@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-01-18 15:07:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -131,14 +131,14 @@ void send_message(const void* p0, const void* p1,
 
     // Get language.
     get_compound_element_by_name(p0, p1,
-        (void*) &LANGUAGE_NAME_ABSTRACTION, (void*) &LANGUAGE_NAME_ABSTRACTION_COUNT,
+        (void*) LANGUAGE_NAME_ABSTRACTION, (void*) LANGUAGE_NAME_ABSTRACTION_COUNT,
         (void*) &la, (void*) &lac, (void*) &las,
         (void*) &lm, (void*) &lmc, (void*) &lms,
         (void*) &ld, (void*) &ldc, (void*) &lds);
 
     // Get sender.
     get_compound_element_by_encapsulated_name(p0, p1,
-        (void*) &SENDER_NAME_ABSTRACTION, (void*) &SENDER_NAME_ABSTRACTION_COUNT,
+        (void*) SENDER_NAME_ABSTRACTION, (void*) SENDER_NAME_ABSTRACTION_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
@@ -146,7 +146,7 @@ void send_message(const void* p0, const void* p1,
 
     // Get receiver.
     get_compound_element_by_encapsulated_name(p0, p1,
-        (void*) &RECEIVER_NAME_ABSTRACTION, (void*) &RECEIVER_NAME_ABSTRACTION_COUNT,
+        (void*) RECEIVER_NAME_ABSTRACTION, (void*) RECEIVER_NAME_ABSTRACTION_COUNT,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
         (void*) &rd, (void*) &rdc, (void*) &rds,
@@ -154,22 +154,20 @@ void send_message(const void* p0, const void* p1,
 
     // Get message.
     get_compound_element_by_encapsulated_name(p0, p1,
-        (void*) &MESSAGE_NAME_ABSTRACTION, (void*) &MESSAGE_NAME_ABSTRACTION_COUNT,
+        (void*) MESSAGE_NAME_ABSTRACTION, (void*) MESSAGE_NAME_ABSTRACTION_COUNT,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
         p2, p3);
 
     // The comparison result.
-    int* r = INTEGER_NULL_POINTER;
-    create_integer((void*) &r);
-    *r = 0;
+    int r = 0;
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays((void*) &lm, (void*) &lmc, (void*) &TUI_LANGUAGE, (void*) &TUI_LANGUAGE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays((void*) lm, (void*) lmc, (void*) TUI_LANGUAGE, (void*) TUI_LANGUAGE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             //?? The temporary standard console output as destination.
             //?? Possibly use "sender" information instead, later.
@@ -177,15 +175,15 @@ void send_message(const void* p0, const void* p1,
             void* tmpdc = NULL_POINTER;
             void* tmpds = NULL_POINTER;
 
-            send_tui((void*) &tmpd, (void*) &tmpdc, (void*) &tmpds, (void*) &mm, (void*) &mmc);
+            send_tui((void*) tmpd, (void*) tmpdc, (void*) tmpds, (void*) mm, (void*) mmc);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays((void*) &lm, (void*) &lmc, (void*) &UNIX_SOCKET_CHANNEL, (void*) &UNIX_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays((void*) lm, (void*) lmc, (void*) UNIX_SOCKET_CHANNEL, (void*) UNIX_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
 /*??
             send_unix_socket((void*) &dn, (void*) &dnc, (void*) &dns,
@@ -196,70 +194,51 @@ void send_message(const void* p0, const void* p1,
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays((void*) &lm, (void*) &lmc, (void*) &TCP_SOCKET_CHANNEL, (void*) &TCP_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays((void*) lm, (void*) lmc, (void*) TCP_SOCKET_CHANNEL, (void*) TCP_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             // The socket number for the signal id.
             // The index for the signal id in the array is the same index
             // in the client socket number array.
-            int* i = INTEGER_NULL_POINTER;
-            create_integer((void*) &i);
-            *i = -1;
+            int i = -1;
 
             get_index_for_signal_id(p6, p5, (void*) &i);
 
-            if (*i >= 0) {
+            if (i >= 0) {
 
                 // The client socket.
-                int* cs = INTEGER_NULL_POINTER;
-                create_integer((void*) &cs);
-                *cs = -1;
+                int cs = -1;
 
                 get_client_socket_number_for_index(p6, (void*) &i, (void*) &cs);
 
-                if (*cs >= 0) {
+                if (cs >= 0) {
 
-                    // The temporary count.
-                    int* tc = INTEGER_NULL_POINTER;
-                    create_integer((void*) &tc);
-                    *tc = 0;
-
-                    // The temporary size.
-                    int* ts = INTEGER_NULL_POINTER;
-                    create_integer((void*) &ts);
-                    *ts = 0;
+                    // The temporary count, size.
+                    int tc = 0;
+                    int ts = 0;
 
                     send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts, (void*) &mm, (void*) &mmc);
-
-                    destroy_integer((void*) &ts);
-                    destroy_integer((void*) &tc);
 
                     // Remove client socket number and main signal id from internals.
                     remove_relation_clientsocketnumber_mainsignalid(p6, (void*) &i);
 
                     // Close socket.
-                    close(*cs);
+                    close(cs);
 
                 } else {
 
                     log_message_debug("Could not send tcp socket message. The client socket number was not found.");
                 }
 
-                destroy_integer((void*) &cs);
-
             } else {
 
                 log_message_debug("Could not send tcp socket message. The signal id index is invalid.");
             }
-
-            destroy_integer((void*) &i);
         }
     }
-
-    destroy_integer((void*) &r);
 }
 
 /* SEND_SOURCE */

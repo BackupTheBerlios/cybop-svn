@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-01-18 15:07:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,145 +62,154 @@ void destroy_internals_memory(void* p0, const void* p1) {
 
         int* s = (int*) p1;
 
-        log_message_debug("Destroy internals memory.");
+        if (p0 != NULL_POINTER) {
 
-        // The loop variable.
-        int j = 0;
-        // The configuration parameter.
-        void* p = NULL_POINTER;
+            void** i = (void**) p0;
 
-        while (1) {
+            log_message_debug("Destroy internals memory.");
 
-            if (j >= *s) {
+            // The loop variable.
+            int j = 0;
+            // The configuration parameter.
+            void* p = NULL_POINTER;
 
-                break;
-            }
+            while (1) {
 
-            // Get all configuration parameters from internals memory and
-            // destroy those which are existent (unequal NULL_POINTER).
-            // The p0 parameter needs to be dereferenced since it is handed over
-            // as reference, but this procedure expects a normal array.
-            get_array_elements(*p0, (void*) &j, (void*) &p, (void*) POINTER_ARRAY);
+                if (j >= *s) {
 
-            // CAUTION! Do not try to remove the parameters!
-            // Each configuration parameter has a fixed position within the
-            // internals memory and CANNOT be removed.
-
-            if (p != NULL_POINTER) {
-
-                // The internals memory is a simple pointer array and does NOT
-                // hold type information about its stored configuration parameters.
-                // This is possible because the type information is known
-                // IN CONTEXT, wherever a configuration parameter is used.
-                // In order to call the correct array desctruction procedure
-                // (in other words: the correct array type),
-                // all configuration parameters need to be distinguished here,
-                // via conditional if-else statements.
-
-                if (j == *STARTUP_CHANNEL_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-
-                } else if (j == *STARTUP_CHANNEL_COUNT_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *STARTUP_CHANNEL_SIZE_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *STARTUP_ABSTRACTION_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-
-                } else if (j == *STARTUP_ABSTRACTION_COUNT_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *STARTUP_ABSTRACTION_SIZE_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *STARTUP_MODEL_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-
-                } else if (j == *STARTUP_MODEL_COUNT_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *STARTUP_MODEL_SIZE_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *KNOWLEDGE_MEMORY_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-
-                } else if (j == *KNOWLEDGE_MEMORY_COUNT_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *KNOWLEDGE_MEMORY_SIZE_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *SIGNAL_MEMORY_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-
-                } else if (j == *SIGNAL_MEMORY_COUNT_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *SIGNAL_MEMORY_SIZE_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *TCP_SERVER_SOCKET_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *TCP_SERVER_SOCKET_PORT_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *TCP_SERVER_SOCKET_ACTIVE_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *TCP_CLIENT_SOCKETS_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-
-                } else if (j == *TCP_CLIENT_SOCKETS_COUNT_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *TCP_CLIENT_SOCKETS_SIZE_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-
-                } else if (j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                } else if (j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL) {
-
-                    destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                    break;
                 }
 
-                //?? TODO: some variables are missing here which causes memory leaks!!
+                // Get all configuration parameters from internals memory and
+                // destroy those which are existent (unequal NULL_POINTER).
+                // The p0 parameter needs to be dereferenced since it is handed over
+                // as reference, but this procedure expects a normal array.
+                get_array_elements(*i, (void*) &j, (void*) &p, (void*) POINTER_ARRAY);
+
+                // CAUTION! Do not try to remove the parameters!
+                // Each configuration parameter has a fixed position within the
+                // internals memory and CANNOT be removed.
+
+                if (p != NULL_POINTER) {
+
+                    // The internals memory is a simple pointer array and does NOT
+                    // hold type information about its stored configuration parameters.
+                    // This is possible because the type information is known
+                    // IN CONTEXT, wherever a configuration parameter is used.
+                    // In order to call the correct array desctruction procedure
+                    // (in other words: the correct array type),
+                    // all configuration parameters need to be distinguished here,
+                    // via conditional if-else statements.
+
+                    if (j == *STARTUP_CHANNEL_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+
+                    } else if (j == *STARTUP_CHANNEL_COUNT_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *STARTUP_CHANNEL_SIZE_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *STARTUP_ABSTRACTION_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+
+                    } else if (j == *STARTUP_ABSTRACTION_COUNT_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *STARTUP_ABSTRACTION_SIZE_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *STARTUP_MODEL_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+
+                    } else if (j == *STARTUP_MODEL_COUNT_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *STARTUP_MODEL_SIZE_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *KNOWLEDGE_MEMORY_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+
+                    } else if (j == *KNOWLEDGE_MEMORY_COUNT_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *KNOWLEDGE_MEMORY_SIZE_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *SIGNAL_MEMORY_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+
+                    } else if (j == *SIGNAL_MEMORY_COUNT_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *SIGNAL_MEMORY_SIZE_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *TCP_SERVER_SOCKET_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *TCP_SERVER_SOCKET_PORT_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *TCP_SERVER_SOCKET_ACTIVE_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *TCP_CLIENT_SOCKETS_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+
+                    } else if (j == *TCP_CLIENT_SOCKETS_COUNT_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *TCP_CLIENT_SOCKETS_SIZE_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+
+                    } else if (j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+
+                    } else if (j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL) {
+
+                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                    }
+
+                    //?? TODO: some variables are missing here which causes memory leaks!!
+                }
+
+                // Reset configuration parameter.
+                p = NULL_POINTER;
+
+                j++;
             }
 
-            // Reset configuration parameter.
-            p = NULL_POINTER;
+        } else {
 
-            j++;
+            log_message_debug("Could not destroy internals memory. The internals memory parameter is null.");
         }
 
     } else {

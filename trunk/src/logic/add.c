@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-01-18 15:07:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,17 +44,17 @@ void add_integers(void* p0, const void* p1, const void* p2) {
 
     if (p2 != NULL_POINTER) {
 
-        int** summand2 = (int**) p2;
+        int* summand2 = (int*) p2;
 
         if (p1 != NULL_POINTER) {
 
-            int** summand1 = (int**) p1;
+            int* summand1 = (int*) p1;
 
             if (p0 != NULL_POINTER) {
 
-                int** sum = (int**) p0;
+                int* sum = (int*) p0;
 
-                **sum = **summand1 + **summand2;
+                *sum = *summand1 + *summand2;
 
             } else {
 
@@ -85,27 +85,23 @@ void add_primitives(void* p0, const void* p1, const void* p2, const void* p3, co
 
     if (p4 != NULL_POINTER) {
 
-        int** ac = (int**) p4;
+        int* ac = (int*) p4;
 
         // The comparison result.
-        int* r = INTEGER_NULL_POINTER;
-        create_integer((void*) &r);
-        *r = 0;
+        int r = 0;
 
-        if (*r != 1) {
+        if (r != 1) {
 
-            if (**ac == *INTEGER_ABSTRACTION_COUNT) {
+            if (*ac == *INTEGER_ABSTRACTION_COUNT) {
 
-                compare_array_elements(p3, (void*) &INTEGER_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &INTEGER_ABSTRACTION_COUNT, (void*) &r);
+                compare_array_elements(p3, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (*r == 1) {
+                if (r == 1) {
 
                     add_integers(p0, p1, p2);
                 }
             }
         }
-
-        destroy_integer((void*) &r);
 
     } else {
 

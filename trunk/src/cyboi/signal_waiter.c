@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2005-01-18 10:54:22 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2005-01-18 15:07:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -104,7 +104,7 @@ void wait(void* p0) {
 //??        test_knowledge_model((void*) &k, (void*) &kc);
 
         // Get index of the top priority signal.
-        get_highest_priority_index(s, (void*) sc, (void*) &i);
+        get_highest_priority_index(s, sc, (void*) &i);
 
 /*??
         //?? Wait for web input, if no signal is in memory. TODO: Use a thread for this!
@@ -117,24 +117,24 @@ void wait(void* p0) {
         if (i >= 0) {
 
             // Get signal.
-            get_signal(s, (void*) sc, (void*) &i,
+            get_signal(s, sc, (void*) &i,
                 (void*) &a, (void*) &ac, (void*) &m, (void*) &mc,
                 (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 
             //?? For testing only. TODO: Delete these lines later!
             fprintf(stderr, "wait i: %i\n", i);
-            fprintf(stderr, "wait a: %s\n", a);
-            fprintf(stderr, "wait ac: %i\n", **((int**) ac));
-            fprintf(stderr, "wait s: %s\n", m);
-            fprintf(stderr, "wait sc: %i\n", **((int**) mc));
+            fprintf(stderr, "wait a: %s\n", (char*) a);
+            fprintf(stderr, "wait ac: %i\n", *((int*) ac));
+            fprintf(stderr, "wait s: %s\n", (char*) m);
+            fprintf(stderr, "wait sc: %i\n", *((int*) mc));
             fprintf(stderr, "wait p: %i\n", d);
-            fprintf(stderr, "wait pc: %i\n", **((int**) dc));
-            fprintf(stderr, "wait pr: %i\n", **((int**) p));
-            fprintf(stderr, "wait id: %i\n", **((int**) id));
+            fprintf(stderr, "wait pc: %i\n", *((int*) dc));
+            fprintf(stderr, "wait pr: %i\n", *((int*) p));
+            fprintf(stderr, "wait id: %i\n", *((int*) id));
             fprintf(stderr, "wait knowledge model: %s\n", "");
 
             // Remove signal from signal memory.
-            remove_signal((void*) s, (void*) sc, (void*) ss, (void*) &i);
+            remove_signal(s, sc, ss, (void*) &i);
 
             // CAUTION! Do NOT destroy signal here!
             // Signals are stored in the logic knowledge tree which gets created
@@ -148,12 +148,11 @@ void wait(void* p0) {
 
             if (r == 0) {
 
-                compare_arrays((void*) a, (void*) ac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(a, ac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 
-                    handle_compound_signal((void*) m, (void*) mc, (void*) p,
-                        (void*) id, (void*) s, (void*) sc, (void*) ss);
+                    handle_compound_signal(m, mc, p, id, s, sc, ss);
                 }
             }
 
@@ -163,13 +162,11 @@ void wait(void* p0) {
 
             if (r == 0) {
 
-                compare_arrays((void*) a, (void*) ac, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(a, ac, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 
-                    handle_operation_signal((void*) m, (void*) mc, (void*) d, (void*) dc,
-                        (void*) k, (void*) kc, (void*) ks,
-                        (void*) id, p0, (void*) &f);
+                    handle_operation_signal(m, mc, d, dc, k, kc, ks, id, p0, (void*) &f);
                 }
             }
 

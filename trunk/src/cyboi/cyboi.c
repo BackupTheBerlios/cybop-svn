@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.72 $ $Date: 2005-01-18 10:54:22 $ $Author: christian $
+ * @version $Revision: 1.73 $ $Date: 2005-01-18 15:07:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -106,7 +106,7 @@ int main(int p0, char** p1) {
                 (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
 
             // Handle system.
-            handle_system((void*) i);
+            handle_system(i);
 
             // Destroy internals memory.
             // All its configuration parameters are destroyed, too.

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-01-18 10:54:22 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-01-18 15:07:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,13 +97,13 @@ void handle_system(void* p0) {
     log_message_debug("Create startup model.");
 
     // The startup model abstraction, model, details.
-    void** ma = POINTER_NULL_POINTER;
+    void* ma = NULL_POINTER;
     int* mac = INTEGER_NULL_POINTER;
     int* mas = INTEGER_NULL_POINTER;
-    void** mm = POINTER_NULL_POINTER;
+    void* mm = NULL_POINTER;
     int* mmc = INTEGER_NULL_POINTER;
     int* mms = INTEGER_NULL_POINTER;
-    void** md = POINTER_NULL_POINTER;
+    void* md = NULL_POINTER;
     int* mdc = INTEGER_NULL_POINTER;
     int* mds = INTEGER_NULL_POINTER;
 
@@ -124,10 +124,12 @@ void handle_system(void* p0) {
     // It is not needed for the startup signal.
 
     // Create startup model abstraction, model, details.
-    create_model((void*) &ma, (void*) mac, (void*) mas, pa, pac,
+    create_model((void*) &ma, (void*) mac, (void*) mas,
+        pa, pac,
         (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-    create_model((void*) &mm, (void*) mmc, (void*) mms, pm, pmc, pa, pac, pc, pcc);
+    create_model((void*) &mm, (void*) mmc, (void*) mms,
+        pm, pmc, pa, pac, pc, pcc);
     // CAUTION! Do not create startup model details!
     // It is not needed for the startup signal.
 
@@ -163,9 +165,8 @@ void handle_system(void* p0) {
     fprintf(stderr, "id: %i\n", *id);
 
     // Add startup signal to signal memory.
-    set_signal(s, (void*) sc, (void*) ss,
-        (void*) ma, (void*) mac, (void*) mm, (void*) mmc,
-        (void*) md, (void*) mdc, (void*) NORMAL_PRIORITY, (void*) id);
+    set_signal(s, sc, ss, ma, (void*) mac, mm, (void*) mmc, md, (void*) mdc,
+        (void*) NORMAL_PRIORITY, (void*) id);
 
     // The system is now started up and complete so that a loop
     // can be entered, waiting for signals (events/ interrupts)
@@ -184,8 +185,10 @@ void handle_system(void* p0) {
 
     // CAUTION! Do not destroy startup model details!
     // It was not needed for the startup signal.
-    destroy_model((void*) &mm, (void*) mmc, (void*) mms, pm, pmc, pa, pac, pc, pcc);
-    destroy_model((void*) &ma, (void*) mac, (void*) mas, pa, pac,
+    destroy_model((void*) &mm, (void*) mmc, (void*) mms,
+        pm, pmc, pa, pac, pc, pcc);
+    destroy_model((void*) &ma, (void*) mac, (void*) mas,
+        pa, pac,
         (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 

@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.22 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2005-01-18 15:07:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,56 +52,56 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 
     if (p0 != NULL_POINTER) {
 
-        int** p = (int**) p0;
+        int* p = (int*) p0;
 
-        if (**p != 1) {
+        if (*p != 1) {
 
-            compare_arrays(p1, p2, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (**p != 1) {
+        if (*p != 1) {
 
-            compare_arrays(p1, p2, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (**p != 1) {
+        if (*p != 1) {
 
-            compare_arrays(p1, p2, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (**p != 1) {
+        if (*p != 1) {
 
-            compare_arrays(p1, p2, (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (**p != 1) {
+        if (*p != 1) {
 
-            compare_arrays(p1, p2, (void*) &DOUBLE_ABSTRACTION, (void*) &DOUBLE_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (**p != 1) {
+        if (*p != 1) {
 
-            compare_arrays(p1, p2, (void*) &BOOLEAN_ABSTRACTION, (void*) &BOOLEAN_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (**p != 1) {
+        if (*p != 1) {
 
-            compare_arrays(p1, p2, (void*) &VECTOR_ABSTRACTION, (void*) &VECTOR_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (**p != 1) {
+        if (*p != 1) {
 
-            compare_arrays(p1, p2, (void*) &FRACTION_ABSTRACTION, (void*) &FRACTION_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) FRACTION_ABSTRACTION, (void*) FRACTION_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (**p != 1) {
+        if (*p != 1) {
 
-            compare_arrays(p1, p2, (void*) &TIME_ABSTRACTION, (void*) &TIME_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) TIME_ABSTRACTION, (void*) TIME_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
-        if (**p != 1) {
+        if (*p != 1) {
 
-            compare_arrays(p1, p2, (void*) &COMPLEX_ABSTRACTION, (void*) &COMPLEX_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) COMPLEX_ABSTRACTION, (void*) COMPLEX_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
     } else {
@@ -130,7 +130,7 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
  * - receive <--> send (read <--> write)
  * - parse <--> serialize
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source model
@@ -149,23 +149,16 @@ void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const 
     // Receive.
     //
 
-    // The receive model count.
-    int* rmc = INTEGER_NULL_POINTER;
-    create_integer((void*) &rmc);
-    *rmc = 0;
-
-    // The receive model size.
-    int* rms = INTEGER_NULL_POINTER;
-    create_integer((void*) &rms);
-    *rms = 0;
-
     // The receive model.
     void* rm = NULL_POINTER;
+    int rmc = 0;
+    int rms = 0;
+
     // Create receive model of type character, to read single bytes.
-    create((void*) &rm, (void*) &rms, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+    create((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
     // Receive persistent byte stream over channel.
-    receive_general((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
+    receive_general((void*) rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
 
     //
     // Parse.
@@ -175,12 +168,10 @@ void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const 
     create(p0, p2, p5, p6);
 
     // Parse byte stream according to given document type.
-    parse(p0, p1, p2, (void*) &rm, (void*) &rmc, p5, p6);
+    parse(p0, p1, p2, (void*) rm, (void*) &rmc, p5, p6);
 
     // Destroy receive model.
-    destroy((void*) &rm, (void*) &rms, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-    destroy_integer((void*) &rms);
-    destroy_integer((void*) &rmc);
+    destroy((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 }
 
 /**
@@ -206,7 +197,7 @@ void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const 
  * - parse <--> serialize
  * - decode <--> encode
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source model
@@ -222,65 +213,46 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     log_message_debug("Create compound model.");
 
     // The configuration flag.
-    int* c = INTEGER_NULL_POINTER;
-    create_integer((void*) &c);
-    *c = 0;
+    int c = 0;
 
-    compare_arrays(p5, p6, (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT, (void*) &c, (void*) &CHARACTER_ARRAY);
+    compare_arrays(p5, p6, (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT, (void*) &c, (void*) CHARACTER_ARRAY);
 
     // The temporary workaround flag to use the libxml2 parser.
     //?? Later, when an own xml parser is implemented in cyboi,
     //?? delete this flag and change the corresponding blocks below!
-    int* w = INTEGER_NULL_POINTER;
-    create_integer((void*) &w);
-    *w = 0;
+    int w = 0;
 
     // Comparison can be done one-after-the-other, because results are only set
     // to 1, if true, but they are NOT set to 0, if false.
     // So, later comparisons won't affect the result of earlier ones.
-    compare_arrays(p5, p6, (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT, (void*) &w, (void*) &CHARACTER_ARRAY);
-    compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &w, (void*) &CHARACTER_ARRAY);
-    compare_arrays(p5, p6, (void*) &XML_ABSTRACTION, (void*) &XML_ABSTRACTION_COUNT, (void*) &w, (void*) &CHARACTER_ARRAY);
-    compare_arrays(p5, p6, (void*) &HXP_ABSTRACTION, (void*) &HXP_ABSTRACTION_COUNT, (void*) &w, (void*) &CHARACTER_ARRAY);
+    compare_arrays(p5, p6, (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
+    compare_arrays(p5, p6, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
+    compare_arrays(p5, p6, (void*) XML_ABSTRACTION, (void*) XML_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
+    compare_arrays(p5, p6, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
 
     //
     // Receive.
     //
 
-    // The receive model count.
-    int* rmc = INTEGER_NULL_POINTER;
-    create_integer((void*) &rmc);
-    *rmc = 0;
-
-    // The receive model size.
-    int* rms = INTEGER_NULL_POINTER;
-    create_integer((void*) &rms);
-    *rms = 0;
-
     // The receive model.
     void* rm = NULL_POINTER;
+    int rmc = 0;
+    int rms = 0;
+
     // Create receive model of type character, to read single bytes.
-    create((void*) &rm, (void*) &rms, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+    create((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
     // Receive persistent byte stream over channel.
-    receive_general((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
+    receive_general(rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
 
     //
     // Parse.
     //
 
-    // The parse model count.
-    int* pmc = INTEGER_NULL_POINTER;
-    create_integer((void*) &pmc);
-    *pmc = 0;
-
-    // The parse model size.
-    int* pms = INTEGER_NULL_POINTER;
-    create_integer((void*) &pms);
-    *pms = 0;
-
     // The parse model.
     void* pm = NULL_POINTER;
+    int pmc = 0;
+    int pms = 0;
 
     if (w == 0) {
 
@@ -288,17 +260,15 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
         create((void*) &pm, (void*) &pms, p5, p6);
 
         // Parse byte stream according to given document type.
-        parse((void*) &pm, (void*) &pmc, (void*) &pms, (void*) &rm, (void*) &rmc, p5, p6);
+        parse(pm, (void*) &pmc, (void*) &pms, rm, (void*) &rmc, p5, p6);
 
     } else {
 
-        parse((void*) &pm, (void*) &pmc, (void*) &pms, p3, p4, p5, p6);
+        parse(pm, (void*) &pmc, (void*) &pms, p3, p4, p5, p6);
     }
 
     // Destroy receive model.
-    destroy((void*) &rm, (void*) &rms, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-    destroy_integer((void*) &rms);
-    destroy_integer((void*) &rmc);
+    destroy((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
     //
     // Decode.
@@ -307,32 +277,27 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     if (c == 0) {
 
         // Create compound decode model.
-        create(p0, p2, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
+        create(p0, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     } else {
 
         // Create internals memory decode model.
-        create(p0, p2, (void*) &INTERNALS_MEMORY_ABSTRACTION, (void*) &INTERNALS_MEMORY_ABSTRACTION_COUNT);
+        create(p0, p2, (void*) INTERNALS_MEMORY_ABSTRACTION, (void*) INTERNALS_MEMORY_ABSTRACTION_COUNT);
     }
 
     // Decode document model according to given document type.
-    decode(p0, p1, p2, (void*) &pm, (void*) &pmc, p5, p6);
+    decode(p0, p1, p2, pm, (void*) &pmc, p5, p6);
 
     if (w == 0) {
 
-        // Destroy parsed model.
+        // Destroy parse model.
         destroy((void*) &pm, (void*) &pms, p5, p6);
-        destroy_integer((void*) &pms);
-        destroy_integer((void*) &pmc);
 
     } else {
 
         // Free xml dom document.
         xmlFreeDoc((xmlDoc*) pm);
     }
-
-    destroy_integer((void*) &w);
-    destroy_integer((void*) &c);
 }
 
 /**
@@ -351,7 +316,7 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
  * - created and destroyed by CYBOI
  * - not available anymore after CYBOI has been destroyed
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source model
@@ -367,14 +332,12 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     log_message_debug("Create model.");
 
     // The comparison result.
-    int* r = INTEGER_NULL_POINTER;
-    create_integer((void*) &r);
-    *r = 0;
+    int r = 0;
 
     // Check for primitive model.
     check_primitive_model((void*) &r, p5, p6);
 
-    if (*r == 1) {
+    if (r == 1) {
 
         create_primitive_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
 
@@ -382,8 +345,6 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         create_compound_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
     }
-
-    destroy_integer((void*) &r);
 }
 
 /**
@@ -489,79 +450,72 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
     // Get name name.
     get_compound_element_by_name(p0, p1,
-        (void*) &NAME_NAME_ABSTRACTION, (void*) &NAME_NAME_ABSTRACTION_COUNT,
+        (void*) NAME_NAME_ABSTRACTION, (void*) NAME_NAME_ABSTRACTION_COUNT,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
         (void*) &nd, (void*) &ndc, (void*) &nds);
 
     // Get channel name.
     get_compound_element_by_name(p0, p1,
-        (void*) &CHANNEL_NAME_ABSTRACTION, (void*) &CHANNEL_NAME_ABSTRACTION_COUNT,
+        (void*) CHANNEL_NAME_ABSTRACTION, (void*) CHANNEL_NAME_ABSTRACTION_COUNT,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds);
 
     // Get abstraction name.
     get_compound_element_by_name(p0, p1,
-        (void*) &ABSTRACTION_NAME_ABSTRACTION, (void*) &ABSTRACTION_NAME_ABSTRACTION_COUNT,
+        (void*) ABSTRACTION_NAME_ABSTRACTION, (void*) ABSTRACTION_NAME_ABSTRACTION_COUNT,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads);
 
     // Get model name.
     get_compound_element_by_name(p0, p1,
-        (void*) &MODEL_NAME_ABSTRACTION, (void*) &MODEL_NAME_ABSTRACTION_COUNT,
+        (void*) MODEL_NAME_ABSTRACTION, (void*) MODEL_NAME_ABSTRACTION_COUNT,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds);
 
     // Get whole.
     get_compound_element_by_encapsulated_name(p0, p1,
-        (void*) &WHOLE_NAME_ABSTRACTION, (void*) &WHOLE_NAME_ABSTRACTION_COUNT,
+        (void*) WHOLE_NAME_ABSTRACTION, (void*) WHOLE_NAME_ABSTRACTION_COUNT,
         (void*) &wa, (void*) &wac, (void*) &was,
         (void*) &wm, (void*) &wmc, (void*) &wms,
         (void*) &wd, (void*) &wdc, (void*) &wds,
         p2, p3);
 
     // Create part name.
-    create_model((void*) &pn, (void*) &pnc, (void*) &pns,
-        (void*) &nm, (void*) &nmc,
-        (void*) &na, (void*) &nac,
-        (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+    create_model((void*) &pn, pnc, pns, nm, nmc, na, nac,
+        (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
     // A part channel is not created, since that is only needed temporarily for
     // model loading.
 
     // Create part abstraction.
-    create_model((void*) &pa, (void*) &pac, (void*) &pas,
-        (void*) &am, (void*) &amc,
-        (void*) &aa, (void*) &aac,
-        (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+    create_model((void*) &pa, pac, pas, am, amc, aa, aac,
+        (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
     // Create part model.
-    create_model((void*) &pm, (void*) &pmc, (void*) &pms,
-        (void*) &mm, (void*) &mmc,
-        (void*) &am, (void*) &amc,
-        (void*) &cm, (void*) &cmc);
+    create_model((void*) &pm, pmc, pms, mm, mmc, am, amc, cm, cmc);
 
     // Add part to whole.
     if (wm == NULL_POINTER) {
 
         // Use the knowledge model root if the determined whole model is null.
         set_compound_element_by_name(p2, p3, p4,
-            (void*) &pn, (void*) &pnc, (void*) &pns,
-            (void*) &pa, (void*) &pac, (void*) &pas,
-            (void*) &pm, (void*) &pmc, (void*) &pms,
-            (void*) &pd, (void*) &pdc, (void*) &pds);
+            pn, pnc, pns,
+            pa, pac, pas,
+            pm, pmc, pms,
+            pd, pdc, pds);
 
     } else {
 
         // Use the determined whole model normally, if it exists.
-        set_compound_element_by_name((void*) &wm, (void*) &wmc, (void*) &wms,
-            (void*) &pn, (void*) &pnc, (void*) &pns,
-            (void*) &pa, (void*) &pac, (void*) &pas,
-            (void*) &pm, (void*) &pmc, (void*) &pms,
-            (void*) &pd, (void*) &pdc, (void*) &pds);
+        set_compound_element_by_name(wm, wmc, wms,
+            &pn, &pnc, &pns,
+            &pa, &pac, &pas,
+            &pm, &pmc, &pms,
+            &pd, &pdc, &pds);
     }
 }
 

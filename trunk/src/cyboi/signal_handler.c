@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2005-01-12 19:18:55 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2005-01-18 15:07:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,7 +56,7 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
 
     if (p1 != NULL_POINTER) {
 
-        int** sc = (int**) p1;
+        int* sc = (int*) p1;
 
         log_message((void*) &INFO_LOG_LEVEL, (void*) &HANDLE_COMPOUND_SIGNAL_MESSAGE, (void*) &HANDLE_COMPOUND_SIGNAL_MESSAGE_COUNT);
 
@@ -71,12 +71,12 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
         void* pdc = NULL_POINTER;
 
         // Get abstractions, models, details.
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &pa);
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &pac);
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_INDEX, (void*) &pm);
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_COUNTS_INDEX, (void*) &pmc);
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_INDEX, (void*) &pd);
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_COUNTS_INDEX, (void*) &pdc);
+        get_array_elements(p0, (void*) ABSTRACTIONS_INDEX, (void*) &pa, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) &pac, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) MODELS_INDEX, (void*) &pm, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) MODELS_COUNTS_INDEX, (void*) &pmc, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) DETAILS_INDEX, (void*) &pd, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) POINTER_ARRAY);
 
         // The abstraction.
         void* a = NULL_POINTER;
@@ -89,31 +89,29 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
         void* dc = NULL_POINTER;
 
         // The loop variable.
-        int* j = INTEGER_NULL_POINTER;
-        create_integer((void*) &j);
-        *j = 0;
+        int j = 0;
 
         while (1) {
 
-            if (*j >= **sc) {
+            if (j >= *sc) {
 
                 break;
             }
 
             // Get abstraction, model, details.
-            get_array_elements(pa, (void*) &POINTER_ARRAY, (void*) &j, (void*) &a);
-            get_array_elements(pac, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ac);
-            get_array_elements(pm, (void*) &POINTER_ARRAY, (void*) &j, (void*) &m);
-            get_array_elements(pmc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &mc);
-            get_array_elements(pd, (void*) &POINTER_ARRAY, (void*) &j, (void*) &d);
-            get_array_elements(pdc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &dc);
+            get_array_elements(pa, (void*) &j, (void*) &a, (void*) POINTER_ARRAY);
+            get_array_elements(pac, (void*) &j, (void*) &ac, (void*) INTEGER_ARRAY);
+            get_array_elements(pm, (void*) &j, (void*) &m, (void*) POINTER_ARRAY);
+            get_array_elements(pmc, (void*) &j, (void*) &mc, (void*) INTEGER_ARRAY);
+            get_array_elements(pd, (void*) &j, (void*) &d, (void*) POINTER_ARRAY);
+            get_array_elements(pdc, (void*) &j, (void*) &dc, (void*) INTEGER_ARRAY);
 
             // Add part model (signal) to memory, using the whole signal's priority.
             // (Each signal has a priority. A signal may consist of part
             // signals. The part signals cannot have higher / lower priority
             // than their original whole signal.)
-            set_signal(p4, p5, p6, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc,
-                (void*) &d, (void*) &dc, p2, p3);
+            set_signal(p4, p5, p6, (void*) a, (void*) ac,
+                (void*) m, (void*) mc, (void*) d, (void*) dc, p2, p3);
 
             // Reset abstraction.
             a = NULL_POINTER;
@@ -125,10 +123,8 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
             d = NULL_POINTER;
             dc = NULL_POINTER;
 
-            (*j)++;
+            j++;
         }
-
-        destroy_integer((void*) &j);
 
     } else {
 
@@ -158,18 +154,16 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
     // The done flag.
     int d = 0;
     // The comparison result.
-    int* r = INTEGER_NULL_POINTER;
-    create_integer((void*) &r);
-    *r = 0;
+    int r = 0;
 
-    fprintf(stderr, "TEST operation: %s\n", *((char**) p0));
-    fprintf(stderr, "TEST operation count: %i\n", **((int**) p1));
+    fprintf(stderr, "TEST operation: %s\n", (char*) p0);
+    fprintf(stderr, "TEST operation count: %i\n", *((int*) p1));
 
     if (d == 0) {
 
-        compare_arrays(p0, p1, (void*) &ADD_ABSTRACTION, (void*) &ADD_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p0, p1, (void*) ADD_ABSTRACTION, (void*) ADD_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             add(p2, p3, p4, p5, p6);
 
@@ -179,9 +173,9 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
     if (d == 0) {
 
-        compare_arrays(p0, p1, (void*) &CREATE_PART_ABSTRACTION, (void*) &CREATE_PART_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p0, p1, (void*) CREATE_PART_ABSTRACTION, (void*) CREATE_PART_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             create_part(p2, p3, p4, p5, p6);
 
@@ -191,9 +185,9 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
     if (d == 0) {
 
-        compare_arrays(p0, p1, (void*) &DESTROY_PART_ABSTRACTION, (void*) &DESTROY_PART_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p0, p1, (void*) DESTROY_PART_ABSTRACTION, (void*) DESTROY_PART_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             destroy_part(p2, p3, p4, p5, p6);
 
@@ -203,9 +197,9 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
     if (d == 0) {
 
-        compare_arrays(p0, p1, (void*) &SEND_ABSTRACTION, (void*) &SEND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p0, p1, (void*) SEND_ABSTRACTION, (void*) SEND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             send_message(p2, p3, p4, p5, p6, p7, p8);
 
@@ -215,9 +209,9 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
     if (d == 0) {
 
-        compare_arrays(p0, p1, (void*) &RECEIVE_ABSTRACTION, (void*) &RECEIVE_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p0, p1, (void*) RECEIVE_ABSTRACTION, (void*) RECEIVE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             receive_message(p2, p3, p4, p5, p6, p8);
 
@@ -227,14 +221,14 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
     if (d == 0) {
 
-        compare_arrays(p0, p1, (void*) &EXIT_ABSTRACTION, (void*) &EXIT_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p0, p1, (void*) EXIT_ABSTRACTION, (void*) EXIT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &SET_SHUTDOWN_FLAG_MESSAGE, (void*) &SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
 
-            int** f = (int**) p9;
-            **f = 1;
+            int* f = (int*) p9;
+            *f = 1;
 
             d = 1;
         }
@@ -268,8 +262,6 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
         }
     }
 */
-
-    destroy_integer((void*) &r);
 }
 
 /* SIGNAL_HANDLER_SOURCE */
