@@ -37,7 +37,7 @@
  *         map = position_abstraction_attribute
  *         (attributes 0..9 = size 10)
  *
- * @version $Revision: 1.6 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-07-21 23:51:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,80 +47,6 @@
 #include <stdio.h>
 #include "../global/constant.c"
 #include "../logger/logger.c"
-
-//
-// File.
-//
-
-/**
- * Initializes the compound from a file.
- *
- * @param p0 the transient model
- * @param p1 the persistent model
- * @param p2 the persistent model size
- */
-void initialize_compound_from_file(void* p0, const void* p1, const void* p2) {
-
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize compound from file.");
-
-/*??
-    // Create temporary cybol model.
-    struct statics_model* cybol = (struct statics_model*) malloc(sizeof(struct statics_model));
-    create_statics_model_containers((void*) cybol);
-
-    // Read statics cybol model from file path.
-    read_statics_cybol_model((void*) cybol, p1);
-
-    // Initialize statics model parts with statics cybol model.
-    if (cybol != NULL_POINTER) {
-
-        initialize_statics_parts(p0, cybol->parts);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize statics model. The statics cybol model is null.");
-    }
-
-    // Destroy temporary statics cybol model.
-    destroy_statics_model_containers((void*) cybol);
-    free((void*) cybol);
-*/
-}
-
-/**
- * Finalizes the compound model to a file.
- *
- * @param p0 the transient model
- * @param p1 the persistent model
- * @param p2 the persistent model size
- */
-void finalize_compound_model_to_file(void* p0, const void* p1, const void* p2) {
-
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize compound model to file.");
-
-/*??
-    // Create temporary statics cybol model.
-    struct statics_model* cybol = (struct statics_model*) malloc(sizeof(struct statics_model));
-    create_statics_model_containers((void*) cybol);
-
-    // Finalize statics model parts with statics cybol model.
-    if (cybol != NULL_POINTER) {
-
-        finalize_statics_parts(p0, cybol->parts);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize statics model. The statics cybol model is null.");
-    }
-
-    // Write statics cybol model to file path.
-    write_statics_cybol_model((void*) cybol, p1);
-
-    // Destroy temporary statics cybol model.
-    destroy_statics_model_containers((void*) cybol);
-    free((void*) cybol);
-*/
-}
 
 //
 // Attribute.

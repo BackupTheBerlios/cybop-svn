@@ -64,7 +64,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.7 $ $Date: 2004-07-04 09:49:29 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-07-21 23:51:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -607,6 +607,49 @@ static const int POSITION_MODEL_ATTRIBUTE_COUNT = 16;
 static const char POSITION_CONSTRAINT_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '=', '"'};
 static const char* POSITION_CONSTRAINT_ATTRIBUTE = POSITION_CONSTRAINT_ATTRIBUTE_ARRAY;
 static const int POSITION_CONSTRAINT_ATTRIBUTE_COUNT = 21;
+
+//
+// Cybol parse modes.
+//
+
+/** The zero parse mode. */
+static const int ZERO_PARSE_MODE = 0;
+
+/** The comment tag parse mode. */
+static const int COMMENT_TAG_PARSE_MODE = 1;
+
+/** The super tag parse mode. */
+static const int SUPER_TAG_PARSE_MODE = 2;
+
+/** The part tag parse mode. */
+static const int PART_TAG_PARSE_MODE = 3;
+
+/** The name attribute parse mode. */
+static const int NAME_ATTRIBUTE_PARSE_MODE = 1;
+
+/** The abstraction attribute parse mode. */
+static const int ABSTRACTION_ATTRIBUTE_PARSE_MODE = 2;
+
+/** The location attribute parse mode. */
+static const int LOCATION_ATTRIBUTE_PARSE_MODE = 3;
+
+/** The model attribute parse mode. */
+static const int MODEL_ATTRIBUTE_PARSE_MODE = 4;
+
+/** The constraint attribute parse mode. */
+static const int CONSTRAINT_ATTRIBUTE_PARSE_MODE = 5;
+
+/** The position abstraction attribute parse mode. */
+static const int POSITION_ABSTRACTION_ATTRIBUTE_PARSE_MODE = 6;
+
+/** The position location attribute parse mode. */
+static const int POSITION_LOCATION_ATTRIBUTE_PARSE_MODE = 7;
+
+/** The position model attribute parse mode. */
+static const int POSITION_MODEL_ATTRIBUTE_PARSE_MODE = 8;
+
+/** The position constraint attribute parse mode. */
+static const int POSITION_CONSTRAINT_ATTRIBUTE_PARSE_MODE = 9;
 
 //
 // Cybol abstraction values:
