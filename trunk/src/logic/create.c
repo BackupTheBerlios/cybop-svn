@@ -23,13 +23,14 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.15 $ $Date: 2004-10-18 10:53:59 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-11-30 15:33:13 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CREATE_SOURCE
 #define CREATE_SOURCE
 
+#include <libxml/tree.h>
 #include "../array/array.c"
 #include "../creator/creator.c"
 #include "../communicator/communicator.c"
@@ -327,10 +328,10 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     //
     // Decode.
     //
-
+    
     // Create compound decode model.
     create(p0, p2, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
-
+    
     // Decode document model according to given document type.
     decode(p0, p1, p2, (void*) &pm, (void*) &pmc, p5, p6);
 
@@ -366,7 +367,7 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source model
- * @param p4 the source model count
+ * @param p4 the source model xy
  * @param p5 the source abstraction
  * @param p6 the source abstraction count
  * @param p7 the source channel
@@ -565,6 +566,7 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
             (void*) &pa, (void*) &pac, (void*) &pas,
             (void*) &pm, (void*) &pmc, (void*) &pms,
             (void*) &pd, (void*) &pdc, (void*) &pds);
+            
     }
 }
 

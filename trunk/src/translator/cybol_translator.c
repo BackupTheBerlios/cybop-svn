@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-09-12 18:51:00 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-11-30 15:30:31 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,6 +40,7 @@
 #include "../global/cybol_constants.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
+#include "../test/test.c"
 
 //
 // Forward declarations.
@@ -292,11 +293,11 @@ void encode_cybol_property(void* p0, void* p1, void* p2, const void* p3, const v
 /**
  * Decodes the cybol node into a compound.
  *
- * @param p0 the destination
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
+ * @param p0 the destination  (a compound model void**)
+ * @param p1 the destination count (the count for coumpound model void*)
+ * @param p2 the destination size (the size for compound model void*)
+ * @param p3 the source   (xmlNode**)
+ * @param p4 the source count  (for this function not relevant void*)
  */
 void decode_cybol_node(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
@@ -389,7 +390,7 @@ void decode_cybol_node(void* p0, void* p1, void* p2, const void* p3, const void*
                             // Decode child node children.
                             decode_cybol_node((void*) &dd, (void*) &ddc, (void*) &dds,
                                 (void*) &c, (void*) &cc);
-
+                                
                             //?? Read details??
                             // Filter out all tags with name attribute value "super" and
                             // hand over model to create parts of super model.

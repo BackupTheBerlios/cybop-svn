@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2004-11-16 16:58:20 $ $Author: rholzmueller $
+ * @version $Revision: 1.6 $ $Date: 2004-11-30 15:34:00 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -205,6 +205,26 @@ void send_message(const void* p0, const void* p1,
             d = 1;
         }
     }
+    
+    if (d == 0) {
+
+        compare_arrays((void*) &lm, (void*) &lmc, (void*) &TCP_SOCKET_CHANNEL, (void*) &TCP_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+/*??
+            send_tcp_socket      
+ 
+            send_unix_socket((void*) &dn, (void*) &dnc, (void*) &dns,
+                (void*) &snm, (void*) &snmc,
+                (void*) &sna, (void*) &snac,
+                (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+*/
+
+            d = 1;
+        }
+    }
+    
 }
 
 /* SEND_SOURCE */

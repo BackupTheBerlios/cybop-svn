@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.25 $ $Date: 2004-11-23 08:25:01 $ $Author: rholzmueller $
+ * @version $Revision: 1.26 $ $Date: 2004-11-30 15:31:15 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -445,10 +445,14 @@ void test_knowledge_model(const void* p0, const void* p1) {
                 (void*) &d, (void*) &dc, (void*) &ds);
 
             // Print element name.
-            fprintf(stderr, "name: %s\n", n);
+            fprintf(stderr, "name:              %s\n", n);
+            fprintf(stderr, "name count:        %d\n", nc);
+            fprintf(stderr, "name size:         %d\n", ns);
 
             // Print element abstraction.
-            fprintf(stderr, "abstraction: %s\n", a);
+            fprintf(stderr, "abstraction:       %s\n", a);
+            fprintf(stderr, "abstraction count: %d\n", ac);
+            fprintf(stderr, "abstraction size:  %d\n", as);
 
             // Handle element model.
             if (r == 0) {
@@ -468,7 +472,9 @@ void test_knowledge_model(const void* p0, const void* p1) {
 
                 if (r == 1) {
 
-                    fprintf(stderr, "model: %s\n", (char*) m);
+                    fprintf(stderr, "model:         %s\n", m);
+                    fprintf(stderr, "model count:   %d\n", mc);
+                    fprintf(stderr, "model size:    %d\n", ms);
                 }
             }
 
@@ -478,7 +484,9 @@ void test_knowledge_model(const void* p0, const void* p1) {
 
                 if (r == 1) {
 
-                    fprintf(stderr, "model: %s\n", (char*) m);
+                    fprintf(stderr, "model:             %s\n", m);
+                    fprintf(stderr, "model count:       %d\n", mc);
+                    fprintf(stderr, "model size:        %d\n", ms);
                 }
             }
 
@@ -516,6 +524,8 @@ void test_knowledge_model(const void* p0, const void* p1) {
         fputs("ERROR: Could not test knowledge model. The knowledge model is null.", stdout);
     }
 }
+
+
 
 /**
  * The main test procedure.
