@@ -51,7 +51,6 @@
  * - logging:
  *   - log levels
  *   - log level names
- *   - log settings
  *   - log messages
  *
  * It was decided to keep them bundled in this place to ease their maintenance.
@@ -61,44 +60,25 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.1 $ $Date: 2004-06-11 19:10:24 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CONSTANTS_SOURCE
-#define CONSTANTS_SOURCE
-
-//
-// Null pointers.
-//
-
-/** The null pointer. */
-static void* NULL_POINTER = (void*) 0;
-
-/** The pointer null pointer. */
-static void** POINTER_NULL_POINTER = (void**) 0;
-
-/** The integer null pointer. */
-static int* INTEGER_NULL_POINTER = (int*) 0;
-
-/** The character null pointer. */
-static char* CHARACTER_NULL_POINTER = (char*) 0;
-
-/** The double null pointer. */
-static double* DOUBLE_NULL_POINTER = (double*) 0;
+#ifndef CONSTANT_SOURCE
+#define CONSTANT_SOURCE
 
 //
 // ASCII characters (0 - 127).
 //
 
 /** The colon character. */
-static char COLON_CHARACTER = ':';
+static const char COLON_CHARACTER = ':';
 
 /** The space character. */
-static char SPACE_CHARACTER = ' ';
+static const char SPACE_CHARACTER = ' ';
 
 /** The new line character. */
-static char NEW_LINE_CHARACTER = '\n';
+static const char NEW_LINE_CHARACTER = '\n';
 
 //
 // ANSI characters (128 - 255).
@@ -113,7 +93,7 @@ static char NEW_LINE_CHARACTER = '\n';
 //
 
 /** The null character, used as string termination in the c programming language. */
-static char NULL_CHARACTER = '\0';
+static const char NULL_CHARACTER = '\0';
 
 //
 // Arrays.
@@ -1636,7 +1616,6 @@ static const int MODEL_STARTUP_PARAMETER_INDEX = 3;
 // Logging:
 // - log levels
 // - log level names
-// - log settings
 // - log messages
 //
 
@@ -1686,16 +1665,6 @@ static const char* INFO_LOG_LEVEL_NAME = INFO_LOG_LEVEL_NAME_ARRAY;
 
 /** The info log level name count. */
 static const int INFO_LOG_LEVEL_NAME_COUNT = 4;
-
-//
-// Log settings.
-//
-
-/** The log level. */
-static const int* LOG_LEVEL = &INFO_LOG_LEVEL;
-
-/** The maximum log message count. */
-static const int MAXIMUM_LOG_MESSAGE_COUNT = 300;
 
 //
 // Logger log messages.
@@ -3252,5 +3221,5 @@ static const char* COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_N
 /** The "Could not execute CYBOI. The command line argument vector is null." message count. */
 static const int COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT = 66;
 
-/* CONSTANTS_SOURCE */
+/* CONSTANT_SOURCE */
 #endif

@@ -23,7 +23,7 @@
  *
  * This file handles a file.
  *
- * @version $Revision: 1.8 $ $Date: 2004-06-11 19:34:39 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,7 +32,7 @@
 
 #include <stdio.h>
 #include "../array/array.c"
-#include "../constant/constant.c"
+#include "../global/constant.c"
 #include "../logger/logger.c"
 
 /**

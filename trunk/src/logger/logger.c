@@ -28,22 +28,15 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.7 $ $Date: 2004-06-11 19:34:39 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LOGGER_SOURCE
 #define LOGGER_SOURCE
 
-#include <stdio.h>
-#include "../constant/constant.c"
-
-//
-// Global variables.
-//
-
-/** The log output. */
-static FILE* log_output;
+#include "../global/constant.c"
+#include "../global/variable.c"
 
 //
 // Log entry.
@@ -102,22 +95,22 @@ void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
 
                 } else {
 
-                    fputs("Error: Could not add log details. The log entry index is null.\n", log_output);
+                    fputs("Error: Could not add log details. The log entry index is null.\n", LOG_OUTPUT);
                 }
 
             } else {
 
-                fputs("Error: Could not add log details. The log entry index is null.\n", log_output);
+                fputs("Error: Could not add log details. The log entry index is null.\n", LOG_OUTPUT);
             }
 
         } else {
 
-            fputs("Error: Could not add log details. The log entry index is null.\n", log_output);
+            fputs("Error: Could not add log details. The log entry index is null.\n", LOG_OUTPUT);
         }
 
     } else {
 
-        fputs("Error: Could not add log details. The log details count is null.\n", log_output);
+        fputs("Error: Could not add log details. The log details count is null.\n", LOG_OUTPUT);
     }
 }
 
@@ -181,7 +174,7 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
 
                     } else {
 
-                        fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", log_output);
+                        fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
                     }
 
                 } else if (*l == WARNING_LOG_LEVEL) {
@@ -193,7 +186,7 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
 
                     } else {
 
-                        fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", log_output);
+                        fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
                     }
 
                 } else if (*l == ERROR_LOG_LEVEL) {
@@ -205,23 +198,23 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
 
                     } else {
 
-                        fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", log_output);
+                        fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
                     }
                 }
 
             } else {
 
-                fputs("Error: Could not add log level name. The log level is null.\n", log_output);
+                fputs("Error: Could not add log level name. The log level is null.\n", LOG_OUTPUT);
             }
 
         } else {
 
-            fputs("Error: Could not add log level name. The log entry count is null.\n", log_output);
+            fputs("Error: Could not add log level name. The log entry count is null.\n", LOG_OUTPUT);
         }
 
     } else {
 
-        fputs("Error: Could not add log level name. The log entry index is null.\n", log_output);
+        fputs("Error: Could not add log level name. The log entry index is null.\n", LOG_OUTPUT);
     }
 }
 
@@ -247,7 +240,7 @@ void log_message(const void* p0, const void* p1, const void* p2) {
             int* l = (int*) p0;
 
             // Only log message if log level matches.
-            if (*l <= *LOG_LEVEL) {
+            if (*l <= LOG_LEVEL) {
 
                 // The log entry.
                 void* e = NULL_POINTER;
@@ -270,7 +263,7 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
                 } else {
 
-                    fputs("Warning: Could not add colon to log entry. The log entry count is exceeded.\n", log_output);
+                    fputs("Warning: Could not add colon to log entry. The log entry count is exceeded.\n", LOG_OUTPUT);
                 }
 
                 // Add space to log entry.
@@ -281,7 +274,7 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
                 } else {
 
-                    fputs("Warning: Could not add space to log entry. The log entry count is exceeded.\n", log_output);
+                    fputs("Warning: Could not add space to log entry. The log entry count is exceeded.\n", LOG_OUTPUT);
                 }
 
                 // Add message to log entry.
@@ -292,7 +285,7 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
                 } else {
 
-                    fputs("Warning: Could not add message to log entry. The log entry count is exceeded.\n", log_output);
+                    fputs("Warning: Could not add message to log entry. The log entry count is exceeded.\n", LOG_OUTPUT);
                 }
 
                 // Add new line to log entry.
@@ -303,7 +296,7 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
                 } else {
 
-                    fputs("Warning: Could not add new line to log entry. The log entry count is exceeded.\n", log_output);
+                    fputs("Warning: Could not add new line to log entry. The log entry count is exceeded.\n", LOG_OUTPUT);
                 }
 
                 // Add string termination to log entry.
@@ -314,11 +307,11 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
                 } else {
 
-                    fputs("Warning: Could not add string termination to log entry. The log entry count is exceeded.\n", log_output);
+                    fputs("Warning: Could not add string termination to log entry. The log entry count is exceeded.\n", LOG_OUTPUT);
                 }
 
                 // Log entry to output.
-                fputs((char*) e, log_output);
+                fputs((char*) e, LOG_OUTPUT);
 
                 // Destroy log entry.
                 free(e);
@@ -326,12 +319,12 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
         } else {
 
-            fputs("Error: Could not log message. The message count is null.\n", log_output);
+            fputs("Error: Could not log message. The message count is null.\n", LOG_OUTPUT);
         }
 
     } else {
 
-        fputs("Error: Could not log message. The log level is null.\n", log_output);
+        fputs("Error: Could not log message. The log level is null.\n", LOG_OUTPUT);
     }
 }
 

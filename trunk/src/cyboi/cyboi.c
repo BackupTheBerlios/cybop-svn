@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.14 $ $Date: 2004-06-11 19:34:39 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,8 +35,9 @@
 
 #include <stdio.h>
 //??#include <stdlib.h>
-#include "../constant/constant.c"
 #include "../cyboi/internals.c"
+#include "../global/constant.c"
+#include "../global/variable.c"
 #include "../logger/logger.c"
 #include "../signal/signal_memory.c"
 #include "../test/test.c"
@@ -207,6 +208,64 @@ void wait(void* p0, void* p1, void* p2,
 }
 
 /**
+ * Initializes the global variables.
+ */
+void initialize_global_variables() {
+
+    //
+    // Logging.
+    //
+
+    // Initialize log level.
+    LOG_LEVEL = INFO_LOG_LEVEL;
+
+    // Initialize maximum log message count.
+    MAXIMUM_LOG_MESSAGE_COUNT = 300;
+
+    // Initialize log output.
+    LOG_OUTPUT = stderr;
+
+    //
+    // Primitive type sizes.
+    //
+
+    // Initialize pointer primitive.
+    POINTER_PRIMITIVE_SIZE = sizeof(void*);
+
+    // Initialize integer primitive.
+    INTEGER_PRIMITIVE_SIZE = sizeof(int);
+
+    // Initialize character primitive.
+    CHARACTER_PRIMITIVE_SIZE = sizeof(char);
+
+    // Initialize double primitive.
+    DOUBLE_PRIMITIVE_SIZE = sizeof(double);
+
+    //
+    // Null pointers.
+    //
+    // CAUTION!
+    // These cannot be constant, because otherwise
+    // one could not alter their values later.
+    //
+
+    /** The null pointer. */
+    NULL_POINTER = (void*) 0;
+
+    /** The pointer null pointer. */
+    POINTER_NULL_POINTER = (void**) 0;
+
+    /** The integer null pointer. */
+    INTEGER_NULL_POINTER = (int*) 0;
+
+    /** The character null pointer. */
+    CHARACTER_NULL_POINTER = (char*) 0;
+
+    /** The double null pointer. */
+    DOUBLE_NULL_POINTER = (double*) 0;
+}
+
+/**
  * The main entry function.
  *
  * Command line arguments have to be in order:
@@ -224,6 +283,15 @@ void wait(void* p0, void* p1, void* p2,
  * Example 2 (calls the startup routine of some application):
  * cyboi compound file /application/logic/startup.cybol
  *
+ * The main function follows a system lifecycle to start up, run and shut down
+ * the CYBOI system, in the following order:
+ * 1 initialize global variables
+ * 2 create statics (state/ logic knowledge container etc.)
+ * 3 create startup signal and add to signal memory
+ * 4 run dynamics (signal waiting loop)
+ * 5 destroy startup signal
+ * 6 destroy statics (state/ logic knowledge container etc.)
+ *
  * @param p0 the argument count (argc)
  * @param p1 the argument vector (argv)
  * @return the return value
@@ -234,24 +302,30 @@ int main(int p0, char** p1) {
     int r = 1;
 
     //
+    // System lifecycle.
+    //
+
+    //
+    // Global variables.
+    //
+
+    // Initialize global variables.
+    // They have to be initialized before the command line parameter check below!
+    // Otherwise, the logger may not be able to log possible error messages.
+    initialize_global_variables();
+
+    //
     // Testing.
+    //
+    // CAUTION!
+    // This has to stand AFTER the initialization of the
+    // global variables because these are used by the testing code.
     //
 
     // Call testing procedures.
     // Comment/ uncomment this as needed.
 //    test();
 //    return 0;
-
-    //
-    // Global variables.
-    //
-
-    /** The log output. */
-    log_output = stderr;
-
-    //
-    // System lifecycle.
-    //
 
     if (p1 != NULL_POINTER) {
 

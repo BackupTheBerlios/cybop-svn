@@ -25,7 +25,7 @@
  *
  * A complex consists of two floats, a real and an imaginary.
  *
- * @version $Revision: 1.2 $ $Date: 2004-06-11 19:34:39 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,7 +33,7 @@
 #define COMPLEX_SOURCE
 
 #include "../array/array.c"
-#include "../constant/constant.c"
+#include "../global/constant.c"
 #include "../logger/logger.c"
 
 //

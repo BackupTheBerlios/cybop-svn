@@ -50,7 +50,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.6 $ $Date: 2004-06-11 19:34:39 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-06-13 23:13:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,7 +61,7 @@
 #include "../array/double_array.c"
 #include "../array/integer_array.c"
 #include "../array/pointer_array.c"
-#include "../constant/constant.c"
+#include "../global/constant.c"
 #include "../logger/logger.c"
 
 //
@@ -173,6 +173,46 @@ void resize_array(void* p0, const void* p1, const void* p2) {
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+    }
+}
+
+/**
+ * Copies the array.
+ *
+ * @param p0 the source array
+ * @param p1 the source array size
+ * @param p2 the source array count
+ * @param p3 the destination array
+ * @param p4 the destination array size
+ * @param p5 the destination array count
+ * @param p6 the type
+ */
+void copy_array(const void* p0, const void* p1, const void* p2, void* p3, void* p4, void* p5, const void* p6) {
+
+    if (p6 != NULL_POINTER) {
+
+        int* t = (int*) p6;
+
+        if (*t == POINTER_ARRAY) {
+
+            copy_pointer_array(p0, p1, p2, p3, p4, p5);
+
+        } else if (*t == INTEGER_ARRAY) {
+
+            copy_integer_array(p0, p1, p2, p3, p4, p5);
+
+        } else if (*t == DOUBLE_ARRAY) {
+
+            copy_double_array(p0, p1, p2, p3, p4, p5);
+
+        } else if (*t == CHARACTER_ARRAY) {
+
+            copy_character_array(p0, p1, p2, p3, p4, p5);
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COPY_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_COPY_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 

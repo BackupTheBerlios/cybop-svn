@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.14 $ $Date: 2004-06-11 19:34:39 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,8 +34,9 @@
 
 #include <stdio.h>
 #include "../array/array.c"
-#include "../constant/constant.c"
 #include "../cybol/file.c"
+#include "../global/constant.c"
+#include "../global/variable.c"
 
 /**
  * Tests the standard output and error stream.
@@ -139,18 +140,18 @@ void test_character_array_single_element() {
     fputs("Integer array:\n", stdout);
 
     void* ia = NULL_POINTER;
-    int ias = 5 * sizeof(int);
+    int ias = 5 * INTEGER_PRIMITIVE_SIZE;
     create_array((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ias);
 
-    int ia1i = 0 * sizeof(int);
+    int ia1i = 0 * INTEGER_PRIMITIVE_SIZE;
     int ia1 = 9;
-    int ia2i = 1 * sizeof(int);
+    int ia2i = 1 * INTEGER_PRIMITIVE_SIZE;
     int ia2 = 8;
-    int ia3i = 2 * sizeof(int);
+    int ia3i = 2 * INTEGER_PRIMITIVE_SIZE;
     int ia3 = 7;
-    int ia4i = 3 * sizeof(int);
+    int ia4i = 3 * INTEGER_PRIMITIVE_SIZE;
     int ia4 = 6;
-    int ia5i = 4 * sizeof(int);
+    int ia5i = 4 * INTEGER_PRIMITIVE_SIZE;
     int ia5 = 5;
 
     set_array_element((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ia1i, (void*) &ia1);
@@ -165,12 +166,12 @@ void test_character_array_single_element() {
 
     while (1) {
 
-        if (j * sizeof(int) >= ias) {
+        if (j * INTEGER_PRIMITIVE_SIZE >= ias) {
 
             break;
         }
 
-        iatest = (int*) (ia + j * sizeof(int));
+        iatest = (int*) (ia + j * INTEGER_PRIMITIVE_SIZE);
         fprintf(stderr, "ia: %d\n", *iatest);
 
         j++;
@@ -180,7 +181,7 @@ void test_character_array_single_element() {
 
     //
     // Caution! In any case consider the size of the type, for all array!
-    // Example: index * sizeof(int)
+    // Example: index * INTEGER_PRIMITIVE_SIZE
     //
 }
 
