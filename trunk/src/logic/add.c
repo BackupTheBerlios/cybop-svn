@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2005-03-10 09:58:22 $ $Author: rholzmueller $
+ * @version $Revision: 1.15 $ $Date: 2005-03-20 09:44:42 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -84,9 +84,15 @@ void add_integers(void* p0, const void* p1, const void* p2) {
 /**
  * Adds two strings (concate)
  *
- * @param p0 the result
- * @param p1 the string 1
- * @param p2 the string 2
+ * @param res the result (Hand over as reference)
+ * @param res_count the result count
+ * @param res_size the result size
+ * @param op1 the operand 1
+ * @param op1_count the operand 1 count
+ * @param op1_size the operand 1 size
+ * @param op2 the operand 2
+ * @param op2_count the operand 2 count
+ * @param op2_size the operand 2 size
  */
 void add_strings( void** res, int* res_count, int* res_size,
                   void* op1, int* op1_count, int* op1_size, 
@@ -109,6 +115,9 @@ void add_strings( void** res, int* res_count, int* res_size,
         {
          
             //resize the result array
+            //if source and the destination the same, then 
+            //must the coutn in a temp variable
+            int start_count = *op1_count;
             *res_size = *op1_count + *op2_count;
             *res_count = *op1_count + *op2_count;
             resize_array( res, res_size, CHARACTER_ARRAY );
@@ -117,7 +126,7 @@ void add_strings( void** res, int* res_count, int* res_size,
             set_array_elements( *res, (void*) ZERO_NUMBER, 
                                 op1, op1_count,  (void*) CHARACTER_ARRAY);
             
-            set_array_elements( *res, op1_count, 
+            set_array_elements( *res, &start_count, 
                                 op2, op2_count,  (void*) CHARACTER_ARRAY);
         }  //check result
              
