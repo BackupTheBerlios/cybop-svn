@@ -1,7 +1,7 @@
 /*
  * $RCSfile: test.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -25,8 +25,9 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.30 $ $Date: 2004-12-20 21:05:15 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2005-01-08 19:55:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
+ * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
 #ifndef TEST_SOURCE

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: constant.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -21,32 +21,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.27 $ $Date: 2004-12-21 17:49:51 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2005-01-08 19:55:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CONSTANT_SOURCE
 #define CONSTANT_SOURCE
-
-//
-// Unix socket.
-//
-
-/** The unix server socket filename. */
-static const char UNIX_SERVER_SOCKET_FILENAME_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'e', 'r', 'v', 'e', 'r', '_', 's', 'o', 'c', 'k', 'e', 't', '_', 'f', 'i', 'l', 'e', 'n', 'a', 'm', 'e'};
-static const char* UNIX_SERVER_SOCKET_FILENAME = UNIX_SERVER_SOCKET_FILENAME_ARRAY;
-static const int UNIX_SERVER_SOCKET_FILENAME_COUNT_ARRAY[] = {27};
-static const int* UNIX_SERVER_SOCKET_FILENAME_COUNT = UNIX_SERVER_SOCKET_FILENAME_COUNT_ARRAY;
-
-/** The unix socket filename name. */
-static const char UNIX_SOCKET_FILENAME_NAME_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'o', 'c', 'k', 'e', 't', '_', 'f', 'i', 'l', 'e', 'n', 'a', 'm', 'e', '_', 'n', 'a', 'm', 'e'};
-static const char* UNIX_SOCKET_FILENAME_NAME = UNIX_SOCKET_FILENAME_NAME_ARRAY;
-static const int UNIX_SOCKET_FILENAME_NAME_COUNT_ARRAY[] = {25};
-static const int* UNIX_SOCKET_FILENAME_NAME_COUNT = UNIX_SOCKET_FILENAME_NAME_COUNT_ARRAY;
-
-//
-// X windows.
-//
 
 //
 // Signal priorities.

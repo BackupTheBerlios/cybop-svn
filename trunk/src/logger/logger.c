@@ -1,7 +1,7 @@
 /*
  * $RCSfile: logger.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -28,8 +28,9 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.14 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2005-01-08 19:55:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
+ * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
 #ifndef LOGGER_SOURCE
@@ -320,7 +321,6 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 /**
  * Logs the message for debugging.
  *
- * @author: Rolf Holzmueller
  * @param m the log message as null terminated string
  */
 void log_message_debug(const char* m) {

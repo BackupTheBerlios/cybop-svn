@@ -21,8 +21,9 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-01-08 19:55:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
+ * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
 #ifndef SOCKET_NUMBER_ACCESSOR_SOURCE

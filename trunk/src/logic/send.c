@@ -1,7 +1,7 @@
 /*
  * $RCSfile: send.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -21,8 +21,9 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-01-08 19:55:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
+ * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
 #ifndef SEND_SOURCE

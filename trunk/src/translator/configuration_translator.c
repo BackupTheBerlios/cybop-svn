@@ -21,8 +21,9 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-01-08 19:55:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
+ * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
 #ifndef CONFIGURATION_TRANSLATOR_SOURCE

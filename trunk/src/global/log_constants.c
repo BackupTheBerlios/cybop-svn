@@ -1,7 +1,7 @@
 /*
  * $RCSfile: log_constants.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -21,14 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file defines global log constants.
- *
- * It was decided to keep them bundled in this place to ease their maintenance.
- * One day, they can be burnt together with the cyboi implementation into a
- * hardware chip, just like operation codes of a central processing unit (cpu).
- * This would tremendously increase performance.
- *
- * @version $Revision: 1.6 $ $Date: 2004-12-17 19:06:23 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-01-08 19:55:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -974,22 +967,11 @@ static const int* COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_IN
 /** The "Usage: " message. */
 static const char USAGE_MESSAGE_ARRAY[] = {
     'P', 'a', 'r', 'a', 'm', 'e', 't', 'e', 'r', 's', ' ', 'h', 'a', 'v', 'e', ' ', 't', 'o', ' ', 'b', 'e', ' ', 'g', 'i', 'v', 'e', 'n', '!', '\n',
-    'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'i', 'n', 'l', 'i', 'n', 'e', '|', 'f', 'i', 'l', 'e', '|', 'f', 't', 'p', '|', 'h', 't', 't', 'p', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', '|', 'c', 'y', 'b', 'o', 'l', ' ', '/', 'p', 'a', 't', 'h', '/', 't', 'o', '/', 's', 't', 'a', 'r', 't', 'u', 'p', '/', 'f', 'i', 'l', 'e', '\n',
-    'E', 'x', 'a', 'm', 'p', 'l', 'e', ' ', '1', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'i', 'n', 'l', 'i', 'n', 'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 'e', 'x', 'i', 't', '\n',
-    'E', 'x', 'a', 'm', 'p', 'l', 'e', ' ', '2', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'f', 'i', 'l', 'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 'e', 'x', 'i', 't', '.', 't', 'x', 't', '\n',
-    'E', 'x', 'a', 'm', 'p', 'l', 'e', ' ', '3', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'f', 'i', 'l', 'e', ' ', 'c', 'y', 'b', 'o', 'l', ' ', 'e', 'x', 'i', 't', '.', 'c', 'y', 'b', 'o', 'l'};
-static const char* USAGE_MESSAGE = USAGE_MESSAGE_ARRAY;
-static const int USAGE_MESSAGE_COUNT_ARRAY[] = {219};
-static const int* USAGE_MESSAGE_COUNT = USAGE_MESSAGE_COUNT_ARRAY;
-
-/** The New "Usage: " message. */
-static const char USAGE_MESSAGE_NEW_ARRAY[] = {
-    'P', 'a', 'r', 'a', 'm', 'e', 't', 'e', 'r', 's', ' ', 'h', 'a', 'v', 'e', ' ', 't', 'o', ' ', 'b', 'e', ' ', 'g', 'i', 'v', 'e', 'n', '!', '\n',
-    'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'o', 'n', 'f', 'i', 'g', 'f', 'i', 'l', 'e', '\n',
+    'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'o', 'n', 'f', 'i', 'g', 'u', 'r', 'a', 't', 'i', 'o', 'n', 'f', 'i', 'l', 'e', '\n',
     'E', 'x', 'a', 'm', 'p', 'l', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'o', 'n', 'f', 'i', 'g', '/', 'c', 'o', 'n', 'f', 'i', 'g', '.', 'c', 'y', 'b', 'o', 'l'};
-static const char* USAGE_MESSAGE_NEW = USAGE_MESSAGE_NEW_ARRAY;
-static const int USAGE_MESSAGE_NEW_COUNT_ARRAY[] = {87};
-static const int* USAGE_MESSAGE_NEW_COUNT = USAGE_MESSAGE_NEW_COUNT_ARRAY;
+static const char* USAGE_MESSAGE = USAGE_MESSAGE_ARRAY;
+static const int USAGE_MESSAGE_COUNT_ARRAY[] = {94};
+static const int* USAGE_MESSAGE_COUNT = USAGE_MESSAGE_COUNT_ARRAY;
 
 /** The "Could not execute CYBOI. The command line argument vector is null." message. */
 static const char COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'e', 'x', 'e', 'c', 'u', 't', 'e', ' ', 'C', 'Y', 'B', 'O', 'I', '.', ' ', 'T', 'h', 'e', ' ', 'c', 'o', 'm', 'm', 'a', 'n', 'd', ' ', 'l', 'i', 'n', 'e', ' ', 'a', 'r', 'g', 'u', 'm', 'e', 'n', 't', ' ', 'v', 'e', 'c', 't', 'o', 'r', ' ', 'i', 's', ' ', 'n', 'u', 'l', 'l', '.'};
