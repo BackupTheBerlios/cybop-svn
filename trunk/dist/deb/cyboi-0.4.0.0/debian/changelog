@@ -32,7 +32,7 @@ cyboi (0.4.0.0) unstable; urgency=low
   * Correct A LOT OF bugs causing segmentation faults at runtime
   * Get Hello, World! application running
 
--- Christian Heller <christian.heller@tuxtax.de> Mon, 14 Feb 2005 02:00:00 +0100
+ -- Christian Heller <christian.heller@tuxtax.de>  Mon, 28 Feb 2005 10:00:00 +0100
 
 
 cyboi (0.3.1.1) unstable; urgency=low
@@ -108,4 +108,4 @@ cyboi(0.1.0.0) unstable; urgency=low
   * Run dynamic loop catching signals from internal signal memory (queue)
   * Create GUI using Java Swing (as temporary workaround)
 
--- Christian Heller <christian.heller@tuxtax.de>  Thu, 11 Sep 2003 12:00:00 +0100
+ -- Christian Heller <christian.heller@tuxtax.de>  Thu, 11 Sep 2003 12:00:00 +0100

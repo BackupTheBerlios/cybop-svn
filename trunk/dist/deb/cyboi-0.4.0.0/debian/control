@@ -8,7 +8,8 @@ Build-Depends: debhelper (>= 4.0.0)
 Package: cyboi
 Architecture: i386
 Depends: ${shlibs:Depends}
-Suggests: cybol,cybop
+Recommends: cybol-core
+Suggests: cyboi-doc
 Description: Cybernetics Oriented Interpreter (CYBOI) for CYBOP
  CYBOI is the corresponding interpreter that is needed to execute systems
  defined in CYBOL.
