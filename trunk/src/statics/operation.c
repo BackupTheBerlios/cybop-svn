@@ -43,16 +43,16 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.5 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef OPERATION_HANDLER_SOURCE
-#define OPERATION_HANDLER_SOURCE
+#ifndef OPERATION_SOURCE
+#define OPERATION_SOURCE
 
-#include "../constants.c"
-#include "../logger/log_handler.c"
-#include "../model/array_handler.c"
+#include "../array/array.c"
+#include "../constants/constants.c"
+#include "../logger/logger.c"
 
 //
 // Operation.
@@ -381,5 +381,5 @@ void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
     }
 }
 
-/* OPERATION_HANDLER_SOURCE */
+/* OPERATION_SOURCE */
 #endif

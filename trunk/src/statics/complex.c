@@ -25,16 +25,16 @@
  *
  * A complex consists of two floats, a real and an imaginary.
  *
- * @version $Revision: 1.4 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef COMPLEX_HANDLER_SOURCE
-#define COMPLEX_HANDLER_SOURCE
+#ifndef COMPLEX_SOURCE
+#define COMPLEX_SOURCE
 
-#include "../constants.c"
-#include "../logger/log_handler.c"
-#include "../model/array_handler.c"
+#include "../array/array.c"
+#include "../constants/constants.c"
+#include "../logger/logger.c"
 
 //
 // Complex.
@@ -116,5 +116,5 @@ void finalize_complex(void* p0, void* p1, void* p2) {
 //??    fprintf(p1, %d, (void*) &(t->imaginary));
 }
 
-/* COMPLEX_HANDLER_SOURCE */
+/* COMPLEX_SOURCE */
 #endif

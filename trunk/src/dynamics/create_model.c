@@ -23,24 +23,24 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.19 $ $Date: 2004-04-29 15:18:06 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CREATE_MODEL_SOURCE
 #define CREATE_MODEL_SOURCE
 
-#include "../logger/log_handler.c"
-#include "../model/model_handler.c"
-#include "../statics/boolean_handler.c"
-#include "../statics/complex_handler.c"
-#include "../statics/double_handler.c"
-#include "../statics/fraction_handler.c"
-#include "../statics/integer_handler.c"
-#include "../statics/operation_handler.c"
-#include "../statics/string_handler.c"
-#include "../statics/time_handler.c"
-#include "../statics/vector_handler.c"
+#include "../logger/logger.c"
+#include "../statics/boolean.c"
+#include "../statics/complex.c"
+#include "../statics/compound.c"
+#include "../statics/double.c"
+#include "../statics/fraction.c"
+#include "../statics/integer.c"
+#include "../statics/operation.c"
+#include "../statics/string.c"
+#include "../statics/time.c"
+#include "../statics/vector.c"
 
 /**
  * Creates a transient model from a persistent model.

@@ -21,15 +21,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2004-04-22 13:25:31 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ADD_SOURCE
 #define ADD_SOURCE
 
-#include "../logger/log_handler.c"
-#include "../model/model_handler.c"
+#include "../logger/logger.c"
+#include "../statics/compound.c"
 
 /**
  * Adds two summands resulting in the sum.

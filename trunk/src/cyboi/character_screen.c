@@ -30,12 +30,12 @@
  * - Textual User Interface (TUI)
  * - Curses (termcap, ncurses)
  *
- * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CHARACTER_SCREEN_HANDLER_SOURCE
-#define CHARACTER_SCREEN_HANDLER_SOURCE
+#ifndef CHARACTER_SCREEN_SOURCE
+#define CHARACTER_SCREEN_SOURCE
 
 #include <stdio.h>
 
@@ -173,5 +173,5 @@ void test_textual_screen() {
 */
 }
 
-/* CHARACTER_SCREEN_HANDLER_SOURCE */
+/* CHARACTER_SCREEN_SOURCE */
 #endif

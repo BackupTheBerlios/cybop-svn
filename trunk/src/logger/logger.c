@@ -24,16 +24,16 @@
  * This file handles log messages.
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef LOG_HANDLER_SOURCE
-#define LOG_HANDLER_SOURCE
+#ifndef LOGGER_SOURCE
+#define LOGGER_SOURCE
 
 #include <stdio.h>
 #include <string.h>
-#include "../constants.c"
+#include "../constants/constants.c"
 
 //
 // Attributes.
@@ -256,5 +256,5 @@ void log_message(const void* p0, const void* p1) {
 */
 }
 
-/* LOG_HANDLER_SOURCE */
+/* LOGGER_SOURCE */
 #endif

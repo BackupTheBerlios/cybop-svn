@@ -25,15 +25,15 @@
  *
  * A double is a floating point number.
  *
- * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DOUBLE_HANDLER_SOURCE
-#define DOUBLE_HANDLER_SOURCE
+#ifndef DOUBLE_SOURCE
+#define DOUBLE_SOURCE
 
-#include "../constants.c"
-#include "../logger/log_handler.c"
+#include "../constants/constants.c"
+#include "../logger/logger.c"
 
 //
 // Double.
@@ -69,5 +69,5 @@ void finalize_double(const void* p0, void* p1, void* p2) {
 //??    sprintf(p1, %d, (void*) &(m->value));
 }
 
-/* DOUBLE_HANDLER_SOURCE */
+/* DOUBLE_SOURCE */
 #endif

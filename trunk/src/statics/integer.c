@@ -23,15 +23,15 @@
  *
  * This file handles an integer.
  *
- * @version $Revision: 1.3 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTEGER_HANDLER_SOURCE
-#define INTEGER_HANDLER_SOURCE
+#ifndef INTEGER_SOURCE
+#define INTEGER_SOURCE
 
-#include "../constants.c"
-#include "../logger/log_handler.c"
+#include "../constants/constants.c"
+#include "../logger/logger.c"
 
 //
 // Integer.
@@ -67,5 +67,5 @@ void finalize_integer(const void* p0, void* p1, void* p2) {
 //??    sprintf(p1, %d, (void*) &(m->value));
 }
 
-/* INTEGER_HANDLER_SOURCE */
+/* INTEGER_SOURCE */
 #endif

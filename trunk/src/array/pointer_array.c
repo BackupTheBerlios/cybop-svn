@@ -39,15 +39,15 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef POINTER_ARRAY_HANDLER_SOURCE
-#define POINTER_ARRAY_HANDLER_SOURCE
+#ifndef POINTER_ARRAY_SOURCE
+#define POINTER_ARRAY_SOURCE
 
-#include "../constants.c"
-#include "../logger/log_handler.c"
+#include "../constants/constants.c"
+#include "../logger/logger.c"
 
 //
 // Array.
@@ -613,5 +613,5 @@ void get_pointer_array_elements_index(const void* p0, const void* p1, const void
     }
 }
 
-/* POINTER_ARRAY_HANDLER_SOURCE */
+/* POINTER_ARRAY_SOURCE */
 #endif

@@ -48,19 +48,19 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ARRAY_HANDLER_SOURCE
-#define ARRAY_HANDLER_SOURCE
+#ifndef ARRAY_SOURCE
+#define ARRAY_SOURCE
 
-#include "../constants.c"
-#include "../logger/log_handler.c"
-#include "../model/character_array_handler.c"
-#include "../model/double_array_handler.c"
-#include "../model/integer_array_handler.c"
-#include "../model/pointer_array_handler.c"
+#include "../array/character_array.c"
+#include "../array/double_array.c"
+#include "../array/integer_array.c"
+#include "../array/pointer_array.c"
+#include "../constants/constants.c"
+#include "../logger/logger.c"
 
 //
 // Array.
@@ -459,5 +459,5 @@ void get_array_element_index(const void* p0, const void* p1, const void* p2, con
     get_array_elements_index(p0, p1, p2, (void*) &p3, (void*) &c, p4);
 }
 
-/* ARRAY_HANDLER_SOURCE */
+/* ARRAY_SOURCE */
 #endif

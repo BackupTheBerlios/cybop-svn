@@ -25,15 +25,15 @@
  *
  * A string is a chain of characters.
  *
- * @version $Revision: 1.3 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef STRING_HANDLER_SOURCE
-#define STRING_HANDLER_SOURCE
+#ifndef STRING_SOURCE
+#define STRING_SOURCE
 
-#include "../constants.c"
-#include "../logger/log_handler.c"
+#include "../constants/constants.c"
+#include "../logger/logger.c"
 
 //
 // String.
@@ -143,5 +143,5 @@ void finalize_string(const void* p0, const void* p1, void* p2, void* p3) {
     }
 }
 
-/* STRING_HANDLER_SOURCE */
+/* STRING_SOURCE */
 #endif

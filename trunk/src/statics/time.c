@@ -32,16 +32,16 @@
  * 01.01.2000 00:00:00";
  * 31.12.1999 23:59:59";
  *
- * @version $Revision: 1.3 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef TIME_HANDLER_SOURCE
-#define TIME_HANDLER_SOURCE
+#ifndef TIME_SOURCE
+#define TIME_SOURCE
 
-#include "../constants.c"
-#include "../logger/log_handler.c"
-#include "../model/array_handler.c"
+#include "../array/array.c"
+#include "../constants/constants.c"
+#include "../logger/logger.c"
 
 //
 // Time.
@@ -141,5 +141,5 @@ void finalize_time(void* p0, void* p1, void* p2) {
 //??    fprintf(p1, %d, &(m->value));
 }
 
-/* TIME_HANDLER_SOURCE */
+/* TIME_SOURCE */
 #endif

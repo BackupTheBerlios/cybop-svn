@@ -25,16 +25,16 @@
  *
  * A vector contains the three coordinates: x, y, z.
  *
- * @version $Revision: 1.3 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef VECTOR_HANDLER_SOURCE
-#define VECTOR_HANDLER_SOURCE
+#ifndef VECTOR_SOURCE
+#define VECTOR_SOURCE
 
-#include "../constants.c"
-#include "../logger/log_handler.c"
-#include "../model/array_handler.c"
+#include "../array/array.c"
+#include "../constants/constants.c"
+#include "../logger/logger.c"
 
 //
 // Vector.
@@ -155,5 +155,5 @@ void finalize_vector(void* p0, void* p1, void* p2) {
 //??    fprintf(p1, %d, &(m->z));
 }
 
-/* VECTOR_HANDLER_SOURCE */
+/* VECTOR_SOURCE */
 #endif

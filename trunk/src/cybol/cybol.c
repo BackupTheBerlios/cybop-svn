@@ -37,16 +37,16 @@
  *         map = position_abstraction_attribute
  *         (attributes 0..9 = size 10)
  *
- * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CYBOL_MODEL_HANDLER_SOURCE
-#define CYBOL_MODEL_HANDLER_SOURCE
+#ifndef CYBOL_SOURCE
+#define CYBOL_SOURCE
 
 #include <stdio.h>
-#include "../constants.c"
-#include "../logger/log_handler.c"
+#include "../constants/constants.c"
+#include "../logger/logger.c"
 
 //
 // File.
@@ -709,5 +709,5 @@ void initialize_source_model(void* p0, void* p1) {
 void finalize_source_model(void* p0, void* p1) {
 }
 
-/* CYBOL_MODEL_HANDLER_SOURCE */
+/* CYBOL_SOURCE */
 #endif

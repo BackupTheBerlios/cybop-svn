@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.9 $ $Date: 2004-04-29 11:37:09 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,8 +33,8 @@
 #define TEST_SOURCE
 
 #include <stdio.h>
-#include "../constants.c"
-#include "../model/array_handler.c"
+#include "../array/array.c"
+#include "../constants/constants.c"
 
 /**
  * Tests the standard output and error stream.

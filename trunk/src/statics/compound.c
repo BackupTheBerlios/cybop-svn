@@ -59,17 +59,17 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef MODEL_HANDLER_SOURCE
-#define MODEL_HANDLER_SOURCE
+#ifndef COMPOUND_SOURCE
+#define COMPOUND_SOURCE
 
-#include "../constants.c"
-#include "../cybol/cybol_model_handler.c"
-#include "../logger/log_handler.c"
-#include "../model/array_handler.c"
+#include "../array/array.c"
+#include "../constants/constants.c"
+#include "../cybol/cybol.c"
+#include "../logger/logger.c"
 
 //
 // Model.
@@ -269,8 +269,7 @@ void destroy_compound(void* p0) {
 // Forward declarations.
 //
 // These functions are the only forward declarations. They are needed because
-// models can recursively create/ destroy compound models using functions which
-// are defined in model_handler.c.
+// compounds can recursively create/ destroy other models.
 //
 
 /**
@@ -1664,5 +1663,5 @@ void get_model_part_by_name(const void* p0, const void* p1, const void* p2,
     }
 }
 
-/* MODEL_HANDLER_SOURCE */
+/* COMPOUND_SOURCE */
 #endif

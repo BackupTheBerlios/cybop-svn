@@ -23,16 +23,16 @@
  *
  * This file handles internals.
  *
- * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTERNALS_HANDLER_SOURCE
 #define INTERNALS_HANDLER_SOURCE
 
-#include "internals.c"
-#include "logger/log_handler.c"
-#include "x_windows/x_windows.c"
+#include "../cyboi/internals.c"
+#include "../logger/logger.c"
+#include "../x_windows/x_windows.c"
 
 //
 // Internals.

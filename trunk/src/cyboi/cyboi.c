@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,15 +35,14 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "constants.c"
-#include "internals.c"
-#include "logger/log_handler.c"
-#include "signal/signal_memory_handler.c"
-#include "test/test.c"
-#include "x_windows/x_windows_handler.c"
-
+#include "../constants/constants.c"
+#include "../cyboi/internals.c"
+#include "../logger/logger.c"
+#include "../signal/signal_memory.c"
+#include "../test/test.c"
+#include "../x_windows/x_windows_handler.c"
 //?? Temporary for character screen testing.
-#include "character_screen_handler.c"
+#include "../cyboi/character_screen.c"
 
 /**
  * Shows the usage information.

@@ -35,20 +35,20 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.8 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SIGNAL_MEMORY_HANDLER_SOURCE
-#define SIGNAL_MEMORY_HANDLER_SOURCE
+#ifndef SIGNAL_MEMORY_SOURCE
+#define SIGNAL_MEMORY_SOURCE
 
-#include "../constants.c"
+#include "../array/array.c"
+#include "../constants/constants.c"
 #include "../dynamics/add.c"
 #include "../dynamics/create_model.c"
 #include "../dynamics/destroy_model.c"
-#include "../logger/log_handler.c"
-#include "../model/array_handler.c"
-#include "../model/model_handler.c"
+#include "../logger/logger.c"
+#include "../statics/compound.c"
 #include "../x_windows/x_windows_handler.c"
 
 //
@@ -821,5 +821,5 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
 */
 }
 
-/* SIGNAL_MEMORY_HANDLER_SOURCE */
+/* SIGNAL_MEMORY_SOURCE */
 #endif

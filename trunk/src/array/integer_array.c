@@ -39,15 +39,15 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTEGER_ARRAY_HANDLER_SOURCE
-#define INTEGER_ARRAY_HANDLER_SOURCE
+#ifndef INTEGER_ARRAY_SOURCE
+#define INTEGER_ARRAY_SOURCE
 
-#include "../constants.c"
-#include "../logger/log_handler.c"
+#include "../constants/constants.c"
+#include "../logger/logger.c"
 
 //
 // Array.
@@ -113,7 +113,7 @@ void destroy_integer_array(void* p0, const void* p1) {
 
             //?? TODO: Destroy all array elements in a loop??
             //?? Which is the same as Garbage Collection!
-            //?? SEE: signal_memory_handler
+            //?? SEE: signal_memory
             free(*a);
 
         } else {
@@ -613,5 +613,5 @@ void get_integer_array_elements_index(const void* p0, const void* p1, const void
     }
 }
 
-/* INTEGER_ARRAY_HANDLER_SOURCE */
+/* INTEGER_ARRAY_SOURCE */
 #endif

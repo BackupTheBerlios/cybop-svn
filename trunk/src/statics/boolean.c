@@ -29,16 +29,16 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.3 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef BOOLEAN_HANDLER_SOURCE
-#define BOOLEAN_HANDLER_SOURCE
+#ifndef BOOLEAN_SOURCE
+#define BOOLEAN_SOURCE
 
-#include "../constants.c"
-#include "../logger/log_handler.c"
-#include "../model/array_handler.c"
+#include "../array/array.c"
+#include "../constants/constants.c"
+#include "../logger/logger.c"
 
 //
 // Boolean.
@@ -141,5 +141,5 @@ void finalize_boolean(const void* p0, void* p1, void* p2) {
     }
 }
 
-/* BOOLEAN_HANDLER_SOURCE */
+/* BOOLEAN_SOURCE */
 #endif
