@@ -32,7 +32,7 @@ package cyboi;
  *
  * Unfortunately, handling of most events is done via graphical components in java.
  *
- * @version $Revision: 1.8 $ $Date: 2003-09-05 14:02:16 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-09-08 06:48:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaEventHandler extends java.awt.EventQueue {
@@ -123,12 +123,11 @@ class JavaEventHandler extends java.awt.EventQueue {
     
                 JavaEventHandler.transform_event(s, evt);
                 
+                // Only send a new signal (store in signal memory) if an action exists.
+                // Otherwise, the chain of signals/ actions finishes here, until a new
+                // hardware event (interrupt) occurs.
                 if (s.predicate != null) {
                     
-                    // Only send a new signal (store in signal memory) if an action exists.
-                    // Otherwise, the chain of signals/ actions finishes here, until a new
-                    // hardware event (interrupt) occurs.
-    
                     // Caution! Adding of signals must be synchronized between:
                     // - SignalHandler.send for adding internal CYBOP signals
                     // - JavaEventHandler.dispatchEvent for adding transformed java event signals
@@ -142,8 +141,10 @@ class JavaEventHandler extends java.awt.EventQueue {
 
                 } else {
                     
-                    // The signal is empty and does not contain an action.
-                    // Do not log this as the loop runs infinite and would stuff the log record.
+                    // Do not log this as the loop runs infinite and would stuff the log record!
+                    // The action is null. No signal gets stored in the signal memory.
+                    // The signal needs to be destroyed again.
+                    s = null;
                 }
     
             } else {
@@ -255,15 +256,6 @@ class JavaEventHandler extends java.awt.EventQueue {
                 } else */if (id == java.awt.event.MouseEvent.MOUSE_CLICKED) {
                     
                     s.predicate = JavaEventHandler.MOUSE_CLICKED_EVENT;
-                    
-/*??
-                    s.object = "system.mouse.pointer_position";
-
-                    ItemHandler.set_item_element("system.mouse.pointer_position.x_distance.quantity", ((java.awt.event.MouseEvent) evt).getX());
-                    ItemHandler.set_item_element("system.mouse.pointer_position.x_distance.unit", "pixel");
-                    ItemHandler.set_item_element("system.mouse.pointer_position.y_distance.quantity", ((java.awt.event.MouseEvent) evt).getY());
-                    ItemHandler.set_item_element("system.mouse.pointer_position.y_distance.unit", "pixel");
-*/
 
                 }/*?? else if (id == java.awt.event.MouseEvent.MOUSE_DRAGGED) {
     
@@ -405,14 +397,12 @@ class JavaEventHandler extends java.awt.EventQueue {
     
                 }*/ else if (id == java.awt.event.MouseEvent.MOUSE_MOVED) {
 
-/*??
-                    String s1 = java.lang.Integer.toString(((java.awt.event.MouseEvent) evt).getX());
-                    String s2 = java.lang.Integer.toString(((java.awt.event.MouseEvent) evt).getY());
-                    ItemHandler.set_item_element("system.controller.mouse_model.pointer_position.x_distance.quantity", s1);
-                    ItemHandler.set_item_element("system.controller.mouse_model.pointer_position.x_distance.unit", "pixel");
-                    ItemHandler.set_item_element("system.controller.mouse_model.pointer_position.y_distance.quantity", s2);
-                    ItemHandler.set_item_element("system.controller.mouse_model.pointer_position.y_distance.unit", "pixel");
-*/
+                    Item it = SignalHandler.root;
+
+                    ItemHandler.set_item_element(it, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
+                    ItemHandler.set_item_element(it, "mouse.pointer_position.x_distance.unit", "pixel");
+                    ItemHandler.set_item_element(it, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
+                    ItemHandler.set_item_element(it, "mouse.pointer_position.y_distance.unit", "pixel");
 
                     s.predicate = JavaEventHandler.MOUSE_MOVED_EVENT;
     

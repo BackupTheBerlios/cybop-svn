@@ -33,7 +33,7 @@ package cyboi;
  * - send
  * - reset
  *
- * @version $Revision: 1.19 $ $Date: 2003-09-05 14:02:16 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2003-09-08 06:48:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -197,21 +197,29 @@ class SignalHandler {
             if (a != null) {
 
                 LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Handle signal: " + a);
+                Item i = SignalHandler.root;
 
                 if (a.equals(JavaEventHandler.MOUSE_MOVED_EVENT)) {
 
-//??                    set_position;
+/*?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
+                    ItemHandler.set_item_element(i, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
+                    ItemHandler.set_item_element(i, "mouse.pointer_position.x_distance.unit", "pixel");
+                    ItemHandler.set_item_element(i, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
+                    ItemHandler.set_item_element(i, "mouse.pointer_position.y_distance.unit", "pixel");
+*/
 
                     SignalHandler.reset(s);
 
                 } else if (a.equals(JavaEventHandler.MOUSE_CLICKED_EVENT)) {
 
-//??                    java.lang.Object a = SignalHandler.root;
+                    java.lang.Object x = ItemHandler.get_item_element(i, "mouse.pointer_position.x_distance.quantity");
+                    java.lang.Object y = ItemHandler.get_item_element(i, "mouse.pointer_position.y_distance.quantity");
 
                     SignalHandler.reset(s);
 
-//??                    s.predicate = SignalHandler.SEND_ACTION;
-//??                    s.object = ItemHandler.get_item_element("root.");
+                    (x >= 0) && (x < width) && (y >= 0) && (y < height)
+
+                    s.predicate = SignalHandler.DETERMINE_SCREEN_MODEL_AT_POSITION;
 
                 } else if (a.equals(SignalHandler.SHOW_SYSTEM_INFORMATION_ACTION)) {
                     
@@ -235,17 +243,17 @@ class SignalHandler {
 */
                 } else if (a.equals(SignalHandler.SEND_ACTION)) {
                     
-                    Item i = (Item) s.object;
+                    Item o = (Item) s.object;
 
-                    if (i != null) {
+                    if (o != null) {
                         
-                        java.lang.Object o = i.java_object;
+                        java.lang.Object j = o.java_object;
 
-                        if (o != null) {
+                        if (j != null) {
                             
-                            if (o instanceof java.awt.Component) {
+                            if (j instanceof java.awt.Component) {
                                 
-                                ((java.awt.Component) o).setVisible(true);
+                                ((java.awt.Component) j).setVisible(true);
                             
                             } else {
                                 
@@ -266,22 +274,20 @@ class SignalHandler {
                     
                 } else if (a.equals(SignalHandler.STARTUP_ACTION)) {
                     
-                    // Root (statics).
-                    SignalHandler.root = ItemHandler.create_object(s.object, Statics.CATEGORY);
-
                     SignalHandler.reset(s);
                     
+                    // Root (statics).
+                    SignalHandler.root = ItemHandler.create_object(s.object, Statics.CATEGORY);
                     s.predicate = SignalHandler.SEND_ACTION;
                     s.object = MapHandler.get_map_element(((Item) root).items, "main_frame");
 
                 } else if (a.equals(SignalHandler.SHUTDOWN_ACTION)) {
                     
+                    SignalHandler.reset(s);
+
                     // Root (statics).
                     ItemHandler.destroy_object(SignalHandler.root, s.object, Statics.CATEGORY);
-
                     sf = true;
-
-                    SignalHandler.reset(s);
                 }
                 
             } else {
@@ -355,8 +361,8 @@ class SignalHandler {
 
             } else {
                 
-                // The signal is empty and does not contain an action.
-                // Do not log this as the loop runs infinite and would stuff the log record.
+                // Do not log this as the loop runs infinite and would stuff the log record!
+                // The action is null. No signal gets stored in the signal memory.
             }
     
         } else {

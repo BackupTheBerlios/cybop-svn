@@ -30,7 +30,7 @@ package cyboi;
  * It is necessary only as long as the Cybernetics Oriented Interpreter (CYBOI)
  * is implemented in the Java programming language.
  *
- * @version $Revision: 1.11 $ $Date: 2003-09-05 14:02:16 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-09-08 06:48:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaObjectHandler {
@@ -44,9 +44,6 @@ class JavaObjectHandler {
 
     /** The key binding. */
     static java.lang.String KEY_BINDING = "key_binding";
-
-    /** The action. */
-    static java.lang.String ACTION = "action";
 
     /** The width. */
     static java.lang.String WIDTH = "width";

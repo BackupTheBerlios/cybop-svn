@@ -29,7 +29,7 @@ package cyboi;
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.31 $ $Date: 2003-08-18 17:30:06 $ $Author: christian $
+ * @version $Revision: 1.32 $ $Date: 2003-09-08 06:48:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -489,118 +489,180 @@ class ItemHandler {
     //
 
     /**
-     * Adds the item element.
-     *
-     * @param p0 the item
-     * @param p1 the element
-     * @param p2 the name
-     */
-/*??
-    static void add_item_element(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
-
-        java.lang.Object n = MapHandler.determine_map_element_name(p0, p2);
-        MapHandler.set_map_element(p0, p1, n);
-    }
-
-    /**
      * Sets the item element.
      *
-     * @param p0 the item name
-     * @param p1 the element
+     * @param p0 the item
+     * @param p1 the hierarchical item name
+     * @param p2 the element
      */
-/*??
-    static void set_item_element(java.lang.Object p0, java.lang.Object p1) {
+    static void set_item_element(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
 
-        Map m = (Map) p0;
-        
-        if (m != null) {
+        Item i = (Item) p0;
+
+        if (i != null) {
+
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Set item element: " + p1);
+            java.lang.String n = get_child_name(p1);
+            java.lang.String r = get_remaining_name(p1);
             
-            int i = MapHandler.determine_next_map_element_index(m, p2);
-
-            m.names = ArrayHandler.set_array_element(m.names, p2, i);
-            m.references = ArrayHandler.set_array_element(m.references, p1, i);
-
-        } else {
-
-            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not set map element. The map is null.");
-        }
-    }
-
-    /**
-     * Removes the map element with the index.
-     *
-     * @param p0 the map
-     * @param p1 the index
-     */
-/*??
-    static void remove_map_element(java.lang.Object p0, int p1) {
-
-        Map m = (Map) p0;
-        
-        if (m != null) {
-
-            ArrayHandler.remove_array_element(m.names, p1);
-            ArrayHandler.remove_array_element(m.references, p1);
-
-        } else {
-
-            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove map element. The map is null.");
-        }
-    }
-
-    /**
-     * Removes the map element with the name.
-     *
-     * @param p0 the map
-     * @param p1 the name
-     */
-/*??
-    static void remove_map_element(java.lang.Object p0, java.lang.Object p1) {
+            if (r != null) {
+                
+                // The given item is the parent of another parent.
+                Item child = MapHandler.get_map_element(i.items, n);
+                
+                // Continue to process along the hierarchical name.
+                ItemHandler.set_item_element(child, r, p2);
+                
+            } else {
     
-        int i = MapHandler.get_map_element_index(p0, p1);
-
-        MapHandler.remove_map_element(p0, i);
+                // The given item is the parent of the child.
+                MapHandler.set_map_element(i.items, n, p2);
+            }
+            
+        } else {
+            
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not set item element. The item is null.");
+        }
     }
 
     /**
-     * Returns the map element with the index.
+     * Removes the item element.
      *
-     * @param p0 the map
-     * @param p1 the index
+     * @param p0 the item
+     * @param p1 the hierarchical item name
+     */
+    static void remove_item_element(java.lang.Object p0, java.lang.Object p1) {
+
+        Item i = (Item) p0;
+
+        if (i != null) {
+
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Remove item element: " + p1);
+            java.lang.String n = get_child_name(p1);
+            java.lang.String r = get_remaining_name(p1);
+            
+            if (r != null) {
+                
+                // The given item is the parent of another parent.
+                Item child = MapHandler.get_map_element(i.items, n);
+                
+                // Continue to process along the hierarchical name.
+                ItemHandler.remove_item_element(child, r);
+                
+            } else {
+    
+                // The given item is the parent of the child.
+                MapHandler.remove_map_element(i.items, n);
+            }
+        } else {
+
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove item element. The item is null.");
+        }
+    }
+
+    /**
+     * Returns the item element.
+     *
+     * @param p0 the item
+     * @param p1 the hierarchical item name
      * @return the element
      */
-/*??
-    static java.lang.Object get_map_element(java.lang.Object p0, int p1) {
+    static java.lang.Object get_item_element(java.lang.Object p0, java.lang.Object p1) {
 
         java.lang.Object e = null;
-        Map m = (Map) p0;
+        Item i = (Item) p0;
 
-        if (m != null) {
+        if (i != null) {
     
-            e = ArrayHandler.get_array_element(m.references, p1);
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Get item element: " + p1);
+            java.lang.String n = get_child_name(p1);
+            java.lang.String r = get_remaining_name(p1);
+            
+            if (r != null) {
+                
+                // The given item is the parent of another parent.
+                Item child = MapHandler.get_map_element(i.items, n);
+                
+                // Continue to process along the hierarchical name.
+                e = ItemHandler.get_item_element(child, r);
+                
+            } else {
+    
+                // The given item is the parent of the child.
+                e = MapHandler.get_map_element(i.items, n);
+            }
 
         } else {
 
-            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not get map element. The map is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not get item element. The item is null.");
         }
         
         return e;
     }
 
     /**
-     * Returns the map element with the name.
+     * Returns the child name.
      *
-     * @param p0 the map
-     * @param p1 the name
-     * @return the element
+     * It is the most left name before the first dot/point "." in the given string
+     * or, if there is no dot, then it is the given name itself.
+     *
+     * @param p0 the hierarchical item name
+     * @return the child name
      */
-/*??
-    static java.lang.Object get_map_element(java.lang.Object p0, java.lang.Object p1) {
-
-        int i = MapHandler.get_map_element_index(p0, p1);
-
-        return MapHandler.get_map_element(p0, i);
+    static java.lang.Object get_child_name(java.lang.Object p0) {
+        
+        java.lang.Object child = null;
+        java.lang.String n = (java.lang.String) p0;
+        
+        if (n != null) {
+            
+            int i = n.indexOf(".");
+            
+            if (i != -1) {
+                
+                child = n.substring(0, i - 1);
+            
+            } else {
+            
+                child = n;
+            }
+            
+        } else {
+            
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not get child name. The hierarchical name is null.");
+        }
+        
+        return child;
     }
-*/
+
+    /**
+     * Returns the remaining name.
+     *
+     * It is the whole string after the first dot/point ".".
+     *
+     * @param p0 the hierarchical item name
+     * @return the remaining name
+     */
+    static java.lang.Object get_remaining_name(java.lang.Object p0) {
+        
+        java.lang.Object rem = null;
+        java.lang.String n = (java.lang.String) p0;
+        
+        if (n != null) {
+            
+            int i = n.indexOf(".");
+            
+            if (i != -1) {
+
+                rem = n.substring(i + 1);
+            }
+            
+        } else {
+            
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical name is null.");
+        }
+        
+        return rem;
+    }
 }
 
