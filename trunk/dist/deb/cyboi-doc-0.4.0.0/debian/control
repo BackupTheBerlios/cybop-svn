@@ -3,17 +3,15 @@ Section: doc
 Priority: optional
 Maintainer: Dennis Reichenbach <dennis.reichenbach@gmx.net>
 Standards-Version: 3.6.1
-Build-Depends: debhelper (>= 4.0.0)
 
 Package: cyboi-doc
-Architecture: i386
-Depends: ${shlibs:Depends}
-Suggests: cybol,cybop
+Architecture: all
+Suggests: cyboi, cybol, cybop
 Description: This is the manual describing how to work with the
  Cybernetics Oriented Interpreter (CYBOI).
-
+ .
  CYBOI is the corresponding interpreter that is needed to execute systems
  defined in the Cybernetics Oriented Language (CYBOL).
-
+ .
  Cybernetics Oriented Programming (CYBOP) is a collection of new concepts
  for software development, which are taken from nature.

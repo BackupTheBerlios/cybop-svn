@@ -27,9 +27,12 @@ cyboi.deb
 
 [cyboi-doc.deb]
 - recommends:   cybop-doc-papers, cybop-doc-presentations
-- suggests:     cyboi
+- suggests:     cyboi, cybol, cybop
 - category:     doc
-- files:        /usr/share/doc/cyboi/manual.txt
+- files:        /usr/share/doc/cyboi-doc/manual.txt
+		/usr/share/doc/cyboi-doc/README.Debian
+		/usr/share/doc/cyboi-doc/changelog.gz
+		/usr/share/doc/cyboi-doc/copyright
 
 [cybol-core.deb]
 - depends:      cyboi

@@ -6,42 +6,33 @@
 # dh-make output file, you may use that output file without restriction.
 # This special exception was added by Craig Small in version 0.37 of dh-make.
 
-# Uncomment this to turn on verbose mode.
-#export DH_VERBOSE=1
-
 
 build: build-stamp
 build-stamp:
-        dh_testdir
+	dh_testdir
 
-        # Add here commands to compile the package.
-        mkdir bin
-        /usr/bin/make -Cadmin
+	# Add here commands to compile the package.
 
-        touch build-stamp
+	touch build-stamp
 
 clean:
-        dh_testdir
-        dh_testroot
-        rm -f build-stamp
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
 
-        # Add here commands to clean up after the build process.
-        /usr/bin/make -Cadmin clean
+	# Add here commands to clean up after the build process.
 
-        dh_clean
+	dh_clean
 
 install: build-stamp
-        dh_testdir
-        dh_testroot
-        dh_clean -k
-        dh_installdirs
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
 
-        # Add here commands to install the package into debian/cyboi.
-        dh_install
-        rm -f build-stamp
-        rm -r bin
-        /usr/bin/make -Cadmin clean
-
+	# Add here commands to install the package into debian.
+	dh_install
+	rm -f build-stamp
 
 # Build architecture-independent files here.
 binary-indep: build install
@@ -49,12 +40,12 @@ binary-indep: build install
 
 # Build architecture-dependent files here.
 binary-arch: build install
-        dh_testdir
-        dh_testroot
-        dh_installchangelogs
-        dh_installdocs
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs
+	dh_installdocs
 #       dh_undocumented
-#       dh_installexamples
+#	dh_installexamples examples/*
 #       dh_install
 #       dh_installmenu
 #       dh_installdebconf
@@ -65,19 +56,19 @@ binary-arch: build install
 #       dh_installinit
 #       dh_installcron
 #       dh_installinfo
-        dh_installman doc/cyboi.1.gz
-        dh_link
-        dh_strip
-        dh_compress
-        dh_fixperms
+#	dh_installman doc/cyboi/cyboi.1.gz
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
 #       dh_perl
 #       dh_python
 #       dh_makeshlibs
-        dh_installdeb
-        dh_shlibdeps
-        dh_gencontrol
-        dh_md5sums
-        dh_builddeb
-        dh_clean -k
+	dh_installdeb
+#	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+	dh_clean -k
 binary: binary-indep binary-arch
 .PHONY: build clean binary-indep binary-arch binary install
