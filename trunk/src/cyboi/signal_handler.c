@@ -21,8 +21,9 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2005-01-25 17:42:41 $ $Author: rholzmueller $
+ * @version $Revision: 1.19 $ $Date: 2005-01-25 19:02:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
+ * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
 #ifndef SIGNAL_HANDLER_SOURCE
@@ -40,7 +41,6 @@
 #include "../logic/send.c"
 #include "../test/test.c"
 #include "../x_windows/x_windows_handler.c"
-
 
 /**
  * Handles the compound signal.
@@ -61,19 +61,17 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
         int* sc = (int*) p1;
 
         int index = 0;
-        //test_compound( p0, (int*) p1, &index);
+//??        test_compound(p0, (int*) p1, &index);
 
         log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_COMPOUND_SIGNAL_MESSAGE, (void*) HANDLE_COMPOUND_SIGNAL_MESSAGE_COUNT);
 
-        // The abstractions.
-        void** pa = NULL_POINTER;
-        void** pac = NULL_POINTER;
-        // The models.
-        void** pm = NULL_POINTER;
-        void** pmc = NULL_POINTER;
-        // The details.
-        void** pd = NULL_POINTER;
-        void** pdc = NULL_POINTER;
+        // The abstractions, models, details.
+        void** pa = POINTER_NULL_POINTER;
+        void** pac = POINTER_NULL_POINTER;
+        void** pm = POINTER_NULL_POINTER;
+        void** pmc = POINTER_NULL_POINTER;
+        void** pd = POINTER_NULL_POINTER;
+        void** pdc = POINTER_NULL_POINTER;
 
         // Get abstractions, models, details.
         get_array_elements(p0, (void*) ABSTRACTIONS_INDEX, (void*) &pa, (void*) POINTER_ARRAY);
@@ -83,15 +81,13 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
         get_array_elements(p0, (void*) DETAILS_INDEX, (void*) &pd, (void*) POINTER_ARRAY);
         get_array_elements(p0, (void*) DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) POINTER_ARRAY);
 
-        // The abstraction.
-        void** a = NULL_POINTER;
-        void** ac = NULL_POINTER;
-        // The model.
-        void** m = NULL_POINTER;
-        void** mc = NULL_POINTER;
-        // The details.
-        void** d = NULL_POINTER;
-        void** dc = NULL_POINTER;
+        // The abstraction, model, details.
+        void** a = POINTER_NULL_POINTER;
+        void** ac = POINTER_NULL_POINTER;
+        void** m = POINTER_NULL_POINTER;
+        void** mc = POINTER_NULL_POINTER;
+        void** d = POINTER_NULL_POINTER;
+        void** dc = POINTER_NULL_POINTER;
 
         // The loop variable.
         int j = 0;
@@ -115,18 +111,15 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
             // (Each signal has a priority. A signal may consist of part
             // signals. The part signals cannot have higher / lower priority
             // than their original whole signal.)
-            set_signal(p4, p5, p6, (void*) *a, (void*) *ac,
-                (void*) *m, (void*) *mc, (void*) *d, (void*) *dc, p2, p3);
+            set_signal(p4, p5, p6, *a, *ac, *m, *mc, *d, *dc, p2, p3);
 
-            // Reset abstraction.
-            a = NULL_POINTER;
-            ac = NULL_POINTER;
-            // Reset model.
-            m = NULL_POINTER;
-            mc = NULL_POINTER;
-            // Reset details.
-            d = NULL_POINTER;
-            dc = NULL_POINTER;
+            // Reset abstraction, model, details.
+            a = POINTER_NULL_POINTER;
+            ac = POINTER_NULL_POINTER;
+            m = POINTER_NULL_POINTER;
+            mc = POINTER_NULL_POINTER;
+            d = POINTER_NULL_POINTER;
+            dc = POINTER_NULL_POINTER;
 
             j++;
         }
