@@ -25,7 +25,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.6 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-12-14 12:27:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -105,7 +105,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_integer(p0, p1);
+            create_integer(p0);
 
             d = 1;
         }
@@ -117,7 +117,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_integer(p0, p1);
+            create_integer(p0);
 
             d = 1;
         }
@@ -277,7 +277,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_integer(p0, p1);
+            destroy_integer(p0);
 
             d = 1;
         }
@@ -289,7 +289,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_integer(p0, p1);
+            destroy_integer(p0);
 
             d = 1;
         }
