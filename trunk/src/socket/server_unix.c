@@ -23,7 +23,7 @@
  *
  * This file handles a server UNIX FILE socket.
  *
- * @version $Revision: 1.4 $ $Date: 2004-06-27 00:59:43 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-06-29 00:52:28 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -31,77 +31,146 @@
 #ifndef SERVER_UNIX_SOURCE
 #define SERVER_UNIX_SOURCE
 
-#include <sys/types.h>
+//??#include <stdio.h>
+//??#include <unistd.h>
 #include <sys/socket.h>
-#include <stdio.h>
+//??#include <sys/types.h>
 #include <sys/un.h>
-#include <unistd.h>
+#include "../global/variable.c"
 
 /**
- * Creates a unix socket.
+ * Creates the unix socket.
+ *
+ * @param p0 the socket
+ * @param p1 the socket name
  */
-void create_unix_socket() {
+void create_unix_socket(void* p0, void* p1) {
 
-    static const char SOCKET_NAME_ARRAY[] = {'s', 'o', 'c', 'k', 'e', 't', '\0'};
-    static const char* SOCKET_NAME = SOCKET_NAME_ARRAY;
-    static const int SOCKET_NAME_COUNT = 7;
+    if (p1 != NULL_POINTER) {
 
-    // Unlink previous socket with identical name.
-//??    unlink(SOCKET_NAME);
+        char** sn = (char**) p1;
 
-    // Open socket and get its number.
-    int n = socket(AF_UNIX, SOCK_STREAM, 0);
+        if (p0 != NULL_POINTER) {
 
-    // The socket address.
-    struct sockaddr_un a;
-    // Set unix family.
-    a.sun_family = AF_UNIX;
-    // Set path.
-    strcpy(a.sun_path, SOCKET_NAME);
+            int* s = (int*) p0;
 
-    // The socket address size.
-    int s = sizeof(a);
+            // Open socket and get its number.
+            // AF stands for address format. AF_LOCAL is a synonym for AF_UNIX.
+            // AF_LOCAL is mandated by POSIX.1g but AF_UNIX is portable to more systems.
+            // AF_UNIX was the traditional name stemming from BSD, so even most POSIX
+            // systems support it. It is also the name of choice in the Unix98
+            // specification.
+            // AF_FILE is another synonym for AF_LOCAL, for compatibility.
+            *s = socket(AF_UNIX, SOCK_STREAM, 0);
 
-    // Bind number to address.
-    bind(n, (struct sockaddr*) &a, s);
+            // Initialize socket address.
+            struct sockaddr_un a;
+            // Set address format.
+            a.sun_family = AF_UNIX;
+            // Set path/file name to use as socket address.
+            strcpy(a.sun_path, *sn);
+//??            strncpy(a.sun_path, *sn, sizeof(a.sun_path));
 
-    // Listen at socket.
-    // CAUTION! This might block further processing!
-    // The number (5) might mean the number of possible clients which can be served.
-    listen(n, 5);
-    // Once listen is left, it is -- in this example -- not entered again!
-    // Implement this later!
+            // CAUTION! The path/file length is normally limited to 108.
+            // This solution works around that limitation by determining
+            // the real path/file size.
+
+            // Determine socket address size.
+            int as = sizeof(struct sockaddr_un);
+//??            int as = (offsetof(struct sockaddr_un, sun_path) + strlen(a.sun_path) + 1);
+
+            // Bind number to address.
+            bind(*s, (struct sockaddr*) &a, as);
+
+            // Listen for client connection requests.
+            // The second parameter specifies the allowed number of pending
+            // connection requests of clients which want to be served.
+            listen(*s, 1);
+            // Once listen is left, it is -- in this example -- not entered again!
+            // Implement this later!
+
+            // Initialize client socket address and its size.
+            struct sockaddr_un ca;
+            int cas = sizeof(ca);
+
+            // CAUTION! This might block further processing!
+            // The accept function waits if there are no connections pending,
+            // unless the socket socket has nonblocking mode set. One can use
+            // select to wait for a pending connection, with a nonblocking socket.
+            // The return value is the file descriptor for the new client socket.
+
+            // Set O_NONBLOCK flag for nonblocking mode! How??
+            accept(*s, (struct sockaddr*) &ca, &cas);
+
+            // After accept, the original socket *s remains open and unconnected,
+            // and continues listening until being closed.
+            // One can accept further connections with socket by calling accept again.
 
 /*??
-    // The following is client stuff.
-    struct sockaddr_un client_address;
-    int client_laenge = sizeof(client_address);
-    int client_socketnummer = accept(server_socket_number, (struct sockaddr*) &client_address, &client_laenge);
+            char ch;
+            char strg[sizeof *stdin];
+            char hello[300] = "Hallo!";
+            int j = 0;
 
-    char ch;
-    char strg[sizeof *stdin];
-    char hello[300] = "Hallo!";
-    int j = 0;
+            while(1) {
 
-    while(1) {
+                if (j == 10) {
 
-        if (j == 10) {
+                    break;
+                }
 
-            break;
-        }
+                read(client_socketnummer, &strg, 300);
+                strcat(strg, hello);
+                write(client_socketnummer, &strg, 300);
 
-        read(client_socketnummer, &strg, 300);
-        strcat(strg, hello);
-        write(client_socketnummer, &strg, 300);
+                j++;
+            }
 
-        j++;
-    }
-
-    close(client_socketnummer);
+            close(client_socketnummer);
 */
 
-    // Close socket.
-    close(n);
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
+    }
+}
+
+/**
+ * Destroys the unix socket.
+ *
+ * @param p0 the socket
+ * @param p1 the socket name
+ */
+void destroy_unix_socket(void* p0, void* p1) {
+
+    if (p1 != NULL_POINTER) {
+
+        char** sn = (char**) p1;
+
+        if (p0 != NULL_POINTER) {
+
+            int* s = (int*) p0;
+
+            // Close socket.
+            close(*s);
+
+            // Unlink socket.
+            unlink(*sn);
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
+    }
 }
 
 /* SERVER_UNIX_SOURCE */
