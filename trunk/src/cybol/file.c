@@ -23,7 +23,7 @@
  *
  * This file handles a file.
  *
- * @version $Revision: 1.1 $ $Date: 2004-05-11 06:15:54 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-05-11 08:32:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,44 +40,79 @@
  * @param p0 the array
  * @param p1 the array size
  * @param p2 the file name
- * @param p3 the file name size
+ * @param p3 the file name count
  */
 void read_file(void* p0, void* p1, const void* p2, const void* p3) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Read file.");
+    if (p3 != NULL_POINTER) {
 
-    // The string termination index.
-    int* i = (int*) p3;
-    // The file name count.
-    int c = *i + 1;
-    // The file name.
-    void* n = NULL_POINTER;
+        int* fnc = (int*) p3;
 
-    // Create new file name with extended size for string termination character.
-    create_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &c);
-    // Add string termination character.
-    set_array_element((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &STRING_TERMINATION_CHARACTER);
+        if (p1 != NULL_POINTER) {
 
-    FILE* f = fopen((char*) n, "r");
+            int* as = (int*) p1;
 
-    if (f != NULL_POINTER) {
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Read file.");
 
-        int j = 0;
+            // The index for the original file name.
+            int oi = 0;
+            // The new file name count.
+            int nc = *fnc + 1;
+            // The file name.
+            void* n = NULL_POINTER;
 
-        while (1) {
+            // Create temporary file name with extended size
+            // for string termination character.
+            create_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
+            // Add original file name.
+            set_array_elements((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &oi, p2, p3);
+            // Add string termination character using file name count as index.
+            set_array_element((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &fnc, (void*) &NULL_CHARACTER);
 
-            j++;
+            FILE* f = fopen((char*) n, "r");
+
+            if (f != NULL_POINTER) {
+
+                char c = fgetc(f);
+                int j = 0;
+
+                while (1) {
+
+                    if (c == EOF) {
+
+                        break;
+                    }
+
+                    if (j >= *as) {
+
+                        *as = *as * 2 + 1;
+                        resize_array(p0, (void*) &CHARACTER_ARRAY, p1);
+                    }
+
+                    set_array_element(p0, (void*) &CHARACTER_ARRAY, (void*) &j, (void*) &c);
+                    c = fgetc(f);
+                    j++;
+                }
+
+                fclose(f);
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The file is null.");
+            }
+
+            // Destroy temporary file name.
+            destroy_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The array size is null.");
         }
-
-        fclose(f);
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The file is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The file name count is null.");
     }
-
-    // Destroy file name.
-    destroy_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &c);
 }
 
 /**
@@ -86,11 +121,81 @@ void read_file(void* p0, void* p1, const void* p2, const void* p3) {
  * @param p0 the array
  * @param p1 the array size
  * @param p2 the file name
- * @param p3 the file name size
+ * @param p3 the file name count
  */
 void write_file(const void* p0, const void* p1, void* p2, void* p3) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Read file.");
+    if (p3 != NULL_POINTER) {
+
+        int* fnc = (int*) p3;
+
+        if (p1 != NULL_POINTER) {
+
+            int* as = (int*) p1;
+
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Write file.");
+
+            // The index for the original file name.
+            int oi = 0;
+            // The new file name count.
+            int nc = *fnc + 1;
+            // The file name.
+            void* n = NULL_POINTER;
+
+            // Create temporary file name with extended size
+            // for string termination character.
+            create_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
+            // Add original file name.
+            set_array_elements((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &oi, p2, p3);
+            // Add string termination character using file name count as index.
+            set_array_element((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &fnc, (void*) &NULL_CHARACTER);
+
+            FILE* f = fopen((char*) n, "r");
+
+            if (f != NULL_POINTER) {
+
+                char r = NULL_CHARACTER;
+                int j = 0;
+                char c = NULL_CHARACTER;
+
+                while (1) {
+
+                    if (j >= *as) {
+
+                        break;
+                    }
+
+                    if (r == EOF) {
+
+                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. A write error occured.");
+
+                        break;
+                    }
+
+                    get_array_element(p0, (void*) &CHARACTER_ARRAY, (void*) &j, (void*) &c);
+                    r = fputc(c, f);
+                    j++;
+                }
+
+                fclose(f);
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. The file is null.");
+            }
+
+            // Destroy temporary file name.
+            destroy_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. The array size is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. The file name count is null.");
+    }
 }
 
 /* FILE_SOURCE */

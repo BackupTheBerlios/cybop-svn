@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.10 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-05-11 08:32:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,7 @@
 #include <stdio.h>
 #include "../array/array.c"
 #include "../constants/constants.c"
+#include "../cybol/file.c"
 
 /**
  * Tests the standard output and error stream.
@@ -203,7 +204,7 @@ void test_character_array_multiple_elements() {
 
     set_array_elements((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &s, (void*) &ss);
 
-    fputs(d, stdout);
+    fputs((char*) d, stdout);
 
     // The constant source array for overwriting and the pointer to it.
     char oa[] = {'o', 'v', 'e', 'r', 'w', 'r', 'i', 't', 't', 'e', 'n', '.', '\n', '\0'};
@@ -215,7 +216,7 @@ void test_character_array_multiple_elements() {
 
     set_array_elements((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &oi, (void*) &os, (void*) &oss);
 
-    fputs(d, stdout);
+    fputs((char*) d, stdout);
 
     // The remove index.
     int ri = 12;
@@ -223,16 +224,63 @@ void test_character_array_multiple_elements() {
     int rc = 7;
     remove_array_elements((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &ds, (void*) &ri, (void*) &rc);
 
-    fputs(d, stdout);
+    fputs((char*) d, stdout);
 
     // The new array size to cut off remaining elements,
     // including two places for new line '\n' and c string termination '\0'.
     int ns = 15;
     resize_array((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &ns);
 
-    fputs(d, stdout);
+    fputs((char*) d, stdout);
 
     destroy_array((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &ns);
+}
+
+/**
+ * Tests the file read.
+ */
+void test_file_read() {
+
+    // A file named "/home/cybop/tmp/test.cybol" needs to be created
+    // in a text editor, for this test to work.
+
+    // The array.
+    void* a = NULL_POINTER;
+    // The array count.
+    int ac = 0;
+    // The file name array.
+    char fna[] = {'/', 'h', 'o', 'm', 'e', '/', 'c', 'y', 'b', 'o', 'p', '/', 't', 'm', 'p', '/', 't', 'e', 's', 't', '.', 'c', 'y', 'b', 'o', 'l'};
+    // The file name.
+    char* fn = fna;
+    // The file name count.
+    int fnc = 26;
+
+    create_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &ac);
+    read_file((void*) &a, (void*) &ac, (void*) &fn, (void*) &fnc);
+
+    int j = 0;
+    char c = NULL_CHARACTER;
+
+    while (1) {
+
+        if (j >= ac) {
+
+            break;
+        }
+
+        get_array_element((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &fnc, (void*) &c);
+        fputc(c, stdout);
+
+        j++;
+    }
+
+    destroy_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &ac);
+}
+
+/**
+ * Tests the file write.
+ */
+void test_file_write() {
 }
 
 /**
@@ -253,8 +301,10 @@ void test() {
 //    test_stdout_stderr();
 //    test_character_array_with_termination();
 //    test_pointer_cast();
-    test_character_array_single_element();
+//    test_character_array_single_element();
 //    test_character_array_multiple_elements();
+    test_file_read();
+//    test_file_write();
 }
 
 /* TEST_SOURCE */

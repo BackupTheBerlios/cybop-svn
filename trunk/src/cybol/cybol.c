@@ -37,7 +37,7 @@
  *         map = position_abstraction_attribute
  *         (attributes 0..9 = size 10)
  *
- * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-05-11 08:32:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -566,9 +566,8 @@ int read_cybol_tag(void* p0, void* p1) {
 void read_cybol_file(void* p0, const void* p1) {
 
 /*??
-    FILE* f = (FILE*) p1;
-    //?? char* s = (char*) malloc(2000);
-    char c = fgetc(f);
+    // s is the character string; c the character currently read.
+
     int parsemode = 0;
     int childmode = 0;
     int string_open = 0;
@@ -657,56 +656,7 @@ void read_cybol_file(void* p0, const void* p1) {
 
         c = fgetc(f);
     }
-
-//??    free(s);
 */
-}
-
-//
-// Source model.
-//
-
-/**
- * Initializes the source model.
- *
- * Reads the file of the given model.
- *
- * @param p0 the model
- * @param p1 the model name
- */
-void initialize_source_model(void* p0, void* p1) {
-
-/*??
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize model.");
-
-    char* n[] = {''};
-    n = strcat(n, CYBOL_PATH);
-    n = strcat(n, p1);
-    n = strcat(n, CYBOL_SUFFIX);
-    FILE* f = fopen(n, "r");
-
-    if (f != NULL_POINTER) {
-
-        read_cybol_file(f);
-        fclose(f);
-        read_into_model(p0, s);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize source model. The file is null.");
-    }
-*/
-}
-
-/**
- * Finalizes the source model.
- *
- * Writes the file of the given model.
- *
- * @param p0 the model
- * @param p1 the model name
- */
-void finalize_source_model(void* p0, void* p1) {
 }
 
 /* CYBOL_SOURCE */
