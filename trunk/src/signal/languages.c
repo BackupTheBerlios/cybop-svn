@@ -30,7 +30,7 @@
  *
  * It defines constants for languages that systems can use to communicate.
  *
- * @version $Revision: 1.1 $ $Date: 2004-02-29 16:26:28 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,84 +39,84 @@
 //
 
 /** The cybol language. */
-static const char* CYBOL_LANGUAGE = "cybol";
+static const char CYBOL_LANGUAGE[] = {'c', 'y', 'b', 'o', 'l'};
 
 /** The inline (serialized) language. */
-static const char* INLINE_LANGUAGE = "inline";
+static const char INLINE_LANGUAGE[] = {'i', 'n', 'l', 'i', 'n', 'e'};
 
 //?? The following languages are not used yet.
 
 /** The textual user interface (tui) language. */
-static const char* TUI_LANGUAGE = "tui";
+static const char TUI_LANGUAGE[] = {'t', 'u', 'i'};
 
 /** The mouse language. */
-static const char* MOUSE_LANGUAGE = "mouse";
+static const char MOUSE_LANGUAGE[] = {'m', 'o', 'u', 's', 'e'};
 
 /** The x windows language. */
-static const char* X_WINDOWS_LANGUAGE = "x_windows";
+static const char X_WINDOWS_LANGUAGE[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', 's'};
 
 /** The socket language. */
-static const char* SOCKET_LANGUAGE = "socket";
+static const char SOCKET_LANGUAGE[] = {'s', 'o', 'c', 'k', 'e', 't'};
 
 /** The structured query language (sql). */
-static const char* SQ_LANGUAGE = "sq";
+static const char SQ_LANGUAGE[] = {'s', 'q'};
 
 /** The java messaging service (jms) language. */
-static const char* JMS_LANGUAGE = "jms";
+static const char JMS_LANGUAGE[] = {'j', 'm', 's'};
 
 /** The remote method invocation (rmi) language. */
-static const char* RMI_LANGUAGE = "rmi";
+static const char RMI_LANGUAGE[] = {'r', 'm', 'i'};
 
 /** The common object request broker architecture (corba) language. */
-static const char* CORBA_LANGUAGE = "corba";
+static const char CORBA_LANGUAGE[] = {'c', 'o', 'r', 'b', 'a'};
 
 /** The extensible markup language (xml). */
-static const char* XML_LANGUAGE = "xml";
+static const char XML_LANGUAGE[] = {'x', 'm', 'l'};
 
 /** The simple object access protocol (soap) language. */
-static const char* SOAP_LANGUAGE = "soap";
+static const char SOAP_LANGUAGE[] = {'s', 'o', 'a', 'p'};
 
 /** The file language. */
-static const char* FILE_LANGUAGE = "file";
+static const char FILE_LANGUAGE[] = {'f', 'i', 'l', 'e'};
 
 /** The floppy language. */
-static const char* FLOPPY_LANGUAGE = "floppy";
+static const char FLOPPY_LANGUAGE[] = {'f', 'l', 'o', 'p', 'p', 'y'};
 
 /** The ftp language. */
-static const char* FTP_LANGUAGE = "ftp";
+static const char FTP_LANGUAGE[] = {'f', 't', 'p'};
 
 /** The sftp language. */
-static const char* SFTP_LANGUAGE = "sftp";
+static const char SFTP_LANGUAGE[] = {'s', 'f', 't', 'p'};
 
 /** The imap language. */
-static const char* IMAP_LANGUAGE = "imap";
+static const char IMAP_LANGUAGE[] = {'i', 'm', 'a', 'p'};
 
 /** The imaps language. */
-static const char* IMAPS_LANGUAGE = "imaps";
+static const char IMAPS_LANGUAGE[] = {'i', 'm', 'a', 'p', 's'};
 
 /** The ldap language. */
-static const char* LDAP_LANGUAGE = "ldap";
+static const char LDAP_LANGUAGE[] = {'l', 'd', 'a', 'p'};
 
 /** The nfs language. */
-static const char* NFS_LANGUAGE = "nfs";
+static const char NFS_LANGUAGE[] = {'n', 'f', 's'};
 
 /** The nntp language. */
-static const char* NNTP_LANGUAGE = "nntp";
+static const char NNTP_LANGUAGE[] = {'n', 'n', 't', 'p'};
 
 /** The smb language. */
-static const char* SMB_LANGUAGE = "smb";
+static const char SMB_LANGUAGE[] = {'s', 'm', 'b'};
 
 /** The smtp language. */
-static const char* SMTP_LANGUAGE = "smtp";
+static const char SMTP_LANGUAGE[] = {'s', 'm', 't', 'p'};
 
 /** The smtps language. */
-static const char* SMTPS_LANGUAGE = "smtps";
+static const char SMTPS_LANGUAGE[] = {'s', 'm', 't', 'p', 's'};
 
 /** The tar language. */
-static const char* TAR_LANGUAGE = "tar";
+static const char TAR_LANGUAGE[] = {'t', 'a', 'r'};
 
 /** The zip language. */
-static const char* ZIP_LANGUAGE = "zip";
+static const char ZIP_LANGUAGE[] = {'z', 'i', 'p'};
 
 /* LANGUAGES_SOURCE */
 #endif

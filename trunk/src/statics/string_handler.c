@@ -20,20 +20,18 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file handles strings.
+ * A string is a chain of characters.
+ *
+ * @version $Revision: 1.8 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef STRING_HANDLER_SOURCE
 #define STRING_HANDLER_SOURCE
 
 #include "../logger/log_handler.c"
-#include "../statics/string.c"
-
-/**
- * This is the string handler.
- *
- * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 //
 // Constants.
@@ -47,6 +45,43 @@ static const char* DEFAULT_STRING_VALUE = "";
 //
 
 /**
+ * Creates the string model.
+ *
+ * @param p0 the string model
+ */
+void create_string_model(void* p0) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Create string model.");
+
+    // The string model.
+    create_array(p0, (void*) &MODEL_SIZE);
+
+    // The value.
+    void* pa = (void*) 0;
+    create_map((void*) &pa);
+    set_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
+}
+
+/**
+ * Destroys the string model.
+ *
+ * @param p0 the string model
+ */
+void destroy_string_model(void* p0) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Destroy string model.");
+
+    // The part abstractions.
+    void* pa = (void*) 0;
+    get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
+    remove_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX);
+    destroy_map((void*) &pa);
+
+    // The model.
+    destroy_array(p0, (void*) &MODEL_SIZE);
+}
+
+/**
  * Initializes the string model.
  *
  * @param p0 the string model
@@ -55,9 +90,9 @@ static const char* DEFAULT_STRING_VALUE = "";
 void initialize_string_model(void* p0, void* p1) {
 
     struct string* m = (struct string*) p0;
-    
+
     if (m != (void*) 0) {
-        
+
         log_message((void*) &INFO_LOG_LEVEL, "Initialize string model.");
 
         // Read input stream and transform to string.
@@ -65,7 +100,7 @@ void initialize_string_model(void* p0, void* p1) {
 //??        strcat(m->value, "\n");
 
     } else {
-        
+
         log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize string model. The string model is null.");
     }
 }

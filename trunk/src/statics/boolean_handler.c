@@ -1,7 +1,7 @@
 /*
  * $RCSfile: boolean_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -20,33 +20,38 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file handles booleans.
+ * A boolean can have just one of the two values: TRUE or FALSE
+ * Synonyms are:
+ * - one and zero
+ * - 1 and 0
+ * - on and off
+ *
+ * @version $Revision: 1.8 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BOOLEAN_HANDLER_SOURCE
 #define BOOLEAN_HANDLER_SOURCE
 
 #include "../logger/log_handler.c"
-#include "../statics/boolean.c"
-
-/**
- * This is the boolean handler.
- *
- * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 //
 // Constants.
 //
 
-/** The true boolean value. */
-static const char* TRUE_VALUE = "true";
+/** The true boolean. */
+static const char TRUE_BOOLEAN[] = {'t', 'r', 'u', 'e'};
 
-/** The false boolean value. */
-static const char* FALSE_VALUE = "false";
+/** The true boolean size. */
+static const int TRUE_BOOLEAN_SIZE = 4;
 
-/** The default boolean value. */
-static const char* DEFAULT_BOOLEAN_VALUE = "false";
+/** The false boolean. */
+static const char FALSE_BOOLEAN[] = {'f', 'a', 'l', 's', 'e'};
+
+/** The false boolean size. */
+static const int FALSE_BOOLEAN_SIZE = 5;
 
 //
 // Boolean model.
@@ -55,62 +60,87 @@ static const char* DEFAULT_BOOLEAN_VALUE = "false";
 /**
  * Initializes the boolean model.
  *
- * @param p0 the boolean model
- * @param p1 the model source
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
  */
-void initialize_boolean_model(void* p0, void* p1) {
+void initialize_boolean_model(void* p0, const void* p1, const void* p2) {
 
-    struct boolean* m = (struct boolean*) p0;
-    
-    if (m != (void*) 0) {
-        
+    int* t = (int*) p0;
+
+    if (t != (void*) 0) {
+
         log_message((void*) &INFO_LOG_LEVEL, "Initialize boolean model.");
 
-        if (strcmp((char*) p1, TRUE_VALUE) == 0) {
-            
-            m->value = 1;
-            
+        int r = 0;
+        compare_arrays(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &TRUE_BOOLEAN, (void*) &TRUE_BOOLEAN_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+
+        if (r == 1) {
+
+            *t = 1;
+
         } else {
 
-            // The default value is "false".
-            m->value = 0;
+            // The default.
+            *t = 0;
         }
 
     } else {
-        
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize boolean model. The boolean model is null.");
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize boolean model. The transient model is null.");
     }
 }
 
 /**
  * Finalizes the boolean model.
  *
- * @param p0 the boolean model
- * @param p1 the model source
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
  */
-void finalize_boolean_model(void* p0, void* p1) {
+void finalize_boolean_model(const void* p0, void* p1, void* p2) {
 
-    struct boolean* m = (struct boolean*) p0;
-    
-    if (m != (void*) 0) {
-        
-        log_message((void*) &INFO_LOG_LEVEL, "Finalize boolean model.");
+    int* t = (int*) p0;
 
-        if (m->value == 1) {
-            
-            strcat(p1, TRUE_VALUE);
-            
+    if (t != (void*) 0) {
+
+        char* p = (char*) p1;
+
+        if (p != (void*) 0) {
+
+            int* ps = (int*) p2;
+
+            if (ps != (void*) 0) {
+
+                log_message((void*) &INFO_LOG_LEVEL, "Finalize boolean model.");
+
+                if (*t == 1) {
+
+                    *p = TRUE_BOOLEAN;
+                    *ps = TRUE_BOOLEAN_SIZE;
+
+                } else {
+
+                    // The default.
+                    *p = FALSE_BOOLEAN;
+                    *ps = FALSE_BOOLEAN_SIZE;
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize boolean model. The persistent model size is null.");
+            }
+
         } else {
-    
-            strcat(p1, FALSE_VALUE);
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize boolean model. The persistent model is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize boolean model. The boolean model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize boolean model. The transient model is null.");
     }
 }
 
 /* BOOLEAN_HANDLER_SOURCE */
 #endif
-

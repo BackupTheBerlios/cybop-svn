@@ -28,7 +28,7 @@
 /**
  * This is the model definition constants.
  *
- * @version $Revision: 1.3 $ $Date: 2004-03-31 15:52:06 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,6 +38,9 @@
 
 /** The compound model. */
 static const char COMPOUND_MODEL[] = {'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd'};
+
+/** The compound model size. */
+static const int COMPOUND_MODEL_SIZE = 8;
 
 /* MODELS_SOURCE */
 #endif

@@ -20,20 +20,8 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
- */
-
-#ifndef MODEL_HANDLER_SOURCE
-#define MODEL_HANDLER_SOURCE
-
-#include <string.h>
-#include "../cybol/cybol_model_handler.c"
-#include "../logger/log_handler.c"
-#include "../model/map_handler.c"
-
-/**
- * This is the model handler.
  *
- * It handles models which represent statics or dynamics.
+ * This file handles models which represent statics or dynamics.
  *
  * Model elements are accessed over their index or name.
  * They can also be accessed hierarchically, using a dot-separated name like:
@@ -50,9 +38,17 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.23 $ $Date: 2004-03-31 15:52:06 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+#ifndef MODEL_HANDLER_SOURCE
+#define MODEL_HANDLER_SOURCE
+
+#include <string.h>
+#include "../cybol/cybol_model_handler.c"
+#include "../logger/log_handler.c"
+#include "../model/map_handler.c"
 
 //
 // Constants.
@@ -405,40 +401,42 @@ void finalize_parts(void* p0, const void* p1) {
 // Model.
 //
 
+//?? CYBOL Examples:
+//?? part name="x" part_abstraction="compound" part_model="ftp://test_compound.cybol"
+//?? part name="y" part_abstraction="string" part_model="file://test_string.txt"
+//?? part name="z" part_abstraction="string" part_model="inline://This is a test string."
+
 /**
- * Initializes the model from a cybol model.
+ * Initializes the compound model.
  *
- * @param p0 the memory model
- * @param p1 the cybol model
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
  */
-void initialize_model(void* p0, const void* p1) {
+void initialize_compound_model(void* p0, const void* p1, const void* p2) {
 
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize model.");
+    if ("file://" ... if "inline://" ...
 
-/*??
-        //?? USE ARRAYS in ARRAY (instead of model with maps) here!!
+    // Create temporary cybol model.
+    struct statics_model* cybol = (struct statics_model*) malloc(sizeof(struct statics_model));
+    create_statics_model_containers((void*) cybol);
 
-        // Create temporary cybol model.
-        struct statics_model* cybol = (struct statics_model*) malloc(sizeof(struct statics_model));
-        create_statics_model_containers((void*) cybol);
+    // Read statics cybol model from file path.
+    read_statics_cybol_model((void*) cybol, p1);
 
-        // Read statics cybol model from file path.
-        read_statics_cybol_model((void*) cybol, p1);
+    // Initialize statics model parts with statics cybol model.
+    if (cybol != (void*) 0) {
 
-        // Initialize statics model parts with statics cybol model.
-        if (cybol != (void*) 0) {
+        initialize_statics_parts(p0, cybol->parts);
 
-            initialize_statics_parts(p0, cybol->parts);
+    } else {
 
-        } else {
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize statics model. The statics cybol model is null.");
+    }
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize statics model. The statics cybol model is null.");
-        }
-
-        // Destroy temporary statics cybol model.
-        destroy_statics_model_containers((void*) cybol);
-        free((void*) cybol);
-*/
+    // Destroy temporary statics cybol model.
+    destroy_statics_model_containers((void*) cybol);
+    free((void*) cybol);
 }
 
 /**

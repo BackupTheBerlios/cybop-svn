@@ -42,7 +42,7 @@
  *
  * It creates a statics or dynamics memory model from a cybol model.
  *
- * @version $Revision: 1.6 $ $Date: 2004-03-29 21:54:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,105 +52,112 @@
  * @param p0 the transient model
  * @param p1 the abstraction
  * @param p2 the abstraction size
- * @param p3 the location
- * @param p4 the location size
- * @param p5 the persistent model
- * @param p6 the persistent model size
+ * @param p3 the persistent model
+ * @param p4 the persistent model size
  */
-void create_model(void* p0, const void* p1, const void* p2, const void* p3, const void* p4, const void* p5, const void* p6) {
+void create_model(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
 
+    //?? part name="x" part_abstraction="compound" part_model="ftp://test_compound.cybol"
+    //?? part name="y" part_abstraction="string" part_model="file://test_string.txt"
+    //?? part name="z" part_abstraction="string" part_model="inline://This is a test string."
+
+    // The comparison result.
     int r = 0;
 
     // Do not consider an empty persistent model further.
-    char* e = {};
-    int es = 0;
-    compare_arrays(p5, p6, (void*) &CHARACTER_ARRAY, (void*) &e, (void*) &es, (void*) &CHARACTER_ARRAY, (void*) &r);
+    int* s = (int*) p4;
 
-    if (r == 0) {
+    if (*s != 0) {
 
-        log_message((void*) &INFO_LOG_LEVEL, "Create model.");
-
-        // Compound model.
-        compare_arrays(p2, (void*) &COMPOUND_MODEL, (void*) &r);
+        // Compound.
+        compare_arrays(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND, (void*) &COMPOUND_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
         if (r == 1) {
 
-            create_compound_model(p3);
-            initialize_compound_model(p3, p0);
+            create_compound(p0);
+            initialize_compound(p0, p3, p4);
 
         } else {
 
-            // Operation model.
-            compare_arrays(p2, (void*) &OPERATION_MODEL, (void*) &r);
+            // Operation.
+            compare_arrays(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &OPERATION, (void*) &OPERATION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
             if (r == 1) {
 
-                create_operation_model(p3);
-                initialize_operation_model(p3, p0);
+                create_operation(p0);
+                initialize_operation(p0, p3, p4);
 
             } else {
 
-                // Statics models.
-                compare_arrays(p2, (void*) &TIME_MODEL, (void*) &r);
+                compare_arrays(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &STRING, (void*) &STRING_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
                 if (r == 1) {
 
-                    create_time_model(p3);
-                    initialize_time_model(p3, p0);
+                    create_string(p0);
+                    initialize_string(p0, p3, p4);
 
                 } else {
 
-                    compare_arrays(p2, (void*) &STRING_MODEL, (void*) &r);
+                    compare_arrays(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &BOOLEAN_MODEL, (void*) &COMPOUND_MODEL_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
                     if (r == 1) {
 
-                        create_string_model(p3);
-                        initialize_string_model(p3, p0);
+                        initialize_boolean(p0, p3, p4);
 
                     } else {
 
-                        compare_arrays(p2, (void*) &VECTOR_MODEL, (void*) &r);
+                        compare_arrays(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &INTEGER_MODEL, (void*) &COMPOUND_MODEL_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
                         if (r == 1) {
 
-                            create_vector_model(p3);
-                            initialize_vector_model(p3, p0);
+                            initialize_integer(p0, p3, p4);
 
                         } else {
 
-                            compare_arrays(p2, (void*) &COMPLEX_MODEL, (void*) &r);
+                            compare_arrays(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &VECTOR, (void*) &VECTOR_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
                             if (r == 1) {
 
-                                create_complex_model(p3);
-                                initialize_complex_model(p3, p0);
+                                create_vector(p0);
+                                initialize_vector(p0, p3, p4);
 
                             } else {
 
-                                compare_arrays(p2, (void*) &FRACTION_MODEL, (void*) &r);
+                                compare_arrays(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &FLOAT_MODEL, (void*) &COMPOUND_MODEL_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
                                 if (r == 1) {
 
-                                    create_fraction_model(p3);
-                                    initialize_fraction_model(p3, p0);
+                                    create_fraction(p0);
+                                    initialize_fraction(p0, p3, p4);
 
                                 } else {
 
-                                    compare_arrays(p2, (void*) &INTEGER_MODEL, (void*) &r);
+                                    compare_arrays(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &FRACTION_MODEL, (void*) &COMPOUND_MODEL_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
                                     if (r == 1) {
 
-                                        create_integer_model(p3);
-                                        initialize_integer_model(p3, p0);
+                                        create_fraction(p0);
+                                        initialize_fraction(p0, p3, p4);
 
                                     } else {
 
-                                        compare_arrays(p2, (void*) &BOOLEAN_MODEL, (void*) &r);
+                                        compare_arrays(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &COMPLEX_MODEL, (void*) &COMPOUND_MODEL_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
                                         if (r == 1) {
 
-                                            create_boolean_model(p3);
-                                            initialize_boolean_model(p3, p0);
+                                            create_complex(p0);
+                                            initialize_complex(p0, p3, p4);
+
+                                        } else {
+
+                                            // Statics models.
+                                            compare_arrays(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &TIME, (void*) &TIME_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+
+                                            if (r == 1) {
+
+                                                create_time(p0);
+                                                initialize_time(p0, p3, p4);
+                                            }
                                         }
                                     }
                                 }

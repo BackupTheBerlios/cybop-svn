@@ -20,6 +20,12 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file handles vectors.
+ * A vector contains the three coordinates: x, y, z.
+ *
+ * @version $Revision: 1.8 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef VECTOR_HANDLER_SOURCE
@@ -27,14 +33,6 @@
 
 #include <string.h>
 #include "../logger/log_handler.c"
-#include "../statics/vector.c"
-
-/**
- * This is the vector handler.
- *
- * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 //
 // Constants.
@@ -42,6 +40,15 @@
 
 /** The default vector value. */
 static const char* DEFAULT_VECTOR_VALUE = "0.0,0.0,0.0";
+
+/** The x coordinate. */
+int x;
+
+/** The y coordinate. */
+int y;
+
+/** The z coordinate. */
+int z;
 
 //
 // Vector model.
@@ -56,9 +63,9 @@ static const char* DEFAULT_VECTOR_VALUE = "0.0,0.0,0.0";
 void initialize_vector_model(void* p0, void* p1) {
 
     struct vector* m = (struct vector*) p0;
-    
+
     if (m != (void*) 0) {
-        
+
         log_message((void*) &INFO_LOG_LEVEL, "Initialize vector model.");
 
         // Read input stream and transform to vector.
@@ -68,15 +75,15 @@ void initialize_vector_model(void* p0, void* p1) {
 
 /*??
         int i1 = s.indexOf(",");
-        
+
         if (i1 != -1) {
-            
+
             char[] x = s.substring(0, i1);
             char[] yz = s.substring(i1 + 1);
             int i2 = yz.indexOf(",");
 
             if (i2 != -1) {
-            
+
                 char[] y = yz.substring(0, i2);
                 char[] z = yz.substring(i2 + 1);
 

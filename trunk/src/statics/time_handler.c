@@ -20,6 +20,13 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file handles times.
+ * A time is used to measure the duration of dynamics or in other words,
+ * the difference between two static states/ instants.
+ *
+ * @version $Revision: 1.8 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef TIME_HANDLER_SOURCE
@@ -27,14 +34,6 @@
 
 #include <string.h>
 #include "../logger/log_handler.c"
-#include "../statics/time.c"
-
-/**
- * This is the time handler.
- *
- * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 //
 // Constants.
@@ -42,6 +41,36 @@
 
 /** The default time value. */
 static const char* DEFAULT_TIME_VALUE = "01.01.0000 00:00:00";
+
+/** The years. */
+int years;
+
+/** The months. */
+int months;
+
+/** The weeks. */
+int weeks;
+
+/** The days. */
+int days;
+
+/** The hours. */
+int hours;
+
+/** The minutes. */
+int minutes;
+
+/** The seconds. */
+int seconds;
+
+/** The milli seconds. */
+int milli_seconds;
+
+/** The micro seconds. */
+int micro_seconds;
+
+/** The nano seconds. */
+int nano_seconds;
 
 //
 // Time model.
@@ -56,16 +85,16 @@ static const char* DEFAULT_TIME_VALUE = "01.01.0000 00:00:00";
 void initialize_time_model(void* p0, void* p1) {
 
     struct time* m = (struct time*) p0;
-    
+
     if (m != (void*) 0) {
-        
+
         log_message((void*) &INFO_LOG_LEVEL, "Initialize time model.");
 
         // Read input stream and transform to time.
 //??        fscanf(p1, %d, &(m->value));
 
     } else {
-        
+
         log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize time model. The time model is null.");
     }
 }

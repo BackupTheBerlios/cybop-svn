@@ -1,7 +1,7 @@
 /*
  * $RCSfile: complex_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -20,21 +20,19 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file handles complexes.
+ * A complex consists of two fraction numbers, a real and an imaginary value.
+ *
+ * @version $Revision: 1.8 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPLEX_HANDLER_SOURCE
 #define COMPLEX_HANDLER_SOURCE
 
-#include <string.h>
 #include "../logger/log_handler.c"
 #include "../statics/complex.c"
-
-/**
- * This is the complex handler.
- *
- * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 //
 // Constants.
@@ -50,51 +48,52 @@ static const char* DEFAULT_COMPLEX_VALUE = "0.0,0.0";
 /**
  * Initializes the complex model.
  *
- * @param p0 the complex model
- * @param p1 the model source
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
  */
 void initialize_complex_model(void* p0, void* p1) {
 
-    struct complex* m = (struct complex*) p0;
-    
-    if (m != (void*) 0) {
-        
+    struct complex* t = (struct complex*) p0;
+
+    if (t != (void*) 0) {
+
         log_message((void*) &INFO_LOG_LEVEL, "Initialize complex model.");
 
         // Read input stream and transform to complex.
-//??        fscanf(p1, %d, (void*) &(m->real));
-//??        fscanf(p1, %d, (void*) &(m->imaginary));
+//??        fscanf(p1, %d, (void*) &(t->real));
+//??        fscanf(p1, %d, (void*) &(t->imaginary));
 
     } else {
-        
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize complex model. The complex model is null.");
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize complex model. The transient model is null.");
     }
 }
 
 /**
  * Finalizes the complex model.
  *
- * @param p0 the complex model
- * @param p1 the model source
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
  */
 void finalize_complex_model(void* p0, void* p1) {
 
-    struct complex* m = (struct complex*) p0;
-    
-    if (m != (void*) 0) {
-        
+    struct complex* t = (struct complex*) p0;
+
+    if (t != (void*) 0) {
+
         log_message((void*) &INFO_LOG_LEVEL, "Finalize complex model.");
-        
+
         // Write output stream and transform from complex.
-//??        fprintf(p1, %d, (void*) &(m->real));
-//??        fprintf(p1, %d, (void*) &(m->imaginary));
+//??        fprintf(p1, %d, (void*) &(t->real));
+//??        fprintf(p1, %d, (void*) &(t->imaginary));
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize complex model. The complex model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize complex model. The transient model is null.");
     }
 }
 
 /* COMPLEX_HANDLER_SOURCE */
 #endif
-

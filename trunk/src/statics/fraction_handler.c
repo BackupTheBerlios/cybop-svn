@@ -1,7 +1,7 @@
 /*
  * $RCSfile: fraction_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -20,6 +20,15 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file handles fractions.
+ * A fraction consists of two integer numbers, a numerator and a denominator.
+ *
+ * For higher performance, it is mostly better to use floating point numbers
+ * (float) which can be calculated by the Arithmetic Logic Unit (ALU).
+ *
+ * @version $Revision: 1.8 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef FRACTION_HANDLER_SOURCE
@@ -28,26 +37,65 @@
 #include "../logger/log_handler.c"
 #include "../statics/fraction.c"
 
-/**
- * This is the fraction handler.
- *
- * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
-
 //
 // Constants.
 //
 
-/** The default fraction value. */
-static const double DEFAULT_FRACTION_VALUE = 0.0;
+/** The fraction size. */
+static const int FRACTION_SIZE = 2;
+
+/** The numerator index. */
+static const int NUMERATOR_INDEX = 0;
+
+/** The denominator index. */
+static const int DENOMINATOR_INDEX = 1;
 
 //
-// Fraction model.
+// Fraction.
 //
 
 /**
- * Initializes the fraction model.
+ * Creates the fraction.
+ *
+ * @param p0 the fraction
+ */
+void create_fraction(void* p0) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Create fraction.");
+
+    // The fraction.
+    create_array(p0, (void*) &FRACTION_SIZE);
+
+    // The numerator.
+    int n = 0;
+    set_array_element(p0, (void*) &FRACTION_SIZE, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX, (void*) &n);
+
+    // The denominator.
+    int d = 0;
+    set_array_element(p0, (void*) &FRACTION_SIZE, (void*) &INTEGER_ARRAY, (void*) &DENOMINATOR_INDEX, (void*) &d);
+}
+
+/**
+ * Destroys the fraction.
+ *
+ * @param p0 the fraction
+ */
+void destroy_fraction(void* p0) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Destroy fraction.");
+
+    // The denominator.
+    remove_array_element(p0, (void*) &FRACTION_SIZE, (void*) &INTEGER_ARRAY, (void*) &DENOMINATOR_INDEX);
+
+    // The numerator.
+    remove_array_element(p0, (void*) &FRACTION_SIZE, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX);
+
+    // The fraction.
+    destroy_array(p0, (void*) &FRACTION_SIZE);
+}
+
+/**
+ * Initializes the fraction.
  *
  * @param p0 the fraction model
  * @param p1 the model source
@@ -55,16 +103,16 @@ static const double DEFAULT_FRACTION_VALUE = 0.0;
 void initialize_fraction_model(void* p0, void* p1) {
 
     struct fraction* m = (struct fraction*) p0;
-    
+
     if (m != (void*) 0) {
-        
+
         log_message((void*) &INFO_LOG_LEVEL, "Initialize fraction model.");
 
         // Read input stream and transform to fraction.
 //??        sscanf(p1, %l, (void*) &(m->value));
 
     } else {
-        
+
         log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize fraction model. The fraction model is null.");
     }
 }
@@ -77,7 +125,7 @@ void initialize_fraction_model(void* p0, void* p1) {
 void finalize_fraction_model(void* p0, void* p1) {
 
     struct fraction* m = (struct fraction*) p0;
-    
+
     if (m != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Finalize fraction model.");
@@ -93,4 +141,3 @@ void finalize_fraction_model(void* p0, void* p1) {
 
 /* FRACTION_HANDLER_SOURCE */
 #endif
-

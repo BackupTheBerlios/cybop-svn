@@ -32,7 +32,6 @@
 #include "../logger/log_handler.c"
 #include "../model/array_handler.c"
 #include "../model/dynamics_models.c"
-#include "../model/map.c"
 #include "../model/map_handler.c"
 #include "../model/model_handler.c"
 #include "../signal/languages.c"
@@ -51,7 +50,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.23 $ $Date: 2004-03-01 17:08:58 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -186,62 +185,6 @@ void* get_signal(void* p0, void* p1) {
     }
 
     return s;
-}
-
-//
-// Abstraction.
-//
-
-/**
- * Gets the abstraction.
- *
- * @param p0 the signal memory
- * @param p1 the index
- * @return the abstraction
- */
-void* get_abstraction(void* p0, void* p1) {
-
-    void* a = (void*) 0;
-    struct signal_memory* m = (struct signal_memory*) p0;
-
-    if (m != (void*) 0) {
-
-        a = get_array_element(m->abstractions, p1);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get abstraction. The signal memory is null.");
-    }
-
-    return a;
-}
-
-//
-// Priority.
-//
-
-/**
- * Gets the priority.
- *
- * @param p0 the signal memory
- * @param p1 the index
- * @return the priority
- */
-void* get_priority(void* p0, void* p1) {
-
-    void* p = (void*) 0;
-    struct signal_memory* m = (struct signal_memory*) p0;
-
-    if (m != (void*) 0) {
-
-        p = get_array_element(m->priorities, p1);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get priority. The signal memory is null.");
-    }
-
-    return p;
 }
 
 /**

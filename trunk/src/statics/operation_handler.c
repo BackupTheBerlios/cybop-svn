@@ -20,7 +20,23 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file handles operations (also known as systems).
+ * An operation transports an input state through logics to an output state.
+ *
+ * The logics is kept as function pointer.
+ * Many inputs and outputs are possible.
+ * Statics models are kept as hierarchical paths.
+ *
+ * Operations can be stored as signals in a signal memory.
+ *
+ * Operation, input and output are stored in the following form:
+ * operation, operand1, operand2, operand3, ...
+ *
+ * @version $Revision: 1.13 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
 
 #ifndef OPERATION_HANDLER_SOURCE
 #define OPERATION_HANDLER_SOURCE
@@ -29,13 +45,6 @@
 #include "../model/map_handler.c"
 #include "../model/model_handler.c"
 #include "../statics/operation.c"
-
-/**
- * This is the operation handler.
- *
- * @version $Revision: 1.12 $ $Date: 2004-03-31 15:52:06 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 //
 // Operation container.

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: integer_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -20,20 +20,17 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file handles integers.
+ *
+ * @version $Revision: 1.9 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTEGER_HANDLER_SOURCE
 #define INTEGER_HANDLER_SOURCE
 
 #include "../logger/log_handler.c"
-#include "../statics/integer.c"
-
-/**
- * This is the integer handler.
- *
- * @version $Revision: 1.8 $ $Date: 2004-02-25 09:09:32 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 //
 // Constants.
@@ -49,47 +46,31 @@ static const int DEFAULT_INTEGER_VALUE = 0;
 /**
  * Initializes the integer model.
  *
- * @param p0 the integer model
- * @param p1 the model source
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
  */
-void initialize_integer_model(void* p0, void* p1) {
+void initialize_integer_model(void* p0, const void* p1, const void* p2) {
 
-    struct integer* m = (struct integer*) p0;
-    
-    if (m != (void*) 0) {
-        
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize integer model.");
+    log_message((void*) &INFO_LOG_LEVEL, "Initialize integer model.");
 
-        // Read input stream and transform to integer.
-//??        sscanf(p1, %d, (void*) &(m->value));
-
-    } else {
-        
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize integer model. The integer model is null.");
-    }
+    // Transform string to integer.
+//??    sscanf(p1, %d, (void*) &(m->value));
 }
 
 /**
  * Finalizes the integer model.
  *
- * @param p0 the integer model
- * @param p1 the model source
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
  */
-void finalize_integer_model(void* p0, void* p1) {
+void finalize_integer_model(const void* p0, void* p1, void* p2) {
 
-    struct integer* m = (struct integer*) p0;
-    
-    if (m != (void*) 0) {
-        
-        log_message((void*) &INFO_LOG_LEVEL, "Finalize integer model.");
-        
-        // Write output stream and transform from integer.
-//??        sprintf(p1, %d, (void*) &(m->value));
+    log_message((void*) &INFO_LOG_LEVEL, "Finalize integer model.");
 
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize integer model. The integer model is null.");
-    }
+    // Transform integer to string.
+//??    sprintf(p1, %d, (void*) &(m->value));
 }
 
 /* INTEGER_HANDLER_SOURCE */
