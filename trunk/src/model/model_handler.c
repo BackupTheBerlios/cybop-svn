@@ -59,7 +59,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.30 $ $Date: 2004-04-21 10:59:53 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -76,74 +76,77 @@
 //
 
 /** The model size. */
-static const int MODEL_SIZE = 21;
+static const int MODEL_SIZE = 22;
 
 //
 // Model index constants.
 //
 
+/** The parts size index. */
+static const int PARTS_SIZE_INDEX = 0;
+
 /** The parts count index. */
-static const int PARTS_COUNT_INDEX = 0;
+static const int PARTS_COUNT_INDEX = 1;
 
 /** The names index. */
-static const int NAMES_INDEX = 1;
+static const int NAMES_INDEX = 2;
 
 /** The names sizes index. */
-static const int NAMES_SIZES_INDEX = 2;
+static const int NAMES_SIZES_INDEX = 3;
 
 /** The part abstractions index. */
-static const int PART_ABSTRACTIONS_INDEX = 3;
+static const int PART_ABSTRACTIONS_INDEX = 4;
 
 /** The part abstractions sizes index. */
-static const int PART_ABSTRACTIONS_SIZES_INDEX = 4;
+static const int PART_ABSTRACTIONS_SIZES_INDEX = 5;
 
 /** The part locations index. */
-static const int PART_LOCATIONS_INDEX = 5;
+static const int PART_LOCATIONS_INDEX = 6;
 
 /** The part locations sizes index. */
-static const int PART_LOCATIONS_SIZES_INDEX = 6;
+static const int PART_LOCATIONS_SIZES_INDEX = 7;
 
 /** The part models index. */
-static const int PART_MODELS_INDEX = 7;
+static const int PART_MODELS_INDEX = 8;
 
 /** The part models sizes index. */
-static const int PART_MODELS_SIZES_INDEX = 8;
+static const int PART_MODELS_SIZES_INDEX = 9;
 
 /** The position abstractions index. */
-static const int POSITION_ABSTRACTIONS_INDEX = 9;
+static const int POSITION_ABSTRACTIONS_INDEX = 10;
 
 /** The position abstractions sizes index. */
-static const int POSITION_ABSTRACTIONS_SIZES_INDEX = 10;
+static const int POSITION_ABSTRACTIONS_SIZES_INDEX = 11;
 
 /** The position locations index. */
-static const int POSITION_LOCATIONS_INDEX = 11;
+static const int POSITION_LOCATIONS_INDEX = 12;
 
 /** The position locations sizes index. */
-static const int POSITION_LOCATIONS_SIZES_INDEX = 12;
+static const int POSITION_LOCATIONS_SIZES_INDEX = 13;
 
 /** The position models index. */
-static const int POSITION_MODELS_INDEX = 13;
+static const int POSITION_MODELS_INDEX = 14;
 
 /** The position models sizes index. */
-static const int POSITION_MODELS_SIZES_INDEX = 14;
+static const int POSITION_MODELS_SIZES_INDEX = 15;
 
 /** The constraint abstractions index. */
-static const int CONSTRAINT_ABSTRACTIONS_INDEX = 15;
+static const int CONSTRAINT_ABSTRACTIONS_INDEX = 16;
 
 /** The constraint abstractions sizes index. */
-static const int CONSTRAINT_ABSTRACTIONS_SIZES_INDEX = 16;
+static const int CONSTRAINT_ABSTRACTIONS_SIZES_INDEX = 17;
 
 /** The constraint locations index. */
-static const int CONSTRAINT_LOCATIONS_INDEX = 17;
+static const int CONSTRAINT_LOCATIONS_INDEX = 18;
 
 /** The constraint locations sizes index. */
-static const int CONSTRAINT_LOCATIONS_SIZES_INDEX = 18;
+static const int CONSTRAINT_LOCATIONS_SIZES_INDEX = 19;
 
 /** The constraint models index. */
-static const int CONSTRAINT_MODELS_INDEX = 19;
+static const int CONSTRAINT_MODELS_INDEX = 20;
 
 /** The constraint models sizes index. */
-static const int CONSTRAINT_MODELS_SIZES_INDEX = 20;
+static const int CONSTRAINT_MODELS_SIZES_INDEX = 21;
 
 //
 // Model separator constants.
@@ -197,6 +200,7 @@ void create_compound_model(void* p0) {
     create_array(p0, (void*) &MODEL_SIZE);
 
     // Initialize elements.
+    int s = 0;
     int c = 0;
     void* n = NULL_POINTER;
     void* ns = NULL_POINTER;
@@ -242,6 +246,7 @@ void create_compound_model(void* p0) {
     create_array((void*) &cms, (void*) &c);
 
     // Set elements in ascending order.
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
     set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
@@ -275,6 +280,7 @@ void destroy_compound_model(void* p0) {
     log_message((void*) &INFO_LOG_LEVEL, "Destroy compound model.");
 
     // Initialize elements.
+    int s = 0;
     int c = 0;
     void* n = NULL_POINTER;
     void* ns = NULL_POINTER;
@@ -298,6 +304,7 @@ void destroy_compound_model(void* p0) {
     void* cms = NULL_POINTER;
 
     // Get elements.
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
@@ -342,6 +349,7 @@ void destroy_compound_model(void* p0) {
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &NAMES_SIZES_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &NAMES_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &PARTS_COUNT_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &PARTS_SIZE_INDEX);
 
     // Destroy elements.
     destroy_array((void*) &n, (void*) &c);
@@ -378,24 +386,28 @@ void destroy_compound_model(void* p0) {
 //
 
 /**
- * Creates a memory model from a cybol model.
+ * Creates a transient model from a persistent model.
  *
- * @param p0 the cybol model
- * @param p1 the location
- * @param p2 the abstraction
- * @return the memory model
+ * @param p0 the transient model
+ * @param p1 the transient model size
+ * @param p2 the persistent model
+ * @param p3 the persistent model size
+ * @param p4 the abstraction
+ * @param p5 the abstraction size
  */
-void* create_model(const void* p0, const void* p1, const void* p2);
+void create_model(void* p0, void* p1, const void* p2, const void* p3, const void* p4, const void* p5);
 
 /**
- * Destroys a memory model to a cybol model.
+ * Destroys a transient model to a persistent model.
  *
- * @param p0 the memory model
- * @param p1 the cybol model
- * @param p2 the location
- * @param p3 the abstraction
+ * @param p0 the transient model
+ * @param p1 the transient model size
+ * @param p2 the persistent model
+ * @param p3 the persistent model size
+ * @param p4 the abstraction
+ * @param p5 the abstraction size
  */
-void destroy_model(void* p0, const void* p1, const void* p2, const void* p3);
+void destroy_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const void* p5);
 
 //
 // Part.
@@ -858,6 +870,7 @@ void set_model_part_by_index(void* p0, const void* p1, const void* p2, const voi
             log_message((void*) &INFO_LOG_LEVEL, "Set model part by index.");
 
             // Initialize elements.
+            int s = 0;
             int c = 0;
             void* n = NULL_POINTER;
             void* ns = NULL_POINTER;
@@ -881,6 +894,7 @@ void set_model_part_by_index(void* p0, const void* p1, const void* p2, const voi
             void* cms = NULL_POINTER;
 
             // Get elements.
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
@@ -903,24 +917,40 @@ void set_model_part_by_index(void* p0, const void* p1, const void* p2, const voi
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_SIZES_INDEX, (void*) &cms);
 
-            if (*i == c) {
+            if (*i == s) {
 
-                // Increment array size.
-                c++;
+                // Increase size.
+                s = s * 2 + 1;
 
                 // Resize elements.
-                resize_array(n, (void*) &c);
-                resize_array(ns, (void*) &c);
-                resize_array(r, (void*) &c);
-                resize_array(rs, (void*) &c);
+                resize_array(n, (void*) &s);
+                resize_array(ns, (void*) &s);
+                resize_array(pa, (void*) &s);
+                resize_array(pas, (void*) &s);
+                resize_array(pl, (void*) &s);
+                resize_array(pls, (void*) &s);
+                resize_array(pm, (void*) &s);
+                resize_array(pms, (void*) &s);
+                resize_array(poa, (void*) &s);
+                resize_array(poas, (void*) &s);
+                resize_array(pol, (void*) &s);
+                resize_array(pols, (void*) &s);
+                resize_array(pom, (void*) &s);
+                resize_array(poms, (void*) &s);
+                resize_array(ca, (void*) &s);
+                resize_array(cas, (void*) &s);
+                resize_array(cl, (void*) &s);
+                resize_array(cls, (void*) &s);
+                resize_array(cm, (void*) &s);
+                resize_array(cms, (void*) &s);
 
-                // Set array size which is equal for all elements.
-                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
+                // Set array size.
+                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
             }
 
-            if (*i < c) {
+            if (*i < s) {
 
-                // Set part in ascending order.
+                // Set part.
                 set_array_element((void*) &n, (void*) &POINTER_ARRAY, p1, p2);
                 set_array_element((void*) &ns, (void*) &POINTER_ARRAY, p1, p3);
                 set_array_element((void*) &pa, (void*) &POINTER_ARRAY, p1, p4);
@@ -941,6 +971,12 @@ void set_model_part_by_index(void* p0, const void* p1, const void* p2, const voi
                 set_array_element((void*) &cls, (void*) &POINTER_ARRAY, p1, p19);
                 set_array_element((void*) &cm, (void*) &POINTER_ARRAY, p1, p20);
                 set_array_element((void*) &cms, (void*) &POINTER_ARRAY, p1, p21);
+
+                // Increment count.
+                c++;
+
+                // Set array count.
+                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
 
             } else {
 
@@ -988,113 +1024,137 @@ void set_model_part_by_name(void* p0, const void* p1, const void* p2,
     const void* p9, const void* p10, const void* p11, const void* p12, const void* p13, const void* p14,
     const void* p15, const void* p16, const void* p17, const void* p18, const void* p19, const void* p20) {
 
-    if (p2 != NULL_POINTER) {
+    // The separator index.
+    int i = -1;
 
-        // The name size.
-        int* ns = (int*) p2;
+    get_array_element_index(p1, (void*) &CHARACTER_ARRAY, p2, (void*) &MODEL_PART_SEPARATOR, (void*) &i);
 
-        // The separator index.
-        int i = -1;
+    if (i != -1) {
 
-        get_array_element_index(p1, (void*) &CHARACTER_ARRAY, p2, (void*) &MODEL_PART_SEPARATOR, (void*) &i);
+        // The separator has been found.
+        // The full name is hierarchical.
+        // The given model contains parts which are compound models.
 
-        if (i != -1) {
+        if (p2 != NULL_POINTER) {
 
-            if (i >= 0) {
+            // The name size.
+            int* ns = (int*) p2;
 
-                if (i < *ns) {
+            if (p1 != NULL_POINTER) {
 
-                    if (i != 0) {
+                // The name.
+                void** n = (void**) p1;
 
-                        if (i != (*ns - 1)) {
+                if (i >= 0) {
 
-//?? Caution! Do not use p1 but *p instead. Cast is needed above to void**!
+                    if (i < *ns) {
 
-                            // The remaining name starts at the index after the separator.
-                            // Example: "hello.test"
-                            // The index of the separator is 5.
-                            // The starting index of the remaining name "test" is 6 = 5 + 1.
-                            void* r = (void*) (p1 + i + 1);
+                        if (i != 0) {
 
-                            // The remaining name size is the full name size decreased
-                            // by the separator index increased by one.
-                            // Example: "hello.test"
-                            // The full name size is 10.
-                            // The separator index is 5.
-                            // The size of the remaining name "test" is 4 = 10 - (5 + 1).
-                            int rs = *ns - (i + 1);
+                            if (i != (*ns - 1)) {
 
-                            // The part models.
-                            void* pm = NULL_POINTER;
-                            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+                                // The remaining name starts at the index after the separator.
+                                // Example: "hello.test"
+                                // The index of the separator is 5.
+                                // The starting index of the remaining name "test" is 6 = 5 + 1.
+                                void* r = (void*) (n + i + 1);
 
-                            // The index is used as part name size.
-                            // Example: "hello.test"
-                            // The index of the separator is 5.
-                            // The size of the part name "hello" before the separator is likewise 5.
-                            void* part = NULL_POINTER;
-                            int size = -1;
-                            get_map_element_with_name((void*) &pm, p1, (void*) &i, (void*) &part, (void*) &size);
+                                // The remaining name size is the full name size decreased
+                                // by the separator index increased by one.
+                                // Example: "hello.test"
+                                // The full name size is 10.
+                                // The separator index is 5.
+                                // The size of the remaining name "test" is 4 = 10 - (5 + 1).
+                                int rs = *ns - (i + 1);
 
-                            // Continue to process along the hierarchical name.
-                            set_model_part((void*) &part, (void*) &r, (void*) &rs, p3, p4, p5, p6,
-                                p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20);
+                                // Get part models.
+                                void* pm = NULL_POINTER;
+                                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+
+                                // Get index of part name.
+                                // The index i is used as part name size.
+                                // Example: "hello.test"
+                                // The index i of the separator is 5.
+                                // The size of the part name "hello" before the separator is likewise 5.
+                                int index = -1;
+                                get_model_part_index(p0, p1, (void*) &i, (void*) &index);
+
+                                if (index != -1) {
+
+                                    // Get part.
+                                    void* part = NULL_POINTER;
+                                    get_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &index, (void*) &part);
+
+                                    // Recursively continue to process along the hierarchical name.
+                                    set_model_part_by_name((void*) &part, (void*) &r, (void*) &rs,
+                                        p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
+                                        p15, p16, p17, p18, p19, p20);
+
+                                } else {
+
+                                    log_message((void*) &WARNING_LOG_LEVEL, "Could not set model part by name. A part with that name does not exist.");
+                                }
+
+                            } else {
+
+                                log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The full name ends with a separator.");
+                            }
 
                         } else {
 
-                            log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The full name ends with a separator.");
+                            log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The full name starts with a separator.");
                         }
 
                     } else {
 
-                        log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The full name starts with a separator.");
+                        log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The separator index exceeds the full name size.");
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The separator index exceeds the full name size.");
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The separator index is negative.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The separator index is negative.");
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The name is null.");
             }
 
         } else {
 
-            // The separator could not be found.
-            // The full name is not hierarchical and represents the part name.
-            // The given model contains parts which are primitive models.
-
-            log_message((void*) &INFO_LOG_LEVEL, "Set model part by name.");
-
-            // The index of the given name.
-            int i = -1;
-            get_model_part_index(p0, p1, p2, (void*) &i);
-
-            if (i != -1) {
-
-                // Set part.
-                set_model_part_by_index(p0, (void*) &i, p1, p2,
-                    p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
-                    p15, p16, p17, p18, p19, p20);
-
-            } else {
-
-                // Get parts count.
-                int c = 0;
-                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
-
-                // Add part.
-                set_model_part_by_index(p0, (void*) &c, p1, p2,
-                    p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
-                    p15, p16, p17, p18, p19, p20);
-            }
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The name size is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The name size is null.");
+        // The separator could not be found.
+        // The full name is not hierarchical and represents the part name.
+        // The given model contains parts which are primitive models.
+
+        // The index of the given name.
+        int index = -1;
+        get_model_part_index(p0, p1, p2, (void*) &index);
+
+        if (index != -1) {
+
+            log_message((void*) &INFO_LOG_LEVEL, "Set model part by name.");
+
+            set_model_part_by_index(p0, (void*) &index, p1, p2,
+                p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
+                p15, p16, p17, p18, p19, p20);
+
+        } else {
+
+            log_message((void*) &INFO_LOG_LEVEL, "Add model part by name.");
+
+            // Get parts count.
+            int c = 0;
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
+
+            set_model_part_by_index(p0, (void*) &c, p1, p2,
+                p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
+                p15, p16, p17, p18, p19, p20);
+        }
     }
 }
 
@@ -1136,40 +1196,106 @@ void add_model_part(void* p0, const void* p1, const void* p2, const void* p3, co
  */
 void remove_model_part_by_index(void* p0, const void* p1) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Remove model part by index.");
+    if (p1 != NULL_POINTER) {
 
-    // Initialize elements.
-    void* pa = NULL_POINTER;
-    void* pl = NULL_POINTER;
-    void* pm = NULL_POINTER;
-    void* poa = NULL_POINTER;
-    void* pol = NULL_POINTER;
-    void* pom = NULL_POINTER;
-    void* ca = NULL_POINTER;
-    void* cl = NULL_POINTER;
-    void* cm = NULL_POINTER;
+        int* i = (int*) p1;
 
-    // Get elements.
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
+        if (*i >= 0) {
 
-    // Remove part in descending order.
-    remove_map_element_by_index((void*) &pa, p1);
-    remove_map_element_by_index((void*) &pl, p1);
-    remove_map_element_by_index((void*) &pm, p1);
-    remove_map_element_by_index((void*) &poa, p1);
-    remove_map_element_by_index((void*) &pol, p1);
-    remove_map_element_by_index((void*) &pom, p1);
-    remove_map_element_by_index((void*) &ca, p1);
-    remove_map_element_by_index((void*) &cl, p1);
-    remove_map_element_by_index((void*) &cm, p1);
+            log_message((void*) &INFO_LOG_LEVEL, "Remove model part by index.");
+
+            // Initialize elements.
+            int s = 0;
+            int c = 0;
+            void* n = NULL_POINTER;
+            void* ns = NULL_POINTER;
+            void* pa = NULL_POINTER;
+            void* pas = NULL_POINTER;
+            void* pl = NULL_POINTER;
+            void* pls = NULL_POINTER;
+            void* pm = NULL_POINTER;
+            void* pms = NULL_POINTER;
+            void* poa = NULL_POINTER;
+            void* poas = NULL_POINTER;
+            void* pol = NULL_POINTER;
+            void* pols = NULL_POINTER;
+            void* pom = NULL_POINTER;
+            void* poms = NULL_POINTER;
+            void* ca = NULL_POINTER;
+            void* cas = NULL_POINTER;
+            void* cl = NULL_POINTER;
+            void* cls = NULL_POINTER;
+            void* cm = NULL_POINTER;
+            void* cms = NULL_POINTER;
+
+            // Get elements.
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_SIZES_INDEX, (void*) &pls);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_SIZES_INDEX, (void*) &pms);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_SIZES_INDEX, (void*) &poas);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_SIZES_INDEX, (void*) &pols);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_SIZES_INDEX, (void*) &poms);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_SIZES_INDEX, (void*) &cas);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_SIZES_INDEX, (void*) &cls);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_SIZES_INDEX, (void*) &cms);
+
+            if (*i < c) {
+
+                // Remove part.
+                remove_array_element((void*) &n, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &ns, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &pa, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &pas, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &pl, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &pls, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &pms, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &poa, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &poas, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &pol, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &pols, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &pom, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &poms, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &ca, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &cas, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &cl, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &cls, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &cm, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &cms, (void*) &POINTER_ARRAY, (void*) &c, p1);
+
+                // Decrement count.
+                c++;
+
+                // Set array count.
+                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by index. The index exceeds the size.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by index. The index is negativ.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by index. The index is null.");
+    }
 }
 
 /**
@@ -1181,97 +1307,125 @@ void remove_model_part_by_index(void* p0, const void* p1) {
  */
 void remove_model_part_by_name(void* p0, const void* p1, const void* p2) {
 
-    if (p2 != NULL_POINTER) {
+    // The separator index.
+    int i = -1;
 
-        // The name size.
-        int* ns = (int*) p2;
+    get_array_element_index(p1, (void*) &CHARACTER_ARRAY, p2, (void*) &MODEL_PART_SEPARATOR, (void*) &i);
 
-        // The separator index.
-        int i = -1;
+    if (i != -1) {
 
-        get_array_element_index(p1, (void*) &CHARACTER_ARRAY, p2, (void*) &MODEL_PART_SEPARATOR, (void*) &i);
+        // The separator has been found.
+        // The full name is hierarchical.
+        // The given model contains parts which are compound models.
 
-        if (i != -1) {
+        if (p2 != NULL_POINTER) {
 
-            if (i >= 0) {
+            // The name size.
+            int* ns = (int*) p2;
 
-                if (i < *ns) {
+            if (p1 != NULL_POINTER) {
 
-                    if (i != 0) {
+                // The name.
+                void** n = (void**) p1;
 
-                        if (i != (*ns - 1)) {
+                if (i >= 0) {
 
-                            // The remaining name starts at the index after the separator.
-                            // Example: "hello.test"
-                            // The index of the separator is 5.
-                            // The starting index of the remaining name "test" is 6 = 5 + 1.
-                            void* r = (void*) (p1 + i + 1);
+                    if (i < *ns) {
 
-                            // The remaining name size is the full name size decreased
-                            // by the separator index increased by one.
-                            // Example: "hello.test"
-                            // The full name size is 10.
-                            // The separator index is 5.
-                            // The size of the remaining name "test" is 4 = 10 - (5 + 1).
-                            int rs = *ns - (i + 1);
+                        if (i != 0) {
 
-                            // The part models.
-                            void* pm = NULL_POINTER;
-                            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+                            if (i != (*ns - 1)) {
 
-                            // The index is used as part name size.
-                            // Example: "hello.test"
-                            // The index of the separator is 5.
-                            // The size of the part name "hello" before the separator is likewise 5.
-                            void* part = NULL_POINTER;
-                            int size = -1;
-                            get_map_element_with_name((void*) &pm, p1, (void*) &i, (void*) &part, (void*) &size);
+                                // The remaining name starts at the index after the separator.
+                                // Example: "hello.test"
+                                // The index of the separator is 5.
+                                // The starting index of the remaining name "test" is 6 = 5 + 1.
+                                void* r = (void*) (n + i + 1);
 
-                            // Continue to process along the hierarchical name.
-                            remove_model_part((void*) &part, (void*) &r, (void*) &rs);
+                                // The remaining name size is the full name size decreased
+                                // by the separator index increased by one.
+                                // Example: "hello.test"
+                                // The full name size is 10.
+                                // The separator index is 5.
+                                // The size of the remaining name "test" is 4 = 10 - (5 + 1).
+                                int rs = *ns - (i + 1);
+
+                                // Get part models.
+                                void* pm = NULL_POINTER;
+                                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+
+                                // Get index of part name.
+                                // The index i is used as part name size.
+                                // Example: "hello.test"
+                                // The index i of the separator is 5.
+                                // The size of the part name "hello" before the separator is likewise 5.
+                                int index = -1;
+                                get_model_part_index(p0, p1, (void*) &i, (void*) &index);
+
+                                if (index != -1) {
+
+                                    // Get part.
+                                    void* part = NULL_POINTER;
+                                    get_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &index, (void*) &part);
+
+                                    // Recursively continue to process along the hierarchical name.
+                                    remove_model_part_by_name((void*) &part, (void*) &r, (void*) &rs);
+
+                                } else {
+
+                                    log_message((void*) &WARNING_LOG_LEVEL, "Could not remove model part by name. A part with that name does not exist.");
+                                }
+
+                            } else {
+
+                                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The full name ends with a separator.");
+                            }
 
                         } else {
 
-                            log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The full name ends with a separator.");
+                            log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The full name starts with a separator.");
                         }
 
                     } else {
 
-                        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The full name starts with a separator.");
+                        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The separator index exceeds the full name size.");
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The separator index exceeds the full name size.");
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The separator index is negative.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The separator index is negative.");
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The name is null.");
             }
 
         } else {
 
-            // The separator could not be found.
-            // The full name is not hierarchical and represents the part name.
-            // The given model contains parts which are primitive models.
-
-            log_message((void*) &INFO_LOG_LEVEL, "Remove model part by name.");
-
-            // The index of the given name.
-            int i = -1;
-            get_model_part_index(p0, p1, p2, (void*) &i);
-
-            if (i != -1) {
-
-                // Remove part.
-                remove_model_part_by_index(p0, (void*) &i);
-            }
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The name size is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The name size is null.");
+        // The separator could not be found.
+        // The full name is not hierarchical and represents the part name.
+        // The given model contains parts which are primitive models.
+
+        // The index of the given name.
+        int index = -1;
+        get_model_part_index(p0, p1, p2, (void*) &index);
+
+        if (index != -1) {
+
+            log_message((void*) &INFO_LOG_LEVEL, "Remove model part by name.");
+
+            remove_model_part_by_index(p0, (void*) &index);
+
+        } else {
+
+            log_message((void*) &WARNING_LOG_LEVEL, "Could not remove model part by name. A part with that name does not exist.");
+        }
     }
 }
 
@@ -1280,64 +1434,126 @@ void remove_model_part_by_name(void* p0, const void* p1, const void* p2) {
  *
  * @param p0 the model
  * @param p1 the index
- * @param p2 the part abstraction
- * @param p3 the part abstraction size
- * @param p4 the part location
- * @param p5 the part location size
- * @param p6 the part model
- * @param p7 the part model size
- * @param p8 the position abstraction
- * @param p9 the position abstraction size
- * @param p10 the position location
- * @param p11 the position location size
- * @param p12 the position model
- * @param p13 the position model size
- * @param p14 the constraint abstraction
- * @param p15 the constraint abstraction size
- * @param p16 the constraint location
- * @param p17 the constraint location size
- * @param p18 the constraint model
- * @param p19 the constraint model size
+ * @param p2 the name
+ * @param p3 the name size
+ * @param p4 the part abstraction
+ * @param p5 the part abstraction size
+ * @param p6 the part location
+ * @param p7 the part location size
+ * @param p8 the part model
+ * @param p9 the part model size
+ * @param p10 the position abstraction
+ * @param p11 the position abstraction size
+ * @param p12 the position location
+ * @param p13 the position location size
+ * @param p14 the position model
+ * @param p15 the position model size
+ * @param p16 the constraint abstraction
+ * @param p17 the constraint abstraction size
+ * @param p18 the constraint location
+ * @param p19 the constraint location size
+ * @param p20 the constraint model
+ * @param p21 the constraint model size
  */
-void get_model_part_by_index(const void* p0, const void* p1,
-    void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
-    void* p8, void* p9, void* p10, void* p11, void* p12, void* p13,
-    void* p14, void* p15, void* p16, void* p17, void* p18, void* p19) {
+void get_model_part_by_index(const void* p0, const void* p1, void* p2, void* p3,
+    void* p4, void* p5, void* p6, void* p7, void* p8, void* p9,
+    void* p10, void* p11, void* p12, void* p13, void* p14, void* p15,
+    void* p16, void* p17, void* p18, void* p19, void* p20, void* p21) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Get model part by index.");
+    if (p1 != NULL_POINTER) {
 
-    // Initialize elements.
-    void* pa = NULL_POINTER;
-    void* pl = NULL_POINTER;
-    void* pm = NULL_POINTER;
-    void* poa = NULL_POINTER;
-    void* pol = NULL_POINTER;
-    void* pom = NULL_POINTER;
-    void* ca = NULL_POINTER;
-    void* cl = NULL_POINTER;
-    void* cm = NULL_POINTER;
+        int* i = (int*) p1;
 
-    // Get elements.
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
+        if (*i >= 0) {
 
-    // Get part.
-    get_map_element_by_index((void*) &pa, p1, p2, p3);
-    get_map_element_by_index((void*) &pl, p1, p4, p5);
-    get_map_element_by_index((void*) &pm, p1, p6, p7);
-    get_map_element_by_index((void*) &poa, p1, p8, p9);
-    get_map_element_by_index((void*) &pol, p1, p10, p11);
-    get_map_element_by_index((void*) &pom, p1, p12, p13);
-    get_map_element_by_index((void*) &ca, p1, p14, p15);
-    get_map_element_by_index((void*) &cl, p1, p16, p17);
-    get_map_element_by_index((void*) &cm, p1, p18, p19);
+            log_message((void*) &INFO_LOG_LEVEL, "Get model part by index.");
+
+            // Initialize elements.
+            int s = 0;
+            int c = 0;
+            void* n = NULL_POINTER;
+            void* ns = NULL_POINTER;
+            void* pa = NULL_POINTER;
+            void* pas = NULL_POINTER;
+            void* pl = NULL_POINTER;
+            void* pls = NULL_POINTER;
+            void* pm = NULL_POINTER;
+            void* pms = NULL_POINTER;
+            void* poa = NULL_POINTER;
+            void* poas = NULL_POINTER;
+            void* pol = NULL_POINTER;
+            void* pols = NULL_POINTER;
+            void* pom = NULL_POINTER;
+            void* poms = NULL_POINTER;
+            void* ca = NULL_POINTER;
+            void* cas = NULL_POINTER;
+            void* cl = NULL_POINTER;
+            void* cls = NULL_POINTER;
+            void* cm = NULL_POINTER;
+            void* cms = NULL_POINTER;
+
+            // Get elements.
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_SIZES_INDEX, (void*) &pls);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_SIZES_INDEX, (void*) &pms);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_SIZES_INDEX, (void*) &poas);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_SIZES_INDEX, (void*) &pols);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_SIZES_INDEX, (void*) &poms);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_SIZES_INDEX, (void*) &cas);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_SIZES_INDEX, (void*) &cls);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_SIZES_INDEX, (void*) &cms);
+
+            if (*i < c) {
+
+                // Get part.
+                get_array_element((void*) &n, (void*) &POINTER_ARRAY, p1, p2);
+                get_array_element((void*) &ns, (void*) &POINTER_ARRAY, p1, p3);
+                get_array_element((void*) &pa, (void*) &POINTER_ARRAY, p1, p4);
+                get_array_element((void*) &pas, (void*) &POINTER_ARRAY, p1, p5);
+                get_array_element((void*) &pl, (void*) &POINTER_ARRAY, p1, p6);
+                get_array_element((void*) &pls, (void*) &POINTER_ARRAY, p1, p7);
+                get_array_element((void*) &pm, (void*) &POINTER_ARRAY, p1, p8);
+                get_array_element((void*) &pms, (void*) &POINTER_ARRAY, p1, p9);
+                get_array_element((void*) &poa, (void*) &POINTER_ARRAY, p1, p10);
+                get_array_element((void*) &poas, (void*) &POINTER_ARRAY, p1, p11);
+                get_array_element((void*) &pol, (void*) &POINTER_ARRAY, p1, p12);
+                get_array_element((void*) &pols, (void*) &POINTER_ARRAY, p1, p13);
+                get_array_element((void*) &pom, (void*) &POINTER_ARRAY, p1, p14);
+                get_array_element((void*) &poms, (void*) &POINTER_ARRAY, p1, p15);
+                get_array_element((void*) &ca, (void*) &POINTER_ARRAY, p1, p16);
+                get_array_element((void*) &cas, (void*) &POINTER_ARRAY, p1, p17);
+                get_array_element((void*) &cl, (void*) &POINTER_ARRAY, p1, p18);
+                get_array_element((void*) &cls, (void*) &POINTER_ARRAY, p1, p19);
+                get_array_element((void*) &cm, (void*) &POINTER_ARRAY, p1, p20);
+                get_array_element((void*) &cms, (void*) &POINTER_ARRAY, p1, p21);
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by index. The index exceeds the size.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by index. The index is negativ.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by index. The index is null.");
+    }
 }
 
 /**
@@ -1370,101 +1586,129 @@ void get_model_part_by_name(const void* p0, const void* p1, const void* p2,
     void* p9, void* p10, void* p11, void* p12, void* p13, void* p14,
     void* p15, void* p16, void* p17, void* p18, void* p19, void* p20) {
 
-    if (p2 != NULL_POINTER) {
+    // The separator index.
+    int i = -1;
 
-        // The name size.
-        int* ns = (int*) p2;
+    get_array_element_index(p1, (void*) &CHARACTER_ARRAY, p2, (void*) &MODEL_PART_SEPARATOR, (void*) &i);
 
-        // The separator index.
-        int i = -1;
+    if (i != -1) {
 
-        get_array_element_index(p1, (void*) &CHARACTER_ARRAY, p2, (void*) &MODEL_PART_SEPARATOR, (void*) &i);
+        // The separator has been found.
+        // The full name is hierarchical.
+        // The given model contains parts which are compound models.
 
-        if (i != -1) {
+        if (p2 != NULL_POINTER) {
 
-            if (i >= 0) {
+            // The name size.
+            int* ns = (int*) p2;
 
-                if (i < *ns) {
+            if (p1 != NULL_POINTER) {
 
-                    if (i != 0) {
+                // The name.
+                void** n = (void**) p1;
 
-                        if (i != (*ns - 1)) {
+                if (i >= 0) {
 
-                            // The remaining name starts at the index after the separator.
-                            // Example: "hello.test"
-                            // The index of the separator is 5.
-                            // The starting index of the remaining name "test" is 6 = 5 + 1.
-                            void* r = (void*) (p1 + i + 1);
+                    if (i < *ns) {
 
-                            // The remaining name size is the full name size decreased
-                            // by the separator index increased by one.
-                            // Example: "hello.test"
-                            // The full name size is 10.
-                            // The separator index is 5.
-                            // The size of the remaining name "test" is 4 = 10 - (5 + 1).
-                            int rs = *ns - (i + 1);
+                        if (i != 0) {
 
-                            // The part models.
-                            void* pm = NULL_POINTER;
-                            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+                            if (i != (*ns - 1)) {
 
-                            // The index is used as part name size.
-                            // Example: "hello.test"
-                            // The index of the separator is 5.
-                            // The size of the part name "hello" before the separator is likewise 5.
-                            void* part = NULL_POINTER;
-                            int size = -1;
-                            get_map_element_with_name((void*) &pm, p1, (void*) &i, (void*) &part, (void*) &size);
+                                // The remaining name starts at the index after the separator.
+                                // Example: "hello.test"
+                                // The index of the separator is 5.
+                                // The starting index of the remaining name "test" is 6 = 5 + 1.
+                                void* r = (void*) (n + i + 1);
 
-                            // Continue to process along the hierarchical name.
-                            get_model_part_by_name((void*) &part, (void*) &r, (void*) &rs,
-                                p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
-                                p15, p16, p17, p18, p19, p20);
+                                // The remaining name size is the full name size decreased
+                                // by the separator index increased by one.
+                                // Example: "hello.test"
+                                // The full name size is 10.
+                                // The separator index is 5.
+                                // The size of the remaining name "test" is 4 = 10 - (5 + 1).
+                                int rs = *ns - (i + 1);
+
+                                // Get part models.
+                                void* pm = NULL_POINTER;
+                                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+
+                                // Get index of part name.
+                                // The index i is used as part name size.
+                                // Example: "hello.test"
+                                // The index i of the separator is 5.
+                                // The size of the part name "hello" before the separator is likewise 5.
+                                int index = -1;
+                                get_model_part_index(p0, p1, (void*) &i, (void*) &index);
+
+                                if (index != -1) {
+
+                                    // Get part.
+                                    void* part = NULL_POINTER;
+                                    get_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &index, (void*) &part);
+
+                                    // Recursively continue to process along the hierarchical name.
+                                    get_model_part_by_name((void*) &part, (void*) &r, (void*) &rs,
+                                        p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
+                                        p15, p16, p17, p18, p19, p20);
+
+                                } else {
+
+                                    log_message((void*) &WARNING_LOG_LEVEL, "Could not get model part by name. A part with that name does not exist.");
+                                }
+
+                            } else {
+
+                                log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The full name ends with a separator.");
+                            }
 
                         } else {
 
-                            log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The full name ends with a separator.");
+                            log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The full name starts with a separator.");
                         }
 
                     } else {
 
-                        log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The full name starts with a separator.");
+                        log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The separator index exceeds the full name size.");
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The separator index exceeds the full name size.");
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The separator index is negative.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The separator index is negative.");
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The name is null.");
             }
 
         } else {
 
-            // The separator could not be found.
-            // The full name is not hierarchical and represents the part name.
-            // The given model contains parts which are primitive models.
-
-            log_message((void*) &INFO_LOG_LEVEL, "Get model part by name.");
-
-            // The index of the given name.
-            int i = -1;
-            get_model_part_index(p0, p1, p2, (void*) &i);
-
-            if (i != -1) {
-
-                // Get part.
-                get_model_part_by_index(p0, (void*) &i, p1, p2,
-                    p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
-                    p15, p16, p17, p18, p19, p20);
-            }
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The name size is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The name size is null.");
+        // The separator could not be found.
+        // The full name is not hierarchical and represents the part name.
+        // The given model contains parts which are primitive models.
+
+        // The index of the given name.
+        int index = -1;
+        get_model_part_index(p0, p1, p2, (void*) &index);
+
+        if (index != -1) {
+
+            log_message((void*) &INFO_LOG_LEVEL, "Get model part by name.");
+
+            get_model_part_by_index(p0, (void*) &index, p1, p2,
+                p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
+                p15, p16, p17, p18, p19, p20);
+
+        } else {
+
+            log_message((void*) &WARNING_LOG_LEVEL, "Could not get model part by name. A part with that name does not exist.");
+        }
     }
 }
 

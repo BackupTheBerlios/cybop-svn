@@ -30,7 +30,7 @@
  * - Textual User Interface (TUI)
  * - Curses (termcap, ncurses)
  *
- * @version $Revision: 1.8 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,6 +56,7 @@ struct button {
 
 void create_test(void* p0) {
 
+/*??
     struct textual_screen* s = (struct textual_screen*) p0;
     s->button = (void*) malloc(sizeof(struct button));
 
@@ -68,16 +69,19 @@ void create_test(void* p0) {
     v->z = 1;
 
     b->label = (void*) "Exit";
+*/
 }
 
 void destroy_test(void* p0) {
 
+/*??
     struct textual_screen* s = (struct textual_screen*) p0;
     struct button* b = (struct button*) s->button;
     struct vector* v = (struct vector*) b->size;
 
     free(v);
     free(b);
+*/
 }
 
 void write_button_label(void* p0, void* p1) {
@@ -93,6 +97,7 @@ void write_button_label(void* p0, void* p1) {
 
 void paint_button(void* p0, void* p1) {
 
+/*??
     struct vector* s = (struct vector*) p0;
     FILE* f = (FILE*) p1;
     int w = s->x;
@@ -125,13 +130,16 @@ void paint_button(void* p0, void* p1) {
     fputc(10, stdout);
     fputc(10, stdout);
     fflush(stdout);
+*/
 }
 
 void send_button(void* p0) {
 
+/*??
     struct button* b = (struct button*) p0;
     paint_button(b->size, stdout);
     write_button_label(b->label, stdout);
+*/
 }
 
 /**
@@ -141,8 +149,10 @@ void send_button(void* p0) {
  */
 void send_textual_screen(void* p0) {
 
+/*??
     struct textual_screen* s = (struct textual_screen*) p0;
     send_button(s->button);
+*/
 }
 
 /**
@@ -152,6 +162,7 @@ void send_textual_screen(void* p0) {
  */
 void test_textual_screen() {
 
+/*??
     void* s = (void*) malloc(sizeof(struct textual_screen));
     create_test(s);
 
@@ -159,6 +170,7 @@ void test_textual_screen() {
 
     destroy_test(s);
     free(s);
+*/
 }
 
 /* CHARACTER_SCREEN_HANDLER_SOURCE */

@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.10 $ $Date: 2004-04-07 15:47:51 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -305,7 +305,7 @@ void get_character_array_element_index(const void* p0, const void* p1, const voi
                     void** a = (void**) p0;
 
                     int j = 0;
-                    char* e1 = NULL_CHARACTER_ARRAY;
+                    char* e1 = NULL_CHARACTER_POINTER;
 
                     while (1) {
 
@@ -384,7 +384,7 @@ void get_character_array_elements_index(const void* p0, const void* p1, const vo
                         void** a = (void**) p0;
 
                         int j = 0;
-                        char* e0 = NULL_CHARACTER_ARRAY;
+                        char* e0 = NULL_CHARACTER_POINTER;
                         int r = 0;
 
                         while (1) {
@@ -398,7 +398,7 @@ void get_character_array_elements_index(const void* p0, const void* p1, const vo
                             // Compare given element with the next elements at array plus index.
                             e0 = (char*) (*a + j);
 
-                            compare_character_arrays(e0, p2, p3, (void*) &r);
+                            compare_character_arrays((void*) &e0, p2, p3, (void*) &r);
 
                             if (r == 1) {
 

@@ -29,7 +29,7 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.13 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,6 +38,7 @@
 
 #include "../constants.c"
 #include "../logger/log_handler.c"
+#include "../model/array_handler.c"
 
 //
 // Constants.
@@ -118,13 +119,13 @@ void finalize_boolean(const void* p0, void* p1, void* p2) {
 
                 if (*t == 1) {
 
-                    *p = TRUE_BOOLEAN;
+//??                    *p = TRUE_BOOLEAN;
                     *ps = TRUE_BOOLEAN_SIZE;
 
                 } else {
 
                     // The default.
-                    *p = FALSE_BOOLEAN;
+//??                    *p = FALSE_BOOLEAN;
                     *ps = FALSE_BOOLEAN_SIZE;
                 }
 

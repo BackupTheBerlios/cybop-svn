@@ -25,7 +25,7 @@
  *
  * A complex consists of two floats, a real and an imaginary.
  *
- * @version $Revision: 1.11 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 
 #include "../constants.c"
 #include "../logger/log_handler.c"
+#include "../model/array_handler.c"
 
 //
 // Constants.
@@ -92,12 +93,12 @@ void initialize_complex(void* p0, const void* p1, const void* p2) {
 //??    fscanf(p1, %d, (void*) &(t->real));
 //??    fscanf(p1, %d, (void*) &(t->imaginary));
 
-    // The real.
-    int r = 0;
-    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &REAL_INDEX, (void*) &r);
-
-    // The imaginary.
+    // Initialize elements.
     int i = 0;
+    int r = 0;
+
+    // Set elements.
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &REAL_INDEX, (void*) &r);
     set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
 }
 
@@ -108,18 +109,20 @@ void initialize_complex(void* p0, const void* p1, const void* p2) {
  * @param p1 the persistent model
  * @param p2 the persistent model size
  */
-void finalize_complex(const void* p0, void* p1, void* p2) {
+void finalize_complex(void* p0, void* p1, void* p2) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Finalize complex.");
 
-    // The imaginary.
+    // Initialize elements.
     int i = 0;
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &COMPLEX_SIZE, (void*) &IMAGINARY_INDEX);
-
-    // The real.
     int r = 0;
+
+    // Get elements.
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &REAL_INDEX, (void*) &r);
+
+    // Remove elements.
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &COMPLEX_SIZE, (void*) &IMAGINARY_INDEX);
     remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &COMPLEX_SIZE, (void*) &REAL_INDEX);
 
 //??    fprintf(p1, %d, (void*) &(t->real));

@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.29 $ $Date: 2004-04-21 10:59:53 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,45 +49,10 @@
 #include "../logger/log_handler.c"
 #include "../model/array_handler.c"
 #include "../model/dynamics_models.c"
-#include "../model/map_handler.c"
 #include "../model/model_handler.c"
 #include "../signal/languages.c"
 #include "../signal/priorities.c"
 #include "../x_windows/x_windows_handler.c"
-
-//
-// Integer constants.
-//
-
-/** The zero number. */
-static const int ZERO_NUMBER = 0;
-
-/** The one number. */
-static const int ONE_NUMBER = 1;
-
-/** The two number. */
-static const int TWO_NUMBER = 2;
-
-/** The three number. */
-static const int THREE_NUMBER = 3;
-
-/** The four number. */
-static const int FOUR_NUMBER = 4;
-
-/** The five number. */
-static const int FIVE_NUMBER = 5;
-
-/** The six number. */
-static const int SIX_NUMBER = 6;
-
-/** The seven number. */
-static const int SEVEN_NUMBER = 7;
-
-/** The eight number. */
-static const int EIGHT_NUMBER = 8;
-
-/** The nine number. */
-static const int NINE_NUMBER = 9;
 
 //
 // Part constants.
@@ -96,23 +61,23 @@ static const int NINE_NUMBER = 9;
 /** The signal memory size. */
 static const int SIGNAL_MEMORY_SIZE = 6;
 
-/** The array size index. */
-static const int ARRAY_SIZE_INDEX = 0;
+/** The signals size index. */
+static const int SIGNALS_SIZE_INDEX = 0;
 
-/** The array count index. */
-static const int ARRAY_COUNT_INDEX = 1;
+/** The signals count index. */
+static const int SIGNALS_COUNT_INDEX = 1;
 
-/** The signals array index. */
-static const int SIGNALS_ARRAY_INDEX = 2;
+/** The signals index. */
+static const int SIGNALS_INDEX = 2;
 
-/** The priorities array index. */
-static const int PRIORITIES_ARRAY_INDEX = 3;
+/** The priorities index. */
+static const int PRIORITIES_INDEX = 3;
 
-/** The abstractions array index. */
-static const int ABSTRACTIONS_ARRAY_INDEX = 4;
+/** The abstractions index. */
+static const int ABSTRACTIONS_INDEX = 4;
 
-/** The abstractions sizes array index. */
-static const int ABSTRACTIONS_SIZES_ARRAY_INDEX = 5;
+/** The abstractions sizes index. */
+static const int ABSTRACTIONS_SIZES_INDEX = 5;
 
 //
 // Signal memory.
@@ -130,7 +95,7 @@ void create_signal_memory(void* p0) {
     // Create signal memory.
     create_array(p0, (void*) &SIGNAL_MEMORY_SIZE);
 
-    // Initialize parts.
+    // Initialize elements.
     int s = 0;
     int c = 0;
     void* sig = NULL_POINTER;
@@ -138,19 +103,19 @@ void create_signal_memory(void* p0) {
     void* a = NULL_POINTER;
     void* as = NULL_POINTER;
 
-    // Create parts.
+    // Create elements.
     create_array((void*) &sig, (void*) &s);
     create_array((void*) &p, (void*) &s);
     create_array((void*) &a, (void*) &s);
     create_array((void*) &as, (void*) &s);
 
-    // Set parts in ascending order.
-    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
-    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ARRAY_INDEX, (void*) &sig);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_ARRAY_INDEX, (void*) &a);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX, (void*) &as);
+    // Set elements in ascending order.
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_SIZE_INDEX, (void*) &s);
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_COUNT_INDEX, (void*) &c);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &sig);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
 }
 
 /**
@@ -160,7 +125,7 @@ void create_signal_memory(void* p0) {
  */
 void destroy_signal_memory(void* p0) {
 
-    // Initialize parts.
+    // Initialize elements.
     int s = 0;
     int c = 0;
     void* sig = NULL_POINTER;
@@ -197,22 +162,23 @@ void destroy_signal_memory(void* p0) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Destroy signal memory.");
 
-    // Get parts.
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ARRAY_INDEX, (void*) &sig);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_ARRAY_INDEX, (void*) &a);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX, (void*) &as);
+    // Get elements.
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_SIZE_INDEX, (void*) &s);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_COUNT_INDEX, (void*) &c);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &sig);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
 
-    // Remove parts in descending order.
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &ABSTRACTIONS_ARRAY_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &PRIORITIES_ARRAY_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &SIGNALS_ARRAY_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &ARRAY_SIZE_INDEX);
+    // Remove elements in descending order.
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &ABSTRACTIONS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &ABSTRACTIONS_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &PRIORITIES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &SIGNALS_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &SIGNALS_COUNT_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &SIGNALS_SIZE_INDEX);
 
-    // Destroy parts.
+    // Destroy elements.
     destroy_array((void*) &sig, (void*) &s);
     destroy_array((void*) &p, (void*) &s);
     destroy_array((void*) &a, (void*) &s);
@@ -237,7 +203,7 @@ void destroy_signal_memory(void* p0) {
  */
 void set_signal(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
 
-    // Initialize parts.
+    // Initialize elements.
     int s = 0;
     int c = 0;
     void* sig = NULL_POINTER;
@@ -245,47 +211,47 @@ void set_signal(void* p0, const void* p1, const void* p2, const void* p3, const 
     void* a = NULL_POINTER;
     void* as = NULL_POINTER;
 
-    // Get parts.
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ARRAY_INDEX, (void*) &sig);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_ARRAY_INDEX, (void*) &a);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX, (void*) &as);
+    // Get elements.
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_SIZE_INDEX, (void*) &s);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_COUNT_INDEX, (void*) &c);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &sig);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
 
     // The index.
     int i = c;
 
     if (i >= 0) {
 
-        if (i >= s) {
+        if (i == s) {
 
-            // Double array size.
+            // Increase size.
             s = s * 2 + 1;
 
-            // Resize parts.
+            // Resize elements.
             resize_array(sig, (void*) &s);
             resize_array(p, (void*) &s);
             resize_array(a, (void*) &s);
             resize_array(as, (void*) &s);
 
             // Set array size which is equal for all arrays.
-            set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
+            set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_SIZE_INDEX, (void*) &s);
         }
 
         if (i < s) {
 
-            // Set element (signal).
+            // Set signal.
             set_array_element((void*) &sig, (void*) &POINTER_ARRAY, (void*) &i, p1);
             set_array_element((void*) &p, (void*) &INTEGER_ARRAY, (void*) &i, p2);
             set_array_element((void*) &a, (void*) &POINTER_ARRAY, (void*) &i, p3);
             set_array_element((void*) &as, (void*) &POINTER_ARRAY, (void*) &i, p4);
 
-            // Increment element count.
+            // Increment count.
             c++;
 
-            // Set array count which is equal for all arrays.
-            set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
+            // Set count.
+            set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_COUNT_INDEX, (void*) &c);
 
         } else {
 
@@ -312,7 +278,7 @@ void remove_signal(void* p0, const void* p1) {
 
         if (*i >= 0) {
 
-            // Initialize parts.
+            // Initialize elements.
             int s = 0;
             int c = 0;
             void* sig = NULL_POINTER;
@@ -320,31 +286,31 @@ void remove_signal(void* p0, const void* p1) {
             void* a = NULL_POINTER;
             void* as = NULL_POINTER;
 
-            // Get parts.
-            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
-            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ARRAY_INDEX, (void*) &sig);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_ARRAY_INDEX, (void*) &a);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX, (void*) &as);
+            // Get elements.
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_SIZE_INDEX, (void*) &s);
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_COUNT_INDEX, (void*) &c);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &sig);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
 
-            if (*i < s) {
+            if (*i < c) {
 
-                // Remove element (signal).
-                remove_array_element((void*) &sig, (void*) &POINTER_ARRAY, (void*) &s, p1);
-                remove_array_element((void*) &p, (void*) &INTEGER_ARRAY, (void*) &s, p1);
-                remove_array_element((void*) &a, (void*) &POINTER_ARRAY, (void*) &s, p1);
-                remove_array_element((void*) &as, (void*) &POINTER_ARRAY, (void*) &s, p1);
+                // Remove signal.
+                remove_array_element((void*) &sig, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &p, (void*) &INTEGER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &a, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &as, (void*) &POINTER_ARRAY, (void*) &c, p1);
 
-                // Decrement element count.
+                // Decrement count.
                 c--;
 
-                // Set array count which is equal for all arrays.
-                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
+                // Set count.
+                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_COUNT_INDEX, (void*) &c);
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove signal. The index exceeds the size.");
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove signal. The index exceeds the count.");
             }
 
         } else {
@@ -376,7 +342,7 @@ void get_signal(const void* p0, const void* p1, void* p2, void* p3, void* p4, vo
 
         if (*i >= 0) {
 
-            // Initialize parts.
+            // Initialize elements.
             int s = 0;
             int c = 0;
             void* sig = NULL_POINTER;
@@ -384,17 +350,17 @@ void get_signal(const void* p0, const void* p1, void* p2, void* p3, void* p4, vo
             void* a = NULL_POINTER;
             void* as = NULL_POINTER;
 
-            // Get parts.
-            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
-            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ARRAY_INDEX, (void*) &sig);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_ARRAY_INDEX, (void*) &a);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX, (void*) &as);
+            // Get elements.
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_SIZE_INDEX, (void*) &s);
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_COUNT_INDEX, (void*) &c);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &sig);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
 
-            if (*i < s) {
+            if (*i < c) {
 
-                // Get element (signal).
+                // Get signal.
                 get_array_element((void*) &sig, (void*) &POINTER_ARRAY, p1, p2);
                 get_array_element((void*) &p, (void*) &INTEGER_ARRAY, p1, p3);
                 get_array_element((void*) &a, (void*) &POINTER_ARRAY, p1, p4);
@@ -402,7 +368,7 @@ void get_signal(const void* p0, const void* p1, void* p2, void* p3, void* p4, vo
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not get signal. The index exceeds the size.");
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not get signal. The index exceeds the count.");
             }
 
         } else {
@@ -428,13 +394,13 @@ void get_highest_priority_index(const void* p0, void* p1) {
 
         int* i = (int*) p1;
 
-        // Initialize parts.
+        // Initialize elements.
         int c = 0;
         void* p = NULL_POINTER;
 
-        // Get parts.
-        get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
-        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
+        // Get elements.
+        get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_COUNT_INDEX, (void*) &c);
+        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
 
         // The loop variable.
         int j = 0;
@@ -482,75 +448,47 @@ void get_highest_priority_index(const void* p0, void* p1) {
  * @param p1 the compound signal
  * @param p2 the priority
  */
-void handle_compound_signal(const void* p0, const void* p1, const void* p2) {
+void handle_compound_signal(void* p0, const void* p1, const void* p2) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Handle compound signal.");
 
-    // Initialize parts.
+    // Initialize elements.
+    int c = 0;
     void* pa = NULL_POINTER;
-    int pas = 0;
-    void* pl = NULL_POINTER;
-    int pls = 0;
+    void* pas = NULL_POINTER;
     void* pm = NULL_POINTER;
-    int pms = 0;
-    void* poa = NULL_POINTER;
-    int poas = 0;
-    void* pol = NULL_POINTER;
-    int pols = 0;
-    void* pom = NULL_POINTER;
-    int poms = 0;
-    void* ca = NULL_POINTER;
-    int cas = 0;
-    void* cl = NULL_POINTER;
-    int cls = 0;
-    void* cm = NULL_POINTER;
-    int cms = 0;
 
-    get_model_part(p1, n, ns,
-        (void*) &pa, (void*) &pas, (void*) &pl, (void*) &pls, (void*) &pm, (void*) &pms,
-        (void*) &poa, (void*) &poas, (void*) &pol, (void*) &pols, (void*) &pom, (void*) &poms,
-        (void*) &ca, (void*) &cas, (void*) &cl, (void*) &cls, (void*) &cm, (void*) &cms);
+    // Get elements.
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
 
-    int count = 0;
-    get_array_count(m->part_models, (void*) &count);
-    int p = 0;
-    int i = 0;
-    int* position = NULL_POINTER;
-    void* abstraction = NULL_POINTER;
-    void* location = NULL_POINTER;
-    void* part = NULL_POINTER;
+    // The part signal model.
+    int j = 0;
+    void* a = NULL_POINTER;
+    int as = 0;
+    void* m = NULL_POINTER;
 
-    // All positions.
-    while (p < count) {
+    while (1) {
 
-        // All parts.
-        while (i < count) {
+        if (j >= c) {
 
-            // Determine position.
-            position = (int*) get_map_element_at_index(m->position_models, (void*) &i);
-
-            // All parts at the current position.
-            if (*position == p) {
-
-                // Determine abstraction.
-                get_model_part_at_index(m->part_abstractions, (void*) &i, abstraction, abstraction_size);
-
-                // Determine part signal as dynamics model.
-                part = get_map_element_at_index(m->part_models, (void*) &i);
-
-                // Add "part" signal to memory, using the "whole" signal's priority.
-                // (Each signal has a priority. A signal may consist of "part"
-                // signals. The "part" signals cannot have higher/lower priority
-                // than their original "whole" signal.)
-                set_signal(p0, signal, p2, abstraction, abstraction_size);
-
-                break;
-            }
-
-            i++;
+            break;
         }
 
-        p++;
+        // Get part signal.
+        get_array_element((void*) &pa, (void*) &POINTER_ARRAY, (void*) &j, (void*) &a);
+        get_array_element((void*) &pas, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &as);
+        get_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &j, (void*) &m);
+
+        // Add part signal to memory, using the whole signal's priority.
+        // (Each signal has a priority. A signal may consist of part
+        // signals. The part signals cannot have higher/lower priority
+        // than their original whole signal.)
+        set_signal(p0, (void*) &m, p2, (void*) &a, (void*) &as);
+
+        j++;
     }
 }
 
@@ -563,151 +501,294 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2) {
  * @param p3 the internals
  * @param p4 the shutdown flag
  */
-void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Handle operation signal.");
 
-    struct operation* o = (struct operation*) p0;
+    // Initialize elements.
+    int s = 0;
+    void* p = NULL_POINTER;
+    void* ps = NULL_POINTER;
 
-    if (o != NULL_POINTER) {
+    // Get elements.
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARAMETERS_SIZE_INDEX, (void*) &s);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &p);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_INDEX, (void*) &ps);
 
-        void* v = o->value;
+    // Initialize parameter names.
+    // The first parameter p0 is the operation name.
+    // Following parameters p1 .. are input and output names.
+    void* param0 = NULL_POINTER;
+    int param0s = 0;
+    void* param1 = NULL_POINTER;
+    int param1s = 0;
+    void* param2 = NULL_POINTER;
+    int param2s = 0;
+    void* param3 = NULL_POINTER;
+    int param3s = 0;
+    void* param4 = NULL_POINTER;
+    int param4s = 0;
+    void* param5 = NULL_POINTER;
+    int param5s = 0;
+    void* param6 = NULL_POINTER;
+    int param6s = 0;
+    void* param7 = NULL_POINTER;
+    int param7s = 0;
+    void* param8 = NULL_POINTER;
+    int param8s = 0;
+    void* param9 = NULL_POINTER;
+    int param9s = 0;
+    void* param10 = NULL_POINTER;
+    int param10s = 0;
 
-        if (v != NULL_POINTER) {
+    // Get parameter names.
+    int j = 0;
 
-            log_message((void*) &INFO_LOG_LEVEL, "TEST 0");
+    while (1) {
 
-            char* a = (char*) get_array_element(v, (void*) &ZERO_NUMBER);
+        if (j >= s) {
 
-            log_message((void*) &INFO_LOG_LEVEL, "TEST 1");
-
-            if (strcmp(a, ADD_MODEL) == 0) {
-
-                add(get_array_element(v, (void*) &ONE_NUMBER), get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER));
-
-            } else if (strcmp(a, CREATE_STATICS_MODEL) == 0) {
-
-                struct model* s = (struct model*) p1;
-
-                if (s != NULL_POINTER) {
-
-                    //?? Work this out! Hand over 9 or just 3 parameters,
-                    //?? for only part or also position and constraint?
-                    void* m = create_model(get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
-                    set_map_element_with_name(s->part_models, get_array_element(v, (void*) &ONE_NUMBER), m);
-
-                } else {
-
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle create statics model. The statics is null.");
-                }
-
-            } else if (strcmp(a, DESTROY_STATICS_MODEL) == 0) {
-
-                struct model* s = (struct model*) p1;
-
-                if (s != NULL_POINTER) {
-
-                    //?? Work this out! Hand over 9 or just 3 parameters,
-                    //?? for only part or also position and constraint?
-                    void* m = get_map_element_with_name(s->part_models, get_map_element_with_name(v, (void*) &ONE_NUMBER));
-                    destroy_model(m, get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
-
-                } else {
-
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle destroy statics model. The statics is null.");
-                }
-
-            } else if (strcmp(a, CREATE_DYNAMICS_MODEL) == 0) {
-
-                struct model* d = (struct model*) p2;
-
-                if (d != NULL_POINTER) {
-
-                    //?? Work this out! Hand over 9 or just 3 parameters,
-                    //?? for only part or also position and constraint?
-                    void* m = create_model(get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
-                    set_map_element_with_name(d->part_models, get_array_element(v, (void*) &ONE_NUMBER), m);
-
-                } else {
-
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle create dynamics model. The dynamics is null.");
-                }
-
-            } else if (strcmp(a, DESTROY_DYNAMICS_MODEL) == 0) {
-
-                struct model* d = (struct model*) p2;
-
-                if (d != NULL_POINTER) {
-
-                    //?? Work this out! Hand over 9 or just 3 parameters,
-                    //?? for only part or also position and constraint?
-                    void* m = get_map_element_with_name(d->part_models, get_map_element_with_name(v, (void*) &ONE_NUMBER));
-                    destroy_model(m, get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
-
-                } else {
-
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle destroy dynamics model. The dynamics is null.");
-                }
-
-            } else if (strcmp(a, SEND_MODEL) == 0) {
-
-                void* l = get_map_element_with_name(v, "language");
-
-                if (strcmp(l, X_WINDOWS_LANGUAGE) == 0) {
-
-                    send_x_windows_output(get_array_element(v, (void*) &ONE_NUMBER), get_array_element(v, (void*) &TWO_NUMBER), p3);
-
-                } else if (strcmp(l, TUI_LANGUAGE) == 0) {
-
-                }
-
-            } else if (strcmp(a, RECEIVE_MODEL) == 0) {
-
-            } else if (strcmp(a, EXIT_MODEL) == 0) {
-
-                log_message((void*) &INFO_LOG_LEVEL, "Set shutdown flag.");
-
-                int* f = (int*) p4;
-                *f = 1;
-            }
-
-/*??
-            //?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
-            if (strcmp(l, "mouse_moved") == 0) {
-
-                Model statics = statics;
-
-                set_model_element(statics, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
-                set_model_element(statics, "mouse.pointer_position.x_distance.unit", "pixel");
-                set_model_element(statics, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
-                set_model_element(statics, "mouse.pointer_position.y_distance.unit", "pixel");
-
-            } else if (strcmp(l, "mouse_clicked") == 0) {
-
-                void* main_frame = get_statics_model_part(statics, (void*) "main_frame");
-                struct vector* pointer_position = get_statics_model_part(statics, (void*) "mouse.pointer_position");
-
-                reset_signal(s);
-
-                if (pointer_position != NULL_POINTER) {
-
-    //??            mouse_clicked_action(main_frame, (void*) pointer_position->x, (void*) pointer_position->y, (void*) pointer_position->z, s->predicate);
-
-                } else {
-
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is null.");
-                }
-            }
-*/
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The operation value is null.");
+            break;
         }
+
+        if (j == 0) {
+
+            get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param0);
+            get_array_element((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param0s);
+
+        } else if (j == 1) {
+
+            get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param1);
+            get_array_element((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param1s);
+
+        } else if (j == 2) {
+
+            get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param2);
+            get_array_element((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param2s);
+
+        } else if (j == 3) {
+
+            get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param3);
+            get_array_element((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param3s);
+
+        } else if (j == 4) {
+
+            get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param4);
+            get_array_element((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param4s);
+
+        } else if (j == 5) {
+
+            get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param5);
+            get_array_element((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param5s);
+
+        } else if (j == 6) {
+
+            get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param6);
+            get_array_element((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param6s);
+
+        } else if (j == 7) {
+
+            get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param7);
+            get_array_element((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param7s);
+
+        } else if (j == 8) {
+
+            get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param8);
+            get_array_element((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param8s);
+
+        } else if (j == 9) {
+
+            get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param9);
+            get_array_element((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param9s);
+
+        } else if (j == 10) {
+
+            get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param10);
+            get_array_element((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param10s);
+        }
+
+        j++;
+    }
+
+    // The comparison result.
+    int r = 0;
+
+    // Add.
+    compare_arrays((void*) &param0, (void*) &param0s, (void*) &ADD_MODEL, (void*) &ADD_MODEL_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+
+    if (r == 1) {
+
+        add(p1, (void*) &param1, (void*) &param1s, (void*) &param2, (void*) &param2s, (void*) &param3, (void*) &param3s);
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The signal model is null.");
-    }
+    // Create statics.
+    compare_arrays((void*) &param0, (void*) &param0s, (void*) &CREATE_STATICS_MODEL, (void*) &CREATE_STATICS_MODEL_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+
+    if (r == 1) {
+
+/*??
+        void* m = NULL_POINTER;
+        int ms = 0;
+
+        * @param p0 the transient model
+        * @param p1 the transient model size
+        * @param p2 the persistent model
+        * @param p3 the persistent model size
+        * @param p4 the abstraction
+        * @param p5 the abstraction size
+        //?? Work this out! Hand over 9 or just 3 parameters,
+        //?? for only part or also position and constraint?
+        //?? ATTENTION! One of the given cybol parameters must specify
+        //?? the whole model that the newly created part model will be attached to.
+        create_model(get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
+        set_map_element_with_name(s->part_models, get_array_element(v, (void*) &ONE_NUMBER), m);
+*/
+
+    } else {
+
+    // Destroy statics.
+    compare_arrays((void*) &param0, (void*) &param0s, (void*) &DESTROY_STATICS_MODEL, (void*) &DESTROY_STATICS_MODEL_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+
+    if (r == 1) {
+
+/*??
+        struct model* s = (struct model*) p1;
+
+        if (s != NULL_POINTER) {
+
+            //?? Work this out! Hand over 9 or just 3 parameters,
+            //?? for only part or also position and constraint?
+            void* m = get_map_element_with_name(s->part_models, get_map_element_with_name(v, (void*) &ONE_NUMBER));
+            destroy_model(m, get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not handle destroy statics model. The statics is null.");
+        }
+*/
+
+    } else {
+
+    // Create dynamics.
+    compare_arrays((void*) &param0, (void*) &param0s, (void*) &CREATE_DYNAMICS_MODEL, (void*) &CREATE_DYNAMICS_MODEL_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+
+    if (r == 1) {
+
+/*??
+        struct model* d = (struct model*) p2;
+
+        if (d != NULL_POINTER) {
+
+            //?? Work this out! Hand over 9 or just 3 parameters,
+            //?? for only part or also position and constraint?
+            void* m = create_model(get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
+            set_map_element_with_name(d->part_models, get_array_element(v, (void*) &ONE_NUMBER), m);
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not handle create dynamics model. The dynamics is null.");
+        }
+*/
+
+    } else {
+
+    // Destroy dynamics.
+    compare_arrays((void*) &param0, (void*) &param0s, (void*) &DESTROY_DYNAMICS_MODEL, (void*) &DESTROY_DYNAMICS_MODEL_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+
+    if (r == 1) {
+
+/*??
+        struct model* d = (struct model*) p2;
+
+        if (d != NULL_POINTER) {
+
+            //?? Work this out! Hand over 9 or just 3 parameters,
+            //?? for only part or also position and constraint?
+            void* m = get_map_element_with_name(d->part_models, get_map_element_with_name(v, (void*) &ONE_NUMBER));
+            destroy_model(m, get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not handle destroy dynamics model. The dynamics is null.");
+        }
+*/
+
+    } else {
+
+    // Send.
+    compare_arrays((void*) &param0, (void*) &param0s, (void*) &SEND_MODEL, (void*) &SEND_MODEL_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+
+    if (r == 1) {
+
+/*??
+        void* l = get_map_element_with_name(v, "language");
+
+        if (strcmp(l, X_WINDOWS_LANGUAGE) == 0) {
+
+            send_x_windows_output(get_array_element(v, (void*) &ONE_NUMBER), get_array_element(v, (void*) &TWO_NUMBER), p3);
+
+        } else if (strcmp(l, TUI_LANGUAGE) == 0) {
+
+        }
+*/
+
+    } else {
+
+    // Receive.
+    compare_arrays((void*) &param0, (void*) &param0s, (void*) &RECEIVE_MODEL, (void*) &RECEIVE_MODEL_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+
+    if (r == 1) {
+
+    } else {
+
+    // Exit.
+    compare_arrays((void*) &param0, (void*) &param0s, (void*) &EXIT_MODEL, (void*) &EXIT_MODEL_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+
+    if (r == 1) {
+
+        log_message((void*) &INFO_LOG_LEVEL, "Set shutdown flag.");
+
+        int* f = (int*) p4;
+        *f = 1;
+
+    } // Exit.
+    } // Receive.
+    } // Send.
+    } // Destroy dynamics.
+    } // Create dynamics.
+    } // Destroy statics.
+    } // Create statics.
+    } // Add.
+
+/*??
+        //?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
+        if (strcmp(l, "mouse_moved") == 0) {
+
+            Model statics = statics;
+
+            set_model_element(statics, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
+            set_model_element(statics, "mouse.pointer_position.x_distance.unit", "pixel");
+            set_model_element(statics, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
+            set_model_element(statics, "mouse.pointer_position.y_distance.unit", "pixel");
+
+        } else if (strcmp(l, "mouse_clicked") == 0) {
+
+            void* main_frame = get_statics_model_part(statics, (void*) "main_frame");
+            struct vector* pointer_position = get_statics_model_part(statics, (void*) "mouse.pointer_position");
+
+            reset_signal(s);
+
+            if (pointer_position != NULL_POINTER) {
+
+//??            mouse_clicked_action(main_frame, (void*) pointer_position->x, (void*) pointer_position->y, (void*) pointer_position->z, s->predicate);
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is null.");
+            }
+        }
+*/
 }
 
 /* SIGNAL_MEMORY_HANDLER_SOURCE */

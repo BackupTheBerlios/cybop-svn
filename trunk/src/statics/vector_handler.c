@@ -25,7 +25,7 @@
  *
  * A vector contains the three coordinates: x, y, z.
  *
- * @version $Revision: 1.11 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,16 +97,14 @@ void initialize_vector(void* p0, const void* p1, const void* p2) {
 //??    fscanf(p1, %d, &(m->y));
 //??    fscanf(p1, %d, &(m->z));
 
-    // The x.
-    int x = 0;
-    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
-
-    // The y.
-    int y = 0;
-    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
-
-    // The z.
+    // Initialize elements.
     int z = 0;
+    int y = 0;
+    int x = 0;
+
+    // Set elements.
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
     set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
 
 /*??
@@ -146,25 +144,25 @@ void initialize_vector(void* p0, const void* p1, const void* p2) {
  * @param p1 the persistent model
  * @param p2 the persistent model size
  */
-void finalize_vector(const void* p0, void* p1, void* p2) {
+void finalize_vector(void* p0, void* p1, void* p2) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Finalize vector.");
 
     // Write output stream and transform from vector.
 
-    // The z.
+    // Initialize elements.
     int z = 0;
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_SIZE, (void*) &Z_INDEX);
-
-    // The y.
     int y = 0;
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_SIZE, (void*) &Y_INDEX);
-
-    // The x.
     int x = 0;
+
+    // Get elements.
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
+
+    // Remove elements.
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_SIZE, (void*) &Z_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_SIZE, (void*) &Y_INDEX);
     remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_SIZE, (void*) &X_INDEX);
 
 //??    fprintf(p1, %d, &(m->x));

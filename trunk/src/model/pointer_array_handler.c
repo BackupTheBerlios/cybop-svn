@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.9 $ $Date: 2004-04-07 15:47:51 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,8 +79,8 @@ void compare_pointer_arrays(const void* p0, const void* p1, const void* p2, void
                     void** a0 = (void**) p0;
 
                     int i = 0;
-                    void** e0 = NULL_POINTER_POINTER;
-                    void** e1 = NULL_POINTER_POINTER;
+                    void** e0 = &NULL_POINTER;
+                    void** e1 = &NULL_POINTER;
 
                     while (1) {
 
@@ -195,8 +195,8 @@ void remove_pointer_array_element(const void* p0, const void* p1, const void* p2
                 // Initialize loop variable with index.
                 // Do not use the index itself as it was handed over as constant parameter!
                 int j = *i;
-                void** e0 = NULL_POINTER_POINTER;
-                void** e1 = NULL_POINTER_POINTER;
+                void** e0 = &NULL_POINTER;
+                void** e1 = &NULL_POINTER;
 
                 // Starting from the given index, move all remaining elements one
                 // place towards the beginning of the elements.
@@ -305,7 +305,7 @@ void get_pointer_array_element_index(const void* p0, const void* p1, const void*
                     void** a = (void**) p0;
 
                     int j = 0;
-                    void** e1 = NULL_POINTER_POINTER;
+                    void** e1 = &NULL_POINTER;
 
                     while (1) {
 

@@ -28,7 +28,7 @@
  * For higher performance, it is mostly better to use floating point numbers
  * (float) which can be calculated by the Arithmetic Logic Unit (ALU).
  *
- * @version $Revision: 1.11 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,6 +37,7 @@
 
 #include "../constants.c"
 #include "../logger/log_handler.c"
+#include "../model/array_handler.c"
 
 //
 // Constants.
@@ -94,12 +95,12 @@ void initialize_fraction(void* p0, const void* p1, const void* p2) {
 
 //??    sscanf(p1, %l, (void*) &(m->value));
 
-    // The numerator.
-    int n = 0;
-    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX, (void*) &n);
-
-    // The denominator.
+    // Initialize elements.
     int d = 0;
+    int n = 0;
+
+    // Set elements.
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX, (void*) &n);
     set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DENOMINATOR_INDEX, (void*) &d);
 }
 
@@ -110,18 +111,20 @@ void initialize_fraction(void* p0, const void* p1, const void* p2) {
  * @param p1 the persistent model
  * @param p2 the persistent model size
  */
-void finalize_fraction_model(const void* p0, void* p1, void* p2) {
+void finalize_fraction_model(void* p0, void* p1, void* p2) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Finalize fraction.");
 
-    // The denominator.
+    // Initialize elements.
     int d = 0;
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DENOMINATOR_INDEX, (void*) &d);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_SIZE, (void*) &DENOMINATOR_INDEX);
-
-    // The numerator.
     int n = 0;
+
+    // Get elements.
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DENOMINATOR_INDEX, (void*) &d);
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX, (void*) &n);
+
+    // Remove elements.
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_SIZE, (void*) &DENOMINATOR_INDEX);
     remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_SIZE, (void*) &NUMERATOR_INDEX);
 
 //??    sprintf(p1, %l, (void*) &(m->value));

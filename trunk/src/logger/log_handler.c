@@ -24,7 +24,7 @@
  * This file handles log messages.
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.10 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,9 +32,11 @@
 #define LOG_HANDLER_SOURCE
 
 #include <stdio.h>
+#include <string.h>
+#include "../constants.c"
 
 //
-// Constants.
+// Log level constants.
 //
 
 /** The off log level. */
@@ -48,6 +50,10 @@ static const int WARNING_LOG_LEVEL = 2;
 
 /** The info log level. */
 static const int INFO_LOG_LEVEL = 3;
+
+//
+// Log level name constants.
+//
 
 /** The error log level name. */
 static const char* ERROR_LOG_LEVEL_NAME = "Error";
@@ -73,27 +79,40 @@ static int* log_level;
  * Returns the log level name.
  *
  * @param p0 the level
- * @return the log level name
+ * @param p1 the level name
  */
-void* get_log_level_name(void* p0) {
+void get_log_level_name(const void* p0, void* p1) {
 
-    void* n = NULL_POINTER;
-    int* l = (int*) p0;
+    if (p1 != NULL_POINTER) {
 
-    if (*l == INFO_LOG_LEVEL) {
+        char** n = (char**) p1;
 
-        n = (void*) INFO_LOG_LEVEL_NAME;
+        if (p0 != NULL_POINTER) {
 
-    } else if (*l == WARNING_LOG_LEVEL) {
+            int* l = (int*) p0;
 
-        n = (void*) WARNING_LOG_LEVEL_NAME;
+            if (*l == INFO_LOG_LEVEL) {
 
-    } else if (*l == ERROR_LOG_LEVEL) {
+                strcat(*n, INFO_LOG_LEVEL_NAME);
 
-        n = (void*) ERROR_LOG_LEVEL_NAME;
+            } else if (*l == WARNING_LOG_LEVEL) {
+
+                strcat(*n, WARNING_LOG_LEVEL_NAME);
+
+            } else if (*l == ERROR_LOG_LEVEL) {
+
+                strcat(*n, ERROR_LOG_LEVEL_NAME);
+            }
+
+        } else {
+
+            show_message((void*) "Error: Could not get log level name. The level is null.\n");
+        }
+
+    } else {
+
+        show_message((void*) "Error: Could not get log level name. The level name is null.\n");
     }
-
-    return n;
 }
 
 /**
@@ -101,12 +120,18 @@ void* get_log_level_name(void* p0) {
  *
  * @param p0 the message
  */
-void show_message(void* p0) {
+void show_message(const void* p0) {
 
     if (p0 != NULL_POINTER) {
 
-//??        fputs((char*) p0, stdout);
-        fputs((char*) p0, stderr);
+        char* m = (char*) p0;
+
+//??        fputs(m, stdout);
+        fputs(m, stderr);
+
+    } else {
+
+        fputs("Error: Could not show message. The message is null.\n", stderr);
     }
 }
 
@@ -116,18 +141,27 @@ void show_message(void* p0) {
  * @param p0 the level
  * @param p1 the message
  */
-void log_message(void* p0, void* p1) {
+void log_message(const void* p0, const void* p1) {
 
-    int* l = (int*) p0;
+    if (p0 != NULL_POINTER) {
 
-    if (*l <= *log_level) {
+        int* l = (int*) p0;
 
-        void* n = get_log_level_name(p0);
+        if (*l <= *log_level) {
 
-        show_message(n);
-        show_message((void*) ": ");
-        show_message(p1);
-        show_message((void*) "\n");
+            char* n = "";
+
+            get_log_level_name(p0, (void*) &n);
+            strcat(n, ": ");
+            strcat(n, (char*) p1);
+            strcat(n, "\n");
+
+            show_message((void*) n);
+        }
+
+    } else {
+
+        show_message((void*) "Error: Could not log message. The level is null.\n");
     }
 }
 
