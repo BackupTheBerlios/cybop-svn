@@ -25,7 +25,7 @@
  * - parse an xml stream into an xml model
  * - serialize an xml model into an xml stream
  *
- * @version $Revision: 1.5 $ $Date: 2004-08-23 07:52:25 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-12-17 12:48:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -296,7 +296,7 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                 // This is used as index to set the termination character.
                 i = *sc;
                 // Add string termination to temporary null-terminated file name.
-                set_array_element((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CHARACTER);
+                set_array_element((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CONTROL_CHARACTER);
 
                 // Initialize the library.
                 // Check potential ABI mismatches between the version

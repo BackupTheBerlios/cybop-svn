@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.26 $ $Date: 2004-11-30 15:31:15 $ $Author: rholzmueller $
+ * @version $Revision: 1.27 $ $Date: 2004-12-17 12:48:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -268,7 +268,7 @@ void test_file_read() {
     fprintf(stderr, "fnc: %i\n", fnc);
 
     int j = 0;
-    char c = NULL_CHARACTER;
+    char c = NULL_CONTROL_CHARACTER;
 
     while (1) {
 

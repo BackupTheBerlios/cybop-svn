@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-12-17 12:48:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -65,7 +65,7 @@ void parse_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4)
         // This is used as index to set the termination character.
         i = *sc;
         // Add string termination to temporary null-terminated string.
-        set_array_element((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CHARACTER);
+        set_array_element((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CONTROL_CHARACTER);
 
         // The tail variable is useless here and only needed for the string
         // transformation function. If the whole string array consists of

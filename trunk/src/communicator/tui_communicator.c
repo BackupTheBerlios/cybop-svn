@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-11-30 15:20:37 $ $Author: rholzmueller $
+ * @version $Revision: 1.3 $ $Date: 2004-12-17 12:48:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -75,7 +75,7 @@ void receive_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                     // Set terminated file name by first copying the actual name and then
                     // adding the null termination character.
                     set_array_elements((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
-                    set_array_element((void*) &tn, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CHARACTER);
+                    set_array_element((void*) &tn, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CONTROL_CHARACTER);
 
                     // Open file.
                     // CAUTION! The file name cannot be handed over as is.
@@ -201,8 +201,8 @@ void send_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                     // This is used as index to set the termination character.
                     i = *sc;
                     // Add string termination to temporary null-terminated message.
-                    set_array_element((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CHARACTER);
-                    
+                    set_array_element((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CONTROL_CHARACTER);
+
                     fputs(tmp, (FILE*) *d);
                     fputs("\n", (FILE*) *d);
 
@@ -249,9 +249,9 @@ void send_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
     }
 
 /*??
-    char r = NULL_CHARACTER;
+    char r = NULL_CONTROL_CHARACTER;
     int j = 0;
-    char c = NULL_CHARACTER;
+    char c = NULL_CONTROL_CHARACTER;
 
     while (1) {
 

@@ -28,7 +28,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.10 $ $Date: 2004-11-09 07:28:30 $ $Author: rholzmueller $
+ * @version $Revision: 1.11 $ $Date: 2004-12-17 12:48:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -304,7 +304,7 @@ void log_message(const void* p0, const void* p1, const void* p2) {
                 // Add new line to log entry.
                 if ((ei + 1) < ec) {
 
-                    add_log_detail((void*) &e, (void*) &ei, (void*) &NEW_LINE_CHARACTER);
+                    add_log_detail((void*) &e, (void*) &ei, (void*) &LINE_FEED_CONTROL_CHARACTER);
                     ei = ei + 1;
 
                 } else {
@@ -315,7 +315,7 @@ void log_message(const void* p0, const void* p1, const void* p2) {
                 // Add string termination to log entry.
                 if ((ei + 1) < ec) {
 
-                    add_log_detail((void*) &e, (void*) &ei, (void*) &NULL_CHARACTER);
+                    add_log_detail((void*) &e, (void*) &ei, (void*) &NULL_CONTROL_CHARACTER);
                     ei = ei + 1;
 
                 } else {
@@ -343,18 +343,18 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
 /**
  * Logs the message for debug
- * 
+ *
  * author: rolf
- * 
- * @param pMessage message for logging, this is a null terminated string 
+ *
+ * @param pMessage message for logging, this is a null terminated string
  *                 for simple logging debug infos
  */
 
 void log_message_debug(const char* pMessage) {
 
     int message_count = strlen(pMessage);
-    log_message( (void*) &DEBUG_LOG_LEVEL, 
-                 (void*) &pMessage, 
+    log_message( (void*) &DEBUG_LOG_LEVEL,
+                 (void*) &pMessage,
                  (void*) &message_count );
 }
 
