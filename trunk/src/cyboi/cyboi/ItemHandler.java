@@ -29,7 +29,7 @@ package cyboi;
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.24 $ $Date: 2003-08-05 00:00:12 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2003-08-05 13:15:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -119,6 +119,7 @@ class ItemHandler {
             } else if (a.equals(Statics.COMPLEX)) {
 
                 ItemHandler.finalize_item(p0, p1);
+                ItemHandler.finalize_item_containers(p0);
             }
             
         } else {
@@ -251,8 +252,8 @@ class ItemHandler {
         if (c != null) {
             
             java.lang.System.out.println("INFO: Initialize item elements.");
-            initialize_java_object(p0, c.java_object);
-            initialize_items(p0, c.items);
+            ItemHandler.initialize_java_object(p0, c.java_object);
+            ItemHandler.initialize_items(p0, c.items);
             
         } else {
             
@@ -291,6 +292,16 @@ class ItemHandler {
         
                 java.lang.System.out.println("INFO: Initialize java object.");
 
+//?? --
+                java.lang.Object test = null;
+                
+                for (int x = 0; x < MapHandler.get_map_size(o.items); x++) {
+    
+                    test = ArrayHandler.get_array_element(((Map) o.items).names, x);
+                    java.lang.System.out.println("TEST: " + test);
+                }
+                java.lang.System.exit(0);
+//?? --
                 java.lang.Object c = MapHandler.get_map_element(o.items, CategoryHandler.CATEGORY);
                 i.java_object = JavaObjectHandler.create_java_object(c);
                 JavaObjectHandler.initialize_java_object_attributes(i.java_object, o.items);
@@ -325,7 +336,7 @@ class ItemHandler {
      * @param p0 the item
      * @param p1 the category items
      */
-    static void initialize_items(java.lang.Object p0, java.lang.Object p1) {
+    static void initialize_items(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
         Item i = (Item) p0;
 
@@ -336,6 +347,17 @@ class ItemHandler {
             int size = MapHandler.get_map_size(m);
             java.lang.Object ci = null;
             Item o = new Item();
+
+//?? --
+            java.lang.Object test = null;
+            
+            for (int x = 0; x < size; x++) {
+
+                test = MapHandler.get_map_element(m, x);
+                java.lang.System.out.println("TEST: " + test);
+            }
+            java.lang.System.exit(0);
+//?? --
                 
             while (count < size) {
             
@@ -343,7 +365,7 @@ class ItemHandler {
     
                 o = new Item();
                 ItemHandler.initialize_item_containers(o);
-                CategoryHandler.initialize_item(o, ci);
+                ItemHandler.initialize_item_element(o, ci);
                 MapHandler.add_map_element(i.items, o, CategoryHandler.ITEM);
             }
 

@@ -27,7 +27,7 @@ package cyboi;
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.7 $ $Date: 2003-08-05 00:00:12 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-08-05 13:15:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryHandler {
@@ -53,6 +53,9 @@ class CategoryHandler {
 
     /** The attribute. */
     static java.lang.String ATTRIBUTE = "attribute";
+
+    /** The null. */
+    static java.lang.String NULL = "null";
 
     /** The item. */
     static java.lang.String ITEM = "item";
@@ -143,9 +146,9 @@ class CategoryHandler {
     
         if (p != null) {
             
-            java.lang.System.out.println("INFO: Initialize category.");
+            java.lang.System.out.println("INFO: Initialize category: " + p1);
             p.parse(CategoryHandler.PATH + p1 + CategoryHandler.CYBOL);
-            CategoryHandler.read_document(p0, p.getDocument());
+            CategoryHandler.read_document(p0, (org.apache.xerces.dom.DocumentImpl) p.getDocument());
     
         } else {
             
@@ -176,26 +179,36 @@ class CategoryHandler {
      */
     static void read_document(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
-        java.lang.System.out.println("TEST document: " + p1);
-        org.w3c.dom.Document doc = (org.w3c.dom.Document) p1;
+        org.apache.xerces.dom.DocumentImpl doc = (org.apache.xerces.dom.DocumentImpl) p1;
 
         if (doc != null) {
             
             java.lang.System.out.println("INFO: Read document.");
             doc.normalize();
-
-            org.w3c.dom.NodeList l = doc.getElementsByTagName(CategoryHandler.SUPER_CATEGORY);
+            org.apache.xerces.dom.DeepNodeListImpl l = null;
+            
+            l = (org.apache.xerces.dom.DeepNodeListImpl) doc.getElementsByTagName(CategoryHandler.SUPER_CATEGORY);
             CategoryHandler.initialize_super_category(p0, l);
 
-            l = doc.getElementsByTagName(CategoryHandler.JAVA_OBJECT);
-            CategoryHandler.initialize_java_object(p0, l);
+            l = (org.apache.xerces.dom.DeepNodeListImpl) doc.getElementsByTagName(CategoryHandler.JAVA_OBJECT);
+            CategoryHandler.initialize_java_objects(p0, l);
                 
             Item c = (Item) p0;
 
             if (c != null) {
                     
-                l = doc.getElementsByTagName(CategoryHandler.ITEM);
+                l = (org.apache.xerces.dom.DeepNodeListImpl) doc.getElementsByTagName(CategoryHandler.ITEM);
                 CategoryHandler.initialize_items(c.items, l);
+//?? --
+                java.lang.Object test = null;
+                
+                for (int x = 0; x < MapHandler.get_map_size(c.items); x++) {
+    
+                    test = ArrayHandler.get_array_element(((Map) c.items).names, x);
+                    java.lang.System.out.println("TEST: " + test);
+                }
+                java.lang.System.exit(0);
+//?? --
 
             } else {
                 
@@ -229,17 +242,16 @@ class CategoryHandler {
      */
     static void initialize_super_category(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
-        java.lang.System.out.println("TEST nodelist 1: " + p1);
-        org.w3c.dom.NodeList l = (org.w3c.dom.NodeList) p1;
+        org.apache.xerces.dom.DeepNodeListImpl l = (org.apache.xerces.dom.DeepNodeListImpl) p1;
 
         if (l != null) {
             
-            org.w3c.dom.Node n = l.item(0);
+            org.apache.xerces.dom.NodeImpl n = (org.apache.xerces.dom.NodeImpl) l.item(0);
             
             if (n != null) {
 
                 java.lang.System.out.println("INFO: Initialize super category.");
-                java.lang.Object s = CategoryHandler.read_attribute(n.getAttributes(), CategoryHandler.CATEGORY);
+                java.lang.Object s = CategoryHandler.read_attribute((org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes(), CategoryHandler.CATEGORY);
                 CategoryHandler.initialize_category(p0, s);
                 
             } else {
@@ -274,38 +286,50 @@ class CategoryHandler {
      */
     static void initialize_java_objects(java.lang.Object p0, java.lang.Object p1) {
 
-        Item i = (Item) p0;
-        
-        if (i != null) {
-            
-            java.lang.System.out.println("TEST nodelist 2: " + p1);
-            org.w3c.dom.NodeList l = (org.w3c.dom.NodeList) p1;
-    
-            if (l != null) {
-    
-                java.lang.System.out.println("INFO: Initialize java objects.");
-                org.w3c.dom.Node n = l.item(0);
+        org.apache.xerces.dom.DeepNodeListImpl l = (org.apache.xerces.dom.DeepNodeListImpl) p1;
 
-                if (n != null) {
-                        
-                    Item o = new Item();
-                    ItemHandler.initialize_item_containers(o);
-                    CategoryHandler.initialize_java_object(o, n);
-                    i.java_object = o;
+        if (l != null) {
+
+            java.lang.System.out.println("INFO: Initialize java objects.");
+            org.apache.xerces.dom.NodeImpl n = (org.apache.xerces.dom.NodeImpl) l.item(0);
+
+            if (n != null) {
                     
+                Item c = (Item) p0;
+                
+                if (c != null) {
+
+                    Item o = null;
+
+                    // Sometimes, a super category sets a java object that is not
+                    // wanted in a sub category. In this case, it can be set to null:
+                    // <javaobject category="null"/>
+                    if (CategoryHandler.is_java_object_null(n) == false) {
+                            
+                        o = new Item();
+                        ItemHandler.initialize_item_containers(o);
+                        CategoryHandler.initialize_java_object(o, n);
+                        
+                    } else {
+                        
+                        o = null;
+                    }
+            
+                    c.java_object = o;
+
                 } else {
                     
-                    java.lang.System.out.println("WARNING: Could not initialize java objects. The java object node is null.");
+                    java.lang.System.out.println("ERROR: Could not initialize java objects. The category is null.");
                 }
-                
+            
             } else {
                 
-                java.lang.System.out.println("ERROR: Could not initialize java objects. The java objects list is null.");
+                java.lang.System.out.println("INFO: Could not initialize java objects. The java object node is null.");
             }
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize java objects. The category is null.");
+            java.lang.System.out.println("ERROR: Could not initialize java objects. The java objects list is null.");
         }
     }
 
@@ -318,6 +342,36 @@ class CategoryHandler {
     static void finalize_java_objects(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
     }
 
+    /**
+     * Checks if java object is null.
+     *
+     * @param p0 the category items
+     * @return true if the java object is null; false otherwise
+     */
+    static boolean is_java_object_null(java.lang.Object p0) {
+
+        boolean b = false;
+        org.apache.xerces.dom.NodeImpl n = (org.apache.xerces.dom.NodeImpl) p0;
+
+        if (n != null) {
+            
+            java.lang.System.out.println("INFO: Check if java object is null.");
+            org.apache.xerces.dom.NamedNodeMapImpl m = (org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes();
+            java.lang.String a = (java.lang.String) CategoryHandler.read_attribute(m, CategoryHandler.CATEGORY);
+        
+            if (a.equals(CategoryHandler.NULL)) {
+                
+                b = true;
+            }
+
+        } else {
+            
+            java.lang.System.out.println("WARNING: Could not initialize java object. The java object node is null.");
+        }
+        
+        return b;
+    }
+    
     //
     // Java object.
     //
@@ -334,12 +388,12 @@ class CategoryHandler {
         
         if (o != null) {
         
-            org.w3c.dom.Node n = (org.apache.xerces.dom.DeepNodeListImpl) p1;
+            org.apache.xerces.dom.NodeImpl n = (org.apache.xerces.dom.NodeImpl) p1;
             
             if (n != null) {
                 
                 java.lang.System.out.println("INFO: Initialize java object.");
-                CategoryHandler.initialize_java_object_attributes(o.items, n.getAttributes());
+                CategoryHandler.initialize_java_object_attributes(o.items, (org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes());
         
             } else {
                 
@@ -407,31 +461,58 @@ class CategoryHandler {
      */
     static void initialize_items(java.lang.Object p0, java.lang.Object p1) {
 
-        java.lang.System.out.println("TEST nodelist 3: " + p1);
-        org.w3c.dom.NodeList l = (org.w3c.dom.NodeList) p1;
+        org.apache.xerces.dom.DeepNodeListImpl l = (org.apache.xerces.dom.DeepNodeListImpl) p1;
 
         if (l != null) {
             
             java.lang.System.out.println("INFO: Initialize items.");
             int count = 0;
             int size = l.getLength();
-            org.w3c.dom.Node n = null;
+            org.apache.xerces.dom.NodeImpl n = null;
             Item i = null;
+            java.lang.Object name = null;
 
             while (count < size) {
             
-                n = l.item(count);
+                n = (org.apache.xerces.dom.NodeImpl) l.item(count);
 
-                i = new Item();
-                ItemHandler.initialize_item_containers(i);
-                CategoryHandler.initialize_item(i, n);
-                MapHandler.add_map_element(p0, i, CategoryHandler.ITEM);
+                if (n != null) {
+                        
+                    i = new Item();
+                    ItemHandler.initialize_item_containers(i);
+                    CategoryHandler.initialize_item(i, n);
+                    
+//?? --
+                    java.lang.Object test = null;
+                    
+                    for (int x = 0; x < MapHandler.get_map_size(p0); x++) {
+            
+                        test = ArrayHandler.get_array_element(((Map) p0).references, x);
+                        java.lang.System.out.println("TEST: " + test);
+                    }
+//?? --
 
+                    if (i != null) {
+                            
+                        name = MapHandler.get_map_element(i.items, CategoryHandler.NAME);
+                        java.lang.System.out.println("TEST name: " + name);
+                        java.lang.System.exit(0);
+                        MapHandler.set_map_element(p0, i, name);
 /*??
-                // Initialize serialized item.
-                i = n.getNodeValue();
+                        // Initialize serialized item.
+                        i = n.getNodeValue();
 */
                 
+                    } else {
+                        
+                        java.lang.System.out.println("ERROR: Could not initialize items. The item is null.");
+                    }
+            
+                } else {
+                    
+                    java.lang.System.out.println("INFO: Could not initialize items. The category item node is null.");
+                }
+                        
                 count++;
             }
             
@@ -462,17 +543,16 @@ class CategoryHandler {
      */
     static void initialize_item(java.lang.Object p0, java.lang.Object p1) {
         
-        Item o = (Item) p0;
+        Item i = (Item) p0;
         
-        if (o != null) {
+        if (i != null) {
         
-            java.lang.System.out.println("TEST node: " + p1);
-            org.w3c.dom.Node n = (org.w3c.dom.Node) p1;
+            org.apache.xerces.dom.NodeImpl n = (org.apache.xerces.dom.NodeImpl) p1;
             
             if (n != null) {
                 
                 java.lang.System.out.println("INFO: Initialize item.");
-                CategoryHandler.initialize_attributes(o.items, n.getAttributes());
+                CategoryHandler.initialize_attributes(i.items, (org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes());
         
             } else {
                 
@@ -508,6 +588,9 @@ class CategoryHandler {
 
         java.lang.System.out.println("INFO: Initialize attributes.");
         java.lang.Object a = null;
+
+        a = CategoryHandler.read_attribute(p1, CategoryHandler.NAME);
+        MapHandler.set_map_element(p0, a, CategoryHandler.NAME);
 
         a = CategoryHandler.read_attribute(p1, CategoryHandler.ITEM_CATEGORY);
         MapHandler.set_map_element(p0, a, CategoryHandler.ITEM_CATEGORY);
@@ -557,12 +640,11 @@ class CategoryHandler {
     static java.lang.Object read_attribute(java.lang.Object p0, java.lang.Object p1) {
     
         java.lang.Object a = null;
-        java.lang.System.out.println("TEST nodemap: " + p0);
-        org.w3c.dom.NamedNodeMap m = (org.w3c.dom.NamedNodeMap) p0;
+        org.apache.xerces.dom.NamedNodeMapImpl m = (org.apache.xerces.dom.NamedNodeMapImpl) p0;
 
         if (m != null) {
     
-            org.w3c.dom.Node n = m.getNamedItem((java.lang.String) p1);
+            org.apache.xerces.dom.NodeImpl n = (org.apache.xerces.dom.NodeImpl) m.getNamedItem((java.lang.String) p1);
             
             if (n != null) {
                 
