@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-01-19 13:41:35 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -44,10 +44,10 @@
 void create_unix_server_socket(void* p0) {
 
     // The unix server socket filename.
-    void** f = POINTER_NULL_POINTER;
+    void* f = POINTER_NULL_POINTER;
 
     // Get unix server socket filename.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f);
+    get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (f != POINTER_NULL_POINTER) {
 
@@ -70,7 +70,7 @@ void create_unix_server_socket(void* p0) {
         *s = socket(AF_UNIX, SOCK_STREAM, 0);
 
         // Set unix server socket.
-        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_NUMBER);
+        set_array_elements(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
 
         if (*s >= 0) {
 
@@ -86,7 +86,7 @@ void create_unix_server_socket(void* p0) {
             a.sun_family = AF_UNIX;
 
             // Set path/file name to use as socket address.
-            strcpy(a.sun_path, (char*) *f);
+            strcpy(a.sun_path, (char*) f);
 //??            strncpy(a.sun_path, *f, sizeof(a.sun_path));
 
             // CAUTION! The path/file length is normally limited to 108.
@@ -129,10 +129,10 @@ void create_unix_server_socket(void* p0) {
 void destroy_unix_server_socket(void* p0) {
 
     // The unix server socket filename.
-    void** f = POINTER_NULL_POINTER;
+    void* f = POINTER_NULL_POINTER;
 
     // Get unix server socket filename.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f);
+    get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (f != POINTER_NULL_POINTER) {
 
@@ -140,7 +140,7 @@ void destroy_unix_server_socket(void* p0) {
         int* s = INTEGER_NULL_POINTER;
 
         // Get unix server socket.
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s);
+        get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_ARRAY);
 
         if (s != INTEGER_NULL_POINTER) {
 
@@ -150,7 +150,7 @@ void destroy_unix_server_socket(void* p0) {
             close(*s);
 
             // Unlink socket.
-            unlink((char*) *f);
+            unlink((char*) f);
 
             // Destroy unix server socket.
             destroy_integer((void*) &s);
@@ -276,7 +276,7 @@ void receive_unix_socket(void* p0) {
     int* s = INTEGER_NULL_POINTER;
 
     // Get unix server socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s);
+    get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_ARRAY);
 
     if (s != INTEGER_NULL_POINTER) {
 
