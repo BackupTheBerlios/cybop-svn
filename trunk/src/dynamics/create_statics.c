@@ -27,6 +27,7 @@
 
 #include "boolean_handler.c"
 #include "complex_handler.c"
+#include "cybol_model_handler.c"
 #include "fraction_handler.c"
 #include "integer_handler.c"
 #include "statics.c"
@@ -41,7 +42,7 @@
  *
  * It creates a statics memory model from a given statics cybol model.
  *
- * @version $Revision: 1.2 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

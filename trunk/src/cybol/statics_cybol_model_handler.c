@@ -33,43 +33,9 @@
  * It can read and write CYBOL source files.
  * CYBOL's syntax is based on the Extensible Markup Language (XML).
  *
- * @version $Revision: 1.2 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-
-//
-// Constants.
-//
-
-/** The cybop directory path. */
-static const char* CYBOP_PATH = "/home/cybop/lib/cybop/";
-
-/** The cybol file suffix. */
-static const char* CYBOL_SUFFIX = ".cybol";
-
-/** The super model. */
-static const char* SUPER_MODEL = "super";
-
-/** The null model. */
-static const char* NULL_MODEL = "null";
-
-/** The part. */
-static const char* PART = "part";
-
-/** The name. */
-static const char* NAME = "name";
-
-/** The part model. */
-static const char* PART_MODEL = "part_model";
-
-/** The part abstraction. */
-static const char* PART_ABSTRACTION = "part_abstraction";
-
-/** The position model. */
-static const char* POSITION_MODEL = "position_model";
-
-/** The position abstraction. */
-static const char* POSITION_ABSTRACTION = "position_abstraction";
 
 //
 // Statics cybol attribute.

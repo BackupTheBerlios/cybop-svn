@@ -1,5 +1,5 @@
 /*
- * $RCSfile: dynamics_cybol_model_handler.c,v $
+ * $RCSfile: cybol_model_handler.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,19 +22,59 @@
  * - Cybernetics Oriented Programming -
  */
 
-#ifndef DYNAMICS_CYBOL_MODEL_HANDLER_SOURCE
-#define DYNAMICS_CYBOL_MODEL_HANDLER_SOURCE
+#ifndef CYBOL_MODEL_HANDLER_SOURCE
+#define CYBOL_MODEL_HANDLER_SOURCE
 
 //?? #include <libxml.h>
 
 /**
- * This is the xml handler.
+ * This is the cybol model handler.
  *
  * It can read and write CYBOL source files.
  *
- * @version $Revision: 1.3 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+//
+// Constants.
+//
+
+/** The cybol path. */
+//?? static const char* CYBOL_PATH = "/home/cybop/lib/cybop/";
+
+/** The cybol file suffix. */
+//?? static const char* FILE_SUFFIX = ".cybol";
+
+/** The super model. */
+//?? static const char* SUPER_MODEL = "super";
+
+/** The null model. */
+//?? static const char* NULL_MODEL = "null";
+
+/** The child. */
+//?? static const char* CHILD = "child";
+
+/** The name. */
+static const char* NAME = "name";
+
+/** The part model. */
+static const char* PART_MODEL = "part_model";
+
+/** The part input output names. */
+static const char* PART_INPUT_OUTPUT_NAMES = "part_input_output_names";
+
+/** The part input output values. */
+static const char* PART_INPUT_OUTPUT_VALUES = "part_input_output_values";
+
+/** The part abstraction. */
+static const char* PART_ABSTRACTION = "part_abstraction";
+
+/** The position model. */
+static const char* POSITION_MODEL = "position_model";
+
+/** The position abstraction. */
+static const char* POSITION_ABSTRACTION = "position_abstraction";
 
 //
 // Source model.
@@ -404,6 +444,6 @@ static void read_child_attribute(void* p0, void* p1, void* p2) {
 static void write_child_attribute(void* p0, void* p1, void* p2) {
 }
 
-/* DYNAMICS_CYBOL_MODEL_HANDLER_SOURCE */
+/* CYBOL_MODEL_HANDLER_SOURCE */
 #endif
 

@@ -25,27 +25,20 @@
 #ifndef CREATE_DYNAMICS_SOURCE
 #define CREATE_DYNAMICS_SOURCE
 
-#include "add_handler.c"
-#include "and_handler.c"
-#include "divide_handler.c"
+#include "cybol_model_handler.c"
 #include "dynamics.c"
 #include "dynamics_cybol_model_handler.c"
 #include "dynamics_model.c"
-#include "equal_handler.c"
-#include "greater_handler.c"
-#include "greater_or_equal_handler.c"
-#include "multiply_handler.c"
-#include "or_handler.c"
-#include "smaller_handler.c"
-#include "smaller_or_equal_handler.c"
-#include "subtract_handler.c"
+#include "map.c"
+#include "map_handler.c"
+#include "operation_handler.c"
 
 /**
  * This is the create dynamics operation.
  *
  * It creates a dynamics memory model from a given dynamics cybol model.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,7 +57,16 @@
  * @param p1 the abstraction
  * @return the dynamics model
  */
-void* create_dynamics(void* p0, void* p1);
+void* create_dynamics(void* p0, void* p1, void* p2);
+
+/**
+ * Creates a statics model.
+ *
+ * @param p0 the model source
+ * @param p1 the abstraction
+ * @return the statics model
+ */
+void* create_statics(void* p0, void* p1);
 
 //
 // Dynamics model containers.
@@ -86,20 +88,11 @@ static void create_dynamics_model_containers(void* p0) {
         m->parts = malloc(sizeof(struct map));
         initialize_map(m->parts);
 
-        m->inputs_0 = malloc(sizeof(struct map));
-        initialize_map(m->inputs_0);
-
-        m->inputs_1 = malloc(sizeof(struct map));
-        initialize_map(m->inputs_1);
-
-        m->outputs_0 = malloc(sizeof(struct map));
-        initialize_map(m->outputs_0);
-
-        m->outputs_1 = malloc(sizeof(struct map));
-        initialize_map(m->outputs_1);
-
         m->positions = malloc(sizeof(struct map));
         initialize_map(m->positions);
+        
+        m->abstractions = malloc(sizeof(struct map));
+        initialize_map(m->abstractions);
         
     } else {
         
@@ -125,13 +118,17 @@ static void initialize_dynamics_part(void* p0, void* p1) {
             
         void* name = get_map_element_with_name(p1, (void*) NAME);                
         void* model = 0;
+        void* io_names = 0;
+        void* io_values = 0;
         void* abstraction = 0;
         void* memory_model = 0;
 
         // Part.
         model = get_map_element_with_name(p1, (void*) PART_MODEL);
+        io_names = get_map_element_with_name(p1, (void*) PART_INPUT_OUTPUT_NAMES);
+        io_values = get_map_element_with_name(p1, (void*) PART_INPUT_OUTPUT_VALUES);
         abstraction = get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
-        memory_model = create_dynamics(model, abstraction);
+        memory_model = create_dynamics(model, io_names, io_values, abstraction);
         set_map_element_with_name(m->parts, name, memory_model);
 
         // Position.
@@ -231,14 +228,15 @@ static void initialize_dynamics_model(void* p0, void* p1) {
  * It creates a dynamics memory model from a given dynamics cybol model.
  *
  * @param p0 the dynamics cybol model path
- * @param p1 the dynamics cybol inputs and outputs
- * @param p2 the abstraction
+ * @param p1 the dynamics cybol input output names
+ * @param p2 the dynamics cybol input output values
+ * @param p3 the abstraction
  * @return the dynamics model
  */
-void* create_dynamics(void* p0, void* p1, void* p2) {
+void* create_dynamics(void* p0, void* p1, void* p2, void* p3) {
 
     void* m = 0;
-    char* a = (char*) p2;
+    char* a = (char*) p3;
     
     log((void*) &INFO_LOG_LEVEL, "Create dynamics model: ");
     log((void*) &INFO_LOG_LEVEL, p0);
@@ -263,10 +261,10 @@ void* create_dynamics(void* p0, void* p1, void* p2) {
         
         if (io != 0) {
             
-            if (strcmp(io, "") != 0) {
+            if (strcmp(io, EMPTY_STRING) != 0) {
                 
                 m = malloc(sizeof(struct operation));
-                initialize_operation_model(m, p1);
+                initialize_operation_input_and_output(m, p1, p2);
             }
         }
     }

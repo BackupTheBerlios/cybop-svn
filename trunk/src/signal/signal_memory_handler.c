@@ -48,7 +48,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.3 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

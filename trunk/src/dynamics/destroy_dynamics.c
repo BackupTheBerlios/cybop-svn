@@ -25,27 +25,20 @@
 #ifndef DESTROY_DYNAMICS_SOURCE
 #define DESTROY_DYNAMICS_SOURCE
 
-#include "add_handler.c"
-#include "and_handler.c"
-#include "divide_handler.c"
+#include "cybol_model_handler.c"
 #include "dynamics.c"
 #include "dynamics_cybol_model_handler.c"
 #include "dynamics_model.c"
-#include "equal_handler.c"
-#include "greater_handler.c"
-#include "greater_or_equal_handler.c"
-#include "multiply_handler.c"
-#include "or_handler.c"
-#include "smaller_handler.c"
-#include "smaller_or_equal_handler.c"
-#include "subtract_handler.c"
+#include "map.c"
+#include "map_handler.c"
+#include "operation_handler.c"
 
 /**
  * This is the destroy dynamics operation.
  *
  * It destroys a dynamics memory model to a given dynamics cybol model.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,7 +57,16 @@
  * @param p1 the model source
  * @param p2 the abstraction
  */
-void destroy_dynamics(void* p0, void* p1, void* p2);
+void destroy_dynamics(void* p0, void* p1, void* p2, void* p3);
+
+/**
+ * Destroys the statics model.
+ *
+ * @param p0 the statics model
+ * @param p1 the model source
+ * @param p2 the abstraction
+ */
+void destroy_statics(void* p0, void* p1, void* p2);
 
 //
 // Dynamics model containers.
@@ -86,17 +88,8 @@ static void destroy_dynamics_model_containers(void* p0) {
         finalize_map(m->positions);
         free(m->positions);
 
-        finalize_map(m->outputs_1);
-        free(m->outputs_1);
-
-        finalize_map(m->outputs_0);
-        free(m->outputs_0);
-
-        finalize_map(m->inputs_1);
-        free(m->inputs_1);
-
-        finalize_map(m->inputs_0);
-        free(m->inputs_0);
+        finalize_map(m->abstractions);
+        free(m->abstractions);
 
         finalize_map(m->parts);
         free(m->parts);
@@ -125,6 +118,7 @@ static void finalize_dynamics_part(void* p0, void* p1) {
 
         void* name = get_map_element_with_name(p1, (void*) NAME);                
         void* model = 0;
+        void* io = 0;
         void* abstraction = 0;
         void* memory_model = 0;
 
@@ -137,8 +131,9 @@ static void finalize_dynamics_part(void* p0, void* p1) {
         // Part.
         memory_model = get_map_element_with_name(m->parts, name);
         model = get_map_element_with_name(p1, (void*) PART_MODEL);
+        io = get_map_element_with_name(p1, (void*) PART_INPUT_OUTPUT);
         abstraction = get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
-        destroy_dynamics(memory_model, model, abstraction);
+        destroy_dynamics(memory_model, model, io, abstraction);
 
     } else {
         
@@ -232,12 +227,13 @@ static void finalize_dynamics_model(void* p0, void* p1) {
  *
  * @param p0 the dynamics memory model
  * @param p1 the dynamics cybol model path
- * @param p2 the dynamics cybol inputs and outputs
- * @param p3 the abstraction
+ * @param p2 the dynamics cybol input output names
+ * @param p3 the dynamics cybol input output values
+ * @param p4 the abstraction
  */
-void destroy_dynamics(void* p0, void* p1, void* p2) {
+void destroy_dynamics(void* p0, void* p1, void* p2, void* p3) {
 
-    char* a = (char*) p3;
+    char* a = (char*) p4;
 
     if (p0 != 0) {
             
@@ -261,7 +257,7 @@ void destroy_dynamics(void* p0, void* p1, void* p2) {
             
             if (io != 0) {
                 
-                finalize_operation_model(p0, p2);
+                finalize_operation_input_and_output(p0, p2, p3);
                 free(p0);
             }
         }

@@ -36,9 +36,28 @@
  * It contains functions which are used by both, the statics and the
  * dynamics model handler.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+//
+// Constants.
+//
+
+/** The null pointer. */
+static const char* NULL_POINTER = (void*) 0;
+
+/** The empty string. */
+static const char* EMPTY_STRING = "";
+
+/** The slash separator. */
+static const char* SLASH_SEPARATOR = "/";
+
+/** The dot separator. */
+static const char* DOT_SEPARATOR = ".";
+
+/** The comma separator. */
+static const char* COMMA_SEPARATOR = ",";
 
 //
 // Helper functions.
@@ -51,25 +70,26 @@
  * or, if there is no dot, then it is the given name itself.
  *
  * @param p0 the hierarchical model name
+ * @param p1 the separation
  * @return the part name
  */
-static void* get_part_name(void* p0) {
+static void* get_part_name(void* p0, void* p1) {
     
-    void* name = 0;
+    void* p = 0;
     char* n = (char*) p0;
     
     if (n != 0) {
         
 /*??
-        int i = n->indexOf(".");
+        int i = n->indexOf(p1);
         
         if (i != -1) {
             
-            p1 = n->substring(0, i);
+            p = n->substring(0, i);
         
         } else {
         
-            p1 = n;
+            p = n;
         }
 */
         
@@ -78,7 +98,7 @@ static void* get_part_name(void* p0) {
         log((void*) &ERROR_LOG_LEVEL, "Could not get part name. The hierarchical model name is null.");
     }
     
-    return name;
+    return p;
 }
 
 /**
@@ -87,21 +107,22 @@ static void* get_part_name(void* p0) {
  * It is the whole string after the first dot/point ".".
  *
  * @param p0 the hierarchical model name
+ * @param p1 the separation
  * @return the remaining name
  */
-static void* get_remaining_name(void* p0) {
+static void* get_remaining_name(void* p0, void* p1) {
 
-    void* name = 0;    
+    void* r = 0;    
     char* n = (char*) p0;
     
     if (n != 0) {
         
 /*??
-        int i = n->indexOf(".");
+        int i = n->indexOf(p1);
         
         if (i != -1) {
 
-            p1 = n->substring(i + 1);
+            r = n->substring(i + 1);
         }
 */
         
@@ -110,7 +131,7 @@ static void* get_remaining_name(void* p0) {
         log((void*) &ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical model name is null.");
     }
     
-    return name;
+    return r;
 }
 
 /* MODEL_HANDLER_SOURCE */
