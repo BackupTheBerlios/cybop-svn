@@ -38,7 +38,7 @@
  *
  * It creates a dynamics memory model from a given dynamics cybol model.
  *
- * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-02-11 00:11:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -84,9 +84,9 @@ void* create_statics(void* p0, void* p1);
 void create_dynamics_model_containers(void* p0) {
 
     struct dynamics_model* m = (struct dynamics_model*) p0;
-    
+
     if (m != (void*) 0) {
-        
+
         log_message((void*) &INFO_LOG_LEVEL, "Create dynamics model containers.");
 
         m->parts = malloc(sizeof(struct map));
@@ -94,12 +94,12 @@ void create_dynamics_model_containers(void* p0) {
 
         m->positions = malloc(sizeof(struct map));
         initialize_map(m->positions);
-        
+
         m->abstractions = malloc(sizeof(struct map));
         initialize_map(m->abstractions);
-        
+
     } else {
-        
+
         log_message((void*) &ERROR_LOG_LEVEL, "Could not create dynamics model containers. The dynamics model is null.");
     }
 }
@@ -281,4 +281,3 @@ void* create_dynamics(void* p0, void* p1, void* p2, void* p3) {
 
 /* CREATE_DYNAMICS_SOURCE */
 #endif
-

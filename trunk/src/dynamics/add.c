@@ -36,7 +36,7 @@
  * @param p0 the summand 0
  * @param p1 the summand 1
  * @param p2 the sum
- * @version $Revision: 1.8 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-02-11 00:11:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 void add(void* p0, void* p1, void* p2) {
@@ -71,4 +71,3 @@ void add(void* p0, void* p1, void* p2) {
 
 /* ADD_SOURCE */
 #endif
-

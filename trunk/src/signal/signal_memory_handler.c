@@ -31,6 +31,7 @@
 #include "../dynamics/create_statics.c"
 #include "../dynamics/destroy_dynamics.c"
 #include "../dynamics/destroy_statics.c"
+#include "../logger/log_handler.c"
 #include "../model/array_handler.c"
 #include "../model/dynamics.c"
 #include "../model/dynamics_model.c"
@@ -51,7 +52,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.14 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-02-11 00:11:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -108,9 +109,9 @@ static const char* SOAP_LANGUAGE = "soap";
 void create_signal_memory(void* p0) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
-    
+
     if (m != (void*) 0) {
-        
+
         log_message((void*) &INFO_LOG_LEVEL, "Create signal memory.");
 
         m->signals = malloc(sizeof(struct array));
@@ -121,9 +122,9 @@ void create_signal_memory(void* p0) {
 
         m->priorities = malloc(sizeof(struct array));
         initialize_array(m->priorities);
-        
+
     } else {
-        
+
         log_message((void*) &ERROR_LOG_LEVEL, "Could not create signal memory. The signal memory is null.");
     }
 }
@@ -136,11 +137,31 @@ void create_signal_memory(void* p0) {
 void destroy_signal_memory(void* p0) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
-    
+
     if (m != (void*) 0) {
-        
+
         log_message((void*) &INFO_LOG_LEVEL, "Destroy signal memory.");
 
+        // Destroy all signals left in signal memory.
+/*??
+        int i = count - 1;
+            get_highest_priority_index(p0, (void*) &index);
+
+        while (i >= 0) {
+
+            s = get_signal(p0, (void*) &index);
+            a = (char*) get_abstraction(p0, (void*) &index);
+            p = get_priority(p0, (void*) &index);
+            remove_signal(p0, (void*) &index);
+            // Destroy signal. Do not destroy the signal's abstraction and
+            // priority here; they are static within CYBOI.
+            destroy_dynamics(ss, (void*) p1[1], (void*) 0, (void*) 0, (void*) DYNAMICS_COMPOUND);
+
+            i--;
+        }
+*/
+
+        // Destroy containers.
         finalize_array(m->priorities);
         free(m->priorities);
 
@@ -172,9 +193,9 @@ void destroy_signal_memory(void* p0) {
 void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
-    
+
     if (m != (void*) 0) {
-        
+
         set_array_element(m->signals, p1, p2);
         set_array_element(m->abstractions, p1, p3);
         set_array_element(m->priorities, p1, p4);
@@ -202,7 +223,7 @@ void add_signal(void* p0, void* p1, void* p2, void* p3) {
         int i = 0;
         get_array_count(m->signals, (void*) &i);
         set_signal(p0, (void*) &i, p1, p2, p3);
-        
+
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not add signal. The signal memory is null.");
@@ -218,7 +239,7 @@ void add_signal(void* p0, void* p1, void* p2, void* p3) {
 void remove_signal(void* p0, void* p1) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
-    
+
     if (m != (void*) 0) {
 
         remove_array_element(m->signals, p1);
@@ -310,7 +331,7 @@ void* get_priority(void* p0, void* p1) {
  * @param p1 the signal index
  */
 void get_highest_priority_index(void* p0, void* p1) {
-    
+
     struct signal_memory* m = (struct signal_memory*) p0;
     int* index = (int*) p1;
 
@@ -378,35 +399,28 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
                 
                 // Determine position.
                 position = (int*) get_map_element_at_index(m->positions, (void*) &i);
-            
+
                 // All parts at the current position.
                 if (*position == pos) {
 
                     // Determine part signal as dynamics model.
                     part = get_map_element_at_index(m->parts, (void*) &i);
-                
+
                     // Determine abstraction.
                     abstr = get_map_element_at_index(m->abstractions, (void*) &i);
 
-                    // Caution! Adding of signals must be synchronized between:
-                    // - internal CYBOI signals added here
-                    // - hardware interrupt signals sent from the operating system
-                    // These are the only two accessing the signal memory for adding.
-//??                    synchronized (p0) {
-    
-                        // Add "part" signal to signal memory,
-                        // using the "whole" signal's priority.
-                        // (Each signal/action has a priority.
-                        // An action may consist of "part" actions.
-                        // The "part" actions cannot have higher/lower priority
-                        // than their original "whole" action.)
-                        add_signal(p0, part, abstr, p2);
-//??                    }
+                    // Add "part" signal to signal memory,
+                    // using the "whole" signal's priority.
+                    // (Each signal/action has a priority.
+                    // An action may consist of "part" actions.
+                    // The "part" actions cannot have higher/lower priority
+                    // than their original "whole" action.)
+                    add_signal(p0, part, abstr, p2);
                 }
-                
+
                 i++;
             }
-            
+
             pos++;
         }
 
@@ -431,7 +445,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, v
     log_message((void*) &INFO_LOG_LEVEL, "Handle operation signal.");
 
     struct operation* o = (struct operation*) p0;
-    
+
     if (o != (void*) 0) {
 
         char* a = (char*) p1;
@@ -463,7 +477,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 struct statics_model* s = (struct statics_model*) p2;
                 
                 if (s != (void*) 0) {
-                        
+
                     void* m = get_map_element_with_name(s->parts, get_map_element_with_name(io, "name"));
                     destroy_statics(m, get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
         
@@ -477,7 +491,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 struct dynamics_model* d = (struct dynamics_model*) p3;
                 
                 if (d != (void*) 0) {
-                        
+
                     void* m = create_dynamics(get_map_element_with_name(io, "model"), get_map_element_with_name(io, "io_names"), get_map_element_with_name(io, "io_values"), get_map_element_with_name(io, "abstraction"));
                     set_map_element_with_name(d->parts, get_map_element_with_name(io, "name"), m);
         
@@ -496,7 +510,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, v
                     destroy_dynamics(m, get_map_element_with_name(io, "model"), get_map_element_with_name(io, "io_names"), get_map_element_with_name(io, "io_values"), get_map_element_with_name(io, "abstraction"));
         
                 } else {
-            
+
                     log_message((void*) &ERROR_LOG_LEVEL, "Could not handle destroy dynamics operation signal. The dynamics is null.");
                 }
 
@@ -562,4 +576,3 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
 /* SIGNAL_MEMORY_HANDLER_SOURCE */
 #endif
-

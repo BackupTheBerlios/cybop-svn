@@ -43,7 +43,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.4 $ $Date: 2004-02-08 23:21:08 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-02-11 00:11:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -100,17 +100,13 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
                 //?? test x windows
                 send_x_windows_output((void*) 0, (void*) 0, p3);
-                sleep(5);
+                sleep(4);
 
                 // Check for x windows events and send them as cyboi signals.
                 if (i->x_windows_flag == 1) {
 
                     receive_x_windows_input(p0, i->x_windows);
                 }
-
-                //?? Testing.
-                sleep(5);
-                XCloseDisplay(((struct x_windows*) i->x_windows)->display);
 
                 break;
 
@@ -121,6 +117,9 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
                 a = (char*) get_abstraction(p0, (void*) &index);
                 p = get_priority(p0, (void*) &index);
                 remove_signal(p0, (void*) &index);
+                // Destroy signal. Do not destroy the signal's abstraction and
+                // priority here; they are static within CYBOI.
+                destroy_dynamics(ss, (void*) p1[1], (void*) 0, (void*) 0, (void*) DYNAMICS_COMPOUND);
 
                 // Handle signal.
                 log_message((void*) &INFO_LOG_LEVEL, "0");
@@ -203,12 +202,14 @@ int main(int p0, char** p1) {
             wait(sm, s, d, i);
             // The loop above is left as soon as its shutdown flag is set.
 
-            // Destroy startup signal.
-            destroy_dynamics(ss, (void*) p1[1], (void*) 0, (void*) 0, (void*) DYNAMICS_COMPOUND);
+            // Startup signal does not get destroyed here.
+            // Signals are destroyed when being read from signal memory.
 
             // Destroy signal memory.
             destroy_signal_memory(sm);
+            log_message((void*) &INFO_LOG_LEVEL, "TEST 1");
             free(sm);
+            log_message((void*) &INFO_LOG_LEVEL, "TEST 2");
 
             // Destroy internals.
             free(i);

@@ -44,7 +44,7 @@
  *
  * It controls the input and output of x windows.
  *
- * @version $Revision: 1.10 $ $Date: 2004-02-08 23:21:08 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-02-11 00:11:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -232,6 +232,11 @@ void send_x_windows_output(void* p0, void* p1, void* p2) {
 
         //?? From xlib tutorial. Remove later when event loop (MappingNotify) functions!
         XFlush(x->display);
+
+        // Free memory.
+        XFreeGC(x->display, gc);
+        XDestroyWindow(x->display, x->window);
+        XCloseDisplay(x->display);
 
     } else {
 
