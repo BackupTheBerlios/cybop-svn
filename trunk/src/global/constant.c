@@ -64,7 +64,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.5 $ $Date: 2004-06-29 13:57:26 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-07-02 08:06:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -609,117 +609,144 @@ static const int FILE_RESIZE_FACTOR = 2;
 // Cybol tags.
 //
 
-/** The model tag array. */
-static const char MODEL_TAG_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
+/** The comment begin array. */
+static const char COMMENT_BEGIN_ARRAY[] = {'<', '!', '-', '-'};
 
-/** The model tag. */
-static const char* MODEL_TAG = MODEL_TAG_ARRAY;
+/** The comment begin. */
+static const char* COMMENT_BEGIN = COMMENT_BEGIN_ARRAY;
 
-/** The model tag count. */
-static const int MODEL_TAG_COUNT = 5;
+/** The comment begin count. */
+static const int COMMENT_BEGIN_COUNT = 4;
+
+/** The comment end array. */
+static const char COMMENT_END_ARRAY[] = {'/', '-', '-', '>'};
+
+/** The comment end. */
+static const char* COMMENT_END = COMMENT_END_ARRAY;
+
+/** The comment end count. */
+static const int COMMENT_END_COUNT = 4;
+
+/** The tag end array. */
+static const char TAG_END_ARRAY[] = {'/', '>'};
+
+/** The tag end. */
+static const char* TAG_END = TAG_END_ARRAY;
+
+/** The tag end count. */
+static const int TAG_END_COUNT = 2;
 
 /** The part tag array. */
-static const char PART_TAG_ARRAY[] = {'p', 'a', 'r', 't'};
+static const char PART_TAG_ARRAY[] = {'<', 'p', 'a', 'r', 't', ' '};
 
 /** The part tag. */
 static const char* PART_TAG = PART_TAG_ARRAY;
 
 /** The part tag count. */
-static const int PART_TAG_COUNT = 4;
+static const int PART_TAG_COUNT = 6;
 
 /** The super tag array. */
-static const char SUPER_TAG_ARRAY[] = {'s', 'u', 'p', 'e', 'r'};
+static const char SUPER_TAG_ARRAY[] = {'<', 's', 'u', 'p', 'e', 'r', ' '};
 
 /** The super tag. */
 static const char* SUPER_TAG = SUPER_TAG_ARRAY;
 
 /** The super tag count. */
-static const int SUPER_TAG_COUNT = 5;
+static const int SUPER_TAG_COUNT = 7;
 
 //
 // Cybol attributes.
 //
 
+/** The attribute end array. */
+static const char ATTRIBUTE_END_ARRAY[] = {'"'};
+
+/** The attribute end. */
+static const char* ATTRIBUTE_END = ATTRIBUTE_END_ARRAY;
+
+/** The attribute end count. */
+static const int ATTRIBUTE_END_COUNT = 1;
+
 /** The name attribute array. */
-static const char NAME_ATTRIBUTE_ARRAY[] = {'n', 'a', 'm', 'e'};
+static const char NAME_ATTRIBUTE_ARRAY[] = {'n', 'a', 'm', 'e', '=', '"'};
 
 /** The name attribute. */
 static const char* NAME_ATTRIBUTE = NAME_ATTRIBUTE_ARRAY;
 
 /** The name attribute count. */
-static const int NAME_ATTRIBUTE_COUNT = 4;
-
-/** The part model attribute array. */
-static const char PART_MODEL_ATTRIBUTE_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
-
-/** The part model attribute. */
-static const char* PART_MODEL_ATTRIBUTE = PART_MODEL_ATTRIBUTE_ARRAY;
-
-/** The part model attribute count. */
-static const int PART_MODEL_ATTRIBUTE_COUNT = 5;
-
-/** The part abstraction attribute array. */
-static const char PART_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-
-/** The part abstraction attribute. */
-static const char* PART_ABSTRACTION_ATTRIBUTE = PART_ABSTRACTION_ATTRIBUTE_ARRAY;
-
-/** The part abstraction attribute count. */
-static const int PART_ABSTRACTION_ATTRIBUTE_COUNT = 11;
-
-/** The part constraint attribute array. */
-static const char PART_CONSTRAINT_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't'};
-
-/** The part constraint attribute. */
-static const char* PART_CONSTRAINT_ATTRIBUTE = PART_CONSTRAINT_ATTRIBUTE_ARRAY;
-
-/** The part constraint attribute count. */
-static const int PART_CONSTRAINT_ATTRIBUTE_COUNT = 10;
+static const int NAME_ATTRIBUTE_COUNT = 6;
 
 /** The part location attribute array. */
-static const char PART_LOCATION_ATTRIBUTE_ARRAY[] = {'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
+static const char PART_LOCATION_ATTRIBUTE_ARRAY[] = {'l', 'o', 'c', 'a', 't', 'i', 'o', 'n', '=', '"'};
 
 /** The part location attribute. */
 static const char* PART_LOCATION_ATTRIBUTE = PART_LOCATION_ATTRIBUTE_ARRAY;
 
 /** The part location attribute count. */
-static const int PART_LOCATION_ATTRIBUTE_COUNT = 8;
+static const int PART_LOCATION_ATTRIBUTE_COUNT = 10;
 
-/** The position model attribute array. */
-static const char POSITION_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'm', 'o', 'd', 'e', 'l'};
+/** The part abstraction attribute array. */
+static const char PART_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n', '=', '"'};
 
-/** The position model attribute. */
-static const char* POSITION_MODEL_ATTRIBUTE = POSITION_MODEL_ATTRIBUTE_ARRAY;
+/** The part abstraction attribute. */
+static const char* PART_ABSTRACTION_ATTRIBUTE = PART_ABSTRACTION_ATTRIBUTE_ARRAY;
 
-/** The position model attribute count. */
-static const int POSITION_MODEL_ATTRIBUTE_COUNT = 14;
+/** The part abstraction attribute count. */
+static const int PART_ABSTRACTION_ATTRIBUTE_COUNT = 13;
 
-/** The position abstraction attribute array. */
-static const char POSITION_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+/** The part model attribute array. */
+static const char PART_MODEL_ATTRIBUTE_ARRAY[] = {'m', 'o', 'd', 'e', 'l', '=', '"'};
 
-/** The position abstraction attribute. */
-static const char* POSITION_ABSTRACTION_ATTRIBUTE = POSITION_ABSTRACTION_ATTRIBUTE_ARRAY;
+/** The part model attribute. */
+static const char* PART_MODEL_ATTRIBUTE = PART_MODEL_ATTRIBUTE_ARRAY;
 
-/** The position abstraction attribute count. */
-static const int POSITION_ABSTRACTION_ATTRIBUTE_COUNT = 20;
+/** The part model attribute count. */
+static const int PART_MODEL_ATTRIBUTE_COUNT = 7;
 
-/** The position constraint attribute array. */
-static const char POSITION_CONSTRAINT_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't'};
+/** The part constraint attribute array. */
+static const char PART_CONSTRAINT_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '=', '"'};
 
-/** The position constraint attribute. */
-static const char* POSITION_CONSTRAINT_ATTRIBUTE = POSITION_CONSTRAINT_ATTRIBUTE_ARRAY;
+/** The part constraint attribute. */
+static const char* PART_CONSTRAINT_ATTRIBUTE = PART_CONSTRAINT_ATTRIBUTE_ARRAY;
 
-/** The position constraint attribute count. */
-static const int POSITION_CONSTRAINT_ATTRIBUTE_COUNT = 19;
+/** The part constraint attribute count. */
+static const int PART_CONSTRAINT_ATTRIBUTE_COUNT = 12;
 
 /** The position location attribute array. */
-static const char POSITION_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
+static const char POSITION_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n', '=', '"'};
 
 /** The position location attribute. */
 static const char* POSITION_LOCATION_ATTRIBUTE = POSITION_LOCATION_ATTRIBUTE_ARRAY;
 
 /** The position location attribute count. */
-static const int POSITION_LOCATION_ATTRIBUTE_COUNT = 17;
+static const int POSITION_LOCATION_ATTRIBUTE_COUNT = 19;
+
+/** The position abstraction attribute array. */
+static const char POSITION_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n', '=', '"'};
+
+/** The position abstraction attribute. */
+static const char* POSITION_ABSTRACTION_ATTRIBUTE = POSITION_ABSTRACTION_ATTRIBUTE_ARRAY;
+
+/** The position abstraction attribute count. */
+static const int POSITION_ABSTRACTION_ATTRIBUTE_COUNT = 22;
+
+/** The position model attribute array. */
+static const char POSITION_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'm', 'o', 'd', 'e', 'l', '=', '"'};
+
+/** The position model attribute. */
+static const char* POSITION_MODEL_ATTRIBUTE = POSITION_MODEL_ATTRIBUTE_ARRAY;
+
+/** The position model attribute count. */
+static const int POSITION_MODEL_ATTRIBUTE_COUNT = 16;
+
+/** The position constraint attribute array. */
+static const char POSITION_CONSTRAINT_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '=', '"'};
+
+/** The position constraint attribute. */
+static const char* POSITION_CONSTRAINT_ATTRIBUTE = POSITION_CONSTRAINT_ATTRIBUTE_ARRAY;
+
+/** The position constraint attribute count. */
+static const int POSITION_CONSTRAINT_ATTRIBUTE_COUNT = 21;
 
 //
 // Cybol abstraction values:
