@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.3 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-09-08 23:34:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -178,6 +178,11 @@ static const char TEX_ABSTRACTION_ARRAY[] = {'t', 'e', 'x'};
 static const char* TEX_ABSTRACTION = TEX_ABSTRACTION_ARRAY;
 static const int TEX_ABSTRACTION_COUNT = 3;
 
+/** The healthcare exchange protocol abstraction array, pointer, count. */
+static const char HXP_ABSTRACTION_ARRAY[] = {'k', 'w', 'd'};
+static const char* HXP_ABSTRACTION = HXP_ABSTRACTION_ARRAY;
+static const int HXP_ABSTRACTION_COUNT = 5;
+
 //
 // Video abstractions.
 //
@@ -195,11 +200,6 @@ static const int QT_ABSTRACTION_COUNT = 2;
 //
 // Application abstractions.
 //
-
-/** The healthcare exchange protocol abstraction array, pointer, count. */
-static const char HXP_ABSTRACTION_ARRAY[] = {'k', 'w', 'd'};
-static const char* HXP_ABSTRACTION = HXP_ABSTRACTION_ARRAY;
-static const int HXP_ABSTRACTION_COUNT = 5;
 
 /** The koffice kword abstraction array, pointer, count. */
 static const char KWD_ABSTRACTION_ARRAY[] = {'k', 'w', 'd'};

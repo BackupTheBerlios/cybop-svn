@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-09-08 23:34:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,7 +36,7 @@
 #define CYBOL_CONSTANTS_SOURCE
 
 //
-// Cybol attributes.
+// Cybol tag (node) attributes (properties).
 //
 
 /** The name attribute array, pointer, count. */
@@ -44,45 +44,20 @@ static const char NAME_ATTRIBUTE_ARRAY[] = {'n', 'a', 'm', 'e'};
 static const char* NAME_ATTRIBUTE = NAME_ATTRIBUTE_ARRAY;
 static const int NAME_ATTRIBUTE_COUNT = 4;
 
+/** The channel attribute array, pointer, count. */
+static const char CHANNEL_ATTRIBUTE_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
+static const char* CHANNEL_ATTRIBUTE = CHANNEL_ATTRIBUTE_ARRAY;
+static const int CHANNEL_ATTRIBUTE_COUNT = 7;
+
 /** The abstraction attribute array, pointer, count. */
 static const char ABSTRACTION_ATTRIBUTE_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
 static const char* ABSTRACTION_ATTRIBUTE = ABSTRACTION_ATTRIBUTE_ARRAY;
 static const int ABSTRACTION_ATTRIBUTE_COUNT = 11;
 
-/** The location attribute array, pointer, count. */
-static const char LOCATION_ATTRIBUTE_ARRAY[] = {'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
-static const char* LOCATION_ATTRIBUTE = LOCATION_ATTRIBUTE_ARRAY;
-static const int LOCATION_ATTRIBUTE_COUNT = 8;
-
 /** The model attribute array, pointer, count. */
 static const char MODEL_ATTRIBUTE_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
 static const char* MODEL_ATTRIBUTE = MODEL_ATTRIBUTE_ARRAY;
 static const int MODEL_ATTRIBUTE_COUNT = 5;
-
-/** The constraint attribute array, pointer, count. */
-static const char CONSTRAINT_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't'};
-static const char* CONSTRAINT_ATTRIBUTE = CONSTRAINT_ATTRIBUTE_ARRAY;
-static const int CONSTRAINT_ATTRIBUTE_COUNT = 10;
-
-/** The position location attribute array, pointer, count. */
-static const char POSITION_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
-static const char* POSITION_LOCATION_ATTRIBUTE = POSITION_LOCATION_ATTRIBUTE_ARRAY;
-static const int POSITION_LOCATION_ATTRIBUTE_COUNT = 17;
-
-/** The position abstraction attribute array, pointer, count. */
-static const char POSITION_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-static const char* POSITION_ABSTRACTION_ATTRIBUTE = POSITION_ABSTRACTION_ATTRIBUTE_ARRAY;
-static const int POSITION_ABSTRACTION_ATTRIBUTE_COUNT = 20;
-
-/** The position model attribute array, pointer, count. */
-static const char POSITION_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'm', 'o', 'd', 'e', 'l'};
-static const char* POSITION_MODEL_ATTRIBUTE = POSITION_MODEL_ATTRIBUTE_ARRAY;
-static const int POSITION_MODEL_ATTRIBUTE_COUNT = 14;
-
-/** The position constraint attribute array, pointer, count. */
-static const char POSITION_CONSTRAINT_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't'};
-static const char* POSITION_CONSTRAINT_ATTRIBUTE = POSITION_CONSTRAINT_ATTRIBUTE_ARRAY;
-static const int POSITION_CONSTRAINT_ATTRIBUTE_COUNT = 19;
 
 /* CYBOL_CONSTANTS_SOURCE */
 #endif

@@ -25,7 +25,7 @@
  * - receive data into a byte array
  * - send data from a byte array
  *
- * @version $Revision: 1.2 $ $Date: 2004-08-14 22:47:54 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-09-08 23:34:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,78 +60,57 @@
 void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6) {
 
-    if (p6 != NULL_POINTER) {
+    // The done flag.
+    int d = 0;
+    // The comparison result.
+    int r = 0;
 
-        int* tc = (int*) p6;
+    if (d == 0) {
 
-        // The done flag.
-        int d = 0;
-        // The comparison result.
-        int r = 0;
+        compare_arrays(p5, p6, (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (d == 0) {
+        if (r == 1) {
 
-            if (*tc == INLINE_CHANNEL_COUNT) {
+            receive_inline(p0, p1, p2, p3, p4);
 
-                compare_array_elements(p5, (void*) &INLINE_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &INLINE_CHANNEL_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    receive_inline(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*tc == FILE_CHANNEL_COUNT) {
+        compare_arrays(p5, p6, (void*) &FILE_CHANNEL, (void*) &FILE_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p5, (void*) &FILE_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &FILE_CHANNEL_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            receive_file(p0, p1, p2, p3, p4);
 
-                    receive_file(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*tc == FTP_CHANNEL_COUNT) {
+        compare_arrays(p5, p6, (void*) &FTP_CHANNEL, (void*) &FTP_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p5, (void*) &FTP_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &FTP_CHANNEL_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            receive_ftp(p0, p1, p2, p3, p4);
 
-                    receive_ftp(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*tc == HTTP_CHANNEL_COUNT) {
+        compare_arrays(p5, p6, (void*) &HTTP_CHANNEL, (void*) &HTTP_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p5, (void*) &HTTP_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &HTTP_CHANNEL_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            receive_http(p0, p1, p2, p3, p4);
 
-                    receive_http(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_MESSAGE, (void*) &COULD_NOT_PARSE_MESSAGE_COUNT);
     }
 }
 
@@ -152,6 +131,59 @@ void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p
  */
 void send_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6) {
+
+    // The done flag.
+    int d = 0;
+    // The comparison result.
+    int r = 0;
+
+    if (d == 0) {
+
+        compare_arrays(p5, p6, (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            send_inline(p0, p1, p2, p3, p4);
+
+            d = 1;
+        }
+    }
+
+    if (d == 0) {
+
+        compare_arrays(p5, p6, (void*) &FILE_CHANNEL, (void*) &FILE_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            send_file(p0, p1, p2, p3, p4);
+
+            d = 1;
+        }
+    }
+
+    if (d == 0) {
+
+        compare_arrays(p5, p6, (void*) &FTP_CHANNEL, (void*) &FTP_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            send_ftp(p0, p1, p2, p3, p4);
+
+            d = 1;
+        }
+    }
+
+    if (d == 0) {
+
+        compare_arrays(p5, p6, (void*) &HTTP_CHANNEL, (void*) &HTTP_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            send_http(p0, p1, p2, p3, p4);
+
+            d = 1;
+        }
+    }
 }
 
 /* COMMUNICATOR_SOURCE */

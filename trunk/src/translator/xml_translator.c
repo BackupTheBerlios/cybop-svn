@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2004-08-23 07:52:25 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-09-08 23:34:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,29 +29,19 @@
 #define XML_TRANSLATOR_SOURCE
 
 #include <libxml/tree.h>
+#include <string.h>
 #include "../array/array.c"
 #include "../creator/compound_creator.c"
 #include "../creator/xml_node_creator.c"
 #include "../creator/xml_property_creator.c"
 #include "../global/character_constants.c"
+#include "../global/cybol_constants.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
 
 //
 // Xml property.
 //
-
-/**
- * Encodes the cyboi model into an xml property.
- *
- * @param p0 the destination
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- */
-void encode_xml_property(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
-}
 
 /**
  * Decodes the xml property into a cyboi model.
@@ -65,12 +55,8 @@ void encode_xml_property(void* p0, void* p1, void* p2, const void* p3, const voi
 void decode_xml_property(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
-//
-// Xml node.
-//
-
 /**
- * Encodes the cyboi model into an xml node.
+ * Encodes the cyboi model into an xml property.
  *
  * @param p0 the destination
  * @param p1 the destination count
@@ -78,8 +64,12 @@ void decode_xml_property(void* p0, void* p1, void* p2, const void* p3, const voi
  * @param p3 the source
  * @param p4 the source count
  */
-void encode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void encode_xml_property(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
+
+//
+// Xml node.
+//
 
 /**
  * Decodes the xml node into a cyboi model.
@@ -101,61 +91,156 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
             xmlNode** s = (xmlNode**) p3;
 
             //
-            // Compare node name ("compound property" or "compound constraint")
-            // using: (*s)->name
+            // Child nodes.
             //
 
-            //
-            // Properties.
-            //
-
-            // Determine first property.
-            xmlAttr* p = (*s)->properties;
-
-            while (1) {
-
-                if (p == NULL_POINTER) {
-
-                    break;
-                }
-
-                // Decode property.
-                decode_xml_property(p0, p1, p2, (void*) &p, p4);
-
-                p = p->next;
-            }
-
-/*??
-            xmlAttr* cur_attr = NULL_POINTER;
-
-            for (cur_attr = n->properties; cur_attr; cur_attr = cur_attr->next) {
-
-                printf("  Attributname: %s\n", cur_attr->name);
-                printf("  Attributwert: %s\n", cur_attr->children->content);
-            }
-*/
-
-            //
-            // Children.
-            //
+            // The name.
+            void* n = NULL_POINTER;
+            int nc = 0;
+            int ns = 0;
+            // The channel.
+            void* c = NULL_POINTER;
+            int cc = 0;
+            int cs = 0;
+            // The abstraction.
+            void* a = NULL_POINTER;
+            int ac = 0;
+            int as = 0;
+            // The model.
+            void* m = NULL_POINTER;
+            int mc = 0;
+            int ms = 0;
 
             // Determine first child node.
-            xmlNode* c = (*s)->children;
+            xmlNode* cn = (*s)->children;
+            // The child node property.
+            xmlAttr* p = NULL_POINTER;
+
+            // The property name.
+            char* pn = NULL_POINTER;
+            int pnc = 0;
+
+            // The done flag.
+            int d = 0;
+            // The comparison result.
+            int r = 0;
 
             while (1) {
 
-                if (c == NULL_POINTER) {
+                if (cn == NULL_POINTER) {
 
                     break;
                 }
 
-                if (c->type == XML_ELEMENT_NODE) {
+                if (cn->type == XML_ELEMENT_NODE) {
+
+                    // Get node name (part | property | constraint):
+                    // cn->name
+
+                    //
+                    // Child node properties.
+                    //
+
+                    // Determine first child node property.
+                    p = cn->properties;
+
+                    while (1) {
+
+                        if (p == NULL_POINTER) {
+
+                            break;
+                        }
+
+                        // Get property name.
+                        pn = (char*) p->name;
+                        pnc = strlen(pn) - 1;
+
+//?? ---
+                        // Reset done flag.
+                        d = 0;
+                        // Reset comparison result.
+                        r = 0;
+
+                        if (d == 0) {
+
+                            compare_arrays((void*) &pn, (void*) &pnc, (void*) &NAME_ATTRIBUTE, (void*) &NAME_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+                            if (r == 1) {
+
+                                // Create a (transient) name.
+
+                                d = 1;
+                            }
+                        }
+
+                        if (d == 0) {
+
+                            compare_arrays((void*) &pn, (void*) &pnc, (void*) &CHANNEL_ATTRIBUTE, (void*) &CHANNEL_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+                            if (r == 1) {
+
+                                // Create a (transient) channel.
+                                // TEMPORARY only, for receiving (reading) data!?
+
+                                d = 1;
+                            }
+                        }
+
+                        if (d == 0) {
+
+                            compare_arrays((void*) &pn, (void*) &pnc, (void*) &ABSTRACTION_ATTRIBUTE, (void*) &ABSTRACTION_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+                            if (r == 1) {
+
+                                // Create a (transient) abstraction.
+
+                                d = 1;
+                            }
+                        }
+
+                        if (d == 0) {
+
+                            compare_arrays((void*) &pn, (void*) &pnc, (void*) &MODEL_ATTRIBUTE, (void*) &MODEL_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+                            if (r == 1) {
+
+                                // Create a (transient) model.
+
+                                d = 1;
+                            }
+                        }
+//?? ---
+
+                        // p->children->content
+
+                        // Decode child node property.
+                        //?? decode_xml_property(p0, p1, p2, (void*) &p, p4);
+
+                        // Reset property name.
+                        pn = NULL_POINTER;
+                        pnc = 0;
+
+                        p = p->next;
+                    }
+
+                    // If child has children, then create details model for it.
+
+                    // Read details.
+                    // Filter out all tags with name attribute value "super" and
+                    // hand over model to create parts of super model.
+                    // Add all details to details model.
+                    // Do NOT add super tags to details model!
+
+                    // Hand over model.
+                    // Receive across channel.
+                    // Read abstraction.
+                    // Initialize it with the actual persistent model.
 
                     // Decode children.
-                    decode_xml_node(p0, p1, p2, (void*) &c, p4);
+                    //?? decode_xml_node(p0, p1, p2, (void*) &c, p4);
                 }
 
-                c = c->next;
+                cn = cn->next;
             }
 
         } else {
@@ -167,6 +252,18 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source count is null.");
     }
+}
+
+/**
+ * Encodes the cyboi model into an xml node.
+ *
+ * @param p0 the destination
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source
+ * @param p4 the source count
+ */
+void encode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 //

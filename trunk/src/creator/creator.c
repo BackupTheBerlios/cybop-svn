@@ -25,7 +25,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.3 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-09-08 23:34:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,213 +60,165 @@
  */
 void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
-    if (p3 != NULL_POINTER) {
+    // The done flag.
+    int d = 0;
+    // The comparison result.
+    int r = 0;
 
-        int* ac = (int*) p3;
+    if (d == 0) {
 
-        // The done flag.
-        int d = 0;
-        // The comparison result.
-        int r = 0;
+        compare_arrays(p2, p3, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (d == 0) {
+        if (r == 1) {
 
-            if (*ac == COMPOUND_ABSTRACTION_COUNT) {
+            create_compound(p0, p1);
 
-                compare_array_elements(p2, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    create_compound(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == CYBOL_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &CYBOL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            create_operation(p0, p1);
 
-                    create_xml_node(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == OPERATION_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            create_string(p0, p1);
 
-                    create_operation(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == STRING_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &BOOLEAN_ABSTRACTION, (void*) &BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &STRING_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &STRING_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            create_boolean(p0, p1);
 
-                    create_string(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == BOOLEAN_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &BOOLEAN_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &BOOLEAN_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            create_integer(p0, p1);
 
-                    create_boolean(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == INTEGER_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &VECTOR_ABSTRACTION, (void*) &VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &INTEGER_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &INTEGER_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            create_vector(p0, p1);
 
-                    create_integer(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == VECTOR_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &DOUBLE_ABSTRACTION, (void*) &DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &VECTOR_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &VECTOR_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            create_double(p0, p1);
 
-                    create_vector(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == DOUBLE_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &FRACTION_ABSTRACTION, (void*) &FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &DOUBLE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DOUBLE_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            create_fraction(p0, p1);
 
-                    create_double(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == FRACTION_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &COMPLEX_ABSTRACTION, (void*) &COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &FRACTION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &FRACTION_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            create_complex(p0, p1);
 
-                    create_fraction(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == COMPLEX_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &TIME_ABSTRACTION, (void*) &TIME_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &COMPLEX_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPLEX_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            create_time(p0, p1);
 
-                    create_complex(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == TIME_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &TIME_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &TIME_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            create_xml_node(p0, p1);
 
-                    create_time(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == HXP_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &HXP_ABSTRACTION, (void*) &HXP_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &HXP_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &HXP_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            create_xml_node(p0, p1);
 
-                    create_xml_node(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == SIGNAL_MEMORY_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            create_signal_memory(p0, p1);
 
-                    create_signal_memory(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create. The abstraction count is null.");
     }
 }
 
@@ -280,213 +232,165 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
  */
 void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
-    if (p3 != NULL_POINTER) {
+    // The done flag.
+    int d = 0;
+    // The comparison result.
+    int r = 0;
 
-        int* ac = (int*) p3;
+    if (d == 0) {
 
-        // The done flag.
-        int d = 0;
-        // The comparison result.
-        int r = 0;
+        compare_arrays(p2, p3, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (d == 0) {
+        if (r == 1) {
 
-            if (*ac == COMPOUND_ABSTRACTION_COUNT) {
+            destroy_compound(p0, p1);
 
-                compare_array_elements(p2, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    destroy_compound(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == CYBOL_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &CYBOL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            destroy_operation(p0, p1);
 
-                    destroy_xml_node(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == OPERATION_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            destroy_string(p0, p1);
 
-                    destroy_operation(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == STRING_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &BOOLEAN_ABSTRACTION, (void*) &BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &STRING_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &STRING_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            destroy_boolean(p0, p1);
 
-                    destroy_string(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == BOOLEAN_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &BOOLEAN_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &BOOLEAN_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            destroy_integer(p0, p1);
 
-                    destroy_boolean(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == INTEGER_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &VECTOR_ABSTRACTION, (void*) &VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &INTEGER_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &INTEGER_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            destroy_vector(p0, p1);
 
-                    destroy_integer(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == VECTOR_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &DOUBLE_ABSTRACTION, (void*) &DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &VECTOR_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &VECTOR_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            destroy_double(p0, p1);
 
-                    destroy_vector(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == DOUBLE_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &FRACTION_ABSTRACTION, (void*) &FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &DOUBLE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DOUBLE_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            destroy_fraction(p0, p1);
 
-                    destroy_double(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == FRACTION_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &COMPLEX_ABSTRACTION, (void*) &COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &FRACTION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &FRACTION_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            destroy_complex(p0, p1);
 
-                    destroy_fraction(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == COMPLEX_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &TIME_ABSTRACTION, (void*) &TIME_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &COMPLEX_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPLEX_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            destroy_time(p0, p1);
 
-                    destroy_complex(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == TIME_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &TIME_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &TIME_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            destroy_xml_node(p0, p1);
 
-                    destroy_time(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == HXP_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &HXP_ABSTRACTION, (void*) &HXP_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &HXP_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &HXP_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            destroy_xml_node(p0, p1);
 
-                    destroy_xml_node(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
+    }
 
-        if (d == 0) {
+    if (d == 0) {
 
-            if (*ac == SIGNAL_MEMORY_ABSTRACTION_COUNT) {
+        compare_arrays(p2, p3, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                compare_array_elements(p2, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r);
+        if (r == 1) {
 
-                if (r == 1) {
+            destroy_signal_memory(p0, p1);
 
-                    destroy_signal_memory(p0, p1);
-
-                    d = 1;
-                }
-            }
+            d = 1;
         }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy. The abstraction count is null.");
     }
 }
 
