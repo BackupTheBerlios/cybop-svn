@@ -25,7 +25,7 @@
  *
  * A string is a chain of characters.
  *
- * @version $Revision: 1.3 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,9 +35,31 @@
 #include "../global/constant.c"
 #include "../logger/logger.c"
 
-//
-// String.
-//
+/**
+ * Creates the string.
+ *
+ * @param p0 the transient model
+ * @param p1 the transient model size
+ */
+void create_string(void* p0, void* p1) {
+
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_STRING_MESSAGE, (void*) &CREATE_STRING_MESSAGE_COUNT);
+
+    create_array(p0, (void*) &CHARACTER_ARRAY, p1);
+}
+
+/**
+ * Destroys the string.
+ *
+ * @param p0 the transient model
+ * @param p1 the transient model size
+ */
+void destroy_string(void* p0, void* p1) {
+
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_STRING_MESSAGE, (void*) &DESTROY_STRING_MESSAGE_COUNT);
+
+    destroy_array(p0, (void*) &CHARACTER_ARRAY, p1);
+}
 
 /**
  * Initializes the string.
@@ -50,45 +72,61 @@
  */
 void initialize_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
-    if (p3 != NULL_POINTER) {
+    if (p2 != NULL_POINTER) {
 
-        int* pc = (int*) p3;
+        int* s = (int*) p2;
 
-        if (p2 != NULL_POINTER) {
+        if (p1 != NULL_POINTER) {
 
-            char* p = (char*) p2;
+            int* c = (int*) p1;
 
-            if (p1 != NULL_POINTER) {
+            // The destination array index.
+            int i = 0;
 
-                int* tc = (int*) p1;
+            if (i >= 0) {
 
-                if (p0 != NULL_POINTER) {
+//??                log_message((void*) &INFO_LOG_LEVEL, (void*) &INITIALIZE_STRING_MESSAGE, (void*) &INITIALIZE_STRING_MESSAGE_COUNT);
 
-                    char* t = (char*) p0;
+                if (i == *s) {
 
-//??                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize string.");
+                    // Increase size.
+                    *s = (*s * STRING_RESIZE_FACTOR) + 1;
 
-                    *t = *p;
-                    *tc = *pc;
+                    // Resize string.
+                    resize_array(p0, (void*) &CHARACTER_ARRAY, p2);
+                }
+
+                if (i < *s) {
+
+                    // Set string.
+                    // CAUTION! Parameter is only set, when not null.
+
+                    if (p3 != NULL_POINTER) {
+
+                        set_array_elements(p0, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
+                    }
+
+                    // Increment count.
+                    (*c)++;
 
                 } else {
 
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The transient model is null.");
+//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The index exceeds the size.");
                 }
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The transient model count is null.");
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The index is negativ.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The persistent model is null.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The count is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The persistent model count is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The size is null.");
     }
 }
 
@@ -102,47 +140,6 @@ void initialize_string(void* p0, void* p1, void* p2, const void* p3, const void*
  * @param p4 the persistent model count
  */
 void finalize_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
-
-    if (p3 != NULL_POINTER) {
-
-        int* pc = (int*) p3;
-
-        if (p2 != NULL_POINTER) {
-
-            char* p = (char*) p2;
-
-            if (p1 != NULL_POINTER) {
-
-                int* tc = (int*) p1;
-
-                if (p0 != NULL_POINTER) {
-
-                    char* t = (char*) p0;
-
-//??                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize string.");
-
-                    *p = *t;
-                    *pc = *tc;
-
-                } else {
-
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The transient model is null.");
-                }
-
-            } else {
-
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The transient model count is null.");
-            }
-
-        } else {
-
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The persistent model is null.");
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The persistent model count is null.");
-    }
 }
 
 /* STRING_SOURCE */

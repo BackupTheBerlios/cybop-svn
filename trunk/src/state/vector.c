@@ -25,7 +25,7 @@
  *
  * A vector contains the three coordinates: x, y, z.
  *
- * @version $Revision: 1.3 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,15 +36,11 @@
 #include "../global/constant.c"
 #include "../logger/logger.c"
 
-//
-// Vector.
-//
-
 /**
  * Creates the vector.
  *
  * @param p0 the transient model
- * @param p1 the transient model count
+ * @param p1 the transient model size
  */
 void create_vector(void* p0, void* p1) {
 
@@ -58,7 +54,7 @@ void create_vector(void* p0, void* p1) {
  * Destroys the vector.
  *
  * @param p0 the transient model
- * @param p1 the transient model count
+ * @param p1 the transient model size
  */
 void destroy_vector(void* p0, void* p1) {
 

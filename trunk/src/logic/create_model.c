@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.4 $ $Date: 2004-06-15 11:31:08 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -138,9 +138,9 @@ void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, co
 }
 
 /**
- * Interprets a persistent model to create a transient model.
+ * Interprets a persistent model.
  *
- * Creates and initializes the transient model.
+ * Creates and initializes a transient model from it.
  *
  * @param p0 the transient model
  * @param p1 the transient model count
@@ -200,7 +200,7 @@ void interpret_model(void* p0, void* p1, void* p2, const void* p3, const void* p
                 }
 
                 //
-                // Logic and Dynamics.
+                // Logic.
                 //
 
                 if (d == 0) {
@@ -229,7 +229,7 @@ void interpret_model(void* p0, void* p1, void* p2, const void* p3, const void* p
                 }
 
                 //
-                // Statics.
+                // State.
                 //
 
                 if (d == 0) {
@@ -240,6 +240,7 @@ void interpret_model(void* p0, void* p1, void* p2, const void* p3, const void* p
 
                         if (r == 1) {
 
+                            create_string(p0, p2);
                             initialize_string(p0, p1, p2, p3, p4);
 
                             d = 1;
@@ -372,7 +373,7 @@ void interpret_model(void* p0, void* p1, void* p2, const void* p3, const void* p
 }
 
 /**
- * Creates a model.
+ * Interprets a persistent model located somewhere.
  *
  * @param p0 the transient model
  * @param p1 the transient model count
@@ -384,7 +385,7 @@ void interpret_model(void* p0, void* p1, void* p2, const void* p3, const void* p
  * @param p7 the persistent model
  * @param p8 the persistent model count
  */
-void create_model(void* p0, void* p1, void* p2,
+void interpret_located_model(void* p0, void* p1, void* p2,
     const void* p3, const void* p4,
     const void* p5, const void* p6,
     const void* p7, const void* p8) {

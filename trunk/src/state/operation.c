@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.3 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,10 +53,6 @@
 #include "../array/array.c"
 #include "../global/constant.c"
 #include "../logger/logger.c"
-
-//
-// Operation.
-//
 
 /**
  * Creates the operation.

@@ -29,7 +29,7 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.3 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,10 +39,6 @@
 #include "../array/array.c"
 #include "../global/constant.c"
 #include "../logger/logger.c"
-
-//
-// Boolean.
-//
 
 /**
  * Initializes the boolean.
@@ -55,18 +51,18 @@
  */
 void initialize_boolean(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
-    if (p3 != NULL_POINTER) {
+    if (p4 != NULL_POINTER) {
 
-        int* pc = (int*) p3;
+        int* pc = (int*) p4;
 
         if (p0 != NULL_POINTER) {
 
             int* t = (int*) p0;
 
-            // The default.
-            *t = 0;
-
 //??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize boolean.");
+
+            // Set boolean to 'false' (default value).
+            *t = 0;
 
             // The comparison result.
             int r = 0;
@@ -77,6 +73,7 @@ void initialize_boolean(void* p0, void* p1, void* p2, const void* p3, const void
 
                 if (r == 1) {
 
+                    // Set boolean to 'true'.
                     *t = 1;
                 }
             }
@@ -117,6 +114,7 @@ void finalize_boolean(void* p0, void* p1, void* p2, const void* p3, const void* 
 
 //??                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize boolean.");
 
+/*??
                 if (*t == 1) {
 
 //??                    *p = TRUE_BOOLEAN;
@@ -128,6 +126,7 @@ void finalize_boolean(void* p0, void* p1, void* p2, const void* p3, const void* 
 //??                    *p = FALSE_BOOLEAN;
                     *pc = FALSE_BOOLEAN_COUNT;
                 }
+*/
 
             } else {
 

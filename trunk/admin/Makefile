@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.12 $ $Date: 2004-06-11 21:58:09 $ $Author: christian $
+# @version $Revision: 1.13 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 # @author Michael Simon <michael.simon@gmx.net>
 #
@@ -70,16 +70,16 @@ MAIN_SOURCE = $(SRC)/cyboi/cyboi.c
 #ROOT_OBJECTS = $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(ROOT_SOURCES))
 ARRAY_SOURCES = $(wildcard $(SRC)/array/*.c)
 ARRAY_OBJECTS = $(patsubst $(SRC)/array/%.c,$(OBJ)/array/%.o,$(ARRAY_SOURCES))
-CONSTANT_SOURCES = $(wildcard $(SRC)/constant/*.c)
-CONSTANT_OBJECTS = $(patsubst $(SRC)/constant/%.c,$(OBJ)/constant/%.o,$(CONSTANT_SOURCES))
 CYBOI_SOURCES = $(wildcard $(SRC)/cyboi/*.c)
 CYBOI_OBJECTS = $(patsubst $(SRC)/cyboi/%.c,$(OBJ)/cyboi/%.o,$(CYBOI_SOURCES))
 CYBOL_SOURCES = $(wildcard $(SRC)/cybol/*.c)
 CYBOL_OBJECTS = $(patsubst $(SRC)/cybol/%.c,$(OBJ)/cybol/%.o,$(CYBOL_SOURCES))
-LOGIC_SOURCES = $(wildcard $(SRC)/logic/*.c)
-LOGIC_OBJECTS = $(patsubst $(SRC)/logic/%.c,$(OBJ)/logic/%.o,$(LOGIC_SOURCES))
+GLOBAL_SOURCES = $(wildcard $(SRC)/global/*.c)
+GLOBAL_OBJECTS = $(patsubst $(SRC)/global/%.c,$(OBJ)/global/%.o,$(GLOBAL_SOURCES))
 LOGGER_SOURCES = $(wildcard $(SRC)/logger/*.c)
 LOGGER_OBJECTS = $(patsubst $(SRC)/logger/%.c,$(OBJ)/logger/%.o,$(LOGGER_SOURCES))
+LOGIC_SOURCES = $(wildcard $(SRC)/logic/*.c)
+LOGIC_OBJECTS = $(patsubst $(SRC)/logic/%.c,$(OBJ)/logic/%.o,$(LOGIC_SOURCES))
 SIGNAL_SOURCES = $(wildcard $(SRC)/signal/*.c)
 SIGNAL_OBJECTS = $(patsubst $(SRC)/signal/%.c,$(OBJ)/signal/%.o,$(SIGNAL_SOURCES))
 STATE_SOURCES = $(wildcard $(SRC)/state/*.c)
@@ -101,7 +101,7 @@ X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WIN
 #
 #	$(COMPILER) -I /usr/X11R6/include -L /usr/X11R6/lib $(OBJ)/cyboi.o -o $(BIN)/$(BINARY)
 #
-all: create $(ARRAY_OBJECTS) $(CONSTANT_OBJECTS) $(CYBOI_OBJECTS) $(CYBOL_OBJECTS) $(LOGIC_OBJECTS) $(LOGGER_OBJECTS) $(SIGNAL_OBJECTS) $(STATE_OBJECTS) $(TEST_OBJECTS) $(X_WINDOWS_OBJECTS)
+all: create $(ARRAY_OBJECTS) $(CYBOI_OBJECTS) $(CYBOL_OBJECTS) $(GLOBAL_OBJECTS) $(LOGGER_OBJECTS) $(LOGIC_OBJECTS) $(SIGNAL_OBJECTS) $(STATE_OBJECTS) $(TEST_OBJECTS) $(X_WINDOWS_OBJECTS)
 	$(COMPILER) -L/usr/X11R6/lib \
 		-o $(BIN)/$(BINARY) $(OBJ)/cyboi/cyboi.o -lX11
 	@echo Compiled cyboi files.
@@ -115,11 +115,11 @@ all: create $(ARRAY_OBJECTS) $(CONSTANT_OBJECTS) $(CYBOI_OBJECTS) $(CYBOL_OBJECT
 create:
 	-cd ..; mkdir obj
 	-cd $(OBJ); mkdir array
-	-cd $(OBJ); mkdir constant
 	-cd $(OBJ); mkdir cyboi
 	-cd $(OBJ); mkdir cybol
-	-cd $(OBJ); mkdir logic
+	-cd $(OBJ); mkdir global
 	-cd $(OBJ); mkdir logger
+	-cd $(OBJ); mkdir logic
 	-cd $(OBJ); mkdir signal
 	-cd $(OBJ); mkdir state
 	-cd $(OBJ); mkdir test
@@ -131,19 +131,19 @@ create:
 $(OBJ)/array/%.o: $(SRC)/array/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/constant/%.o: $(SRC)/constant/%.c
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
-
 $(OBJ)/cyboi/%.o: $(SRC)/cyboi/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/cybol/%.o: $(SRC)/cybol/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/logic/%.o: $(SRC)/logic/%.c
+$(OBJ)/global/%.o: $(SRC)/global/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/logger/%.o: $(SRC)/logger/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/logic/%.o: $(SRC)/logic/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/signal/%.o: $(SRC)/signal/%.c

@@ -23,7 +23,7 @@
  *
  * This file handles an integer.
  *
- * @version $Revision: 1.3 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,10 +32,6 @@
 
 #include "../global/constant.c"
 #include "../logger/logger.c"
-
-//
-// Integer.
-//
 
 /**
  * Initializes the integer.

@@ -25,6 +25,7 @@
  * - null pointers
  * - arrays
  * - compounds:
+ *   - string
  *   - fraction
  *   - vector
  *   - time
@@ -60,7 +61,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.1 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -113,6 +114,7 @@ static const int DOUBLE_ARRAY = 3;
 
 //
 // Compounds:
+// - string
 // - fraction
 // - vector
 // - time
@@ -121,6 +123,13 @@ static const int DOUBLE_ARRAY = 3;
 // - model
 // - signal memory
 //
+
+//
+// String.
+//
+
+/** The string resize factor. */
+static const int STRING_RESIZE_FACTOR = 2;
 
 //
 // Fraction.
