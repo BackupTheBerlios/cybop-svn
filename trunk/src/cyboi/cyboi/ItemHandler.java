@@ -29,13 +29,13 @@ package cyboi;
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.29 $ $Date: 2003-08-14 12:13:20 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2003-08-15 09:34:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
 
     //
-    // Object.
+    // Item object.
     //
 
     /**
@@ -138,69 +138,6 @@ class ItemHandler {
     }
 
     //
-    // Item containers.
-    //
-
-    /**
-     * Initializes the item containers.
-     *
-     * @param p0 the item
-     */
-    static void initialize_item_containers(java.lang.Object p0) {
-
-        Item i = (Item) p0;
-        
-        if (i != null) {
-            
-            java.lang.System.out.println("INFO: Initialize item containers.");
-
-            i.items = new Map();
-            MapHandler.initialize_map(i.items);
-            i.positions = new Map();
-            MapHandler.initialize_map(i.positions);
-            i.instances = new Map();
-            MapHandler.initialize_map(i.instances);
-            i.interactions = new Map();
-            MapHandler.initialize_map(i.interactions);
-
-        } else {
-            
-            java.lang.System.out.println("ERROR: Could not initialize item containers. The item is null.");
-        }
-    }
-
-    /**
-     * Finalizes the item containers.
-     *
-     * @param p0 the item
-     */
-    static void finalize_item_containers(java.lang.Object p0) {
-
-        Item i = (Item) p0;
-        
-        if (i != null) {
-
-            java.lang.System.out.println("INFO: Finalize item containers.");
-
-            MapHandler.finalize_map(i.interactions);
-            i.interactions = null;
-
-            MapHandler.finalize_map(i.instances);
-            i.instances = null;
-
-            MapHandler.finalize_map(i.positions);
-            i.positions = null;
-
-            MapHandler.finalize_map(i.items);
-            i.items = null;
-
-        } else {
-
-            java.lang.System.out.println("ERROR: Could not finalize item containers. The item is null.");
-        }
-    }
-
-    //
     // Item.
     //
 
@@ -270,6 +207,69 @@ class ItemHandler {
         // Destroy temporary category item.        
         ItemHandler.finalize_item_containers(c);
         c = null;
+    }
+
+    //
+    // Item containers.
+    //
+
+    /**
+     * Initializes the item containers.
+     *
+     * @param p0 the item
+     */
+    static void initialize_item_containers(java.lang.Object p0) {
+
+        Item i = (Item) p0;
+        
+        if (i != null) {
+            
+            java.lang.System.out.println("INFO: Initialize item containers.");
+
+            i.items = new Map();
+            MapHandler.initialize_map(i.items);
+            i.positions = new Map();
+            MapHandler.initialize_map(i.positions);
+            i.instances = new Map();
+            MapHandler.initialize_map(i.instances);
+            i.interactions = new Map();
+            MapHandler.initialize_map(i.interactions);
+
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not initialize item containers. The item is null.");
+        }
+    }
+
+    /**
+     * Finalizes the item containers.
+     *
+     * @param p0 the item
+     */
+    static void finalize_item_containers(java.lang.Object p0) {
+
+        Item i = (Item) p0;
+        
+        if (i != null) {
+
+            java.lang.System.out.println("INFO: Finalize item containers.");
+
+            MapHandler.finalize_map(i.interactions);
+            i.interactions = null;
+
+            MapHandler.finalize_map(i.instances);
+            i.instances = null;
+
+            MapHandler.finalize_map(i.positions);
+            i.positions = null;
+
+            MapHandler.finalize_map(i.items);
+            i.items = null;
+
+        } else {
+
+            java.lang.System.out.println("ERROR: Could not finalize item containers. The item is null.");
+        }
     }
 
     //
@@ -483,5 +483,124 @@ class ItemHandler {
      */
     static void finalize_child_item(java.lang.Object p0, java.lang.Object p1) {
     }
+
+    //
+    // Item element.
+    //
+
+    /**
+     * Adds the item element.
+     *
+     * @param p0 the item
+     * @param p1 the element
+     * @param p2 the name
+     */
+/*??
+    static void add_item_element(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
+
+        java.lang.Object n = MapHandler.determine_map_element_name(p0, p2);
+        MapHandler.set_map_element(p0, p1, n);
+    }
+
+    /**
+     * Sets the item element.
+     *
+     * @param p0 the item name
+     * @param p1 the element
+     */
+/*??
+    static void set_item_element(java.lang.Object p0, java.lang.Object p1) {
+
+        Map m = (Map) p0;
+        
+        if (m != null) {
+            
+            int i = MapHandler.determine_next_map_element_index(m, p2);
+
+            m.names = ArrayHandler.set_array_element(m.names, p2, i);
+            m.references = ArrayHandler.set_array_element(m.references, p1, i);
+
+        } else {
+
+            java.lang.System.out.println("ERROR: Could not set map element. The map is null.");
+        }
+    }
+
+    /**
+     * Removes the map element with the index.
+     *
+     * @param p0 the map
+     * @param p1 the index
+     */
+/*??
+    static void remove_map_element(java.lang.Object p0, int p1) {
+
+        Map m = (Map) p0;
+        
+        if (m != null) {
+
+            ArrayHandler.remove_array_element(m.names, p1);
+            ArrayHandler.remove_array_element(m.references, p1);
+
+        } else {
+
+            java.lang.System.out.println("ERROR: Could not remove map element. The map is null.");
+        }
+    }
+
+    /**
+     * Removes the map element with the name.
+     *
+     * @param p0 the map
+     * @param p1 the name
+     */
+/*??
+    static void remove_map_element(java.lang.Object p0, java.lang.Object p1) {
+    
+        int i = MapHandler.get_map_element_index(p0, p1);
+
+        MapHandler.remove_map_element(p0, i);
+    }
+
+    /**
+     * Returns the map element with the index.
+     *
+     * @param p0 the map
+     * @param p1 the index
+     * @return the element
+     */
+/*??
+    static java.lang.Object get_map_element(java.lang.Object p0, int p1) {
+
+        java.lang.Object e = null;
+        Map m = (Map) p0;
+
+        if (m != null) {
+    
+            e = ArrayHandler.get_array_element(m.references, p1);
+
+        } else {
+
+            java.lang.System.out.println("ERROR: Could not get map element. The map is null.");
+        }
+        
+        return e;
+    }
+
+    /**
+     * Returns the map element with the name.
+     *
+     * @param p0 the map
+     * @param p1 the name
+     * @return the element
+     */
+/*??
+    static java.lang.Object get_map_element(java.lang.Object p0, java.lang.Object p1) {
+
+        int i = MapHandler.get_map_element_index(p0, p1);
+
+        return MapHandler.get_map_element(p0, i);
+    }
+*/
 }
 

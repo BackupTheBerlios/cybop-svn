@@ -32,7 +32,7 @@ package cyboi;
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) format.
  *
- * @version $Revision: 1.29 $ $Date: 2003-08-12 21:17:16 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2003-08-15 09:34:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -52,11 +52,11 @@ class Main {
 
             if (args != null) {
 
-                if (args.length == 2) {
+                if ((args.length == 2) && (args[0] != null) && (args[1] != null)) {
 
                     // Arguments.
-                    java.lang.Object statics_category_name = args[0];
-                    java.lang.Object dynamics_category_name = args[1];
+                    java.lang.Object dynamics = args[0];
+                    java.lang.Object statics = args[1];
 
                     // XML parser.
                     CategoryHandler.xml_parser = new org.apache.xerces.parsers.DOMParser();
@@ -66,57 +66,41 @@ class Main {
                     java.lang.Object signal_memory = new Map();
                     MapHandler.initialize_map(signal_memory);
 
-                    // Statics (system).
-                    java.lang.Object statics = ItemHandler.create_object(statics_category_name, Statics.CATEGORY);
-
-                    // Dynamics (signal).
-                    if (dynamics_category_name != null) {
-                        
-                        // Only send a new signal (store in signal memory) if an action exists.
-                        Signal tmp = new Signal();
-                
-                        if (tmp != null) {
-                        
-                            // Set signal elements.
-                            tmp.priority = SignalHandler.NORMAL_PRIORITY;
-                            tmp.language = SignalHandler.NEURO_LANGUAGE;
-                            tmp.predicate = dynamics_category_name;
-        
-                            // Add signal to signal memory (interrupt vector table).
-                            MapHandler.add_map_element(signal_memory, tmp, SignalHandler.SIGNAL);
-            
-                        } else {
-                
-                            java.lang.System.out.println("ERROR: Could not create initial signal. The signal is null.");
-                        }
-            
-                    } else {
-                        
-                        java.lang.System.out.println("ERROR: Could not create initial signal. The dynamics (signal/ action) is null.");
-                    }
-    
                     // Event handler.
                     JavaEventHandler.signal_memory = signal_memory;
                     java.lang.Object event_handler = new JavaEventHandler();
                     JavaEventHandler.set_event_handler(event_handler);
 
+                    // Create and send signal (store in signal memory).
+                    Signal tmp = new Signal();
+            
+                    if (tmp != null) {
+                    
+                        // Set signal elements.
+                        tmp.priority = SignalHandler.NORMAL_PRIORITY;
+                        tmp.language = SignalHandler.NEURO_LANGUAGE;
+                        tmp.predicate = dynamics;
+                        tmp.object = statics;
+    
+                        // Add signal to signal memory (interrupt vector table).
+                        MapHandler.add_map_element(signal_memory, tmp, SignalHandler.SIGNAL);
+        
+                    } else {
+            
+                        java.lang.System.out.println("ERROR: Could not create initial signal. The signal is null.");
+                    }
+    
                     // The system is now started up and complete so that a loop
                     // can be entered, waiting for signals (events/ interrupts)
                     // which are stored/ found in the signal memory.
                     Main.await(signal_memory);
-    
                     // The loop above is left as soon as its shutdown flag is set.
-    
+
                     // Event handler.
                     JavaEventHandler.remove_event_handler(event_handler);
                     event_handler = null;
                     JavaEventHandler.signal_memory = null;
                     
-                    // Dynamics (signal).
-
-                    // Statics (system).
-                    ItemHandler.destroy_object(statics, statics_category_name, Statics.CATEGORY);
-
                     // Memory (signal queue).
                     MapHandler.finalize_map(signal_memory);
                     signal_memory = null;
@@ -137,9 +121,9 @@ class Main {
 
                 } else {
     
-                    // Help information.
+                    // Show help information.
                     java.lang.System.out.println("Usage:\n"
-                        + "startup_cyboi cybol/core/system/system workflow");
+                        + "cyboi startup cybol.core.system.system");
                 }
 
             } else {

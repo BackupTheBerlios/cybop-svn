@@ -31,7 +31,7 @@ package cyboi;
  * 
  * Signals can be stored in a memory.
  * 
- * @version $Revision: 1.1 $ $Date: 2003-08-12 17:14:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-08-15 09:34:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Signal {
@@ -58,8 +58,8 @@ class Signal {
     /** The sender. */
     java.lang.Object sender;
 
-    /** The model. */
-    java.lang.Object model;
+    /** The object. */
+    java.lang.Object object;
 
     /** The adverbial. */
     java.lang.Object adverbial;

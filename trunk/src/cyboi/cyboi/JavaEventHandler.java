@@ -32,10 +32,20 @@ package cyboi;
  *
  * Unfortunately, handling of most events is done via graphical components in java.
  *
- * @version $Revision: 1.5 $ $Date: 2003-08-14 12:13:20 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-08-15 09:34:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaEventHandler extends java.awt.EventQueue {
+
+    //
+    // Events.
+    //
+    
+    /** The mouse clicked event. */
+    static java.lang.String MOUSE_CLICKED_EVENT = "mouse_clicked";
+
+    /** The mouse moved event. */
+    static java.lang.String MOUSE_MOVED_EVENT = "mouse_moved";
 
     //
     // Attributes.
@@ -244,7 +254,7 @@ class JavaEventHandler extends java.awt.EventQueue {
     
                 } else */if (id == java.awt.event.MouseEvent.MOUSE_CLICKED) {
     
-                    s.predicate = "shutdown";
+                    s.predicate = JavaEventHandler.MOUSE_CLICKED_EVENT;
 
 /*??
                     a = Controller.MOUSE_CLICKED_ACTION;
@@ -405,7 +415,7 @@ class JavaEventHandler extends java.awt.EventQueue {
                     ItemHandler.set_item_element("system.controller.mouse_model.pointer_position.y_distance.unit", "pixel");
 */
 
-                    s.predicate = "mouse_moved_event";
+                    s.predicate = JavaEventHandler.MOUSE_MOVED_EVENT;
     
                 }/*?? else if (id == java.awt.event.MouseEvent.MOUSE_PRESSED) {
     

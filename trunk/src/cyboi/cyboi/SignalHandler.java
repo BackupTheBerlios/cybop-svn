@@ -33,7 +33,7 @@ package cyboi;
  * - send
  * - reset
  *
- * @version $Revision: 1.12 $ $Date: 2003-08-14 12:13:20 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-08-15 09:34:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -57,37 +57,56 @@ class SignalHandler {
     //
 
     /** The system internal (neuro) language. */
-    static java.lang.String NEURO_LANGUAGE = "neuro_language";
+    static java.lang.String NEURO_LANGUAGE = "neuro";
 
     /** The textual user interface (tui) language. */
-    static java.lang.String TUI_LANGUAGE = "tui_language";
+    static java.lang.String TUI_LANGUAGE = "tui";
 
     /** The mouse language. */
-    static java.lang.String MOUSE_LANGUAGE = "mouse_language";
+    static java.lang.String MOUSE_LANGUAGE = "mouse";
 
     /** The graphical user interface (gui) language. */
-    static java.lang.String GUI_LANGUAGE = "gui_language";
+    static java.lang.String GUI_LANGUAGE = "gui";
 
     /** The socket language. */
-    static java.lang.String SOCKET_LANGUAGE = "socket_language";
+    static java.lang.String SOCKET_LANGUAGE = "socket";
 
     /** The structured query language (sql). */
-    static java.lang.String SQ_LANGUAGE = "sq_language";
+    static java.lang.String SQ_LANGUAGE = "sq";
 
     /** The java messaging service (jms) language. */
-    static java.lang.String JMS_LANGUAGE = "jms_language";
+    static java.lang.String JMS_LANGUAGE = "jms";
 
     /** The remote method invocation (rmi) language. */
-    static java.lang.String RMI_LANGUAGE = "rmi_language";
+    static java.lang.String RMI_LANGUAGE = "rmi";
 
     /** The common object request broker architecture (corba) language. */
-    static java.lang.String CORBA_LANGUAGE = "corba_language";
+    static java.lang.String CORBA_LANGUAGE = "corba";
 
     /** The extensible markup language (xml). */
-    static java.lang.String XM_LANGUAGE = "xm_language";
+    static java.lang.String XM_LANGUAGE = "xm";
 
     /** The simple object access protocol (soap) language. */
-    static java.lang.String SOAP_LANGUAGE = "soap_language";
+    static java.lang.String SOAP_LANGUAGE = "soap";
+
+    //
+    // Actions.
+    //
+
+    /** The show system information action. */
+    static java.lang.String SHOW_SYSTEM_INFORMATION_ACTION = "show_system_information";
+
+    /** The startup action. */
+    static java.lang.String STARTUP_ACTION = "startup";
+
+    /** The shutdown action. */
+    static java.lang.String SHUTDOWN_ACTION = "shutdown";
+    
+    //
+    // Attributes.
+    //
+    
+    static java.lang.Object statics;
 
     //
     // Signal.
@@ -133,7 +152,7 @@ class SignalHandler {
                 s.predicate = tmp.predicate;
                 s.owner = tmp.owner;
                 s.sender = tmp.sender;
-                s.model = tmp.model;
+                s.object = tmp.object;
                 s.adverbial = tmp.adverbial;
                 s.condition = tmp.condition;
 
@@ -160,7 +179,7 @@ class SignalHandler {
      * @param p1 the remote flag
      * @return the shutdown flag
      */
-    static boolean handle(java.lang.Object p0, int p1) {
+    static boolean handle(java.lang.Object p0, int p1) throws java.lang.Exception {
 
         boolean sf = false;
         Signal s = (Signal) p0;
@@ -173,23 +192,36 @@ class SignalHandler {
 
                 java.lang.System.out.println("INFO: Handle signal: " + a);
 
-                if (a.equals("mouse_moved_event")) {
+                if (a.equals(JavaEventHandler.MOUSE_MOVED_EVENT)) {
 
 //??                    set_position;
 
                     SignalHandler.reset(s);
 
-                } else if (a.equals("startup")) {
+                } else if (a.equals(JavaEventHandler.MOUSE_CLICKED_EVENT)) {
+
+                    SignalHandler.reset(s);
+
+                } else if (a.equals(SignalHandler.SHOW_SYSTEM_INFORMATION_ACTION)) {
                     
                     SignalHandler.reset(s);
 
-                } else if (a.equals("shutdown")) {
+                } else if (a.equals(SignalHandler.STARTUP_ACTION)) {
                     
+                    // Statics (system).
+                    SignalHandler.statics = ItemHandler.create_object(s.object, Statics.CATEGORY);
+
+                    SignalHandler.reset(s);
+
+                } else if (a.equals(SignalHandler.SHUTDOWN_ACTION)) {
+                    
+                    // Statics (system).
+                    ItemHandler.destroy_object(SignalHandler.statics, s.object, Statics.CATEGORY);
+
                     sf = true;
 
                     SignalHandler.reset(s);
                 }
-                
                 
             } else {
     
@@ -240,7 +272,7 @@ class SignalHandler {
                     tmp.predicate = s.predicate;
                     tmp.owner = s.owner;
                     tmp.sender = s.sender;
-                    tmp.model = s.model;
+                    tmp.object = s.object;
                     tmp.adverbial = s.adverbial;
                     tmp.condition = s.condition;
 
@@ -290,7 +322,7 @@ class SignalHandler {
             s.predicate = null;
             s.owner = null;
             s.sender = null;
-            s.model = null;
+            s.object = null;
             s.adverbial = null;
             s.condition = null;
 
