@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+<model>
+
+    <part
+        name="set_colour_for_default"
+        location="inline"
+        abstraction="operation"
+        model="setproperty,
+               example2.web.web.first_name,
+               colour,
+               example2.web.web.colour_default"
+    />
+
+
+    <part
+        name="set_colour_for_special"
+        location="inline"
+        abstraction="operation"
+        model="setproperty,
+               example2.web.first_name,
+               colour,
+               example2.web.colour_special"
+    />
+    
+    <part
+        name="set_first_name"
+        location="inline"
+        position="1"
+        abstraction="operation"
+        model="set,
+               example2.domain.adress.first_name,
+               example2.web.web.first_name"
+    />
+    
+    <part
+        name="set_last_name"
+        location="inline"
+        position="2"
+        abstraction="operation"
+        model="setproperty,
+               example2.domain.adress.last_name,
+               example2.web.web.last_name"
+    />
+    
+    <part
+        name="set_colour"
+        location="inline"
+        position="3"
+        abstraction="operation"
+        model="equals,
+               example2.domain.adress.first_name,
+               example2.domain.comparison.first_name,
+               set_colour_for_special,
+               set_colour_for_default"
+    />
+    
+</model>

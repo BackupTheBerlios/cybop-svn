@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window id="WB3demo-window"
+        width="400"
+        height="450"
+        title="WB3 Demo"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+
+  <box orient="vertical" width="500">
+    <html>
+      <html:dt>
+        <html:b>Einfuehrung Prototyp</html:b>
+        <html:dd>
+          Dieser Prototyp ist nach Diskussionen im Internet Prtojekt Woerterbuch 
+          entstanden. Er soll dazu dienen, technische Fragen abzuklaeren, die bei 
+          der Umsetzung eines mehrsprachigen Woerterbuchs im Internet in 
+          Zusammenhang mit der HTML - CGI - C - Datenbank auftreten.
+          Gestartet Ende Juni 1998. Initialisiert mit der freuen Wortliste   
+          MOBY(German).
+        </html:dd>
+      </html:dt>
+      <html:dt>
+        <html:b>Das Projekt Woerterbuch</html:b>
+        <html:dd>
+        Kurz gesagt: Durch freie Mitarbeit soll ein lizenzfreies, 
+        mehrsprachiges, innovatives Woerterbuch geschaffen werden. Es soll 
+        Wortlisten fuer Rechtschreibpruefungen in verschiedenen Programmen
+        (z.B. Pegasus) liefern, aber auch fuer linguistische Zwecke
+        oder einfach zum Nachschlagen verfuegbar sein. Jeder ist herzlich 
+        eingeladen, seinen Beitrag zu leisten.
+        </html:dd>
+      </html:dt>
+      <html:table cellpadding="3" border="0" width="100%">
+        <html:tr>
+          <html:td bgcolor="#655bbb">
+            <html:font color="#ffffff" size="3" face="verdana, arial, helvetica">
+              Bearbeiten des Woerterbuchs
+            </html:font>
+          </html:td>
+        </html:tr>
+      </html:table>
+    </html>
+
+    <grid>
+      <columns>
+        <column/>
+        <column flex="1"/>
+      </columns>
+
+      <rows>
+        <row>
+          <text value="Sprache:"/>
+          <textfield flex="1"/>
+        </row>
+        <row>
+          <text value="Suchen nach:"/>
+          <textfield flex="1"/>
+        </row>
+        <row>
+          <text value="Fundstellen(max):"/>
+          <box flex="1">
+            <textfield flex="1"/>
+            <button value="Suchen ..."/>
+          </box>   
+        </row>
+      </rows>
+    </grid>
+    <html>
+      <html:table cellpadding="3" border="0" width="100%">
+        <html:tr>
+          <html:td bgcolor="#655bbb">
+            <html:font color="#ffffff" size="3" face="verdana, arial, helvetica">
+              Nachschlagen im Woerterbuch
+            </html:font>
+          </html:td>
+        </html:tr>
+      </html:table>
+    </html>
+    <grid>
+      <columns>
+        <column/>
+        <column flex="1"/>
+        <column/>
+      </columns>
+
+      <rows>
+        <row>
+          <text value="Sprache:"/>
+          <box flex="1">
+            <textfield flex="1"/>
+            <text value="(z.B. de oder en)"/>
+          </box>
+          <text value="(leer=alle)"/>
+        </row>
+        <row>
+          <text value="Suchen nach:"/>
+          <textfield flex="1"/>
+        </row>
+        <row>
+          <text value="Fundstellen(max):"/>
+          <textfield flex="1"/>
+          <button value="Suchen ..."/>
+        </row>
+      </rows>
+    </grid>
+    <html>
+      <html:table cellpadding="3" border="0" width="100%">
+        <html:tr>
+          <html:td bgcolor="#655bbb">
+            <html:font color="#ffffff" size="3" face="verdana, arial, helvetica">
+              Woerterbuch: Gesamter Inhalt in Textform
+            </html:font>
+          </html:td>
+        </html:tr>
+      </html:table>
+      <html:dt>
+        <html:b>Freie Verfuegbarkeit der Datenbank</html:b>
+        <html:dd>
+          Der Inhalt der WB3 Datenbank ist frei verfuegbar und, ohne 
+  	  Lizenzrechte zu verletzen, frei verwendbar. Da noch nicht klar ist,
+  	  in welchen Formaten und in welcher Aktualitaet die Daten gebraucht
+	  werden, befindet hier nur eine Testmoeglichkeit als Platzhalter 
+	  fuer zukuenftige Exportfunktionen.
+        </html:dd>
+      </html:dt>
+    </html>
+    <button value="Liste erstellen ... (Test: maximal 4000)"/>
+    <html>
+      <html:table cellpadding="3" border="0" width="100%">
+        <html:tr>
+          <html:td bgcolor="#655bbb">
+            <html:font color="#ffffff" size="3" face="verdana, arial, helvetica">
+              Woerterbuch - Erzeugung von Wortlisten
+            </html:font>
+          </html:td>
+        </html:tr>
+      </html:table>
+    </html>
+    <grid>
+      <columns>
+        <column/>
+        <column flex="1"/>
+        <column/>
+      </columns>
+
+      <rows>
+        <row>
+          <text value="Sprache:"/>
+          <box flex="1">
+            <textfield flex="1"/>
+            <text value="(z.B. de oder en)"/>
+          </box>
+          <text value="(leer=alle)"/>
+        </row>
+        <row>
+          <text value="Suchen nach:"/>
+          <textfield flex="1"/>
+        </row>
+      </rows>
+    </grid>
+    <button value="Wortiste erstellen ... (Test: maximal 100)"/>
+  </box>
+ 
+</window>
+
