@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.4 $ $Date: 2004-09-08 23:34:12 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-09-12 09:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -179,7 +179,7 @@ static const char* TEX_ABSTRACTION = TEX_ABSTRACTION_ARRAY;
 static const int TEX_ABSTRACTION_COUNT = 3;
 
 /** The healthcare exchange protocol abstraction array, pointer, count. */
-static const char HXP_ABSTRACTION_ARRAY[] = {'k', 'w', 'd'};
+static const char HXP_ABSTRACTION_ARRAY[] = {'h', 'x', 'p'};
 static const char* HXP_ABSTRACTION = HXP_ABSTRACTION_ARRAY;
 static const int HXP_ABSTRACTION_COUNT = 5;
 
@@ -232,9 +232,9 @@ static const char* X_WINDOWS_LANGUAGE = X_WINDOWS_LANGUAGE_ARRAY;
 static const int X_WINDOWS_LANGUAGE_COUNT = 9;
 
 /** The structured query language (sql) array, pointer, count. */
-static const char SQ_LANGUAGE_ARRAY[] = {'s', 'q', 'l'};
-static const char* SQ_LANGUAGE = SQ_LANGUAGE_ARRAY;
-static const int SQ_LANGUAGE_COUNT = 3;
+static const char SQL_LANGUAGE_ARRAY[] = {'s', 'q', 'l'};
+static const char* SQL_LANGUAGE = SQL_LANGUAGE_ARRAY;
+static const int SQL_LANGUAGE_COUNT = 3;
 
 /** The tar language array, pointer, count. */
 static const char TAR_LANGUAGE_ARRAY[] = {'t', 'a', 'r'};

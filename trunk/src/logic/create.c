@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.10 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-09-12 09:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -219,7 +219,7 @@ void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const 
 }
 
 /**
- * Creates a model.
+ * Creates a compound model.
  *
  * The creation happens in 3 steps and 4 models are involved.
  *
@@ -364,9 +364,13 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
     if (p == 1) {
 
+    fprintf(stderr, "TEST: create primitive model: %i\n", p5);
+
         create_primitive_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
 
     } else {
+
+    fprintf(stderr, "TEST: create compound model: %i\n", p5);
 
         create_compound_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
     }

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-09-12 09:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,12 +32,11 @@
 #include "../global/abstraction_constants.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
-#include "../translator/compound_translator.c"
-#include "../translator/xml_translator.c"
+#include "../translator/cybol_translator.c"
 
 /**
  * Decodes the document model according to the given document type
- * and creates a cyboi model from it.
+ * and creates a cyboi compound model from it.
  *
  * @param p0 the destination
  * @param p1 the destination count
@@ -57,23 +56,11 @@ void decode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
     if (d == 0) {
 
-        compare_arrays(p5, p6, (void*) &XML_ABSTRACTION, (void*) &XML_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            decode_xml(p0, p1, p2, p3, p4);
-
-            d = 1;
-        }
-    }
-
-    if (d == 0) {
-
-        compare_arrays(p5, p6, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            decode_compound(p0, p1, p2, p3, p4);
+            decode_cybol(p0, p1, p2, p3, p4);
 
             d = 1;
         }
@@ -84,7 +71,7 @@ void decode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 }
 
 /**
- * Encodes the cyboi model according to the given document type
+ * Encodes the cyboi compound model according to the given document type
  * and creates a document model from it.
  *
  * @param p0 the destination
@@ -105,23 +92,11 @@ void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
     if (d == 0) {
 
-        compare_arrays(p5, p6, (void*) &XML_ABSTRACTION, (void*) &XML_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            encode_xml(p0, p1, p2, p3, p4);
-
-            d = 1;
-        }
-    }
-
-    if (d == 0) {
-
-        compare_arrays(p5, p6, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            encode_compound(p0, p1, p2, p3, p4);
+            encode_cybol(p0, p1, p2, p3, p4);
 
             d = 1;
         }

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-09-12 09:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,7 +43,7 @@
  *
  * @param p0 the signal
  * @param p1 the signal count
- * @param p2 the signal priority
+ * @param p2 the priority
  * @param p3 the signal memory
  * @param p4 the signal memory count
  * @param p5 the signal memory size
@@ -109,6 +109,16 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
             // than their original whole signal.)
             set_signal(p3, p4, p5, (void*) &a, (void*) &ac,
                 (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, p2);
+
+            // Reset abstraction.
+            a = NULL_POINTER;
+            ac = 0;
+            // Reset model.
+            m = NULL_POINTER;
+            mc = 0;
+            // Reset details.
+            d = NULL_POINTER;
+            dc = 0;
 
             j++;
         }

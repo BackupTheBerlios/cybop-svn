@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.35 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
+ * @version $Revision: 1.36 $ $Date: 2004-09-12 09:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -277,7 +277,8 @@ int main(int p0, char** p1) {
                 (void*) &sa, (void*) &sac,
                 (void*) &sc, (void*) &scc);
 
-            // Do not create destination details! It is not needed.
+            // Do not create destination details!
+            // It is not needed for the startup signal.
 
             //
             // Startup signal.

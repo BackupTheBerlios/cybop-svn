@@ -25,7 +25,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-14 22:20:33 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-09-12 09:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,9 +78,6 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
                     // adding the null termination character.
                     set_array_elements((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
                     set_array_element((void*) &tn, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CHARACTER);
-
-    fprintf(stderr, "read file name: %s\n", tn);
-    fprintf(stderr, "read file name size: %i\n", tns);
 
                     // Open file.
                     // CAUTION! The file name cannot be handed over as is.

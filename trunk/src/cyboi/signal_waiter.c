@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-09-12 09:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -194,7 +194,7 @@ void wait(void* p0, void* p1, void* p2,
 
             if (d == 0) {
 
-                compare_arrays((void*) &a, (void*) &ac, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+                compare_arrays((void*) &a, (void*) &ac, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
                 if (r == 1) {
 
@@ -223,6 +223,10 @@ void wait(void* p0, void* p1, void* p2,
                 }
             }
 
+            //
+            // Unknown signal abstraction.
+            //
+
             if (d == 0) {
 
                 log_message((void*) &WARNING_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE, (void*) &COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT);
@@ -238,7 +242,7 @@ void wait(void* p0, void* p1, void* p2,
             p = NULL_POINTER;
             pc = 0;
             // Reset priority.
-            p = NORMAL_PRIORITY;
+            pr = NORMAL_PRIORITY;
             // Reset highest priority index.
             i == -1;
             // Reset done flag.

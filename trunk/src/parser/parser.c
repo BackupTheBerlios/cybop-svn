@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-09-12 09:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,7 +34,6 @@
 #include "../logger/logger.c"
 #include "../parser/boolean_parser.c"
 #include "../parser/complex_parser.c"
-#include "../parser/compound_parser.c"
 #include "../parser/double_parser.c"
 #include "../parser/fraction_parser.c"
 #include "../parser/integer_parser.c"
@@ -65,23 +64,11 @@ void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
     if (d == 0) {
 
-        compare_arrays(p5, p6, (void*) &XML_ABSTRACTION, (void*) &XML_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
         if (r == 1) {
 
             parse_xml(p0, p1, p2, p3, p4);
-
-            d = 1;
-        }
-    }
-
-    if (d == 0) {
-
-        compare_arrays(p5, p6, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            parse_compound(p0, p1, p2, p3, p4);
 
             d = 1;
         }
@@ -246,23 +233,11 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
     if (d == 0) {
 
-        compare_arrays(p5, p6, (void*) &XML_ABSTRACTION, (void*) &XML_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
         if (r == 1) {
 
             serialize_xml(p0, p1, p2, p3, p4);
-
-            d = 1;
-        }
-    }
-
-    if (d == 0) {
-
-        compare_arrays(p5, p6, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            serialize_compound(p0, p1, p2, p3, p4);
 
             d = 1;
         }

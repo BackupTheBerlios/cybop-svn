@@ -1,5 +1,5 @@
 /*
- * $RCSfile: xml_translator.c,v $
+ * $RCSfile: cybol_translator.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -21,12 +21,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-09-12 09:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef XML_TRANSLATOR_SOURCE
-#define XML_TRANSLATOR_SOURCE
+#ifndef CYBOL_TRANSLATOR_SOURCE
+#define CYBOL_TRANSLATOR_SOURCE
 
 #include <libxml/tree.h>
 #include <string.h>
@@ -62,11 +62,11 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8);
 
 //
-// Xml property.
+// Cybol property.
 //
 
 /**
- * Decodes the xml property into a cyboi model.
+ * Decodes the cybol properties.
  *
  * @param p0 the child node
  * @param p1 the name
@@ -78,7 +78,7 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  * @param p7 the model
  * @param p8 the model count
  */
-void decode_xml_property(const void* p0, void* p1, void* p2,
+void decode_cybol_property(const void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p8 != NULL_POINTER) {
@@ -219,9 +219,6 @@ void decode_xml_property(const void* p0, void* p1, void* p2,
                                             //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source property value is null.");
                                                 }
 
-                                                // Decode child node property.
-                                                //?? decode_xml_property(p0, p1, p2, (void*) &p, p4);
-
                                                 p = p->next;
                                             }
 
@@ -277,7 +274,7 @@ void decode_xml_property(const void* p0, void* p1, void* p2,
 }
 
 /**
- * Encodes the cyboi model into an xml property.
+ * Encodes the cybol properties.
  *
  * @param p0 the destination
  * @param p1 the destination count
@@ -285,15 +282,15 @@ void decode_xml_property(const void* p0, void* p1, void* p2,
  * @param p3 the source
  * @param p4 the source count
  */
-void encode_xml_property(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void encode_cybol_property(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 //
-// Xml node.
+// Cybol node.
 //
 
 /**
- * Decodes the xml node into a cyboi model.
+ * Decodes the cybol node into a compound.
  *
  * @param p0 the destination
  * @param p1 the destination count
@@ -301,7 +298,7 @@ void encode_xml_property(void* p0, void* p1, void* p2, const void* p3, const voi
  * @param p3 the source
  * @param p4 the source count
  */
-void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void decode_cybol_node(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -357,7 +354,7 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
                     if (c->type == XML_ELEMENT_NODE) {
 
                         // Decode child node properties.
-                        decode_xml_property((void*) &c,
+                        decode_cybol_property((void*) &c,
                             (void*) &sn, (void*) &snc, (void*) &sc, (void*) &scc,
                             (void*) &sa, (void*) &sac, (void*) &sm, (void*) &smc);
 
@@ -390,7 +387,7 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
                                 (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
 
                             // Decode child node children.
-                            decode_xml_node((void*) &dd, (void*) &ddc, (void*) &dds,
+                            decode_cybol_node((void*) &dd, (void*) &ddc, (void*) &dds,
                                 (void*) &c, (void*) &cc);
 
                             //?? Read details??
@@ -465,7 +462,7 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
 }
 
 /**
- * Encodes the cyboi model into an xml node.
+ * Encodes the compound into a cybol node.
  *
  * @param p0 the destination
  * @param p1 the destination count
@@ -473,15 +470,15 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
  * @param p3 the source
  * @param p4 the source count
  */
-void encode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void encode_cybol_node(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 //
-// Xml model.
+// Cybol model.
 //
 
 /**
- * Decodes the xml model and creates a cyboi compound from it.
+ * Decodes the cybol model into a compound.
  *
  * @param p0 the destination
  * @param p1 the destination count
@@ -489,7 +486,7 @@ void encode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
  * @param p3 the source
  * @param p4 the source count
  */
-void decode_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void decode_cybol(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     //??
     //?? BEGIN of temporary workaround for using the libxml2 parser.
@@ -513,7 +510,7 @@ void decode_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                 // Get root element node.
                 xmlNode* r = xmlDocGetRootElement((xmlDoc*) *s);
 
-                decode_xml_node(p0, p1, p2, (void*) &r, p4);
+                decode_cybol_node(p0, p1, p2, (void*) &r, p4);
 
             } else {
 
@@ -536,7 +533,7 @@ void decode_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /**
- * Encodes the cyboi compound and creates an xml model from it.
+ * Encodes the compound into a cybol model.
  *
  * @param p0 the destination
  * @param p1 the destination count
@@ -544,8 +541,8 @@ void decode_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
  * @param p3 the source
  * @param p4 the source count
  */
-void encode_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void encode_cybol(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
-/* XML_TRANSLATOR_SOURCE */
+/* CYBOL_TRANSLATOR_SOURCE */
 #endif
