@@ -26,14 +26,13 @@
 #define LOG_HANDLER_SOURCE
 
 #include <stdio.h>
-#include <string.h>
 
 /**
  * This is a log handler.
  *
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.2 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-12-12 14:47:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -107,7 +106,8 @@ void* get_log_level_name(void* p0) {
  */
 void show_message(void* p0) {
 
-    puts((char*) p0);
+//??    fputs((char*) p0, stdout);
+    fputs((char*) p0, stderr);
 }
 
 /**
@@ -122,15 +122,12 @@ void log_message(void* p0, void* p1) {
 
     if (*l <= *log_level) {
 
-        char* m = (char*) malloc(0);
+        void* n = get_log_level_name(p0);
 
-        char* n = (char*) get_log_level_name(p0);
-        strcat(m, n);
-        strcat(m, ": ");
-        strcat(m, (char*) p1);
-        show_message(m);
-        
-//??        free(m);
+        show_message(n);
+        show_message((void*) ": ");
+        show_message(p1);
+        show_message((void*) "\n");
     }
 }
 
