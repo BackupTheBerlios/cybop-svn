@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2005-01-26 10:51:35 $ $Author: rholzmueller $
+ * @version $Revision: 1.19 $ $Date: 2005-01-28 13:29:35 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,9 +68,9 @@ void get_compound_element_index(const void* p0, const void* p1, const void* p2, 
             // The loop variable.
             int j = 0;
             // The name.
-            void** n1 = NULL_POINTER;
+            void** n1 = POINTER_NULL_POINTER;
             // The name count.
-            void** nc1 = NULL_POINTER;
+            void** nc1 = POINTER_NULL_POINTER;
             // The comparison result.
             int r = 0;
 
@@ -95,8 +95,8 @@ void get_compound_element_index(const void* p0, const void* p1, const void* p2, 
                 }
 
                 // Reset name and name count.
-                n1 = NULL_POINTER;
-                nc1 = NULL_POINTER;
+                n1 = POINTER_NULL_POINTER;
+                nc1 = POINTER_NULL_POINTER;
 
                 j++;
             }
@@ -1182,15 +1182,15 @@ void get_compound_element_name_by_index(const void* p0, const void* p1,
  * @param p1 the compound count
  * @param p2 the name
  * @param p3 the name count
- * @param p4 the abstraction
- * @param p5 the abstraction count
- * @param p6 the abstraction size
- * @param p7 the model
- * @param p8 the model count
- * @param p9 the model size
- * @param p10 the details
- * @param p11 the details count
- * @param p12 the details size
+ * @param p4 the abstraction (Hand over as reference!)
+ * @param p5 the abstraction count (Hand over as reference!)
+ * @param p6 the abstraction size (Hand over as reference!)
+ * @param p7 the model (Hand over as reference!)
+ * @param p8 the model count (Hand over as reference!)
+ * @param p9 the model size (Hand over as reference!)
+ * @param p10 the details (Hand over as reference!)
+ * @param p11 the details count (Hand over as reference!)
+ * @param p12 the details size (Hand over as reference!)
  * @param p13 the knowledge
  * @param p14 the knowledge count
  */
@@ -1233,8 +1233,10 @@ void get_compound_element_by_encapsulated_name(const void* p0, const void* p1,
     //
 
     // Get knowledge element.
-    get_compound_element_by_name(p13, p14, *m, *mc,
-        p4, p5, p6, p7, p8, p9, p10, p11, p12);
+    if ((m != POINTER_NULL_POINTER) && (mc != POINTER_NULL_POINTER )) {
+        get_compound_element_by_name(p13, p14, *m, *mc,
+            p4, p5, p6, p7, p8, p9, p10, p11, p12);
+    }
 }
 
 /* COMPOUND_ACCESSOR_SOURCE */
