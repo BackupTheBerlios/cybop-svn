@@ -1,5 +1,5 @@
 /*
- * $RCSfile: ItemContainer.java,v $
+ * $RCSfile: Item.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -33,16 +33,16 @@ package cyboi;
  * Instantiating means allocating some place in the computer's memory.
  * Basically, every item can become a category if copies of this item are created.
  *
- * @version $Revision: 1.4 $ $Date: 2003-07-23 20:10:54 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-07-24 09:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class ItemContainer extends Container {
+class Item {
 
     /** The name. */
     static java.lang.Object name;
 
-    /** The super category. */
-    static java.lang.Object super_category;
+    /** The super item. */
+    static java.lang.Object super_item;
 
     /** The java object. */
     static java.lang.Object java_object;
@@ -50,28 +50,28 @@ class ItemContainer extends Container {
     /** The java tree node. */
     static java.lang.Object java_tree_node;
 
-    /** The item abstractions container. */
+    /** The item abstractions. */
     static java.lang.Object item_abstractions;
 
-    /** The items container. */
+    /** The items. */
     static java.lang.Object items;
 
-    /** The space abstractions container. */
+    /** The space abstractions. */
     static java.lang.Object space_abstractions;
 
-    /** The spaces container. */
+    /** The spaces. */
     static java.lang.Object spaces;
 
-    /** The time abstractions container. */
+    /** The time abstractions. */
     static java.lang.Object time_abstractions;
 
-    /** The times container. */
+    /** The times. */
     static java.lang.Object times;
 
-    /** The force abstractions container. */
+    /** The force abstractions. */
     static java.lang.Object force_abstractions;
 
-    /** The forces container. */
+    /** The forces. */
     static java.lang.Object forces;
 }
 

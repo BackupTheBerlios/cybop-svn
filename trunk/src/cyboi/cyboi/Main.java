@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.11 $ $Date: 2003-07-23 20:10:54 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-07-24 09:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -73,9 +73,11 @@ class Main {
                     java.lang.Object statics = ItemHandler.create_item_container();
                     ItemHandler.initialize(statics, statics_category);
 
+/*??
                     java.lang.Object dynamics = ItemHandler.create_item_container();
-//??                    ItemHandler.initialize(dynamics, dynamics_category);
-    
+                    ItemHandler.initialize(dynamics, dynamics_category);
+*/
+
                     // Alternative to Java Event Handler
                     // (if it gets replaced one day, once CYBOI is implemented in C):
                     // Enter waiting loop and read events (IRQs) from devices (IVT?).
@@ -86,10 +88,14 @@ class Main {
     
                     // The loop above is left as soon as the shutdown flag is set.
     
-//??                    Main.finalizz(i);
-    
+/*??
+                    ItemHandler.finalizz(dynamics, dynamics_category);
                     ItemHandler.destroy_item_container(dynamics);
+*/
+
+                    ItemHandler.finalizz(statics, statics_category);
                     ItemHandler.destroy_item_container(statics);
+
                     MapHandler.destroy_map_container(signal_memory);
                     Main.destroy_event_handler(event_handler);
                     ItemHandler.destroy_xml_parser(ItemHandler.xml_parser);
@@ -102,7 +108,7 @@ class Main {
                     // do the same thing.
                     // The program exits normally, when the last non-daemon thread exits.
                     //
-                    java.lang.System.out.println("INFO: Exit system normally.");
+                    java.lang.System.out.println("INFO: Exit cyboi normally.");
                     java.lang.System.exit(0);
 
                 } else {

@@ -65,10 +65,35 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.11 $ $Date: 2003-07-23 20:10:54 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-07-24 09:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
+
+    //
+    // Constants.
+    //
+    
+    /** The name constant. */
+    static java.lang.String NAME = "name";
+
+    /** The item abstraction constant. */
+    static java.lang.String ITEM_ABSTRACTION = "item_abstraction";
+
+    /** The item category constant. */
+    static java.lang.String ITEM_CATEGORY = "item_category";
+
+    /** The space abstraction constant. */
+    static java.lang.String SPACE_ABSTRACTION = "space_abstraction";
+
+    /** The space category constant. */
+    static java.lang.String SPACE_CATEGORY = "space_category";
+
+    /** The time abstraction constant. */
+    static java.lang.String TIME_ABSTRACTION = "time_abstraction";
+
+    /** The time category constant. */
+    static java.lang.String TIME_CATEGORY = "time_category";
 
     /** The xml parser. */
     static java.lang.Object xml_parser;
@@ -228,7 +253,7 @@ class ItemHandler {
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not create item element. The abstraction is null.");
+            java.lang.System.out.println("WARNING: Could not create item element. The abstraction is null.");
         }
 
         return i;
@@ -269,7 +294,7 @@ class ItemHandler {
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not destroy item element. The abstraction is null.");
+            java.lang.System.out.println("WARNING: Could not destroy item element. The abstraction is null.");
         }
 
         return i;
@@ -295,8 +320,8 @@ class ItemHandler {
             
             java.lang.String f = c + ".cybol";
 
+            java.lang.System.out.println("INFO: Parse file: " + f);
             p.parse(f);
-            java.lang.System.out.println("INFO: Parsed file: " + f);
             
             org.w3c.dom.Document d = p.getDocument();
 
@@ -475,27 +500,27 @@ class ItemHandler {
         
         if (ic != null) {
                 
-            java.lang.Object n = ItemHandler.get_attribute(m, ItemElement.NAME);
+            java.lang.Object n = ItemHandler.get_attribute(m, ItemHandler.NAME);
             java.lang.Object a = null;
             java.lang.Object c = null;
             java.lang.Object it = null;
             
-            a = ItemHandler.get_attribute(m, ItemElement.ITEM_ABSTRACTION);
-            c = ItemHandler.get_attribute(m, ItemElement.ITEM_CATEGORY);
+            a = ItemHandler.get_attribute(m, ItemHandler.ITEM_ABSTRACTION);
+            c = ItemHandler.get_attribute(m, ItemHandler.ITEM_CATEGORY);
             it = ItemHandler.create_item_element(a, c);
             MapHandler.add_map_element(ic.items, n, it);
             
-            a = ItemHandler.get_attribute(m, ItemElement.SPACE_ABSTRACTION);
-            c = ItemHandler.get_attribute(m, ItemElement.SPACE_CATEGORY);
+            a = ItemHandler.get_attribute(m, ItemHandler.SPACE_ABSTRACTION);
+            c = ItemHandler.get_attribute(m, ItemHandler.SPACE_CATEGORY);
             it = ItemHandler.create_item_element(a, c);
             MapHandler.add_map_element(ic.spaces, n, it);
             
-            a = ItemHandler.get_attribute(m, ItemElement.TIME_ABSTRACTION);
-            c = ItemHandler.get_attribute(m, ItemElement.TIME_CATEGORY);
+            a = ItemHandler.get_attribute(m, ItemHandler.TIME_ABSTRACTION);
+            c = ItemHandler.get_attribute(m, ItemHandler.TIME_CATEGORY);
             it = ItemHandler.create_item_element(a, c);
             MapHandler.add_map_element(ic.times, n, it);
             
-            java.lang.System.out.println("INFO: Successfully read item: " + n);
+            java.lang.System.out.println("INFO: Read item: " + n);
             
         } else {
             
@@ -525,7 +550,7 @@ class ItemHandler {
         
             } else {
                 
-                java.lang.System.out.println("ERROR: Could not get attribute. The attribute element is null.");
+                java.lang.System.out.println("WARNING: Could not get attribute. The attribute element is null.");
             }
         
         } else {

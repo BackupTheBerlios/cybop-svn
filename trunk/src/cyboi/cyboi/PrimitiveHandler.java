@@ -25,11 +25,11 @@
 package cyboi;
 
 /**
- * This is a primitive handler.<br><br>
+ * This is a primitive handler.
  *
  * It contains procedures to create items of primitive type.
  *
- * @version $Revision: 1.7 $ $Date: 2003-07-23 20:10:54 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-07-24 09:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class PrimitiveHandler {

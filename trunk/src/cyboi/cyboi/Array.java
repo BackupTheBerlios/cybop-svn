@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Element.java,v $
+ * $RCSfile: Array.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -25,13 +25,18 @@
 package cyboi;
 
 /**
- * This is an element.
+ * This is an array.
  *
- * It can be stored in a container.
+ * It represents an allocated area in the computer's memory that can contain
+ * a number of abstract elements.
  *
- * @version $Revision: 1.1 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
+ * An abstraction simplifies and represents a real world item.
+ * In the case of computer science, everything gets abstracted to 0 and 1.
+ * But that also means that every abstraction has a bytecode representation.
+ *
+ * @version $Revision: 1.3 $ $Date: 2003-07-24 09:46:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class Element extends java.lang.Object {
+class Array {
 }
 
