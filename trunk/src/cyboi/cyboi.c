@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.74 $ $Date: 2005-01-19 19:31:21 $ $Author: christian $
+ * @version $Revision: 1.75 $ $Date: 2005-01-28 23:30:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -86,39 +86,46 @@ int main(int p0, char** p1) {
             // Get configuration file name.
             get_array_elements((void*) p1, (void*) CONFIGURATION_FILE_PARAMETER_INDEX, (void*) &c, (void*) POINTER_ARRAY);
 
-            // CAUTION! This is a DIRTY workaround!
-            // The configuration file count (number of file path characters)
-            // is not known. There are two possibilities to determine it:
-            // 1 Force the user to give it as third command line parameter
-            // (this would be rather weird and not very user-friendly)
-            // 2 Rely on the null termination character to determine it
-            // (in this case, the strlen function can be used)
-            // Possibility 2 is applied here.
-            int cc = strlen((char*) *c);
-            // The internals memory.
-            void* i = NULL_POINTER;
+            if (c != POINTER_NULL_POINTER) {
 
-            // Create internals memory.
-            // Fill it with the parameters read from the configuration file.
-            create_model((void*) &i, (void*) INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) INTERNALS_MEMORY_ELEMENTS_COUNT,
-                *c, (void*) &cc,
-                (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT,
-                (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
+                // CAUTION! This is a DIRTY workaround!
+                // The configuration file count (number of file path characters)
+                // is not known. There are two possibilities to determine it:
+                // 1 Force the user to give it as third command line parameter
+                // (this would be rather weird and not very user-friendly)
+                // 2 Rely on the null termination character to determine it
+                // (in this case, the strlen function can be used)
+                // Possibility 2 is applied here.
+                int cc = strlen((char*) *c);
+                // The internals memory.
+                void* i = NULL_POINTER;
 
-            // Handle system.
-            handle_system(i);
+                // Create internals memory.
+                // Fill it with the parameters read from the configuration file.
+                create_model((void*) &i, (void*) INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) INTERNALS_MEMORY_ELEMENTS_COUNT,
+                    *c, (void*) &cc,
+                    (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT,
+                    (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
 
-            // Destroy internals memory.
-            // All its configuration parameters are destroyed, too.
-            destroy_model((void*) &i, (void*) INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) INTERNALS_MEMORY_ELEMENTS_COUNT,
-                *c, (void*) &cc,
-                (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT,
-                (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
+                // Handle system.
+                handle_system(i);
 
-            log_message((void*) INFO_LOG_LEVEL, (void*) EXIT_CYBOI_NORMALLY_MESSAGE, (void*) EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
+                // Destroy internals memory.
+                // All its configuration parameters are destroyed, too.
+                destroy_model((void*) &i, (void*) INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) INTERNALS_MEMORY_ELEMENTS_COUNT,
+                    *c, (void*) &cc,
+                    (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT,
+                    (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
 
-            // Set return value to 0, to indicate proper shutdown.
-            r = 0;
+                log_message((void*) INFO_LOG_LEVEL, (void*) EXIT_CYBOI_NORMALLY_MESSAGE, (void*) EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
+
+                // Set return value to 0, to indicate proper shutdown.
+                r = 0;
+
+            } else {
+
+                log_message_debug("Could not execute CYBOI. The configuration file name is null.");
+            }
 
         } else {
 

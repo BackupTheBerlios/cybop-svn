@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2005-01-25 19:02:09 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2005-01-28 23:30:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -81,52 +81,136 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
         get_array_elements(p0, (void*) DETAILS_INDEX, (void*) &pd, (void*) POINTER_ARRAY);
         get_array_elements(p0, (void*) DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) POINTER_ARRAY);
 
-        // The abstraction, model, details.
-        void** a = POINTER_NULL_POINTER;
-        void** ac = POINTER_NULL_POINTER;
-        void** m = POINTER_NULL_POINTER;
-        void** mc = POINTER_NULL_POINTER;
-        void** d = POINTER_NULL_POINTER;
-        void** dc = POINTER_NULL_POINTER;
+        if (pa != POINTER_NULL_POINTER) {
 
-        // The loop variable.
-        int j = 0;
+            if (pac != POINTER_NULL_POINTER) {
 
-        while (1) {
+                if (pm != POINTER_NULL_POINTER) {
 
-            if (j >= *sc) {
+                    if (pmc != POINTER_NULL_POINTER) {
 
-                break;
+                        if (pd != POINTER_NULL_POINTER) {
+
+                            if (pdc != POINTER_NULL_POINTER) {
+
+                                // The abstraction, model, details.
+                                void** a = POINTER_NULL_POINTER;
+                                void** ac = POINTER_NULL_POINTER;
+                                void** m = POINTER_NULL_POINTER;
+                                void** mc = POINTER_NULL_POINTER;
+                                void** d = POINTER_NULL_POINTER;
+                                void** dc = POINTER_NULL_POINTER;
+
+                                // The loop variable.
+                                int j = 0;
+
+                                while (1) {
+
+                                    if (j >= *sc) {
+
+                                        break;
+                                    }
+
+                                    // Get abstraction, model, details.
+                                    get_array_elements(*pa, (void*) &j, (void*) &a, (void*) POINTER_ARRAY);
+                                    get_array_elements(*pac, (void*) &j, (void*) &ac, (void*) INTEGER_ARRAY);
+                                    get_array_elements(*pm, (void*) &j, (void*) &m, (void*) POINTER_ARRAY);
+                                    get_array_elements(*pmc, (void*) &j, (void*) &mc, (void*) INTEGER_ARRAY);
+                                    get_array_elements(*pd, (void*) &j, (void*) &d, (void*) POINTER_ARRAY);
+                                    get_array_elements(*pdc, (void*) &j, (void*) &dc, (void*) INTEGER_ARRAY);
+
+                                    if (a != POINTER_NULL_POINTER) {
+
+                                        if (ac != POINTER_NULL_POINTER) {
+
+                                            if (m != POINTER_NULL_POINTER) {
+
+                                                if (mc != POINTER_NULL_POINTER) {
+
+                                                    if (d != POINTER_NULL_POINTER) {
+
+                                                        if (dc != POINTER_NULL_POINTER) {
+
+                                                            // Add part model (signal) to memory, using the whole signal's priority.
+                                                            // (Each signal has a priority. A signal may consist of part
+                                                            // signals. The part signals cannot have higher / lower priority
+                                                            // than their original whole signal.)
+                                                            set_signal(p4, p5, p6, *a, *ac, *m, *mc, *d, *dc, p2, p3);
+
+                                                        } else {
+
+                                                            log_message_debug("Could not handle compound signal. The details count is null.");
+                                                        }
+
+                                                    } else {
+
+                                                        log_message_debug("Could not handle compound signal. The details is null.");
+                                                    }
+
+                                                } else {
+
+                                                    log_message_debug("Could not handle compound signal. The model count is null.");
+                                                }
+
+                                            } else {
+
+                                                log_message_debug("Could not handle compound signal. The model is null.");
+                                            }
+
+                                        } else {
+
+                                            log_message_debug("Could not handle compound signal. The abstraction count is null.");
+                                        }
+
+                                    } else {
+
+                                        log_message_debug("Could not handle compound signal. The abstraction is null.");
+                                    }
+
+                                    // Reset abstraction, model, details.
+                                    a = POINTER_NULL_POINTER;
+                                    ac = POINTER_NULL_POINTER;
+                                    m = POINTER_NULL_POINTER;
+                                    mc = POINTER_NULL_POINTER;
+                                    d = POINTER_NULL_POINTER;
+                                    dc = POINTER_NULL_POINTER;
+
+                                    j++;
+                                }
+
+                            } else {
+
+                                log_message_debug("Could not handle compound signal. The part details counts is null.");
+                            }
+
+                        } else {
+
+                            log_message_debug("Could not handle compound signal. The part details is null.");
+                        }
+
+                    } else {
+
+                        log_message_debug("Could not handle compound signal. The part models counts is null.");
+                    }
+
+                } else {
+
+                    log_message_debug("Could not handle compound signal. The part models is null.");
+                }
+
+            } else {
+
+                log_message_debug("Could not handle compound signal. The part abstractions counts is null.");
             }
 
-            // Get abstraction, model, details.
-            get_array_elements(*pa, (void*) &j, (void*) &a, (void*) POINTER_ARRAY);
-            get_array_elements(*pac, (void*) &j, (void*) &ac, (void*) INTEGER_ARRAY);
-            get_array_elements(*pm, (void*) &j, (void*) &m, (void*) POINTER_ARRAY);
-            get_array_elements(*pmc, (void*) &j, (void*) &mc, (void*) INTEGER_ARRAY);
-            get_array_elements(*pd, (void*) &j, (void*) &d, (void*) POINTER_ARRAY);
-            get_array_elements(*pdc, (void*) &j, (void*) &dc, (void*) INTEGER_ARRAY);
+        } else {
 
-            // Add part model (signal) to memory, using the whole signal's priority.
-            // (Each signal has a priority. A signal may consist of part
-            // signals. The part signals cannot have higher / lower priority
-            // than their original whole signal.)
-            set_signal(p4, p5, p6, *a, *ac, *m, *mc, *d, *dc, p2, p3);
-
-            // Reset abstraction, model, details.
-            a = POINTER_NULL_POINTER;
-            ac = POINTER_NULL_POINTER;
-            m = POINTER_NULL_POINTER;
-            mc = POINTER_NULL_POINTER;
-            d = POINTER_NULL_POINTER;
-            dc = POINTER_NULL_POINTER;
-
-            j++;
+            log_message_debug("Could not handle compound signal. The part abstractions is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle compound signal. The signal memory count is null.");
+        log_message_debug("Could not handle compound signal. The signal count is null.");
     }
 }
 

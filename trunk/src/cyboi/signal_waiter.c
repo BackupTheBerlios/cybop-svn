@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2005-01-20 12:11:16 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2005-01-28 23:30:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -66,142 +66,234 @@ void wait(void* p0) {
     get_array_elements(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_ARRAY);
     get_array_elements(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_ARRAY);
 
-    // The shutdown flag.
-    int f = 0;
-    // The abstraction.
-    void** a = POINTER_NULL_POINTER;
-    void** ac = POINTER_NULL_POINTER;
-    // The model (signal operation).
-    void** m = POINTER_NULL_POINTER;
-    void** mc = POINTER_NULL_POINTER;
-    // The details (parameters).
-    void** d = POINTER_NULL_POINTER;
-    void** dc = POINTER_NULL_POINTER;
-    // The priority.
-    void** p = POINTER_NULL_POINTER;
-    // The signal id.
-    void** id = POINTER_NULL_POINTER;
-    // The highest priority index.
-    int i = -1;
-    // The comparison result.
-    int r = 0;
+    if (k != POINTER_NULL_POINTER) {
 
-    // Run endless loop checking signal memory for signals.
-    while (1) {
+        if (kc != POINTER_NULL_POINTER) {
 
-        if (f == 1) {
+            if (ks != POINTER_NULL_POINTER) {
 
-            // Leave loop if the shutdown flag was set.
-            break;
-        }
+                if (s != POINTER_NULL_POINTER) {
 
-        //?? For testing only. TODO: Delete this line later!
-//??        sleep(1);
+                    if (sc != POINTER_NULL_POINTER) {
 
-        //?? Test knowledge model. TODO: Delete later!
-//??        test_knowledge_model((void*) &k, (void*) &kc);
+                        if (ss != POINTER_NULL_POINTER) {
 
-        // Get index of the top priority signal.
-        get_highest_priority_index(*s, *sc, (void*) &i);
+                            // The shutdown flag.
+                            int f = 0;
+                            // The abstraction.
+                            void** a = POINTER_NULL_POINTER;
+                            void** ac = POINTER_NULL_POINTER;
+                            // The model (signal operation).
+                            void** m = POINTER_NULL_POINTER;
+                            void** mc = POINTER_NULL_POINTER;
+                            // The details (parameters).
+                            void** d = POINTER_NULL_POINTER;
+                            void** dc = POINTER_NULL_POINTER;
+                            // The priority.
+                            void** p = POINTER_NULL_POINTER;
+                            // The signal id.
+                            void** id = POINTER_NULL_POINTER;
+                            // The highest priority index.
+                            int i = -1;
+                            // The comparison result.
+                            int r = 0;
+
+                            // Run endless loop checking signal memory for signals.
+                            while (1) {
+
+                                if (f == 1) {
+
+                                    // Leave loop if the shutdown flag was set.
+                                    break;
+                                }
+
+                                // Get index of the top priority signal.
+                                get_highest_priority_index(*s, *sc, (void*) &i);
 
 /*??
-        //?? Wait for web input, if no signal is in memory. TODO: Use a thread for this!
-        if (*i < 0) {
+                                //?? Wait for web input, if no signal is in memory. TODO: Use a thread for this!
+                                if (*i < 0) {
 
-            run_tcp_socket((void*) &p0);
-        }
+                                    run_tcp_socket((void*) &p0);
+                                }
 */
 
-        if (i >= 0) {
+                                if (i >= 0) {
 
-            // Get signal.
-            get_signal(*s, *sc, (void*) &i,
-                (void*) &a, (void*) &ac, (void*) &m, (void*) &mc,
-                (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
+                                    // Get signal.
+                                    get_signal(*s, *sc, (void*) &i,
+                                        (void*) &a, (void*) &ac, (void*) &m, (void*) &mc,
+                                        (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 
-            //?? For testing only. TODO: Delete these lines later!
-            fprintf(stderr, "wait i: %i\n", i);
-            fprintf(stderr, "wait a: %s\n", (char*) *a);
-            fprintf(stderr, "wait ac: %i\n", *((int*) *ac));
-            fprintf(stderr, "wait m: %s\n", (char*) *m);
-            fprintf(stderr, "wait mc: %i\n", *((int*) *mc));
-            //?? d and dc are NULL. DO NOT try to print their values here!
-            fprintf(stderr, "wait p: %i\n", *((int*) *p));
-            fprintf(stderr, "wait id: %i\n", *((int*) *id));
-            fprintf(stderr, "wait knowledge model: %s\n", "");
+                                    if (a != POINTER_NULL_POINTER) {
 
-            // Remove signal from signal memory.
-            remove_signal(*s, *sc, *ss, (void*) &i);
+                                        if (ac != POINTER_NULL_POINTER) {
 
-            // CAUTION! Do NOT destroy signal here!
-            // Signals are stored in the logic knowledge tree which gets created
-            // at system startup and destroyed at system shutdown.
-            //?? TODO: Is this still true? A signal only encapsulates a logic model.
-            //?? So the signal possibly needs to be destroyed, only not the logic model!
+                                            if (m != POINTER_NULL_POINTER) {
 
-            //
-            // Handle compound signal.
-            //
+                                                if (mc != POINTER_NULL_POINTER) {
 
-            if (r != 1) {
+                                                    if (d != POINTER_NULL_POINTER) {
 
-                compare_arrays(*a, *ac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                                                        if (dc != POINTER_NULL_POINTER) {
 
-                if (r == 1) {
+                                                            if (p != POINTER_NULL_POINTER) {
 
-                    handle_compound_signal(*m, *mc, *p, *id, *s, *sc, *ss);
+                                                                if (id != POINTER_NULL_POINTER) {
+
+                                                                    //?? For testing only. TODO: Delete these lines later!
+                                                                    fprintf(stderr, "wait i: %i\n", i);
+                                                                    fprintf(stderr, "wait a: %s\n", (char*) *a);
+                                                                    fprintf(stderr, "wait ac: %i\n", *((int*) *ac));
+                                                                    fprintf(stderr, "wait m: %s\n", (char*) *m);
+                                                                    fprintf(stderr, "wait mc: %i\n", *((int*) *mc));
+                                                                    //?? d and dc are NULL. DO NOT try to print their values here!
+                                                                    fprintf(stderr, "wait p: %i\n", *((int*) *p));
+                                                                    fprintf(stderr, "wait id: %i\n", *((int*) *id));
+                                                                    fprintf(stderr, "wait knowledge model: %s\n", "");
+
+                                                                    // Remove signal from signal memory.
+                                                                    remove_signal(*s, *sc, *ss, (void*) &i);
+
+                                                                    // CAUTION! Do NOT destroy signal here!
+                                                                    // Signals are stored in the logic knowledge tree which gets created
+                                                                    // at system startup and destroyed at system shutdown.
+                                                                    //?? TODO: Is this still true? A signal only encapsulates a logic model.
+                                                                    //?? So the signal possibly needs to be destroyed, only not the logic model!
+
+                                                                    //
+                                                                    // Handle compound signal.
+                                                                    //
+
+                                                                    if (r != 1) {
+
+                                                                        compare_arrays(*a, *ac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                                                                        if (r == 1) {
+
+                                                                            handle_compound_signal(*m, *mc, *p, *id, *s, *sc, *ss);
+                                                                        }
+                                                                    }
+
+                                                                    //
+                                                                    // Handle operation signal.
+                                                                    //
+
+                                                                    if (r != 1) {
+
+                                                                        compare_arrays(*a, *ac, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                                                                        if (r == 1) {
+
+                                                                            handle_operation_signal(*m, *mc, *d, *dc, *k, *kc, *ks, *id, p0, (void*) &f);
+                                                                        }
+                                                                    }
+
+                                                                    //
+                                                                    // Unknown signal abstraction.
+                                                                    //
+
+                                                                    if (r != 1) {
+
+                                                                        log_message((void*) WARNING_LOG_LEVEL, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT);
+                                                                    }
+
+                                                                    // Destroy signal id.
+                                                                    // CAUTION! Do NOT hand over as reference!
+                                                                    // The id was read from signal memory and is of type void**.
+                                                                    // The expression (&*id) is the same like (id).
+                                                                    destroy_integer((void*) id);
+                                                                    // CAUTION! Do NOT destroy the signal priority!
+                                                                    // It is a FIXED system constant.
+
+                                                                } else {
+
+                                                                    log_message_debug("Could not wait for signals. The identification is null.");
+                                                                }
+
+                                                            } else {
+
+                                                                log_message_debug("Could not wait for signals. The priority is null.");
+                                                            }
+
+                                                        } else {
+
+                                                            log_message_debug("Could not wait for signals. The details count is null.");
+                                                        }
+
+                                                    } else {
+
+                                                        log_message_debug("Could not wait for signals. The details is null.");
+                                                    }
+
+                                                } else {
+
+                                                    log_message_debug("Could not wait for signals. The model count is null.");
+                                                }
+
+                                            } else {
+
+                                                log_message_debug("Could not wait for signals. The model is null.");
+                                            }
+
+                                        } else {
+
+                                            log_message_debug("Could not wait for signals. The abstraction count is null.");
+                                        }
+
+                                    } else {
+
+                                        log_message_debug("Could not wait for signals. The abstraction is null.");
+                                    }
+
+                                    // Reset abstraction.
+                                    a = POINTER_NULL_POINTER;
+                                    ac = POINTER_NULL_POINTER;
+                                    // Reset model (signal operation).
+                                    m = POINTER_NULL_POINTER;
+                                    mc = POINTER_NULL_POINTER;
+                                    // Reset details (parameters).
+                                    d = POINTER_NULL_POINTER;
+                                    dc = POINTER_NULL_POINTER;
+                                    // Reset priority.
+                                    p = POINTER_NULL_POINTER;
+                                    // Reset main signal id.
+                                    id = POINTER_NULL_POINTER;
+                                    // Reset highest priority index.
+                                    i = -1;
+                                    // Reset comparison result.
+                                    r = 0;
+                                }
+                            }
+
+                        } else {
+
+                            log_message_debug("Could not wait for signals. The signal memory size is null.");
+                        }
+
+                    } else {
+
+                        log_message_debug("Could not wait for signals. The signal memory count is null.");
+                    }
+
+                } else {
+
+                    log_message_debug("Could not wait for signals. The signal memory is null.");
                 }
+
+            } else {
+
+                log_message_debug("Could not wait for signals. The knowledge memory size is null.");
             }
 
-            //
-            // Handle operation signal.
-            //
+        } else {
 
-            if (r != 1) {
-
-                compare_arrays(*a, *ac, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r == 1) {
-
-                    handle_operation_signal(*m, *mc, *d, *dc, *k, *kc, *ks, *id, p0, (void*) &f);
-                }
-            }
-
-            //
-            // Unknown signal abstraction.
-            //
-
-            if (r != 1) {
-
-                log_message((void*) WARNING_LOG_LEVEL, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT);
-            }
-
-            // Destroy signal id.
-            // CAUTION! Do NOT hand over as reference!
-            // The id was read from signal memory and is of type void**.
-            // The expression (&*id) is the same like (id).
-            destroy_integer((void*) id);
-            // CAUTION! Do NOT destroy the signal priority!
-            // It is a FIXED system constant.
-
-            // Reset abstraction.
-            a = POINTER_NULL_POINTER;
-            ac = POINTER_NULL_POINTER;
-            // Reset model (signal operation).
-            m = POINTER_NULL_POINTER;
-            mc = POINTER_NULL_POINTER;
-            // Reset details (parameters).
-            d = POINTER_NULL_POINTER;
-            dc = POINTER_NULL_POINTER;
-            // Reset priority.
-            p = POINTER_NULL_POINTER;
-            // Reset main signal id.
-            id = POINTER_NULL_POINTER;
-            // Reset highest priority index.
-            i = -1;
-            // Reset comparison result.
-            r = 0;
+            log_message_debug("Could not wait for signals. The knowledge memory count is null.");
         }
+
+    } else {
+
+        log_message_debug("Could not wait for signals. The knowledge memory is null.");
     }
 }
 

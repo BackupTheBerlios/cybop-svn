@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.25 $ $Date: 2005-01-28 13:30:03 $ $Author: rholzmueller $
+ * @version $Revision: 1.26 $ $Date: 2005-01-28 23:30:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -272,7 +272,7 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     destroy((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
     //
-    // Decode. 
+    // Decode.
     //
 
     if (c == 0) {
@@ -287,10 +287,14 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
 
     // Decode document model according to given document type.
     decode(p0, p1, p2, pm, (void*) &pmc, p5, p6);
-    if (c==0) {
-        int index=0;
-        test_compound( *((void**)p0), p2, &index ); 
+
+//?? Start of TEMPORARY test from Rolf Holzmueller. Delete again later!
+    if (c == 0) {
+
+        int index = 0;
+        test_compound(*((void**) p0), p2, &index);
     }
+//?? End of TEMPORARY test from Rolf Holzmueller.
 
     if (w == 0) {
 
@@ -435,23 +439,6 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
     void** wdc = NULL_POINTER;
     void** wds = NULL_POINTER;
 
-    // The part name.
-    void* pn = NULL_POINTER;
-    void* pnc = NULL_POINTER;
-    void* pns = NULL_POINTER;
-    // The part abstraction.
-    void* pa = NULL_POINTER;
-    void* pac = NULL_POINTER;
-    void* pas = NULL_POINTER;
-    // The part model.
-    void* pm = NULL_POINTER;
-    void* pmc = NULL_POINTER;
-    void* pms = NULL_POINTER;
-    // The part details.
-    void* pd = NULL_POINTER;
-    void* pdc = NULL_POINTER;
-    void* pds = NULL_POINTER;
-
     // Get name name.
     get_compound_element_by_name(p0, p1,
         (void*) NAME_NAME_ABSTRACTION, (void*) NAME_NAME_ABSTRACTION_COUNT,
@@ -488,38 +475,70 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
         (void*) &wd, (void*) &wdc, (void*) &wds,
         p2, p3);
 
+//?? TODO: TEST all void** variables for POINTER_NULL_POINTER!
+
+    // The part name.
+    void* pn = NULL_POINTER;
+    int* pnc = INTEGER_NULL_POINTER;
+    int* pns = INTEGER_NULL_POINTER;
+    // The part abstraction.
+    void* pa = NULL_POINTER;
+    int* pac = INTEGER_NULL_POINTER;
+    int* pas = INTEGER_NULL_POINTER;
+    // The part model.
+    void* pm = NULL_POINTER;
+    int* pmc = INTEGER_NULL_POINTER;
+    int* pms = INTEGER_NULL_POINTER;
+    // The part details.
+    void* pd = NULL_POINTER;
+    int* pdc = INTEGER_NULL_POINTER;
+    int* pds = INTEGER_NULL_POINTER;
+
     // Create part name.
-    create_model((void*) &pn, pnc, pns, *nm, *nmc, *na, *nac,
+    create_integer((void*) &pnc);
+    *pnc = 0;
+    create_integer((void*) &pns);
+    *pns = 0;
+    create_model((void*) &pn, (void*) pnc, (void*) pns, *nm, *nmc, *na, *nac,
         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
     // A part channel is not created, since that is only needed temporarily
     // for model loading.
 
     // Create part abstraction.
-    create_model((void*) &pa, pac, pas, *am, *amc, *aa, *aac,
+    create_integer((void*) &pac);
+    *pac = 0;
+    create_integer((void*) &pas);
+    *pas = 0;
+    create_model((void*) &pa, (void*) pac, (void*) pas, *am, *amc, *aa, *aac,
         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
     // Create part model.
-    create_model((void*) &pm, pmc, pms, *mm, *mmc, *am, *amc, *cm, *cmc);
+    create_integer((void*) &pmc);
+    *pmc = 0;
+    create_integer((void*) &pms);
+    *pms = 0;
+    create_model((void*) &pm, (void*) pmc, (void*) pms, *mm, *mmc, *am, *amc,
+        *cm, *cmc);
 
     // Add part to whole.
     if (wm == NULL_POINTER) {
 
         // Use the knowledge model root if the determined whole model is null.
         set_compound_element_by_name(p2, p3, p4,
-            pn, pnc, pns,
-            pa, pac, pas,
-            pm, pmc, pms,
-            pd, pdc, pds);
+            pn, (void*) pnc, (void*) pns,
+            pa, (void*) pac, (void*) pas,
+            pm, (void*) pmc, (void*) pms,
+            pd, (void*) pdc, (void*) pds);
 
     } else {
 
         // Use the determined whole model normally, if it exists.
         set_compound_element_by_name(wm, wmc, wms,
-            pn, pnc, pns,
-            pa, pac, pas,
-            pm, pmc, pms,
-            pd, pdc, pds);
+            pn, (void*) pnc, (void*) pns,
+            pa, (void*) pac, (void*) pas,
+            pm, (void*) pmc, (void*) pms,
+            pd, (void*) pdc, (void*) pds);
     }
 }
 

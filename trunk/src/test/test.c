@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.39 $ $Date: 2005-01-25 19:02:09 $ $Author: christian $
+ * @version $Revision: 1.40 $ $Date: 2005-01-28 23:30:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -479,12 +479,10 @@ void test_knowledge_model(const void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
-        int** c = (int**) p1;
+        int* c = (int*) p1;
 
         // The loop index.
-        int* i = INTEGER_NULL_POINTER;
-        create_integer((void*) &i);
-        *i = 0;
+        int i = 0;
         // The element name.
         char* n = CHARACTER_NULL_POINTER;
         int* nc = INTEGER_NULL_POINTER;
@@ -502,13 +500,11 @@ void test_knowledge_model(const void* p0, const void* p1) {
         int* dc = INTEGER_NULL_POINTER;
         int* ds = INTEGER_NULL_POINTER;
         // The comparison result.
-        int* r = INTEGER_NULL_POINTER;
-        create_integer((void*) &r);
-        *r = 0;
+        int r = 0;
 
         while (1) {
 
-            if (*i >= **c) {
+            if (i >= *c) {
 
                 break;
             }
@@ -530,22 +526,22 @@ void test_knowledge_model(const void* p0, const void* p1) {
             fprintf(stderr, "abstraction size:  %i\n", *as);
 
             // Handle element model.
-            if (*r == 0) {
+            if (r != 1) {
 
                 compare_arrays((void*) &a, (void*) &ac, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                if (*r == 1) {
+                if (r == 1) {
 
                     fprintf(stderr, "model: %s\n", "");
                     test_knowledge_model((void*) &m, (void*) &mc);
                 }
             }
 
-            if (*r == 0) {
+            if (r != 1) {
 
                 compare_arrays((void*) &a, (void*) &ac, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                if (*r == 1) {
+                if (r == 1) {
 
                     fprintf(stderr, "model:         %i\n", m);
                     fprintf(stderr, "model count:   %i\n", *mc);
@@ -553,11 +549,11 @@ void test_knowledge_model(const void* p0, const void* p1) {
                 }
             }
 
-            if (*r == 0) {
+            if (r != 1) {
 
                 compare_arrays((void*) &a, (void*) &ac, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                if (*r == 1) {
+                if (r == 1) {
 
                     fprintf(stderr, "model:             %i\n", m);
                     fprintf(stderr, "model count:       %i\n", *mc);
@@ -589,13 +585,10 @@ void test_knowledge_model(const void* p0, const void* p1) {
             *dc = 0;
             *ds = 0;
             // Reset comparison result.
-            *r = 0;
+            r = 0;
 
-            (*i)++;
+            i++;
         }
-
-        destroy_integer((void*) &r);
-        destroy_integer((void*) &i);
 
     } else {
 
