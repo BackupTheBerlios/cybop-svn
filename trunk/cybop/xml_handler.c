@@ -27,7 +27,7 @@
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.3 $ $Date: 2003-10-06 00:06:55 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-10-07 09:51:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

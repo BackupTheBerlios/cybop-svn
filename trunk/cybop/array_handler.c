@@ -39,7 +39,12 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.9 $ $Date: 2003-10-06 00:06:55 $ $Author: christian $
+ * A double pointer ** is used to express an array of pointers!
+ * Example:
+ * int** a = 0; // Array of integer pointers
+ * void** a = 0; // Array of void pointers
+ *
+ * @version $Revision: 1.10 $ $Date: 2003-10-07 09:51:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,28 +58,33 @@
  * All elements are copied from the old to the new array.
  *
  * @param p0 the array
- * @param p1 the extended array
  */
-static void extend_array(void* p0, void* p1) {
+static void extend_array(void** p0) {
 
-    if (p0 != 0) {
+    void** old_array = p0;
 
-        int old_length = sizeof(p0);
+    if (old_array != 0) {
+
+        int old_length = sizeof(old_array);
         int new_length = old_length * 2 + 1;
-        p1 = malloc(new_length);
+        void** new_array = (void**) malloc(new_length);
 
-        if (p1 != 0) {
+        if (new_array != 0) {
                 
             int i = 0;
 
-            while (i < old_length) {
+            while (smaller((void*) &i, (void*) &old_length)) {
 
-//??                a[i] = p0[i];
+                new_array[i] = old_array[i];
 
                 i++;
             }
 
-            free(p0);
+            // Free old array.
+            free(old_array);
+            
+            // Direct pointer to new array.
+            p0 = new_array;
 
         } else {
 
@@ -97,11 +107,8 @@ static void extend_array(void* p0, void* p1) {
  * @param p0 the array
  * @param p1 the index
  * @param p2 the element
- * @param p3 the same or an extended array
  */
-static void set_array_element(void* p0, void* p1, void* p2, void* p3) {
-
-    int* i = (int*) p1;
+static void set_array_element(void** p0, void* p1, void* p2) {
 
     if (p0 != 0) {
 
@@ -111,16 +118,14 @@ static void set_array_element(void* p0, void* p1, void* p2, void* p3) {
         // is created and delivered back.
         if (greater_or_equal(p1, &size)) {
 
-            extend_array(p0, p3);
-        
-        } else {
-        
-            p3 = p0;
+            extend_array(p0);
         }
 
-        // Set element.
-//??        p3[*i] = p2;
+        int* i = (int*) p1;
 
+        // Set element.
+        p0[*i] = p2;
+        
     } else {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not set array element. The array is null.");
@@ -133,27 +138,27 @@ static void set_array_element(void* p0, void* p1, void* p2, void* p3) {
  * @param p0 the array
  * @param p1 the index
  */
-static void remove_array_element(void* p0, void* p1) {
+static void remove_array_element(void** p0, void* p1) {
 
-    int* i = (int*) p1;
-    
     if (p0 != 0) {
 
-        if (*i != -1) {
+        int* i = (int*) p1;
+        
+        if (equal(p1, (void*) &(INVALID_INDEX)) == 0) {
             
             // Move all remaining elements one place towards the
             // beginning of the elements.
             int size = sizeof(p0);
 
-            while ((*i + 1) < size) {
+            while (smaller((void*) ((*i + 1)), (void*) &size)) {
 
-//??                p0[*i] = p0[*i + 1];
+                p0[*i] = p0[*i + 1];
 
                 (*i)++;
             }
 
             // Set former last element to 0.
-//??            p0[*i] = 0;
+            p0[*i] = 0;
         }
 
     } else {
@@ -169,15 +174,15 @@ static void remove_array_element(void* p0, void* p1) {
  * @param p1 the index
  * @param p2 the element
  */
-static void get_array_element(void* p0, void* p1, void* p2) {
-
-    int* i = (int*) p1;
+static void get_array_element(void** p0, void* p1, void* p2) {
 
     if (p0 != 0) {
 
-        if (*i != -1) {
+        if (equal(p1, (void*) &(INVALID_INDEX)) == 0) {
             
-//??            p2 = p0[*i];
+            int* i = (int*) p1;
+    
+            p2 = p0[*i];
         }
 
     } else {

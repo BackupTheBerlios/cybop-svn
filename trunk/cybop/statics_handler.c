@@ -22,8 +22,12 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef STATICS_HANDLER_SOURCE
+#define STATICS_HANDLER_SOURCE
+
 #include <string.h>
 #include "complex.c"
+#include "statics.c"
 #include "time.c"
 #include "vector.c"
 #include "xml_handler.c"
@@ -31,103 +35,12 @@
 /**
  * This is the statics handler.
  *
- * There are complex and primitive static models.
- * Complex models consist of other complex models and primitive models.
- * Primitive models are the final abstraction in software.
- *
+ * It implements static operators.
  * An instance is retrieved by instantiating a model.
  *
- * @version $Revision: 1.3 $ $Date: 2003-10-06 00:06:55 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-10-07 09:51:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-
-//
-// Complex model.
-//
-
-/** The complex model. */
-static const char* COMPLEX_MODEL = "complex";
-
-//
-// Primitive models.
-//
-
-/** The boolean primitive. */
-static const char* BOOLEAN_PRIMITIVE = "boolean";
-
-/** The integer primitive. */
-static const char* INTEGER_PRIMITIVE = "integer";
-
-/** The float primitive. */
-static const char* FLOAT_PRIMITIVE = "float";
-
-/** The vector primitive. */
-static const char* VECTOR_PRIMITIVE = "vector";
-
-/** The string primitive. */
-static const char* STRING_PRIMITIVE = "string";
-
-/** The time primitive. */
-static const char* TIME_PRIMITIVE = "time";
-
-//
-// Application models.
-//
-
-/** The koffice kword application. */
-static const char* KWORD_APPLICATION = "kword_application";
-
-/** The open office writer application. */
-static const char* SXW_APPLICATION = "sxw_application";
-
-//
-// Audio models.
-//
-
-/** The mp3 audio. */
-static const char* MP3_AUDIO = "mp3_audio";
-
-//
-// Image models.
-//
-
-/** The jpeg image. */
-static const char* JPEG_IMAGE = "jpeg_image";
-
-/** The gif image. */
-static const char* GIF_IMAGE = "gif_image";
-
-/** The bmp image. */
-static const char* BMP_IMAGE = "bmp_image";
-
-//
-// Text models.
-//
-
-/** The sgml text. */
-static const char* SGML_TEXT = "sgml_text";
-
-/** The xml text. */
-static const char* XML_TEXT = "xml_text";
-
-/** The html text. */
-static const char* HTML_TEXT = "html_text";
-
-/** The rtf text. */
-static const char* RTF_TEXT = "rtf_text";
-
-/** The tex text. */
-static const char* TEX_TEXT = "tex_text";
-
-//
-// Video models.
-//
-
-/** The mpeg video. */
-static const char* MPEG_VIDEO = "mpeg_video";
-
-/** The quicktime video. */
-static const char* QUICKTIME_VIDEO = "quicktime_video";
 
 //
 // Complex instance.
@@ -652,7 +565,8 @@ static void destroy_time_instance(void* p0, void* p1) {
  */
 static void create_instance(void* p0, void* p1, void* p2) {
 
-    log((void*) &INFO_LOG_LEVEL, strcat("Create instance: ", p1));
+    log((void*) &INFO_LOG_LEVEL, "Create instance: ");
+    log((void*) &INFO_LOG_LEVEL, p1);
 
     if (strcmp(p2, COMPLEX_MODEL) == 0) {
 
@@ -693,7 +607,8 @@ static void create_instance(void* p0, void* p1, void* p2) {
  */
 static void destroy_instance(void* p0, void* p1, void* p2) {
 
-    log((void*) &INFO_LOG_LEVEL, strcat("Destroy instance: ", p1));
+    log((void*) &INFO_LOG_LEVEL, "Destroy instance: ");
+    log((void*) &INFO_LOG_LEVEL, p1);
 
     if (strcmp(p2, COMPLEX_MODEL) == 0) {
 
@@ -724,4 +639,7 @@ static void destroy_instance(void* p0, void* p1, void* p2) {
         destroy_time_instance(p0, p1);
     }
 }
+
+/* STATICS_HANDLER_SOURCE */
+#endif
 

@@ -34,7 +34,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.9 $ $Date: 2003-10-06 00:06:55 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-10-07 09:51:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,8 +55,8 @@ static void initialize_map(void* p0) {
 
         log((void*) &INFO_LOG_LEVEL, "Initialize map.");
 
-        m->names = malloc(0);
-        m->references = malloc(0);
+        m->names = (void**) malloc(0);
+        m->references = (void**) malloc(0);
 
     } else {
 
@@ -98,10 +98,10 @@ static void finalize_map(void* p0) {
 static void get_map_size(void* p0, void* p1) {
 
     struct map* m = (struct map*) p0;
-    int* s = (int*) p1;
 
     if (m != 0) {
 
+        int* s = (int*) p1;
         *s = sizeof(*(m->names));
 
     } else {
@@ -124,11 +124,11 @@ static void get_map_size(void* p0, void* p1) {
 static void get_map_element_index(void* p0, void* p1, void* p2) {
 
     struct map* m = (struct map*) p0;
-    int* index = (int*) p2;
 
     if (m != 0) {
         
         void* a = m->names;
+        int* index = (int*) p2;
         int i = *index + 1;
         int size = sizeof(a);
         void* name = malloc(0);
@@ -351,8 +351,8 @@ static void set_map_element(void* p0, void* p1, void* p2) {
         
         get_next_map_element_index(m, p1, i);
 
-        set_array_element(m->names, i, p1, m->names);
-        set_array_element(m->references, i, p2, m->references);
+        set_array_element(m->names, i, p1);
+        set_array_element(m->references, i, p2);
 
         //?? Move to finalize?
         free(i);

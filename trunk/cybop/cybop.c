@@ -29,6 +29,7 @@
 #include "map_handler.c"
 #include "signal.c"
 #include "signal_handler.c"
+#include "statics.c"
 
 //?? Temporary for character screen testing.
 #include "character_screen_handler.c"
@@ -39,7 +40,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.7 $ $Date: 2003-10-06 00:06:55 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-10-07 09:51:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,17 +50,25 @@
 static void show_usage_information() {
 
     show_message("Usage: cyboi dynamics statics");
-    show_message("Example: cyboi startup cybol.core.system.system");
+    show_message("Example: cyboi application.dynamics.startup application.statics.system");
 }
 
 /**
  * The main entry function.
  *
+ * Command line arguments have to be in order:
+ * - command
+ * - dynamics
+ * - statics
+ *
+ * Example:
+ * cyboi application.dynamics.startup application.statics.system
+ *
  * @param p0 the argument count (argc)
  * @param p1 the argument vector (argv)
  * @return the return value
  */
-int main(int p0, char* p1) {
+int main(int p0, char** p1) {
 
     // Return 1 to indicate an error, by default.
     int r = 1;
@@ -73,10 +82,6 @@ int main(int p0, char* p1) {
     if (p1 != 0) {
 
         if ((p0 == 3) && (p1[1] != 0) && (p1[2] != 0)) {
-
-            // Arguments.
-            void* dynamics_argument = (void*) p1[1];
-            void* statics_argument = (void*) p1[2];
 
 /*??
             // XML parser.
@@ -95,19 +100,19 @@ int main(int p0, char* p1) {
             JavaEventHandler.set_event_handler(event_handler);
 */
 
-/*??
             // Create signal for storage in signal memory.
             struct signal* tmp = (struct signal*) malloc(sizeof(struct signal));
 
             if (tmp != 0) {
 
-                log(INFO_LOG_LEVEL, strcat("Send signal: ", dynamics));
+                log((void*) &INFO_LOG_LEVEL, "Send signal: ");
+                log((void*) &INFO_LOG_LEVEL, p1[1]);
 
                 // Set signal elements.
-                tmp->priority = &NORMAL_PRIORITY;
-                tmp->language = &NEURO_LANGUAGE;
-                tmp->predicate = dynamics;
-                tmp->object = statics;
+                tmp->priority = (void*) &NORMAL_PRIORITY;
+                tmp->language = (void*) &NEURO_LANGUAGE;
+                tmp->predicate = (void*) p1[1];
+                tmp->object = (void*) p1[2];
 
 /*??
                 // Caution! Adding of signals must be synchronized between:
@@ -122,10 +127,9 @@ int main(int p0, char* p1) {
                 }
 */
 
-/*??
             } else {
 
-                log(ERROR_LOG_LEVEL, "Could not send initial signal. The signal is null.");
+                log((void*) &ERROR_LOG_LEVEL, "Could not send initial signal. The signal is null.");
             }
 
             // The system is now started up and complete so that a loop
@@ -185,20 +189,28 @@ int main(int p0, char* p1) {
 static void await(void* p0) {
 
     // The shutdown flag.
-    void* sf = malloc(0);
+    int* sf = (int*) malloc(sizeof(int));
+    *sf = FALSE_VALUE;
+
     // Transporting signal.
     void* s = malloc(sizeof(struct signal));
 
-    // Run endless loop handling any signals.
-    while (1) {
+    // Comparison result.
+    int* result = (int*) malloc(sizeof(int));
+    *result = FALSE_VALUE;
 
-        if (equal(sf, 0)) {
+    // Run endless loop handling any signals.
+    while (TRUE_VALUE) {
+
+        equal((void*) sf, (void*) &FALSE_VALUE, (void*) result);
+
+        if (*result == TRUE_VALUE) {
 
             // Receive signal.
             receive_signal(p0, s);
 
             // Handle signal.
-            handle_signal(s, 0, sf);
+            handle_signal(s, FALSE_VALUE, sf);
 
             // Send signal.
             send_signal(p0, s);
@@ -212,7 +224,8 @@ static void await(void* p0) {
             break;
         }
     }
-    
+
+    free(result);    
     free(s);
     free(sf);
 }

@@ -38,7 +38,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.9 $ $Date: 2003-10-06 00:06:55 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-10-07 09:51:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -179,7 +179,8 @@ static void send_signal(void* p0, void* p1) {
     
             if (tmp != 0) {
             
-                log((void*) &INFO_LOG_LEVEL, strcat("Send signal: ", s->predicate));
+                log((void*) &INFO_LOG_LEVEL, "Send signal: ");
+                log((void*) &INFO_LOG_LEVEL, s->predicate);
 
                 // Copy transporting signal given as parameter to the signal memory signal.
                 tmp->priority = s->priority;
@@ -253,7 +254,8 @@ static void receive_signal(void* p0, void* p1) {
         
         if (tmp != 0) {
         
-            log((void*) &INFO_LOG_LEVEL, strcat("Receive signal: ", tmp->predicate));
+            log((void*) &INFO_LOG_LEVEL, "Receive signal: ");
+            log((void*) &INFO_LOG_LEVEL, tmp->predicate);
 
             // Copy signal memory signal to the transporting signal given as parameter.
             s->priority = tmp->priority;
@@ -300,7 +302,8 @@ static void handle_signal(void* p0, void* p1, void* p2) {
 
         if (a != 0) {
 
-            log((void*) &INFO_LOG_LEVEL, strcat("Handle signal: ", a));
+            log((void*) &INFO_LOG_LEVEL, "Handle signal: ");
+            log((void*) &INFO_LOG_LEVEL, a);
 
             if (strcmp(a, "mouse_moved") == 0) {
 

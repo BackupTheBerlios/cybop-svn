@@ -31,16 +31,18 @@
  * A map is like a table. One column (array) contains the element names.
  * A second column (array) contains the actual element references.
  *
- * @version $Revision: 1.9 $ $Date: 2003-10-06 00:06:55 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-10-07 09:51:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct map {
 
+    // A double pointer ** is used to express an array of pointers!
+    
     /** The names. */
-    void* names;
+    void** names;
 
     /** The references. */
-    void* references;
+    void** references;
 };
 
 /* MAP_SOURCE */

@@ -34,7 +34,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.3 $ $Date: 2003-10-06 00:06:55 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-10-07 09:51:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,9 +55,9 @@ static void initialize_complex(void* p0) {
         
         log((void*) &INFO_LOG_LEVEL, "Initialize complex.");
 
-        c->children = malloc(sizeof(map));
+        c->children = malloc(sizeof(struct map));
         initialize_map(c->children);
-        c->positions = malloc(sizeof(map));
+        c->positions = malloc(sizeof(struct map));
         initialize_map(c->positions);
 
     } else {
@@ -175,7 +175,8 @@ static void set_complex_element(void* p0, void* p1, void* p2) {
 
     if (c != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, strcat("Set complex element: ", p1));
+        log((void*) &INFO_LOG_LEVEL, "Set complex element: ");
+        log((void*) &INFO_LOG_LEVEL, p1);
         
         void* n = 0;
         void* r = 0;
@@ -217,7 +218,8 @@ static void remove_complex_element(void* p0, void* p1) {
 
     if (c != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, strcat("Remove complex element: ", p1));
+        log((void*) &INFO_LOG_LEVEL, "Remove complex element: ");
+        log((void*) &INFO_LOG_LEVEL, p1);
         
         void* n = 0;
         void* r = 0;
@@ -230,7 +232,7 @@ static void remove_complex_element(void* p0, void* p1) {
             // The given complex is the parent of another parent.
             void* child = 0;
             
-            get_map_element(c->children, n, child);
+            get_map_element_with_name(c->children, n, child);
             
             // Continue to process along the hierarchical name.
             remove_complex_element(child, r);
@@ -238,7 +240,7 @@ static void remove_complex_element(void* p0, void* p1) {
         } else {
 
             // The given complex is the parent of the child.
-            remove_map_element(c->children, n);
+            remove_map_element_with_name(c->children, n);
         }
 
     } else {
@@ -260,7 +262,8 @@ static void get_complex_element(void* p0, void* p1, void* p2) {
 
     if (c != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, strcat("Get complex element: ", p1));
+        log((void*) &INFO_LOG_LEVEL, "Get complex element: ");
+        log((void*) &INFO_LOG_LEVEL, p1);
         
         void* n = 0;
         void* r = 0;
@@ -273,7 +276,7 @@ static void get_complex_element(void* p0, void* p1, void* p2) {
             // The given complex is the parent of another parent.
             void* child = 0;
             
-            get_map_element(c->children, n, child);
+            get_map_element_with_name(c->children, n, child);
             
             // Continue to process along the hierarchical name.
             get_complex_element(child, r, p2);
@@ -281,7 +284,7 @@ static void get_complex_element(void* p0, void* p1, void* p2) {
         } else {
 
             // The given complex is the parent of the child.
-            get_map_element(c->children, n, p2);
+            get_map_element_with_name(c->children, n, p2);
         }
 
     } else {
