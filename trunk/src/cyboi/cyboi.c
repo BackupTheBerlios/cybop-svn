@@ -1,7 +1,7 @@
 /*
  * $RCSfile: cyboi.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.64 $ $Date: 2005-01-09 01:30:12 $ $Author: christian $
+ * @version $Revision: 1.65 $ $Date: 2005-01-09 20:30:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,21 +77,32 @@ int main(int p0, char** p1) {
 
         if (p0 == *STARTUP_PARAMETERS_COUNT) {
 
-            log_message_debug("Run CYBOI.");
+            log_message_debug("Execute CYBOI.");
 
             // The internals memory.
             void* i = NULL_POINTER;
             // The configuration file name.
-            void* c = NULL_POINTER;
+            void** c = POINTER_NULL_POINTER;
             // The configuration file name count.
             int* cc = INTEGER_NULL_POINTER;
+
+            // Create configuration file name.
             create_integer((void*) &cc);
             *cc = 0;
+//??            create_array((void*) &c, (void*) &CHARACTER_ARRAY, (void*) &cc);
 
             // Get configuration file name.
-            get_array_elements(p1, (void*) &POINTER_ARRAY, (void*) &CONFIGURATION_FILE_PARAMETER_INDEX, (void*) &c, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements((void*) &p1, (void*) &POINTER_ARRAY, (void*) &CONFIGURATION_FILE_PARAMETER_INDEX, (void*) &c, (void*) &ONE_ELEMENT_COUNT);
+
+//??            set_array_elements((void*) &p1, (void*) &POINTER_ARRAY, (void*) &CONFIGURATION_FILE_PARAMETER_INDEX, (void*) &c, (void*) &cc);
+//??    char** tmp = (char**) (((void*) p1) + (*CONFIGURATION_FILE_PARAMETER_INDEX * sizeof(void*)));
+//??    fprintf(stderr, "FILENAME orig: %s\n", *tmp);
+//??    fprintf(stderr, "FILENAME copy: %s\n", (char*) *c);
+//??    fputs("TEST\n", stdout);
+
             // Get configuration file name count.
-            *cc = strlen((char*) c);
+            *cc = strlen((char*) *c);
+
             // Create internals memory.
             // Fill it with the parameters read from the configuration file.
             create_model((void*) &i, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT,
@@ -108,8 +119,9 @@ int main(int p0, char** p1) {
                 (void*) &c, (void*) &cc,
                 (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT,
                 (void*) &FILE_CHANNEL, (void*) &FILE_CHANNEL_COUNT);
-            // CAUTION! The configuration file name string MUST NOT be destroyed
-            // as it was given as constant command line parameter string.
+
+            // Destroy configuration file name.
+            destroy_array((void*) &c, (void*) &CHARACTER_ARRAY, (void*) &cc);
             destroy_integer((void*) &cc);
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);

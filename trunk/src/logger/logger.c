@@ -28,7 +28,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.15 $ $Date: 2005-01-08 19:55:18 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-01-09 20:30:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -40,10 +40,6 @@
 #include "../global/log_constants.c"
 #include "../global/variables.c"
 
-//
-// Log entry.
-//
-
 /**
  * Adds the log details.
  *
@@ -53,6 +49,10 @@
  * @param p3 the log details count
  */
 void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
+
+    // CAUTION! DO NOT use array functionality here!
+    // The arrays use the logger which would cause circular references.
+    // Instead, use malloc and similar functions directly!
 
     if (p3 != NULL_POINTER) {
 
@@ -97,21 +97,29 @@ void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
 
                 } else {
 
+                    // CAUTION! DO NOT use logging functionality here!
+                    // The logger cannot log itself.
                     fputs("Error: Could not add log details. The log entry index is null.\n", LOG_OUTPUT);
                 }
 
             } else {
 
+                // CAUTION! DO NOT use logging functionality here!
+                // The logger cannot log itself.
                 fputs("Error: Could not add log details. The log entry index is null.\n", LOG_OUTPUT);
             }
 
         } else {
 
+            // CAUTION! DO NOT use logging functionality here!
+            // The logger cannot log itself.
             fputs("Error: Could not add log details. The log entry index is null.\n", LOG_OUTPUT);
         }
 
     } else {
 
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger cannot log itself.
         fputs("Error: Could not add log details. The log details count is null.\n", LOG_OUTPUT);
     }
 }
@@ -126,9 +134,9 @@ void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
  */
 void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
 
-    //
-    // CAUTION! CYBOI's array procedures are NOT used to avoid an endless loop!
-    //
+    // CAUTION! DO NOT use array functionality here!
+    // The arrays use the logger which would cause circular references.
+    // Instead, use malloc and similar functions directly!
 
     if (p3 != NULL_POINTER) {
 
@@ -151,6 +159,8 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
 
                     } else {
 
+                        // CAUTION! DO NOT use logging functionality here!
+                        // The logger cannot log itself.
                         fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
                     }
 
@@ -163,6 +173,8 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
 
                     } else {
 
+                        // CAUTION! DO NOT use logging functionality here!
+                        // The logger cannot log itself.
                         fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
                     }
 
@@ -175,6 +187,8 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
 
                     } else {
 
+                        // CAUTION! DO NOT use logging functionality here!
+                        // The logger cannot log itself.
                         fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
                     }
 
@@ -187,22 +201,30 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
 
                     } else {
 
+                        // CAUTION! DO NOT use logging functionality here!
+                        // The logger cannot log itself.
                         fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
                     }
                 }
 
             } else {
 
+                // CAUTION! DO NOT use logging functionality here!
+                // The logger cannot log itself.
                 fputs("Error: Could not add log level name. The log level is null.\n", LOG_OUTPUT);
             }
 
         } else {
 
+            // CAUTION! DO NOT use logging functionality here!
+            // The logger cannot log itself.
             fputs("Error: Could not add log level name. The log entry count is null.\n", LOG_OUTPUT);
         }
 
     } else {
 
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger cannot log itself.
         fputs("Error: Could not add log level name. The log entry index is null.\n", LOG_OUTPUT);
     }
 }
@@ -216,10 +238,9 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
  */
 void log_message(const void* p0, const void* p1, const void* p2) {
 
-    //
-    // CAUTION! CYBOI's array procedures are NOT used,
-    // in order to avoid endless loops!
-    //
+    // CAUTION! DO NOT use array functionality here!
+    // The arrays use the logger which would cause circular references.
+    // Instead, use malloc and similar functions directly!
 
     if (p2 != NULL_POINTER) {
 
@@ -253,6 +274,8 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
                 } else {
 
+                    // CAUTION! DO NOT use logging functionality here!
+                    // The logger cannot log itself.
                     fputs("Warning: Could not add colon to log entry. The log entry count is exceeded.\n", LOG_OUTPUT);
                 }
 
@@ -264,6 +287,8 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
                 } else {
 
+                    // CAUTION! DO NOT use logging functionality here!
+                    // The logger cannot log itself.
                     fputs("Warning: Could not add space to log entry. The log entry count is exceeded.\n", LOG_OUTPUT);
                 }
 
@@ -275,6 +300,8 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
                 } else {
 
+                    // CAUTION! DO NOT use logging functionality here!
+                    // The logger cannot log itself.
                     fputs("Warning: Could not add message to log entry. The log entry count is exceeded.\n", LOG_OUTPUT);
                 }
 
@@ -286,6 +313,8 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
                 } else {
 
+                    // CAUTION! DO NOT use logging functionality here!
+                    // The logger cannot log itself.
                     fputs("Warning: Could not add new line to log entry. The log entry count is exceeded.\n", LOG_OUTPUT);
                 }
 
@@ -297,6 +326,8 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
                 } else {
 
+                    // CAUTION! DO NOT use logging functionality here!
+                    // The logger cannot log itself.
                     fputs("Warning: Could not add string termination to log entry. The log entry count is exceeded.\n", LOG_OUTPUT);
                 }
 
@@ -309,11 +340,15 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
         } else {
 
+            // CAUTION! DO NOT use logging functionality here!
+            // The logger cannot log itself.
             fputs("Error: Could not log message. The message count is null.\n", LOG_OUTPUT);
         }
 
     } else {
 
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger cannot log itself.
         fputs("Error: Could not log message. The log level is null.\n", LOG_OUTPUT);
     }
 }
@@ -324,6 +359,10 @@ void log_message(const void* p0, const void* p1, const void* p2) {
  * @param m the log message as null terminated string
  */
 void log_message_debug(const char* m) {
+
+    // CAUTION! DO NOT use array functionality here!
+    // The arrays use the logger which would cause circular references.
+    // Instead, use malloc and similar functions directly!
 
     // The message count.
     int* c = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-01-09 20:30:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,7 +39,9 @@
  */
 void create_globals() {
 
-    log_message_debug("Create globals.");
+    // CAUTION! DO NOT use logging functionality here!
+    // The logger will not work before these global variables are set.
+    fputs("Info: Create globals.\n", stdout);
 
     //
     // Null pointers.
@@ -68,45 +70,49 @@ void create_globals() {
     FILE_NULL_POINTER = (FILE*) 0;
 
     //
+    // Primitive type sizes.
+    //
+    // CAUTION! DO NOT use array functionality here!
+    // The arrays use the logger which would cause circular references.
+    // Instead, use malloc and similar functions directly!
+    //
+
+    // The integer primitive size.
+    // CAUTION! The sizeof operator must be used twice here,
+    // because INTEGER_PRIMITIVE_SIZE cannot be used before being initialized.
+    INTEGER_PRIMITIVE_SIZE = (int*) malloc(sizeof(int));
+    *INTEGER_PRIMITIVE_SIZE = sizeof(int);
+
+    // The pointer primitive size.
+    POINTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *POINTER_PRIMITIVE_SIZE = sizeof(void*);
+
+    // The character primitive size.
+    CHARACTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *CHARACTER_PRIMITIVE_SIZE = sizeof(char);
+
+    // The double primitive size.
+    DOUBLE_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *DOUBLE_PRIMITIVE_SIZE = sizeof(double);
+
+    //
     // Logging.
+    //
+    // CAUTION! DO NOT use array functionality here!
+    // The arrays use the logger which would cause circular references.
+    // Instead, use malloc and similar functions directly!
     //
 
     // The log level.
-    LOG_LEVEL = INTEGER_NULL_POINTER;
-    create_integer((void*) &LOG_LEVEL);
+    LOG_LEVEL = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *LOG_LEVEL = *DEBUG_LOG_LEVEL;
 
     // The maximum log message count.
-    MAXIMUM_LOG_MESSAGE_COUNT = INTEGER_NULL_POINTER;
-    create_integer((void*) &MAXIMUM_LOG_MESSAGE_COUNT);
+    MAXIMUM_LOG_MESSAGE_COUNT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *MAXIMUM_LOG_MESSAGE_COUNT = 300;
 
     // The log output.
     LOG_OUTPUT = stderr;
-
-    //
-    // Primitive type sizes.
-    //
-
-    // The pointer primitive size.
-    POINTER_PRIMITIVE_SIZE = INTEGER_NULL_POINTER;
-    create_integer((void*) &POINTER_PRIMITIVE_SIZE);
-    *POINTER_PRIMITIVE_SIZE = sizeof(void*);
-
-    // The integer primitive size.
-    INTEGER_PRIMITIVE_SIZE = INTEGER_NULL_POINTER;
-    create_integer((void*) &INTEGER_PRIMITIVE_SIZE);
-    *INTEGER_PRIMITIVE_SIZE = sizeof(int);
-
-    // The character primitive size.
-    CHARACTER_PRIMITIVE_SIZE = INTEGER_NULL_POINTER;
-    create_integer((void*) &CHARACTER_PRIMITIVE_SIZE);
-    *CHARACTER_PRIMITIVE_SIZE = sizeof(char);
-
-    // The double primitive size.
-    DOUBLE_PRIMITIVE_SIZE = INTEGER_NULL_POINTER;
-    create_integer((void*) &DOUBLE_PRIMITIVE_SIZE);
-    *DOUBLE_PRIMITIVE_SIZE = sizeof(double);
 }
 
 /**
@@ -120,30 +126,38 @@ void destroy_globals() {
     log_message_debug("Destroy globals.");
 
     //
-    // Primitive type sizes.
-    //
-
-    // The pointer primitive size.
-    destroy_integer((void*) &POINTER_PRIMITIVE_SIZE);
-
-    // The integer primitive size.
-    destroy_integer((void*) &INTEGER_PRIMITIVE_SIZE);
-
-    // The character primitive size.
-    destroy_integer((void*) &CHARACTER_PRIMITIVE_SIZE);
-
-    // The double primitive size.
-    destroy_integer((void*) &DOUBLE_PRIMITIVE_SIZE);
-
-    //
     // Logging.
+    //
+    // CAUTION! DO NOT use array functionality here!
+    // The arrays use the logger which would cause circular references.
+    // Instead, use malloc and similar functions directly!
     //
 
     // The maximum log message count.
-    destroy_integer((void*) &MAXIMUM_LOG_MESSAGE_COUNT);
+    free(MAXIMUM_LOG_MESSAGE_COUNT);
 
     // The log level.
-    destroy_integer((void*) &LOG_LEVEL);
+    free(LOG_LEVEL);
+
+    //
+    // Primitive type sizes.
+    //
+    // CAUTION! DO NOT use array functionality here!
+    // The arrays use the logger which would cause circular references.
+    // Instead, use malloc and similar functions directly!
+    //
+
+    // The double primitive size.
+    free(DOUBLE_PRIMITIVE_SIZE);
+
+    // The character primitive size.
+    free(CHARACTER_PRIMITIVE_SIZE);
+
+    // The pointer primitive size.
+    free(POINTER_PRIMITIVE_SIZE);
+
+    // The integer primitive size.
+    free(INTEGER_PRIMITIVE_SIZE);
 }
 
 /* GLOBALS_HANDLER_SOURCE */

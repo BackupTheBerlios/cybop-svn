@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.20 $ $Date: 2005-01-07 00:06:39 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2005-01-09 20:30:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -199,7 +199,7 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8) {
 
-    fputs("TEST: create primitive model\n", stdout);
+    log_message_debug("Create primitive model.");
 
     //
     // Receive.
@@ -275,7 +275,7 @@ void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const 
 void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8) {
 
-    fputs("TEST: create compound model\n", stdout);
+    log_message_debug("Create compound model.");
 
     // The configuration flag.
     int* c = INTEGER_NULL_POINTER;
@@ -420,6 +420,8 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
 void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8) {
 
+    log_message_debug("Create model.");
+
     // The comparison result.
     int* r = INTEGER_NULL_POINTER;
     create_integer((void*) &r);
@@ -456,6 +458,8 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  * @param p4 the knowledge size
  */
 void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
+
+    log_message_debug("Create part.");
 
     // The name name abstraction.
     void* na = NULL_POINTER;
