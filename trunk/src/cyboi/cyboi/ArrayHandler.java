@@ -29,7 +29,7 @@ package cyboi;
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.11 $ $Date: 2003-07-31 11:09:44 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-08-01 09:25:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ArrayHandler {
@@ -150,16 +150,23 @@ class ArrayHandler {
      * @param p0 the array
      * @param p1 the element
      * @param p2 the index
+     * @return the extended array
      */
-    static void set_array_element(java.lang.Object[] p0, java.lang.Object p1, int p2) {
+    static java.lang.Object[] set_array_element(java.lang.Object[] p0, java.lang.Object p1, int p2) {
 
+        java.lang.Object[] a = null;
+        
         if (p0 != null) {
 
             // If the array length is exceeded, a new array with extended length
             // is created and delivered back.
             if (p2 >= p0.length) {
 
-                p0 = ArrayHandler.extend_array(p0);
+                a = ArrayHandler.extend_array(p0);
+            
+            } else {
+            
+                a = p0;
             }
 
             //?? Temporary: Remove old and add new java tree node.
@@ -169,12 +176,14 @@ class ArrayHandler {
 */
 
             // Set element.
-            p0[p2] = p1;
+            a[p2] = p1;
 
         } else {
 
             System.out.println("ERROR: Could not set array element. The array is null.");
         }
+        
+        return a;
     }
 
     /**

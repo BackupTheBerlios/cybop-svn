@@ -27,7 +27,7 @@ package cyboi;
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.5 $ $Date: 2003-07-31 11:09:45 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-08-01 09:25:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryHandler {
@@ -449,6 +449,7 @@ class CategoryHandler {
                 
                 java.lang.Object a = n.getAttributes();
                 CategoryHandler.initialize_java_object_attributes(p0, a);
+                java.lang.System.out.println("---------- \n\n\nTEST wrapper: " + ((CategoryJavaObject) p0).category);
                 
             } else {
                 
@@ -507,14 +508,14 @@ class CategoryHandler {
      */
     static void initialize_java_object_attributes(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
-        CategoryJavaObject o = new CategoryJavaObject();
-        CategoryJavaObjectHandler.initialize_category_java_object(o);
+        CategoryJavaObject o = (CategoryJavaObject) p0;
         
         if (o != null) {
         
             java.lang.System.out.println("INFO: Initialize java object attributes.");
             
             o.category = read_attribute(p1, CategoryHandler.CATEGORY);
+            java.lang.System.out.println("--\nTEST inner: " + o.category);
             org.w3c.dom.NamedNodeMap m = (org.w3c.dom.NamedNodeMap) p1;
     
             if (m != null) {
@@ -584,7 +585,7 @@ class CategoryHandler {
                     if (i != null) {
                     
                         MapHandler.add_map_element(p0, i, i.name);
-                
+
                     } else {
                         
                         java.lang.System.out.println("ERROR: Could not initialize items. The item node is null.");
@@ -625,11 +626,13 @@ class CategoryHandler {
         
         if (ci != null) {
                 
-            java.lang.System.out.println("INFO: Initialize category item.");
-
             ci.name = CategoryHandler.read_attribute(p1, CategoryHandler.NAME);
+            java.lang.System.out.println("INFO: Initialize category item: " + ci.name);
+
             ci.item_abstraction = CategoryHandler.read_attribute(p1, CategoryHandler.ITEM_ABSTRACTION);
+            java.lang.System.out.println("TEST item_abstraction: " + ci.item_abstraction);
             ci.item_category = CategoryHandler.read_attribute(p1, CategoryHandler.ITEM_CATEGORY);
+            java.lang.System.out.println("TEST item_category: " + ci.item_category);
             ci.position_abstraction = CategoryHandler.read_attribute(p1, CategoryHandler.POSITION_ABSTRACTION);
             ci.position_category = CategoryHandler.read_attribute(p1, CategoryHandler.POSITION_CATEGORY);
             ci.instance_abstraction = CategoryHandler.read_attribute(p1, CategoryHandler.INSTANCE_ABSTRACTION);

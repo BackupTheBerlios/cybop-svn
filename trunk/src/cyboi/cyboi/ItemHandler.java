@@ -29,7 +29,7 @@ package cyboi;
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.22 $ $Date: 2003-07-31 11:09:45 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2003-08-01 09:25:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -39,62 +39,65 @@ class ItemHandler {
     //
 
     /**
-     * Initializes the object.
+     * Creates the object.
      *
-     * @param p0 the object
-     * @param p1 the category
-     * @param p2 the abstraction
+     * @param p0 the category
+     * @param p1 the abstraction
+     * @return the object
      */
-    static void initialize_object(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) throws java.lang.Exception {
+    static java.lang.Object create_object(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
-        java.lang.String a = (java.lang.String) p2;
+        java.lang.Object o = null;
+        java.lang.String a = (java.lang.String) p1;
         
         if (a != null) {
 
-            java.lang.System.out.println("INFO: Initialize object.");
+            java.lang.System.out.println("INFO: Create object: " + p0);
 
             if (a.equals(Statics.INTEGER_PRIMITIVE)) {
 
-                p0 = PrimitiveHandler.create_integer_primitive(p1);
+                o = PrimitiveHandler.create_integer_primitive(p0);
 
             } else if (a.equals(Statics.FLOAT_PRIMITIVE)) {
 
-                p0 = PrimitiveHandler.create_float_primitive(p1);
+                o = PrimitiveHandler.create_float_primitive(p0);
 
             } else if (a.equals(Statics.CHAR_PRIMITIVE)) {
 
-                p0 = PrimitiveHandler.create_character_primitive(p1);
+                o = PrimitiveHandler.create_character_primitive(p0);
 
             } else if (a.equals(Statics.STRING_PRIMITIVE)) {
 
-                p0 = PrimitiveHandler.create_string_primitive(p1);
+                o = PrimitiveHandler.create_string_primitive(p0);
 
             } else if (a.equals(Statics.COMPLEX)) {
 
-                p0 = new Item();
-                ItemHandler.initialize_item(p0, p1);
+                o = new Item();
+                ItemHandler.initialize_item(o, p0);
             }
             
         } else {
             
-            java.lang.System.out.println("WARNING: Could not initialize object. The abstraction is null.");
+            java.lang.System.out.println("WARNING: Could not create object. The abstraction is null.");
         }
+        
+        return o;
     }
 
     /**
-     * Finalizes the object.
+     * Destroys the object.
      *
      * @param p0 the object
      * @param p1 the category
      * @param p2 the abstraction
      */
-    static void finalize_object(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) throws java.lang.Exception {
+    static void destroy_object(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) throws java.lang.Exception {
 
         java.lang.String a = (java.lang.String) p2;
         
         if (a != null) {
 
-            java.lang.System.out.println("INFO: Finalize object.");
+            java.lang.System.out.println("INFO: Destroy object: " + p1);
 
             if (a.equals(Statics.INTEGER_PRIMITIVE)) {
 
@@ -115,12 +118,11 @@ class ItemHandler {
             } else if (a.equals(Statics.COMPLEX)) {
 
                 ItemHandler.finalize_item(p0, p1);
-                p0 = null;
             }
             
         } else {
             
-            java.lang.System.out.println("WARNING: Could not finalize object. The abstraction is null.");
+            java.lang.System.out.println("WARNING: Could not destroy object. The abstraction is null.");
         }
     }
 
@@ -142,13 +144,6 @@ class ItemHandler {
 
         Category c = new Category();
         CategoryHandler.initialize_category(c, p1);
-        java.lang.System.out.println("TEST category: " + c);
-        java.lang.System.out.println("TEST java object: " + c.java_object);
-        java.lang.System.out.println("TEST items: " + c.items);
-        java.lang.System.out.println("TEST items length: " + ((Map) c.items).names.length);
-        for (int i = 0; i < ((Map) c.items).names.length; i++) {
-            java.lang.System.out.println("TEST item: " + i + " " + ((Map) c.items).names[i]);
-        }
         ItemHandler.initialize_item_elements(p0, c);
         c = null;
     }
@@ -387,20 +382,18 @@ class ItemHandler {
 
                 java.lang.Object o = null;
                 
-                o = null;
-                ItemHandler.initialize_object(o, ci.item_category, ci.item_abstraction);
+                java.lang.System.out.println("\n\nTEST category: " + ci.item_category);
+                java.lang.System.out.println("\n\nTEST abstraction: " + ci.item_abstraction);
+                o = ItemHandler.create_object(ci.item_category, ci.item_abstraction);
                 MapHandler.add_map_element(i.items, o, ci.name);
     
-                o = null;
-                ItemHandler.initialize_object(o, ci.position_category, ci.position_abstraction);
+                o = ItemHandler.create_object(ci.position_category, ci.position_abstraction);
                 MapHandler.add_map_element(i.positions, o, ci.name);
     
-                o = null;
-                ItemHandler.initialize_object(o, ci.instance_category, ci.instance_abstraction);
+                o = ItemHandler.create_object(ci.instance_category, ci.instance_abstraction);
                 MapHandler.add_map_element(i.instances, o, ci.name);
     
-                o = null;
-                ItemHandler.initialize_object(o, ci.interaction_category, ci.interaction_abstraction);
+                o = ItemHandler.create_object(ci.interaction_category, ci.interaction_abstraction);
                 MapHandler.add_map_element(i.interactions, o, ci.name);
     
             } else {
@@ -435,19 +428,19 @@ class ItemHandler {
                 java.lang.Object o = null;
 
                 o = MapHandler.get_map_element(i.items, ci.name);
-                ItemHandler.finalize_object(o, ci.item_category, ci.item_abstraction);
+                ItemHandler.destroy_object(o, ci.item_category, ci.item_abstraction);
                 MapHandler.remove_map_element(i.items, ci.name);
     
                 o = MapHandler.get_map_element(i.positions, ci.name);
-                ItemHandler.finalize_object(o, ci.position_category, ci.position_abstraction);
+                ItemHandler.destroy_object(o, ci.position_category, ci.position_abstraction);
                 MapHandler.remove_map_element(i.positions, ci.name);
     
                 o = MapHandler.get_map_element(i.instances, ci.name);
-                ItemHandler.finalize_object(o, ci.instance_category, ci.instance_abstraction);
+                ItemHandler.destroy_object(o, ci.instance_category, ci.instance_abstraction);
                 MapHandler.remove_map_element(i.instances, ci.name);
     
                 o = MapHandler.get_map_element(i.interactions, ci.name);
-                ItemHandler.finalize_object(o, ci.interaction_category, ci.interaction_abstraction);
+                ItemHandler.destroy_object(o, ci.interaction_category, ci.interaction_abstraction);
                 MapHandler.remove_map_element(i.interactions, ci.name);
     
             } else {

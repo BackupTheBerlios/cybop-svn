@@ -29,7 +29,7 @@ package cyboi;
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.14 $ $Date: 2003-07-31 11:09:45 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-08-01 09:25:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class MapHandler {
@@ -48,6 +48,8 @@ class MapHandler {
         Map m = (Map) p0;
 
         if (m != null) {
+
+            java.lang.System.out.println("INFO: Initialize map.");
 
             m.names = new java.lang.Object[0];
             m.references = new java.lang.Object[0];
@@ -68,6 +70,8 @@ class MapHandler {
         Map m = (Map) p0;
         
         if (m != null) {
+
+            java.lang.System.out.println("INFO: Finalize map.");
 
             m.references = null;
             m.names = null;
@@ -114,8 +118,8 @@ class MapHandler {
      */
     static void add_map_element(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
 
-        MapHandler.determine_map_element_name(p0, p2);
-        MapHandler.set_map_element(p0, p1, p2);
+        java.lang.Object n = MapHandler.determine_map_element_name(p0, p2);
+        MapHandler.set_map_element(p0, p1, n);
     }
 
     /**
@@ -133,8 +137,8 @@ class MapHandler {
             
             int i = MapHandler.determine_next_map_element_index(m, p2);
 
-            ArrayHandler.set_array_element(m.names, p2, i);
-            ArrayHandler.set_array_element(m.references, p1, i);
+            m.names = ArrayHandler.set_array_element(m.names, p2, i);
+            m.references = ArrayHandler.set_array_element(m.references, p1, i);
 
         } else {
 
@@ -342,17 +346,19 @@ class MapHandler {
      * (which is the same as increasing the currently highest index by one).
      *
      * @param p0 the map
-     * @param p1 the name
+     * @param p1 the base name
+     * @return the name
      */
-    static void determine_map_element_name(java.lang.Object p0, java.lang.Object p1) {
+    static java.lang.Object determine_map_element_name(java.lang.Object p0, java.lang.Object p1) {
 
+        java.lang.Object n = null;
         java.lang.String index = java.lang.String.valueOf(MapHandler.get_map_element_count(p0, p1));
 
         if (p1 != null) {
 
             if (index != null) {
 
-                p1 = p1 + "_" + index;
+                n = p1 + "_" + index;
 
             } else {
 
@@ -363,6 +369,8 @@ class MapHandler {
 
             java.lang.System.out.println("ERROR: Could not determine map element name. The name is null.");
         }
+        
+        return n;
     }
 
     /**
