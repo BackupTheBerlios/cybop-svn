@@ -60,7 +60,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-21 23:25:10 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-23 13:08:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends Block implements 
@@ -140,6 +140,99 @@ public class System extends Block implements
     public java.lang.Object createJavaObject() {
 
         return new java.lang.Thread(this);
+    }
+
+    //
+    // Child management.
+    //
+
+    /**
+     * Creates a system.
+     *
+     * @param n the system class name
+     * @param l the configuration location
+     * @return the system
+     * @exception NullPointerException if the system class is null
+     * @exception NullPointerException if the system is null
+     */
+    public System createSystem(String n, String l) throws Exception, NullPointerException {
+
+        System s = null;
+
+        // If a system class name is set to null, then don't try to create the system.
+        if (n != null) {
+
+            // Find class by name.
+            Class cl = Class.forName((java.lang.String) n.getJavaObject());
+
+            if (cl != null) {
+
+                // Create system from given class.
+                s = (System) cl.newInstance();
+
+                if (s != null) {
+
+                    java.lang.System.out.println("INFO: Set global system items.");
+                    s.set(Component.CONFIGURATION, createItem(new String("cybop.core.system.chain.Configuration")));
+                    s.set(Component.LOG_RECORD, createItem(new String("cybop.core.system.chain.LogRecord")));
+                    s.set(Component.SIGNAL_MEMORY, createItem(new String("cybop.core.system.chain.SignalMemory")));
+
+                    java.lang.System.out.println("INFO: Configure system.");
+                    s.configure();
+
+                    java.lang.System.out.println("INFO: Initialize system.");
+                    s.initialize();
+
+                } else {
+
+                    throw new NullPointerException("Could not create system. The system is null.");
+                }
+
+            } else {
+
+                throw new NullPointerException("Could not create system. The system class is null.");
+            }
+
+        } else {
+
+            java.lang.System.out.println("DEBUG: Could not create system. The system class name is null.");
+        }
+
+        return s;
+    }
+
+    /**
+     * Destroys the system.
+     *
+     * @param s the system
+     */
+    public void destroySystem(System s) throws Exception {
+
+        if (s != null) {
+
+            java.lang.System.out.println("INFO: Finalize system.");
+            s.finalizz();
+
+            java.lang.System.out.println("INFO: Deconfigure system.");
+            s.deconfigure();
+
+            java.lang.System.out.println("INFO: Remove global system items.");
+            SignalMemory m = (SignalMemory) s.get(Component.SIGNAL_MEMORY);
+            s.remove(Component.SIGNAL_MEMORY);
+            destroyItem(m);
+
+            LogRecord h = (LogRecord) s.get(Component.LOG_RECORD);
+            s.remove(Component.LOG_RECORD);
+            destroyItem(h);
+
+            Configuration c = (Configuration) s.get(Component.CONFIGURATION);
+            s.remove(Component.CONFIGURATION);
+            destroyItem(c);
+
+        } else {
+
+            java.lang.System.out.println("DEBUG: Could not destroy system. The system is null.");
+        }
     }
 
     //

@@ -49,7 +49,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.8 $ $Date: 2003-04-21 23:25:10 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-04-23 13:08:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -351,6 +351,7 @@ public class Family extends System {
 
         set(Family.SYSTEMS_COUNT, this.defaultSystemsCount);
 
+/*??
         if (get(Family.SYSTEMS_COUNT) != null) {
 
             String cl = null;
@@ -394,6 +395,7 @@ public class Family extends System {
 
             throw new NullPointerException("Could not initialize system. The external systems count is null.");
         }
+*/
     }
 
     /**
@@ -404,6 +406,7 @@ public class Family extends System {
         int i;
         String s;
 
+/*??
         //
         // External systems.
         //
@@ -468,6 +471,7 @@ public class Family extends System {
 
             throw new NullPointerException("Could not finalize system. The systems count is null.");
         }
+*/
 
         //
         // Available systems.

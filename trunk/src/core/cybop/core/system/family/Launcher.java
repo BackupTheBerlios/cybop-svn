@@ -69,23 +69,10 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.14 $ $Date: 2003-04-21 23:25:10 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-04-23 13:08:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Launcher extends Family /*??implements
-    java.awt.event.ActionListener,
-    java.awt.event.FocusListener,
-    java.awt.event.ItemListener,
-    java.awt.event.KeyListener,
-    java.awt.event.MouseListener,
-    java.awt.event.MouseMotionListener,
-    java.awt.event.WindowFocusListener,
-    java.awt.event.WindowListener,
-    java.awt.event.WindowStateListener,
-    javax.swing.event.DocumentListener,
-    javax.swing.event.InternalFrameListener,
-    javax.swing.event.ListSelectionListener,
-    javax.swing.event.TreeSelectionListener */{
+public class Launcher extends Family {
 
     //
     // Command line arguments.
@@ -168,18 +155,41 @@ public class Launcher extends Family /*??implements
             if (l != null) {
 
                 l.setArguments(args);
-                //?? l.metalize or l.typify (to create globals, configuration, logRecord)
+
+                java.lang.System.out.println("INFO: Set global launcher items.");
+                l.set(Component.CONFIGURATION, new cybop.core.system.chain.Configuration());
+                l.set(Component.LOG_RECORD, new cybop.core.system.chain.LogRecord());
+                l.set(Component.SIGNAL_MEMORY, new cybop.core.system.chain.SignalMemory());
+
+                java.lang.System.out.println("INFO: Configure launcher.");
                 l.configure();
+
+                java.lang.System.out.println("INFO: Initialize launcher.");
                 l.initialize();
                 l.launch();
+
                 // The system is now started up and complete so that a loop
                 // can be entered, waiting for signals (events).
                 l.await();
                 // The loop above is left as soon as the shutdown flag is set
                 // so that the system can be shut down now.
+
+                java.lang.System.out.println("INFO: Finalize launcher.");
                 l.finalizz();
+
+                java.lang.System.out.println("INFO: Deconfigure launcher.");
                 l.deconfigure();
-                //?? l.demetalize or l.detypify (to destroy globals, configuration, logRecord)
+
+                java.lang.System.out.println("INFO: Remove global launcher items.");
+                Item m = l.get(Component.SIGNAL_MEMORY);
+                l.remove(Component.SIGNAL_MEMORY);
+
+                Item h = l.get(Component.LOG_RECORD);
+                l.remove(Component.LOG_RECORD);
+
+                Item c = l.get(Component.CONFIGURATION);
+                l.remove(Component.CONFIGURATION);
+
                 l.setArguments(null);
 
                 //
@@ -966,12 +976,12 @@ public class Launcher extends Family /*??implements
      */
     public void startupSystem(String sys, String c) throws Exception, NullPointerException {
 
-        setSystem(Launcher.SYSTEM, createComponent(sys/*??, c*/));
+        setSystem(Launcher.SYSTEM, createSystem(sys, c));
 
         Signal s = (Signal) createItem(getDefaultSignal());
 
         if (s != null) {
-            
+
             s.set(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
             s.set(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
             s.set(Signal.SUBJECT, get(Launcher.USER));
@@ -1035,7 +1045,7 @@ public class Launcher extends Family /*??implements
 
             // Remove and destroy the system the signal is coming from.
             removeSystem(ext);
-            destroyComponent(system);
+            destroySystem(system);
 
             // If this launcher system has sent the exit signal, then set the
             // shutdown flag causing the waiting loop to break and by this to
