@@ -48,7 +48,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.30 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2004-04-22 08:54:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,32 +61,6 @@
 #include "../model/double_array_handler.c"
 #include "../model/integer_array_handler.c"
 #include "../model/pointer_array_handler.c"
-
-//
-// Array type constants.
-//
-
-//?? Possibly remove pointer array, if a pointer is really identical to an integer.
-
-/** The pointer array constant. */
-static const int POINTER_ARRAY = 0;
-
-/** The integer array constant. */
-static const int INTEGER_ARRAY = 1;
-
-//?? Possibly remove character array, if a character primitive is really
-//?? identical to an integer primitive. Are they?
-
-/** The character array constant. */
-static const int CHARACTER_ARRAY = 2;
-
-//?? Possibly remove double array, if a double primitive can be replaced by
-//?? a compound structure like "fraction". How would this effect performance
-//?? when ALU will not work with doubles but they rather get transformed into
-//?? integers first?
-
-/** The double array constant. */
-static const int DOUBLE_ARRAY = 3;
 
 //
 // Array.

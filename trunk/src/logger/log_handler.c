@@ -24,7 +24,7 @@
  * This file handles log messages.
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.15 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-04-22 08:54:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,35 +36,6 @@
 #include "../constants.c"
 
 //
-// Log level constants.
-//
-
-/** The off log level. */
-static const int OFF_LOG_LEVEL = 0;
-
-/** The error log level. */
-static const int ERROR_LOG_LEVEL = 1;
-
-/** The warning log level. */
-static const int WARNING_LOG_LEVEL = 2;
-
-/** The info log level. */
-static const int INFO_LOG_LEVEL = 3;
-
-//
-// Log level name constants.
-//
-
-/** The error log level name. */
-static const char* ERROR_LOG_LEVEL_NAME = "Error";
-
-/** The warning log level name. */
-static const char* WARNING_LOG_LEVEL_NAME = "Warning";
-
-/** The info log level name. */
-static const char* INFO_LOG_LEVEL_NAME = "Info";
-
-//
 // Attributes.
 //
 
@@ -74,9 +45,6 @@ static int log_level;
 //
 // Forward declarations.
 //
-
-/** The character array constant. */
-static const int CHARACTER_ARRAY;
 
 /**
  * Creates the array.

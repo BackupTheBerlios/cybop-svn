@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.21 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2004-04-22 08:54:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,37 +45,6 @@
 
 //?? Temporary for character screen testing.
 #include "character_screen_handler.c"
-
-//
-// Message constants.
-//
-
-// The usage message array.
-static const char USAGE_MESSAGE_ARRAY[] = {'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 's', 'i', 'g', 'n', 'a', 'l'};
-
-// The usage message.
-static const char* USAGE_MESSAGE = USAGE_MESSAGE_ARRAY;
-
-// The usage message size.
-static const int USAGE_MESSAGE_SIZE = 19;
-
-// The example message array.
-static const char EXAMPLE_MESSAGE_ARRAY[] = {'E', 'x', 'a', 'm', 'p', 'l', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'y', 'b', 'o', 'p', '.', 's', 'a', 'm', 'p', 'l', 'e', '.', 'h', 'e', 'l', 'l', 'o', '_', 'w', 'o', 'r', 'l', 'd', '.', 'd', 'y', 'n', 'a', 'm', 'i', 'c', 's', '.', 's', 't', 'a', 'r', 't', 'u', 'p'};
-
-// The example message.
-static const char* EXAMPLE_MESSAGE = EXAMPLE_MESSAGE_ARRAY;
-
-// The example message size.
-static const int EXAMPLE_MESSAGE_SIZE = 56;
-
-/*??
-log_message((void*) &INFO_LOG_LEVEL, (void*) &"Wait for signals.");
-log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not handle signal. The signal abstraction is unknown.");
-log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not wait for signals. The internals is null.");
-log_message((void*) &INFO_LOG_LEVEL, (void*) &"Exit CYBOI normally.");
-log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not execute CYBOI. The command line argument number is incorrect.");
-log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not execute CYBOI. The command line argument vector is null.");
-*/
 
 /**
  * Shows the usage information.

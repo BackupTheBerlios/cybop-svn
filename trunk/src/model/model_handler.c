@@ -59,7 +59,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.35 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.36 $ $Date: 2004-04-22 08:54:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -70,118 +70,6 @@
 #include "../cybol/cybol_model_handler.c"
 #include "../logger/log_handler.c"
 #include "../model/array_handler.c"
-
-//
-// Model size constants.
-//
-
-/** The model size. */
-static const int MODEL_SIZE = 22;
-
-//
-// Model index constants.
-//
-
-/** The parts size index. */
-static const int PARTS_SIZE_INDEX = 0;
-
-/** The parts count index. */
-static const int PARTS_COUNT_INDEX = 1;
-
-/** The names index. */
-static const int NAMES_INDEX = 2;
-
-/** The names sizes index. */
-static const int NAMES_SIZES_INDEX = 3;
-
-/** The part abstractions index. */
-static const int PART_ABSTRACTIONS_INDEX = 4;
-
-/** The part abstractions sizes index. */
-static const int PART_ABSTRACTIONS_SIZES_INDEX = 5;
-
-/** The part locations index. */
-static const int PART_LOCATIONS_INDEX = 6;
-
-/** The part locations sizes index. */
-static const int PART_LOCATIONS_SIZES_INDEX = 7;
-
-/** The part models index. */
-static const int PART_MODELS_INDEX = 8;
-
-/** The part models sizes index. */
-static const int PART_MODELS_SIZES_INDEX = 9;
-
-/** The position abstractions index. */
-static const int POSITION_ABSTRACTIONS_INDEX = 10;
-
-/** The position abstractions sizes index. */
-static const int POSITION_ABSTRACTIONS_SIZES_INDEX = 11;
-
-/** The position locations index. */
-static const int POSITION_LOCATIONS_INDEX = 12;
-
-/** The position locations sizes index. */
-static const int POSITION_LOCATIONS_SIZES_INDEX = 13;
-
-/** The position models index. */
-static const int POSITION_MODELS_INDEX = 14;
-
-/** The position models sizes index. */
-static const int POSITION_MODELS_SIZES_INDEX = 15;
-
-/** The constraint abstractions index. */
-static const int CONSTRAINT_ABSTRACTIONS_INDEX = 16;
-
-/** The constraint abstractions sizes index. */
-static const int CONSTRAINT_ABSTRACTIONS_SIZES_INDEX = 17;
-
-/** The constraint locations index. */
-static const int CONSTRAINT_LOCATIONS_INDEX = 18;
-
-/** The constraint locations sizes index. */
-static const int CONSTRAINT_LOCATIONS_SIZES_INDEX = 19;
-
-/** The constraint models index. */
-static const int CONSTRAINT_MODELS_INDEX = 20;
-
-/** The constraint models sizes index. */
-static const int CONSTRAINT_MODELS_SIZES_INDEX = 21;
-
-//
-// Model separator constants.
-//
-
-/** The model part separator. */
-static const char MODEL_PART_SEPARATOR = '.';
-
-//
-// Model location constants.
-//
-
-/** The inline location. */
-static const char INLINE_LOCATION[] = {'i', 'n', 'l', 'i', 'n', 'e', ':', '/'};
-
-/** The inline location size. */
-static const int INLINE_LOCATION_SIZE = 8;
-
-/** The file location. */
-static const char FILE_LOCATION[] = {'f', 'i', 'l', 'e', ':', '/'};
-
-/** The file location size. */
-static const int FILE_LOCATION_SIZE = 6;
-
-/** The http location. */
-static const char HTTP_LOCATION[] = {'h', 't', 't', 'p', ':', '/', '/'};
-
-/** The http location size. */
-static const int HTTP_LOCATION_SIZE = 7;
-
-/** The ftp location. */
-static const char FTP_LOCATION[] = {'f', 't', 'p', ':', '/', '/'};
-
-/** The ftp location size. */
-static const int FTP_LOCATION_SIZE = 6;
 
 //
 // Model.

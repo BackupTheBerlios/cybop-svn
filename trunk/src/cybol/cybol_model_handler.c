@@ -37,7 +37,7 @@
  *         map = position_abstraction_attribute
  *         (attributes 0..9 = size 10)
  *
- * @version $Revision: 1.17 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-04-22 08:54:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,109 +47,6 @@
 #include <stdio.h>
 #include "../constants.c"
 #include "../logger/log_handler.c"
-
-//
-// Constants.
-//
-
-/** The cybol path. */
-//?? static const char CYBOL_PATH[] = {'/home/cybop/lib/cybop/'};
-
-/** The open office writer model size. */
-//?? static const int SXW_MODEL_SIZE = 3;
-
-/** The cybol file suffix. */
-//?? static const char FILE_SUFFIX[] = {'.cybol'};
-
-/** The open office writer model size. */
-//?? static const int SXW_MODEL_SIZE = 3;
-
-/** The null model. */
-//?? static const char NULL_MODEL[] = {'null'};
-
-/** The open office writer model size. */
-//?? static const int SXW_MODEL_SIZE = 3;
-
-/** The model tag array. */
-static const char MODEL_TAG_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
-
-/** The model tag. */
-static const char* MODEL_TAG = {'m', 'o', 'd', 'e', 'l'};
-
-/** The model tag size. */
-static const int MODEL_TAG_SIZE = 5;
-
-/** The part tag array. */
-static const char PART_TAG_ARRAY[] = {'p', 'a', 'r', 't'};
-
-/** The part tag size. */
-static const int PART_TAG_SIZE = 4;
-
-/** The super tag array. */
-static const char SUPER_TAG_ARRAY[] = {'s', 'u', 'p', 'e', 'r'};
-
-/** The super tag size. */
-static const int SUPER_TAG_SIZE = 5;
-
-/** The name attribute array. */
-static const char NAME_ATTRIBUTE_ARRAY[] = {'n', 'a', 'm', 'e'};
-
-/** The name attribute size. */
-static const int NAME_ATTRIBUTE_SIZE = 4;
-
-/** The part abstraction attribute array. */
-static const char PART_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'a', 'r', 't', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-
-/** The part abstraction attribute size. */
-static const int PART_ABSTRACTION_ATTRIBUTE_SIZE = 16;
-
-/** The part location attribute array. */
-static const char PART_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'a', 'r', 't', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
-
-/** The part location attribute size. */
-static const int PART_LOCATION_ATTRIBUTE_SIZE = 13;
-
-/** The part model attribute array. */
-static const char PART_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'a', 'r', 't', '_', 'm', 'o', 'd', 'e', 'l'};
-
-/** The part model attribute size. */
-static const int PART_MODEL_ATTRIBUTE_SIZE = 10;
-
-/** The position abstraction attribute array. */
-static const char POSITION_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-
-/** The position abstraction attribute size. */
-static const int POSITION_ABSTRACTION_ATTRIBUTE_SIZE = 20;
-
-/** The position location attribute array. */
-static const char POSITION_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
-
-/** The position location attribute size. */
-static const int POSITION_LOCATION_ATTRIBUTE_SIZE = 17;
-
-/** The position model attribute array. */
-static const char POSITION_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'm', 'o', 'd', 'e', 'l'};
-
-/** The position model attribute size. */
-static const int POSITION_MODEL_ATTRIBUTE_SIZE = 14;
-
-/** The constraint abstraction attribute array. */
-static const char CONSTRAINT_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-
-/** The constraint abstraction attribute size. */
-static const int CONSTRAINT_ABSTRACTION_ATTRIBUTE_SIZE = 22;
-
-/** The constraint location attribute array. */
-static const char CONSTRAINT_LOCATION_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
-
-/** The constraint location attribute size. */
-static const int CONSTRAINT_LOCATION_ATTRIBUTE_SIZE = 19;
-
-/** The constraint model attribute array. */
-static const char CONSTRAINT_MODEL_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '_', 'm', 'o', 'd', 'e', 'l'};
-
-/** The constraint model attribute size. */
-static const int CONSTRAINT_MODEL_ATTRIBUTE_SIZE = 16;
 
 //
 // File.

@@ -23,19 +23,12 @@
  *
  * This file defines constants for priorities that signals can have.
  *
- * @version $Revision: 1.2 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-04-22 08:54:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef PRIORITIES_SOURCE
 #define PRIORITIES_SOURCE
-
-//
-// Priorities.
-//
-
-/** The normal priority. */
-static const int NORMAL_PRIORITY = 0;
 
 /* PRIORITIES_SOURCE */
 #endif
