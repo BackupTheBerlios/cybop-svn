@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2004-12-21 17:49:51 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-12-21 20:37:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,16 +58,9 @@
  * the adding of signals to the signal memory must be synchronized!
  * How to do this properly in C?
  *
- * @param p0 the signal memory
- * @param p1 the signal memory count
- * @param p2 the signal memory size
- * @param p3 the character internals
- * @param p4 the integer internals
- * @param p5 the pointer internals
- * @param p6 the double internals
- * @param pp_thread_parameter the only one thread parameter (typ void**)
+ * @param p0 the internals memory
  */
-void activate_internals(void** pp_internals) {
+void activate_internals(void* p0) {
 
     //
     // Unix socket.
@@ -91,14 +84,13 @@ void activate_internals(void** pp_internals) {
     //
 
     int* p_tcp_socket_active = NULL_POINTER;
-    int internal_type = 0;
 
     // get the active flag for tcp socket
-    get_internal(pp_internals, (void*) &p_tcp_socket_active, (void*) &internal_type, (void*) &INTERNAL_TCPSOCKET_ACTIVE_INDEX);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &INTERNALS_TCPSOCKET_ACTIVE, (void*) &p_tcp_socket_active, (void*) &ONE_ELEMENT_COUNT);
 
-    if ( *p_tcp_socket_active == 1) {
+    if (*p_tcp_socket_active == 1) {
 
-        //activate_tcp_socket( pp_internals );
+//??        activate_tcp_socket(p0);
     }
 
 /*??
@@ -125,39 +117,28 @@ void activate_internals(void** pp_internals) {
 /**
  * Waits for signals.
  *
- * @param p0 the signal memory
- * @param p1 the signal memory count
- * @param p2 the signal memory size
- * @param p3 the knowledge
- * @param p4 the knowledge count
- * @param p5 the knowledge size
- * @param p6 the character internals
- * @param p7 the integer internals
- * @param p8 the pointer internals
- * @param p9 the double internals
+ * @param p0 the internals memory
  */
-void wait(void** pp_internal) {
+void wait(void* p0) {
 
     // Activate internal mechanisms for signal reception.
-    activate_internals(pp_internal);
+    activate_internals(p0);
 
-    int internal_type = 0;
-
-    // The signal memory and knowledge model.
-    void* m = NULL_POINTER;
-    void* mc = NULL_POINTER;
-    void* ms = NULL_POINTER;
+    // The knowledge memory, signal memory.
     void* k = NULL_POINTER;
     void* kc = NULL_POINTER;
     void* ks = NULL_POINTER;
+    void* s = NULL_POINTER;
+    void* sc = NULL_POINTER;
+    void* ss = NULL_POINTER;
 
-    // Get signal memory and knowledge model.
-    get_internal(pp_internal, (void*) &m, (void*) &internal_type, (void*) &INTERNAL_SIGNAL_MEMORY_INDEX);
-    get_internal(pp_internal, (void*) &mc, (void*) &internal_type, (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX);
-    get_internal(pp_internal, (void*) &ms, (void*) &internal_type, (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX);
-    get_internal(pp_internal, (void*) &k, (void*) &internal_type, (void*) &INTERNAL_KNOWLEDGE_MODEL_INDEX);
-    get_internal(pp_internal, (void*) &kc, (void*) &internal_type, (void*) &INTERNAL_KNOWLEDGE_MODEL_COUNT_INDEX);
-    get_internal(pp_internal, (void*) &ks, (void*) &internal_type, (void*) &INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX);
+    // Get knowledge memory, signal memory.
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &INTERNALS_KNOWLEDGE_MEMORY, (void*) &k, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &INTERNALS_KNOWLEDGE_MEMORY_COUNT, (void*) &kc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &INTERNALS_KNOWLEDGE_MEMORY_SIZE, (void*) &ks, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &INTERNALS_SIGNAL_MEMORY, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &INTERNALS_SIGNAL_MEMORY_COUNT, (void*) &sc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &INTERNALS_SIGNAL_MEMORY_SIZE, (void*) &ss, (void*) &ONE_ELEMENT_COUNT);
 
     // The shutdown flag.
     int* f = INTEGER_NULL_POINTER;
@@ -166,22 +147,20 @@ void wait(void** pp_internal) {
     // The abstraction.
     void* a = NULL_POINTER;
     void* ac = NULL_POINTER;
-    // The signal (operation).
-    void* s = NULL_POINTER;
-    void* sc = NULL_POINTER;
-    // The parameters (details).
-    void* p = NULL_POINTER;
-    void* pc = NULL_POINTER;
+    // The model (signal operation).
+    void* m = NULL_POINTER;
+    void* mc = NULL_POINTER;
+    // The details (parameters).
+    void* d = NULL_POINTER;
+    void* dc = NULL_POINTER;
     // The priority.
-    void* pr = NULL_POINTER;
-    // The main signal id
+    void* p = NULL_POINTER;
+    // The signal id.
     void* id = NULL_POINTER;
     // The highest priority index.
     int* i = INTEGER_NULL_POINTER;
     create_integer((void*) &i);
     *i = -1;
-    // The done flag.
-    int d = 0;
     // The comparison result.
     int* r = INTEGER_NULL_POINTER;
     create_integer((void*) &r);
@@ -205,37 +184,37 @@ void wait(void** pp_internal) {
 //??        test_knowledge_model((void*) &k, (void*) &kc);
 
         // Get index of the top priority signal.
-        get_highest_priority_index((void*) &m, (void*) &mc, (void*) &i);
+        get_highest_priority_index((void*) &s, (void*) &sc, (void*) &i);
 
 /*??
         //?? Wait for web input, if no signal is in memory. TODO: Use a thread for this!
-        if (i < 0) {
+        if (*i < 0) {
 
-            run_tcp_socket((void*) &pp_internal);
+            run_tcp_socket((void*) &p0);
         }
 */
 
         if (*i >= 0) {
 
             // Get signal.
-            get_signal((void*) &m, (void*) &mc, (void*) &i,
-                (void*) &a, (void*) &ac, (void*) &s, (void*) &sc,
-                (void*) &p, (void*) &pc, (void*) &pr, (void*) &id);
+            get_signal((void*) &s, (void*) &sc, (void*) &i,
+                (void*) &a, (void*) &ac, (void*) &m, (void*) &mc,
+                (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 
             //?? For testing only. TODO: Delete these lines later!
             fprintf(stderr, "wait i: %i\n", *i);
             fprintf(stderr, "wait a: %s\n", a);
             fprintf(stderr, "wait ac: %i\n", **((int**) ac));
-            fprintf(stderr, "wait s: %s\n", s);
-            fprintf(stderr, "wait sc: %i\n", **((int**) sc));
-            fprintf(stderr, "wait p: %i\n", p);
-            fprintf(stderr, "wait pc: %i\n", **((int**) pc));
-            fprintf(stderr, "wait pr: %i\n", **((int**) pr));
+            fprintf(stderr, "wait s: %s\n", m);
+            fprintf(stderr, "wait sc: %i\n", **((int**) mc));
+            fprintf(stderr, "wait p: %i\n", d);
+            fprintf(stderr, "wait pc: %i\n", **((int**) dc));
+            fprintf(stderr, "wait pr: %i\n", **((int**) p));
             fprintf(stderr, "wait id: %i\n", **((int**) id));
             fprintf(stderr, "wait knowledge model: %s\n", "");
 
             // Remove signal from signal memory.
-            remove_signal((void*) &m, (void*) &mc, (void*) &ms, (void*) &i);
+            remove_signal((void*) &s, (void*) &sc, (void*) &ss, (void*) &i);
 
             // CAUTION! Do NOT destroy signal here!
             // Signals are stored in the logic knowledge tree which gets created
@@ -247,16 +226,14 @@ void wait(void** pp_internal) {
             // Handle compound signal.
             //
 
-            if (d == 0) {
+            if (*r == 0) {
 
                 compare_arrays((void*) &a, (void*) &ac, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
                 if (*r == 1) {
 
-                    handle_compound_signal((void*) &s, (void*) &sc, (void*) &pr,
-                        (void*) &id, (void*) &m, (void*) &mc, (void*) &ms);
-
-                    d = 1;
+                    handle_compound_signal((void*) &m, (void*) &mc, (void*) &p,
+                        (void*) &id, (void*) &s, (void*) &sc, (void*) &ss);
                 }
             }
 
@@ -264,17 +241,15 @@ void wait(void** pp_internal) {
             // Handle operation signal.
             //
 
-            if (d == 0) {
+            if (*r == 0) {
 
                 compare_arrays((void*) &a, (void*) &ac, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
                 if (*r == 1) {
 
-                    handle_operation_signal((void*) &s, (void*) &sc, (void*) &p, (void*) &pc,
+                    handle_operation_signal((void*) &m, (void*) &mc, (void*) &d, (void*) &dc,
                         (void*) &k, (void*) &kc, (void*) &ks,
-                        (void*) &id, (void*) &pp_internal, (void*) &f);
-
-                    d = 1;
+                        (void*) &id, p0, (void*) &f);
                 }
             }
 
@@ -282,28 +257,30 @@ void wait(void** pp_internal) {
             // Unknown signal abstraction.
             //
 
-            if (d == 0) {
+            if (*r == 0) {
 
                 log_message((void*) &WARNING_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE, (void*) &COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT);
             }
 
+            // Destroy signal (id and priority).
+            destroy_integer((void*) &id);
+            destroy_integer((void*) &p);
+
             // Reset abstraction.
             a = NULL_POINTER;
             ac = NULL_POINTER;
-            // Reset signal (operation).
-            s = NULL_POINTER;
-            sc = NULL_POINTER;
-            // Reset parameters (details).
-            p = NULL_POINTER;
-            pc = NULL_POINTER;
+            // Reset model (signal operation).
+            m = NULL_POINTER;
+            mc = NULL_POINTER;
+            // Reset details (parameters).
+            d = NULL_POINTER;
+            dc = NULL_POINTER;
             // Reset priority.
-            pr = NULL_POINTER;
+            p = NULL_POINTER;
             // Reset main signal id.
             id = NULL_POINTER;
             // Reset highest priority index.
             *i = -1;
-            // Reset done flag.
-            d = 0;
             // Reset comparison result.
             *r = 0;
         }

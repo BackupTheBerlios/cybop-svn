@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.9 $ $Date: 2004-12-21 17:49:51 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-12-21 20:37:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -238,22 +238,6 @@ static const int* DETAILS_COUNTS_INDEX = DETAILS_COUNTS_INDEX_ARRAY;
 /** The details sizes index. */
 static const int DETAILS_SIZES_INDEX_ARRAY[] = {11};
 static const int* DETAILS_SIZES_INDEX = DETAILS_SIZES_INDEX_ARRAY;
-
-//
-// Internals memory.
-//
-
-/** The internals memory count. */
-static const int INTERNALS_MEMORY_COUNT_ARRAY[] = {2};
-static const int* INTERNALS_MEMORY_COUNT = INTERNALS_MEMORY_COUNT_ARRAY;
-
-/** The internals values index. */
-static const int INTERNALS_VALUES_INDEX_ARRAY[] = {0};
-static const int* INTERNALS_VALUES_INDEX = INTERNALS_VALUES_INDEX_ARRAY;
-
-/** The internals types index. */
-static const int INTERNALS_TYPES_INDEX_ARRAY[] = {1};
-static const int* INTERNALS_TYPES_INDEX = INTERNALS_TYPES_INDEX_ARRAY;
 
 //
 // Internals memory elements.

@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.54 $ $Date: 2004-12-21 17:49:51 $ $Author: christian $
+ * @version $Revision: 1.55 $ $Date: 2004-12-21 20:37:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -124,7 +124,6 @@ int main(int p0, char** p1) {
             // Read parameters from configuration file given at command line
             // and copy them into the internals memory.
             create_startup_parameters((void*) &c, (void*) &i);
-//??OLD:            create_startup_parameters(p1[*CONFIGURATION_FILE_PARAMETER_INDEX], (void*) &i);
 
             //
             // Knowledge memory.
@@ -147,9 +146,9 @@ int main(int p0, char** p1) {
             create((void*) &k, (void*) &ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
 
             // Set knowledge memory into internals.
-            set_internal((void*) &i, (void*) &k, (void*) &POINTER_ABSTRACTION, (void*) &INTERNALS_KNOWLEDGE_MEMORY);
-            set_internal((void*) &i, (void*) &kc, (void*) &POINTER_ABSTRACTION, (void*) &INTERNALS_KNOWLEDGE_MEMORY_COUNT);
-            set_internal((void*) &i, (void*) &ks, (void*) &POINTER_ABSTRACTION, (void*) &INTERNALS_KNOWLEDGE_MEMORY_SIZE);
+            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_KNOWLEDGE_MEMORY, (void*) &k, (void*) &ONE_ELEMENT_COUNT);
+            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_KNOWLEDGE_MEMORY_COUNT, (void*) &kc, (void*) &ONE_ELEMENT_COUNT);
+            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_KNOWLEDGE_MEMORY_SIZE, (void*) &ks, (void*) &ONE_ELEMENT_COUNT);
 
             //
             // Signal memory.
@@ -172,9 +171,9 @@ int main(int p0, char** p1) {
             create((void*) &s, (void*) &ss, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
             // Set signal memory into internals.
-            set_internal((void*) &i, (void*) &s, (void*) &POINTER_ABSTRACTION, (void*) &INTERNALS_SIGNAL_MEMORY);
-            set_internal((void*) &i, (void*) &sc, (void*) &POINTER_ABSTRACTION, (void*) &INTERNALS_SIGNAL_MEMORY_COUNT);
-            set_internal((void*) &i, (void*) &ss, (void*) &POINTER_ABSTRACTION, (void*) &INTERNALS_SIGNAL_MEMORY_SIZE);
+            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_SIGNAL_MEMORY, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
+            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_SIGNAL_MEMORY_COUNT, (void*) &sc, (void*) &ONE_ELEMENT_COUNT);
+            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_SIGNAL_MEMORY_SIZE, (void*) &ss, (void*) &ONE_ELEMENT_COUNT);
 
             //
             // TCP socket.
@@ -206,61 +205,70 @@ int main(int p0, char** p1) {
             // Startup model.
             //
 
-            log_message_debug("Create startup model.");
+            log_message_debug("Determine startup parameters.");
 
-            // The source channel.
-            char** sc = NULL_POINTER;
-            int* scc = NULL_POINTER;
-            // The source abstraction.
-            char** sa = NULL_POINTER;
-            int* sac = NULL_POINTER;
-            // The source model.
-            char** sm = NULL_POINTER;
-            int* smc = NULL_POINTER;
+            // The startup parameters channel, abstraction, model.
+            // CAUTION! These were created while reading from the configuration file,
+            // and such do not have to be created here!
+            void* pc = NULL_POINTER;
+            void* pcc = NULL_POINTER;
+            void* pa = NULL_POINTER;
+            void* pac = NULL_POINTER;
+            void* pm = NULL_POINTER;
+            void* pmc = NULL_POINTER;
 
-            int internal_type = 0;
+            // Get startup parameters channel, abstraction, model.
+            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_STARTUP_CHANNEL, (void*) &pc, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_STARTUP_CHANNEL_COUNT, (void*) &pcc, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_STARTUP_ABSTRACTION, (void*) &pa, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_STARTUP_ABSTRACTION_COUNT, (void*) &pac, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_STARTUP_MODEL, (void*) &pm, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_STARTUP_MODEL_COUNT, (void*) &pmc, (void*) &ONE_ELEMENT_COUNT);
 
-            // Get source channel.
-            get_internal((void*) &i, (void*) &sc, (void*) &internal_type, (void*) &INTERNAL_START_CHANNEL);
-            get_internal((void*) &i, (void*) &scc, (void*) &internal_type, (void*) &INTERNAL_START_CHANNEL_COUNT);
+            log_message_debug("Create startup model abstraction.");
 
-            // Get source abstraction.
-            get_internal((void*) &i, (void*) &sa, (void*) &internal_type, (void*) &INTERNAL_START_ABSTRACTION);
-            get_internal((void*) &i, (void*) &sac, (void*) &internal_type, (void*) &INTERNAL_START_ABSTRACTION_COUNT);
+            // The startup model abstraction count.
+            int* mac = INTEGER_NULL_POINTER;
+            create_integer((void*) &mac);
+            *mac = 0;
 
-            // Get source model.
-            get_internal((void*) &i, (void*) &sm, (void*) &internal_type, (void*) &INTERNAL_START_MODEL);
-            get_internal((void*) &i, (void*) &smc, (void*) &internal_type, (void*) &INTERNAL_START_MODEL_COUNT);
+            // The startup model abstraction size.
+            int* mas = INTEGER_NULL_POINTER;
+            create_integer((void*) &mas);
+            *mas = 0;
 
-            // The destination abstraction.
-            void* da = NULL_POINTER;
-            int dac = 0;
-            int das = 0;
-            // The destination model.
-            void* dm = NULL_POINTER;
-            int dmc = 0;
-            int dms = 0;
-            // The destination details.
-            void* dd = NULL_POINTER;
-            int ddc = 0;
-            int dds = 0;
-
-            // Create destination abstraction.
-            create_model((void*) &da, (void*) &dac, (void*) &das,
-                sa, sac,
+            // The startup model abstraction.
+            void* ma = NULL_POINTER;
+            create_model((void*) &ma, (void*) &mac, (void*) &mas,
+                (void*) &pa, (void*) &pac,
                 (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
                 (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
-            log_message_debug( "create destination abstraction" );
 
-            // Create destination model.
-            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-                sm, smc,
-                sa, sac,
-                sc, scc);
-            log_message_debug( "create destination model" );
+            log_message_debug("Create startup model model.");
 
-            // test_knowledge_model( (void*) &dm, (void*) &dmc );
-            // CAUTION! Do not create destination details!
+            // The startup model model count.
+            int* mmc = INTEGER_NULL_POINTER;
+            create_integer((void*) &mmc);
+            *mmc = 0;
+
+            // The startup model model size.
+            int* mms = INTEGER_NULL_POINTER;
+            create_integer((void*) &mms);
+            *mms = 0;
+
+            // The startup model model.
+            void* mm = NULL_POINTER;
+            create_model((void*) &mm, (void*) &mmc, (void*) &mms,
+                (void*) &pm, (void*) &pmc,
+                (void*) &pa, (void*) &pac,
+                (void*) &pc, (void*) &pcc);
+
+            // The startup model details.
+            int* mdc = INTEGER_NULL_POINTER;
+            int* mds = INTEGER_NULL_POINTER;
+            void* md = NULL_POINTER;
+
+            // CAUTION! Do not create startup model details!
             // It is not needed for the startup signal.
 
             //
@@ -269,16 +277,18 @@ int main(int p0, char** p1) {
 
             log_message_debug("Create startup signal.");
 
-            // get the new main signal id
-            int id = 0;
+            // The signal id.
+            int* id = INTEGER_NULL_POINTER;
+            create_integer((void*) &id);
+            *id = 0;
+
+            // Get new main signal id.
             get_new_signal_id((void*) &s, (void*) &sc, (void*) &id);
 
             // Add startup signal to signal memory.
             set_signal((void*) &s, (void*) &sc, (void*) &ss,
-                (void*) &da, (void*) &dac, (void*) &dm, (void*) &dmc,
-                (void*) &dd, (void*) &ddc, (void*) &NORMAL_PRIORITY, (void*) &id);
-
-            log_message_debug( "set start signals" );
+                (void*) &ma, (void*) &mac, (void*) &mm, (void*) &mmc,
+                (void*) &md, (void*) &mdc, (void*) &NORMAL_PRIORITY, (void*) &id);
 
             //
             // Waiting loop.
@@ -297,19 +307,31 @@ int main(int p0, char** p1) {
             // CAUTION! Use descending order, as compared to creation!
             //
 
-/*??
-            // Destroy destination model.
-            destroy_model((void*) &dm, (void*) &dmc, (void*) &dms,
-                (void*) &sm, (void*) &smc,
-                (void*) &sa, (void*) &sac,
-                (void*) &sc, (void*) &scc);
+            // Destroy startup signal.
+            // CAUTION! All signals are destroyed in the signal waiting loop,
+            // after having been read from the signal memory.
+            // Since this also counts for the startup signal,
+            // it must not be destroyed here!
 
-            // Destroy destination abstraction.
-            destroy_model((void*) &da, (void*) &dac, (void*) &das,
-                (void*) &sa, (void*) &sac,
+            // Destroy startup model model, count, size.
+/*??
+            destroy_model((void*) &mm, (void*) &mmc, (void*) &mms,
+                (void*) &pm, (void*) &pmc,
+                (void*) &pa, (void*) &pac,
+                (void*) &pc, (void*) &pcc);
+*/
+            destroy_integer((void*) &mms);
+            destroy_integer((void*) &mmc);
+
+            // Destroy startup model abstraction, count, size.
+/*??
+            destroy_model((void*) &ma, (void*) &mac, (void*) &mas,
+                (void*) &pa, (void*) &pac,
                 (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
                 (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
 */
+            destroy_integer((void*) &mas);
+            destroy_integer((void*) &mac);
 
 //??            log_message_debug("Destroy unix socket.");
 
@@ -332,6 +354,7 @@ int main(int p0, char** p1) {
             destroy_integer((void*) &kc);
 
             // Destroy startup parameters.
+            log_message_debug("Destroy startup parameters.");
             destroy_startup_parameters((void*) &c, (void*) &i);
 
             // Destroy internals.
