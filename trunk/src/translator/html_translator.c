@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-04-05 16:42:58 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,10 @@
 
 #include "../accessor/compound_accessor.c"
 #include "../array/array.c"
+#include "../global/abstraction_constants.c"
+#include "../global/channel_constants.c"
+#include "../global/constant.c"
+#include "../global/log_constants.c"
 #include "../global/name_constants.c"
 #include "../logger/logger.c"
 
@@ -183,6 +187,43 @@ void encode_html_string( void** dest, int* dest_count, int* dest_size,
         parse( dest, dest_count, dest_size,
                source_model, source_model_count,
                STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+    }
+}
+
+
+void encode_html_integer( void** dest, int* dest_count, int* dest_size,
+                         const void* source_model, const int* source_model_count,
+                         const void* source_detail, const int* source_detail_count)
+{
+
+    if ( (dest != NULL_POINTER ) &&
+         (dest_count != NULL_POINTER ) &&
+         (dest_size != NULL_POINTER ) )
+    {
+
+        //parse the model
+        void* dest_int = POINTER_NULL_POINTER;
+        int* dest_int_count = INTEGER_NULL_POINTER;
+        int* dest_int_size = INTEGER_NULL_POINTER;
+        
+        create_integer( &dest_int_count );
+        *dest_int_count = 0;
+        create_integer( &dest_int_size );
+        *dest_int_size = 0;
+        create_model((void*) &dest_int, (void*) dest_int_count, (void*) dest_int_size,
+            (void*) SPACE_CHARACTER , (void*) SPACE_CHARACTER_COUNT,
+            (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+
+        serialize( &dest_int, dest_int_count, dest_int_size,
+               source_model, source_model_count,
+               INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+
+        //parse the model
+        parse( dest, dest_count, dest_size,
+               dest_int, dest_int_count,
+               STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+
     }
 }
 
@@ -376,6 +417,21 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
                                     source_detail, source_detail_count );
             }
         }
+        
+        if (r != 1) {
+
+            compare_arrays( source_abstr, source_abstr_count,
+                            (void*) INTEGER_ABSTRACTION,
+                            (void*) INTEGER_ABSTRACTION_COUNT,
+                            (void*) &r, (void*) CHARACTER_ARRAY);
+            if (r == 1) {
+
+                encode_html_integer( dest, dest_count, dest_size,
+                                    source_model, source_model_count,
+                                    source_detail, source_detail_count );
+            }
+        }
+        
 
         //parse the line feed for better reading the html-source
         parse( dest, dest_count, dest_size,
