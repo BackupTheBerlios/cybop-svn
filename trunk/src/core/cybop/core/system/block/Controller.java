@@ -51,7 +51,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.10 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-04-25 11:23:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
@@ -573,6 +573,7 @@ public class Controller extends Block {
 
         if (s != null) {
 
+            s.setChildItem(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
             s.setChildItem(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
             s.setChildItem(Signal.OBJECT, getChildItem(Controller.SYSTEM_USER_INTERFACE));
 
@@ -679,12 +680,22 @@ public class Controller extends Block {
                     String a = (String) i.getChildItem(Item.ACTION);
 
                     s.setChildItem(Signal.LANGUAGE, Signal.GUI_LANGUAGE/*??NEURO_LANGUAGE*/);
+                    //?? s.setChildItem(Signal.SUBJECT, system belonging to the clicked window);
                     s.setChildItem(Signal.PREDICATE, a);
+                    //?? s.setChildItem(Signal.SENDER_OBJECT, USER);
 
-                    control(s);
+                    // Uncorrect! Don't call the control method directly!
+                    // The system which belongs to the clicked window needs
+                    // to be identified and its name sent within a new signal.
+                    // The launcher (OS) then identifies the system and
+                    // calls its control method.
+                    // (Background: Many systems can have the same action,
+                    // so the signal handling needs to know which system to
+                    // send the signal to.
+//??                    control(s);
 
                 } else {
-        
+
                     throw new NullPointerException("Could not react on mouse clicked action. The graphic item is null.");
                 }
 

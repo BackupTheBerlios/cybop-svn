@@ -33,7 +33,7 @@ import cybop.core.basic.String;
  *
  * It serves as container transporting information of communication.
  *
- * @version $Revision: 1.10 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-04-25 11:23:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Signal extends Item {
@@ -48,16 +48,19 @@ public class Signal extends Item {
     /** The language. */
     public static final String LANGUAGE = new String("language");
 
-    /** The subject. */
+    /** The subject (signal receiver). */
     public static final String SUBJECT = new String("subject");
 
-    /** The predicate. */
+    /** The predicate (action). */
     public static final String PREDICATE = new String("predicate");
 
-    /** The object. */
+    /** The sender object (signal sender). */
+    public static final String SENDER_OBJECT = new String("object");
+
+    /** The object (passive data model). */
     public static final String OBJECT = new String("object");
 
-    /** The adverbial. */
+    /** The adverbial (temporal, local, causal). */
     public static final String ADVERBIAL = new String("adverbial");
 
     //
@@ -71,7 +74,7 @@ public class Signal extends Item {
     // Languages.
     //
 
-    /** The neuro (system internal) language. */
+    /** The system internal (neuro) language. */
     public static final String NEURO_LANGUAGE = new String("neuro_language");
 
     /** The textual user interface (tui) language. */
@@ -149,6 +152,16 @@ public class Signal extends Item {
     }
 
     /**
+     * Returns the default sender object.
+     *
+     * @return the default sender object
+     */
+    public String getDefaultSenderObject() {
+
+        return null;
+    }
+
+    /**
      * Returns the default object.
      *
      * @return the default object
@@ -183,6 +196,7 @@ public class Signal extends Item {
         setChildItem(Signal.LANGUAGE, getDefaultLanguage());
         setChildItem(Signal.SUBJECT, getDefaultSubject());
         setChildItem(Signal.PREDICATE, getDefaultPredicate());
+        setChildItem(Signal.SENDER_OBJECT, getDefaultSenderObject());
         setChildItem(Signal.OBJECT, getDefaultObject());
         setChildItem(Signal.ADVERBIAL, getDefaultAdverbial());
     }
@@ -198,6 +212,7 @@ public class Signal extends Item {
 
         removeChildItem(Signal.ADVERBIAL);
         removeChildItem(Signal.OBJECT);
+        removeChildItem(Signal.SENDER_OBJECT);
         removeChildItem(Signal.PREDICATE);
         removeChildItem(Signal.SUBJECT);
         removeChildItem(Signal.LANGUAGE);

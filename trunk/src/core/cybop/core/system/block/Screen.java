@@ -33,7 +33,7 @@ import cybop.core.system.*;
  *
  * A screen is an output device that displays optical (graphical) information. 
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-04-25 11:23:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Screen extends Block {
@@ -48,13 +48,14 @@ public class Screen extends Block {
      * @param m the gui model
      * @exception NullPointerException if the model is null
      */
-    public void show(UserInterface m) throws NullPointerException {
+    public void show(UserInterface m) throws Exception, NullPointerException {
 
         if (m != null) {
 
             //?? Temporary workaround using Java AWT's capabilities.
             //?? Let this screen class paint everything later,
             //?? when AWT gets replaced.
+            log(Screen.DEBUG_LOG_LEVEL, "Set java gui visible.");
             ((java.awt.Component) m.getJavaObject()).setVisible(Boolean.TRUE);
 
         } else {
@@ -69,13 +70,14 @@ public class Screen extends Block {
      * @param m the gui model
      * @exception NullPointerException if the model is null
      */
-    public void hide(UserInterface m) throws NullPointerException {
+    public void hide(UserInterface m) throws Exception, NullPointerException {
 
         if (m != null) {
 
             //?? Temporary workaround using Java AWT's capabilities.
             //?? Let this screen class paint everything later,
             //?? when AWT gets replaced.
+            log(Screen.DEBUG_LOG_LEVEL, "Set java gui invisible.");
             ((java.awt.Component) m.getJavaObject()).setVisible(Boolean.FALSE);
 
         } else {

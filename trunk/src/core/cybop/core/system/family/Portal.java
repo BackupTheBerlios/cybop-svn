@@ -49,7 +49,7 @@ import cybop.core.system.chain.*;
  * Child systems can be integrated into the portal system's Frame as Frame,
  * InternalFrame or TabPage.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-25 11:23:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Portal extends Family {
@@ -59,61 +59,61 @@ public class Portal extends Family {
     //
 
     /*
-     * Returns the default configuration.
+     * Returns the default configuration category.
      *
-     * @return the default configuration
+     * @return the default configuration category
      */
-    public String getDefaultConfiguration() {
+    public String getDefaultConfigurationCategory() {
 
         return new String("cybop.core.system.chain.Configuration");
     }
 
     /**
-     * Returns the default name.
+     * Returns the default name category.
      *
-     * @return the default name
+     * @return the default name category
      */
-    public String getDefaultName() {
+    public String getDefaultNameCategory() {
 
         return new String("Res Medicinae Portal");
     }
 
     /**
-     * Returns the default version.
+     * Returns the default version category.
      *
-     * @return the default version
+     * @return the default version category
      */
-    public String getDefaultVersion() {
+    public String getDefaultVersionCategory() {
 
         return new String("0.0.6.0");
     }
 
     /**
-     * Returns the default date.
+     * Returns the default date category.
      *
-     * @return the default date
+     * @return the default date category
      */
-    public String getDefaultDate() {
+    public String getDefaultDateCategory() {
 
         return new String("06.04.2003");
     }
 
     /**
-     * Returns the default authors.
+     * Returns the default authors category.
      *
-     * @return the default authors
+     * @return the default authors category
      */
-    public String getDefaultAuthors() {
+    public String getDefaultAuthorsCategory() {
 
         return new String("Christian Heller\n<christian.heller@tuxtax.de>\n- initiated project\n- maintains ResMedLib framework\n- created Portal module\n");
     }
 
     /**
-     * Returns the default helpers.
+     * Returns the default helpers category.
      *
-     * @return the default helpers
+     * @return the default helpers category
      */
-    public String getDefaultHelpers() {
+    public String getDefaultHelpersCategory() {
 
         return new String("Karsten Hilbert\n<karsten.hilbert@gmx.net>\n- maintains the Analysis Document\n- helps out in many things\n\n"
                 + "Michael Simon\n<michael.simon@gmx.net>\n- created ANT build.xml files\n- created .bat build/start files\n- prepared IzPack installer\n\n"
@@ -125,11 +125,11 @@ public class Portal extends Family {
     }
 
     /**
-     * Returns the default inspirations.
+     * Returns the default inspirations category.
      *
-     * @return the default inspirations
+     * @return the default inspirations category
      */
-    public String getDefaultInspirations() {
+    public String getDefaultInspirationsCategory() {
 
         return new String("Scope\nhttp://www.sourceforge.net/projects/scope\n- Hierarchical Model View Controller (HMVC) Design Pattern\n\n"
                 + "Apache-Jakarta-Framework\nhttp://jakarta.apache.org\nComponent Lifecycle\n\n"
@@ -137,21 +137,21 @@ public class Portal extends Family {
     }
 
     /**
-     * Returns the default controller.
+     * Returns the default controller category.
      *
-     * @return the default controller
+     * @return the default controller category
      */
-    public String getDefaultController() {
+    public String getDefaultControllerCategory() {
 
         return new String("cybop.core.system.block.controller.PortalController");
     }
 
     /**
-     * Returns the default user.
+     * Returns the default user category.
      *
-     * @return the default user
+     * @return the default user category
      */
-    public String getDefaultUser() {
+    public String getDefaultUserCategory() {
 
         return new String("cybop.core.system.system.User");
     }

@@ -60,7 +60,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.8 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-04-25 11:23:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends Block implements 
@@ -567,10 +567,12 @@ public class System extends Block implements
 
                 if (b.isEqualTo(Boolean.FALSE)) {
 
+                    log(System.DEBUG_LOG_LEVEL, "Control signal.");
                     c.control(s);
 
                 } else {
 
+                    log(System.DEBUG_LOG_LEVEL, "Control signal as server dummy.");
                     c.controlAsServerDummy(s);
                 }
 

@@ -49,7 +49,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.10 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-04-25 11:23:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -525,42 +525,75 @@ public class Family extends System {
      *     <li>true: local server dummy which represents a remote system and
      *     needs to forward messages to the actual server</li>
      * </ul>
+     * @exception NullPointerException if the signal is null
+     * @exception NullPointerException if the subject is null
      * @exception NullPointerException if the systems count is null
      * @exception NullPointerException if a system is null
      */
     public void handle(Signal s, Boolean b) throws Exception, NullPointerException {
-        
-        super.handle(s, b);
 
-        Integer count = (Integer) getChildItem(Family.SYSTEMS_COUNT);
+        if (s != null) {
+            
+            String sub = (String) s.getChildItem(Signal.SUBJECT);
 
-        if (count != null) {
+            if (sub != null) {
 
-            String str = null;
-            System sys = null;
+                if (sub.isEqualTo(getName())) {
 
-//??            for (int i = 0; i < count.getJavaPrimitive(); i++) {
-
-                //?? Delete this line later and use the one below!
-                str = Family.SYSTEM;
-                //?? When more modules are used, use the following line!
-                //?? To be implemented yet.
-//??                str = new String(Family.SYSTEM.getJavaObject() + "_" + java.lang.String.valueOf(i));
-                sys = (System) getSystem(str);
-
-                if (sys != null) {
-
-                    sys.handle(s, b);
+                    log(System.DEBUG_LOG_LEVEL, "Handle signal in super class.");
+                    super.handle(s, b);
 
                 } else {
 
-//??                    throw new NullPointerException("Could not handle signal. A system is null.");
+                    Integer count = (Integer) getChildItem(Family.SYSTEMS_COUNT);
+
+                    if (count != null) {
+
+                        String str = null;
+                        System sys = null;
+                        int i = 0;
+
+//??                        while (i < count.getJavaPrimitive()) {
+
+                            //?? Delete this line later and use the one below!
+                            str = Family.SYSTEM;
+                            //?? When more modules are used, use the following line!
+                            //?? To be implemented yet.
+//??                            str = new String(Family.SYSTEM.getJavaObject() + "_" + java.lang.String.valueOf(i));
+                            if (sub.isEqualTo(str)) {
+
+                                sys = (System) getSystem(str);
+    
+                                if (sys != null) {
+
+                                    log(System.DEBUG_LOG_LEVEL, "Handle signal in system " + sys);
+                                    sys.handle(s, b);
+                
+                                } else {
+
+                                    throw new NullPointerException("Could not handle signal. A system is null.");
+                                }
+                                
+//??                                break;
+                            }
+
+                            i++;
+//??                        }
+
+                    } else {
+
+                        throw new NullPointerException("Could not handle signal. The systems count is null.");
+                    }
                 }
-//??            }
+
+            } else {
+
+                throw new NullPointerException("Could not handle signal. The subject is null.");
+            }
 
         } else {
 
-            throw new NullPointerException("Could not handle signal. The systems count is null.");
+            throw new NullPointerException("Could not handle signal. The signal is null.");
         }
     }
 }

@@ -69,7 +69,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.16 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2003-04-25 11:23:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -150,6 +150,7 @@ public class Launcher extends Family {
 
         try {
 
+            String n = new String("launcher");
             Launcher l = new Launcher();
 
             if (l != null) {
@@ -166,6 +167,11 @@ public class Launcher extends Family {
 
                 java.lang.System.out.println("INFO: Initialize launcher.");
                 l.initialize();
+                // Set meta attributes for child.
+                // DO NOT use the normal method setChildItem(name, item);
+                // This would lead to an endless loop since for example
+                // setChildItem(Item.NAME, n); would cause to be called repeatedly!
+                l.setName(n);
                 l.launch();
 
                 // The system is now started up and complete so that a loop
@@ -174,6 +180,7 @@ public class Launcher extends Family {
                 // The loop above is left as soon as the shutdown flag is set
                 // so that the system can be shut down now.
 
+                l.setName(null);
                 java.lang.System.out.println("INFO: Finalize launcher.");
                 l.finalizz();
 
@@ -639,8 +646,8 @@ public class Launcher extends Family {
         if (s != null) {
 
             s.setChildItem(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
-            s.setChildItem(Signal.LANGUAGE, Signal.TUI_LANGUAGE);
-            s.setChildItem(Signal.SUBJECT, getChildItem(Launcher.USER));
+            s.setChildItem(Signal.LANGUAGE, Signal.NEURO_LANGUAGE);
+            s.setChildItem(Signal.SUBJECT, getName());
             s.setChildItem(Signal.PREDICATE, getChildItem(Launcher.LIFECYCLE_ACTION));
 
         } else {
@@ -693,13 +700,13 @@ public class Launcher extends Family {
 
             if (queued != null) {
 
-                java.lang.System.out.println("DEBUG: Handle signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChildItem(Signal.PREDICATE)).getJavaObject());
-
                 //?? Temporary code block for handling of signals that came from the
                 //?? java event queue and were stored in the signal memory.
                 //?? These signals were created outside this method but must be
                 //?? destroyed here!
+                log(Launcher.DEBUG_LOG_LEVEL, "Handle signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChildItem(Signal.PREDICATE)).getJavaObject());
                 handle(queued, new Boolean(Boolean.FALSE));
+                log(Launcher.DEBUG_LOG_LEVEL, "Send signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChildItem(Signal.PREDICATE)).getJavaObject());
                 send(queued);
                 destroyChildItem(queued);
 
@@ -857,7 +864,7 @@ public class Launcher extends Family {
      * @exception NullPointerException if the language is null
      * @exception NullPointerException if the screen is null
      */
-    public void send(Signal s) throws NullPointerException {
+    public void send(Signal s) throws Exception, NullPointerException {
 
         String l = null;
 
@@ -873,6 +880,7 @@ public class Launcher extends Family {
 
                     if (scr != null) {
 
+                        log(Launcher.DEBUG_LOG_LEVEL, "Show on screen." + s.getChildItem(Signal.OBJECT));
                         scr.show((UserInterface) s.getChildItem(Signal.OBJECT));
 
                     } else {
@@ -883,9 +891,7 @@ public class Launcher extends Family {
 
             } else {
 
-//?? Temporarily commented out, because not all signals created from java events have
-//?? a language yet!
-//??                throw new NullPointerException("Could not send signal. The language is null.");
+                throw new NullPointerException("Could not send signal. The language is null.");
             }
 
         } else {
@@ -975,6 +981,7 @@ public class Launcher extends Family {
      */
     public void startupSystem(String sys, String c) throws Exception, NullPointerException {
 
+        setupJavaEventHandling();
         setSystem(Launcher.SYSTEM, createSystem(sys, c));
 
         Signal s = (Signal) createChildItem(getDefaultSignalCategory());
@@ -982,9 +989,10 @@ public class Launcher extends Family {
         if (s != null) {
 
             s.setChildItem(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
-            s.setChildItem(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
-            s.setChildItem(Signal.SUBJECT, getChildItem(Launcher.USER));
+            s.setChildItem(Signal.LANGUAGE, Signal.NEURO_LANGUAGE);
+            s.setChildItem(Signal.SUBJECT, Launcher.SYSTEM);
             s.setChildItem(Signal.PREDICATE, Controller.SHOW_SYSTEM_USER_INTERFACE_ACTION);
+            s.setChildItem(Signal.SENDER_OBJECT, Launcher.USER);
 
         } else {
 
@@ -992,7 +1000,6 @@ public class Launcher extends Family {
         }
 
         storeSignal(s);
-        setupJavaEventHandling();
     }
 
     /**
@@ -1077,7 +1084,7 @@ public class Launcher extends Family {
             
             s.setChildItem(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
             s.setChildItem(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
-            s.setChildItem(Signal.SUBJECT, getChildItem(Launcher.USER));
+            s.setChildItem(Signal.SUBJECT, Launcher.SYSTEM);
             s.setChildItem(Signal.PREDICATE, Launcher.SHUTDOWN_SYSTEM_ACTION);
 
         } else {
@@ -1226,57 +1233,57 @@ public class Launcher extends Family {
             if (id == java.awt.event.ComponentEvent.COMPONENT_HIDDEN) {
 
                 a = Controller.COMPONENT_HIDDEN_ACTION;
-                l = null;
+                l = Signal.NEURO_LANGUAGE;
 
             } else if (id == java.awt.event.ComponentEvent.COMPONENT_MOVED) {
 
                 a = Controller.COMPONENT_MOVED_ACTION;
-                l = null;
+                l = Signal.NEURO_LANGUAGE;
 
             } else if (id == java.awt.event.ComponentEvent.COMPONENT_RESIZED) {
 
                 a = Controller.COMPONENT_RESIZED_ACTION;
-                l = null;
+                l = Signal.NEURO_LANGUAGE;
 
             } else if (id == java.awt.event.ComponentEvent.COMPONENT_SHOWN) {
 
                 a = Controller.COMPONENT_SHOWN_ACTION;
-                l = null;
+                l = Signal.NEURO_LANGUAGE;
 
             } else if (id == java.awt.event.FocusEvent.FOCUS_GAINED) {
 
                 a = Controller.FOCUS_GAINED_ACTION;
-                l = null;
+                l = Signal.NEURO_LANGUAGE;
 
             } else if (id == java.awt.event.FocusEvent.FOCUS_LOST) {
 
                 a = Controller.FOCUS_LOST_ACTION;
-                l = null;
+                l = Signal.NEURO_LANGUAGE;
 
             } else if (id == java.awt.event.HierarchyEvent.ANCESTOR_MOVED) {
 
                 a = Controller.ANCESTOR_MOVED_ACTION;
-                l = null;
+                l = Signal.NEURO_LANGUAGE;
 
             } else if (id == java.awt.event.HierarchyEvent.ANCESTOR_RESIZED) {
 
                 a = Controller.ANCESTOR_RESIZED_ACTION;
-                l = null;
+                l = Signal.NEURO_LANGUAGE;
 
             } else if (id == java.awt.event.HierarchyEvent.HIERARCHY_CHANGED) {
 
                 a = Controller.HIERARCHY_CHANGED_ACTION;
-                l = null;
+                l = Signal.NEURO_LANGUAGE;
 
             } else if (id == java.awt.event.InputMethodEvent.CARET_POSITION_CHANGED) {
 
                 a = Controller.CARET_POSITION_CHANGED_ACTION;
-                l = null;
+                l = Signal.NEURO_LANGUAGE;
 
             } else if (id == java.awt.event.InputMethodEvent.INPUT_METHOD_TEXT_CHANGED) {
 
                 a = Controller.INPUT_METHOD_TEXT_CHANGED_ACTION;
-                l = null;
+                l = Signal.NEURO_LANGUAGE;
 
             } else if (id == java.awt.event.KeyEvent.KEY_PRESSED) {
 
@@ -1637,7 +1644,7 @@ public class Launcher extends Family {
 
                     s.setChildItem(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
                     s.setChildItem(Signal.LANGUAGE, l);
-                    s.setChildItem(Signal.SUBJECT, getChildItem(Launcher.USER));
+                    s.setChildItem(Signal.SUBJECT, getName());
                     s.setChildItem(Signal.PREDICATE, a);
                     s.setChildItem(Signal.OBJECT, m);
 
