@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Category.java,v $
+ * $RCSfile: Abstraction.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -25,63 +25,70 @@
 package cybop.core.basic;
 
 /**
- * This class represents a category.
+ * This class represents an abstraction.
  *
- * A category classifies items with common properties into one group.
- * The category can be named using the corresponding name attribute.
+ * An abstraction is something which represents a real world item.
+ * In the case of computer science, everything gets abstracted to 0 and 1.
+ * But that also means that every abstraction has a bytecode representation.
  *
- * @version $Revision: 1.3 $ $Date: 2003-04-30 14:37:17 $ $Author: christian $
+ * Actually, the abstraction can be seen as byte array itself.
+ *
+ * @version $Revision: 1.1 $ $Date: 2003-04-30 14:37:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Category extends Abstraction {
+public class Abstraction extends java.lang.Object {
+    
+    //?? See for example:
+    //?? java.io.ObjectOutputStream::writeArray
+    //?? for how to transfer a java.lang.Object into a byte[]
 
     //
     // Meta attributes.
     //
 
-    /** The name. */
-    private String name;
+    /** The byte code. */
+    private byte[] byteCode;
 
     //
-    // Name.
+    // Byte code.
     //
 
     /**
-     * Creates a name.
+     * Creates a byte code.
      *
-     * @return the name
+     * @return the byte code
      */
-    public String createName() {
+    public byte[] createByteCode() {
 
         return null;
     }
 
     /**
-     * Destroys the name.
+     * Destroys the byte code.
      *
-     * @param n the name
+     * @param c the byte code
      */
-    public void destroyName(String n) {
+    public void destroyByteCode(byte[] c) {
     }
 
     /**
-     * Sets the name.
+     * Sets the byte code.
      *
-     * @param n the name
+     * @param c the byte code
      */
-    public void setName(String n) {
+    public void setByteCode(byte[] c) {
 
-        this.name = n;
+        this.byteCode = c;
     }
 
     /**
-     * Returns the name.
+     * Returns the byte code.
      *
-     * @return the name
+     * @return the byte code
      */
-    public String getName() {
+    public byte[] getByteCode() {
 
-        return this.name;
+        return this.byteCode;
     }
 
     //
@@ -89,21 +96,21 @@ public class Category extends Abstraction {
     //
 
     /**
-     * Initializes this category.
+     * Initializes this abstraction.
      */
     public void initialize() throws Exception {
 
-        setName(createName());
+        setByteCode(createByteCode());
     }
 
     /**
-     * Finalizes this category.
+     * Finalizes this abstraction.
      */
     public void finalizz() throws Exception {
 
-        char[] name = getName();
-        setName(null);
-        destroyName(name);
+        byte[] byteCode = getByteCode();
+        setByteCode(null);
+        destroyByteCode(byteCode);
     }
 }
 

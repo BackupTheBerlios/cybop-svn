@@ -45,116 +45,29 @@ import cybop.core.system.chain.*;
  *      <li>Chain</li>
  *  </ul>
  *
- * An item consists of a number of child items. It can also be a child itself,
- * belonging to a parent item.<br><br>
- *
- * Since humans don't know where this hierarchy stops in the real world
- * - to microcosm as well as towards macrocosm -, a black box has to be assumed
- * at some point towards microcosm. In the case of programming, this is mostly
- * the basic items of programming language, namely Boolean and Numbers.
- * They are coded in binaries within the machine and that is the final abstraction.
- * Towards macrocosm, it depends on the modeller how far he/she wants to go.
- * At the time of writing this, the CYBOP framework's highest class in its
- * ontology is Network, consisting of Families which consist of Systems.<br><br>
- *
- * An item has well-defined public methods useable by outside entities. An outside
- * entity which contains items is called their container. Containers have a contract
- * with the items they contain, in that public methods are called in a specific order,
- * called a lifecycle.<br><br>
- *
- * By calling the lifecycle methods, a container ensures the proper startup and
- * shutdown of each item, to work correctly. One or more methods can be called
- * by the container, but the order must be the same.<br>
- *
- * An item has the following lifecycle:
- *  <ul>
- *      <li>constructor(): called without any parameters on keyword <code>new</code></li>
- *      <li>initialize(): creates items (attributes) that are specific to this item; allocates necessary memory</li>
- *      <li>finalize(): destroys items (attributes) that are specific to this item; deallocates memory</li>
- *      <li>destructor(): called without any parameters; not available for Java where a garbage collector destroys objects incidentally!</li>
- *  </ul>
- *
- * Children of an item can have a position, relative to each other. That means
- * that this item also is a special constellation of children which can be
- * enforced by constraints.
- *
- * @version $Revision: 1.23 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2003-04-30 14:37:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Item extends State {
+public class Item extends Hierarchy {
 
     //
     // Meta attributes.
     //
 
-    /** The name. */
-    private String name;
-
-    /** The position */
+    /** The position. */
     private Integer position;
 
     /** The following item. */
     private Item follower;
 
-    /** The children container. */
-    private Item[] children;
+    /** The parts. */
+    private Item[] parts;
 
-    /** The children number. */
-    private int childrenNumber;
+    /** The parts categories. */
+    private Item[] partsCategories;
 
-    /**
-     * The children limit factor.
-     *
-     * It is a percentual limit for the children array length. For example:
-     *
-     * Factor           Percentage
-     * 0.25             25%
-     * 0.5              50%
-     * 0.75             75%
-     *
-     * If the array is filled by the given percentage, it will be extended.
-     */
-    private double childrenLimitFactor;
-
-    /** The children categories container. */
-    private Item[] childrenCategories;
-
-    /** The children categories number. */
-    private int childrenCategoriesNumber;
-
-    /**
-     * The children categories limit factor.
-     *
-     * It is a percentual limit for the children array length. For example:
-     *
-     * Factor           Percentage
-     * 0.25             25%
-     * 0.5              50%
-     * 0.75             75%
-     *
-     * If the array is filled by the given percentage, it will be extended.
-     */
-    private double childrenCategoriesLimitFactor;
-
-    /** The children positions container. */
-    private Item[] childrenPositions;
-
-    /** The children Positions number. */
-    private int childrenPositionsNumber;
-
-    /**
-     * The children positions limit factor.
-     *
-     * It is a percentual limit for the children array length. For example:
-     *
-     * Factor           Percentage
-     * 0.25             25%
-     * 0.5              50%
-     * 0.75             75%
-     *
-     * If the array is filled by the given percentage, it will be extended.
-     */
-    private double childrenPositionsLimitFactor;
+    /** The parts positions. */
+    private Item[] partsPositions;
 
     //
     // Temporary until CYBOP framework doesn't rely on java classes anymore.
@@ -273,7 +186,6 @@ public class Item extends State {
      */
     public Item() {
 
-        setName(createName());
         setPosition(createPosition());
         setFollower(createFollower());
         setChildren(createChildren());
@@ -364,48 +276,6 @@ public class Item extends State {
     public Item getDefaultActionCategory() {
 
         return null;
-    }
-
-    //
-    // Name.
-    //
-
-    /**
-     * Creates a name.
-     *
-     * @return the name
-     */
-    public String createName() {
-
-        return null;
-    }
-
-    /**
-     * Destroys the name.
-     *
-     * @param n the name
-     */
-    public void destroyName(String n) {
-    }
-
-    /**
-     * Sets the name.
-     *
-     * @param n the name
-     */
-    public void setName(String n) {
-
-        this.name = n;
-    }
-
-    /**
-     * Returns the name.
-     *
-     * @return the name
-     */
-    public String getName() {
-
-        return this.name;
     }
 
     //
@@ -1620,10 +1490,6 @@ public class Item extends State {
         // java.util.Map children = getChildren();
         // setChildren(null);
         // destroyChildren(children);
-
-        // String name = getName();
-        // setName(null);
-        // destroyName(name);
     }
 
     //
