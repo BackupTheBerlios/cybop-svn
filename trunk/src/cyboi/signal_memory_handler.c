@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-01-20 12:11:16 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-01-24 22:47:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -88,9 +88,9 @@ void shutdown_signal_memory(void* p0) {
     // CAUTION! Do NOT hand over as reference!
     // The variables are of type void**.
     // The expression (&*variable) is the same like (variable).
-    destroy((void*) s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
-    destroy_integer((void*) sc);
-    destroy_integer((void*) ss);
+    destroy(s, ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
+    destroy_integer(sc);
+    destroy_integer(ss);
 }
 
 /* SIGNAL_MEMORY_HANDLER_SOURCE */
