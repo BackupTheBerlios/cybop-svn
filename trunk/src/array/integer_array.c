@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.21 $ $Date: 2005-01-10 23:54:00 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2005-01-17 17:11:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,21 +51,17 @@
 #include "../global/variables.c"
 #include "../logger/logger.c"
 
-//
-// Array.
-//
-
 /**
  * Creates the integer array.
  *
- * @param p0 the array
- * @param p1 the maximum count
+ * @param p0 the array (Hand over as reference!)
+ * @param p1 the size
  */
 void create_integer_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
-        int** c = (int**) p1;
+        int* s = (int*) p1;
 
         if (p0 != NULL_POINTER) {
 
@@ -73,13 +69,14 @@ void create_integer_array(void* p0, const void* p1) {
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTEGER_ARRAY_MESSAGE, (void*) &CREATE_INTEGER_ARRAY_MESSAGE_COUNT);
 
-            // Determine size as product of element count and type size.
-            int s = **c * *INTEGER_PRIMITIVE_SIZE;
+            // Determine the memory area to be allocated,
+            // as product of element count and type size.
+            int m = *s * *INTEGER_PRIMITIVE_SIZE;
 
             // A minimal space in memory is always allocated,
             // even if the requested size is zero.
             // In other words, a handle to the new instance is always returned.
-            *a = (void*) malloc(s);
+            *a = (void*) malloc(m);
 
         } else {
 
@@ -96,13 +93,13 @@ void create_integer_array(void* p0, const void* p1) {
  * Destroys the integer array.
  *
  * @param p0 the array
- * @param p1 the maximum count
+ * @param p1 the size
  */
 void destroy_integer_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
-        int** c = (int**) p1;
+        int* s = (int*) p1;
 
         if (p0 != NULL_POINTER) {
 
@@ -127,13 +124,13 @@ void destroy_integer_array(void* p0, const void* p1) {
  * Resizes the integer array.
  *
  * @param p0 the array
- * @param p1 the maximum count
+ * @param p1 the size
  */
 void resize_integer_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
-        int** c = (int**) p1;
+        int* s = (int*) p1;
 
         if (p0 != NULL_POINTER) {
 
@@ -141,11 +138,12 @@ void resize_integer_array(void* p0, const void* p1) {
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &RESIZE_INTEGER_ARRAY_MESSAGE, (void*) &RESIZE_INTEGER_ARRAY_MESSAGE_COUNT);
 
-            // Determine size as product of element count and type size.
-            int s = **c * *INTEGER_PRIMITIVE_SIZE;
+            // Determine the memory area to be allocated,
+            // as product of element count and type size.
+            int m = *s * *INTEGER_PRIMITIVE_SIZE;
 
             // Create a new array with extended size.
-            *a = (void*) realloc(*a, s);
+            *a = (void*) realloc(*a, m);
 
         } else {
 
@@ -158,38 +156,30 @@ void resize_integer_array(void* p0, const void* p1) {
     }
 }
 
-//
-// Array element.
-//
-
 /**
  * Compares the integer array elements.
  *
- * Returns 1 if the integer elements are equal.
- * The given result remains unchanged if the array elements are unequal.
+ * Returns 1 if the array elements are equal;
+ * leaves the given result parameter unchanged, otherwise.
  *
  * @param p0 the first array
  * @param p1 the second array
  * @param p2 the count
- * @param p3 the result
+ * @param p3 the result (Hand over as reference!)
  */
 void compare_integer_array_elements(const void* p0, const void* p1, const void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
-        int** r = (int**) p3;
+        int* r = (int*) p3;
 
         if (p2 != NULL_POINTER) {
 
-            int** c = (int**) p2;
+            int* c = (int*) p2;
 
             if (p1 != NULL_POINTER) {
 
-                void** a1 = (void**) p1;
-
                 if (p0 != NULL_POINTER) {
-
-                    void** a0 = (void**) p0;
 
                     // The loop variable.
                     int j = 0;
@@ -202,10 +192,10 @@ void compare_integer_array_elements(const void* p0, const void* p1, const void* 
 
                     while (1) {
 
-                        if (j >= **c) {
+                        if (j >= *c) {
 
                             // All elements have been compared and are equal.
-                            **r = 1;
+                            *r = 1;
 
                             break;
                         }
@@ -214,8 +204,8 @@ void compare_integer_array_elements(const void* p0, const void* p1, const void* 
                         s = j * *INTEGER_PRIMITIVE_SIZE;
 
                         // Determine the next elements at array plus index.
-                        e0 = (int*) (*a0 + s);
-                        e1 = (int*) (*a1 + s);
+                        e0 = (int*) (p0 + s);
+                        e1 = (int*) (p1 + s);
 
                         if (*e0 != *e1) {
 
@@ -250,43 +240,39 @@ void compare_integer_array_elements(const void* p0, const void* p1, const void* 
 /**
  * Sets the integer array elements.
  *
- * @param p0 the destination array
- * @param p1 the destination array index
- * @param p2 the source array
+ * @param p0 the array
+ * @param p1 the index
+ * @param p2 the elements (Hand over as array!)
  * @param p3 the count
  */
 void set_integer_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
-        int** c = (int**) p3;
+        int* c = (int*) p3;
 
         if (p2 != NULL_POINTER) {
 
-            void** sa = (void**) p2;
-
             if (p1 != NULL_POINTER) {
 
-                int** i = (int**) p1;
+                int* i = (int*) p1;
 
                 if (p0 != NULL_POINTER) {
 
-                    void** da = (void**) p0;
-
-                    // The loop variable.
-                    int j = 0;
-                    // The destination base to start copying to.
-                    void* db = (void*) (*da + **i * *INTEGER_PRIMITIVE_SIZE);
+                    // The destination base.
+                    void* db = (void*) (p0 + (*i * *INTEGER_PRIMITIVE_SIZE));
                     // The source element.
                     int* se = INTEGER_NULL_POINTER;
                     // The destination element.
                     int* de = INTEGER_NULL_POINTER;
+                    // The loop variable.
+                    int j = 0;
                     // The size.
                     int s = 0;
 
                     while (1) {
 
-                        if (j >= **c) {
+                        if (j >= *c) {
 
                             break;
                         }
@@ -295,7 +281,7 @@ void set_integer_array_elements(void* p0, const void* p1, const void* p2, const 
                         s = j * *INTEGER_PRIMITIVE_SIZE;
 
                         // Determine source and destination element.
-                        se = (int*) (*sa + s);
+                        se = (int*) (p2 + s);
                         de = (int*) (db + s);
 
                         // Set destination element.
@@ -329,40 +315,38 @@ void set_integer_array_elements(void* p0, const void* p1, const void* p2, const 
  * Removes the integer array elements.
  *
  * @param p0 the array
- * @param p1 the maximum count
- * @param p2 the array index
+ * @param p1 the size
+ * @param p2 the index
  * @param p3 the count
  */
 void remove_integer_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
-        int** c = (int**) p3;
+        int* c = (int*) p3;
 
         if (p2 != NULL_POINTER) {
 
-            int** i = (int**) p2;
+            int* i = (int*) p2;
 
             if (p1 != NULL_POINTER) {
 
-                int** m = (int**) p1;
+                int* m = (int*) p1;
 
                 if (p0 != NULL_POINTER) {
 
-                    void** a = (void**) p0;
-
-                    // The loop variable.
-                    int j = 0;
-                    // The remaining elements count.
-                    int r = **m - (**i + **c);
                     // The destination base.
-                    void* db = (void*) (*a + **i * *INTEGER_PRIMITIVE_SIZE);
+                    void* db = (void*) (p0 + (*i * *INTEGER_PRIMITIVE_SIZE));
                     // The source base.
-                    void* sb = (void*) (*a + **i * *INTEGER_PRIMITIVE_SIZE + **c * *INTEGER_PRIMITIVE_SIZE);
+                    void* sb = (void*) (db + (*c * *INTEGER_PRIMITIVE_SIZE));
                     // The source element.
                     int* se = INTEGER_NULL_POINTER;
                     // The destination element.
                     int* de = INTEGER_NULL_POINTER;
+                    // The remaining elements size.
+                    int r = *m - (*i + *c);
+                    // The loop variable.
+                    int j = 0;
                     // The size.
                     int s = 0;
 
@@ -425,7 +409,7 @@ void remove_integer_array_elements(void* p0, const void* p1, const void* p2, con
  *
  * @param p0 the array
  * @param p1 the index
- * @param p2 the elements
+ * @param p2 the elements (Hand over as array reference!)
  */
 void get_integer_array_elements(const void* p0, const void* p1, void* p2) {
 
@@ -435,14 +419,12 @@ void get_integer_array_elements(const void* p0, const void* p1, void* p2) {
 
         if (p1 != NULL_POINTER) {
 
-            int** i = (int**) p1;
+            int* i = (int*) p1;
 
             if (p0 != NULL_POINTER) {
 
-                void** a = (void**) p0;
-
                 // Determine element.
-                *e = (void*) (*a + (**i * *INTEGER_PRIMITIVE_SIZE));
+                *e = (void*) (p0 + (*i * *INTEGER_PRIMITIVE_SIZE));
 
             } else {
 
@@ -463,91 +445,71 @@ void get_integer_array_elements(const void* p0, const void* p1, void* p2) {
 /**
  * Gets the integer array elements index.
  *
- * The first occurence of the element will be considered.
- * The given index remains unchanged if no element is found.
+ * Returns the index if the array elements could be found;
+ * leaves the given index parameter unchanged, otherwise.
+ * Only the first occurence of the elements is considered.
  *
  * @param p0 the array
- * @param p1 the array maximum count
- * @param p2 the comparison array
- * @param p3 the comparison array count
- * @param p4 the index within array
+ * @param p1 the array count
+ * @param p2 the elements
+ * @param p3 the elements count
+ * @param p4 the index (Hand over as reference!)
  */
 void get_integer_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
-        int** i = (int**) p4;
+        int* i = (int*) p4;
 
         if (p3 != NULL_POINTER) {
 
-            int** c = (int**) p3;
+            int* ec = (int*) p3;
 
-            if (p2 != NULL_POINTER) {
+            if (p1 != NULL_POINTER) {
 
-                void** ca = (void**) p2;
+                int* ac = (int*) p1;
 
-                if (p1 != NULL_POINTER) {
+                if (p0 != NULL_POINTER) {
 
-                    int** m = (int**) p1;
+                    // The iteration limit.
+                    int l = *ac - *ec + 1;
+                    // The element.
+                    void* e = NULL_POINTER;
+                    // The loop variable.
+                    int j = 0;
+                    // The comparison result.
+                    int r = 0;
 
-                    if (p0 != NULL_POINTER) {
+                    while (1) {
 
-                        void** a = (void**) p0;
+                        if (j >= l) {
 
-                        // The loop variable.
-                        int j = 0;
-                        // The iteration limit.
-                        int l = **m - **c + 1;
-                        // The element.
-                        void* e = NULL_POINTER;
-                        // The comparison result.
-                        int* r = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-                        *r = 0;
-                        // The size.
-                        int s = 0;
-
-                        while (1) {
-
-                            if (j >= l) {
-
-                                // The element has not been found.
-                                break;
-                            }
-
-                            // Determine size.
-                            s = j * *INTEGER_PRIMITIVE_SIZE;
-
-                            // Determine element.
-                            e = (void*) (*a + s);
-
-                            compare_integer_array_elements((void*) &e, p2, p3, (void*) &r);
-
-                            if (*r == 1) {
-
-                                // The element has been found.
-                                **i = j;
-
-                                break;
-                            }
-
-                            j++;
+                            // The element has not been found.
+                            break;
                         }
 
-                        free(r);
+                        get_integer_array_elements(p0, (void*) &j, (void*) &e);
+                        compare_integer_array_elements(e, p2, p3, (void*) &r);
 
-                    } else {
+                        if (r == 1) {
 
-                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+                            // The element has been found.
+                            *i = j;
+
+                            break;
+                        }
+
+                        j++;
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE_COUNT);
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_COMPARISON_ARRAY_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_COMPARISON_ARRAY_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {

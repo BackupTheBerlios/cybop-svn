@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.34 $ $Date: 2005-01-16 23:53:23 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2005-01-17 17:11:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -307,6 +307,14 @@ void test_character_array_multiple_elements_new() {
     resize_array((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &ns);
 
     fputs((char*) d, stdout);
+
+    // The result array.
+    void* r = NULL_POINTER;
+
+    // Test getting a reference.
+    get_character_array_elements_new(d, EIGHT_NUMBER, &r);
+
+    fputs((char*) r, stdout);
 
     // Destroy destination array.
     destroy_array((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &ns);
