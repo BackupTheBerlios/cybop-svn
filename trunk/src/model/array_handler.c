@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.12 $ $Date: 2004-03-02 16:22:03 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-03-02 18:24:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -132,6 +132,27 @@ void get_array_count(void* p0, void* p1) {
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get array count. The array is null.");
+    }
+}
+
+/**
+ * Returns the array type.
+ *
+ * @param p0 the array
+ * @param p1 the array type
+ */
+void get_array_count(void* p0, void* p1) {
+
+    struct array* a = (struct array*) p0;
+    int* t = (int*) p1;
+
+    if (a != (void*) 0) {
+
+        *t = a->type;
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get array type. The array is null.");
     }
 }
 

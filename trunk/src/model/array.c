@@ -1,7 +1,7 @@
 /*
  * $RCSfile: array.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -25,6 +25,22 @@
 #ifndef ARRAY_SOURCE
 #define ARRAY_SOURCE
 
+//
+// Constants.
+//
+
+/** The pointer array constant. */
+static const int POINTER_ARRAY = 0;
+
+/** The integer array constant. */
+static const int INTEGER_ARRAY = 1;
+
+/** The double array constant. */
+static const int DOUBLE_ARRAY = 2;
+
+/** The character array constant. */
+static const int CHARACTER_ARRAY = 3;
+
 /**
  * This is an array.
  *
@@ -34,13 +50,16 @@
  * In the case of computer science, everything gets abstracted to 0 and 1.
  * But that also means that every abstraction has a bytecode representation.
  *
- * @version $Revision: 1.2 $ $Date: 2004-02-11 00:11:16 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-03-02 18:24:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct array {
 
     /** The internal array of pointers (memory addresses). */
     void** internal_array;
+
+    /** The type. */
+    int type;
 
     /**
      * The size.
@@ -50,7 +69,7 @@ struct array {
      * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
      */
     int size;
-    
+
     /** The elements count. */
     int count;
 };

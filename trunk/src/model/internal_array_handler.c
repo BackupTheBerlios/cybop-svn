@@ -34,7 +34,7 @@
  * Its syntax mostly looks like: type[size].
  * Internal array elements are accessed over an index.
  *
- * @version $Revision: 1.7 $ $Date: 2004-03-02 16:22:03 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-03-02 18:24:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
 // Constants.
 //
 
-/** The invalid index. */
+/** The invalid/ null/ not found index. */
 static const int INVALID_INDEX = -1;
 
 //
@@ -268,7 +268,7 @@ void* get_internal_array_element(void** p0, void* p1) {
  * @param p2 the count
  * @param p3 the index
  */
-void get_pointer_array_element_index(const void** p0, const void* p1, const void* p2, void* p3) {
+void get_pointer_array_element_index(const void** p0, const void** p1, const void* p2, void* p3) {
 
     int* index = (int*) p3;
 
@@ -278,21 +278,21 @@ void get_pointer_array_element_index(const void** p0, const void* p1, const void
 
         if (c != (void*) 0) {
 
-            int* e = (int*) p1;
+            void** e = (void**) p1;
             int i = 0;
-            int* x = (void*) 0;
+            void** x = (void*) 0;
 
             while (1) {
 
                 if (i == *c) {
 
                     // The element has not been found.
-                    *index = -1;
+                    *index = INVALID_INDEX;
                     break;
                 }
 
                 // Determine the next integer element at array plus index.
-                x = (int*) (p0 + i);
+                x = (void**) (p0 + i);
 
                 if (*x == *e) {
 
@@ -320,16 +320,16 @@ void get_pointer_array_element_index(const void** p0, const void* p1, const void
 //
 
 /**
- * Gets the internal array integer element index.
+ * Gets the integer array element index.
  *
  * The first occurence of the element will be considered.
  *
- * @param p0 the internal array
- * @param p1 the integer element
+ * @param p0 the integer array
+ * @param p1 the element
  * @param p2 the count
  * @param p3 the index
  */
-void get_internal_array_integer_element_index(const void* p0, const void* p1, const void* p2, void* p3) {
+void get_integer_array_element_index(const void* p0, const void* p1, const void* p2, void* p3) {
 
     int* index = (int*) p3;
 
@@ -348,7 +348,7 @@ void get_internal_array_integer_element_index(const void* p0, const void* p1, co
                 if (i == *c) {
 
                     // The element has not been found.
-                    *index = -1;
+                    *index = INVALID_INDEX;
                     break;
                 }
 
@@ -367,12 +367,12 @@ void get_internal_array_integer_element_index(const void* p0, const void* p1, co
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not get internal array integer element index. The count is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get integer array element index. The count is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get internal array integer element index. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get integer array element index. The index is null.");
     }
 }
 
@@ -381,16 +381,16 @@ void get_internal_array_integer_element_index(const void* p0, const void* p1, co
 //
 
 /**
- * Gets the internal array pointer element index.
+ * Gets the double array element index.
  *
  * The first occurence of the element will be considered.
  *
- * @param p0 the internal array
- * @param p1 the pointer element
+ * @param p0 the double array
+ * @param p1 the element
  * @param p2 the count
  * @param p3 the index
  */
-void get_internal_array_pointer_element_index(const void** p0, const void* p1, const void* p2, void* p3) {
+void get_double_array_element_index(const void* p0, const void* p1, const void* p2, void* p3) {
 
     int* index = (int*) p3;
 
@@ -400,21 +400,21 @@ void get_internal_array_pointer_element_index(const void** p0, const void* p1, c
 
         if (c != (void*) 0) {
 
-            int* e = (int*) p1;
+            double* e = (double*) p1;
             int i = 0;
-            int* x = (void*) 0;
+            double* x = (void*) 0;
 
             while (1) {
 
                 if (i == *c) {
 
                     // The element has not been found.
-                    *index = -1;
+                    *index = INVALID_INDEX;
                     break;
                 }
 
                 // Determine the next integer element at array plus index.
-                x = (int*) (p0 + i);
+                x = (double*) (p0 + i);
 
                 if (*x == *e) {
 
@@ -428,12 +428,12 @@ void get_internal_array_pointer_element_index(const void** p0, const void* p1, c
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not get internal array integer element index. The count is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get double array element index. The count is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get internal array integer element index. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get double array element index. The index is null.");
     }
 }
 
@@ -442,16 +442,16 @@ void get_internal_array_pointer_element_index(const void** p0, const void* p1, c
 //
 
 /**
- * Gets the internal array pointer element index.
+ * Gets the character array element index.
  *
  * The first occurence of the element will be considered.
  *
- * @param p0 the internal array
- * @param p1 the pointer element
+ * @param p0 the character array
+ * @param p1 the element
  * @param p2 the count
  * @param p3 the index
  */
-void get_internal_array_pointer_element_index(const void** p0, const void* p1, const void* p2, void* p3) {
+void get_character_array_element_index(const void** p0, const void* p1, const void* p2, void* p3) {
 
     int* index = (int*) p3;
 
@@ -461,21 +461,21 @@ void get_internal_array_pointer_element_index(const void** p0, const void* p1, c
 
         if (c != (void*) 0) {
 
-            int* e = (int*) p1;
+            char* e = (char*) p1;
             int i = 0;
-            int* x = (void*) 0;
+            char* x = (void*) 0;
 
             while (1) {
 
                 if (i == *c) {
 
                     // The element has not been found.
-                    *index = -1;
+                    *index = INVALID_INDEX;
                     break;
                 }
 
                 // Determine the next integer element at array plus index.
-                x = (int*) (p0 + i);
+                x = (char*) (p0 + i);
 
                 if (*x == *e) {
 
@@ -489,12 +489,12 @@ void get_internal_array_pointer_element_index(const void** p0, const void* p1, c
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not get internal array integer element index. The count is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array element index. The count is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get internal array integer element index. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array element index. The index is null.");
     }
 }
 
