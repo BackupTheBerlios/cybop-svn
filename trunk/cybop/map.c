@@ -31,7 +31,7 @@
  * A map is like a table. One column (array) contains the element names.
  * A second column (array) contains the actual element references.
  *
- * @version $Revision: 1.10 $ $Date: 2003-10-07 09:51:46 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-10-07 23:07:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct map {

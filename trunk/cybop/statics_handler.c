@@ -27,6 +27,7 @@
 
 #include <string.h>
 #include "complex.c"
+#include "log_handler.c"
 #include "statics.c"
 #include "time.c"
 #include "vector.c"
@@ -38,7 +39,7 @@
  * It implements static operators.
  * An instance is retrieved by instantiating a model.
  *
- * @version $Revision: 1.4 $ $Date: 2003-10-07 09:51:46 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-10-07 23:07:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -27,15 +27,13 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "dynamics_handler.c"
-#include "statics_handler.c"
 
 /**
  * This is a log handler.
  *
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.10 $ $Date: 2003-10-07 09:51:46 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-10-07 23:07:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -74,35 +72,21 @@ static void* log_level;
  */
 static void get_log_level_name(void* p0, void* p1) {
 
-    int* result = (int*) malloc(sizeof(int));
-    *result = FALSE_VALUE;
-
-    equal(p1, (void*) &INFO_LOG_LEVEL, (void*) result);
-
-    if (*result == TRUE_VALUE) {
-
-        strcat((char*) p0, "INFO");
-        
-    } else {
-        
-        equal(p1, (void*) &WARNING_LOG_LEVEL, (void*) result);
-
-        if (*result == TRUE_VALUE) {
-
-            strcat((char*) p0, "WARNING");
-        
-        } else {
-            
-            equal(p1, (void*) &ERROR_LOG_LEVEL, (void*) result);
-
-            if (*result == TRUE_VALUE) {
-
-                strcat((char*) p0, "ERROR");
-            }
-        }
-    }
+    char* n = (char*) p0;
+    int* l = (int*) p1;
     
-    free(result);
+    if (*l == INFO_LOG_LEVEL) {
+
+        strcat(n, "INFO");
+        
+    } else if (*l == WARNING_LOG_LEVEL) {
+
+        strcat(n, "WARNING");
+    
+    } else if (*l == ERROR_LOG_LEVEL) {
+
+        strcat(n, "ERROR");
+    }
 }
 
 /**
@@ -111,7 +95,7 @@ static void get_log_level_name(void* p0, void* p1) {
  * @param p0 the message
  */
 static void show_message(void* p0) {
-    
+
     puts((char*) p0);
 }
 
@@ -122,13 +106,11 @@ static void show_message(void* p0) {
  * @param p1 the message
  */
 static void log(void* p0, void* p1) {
+    
+    int* l = (int*) p0;
+    int* ll = (int*) log_level;
 
-    int* result = (int*) malloc(sizeof(int));
-    *result = FALSE_VALUE;
-    
-    smaller_or_equal(p0, log_level, (void*) result);
-    
-    if (*result == TRUE_VALUE) {
+    if (*l <= *ll) {
 
         void* n = malloc(0);
         
@@ -137,8 +119,6 @@ static void log(void* p0, void* p1) {
         
         free(n);
     }
-    
-    free(result);
 }
 
 /* LOG_HANDLER_SOURCE */

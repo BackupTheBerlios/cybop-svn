@@ -30,7 +30,7 @@
  *
  * It defines constants for dynamic operations.
  *
- * @version $Revision: 1.1 $ $Date: 2003-10-07 09:51:46 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-10-07 23:07:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -412,6 +412,25 @@ static java.lang.String CATEGORY = "invokeinterface_noguess"; // +- 226
 
 static java.lang.String CATEGORY = "invokevirtual_quick_optimised";
 */
+
+//
+// Actions.
+//
+
+/** The show system information action. */
+static const char* SHOW_SYSTEM_INFORMATION_ACTION = "show_system_information";
+
+/** The startup action. */
+static const char* STARTUP_ACTION = "startup";
+
+/** The shutdown action. */
+static const char* SHUTDOWN_ACTION = "shutdown";
+
+/** The receive action. */
+static const char* RECEIVE_ACTION = "receive";
+
+/** The send action. */
+static const char* SEND_ACTION = "send";
 
 /* DYNAMICS_SOURCE */
 #endif

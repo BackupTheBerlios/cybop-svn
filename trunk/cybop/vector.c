@@ -30,7 +30,7 @@
  *
  * It contains the three coordinates: x, y, z.
  *
- * @version $Revision: 1.10 $ $Date: 2003-10-07 09:51:47 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-10-07 23:07:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct vector {

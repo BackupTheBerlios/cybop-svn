@@ -27,6 +27,7 @@
 
 #include "dynamics_handler.c"
 #include "log_handler.c"
+#include "statics.c"
 
 /**
  * This is the array handler.
@@ -44,7 +45,7 @@
  * int** a = 0; // Array of integer pointers
  * void** a = 0; // Array of void pointers
  *
- * @version $Revision: 1.10 $ $Date: 2003-10-07 09:51:46 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-10-07 23:07:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,9 +72,10 @@ static void extend_array(void** p0) {
 
         if (new_array != 0) {
                 
+            // Copy all elements of the old into the new array.
             int i = 0;
 
-            while (smaller((void*) &i, (void*) &old_length)) {
+            while (i < old_length) {
 
                 new_array[i] = old_array[i];
 
@@ -112,16 +114,15 @@ static void set_array_element(void** p0, void* p1, void* p2) {
 
     if (p0 != 0) {
 
+        int* i = (int*) p1;
         int size = sizeof(p0);
         
         // If the array length is exceeded, a new array with extended length
         // is created and delivered back.
-        if (greater_or_equal(p1, &size)) {
+        if (*i >= size) {
 
             extend_array(p0);
         }
-
-        int* i = (int*) p1;
 
         // Set element.
         p0[*i] = p2;
@@ -144,13 +145,13 @@ static void remove_array_element(void** p0, void* p1) {
 
         int* i = (int*) p1;
         
-        if (equal(p1, (void*) &(INVALID_INDEX)) == 0) {
-            
-            // Move all remaining elements one place towards the
-            // beginning of the elements.
-            int size = sizeof(p0);
+        if (*i != INVALID_VALUE) {
 
-            while (smaller((void*) ((*i + 1)), (void*) &size)) {
+            // Starting from the given index, move all remaining elements one
+            // place towards the beginning of the elements.
+            int size = sizeof(p0);
+            
+            while ((*i + 1) < size) {
 
                 p0[*i] = p0[*i + 1];
 
@@ -178,10 +179,10 @@ static void get_array_element(void** p0, void* p1, void* p2) {
 
     if (p0 != 0) {
 
-        if (equal(p1, (void*) &(INVALID_INDEX)) == 0) {
+        int* i = (int*) p1;
+
+        if (*i != INVALID_VALUE) {
             
-            int* i = (int*) p1;
-    
             p2 = p0[*i];
         }
 

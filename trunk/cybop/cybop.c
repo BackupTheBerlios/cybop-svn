@@ -40,7 +40,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.8 $ $Date: 2003-10-07 09:51:46 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-10-07 23:07:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,6 +51,54 @@ static void show_usage_information() {
 
     show_message("Usage: cyboi dynamics statics");
     show_message("Example: cyboi application.dynamics.startup application.statics.system");
+}
+
+/**
+ * Waits for signals.
+ *
+ * The processing of signals follows this sequence:
+ * - receive
+ * - handle
+ * - send
+ * - reset
+ *
+ * @param p0 the signal memory
+ */
+static void wait(void* p0) {
+
+    // The shutdown flag.
+    int* sf = (int*) malloc(sizeof(int));
+    *sf = FALSE_VALUE;
+
+    // Transporting signal.
+    void* s = malloc(sizeof(struct signal));
+
+    // Run endless loop handling any signals.
+    while (TRUE_VALUE) {
+
+        if (*sf == FALSE_VALUE) {
+
+            // Receive signal.
+            receive_signal(p0, s);
+
+            // Handle signal.
+            handle_signal(s, FALSE_VALUE, sf);
+
+            // Send signal.
+            send_signal(p0, s);
+
+            // Reset signal.
+            reset_signal(s);
+
+        } else {
+
+            // Leave loop if the shutdown flag was set.
+            break;
+        }
+    }
+
+    free(s);
+    free(sf);
 }
 
 /**
@@ -135,7 +183,7 @@ int main(int p0, char** p1) {
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)
             // which are stored/ found in the signal memory.
-//??            await(signal_memory);
+            wait(signal_memory);
             // The loop above is left as soon as its shutdown flag is set.
 
 /*??
@@ -173,60 +221,5 @@ int main(int p0, char** p1) {
     }
 
     return r;
-}
-
-/**
- * Waits for signals.
- *
- * The processing of signals follows this sequence:
- * - receive
- * - handle
- * - send
- * - reset
- *
- * @param p0 the signal memory
- */
-static void await(void* p0) {
-
-    // The shutdown flag.
-    int* sf = (int*) malloc(sizeof(int));
-    *sf = FALSE_VALUE;
-
-    // Transporting signal.
-    void* s = malloc(sizeof(struct signal));
-
-    // Comparison result.
-    int* result = (int*) malloc(sizeof(int));
-    *result = FALSE_VALUE;
-
-    // Run endless loop handling any signals.
-    while (TRUE_VALUE) {
-
-        equal((void*) sf, (void*) &FALSE_VALUE, (void*) result);
-
-        if (*result == TRUE_VALUE) {
-
-            // Receive signal.
-            receive_signal(p0, s);
-
-            // Handle signal.
-            handle_signal(s, FALSE_VALUE, sf);
-
-            // Send signal.
-            send_signal(p0, s);
-
-            // Reset signal.
-            reset_signal(s);
-
-        } else {
-
-            // Leave loop if the shutdown flag was set.
-            break;
-        }
-    }
-
-    free(result);    
-    free(s);
-    free(sf);
 }
 

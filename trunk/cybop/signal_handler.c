@@ -38,7 +38,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.10 $ $Date: 2003-10-07 09:51:46 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-10-07 23:07:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -92,25 +92,6 @@ static const char* XML_LANGUAGE = "xml";
 
 /** The simple object access protocol (soap) language. */
 static const char* SOAP_LANGUAGE = "soap";
-
-//
-// Actions.
-//
-
-/** The show system information action. */
-static const char* SHOW_SYSTEM_INFORMATION_ACTION = "show_system_information";
-
-/** The startup action. */
-static const char* STARTUP_ACTION = "startup";
-
-/** The shutdown action. */
-static const char* SHUTDOWN_ACTION = "shutdown";
-
-/** The receive action. */
-static const char* RECEIVE_ACTION = "receive";
-
-/** The send action. */
-static const char* SEND_ACTION = "send";
 
 //
 // Attributes.
@@ -179,7 +160,7 @@ static void send_signal(void* p0, void* p1) {
     
             if (tmp != 0) {
             
-                log((void*) &INFO_LOG_LEVEL, "Send signal: ");
+                log((void*) &INFO_LOG_LEVEL, "Send signal:");
                 log((void*) &INFO_LOG_LEVEL, s->predicate);
 
                 // Copy transporting signal given as parameter to the signal memory signal.
@@ -201,7 +182,7 @@ static void send_signal(void* p0, void* p1) {
 //??                synchronized (p0) {
 
                     // Add signal to signal memory (interrupt vector table).
-                    add_map_element(p0, &SIGNAL, (void*) tmp);
+                    add_map_element(p0, (void*) SIGNAL, (void*) tmp);
 //??                }
 
             } else {
@@ -248,13 +229,14 @@ static void receive_signal(void* p0, void* p1) {
 
         // Read and remove signal from signal memory (interrupt vector table).
         struct signal* tmp = 0;
+        int i = 0;
         
-        get_map_element_at_index(p0, 0, tmp);
-        remove_map_element_at_index(p0, 0);
-        
+        get_map_element_at_index(p0, (void*) &i, (void*) tmp);
+        remove_map_element_at_index(p0, (void*) &i);
+
         if (tmp != 0) {
         
-            log((void*) &INFO_LOG_LEVEL, "Receive signal: ");
+            log((void*) &INFO_LOG_LEVEL, "Receive signal:");
             log((void*) &INFO_LOG_LEVEL, tmp->predicate);
 
             // Copy signal memory signal to the transporting signal given as parameter.
@@ -302,7 +284,7 @@ static void handle_signal(void* p0, void* p1, void* p2) {
 
         if (a != 0) {
 
-            log((void*) &INFO_LOG_LEVEL, "Handle signal: ");
+            log((void*) &INFO_LOG_LEVEL, "Handle signal:");
             log((void*) &INFO_LOG_LEVEL, a);
 
             if (strcmp(a, "mouse_moved") == 0) {
