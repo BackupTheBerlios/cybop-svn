@@ -20,15 +20,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #
-# http://www.resmedicinae.org
-# - Information in Medicine -
+# http://www.cybop.net
+# - Cybernetics Oriented Programming -
 #
 # This file can be used to easily build the specified project.
 # The project's source directory must contain a "build.xml" file.
 # The building is done by the "Ant" tool of the "Jakarta" tool suite.
 #
 # @see http://www.apache.org
-# @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
+# @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 

@@ -20,12 +20,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #
-# http://www.resmedicinae.org
-# - Information in Medicine -
+# http://www.cybop.net
+# - Cybernetics Oriented Programming -
 #
 # This file sets the path and classpath.
 #
-# @version $Revision: 1.1 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
+# @version $Revision: 1.2 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Henrik Brandes <henrik-b@gmx.de>
 # @author Christian Heller <christian.heller@tuxtax.de>
@@ -53,7 +53,7 @@
 # 2 Now, build/start your system.
 # The build/start scripts use this set_home script automatically.
 #
-# @version $Revision: 1.1 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
+# @version $Revision: 1.2 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 

@@ -18,8 +18,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
- * http://www.resmedicinae.org
- * - Information in Medicine -
+ * http://www.cybop.net
+ * - Cybernetics Oriented Programming -
  */
 
 package cybop.core.basic;
@@ -30,7 +30,7 @@ package cybop.core.basic;
  * A state is a snapshot in time, marked by a timestamp.
  * It knows about its previous state and such builds up a timeline.
  *
- * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class State extends java.lang.Object {
