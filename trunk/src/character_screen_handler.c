@@ -26,7 +26,7 @@
 #define CHARACTER_SCREEN_HANDLER_SOURCE
 
 #include <stdio.h>
-#include "vector.c"
+#include "statics/vector.c"
 
 /**
  * This is the character screen handler.
@@ -38,7 +38,7 @@
  * - Textual User Interface (TUI)
  * - Curses (termcap, ncurses)
  *
- * @version $Revision: 1.5 $ $Date: 2004-01-11 15:32:47 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-01-26 00:13:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

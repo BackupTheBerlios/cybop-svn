@@ -1,7 +1,8 @@
 #
 # $RCSfile: Makefile,v $
 #
-# Copyright (c) 2004-2004. Michael Simon. All rights reserved.
+# Copyright (c) 2003-2004. Michael Simon. All rights reserved.
+# Copyright (c) 2004-2004. Christian Heller. All rights reserved.
 #
 # This software is published under the GPL GNU General Public License.
 # This program is free software; you can redistribute it and/or
@@ -21,98 +22,147 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.3 $ $Date: 2004-01-07 11:12:18 $ $Author: christian $
+# @version $Revision: 1.4 $ $Date: 2004-01-26 00:13:46 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
+# @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-CC=cc
+#
+# CAUTION!
+#
+# TABS must not be replaced with SPACES!
+# Otherwise, the makefile will not work.
+#
+
+#
+# Path constants.
+#
+
+ROOT = ..
+ADMIN = $(ROOT)/admin
+BIN = $(ROOT)/bin
+DIST = $(ROOT)/dist
+DOC = $(ROOT)/doc
+OBJ = $(ROOT)/obj
+SRC = $(ROOT)/src
+
+#
+# File constants.
+#
+
+BINARY = cyboi
+COMPILER = gcc
 #-Wall -pedantic
-CFLAGS=-g
+COMPILER_FLAGS = -g
 
-vpath %.c ../src
-vpath %.o ../src
+#
+# Wildcards.
+#
 
-ROOTSOURCES:=$(wildcard ../src/*.c)
-ROOTOBJECTS:=$(patsubst ../src/%.c,../lib/%.o,$(ROOTSOURCES))
-CYBOLSOURCES:=$(wildcard ../src/cybol/*.c)
-CYBOLBJECTS:=$(patsubst ../src/cybol/%.c,../lib/cybol/%.o,$(CYBOLSOURCES))
-DYNAMICSSOURCES:=$(wildcard ../src/dynamics/*.c)
-DYNAMICSOBJECTS:=$(patsubst ../src/dynamics/%.c,../lib/dynamics/%.o,$(DYNAMICSSOURCES))
-LOGGERSOURCES:=$(wildcard ../src/logger/*.c)
-LOGGEROBJECTS:=$(patsubst ../src/logger/%.c,../lib/logger/%.o,$(LOGGERSOURCES))
-MODELSOURCES:=$(wildcard ../src/model/*.c)
-MODELOBJECTS:=$(patsubst ../src/model/%.c,../lib/model/%.o,$(MODELSOURCES))
-SIGNALSOURCES:=$(wildcard ../src/signal/*.c)
-SIGNALOBJECTS:=$(patsubst ../src/signal/%.c,../lib/signal/%.o,$(SIGNALSOURCES))
-STATICSOURCES:=$(wildcard ../src/statics/*.c)
-STATICSOBJECTS:=$(patsubst ../src/statics/%.c,../lib/statics/%.o,$(STATICSSOURCES))
-X_WINDOWSSOURCES:=$(wildcard ../src/x_windows/*.c)
-X_WINDOWSOBJECTS:=$(patsubst ../src/x_windows/%.c,../lib/x_windows/%.o,$(X_WINDOWSSOURCES))
+#vpath %.c $(SRC)
+#vpath %.o $(OBJ)
 
-all: $(ROOTOBJECTS) $(CYBOLOBJECTS) $(DYNAMICSOBJECTS) $(LOGGEROBJECTS) $(MODELOBJECTS) $(SIGNALOBJECTS) $(STATICSOBJECTS) $(X_WINDOWSOBJECTS)
-    $(CC) -o ../bin/cyboi $(ROOTOBJECTS) $(CYBOLOBJECTS) $(DYNAMICSOBJECTS) $(LOGGEROBJECTS) $(MODELOBJECTS) $(SIGNALOBJECTS) $(STATICSOBJECTS) $(X_WINDOWSOBJECTS)
-    @echo -----------------------
-    @echo All Sources compiled...
-    @echo -----------------------
+ROOT_SOURCES = $(wildcard $(SRC)/*.c)
+ROOT_OBJECTS = $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(ROOT_SOURCES))
+CYBOL_SOURCES = $(wildcard $(SRC)/cybol/*.c)
+CYBOL_OBJECTS = $(patsubst $(SRC)/cybol/%.c,$(OBJ)/cybol/%.o,$(CYBOL_SOURCES))
+DYNAMICS_SOURCES = $(wildcard $(SRC)/dynamics/*.c)
+DYNAMICS_OBJECTS = $(patsubst $(SRC)/dynamics/%.c,$(OBJ)/dynamics/%.o,$(DYNAMICS_SOURCES))
+LOGGER_SOURCES = $(wildcard $(SRC)/logger/*.c)
+LOGGER_OBJECTS = $(patsubst $(SRC)/logger/%.c,$(OBJ)/logger/%.o,$(LOGGER_SOURCES))
+MODEL_SOURCES = $(wildcard $(SRC)/model/*.c)
+MODEL_OBJECTS = $(patsubst $(SRC)/model/%.c,$(OBJ)/model/%.o,$(MODEL_SOURCES))
+SIGNAL_SOURCES = $(wildcard $(SRC)/signal/*.c)
+SIGNAL_OBJECTS = $(patsubst $(SRC)/signal/%.c,$(OBJ)/signal/%.o,$(SIGNAL_SOURCES))
+STATICS_SOURCES = $(wildcard $(SRC)/statics/*.c)
+STATICS_OBJECTS = $(patsubst $(SRC)/statics/%.c,$(OBJ)/statics/%.o,$(STATICS_SOURCES))
+X_WINDOWS_SOURCES = $(wildcard $(SRC)/x_windows/*.c)
+X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WINDOWS_SOURCES))
 
-dist: clean
-    -cd ..; mkdir dist
-    cd ..; tar -cvzf dist/cybol.tar.gz * -X admin/exclude
-    @echo -----------------------------------------------------------------
-    @echo All Object-files, Binaries and old Distribution-files deleted...
-    @echo New distribution-file cybol.tar.gz generated in directory dist...
-    @echo -----------------------------------------------------------------
+#
+# Compiles all cyboi source files.
+#
+# - compiles sources
+# - creates objects
+# - creates binary
+#
+all: $(ROOT_OBJECTS) $(CYBOL_OBJECTS) $(DYNAMICS_OBJECTS) $(LOGGER_OBJECTS) $(MODEL_OBJECTS) $(SIGNAL_OBJECTS) $(STATICS_OBJECTS) $(X_WINDOWS_OBJECTS)
+	$(COMPILER) -o $(BIN)/$(BINARY) $(ROOT_OBJECTS) $(CYBOL_OBJECTS) $(DYNAMICS_OBJECTS) $(LOGGER_OBJECTS) $(MODEL_OBJECTS) $(SIGNAL_OBJECTS) $(STATICS_OBJECTS) $(X_WINDOWS_OBJECTS) $@
+	@echo Compiled cyboi files.
 
-../lib/%.o : ../src/%.c
-    $(CC) -c $(CFLAGS) $< -o $@
+$(OBJ)/%.o : $(SRC)/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-../lib/cybol/%.o : ../src/cybol/%.c
-    -cd ..; mkdir cybol
-    $(CC) -c $(CFLAGS) $< -o $@
+$(OBJ)/cybol/%.o : $(SRC)/cybol/%.c
+#	-cd $(OBJ);
+#	mkdir cybol
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-../lib/dynamics/%.o : ../src/dynamics/%.c
-    -cd ..; mkdir dynamics
-    $(CC) -c $(CFLAGS) $< -o $@
+$(OBJ)/dynamics/%.o : $(SRC)/dynamics/%.c
+	-cd ..;
+	mkdir dynamics
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-../lib/logger/%.o : ../src/logger/%.c
-    -cd ..; mkdir logger
-    $(CC) -c $(CFLAGS) $< -o $@
+$(OBJ)/logger/%.o : $(SRC)/logger/%.c
+	-cd ..;
+	mkdir logger
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-../lib/model/%.o : ../src/model/%.c
-    -cd ..; mkdir model
-    $(CC) -c $(CFLAGS) $< -o $@
+$(OBJ)/model/%.o : $(SRC)/model/%.c
+	-cd ..;
+	mkdir model
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-../lib/signals/%.o : ../src/signals/%.c
-    -cd ..; mkdir signals
-    $(CC) -c $(CFLAGS) $< -o $@
+$(OBJ)/signals/%.o : $(SRC)/signals/%.c
+	-cd ..;
+	mkdir signals
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-../lib/statics/%.o : ../src/statics/%.c
-    -cd ..; mkdir statics
-    $(CC) -c $(CFLAGS) $< -o $@
+$(OBJ)/statics/%.o : $(SRC)/statics/%.c
+	-cd ..;
+	mkdir statics
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-../lib/x_windows/%.o : ../src/x_windows/%.c
-    -cd ..; mkdir x_windows
-    $(CC) -c $(CFLAGS) $< -o $@
+$(OBJ)/x_windows/%.o : $(SRC)/x_windows/%.c
+	-cd ..;
+	mkdir x_windows
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-test: all
-    @echo -----------------
-    @echo Starting Cyboi...
-    @echo -----------------
-    ./../bin/cyboi
+#
+# Creates distribution file.
+#
+# - packs objects
+# - packs binaries
+# - packs cybol libraries
+# - packs documentation
+# - writes distribution file cyboi.tar.gz to directory /dist
+#
+dist:
+	clean
+	-cd ..;
+	mkdir dist
+	cd ..;
+	tar -cvzf dist/cybol.tar.gz * -X admin/exclude
+	@echo Created distribution file.
 
-.PHONY: clean
+#
+# Cleans cyboi files.
+#
+# - objects
+# - binaries
+# - distribution
+#
+#.PHONY: clean
 clean:
-    -rm -r ../lib/cybol
-    -rm -r ../lib/dynamics
-    -rm -r ../lib/logger
-    -rm -r ../lib/model
-    -rm -r ../lib/signal
-    -rm -r ../lib/statics
-    -rm -r ../lib/x_windows
-    -rm -f ../lib/*.o
-    -rm -f ../bin/cyboi
-    -rm -f ../dist/cybol.tar.gz
-    @echo ----------------------------------------------------------------
-    @echo All Object-files, Binaries and old Distribution-files deleted...
-    @echo ----------------------------------------------------------------
+	-rm -r $(OBJ)/cybol
+	-rm -r $(OBJ)/dynamics
+	-rm -r $(OBJ)/logger
+	-rm -r $(OBJ)/model
+	-rm -r $(OBJ)/signal
+	-rm -r $(OBJ)/statics
+	-rm -r $(OBJ)/x_windows
+	-rm -f $(OBJ)/*.o
+	-rm -f $(BINARY)
+	-rm -f $(DIST)/cybol.tar.gz
+	@echo Cleaned cyboi files.
 
