@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.59 $ $Date: 2005-01-07 11:59:47 $ $Author: christian $
+ * @version $Revision: 1.60 $ $Date: 2005-01-08 01:24:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -148,9 +148,9 @@ int main(int p0, char** p1) {
             create((void*) &k, (void*) &ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
 
             // Set knowledge memory into internals.
-            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_KNOWLEDGE_MEMORY, (void*) &k, (void*) &ONE_ELEMENT_COUNT);
-            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_KNOWLEDGE_MEMORY_COUNT, (void*) &kc, (void*) &ONE_ELEMENT_COUNT);
-            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_KNOWLEDGE_MEMORY_SIZE, (void*) &ks, (void*) &ONE_ELEMENT_COUNT);
+            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) &ONE_ELEMENT_COUNT);
+            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) &ONE_ELEMENT_COUNT);
+            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) &ONE_ELEMENT_COUNT);
 
             //
             // Signal memory.
@@ -173,9 +173,9 @@ int main(int p0, char** p1) {
             create((void*) &s, (void*) &ss, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
             // Set signal memory into internals.
-            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_SIGNAL_MEMORY, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
-            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_SIGNAL_MEMORY_COUNT, (void*) &sc, (void*) &ONE_ELEMENT_COUNT);
-            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_SIGNAL_MEMORY_SIZE, (void*) &ss, (void*) &ONE_ELEMENT_COUNT);
+            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
+            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) &ONE_ELEMENT_COUNT);
+            set_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) &ONE_ELEMENT_COUNT);
 
             //
             // TCP socket.
@@ -220,12 +220,12 @@ int main(int p0, char** p1) {
             void* pmc = NULL_POINTER;
 
             // Get startup parameters channel, abstraction, model.
-            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_STARTUP_CHANNEL, (void*) &pc, (void*) &ONE_ELEMENT_COUNT);
-            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_STARTUP_CHANNEL_COUNT, (void*) &pcc, (void*) &ONE_ELEMENT_COUNT);
-            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_STARTUP_ABSTRACTION, (void*) &pa, (void*) &ONE_ELEMENT_COUNT);
-            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_STARTUP_ABSTRACTION_COUNT, (void*) &pac, (void*) &ONE_ELEMENT_COUNT);
-            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_STARTUP_MODEL, (void*) &pm, (void*) &ONE_ELEMENT_COUNT);
-            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_STARTUP_MODEL_COUNT, (void*) &pmc, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_INTERNAL, (void*) &pc, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_COUNT_INTERNAL, (void*) &pcc, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_INTERNAL, (void*) &pa, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_COUNT_INTERNAL, (void*) &pac, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_INTERNAL, (void*) &pm, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_COUNT_INTERNAL, (void*) &pmc, (void*) &ONE_ELEMENT_COUNT);
 
             log_message_debug("Create startup model abstraction.");
 

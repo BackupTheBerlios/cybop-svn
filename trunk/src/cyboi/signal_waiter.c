@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-01-07 11:59:48 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2005-01-08 01:24:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -85,7 +85,7 @@ void activate_internals(void* p0) {
     int* p_tcp_socket_active = NULL_POINTER;
 
     // get the active flag for tcp socket
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &INTERNALS_TCPSOCKET_ACTIVE, (void*) &p_tcp_socket_active, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &p_tcp_socket_active, (void*) &ONE_ELEMENT_COUNT);
 
     if (*p_tcp_socket_active == 1) {
 
@@ -132,12 +132,12 @@ void wait(void* p0) {
     void* ss = NULL_POINTER;
 
     // Get knowledge memory, signal memory.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &INTERNALS_KNOWLEDGE_MEMORY, (void*) &k, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &INTERNALS_KNOWLEDGE_MEMORY_COUNT, (void*) &kc, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &INTERNALS_KNOWLEDGE_MEMORY_SIZE, (void*) &ks, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &INTERNALS_SIGNAL_MEMORY, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &INTERNALS_SIGNAL_MEMORY_COUNT, (void*) &sc, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &INTERNALS_SIGNAL_MEMORY_SIZE, (void*) &ss, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) &ONE_ELEMENT_COUNT);
 
     // The shutdown flag.
     int* f = INTEGER_NULL_POINTER;
