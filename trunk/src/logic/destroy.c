@@ -22,13 +22,17 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.10 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-04-05 16:35:50 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DESTROY_SOURCE
 #define DESTROY_SOURCE
 
+#include "../array/array.c"
+#include "../global/abstraction_constants.c"
+#include "../global/log_constants.c"
+#include "../global/name_constants.c"
 #include "../logger/logger.c"
 
 /**
@@ -98,6 +102,64 @@ void destroy_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  * @param p4 the knowledge size
  */
 void destroy_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
+ 
+    log_message_debug("Destroy part.");
+
+    // The name name abstraction.
+    void** na = POINTER_NULL_POINTER;
+    void** nac = POINTER_NULL_POINTER;
+    void** nas = POINTER_NULL_POINTER;
+    // The name name model.
+    void** nm = POINTER_NULL_POINTER;
+    void** nmc = POINTER_NULL_POINTER;
+    void** nms = POINTER_NULL_POINTER;
+    // The name name details.
+    void** nd = POINTER_NULL_POINTER;
+    void** ndc = POINTER_NULL_POINTER;
+    void** nds = POINTER_NULL_POINTER;
+
+    // Get name name.
+    get_real_compound_element_by_name(p0, p1,
+        (void*) NAME_NAME_ABSTRACTION, (void*) NAME_NAME_ABSTRACTION_COUNT,
+        (void*) &na, (void*) &nac, (void*) &nas,
+        (void*) &nm, (void*) &nmc, (void*) &nms,
+        (void*) &nd, (void*) &ndc, (void*) &nds,
+        p2, p3);
+
+
+    // Check name name.
+    if ((na != POINTER_NULL_POINTER)
+        && (nac != POINTER_NULL_POINTER)
+        && (nas != POINTER_NULL_POINTER)
+        && (nm != POINTER_NULL_POINTER)
+        && (nmc != POINTER_NULL_POINTER)
+        && (nms != POINTER_NULL_POINTER)
+        && (nd != POINTER_NULL_POINTER)
+        && (ndc != POINTER_NULL_POINTER)
+        && (nds != POINTER_NULL_POINTER)
+        ) 
+    {
+
+        //check the abstraction from the name
+        //is must be a string
+        int r = 0;
+        compare_arrays( *na, *nac, 
+                        STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT,
+                        &r, CHARACTER_ARRAY );
+
+        if ( r==1 ) {
+         
+            //remove the part
+            remove_compound_element_by_name(p2, p3, p4,
+                (void*) *nm, (void*) *nmc );
+
+        }
+
+    } else {
+
+        log_message_debug("Could not destry the part. At least one of the given parameters is null.");
+    }
+ 
 }
 
 /* DESTROY_SOURCE */
