@@ -33,7 +33,7 @@
 /**
  * This is the operation handler.
  *
- * @version $Revision: 1.2 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-12-16 11:07:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

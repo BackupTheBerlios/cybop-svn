@@ -36,7 +36,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.5 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-12-16 11:07:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct operation {
