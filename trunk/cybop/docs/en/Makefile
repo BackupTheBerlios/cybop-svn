@@ -1,5 +1,5 @@
 # Makefile.in generated automatically by automake 1.5 from Makefile.am.
-# KDE tags expanded automatically by am_edit - $Revision: 1.3 $ 
+# KDE tags expanded automatically by am_edit - $Revision: 1.4 $ 
 
 # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001
 # Free Software Foundation, Inc.
@@ -46,7 +46,7 @@ AUTOCONF = autoconf
 AUTOMAKE = automake
 AUTOHEADER = autoheader
 
-INSTALL = /usr/bin/install -c -p
+INSTALL = /usr/bin/ginstall -c -p
 INSTALL_PROGRAM = ${INSTALL} $(INSTALL_STRIP_FLAG)
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_SCRIPT = ${INSTALL}
@@ -183,7 +183,7 @@ RC = @RC@
 REPO = -frepo
 SETUIDFLAGS = @SETUIDFLAGS@
 STRIP = strip
-TOPSUBDIRS =  cybop
+TOPSUBDIRS =  CVSROOT bin cybop cybop-0.1.0.0 doc lib src tmp
 UIC = @UIC@
 UIC_TR = @UIC_TR@
 USER_INCLUDES = 

@@ -41,7 +41,7 @@ available_tags=" CXX GCJ"
 
 # ### BEGIN LIBTOOL CONFIG
 
-# Libtool was configured on host chris.tuxtax:
+# Libtool was configured on host pi24:
 
 # Shell to use when invoking shell scripts.
 SHELL="/bin/sh"
@@ -79,7 +79,7 @@ CC="gcc"
 with_gcc=yes
 
 # The linker used to build libraries.
-LD="/usr/bin/ld"
+LD="/usr/i486-suse-linux/bin/ld"
 
 # Whether we need hard or soft links.
 LN_S="ln -s"
@@ -156,7 +156,7 @@ dlopen_self_static=unknown
 link_static_flag="-static"
 
 # Compiler flag to turn off builtin functions.
-no_builtin_flag=" -fno-builtin"
+no_builtin_flag=" -fno-builtin -fno-rtti -fno-exceptions"
 
 # Compiler flag to allow reflexive dlopens.
 export_dynamic_flag_spec="\${wl}--export-dynamic"
@@ -5893,7 +5893,7 @@ build_old_libs=`case $build_libtool_libs in yes) echo no;; *) echo yes;; esac`
 # End:
 # ### BEGIN LIBTOOL TAG CONFIG: CXX
 
-# Libtool was configured on host chris.tuxtax:
+# Libtool was configured on host pi24:
 
 # Shell to use when invoking shell scripts.
 SHELL="/bin/sh"
@@ -5931,7 +5931,7 @@ CC="g++"
 with_gcc=no
 
 # The linker used to build libraries.
-LD="/usr/bin/ld"
+LD="/usr/i486-suse-linux/bin/ld"
 
 # Whether we need hard or soft links.
 LN_S="ln -s"
@@ -6170,7 +6170,7 @@ include_expsyms=""
 
 # ### BEGIN LIBTOOL TAG CONFIG: GCJ
 
-# Libtool was configured on host chris.tuxtax:
+# Libtool was configured on host pi24:
 
 # Shell to use when invoking shell scripts.
 SHELL="/bin/sh"
@@ -6254,7 +6254,7 @@ libext="a"
 exeext=""
 
 # Additional compiler flags for building library objects.
-pic_flag=" -DPIC"
+pic_flag=" -fPIC -DPIC"
 pic_mode=default
 
 # What is the maximum length of a command?
@@ -6285,7 +6285,7 @@ dlopen_self_static=unknown
 link_static_flag="-static"
 
 # Compiler flag to turn off builtin functions.
-no_builtin_flag=" -fno-builtin"
+no_builtin_flag=" -fno-builtin -fno-rtti -fno-exceptions"
 
 # Compiler flag to allow reflexive dlopens.
 export_dynamic_flag_spec=""
