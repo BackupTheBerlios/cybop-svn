@@ -29,7 +29,7 @@ package cyboi;
  *
  * It contains all static data structures.
  *
- * @version $Revision: 1.6 $ $Date: 2003-08-10 22:34:31 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-09-10 14:44:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Statics {
@@ -54,11 +54,17 @@ class Statics {
     /** The float primitive. */
     static java.lang.String FLOAT_PRIMITIVE = "float_primitive";
 
+    /** The vector primitive. */
+    static java.lang.String VECTOR_PRIMITIVE = "vector_primitive";
+
     /** The char primitive. */
     static java.lang.String CHAR_PRIMITIVE = "char_primitive";
 
     /** The string primitive. */
     static java.lang.String STRING_PRIMITIVE = "string_primitive";
+
+    /** The time primitive. */
+    static java.lang.String TIME_PRIMITIVE = "time_primitive";
 
     //
     // Applications.

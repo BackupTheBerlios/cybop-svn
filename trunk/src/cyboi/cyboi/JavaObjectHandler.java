@@ -30,7 +30,7 @@ package cyboi;
  * It is necessary only as long as the Cybernetics Oriented Interpreter (CYBOI)
  * is implemented in the Java programming language.
  *
- * @version $Revision: 1.13 $ $Date: 2003-09-09 14:37:26 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-09-10 14:44:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaObjectHandler {
@@ -338,11 +338,11 @@ class JavaObjectHandler {
         if (f != null) {
 
             LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize jframe.");
-            
+
             java.lang.String width = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.WIDTH);
             java.lang.String height = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.HEIGHT);
-            f.setSize(java.lang.Integer.parseInt(width), java.lang.Integer.parseInt(height));
-            
+            f.setSize(java.lang.Integer.parseInt(width), java.lang.Integer.parseInt(height));            
+
         } else {
             
             LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize jframe. The jframe is null.");
@@ -372,7 +372,7 @@ class JavaObjectHandler {
         if (f != null) {
 
             LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Add to jframe.");
-            
+
             if (p1 instanceof javax.swing.JMenuBar) {
                     
                 f.setJMenuBar((javax.swing.JMenuBar) p1);
@@ -456,7 +456,7 @@ class JavaObjectHandler {
             
             java.lang.String width = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.WIDTH);
             java.lang.String height = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.HEIGHT);
-            d.setSize(java.lang.Integer.parseInt(width), java.lang.Integer.parseInt(height));
+            d.setSize(java.lang.Integer.parseInt(width), java.lang.Integer.parseInt(height));            
 
         } else {
             
@@ -821,7 +821,7 @@ class JavaObjectHandler {
             LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Add to jpanel.");
             
             if (p1 instanceof java.awt.Component) {
-                    
+
                 p.add((java.awt.Component) p1, p2);
             }
 

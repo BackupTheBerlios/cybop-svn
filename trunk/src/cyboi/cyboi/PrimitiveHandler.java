@@ -29,7 +29,7 @@ package cyboi;
  *
  * It contains procedures to create items of primitive type.
  *
- * @version $Revision: 1.15 $ $Date: 2003-09-08 06:48:49 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-09-10 14:44:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class PrimitiveHandler {
@@ -167,6 +167,83 @@ class PrimitiveHandler {
     }
 
     //
+    // Vector primitive.
+    //
+
+    /**
+     * Creates a vector primitive.
+     *
+     * @param s the vector primitive as string
+     * @return the vector primitive
+     */
+    static java.lang.Object create_vector_primitive(java.lang.Object s) {
+
+        Vector p = new Vector();
+        java.lang.String xyz = (java.lang.String) s;
+        
+        if (p != null) {
+
+            if (xyz != null) {
+                
+                if (!xyz.equals("")) {
+                    
+                    LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Create vector primitive.");
+                    int i1 = xyz.indexOf(",");
+                    
+                    if (i1 != -1) {
+                        
+                        java.lang.String x = xyz.substring(0, i1);
+                        java.lang.String yz = xyz.substring(i1 + 1);
+                        int i2 = yz.indexOf(",");
+    
+                        if (i2 != -1) {
+                        
+                            java.lang.String y = yz.substring(0, i2);
+                            java.lang.String z = yz.substring(i2 + 1);
+    
+                            p.x = java.lang.Integer.parseInt(x);
+                            p.y = java.lang.Integer.parseInt(y);
+                            p.z = java.lang.Integer.parseInt(z);
+
+                        } else {
+                        
+                            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not create vector primitive. The vector does not contain a z coordinate.");
+                        }
+                        
+                    } else {
+                    
+                        LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not create vector primitive. The vector does not contain an y coordinate.");
+                    }
+                    
+                } else {
+                    
+                    LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Could not create vector primitive. The string is empty.");
+                }
+            
+            } else {
+                
+                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not create vector primitive. The string is null.");
+            }
+        
+        } else {
+            
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not create vector primitive. The vector is null.");
+        }
+        
+        return p;
+    }
+
+    /**
+     * Destroys the vector primitive.
+     *
+     * @param p the vector primitive
+     */
+    static void destroy_vector_primitive(java.lang.Object p) {
+
+        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Destroy vector primitive.");
+    }
+
+    //
     // Character primitive.
     //
 
@@ -268,6 +345,31 @@ class PrimitiveHandler {
     static void destroy_string_primitive(java.lang.Object p) {
 
         LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Destroy string primitive.");
+    }
+
+    //
+    // Time primitive.
+    //
+
+    /**
+     * Creates a time primitive.
+     *
+     * @param s the time primitive as string
+     * @return the time primitive
+     */
+    static java.lang.Object create_time_primitive(java.lang.Object s) {
+
+        return null;
+    }
+
+    /**
+     * Destroys the time primitive.
+     *
+     * @param p the time primitive
+     */
+    static void destroy_time_primitive(java.lang.Object p) {
+
+        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Destroy time primitive.");
     }
 
 /*??

@@ -33,7 +33,7 @@ package cyboi;
  * - send
  * - reset
  *
- * @version $Revision: 1.23 $ $Date: 2003-09-09 14:37:26 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2003-09-10 14:44:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -219,12 +219,18 @@ class SignalHandler {
 
                     Item statics = SignalHandler.statics;
                     java.lang.Object main_frame = ItemHandler.get_item_element(statics, "main_frame");
-                    java.lang.Object x = ItemHandler.get_item_element(statics, "mouse.pointer_position.x_distance.quantity");
-                    java.lang.Object y = ItemHandler.get_item_element(statics, "mouse.pointer_position.y_distance.quantity");
-                    java.lang.Object z = ItemHandler.get_item_element(statics, "mouse.pointer_position.z_distance.quantity");
-
+                    Vector pointer_position = (Vector) ItemHandler.get_item_element(statics, "mouse.pointer_position");
+                    
                     SignalHandler.reset(s);
-                    s.predicate = SignalHandler.mouse_clicked_action(main_frame, x, y, z);
+
+                    if (pointer_position != null) {
+                     
+                        s.predicate = SignalHandler.mouse_clicked_action(main_frame, pointer_position.x, pointer_position.y, pointer_position.z);
+                        
+                    } else {
+                        
+                        LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is null.");
+                    }
 
                 } else if (a.equals(SignalHandler.SHOW_SYSTEM_INFORMATION_ACTION)) {
 
@@ -421,7 +427,7 @@ class SignalHandler {
      * @param p3 the z coordinate
      * @return the action
      */
-    static java.lang.Object mouse_clicked_action(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2, java.lang.Object p3) {
+    static java.lang.Object mouse_clicked_action(java.lang.Object p0, int p1, int p2, int p3) {
 
         java.lang.Object a = null;
         Item i = (Item) p0;
@@ -444,50 +450,68 @@ class SignalHandler {
             int count = 0;
             int size = MapHandler.get_map_size(i.items);
             java.lang.Object child = null;
-            java.lang.Object position = null;
-            java.lang.Object x = null;
-            java.lang.Object y = null;
-            java.lang.Object z = null;
-            java.lang.Object width = null;
-            java.lang.Object height = null;
-            java.lang.Object depth = null;
+            Vector position = null;
+            Vector expansion = null;
+            int x = -1;
+            int y = -1;
+            int z = -1;
+            int width = -1;
+            int height = -1;
+            int depth = -1;
             boolean contains = false;
             
             while (count < size) {
 
-                // Determine child and its position within the given screen item.
+                // Determine child, its position and expansion within the given screen item.
                 child = MapHandler.get_map_element(i.items, count);
-                position = MapHandler.get_map_element(i.positions, count);
+                position = (Vector) MapHandler.get_map_element(i.positions, count);
+                expansion = (Vector) ItemHandler.get_item_element(child, "expansion");
                 
-                // Translate the given coordinates according to the child's position.
-                x = SignalHandler.subtract(p1, ItemHandler.get_item_element(position, "x_distance.quantity"));
-                y = SignalHandler.subtract(p2, ItemHandler.get_item_element(position, "y_distance.quantity"));
-                z = SignalHandler.subtract(p3, ItemHandler.get_item_element(position, "z_distance.quantity"));
-                
-                // Determine child's expansion.
-                width = ItemHandler.get_item_element(child, "expansion.x_distance.quantity");
-                height = ItemHandler.get_item_element(child, "expansion.y_distance.quantity");
-                depth = ItemHandler.get_item_element(child, "expansion.z_distance.quantity");
+                if (position != null) {
+                        
+                    // Translate the given coordinates according to the child's position.
+                    x = p1 - position.x;
+                    y = p2 - position.y;
+                    z = p3 - position.z;
 
-                // Check if the given coordinates are in the child's screen area.
-                // The "if" conditions had to be inserted because in classical
-                // graphical user interfaces, the depth is normally 0 and
-                // such the boolean comparison would deliver "false".
-                // Using the conditions, the coordinates that are set to "0"
-                // are not considered for comparison.
-                contains = SignalHandler.greater_or_equal(x, new java.lang.Integer(0));
-                contains = SignalHandler.and(contains, SignalHandler.smaller(x, width));
-                contains = SignalHandler.and(contains, SignalHandler.greater_or_equal(y, new java.lang.Integer(0)));
-                contains = SignalHandler.and(contains, SignalHandler.smaller(y, height));
-                //?? contains = SignalHandler.and(contains, SignalHandler.greater_or_equal(z, new java.lang.Integer(0)));
-                //?? contains = SignalHandler.and(contains, SignalHandler.smaller(z, depth));
+                    if (expansion != null) {
 
-                if (contains == true) {
+                        // Determine child's expansion.
+                        width = expansion.x;
+                        height = expansion.y;
+                        depth = expansion.z;
+        
+                        // Check if the given coordinates are in the child's screen area.
+                        // The "if" conditions had to be inserted because in classical
+                        // graphical user interfaces, the depth is normally 0 and
+                        // such the boolean comparison would deliver "false".
+                        // Using the conditions, the coordinates that are set to "0"
+                        // are not considered for comparison.
+                        contains = (x >= 0);
+                        contains = contains && (x < width);
+                        contains = contains && (y >= 0);
+                        contains = contains && (y < height);
+                        contains = contains && (z >= 0);
+                        contains = contains && (z < depth);
+        
+                        if (contains == true) {
+        
+                            // The given coordinates are in the child's screen area.
+                            // Therefore, use the child's action.
+                            a = SignalHandler.mouse_clicked_action(child, x, y, z);
+                        }
 
-                    // The given coordinates are in the child's screen area.
-                    // Therefore, use the child's action.
-                    a = SignalHandler.mouse_clicked_action(child, x, y, z);
+                    } else {
+                        
+                        LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not handle mouse clicked action. An expansion is null.");
+                    }
+
+                } else {
+                    
+                    LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not handle mouse clicked action. A position is null.");
                 }
+                
+                count++;
             }
     
         } else {

@@ -29,7 +29,7 @@ package cyboi;
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.33 $ $Date: 2003-09-09 14:37:26 $ $Author: christian $
+ * @version $Revision: 1.34 $ $Date: 2003-09-10 14:44:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -66,6 +66,10 @@ class ItemHandler {
 
                 o = PrimitiveHandler.create_float_primitive(p0);
 
+            } else if (a.equals(Statics.VECTOR_PRIMITIVE)) {
+
+                o = PrimitiveHandler.create_vector_primitive(p0);
+
             } else if (a.equals(Statics.CHAR_PRIMITIVE)) {
 
                 o = PrimitiveHandler.create_character_primitive(p0);
@@ -73,6 +77,10 @@ class ItemHandler {
             } else if (a.equals(Statics.STRING_PRIMITIVE)) {
 
                 o = PrimitiveHandler.create_string_primitive(p0);
+
+            } else if (a.equals(Statics.TIME_PRIMITIVE)) {
+
+                o = PrimitiveHandler.create_time_primitive(p0);
 
             } else if (a.equals(Statics.CATEGORY)) {
 
@@ -116,6 +124,10 @@ class ItemHandler {
 
                 PrimitiveHandler.destroy_float_primitive(p0);
 
+            } else if (a.equals(Statics.VECTOR_PRIMITIVE)) {
+
+                PrimitiveHandler.destroy_vector_primitive(p0);
+
             } else if (a.equals(Statics.CHAR_PRIMITIVE)) {
 
                 PrimitiveHandler.destroy_character_primitive(p0);
@@ -123,6 +135,10 @@ class ItemHandler {
             } else if (a.equals(Statics.STRING_PRIMITIVE)) {
 
                 PrimitiveHandler.destroy_string_primitive(p0);
+
+            } else if (a.equals(Statics.TIME_PRIMITIVE)) {
+
+                PrimitiveHandler.destroy_time_primitive(p0);
 
             } else if (a.equals(Statics.CATEGORY)) {
 
@@ -163,7 +179,6 @@ class ItemHandler {
 
             ItemHandler.initialize_java_object(p0, c.java_object);
             ItemHandler.initialize_child_items(p0, c.items);
-            ItemHandler.initialize_java_object_attributes(p0);
             
         } else {
             
@@ -192,7 +207,6 @@ class ItemHandler {
         // Finalize elements with category.
         if (c != null) {
             
-            ItemHandler.finalize_java_object_attributes(p0);
             ItemHandler.finalize_child_items(p0, c.items);
             ItemHandler.finalize_java_object(p0, c.java_object);
             
@@ -296,6 +310,7 @@ class ItemHandler {
 
                 java.lang.Object c = MapHandler.get_map_element(o.items, CategoryHandler.CATEGORY);
                 i.java_object = JavaObjectHandler.create_java_object(c);
+                JavaObjectHandler.initialize_java_object_attributes(i.java_object, o.items);
     
             } else {
                 
@@ -315,48 +330,6 @@ class ItemHandler {
      * @param p1 the category java object
      */
     static void finalize_java_object(java.lang.Object p0, java.lang.Object p1) {
-    }
-
-    //
-    // Java object attributes.
-    //
-
-    /**
-     * Initializes the java object attributes.
-     *
-     * @param p0 the item
-     */
-    static void initialize_java_object_attributes(java.lang.Object p0) throws java.lang.Exception {
-
-        Item i = (Item) p0;
-        
-        if (i != null) {
-                
-            JavaObjectHandler.initialize_java_object_attributes(i.java_object, i.items);
-
-        } else {
-            
-            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize java object attributes. The item is null.");
-        }
-    }
-
-    /**
-     * Finalizes the java object attributes.
-     *
-     * @param p0 the item
-     */
-    static void finalize_java_object_attributes(java.lang.Object p0) {
-
-        Item i = (Item) p0;
-        
-        if (i != null) {
-                
-            JavaObjectHandler.finalize_java_object_attributes(i.java_object, i.items);
-
-        } else {
-            
-            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize java object attributes. The item is null.");
-        }
     }
 
     //
@@ -451,7 +424,7 @@ class ItemHandler {
 
             // Java object.
             java.lang.Object java_object_item = MapHandler.get_map_element(i.items, name);
-            java.lang.Object java_object_position = MapHandler.get_map_element(i.positions, name);
+            java.lang.Object java_object_position = MapHandler.get_map_element(i.interactions, name);
             
             if (java_object_item != null) {
                 
