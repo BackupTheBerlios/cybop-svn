@@ -1,7 +1,7 @@
 /*
  * $RCSfile: model_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -33,10 +33,13 @@
 /**
  * This is the model handler.
  *
- * It contains functions which are used by both, the statics and the
- * dynamics model handler.
+ * It handles models which represent statics or dynamics.
  *
- * @version $Revision: 1.7 $ $Date: 2004-02-28 20:04:35 $ $Author: christian $
+ * Model elements are accessed over their index or name.
+ * They can also be accessed hierarchically, using a dot-separated name like:
+ * "system.frame.menu_bar.exit_menu_item.action"
+ *
+ * @version $Revision: 1.8 $ $Date: 2004-02-29 12:51:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,27 +74,27 @@ static const char* COMMA_SEPARATOR = ",";
  * @return the part name
  */
 void* get_part_name(void* p0, void* p1) {
-    
+
     void* p = (void*) 0;
     char* n = (char*) p0;
-    
+
     if (n != (void*) 0) {
-        
+
 /*??
         int i = n->indexOf(p1);
-        
+
         if (i != -1) {
-            
+
             p = n->substring(0, i);
-        
+
         } else {
-        
+
             p = n;
         }
 */
-        
+
     } else {
-        
+
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get part name. The hierarchical model name is null.");
     }
 
@@ -111,24 +114,213 @@ void* get_remaining_name(void* p0, void* p1) {
 
     void* r = (void*) 0;
     char* n = (char*) p0;
-    
+
     if (n != (void*) 0) {
-        
+
 /*??
         int i = n->indexOf(p1);
-        
+
         if (i != -1) {
 
             r = n->substring(i + 1);
         }
 */
-        
+
     } else {
-        
+
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical model name is null.");
     }
 
     return r;
+}
+
+//
+// Model part.
+//
+
+/**
+ * Sets the model part.
+ *
+ * @param p0 the model
+ * @param p1 the hierarchical model name
+ * @param p2 the part abstraction
+ * @param p3 the part location
+ * @param p4 the part model
+ * @param p5 the position abstraction
+ * @param p6 the position location
+ * @param p7 the position model
+ * @param p8 the constraint abstraction
+ * @param p9 the constraint location
+ * @param p10 the constraint model
+ */
+void set_model_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+
+    struct model* m = (struct model*) p0;
+
+    if (m != (void*) 0) {
+
+        log_message((void*) &INFO_LOG_LEVEL, "Set model part: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
+
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
+
+        if (r != (void*) 0) {
+
+            // The given model contains compound models.
+            void* part = get_map_element_with_name(m->part_models, n);
+
+            // Continue to process along the hierarchical name.
+            set_model_part(part, r, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+
+        } else {
+
+            // The given model contains primitive models.
+            set_map_element_with_name(m->part_abstractions, n, p2);
+            set_map_element_with_name(m->part_locations, n, p3);
+            set_map_element_with_name(m->part_models, n, p4);
+            set_map_element_with_name(m->position_abstractions, n, p5);
+            set_map_element_with_name(m->position_locations, n, p6);
+            set_map_element_with_name(m->position_models, n, p7);
+            set_map_element_with_name(m->constraint_abstractions, n, p8);
+            set_map_element_with_name(m->constraint_locations, n, p9);
+            set_map_element_with_name(m->constraint_models, n, p10);
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part. The model is null.");
+    }
+}
+
+/**
+ * Removes the model part.
+ *
+ * @param p0 the model
+ * @param p1 the hierarchical model name
+ */
+void remove_model_part(void* p0, void* p1) {
+
+    struct model* m = (struct model*) p0;
+
+    if (m != (void*) 0) {
+
+        log_message((void*) &INFO_LOG_LEVEL, "Remove model part: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
+
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
+
+        if (r != (void*) 0) {
+
+            // The given model contains compound models.
+            void* part = get_map_element_with_name(m->parts, n);
+
+            // Continue to process along the hierarchical name.
+            remove_statics_model_part(part, r);
+
+        } else {
+
+            // The given model contains primitive models.
+            remove_map_element_with_name(m->part_abstractions, n);
+            remove_map_element_with_name(m->part_locations, n);
+            remove_map_element_with_name(m->part_models, n);
+            remove_map_element_with_name(m->position_abstractions, n);
+            remove_map_element_with_name(m->position_locations, n);
+            remove_map_element_with_name(m->position_models, n);
+            remove_map_element_with_name(m->constraint_abstractions, n);
+            remove_map_element_with_name(m->constraint_locations, n);
+            remove_map_element_with_name(m->constraint_models, n);
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part. The model is null.");
+    }
+}
+
+/**
+ * Returns the model part.
+ *
+ * @param p0 the model
+ * @param p1 the hierarchical model name
+ * @return the part
+ */
+void* get_model_part(void* p0, void* p1) {
+
+    void* p = (void*) 0;
+    struct model* m = (struct model*) p0;
+
+    if (m != (void*) 0) {
+
+        log_message((void*) &INFO_LOG_LEVEL, "Get model part: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
+
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
+
+        if (r != (void*) 0) {
+
+            // The given model contains compound models.
+            void* part = get_map_element_with_name(m->parts, n);
+
+            // Continue to process along the hierarchical name.
+            p = get_statics_model_part(part, r);
+
+        } else {
+
+            // The given model contains primitive models.
+            p = get_map_element_with_name(m->part_models, n);
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part. The model is null.");
+    }
+
+    return p;
+}
+
+/**
+ * Returns the model part position.
+ *
+ * @param p0 the model
+ * @param p1 the hierarchical model name
+ * @return the part position
+ */
+void* get_model_part_position(void* p0, void* p1) {
+
+    void* p = (void*) 0;
+    struct model* m = (struct model*) p0;
+
+    if (m != (void*) 0) {
+
+        log_message((void*) &INFO_LOG_LEVEL, "Get model part position: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
+
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
+
+        if (r != (void*) 0) {
+
+            // The given model contains compound models.
+            void* part = get_map_element_with_name(m->parts, n);
+
+            // Continue to process along the hierarchical name.
+            p = get_statics_model_part(part, r);
+
+        } else {
+
+            // The given model contains primitive models.
+            p = get_map_element_with_name(m->position_models, n);
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part position. The model is null.");
+    }
+
+    return p;
 }
 
 /* MODEL_HANDLER_SOURCE */

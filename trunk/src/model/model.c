@@ -39,7 +39,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.1 $ $Date: 2004-02-28 19:43:30 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-02-29 12:51:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct model {
@@ -47,17 +47,26 @@ struct model {
     /** The part abstractions. */
     void* part_abstractions;
 
+    /** The part locations. */
+    void* part_locations;
+
     /** The part models. */
     void* part_models;
 
     /** The position abstractions. */
     void* position_abstractions;
 
+    /** The position locations. */
+    void* position_locations;
+
     /** The position models. */
     void* position_models;
 
     /** The constraint abstractions. */
     void* constraint_abstractions;
+
+    /** The constraint locations. */
+    void* constraint_locations;
 
     /** The constraint models. */
     void* constraint_models;

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: dynamics_models.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,13 +22,13 @@
  * - Cybernetics Oriented Programming -
  */
 
-#ifndef DYNAMICS_SOURCE
-#define DYNAMICS_SOURCE
+#ifndef DYNAMICS_MODELS_SOURCE
+#define DYNAMICS_MODELS_SOURCE
 
 /**
- * This is the dynamics.
+ * This is the dynamics models.
  *
- * It defines constants for dynamic operations.
+ * It defines constants for dynamic models.
  *
  * Some knowledge about function pointers in the C programming language
  * is needed. See for instance the (German) tutorials:
@@ -37,16 +37,9 @@
  * http://home.arcor.de/cpp_kurs/cpp/le07/k2_09_d1.htm
  * ... or try a Google search.
  *
- * @version $Revision: 1.1 $ $Date: 2004-02-28 20:04:35 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-02-29 12:51:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-
-//
-// Compound model.
-//
-
-/** The dynamics compound. */
-static const char* DYNAMICS_COMPOUND = "compound";
 
 //
 // Logics models.
@@ -498,6 +491,5 @@ static java.lang.String CATEGORY = "invokeinterface_noguess"; // +- 226
 static java.lang.String CATEGORY = "invokevirtual_quick_optimised";
 */
 
-/* DYNAMICS_SOURCE */
+/* DYNAMICS_MODELS_SOURCE */
 #endif
-
