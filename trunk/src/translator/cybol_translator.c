@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-01-28 23:30:53 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-03-02 07:27:19 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,6 +60,13 @@
  */
 void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8);
+void set_compound_element_by_name(void* p0, void* p1, void* p2,
+    const void* p3, const void* p4, const void* p5,
+    const void* p6, const void* p7, const void* p8,
+    const void* p9, const void* p10, const void* p11,
+    const void* p12, const void* p13, const void* p14);
+
+
 
 //
 // Cybol property.
