@@ -30,7 +30,7 @@ package cybop.core.category;
  * A category classifies items with common properties into one group.
  * The category can be named using the corresponding name attribute.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-20 11:32:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Category extends Array {
@@ -101,6 +101,8 @@ public class Category extends Array {
      */
     public void abstracc() throws Exception {
 
+        super.abstracc();
+
         setName(createName());
     }
 
@@ -112,6 +114,8 @@ public class Category extends Array {
         Array name = getName();
         setName(null);
         destroyName(name);
+
+        super.deabstract();
     }
 
     //

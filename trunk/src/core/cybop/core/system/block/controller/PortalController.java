@@ -35,7 +35,7 @@ import cybop.core.system.region.controller.translator.*;
 /**
  * This class represents a portal controller.
  *
- * @version $Revision: 1.11 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalController extends Controller {
@@ -55,33 +55,13 @@ public class PortalController extends Controller {
     }
 
     /**
-     * Returns the default knowledge model category.
+     * Returns the default system display category.
      *
-     * @return the default knowledge model category
+     * @return the default system display category
      */
-    public Item getDefaultKnowledgeModelCategory() {
-
-        return null;
-    }
-
-    /**
-     * Returns the default display category.
-     *
-     * @return the default display category
-     */
-    public Item getDefaultDisplayCategory() {
+    public Item getDefaultSystemDisplayCategory() {
 
         return new String("cybop.core.screen.model.frame.PortalDisplay");
-    }
-
-    /**
-     * Returns the default mouse model category.
-     *
-     * @return the default mouse model category
-     */
-    public Item getDefaultMouseModelCategory() {
-
-        return new String("cybop.core.mouse.MouseModel");
     }
 
     /**
@@ -102,6 +82,26 @@ public class PortalController extends Controller {
     public Item getDefaultSystemInformationDisplayTranslatorCategory() {
 
         return new String("cybop.core.system.region.controller.translator.SystemInformationDisplayTranslator");
+    }
+
+    /**
+     * Returns the default mouse model category.
+     *
+     * @return the default mouse model category
+     */
+    public Item getDefaultMouseModelCategory() {
+
+        return new String("cybop.core.mouse.MouseModel");
+    }
+
+    /**
+     * Returns the default knowledge model category.
+     *
+     * @return the default knowledge model category
+     */
+    public Item getDefaultKnowledgeModelCategory() {
+
+        return null;
     }
 }
 

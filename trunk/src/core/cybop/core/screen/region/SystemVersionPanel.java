@@ -33,10 +33,10 @@ import cybop.core.screen.component.*;
 /**
  * This class represents a system version panel.
  *
- * @version $Revision: 1.7 $ $Date: 2003-06-18 11:54:34 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class SystemVersionPanel extends DisplayRegion {
+public class SystemVersionPanel extends Panel {
 
     //
     // Children names.

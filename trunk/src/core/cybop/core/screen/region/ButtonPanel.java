@@ -33,10 +33,10 @@ import cybop.core.screen.component.button.*;
 /**
  * This class represents a button panel.
  *
- * @version $Revision: 1.6 $ $Date: 2003-06-18 11:54:34 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class ButtonPanel extends DisplayRegion {
+public class ButtonPanel extends Panel {
 
     //
     // Children names.

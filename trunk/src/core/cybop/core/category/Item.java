@@ -83,7 +83,7 @@ import cybop.core.model.String;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.13 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-06-20 11:32:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends Behaviour {
@@ -153,21 +153,21 @@ public class Item extends Behaviour {
      *
      * @return the size
      */
-    public int getSize() throws Exception {
+    public int getChildrenSize() throws Exception {
 
-        int size = 0;
+        int s = 0;
         Map c = getChildren();
 
         if (c != null) {
 
-            size = c.getSize();
+            s = c.getSize();
 
         } else {
 
             throw new Exception("Could not get size. The children is null.");
         }
 
-        return size;
+        return s;
     }
 
     //
@@ -313,16 +313,16 @@ public class Item extends Behaviour {
     /**
      * Removes the child.
      *
-     * @param n the name
+     * @param i the index
      * @exception Exception if the children is null
      */
-    public void removeChild(Array n) throws Exception {
+    public void removeChild(int i) throws Exception {
 
         Map m = getChildren();
 
         if (m != null) {
 
-            m.remove(n);
+            m.remove(i);
 
 /*??
             // The child must sometimes know its own name, just like people in real life.
@@ -339,6 +339,50 @@ public class Item extends Behaviour {
 
             throw new Exception("Could not remove child. The children is null.");
         }
+    }
+
+    /**
+     * Removes the child.
+     *
+     * @param n the name
+     * @exception Exception if the children is null
+     */
+    public void removeChild(Array n) throws Exception {
+
+        Map m = getChildren();
+
+        if (m != null) {
+
+            m.remove(n);
+
+        } else {
+
+            throw new Exception("Could not remove child. The children is null.");
+        }
+    }
+
+    /**
+     * Returns the child with the index.
+     *
+     * @param i the index
+     * @return the child
+     * @exception Exception if the children is null
+     */
+    public Item getChild(int i) throws Exception {
+
+        Item c = null;
+        Map m = getChildren();
+
+        if (m != null) {
+
+            c = (Item) m.get(i);
+
+        } else {
+
+            throw new Exception("Could not get child. The children is null.");
+        }
+
+        return c;
     }
 
     /**

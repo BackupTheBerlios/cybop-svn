@@ -28,13 +28,13 @@ import cybop.core.model.String;
 import cybop.core.screen.model.*;
 
 /**
- * This class represents a portal model.
+ * This class represents a portal display.
  *
  * It is based on a split pane containing a tree menu on the left.
  * The tree offers a hierarchy of categories with available system modules.
  * On the right side of the splitter, there is a container for child system views.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalDisplay extends FrameDisplay {

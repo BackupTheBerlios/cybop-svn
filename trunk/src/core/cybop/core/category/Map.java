@@ -33,7 +33,7 @@ package cybop.core.category;
  * the index of the wanted element -- and then returning the corresponding
  * reference.
  *
- * @version $Revision: 1.10 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-06-20 11:32:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Map {
@@ -197,11 +197,6 @@ public class Map {
 
             int i = getNextIndex(n);
 
-            if (i == -1) {
-
-                i = names.getSize();
-            }
-
             names.set(i, n);
             refs.set(i, e);
 
@@ -212,18 +207,16 @@ public class Map {
     }
 
     /**
-     * Removes the element with the name.
+     * Removes the element with the index.
      *
-     * @param n the name
+     * @param i the index
      * @exception Exception if the references is null
      */
-    public void remove(Array n) throws Exception {
+    public void remove(int i) throws Exception {
 
         Array refs = getReferences();
 
         if (refs != null) {
-
-            int i = getIndex(n);
 
             if (i > -1) {
 
@@ -235,6 +228,19 @@ public class Map {
 
             throw new Exception("Could not remove element. The references is null.");
         }
+    }
+
+    /**
+     * Removes the element with the name.
+     *
+     * @param n the name
+     * @exception Exception if the references is null
+     */
+    public void remove(Array n) throws Exception {
+    
+        int i = getIndex(n);
+    
+        remove(i);
     }
 
     /**
@@ -251,10 +257,7 @@ public class Map {
 
         if (refs != null) {
 
-            if (i > -1) {
-
-                e = refs.get(i);
-            }
+            e = refs.get(i);
 
         } else {
 
@@ -328,7 +331,14 @@ public class Map {
     }
 
     /**
-     * Returns the next index.
+     * Returns the next index that can be used to set an element.
+     *
+     * If an element with the given name is found, then its index will be returned
+     * so that the element can be replaced.
+     * If a null element is reached, then the corresponding index marks the next
+     * available place and will be returned.
+     * If neither an element matches nor a null element is reached, then the
+     * map is full and its size will be returned as next available index.
      *
      * @param n the name
      * @return the next index
@@ -368,6 +378,13 @@ public class Map {
                 }
 
                 i++;
+            }
+
+            // Neither element matched, nor was a null element found.
+            // The map is full and such its size will be the next index to be used.
+            if (index == -1) {
+
+                index = names.getSize();
             }
 
         } else {

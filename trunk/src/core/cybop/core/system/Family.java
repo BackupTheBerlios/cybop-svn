@@ -50,7 +50,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.22 $ $Date: 2003-06-19 19:41:21 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -232,11 +232,11 @@ public class Family extends System {
         super.categorize();
 
         setCategory(Family.AVAILABLE_SYSTEMS, getDefaultAvailableSystemsCategory());
-        setCategory(Family.SYSTEMS_COUNT, getDefaultAvailableSystemsCategory());
-        setCategory(Family.SYSTEM, getDefaultAvailableSystemsCategory());
-        setCategory(Family.EXTERNAL_SYSTEMS_COUNT, getDefaultAvailableSystemsCategory());
-        setCategory(Family.EXTERNAL_SYSTEM_COMMAND, getDefaultAvailableSystemsCategory());
-        setCategory(Family.EXTERNAL_SYSTEM, getDefaultAvailableSystemsCategory());
+        setCategory(Family.SYSTEMS_COUNT, getDefaultSystemsCountCategory());
+        setCategory(Family.SYSTEM, getDefaultSystemCategory());
+        setCategory(Family.EXTERNAL_SYSTEMS_COUNT, getDefaultExternalSystemsCountCategory());
+        setCategory(Family.EXTERNAL_SYSTEM_COMMAND, getDefaultExternalSystemCommandCategory());
+        setCategory(Family.EXTERNAL_SYSTEM, getDefaultExternalSystemCategory());
     }
 
     /**

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: PortalPanel.java,v $
+ * $RCSfile: Panel.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -28,22 +28,36 @@ import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
 import cybop.core.screen.*;
-import cybop.core.screen.region.splitpane.*;
+import cybop.core.screen.component.*;
 
 /**
- * This class represents a portal contents panel.
+ * This class represents a screen region.
  *
- * @version $Revision: 1.8 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class PortalPanel extends Panel {
+public class Panel extends DisplayRegion {
 
     //
     // Children names.
     //
 
-    /** The portal split pane. */
-    public static final String PORTAL_SPLIT_PANE = new String("portal_split_pane");
+    /** The layout. */
+    public static final String LAYOUT = new String("layout");
+
+    //
+    // Encapsulated java swing panel.
+    //
+    
+    /**
+     * Creates an encapsulated java swing panel.
+     *
+     * @return the encapsulated java swing panel
+     */
+    public java.lang.Object createJavaObject() throws Exception {
+        
+        return new javax.swing.JPanel();
+    }
 
     //
     // Child management.
@@ -62,9 +76,9 @@ public class PortalPanel extends Panel {
 
         if (n != null) {
 
-            if (n.isEqualTo(PortalPanel.PORTAL_SPLIT_PANE)) {
+            if (n.isEqualTo(Panel.LAYOUT)) {
 
-                setPortalSplitPane((PortalSplitPane) i);
+                setLayout((Layout) i);
             }
 
         } else {
@@ -83,115 +97,139 @@ public class PortalPanel extends Panel {
 
         if (n != null) {
 
-            if (n.isEqualTo(PortalPanel.PORTAL_SPLIT_PANE)) {
-
-                removePortalSplitPane((PortalSplitPane) getChild(n));
+            if (n.isEqualTo(Panel.LAYOUT)) {
+                
+                removeLayout((Layout) getChild(n));
             }
 
         } else {
 
             throw new Exception("Could not set item. The name is null.");
         }
-        
+
         super.removeChild(n);
     }
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default portal split pane.
+     * Returns the default layout category.
      *
-     * @return the default portal split pane
+     * @return the default layout category
      */
-    public String getDefaultPortalSplitPane() {
+    public String getDefaultLayoutCategory() {
 
-        return new String("cybop.core.screen.region.splitpane.PortalSplitPane");
+        return new String("cybop.core.screen.component.Layout");
     }
 
     //
-    // Portal split pane.
+    // Layout.
     //
 
     /**
-     * Sets the portal split pane.
+     * Sets the layout.
      *
-     * @param sp the portal split pane
+     * @param l the layout
      * @exception Exception if the java panel is null
-     * @exception Exception if the portal split pane is null
+     * @exception Exception if the layout is null
      */
-    public void setPortalSplitPane(PortalSplitPane sp) throws Exception {
+    public void setLayout(Layout l) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
         if (p != null) {
 
-            if (sp != null) {
+            if (l != null) {
 
-                p.add((javax.swing.JSplitPane) sp.getJavaObject(), java.awt.BorderLayout.CENTER);
+                p.setLayout((java.awt.LayoutManager) l.getJavaObject());
 
             } else {
     
-                throw new Exception("Could not set portal split pane. The portal split pane is null.");
+                throw new Exception("Could not set layout. The layout is null.");
             }
 
         } else {
 
-            throw new Exception("Could not set portal split pane. The java panel is null.");
+            throw new Exception("Could not set layout. The java panel is null.");
         }
     }
 
     /**
-     * Removes the portal split pane.
+     * Removes the layout.
      *
-     * @param sp the portal split pane
+     * @param l the layout
      * @exception Exception if the java panel is null
-     * @exception Exception if the portal split pane is null
+     * @exception Exception if the layout is null
      */
-    public void removePortalSplitPane(PortalSplitPane sp) throws Exception {
+    public void removeLayout(Layout l) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
         if (p != null) {
 
-            if (sp != null) {
+            if (l != null) {
 
-                p.remove((javax.swing.JSplitPane) sp.getJavaObject());
+                p.setLayout(null);
 
             } else {
-    
-                throw new Exception("Could not remove portal split pane. The portal split pane is null.");
+
+                throw new Exception("Could not remove layout. The layout is null.");
             }
 
         } else {
 
-            throw new Exception("Could not remove portal split pane. The java panel is null.");
+            throw new Exception("Could not remove layout. The java panel is null.");
         }
     }
 
     //
-    // Initializable.
+    // Categorization.
     //
 
     /**
-     * Initializes this portal contents panel.
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(Panel.LAYOUT, getDefaultLayoutCategory());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(Panel.LAYOUT);
+
+        super.decategorize();
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
         super.initialize();
 
-        setChild(PortalPanel.PORTAL_SPLIT_PANE, createChild(getDefaultPortalSplitPane()));
+        setChild(Panel.LAYOUT, createChild(getCategory(Panel.LAYOUT)));
     }
 
     /**
-     * Finalizes this portal contents panel.
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
-        PortalSplitPane portalSplitPane = (PortalSplitPane) getChild(PortalPanel.PORTAL_SPLIT_PANE);
-        removeChild(PortalPanel.PORTAL_SPLIT_PANE);
-        destroyChild(portalSplitPane);
+        Item layout = getChild(Panel.LAYOUT);
+        removeChild(Panel.LAYOUT);
+        destroyChild(layout);
 
         super.finalizz();
     }

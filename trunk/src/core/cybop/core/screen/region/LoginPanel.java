@@ -31,9 +31,9 @@ import cybop.core.screen.*;
 /**
  * This class represents a login panel.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class LoginPanel extends DisplayRegion {
+public class LoginPanel extends Panel {
 }
 

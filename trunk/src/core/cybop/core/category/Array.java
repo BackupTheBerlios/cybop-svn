@@ -34,7 +34,7 @@ package cybop.core.category;
  * In the case of computer science, everything gets abstracted to 0 and 1.
  * But that also means that every abstraction has a bytecode representation.
  *
- * @version $Revision: 1.9 $ $Date: 2003-06-19 16:20:03 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-06-20 11:32:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Array {
@@ -250,7 +250,10 @@ public class Array {
 
         if (a != null) {
 
-            e = a[i];
+//??            if (i > -1) {
+
+                e = a[i];
+//??            }
 
         } else {
 
@@ -428,7 +431,7 @@ public class Array {
                 // Also, array should not know about Signal because this
                 // breaks the dependency between the framework's layers.
                 //
-                if ((a.getJavaTreeNode() != null) && ((a instanceof cybop.core.signal.Signal) == false)) {
+                if ((a.getJavaTreeNode() != null) && (a.getJavaTreeNode().isNodeAncestor(tn))) {
 
                     tn.add(a.getJavaTreeNode());
                 }
@@ -470,13 +473,13 @@ public class Array {
                 // Alternative:
                 // if (tn.isNodeChild(a.getJavaTreeNode())) {
                 //
-                if ((a.getJavaTreeNode() != null) && ((a instanceof cybop.core.signal.Signal) == false)) {
+                if ((a.getJavaTreeNode() != null) && (a.getJavaTreeNode().isNodeAncestor(tn))) {
 
                     tn.remove(a.getJavaTreeNode());
                 }
 
             } else {
-    
+
                 java.lang.System.out.println("DEBUG: Could not remove java tree node. The array is null.");
             }
 

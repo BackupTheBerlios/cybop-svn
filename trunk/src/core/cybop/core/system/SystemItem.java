@@ -37,7 +37,7 @@ import cybop.core.system.chain.*;
  * A system item has special properties like configuration or log record and
  * is able to create and send signals.
  *
- * @version $Revision: 1.11 $ $Date: 2003-06-19 19:41:21 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemItem extends Item {
@@ -94,8 +94,13 @@ public class SystemItem extends Item {
 
         if (i != null) {
 
-            java.lang.System.out.println("INFO: Connect child to signal memory.");
-            i.setChild(SystemItem.SIGNAL_MEMORY, getChild(SystemItem.SIGNAL_MEMORY));
+            // It is bad programming style to use instanceof.
+            // This is only temporary to ease coding until switching to new language.
+            if (i instanceof SystemItem) {
+
+                java.lang.System.out.println("INFO: Connect child to signal memory.");
+                i.setChild(SystemItem.SIGNAL_MEMORY, getChild(SystemItem.SIGNAL_MEMORY));
+            }
         }
 
         return i;
@@ -111,8 +116,13 @@ public class SystemItem extends Item {
 
         if (i != null) {
 
-            java.lang.System.out.println("INFO: Disconnect child from signal memory.");
-            i.removeChild(SystemItem.SIGNAL_MEMORY);
+            // It is bad programming style to use instanceof.
+            // This is only temporary to ease coding until switching to new language.
+            if (i instanceof SystemItem) {
+
+                java.lang.System.out.println("INFO: Disconnect child from signal memory.");
+                i.removeChild(SystemItem.SIGNAL_MEMORY);
+            }
         }
 
         super.destroyChild(i);
@@ -142,26 +152,6 @@ public class SystemItem extends Item {
         removeCategory(SystemItem.SIGNAL_MEMORY);
 
         super.decategorize();
-    }
-
-    //
-    // Initialization.
-    //
-
-    /**
-     * Initializes this item.
-     */
-    public void initialize() throws Exception {
-
-        super.initialize();
-    }
-
-    /**
-     * Finalizes this item.
-     */
-    public void finalizz() throws Exception {
-
-        super.finalizz();
     }
 
     //
@@ -210,53 +200,47 @@ public class SystemItem extends Item {
 
         if (mem != null) {
 
-            Map c = mem.getChildren();
+            int i = 0;
+            int size = mem.getChildrenSize();
+            Signal child = null;
+            Integer priority = null;
+            Integer max = new Integer(0);
+            int index = -1;
 
-            if (c != null) {
+            while (i < size) {
 
-                int index = 0;
-                int size = mem.getSize();
-                Signal child = null;
-                Integer priority = null;
-                Integer max = new Integer(0);
+                child = (Signal) mem.getChild(i);
 
-                while (index < size) {
+                if (child != null) {
 
-                    child = (Signal) c.get(index);
+                    priority = (Integer) child.getChild(Signal.PRIORITY);
 
-                    if (child != null) {
-    
-                        priority = (Integer) child.getChild(Signal.PRIORITY);
-    
-                        if (priority != null) {
-    
-                            if (priority.isGreaterThan(max)) {
-    
-                                max = priority;
-                                s = child;
-                            }
+                    if (priority != null) {
 
-                        } else {
-    
-                            throw new Exception("Could not fetch signal. The priority is null.");
+                        if (priority.isGreaterThan(max)) {
+
+                            max = priority;
+                            s = child;
+                            index = i;
                         }
-    
+
                     } else {
-    
-                        throw new Exception("Could not fetch signal. A child is null.");
+
+                        throw new Exception("Could not fetch signal. The priority is null.");
                     }
-    
-                    index++;
+
+                } else {
+
+                    break;
                 }
 
-                if (s != null) {
+                i++;
+            }
 
-                    mem.removeChild(s.getName());
-                }
+            // If a signal was found, then remove it from the memory.
+            if (index > -1) {
 
-            } else {
-
-                throw new Exception("Could not fetch signal. The children map is null.");
+                mem.removeChild(index);
             }
 
         } else {

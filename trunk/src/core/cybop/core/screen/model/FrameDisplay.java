@@ -35,7 +35,7 @@ import cybop.core.screen.region.*;
 /**
  * This class represents a frame model.
  *
- * @version $Revision: 1.8 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class FrameDisplay extends Display {
@@ -338,7 +338,7 @@ public class FrameDisplay extends Display {
      */
     public Item getDefaultContentsPanelCategory() {
 
-        return new String("cybop.core.screen.DisplayRegion");
+        return new String("cybop.core.screen.region.Panel");
     }
 
     /**

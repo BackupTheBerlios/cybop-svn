@@ -25,9 +25,9 @@
 package cybop.core.screen;
 
 /**
- * This class represents a screen model.
+ * This class represents a display.
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Display extends DisplayItem {

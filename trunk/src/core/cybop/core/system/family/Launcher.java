@@ -70,7 +70,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.33 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
+ * @version $Revision: 1.34 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -157,6 +157,10 @@ public class Launcher extends Family {
                 java.lang.System.out.println("INFO: Abstract child to get an abstraction.");
                 l.abstracc();
 
+                // Set meta attributes for child.
+                // DO NOT use the normal method setChild(name, item);
+                // This would lead to an endless loop since for example
+                // setChild(Item.NAME, n); would cause to be called repeatedly!
                 java.lang.System.out.println("INFO: Name child to get a category.");
                 l.name(new String("launcher"));
 
@@ -181,12 +185,6 @@ public class Launcher extends Family {
                 java.lang.System.out.println("INFO: Initialize child to get an item.");
                 l.initialize();
 
-                // Set meta attributes for child.
-                // DO NOT use the normal method setChild(name, item);
-                // This would lead to an endless loop since for example
-                // setChild(Item.NAME, n); would cause to be called repeatedly!
-//??                l.setName(n);
-
                 l.launch();
 
                 // The system is now started up and complete so that a loop
@@ -194,8 +192,6 @@ public class Launcher extends Family {
                 l.await();
                 // The loop above is left as soon as the shutdown flag is set
                 // so that the system can be shut down now.
-
-//??                l.setName(null);
 
                 java.lang.System.out.println("INFO: Finalize child.");
                 l.finalizz();
@@ -710,7 +706,7 @@ public class Launcher extends Family {
      */
     public void launch() throws Exception {
 
-        Signal s = (Signal) createChild(getDefaultSignalCategory());
+        Signal s = (Signal) createChild(getCategory(Launcher.SIGNAL));
 
         if (s != null) {
 
@@ -743,7 +739,7 @@ public class Launcher extends Family {
      */
     public void await() throws Exception {
 
-        Signal s = (Signal) createChild((String) getDefaultSignalCategory());
+        Signal s = (Signal) createChild(getCategory(Launcher.SIGNAL));
         //?? Temporary for handling signals which stem from java event queue.
         Signal queued = null;
         Boolean b = null;
@@ -998,7 +994,7 @@ public class Launcher extends Family {
                 if (a.isEqualTo(Launcher.STARTUP_SYSTEM_ACTION)) {
 
                     java.lang.System.out.println("INFO: Startup system.");
-                    startupSystem((String) getCategory(Launcher.SYSTEM));
+                    startupSystem(getCategory(Launcher.SYSTEM));
 
                 } else if (a.isEqualTo(Launcher.SHUTDOWN_SYSTEM_ACTION)) {
 
@@ -1050,12 +1046,12 @@ public class Launcher extends Family {
      * @param sys the system category
      * @exception Exception if the signal is null
      */
-    public void startupSystem(String sys) throws Exception {
+    public void startupSystem(Array sys) throws Exception {
 
         setupJavaEventHandling();
-        setSystem(Launcher.SYSTEM, createChild(sys));
+        setSystem(Launcher.SYSTEM, createChild((String) sys));
 
-        Signal s = (Signal) createChild(getDefaultSignalCategory());
+        Signal s = (Signal) createChild(getCategory(Launcher.SIGNAL));
 
         if (s != null) {
 
@@ -1148,7 +1144,7 @@ public class Launcher extends Family {
      */
     public void shutdownSystemAcrossSocket() throws Exception {
 
-        Signal s = (Signal) createChild((String) getDefaultSignalCategory());
+        Signal s = (Signal) createChild(getCategory(Launcher.SIGNAL));
 
         if (s != null) {
             
@@ -1706,7 +1702,7 @@ public class Launcher extends Family {
             // In this case it does NOT make sense to continue the signal handling.
             if (a != null) {
 
-                Signal s = (Signal) createChild((String) getDefaultSignalCategory());
+                Signal s = (Signal) createChild(getCategory(Launcher.SIGNAL));
 
                 // Check for changed flags on computer (currently done by operating system),
                 // e.g. to receive a keyboard or mouse event and then create a CYBOP signal of it.
