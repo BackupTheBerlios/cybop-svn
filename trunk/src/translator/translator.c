@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-03-02 07:27:58 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,7 @@
 #include "../logger/logger.c"
 #include "../translator/configuration_translator.c"
 #include "../translator/cybol_translator.c"
+#include "../translator/html_translator.c"
 
 /**
  * Decodes the document model according to the given document type
@@ -113,6 +114,56 @@ void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
         if (r == 1) {
 
             encode_configuration(p0, p1, p2, p3, p4);
+        }
+    }
+
+    //?? Later, additional formats besides cybol might be read,
+    //?? for example html, sxi, hdx.sf.net etc.
+}
+
+
+/**
+ * Encodes a cyboi model according to the given document type
+ * and creates a document model from it.
+ *
+ * @param dest the destination (Hand over as reference!)
+ * @param dest_count the destination count
+ * @param dest_size the destination size
+ * @param source_abstr the source abstraction
+ * @param source_abstr_count the source abstraction count
+ * @param source_model the source model
+ * @param source_model_count the source model count
+ * @param source_detail the source detail
+ * @param source_detail_count the source detail count
+ * @param type the type
+ * @param type_count the type count
+ * @param know the knowledege memeory
+ * @param know_count the knowledege memeory count
+ * @param know_size the knowledege memeory size
+ * 
+ */
+void encode_model( void** dest, int* dest_count, int* dest_size, 
+                   const void* source_abstr, const int* source_abstr_count,
+                   const void* source_model, const int* source_model_count,
+                   const void* source_detail, const int* source_detail_count,
+                   const void* type, const int* type_count,
+                   const void* know, const int* know_count) 
+{
+
+    // The comparison result.
+    int r = 0;
+
+    if (r != 1) {
+
+        compare_arrays(type, type_count, (void*) HTML_ABSTRACTION, (void*) HTML_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            encode_html( dest, dest_count, dest_size,
+                         source_abstr, source_abstr_count,
+                         source_model, source_model_count,
+                         source_detail, source_detail_count,
+                         know, know_count );
         }
     }
 
