@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.18 $ $Date: 2004-12-20 14:41:02 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-01-06 17:21:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -284,6 +284,7 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     create_integer((void*) &w);
     *w = 0;
 
+    compare_arrays(p5, p6, (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT, (void*) &w, (void*) &CHARACTER_ARRAY);
     compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &w, (void*) &CHARACTER_ARRAY);
     compare_arrays(p5, p6, (void*) &XML_ABSTRACTION, (void*) &XML_ABSTRACTION_COUNT, (void*) &w, (void*) &CHARACTER_ARRAY);
     compare_arrays(p5, p6, (void*) &HXP_ABSTRACTION, (void*) &HXP_ABSTRACTION_COUNT, (void*) &w, (void*) &CHARACTER_ARRAY);
@@ -391,7 +392,7 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source model
- * @param p4 the source model xy
+ * @param p4 the source model count
  * @param p5 the source abstraction
  * @param p6 the source abstraction count
  * @param p7 the source channel
@@ -400,15 +401,15 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
 void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8) {
 
-    // The primitive flag.
-    int* p = INTEGER_NULL_POINTER;
-    create_integer((void*) &p);
-    *p = 0;
+    // The comparison result.
+    int* r = INTEGER_NULL_POINTER;
+    create_integer((void*) &r);
+    *r = 0;
 
     // Check for primitive model.
-    check_primitive_model((void*) &p, p5, p6);
+    check_primitive_model((void*) &r, p5, p6);
 
-    if (*p == 1) {
+    if (*r == 1) {
 
         create_primitive_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
 
@@ -417,7 +418,7 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
         create_compound_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
     }
 
-    destroy_integer((void*) &p);
+    destroy_integer((void*) &r);
 }
 
 /**

@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.56 $ $Date: 2005-01-06 12:23:39 $ $Author: christian $
+ * @version $Revision: 1.57 $ $Date: 2005-01-06 17:21:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -109,19 +109,24 @@ int main(int p0, char** p1) {
 
             log_message_debug("Create internals memory.");
 
-            // The internals memory.
-            void* i = NULL_POINTER;
-            create_array((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT);
-
-            //
-            // Configuration parameters.
-            //
-
-            log_message_debug("Decode configuration.");
-
             // The configuration file name.
             void* c = NULL_POINTER;
             get_array_elements(p1, (void*) &POINTER_ARRAY, (void*) &CONFIGURATION_FILE_PARAMETER_INDEX, (void*) &c, (void*) &ONE_ELEMENT_COUNT);
+            cc = ??TODO: get_length(filename);
+
+            TODO:
+            - change in create_compound_model to create pointer array instead of compound for configuration!
+            - add configuration_abstraction constant
+            - rename internals or configuration?
+
+            // The internals memory.
+            void* i = NULL_POINTER;
+            create_model((void*) &i, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT,
+                (void*) &c, (void*) &cc,
+                (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT,
+                (void*) &FILE_CHANNEL, (void*) &FILE_CHANNEL_COUNT);
+
+            create_array((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT);
 
             // Read configuration file given at command line and
             // write parameters into the internals memory.
@@ -355,12 +360,8 @@ int main(int p0, char** p1) {
             destroy_integer((void*) &ks);
             destroy_integer((void*) &kc);
 
-            // CAUTION!
-            // Parameters of the internals memory MUST NOT be written to the
-            // configuration file which was given at command line!
-            // That CYBOI configuration file can only be edited MANUALLY.
-            // All parameters that were read from the configuration file and
-            // created at system startup HAVE TO BE destroyed here,
+            // CAUTION! All parameters that were read from the configuration file
+            // and created at system startup HAVE TO BE destroyed here,
             // BEFORE the actual internals memory gets destroyed!
             destroy_configuration_parameters((void*) &i, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT);
 

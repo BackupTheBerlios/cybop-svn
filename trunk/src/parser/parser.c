@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2004-12-20 14:41:02 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-01-06 17:21:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -180,6 +180,18 @@ void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
         if (*r == 1) {
 
             parse_time(p0, p1, p2, p3, p4);
+
+            d = 1;
+        }
+    }
+
+    if (d == 0) {
+
+        compare_arrays(p5, p6, (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (*r == 1) {
+
+            parse_xml(p0, p1, p2, p3, p4);
 
             d = 1;
         }
@@ -358,6 +370,14 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
             d = 1;
         }
     }
+
+    //
+    // CONFIGURATION_ABSTRACTION
+    //
+    // CAUTION! Parameters of the internals memory MUST NOT be written
+    // to the configuration file which was given at command line!
+    // The CYBOI configuration file can only be edited MANUALLY.
+    //
 
     //?? Later, distinguish file types according to abstraction,
     //?? for example xml, html, sxi, txt, rtf,

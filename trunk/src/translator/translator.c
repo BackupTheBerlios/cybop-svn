@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2004-12-20 21:05:15 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-01-06 17:21:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,13 +54,23 @@ void decode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     create_integer((void*) &r);
     *r = 0;
 
-    if (*r != 1) {
+    if (*r == 0) {
 
         compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
         if (*r == 1) {
 
             decode_cybol(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (*r == 0) {
+
+        compare_arrays(p5, p6, (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (*r == 1) {
+
+            decode_configuration(p0, p1, p2, p3, p4);
         }
     }
 
@@ -90,7 +100,7 @@ void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     create_integer((void*) &r);
     *r = 0;
 
-    if (*r != 1) {
+    if (*r == 0) {
 
         compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -99,6 +109,14 @@ void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
             encode_cybol(p0, p1, p2, p3, p4);
         }
     }
+
+    //
+    // CONFIGURATION_ABSTRACTION
+    //
+    // CAUTION! Parameters of the internals memory MUST NOT be written
+    // to the configuration file which was given at command line!
+    // The CYBOI configuration file can only be edited MANUALLY.
+    //
 
     //?? Later, additional formats besides cybol might be read,
     //?? for example html, sxi, hdx.sf.net etc.
