@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,12 +79,12 @@ void parse_time(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                 int y = 0;
 
                 // Set elements.
-                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &YEAR_INDEX, (void*) &y);
-                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MONTH_INDEX, (void*) &m);
-                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DAY_INDEX, (void*) &d);
-                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &HOUR_INDEX, (void*) &h);
-                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MINUTE_INDEX, (void*) &min);
-                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SECOND_INDEX, (void*) &s);
+                set_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &YEAR_INDEX, (void*) &y);
+                set_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &MONTH_INDEX, (void*) &m);
+                set_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &DAY_INDEX, (void*) &d);
+                set_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &HOUR_INDEX, (void*) &h);
+                set_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &MINUTE_INDEX, (void*) &min);
+                set_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &SECOND_INDEX, (void*) &s);
 */
 
             } else {
@@ -126,20 +126,20 @@ void serialize_time(void* p0, void* p1, void* p2, const void* p3, const void* p4
                 int y = 0;
 
                 // Get elements.
-                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SECOND_INDEX, (void*) &s);
-                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MINUTE_INDEX, (void*) &min);
-                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &HOUR_INDEX, (void*) &h);
-                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DAY_INDEX, (void*) &d);
-                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MONTH_INDEX, (void*) &m);
-                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &YEAR_INDEX, (void*) &y);
+                get_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &SECOND_INDEX, (void*) &s);
+                get_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &MINUTE_INDEX, (void*) &min);
+                get_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &HOUR_INDEX, (void*) &h);
+                get_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &DAY_INDEX, (void*) &d);
+                get_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &MONTH_INDEX, (void*) &m);
+                get_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &YEAR_INDEX, (void*) &y);
 
                 // Remove elements in descending order.
-                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &SECOND_INDEX);
-                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &MINUTE_INDEX);
-                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &HOUR_INDEX);
-                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &DAY_INDEX);
-                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &MONTH_INDEX);
-                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &YEAR_INDEX);
+                remove_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &SECOND_INDEX);
+                remove_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &MINUTE_INDEX);
+                remove_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &HOUR_INDEX);
+                remove_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &DAY_INDEX);
+                remove_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &MONTH_INDEX);
+                remove_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &YEAR_INDEX);
 
             //??    fprintf(p1, %d, &(m->value));
 */

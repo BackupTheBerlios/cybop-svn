@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.28 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -91,29 +91,48 @@ void test_pointer_cast() {
  */
 void test_character_array_single_element() {
 
-    // Character array.
-    fputs("Character array:\n", stdout);
+    fputs("Test character array:\n", stdout);
 
+    // The character array.
     void* ca = NULL_POINTER;
-    int cas = 5;
+    int* cas = INTEGER_NULL_POINTER;
+    create_integer((void*) &cas);
+    *cas = 5;
+
+    // Create character array.
     create_array((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &cas);
 
-    int ca1i = 0;
-    char ca1 = 'a';
-    int ca2i = 1;
-    char ca2 = 'b';
-    int ca3i = 2;
-    char ca3 = 'c';
-    int ca4i = 3;
-    char ca4 = '\n';
-    int ca5i = 4;
-    char ca5 = '\0';
+    int* ca1i = INTEGER_NULL_POINTER;
+    create_integer((void*) &ca1i);
+    *ca1i = 0;
 
-    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca1i, (void*) &ca1);
-    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca2i, (void*) &ca2);
-    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca3i, (void*) &ca3);
-    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca4i, (void*) &ca4);
-    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca5i, (void*) &ca5);
+    int* ca2i = INTEGER_NULL_POINTER;
+    create_integer((void*) &ca2i);
+    *ca2i = 1;
+
+    int* ca3i = INTEGER_NULL_POINTER;
+    create_integer((void*) &ca3i);
+    *ca3i = 2;
+
+    int* ca4i = INTEGER_NULL_POINTER;
+    create_integer((void*) &ca4i);
+    *ca4i = 3;
+
+    int* ca5i = INTEGER_NULL_POINTER;
+    create_integer((void*) &ca5i);
+    *ca5i = 4;
+
+    set_array_elements((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca1i, (void*) &LATIN_CAPITAL_LETTER_A_CHARACTER, (void*) &LATIN_CAPITAL_LETTER_A_CHARACTER_COUNT);
+    set_array_elements((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca2i, (void*) &LATIN_CAPITAL_LETTER_B_CHARACTER, (void*) &LATIN_CAPITAL_LETTER_B_CHARACTER_COUNT);
+    set_array_elements((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca3i, (void*) &LATIN_CAPITAL_LETTER_C_CHARACTER, (void*) &LATIN_CAPITAL_LETTER_C_CHARACTER_COUNT);
+    set_array_elements((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca4i, (void*) &LINE_FEED_CONTROL_CHARACTER, (void*) &LINE_FEED_CONTROL_CHARACTER_COUNT);
+    set_array_elements((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca5i, (void*) &NULL_CONTROL_CHARACTER, (void*) &NULL_CONTROL_CHARACTER_COUNT);
+
+    destroy_integer((void*) &ca5i);
+    destroy_integer((void*) &ca4i);
+    destroy_integer((void*) &ca3i);
+    destroy_integer((void*) &ca2i);
+    destroy_integer((void*) &ca1i);
 
     // Print out array contents.
     fputs((char*) ca, stdout);
@@ -123,7 +142,7 @@ void test_character_array_single_element() {
 
     while (1) {
 
-        if (i >= cas) {
+        if (i >= *cas) {
 
             break;
         }
@@ -134,55 +153,9 @@ void test_character_array_single_element() {
         i++;
     }
 
+    // Destroy character array.
     destroy_array((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &cas);
-
-    // Integer array.
-    fputs("Integer array:\n", stdout);
-
-    void* ia = NULL_POINTER;
-    int ias = 5 * INTEGER_PRIMITIVE_SIZE;
-    create_array((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ias);
-
-    int ia1i = 0 * INTEGER_PRIMITIVE_SIZE;
-    int ia1 = 9;
-    int ia2i = 1 * INTEGER_PRIMITIVE_SIZE;
-    int ia2 = 8;
-    int ia3i = 2 * INTEGER_PRIMITIVE_SIZE;
-    int ia3 = 7;
-    int ia4i = 3 * INTEGER_PRIMITIVE_SIZE;
-    int ia4 = 6;
-    int ia5i = 4 * INTEGER_PRIMITIVE_SIZE;
-    int ia5 = 5;
-
-    set_array_element((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ia1i, (void*) &ia1);
-    set_array_element((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ia2i, (void*) &ia2);
-    set_array_element((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ia3i, (void*) &ia3);
-    set_array_element((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ia4i, (void*) &ia4);
-    set_array_element((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ia5i, (void*) &ia5);
-
-    // Print out array contents.
-    int j = 0;
-    int* iatest = INTEGER_NULL_POINTER;
-
-    while (1) {
-
-        if (j * INTEGER_PRIMITIVE_SIZE >= ias) {
-
-            break;
-        }
-
-        iatest = (int*) (ia + j * INTEGER_PRIMITIVE_SIZE);
-        fprintf(stderr, "ia: %d\n", *iatest);
-
-        j++;
-    }
-
-    destroy_array((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ias);
-
-    //
-    // Caution! In any case consider the size of the type, for all array!
-    // Example: index * INTEGER_PRIMITIVE_SIZE
-    //
+    destroy_integer((void*) &cas);
 }
 
 /**
@@ -192,49 +165,78 @@ void test_character_array_multiple_elements() {
 
     // The destination array.
     void* d = NULL_POINTER;
-    int ds = 20;
+    int* ds = INTEGER_NULL_POINTER;
+    create_integer((void*) &ds);
+    *ds = 20;
+
+    // Create destination array.
     create_array((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &ds);
 
     // The constant source array and the pointer to it.
     char a[] = {'T', 'h', 'i', 's', ' ', 'i', 's', ' ', 'a', ' ', 't', 'e', 's', 't', '.', '\n', '\0'};
     char* s = a;
-    int ss = 17;
+    int ssa[] = {17};
+    int* ss = ssa;
 
     // The destination index to which to copy the source array.
-    int i = 0;
+    int* i = INTEGER_NULL_POINTER;
+    create_integer((void*) &i);
+    *i = 0;
 
     set_array_elements((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &s, (void*) &ss);
+
+    destroy_integer((void*) &i);
 
     fputs((char*) d, stdout);
 
     // The constant source array for overwriting and the pointer to it.
     char oa[] = {'o', 'v', 'e', 'r', 'w', 'r', 'i', 't', 't', 'e', 'n', '.', '\n', '\0'};
     char* os = oa;
-    int oss = 14;
+    int ossa[] = {14};
+    int* oss = ossa;
 
     // The destination index to which to copy the source array for overwriting.
-    int oi = 8;
+    int* oi = INTEGER_NULL_POINTER;
+    create_integer((void*) &oi);
+    *oi = 8;
 
     set_array_elements((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &oi, (void*) &os, (void*) &oss);
+
+    destroy_integer((void*) &oi);
 
     fputs((char*) d, stdout);
 
     // The remove index.
-    int ri = 12;
+    int* ri = INTEGER_NULL_POINTER;
+    create_integer((void*) &ri);
+    *ri = 12;
     // The remove count.
-    int rc = 7;
+    int* rc = INTEGER_NULL_POINTER;
+    create_integer((void*) &rc);
+    *rc = 7;
+
     remove_array_elements((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &ds, (void*) &ri, (void*) &rc);
+
+    destroy_integer((void*) &rc);
+    destroy_integer((void*) &ri);
 
     fputs((char*) d, stdout);
 
     // The new array size to cut off remaining elements,
     // including two places for new line '\n' and c string termination '\0'.
-    int ns = 15;
+    int* ns = INTEGER_NULL_POINTER;
+    create_integer((void*) &ns);
+    *ns = 15;
+
     resize_array((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &ns);
+
+    destroy_integer((void*) &ns);
 
     fputs((char*) d, stdout);
 
+    // Destroy destination array.
     destroy_array((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &ns);
+    destroy_integer((void*) &ds);
 }
 
 /**
@@ -245,6 +247,7 @@ void test_file_read() {
     // A file named "/home/cybop/tmp/test.cybol" needs to be created
     // in a text editor, for this test to work.
 
+/*??
     // The array.
     void* a = NULL_POINTER;
     // The array size.
@@ -268,7 +271,8 @@ void test_file_read() {
     fprintf(stderr, "fnc: %i\n", fnc);
 
     int j = 0;
-    char c = NULL_CONTROL_CHARACTER;
+    char* c = NULL_POINTER;
+    int* cc = 1;
 
     while (1) {
 
@@ -277,13 +281,14 @@ void test_file_read() {
             break;
         }
 
-        get_array_element((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &j, (void*) &c);
-        fputc(c, stdout);
+        get_array_elements((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &j, (void*) &c, (void*) &cc);
+        fputs(c, stdout);
 
         j++;
     }
 
     destroy_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &as);
+*/
 }
 
 /**
@@ -402,9 +407,9 @@ void test_integer_parser() {
  */
 void test_knowledge_model(const void* p0, const void* p1) {
 
-    int* c = (int*) p1;
+    if (p1 != NULL_POINTER) {
 
-    if (c != NULL_POINTER) {
+        int** c = (int**) p1;
 
         // The loop index.
         int i = 0;
@@ -429,7 +434,7 @@ void test_knowledge_model(const void* p0, const void* p1) {
 
         while (1) {
 
-            if (i >= *c) {
+            if (i >= **c) {
 
                 break;
             }

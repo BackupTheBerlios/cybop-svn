@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-12-19 00:53:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,13 +45,11 @@ void create_xml_node(void* p0, const void* p1) {
     // Create xml node.
     create_array(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_COUNT);
 
-    // Initialize xml node name, attributes, value
-    // and their counts.
+    // Initialize xml node name, attributes, value.
     void* nav = NULL_POINTER;
     void* c = NULL_POINTER;
 
-    // Create xml tag name, attributes, value
-    // and their counts.
+    // Create xml tag name, attributes, value.
     create_array((void*) &nav, (void*) &POINTER_ARRAY, p1);
     create_array((void*) &c, (void*) &INTEGER_ARRAY, p1);
 
@@ -59,10 +57,9 @@ void create_xml_node(void* p0, const void* p1) {
     // Use ascending order.
     //
 
-    // Set xml tag name, attributes, value
-    // and their counts.
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_NAME_ATTRIBUTE_VALUE_INDEX, (void*) &nav);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_COUNTS_INDEX, (void*) &c);
+    // Set xml tag name, attributes, value.
+//??    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_NAME_ATTRIBUTE_VALUE_INDEX, (void*) &nav);
+//??    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_COUNTS_INDEX, (void*) &c);
 }
 
 /**
@@ -75,27 +72,23 @@ void destroy_xml_node(void* p0, const void* p1) {
 
 //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_INTEGER_MESSAGE, (void*) &DESTROY_INTEGER_MESSAGE_COUNT);
 
-    // Initialize xml tag name, attributes, value
-    // and their counts.
+    // Initialize xml tag name, attributes, value.
     void* nav = NULL_POINTER;
     void* c = NULL_POINTER;
 
-    // Get xml tag name, attributes, value
-    // and their counts.
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_NAME_ATTRIBUTE_VALUE_INDEX, (void*) &nav);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_COUNTS_INDEX, (void*) &c);
+    // Get xml tag name, attributes, value.
+//??    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_NAME_ATTRIBUTE_VALUE_INDEX, (void*) &nav);
+//??    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_COUNTS_INDEX, (void*) &c);
 
     //
     // Use descending order.
     //
 
-    // Remove xml tag name, attributes, value
-    // and their counts.
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_COUNT, (void*) &XML_TAG_COUNTS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_COUNT, (void*) &XML_TAG_NAME_ATTRIBUTE_VALUE_INDEX);
+    // Remove xml tag name, attributes, value.
+//??    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_COUNT, (void*) &XML_TAG_COUNTS_INDEX);
+//??    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_COUNT, (void*) &XML_TAG_NAME_ATTRIBUTE_VALUE_INDEX);
 
-    // Destroy xml tag name, attributes, value
-    // and their counts.
+    // Destroy xml tag name, attributes, value.
     destroy_array((void*) &nav, (void*) &POINTER_ARRAY, p1);
     destroy_array((void*) &c, (void*) &INTEGER_ARRAY, p1);
 

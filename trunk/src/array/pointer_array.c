@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.16 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-12-19 00:53:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -75,19 +75,15 @@ void create_pointer_array(void* p0, const void* p1) {
             log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_POINTER_ARRAY_MESSAGE, (void*) &CREATE_POINTER_ARRAY_MESSAGE_COUNT);
 
             // Determine size as product of element count and type size.
-            int* s = INTEGER_NULL_POINTER;
-            create_integer((void*) &s);
-            *s = **c * *POINTER_PRIMITIVE_SIZE;
+            int s = **c * *POINTER_PRIMITIVE_SIZE;
 
             // A minimal space in memory is always allocated,
             // even if the requested size is zero.
             // In other words, a handle to the new instance is always returned.
-            *a = (void*) malloc(*s);
+            *a = (void*) malloc(s);
 
             // Initialize array elements with null pointer.
-            memset(*a, 0, *s);
-
-            destroy_integer((void*) &s);
+            memset(*a, 0, s);
 
         } else {
 
@@ -150,14 +146,10 @@ void resize_pointer_array(void* p0, const void* p1) {
             log_message((void*) &INFO_LOG_LEVEL, (void*) &RESIZE_POINTER_ARRAY_MESSAGE, (void*) &RESIZE_POINTER_ARRAY_MESSAGE_COUNT);
 
             // Determine size as product of element count and type size.
-            int* s = INTEGER_NULL_POINTER;
-            create_integer((void*) &s);
-            *s = **c * *POINTER_PRIMITIVE_SIZE;
+            int s = **c * *POINTER_PRIMITIVE_SIZE;
 
             // Create a new array with extended size.
-            *a = (void*) realloc(*a, *s);
-
-            destroy_integer((void*) &s);
+            *a = (void*) realloc(*a, s);
 
         } else {
 
@@ -204,21 +196,17 @@ void compare_pointer_array_elements(const void* p0, const void* p1, const void* 
                     void** a0 = (void**) p0;
 
                     // The loop variable.
-                    int* j = INTEGER_NULL_POINTER;
-                    create_integer((void*) &j);
-                    *j = 0;
+                    int j = 0;
                     // The first element.
                     void** e0 = POINTER_NULL_POINTER;
                     // The second element.
                     void** e1 = POINTER_NULL_POINTER;
                     // The size.
-                    int* s = INTEGER_NULL_POINTER;
-                    create_integer((void*) &s);
-                    *s = 0;
+                    int s = 0;
 
                     while (1) {
 
-                        if (*j >= **c) {
+                        if (j >= **c) {
 
                             // All elements have been compared and are equal.
                             **r = 1;
@@ -227,11 +215,11 @@ void compare_pointer_array_elements(const void* p0, const void* p1, const void* 
                         }
 
                         // Determine size.
-                        *s = *j * *POINTER_PRIMITIVE_SIZE;
+                        s = j * *POINTER_PRIMITIVE_SIZE;
 
                         // Determine the next elements at array plus index.
-                        e0 = (void**) (*a0 + *s);
-                        e1 = (void**) (*a1 + *s);
+                        e0 = (void**) (*a0 + s);
+                        e1 = (void**) (*a1 + s);
 
                         if (*e0 != *e1) {
 
@@ -239,11 +227,8 @@ void compare_pointer_array_elements(const void* p0, const void* p1, const void* 
                             break;
                         }
 
-                        (*j)++;
+                        j++;
                     }
-
-                    destroy_integer((void*) &s);
-                    destroy_integer((void*) &j);
 
                 } else {
 
@@ -293,9 +278,7 @@ void set_pointer_array_elements(void* p0, const void* p1, const void* p2, const 
                     void** da = (void**) p0;
 
                     // The loop variable.
-                    int* j = INTEGER_NULL_POINTER;
-                    create_integer((void*) &j);
-                    *j = 0;
+                    int j = 0;
                     // The destination base to start copying to.
                     void* db = (void*) (*da + **i * *POINTER_PRIMITIVE_SIZE);
                     // The source element.
@@ -303,32 +286,27 @@ void set_pointer_array_elements(void* p0, const void* p1, const void* p2, const 
                     // The destination element.
                     void** de = POINTER_NULL_POINTER;
                     // The size.
-                    int* s = INTEGER_NULL_POINTER;
-                    create_integer((void*) &s);
-                    *s = 0;
+                    int s = 0;
 
                     while (1) {
 
-                        if (*j >= **c) {
+                        if (j >= **c) {
 
                             break;
                         }
 
                         // Determine size.
-                        *s = *j * *POINTER_PRIMITIVE_SIZE;
+                        s = j * *POINTER_PRIMITIVE_SIZE;
 
                         // Determine source and destination element.
-                        se = (void**) (*sa + *s);
-                        de = (void**) (db + *s);
+                        se = (void**) (*sa + s);
+                        de = (void**) (db + s);
 
                         // Set destination element.
                         *de = *se;
 
-                        (*j)++;
+                        j++;
                     }
-
-                    destroy_integer((void*) &s);
-                    destroy_integer((void*) &j);
 
                 } else {
 
@@ -378,13 +356,9 @@ void remove_pointer_array_elements(void* p0, const void* p1, const void* p2, con
                     void** a = (void**) p0;
 
                     // The loop variable.
-                    int* j = INTEGER_NULL_POINTER;
-                    create_integer((void*) &j);
-                    *j = 0;
+                    int j = 0;
                     // The remaining elements size.
-                    int* r = INTEGER_NULL_POINTER;
-                    create_integer((void*) &r);
-                    *r = **m - (**i + **c);
+                    int r = **m - (**i + **c);
                     // The destination base.
                     void* db = (void*) (*a + **i * *POINTER_PRIMITIVE_SIZE);
                     // The source base.
@@ -394,9 +368,7 @@ void remove_pointer_array_elements(void* p0, const void* p1, const void* p2, con
                     // The destination element.
                     void** de = POINTER_NULL_POINTER;
                     // The size.
-                    int* s = INTEGER_NULL_POINTER;
-                    create_integer((void*) &s);
-                    *s = 0;
+                    int s = 0;
 
                     // Starting from the given index, move all remaining elements
                     // one place towards the beginning of the elements.
@@ -407,22 +379,22 @@ void remove_pointer_array_elements(void* p0, const void* p1, const void* p2, con
                     // rest = 11 - (4 + 2) = 11 - 6 = 5
                     while (1) {
 
-                        if (*j >= *r) {
+                        if (j >= r) {
 
                             break;
                         }
 
                         // Determine size.
-                        *s = *j * *POINTER_PRIMITIVE_SIZE;
+                        s = j * *POINTER_PRIMITIVE_SIZE;
 
                         // Determine source and destination element.
-                        de = (void**) (db + *s);
-                        se = (void**) (sb + *s);
+                        de = (void**) (db + s);
+                        se = (void**) (sb + s);
 
                         // Set destination element.
                         *de = *se;
 
-                        (*j)++;
+                        j++;
                     }
 
                     // Set former last elements to 0.0.
@@ -430,10 +402,6 @@ void remove_pointer_array_elements(void* p0, const void* p1, const void* p2, con
                     // its elements are also NOT initialized with ''.
                     // The calling procedure may just cut off the remaining
                     // elements by decreasing the array size (resizing).
-
-                    destroy_integer((void*) &s);
-                    destroy_integer((void*) &r);
-                    destroy_integer((void*) &j);
 
                 } else {
 
@@ -483,9 +451,7 @@ void get_pointer_array_elements(const void* p0, const void* p1, void* p2, const 
                     void** sa = (void**) p0;
 
                     // The loop variable.
-                    int* j = INTEGER_NULL_POINTER;
-                    create_integer((void*) &j);
-                    *j = 0;
+                    int j = 0;
                     // The source base to start copying from.
                     void* sb = (void*) (*sa + **i * *POINTER_PRIMITIVE_SIZE);
                     // The source element.
@@ -493,32 +459,27 @@ void get_pointer_array_elements(const void* p0, const void* p1, void* p2, const 
                     // The destination element.
                     void** de = POINTER_NULL_POINTER;
                     // The size.
-                    int* s = INTEGER_NULL_POINTER;
-                    create_integer((void*) &s);
-                    *s = 0;
+                    int s = 0;
 
                     while (1) {
 
-                        if (*j >= **c) {
+                        if (j >= **c) {
 
                             break;
                         }
 
                         // Determine size.
-                        *s = *j * *POINTER_PRIMITIVE_SIZE;
+                        s = j * *POINTER_PRIMITIVE_SIZE;
 
                         // Determine source and destination element.
-                        se = (void**) (sb + *s);
-                        de = (void**) (*da + *s);
+                        se = (void**) (sb + s);
+                        de = (void**) (*da + s);
 
                         // Set destination element.
                         *de = *se;
 
-                        (*j)++;
+                        j++;
                     }
-
-                    destroy_integer((void*) &s);
-                    destroy_integer((void*) &j);
 
                 } else {
 
@@ -576,13 +537,9 @@ void get_pointer_array_elements_index(const void* p0, const void* p1, const void
                         void** a = (void**) p0;
 
                         // The loop variable.
-                        int* j = INTEGER_NULL_POINTER;
-                        create_integer((void*) &j);
-                        *j = 0;
+                        int j = 0;
                         // The iteration limit.
-                        int* l = INTEGER_NULL_POINTER;
-                        create_integer((void*) &l);
-                        *l = **m - **c + 1;
+                        int l = **m - **c + 1;
                         // The element.
                         void* e = NULL_POINTER;
                         // The comparison result.
@@ -590,41 +547,36 @@ void get_pointer_array_elements_index(const void* p0, const void* p1, const void
                         create_integer((void*) &r);
                         *r = 0;
                         // The size.
-                        int* s = INTEGER_NULL_POINTER;
-                        create_integer((void*) &s);
-                        *s = 0;
+                        int s = 0;
 
                         while (1) {
 
-                            if (*j >= *l) {
+                            if (j >= l) {
 
                                 // The element has not been found.
                                 break;
                             }
 
                             // Determine size.
-                            *s = *j * *POINTER_PRIMITIVE_SIZE;
+                            s = j * *POINTER_PRIMITIVE_SIZE;
 
                             // Determine element.
-                            e = (void*) (*a + *s);
+                            e = (void*) (*a + s);
 
                             compare_pointer_array_elements((void*) &e, p2, p3, (void*) &r);
 
                             if (*r == 1) {
 
                                 // The element has been found.
-                                **i = *j;
+                                **i = j;
 
                                 break;
                             }
 
-                            (*j)++;
+                            j++;
                         }
 
-                        destroy_integer((void*) &s);
                         destroy_integer((void*) &r);
-                        destroy_integer((void*) &l);
-                        destroy_integer((void*) &j);
 
                     } else {
 

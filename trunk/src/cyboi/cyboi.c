@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.49 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
+ * @version $Revision: 1.50 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -98,7 +98,7 @@ int main(int p0, char** p1) {
 
     if (p1 != NULL_POINTER) {
 
-        if (p0 == STARTUP_PARAMETERS_COUNT) {
+        if (p0 == *STARTUP_PARAMETERS_COUNT) {
 
             //
             // Internals.
@@ -110,10 +110,10 @@ int main(int p0, char** p1) {
             // colum 3:  count for the value
             // colum 4:  size for the value
             void* p_internal = NULL_POINTER;
-            create_internals_structur( (void*) &p_internal );
+            create_internals_structur((void*) &p_internal);
 
             // Copy configuration file parameters into internals.
-            initialize_internals(p1[CONFIG_STARTUP_PARAMETER_INDEX], (void*) &p_internal);
+            initialize_internals(p1[*CONFIG_STARTUP_PARAMETER_INDEX], (void*) &p_internal);
 
             //
             // Signal memory.

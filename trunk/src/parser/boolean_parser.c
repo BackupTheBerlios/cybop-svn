@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,7 +66,7 @@ void parse_boolean(void* p0, void* p1, void* p2, const void* p3, const void* p4)
             // The comparison result.
             int r = 0;
 
-            if (*sc == TRUE_BOOLEAN_COUNT) {
+            if (*sc == *TRUE_BOOLEAN_COUNT) {
 
                 compare_array_elements(p3, (void*) &TRUE_BOOLEAN, (void*) &CHARACTER_ARRAY, (void*) &TRUE_BOOLEAN_COUNT, (void*) &r);
 

@@ -28,7 +28,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.13 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -216,7 +216,8 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
 void log_message(const void* p0, const void* p1, const void* p2) {
 
     //
-    // CAUTION! CYBOI's array procedures are NOT used to avoid an endless loop!
+    // CAUTION! CYBOI's array procedures are NOT used,
+    // in order to avoid endless loops!
     //
 
     if (p2 != NULL_POINTER) {
@@ -325,9 +326,12 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 void log_message_debug(const char* m) {
 
     // The message count.
-    int c = strlen(m);
+    int* c = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *c = strlen(m);
 
     log_message((void*) &DEBUG_LOG_LEVEL, (void*) &m, (void*) &c);
+
+    free(c);
 }
 
 /* LOGGER_SOURCE */

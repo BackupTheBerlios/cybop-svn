@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-12-08 14:12:16 $ $Author: rholzmueller $
+ * @version $Revision: 1.2 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,56 +36,55 @@
 #include "../logger/logger.c"
 
 /**
- * add the client socket number in a integer array
- * 
+ * Add the client socket number in a integer array.
+ *
  * @param pp_internals the pointer to the internals
  * @param p_socket_number the client socket number
  */
-void add_client_socket_number( void** pp_internals,
-                               int* p_socket_number ) {
+void add_client_socket_number(void** pp_internals, int* p_socket_number) {
 
     // get the client socket number from internal
     void** pp_clientsocketnumbers = NULL_POINTER;
     int* p_clientsocketnumbers_count = NULL_POINTER;
     int* p_clientsocketnumbers_size = NULL_POINTER;
-    
+
     int internal_type = 0;
     get_internal( pp_internals, (void*) &pp_clientsocketnumbers,
-                  (void*) &internal_type, 
+                  (void*) &internal_type,
                   (void*) &INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_INDEX );
     get_internal( pp_internals, (void*) &p_clientsocketnumbers_count,
-                  (void*) &internal_type, 
+                  (void*) &internal_type,
                   (void*) &INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_COUNT_INDEX );
     get_internal( pp_internals, (void*) &p_clientsocketnumbers_size,
-                  (void*) &internal_type, 
-                  (void*) &INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_SIZE_INDEX );
+                  (void*) &internal_type,
+                  (void*) &INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_SIZE_INDEX);
 
-    //resize the array for the client socket number as a requirement 
+    //resize the array for the client socket number as a requirement
     if (*p_clientsocketnumbers_count >= *p_clientsocketnumbers_size) {
-    
+
         *p_clientsocketnumbers_size = *p_clientsocketnumbers_size + 1;
-        resize_array( pp_clientsocketnumbers, (void*) &INTEGER_ARRAY,
-                      p_clientsocketnumbers_size );
-        set_internal( pp_internals, (void*) &pp_clientsocketnumbers,
-                      (void*) &INTERNAL_TYPE_POINTER, 
-                      (void*) &INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_INDEX );
+
+        resize_array(pp_clientsocketnumbers, (void*) &INTEGER_ARRAY, p_clientsocketnumbers_size);
+
+        set_internal(pp_internals, (void*) &pp_clientsocketnumbers,
+            (void*) &INTERNAL_TYPE_POINTER,
+            (void*) &INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_INDEX);
     }
-    
-    //add the socket number
-    set_array_element( pp_clientsocketnumbers, (void*) &INTEGER_ARRAY,
-                       p_clientsocketnumbers_count, p_socket_number );
+
+    // Add the socket number.
+    set_array_elements(pp_clientsocketnumbers, (void*) &INTEGER_ARRAY,
+        p_clientsocketnumbers_count, p_socket_number, (void*) &ONE_ELEMENT_COUNT);
+
     *p_clientsocketnumbers_count = *p_clientsocketnumbers_count+1;
-                       
-} 
+}
 
 /**
- * add the main signal id in a integer array
-  *
+ * Adds the main signal id in a integer array.
+ *
  * @param pp_internals the pointer to the internals
  * @param p_main_signal_id the main signal id
  */
-void add_main_signal_id( void** pp_internals,
-                         int* main_signal_id ) {
+void add_main_signal_id(void** pp_internals, int* main_signal_id) {
 
     // get the main signal id from internal
     void** pp_mainsignal_ids = NULL_POINTER;
@@ -95,31 +94,32 @@ void add_main_signal_id( void** pp_internals,
     int internal_type = 0;
 
     get_internal( pp_internals, (void*) &pp_mainsignal_ids,
-                  (void*) &internal_type, 
+                  (void*) &internal_type,
                   (void*) &INTERNAL_TCPSOCKET_MAINSIGNALID_INDEX );
     get_internal( pp_internals, (void*) &p_mainsignal_ids_count,
-                  (void*) &internal_type, 
+                  (void*) &internal_type,
                   (void*) &INTERNAL_TCPSOCKET_MAINSIGNALID_COUNT_INDEX );
     get_internal( pp_internals, (void*) &p_mainsignal_ids_size,
-                  (void*) &internal_type, 
+                  (void*) &internal_type,
                   (void*) &INTERNAL_TCPSOCKET_MAINSIGNALID_SIZE_INDEX );
 
-    //resize the array for the client socket number as a requirement 
+    //resize the array for the client socket number as a requirement
     if (*p_mainsignal_ids_count >= *p_mainsignal_ids_size) {
-    
+
         *p_mainsignal_ids_size = *p_mainsignal_ids_size + 1;
         resize_array( pp_mainsignal_ids, (void*) &INTEGER_ARRAY,
                       p_mainsignal_ids_size );
         set_internal( pp_internals, (void*) &pp_mainsignal_ids,
-                      (void*) &INTERNAL_TYPE_POINTER, 
+                      (void*) &INTERNAL_TYPE_POINTER,
                       (void*) &INTERNAL_TCPSOCKET_MAINSIGNALID_INDEX );
     }
-    
-    //add the socket number
-    set_array_element( pp_mainsignal_ids, (void*) &INTEGER_ARRAY,
-                       p_mainsignal_ids_count, main_signal_id );
+
+    // Add the socket number.
+    set_array_elements(pp_mainsignal_ids, (void*) &INTEGER_ARRAY,
+        p_mainsignal_ids_count, main_signal_id, (void*) &ONE_ELEMENT_COUNT);
+
     *p_mainsignal_ids_count = *p_mainsignal_ids_count+1;
-} 
+}
 
 /**
  * remove the client socket number and the main signal id from the internals
@@ -131,7 +131,7 @@ void remove_relation_clientsocketnumber_mainsignalid( void** pp_internals,
                                                       int* p_index ){
 
     if ( pp_internals == NULL_POINTER ) {
-    
+
         log_message_debug( "pp_internals is a NULL POINTER" );
     }
     else if ( p_index  == NULL_POINTER ) {

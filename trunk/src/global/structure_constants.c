@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.6 $ $Date: 2004-12-16 16:34:57 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,6 +54,14 @@ static const int* CHARACTER_ARRAY = CHARACTER_ARRAY_ARRAY;
 /** The double array constant. */
 static const int DOUBLE_ARRAY_ARRAY[] = {3};
 static const int* DOUBLE_ARRAY = DOUBLE_ARRAY_ARRAY;
+
+//
+// Array element counts.
+//
+
+/** The one element count. */
+static const int ONE_ELEMENT_COUNT_ARRAY[] = {1};
+static const int* ONE_ELEMENT_COUNT = ONE_ELEMENT_COUNT_ARRAY;
 
 //
 // String.

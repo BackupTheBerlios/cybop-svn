@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-12-19 00:53:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -75,7 +75,7 @@ void receive_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                     // Set terminated file name by first copying the actual name and then
                     // adding the null termination character.
                     set_array_elements((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
-                    set_array_element((void*) &tn, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CONTROL_CHARACTER);
+                    set_array_elements((void*) &tn, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CONTROL_CHARACTER, (void*) &NULL_CONTROL_CHARACTER_COUNT);
 
                     // Open file.
                     // CAUTION! The file name cannot be handed over as is.
@@ -109,7 +109,7 @@ void receive_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
                                 // Set character in destination array.
                                 // The array count serves as index for setting the character.
-                                set_array_element(p0, (void*) &CHARACTER_ARRAY, p1, (void*) &c);
+                                set_array_elements(p0, (void*) &CHARACTER_ARRAY, p1, (void*) &c);
 
                                 // Increase array count.
                                 (*ac)++;
@@ -201,7 +201,7 @@ void send_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                     // This is used as index to set the termination character.
                     i = *sc;
                     // Add string termination to temporary null-terminated message.
-                    set_array_element((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CONTROL_CHARACTER);
+                    set_array_elements((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CONTROL_CHARACTER, (void*) &NULL_CONTROL_CHARACTER_COUNT);
 
                     fputs(tmp, (FILE*) *d);
                     fputs("\n", (FILE*) *d);

@@ -21,12 +21,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef GLOBALS_SOURCE
 #define GLOBALS_SOURCE
+
+#include "../global/variables.c"
 
 /**
  * Initializes the global variables.

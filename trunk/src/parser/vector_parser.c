@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,9 +72,9 @@ void parse_vector(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
                 int x = 0;
 
                 // Set elements.
-                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
-                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
-                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
+                set_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
+                set_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
+                set_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
 
 /*??
                 int i1 = s.indexOf(",");
@@ -143,14 +143,14 @@ void serialize_vector(void* p0, void* p1, void* p2, const void* p3, const void* 
                 int x = 0;
 
                 // Get elements.
-                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
-                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
-                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
+                get_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
+                get_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
+                get_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
 
                 // Remove elements.
-                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &Z_INDEX);
-                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &Y_INDEX);
-                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &X_INDEX);
+                remove_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &Z_INDEX);
+                remove_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &Y_INDEX);
+                remove_array_elements(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &X_INDEX);
 
             //??    fprintf(p1, %d, &(m->x));
             //??    fprintf(p1, %d, &(m->y));
