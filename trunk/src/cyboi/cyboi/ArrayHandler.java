@@ -29,7 +29,7 @@ package cyboi;
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.12 $ $Date: 2003-08-01 09:25:04 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-08-11 19:30:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ArrayHandler {
@@ -196,22 +196,25 @@ class ArrayHandler {
 
         if (p0 != null) {
 
-            //?? Temporary: Remove java tree node.
-//??            ArrayHandler.remove_tree_node(p0[p1]);
+            if (p1 != -1) {
+                
+                //?? Temporary: Remove java tree node.
+//??                ArrayHandler.remove_tree_node(p0[p1]);
 
-            // Move all remaining elements one place towards the
-            // beginning of the elements.
-            int size = p0.length;
-
-            while ((p1 + 1) < size) {
-
-                p0[p1] = p0[p1 + 1];
-
-                p1++;
+                // Move all remaining elements one place towards the
+                // beginning of the elements.
+                int size = p0.length;
+    
+                while ((p1 + 1) < size) {
+    
+                    p0[p1] = p0[p1 + 1];
+    
+                    p1++;
+                }
+    
+                // Set former last element to null.
+                p0[p1] = null;
             }
-
-            // Set former last element to null.
-            p0[p1] = null;
 
         } else {
 
@@ -235,10 +238,6 @@ class ArrayHandler {
             if (p1 != -1) {
                 
                 e = p0[p1];
-                
-            } else {
-                
-                e = null;
             }
 
         } else {

@@ -34,7 +34,7 @@ package cyboi;
  * send
  * reset
  *
- * @version $Revision: 1.7 $ $Date: 2003-08-09 15:34:58 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-08-11 19:30:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -42,6 +42,12 @@ class SignalHandler {
     //
     // Constants.
     //
+
+    /** The signal. */
+    static java.lang.String SIGNAL = "signal";
+
+    /** The signal category name. */
+    static java.lang.String SIGNAL_CATEGORY_NAME = "cybol/core/signal/signal";
 
     /** The priority. */
     static java.lang.String PRIORITY = "priority";
@@ -56,13 +62,13 @@ class SignalHandler {
     static java.lang.String PREDICATE = "predicate";
 
     /** The (genitiv) object (object owner). */
-//??    static java.lang.String SENDER_OBJECT = "object";
+    static java.lang.String OWNER = "owner";
 
     /** The (dativ) object (signal sender). */
-    static java.lang.String SENDER_OBJECT = "sender_object";
+    static java.lang.String SENDER = "sender";
 
     /** The (akussativ) object (passive data model). */
-    static java.lang.String OBJECT = "object";
+    static java.lang.String MODEL = "model";
 
     /** The adverbial (temporal, local, causal). */
     static java.lang.String ADVERBIAL = "adverbial";
@@ -115,18 +121,85 @@ class SignalHandler {
     static java.lang.String SOAP_LANGUAGE = "soap_language";
 
     //
-    // Signal management.
+    // Signal.
     //
     
     /**
      * Receives the signal.
      *
-     * @param p0 the signal
+     * The JDK sends java.awt.AWTEvent events.
+     * The EventHandler catches these events in the EventHandler.dispatchEvent method,
+     * transforms them into CYBOP signals and stores them in the signal memory.
+     *
+     * This method:
+     * - gets the top priority signal from the signal memory and removes it from there
+     * - copies that signal memory signal to the transporting signal handed over as parameter
+     *
+     * The idea is that one day, signals (interrupts) might be read from the
+     * interrupt vector table.
+     * Currently, the operating system checks for changed flags on the computer,
+     * to receive for example keyboard or mouse events.
+     *
+     * @param p0 the signal memory
+     * @param p1 the signal
      */
-    static void receive(java.lang.Object p0) {
-        
-        if (p0 != null) {
+    static void receive(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
+        Item s = (Item) p1;
+        
+        if (s != null) {
+
+            // Read and remove signal from signal memory (interrupt vector table).
+            Item tmp = null;
+//??            Item tmp = (Item) MapHandler.get_map_element(p0, 0);
+//??            MapHandler.remove_map_element(p0, 0);
+            
+            if (tmp != null) {
+            
+                // Copy signal memory signal to the transporting signal given as parameter.
+                java.lang.Object o = null;
+                
+                o = MapHandler.get_map_element(tmp.items, SignalHandler.PRIORITY);
+                MapHandler.set_map_element(s.items, o, SignalHandler.PRIORITY);
+        
+                o = MapHandler.get_map_element(tmp.items, SignalHandler.LANGUAGE);
+                MapHandler.set_map_element(s.items, o, SignalHandler.LANGUAGE);
+        
+                o = MapHandler.get_map_element(tmp.items, SignalHandler.SUBJECT);
+                MapHandler.set_map_element(s.items, o, SignalHandler.SUBJECT);
+        
+                o = MapHandler.get_map_element(tmp.items, SignalHandler.PREDICATE);
+                MapHandler.set_map_element(s.items, o, SignalHandler.PREDICATE);
+        
+                o = MapHandler.get_map_element(tmp.items, SignalHandler.OWNER);
+                MapHandler.set_map_element(s.items, o, SignalHandler.OWNER);
+        
+                o = MapHandler.get_map_element(tmp.items, SignalHandler.SENDER);
+                MapHandler.set_map_element(s.items, o, SignalHandler.SENDER);
+        
+                o = MapHandler.get_map_element(tmp.items, SignalHandler.MODEL);
+                MapHandler.set_map_element(s.items, o, SignalHandler.MODEL);
+        
+                o = MapHandler.get_map_element(tmp.items, SignalHandler.ADVERBIAL);
+                MapHandler.set_map_element(s.items, o, SignalHandler.ADVERBIAL);
+        
+                o = MapHandler.get_map_element(tmp.items, SignalHandler.CONDITION);
+                MapHandler.set_map_element(s.items, o, SignalHandler.CONDITION);
+
+                // Reset and destroy signal memory signal.
+                // CAUTION! Reset is essential to avoid the accidential destruction of
+                // items transported by the signal.
+                SignalHandler.reset(tmp);
+                // Category and abstraction are not handed over because it is NOT wanted
+                // that the signal category CYBOL file is written and changed.
+                ItemHandler.destroy_object(tmp, SignalHandler.SIGNAL_CATEGORY_NAME, null);
+        
+            } else {
+    
+                // No signal was received.
+                // Do not log this as the loop runs infinite and would stuff the log record.
+            }
+    
         } else {
 
             java.lang.System.out.println("ERROR: Could not receive signal. The signal is null.");
@@ -140,25 +213,27 @@ class SignalHandler {
      * @param p1 the remote flag
      * @return the shutdown flag
      */
-    static int handle(java.lang.Object p0, int p1) {
-        
-        int sf = 0;
+    static boolean handle(java.lang.Object p0, int p1) {
+
+        // The shutdown flag.
+        boolean sf = false;
         Item s = (Item) p0;
                 
         if (s != null) {
 
-            java.lang.String p = (java.lang.String) MapHandler.get_map_element(s.items, "predicate_0");
+            java.lang.String a = (java.lang.String) MapHandler.get_map_element(s.items, SignalHandler.PREDICATE);
 
-            if (p != null) {
+            if (a != null) {
 
-                if (p.equals("shutdown")) {
+                if (a.equals("shutdown")) {
                     
-                    sf = 1;
+                    sf = true;
                 }
                 
             } else {
     
-//??                java.lang.System.out.println("ERROR: Could not handle signal. The predicate is null.");
+                // The signal is empty and does not contain an action.
+                // Do not log this as the loop runs infinite and would stuff the log record.
             }
     
         } else {
@@ -172,12 +247,75 @@ class SignalHandler {
     /**
      * Sends the signal.
      *
-     * @param p0 the signal
+     * If a signal's action is null, it will get destroyed.
+     * Otherwise, the signal will be stored in the signal memory for further
+     * handling.
+     *
+     * @param p0 the signal memory
+     * @param p1 the signal
      */
-    static void send(java.lang.Object p0) {
-        
-        if (p0 != null) {
+    static void send(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
+        Item s = (Item) p1;
+        
+        if (s != null) {
+
+            java.lang.Object a = MapHandler.get_map_element(s.items, SignalHandler.PREDICATE);
+
+            // Only send a new signal (store in signal memory) if an action exists.
+            // Otherwise, the chain of signals/ actions finishes here, until a new
+            // hardware event (interrupt) occurs.
+            if (a != null) {
+                
+                // Create signal for storage in signal memory.
+                Item tmp = (Item) ItemHandler.create_object(SignalHandler.SIGNAL_CATEGORY_NAME, Dynamics.CATEGORY);
+        
+                if (tmp != null) {
+                
+                    // Copy transporting signal given as parameter to the signal memory signal.
+                    java.lang.Object o = null;
+                    
+                    o = MapHandler.get_map_element(s.items, SignalHandler.PRIORITY);
+                    MapHandler.set_map_element(tmp.items, o, SignalHandler.PRIORITY);
+            
+                    o = MapHandler.get_map_element(s.items, SignalHandler.LANGUAGE);
+                    MapHandler.set_map_element(tmp.items, o, SignalHandler.LANGUAGE);
+            
+                    o = MapHandler.get_map_element(s.items, SignalHandler.SUBJECT);
+                    MapHandler.set_map_element(tmp.items, o, SignalHandler.SUBJECT);
+            
+                    o = MapHandler.get_map_element(s.items, SignalHandler.PREDICATE);
+                    MapHandler.set_map_element(tmp.items, o, SignalHandler.PREDICATE);
+            
+                    o = MapHandler.get_map_element(s.items, SignalHandler.OWNER);
+                    MapHandler.set_map_element(tmp.items, o, SignalHandler.OWNER);
+            
+                    o = MapHandler.get_map_element(s.items, SignalHandler.SENDER);
+                    MapHandler.set_map_element(tmp.items, o, SignalHandler.SENDER);
+            
+                    o = MapHandler.get_map_element(s.items, SignalHandler.MODEL);
+                    MapHandler.set_map_element(tmp.items, o, SignalHandler.MODEL);
+
+                    o = MapHandler.get_map_element(s.items, SignalHandler.ADVERBIAL);
+                    MapHandler.set_map_element(tmp.items, o, SignalHandler.ADVERBIAL);
+            
+                    o = MapHandler.get_map_element(s.items, SignalHandler.CONDITION);
+                    MapHandler.set_map_element(tmp.items, o, SignalHandler.CONDITION);
+
+                    // Add signal to signal memory (interrupt vector table).
+                    MapHandler.add_map_element(p0, p1, SignalHandler.SIGNAL);
+
+                } else {
+        
+                    java.lang.System.out.println("ERROR: Could not send signal. The signal memory signal is null.");
+                }
+
+            } else {
+                
+                // The signal is empty and does not contain an action.
+                // Do not log this as the loop runs infinite and would stuff the log record.
+            }
+    
         } else {
 
             java.lang.System.out.println("ERROR: Could not send signal. The signal is null.");
@@ -191,7 +329,19 @@ class SignalHandler {
      */
     static void reset(java.lang.Object p0) {
         
-        if (p0 != null) {
+        Item s = (Item) p0;
+        
+        if (s != null) {
+
+            MapHandler.remove_map_element(s.items, SignalHandler.PRIORITY);
+            MapHandler.remove_map_element(s.items, SignalHandler.LANGUAGE);
+            MapHandler.remove_map_element(s.items, SignalHandler.SUBJECT);
+            MapHandler.remove_map_element(s.items, SignalHandler.PREDICATE);
+            MapHandler.remove_map_element(s.items, SignalHandler.OWNER);
+            MapHandler.remove_map_element(s.items, SignalHandler.SENDER);
+            MapHandler.remove_map_element(s.items, SignalHandler.MODEL);
+            MapHandler.remove_map_element(s.items, SignalHandler.ADVERBIAL);
+            MapHandler.remove_map_element(s.items, SignalHandler.CONDITION);
 
         } else {
 

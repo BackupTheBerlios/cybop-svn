@@ -27,7 +27,7 @@ package cyboi;
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.12 $ $Date: 2003-08-09 15:34:58 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-08-11 19:30:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryHandler {
@@ -88,6 +88,13 @@ class CategoryHandler {
     static java.lang.String INTERACTION_ABSTRACTION = "interaction_abstraction";
 
     //
+    // Attributes.
+    //
+
+    /** The xml parser. */    
+    static java.lang.Object xml_parser;
+    
+    //
     // Category.
     //
     
@@ -101,8 +108,7 @@ class CategoryHandler {
      */
     static void initialize_category(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
-        org.apache.xerces.parsers.DOMParser p = new org.apache.xerces.parsers.DOMParser();
-        CategoryHandler.initialize_xml_parser(p);
+        org.apache.xerces.parsers.DOMParser p = (org.apache.xerces.parsers.DOMParser) CategoryHandler.xml_parser;
     
         if (p != null) {
             
@@ -114,9 +120,6 @@ class CategoryHandler {
             
             java.lang.System.out.println("ERROR: Could not initialize category elements. The xml parser is null.");
         }
-
-        CategoryHandler.finalize_xml_parser(p);
-        p = null;
     }
 
     /**

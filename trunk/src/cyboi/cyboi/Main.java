@@ -32,7 +32,7 @@ package cyboi;
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) format.
  *
- * @version $Revision: 1.25 $ $Date: 2003-08-10 22:34:31 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2003-08-11 19:30:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -42,7 +42,7 @@ class Main {
     //?? for how to transfer an Object into a byte[]
 
     /*
-     * The main method.
+     * The main entry procedure.
      *
      * @param args the arguments
      */
@@ -57,54 +57,52 @@ class Main {
                     // Arguments.
                     java.lang.Object statics_category_name = args[0];
                     java.lang.Object dynamics_category_name = args[1];
-                    java.lang.Object signal_category_name = "cybol/core/signal/signal";
 
-                    // Statics.
+                    // XML parser.
+                    CategoryHandler.xml_parser = new org.apache.xerces.parsers.DOMParser();
+                    CategoryHandler.initialize_xml_parser(CategoryHandler.xml_parser);
+                    
+                    // Statics (system).
                     java.lang.Object statics = ItemHandler.create_object(statics_category_name, Statics.CATEGORY);
 
-/*??
-                    // Dynamics.
-                    java.lang.Object dynamics = new Item();
-                    ItemHandler.initialize_item_containers(dynamics);
-                    ItemHandler.initialize_item(dynamics, dynamics_category_name);
-*/
+                    // Dynamics (signal).
+                    java.lang.Object dynamics = ItemHandler.create_object(SignalHandler.SIGNAL_CATEGORY_NAME, Dynamics.CATEGORY);
 
-                    // Signal memory.
+                    // Memory (signal queue).
                     java.lang.Object signal_memory = new Map();
                     MapHandler.initialize_map(signal_memory);
 
-                    // Signal.
-                    java.lang.Object signal = ItemHandler.create_object(signal_category_name, Statics.CATEGORY);
-
                     // Event handler.
+                    EventHandler.signal_memory = signal_memory;
                     java.lang.Object event_handler = new EventHandler();
-                    Main.replaceEventQueue(event_handler);
+                    EventHandler.replaceEventQueue(event_handler);
 
                     // The system is now started up and complete so that a loop
-                    // can be entered, waiting for signals (events/ interrupts).
-                    Main.await(signal);
+                    // can be entered, waiting for signals (events/ interrupts)
+                    // which are stored/ found in the signal memory.
+                    Main.await(signal_memory, dynamics);
     
                     // The loop above is left as soon as its shutdown flag is set.
     
                     // Event handler.
                     event_handler = null;
+                    EventHandler.signal_memory = null;
                     
-                    // Signal.
-                    ItemHandler.destroy_object(signal, signal_category_name, Statics.CATEGORY);
-
-                    // Signal memory.
+                    // Memory (signal queue).
                     MapHandler.finalize_map(signal_memory);
                     signal_memory = null;
 
-/*??
-                    // Dynamics.
-                    ItemHandler.finalize_item(dynamics, dynamics_category_name);
-                    ItemHandler.finalize_item_containers(dynamics);
-                    dynamics = null;
-*/
+                    // Dynamics (signal).
+                    // Abstraction is set to null because it is not wanted to write
+                    // and change the signal category CYBOL file.
+                    ItemHandler.destroy_object(dynamics, SignalHandler.SIGNAL_CATEGORY_NAME, null);
 
-                    // Statics.
+                    // Statics (system).
                     ItemHandler.destroy_object(statics, statics_category_name, Statics.CATEGORY);
+
+                    // XML parser.
+                    CategoryHandler.finalize_xml_parser(CategoryHandler.xml_parser);
+                    CategoryHandler.xml_parser = null;
 
                     //
                     // Runtime.getRuntime().exit(0);
@@ -147,69 +145,41 @@ class Main {
     /**
      * Waits for signals.
      *
-     * @param s the signal
+     * The processing of signals follows this sequence:
+     * - receive
+     * - handle
+     * - send
+     * - reset
+     * 
+     * @param p0 the signal memory
+     * @param p1 the signal
      */
-    static void await(java.lang.Object s) {
+    static void await(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
-        int sf = 0;
+        // The shutdown flag.
+        boolean sf = false;
     
         while (true) {
 
-            if (sf == 0) {
+            if (sf != true) {
 
                 // Receive signal.
-                SignalHandler.receive(s);
+                SignalHandler.receive(p0, p1);
     
                 // Handle signal.
-                sf = SignalHandler.handle(s, 0);
+                sf = SignalHandler.handle(p1, 0);
     
                 // Send signal.
-                SignalHandler.send(s);
+                SignalHandler.send(p0, p1);
     
                 // Reset signal.
-                SignalHandler.reset(s);
+                SignalHandler.reset(p1);
                 
             } else {
                 
                 // Leave loop if the shutdown flag was set.
                 break;
             }
-        }
-    }
-
-    //
-    // Event handler.
-    //
-    
-    /**
-     * Replaces the event queue with the event handler.
-     *
-     * @param h the event handler
-     */
-    static void replaceEventQueue(java.lang.Object h) {
-
-        // Start the awt event thread by calling getDefaultToolkit().
-        // Otherwise, the event thread is started by calling the show method
-        // on a java awt frame.
-        java.awt.Toolkit t = java.awt.Toolkit.getDefaultToolkit();
-
-        if (t != null) {
-
-            java.awt.EventQueue q = t.getSystemEventQueue();
-
-            if (q != null) {
-
-                // Replace the system event queue with the event handler.
-                q.push((EventHandler) h);
-
-            } else {
-
-                java.lang.System.out.println("ERROR: Could not replace event queue. The event queue is null.");
-            }
-
-        } else {
-
-            java.lang.System.out.println("ERROR: Could not replace event queue. The java awt toolkit is null.");
         }
     }
 
