@@ -41,7 +41,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.15 $ $Date: 2004-03-11 14:33:52 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-03-11 22:44:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -185,6 +185,7 @@ void initialize_part(void* p0, const void* p1) {
 
     if (m != (void*) 0) {
 
+/*??
         void* name = (void*) get_map_element_with_name(p1, (void*) NAME);
         void* abstraction = (void*) 0;
         void* location = (void*) 0;
@@ -219,6 +220,7 @@ void initialize_part(void* p0, const void* p1) {
         set_map_element_with_name(m->constraint_abstractions, name, abstraction);
         set_map_element_with_name(m->constraint_locations, name, location);
         set_map_element_with_name(m->constraint_models, name, part);
+*/
 
     } else {
 
@@ -238,6 +240,7 @@ void finalize_part(void* p0, const void* p1) {
 
     if (m != (void*) 0) {
 
+/*??
         void* name = (void*) get_map_element_with_name(p1, (void*) NAME);
         void* abstraction = (void*) 0;
         void* location = (void*) 0;
@@ -279,6 +282,7 @@ void finalize_part(void* p0, const void* p1) {
  */
 void initialize_parts(void* p0, const void* p1) {
 
+/*??
     struct map* m = (struct map*) p1;
     int count = 0;
     int size = 0;
@@ -300,6 +304,7 @@ void initialize_parts(void* p0, const void* p1) {
 
         count++;
     }
+*/
 }
 
 /**
@@ -310,6 +315,7 @@ void initialize_parts(void* p0, const void* p1) {
  */
 void finalize_parts(void* p0, const void* p1) {
 
+/*??
     struct map* m = (struct map*) p1;
     int count = 0;
     int size = 0;
@@ -331,6 +337,7 @@ void finalize_parts(void* p0, const void* p1) {
 
         count++;
     }
+*/
 }
 
 //
@@ -435,7 +442,7 @@ void finalize_model(void* p0, const void* p1) {
  * Sets the model part.
  *
  * @param p0 the model
- * @param p1 the hierarchical model name
+ * @param p1 the name
  * @param p2 the part abstraction
  * @param p3 the part location
  * @param p4 the part model
@@ -453,8 +460,18 @@ void set_model_part(void* p0, const void* p1, const void* p2, const void* p3, co
     if (m != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Set model part: ");
-        log_message((void*) &INFO_LOG_LEVEL, p1);
 
+        set_map_element_with_name(m->part_abstractions, p1, p2);
+        set_map_element_with_name(m->part_locations, p1, p3);
+        set_map_element_with_name(m->part_models, p1, p4);
+        set_map_element_with_name(m->position_abstractions, p1, p5);
+        set_map_element_with_name(m->position_locations, p1, p6);
+        set_map_element_with_name(m->position_models, p1, p7);
+        set_map_element_with_name(m->constraint_abstractions, p1, p8);
+        set_map_element_with_name(m->constraint_locations, p1, p9);
+        set_map_element_with_name(m->constraint_models, p1, p10);
+
+/*??
         int length = 0;
         get_string_length(p1, (void*) &length);
         int start = 0;
@@ -494,6 +511,7 @@ void set_model_part(void* p0, const void* p1, const void* p2, const void* p3, co
             // Do not free(n) here! The name is referenced by the model maps.
             // It will get freed when removing a model part.
         }
+*/
 
     } else {
 
@@ -505,7 +523,7 @@ void set_model_part(void* p0, const void* p1, const void* p2, const void* p3, co
  * Removes the model part.
  *
  * @param p0 the model
- * @param p1 the hierarchical model name
+ * @param p1 the name
  */
 void remove_model_part(void* p0, const void* p1) {
 
@@ -514,8 +532,18 @@ void remove_model_part(void* p0, const void* p1) {
     if (m != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Remove model part: ");
-        log_message((void*) &INFO_LOG_LEVEL, p1);
 
+        remove_map_element_with_name(m->part_abstractions, p1);
+        remove_map_element_with_name(m->part_locations, p1);
+        remove_map_element_with_name(m->part_models, p1);
+        remove_map_element_with_name(m->position_abstractions, p1);
+        remove_map_element_with_name(m->position_locations, p1);
+        remove_map_element_with_name(m->position_models, p1);
+        remove_map_element_with_name(m->constraint_abstractions, p1);
+        remove_map_element_with_name(m->constraint_locations, p1);
+        remove_map_element_with_name(m->constraint_models, p1);
+
+/*??
         int length = 0;
         get_string_length(p1, (void*) &length);
         int start = 0;
@@ -555,6 +583,7 @@ void remove_model_part(void* p0, const void* p1) {
             // Do not free(n) here! The name is referenced by the model maps.
             // It will get freed when removing a model part.
         }
+*/
 
     } else {
 
@@ -566,57 +595,47 @@ void remove_model_part(void* p0, const void* p1) {
  * Gets the model part.
  *
  * @param p0 the model
- * @param p1 the hierarchical name
+ * @param p1 the name
  * @param p2 the part
  */
 void get_model_part(const void* p0, const void* p1, void* p2) {
 
-    char* h = (char*) p1;
+    struct model* m = (struct model*) p0;
 
-    if (h != (void*) 0) {
+    if (m != (void*) 0) {
 
-        struct model* m = (struct model*) p0;
+        log_message((void*) &INFO_LOG_LEVEL, "Get model part: ");
 
-        if (m != (void*) 0) {
+        get_map_element_with_name(m->part_models, p1, p2);
 
-            log_message((void*) &INFO_LOG_LEVEL, "Get model part: ");
-            log_message((void*) &INFO_LOG_LEVEL, p1);
+/*??
+        int s = p1->size;
+        int i = INVALID_INDEX;
+        get_array_element_index(p1, (void*) &DOT_CHARACTER, (void*) &i);
 
-            struct array n = (void*) 0;
+        void* n = (p1 + i - 1);
 
+        // Only call procedure recursively if the remaining string is not empty.
+        if (i != INVALID_INDEX) {
 
---
-            int s = p1->size;
-            int i = INVALID_INDEX;
-            get_array_element_index(p1, (void*) &DOT_CHARACTER, (void*) &i);
+            char* r = (char*) (p1 + i + 1);
 
-            void* n = (p1 + i - 1);
+            // The given model contains compound models.
+            void* part = get_map_element_with_name(m->part_models, n);
 
-            // Only call procedure recursively if the remaining string is not empty.
-            if (i != INVALID_INDEX) {
-
-                char* r = (char*) (p1 + i + 1);
-
-                // The given model contains compound models.
-                void* part = get_map_element_with_name(m->part_models, n);
-
-                // Continue to process along the hierarchical name.
-                p = get_model_part(part, r + 1);
-
-            } else {
-
-                // The given model contains primitive models.
-                p = get_map_element_with_name(m->part_models, n);
-            }
+            // Continue to process along the hierarchical name.
+            p = get_model_part(part, r + 1);
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part. The model is null.");
+            // The given model contains primitive models.
+            p = get_map_element_with_name(m->part_models, n);
         }
+*/
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part. The hierarchical name is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part. The model is null.");
     }
 }
 
@@ -627,6 +646,7 @@ void get_model_part(const void* p0, const void* p1, void* p2) {
  * @param p1 the hierarchical model name
  * @return the part position
  */
+/*??
 void* get_model_part_position(const void* p0, const void* p1) {
 
     void* p = (void*) 0;
@@ -635,7 +655,6 @@ void* get_model_part_position(const void* p0, const void* p1) {
     if (m != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Get model part position: ");
-        log_message((void*) &INFO_LOG_LEVEL, p1);
 
         int length = 0;
         get_string_length(p1, (void*) &length);

@@ -43,7 +43,7 @@
  *
  * It creates a statics or dynamics memory model from a cybol model.
  *
- * @version $Revision: 1.4 $ $Date: 2004-03-01 17:08:58 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-03-11 22:44:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,75 +53,121 @@
  * @param p0 the cybol model
  * @param p1 the location
  * @param p2 the abstraction
- * @return the memory model
+ * @param p3 the memory model
  */
-void* create_model(void* p0, void* p1, void* p2) {
+void create_model(const void* p0, const void* p1, const void* p2, void* p3) {
 
-    void* m = (void*) 0;
-    char* p = (char*) p0;
-    char* a = (char*) p2;
+    void** m = (void**) p3;
 
-    if (p != (void*) 0) {
+    if (m != (void*) 0) {
 
-        if (strcmp(p, "") != 0) {
+        int r = 0;
+
+        // Do not consider empty cybol models further.
+        compare_arrays(p0, (void*) &EMPTY_STRING, (void*) &r);
+
+        if (r == 0) {
 
             log_message((void*) &INFO_LOG_LEVEL, "Create model.");
-            log_message((void*) &INFO_LOG_LEVEL, p0);
 
             // Compound model.
-            if (strcmp(a, COMPOUND_MODEL) == 0) {
+            compare_arrays(p2, (void*) &COMPOUND_MODEL, (void*) &r);
 
-                m = (void*) malloc(sizeof(struct model));
-                create_model_containers(m);
-                initialize_model(m, p0);
+            if (r == 1) {
 
-            // Dynamics model.
-            } else if (strcmp(a, OPERATION_MODEL) == 0) {
+                *m = (void*) malloc(sizeof(struct model));
+                create_model_containers((void*) m);
+                initialize_model((void*) m, p0);
 
-                m = (void*) malloc(sizeof(struct operation));
-                create_operation_container(m);
-                initialize_operation_model(m, p0);
+            } else {
 
-            // Statics models.
-            } else if (strcmp(a, TIME_MODEL) == 0) {
+                // Dynamics model.
+                compare_arrays(p2, (void*) &OPERATION_MODEL, (void*) &r);
 
-                m = (void*) malloc(sizeof(struct time));
-                initialize_time_model(m, p0);
+                if (r == 1) {
 
-            } else if (strcmp(a, STRING_MODEL) == 0) {
+                    *m = (void*) malloc(sizeof(struct operation));
+                    create_operation_container((void*) m);
+                    initialize_operation_model((void*) m, p0);
 
-                m = (void*) malloc(sizeof(struct string));
-                initialize_string_model(m, p0);
+                } else {
 
-            } else if (strcmp(a, VECTOR_MODEL) == 0) {
+                    // Statics models.
+                    compare_arrays(p2, (void*) &TIME_MODEL, (void*) &r);
 
-                m = (void*) malloc(sizeof(struct vector));
-                initialize_vector_model(m, p0);
+                    if (r == 1) {
 
-            } else if (strcmp(a, COMPLEX_MODEL) == 0) {
+                        *m = (void*) malloc(sizeof(struct time));
+                        initialize_time_model((void*) m, p0);
 
-                m = (void*) malloc(sizeof(struct complex));
-                initialize_complex_model(m, p0);
+                    } else {
 
-            } else if (strcmp(a, FRACTION_MODEL) == 0) {
+                        compare_arrays(p2, (void*) &STRING_MODEL, (void*) &r);
 
-                m = (void*) malloc(sizeof(struct fraction));
-                initialize_fraction_model(m, p0);
+                        if (r == 1) {
 
-            } else if (strcmp(a, INTEGER_MODEL) == 0) {
+                            *m = (void*) malloc(sizeof(struct string));
+                            initialize_string_model((void*) m, p0);
 
-                m = (void*) malloc(sizeof(struct integer));
-                initialize_integer_model(m, p0);
+                        } else {
 
-            } else if (strcmp(a, BOOLEAN_MODEL) == 0) {
+                            compare_arrays(p2, (void*) &VECTOR_MODEL, (void*) &r);
 
-                m = (void*) malloc(sizeof(struct boolean));
-                initialize_boolean_model(m, p0);
+                            if (r == 1) {
+
+                                *m = (void*) malloc(sizeof(struct vector));
+                                initialize_vector_model((void*) m, p0);
+
+                            } else {
+
+                                compare_arrays(p2, (void*) &COMPLEX_MODEL, (void*) &r);
+
+                                if (r == 1) {
+
+                                    *m = (void*) malloc(sizeof(struct complex));
+                                    initialize_complex_model((void*) m, p0);
+
+                                } else {
+
+                                    compare_arrays(p2, (void*) &FRACTION_MODEL, (void*) &r);
+
+                                    if (r == 1) {
+
+                                        *m = (void*) malloc(sizeof(struct fraction));
+                                        initialize_fraction_model((void*) m, p0);
+
+                                    } else {
+
+                                        compare_arrays(p2, (void*) &INTEGER_MODEL, (void*) &r);
+
+                                        if (r == 1) {
+
+                                            *m = (void*) malloc(sizeof(struct integer));
+                                            initialize_integer_model((void*) m, p0);
+
+                                        } else {
+
+                                            compare_arrays(p2, (void*) &BOOLEAN_MODEL, (void*) &r);
+
+                                            if (r == 1) {
+
+                                                *m = (void*) malloc(sizeof(struct boolean));
+                                                initialize_boolean_model((void*) m, p0);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
-    }
 
-    return m;
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not create model. The model is null.");
+    }
 }
 
 /* CREATE_MODEL_SOURCE */

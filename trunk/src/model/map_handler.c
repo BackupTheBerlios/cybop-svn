@@ -35,7 +35,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.13 $ $Date: 2004-03-11 14:33:52 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-03-11 22:44:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -151,11 +151,12 @@ void get_map_element_index(const void* p0, const void* p1, void* p2) {
             }
 
             get_array_element(p0, (void*) &j, (void*) &n);
+            compare_arrays((void*) &n, p1, (void*) &r);
 
-            // If a name equal to the searched one is found,
-            // then its index is the one to be returned.
-            if (compare_arrays((void*) &n, p1, (void*) &r) == 1) {
+            if (r == 1) {
 
+                // If a name equal to the searched one is found,
+                // then its index is the one to be returned.
                 *i = j;
 
                 break;

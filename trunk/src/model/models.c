@@ -28,7 +28,7 @@
 /**
  * This is the model definition constants.
  *
- * @version $Revision: 1.1 $ $Date: 2004-02-29 18:33:30 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-03-11 22:44:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,7 +37,7 @@
 //
 
 /** The compound model. */
-static const char* COMPOUND_MODEL = "compound";
+static const char* COMPOUND_MODEL = {'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd'};
 
 /* MODELS_SOURCE */
 #endif

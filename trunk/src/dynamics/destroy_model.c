@@ -44,7 +44,7 @@
  *
  * It destroys a statics or dynamics memory model to a cybol model.
  *
- * @version $Revision: 1.4 $ $Date: 2004-03-01 17:08:58 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-03-11 22:44:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,67 +58,116 @@
  */
 void destroy_model(void* p0, void* p1, void* p2, void* p3) {
 
-    char* p = (char*) p1;
-    char* a = (char*) p3;
+    void** m = (void**) p3;
 
-    if (p0 != (void*) 0) {
+    if (m != (void*) 0) {
 
-//??        if (p != (void*) 0) {
+        int r = 0;
+
+        // Do not consider empty cybol models further.
+        compare_arrays(p0, (void*) &EMPTY_STRING, (void*) &r);
+
+        if (r == 0) {
 
             log_message((void*) &INFO_LOG_LEVEL, "Destroy model.");
-            log_message((void*) &INFO_LOG_LEVEL, p1);
 
             // Compound model.
-            if (strcmp(a, COMPOUND_MODEL) == 0) {
+            compare_arrays(p2, (void*) &COMPOUND_MODEL, (void*) &r);
+
+            if (r == 1) {
 
                 finalize_model(p0, p1);
                 destroy_model_containers(p0);
                 free(p0);
 
-            // Dynamics model.
-            } else if (strcmp(a, OPERATION_MODEL) == 0) {
+            } else {
 
-                finalize_operation_model(p0, p1);
-                destroy_operation_container(p0);
-                free(p0);
+                // Dynamics model.
+                compare_arrays(p2, (void*) &OPERATION_MODEL, (void*) &r);
 
-            // Statics models.
-            } else if (strcmp(a, TIME_MODEL) == 0) {
+                if (r == 1) {
 
-                finalize_time_model(p0, p1);
-                free(p0);
+                    finalize_operation_model(p0, p1);
+                    destroy_operation_container(p0);
+                    free(p0);
 
-            } else if (strcmp(a, STRING_MODEL) == 0) {
+                } else {
 
-                finalize_string_model(p0, p1);
-                free(p0);
+                    // Statics models.
+                    compare_arrays(p2, (void*) &TIME_MODEL, (void*) &r);
 
-            } else if (strcmp(a, VECTOR_MODEL) == 0) {
+                    if (r == 1) {
 
-                finalize_vector_model(p0, p1);
-                free(p0);
+                        finalize_time_model(p0, p1);
+                        free(p0);
 
-            } else if (strcmp(a, COMPLEX_MODEL) == 0) {
+                    } else {
 
-                finalize_complex_model(p0, p1);
-                free(p0);
+                        compare_arrays(p2, (void*) &STRING_MODEL, (void*) &r);
 
-            } else if (strcmp(a, FRACTION_MODEL) == 0) {
+                        if (r == 1) {
 
-                finalize_fraction_model(p0, p1);
-                free(p0);
+                            finalize_string_model(p0, p1);
+                            free(p0);
 
-            } else if (strcmp(a, INTEGER_MODEL) == 0) {
+                        } else {
 
-                finalize_integer_model(p0, p1);
-                free(p0);
+                            compare_arrays(p2, (void*) &VECTOR_MODEL, (void*) &r);
 
-            } else if (strcmp(a, BOOLEAN_MODEL) == 0) {
+                            if (r == 1) {
 
-                finalize_boolean_model(p0, p1);
-                free(p0);
+                                finalize_vector_model(p0, p1);
+                                free(p0);
+
+                            } else {
+
+                                compare_arrays(p2, (void*) &COMPLEX_MODEL, (void*) &r);
+
+                                if (r == 1) {
+
+                                    finalize_complex_model(p0, p1);
+                                    free(p0);
+
+                                } else {
+
+                                    compare_arrays(p2, (void*) &FRACTION_MODEL, (void*) &r);
+
+                                    if (r == 1) {
+
+                                        finalize_fraction_model(p0, p1);
+                                        free(p0);
+
+                                    } else {
+
+                                        compare_arrays(p2, (void*) &INTEGER_MODEL, (void*) &r);
+
+                                        if (r == 1) {
+
+                                            finalize_integer_model(p0, p1);
+                                            free(p0);
+
+                                        } else {
+
+                                            compare_arrays(p2, (void*) &BOOLEAN_MODEL, (void*) &r);
+
+                                            if (r == 1) {
+
+                                                finalize_boolean_model(p0, p1);
+                                                free(p0);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-//??        }
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not create model. The model is null.");
     }
 }
 

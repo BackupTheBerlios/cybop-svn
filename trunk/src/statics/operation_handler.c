@@ -34,7 +34,7 @@
 /**
  * This is the operation handler.
  *
- * @version $Revision: 1.10 $ $Date: 2004-03-02 16:22:04 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-03-11 22:44:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,7 +56,7 @@ void create_operation_container(void* p0) {
         log_message((void*) &INFO_LOG_LEVEL, "Create operation container.");
 
         m->value = (void*) malloc(sizeof(struct array));
-        initialize_array(m->value);
+        initialize_array(m->value, (void*) &CHARACTER_ARRAY);
 
     } else {
 
@@ -104,6 +104,7 @@ void initialize_operation_model(void* p0, void* p1) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Initialize operation model.");
 
+/*??
         // Read input stream and transform to operation with operands.
         int length = 0;
         get_string_length(p1, (void*) &length);
@@ -123,6 +124,7 @@ void initialize_operation_model(void* p0, void* p1) {
             // Set index of remaining string to one after the comma character.
             initialize_operation_model(p0, r + 1);
         }
+*/
 
     } else {
 
@@ -144,6 +146,7 @@ void finalize_operation_model(void* p0, void* p1) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Finalize operation model.");
 
+/*??
         if (p1 != (void*) 0) {
 
             // Write output stream by transforming from operation with operands.
@@ -168,6 +171,7 @@ void finalize_operation_model(void* p0, void* p1) {
 
             log_message((void*) &INFO_LOG_LEVEL, "Did not finalize operation model. The cybol model is null.");
         }
+*/
 
     } else {
 

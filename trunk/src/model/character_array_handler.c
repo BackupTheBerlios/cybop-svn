@@ -43,7 +43,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.3 $ $Date: 2004-03-11 14:33:52 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-03-11 22:44:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -210,7 +210,7 @@ void remove_character_array_element(const void* p0, const void* p1, const void* 
 
                 // Set former last element to ''.
                 e0 = (char*) (p0 + j);
-                *e0 = '';
+                *e0 = 0;
 
             } else {
 

@@ -34,7 +34,7 @@
  * Complex models consist of other complex models and primitive models.
  * Primitive models are the final abstraction in software.
  *
- * @version $Revision: 1.4 $ $Date: 2004-02-29 19:55:27 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-03-11 22:44:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,91 +43,91 @@
 //
 
 /** The operation model. */
-static const char* OPERATION_MODEL = "operation";
+static const char* OPERATION_MODEL = {'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n'};
 
 //
 // Primitive models.
 //
 
 /** The boolean model. */
-static const char* BOOLEAN_MODEL = "boolean";
+static const char* BOOLEAN_MODEL = {'b', 'o', 'o', 'l', 'e', 'a', 'n'};
 
 /** The integer model. */
-static const char* INTEGER_MODEL = "integer";
+static const char* INTEGER_MODEL = {'i', 'n', 't', 'e', 'g', 'e', 'r'};
 
 /** The fraction model. */
-static const char* FRACTION_MODEL = "fraction";
+static const char* FRACTION_MODEL = {'f', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
 
 /** The complex model. */
-static const char* COMPLEX_MODEL = "complex";
+static const char* COMPLEX_MODEL = {'c', 'o', 'm', 'p', 'l', 'e', 'x'};
 
 /** The vector model. */
-static const char* VECTOR_MODEL = "vector";
+static const char* VECTOR_MODEL = {'v', 'e', 'c', 't', 'o', 'r'};
 
 /** The string model. */
-static const char* STRING_MODEL = "string";
+static const char* STRING_MODEL = {'s', 't', 'r', 'i', 'n', 'g'};
 
 /** The time model. */
-static const char* TIME_MODEL = "time";
+static const char* TIME_MODEL = {'t', 'i', 'm', 'e'};
 
 //
 // Audio models.
 //
 
 /** The mp3 model. */
-static const char* MP3_MODEL = "mp3";
+static const char* MP3_MODEL = {'m', 'p', '3'};
 
 //
 // Image models.
 //
 
 /** The jpeg model. */
-static const char* JPEG_MODEL = "jpeg";
+static const char* JPEG_MODEL = {'j', 'p', 'e', 'g'};
 
 /** The gif model. */
-static const char* GIF_MODEL = "gif";
+static const char* GIF_MODEL = {'g', 'i', 'f'};
 
 /** The bmp model. */
-static const char* BMP_MODEL = "bmp";
+static const char* BMP_MODEL = {'b', 'm', 'p'};
 
 //
 // Text models.
 //
 
 /** The sgml model. */
-static const char* SGML_MODEL = "sgml";
+static const char* SGML_MODEL = {'s', 'g', 'm', 'l'};
 
 /** The xml model. */
-static const char* XML_MODEL = "xml";
+static const char* XML_MODEL = {'x', 'm', 'l'};
 
 /** The html model. */
-static const char* HTML_MODEL = "html";
+static const char* HTML_MODEL = {'h', 't', 'm', 'l'};
 
 /** The rtf model. */
-static const char* RTF_MODEL = "rtf";
+static const char* RTF_MODEL = {'r', 't', 'f'};
 
 /** The tex model. */
-static const char* TEX_MODEL = "tex";
+static const char* TEX_MODEL = {'t', 'e', 'x'};
 
 //
 // Video models.
 //
 
 /** The mpeg model. */
-static const char* MPEG_MODEL = "mpeg";
+static const char* MPEG_MODEL = {'m', 'p', 'e', 'g'};
 
 /** The quicktime model. */
-static const char* QUICKTIME_MODEL = "qt";
+static const char* QUICKTIME_MODEL = {'q', 't'};
 
 //
 // Application models.
 //
 
 /** The koffice kword model. */
-static const char* KWORD_MODEL = "kword";
+static const char* KWORD_MODEL = {'k', 'w', 'o', 'r', 'd'};
 
 /** The open office writer model. */
-static const char* SXW_MODEL = "sxw";
+static const char* SXW_MODEL = {'s', 'x', 'w'};
 
 /* STATICS_MODELS_SOURCE */
 #endif
