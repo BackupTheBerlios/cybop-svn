@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2004-09-08 23:34:12 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-09-09 09:07:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,8 @@
 #include "../creator/compound_creator.c"
 #include "../creator/xml_node_creator.c"
 #include "../creator/xml_property_creator.c"
+#include "../global/abstraction_constants.c"
+#include "../global/channel_constants.c"
 #include "../global/character_constants.c"
 #include "../global/cybol_constants.c"
 #include "../global/log_constants.c"
@@ -91,34 +93,49 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
             xmlNode** s = (xmlNode**) p3;
 
             //
-            // Child nodes.
+            // Source variables (persistent).
             //
 
-            // The name.
-            void* n = NULL_POINTER;
-            int nc = 0;
-            int ns = 0;
-            // The channel.
-            void* c = NULL_POINTER;
-            int cc = 0;
-            int cs = 0;
-            // The abstraction.
-            void* a = NULL_POINTER;
-            int ac = 0;
-            int as = 0;
-            // The model.
-            void* m = NULL_POINTER;
-            int mc = 0;
-            int ms = 0;
-
             // Determine first child node.
-            xmlNode* cn = (*s)->children;
+            xmlNode* c = (*s)->children;
             // The child node property.
             xmlAttr* p = NULL_POINTER;
-
             // The property name.
-            char* pn = NULL_POINTER;
-            int pnc = 0;
+            char* n = NULL_POINTER;
+            int nc = 0;
+            // The source name.
+            void* sn = NULL_POINTER;
+            int snc = 0;
+            int sns = 0;
+            // The source channel.
+            void* sc = NULL_POINTER;
+            int scc = 0;
+            int scs = 0;
+            // The source abstraction.
+            void* sa = NULL_POINTER;
+            int sac = 0;
+            int sas = 0;
+            // The source model.
+            void* sm = NULL_POINTER;
+            int smc = 0;
+            int sms = 0;
+
+            //
+            // Destination variables (transient).
+            //
+
+            // The destination name.
+            void* dn = NULL_POINTER;
+            int dnc = 0;
+            int dns = 0;
+            // The destination abstraction.
+            void* da = NULL_POINTER;
+            int dac = 0;
+            int das = 0;
+            // The destination model.
+            void* dm = NULL_POINTER;
+            int dmc = 0;
+            int dms = 0;
 
             // The done flag.
             int d = 0;
@@ -127,22 +144,19 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
 
             while (1) {
 
-                if (cn == NULL_POINTER) {
+                if (c == NULL_POINTER) {
 
                     break;
                 }
 
-                if (cn->type == XML_ELEMENT_NODE) {
-
-                    // Get node name (part | property | constraint):
-                    // cn->name
+                if (c->type == XML_ELEMENT_NODE) {
 
                     //
                     // Child node properties.
                     //
 
                     // Determine first child node property.
-                    p = cn->properties;
+                    p = c->properties;
 
                     while (1) {
 
@@ -152,8 +166,8 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
                         }
 
                         // Get property name.
-                        pn = (char*) p->name;
-                        pnc = strlen(pn) - 1;
+                        n = (char*) p->name;
+                        nc = strlen(n) - 1;
 
 //?? ---
                         // Reset done flag.
@@ -163,7 +177,7 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
 
                         if (d == 0) {
 
-                            compare_arrays((void*) &pn, (void*) &pnc, (void*) &NAME_ATTRIBUTE, (void*) &NAME_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+                            compare_arrays((void*) &n, (void*) &nc, (void*) &NAME_ATTRIBUTE, (void*) &NAME_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
                             if (r == 1) {
 
@@ -175,7 +189,7 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
 
                         if (d == 0) {
 
-                            compare_arrays((void*) &pn, (void*) &pnc, (void*) &CHANNEL_ATTRIBUTE, (void*) &CHANNEL_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+                            compare_arrays((void*) &n, (void*) &nc, (void*) &CHANNEL_ATTRIBUTE, (void*) &CHANNEL_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
                             if (r == 1) {
 
@@ -188,7 +202,7 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
 
                         if (d == 0) {
 
-                            compare_arrays((void*) &pn, (void*) &pnc, (void*) &ABSTRACTION_ATTRIBUTE, (void*) &ABSTRACTION_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+                            compare_arrays((void*) &n, (void*) &nc, (void*) &ABSTRACTION_ATTRIBUTE, (void*) &ABSTRACTION_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
                             if (r == 1) {
 
@@ -200,7 +214,7 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
 
                         if (d == 0) {
 
-                            compare_arrays((void*) &pn, (void*) &pnc, (void*) &MODEL_ATTRIBUTE, (void*) &MODEL_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+                            compare_arrays((void*) &n, (void*) &nc, (void*) &MODEL_ATTRIBUTE, (void*) &MODEL_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
                             if (r == 1) {
 
@@ -217,11 +231,35 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
                         //?? decode_xml_property(p0, p1, p2, (void*) &p, p4);
 
                         // Reset property name.
-                        pn = NULL_POINTER;
-                        pnc = 0;
+                        n = NULL_POINTER;
+                        nc = 0;
 
                         p = p->next;
                     }
+
+                    // Get node name (part | property | constraint):
+                    // c->name
+
+                    // Create name.
+                    create_model((void*) &dn, (void*) &dnc, (void*) &dns,
+                        (void*) &sn, (void*) &snc,
+                        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
+                        (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+
+                    // Create abstraction.
+                    create_model((void*) &da, (void*) &dac, (void*) &das,
+                        (void*) &sa, (void*) &sac,
+                        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
+                        (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+
+                    // Create model.
+                    create_model((void*) &dm, (void*) &dmc, (void*) &dms,
+                        (void*) &sm, (void*) &smc,
+                        (void*) &sa, (void*) &sac,
+                        (void*) &sc, (void*) &scc);
+
+                    // Add child node to destination.
+                    //?? ...
 
                     // If child has children, then create details model for it.
 
@@ -231,16 +269,11 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
                     // Add all details to details model.
                     // Do NOT add super tags to details model!
 
-                    // Hand over model.
-                    // Receive across channel.
-                    // Read abstraction.
-                    // Initialize it with the actual persistent model.
-
                     // Decode children.
                     //?? decode_xml_node(p0, p1, p2, (void*) &c, p4);
                 }
 
-                cn = cn->next;
+                c = c->next;
             }
 
         } else {
