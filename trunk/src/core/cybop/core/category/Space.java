@@ -22,7 +22,7 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model;
+package cybop.core.category;
 
 import cybop.core.model.Integer;
 import cybop.core.model.String;
@@ -34,10 +34,10 @@ import cybop.core.model.String;
  * A point is just a minimal space and always relative to the referenced object.
  * The absolute point does not exist as any point can consist of yet smaller points.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-05-23 11:57:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Space extends ModelItem {
+public class Space extends Map {
 
     //
     // Children names.

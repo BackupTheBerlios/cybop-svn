@@ -22,22 +22,22 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model.model.user.system;
+package cybop.core.screen.model.frame;
 
 import cybop.core.model.String;
-import cybop.core.model.model.user.*;
+import cybop.core.screen.model.*;
 
 /**
- * This class represents a portal user interface.
+ * This class represents a portal model.
  *
  * It is based on a split pane containing a tree menu on the left.
  * The tree offers a hierarchy of categories with available system modules.
  * On the right side of the splitter, there is a container for child system views.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class PortalUserInterface extends SystemUserInterface {
+public class PortalModel extends FrameModel {
 
     //
     // Default children.

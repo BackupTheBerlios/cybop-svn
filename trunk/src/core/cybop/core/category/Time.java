@@ -22,7 +22,7 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model;
+package cybop.core.category;
 
 /**
  * This class represents a time.
@@ -37,9 +37,9 @@ package cybop.core.model;
  *
  * It is measured in seconds [s].
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-05-23 11:57:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Time extends ModelItem {
+public class Time extends Map {
 }
 

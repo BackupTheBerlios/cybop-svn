@@ -22,16 +22,15 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model.model.user;
+package cybop.core.screen.model.frame;
 
 import cybop.core.model.Boolean;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
-import cybop.core.model.model.*;
-import cybop.core.model.organizer.*;
+import cybop.core.screen.model.*;
 
 /**
- * This class represents a system information user interface.
+ * This class represents a system information model.
  *
  * It shows the following information about the system:
  * - name
@@ -41,10 +40,10 @@ import cybop.core.model.organizer.*;
  * - authors
  * - helpers
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class SystemInformationUserInterface extends UserInterface {
+public class SystemInformationModel extends FrameModel {
 
     //
     // Default children.

@@ -25,16 +25,17 @@
 package cybop.core.screen.component;
 
 import cybop.core.model.*;
+import cybop.core.screen.*;
 
 /**
  * This class represents a layout.
  *
  * It specifies the form in which components of a region are ordered.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Layout extends Organizer {
+public class Layout extends ScreenComponent {
 
     //
     // Encapsulated java awt layout manager.

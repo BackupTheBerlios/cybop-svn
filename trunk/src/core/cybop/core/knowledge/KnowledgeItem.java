@@ -32,10 +32,146 @@ import cybop.core.model.*;
  * It is a general part of a knowledge model that is able to store
  * knowledge, that is hierarchical information.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * Because (active) system items must be able to uniquely identify a (passive)
+ * knowledge item, knowledge items get assigned an id at the time of their
+ * creation. The id consists of:
+ * <ul>
+ *     <li>network card number (unique in space)</li>
+ *     <li>timestamp (unique in time)</li>
+ * </ul>
+ *
+ * Because a model item can also represent a state, that is a snapshot in time,
+ * it knows about its previous state and is such able to build up a timeline.
+ *
+ * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Torsten Kunze <zone3@gmx.de>
  */
 public class KnowledgeItem extends ModelItem {
+
+    //
+    // Children names.
+    //
+
+    /** The identifier. */
+    private String identifier;
+
+    /** The predecessor. */
+    private ModelItem predecessor;
+
+    //
+    // The identifier.
+    //
+    
+    /**
+     * Creates the identifier.
+     *
+     * @return the identifier
+     */
+    public String createIdentifier() {
+
+        return null;
+    }
+
+    /**
+     * Destroys the identifier.
+     *
+     * @param s the identifier
+     */
+    public void destroyIdentifier(String s) {
+    }
+
+    /**
+     * Sets the identifier.
+     *
+     * @param s the identifier
+     */
+    public void setIdentifier(String s) {
+
+        this.identifier = s;
+    }
+    
+    /**
+     * Returns the identifier.
+     *
+     * @return the identifier
+     */
+    public String getIdentifier() {
+
+        return this.identifier;
+    }
+
+    //
+    // The predecessor.
+    //
+
+    /**
+     * Creates the predecessor.
+     *
+     * @return the predecessor
+     */
+    public ModelItem createPredecessor() {
+
+        return null;
+    }
+
+    /**
+     * Destroys the predecessor.
+     *
+     * @param p the predecessor
+     */
+    public void destroyPredecessor(ModelItem p) {
+    }
+
+    /**
+     * Sets the predecessor.
+     *
+     * @param p the predecessor
+     */
+    public void setPredecessor(ModelItem p) {
+
+        this.predecessor = p;
+    }
+    
+    /**
+     * Returns the predecessor.
+     *
+     * @return the predecessor
+     */
+    public ModelItem getPredecessor() {
+
+        return this.predecessor;
+    }
+
+    //
+    // Initializable.
+    //
+
+    /**
+     * Initializes this item.
+     */
+    public void initialize() throws Exception {
+
+        super.initialize();
+
+        setIdentifier(createIdentifier());
+        setPredecessor(createPredecessor());
+    }
+
+    /**
+     * Finalizes this item.
+     */
+    public void finalizz() throws Exception {
+
+        ModelItem predecessor = getPredecessor();
+        setPredecessor(null);
+        destroyPredecessor(predecessor);
+
+        String identifier = getIdentifier();
+        setIdentifier(null);
+        destroyIdentifier(identifier);
+
+        super.finalizz();
+    }
 }
 

@@ -33,7 +33,7 @@ package cybop.core.category;
  * the index of the wanted element -- and then returning the corresponding
  * reference.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-23 11:57:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Map extends Array {
@@ -251,7 +251,7 @@ public class Map extends Array {
 
                     // If a name equal to the searched one is found,
                     // then its index is the one to be returned.
-                    if name.isEqualTo(n) {
+                    if (name.isEqualTo(n)) {
 
                         break;
                     }

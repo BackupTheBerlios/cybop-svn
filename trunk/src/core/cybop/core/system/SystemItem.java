@@ -25,6 +25,7 @@
 package cybop.core.system;
 
 import cybop.core.category.*;
+import cybop.core.model.*;
 
 /**
  * This class represents a system item.<br><br>
@@ -32,10 +33,10 @@ import cybop.core.category.*;
  * A system item has special properties like configuration or log record and
  * is able to create and send signals.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class SystemItem extends Item {
+public class SystemItem extends ModelItem {
 
     //
     // Children names.

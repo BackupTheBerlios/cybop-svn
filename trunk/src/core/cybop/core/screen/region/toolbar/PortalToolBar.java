@@ -22,14 +22,15 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model.organizer;
+package cybop.core.screen.region.toolbar;
 
 import cybop.core.model.*;
+import cybop.core.screen.region.*;
 
 /**
  * This class represents a portal tool bar.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:58:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalToolBar extends ToolBar {

@@ -27,15 +27,15 @@ package cybop.core.screen.component;
 import cybop.core.model.*;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
-import cybop.core.model.*;
+import cybop.core.screen.*;
 
 /**
  * This class represents a label.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Label extends Organizer {
+public class Label extends ScreenComponent {
 
     //
     // Children names.

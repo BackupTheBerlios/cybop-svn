@@ -24,8 +24,6 @@
 
 package cybop.core.system;
 
-import cybop.core.model.*;
-
 /**
  * This class represents a chain.
  *
@@ -47,9 +45,9 @@ import cybop.core.model.*;
  *
  * A chain corresponds to a molecule chain in biology.
  *
- * @version $Revision: 1.4 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Chain extends Item {
+public class Chain extends SystemItem {
 }
 

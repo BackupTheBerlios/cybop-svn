@@ -80,7 +80,7 @@ package cybop.core.category;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-23 11:57:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends Behaviour {
@@ -91,56 +91,6 @@ public class Item extends Behaviour {
 
     /** The children. */
     private Map children;
-
-    //
-    // Children names.
-    //
-
-    /** The log level. */
-    public static final String LOG_LEVEL = new String("log_level");
-
-    //
-    // Children category names.
-    //
-
-    /** The log level category. */
-    public static final String LOG_LEVEL_CATEGORY = new String("log_level_category");
-
-    //
-    // Log levels.
-    //
-
-    /** The log level to turn off logging. */
-    public static final Integer OFF_LOG_LEVEL = new Integer(0);
-
-    /** The log level indicating a serious failure. */
-    public static final Integer ERROR_LOG_LEVEL = new Integer(1);
-
-    /** The log level indicating a potential problem. */
-    public static final Integer WARNING_LOG_LEVEL = new Integer(2);
-
-    /** The log level for informational messages. */
-    public static final Integer INFO_LOG_LEVEL = new Integer(3);
-
-    /** The log level providing tracing information. */
-    public static final Integer DEBUG_LOG_LEVEL = new Integer(4);
-
-    /** The log level printing all messages, including every signal occuring in the system. */
-    public static final Integer SIGNAL_LOG_LEVEL = new Integer(5);
-
-    //
-    // Default categories.
-    //
-
-    /**
-     * Returns the default log level category.
-     *
-     * @return the default log level category
-     */
-    public Item getDefaultLogLevelCategory() {
-
-        return Item.SIGNAL_LOG_LEVEL;
-    }
 
     //
     // Children.
@@ -361,55 +311,6 @@ public class Item extends Behaviour {
     }
 
     //
-    // Categorization.
-    //
-
-    /**
-     * Categorizes this item.
-     */
-    public void categorize() throws Exception {
-
-        super.categorize();
-
-        setChildCategory(Item.LOG_LEVEL_CATEGORY, c.getChildItem(Item.LOG_LEVEL_CATEGORY, getDefaultLogLevelCategory()));
-    }
-
-    /**
-     * Decategorizes this item.
-     */
-    public void decategorize() throws Exception {
-
-        //?? Write changes to local user configuration file.
-//??        c.setChildItem(Item.LOG_LEVEL_CATEGORY, getChildCategory(Item.LOG_LEVEL_CATEGORY));
-//??        removeChildCategory(Item.LOG_LEVEL_CATEGORY);
-
-        super.decategorize();
-    }
-
-    //
-    // Globalization.
-    //
-
-    /**
-     * Globalizes this item.
-     *
-     * @param r the log record
-     * @param m the signal memory
-     */
-    public void globalize(Item r, Item m) throws Exception {
-
-        setChildItem(Item.LOG_RECORD, r);
-    }
-
-    /**
-     * Deglobalizes this item.
-     */
-    public void deglobalize() throws Exception {
-
-        removeChildItem(Item.LOG_RECORD);
-    }
-
-    //
     // Initialization.
     //
 
@@ -419,7 +320,6 @@ public class Item extends Behaviour {
     public void initialize() throws Exception {
 
         setChildren(createChildren());
-        setChildItem(Item.LOG_LEVEL, getChildCategory(Item.LOG_LEVEL_CATEGORY));
     }
 
     /**
@@ -434,146 +334,10 @@ public class Item extends Behaviour {
      */
     public void finalizz() throws Exception {
 
-        Item logLevel = getChildItem(Item.LOG_LEVEL);
-        removeChildItem(Item.LOG_LEVEL);
-        destroyChildItem((Integer) logLevel);
-
         Abstraction children = getChildren();
         setChildren(null);
         destroyChildren((Hierarchy) children);
     }
-
-    //
-    // Logging.
-    //
-
-    /**
-     * Logs a message with no arguments.
-     *
-     * @param l the log level
-     * @param m the message
-     */
-    public void log(Integer l, java.lang.String m) throws Exception {
-
-        log(l, m, null);
-    }
-
-    /**
-     * Logs a message with associated throwable information.
-     *
-     * @param l the log level
-     * @param m the message
-     * @param t the throwable
-     * @exception Exception if the log level is null
-     * @exception Exception if the log record is null
-     */
-    public void log(Integer l, java.lang.String m, java.lang.Throwable t) throws Exception {
-
-        if (l != null) {
-
-            if (l.isSmallerThanOrEqualTo((Integer) getChildItem(Item.LOG_LEVEL))) {
-
-                LogRecord r = (LogRecord) getChildItem(Item.LOG_RECORD);
-
-                if (r != null) {
-
-                    r.setChildItem(LogRecord.MESSAGE, new String(m));
-                    r.setThrowable(t);
-
-                } else {
-                    
-                    throw new Exception("Could not log message. The log record is null.");
-                }
-    
-                log(r);
-            }
-
-        } else {
-            
-            throw new Exception("Could not log message. The log level is null.");
-        }
-    }
-
-    /**
-     * Logs a log record.
-     *
-     * @param r the log record
-     * @exception Exception if the log record is null
-     */
-    public void log(LogRecord r) throws Exception {
-
-/*??
-        cybop.core.system.region.controller.Encoder e = (cybop.core.system.region.controller.Encoder) getChildItem(Item.ENCODER);
-
-        if (e != null) {
-
-            e.drive(r);
-            
-        } else {
-
-            /*??
-             * Temporary replacement for logging.
-             * The motor (output mechanism) has to be assigned here later.
-             * For now, the system console is used for message output.
-             */
-            if (r.getThrowable() != null) {
-
-                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChildItem(LogRecord.MESSAGE)).getJavaObject() + "\n" + r.getThrowable());
-                r.getThrowable().printStackTrace();
-
-            } else {
-
-                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChildItem(LogRecord.MESSAGE)).getJavaObject());
-            }
-
-/*??
-            throw new Exception("Could not log record. The motor is null.");
-        }
-*/
-    }
-
-    /**
-     * Logs a message with associated throwable information.
-     *
-     * Displays a graphical message dialog, in addition to the pure logging
-     * being done in the parent class's log method.
-     *
-     * @param lev the level
-     * @param msg the message
-     * @param t the throwable
-     */
-/*??
-    public void log(Level lev, String msg, Throwable t) throws Exception {
-
-        super.log(lev, msg, t);
-
-        DisplayManager dm = getDisplayManager();
-
-        if (dm != null) {
-
-//??            dm.showMessage(lev, msg, t);
-
-            //?? Example for localization!
-            //?? showError(e.getLocalizedSourceControlName(), e.getLocalizedMessage());
-
-        } else {
-
-            // Don't throw exception here cause not all controllers/applications
-            // use a graphical display, i.e. not all have a display manager.
-        }
-    }
-
-    /**
-     * Shows a message dialog.
-     *
-     * @param lev the level
-     * @param msg the message
-     * @param t the throwable
-     */
-/*??
-    public void showMessage(Level lev, String msg, Throwable t) throws Exception {
-    }
-*/
 
     //
     // Name management.

@@ -28,6 +28,7 @@ import cybop.core.model.*;
 import cybop.core.model.Boolean;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
+import cybop.core.system.*;
 import cybop.core.system.chain.*;
 
 /**
@@ -63,10 +64,10 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.18 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Component extends Chain {
+public class Component extends SystemItem {
 
     //
     // Children names.

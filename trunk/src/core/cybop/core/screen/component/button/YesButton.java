@@ -22,7 +22,7 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.screen.component;
+package cybop.core.screen.component.button;
 
 import cybop.core.model.Integer;
 import cybop.core.model.String;
@@ -30,7 +30,7 @@ import cybop.core.model.String;
 /**
  * This class represents a yes button.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class YesButton extends PanelButton {

@@ -22,7 +22,7 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model.organizer;
+package cybop.core.screen.region;
 
 /**
  * This class represents a composite tree/table component.
@@ -34,11 +34,10 @@ package cybop.core.model.organizer;
  * Idea of a tree table originally taken from the "Kiwi Toolkit" of Mark A. Lindner:
  * http://www.dystance.net/ping/kiwi/
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:58:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
  * @author Mark A. Lindner <frenzy@ix.netcom.com> <mark_a_lindner@yahoo.com>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-
 public class TreeTable extends Table {
 
     /**

@@ -24,8 +24,6 @@
 
 package cybop.core.system;
 
-import cybop.core.model.String;
-
 /**
  * This class represents a block.
  *
@@ -47,9 +45,9 @@ import cybop.core.model.String;
  *
  * A block corresponds to an organ in an animal's or human's body.
  *
- * @version $Revision: 1.4 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Block extends Region {
+public class Block extends SystemItem {
 }
 

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: ToggleButton.java,v $
+ * $RCSfile: Force.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,19 +22,26 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.screen.component;
-
-import cybop.core.model.*;
-import cybop.core.screen.*;
+package cybop.core.category;
 
 /**
- * This class represents a toggle button.
+ * This class represents a force.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * A force is an interaction between two categories.
+ *
+ * The modern physics knows four different kinds of forces:
+ * <ul>
+ *     <li>gravitation</li>
+ *     <li>electromagnetic</li>
+ *     <li>strong force</li>
+ *     <li>weak force</li>
+ * </ul>
+ *
+ * It is measured in Newton [N].
+ *
+ * @version $Revision: 1.1 $ $Date: 2003-05-23 11:57:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class ToggleButton extends ScreenComponent {
-    
-    //?? JToggleButton
+public class Force extends Map {
 }
 

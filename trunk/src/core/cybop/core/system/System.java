@@ -28,9 +28,6 @@ import cybop.core.model.*;
 import cybop.core.model.Boolean;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
-import cybop.core.model.*;
-import cybop.core.model.model.*;
-import cybop.core.model.model.user.*;
 import cybop.core.signal.*;
 import cybop.core.system.block.*;
 import cybop.core.system.chain.*;
@@ -60,11 +57,10 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.14 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class System extends Block implements 
-    java.lang.Runnable {
+public class System extends SystemItem implements java.lang.Runnable {
 
     //
     // Children names.

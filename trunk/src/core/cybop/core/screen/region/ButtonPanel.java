@@ -22,15 +22,16 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model.organizer;
+package cybop.core.screen.region;
 
 import cybop.core.model.*;
 import cybop.core.model.String;
+import cybop.core.screen.*;
 
 /**
  * This class represents a button panel.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ButtonPanel extends Panel {
