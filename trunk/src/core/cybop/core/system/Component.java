@@ -69,7 +69,7 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-03-15 01:01:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends Chain {
@@ -340,7 +340,7 @@ public class Component extends Chain {
             //?? Temporary, to assign the root system as action listener to gui components.
             //?? To be removed, when CYBOP supports its own mouse input handling,
             //?? replacing the java AWT/Swing stuff.
-            setSignalHandler(g.getSignalHandler());
+//??            setSignalHandler(g.getSignalHandler());
 
         } else {
 
@@ -361,7 +361,7 @@ public class Component extends Chain {
             //?? Temporary, to assign the root system as action listener to gui components.
             //?? To be removed, when CYBOP supports its own mouse input handling,
             //?? replacing the java AWT/Swing stuff.
-            setSignalHandler(null);
+//??            setSignalHandler(null);
             remove(Component.LOG_RECORD);
             remove(Component.CONFIGURATION);
             remove(Component.GLOBALS);
@@ -430,7 +430,7 @@ public class Component extends Chain {
         //?? Temporary, to assign the root system as action listener to gui components.
         //?? To be removed, when CYBOP supports its own mouse input handling,
         //?? replacing the java AWT/Swing stuff.
-        set(Component.FINALIZE_SIGNAL_HANDLER_FLAG, getDefaultFinalizeSignalHandlerFlag());
+//??        set(Component.FINALIZE_SIGNAL_HANDLER_FLAG, getDefaultFinalizeSignalHandlerFlag());
 
         // If no globals item was set in the globalize method,
         // then create a globals item here.
@@ -467,12 +467,14 @@ public class Component extends Chain {
             //?? replacing the java AWT/Swing stuff.
             // If no global signal handler was set in the globalize method,
             // then set it here to this object which is the root of the whole system.
+/*??
             if (getSignalHandler() == null) {
 
                 setSignalHandler(this);
                 set(Component.FINALIZE_SIGNAL_HANDLER_FLAG, new Boolean(Boolean.TRUE));
                 g.setSignalHandler(getSignalHandler());
             }
+*/
 
         } else {
 
@@ -532,6 +534,7 @@ public class Component extends Chain {
                 //?? replacing the java AWT/Swing stuff.
                 // Only destroy signal handler, if it was also set
                 // in this component, which can be seen on the flag.            
+/*??
                 if (get(Component.FINALIZE_SIGNAL_HANDLER_FLAG) != null) {
 
                     if (((Boolean) get(Component.FINALIZE_SIGNAL_HANDLER_FLAG)).isEqualTo(Boolean.TRUE)) {
@@ -541,9 +544,10 @@ public class Component extends Chain {
                     }
 
                 } else {
-                    
-                    throw new NullPointerException("Could not finalize component. The finalize log record item is null.");
+
+                    throw new NullPointerException("Could not finalize component. The finalize signal handler flag is null.");
                 }
+*/
 
                 // Only destroy log record, if it was also created
                 // in this component, which can be seen on the flag.            

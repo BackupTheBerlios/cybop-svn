@@ -67,10 +67,10 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.5 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-03-15 01:01:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Launcher extends Family implements
+public class Launcher extends Family /*??implements
     java.awt.event.ActionListener,
     java.awt.event.FocusListener,
     java.awt.event.ItemListener,
@@ -83,63 +83,7 @@ public class Launcher extends Family implements
     javax.swing.event.DocumentListener,
     javax.swing.event.InternalFrameListener,
     javax.swing.event.ListSelectionListener,
-    javax.swing.event.TreeSelectionListener {
-
-/*?? Java Events:
-Try subclassing EventQueue and adding a little logging functionality at the level
-of dispatchEvent(AWTEvent), while still letting the superclass do all the work.
-Then replace the SystemEventQueue with the "Logging Queue":
-
-import javax.swing.*; 
-import java.awt.*;
-import java.awt.event.*; 
-import java.util.*; 
-
-public class LoggingQueue extends EventQueue { 
-
-    protected Vector eventLog = new Vector(); 
-
-    protected void dispatchEvent(AWTEvent event) {
-
-        eventLog.addElement(event.toString()); 
-        System.out.println(event.toString()); 
-        super.dispatchEvent(event); 
-    } 
-
-    public static void main(String[] args) { 
-
-        JFrame frame = new JFrame(); 
-
-        frame.getToolkit().getSystemEventQueue().push(new LoggingQueue()); 
-        frame.setSize(300,300); 
-        frame.setVisible(true); 
-    } 
-} 
-
---
-
-I've found that the awt-thread can be started by this code:
-EventQueue eq = Toolkit.getDefaultToolkit().getSystemEventQueue();
-
---
-
-Post an event:
-Toolkit.getEventQueue().postEvent(e);
-
---
-
-Identification of clicked component:
-java.awt.Container::getMouseEventTargetImpl();
-java.awt.Container::dispatchEvent(AWTEvent e);
-
---
-
-EventDispatchThread::pumpOneEventForHierarchy(...);
-
---
-
-java.awt.Toolkit::getSystemEventQueueImpl();
-*/
+    javax.swing.event.TreeSelectionListener */{
 
     //
     // Command line arguments.
@@ -169,6 +113,12 @@ java.awt.Toolkit::getSystemEventQueueImpl();
 
     /** The lifecycle action. */
     public static final String LIFECYCLE_ACTION = new String("lifecycle_action");
+
+    /** The java event catcher. */
+    private JavaEventCatcher javaEventCatcher;
+
+    /** The signal. */
+    private Signal signal;
 
     /** The shutdown hook. */
     public static final String SHUTDOWN_HOOK = new String("shutdown_hook");
@@ -221,7 +171,13 @@ java.awt.Toolkit::getSystemEventQueueImpl();
                 l.setArguments(args);
                 l.initialize();
                 l.launch();
-                l.await();
+//??                The wait method is only needed if this is an operating system
+//??                catching all events. For now, we use the java awt events and
+//??                catch them here, in an internal class, with the dispatchEvent
+//??                method of the java awt EventQueue.
+//??                The internal class was already created in the initialize method,
+//??                so that the system is now complete and waits for events.
+//??                l.await();
                 l.finalizz();
                 l.setArguments(null);
 
@@ -429,6 +385,97 @@ java.awt.Toolkit::getSystemEventQueueImpl();
     }
 
     //
+    // Java event catcher.
+    //
+
+    /**
+     * Creates a java event catcher.
+     *
+     * @return the java event catcher
+     * @exception NullPointerException if the java event catcher is null
+     */
+    public JavaEventCatcher createJavaEventCatcher() throws Exception, NullPointerException {
+
+        JavaEventCatcher jec = new JavaEventCatcher();
+        
+        if (jec != null) {
+
+            // Exceptionally, the private internal class JavaEventCatcher has
+            // permittance to know about its container (this launcher).
+            // This is necessary to forward java awt events to this launcher.             
+            jec.setLauncher(this);
+
+        } else {
+    
+            throw new NullPointerException("Could not create java event catcher. The java event catcher is null.");
+        }
+        
+        return jec;
+    }
+
+    /*
+     * Destroys the java event catcher.
+     *
+     * @param jec the java event catcher
+     * @exception NullPointerException if the java event catcher is null
+     */
+    public void destroyJavaEventCatcher(JavaEventCatcher jec) throws Exception, NullPointerException {
+
+        if (jec != null) {
+
+            jec.setLauncher(null);
+
+        } else {
+
+            throw new NullPointerException("Could not destroy java event catcher. The java event catcher is null.");
+        }
+    }
+
+    /*
+     * Sets the java event catcher.
+     *
+     * @param jec the java event catcher
+     */
+    public void setJavaEventCatcher(JavaEventCatcher jec) {
+
+        this.javaEventCatcher = jec;
+    }
+
+    /**
+     * Returns the java event catcher.
+     *
+     * @return the java event catcher
+     */
+    public JavaEventCatcher getJavaEventCatcher() {
+
+        return this.javaEventCatcher;
+    }
+
+    //
+    // Signal.
+    //
+
+    /*
+     * Sets the signal.
+     *
+     * @param s the signal
+     */
+    public void setSignal(Signal s) {
+
+        this.signal = s;
+    }
+
+    /**
+     * Returns the signal.
+     *
+     * @return the signal
+     */
+    public Signal getSignal() {
+
+        return this.signal;
+    }
+
+    //
     // Shutdown hook.
     //
 
@@ -556,6 +603,11 @@ java.awt.Toolkit::getSystemEventQueueImpl();
             set(Launcher.SYSTEM_CONFIGURATION_LOCATION, getArgument(Launcher.SYSTEM_CONFIGURATION_LOCATION_ARGUMENT, getDefaultSystemConfigurationLocation()));
             set(Launcher.SCREEN, createComponent(getDefaultScreen()));
             set(Launcher.LIFECYCLE_ACTION, getArgument(Launcher.LIFECYCLE_ACTION_ARGUMENT, getDefaultLifecycleAction()));
+            //?? Temporary until event handling doesn't need java awt EventQueue anymore.
+            setJavaEventCatcher(createJavaEventCatcher());
+            //?? The set/get methods of the Item class are not used here to
+            //?? speed up finding the signal when accessing it directly as attribute.
+            setSignal((Signal) createItem(getDefaultSignal()));
             set(Launcher.SHUTDOWN_HOOK, createShutdownHook());
             set(Launcher.SHUTDOWN_FLAG, getDefaultShutdownFlag());
         }
@@ -573,6 +625,15 @@ java.awt.Toolkit::getSystemEventQueueImpl();
         ShutdownHook shutdownHook = (ShutdownHook) get(Launcher.SHUTDOWN_HOOK);
         remove(Launcher.SHUTDOWN_HOOK);
         destroyComponent(shutdownHook);
+
+        //?? The set/get methods of the Item class are not used here to
+        //?? speed up finding the signal when accessing it directly as attribute.
+        destroyItem(getSignal());
+        setSignal(null);
+
+        //?? Temporary until event handling doesn't need java awt EventQueue anymore.
+        destroyJavaEventCatcher(getJavaEventCatcher());
+        setJavaEventCatcher(null);
 
         String lifecycleAction = (String) get(Launcher.LIFECYCLE_ACTION);
         remove(Launcher.LIFECYCLE_ACTION);
@@ -626,6 +687,7 @@ java.awt.Toolkit::getSystemEventQueueImpl();
      */
     public void await() throws Exception {
 
+/*??
         Signal s = (Signal) createItem(getDefaultSignal());
         Boolean b = null;
 
@@ -651,13 +713,11 @@ java.awt.Toolkit::getSystemEventQueueImpl();
             // After having handled the signal in this system, its answer will be sent -
             // again by changing flags on the computer (done by operating system),
             // e.g. a gui drawn onto the screen, a printout or a network message.
-/*??
             receive(s);
             handle(s, new Boolean(Boolean.FALSE));
             send(s);
             reset(s);
 
-/*??
             // Run garbage collector. Since java has no destructor methods,
             // all unreferenced objects are hanging in memory until the gc is run.
             // Because a signal is created in every cycle of the waiting loop,
@@ -665,11 +725,11 @@ java.awt.Toolkit::getSystemEventQueueImpl();
             // would be hanging in memory.
             // This garbage collector run is also useful to destruct all objects
             // which were created during handling of the signal.
-            java.lang.System.gc();
-*/
+//??            java.lang.System.gc();
         }
 
         destroyItem(s);
+*/
 
 /*??
         String port = (String) get(System.SHUTDOWN_PORT);
@@ -776,8 +836,10 @@ java.awt.Toolkit::getSystemEventQueueImpl();
     public void receive(Signal s) {
 
         // As long as this CYBOP framework has no OperatingSystem class yet,
-        // other methods are used to catch signals, e.g. the actionPerformed method
-        // which informs about events of the java AWT/Swing framework.
+        // java events are catched using the JavaEventCatcher class which
+        // inherits from the java.awt.EventQueue class.
+        // That's why another receive method has to be used for now,
+        // to hand over parameters from java events to the new CYBOP signals.
     }
 
     /**
@@ -855,6 +917,26 @@ java.awt.Toolkit::getSystemEventQueueImpl();
     }
 
     /**
+     * Resets the signal.<br><br>
+     *
+     * All children of the signal will be removed.
+     *
+     * @param s the signal
+     * @exception NullPointerException if the signal is null
+     */
+    public void reset(Signal s) throws NullPointerException {
+
+        if (s != null) {
+            
+            s.reset();
+
+        } else {
+
+            throw new NullPointerException("Could not reset signal. The signal is null.");
+        }
+    }
+
+    /**
      * Handles the signal.
      *
      * @param s the signal
@@ -926,9 +1008,11 @@ java.awt.Toolkit::getSystemEventQueueImpl();
     /**
      * Starts up the system.
      *
+     * Create user interface by sending the corresponding signal through the system.
+     * The user interface will be displayed by the screen, done in the send method.
+     *
      * @param s the system class name
      * @param c the configuration location
-     * @exception NullPointerException if the system is null
      */
     public void startupSystem(String s, String c) throws Exception {
 
@@ -940,6 +1024,41 @@ java.awt.Toolkit::getSystemEventQueueImpl();
         handle(sig, new Boolean(Boolean.FALSE));
         send(sig);
         destroyItem(sig);
+
+        setupJavaEventHandling();
+    }
+
+    /**
+     * Sets up the java event handling.
+     *
+     * @exception NullPointerException if the java awt toolkit is null
+     * @exception NullPointerException if the java event queue is null
+     */
+    private void setupJavaEventHandling() throws NullPointerException {
+
+        // Start the awt event thread by calling getDefaultToolkit().
+        // Otherwise, the event thread is started by calling the show method
+        // on a java awt frame.
+        java.awt.Toolkit t = java.awt.Toolkit.getDefaultToolkit();
+
+        if (t != null) {
+
+            java.awt.EventQueue q = t.getSystemEventQueue();
+
+            if (q != null) {
+
+                // Replace the SystemEventQueue with the JavaEventCatcher.
+                q.push(getJavaEventCatcher());
+
+            } else {
+
+                throw new NullPointerException("Could not startup system. The java event queue is null.");
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not startup system. The java awt toolkit is null.");
+        }
     }
 
     /**
@@ -1090,272 +1209,350 @@ java.awt.Toolkit::getSystemEventQueueImpl();
     }
 */
 
+    //
+    // Java event handling and transformation into CYBOP signals.
+    //
+    
     /**
-     * Resets the signal.<br><br>
+     * Handles a java event.
      *
-     * All children of the signal will be removed.
+     * After the java event has been transformed into a CYBOP signal,
+     * the signal is forwarded to the normal signal handling method
+     * which finally broadcasts the signal through the whole system
+     * and all sub systems.
      *
-     * @param s the signal
-     * @exception NullPointerException if the signal is null
+     * @param evt the java event
+     * @exception NullPointerException if the java event is null
      */
-    public void reset(Signal s) throws NullPointerException {
+    public void handle(java.awt.AWTEvent evt) throws Exception, NullPointerException {
 
-        if (s != null) {
-            
-            s.reset();
+        // Print out ALL events arriving here.
+        java.lang.System.out.println("EVENT: " + evt.toString());
+
+        String a = new String("");
+
+        if (evt != null) {
+
+/*??
+            if (evt instanceof java.awt.FocusEvent) {
+
+                protected void processFocusEvent(FocusEvent e) {
+                    FocusListener listener = focusListener;
+                    if (listener != null) {
+                        int id = e.getID();
+                        switch(id) {
+                          case FocusEvent.FOCUS_GAINED:
+                            listener.focusGained(e);
+                            break;
+                          case FocusEvent.FOCUS_LOST:
+                            listener.focusLost(e);
+                            break;
+                        }
+                    }
+                }
+    
+            } else if (e instanceof java.awt.MouseEvent) {
+
+                switch(e.getID()) {
+                  case java.awt.MouseEvent.MOUSE_PRESSED:
+                  case java.awt.MouseEvent.MOUSE_RELEASED:
+                  case java.awt.MouseEvent.MOUSE_CLICKED:
+                  case java.awt.MouseEvent.MOUSE_ENTERED:
+                  case java.awt.MouseEvent.MOUSE_EXITED:
+                    protected void processMouseEvent(MouseEvent e) {
+                        MouseListener listener = mouseListener;
+                        if (listener != null) {
+                            int id = e.getID();
+                            switch(id) {
+                              case MouseEvent.MOUSE_PRESSED:
+                                listener.mousePressed(e);
+                                break;
+                              case MouseEvent.MOUSE_RELEASED:
+                                listener.mouseReleased(e);
+                                break;
+                              case MouseEvent.MOUSE_CLICKED:
+                                listener.mouseClicked(e);
+                                break;
+                              case MouseEvent.MOUSE_EXITED:
+                                listener.mouseExited(e);
+                                break;
+                              case MouseEvent.MOUSE_ENTERED:
+                                listener.mouseEntered(e);
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                  case java.awt.MouseEvent.MOUSE_MOVED:
+                  case java.awt.MouseEvent.MOUSE_DRAGGED:
+                    protected void processMouseMotionEvent(MouseEvent e) {
+                        MouseMotionListener listener = mouseMotionListener;
+                        if (listener != null) {
+                            int id = e.getID();
+                            switch(id) {
+                              case MouseEvent.MOUSE_MOVED:
+                                listener.mouseMoved(e);
+                                break;
+                              case MouseEvent.MOUSE_DRAGGED:
+                                listener.mouseDragged(e);
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                  case java.awt.MouseEvent.MOUSE_WHEEL:
+                    protected void processMouseWheelEvent(MouseWheelEvent e) {
+                        MouseWheelListener listener = mouseWheelListener;
+                        if (listener != null) {
+                            int id = e.getID();
+                            switch(id) {
+                                case MouseEvent.MOUSE_WHEEL:
+                                    listener.mouseWheelMoved(e);
+                                    break;
+                            }
+                        }
+                    }
+                    break;
+                }
+    
+            } else if (e instanceof java.awt.KeyEvent) {
+                protected void processKeyEvent(KeyEvent e) {
+                    KeyListener listener = keyListener;
+                    if (listener != null) {
+                        int id = e.getID();
+                        switch(id) {
+                          case KeyEvent.KEY_TYPED:
+                            listener.keyTyped(e);
+                            break;
+                          case KeyEvent.KEY_PRESSED:
+                            listener.keyPressed(e);
+                            break;
+                          case KeyEvent.KEY_RELEASED:
+                            listener.keyReleased(e);
+                            break;
+                        }
+                    }
+                }
+    
+            } else if (e instanceof java.awt.ComponentEvent) {
+                protected void processComponentEvent(ComponentEvent e) {
+                    ComponentListener listener = componentListener;
+                    if (listener != null) {
+                        int id = e.getID();
+                        switch(id) {
+                          case ComponentEvent.COMPONENT_RESIZED:
+                            listener.componentResized(e);
+                            break;
+                          case ComponentEvent.COMPONENT_MOVED:
+                            listener.componentMoved(e);
+                            break;
+                          case ComponentEvent.COMPONENT_SHOWN:
+                            listener.componentShown(e);
+                            break;
+                          case ComponentEvent.COMPONENT_HIDDEN:
+                            listener.componentHidden(e);
+                            break;
+                        }
+                    }
+                }
+            } else if (e instanceof java.awt.InputMethodEvent) {
+                protected void processInputMethodEvent(InputMethodEvent e) {
+                    InputMethodListener listener = inputMethodListener;
+                    if (listener != null) {
+                        int id = e.getID();
+                        switch (id) {
+                          case InputMethodEvent.INPUT_METHOD_TEXT_CHANGED:
+                            listener.inputMethodTextChanged(e);
+                            break;
+                          case InputMethodEvent.CARET_POSITION_CHANGED:
+                            listener.caretPositionChanged(e);
+                            break;
+                        }
+                    }
+                }
+            } else if (e instanceof java.awt.HierarchyEvent) {
+                switch (e.getID()) {
+                  case java.awt.HierarchyEvent.HIERARCHY_CHANGED:
+                    protected void processHierarchyEvent(HierarchyEvent e) {
+                        HierarchyListener listener = hierarchyListener;
+                        if (listener != null) {
+                            int id = e.getID();
+                            switch (id) {
+                              case HierarchyEvent.HIERARCHY_CHANGED:
+                                listener.hierarchyChanged(e);
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                  case java.awt.HierarchyEvent.ANCESTOR_MOVED:
+                  case java.awt.HierarchyEvent.ANCESTOR_RESIZED:
+                    protected void processHierarchyBoundsEvent(HierarchyEvent e) {
+                        HierarchyBoundsListener listener = hierarchyBoundsListener;
+                        if (listener != null) {
+                            int id = e.getID();
+                            switch (id) {
+                              case HierarchyEvent.ANCESTOR_MOVED:
+                                listener.ancestorMoved(e);
+                                break;
+                              case HierarchyEvent.ANCESTOR_RESIZED:
+                                listener.ancestorResized(e);
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+*/
+
+            Signal s = getSignal();
+
+            // Check for changed flags on computer (currently done by operating system),
+            // e.g. to receive a keyboard or mouse event and then create a CYBOP signal of it.
+            // In our case here we have checked the coming java events and will now
+            // transform them into a CYBOP signal.
+            receive(s, Signal.GUI_LANGUAGE, get(Launcher.USER), a);
+            // Actually handle the signal by broadcasting it through the whole system.
+            handle(s, new Boolean(Boolean.FALSE));
+            // After having handled the signal in this system, its answer will be sent -
+            // again by changing flags on the computer (done by operating system),
+            // e.g. a gui drawn onto the screen, a printout or a network message.
+            send(s);
+            // Reset the signal instead of destroying it and creating a new one all the time.
+            // This launcher contains only one single signal which is created on startup
+            // and destroyed on shutdown. That's why the signal needs to be resetted
+            // between occurences of the single events.
+            reset(s);
 
         } else {
 
-            throw new NullPointerException("Could not reset signal. The signal is null.");
+            throw new NullPointerException("Could not handle java event. The java event is null.");
         }
     }
 
-    //
-    // Temporary methods to:
-    // - catch ALL events of the java AWT/Swing framework
-    // - create, handle and destroy the signal
-    //
-    // These methods are to be removed as soon as this framework
-    // has an OperatingSystem class with input device drivers etc.
-    //
-
     /**
-     * Catches action events.
+     * This sub class of java awt component is only meant to catch awt events.<br><br>
      *
-     * @param evt the event
+     * Unfortunately, handling of most events is done via graphical components in java.
+     *
+     * By the way, Java events can be posted using:
+     * Toolkit.getEventQueue().postEvent(evt);
      */
-    public void actionPerformed(java.awt.event.ActionEvent evt) {
+    private class JavaEventCatcher extends java.awt.EventQueue {
 
-        try {
+        //
+        // Children names.
+        //
 
-            if (evt != null) {
+        /**
+         * The launcher.
+         *
+         * Exceptionally, the private internal class JavaEventCatcher has
+         * permittance to know about its container (this launcher).
+         * This is necessary to forward java awt events to this launcher.
+         */             
+        private Launcher launcher;
 
-                Signal s = (Signal) createItem(getDefaultSignal());
+        //
+        // Launcher.
+        //
 
-                receive(s, Signal.GUI_LANGUAGE, get(Launcher.USER), new String(evt.getActionCommand()));
-                handle(s, new Boolean(Boolean.FALSE));
-                send(s);
-                destroyItem(s);
+        /*
+         * Sets the launcher.
+         *
+         * @param l the launcher
+         */
+        public void setLauncher(Launcher l) {
+    
+            this.launcher = l;
+        }
+    
+        /**
+         * Returns the launcher.
+         *
+         * @return the launcher
+         */
+        public Launcher getLauncher() {
 
-            } else {
+            return this.launcher;
+        }
 
-                throw new NullPointerException("Could not catch action event. The action event is null.");
+        /**
+         * Dispatches an event.
+         *
+         * Example:
+         * On clicking the mouse or a button, a hardware interrupt occurs.
+         * The operating system catches this interrupt and transforms it
+         * correctly into some meaningful piece of software code.
+         * Device drivers are necessary to do this translation.
+         * Now, all running processes are informed by the operating system.
+         * In the case of Java processes (applications), the Java Virtual Machine (JVM)
+         * (which is an application itself to the operating system) receives the events.
+         * Finally, the JVM puts the events into the event queue of the
+         * Abstract Windowing Toolkit (AWT).
+         *
+         * As we don't want to use event listeners and the like in CYBOP
+         * (they are improper and unnecessarily complicated in our opinion),
+         * we catch all events directly in the event queue, their first point
+         * of occurence in the Java Development Kit (JDK) Class Hierarchy.
+         *
+         * The AWT distinguishes between different types of events and filters
+         * them out by comparing with "instanceof" - again improper.
+         * As a rule of thumb, one should never use "instanceof" in
+         * Object Oriented Programming (OOP).
+         * However, we have to use these events here but will transform them
+         * into CYBOP signals which have a predicate which is a string that
+         * identifies the action.
+         *
+         * The following java awt methods might be of interest in understanding
+         * how events are handled in the JDK and how clicked components are
+         * identified:
+         *
+         * java.awt.EventDispatchThread::pumpOneEventForHierarchy(...);
+         * java.awt.Toolkit::getSystemEventQueueImpl();
+         * java.awt.Container::dispatchEvent(AWTEvent e);
+         * java.awt.Container::getMouseEventTargetImpl();
+         *
+         * @param evt the java awt event sent directly from the JVM to here
+         */
+        protected void dispatchEvent(java.awt.AWTEvent evt) {
+
+            //?? For now, we also call the AWT event handling.
+            //?? Later, we will cut it off by removing this line.
+            super.dispatchEvent(evt);
+
+            try {
+
+                Launcher l = getLauncher();
+    
+                if (l != null) {
+                    
+                    l.handle(evt);
+
+                } else {
+    
+                    throw new NullPointerException("Could not dispatch java awt event. The launcher is null.");
+                }
+    
+            } catch (Exception e) {
+
+                java.lang.System.out.println("ERROR: Could not dispatch java awt event. An exception occured:\n" + e);
             }
-
-        } catch (Exception e) {
-
-            java.lang.System.out.println("ERROR: Could not catch action event. An exception occured:\n" + e);
         }
     }
 
     /**
-     * Evaluates the event if some attribute has changed
+     * ?? OLD method !! Only kept here for reference purposes.
+     * Remove this method once the signal is handled by controller or processor!
      *
-     * @param evt the event
-     */
-    public void changedUpdate(javax.swing.event.DocumentEvent evt) {
-    }
-
-    /**
-     * Invoked when a component gains the keyboard focus.
-     *
-     * @param evt the event
-     */
-    public void focusGained(java.awt.event.FocusEvent evt) {
-    }
-
-    /**
-     * Invoked when a component loses the keyboard focus.
-     *
-     * @param evt the event
-     */
-    public void focusLost(java.awt.event.FocusEvent evt) {
-    }
-
-    /**
-     * Evaluates the event if something was inserted into the text area
-     *
-     * @param evt the event
-     */
-    public void insertUpdate(javax.swing.event.DocumentEvent evt) {
-    }
-
-    /**
-     * Invoked when an internal frame is activated.
-     *
-     * @param evt the internal frame event
-     */
-    public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-    }
-
-    /**
-     * Invoked when an internal frame has been closed.
-     *
-     * @param evt the internal frame event
-     */
-    public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-    }
-
-    /**
-     * Invoked when an internal frame is in the process of being closed.
-     * The close operation can be overridden at this point.
-     *
-     * @param evt the internal frame event
-     */
-    public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-
-//??        getView().issueControl(getView().getCloseControl());
-    }
-
-    /**
-     * Invoked when an internal frame is de-activated.
-     *
-     * @param evt the internal frame event
-     */
-    public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-    }
-
-    /**
-     * Invoked when an internal frame is de-iconified.
-     *
-     * @param evt the internal frame event
-     */
-    public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-    }
-
-    /**
-     * Invoked when an internal frame is iconified.
-     *
-     * @param evt the internal frame event
-     */
-    public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-    }
-
-    /**
-     * Invoked when an internal frame has been opened.
-     *
-     * @param evt the internal frame event
-     */
-    public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-    }
-
-    /**
-     * Handles all item events of the whole application.
-     *
-     * @param evt the event
-     */                
-    public void itemStateChanged(java.awt.event.ItemEvent evt) {
-    }
-
-    /**
-     * Handles all keyPressed events of the whole application.
-     *
-     * @param evt the event
-     */                
-    public void keyPressed(java.awt.event.KeyEvent evt) {        
-    }
-
-    /**
-     * Handles all keyTyped events of the whole application.
-     *
-     * @param evt the event
-     */                
-    public void keyTyped(java.awt.event.KeyEvent evt) {        
-    }
-
-   /**
-    * Handles all keyReleased events of the whole application.
-     *
-     * @param evt the event
-    */            
-    public void keyReleased(java.awt.event.KeyEvent evt) {
-    }
-
-    /**
-     * Handles all mouseClicked events of the whole application.
-     *
-     * @param evt the event
-     */                
-    public void mouseClicked(java.awt.event.MouseEvent evt) {
-    }
-
-    /**
-     * Not implemented.
-     *
-     * @param evt the event
-     */
-    public void mouseDragged(java.awt.event.MouseEvent evt) { 
-    }
-
-    /**
-     * Not implemented.
-     *
-     * @param evt the event
-     */
-    public void mouseEntered(java.awt.event.MouseEvent evt) {
-    }
-   
-    /**
-     * Not implemented.
-     *
-     * @param evt the event
-     */
-    public void mouseExited(java.awt.event.MouseEvent evt) {
-    }
-
-    /**
-     * Mouse moves are registered. If the mouse moved over a polygon area, the polygon is
-     * drawn. The polygon info panel is also updated. If one polygon is already painted, and
-     * the mouse is still on it, it will no be painted again (see isPainted()). If mouse moves
-     * out of a polygon the whole panel is repainted and also overidden the painted polygons
-     * Of course in this case the info panel is also updated.
-     *
-     * @param evt the event
-     */
-    public void mouseMoved(java.awt.event.MouseEvent evt) {
-    }
-
-    /**
-     * Not implemented.
-     *
-     * @param evt the event
-     */
-    public void mousePressed(java.awt.event.MouseEvent evt) { 
-    }
-
-    /**
-     * Not implemented.
-     *
-     * @param evt the event
-     */
-    public void mouseReleased(java.awt.event.MouseEvent evt) { 
-    }
-
-    /**
-     * Evaluates the event if something was removed from the text area
-     *
-     * @param evt the event
-     */
-    public void removeUpdate(javax.swing.event.DocumentEvent evt) {
-    }
-
-    /**
-     * Here are all valueChanged events of the whole application handled. These 
-     * are events from tables, or lists.
-     *
-     * @param evt the event
-     */                
-    public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-    }
-
-    /**
      * Listens and reacts to tree selection events.
      *
      * @param evt the event
      */
+/*??
     public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
 
-/*??
         // Determine application tree view as the event's source.
         ResTree tv = (ResTree) evt.getSource();
 
@@ -1397,106 +1594,7 @@ java.awt.Toolkit::getSystemEventQueueImpl();
                 }
             }
         }
+    }
 */
-    }
-
-    /**
-     * Invoked when a window is activated.
-     *
-     * @param evt the window event
-     */
-    public void windowActivated(java.awt.event.WindowEvent evt) {
-    }
-
-    /**
-     * Invoked when a window has been closed.
-     *
-     * @param evt the window event
-     */
-    public void windowClosed(java.awt.event.WindowEvent evt) {
-    }
-
-    /**
-     * Invoked when a window is in the process of being closed.
-     * The close operation can be overridden at this point.
-     *
-     * @param evt the window event
-     * @exception NullPointerException if the view is null
-     */
-    public void windowClosing(java.awt.event.WindowEvent evt) throws NullPointerException {
-
-/*??
-        SwingView v = getView();
-
-        if (v != null) {
-
-//??            v.issueControl(v.getCloseControl());
-
-        } else {
-
-            throw new NullPointerException("Could not issue control. The view is null.");
-        }
-*/
-    }
-
-    /**
-     * Invoked when a window is de-activated.
-     *
-     * @param evt the window event
-     */
-    public void windowDeactivated(java.awt.event.WindowEvent evt) {
-    }
-
-    /**
-     * Invoked when a window is de-iconified.
-     *
-     * @param evt the window event
-     */
-    public void windowDeiconified(java.awt.event.WindowEvent evt) {
-    }
-
-    /**
-     * Invoked when the Window is set to be the focused Window, which means
-     * that the Window, or one of its subcomponents, will receive keyboard
-     * events.
-     *
-     * @param evt the window event
-     */
-    public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-    }
-
-    /**
-     * Invoked when a window is iconified.
-     *
-     * @param evt the window event
-     */
-    public void windowIconified(java.awt.event.WindowEvent evt) {
-    }
-
-    /**
-     * Invoked when the Window is no longer the focused Window, which means
-     * that keyboard events will no longer be delivered to the Window or any of
-     * its subcomponents.
-     *
-     * @param evt the window event
-     */
-    public void windowLostFocus(java.awt.event.WindowEvent evt) {
-    }
-
-    /**
-     * Invoked when a window has been opened.
-     *
-     * @param evt the window event
-     */
-    public void windowOpened(java.awt.event.WindowEvent evt) {
-    }
-
-    /**
-     * Invoked when a window state is changed.
-     *
-     * @param evt the window event
-     */
-    public void windowStateChanged(java.awt.event.WindowEvent evt) {
-    }
 }
 

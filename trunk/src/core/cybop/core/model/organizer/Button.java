@@ -32,7 +32,7 @@ import cybop.core.model.*;
 /**
  * This class represents a button.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-03-15 01:01:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Button extends Organizer {
@@ -357,42 +357,12 @@ public class Button extends Organizer {
         set(Button.LABEL, getDefaultLabel());
         set(Button.MNEMONIC, getDefaultMnemonic());
         set(Button.ACTION, getDefaultAction());
-
-        //?? Add java awt/swing action listener.
-        //?? Has to be done here (and not in createJavaObject) because the signal handler
-        //?? (action listener) has to be forwarded in the globalize method first.
-        //?? Remove this part as soon as CYBOP supports mouse/keyboard input handling.
-        javax.swing.AbstractButton b = (javax.swing.AbstractButton) getJavaObject();
-
-        if (b != null) {
-
-            b.addActionListener((cybop.core.system.family.Launcher) getSignalHandler());
-
-        } else {
-
-            throw new NullPointerException("Could not create encapsulated java swing abstract button. The encapsulated java swing abstract button is null.");
-        }
     }
 
     /**
      * Finalizes this button.
      */
     public void finalizz() throws Exception {
-
-        //?? Remove java awt/swing action listener.
-        //?? Has to be done here (and not in createJavaObject) because the signal handler
-        //?? (action listener) has to be forwarded in the globalize method first.
-        //?? Remove this part as soon as CYBOP supports mouse/keyboard input handling.
-        javax.swing.AbstractButton b = (javax.swing.AbstractButton) getJavaObject();
-
-        if (b != null) {
-
-            b.removeActionListener((cybop.core.system.family.Launcher) getSignalHandler());
-
-        } else {
-
-            throw new NullPointerException("Could not destroy encapsulated java swing abstract button. The encapsulated java swing abstract button is null.");
-        }
 
         String action = (String) get(Button.ACTION);
         remove(Button.ACTION);

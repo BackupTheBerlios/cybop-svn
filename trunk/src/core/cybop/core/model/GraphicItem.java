@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a graphic item.<br><br>
  *
- * @version $Revision: 1.3 $ $Date: 2003-03-14 14:51:44 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-15 01:01:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class GraphicItem extends Item {
@@ -84,94 +84,5 @@ public class GraphicItem extends Item {
 
     /** The 270 degree orientation. */
     public static final String DEGREE_270_ORIENTATION = new String("270_degree_orientation");
-
-    /**
-     * This sub class of java awt component is only meant to catch awt events.<br><br>
-     *
-     * Unfortunately, handling of most events is done via graphical components.
-     */
-    private class JavaEventCatcher extends java.awt.Component {
-
-//?? Eventuell EventQueue::dispatchEvent(AWTEvent evt) verwenden,
-//?? d.h. u.a. auch, von java.awt.EventQueue erben!
-//?? Von dort wird erst Component::dispatchEvent aufgerufen, die dann
-//?? wiederum Component::processEvent aufruft.
-
-        /**
-         * Processes events occurring on this component.
-         *
-         * @param evt the event
-         */
-/*??
-        protected void processEvent(AWTEvent evt) {
-
-            if (evt instanceof FocusEvent) {
-
-                processFocusEvent((FocusEvent)e);
-
-            } else if (e instanceof MouseEvent) {
-
-                switch(e.getID()) {
-                  case MouseEvent.MOUSE_PRESSED:
-                  case MouseEvent.MOUSE_RELEASED:
-                  case MouseEvent.MOUSE_CLICKED:
-                  case MouseEvent.MOUSE_ENTERED:
-                  case MouseEvent.MOUSE_EXITED:
-                    processMouseEvent((MouseEvent)e);
-                    break;
-                  case MouseEvent.MOUSE_MOVED:
-                  case MouseEvent.MOUSE_DRAGGED:
-                    processMouseMotionEvent((MouseEvent)e);
-                    break;
-                  case MouseEvent.MOUSE_WHEEL:
-                    processMouseWheelEvent((MouseWheelEvent)e);
-                    break;
-                }
-    
-            } else if (e instanceof KeyEvent) {
-                processKeyEvent((KeyEvent)e);
-    
-            } else if (e instanceof ComponentEvent) {
-                processComponentEvent((ComponentEvent)e);
-            } else if (e instanceof InputMethodEvent) {
-                processInputMethodEvent((InputMethodEvent)e);
-            } else if (e instanceof HierarchyEvent) {
-                switch (e.getID()) {
-                  case HierarchyEvent.HIERARCHY_CHANGED:
-                    processHierarchyEvent((HierarchyEvent)e);
-                    break;
-                  case HierarchyEvent.ANCESTOR_MOVED:
-                  case HierarchyEvent.ANCESTOR_RESIZED:
-                    processHierarchyBoundsEvent((HierarchyEvent)e);
-                    break;
-                }
-            }
-        }
-*/
-    }
-
-/*??
->?You may notice that a user-interface thread can only dispatch one event at
->?a time. When you press a button, the user-interface thread (eventually)
->?invokes the handleEvent() method of an AWT component. Typically, this
->?thread polls the foreign operating system for events.
-
-Aha! That's where the event comes from. Thank you!
-I've checked the java code a bit now. Two old method names have changed:
-postEvent(Event e) --> dispatchEvent(AWTEvent)
-handleEvent(Event evt) --> processEvent(AWTEvent)
-
-I can neglect the dispatchEvent method since it deals with a lot of old
-stuff and finally calls processEvent. So I will let my super class of
-all my gui components have an inner class:
-
-private class JavaEventCatcher extends java.awt.Component {
-
-? ? protected void processEvent(AWTEvent evt) {
-
-? ? ? ? ...
-? ? }
-}
-*/
 }
 
