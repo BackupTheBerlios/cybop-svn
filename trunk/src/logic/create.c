@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.27 $ $Date: 2005-01-30 20:42:05 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2005-02-08 18:28:00 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -515,16 +515,17 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
         && (md != POINTER_NULL_POINTER)
         && (mdc != POINTER_NULL_POINTER)
         && (mds != POINTER_NULL_POINTER)
-        // Check whole name.
-        && (wa != POINTER_NULL_POINTER)
-        && (wac != POINTER_NULL_POINTER)
-        && (was != POINTER_NULL_POINTER)
-        && (wm != POINTER_NULL_POINTER)
-        && (wmc != POINTER_NULL_POINTER)
-        && (wms != POINTER_NULL_POINTER)
-        && (wd != POINTER_NULL_POINTER)
-        && (wdc != POINTER_NULL_POINTER)
-        && (wds != POINTER_NULL_POINTER)) {
+//        // Check whole name.
+//        && (wa != POINTER_NULL_POINTER)
+//        && (wac != POINTER_NULL_POINTER)
+//        && (was != POINTER_NULL_POINTER)
+//        && (wm != POINTER_NULL_POINTER)
+//        && (wmc != POINTER_NULL_POINTER)
+//        && (wms != POINTER_NULL_POINTER)
+//        && (wd != POINTER_NULL_POINTER)
+//        && (wdc != POINTER_NULL_POINTER)
+//        && (wds != POINTER_NULL_POINTER)
+        ) {
 
         // The part name.
         void* pn = NULL_POINTER;
@@ -583,7 +584,7 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
         } else {
 
             // Use the determined whole model normally, if it exists.
-            set_compound_element_by_name(wm, wmc, wms,
+            set_compound_element_by_name(*wm, *wmc, *wms,
                 pn, (void*) pnc, (void*) pns,
                 pa, (void*) pac, (void*) pas,
                 pm, (void*) pmc, (void*) pms,
