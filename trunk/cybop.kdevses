@@ -1,9 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?><!DOCTYPE KDevPrjSession ><KDevPrjSession>
  <LastCompileConfig>(Default)</LastCompileConfig>
  <Mainframe MaximizeMode="1" />
- <DocsAndViews NumberOfDocuments="1" >
-  <Doc0 Type="CDocBrowser" NumberOfViews="1" FileName="/usr/share/doc/glibc-doc/html/libc_3.html#SEC19" >
-   <View Top="0" Width="708" Attach="1" Height="576" Left="0" Focus="0" Type="KHTMLView" MinMaxMode="0" />
-  </Doc0>
- </DocsAndViews>
+ <DocsAndViews NumberOfDocuments="0" />
 </KDevPrjSession>

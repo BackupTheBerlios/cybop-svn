@@ -28,68 +28,71 @@
 #endif
 */
 
-#include <stdlib.h>
+//??#include <stdlib.h>
 
 /**
- * This is the main class of the Cybernetics Oriented Interpreter (CYBOI).
- *
- * It contains a main method to execute the interpreter.
+ * This is the main function to execute the Cybernetics Oriented Interpreter (CYBOI).
  *
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.2 $ $Date: 2003-09-17 18:45:34 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-09-20 09:35:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 /**
- * The main entry procedure.
+ * The main entry function.
  *
- * @param argc the character arguments
- * @param argv the array
+ * @param p0 the argument count (argc)
+ * @param p1 the argument vector (argv)
  * @return the return value
  */
-int main(int argc, char[]* argv) {
+int main(int p0, char[]* p1) {
 
     int r = -1;
 
-    if (args != null) {
+    if (argv != NULL) {
 
-        if ((args.length == 2) && (args[0] != null) && (args[1] != null)) {
+        if ((p0 == 3) && (p1[1] != NULL) && (p1[2] != NULL)) {
 
             // Arguments.
-            java.lang.Object dynamics = args[0];
-            java.lang.Object statics = args[1];
+            java.lang.Object dynamics = p1[1];
+            java.lang.Object statics = p1[2];
 
             // Log handler.
-            LogHandler.log_level = 3;
+            log_level = 3;
 
+/*??
             // XML parser.
             CategoryHandler.xml_parser = new org.apache.xerces.parsers.DOMParser();
             CategoryHandler.initialize_xml_parser(CategoryHandler.xml_parser);
+*/
 
             // Signal memory (signal queue).
-            map* signal_memory = new map();
-            MapHandler.initialize_map(signal_memory);
+            map* signal_memory = (map*) malloc(sizeof(map));
+            initialize_map(signal_memory);
 
+/*??
             // Event handler.
             JavaEventHandler.signal_memory = signal_memory;
             java.lang.Object event_handler = new JavaEventHandler();
             JavaEventHandler.set_event_handler(event_handler);
+*/
 
             // Create signal for storage in signal memory.
-            Signal tmp = new Signal();
+            signal* tmp = (signal*) malloc(sizeof(signal));
 
-            if (tmp != null) {
+            if (tmp != NULL) {
 
-                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Send signal: " + dynamics);
+                log(INFO_LOG_LEVEL, "Send signal: " + dynamics);
 
                 // Set signal elements.
-                tmp.priority = SignalHandler.NORMAL_PRIORITY;
-                tmp.language = SignalHandler.NEURO_LANGUAGE;
+                tmp.priority = NORMAL_PRIORITY;
+                tmp.language = NEURO_LANGUAGE;
                 tmp.predicate = dynamics;
                 tmp.object = statics;
 
+/*??
                 // Caution! Adding of signals must be synchronized between:
                 // - SignalHandler.send for adding internal CYBOP signals
                 // - JavaEventHandler.dispatchEvent for adding transformed java event signals
@@ -98,52 +101,57 @@ int main(int argc, char[]* argv) {
                 synchronized (signal_memory) {
 
                     // Add signal to signal memory (interrupt vector table).
-                    MapHandler.add_map_element(signal_memory, SignalHandler.SIGNAL, tmp);
+                    add_map_element(signal_memory, SIGNAL, tmp);
                 }
+*/
 
             } else {
 
-                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not send initial signal. The signal is null.");
+                log(ERROR_LOG_LEVEL, "Could not send initial signal. The signal is NULL.");
             }
 
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)
             // which are stored/ found in the signal memory.
-            Main.await(signal_memory);
+//??            await(signal_memory);
             // The loop above is left as soon as its shutdown flag is set.
 
+/*??
             // Event handler.
             JavaEventHandler.remove_event_handler(event_handler);
-            event_handler = null;
-            JavaEventHandler.signal_memory = null;
+            event_handler = NULL;
+            JavaEventHandler.signal_memory = NULL;
+*/
 
             // Signal memory (signal queue).
-            MapHandler.finalize_map(signal_memory);
-            signal_memory = null;
+            finalize_map(signal_memory);
+            free(signal_memory);
 
+/*??
             // XML parser.
             CategoryHandler.finalize_xml_parser(CategoryHandler.xml_parser);
-            CategoryHandler.xml_parser = null;
+            CategoryHandler.xml_parser = NULL;
+*/
 
             //
             // The program exits normally, when the last non-daemon thread exits.
             //
-            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Exit cyboi normally.");
-            value = EXIT_SUCCESS;
+            log(INFO_LOG_LEVEL, "Exit cyboi normally.");
+            r = EXIT_SUCCESS;
 
         } else {
 
             // Show help information.
-            java.lang.System.out.println("Usage:\n"
+            log(ERROR_LOG_LEVEL, "Usage:\n"
                 + "cyboi startup cybol.core.system.system");
         }
 
     } else {
 
-        LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not execute cyboi. The argument array is null.");
+        log(ERROR_LOG_LEVEL, "Could not execute cyboi. The argument vector is NULL.");
     }
 
-    return value;
+    return r;
 }
 
 /**
@@ -160,25 +168,25 @@ int main(int argc, char[]* argv) {
 void await(map* p0) {
 
     // The shutdown flag.
-    boolean sf = false;
+    int sf = 0;
     // Transporting signal.
-    signal* s = new signal();
+    signal* s = (signal*) malloc(sizeof(signal));
 
     while (true) {
 
-        if (sf != true) {
+        if (sf == 0) {
 
             // Receive signal.
-            SignalHandler.receive(p0, s);
+            receive_signal(p0, s);
 
             // Handle signal.
-            sf = SignalHandler.handle(s, 0);
+            sf = handle_signal(s, 0);
 
             // Send signal.
-            SignalHandler.send(p0, s);
+            send_signal(p0, s);
 
             // Reset signal.
-            SignalHandler.reset(s);
+            reset_signal(s);
 
         } else {
 

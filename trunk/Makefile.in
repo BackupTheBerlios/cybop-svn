@@ -1,5 +1,5 @@
 # Makefile.in generated automatically by automake 1.4-p4 from Makefile.am
-# KDE tags expanded automatically by am_edit - $Revision: 1.2 $ 
+# KDE tags expanded automatically by am_edit - $Revision: 1.3 $ 
 
 # Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
@@ -240,13 +240,6 @@ x_libraries = @x_libraries@
 SUBDIRS = cybop 
 
 EXTRA_DIST = cybop.kdevprj admin AUTHORS COPYING ChangeLog INSTALL README TODO cybop.lsm 
-
-####### kdevelop will overwrite this part!!! (end)############
-# not a GNU package. You can remove this line, if
-# have all needed files, that a GNU package needs
-AUTOMAKE_OPTIONS = foreign
-
-MAINTAINERCLEANFILES = subdirs configure.in acinclude.m4 configure.files
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/admin/mkinstalldirs
 CONFIG_HEADER = config.h
@@ -258,7 +251,7 @@ DIST_COMMON =  README ./stamp-h.in AUTHORS COPYING ChangeLog INSTALL \
 
 #>- DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 #>+ 4
-KDE_DIST=cybop.kdevses subdirs special.m4.in RUN configure.files Makefile.dist configure.in.in 
+KDE_DIST=cybop.doxygen cybop.kdevses subdirs special.m4.in RUN configure.files configure.in.in 
 
 DISTFILES= $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
 
@@ -467,7 +460,6 @@ distdir: $(DISTFILES)
 	|| exit 1; \
 	fi; \
 	done
-	$(MAKE) $(AM_MAKEFLAGS) top_distdir="$(top_distdir)" distdir="$(distdir)" dist-hook
 info-am:
 info: info-recursive
 dvi-am:
@@ -507,7 +499,6 @@ distclean-generic:
 	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
 
 maintainer-clean-generic:
-	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
 mostlyclean-am:  mostlyclean-hdr mostlyclean-tags mostlyclean-generic
 
 mostlyclean: mostlyclean-recursive
@@ -546,21 +537,7 @@ maintainer-clean: maintainer-clean-recursive
 	maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 
 
-$(top_srcdir)/configure.in: configure.in.in $(top_srcdir)/subdirs
-	cd $(top_srcdir) && $(MAKE) -f admin/Makefile.common configure.in ;
-
-$(top_srcdir)/subdirs:
-	cd $(top_srcdir) && $(MAKE) -f admin/Makefile.common subdirs
-
-$(top_srcdir)/acinclude.m4: $(top_srcdir)/admin/acinclude.m4.in $(top_srcdir)/special.m4.in $(top_srcdir)/admin/libtool.m4.in
-	@cd $(top_srcdir) && cat admin/acinclude.m4.in special.m4.in admin/libtool.m4.in > acinclude.m4
-
-package-messages:
-	$(MAKE) -f admin/Makefile.common package-messages
-
-dist-hook:
-	cd $(top_distdir) && perl admin/am_edit -padmin
-	cd $(top_distdir) && $(MAKE) -f admin/Makefile.common subdirs
+####### kdevelop will overwrite this part!!! (end)############
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
