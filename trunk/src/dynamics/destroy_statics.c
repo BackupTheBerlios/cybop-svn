@@ -42,7 +42,7 @@
  *
  * It destroys a statics memory model to a given statics cybol model.
  *
- * @version $Revision: 1.7 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -108,7 +108,7 @@ void finalize_statics_part(void* p0, void* p1) {
     
     if (m != 0) {
 
-        void* name = get_map_element_with_name(p1, (void*) NAME);                
+        void* name = get_map_element_with_name(p1, (void*) NAME);
         void* model = 0;
         void* abstraction = 0;
         void* memory_model = 0;

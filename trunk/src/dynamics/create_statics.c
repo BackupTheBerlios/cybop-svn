@@ -27,6 +27,8 @@
 
 #include "../cybol/cybol_model_handler.c"
 #include "../cybol/statics_cybol_model_handler.c"
+#include "../logger/log_handler.c"
+#include "../model/map.c"
 #include "../model/statics.c"
 #include "../model/statics_model.c"
 #include "../statics/boolean_handler.c"
@@ -42,7 +44,7 @@
  *
  * It creates a statics memory model from a given statics cybol model.
  *
- * @version $Revision: 1.7 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

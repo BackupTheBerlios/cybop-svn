@@ -29,6 +29,7 @@
 #include "../model/map.c"
 #include "../model/map_handler.c"
 #include "../model/model_handler.c"
+#include "../model/statics_model.c"
 
 /**
  * This is the statics model handler.
@@ -37,7 +38,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.6 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -36,6 +36,7 @@
 //?? #include <X11/Xproto.h>
 //?? #include <X11/Xresource.h>
 #include <X11/Xutil.h>
+#include "../logger/log_handler.c"
 #include "../x_windows/x_windows.c"
 
 /**
@@ -43,7 +44,7 @@
  *
  * It controls the input and output of x windows.
  *
- * @version $Revision: 1.5 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -37,6 +37,7 @@
 #include "../model/map.c"
 #include "../model/map_handler.c"
 #include "../model/statics_model_handler.c"
+#include "../signal/signal_memory.c"
 #include "../statics/vector.c"
 #include "../x_windows/x_windows_handler.c"
 
@@ -50,7 +51,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.12 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

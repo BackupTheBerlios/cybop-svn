@@ -26,12 +26,13 @@
 #define VECTOR_HANDLER_SOURCE
 
 #include <string.h>
+#include "../logger/log_handler.c"
 #include "../statics/vector.c"
 
 /**
  * This is the vector handler.
  *
- * @version $Revision: 1.5 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -26,6 +26,7 @@
 #define DYNAMICS_MODEL_HANDLER_SOURCE
 
 #include "../logger/log_handler.c"
+#include "../model/dynamics_model.c"
 #include "../model/map.c"
 #include "../model/map_handler.c"
 #include "../model/model_handler.c"
@@ -37,7 +38,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.6 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -81,11 +82,13 @@ void set_dynamics_model_part(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
             // The given model is the compound of the part.
             set_map_element_with_name(m->parts, n, p2);
+/*??
             set_map_element_with_name(m->inputs_0, n, p3);
             set_map_element_with_name(m->inputs_1, n, p4);
             set_map_element_with_name(m->outputs_0, n, p5);
             set_map_element_with_name(m->outputs_1, n, p6);
             set_map_element_with_name(m->positions, n, p7);
+*/
         }
         
     } else {
@@ -124,11 +127,13 @@ void remove_dynamics_model_part(void* p0, void* p1) {
 
             // The given model is the compound of the part.
             remove_map_element_with_name(m->parts, n);
+/*??
             remove_map_element_with_name(m->inputs_0, n);
             remove_map_element_with_name(m->inputs_1, n);
             remove_map_element_with_name(m->outputs_0, n);
             remove_map_element_with_name(m->outputs_1, n);
             remove_map_element_with_name(m->positions, n);
+*/
         }
         
     } else {
@@ -205,12 +210,12 @@ void* get_dynamics_model_part_input_0(void* p0, void* p1) {
             void* part = get_map_element_with_name(m->parts, n);
             
             // Continue to process along the hierarchical name.
-            i = get_dynamics_model_part_input_0(part, r);
+//??            i = get_dynamics_model_part_input_0(part, r);
             
         } else {
 
             // The given model is the compound of the part.
-            i = get_map_element_with_name(m->inputs_0, n);
+//??            i = get_map_element_with_name(m->inputs_0, n);
         }
 
     } else {
@@ -247,12 +252,12 @@ void* get_dynamics_model_part_input_1(void* p0, void* p1) {
             void* part = get_map_element_with_name(m->parts, n);
             
             // Continue to process along the hierarchical name.
-            i = get_dynamics_model_part_input_1(part, r);
+//??            i = get_dynamics_model_part_input_1(part, r);
             
         } else {
 
             // The given model is the compound of the part.
-            i = get_map_element_with_name(m->inputs_1, n);
+//??            i = get_map_element_with_name(m->inputs_1, n);
         }
 
     } else {
@@ -289,12 +294,12 @@ void* get_dynamics_model_part_output_0(void* p0, void* p1) {
             void* part = get_map_element_with_name(m->parts, n);
             
             // Continue to process along the hierarchical name.
-            o = get_dynamics_model_part_output_0(part, r);
+//??            o = get_dynamics_model_part_output_0(part, r);
             
         } else {
 
             // The given model is the compound of the part.
-            o = get_map_element_with_name(m->outputs_0, n);
+//??            o = get_map_element_with_name(m->outputs_0, n);
         }
 
     } else {
@@ -331,12 +336,12 @@ void* get_dynamics_model_part_output_1(void* p0, void* p1) {
             void* part = get_map_element_with_name(m->parts, n);
             
             // Continue to process along the hierarchical name.
-            o = get_dynamics_model_part_output_1(part, r);
+//??            o = get_dynamics_model_part_output_1(part, r);
             
         } else {
 
             // The given model is the compound of the part.
-            o = get_map_element_with_name(m->outputs_1, n);
+//??            o = get_map_element_with_name(m->outputs_1, n);
         }
 
     } else {

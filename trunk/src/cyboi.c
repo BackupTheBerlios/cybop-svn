@@ -1,5 +1,5 @@
 /*
- * $RCSfile: cybop.c,v $
+ * $RCSfile: cyboi.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -43,7 +43,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.13 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -25,12 +25,13 @@
 #ifndef STRING_HANDLER_SOURCE
 #define STRING_HANDLER_SOURCE
 
+#include "../logger/log_handler.c"
 #include "../statics/string.c"
 
 /**
  * This is the string handler.
  *
- * @version $Revision: 1.5 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
