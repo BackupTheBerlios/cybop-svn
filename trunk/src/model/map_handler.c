@@ -44,34 +44,27 @@
  *
  * A map's elements can such be accessed over their name or index.
  *
- * @version $Revision: 1.17 $ $Date: 2004-03-29 08:15:05 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-03-29 21:54:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-
-//
-// Constants.
-//
-
-/** The separation. The ASCII code for "_" is 95. */
-static const int SEPARATION = 95;
 
 //
 // Map.
 //
 
 /**
- * Initializes the map.
+ * Creates the map.
  *
  * @param p0 the map
  */
-void initialize_map(void* p0) {
+void create_map(void* p0) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Initialize map.");
+    log_message((void*) &INFO_LOG_LEVEL, "Create map.");
 
     // The map size.
     int s = 4;
     // The map.
-    initialize_array(p0, (void*) &s);
+    create_array(p0, (void*) &s);
     // The index.
     int i;
 
@@ -90,30 +83,30 @@ void initialize_map(void* p0) {
     // The names array.
     i = 1;
     void* n = (void*) 0;
-    initialize_array((void*) &n, (void*) &as);
+    create_array((void*) &n, (void*) &as);
     set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
 
     // The names sizes array.
     i = 2;
     void* ns = (void*) 0;
-    initialize_array((void*) &ns, (void*) &as);
+    create_array((void*) &ns, (void*) &as);
     set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ns);
 
     // The references array.
     i = 3;
     void* r = (void*) 0;
-    initialize_array((void*) &r, (void*) &as);
+    create_array((void*) &r, (void*) &as);
     set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
 }
 
 /**
- * Finalizes the map.
+ * Destroys the map.
  *
  * @param p0 the map
  */
-void finalize_map(void* p0) {
+void destroy_map(void* p0) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Finalize map.");
+    log_message((void*) &INFO_LOG_LEVEL, "Destroy map.");
 
     // The map size.
     int s = 4;
@@ -125,21 +118,21 @@ void finalize_map(void* p0) {
     void* r = (void*) 0;
     get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
     remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
-    finalize_array((void*) &r, (void*) &as);
+    destroy_array((void*) &r, (void*) &as);
 
     // The names sizes array.
     i = 2;
     void* ns = (void*) 0;
     get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ns);
     remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
-    finalize_array((void*) &sn, (void*) &as);
+    destroy_array((void*) &sn, (void*) &as);
 
     // The names array.
     i = 1;
     void* n = (void*) 0;
     get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
     remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
-    finalize_array((void*) &n, (void*) &as);
+    destroy_array((void*) &n, (void*) &as);
 
     //?? Actually, the array size should be stored in an own integer_array.
     //?? Caution! INTEGER_ARRAY needs to be given as type for the array size.
@@ -152,7 +145,7 @@ void finalize_map(void* p0) {
     remove_array_element(p0, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i);
 
     // The map.
-    finalize_array(p0, (void*) &s);
+    destroy_array(p0, (void*) &s);
 }
 
 //
@@ -323,6 +316,9 @@ int get_map_element_count(const void* p0, const void* p1) {
 
     return name_count;
 }
+
+/** The separation. The ASCII code for "_" is 95. */
+//??static const int SEPARATION = 95;
 
 /**
  * Builds the next map element name.

@@ -50,7 +50,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.17 $ $Date: 2004-03-29 08:15:05 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-03-29 21:54:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,128 +58,169 @@
 // Model.
 //
 
-//?? TEMPORARY: old model --> delete later!
-
-//??struct model {
-
-    /** The part abstractions. */
-//??    void* part_abstractions;
-
-    /** The part locations. */
-//??    void* part_locations;
-
-    /** The part models. */
-//??    void* part_models;
-
-    /** The position abstractions. */
-//??    void* position_abstractions;
-
-    /** The position locations. */
-//??    void* position_locations;
-
-    /** The position models. */
-//??    void* position_models;
-
-    /** The constraint abstractions. */
-//??    void* constraint_abstractions;
-
-    /** The constraint locations. */
-//??    void* constraint_locations;
-
-    /** The constraint models. */
-//??    void* constraint_models;
-//??};
-
 /**
- * Creates the model containers.
+ * Creates the compound model.
  *
- * @param p0 the memory model
+ * @param p0 the model
  */
-void create_model_containers(void* p0) {
+void create_compound_model(void* p0) {
 
-    struct model* m = (struct model*) p0;
+    log_message((void*) &INFO_LOG_LEVEL, "Create compound model.");
 
-    if (m != (void*) 0) {
+    // The model size.
+    int s = 10;
+    // The model.
+    create_array(p0, (void*) &s);
+    // The index.
+    int i;
 
-        log_message((void*) &INFO_LOG_LEVEL, "Create model containers.");
+    // The super location.
+    i = 0;
+    void* sl = (void*) 0;
+    create_map((void*) &sl);
+    set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &sl);
 
-        m->part_abstractions = (void*) malloc(sizeof(struct map));
-        initialize_map(m->part_abstractions);
+    // The part abstractions.
+    i = 1;
+    void* pa = (void*) 0;
+    create_map((void*) &pa);
+    set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pa);
 
-        m->part_locations = (void*) malloc(sizeof(struct map));
-        initialize_map(m->part_locations);
+    // The part locations.
+    i = 2;
+    void* pl = (void*) 0;
+    create_map((void*) &pl);
+    set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pl);
 
-        m->part_models = (void*) malloc(sizeof(struct map));
-        initialize_map(m->part_models);
+    // The part models.
+    i = 3;
+    void* pm = (void*) 0;
+    create_map((void*) &pm);
+    set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pm);
 
-        m->position_abstractions = (void*) malloc(sizeof(struct map));
-        initialize_map(m->position_abstractions);
+    // The position abstractions.
+    i = 4;
+    void* poa = (void*) 0;
+    create_map((void*) &poa);
+    set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &poa);
 
-        m->position_locations = (void*) malloc(sizeof(struct map));
-        initialize_map(m->position_locations);
+    // The position locations.
+    i = 5;
+    void* pol = (void*) 0;
+    create_map((void*) &pol);
+    set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pol);
 
-        m->position_models = (void*) malloc(sizeof(struct map));
-        initialize_map(m->position_models);
+    // The position models.
+    i = 6;
+    void* pom = (void*) 0;
+    create_map((void*) &pom);
+    set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pom);
 
-        m->constraint_abstractions = (void*) malloc(sizeof(struct map));
-        initialize_map(m->constraint_abstractions);
+    // The constraint abstractions.
+    i = 7;
+    void* ca = (void*) 0;
+    create_map((void*) &ca);
+    set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ca);
 
-        m->constraint_locations = (void*) malloc(sizeof(struct map));
-        initialize_map(m->constraint_locations);
+    // The constraint locations.
+    i = 8;
+    void* cl = (void*) 0;
+    create_map((void*) &cl);
+    set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cl);
 
-        m->constraint_models = (void*) malloc(sizeof(struct map));
-        initialize_map(m->constraint_models);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not create model containers. The memory model is null.");
-    }
+    // The constraint models.
+    i = 9;
+    void* cm = (void*) 0;
+    create_map((void*) &cm);
+    set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cm);
 }
 
 /**
- * Destroys the model containers.
+ * Destroys the compound model.
  *
- * @param p0 the memory model
+ * @param p0 the model
  */
-void destroy_model_containers(void* p0) {
+void destroy_compound_model(void* p0) {
 
-    struct model* m = (struct model*) p0;
+    log_message((void*) &INFO_LOG_LEVEL, "Destroy compound model.");
 
-    if (m != (void*) 0) {
+    // The model size.
+    int s = 10;
+    // The index.
+    int i;
 
-        log_message((void*) &INFO_LOG_LEVEL, "Destroy model containers.");
+    // The constraint models.
+    i = 9;
+    void* cm = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cm);
+    remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    destroy_map((void*) &cm);
 
-        finalize_map(m->constraint_models);
-        free(m->constraint_models);
+    // The constraint locations.
+    i = 8;
+    void* cl = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cl);
+    remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    destroy_map((void*) &cl);
 
-        finalize_map(m->constraint_locations);
-        free(m->constraint_locations);
+    // The constraint abstractions.
+    i = 7;
+    void* ca = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ca);
+    remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    destroy_map((void*) &ca);
 
-        finalize_map(m->constraint_abstractions);
-        free(m->constraint_abstractions);
+    // The position models.
+    i = 6;
+    void* pom = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pom);
+    remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    destroy_map((void*) &pom);
 
-        finalize_map(m->position_models);
-        free(m->position_models);
+    // The position locations.
+    i = 5;
+    void* pol = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pol);
+    remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    destroy_map((void*) &pol);
 
-        finalize_map(m->position_locations);
-        free(m->position_locations);
+    // The position abstractions.
+    i = 4;
+    void* poa = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &poa);
+    remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    destroy_map((void*) &poa);
 
-        finalize_map(m->position_abstractions);
-        free(m->position_abstractions);
+    // The part models.
+    i = 3;
+    void* pm = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pm);
+    remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    destroy_map((void*) &pm);
 
-        finalize_map(m->part_models);
-        free(m->part_models);
+    // The part locations.
+    i = 2;
+    void* pl = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pl);
+    remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    destroy_map((void*) &pl);
 
-        finalize_map(m->part_locations);
-        free(m->part_locations);
+    // The part abstractions.
+    i = 1;
+    void* pa = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pa);
+    remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    destroy_map((void*) &pa);
 
-        finalize_map(m->part_abstractions);
-        free(m->part_abstractions);
+    // The super location.
+    i = 0;
+    void* sl = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &sl);
+    remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    destroy_map((void*) &sl);
 
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not destroy model containers. The memory model is null.");
-    }
+    // The model.
+    destroy_array(p0, (void*) &s);
 }
 
 //

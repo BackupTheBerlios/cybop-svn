@@ -62,7 +62,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.19 $ $Date: 2004-03-25 08:39:24 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2004-03-29 21:54:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,12 +97,12 @@ static const int DOUBLE_ARRAY = 2;
 //
 
 /**
- * Initializes the array.
+ * Creates the array.
  *
  * @param p0 the array
  * @param p1 the size
  */
-void initialize_array(void* p0, const void* p1) {
+void create_array(void* p0, const void* p1) {
 
     int* s = (int*) p1;
 
@@ -112,7 +112,7 @@ void initialize_array(void* p0, const void* p1) {
 
         if (a != (void*) 0) {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Initialize array.");
+            log_message((void*) &INFO_LOG_LEVEL, "Create array.");
 
             // An array CANNOT have ZERO length, so that dereferencing a pointer to
             // the first element of an array always returns a valid result.
@@ -122,22 +122,22 @@ void initialize_array(void* p0, const void* p1) {
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize array. The array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not create array. The array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize array. The size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not create array. The size is null.");
     }
 }
 
 /**
- * Finalizes the array.
+ * Destroys the array.
  *
  * @param p0 the array
  * @param p1 the size
  */
-void finalize_array(void* p0, const void* p1) {
+void destroy_array(void* p0, const void* p1) {
 
     int* s = (int*) p1;
 
@@ -147,7 +147,7 @@ void finalize_array(void* p0, const void* p1) {
 
         if (a != (void*) 0) {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Finalize array.");
+            log_message((void*) &INFO_LOG_LEVEL, "Destroy array.");
 
             //?? TODO: Destroy all array elements in a loop,
             //?? which is the same as Garbage Collection!
@@ -157,12 +157,12 @@ void finalize_array(void* p0, const void* p1) {
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize array. The array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not destroy array. The array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize array. The size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not destroy array. The size is null.");
     }
 }
 
