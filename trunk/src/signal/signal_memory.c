@@ -32,7 +32,7 @@
  * A signal is a transient logic model.
  * It is stored in the computer's random access memory (ram).
  *
- * @version $Revision: 1.26 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2004-06-14 23:56:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -605,46 +605,42 @@ void handle_create_model_signal(const void* p0,
 
                     if (*sc == 11) {
 
-                        // Initialize whole name and its count and size.
-                        void* wn = NULL_POINTER;
-                        int wnc = 0;
-                        int wns = 0;
-                        // Initialize part name and its count and size.
-                        void* pn = NULL_POINTER;
-                        int pnc = 0;
-                        int pns = 0;
-                        // Initialize part abstraction and its count and size.
-                        void* pa = NULL_POINTER;
-                        int pac = 0;
-                        int pas = 0;
-                        // Initialize part location and its count and size.
-                        void* pl = NULL_POINTER;
-                        int plc = 0;
-                        int pls = 0;
-                        // Initialize part model and its count and size.
-                        void* pm = NULL_POINTER;
-                        int pmc = 0;
-                        int pms = 0;
-                        // Initialize part constraints and its count and size.
-                        void* pc = NULL_POINTER;
-                        int pcc = 0;
-                        int pcs = 0;
-                        // Initialize position abstraction and its count and size.
-                        void* poa = NULL_POINTER;
-                        int poac = 0;
-                        int poas = 0;
-                        // Initialize position location and its count and size.
-                        void* pol = NULL_POINTER;
-                        int polc = 0;
-                        int pols = 0;
-                        // Initialize position model and its count and size.
-                        void* pom = NULL_POINTER;
-                        int pomc = 0;
-                        int poms = 0;
-                        // Initialize position constraints and its count and size.
-                        void* poc = NULL_POINTER;
-                        int pocc = 0;
-                        int pocs = 0;
+                        // Initialize persistent whole name and its count and size.
+                        void* pwn = NULL_POINTER;
+                        int pwnc = 0;
+                        int pwns = 0;
+
+                        // Initialize persistent part name,
+                        // part abstraction, location, model, constraint,
+                        // position abstraction, location, model, constraint,
+                        // and their counts and sizes.
+                        void* ppn = NULL_POINTER;
+                        int ppnc = 0;
+                        int ppns = 0;
+                        void* ppa = NULL_POINTER;
+                        int ppac = 0;
+                        int ppas = 0;
+                        void* ppl = NULL_POINTER;
+                        int pplc = 0;
+                        int ppls = 0;
+                        void* ppm = NULL_POINTER;
+                        int ppmc = 0;
+                        int ppms = 0;
+                        void* ppc = NULL_POINTER;
+                        int ppcc = 0;
+                        int ppcs = 0;
+                        void* ppoa = NULL_POINTER;
+                        int ppoac = 0;
+                        int ppoas = 0;
+                        void* ppol = NULL_POINTER;
+                        int ppolc = 0;
+                        int ppols = 0;
+                        void* ppom = NULL_POINTER;
+                        int ppomc = 0;
+                        int ppoms = 0;
+                        void* ppoc = NULL_POINTER;
+                        int ppocc = 0;
+                        int ppocs = 0;
 
                         // CAUTION! The parameter at index 0 is the logic/ operation name.
                         // Input and output parameters start with index 1.
@@ -664,101 +660,101 @@ void handle_create_model_signal(const void* p0,
 
                             if (j == 1) {
 
-                                // Get whole name and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &wn);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &wnc);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &wns);
+                                // Get persistent whole name and its count and size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pwn);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pwnc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pwns);
 
                             } else if (j == 2) {
 
-                                // Get part name and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pn);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pnc);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pns);
+                                // Get persistent part name and its count and size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ppn);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppnc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppns);
 
                             } else if (j == 3) {
 
-                                // Get part abstraction and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pa);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pac);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pas);
+                                // Get persistent part abstraction and its count and size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ppa);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppac);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppas);
 
                             } else if (j == 4) {
 
-                                // Get part location and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pl);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &plc);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pls);
+                                // Get persistent part location and its count and size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ppl);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pplc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppls);
 
                             } else if (j == 5) {
 
-                                // Get part model and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pm);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pmc);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pms);
+                                // Get persistent part model and its count and size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ppm);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppmc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppms);
 
                             } else if (j == 6) {
 
-                                // Get part constraints and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pc);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pcc);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pcs);
+                                // Get persistent part constraints and its count and size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ppc);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppcc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppcs);
 
                             } else if (j == 7) {
 
-                                // Get position abstraction and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &poa);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &poac);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &poas);
+                                // Get persistent position abstraction and its count and size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ppoa);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppoac);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppoas);
 
                             } else if (j == 8) {
 
-                                // Get position location and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pol);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &polc);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pols);
+                                // Get persistent position location and its count and size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ppol);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppolc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppols);
 
                             } else if (j == 9) {
 
-                                // Get position model and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pom);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pomc);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &poms);
+                                // Get persistent position model and its count and size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ppom);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppomc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppoms);
 
                             } else if (j == 10) {
 
-                                // Get position constraints and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &poc);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pocc);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pocs);
+                                // Get persistent position constraints and its count and size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ppoc);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppocc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppocs);
                             }
 
                             j++;
                         }
 
-                        // Initialize whole model and its count and size.
-                        void* wm = NULL_POINTER;
-                        int wmc = 0;
-                        int wms = 0;
+                        // Initialize transient whole model and its count and size.
+                        void* twm = NULL_POINTER;
+                        int twmc = 0;
+                        int twms = 0;
 
-                        // Get whole model.
-                        if (wn == NULL_POINTER) {
+                        // Get transient whole model.
+                        if (pwn == NULL_POINTER) {
 
-                            // If the whole model name is null, the knowledge
-                            // root is taken as whole model.
-                            wm = *k;
-                            wmc = *kc;
-                            wms = *ks;
+                            // If the persistent whole model name is null, the
+                            // knowledge root is taken as transient whole model.
+                            twm = *k;
+                            twmc = *kc;
+                            twms = *ks;
 
                         } else {
 
-                            // If a whole model name exists, the whole model is
-                            // determined within the knowledge root.
+                            // If a persistent whole model name exists, the transient
+                            // whole model is determined within the knowledge root.
                             // Abstraction and constraints as well as the model's
                             // position within the knowledge root are not of interest.
                             get_compound_part_by_name(p4, p5, p6,
-                                (void*) &wn, (void*) &wnc, (void*) &wns,
-                                (void*) &wm, (void*) &wmc, (void*) &wms,
+                                (void*) &pwn, (void*) &pwnc, (void*) &pwns,
+                                (void*) &twm, (void*) &twmc, (void*) &twms,
                                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
                                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
                                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
@@ -766,25 +762,52 @@ void handle_create_model_signal(const void* p0,
                                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
                         }
 
-                        // Initialize transient part model, position
-                        // and their count and size.
+                        // Initialize transient part name,
+                        // part abstraction, model, constraint,
+                        // position abstraction, model, constraint,
+                        // and their counts and sizes.
+                        // CAUTION! A transient location is not stored,
+                        // since that is only needed temporarily
+                        // for model loading.
+                        void* tpn = NULL_POINTER;
+                        int tpnc = 0;
+                        int tpns = 0;
+                        void* tpa = NULL_POINTER;
+                        int tpac = 0;
+                        int tpas = 0;
                         void* tpm = NULL_POINTER;
                         int tpmc = 0;
                         int tpms = 0;
+                        void* tpc = NULL_POINTER;
+                        int tpcc = 0;
+                        int tpcs = 0;
+                        void* tpoa = NULL_POINTER;
+                        int tpoac = 0;
+                        int tpoas = 0;
                         void* tpom = NULL_POINTER;
                         int tpomc = 0;
                         int tpoms = 0;
+                        void* tpoc = NULL_POINTER;
+                        int tpocc = 0;
+                        int tpocs = 0;
 
-                        // Create transient part model, position
-                        // and their count and size.
+                        // Create transient part name,
+                        // part abstraction, model, constraint,
+                        // position abstraction, model, constraint,
+                        // and their counts and sizes.
+                        copy_array((void*) &ppn, (void*) &ppns, (void*) &ppnc, (void*) &tpn, (void*) &tpns, (void*) &tpnc, (void*) &CHARACTER_ARRAY);
+                        copy_array((void*) &ppa, (void*) &ppas, (void*) &ppac, (void*) &tpa, (void*) &tpas, (void*) &tpac, (void*) &CHARACTER_ARRAY);
                         create_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
-                            (void*) &tpom, (void*) &tpomc, (void*) &tpoms,
-                            (void*) &pa, (void*) &pac,
-                            (void*) &pl, (void*) &plc,
-                            (void*) &pm, (void*) &pmc,
-                            (void*) &poa, (void*) &poac,
-                            (void*) &pol, (void*) &polc,
-                            (void*) &pom, (void*) &pomc);
+                            (void*) &ppa, (void*) &ppac,
+                            (void*) &ppl, (void*) &pplc,
+                            (void*) &ppm, (void*) &ppmc);
+                        copy_array((void*) &ppc, (void*) &ppcs, (void*) &ppcc, (void*) &tpc, (void*) &tpcs, (void*) &tpcc, (void*) &CHARACTER_ARRAY);
+                        copy_array((void*) &ppoa, (void*) &ppoas, (void*) &ppoac, (void*) &tpoa, (void*) &tpoas, (void*) &tpoac, (void*) &CHARACTER_ARRAY);
+                        create_model((void*) &tpom, (void*) &tpomc, (void*) &tpoms,
+                            (void*) &ppoa, (void*) &ppoac,
+                            (void*) &ppol, (void*) &ppolc,
+                            (void*) &ppom, (void*) &ppomc);
+                        copy_array((void*) &ppoc, (void*) &ppocs, (void*) &ppocc, (void*) &tpoc, (void*) &tpocs, (void*) &tpocc, (void*) &CHARACTER_ARRAY);
 
                         //?? If "add", then first check if name exists in whole;
                         //?? if yes, add "_0" or "_1" or "_2" etc.
@@ -793,16 +816,18 @@ void handle_create_model_signal(const void* p0,
                         //?? with equal name; but where to destroy it if
                         //?? no whole keeps a reference to it anymore?
 
-                        // Set transient part model, position
-                        // and their count and size.
-                        set_compound_part_by_name((void*) &wm, (void*) &wmc, (void*) &wms,
-                            (void*) &pn, (void*) &pnc, (void*) &pns,
-                            (void*) &pm, (void*) &pmc, (void*) &pms,
-                            (void*) &pa, (void*) &pac, (void*) &pas,
-                            (void*) &pc, (void*) &pcc, (void*) &pcs,
-                            (void*) &pom, (void*) &pomc, (void*) &poms,
-                            (void*) &poa, (void*) &poac, (void*) &poas,
-                            (void*) &poc, (void*) &pocc, (void*) &pocs);
+                        // Set transient part name,
+                        // part abstraction, model, constraint,
+                        // position abstraction, model, constraint,
+                        // and their counts and sizes.
+                        set_compound_part_by_name((void*) &twm, (void*) &twmc, (void*) &twms,
+                            (void*) &tpn, (void*) &tpnc, (void*) &tpns,
+                            (void*) &tpm, (void*) &tpmc, (void*) &tpms,
+                            (void*) &tpa, (void*) &tpac, (void*) &tpas,
+                            (void*) &tpc, (void*) &tpcc, (void*) &tpcs,
+                            (void*) &tpom, (void*) &tpomc, (void*) &tpoms,
+                            (void*) &tpoa, (void*) &tpoac, (void*) &tpoas,
+                            (void*) &tpoc, (void*) &tpocc, (void*) &tpocs);
 
                     } else {
 

@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.15 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-06-14 23:56:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -126,6 +126,9 @@ void wait(void* p0, void* p1, void* p2,
 
                 get_signal(p0, p1, (void*) &i,
                     (void*) &s, (void*) &sc, (void*) &p, (void*) &a, (void*) &ac);
+
+    //?? HERE is the segmentation fault error!
+    fprintf(stderr, "TEST 4: %i\n", f);
 
                 // Abstraction and priority are removed internally,
                 // together with the signal.
@@ -283,8 +286,8 @@ void initialize_global_variables() {
  * Example 2 (calls the startup routine of some application):
  * cyboi compound file /application/logic/startup.cybol
  *
- * The main function follows a system lifecycle to start up, run and shut down
- * the CYBOI system, in the following order:
+ * The main function follows a system lifecycle to start up,
+ * run and shut down the CYBOI system, in the following order:
  * 1 initialize global variables
  * 2 create statics (state/ logic knowledge container etc.)
  * 3 create startup signal and add to signal memory
@@ -302,14 +305,11 @@ int main(int p0, char** p1) {
     int r = 1;
 
     //
-    // System lifecycle.
-    //
-
-    //
     // Global variables.
     //
 
     // Initialize global variables.
+    // CAUTION!
     // They have to be initialized before the command line parameter check below!
     // Otherwise, the logger may not be able to log possible error messages.
     initialize_global_variables();
@@ -317,15 +317,14 @@ int main(int p0, char** p1) {
     //
     // Testing.
     //
-    // CAUTION!
-    // This has to stand AFTER the initialization of the
-    // global variables because these are used by the testing code.
-    //
 
     // Call testing procedures.
     // Comment/ uncomment this as needed.
-//    test();
-//    return 0;
+    // CAUTION!
+    // This has to stand AFTER the initialization of the
+    // global variables because these are used by the testing code.
+    test();
+    return 0;
 
     if (p1 != NULL_POINTER) {
 
@@ -373,43 +372,45 @@ int main(int p0, char** p1) {
             // Startup model.
             //
 
-            // The transient model and its count and size.
-            void* t = NULL_POINTER;
-            int tc = 0;
-            int ts = 0;
+            // Initialize persistent part abstraction, location, model
+            // and their counts and sizes.
+            void* ppa = (void*) p1[ABSTRACTION_STARTUP_PARAMETER_INDEX];
+            int ppac = strlen(p1[ABSTRACTION_STARTUP_PARAMETER_INDEX]);
+            int ppas = ppac;
+            void* ppl = (void*) p1[LOCATION_STARTUP_PARAMETER_INDEX];
+            int pplc = strlen(p1[LOCATION_STARTUP_PARAMETER_INDEX]);
+            int ppls = pplc;
+            void* ppm = (void*) p1[MODEL_STARTUP_PARAMETER_INDEX];
+            int ppmc = strlen(p1[MODEL_STARTUP_PARAMETER_INDEX]);
+            int ppms = ppmc;
 
-            // The persistent part abstraction and its count.
-            void* pa = (void*) p1[ABSTRACTION_STARTUP_PARAMETER_INDEX];
-            int pac = strlen(p1[ABSTRACTION_STARTUP_PARAMETER_INDEX]);
+            // Initialize transient part abstraction, model
+            // and their counts and sizes.
+            // CAUTION! A transient location is not stored,
+            // since that is only needed temporarily
+            // for model loading.
+            void* tpa = NULL_POINTER;
+            int tpac = 0;
+            int tpas = 0;
+            void* tpm = NULL_POINTER;
+            int tpmc = 0;
+            int tpms = 0;
 
-            // The persistent part location and its count.
-            void* pl = (void*) p1[LOCATION_STARTUP_PARAMETER_INDEX];
-            int plc = strlen(p1[LOCATION_STARTUP_PARAMETER_INDEX]);
+            // Create transient part abstraction, model
+            // and their counts and sizes.
+            copy_array((void*) &ppa, (void*) &ppas, (void*) &ppac, (void*) &tpa, (void*) &tpas, (void*) &tpac, (void*) &CHARACTER_ARRAY);
+            create_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
+                (void*) &ppa, (void*) &ppac,
+                (void*) &ppl, (void*) &pplc,
+                (void*) &ppm, (void*) &ppmc);
 
-            // The persistent part model and its count.
-            void* pm = (void*) p1[MODEL_STARTUP_PARAMETER_INDEX];
-            int pmc = strlen(p1[MODEL_STARTUP_PARAMETER_INDEX]);
+    fprintf(stderr, "tpa: %s\n", tpa);
+    fprintf(stderr, "tpac: %i\n", tpac);
+    fprintf(stderr, "tpas: %i\n", tpas);
 
-    fprintf(stderr, "pa: %s\n", pa);
-    fprintf(stderr, "pac: %i\n", pac);
-    fprintf(stderr, "pl: %s\n", pl);
-    fprintf(stderr, "plc: %i\n", plc);
-    fprintf(stderr, "pm: %s\n", pm);
-    fprintf(stderr, "pmc: %i\n", pmc);
-
-            // Create startup model.
-            create_model((void*) &t, (void*) &tc, (void*) &ts,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &pa, (void*) &pac,
-                (void*) &pl, (void*) &plc,
-                (void*) &pm, (void*) &pmc,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER);
-
-    fprintf(stderr, "t: %i\n", t);
-    fprintf(stderr, "tc: %i\n", tc);
-    fprintf(stderr, "ts: %i\n", ts);
+    fprintf(stderr, "tpm: %i\n", tpm);
+    fprintf(stderr, "tpmc: %i\n", tpmc);
+    fprintf(stderr, "tpms: %i\n", tpms);
 
             //
             // Startup signal.
@@ -417,9 +418,9 @@ int main(int p0, char** p1) {
 
             // Add startup signal to signal memory.
             set_signal((void*) &s, (void*) &sc, (void*) &ss,
-                (void*) &t, (void*) &tc,
+                (void*) &tpm, (void*) &tpmc,
                 (void*) &NORMAL_PRIORITY,
-                (void*) &pa, (void*) &pac);
+                (void*) &tpa, (void*) &tpac);
 
             //
             // Waiting loop.
@@ -437,12 +438,14 @@ int main(int p0, char** p1) {
             // Destruction.
             //
 
+            //?? Do not forget to destroy startup abstraction etc. HERE!
+
             // Destroy startup model.
-            destroy_model((void*) &t, (void*) &tc, (void*) &ts,
+            destroy_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &pa, (void*) &pac,
-                (void*) &pl, (void*) &plc,
-                (void*) &pm, (void*) &pmc,
+                (void*) &tpa, (void*) &tpac,
+                (void*) &tpa, (void*) &tpac,
+                (void*) &tpm, (void*) &tpmc,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER);
