@@ -29,10 +29,10 @@ package cybop.core.model;
  *
  * A string is an addition of characters, in other words a character array.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-13 15:24:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class String extends Array {
+public class String extends Quality {
 
     //
     // Static values.

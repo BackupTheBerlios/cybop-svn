@@ -30,7 +30,7 @@ package cybop.core.model;
  * An array is an area in the computer memory that can contain a number of
  * abstract elements.
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-13 15:24:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Array extends java.lang.Object {
@@ -442,7 +442,7 @@ public class Array extends java.lang.Object {
      */
     public void abstracc() throws Exception {
 
-        super.abstracc();
+//??        super.abstracc();
 
         setElements(createElements());
 
@@ -470,7 +470,7 @@ public class Array extends java.lang.Object {
         setElements(null);
         destroyElements(elements);
 
-        super.deabstract();
+//??        super.deabstract();
     }
 }
 

@@ -31,7 +31,7 @@ package cybop.core.model;
  * In the case of computer science, everything gets abstracted to 0 and 1.
  * But that also means that every abstraction has a bytecode representation.
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-13 15:24:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Abstraction extends Array {
@@ -109,6 +109,8 @@ public class Abstraction extends Array {
      */
     public void abstracc() throws Exception {
 
+        super.abstracc();
+
         // As long as the CYBOP framework is built on Java, every
         // item needs to be capable of encapsulating a pure Java object.
         setJavaObject(createJavaObject());
@@ -124,6 +126,8 @@ public class Abstraction extends Array {
         java.lang.Object javaObject = getJavaObject();
         setJavaObject(null);
         destroyJavaObject(javaObject);
+
+        super.deabstract();
     }
 }
 
