@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.36 $ $Date: 2005-01-19 13:41:35 $ $Author: christian $
+ * @version $Revision: 1.37 $ $Date: 2005-01-19 19:31:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -249,35 +249,43 @@ void test_pointer_array() {
     //
 
     // The character array (including new line and null termination character).
-    void* c = NULL_POINTER;
+    void* c = (void*) "Hello World!";
     int cs = 13;
 
-    // Create character array.
-    c = (void*) "Hello World!";
+    fprintf(stderr, "c: %s\n", (char*) c);
 
     // The pointer array.
-    void* p = NULL_POINTER;
+    void** p = POINTER_NULL_POINTER;
     int ps = 1;
 
     // Create pointer array.
     create_array((void*) &p, (void*) &ps, (void*) POINTER_ARRAY);
 
+    fprintf(stderr, "p: %i\n", p);
+
     // The result array.
-    void* r = NULL_POINTER;
+    void** r = NULL_POINTER;
 
     //
     // Testing.
     //
 
+    fprintf(stderr, "p[0] before set: %i\n", p[0]);
+    fprintf(stderr, "p[1] before set: %i\n", p[1]);
+
     // Set character array in pointer array.
     // Hand over character array as reference, because pointer array is expected!
     set_array_elements(p, (void*) ZERO_NUMBER, (void*) &c, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+
+    fprintf(stderr, "p[0] after set: %i\n", p[0]);
+    fprintf(stderr, "p[1] after set: %i\n", p[1]);
 
     // Get character array from pointer array.
     get_array_elements(p, (void*) ZERO_NUMBER, (void*) &r, (void*) POINTER_ARRAY);
 
     // Print result (character array).
-    fprintf(stderr, "r: %s\n", (char*) r);
+    fprintf(stderr, "r pointer: %i\n", *r);
+    fprintf(stderr, "r string: %s\n", (char*) *r);
 
     //
     // Destruction.
@@ -610,13 +618,13 @@ void test() {
     // int x = 2;
     // fprintf(stderr, "The value of x is: %d\n", x);
 
-    test_stdout_stderr();
+//??    test_stdout_stderr();
 //??    test_character_array_with_termination();
 //??    test_pointer_cast();
 //??    test_character_array_single_element();
 //??    test_character_array_multiple_elements();
 //??    test_pointer_return();
-//??    test_pointer_array();
+    test_pointer_array();
 //??    test_file_read();
 //??    test_file_write();
 //??    test_console();

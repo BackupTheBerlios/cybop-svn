@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.73 $ $Date: 2005-01-18 15:07:01 $ $Author: christian $
+ * @version $Revision: 1.74 $ $Date: 2005-01-19 19:31:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,7 +72,7 @@ int main(int p0, char** p1) {
     // Call testing procedures. Comment/ uncomment this as needed.
     // CAUTION! This has to stand AFTER the initialization of the
     // global variables because these are used by the testing code.
-    test(); destroy_globals(); r = 0; return r;
+//??    test(); destroy_globals(); r = 0; return r;
 
     if (p1 != NULL_POINTER) {
 
@@ -115,26 +115,26 @@ int main(int p0, char** p1) {
                 (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT,
                 (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
-
-            // Destroy global variables.
-            // CAUTION! They have to be destroyed AFTER the last log message above!
-            // Otherwise, the logger may not be able to log possible error messages.
-            destroy_globals();
+            log_message((void*) INFO_LOG_LEVEL, (void*) EXIT_CYBOI_NORMALLY_MESSAGE, (void*) EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 
             // Set return value to 0, to indicate proper shutdown.
             r = 0;
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE_COUNT);
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &USAGE_MESSAGE, (void*) &USAGE_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE, (void*) COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE_COUNT);
+            log_message((void*) INFO_LOG_LEVEL, (void*) USAGE_MESSAGE, (void*) USAGE_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
     }
+
+    // Destroy global variables.
+    // CAUTION! They have to be destroyed AFTER the log messages above!
+    // Otherwise, the logger may not be able to log possible error messages.
+    destroy_globals();
 
     return r;
 }
