@@ -23,7 +23,8 @@
  */
 
 #include <string.h>
-#include "container.c"
+#include "complex.c"
+#include "map.c"
 #include "map_handler.c"
 
 /**
@@ -33,7 +34,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.2 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-10-06 00:06:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -91,6 +92,73 @@ static void finalize_complex(void* p0) {
 }
 
 //
+// Helper functions.
+//
+
+/**
+ * Returns the child name.
+ *
+ * It is the most left name before the first dot/point "." in the given string
+ * or, if there is no dot, then it is the given name itself.
+ *
+ * @param p0 the hierarchical complex name
+ * @param p1 the child name
+ */
+static void get_child_name(void* p0, void* p1) {
+    
+    char* n = (char*) p0;
+    
+    if (n != 0) {
+        
+/*??
+        int i = n->indexOf(".");
+        
+        if (i != -1) {
+            
+            p1 = n->substring(0, i);
+        
+        } else {
+        
+            p1 = n;
+        }
+*/
+        
+    } else {
+        
+        log((void*) &ERROR_LOG_LEVEL, "Could not get child name. The hierarchical name is null.");
+    }
+}
+
+/**
+ * Returns the remaining name.
+ *
+ * It is the whole string after the first dot/point ".".
+ *
+ * @param p0 the hierarchical complex name
+ * @param p1 the remaining name
+ */
+static void get_remaining_name(void* p0, void* p1) {
+    
+    char* n = (char*) p0;
+    
+    if (n != 0) {
+        
+/*??
+        int i = n->indexOf(".");
+        
+        if (i != -1) {
+
+            p1 = n->substring(i + 1);
+        }
+*/
+        
+    } else {
+        
+        log((void*) &ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical name is null.");
+    }
+}
+
+//
 // Complex element.
 //
 
@@ -107,7 +175,7 @@ static void set_complex_element(void* p0, void* p1, void* p2) {
 
     if (c != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Set complex element: " + p1);
+        log((void*) &INFO_LOG_LEVEL, strcat("Set complex element: ", p1));
         
         void* n = 0;
         void* r = 0;
@@ -149,7 +217,7 @@ static void remove_complex_element(void* p0, void* p1) {
 
     if (c != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Remove complex element: " + p1);
+        log((void*) &INFO_LOG_LEVEL, strcat("Remove complex element: ", p1));
         
         void* n = 0;
         void* r = 0;
@@ -192,7 +260,7 @@ static void get_complex_element(void* p0, void* p1, void* p2) {
 
     if (c != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Get complex element: " + p1);
+        log((void*) &INFO_LOG_LEVEL, strcat("Get complex element: ", p1));
         
         void* n = 0;
         void* r = 0;
@@ -208,76 +276,17 @@ static void get_complex_element(void* p0, void* p1, void* p2) {
             get_map_element(c->children, n, child);
             
             // Continue to process along the hierarchical name.
-            p2 = get_complex_element(child, r);
+            get_complex_element(child, r, p2);
             
         } else {
 
             // The given complex is the parent of the child.
-            p2 = get_map_element(c->items, n);
+            get_map_element(c->children, n, p2);
         }
 
     } else {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not get complex element. The complex is null.");
-    }
-}
-
-/**
- * Returns the child name.
- *
- * It is the most left name before the first dot/point "." in the given string
- * or, if there is no dot, then it is the given name itself.
- *
- * @param p0 the hierarchical complex name
- * @param p1 the child name
- */
-static void get_child_name(void* p0, void* p1) {
-    
-    char* n = (char*) p0;
-    
-    if (n != 0) {
-        
-        int i = n->indexOf(".");
-        
-        if (i != -1) {
-            
-            p1 = n->substring(0, i);
-        
-        } else {
-        
-            p1 = n;
-        }
-        
-    } else {
-        
-        log((void*) &ERROR_LOG_LEVEL, "Could not get child name. The hierarchical name is null.");
-    }
-}
-
-/**
- * Returns the remaining name.
- *
- * It is the whole string after the first dot/point ".".
- *
- * @param p0 the hierarchical complex name
- * @param p1 the remaining name
- */
-static void get_remaining_name(void* p0, void* p1) {
-    
-    char* n = (char*) p0;
-    
-    if (n != 0) {
-        
-        int i = n->indexOf(".");
-        
-        if (i != -1) {
-
-            p1 = n->substring(i + 1);
-        }
-        
-    } else {
-        
-        log((void*) &ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical name is null.");
     }
 }
 

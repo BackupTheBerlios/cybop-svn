@@ -28,7 +28,7 @@
 #include "map.c"
 #include "map_handler.c"
 #include "signal.c"
-//?? #include "signal_handler.c"
+#include "signal_handler.c"
 
 //?? Temporary for character screen testing.
 #include "character_screen_handler.c"
@@ -39,7 +39,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.6 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-10-06 00:06:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -194,7 +194,6 @@ static void await(void* p0) {
 
         if (equal(sf, 0)) {
 
-/*??
             // Receive signal.
             receive_signal(p0, s);
 
@@ -206,7 +205,6 @@ static void await(void* p0) {
 
             // Reset signal.
             reset_signal(s);
-*/
 
         } else {
 
@@ -215,6 +213,7 @@ static void await(void* p0) {
         }
     }
     
+    free(s);
     free(sf);
 }
 

@@ -34,7 +34,7 @@
  * - Textual User Interface (TUI)
  * - Curses (termcap, ncurses)
  *
- * @version $Revision: 1.1 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-10-06 00:06:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

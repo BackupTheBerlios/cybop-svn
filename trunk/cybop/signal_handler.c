@@ -23,6 +23,8 @@
  */
 
 #include <string.h>
+#include "complex_handler.c"
+#include "map_handler.c"
 #include "signal.c"
 #include "statics_handler.c"
 #include "vector.c"
@@ -36,7 +38,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.8 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-10-06 00:06:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -125,6 +127,100 @@ static void* dynamics;
 //
 
 /**
+ * Resets the signal.
+ *
+ * @param p0 the signal
+ */
+static void reset_signal(void* p0) {
+    
+    struct signal* s = (struct signal*) p0;
+    
+    if (s != 0) {
+
+        s->priority = 0;
+        s->language = 0;
+        s->subject = 0;
+        s->predicate = 0;
+        s->owner = 0;
+        s->sender = 0;
+        s->object = 0;
+        s->adverbial = 0;
+        s->condition = 0;
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not reset signal. The signal is null.");
+    }
+}
+
+/**
+ * Sends the signal.
+ *
+ * If a signal's action is 0, it will get destroyed.
+ * Otherwise, the signal will be stored in the signal memory for further
+ * handling.
+ *
+ * @param p0 the signal memory
+ * @param p1 the signal
+ */
+static void send_signal(void* p0, void* p1) {
+
+    struct signal* s = (struct signal*) p1;
+    
+    if (s != 0) {
+
+        // Only send a new signal (store in signal memory) if an action exists.
+        // Otherwise, the chain of signals/ actions finishes here, until a new
+        // hardware event (interrupt) occurs.
+        if (s->predicate != 0) {
+            
+            // Create signal for storage in signal memory.
+            struct signal* tmp = (struct signal*) malloc(sizeof(struct signal));
+    
+            if (tmp != 0) {
+            
+                log((void*) &INFO_LOG_LEVEL, strcat("Send signal: ", s->predicate));
+
+                // Copy transporting signal given as parameter to the signal memory signal.
+                tmp->priority = s->priority;
+                tmp->language = s->language;
+                tmp->subject = s->subject;
+                tmp->predicate = s->predicate;
+                tmp->owner = s->owner;
+                tmp->sender = s->sender;
+                tmp->object = s->object;
+                tmp->adverbial = s->adverbial;
+                tmp->condition = s->condition;
+
+                // Caution! Adding of signals must be synchronized between:
+                // - send for adding internal CYBOP signals
+                // - JavaEventHandler.dispatchEvent for adding transformed java event signals
+                // These are the only procedures accessing the signal
+                // memory for adding signals.
+//??                synchronized (p0) {
+
+                    // Add signal to signal memory (interrupt vector table).
+                    add_map_element(p0, &SIGNAL, (void*) tmp);
+//??                }
+
+            } else {
+    
+                log((void*) &ERROR_LOG_LEVEL, "Could not send signal. The signal memory signal is null.");
+            }
+
+        } else {
+            
+            // Do not log this as the loop runs infinite and would stuff the log record!
+            // The action is 0. No signal gets stored in the signal memory.
+        }
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not send signal. The signal is null.");
+    }
+}
+
+/**
  * Receives the signal.
  *
  * The JDK sends java.awt.AWTEvent events.
@@ -150,8 +246,10 @@ static void receive_signal(void* p0, void* p1) {
     if (s != 0) {
 
         // Read and remove signal from signal memory (interrupt vector table).
-        struct signal* tmp = (struct signal*) get_map_element(p0, 0);
-        remove_map_element(p0, 0);
+        struct signal* tmp = 0;
+        
+        get_map_element_at_index(p0, 0, tmp);
+        remove_map_element_at_index(p0, 0);
         
         if (tmp != 0) {
         
@@ -194,10 +292,11 @@ static void receive_signal(void* p0, void* p1) {
 static void handle_signal(void* p0, void* p1, void* p2) {
 
     struct signal* s = (struct signal*) p0;
+    int* sf = (int*) p2;
 
     if (s != 0) {
 
-        void* a = s->predicate;
+        char* a = (char*) s->predicate;
 
         if (a != 0) {
 
@@ -218,20 +317,25 @@ static void handle_signal(void* p0, void* p1, void* p2) {
 
             } else if (strcmp(a, "mouse_clicked") == 0) {
 
-                void* statics = statics;
-                void* main_frame = get_item_element(statics, "main_frame");
-                struct vector* pointer_position = (struct vector*) get_item_element(statics, "mouse.pointer_position");
+                void* main_frame = malloc(0);
+                struct vector* pointer_position = malloc(0);
+                
+                get_complex_element(statics, "main_frame", main_frame);
+                get_complex_element(statics, "mouse.pointer_position", pointer_position);
                 
                 reset_signal(s);
 
                 if (pointer_position != 0) {
                  
-                    s->predicate = mouse_clicked_action(main_frame, pointer_position->x, pointer_position->y, pointer_position->z);
+                    mouse_clicked_action(main_frame, (void*) pointer_position->x, (void*) pointer_position->y, (void*) pointer_position->z, s->predicate);
                     
                 } else {
                     
                     log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is null.");
                 }
+                
+                free(pointer_position);
+                free(main_frame);
 
             } else if (strcmp(a, SHOW_SYSTEM_INFORMATION_ACTION) == 0) {
 
@@ -289,7 +393,7 @@ static void handle_signal(void* p0, void* p1, void* p2) {
             } else if (strcmp(a, STARTUP_ACTION) == 0) {
                 
                 // Root (statics).
-                create_instance(statics, s->object, COMPLEX_MODEL);
+                create_instance(statics, s->object, &COMPLEX_MODEL);
 
                 reset_signal(s);
                 
@@ -301,8 +405,8 @@ static void handle_signal(void* p0, void* p1, void* p2) {
             } else if (strcmp(a, SHUTDOWN_ACTION) == 0) {
                 
                 // Root (statics).
-                destroy_instance(statics, s->object, COMPLEX_MODEL);
-                *p2 = 1;
+                destroy_instance(statics, s->object, &COMPLEX_MODEL);
+                *sf = 1;
 
                 reset_signal(s);
             }
@@ -316,218 +420,6 @@ static void handle_signal(void* p0, void* p1, void* p2) {
     } else {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not handle signal. The signal is null.");
-    }
-}
-
-/**
- * Sends the signal.
- *
- * If a signal's action is 0, it will get destroyed.
- * Otherwise, the signal will be stored in the signal memory for further
- * handling.
- *
- * @param p0 the signal memory
- * @param p1 the signal
- */
-static void send_signal(void* p0, void* p1) {
-
-    struct signal* s = (struct signal*) p1;
-    
-    if (s != 0) {
-
-        // Only send a new signal (store in signal memory) if an action exists.
-        // Otherwise, the chain of signals/ actions finishes here, until a new
-        // hardware event (interrupt) occurs.
-        if (s->predicate != 0) {
-            
-            // Create signal for storage in signal memory.
-            struct signal* tmp = (struct signal*) malloc(sizeof(struct signal));
-    
-            if (tmp != 0) {
-            
-                log((void*) &INFO_LOG_LEVEL, strcat("Send signal: ", s->predicate));
-
-                // Copy transporting signal given as parameter to the signal memory signal.
-                tmp->priority = s->priority;
-                tmp->language = s->language;
-                tmp->subject = s->subject;
-                tmp->predicate = s->predicate;
-                tmp->owner = s->owner;
-                tmp->sender = s->sender;
-                tmp->object = s->object;
-                tmp->adverbial = s->adverbial;
-                tmp->condition = s->condition;
-
-                // Caution! Adding of signals must be synchronized between:
-                // - send for adding internal CYBOP signals
-                // - JavaEventHandler.dispatchEvent for adding transformed java event signals
-                // These are the only procedures accessing the signal
-                // memory for adding signals.
-/*??
-                synchronized (p0) {
-
-                    // Add signal to signal memory (interrupt vector table).
-                    add_map_element(p0, SIGNAL, tmp);
-                }
-*/
-
-            } else {
-    
-                log((void*) &ERROR_LOG_LEVEL, "Could not send signal. The signal memory signal is null.");
-            }
-
-        } else {
-            
-            // Do not log this as the loop runs infinite and would stuff the log record!
-            // The action is 0. No signal gets stored in the signal memory.
-        }
-
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not send signal. The signal is null.");
-    }
-}
-
-/**
- * Resets the signal.
- *
- * @param p0 the signal
- */
-static void reset_signal(void* p0) {
-    
-    struct signal* s = (struct signal*) p0;
-    
-    if (s != 0) {
-
-        s->priority = 0;
-        s->language = 0;
-        s->subject = 0;
-        s->predicate = 0;
-        s->owner = 0;
-        s->sender = 0;
-        s->object = 0;
-        s->adverbial = 0;
-        s->condition = 0;
-
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not reset signal. The signal is null.");
-    }
-}
-
-//
-// Signal handling.
-//
-
-/**
- * Handles the mouse clicked action.
- *
- * @param p0 the screen item
- * @param p1 the x coordinate
- * @param p2 the y coordinate
- * @param p3 the z coordinate
- * @param p4 the action
- */
-static void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p0 != 0) {
-
-/*??
-        // Determine the action of the clicked child screen item.
-        int count = 0;
-        int size = get_map_size(p0->items);
-        void* child = 0;
-        struct vector* position = 0;
-        struct vector* expansion = 0;
-        int x = -1;
-        int y = -1;
-        int z = -1;
-        int width = -1;
-        int height = -1;
-        int depth = -1;
-        int contains = 0;
-        void* action = 0;
-        
-        while (count < size) {
-
-            // Determine child, its position and expansion within the given screen item.
-            child = get_map_element(p0->items, count);
-            position = (vector*) get_map_element(p0->positions, count);
-            
-            if (child instanceof item) {
-                    
-                expansion = (vector) get_item_element(child, "expansion");
-                
-                if (position != 0) {
-                        
-                    // Translate the given coordinates according to the child's position.
-                    x = p1 - position->x;
-                    y = p2 - position->y;
-                    z = p3 - position->z;
-
-                    if (expansion != 0) {
-
-                        // Determine child's expansion.
-                        width = expansion->x;
-                        height = expansion->y;
-                        depth = expansion->z;
-        
-                        // Check if the given coordinates are in the child's screen area.
-                        // The "if" conditions had to be inserted because in classical
-                        // graphical user interfaces, the depth is normally 0 and
-                        // such the boolean comparison would deliver "false".
-                        // Using the conditions, the coordinates that are set to "0"
-                        // are not considered for comparison.
-                        contains = (x >= 0);
-                        contains = contains && (x < width);
-                        contains = contains && (y >= 0);
-                        contains = contains && (y < height);
-                        contains = contains && (z >= 0);
-                        contains = contains && (z < depth);
-        
-                        if (contains == 1) {
-        
-                            // The given coordinates are in the child's screen area.
-                            // Therefore, use the child's action.
-                            action = mouse_clicked_action(child, x, y, z, p4);
-                
-                            break;
-                        }
-
-                    } else {
-                        
-                        log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. An expansion is null.");
-                    }
-
-                } else {
-                    
-                    log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. A position is null.");
-                }
-
-            } else {
-                
-                log((void*) &INFO_LOG_LEVEL, "Could not handle mouse clicked action. A child is not of type Item.");
-            }
-            
-            count++;
-        }
-        
-        // Only use child screen item's action if it exists.
-        // Otherwise, use the parent screen item's action.
-        if (action != 0) {
-            
-            p4 = action;
-
-        } else {
-            
-            // Determine the action of the given screen item.
-            get_map_element(i->items, "mouse_clicked_action", p4);
-        }
-*/
-
-    } else {
-        
-        log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The item is null.");
     }
 }
 

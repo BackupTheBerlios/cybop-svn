@@ -22,6 +22,9 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef MAP_HANDLER_SOURCE
+#define MAP_HANDLER_SOURCE
+
 #include <string.h>
 #include "array_handler.c"
 #include "map.c"
@@ -31,7 +34,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.8 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-10-06 00:06:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -455,4 +458,7 @@ static void get_map_element_with_name(void* p0, void* p1, void* p2) {
     //?? Move to finalize?
     free(i);
 }
+
+/* MAP_HANDLER_SOURCE */
+#endif
 
