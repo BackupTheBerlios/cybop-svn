@@ -30,13 +30,13 @@ package cyboi;
  * Item elements are accessed over their index or name.
  *
  * An item has well-defined methods useable by outside entities. An outside
- * entity which contains items is called their container. Containers have a contract
+ * entity which contains items is called their. Containers have a contract
  * with the items they contain, in that methods are called in a specific order,
  * called a lifecycle.<br><br>
  *
- * By calling the lifecycle methods, a container ensures the proper startup and
+ * By calling the lifecycle methods, a ensures the proper startup and
  * shutdown of each item, to work correctly. One or more methods can be called
- * by the container, but the order must be the same.<br>
+ * by the, but the order must be the same.<br>
  *
  * An item has the following lifecycle:
  *  <ul>
@@ -65,7 +65,7 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.12 $ $Date: 2003-07-24 09:46:18 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-07-24 09:59:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -132,83 +132,83 @@ class ItemHandler {
     }
 
     //
-    // Item container management.
+    // Item management.
     //
 
     /**
-     * Creates an item container.
+     * Creates an item.
      *
-     * @return the item container
+     * @return the item
      */
-    static java.lang.Object create_item_container() {
+    static java.lang.Object create_item() {
 
-        ItemContainer c = new ItemContainer();
+        Item c = new Item();
 
         if (c != null) {
 
-            c.item_abstractions = MapHandler.create_map_container();
-            c.items = MapHandler.create_map_container();
-            c.space_abstractions = MapHandler.create_map_container();
-            c.spaces = MapHandler.create_map_container();
-            c.time_abstractions = MapHandler.create_map_container();
-            c.times = MapHandler.create_map_container();
-            c.force_abstractions = MapHandler.create_map_container();
-            c.forces = MapHandler.create_map_container();
+            c.item_abstractions = MapHandler.create_map();
+            c.items = MapHandler.create_map();
+            c.space_abstractions = MapHandler.create_map();
+            c.spaces = MapHandler.create_map();
+            c.time_abstractions = MapHandler.create_map();
+            c.times = MapHandler.create_map();
+            c.force_abstractions = MapHandler.create_map();
+            c.forces = MapHandler.create_map();
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not create item container. The item container is null.");
+            java.lang.System.out.println("ERROR: Could not create item. The item is null.");
         }
 
         return c;
     }
 
     /**
-     * Destroys the item container.
+     * Destroys the item.
      *
-     * @param c the item container
+     * @param c the item
      */
-    static void destroy_item_container(java.lang.Object c) {
+    static void destroy_item(java.lang.Object c) {
 
-        ItemContainer ic = (ItemContainer) c;
+        Item ic = (Item) c;
         
         if (ic != null) {
 
             java.lang.Object forces = ic.forces;
             ic.forces = null;
-            MapHandler.destroy_map_container(forces);
+            MapHandler.destroy_map(forces);
 
             java.lang.Object force_abstractions = ic.force_abstractions;
             ic.force_abstractions = null;
-            MapHandler.destroy_map_container(force_abstractions);
+            MapHandler.destroy_map(force_abstractions);
 
             java.lang.Object times = ic.times;
             ic.times = null;
-            MapHandler.destroy_map_container(times);
+            MapHandler.destroy_map(times);
 
             java.lang.Object time_abstractions = ic.time_abstractions;
             ic.time_abstractions = null;
-            MapHandler.destroy_map_container(time_abstractions);
+            MapHandler.destroy_map(time_abstractions);
 
             java.lang.Object spaces = ic.spaces;
             ic.spaces = null;
-            MapHandler.destroy_map_container(spaces);
+            MapHandler.destroy_map(spaces);
 
             java.lang.Object space_abstractions = ic.space_abstractions;
             ic.space_abstractions = null;
-            MapHandler.destroy_map_container(space_abstractions);
+            MapHandler.destroy_map(space_abstractions);
 
             java.lang.Object items = ic.items;
             ic.items = null;
-            MapHandler.destroy_map_container(items);
+            MapHandler.destroy_map(items);
 
             java.lang.Object item_abstractions = ic.item_abstractions;
             ic.item_abstractions = null;
-            MapHandler.destroy_map_container(item_abstractions);
+            MapHandler.destroy_map(item_abstractions);
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not destroy item container. The item container is null.");
+            java.lang.System.out.println("ERROR: Could not destroy item. The item is null.");
         }
     }
 
@@ -217,11 +217,11 @@ class ItemHandler {
     //
 
     /**
-     * Creates an item element.
+     * Creates an element.
      *
      * @param a the abstraction
      * @param c the category
-     * @return the item element
+     * @return the element
      */
     static java.lang.Object create_item_element(java.lang.Object a, java.lang.Object c) throws java.lang.Exception {
 
@@ -247,24 +247,24 @@ class ItemHandler {
 
             } else if (a.equals(Statics.COMPLEX)) {
 
-                i = ItemHandler.create_item_container();
+                i = ItemHandler.create_item();
                 ItemHandler.initialize(i, c);
             }
             
         } else {
             
-            java.lang.System.out.println("WARNING: Could not create item element. The abstraction is null.");
+            java.lang.System.out.println("WARNING: Could not create element. The abstraction is null.");
         }
 
         return i;
     }
 
     /**
-     * Destroys the item element.
+     * Destroys the element.
      *
      * @param a the abstraction
      * @param c the category
-     * @param i the item element
+     * @param i the element
      */
     static java.lang.Object destroy_item_element(java.lang.Object a, java.lang.Object c, java.lang.Object i) throws java.lang.Exception {
 
@@ -289,12 +289,12 @@ class ItemHandler {
             } else if (a.equals(Statics.COMPLEX)) {
 
                 ItemHandler.finalizz(i, c);
-                ItemHandler.destroy_item_container(i);
+                ItemHandler.destroy_item(i);
             }
             
         } else {
             
-            java.lang.System.out.println("WARNING: Could not destroy item element. The abstraction is null.");
+            java.lang.System.out.println("WARNING: Could not destroy element. The abstraction is null.");
         }
 
         return i;
@@ -496,7 +496,7 @@ class ItemHandler {
      */
     static void process_node_map(java.lang.Object i, java.lang.Object m) throws java.lang.Exception {
 
-        ItemContainer ic = (ItemContainer) i;
+        Item ic = (Item) i;
         
         if (ic != null) {
                 
@@ -524,7 +524,7 @@ class ItemHandler {
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not process node map. The item container is null.");
+            java.lang.System.out.println("ERROR: Could not process node map. The item is null.");
         }
     }
 
@@ -568,7 +568,7 @@ class ItemHandler {
     /**
      * Returns the item at the given position.
      *
-     * @param p the position relative to this container item
+     * @param p the position relative to this item
      * @return the item
      */
 /*??
@@ -602,7 +602,7 @@ class ItemHandler {
                         // returned itself.
                         // For example, a mouse may be clicked on a panel, in the gap between
                         // two buttons. Then, none of the buttons contains the given position
-                        // but the panel as parent container of the buttons does.
+                        // but the panel as parent of the buttons does.
                         child = item;
                         n = item.getChildrenNumber();
     

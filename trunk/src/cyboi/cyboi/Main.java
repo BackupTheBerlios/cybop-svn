@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.12 $ $Date: 2003-07-24 09:46:18 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-07-24 09:59:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -68,13 +68,13 @@ class Main {
                     java.lang.Object event_handler = Main.create_event_handler();
                     Main.replaceEventQueue(event_handler);
 
-                    java.lang.Object signal_memory = MapHandler.create_map_container();
+                    java.lang.Object signal_memory = MapHandler.create_map();
 
-                    java.lang.Object statics = ItemHandler.create_item_container();
+                    java.lang.Object statics = ItemHandler.create_item();
                     ItemHandler.initialize(statics, statics_category);
 
 /*??
-                    java.lang.Object dynamics = ItemHandler.create_item_container();
+                    java.lang.Object dynamics = ItemHandler.create_item();
                     ItemHandler.initialize(dynamics, dynamics_category);
 */
 
@@ -90,14 +90,16 @@ class Main {
     
 /*??
                     ItemHandler.finalizz(dynamics, dynamics_category);
-                    ItemHandler.destroy_item_container(dynamics);
+                    ItemHandler.destroy_item(dynamics);
 */
 
                     ItemHandler.finalizz(statics, statics_category);
-                    ItemHandler.destroy_item_container(statics);
+                    ItemHandler.destroy_item(statics);
 
-                    MapHandler.destroy_map_container(signal_memory);
+                    MapHandler.destroy_map(signal_memory);
+
                     Main.destroy_event_handler(event_handler);
+
                     ItemHandler.destroy_xml_parser(ItemHandler.xml_parser);
                     ItemHandler.xml_parser = null;
     
