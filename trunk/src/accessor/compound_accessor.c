@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2005-01-24 22:47:52 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2005-01-26 10:51:35 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,9 +68,9 @@ void get_compound_element_index(const void* p0, const void* p1, const void* p2, 
             // The loop variable.
             int j = 0;
             // The name.
-            void* n1 = NULL_POINTER;
+            void** n1 = NULL_POINTER;
             // The name count.
-            void* nc1 = NULL_POINTER;
+            void** nc1 = NULL_POINTER;
             // The comparison result.
             int r = 0;
 
@@ -85,7 +85,7 @@ void get_compound_element_index(const void* p0, const void* p1, const void* p2, 
                 get_array_elements(*n, (void*) &j, (void*) &n1, (void*) POINTER_ARRAY);
                 get_array_elements(*nc, (void*) &j, (void*) &nc1, (void*) POINTER_ARRAY);
 
-                compare_arrays(p2, p3, (void*) n1, (void*) nc1, (void*) &r, (void*) &CHARACTER_ARRAY);
+                compare_arrays(p2, p3, (void*) *n1, (void*) *nc1, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 
