@@ -1,7 +1,7 @@
 /*
  * $RCSfile: cybop.css,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -30,7 +30,7 @@
  * - green: #C0FFC0
  * - orange: #FFDCA8
  *
- * @version $Revision: 1.2 $ $Date: 2004-07-10 18:41:45 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-07-16 16:13:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -104,5 +104,5 @@ ul.circle {
  */
 a:link { color: #C0C0FF; text-decoration: none; }
 a:active { color: #FF8080; text-decoration: none; }
-a:visited { color: #FFFFC0; text-decoration: none; }
+a:visited { color: #C0FFC0; text-decoration: none; }
 
