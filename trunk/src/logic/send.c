@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-03-18 00:42:09 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -40,6 +40,10 @@
 #include "../socket/unix_socket.c"
 #include "../translator/translator.c"
 #include "../web/socket_number_accessor.c"
+
+//?? TEMPORARY TESTING
+#include "../x_windows/x_windows.c"
+#include "../x_windows/x_windows_handler.c"
 
 /**
  * Sends a message in a special language.
@@ -235,6 +239,131 @@ void send_message(const void* p0, const void* p1,
             void* tmpds = NULL_POINTER;
 
             send_tui(tmpd, tmpdc, tmpds, *mm, *mmc);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays((void*) *lm, (void*) *lmc, (void*) X_WINDOWS_ABSTRACTION, (void*) X_WINDOWS_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+/*??
+            translate
+            serialise
+            send_vga
+*/
+
+            init_x();
+
+            struct x_windows* x = (struct x_windows*) malloc(sizeof(struct x_windows));
+
+            if (x != NULL_POINTER) {
+
+                // Get parameters from screen and set them on X.
+                x->display = XOpenDisplay("");
+                x->screen = DefaultScreen(x->display);
+
+                // Voreinstellung fuer Pixelwerte
+                x->background = WhitePixel(x->display, x->screen);
+                x->foreground = BlackPixel(x->display, x->screen);
+
+                // Window-position
+                x->hint.x = 100;
+                x->hint.y = 100;
+
+                x->hint.width = Anwendung.size_x;
+                x->hint.height = Anwendung.size_y;
+                x->hint.flags = PPosition | PSize;
+
+                x->window = XCreateSimpleWindow(
+                    x->display,
+                    DefaultRootWindow(x->display),
+                    x->hint.x,
+                    x->hint.y,
+                    x->hint.width,
+                    x->hint.height,
+                    5,
+                    x->foreground,
+                    x->background);
+
+                XSetStandardProperties(
+                    x->display,
+                    x->window,
+                    "Application",
+                    "Icon",
+                    None,
+                    NULL,
+                    0,
+                    (void*) &(x->hint));
+
+                // GCs fuer Menubar erzeugen
+                x->cmap = DefaultColormap(x->display, x->screen);
+                x->gray.red = 49125;
+                x->gray.green = 49125;
+                x->gray.blue = 49125;
+
+                XAllocColor(x->display, x->cmap, &(x->gray));
+                x->light_gray.red = 56000;
+                x->light_gray.green = 58000;
+                x->light_gray.blue = 60000;
+
+                XAllocColor(x->display, x->cmap, &(x->light_gray));
+                x->vlight_gray.red = 60000;
+                x->vlight_gray.green = 61000;
+                x->vlight_gray.blue = 62000;
+
+                XAllocColor(x->display, x->cmap, &(x->vlight_gray));
+                x->dark_gray.red = 32768;
+                x->dark_gray.green = 32768;
+                x->dark_gray.blue = 32768;
+
+                XAllocColor(x->display, x->cmap, &(x->dark_gray));
+
+                x->gc_menu = XCreateGC(x->display, x->window, 0, 0);
+                XSetBackground(x->display, x->gc_menu, x->background);
+                XSetForeground(x->display, x->gc_menu, x->light_gray.pixel);
+
+                x->gc_menu_border_top = XCreateGC(x->display, x->window, 0, 0);
+                XSetBackground(x->display, x->gc_menu_border_top, x->background);
+                XSetForeground(x->display, x->gc_menu_border_top, x->vlight_gray.pixel);
+
+                x->gc_menu_border_bottom = XCreateGC(x->display, x->window, 0, 0);
+                XSetBackground(x->display, x->gc_menu_border_bottom, x->background);
+                XSetForeground(x->display, x->gc_menu_border_bottom, x->dark_gray.pixel);
+
+                x->gc_menu_font = XCreateGC(x->display, x->window, 0, 0);
+                XSetBackground(x->display, x->gc_menu_font, x->light_gray.pixel);
+                XSetForeground(x->display, x->gc_menu_font, x->foreground);
+
+                // GC (graphic content) erzeugen
+                GC gc = XCreateGC(x->display, x->window, 0, 0);
+
+                XSetBackground(x->display, gc, x->background);
+                XSetForeground(x->display, gc, x->foreground);
+
+                // Request input signals.
+                XSelectInput(x->display, x->window, ButtonPressMask | KeyPressMask | ExposureMask);
+
+                // Map windows.
+                XMapRaised(x->display, x->window);
+
+                //?? From xlib tutorial. Remove later when event loop (MappingNotify) functions!
+                XFlush(x->display);
+
+                sleep(5);
+
+                // Free memory.
+                XFreeGC(x->display, gc);
+                XDestroyWindow(x->display, x->window);
+                XCloseDisplay(x->display);
+
+                free(x);
+
+            } else {
+
+        //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle send x windows output. The x windows is null.");
+            }
         }
     }
 

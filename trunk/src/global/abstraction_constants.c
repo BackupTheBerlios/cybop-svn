@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-03-18 07:47:57 $ $Author: rholzmueller $
+ * @version $Revision: 1.17 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -282,6 +282,12 @@ static const char TUI_ABSTRACTION_ARRAY[] = {'t', 'u', 'i'};
 static const char* TUI_ABSTRACTION = TUI_ABSTRACTION_ARRAY;
 static const int TUI_ABSTRACTION_COUNT_ARRAY[] = {3};
 static const int* TUI_ABSTRACTION_COUNT = TUI_ABSTRACTION_COUNT_ARRAY;
+
+/** The graphical user interface (gui) abstraction. */
+static const char GUI_ABSTRACTION_ARRAY[] = {'g', 'u', 'i'};
+static const char* GUI_ABSTRACTION = GUI_ABSTRACTION_ARRAY;
+static const int GUI_ABSTRACTION_COUNT_ARRAY[] = {3};
+static const int* GUI_ABSTRACTION_COUNT = GUI_ABSTRACTION_COUNT_ARRAY;
 
 /** The x windows abstraction. */
 static const char X_WINDOWS_ABSTRACTION_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', 's'};

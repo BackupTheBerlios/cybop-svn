@@ -23,15 +23,13 @@
  *
  * This file handles a client UDP socket.
  *
- * @version $Revision: 1.5 $ $Date: 2005-03-18 00:42:09 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CLIENT_UDP_SOURCE
 #define CLIENT_UDP_SOURCE
-
-#include "../global/includes.c"
 
 /*??
 char *pfad = "/home/cybop/object/socket/server_udp.o";

@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.42 $ $Date: 2005-02-11 11:02:54 $ $Author: christian $
+ * @version $Revision: 1.43 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -34,6 +34,7 @@
 #define TEST_SOURCE
 
 #include <stdio.h>
+#include "../accessor/compound_accessor.c"
 #include "../array/array.c"
 #include "../creator/integer_creator.c"
 #include "../global/structure_constants.c"

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-03-18 00:42:08 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -29,7 +29,8 @@
 #ifndef INPUT_OUTPUT_ACTIVATOR_SOURCE
 #define INPUT_OUTPUT_ACTIVATOR_SOURCE
 
-#include "../global/includes.c"
+#include "../communicator/tcp_socket_communicator.c"
+#include "../socket/unix_socket.c"
 
 /**
  * Activates the input output mechanisms.
@@ -109,11 +110,6 @@ void activate_input_output(void* p0) {
 
         f = POINTER_NULL_POINTER;
     }
-
-//?? TEST only!
-//??    send_x_windows_output(NULL, NULL, p5);
-//??    sleep(4);
-//??    init_x();
 }
 
 /* INPUT_OUTPUT_ACTIVATOR_SOURCE */

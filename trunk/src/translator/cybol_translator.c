@@ -21,14 +21,23 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-03-18 00:42:10 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOL_TRANSLATOR_SOURCE
 #define CYBOL_TRANSLATOR_SOURCE
 
-#include "../global/includes.c"
+#include <string.h>
+#include <libxml/tree.h>
+#include "../array/array.c"
+#include "../creator/integer_creator.c"
+#include "../global/abstraction_constants.c"
+#include "../global/channel_constants.c"
+#include "../global/cybol_constants.c"
+#include "../global/integer_constants.c"
+#include "../global/name_constants.c"
+#include "../logger/logger.c"
 
 //
 // Forward declarations.
@@ -49,13 +58,12 @@
  */
 void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8);
+
 void set_compound_element_by_name(void* p0, void* p1, void* p2,
     const void* p3, const void* p4, const void* p5,
     const void* p6, const void* p7, const void* p8,
     const void* p9, const void* p10, const void* p11,
     const void* p12, const void* p13, const void* p14);
-
-
 
 //
 // Cybol property.

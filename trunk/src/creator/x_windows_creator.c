@@ -21,14 +21,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-03-18 09:20:56 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef X_WINDOWS_CREATOR_SOURCE
 #define X_WINDOWS_CREATOR_SOURCE
-
-#include "../global/includes.c"
 
 /* X_WINDOWS_CREATOR_SOURCE */
 #endif

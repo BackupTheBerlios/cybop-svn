@@ -21,112 +21,92 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-01-08 19:55:19 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef X_WINDOWS_SOURCE
 #define X_WINDOWS_SOURCE
 
-//??#include <X11/Xlib.h>
-//??#include <X11/Xutil.h>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
 
 /**
  * This is the x windows.
  *
  * It keeps data which are necessary to control an x windows.
  *
- * @version $Revision: 1.7 $ $Date: 2005-01-08 19:55:19 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct x_windows {
 
     /** The display. */
-/*??
     Display* display;
 
     /** The screen. */
-/*??
     int screen;
 
     /** The window. */
-/*??
     Window window;
 
     /** The graphics context. */
-/*??
     GC gc;
 
     /** The menu graphics context. */
-/*??
     GC gc_menu;
 
     /** The menu border top graphics context. */
-/*??
     GC gc_menu_border_top;
 
     /** The menu border bottom graphics context. */
-/*??
     GC gc_menu_border_bottom;
 
     /** The menu font graphics context. */
-/*??
     GC gc_menu_font;
 
     /** The event. */
-/*??
     XEvent event;
 
     /** The key. */
-/*??
     KeySym key;
 
     /** The size hint. */
-/*??
     XSizeHints hint;
 
     /** The text. */
-/*??
     char text[10];
 
     /** The test. */
-/*??
     char str_test[1000];
 
     /** The zugriff. */
-/*??
     char str_zugriff[1000];
 
     /** The menu bar. */
-/*??
     char str_menubar[100];
 
     /** The foreground. */
-    /*??unsigned long*/ //??double foreground;
+    unsigned long foreground; //??double foreground;
 
     /** The background. */
-    /*??unsigned long*/ //??double background;
+    unsigned long background; //??double background;
 
     /** The menu foreground. */
     /*??unsigned long*/ //??double menu_foreground;
 
     /** The temporary variables. */
-/*??
     int k;
     int menu_eintrage_ende;
 
     /** The color map. */
-/*??
     Colormap cmap;
 
     /** The colors. */
-/*??
     XColor gray, light_gray, vlight_gray, dark_gray;
 
     /** The window attributes. */
-/*??
     XWindowAttributes window_attributes;
-*/
 };
 
 /* X_WINDOWS_SOURCE */

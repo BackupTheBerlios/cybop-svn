@@ -21,14 +21,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-03-18 09:20:56 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef VGA_COMMUNICATOR_SOURCE
 #define VGA_COMMUNICATOR_SOURCE
-
-#include "../global/includes.c"
 
 /**
  * Receives an expose x windows input.
@@ -492,113 +490,6 @@ void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p4 the source count
  */
 void send_vga(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
-
-/*??
-    struct x_windows* x = (struct x_windows*) p2;
-
-    if (x != NULL_POINTER) {
-
-        // Get parameters from screen and set them on X.
-        x->display = XOpenDisplay("");
-        x->screen = DefaultScreen(x->display);
-
-        // Voreinstellung fuer Pixelwerte
-        x->background = WhitePixel(x->display, x->screen);
-        x->foreground = BlackPixel(x->display, x->screen);
-
-        // Window-position
-        x->hint.x = 100;
-        x->hint.y = 100;
-
-        x->hint.width = Anwendung.size_x;
-        x->hint.height = Anwendung.size_y;
-        x->hint.flags = PPosition | PSize;
-
-        x->window = XCreateSimpleWindow(
-            x->display,
-            DefaultRootWindow(x->display),
-            x->hint.x,
-            x->hint.y,
-            x->hint.width,
-            x->hint.height,
-            5,
-            x->foreground,
-            x->background);
-
-        XSetStandardProperties(
-            x->display,
-            x->window,
-            "Application",
-            "Icon",
-            None,
-            NULL,
-            0,
-            (void*) &(x->hint));
-
-        // GCs fuer Menubar erzeugen
-        x->cmap = DefaultColormap(x->display, x->screen);
-        x->gray.red = 49125;
-        x->gray.green = 49125;
-        x->gray.blue = 49125;
-
-        XAllocColor(x->display, x->cmap, &(x->gray));
-        x->light_gray.red = 56000;
-        x->light_gray.green = 58000;
-        x->light_gray.blue = 60000;
-
-        XAllocColor(x->display, x->cmap, &(x->light_gray));
-        x->vlight_gray.red = 60000;
-        x->vlight_gray.green = 61000;
-        x->vlight_gray.blue = 62000;
-
-        XAllocColor(x->display, x->cmap, &(x->vlight_gray));
-        x->dark_gray.red = 32768;
-        x->dark_gray.green = 32768;
-        x->dark_gray.blue = 32768;
-
-        XAllocColor(x->display, x->cmap, &(x->dark_gray));
-
-        x->gc_menu = XCreateGC(x->display, x->window, 0, 0);
-        XSetBackground(x->display, x->gc_menu, x->background);
-        XSetForeground(x->display, x->gc_menu, x->light_gray.pixel);
-
-        x->gc_menu_border_top = XCreateGC(x->display, x->window, 0, 0);
-        XSetBackground(x->display, x->gc_menu_border_top, x->background);
-        XSetForeground(x->display, x->gc_menu_border_top, x->vlight_gray.pixel);
-
-        x->gc_menu_border_bottom = XCreateGC(x->display, x->window, 0, 0);
-        XSetBackground(x->display, x->gc_menu_border_bottom, x->background);
-        XSetForeground(x->display, x->gc_menu_border_bottom, x->dark_gray.pixel);
-
-        x->gc_menu_font = XCreateGC(x->display, x->window, 0, 0);
-        XSetBackground(x->display, x->gc_menu_font, x->light_gray.pixel);
-        XSetForeground(x->display, x->gc_menu_font, x->foreground);
-
-        // GC (graphic content) erzeugen
-        GC gc = XCreateGC(x->display, x->window, 0, 0);
-
-        XSetBackground(x->display, gc, x->background);
-        XSetForeground(x->display, gc, x->foreground);
-
-        // Request input signals.
-        XSelectInput(x->display, x->window, ButtonPressMask | KeyPressMask | ExposureMask);
-
-        // Map windows.
-        XMapRaised(x->display, x->window);
-
-        //?? From xlib tutorial. Remove later when event loop (MappingNotify) functions!
-        XFlush(x->display);
-
-        // Free memory.
-        XFreeGC(x->display, gc);
-        XDestroyWindow(x->display, x->window);
-        XCloseDisplay(x->display);
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle send x windows output. The x windows is null.");
-    }
-*/
 }
 
 /* VGA_COMMUNICATOR_SOURCE */

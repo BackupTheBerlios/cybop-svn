@@ -21,14 +21,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2005-03-18 00:42:10 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef X_WINDOWS_HANDLER_SOURCE
 #define X_WINDOWS_HANDLER_SOURCE
-
-#include "../global/includes.c"
 
 /**
  * Temporary! Initializes X-Windows testing variables.
