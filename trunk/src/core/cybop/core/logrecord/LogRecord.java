@@ -36,17 +36,10 @@ import cybop.core.model.String;
  * This may be writing out the record to console or a file or to another medium
  * or location, using mechanisms offered by the framework.
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-16 18:27:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class LogRecord extends LogItem {
-
-    //
-    // Children categories.
-    //
-
-    /** The entry category. */
-    public static final String ENTRY_CATEGORY = new String("entry_category");
 
     //
     // Children names.

@@ -50,7 +50,7 @@ import cybop.core.system.chain.*;
  * Child systems can be integrated into the portal system's Frame as Frame,
  * InternalFrame or TabPage.
  *
- * @version $Revision: 1.11 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-06-16 18:25:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Portal extends Family {
@@ -58,16 +58,6 @@ public class Portal extends Family {
     //
     // Default children.
     //
-
-    /*
-     * Returns the default configuration location category.
-     *
-     * @return the default configuration location category
-     */
-    public Item getDefaultConfigurationLocationCategory() {
-
-        return new String("cybop.core.system.chain.Configuration");
-    }
 
     /**
      * Returns the default name category.

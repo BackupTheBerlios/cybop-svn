@@ -58,7 +58,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.17 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2003-06-16 18:25:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends SystemItem implements java.lang.Runnable {
@@ -586,6 +586,8 @@ public class System extends SystemItem implements java.lang.Runnable {
      * @exception Exception if the dummy flag is null
      */
     public void handle(Signal s, Boolean b) throws Exception {
+        
+        log(s);
 
         Controller c = (Controller) getChild(System.CONTROLLER);
 
@@ -595,12 +597,12 @@ public class System extends SystemItem implements java.lang.Runnable {
 
                 if (b.isEqualTo(Boolean.FALSE)) {
 
-                    log(System.DEBUG_LOG_LEVEL, "Control signal.");
+                    java.lang.System.out.println("DEBUG: Control signal.");
                     c.control(s);
 
                 } else {
 
-                    log(System.DEBUG_LOG_LEVEL, "Control signal as server dummy.");
+                    java.lang.System.out.println("DEBUG: Control signal as server dummy.");
                     c.controlAsServerDummy(s);
                 }
 
@@ -611,7 +613,51 @@ public class System extends SystemItem implements java.lang.Runnable {
 
         } else {
 
-            log(System.DEBUG_LOG_LEVEL, "Could not handle signal. The controller is null.");
+            java.lang.System.out.println("DEBUG: Could not handle signal. The controller is null.");
+        }
+    }
+
+    /**
+     * Logs the signal.
+     *
+     * @param s the signal
+     * @exception Exception if the log record is null
+     * @exception Exception if the log entry is null
+     * @exception Exception if the signal is null
+     */
+    public void log(Signal s) throws Exception {
+
+        LogRecord r = getChild(Launcher.LOG_RECORD);
+
+        if (r != null) {
+
+            LogEntry e = createItem(LogRecord.ENTRY);
+            
+            if (e != null) {
+
+                if (s != null) {
+
+//??                    Time time = ??;
+
+//??                    Integer level = ??;
+
+                    e.setChild(LogEntry.MESSAGE, s.getChild(Signal.PREDICATE));
+
+                } else {
+        
+                    throw new Exception("Could not log signal. The signal is null.");
+                }
+
+                r.set(LogRecord.ENTRY, e);
+
+            } else {
+
+                throw new Exception("Could not log signal. The log entry is null.");
+            }
+
+        } else {
+
+            throw new Exception("Could not log signal. The log record is null.");
         }
     }
 }

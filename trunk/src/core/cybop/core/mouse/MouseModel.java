@@ -25,6 +25,7 @@
 package cybop.core.mouse;
 
 import cybop.core.category.*;
+import cybop.core.model.*;
 import cybop.core.model.String;
 
 /**
@@ -33,7 +34,7 @@ import cybop.core.model.String;
  * It contains information about how to talk to a mouse, that is its pointer and
  * position etc.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-16 18:26:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class MouseModel extends Item {
@@ -77,12 +78,10 @@ public class MouseModel extends Item {
      * Finalizes this mouse model.
      */
     public void finalizz() throws Exception {
-        
-/*??
+
         Space pointerPosition = (Space) getChild(MouseModel.POINTER_POSITION);
         removeChild(MouseModel.POINTER_POSITION);
         destroyChild(pointerPosition);
-*/
 
         super.finalizz();
     }

@@ -29,6 +29,7 @@ import cybop.core.model.*;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
 import cybop.core.signal.*;
+import cybop.core.system.chain.*;
 
 /**
  * This class represents a system item.<br><br>
@@ -36,7 +37,7 @@ import cybop.core.signal.*;
  * A system item has special properties like configuration or log record and
  * is able to create and send signals.
  *
- * @version $Revision: 1.6 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-16 18:25:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemItem extends Item {
@@ -45,15 +46,25 @@ public class SystemItem extends Item {
     // Children names.
     //
 
+    /** The signal memory. */
+    public static final String SIGNAL_MEMORY = new String("signal_memory");
+
     /** The signal. */
     public static final String SIGNAL = new String("signal");
-
-    /** The action. */
-    public static final String ACTION = new String("action");
 
     //
     // Default categories.
     //
+
+    /**
+     * Returns the default signal memory category.
+     *
+     * @return the default signal memory category
+     */
+    public Item getDefaultSignalMemoryCategory() {
+
+        return new String("cybop.core.system.chain.SignalMemory");
+    }
 
     /**
      * Returns the default signal category.
@@ -63,16 +74,6 @@ public class SystemItem extends Item {
     public Item getDefaultSignalCategory() {
 
         return new String("cybop.core.signal.Signal");
-    }
-
-    /**
-     * Returns the default action category.
-     *
-     * @return the default action category
-     */
-    public Item getDefaultActionCategory() {
-
-        return null;
     }
 
     //
@@ -94,7 +95,7 @@ public class SystemItem extends Item {
         if (i != null) {
 
             java.lang.System.out.println("INFO: Connect child to signal memory.");
-            i.set(SystemItem.SIGNAL_MEMORY);
+            i.setChild(SystemItem.SIGNAL_MEMORY, getChild(SystemItem.SIGNAL_MEMORY));
         }
 
         return i;
@@ -111,10 +112,10 @@ public class SystemItem extends Item {
         if (i != null) {
 
             java.lang.System.out.println("INFO: Unconnect child from signal memory.");
-            i.remove(SystemItem.SIGNAL_MEMORY);
+            i.removeChild(SystemItem.SIGNAL_MEMORY);
         }
 
-        super.destroyChild();
+        super.destroyChild(i);
     }
 
     //
@@ -128,6 +129,7 @@ public class SystemItem extends Item {
 
         super.categorize();
 
+        setCategory(SystemItem.SIGNAL_MEMORY, getDefaultSignalMemoryCategory());
         setCategory(SystemItem.SIGNAL, getDefaultSignalCategory());
     }
 
@@ -136,38 +138,10 @@ public class SystemItem extends Item {
      */
     public void decategorize() throws Exception {
 
-        Hierarchy signal = getCategory(SystemItem.SIGNAL);
         removeCategory(SystemItem.SIGNAL);
-        destroyCategory(signal);
+        removeCategory(SystemItem.SIGNAL_MEMORY);
 
         super.decategorize();
-    }
-
-    //
-    // Globalization.
-    //
-
-    /**
-     * Globalizes this item.
-     *
-     * @param r the log record
-     * @param m the signal memory
-     */
-    public void globalize(Item r, Item m) throws Exception {
-
-        super.globalize();
-
-        setChild(Item.SIGNAL_MEMORY, m);
-    }
-
-    /**
-     * Deglobalizes this item.
-     */
-    public void deglobalize() throws Exception {
-
-        removeChild(Item.SIGNAL_MEMORY);
-
-        super.deglobalize();
     }
 
     //
@@ -181,7 +155,8 @@ public class SystemItem extends Item {
 
         super.initialize();
 
-        setChild(Item.ACTION, (String) getDefaultActionCategory());
+        setChild(SystemItem.SIGNAL_MEMORY, createChild(getCategory(SystemItem.SIGNAL_MEMORY)));
+        setChild(SystemItem.SIGNAL, createChild(getCategory(SystemItem.SIGNAL)));
     }
 
     /**
@@ -189,9 +164,13 @@ public class SystemItem extends Item {
      */
     public void finalizz() throws Exception {
 
-        String action = (String) getChild(Item.ACTION);
-        removeChild(Item.ACTION);
-        destroyChild(action);
+        Item signal = getChild(SystemItem.SIGNAL);
+        removeChild(SystemItem.SIGNAL);
+        destroyChild(signal);
+
+        Item signalMemory = getChild(SystemItem.SIGNAL_MEMORY);
+        removeChild(SystemItem.SIGNAL_MEMORY);
+        destroyChild(signalMemory);
 
         super.finalizz();
     }
@@ -208,11 +187,11 @@ public class SystemItem extends Item {
      */
     public void storeSignal(Signal s) throws Exception {
 
-        SignalMemory mem = (SignalMemory) getChild(Item.SIGNAL_MEMORY);
+        SignalMemory mem = (SignalMemory) getChild(SystemItem.SIGNAL_MEMORY);
 
         if (mem != null) {
 
-            String n = mem.buildName(Item.SIGNAL);
+            Array n = mem.buildName(SystemItem.SIGNAL);
 
             mem.setChild(n, s);
 
@@ -231,60 +210,48 @@ public class SystemItem extends Item {
      *
      * @return the signal
      * @exception Exception if the signal memory is null
+     * @exception Exception if the children map is null
      * @exception Exception if a child is null
      * @exception Exception if the priority is null
      */
     public Signal fetchSignal() throws Exception {
 
         Signal s = null;
-        SignalMemory mem = (SignalMemory) getChild(Item.SIGNAL_MEMORY);
+        Item mem = getChild(SystemItem.SIGNAL_MEMORY);
 
         if (mem != null) {
 
-            Item[] c = mem.getChildren();
-            
+            Map c = mem.getChildren();
+
             if (c != null) {
 
                 int index = 0;
-                int no = mem.getChildrenNumber();
+                int size = mem.getSize();
                 Signal child = null;
-                String n = null;
                 Integer priority = null;
                 Integer max = new Integer(0);
-    
-                while (index < no) {
-    
-                    child = (Signal) c[index];
-    
+
+                while (index < size) {
+
+                    child = (Signal) c.get(index);
+
                     if (child != null) {
     
-                        n = child.getName();
-                        
-                        if (n != null) {
+                        priority = (Integer) child.getChild(Signal.PRIORITY);
     
-                            if (n.startsWith(Item.SIGNAL)) {
-
-                                priority = (Integer) child.getChild(Signal.PRIORITY);
-
-                                if (priority != null) {
+                        if (priority != null) {
     
-                                    if (priority.isGreaterThan(max)) {
+                            if (priority.isGreaterThan(max)) {
     
-                                        max = priority;
-                                        s = child;
-                                    }
-
-                                } else {
-
-                                    throw new Exception("Could not fetch signal. The priority is null.");
-                                }
+                                max = priority;
+                                s = child;
                             }
-    
+
                         } else {
-            
-                            throw new Exception("Could not fetch signal. The name is null.");
+    
+                            throw new Exception("Could not fetch signal. The priority is null.");
                         }
-        
+    
                     } else {
     
                         throw new Exception("Could not fetch signal. A child is null.");
@@ -299,148 +266,16 @@ public class SystemItem extends Item {
                 }
 
             } else {
-    
-                throw new Exception("Could not place signal. The signal memory is null.");
+
+                throw new Exception("Could not fetch signal. The children map is null.");
             }
 
         } else {
 
-            throw new Exception("Could not place signal. The signal memory is null.");
+            throw new Exception("Could not fetch signal. The signal memory is null.");
         }
 
         return s;
     }
-
-    //
-    // Logging.
-    //
-
-    /**
-     * Logs a message with no arguments.
-     *
-     * @param l the log level
-     * @param m the message
-     */
-    public void log(Integer l, java.lang.String m) throws Exception {
-
-        log(l, m, null);
-    }
-
-    /**
-     * Logs a message with associated throwable information.
-     *
-     * @param l the log level
-     * @param m the message
-     * @param t the throwable
-     * @exception Exception if the log level is null
-     * @exception Exception if the log record is null
-     */
-    public void log(Integer l, java.lang.String m, java.lang.Throwable t) throws Exception {
-
-        if (l != null) {
-
-            if (l.isSmallerThanOrEqualTo((Integer) getChild(Item.LOG_LEVEL))) {
-
-                LogRecord r = (LogRecord) getChild(Item.LOG_RECORD);
-
-                if (r != null) {
-
-                    r.setChild(LogRecord.MESSAGE, new String(m));
-                    r.setThrowable(t);
-
-                } else {
-                    
-                    throw new Exception("Could not log message. The log record is null.");
-                }
-    
-                log(r);
-            }
-
-        } else {
-            
-            throw new Exception("Could not log message. The log level is null.");
-        }
-    }
-
-    /**
-     * Logs a log record.
-     *
-     * @param r the log record
-     * @exception Exception if the log record is null
-     */
-/*??
-    public void log(LogRecord r) throws Exception {
-
-        cybop.core.system.region.controller.Encoder e = (cybop.core.system.region.controller.Encoder) getChild(Item.ENCODER);
-
-        if (e != null) {
-
-            e.drive(r);
-            
-        } else {
-
-            /*??
-             * Temporary replacement for logging.
-             * The motor (output mechanism) has to be assigned here later.
-             * For now, the system console is used for message output.
-             */
-/*??
-            if (r.getThrowable() != null) {
-
-                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChild(LogRecord.MESSAGE)).getJavaObject() + "\n" + r.getThrowable());
-                r.getThrowable().printStackTrace();
-
-            } else {
-
-                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChild(LogRecord.MESSAGE)).getJavaObject());
-            }
-
-/*??
-            throw new Exception("Could not log record. The motor is null.");
-        }
-    }
-
-    /**
-     * Logs a message with associated throwable information.
-     *
-     * Displays a graphical message dialog, in addition to the pure logging
-     * being done in the parent class's log method.
-     *
-     * @param lev the level
-     * @param msg the message
-     * @param t the throwable
-     */
-/*??
-    public void log(Level lev, String msg, Throwable t) throws Exception {
-
-        super.log(lev, msg, t);
-
-        DisplayManager dm = getDisplayManager();
-
-        if (dm != null) {
-
-//??            dm.showMessage(lev, msg, t);
-
-            //?? Example for localization!
-            //?? showError(e.getLocalizedSourceControlName(), e.getLocalizedMessage());
-
-        } else {
-
-            // Don't throw exception here cause not all controllers/applications
-            // use a graphical display, i.e. not all have a display manager.
-        }
-    }
-
-    /**
-     * Shows a message dialog.
-     *
-     * @param lev the level
-     * @param msg the message
-     * @param t the throwable
-     */
-/*??
-    public void showMessage(Level lev, String msg, Throwable t) throws Exception {
-    }
-*/
 }
 

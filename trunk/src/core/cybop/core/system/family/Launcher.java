@@ -68,7 +68,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.24 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2003-06-16 18:25:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -694,7 +694,7 @@ public class Launcher extends Family {
      */
     public void launch() throws Exception {
 
-        Signal s = (Signal) createChild((String) getDefaultSignalCategory());
+        Signal s = (Signal) createChild(getDefaultSignalCategory());
 
         if (s != null) {
 
@@ -757,10 +757,13 @@ public class Launcher extends Family {
                 //?? java event queue and were stored in the signal memory.
                 //?? These signals were created outside this method but must be
                 //?? destroyed here!
-                log(Launcher.DEBUG_LOG_LEVEL, "Handle signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChild(Signal.PREDICATE)).getJavaObject());
+
+                java.lang.System.out.println("DEBUG: Handle signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChild(Signal.PREDICATE)).getJavaObject());
                 handle(queued, new Boolean(Boolean.FALSE));
-                log(Launcher.DEBUG_LOG_LEVEL, "Send signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChild(Signal.PREDICATE)).getJavaObject());
+
+                java.lang.System.out.println("DEBUG: Send signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChild(Signal.PREDICATE)).getJavaObject());
                 send(queued);
+
                 destroyChild(queued);
 
             } else {
@@ -1037,7 +1040,7 @@ public class Launcher extends Family {
         setupJavaEventHandling();
         setSystem(Launcher.SYSTEM, createChild(sys/*??, c*/));
 
-        Signal s = (Signal) createChild((String) getDefaultSignalCategory());
+        Signal s = (Signal) createChild(getDefaultSignalCategory());
 
         if (s != null) {
 

@@ -80,7 +80,7 @@ package cybop.core.category;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.6 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-16 18:28:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends Behaviour {
@@ -516,7 +516,7 @@ public class Item extends Behaviour {
      * @exception Exception if the children array is null
      * @exception Exception if the child item is null
      */
-    public Item getChild(Space p) throws Exception {
+    public Item getChild(Structure p) throws Exception {
 
         Item child = null;
 /*??
@@ -588,10 +588,11 @@ public class Item extends Behaviour {
      * false otherwise
      * @exception Exception if the space is null
      */
-    public boolean contains(Space p) throws Exception {
+    public boolean contains(Structure p) throws Exception {
 
         boolean b = false;
-        Space s = null; //?? getChild(Item.SPACE);
+/*??
+        Structure s = null; //?? getChild(Item.SPACE);
 
         if (s != null) {
 
@@ -601,6 +602,7 @@ public class Item extends Behaviour {
 
             throw new Exception("Could not check position. The space is null.");
         }
+*/
 
         return b;
     }

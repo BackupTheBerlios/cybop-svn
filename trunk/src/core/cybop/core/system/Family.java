@@ -50,7 +50,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.17 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2003-06-16 18:25:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -573,7 +573,7 @@ public class Family extends System {
 
                 if (sub.isEqualTo(getName())) {
 
-                    log(System.DEBUG_LOG_LEVEL, "Handle signal in super class.");
+                    java.lang.System.out.println("DEBUG: Handle signal in super class.");
                     super.handle(s, b);
 
                 } else {
@@ -599,7 +599,7 @@ public class Family extends System {
     
                                 if (sys != null) {
 
-                                    log(System.DEBUG_LOG_LEVEL, "Handle signal in system " + sys);
+                                    java.lang.System.out.println("DEBUG: Handle signal in system " + sys);
                                     sys.handle(s, b);
                 
                                 } else {

@@ -33,7 +33,7 @@ package cybop.core.category;
  * the index of the wanted element -- and then returning the corresponding
  * reference.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-16 18:28:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Map {
@@ -132,6 +132,28 @@ public class Map {
         return this.references;
     }
 
+    /**
+     * Returns the size.
+     *
+     * @return the size
+     */
+    public int getSize() throws Exception {
+
+        int size = 0;
+        Array refs = getReferences();
+
+        if (refs != null) {
+
+            size = refs.getSize();
+
+        } else {
+
+            throw new Exception("Could not get size. The references is null.");
+        }
+
+        return size;
+    }
+
     //
     // Element management.
     //
@@ -194,20 +216,18 @@ public class Map {
     }
 
     /**
-     * Returns the element with the name.
+     * Returns the element with the index.
      *
-     * @param n the name
+     * @param i the index
      * @return the element
      * @exception Exception if the references is null
      */
-    public Array get(Array n) throws Exception {
+    public Array get(int i) throws Exception {
 
         Array e = null;
         Array refs = getReferences();
 
         if (refs != null) {
-
-            int i = getIndex(n);
 
             if (i > -1) {
 
@@ -220,6 +240,20 @@ public class Map {
         }
 
         return e;
+    }
+
+    /**
+     * Returns the element with the name.
+     *
+     * @param n the name
+     * @return the element
+     * @exception Exception if the references is null
+     */
+    public Array get(Array n) throws Exception {
+
+        int i = getIndex(n);
+
+        return get(i);
     }
 
     /**

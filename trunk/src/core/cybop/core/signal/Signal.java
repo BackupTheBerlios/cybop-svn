@@ -34,7 +34,7 @@ import cybop.core.model.String;
  *
  * It serves as container transporting information of communication.
  *
- * @version $Revision: 1.14 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-06-16 18:26:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Signal extends Item {
@@ -55,14 +55,20 @@ public class Signal extends Item {
     /** The predicate (action). */
     public static final String PREDICATE = new String("predicate");
 
-    /** The sender object (signal sender). */
-    public static final String SENDER_OBJECT = new String("object");
+    /** The (genitiv) object (object owner). */
+//??    public static final String SENDER_OBJECT = new String("object");
 
-    /** The object (passive data model). */
+    /** The (dativ) object (signal sender). */
+    public static final String SENDER_OBJECT = new String("sender_object");
+
+    /** The (akussativ) object (passive data model). */
     public static final String OBJECT = new String("object");
 
     /** The adverbial (temporal, local, causal). */
     public static final String ADVERBIAL = new String("adverbial");
+
+    /** The pre/post condition (conditional clause). */
+    public static final String CONDITION = new String("condition");
 
     //
     // Priorities.
