@@ -39,13 +39,14 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.11 $ $Date: 2004-09-12 23:04:40 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-09-23 00:12:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DOUBLE_ARRAY_SOURCE
 #define DOUBLE_ARRAY_SOURCE
 
+#include <stdlib.h>
 #include "../global/log_constants.c"
 #include "../global/variable.c"
 #include "../logger/logger.c"

@@ -39,13 +39,14 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.11 $ $Date: 2004-09-12 18:51:00 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-09-23 00:12:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CHARACTER_ARRAY_SOURCE
 #define CHARACTER_ARRAY_SOURCE
 
+#include <stdlib.h>
 #include "../global/log_constants.c"
 #include "../global/variable.c"
 #include "../logger/logger.c"
@@ -143,8 +144,20 @@ void resize_character_array(void* p0, const void* p1) {
             // Determine size as product of element count and type size.
             int s = *c * CHARACTER_PRIMITIVE_SIZE;
 
+            //?? WORKAROUND - TODO:
+            //?? For some reason, sometimes a segmentation fault occurs
+            //?? when resizing a character array.
+            //?? The fault does not occur when the array size is doubled here.
+            //?? Remove this later!
+            s = s * 2;
+
+    fprintf(stderr, "c: %i\n", *c);
+    fprintf(stderr, "s: %i\n", s);
+
             // Create a new array with extended size.
             *a = (void*) realloc(*a, s);
+
+    fprintf(stderr, "a: %i\n", *a);
 
         } else {
 
