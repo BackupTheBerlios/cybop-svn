@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.37 $ $Date: 2004-10-19 07:02:12 $ $Author: christian $
+ * @version $Revision: 1.38 $ $Date: 2004-10-27 13:45:50 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,6 +44,7 @@
 #include "../cyboi/integer_internals.c"
 #include "../cyboi/pointer_internals.c"
 #include "../cyboi/signal_waiter.c"
+#include "../cyboi/config_into_internals.c"
 #include "../global/abstraction_constants.c"
 #include "../global/log_constants.c"
 #include "../global/variable.c"
@@ -214,6 +215,14 @@ int main(int p0, char** p1) {
             create((void*) &m, (void*) &ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
             //
+            // config file into internals
+            //
+			initialize_internals( p1[CONFIG_STARTUP_PARAMETER_INDEX],
+								  pi,
+								  ii );
+			
+
+            //
             //?? Test to set internals values.
             //?? Either take them from command line arguments or
             //?? from an extra cyboi configuration file?
@@ -241,14 +250,51 @@ int main(int p0, char** p1) {
             //
 
             // Determine source channel.
-            void* sc = (void*) p1[CHANNEL_STARTUP_PARAMETER_INDEX];
-            int scc = strlen(p1[CHANNEL_STARTUP_PARAMETER_INDEX]);
+            void* sc = NULL_POINTER;
+            get_array_element( (void*) &pi, 
+                               (void*) &POINTER_ARRAY, 
+                               (void*) &POINTER_INTERNALS_START_CHANNEL_INDEX, 
+                               (void*) &sc ); 
+            int scc;
+            get_array_element( (void*) &ii, 
+                               (void*) &INTEGER_ARRAY, 
+                               (void*) &INTEGER_INTERNALS_START_CHANNEL_COUNT_INDEX, 
+                               (void*) &scc ); 
             // Determine source abstraction.
-            void* sa = (void*) p1[ABSTRACTION_STARTUP_PARAMETER_INDEX];
-            int sac = strlen(p1[ABSTRACTION_STARTUP_PARAMETER_INDEX]);
+            void* sa = NULL_POINTER;
+            get_array_element( (void*) &pi, 
+                               (void*) &POINTER_ARRAY, 
+                               (void*) &POINTER_INTERNALS_START_ABSTRACTION_INDEX, 
+                               (void*) &sa ); 
+            int sac = 0;
+            get_array_element( (void*) &ii, 
+                               (void*) &INTEGER_ARRAY, 
+                               (void*) &INTEGER_INTERNALS_START_ABSTRACTION_COUNT_INDEX, 
+                               (void*) &sac ); 
             // Determine source model.
-            void* sm = (void*) p1[MODEL_STARTUP_PARAMETER_INDEX];
-            int smc = strlen(p1[MODEL_STARTUP_PARAMETER_INDEX]);
+            void* sm = NULL_POINTER;
+            get_array_element( (void*) &pi, 
+                               (void*) &POINTER_ARRAY, 
+                               (void*) &POINTER_INTERNALS_START_MODEL_INDEX, 
+                               (void*) &sm ); 
+            int smc;
+            get_array_element( (void*) &ii, 
+                               (void*) &INTEGER_ARRAY, 
+                               (void*) &INTEGER_INTERNALS_START_MODEL_COUNT_INDEX, 
+                               (void*) &smc ); 
+
+
+            // Determine source channel.
+            //void* sc = (void*) p1[CHANNEL_STARTUP_PARAMETER_INDEX];
+            //int scc = strlen(p1[CHANNEL_STARTUP_PARAMETER_INDEX]);
+            
+            // Determine source abstraction.
+            //void* sa = (void*) p1[ABSTRACTION_STARTUP_PARAMETER_INDEX];
+            //int sac = strlen(p1[ABSTRACTION_STARTUP_PARAMETER_INDEX]);
+            
+            // Determine source model.
+            //void* sm = (void*) p1[MODEL_STARTUP_PARAMETER_INDEX];
+            //int smc = strlen(p1[MODEL_STARTUP_PARAMETER_INDEX]);
 
             // The destination abstraction.
             void* da = NULL_POINTER;
@@ -344,7 +390,7 @@ int main(int p0, char** p1) {
         } else {
 
             log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE_COUNT);
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &USAGE_MESSAGE, (void*) &USAGE_MESSAGE_COUNT);
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &USAGE_MESSAGE_NEW, (void*) &USAGE_MESSAGE_NEW_COUNT);
         }
 
     } else {
