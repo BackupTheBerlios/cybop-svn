@@ -64,7 +64,7 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.7 $ $Date: 2003-04-17 14:50:02 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-04-19 09:12:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends Chain {
@@ -96,6 +96,9 @@ public class Component extends Chain {
 
     /** The finalize signal memory flag. */
     public static final String FINALIZE_SIGNAL_MEMORY_FLAG = new String("finalize_signal_memory_flag");
+
+    /** The signal. */
+    public static final String SIGNAL = new String("signal");
 
     /** The named subsystem. */
     public static final String NAMED_SUBSYSTEM = new String("named_subsystem");
@@ -293,6 +296,16 @@ public class Component extends Chain {
     }
 
     /**
+     * Returns the default signal.
+     *
+     * @return the default signal
+     */
+    public String getDefaultSignal() {
+
+        return new String("cybop.core.signal.Signal");
+    }
+
+    /**
      * Returns the default named subsystem.
      *
      * @return the default named subsystem
@@ -438,7 +451,7 @@ public class Component extends Chain {
         if (g != null) {
 
             // If no global configuration was set in the globalize method,
-            // then create a configuration here.            
+            // then create a configuration here.
             if (get(Component.CONFIGURATION) == null) {
 
                 set(Component.CONFIGURATION, createItem(getDefaultConfiguration()));
@@ -523,7 +536,7 @@ public class Component extends Chain {
 
                     if (((Boolean) get(Component.FINALIZE_SIGNAL_MEMORY_FLAG)).isEqualTo(Boolean.TRUE)) {
 
-                        Item signalMemory = (Item) get(Component.SIGNAL_MEMORY);
+                        Item signalMemory = get(Component.SIGNAL_MEMORY);
                         g.remove(Component.SIGNAL_MEMORY);
                         remove(Component.SIGNAL_MEMORY);
                         destroyItem(signalMemory);
@@ -540,7 +553,7 @@ public class Component extends Chain {
 
                     if (((Boolean) get(Component.FINALIZE_LOG_RECORD_FLAG)).isEqualTo(Boolean.TRUE)) {
 
-                        LogRecord logRecord = (LogRecord) get(Component.LOG_RECORD);
+                        Item logRecord = get(Component.LOG_RECORD);
                         g.remove(Component.LOG_RECORD);
                         remove(Component.LOG_RECORD);
                         destroyItem(logRecord);
@@ -557,7 +570,7 @@ public class Component extends Chain {
 
                     if (((Boolean) get(Component.FINALIZE_CONFIGURATION_FLAG)).isEqualTo(Boolean.TRUE)) {
 
-                        Configuration configuration = (Configuration) get(Component.CONFIGURATION);
+                        Item configuration = get(Component.CONFIGURATION);
                         g.remove(Component.CONFIGURATION);
                         remove(Component.CONFIGURATION);
                         destroyItem(configuration);
@@ -579,7 +592,7 @@ public class Component extends Chain {
 
                 if (((Boolean) get(Component.FINALIZE_GLOBALS_FLAG)).isEqualTo(Boolean.TRUE)) {
 
-                    Item globals = (Item) get(Component.GLOBALS);
+                    Item globals = get(Component.GLOBALS);
                     remove(Component.GLOBALS);
                     destroyItem(globals);
                 }
@@ -589,19 +602,19 @@ public class Component extends Chain {
                 throw new NullPointerException("Could not finalize component. The finalize globals item is null.");
             }
 
-            Boolean finalizeSignalMemoryFlag = (Boolean) get(Component.FINALIZE_SIGNAL_MEMORY_FLAG);
+            Item finalizeSignalMemoryFlag = get(Component.FINALIZE_SIGNAL_MEMORY_FLAG);
             remove(Component.FINALIZE_SIGNAL_MEMORY_FLAG);
             destroyItem(finalizeSignalMemoryFlag);
 
-            Boolean finalizeLogRecordFlag = (Boolean) get(Component.FINALIZE_LOG_RECORD_FLAG);
+            Item finalizeLogRecordFlag = get(Component.FINALIZE_LOG_RECORD_FLAG);
             remove(Component.FINALIZE_LOG_RECORD_FLAG);
             destroyItem(finalizeLogRecordFlag);
 
-            Boolean finalizeConfigurationFlag = (Boolean) get(Component.FINALIZE_CONFIGURATION_FLAG);
+            Item finalizeConfigurationFlag = get(Component.FINALIZE_CONFIGURATION_FLAG);
             remove(Component.FINALIZE_CONFIGURATION_FLAG);
             destroyItem(finalizeConfigurationFlag);
 
-            Boolean finalizeGlobalsFlag = (Boolean) get(Component.FINALIZE_GLOBALS_FLAG);
+            Item finalizeGlobalsFlag = get(Component.FINALIZE_GLOBALS_FLAG);
             remove(Component.FINALIZE_GLOBALS_FLAG);
             destroyItem(finalizeGlobalsFlag);
 
@@ -755,40 +768,108 @@ public class Component extends Chain {
      * @param s the signal
      * @exception NullPointerException if the signal memory is null
      */
-    public void storeSignal(Signal s) throws NullPointerException {
+    public synchronized void storeSignal(Signal s) throws NullPointerException {
 
         SignalMemory mem = (SignalMemory) get(Component.SIGNAL_MEMORY);
 
         if (mem != null) {
 
-            mem.storeSignal(s);
+            String n = mem.buildName(Component.SIGNAL);
+
+            mem.set(n, s);
 
         } else {
 
-            throw new NullPointerException("Could not remember signal. The signal memory is null.");
+            throw new NullPointerException("Could not store signal. The signal memory is null.");
         }
     }
 
     /**
      * Fetch the next signal to be handled from the signal memory.
      *
+     * The signal is determined by comparing the priority levels of all signals.
+     * Of these highest priority signals, the one which was first queued will
+     * be returned.
+     *
      * @return the signal
      * @exception NullPointerException if the signal memory is null
+     * @exception NullPointerException if a child is null
+     * @exception NullPointerException if the priority is null
      */
-    public Signal fetchSignal() throws NullPointerException {
+    public synchronized Signal fetchSignal() throws NullPointerException {
 
         Signal s = null;
         SignalMemory mem = (SignalMemory) get(Component.SIGNAL_MEMORY);
 
         if (mem != null) {
 
-            s = mem.fetchSignal();
+            Item[] c = mem.getChildren();
+            
+            if (c != null) {
+
+                int index = 0;
+                int no = mem.getChildrenNumber();
+                Signal child = null;
+                String n = null;
+                Integer priority = null;
+                Integer max = new Integer(0);
+    
+                while (index < no) {
+    
+                    child = (Signal) c[index];
+    
+                    if (child != null) {
+    
+                        n = child.getName();
+                        
+                        if (n != null) {
+    
+                            if (n.startsWith(Component.SIGNAL)) {
+    
+                                priority = (Integer) child.get(Signal.PRIORITY);
+    
+                                if (priority != null) {
+    
+                                    if (priority.isGreaterThan(max)) {
+    
+                                        max = priority;
+                                        s = child;
+                                    }
+    
+                                } else {
+    
+                                    throw new NullPointerException("Could not fetch signal. The priority is null.");
+                                }
+                            }
+    
+                        } else {
+            
+                            throw new NullPointerException("Could not fetch signal. The name is null.");
+                        }
+        
+                    } else {
+    
+                        throw new NullPointerException("Could not fetch signal. A child is null.");
+                    }
+    
+                    index++;
+                }
+
+                if (s != null) {
+
+                    mem.remove(s.getName());
+                }
+
+            } else {
+    
+                throw new NullPointerException("Could not place signal. The signal memory is null.");
+            }
 
         } else {
 
             throw new NullPointerException("Could not place signal. The signal memory is null.");
         }
-        
+
         return s;
     }
 }

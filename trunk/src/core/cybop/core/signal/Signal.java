@@ -33,7 +33,7 @@ import cybop.core.basic.String;
  *
  * It serves as container transporting information of communication.
  *
- * @version $Revision: 1.7 $ $Date: 2003-04-17 14:50:02 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-04-19 09:12:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Signal extends Item {
@@ -168,6 +168,13 @@ public class Signal extends Item {
     public void initialize() throws Exception {
 
         super.initialize();
+
+        set(Signal.PRIORITY, getDefaultPriority());
+        set(Signal.LANGUAGE, getDefaultLanguage());
+        set(Signal.SUBJECT, getDefaultSubject());
+        set(Signal.PREDICATE, getDefaultPredicate());
+        set(Signal.OBJECT, getDefaultObject());
+        set(Signal.ADVERBIAL, getDefaultAdverbial());
     }
 
     /**
@@ -175,7 +182,29 @@ public class Signal extends Item {
      */
     public void finalizz() throws Exception {
 
-        reset();
+        Item adverbial = get(Signal.ADVERBIAL);
+        remove(Signal.ADVERBIAL);
+        destroyItem(adverbial);
+
+        Item object = get(Signal.OBJECT);
+        remove(Signal.OBJECT);
+        destroyItem(object);
+
+        Item predicate = get(Signal.PREDICATE);
+        remove(Signal.PREDICATE);
+        destroyItem(predicate);
+
+        Item subject = get(Signal.SUBJECT);
+        remove(Signal.SUBJECT);
+        destroyItem(subject);
+
+        Item language = get(Signal.LANGUAGE);
+        remove(Signal.LANGUAGE);
+        destroyItem(language);
+
+        Item priority = get(Signal.PRIORITY);
+        remove(Signal.PRIORITY);
+        destroyItem(priority);
 
         super.finalizz();
     }
@@ -187,16 +216,12 @@ public class Signal extends Item {
     /**
      * Resets the signal.
      *
-     * Removes all children.
+     * Removes and then sets all children.
      */
-    public void reset() {
+    public void reset() throws Exception {
 
-        remove(Signal.ADVERBIAL);
-        remove(Signal.OBJECT);
-        remove(Signal.PREDICATE);
-        remove(Signal.SUBJECT);
-        remove(Signal.LANGUAGE);
-        remove(Signal.PRIORITY);
+        finalizz();
+        initialize();
     }
 }
 

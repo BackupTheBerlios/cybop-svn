@@ -76,7 +76,7 @@ import cybop.core.model.principle.*;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.16 $ $Date: 2003-04-18 16:31:07 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2003-04-19 09:12:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -303,7 +303,7 @@ public class Item extends State {
      */
     public Integer getHighestNameNumber(String base) throws NullPointerException {
 
-        Integer i = new Integer(0);
+        Integer i = new Integer(-1);
         Item[] c = getChildren();
 
         if (c != null) {
