@@ -29,10 +29,10 @@ package cybop.core.basic;
  *
  * A string is an addition of characters.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-18 16:31:07 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class String extends Item {
+public class String extends Quality {
 
     //
     // Static values.

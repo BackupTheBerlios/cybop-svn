@@ -69,7 +69,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.17 $ $Date: 2003-04-25 11:23:56 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -641,7 +641,7 @@ public class Launcher extends Family {
      */
     public void launch() throws Exception, NullPointerException {
 
-        Signal s = (Signal) createChildItem(getDefaultSignalCategory());
+        Signal s = (Signal) createChildItem((String) getDefaultSignalCategory());
 
         if (s != null) {
 
@@ -674,7 +674,7 @@ public class Launcher extends Family {
      */
     public void await() throws Exception {
 
-        Signal s = (Signal) createChildItem(getDefaultSignalCategory());
+        Signal s = (Signal) createChildItem((String) getDefaultSignalCategory());
         //?? Temporary for handling signals which stem from java event queue.
         Signal queued = null;
         Boolean b = null;
@@ -984,7 +984,7 @@ public class Launcher extends Family {
         setupJavaEventHandling();
         setSystem(Launcher.SYSTEM, createSystem(sys, c));
 
-        Signal s = (Signal) createChildItem(getDefaultSignalCategory());
+        Signal s = (Signal) createChildItem((String) getDefaultSignalCategory());
 
         if (s != null) {
 
@@ -1077,7 +1077,7 @@ public class Launcher extends Family {
      */
     public void shutdownSystemAcrossSocket() throws Exception, NullPointerException {
 
-        Signal s = (Signal) createChildItem(getDefaultSignalCategory());
+        Signal s = (Signal) createChildItem((String) getDefaultSignalCategory());
         ShutdownSocket socket = (ShutdownSocket) createComponent(getDefaultShutdownSocket());
 
         if (s != null) {
@@ -1634,7 +1634,7 @@ public class Launcher extends Family {
             // In this case it does NOT make sense to continue the signal handling.
             if (a != null) {
 
-                Signal s = (Signal) createChildItem(getDefaultSignalCategory());
+                Signal s = (Signal) createChildItem((String) getDefaultSignalCategory());
 
                 // Check for changed flags on computer (currently done by operating system),
                 // e.g. to receive a keyboard or mouse event and then create a CYBOP signal of it.

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Video.java,v $
+ * $RCSfile: Quantity.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -25,14 +25,13 @@
 package cybop.core.basic;
 
 /**
- * This class represents a video.<br><br>
+ * This class represents a quantity.
  *
- * A video corresponds to a film and contains both, graphical and
- * acoustical information.
+ * A quantity can be used to count items.
  *
- * @version $Revision: 1.2 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Video extends Quality {
+public class Quantity extends Category {
 }
 

@@ -40,11 +40,11 @@ package cybop.core.basic;
  * Of course, other coding schemes such as the four states of quark particles
  * may be used as well.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Boolean extends Item {
-    
+public class Boolean extends Quantity {
+
     //
     // Static values.
     //

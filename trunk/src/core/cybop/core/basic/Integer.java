@@ -32,10 +32,10 @@ package cybop.core.basic;
  * A number stands for some countable thing of the real world.
  * Possible compositions of Integer are Fraction (Float/Double) and Complex.
  *
- * @version $Revision: 1.4 $ $Date: 2003-04-18 16:31:07 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Integer extends Item {
+public class Integer extends Quantity {
 
     //
     // Static values.

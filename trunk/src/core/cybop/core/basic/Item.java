@@ -76,7 +76,7 @@ import cybop.core.model.principle.*;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.20 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -1743,6 +1743,10 @@ public class Item extends State {
         // java.util.Map children = getChildren();
         // setChildren(null);
         // destroyChildren(children);
+
+        // String name = getName();
+        // setName(null);
+        // destroyName(name);
 
         super.finalizz();
     }

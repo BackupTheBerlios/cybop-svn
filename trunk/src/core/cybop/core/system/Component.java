@@ -64,7 +64,7 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.13 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends Chain {
@@ -234,7 +234,7 @@ public class Component extends Chain {
      *
      * @return the default signal category
      */
-    public String getDefaultSignalCategory() {
+    public Category getDefaultSignalCategory() {
 
         return new String("cybop.core.signal.Signal");
     }
@@ -244,7 +244,7 @@ public class Component extends Chain {
      *
      * @return the default named subsystem category
      */
-    public String getDefaultNamedSubsystemCategory() {
+    public Category getDefaultNamedSubsystemCategory() {
 
         return new String(getClass().getName());
     }
@@ -254,7 +254,7 @@ public class Component extends Chain {
      *
      * @return the default logger output category
      */
-    public String getDefaultLoggerOutputCategory() {
+    public Category getDefaultLoggerOutputCategory() {
 
         return new String("console");
     }
@@ -264,7 +264,7 @@ public class Component extends Chain {
      *
      * @return the default log level category
      */
-    public Integer getDefaultLogLevelCategory() {
+    public Category getDefaultLogLevelCategory() {
 
         return Component.EVENT_LOG_LEVEL;
     }
@@ -335,9 +335,9 @@ public class Component extends Chain {
 
         super.initialize();
 
-        setChildItem(Component.NAMED_SUBSYSTEM, getChildCategory(Component.NAMED_SUBSYSTEM_CATEGORY));
-        setChildItem(Component.LOGGER_OUTPUT, getChildCategory(Component.LOGGER_OUTPUT_CATEGORY));
-        setChildItem(Component.LOG_LEVEL, getChildCategory(Component.LOG_LEVEL_CATEGORY));
+        setChildItem(Component.NAMED_SUBSYSTEM, createChildItem((String) getChildCategory(Component.NAMED_SUBSYSTEM_CATEGORY)));
+        setChildItem(Component.LOGGER_OUTPUT, createChildItem((String) getChildCategory(Component.LOGGER_OUTPUT_CATEGORY)));
+        setChildItem(Component.LOG_LEVEL, (Integer) getChildCategory(Component.LOG_LEVEL_CATEGORY));
     }
 
     /**

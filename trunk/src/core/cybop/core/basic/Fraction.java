@@ -31,10 +31,10 @@ package cybop.core.basic;
  * In computing, it is also known as floating point- or double number,
  * having a part "before and after the point/comma".
  *
- * @version $Revision: 1.4 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Fraction extends Item {
+public class Fraction extends Quantity {
 
     //
     // Constants.
