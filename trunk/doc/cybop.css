@@ -23,7 +23,14 @@
  *
  * This style sheet file defines layout information for the website.
  *
- * @version $Revision: 1.1 $ $Date: 2003-07-07 14:18:32 $ $Author: christian $
+ * Colours:
+ * - yellow: #FFFFC0
+ * - blue: #C0C0FF
+ * - red: #FF8080
+ * - green: #C0FFC0
+ * - orange: #FFDCA8
+ *
+ * @version $Revision: 1.2 $ $Date: 2004-07-10 18:41:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,10 +39,10 @@
  */
 body {
 
-    background-color: #FFFFFF;
-    font-family: "Verdana", "Times New Roman";
+    background-color: #000000;
+    font-family: "FreeSans", "Helvetica", "Nimbus Sans L", "Verdana", "Bitstream Vera Sans", "Arial", "Times New Roman";
     font-size: 10pt;
-    color: #000000;
+    color: #FFFFC0;
     margin-left: 0cm;
     margin-top: 0cm;
     margin-right: 0cm;
@@ -45,12 +52,12 @@ body {
 /**
  * The header.
  */
-h1 { font-size: 18pt; font-weight: bold; text-align: left; color: #000000; }
-h2 { font-size: 16pt; font-weight: bold; text-align: left; color: #000000; }
-h3 { font-size: 14pt; font-weight: bold; text-align: left; color: #000000; }
-h4 { font-size: 12pt; font-weight: bold; text-align: left; color: #000000; }
-h5 { font-size: 10pt; font-weight: bold; text-align: left; color: #000000; }
-h6 { font-size: 08pt; font-weight: bold; text-align: left; color: #000000; }
+h1 { font-size: 18pt; font-weight: bold; text-align: left; color: #C0C0FF; }
+h2 { font-size: 16pt; font-weight: bold; text-align: left; color: #C0C0FF; }
+h3 { font-size: 14pt; font-weight: bold; text-align: left; color: #C0C0FF; }
+h4 { font-size: 12pt; font-weight: bold; text-align: left; color: #C0C0FF; }
+h5 { font-size: 10pt; font-weight: bold; text-align: left; color: #C0C0FF; }
+h6 { font-size: 08pt; font-weight: bold; text-align: left; color: #C0C0FF; }
 
 /**
  * The text paragraph.
@@ -73,6 +80,7 @@ th {
 
     font-size: 10pt;
     font-weight: bold;
+    color: #000000;
 }
 
 /**
@@ -94,7 +102,7 @@ ul.circle {
 /**
  * The links to other pages.
  */
-a:link { color: #008080; text-decoration: none; }
+a:link { color: #C0C0FF; text-decoration: none; }
 a:active { color: #FF8080; text-decoration: none; }
-a:visited { color: #808080; text-decoration: none; }
+a:visited { color: #FFFFC0; text-decoration: none; }
 
