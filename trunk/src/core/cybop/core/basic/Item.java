@@ -74,7 +74,7 @@ import cybop.core.basic.String;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.5 $ $Date: 2003-02-24 22:34:08 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-03-03 07:37:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -502,7 +502,7 @@ public class Item extends State {
                     java.lang.System.out.println("DEBUG: Set child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
                     addTreeNode(i);
                     s.put(n.getJavaObject(), i);
-                    position(p, i);
+//??                    position(p, i);
 
                 } else {
 
@@ -621,6 +621,7 @@ public class Item extends State {
      * @param p the position
      * @exception NullPointerException if the constellation is null
      */
+/*??
     public void position(Item i, Position p) throws NullPointerException {
 
         if (p != null) {
@@ -649,6 +650,7 @@ public class Item extends State {
      * @param p the position
      * @exception NullPointerException if the constellation is null
      */
+/*??
     public void unposition(Item i, Position p) throws NullPointerException {
 
         if (p != null) {
