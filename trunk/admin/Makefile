@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.5 $ $Date: 2004-02-04 08:59:36 $ $Author: christian $
+# @version $Revision: 1.6 $ $Date: 2004-02-04 10:58:14 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -63,6 +63,7 @@ COMPILER_FLAGS = -g
 #vpath %.c $(SRC)
 #vpath %.o $(OBJ)
 
+MAIN_SOURCE = $(SRC)/cyboi.c
 ROOT_SOURCES = $(wildcard $(SRC)/*.c)
 ROOT_OBJECTS = $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(ROOT_SOURCES))
 CYBOL_SOURCES = $(wildcard $(SRC)/cybol/*.c)
@@ -87,14 +88,21 @@ X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WIN
 # - creates objects
 # - creates binary
 #
+# Do NOT add a "$@" at the end!
+# Otherwise, a compiler error will occur, because "make $@" is already used internally.
+#
 all: create $(ROOT_OBJECTS) $(CYBOL_OBJECTS) $(DYNAMICS_OBJECTS) $(LOGGER_OBJECTS) $(MODEL_OBJECTS) $(SIGNAL_OBJECTS) $(STATICS_OBJECTS) $(X_WINDOWS_OBJECTS)
-	$(COMPILER) -o $(BIN)/$(BINARY) $(ROOT_OBJECTS) $(CYBOL_OBJECTS) $(DYNAMICS_OBJECTS) $(LOGGER_OBJECTS) $(MODEL_OBJECTS) $(SIGNAL_OBJECTS) $(STATICS_OBJECTS) $(X_WINDOWS_OBJECTS)
-#	$@	musste ich auskommentieren, da es zu einem Compilerfehler kommt, wenn make (da make $@ schon intern verwendet) aufgerufen wird
+	$(COMPILER) -o $(BIN)/$(BINARY) $(MAIN_SOURCE)
 	@echo Compiled cyboi files.
 
-create :
+#
+# Creates object directories and compiles cyboi source files into these.
+#
+# The commands have to stand in ONE line (or separated by "\"), because otherwise
+# the "cd" command of the first line has no effect for the following lines.
+#
+create:
 	-cd ..; mkdir obj
-# die Befehle müssen alle in einer Zeile stehen (bzw. durch \ getrennt werden), da sonst der cd befehl in der ersten Zeile für die darauffolgende schon nicht mehr gilt
 	-cd $(OBJ); mkdir cybol
 	-cd $(OBJ); mkdir dynamics
 	-cd $(OBJ); mkdir logger
@@ -103,43 +111,29 @@ create :
 	-cd $(OBJ); mkdir statics
 	-cd $(OBJ); mkdir x_windows
 
-$(OBJ)/%.o : $(SRC)/%.c
-#	-cd ..; mkdir obj
+$(OBJ)/%.o: $(SRC)/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/cybol/%.o : $(SRC)/cybol/%.c
-#	-cd ..; cd $(OBJ); mkdir cybol
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+#$(OBJ)/cybol/%.o: $(SRC)/cybol/%.c
+#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/dynamics/%.o : $(SRC)/dynamics/%.c
-#	-cd ..;
-#	mkdir dynamics
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+#$(OBJ)/dynamics/%.o: $(SRC)/dynamics/%.c
+#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/logger/%.o : $(SRC)/logger/%.c
-#	-cd ..;
-#	mkdir logger
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+#$(OBJ)/logger/%.o: $(SRC)/logger/%.c
+#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/model/%.o : $(SRC)/model/%.c
-#	-cd ..;
-#	mkdir model
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+#$(OBJ)/model/%.o: $(SRC)/model/%.c
+#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/signal/%.o : $(SRC)/signal/%.c
-#	-cd ..;
-#	mkdir signal
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+#$(OBJ)/signal/%.o: $(SRC)/signal/%.c
+#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/statics/%.o : $(SRC)/statics/%.c
-#	-cd ..;
-#	mkdir statics
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+#$(OBJ)/statics/%.o: $(SRC)/statics/%.c
+#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/x_windows/%.o : $(SRC)/x_windows/%.c
-#	-cd ..;
-#	mkdir x_windows
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+#$(OBJ)/x_windows/%.o: $(SRC)/x_windows/%.c
+#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 #
 # Creates distribution file.
@@ -153,7 +147,6 @@ $(OBJ)/x_windows/%.o : $(SRC)/x_windows/%.c
 dist:
 	clean
 	-cd ..; mkdir dist
-#	cd ..;
 	tar -cvzf dist/cybol.tar.gz * -X admin/exclude
 	@echo Created distribution file.
 
