@@ -25,14 +25,72 @@
 #ifndef STRING_HANDLER
 #define STRING_HANDLER
 
+#include "string.c"
+
 /**
  * This is the string handler.
  *
- * It contains some operations for easier handling of strings.
- *
- * @version $Revision: 1.6 $ $Date: 2003-10-13 13:55:21 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+//
+// Constants.
+//
+
+/** The default string value. */
+static const char* DEFAULT_STRING_VALUE = "";
+
+//
+// String model.
+//
+
+/**
+ * Initializes the string model.
+ *
+ * @param p0 the string model
+ * @param p1 the model source
+ */
+static void initialize_string_model(void* p0, void* p1) {
+
+    struct string* m = (struct string*) p0;
+    
+    if (m != 0) {
+        
+        log((void*) &INFO_LOG_LEVEL, "Initialize string model.");
+
+        // Read input stream and transform to string.
+//??        sscanf(p1, %10c, (void*) m->value);
+//??        strcat(m->value, "\n");
+
+    } else {
+        
+        log((void*) &ERROR_LOG_LEVEL, "Could not initialize string model. The string model is null.");
+    }
+}
+
+/**
+ * Finalizes the string model.
+ *
+ * @param p0 the string model
+ * @param p1 the model source
+ */
+static void finalize_string_model(void* p0, void* p1) {
+
+    struct string* m = (struct string*) p0;
+    
+    if (m != 0) {
+        
+        log((void*) &INFO_LOG_LEVEL, "Finalize string model.");
+        
+        // Write output stream and transform from string.
+//??        sprintf(p1, %c, (void*) m->value);
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not finalize string model. The string model is null.");
+    }
+}
 
 /**
  * Returns the string element index.

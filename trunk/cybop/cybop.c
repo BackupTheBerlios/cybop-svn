@@ -40,7 +40,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.21 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,7 +68,7 @@ static void wait(void* p0) {
 
     // The shutdown flag.
     int* sf = (int*) malloc(sizeof(int));
-    *sf = FALSE_VALUE;
+    *sf = 0;
 
     // Transporting signal.
     void* s = malloc(sizeof(struct signal));
@@ -76,7 +76,7 @@ static void wait(void* p0) {
     // Run endless loop handling any signals.
     while (TRUE_VALUE) {
 
-        if (*sf == FALSE_VALUE) {
+        if (*sf == 1) {
 
             // Receive signal.
 

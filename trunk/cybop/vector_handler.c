@@ -23,267 +23,102 @@
  */
 
 #include <string.h>
-#include "model.c"
-#include "map.c"
-#include "map_handler.c"
+#include "vector.c"
 
 /**
- * This is the model handler.
+ * This is the vector handler.
  *
- * Model elements are accessed over their index or name.
- * They can also be accessed hierarchically, using a dot-separated name like:
- * "system.frame.menu_bar.exit_menu_item.action"
- *
- * @version $Revision: 1.2 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 //
-// Model.
+// Constants.
+//
+
+/** The default vector value. */
+static const char* DEFAULT_VECTOR_VALUE = "0.0,0.0,0.0";
+
+//
+// Vector model.
 //
 
 /**
- * Initializes the model.
+ * Initializes the vector model.
  *
- * @param p0 the model
+ * @param p0 the vector model
+ * @param p1 the model source
  */
-static void initialize_model(void* p0) {
+static void initialize_vector_model(void* p0, void* p1) {
 
-    struct model* m = (struct model*) p0;
+    struct vector* m = (struct vector*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Initialize model.");
+        log((void*) &INFO_LOG_LEVEL, "Initialize vector model.");
 
-        m->children = malloc(sizeof(struct map));
-        initialize_map(m->children);
-        m->positions = malloc(sizeof(struct map));
-        initialize_map(m->positions);
+        // Read input stream and transform to vector.
+//??        fscanf(p1, %d, &(m->x));
+//??        fscanf(p1, %d, &(m->y));
+//??        fscanf(p1, %d, &(m->z));
 
-    } else {
-        
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize model. The model is null.");
-    }
-}
-
-/**
- * Finalizes the model.
- *
- * @param p0 the model
- */
-static void finalize_model(void* p0) {
-
-    struct model* m = (struct model*) p0;
-    
-    if (m != 0) {
-
-        log((void*) &INFO_LOG_LEVEL, "Finalize model.");
-
-        finalize_map(m->positions);
-        free(m->positions);
-
-        finalize_map(m->children);
-        free(m->children);
-
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize model. The model is null.");
-    }
-}
-
-//
-// Helper functions.
-//
-
-/**
- * Returns the child name.
- *
- * It is the most left name before the first dot/point "." in the given string
- * or, if there is no dot, then it is the given name itself.
- *
- * @param p0 the hierarchical model name
- * @return the child name
- */
-static void* get_child_name(void* p0) {
-    
-    void* name = 0;
-    char* n = (char*) p0;
-    
-    if (n != 0) {
-        
 /*??
-        int i = n->indexOf(".");
+        int i1 = s.indexOf(",");
         
-        if (i != -1) {
+        if (i1 != -1) {
             
-            p1 = n->substring(0, i);
-        
+            char[] x = s.substring(0, i1);
+            char[] yz = s.substring(i1 + 1);
+            int i2 = yz.indexOf(",");
+
+            if (i2 != -1) {
+            
+                char[] y = yz.substring(0, i2);
+                char[] z = yz.substring(i2 + 1);
+
+                p.x = java.lang.Integer.parseInt(x);
+                p.y = java.lang.Integer.parseInt(y);
+                p.z = java.lang.Integer.parseInt(z);
+
+            } else {
+            
+                log((void*) &ERROR_LOG_LEVEL, "Could not create vector model. The vector does not contain a z coordinate.");
+            }
+            
         } else {
         
-            p1 = n;
+            log((void*) &ERROR_LOG_LEVEL, "Could not create vector model. The vector does not contain an y coordinate.");
         }
 */
-        
+
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not get child name. The hierarchical name is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not initialize vector model. The vector model is null.");
     }
-    
-    return name;
 }
 
 /**
- * Returns the remaining name.
+ * Finalizes the vector model.
  *
- * It is the whole string after the first dot/point ".".
- *
- * @param p0 the hierarchical model name
- * @return the remaining name
+ * @param p0 the vector model
+ * @param p1 the model source
  */
-static void* get_remaining_name(void* p0) {
+static void finalize_vector_model(void* p0, void* p1) {
 
-    void* name = 0;    
-    char* n = (char*) p0;
+    struct vector* m = (struct vector*) p0;
     
-    if (n != 0) {
-        
-/*??
-        int i = n->indexOf(".");
-        
-        if (i != -1) {
-
-            p1 = n->substring(i + 1);
-        }
-*/
-        
-    } else {
-        
-        log((void*) &ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical name is null.");
-    }
-    
-    return name;
-}
-
-//
-// Model element.
-//
-
-/**
- * Sets the model element.
- *
- * @param p0 the model
- * @param p1 the hierarchical model name
- * @param p2 the element
- */
-static void set_model_element(void* p0, void* p1, void* p2) {
-
-    struct model* m = (struct model*) p0;
-
     if (m != 0) {
-
-        log((void*) &INFO_LOG_LEVEL, "Set model element: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = get_child_name(p1);
-        void* r = get_remaining_name(p1);
+        log((void*) &INFO_LOG_LEVEL, "Finalize vector model.");
         
-        if (r != 0) {
-
-            // The given model is the parent of another parent.
-            void* child = get_map_element_with_name(m->children, n);
-            
-            // Continue to process along the hierarchical name.
-            set_model_element(child, r, p2);
-            
-        } else {
-
-            // The given model is the parent of the child.
-            set_map_element_with_name(m->children, n, p2);
-        }
-        
-    } else {
-        
-        log((void*) &ERROR_LOG_LEVEL, "Could not set model element. The model is null.");
-    }
-}
-
-/**
- * Removes the model element.
- *
- * @param p0 the model
- * @param p1 the hierarchical model name
- */
-static void remove_model_element(void* p0, void* p1) {
-
-    struct model* m = (struct model*) p0;
-
-    if (m != 0) {
-
-        log((void*) &INFO_LOG_LEVEL, "Remove model element: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
-        
-        void* n = get_child_name(p1);
-        void* r = get_remaining_name(p1);
-        
-        if (r != 0) {
-            
-            // The given model is the parent of another parent.
-            void* child = get_map_element_with_name(m->children, n);
-            
-            // Continue to process along the hierarchical name.
-            remove_model_element(child, r);
-            
-        } else {
-
-            // The given model is the parent of the child.
-            remove_map_element_with_name(m->children, n);
-        }
-        
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not remove model element. The model is null.");
-    }
-}
-
-/**
- * Returns the model element.
- *
- * @param p0 the model
- * @param p1 the hierarchical model name
- * @return the element
- */
-static void* get_model_element(void* p0, void* p1) {
-
-    void* e = 0;
-    struct model* m = (struct model*) p0;
-
-    if (m != 0) {
-
-        log((void*) &INFO_LOG_LEVEL, "Get model element: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
-        
-        void* n = get_child_name(p1);
-        void* r = get_remaining_name(p1);
-        
-        if (r != 0) {
-            
-            // The given model is the parent of another parent.
-            void* child = get_map_element_with_name(m->children, n);
-            
-            // Continue to process along the hierarchical name.
-            e = get_model_element(child, r);
-            
-        } else {
-
-            // The given model is the parent of the child.
-            e = get_map_element_with_name(m->children, n);
-        }
+        // Write output stream and transform from vector.
+//??        fprintf(p1, %d, &(m->x));
+//??        fprintf(p1, %d, &(m->y));
+//??        fprintf(p1, %d, &(m->z));
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get model element. The model is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not finalize vector model. The vector model is null.");
     }
-    
-    return e;
 }
 

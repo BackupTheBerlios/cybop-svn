@@ -38,7 +38,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.22 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -302,8 +302,8 @@ static void handle_signal(void* p0, void* p1, void* p2) {
 
             } else if (strcmp(a, "mouse_clicked") == 0) {
 
-                void* main_frame = get_complex_element(statics, "main_frame");
-                struct vector* pointer_position = get_complex_element(statics, "mouse.pointer_position");
+                void* main_frame = get_complex_element(statics, (void*) "main_frame");
+                struct vector* pointer_position = get_complex_element(statics, (void*) "mouse.pointer_position");
                 
                 reset_signal(s);
 

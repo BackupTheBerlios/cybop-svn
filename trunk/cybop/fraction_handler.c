@@ -27,7 +27,7 @@
 /**
  * This is the fraction handler.
  *
- * @version $Revision: 1.2 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,57 +36,11 @@
 //
 
 /** The default fraction value. */
-static const int DEFAULT_FRACTION_VALUE = 0.0;
+static const double DEFAULT_FRACTION_VALUE = 0.0;
 
 //
 // Fraction model.
 //
-
-/**
- * Creates a fraction model.
- *
- * @param p0 the model source
- * @return the fraction model
- */
-static void* create_fraction_model(void* p0) {
-
-    void* i = 0;
-    
-    if (p0 != 0) {
-        
-        log((void*) &INFO_LOG_LEVEL, "Create fraction model.");
-
-        if (strcmp(p0, "") != 0) {
-            
-            i = malloc(sizeof(struct fraction));
-
-            initialize_fraction_model(i, p0);
-        }
-    }
-    
-    return i;
-}
-
-/**
- * Destroys the fraction model.
- *
- * @param p0 the fraction model
- * @param p1 the model source
- */
-static void destroy_fraction_model(void* p0, void* p1) {
-
-    if (p0 != 0) {
-        
-        log((void*) &INFO_LOG_LEVEL, "Destroy fraction model.");
-
-        if (strcmp(p1, "") != 0) {
-            
-            finalize_fraction_model(p0, p1);
-        }
-
-        free(p0);
-    }
-}
 
 /**
  * Initializes the fraction model.
@@ -96,14 +50,14 @@ static void destroy_fraction_model(void* p0, void* p1) {
  */
 static void initialize_fraction_model(void* p0, void* p1) {
 
-    struct fraction* f = (struct fraction*) p0;
+    struct fraction* m = (struct fraction*) p0;
     
-    if (f != 0) {
+    if (m != 0) {
         
         log((void*) &INFO_LOG_LEVEL, "Initialize fraction model.");
 
         // Read input stream and transform to fraction.
-        fscanf(p1, %f, &(f->value));
+//??        sscanf(p1, %l, (void*) &(m->value));
 
     } else {
         
@@ -118,14 +72,14 @@ static void initialize_fraction_model(void* p0, void* p1) {
  */
 static void finalize_fraction_model(void* p0, void* p1) {
 
-    struct fraction* f = (struct fraction*) p0;
+    struct fraction* m = (struct fraction*) p0;
     
-    if (f != 0) {
+    if (m != 0) {
 
         log((void*) &INFO_LOG_LEVEL, "Finalize fraction model.");
 
         // Write output stream and transform from fraction.
-        fprintf(p1, %f, &(f->value));
+//??        sprintf(p1, %l, (void*) &(m->value));
 
     } else {
 

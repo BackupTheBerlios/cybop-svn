@@ -23,267 +23,69 @@
  */
 
 #include <string.h>
-#include "model.c"
-#include "map.c"
-#include "map_handler.c"
+#include "time.c"
 
 /**
- * This is the model handler.
+ * This is the time handler.
  *
- * Model elements are accessed over their index or name.
- * They can also be accessed hierarchically, using a dot-separated name like:
- * "system.frame.menu_bar.exit_menu_item.action"
- *
- * @version $Revision: 1.2 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 //
-// Model.
+// Constants.
+//
+
+/** The default time value. */
+static const char* DEFAULT_TIME_VALUE = "01.01.0000 00:00:00";
+
+//
+// Time model.
 //
 
 /**
- * Initializes the model.
+ * Initializes the time model.
  *
- * @param p0 the model
+ * @param p0 the time model
+ * @param p1 the model source
  */
-static void initialize_model(void* p0) {
+static void initialize_time_model(void* p0, void* p1) {
 
-    struct model* m = (struct model*) p0;
+    struct time* m = (struct time*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Initialize model.");
+        log((void*) &INFO_LOG_LEVEL, "Initialize time model.");
 
-        m->children = malloc(sizeof(struct map));
-        initialize_map(m->children);
-        m->positions = malloc(sizeof(struct map));
-        initialize_map(m->positions);
+        // Read input stream and transform to time.
+//??        fscanf(p1, %d, &(m->value));
 
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize model. The model is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not initialize time model. The time model is null.");
     }
 }
 
 /**
- * Finalizes the model.
+ * Finalizes the time model.
  *
- * @param p0 the model
+ * @param p0 the time model
+ * @param p1 the model source
  */
-static void finalize_model(void* p0) {
+static void finalize_time_model(void* p0, void* p1) {
 
-    struct model* m = (struct model*) p0;
+    struct time* m = (struct time*) p0;
     
     if (m != 0) {
-
-        log((void*) &INFO_LOG_LEVEL, "Finalize model.");
-
-        finalize_map(m->positions);
-        free(m->positions);
-
-        finalize_map(m->children);
-        free(m->children);
+        
+        log((void*) &INFO_LOG_LEVEL, "Finalize time model.");
+        
+        // Write output stream and transform from time.
+//??        fprintf(p1, %d, &(m->value));
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize model. The model is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not finalize time model. The time model is null.");
     }
-}
-
-//
-// Helper functions.
-//
-
-/**
- * Returns the child name.
- *
- * It is the most left name before the first dot/point "." in the given string
- * or, if there is no dot, then it is the given name itself.
- *
- * @param p0 the hierarchical model name
- * @return the child name
- */
-static void* get_child_name(void* p0) {
-    
-    void* name = 0;
-    char* n = (char*) p0;
-    
-    if (n != 0) {
-        
-/*??
-        int i = n->indexOf(".");
-        
-        if (i != -1) {
-            
-            p1 = n->substring(0, i);
-        
-        } else {
-        
-            p1 = n;
-        }
-*/
-        
-    } else {
-        
-        log((void*) &ERROR_LOG_LEVEL, "Could not get child name. The hierarchical name is null.");
-    }
-    
-    return name;
-}
-
-/**
- * Returns the remaining name.
- *
- * It is the whole string after the first dot/point ".".
- *
- * @param p0 the hierarchical model name
- * @return the remaining name
- */
-static void* get_remaining_name(void* p0) {
-
-    void* name = 0;    
-    char* n = (char*) p0;
-    
-    if (n != 0) {
-        
-/*??
-        int i = n->indexOf(".");
-        
-        if (i != -1) {
-
-            p1 = n->substring(i + 1);
-        }
-*/
-        
-    } else {
-        
-        log((void*) &ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical name is null.");
-    }
-    
-    return name;
-}
-
-//
-// Model element.
-//
-
-/**
- * Sets the model element.
- *
- * @param p0 the model
- * @param p1 the hierarchical model name
- * @param p2 the element
- */
-static void set_model_element(void* p0, void* p1, void* p2) {
-
-    struct model* m = (struct model*) p0;
-
-    if (m != 0) {
-
-        log((void*) &INFO_LOG_LEVEL, "Set model element: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
-        
-        void* n = get_child_name(p1);
-        void* r = get_remaining_name(p1);
-        
-        if (r != 0) {
-
-            // The given model is the parent of another parent.
-            void* child = get_map_element_with_name(m->children, n);
-            
-            // Continue to process along the hierarchical name.
-            set_model_element(child, r, p2);
-            
-        } else {
-
-            // The given model is the parent of the child.
-            set_map_element_with_name(m->children, n, p2);
-        }
-        
-    } else {
-        
-        log((void*) &ERROR_LOG_LEVEL, "Could not set model element. The model is null.");
-    }
-}
-
-/**
- * Removes the model element.
- *
- * @param p0 the model
- * @param p1 the hierarchical model name
- */
-static void remove_model_element(void* p0, void* p1) {
-
-    struct model* m = (struct model*) p0;
-
-    if (m != 0) {
-
-        log((void*) &INFO_LOG_LEVEL, "Remove model element: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
-        
-        void* n = get_child_name(p1);
-        void* r = get_remaining_name(p1);
-        
-        if (r != 0) {
-            
-            // The given model is the parent of another parent.
-            void* child = get_map_element_with_name(m->children, n);
-            
-            // Continue to process along the hierarchical name.
-            remove_model_element(child, r);
-            
-        } else {
-
-            // The given model is the parent of the child.
-            remove_map_element_with_name(m->children, n);
-        }
-        
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not remove model element. The model is null.");
-    }
-}
-
-/**
- * Returns the model element.
- *
- * @param p0 the model
- * @param p1 the hierarchical model name
- * @return the element
- */
-static void* get_model_element(void* p0, void* p1) {
-
-    void* e = 0;
-    struct model* m = (struct model*) p0;
-
-    if (m != 0) {
-
-        log((void*) &INFO_LOG_LEVEL, "Get model element: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
-        
-        void* n = get_child_name(p1);
-        void* r = get_remaining_name(p1);
-        
-        if (r != 0) {
-            
-            // The given model is the parent of another parent.
-            void* child = get_map_element_with_name(m->children, n);
-            
-            // Continue to process along the hierarchical name.
-            e = get_model_element(child, r);
-            
-        } else {
-
-            // The given model is the parent of the child.
-            e = get_map_element_with_name(m->children, n);
-        }
-
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not get model element. The model is null.");
-    }
-    
-    return e;
 }
 

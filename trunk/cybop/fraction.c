@@ -32,7 +32,7 @@
  *
  * It consists of two integer numbers, a numerator and a denominator.
  *
- * @version $Revision: 1.3 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct fraction {
@@ -44,10 +44,10 @@ struct fraction {
     double value;
     
     /** The numerator. */
-//??    integer numerator;
+//??    struct integer numerator;
     
     /** The denominator. */
-//??    integer denominator;
+//??    struct integer denominator;
 };
 
 /* FRACTION_SOURCE */

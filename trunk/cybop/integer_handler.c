@@ -27,7 +27,7 @@
 /**
  * This is the integer handler.
  *
- * @version $Revision: 1.2 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,58 +38,9 @@
 /** The default integer value. */
 static const int DEFAULT_INTEGER_VALUE = 0;
 
-/** The invalid index value. */
-static const int INVALID_VALUE = -1;
-
 //
 // Integer model.
 //
-
-/**
- * Creates an integer model.
- *
- * @param p0 the model source
- * @return the integer model
- */
-static void* create_integer_model(void* p0) {
-
-    void* i = 0;
-    
-    if (p0 != 0) {
-        
-        log((void*) &INFO_LOG_LEVEL, "Create integer model.");
-        
-        if (strcmp(p0, "") != 0) {
-            
-            i = malloc(sizeof(struct integer));
-
-            initialize_integer_model(i, p0);
-        }
-    }
-    
-    return i;
-}
-
-/**
- * Destroys the integer model.
- *
- * @param p0 the integer model
- * @param p1 the model source
- */
-static void destroy_integer_model(void* p0, void* p1) {
-
-    if (p0 != 0) {
-        
-        log((void*) &INFO_LOG_LEVEL, "Destroy integer model.");
-
-        if (strcmp(p1, "") != 0) {
-            
-            finalize_integer_model(p0, p1);
-        }
-
-        free(p0);
-    }
-}
 
 /**
  * Initializes the integer model.
@@ -99,14 +50,14 @@ static void destroy_integer_model(void* p0, void* p1) {
  */
 static void initialize_integer_model(void* p0, void* p1) {
 
-    struct integer* i = (struct integer*) p0;
+    struct integer* m = (struct integer*) p0;
     
-    if (i != 0) {
+    if (m != 0) {
         
         log((void*) &INFO_LOG_LEVEL, "Initialize integer model.");
 
         // Read input stream and transform to integer.
-        fscanf(p1, %d, &(i->value));
+//??        sscanf(p1, %d, (void*) &(m->value));
 
     } else {
         
@@ -122,14 +73,14 @@ static void initialize_integer_model(void* p0, void* p1) {
  */
 static void finalize_integer_model(void* p0, void* p1) {
 
-    struct integer* i = (struct integer*) p0;
+    struct integer* m = (struct integer*) p0;
     
-    if (i != 0) {
+    if (m != 0) {
         
         log((void*) &INFO_LOG_LEVEL, "Finalize integer model.");
         
         // Write output stream and transform from integer.
-        fprintf(p1, %d, &(i->value));
+//??        sprintf(p1, %d, (void*) &(m->value));
 
     } else {
 

@@ -34,7 +34,7 @@
  * Complex models consist of other complex models and primitive models.
  * Primitive models are the final abstraction in software.
  *
- * @version $Revision: 1.10 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,8 +55,11 @@ static const char* BOOLEAN_PRIMITIVE = "boolean";
 /** The integer primitive. */
 static const char* INTEGER_PRIMITIVE = "integer";
 
-/** The float primitive. */
-static const char* FLOAT_PRIMITIVE = "float";
+/** The fraction primitive. */
+static const char* FRACTION_PRIMITIVE = "fraction";
+
+/** The complex primitive. */
+static const char* COMPLEX_PRIMITIVE = "complex";
 
 /** The vector primitive. */
 static const char* VECTOR_PRIMITIVE = "vector";

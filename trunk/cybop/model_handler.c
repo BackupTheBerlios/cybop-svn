@@ -22,6 +22,9 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef MODEL_HANDLER_SOURCE
+#define MODEL_HANDLER_SOURCE
+
 #include <string.h>
 #include "model.c"
 #include "map.c"
@@ -34,51 +37,58 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.3 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 //
-// Model.
+// Statics model.
 //
 
 /**
- * Initializes the model.
+ * Initializes the statics model.
  *
- * @param p0 the model
+ * @param p0 the statics model
+ * @param p1 the model source
  */
-static void initialize_model(void* p0) {
+static void initialize_statics_model(void* p0, void* p1) {
 
     struct model* m = (struct model*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Initialize model.");
+        log((void*) &INFO_LOG_LEVEL, "Initialize statics model.");
 
         m->children = malloc(sizeof(struct map));
         initialize_map(m->children);
+
         m->positions = malloc(sizeof(struct map));
         initialize_map(m->positions);
 
+        //?? Read source and add elements here!
+        
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize model. The model is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not initialize statics model. The statics model is null.");
     }
 }
 
 /**
- * Finalizes the model.
+ * Finalizes the statics model.
  *
- * @param p0 the model
+ * @param p0 the statics model
+ * @param p1 the model source
  */
-static void finalize_model(void* p0) {
+static void finalize_statics_model(void* p0, void* p1) {
 
     struct model* m = (struct model*) p0;
     
     if (m != 0) {
+        
+        log((void*) &INFO_LOG_LEVEL, "Finalize statics model.");
 
-        log((void*) &INFO_LOG_LEVEL, "Finalize model.");
-
+        //?? Remove elements and write source here!
+        
         finalize_map(m->positions);
         free(m->positions);
 
@@ -87,7 +97,7 @@ static void finalize_model(void* p0) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize model. The model is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The statics model is null.");
     }
 }
 
@@ -286,4 +296,7 @@ static void* get_model_element(void* p0, void* p1) {
     
     return e;
 }
+
+/* MODEL_HANDLER_SOURCE */
+#endif
 

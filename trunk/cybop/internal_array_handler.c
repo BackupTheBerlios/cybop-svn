@@ -33,10 +33,17 @@
  *
  * Internal array elements are accessed over their index.
  *
- * @version $Revision: 1.9 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
- 
+
+//
+// Constants.
+//
+
+/** The invalid index value. */
+static const int INVALID_INDEX_VALUE = -1;
+
 //
 // Internal array.
 //
@@ -107,7 +114,7 @@ static void set_internal_array_element(void** p0, void* p1, void* p2) {
 
         int* i = (int*) p1;
 
-        if (*i != INVALID_VALUE) {
+        if (*i != INVALID_INDEX_VALUE) {
                 
             // Set element.
             p0[*i] = p2;
@@ -136,7 +143,7 @@ static void remove_internal_array_element(void** p0, void* p1, void* p2) {
 
         int* i = (int*) p1;
 
-        if (*i != INVALID_VALUE) {
+        if (*i != INVALID_INDEX_VALUE) {
 
             int* size = (int*) p2;
             
@@ -178,7 +185,7 @@ static void* get_internal_array_element(void** p0, void* p1) {
 
         int* i = (int*) p1;
 
-        if (*i != INVALID_VALUE) {
+        if (*i != INVALID_INDEX_VALUE) {
             
             // Get element.
             e = p0[*i];
