@@ -76,7 +76,7 @@ import cybop.core.model.principle.*;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.15 $ $Date: 2003-04-17 14:50:02 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-04-18 16:31:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -243,6 +243,127 @@ public class Item extends State {
     public String getName() {
 
         return this.name;
+    }
+    
+    //
+    // Name handling.
+    //
+
+    /**
+     * Builds a name.
+     *
+     * @param base the word base of the name
+     * @return the name
+     * @exception NullPointerException if the highest name number is null
+     * @exception NullPointerException if the word base of the name is null
+     * @exception NullPointerException if the number string is null
+     */
+    public String buildName(String base) throws NullPointerException {
+
+        String n = null;
+        Integer i = getHighestNameNumber(base);
+        
+        if (i != null) {
+
+            String no = new String(java.lang.String.valueOf(i.getJavaPrimitive() + 1));
+
+            if (base != null) {
+
+                if (no != null) {
+
+                    n = new String(base.getJavaObject() + "_" + no.getJavaObject());
+
+                } else {
+        
+                    throw new NullPointerException("Could not build name. The number string is null.");
+                }
+
+            } else {
+    
+                throw new NullPointerException("Could not build name. The word base of the name is null.");
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not build name. The highest name number is null.");
+        }
+
+        return n;        
+    }
+
+    /**
+     * Returns the highest name number.
+     *
+     * @param base the word base of the name
+     * @return the highest name number
+     * @exception NullPointerException if the children array is null
+     * @exception NullPointerException if a child is null
+     * @exception NullPointerException if the name is null
+     * @exception NullPointerException if the number is null
+     */
+    public Integer getHighestNameNumber(String base) throws NullPointerException {
+
+        Integer i = new Integer(0);
+        Item[] c = getChildren();
+
+        if (c != null) {
+
+            int index = 0;
+            int no = getChildrenNumber();
+            Item child = null;
+            String n = null;
+            int begin = 0;
+            String sub = null;
+            Integer number = null;
+
+            while (index < no) {
+
+                child = (Item) c[index];
+
+                if (child != null) {
+
+                    n = child.getName();
+
+                    if (n != null) {
+
+                        if (n.startsWith(base)) {
+
+                            begin = n.indexOf(new String("_"));
+                            sub = n.subString(begin + 1);
+                            number = Integer.toInteger(sub);
+
+                            if (number != null) {
+
+                                if (number.isGreaterThan(i)) {
+
+                                    i = number;
+                                }
+
+                            } else {
+                
+                                throw new NullPointerException("Could not get highest name number. The number is null.");
+                            }
+                        }
+
+                    } else {
+        
+                        throw new NullPointerException("Could not get highest name number. The name is null.");
+                    }
+    
+                } else {
+
+                    throw new NullPointerException("Could not get highest name number. A child is null.");
+                }
+
+                index++;
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not get highest name number. The children array is null.");
+        }
+
+        return i;
     }
 
     //
@@ -853,6 +974,7 @@ public class Item extends State {
      * @exception NullPointerException if the children array is null
      * @exception NullPointerException if the name is null
      * @exception NullPointerException if a child is null
+     * @exception NullPointerException if the item is null
      */
     public boolean replace(String n, Item i) throws NullPointerException {
 
@@ -944,13 +1066,6 @@ public class Item extends State {
 
                         if (n.isEqualTo(i.getName())) {
 
-                            //?? test
-                            int test;
-                            java.lang.System.out.println("\n\n\n\npre");
-                            for (test = 0; test < c.length; test++) {
-                                java.lang.System.out.println("array pos: " + test + " item: " + c[test]);
-                            }
-            
                             // Move all remaining items one place towards the beginning
                             // of the array.
                             java.lang.System.out.println("DEBUG: Remove child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
@@ -969,12 +1084,6 @@ public class Item extends State {
                             removeTreeNode(i);
                             setChildrenNumber(no - 1);
 
-                            //?? test
-                            java.lang.System.out.println("\n\n\n\npost");
-                            for (test = 0; test < c.length; test++) {
-                                java.lang.System.out.println("array pos: " + test + " item: " + c[test]);
-                            }
-            
                             break;
                         }
 

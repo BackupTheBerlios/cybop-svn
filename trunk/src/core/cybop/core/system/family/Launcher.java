@@ -69,7 +69,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.10 $ $Date: 2003-04-17 14:50:02 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-04-18 16:31:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family /*??implements
@@ -1379,6 +1379,7 @@ public class Launcher extends Family /*??implements
 
         if (s != null) {
 
+            s.set(Signal.PRIORITY, new Integer(1));
             s.set(Signal.LANGUAGE, l);
             s.set(Signal.SUBJECT, subj);
             s.set(Signal.PREDICATE, p);

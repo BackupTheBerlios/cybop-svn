@@ -26,6 +26,7 @@ package cybop.core.system.chain;
 
 import cybop.core.basic.*;
 import cybop.core.basic.Integer;
+import cybop.core.basic.String;
 import cybop.core.signal.*;
 import cybop.core.system.*;
 
@@ -36,10 +37,17 @@ import cybop.core.system.*;
  * responsible for short-time storage of signals.<br><br>
  * [German: "Kurzzeitgedaechtnis"]
  *
- * @version $Revision: 1.1 $ $Date: 2003-04-17 14:50:02 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-04-18 16:31:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SignalMemory extends Chain {
+    
+    //
+    // Children names.
+    //
+    
+    /** The signal. */
+    public static final String SIGNAL = new String("signal");
 
     //
     // Initialization.
@@ -77,9 +85,9 @@ public class SignalMemory extends Chain {
 
         if (c != null) {
 
-            //?? Use algorithm to find item key.
-            //?? Timestamp as extension!
-            //?? Launcher.SIGNAL + extension
+            String n = buildName(SignalMemory.SIGNAL);
+
+            add(n, s);
 
         } else {
 
@@ -107,31 +115,45 @@ public class SignalMemory extends Chain {
         if (c != null) {
 
             int index = 0;
+            int no = getChildrenNumber();
             Signal child = null;
+            String n = null;
             Integer priority = null;
-            Integer max = priority;
+            Integer max = new Integer(0);
 
-            while (index < getChildrenNumber()) {
+            while (index < no) {
 
                 child = (Signal) c[index];
 
                 if (child != null) {
 
-                    priority = (Integer) child.get(Signal.PRIORITY);
+                    n = child.getName();
                     
-                    if (priority != null) {
+                    if (n != null) {
 
-                        if (priority.isGreaterThan(max)) {
-                            
-                            max = priority;
-                            s = child;
+                        if (n.startsWith(SignalMemory.SIGNAL)) {
+
+                            priority = (Integer) child.get(Signal.PRIORITY);
+
+                            if (priority != null) {
+
+                                if (priority.isGreaterThan(max)) {
+
+                                    max = priority;
+                                    s = child;
+                                }
+
+                            } else {
+            
+                                throw new NullPointerException("Could not fetch signal. The priority is null.");
+                            }
                         }
 
                     } else {
-    
-                        throw new NullPointerException("Could not fetch signal. The priority is null.");
+        
+                        throw new NullPointerException("Could not fetch signal. The name is null.");
                     }
-
+    
                 } else {
 
                     throw new NullPointerException("Could not fetch signal. A child is null.");

@@ -29,7 +29,7 @@ package cybop.core.basic;
  *
  * A string is an addition of characters.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-11 14:55:22 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-18 16:31:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class String extends Item {
@@ -220,6 +220,38 @@ public class String extends Item {
     }
 
     /**
+     * Returns the index of where the given sub string starts.
+     *
+     * @param s the sub string
+     * @return the index of where the given sub string starts
+     * @exception NullPointerException if the java object is null
+     * @exception NullPointerException if the sub string is null
+     */
+    public int indexOf(String s) throws NullPointerException {
+
+        int i = 0;
+        java.lang.String o = (java.lang.String) getJavaObject();
+
+        if (o != null) {
+
+            if (s != null) {
+
+                i = o.indexOf((java.lang.String) s.getJavaObject());
+
+            } else {
+
+                throw new NullPointerException("Could not return index. The sub string is null.");
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not return index. The java object is null.");
+        }
+        
+        return i;
+    }
+
+    /**
      * Returns the character at the given position.
      *
      * @param i the character position
@@ -241,6 +273,117 @@ public class String extends Item {
         }
 
         return c;
+    }
+
+    /**
+     * Returns the sub string of this string, starting at begin and ending at end.
+     *
+     * @param begin the begin of the substring
+     * @param end the end of the substring
+     * @return the sub string of this string
+     * @exception NullPointerException if the java object is null
+     */
+    public String subString(int begin, int end) throws NullPointerException {
+        
+        String s = null;
+        java.lang.String o = (java.lang.String) getJavaObject();
+
+        if (o != null) {
+
+            s = new String(o.substring(begin, end));
+
+        } else {
+
+            throw new NullPointerException("Could not return sub string. The java object is null.");
+        }
+
+        return s;
+    }
+
+    /**
+     * Returns the sub string of this string, starting at begin and ending at
+     * this string's length.
+     *
+     * @param begin the begin of the substring
+     * @return the sub string of this string
+     * @exception NullPointerException if the java object is null
+     */
+    public String subString(int begin) throws NullPointerException {
+        
+        String s = null;
+        java.lang.String o = (java.lang.String) getJavaObject();
+
+        if (o != null) {
+
+            s = new String(o.substring(begin, o.length()));
+
+        } else {
+
+            throw new NullPointerException("Could not return sub string. The java object is null.");
+        }
+
+        return s;
+    }
+
+    /**
+     * Checks if this string starts with the given prefix.
+     *
+     * @param p the prefix
+     * @return true - if this string starts with the given prefix;
+     * false - otherwise
+     * @exception NullPointerException if the java object is null
+     * @exception NullPointerException if the prefix is null
+     */
+    public boolean startsWith(String p) throws NullPointerException {
+
+        boolean b = false;
+        java.lang.String o = (java.lang.String) getJavaObject();
+
+        if (o != null) {
+
+            if (p != null) {
+
+                b = o.startsWith((java.lang.String) p.getJavaObject());
+
+            } else {
+
+                throw new NullPointerException("Could not check for prefix. The prefix is null.");
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not check for prefix. The java object is null.");
+        }
+
+        return b;        
+    }
+
+    //
+    // Transformation.
+    //
+
+    /**
+     * Returns the string representation of the given integer.
+     *
+     * @param i the integer
+     * @return the string representation of the given integer
+     * @exception NullPointerException if the java object is null
+     */
+    public String toString(int i) throws NullPointerException {
+
+        String s = null;
+        java.lang.String o = (java.lang.String) getJavaObject();
+
+        if (o != null) {
+
+            s = new String(o.valueOf(i));
+
+        } else {
+
+            throw new NullPointerException("Could not return string representation. The java object is null.");
+        }
+
+        return s;
     }
 }
 

@@ -32,7 +32,7 @@ package cybop.core.basic;
  * A number stands for some countable thing of the real world.
  * Possible compositions of Integer are Fraction (Float/Double) and Complex.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-04-18 16:31:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Integer extends Item {
@@ -86,6 +86,32 @@ public class Integer extends Item {
 
         super();
         setJavaObject(new java.lang.Integer(i));
+    }
+
+    /**
+     * Constructs this integer.<br><br>
+     *
+     * Normally, constructors are NOT used in the ResMedLib framework,
+     * because no counterparts (destructors) exist in the java language.
+     * The aim of this prohibition is to ensure a proper startup and shutdown
+     * (lifecycle) of every item in the system.<br><br>
+     *
+     * However, when it comes to lower abstraction (language) levels of our
+     * ontology, we need to make some exceptions:<br>
+     * Whenever an integer like "0", "1", "2" is given,
+     * the java language constructs a new integer object anyway.
+     * So, it doesn't matter if also we are creating integers which do not
+     * get properly destroyed by the lifecycle, just by the garbage collector
+     * after an indefinable time.
+     * Most often, such integers are needed/created as static variables to define
+     * constants, e.g. attribute ids. That's why we need this integer constructor.
+     *
+     * @param i the java integer
+     */
+    public Integer(java.lang.Integer i) {
+
+        super();
+        setJavaObject(i);
     }
 
     //
@@ -490,7 +516,6 @@ public class Integer extends Item {
     public boolean isEqualTo(int p) throws NullPointerException {
 
         boolean result = Boolean.FALSE;
-        
         java.lang.Integer j = (java.lang.Integer) getJavaObject();
         
         if (j != null) {
@@ -566,7 +591,6 @@ public class Integer extends Item {
     public boolean isSmallerThan(int p) throws NullPointerException {
 
         boolean result = Boolean.FALSE;
-        
         java.lang.Integer j = (java.lang.Integer) getJavaObject();
         
         if (j != null) {
@@ -642,7 +666,6 @@ public class Integer extends Item {
     public boolean isGreaterThan(int p) throws NullPointerException {
 
         boolean result = Boolean.FALSE;
-        
         java.lang.Integer j = (java.lang.Integer) getJavaObject();
         
         if (j != null) {
@@ -793,7 +816,6 @@ public class Integer extends Item {
     public boolean isGreaterThanOrEqualTo(int p) throws NullPointerException {
 
         boolean result = Boolean.FALSE;
-        
         java.lang.Integer j = (java.lang.Integer) getJavaObject();
         
         if (j != null) {
@@ -809,6 +831,33 @@ public class Integer extends Item {
         }
             
         return result;        
+    }
+
+    //
+    // Transformation.
+    //
+
+    /**
+     * Returns the string representation of the given integer.
+     *
+     * @param i the integer
+     * @return the string representation of the given integer
+     * @exception NullPointerException if the java object is null
+     */
+    public static Integer toInteger(String s) throws NullPointerException {
+
+        Integer i = null;
+
+        if (s != null) {
+
+            i = new Integer(java.lang.Integer.valueOf((java.lang.String) s.getJavaObject()));
+        
+        } else {
+            
+            throw new NullPointerException("Could not transform string to integer. The string is null.");
+        }
+
+        return i;
     }
 }
 
