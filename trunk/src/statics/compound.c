@@ -64,7 +64,7 @@
  * A compound model can be created by cloning an existing model template so that
  * some space gets allocated in the computer's memory.
  *
- * @version $Revision: 1.8 $ $Date: 2004-06-03 07:11:22 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-06-06 21:34:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -689,7 +689,7 @@ void set_compound_part_by_index(void* p0, void* p1, void* p2, const void* p3, co
 
         if (*i >= 0) {
 
-//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Set model part by index.");
+//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Set compound part by index.");
 
             // Initialize elements.
             int s = 0;
@@ -778,17 +778,17 @@ void set_compound_part_by_index(void* p0, void* p1, void* p2, const void* p3, co
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by index. The index exceeds the size.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The index exceeds the size.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by index. The index is negativ.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The index is negativ.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by index. The index is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The index is null.");
     }
 }
 
@@ -800,18 +800,25 @@ void set_compound_part_by_index(void* p0, void* p1, void* p2, const void* p3, co
  * @param p2 the compound size
  * @param p3 the name
  * @param p4 the name count
- * @param p5 the model
- * @param p6 the model count
- * @param p7 the abstraction
- * @param p8 the abstraction count
- * @param p9 the constraints
- * @param p10 the constraints count
- * @param p11 the position model
- * @param p12 the position model count
- * @param p13 the position abstraction
- * @param p14 the position abstraction count
- * @param p15 the position constraints
- * @param p16 the position constraints count
+ * @param p5 the name size
+ * @param p6 the model
+ * @param p7 the model count
+ * @param p8 the model size
+ * @param p9 the abstraction
+ * @param p10 the abstraction count
+ * @param p11 the abstraction size
+ * @param p12 the constraints
+ * @param p13 the constraints count
+ * @param p14 the constraints size
+ * @param p15 the position model
+ * @param p16 the position model count
+ * @param p17 the position model size
+ * @param p18 the position abstraction
+ * @param p19 the position abstraction count
+ * @param p20 the position abstraction size
+ * @param p21 the position constraints
+ * @param p22 the position constraints count
+ * @param p23 the position constraints size
  */
 void set_compound_part_by_name(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8, const void* p9, const void* p10,
@@ -826,7 +833,7 @@ void set_compound_part_by_name(void* p0, void* p1, void* p2, const void* p3, con
 
         // The separator has been found.
         // The full name is hierarchical.
-        // The given model contains parts which are compound models.
+        // The given compound contains parts which are compound models.
 
         if (p2 != NULL_POINTER) {
 
@@ -870,7 +877,7 @@ void set_compound_part_by_name(void* p0, void* p1, void* p2, const void* p3, con
                                 // The index i of the separator is 5.
                                 // The size of the part name "hello" before the separator is likewise 5.
                                 int index = -1;
-                                get_model_part_index(p0, p1, (void*) &i, (void*) &index);
+                                get_compound_part_index(p0, p1, (void*) &i, (void*) &index);
 
                                 if (index != -1) {
 
@@ -879,43 +886,43 @@ void set_compound_part_by_name(void* p0, void* p1, void* p2, const void* p3, con
                                     get_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &index, (void*) &part);
 
                                     // Recursively continue to process along the hierarchical name.
-                                    set_model_part_by_name((void*) &part, (void*) &r, (void*) &rs,
+                                    set_compound_part_by_name((void*) &part, (void*) &r, (void*) &rs,
                                         p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
                                         p15, p16, p17, p18, p19, p20);
 
                                 } else {
 
-//??                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not set model part by name. A part with that name does not exist.");
+//??                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not set compound part by name. A part with that name does not exist.");
                                 }
 
                             } else {
 
-//??                                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by name. The full name ends with a separator.");
+//??                                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by name. The full name ends with a separator.");
                             }
 
                         } else {
 
-//??                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by name. The full name starts with a separator.");
+//??                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by name. The full name starts with a separator.");
                         }
 
                     } else {
 
-//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by name. The separator index exceeds the full name size.");
+//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by name. The separator index exceeds the full name size.");
                     }
 
                 } else {
 
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by name. The separator index is negative.");
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by name. The separator index is negative.");
                 }
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by name. The name is null.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by name. The name is null.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by name. The name size is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by name. The name size is null.");
         }
 
     } else {
@@ -947,7 +954,7 @@ void set_compound_part_by_name(void* p0, void* p1, void* p2, const void* p3, con
 }
 
 /**
- * Adds the model part.
+ * Adds the compound part.
  *
  * @param p0 the map
  * @param p1 the name
@@ -955,7 +962,7 @@ void set_compound_part_by_name(void* p0, void* p1, void* p2, const void* p3, con
  * @param p3 the reference
  * @param p4 the reference size
  */
-void add_model_part(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
+void add_compound_part(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
 
 /*??
     // This element name will get destroyed (free) in remove_map_element.
@@ -977,12 +984,12 @@ void add_model_part(void* p0, const void* p1, const void* p2, const void* p3, co
 }
 
 /**
- * Removes the model part by index.
+ * Removes the compound part by index.
  *
  * @param p0 the model
  * @param p1 the index
  */
-void remove_model_part_by_index(void* p0, const void* p1) {
+void remove_compound_part_by_index(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -990,7 +997,7 @@ void remove_model_part_by_index(void* p0, const void* p1) {
 
         if (*i >= 0) {
 
-//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Remove model part by index.");
+//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Remove compound part by index.");
 
             // Initialize elements.
             int s = 0;
@@ -1054,28 +1061,28 @@ void remove_model_part_by_index(void* p0, const void* p1) {
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by index. The index exceeds the size.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove compound part by index. The index exceeds the size.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by index. The index is negativ.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove compound part by index. The index is negativ.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by index. The index is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove compound part by index. The index is null.");
     }
 }
 
 /**
- * Removes the model part by name.
+ * Removes the compound part by name.
  *
  * @param p0 the model
  * @param p1 the name
  * @param p2 the name size
  */
-void remove_model_part_by_name(void* p0, const void* p1, const void* p2) {
+void remove_compound_part_by_name(void* p0, const void* p1, const void* p2) {
 
     // The separator index.
     int i = -1;
@@ -1086,7 +1093,7 @@ void remove_model_part_by_name(void* p0, const void* p1, const void* p2) {
 
         // The separator has been found.
         // The full name is hierarchical.
-        // The given model contains parts which are compound models.
+        // The given compound contains parts which are compound models.
 
         if (p2 != NULL_POINTER) {
 
@@ -1130,7 +1137,7 @@ void remove_model_part_by_name(void* p0, const void* p1, const void* p2) {
                                 // The index i of the separator is 5.
                                 // The size of the part name "hello" before the separator is likewise 5.
                                 int index = -1;
-                                get_model_part_index(p0, p1, (void*) &i, (void*) &index);
+                                get_compound_part_index(p0, p1, (void*) &i, (void*) &index);
 
                                 if (index != -1) {
 
@@ -1139,68 +1146,68 @@ void remove_model_part_by_name(void* p0, const void* p1, const void* p2) {
                                     get_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &index, (void*) &part);
 
                                     // Recursively continue to process along the hierarchical name.
-                                    remove_model_part_by_name((void*) &part, (void*) &r, (void*) &rs);
+                                    remove_compound_part_by_name((void*) &part, (void*) &r, (void*) &rs);
 
                                 } else {
 
-//??                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not remove model part by name. A part with that name does not exist.");
+//??                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not remove compound part by name. A part with that name does not exist.");
                                 }
 
                             } else {
 
-//??                                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by name. The full name ends with a separator.");
+//??                                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove compound part by name. The full name ends with a separator.");
                             }
 
                         } else {
 
-//??                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by name. The full name starts with a separator.");
+//??                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove compound part by name. The full name starts with a separator.");
                         }
 
                     } else {
 
-//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by name. The separator index exceeds the full name size.");
+//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove compound part by name. The separator index exceeds the full name size.");
                     }
 
                 } else {
 
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by name. The separator index is negative.");
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove compound part by name. The separator index is negative.");
                 }
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by name. The name is null.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove compound part by name. The name is null.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by name. The name size is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove compound part by name. The name size is null.");
         }
 
     } else {
 
         // The separator could not be found.
         // The full name is not hierarchical and represents the part name.
-        // The given model contains parts which are primitive models.
+        // The given compound contains parts which are primitive models.
 
         // The index of the given name.
         int index = -1;
-        get_model_part_index(p0, p1, p2, (void*) &index);
+        get_compound_part_index(p0, p1, p2, (void*) &index);
 
         if (index != -1) {
 
-//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Remove model part by name.");
+//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Remove compound part by name.");
 
-            remove_model_part_by_index(p0, (void*) &index);
+            remove_compound_part_by_index(p0, (void*) &index);
 
         } else {
 
-//??            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not remove model part by name. A part with that name does not exist.");
+//??            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not remove compound part by name. A part with that name does not exist.");
         }
     }
 }
 
 /**
- * Gets the model part by index.
+ * Gets the compound part by index.
  *
  * @param p0 the model
  * @param p1 the index
@@ -1223,7 +1230,7 @@ void remove_model_part_by_name(void* p0, const void* p1, const void* p2) {
  * @param p18 the constraint model
  * @param p19 the constraint model size
  */
-void get_model_part_by_index(const void* p0, const void* p1,
+void get_compound_part_by_index(const void* p0, const void* p1,
     void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
     void* p8, void* p9, void* p10, void* p11, void* p12, void* p13,
     void* p14, void* p15, void* p16, void* p17, void* p18, void* p19) {
@@ -1234,7 +1241,7 @@ void get_model_part_by_index(const void* p0, const void* p1,
 
         if (*i >= 0) {
 
-//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Get model part by index.");
+//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Get compound part by index.");
 
             // Initialize elements.
             int s = 0;
@@ -1286,56 +1293,55 @@ void get_model_part_by_index(const void* p0, const void* p1,
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by index. The index exceeds the size.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by index. The index exceeds the size.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by index. The index is negativ.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by index. The index is negativ.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by index. The index is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by index. The index is null.");
     }
 }
 
 /**
- * Gets the model part by name.
+ * Gets the compound part by name.
  *
  * @param p0 the compound
  * @param p1 the compound count
- * @param p2 the compound size
- * @param p3 the name
- * @param p4 the name count
- * @param p5 the name count
- * @param p6 the model
- * @param p7 the model count
- * @param p8 the model count
- * @param p9 the abstraction
- * @param p10 the abstraction count
- * @param p11 the abstraction count
- * @param p12 the constraints
- * @param p13 the constraints count
- * @param p14 the constraints count
- * @param p15 the position model
- * @param p16 the position model count
- * @param p17 the position model count
- * @param p18 the position abstraction
- * @param p19 the position abstraction count
- * @param p20 the position abstraction count
- * @param p21 the position constraints
- * @param p22 the position constraints count
- * @param p23 the position constraints count
+ * @param p2 the name
+ * @param p3 the name count
+ * @param p4 the name size
+ * @param p5 the model
+ * @param p6 the model count
+ * @param p7 the model size
+ * @param p8 the abstraction
+ * @param p9 the abstraction count
+ * @param p10 the abstraction size
+ * @param p11 the constraints
+ * @param p12 the constraints count
+ * @param p13 the constraints size
+ * @param p14 the position model
+ * @param p15 the position model count
+ * @param p16 the position model size
+ * @param p17 the position abstraction
+ * @param p18 the position abstraction count
+ * @param p19 the position abstraction size
+ * @param p20 the position constraints
+ * @param p21 the position constraints count
+ * @param p22 the position constraints size
  */
-void get_model_part_by_name(const void* p0, const void* p1, const void* p2,
-    const void* p3, const void* p4, const void* p5,
-    void* p6, void* p7, void* p8,
-    void* p9, void* p10, void* p11,
-    void* p12, void* p13, void* p14,
-    void* p15, void* p16, void* p17,
-    void* p18, void* p19, void* p20,
-    void* p21, void* p22, void* p23) {
+void get_compound_part_by_name(const void* p0, const void* p1,
+    const void* p2, const void* p3, const void* p4,
+    void* p5, void* p6, void* p7,
+    void* p8, void* p9, void* p10,
+    void* p11, void* p12, void* p13,
+    void* p14, void* p15, void* p16,
+    void* p17, void* p18, void* p19,
+    void* p20, void* p21, void* p22) {
 
     // The separator index.
     int i = -1;
@@ -1346,7 +1352,7 @@ void get_model_part_by_name(const void* p0, const void* p1, const void* p2,
 
         // The separator has been found.
         // The full name is hierarchical.
-        // The given model contains parts which are compound models.
+        // The given compound contains parts which are compound models.
 
         if (p2 != NULL_POINTER) {
 
@@ -1390,7 +1396,7 @@ void get_model_part_by_name(const void* p0, const void* p1, const void* p2,
                                 // The index i of the separator is 5.
                                 // The size of the part name "hello" before the separator is likewise 5.
                                 int index = -1;
-                                get_model_part_index(p0, p1, (void*) &i, (void*) &index);
+                                get_compound_part_index(p0, p1, (void*) &i, (void*) &index);
 
                                 if (index != -1) {
 
@@ -1399,66 +1405,66 @@ void get_model_part_by_name(const void* p0, const void* p1, const void* p2,
                                     get_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &index, (void*) &part);
 
                                     // Recursively continue to process along the hierarchical name.
-                                    get_model_part_by_name((void*) &part, (void*) &r, (void*) &rs,
+                                    get_compound_part_by_name((void*) &part, (void*) &r, (void*) &rs,
                                         p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
                                         p15, p16, p17, p18, p19, p20);
 
                                 } else {
 
-//??                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not get model part by name. A part with that name does not exist.");
+//??                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not get compound part by name. A part with that name does not exist.");
                                 }
 
                             } else {
 
-//??                                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by name. The full name ends with a separator.");
+//??                                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by name. The full name ends with a separator.");
                             }
 
                         } else {
 
-//??                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by name. The full name starts with a separator.");
+//??                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by name. The full name starts with a separator.");
                         }
 
                     } else {
 
-//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by name. The separator index exceeds the full name size.");
+//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by name. The separator index exceeds the full name size.");
                     }
 
                 } else {
 
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by name. The separator index is negative.");
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by name. The separator index is negative.");
                 }
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by name. The name is null.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by name. The name is null.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by name. The name size is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by name. The name size is null.");
         }
 
     } else {
 
         // The separator could not be found.
         // The full name is not hierarchical and represents the part name.
-        // The given model contains parts which are primitive models.
+        // The given compound contains parts which are primitive models.
 
         // The index of the given name.
         int index = -1;
-        get_model_part_index(p0, p1, p2, (void*) &index);
+        get_compound_part_index(p0, p1, p2, (void*) &index);
 
         if (index != -1) {
 
-//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Get model part by name.");
+//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Get compound part by name.");
 
-            get_model_part_by_index(p0, (void*) &index,
+            get_compound_part_by_index(p0, (void*) &index,
                 p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
                 p15, p16, p17, p18, p19, p20);
 
         } else {
 
-//??            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not get model part by name. A part with that name does not exist.");
+//??            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not get compound part by name. A part with that name does not exist.");
         }
     }
 }

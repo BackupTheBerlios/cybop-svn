@@ -32,7 +32,7 @@
  * A signal is a transient logic model.
  * It is stored in the computer's random access memory (ram).
  *
- * @version $Revision: 1.22 $ $Date: 2004-06-03 07:11:22 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2004-06-06 21:34:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -168,11 +168,11 @@ void destroy_signal_memory(void* p0, void* p1, void* p2) {
  * @param p0 the signal memory
  * @param p1 the signal memory count
  * @param p2 the signal memory size
- * @param p3 the signal
- * @param p4 the signal count
- * @param p5 the signal priority
- * @param p6 the signal abstraction
- * @param p7 the signal abstraction size
+ * @param p3 the model
+ * @param p4 the model count
+ * @param p5 the priority
+ * @param p6 the abstraction
+ * @param p7 the abstraction count
  */
 void set_signal(void* p0, void* p1, void* p2, const void* p3, const void* p4, const void* p5, const void* p6, const void* p7) {
 
@@ -466,50 +466,56 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
 /**
  * Handles the compound signal.
  *
- * @param p0 the signal memory
- * @param p1 the signal memory count
- * @param p2 the signal memory size
- * @param p3 the compound signal
- * @param p4 the compound signal count
- * @param p5 the priority
+ * @param p0 the signal
+ * @param p1 the signal count
+ * @param p2 the signal priority
+ * @param p3 the signal memory
+ * @param p4 the signal memory count
+ * @param p5 the signal memory size
  */
-void handle_compound_signal(void* p0, void* p1, void* p2, const void* p3, const void* p4, const void* p5) {
+void handle_compound_signal(const void* p0, const void* p1, const void* p2, void* p3, void* p4, void* p5) {
 
-    if (p4 != NULL_POINTER) {
+    if (p2 != NULL_POINTER) {
 
-        int* c = (int*) p4;
+        int* sc = (int*) p2;
 
         log_message((void*) &INFO_LOG_LEVEL, (void*) &HANDLE_COMPOUND_SIGNAL_MESSAGE, (void*) &HANDLE_COMPOUND_SIGNAL_MESSAGE_COUNT);
 
-        // Initialize elements.
+        // The part model, count.
         void* pm = NULL_POINTER;
         void* pmc = NULL_POINTER;
+        // The part abstraction, count.
         void* pa = NULL_POINTER;
         void* pac = NULL_POINTER;
 
-        // Get elements.
-        get_array_element(p3, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
-        get_array_element(p3, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &pmc);
-        get_array_element(p3, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
-        get_array_element(p3, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX, (void*) &pac);
+        // Get part model.
+        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &pmc);
+        // Get part abstraction.
+        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
+        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX, (void*) &pac);
 
-        // The part signal model.
-        int j = 0;
+        // The part signal model, count.
         void* m = NULL_POINTER;
         int mc = 0;
+        // The part signal abstraction, count.
         void* a = NULL_POINTER;
         int ac = 0;
 
+        // The loop variable.
+        int j = 0;
+
         while (1) {
 
-            if (j >= *c) {
+            if (j >= *sc) {
 
                 break;
             }
 
-            // Get part signal.
+            // Get part signal model.
             get_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &j, (void*) &m);
             get_array_element((void*) &pmc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &mc);
+            // Get part signal abstraction.
             get_array_element((void*) &pa, (void*) &POINTER_ARRAY, (void*) &j, (void*) &a);
             get_array_element((void*) &pac, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ac);
 
@@ -517,7 +523,7 @@ void handle_compound_signal(void* p0, void* p1, void* p2, const void* p3, const 
             // (Each signal has a priority. A signal may consist of part
             // signals. The part signals cannot have higher/lower priority
             // than their original whole signal.)
-            set_signal(p0, p1, p2, (void*) &m, (void*) &mc, p5, (void*) &a, (void*) &ac);
+            set_signal(p3, p4, p5, (void*) &m, (void*) &mc, p2, (void*) &a, (void*) &ac);
 
             j++;
         }
@@ -529,19 +535,394 @@ void handle_compound_signal(void* p0, void* p1, void* p2, const void* p3, const 
 }
 
 /**
+ * Handles the create model signal.
+ *
+ * CYBOL Examples:
+ * <!-- Operation parameters (as value of part_model tag):
+ *      logic name,whole name,part name,
+ *      part abstraction,part location,part model,part constraints,
+ *      position abstraction,position location,position model,position constraints /-->
+ *
+ * <part name="create_domain" part_abstraction="operation" part_location="inline"
+ *      part_model="create,,domain,compound,file,/helloworld/domain.cybol,null,null,null,null,null"/>
+ *
+ * <part name="create_find_dialog" part_abstraction="operation" part_location="inline"
+ *      part_model="create,application.gui,find_dialog,compound,file,application/find_dialog.cybol,,
+ *          vector,inline,100;100;0,x<1000;y<1000;z=0"/>
+ *
+ * @param p0 the signal parameters count
+ * @param p1 the parameters
+ * @param p2 the parameters counts
+ * @param p3 the parameters sizes
+ * @param p4 the knowledge
+ * @param p5 the knowledge count
+ * @param p6 the knowledge size
+ */
+void handle_create_model_signal(const void* p0,
+    const void* p1, const void* p2, const void* p3,
+    const void* p4, const void* p5) {
+
+    if (p6 != NULL_POINTER) {
+
+        int* ks = (int*) p6;
+
+        if (p5 != NULL_POINTER) {
+
+            int* kc = (int*) p5;
+
+            if (p4 != NULL_POINTER) {
+
+                void** k = (void**) p4;
+
+                if (p0 != NULL_POINTER) {
+
+                    int* sc = (int*) p0;
+
+                    if (*sc == 11) {
+
+                        // The whole name, count, size.
+                        void* wn = NULL_POINTER;
+                        int wnc = 0;
+                        int wns = 0;
+                        // The part name, count, size.
+                        void* pn = NULL_POINTER;
+                        int pnc = 0;
+                        int pns = 0;
+                        // The part abstraction, count, size.
+                        void* pa = NULL_POINTER;
+                        int pac = 0;
+                        int pas = 0;
+                        // The part location, count, size.
+                        void* pl = NULL_POINTER;
+                        int plc = 0;
+                        int pls = 0;
+                        // The part model, count, size.
+                        void* pm = NULL_POINTER;
+                        int pmc = 0;
+                        int pms = 0;
+                        // The part constraints, count, size.
+                        void* pc = NULL_POINTER;
+                        int pcc = 0;
+                        int pcs = 0;
+                        // The position abstraction, count, size.
+                        void* poa = NULL_POINTER;
+                        int poac = 0;
+                        int poas = 0;
+                        // The position location, count, size.
+                        void* pol = NULL_POINTER;
+                        int polc = 0;
+                        int pols = 0;
+                        // The position model, count, size.
+                        void* pom = NULL_POINTER;
+                        int pomc = 0;
+                        int poms = 0;
+                        // The position constraints, count, size.
+                        void* poc = NULL_POINTER;
+                        int pocc = 0;
+                        int pocs = 0;
+
+                        // CAUTION! The parameter at index 0 is the logic/ operation name.
+                        // Input and output parameters start with index 1.
+
+                        // The loop variable.
+                        int j = 1;
+
+                        while (1) {
+
+                            if (j >= *sc) {
+
+                                break;
+                            }
+
+                            // CAUTION! The parameter at index 0 is the logic/ operation name.
+                            // Input and output parameters start with index 1.
+
+                            if (j == 1) {
+
+                                // Get whole name, count, size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &wn);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &wnc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &wns);
+
+                            } else if (j == 2) {
+
+                                // Get part name, count, size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pn);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pnc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pns);
+
+                            } else if (j == 3) {
+
+                                // Get part abstraction, count, size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pa);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pac);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pas);
+
+                            } else if (j == 4) {
+
+                                // Get part location, count, size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pl);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &plc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pls);
+
+                            } else if (j == 5) {
+
+                                // Get part model, count, size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pm);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pmc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pms);
+
+                            } else if (j == 6) {
+
+                                // Get part constraints, count, size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pc);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pcc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pcs);
+
+                            } else if (j == 7) {
+
+                                // Get position abstraction, count, size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &poa);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &poac);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &poas);
+
+                            } else if (j == 8) {
+
+                                // Get position location, count, size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pol);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &polc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pols);
+
+                            } else if (j == 9) {
+
+                                // Get position model, count, size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pom);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pomc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &poms);
+
+                            } else if (j == 10) {
+
+                                // Get position constraints, count, size.
+                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &poc);
+                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pocc);
+                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pocs);
+                            }
+
+                            j++;
+                        }
+
+                        // The whole model, count, size.
+                        void* wm = NULL_POINTER;
+                        int wmc = 0;
+                        int wms = 0;
+
+                        // Determine whole model.
+                        if (wn == NULL_POINTER) {
+
+                            // If the whole model name is null, the knowledge
+                            // root is taken as whole model.
+                            wm = *k;
+                            wmc = *kc;
+                            wms = *ks;
+
+                        } else {
+
+                            // If a whole model name exists, the whole model is
+                            // determined within the knowledge root.
+                            // Abstraction and constraints as well as the model's
+                            // position within the knowledge root are not of interest.
+                            get_compound_part_by_name(p4, p5,
+                                (void*) &wn, (void*) &wnc, (void*) &wns,
+                                (void*) &wm, (void*) &wmc, (void*) &wms,
+                                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
+                                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
+                                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
+                                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
+                                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
+                        }
+
+                        // The transient part model.
+                        void* tpm = NULL_POINTER;
+                        // The transient part model count.
+                        int tpmc = 0;
+                        // The transient part model size.
+                        int tpms = 0;
+
+                        // The transient position model.
+                        void* tpom = NULL_POINTER;
+                        // The transient position model count.
+                        int tpomc = 0;
+                        // The transient position model size.
+                        int tpoms = 0;
+
+                        // Create part model.
+                        create_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
+                            (void*) &tpom, (void*) &tpomc, (void*) &tpoms,
+                            (void*) &pn, (void*) &pnc,
+                            (void*) &pa, (void*) &pac,
+                            (void*) &pl, (void*) &plc,
+                            (void*) &pm, (void*) &pmc,
+                            (void*) &pc, (void*) &pcc,
+                            (void*) &poa, (void*) &poac,
+                            (void*) &pol, (void*) &polc,
+                            (void*) &pom, (void*) &pomc,
+                            (void*) &poc, (void*) &pocc);
+
+                        //?? If "add", then first check if name exists in whole;
+                        //?? if yes, add "_0" or "_1" or "_2" etc.
+                        //?? to name, taking first non-existing suffix!
+                        //?? If "set", then just replace the model
+                        //?? with equal name; but where to destroy it if
+                        //?? no whole keeps a reference to it anymore?
+
+                        // Add part model to compound.
+                        set_compound_part_by_name((void*) &wm, (void*) &wmc, (void*) &wms,
+                            (void*) &pn, (void*) &pnc, (void*) &pns,
+                            (void*) &pm, (void*) &pmc, (void*) &pms,
+                            (void*) &pa, (void*) &pac, (void*) &pas,
+                            (void*) &pc, (void*) &pcc, (void*) &pcs,
+                            (void*) &pom, (void*) &pomc, (void*) &poms,
+                            (void*) &poa, (void*) &poac, (void*) &poas,
+                            (void*) &poc, (void*) &pocc, (void*) &pocs);
+
+                    } else {
+
+//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_DOES_NOT_MATCH_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_DOES_NOT_MATCH_MESSAGE_COUNT);
+                    }
+
+                } else {
+
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE_COUNT);
+                }
+
+            } else {
+
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_IS_NULL_MESSAGE_COUNT);
+            }
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_COUNT_IS_NULL_MESSAGE_COUNT);
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
+    }
+}
+
+/**
+ * Handles the send signal.
+ *
+ * CYBOL Example:
+ * <!-- Operation parameters (as value of part_model tag):
+ *      logic name,signal name /-->
+ * <part name="send_signal" part_abstraction="operation" part_location="inline"
+ *      part_model="send,path.name.signal"/>
+ *
+ * @param p0 the signal parameters count
+ * @param p1 the parameters
+ * @param p2 the parameters counts
+ * @param p3 the parameters sizes
+ * @param p4 the knowledge
+ * @param p5 the knowledge count
+ * @param p6 the signal memory
+ * @param p7 the signal memory count
+ * @param p8 the signal memory size
+ */
+void handle_send_signal(const void* p0,
+    const void* p1, const void* p2, const void* p3,
+    const void* p4, const void* p5,
+    void* p6, void* p7, void* p8) {
+
+    if (p0 != NULL_POINTER) {
+
+        int* sc = (int*) p0;
+
+        if (*sc == 2) {
+
+            // The signal name, count, size.
+            void* sn = NULL_POINTER;
+            int snc = 0;
+            int sns = 0;
+
+            // CAUTION! The parameter at index 0 is the logic/ operation name.
+            // Input and output parameters start with index 1.
+
+            // The loop variable.
+            int j = 1;
+
+            while (1) {
+
+                if (j >= *sc) {
+
+                    break;
+                }
+
+                // CAUTION! The parameter at index 0 is the logic/ operation name.
+                // Input and output parameters start with index 1.
+
+                if (j == 1) {
+
+                    get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &sn);
+                    get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &snc);
+                    get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &sns);
+                }
+
+                j++;
+            }
+
+            // The part model.
+            void* pm = NULL_POINTER;
+            // The part model count.
+            int pmc = 0;
+            // The part model size.
+            int pms = 0;
+            // The part abstraction.
+            void* pa = NULL_POINTER;
+            // The part abstraction count.
+            int pac = 0;
+            // The part abstraction size.
+            int pas = 0;
+
+            // Determine signal.
+            get_compound_part_by_name(p4, p5,
+                (void*) &sn, (void*) &snc, (void*) &sns,
+                (void*) &pm, (void*) &pmc, (void*) &pms,
+                (void*) &pa, (void*) &pac, (void*) &pas,
+                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
+                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
+                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
+                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
+
+            // Add signal to signal memory.
+            set_signal(p6, p7, p8, (void*) &pm, (void*) &pmc, (void*) &NORMAL_PRIORITY, (void*) &pa, (void*) &pac);
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_SEND_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_DOES_NOT_MATCH_MESSAGE, (void*) &COULD_NOT_HANDLE_SEND_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_DOES_NOT_MATCH_MESSAGE_COUNT);
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_SEND_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_SEND_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE_COUNT);
+    }
+}
+
+/**
  * Handles the operation signal.
  *
- * @param p0 the operation signal
- * @param p1 the operation signal parameters count
- * @param p2 the state knowledge
- * @param p3 the state knowledge count
- * @param p4 the state knowledge size
- * @param p5 the logic knowledge
- * @param p6 the logic knowledge count
- * @param p7 the logic knowledge size
- * @param p8 the internals
- * @param p9 the internals count
- * @param p10 the internals size
+ * @param p0 the signal
+ * @param p1 the signal parameters count
+ * @param p2 the knowledge
+ * @param p3 the knowledge count
+ * @param p4 the knowledge size
+ * @param p5 the internals
+ * @param p6 the internals count
+ * @param p7 the internals size
+ * @param p8 the signal memory
+ * @param p9 the signal memory count
+ * @param p10 the signal memory size
  * @param p11 the shutdown flag
  */
 void handle_operation_signal(const void* p0, const void* p1,
@@ -552,310 +933,176 @@ void handle_operation_signal(const void* p0, const void* p1,
 
     if (p1 != NULL_POINTER) {
 
-        int* c = (int*) p1;
+        int* sc = (int*) p1;
 
-        log_message((void*) &INFO_LOG_LEVEL, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT);
+        // The signal parameters count must be greater than zero.
+        if (*sc >= 1) {
 
-        // Initialize elements.
-        void* p = NULL_POINTER;
-        void* pc = NULL_POINTER;
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT);
 
-        // Get elements.
-        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &p);
-        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &pc);
+            // The parameters, counts, sizes.
+            void* p = NULL_POINTER;
+            int pc = NULL_POINTER;
+            int ps = NULL_POINTER;
 
-        // Initialize parameter names.
-        // The first parameter param0 is the operation name.
-        // Following parameters param1 .. are input and output names.
+            // Get parameters.
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &p);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &pc);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_INDEX, (void*) &ps);
 
-        //?? Use a loop with a pointer array here??
-        //?? Fill this array with pointers to parameters,
-        //?? using one single help variable.
-        //?? The operation signal parameters count gives the size of the array.
+            // The logic (operation) name, count.
+            // The first parameter param0 is the operation name.
+            // Following parameters param1 .. are input and output names.
+            void* l = NULL_POINTER;
+            int lc = 0;
 
-        void* param0 = NULL_POINTER;
-        int param0c = 0;
-        void* param1 = NULL_POINTER;
-        int param1c = 0;
-        void* param2 = NULL_POINTER;
-        int param2c = 0;
-        void* param3 = NULL_POINTER;
-        int param3c = 0;
-        void* param4 = NULL_POINTER;
-        int param4c = 0;
-        void* param5 = NULL_POINTER;
-        int param5c = 0;
-        void* param6 = NULL_POINTER;
-        int param6c = 0;
-        void* param7 = NULL_POINTER;
-        int param7c = 0;
-        void* param8 = NULL_POINTER;
-        int param8c = 0;
-        void* param9 = NULL_POINTER;
-        int param9c = 0;
-        void* param10 = NULL_POINTER;
-        int param10c = 0;
-        void* param11 = NULL_POINTER;
-        int param11c = 0;
-        void* param12 = NULL_POINTER;
-        int param12c = 0;
+            // The parameter index.
+            int i = 0;
 
-        // Get parameter names.
-        int j = 0;
+            // Get logic name.
+            get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &i, (void*) &l);
+            get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &lc);
 
-        while (1) {
+            // The done flag.
+            int d = 0;
+            // The comparison result.
+            int r = 0;
 
-            if (j >= *c) {
+            fprintf(stderr, "TEST operation: %s\n", (char*) l);
+            fprintf(stderr, "TEST operation_count: %i\n", lc);
 
-                break;
-            }
+            // Add.
+            if (d == 0) {
 
-            if (j == 0) {
+                if (lc == ADD_ABSTRACTION_COUNT) {
 
-                get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param0);
-                get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param0c);
+                    compare_array_elements((void*) &l, (void*) &ADD_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &ADD_ABSTRACTION_COUNT, (void*) &r);
 
-            } else if (j == 1) {
+                    if (r == 1) {
 
-                get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param1);
-                get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param1c);
+//??                        handle_add_signal(p2, (void*) &param1, (void*) &param1c, (void*) &param2, (void*) &param2c, (void*) &param3, (void*) &param3c);
 
-            } else if (j == 2) {
-
-                get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param2);
-                get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param2c);
-
-            } else if (j == 3) {
-
-                get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param3);
-                get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param3c);
-
-            } else if (j == 4) {
-
-                get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param4);
-                get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param4c);
-
-            } else if (j == 5) {
-
-                get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param5);
-                get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param5c);
-
-            } else if (j == 6) {
-
-                get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param6);
-                get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param6c);
-
-            } else if (j == 7) {
-
-                get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param7);
-                get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param7c);
-
-            } else if (j == 8) {
-
-                get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param8);
-                get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param8c);
-
-            } else if (j == 9) {
-
-                get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param9);
-                get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param9c);
-
-            } else if (j == 10) {
-
-                get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param10);
-                get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param10c);
-
-            } else if (j == 11) {
-
-                get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param11);
-                get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param11c);
-
-            } else if (j == 12) {
-
-                get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param12);
-                get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param12c);
-            }
-
-            j++;
-        }
-
-        // The done flag.
-        int d = 0;
-        // The comparison result.
-        int r = 0;
-
-        fprintf(stderr, "TEST param0: %s\n", (char*) param0);
-        fprintf(stderr, "TEST param0c: %i\n", param0c);
-
-        // Add.
-        if (d == 0) {
-
-            if (param0c == ADD_ABSTRACTION_COUNT) {
-
-                compare_array_elements((void*) &param0, (void*) &ADD_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &ADD_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    //?? Check parameter array size to avoid accessing
-                    //?? not existing array element/ crossing array limits!
-
-                    add(p2, (void*) &param1, (void*) &param1c, (void*) &param2, (void*) &param2c, (void*) &param3, (void*) &param3c);
-
-                    d = 1;
-                }
-            }
-        }
-
-        // Create model.
-        if (d == 0) {
-
-            if (param0c == CREATE_MODEL_ABSTRACTION_COUNT) {
-
-                compare_array_elements((void*) &param0, (void*) &CREATE_MODEL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CREATE_MODEL_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    //?? Check parameter array size to avoid accessing
-                    //?? not existing array element/ crossing array limits!
-
-<!-- create operation,whole model,part name,part abstraction,part location,part model /-->
-<part name="create_domain" part_abstraction="operation" part_location="inline" part_model="create,root,domain,compound,file,/helloworld/domain.cybol"/>
-
-                    // Determine whole model.
-                    void* w = NULL_POINTER;
-                    int wc = 0;
-                    int ws = 0;
-
-                    get_compound_part_by_name(p2, p3, p4,
-                        wholenameparam, wholenamecountparam, wholenamesizeparam,
-                        (void*) &w, (void*) &wc, (void*) &ws,
-                        (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                        );
-
-                    create_model((void*) &whole, (void*) &wholes,
-                        (void*) &param2, (void*) &param2s,
-                        (void*) &param3, (void*) &param3s,
-                        (void*) &param4, (void*) &param4s,
-                        (void*) &param5, (void*) &param5s,
-                        (void*) &param6, (void*) &param6s,
-                        (void*) &param7, (void*) &param7s,
-                        (void*) &param8, (void*) &param8s,
-                        (void*) &param9, (void*) &param9s,
-                        (void*) &param10, (void*) &param10s,
-                        (void*) &param11, (void*) &param11s,
-                        (void*) &param12, (void*) &param12s);
-*/
-
-                    d = 1;
-                }
-            }
-        }
-
-        // Destroy model.
-        if (d == 0) {
-
-            if (param0c == DESTROY_MODEL_ABSTRACTION_COUNT) {
-
-                compare_array_elements((void*) &param0, (void*) &DESTROY_MODEL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_MODEL_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    d = 1;
-                }
-            }
-        }
-
-        // Send.
-        if (d == 0) {
-
-            if (param0c == SEND_ABSTRACTION_COUNT) {
-
-                compare_array_elements((void*) &param0, (void*) &SEND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &SEND_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-    /*??
-                    void* l = get_map_element_with_name(v, "language");
-
-                    if (strcmp(l, X_WINDOWS_LANGUAGE) == 0) {
-
-                        send_x_windows_output(get_array_element(v, (void*) &ONE_NUMBER), get_array_element(v, (void*) &TWO_NUMBER), p4);
-
-                    } else if (strcmp(l, TUI_LANGUAGE) == 0) {
-
+                        d = 1;
                     }
-    */
-
-                    d = 1;
                 }
             }
+
+            // Create model.
+            if (d == 0) {
+
+                if (lc == CREATE_MODEL_ABSTRACTION_COUNT) {
+
+                    compare_array_elements((void*) &l, (void*) &CREATE_MODEL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CREATE_MODEL_ABSTRACTION_COUNT, (void*) &r);
+
+                    if (r == 1) {
+
+                        handle_create_model_signal(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p4);
+
+                        d = 1;
+                    }
+                }
+            }
+
+            // Destroy model.
+            if (d == 0) {
+
+                if (lc == DESTROY_MODEL_ABSTRACTION_COUNT) {
+
+                    compare_array_elements((void*) &l, (void*) &DESTROY_MODEL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_MODEL_ABSTRACTION_COUNT, (void*) &r);
+
+                    if (r == 1) {
+
+                        d = 1;
+                    }
+                }
+            }
+
+            // Send.
+            if (d == 0) {
+
+                if (lc == SEND_ABSTRACTION_COUNT) {
+
+                    compare_array_elements((void*) &l, (void*) &SEND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &SEND_ABSTRACTION_COUNT, (void*) &r);
+
+                    if (r == 1) {
+
+                        handle_send_signal(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p8, p9, p10);
+
+                        d = 1;
+                    }
+                }
+            }
+
+            // Receive.
+            if (d == 0) {
+
+                if (lc == RECEIVE_ABSTRACTION_COUNT) {
+
+                    compare_array_elements((void*) &l, (void*) &RECEIVE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &RECEIVE_ABSTRACTION_COUNT, (void*) &r);
+
+                    if (r == 1) {
+
+                        d = 1;
+                    }
+                }
+            }
+
+            // Exit.
+            if (d == 0) {
+
+                if (lc == EXIT_ABSTRACTION_COUNT) {
+
+                    compare_array_elements((void*) &l, (void*) &EXIT_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &EXIT_ABSTRACTION_COUNT, (void*) &r);
+
+                    if (r == 1) {
+
+                        log_message((void*) &INFO_LOG_LEVEL, (void*) &SET_SHUTDOWN_FLAG_MESSAGE, (void*) &SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
+
+                        int* f = (int*) p5;
+                        *f = 1;
+
+                        d = 1;
+                    }
+                }
+            }
+
+        /*??
+                //?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
+                if (strcmp(l, "mouse_moved") == 0) {
+
+                    Model statics = statics;
+
+                    set_model_element(statics, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
+                    set_model_element(statics, "mouse.pointer_position.x_distance.unit", "pixel");
+                    set_model_element(statics, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
+                    set_model_element(statics, "mouse.pointer_position.y_distance.unit", "pixel");
+
+                } else if (strcmp(l, "mouse_clicked") == 0) {
+
+                    void* main_frame = get_statics_model_part(statics, (void*) "main_frame");
+                    struct vector* pointer_position = get_statics_model_part(statics, (void*) "mouse.pointer_position");
+
+                    reset_signal(s);
+
+                    if (pointer_position != NULL_POINTER) {
+
+        //??            mouse_clicked_action(main_frame, (void*) pointer_position->x, (void*) pointer_position->y, (void*) pointer_position->z, s->predicate);
+
+                    } else {
+
+        //??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle mouse clicked action. The pointer position is null.");
+                    }
+                }
+        */
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle operation signal. The signal parameters count is zero.");
         }
-
-        // Receive.
-        if (d == 0) {
-
-            if (param0c == RECEIVE_ABSTRACTION_COUNT) {
-
-                compare_array_elements((void*) &param0, (void*) &RECEIVE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &RECEIVE_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    d = 1;
-                }
-            }
-        }
-
-        // Exit.
-        if (d == 0) {
-
-            if (param0c == EXIT_ABSTRACTION_COUNT) {
-
-                compare_array_elements((void*) &param0, (void*) &EXIT_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &EXIT_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    log_message((void*) &INFO_LOG_LEVEL, (void*) &SET_SHUTDOWN_FLAG_MESSAGE, (void*) &SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
-
-                    int* f = (int*) p5;
-                    *f = 1;
-
-                    d = 1;
-                }
-            }
-        }
-
-    /*??
-            //?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
-            if (strcmp(l, "mouse_moved") == 0) {
-
-                Model statics = statics;
-
-                set_model_element(statics, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
-                set_model_element(statics, "mouse.pointer_position.x_distance.unit", "pixel");
-                set_model_element(statics, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
-                set_model_element(statics, "mouse.pointer_position.y_distance.unit", "pixel");
-
-            } else if (strcmp(l, "mouse_clicked") == 0) {
-
-                void* main_frame = get_statics_model_part(statics, (void*) "main_frame");
-                struct vector* pointer_position = get_statics_model_part(statics, (void*) "mouse.pointer_position");
-
-                reset_signal(s);
-
-                if (pointer_position != NULL_POINTER) {
-
-    //??            mouse_clicked_action(main_frame, (void*) pointer_position->x, (void*) pointer_position->y, (void*) pointer_position->z, s->predicate);
-
-                } else {
-
-    //??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle mouse clicked action. The pointer position is null.");
-                }
-            }
-    */
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle operation signal. The operation signal parameters count is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle operation signal. The signal parameters count is null.");
     }
 }
 

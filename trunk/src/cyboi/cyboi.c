@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.11 $ $Date: 2004-05-31 17:49:23 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-06-06 21:34:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,18 +49,24 @@
  * @param p0 the signal memory
  * @param p1 the signal memory count
  * @param p2 the signal memory size
- * @param p3 the statics
- * @param p4 the dynamics
- * @param p5 the internals
+ * @param p3 the knowledge
+ * @param p4 the knowledge count
+ * @param p5 the knowledge size
+ * @param p6 the internals
+ * @param p7 the internals count
+ * @param p8 the internals size
  */
-void wait(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void wait(void* p0, void* p1, void* p2,
+    void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8) {
 
     if (p5 != NULL_POINTER) {
 
         // The internal data and flags for legacy stuff and
         // handling of various platforms and graphical user interfaces
         // such as X-Windows, Macintosh or MS Windows.
-//??        struct internals* intern = (struct internals*) p5;
+//??        void** intern = (void**) p9;
+
         // The shutdown flag.
         int f = 0;
         // The highest priority index.
@@ -138,7 +144,7 @@ void wait(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
                         if (r == 1) {
 
-                            handle_compound_signal(p0, p1, p2, (void*) &s, (void*) &sc, (void*) &p);
+                            handle_compound_signal((void*) &s, (void*) &sc, (void*) &p, p0, p1, p2);
 
                             d = 1;
                         }
@@ -157,7 +163,9 @@ void wait(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
                         if (r == 1) {
 
-                            handle_operation_signal((void*) &s, (void*) &sc, p3, p4, p5, (void*) &f);
+                            handle_operation_signal((void*) &s, (void*) &sc,
+                                p3, p4, p5, p6, p7, p8, p0, p1, p2,
+                                (void*) &f);
 
                             d = 1;
                         }
@@ -243,93 +251,79 @@ int main(int p0, char** p1) {
         if (p0 == 2) {
 
             //
-            // State root container.
+            // Knowledge container.
             //
 
-            // The state root.
-            void* s = NULL_POINTER;
-            // The state root count.
-            int sc = 0;
-            // The state root size.
-            int ss = 0;
+            // The knowledge container.
+            void* k = NULL_POINTER;
+            // The knowledge container count.
+            int kc = 0;
+            // The knowledge container size.
+            int ks = 0;
 
-            // Create state root.
+            // Create knowledge container.
             create_compound((void*) &s, (void*) &sc, (void*) &ss);
-
-            //
-            // Logic root container.
-            //
-
-            // The logic root.
-            void* l = NULL_POINTER;
-            // The logic root count.
-            int lc = 0;
-            // The logic root size.
-            int ls = 0;
-
-            // Create logic root.
-            create_compound((void*) &l, (void*) &lc, (void*) &ls);
 
             //
             // Internals container.
             //
 
-            // The internals.
+            // The internals container.
             void* i = NULL_POINTER;
-            // The internals count.
+            // The internals container count.
             int ic = 0;
-            // The internals size.
+            // The internals container size.
             int is = 0;
 
-            // Create internals.
+            // Create internals container.
 //??            create_internals((void*) &i);
 
             //
-            // Signal memory container.
+            // Signal container.
             // The initial count and size is set to 1,
             // for storing the startup signal.
             //
 
-            // The signal memory.
-            void* m = NULL_POINTER;
-            // The signal memory count.
-            int mc = 1;
-            // The signal memory size.
-            int ms = 1;
+            // The signal container.
+            void* s = NULL_POINTER;
+            // The signal container count.
+            int sc = 1;
+            // The signal container size.
+            int ss = 1;
 
-            // Create signal memory.
-            create_signal_memory((void*) &m, (void*) &mc, (void*) &ms);
+            // Create signal container.
+            create_signal_memory((void*) &s, (void*) &sc, (void*) &ss);
 
             //
             // Startup signal.
             //
 
             // The startup signal.
-            void* ss = NULL_POINTER;
+            void* sig = NULL_POINTER;
             // The startup signal count.
-            int ssc = 0;
+            int sigc = 0;
             // The startup signal size.
-            int sss = 0;
+            int sigs = 0;
             // The startup signal model.
-            void* sm = (void*) p1[1];
+            void* sigm = (void*) p1[1];
             // The startup signal model count.
-            int smc = strlen(p1[1]);
+            int sigmc = strlen(p1[1]);
             // The startup signal abstraction.
-            void* sa = (void*) OPERATION_ABSTRACTION; //?? COMPOUND_ABSTRACTION
+            void* siga = (void*) OPERATION_ABSTRACTION; //?? COMPOUND_ABSTRACTION
             // The startup signal abstraction count.
-            int sac = OPERATION_ABSTRACTION_COUNT; //?? COMPOUND_ABSTRACTION_COUNT
+            int sigac = OPERATION_ABSTRACTION_COUNT; //?? COMPOUND_ABSTRACTION_COUNT
             // The startup signal location.
-            void* sl = (void*) INLINE_LOCATION; //?? FILE_LOCATION;
+            void* sigl = (void*) INLINE_LOCATION; //?? FILE_LOCATION;
             // The startup signal location count.
-            int slc = INLINE_LOCATION_COUNT; //?? FILE_LOCATION_COUNT;
+            int siglc = INLINE_LOCATION_COUNT; //?? FILE_LOCATION_COUNT;
 
             // Create startup signal.
             // The transient signal gets initialized from a persistent
             // cybol source whose location was given at command line.
-            create_model((void*) &ss, (void*) &ssc, (void*) &sss, (void*) &sm, (void*) &smc, (void*) &sa, (void*) &sac, (void*) &sl, (void*) &slc);
+            create_model((void*) &sig, (void*) &sigc, (void*) &sigs, (void*) &sigm, (void*) &sigmc, (void*) &siga, (void*) &sigac, (void*) &sigl, (void*) &siglc);
 
             // Add startup signal to signal memory.
-            set_signal((void*) &m, (void*) &mc, (void*) &ms, (void*) &ss, (void*) &NORMAL_PRIORITY, (void*) &sa, (void*) &sac);
+            set_signal((void*) &s, (void*) &sc, (void*) &ss, (void*) &sig, (void*) &NORMAL_PRIORITY, (void*) &siga, (void*) &sigac);
 
             //
             // Waiting loop.
@@ -338,7 +332,9 @@ int main(int p0, char** p1) {
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)
             // which are stored/ found in the signal memory.
-            wait((void*) &m, (void*) &mc, (void*) &ms, (void*) &s, (void*) &l, (void*) &i);
+            wait((void*) &s, (void*) &sc, (void*) &ss,
+                (void*) &k, (void*) &kc, (void*) &ks,
+                (void*) &i, (void*) &ic, (void*) &is);
             // The loop above is left as soon as its shutdown flag is set.
 
             //
@@ -346,19 +342,16 @@ int main(int p0, char** p1) {
             //
 
             // Destroy startup signal.
-            destroy_model((void*) &sig, (void*) &sigc, (void*) &p, (void*) &pc, (void*) &a, (void*) &ac, (void*) &l, (void*) &lc);
+            destroy_model((void*) &sig, (void*) &sigc, (void*) &sigm, (void*) &sigmc, (void*) &siga, (void*) &sigac, (void*) &sigl, (void*) &siglc);
 
-            // Destroy signal memory.
-            destroy_signal_memory((void*) &m, (void*) &mc, (void*) &ms);
+            // Destroy signal container.
+            destroy_signal_memory((void*) &s, (void*) &sc, (void*) &ss);
 
-            // Destroy internals.
+            // Destroy internals container.
 //??            destroy_internals(i);
 
-            // Destroy logic container.
-            destroy_compound((void*) &l, (void*) &lc, (void*) &ls);
-
-            // Destroy state container.
-            destroy_compound((void*) &s, (void*) &sc, (void*) &ss);
+            // Destroy knowledge container.
+            destroy_compound((void*) &k, (void*) &kc, (void*) &ks);
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 

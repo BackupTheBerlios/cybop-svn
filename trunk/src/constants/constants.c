@@ -59,7 +59,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.13 $ $Date: 2004-06-03 07:11:22 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-06-06 21:34:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

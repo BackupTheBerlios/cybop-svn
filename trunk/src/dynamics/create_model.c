@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.28 $ $Date: 2004-06-03 07:11:22 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2004-06-06 21:34:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,16 +55,16 @@
  * @param p0 the buffer array
  * @param p1 the buffer array count
  * @param p2 the buffer array size
- * @param p3 the persistent model
- * @param p4 the persistent model count
- * @param p5 the location
- * @param p6 the location count
+ * @param p3 the persistent location
+ * @param p4 the persistent location count
+ * @param p5 the persistent model
+ * @param p6 the persistent model count
  */
 void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, const void* p5, const void* p6) {
 
-    if (p6 != NULL_POINTER) {
+    if (p4 != NULL_POINTER) {
 
-        int* lc = (int*) p6;
+        int* lc = (int*) p4;
 
         // The done flag.
         int d = 0;
@@ -75,7 +75,7 @@ void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, co
 
             if (*lc == INLINE_LOCATION_COUNT) {
 
-                compare_array_elements(p5, (void*) &INLINE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &INLINE_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p3, (void*) &INLINE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &INLINE_LOCATION_COUNT, (void*) &r);
 
                 if (r == 1) {
 
@@ -90,7 +90,7 @@ void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, co
 
             if (*lc == FILE_LOCATION_COUNT) {
 
-                compare_array_elements(p5, (void*) &FILE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FILE_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p3, (void*) &FILE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FILE_LOCATION_COUNT, (void*) &r);
 
                 if (r == 1) {
 
@@ -105,7 +105,7 @@ void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, co
 
             if (*lc == FTP_LOCATION_COUNT) {
 
-                compare_array_elements(p5, (void*) &FTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FTP_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p3, (void*) &FTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FTP_LOCATION_COUNT, (void*) &r);
 
                 if (r == 1) {
 
@@ -120,7 +120,7 @@ void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, co
 
             if (*lc == HTTP_LOCATION_COUNT) {
 
-                compare_array_elements(p5, (void*) &HTTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &HTTP_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p3, (void*) &HTTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &HTTP_LOCATION_COUNT, (void*) &r);
 
                 if (r == 1) {
 
@@ -365,180 +365,120 @@ void interpret_model(void* p0, void* p1, void* p2, const void* p3, const void* p
 /**
  * Creates a model.
  *
- * @param p0 the compound
- * @param p1 the compound count
- * @param p2 the compound size
- * @param p3 the persistent name
- * @param p4 the persistent name count
- * @param p5 the persistent model
- * @param p6 the persistent model count
- * @param p7 the persistent location
- * @param p8 the persistent location count
- * @param p9 the persistent abstraction
- * @param p10 the persistent abstraction count
- * @param p11 the persistent constraints
- * @param p12 the persistent constraints count
- * @param p13 the persistent position model
- * @param p14 the persistent position model count
- * @param p15 the persistent position location
- * @param p16 the persistent position location count
- * @param p17 the persistent position abstraction
- * @param p18 the persistent position abstraction count
- * @param p19 the persistent position constraints
- * @param p20 the persistent position constraints count
+ * @param p0 the transient model
+ * @param p1 the transient model count
+ * @param p2 the transient model size
+ * @param p3 the transient position model
+ * @param p4 the transient position model count
+ * @param p5 the transient position model size
+ * @param p6 the persistent abstraction
+ * @param p7 the persistent abstraction count
+ * @param p8 the persistent location
+ * @param p9 the persistent location count
+ * @param p10 the persistent model
+ * @param p11 the persistent model count
+ * @param p12 the persistent position abstraction
+ * @param p13 the persistent position abstraction count
+ * @param p14 the persistent position location
+ * @param p15 the persistent position location count
+ * @param p16 the persistent position model
+ * @param p17 the persistent position model count
  */
-void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6, const void* p7, const void* p8,
-    const void* p9, const void* p10, const void* p11, const void* p12,
-    const void* p13, const void* p14, const void* p15, const void* p16,
-    const void* p17, const void* p18, const void* p19, const void* p20) {
+void create_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    const void* p6, const void* p7, const void* p8, const void* p9, const void* p10, const void* p11,
+    const void* p12, const void* p13, const void* p14, const void* p15, const void* p16, const void* p17) {
 
-    //
-    // Buffer.
-    //
+    if (p5 != NULL_POINTER) {
 
-    // The buffer array.
-    void* b = NULL_POINTER;
-    // The buffer array count.
-    int bc = 0;
-    // The buffer array size.
-    int bs = 0;
+        int* pos = (int*) p5;
 
-    //
-    // Part.
-    //
+        if (p4 != NULL_POINTER) {
 
-    // The part.
-    void* p = NULL_POINTER;
-    // The part count.
-    int pc = 0;
-    // The part size.
-    int ps = 0;
+            int* poc = (int*) p4;
 
-    // Create buffer array of type character to read single bytes.
-    create_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
+            if (p3 != NULL_POINTER) {
 
-    // Read persistent model from location into buffer array.
-    read_model((void*) &b, (void*) &bc, (void*) &bs, p5, p6, p7, p8);
+                void** po = (void**) p3;
 
-    // Create and initialize transient model from buffer array.
-    interpret_model((void*) &p, (void*) &pc, (void*) &ps, (void*) &b, (void*) &bc, p9, p10);
+                if (p2 != NULL_POINTER) {
 
-    // Destroy buffer array.
-    destroy_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
+                    int* ps = (int*) p2;
 
-    //
-    // Position.
-    //
+                    if (p1 != NULL_POINTER) {
 
-    // The position.
-    void* po = NULL_POINTER;
-    // The position count.
-    int poc = 0;
-    // The position size.
-    int pos = 0;
+                        int* pc = (int*) p1;
 
-    // Create buffer array of type character to read single bytes.
-    create_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
+                        if (p0 != NULL_POINTER) {
 
-    // Read persistent model from location into buffer array.
-    read_model((void*) &b, (void*) &bc, (void*) &bs, p13, p14, p15, p16);
+                            void** p = (void**) p0;
 
-    // Create and initialize transient model from buffer array.
-    interpret_model((void*) &po, (void*) &poc, (void*) &pos, (void*) &b, (void*) &bc, p17, p18);
+                            //
+                            // Buffer.
+                            //
 
-    // Destroy buffer array.
-    destroy_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
+                            // The buffer array.
+                            void* b = NULL_POINTER;
+                            // The buffer array count.
+                            int bc = 0;
+                            // The buffer array size.
+                            int bs = 0;
 
-    //
-    // Model.
-    //
+                            //
+                            // Part.
+                            //
 
-    <!-- create operation,whole model,name,abstraction,location,model /-->
-    <part name="create_domain" part_abstraction="operation" part_location="inline" part_model="create,root,domain,compound,file,/helloworld/domain.cybol"/>
-    // Set transient model as part of the whole model.
-    set_compound_part_by_name(w, wc, ws, n, nc, m, mc, a, ac, c, cc, pm, pmc, pa, pac, pc, pcc);
+                            // Create buffer array of type character to read single bytes.
+                            create_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
+                            // Read persistent model from location into buffer array.
+                            read_model((void*) &b, (void*) &bc, (void*) &bs, p8, p9, p10, p11);
+                            // Create and initialize transient model from buffer array.
+                            interpret_model((void*) &p, (void*) &pc, (void*) &ps, (void*) &b, (void*) &bc, p6, p7);
+                            // Destroy buffer array.
+                            destroy_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
+
+                            //
+                            // Position.
+                            //
+
+                            // Create buffer array of type character to read single bytes.
+                            create_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
+                            // Read persistent model from location into buffer array.
+                            read_model((void*) &b, (void*) &bc, (void*) &bs, p14, p15, p16, p17);
+                            // Create and initialize transient model from buffer array.
+                            interpret_model((void*) &po, (void*) &poc, (void*) &pos, (void*) &b, (void*) &bc, p12, p13);
+                            // Destroy buffer array.
+                            destroy_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
+
+                        } else {
+
+//??                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_IS_NULL_MESSAGE_COUNT);
+                        }
+
+                    } else {
+
+//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_COUNT_IS_NULL_MESSAGE_COUNT);
+                    }
+
+                } else {
+
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_SIZE_IS_NULL_MESSAGE_COUNT);
+                }
+
+            } else {
+
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_POSITION_MODEL_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_POSITION_MODEL_IS_NULL_MESSAGE_COUNT);
+            }
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_POSITION_MODEL_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_POSITION_MODEL_COUNT_IS_NULL_MESSAGE_COUNT);
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_POSITION_MODEL_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_POSITION_MODEL_SIZE_IS_NULL_MESSAGE_COUNT);
+    }
 }
-
-/**
- * OLD DOCUMENTATION --> delete when not needed anymore!
- *
- * Creates a transient model from a persistent model.
- *
- * Structure of part_model for create_model or destroy_model operation:
- * - operation
- * - whole model of created/destroyed part model
- * - name
- * - part_abstraction
- * - part_location
- * - part_model
- * - position_abstraction
- * - position_location
- * - position_model
- * - constraint_abstraction
- * - constraint_location
- * - constraint_model
- *
- * Not all of these parameters are needed. Those at the end
- * (for example for position and constraint) can be left out.
- * Caution:
- * It is not possible to leave out parameters in between,
- * because then the order of parameters will get mixed up!
- *
- * Example:
- * <part name="create_find_dialog"
- *     part_abstraction="operation"
- *     part_location="inline"
- *     part_model="
- *         create_model,
- *         application.gui,
- *         find_dialog,
- *         compound,
- *         file,
- *         application/find_dialog.cybol"/>
- *
- * @param p0 the whole
- * @param p1 the ??
- * @param p2 the name
- * @param p3 the name size
- * @param p4 the part abstraction
- * @param p5 the part abstraction size
- * @param p6 the part location
- * @param p7 the part location size
- * @param p8 the part model
- * @param p9 the part model size
- * @param p10 the position abstraction
- * @param p11 the position abstraction size
- * @param p12 the position location
- * @param p13 the position location size
- * @param p14 the position model
- * @param p15 the position model size
- * @param p16 the constraint abstraction
- * @param p17 the constraint abstraction size
- * @param p18 the constraint location
- * @param p19 the constraint location size
- * @param p20 the constraint model
- * @param p21 the constraint model size
- */
-/*??
-void create_model(void* p0, void* p1,
-    const void* p2, const void* p3,
-    const void* p4, const void* p5, const void* p6, const void* p7, const void* p8, const void* p9,
-    const void* p10, const void* p11, const void* p12, const void* p13, const void* p14, const void* p15,
-    const void* p16, const void* p17, const void* p18, const void* p19, const void* p20, const void* p21) {
-
-    // 5 check if name exists in whole; if yes, add "_0" or "_1" or "_2" etc.
-    //   to name, taking first non-existing suffix
-    // 6 add transient model to whole with procedure:
-    //   set_model_part_by_name(whole_model, name, name_size, ...)
-
-    // Add to whole model (for example statics).
-    set_model_part_by_name(p1, (void*) &param1, (void*) &param1s,
-        (void*) &param2, (void*) &param2s, (void*) &param3, (void*) &param3s, (void*) &param4, (void*) &param4s,
-        (void*) &param5, (void*) &param5s, (void*) &param6, (void*) &param6s, (void*) &param7, (void*) &param7s,
-        (void*) &param8, (void*) &param8s, (void*) &param9, (void*) &param9s, (void*) &param10, (void*) &param10s);
-}
-*/
 
 /* CREATE_MODEL_SOURCE */
 #endif
