@@ -59,7 +59,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.2 $ $Date: 2004-05-06 22:29:58 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-05-11 06:15:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -84,6 +84,13 @@ static char* CHARACTER_NULL_POINTER = (char*) 0;
 
 /** The double null pointer. */
 static double* DOUBLE_NULL_POINTER = (double*) 0;
+
+//
+// Special characters.
+//
+
+/** The string termination character. */
+static char STRING_TERMINATION_CHARACTER = '\0';
 
 //
 // Arrays.
