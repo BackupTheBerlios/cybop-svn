@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.42 $ $Date: 2004-11-09 07:35:48 $ $Author: rholzmueller $
+ * @version $Revision: 1.43 $ $Date: 2004-11-16 16:54:14 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,10 +39,7 @@
 #include "../accessor/signal_memory_accessor.c"
 #include "../communicator/communicator.c"
 #include "../creator/creator.c"
-#include "../cyboi/character_internals.c"
-#include "../cyboi/double_internals.c"
-#include "../cyboi/integer_internals.c"
-#include "../cyboi/pointer_internals.c"
+#include "../cyboi/internals.c"
 #include "../cyboi/signal_waiter.c"
 #include "../cyboi/config_into_internals.c"
 #include "../global/abstraction_constants.c"
@@ -51,7 +48,7 @@
 #include "../logger/logger.c"
 #include "../socket/unix_socket.c"
 #include "../test/test.c"
-//#include "../web/tcp_socket_server.c"
+#include "../web/tcp_socket_server.c"
 #include "../x_windows/x_windows_handler.c"
 
 /**
@@ -112,6 +109,8 @@ void initialize_global_variables() {
     DOUBLE_NULL_POINTER = (double*) 0;
 }
 
+
+
 /**
  * The main entry function.
  *
@@ -157,7 +156,7 @@ int main(int p0, char** p1) {
     // They have to be initialized before the command line parameter check below!
     // Otherwise, the logger may not be able to log possible error messages.
     initialize_global_variables();
-    log_message_debug( "init global varibales" );
+    log_message_debug( "jkdsjdjksd test init global varibales" );
 
     //
     // Testing.
@@ -172,125 +171,231 @@ int main(int p0, char** p1) {
     if (p1 != NULL_POINTER) {
 
         if (p0 == STARTUP_PARAMETERS_COUNT) {
-
+         
             //
-            // Knowledge container.
+            // create internal
+            // the internal ist a pointer to array with 4 colums
+            // colum 1:  pointer for the value
+            // colum 2:  type for the value
+            // colum 3:  count for the value
+            // colum 4:  size for the value
             //
-
-            // Initialize knowledge and its count and size.
-            void* k = NULL_POINTER;
-            int kc = 0;
-            int ks = 0;
-
-            // Create knowledge container.
-            create((void*) &k, (void*) &ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
-            log_message_debug( "init knowledge container" );
-
+            void* p_internal = NULL_POINTER;
+            create_internal( (void*) &p_internal );
+            
             //
-            // Internals containers.
+            // copy configuration file parameters into internals
             //
 
-            // Initialize character-, integer-, pointer- and double internals.
-            // Internals have a fixed size, so counts or sizes are not needed.
-            void* ci = NULL_POINTER;
-            void* ii = NULL_POINTER;
-            void* pi = NULL_POINTER;
-            void* di = NULL_POINTER;
+            initialize_internals( p1[CONFIG_STARTUP_PARAMETER_INDEX], 
+                                  (void*) &p_internal );
+            //log_message_debug( "init internals with parameters" );
 
-            // Create character-, integer-, pointer- and double internals.
-            create_character_internals((void*) &ci, (void*) &CHARACTER_INTERNALS_COUNT);
-            create_integer_internals((void*) &ii, (void*) &INTEGER_INTERNALS_COUNT);
-            create_pointer_internals((void*) &pi, (void*) &POINTER_INTERNALS_COUNT);
-            create_double_internals((void*) &di, (void*) &DOUBLE_INTERNALS_COUNT);
-            log_message_debug( "init internals" );
 
             //
             // Signal memory.
             //
 
             // The signal memory and its count and size.
-            void* m = NULL_POINTER;
+            void* p_m = NULL_POINTER;
+            void* pp_m = &p_m;
             int mc = 0;
+            int* p_mc = (void*) &mc;
             int ms = 0;
+            int* p_ms = (void*) &ms;
 
             // Create signal container.
-            create((void*) &m, (void*) &ms, (void*) &SIGNAL_MEMORY_ABSTRACTION,
-                (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
+            create( (void*) &p_m, (void*) &ms, 
+                    (void*) &SIGNAL_MEMORY_ABSTRACTION,
+                    (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT );
+                    
+            // set the signal container into internals
+            int internal_count = 1;
+            
+            set_internal( (void*) &p_internal, (void*) &pp_m,  
+                          (void*) &INTERNAL_TYPE_POINTER,
+                          (void*) &internal_count, 
+                          (void*) &POINTER_PRIMITIVE_SIZE,
+                          (void*) &INTERNAL_SIGNAL_MEMORY_INDEX );
+
+            set_internal( (void*) &p_internal, (void*) &p_mc,  
+                          (void*) &INTERNAL_TYPE_INTEGER,
+                          (void*) &internal_count, 
+                          (void*) &INTEGER_PRIMITIVE_SIZE,
+                          (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX );
+
+            set_internal( (void*) &p_internal, (void*) &p_ms,  
+                          (void*) &INTERNAL_TYPE_INTEGER,
+                          (void*) &internal_count, 
+                          (void*) &INTEGER_PRIMITIVE_SIZE,
+                          (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX );
+
             log_message_debug( "init signal container" );
 
             //
-            // Copy configuration file parameters into internals.
+            // Knowledge container.
             //
-            initialize_internals(p1[CONFIG_STARTUP_PARAMETER_INDEX], pi, ii);
-            log_message_debug( "init internals with parameters" );
+
+            // Initialize knowledge and its count and size.
+            void* p_k = NULL_POINTER;
+            void* pp_k = &p_k;
+            int kc = 0;
+            int* p_kc = (void*) &kc;
+            int ks = 0;
+            int* p_ks = (void*) &ks;
+
+            // Create knowledge container.
+            create( (void*) &p_k, (void*) &ks, 
+                    (void*) &COMPOUND_ABSTRACTION, 
+                    (void*) &COMPOUND_ABSTRACTION_COUNT );
+
+            // set the knowledge container into internals
+            internal_count = 1;
+            
+            set_internal( (void*) &p_internal, (void*) &pp_k,  
+                          (void*) &INTERNAL_TYPE_POINTER,
+                          (void*) &internal_count, 
+                          (void*) &POINTER_PRIMITIVE_SIZE,
+                          (void*) &INTERNAL_KNOWLEDGE_MODEL_INDEX );
+
+            set_internal( (void*) &p_internal, (void*) &p_kc,  
+                          (void*) &INTERNAL_TYPE_INTEGER,
+                          (void*) &internal_count, 
+                          (void*) &INTEGER_PRIMITIVE_SIZE,
+                          (void*) &INTERNAL_KNOWLEDGE_MODEL_COUNT_INDEX );
+
+            set_internal( (void*) &p_internal, (void*) &p_ks,  
+                          (void*) &INTERNAL_TYPE_INTEGER,
+                          (void*) &internal_count, 
+                          (void*) &INTEGER_PRIMITIVE_SIZE,
+                          (void*) &INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX );
+            log_message_debug( "init knowledge container" );
+
 
             //
             // TCP socket.
             //
 
-            // The active flag and port.
-            int active;
-            int port;
-
-            // Get active flag and port.
-            get_array_element( (void*) &ii, (void*) &INTEGER_ARRAY,
-                (void*) &INTEGER_INTERNALS_TCPSOCKET_ACTIVE_INDEX, (void*) &active );
-
-            get_array_element( (void*) &ii, (void*) &INTEGER_ARRAY,
-                (void*) &INTEGER_INTERNALS_TCPSOCKET_PORT_INDEX, (void*) &port );
-
-            // Start tcp socket server.
-            //start_tcp_socket_server((void*) &active, (void*) &port);
+//            // The active flag and port.
+//            int* p_tcp_socket_active = NULL_POINTER;
+//            int* p_tcp_socket_port = NULL_POINTER;
+//            int* p_tcp_socket_number = NULL_POINTER;
+//            
+//            int dummy_type;
+//            int dummy_count;
+//            int dummy_size;
+//
+//            // Get active flag and port.
+//            get_internal( (void*) &p_internal, (void*) &p_tcp_socket_active,
+//                          (void*) &dummy_type, 
+//                          (void*) &dummy_count, 
+//                          (void*) &dummy_size,
+//                          (void*) &INTERNAL_TCPSOCKET_ACTIVE_INDEX );
+//            
+//            get_internal( (void*) &p_internal, (void*) &p_tcp_socket_port,
+//                          (void*) &dummy_type, 
+//                          (void*) &dummy_count, 
+//                          (void*) &dummy_size,
+//                          (void*) &INTERNAL_TCPSOCKET_PORT_INDEX );
+//
+//            // Start tcp socket server.
+//            if ( *p_tcp_socket_active==1 ) {
+//
+//                int err = 0;
+//                err = create_tcp_socket( p_tcp_socket_port, 
+//                                         p_tcp_socket_number );
+//                    
+//                if ( err == 0 ) {
+//                  
+//                    log_message_debug( "create tcp socket was successful");
+//                    
+//                    //the socket number must into the internals
+//                    dummy_count = 1;
+//                    set_internal( (void*) &p_internal, (void*) &p_tcp_socket_number,
+//                                  (void*) &INTERNAL_TYPE_INTEGER, 
+//                                  (void*) &dummy_count, 
+//                                  (void*) &INTEGER_PRIMITIVE_SIZE,
+//                                  (void*) &INTERNAL_TCPSOCKET_SERVERSOCKETNUMBER_INDEX );
+//                    
+//                    set_array_element( 
+//                        (void*) &pi,
+//                        (void*) &INTEGER_ARRAY,
+//                        (void*) &INTEGER_INTERNALS_TCPSOCKET_SERVERSOCKETNUMBER_INDEX,
+//                        (void*) &tcp_socket_number );                    
+//                }
+//                else {
+//                    
+//                    log_message_debug( "create tcp socket was incorrect");
+//                    
+//                    //deactivat the active flag for tcp socket 
+//                    *p_tcp_socket_active = 0;
+//                    dummy_count = 1;
+//                    set_internal( (void*) &p_internal, (void*) &p_tcp_socket_active,
+//                                  (void*) &INTERNAL_TYPE_INTEGER, 
+//                                  (void*) &dummy_count, 
+//                                  (void*) &INTEGER_PRIMITIVE_SIZE,
+//                                  (void*) &INTERNAL_TCPSOCKET_ACTIVE_INDEX );
+//                    set_array_element( 
+//                        (void*) &pi,
+//                        (void*) &INTEGER_ARRAY,
+//                        (void*) &INTEGER_INTERNALS_TCPSOCKET_ACTIVE_INDEX,
+//                        (void*) &tcp_socket_active );                    
+//                }
+//            }
 
             //
             // UNIX socket.
             //
 
-            // Initialize unix server socket.
-            int unix_server_socket = -1;
-            //?? Set unix server socket flag so that unix server socket gets created.
-            char unix_server_socket_flag = 1;
-            set_array_element((void*) &ci, (void*) &CHARACTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FLAG_INDEX, (void*) &unix_server_socket_flag);
-
-            if (unix_server_socket_flag == 1) {
-
-                // Create unix server socket.
-                create_unix_socket((void*) &unix_server_socket, (void*) &UNIX_SERVER_SOCKET_FILENAME);
-            }
-
-    fprintf(stderr, "unix_socket: %i\n", unix_server_socket);
+//            // Initialize unix server socket.
+//            int unix_server_socket = -1;
+//            //?? Set unix server socket flag so that unix server socket gets created.
+//            char unix_server_socket_flag = 0;
+//            set_array_element((void*) &ci, (void*) &CHARACTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FLAG_INDEX, (void*) &unix_server_socket_flag);
+//
+//            if (unix_server_socket_flag == 1) {
+//
+//                // Create unix server socket.
+//                create_unix_socket((void*) &unix_server_socket, (void*) &UNIX_SERVER_SOCKET_FILENAME);
+//            }
 
             //
             // Startup model.
             //
 
             // The source channel.
-            void* sc = NULL_POINTER;
+            char* sc = NULL_POINTER;
             int scc;
             // The source abstraction.
-            void* sa = NULL_POINTER;
+            char* sa = NULL_POINTER;
             int sac = 0;
             // The source model.
-            void* sm = NULL_POINTER;
+            char* sm = NULL_POINTER;
             int smc;
 
+            int internal_type = 0;
+            int internal_size = 0;
+            
             // Get source channel.
-            get_array_element((void*) &pi, (void*) &POINTER_ARRAY,
-                (void*) &POINTER_INTERNALS_START_CHANNEL_INDEX, (void*) &sc);
-            get_array_element((void*) &ii, (void*) &INTEGER_ARRAY,
-                (void*) &INTEGER_INTERNALS_START_CHANNEL_COUNT_INDEX, (void*) &scc);
+            get_internal( (void*) &p_internal, (void*) &sc,
+                          (void*) &internal_type, 
+                          (void*) &scc, 
+                          (void*) &internal_size,
+                          (void*) &INTERNAL_START_CHANNEL_INDEX );
 
             // Get source abstraction.
-            get_array_element((void*) &pi, (void*) &POINTER_ARRAY,
-                (void*) &POINTER_INTERNALS_START_ABSTRACTION_INDEX, (void*) &sa);
-            get_array_element((void*) &ii, (void*) &INTEGER_ARRAY,
-                (void*) &INTEGER_INTERNALS_START_ABSTRACTION_COUNT_INDEX, (void*) &sac);
+            get_internal( (void*) &p_internal, (void*) &sa,
+                          (void*) &internal_type, 
+                          (void*) &sac, 
+                          (void*) &internal_size,
+                          (void*) &INTERNAL_START_ABSTRACTION_INDEX );
 
             // Get source model.
-            get_array_element((void*) &pi, (void*) &POINTER_ARRAY,
-                (void*) &POINTER_INTERNALS_START_MODEL_INDEX, (void*) &sm);
-            get_array_element((void*) &ii, (void*) &INTEGER_ARRAY,
-                (void*) &INTEGER_INTERNALS_START_MODEL_COUNT_INDEX, (void*) &smc);
+            get_internal( (void*) &p_internal, (void*) &sm,
+                          (void*) &internal_type, 
+                          (void*) &smc, 
+                          (void*) &internal_size,
+                          (void*) &INTERNAL_START_MODEL_INDEX );
 
             // The destination abstraction.
             void* da = NULL_POINTER;
@@ -310,12 +415,14 @@ int main(int p0, char** p1) {
                 (void*) &sa, (void*) &sac,
                 (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
                 (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+            log_message_debug( "create destination abstraction" );
 
             // Create destination model.
             create_model((void*) &dm, (void*) &dmc, (void*) &dms,
                 (void*) &sm, (void*) &smc,
                 (void*) &sa, (void*) &sac,
                 (void*) &sc, (void*) &scc);
+            log_message_debug( "create destination model" );
 
             // CAUTION! Do not create destination details!
             // It is not needed for the startup signal.
@@ -324,10 +431,30 @@ int main(int p0, char** p1) {
             // Startup signal.
             //
 
+            get_internal( (void*) &p_internal, (void*) &pp_m,  
+                          (void*) &internal_type,
+                          (void*) &internal_count, 
+                          (void*) &internal_size,
+                          (void*) &INTERNAL_SIGNAL_MEMORY_INDEX );
+            get_internal( (void*) &p_internal, (void*) &p_mc,  
+                          (void*) &internal_type,
+                          (void*) &internal_count, 
+                          (void*) &internal_size,
+                          (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX );
+            get_internal( (void*) &p_internal, (void*) &p_ms,  
+                          (void*) &internal_type,
+                          (void*) &internal_count, 
+                          (void*) &internal_size,
+                          (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX );
+
+
             // Add startup signal to signal memory.
-            set_signal((void*) &m, (void*) &mc, (void*) &ms,
-                (void*) &da, (void*) &dac, (void*) &dm, (void*) &dmc,
-                (void*) &dd, (void*) &ddc, (void*) &NORMAL_PRIORITY);
+            set_signal( (void*) pp_m, (void*) p_mc, (void*) p_ms,   //memory
+                        (void*) &da, (void*) &dac,              //dest abtsraction
+                        (void*) &dm, (void*) &dmc,              //dest model
+                        (void*) &dd, (void*) &ddc,              //dest details
+                        (void*) &NORMAL_PRIORITY);
+            log_message_debug( "set start signals" );
 
             //
             // Waiting loop.
@@ -337,9 +464,7 @@ int main(int p0, char** p1) {
             // can be entered, waiting for signals (events/ interrupts)
             // which are stored/ found in the signal memory.
             // The loop is left as soon as its shutdown flag is set.
-            wait((void*) &m, (void*) &mc, (void*) &ms,
-                (void*) &k, (void*) &kc, (void*) &ks,
-                (void*) &ci, (void*) &ii, (void*) &pi, (void*) &di);
+            wait( (void*) &p_internal );
 
             //
             // Destruction.
@@ -360,23 +485,21 @@ int main(int p0, char** p1) {
                 (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
 */
 
-            // Destroy unix server socket.
-            if (unix_server_socket_flag == 1) {
-
-                destroy_unix_socket((void*) &unix_server_socket, (void*) &UNIX_SERVER_SOCKET_FILENAME);
-            }
-
-            // Destroy signal memory.
-            destroy((void*) &m, (void*) &ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
-
-            // Destroy character-, integer-, pointer- and double internals.
-            destroy_character_internals((void*) &ci, (void*) &CHARACTER_INTERNALS_COUNT);
-            destroy_integer_internals((void*) &ii, (void*) &INTEGER_INTERNALS_COUNT);
-            destroy_pointer_internals((void*) &pi, (void*) &POINTER_INTERNALS_COUNT);
-            destroy_double_internals((void*) &di, (void*) &DOUBLE_INTERNALS_COUNT);
+//            // Destroy unix server socket.
+//            if (unix_server_socket_flag == 1) {
+//
+//                destroy_unix_socket((void*) &unix_server_socket, (void*) &UNIX_SERVER_SOCKET_FILENAME);
+//            }
 
             // Destroy knowledge.
-            destroy((void*) &k, (void*) &ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
+            destroy((void*) &p_k, (void*) &ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
+
+
+            // Destroy signal memory.
+            destroy((void*) &p_m, (void*) &ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
+
+            // destroy the internals
+            destroy_internal( (void*) &p_internal );
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 

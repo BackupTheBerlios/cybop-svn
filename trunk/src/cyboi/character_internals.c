@@ -32,7 +32,7 @@
  * - Macintosh
  * - MS Windows
  *
- * @version $Revision: 1.1 $ $Date: 2004-07-04 09:49:29 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-11-16 16:49:00 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,51 +43,37 @@
 #include "../global/constant.c"
 #include "../logger/logger.c"
 
-/**
- * Creates the character internals.
- *
- * @param p0 the transient model
- * @param p1 the transient model size
- */
-void create_character_internals(void* p0, const void* p1) {
-
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTERNALS_MESSAGE, (void*) &CREATE_INTERNALS_MESSAGE_COUNT);
-
-    // Create character internals.
-    create_array(p0, (void*) &CHARACTER_ARRAY, p1);
-
-    // Initialize elements.
-    char unix_server_socket_flag = 0;
-//??    char x_windows_flag = 0;
-//??    char macintosh_flag = 0;
-//??    char ms_windows_flag = 0;
-
-    // Set elements in ascending order.
-    set_array_element(p0, (void*) &CHARACTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FLAG_INDEX, (void*) &unix_server_socket_flag);
-}
 
 /**
- * Destroys the character internals.
+ * creates a character internal
  *
- * @param p0 the transient model
- * @param p1 the transient model size
+ * @param pp_internalvalue
+ * @param pp_value
+ * @param p_valuecount
  */
-void destroy_character_internals(void* p0, const void* p1) {
+void create_character_internal( void** pp_internalvalue, void** pp_value,
+                              int* p_valuecount ) {
 
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_INTERNALS_MESSAGE, (void*) &DESTROY_INTERNALS_MESSAGE_COUNT);
+    create_array( pp_internalvalue, (void*) &CHARACTER_ARRAY, p_valuecount );
+    
+    int array_index = 0;
+    set_array_elements( pp_internalvalue, (void*) &CHARACTER_ARRAY, 
+                        (void*) &array_index, 
+                        pp_value, p_valuecount );
+}                                 
 
-    // Initialize elements.
-    int unix_server_socket_flag = 0;
+/**
+ * destroy a character internal
+ *
+ * @param pp_internalvalue
+ * @param p_valuecount
+ */
+void destroy_character_internal( void** pp_internalvalue, 
+                              int* p_valuecount ) {
 
-    // Get elements.
-    get_array_element(p0, (void*) &CHARACTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FLAG_INDEX, (void*) &unix_server_socket_flag);
+    destroy_array( pp_internalvalue, (void*) &CHARACTER_ARRAY, p_valuecount );
+}                                 
 
-    // Remove elements in descending order.
-    remove_array_element(p0, (void*) &CHARACTER_ARRAY, p1, (void*) &UNIX_SERVER_SOCKET_FLAG_INDEX);
-
-    // Destroy character internals.
-    destroy_array(p0, (void*) &CHARACTER_ARRAY, p1);
-}
 
 /* CHARACTER_INTERNALS_SOURCE */
 #endif

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-11-16 16:52:04 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,10 @@
 
 #include "../accessor/signal_memory_accessor.c"
 #include "../array/array.c"
+#include "../cyboi/internals.c"
 #include "../cyboi/signal_handler.c"
 #include "../global/abstraction_constants.c"
+#include "../global/constant.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
 #include "../socket/unix_socket.c"
@@ -62,10 +64,10 @@
  * @param p4 the integer internals
  * @param p5 the pointer internals
  * @param p6 the double internals
+ * @param pp_thread_parameter the only one thread parameter (typ void**)
  */
-void activate_internals(void* p0, void* p1, void* p2,
-    void* p3, void* p4, void* p5, void* p6) {
-
+void activate_internals( void** pp_internals ) {
+/*
     //
     // Unix socket.
     //
@@ -82,6 +84,22 @@ void activate_internals(void* p0, void* p1, void* p2,
 
         receive_unix_socket((void*) &unix_server_socket);
     }
+
+    //
+    // tcp socket
+    //
+
+    int tcp_socket_active = 0;
+
+    get_array_element( p4, (void*) &INTEGER_ARRAY, 
+                      (void*) &INTEGER_INTERNALS_TCPSOCKET_ACTIVE_INDEX, 
+                      (void*) &tcp_socket_active);
+
+    if ( tcp_socket_active == 1) {
+
+       // activate_tcp_socket( pp_thread_parameter );
+    }
+*/
 
 /*??
     //
@@ -118,13 +136,56 @@ void activate_internals(void* p0, void* p1, void* p2,
  * @param p8 the pointer internals
  * @param p9 the double internals
  */
-void wait(void* p0, void* p1, void* p2,
-    void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8, void* p9) {
+void wait( void** pp_internal ) {
 
-    // Activate internal mechanisms for signal reception.
-    activate_internals(p0, p1, p2, p6, p7, p8, p9);
+    // activate internal mechanisms for signal reception
+    activate_internals( pp_internal );
+    
+    int internal_type = 0;
+    int internal_count = 0;
+    int internal_size = 0;
+    
+    //separated paramter from the internals
+    void** pp_sig_memory = NULL_POINTER;
+    void* p_sig_memory_count = NULL_POINTER;
+    void* p_sig_memory_size = NULL_POINTER;
 
+    void** pp_knowledge = NULL_POINTER;
+    void* p_knowledge_count = NULL_POINTER;
+    void* p_knowledge_size = NULL_POINTER;
+    
+    get_internal( pp_internal, (void*) &pp_sig_memory,  
+                  (void*) &internal_type,
+                  (void*) &internal_count, 
+                  (void*) &internal_size,
+                  (void*) &INTERNAL_SIGNAL_MEMORY_INDEX );
+    get_internal( pp_internal, (void*) &p_sig_memory_count,  
+                  (void*) &internal_type,
+                  (void*) &internal_count, 
+                  (void*) &internal_size,
+                  (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX );
+    get_internal( pp_internal, (void*) &p_sig_memory_size,  
+                  (void*) &internal_type,
+                  (void*) &internal_count, 
+                  (void*) &internal_size,
+                  (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX );
+
+    get_internal( pp_internal, (void*) &pp_knowledge,  
+              (void*) &internal_type,
+              (void*) &internal_count, 
+              (void*) &internal_size,
+              (void*) &INTERNAL_KNOWLEDGE_MODEL_INDEX );
+    get_internal( pp_internal, (void*) &p_knowledge_count,  
+              (void*) &internal_type,
+              (void*) &internal_count, 
+              (void*) &internal_size,
+              (void*) &INTERNAL_KNOWLEDGE_MODEL_COUNT_INDEX );
+    get_internal( pp_internal, (void*) &p_knowledge_size,  
+              (void*) &internal_type,
+              (void*) &internal_count, 
+              (void*) &internal_size,
+              (void*) &INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX );
+                      
     // The shutdown flag.
     int f = 0;
 
@@ -158,15 +219,22 @@ void wait(void* p0, void* p1, void* p2,
             // Leave loop if the shutdown flag was set.
             break;
         }
+        
+        sleep(2);
 
         // Get index of the top priority signal.
-        get_highest_priority_index(p0, p1, (void*) &i);
+        get_highest_priority_index( pp_sig_memory, 
+                                    p_sig_memory_count, 
+                                    (void*) &i );
 
         if (i >= 0) {
 
             // Get signal.
-            get_signal(p0, p1, (void*) &i, (void*) &a, (void*) &ac,
-                (void*) &s, (void*) &sc, (void*) &p, (void*) &pc, (void*) &pr);
+            get_signal( pp_sig_memory, p_sig_memory_count, 
+                        (void*) &i, 
+                        (void*) &a, (void*) &ac,
+                        (void*) &s, (void*) &sc, 
+                        (void*) &p, (void*) &pc, (void*) &pr );
 
     fprintf(stderr, "wait i: %i\n", i);
     fprintf(stderr, "wait a: %s\n", a);
@@ -181,7 +249,9 @@ void wait(void* p0, void* p1, void* p2,
 //??    test_knowledge_model(p3, p4);
 
             // Remove signal.
-            remove_signal(p0, p1, p2, (void*) &i);
+            remove_signal( pp_sig_memory, p_sig_memory_count, 
+                           p_sig_memory_size, 
+                           (void*) &i);
 
             // CAUTION! Do NOT destroy signal here!
             // Signals are static and stored in the logic knowledge tree
@@ -197,8 +267,10 @@ void wait(void* p0, void* p1, void* p2,
 
                 if (r == 1) {
 
-                    handle_compound_signal((void*) &s, (void*) &sc,
-                        (void*) &pr, p0, p1, p2);
+                    handle_compound_signal(
+                        (void*) &s, (void*) &sc, (void*) &pr, 
+                        (void*) pp_sig_memory, 
+                        (void*) p_sig_memory_count, (void*) p_sig_memory_size );
 
                     d = 1;
                 }
@@ -214,9 +286,13 @@ void wait(void* p0, void* p1, void* p2,
 
                 if (r == 1) {
 
-                    handle_operation_signal((void*) &s, (void*) &sc,
+                    handle_operation_signal(
+                        (void*) &s, (void*) &sc,
                         (void*) &p, (void*) &pc,
-                        p3, p4, p5, p6, p7, p8, p9, (void*) &f);
+                        (void*) pp_knowledge,
+                        (void*) p_knowledge_count, (void*) p_knowledge_size,
+                        pp_internal,
+                        (void*) &f );
 
                     d = 1;
                 }

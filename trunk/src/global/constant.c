@@ -48,12 +48,55 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.17 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-11-16 16:56:25 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CONSTANT_SOURCE
 #define CONSTANT_SOURCE
+
+//
+// internal
+//
+static const int INTERNAL_COLUMN_COUNT = 4;
+static const int INTERNAL_COLUMN_VALUE_INDEX = 0;
+static const int INTERNAL_COLUMN_VALUETYPE_INDEX = 1;
+static const int INTERNAL_COLUMN_VALUECOUNT_INDEX = 2;
+static const int INTERNAL_COLUMN_VALUESIZE_INDEX = 3;
+
+//
+// internal value type
+//
+static const int INTERNAL_TYPE_CHARACTER = 1;
+static const int INTERNAL_TYPE_INTEGER = 2;
+static const int INTERNAL_TYPE_DOUBLE = 3;
+static const int INTERNAL_TYPE_POINTER = 4;
+
+//
+// internal array index
+//
+static const int INTERNAL_ARRAY_COUNT = 12;
+
+/** The tcp socket index. */
+static const int INTERNAL_TCPSOCKET_PORT_INDEX = 0;
+static const int INTERNAL_TCPSOCKET_ACTIVE_INDEX = 1;
+static const int INTERNAL_TCPSOCKET_SERVERSOCKETNUMBER_INDEX = 2;
+
+/** The start parameter index. */
+static const int INTERNAL_START_ABSTRACTION_INDEX = 3;
+static const int INTERNAL_START_CHANNEL_INDEX = 4;
+static const int INTERNAL_START_MODEL_INDEX = 5;
+
+/** The signal memory index. */
+static const int INTERNAL_SIGNAL_MEMORY_INDEX = 6;
+static const int INTERNAL_SIGNAL_MEMORY_COUNT_INDEX = 7;
+static const int INTERNAL_SIGNAL_MEMORY_SIZE_INDEX = 8;
+
+/** The knowledge model index. */
+static const int INTERNAL_KNOWLEDGE_MODEL_INDEX = 9;
+static const int INTERNAL_KNOWLEDGE_MODEL_COUNT_INDEX = 10;
+static const int INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX = 11;
+
 
 //
 // Character internals.
@@ -70,7 +113,7 @@ static const int UNIX_SERVER_SOCKET_FLAG_INDEX = 0;
 //
 
 /** The integer internals count. */
-static const int INTEGER_INTERNALS_COUNT = 6;
+static const int INTEGER_INTERNALS_COUNT = 7;
 
 /** The unix server socket index. */
 static const int UNIX_SERVER_SOCKET_INDEX = 0;
@@ -78,11 +121,12 @@ static const int UNIX_SERVER_SOCKET_INDEX = 0;
 /** The tcp socket index. */
 static const int INTEGER_INTERNALS_TCPSOCKET_PORT_INDEX = 1;
 static const int INTEGER_INTERNALS_TCPSOCKET_ACTIVE_INDEX = 2;
+static const int INTEGER_INTERNALS_TCPSOCKET_SERVERSOCKETNUMBER_INDEX = 3;
 
 /** The start parameter index. */
-static const int INTEGER_INTERNALS_START_ABSTRACTION_COUNT_INDEX = 3;
-static const int INTEGER_INTERNALS_START_CHANNEL_COUNT_INDEX = 4;
-static const int INTEGER_INTERNALS_START_MODEL_COUNT_INDEX = 5;
+static const int INTEGER_INTERNALS_START_ABSTRACTION_COUNT_INDEX = 4;
+static const int INTEGER_INTERNALS_START_CHANNEL_COUNT_INDEX = 5;
+static const int INTEGER_INTERNALS_START_MODEL_COUNT_INDEX = 6;
 
 //
 // Pointer internals.
@@ -119,6 +163,7 @@ static const int UNIX_SERVER_SOCKET_FILENAME_COUNT = 27;
 static const char UNIX_SOCKET_FILENAME_NAME_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'o', 'c', 'k', 'e', 't', '_', 'f', 'i', 'l', 'e', 'n', 'a', 'm', 'e', '_', 'n', 'a', 'm', 'e'};
 static const char* UNIX_SOCKET_FILENAME_NAME = UNIX_SOCKET_FILENAME_NAME_ARRAY;
 static const int UNIX_SOCKET_FILENAME_NAME_COUNT = 25;
+
 
 //
 // X windows.

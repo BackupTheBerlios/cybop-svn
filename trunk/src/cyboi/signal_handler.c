@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2004-10-18 10:53:59 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-11-16 16:50:31 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -139,14 +139,11 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
  * @param p4 the knowledge
  * @param p5 the knowledge count
  * @param p6 the knowledge size
- * @param p7 the character internals
- * @param p8 the integer internals
- * @param p9 the pointer internals
- * @param p10 the double internals
+ * @param pp_internal the internals
  * @param p11 the shutdown flag
  */
 void handle_operation_signal(const void* p0, const void* p1, const void* p2, const void* p3,
-    void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
+    void* p4, void* p5, void* p6, void** pp_internal, void* p11) {
 
     log_message((void*) &INFO_LOG_LEVEL, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT);
 
@@ -200,7 +197,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            send_message(p2, p3, p4, p5, p6, p7, p8, p9, p10);
+            send_message(p2, p3, p4, p5, p6, pp_internal );
 
             d = 1;
         }
@@ -212,7 +209,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            receive_message(p2, p3, p4, p5, p6, p7, p8, p9, p10);
+            receive_message(p2, p3, p4, p5, p6, pp_internal );
 
             d = 1;
         }

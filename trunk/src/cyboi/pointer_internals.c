@@ -32,7 +32,7 @@
  * - Macintosh
  * - MS Windows
  *
- * @version $Revision: 1.1 $ $Date: 2004-07-04 09:49:29 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-11-16 16:49:00 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,33 +43,37 @@
 #include "../global/constant.c"
 #include "../logger/logger.c"
 
-/**
- * Creates the pointer internals.
- *
- * @param p0 the transient model
- * @param p1 the transient model size
- */
-void create_pointer_internals(void* p0, const void* p1) {
-
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTERNALS_MESSAGE, (void*) &CREATE_INTERNALS_MESSAGE_COUNT);
-
-    // Create pointer internals.
-    create_array(p0, (void*) &POINTER_ARRAY, p1);
-}
 
 /**
- * Destroys the pointer internals.
+ * creates a pointer internal
  *
- * @param p0 the transient model
- * @param p1 the transient model size
+ * @param pp_internalvalue
+ * @param pp_value
+ * @param p_valuecount
  */
-void destroy_pointer_internals(void* p0, const void* p1) {
+void create_pointer_internal( void** pp_internalvalue, void** pp_value,
+                              int* p_valuecount ) {
 
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_INTERNALS_MESSAGE, (void*) &DESTROY_INTERNALS_MESSAGE_COUNT);
+    create_array( pp_internalvalue, (void*) &POINTER_ARRAY, p_valuecount );
+    
+    int array_index = 0;
+    set_array_elements( pp_internalvalue, (void*) &POINTER_ARRAY, 
+                        (void*) &array_index, 
+                        (void*) pp_value, p_valuecount );
+}                                 
 
-    // Destroy pointer internals.
-    destroy_array(p0, (void*) &POINTER_ARRAY, p1);
-}
+/**
+ * destroy a pointer internal
+ *
+ * @param pp_internalvalue
+ * @param p_valuecount
+ */
+void destroy_pointer_internal( void** pp_internalvalue, 
+                               int* p_valuecount ) {
+
+    destroy_array( pp_internalvalue, (void*) &POINTER_ARRAY, p_valuecount );
+    
+}                                 
 
 /* POINTER_INTERNALS_SOURCE */
 #endif
