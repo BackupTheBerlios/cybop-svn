@@ -49,7 +49,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.7 $ $Date: 2003-03-22 09:19:53 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-04-21 23:25:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -81,6 +81,34 @@ public class Family extends System {
 
     /** The external system. */
     public static final String EXTERNAL_SYSTEM = new String("external_system");
+
+    //
+    // Default children.
+    //
+
+    /** The default available systems. */
+    public Item defaultAvailableSystems;
+
+    /** The default systems count. */
+    public Item defaultSystemsCount;
+
+    /** The default system class name. */
+    public Item defaultSystemClassName;
+
+    /** The default system configuration location. */
+    public Item defaultSystemConfigurationLocation;
+
+    /** The default system. */
+    public Item defaultSystem;
+
+    /** The default external systems count. */
+    public Item defaultExternalSystemsCount;
+
+    /** The default external system command. */
+    public Item defaultExternalSystemCommand;
+
+    /** The default external system. */
+    public Item defaultExternalSystem;
 
     //
     // Default children.
@@ -226,214 +254,252 @@ public class Family extends System {
     }
 
     //
+    // Configuration.
+    //
+
+    /**
+     * Configures this family.
+     *
+     * @exception NullPointerException if the configuration is null
+     */
+    public void configure() throws Exception, NullPointerException {
+
+        super.configure();
+
+        Configuration c = (Configuration) get(Family.CONFIGURATION);
+
+        if (c != null) {
+
+            this.defaultAvailableSystems = c.get(Family.AVAILABLE_SYSTEMS, getDefaultAvailableSystems());
+            this.defaultSystemsCount = c.get(Family.SYSTEMS_COUNT, getDefaultSystemsCount());
+            this.defaultSystemClassName = c.get(Family.SYSTEM_CLASS_NAME, getDefaultSystemClassName());
+            this.defaultSystemConfigurationLocation = c.get(Family.SYSTEM_CONFIGURATION_LOCATION, getDefaultSystemConfigurationLocation());
+//??            this.defaultSystem = c.get(Family.SYSTEM, getDefaultSystem());
+            this.defaultExternalSystemsCount = c.get(Family.EXTERNAL_SYSTEMS_COUNT, getDefaultExternalSystemsCount());
+            this.defaultExternalSystemCommand = c.get(Family.EXTERNAL_SYSTEM_COMMAND, getDefaultExternalSystemCommand());
+//??            this.defaultExternalSystem = c.get(Family.EXTERNAL_SYSTEM, getDefaultExternalSystem());
+
+        } else {
+
+            java.lang.System.out.println("WARNING: Could not configure family. The configuration is null.");
+        }
+    }
+
+    /**
+     * Deconfigures this family.
+     *
+     * @exception NullPointerException if the configuration is null
+     */
+    public void deconfigure() throws Exception, NullPointerException {
+
+        Configuration c = (Configuration) get(Family.CONFIGURATION);
+
+        if (c != null) {
+
+//??            c.set(Family.EXTERNAL_SYSTEM, this.defaultExternalSystem);
+            c.set(Family.EXTERNAL_SYSTEM_COMMAND, this.defaultExternalSystemCommand);
+            c.set(Family.EXTERNAL_SYSTEMS_COUNT, this.defaultExternalSystemsCount);
+//??            c.set(Family.SYSTEM, this.defaultSystem);
+            c.set(Family.SYSTEM_CONFIGURATION_LOCATION, this.defaultSystemConfigurationLocation);
+            c.set(Family.SYSTEM_CLASS_NAME, this.defaultSystemClassName);
+            c.set(Family.SYSTEMS_COUNT, this.defaultSystemsCount);
+            c.set(Family.AVAILABLE_SYSTEMS, this.defaultAvailableSystems);
+
+        } else {
+
+            java.lang.System.out.println("WARNING: Could not deconfigure family. The configuration is null.");
+        }
+
+        super.deconfigure();
+    }
+
+    //
     // Initialization.
     //
 
     /**
      * Initializes this family.
-     *
-     * @exception NullPointerException if the configuration is null
      */
-    public void initialize() throws Exception, NullPointerException {
+    public void initialize() throws Exception {
 
         super.initialize();
 
-        Configuration c = (Configuration) get(Family.CONFIGURATION);
+        //
+        // Available systems.
+        //
 
-        if (c != null) {
-
-            //
-            // Available systems.
-            //
-
-            set(Family.AVAILABLE_SYSTEMS, createItem(getDefaultAvailableSystems()));
+        set(Family.AVAILABLE_SYSTEMS, createItem((String) this.defaultAvailableSystems));
 
 /*??
-            Integer count = getAvailableSystemsCount();
-            String[] s = new String[count];
-    
-            for (Integer i = 0; i < count; i++) {
-    
-                s[i] = getPreferences().get(FamilyConfiguration.AVAILABLE_SYSTEMS + "_" + Integer.toString(i), def);
-            }
-    
-            return s;
+        Integer count = getAvailableSystemsCount();
+        String[] s = new String[count];
+
+        for (Integer i = 0; i < count; i++) {
+
+            s[i] = getPreferences().get(FamilyConfiguration.AVAILABLE_SYSTEMS + "_" + Integer.toString(i), def);
+        }
+
+        return s;
 */
 
-            int i;
-            String s = null;
+        int i;
+        String s = null;
 
-            //
-            // Systems.
-            //
+        //
+        // Systems.
+        //
 
-            set(Family.SYSTEMS_COUNT, c.get(Family.SYSTEMS_COUNT, getDefaultSystemsCount()));
+        set(Family.SYSTEMS_COUNT, this.defaultSystemsCount);
 
-            if (get(Family.SYSTEMS_COUNT) != null) {
+        if (get(Family.SYSTEMS_COUNT) != null) {
 
-                String cl = null;
-                String conf = null;
+            String cl = null;
+            String conf = null;
 
-                // Retrieve the number of systems and create them one by one.
-                for (i = 0; i < ((Integer) get(Family.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+            // Retrieve the number of systems and create them one by one.
+            for (i = 0; i < ((Integer) get(Family.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
 
-                    s = new String(Family.SYSTEM + "_" + java.lang.String.valueOf(i));
-                    cl = new String(Family.SYSTEM_CLASS_NAME + "_" + java.lang.String.valueOf(i));
-                    conf = new String(Family.SYSTEM_CONFIGURATION_LOCATION + "_" + java.lang.String.valueOf(i));
+                s = new String(Family.SYSTEM + "_" + java.lang.String.valueOf(i));
+                cl = new String(Family.SYSTEM_CLASS_NAME + "_" + java.lang.String.valueOf(i));
+                conf = new String(Family.SYSTEM_CONFIGURATION_LOCATION + "_" + java.lang.String.valueOf(i));
 
-                    set(s, createComponent(c.get(cl, getDefaultSystemClassName())));
-                }
-
-            } else {
-    
-                throw new NullPointerException("Could not initialize system. The systems count is null.");
-            }
-
-            //
-            // External systems.
-            //
-
-            set(Family.EXTERNAL_SYSTEMS_COUNT, c.get(Family.EXTERNAL_SYSTEMS_COUNT, getDefaultExternalSystemsCount()));
-
-            if (get(Family.EXTERNAL_SYSTEMS_COUNT) != null) {
-
-                String cmd = null;
-
-                // Retrieve the number of external systems and create them one by one.
-                for (i = 0; i < ((Integer) get(Family.EXTERNAL_SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
-
-                    s = new String(Family.EXTERNAL_SYSTEM + "_" + java.lang.String.valueOf(i));
-                    cmd = new String(Family.EXTERNAL_SYSTEM_COMMAND + "_" + java.lang.String.valueOf(i));
-
-                    set(s, createComponent(c.get(cmd, getDefaultExternalSystemCommand())));
-                }
-
-            } else {
-    
-                throw new NullPointerException("Could not initialize system. The external systems count is null.");
+//??                set(s, createComponent(c.get(cl, getDefaultSystemClassName())));
             }
 
         } else {
 
-            throw new NullPointerException("Could not initialize system. The configuration is null.");
+            throw new NullPointerException("Could not initialize system. The systems count is null.");
+        }
+
+        //
+        // External systems.
+        //
+
+        set(Family.EXTERNAL_SYSTEMS_COUNT, this.defaultExternalSystemsCount);
+
+        if (get(Family.EXTERNAL_SYSTEMS_COUNT) != null) {
+
+            String cmd = null;
+
+            // Retrieve the number of external systems and create them one by one.
+            for (i = 0; i < ((Integer) get(Family.EXTERNAL_SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+
+                s = new String(Family.EXTERNAL_SYSTEM + "_" + java.lang.String.valueOf(i));
+                cmd = new String(Family.EXTERNAL_SYSTEM_COMMAND + "_" + java.lang.String.valueOf(i));
+
+//??                set(s, createComponent(c.get(cmd, getDefaultExternalSystemCommand())));
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not initialize system. The external systems count is null.");
         }
     }
 
     /**
      * Finalizes this family.
-     *
-     * @exception NullPointerException if the configuration is null
      */
-    public void finalizz() throws Exception, NullPointerException {
+    public void finalizz() throws Exception {
 
-        Configuration c = (Configuration) get(Family.CONFIGURATION);
+        int i;
+        String s;
 
-        if (c != null) {
+        //
+        // External systems.
+        //
 
-            int i;
-            String s;
+        if (get(Family.EXTERNAL_SYSTEMS_COUNT) != null) {
 
-            //
-            // External systems.
-            //
+            String cmd = null;
+            ExternalSystem externalSystem = null;
 
-            if (get(Family.EXTERNAL_SYSTEMS_COUNT) != null) {
+            for (i = 0; i < ((Integer) get(Family.EXTERNAL_SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
 
-                String cmd = null;
-                ExternalSystem externalSystem = null;
+                s = new String(Family.EXTERNAL_SYSTEM + "_" + java.lang.String.valueOf(i));
+                cmd = new String(Family.EXTERNAL_SYSTEM_COMMAND + "_" + java.lang.String.valueOf(i));
 
-                for (i = 0; i < ((Integer) get(Family.EXTERNAL_SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+//??                c.set(cmd, (String) get(cmd));
 
-                    s = new String(Family.EXTERNAL_SYSTEM + "_" + java.lang.String.valueOf(i));
-                    cmd = new String(Family.EXTERNAL_SYSTEM_COMMAND + "_" + java.lang.String.valueOf(i));
-
-                    c.set(cmd, (String) get(cmd));
-
-                    externalSystem = (ExternalSystem) get(s);
-                    remove(s);
-                    destroyComponent(externalSystem);
-                }
-
-                Integer externalSystemsCount = (Integer) get(Family.EXTERNAL_SYSTEMS_COUNT);
-                c.set(Family.EXTERNAL_SYSTEMS_COUNT, externalSystemsCount);
-                remove(Family.EXTERNAL_SYSTEMS_COUNT);
-                destroyItem(externalSystemsCount);
-
-            } else {
-    
-                throw new NullPointerException("Could not finalize system. The external systems count is null.");
+                externalSystem = (ExternalSystem) get(s);
+                remove(s);
+                destroyComponent(externalSystem);
             }
 
-            //
-            // Systems.
-            //
+            Integer externalSystemsCount = (Integer) get(Family.EXTERNAL_SYSTEMS_COUNT);
+//??            c.set(Family.EXTERNAL_SYSTEMS_COUNT, externalSystemsCount);
+            remove(Family.EXTERNAL_SYSTEMS_COUNT);
+            destroyItem(externalSystemsCount);
 
-            if (get(Family.SYSTEMS_COUNT) != null) {
+        } else {
 
-                String cl = null;
-                String conf = null; 
-                System system = null;
+            throw new NullPointerException("Could not finalize system. The external systems count is null.");
+        }
 
-                for (i = 0; i < ((Integer) get(Family.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+        //
+        // Systems.
+        //
 
-                    s = new String(Family.SYSTEM + "_" + java.lang.String.valueOf(i));
-                    cl = new String(Family.SYSTEM_CLASS_NAME + "_" + java.lang.String.valueOf(i));
-                    conf = new String(Family.SYSTEM_CONFIGURATION_LOCATION + "_" + java.lang.String.valueOf(i));
+        if (get(Family.SYSTEMS_COUNT) != null) {
 
-                    c.set(cl, (String) get(cl));
-                    c.set(conf, (String) get(conf));
+            String cl = null;
+            String conf = null; 
+            System system = null;
 
-                    system = (System) get(s);
-                    remove(s);
-                    destroyComponent(system);
-                }
+            for (i = 0; i < ((Integer) get(Family.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
 
-                Integer systemsCount = (Integer) get(Family.SYSTEMS_COUNT);
-                c.set(Family.SYSTEMS_COUNT, systemsCount);
-                remove(Family.SYSTEMS_COUNT);
-                destroyItem(systemsCount);
+                s = new String(Family.SYSTEM + "_" + java.lang.String.valueOf(i));
+                cl = new String(Family.SYSTEM_CLASS_NAME + "_" + java.lang.String.valueOf(i));
+                conf = new String(Family.SYSTEM_CONFIGURATION_LOCATION + "_" + java.lang.String.valueOf(i));
 
-            } else {
-    
-                throw new NullPointerException("Could not finalize system. The systems count is null.");
+//??                c.set(cl, (String) get(cl));
+//??                c.set(conf, (String) get(conf));
+
+                system = (System) get(s);
+                remove(s);
+                destroyComponent(system);
             }
 
-            //
-            // Available systems.
-            //
+            Integer systemsCount = (Integer) get(Family.SYSTEMS_COUNT);
+//??            c.set(Family.SYSTEMS_COUNT, systemsCount);
+            remove(Family.SYSTEMS_COUNT);
+            destroyItem(systemsCount);
 
-            Item availableSystems = get(Family.AVAILABLE_SYSTEMS);
-            remove(Family.AVAILABLE_SYSTEMS);
-            destroyItem(availableSystems);
+        } else {
+
+            throw new NullPointerException("Could not finalize system. The systems count is null.");
+        }
+
+        //
+        // Available systems.
+        //
+
+        Item availableSystems = get(Family.AVAILABLE_SYSTEMS);
+        remove(Family.AVAILABLE_SYSTEMS);
+        destroyItem(availableSystems);
 
 /*??
-            if (n != null) {
+        if (n != null) {
 
-                Enumeration enum = n.depthFirstEnumeration();
-    
-                if (enum != null) {
-    
-                    Object o;
-                    Integer i = -1;
-    
-                    while (enum.hasMoreElements() == true) {
-    
-                        o = enum.nextElement();
-                        i = i + 1;
-    
-                        if (o != null) {
-    
-                            getPreferences().put(FamilyConfiguration.AVAILABLE_SYSTEMS + "_" + Integer.toString(i), o.toString());
-                        }
+            Enumeration enum = n.depthFirstEnumeration();
+
+            if (enum != null) {
+
+                Object o;
+                Integer i = -1;
+
+                while (enum.hasMoreElements() == true) {
+
+                    o = enum.nextElement();
+                    i = i + 1;
+
+                    if (o != null) {
+
+                        getPreferences().put(FamilyConfiguration.AVAILABLE_SYSTEMS + "_" + Integer.toString(i), o.toString());
                     }
                 }
             }
-*/
-
-        } else {
-            
-            throw new NullPointerException("Could not finalize system. The configuration is null.");
         }
+*/
 
         super.finalizz();
     }

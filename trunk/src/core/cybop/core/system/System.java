@@ -60,7 +60,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-21 23:25:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends Block implements 
@@ -265,7 +265,7 @@ public class System extends Block implements
 
         } else {
 
-            throw new NullPointerException("Could not configure system. The configuration is null.");
+            java.lang.System.out.println("WARNING: Could not configure system. The configuration is null.");
         }
     }
 
@@ -292,7 +292,7 @@ public class System extends Block implements
 
         } else {
 
-            throw new NullPointerException("Could not deconfigure system. The configuration is null.");
+            java.lang.System.out.println("WARNING: Could not deconfigure system. The configuration is null.");
         }
 
         super.deconfigure();
@@ -313,8 +313,8 @@ public class System extends Block implements
         set(System.SOCKET_ADDRESS, createComponent(this.defaultSocketAddress));
         set(System.IP6_ADDRESS, createComponent(this.defaultIp6Address));
         set(System.IP4_ADDRESS, createComponent(this.defaultIp4Address));
-        set(System.HOST_NAME, this.defaultHostName);
-        set(System.DOMAIN_NAME, this.defaultDomainName);
+        set(System.HOST_NAME, createItem(this.defaultHostName));
+        set(System.DOMAIN_NAME, createItem(this.defaultDomainName));
         set(System.USER, createComponent(this.defaultUser));
 
         //
@@ -371,17 +371,12 @@ public class System extends Block implements
                 args = new String(System.SYSTEM_ARGUMENTS + "_" + java.lang.String.valueOf(i));
                 wp = new String(System.SYSTEM_WORKPATH + "_" + java.lang.String.valueOf(i));
 
-                c.set(loc, (String) get(loc));
-                c.set(args, (String) get(args));
-                c.set(wp, (String) get(wp));
-
                 system = (System) get(s);
                 remove(s);
                 destroySystem(system);
             }
 
             Integer systemsCount = (Integer) get(System.SYSTEMS_COUNT);
-            c.set(System.SYSTEMS_COUNT, systemsCount);
             remove(System.SYSTEMS_COUNT);
             destroySystemsCount(systemsCount);
 

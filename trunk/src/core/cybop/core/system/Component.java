@@ -64,7 +64,7 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.9 $ $Date: 2003-04-20 22:21:01 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-04-21 23:25:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends Chain {
@@ -110,9 +110,49 @@ public class Component extends Chain {
     public static final String LOG_LEVEL = new String("log_level");
 
     //
+    // Default children.
+    //
+
+    /** The default globals. */
+    public Item defaultGlobals;
+
+    /** The default finalize globals flag. */
+    public Item defaultFinalizeGlobalsFlag;
+
+    /** The default configuration. */
+    public Item defaultConfiguration;
+
+    /** The default finalize configuration flag. */
+    public Item defaultFinalizeConfigurationFlag;
+
+    /** The default log record. */
+    public Item defaultLogRecord;
+
+    /** The default finalize log record flag. */
+    public Item defaultFinalizeLogRecordFlag;
+
+    /** The default signal memory. */
+    public Item defaultSignalMemory;
+
+    /** The default finalize signal memory flag. */
+    public Item defaultFinalizeSignalMemoryFlag;
+
+    /** The default signal. */
+    public Item defaultSignal;
+
+    /** The default named subsystem. */
+    public Item defaultNamedSubsystem;
+
+    /** The default logger output. */
+    public Item defaultLoggerOutput;
+
+    /** The default log level. */
+    public Item defaultLogLevel;
+
+    //
     // Log levels.
     //
-    
+
     /** The log level to turn off logging. */
     public static final Integer OFF_LOG_LEVEL = new Integer(0);
 
@@ -392,13 +432,26 @@ public class Component extends Chain {
      */
     public void configure() throws Exception, NullPointerException {
 
-        Configuration c = (Configuration) get(System.CONFIGURATION);
+        Configuration c = (Configuration) get(Component.CONFIGURATION);
 
         if (c != null) {
 
+            this.defaultGlobals = c.get(Component.GLOBALS, getDefaultGlobals());
+            this.defaultFinalizeGlobalsFlag = c.get(Component.FINALIZE_GLOBALS_FLAG, getDefaultFinalizeGlobalsFlag());
+            this.defaultConfiguration = c.get(Component.CONFIGURATION, getDefaultConfiguration());
+            this.defaultFinalizeConfigurationFlag = c.get(Component.FINALIZE_CONFIGURATION_FLAG, getDefaultFinalizeConfigurationFlag());
+            this.defaultLogRecord = c.get(Component.LOG_RECORD, getDefaultLogRecord());
+            this.defaultFinalizeLogRecordFlag = c.get(Component.FINALIZE_LOG_RECORD_FLAG, getDefaultFinalizeLogRecordFlag());
+            this.defaultSignalMemory = c.get(Component.SIGNAL_MEMORY, getDefaultSignalMemory());
+            this.defaultFinalizeSignalMemoryFlag = c.get(Component.FINALIZE_SIGNAL_MEMORY_FLAG, getDefaultFinalizeSignalMemoryFlag());
+            this.defaultSignal = c.get(Component.SIGNAL, getDefaultSignal());
+            this.defaultNamedSubsystem = c.get(Component.NAMED_SUBSYSTEM, getDefaultNamedSubsystem());
+            this.defaultLoggerOutput = c.get(Component.LOGGER_OUTPUT, getDefaultLoggerOutput());
+            this.defaultLogLevel = c.get(Component.LOG_LEVEL, getDefaultLogLevel());
+
         } else {
 
-            throw new NullPointerException("Could not configure system. The configuration is null.");
+            java.lang.System.out.println("WARNING: Could not configure component. The configuration is null.");
         }
     }
 
@@ -409,13 +462,26 @@ public class Component extends Chain {
      */
     public void deconfigure() throws Exception, NullPointerException {
 
-        Configuration c = (Configuration) get(System.CONFIGURATION);
+        Configuration c = (Configuration) get(Component.CONFIGURATION);
 
         if (c != null) {
 
+            c.set(Component.LOG_LEVEL, this.defaultLogLevel);
+            c.set(Component.LOGGER_OUTPUT, this.defaultLoggerOutput);
+            c.set(Component.NAMED_SUBSYSTEM, this.defaultNamedSubsystem);
+            c.set(Component.SIGNAL, this.defaultSignal);
+            c.set(Component.FINALIZE_SIGNAL_MEMORY_FLAG, this.defaultFinalizeSignalMemoryFlag);
+            c.set(Component.SIGNAL_MEMORY, this.defaultSignalMemory);
+            c.set(Component.FINALIZE_LOG_RECORD_FLAG, this.defaultFinalizeLogRecordFlag);
+            c.set(Component.LOG_RECORD, this.defaultLogRecord);
+            c.set(Component.FINALIZE_CONFIGURATION_FLAG, this.defaultFinalizeConfigurationFlag);
+            c.set(Component.CONFIGURATION, this.defaultConfiguration);
+            c.set(Component.FINALIZE_GLOBALS_FLAG, this.defaultFinalizeGlobalsFlag);
+            c.set(Component.GLOBALS, this.defaultGlobals);
+
         } else {
 
-            throw new NullPointerException("Could not deconfigure system. The configuration is null.");
+            java.lang.System.out.println("WARNING: Could not deconfigure component. The configuration is null.");
         }
     }
 
@@ -427,22 +493,21 @@ public class Component extends Chain {
      * Initializes this component.
      *
      * @exception NullPointerException if the globals item is null
-     * @exception NullPointerException if the configuration is null
      */
     public void initialize() throws Exception, NullPointerException {
 
         super.initialize();
 
-        set(Component.FINALIZE_GLOBALS_FLAG, getDefaultFinalizeGlobalsFlag());
-        set(Component.FINALIZE_CONFIGURATION_FLAG, getDefaultFinalizeConfigurationFlag());
-        set(Component.FINALIZE_LOG_RECORD_FLAG, getDefaultFinalizeLogRecordFlag());
-        set(Component.FINALIZE_SIGNAL_MEMORY_FLAG, getDefaultFinalizeSignalMemoryFlag());
+        set(Component.FINALIZE_GLOBALS_FLAG, this.defaultFinalizeGlobalsFlag);
+        set(Component.FINALIZE_CONFIGURATION_FLAG, this.defaultFinalizeConfigurationFlag);
+        set(Component.FINALIZE_LOG_RECORD_FLAG, this.defaultFinalizeLogRecordFlag);
+        set(Component.FINALIZE_SIGNAL_MEMORY_FLAG, this.defaultFinalizeSignalMemoryFlag);
 
         // If no globals item was set in the globalize method,
         // then create a globals item here.
         if (get(Component.GLOBALS) == null) {
 
-            set(Component.GLOBALS, createItem(getDefaultGlobals()));
+            set(Component.GLOBALS, createItem((String) this.defaultGlobals));
             set(Component.FINALIZE_GLOBALS_FLAG, new Boolean(Boolean.TRUE));
         }
 
@@ -454,7 +519,7 @@ public class Component extends Chain {
             // then create a configuration here.
             if (get(Component.CONFIGURATION) == null) {
 
-                set(Component.CONFIGURATION, createItem(getDefaultConfiguration()));
+                set(Component.CONFIGURATION, createItem((String) this.defaultConfiguration));
                 set(Component.FINALIZE_CONFIGURATION_FLAG, new Boolean(Boolean.TRUE));
                 g.set(Component.CONFIGURATION, get(Component.CONFIGURATION));
             }
@@ -463,7 +528,7 @@ public class Component extends Chain {
             // then create a log record here.
             if (get(Component.LOG_RECORD) == null) {
 
-                set(Component.LOG_RECORD, createItem(getDefaultLogRecord()));
+                set(Component.LOG_RECORD, createItem((String) this.defaultLogRecord));
                 set(Component.FINALIZE_LOG_RECORD_FLAG, new Boolean(Boolean.TRUE));
                 g.set(Component.LOG_RECORD, get(Component.LOG_RECORD));
             }
@@ -472,7 +537,7 @@ public class Component extends Chain {
             // then create a signal memory here.
             if (get(Component.SIGNAL_MEMORY) == null) {
 
-                set(Component.SIGNAL_MEMORY, createItem(getDefaultSignalMemory()));
+                set(Component.SIGNAL_MEMORY, createItem((String) this.defaultSignalMemory));
                 set(Component.FINALIZE_SIGNAL_MEMORY_FLAG, new Boolean(Boolean.TRUE));
                 g.set(Component.SIGNAL_MEMORY, get(Component.SIGNAL_MEMORY));
             }
@@ -482,24 +547,14 @@ public class Component extends Chain {
             throw new NullPointerException("Could not initialize component. The globals item is null.");
         }
 
-        Configuration c = (Configuration) get(Component.CONFIGURATION);
-
-        if (c != null) {
-
-            set(Component.NAMED_SUBSYSTEM, c.get(Component.NAMED_SUBSYSTEM, getDefaultNamedSubsystem()));
-            set(Component.LOGGER_OUTPUT, c.get(Component.LOGGER_OUTPUT, getDefaultLoggerOutput()));
-            set(Component.LOG_LEVEL, c.get(Component.LOG_LEVEL, getDefaultLogLevel()));
-
-        } else {
-
-            throw new NullPointerException("Could not initialize component. The configuration is null.");
-        }
+        set(Component.NAMED_SUBSYSTEM, this.defaultNamedSubsystem);
+        set(Component.LOGGER_OUTPUT, this.defaultLoggerOutput);
+        set(Component.LOG_LEVEL, this.defaultLogLevel);
     }
 
     /**
      * Finalizes this component.
      *
-     * @exception NullPointerException if the configuration is null
      * @exception NullPointerException if the globals item is null
      * @exception NullPointerException if the finalize log record item is null
      * @exception NullPointerException if the finalize configuration item is null
@@ -507,121 +562,109 @@ public class Component extends Chain {
      */
     public void finalizz() throws Exception, NullPointerException {
 
-        Configuration c = (Configuration) get(Component.CONFIGURATION);
+        Integer logLevel = (Integer) get(Component.LOG_LEVEL);
+        remove(Component.LOG_LEVEL);
+        destroyItem(logLevel);
 
-        if (c != null) {
+        String loggerOutput = (String) get(Component.LOGGER_OUTPUT);
+        remove(Component.LOGGER_OUTPUT);
+        destroyItem(loggerOutput);
 
-            Integer logLevel = (Integer) get(Component.LOG_LEVEL);
-            c.set(Component.LOG_LEVEL, logLevel);
-            remove(Component.LOG_LEVEL);
-            destroyItem(logLevel);
+        String namedSubsystem = (String) get(Component.NAMED_SUBSYSTEM);
+        remove(Component.NAMED_SUBSYSTEM);
+        destroyItem(namedSubsystem);
 
-            String loggerOutput = (String) get(Component.LOGGER_OUTPUT);
-            c.set(Component.LOGGER_OUTPUT, loggerOutput);
-            remove(Component.LOGGER_OUTPUT);
-            destroyItem(loggerOutput);
+        Item g = (Item) get(Component.GLOBALS);
+        
+        if (g != null) {
 
-            String namedSubsystem = (String) get(Component.NAMED_SUBSYSTEM);
-            c.set(Component.NAMED_SUBSYSTEM, namedSubsystem);
-            remove(Component.NAMED_SUBSYSTEM);
-            destroyItem(namedSubsystem);
+            // Only destroy signal memory, if it was also created
+            // in this component, which can be seen on the flag.
+            if (get(Component.FINALIZE_SIGNAL_MEMORY_FLAG) != null) {
 
-            Item g = (Item) get(Component.GLOBALS);
-            
-            if (g != null) {
+                if (((Boolean) get(Component.FINALIZE_SIGNAL_MEMORY_FLAG)).isEqualTo(Boolean.TRUE)) {
 
-                // Only destroy signal memory, if it was also created
-                // in this component, which can be seen on the flag.
-                if (get(Component.FINALIZE_SIGNAL_MEMORY_FLAG) != null) {
-
-                    if (((Boolean) get(Component.FINALIZE_SIGNAL_MEMORY_FLAG)).isEqualTo(Boolean.TRUE)) {
-
-                        Item signalMemory = get(Component.SIGNAL_MEMORY);
-                        g.remove(Component.SIGNAL_MEMORY);
-                        remove(Component.SIGNAL_MEMORY);
-                        destroyItem(signalMemory);
-                    }
-
-                } else {
-                    
-                    throw new NullPointerException("Could not finalize component. The finalize configuration item is null.");
-                }
-
-                // Only destroy log record, if it was also created
-                // in this component, which can be seen on the flag.            
-                if (get(Component.FINALIZE_LOG_RECORD_FLAG) != null) {
-
-                    if (((Boolean) get(Component.FINALIZE_LOG_RECORD_FLAG)).isEqualTo(Boolean.TRUE)) {
-
-                        Item logRecord = get(Component.LOG_RECORD);
-                        g.remove(Component.LOG_RECORD);
-                        remove(Component.LOG_RECORD);
-                        destroyItem(logRecord);
-                    }
-
-                } else {
-                    
-                    throw new NullPointerException("Could not finalize component. The finalize log record item is null.");
-                }
-
-                // Only destroy configuration, if it was also created
-                // in this component, which can be seen on the flag.            
-                if (get(Component.FINALIZE_CONFIGURATION_FLAG) != null) {
-
-                    if (((Boolean) get(Component.FINALIZE_CONFIGURATION_FLAG)).isEqualTo(Boolean.TRUE)) {
-
-                        Item configuration = get(Component.CONFIGURATION);
-                        g.remove(Component.CONFIGURATION);
-                        remove(Component.CONFIGURATION);
-                        destroyItem(configuration);
-                    }
-
-                } else {
-                    
-                    throw new NullPointerException("Could not finalize component. The finalize configuration item is null.");
+                    Item signalMemory = get(Component.SIGNAL_MEMORY);
+                    g.remove(Component.SIGNAL_MEMORY);
+                    remove(Component.SIGNAL_MEMORY);
+                    destroyItem(signalMemory);
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not finalize component. The globals item is null.");
+                throw new NullPointerException("Could not finalize component. The finalize configuration item is null.");
             }
 
-            // Only destroy globals item, if it was also created
+            // Only destroy log record, if it was also created
             // in this component, which can be seen on the flag.            
-            if (get(Component.FINALIZE_GLOBALS_FLAG) != null) {
+            if (get(Component.FINALIZE_LOG_RECORD_FLAG) != null) {
 
-                if (((Boolean) get(Component.FINALIZE_GLOBALS_FLAG)).isEqualTo(Boolean.TRUE)) {
+                if (((Boolean) get(Component.FINALIZE_LOG_RECORD_FLAG)).isEqualTo(Boolean.TRUE)) {
 
-                    Item globals = get(Component.GLOBALS);
-                    remove(Component.GLOBALS);
-                    destroyItem(globals);
+                    Item logRecord = get(Component.LOG_RECORD);
+                    g.remove(Component.LOG_RECORD);
+                    remove(Component.LOG_RECORD);
+                    destroyItem(logRecord);
                 }
 
             } else {
-
-                throw new NullPointerException("Could not finalize component. The finalize globals item is null.");
+                
+                throw new NullPointerException("Could not finalize component. The finalize log record item is null.");
             }
 
-            Item finalizeSignalMemoryFlag = get(Component.FINALIZE_SIGNAL_MEMORY_FLAG);
-            remove(Component.FINALIZE_SIGNAL_MEMORY_FLAG);
-            destroyItem(finalizeSignalMemoryFlag);
+            // Only destroy configuration, if it was also created
+            // in this component, which can be seen on the flag.            
+            if (get(Component.FINALIZE_CONFIGURATION_FLAG) != null) {
 
-            Item finalizeLogRecordFlag = get(Component.FINALIZE_LOG_RECORD_FLAG);
-            remove(Component.FINALIZE_LOG_RECORD_FLAG);
-            destroyItem(finalizeLogRecordFlag);
+                if (((Boolean) get(Component.FINALIZE_CONFIGURATION_FLAG)).isEqualTo(Boolean.TRUE)) {
 
-            Item finalizeConfigurationFlag = get(Component.FINALIZE_CONFIGURATION_FLAG);
-            remove(Component.FINALIZE_CONFIGURATION_FLAG);
-            destroyItem(finalizeConfigurationFlag);
+                    Item configuration = get(Component.CONFIGURATION);
+                    g.remove(Component.CONFIGURATION);
+                    remove(Component.CONFIGURATION);
+                    destroyItem(configuration);
+                }
 
-            Item finalizeGlobalsFlag = get(Component.FINALIZE_GLOBALS_FLAG);
-            remove(Component.FINALIZE_GLOBALS_FLAG);
-            destroyItem(finalizeGlobalsFlag);
+            } else {
+                
+                throw new NullPointerException("Could not finalize component. The finalize configuration item is null.");
+            }
+
+        } else {
+            
+            throw new NullPointerException("Could not finalize component. The globals item is null.");
+        }
+
+        // Only destroy globals item, if it was also created
+        // in this component, which can be seen on the flag.            
+        if (get(Component.FINALIZE_GLOBALS_FLAG) != null) {
+
+            if (((Boolean) get(Component.FINALIZE_GLOBALS_FLAG)).isEqualTo(Boolean.TRUE)) {
+
+                Item globals = get(Component.GLOBALS);
+                remove(Component.GLOBALS);
+                destroyItem(globals);
+            }
 
         } else {
 
-            throw new NullPointerException("Could not finalize component. The configuration is null.");
+            throw new NullPointerException("Could not finalize component. The finalize globals item is null.");
         }
+
+        Item finalizeSignalMemoryFlag = get(Component.FINALIZE_SIGNAL_MEMORY_FLAG);
+        remove(Component.FINALIZE_SIGNAL_MEMORY_FLAG);
+        destroyItem(finalizeSignalMemoryFlag);
+
+        Item finalizeLogRecordFlag = get(Component.FINALIZE_LOG_RECORD_FLAG);
+        remove(Component.FINALIZE_LOG_RECORD_FLAG);
+        destroyItem(finalizeLogRecordFlag);
+
+        Item finalizeConfigurationFlag = get(Component.FINALIZE_CONFIGURATION_FLAG);
+        remove(Component.FINALIZE_CONFIGURATION_FLAG);
+        destroyItem(finalizeConfigurationFlag);
+
+        Item finalizeGlobalsFlag = get(Component.FINALIZE_GLOBALS_FLAG);
+        remove(Component.FINALIZE_GLOBALS_FLAG);
+        destroyItem(finalizeGlobalsFlag);
 
         super.finalizz();
     }

@@ -69,7 +69,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.13 $ $Date: 2003-04-20 22:21:01 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-04-21 23:25:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family /*??implements
@@ -168,6 +168,8 @@ public class Launcher extends Family /*??implements
             if (l != null) {
 
                 l.setArguments(args);
+                //?? l.metalize or l.typify (to create globals, configuration, logRecord)
+                l.configure();
                 l.initialize();
                 l.launch();
                 // The system is now started up and complete so that a loop
@@ -176,6 +178,8 @@ public class Launcher extends Family /*??implements
                 // The loop above is left as soon as the shutdown flag is set
                 // so that the system can be shut down now.
                 l.finalizz();
+                l.deconfigure();
+                //?? l.demetalize or l.detypify (to destroy globals, configuration, logRecord)
                 l.setArguments(null);
 
                 //
@@ -453,7 +457,7 @@ public class Launcher extends Family /*??implements
         ShutdownHook sh = new ShutdownHook();
 
         if (sh != null) {
-            
+
             sh.initialize();
 
             // This is an exceptional setting.
