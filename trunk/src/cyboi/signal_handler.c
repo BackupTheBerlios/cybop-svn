@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2005-03-11 10:06:04 $ $Author: rholzmueller $
+ * @version $Revision: 1.24 $ $Date: 2005-03-18 07:40:51 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -368,6 +368,16 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
         if (r == 1) {
 
             set(p2, p3, p4, p5, p7 );
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p0, p1, (void*) SET_PROPERTY_ABSTRACTION, (void*) SET_PROPERTY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            set_property(p2, p3, p4, p5, p7 );
         }
     }
 
