@@ -61,7 +61,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.2 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-06-22 23:42:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -563,6 +563,9 @@ static const int ZIP_LANGUAGE_COUNT = 3;
 //
 // Cybol file.
 //
+
+/** The file resize factor. */
+static const int FILE_RESIZE_FACTOR = 2;
 
 /** The cybol path. */
 //?? static const char CYBOL_PATH[] = {'/home/cybop/lib/cybop/'};
