@@ -48,7 +48,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.24 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2004-04-21 10:59:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,7 +63,7 @@
 #include "../model/pointer_array_handler.c"
 
 //
-// Constants.
+// Array type constants.
 //
 
 //?? Possibly remove pointer array, if a pointer is really identical to an integer.

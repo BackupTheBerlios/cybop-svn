@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.28 $ $Date: 2004-04-07 15:47:51 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2004-04-21 10:59:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,26 +90,29 @@ static const int EIGHT_NUMBER = 8;
 static const int NINE_NUMBER = 9;
 
 //
-// Constants.
+// Part constants.
 //
 
 /** The signal memory size. */
-static const int SIGNAL_MEMORY_SIZE = 5;
+static const int SIGNAL_MEMORY_SIZE = 6;
 
 /** The array size index. */
 static const int ARRAY_SIZE_INDEX = 0;
 
+/** The array count index. */
+static const int ARRAY_COUNT_INDEX = 1;
+
 /** The signals array index. */
-static const int SIGNALS_ARRAY_INDEX = 1;
+static const int SIGNALS_ARRAY_INDEX = 2;
 
 /** The priorities array index. */
-static const int PRIORITIES_ARRAY_INDEX = 2;
+static const int PRIORITIES_ARRAY_INDEX = 3;
 
 /** The abstractions array index. */
-static const int ABSTRACTIONS_ARRAY_INDEX = 3;
+static const int ABSTRACTIONS_ARRAY_INDEX = 4;
 
 /** The abstractions sizes array index. */
-static const int ABSTRACTIONS_SIZES_ARRAY_INDEX = 4;
+static const int ABSTRACTIONS_SIZES_ARRAY_INDEX = 5;
 
 //
 // Signal memory.
@@ -124,38 +127,29 @@ void create_signal_memory(void* p0) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Create signal memory.");
 
-    // The signal memory.
+    // Create signal memory.
     create_array(p0, (void*) &SIGNAL_MEMORY_SIZE);
 
-    //?? Actually, the array size should be stored in an own integer_array.
-    //?? But since probably in the future, only the integer_array will
-    //?? stay and a pointer in the end is also an integer, the array size
-    //?? is just added at first, before the names and references arrays,
-    //?? to the pointer array which represents the map.
-    //?? Caution! INTEGER_ARRAY needs to be given as type for the array size.
-
-    // Set array size which is equal for all arrays.
+    // Initialize parts.
     int s = 0;
-    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
-
-    // The signals array.
+    int c = 0;
     void* sig = NULL_POINTER;
-    create_array((void*) &sig, (void*) &s);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ARRAY_INDEX, (void*) &sig);
-
-    // The priorities array.
     void* p = NULL_POINTER;
-    create_array((void*) &p, (void*) &s);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
-
-    // The abstractions array.
     void* a = NULL_POINTER;
-    create_array((void*) &a, (void*) &s);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_ARRAY_INDEX, (void*) &a);
-
-    // The abstractions sizes array.
     void* as = NULL_POINTER;
+
+    // Create parts.
+    create_array((void*) &sig, (void*) &s);
+    create_array((void*) &p, (void*) &s);
+    create_array((void*) &a, (void*) &s);
     create_array((void*) &as, (void*) &s);
+
+    // Set parts in ascending order.
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ARRAY_INDEX, (void*) &sig);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_ARRAY_INDEX, (void*) &a);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX, (void*) &as);
 }
 
@@ -166,9 +160,17 @@ void create_signal_memory(void* p0) {
  */
 void destroy_signal_memory(void* p0) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Destroy all signals left in signal memory.");
+    // Initialize parts.
+    int s = 0;
+    int c = 0;
+    void* sig = NULL_POINTER;
+    void* p = NULL_POINTER;
+    void* a = NULL_POINTER;
+    void* as = NULL_POINTER;
 
 /*??
+    log_message((void*) &INFO_LOG_LEVEL, "Destroy all signals left in signal memory.");
+
     int i = 0;
     get_array_count(m->signals, (void*) &i);
     i--;
@@ -195,99 +197,104 @@ void destroy_signal_memory(void* p0) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Destroy signal memory.");
 
-    // Get array size which is equal for all arrays.
-    int s = 0;
+    // Get parts.
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
-
-    // The abstractions sizes array.
-    void* as = NULL_POINTER;
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX, (void*) &as);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX);
-    destroy_array((void*) &as, (void*) &s);
-
-    // The abstractions array.
-    void* a = NULL_POINTER;
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_ARRAY_INDEX, (void*) &a);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &ABSTRACTIONS_ARRAY_INDEX);
-    destroy_array((void*) &a, (void*) &s);
-
-    // The priorities array.
-    void* p = NULL_POINTER;
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &PRIORITIES_ARRAY_INDEX);
-    destroy_array((void*) &p, (void*) &s);
-
-    // The signals array.
-    void* sig = NULL_POINTER;
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ARRAY_INDEX, (void*) &sig);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_ARRAY_INDEX, (void*) &a);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX, (void*) &as);
+
+    // Remove parts in descending order.
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &ABSTRACTIONS_ARRAY_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &PRIORITIES_ARRAY_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &SIGNALS_ARRAY_INDEX);
-    destroy_array((void*) &sig, (void*) &s);
-
-    //?? Actually, the array size should be stored in an own integer_array.
-    //?? Caution! INTEGER_ARRAY needs to be given as type for the array size.
-    //?? The remove procedure moves all pointer elements and deletes the
-    //?? last element. Since the size is the last remaining element,
-    //?? no pointer elements are found which would be wrongly casted to (int*).
-
-    // Remove array size which is equal for all arrays.
     remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &ARRAY_SIZE_INDEX);
 
-    // The signal memory.
+    // Destroy parts.
+    destroy_array((void*) &sig, (void*) &s);
+    destroy_array((void*) &p, (void*) &s);
+    destroy_array((void*) &a, (void*) &s);
+    destroy_array((void*) &as, (void*) &s);
+
+    // Destroy signal memory.
     destroy_array(p0, (void*) &SIGNAL_MEMORY_SIZE);
 }
 
 //
-// Signal memory element.
+// Signal memory element (signal).
 //
 
 /**
  * Sets the signal.
  *
  * @param p0 the signal memory
- * @param p1 the index
- * @param p2 the signal
- * @param p3 the priority
- * @param p4 the abstraction
- * @param p5 the abstraction size
- */
-void set_signal(void* p0, const void* p1, const void* p2, const void* p3, const void* p4, const void* p5) {
-
-    struct signal_memory* m = (struct signal_memory*) p0;
-
-    if (m != NULL_POINTER) {
-
-        set_array_element(m->signals, p1, p2);
-        set_array_element(m->priorities, p1, p4);
-        set_array_element(m->abstractions, p1, p3);
-        set_array_element(m->abstractions_sizes, p1, p3);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not set signal. The signal memory is null.");
-    }
-}
-
-/**
- * Adds the signal.
- *
- * @param p0 the signal memory
  * @param p1 the signal
- * @param p2 the abstraction
- * @param p3 the priority
+ * @param p2 the priority
+ * @param p3 the abstraction
+ * @param p4 the abstraction size
  */
-void add_signal(void* p0, void* p1, void* p2, void* p3) {
+void set_signal(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
 
-    struct signal_memory* m = (struct signal_memory*) p0;
+    // Initialize parts.
+    int s = 0;
+    int c = 0;
+    void* sig = NULL_POINTER;
+    void* p = NULL_POINTER;
+    void* a = NULL_POINTER;
+    void* as = NULL_POINTER;
 
-    if (m != NULL_POINTER) {
+    // Get parts.
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ARRAY_INDEX, (void*) &sig);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_ARRAY_INDEX, (void*) &a);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX, (void*) &as);
 
-        int i = 0;
-        get_array_count(m->signals, (void*) &i);
-        set_signal(p0, (void*) &i, p1, p2, p3);
+    // The index.
+    int i = c;
+
+    if (i >= 0) {
+
+        if (i >= s) {
+
+            // Double array size.
+            s = s * 2 + 1;
+
+            // Resize parts.
+            resize_array(sig, (void*) &s);
+            resize_array(p, (void*) &s);
+            resize_array(a, (void*) &s);
+            resize_array(as, (void*) &s);
+
+            // Set array size which is equal for all arrays.
+            set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
+        }
+
+        if (i < s) {
+
+            // Set element (signal).
+            set_array_element((void*) &sig, (void*) &POINTER_ARRAY, (void*) &i, p1);
+            set_array_element((void*) &p, (void*) &INTEGER_ARRAY, (void*) &i, p2);
+            set_array_element((void*) &a, (void*) &POINTER_ARRAY, (void*) &i, p3);
+            set_array_element((void*) &as, (void*) &POINTER_ARRAY, (void*) &i, p4);
+
+            // Increment element count.
+            c++;
+
+            // Set array count which is equal for all arrays.
+            set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not set signal. The index exceeds the size.");
+        }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not add signal. The signal memory is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not set signal. The index is negativ.");
     }
 }
 
@@ -297,19 +304,57 @@ void add_signal(void* p0, void* p1, void* p2, void* p3) {
  * @param p0 the signal memory
  * @param p1 the index
  */
-void remove_signal(void* p0, void* p1) {
+void remove_signal(void* p0, const void* p1) {
 
-    struct signal_memory* m = (struct signal_memory*) p0;
+    if (p1 != NULL_POINTER) {
 
-    if (m != NULL_POINTER) {
+        int* i = (int*) p1;
 
-        remove_array_element(m->signals, p1);
-        remove_array_element(m->abstractions, p1);
-        remove_array_element(m->priorities, p1);
+        if (*i >= 0) {
+
+            // Initialize parts.
+            int s = 0;
+            int c = 0;
+            void* sig = NULL_POINTER;
+            void* p = NULL_POINTER;
+            void* a = NULL_POINTER;
+            void* as = NULL_POINTER;
+
+            // Get parts.
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ARRAY_INDEX, (void*) &sig);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_ARRAY_INDEX, (void*) &a);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX, (void*) &as);
+
+            if (*i < s) {
+
+                // Remove element (signal).
+                remove_array_element((void*) &sig, (void*) &POINTER_ARRAY, (void*) &s, p1);
+                remove_array_element((void*) &p, (void*) &INTEGER_ARRAY, (void*) &s, p1);
+                remove_array_element((void*) &a, (void*) &POINTER_ARRAY, (void*) &s, p1);
+                remove_array_element((void*) &as, (void*) &POINTER_ARRAY, (void*) &s, p1);
+
+                // Decrement element count.
+                c--;
+
+                // Set array count which is equal for all arrays.
+                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove signal. The index exceeds the size.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not remove signal. The index is negativ.");
+        }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove signal. The signal memory is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove signal. The index is null.");
     }
 }
 
@@ -318,62 +363,111 @@ void remove_signal(void* p0, void* p1) {
  *
  * @param p0 the signal memory
  * @param p1 the index
- * @return the signal
+ * @param p2 the signal
+ * @param p3 the priority
+ * @param p4 the abstraction
+ * @param p5 the abstraction size
  */
-void* get_signal(void* p0, void* p1) {
+void get_signal(const void* p0, const void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    void* s = NULL_POINTER;
-    struct signal_memory* m = (struct signal_memory*) p0;
+    if (p1 != NULL_POINTER) {
 
-    if (m != NULL_POINTER) {
+        int* i = (int*) p1;
 
-        s = get_array_element(m->signals, p1);
+        if (*i >= 0) {
+
+            // Initialize parts.
+            int s = 0;
+            int c = 0;
+            void* sig = NULL_POINTER;
+            void* p = NULL_POINTER;
+            void* a = NULL_POINTER;
+            void* as = NULL_POINTER;
+
+            // Get parts.
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ARRAY_INDEX, (void*) &sig);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_ARRAY_INDEX, (void*) &a);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX, (void*) &as);
+
+            if (*i < s) {
+
+                // Get element (signal).
+                get_array_element((void*) &sig, (void*) &POINTER_ARRAY, p1, p2);
+                get_array_element((void*) &p, (void*) &INTEGER_ARRAY, p1, p3);
+                get_array_element((void*) &a, (void*) &POINTER_ARRAY, p1, p4);
+                get_array_element((void*) &as, (void*) &POINTER_ARRAY, p1, p5);
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not get signal. The index exceeds the size.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get signal. The index is negativ.");
+        }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get signal. The signal memory is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get signal. The index is null.");
     }
-
-    return s;
 }
 
 /**
  * Gets the index of the signal with highest priority.
  *
  * @param p0 the signal memory
- * @param p1 the signal index
+ * @param p1 the index
  */
-void get_highest_priority_index(void* p0, void* p1) {
+void get_highest_priority_index(const void* p0, void* p1) {
 
-    struct signal_memory* m = (struct signal_memory*) p0;
-    int* index = (int*) p1;
+    if (p1 != NULL_POINTER) {
 
-    if (m != NULL_POINTER) {
+        int* i = (int*) p1;
 
-        int i = 0;
-        int count = 0;
-        get_array_count(m->priorities, (void*) &count);
-        int* p = NULL_POINTER;
-        int h = *index;
+        // Initialize parts.
+        int c = 0;
+        void* p = NULL_POINTER;
 
-        while (i < count) {
+        // Get parts.
+        get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_COUNT_INDEX, (void*) &c);
+        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
 
-            p = (int*) get_array_element(m->priorities, (void*) &i);
+        // The loop variable.
+        int j = 0;
+        // The priority.
+        int prio = 0;
+        // The highest priority.
+        int h = prio;
 
-            // If a signal with higher priority is found,
-            // then its index is the one to be returned.
-            if (*p > h) {
+        while (1) {
 
-                *index = i;
-                h = *p;
+            if (j >= c) {
+
+                break;
             }
 
-            i++;
+            // Get element (signal) priority.
+            get_array_element((void*) &p, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &prio);
+
+            if (prio > h) {
+
+                h = prio;
+
+                // If a signal with higher priority is found,
+                // then its index is the one to be returned.
+                *i = j;
+            }
+
+            j++;
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get index of the signal with highest priority. The signal memory is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get highest priority index. The index is null.");
     }
 }
 
@@ -388,63 +482,75 @@ void get_highest_priority_index(void* p0, void* p1) {
  * @param p1 the compound signal
  * @param p2 the priority
  */
-void handle_compound_signal(void* p0, void* p1, void* p2) {
+void handle_compound_signal(const void* p0, const void* p1, const void* p2) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Handle compound signal.");
 
-    struct model* m = (struct model*) p1;
+    // Initialize parts.
+    void* pa = NULL_POINTER;
+    int pas = 0;
+    void* pl = NULL_POINTER;
+    int pls = 0;
+    void* pm = NULL_POINTER;
+    int pms = 0;
+    void* poa = NULL_POINTER;
+    int poas = 0;
+    void* pol = NULL_POINTER;
+    int pols = 0;
+    void* pom = NULL_POINTER;
+    int poms = 0;
+    void* ca = NULL_POINTER;
+    int cas = 0;
+    void* cl = NULL_POINTER;
+    int cls = 0;
+    void* cm = NULL_POINTER;
+    int cms = 0;
 
-    if (m != NULL_POINTER) {
+    get_model_part(p1, n, ns,
+        (void*) &pa, (void*) &pas, (void*) &pl, (void*) &pls, (void*) &pm, (void*) &pms,
+        (void*) &poa, (void*) &poas, (void*) &pol, (void*) &pols, (void*) &pom, (void*) &poms,
+        (void*) &ca, (void*) &cas, (void*) &cl, (void*) &cls, (void*) &cm, (void*) &cms);
 
-        int count = 0;
-        get_array_count(m->part_models, (void*) &count);
-        int p = 0;
-        int i = 0;
-        int* position = NULL_POINTER;
-        void* abstraction = NULL_POINTER;
-        void* location = NULL_POINTER;
-        void* part = NULL_POINTER;
+    int count = 0;
+    get_array_count(m->part_models, (void*) &count);
+    int p = 0;
+    int i = 0;
+    int* position = NULL_POINTER;
+    void* abstraction = NULL_POINTER;
+    void* location = NULL_POINTER;
+    void* part = NULL_POINTER;
 
-        // All positions.
-        while (p < count) {
+    // All positions.
+    while (p < count) {
 
-            // All parts.
-            while (i < count) {
+        // All parts.
+        while (i < count) {
 
-                // Determine position.
-                position = (int*) get_map_element_at_index(m->position_models, (void*) &i);
+            // Determine position.
+            position = (int*) get_map_element_at_index(m->position_models, (void*) &i);
 
-                // All parts at the current position.
-                if (*position == p) {
+            // All parts at the current position.
+            if (*position == p) {
 
-                    // Determine abstraction.
-                    abstraction = get_map_element_at_index(m->part_abstractions, (void*) &i);
+                // Determine abstraction.
+                get_model_part_at_index(m->part_abstractions, (void*) &i, abstraction, abstraction_size);
 
-                    // Determine abstraction.
-                    location = get_map_element_at_index(m->part_locations, (void*) &i);
+                // Determine part signal as dynamics model.
+                part = get_map_element_at_index(m->part_models, (void*) &i);
 
-                    // Determine part signal as dynamics model.
-                    part = get_map_element_at_index(m->part_models, (void*) &i);
+                // Add "part" signal to memory, using the "whole" signal's priority.
+                // (Each signal has a priority. A signal may consist of "part"
+                // signals. The "part" signals cannot have higher/lower priority
+                // than their original "whole" signal.)
+                set_signal(p0, signal, p2, abstraction, abstraction_size);
 
-                    // Add "part" signal to signal memory,
-                    // using the "whole" signal's priority.
-                    // (Each signal has a priority. A signal may consist of "part"
-                    // signals. The "part" signals cannot have higher/lower priority
-                    // than their original "whole" signal.)
-                    add_signal(p0, part, abstraction, p2);
-
-                    break;
-                }
-
-                i++;
+                break;
             }
 
-            p++;
+            i++;
         }
 
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not handle compound signal. The signal model is null.");
+        p++;
     }
 }
 
