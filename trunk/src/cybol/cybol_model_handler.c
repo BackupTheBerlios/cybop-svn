@@ -32,7 +32,7 @@
  *
  * It can read and write CYBOL source files.
  *
- * @version $Revision: 1.4 $ $Date: 2003-12-19 12:44:54 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-01-05 01:07:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -415,23 +415,58 @@ void write_from_model(void* p0, void* p1) {
  */
 int read_cybol_attribute(void* p0, void* p1) {
     
-    char* wort (char*) p0;
-    // Normal mode.
-    int mode = 0; 
+    int mode = 0;
+    char* s = (char*) p0;
     
-    if (strcmp(wort,"name=")==0) mode = 1;
-    if (strcmp(wort,"child_ab straction=")==0) mode = 2;
-    if (strcmp(wort,"child_model=")==0) mode = 3;
-    if (strcmp(wort,"position_abstraction=")==0) mode = 4;
-    if (strcmp(wort,"position_model=")==0) mode = 5;
-    if (strcmp(wort,"logics_abstraction=")==0) mode = 6;
-    if (strcmp(wort,"input_0=")==0) mode = 7;
-    if (strcmp(wort,"output_0=")==0) mode = 8;
-    if (strcmp(wort,"input_1=")==0) mode = 9;
-    if (strcmp(wort,"input_abstraction=")==0) mode = 10;
-    if (strcmp(wort,"input_model=")==0) mode = 11;
-    if (strcmp(wort,"logics_model=")==0) mode = 12;
+    if (strcmp(s, "name=") == 0) {
+        
+        mode = 1;
 
+    } else if (strcmp(s, "child_ab straction=") == 0) {
+        
+        mode = 2;
+    
+    } else if (strcmp(s, "child_model=") == 0) {
+        
+        mode = 3;
+    
+    } else if (strcmp(s, "position_abstraction=") == 0) {
+        
+        mode = 4;
+    
+    } else if (strcmp(s, "position_model=") == 0) {
+        
+        mode = 5;
+    
+    } else if (strcmp(s, "logics_abstraction=") == 0) {
+        
+        mode = 6;
+    
+    } else if (strcmp(s, "input_0=") == 0) {
+        
+        mode = 7;
+    
+    } else if (strcmp(s, "output_0=") == 0) {
+        
+        mode = 8;
+    
+    } else if (strcmp(s, "input_1=") == 0) {
+        
+        mode = 9;
+    
+    } else if (strcmp(s, "input_abstraction=") == 0) {
+        
+        mode = 10;
+    
+    } else if (strcmp(s, "input_model=") == 0) {
+        
+        mode = 11;
+    
+    } else if (strcmp(s, "logics_model=") == 0) {
+        
+        mode = 12;
+    }
+    
     return mode;
 }
 
@@ -443,14 +478,31 @@ int read_cybol_attribute(void* p0, void* p1) {
  */
 int read_cybol_tag(void* p0, void* p1) {
     
-    char* wort = (char*) p0;
-    int mode = 0; //normalmode
+    int mode = 0;
+    char* s = (char*) p0;
 
-    if (strcmp(wort,"<!--")==0) mode = 1; //Kommentaranfang ... innerhalb model berreich mode 4
-    if ((strcmp(wort,"!-->")==0) || (strcmp(wort,"/-->")==0)) mode = 2; //Kommentarende ...innerhalb model bereich 5
-    if ((strcmp(wort,"<model>")==0) || (strcmp(wort,"/>")==0)) mode = 3;
-    if (strcmp(wort,"<child")==0) mode =6;
-    if (strcmp(wort,"</model>")==0) mode =7;
+    if (strcmp(s, "<!--") == 0) {
+        
+        //Kommentaranfang ... innerhalb model berreich mode 4
+        mode = 1;
+    
+    } else if (strcmp(s, "/-->") == 0) {
+        
+        //Kommentarende ...innerhalb model bereich 5
+        mode = 2;
+    
+    } else if ((strcmp(s, "<model>") == 0) || (strcmp(s, "/>") == 0)) {
+        
+        mode = 3;
+    
+    } else if (strcmp(s, "<child") == 0) {
+        
+        mode = 6;
+    
+    } else if (strcmp(s, "</model>") == 0) {
+        
+        mode = 7;
+    }
 
     return mode;
 }
@@ -463,51 +515,102 @@ int read_cybol_tag(void* p0, void* p1) {
  */
 void read_cybol_file(void* p0, void* p1) {
     
-    FILE* fp = (FILE*) p0;
-    char zeichen;
-  char* wort= (char*) malloc(2000);
-	int parsemode = 0, childmode = 0,string_open=0;
-	while (zeichen != EOF)
-	{
-		zeichen = fgetc(fp);
-		//kommentare ausserhalb model bereich abfangen ... eigentlich unsinnig, aber vermeidung von interpretation auskommentierter model bereiche
-		if (parsemode == 1) {if (schluesselwort(wort) == 2) parsemode = 0; }
-		else if (parsemode<3) parsemode = schluesselwort(wort);
-		//kommentare innerhalb model breich abfangen
-		if (parsemode > 2) {
-			if ((schluesselwort(wort) == 1) && (parsemode == 3)) parsemode = 4;
-			if ((parsemode == 4) && (schluesselwort(wort) == 2)) parsemode = 5;
-			if ((parsemode == 6) && (schluesselwort(wort) == 3)) parsemode = 3;
-			if (schluesselwort(wort) > 5) parsemode = schluesselwort(wort);
+    FILE* f = (FILE*) p0;
+    //?? struct map* s = (struct map*) p1;
+    char* s = (char*) malloc(2000);
+    char c = fgetc(f);
+    int parsemode = 0;
+    int childmode = 0;
+    int string_open = 0;
 
-//**************************************der rest genauso**********************************************
+    while (c != EOF) {
 
-                        if (parsemode == 6) {
-                                if ((zeichen == 34)&& (string_open)) {
-	//++++++++++++++++++CHILD+++++++++++++++++++++++++
-if ((parsemode == 6) && (string_open)) printf(wort);  
-//	if ((parsemode == 6) && (string_open)) cout << wort << "Childsektion:  " << childmode<< "\n";
-	//++++++++++++++++++++++++++++++++++++++++++++++++
-				}
-				if ((string_open==0) && (child_schluesselwort(wort)>0)) childmode = child_schluesselwort(wort);
-			}
-
-//*******************************************************************************************
-		}
-//cout << wort << "\n";
-//cout << string_open << "   " << childmode << "   " <<parsemode;
-		if ((zeichen != EOF))
-		{
-			if ((zeichen == 10) || (zeichen == 13) || (zeichen == 32) || (zeichen == 34)) wort[0]='\0';
-			else wort[strlen(wort)] = zeichen;
-			if ((zeichen==34) && (parsemode>5)) {
-				if (string_open==1) string_open=0;
-				else string_open=1;
-			}
-		}
-	}
+        // Kommentare ausserhalb model bereich abfangen ... eigentlich unsinnig,
+        // aber vermeidung von interpretation auskommentierter model bereiche
+        if (parsemode == 1) {
         
-  free(wort);
+            if (read_cybol_tag(s) == 2) {
+                
+                parsemode = 0;
+            }
+        
+        } else if (parsemode < 3) {
+            
+            parsemode = read_cybol_tag(s);
+        }
+        
+        //kommentare innerhalb model breich abfangen
+        if (parsemode > 2) {
+
+            if ((read_cybol_tag(s) == 1) && (parsemode == 3)) {
+                
+                parsemode = 4;
+            
+            } else if ((parsemode == 4) && (read_cybol_tag(s) == 2)) {
+                
+                parsemode = 5;
+                
+            } else if ((parsemode == 6) && (read_cybol_tag(s) == 3)) {
+                
+                parsemode = 3;
+                
+            } else if (read_cybol_tag(s) > 5) {
+                
+                parsemode = read_cybol_tag(s);
+            
+            } else if (parsemode == 6) {
+                
+                if ((c == 34) && (string_open)) {
+                    
+                    // Child.
+                    if ((parsemode == 6) && (string_open)) {
+                        
+                        printf(s);
+                    }
+
+/*??
+                    if ((parsemode == 6) && (string_open)) {
+                        
+                        cout << s << "Childsektion:  " << childmode<< "\n";
+                    }
+*/
+                }
+            
+            } else if ((string_open == 0) && (read_cybol_attribute(s) > 0)) {
+                
+                childmode = read_cybol_attribute(s);
+            }
+        }
+
+        if ((c != EOF)) {
+
+            // 10 == '??', 13 == '??', 32 == '??', 34 == '??' 
+            if ((c == 10) || (c == 13) || (c == 32) || (c == 34)) {
+                
+                s[0] = '\0';
+                
+            } else {
+                
+                s[strlen(s)] = c;
+            }
+            
+            if ((c == 34) && (parsemode > 5)) {
+                
+                if (string_open == 1) {
+                    
+                    string_open = 0;
+                
+                } else {
+                    
+                    string_open = 1;
+                }
+            }
+        }
+        
+        c = fgetc(f);
+    }
+    
+    free(s);
 }
 
 //
