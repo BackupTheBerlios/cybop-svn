@@ -35,14 +35,16 @@
  * A map is like a table. One column (array) contains the element names.
  * A second column (array) contains the actual element references.
  *
- * The map itself is a pointer array consisting of:
+ * The map itself is an array consisting of:
  * - array size
  * - names array
+ * - names sizes array
  * - references array
+ * - references sizes array
  *
  * A map's elements can such be accessed over their name or index.
  *
- * @version $Revision: 1.15 $ $Date: 2004-03-25 08:39:24 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-03-28 22:35:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -67,7 +69,7 @@ void initialize_map(void* p0) {
     log_message((void*) &INFO_LOG_LEVEL, "Initialize map.");
 
     // The map size.
-    int s = 3;
+    int s = 4;
     // The map.
     initialize_array(p0, (void*) &s);
     // The index.
@@ -83,19 +85,25 @@ void initialize_map(void* p0) {
     // The array size which is always equal for both arrays.
     i = 0;
     int as = 0;
-    set_array_element(m, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &as);
+    set_array_element(p0, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &as);
 
     // The names array.
     i = 1;
     void* n = (void*) 0;
     initialize_array((void*) &n, (void*) &as);
-    set_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
+    set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
+
+    // The names sizes array.
+    i = 2;
+    void* ns = (void*) 0;
+    initialize_array((void*) &ns, (void*) &as);
+    set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ns);
 
     // The references array.
-    i = 2;
+    i = 3;
     void* r = (void*) 0;
     initialize_array((void*) &r, (void*) &as);
-    set_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
+    set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
 }
 
 /**
@@ -108,22 +116,29 @@ void finalize_map(void* p0) {
     log_message((void*) &INFO_LOG_LEVEL, "Finalize map.");
 
     // The map size.
-    int s = 3;
+    int s = 4;
     // The index.
-    int i = 0;
+    int i;
 
     // The references array.
-    i = 2;
+    i = 3;
     void* r = (void*) 0;
-    get_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
-    remove_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
+    remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
     finalize_array((void*) &r, (void*) &as);
+
+    // The names sizes array.
+    i = 2;
+    void* ns = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ns);
+    remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    finalize_array((void*) &sn, (void*) &as);
 
     // The names array.
     i = 1;
     void* n = (void*) 0;
-    get_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
-    remove_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
+    remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
     finalize_array((void*) &n, (void*) &as);
 
     //?? Actually, the array size should be stored in an own integer_array.
@@ -134,7 +149,7 @@ void finalize_map(void* p0) {
 
     // The array size which is always equal for both arrays.
     i = 0;
-    remove_array_element(m, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i);
+    remove_array_element(p0, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i);
 
     // The map.
     finalize_array(p0, (void*) &s);
@@ -143,53 +158,6 @@ void finalize_map(void* p0) {
 //
 // Map element.
 //
-
-/**
- * Gets the map element index.
- *
- * @param p0 the names array
- * @param p1 the name
- * @param p2 the index
- */
-void get_map_element_index(const void* p0, const void* p1, void* p2) {
-
-    int* i = (int*) p2;
-
-    if (i != (void*) 0) {
-
-        int j = 0;
-        int c = 0;
-        get_array_size(p0, (void*) &c);
-        void* n = (void*) 0;
-        int r = 0;
-
-        while (1) {
-
-            if (j >= c) {
-
-                break;
-            }
-
-            get_array_element(p0, (void*) &j, (void*) &n);
-            compare_arrays((void*) &n, p1, (void*) &r);
-
-            if (r == 1) {
-
-                // If a name equal to the searched one is found,
-                // then its index is the one to be returned.
-                *i = j;
-
-                break;
-            }
-
-            j++;
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get map element index. The index is null.");
-    }
-}
 
 /**
  * Returns the next index that can be used to set a map element.
@@ -328,35 +296,44 @@ void build_next_map_element_name(const void* p0, const void* p1, void* p2) {
  * @param p0 the map
  * @param p1 the index
  * @param p2 the name
- * @param p3 the element
+ * @param p3 the name size
+ * @param p4 the element
  */
-void set_map_element_at_index(void* p0, const void* p1, const void* p2, const void* p3) {
+void set_map_element_at_index(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
 
     // The map size.
-    int s = 3;
+    int s = 4;
     // The index.
     int i;
 
     // The array size which is always equal for both arrays.
     i = 0;
     int as = 0;
-    get_array_element(m, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &as);
+    get_array_element(p0, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &as);
 
     // The names array.
     i = 1;
     void* n = (void*) 0;
-    get_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
     set_array_element((void*) &n, (void*) &as, (void*) &POINTER_ARRAY, p1, p2);
 
-    // The references array.
-    i = 2;
-    void* r = (void*) 0;
-    get_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
-    set_array_element((void*) &r, (void*) &as, (void*) &POINTER_ARRAY, p1, p3);
+    // Store the new array size here after it was incremented once.
+    // The size gets possibly manipulated again and again below,
+    // so that it has to be stored and set here.
+    i = 0;
+    set_array_element(p0, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &as);
 
-    //?? Change array size!
-    //?? Error: array size gets incremented twice above, by names and references
-    //?? array handling.
+    // The names sizes array.
+    i = 2;
+    void* ns = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ns);
+    set_array_element((void*) &ns, (void*) &as, (void*) &INTEGER_ARRAY, p1, p3);
+
+    // The references array.
+    i = 3;
+    void* r = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
+    set_array_element((void*) &r, (void*) &as, (void*) &POINTER_ARRAY, p1, p4);
 }
 
 /**
@@ -364,36 +341,28 @@ void set_map_element_at_index(void* p0, const void* p1, const void* p2, const vo
  *
  * @param p0 the map
  * @param p1 the name
- * @param p2 the element
+ * @param p2 the name size
+ * @param p3 the element
  */
-void add_map_element(void* p0, const void* p1, const void* p2) {
-
-    struct map* m = (struct map*) p0;
-
-    if (m != (void*) 0) {
+void add_map_element(void* p0, const void* p1, const void* p2, const void* p3) {
 
 /*??
-        // This element name will get destroyed (free) in remove_map_element.
-        void* n = malloc(0);
+    // This element name will get destroyed (free) in remove_map_element.
+    void* n = malloc(0);
 
-        // Extend name with next free index.
-        build_next_map_element_name(m->names, p1, n);
-        set_map_element_with_name(p0, n, p2);
-*/
+    // Extend name with next free index.
+    build_next_map_element_name(m->names, p1, n);
+    set_map_element_with_name(p0, n, p3);
 
-        int i = INVALID_INDEX;
+    int i = -1;
 
-        get_map_size(p0, (void*) &i);
+    get_map_size(p0, (void*) &i);
 
-        if (i != INVALID_INDEX) {
+    if (i != -1) {
 
-            set_map_element_at_index(p0, (void*) &i, p1, p2);
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not add map element. The map is null.");
+        set_map_element_at_index(p0, (void*) &i, p1, p3);
     }
+*/
 }
 
 /**
@@ -401,31 +370,37 @@ void add_map_element(void* p0, const void* p1, const void* p2) {
  *
  * @param p0 the map
  * @param p1 the name
- * @param p2 the element
+ * @param p2 the name size
+ * @param p3 the element
  */
-void set_map_element_with_name(void* p0, const void* p1, const void* p2) {
+void set_map_element_with_name(void* p0, const void* p1, const void* p2, const void* p3) {
 
-    struct map* m = (struct map*) p0;
+    // The map size.
+    int s = 4;
+    // The index.
+    int i;
 
-    if (m != (void*) 0) {
+    // The array size which is always equal for both arrays.
+    i = 0;
+    int as = 0;
+    get_array_element(p0, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &as);
 
-        int i = INVALID_INDEX;
+    // The names array.
+    i = 1;
+    void* n = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
 
-        get_map_element_index(m->names, p1, (void*) &i);
-//??        get_next_map_element_index(m->names, p1, (void*) &i);
+    // The index of the given name.
+    int index = -1;
+    get_array_element_index((void*) &n, (void*) &as, (void*) &POINTER_ARRAY, p1, index);
 
-        if (i != INVALID_INDEX) {
+    if (index != -1) {
 
-            set_map_element_at_index(p0, (void*) &i, p1, p2);
-
-        } else {
-
-            add_map_element(p0, p1, p2);
-        }
+        set_map_element_at_index(p0, (void*) &index, p1, p2, p3);
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not set map element with name. The map is null.");
+        add_map_element(p0, p1, p2, p3);
     }
 }
 
@@ -437,17 +412,39 @@ void set_map_element_with_name(void* p0, const void* p1, const void* p2) {
  */
 void remove_map_element_at_index(void* p0, const void* p1) {
 
-    struct map* m = (struct map*) p0;
+    // The map size.
+    int s = 4;
+    // The index.
+    int i;
 
-    if (m != (void*) 0) {
+    // The array size which is always equal for both arrays.
+    i = 0;
+    int as = 0;
+    get_array_element(p0, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &as);
 
-        remove_array_element(m->names, p1);
-        remove_array_element(m->references, p1);
+    // The names array.
+    i = 1;
+    void* n = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
+    remove_array_element((void*) &n, (void*) &as, (void*) &POINTER_ARRAY, p1);
 
-    } else {
+    // Store the new array size here after it was decremented once.
+    // The size gets possibly manipulated again and again below,
+    // so that it has to be stored and set here.
+    i = 0;
+    set_array_element(p0, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &as);
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove map element at index. The map is null.");
-    }
+    // The names sizes array.
+    i = 2;
+    void* ns = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ns);
+    remove_array_element((void*) &ns, (void*) &as, (void*) &INTEGER_ARRAY, p1);
+
+    // The references array.
+    i = 3;
+    void* r = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
+    remove_array_element((void*) &r, (void*) &as, (void*) &POINTER_ARRAY, p1);
 }
 
 /**
@@ -455,25 +452,32 @@ void remove_map_element_at_index(void* p0, const void* p1) {
  *
  * @param p0 the map
  * @param p1 the name
+ * @param p2 the name size
  */
-void remove_map_element_with_name(void* p0, const void* p1) {
+void remove_map_element_with_name(void* p0, const void* p1, const void* p2) {
 
-    struct map* m = (struct map*) p0;
+    // The map size.
+    int s = 4;
+    // The index.
+    int i;
 
-    if (m != (void*) 0) {
+    // The array size which is always equal for both arrays.
+    i = 0;
+    int as = 0;
+    get_array_element(p0, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &as);
 
-        int i = INVALID_INDEX;
+    // The names array.
+    i = 1;
+    void* n = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
 
-        get_map_element_index(m->names, p1, (void*) &i);
+    // The index of the given name.
+    int index = -1;
+    get_array_element_index((void*) &n, (void*) &as, (void*) &POINTER_ARRAY, p1, index);
 
-        if (i != INVALID_INDEX) {
+    if (index != -1) {
 
-            remove_map_element_at_index(p0, (void*) &i);
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove map element with name. The map is null.");
+        remove_map_element_at_index(p0, (void*) &index);
     }
 
     // This element name was created (malloc) in add_map_element.
@@ -489,16 +493,21 @@ void remove_map_element_with_name(void* p0, const void* p1) {
  */
 void get_map_element_at_index(const void* p0, const void* p1, void* p2) {
 
-    struct map* m = (struct map*) p0;
+    // The map size.
+    int s = 4;
+    // The index.
+    int i;
 
-    if (m != (void*) 0) {
+    // The array size which is always equal for both arrays.
+    i = 0;
+    int as = 0;
+    get_array_element(p0, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &as);
 
-        get_array_element(m->references, p1, p2);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get map element at index. The map is null.");
-    }
+    // The references array.
+    i = 3;
+    void* r = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
+    get_array_element((void*) &r, (void*) &as, (void*) &POINTER_ARRAY, p1, p2);
 }
 
 /**
@@ -506,26 +515,37 @@ void get_map_element_at_index(const void* p0, const void* p1, void* p2) {
  *
  * @param p0 the map
  * @param p1 the name
- * @param p2 the element
+ * @param p2 the name size
+ * @param p3 the element
  */
-void get_map_element_with_name(const void* p0, const void* p1, void* p2) {
+void get_map_element_with_name(const void* p0, const void* p1, const void* p2, void* p3) {
 
-    struct map* m = (struct map*) p0;
+    // The map size.
+    int s = 4;
+    // The index.
+    int i;
 
-    if (m != (void*) 0) {
+    // The array size which is always equal for both arrays.
+    i = 0;
+    int as = 0;
+    get_array_element(p0, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &as);
 
-        int i = INVALID_INDEX;
+    // The names array.
+    i = 1;
+    void* n = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
 
-        get_map_element_index(m->names, p1, (void*) &i);
+    // The index of the given name.
+    int index = -1;
+    get_array_element_index((void*) &n, (void*) &as, (void*) &POINTER_ARRAY, p1, index);
 
-        if (i != INVALID_INDEX) {
+    //?? TODO: insert loop here that compares two string arrays
+    //?? and remembers index when arrays are equal!
+    //?? Also insert this loop to all similar procedures above!
 
-            get_map_element_at_index(p0, (void*) &i, p2);
-        }
+    if (index != -1) {
 
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get map element with name. The map is null.");
+        get_map_element_at_index(p0, (void*) &index, p3);
     }
 }
 
