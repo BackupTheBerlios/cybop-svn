@@ -1,0 +1,87 @@
+{\rtf1\ansi\deff1
+{\fonttbl{\f0\froman\fprq2\fcharset0 Times;}{\f1\fnil\fprq0\fcharset0 MS Sans Serif;}{\f2\fnil\fprq0\fcharset0 Times New Roman;}}
+{\colortbl\red0\green0\blue0;\red0\green0\blue128;\red255\green255\blue255;\red128\green128\blue128;}
+{\stylesheet{\s1\snext1 Standard;}
+{\*\cs3\cf1\ul Internet link;}
+}
+{\info{\comment StarWriter}{\vern5690}}\deftab720
+{\*\pgdsctbl
+{\pgdsc0\pgdscuse195\pgwsxn12240\pghsxn15840\marglsxn1134\margrsxn1134\margtsxn1134\margbsxn1134\pgdscnxt0 Standard;}}
+\paperh15840\paperw12240\margl1134\margr1134\margt1134\margb1134\sectd\sbknone\pgwsxn12240\pghsxn15840\marglsxn1134\margrsxn1134\margtsxn1134\margbsxn1134\ftnbj\ftnstart1\ftnrstcont\ftnnar\aenddoc\aftnrstcont\aftnstart1\aftnnrlc
+\pard\plain \s1\f2\fs20 Medizinische Informatik 
+\par Open Source erreicht die Medizin
+\par 
+\par Projekte freier Software etablieren sich in letzter Zeit zunehmend auch f\'fcr den Einsatz in der Medizin. Der Beitrag gibt einen \'dcberblick \'fcber aktuelle Projekte.
+\par \pard\plain \s1{\fs20\f2 Der Grundgedanke der Open-Source-Initiative beruht darauf, dass der Programmcode einer Software frei verf\'fcgbar ist, sodass sich jeder an der Weiterentwicklung der Software, die \'84Gemeinschaftseigentum\ldblquote  ist, beteiligen kann. Da Open-Source-Projekte von Entwi
+cklern vieler L\'e4nder bearbeitet werden, die \'fcber das Internet miteinander kommunizieren, sind von vornherein Kommunikationsf\'e4higkeit und Internationalisierung, aber auch Sicherheit und Stabilit\'e4t der Software wesentliche Aspekte des Entwicklungsprozesses. 
+Die Medizin-Projekte sollen nach dem Dilemma jahrzehntelanger, meist erfolgloser Versuche kommerziellen Ursprungs nun endlich allgemein akzeptierte L\'f6sungen bieten (??bringen??), die durchaus auch zu Standards f\'fchren k\'f6nnen. Der Schwerpunkt gegenw\'e4rtiger A
+ktivit\'e4ten liegt auf der Schaffung elektronischer Patientenakten.}
+\par \pard\plain \s1\f2\fs20 Im Wesentlichen lassen sich zurzeit zwei Str\'f6mungen beziehungsweise Projektgruppen unterscheiden. 
+\par Drei-Schichten-Architektur
+\par Die eine m\'f6chte m\'f6glichst praxisnah \'84von unten\ldblquote  beginnen und dann Schritt f\'fcr Schritt durch Anpassungen eine gr\'f6\'dfere Software erstellen. Das ist ein in der Open-Source-Gemeinde bew\'e4hrtes Konzept; es wird viel ausprobiert und wieder verworfen, bis sich schl
+ie\'dflich eine ausgereifte L\'f6sung einstellt. Im Bestreben, m\'f6glichst plattformneutral, das hei\'dft betriebssystemunabh\'e4ngig zu sein, setzt die Mehrheit dieser Projekte auf Web-Technologien, wie die Kombination aus Script-Sprache und Application-Server.
+\par N\~Script-Sprachen-L\'f6sungen: Hierzu z\'e4hlt als nicht webbasierter Vertreter zun\'e4chst Tkfp \endash  Tk_familypractice. Es basiert auf der Sprache \'84Tcl/Tk\ldblquote , bietet bereits mehrere Module mit unterschiedlichsten Funktionen an und speichert die Daten in einer XML-Daten
+bank. Als eines von wenigen medizinischen Open-Source-Paketen, stellt es seine Praxistauglichkeit im t\'e4glichen Einsatz unter Beweis (Screenshots des Programms, siehe Linkliste). 
+\par \'c4hnlich gelagert, jedoch webbasiert, ist FreeMED, das aber die Sprache \'84PHP\ldblquote  benutzt und die relativ schwer zu administrierende MySQL-Datenbank ben\'f6tigt. Ein Apache-Webserver gew\'e4hrleistet Plattformneutralit\'e4t f\'fcr dieses Projekt, an dem inzwischen 16 Mitar
+beiter arbeiten. 
+\par Die Kombination \'84Python\ldblquote  als Sprache und \'84Zope\ldblquote  als Application-Server sowie PostgreSQL als Datenbank wird von gleich zwei Projekten verwendet, die zunehmend enger kooperieren: FreePM \endash  Free Practice Management und OIO \endash  Open Infrastructure for Outcomes. B
+eide bieten eine Online-Demo \endash  OIO nur nach Registrierung. FreePM legte den Schwerpunkt bisher auf die administrative, die \'84Business-Seite\ldblquote  des Medizineralltags \endash  im Vergleich zu anderen, eher klinisch orientierten Projekten. Es ist leicht zu installieren 
+und zu konfigurieren und macht in letzter Zeit gro\'dfe Fortschritte. OIO erm\'f6glicht dem Nutzer die Erstellung von webbasierten Formularen mit dahinterliegenden automatisierten Datenbehandlungsroutinen. Die Funktionen lassen sich per Mausklick bedienen, ohne 
+dass auch nur eine Befehlszeile geschrieben werden muss. OIO und FreePM haben erst vor kurzem mit Tkfp vereinbart, gegenseitig die jeweils besten Ideen umzusetzen.
+\par N\~L\'f6sungen mit klassischen Programmiersprachen: Ein etwas ins Stocken geratenes Projekt ist Littlefish. Die Projektadministration ist australischen Ursprungs, wechselte vor rund einem Jahr aber nach Frankreich. Vom neuen Koordinator war zu lesen, dass wege
+n der \'c4hnlichkeit der Ziele eine Verschmelzung mit den Projekten FreePM bzw. OIO nicht ausgeschlossen wird. Littlefish hat sein Konzept in der Sprache \'84Delphi\ldblquote  realisiert. Dadurch ist das entstandene Programm nur auf Windows-Plattformen einsetzbar. Auch wu
+rde eine propriet\'e4re Datenbank verwendet. Immerhin wurde der offene Standard GEHR f\'fcr elektronische Patientenakten beachtet. 
+\par Das von einem nach Australien ausgewanderten, deutschen Arzt gegr\'fcndete Projekt GNUMed verwendet zurzeit die bew\'e4hrte Sprache C++ und proklamiert Offenheit gegen\'fcber anderen Ans\'e4tzen. Auch hier wird die Open-Source-Datenbank PostgreSQL (nach Versuchen mit 
+InterBase) eingesetzt, und es wird betont, ausschlie\'dflich auf frei verf\'fcgbare Technologien zu bauen. Ein speziell entworfener Server garantiert robuste Transaktionen und Sicherheit \endash  bis hin zur kompletten Verschl\'fcsselung. Seit kurzem ist GNUMed von Richar
+d Stallman (Gr\'fcnder der Free Software Foundation) als offizielles GNU-Projekt akzeptiert. 
+\par Nach Versuchen mit CGI- und CorbaWeb-Scripts, entschied man sich auch im Projekt Circare f\'fcr die Verwendung von C++ mit PostgreSQL. Das Ziel, verteilte Informationen \'fcber Patienten einem regionalen Netzwerk zug\'e4nglich zu machen, sollte auch hier \'fcber den A
+pache-Webserver realisiert werden. Daf\'fcr sollten auch Schnittstellen nach den Standards HL7 und CORBAmed PIDS angeboten werden. Das Mitte 1999 mit kommerzieller Unterst\'fctzung gestartete und bis Mitte 2000 aktive Projekt ruht momentan wegen mangelnder Resso
+urcen. Als gr\'f6\'dften Verdienst bisher hat Circare aber die \'84Open Health Mailing List\ldblquote  hervorgebracht, in der zahlreiche Entwickler, interessierte \'c4rzte, Projektmanager und politische Vertreter der EU ihre Meinungen austauschen. Hier kommen neben technischen 
+Details zunehmend h\'e4ufiger auch allgemeine und politische Themen, wie die Diskussion um die Einf\'fchrung von Software-Patenten etc., zur Sprache.
+\par DOCScope ging als weitere Anstrengung aus Circare hervor. Dabei handelt es sich um den Versuch, eine komplette elektronische Patientenakte mithilfe von Open-Source-XML-Komponenten zu realisieren.
+\par Verteilte Anwendungen
+\par In einer anderen Str\'f6mung versuchen die Entwickler, modernste Konzepte und Technologien einzusetzen und eine Software zu entwickeln, die vom Krankenhaus-Informationssystem bis zum kleinen Praxisprogramm alles abdecken kann. Der Nachteil ist eine l\'e4ngere Vo
+rlaufzeit, bis ein einsatzf\'e4higer Prototyp bereitsteht. Der Vorteil hierbei ist, ein von Grund auf durchdachtes Konzept zu haben, das es erm\'f6glicht, die Software bis ins Kleinste anzupassen. Diese modernen Technologien werden noch kaum in kommerziellen Pro
+grammen verwendet, da die Entwicklungskapazit\'e4ten \endash  auch der Firmen \endash  beschr\'e4nkt sind. 
+\par OpenEMed als ein Vertreter dieser Str\'f6mung ging aus dem langj\'e4hrigen Telemed-Projekt des Los Alamos National Laboratory hervor. Es setzt auf den Standard CORBAmed und beabsichtigt, Anwendungen zu schaffen, \'fcber die \endash  vereinfacht gesagt \endash  Inhalte weltweit a
+usgetauscht werden k\'f6nnen. 
+\par Diese Technik der \'84verteilten Objekte\ldblquote  und Komponenten gilt als n\'e4chster Schritt nach dem Boom der objektorientierten Programmierung in den neunziger Jahren. F\'fcr verschiedene Anwendungsbereiche wurden eindeutige Schnittstellen in der Sprache \'84IDL\ldblquote  definier
+t. So dient das Modul PIDS zum weltweiten Auffinden von Patienten, das Modul COAS der Erfassung von Daten f\'fcr die Patientenkartei, CIAS ist ein Modul f\'fcr die medizinische Bildverarbeitung etc. Das Projekt hat damit ein hohes Abstraktionsniveau und bringt e
+inen ebenso hohen Einarbeitungsaufwand f\'fcr neue Interessenten mit sich. Dies kann aber zum Teil durch die eingesetzte, einfach zu erlernende und dennoch umfassende und fortschrittlichste Sprache Java ausgeglichen werden.
+\par Res Medicinae als einziges Projekt deutschen Ursprungs verfolgt \'e4hnliche Ziele wie OpenEMed. Nach dem Start im April 2000 ging die Entwicklung \'fcber die Erstellung einer Homepage, das Sammeln von Standards, die Kommunikation mit anderen Projekten und das Mo
+dellieren erster Ideen nicht hinaus. Der Grund daf\'fcr, dass noch kein Programmcode geschrieben wurde, ist unter anderem auf den erheblichen Einarbeitungsaufwand in CORBAmed und andere Standards zur\'fcckzuf\'fchren. Wegen gleichartiger Ziele entwickelt Res Medici
+nae zurzeit an OpenEMed mit. Ein sp\'e4teres Wiederaufleben als deutsche Distribution ist aber m\'f6glich, um den \'c4rzten beispielsweise spezielle Module \endash  etwa f\'fcr die Abrechnung \endash  zur Verf\'fcgung zu stellen. 
+\par Letztlich ist es sinnvoll, ein System zu entwickeln, das so flexibel ist, dass es keine Rolle spielt, ob sein Einsatzort ein Klinikum, eine Arzt-, Zahnarzt- oder gar Tierarztpraxis sein wird. F\'fcr den \'84Quick Quack Medical Manager\ldblquote  wurde schon in den achtzig
+er Jahren eine umfassende Liste mit Anforderungen erstellt, die seither weiter aktualisiert und vervollst\'e4ndigt wird. 
+\par Als erste Open-Source-Initiative im Medizinbereich hat k\'fcrzlich SPIRIT die Zusage der EU \'fcber eine F\'f6rderung von 450 000 Euro f\'fcr ein 15-monatiges Projekt bekommen. Welche Str\'f6mung auch immer zuerst zu einem akzeptablen Medizinprogramm f\'fchrt \endash  die Entwickl
+er tauschen auch untereinander Informationen aus, stellen sich Programmcode-Fragmente zur Verf\'fcgung und suchen in Internet-Diskussionsforen gemeinsam nach L\'f6sungen. Es ist sogar h\'f6chst wahrscheinlich, dass in einigen Monaten oder Jahren eine Verschmelzung 
+stattfinden wird, wie es bereits schon einige gab. Dabei k\'f6nnten die bisherigen L\'f6sungen beider Str\'f6mungen durchaus sinnvoll miteinander kombiniert werden. Der CORBAmed Standard beispielsweise ist v\'f6llig unabh\'e4ngig von Betriebssystem und verwendeter Progra
+mmiersprache und k\'f6nnte so f\'fcr den Informationsaustausch zwischen Programmen verschiedenster Couleur verwendet werden, indem er diese einfach in Module kapselt. Andere Projekte wie GEHR oder CEN (und entfernt HL7) versuchen, die Architektur elektronischer 
+Patientenakten zu standardisieren. 
+\par Weitere Entwicklung
+\par K\'fcnftig werden es die kommerziellen Anbieter medizinischer Software zunehmend schwer haben, sich auf dem Markt zu behaupten. Keine Firma kann mit ihrer Entwicklungsabteilung auf Dauer das Gleiche leisten wie tausende von weltweit arbeitenden Enthusiasten. 
+Durch den f\'fcr jeden zug\'e4nglichen Programmquelltext k\'f6nnen Fehler binnen Stunden behoben, Sicherheitsl\'fccken innerhalb von Tagen geschlossen und Anwenderw\'fcnsche in wenigen Wochen in einer Folgeversion ber\'fccksichtigt werden. 
+\par Auch bei den Anwendern setzt sich die Einsicht immer mehr durch, dass es nicht sinnvoll sein kann, kommerzielle Software mit geschlossenen Quellen wie eine Katze im Sack zu kaufen, sondern auf tausendfach getestete und bew\'e4hrte, freie Software zu setzen. V
+orerst bleibt die Medizin eine gro\'dfe Herausforderung an die Open-Source-Software-Bewegung. Dabei kommen vor allem zwei Faktoren erschwerend hinzu: der gro\'dfe Umfang des medizinischen Sektors einerseits und das geringe Interesse der Entwickler, medizinische 
+Software zu programmieren andererseits. Insgesamt machen die meisten Projekte jedoch gute Fortschritte. 
+\par Unterst\'fctzung ist sehr erw\'fcnscht. Dies kann beim \'84wohlwollenden Interesse\ldblquote  f\'fcr die Open-Source-Bewegung beginnen, weitergehen \'fcber eine Teilnahme an den Diskussionen der Open Health Mailing List bis hin zur Mitentwicklung eines Projekts. \'84Entwicklung\ldblquote  muss
+ hierbei nicht \'84Programmieren\ldblquote  bedeuten. T\'e4tigkeiten wie das Schreiben von Dokumentationen, das Testen und \'dcbersetzen der Programme in andere Landessprachen oder das Pflegen der Homepage tragen ebenfalls zum Erfolg eines Projekts bei. \tab 
+\par \tab Christian Heller
+\par Kontaktadresse: Dipl.-Ing. Christian Heller (Gr\'fcnder des Res Medicinae-Projekts), Fachgebiet Prozessinformatik, Institut f\'fcr Theoretische und Technische Informatik, Fakult\'e4t f\'fcr Informatik und Automatisierung, Technische Universit\'e4t Ilmenau, 
+\par E-Mail: christian.heller@theoinf.tu-
+\par \pard\plain \s1{\fs20\f2 ilmenau.de; {{\field{\*\fldinst HYPERLINK "mailto:christian.heller@tuxtax.de" }{\fldrslt \*\cs3\cf1\ul christian.heller@tuxtax.de}}}}
+\par \pard\plain \s1\f2\fs20 --
+\par Abk\'fcrzungsverzeichnis (Glossar??):
+\par CEN - Committee Europeen de Normalisation (europ\'e4isches Standardisierungsgremium)
+\par GEHR - Good Electronic Health Record (aus einem EU Projekt der CEN hervorgegangene Initiative, die eine komplette, theoretische Definition elektronischer Patientenakten anstrebt; verwandtes Projekt: OpenEHR)
+\par \pard\plain \s1{\fs20\f2 GNU - rekursives Akronym f\'fcr GNU's Not Unix! (freies UNIX Betriebssystem, das mittlerweile in mehreren Varianten mit Linux Kernel existiert)}
+\par {\fs20\f2 HL7 - Health Level Seven (Medizinischer Quasi Standard, der ein Software Framework definiert)}
+\par {\fs20\f2 CORBAmed - Common Object Request Broker Architecture for Medicine (Medizinischer Quasi Standard zum Kapseln verschiedenster Programmbausteine, die ein weltweit verteiltes Arbeiten erm\'f6glichen)}
+\par {\fs20\f2 PIDS - Person/Patient Identification Service (eines von vielen CORBAmed Modulen)}
+\par \pard\plain \s1\f2\fs20 COAS - Clinical Observation and Access Service
+\par CIAS - Clinical Image Access Service
+\par \pard\plain \s1{\fs20\f2 --}
+\par {\fs20\f2 Interne Anmerkung: Ich wei\'df nicht, ob es sinnvoll ist, alle Abk\'fcrzungen ausf\'fchrlich zu erkl\'e4ren. Wenn noch Begriffe f\'fcr z.B. Programmiersprachen wie "CGI-Script" oder PostgreSQL etc. definiert w\'fcrden, w\'e4re das zu umfangreich und das Thema verfehlt. Auf die
+ Standards wie CORBAmed etc. w\'fcrde ich lieber in einem eigenen Artikel eingehen.}
+\par 
+\par }

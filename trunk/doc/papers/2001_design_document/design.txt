@@ -14,7 +14,7 @@
     - Information in Medicine -
 
     $RCSfile: design.txt,v $
-    @version $Revision: 1.1 $ $Date: 2003-03-07 19:38:17 $ $Author: christian $
+    @version $Revision: 1.1 $ $Date: 2003-05-02 13:11:22 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
     @author Karsten Hilbert <karsten.hilbert@gmx.net>
     @author resmedicinae-deutsch MailingList <resmedicinae-deutsch@lists.sourceforge.net>

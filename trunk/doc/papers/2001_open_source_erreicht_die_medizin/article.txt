@@ -1,0 +1,230 @@
+Heller, Christian
+Medizinische Informatik: Open Source erreicht die Medizin
+Deutsches Ärzteblatt 98, Heft 23 vom 08.06.01, Seite [18]
+SUPPLEMENT: Praxis Computer
+
+
+Medizinische Informatik
+
+Open Source erreicht die Medizin
+
+Projekte freier, nichtkommerzieller Software etablieren sich zunehmend auch
+für den Einsatz in der Medizin. Der Beitrag gibt einen Überblick über
+aktuelle Aktivitäten.
+
+Der Grundgedanke der Open-Source-Initiative beruht darauf, dass der
+Programmcode einer Software frei verfügbar ist, sodass sich jeder an der
+Weiterentwicklung der Software, die "Gemeinschaftseigentum" ist, beteiligen
+kann. Da Open-Source-Projekte von Entwicklern vieler Länder bearbeitet
+werden, die über das Internet miteinander kommunizieren, sind von vornherein
+Kommunikationsfähigkeit und Internationalisierung, aber auch Sicherheit und
+Stabilität der Software wesentliche Aspekte des Entwicklungsprozesses. Die
+Medizin-Projekte sollen - im Gegensatz zu kommerziellen Produkten - zu
+allgemein akzeptierten Lösungen und gegebenenfalls auch Standards führen.
+Der Schwerpunkt gegenwärtiger Aktivitäten liegt in der Entwicklung
+elektronischer Patientenakten.
+
+Im Wesentlichen lassen sich zurzeit zwei Strömungen beziehungsweise
+Projektgruppen unterscheiden.
+
+Ansatz "von unten"
+Die eine möchte möglichst praxisnah "von unten" beginnen und dann Schritt
+für Schritt durch Anpassungen eine größere Software erstellen. Das ist ein
+in der Open-Source-Gemeinde bewährtes Konzept; es wird viel ausprobiert und
+wieder verworfen, bis sich schließlich eine ausgereifte Lösung einstellt. Im
+Bestreben, möglichst plattformneutral, das heißt betriebssystemunabhängig zu
+sein, setzt die Mehrheit dieser Projekte auf Web-Technologien, wie die
+Kombination aus Script-Sprache und Application-Server. Während auf
+Script-Sprachen basierende Anwendungen (zum Beispiel Internet-Browser) auf
+ein Interpreter-Programm angewiesen sind, das für die Ausführung der
+Anwendungen sorgt, werden mit klassischen Programmiersprachen erstellte
+Programme übersetzt und sind dann sofort startbereit und als Systemprozess
+selbstständig lauffähig.
+
+- Script-Sprachen-Lösungen: Hierzu zählt als nicht webbasierter Vertreter
+zunächst Tkfp (Tk_familypractice). Das Programm bietet  mehrere Module mit
+unterschiedlichen Funktionen - wie Patientenverwaltung, Verordnung,
+Terminplanung, Abrechnung - an und speichert die Daten in einer
+XML-Datenbank. Als eines von wenigen medizinischen Open-Source-Paketen wird
+es von einem Arzt in der Praxis bereits eingesetzt.
+Ähnlich gelagert, jedoch webbasiert, ist FreeMED, das die Sprache "PHP
+ benutzt und die relativ schwer zu administrierende MySQL-Datenbank
+benötigt. Ein Apache-Webserver gewährleistet hier die Plattformneutralität.
+Die Kombination "Python" als Sprache und "Zope" als Application-Server sowie
+PostgreSQL als Datenbank wird von gleich zwei Projekten eingesetzt, die
+zunehmend enger zusammenarbeiten: FreePM (Free Practice Management) und OIO
+(Open Infrastructure for Outcomes). Beide bieten eine Online-Demo - OIO nur
+nach Registrierung. FreePM legt den Schwerpunkt auf die administrative Seite
+medizinischer Abläufe - im Unterschied zu anderen, eher klinisch
+orientierten Projekten. Es ist leicht zu installieren und zu konfigurieren
+und macht in letzter Zeit große Fortschritte. OIO ermöglicht dem Nutzer die
+Erstellung von webbasierten Formularen mit dahinterliegenden automatisierten
+Datenbehandlungsroutinen. Die Funktionen lassen sich per Mausklick bedienen,
+ohne dass auch nur eine Befehlszeile geschrieben werden muss. OIO und FreePM
+wollen künftig mit Tkfp kooperieren.
+
+- Lösungen mit klassischen Programmiersprachen: Ein ins Stocken geratenes
+Projekt ist Littlefish. Wegen der Ähnlichkeit der Ziele ist eine
+Verschmelzung mit den Projekten FreePM bzw. OIO künftig möglich. Littlefish
+hat sein Konzept in der Sprache "Delphi" realisiert. Dadurch ist das
+entstandene Programm nur auf Windows-Plattformen einsetzbar. Auch wird eine
+proprietäre Datenbank verwendet. Immerhin ist der offene Standard GEHR für
+elektronische Patientenakten berücksichtigt.
+Das von einem nach Australien ausgewanderten, deutschen Arzt gegründete
+Projekt GNUMed verwendet zurzeit die bewährte Sprache C++ und die
+Open-Source-Datenbank PostgreSQL. Die Entwickler betonen, ausschließlich auf
+frei verfügbare Technologien zu bauen. Ein speziell entworfener Server
+garantiert robuste Transaktionen und Sicherheit - bis hin zur kompletten
+Verschlüsselung. Seit kurzem ist GNUMed von Richard Stallman (Gründer der
+Free Software Foundation) als offizielles GNU-Projekt akzeptiert.
+Im Projekt Circare entschied man sich ebenfalls dafür, C++ als
+Programmiersprache mit PostgreSQL zu verwenden. Das Ziel, verteilte
+Informationen über Patienten einem regionalen Netzwerk zugänglich zu machen,
+soll hier über den Apache-Webserver realisiert werden. Dafür sollen auch
+Schnittstellen nach den Standards HL7 und CORBAmed PIDS angeboten werden.
+Das Mitte 1999 mit kommerzieller Unterstützung gestartete und bis Mitte 2000
+aktive Projekt ruht zurzeit wegen mangelnder Ressourcen. Als größten
+Verdienst bisher hat Circare aber die "Open Health Mailing List"
+hervorgebracht, in der zahlreiche Entwickler, interessierte Ärzte,
+Projektmanager und politische Vertreter der EU ihre Meinungen austauschen.
+Hier kommen neben technischen Details zunehmend auch allgemeine und
+politische Themen, wie die Diskussion um die Einführung von
+Software-Patenten etc., zur Sprache.
+DOCScope ging als weitere Anstrengung aus Circare hervor. Dabei handelt es
+sich um den Versuch, eine elektronische Patientenakte mithilfe von
+Open-Source-XML-Komponenten zu realisieren.
+
+Komplexer Ansatz
+In einer anderen Strömung versuchen die Entwickler, modernste Konzepte und
+Technologien einzusetzen und eine Software zu entwickeln, die vom
+Krankenhaus-Informationssystem bis zum kleinen Praxisprogramm alles abdecken
+kann. Der Nachteil ist eine längere Vorlaufzeit, bis ein einsatzfähiger
+Prototyp bereitsteht. Der Vorteil: Man erhält ein von Grund auf durchdachtes
+Konzept, das es ermöglicht, die Software bis ins Kleinste anzupassen. Diese
+modernen Technologien werden noch kaum in kommerziellen Programmen
+verwendet.
+
+OpenEMed als ein Vertreter dieser Strömung ging aus dem langjährigen
+Telemed-Projekt des Los Alamos National Laboratory hervor. Es setzt auf den
+Quasi-Standard CORBAmed und will Anwendungen schaffen, über die -
+vereinfacht gesagt - Inhalte weltweit ausgetauscht werden können.
+Diese Technik der "verteilten Objekte" und Komponenten gilt als nächster
+Schritt nach dem Boom der objektorientierten Programmierung in den neunziger
+Jahren. Für verschiedene Anwendungsbereiche wurden eindeutige Schnittstellen
+in der Sprache "IDL" definiert. So dient das Modul PIDS zum weltweiten
+Auffinden von Patienten, das Modul COAS der Erfassung von Daten für die
+Patientenkartei, CIAS ist ein Modul für die medizinische Bildverarbeitung
+etc. Das Projekt hat damit ein hohes Abstraktionsniveau und bringt einen
+ebenso hohen Einarbeitungsaufwand für neue Interessenten mit sich. Dies kann
+aber zum Teil durch die eingesetzte, einfach zu erlernende und dennoch
+umfassende und fortschrittlichste Sprache Java ausgeglichen werden.
+Res Medicinae als einziges Projekt deutschen Ursprungs verfolgt ähnliche
+Ziele wie OpenEMed. Nach dem Start im April 2000 ging die Entwicklung über
+die Erstellung einer Homepage, das Sammeln von Standards, die Kommunikation
+mit anderen Projekten und das Modellieren erster Ideen nicht hinaus. Der
+Grund dafür, dass noch kein Programmcode geschrieben wurde, ist unter
+anderem auf den erheblichen Einarbeitungsaufwand in CORBAmed und andere
+Standards zurückzuführen. Wegen gleichartiger Ziele entwickelt Res Medicinae
+zurzeit an OpenEMed mit. Ein späteres Wiederaufleben als deutsche
+Distribution ist aber möglich, um den Ärzten beispielsweise spezielle
+Module - etwa für die Abrechnung - zur Verfügung zu stellen.
+
+Letztlich ist es sinnvoll, ein System zu entwickeln, das so flexibel ist,
+dass es keine Rolle spielt, ob sein Einsatzort ein Klinikum, eine Arzt-,
+Zahnarzt- oder gar Tierarztpraxis sein wird. Für den "Quick Quack Medical
+Manager" wurde schon in den achtziger Jahren eine umfassende Liste mit
+Anforderungen erstellt, die seither weiter aktualisiert und vervollständigt
+wird.
+Als erste Open-Source-Initiative im Medizinbereich hat kürzlich SPIRIT die
+Zusage der EU über eine Förderung von 450 000 Euro für ein 15-monatiges
+Projekt bekommen. Welche Strömung auch immer zuerst zu einem akzeptablen
+Medizinprogramm führt - die Entwickler tauschen untereinander Informationen
+aus, stellen sich Programmcode-Fragmente zur Verfügung und suchen in
+Internet-Diskussionsforen gemeinsam nach Lösungen. Es ist sogar höchst
+wahrscheinlich, dass in einigen Monaten oder Jahren eine Verschmelzung
+stattfinden wird, wie es bereits schon einige gab. Dabei könnten die
+bisherigen Lösungen beider Strömungen sinnvoll miteinander kombiniert
+werden. Der CORBAmed-Standard beispielsweise ist unabhängig von
+Betriebssystem und verwendeter Programmiersprache und könnte so für den
+Informationsaustausch zwischen verschiedenen Programmen verwendet werden,
+indem er diese in Module kapselt. Andere Projekte wie GEHR oder CEN (und
+entfernt HL7) versuchen, die Architektur elektronischer Patientenakten zu
+standardisieren.
+
+Weitere Entwicklung
+Künftig werden es die kommerziellen Anbieter medizinischer Software
+zunehmend schwer haben, sich auf dem Markt zu behaupten. Keine Firma kann
+mit ihrer Entwicklungsabteilung auf Dauer das Gleiche leisten wie tausende
+von weltweit arbeitenden Enthusiasten. Durch den für jeden zugänglichen
+Programmquelltext können Fehler binnen Stunden behoben, Sicherheitslücken
+innerhalb von Tagen geschlossen und Anwenderwünsche in wenigen Wochen in
+einer Folgeversion berücksichtigt werden.
+Auch bei den Anwendern setzt sich die Einsicht immer mehr durch, dass es
+nicht sinnvoll sein kann, kommerzielle Software mit geschlossenen Quellen
+wie eine Katze im Sack zu kaufen, sondern auf tausendfach getestete und
+bewährte, freie Software zu setzen. Vorerst bleibt die Medizin eine große
+Herausforderung an die Open-Source-Software-Bewegung. Dabei kommen vor allem
+zwei Faktoren erschwerend hinzu: der große Umfang des medizinischen Sektors
+einerseits und das geringe Interesse der Entwickler, medizinische Software
+zu programmieren, andererseits. Insgesamt machen die meisten Projekte jedoch
+gute Fortschritte.
+
+Unterstützung, beispielsweise durch die Teilnahme an den Diskussionen der
+Open Health Mailing List oder durch Mitentwicklung eines Projekts, ist sehr
+erwünscht. "Entwicklung" muss hierbei nicht "Programmieren" bedeuten.
+Tätigkeiten wie das Schreiben von Dokumentationen, das Testen und Übersetzen
+der Programme in andere Landessprachen oder das Pflegen der Homepage tragen
+auch zum Erfolg eines Projekts bei. Für deutschsprachige Interessenten wurde
+die Mailing List resmedicinae-deutsch@lists.sourceforge.net eingerichtet.
+Eine Anmeldung ist unter
+http://lists.sourceforge.net/lists/listinfo/resmedicinae-deutsch möglich.
+
+Christian Heller
+
+Kontaktadresse: Dipl.-Ing. Christian Heller (Gründer des Res
+Medicinae-Projekts), Institut für Theoretische und Technische Informatik,
+Fakultät für Informatik und Automatisierung, Technische Universität Ilmenau,
+E-Mail: christian.heller@theoinf.tu-ilmenau.de
+
+Internet-Adressen der Projekte (in Reihenfolge ihrer Erwähnung):
+Tkfp - Tk_familypractice ! www.psnw.com/~alcald/#informatics
+FreeMED ! www.freemed.org
+FreePM - Free Practice Management ! www.freepm.org
+OIO - Open Infrastructure for Outcomes ! www.txoutcome.org
+Littlefish ! www.paninfo.com.au/intro/littlefishproject_homepage.htm
+GNUMed ! www.gnumed.org
+Circare ! www.openhealth.com/circare/index.html
+Openhealth Mailing List ! openhealth-list-request@minoru-development.com
+DocScope ! www.openhealth.com/docscope/index.html
+OpenEMed ! www.openemed.org
+Res Medicinae ! www.resmedicinae.org
+ResMedicinae Mailing List ! resmedicinae-deutsch@lists.sourceforge.net
+QuickQuack ! http://lorenzo.uwstout.edu/QQMIM/qq4.html
+SPIRIT ! www.openhealth.com/en/press/05jan01.html
+
+Weitere Übersichten:
+http://www.omp.de.vu
+www.mobilix.org/med_linux.html
+www.linuxmednews.com/projects/
+www.openhealth.com/en/healthlinks.html
+http://sourceforge.net/
+www.berlios.de
+
+Glossar
+CEN - Committee Europeen de Normalisation (europäisches
+Standardisierungsgremium)
+GEHR - Good Electronic Health Record (aus einem EU Projekt der CEN
+hervorgegangene Initiative, die eine komplette, theoretische Definition
+elektronischer Patientenakten anstrebt; verwandtes Projekt: OpenEHR)
+GNU - rekursives Akronym für "GNU's Not Unix!" (freies UNIX Betriebssystem,
+das mittlerweile in mehreren Varianten mit Linux Kernel existiert)
+HL7 - Health Level Seven (Medizinischer Quasi- Standard, der ein Software
+Framework definiert)
+CORBAmed - Common Object Request Broker Architecture for Medicine
+(Medizinischer Quasi- Standard zum Kapseln verschiedenster
+Programmbausteine, die ein weltweit verteiltes Arbeiten ermöglichen)
+PIDS - Person/Patient Identification Service (eines von vielen CORBAmed
+Modulen)
+COAS - Clinical Observation and Access Service
+CIAS - Clinical Image Access Service
+
