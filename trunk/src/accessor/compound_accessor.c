@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2005-03-30 14:15:41 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2005-04-05 16:21:35 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,10 @@
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
 
+void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
+    const void* p5, const void* p6);
+void reindex_compound_for_listelements( void* compound, void* compound_count,
+    const void* basisname, int* basisname_count );
 /**
  * Gets the compound element index.
  *
@@ -956,6 +960,7 @@ void remove_compound_element_by_index(void* p0, void* p1, void* p2, const void* 
     }
 }
 
+
 /**
  * Removes the compound element by name.
  *
@@ -1144,7 +1149,20 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
 
             log_message_debug("Remove compound element by name.");
 
+            //check of a List element
+            //if a list element. so must be reindexd the list
+            int position = -1;
+            get_index_in_array( p3, p4,
+                                LIST_SEPARATOR, LIST_SEPARATOR_COUNT,
+                                &position, CHARACTER_ARRAY );
+
             remove_compound_element_by_index(p0, p1, p2, (void*) &index);
+                                
+            if ( position > 0 ) {
+             
+                reindex_compound_for_listelements( p0, p1, 
+                                                   p3, &position );
+            }
 
         } else {
 
@@ -1802,6 +1820,128 @@ void get_real_compound_element_by_name(const void* p0, const void* p1,
     }
 
 }
+
+/**
+ *  Reindex the listelemenst in the compound
+ * 
+ * @param compound
+ * @param compound_count
+ * @param basisname the list basis name
+ * @param basisname_count the liste basis name count
+ * 
+ */
+void reindex_compound_for_listelements( void* compound, void* compound_count,
+    const void* basisname, int* basisname_count ) 
+{
+ 
+    if (    (compound != NULL_POINTER)
+         && (compound_count != NULL_POINTER)
+         && (basisname != NULL_POINTER)
+         && (basisname_count != NULL_POINTER)
+       )
+    {
+        int compound_counter = 0;
+        int index_counter = 0;
+
+        // The compund element name.
+        void** cen = POINTER_NULL_POINTER;
+        void** cenc = POINTER_NULL_POINTER;
+        void** cens = POINTER_NULL_POINTER;
+        
+        
+        // Create compare string.
+        char* compstring = NULL_POINTER;
+        int compstring_count = *((int*)basisname_count) + *LIST_SEPARATOR_COUNT;
+        
+        create_array( (void*) &compstring, (void*) &compstring_count, 
+                      (void*) CHARACTER_ARRAY);
+
+        // Set the compare string
+        //this is the basisname and the list separat 
+        set_array_elements( compstring, (void*) ZERO_NUMBER, 
+                            basisname, basisname_count,
+                            (void*) CHARACTER_ARRAY);
+        set_array_elements( compstring, basisname_count, 
+                            LIST_SEPARATOR, LIST_SEPARATOR_COUNT,  
+                            (void*) CHARACTER_ARRAY);
+                            
+        //create integer model for the index
+        void* indexstr = NULL_POINTER;
+        int indexstr_count = 0;
+        int indexstr_size = 10;
+        create_array( (void*) &indexstr, (void*) &indexstr_size, 
+                      (void*) CHARACTER_ARRAY);
+                            
+        int comp_res = 0;                            
+        
+        while ( 1 ) {
+         
+            if ( compound_counter >= *((int*)compound_count) ) {
+                
+                break;
+            }
+            
+            get_compound_element_name_by_index(
+                    compound, compound_count, 
+                    &compound_counter, 
+                    &cen, &cenc, &cens );
+            if (    (cen != NULL_POINTER)
+                 && (cenc != NULL_POINTER)
+                 && (cens != NULL_POINTER) 
+               )
+            {           
+            
+                if ( *((int*)*cenc) > compstring_count ) {
+        
+                    comp_res = 0;
+                    compare_arrays( compstring, &compstring_count,
+                                    *cen, &compstring_count,
+                                    &comp_res,
+                                    CHARACTER_ARRAY );
+                                   
+                    //if teh begiining of the two arrays ident, then 
+                    //the compound element is a part of the list
+                    if ( comp_res == 1 ) {
+         
+                        *((int*)*cenc) = 0;
+                     
+                        //parse the basisname
+                        parse( cen, *cenc, *cens,
+                           basisname, basisname_count,
+                           STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                        
+                        //parse the list separator
+                        parse( cen, *cenc, *cens,
+                           LIST_SEPARATOR, LIST_SEPARATOR_COUNT,
+                           STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+        
+                        //parse the index
+                        indexstr_count = snprintf( indexstr, indexstr_size, 
+                                                   "%i", index_counter);
+                        parse( cen, *cenc, *cens,
+                           indexstr, &indexstr_count,
+                           STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                     
+                        index_counter = index_counter+1;
+                    }
+                }
+            } //
+            
+            compound_counter = compound_counter + 1;
+        }
+        
+        // destroy compare string.
+        destroy_array( (void*) &compstring, (void*) &compstring_count, 
+                       (void*) CHARACTER_ARRAY);
+                       
+        // destroy index string.
+        destroy_array( (void*) &indexstr, (void*) &indexstr_count, 
+                       (void*) CHARACTER_ARRAY);
+                       
+    }
+        
+}
+
 
 
 /* COMPOUND_ACCESSOR_SOURCE */
