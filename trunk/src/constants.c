@@ -59,7 +59,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.10 $ $Date: 2004-04-29 11:37:08 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-05-03 10:01:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1528,8 +1528,8 @@ static const char INLINE_LOCATION_ARRAY[] = {'i', 'n', 'l', 'i', 'n', 'e'};
 /** The inline location. */
 static const char* INLINE_LOCATION = INLINE_LOCATION_ARRAY;
 
-/** The inline location size. */
-static const int INLINE_LOCATION_SIZE = 6;
+/** The inline location count. */
+static const int INLINE_LOCATION_COUNT = 6;
 
 /** The file location array. */
 static const char FILE_LOCATION_ARRAY[] = {'f', 'i', 'l', 'e'};
@@ -1537,8 +1537,8 @@ static const char FILE_LOCATION_ARRAY[] = {'f', 'i', 'l', 'e'};
 /** The file location. */
 static const char* FILE_LOCATION = FILE_LOCATION_ARRAY;
 
-/** The file location size. */
-static const int FILE_LOCATION_SIZE = 4;
+/** The file location count. */
+static const int FILE_LOCATION_COUNT = 4;
 
 /** The http location array. */
 static const char HTTP_LOCATION_ARRAY[] = {'h', 't', 't', 'p'};
@@ -1546,8 +1546,8 @@ static const char HTTP_LOCATION_ARRAY[] = {'h', 't', 't', 'p'};
 /** The http location. */
 static const char* HTTP_LOCATION = HTTP_LOCATION_ARRAY;
 
-/** The http location size. */
-static const int HTTP_LOCATION_SIZE = 4;
+/** The http location count. */
+static const int HTTP_LOCATION_COUNT = 4;
 
 /** The ftp location array. */
 static const char FTP_LOCATION_ARRAY[] = {'f', 't', 'p'};
@@ -1555,21 +1555,21 @@ static const char FTP_LOCATION_ARRAY[] = {'f', 't', 'p'};
 /** The ftp location. */
 static const char* FTP_LOCATION = FTP_LOCATION_ARRAY;
 
-/** The ftp location size. */
-static const int FTP_LOCATION_SIZE = 3;
+/** The ftp location count. */
+static const int FTP_LOCATION_COUNT = 3;
 
 //
 // Location separators.
 //
 
 /** The model location separator array. */
-static const char MODEL_LOCATION_SEPARATOR_ARRAY[] = {':', '/', '/'};
+static const char MODEL_LOCATION_SEPARATOR_ARRAY[] = {':'};
 
 /** The model location separator. */
 static const char* MODEL_LOCATION_SEPARATOR = MODEL_LOCATION_SEPARATOR_ARRAY;
 
-/** The model location separator size. */
-static const int MODEL_LOCATION_SEPARATOR_SIZE = 3;
+/** The model location separator count. */
+static const int MODEL_LOCATION_SEPARATOR_COUNT = 1;
 
 //
 // Cybol model values:

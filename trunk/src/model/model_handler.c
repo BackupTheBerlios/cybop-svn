@@ -59,7 +59,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.39 $ $Date: 2004-05-02 23:24:21 $ $Author: christian $
+ * @version $Revision: 1.40 $ $Date: 2004-05-03 10:01:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -516,10 +516,12 @@ void initialize_compound(void* p0, const void* p1, const void* p2) {
 
                             if (r == 1) {
 
+/*??
                                 read_source_from_file((void*) &b, (void*) &path, (void*) &pc);
                                 initialize_compound_from_cybol(p0, (void*) &b);
                                 ... from_text
                                 ... from_html
+*/
 
                                 d = 1;
                             }
