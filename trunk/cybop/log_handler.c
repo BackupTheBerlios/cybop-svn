@@ -29,7 +29,7 @@
  *
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.1 $ $Date: 2003-09-17 18:45:34 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,23 +38,23 @@
 //
 
 /** The off log level. */
-int OFF_LOG_LEVEL = 0;
+static const int OFF_LOG_LEVEL = 0;
 
 /** The error log level. */
-int ERROR_LOG_LEVEL = 1;
+static const int ERROR_LOG_LEVEL = 1;
 
 /** The warning log level. */
-int WARNING_LOG_LEVEL = 2;
+static const int WARNING_LOG_LEVEL = 2;
 
 /** The info log level. */
-int INFO_LOG_LEVEL = 3;
+static const int INFO_LOG_LEVEL = 3;
 
 //
 // Attributes.
 //
 
 /** The log level. */    
-int log_level;
+static int log_level;
 
 //
 // Log entry.
@@ -66,11 +66,11 @@ int log_level;
  * @param p0 the level
  * @param p1 the message
  */
-void log(int p0, java.lang.Object p1) {
+void log(int p0, int p1) {
 
-    if (p0 <= LogHandler.log_level) {
+    if (p0 <= log_level) {
 
-        java.lang.Object l = LogHandler.get_log_level_name(p0);
+        int l = get_log_level_name(p0);
         
         printf(l + ": " + p1);
     }
@@ -82,19 +82,19 @@ void log(int p0, java.lang.Object p1) {
  * @param p0 the level
  * @return the log level name
  */
-java.lang.Object get_log_level_name(int p0) {
+int get_log_level_name(int p0) {
 
-    java.lang.Object l = null;
+    int l = NULL;
     
-    if (p0 == LogHandler.INFO_LOG_LEVEL) {
+    if (p0 == INFO_LOG_LEVEL) {
 
         l = "INFO";
         
-    } else if (p0 == LogHandler.WARNING_LOG_LEVEL) {
+    } else if (p0 == WARNING_LOG_LEVEL) {
 
         l = "WARNING";
         
-    } else if (p0 == LogHandler.ERROR_LOG_LEVEL) {
+    } else if (p0 == ERROR_LOG_LEVEL) {
 
         l = "ERROR";
     }

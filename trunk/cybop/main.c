@@ -36,7 +36,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.3 $ $Date: 2003-09-20 09:35:32 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,23 +49,23 @@
  */
 int main(int p0, char[]* p1) {
 
-    int r = -1;
+    int r = EXIT_FAILURE;
 
     if (argv != NULL) {
 
         if ((p0 == 3) && (p1[1] != NULL) && (p1[2] != NULL)) {
 
             // Arguments.
-            java.lang.Object dynamics = p1[1];
-            java.lang.Object statics = p1[2];
+            char[]* dynamics = p1[1];
+            char[]* statics = p1[2];
 
             // Log handler.
             log_level = 3;
 
 /*??
             // XML parser.
-            CategoryHandler.xml_parser = new org.apache.xerces.parsers.DOMParser();
-            CategoryHandler.initialize_xml_parser(CategoryHandler.xml_parser);
+            xml_parser = new org.apache.xerces.parsers.DOMParser();
+            initialize_xml_parser(xml_parser);
 */
 
             // Signal memory (signal queue).
@@ -75,7 +75,7 @@ int main(int p0, char[]* p1) {
 /*??
             // Event handler.
             JavaEventHandler.signal_memory = signal_memory;
-            java.lang.Object event_handler = new JavaEventHandler();
+            int event_handler = new JavaEventHandler();
             JavaEventHandler.set_event_handler(event_handler);
 */
 
@@ -94,7 +94,7 @@ int main(int p0, char[]* p1) {
 
 /*??
                 // Caution! Adding of signals must be synchronized between:
-                // - SignalHandler.send for adding internal CYBOP signals
+                // - send for adding internal CYBOP signals
                 // - JavaEventHandler.dispatchEvent for adding transformed java event signals
                 // These are the only procedures accessing the signal
                 // memory for adding signals.
@@ -129,8 +129,8 @@ int main(int p0, char[]* p1) {
 
 /*??
             // XML parser.
-            CategoryHandler.finalize_xml_parser(CategoryHandler.xml_parser);
-            CategoryHandler.xml_parser = NULL;
+            finalize_xml_parser(xml_parser);
+            xml_parser = NULL;
 */
 
             //

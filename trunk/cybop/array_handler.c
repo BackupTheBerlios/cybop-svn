@@ -22,230 +22,159 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cyboi;
-
 /**
  * This is an array handler.
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.1 $ $Date: 2003-09-17 18:45:34 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class ArrayHandler {
 
-    //
-    // Array.
-    //
+//
+// Array.
+//
 
-    /**
-     * Extends the array by doubling its length.
-     *
-     * All elements are copied from the old to the new array.
-     *
-     * @param p0 the array
-     * @return the extended array
-     */
-    java.lang.Object[] extend_array(java.lang.Object[] p0) {
+/**
+ * Extends the array by doubling its length.
+ *
+ * All elements are copied from the old to the new array.
+ *
+ * @param p0 the array
+ * @return the extended array
+ */
+int[]* extend_array(int[]* p0) {
 
-        java.lang.Object[] a = null;
-        
-        if (p0 != null) {
-
-            int old_length = p0.length;
-            int new_length = old_length * 2 + 1;
-            a = new java.lang.Object[new_length];
-            
-            if (a != null) {
-                    
-                int i = 0;
+    int[]* a = NULL;
     
-                while (i < old_length) {
-    
-                    a[i] = p0[i];
-    
-                    i++;
-                }
-    
-                p0 = null;
+    if (p0 != NULL) {
 
-            } else {
-    
-                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not extend array. The new array is null.");
-            }
+        int old_length = sizeof(p0);
+        int new_length = old_length * 2 + 1;
+        a = (int[]*) malloc(sizeof(int[new_length]));
 
-        } else {
-
-            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not extend array. The array is null.");
-        }
-        
-        return a;
-    }
-
-    /**
-     * Returns the array size.
-     *
-     * @param p0 the array
-     * @return the array size
-     */
-    int get_array_size(java.lang.Object[] p0) {
-
-        int s = -1;
-
-        if (p0 != null) {
-
-            s = p0.length;
-
-        } else {
-
-            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not get array size. The array is null.");
-        }
-
-        return s;
-    }
-
-    /**
-     * Compares both arrays.
-     *
-     * @param p0 the first array
-     * @param p1 the second array
-     * @return 1 if the size and contents of both arrays are equal; 0 otherwise
-     */
-    int compare(java.lang.Object[] p0, java.lang.Object[] p1) {
-
-        int r = 1;
-/*??
-        int i = ArrayHandler.get_array_size(p0);
-
-        // Compares the array sizes.
-        if (i != ArrayHandler.get_array_size(p1)) {
-
-            r = 0;
-            
-        } else {
-
-            // Compares the elements.
-            while (i-- != 0) {
-
-                if (ArrayHandler.get_array_element(p0, i) != ArrayHandler.get_array_element(p1, i)) {
-
-                    r = 0;
-
-                    break;
-                }
-            }
-        }
-*/
-
-        return r;
-    }
-
-    //
-    // Array element.
-    //
-
-    /**
-     * Sets the array element.
-     *
-     * @param p0 the array
-     * @param p1 the index
-     * @param p2 the element
-     * @return the extended array
-     */
-    java.lang.Object[] set_array_element(java.lang.Object[] p0, int p1, java.lang.Object p2) {
-
-        java.lang.Object[] a = null;
-        
-        if (p0 != null) {
-
-            // If the array length is exceeded, a new array with extended length
-            // is created and delivered back.
-            if (p1 >= p0.length) {
-
-                a = ArrayHandler.extend_array(p0);
-            
-            } else {
-            
-                a = p0;
-            }
-
-            //?? Temporary: Remove old and add new java tree node.
-/*??
-            ArrayHandler.remove_tree_node(p0[i]);
-            ArrayHandler.add_tree_node(p1);
-*/
-
-            // Set element.
-            a[p1] = p2;
-
-        } else {
-
-            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not set array element. The array is null.");
-        }
-        
-        return a;
-    }
-
-    /**
-     * Removes the array element.
-     *
-     * @param p0 the array
-     * @param p1 the index
-     */
-    void remove_array_element(java.lang.Object[] p0, int p1) {
-
-        if (p0 != null) {
-
-            if (p1 != -1) {
+        if (a != NULL) {
                 
-                //?? Temporary: Remove java tree node.
-//??                ArrayHandler.remove_tree_node(p0[p1]);
+            int i = 0;
 
-                // Move all remaining elements one place towards the
-                // beginning of the elements.
-                int size = p0.length;
-    
-                while ((p1 + 1) < size) {
-    
-                    p0[p1] = p0[p1 + 1];
-    
-                    p1++;
-                }
-    
-                // Set former last element to null.
-                p0[p1] = null;
+            while (i < old_length) {
+
+                a[i] = p0[i];
+
+                i++;
             }
+
+            free(p0);
 
         } else {
 
-            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove array element. The array is null.");
+            log(ERROR_LOG_LEVEL, "Could not extend array. The new array is NULL.");
         }
+
+    } else {
+
+        log(ERROR_LOG_LEVEL, "Could not extend array. The array is NULL.");
     }
+    
+    return a;
+}
 
-    /**
-     * Returns the element.
-     *
-     * @param p0 the array
-     * @param p1 the index
-     * @return the element
-     */
-    java.lang.Object get_array_element(java.lang.Object[] p0, int p1) {
+//
+// Array element.
+//
 
-        java.lang.Object e = null;
+/**
+ * Sets the array element.
+ *
+ * @param p0 the array
+ * @param p1 the index
+ * @param p2 the element
+ * @return the extended array
+ */
+int[]* set_array_element(int[]* p0, int p1, int p2) {
+
+    int[]* a = NULL;
+    
+    if (p0 != NULL) {
+
+        // If the array length is exceeded, a new array with extended length
+        // is created and delivered back.
+        if (p1 >= sizeof(p0)) {
+
+            a = extend_array(p0);
         
-        if (p0 != null) {
+        } else {
+        
+            a = p0;
+        }
 
-            if (p1 != -1) {
-                
-                e = p0[p1];
+        // Set element.
+        *a[p1] = p2;
+
+    } else {
+
+        log(ERROR_LOG_LEVEL, "Could not set array element. The array is NULL.");
+    }
+    
+    return a;
+}
+
+/**
+ * Removes the array element.
+ *
+ * @param p0 the array
+ * @param p1 the index
+ */
+void remove_array_element(int[]* p0, int p1) {
+
+    if (p0 != NULL) {
+
+        if (p1 != -1) {
+            
+            // Move all remaining elements one place towards the
+            // beginning of the elements.
+            int size = sizeof(p0);
+
+            while ((p1 + 1) < size) {
+
+                p0[p1] = p0[p1 + 1];
+
+                p1++;
             }
 
-        } else {
-
-            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not get array element. The array is null.");
+            // Set former last element to NULL.
+            p0[p1] = NULL;
         }
-        
-        return e;
+
+    } else {
+
+        log(ERROR_LOG_LEVEL, "Could not remove array element. The array is NULL.");
     }
+}
+
+/**
+ * Returns the element.
+ *
+ * @param p0 the array
+ * @param p1 the index
+ * @return the element
+ */
+int get_array_element(int[]* p0, int p1) {
+
+    int e = NULL;
+    
+    if (p0 != NULL) {
+
+        if (p1 != -1) {
+            
+            e = p0[p1];
+        }
+
+    } else {
+
+        log(ERROR_LOG_LEVEL, "Could not get array element. The array is NULL.");
+    }
+    
+    return e;
 }
 

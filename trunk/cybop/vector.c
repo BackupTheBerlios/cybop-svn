@@ -22,20 +22,16 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cyboi;
-
 /**
  * This is a vector.
  *
- * @version $Revision: 1.1 $ $Date: 2003-09-17 18:45:34 $ $Author: christian $
+ * It contains the three coordinates: x, y, z.
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class Vector {
+struct vector {
 
-    // Do not use keyword!
-    // If you do, the elements will always be overwritten
-    // whenever some instance sets them.
-    
     /** The x coordinate. */
     int x;
 

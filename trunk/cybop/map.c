@@ -22,27 +22,21 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cyboi;
-
 /**
  * This is a map.
  *
  * A map is like a table. One column (array) contains the element names.
  * A second column (array) contains the actual element references.
  *
- * @version $Revision: 1.1 $ $Date: 2003-09-17 18:45:34 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class Map {
+struct map {
 
-    // Do not use keyword!
-    // If you do, the elements will always be overwritten
-    // whenever some instance sets them.
-    
     /** The names. */
-    java.lang.Object[] names;
+    int names;
 
     /** The references. */
-    java.lang.Object[] references;
+    int references;
 }
 

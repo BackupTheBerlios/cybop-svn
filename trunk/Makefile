@@ -1,5 +1,5 @@
 # Makefile.in generated automatically by automake 1.4-p4 from Makefile.am
-# KDE tags expanded automatically by am_edit - $Revision: 1.3 $ 
+# KDE tags expanded automatically by am_edit - $Revision: 1.4 $ 
 
 # Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
@@ -251,7 +251,7 @@ DIST_COMMON =  README ./stamp-h.in AUTHORS COPYING ChangeLog INSTALL \
 
 #>- DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 #>+ 4
-KDE_DIST=cybop.doxygen cybop.kdevses subdirs special.m4.in RUN configure.files configure.in.in 
+KDE_DIST=cybop.doxygen cybop.kdevses subdirs special.m4.in RUN configure.files Makefile.dist configure.in.in 
 
 DISTFILES= $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
 

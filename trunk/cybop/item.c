@@ -22,42 +22,30 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cyboi;
-
 /**
  * This is an item.
  *
- * It represents an abstract description of some real world item.
+ * It represents an abstract description of some real world thing.
  *
  * An item can be created by instantiating (cloning) an existing category.
  * Instantiating means allocating some place in the computer's memory.
  * Basically, every item can become a category if copies of this item are created.
  *
- * @version $Revision: 1.1 $ $Date: 2003-09-17 18:45:34 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class Item {
-
-    // Do not use keyword!
-    // If you do, the elements will always be overwritten
-    // whenever some instance sets them.
-    
-    /** The java object. */
-    java.lang.Object java_object;
-
-    /** The java tree node. */
-    java.lang.Object java_tree_node;
+struct item {
 
     /** The items. */
-    java.lang.Object items;
+    int items;
 
     /** The positions. */
-    java.lang.Object positions;
+    int positions;
 
     /** The instances. */
-    java.lang.Object instances;
+    int instances;
 
     /** The interactions. */
-    java.lang.Object interactions;
+    int interactions;
 }
 

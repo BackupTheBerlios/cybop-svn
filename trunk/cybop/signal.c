@@ -22,49 +22,43 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cyboi;
-
 /**
  * This is a signal.
  *
- * A signal transports an input state throughout a system to an output state.
- * 
+ * A signal transports an input state through a system to an output state.
+ *
  * Signals can be stored in a memory.
  * 
- * @version $Revision: 1.1 $ $Date: 2003-09-17 18:45:34 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class Signal {
+struct signal {
 
-    // Do not use keyword!
-    // If you do, the elements will always be overwritten
-    // whenever some instance sets them.
-    
     /** The priority. */
-    java.lang.Object priority;
+    int priority;
 
     /** The language. */
-    java.lang.Object language;
+    int language;
 
     /** The subject. */
-    java.lang.Object subject;
+    int subject;
 
     /** The predicate. */
-    java.lang.Object predicate;
+    int predicate;
 
     /** The owner. */
-    java.lang.Object owner;
+    int owner;
 
     /** The sender. */
-    java.lang.Object sender;
+    int sender;
 
     /** The object. */
-    java.lang.Object object;
+    int object;
 
     /** The adverbial. */
-    java.lang.Object adverbial;
+    int adverbial;
 
     /** The condition. */
-    java.lang.Object condition;
+    int condition;
 }
 

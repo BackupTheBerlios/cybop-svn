@@ -22,20 +22,17 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cyboi;
-
 /**
  * This is a time.
  *
- * @version $Revision: 1.1 $ $Date: 2003-09-17 18:45:34 $ $Author: christian $
+ * It is used to measure the duration of dynamics or in other words,
+ * the difference between two static states/ instants.
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class Time {
+struct time {
 
-    // Do not use keyword!
-    // If you do, the elements will always be overwritten
-    // whenever some instance sets them.
-    
     /** The years. */
     int years;
     
