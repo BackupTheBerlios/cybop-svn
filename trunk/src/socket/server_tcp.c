@@ -23,7 +23,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.3 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-03-18 00:42:09 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -31,15 +31,10 @@
 #ifndef SERVER_TCP_SOURCE
 #define SERVER_TCP_SOURCE
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <stdio.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
+#include "../global/includes.c"
 
-int main()
-{
+/*??
+int main() {
 
     int server_socketnummer,client_socketnummer;
     int server_laenge,client_laenge;
@@ -68,14 +63,15 @@ int main()
 
     while(1) {
 
-    	read(client_socketnummer,&strg,300);
-	strcat(strg,hello);
-	write(client_socketnummer,&strg,300);
+        read(client_socketnummer,&strg,300);
+        strcat(strg,hello);
+        write(client_socketnummer,&strg,300);
 
     }
     close(client_socketnummer);
     close(server_socketnummer);
 }
+*/
 
 /* SERVER_TCP_SOURCE */
 #endif

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-02-25 01:35:09 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-03-18 00:42:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -29,14 +29,7 @@
 #ifndef INPUT_OUTPUT_ACTIVATOR_SOURCE
 #define INPUT_OUTPUT_ACTIVATOR_SOURCE
 
-#include "../global/integer_constants.c"
-#include "../global/log_constants.c"
-#include "../global/structure_constants.c"
-#include "../global/variables.c"
-#include "../logger/logger.c"
-#include "../socket/unix_socket.c"
-#include "../web/tcp_socket_server.c"
-#include "../x_windows/x_windows_handler.c"
+#include "../global/includes.c"
 
 /**
  * Activates the input output mechanisms.
@@ -110,7 +103,7 @@ void activate_input_output(void* p0) {
 
         if (r == 1) {
 
-            receive_x_windows(p0);
+//??            receive_x_windows(p0);
             r = 0;
         }
 

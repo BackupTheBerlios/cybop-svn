@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2005-03-11 10:05:52 $ $Author: rholzmueller $
+ * @version $Revision: 1.15 $ $Date: 2005-03-18 00:42:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -273,28 +273,32 @@ static const char* SXW_ABSTRACTION = SXW_ABSTRACTION_ARRAY;
 static const int SXW_ABSTRACTION_COUNT_ARRAY[] = {3};
 static const int* SXW_ABSTRACTION_COUNT = SXW_ABSTRACTION_COUNT_ARRAY;
 
+//
+// User interface abstractions.
+//
+
+/** The character/ textual user interface (tui) abstraction. */
+static const char TUI_ABSTRACTION_ARRAY[] = {'t', 'u', 'i'};
+static const char* TUI_ABSTRACTION = TUI_ABSTRACTION_ARRAY;
+static const int TUI_ABSTRACTION_COUNT_ARRAY[] = {3};
+static const int* TUI_ABSTRACTION_COUNT = TUI_ABSTRACTION_COUNT_ARRAY;
+
+/** The x windows abstraction. */
+static const char X_WINDOWS_ABSTRACTION_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', 's'};
+static const char* X_WINDOWS_ABSTRACTION = X_WINDOWS_ABSTRACTION_ARRAY;
+static const int X_WINDOWS_ABSTRACTION_COUNT_ARRAY[] = {9};
+static const int* X_WINDOWS_ABSTRACTION_COUNT = X_WINDOWS_ABSTRACTION_COUNT_ARRAY;
+
+/** The mouse abstraction. */
+static const char MOUSE_ABSTRACTION_ARRAY[] = {'m', 'o', 'u', 's', 'e'};
+static const char* MOUSE_ABSTRACTION = MOUSE_ABSTRACTION_ARRAY;
+static const int MOUSE_ABSTRACTION_COUNT_ARRAY[] = {5};
+static const int* MOUSE_ABSTRACTION_COUNT = MOUSE_ABSTRACTION_COUNT_ARRAY;
+
 //??
 //?? Special, additional abstractions (former signal languages).
 //?? Sort them into better categories later! See above!
 //??
-
-/** The character/ textual user interface (tui) language. */
-static const char TUI_LANGUAGE_ARRAY[] = {'t', 'u', 'i'};
-static const char* TUI_LANGUAGE = TUI_LANGUAGE_ARRAY;
-static const int TUI_LANGUAGE_COUNT_ARRAY[] = {3};
-static const int* TUI_LANGUAGE_COUNT = TUI_LANGUAGE_COUNT_ARRAY;
-
-/** The mouse language. */
-static const char MOUSE_LANGUAGE_ARRAY[] = {'m', 'o', 'u', 's', 'e'};
-static const char* MOUSE_LANGUAGE = MOUSE_LANGUAGE_ARRAY;
-static const int MOUSE_LANGUAGE_COUNT_ARRAY[] = {5};
-static const int* MOUSE_LANGUAGE_COUNT = MOUSE_LANGUAGE_COUNT_ARRAY;
-
-/** The x windows language. */
-static const char X_WINDOWS_LANGUAGE_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', 's'};
-static const char* X_WINDOWS_LANGUAGE = X_WINDOWS_LANGUAGE_ARRAY;
-static const int X_WINDOWS_LANGUAGE_COUNT_ARRAY[] = {9};
-static const int* X_WINDOWS_LANGUAGE_COUNT = X_WINDOWS_LANGUAGE_COUNT_ARRAY;
 
 /** The structured query language (sql). */
 static const char SQL_LANGUAGE_ARRAY[] = {'s', 'q', 'l'};
@@ -321,6 +325,46 @@ static const int* ZIP_LANGUAGE_COUNT = ZIP_LANGUAGE_COUNT_ARRAY;
 // The compound abstraction constant is defined above.
 // Primitive models as defined below are the final abstraction in software.
 //
+
+//
+// Program flow abstractions.
+//
+
+/** The set/ assign/ copy abstraction. */
+static const char SET_ABSTRACTION_ARRAY[] = {'s', 'e', 't'};
+static const char* SET_ABSTRACTION = SET_ABSTRACTION_ARRAY;
+static const int SET_ABSTRACTION_COUNT_ARRAY[] = {3};
+static const int* SET_ABSTRACTION_COUNT = SET_ABSTRACTION_COUNT_ARRAY;
+
+/** The compare abstraction. */
+static const char COMPARE_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'a', 'r', 'e'};
+static const char* COMPARE_ABSTRACTION = COMPARE_ABSTRACTION_ARRAY;
+static const int COMPARE_ABSTRACTION_COUNT_ARRAY[] = {7};
+static const int* COMPARE_ABSTRACTION_COUNT = COMPARE_ABSTRACTION_COUNT_ARRAY;
+
+/** The loop abstraction. */
+static const char LOOP_ABSTRACTION_ARRAY[] = {'l', 'o', 'o', 'p'};
+static const char* LOOP_ABSTRACTION = LOOP_ABSTRACTION_ARRAY;
+static const int LOOP_ABSTRACTION_COUNT_ARRAY[] = {4};
+static const int* LOOP_ABSTRACTION_COUNT = LOOP_ABSTRACTION_COUNT_ARRAY;
+
+/** The count part abstraction. */
+static const char COUNT_PART_ABSTRACTION_ARRAY[] = {'c', 'o', 'u', 'n', 't', '_', 'p', 'a', 'r', 't' };
+static const char* COUNT_PART_ABSTRACTION = COUNT_PART_ABSTRACTION_ARRAY;
+static const int COUNT_PART_ABSTRACTION_COUNT_ARRAY[] = {10};
+static const int* COUNT_PART_ABSTRACTION_COUNT = COUNT_PART_ABSTRACTION_COUNT_ARRAY;
+
+/** The build listname abstraction. */
+static const char BUILD_LISTNAME_ABSTRACTION_ARRAY[] = {'b', 'u', 'i', 'l', 'd', '_', 'l', 'i', 's', 't', 'n', 'a', 'm', 'e' };
+static const char* BUILD_LISTNAME_ABSTRACTION = BUILD_LISTNAME_ABSTRACTION_ARRAY;
+static const int BUILD_LISTNAME_ABSTRACTION_COUNT_ARRAY[] = {14};
+static const int* BUILD_LISTNAME_ABSTRACTION_COUNT = BUILD_LISTNAME_ABSTRACTION_COUNT_ARRAY;
+
+/** The selection abstraction. */
+static const char SELECTION_ABSTRACTION_ARRAY[] = {'s', 'e', 'l', 'e', 'c', 't', 'i', 'o', 'n' };
+static const char* SELECTION_ABSTRACTION = SELECTION_ABSTRACTION_ARRAY;
+static const int SELECTION_ABSTRACTION_COUNT_ARRAY[] = {9};
+static const int* SELECTION_ABSTRACTION_COUNT = SELECTION_ABSTRACTION_COUNT_ARRAY;
 
 //
 // Boolean logic abstractions.
@@ -459,49 +503,6 @@ static const char EXIT_ABSTRACTION_ARRAY[] = {'e', 'x', 'i', 't'};
 static const char* EXIT_ABSTRACTION = EXIT_ABSTRACTION_ARRAY;
 static const int EXIT_ABSTRACTION_COUNT_ARRAY[] = {4};
 static const int* EXIT_ABSTRACTION_COUNT = EXIT_ABSTRACTION_COUNT_ARRAY;
-
-
-//
-// Operations abstractions.
-//
-
-/** The loop abstraction. */
-static const char LOOP_ABSTRACTION_ARRAY[] = {'l', 'o', 'o', 'p'};
-static const char* LOOP_ABSTRACTION = LOOP_ABSTRACTION_ARRAY;
-static const int LOOP_ABSTRACTION_COUNT_ARRAY[] = {4};
-static const int* LOOP_ABSTRACTION_COUNT = LOOP_ABSTRACTION_COUNT_ARRAY;
-
-/** The compare abstraction. */
-static const char COMPARE_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'a', 'r', 'e'};
-static const char* COMPARE_ABSTRACTION = COMPARE_ABSTRACTION_ARRAY;
-static const int COMPARE_ABSTRACTION_COUNT_ARRAY[] = {7};
-static const int* COMPARE_ABSTRACTION_COUNT = COMPARE_ABSTRACTION_COUNT_ARRAY;
-
-/** The set abstraction. */
-static const char SET_ABSTRACTION_ARRAY[] = {'s', 'e', 't'};
-static const char* SET_ABSTRACTION = SET_ABSTRACTION_ARRAY;
-static const int SET_ABSTRACTION_COUNT_ARRAY[] = {3};
-static const int* SET_ABSTRACTION_COUNT = SET_ABSTRACTION_COUNT_ARRAY;
-
-
-/** The count part abstraction. */
-static const char COUNT_PART_ABSTRACTION_ARRAY[] = {'c', 'o', 'u', 'n', 't', '_', 'p', 'a', 'r', 't' };
-static const char* COUNT_PART_ABSTRACTION = COUNT_PART_ABSTRACTION_ARRAY;
-static const int COUNT_PART_ABSTRACTION_COUNT_ARRAY[] = {10};
-static const int* COUNT_PART_ABSTRACTION_COUNT = COUNT_PART_ABSTRACTION_COUNT_ARRAY;
-
-/** The build listname abstraction. */
-static const char BUILD_LISTNAME_ABSTRACTION_ARRAY[] = {'b', 'u', 'i', 'l', 'd', '_', 'l', 'i', 's', 't', 'n', 'a', 'm', 'e' };
-static const char* BUILD_LISTNAME_ABSTRACTION = BUILD_LISTNAME_ABSTRACTION_ARRAY;
-static const int BUILD_LISTNAME_ABSTRACTION_COUNT_ARRAY[] = {14};
-static const int* BUILD_LISTNAME_ABSTRACTION_COUNT = BUILD_LISTNAME_ABSTRACTION_COUNT_ARRAY;
-
-/** The  selection abstraction. */
-static const char SELECTION_ABSTRACTION_ARRAY[] = {'s', 'e', 'l', 'e', 'c', 't', 'i', 'o', 'n' };
-static const char* SELECTION_ABSTRACTION = SELECTION_ABSTRACTION_ARRAY;
-static const int SELECTION_ABSTRACTION_COUNT_ARRAY[] = {9};
-static const int* SELECTION_ABSTRACTION_COUNT = SELECTION_ABSTRACTION_COUNT_ARRAY;
-
 
 //
 //

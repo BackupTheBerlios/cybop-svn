@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2005-03-02 07:22:03 $ $Author: rholzmueller $
+ * @version $Revision: 1.16 $ $Date: 2005-03-18 00:42:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -224,7 +224,7 @@ void send_message(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays((void*) *lm, (void*) *lmc, (void*) TUI_LANGUAGE, (void*) TUI_LANGUAGE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *lm, (void*) *lmc, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
@@ -274,33 +274,33 @@ void send_message(const void* p0, const void* p1,
                 get_client_socket_number_for_index(p6, (void*) &i, (void*) &cs);
 
                 if (*cs >= 0) {
-                   
+
                     //in abhängigkeit vom empfänger
                     //müssen die Daten verschieden aufbereitet werden
                     //zur Zeit nur TCP socket für webanwednung
                     //darum z.Z. immer html-Aufbereitung
                     //--> das bedeuet, das ermittelte Modell
                     //muss noch für die Ausgabe aufbereuitet (tranlate) werden.
-                    
+
                     //create the destination for the send model
                     void* dest = NULL_POINTER;
                     int* dest_count = INTEGER_NULL_POINTER;
                     int* dest_size = INTEGER_NULL_POINTER;
-                    
-                    create( &dest_count, INTEGER_COUNT, 
+
+                    create( &dest_count, INTEGER_COUNT,
                             INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
-                    create( &dest_size, INTEGER_COUNT, 
+                    create( &dest_size, INTEGER_COUNT,
                             INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
                     *dest_count = 0;
                     *dest_size  = 0;
-                    create( &dest, dest_size, 
+                    create( &dest, dest_size,
                             STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT );
-                    
+
                     encode_model( &dest, dest_count, dest_size,
-                                  *ma, *mac, 
+                                  *ma, *mac,
                                   *mm, *mmc,
                                   *md, *mdc,
-                                  (void*) HTML_ABSTRACTION, 
+                                  (void*) HTML_ABSTRACTION,
                                   (void*) HTML_ABSTRACTION_COUNT,
                                   p2, p3 );
 
@@ -308,7 +308,7 @@ void send_message(const void* p0, const void* p1,
                     int tc = 0;
                     int ts = 0;
 
-                    send_tcp_socket( (void*) &cs, (void*) &tc, (void*) &ts, 
+                    send_tcp_socket( (void*) &cs, (void*) &tc, (void*) &ts,
                                      (void*) dest, (void*) dest_count );
 
                     // Remove client socket number and main signal id from internals.
@@ -316,15 +316,15 @@ void send_message(const void* p0, const void* p1,
 
                     // Close socket.
                     close(*cs);
-                    
-                    //destroy destination 
-                    destroy( &dest, dest_size, 
+
+                    //destroy destination
+                    destroy( &dest, dest_size,
                              STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT );
-                    destroy( &dest_count, INTEGER_COUNT, 
+                    destroy( &dest_count, INTEGER_COUNT,
                              INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
-                    destroy( &dest_size, INTEGER_COUNT, 
+                    destroy( &dest_size, INTEGER_COUNT,
                              INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
-                                                 
+
                 } else {
 
                     log_message_debug("Could not send tcp socket message. The client socket number was not found.");

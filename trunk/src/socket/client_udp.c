@@ -23,7 +23,7 @@
  *
  * This file handles a client UDP socket.
  *
- * @version $Revision: 1.4 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-03-18 00:42:09 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -31,16 +31,12 @@
 #ifndef CLIENT_UDP_SOURCE
 #define CLIENT_UDP_SOURCE
 
-#include <stdio.h>
-#include <sys/types.h>   //int socket(..)
-#include <sys/socket.h>  //int socket(..),int bind(..)
-#include <netinet/in.h>
-#include <arpa/inet.h>
+#include "../global/includes.c"
 
+/*??
 char *pfad = "/home/cybop/object/socket/server_udp.o";
 
-int main()
-{
+int main() {
 
     int socketnummer;
     int laenge;
@@ -89,6 +85,7 @@ while (i<10) {
  close(socketnummer);
 return 0;
 }
+*/
 
 /* CLIENT_UDP_SOURCE */
 #endif

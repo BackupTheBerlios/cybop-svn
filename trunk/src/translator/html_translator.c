@@ -21,27 +21,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-03-02 07:26:29 $ $Author: rholzmueller $
+ * @version $Revision: 1.2 $ $Date: 2005-03-18 00:42:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef HTML_TRANSLATOR_SOURCE
 #define HTML_TRANSLATOR_SOURCE
 
-#include <libxml/tree.h>
-#include <string.h>
-#include "../accessor/compound_accessor.c"
-#include "../array/array.c"
-#include "../creator/compound_creator.c"
-#include "../creator/xml_node_creator.c"
-#include "../creator/xml_property_creator.c"
-#include "../global/abstraction_constants.c"
-#include "../global/channel_constants.c"
-#include "../global/character_constants.c"
-#include "../global/cybol_constants.c"
-#include "../global/log_constants.c"
-#include "../global/name_constants.c"
-#include "../logger/logger.c"
+#include "../global/includes.c"
 
 //
 // Forward declarations.
@@ -62,7 +49,7 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
  * @param dest_size the destination size
  * @param source_model the source model
  * @param source_model_count the source model count
- * @param source_detail the source detail 
+ * @param source_detail the source detail
  * @param source_detail_count the source detail count
  * @param know the knowledge memeory
  * @param know_count the knowledge memeory count
@@ -70,7 +57,7 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
 void encode_html_compound( void** dest, int* dest_count, int* dest_size,
                            const void* source_model, const int* source_model_count,
                            const void* source_detail, const int* source_detail_count,
-                           const void* know, const int* know_count ) 
+                           const void* know, const int* know_count )
 {
 
     // The compound abstraction.
@@ -86,30 +73,30 @@ void encode_html_compound( void** dest, int* dest_count, int* dest_size,
     void** comp_detail_count = POINTER_NULL_POINTER;
     void** comp_detail_size = POINTER_NULL_POINTER;
 
- 
+
     int comp_index = 0;
-    
+
     while (1) {
-       
+
         if (comp_index >= *source_model_count) {
-            break;  
+            break;
         }
 
-        get_compound_element_by_index( 
+        get_compound_element_by_index(
             source_model, source_model_count, (void*) &comp_index,
             &comp_abstr, &comp_abstr_count, &comp_abstr_size,
             &comp_model, &comp_model_count, &comp_model_size,
-            &comp_detail, &comp_detail_count, &comp_detail_size );       
-            
-        encode_html( dest, dest_count, dest_size, 
-                     *comp_abstr, *comp_abstr_count, 
-                     *comp_model, *comp_model_count, 
+            &comp_detail, &comp_detail_count, &comp_detail_size );
+
+        encode_html( dest, dest_count, dest_size,
+                     *comp_abstr, *comp_abstr_count,
+                     *comp_model, *comp_model_count,
                      *comp_detail, *comp_detail_count,
                      know, know_count );
-            
+
         comp_index++;
     }
-}                         
+}
 
 
 /**
@@ -120,20 +107,20 @@ void encode_html_compound( void** dest, int* dest_count, int* dest_size,
  * @param dest_size the destination size
  * @param source_model the source model
  * @param source_model_count the source model count
- * @param source_detail the source detail 
+ * @param source_detail the source detail
  * @param source_detail_count the source detail count
  * @param know the knowledge memeory
  * @param know_count the knowledge memeory count
  */
-void encode_html_knowledgememory( 
+void encode_html_knowledgememory(
     void** dest, int* dest_count, int* dest_size,
     const void* source_model, const int* source_model_count,
     const void* source_detail, const int* source_detail_count,
-    const void* know, const int* know_count ) 
+    const void* know, const int* know_count )
 {
 
     if ( (source_model!=NULL_POINTER) &&
-         (source_model_count!=NULL_POINTER) ) 
+         (source_model_count!=NULL_POINTER) )
     {
 
         // The compound abstraction.
@@ -148,20 +135,20 @@ void encode_html_knowledgememory(
         void** comp_detail = POINTER_NULL_POINTER;
         void** comp_detail_count = POINTER_NULL_POINTER;
         void** comp_detail_size = POINTER_NULL_POINTER;
-    
-        get_compound_element_by_name( 
-            know, know_count, 
+
+        get_compound_element_by_name(
+            know, know_count,
             source_model, source_model_count,
             &comp_abstr, &comp_abstr_count, &comp_abstr_size,
             &comp_model, &comp_model_count, &comp_model_size,
             &comp_detail, &comp_detail_count, &comp_detail_size );
-            
-        encode_html( dest, dest_count, dest_size, 
-                     *comp_abstr, *comp_abstr_count, 
-                     *comp_model, *comp_model_count, 
+
+        encode_html( dest, dest_count, dest_size,
+                     *comp_abstr, *comp_abstr_count,
+                     *comp_model, *comp_model_count,
                      *comp_detail, *comp_detail_count,
                      know, know_count );
-    }           
+    }
 }
 
 
@@ -177,38 +164,38 @@ void encode_html_knowledgememory(
  * @param dest_size the destination size
  * @param source_model the source model
  * @param source_model_count the source model count
- * @param source_detail the source detail 
+ * @param source_detail the source detail
  * @param source_detail_count the source detail count
  */
 void encode_html_string( void** dest, int* dest_count, int* dest_size,
                          const void* source_model, const int* source_model_count,
-                         const void* source_detail, const int* source_detail_count) 
+                         const void* source_detail, const int* source_detail_count)
 {
 
     if ( (dest != NULL_POINTER ) &&
          (dest_count != NULL_POINTER ) &&
          (dest_size != NULL_POINTER ) )
     {
-        
+
         //parse the model
         parse( dest, dest_count, dest_size,
                source_model, source_model_count,
-               STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT); 
+               STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
     }
 }
 
 /**
  * Encodes a model into a html string.
- * 
- * destination ist ein String. In dem Steht der Vollständige 
+ *
+ * destination ist ein String. In dem Steht der Vollständige
  * html-Text, der aus dem model generiert werden kann, enthalten
- * in den properties von dem model steht der html_tag drinne. 
- * Ist das model ein compound, so muss  dieses compound hierarchisch 
- * aufgelößt werden. 
+ * in den properties von dem model steht der html_tag drinne.
+ * Ist das model ein compound, so muss  dieses compound hierarchisch
+ * aufgelößt werden.
  *
  * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count 
- * @param p2 the destination size 
+ * @param p1 the destination count
+ * @param p2 the destination size
  * @param p3 the source model
  * @param p4 the source model count
  * @param p3 the source abstraction
@@ -218,7 +205,7 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
                   const void* source_abstr, const int* source_abstr_count,
                   const void* source_model, const int* source_model_count,
                   const void* source_detail, const int* source_detail_count,
-                  const void* know, const int* know_count ) 
+                  const void* know, const int* know_count )
 {
 
     //check for destination
@@ -226,7 +213,7 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
          (dest_count != NULL_POINTER ) &&
          (dest_size != NULL_POINTER ) )
     {
-        
+
 
         // The html tag abstraction.
         void** tag_abstr = POINTER_NULL_POINTER;
@@ -240,17 +227,17 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
         void** tag_detail = POINTER_NULL_POINTER;
         void** tag_detail_count = POINTER_NULL_POINTER;
         void** tag_detail_size = POINTER_NULL_POINTER;
-        
-        //in the source detail look for html_tag 
+
+        //in the source detail look for html_tag
         if ( (source_detail != NULL_POINTER) &&
              (source_detail_count != NULL_POINTER) ) {
-        
+
             get_compound_element_by_name(
                 source_detail, source_detail_count,
                 HTML_TAG_NAME_ABSTRACTION, HTML_TAG_NAME_ABSTRACTION_COUNT,
                 &tag_abstr, &tag_abstr_count, &tag_abstr_size,
                 &tag_model, &tag_model_count, &tag_model_size,
-                &tag_detail, &tag_detail_count, &tag_detail_size             
+                &tag_detail, &tag_detail_count, &tag_detail_size
             );
         }
 
@@ -260,41 +247,41 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
              (tag_model_size != POINTER_NULL_POINTER)
            )
         {
-         
+
             if ( (*tag_model!=NULL_POINTER) &&
                  (*tag_model_count!=NULL_POINTER) &&
-                 (*tag_model_size!=NULL_POINTER) 
+                 (*tag_model_size!=NULL_POINTER)
                )
             {
                 //parse the <
                 parse( dest, dest_count, dest_size,
                        LESS_THAN_SIGN_CHARACTER, LESS_THAN_SIGN_CHARACTER_COUNT,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT); 
-                       
+                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+
                 //parse the html tag
                 parse( dest, dest_count, dest_size,
                        *tag_model, *tag_model_count,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT); 
+                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
-                //parse the > 
+                //parse the >
                 parse( dest, dest_count, dest_size,
                        GREATER_THAN_SIGN_CHARACTER, GREATER_THAN_SIGN_CHARACTER_COUNT,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT); 
+                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
             }
         }
 
-        //encode the model 
+        //encode the model
         int r = 0;
-    
+
         if (r != 1) {
-    
+
             compare_arrays( source_abstr, source_abstr_count,
-                            (void*) COMPOUND_ABSTRACTION, 
-                            (void*) COMPOUND_ABSTRACTION_COUNT, 
+                            (void*) COMPOUND_ABSTRACTION,
+                            (void*) COMPOUND_ABSTRACTION_COUNT,
                             (void*) &r, (void*) CHARACTER_ARRAY);
             if (r == 1) {
-    
+
                 encode_html_compound( dest, dest_count, dest_size,
                                       source_model, source_model_count,
                                       source_detail, source_detail_count,
@@ -303,14 +290,14 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
         }
 
         if (r != 1) {
-    
+
             compare_arrays( source_abstr, source_abstr_count,
-                            (void*) KNOWLEDGE_MEMORY_ABSTRACTION, 
-                            (void*) KNOWLEDGE_MEMORY_ABSTRACTION_COUNT, 
+                            (void*) KNOWLEDGE_MEMORY_ABSTRACTION,
+                            (void*) KNOWLEDGE_MEMORY_ABSTRACTION_COUNT,
                             (void*) &r, (void*) CHARACTER_ARRAY);
             if (r == 1) {
-    
-                encode_html_knowledgememory( 
+
+                encode_html_knowledgememory(
                     dest, dest_count, dest_size,
                     source_model, source_model_count,
                     source_detail, source_detail_count,
@@ -319,13 +306,13 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
         }
 
         if (r != 1) {
-    
+
             compare_arrays( source_abstr, source_abstr_count,
-                            (void*) CYBOL_ABSTRACTION, 
-                            (void*) CYBOL_ABSTRACTION_COUNT, 
+                            (void*) CYBOL_ABSTRACTION,
+                            (void*) CYBOL_ABSTRACTION_COUNT,
                             (void*) &r, (void*) CHARACTER_ARRAY);
             if (r == 1) {
-    
+
                 encode_html_compound( dest, dest_count, dest_size,
                                       source_model, source_model_count,
                                       source_detail, source_detail_count,
@@ -333,15 +320,15 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
             }
         }
 
-    
+
         if (r != 1) {
-    
+
             compare_arrays( source_abstr, source_abstr_count,
-                            (void*) STRING_ABSTRACTION, 
-                            (void*) STRING_ABSTRACTION_COUNT, 
+                            (void*) STRING_ABSTRACTION,
+                            (void*) STRING_ABSTRACTION_COUNT,
                             (void*) &r, (void*) CHARACTER_ARRAY);
             if (r == 1) {
-             
+
                 encode_html_string( dest, dest_count, dest_size,
                                     source_model, source_model_count,
                                     source_detail, source_detail_count );
@@ -354,31 +341,31 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
              (tag_model_size != POINTER_NULL_POINTER)
            )
         {
-         
+
             if ( (*tag_model!=NULL_POINTER) &&
                  (*tag_model_count!=NULL_POINTER) &&
-                 (*tag_model_size!=NULL_POINTER) 
+                 (*tag_model_size!=NULL_POINTER)
                )
             {
-                //parse the < 
+                //parse the <
                 parse( dest, dest_count, dest_size,
                        LESS_THAN_SIGN_CHARACTER, LESS_THAN_SIGN_CHARACTER_COUNT,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT); 
-                       
+                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+
                 //parse the /
                 parse( dest, dest_count, dest_size,
                        SOLIDUS_CHARACTER, SOLIDUS_CHARACTER_COUNT,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT); 
+                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
                 //parse the html tag
                 parse( dest, dest_count, dest_size,
                        *tag_model, *tag_model_count,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT); 
+                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
                 //parse the >
                 parse( dest, dest_count, dest_size,
                        GREATER_THAN_SIGN_CHARACTER, GREATER_THAN_SIGN_CHARACTER_COUNT,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT); 
+                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
             }
         }
     }  //check for destination

@@ -21,25 +21,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-03-02 07:27:19 $ $Author: rholzmueller $
+ * @version $Revision: 1.13 $ $Date: 2005-03-18 00:42:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOL_TRANSLATOR_SOURCE
 #define CYBOL_TRANSLATOR_SOURCE
 
-#include <libxml/tree.h>
-#include <string.h>
-#include "../array/array.c"
-#include "../creator/compound_creator.c"
-#include "../creator/xml_node_creator.c"
-#include "../creator/xml_property_creator.c"
-#include "../global/abstraction_constants.c"
-#include "../global/channel_constants.c"
-#include "../global/character_constants.c"
-#include "../global/cybol_constants.c"
-#include "../global/log_constants.c"
-#include "../logger/logger.c"
+#include "../global/includes.c"
 
 //
 // Forward declarations.

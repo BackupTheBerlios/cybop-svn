@@ -21,21 +21,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2005-03-02 07:27:58 $ $Author: rholzmueller $
+ * @version $Revision: 1.15 $ $Date: 2005-03-18 00:42:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef TRANSLATOR_SOURCE
 #define TRANSLATOR_SOURCE
 
-#include "../array/array.c"
-#include "../creator/integer_creator.c"
-#include "../global/abstraction_constants.c"
-#include "../global/log_constants.c"
-#include "../logger/logger.c"
-#include "../translator/configuration_translator.c"
-#include "../translator/cybol_translator.c"
-#include "../translator/html_translator.c"
+#include "../global/includes.c"
 
 /**
  * Decodes the document model according to the given document type
@@ -67,6 +60,46 @@ void decode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
     if (r != 1) {
 
+        compare_arrays(p5, p6, (void*) X_WINDOWS_ABSTRACTION, (void*) X_WINDOWS_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            decode_x_windows(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p5, p6, (void*) HTML_ABSTRACTION, (void*) HTML_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+//??            decode_html(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p5, p6, (void*) SXW_ABSTRACTION, (void*) SXW_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+//??            decode_sxw(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p5, p6, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+//??            decode_hxp(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r != 1) {
+
         compare_arrays(p5, p6, (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
@@ -74,9 +107,6 @@ void decode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
             decode_configuration(p0, p1, p2, p3, p4);
         }
     }
-
-    //?? Later, additional formats besides cybol might be read,
-    //?? for example html, sxi, hdx.sf.net etc.
 }
 
 /**
@@ -109,6 +139,46 @@ void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
     if (r != 1) {
 
+        compare_arrays(p5, p6, (void*) X_WINDOWS_ABSTRACTION, (void*) X_WINDOWS_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            encode_x_windows(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p5, p6, (void*) HTML_ABSTRACTION, (void*) HTML_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+//??            encode_html(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p5, p6, (void*) SXW_ABSTRACTION, (void*) SXW_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+//??            encode_sxw(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p5, p6, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+//??            encode_hxp(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r != 1) {
+
         compare_arrays(p5, p6, (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
@@ -116,11 +186,7 @@ void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
             encode_configuration(p0, p1, p2, p3, p4);
         }
     }
-
-    //?? Later, additional formats besides cybol might be read,
-    //?? for example html, sxi, hdx.sf.net etc.
 }
-
 
 /**
  * Encodes a cyboi model according to the given document type
@@ -140,15 +206,13 @@ void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  * @param know the knowledege memeory
  * @param know_count the knowledege memeory count
  * @param know_size the knowledege memeory size
- * 
  */
-void encode_model( void** dest, int* dest_count, int* dest_size, 
-                   const void* source_abstr, const int* source_abstr_count,
-                   const void* source_model, const int* source_model_count,
-                   const void* source_detail, const int* source_detail_count,
-                   const void* type, const int* type_count,
-                   const void* know, const int* know_count) 
-{
+void encode_model(void** dest, int* dest_count, int* dest_size,
+                  const void* source_abstr, const int* source_abstr_count,
+                  const void* source_model, const int* source_model_count,
+                  const void* source_detail, const int* source_detail_count,
+                  const void* type, const int* type_count,
+                  const void* know, const int* know_count) {
 
     // The comparison result.
     int r = 0;
@@ -159,16 +223,13 @@ void encode_model( void** dest, int* dest_count, int* dest_size,
 
         if (r == 1) {
 
-            encode_html( dest, dest_count, dest_size,
-                         source_abstr, source_abstr_count,
-                         source_model, source_model_count,
-                         source_detail, source_detail_count,
-                         know, know_count );
+            encode_html(dest, dest_count, dest_size,
+                        source_abstr, source_abstr_count,
+                        source_model, source_model_count,
+                        source_detail, source_detail_count,
+                        know, know_count);
         }
     }
-
-    //?? Later, additional formats besides cybol might be read,
-    //?? for example html, sxi, hdx.sf.net etc.
 }
 
 /* TRANSLATOR_SOURCE */
