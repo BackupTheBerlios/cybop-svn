@@ -24,11 +24,11 @@
 
 package cyboi;
 
-import java.io.*;
-import org.apache.xerces.dom.*;
-import org.apache.xerces.parsers.*;
-import org.apache.xml.serialize.*;
-import org.w3c.dom.*;
+//?? import java.io.*;
+//?? import org.apache.xerces.dom.*;
+//?? import org.apache.xerces.parsers.*;
+//?? import org.apache.xml.serialize.*;
+//?? import org.w3c.dom.*;
 
 /**
  * This is the main class of the <i>Cybernetics Oriented Interpreter</i> (CYBOI).<br><br>
@@ -38,7 +38,7 @@ import org.w3c.dom.*;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.4 $ $Date: 2003-07-17 23:26:15 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-07-18 11:24:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -47,87 +47,14 @@ class Main {
     //?? java.io.ObjectOutputStream::writeArray
     //?? for how to transfer a Object into a byte[]
 
-    //
-    // Complex constant.
-    //
-    
-    /** The complex constant. */
-    static final String COMPLEX = new String("complex");
+    /** The xml dom parser. */
+    static org.apache.xerces.parsers.DOMParser parser;
 
-    //
-    // Primitive constants.
-    //
-    
-    /** The integer primitive constant. */
-    static final String INTEGER_PRIMITIVE = new String("integer_primitive");
+    /** The java event handler. */
+    static JavaEventHandler java_event_handler;
 
-    /** The float primitive constant. */
-    static final String FLOAT_PRIMITIVE = new String("float_primitive");
-
-    /** The char primitive constant. */
-    static final String CHAR_PRIMITIVE = new String("char_primitive");
-
-    /** The string primitive constant. */
-    static final String STRING_PRIMITIVE = new String("string_primitive");
-
-    //
-    // Application constants.
-    //
-    
-    /** The koffice kword application constant. */
-    static final String KWORD_APPLICATION = new String("kword_application");
-
-    /** The open office writer application constant. */
-    static final String SXW_APPLICATION = new String("sxw_application");
-
-    //
-    // Audio constants.
-    //
-    
-    /** The mp3 audio constant. */
-    static final String MP3_AUDIO = new String("mp3_audio");
-
-    //
-    // Image constants.
-    //
-    
-    /** The jpeg image constant. */
-    static final String JPEG_IMAGE = new String("jpeg_image");
-
-    /** The gif image constant. */
-    static final String GIF_IMAGE = new String("gif_image");
-
-    /** The bmp image constant. */
-    static final String BMP_IMAGE = new String("bmp_image");
-
-    //
-    // Text constants.
-    //
-    
-    /** The sgml text constant. */
-    static final String SGML_TEXT = new String("sgml_text");
-
-    /** The xml text constant. */
-    static final String XML_TEXT = new String("xml_text");
-
-    /** The html text constant. */
-    static final String HTML_TEXT = new String("html_text");
-
-    /** The rtf text constant. */
-    static final String RTF_TEXT = new String("rtf_text");
-
-    /** The tex text constant. */
-    static final String TEX_TEXT = new String("tex_text");
-
-    //
-    // Video constants.
-    //
-    
-    /** The mpeg video constant. */
-    static final String MPEG_VIDEO = new String("mpeg_video");
-
-    /** The quicktime video constant. */
-    static final String QUICKTIME_VIDEO = new String("quicktime_video");
+    /** The signal memory. */
+    static Map signal_memory;
 
     /*
      * The main method.
@@ -140,33 +67,35 @@ class Main {
 
             if (args != null) {
 
-                // Setup XML processing environment (SAX).
-                
-                // Take initial system .cybol file, given as argument.
-
-                // Create system.
-                Item i = ItemHandler.createItem();
-
-                Main.initialize(i, args[0]);
-
-                // Setup Java Event Handler.
-                // All Java events get transformed into CYBOP signals and
-                // are then sent through the whole system.
+                Main.java_event_handler = create_java_event_handling();
+                create_signal_memory();
+                create_statics();
+                create_dynamics();
 
                 // Alternative to Java Event Handler
                 // (if it gets replaced one day, once CYBOI is implemented in C):
-                // Enter waiting loop and read events (IRQs) from devices.
+                // Enter waiting loop and read events (IRQs) from devices (IVT?).
 
                 // The system is now started up and complete so that a loop
                 // can be entered, waiting for signals (events).
                 Main.await();
 
+                Item i = ItemHandler.create_item();
+
+                Main.initialize(i, args[0]); //?? dynamics
+//??                Main.initialize(i, args[1]); //?? statics
+
                 // The loop above is left as soon as the shutdown flag is set.
 
 //??                Main.finalizz(i);
 
-                // Destroy system.
-                ItemHandler.destroyItem(i);
+                ItemHandler.destroy_item(i);
+
+                destroy_dynamics();
+                destroy_statics();
+                destroy_signal_memory();
+                destroy_java_event_handling();
+                destroy_xml_environment();
 
                 //
                 // Runtime.getRuntime().exit(0);
@@ -175,12 +104,12 @@ class Main {
                 // do the same thing.
                 // The program exits normally, when the last non-daemon thread exits.
                 //
-                System.out.println("INFO: Exit system normally.");
-                System.exit(0);
+                java.lang.System.out.println("INFO: Exit system normally.");
+                java.lang.System.exit(0);
 
             } else {
 
-                System.out.println("Could not execute cyboi. The argument array is null.");
+                java.lang.System.out.println("Could not execute cyboi. The argument array is null.");
             }
 
         } catch (Exception e) {
@@ -193,12 +122,78 @@ class Main {
             // The system exits normally, when the last non-daemon thread exits.
             // Since an exception was caught here, the system exits unnormally.
             //
-            System.out.println("ERROR: Exit cyboi unnormally. Undiscovered exception:\n");
+            java.lang.System.out.println("ERROR: Exit cyboi unnormally. Undiscovered exception:\n");
             e.printStackTrace();
-            System.exit(1);
+            java.lang.System.exit(1);
         }
     }
 
+    /**
+     * Initializes the signal memory.
+     */
+    static void initialize_signal_memory() throws Exception {
+
+        Main.signal_memory = MapHandler.create_map();
+    }
+
+    /**
+     * Initializes the xml environment.
+     */
+    static void initialize_xml_environment() throws Exception {
+
+        Main.parser = new org.apache.xerces.parsers.DOMParser();
+    }
+
+    /**
+     * Creates the java event handler.
+     *
+     * @return the java event handler
+     */
+    static JavaEventHandler create_java_event_handler() throws Exception {
+
+        JavaEventHandler h = new JavaEventHandler();
+        
+        // Start the awt event thread by calling getDefaultToolkit().
+        // Otherwise, the event thread is started by calling the show method
+        // on a java awt frame.
+        java.awt.Toolkit t = java.awt.Toolkit.getDefaultToolkit();
+
+        if (t != null) {
+
+            java.awt.EventQueue q = t.getSystemEventQueue();
+
+            if (q != null) {
+
+                // Replace the system event queue with the java event handler.
+                q.push(h);
+
+            } else {
+
+                java.lang.System.out.println("Could not create java event handler. The java event queue is null.");
+            }
+
+        } else {
+
+            java.lang.System.out.println("Could not startup system. The java awt toolkit is null.");
+        }
+        
+        return h;
+    }
+
+    /**
+     * Destroys the java event handler.
+     *
+     * @param h the java event handler
+     */
+    static void destroy_java_event_handler(JavaEventHandler h) {
+
+        Main.java_event_handler = null;
+    }
+
+    //
+    // Initialization.
+    //
+    
     /**
      * Initializes the item.
      *
@@ -207,24 +202,23 @@ class Main {
      */
     static void initialize(Item item, Object c) throws Exception {
 
-        String f = c + ".cybol";
-        Document doc = new DocumentImpl();
-        DOMParser p = new DOMParser();
+        java.lang.String f = c + ".cybol";
+        org.w3c.dom.Document doc = new org.apache.xerces.dom.DocumentImpl();
 
-        if (p != null) {
+        if (Main.parser != null) {
             
-            p.setFeature("http://xml.org/sax/features/validation", true);
-            p.parse(f);
-            System.out.println("INFO: Parsed file: " + f);
+            Main.parser.setFeature("http://xml.org/sax/features/validation", true);
+            Main.parser.parse(f);
+            java.lang.System.out.println("INFO: Parsed file: " + f);
             
-            doc = p.getDocument();
+            doc = Main.parser.getDocument();
             
             if (doc != null) {
                 
                 doc.normalize();
         
-                NodeList l = null;
-                Node n = null;
+                org.w3c.dom.NodeList l = null;
+                org.w3c.dom.Node n = null;
 
 /*??
                 l = doc.getElementsByTagName("name");
@@ -236,16 +230,16 @@ class Main {
                     if (n != null) {
                         
                         String name = n.getNodeValue();
-                        System.out.println("INFO: Read name: " + name);
+                        java.lang.System.out.println("INFO: Read name: " + name);
                         
                     } else {
                         
-                        System.out.println("ERROR: The node is null.");
+                        java.lang.System.out.println("ERROR: The node is null.");
                     }
                     
                 } else {
                     
-                    System.out.println("ERROR: The node list is null.");
+                    java.lang.System.out.println("ERROR: The node list is null.");
                 }
                     
                 l = doc.getElementsByTagName("super");
@@ -257,16 +251,16 @@ class Main {
                     if (n != null) {
                         
                         String superCategory = n.getNodeValue();
-                        System.out.println("INFO: Read super: " + superCategory);
+                        java.lang.System.out.println("INFO: Read super: " + superCategory);
                         
                     } else {
                         
-                        System.out.println("ERROR: The node is null.");
+                        java.lang.System.out.println("ERROR: The node is null.");
                     }
                     
                 } else {
                     
-                    System.out.println("ERROR: The node list is null.");
+                    java.lang.System.out.println("ERROR: The node list is null.");
                 }
 */
                     
@@ -276,13 +270,13 @@ class Main {
                     
                     int size = l.getLength();
                     int i = 0;
-                    NamedNodeMap m = null;
+                    org.w3c.dom.NamedNodeMap m = null;
                     int msize = 0;
                     int j = 0;
-                    Node a = null;
-                    String name = null;
-                    String abstraction = null;
-                    String category = null;
+                    org.w3c.dom.Node a = null;
+                    java.lang.String name = null;
+                    java.lang.String abstraction = null;
+                    java.lang.String category = null;
        
                     while (i < size) {
                     
@@ -292,7 +286,7 @@ class Main {
                                 
 /*??
                             item = n.getNodeValue();
-                            System.out.println("INFO: Read item: " + item);
+                            java.lang.System.out.println("INFO: Read item: " + item);
 */
                         
                             m = n.getAttributes();
@@ -301,72 +295,72 @@ class Main {
                 
                                 a = m.getNamedItem("name");
                                 name = a.getNodeValue();
-                                System.out.println(name);
+                                java.lang.System.out.println(name);
             
                                 a = m.getNamedItem("abstraction");
                                 abstraction = a.getNodeValue();
-                                System.out.println(abstraction);
+                                java.lang.System.out.println(abstraction);
             
                                 a = m.getNamedItem("category");
                                 category = a.getNodeValue();
-                                System.out.println(category);
+                                java.lang.System.out.println(category);
 
                             } else {
                                 
-                                System.out.println("ERROR: The named node map is null.");
+                                java.lang.System.out.println("ERROR: The named node map is null.");
                             }
 
                         } else {
                             
-                            System.out.println("ERROR: The node is null.");
+                            java.lang.System.out.println("ERROR: The node is null.");
                         }
                         
                         i++;
                     }
                     
-                    Object child = null;
+                    java.lang.Object child = null;
                     
                     if (abstraction != null) {
             
-                        if (abstraction.equals(Main.INTEGER_PRIMITIVE)) {
+                        if (abstraction.equals(Statics.INTEGER_PRIMITIVE)) {
             
-                            child = PrimitiveHandler.createIntegerPrimitive(category);
+                            child = PrimitiveHandler.create_integer_primitive(category);
             
-                        } else if (abstraction.equals(Main.FLOAT_PRIMITIVE)) {
+                        } else if (abstraction.equals(Statics.FLOAT_PRIMITIVE)) {
             
-                            child = PrimitiveHandler.createFloatPrimitive(category);
+                            child = PrimitiveHandler.create_float_primitive(category);
             
-                        } else if (abstraction.equals(Main.CHAR_PRIMITIVE)) {
+                        } else if (abstraction.equals(Statics.CHAR_PRIMITIVE)) {
             
-                            child = PrimitiveHandler.createCharacterPrimitive(category);
+                            child = PrimitiveHandler.create_character_primitive(category);
             
-                        } else if (abstraction.equals(Main.STRING_PRIMITIVE)) {
+                        } else if (abstraction.equals(Statics.STRING_PRIMITIVE)) {
             
-                            child = PrimitiveHandler.createStringPrimitive(category);
+                            child = PrimitiveHandler.create_string_primitive(category);
             
-                        } else if (abstraction.equals(Main.COMPLEX)) {
+                        } else if (abstraction.equals(Statics.COMPLEX)) {
             
-//??                            child = ItemHandler.createItem(category);
+//??                            child = ItemHandler.create_item(category);
                         }
                     
                     } else {
                         
-                        System.out.println("ERROR: The abstraction is null.");
+                        java.lang.System.out.println("ERROR: The abstraction is null.");
                     }
                     
                 } else {
                     
-                    System.out.println("ERROR: The node list is null.");
+                    java.lang.System.out.println("ERROR: The node list is null.");
                 }
 
             } else {
                 
-                System.out.println("ERROR: The document is null.");
+                java.lang.System.out.println("ERROR: The document is null.");
             }
             
         } else {
             
-            System.out.println("ERROR: The parser is null.");
+            java.lang.System.out.println("ERROR: The parser is null.");
         }
             
 /*??
@@ -460,7 +454,7 @@ class Main {
 
         } else {
 
-            System.out.println("DEBUG: Could not read item. The abstraction is null.");
+            java.lang.System.out.println("DEBUG: Could not read item. The abstraction is null.");
         }
     }
 */
@@ -490,7 +484,7 @@ class Main {
 
             } else {
 
-                throw new Exception("Could not wait for signals. The shutdown flag is null.");
+                java.lang.System.out.println("Could not wait for signals. The shutdown flag is null.");
             }
 
             queued = fetchSignal();
@@ -502,10 +496,10 @@ class Main {
                 //?? These signals were created outside this method but must be
                 //?? destroyed here!
 
-                java.lang.System.out.println("DEBUG: Handle signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChild(Signal.PREDICATE)).getJavaObject());
+                java.lang.java.lang.System.out.println("DEBUG: Handle signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChild(Signal.PREDICATE)).getJavaObject());
                 handle(queued, new Boolean(Boolean.FALSE));
 
-                java.lang.System.out.println("DEBUG: Send signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChild(Signal.PREDICATE)).getJavaObject());
+                java.lang.java.lang.System.out.println("DEBUG: Send signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChild(Signal.PREDICATE)).getJavaObject());
                 send(queued);
 
                 destroyChild(queued);
@@ -529,7 +523,7 @@ class Main {
         
                 } else {
         
-                    throw new Exception("Could not reset signal. The signal is null.");
+                    java.lang.System.out.println("Could not reset signal. The signal is null.");
                 }
 */
 /*??

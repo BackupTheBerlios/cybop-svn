@@ -63,7 +63,7 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.3 $ $Date: 2003-07-17 09:03:04 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-07-18 11:24:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -77,16 +77,16 @@ class ItemHandler {
      *
      * @return the item
      */
-    static Item createItem() {
+    static Item create_item() {
 
         Item i = new Item();
 
         if (i != null) {
 
-            i.abstractions = MapHandler.createMap();
-            i.categories = MapHandler.createMap();
-            i.positions = MapHandler.createMap();
-            i.items = MapHandler.createMap();
+            i.abstractions = MapHandler.create_map();
+            i.categories = MapHandler.create_map();
+            i.positions = MapHandler.create_map();
+            i.items = MapHandler.create_map();
 
         } else {
 
@@ -101,25 +101,25 @@ class ItemHandler {
      *
      * @param i the item
      */
-    static void destroyItem(Item i) {
+    static void destroy_item(Item i) {
 
         if (i != null) {
 
             Map items = i.items;
             i.items = null;
-            MapHandler.destroyMap(items);
+            MapHandler.destroy_map(items);
 
             Map positions = i.positions;
             i.positions = null;
-            MapHandler.destroyMap(positions);
+            MapHandler.destroy_map(positions);
 
             Map categories = i.categories;
             i.categories = null;
-            MapHandler.destroyMap(categories);
+            MapHandler.destroy_map(categories);
 
             Map abstractions = i.abstractions;
             i.abstractions = null;
-            MapHandler.destroyMap(abstractions);
+            MapHandler.destroy_map(abstractions);
 
         } else {
 

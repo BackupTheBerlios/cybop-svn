@@ -29,7 +29,7 @@ package cyboi;
  *
  * It contains procedures to create items of primitive type.
  *
- * @version $Revision: 1.2 $ $Date: 2003-07-17 23:26:15 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-07-18 11:24:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class PrimitiveHandler {
@@ -40,7 +40,7 @@ class PrimitiveHandler {
      * @param s the integer primitive as string
      * @return the integer primitive
      */
-    static Object createIntegerPrimitive(String s) {
+    static Object create_integer_primitive(String s) {
 
         return Integer.valueOf(s);
     }
@@ -51,7 +51,7 @@ class PrimitiveHandler {
      * @param s the float primitive as string
      * @return the float primitive
      */
-    static Object createFloatPrimitive(String s) {
+    static Object create_float_primitive(String s) {
 
         return Double.valueOf(s);
     }
@@ -62,7 +62,7 @@ class PrimitiveHandler {
      * @param s the character primitive as string
      * @return the character primitive
      */
-    static Object createCharacterPrimitive(String s) {
+    static Object create_character_primitive(String s) {
 
         return null; //?? Double.valueOf(s);
     }
@@ -73,7 +73,7 @@ class PrimitiveHandler {
      * @param s the string primitive as string
      * @return the string primitive
      */
-    static Object createStringPrimitive(String s) {
+    static Object create_string_primitive(String s) {
 
         return s;
     }

@@ -34,7 +34,7 @@ package cyboi;
  * In the case of computer science, everything gets abstracted to 0 and 1.
  * But that also means that every abstraction has a bytecode representation.
  *
- * @version $Revision: 1.2 $ $Date: 2003-07-17 09:03:04 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-07-18 11:24:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ArrayHandler {
@@ -48,7 +48,7 @@ class ArrayHandler {
      *
      * @return the array
      */
-    static Object[] createArray() {
+    static Object[] create_array() {
 
         return new Object[0];
     }
@@ -61,25 +61,25 @@ class ArrayHandler {
      * @param old the old array
      * @return the extended array
      */
-    static Object[] createArray(Object[] old) {
+    static Object[] create_array(Object[] old) {
 
         Object[] a = null;
 
         if (old != null) {
 
-            int oldLength = old.length;
-            int newLength = oldLength * 2 + 1;
-            a = new Object[newLength];
+            int old_length = old.length;
+            int new_length = old_length * 2 + 1;
+            a = new Object[new_length];
             int i = 0;
 
-            while (i < oldLength) {
+            while (i < old_length) {
 
                 a[i] = old[i];
 
                 i++;
             }
 
-            ArrayHandler.destroyArray(old);
+            ArrayHandler.destroy_array(old);
 
         } else {
 
@@ -94,7 +94,7 @@ class ArrayHandler {
      *
      * @param a the array
      */
-    static void destroyArray(Object[] a) {
+    static void destroy_array(Object[] a) {
     }
 
     /**
@@ -103,7 +103,7 @@ class ArrayHandler {
      * @param a the array
      * @return the size of the array
      */
-    static int getArraySize(Object[] a) {
+    static int get_array_size(Object[] a) {
 
         int s = -1;
 
@@ -130,10 +130,10 @@ class ArrayHandler {
     static boolean compare(Object[] a, Object[] sa) {
 
         boolean b = true;
-        int i = ArrayHandler.getArraySize(a);
+        int i = ArrayHandler.get_array_size(a);
 
         // Compares the array sizes.
-        if (i != ArrayHandler.getArraySize(sa)) {
+        if (i != ArrayHandler.get_array_size(sa)) {
 
             b = false;
             
@@ -142,7 +142,7 @@ class ArrayHandler {
             // Compares the array elements.
             while (i-- != 0) {
 
-                if (ArrayHandler.getArrayElement(a, i) != ArrayHandler.getArrayElement(sa, i)) {
+                if (ArrayHandler.get_array_element(a, i) != ArrayHandler.get_array_element(sa, i)) {
 
                     b = false;
 
@@ -165,7 +165,7 @@ class ArrayHandler {
      * @param i the index
      * @param e the array element
      */
-    static void setArrayElement(Object[] old, int i, Object e) {
+    static void set_array_element(Object[] old, int i, Object e) {
 
         if (old != null) {
 
@@ -175,11 +175,11 @@ class ArrayHandler {
             // extended length is created and delivered back.
             if (i >= old.length) {
 
-                a = ArrayHandler.createArray(old);
-                ArrayHandler.destroyArray(old);
+                a = ArrayHandler.create_array(old);
+                ArrayHandler.destroy_array(old);
 /*??
                 //?? WHAT TO DO HERE??
-                ArrayHandler.setElements(a);
+                ArrayHandler.set_elements(a);
 */
 
             } else {
@@ -189,8 +189,8 @@ class ArrayHandler {
 
             //?? Temporary: Remove old and add new java tree node.
 /*??
-            ArrayHandler.removeTreeNode(a[i]);
-            ArrayHandler.addTreeNode(e);
+            ArrayHandler.remove_tree_node(a[i]);
+            ArrayHandler.add_tree_node(e);
 */
 
             // Set element.
@@ -208,12 +208,12 @@ class ArrayHandler {
      * @param a the array
      * @param i the index
      */
-    static void removeArrayElement(Object[] a, int i) {
+    static void remove_array_element(Object[] a, int i) {
 
         if (a != null) {
 
             //?? Temporary: Remove java tree node.
-//??            ArrayHandler.removeTreeNode(a[i]);
+//??            ArrayHandler.remove_tree_node(a[i]);
 
             // Move all remaining elements one place towards the
             // beginning of the elements.
@@ -241,7 +241,7 @@ class ArrayHandler {
      * @param a the array
      * @return the array element
      */
-    static Object getArrayElement(Object[] a, int i) {
+    static Object get_array_element(Object[] a, int i) {
 
         Object e = null;
 
