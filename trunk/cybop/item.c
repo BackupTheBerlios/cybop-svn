@@ -31,21 +31,21 @@
  * Instantiating means allocating some place in the computer's memory.
  * Basically, every item can become a category if copies of this item are created.
  *
- * @version $Revision: 1.2 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-09-25 07:04:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct item {
 
-    /** The items. */
-    int items;
+    /** The children. */
+    void* children;
 
     /** The positions. */
-    int positions;
+    void* positions;
 
     /** The instances. */
-    int instances;
+    void* instances;
 
     /** The interactions. */
-    int interactions;
-}
+    void* interactions;
+};
 

@@ -22,12 +22,14 @@
  * - Cybernetics Oriented Programming -
  */
 
+#include "item.c"
+
 /**
  * This is an item handler.
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.2 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-09-25 07:04:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,11 +44,11 @@
  * @param p1 the abstraction name
  * @return the object
  */
-int create_object(int p0, int p1) {
+void* create_object(void* p0, void* p1) {
 
-    int o = NULL;
+    void* o = 0;
     
-    if (a != NULL) {
+    if (p1 != 0) {
 
         log(INFO_LOG_LEVEL, "Create object: " + p0);
 
@@ -80,14 +82,14 @@ int create_object(int p0, int p1) {
 
         } else if (a.equals(CATEGORY)) {
 
-            o = (int) malloc(sizeof(item));
+            o = malloc(sizeof(item));
             initialize_item_containers(o);
             initialize_item(o, p0);
         }
         
     } else {
         
-        log(WARNING_LOG_LEVEL, "Could not create object. The abstraction is NULL.");
+        log(WARNING_LOG_LEVEL, "Could not create object. The abstraction is null.");
     }
     
     return o;
@@ -100,9 +102,9 @@ int create_object(int p0, int p1) {
  * @param p1 the category name
  * @param p2 the abstraction name
  */
-void destroy_object(int p0, int p1, int p2) {
+void destroy_object(void* p0, void* p1, void* p2) {
 
-    if (a != NULL) {
+    if (p2 != 0) {
 
         log(INFO_LOG_LEVEL, "Destroy object: " + p1);
 
@@ -143,7 +145,7 @@ void destroy_object(int p0, int p1, int p2) {
         
     } else {
         
-        log(WARNING_LOG_LEVEL, "Could not destroy object. The abstraction is NULL.");
+        log(WARNING_LOG_LEVEL, "Could not destroy object. The abstraction is null.");
     }
 }
 
@@ -157,25 +159,25 @@ void destroy_object(int p0, int p1, int p2) {
  * @param p0 the item
  * @param p1 the category name
  */
-void initialize_item(int p0, int p1) {
+void initialize_item(void* p0, void* p1) {
 
     log(INFO_LOG_LEVEL, "Initialize item: " + p1);
 
     // Create temporary category item.
-    int c = (int) malloc(sizeof(item));
+    struct item* c = (struct item*) malloc(sizeof(item));
     initialize_item_containers(c);
 
     // Read category from file.
     initialize_category(c, p1);
 
     // Initialize elements with category.
-    if (c != NULL) {
+    if (c != 0) {
 
-        initialize_child_items(p0, c.items);
+        initialize_child_items(p0, c->children);
         
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not initialize item elements. The category is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not initialize item elements. The category is null.");
     }
 
     // Destroy temporary category item.        
@@ -189,22 +191,22 @@ void initialize_item(int p0, int p1) {
  * @param p0 the item
  * @param p1 the category name
  */
-void finalize_item(int p0, int p1) {
+void finalize_item(void* p0, void* p1) {
 
     log(INFO_LOG_LEVEL, "Finalize item: " + p1);
     
-    // Create temporary category item.        
-    int c = (int) malloc(sizeof(item));
+    // Create temporary category item.
+    struct item* c = (struct item*) malloc(sizeof(item));
     initialize_item_containers(c);
 
     // Finalize elements with category.
-    if (c != NULL) {
+    if (c != 0) {
         
-        finalize_child_items(p0, c.items);
+        finalize_child_items(p0, c->children);
         
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not finalize item elements. The category is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not finalize item elements. The category is null.");
     }
 
     // Write category to file.
@@ -224,26 +226,26 @@ void finalize_item(int p0, int p1) {
  *
  * @param p0 the item
  */
-void initialize_item_containers(int p0) {
+void initialize_item_containers(void* p0) {
 
-    item i = (item) p0;
+    struct item* i = (struct item*) p0;
     
-    if (i != NULL) {
+    if (i != 0) {
         
         log(INFO_LOG_LEVEL, "Initialize item containers.");
 
-        i.items = (map*) malloc(sizeof(map));
-        initialize_map(i.items);
-        i.positions = (map*) malloc(sizeof(map));
-        initialize_map(i.positions);
-        i.instances = (map*) malloc(sizeof(map));
-        initialize_map(i.instances);
-        i.interactions = (map*) malloc(sizeof(map));
-        initialize_map(i.interactions);
+        i->children = malloc(sizeof(map));
+        initialize_map(i->children);
+        i->positions = malloc(sizeof(map));
+        initialize_map(i->positions);
+        i->instances = malloc(sizeof(map));
+        initialize_map(i->instances);
+        i->interactions = malloc(sizeof(map));
+        initialize_map(i->interactions);
 
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not initialize item containers. The item is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not initialize item containers. The item is null.");
     }
 }
 
@@ -252,29 +254,29 @@ void initialize_item_containers(int p0) {
  *
  * @param p0 the item
  */
-void finalize_item_containers(int p0) {
+void finalize_item_containers(void* p0) {
 
-    item i = (item) p0;
+    struct item* i = (struct item*) p0;
     
-    if (i != NULL) {
+    if (i != 0) {
 
         log(INFO_LOG_LEVEL, "Finalize item containers.");
 
-        finalize_map(i.interactions);
-        free(i.interactions);
+        finalize_map(i->interactions);
+        free(i->interactions);
 
-        finalize_map(i.instances);
-        free(i.instances);
+        finalize_map(i->instances);
+        free(i->instances);
 
-        finalize_map(i.positions);
-        free(i.positions);
+        finalize_map(i->positions);
+        free(i->positions);
 
-        finalize_map(i.items);
-        free(i.items);
+        finalize_map(i->children);
+        free(i->children);
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not finalize item containers. The item is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not finalize item containers. The item is null.");
     }
 }
 
@@ -288,25 +290,25 @@ void finalize_item_containers(int p0) {
  * @param p0 the item
  * @param p1 the category items
  */
-void initialize_child_items(int p0, int p1) {
+void initialize_child_items(void* p0, void* p1) {
 
-    map m = (map) p1;
+    struct map* m = (struct map*) p1;
     int count = 0;
     int size = get_map_size(m);
-    item ci = NULL;
-    item o = NULL;
+    struct item* ci = 0;
+    struct item* o = 0;
 
     while (count < size) {
     
-        ci = (item) get_map_element(m, count);
+        ci = (struct item*) get_map_element(m, count);
 
-        if (ci != NULL) {
+        if (ci != 0) {
             
-            initialize_child_item(p0, ci.items);
+            initialize_child_item(p0, ci->items);
 
         } else {
             
-            log(ERROR_LOG_LEVEL, "Could not initialize items. A category item is NULL.");
+            log(ERROR_LOG_LEVEL, "Could not initialize items. A category item is null.");
         }
         
         count++;
@@ -319,7 +321,7 @@ void initialize_child_items(int p0, int p1) {
  * @param p0 the item
  * @param p1 the category items
  */
-void finalize_child_items(int p0, int p1) {
+void finalize_child_items(void* p0, void* p1) {
 }
 
 //
@@ -332,45 +334,45 @@ void finalize_child_items(int p0, int p1) {
  * @param p0 the item
  * @param p1 the category item attributes
  */
-void initialize_child_item(int p0, int p1) {
+void initialize_child_item(void* p0, void* p1) {
 
-    item i = (item) p0;
+    struct item* i = (struct item*) p0;
     
-    if (i != NULL) {
+    if (i != 0) {
             
         log(INFO_LOG_LEVEL, "Initialize item element.");
-        int name = get_map_element(p1, NAME);                
-        int category = NULL;                
-        int abstraction = NULL;                
-        int o = NULL;
+        void* name = get_map_element(p1, NAME);                
+        void* category = 0;                
+        void* abstraction = 0;                
+        void* o = 0;
 
         // Item.
         category = get_map_element(p1, ITEM_CATEGORY);
         abstraction = get_map_element(p1, ITEM_ABSTRACTION);
         o = create_object(category, abstraction);
-        set_map_element(i.items, name, o);
+        set_map_element(i->children, name, o);
 
         // Position.
         category = get_map_element(p1, POSITION_CATEGORY);
         abstraction = get_map_element(p1, POSITION_ABSTRACTION);
         o = create_object(category, abstraction);
-        set_map_element(i.positions, name, o);
+        set_map_element(i->positions, name, o);
 
         // Instance.
         category = get_map_element(p1, INSTANCE_CATEGORY);
         abstraction = get_map_element(p1, INSTANCE_ABSTRACTION);
         o = create_object(category, abstraction);
-        set_map_element(i.instances, name, o);
+        set_map_element(i->instances, name, o);
 
         // Interaction.
         category = get_map_element(p1, INTERACTION_CATEGORY);
         abstraction = get_map_element(p1, INTERACTION_ABSTRACTION);
         o = create_object(category, abstraction);
-        set_map_element(i.interactions, name, o);
+        set_map_element(i->interactions, name, o);
 
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not initialize item element. The item is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not initialize item element. The item is null.");
     }
 }
 
@@ -380,7 +382,7 @@ void initialize_child_item(int p0, int p1) {
  * @param p0 the item
  * @param p1 the category item attributes
  */
-void finalize_child_item(int p0, int p1) {
+void finalize_child_item(void* p0, void* p1) {
 }
 
 //
@@ -394,20 +396,20 @@ void finalize_child_item(int p0, int p1) {
  * @param p1 the hierarchical item name
  * @param p2 the element
  */
-void set_item_element(int p0, int p1, int p2) {
+void set_item_element(void* p0, void* p1, void* p2) {
 
-    item i = (item) p0;
+    struct item* i = (struct item*) p0;
 
-    if (i != NULL) {
+    if (i != 0) {
 
         log(INFO_LOG_LEVEL, "Set item element: " + p1);
-        int n = get_child_name(p1);
-        int r = get_remaining_name(p1);
+        void* n = get_child_name(p1);
+        void* r = get_remaining_name(p1);
         
-        if (r != NULL) {
+        if (r != 0) {
 
             // The given item is the parent of another parent.
-            int child = get_map_element(i.items, n);
+            void* child = get_map_element(i->children, n);
             
             // Continue to process along the hierarchical name.
             set_item_element(child, r, p2);
@@ -415,12 +417,12 @@ void set_item_element(int p0, int p1, int p2) {
         } else {
 
             // The given item is the parent of the child.
-            set_map_element(i.items, n, p2);
+            set_map_element(i->children, n, p2);
         }
         
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not set item element. The item is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not set item element. The item is null.");
     }
 }
 
@@ -430,20 +432,20 @@ void set_item_element(int p0, int p1, int p2) {
  * @param p0 the item
  * @param p1 the hierarchical item name
  */
-void remove_item_element(int p0, int p1) {
+void remove_item_element(void* p0, void* p1) {
 
-    item i = (item) p0;
+    struct item* i = (struct item*) p0;
 
-    if (i != NULL) {
+    if (i != 0) {
 
         log(INFO_LOG_LEVEL, "Remove item element: " + p1);
-        int n = get_child_name(p1);
-        int r = get_remaining_name(p1);
+        void* n = get_child_name(p1);
+        void* r = get_remaining_name(p1);
         
-        if (r != NULL) {
+        if (r != 0) {
             
             // The given item is the parent of another parent.
-            int child = get_map_element(i.items, n);
+            void* child = get_map_element(i->items, n);
             
             // Continue to process along the hierarchical name.
             remove_item_element(child, r);
@@ -451,11 +453,11 @@ void remove_item_element(int p0, int p1) {
         } else {
 
             // The given item is the parent of the child.
-            remove_map_element(i.items, n);
+            remove_map_element(i->children, n);
         }
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not remove item element. The item is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not remove item element. The item is null.");
     }
 }
 
@@ -466,21 +468,21 @@ void remove_item_element(int p0, int p1) {
  * @param p1 the hierarchical item name
  * @return the element
  */
-int get_item_element(int p0, int p1) {
+void* get_item_element(void* p0, void* p1) {
 
-    int e = NULL;
-    item i = (item) p0;
+    void* e = 0;
+    struct item* i = (struct item*) p0;
 
-    if (i != NULL) {
+    if (i != 0) {
 
         log(INFO_LOG_LEVEL, "Get item element: " + p1);
-        int n = get_child_name(p1);
-        int r = get_remaining_name(p1);
+        void* n = get_child_name(p1);
+        void* r = get_remaining_name(p1);
         
-        if (r != NULL) {
+        if (r != 0) {
             
             // The given item is the parent of another parent.
-            int child = get_map_element(i.items, n);
+            void* child = get_map_element(i->items, n);
             
             // Continue to process along the hierarchical name.
             e = get_item_element(child, r);
@@ -488,12 +490,12 @@ int get_item_element(int p0, int p1) {
         } else {
 
             // The given item is the parent of the child.
-            e = get_map_element(i.items, n);
+            e = get_map_element(i->items, n);
         }
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not get item element. The item is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not get item element. The item is null.");
     }
     
     return e;
@@ -508,17 +510,18 @@ int get_item_element(int p0, int p1) {
  * @param p0 the hierarchical item name
  * @return the child name
  */
-int get_child_name(int p0) {
+void* get_child_name(void* p0) {
     
-    int child = NULL;
+    void* child = 0;
+    char* n = (char*) p0;
     
-    if (n != NULL) {
+    if (n != 0) {
         
-        int i = n.indexOf(".");
+        int i = n->indexOf(".");
         
         if (i != -1) {
             
-            child = n.substring(0, i);
+            child = n->substring(0, i);
         
         } else {
         
@@ -527,7 +530,7 @@ int get_child_name(int p0) {
         
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not get child name. The hierarchical name is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not get child name. The hierarchical name is null.");
     }
     
     return child;
@@ -541,22 +544,23 @@ int get_child_name(int p0) {
  * @param p0 the hierarchical item name
  * @return the remaining name
  */
-int get_remaining_name(int p0) {
+void* get_remaining_name(void* p0) {
     
-    int rem = NULL;
+    void* rem = 0;
+    char* n = (char*) p0;
     
-    if (n != NULL) {
+    if (n != 0) {
         
-        int i = n.indexOf(".");
+        int i = n->indexOf(".");
         
         if (i != -1) {
 
-            rem = n.substring(i + 1);
+            rem = n->substring(i + 1);
         }
         
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical name is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical name is null.");
     }
     
     return rem;

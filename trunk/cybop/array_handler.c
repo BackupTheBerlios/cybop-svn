@@ -27,7 +27,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.3 $ $Date: 2003-09-23 23:43:21 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-09-25 07:04:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,17 +43,17 @@
  * @param p0 the array
  * @return the extended array
  */
-int extend_array(int p0) {
+void* extend_array(void* p0) {
 
-    int a = NULL;
+    void* a = 0;
     
-    if (p0 != NULL) {
+    if (p0 != 0) {
 
         int old_length = sizeof(p0);
         int new_length = old_length * 2 + 1;
-        a = (int) malloc(sizeof(int[new_length]));
+        a = (void*) malloc(sizeof(new_length));
 
-        if (a != NULL) {
+        if (a != 0) {
                 
             int i = 0;
 
@@ -68,12 +68,12 @@ int extend_array(int p0) {
 
         } else {
 
-            log(ERROR_LOG_LEVEL, "Could not extend array. The new array is NULL.");
+            log(ERROR_LOG_LEVEL, "Could not extend array. The new array is null.");
         }
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not extend array. The array is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not extend array. The array is null.");
     }
     
     return a;
@@ -91,11 +91,11 @@ int extend_array(int p0) {
  * @param p2 the element
  * @return the extended array
  */
-int set_array_element(int p0, int p1, int p2) {
+void* set_array_element(void* p0, int p1, void* p2) {
 
-    int a = NULL;
+    void* a = 0;
     
-    if (p0 != NULL) {
+    if (p0 != 0) {
 
         // If the array length is exceeded, a new array with extended length
         // is created and delivered back.
@@ -113,7 +113,7 @@ int set_array_element(int p0, int p1, int p2) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not set array element. The array is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not set array element. The array is null.");
     }
     
     return a;
@@ -125,9 +125,9 @@ int set_array_element(int p0, int p1, int p2) {
  * @param p0 the array
  * @param p1 the index
  */
-void remove_array_element(int p0, int p1) {
+void remove_array_element(void* p0, int p1) {
 
-    if (p0 != NULL) {
+    if (p0 != 0) {
 
         if (p1 != -1) {
             
@@ -142,13 +142,13 @@ void remove_array_element(int p0, int p1) {
                 p1++;
             }
 
-            // Set former last element to NULL.
-            p0[p1] = NULL;
+            // Set former last element to 0.
+            p0[p1] = 0;
         }
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not remove array element. The array is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not remove array element. The array is null.");
     }
 }
 
@@ -159,11 +159,11 @@ void remove_array_element(int p0, int p1) {
  * @param p1 the index
  * @return the element
  */
-int get_array_element(int p0, int p1) {
+void* get_array_element(void* p0, int p1) {
 
-    int e = NULL;
+    void* e = 0;
     
-    if (p0 != NULL) {
+    if (p0 != 0) {
 
         if (p1 != -1) {
             
@@ -172,7 +172,7 @@ int get_array_element(int p0, int p1) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not get array element. The array is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not get array element. The array is null.");
     }
     
     return e;

@@ -29,7 +29,7 @@
  *
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.3 $ $Date: 2003-09-23 23:43:21 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-09-25 07:04:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,11 +66,11 @@ static int log_level;
  * @param p0 the level
  * @param p1 the message
  */
-void log(int p0, int p1) {
+void log(int p0, void* p1) {
 
     if (p0 <= log_level) {
 
-        int l = get_log_level_name(p0);
+        void* l = get_log_level_name(p0);
         
         printf(l + ": " + p1);
     }
@@ -82,21 +82,21 @@ void log(int p0, int p1) {
  * @param p0 the level
  * @return the log level name
  */
-int get_log_level_name(int p0) {
+void* get_log_level_name(int p0) {
 
-    int l = (int) NULL;
+    void* l = 0;
     
     if (p0 == INFO_LOG_LEVEL) {
 
-        l = (int) "INFO";
+        l = "INFO";
         
     } else if (p0 == WARNING_LOG_LEVEL) {
 
-        l = (int) "WARNING";
+        l = "WARNING";
         
     } else if (p0 == ERROR_LOG_LEVEL) {
 
-        l = (int) "ERROR";
+        l = "ERROR";
     }
 
     return l;

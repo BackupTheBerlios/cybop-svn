@@ -28,15 +28,15 @@
  * A map is like a table. One column (array) contains the element names.
  * A second column (array) contains the actual element references.
  *
- * @version $Revision: 1.3 $ $Date: 2003-09-23 23:43:21 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-09-25 07:04:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct map {
 
     /** The names. */
-    int names;
+    void* names;
 
     /** The references. */
-    int references;
+    void* references;
 };
 

@@ -29,7 +29,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.3 $ $Date: 2003-09-23 23:43:21 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-09-25 07:04:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,20 +42,20 @@
  *
  * @param p0 the map
  */
-void initialize_map(int p0) {
+void initialize_map(void* p0) {
 
     struct map* m = (struct map*) p0;
 
-    if (m != NULL) {
+    if (m != 0) {
 
         log(INFO_LOG_LEVEL, "Initialize map.");
 
-        m->names = (int[]*) malloc(sizeof(int[0]));
-        m->references = (int[]*) malloc(sizeof(int[0]));
+        m->names = (void*) malloc(sizeof(0));
+        m->references = (void*) malloc(sizeof(0));
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not initialize map. The map is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not initialize map. The map is null.");
     }
 }
 
@@ -68,7 +68,7 @@ void finalize_map(int p0) {
 
     struct map* m = (struct map*) p0;
     
-    if (m != NULL) {
+    if (m != 0) {
 
         log(INFO_LOG_LEVEL, "Finalize map.");
 
@@ -77,7 +77,7 @@ void finalize_map(int p0) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not finalize map. The map is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not finalize map. The map is null.");
     }
 }
 
@@ -92,13 +92,13 @@ int get_map_size(int p0) {
     int s = -1;
     struct map* m = (struct map*) p0;
 
-    if (m != NULL) {
+    if (m != 0) {
 
         s = sizeof(m->names);
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not get map size. The map is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not get map size. The map is null.");
     }
 
     return s;
@@ -115,9 +115,9 @@ int get_map_size(int p0) {
  * @param p1 the name
  * @param p2 the element
  */
-void add_map_element(int p0, int p1, int p2) {
+void add_map_element(void* p0, void* p1, void* p2) {
 
-    int n = determine_map_element_name(p0, p1);
+    void* n = determine_map_element_name(p0, p1);
     set_map_element(p0, n, p2);
 }
 
@@ -128,11 +128,11 @@ void add_map_element(int p0, int p1, int p2) {
  * @param p1 the name
  * @param p2 the element
  */
-void set_map_element(int p0, int p1, int p2) {
+void set_map_element(void* p0, void* p1, void* p2) {
 
     struct map* m = (struct map*) p0;
     
-    if (m != NULL) {
+    if (m != 0) {
         
         int i = determine_next_map_element_index(m, p1);
 
@@ -141,7 +141,7 @@ void set_map_element(int p0, int p1, int p2) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not set map element. The map is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not set map element. The map is null.");
     }
 }
 
@@ -151,18 +151,18 @@ void set_map_element(int p0, int p1, int p2) {
  * @param p0 the map
  * @param p1 the index
  */
-void remove_map_element(int p0, int p1) {
+void remove_map_element(void* p0, int p1) {
 
     struct map* m = (struct map*) p0;
     
-    if (m != NULL) {
+    if (m != 0) {
 
         remove_array_element(m->names, p1);
         remove_array_element(m->references, p1);
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not remove map element. The map is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not remove map element. The map is null.");
     }
 }
 
@@ -172,7 +172,7 @@ void remove_map_element(int p0, int p1) {
  * @param p0 the map
  * @param p1 the name
  */
-void remove_map_element(int p0, int p1) {
+void remove_map_element(void* p0, void* p1) {
 
     int i = get_map_element_index(p0, p1);
 
@@ -186,18 +186,18 @@ void remove_map_element(int p0, int p1) {
  * @param p1 the index
  * @return the element
  */
-int get_map_element(int p0, int p1) {
+void* get_map_element(void* p0, int p1) {
 
-    int e = NULL;
+    void* e = 0;
     struct map* m = (struct map*) p0;
 
-    if (m != NULL) {
+    if (m != 0) {
 
         e = get_array_element(m->references, p1);
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not get map element. The map is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not get map element. The map is null.");
     }
     
     return e;
@@ -210,7 +210,7 @@ int get_map_element(int p0, int p1) {
  * @param p1 the name
  * @return the element
  */
-int get_map_element(int p0, int p1) {
+void* get_map_element(void* p0, void* p1) {
 
     int i = get_map_element_index(p0, p1);
 
@@ -224,25 +224,25 @@ int get_map_element(int p0, int p1) {
  * @param p1 the name
  * @return the index
  */
-int get_map_element_index(int p0, int p1) {
+int get_map_element_index(void* p0, void* p1) {
 
     int index = -1;
     struct map* m = (struct map*) p0;
 
-    if (m != NULL) {
+    if (m != 0) {
         
-        int a = m->names;
+        void* a = m->names;
         int i = index + 1;
         int size = sizeof(a);
-        int name = NULL;
+        void* name = 0;
 
         while (i < size) {
 
             name = get_array_element(a, i);
 
-            // If a NULL name is reached, then the name was not found.
+            // If a 0 name is reached, then the name was not found.
             // In this case, reset index to -1.
-            if (name == NULL) {
+            if (name == 0) {
 
                 index = -1;
                 break;
@@ -263,7 +263,7 @@ int get_map_element_index(int p0, int p1) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not get map element index. The map is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not get map element index. The map is null.");
     }
 
     return index;
@@ -274,34 +274,34 @@ int get_map_element_index(int p0, int p1) {
  *
  * If an element with the given name is found, then its index will be returned
  * so that the element can be replaced.
- * If a NULL element is reached, then the corresponding index marks the next
+ * If a 0 element is reached, then the corresponding index marks the next
  * available place and will be returned.
- * If neither an element matches nor a NULL element is reached, then the
+ * If neither an element matches nor a 0 element is reached, then the
  * map is full and its size will be returned as next available index.
  *
  * @param p0 the map
  * @param p1 the name
  * @return the next index
  */
-int determine_next_map_element_index(int p0, int p1) {
+int determine_next_map_element_index(void* p0, void* p1) {
 
     int index = -1;
     struct map* m = (struct map*) p0;
 
-    if (m != NULL) {
+    if (m != 0) {
 
-        int a = m->names;
+        void* a = m->names;
         int i = index + 1;
         int size = sizeof(a);
-        int name = NULL;
+        void* name = 0;
 
         while (i < size) {
 
             name = get_array_element(a, i);
 
-            // If a NULL name is reached, then the name was not found.
+            // If a 0 name is reached, then the name was not found.
             // In this case, the current value of i is the next free index.
-            if (name == NULL) {
+            if (name == 0) {
 
                 index = i;
                 break;
@@ -321,7 +321,7 @@ int determine_next_map_element_index(int p0, int p1) {
             i++;
         }
 
-        // Neither element matched, nor was a NULL element found.
+        // Neither element matched, nor was a 0 element found.
         // The map is full and such its size will be the next index to be used.
         if (index == -1) {
 
@@ -330,7 +330,7 @@ int determine_next_map_element_index(int p0, int p1) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not get next map element index. The map is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not get next map element index. The map is null.");
     }
 
     return index;
@@ -348,25 +348,25 @@ int determine_next_map_element_index(int p0, int p1) {
  * @param p1 the base name
  * @return the name
  */
-int determine_map_element_name(int p0, int p1) {
+void* determine_map_element_name(void* p0, void* p1) {
 
-    int n = NULL;
+    void* n = 0;
     char* index = java.lang.String.valueOf(get_map_element_count(p0, p1));
 
-    if (p1 != NULL) {
+    if (p1 != 0) {
 
-        if (index != NULL) {
+        if (index != 0) {
 
             n = p1 + "_" + index;
 
         } else {
 
-            log(ERROR_LOG_LEVEL, "Could not determine map element name. The index string is NULL.");
+            log(ERROR_LOG_LEVEL, "Could not determine map element name. The index string is null.");
         }
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not determine map element name. The name is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not determine map element name. The name is null.");
     }
     
     return n;
@@ -379,29 +379,29 @@ int determine_map_element_name(int p0, int p1) {
  * @param p1 the name
  * @return the number of map elements whose name starts with the given name
  */
-int get_map_element_count(int p0, int p1) {
+int get_map_element_count(void* p0, void* p1) {
 
     int count = 0;
     struct map* m = (struct map*) p0;
 
-    if (m != NULL) {
+    if (m != 0) {
 
-        int a = m->names;
+        void* a = m->names;
         int i = 0;
         int size = sizeof(a);
-        int name = NULL;
+        void* name = 0;
 
         while (i < size) {
 
             name = get_array_element(a, i);
 
-            if (name != NULL) {
+            if (name != 0) {
 
                 if ((name).startsWith(p1)) {
 
 /*??
                     int begin = 0;
-                    char[] sub = NULL;
+                    char[] sub = 0;
                     int number = 0;
         
                     begin = ((char[]) name).indexOf("_");
@@ -419,7 +419,7 @@ int get_map_element_count(int p0, int p1) {
 
             } else {
 
-                // Reached last valid name. Only NULL entries left.
+                // Reached last valid name. Only null entries left.
                 break;
             }
 
@@ -428,7 +428,7 @@ int get_map_element_count(int p0, int p1) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not get element count. The map is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not get element count. The map is null.");
     }
 
     return count;

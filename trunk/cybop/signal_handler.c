@@ -33,7 +33,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.3 $ $Date: 2003-09-23 23:43:21 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-09-25 07:04:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -112,10 +112,10 @@ static const char* SEND_ACTION = "send";
 //
 
 /** The statics. */
-static struct item* statics;
+void* statics;
 
 /** The dynamics. */
-static struct item* dynamics;
+void* dynamics;
 
 //
 // Signal.
@@ -140,17 +140,17 @@ static struct item* dynamics;
  * @param p0 the signal memory
  * @param p1 the signal
  */
-void receive_signal(int p0, int p1) {
+void receive_signal(void* p0, void* p1) {
 
     struct signal* s = (struct signal*) p1;
     
-    if (s != NULL) {
+    if (s != 0) {
 
         // Read and remove signal from signal memory (interrupt vector table).
         struct signal* tmp = (struct signal*) get_map_element(p0, 0);
         remove_map_element(p0, 0);
         
-        if (tmp != NULL) {
+        if (tmp != 0) {
         
             log(INFO_LOG_LEVEL, "Receive signal: " + tmp->predicate);
 
@@ -177,7 +177,7 @@ void receive_signal(int p0, int p1) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not receive signal. The signal is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not receive signal. The signal is null.");
     }
 }
 
@@ -188,16 +188,16 @@ void receive_signal(int p0, int p1) {
  * @param p1 the remote flag
  * @return the shutdown flag
  */
-int handle_signal(int p0, int p1) {
+int handle_signal(void* p0, int p1) {
 
     int sf = 0;
     struct signal* s = (struct signal*) p0;
 
-    if (s != NULL) {
+    if (s != 0) {
 
-        int a = s->predicate;
+        void* a = s->predicate;
 
-        if (a != NULL) {
+        if (a != 0) {
 
             log(INFO_LOG_LEVEL, "Handle signal: " + a);
 
@@ -216,19 +216,19 @@ int handle_signal(int p0, int p1) {
 
             } else if (a.equals("mouse_clicked")) {
 
-                struct item* statics = statics;
-                int main_frame = get_item_element(statics, "main_frame");
+                void* statics = statics;
+                void* main_frame = get_item_element(statics, "main_frame");
                 struct vector* pointer_position = (struct vector*) get_item_element(statics, "mouse.pointer_position");
                 
                 reset_signal(s);
 
-                if (pointer_position != NULL) {
+                if (pointer_position != 0) {
                  
                     s->predicate = mouse_clicked_action(main_frame, pointer_position->x, pointer_position->y, pointer_position->z);
                     
                 } else {
                     
-                    log(ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is NULL.");
+                    log(ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is null.");
                 }
 
             } else if (a.equals(SHOW_SYSTEM_INFORMATION_ACTION)) {
@@ -255,12 +255,12 @@ int handle_signal(int p0, int p1) {
                 
                 struct item* o = (struct item*) s->object;
 
-                if (o != NULL) {
+                if (o != 0) {
                     
 /*??
                     int j = o.java_object;
 
-                    if (j != NULL) {
+                    if (j != 0) {
                         
                         if (j instanceof java.awt.Component) {
                             
@@ -273,13 +273,13 @@ int handle_signal(int p0, int p1) {
                 
                     } else {
                         
-                        log(ERROR_LOG_LEVEL, "Could not handle send action. The java object is NULL.");
+                        log(ERROR_LOG_LEVEL, "Could not handle send action. The java object is null.");
                     }
 */
                 
                 } else {
                     
-                    log(ERROR_LOG_LEVEL, "Could not handle send action. The signal object is NULL.");
+                    log(ERROR_LOG_LEVEL, "Could not handle send action. The signal object is null.");
                 }
 
                 reset_signal(s);
@@ -287,12 +287,12 @@ int handle_signal(int p0, int p1) {
             } else if (a.equals(STARTUP_ACTION)) {
                 
                 // Root (statics).
-                statics = (struct item*) create_object(s->object, CATEGORY);
+                statics = create_object(s->object, CATEGORY);
 
                 reset_signal(s);
                 
                 s->predicate = SEND_ACTION;
-                s->object = get_map_element(((struct item*) statics)->items, "main_frame");
+                s->object = get_map_element(((struct item*) statics)->children, "main_frame");
 
             } else if (a.equals(SHUTDOWN_ACTION)) {
                 
@@ -311,7 +311,7 @@ int handle_signal(int p0, int p1) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not handle signal. The signal is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not handle signal. The signal is null.");
     }
     
     return sf;
@@ -320,28 +320,28 @@ int handle_signal(int p0, int p1) {
 /**
  * Sends the signal.
  *
- * If a signal's action is NULL, it will get destroyed.
+ * If a signal's action is 0, it will get destroyed.
  * Otherwise, the signal will be stored in the signal memory for further
  * handling.
  *
  * @param p0 the signal memory
  * @param p1 the signal
  */
-void send_signal(int p0, int p1) {
+void send_signal(void* p0, void* p1) {
 
     struct signal* s = (struct signal*) p1;
     
-    if (s != NULL) {
+    if (s != 0) {
 
         // Only send a new signal (store in signal memory) if an action exists.
         // Otherwise, the chain of signals/ actions finishes here, until a new
         // hardware event (interrupt) occurs.
-        if (s->predicate != NULL) {
+        if (s->predicate != 0) {
             
             // Create signal for storage in signal memory.
             struct signal* tmp = (struct signal*) malloc(sizeof(struct signal));
     
-            if (tmp != NULL) {
+            if (tmp != 0) {
             
                 log(INFO_LOG_LEVEL, "Send signal: " + s->predicate);
 
@@ -369,18 +369,18 @@ void send_signal(int p0, int p1) {
 
             } else {
     
-                log(ERROR_LOG_LEVEL, "Could not send signal. The signal memory signal is NULL.");
+                log(ERROR_LOG_LEVEL, "Could not send signal. The signal memory signal is null.");
             }
 
         } else {
             
             // Do not log this as the loop runs infinite and would stuff the log record!
-            // The action is NULL. No signal gets stored in the signal memory.
+            // The action is 0. No signal gets stored in the signal memory.
         }
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not send signal. The signal is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not send signal. The signal is null.");
     }
 }
 
@@ -389,25 +389,25 @@ void send_signal(int p0, int p1) {
  *
  * @param p0 the signal
  */
-void reset_signal(int p0) {
+void reset_signal(void* p0) {
     
     struct signal* s = (struct signal*) p0;
     
-    if (s != NULL) {
+    if (s != 0) {
 
-        s->priority = NULL;
-        s->language = NULL;
-        s->subject = NULL;
-        s->predicate = NULL;
-        s->owner = NULL;
-        s->sender = NULL;
-        s->object = NULL;
-        s->adverbial = NULL;
-        s->condition = NULL;
+        s->priority = 0;
+        s->language = 0;
+        s->subject = 0;
+        s->predicate = 0;
+        s->owner = 0;
+        s->sender = 0;
+        s->object = 0;
+        s->adverbial = 0;
+        s->condition = 0;
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not reset signal. The signal is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not reset signal. The signal is null.");
     }
 }
 
@@ -428,19 +428,19 @@ void reset_signal(int p0) {
  * @param p3 the z coordinate
  * @return the action
  */
-int mouse_clicked_action(int p0, int p1, int p2, int p3) {
+void* mouse_clicked_action(void* p0, int p1, int p2, int p3) {
 
-    int a = NULL;
+    void* a = 0;
     struct item* i = (struct item*) p0;
     
-    if (i != NULL) {
+    if (i != 0) {
 
         // Determine the action of the clicked child screen item.
         int count = 0;
         int size = get_map_size(i->items);
-        int child = NULL;
-        struct vector* position = NULL;
-        struct vector* expansion = NULL;
+        void* child = 0;
+        struct vector* position = 0;
+        struct vector* expansion = 0;
         int x = -1;
         int y = -1;
         int z = -1;
@@ -448,27 +448,27 @@ int mouse_clicked_action(int p0, int p1, int p2, int p3) {
         int height = -1;
         int depth = -1;
         int contains = 0;
-        int action = NULL;
+        void* action = 0;
         
         while (count < size) {
 
             // Determine child, its position and expansion within the given screen item.
             child = get_map_element(i->items, count);
-            position = (vector) get_map_element(i->positions, count);
+            position = (vector*) get_map_element(i->positions, count);
             
 /*??
             if (child instanceof item) {
                     
                 expansion = (vector) get_item_element(child, "expansion");
                 
-                if (position != NULL) {
+                if (position != 0) {
                         
                     // Translate the given coordinates according to the child's position.
                     x = p1 - position->x;
                     y = p2 - position->y;
                     z = p3 - position->z;
 
-                    if (expansion != NULL) {
+                    if (expansion != 0) {
 
                         // Determine child's expansion.
                         width = expansion->x;
@@ -499,12 +499,12 @@ int mouse_clicked_action(int p0, int p1, int p2, int p3) {
 
                     } else {
                         
-                        log(ERROR_LOG_LEVEL, "Could not handle mouse clicked action. An expansion is NULL.");
+                        log(ERROR_LOG_LEVEL, "Could not handle mouse clicked action. An expansion is null.");
                     }
 
                 } else {
                     
-                    log(ERROR_LOG_LEVEL, "Could not handle mouse clicked action. A position is NULL.");
+                    log(ERROR_LOG_LEVEL, "Could not handle mouse clicked action. A position is null.");
                 }
 
             } else {
@@ -518,7 +518,7 @@ int mouse_clicked_action(int p0, int p1, int p2, int p3) {
         
         // Only use child screen item's action if it exists.
         // Otherwise, use the parent screen item's action.
-        if (action != NULL) {
+        if (action != 0) {
             
             a = action;
 
@@ -530,7 +530,7 @@ int mouse_clicked_action(int p0, int p1, int p2, int p3) {
 
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The item is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The item is null.");
     }
     
     return a;
@@ -547,26 +547,27 @@ int mouse_clicked_action(int p0, int p1, int p2, int p3) {
  * @param p1 the second parameter
  * @return the sum
  */
+/*??
 int add(int p0, int p1) {
 
-    int sum = NULL;
+    int sum = 0;
     java.lang.Integer i0 = (java.lang.Integer) p0;
     java.lang.Integer i1 = (java.lang.Integer) p1;
     
-    if (i0 != NULL) {
+    if (i0 != 0) {
 
-        if (i1 != NULL) {
+        if (i1 != 0) {
 
             sum = new java.lang.Integer(i0.intValue() + i1.intValue());
 
         } else {
             
-            log(ERROR_LOG_LEVEL, "Could not add. The second parameter is NULL.");
+            log(ERROR_LOG_LEVEL, "Could not add. The second parameter is null.");
         }
             
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not add. The first parameter is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not add. The first parameter is null.");
     }
     
     return sum;
@@ -579,26 +580,27 @@ int add(int p0, int p1) {
  * @param p1 the second parameter
  * @return the difference
  */
+/*??
 int subtract(int p0, int p1) {
 
-    int difference = NULL;
+    int difference = 0;
     java.lang.Integer i0 = (java.lang.Integer) p0;
     java.lang.Integer i1 = (java.lang.Integer) p1;
     
-    if (i0 != NULL) {
+    if (i0 != 0) {
 
-        if (i1 != NULL) {
+        if (i1 != 0) {
 
             difference = new java.lang.Integer(i0.intValue() - i1.intValue());
 
         } else {
             
-            log(ERROR_LOG_LEVEL, "Could not subtract. The second parameter is NULL.");
+            log(ERROR_LOG_LEVEL, "Could not subtract. The second parameter is null.");
         }
             
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not subtract. The first parameter is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not subtract. The first parameter is null.");
     }
     
     return difference;
@@ -611,26 +613,27 @@ int subtract(int p0, int p1) {
  * @param p1 the second parameter
  * @return the product
  */
+/*??
 int multiply(int p0, int p1) {
 
-    int product = NULL;
+    int product = 0;
     java.lang.Integer i0 = (java.lang.Integer) p0;
     java.lang.Integer i1 = (java.lang.Integer) p1;
     
-    if (i0 != NULL) {
+    if (i0 != 0) {
 
-        if (i1 != NULL) {
+        if (i1 != 0) {
 
             product = new java.lang.Integer(i0.intValue() * i1.intValue());
 
         } else {
             
-            log(ERROR_LOG_LEVEL, "Could not multiply. The second parameter is NULL.");
+            log(ERROR_LOG_LEVEL, "Could not multiply. The second parameter is null.");
         }
             
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not multiply. The first parameter is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not multiply. The first parameter is null.");
     }
     
     return product;
@@ -643,15 +646,16 @@ int multiply(int p0, int p1) {
  * @param p1 the second parameter
  * @return the integer quotient (without rest)
  */
+/*??
 int divide(int p0, int p1) {
 
-    int quotient = NULL;
+    int quotient = 0;
     java.lang.Integer i0 = (java.lang.Integer) p0;
     java.lang.Integer i1 = (java.lang.Integer) p1;
     
-    if (i0 != NULL) {
+    if (i0 != 0) {
 
-        if (i1 != NULL) {
+        if (i1 != 0) {
 
             quotient = new java.lang.Integer(i0.intValue() / i1.intValue());
             //?? Rest of integer division is determined with:
@@ -659,12 +663,12 @@ int divide(int p0, int p1) {
 
         } else {
             
-            log(ERROR_LOG_LEVEL, "Could not divide. The second parameter is NULL.");
+            log(ERROR_LOG_LEVEL, "Could not divide. The second parameter is null.");
         }
             
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not divide. The first parameter is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not divide. The first parameter is null.");
     }
     
     return quotient;
@@ -682,15 +686,15 @@ boolean isDividableWithoutRest(Integer i) {
 
     boolean result = Boolean.FALSE;
     
-    if (i != NULL) {
+    if (i != 0) {
 
         java.lang.Integer j2 = (java.lang.Integer) i.getJavaObject();
 
-        if (j2 != NULL) {
+        if (j2 != 0) {
 
             java.lang.Integer j1 = (java.lang.Integer) getJavaObject();
 
-            if (j1 != NULL) {
+            if (j1 != 0) {
 
                 int rest = j1.intValue() % j2.intValue();
 
@@ -701,17 +705,17 @@ boolean isDividableWithoutRest(Integer i) {
 
             } else {
                 
-                log(ERROR_LOG_LEVEL, "Could not divide integer. This java integer 1 is NULL.");
+                log(ERROR_LOG_LEVEL, "Could not divide integer. This java integer 1 is null.");
             }
 
         } else {
             
-            log(ERROR_LOG_LEVEL, "Could not divide integer. The java integer 2 is NULL.");
+            log(ERROR_LOG_LEVEL, "Could not divide integer. The java integer 2 is null.");
         }
             
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not divide integer. The integer is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not divide integer. The integer is null.");
     }
     
     return result;
@@ -725,19 +729,19 @@ boolean isDividableWithoutRest(Integer i) {
 /*??
 Integer absolute() {
 
-    Integer abs = NULL;
+    Integer abs = 0;
     
 /*??
     java.lang.Integer j = (java.lang.Integer) getJavaObject();
 
-    if (j != NULL) {
+    if (j != 0) {
         
         int i = abs(j.intValue());
         abs = new java.lang.Integer(i);
 
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not determine absolute value. The java integer is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not determine absolute value. The java integer is null.");
     }
 */
 /*??
@@ -756,15 +760,16 @@ Integer absolute() {
  * @param p1 the second parameter
  * @return true if equal; false otherwise
  */
+/*??
 int equal(int p0, int p1) {
 
     int result = 0;
     java.lang.Integer i0 = (java.lang.Integer) p0;
     java.lang.Integer i1 = (java.lang.Integer) p1;
 
-    if (i0 != NULL) {
+    if (i0 != 0) {
 
-        if (i1 != NULL) {
+        if (i1 != 0) {
 
             if (i0.intValue() == i1.intValue()) {
 
@@ -773,12 +778,12 @@ int equal(int p0, int p1) {
 
         } else {
             
-            log(ERROR_LOG_LEVEL, "Could not compare equal. The second parameter is NULL.");
+            log(ERROR_LOG_LEVEL, "Could not compare equal. The second parameter is null.");
         }
             
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not compare equal. The first parameter is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not compare equal. The first parameter is null.");
     }
 
     return result;        
@@ -791,15 +796,16 @@ int equal(int p0, int p1) {
  * @param p1 the second parameter
  * @return true if smaller; false otherwise
  */
+/*??
 int smaller(int p0, int p1) {
 
     int result = false;
     java.lang.Integer i0 = (java.lang.Integer) p0;
     java.lang.Integer i1 = (java.lang.Integer) p1;
 
-    if (i0 != NULL) {
+    if (i0 != 0) {
 
-        if (i1 != NULL) {
+        if (i1 != 0) {
 
             if (i0.intValue() < i1.intValue()) {
 
@@ -808,12 +814,12 @@ int smaller(int p0, int p1) {
 
         } else {
             
-            log(ERROR_LOG_LEVEL, "Could not compare smaller. The second parameter is NULL.");
+            log(ERROR_LOG_LEVEL, "Could not compare smaller. The second parameter is null.");
         }
             
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not compare smaller. The first parameter is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not compare smaller. The first parameter is null.");
     }
 
     return result;        
@@ -826,15 +832,16 @@ int smaller(int p0, int p1) {
  * @param p1 the second parameter
  * @return true if greater; false otherwise
  */
+/*??
 int greater(int p0, int p1) {
 
     int result = false;
     java.lang.Integer i0 = (java.lang.Integer) p0;
     java.lang.Integer i1 = (java.lang.Integer) p1;
 
-    if (i0 != NULL) {
+    if (i0 != 0) {
 
-        if (i1 != NULL) {
+        if (i1 != 0) {
 
             if (i0.intValue() > i1.intValue()) {
 
@@ -843,12 +850,12 @@ int greater(int p0, int p1) {
 
         } else {
             
-            log(ERROR_LOG_LEVEL, "Could not compare greater. The second parameter is NULL.");
+            log(ERROR_LOG_LEVEL, "Could not compare greater. The second parameter is null.");
         }
             
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not compare greater. The first parameter is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not compare greater. The first parameter is null.");
     }
 
     return result;        
@@ -861,15 +868,16 @@ int greater(int p0, int p1) {
  * @param p1 the second parameter
  * @return true if smaller or equal; false otherwise
  */
+/*??
 int smaller_or_equal(int p0, int p1) {
 
     int result = false;
     java.lang.Integer i0 = (java.lang.Integer) p0;
     java.lang.Integer i1 = (java.lang.Integer) p1;
 
-    if (i0 != NULL) {
+    if (i0 != 0) {
 
-        if (i1 != NULL) {
+        if (i1 != 0) {
 
             if (i0.intValue() <= i1.intValue()) {
 
@@ -878,12 +886,12 @@ int smaller_or_equal(int p0, int p1) {
 
         } else {
             
-            log(ERROR_LOG_LEVEL, "Could not compare smaller or equal. The second parameter is NULL.");
+            log(ERROR_LOG_LEVEL, "Could not compare smaller or equal. The second parameter is null.");
         }
             
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not compare smaller or equal. The first parameter is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not compare smaller or equal. The first parameter is null.");
     }
 
     return result;        
@@ -896,15 +904,16 @@ int smaller_or_equal(int p0, int p1) {
  * @param p1 the second parameter
  * @return true if greater or equal; false otherwise
  */
+/*??
 int greater_or_equal(int p0, int p1) {
 
     int result = false;
     java.lang.Integer i0 = (java.lang.Integer) p0;
     java.lang.Integer i1 = (java.lang.Integer) p1;
 
-    if (i0 != NULL) {
+    if (i0 != 0) {
 
-        if (i1 != NULL) {
+        if (i1 != 0) {
 
             if (i0.intValue() >= i1.intValue()) {
 
@@ -913,12 +922,12 @@ int greater_or_equal(int p0, int p1) {
 
         } else {
             
-            log(ERROR_LOG_LEVEL, "Could not compare greater or equal. The second parameter is NULL.");
+            log(ERROR_LOG_LEVEL, "Could not compare greater or equal. The second parameter is null.");
         }
             
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not compare greater or equal. The first parameter is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not compare greater or equal. The first parameter is null.");
     }
 
     return result;        
@@ -935,6 +944,7 @@ int greater_or_equal(int p0, int p1) {
  * @param p1 the second parameter
  * @return the boolean result
  */
+/*??
 int and(int p0, int p1) {
 
     return p0 && p1;
@@ -947,8 +957,10 @@ int and(int p0, int p1) {
  * @param p1 the second parameter
  * @return the boolean result
  */
+/*??
 int or(int p0, int p1) {
 
     return p0 || p1;
 }
+*/
 

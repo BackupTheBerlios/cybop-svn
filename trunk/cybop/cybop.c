@@ -41,7 +41,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.1 $ $Date: 2003-09-23 23:44:33 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-09-25 07:04:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,15 +54,16 @@
  */
 int main(int p0, char** p1) {
 
-    int r = EXIT_FAILURE;
+    // Return 1 to indicate an error, by default.
+    int r = 1;
 
-    if (p1 != NULL) {
+    if (p1 != 0) {
 
-        if ((p0 == 3) && (p1[1] != NULL) && (p1[2] != NULL)) {
+        if ((p0 == 3) && (p1[1] != 0) && (p1[2] != 0)) {
 
             // Arguments.
-            int dynamics = (int) p1[1];
-            int statics = (int) p1[2];
+            void* dynamics = (void*) p1[1];
+            void* statics = (void*) p1[2];
 
             // Log handler.
             log_level = 3;
@@ -74,7 +75,7 @@ int main(int p0, char** p1) {
 */
 
             // Signal memory (signal queue).
-            struct map* signal_memory = (struct map*) malloc(sizeof(struct map));
+            void* signal_memory = malloc(sizeof(struct map));
             initialize_map(signal_memory);
 
 /*??
@@ -87,13 +88,13 @@ int main(int p0, char** p1) {
             // Create signal for storage in signal memory.
             struct signal* tmp = (struct signal*) malloc(sizeof(struct signal));
 
-            if (tmp != NULL) {
+            if (tmp != 0) {
 
                 log(INFO_LOG_LEVEL, "Send signal: " + dynamics);
 
                 // Set signal elements.
-//??                tmp->priority = NORMAL_PRIORITY;
-//??                tmp->language = NEURO_LANGUAGE;
+                tmp->priority = NORMAL_PRIORITY;
+                tmp->language = NEURO_LANGUAGE;
                 tmp->predicate = dynamics;
                 tmp->object = statics;
 
@@ -112,7 +113,7 @@ int main(int p0, char** p1) {
 
             } else {
 
-                log(ERROR_LOG_LEVEL, "Could not send initial signal. The signal is NULL.");
+                log(ERROR_LOG_LEVEL, "Could not send initial signal. The signal is null.");
             }
 
             // The system is now started up and complete so that a loop
@@ -124,8 +125,8 @@ int main(int p0, char** p1) {
 /*??
             // Event handler.
             JavaEventHandler.remove_event_handler(event_handler);
-            event_handler = NULL;
-            JavaEventHandler.signal_memory = NULL;
+            event_handler = 0;
+            JavaEventHandler.signal_memory = 0;
 */
 
             // Signal memory (signal queue).
@@ -135,14 +136,12 @@ int main(int p0, char** p1) {
 /*??
             // XML parser.
             finalize_xml_parser(xml_parser);
-            xml_parser = NULL;
+            xml_parser = 0;
 */
 
-            //
-            // The program exits normally, when the last non-daemon thread exits.
-            //
             log(INFO_LOG_LEVEL, "Exit cyboi normally.");
-            r = EXIT_SUCCESS;
+            // Return 0 to indicate proper shutdown.
+            r = 0;
 
         } else {
 
@@ -153,7 +152,7 @@ int main(int p0, char** p1) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not execute cyboi. The argument vector is NULL.");
+        log(ERROR_LOG_LEVEL, "Could not execute cyboi. The argument vector is null.");
     }
 
     return r;
@@ -170,13 +169,14 @@ int main(int p0, char** p1) {
  *
  * @param p0 the signal memory
  */
-void await(struct map* p0) {
+void await(void* p0) {
 
     // The shutdown flag.
     int sf = 0;
     // Transporting signal.
-    struct signal* s = (struct signal*) malloc(sizeof(struct signal));
+    void* s = malloc(sizeof(struct signal));
 
+    // Run endless loop handling any signals.
     while (1) {
 
         if (sf == 0) {

@@ -29,36 +29,36 @@
  *
  * Signals can be stored in a memory.
  * 
- * @version $Revision: 1.3 $ $Date: 2003-09-23 23:43:21 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-09-25 07:04:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct signal {
 
     /** The priority. */
-    int priority;
+    void* priority;
 
     /** The language. */
-    int language;
+    void* language;
 
     /** The subject. */
-    int subject;
+    void* subject;
 
     /** The predicate. */
-    int predicate;
+    void* predicate;
 
     /** The owner. */
-    int owner;
+    void* owner;
 
     /** The sender. */
-    int sender;
+    void* sender;
 
     /** The object. */
-    int object;
+    void* object;
 
     /** The adverbial. */
-    int adverbial;
+    void* adverbial;
 
     /** The condition. */
-    int condition;
+    void* condition;
 };
 
