@@ -74,13 +74,13 @@ import cybop.core.basic.String;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.6 $ $Date: 2003-03-03 07:37:50 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
 
     //
-    // Children.
+    // Children names.
     //
 
     /**

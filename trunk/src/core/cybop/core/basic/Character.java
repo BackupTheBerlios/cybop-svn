@@ -31,7 +31,7 @@ package cybop.core.basic;
  * In informatics, special tables were created which map every known sign
  * to a certain encoding number. The most popular tables are ASCII, ANSI and UNICODE.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Character extends Item {
@@ -49,7 +49,7 @@ public class Character extends Item {
     }
 
     //
-    // Children.
+    // Children names.
     //
     
     /** The encapsulated java object. */

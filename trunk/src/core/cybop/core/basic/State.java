@@ -30,13 +30,13 @@ package cybop.core.basic;
  * A state is a snapshot in time, marked by a timestamp.
  * It knows about its previous state and such builds up a timeline.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class State extends java.lang.Object {
 
     //
-    // Children.
+    // Children names.
     //
 
     /** The time stamp. */

@@ -32,13 +32,13 @@ import cybop.core.model.organizer.menuitem.*;
 /**
  * This class represents a systems menu.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemsMenu extends Menu {
 
     //
-    // Children.
+    // Children names.
     //
 
     /** The exit menu item. */

@@ -40,13 +40,13 @@ import cybop.core.system.*;
  * A system is responsible for writing out the record to console or file or
  * another location/medium, using mechanisms offered by the framework.
  * 
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class LogRecord extends Chain {
 
     //
-    // Children.
+    // Children names.
     //
 
     /** The message. */

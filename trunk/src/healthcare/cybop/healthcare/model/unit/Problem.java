@@ -32,13 +32,13 @@ import cybop.healthcare.model.*;
  *
  * A problem is some artifact in the health of a patient.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:15 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Problem extends Unit {
 
     //
-    // Children.
+    // Children names.
     //
 
     /** The identifier. */

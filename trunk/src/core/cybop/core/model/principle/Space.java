@@ -24,7 +24,7 @@
 
 package cybop.core.model.principle;
 
-import cybop.core.basic.Integer;
+import cybop.core.basic.String;
 import cybop.core.model.*;
 
 /**
@@ -34,108 +34,31 @@ import cybop.core.model.*;
  * A point is just a minimal space and always relative to the referenced object.
  * The absolute point does not exist as any point can consist of yet smaller points.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Space extends Principle {
 
     //
-    // Children.
+    // Children names.
     //
 
-    /** The x coordinate. */
-    private Integer x;
-    
-    /** The y coordinate. */
-    private Integer y;
-    
-    /** The z coordinate. */
-    private Integer z;
+    /** The origin x coordinate. */
+    public static final String ORIGIN_X_COORDINATE = new String("origin_x_coordinate");
 
-    //
-    // Encapsulated java awt point.
-    //
-    
-    /**
-     * Creates an encapsulated java awt point.
-     *
-     * @return the encapsulated java awt point
-     */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    /** The origin y coordinate. */
+    public static final String ORIGIN_Y_COORDINATE = new String("origin_y_coordinate");
 
-        return new java.awt.Point();
-    }
+    /** The origin z coordinate. */
+    public static final String ORIGIN_Z_COORDINATE = new String("origin_z_coordinate");
 
-    //
-    // The x coordinate.
-    //
-    
-    /**
-     * Sets the x coordinate.
-     *
-     * @param x the x coordinate
-     */
-    public void setX(Integer x) {
-        
-        this.x = x;
-    }
-    
-    /**
-     * Returns the x coordinate.
-     *
-     * @return the x coordinate
-     */
-    public Integer getX() {
-        
-        return this.x;
-    }
-    
-    //
-    // The y coordinate.
-    //
-    
-    /**
-     * Sets the y coordinate.
-     *
-     * @param y the y coordinate
-     */
-    public void setY(Integer y) {
-        
-        this.y = y;
-    }
-    
-    /**
-     * Returns the y coordinate.
-     *
-     * @return the y coordinate
-     */
-    public Integer getY() {
-        
-        return this.y;
-    }
-    
-    //
-    // The z coordinate.
-    //
-    
-    /**
-     * Sets the z coordinate.
-     *
-     * @param z the z coordinate
-     */
-    public void setZ(Integer z) {
+    /** The expanse x coordinate. */
+    public static final String EXPANSE_X_COORDINATE = new String("expanse_x_coordinate");
 
-        this.z = z;
-    }
-    
-    /**
-     * Returns the z coordinate.
-     *
-     * @return the z coordinate
-     */
-    public Integer getZ() {
-        
-        return this.z;
-    }
+    /** The expanse y coordinate. */
+    public static final String EXPANSE_Y_COORDINATE = new String("expanse_y_coordinate");
+
+    /** The expanse z coordinate. */
+    public static final String EXPANSE_Z_COORDINATE = new String("expanse_z_coordinate");
 }
 

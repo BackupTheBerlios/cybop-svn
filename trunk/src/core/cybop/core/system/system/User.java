@@ -35,13 +35,13 @@ import cybop.core.system.block.*;
  * Systems can communicate with each other and it doesn't matter whether
  * the systems are machines or users.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class User extends System {
 
     //
-    // Children.
+    // Children names.
     //
 
     /** The login. */

@@ -60,14 +60,14 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends Block implements 
     java.lang.Runnable {
 
     //
-    // Children.
+    // Children names.
     //
 
     /** The controller. */
@@ -96,6 +96,37 @@ public class System extends Block implements
 
     /** The user. */
     public static final String USER = new String("user");
+
+    //
+    // Default children.
+    //
+
+    /** The default controller. */
+    public String defaultController;
+
+    /** The default socket address. */
+    public String defaultSocketAddress;
+
+    /** The default internet protocol 6 address. */
+    public String defaultIp6Address;
+
+    /** The default internet protocol 4 address. */
+    public String defaultIp4Address;
+
+    /** The default host name. */
+    public String defaultHostName;
+
+    /** The default domain name. */
+    public String defaultDomainName;
+
+    /** The default communication partners count. */
+    public Integer defaultCommunicationPartnersCount;
+
+    /** The default communication partner. */
+    public String defaultCommunicationPartner;
+
+    /** The default user. */
+    public String defaultUser;
 
     //
     // Encapsulated java thread.
@@ -206,147 +237,187 @@ public class System extends Block implements
     }
 
     //
+    // Configuration.
+    //
+
+    /**
+     * Configures this system.
+     *
+     * @exception NullPointerException if the configuration is null
+     */
+    public void configure() throws Exception, NullPointerException {
+
+        super.configure();
+
+        Configuration c = (Configuration) get(System.CONFIGURATION);
+
+        if (c != null) {
+
+            this.defaultController = c.get(System.CONTROLLER, getDefaultController());
+            this.defaultSocketAddress = c.get(System.SOCKET_ADDRESS, getDefaultSocketAddress());
+            this.defaultIp6Address = c.get(System.IP6_ADDRESS, getDefaultIp6Address());
+            this.defaultIp4Address = c.get(System.IP4_ADDRESS, getDefaultIp4Address());
+            this.defaultHostName = c.get(System.HOST_NAME, getDefaultHostName());
+            this.defaultDomainName = c.get(System.DOMAIN_NAME, getDefaultDomainName());
+            this.defaultCommunicationPartnersCount = c.get(System.COMMUNICATION_PARTNERS_COUNT, getDefaultCommunicationPartnersCount());
+            this.defaultCommunicationPartner = c.get(System.COMMUNICATION_PARTNER, getDefaultCommunicationPartner());
+            this.defaultUser = c.get(System.USER, getDefaultUser());
+
+        } else {
+
+            throw new NullPointerException("Could not configure system. The configuration is null.");
+        }
+    }
+
+    /**
+     * Deconfigures this system.
+     *
+     * @exception NullPointerException if the configuration is null
+     */
+    public void deconfigure() throws Exception, NullPointerException {
+
+        Configuration c = (Configuration) get(System.CONFIGURATION);
+
+        if (c != null) {
+
+            c.set(System.CONTROLLER, this.defaultController);
+            c.set(System.SOCKET_ADDRESS, this.defaultSocketAddress);
+            c.set(System.IP6_ADDRESS, this.defaultIp6Address);
+            c.set(System.IP4_ADDRESS, this.defaultIp4Address);
+            c.set(System.HOST_NAME, this.defaultHostName);
+            c.set(System.DOMAIN_NAME, this.defaultDomainName);
+            c.set(System.COMMUNICATION_PARTNERS_COUNT, this.defaultCommunicationPartnersCount);
+            c.set(System.COMMUNICATION_PARTNER, this.defaultCommunicationPartner);
+            c.set(System.USER, this.defaultUser);
+
+        } else {
+
+            throw new NullPointerException("Could not deconfigure system. The configuration is null.");
+        }
+
+        super.deconfigure();
+    }
+
+    //
     // Initialization.
     //
 
     /**
      * Initializes this system.
-     *
-     * @exception NullPointerException if the configuration is null
      */
-    public void initialize() throws Exception, NullPointerException {
+    public void initialize() throws Exception {
 
         super.initialize();
 
-        Configuration c = (Configuration) get(System.CONFIGURATION);
+        set(System.CONTROLLER, createComponent(this.defaultController));
+        set(System.SOCKET_ADDRESS, createComponent(this.defaultSocketAddress));
+        set(System.IP6_ADDRESS, createComponent(this.defaultIp6Address));
+        set(System.IP4_ADDRESS, createComponent(this.defaultIp4Address));
+        set(System.HOST_NAME, this.defaultHostName);
+        set(System.DOMAIN_NAME, this.defaultDomainName);
+        set(System.USER, createComponent(this.defaultUser));
 
-        if (c != null) {
-
-            set(System.CONTROLLER, createComponent(getDefaultController()));
-            set(System.SOCKET_ADDRESS, createComponent(getDefaultSocketAddress()));
-            set(System.IP6_ADDRESS, createComponent(getDefaultIp6Address()));
-            set(System.IP4_ADDRESS, createComponent(getDefaultIp4Address()));
-            set(System.HOST_NAME, getDefaultHostName());
-            set(System.DOMAIN_NAME, getDefaultDomainName());
-            set(System.USER, createComponent(getDefaultUser()));
-
-            //
-            // Communication partners.
-            //
+        //
+        // Communication partners.
+        //
 
 /*??
-            int i;
-            String s = null;
+        int i;
+        String s = null;
 
-            set(System.SYSTEMS_COUNT, c.get(System.SYSTEMS_COUNT, createSystemsCount()));
+        set(System.SYSTEMS_COUNT, c.get(System.SYSTEMS_COUNT, createSystemsCount()));
 
-            if (get(System.SYSTEMS_COUNT) != null) {
+        if (get(System.SYSTEMS_COUNT) != null) {
 
-                // Retrieve the number of systems and create them one by one.
-                for (i = 0; i < ((Integer) get(System.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+            // Retrieve the number of systems and create them one by one.
+            for (i = 0; i < ((Integer) get(System.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
 
-                    s = new String(System.SYSTEM + "_" + java.lang.String.valueOf(i));
+                s = new String(System.SYSTEM + "_" + java.lang.String.valueOf(i));
 
-                    set(s, createSystem(c.get(loc, new String("")), c.get(args, new String("")), c.get(wp, new String(""))));
+                set(s, createSystem(c.get(loc, new String("")), c.get(args, new String("")), c.get(wp, new String(""))));
 
-                    //?? Testing.
-                    set(new String("system_test_user"), createSystem(c.get(loc, new String("cybop.core.system.system.User")), c.get(args, new String("")), c.get(wp, new String(""))));
-                }
-    
-            } else {
-    
-                throw new NullPointerException("Could not initialize system. The systems count is null.");
+                //?? Testing.
+                set(new String("system_test_user"), createSystem(c.get(loc, new String("cybop.core.system.system.User")), c.get(args, new String("")), c.get(wp, new String(""))));
             }
-*/
 
         } else {
 
-            throw new NullPointerException("Could not initialize system. The configuration is null.");
+            throw new NullPointerException("Could not initialize system. The systems count is null.");
         }
+*/
     }
 
     /**
      * Finalizes this system.
-     *
-     * @exception NullPointerException if the configuration is null
      */
-    public void finalizz() throws Exception, NullPointerException {
+    public void finalizz() throws Exception {
 
-        Configuration c = (Configuration) get(System.CONFIGURATION);
-
-        if (c != null) {
-
-            //
-            // Communication partners.
-            //
+        //
+        // Communication partners.
+        //
 
 /*??
-            if (get(System.SYSTEMS_COUNT) != null) {
+        if (get(System.SYSTEMS_COUNT) != null) {
 
-                String loc;
-                String args; 
-                String wp;
-                System system = null;
+            String loc;
+            String args; 
+            String wp;
+            System system = null;
 
-                for (i = 0; i < ((Integer) get(System.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+            for (i = 0; i < ((Integer) get(System.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
 
-                    s = new String(System.SYSTEM + "_" + java.lang.String.valueOf(i));
-                    loc = new String(System.SYSTEM_LOCATION + "_" + java.lang.String.valueOf(i));
-                    args = new String(System.SYSTEM_ARGUMENTS + "_" + java.lang.String.valueOf(i));
-                    wp = new String(System.SYSTEM_WORKPATH + "_" + java.lang.String.valueOf(i));
+                s = new String(System.SYSTEM + "_" + java.lang.String.valueOf(i));
+                loc = new String(System.SYSTEM_LOCATION + "_" + java.lang.String.valueOf(i));
+                args = new String(System.SYSTEM_ARGUMENTS + "_" + java.lang.String.valueOf(i));
+                wp = new String(System.SYSTEM_WORKPATH + "_" + java.lang.String.valueOf(i));
 
-                    c.set(loc, (String) get(loc));
-                    c.set(args, (String) get(args));
-                    c.set(wp, (String) get(wp));
+                c.set(loc, (String) get(loc));
+                c.set(args, (String) get(args));
+                c.set(wp, (String) get(wp));
 
-                    system = (System) get(s);
-                    remove(s);
-                    destroySystem(system);
-                }
-
-                Integer systemsCount = (Integer) get(System.SYSTEMS_COUNT);
-                c.set(System.SYSTEMS_COUNT, systemsCount);
-                remove(System.SYSTEMS_COUNT);
-                destroySystemsCount(systemsCount);
-
-            } else {
-    
-                throw new NullPointerException("Could not finalize system. The systems count is null.");
+                system = (System) get(s);
+                remove(s);
+                destroySystem(system);
             }
-*/
 
-            User user = (User) get(System.USER);
-            remove(System.USER);
-            destroyComponent(user);
-
-            String domainName = (String) get(System.DOMAIN_NAME);
-            remove(System.DOMAIN_NAME);
-//??            destroyDomainName(domainName);
-
-            String hostName = (String) get(System.HOST_NAME);
-            remove(System.HOST_NAME);
-//??            destroyHostName(hostName);
-
-            Ip4Address ip4Address = (Ip4Address) get(System.IP4_ADDRESS);
-            remove(System.IP4_ADDRESS);
-            destroyItem(ip4Address);
-
-            Ip6Address ip6Address = (Ip6Address) get(System.IP6_ADDRESS);
-            remove(System.IP6_ADDRESS);
-            destroyItem(ip6Address);
-
-            SocketAddress socketAddress = (SocketAddress) get(System.SOCKET_ADDRESS);
-            remove(System.SOCKET_ADDRESS);
-            destroyItem(socketAddress);
-
-            Controller controller = (Controller) get(System.CONTROLLER);
-            remove(System.CONTROLLER);
-            destroyComponent(controller);
+            Integer systemsCount = (Integer) get(System.SYSTEMS_COUNT);
+            c.set(System.SYSTEMS_COUNT, systemsCount);
+            remove(System.SYSTEMS_COUNT);
+            destroySystemsCount(systemsCount);
 
         } else {
 
-            throw new NullPointerException("Could not finalize system. The configuration is null.");
+            throw new NullPointerException("Could not finalize system. The systems count is null.");
         }
+*/
+
+        User user = (User) get(System.USER);
+        remove(System.USER);
+        destroyComponent(user);
+
+        String domainName = (String) get(System.DOMAIN_NAME);
+        remove(System.DOMAIN_NAME);
+//??            destroyDomainName(domainName);
+
+        String hostName = (String) get(System.HOST_NAME);
+        remove(System.HOST_NAME);
+//??            destroyHostName(hostName);
+
+        Ip4Address ip4Address = (Ip4Address) get(System.IP4_ADDRESS);
+        remove(System.IP4_ADDRESS);
+        destroyItem(ip4Address);
+
+        Ip6Address ip6Address = (Ip6Address) get(System.IP6_ADDRESS);
+        remove(System.IP6_ADDRESS);
+        destroyItem(ip6Address);
+
+        SocketAddress socketAddress = (SocketAddress) get(System.SOCKET_ADDRESS);
+        remove(System.SOCKET_ADDRESS);
+        destroyItem(socketAddress);
+
+        Controller controller = (Controller) get(System.CONTROLLER);
+        remove(System.CONTROLLER);
+        destroyComponent(controller);
 
         super.finalizz();
     }

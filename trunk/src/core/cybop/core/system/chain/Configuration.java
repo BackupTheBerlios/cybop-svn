@@ -50,13 +50,13 @@ import cybop.core.system.*;
  * (absolute paths) added together is larger than that, the tree will have
  * to be split to store its branches in more than just one property.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Configuration extends Chain {
 
     //
-    // Children.
+    // Children names.
     //
 
     /**

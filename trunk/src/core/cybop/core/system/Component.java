@@ -69,13 +69,13 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends Chain {
 
     //
-    // Children.
+    // Children names.
     //
 
     /** The globals. */
@@ -165,6 +165,9 @@ public class Component extends Chain {
                     java.lang.System.out.println("INFO: Globalize component.");
                     c.globalize(get(Component.GLOBALS));
 
+                    java.lang.System.out.println("INFO: Configure component.");
+                    c.configure();
+
                     java.lang.System.out.println("INFO: Initialize component.");
                     c.initialize();
 
@@ -197,6 +200,9 @@ public class Component extends Chain {
 
             java.lang.System.out.println("INFO: Finalize component.");
             c.finalizz();
+
+            java.lang.System.out.println("INFO: Deconfigure component.");
+            c.deconfigure();
 
             java.lang.System.out.println("INFO: Deglobalize component.");
             c.deglobalize(get(Component.GLOBALS));
@@ -363,6 +369,44 @@ public class Component extends Chain {
         } else {
             
             log(Component.WARNING_LOG_LEVEL, "Could not deglobalize component. The globals item is null.");
+        }
+    }
+
+    //
+    // Configuration.
+    //
+
+    /**
+     * Configures this system.
+     *
+     * @exception NullPointerException if the configuration is null
+     */
+    public void configure() throws Exception, NullPointerException {
+
+        Configuration c = (Configuration) get(System.CONFIGURATION);
+
+        if (c != null) {
+
+        } else {
+
+            throw new NullPointerException("Could not configure system. The configuration is null.");
+        }
+    }
+
+    /**
+     * Deconfigures this system.
+     *
+     * @exception NullPointerException if the configuration is null
+     */
+    public void deconfigure() throws Exception, NullPointerException {
+
+        Configuration c = (Configuration) get(System.CONFIGURATION);
+
+        if (c != null) {
+
+        } else {
+
+            throw new NullPointerException("Could not deconfigure system. The configuration is null.");
         }
     }
 

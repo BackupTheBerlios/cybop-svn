@@ -37,7 +37,7 @@ import cybop.healthcare.model.heading.problem.Objective;
  * A partial contact is a time extract of an episode.
  * It consists of problem headings.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:15 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Jens Bohl <jens.bohl@stud.tu-ilmenau.de>
  * @author Torsten Kunze <zone3@gmx.de>
@@ -45,7 +45,7 @@ import cybop.healthcare.model.heading.problem.Objective;
 public class PartialContact extends Unit {
 
     //
-    // Children.
+    // Children names.
     //
 
     /** The partial contact number. */

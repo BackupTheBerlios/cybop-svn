@@ -33,7 +33,7 @@ import cybop.healthcare.model.*;
  * An episode is a time extract of a certain problem/illness.
  * It consists of at least one or many partial contacts.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:15 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Jens Bohl <jens.bohl@stud.tu-ilmenau.de>
  * @author Torsten Kunze <zone3@gmx.de>
@@ -41,7 +41,7 @@ import cybop.healthcare.model.*;
 public class Episode extends Unit {
     
     //
-    // Children.
+    // Children names.
     //
 
     /** The value. */
