@@ -66,7 +66,7 @@
  * A compound model can be created by cloning an existing model template so that
  * some space gets allocated in the computer's memory.
  *
- * @version $Revision: 1.10 $ $Date: 2004-07-28 22:46:28 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-07-28 22:54:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -74,7 +74,6 @@
 #define COMPOUND_SOURCE
 
 #include "../array/array.c"
-#include "../cybol/cybol.c"
 #include "../global/constant.c"
 #include "../logger/logger.c"
 
