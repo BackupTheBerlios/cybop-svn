@@ -30,10 +30,10 @@ package cyboi;
  * A map element is accessed either directly by using its index or by first checking
  * for its name to determine its index and then returning the corresponding reference.
  *
- * @version $Revision: 1.2 $ $Date: 2003-07-15 13:21:54 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-07-17 09:03:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class MapHandler {
+class MapHandler {
 
     //
     // Creation and destruction.
@@ -44,19 +44,21 @@ public class MapHandler {
      *
      * @return the map
      */
-    public static Map createMap() {
+    static Map createMap() {
 
         Map m = new Map();
 
         if (m != null) {
 
-            m.names = createArray();
-            m.references = createArray();
+            m.names = ArrayHandler.createArray();
+            m.references = ArrayHandler.createArray();
 
         } else {
 
             System.out.println("ERROR: Could not create map. The map is null.");
         }
+        
+        return m;
     }
 
     /**
@@ -64,17 +66,17 @@ public class MapHandler {
      *
      * @param m the map
      */
-    public static void destroyMap(Map m) {
+    static void destroyMap(Map m) {
 
         if (m != null) {
 
             Object[] references = m.references;
             m.references = null;
-            destroyArray(references);
+            ArrayHandler.destroyArray(references);
 
             Object[] names = m.names;
             m.names = null;
-            destroyArray(names);
+            ArrayHandler.destroyArray(names);
 
         } else {
 
@@ -88,13 +90,13 @@ public class MapHandler {
      * @param m the map
      * @return the map size
      */
-    public static int getMapSize(Map m) {
+    static int getMapSize(Map m) {
 
         int s = -1;
 
         if (m != null) {
 
-            getArraySize(m.names);
+            ArrayHandler.getArraySize(m.names);
 
         } else {
 
@@ -115,14 +117,14 @@ public class MapHandler {
      * @param n the name
      * @param e the element
      */
-    public static void setMapElement(Map m, Object n, Object e) {
+    static void setMapElement(Map m, Object n, Object e) {
 
         if (m != null) {
 
-            int i = getNextMapElementIndex(m, n);
+            int i = MapHandler.getNextMapElementIndex(m, n);
 
-            setArrayElement(m.names, i, n);
-            setArrayElement(m.references, i, e);
+            ArrayHandler.setArrayElement(m.names, i, n);
+            ArrayHandler.setArrayElement(m.references, i, e);
 
         } else {
 
@@ -138,11 +140,11 @@ public class MapHandler {
      * @param e the map element
      * @return the map element name
      */
-    public static Object addMapElement(Map m, Object n, Object e) {
+    static Object addMapElement(Map m, Object n, Object e) {
 
-        Object en = getNewMapElementName(m, n);
+        Object en = MapHandler.getNewMapElementName(m, n);
 
-        setMapElement(m, en, e);
+        MapHandler.setMapElement(m, en, e);
 
         return en;
     }
@@ -155,14 +157,14 @@ public class MapHandler {
      * @exception Exception if the references is null
      * @exception Exception if the names is null
      */
-    public static void removeMapElement(Map m, int i) {
+    static void removeMapElement(Map m, int i) {
 
         if (m != null) {
 
             if (i > -1) {
 
-                removeArrayElement(m.names, i);
-                removeArrayElement(m.references, i);
+                ArrayHandler.removeArrayElement(m.names, i);
+                ArrayHandler.removeArrayElement(m.references, i);
             }
 
         } else {
@@ -177,11 +179,11 @@ public class MapHandler {
      * @param m the map
      * @param n the name
      */
-    public static void removeMapElement(Map m, Object n) {
+    static void removeMapElement(Map m, Object n) {
     
-        int i = getMapElementIndex(m, n);
+        int i = MapHandler.getMapElementIndex(m, n);
 
-        removeMapElement(m, i);
+        MapHandler.removeMapElement(m, i);
     }
 
     /**
@@ -191,13 +193,13 @@ public class MapHandler {
      * @param i the index
      * @return the map element
      */
-    public static Object getMapElement(Map m, int i) {
+    static Object getMapElement(Map m, int i) {
 
         Object e = null;
 
         if (m != null) {
     
-            e = getArrayElement(m.references, i);
+            e = ArrayHandler.getArrayElement(m.references, i);
 
         } else {
 
@@ -214,11 +216,11 @@ public class MapHandler {
      * @param n the name
      * @return the map element
      */
-    public static Object getMapElement(Map m, Object n) {
+    static Object getMapElement(Map m, Object n) {
 
-        int i = getMapElementIndex(m, n);
+        int i = MapHandler.getMapElementIndex(m, n);
 
-        return getMapElement(m, i);
+        return MapHandler.getMapElement(m, i);
     }
 
     /**
@@ -228,19 +230,19 @@ public class MapHandler {
      * @param n the name
      * @return the index
      */
-    public static int getMapElementIndex(Map m, Object n) {
+    static int getMapElementIndex(Map m, Object n) {
 
         int index = -1;
 
         if (m != null) {
 
             int i = index + 1;
-            int size = getMapSize(m);
+            int size = MapHandler.getMapSize(m);
             Object name = null;
 
             while (i < size) {
 
-                name = getArrayElement(m.names, i);
+                name = ArrayHandler.getArrayElement(m.names, i);
 
                 // If a null name is reached, then the name was not found.
                 // In this case, reset index to -1.
@@ -252,7 +254,7 @@ public class MapHandler {
 
                     // If a name equal to the searched one is found,
                     // then its index is the one to be returned.
-                    if (compare(name, n)) {
+                    if (name.equals(n)) {
 
                         index = i;
                         break;
@@ -284,19 +286,19 @@ public class MapHandler {
      * @param n the name
      * @return the next index
      */
-    public static int getNextMapElementIndex(Map m, Object n) {
+    static int getNextMapElementIndex(Map m, Object n) {
 
         int index = -1;
 
         if (m != null) {
 
             int i = index + 1;
-            int size = getMapSize(m);
+            int size = MapHandler.getMapSize(m);
             Object name = null;
 
             while (i < size) {
 
-                name = getArrayElement(m.names, i);
+                name = ArrayHandler.getArrayElement(m.names, i);
 
                 // If a null name is reached, then the name was not found.
                 // In this case, the current value of i is the next free index.
@@ -310,7 +312,7 @@ public class MapHandler {
                     // If a name equal to the searched one is found,
                     // then its index is the one to be returned since
                     // this element will have to be replaced.
-                    if (compare(name, n)) {
+                    if (name.equals(n)) {
 
                         index = i;
                         break;
@@ -324,7 +326,7 @@ public class MapHandler {
             // The map is full and such its size will be the next index to be used.
             if (index == -1) {
 
-                index = getMapSize(m);
+                index = MapHandler.getMapSize(m);
             }
 
         } else {
@@ -347,10 +349,10 @@ public class MapHandler {
      * @param n the name
      * @return the new name
      */
-    public static Object getNewMapElementName(Map m, Object n) {
+    static Object getNewMapElementName(Map m, Object n) {
 
         Object nn = null;
-        String index = String.valueOf(getMapElementCount(m, n));
+        String index = String.valueOf(MapHandler.getMapElementCount(m, n));
 
         if (n != null) {
 
@@ -378,19 +380,19 @@ public class MapHandler {
      * @param n the name
      * @return the number of names that start with the given name as word base
      */
-    public static int getMapElementCount(Map m, Object n) {
+    static int getMapElementCount(Map m, Object n) {
 
         int count = 0;
 
         if (m != null) {
 
             int i = 0;
-            int size = getMapSize(m);
+            int size = MapHandler.getMapSize(m);
             Object name = null;
 
             while (i < size) {
 
-                name = getArrayElement(m.names, i);
+                name = ArrayHandler.getArrayElement(m.names, i);
 
                 if (name != null) {
 

@@ -34,21 +34,21 @@ package cyboi;
  *
  * Item is the super class of all other classes in the framework.
  *
- * @version $Revision: 1.2 $ $Date: 2003-07-15 13:21:54 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-07-17 09:03:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Item {
+class Item {
 
     /** The abstractions. */
-    static final Map abstractions;
+    static Map abstractions;
 
     /** The categories. */
-    static final Map categories;
+    static Map categories;
 
     /** The positions. */
-    static final Map positions;
+    static Map positions;
 
     /** The items. */
-    static final Map items;
+    static Map items;
 }
 

@@ -27,9 +27,9 @@ package cyboi;
 /**
  * This is an item handler.<br><br>
  *
- * An item has well-defined public methods useable by outside entities. An outside
+ * An item has well-defined methods useable by outside entities. An outside
  * entity which contains items is called their container. Containers have a contract
- * with the items they contain, in that public methods are called in a specific order,
+ * with the items they contain, in that methods are called in a specific order,
  * called a lifecycle.<br><br>
  *
  * By calling the lifecycle methods, a container ensures the proper startup and
@@ -63,10 +63,10 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.2 $ $Date: 2003-07-15 13:21:54 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-07-17 09:03:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class ItemHandler {
+class ItemHandler {
 
     //
     // Creation and destruction.
@@ -77,16 +77,16 @@ public class ItemHandler {
      *
      * @return the item
      */
-    public static Item createItem() {
+    static Item createItem() {
 
         Item i = new Item();
 
         if (i != null) {
 
-            i.abstractions = createMap();
-            i.categories = createMap();
-            i.positions = createMap();
-            i.items = createMap();
+            i.abstractions = MapHandler.createMap();
+            i.categories = MapHandler.createMap();
+            i.positions = MapHandler.createMap();
+            i.items = MapHandler.createMap();
 
         } else {
 
@@ -101,25 +101,25 @@ public class ItemHandler {
      *
      * @param i the item
      */
-    public static void destroyItem(Item i) {
+    static void destroyItem(Item i) {
 
         if (i != null) {
 
             Map items = i.items;
             i.items = null;
-            destroyMap(items);
+            MapHandler.destroyMap(items);
 
             Map positions = i.positions;
             i.positions = null;
-            destroyMap(positions);
+            MapHandler.destroyMap(positions);
 
             Map categories = i.categories;
             i.categories = null;
-            destroyMap(categories);
+            MapHandler.destroyMap(categories);
 
             Map abstractions = i.abstractions;
             i.abstractions = null;
-            destroyMap(abstractions);
+            MapHandler.destroyMap(abstractions);
 
         } else {
 
@@ -137,7 +137,8 @@ public class ItemHandler {
      * @param n the name
      * @param c the item
      */
-    public static void setItem(Object n, Item c) {
+/*??
+    static void setItem(Object n, Item c) {
 
         Map m = getItemren();
 
@@ -158,7 +159,8 @@ public class ItemHandler {
      * @param c the item
      * @return the item name
      */
-    public static Object addItem(Object n, Item c) {
+/*??
+    static Object addItem(Object n, Item c) {
 
         Object cn = null;
         Map m = getItemren();
@@ -180,7 +182,8 @@ public class ItemHandler {
      *
      * @param i the index
      */
-    public static void removeItem(int i) {
+/*??
+    static void removeItem(int i) {
 
         Map m = getItemren();
 
@@ -199,7 +202,8 @@ public class ItemHandler {
      *
      * @param n the name
      */
-    public static void removeItem(Object n) {
+/*??
+    static void removeItem(Object n) {
 
         Map m = getItemren();
 
@@ -219,7 +223,8 @@ public class ItemHandler {
      * @param i the index
      * @return the item
      */
-    public static Item getItem(int i) {
+/*??
+    static Item getItem(int i) {
 
         Item c = null;
         Map m = getItemren();
@@ -242,7 +247,8 @@ public class ItemHandler {
      * @param n the name
      * @return the item
      */
-    public static Item getItem(Object n) {
+/*??
+    static Item getItem(Object n) {
 
         Item c = null;
         Map m = getItemren();
@@ -266,7 +272,8 @@ public class ItemHandler {
      * @param d the default item
      * @return the item
      */
-    public static Item getItem(Object n, Item d) {
+/*??
+    static Item getItem(Object n, Item d) {
 
         Item c = getItem(n);
 
@@ -283,7 +290,8 @@ public class ItemHandler {
      *
      * @param n the name
      */
-    public static int getCount(Object n) {
+/*??
+    static int getCount(Object n) {
 
         int c = -1;
         Map m = getItemren();
@@ -307,7 +315,8 @@ public class ItemHandler {
     /**
      * Initializes this item.
      */
-    public static void initialize() {
+/*??
+    static void initialize() {
     }
 
     /**
@@ -320,7 +329,8 @@ public class ItemHandler {
      * This method will be renamed to <code>finalize</code> as soon as the new
      * and simplified CYBOL computer language is used.
      */
-    public static void finalizz() {
+/*??
+    static void finalizz() {
     }
 
     //
@@ -334,7 +344,7 @@ public class ItemHandler {
      * @return the item
      */
 /*??
-    public static Item getChild(Space p) {
+    static Item getChild(Space p) {
 
         Item child = null;
         Item[] c = getChildren();
@@ -404,7 +414,7 @@ public class ItemHandler {
      * false otherwise
      */
 /*??
-    public static boolean contains(Structure p) {
+    static boolean contains(Structure p) {
 
         boolean b = false;
         Structure s = null; //?? getChild(Item.SPACE);

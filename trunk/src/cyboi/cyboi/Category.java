@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Map.java,v $
+ * $RCSfile: Category.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -25,20 +25,28 @@
 package cyboi;
 
 /**
- * This is a map.
+ * This is a category.<br><br>
  *
- * A map is like a table. One column (array) contains the element names.
- * A second column (array) contains the actual element references.
+ * A category represents an abstract description of some real world item.
  *
- * @version $Revision: 1.2 $ $Date: 2003-07-17 09:03:04 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-07-17 09:03:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class Map {
+class Category {
 
-    /** The names. */
-    static Object[] names;
+    /** The name. */
+    static String name;
 
-    /** The references. */
-    static Object[] references;
+    /** The super category. */
+    static String super_category;
+
+    /** The java object. */
+    static String java_object;
+
+    /** The java tree node. */
+    static String java_tree_node;
+
+    /** The items. */
+    static Object[] items;
 }
 
