@@ -24,7 +24,7 @@
  * This file defines global constants for:
  * - null pointers
  * - arrays
- * - compounds:
+ * - types:
  *   - string
  *   - fraction
  *   - vector
@@ -36,8 +36,12 @@
  *   - internals
  *   - unix socket
  *   - x windows
+ *   - xml tag
+ *   - xml attribute
  * - signal priorities
  * - signal languages
+ * - xml markups
+ * - xml parse modes
  * - cybol file
  * - cybol tags
  * - cybol attributes
@@ -64,7 +68,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.10 $ $Date: 2004-07-23 22:15:25 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-07-25 15:48:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -374,6 +378,32 @@ static const int UNIX_SOCKET_FILENAME_NAME_COUNT = 25;
 //
 
 //
+// Xml tag.
+//
+
+/** The xml tag count. */
+static const int XML_TAG_COUNT = 2;
+
+/** The xml tag name, attribute, value index. */
+static const int XML_TAG_NAME_ATTRIBUTE_VALUE_INDEX = 0;
+
+/** The xml tag counts index. */
+static const int XML_TAG_COUNTS_INDEX = 1;
+
+//
+// Xml attribute.
+//
+
+/** The xml attribute count. */
+static const int XML_ATTRIBUTE_COUNT = 2;
+
+/** The xml attribute name, value index. */
+static const int XML_ATTRIBUTE_NAME_VALUE_INDEX = 0;
+
+/** The xml attribute counts index. */
+static const int XML_ATTRIBUTE_COUNTS_INDEX = 1;
+
+//
 // Signal priorities.
 //
 
@@ -510,72 +540,7 @@ static const char* ZIP_LANGUAGE = ZIP_LANGUAGE_ARRAY;
 static const int ZIP_LANGUAGE_COUNT = 3;
 
 //
-// Cybol file.
-//
-
-/** The file resize factor. */
-static const int FILE_RESIZE_FACTOR = 2;
-
-/** The cybol path. */
-//?? static const char CYBOL_PATH[] = {'/home/cybop/lib/cybop/'};
-
-/** The cybol file suffix. */
-//?? static const char FILE_SUFFIX[] = {'.cybol'};
-
-/** The null model. */
-//?? static const char NULL_MODEL[] = {'null'};
-
-//
-// Cybol attributes.
-//
-
-/** The name attribute array, pointer, count. */
-static const char NAME_ATTRIBUTE_ARRAY[] = {'n', 'a', 'm', 'e'};
-static const char* NAME_ATTRIBUTE = NAME_ATTRIBUTE_ARRAY;
-static const int NAME_ATTRIBUTE_COUNT = 4;
-
-/** The abstraction attribute array, pointer, count. */
-static const char ABSTRACTION_ATTRIBUTE_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-static const char* ABSTRACTION_ATTRIBUTE = ABSTRACTION_ATTRIBUTE_ARRAY;
-static const int ABSTRACTION_ATTRIBUTE_COUNT = 11;
-
-/** The location attribute array, pointer, count. */
-static const char LOCATION_ATTRIBUTE_ARRAY[] = {'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
-static const char* LOCATION_ATTRIBUTE = LOCATION_ATTRIBUTE_ARRAY;
-static const int LOCATION_ATTRIBUTE_COUNT = 8;
-
-/** The model attribute array, pointer, count. */
-static const char MODEL_ATTRIBUTE_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
-static const char* MODEL_ATTRIBUTE = MODEL_ATTRIBUTE_ARRAY;
-static const int MODEL_ATTRIBUTE_COUNT = 5;
-
-/** The constraint attribute array, pointer, count. */
-static const char CONSTRAINT_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't'};
-static const char* CONSTRAINT_ATTRIBUTE = CONSTRAINT_ATTRIBUTE_ARRAY;
-static const int CONSTRAINT_ATTRIBUTE_COUNT = 10;
-
-/** The position location attribute array, pointer, count. */
-static const char POSITION_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
-static const char* POSITION_LOCATION_ATTRIBUTE = POSITION_LOCATION_ATTRIBUTE_ARRAY;
-static const int POSITION_LOCATION_ATTRIBUTE_COUNT = 17;
-
-/** The position abstraction attribute array, pointer, count. */
-static const char POSITION_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-static const char* POSITION_ABSTRACTION_ATTRIBUTE = POSITION_ABSTRACTION_ATTRIBUTE_ARRAY;
-static const int POSITION_ABSTRACTION_ATTRIBUTE_COUNT = 20;
-
-/** The position model attribute array, pointer, count. */
-static const char POSITION_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'm', 'o', 'd', 'e', 'l'};
-static const char* POSITION_MODEL_ATTRIBUTE = POSITION_MODEL_ATTRIBUTE_ARRAY;
-static const int POSITION_MODEL_ATTRIBUTE_COUNT = 14;
-
-/** The position constraint attribute array, pointer, count. */
-static const char POSITION_CONSTRAINT_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't'};
-static const char* POSITION_CONSTRAINT_ATTRIBUTE = POSITION_CONSTRAINT_ATTRIBUTE_ARRAY;
-static const int POSITION_CONSTRAINT_ATTRIBUTE_COUNT = 19;
-
-//
-// Xml tags.
+// Xml markups.
 //
 
 /** The begin comment tag array, pointer, count. */
@@ -652,6 +617,71 @@ static const int ATTRIBUTE_NAME_PARSE_MODE = 5;
 
 /** The attribute value parse mode. */
 static const int ATTRIBUTE_VALUE_PARSE_MODE = 6;
+
+//
+// Cybol file.
+//
+
+/** The file resize factor. */
+static const int FILE_RESIZE_FACTOR = 2;
+
+/** The cybol path. */
+//?? static const char CYBOL_PATH[] = {'/home/cybop/lib/cybop/'};
+
+/** The cybol file suffix. */
+//?? static const char FILE_SUFFIX[] = {'.cybol'};
+
+/** The null model. */
+//?? static const char NULL_MODEL[] = {'null'};
+
+//
+// Cybol attributes.
+//
+
+/** The name attribute array, pointer, count. */
+static const char NAME_ATTRIBUTE_ARRAY[] = {'n', 'a', 'm', 'e'};
+static const char* NAME_ATTRIBUTE = NAME_ATTRIBUTE_ARRAY;
+static const int NAME_ATTRIBUTE_COUNT = 4;
+
+/** The abstraction attribute array, pointer, count. */
+static const char ABSTRACTION_ATTRIBUTE_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+static const char* ABSTRACTION_ATTRIBUTE = ABSTRACTION_ATTRIBUTE_ARRAY;
+static const int ABSTRACTION_ATTRIBUTE_COUNT = 11;
+
+/** The location attribute array, pointer, count. */
+static const char LOCATION_ATTRIBUTE_ARRAY[] = {'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
+static const char* LOCATION_ATTRIBUTE = LOCATION_ATTRIBUTE_ARRAY;
+static const int LOCATION_ATTRIBUTE_COUNT = 8;
+
+/** The model attribute array, pointer, count. */
+static const char MODEL_ATTRIBUTE_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
+static const char* MODEL_ATTRIBUTE = MODEL_ATTRIBUTE_ARRAY;
+static const int MODEL_ATTRIBUTE_COUNT = 5;
+
+/** The constraint attribute array, pointer, count. */
+static const char CONSTRAINT_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't'};
+static const char* CONSTRAINT_ATTRIBUTE = CONSTRAINT_ATTRIBUTE_ARRAY;
+static const int CONSTRAINT_ATTRIBUTE_COUNT = 10;
+
+/** The position location attribute array, pointer, count. */
+static const char POSITION_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
+static const char* POSITION_LOCATION_ATTRIBUTE = POSITION_LOCATION_ATTRIBUTE_ARRAY;
+static const int POSITION_LOCATION_ATTRIBUTE_COUNT = 17;
+
+/** The position abstraction attribute array, pointer, count. */
+static const char POSITION_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+static const char* POSITION_ABSTRACTION_ATTRIBUTE = POSITION_ABSTRACTION_ATTRIBUTE_ARRAY;
+static const int POSITION_ABSTRACTION_ATTRIBUTE_COUNT = 20;
+
+/** The position model attribute array, pointer, count. */
+static const char POSITION_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'm', 'o', 'd', 'e', 'l'};
+static const char* POSITION_MODEL_ATTRIBUTE = POSITION_MODEL_ATTRIBUTE_ARRAY;
+static const int POSITION_MODEL_ATTRIBUTE_COUNT = 14;
+
+/** The position constraint attribute array, pointer, count. */
+static const char POSITION_CONSTRAINT_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't'};
+static const char* POSITION_CONSTRAINT_ATTRIBUTE = POSITION_CONSTRAINT_ATTRIBUTE_ARRAY;
+static const int POSITION_CONSTRAINT_ATTRIBUTE_COUNT = 19;
 
 //
 // Cybol abstraction values:
