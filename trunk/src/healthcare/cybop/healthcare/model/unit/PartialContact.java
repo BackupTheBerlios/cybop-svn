@@ -37,7 +37,7 @@ import cybop.healthcare.model.heading.problem.Objective;
  * A partial contact is a time extract of an episode.
  * It consists of problem headings.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Jens Bohl <jens.bohl@stud.tu-ilmenau.de>
  * @author Torsten Kunze <zone3@gmx.de>
@@ -63,7 +63,7 @@ public class PartialContact extends Unit {
 
         String id = new String(java.lang.String.valueOf(getObjectiveCount()));
 
-        set(id, o);
+        setChildItem(id, o);
     }
 
     public int getObjectiveCount() {
@@ -179,7 +179,7 @@ public class PartialContact extends Unit {
 
             if (objectives[i].equals(objective)) {
 
-//??                remove(objective.get(Objective.IDENTIFIER));
+//??                removeChildItem(objective.getChildItem(Objective.IDENTIFIER));
             }
         }
     }

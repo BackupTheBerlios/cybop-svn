@@ -30,7 +30,7 @@ import cybop.healthcare.model.*;
 /**
  * This class represents a dose.<br><br>
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Dose extends Description {
@@ -67,7 +67,7 @@ public class Dose extends Description {
 
         super.initialize();
 
-        set(Dose.VALUE, getDefaultValue());
+        setChildItem(Dose.VALUE, getDefaultValue());
     }
 
     /**
@@ -75,7 +75,7 @@ public class Dose extends Description {
      */
     public void finalizz() throws Exception {
 
-        remove(Dose.VALUE);
+        removeChildItem(Dose.VALUE);
 
         super.finalizz();
     }

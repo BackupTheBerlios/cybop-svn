@@ -35,7 +35,7 @@ import cybop.core.system.block.*;
  * Systems can communicate with each other and it doesn't matter whether
  * the systems are machines or users.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class User extends System {
@@ -85,8 +85,8 @@ public class User extends System {
 
         super.initialize();
 
-        set(User.LOGIN, getDefaultLogin());
-        set(User.PASSWORD, getDefaultPassword());
+        setChildItem(User.LOGIN, getDefaultLogin());
+        setChildItem(User.PASSWORD, getDefaultPassword());
     }
 
     /**
@@ -94,9 +94,9 @@ public class User extends System {
      */
     public void finalizz() throws Exception {
 
-        remove(User.PASSWORD);
+        removeChildItem(User.PASSWORD);
 
-        remove(User.LOGIN);
+        removeChildItem(User.LOGIN);
 
         super.finalizz();
     }

@@ -31,7 +31,7 @@ import cybop.core.model.*;
 /**
  * This class represents a text panel.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class TextPanel extends Panel {
@@ -99,9 +99,9 @@ public class TextPanel extends Panel {
      * @param i the item
      * @exception NullPointerException if the name is null
      */
-    public void set(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws NullPointerException {
 
-        super.set(n, i);
+        super.setChildItem(n, i);
 
         if (n != null) {
 
@@ -122,13 +122,13 @@ public class TextPanel extends Panel {
      * @param n the name
      * @exception NullPointerException if the name is null
      */
-    public void remove(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws NullPointerException {
 
         if (n != null) {
 
             if (n.isEqualTo(TextPanel.TEXT)) {
 
-                removeText((String) get(n));
+                removeText((String) getChildItem(n));
             }
 
         } else {
@@ -136,7 +136,7 @@ public class TextPanel extends Panel {
             throw new NullPointerException("Could not remove item. The name is null.");
         }
         
-        super.remove(n);
+        super.removeChildItem(n);
     }
 
     //
@@ -224,7 +224,7 @@ public class TextPanel extends Panel {
 
         super.initialize();
 
-        set(TextPanel.TEXT, getDefaultText());
+        setChildItem(TextPanel.TEXT, getDefaultText());
     }
 
     /**
@@ -232,8 +232,8 @@ public class TextPanel extends Panel {
      */
     public void finalizz() throws Exception {
 
-//??        TextPanel textPanel = (TextPanel) get(ImagePanel.TEXT);
-        remove(TextPanel.TEXT);
+//??        TextPanel textPanel = (TextPanel) getChildItem(ImagePanel.TEXT);
+        removeChildItem(TextPanel.TEXT);
 //??        destroyComponent(textPanel);
 
         super.finalizz();

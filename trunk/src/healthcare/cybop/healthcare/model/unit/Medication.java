@@ -33,7 +33,7 @@ import cybop.healthcare.model.description.*;
  *
  * A medication is ...
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Medication extends Unit {
@@ -70,7 +70,7 @@ public class Medication extends Unit {
 
         super.initialize();
 
-        set(Medication.NAME, getDefaultName());
+        setChildItem(Medication.NAME, getDefaultName());
     }
 
     /**
@@ -78,7 +78,7 @@ public class Medication extends Unit {
      */
     public void finalizz() throws Exception {
 
-        remove(Medication.NAME);
+        removeChildItem(Medication.NAME);
 
         super.finalizz();
     }

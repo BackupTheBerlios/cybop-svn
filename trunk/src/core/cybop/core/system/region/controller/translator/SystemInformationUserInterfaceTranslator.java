@@ -35,7 +35,7 @@ import cybop.core.system.region.controller.*;
 /**
  * This class represents a system information user interface translator.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationUserInterfaceTranslator extends Translator {
@@ -59,14 +59,14 @@ public class SystemInformationUserInterfaceTranslator extends Translator {
 
         if (ui != null) {
             
-            SystemInformationContentsPanel p = (SystemInformationContentsPanel) ui.get(SystemInformationUserInterface.CONTENTS_PANEL);
+            SystemInformationContentsPanel p = (SystemInformationContentsPanel) ui.getChildItem(SystemInformationUserInterface.CONTENTS_PANEL);
 
             if (p != null) {
 
                 if (dm != null) {
 
-                    encodeHeadPanel((SystemInformation) dm.get(DomainModel.SYSTEM_INFORMATION), (HeadPanel) p.get(SystemInformationContentsPanel.HEAD_PANEL));
-                    encodeTabbedPane((SystemInformation) dm.get(DomainModel.SYSTEM_INFORMATION), (TabbedPane) p.get(SystemInformationContentsPanel.TABBED_PANE));
+                    encodeHeadPanel((SystemInformation) dm.getChildItem(DomainModel.SYSTEM_INFORMATION), (HeadPanel) p.getChildItem(SystemInformationContentsPanel.HEAD_PANEL));
+                    encodeTabbedPane((SystemInformation) dm.getChildItem(DomainModel.SYSTEM_INFORMATION), (TabbedPane) p.getChildItem(SystemInformationContentsPanel.TABBED_PANE));
 
                 } else {
 
@@ -111,10 +111,10 @@ public class SystemInformationUserInterfaceTranslator extends Translator {
 
             if (p != null) {
 
-                encodeLabel((Label) p.get(HeadPanel.NAME_LABEL), (String) i.get(SystemInformation.NAME));
-                encodeLabel((Label) p.get(HeadPanel.VERSION_LABEL), (String) i.get(SystemInformation.VERSION));
-                encodeLabel((Label) p.get(HeadPanel.DATE_LABEL), (String) i.get(SystemInformation.DATE));
-                encodeLabel((Label) p.get(HeadPanel.SLOGAN_LABEL), (String) i.get(SystemInformation.SLOGAN));
+                encodeLabel((Label) p.getChildItem(HeadPanel.NAME_LABEL), (String) i.getChildItem(SystemInformation.NAME));
+                encodeLabel((Label) p.getChildItem(HeadPanel.VERSION_LABEL), (String) i.getChildItem(SystemInformation.VERSION));
+                encodeLabel((Label) p.getChildItem(HeadPanel.DATE_LABEL), (String) i.getChildItem(SystemInformation.DATE));
+                encodeLabel((Label) p.getChildItem(HeadPanel.SLOGAN_LABEL), (String) i.getChildItem(SystemInformation.SLOGAN));
 
             } else {
 

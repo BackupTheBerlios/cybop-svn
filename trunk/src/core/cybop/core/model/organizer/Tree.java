@@ -31,7 +31,7 @@ import cybop.core.model.*;
 /**
  * This class represents a tree.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Tree extends Organizer {
@@ -102,9 +102,9 @@ public class Tree extends Organizer {
      * @param i the item
      * @exception NullPointerException if the name is null
      */
-    public void set(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws NullPointerException {
 
-        super.set(n, i);
+        super.setChildItem(n, i);
 
         if (n != null) {
 
@@ -125,13 +125,13 @@ public class Tree extends Organizer {
      * @param n the name
      * @exception NullPointerException if the name is null
      */
-    public void remove(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws NullPointerException {
 
         if (n != null) {
 
             if (n.isEqualTo(Tree.MODEL)) {
 
-                removeModel((Model) get(n));
+                removeModel((Model) getChildItem(n));
             }
 
         } else {
@@ -139,7 +139,7 @@ public class Tree extends Organizer {
             throw new NullPointerException("Could not remove item. The name is null.");
         }
 
-        super.remove(n);
+        super.removeChildItem(n);
     }
 
     //

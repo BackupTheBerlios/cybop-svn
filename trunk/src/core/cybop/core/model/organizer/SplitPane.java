@@ -31,7 +31,7 @@ import cybop.core.model.*;
 /**
  * This class represents a split pane.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SplitPane extends Organizer {
@@ -57,9 +57,9 @@ public class SplitPane extends Organizer {
      * @param i the item
      * @exception NullPointerException if the name is null
      */
-    public void set(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws NullPointerException {
 
-        super.set(n, i);
+        super.setChildItem(n, i);
 
         if (n != null) {
 
@@ -84,17 +84,17 @@ public class SplitPane extends Organizer {
      * @param n the name
      * @exception NullPointerException if the name is null
      */
-    public void remove(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws NullPointerException {
 
         if (n != null) {
 
             if (n.isEqualTo(SplitPane.LEFT_ORGANIZER)) {
 
-                removeLeftOrganizer((Organizer) get(n));
+                removeLeftOrganizer((Organizer) getChildItem(n));
             
             } else if (n.isEqualTo(SplitPane.RIGHT_ORGANIZER)) {
 
-                removeRightOrganizer((Organizer) get(n));
+                removeRightOrganizer((Organizer) getChildItem(n));
             }
 
         } else {
@@ -102,7 +102,7 @@ public class SplitPane extends Organizer {
             throw new NullPointerException("Could not remove item. The name is null.");
         }
 
-        super.remove(n);
+        super.removeChildItem(n);
     }
 
     //
@@ -290,8 +290,8 @@ public class SplitPane extends Organizer {
 
         super.initialize();
 
-        set(SplitPane.LEFT_ORGANIZER, createItem(getDefaultLeftOrganizer()));
-        set(SplitPane.RIGHT_ORGANIZER, createItem(getDefaultRightOrganizer()));
+        setChildItem(SplitPane.LEFT_ORGANIZER, createChildItem(getDefaultLeftOrganizer()));
+        setChildItem(SplitPane.RIGHT_ORGANIZER, createChildItem(getDefaultRightOrganizer()));
     }
 
     /**
@@ -299,13 +299,13 @@ public class SplitPane extends Organizer {
      */
     public void finalizz() throws Exception {
 
-        Organizer rightOrganizer = (Organizer) get(SplitPane.RIGHT_ORGANIZER);
-        remove(SplitPane.RIGHT_ORGANIZER);
-        destroyItem(rightOrganizer);
+        Organizer rightOrganizer = (Organizer) getChildItem(SplitPane.RIGHT_ORGANIZER);
+        removeChildItem(SplitPane.RIGHT_ORGANIZER);
+        destroyChildItem(rightOrganizer);
 
-        Organizer leftOrganizer = (Organizer) get(SplitPane.LEFT_ORGANIZER);
-        remove(SplitPane.LEFT_ORGANIZER);
-        destroyItem(leftOrganizer);
+        Organizer leftOrganizer = (Organizer) getChildItem(SplitPane.LEFT_ORGANIZER);
+        removeChildItem(SplitPane.LEFT_ORGANIZER);
+        destroyChildItem(leftOrganizer);
 
         super.finalizz();
     }

@@ -35,7 +35,7 @@ import cybop.core.system.chain.*;
  *
  * It contains meta information about a mouse, its pointer and position etc.
  *
- * @version $Revision: 1.1 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class MouseModel extends Model {
@@ -72,7 +72,7 @@ public class MouseModel extends Model {
 
         super.initialize();
 
-        set(MouseModel.POINTER_POSITION, createItem(getDefaultPointerPosition()));
+        setChildItem(MouseModel.POINTER_POSITION, createChildItem(getDefaultPointerPosition()));
     }
 
     /**
@@ -80,9 +80,9 @@ public class MouseModel extends Model {
      */
     public void finalizz() throws Exception {
 
-        Space pointerPosition = (Space) get(MouseModel.POINTER_POSITION);
-        remove(MouseModel.POINTER_POSITION);
-        destroyItem(pointerPosition);
+        Space pointerPosition = (Space) getChildItem(MouseModel.POINTER_POSITION);
+        removeChildItem(MouseModel.POINTER_POSITION);
+        destroyChildItem(pointerPosition);
 
         super.finalizz();
     }

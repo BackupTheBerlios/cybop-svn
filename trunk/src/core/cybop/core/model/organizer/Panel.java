@@ -31,7 +31,7 @@ import cybop.core.model.*;
 /**
  * This class represents a panel.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Panel extends Organizer {
@@ -68,9 +68,9 @@ public class Panel extends Organizer {
      * @param i the item
      * @exception NullPointerException if the name is null
      */
-    public void set(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws NullPointerException {
 
-        super.set(n, i);
+        super.setChildItem(n, i);
 
         if (n != null) {
 
@@ -91,13 +91,13 @@ public class Panel extends Organizer {
      * @param n the name
      * @exception NullPointerException if the name is null
      */
-    public void remove(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws NullPointerException {
 
         if (n != null) {
 
             if (n.isEqualTo(Panel.LAYOUT)) {
                 
-                removeLayout((Layout) get(n));
+                removeLayout((Layout) getChildItem(n));
             }
 
         } else {
@@ -105,7 +105,7 @@ public class Panel extends Organizer {
             throw new NullPointerException("Could not set item. The name is null.");
         }
 
-        super.remove(n);
+        super.removeChildItem(n);
     }
 
     //
@@ -193,7 +193,7 @@ public class Panel extends Organizer {
 
         super.initialize();
 
-        set(Panel.LAYOUT, createItem(getDefaultLayout()));
+        setChildItem(Panel.LAYOUT, createChildItem(getDefaultLayout()));
     }
 
     /**
@@ -201,9 +201,9 @@ public class Panel extends Organizer {
      */
     public void finalizz() throws Exception {
 
-        Layout layout = (Layout) get(Panel.LAYOUT);
-        remove(Panel.LAYOUT);
-        destroyItem(layout);
+        Layout layout = (Layout) getChildItem(Panel.LAYOUT);
+        removeChildItem(Panel.LAYOUT);
+        destroyChildItem(layout);
 
         super.finalizz();
     }

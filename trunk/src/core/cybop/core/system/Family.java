@@ -49,7 +49,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.9 $ $Date: 2003-04-23 13:08:57 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -188,7 +188,7 @@ public class Family extends System {
 
         if (n != null) {
 
-            super.remove(n);
+            super.removeChildItem(n);
 
         } else {
 
@@ -205,7 +205,7 @@ public class Family extends System {
      */
     public void setSystem(String n, Item s) throws NullPointerException {
 
-        Integer c = (Integer) get(Family.SYSTEMS_COUNT);
+        Integer c = (Integer) getChildItem(Family.SYSTEMS_COUNT);
 
         if (c != null) {
 
@@ -217,8 +217,8 @@ public class Family extends System {
                 //?? To be implemented yet.
 //??                String ext = new String(n.getJavaObject() + "_" + java.lang.String.valueOf(c.getJavaPrimitive()));
 
-                super.set(ext, s);
-                set(Family.SYSTEMS_COUNT, new Integer(c.getJavaPrimitive() + 1));
+                super.setChildItem(ext, s);
+                setChildItem(Family.SYSTEMS_COUNT, new Integer(c.getJavaPrimitive() + 1));
 
             } else {
 
@@ -243,7 +243,7 @@ public class Family extends System {
 
         if (n != null) {
 
-            s = (System) super.get(n);
+            s = (System) super.getChildItem(n);
 
         } else {
 
@@ -266,18 +266,18 @@ public class Family extends System {
 
         super.configure();
 
-        Configuration c = (Configuration) get(Family.CONFIGURATION);
+        Configuration c = (Configuration) getChildItem(Family.CONFIGURATION);
 
         if (c != null) {
 
-            this.defaultAvailableSystems = c.get(Family.AVAILABLE_SYSTEMS, getDefaultAvailableSystems());
-            this.defaultSystemsCount = c.get(Family.SYSTEMS_COUNT, getDefaultSystemsCount());
-            this.defaultSystemClassName = c.get(Family.SYSTEM_CLASS_NAME, getDefaultSystemClassName());
-            this.defaultSystemConfigurationLocation = c.get(Family.SYSTEM_CONFIGURATION_LOCATION, getDefaultSystemConfigurationLocation());
-//??            this.defaultSystem = c.get(Family.SYSTEM, getDefaultSystem());
-            this.defaultExternalSystemsCount = c.get(Family.EXTERNAL_SYSTEMS_COUNT, getDefaultExternalSystemsCount());
-            this.defaultExternalSystemCommand = c.get(Family.EXTERNAL_SYSTEM_COMMAND, getDefaultExternalSystemCommand());
-//??            this.defaultExternalSystem = c.get(Family.EXTERNAL_SYSTEM, getDefaultExternalSystem());
+            this.defaultAvailableSystems = c.getChildItem(Family.AVAILABLE_SYSTEMS, getDefaultAvailableSystems());
+            this.defaultSystemsCount = c.getChildItem(Family.SYSTEMS_COUNT, getDefaultSystemsCount());
+            this.defaultSystemClassName = c.getChildItem(Family.SYSTEM_CLASS_NAME, getDefaultSystemClassName());
+            this.defaultSystemConfigurationLocation = c.getChildItem(Family.SYSTEM_CONFIGURATION_LOCATION, getDefaultSystemConfigurationLocation());
+//??            this.defaultSystem = c.getChildItem(Family.SYSTEM, getDefaultSystem());
+            this.defaultExternalSystemsCount = c.getChildItem(Family.EXTERNAL_SYSTEMS_COUNT, getDefaultExternalSystemsCount());
+            this.defaultExternalSystemCommand = c.getChildItem(Family.EXTERNAL_SYSTEM_COMMAND, getDefaultExternalSystemCommand());
+//??            this.defaultExternalSystem = c.getChildItem(Family.EXTERNAL_SYSTEM, getDefaultExternalSystem());
 
         } else {
 
@@ -292,18 +292,18 @@ public class Family extends System {
      */
     public void deconfigure() throws Exception, NullPointerException {
 
-        Configuration c = (Configuration) get(Family.CONFIGURATION);
+        Configuration c = (Configuration) getChildItem(Family.CONFIGURATION);
 
         if (c != null) {
 
-//??            c.set(Family.EXTERNAL_SYSTEM, this.defaultExternalSystem);
-            c.set(Family.EXTERNAL_SYSTEM_COMMAND, this.defaultExternalSystemCommand);
-            c.set(Family.EXTERNAL_SYSTEMS_COUNT, this.defaultExternalSystemsCount);
-//??            c.set(Family.SYSTEM, this.defaultSystem);
-            c.set(Family.SYSTEM_CONFIGURATION_LOCATION, this.defaultSystemConfigurationLocation);
-            c.set(Family.SYSTEM_CLASS_NAME, this.defaultSystemClassName);
-            c.set(Family.SYSTEMS_COUNT, this.defaultSystemsCount);
-            c.set(Family.AVAILABLE_SYSTEMS, this.defaultAvailableSystems);
+//??            c.setChildItem(Family.EXTERNAL_SYSTEM, this.defaultExternalSystem);
+            c.setChildItem(Family.EXTERNAL_SYSTEM_COMMAND, this.defaultExternalSystemCommand);
+            c.setChildItem(Family.EXTERNAL_SYSTEMS_COUNT, this.defaultExternalSystemsCount);
+//??            c.setChildItem(Family.SYSTEM, this.defaultSystem);
+            c.setChildItem(Family.SYSTEM_CONFIGURATION_LOCATION, this.defaultSystemConfigurationLocation);
+            c.setChildItem(Family.SYSTEM_CLASS_NAME, this.defaultSystemClassName);
+            c.setChildItem(Family.SYSTEMS_COUNT, this.defaultSystemsCount);
+            c.setChildItem(Family.AVAILABLE_SYSTEMS, this.defaultAvailableSystems);
 
         } else {
 
@@ -328,7 +328,7 @@ public class Family extends System {
         // Available systems.
         //
 
-        set(Family.AVAILABLE_SYSTEMS, createItem((String) this.defaultAvailableSystems));
+        setChildItem(Family.AVAILABLE_SYSTEMS, createChildItem((String) this.defaultAvailableSystems));
 
 /*??
         Integer count = getAvailableSystemsCount();
@@ -336,7 +336,7 @@ public class Family extends System {
 
         for (Integer i = 0; i < count; i++) {
 
-            s[i] = getPreferences().get(FamilyConfiguration.AVAILABLE_SYSTEMS + "_" + Integer.toString(i), def);
+            s[i] = getPreferences().getChildItem(FamilyConfiguration.AVAILABLE_SYSTEMS + "_" + Integer.toString(i), def);
         }
 
         return s;
@@ -349,22 +349,22 @@ public class Family extends System {
         // Systems.
         //
 
-        set(Family.SYSTEMS_COUNT, this.defaultSystemsCount);
+        setChildItem(Family.SYSTEMS_COUNT, this.defaultSystemsCount);
 
 /*??
-        if (get(Family.SYSTEMS_COUNT) != null) {
+        if (getChildItem(Family.SYSTEMS_COUNT) != null) {
 
             String cl = null;
             String conf = null;
 
             // Retrieve the number of systems and create them one by one.
-            for (i = 0; i < ((Integer) get(Family.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+            for (i = 0; i < ((Integer) getChildItem(Family.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
 
                 s = new String(Family.SYSTEM + "_" + java.lang.String.valueOf(i));
                 cl = new String(Family.SYSTEM_CLASS_NAME + "_" + java.lang.String.valueOf(i));
                 conf = new String(Family.SYSTEM_CONFIGURATION_LOCATION + "_" + java.lang.String.valueOf(i));
 
-//??                set(s, createComponent(c.get(cl, getDefaultSystemClassName())));
+//??                setChildItem(s, createComponent(c.getChildItem(cl, getDefaultSystemClassName())));
             }
 
         } else {
@@ -376,19 +376,19 @@ public class Family extends System {
         // External systems.
         //
 
-        set(Family.EXTERNAL_SYSTEMS_COUNT, this.defaultExternalSystemsCount);
+        setChildItem(Family.EXTERNAL_SYSTEMS_COUNT, this.defaultExternalSystemsCount);
 
-        if (get(Family.EXTERNAL_SYSTEMS_COUNT) != null) {
+        if (getChildItem(Family.EXTERNAL_SYSTEMS_COUNT) != null) {
 
             String cmd = null;
 
             // Retrieve the number of external systems and create them one by one.
-            for (i = 0; i < ((Integer) get(Family.EXTERNAL_SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+            for (i = 0; i < ((Integer) getChildItem(Family.EXTERNAL_SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
 
                 s = new String(Family.EXTERNAL_SYSTEM + "_" + java.lang.String.valueOf(i));
                 cmd = new String(Family.EXTERNAL_SYSTEM_COMMAND + "_" + java.lang.String.valueOf(i));
 
-//??                set(s, createComponent(c.get(cmd, getDefaultExternalSystemCommand())));
+//??                setChildItem(s, createComponent(c.getChildItem(cmd, getDefaultExternalSystemCommand())));
             }
 
         } else {
@@ -411,27 +411,27 @@ public class Family extends System {
         // External systems.
         //
 
-        if (get(Family.EXTERNAL_SYSTEMS_COUNT) != null) {
+        if (getChildItem(Family.EXTERNAL_SYSTEMS_COUNT) != null) {
 
             String cmd = null;
             ExternalSystem externalSystem = null;
 
-            for (i = 0; i < ((Integer) get(Family.EXTERNAL_SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+            for (i = 0; i < ((Integer) getChildItem(Family.EXTERNAL_SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
 
                 s = new String(Family.EXTERNAL_SYSTEM + "_" + java.lang.String.valueOf(i));
                 cmd = new String(Family.EXTERNAL_SYSTEM_COMMAND + "_" + java.lang.String.valueOf(i));
 
-//??                c.set(cmd, (String) get(cmd));
+//??                c.setChildItem(cmd, (String) getChildItem(cmd));
 
-                externalSystem = (ExternalSystem) get(s);
-                remove(s);
+                externalSystem = (ExternalSystem) getChildItem(s);
+                removeChildItem(s);
                 destroyComponent(externalSystem);
             }
 
-            Integer externalSystemsCount = (Integer) get(Family.EXTERNAL_SYSTEMS_COUNT);
-//??            c.set(Family.EXTERNAL_SYSTEMS_COUNT, externalSystemsCount);
-            remove(Family.EXTERNAL_SYSTEMS_COUNT);
-            destroyItem(externalSystemsCount);
+            Integer externalSystemsCount = (Integer) getChildItem(Family.EXTERNAL_SYSTEMS_COUNT);
+//??            c.setChildItem(Family.EXTERNAL_SYSTEMS_COUNT, externalSystemsCount);
+            removeChildItem(Family.EXTERNAL_SYSTEMS_COUNT);
+            destroyChildItem(externalSystemsCount);
 
         } else {
 
@@ -442,30 +442,30 @@ public class Family extends System {
         // Systems.
         //
 
-        if (get(Family.SYSTEMS_COUNT) != null) {
+        if (getChildItem(Family.SYSTEMS_COUNT) != null) {
 
             String cl = null;
             String conf = null; 
             System system = null;
 
-            for (i = 0; i < ((Integer) get(Family.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+            for (i = 0; i < ((Integer) getChildItem(Family.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
 
                 s = new String(Family.SYSTEM + "_" + java.lang.String.valueOf(i));
                 cl = new String(Family.SYSTEM_CLASS_NAME + "_" + java.lang.String.valueOf(i));
                 conf = new String(Family.SYSTEM_CONFIGURATION_LOCATION + "_" + java.lang.String.valueOf(i));
 
-//??                c.set(cl, (String) get(cl));
-//??                c.set(conf, (String) get(conf));
+//??                c.setChildItem(cl, (String) getChildItem(cl));
+//??                c.setChildItem(conf, (String) getChildItem(conf));
 
-                system = (System) get(s);
-                remove(s);
+                system = (System) getChildItem(s);
+                removeChildItem(s);
                 destroyComponent(system);
             }
 
-            Integer systemsCount = (Integer) get(Family.SYSTEMS_COUNT);
-//??            c.set(Family.SYSTEMS_COUNT, systemsCount);
-            remove(Family.SYSTEMS_COUNT);
-            destroyItem(systemsCount);
+            Integer systemsCount = (Integer) getChildItem(Family.SYSTEMS_COUNT);
+//??            c.setChildItem(Family.SYSTEMS_COUNT, systemsCount);
+            removeChildItem(Family.SYSTEMS_COUNT);
+            destroyChildItem(systemsCount);
 
         } else {
 
@@ -477,9 +477,9 @@ public class Family extends System {
         // Available systems.
         //
 
-        Item availableSystems = get(Family.AVAILABLE_SYSTEMS);
-        remove(Family.AVAILABLE_SYSTEMS);
-        destroyItem(availableSystems);
+        Item availableSystems = getChildItem(Family.AVAILABLE_SYSTEMS);
+        removeChildItem(Family.AVAILABLE_SYSTEMS);
+        destroyChildItem(availableSystems);
 
 /*??
         if (n != null) {
@@ -532,7 +532,7 @@ public class Family extends System {
         
         super.handle(s, b);
 
-        Integer count = (Integer) get(Family.SYSTEMS_COUNT);
+        Integer count = (Integer) getChildItem(Family.SYSTEMS_COUNT);
 
         if (count != null) {
 

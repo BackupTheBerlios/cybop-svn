@@ -49,7 +49,7 @@ import cybop.core.system.chain.*;
  * Child systems can be integrated into the portal system's Frame as Frame,
  * InternalFrame or TabPage.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Portal extends Family {
@@ -172,31 +172,31 @@ public class Portal extends Family {
         //
 
 /*??
-        User u = (User) get(Portal.USER);
+        User u = (User) getChildItem(Portal.USER);
 
         if (u != null) {
 
-            PortalUserController uc = (PortalUserController) u.get(PortalUser.CONTROLLER);
+            PortalUserController uc = (PortalUserController) u.getChildItem(PortalUser.CONTROLLER);
     
             if (uc != null) {
 
-                PortalUserInterface m = (PortalUserInterface) uc.get(PortalUserController.MODEL);
+                PortalUserInterface m = (PortalUserInterface) uc.getChildItem(PortalUserController.MODEL);
 
                 if (m != null) {
                     
-                    cybop.model.organizer.PortalContentsPanel cp = (cybop.model.organizer.PortalContentsPanel) m.get(PortalUserInterface.CONTENTS_PANEL);
+                    cybop.model.organizer.PortalContentsPanel cp = (cybop.model.organizer.PortalContentsPanel) m.getChildItem(PortalUserInterface.CONTENTS_PANEL);
                     
                     if (cp != null) {
         
-                        cybop.model.organizer.PortalSplitPane sp = (cybop.model.organizer.PortalSplitPane) cp.get(cybop.model.organizer.PortalContentsPanel.PORTAL_SPLIT_PANE);
+                        cybop.model.organizer.PortalSplitPane sp = (cybop.model.organizer.PortalSplitPane) cp.getChildItem(cybop.model.organizer.PortalContentsPanel.PORTAL_SPLIT_PANE);
                         
                         if (sp != null) {
                             
-                            cybop.model.organizer.Tree t = (cybop.model.organizer.Tree) sp.get(cybop.model.organizer.PortalSplitPane.LEFT_ORGANIZER);
+                            cybop.model.organizer.Tree t = (cybop.model.organizer.Tree) sp.getChildItem(cybop.model.organizer.PortalSplitPane.LEFT_ORGANIZER);
                             
                             if (t != null) {
         
-                                t.set(cybop.model.organizer.Tree.MODEL, get(Portal.AVAILABLE_SYSTEMS));
+                                t.setChildItem(cybop.model.organizer.Tree.MODEL, getChildItem(Portal.AVAILABLE_SYSTEMS));
                                 //?? t.addTreeSelectionListener(this);
 
                             } else {
@@ -394,7 +394,7 @@ public class Portal extends Family {
             for (Integer i = 0; i < l.size(); i++) {
 
                 // Determine child controller.
-                o = l.get(i);
+                o = l.getChildItem(i);
 
                 if (o instanceof org.resmedicinae.resmedlib.System) {
 
@@ -427,7 +427,7 @@ public class Portal extends Family {
             for (Integer i = 0; i < l.size(); i++) {
 
                 // Determine child controller.
-                o = l.get(i);
+                o = l.getChildItem(i);
 
                 if (o instanceof org.resmedicinae.resmedlib.System) {
 

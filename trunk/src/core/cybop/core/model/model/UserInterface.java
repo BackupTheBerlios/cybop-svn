@@ -34,7 +34,7 @@ import cybop.core.model.organizer.*;
 /**
  * This class represents a user interface.
  *
- * @version $Revision: 1.7 $ $Date: 2003-04-17 14:50:02 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class UserInterface extends Model {
@@ -114,7 +114,7 @@ public class UserInterface extends Model {
 
         java.awt.Container c = null;
 /*??
-        Integer i = (Integer) get(UserInterface.USER_INTERFACE_MODE);
+        Integer i = (Integer) getChildItem(UserInterface.USER_INTERFACE_MODE);
 
         if (i != null) {
 
@@ -178,9 +178,9 @@ public class UserInterface extends Model {
      * @param i the item
      * @exception NullPointerException if the name is null
      */
-    public void set(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws NullPointerException {
 
-        super.set(n, i);
+        super.setChildItem(n, i);
 
         if (n != null) {
 
@@ -230,42 +230,42 @@ public class UserInterface extends Model {
      * @param n the name
      * @exception NullPointerException if the name is null
      */
-    public void remove(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws NullPointerException {
 
         if (n != null) {
 
             if (n.isEqualTo(UserInterface.TITLE)) {
 
-                removeTitle((String) get(n));
+                removeTitle((String) getChildItem(n));
 
             } else if (n.isEqualTo(UserInterface.ICON)) {
 
-                removeIcon((String) get(n));
+                removeIcon((String) getChildItem(n));
 
             } else if (n.isEqualTo(UserInterface.MENU_BAR)) {
 
-                removeMenuBar((MenuBar) get(n));
+                removeMenuBar((MenuBar) getChildItem(n));
 
             } else if (n.isEqualTo(UserInterface.TOOL_BAR)) {
 
-                removeToolBar((ToolBar) get(n));
+                removeToolBar((ToolBar) getChildItem(n));
 
             } else if (n.isEqualTo(UserInterface.CONTENTS_PANEL)) {
 
-                removeContentsPanel((ContentsPanel) get(n));
+                removeContentsPanel((ContentsPanel) getChildItem(n));
 
             } else if (n.isEqualTo(UserInterface.STATUS_BAR)) {
 
-                removeStatusBar((StatusBar) get(n));
+                removeStatusBar((StatusBar) getChildItem(n));
 
             } else if (n.isEqualTo(UserInterface.BOUNDS)) {
 
-//??                    removeBounds((java.awt.Rectangle) get(n));
+//??                    removeBounds((java.awt.Rectangle) getChildItem(n));
                 java.lang.System.out.println("WARNING: Bounds not set. Replace java.awt.Rectangle");
 
             } else if (n.isEqualTo(UserInterface.RESIZABLE_FLAG)) {
                 
-                removeResizable((Boolean) get(n));
+                removeResizable((Boolean) getChildItem(n));
             }
 
         } else {
@@ -273,7 +273,7 @@ public class UserInterface extends Model {
             throw new NullPointerException("Could not set item. The name is null.");
         }
 
-        super.remove(n);
+        super.removeChildItem(n);
     }
 
     //
@@ -757,7 +757,7 @@ public class UserInterface extends Model {
                 java.awt.Container cp = f.getContentPane();
                 
                 if (cp != null) {
-                    
+
                     cp.add((javax.swing.JLabel) s.getJavaObject(), java.awt.BorderLayout.SOUTH);
 
                 } else {
@@ -886,7 +886,7 @@ public class UserInterface extends Model {
 
 /*??
         java.awt.Rectangle r = def;
-        Configuration c = (Configuration) get(UserInterface.CONFIGURATION);
+        Configuration c = (Configuration) getChildItem(UserInterface.CONFIGURATION);
 
         if (c != null) {
 
@@ -928,7 +928,7 @@ public class UserInterface extends Model {
     public void deconfigureBounds(java.awt.Rectangle r) throws NullPointerException {
 
 /*??
-        Configuration c = (Configuration) get(UserInterface.CONFIGURATION);
+        Configuration c = (Configuration) getChildItem(UserInterface.CONFIGURATION);
 
         if (c != null) {
 
@@ -1028,7 +1028,7 @@ public class UserInterface extends Model {
     public javax.swing.LookAndFeel configureLookAndFeel(javax.swing.LookAndFeel def) throws Exception, NullPointerException {
 
         javax.swing.LookAndFeel laf = def;
-        Configuration c = (Configuration) get(UserInterface.CONFIGURATION);
+        Configuration c = (Configuration) getChildItem(UserInterface.CONFIGURATION);
         
         if (c != null) {
             
@@ -1092,7 +1092,7 @@ public class UserInterface extends Model {
 /*??
     public void deconfigureLookAndFeel(javax.swing.LookAndFeel laf) throws NullPointerException {
 
-        Configuration c = (Configuration) get(UserInterface.CONFIGURATION);
+        Configuration c = (Configuration) getChildItem(UserInterface.CONFIGURATION);
         
         if (c != null) {
 
@@ -1125,20 +1125,20 @@ public class UserInterface extends Model {
         super.initialize();
 
         javax.swing.UIManager.setLookAndFeel(getDefaultLookAndFeel());
-        set(UserInterface.USER_INTERFACE_MODE, getDefaultUserInterfaceMode());
+        setChildItem(UserInterface.USER_INTERFACE_MODE, getDefaultUserInterfaceMode());
 /*??
-        set(UserInterface.WINDOW_BOUNDS, configureWindowBounds(getDefaultWindowBounds()));
-        set(UserInterface.DIALOG_BOUNDS, configureDialogBounds(getDefaultDialogBounds()));
-        set(UserInterface.FRAME_BOUNDS, configureFrameBounds(getDefaultFrameBounds()));
-        set(UserInterface.INTERNAL_FRAME_BOUNDS, configureInternalFrameBounds(getDefaultInternalFrameBounds()));
+        setChildItem(UserInterface.WINDOW_BOUNDS, configureWindowBounds(getDefaultWindowBounds()));
+        setChildItem(UserInterface.DIALOG_BOUNDS, configureDialogBounds(getDefaultDialogBounds()));
+        setChildItem(UserInterface.FRAME_BOUNDS, configureFrameBounds(getDefaultFrameBounds()));
+        setChildItem(UserInterface.INTERNAL_FRAME_BOUNDS, configureInternalFrameBounds(getDefaultInternalFrameBounds()));
 */
-        set(UserInterface.TITLE, getDefaultTitle());
-        set(UserInterface.ICON, getDefaultIcon());
-        set(UserInterface.MENU_BAR, createComponent(getDefaultMenuBar()));
-        set(UserInterface.TOOL_BAR, createComponent(getDefaultToolBar()));
-        set(UserInterface.CONTENTS_PANEL, createComponent(getDefaultContentsPanel()));
-        set(UserInterface.STATUS_BAR, createComponent(getDefaultStatusBar()));
-        set(UserInterface.RESIZABLE_FLAG, getDefaultResizableFlag());
+        setChildItem(UserInterface.TITLE, getDefaultTitle());
+        setChildItem(UserInterface.ICON, getDefaultIcon());
+        setChildItem(UserInterface.MENU_BAR, createComponent(getDefaultMenuBar()));
+        setChildItem(UserInterface.TOOL_BAR, createComponent(getDefaultToolBar()));
+        setChildItem(UserInterface.CONTENTS_PANEL, createComponent(getDefaultContentsPanel()));
+        setChildItem(UserInterface.STATUS_BAR, createComponent(getDefaultStatusBar()));
+        setChildItem(UserInterface.RESIZABLE_FLAG, getDefaultResizableFlag());
     }
 
     /**
@@ -1148,51 +1148,51 @@ public class UserInterface extends Model {
      */
     public void finalizz() throws Exception, NullPointerException {
 
-        Boolean resizable = (Boolean) get(UserInterface.RESIZABLE_FLAG);
-        remove(UserInterface.RESIZABLE_FLAG);
+        Boolean resizable = (Boolean) getChildItem(UserInterface.RESIZABLE_FLAG);
+        removeChildItem(UserInterface.RESIZABLE_FLAG);
 
-        StatusBar statusBar = (StatusBar) get(UserInterface.STATUS_BAR);
-        remove(UserInterface.STATUS_BAR);
+        StatusBar statusBar = (StatusBar) getChildItem(UserInterface.STATUS_BAR);
+        removeChildItem(UserInterface.STATUS_BAR);
         destroyComponent(statusBar);
 
-        ContentsPanel contentsPanel = (ContentsPanel) get(UserInterface.CONTENTS_PANEL);
-        remove(UserInterface.CONTENTS_PANEL);
+        ContentsPanel contentsPanel = (ContentsPanel) getChildItem(UserInterface.CONTENTS_PANEL);
+        removeChildItem(UserInterface.CONTENTS_PANEL);
         destroyComponent(contentsPanel);
 
-        ToolBar toolBar = (ToolBar) get(UserInterface.TOOL_BAR);
-        remove(UserInterface.TOOL_BAR);
+        ToolBar toolBar = (ToolBar) getChildItem(UserInterface.TOOL_BAR);
+        removeChildItem(UserInterface.TOOL_BAR);
         destroyComponent(toolBar);
 
-        MenuBar menuBar = (MenuBar) get(UserInterface.MENU_BAR);
-        remove(UserInterface.MENU_BAR);
+        MenuBar menuBar = (MenuBar) getChildItem(UserInterface.MENU_BAR);
+        removeChildItem(UserInterface.MENU_BAR);
         destroyComponent(menuBar);
 
-        String icon = (String) get(UserInterface.ICON);
-        remove(UserInterface.ICON);
+        String icon = (String) getChildItem(UserInterface.ICON);
+        removeChildItem(UserInterface.ICON);
 
-        String title = (String) get(UserInterface.TITLE);
-        remove(UserInterface.TITLE);
+        String title = (String) getChildItem(UserInterface.TITLE);
+        removeChildItem(UserInterface.TITLE);
 
 /*??
-        deconfigureInternalFrameBounds((java.awt.Rectangle) get(UserInterface.INTERNAL_FRAME_BOUNDS));
-        remove(UserInterface.INTERNAL_FRAME_BOUNDS);
-        destroyItem((java.awt.Rectangle) get(UserInterface.INTERNAL_FRAME_BOUNDS));
+        deconfigureInternalFrameBounds((java.awt.Rectangle) getChildItem(UserInterface.INTERNAL_FRAME_BOUNDS));
+        removeChildItem(UserInterface.INTERNAL_FRAME_BOUNDS);
+        destroyChildItem((java.awt.Rectangle) getChildItem(UserInterface.INTERNAL_FRAME_BOUNDS));
 
-        deconfigureFrameBounds((java.awt.Rectangle) get(UserInterface.FRAME_BOUNDS));
-        remove(UserInterface.FRAME_BOUNDS);
-        destroyItem((java.awt.Rectangle) get(UserInterface.FRAME_BOUNDS));
+        deconfigureFrameBounds((java.awt.Rectangle) getChildItem(UserInterface.FRAME_BOUNDS));
+        removeChildItem(UserInterface.FRAME_BOUNDS);
+        destroyChildItem((java.awt.Rectangle) getChildItem(UserInterface.FRAME_BOUNDS));
 
-        deconfigureDialogBounds((java.awt.Rectangle) get(UserInterface.DIALOG_BOUNDS));
-        remove(UserInterface.DIALOG_BOUNDS);
-        destroyItem((java.awt.Rectangle) get(UserInterface.DIALOG_BOUNDS));
+        deconfigureDialogBounds((java.awt.Rectangle) getChildItem(UserInterface.DIALOG_BOUNDS));
+        removeChildItem(UserInterface.DIALOG_BOUNDS);
+        destroyChildItem((java.awt.Rectangle) getChildItem(UserInterface.DIALOG_BOUNDS));
 
-        deconfigureWindowBounds((java.awt.Rectangle) get(UserInterface.WINDOW_BOUNDS));
-        remove(UserInterface.WINDOW_BOUNDS);
-        destroyItem((java.awt.Rectangle) get(UserInterface.WINDOW_BOUNDS));
+        deconfigureWindowBounds((java.awt.Rectangle) getChildItem(UserInterface.WINDOW_BOUNDS));
+        removeChildItem(UserInterface.WINDOW_BOUNDS);
+        destroyChildItem((java.awt.Rectangle) getChildItem(UserInterface.WINDOW_BOUNDS));
 */
 
-        Integer viewModelMode = (Integer) get(UserInterface.USER_INTERFACE_MODE);
-        remove(UserInterface.USER_INTERFACE_MODE);
+        Integer viewModelMode = (Integer) getChildItem(UserInterface.USER_INTERFACE_MODE);
+        removeChildItem(UserInterface.USER_INTERFACE_MODE);
 
         super.finalizz();
     }

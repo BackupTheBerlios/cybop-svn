@@ -35,7 +35,7 @@ import cybop.core.system.chain.*;
  * It is the communication partner that can be asked by another system
  * to shutdown a system.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ShutdownSocket extends Socket {
@@ -84,7 +84,7 @@ public class ShutdownSocket extends Socket {
 
         if (s != null) {
 
-            String a = (String) s.get(Signal.PREDICATE);
+            String a = (String) s.getChildItem(Signal.PREDICATE);
 
             if (a != null) {
 
@@ -117,7 +117,7 @@ public class ShutdownSocket extends Socket {
 
         if (s != null) {
 
-            java.io.OutputStream stream = (OutputStream) get(ShutdownSocket.OUTPUT_STREAM);
+            java.io.OutputStream stream = (OutputStream) getChildItem(ShutdownSocket.OUTPUT_STREAM);
 
             if (stream != null) {
 

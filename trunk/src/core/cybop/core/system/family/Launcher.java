@@ -69,7 +69,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.15 $ $Date: 2003-04-23 13:08:57 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -157,9 +157,9 @@ public class Launcher extends Family {
                 l.setArguments(args);
 
                 java.lang.System.out.println("INFO: Set global launcher items.");
-                l.set(Component.CONFIGURATION, new cybop.core.system.chain.Configuration());
-                l.set(Component.LOG_RECORD, new cybop.core.system.chain.LogRecord());
-                l.set(Component.SIGNAL_MEMORY, new cybop.core.system.chain.SignalMemory());
+                l.setChildItem(Component.CONFIGURATION, new cybop.core.system.chain.Configuration());
+                l.setChildItem(Component.LOG_RECORD, new cybop.core.system.chain.LogRecord());
+                l.setChildItem(Component.SIGNAL_MEMORY, new cybop.core.system.chain.SignalMemory());
 
                 java.lang.System.out.println("INFO: Configure launcher.");
                 l.configure();
@@ -181,14 +181,14 @@ public class Launcher extends Family {
                 l.deconfigure();
 
                 java.lang.System.out.println("INFO: Remove global launcher items.");
-                Item m = l.get(Component.SIGNAL_MEMORY);
-                l.remove(Component.SIGNAL_MEMORY);
+                Item m = l.getChildItem(Component.SIGNAL_MEMORY);
+                l.removeChildItem(Component.SIGNAL_MEMORY);
 
-                Item h = l.get(Component.LOG_RECORD);
-                l.remove(Component.LOG_RECORD);
+                Item h = l.getChildItem(Component.LOG_RECORD);
+                l.removeChildItem(Component.LOG_RECORD);
 
-                Item c = l.get(Component.CONFIGURATION);
-                l.remove(Component.CONFIGURATION);
+                Item c = l.getChildItem(Component.CONFIGURATION);
+                l.removeChildItem(Component.CONFIGURATION);
 
                 l.setArguments(null);
 
@@ -234,9 +234,9 @@ public class Launcher extends Family {
      * @param i the item
      * @exception NullPointerException if the name is null
      */
-    public void set(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws NullPointerException {
 
-        super.set(n, i);
+        super.setChildItem(n, i);
 
         if (n != null) {
 
@@ -257,13 +257,13 @@ public class Launcher extends Family {
      * @param n the name
      * @exception NullPointerException if the name is null
      */
-    public void remove(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws NullPointerException {
 
         if (n != null) {
 
             if (n.isEqualTo(Launcher.COMMUNICATION_PARTNER)) {
 
-                removeShutdownHook((ShutdownHook) get(n));
+                removeShutdownHook((ShutdownHook) getChildItem(n));
             }
 
         } else {
@@ -271,7 +271,7 @@ public class Launcher extends Family {
             throw new NullPointerException("Could not set item. The name is null.");
         }
 
-        super.remove(n);
+        super.removeChildItem(n);
     }
 
     //
@@ -572,18 +572,18 @@ public class Launcher extends Family {
 
         if (getArgument(Launcher.HELP_ARGUMENT, null) != null) {
 
-            set(Launcher.LIFECYCLE_ACTION, Launcher.SHOW_HELP_ACTION);
+            setChildItem(Launcher.LIFECYCLE_ACTION, Launcher.SHOW_HELP_ACTION);
 
         } else {
 
-            set(Launcher.SYSTEM_CLASS_NAME, getArgument(Launcher.SYSTEM_CLASS_NAME_ARGUMENT, getDefaultSystemClassName()));
-            set(Launcher.SYSTEM_CONFIGURATION_LOCATION, getArgument(Launcher.SYSTEM_CONFIGURATION_LOCATION_ARGUMENT, getDefaultSystemConfigurationLocation()));
-            set(Launcher.SCREEN, createComponent(getDefaultScreen()));
-            set(Launcher.LIFECYCLE_ACTION, getArgument(Launcher.LIFECYCLE_ACTION_ARGUMENT, getDefaultLifecycleAction()));
+            setChildItem(Launcher.SYSTEM_CLASS_NAME, getArgument(Launcher.SYSTEM_CLASS_NAME_ARGUMENT, getDefaultSystemClassName()));
+            setChildItem(Launcher.SYSTEM_CONFIGURATION_LOCATION, getArgument(Launcher.SYSTEM_CONFIGURATION_LOCATION_ARGUMENT, getDefaultSystemConfigurationLocation()));
+            setChildItem(Launcher.SCREEN, createComponent(getDefaultScreen()));
+            setChildItem(Launcher.LIFECYCLE_ACTION, getArgument(Launcher.LIFECYCLE_ACTION_ARGUMENT, getDefaultLifecycleAction()));
             //?? Temporary until event handling doesn't need java awt EventQueue anymore.
             setJavaEventCatcher(createJavaEventCatcher());
-            set(Launcher.SHUTDOWN_HOOK, createShutdownHook());
-            set(Launcher.SHUTDOWN_FLAG, getDefaultShutdownFlag());
+            setChildItem(Launcher.SHUTDOWN_HOOK, createShutdownHook());
+            setChildItem(Launcher.SHUTDOWN_FLAG, getDefaultShutdownFlag());
         }
     }
 
@@ -592,33 +592,33 @@ public class Launcher extends Family {
      */
     public void finalizz() throws Exception {
 
-        remove(Launcher.SHUTDOWN_FLAG);
+        removeChildItem(Launcher.SHUTDOWN_FLAG);
 
         // Remove shutdown hook first to avoid another shutdown call
         // from the java virtual machine to this system.
-        ShutdownHook shutdownHook = (ShutdownHook) get(Launcher.SHUTDOWN_HOOK);
-        remove(Launcher.SHUTDOWN_HOOK);
+        ShutdownHook shutdownHook = (ShutdownHook) getChildItem(Launcher.SHUTDOWN_HOOK);
+        removeChildItem(Launcher.SHUTDOWN_HOOK);
         destroyComponent(shutdownHook);
 
         //?? Temporary until event handling doesn't need java awt EventQueue anymore.
         destroyJavaEventCatcher(getJavaEventCatcher());
         setJavaEventCatcher(null);
 
-        String lifecycleAction = (String) get(Launcher.LIFECYCLE_ACTION);
-        remove(Launcher.LIFECYCLE_ACTION);
-        destroyItem(lifecycleAction);
+        String lifecycleAction = (String) getChildItem(Launcher.LIFECYCLE_ACTION);
+        removeChildItem(Launcher.LIFECYCLE_ACTION);
+        destroyChildItem(lifecycleAction);
 
-        Screen screen = (Screen) get(Launcher.SCREEN);
-        remove(Launcher.SCREEN);
-        destroyItem(screen);
+        Screen screen = (Screen) getChildItem(Launcher.SCREEN);
+        removeChildItem(Launcher.SCREEN);
+        destroyChildItem(screen);
 
-        String systemConfigurationLocation = (String) get(Launcher.SYSTEM_CONFIGURATION_LOCATION);
-        remove(Launcher.SYSTEM_CONFIGURATION_LOCATION);
-        destroyItem(systemConfigurationLocation);
+        String systemConfigurationLocation = (String) getChildItem(Launcher.SYSTEM_CONFIGURATION_LOCATION);
+        removeChildItem(Launcher.SYSTEM_CONFIGURATION_LOCATION);
+        destroyChildItem(systemConfigurationLocation);
 
-        String systemClassName = (String) get(Launcher.SYSTEM_CLASS_NAME);
-        remove(Launcher.SYSTEM_CLASS_NAME);
-        destroyItem(systemClassName);
+        String systemClassName = (String) getChildItem(Launcher.SYSTEM_CLASS_NAME);
+        removeChildItem(Launcher.SYSTEM_CLASS_NAME);
+        destroyChildItem(systemClassName);
 
         super.finalizz();
     }
@@ -634,14 +634,14 @@ public class Launcher extends Family {
      */
     public void launch() throws Exception, NullPointerException {
 
-        Signal s = (Signal) createItem(getDefaultSignal());
+        Signal s = (Signal) createChildItem(getDefaultSignalCategory());
 
         if (s != null) {
 
-            s.set(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
-            s.set(Signal.LANGUAGE, Signal.TUI_LANGUAGE);
-            s.set(Signal.SUBJECT, get(Launcher.USER));
-            s.set(Signal.PREDICATE, get(Launcher.LIFECYCLE_ACTION));
+            s.setChildItem(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
+            s.setChildItem(Signal.LANGUAGE, Signal.TUI_LANGUAGE);
+            s.setChildItem(Signal.SUBJECT, getChildItem(Launcher.USER));
+            s.setChildItem(Signal.PREDICATE, getChildItem(Launcher.LIFECYCLE_ACTION));
 
         } else {
 
@@ -667,7 +667,7 @@ public class Launcher extends Family {
      */
     public void await() throws Exception {
 
-        Signal s = (Signal) createItem(getDefaultSignal());
+        Signal s = (Signal) createChildItem(getDefaultSignalCategory());
         //?? Temporary for handling signals which stem from java event queue.
         Signal queued = null;
         Boolean b = null;
@@ -675,7 +675,7 @@ public class Launcher extends Family {
         while (true) {
 
             // Check shutdown flag.
-            b = (Boolean) get(Launcher.SHUTDOWN_FLAG);
+            b = (Boolean) getChildItem(Launcher.SHUTDOWN_FLAG);
 
             if (b != null) {
 
@@ -690,11 +690,10 @@ public class Launcher extends Family {
             }
 
             queued = fetchSignal();
-            if (queued != null) {
-                java.lang.System.out.println("\n\n\n\n\n Test fetch:\n" + queued.getName().getJavaObject());
-            }
 
             if (queued != null) {
+
+                java.lang.System.out.println("DEBUG: Handle signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChildItem(Signal.PREDICATE)).getJavaObject());
 
                 //?? Temporary code block for handling of signals that came from the
                 //?? java event queue and were stored in the signal memory.
@@ -702,7 +701,7 @@ public class Launcher extends Family {
                 //?? destroyed here!
                 handle(queued, new Boolean(Boolean.FALSE));
                 send(queued);
-                destroyItem(queued);
+                destroyChildItem(queued);
 
             } else {
 
@@ -719,7 +718,7 @@ public class Launcher extends Family {
 
                 if (s != null) {
                     
-                    s.reset();
+                    s.resetChildItem();
         
                 } else {
         
@@ -729,10 +728,10 @@ public class Launcher extends Family {
             }
         }
 
-        destroyItem(s);
+        destroyChildItem(s);
 
 /*??
-        String port = (String) get(System.SHUTDOWN_PORT);
+        String port = (String) getChildItem(System.SHUTDOWN_PORT);
 
         if (port != null) {
 
@@ -864,17 +863,17 @@ public class Launcher extends Family {
 
         if (s != null) {
 
-            l = (String) s.get(Signal.LANGUAGE);
+            l = (String) s.getChildItem(Signal.LANGUAGE);
             
             if (l != null) {
 
                 if (l.isEqualTo(Signal.GUI_LANGUAGE)) {
 
-                    Screen scr = (Screen) get(Launcher.SCREEN);
+                    Screen scr = (Screen) getChildItem(Launcher.SCREEN);
 
                     if (scr != null) {
 
-                        scr.show((UserInterface) s.get(Signal.OBJECT));
+                        scr.show((UserInterface) s.getChildItem(Signal.OBJECT));
 
                     } else {
 
@@ -914,14 +913,14 @@ public class Launcher extends Family {
 
         if (s != null) {
 
-            String a = (String) s.get(Signal.PREDICATE);
+            String a = (String) s.getChildItem(Signal.PREDICATE);
 
             if (a != null) {
 
                 if (a.isEqualTo(Launcher.STARTUP_SYSTEM_ACTION)) {
 
                     log(Launcher.INFO_LOG_LEVEL, "Startup system.");
-                    startupSystem((String) get(Launcher.SYSTEM_CLASS_NAME), (String) get(Launcher.SYSTEM_CONFIGURATION_LOCATION));
+                    startupSystem((String) getChildItem(Launcher.SYSTEM_CLASS_NAME), (String) getChildItem(Launcher.SYSTEM_CONFIGURATION_LOCATION));
 
                 } else if (a.isEqualTo(Launcher.SHUTDOWN_SYSTEM_ACTION)) {
 
@@ -978,14 +977,14 @@ public class Launcher extends Family {
 
         setSystem(Launcher.SYSTEM, createSystem(sys, c));
 
-        Signal s = (Signal) createItem(getDefaultSignal());
+        Signal s = (Signal) createChildItem(getDefaultSignalCategory());
 
         if (s != null) {
 
-            s.set(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
-            s.set(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
-            s.set(Signal.SUBJECT, get(Launcher.USER));
-            s.set(Signal.PREDICATE, Controller.SHOW_SYSTEM_USER_INTERFACE_ACTION);
+            s.setChildItem(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
+            s.setChildItem(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
+            s.setChildItem(Signal.SUBJECT, getChildItem(Launcher.USER));
+            s.setChildItem(Signal.PREDICATE, Controller.SHOW_SYSTEM_USER_INTERFACE_ACTION);
 
         } else {
 
@@ -1038,7 +1037,7 @@ public class Launcher extends Family {
         //?? (e.g. check on which gui the mouse click occured).
         //?? This system reference will be sent as subject of the signal.
         String ext = new String(Launcher.SYSTEM.getJavaObject() + "_" + java.lang.String.valueOf("0"));
-        System system = (System) get(ext);
+        System system = (System) getChildItem(ext);
 
         // The system can be null if another launcher was used to create it.        
         if (system != null) {
@@ -1050,7 +1049,7 @@ public class Launcher extends Family {
             // If this launcher system has sent the exit signal, then set the
             // shutdown flag causing the waiting loop to break and by this to
             // finally exit the whole java virtual machine.
-            set(Launcher.SHUTDOWN_FLAG, new Boolean(Boolean.TRUE));
+            setChildItem(Launcher.SHUTDOWN_FLAG, new Boolean(Boolean.TRUE));
 
         } else {
 
@@ -1071,15 +1070,15 @@ public class Launcher extends Family {
      */
     public void shutdownSystemAcrossSocket() throws Exception, NullPointerException {
 
-        Signal s = (Signal) createItem(getDefaultSignal());
+        Signal s = (Signal) createChildItem(getDefaultSignalCategory());
         ShutdownSocket socket = (ShutdownSocket) createComponent(getDefaultShutdownSocket());
 
         if (s != null) {
             
-            s.set(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
-            s.set(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
-            s.set(Signal.SUBJECT, get(Launcher.USER));
-            s.set(Signal.PREDICATE, Launcher.SHUTDOWN_SYSTEM_ACTION);
+            s.setChildItem(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
+            s.setChildItem(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
+            s.setChildItem(Signal.SUBJECT, getChildItem(Launcher.USER));
+            s.setChildItem(Signal.PREDICATE, Launcher.SHUTDOWN_SYSTEM_ACTION);
 
         } else {
 
@@ -1305,20 +1304,20 @@ public class Launcher extends Family {
 
                 if (sys != null) {
 
-                    Controller c = (Controller) sys.get(System.CONTROLLER);
+                    Controller c = (Controller) sys.getChildItem(System.CONTROLLER);
     
                     if (c != null) {
     
-                        m = (MouseModel) c.get(Controller.MOUSE_MODEL);
+                        m = (MouseModel) c.getChildItem(Controller.MOUSE_MODEL);
     
                         if (m != null) {
 
-                            Space sp = (Space) m.get(MouseModel.POINTER_POSITION);
+                            Space sp = (Space) m.getChildItem(MouseModel.POINTER_POSITION);
 
                             if (sp != null) {
 
-                                sp.set(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
-                                sp.set(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
+                                sp.setChildItem(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
+                                sp.setChildItem(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
 
                             } else {
 
@@ -1351,20 +1350,20 @@ public class Launcher extends Family {
 
                 if (sys != null) {
 
-                    Controller c = (Controller) sys.get(System.CONTROLLER);
+                    Controller c = (Controller) sys.getChildItem(System.CONTROLLER);
     
                     if (c != null) {
     
-                        m = (MouseModel) c.get(Controller.MOUSE_MODEL);
+                        m = (MouseModel) c.getChildItem(Controller.MOUSE_MODEL);
     
                         if (m != null) {
 
-                            Space sp = (Space) m.get(MouseModel.POINTER_POSITION);
+                            Space sp = (Space) m.getChildItem(MouseModel.POINTER_POSITION);
 
                             if (sp != null) {
 
-                                sp.set(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
-                                sp.set(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
+                                sp.setChildItem(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
+                                sp.setChildItem(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
 
                             } else {
 
@@ -1397,20 +1396,20 @@ public class Launcher extends Family {
 
                 if (sys != null) {
 
-                    Controller c = (Controller) sys.get(System.CONTROLLER);
+                    Controller c = (Controller) sys.getChildItem(System.CONTROLLER);
     
                     if (c != null) {
     
-                        m = (MouseModel) c.get(Controller.MOUSE_MODEL);
+                        m = (MouseModel) c.getChildItem(Controller.MOUSE_MODEL);
     
                         if (m != null) {
 
-                            Space sp = (Space) m.get(MouseModel.POINTER_POSITION);
+                            Space sp = (Space) m.getChildItem(MouseModel.POINTER_POSITION);
 
                             if (sp != null) {
 
-                                sp.set(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
-                                sp.set(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
+                                sp.setChildItem(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
+                                sp.setChildItem(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
 
                             } else {
 
@@ -1443,20 +1442,20 @@ public class Launcher extends Family {
 
                 if (sys != null) {
 
-                    Controller c = (Controller) sys.get(System.CONTROLLER);
+                    Controller c = (Controller) sys.getChildItem(System.CONTROLLER);
     
                     if (c != null) {
     
-                        m = (MouseModel) c.get(Controller.MOUSE_MODEL);
+                        m = (MouseModel) c.getChildItem(Controller.MOUSE_MODEL);
     
                         if (m != null) {
 
-                            Space sp = (Space) m.get(MouseModel.POINTER_POSITION);
+                            Space sp = (Space) m.getChildItem(MouseModel.POINTER_POSITION);
 
                             if (sp != null) {
 
-                                sp.set(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
-                                sp.set(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
+                                sp.setChildItem(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
+                                sp.setChildItem(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
 
                             } else {
 
@@ -1489,20 +1488,20 @@ public class Launcher extends Family {
 
                 if (sys != null) {
 
-                    Controller c = (Controller) sys.get(System.CONTROLLER);
+                    Controller c = (Controller) sys.getChildItem(System.CONTROLLER);
     
                     if (c != null) {
     
-                        m = (MouseModel) c.get(Controller.MOUSE_MODEL);
+                        m = (MouseModel) c.getChildItem(Controller.MOUSE_MODEL);
     
                         if (m != null) {
 
-                            Space sp = (Space) m.get(MouseModel.POINTER_POSITION);
+                            Space sp = (Space) m.getChildItem(MouseModel.POINTER_POSITION);
 
                             if (sp != null) {
 
-                                sp.set(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
-                                sp.set(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
+                                sp.setChildItem(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
+                                sp.setChildItem(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
 
                             } else {
 
@@ -1535,20 +1534,20 @@ public class Launcher extends Family {
 
                 if (sys != null) {
 
-                    Controller c = (Controller) sys.get(System.CONTROLLER);
+                    Controller c = (Controller) sys.getChildItem(System.CONTROLLER);
     
                     if (c != null) {
     
-                        m = (MouseModel) c.get(Controller.MOUSE_MODEL);
+                        m = (MouseModel) c.getChildItem(Controller.MOUSE_MODEL);
     
                         if (m != null) {
 
-                            Space sp = (Space) m.get(MouseModel.POINTER_POSITION);
+                            Space sp = (Space) m.getChildItem(MouseModel.POINTER_POSITION);
 
                             if (sp != null) {
 
-                                sp.set(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
-                                sp.set(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
+                                sp.setChildItem(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
+                                sp.setChildItem(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
 
                             } else {
 
@@ -1581,20 +1580,20 @@ public class Launcher extends Family {
 
                 if (sys != null) {
 
-                    Controller c = (Controller) sys.get(System.CONTROLLER);
+                    Controller c = (Controller) sys.getChildItem(System.CONTROLLER);
     
                     if (c != null) {
     
-                        m = (MouseModel) c.get(Controller.MOUSE_MODEL);
+                        m = (MouseModel) c.getChildItem(Controller.MOUSE_MODEL);
     
                         if (m != null) {
 
-                            Space sp = (Space) m.get(MouseModel.POINTER_POSITION);
+                            Space sp = (Space) m.getChildItem(MouseModel.POINTER_POSITION);
 
                             if (sp != null) {
 
-                                sp.set(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
-                                sp.set(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
+                                sp.setChildItem(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
+                                sp.setChildItem(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
 
                             } else {
 
@@ -1628,7 +1627,7 @@ public class Launcher extends Family {
             // In this case it does NOT make sense to continue the signal handling.
             if (a != null) {
 
-                Signal s = (Signal) createItem(getDefaultSignal());
+                Signal s = (Signal) createChildItem(getDefaultSignalCategory());
 
                 // Check for changed flags on computer (currently done by operating system),
                 // e.g. to receive a keyboard or mouse event and then create a CYBOP signal of it.
@@ -1636,11 +1635,11 @@ public class Launcher extends Family {
                 // transform them into a CYBOP signal.
                 if (s != null) {
 
-                    s.set(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
-                    s.set(Signal.LANGUAGE, l);
-                    s.set(Signal.SUBJECT, get(Launcher.USER));
-                    s.set(Signal.PREDICATE, a);
-                    s.set(Signal.OBJECT, m);
+                    s.setChildItem(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
+                    s.setChildItem(Signal.LANGUAGE, l);
+                    s.setChildItem(Signal.SUBJECT, getChildItem(Launcher.USER));
+                    s.setChildItem(Signal.PREDICATE, a);
+                    s.setChildItem(Signal.OBJECT, m);
 
                 } else {
         

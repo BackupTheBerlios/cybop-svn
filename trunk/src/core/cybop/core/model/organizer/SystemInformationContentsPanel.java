@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a system information contents panel.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationContentsPanel extends ContentsPanel {
@@ -104,9 +104,9 @@ public class SystemInformationContentsPanel extends ContentsPanel {
      * @param i the item
      * @exception NullPointerException if the name is null
      */
-    public void set(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws NullPointerException {
 
-        super.set(n, i);
+        super.setChildItem(n, i);
 
         if (n != null) {
 
@@ -135,21 +135,21 @@ public class SystemInformationContentsPanel extends ContentsPanel {
      * @param n the name
      * @exception NullPointerException if the name is null
      */
-    public void remove(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws NullPointerException {
 
         if (n != null) {
 
             if (n.isEqualTo(SystemInformationContentsPanel.HEAD_PANEL)) {
 
-                removeHeadPanel((HeadPanel) get(n));
+                removeHeadPanel((HeadPanel) getChildItem(n));
 
             } else if (n.isEqualTo(SystemInformationContentsPanel.TABBED_PANE)) {
 
-                removeTabbedPane((TabbedPane) get(n));
+                removeTabbedPane((TabbedPane) getChildItem(n));
             
             } else if (n.isEqualTo(SystemInformationContentsPanel.BUTTON_PANEL)) {
 
-                removeButtonPanel((ButtonPanel) get(n));
+                removeButtonPanel((ButtonPanel) getChildItem(n));
             }
 
         } else {
@@ -157,7 +157,7 @@ public class SystemInformationContentsPanel extends ContentsPanel {
             throw new NullPointerException("Could not set item. The name is null.");
         }
         
-        super.remove(n);
+        super.removeChildItem(n);
     }
 
     //
@@ -385,9 +385,9 @@ public class SystemInformationContentsPanel extends ContentsPanel {
 
         super.initialize();
 
-        set(SystemInformationContentsPanel.HEAD_PANEL, createComponent(getDefaultHeadPanel()));
-        set(SystemInformationContentsPanel.TABBED_PANE, createComponent(getDefaultTabbedPane()));
-        set(SystemInformationContentsPanel.BUTTON_PANEL, createComponent(getDefaultButtonPanel()));
+        setChildItem(SystemInformationContentsPanel.HEAD_PANEL, createComponent(getDefaultHeadPanel()));
+        setChildItem(SystemInformationContentsPanel.TABBED_PANE, createComponent(getDefaultTabbedPane()));
+        setChildItem(SystemInformationContentsPanel.BUTTON_PANEL, createComponent(getDefaultButtonPanel()));
     }
 
     /**
@@ -395,16 +395,16 @@ public class SystemInformationContentsPanel extends ContentsPanel {
      */
     public void finalizz() throws Exception {
 
-        ButtonPanel buttonPanel = (ButtonPanel) get(SystemInformationContentsPanel.BUTTON_PANEL);
-        remove(SystemInformationContentsPanel.BUTTON_PANEL);
+        ButtonPanel buttonPanel = (ButtonPanel) getChildItem(SystemInformationContentsPanel.BUTTON_PANEL);
+        removeChildItem(SystemInformationContentsPanel.BUTTON_PANEL);
         destroyComponent(buttonPanel);
 
-        TabbedPane tabbedPane = (TabbedPane) get(SystemInformationContentsPanel.TABBED_PANE);
-        remove(SystemInformationContentsPanel.TABBED_PANE);
+        TabbedPane tabbedPane = (TabbedPane) getChildItem(SystemInformationContentsPanel.TABBED_PANE);
+        removeChildItem(SystemInformationContentsPanel.TABBED_PANE);
         destroyComponent(tabbedPane);
 
-        HeadPanel headPanel = (HeadPanel) get(SystemInformationContentsPanel.HEAD_PANEL);
-        remove(SystemInformationContentsPanel.HEAD_PANEL);
+        HeadPanel headPanel = (HeadPanel) getChildItem(SystemInformationContentsPanel.HEAD_PANEL);
+        removeChildItem(SystemInformationContentsPanel.HEAD_PANEL);
         destroyComponent(headPanel);
 
         super.finalizz();

@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a logo panel.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ImagePanel extends Panel {
@@ -98,9 +98,9 @@ public class ImagePanel extends Panel {
      * @param i the item
      * @exception NullPointerException if the name is null
      */
-    public void set(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws NullPointerException {
 
-        super.set(n, i);
+        super.setChildItem(n, i);
 
         if (n != null) {
 
@@ -121,13 +121,13 @@ public class ImagePanel extends Panel {
      * @param n the name
      * @exception NullPointerException if the name is null
      */
-    public void remove(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws NullPointerException {
 
         if (n != null) {
 
             if (n.isEqualTo(ImagePanel.IMAGE)) {
 
-                removeImage((Image) get(n));
+                removeImage((Image) getChildItem(n));
             }
 
         } else {
@@ -135,7 +135,7 @@ public class ImagePanel extends Panel {
             throw new NullPointerException("Could not remove item. The name is null.");
         }
         
-        super.remove(n);
+        super.removeChildItem(n);
     }
 
     //
@@ -199,7 +199,7 @@ public class ImagePanel extends Panel {
 
             if (i != null) {
 
-//??                p.remove((java.awt.image.BufferedImage) i.getJavaObject());
+//??                p.removeChildItem((java.awt.image.BufferedImage) i.getJavaObject());
 
             } else {
 
@@ -223,7 +223,7 @@ public class ImagePanel extends Panel {
 
         super.initialize();
 
-        set(ImagePanel.IMAGE, createComponent(getDefaultImage()));
+        setChildItem(ImagePanel.IMAGE, createComponent(getDefaultImage()));
     }
 
     /**
@@ -231,8 +231,8 @@ public class ImagePanel extends Panel {
      */
     public void finalizz() throws Exception {
 
-        Image image = (Image) get(ImagePanel.IMAGE);
-        remove(ImagePanel.IMAGE);
+        Image image = (Image) getChildItem(ImagePanel.IMAGE);
+        removeChildItem(ImagePanel.IMAGE);
         destroyComponent(image);
 
         super.finalizz();

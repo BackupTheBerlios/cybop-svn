@@ -32,7 +32,7 @@ import cybop.core.model.*;
 /**
  * This class represents a button.
  *
- * @version $Revision: 1.6 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Button extends Organizer {
@@ -58,9 +58,9 @@ public class Button extends Organizer {
      * @param i the item
      * @exception NullPointerException if the name is null
      */
-    public void set(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws NullPointerException {
 
-        super.set(n, i);
+        super.setChildItem(n, i);
 
         if (n != null) {
 
@@ -85,17 +85,17 @@ public class Button extends Organizer {
      * @param n the name
      * @exception NullPointerException if the name is null
      */
-    public void remove(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws NullPointerException {
 
         if (n != null) {
 
             if (n.isEqualTo(Button.LABEL)) {
 
-                removeLabel((String) get(n));
+                removeLabel((String) getChildItem(n));
 
             } else if (n.isEqualTo(Button.MNEMONIC)) {
 
-                removeMnemonic((Integer) get(n));
+                removeMnemonic((Integer) getChildItem(n));
             }
 
         } else {
@@ -103,7 +103,7 @@ public class Button extends Organizer {
             throw new NullPointerException("Could not remove item. The name is null.");
         }
 
-        super.remove(n);
+        super.removeChildItem(n);
     }
 
     //
@@ -281,8 +281,8 @@ public class Button extends Organizer {
 
         super.initialize();
 
-        set(Button.LABEL, getDefaultLabel());
-        set(Button.MNEMONIC, getDefaultMnemonic());
+        setChildItem(Button.LABEL, getDefaultLabel());
+        setChildItem(Button.MNEMONIC, getDefaultMnemonic());
     }
 
     /**
@@ -290,13 +290,13 @@ public class Button extends Organizer {
      */
     public void finalizz() throws Exception {
 
-        Integer mnemonic = (Integer) get(Button.MNEMONIC);
-        remove(Button.MNEMONIC);
-        destroyItem(mnemonic);
+        Integer mnemonic = (Integer) getChildItem(Button.MNEMONIC);
+        removeChildItem(Button.MNEMONIC);
+        destroyChildItem(mnemonic);
 
-        String label = (String) get(Button.LABEL);
-        remove(Button.LABEL);
-        destroyItem(label);
+        String label = (String) getChildItem(Button.LABEL);
+        removeChildItem(Button.LABEL);
+        destroyChildItem(label);
 
         super.finalizz();
     }

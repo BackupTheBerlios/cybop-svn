@@ -33,7 +33,7 @@ import cybop.core.basic.String;
  *
  * It serves as container transporting information of communication.
  *
- * @version $Revision: 1.9 $ $Date: 2003-04-20 22:21:01 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Signal extends Item {
@@ -179,12 +179,12 @@ public class Signal extends Item {
 
         super.initialize();
 
-        set(Signal.PRIORITY, getDefaultPriority());
-        set(Signal.LANGUAGE, getDefaultLanguage());
-        set(Signal.SUBJECT, getDefaultSubject());
-        set(Signal.PREDICATE, getDefaultPredicate());
-        set(Signal.OBJECT, getDefaultObject());
-        set(Signal.ADVERBIAL, getDefaultAdverbial());
+        setChildItem(Signal.PRIORITY, getDefaultPriority());
+        setChildItem(Signal.LANGUAGE, getDefaultLanguage());
+        setChildItem(Signal.SUBJECT, getDefaultSubject());
+        setChildItem(Signal.PREDICATE, getDefaultPredicate());
+        setChildItem(Signal.OBJECT, getDefaultObject());
+        setChildItem(Signal.ADVERBIAL, getDefaultAdverbial());
     }
 
     /**
@@ -196,12 +196,12 @@ public class Signal extends Item {
         // There were created by external items and also have to be
         // destroyed by them.
 
-        remove(Signal.ADVERBIAL);
-        remove(Signal.OBJECT);
-        remove(Signal.PREDICATE);
-        remove(Signal.SUBJECT);
-        remove(Signal.LANGUAGE);
-        remove(Signal.PRIORITY);
+        removeChildItem(Signal.ADVERBIAL);
+        removeChildItem(Signal.OBJECT);
+        removeChildItem(Signal.PREDICATE);
+        removeChildItem(Signal.SUBJECT);
+        removeChildItem(Signal.LANGUAGE);
+        removeChildItem(Signal.PRIORITY);
 
         super.finalizz();
     }

@@ -32,7 +32,7 @@ import cybop.core.model.*;
 /**
  * This class represents a label.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Label extends Organizer {
@@ -109,9 +109,9 @@ public class Label extends Organizer {
      * @param i the item
      * @exception NullPointerException if the name is null
      */
-    public void set(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws NullPointerException {
 
-        super.set(n, i);
+        super.setChildItem(n, i);
 
         if (n != null) {
 
@@ -144,25 +144,25 @@ public class Label extends Organizer {
      * @param n the name
      * @exception NullPointerException if the name is null
      */
-    public void remove(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws NullPointerException {
 
         if (n != null) {
 
             if (n.isEqualTo(Label.FONT)) {
 
-                removeFont((Font) get(n));
+                removeFont((Font) getChildItem(n));
 
             } else if (n.isEqualTo(Label.TEXT)) {
 
-                removeText((String) get(n));
+                removeText((String) getChildItem(n));
 
             } else if (n.isEqualTo(Label.HORIZONTAL_TEXT_POSITION)) {
 
-                removeHorizontalTextPosition((Integer) get(n));
+                removeHorizontalTextPosition((Integer) getChildItem(n));
             
             } else if (n.isEqualTo(Label.VERTICAL_TEXT_POSITION)) {
 
-                removeVerticalTextPosition((Integer) get(n));
+                removeVerticalTextPosition((Integer) getChildItem(n));
             }
 
         } else {
@@ -170,7 +170,7 @@ public class Label extends Organizer {
             throw new NullPointerException("Could not remove item. The name is null.");
         }
         
-        super.remove(n);
+        super.removeChildItem(n);
     }
 
     //
@@ -468,10 +468,10 @@ public class Label extends Organizer {
 
         super.initialize();
 
-        set(Label.FONT, createComponent(getDefaultFont()));
-        set(Label.TEXT, getDefaultText());
-        set(Label.HORIZONTAL_TEXT_POSITION, getDefaultHorizontalTextPosition());
-        set(Label.VERTICAL_TEXT_POSITION, getDefaultVerticalTextPosition());
+        setChildItem(Label.FONT, createComponent(getDefaultFont()));
+        setChildItem(Label.TEXT, getDefaultText());
+        setChildItem(Label.HORIZONTAL_TEXT_POSITION, getDefaultHorizontalTextPosition());
+        setChildItem(Label.VERTICAL_TEXT_POSITION, getDefaultVerticalTextPosition());
     }
 
     /**
@@ -479,20 +479,20 @@ public class Label extends Organizer {
      */
     public void finalizz() throws Exception {
 
-        Integer verticalTextPosition = (Integer) get(Label.VERTICAL_TEXT_POSITION);
-        remove(Label.VERTICAL_TEXT_POSITION);
-        destroyItem(verticalTextPosition);
+        Integer verticalTextPosition = (Integer) getChildItem(Label.VERTICAL_TEXT_POSITION);
+        removeChildItem(Label.VERTICAL_TEXT_POSITION);
+        destroyChildItem(verticalTextPosition);
 
-        Integer horizontalTextPosition = (Integer) get(Label.HORIZONTAL_TEXT_POSITION);
-        remove(Label.HORIZONTAL_TEXT_POSITION);
-        destroyItem(horizontalTextPosition);
+        Integer horizontalTextPosition = (Integer) getChildItem(Label.HORIZONTAL_TEXT_POSITION);
+        removeChildItem(Label.HORIZONTAL_TEXT_POSITION);
+        destroyChildItem(horizontalTextPosition);
 
-        String text = (String) get(Label.TEXT);
-        remove(Label.TEXT);
-        destroyItem(text);
+        String text = (String) getChildItem(Label.TEXT);
+        removeChildItem(Label.TEXT);
+        destroyChildItem(text);
 
-        Font font = (Font) get(Label.FONT);
-        remove(Label.FONT);
+        Font font = (Font) getChildItem(Label.FONT);
+        removeChildItem(Label.FONT);
         destroyComponent(font);
 
         super.finalizz();

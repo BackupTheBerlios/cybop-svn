@@ -64,7 +64,7 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.12 $ $Date: 2003-04-23 16:03:25 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends Chain {
@@ -171,9 +171,9 @@ public class Component extends Chain {
                 if (c != null) {
 
                     java.lang.System.out.println("INFO: Set global component items.");
-                    c.set(Component.CONFIGURATION, get(Component.CONFIGURATION));
-                    c.set(Component.LOG_RECORD, get(Component.LOG_RECORD));
-                    c.set(Component.SIGNAL_MEMORY, get(Component.SIGNAL_MEMORY));
+                    c.setChildItem(Component.CONFIGURATION, getChildItem(Component.CONFIGURATION));
+                    c.setChildItem(Component.LOG_RECORD, getChildItem(Component.LOG_RECORD));
+                    c.setChildItem(Component.SIGNAL_MEMORY, getChildItem(Component.SIGNAL_MEMORY));
 
                     java.lang.System.out.println("INFO: Configure component.");
                     c.configure();
@@ -215,9 +215,9 @@ public class Component extends Chain {
             c.deconfigure();
 
             java.lang.System.out.println("INFO: Remove global component items.");
-            c.remove(Component.SIGNAL_MEMORY);
-            c.remove(Component.LOG_RECORD);
-            c.remove(Component.CONFIGURATION);
+            c.removeChildItem(Component.SIGNAL_MEMORY);
+            c.removeChildItem(Component.LOG_RECORD);
+            c.removeChildItem(Component.CONFIGURATION);
 
         } else {
 
@@ -280,14 +280,14 @@ public class Component extends Chain {
      */
     public void configure() throws Exception, NullPointerException {
 
-        Configuration c = (Configuration) get(Component.CONFIGURATION);
+        Configuration c = (Configuration) getChildItem(Component.CONFIGURATION);
 
         if (c != null) {
 
-            setCategory(Component.SIGNAL_CATEGORY, c.get(Component.SIGNAL_CATEGORY, getDefaultSignalCategory()));
-            setCategory(Component.NAMED_SUBSYSTEM_CATEGORY, c.get(Component.NAMED_SUBSYSTEM_CATEGORY, getDefaultNamedSubsystemCategory()));
-            setCategory(Component.LOGGER_OUTPUT_CATEGORY, c.get(Component.LOGGER_OUTPUT_CATEGORY, getDefaultLoggerOutputCategory()));
-            setCategory(Component.LOG_LEVEL_CATEGORY, c.get(Component.LOG_LEVEL_CATEGORY, getDefaultLogLevelCategory()));
+            setChildCategory(Component.SIGNAL_CATEGORY, c.getChildItem(Component.SIGNAL_CATEGORY, getDefaultSignalCategory()));
+            setChildCategory(Component.NAMED_SUBSYSTEM_CATEGORY, c.getChildItem(Component.NAMED_SUBSYSTEM_CATEGORY, getDefaultNamedSubsystemCategory()));
+            setChildCategory(Component.LOGGER_OUTPUT_CATEGORY, c.getChildItem(Component.LOGGER_OUTPUT_CATEGORY, getDefaultLoggerOutputCategory()));
+            setChildCategory(Component.LOG_LEVEL_CATEGORY, c.getChildItem(Component.LOG_LEVEL_CATEGORY, getDefaultLogLevelCategory()));
 
         } else {
 
@@ -302,21 +302,21 @@ public class Component extends Chain {
      */
     public void deconfigure() throws Exception, NullPointerException {
 
-        Configuration c = (Configuration) get(Component.CONFIGURATION);
+        Configuration c = (Configuration) getChildItem(Component.CONFIGURATION);
 
         if (c != null) {
 
-            c.set(Component.LOG_LEVEL_CATEGORY, getCategory(Component.LOG_LEVEL_CATEGORY));
-            removeCategory(Component.LOG_LEVEL_CATEGORY);
+            c.setChildItem(Component.LOG_LEVEL_CATEGORY, getChildCategory(Component.LOG_LEVEL_CATEGORY));
+            removeChildCategory(Component.LOG_LEVEL_CATEGORY);
 
-            c.set(Component.LOGGER_OUTPUT_CATEGORY, getCategory(Component.LOGGER_OUTPUT_CATEGORY));
-            removeCategory(Component.LOGGER_OUTPUT_CATEGORY);
+            c.setChildItem(Component.LOGGER_OUTPUT_CATEGORY, getChildCategory(Component.LOGGER_OUTPUT_CATEGORY));
+            removeChildCategory(Component.LOGGER_OUTPUT_CATEGORY);
 
-            c.set(Component.NAMED_SUBSYSTEM_CATEGORY, getCategory(Component.NAMED_SUBSYSTEM_CATEGORY));
-            removeCategory(Component.NAMED_SUBSYSTEM_CATEGORY);
+            c.setChildItem(Component.NAMED_SUBSYSTEM_CATEGORY, getChildCategory(Component.NAMED_SUBSYSTEM_CATEGORY));
+            removeChildCategory(Component.NAMED_SUBSYSTEM_CATEGORY);
 
-            c.set(Component.SIGNAL_CATEGORY, getCategory(Component.SIGNAL_CATEGORY));
-            removeCategory(Component.SIGNAL_CATEGORY);
+            c.setChildItem(Component.SIGNAL_CATEGORY, getChildCategory(Component.SIGNAL_CATEGORY));
+            removeChildCategory(Component.SIGNAL_CATEGORY);
 
         } else {
 
@@ -335,9 +335,9 @@ public class Component extends Chain {
 
         super.initialize();
 
-        set(Component.NAMED_SUBSYSTEM, getCategory(Component.NAMED_SUBSYSTEM_CATEGORY));
-        set(Component.LOGGER_OUTPUT, getCategory(Component.LOGGER_OUTPUT_CATEGORY));
-        set(Component.LOG_LEVEL, getCategory(Component.LOG_LEVEL_CATEGORY));
+        setChildItem(Component.NAMED_SUBSYSTEM, getChildCategory(Component.NAMED_SUBSYSTEM_CATEGORY));
+        setChildItem(Component.LOGGER_OUTPUT, getChildCategory(Component.LOGGER_OUTPUT_CATEGORY));
+        setChildItem(Component.LOG_LEVEL, getChildCategory(Component.LOG_LEVEL_CATEGORY));
     }
 
     /**
@@ -345,17 +345,17 @@ public class Component extends Chain {
      */
     public void finalizz() throws Exception {
 
-        Integer logLevel = (Integer) get(Component.LOG_LEVEL);
-        remove(Component.LOG_LEVEL);
-        destroyItem(logLevel);
+        Integer logLevel = (Integer) getChildItem(Component.LOG_LEVEL);
+        removeChildItem(Component.LOG_LEVEL);
+        destroyChildItem(logLevel);
 
-        String loggerOutput = (String) get(Component.LOGGER_OUTPUT);
-        remove(Component.LOGGER_OUTPUT);
-        destroyItem(loggerOutput);
+        String loggerOutput = (String) getChildItem(Component.LOGGER_OUTPUT);
+        removeChildItem(Component.LOGGER_OUTPUT);
+        destroyChildItem(loggerOutput);
 
-        String namedSubsystem = (String) get(Component.NAMED_SUBSYSTEM);
-        remove(Component.NAMED_SUBSYSTEM);
-        destroyItem(namedSubsystem);
+        String namedSubsystem = (String) getChildItem(Component.NAMED_SUBSYSTEM);
+        removeChildItem(Component.NAMED_SUBSYSTEM);
+        destroyChildItem(namedSubsystem);
 
         super.finalizz();
     }
@@ -388,13 +388,13 @@ public class Component extends Chain {
 
         if (l != null) {
 
-            if (l.isSmallerThanOrEqualTo((Integer) get(Component.LOG_LEVEL))) {
+            if (l.isSmallerThanOrEqualTo((Integer) getChildItem(Component.LOG_LEVEL))) {
 
-                LogRecord r = (LogRecord) get(Component.LOG_RECORD);
+                LogRecord r = (LogRecord) getChildItem(Component.LOG_RECORD);
     
                 if (r != null) {
 
-                    r.set(LogRecord.MESSAGE, new String(m));
+                    r.setChildItem(LogRecord.MESSAGE, new String(m));
                     r.setThrowable(t);
 
                 } else {
@@ -420,7 +420,7 @@ public class Component extends Chain {
     public void log(LogRecord r) throws Exception, NullPointerException {
 
 /*??
-        cybop.core.system.region.controller.Encoder e = (cybop.core.system.region.controller.Encoder) get(Component.ENCODER);
+        cybop.core.system.region.controller.Encoder e = (cybop.core.system.region.controller.Encoder) getChildItem(Component.ENCODER);
 
         if (e != null) {
 
@@ -435,12 +435,12 @@ public class Component extends Chain {
              */
             if (r.getThrowable() != null) {
 
-                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.get(LogRecord.MESSAGE)).getJavaObject() + "\n" + r.getThrowable());
+                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChildItem(LogRecord.MESSAGE)).getJavaObject() + "\n" + r.getThrowable());
                 r.getThrowable().printStackTrace();
 
             } else {
 
-                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.get(LogRecord.MESSAGE)).getJavaObject());
+                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChildItem(LogRecord.MESSAGE)).getJavaObject());
             }
 
 /*??
@@ -504,13 +504,13 @@ public class Component extends Chain {
      */
     public void storeSignal(Signal s) throws NullPointerException {
 
-        SignalMemory mem = (SignalMemory) get(Component.SIGNAL_MEMORY);
+        SignalMemory mem = (SignalMemory) getChildItem(Component.SIGNAL_MEMORY);
 
         if (mem != null) {
 
             String n = mem.buildName(Component.SIGNAL);
 
-            mem.set(n, s);
+            mem.setChildItem(n, s);
 
         } else {
 
@@ -533,7 +533,7 @@ public class Component extends Chain {
     public Signal fetchSignal() throws NullPointerException {
 
         Signal s = null;
-        SignalMemory mem = (SignalMemory) get(Component.SIGNAL_MEMORY);
+        SignalMemory mem = (SignalMemory) getChildItem(Component.SIGNAL_MEMORY);
 
         if (mem != null) {
 
@@ -560,7 +560,7 @@ public class Component extends Chain {
     
                             if (n.startsWith(Component.SIGNAL)) {
     
-                                priority = (Integer) child.get(Signal.PRIORITY);
+                                priority = (Integer) child.getChildItem(Signal.PRIORITY);
     
                                 if (priority != null) {
     
@@ -591,7 +591,7 @@ public class Component extends Chain {
 
                 if (s != null) {
 
-                    mem.remove(s.getName());
+                    mem.removeChildItem(s.getName());
                 }
 
             } else {

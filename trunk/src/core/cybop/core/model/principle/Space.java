@@ -35,7 +35,7 @@ import cybop.core.model.*;
  * A point is just a minimal space and always relative to the referenced object.
  * The absolute point does not exist as any point can consist of yet smaller points.
  *
- * @version $Revision: 1.6 $ $Date: 2003-03-18 00:18:01 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Space extends Principle {
@@ -137,12 +137,12 @@ public class Space extends Principle {
 
         super.initialize();
 
-        set(Space.ORIGIN_X_COORDINATE, createItem(getDefaultOriginXCoordinate()));
-        set(Space.ORIGIN_Y_COORDINATE, createItem(getDefaultOriginYCoordinate()));
-        set(Space.ORIGIN_Z_COORDINATE, createItem(getDefaultOriginZCoordinate()));
-        set(Space.EXPANSE_X_COORDINATE, createItem(getDefaultExpanseXCoordinate()));
-        set(Space.EXPANSE_Y_COORDINATE, createItem(getDefaultExpanseYCoordinate()));
-        set(Space.EXPANSE_Z_COORDINATE, createItem(getDefaultExpanseZCoordinate()));
+        setChildItem(Space.ORIGIN_X_COORDINATE, createChildItem(getDefaultOriginXCoordinate()));
+        setChildItem(Space.ORIGIN_Y_COORDINATE, createChildItem(getDefaultOriginYCoordinate()));
+        setChildItem(Space.ORIGIN_Z_COORDINATE, createChildItem(getDefaultOriginZCoordinate()));
+        setChildItem(Space.EXPANSE_X_COORDINATE, createChildItem(getDefaultExpanseXCoordinate()));
+        setChildItem(Space.EXPANSE_Y_COORDINATE, createChildItem(getDefaultExpanseYCoordinate()));
+        setChildItem(Space.EXPANSE_Z_COORDINATE, createChildItem(getDefaultExpanseZCoordinate()));
     }
 
     /**
@@ -150,29 +150,29 @@ public class Space extends Principle {
      */
     public void finalizz() throws Exception {
 
-        Integer expanseZCoordinate = (Integer) get(Space.EXPANSE_Z_COORDINATE);
-        remove(Space.EXPANSE_Z_COORDINATE);
-        destroyItem(expanseZCoordinate);
+        Integer expanseZCoordinate = (Integer) getChildItem(Space.EXPANSE_Z_COORDINATE);
+        removeChildItem(Space.EXPANSE_Z_COORDINATE);
+        destroyChildItem(expanseZCoordinate);
 
-        Integer expanseYCoordinate = (Integer) get(Space.EXPANSE_Y_COORDINATE);
-        remove(Space.EXPANSE_Y_COORDINATE);
-        destroyItem(expanseYCoordinate);
+        Integer expanseYCoordinate = (Integer) getChildItem(Space.EXPANSE_Y_COORDINATE);
+        removeChildItem(Space.EXPANSE_Y_COORDINATE);
+        destroyChildItem(expanseYCoordinate);
 
-        Integer expanseXCoordinate = (Integer) get(Space.EXPANSE_X_COORDINATE);
-        remove(Space.EXPANSE_X_COORDINATE);
-        destroyItem(expanseXCoordinate);
+        Integer expanseXCoordinate = (Integer) getChildItem(Space.EXPANSE_X_COORDINATE);
+        removeChildItem(Space.EXPANSE_X_COORDINATE);
+        destroyChildItem(expanseXCoordinate);
 
-        Integer originZCoordinate = (Integer) get(Space.ORIGIN_Z_COORDINATE);
-        remove(Space.ORIGIN_Z_COORDINATE);
-        destroyItem(originZCoordinate);
+        Integer originZCoordinate = (Integer) getChildItem(Space.ORIGIN_Z_COORDINATE);
+        removeChildItem(Space.ORIGIN_Z_COORDINATE);
+        destroyChildItem(originZCoordinate);
 
-        Integer originYCoordinate = (Integer) get(Space.ORIGIN_Y_COORDINATE);
-        remove(Space.ORIGIN_Y_COORDINATE);
-        destroyItem(originYCoordinate);
+        Integer originYCoordinate = (Integer) getChildItem(Space.ORIGIN_Y_COORDINATE);
+        removeChildItem(Space.ORIGIN_Y_COORDINATE);
+        destroyChildItem(originYCoordinate);
 
-        Integer originXCoordinate = (Integer) get(Space.ORIGIN_X_COORDINATE);
-        remove(Space.ORIGIN_X_COORDINATE);
-        destroyItem(originXCoordinate);
+        Integer originXCoordinate = (Integer) getChildItem(Space.ORIGIN_X_COORDINATE);
+        removeChildItem(Space.ORIGIN_X_COORDINATE);
+        destroyChildItem(originXCoordinate);
 
         super.finalizz();
     }
@@ -195,12 +195,12 @@ public class Space extends Principle {
 
         if (p != null) {
 
-            boolean xob = xContains((Integer) p.get(Space.ORIGIN_X_COORDINATE));
-            boolean xeb = xContains((Integer) p.get(Space.EXPANSE_X_COORDINATE));
-            boolean yob = yContains((Integer) p.get(Space.ORIGIN_Y_COORDINATE));
-            boolean yeb = yContains((Integer) p.get(Space.EXPANSE_Y_COORDINATE));
-            boolean zob = zContains((Integer) p.get(Space.ORIGIN_Z_COORDINATE));
-            boolean zeb = zContains((Integer) p.get(Space.EXPANSE_Z_COORDINATE));
+            boolean xob = xContains((Integer) p.getChildItem(Space.ORIGIN_X_COORDINATE));
+            boolean xeb = xContains((Integer) p.getChildItem(Space.EXPANSE_X_COORDINATE));
+            boolean yob = yContains((Integer) p.getChildItem(Space.ORIGIN_Y_COORDINATE));
+            boolean yeb = yContains((Integer) p.getChildItem(Space.EXPANSE_Y_COORDINATE));
+            boolean zob = zContains((Integer) p.getChildItem(Space.ORIGIN_Z_COORDINATE));
+            boolean zeb = zContains((Integer) p.getChildItem(Space.EXPANSE_Z_COORDINATE));
 
             if (xob && xeb && yob && yeb && zob && zeb) {
 
@@ -229,8 +229,8 @@ public class Space extends Principle {
 
         if (x != null) {
 
-            if (x.isGreaterThanOrEqualTo((Integer) get(Space.ORIGIN_X_COORDINATE))
-                && x.isSmallerThan((Integer) get(Space.EXPANSE_X_COORDINATE))) {
+            if (x.isGreaterThanOrEqualTo((Integer) getChildItem(Space.ORIGIN_X_COORDINATE))
+                && x.isSmallerThan((Integer) getChildItem(Space.EXPANSE_X_COORDINATE))) {
 
                 b = true;
             }
@@ -257,8 +257,8 @@ public class Space extends Principle {
 
         if (y != null) {
 
-            if (y.isGreaterThanOrEqualTo((Integer) get(Space.ORIGIN_Y_COORDINATE))
-                && y.isSmallerThan((Integer) get(Space.EXPANSE_Y_COORDINATE))) {
+            if (y.isGreaterThanOrEqualTo((Integer) getChildItem(Space.ORIGIN_Y_COORDINATE))
+                && y.isSmallerThan((Integer) getChildItem(Space.EXPANSE_Y_COORDINATE))) {
 
                 b = true;
             }
@@ -285,8 +285,8 @@ public class Space extends Principle {
 
         if (z != null) {
 
-            if (z.isGreaterThanOrEqualTo((Integer) get(Space.ORIGIN_Z_COORDINATE))
-                && z.isSmallerThan((Integer) get(Space.EXPANSE_Z_COORDINATE))) {
+            if (z.isGreaterThanOrEqualTo((Integer) getChildItem(Space.ORIGIN_Z_COORDINATE))
+                && z.isSmallerThan((Integer) getChildItem(Space.EXPANSE_Z_COORDINATE))) {
 
                 b = true;
             }

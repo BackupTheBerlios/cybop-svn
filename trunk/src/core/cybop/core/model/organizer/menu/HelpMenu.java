@@ -32,7 +32,7 @@ import cybop.core.model.organizer.menuitem.*;
 /**
  * This class represents a help menu.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class HelpMenu extends Menu {
@@ -55,9 +55,9 @@ public class HelpMenu extends Menu {
      * @param i the item
      * @exception NullPointerException if the name is null
      */
-    public void set(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws NullPointerException {
 
-        super.set(n, i);
+        super.setChildItem(n, i);
 
         if (n != null) {
 
@@ -78,13 +78,13 @@ public class HelpMenu extends Menu {
      * @param n the name
      * @exception NullPointerException if the name is null
      */
-    public void remove(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws NullPointerException {
 
         if (n != null) {
 
             if (n.isEqualTo(HelpMenu.ABOUT_MENU_ITEM)) {
 
-                removeAboutMenuItem((AboutMenuItem) get(n));
+                removeAboutMenuItem((AboutMenuItem) getChildItem(n));
             }
 
         } else {
@@ -92,7 +92,7 @@ public class HelpMenu extends Menu {
             throw new NullPointerException("Could not remove item. The name is null.");
         }
 
-        super.remove(n);
+        super.removeChildItem(n);
     }
 
     //
@@ -190,7 +190,7 @@ public class HelpMenu extends Menu {
 
         super.initialize();
 
-        set(HelpMenu.ABOUT_MENU_ITEM, createComponent(getDefaultAboutMenuItem()));
+        setChildItem(HelpMenu.ABOUT_MENU_ITEM, createComponent(getDefaultAboutMenuItem()));
     }
 
     /**
@@ -198,8 +198,8 @@ public class HelpMenu extends Menu {
      */
     public void finalizz() throws Exception {
 
-        AboutMenuItem aboutMenuItem = (AboutMenuItem) get(HelpMenu.ABOUT_MENU_ITEM);
-        remove(HelpMenu.ABOUT_MENU_ITEM);
+        AboutMenuItem aboutMenuItem = (AboutMenuItem) getChildItem(HelpMenu.ABOUT_MENU_ITEM);
+        removeChildItem(HelpMenu.ABOUT_MENU_ITEM);
         destroyComponent(aboutMenuItem);
 
         super.finalizz();

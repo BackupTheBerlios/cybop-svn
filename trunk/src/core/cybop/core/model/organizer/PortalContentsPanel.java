@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a portal contents panel.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalContentsPanel extends ContentsPanel {
@@ -53,9 +53,9 @@ public class PortalContentsPanel extends ContentsPanel {
      * @param i the item
      * @exception NullPointerException if the name is null
      */
-    public void set(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws NullPointerException {
 
-        super.set(n, i);
+        super.setChildItem(n, i);
 
         if (n != null) {
 
@@ -76,13 +76,13 @@ public class PortalContentsPanel extends ContentsPanel {
      * @param n the name
      * @exception NullPointerException if the name is null
      */
-    public void remove(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws NullPointerException {
 
         if (n != null) {
 
             if (n.isEqualTo(PortalContentsPanel.PORTAL_SPLIT_PANE)) {
 
-                removePortalSplitPane((PortalSplitPane) get(n));
+                removePortalSplitPane((PortalSplitPane) getChildItem(n));
             }
 
         } else {
@@ -90,7 +90,7 @@ public class PortalContentsPanel extends ContentsPanel {
             throw new NullPointerException("Could not set item. The name is null.");
         }
         
-        super.remove(n);
+        super.removeChildItem(n);
     }
 
     //
@@ -178,7 +178,7 @@ public class PortalContentsPanel extends ContentsPanel {
 
         super.initialize();
 
-        set(PortalContentsPanel.PORTAL_SPLIT_PANE, createComponent(getDefaultPortalSplitPane()));
+        setChildItem(PortalContentsPanel.PORTAL_SPLIT_PANE, createComponent(getDefaultPortalSplitPane()));
     }
 
     /**
@@ -186,8 +186,8 @@ public class PortalContentsPanel extends ContentsPanel {
      */
     public void finalizz() throws Exception {
 
-        PortalSplitPane portalSplitPane = (PortalSplitPane) get(PortalContentsPanel.PORTAL_SPLIT_PANE);
-        remove(PortalContentsPanel.PORTAL_SPLIT_PANE);
+        PortalSplitPane portalSplitPane = (PortalSplitPane) getChildItem(PortalContentsPanel.PORTAL_SPLIT_PANE);
+        removeChildItem(PortalContentsPanel.PORTAL_SPLIT_PANE);
         destroyComponent(portalSplitPane);
 
         super.finalizz();

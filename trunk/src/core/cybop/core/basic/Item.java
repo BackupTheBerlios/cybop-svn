@@ -76,7 +76,7 @@ import cybop.core.model.principle.*;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.19 $ $Date: 2003-04-23 16:03:25 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -100,20 +100,8 @@ public class Item extends State {
     /** The children number. */
     private int childrenNumber;
 
-    /** The children categories container. */
-    private Item[] childrenCategories;
-
-    /** The children categories number. */
-    private int childrenCategoriesNumber;
-
-    /** The children positions container. */
-    private Item[] childrenPositions;
-
-    /** The children Positions number. */
-    private int childrenPositionsNumber;
-
     /**
-     * The limit factor.
+     * The children limit factor.
      *
      * It is a percentual limit for the children array length. For example:
      *
@@ -124,23 +112,56 @@ public class Item extends State {
      *
      * If the array is filled by the given percentage, it will be extended.
      */
-    private double limitFactor;
+    private double childrenLimitFactor;
 
-    /** The positioning */
-    private String positioning;
+    /** The children categories container. */
+    private Item[] childrenCategories;
+
+    /** The children categories number. */
+    private int childrenCategoriesNumber;
 
     /**
-     * The java tree node.
+     * The children categories limit factor.
      *
-     * ?? Temporary until CYBOP framework doesn't rely on java classes anymore.
+     * It is a percentual limit for the children array length. For example:
+     *
+     * Factor           Percentage
+     * 0.25             25%
+     * 0.5              50%
+     * 0.75             75%
+     *
+     * If the array is filled by the given percentage, it will be extended.
      */
+    private double childrenCategoriesLimitFactor;
+
+    /** The children positions container. */
+    private Item[] childrenPositions;
+
+    /** The children Positions number. */
+    private int childrenPositionsNumber;
+
+    /**
+     * The children positions limit factor.
+     *
+     * It is a percentual limit for the children array length. For example:
+     *
+     * Factor           Percentage
+     * 0.25             25%
+     * 0.5              50%
+     * 0.75             75%
+     *
+     * If the array is filled by the given percentage, it will be extended.
+     */
+    private double childrenPositionsLimitFactor;
+
+    //
+    // Temporary until CYBOP framework doesn't rely on java classes anymore.
+    //
+
+    /** The java tree node. */
     private javax.swing.tree.DefaultMutableTreeNode javaTreeNode;
 
-    /**
-     * The encapsulated java object.
-     *
-     * ?? Temporary until CYBOP framework doesn't rely on java classes anymore.
-     */
+    /** The encapsulated java object. */
     private java.lang.Object javaObject;
 
     //
@@ -151,7 +172,7 @@ public class Item extends State {
     public static final String ACTION = new String("action");
 
     //
-    // Children positioning.
+    // Children positions.
     //
 
     /** The index positioning. */
@@ -196,8 +217,13 @@ public class Item extends State {
         setFollower(createFollower());
         setChildren(createChildren());
         setChildrenNumber(createChildrenNumber());
-        setLimitFactor(createLimitFactor());
-        setPositioning(createPositioning());
+        setChildrenLimitFactor(createChildrenLimitFactor());
+        setChildrenCategories(createChildrenCategories());
+        setChildrenCategoriesNumber(createChildrenCategoriesNumber());
+        setChildrenCategoriesLimitFactor(createChildrenCategoriesLimitFactor());
+        setChildrenPositions(createChildrenPositions());
+        setChildrenPositionsNumber(createChildrenPositionsNumber());
+        setChildrenPositionsLimitFactor(createChildrenPositionsLimitFactor());
 
         // This java tree node is equivalent to the children container above
         // in that it can contain children.
@@ -256,9 +282,1303 @@ public class Item extends State {
 
         return this.name;
     }
-    
+
     //
-    // Name handling.
+    // Position.
+    //
+
+    /**
+     * Creates the position.
+     *
+     * @return the position
+     */
+    public Integer createPosition() {
+
+        return null;
+    }
+
+    /**
+     * Destroys the position.
+     *
+     * @param p the position
+     */
+    public void destroyPosition(Integer p) {
+    }
+
+    /**
+     * Sets the position.
+     *
+     * @param p the position
+     */
+    public void setPosition(Integer p) {
+
+        this.position = p;
+    }
+
+    /**
+     * Returns the position.
+     *
+     * @return the position
+     */
+    public Integer getPosition() {
+
+        return this.position;
+    }
+
+    //
+    // Following item.
+    //
+    
+    /**
+     * Creates the following item.
+     *
+     * @return the following item
+     */
+    public Item createFollower() {
+
+        return null;
+    }
+
+    /**
+     * Destroys the following item.
+     *
+     * @param f the following item
+     */
+    public void destroyFollower(Item f) {
+    }
+
+    /**
+     * Sets the following item.
+     *
+     * @param f the following item
+     */
+    public void setFollower(Item f) {
+
+        this.follower = f;
+    }
+
+    /**
+     * Returns the following item.
+     *
+     * @return the following item
+     */
+    public Item getFollower() {
+
+        return this.follower;
+    }
+
+    //
+    // Children container.
+    //
+
+    /**
+     * Creates the children container.
+     *
+     * @return the children container
+     */
+    public Item[] createChildren() {
+
+        return new Item[0];
+    }
+
+    /**
+     * Destroys the children container.
+     *
+     * @param c the children container
+     */
+    public void destroyChildren(Item[] c) {
+    }
+
+    /**
+     * Sets the children container.
+     *
+     * @param c the children container
+     */
+    public void setChildren(Item[] c) {
+
+        this.children = c;
+    }
+
+    /**
+     * Returns the children container.
+     *
+     * @return the children container
+     */
+    public Item[] getChildren() {
+
+        return this.children;
+    }
+
+    //
+    // Children number.
+    //
+
+    /**
+     * Creates the children number.
+     *
+     * @return the children number
+     */
+    public int createChildrenNumber() {
+
+        return 0;
+    }
+
+    /**
+     * Destroys the children number.
+     *
+     * @param n the children number
+     */
+    public void destroyChildrenNumber(int n) {
+    }
+
+    /**
+     * Sets the children number.
+     *
+     * @param n the children number
+     */
+    public void setChildrenNumber(int n) {
+
+        this.childrenNumber = n;
+    }
+
+    /**
+     * Returns the children number.
+     *
+     * @return the children number
+     */
+    public int getChildrenNumber() {
+
+        return this.childrenNumber;
+    }
+
+    //
+    // Children limit factor.
+    //
+
+    /**
+     * Creates the children limit factor.
+     *
+     * @return the children limit factor
+     */
+    public double createChildrenLimitFactor() {
+
+        return 0.75;
+    }
+
+    /**
+     * Destroys the children limit factor.
+     *
+     * @param f the children limit factor
+     */
+    public void destroyChildrenLimitFactor(double f) {
+    }
+
+    /**
+     * Sets the children limit factor.
+     *
+     * @param f the children limit factor
+     */
+    public void setChildrenLimitFactor(double f) {
+
+        this.childrenLimitFactor = f;
+    }
+
+    /**
+     * Returns the children limit factor.
+     *
+     * @return the children limit factor
+     */
+    public double getChildrenLimitFactor() {
+
+        return this.childrenLimitFactor;
+    }
+
+    //
+    // Children categories container.
+    //
+
+    /**
+     * Creates the children categories container.
+     *
+     * @return the children categories container
+     */
+    public Item[] createChildrenCategories() {
+
+        return new Item[0];
+    }
+
+    /**
+     * Destroys the children categories container.
+     *
+     * @param c the children categories container
+     */
+    public void destroyChildrenCategories(Item[] c) {
+    }
+
+    /**
+     * Sets the children categories container.
+     *
+     * @param c the children categories container
+     */
+    public void setChildrenCategories(Item[] c) {
+
+        this.childrenCategories = c;
+    }
+
+    /**
+     * Returns the children categories container.
+     *
+     * @return the children categories container
+     */
+    public Item[] getChildrenCategories() {
+
+        return this.childrenCategories;
+    }
+
+    //
+    // Children categories number.
+    //
+
+    /**
+     * Creates the children categories number.
+     *
+     * @return the children categories number
+     */
+    public int createChildrenCategoriesNumber() {
+
+        return 0;
+    }
+
+    /**
+     * Destroys the children categories number.
+     *
+     * @param n the children categories number
+     */
+    public void destroyChildrenCategoriesNumber(int n) {
+    }
+
+    /**
+     * Sets the children categories number.
+     *
+     * @param n the children categories number
+     */
+    public void setChildrenCategoriesNumber(int n) {
+
+        this.childrenCategoriesNumber = n;
+    }
+
+    /**
+     * Returns the children categories number.
+     *
+     * @return the children categories number
+     */
+    public int getChildrenCategoriesNumber() {
+
+        return this.childrenCategoriesNumber;
+    }
+
+    //
+    // Children categories limit factor.
+    //
+
+    /**
+     * Creates the children categories limit factor.
+     *
+     * @return the children categories limit factor
+     */
+    public double createChildrenCategoriesLimitFactor() {
+
+        return 0.75;
+    }
+
+    /**
+     * Destroys the children categories limit factor.
+     *
+     * @param f the children categories limit factor
+     */
+    public void destroyChildrenCategoriesLimitFactor(double f) {
+    }
+
+    /**
+     * Sets the children categories limit factor.
+     *
+     * @param f the children categories limit factor
+     */
+    public void setChildrenCategoriesLimitFactor(double f) {
+
+        this.childrenCategoriesLimitFactor = f;
+    }
+
+    /**
+     * Returns the children categories limit factor.
+     *
+     * @return the children categories limit factor
+     */
+    public double getChildrenCategoriesLimitFactor() {
+
+        return this.childrenCategoriesLimitFactor;
+    }
+
+    //
+    // Children positions container.
+    //
+
+    /**
+     * Creates the children positions container.
+     *
+     * @return the children positions container
+     */
+    public Item[] createChildrenPositions() {
+
+        return new Item[0];
+    }
+
+    /**
+     * Destroys the children positions container.
+     *
+     * @param c the children positions container
+     */
+    public void destroyChildrenPositions(Item[] c) {
+    }
+
+    /**
+     * Sets the children positions container.
+     *
+     * @param c the children positions container
+     */
+    public void setChildrenPositions(Item[] c) {
+
+        this.childrenPositions = c;
+    }
+
+    /**
+     * Returns the children positions container.
+     *
+     * @return the children positions container
+     */
+    public Item[] getChildrenPositions() {
+
+        return this.childrenPositions;
+    }
+
+    //
+    // Children positions number.
+    //
+
+    /**
+     * Creates the children positions number.
+     *
+     * @return the children positions number
+     */
+    public int createChildrenPositionsNumber() {
+
+        return 0;
+    }
+
+    /**
+     * Destroys the children positions number.
+     *
+     * @param n the children positions number
+     */
+    public void destroyChildrenPositionsNumber(int n) {
+    }
+
+    /**
+     * Sets the children positions number.
+     *
+     * @param n the children positions number
+     */
+    public void setChildrenPositionsNumber(int n) {
+
+        this.childrenPositionsNumber = n;
+    }
+
+    /**
+     * Returns the children positions number.
+     *
+     * @return the children positions number
+     */
+    public int getChildrenPositionsNumber() {
+
+        return this.childrenPositionsNumber;
+    }
+
+    //
+    // Children positions limit factor.
+    //
+
+    /**
+     * Creates the children positions limit factor.
+     *
+     * @return the children positions limit factor
+     */
+    public double createChildrenPositionsLimitFactor() {
+
+        return 0.75;
+    }
+
+    /**
+     * Destroys the children positions limit factor.
+     *
+     * @param f the children positions limit factor
+     */
+    public void destroyChildrenPositionsLimitFactor(double f) {
+    }
+
+    /**
+     * Sets the children positions limit factor.
+     *
+     * @param f the children positions limit factor
+     */
+    public void setChildrenPositionsLimitFactor(double f) {
+
+        this.childrenPositionsLimitFactor = f;
+    }
+
+    /**
+     * Returns the children positions limit factor.
+     *
+     * @return the children positions limit factor
+     */
+    public double getChildrenPositionsLimitFactor() {
+
+        return this.childrenPositionsLimitFactor;
+    }
+
+    //
+    // Java tree node.
+    //
+
+    /**
+     * Creates a java tree node.
+     *
+     * @return the java tree node
+     * @exception NullPointerException if the java tree node is null
+     */
+    public javax.swing.tree.DefaultMutableTreeNode createJavaTreeNode() throws NullPointerException {
+
+        javax.swing.tree.DefaultMutableTreeNode tn = new javax.swing.tree.DefaultMutableTreeNode();
+
+        if (tn != null) {
+
+            tn.setUserObject("Item");
+
+        } else {
+
+            throw new NullPointerException("Could not create java tree node. The java tree node is null.");
+        }
+
+        return tn;
+    }
+
+    /**
+     * Destroys the java tree node.
+     *
+     * @param tn the java tree node
+     */
+    public void destroyJavaTreeNode(javax.swing.tree.DefaultMutableTreeNode tn) {
+    }
+
+    /**
+     * Sets the java tree node.
+     *
+     * @param tn the java tree node
+     */
+    public void setJavaTreeNode(javax.swing.tree.DefaultMutableTreeNode tn) {
+
+        this.javaTreeNode = tn;
+    }
+
+    /**
+     * Returns the java tree node.
+     *
+     * @return the java tree node
+     */
+    public javax.swing.tree.DefaultMutableTreeNode getJavaTreeNode() {
+
+        return this.javaTreeNode;
+    }
+
+    //
+    // Encapsulated java object.
+    //
+    
+    /**
+     * Creates an encapsulated java object.
+     *
+     * @return the encapsulated java object
+     * @exception NullPointerException if the encapsulated java object is null
+     */
+    public java.lang.Object createJavaObject() {
+
+        return null;
+    }
+
+    /**
+     * Destroys the encapsulated java object.
+     *
+     * @param o the encapsulated java object
+     */
+    public void destroyJavaObject(java.lang.Object o) {
+    }
+
+    /**
+     * Sets the encapsulated java object.
+     *
+     * @param o the encapsulated java object
+     */
+    public void setJavaObject(java.lang.Object o) {
+
+        this.javaObject = o;
+    }
+
+    /**
+     * Returns the encapsulated java object.
+     *
+     * @return the encapsulated java object
+     */
+    public java.lang.Object getJavaObject() {
+
+        return this.javaObject;
+    }
+
+    //
+    // Default children.
+    //
+
+    /**
+     * Returns the default action.
+     *
+     * @return the default action
+     */
+    public String getDefaultAction() {
+
+        return null;
+    }
+
+    //
+    // Child.
+    //
+
+    /**
+     * Creates a child item.
+     *
+     * @param n the child item category (class) name
+     * @return the child item
+     * @exception NullPointerException if the child item class is null
+     * @exception NullPointerException if the child item is null
+     */
+    public Item createChildItem(String n) throws Exception, NullPointerException {
+
+        Item i = null;
+
+        // If a child item class name is set to null, then don't try to create the item.
+        if (n != null) {
+
+            // Find class by name.
+            Class cl = Class.forName((java.lang.String) n.getJavaObject());
+
+            if (cl != null) {
+
+                // Create item from given class.
+                i = (Item) cl.newInstance();
+
+                if (i != null) {
+
+                    java.lang.System.out.println("INFO: Initialize child item.");
+                    i.initialize();
+
+                } else {
+        
+                    throw new NullPointerException("Could not create child item. The child item is null.");
+                }
+
+            } else {
+
+                throw new NullPointerException("Could not create child item. The child item class is null.");
+            }
+
+        } else {
+
+            java.lang.System.out.println("DEBUG: Could not create child item. The child item class name is null.");
+        }
+
+        return i;
+    }
+
+    /**
+     * Destroys the child item.
+     *
+     * @param i the child item
+     * @exception NullPointerException if the child item is null
+     */
+    public void destroyChildItem(Item i) throws Exception {
+
+        if (i != null) {
+
+            java.lang.System.out.println("INFO: Finalize child item.");
+            i.finalizz();
+
+        } else {
+
+            java.lang.System.out.println("DEBUG: Could not destroy child item. The child item is null.");
+        }
+    }
+
+    /**
+     * Sets the child item.
+     *
+     * @param n the child item name
+     * @param c the child item
+     */
+    public void setChildItem(String n, Item c) {
+
+        if (c != null) {
+
+            // Set meta attributes for child.
+            // DO NOT use the normal method setChildItem(name, item);
+            // This would lead to an endless loop since for example
+            // setChildItem(Item.NAME, n); would cause to be called repeatedly!
+            c.setName(n);
+
+            Item[] a = getChildren();
+            int no = getChildrenNumber();
+
+            if (replace(a, no, n, c) == false) {
+
+                // If the child was not found and such not replaced,
+                // then it does not exist in the array yet.
+                // Therefore, it is added to the array here.
+
+                // If the array length is exceeded, a new adjusted array with
+                // extended length is created and delivered back.
+                // Otherwise, the previous array is returned again.
+                Item[] aa = adjust(a, no, getChildrenLimitFactor());
+
+                add(aa, no, c);
+                setChildren(aa);
+                setChildrenNumber(no + 1);
+            }
+
+        } else {
+
+            java.lang.System.out.println("WARNING: Could not set child item. The child item is null.");
+        }
+    }
+
+    /**
+     * Removes the child item.
+     *
+     * @param n the child item name
+     */
+    public void removeChildItem(String n) {
+
+        int no = getChildrenNumber();
+
+        remove(getChildren(), no, n);
+        setChildrenNumber(no - 1);
+    }
+
+    /**
+     * Returns the child item.
+     *
+     * @param n the child item name
+     * @return the child item
+     */
+    public Item getChildItem(String n) {
+
+        return getChildItem(n, null);
+    }
+
+    /**
+     * Returns the child item.
+     *
+     * @param n the child item name
+     * @param d the default item
+     * @return the child item
+     */
+    public Item getChildItem(String n, Item d) {
+
+        Item i = get(getChildren(), getChildrenNumber(), n);
+
+        if (i == null) {
+
+            i = d;
+        }
+
+        return i;
+    }
+
+    //
+    // Child category.
+    //
+
+    /**
+     * Creates a child category.
+     *
+     * @return the child category
+     */
+    public Item createChildCategory() throws Exception {
+
+        return null;
+    }
+
+    /**
+     * Destroys the child category.
+     *
+     * @param c the child category
+     */
+    public void destroyChildCategory(Item c) throws Exception {
+    }
+
+    /**
+     * Sets the child category.
+     *
+     * @param n the child category name
+     * @param c the child category
+     */
+    public void setChildCategory(String n, Item c) {
+
+        if (c != null) {
+
+            // Set meta attributes for child.
+            // DO NOT use the normal method setChildItem(name, item);
+            // This would lead to an endless loop since for example
+            // setChildItem(Item.NAME, n); would cause to be called repeatedly!
+            c.setName(n);
+
+            Item[] a = getChildrenCategories();
+            int no = getChildrenCategoriesNumber();
+
+            if (replace(a, no, n, c) == false) {
+
+                // If the child was not found and such not replaced,
+                // then it does not exist in the array yet.
+                // Therefore, it is added to the array here.
+
+                // If the array length is exceeded, a new adjusted array with
+                // extended length is created and delivered back.
+                // Otherwise, the previous array is returned again.
+                Item[] aa = adjust(a, no, getChildrenCategoriesLimitFactor());
+
+                add(aa, no, c);
+                setChildrenCategories(aa);
+                setChildrenCategoriesNumber(no + 1);
+            }
+
+        } else {
+
+            java.lang.System.out.println("WARNING: Could not set child category. The child category is null.");
+        }
+    }
+
+    /**
+     * Removes the child category.
+     *
+     * @param n the child category name
+     */
+    public void removeChildCategory(String n) {
+
+        int no = getChildrenCategoriesNumber();
+
+        remove(getChildrenCategories(), no, n);
+        setChildrenCategoriesNumber(no - 1);
+    }
+
+    /**
+     * Returns the child category.
+     *
+     * @param n the child category name
+     * @return the child category
+     */
+    public Item getChildCategory(String n) {
+
+        return getChildCategory(n, null);
+    }
+
+    /**
+     * Returns the child category.
+     *
+     * @param n the child category name
+     * @param d the default child category
+     * @return the child category
+     */
+    public Item getChildCategory(String n, Item d) {
+
+        Item i = get(getChildrenCategories(), getChildrenCategoriesNumber(), n);
+
+        if (i == null) {
+
+            i = d;
+        }
+
+        return i;
+    }
+
+    //
+    // Child position.
+    //
+
+    /**
+     * Creates a child position.
+     *
+     * @return the child position
+     */
+    public Item createChildPosition() {
+
+        return null;
+    }
+
+    /**
+     * Destroys the child position.
+     *
+     * @param p the child position
+     */
+    public void destroyChildPosition(Item p) {
+    }
+
+    /**
+     * Sets the child position.
+     *
+     * @param n the child position name
+     * @param c the child position
+     */
+    public void setChildPosition(String n, Item c) {
+
+        if (c != null) {
+
+            // Set meta attributes for child.
+            // DO NOT use the normal method setChildItem(name, item);
+            // This would lead to an endless loop since for example
+            // setChildItem(Item.NAME, n); would cause to be called repeatedly!
+            c.setName(n);
+
+            Item[] a = getChildrenPositions();
+            int no = getChildrenPositionsNumber();
+
+            if (replace(a, no, n, c) == false) {
+
+                // If the child was not found and such not replaced,
+                // then it does not exist in the array yet.
+                // Therefore, it is added to the array here.
+
+                // If the array length is exceeded, a new adjusted array with
+                // extended length is created and delivered back.
+                // Otherwise, the previous array is returned again.
+                Item[] aa = adjust(a, no, getChildrenPositionsLimitFactor());
+
+                add(aa, no, c);
+                setChildrenPositions(aa);
+                setChildrenPositionsNumber(no + 1);
+            }
+
+        } else {
+
+            java.lang.System.out.println("WARNING: Could not set child position. The child position is null.");
+        }
+    }
+
+    /**
+     * Removes the child position.
+     *
+     * @param n the child position name
+     */
+    public void removeChildPosition(String n) {
+
+        int no = getChildrenPositionsNumber();
+
+        remove(getChildrenPositions(), no, n);
+        setChildrenPositionsNumber(no - 1);
+    }
+
+    /**
+     * Returns the child position.
+     *
+     * @param n the child position name
+     * @return the child position
+     */
+    public Item getChildPosition(String n) {
+
+        return getChildPosition(n, null);
+    }
+
+    /**
+     * Returns the child position.
+     *
+     * @param n the child position name
+     * @param d the default child position
+     * @return the child position
+     */
+    public Item getChildPosition(String n, Item d) {
+
+        Item i = get(getChildrenPositions(), getChildrenPositionsNumber(), n);
+
+        if (i == null) {
+
+            i = d;
+        }
+
+        return i;
+    }
+
+    //
+    // Java tree node management.
+    //
+
+    /**
+     * Adds the java tree node of the item.
+     *
+     * @param i the item
+     * @exception NullPointerException if the java tree node is null
+     * @exception NullPointerException if the item is null
+     */
+    public void addTreeNode(Item i) throws NullPointerException {
+
+        javax.swing.tree.DefaultMutableTreeNode tn = getJavaTreeNode();
+
+        if (tn != null) {
+    
+            if (i != null) {
+
+                tn.add(i.getJavaTreeNode());
+
+            } else {
+    
+                java.lang.System.out.println("DEBUG: Could not add java tree node. The item is null.");
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not add java tree node. The java tree node is null.");
+        }
+    }
+
+    /**
+     * Removes the java tree node of the item.
+     *
+     * @param i the item
+     * @exception NullPointerException if the java tree node is null
+     * @exception NullPointerException if the item is null
+     */
+    public void removeTreeNode(Item i) throws NullPointerException {
+
+        javax.swing.tree.DefaultMutableTreeNode tn = getJavaTreeNode();
+
+        if (tn != null) {
+    
+            if (i != null) {
+
+                // This check had to be inserted because signal items have
+                // children that are not child tree nodes of that signal.
+                if (tn.isNodeChild(i.getJavaTreeNode())) {
+
+                    tn.remove(i.getJavaTreeNode());
+                }
+
+            } else {
+    
+                java.lang.System.out.println("DEBUG: Could not remove java tree node. The item is null.");
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not remove java tree node. The java tree node is null.");
+        }
+    }
+
+    //
+    // Array container management.
+    //
+
+    /**
+     * Adjusts the array.
+     *
+     * If the length limit of the given array is reached, a new array with
+     * extended length is created and returned.
+     *
+     * @param a the array
+     * @param n the array items number
+     * @param f the array limit factor
+     * @return the adjusted array;
+     * by default, the same array like given as parameter will be returned;
+     * only if the length limit was reached, a new array with extended length
+     * is created and returned
+     *
+     * @exception NullPointerException if the array is null
+     */
+    protected Item[] adjust(Item[] a, int n, double f) throws NullPointerException {
+
+        Item[] i = a;
+
+        if (a != null) {
+
+            int limit = (int) (a.length * f);
+
+            if (n >= limit) {
+
+                // If the children number reaches/ exceeds the limit,
+                // the children array will be extended (rehashed).
+                i = recreate(a);
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not adjust array. The array is null.");
+        }
+
+        return i;
+    }
+
+    /**
+     * Recreates the given array with double length.
+     *
+     * Extends the length of the children array and internally reorganizes it, 
+     * in order to accommodate and access its entries more efficiently.
+     *
+     * @param old the old children array
+     * @return the recreated children array
+     * @exception NullPointerException if the children array is null
+     * @exception NullPointerException if an old item is null
+     */
+    protected Item[] recreate(Item[] old) throws NullPointerException {
+
+        Item[] c = null;
+
+        if (old != null) {
+
+            int oldLength = old.length;
+            int newLength = oldLength * 2 + 1;
+            c = new Item[newLength];
+            int i = 0;
+
+            while (i < oldLength) {
+
+                c[i] = old[i];
+
+                i++;
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not extend children array. The children array is null.");
+        }
+
+        return c;
+    }
+
+    //
+    // Array item management.
+    //
+
+    /**
+     * Adds the item with the name to the array.
+     *
+     * @param a the array
+     * @param no the item number
+     * @param i the item
+     * @exception NullPointerException if the array is null
+     */
+    public void add(Item[] a, int no, Item i) throws NullPointerException {
+
+        if (a != null) {
+
+            java.lang.System.out.println("DEBUG: Add item: " + i + " in item: " + this);
+            addTreeNode(i);
+            a[no] = i;
+
+        } else {
+
+            throw new NullPointerException("Could not add item. The array is null.");
+        }
+    }
+
+    /**
+     * Replaces the item with the name in the array.
+     *
+     * @param a the array
+     * @param no the item number
+     * @param n the name
+     * @param i the item
+     * @return true if the item was replaced; false otherwise
+     * @exception NullPointerException if the array is null
+     * @exception NullPointerException if the name is null
+     * @exception NullPointerException if a child is null
+     */
+    public boolean replace(Item[] a, int no, String n, Item i) throws NullPointerException {
+
+        boolean b = false;
+
+        if (a != null) {
+
+            if (n != null) {
+
+                int index = 0;
+                Item child = null;
+
+                while (index < no) {
+
+                    child = a[index];
+
+                    if (child != null) {
+
+                        if (n.isEqualTo(child.getName())) {
+
+                            java.lang.System.out.println("DEBUG: Replace item: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
+
+                            removeTreeNode(child);
+                            addTreeNode(i);
+                            a[index] = i;
+                            b = true;
+
+                            break;
+                        }
+                        
+                    } else {
+
+                        throw new NullPointerException("Could not replace item. A child is null.");
+                    }
+
+                    index++;
+                }
+
+            } else {
+
+                throw new NullPointerException("Could not replace item. The name is null.");
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not replace item. The array is null.");
+        }
+        
+        return b;
+    }
+
+    /**
+     * Removes the item from this item.
+     *
+     * @param a the array
+     * @param no the item number
+     * @param n the name
+     * @exception NullPointerException if the array is null
+     * @exception NullPointerException if the name is null
+     * @exception NullPointerException if a child is null
+     */
+    public void remove(Item[] a, int no, String n) throws NullPointerException {
+
+        if (a != null) {
+
+            if (n != null) {
+
+                int index = 0;
+                Item i = null;
+
+                while (index < no) {
+
+                    i = a[index];
+
+                    if (i != null) {
+
+                        if (n.isEqualTo(i.getName())) {
+
+                            // Move all remaining items one place towards the
+                            // beginning of the array.
+                            java.lang.System.out.println("DEBUG: Remove item: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
+
+                            while ((index + 1) < no) {
+
+                                a[index] = a[index + 1];
+
+                                index++;
+                            }
+
+                            // The order of these method calls is important for
+                            // removal of the tree node!
+
+                            // Set former last item to null.
+                            a[index] = null;
+                            removeTreeNode(i);
+
+                            break;
+                        }
+
+                    } else {
+
+                        throw new NullPointerException("Could not remove item. A child is null.");
+                    }
+
+                    index++;
+                }
+
+            } else {
+
+                throw new NullPointerException("Could not remove item. The name is null.");
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not remove item. The array is null.");
+        }
+    }
+
+    /**
+     * Returns the item with the name.
+     *
+     * @param a the array
+     * @param no the item number
+     * @param n the name
+     * @return the item
+     * @exception NullPointerException if the name is null
+     * @exception NullPointerException if the array is null
+     * @exception NullPointerException if a child is null
+     */
+    public Item get(Item[] a, int no, String n) throws NullPointerException {
+
+        Item i = null;
+
+        if (a != null) {
+
+            if (n != null) {
+
+                int index = 0;
+                Item child = null;
+
+                while (index < no) {
+                    
+                    child = a[index];
+    
+                    if (child != null) {
+    
+                        if (n.isEqualTo(child.getName())) {
+
+                            i = child;
+
+                            break;
+                        }
+
+                    } else {
+
+                        throw new NullPointerException("Could not get item. A child is null.");
+                    }
+
+                    index++;
+                }
+
+            } else {
+
+                throw new NullPointerException("Could not get item. The name is null.");
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not get item. The array is null.");
+        }
+
+        return i;
+    }
+
+    //
+    // Name management.
     //
 
     /**
@@ -379,1051 +1699,6 @@ public class Item extends State {
     }
 
     //
-    // Position.
-    //
-
-    /**
-     * Creates the position.
-     *
-     * @return the position
-     */
-    public Integer createPosition() {
-
-        return null;
-    }
-
-    /**
-     * Destroys the position.
-     *
-     * @param p the position
-     */
-    public void destroyPosition(Integer p) {
-    }
-
-    /**
-     * Sets the position.
-     *
-     * @param p the position
-     */
-    public void setPosition(Integer p) {
-
-        this.position = p;
-    }
-
-    /**
-     * Returns the position.
-     *
-     * @return the position
-     */
-    public Integer getPosition() {
-
-        return this.position;
-    }
-
-    //
-    // Following item.
-    //
-    
-    /**
-     * Creates the following item.
-     *
-     * @return the following item
-     */
-    public Item createFollower() {
-
-        return null;
-    }
-
-    /**
-     * Destroys the following item.
-     *
-     * @param f the following item
-     */
-    public void destroyFollower(Item f) {
-    }
-
-    /**
-     * Sets the following item.
-     *
-     * @param f the following item
-     */
-    public void setFollower(Item f) {
-
-        this.follower = f;
-    }
-
-    /**
-     * Returns the following item.
-     *
-     * @return the following item
-     */
-    public Item getFollower() {
-
-        return this.follower;
-    }
-
-    //
-    // Children container.
-    //
-
-    /**
-     * Creates the children container.
-     *
-     * @return the children container
-     */
-    public Item[] createChildren() {
-
-        return new Item[0];
-    }
-
-    /**
-     * Recreates the children array.
-     *
-     * Extends the length of the children array and internally reorganizes it, 
-     * in order to accommodate and access its entries more efficiently.
-     *
-     * @param old the old children array
-     * @return the recreated children array
-     * @exception NullPointerException if the children array is null
-     * @exception NullPointerException if an old item is null
-     */
-    protected Item[] recreate(Item[] old) throws NullPointerException {
-
-        Item[] c = null;
-
-        if (old != null) {
-
-            int oldLength = old.length;
-            int newLength = oldLength * 2 + 1;
-            c = new Item[newLength];
-            int i = 0;
-
-            while (i < oldLength) {
-
-                c[i] = old[i];
-
-                i++;
-            }
-
-/*??
-            Item oldItem = null;
-            int index = 0;
-
-            for (int i = oldLength; i-- > 0;) {
-
-                for (oldItem = old[i]; oldItem != null; oldItem = oldItem.getFollower()) {
-
-                    if (oldItem != null) {
-
-                        index = (oldItem.getHashCode() & 0x7FFFFFFF) % newLength;
-                        oldItem.setFollower(c[index]);
-                        c[index] = oldItem;
-
-                    } else {
-
-                        throw new NullPointerException("Could not extend children array. The old item is null.");
-                    }
-                }
-            }
-*/
-
-        } else {
-
-            throw new NullPointerException("Could not extend children array. The children array is null.");
-        }
-
-        return c;
-    }
-
-    /**
-     * Adjusts the children array.
-     *
-     * If the length limit of the given children array is reached,
-     * a new array with extended length is created and returned.
-     *
-     * @param old the old children array
-     * @return the adjusted children array;
-     * by default, the same array as given as parameter will be returned;
-     * only if the length limit was reached, a new array with extended length
-     * is created and returned
-     *
-     * @exception NullPointerException if the children array is null
-     */
-    protected Item[] adjust(Item[] old) throws NullPointerException {
-
-        Item[] c = old;
-
-        if (old != null) {
-
-            int limit = (int) (old.length * getLimitFactor());
-
-            if (getChildrenNumber() >= limit) {
-
-                // If the children number reaches/ exceeds the limit,
-                // the children array will be extended (rehashed).
-                c = recreate(old);
-                setChildren(c);
-            }
-
-        } else {
-
-            throw new NullPointerException("Could not adjust children array. The children array is null.");
-        }
-
-        return c;
-    }
-
-    /**
-     * Destroys the children container.
-     *
-     * @param c the children container
-     */
-    public void destroyChildren(Item[] c) {
-    }
-
-    /**
-     * Sets the children container.
-     *
-     * @param c the children container
-     */
-    public void setChildren(Item[] c) {
-
-        this.children = c;
-    }
-
-    /**
-     * Returns the children container.
-     *
-     * @return the children container
-     */
-    public Item[] getChildren() {
-
-        return this.children;
-    }
-
-    //
-    // Children number.
-    //
-
-    /**
-     * Creates the children number.
-     *
-     * @return the children number
-     */
-    public int createChildrenNumber() {
-
-        return 0;
-    }
-
-    /**
-     * Destroys the children number.
-     *
-     * @param n the children number
-     */
-    public void destroyChildrenNumber(int n) {
-    }
-
-    /**
-     * Sets the children number.
-     *
-     * @param n the children number
-     */
-    public void setChildrenNumber(int n) {
-
-        this.childrenNumber = n;
-    }
-
-    /**
-     * Returns the children number.
-     *
-     * @return the children number
-     */
-    public int getChildrenNumber() {
-
-        return this.childrenNumber;
-    }
-
-    //
-    // Limit factor.
-    //
-
-    /**
-     * Creates the limit factor.
-     *
-     * @return the limit factor
-     */
-    public double createLimitFactor() {
-
-        return 0.75;
-    }
-
-    /**
-     * Destroys the limit factor.
-     *
-     * @param f the limit factor
-     */
-    public void destroyLimitFactor(double f) {
-    }
-
-    /**
-     * Sets the limit factor.
-     *
-     * @param f the limit factor
-     */
-    public void setLimitFactor(double f) {
-
-        this.limitFactor = f;
-    }
-
-    /**
-     * Returns the limit factor.
-     *
-     * @return the limit factor
-     */
-    public double getLimitFactor() {
-
-        return this.limitFactor;
-    }
-
-    //
-    // Positioning.
-    //
-
-    /**
-     * Creates a positioning.
-     *
-     * @return the positioning
-     */
-    public String createPositioning() {
-
-        return null;
-    }
-
-    /**
-     * Destroys the positioning.
-     *
-     * @param p the positioning
-     */
-    public void destroyPositioning(String p) {
-    }
-
-    /**
-     * Sets the positioning.
-     *
-     * @param p the positioning
-     */
-    public void setPositioning(String p) {
-
-        this.positioning = p;
-    }
-
-    /**
-     * Returns the positioning.
-     *
-     * @return the positioning
-     */
-    public String getPositioning() {
-
-        return this.positioning;
-    }
-
-    //
-    // Java tree node.
-    //
-
-    /**
-     * Creates a java tree node.
-     *
-     * @return the java tree node
-     * @exception NullPointerException if the java tree node is null
-     */
-    public javax.swing.tree.DefaultMutableTreeNode createJavaTreeNode() throws NullPointerException {
-
-        javax.swing.tree.DefaultMutableTreeNode tn = new javax.swing.tree.DefaultMutableTreeNode();
-
-        if (tn != null) {
-
-            tn.setUserObject("Item");
-
-        } else {
-
-            throw new NullPointerException("Could not create java tree node. The java tree node is null.");
-        }
-
-        return tn;
-    }
-
-    /**
-     * Destroys the java tree node.
-     *
-     * @param tn the java tree node
-     */
-    public void destroyJavaTreeNode(javax.swing.tree.DefaultMutableTreeNode tn) {
-    }
-
-    /**
-     * Sets the java tree node.
-     *
-     * @param tn the java tree node
-     */
-    public void setJavaTreeNode(javax.swing.tree.DefaultMutableTreeNode tn) {
-
-        this.javaTreeNode = tn;
-    }
-
-    /**
-     * Returns the java tree node.
-     *
-     * @return the java tree node
-     */
-    public javax.swing.tree.DefaultMutableTreeNode getJavaTreeNode() {
-
-        return this.javaTreeNode;
-    }
-
-    //
-    // Encapsulated java object.
-    //
-    
-    /**
-     * Creates an encapsulated java object.
-     *
-     * @return the encapsulated java object
-     * @exception NullPointerException if the encapsulated java object is null
-     */
-    public java.lang.Object createJavaObject() {
-
-        return null;
-    }
-
-    /**
-     * Destroys the encapsulated java object.
-     *
-     * @param o the encapsulated java object
-     */
-    public void destroyJavaObject(java.lang.Object o) {
-    }
-
-    /**
-     * Sets the encapsulated java object.
-     *
-     * @param o the encapsulated java object
-     */
-    public void setJavaObject(java.lang.Object o) {
-
-        this.javaObject = o;
-    }
-
-    /**
-     * Returns the encapsulated java object.
-     *
-     * @return the encapsulated java object
-     */
-    public java.lang.Object getJavaObject() {
-
-        return this.javaObject;
-    }
-
-    //
-    // Default children.
-    //
-
-    /**
-     * Returns the default action.
-     *
-     * @return the default action
-     */
-    public String getDefaultAction() {
-
-        return null;
-    }
-
-    //
-    // Child management.
-    //
-
-    /**
-     * Creates an item.
-     *
-     * @param n the item class name
-     * @return the item
-     * @exception NullPointerException if the item class is null
-     * @exception NullPointerException if the item is null
-     */
-    public Item createItem(String n) throws Exception {
-
-        Item i = null;
-
-        // If an item class name is set to null, then don't try to create the item.
-        if (n != null) {
-
-            // Find class by name.
-            Class cl = Class.forName((java.lang.String) n.getJavaObject());
-
-            if (cl != null) {
-
-                // Create item from given class.
-                i = (Item) cl.newInstance();
-
-                if (i != null) {
-
-                    java.lang.System.out.println("INFO: Initialize item.");
-                    i.initialize();
-
-                } else {
-        
-                    throw new NullPointerException("Could not create item. The item is null.");
-                }
-
-            } else {
-
-                throw new NullPointerException("Could not create item. The item class is null.");
-            }
-
-        } else {
-
-            java.lang.System.out.println("DEBUG: Could not create item. The item class name is null.");
-        }
-
-        return i;
-    }
-
-    /**
-     * Destroys the item.
-     *
-     * @param i the item
-     * @exception NullPointerException if the item is null
-     */
-    public void destroyItem(Item i) throws Exception {
-
-        if (i != null) {
-
-            java.lang.System.out.println("INFO: Finalize item.");
-            i.finalizz();
-
-        } else {
-
-            java.lang.System.out.println("DEBUG: Could not destroy item. The item is null.");
-        }
-    }
-
-    /**
-     * Sets the item to become a child of this item.
-     *
-     * @param n the name
-     * @param i the item
-     */
-    public void set(String n, Item i) {
-
-        if (i != null) {
-
-            if (replace(n, i) == false) {
-
-                add(n, i);
-            }
-
-        } else {
-
-            java.lang.System.out.println("WARNING: Could not set item. The item is null.");
-        }
-    }
-
-    /**
-     * Adds the item to become a child of this item.
-     *
-     * @param n the name
-     * @param i the item
-     * @exception NullPointerException if the children array is null
-     * @exception NullPointerException if the name is null
-     * @exception NullPointerException if the item is null
-     */
-    public void add(String n, Item i) throws NullPointerException {
-
-        Item[] c = adjust(getChildren());
-
-        if (c != null) {
-
-            if (n != null) {
-
-                int index = getChildrenNumber();
-
-                if (i != null) {
-
-                    // Set meta attributes for item.
-                    // DO NOT use the normal method set(name, item);
-                    // This would lead to an endless loop since for example
-                    // set(Item.NAME, n); would cause to be called repeatedly!
-                    i.setName(n);
-//??                    i.setFollower(c[index]);
-
-                    java.lang.System.out.println("DEBUG: Add child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
-                    addTreeNode(i);
-                    c[index] = i;
-                    setChildrenNumber(index + 1);
-
-                } else {
-
-                    throw new NullPointerException("Could not add item. The item is null.");
-                }
-
-            } else {
-
-                throw new NullPointerException("Could not add item. The name is null.");
-            }
-
-        } else {
-
-            throw new NullPointerException("Could not add item. The children array is null.");
-        }
-    }
-
-    /**
-     * Replaces the child with the given name, if one already exists.
-     *
-     * @param n the name
-     * @param i the item
-     * @return true - if the item was replaced; false - otherwise
-     * @exception NullPointerException if the children array is null
-     * @exception NullPointerException if the name is null
-     * @exception NullPointerException if a child is null
-     * @exception NullPointerException if the item is null
-     */
-    public boolean replace(String n, Item i) throws NullPointerException {
-
-        boolean b = false;
-        Item[] c = getChildren();
-
-        if (c != null) {
-
-            if (n != null) {
-
-                int index = 0;
-                Item child = null;
-
-                while (index < getChildrenNumber()) {
-
-                    child = c[index];
-
-                    if (child != null) {
-
-                        if (n.isEqualTo(child.getName())) {
-
-                            if (i != null) {
-
-                                // Set meta attributes for item.
-                                // DO NOT use the normal method set(name, item);
-                                // This would lead to an endless loop since for example
-                                // set(Item.NAME, n); would cause to be called repeatedly!
-                                i.setName(n);
-//??                                i.setFollower(c[index]);
-
-                                java.lang.System.out.println("DEBUG: Replace child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
-                                addTreeNode(i);
-                                c[index] = i;
-                                b = true;
-
-                                break;
-
-                            } else {
-
-                                throw new NullPointerException("Could not replace item. The item is null.");
-                            }
-                        }
-                        
-                    } else {
-
-                        throw new NullPointerException("Could not replace item. A child is null.");
-                    }
-
-                    index++;
-                }
-        
-            } else {
-    
-                throw new NullPointerException("Could not replace item. The name is null.");
-            }
-
-        } else {
-
-            throw new NullPointerException("Could not replace item. The children array is null.");
-        }
-
-        return b;
-    }
-
-    /**
-     * Removes the child item from this item.
-     *
-     * @param n the name
-     * @exception NullPointerException if the children array is null
-     * @exception NullPointerException if the name is null
-     */
-    public void remove(String n) throws NullPointerException {
-
-	Item[] c = getChildren();
-
-        if (c != null) {
-
-            if (n != null) {
-
-                int index = 0;
-                Item i = null;
-                int no = getChildrenNumber();
-
-                while (index < no) {
-
-                    i = c[index];
-
-                    if (i != null) {
-
-                        if (n.isEqualTo(i.getName())) {
-
-                            // Move all remaining items one place towards the beginning
-                            // of the array.
-                            java.lang.System.out.println("DEBUG: Remove child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
-
-                            while ((index + 1) < no) {
-
-                                c[index] = c[index + 1];
-
-                                index++;
-                            }
-
-                            // The order of these method calls is important for removal of the tree node!
-                            // Set former last item to null.
-                            c[index] = null;
-                            // Finally, reduce children number by one and break the loop.
-                            removeTreeNode(i);
-                            setChildrenNumber(no - 1);
-
-                            break;
-                        }
-
-                    } else {
-
-                        throw new NullPointerException("Could not remove item. An item is null.");
-                    }
-
-                    index++;
-                }
-
-            } else {
-
-                throw new NullPointerException("Could not remove item. The name is null.");
-            }
-
-        } else {
-
-            throw new NullPointerException("Could not remove item. The children array is null.");
-        }
-    }
-
-    /**
-     * Returns the child with the given name.
-     *
-     * @param n the name
-     * @return the child item
-     * @exception NullPointerException if the name is null
-     * @exception NullPointerException if the children array is null
-     * @exception NullPointerException if a child is null
-     */
-    public Item get(String n) throws NullPointerException {
-
-        Item i = null;
-        Item[] c = getChildren();
-
-        if (c != null) {
-
-            if (n != null) {
-
-                int index = 0;
-                Item child = null;
-
-                while (index < getChildrenNumber()) {
-                    
-                    child = c[index];
-    
-                    if (child != null) {
-    
-                        if (n.isEqualTo(child.getName())) {
-
-                            i = child;
-
-                            break;
-                        }
-
-                    } else {
-    
-                        throw new NullPointerException("Could not get item. A child is null.");
-                    }
-
-                    index++;
-                }
-
-            } else {
-
-                throw new NullPointerException("Could not get item. The name is null.");
-            }
-
-        } else {
-
-            throw new NullPointerException("Could not get item. The children array is null.");
-        }
-
-        return i;
-    }
-
-    //
-    // Children categories management.
-    //
-
-    /**
-     * Sets the children category.
-     *
-     * @param n the category name
-     * @param c the category
-     */
-    public void setCategory(String n, String c) {
-
-        Item[] c = getChildrenCategories();
-        
-        set(c);
-    }
-
-    set
-    add
-    replace
-    remove
-    get
-    
-    //
-    // Position management.
-    //
-
-    /**
-     * Creates the position for the child item with the given name.
-     *
-     * @param n the name
-     * @return the position
-     * @exception NullPointerException if the item is null
-     */
-    public Integer createPosition(String n) throws NullPointerException {
-
-        Integer p = null;
-        Item i = get(n);
-
-        if (i != null) {
-
-            p = i.createPosition();
-
-        } else {
-
-            throw new NullPointerException("Could not create position. The item is null.");
-        }
-
-        return p;
-    }
-
-    /**
-     * Destroys the position for the child item with the given name.
-     *
-     * @param n the name
-     * @param p the position
-     * @exception NullPointerException if the item is null
-     */
-    public void destroyPosition(String n, Integer p) throws NullPointerException {
-
-        Item i = get(n);
-
-        if (i != null) {
-
-            i.destroyPosition(p);
-
-        } else {
-
-            throw new NullPointerException("Could not destroy position. The item is null.");
-        }
-    }
-
-    /**
-     * Sets the position for the child item with the given name.
-     *
-     * (positioning/ constellation/ constraints)
-     *
-     * @param n the name
-     * @param p the position
-     * @exception NullPointerException if the item is null
-     */
-    public void setPosition(String n, Integer p) throws NullPointerException {
-
-        Item i = get(n);
-
-        if (i != null) {
-
-            i.setPosition(p);
-
-        } else {
-
-            throw new NullPointerException("Could not set position. The item is null.");
-        }
-    }
-
-    /**
-     * Returns the position for the child item with the given name.
-     *
-     * @param n the name
-     * @return the position
-     * @exception NullPointerException if the item is null
-     */
-    public Integer getPosition(String n) throws NullPointerException {
-
-        Integer p = null;
-        Item i = get(n);
-
-        if (i != null) {
-
-            p = i.getPosition();
-
-        } else {
-
-            throw new NullPointerException("Could not set position. The item is null.");
-        }
-        
-        return p;
-    }
-
-    //
-    // Positioning.
-    //
-
-    /**
-     * Positions the item.
-     *
-     * The item will be positioned according to the given position which
-     * is considered in relation to other items and the whole constellation
-     * of items of this item.
-     *
-     * @param i the item
-     * @param p the position
-     * @exception NullPointerException if the constellation is null
-     */
-/*??
-    public void position(Item i, Position p) throws NullPointerException {
-
-        if (p != null) {
-
-            Constellation c = getConstellation();
-            
-            if (c != null) {
-
-                c.position(i, p);
-
-            } else {
-
-                throw new NullPointerException("Could not position item. The constellation is null.");
-            }
-
-        } else {
-
-            java.lang.System.out.println("DEBUG: Could not position item. The position is null.");
-        }
-    }
-
-    /**
-     * Unpositions the item.
-     *
-     * @param i the item
-     * @param p the position
-     * @exception NullPointerException if the constellation is null
-     */
-/*??
-    public void unposition(Item i, Position p) throws NullPointerException {
-
-        if (p != null) {
-
-            Constellation c = getConstellation();
-            
-            if (c != null) {
-
-                c.unposition(i, p);
-                
-            } else {
-    
-                throw new NullPointerException("Could not unposition item. The constellation is null.");
-            }
-
-        } else {
-
-            java.lang.System.out.println("DEBUG: Could not unposition item. The position is null.");
-        }
-    }
-
-    //
-    // Java tree node management.
-    //
-
-    /**
-     * Adds the java tree node of the item.
-     *
-     * @param i the item
-     * @exception NullPointerException if the java tree node is null
-     * @exception NullPointerException if the item is null
-     */
-    public void addTreeNode(Item i) throws NullPointerException {
-
-        javax.swing.tree.DefaultMutableTreeNode tn = getJavaTreeNode();
-
-        if (tn != null) {
-    
-            if (i != null) {
-
-                tn.add(i.getJavaTreeNode());
-
-            } else {
-    
-                java.lang.System.out.println("DEBUG: Could not add java tree node. The item is null.");
-            }
-    
-        } else {
-    
-            throw new NullPointerException("Could not add java tree node. The java tree node is null.");
-        }
-    }
-
-    /**
-     * Removes the java tree node of the item.
-     *
-     * @param i the item
-     * @exception NullPointerException if the java tree node is null
-     * @exception NullPointerException if the item is null
-     */
-    public void removeTreeNode(Item i) throws NullPointerException {
-
-        javax.swing.tree.DefaultMutableTreeNode tn = getJavaTreeNode();
-
-        if (tn != null) {
-    
-            if (i != null) {
-
-                // This check had to be inserted because signal items have
-                // children that are not child tree nodes of that signal.
-                if (tn.isNodeChild(i.getJavaTreeNode())) {
-
-                    tn.remove(i.getJavaTreeNode());
-                }
-
-            } else {
-    
-                java.lang.System.out.println("DEBUG: Could not remove java tree node. The item is null.");
-            }
-
-        } else {
-
-            throw new NullPointerException("Could not remove java tree node. The java tree node is null.");
-        }
-    }
-
-    //
     // Initializable.
     //
 
@@ -1434,7 +1709,7 @@ public class Item extends State {
         
         super.initialize();
 
-        set(Item.ACTION, getDefaultAction());
+        setChildItem(Item.ACTION, getDefaultAction());
     }
 
     /**
@@ -1442,9 +1717,9 @@ public class Item extends State {
      */
     public void finalizz() throws Exception {
 
-        String action = (String) get(Item.ACTION);
-        remove(Item.ACTION);
-        destroyItem(action);
+        String action = (String) getChildItem(Item.ACTION);
+        removeChildItem(Item.ACTION);
+        destroyChildItem(action);
 
         // The following objects MUST NOT be destroyed here!
         // They actually belong into a destructor method (if it existed in java).
@@ -1484,7 +1759,7 @@ public class Item extends State {
      * @exception NullPointerException if the children array is null
      * @exception NullPointerException if the child item is null
      */
-    public Item get(Space p) throws Exception, NullPointerException {
+    public Item getChildItem(Space p) throws Exception, NullPointerException {
 
         Item child = null;
 /*??
@@ -1526,7 +1801,7 @@ public class Item extends State {
                                 // The child item has children, so call this method
                                 // recursively on child item, to get the child item's
                                 // child item which is located at the given position.
-                                child = item.get(rp);
+                                child = item.getChildItem(rp);
                             }
                         }
                     }
@@ -1559,7 +1834,7 @@ public class Item extends State {
     public boolean contains(Space p) throws Exception, NullPointerException {
 
         boolean b = false;
-        Space s = null; //?? get(Item.SPACE);
+        Space s = null; //?? getChildItem(Item.SPACE);
 
         if (s != null) {
 

@@ -32,7 +32,7 @@ import cybop.core.basic.String;
  * Synonyms for <i>model</i> are <i>protocol</i> or <i>language</i>,
  * i.e. everything that defines a structure for how systems exchange data.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-17 14:50:02 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Model extends GraphicItem {
@@ -69,7 +69,7 @@ public class Model extends GraphicItem {
 
         super.initialize();
 
-        set(Model.OWNER, getDefaultOwner());
+        setChildItem(Model.OWNER, getDefaultOwner());
     }
 
     /**
@@ -77,7 +77,7 @@ public class Model extends GraphicItem {
      */
     public void finalizz() throws Exception {
 
-        remove(Model.OWNER);
+        removeChildItem(Model.OWNER);
 
         super.finalizz();
     }

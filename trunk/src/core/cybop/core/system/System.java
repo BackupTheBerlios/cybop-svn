@@ -60,7 +60,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.7 $ $Date: 2003-04-23 16:03:25 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends Block implements 
@@ -173,9 +173,9 @@ public class System extends Block implements
                 if (s != null) {
 
                     java.lang.System.out.println("INFO: Set global system items.");
-                    s.set(System.CONFIGURATION, createItem(new String("cybop.core.system.chain.Configuration")));
-                    s.set(System.LOG_RECORD, createItem(new String("cybop.core.system.chain.LogRecord")));
-                    s.set(System.SIGNAL_MEMORY, createItem(new String("cybop.core.system.chain.SignalMemory")));
+                    s.setChildItem(System.CONFIGURATION, createChildItem(new String("cybop.core.system.chain.Configuration")));
+                    s.setChildItem(System.LOG_RECORD, createChildItem(new String("cybop.core.system.chain.LogRecord")));
+                    s.setChildItem(System.SIGNAL_MEMORY, createChildItem(new String("cybop.core.system.chain.SignalMemory")));
 
                     java.lang.System.out.println("INFO: Configure system.");
                     s.configure();
@@ -217,17 +217,17 @@ public class System extends Block implements
             s.deconfigure();
 
             java.lang.System.out.println("INFO: Remove global system items.");
-            SignalMemory m = (SignalMemory) s.get(System.SIGNAL_MEMORY);
-            s.remove(System.SIGNAL_MEMORY);
-            destroyItem(m);
+            SignalMemory m = (SignalMemory) s.getChildItem(System.SIGNAL_MEMORY);
+            s.removeChildItem(System.SIGNAL_MEMORY);
+            destroyChildItem(m);
 
-            LogRecord h = (LogRecord) s.get(System.LOG_RECORD);
-            s.remove(System.LOG_RECORD);
-            destroyItem(h);
+            LogRecord h = (LogRecord) s.getChildItem(System.LOG_RECORD);
+            s.removeChildItem(System.LOG_RECORD);
+            destroyChildItem(h);
 
-            Configuration c = (Configuration) s.get(System.CONFIGURATION);
-            s.remove(System.CONFIGURATION);
-            destroyItem(c);
+            Configuration c = (Configuration) s.getChildItem(System.CONFIGURATION);
+            s.removeChildItem(System.CONFIGURATION);
+            destroyChildItem(c);
 
         } else {
 
@@ -342,19 +342,19 @@ public class System extends Block implements
 
         super.configure();
 
-        Configuration c = (Configuration) get(System.CONFIGURATION);
+        Configuration c = (Configuration) getChildItem(System.CONFIGURATION);
 
         if (c != null) {
 
-            setCategory(System.CONTROLLER_CATEGORY, c.get(System.CONTROLLER_CATEGORY, getDefaultControllerCategory()));
-            setCategory(System.SOCKET_ADDRESS_CATEGORY, c.get(System.SOCKET_ADDRESS_CATEGORY, getDefaultSocketAddressCategory()));
-            setCategory(System.IP6_ADDRESS_CATEGORY, c.get(System.IP6_ADDRESS_CATEGORY, getDefaultIp6AddressCategory()));
-            setCategory(System.IP4_ADDRESS_CATEGORY, c.get(System.IP4_ADDRESS_CATEGORY, getDefaultIp4AddressCategory()));
-            setCategory(System.HOST_NAME_CATEGORY, c.get(System.HOST_NAME_CATEGORY, getDefaultHostNameCategory()));
-            setCategory(System.DOMAIN_NAME_CATEGORY, c.get(System.DOMAIN_NAME_CATEGORY, getDefaultDomainNameCategory()));
-            setCategory(System.COMMUNICATION_PARTNERS_COUNT_CATEGORY, c.get(System.COMMUNICATION_PARTNERS_COUNT_CATEGORY, getDefaultCommunicationPartnersCountCategory()));
-            setCategory(System.COMMUNICATION_PARTNER_CATEGORY, c.get(System.COMMUNICATION_PARTNER_CATEGORY, getDefaultCommunicationPartnerCategory()));
-            setCategory(System.USER_CATEGORY, c.get(System.USER_CATEGORY, getDefaultUserCategory()));
+            setChildCategory(System.CONTROLLER_CATEGORY, c.getChildItem(System.CONTROLLER_CATEGORY, getDefaultControllerCategory()));
+            setChildCategory(System.SOCKET_ADDRESS_CATEGORY, c.getChildItem(System.SOCKET_ADDRESS_CATEGORY, getDefaultSocketAddressCategory()));
+            setChildCategory(System.IP6_ADDRESS_CATEGORY, c.getChildItem(System.IP6_ADDRESS_CATEGORY, getDefaultIp6AddressCategory()));
+            setChildCategory(System.IP4_ADDRESS_CATEGORY, c.getChildItem(System.IP4_ADDRESS_CATEGORY, getDefaultIp4AddressCategory()));
+            setChildCategory(System.HOST_NAME_CATEGORY, c.getChildItem(System.HOST_NAME_CATEGORY, getDefaultHostNameCategory()));
+            setChildCategory(System.DOMAIN_NAME_CATEGORY, c.getChildItem(System.DOMAIN_NAME_CATEGORY, getDefaultDomainNameCategory()));
+            setChildCategory(System.COMMUNICATION_PARTNERS_COUNT_CATEGORY, c.getChildItem(System.COMMUNICATION_PARTNERS_COUNT_CATEGORY, getDefaultCommunicationPartnersCountCategory()));
+            setChildCategory(System.COMMUNICATION_PARTNER_CATEGORY, c.getChildItem(System.COMMUNICATION_PARTNER_CATEGORY, getDefaultCommunicationPartnerCategory()));
+            setChildCategory(System.USER_CATEGORY, c.getChildItem(System.USER_CATEGORY, getDefaultUserCategory()));
 
         } else {
 
@@ -369,36 +369,36 @@ public class System extends Block implements
      */
     public void deconfigure() throws Exception, NullPointerException {
 
-        Configuration c = (Configuration) get(System.CONFIGURATION);
+        Configuration c = (Configuration) getChildItem(System.CONFIGURATION);
 
         if (c != null) {
 
-            c.set(System.USER_CATEGORY, getCategory(System.USER_CATEGORY));
-            removeCategory(System.USER_CATEGORY);
+            c.setChildItem(System.USER_CATEGORY, getChildCategory(System.USER_CATEGORY));
+            removeChildCategory(System.USER_CATEGORY);
 
-            c.set(System.COMMUNICATION_PARTNER_CATEGORY, getCategory(System.COMMUNICATION_PARTNER_CATEGORY));
-            removeCategory(System.COMMUNICATION_PARTNER_CATEGORY);
+            c.setChildItem(System.COMMUNICATION_PARTNER_CATEGORY, getChildCategory(System.COMMUNICATION_PARTNER_CATEGORY));
+            removeChildCategory(System.COMMUNICATION_PARTNER_CATEGORY);
 
-            c.set(System.COMMUNICATION_PARTNERS_COUNT_CATEGORY, getCategory(System.COMMUNICATION_PARTNERS_COUNT_CATEGORY));
-            removeCategory(System.COMMUNICATION_PARTNERS_COUNT_CATEGORY);
+            c.setChildItem(System.COMMUNICATION_PARTNERS_COUNT_CATEGORY, getChildCategory(System.COMMUNICATION_PARTNERS_COUNT_CATEGORY));
+            removeChildCategory(System.COMMUNICATION_PARTNERS_COUNT_CATEGORY);
 
-            c.set(System.DOMAIN_NAME_CATEGORY, getCategory(System.DOMAIN_NAME_CATEGORY));
-            removeCategory(System.DOMAIN_NAME_CATEGORY);
+            c.setChildItem(System.DOMAIN_NAME_CATEGORY, getChildCategory(System.DOMAIN_NAME_CATEGORY));
+            removeChildCategory(System.DOMAIN_NAME_CATEGORY);
 
-            c.set(System.HOST_NAME_CATEGORY, getCategory(System.HOST_NAME_CATEGORY));
-            removeCategory(System.HOST_NAME_CATEGORY);
+            c.setChildItem(System.HOST_NAME_CATEGORY, getChildCategory(System.HOST_NAME_CATEGORY));
+            removeChildCategory(System.HOST_NAME_CATEGORY);
 
-            c.set(System.IP4_ADDRESS_CATEGORY, getCategory(System.IP4_ADDRESS_CATEGORY));
-            removeCategory(System.IP4_ADDRESS_CATEGORY);
+            c.setChildItem(System.IP4_ADDRESS_CATEGORY, getChildCategory(System.IP4_ADDRESS_CATEGORY));
+            removeChildCategory(System.IP4_ADDRESS_CATEGORY);
 
-            c.set(System.IP6_ADDRESS_CATEGORY, getCategory(System.IP6_ADDRESS_CATEGORY));
-            removeCategory(System.IP6_ADDRESS_CATEGORY);
+            c.setChildItem(System.IP6_ADDRESS_CATEGORY, getChildCategory(System.IP6_ADDRESS_CATEGORY));
+            removeChildCategory(System.IP6_ADDRESS_CATEGORY);
 
-            c.set(System.SOCKET_ADDRESS_CATEGORY, getCategory(System.SOCKET_ADDRESS_CATEGORY));
-            removeCategory(System.SOCKET_ADDRESS_CATEGORY);
+            c.setChildItem(System.SOCKET_ADDRESS_CATEGORY, getChildCategory(System.SOCKET_ADDRESS_CATEGORY));
+            removeChildCategory(System.SOCKET_ADDRESS_CATEGORY);
 
-            c.set(System.CONTROLLER_CATEGORY, getCategory(System.CONTROLLER_CATEGORY));
-            removeCategory(System.CONTROLLER_CATEGORY);
+            c.setChildItem(System.CONTROLLER_CATEGORY, getChildCategory(System.CONTROLLER_CATEGORY));
+            removeChildCategory(System.CONTROLLER_CATEGORY);
 
         } else {
 
@@ -419,13 +419,13 @@ public class System extends Block implements
 
         super.initialize();
 
-        set(System.CONTROLLER, createComponent(getCategory(System.CONTROLLER_CATEGORY)));
-        set(System.SOCKET_ADDRESS, createComponent(getCategory(System.SOCKET_ADDRESS_CATEGORY)));
-        set(System.IP6_ADDRESS, createComponent(getCategory(System.IP6_ADDRESS_CATEGORY)));
-        set(System.IP4_ADDRESS, createComponent(getCategory(System.IP4_ADDRESS_CATEGORY)));
-        set(System.HOST_NAME, createItem(getCategory(System.HOST_NAME_CATEGORY)));
-        set(System.DOMAIN_NAME, createItem(getCategory(System.DOMAIN_NAME_CATEGORY)));
-        set(System.USER, createComponent(getCategory(System.USER_CATEGORY)));
+        setChildItem(System.CONTROLLER, createComponent((String) getChildCategory(System.CONTROLLER_CATEGORY)));
+        setChildItem(System.SOCKET_ADDRESS, createComponent((String) getChildCategory(System.SOCKET_ADDRESS_CATEGORY)));
+        setChildItem(System.IP6_ADDRESS, createComponent((String) getChildCategory(System.IP6_ADDRESS_CATEGORY)));
+        setChildItem(System.IP4_ADDRESS, createComponent((String) getChildCategory(System.IP4_ADDRESS_CATEGORY)));
+        setChildItem(System.HOST_NAME, createChildItem((String) getChildCategory(System.HOST_NAME_CATEGORY)));
+        setChildItem(System.DOMAIN_NAME, createChildItem((String) getChildCategory(System.DOMAIN_NAME_CATEGORY)));
+        setChildItem(System.USER, createComponent((String) getChildCategory(System.USER_CATEGORY)));
 
         //
         // Communication partners.
@@ -435,19 +435,19 @@ public class System extends Block implements
         int i;
         String s = null;
 
-        set(System.SYSTEMS_COUNT, c.get(System.SYSTEMS_COUNT, createSystemsCount()));
+        setChildItem(System.SYSTEMS_COUNT, c.getChildItem(System.SYSTEMS_COUNT, createSystemsCount()));
 
-        if (get(System.SYSTEMS_COUNT) != null) {
+        if (getChildItem(System.SYSTEMS_COUNT) != null) {
 
             // Retrieve the number of systems and create them one by one.
-            for (i = 0; i < ((Integer) get(System.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+            for (i = 0; i < ((Integer) getChildItem(System.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
 
                 s = new String(System.SYSTEM + "_" + java.lang.String.valueOf(i));
 
-                set(s, createSystem(c.get(loc, new String("")), c.get(args, new String("")), c.get(wp, new String(""))));
+                setChildItem(s, createSystem(c.getChildItem(loc, new String("")), c.getChildItem(args, new String("")), c.getChildItem(wp, new String(""))));
 
                 //?? Testing.
-                set(new String("system_test_user"), createSystem(c.get(loc, new String("cybop.core.system.system.User")), c.get(args, new String("")), c.get(wp, new String(""))));
+                setChildItem(new String("system_test_user"), createSystem(c.getChildItem(loc, new String("cybop.core.system.system.User")), c.getChildItem(args, new String("")), c.getChildItem(wp, new String(""))));
             }
 
         } else {
@@ -467,27 +467,27 @@ public class System extends Block implements
         //
 
 /*??
-        if (get(System.SYSTEMS_COUNT) != null) {
+        if (getChildItem(System.SYSTEMS_COUNT) != null) {
 
             String loc;
             String args; 
             String wp;
             System system = null;
 
-            for (i = 0; i < ((Integer) get(System.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+            for (i = 0; i < ((Integer) getChildItem(System.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
 
                 s = new String(System.SYSTEM + "_" + java.lang.String.valueOf(i));
                 loc = new String(System.SYSTEM_LOCATION + "_" + java.lang.String.valueOf(i));
                 args = new String(System.SYSTEM_ARGUMENTS + "_" + java.lang.String.valueOf(i));
                 wp = new String(System.SYSTEM_WORKPATH + "_" + java.lang.String.valueOf(i));
 
-                system = (System) get(s);
-                remove(s);
+                system = (System) getChildItem(s);
+                removeChildItem(s);
                 destroySystem(system);
             }
 
-            Integer systemsCount = (Integer) get(System.SYSTEMS_COUNT);
-            remove(System.SYSTEMS_COUNT);
+            Integer systemsCount = (Integer) getChildItem(System.SYSTEMS_COUNT);
+            removeChildItem(System.SYSTEMS_COUNT);
             destroySystemsCount(systemsCount);
 
         } else {
@@ -496,32 +496,32 @@ public class System extends Block implements
         }
 */
 
-        User user = (User) get(System.USER);
-        remove(System.USER);
+        User user = (User) getChildItem(System.USER);
+        removeChildItem(System.USER);
         destroyComponent(user);
 
-        String domainName = (String) get(System.DOMAIN_NAME);
-        remove(System.DOMAIN_NAME);
+        String domainName = (String) getChildItem(System.DOMAIN_NAME);
+        removeChildItem(System.DOMAIN_NAME);
 //??            destroyDomainName(domainName);
 
-        String hostName = (String) get(System.HOST_NAME);
-        remove(System.HOST_NAME);
+        String hostName = (String) getChildItem(System.HOST_NAME);
+        removeChildItem(System.HOST_NAME);
 //??            destroyHostName(hostName);
 
-        Ip4Address ip4Address = (Ip4Address) get(System.IP4_ADDRESS);
-        remove(System.IP4_ADDRESS);
-        destroyItem(ip4Address);
+        Ip4Address ip4Address = (Ip4Address) getChildItem(System.IP4_ADDRESS);
+        removeChildItem(System.IP4_ADDRESS);
+        destroyChildItem(ip4Address);
 
-        Ip6Address ip6Address = (Ip6Address) get(System.IP6_ADDRESS);
-        remove(System.IP6_ADDRESS);
-        destroyItem(ip6Address);
+        Ip6Address ip6Address = (Ip6Address) getChildItem(System.IP6_ADDRESS);
+        removeChildItem(System.IP6_ADDRESS);
+        destroyChildItem(ip6Address);
 
-        SocketAddress socketAddress = (SocketAddress) get(System.SOCKET_ADDRESS);
-        remove(System.SOCKET_ADDRESS);
-        destroyItem(socketAddress);
+        SocketAddress socketAddress = (SocketAddress) getChildItem(System.SOCKET_ADDRESS);
+        removeChildItem(System.SOCKET_ADDRESS);
+        destroyChildItem(socketAddress);
 
-        Controller controller = (Controller) get(System.CONTROLLER);
-        remove(System.CONTROLLER);
+        Controller controller = (Controller) getChildItem(System.CONTROLLER);
+        removeChildItem(System.CONTROLLER);
         destroyComponent(controller);
 
         super.finalizz();
@@ -559,7 +559,7 @@ public class System extends Block implements
      */
     public void handle(Signal s, Boolean b) throws Exception, NullPointerException {
 
-        Controller c = (Controller) get(System.CONTROLLER);
+        Controller c = (Controller) getChildItem(System.CONTROLLER);
 
         if (c != null) {
 

@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a button panel.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ButtonPanel extends Panel {
@@ -119,9 +119,9 @@ public class ButtonPanel extends Panel {
      * @param i the item
      * @exception NullPointerException if the name is null
      */
-    public void set(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws NullPointerException {
 
-        super.set(n, i);
+        super.setChildItem(n, i);
 
         if (n != null) {
 
@@ -170,41 +170,41 @@ public class ButtonPanel extends Panel {
      * @param n the name
      * @exception NullPointerException if the name is null
      */
-    public void remove(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws NullPointerException {
 
         if (n != null) {
 
             if (n.isEqualTo(ButtonPanel.OK_BUTTON)) {
 
-                removeOkButton((OkButton) get(n));
+                removeOkButton((OkButton) getChildItem(n));
 
             } else if (n.isEqualTo(ButtonPanel.CANCEL_BUTTON)) {
 
-                removeCancelButton((CancelButton) get(n));
+                removeCancelButton((CancelButton) getChildItem(n));
             
             } else if (n.isEqualTo(ButtonPanel.YES_BUTTON)) {
 
-                removeYesButton((YesButton) get(n));
+                removeYesButton((YesButton) getChildItem(n));
             
             } else if (n.isEqualTo(ButtonPanel.NO_BUTTON)) {
 
-                removeNoButton((NoButton) get(n));
+                removeNoButton((NoButton) getChildItem(n));
             
             } else if (n.isEqualTo(ButtonPanel.APPLY_BUTTON)) {
 
-                removeApplyButton((ApplyButton) get(n));
+                removeApplyButton((ApplyButton) getChildItem(n));
             
             } else if (n.isEqualTo(ButtonPanel.RESET_BUTTON)) {
 
-                removeResetButton((ResetButton) get(n));
+                removeResetButton((ResetButton) getChildItem(n));
             
             } else if (n.isEqualTo(ButtonPanel.HELP_BUTTON)) {
 
-                removeHelpButton((HelpButton) get(n));
+                removeHelpButton((HelpButton) getChildItem(n));
 
             } else if (n.isEqualTo(ButtonPanel.CLOSE_BUTTON)) {
 
-                removeCloseButton((CloseButton) get(n));
+                removeCloseButton((CloseButton) getChildItem(n));
             }
 
         } else {
@@ -212,7 +212,7 @@ public class ButtonPanel extends Panel {
             throw new NullPointerException("Could not remove item. The name is null.");
         }
         
-        super.remove(n);
+        super.removeChildItem(n);
     }
 
     //
@@ -790,14 +790,14 @@ public class ButtonPanel extends Panel {
 
         super.initialize();
 
-        set(ButtonPanel.OK_BUTTON, createComponent(getDefaultOkButton()));
-        set(ButtonPanel.CANCEL_BUTTON, createComponent(getDefaultCancelButton()));
-        set(ButtonPanel.YES_BUTTON, createComponent(getDefaultYesButton()));
-        set(ButtonPanel.NO_BUTTON, createComponent(getDefaultNoButton()));
-        set(ButtonPanel.APPLY_BUTTON, createComponent(getDefaultApplyButton()));
-        set(ButtonPanel.RESET_BUTTON, createComponent(getDefaultResetButton()));
-        set(ButtonPanel.HELP_BUTTON, createComponent(getDefaultHelpButton()));
-        set(ButtonPanel.CLOSE_BUTTON, createComponent(getDefaultCloseButton()));
+        setChildItem(ButtonPanel.OK_BUTTON, createComponent(getDefaultOkButton()));
+        setChildItem(ButtonPanel.CANCEL_BUTTON, createComponent(getDefaultCancelButton()));
+        setChildItem(ButtonPanel.YES_BUTTON, createComponent(getDefaultYesButton()));
+        setChildItem(ButtonPanel.NO_BUTTON, createComponent(getDefaultNoButton()));
+        setChildItem(ButtonPanel.APPLY_BUTTON, createComponent(getDefaultApplyButton()));
+        setChildItem(ButtonPanel.RESET_BUTTON, createComponent(getDefaultResetButton()));
+        setChildItem(ButtonPanel.HELP_BUTTON, createComponent(getDefaultHelpButton()));
+        setChildItem(ButtonPanel.CLOSE_BUTTON, createComponent(getDefaultCloseButton()));
     }
 
     /**
@@ -805,36 +805,36 @@ public class ButtonPanel extends Panel {
      */
     public void finalizz() throws Exception {
 
-        CloseButton closeButton = (CloseButton) get(ButtonPanel.CLOSE_BUTTON);
-        remove(ButtonPanel.CLOSE_BUTTON);
+        CloseButton closeButton = (CloseButton) getChildItem(ButtonPanel.CLOSE_BUTTON);
+        removeChildItem(ButtonPanel.CLOSE_BUTTON);
         destroyComponent(closeButton);
 
-        HelpButton helpButton = (HelpButton) get(ButtonPanel.HELP_BUTTON);
-        remove(ButtonPanel.HELP_BUTTON);
+        HelpButton helpButton = (HelpButton) getChildItem(ButtonPanel.HELP_BUTTON);
+        removeChildItem(ButtonPanel.HELP_BUTTON);
         destroyComponent(helpButton);
 
-        ResetButton resetButton = (ResetButton) get(ButtonPanel.RESET_BUTTON);
-        remove(ButtonPanel.RESET_BUTTON);
+        ResetButton resetButton = (ResetButton) getChildItem(ButtonPanel.RESET_BUTTON);
+        removeChildItem(ButtonPanel.RESET_BUTTON);
         destroyComponent(resetButton);
 
-        ApplyButton applyButton = (ApplyButton) get(ButtonPanel.APPLY_BUTTON);
-        remove(ButtonPanel.APPLY_BUTTON);
+        ApplyButton applyButton = (ApplyButton) getChildItem(ButtonPanel.APPLY_BUTTON);
+        removeChildItem(ButtonPanel.APPLY_BUTTON);
         destroyComponent(applyButton);
 
-        NoButton noButton = (NoButton) get(ButtonPanel.NO_BUTTON);
-        remove(ButtonPanel.NO_BUTTON);
+        NoButton noButton = (NoButton) getChildItem(ButtonPanel.NO_BUTTON);
+        removeChildItem(ButtonPanel.NO_BUTTON);
         destroyComponent(noButton);
 
-        YesButton yesButton = (YesButton) get(ButtonPanel.YES_BUTTON);
-        remove(ButtonPanel.YES_BUTTON);
+        YesButton yesButton = (YesButton) getChildItem(ButtonPanel.YES_BUTTON);
+        removeChildItem(ButtonPanel.YES_BUTTON);
         destroyComponent(yesButton);
 
-        CancelButton cancelButton = (CancelButton) get(ButtonPanel.CANCEL_BUTTON);
-        remove(ButtonPanel.CANCEL_BUTTON);
+        CancelButton cancelButton = (CancelButton) getChildItem(ButtonPanel.CANCEL_BUTTON);
+        removeChildItem(ButtonPanel.CANCEL_BUTTON);
         destroyComponent(cancelButton);
 
-        OkButton okButton = (OkButton) get(ButtonPanel.OK_BUTTON);
-        remove(ButtonPanel.OK_BUTTON);
+        OkButton okButton = (OkButton) getChildItem(ButtonPanel.OK_BUTTON);
+        removeChildItem(ButtonPanel.OK_BUTTON);
         destroyComponent(okButton);
 
         super.finalizz();

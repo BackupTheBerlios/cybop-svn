@@ -32,7 +32,7 @@ import cybop.core.system.chain.*;
 /**
  * This class represents a domain model.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Torsten Kunze <zone3@gmx.de>
  */
@@ -72,11 +72,11 @@ public class DomainModel extends Model {
 
         super.initialize();
 
-        Configuration c = (Configuration) get(DomainModel.CONFIGURATION);
+        Configuration c = (Configuration) getChildItem(DomainModel.CONFIGURATION);
 
         if (c != null) {
 
-            set(DomainModel.SYSTEM_INFORMATION, createComponent(getDefaultSystemInformation()));
+            setChildItem(DomainModel.SYSTEM_INFORMATION, createComponent(getDefaultSystemInformation()));
 
         } else {
 
@@ -91,12 +91,12 @@ public class DomainModel extends Model {
      */
     public void finalizz() throws Exception, NullPointerException {
 
-        Configuration c = (Configuration) get(DomainModel.CONFIGURATION);
+        Configuration c = (Configuration) getChildItem(DomainModel.CONFIGURATION);
 
         if (c != null) {
 
-            SystemInformation systemInformation = (SystemInformation) get(DomainModel.SYSTEM_INFORMATION);
-            remove(DomainModel.SYSTEM_INFORMATION);
+            SystemInformation systemInformation = (SystemInformation) getChildItem(DomainModel.SYSTEM_INFORMATION);
+            removeChildItem(DomainModel.SYSTEM_INFORMATION);
             destroyComponent(systemInformation);
 
         } else {
