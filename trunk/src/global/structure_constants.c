@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2005-01-12 13:41:48 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2005-03-02 07:17:59 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -254,7 +254,7 @@ static const int* DETAILS_SIZES_INDEX = DETAILS_SIZES_INDEX_ARRAY;
 //
 
 /** The internals memory elements count. */
-static const int INTERNALS_MEMORY_ELEMENTS_COUNT_ARRAY[] = {24};
+static const int INTERNALS_MEMORY_ELEMENTS_COUNT_ARRAY[] = {28};
 static const int* INTERNALS_MEMORY_ELEMENTS_COUNT = INTERNALS_MEMORY_ELEMENTS_COUNT_ARRAY;
 
 /** The startup parameters. */
