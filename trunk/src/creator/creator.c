@@ -25,7 +25,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.7 $ $Date: 2004-12-14 12:27:04 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,14 +60,17 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
     // The done flag.
     int d = 0;
+
     // The comparison result.
-    int r = 0;
+    int* r = INTEGER_NULL_POINTER;
+    create_integer((void*) &r);
+    *r = 0;
 
     if (d == 0) {
 
         compare_arrays(p2, p3, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             create_compound(p0, p1);
 
@@ -79,7 +82,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             create_string(p0, p1);
 
@@ -91,7 +94,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             create_string(p0, p1);
 
@@ -103,7 +106,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &BOOLEAN_ABSTRACTION, (void*) &BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             create_integer(p0);
 
@@ -115,7 +118,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             create_integer(p0);
 
@@ -127,7 +130,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &VECTOR_ABSTRACTION, (void*) &VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             create_vector(p0, p1);
 
@@ -139,7 +142,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &DOUBLE_ABSTRACTION, (void*) &DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             create_double(p0, p1);
 
@@ -151,7 +154,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &FRACTION_ABSTRACTION, (void*) &FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             create_fraction(p0, p1);
 
@@ -163,7 +166,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &COMPLEX_ABSTRACTION, (void*) &COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             create_complex(p0, p1);
 
@@ -175,7 +178,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &TIME_ABSTRACTION, (void*) &TIME_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             create_time(p0, p1);
 
@@ -187,7 +190,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             create_xml_node(p0, p1);
 
@@ -199,7 +202,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &HXP_ABSTRACTION, (void*) &HXP_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             create_xml_node(p0, p1);
 
@@ -211,13 +214,15 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             create_signal_memory(p0, p1);
 
             d = 1;
         }
     }
+
+    destroy_integer((void*) &r);
 }
 
 /**
@@ -232,14 +237,17 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
     // The done flag.
     int d = 0;
+
     // The comparison result.
-    int r = 0;
+    int* r = INTEGER_NULL_POINTER;
+    create_integer((void*) &r);
+    *r = 0;
 
     if (d == 0) {
 
         compare_arrays(p2, p3, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             destroy_compound(p0, p1);
 
@@ -251,7 +259,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             destroy_string(p0, p1);
 
@@ -263,7 +271,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             destroy_string(p0, p1);
 
@@ -275,7 +283,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &BOOLEAN_ABSTRACTION, (void*) &BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             destroy_integer(p0);
 
@@ -287,7 +295,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             destroy_integer(p0);
 
@@ -299,7 +307,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &VECTOR_ABSTRACTION, (void*) &VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             destroy_vector(p0, p1);
 
@@ -311,7 +319,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &DOUBLE_ABSTRACTION, (void*) &DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             destroy_double(p0, p1);
 
@@ -323,7 +331,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &FRACTION_ABSTRACTION, (void*) &FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             destroy_fraction(p0, p1);
 
@@ -335,7 +343,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &COMPLEX_ABSTRACTION, (void*) &COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             destroy_complex(p0, p1);
 
@@ -347,7 +355,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &TIME_ABSTRACTION, (void*) &TIME_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             destroy_time(p0, p1);
 
@@ -359,7 +367,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             destroy_xml_node(p0, p1);
 
@@ -371,7 +379,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &HXP_ABSTRACTION, (void*) &HXP_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             destroy_xml_node(p0, p1);
 
@@ -383,13 +391,15 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         compare_arrays(p2, p3, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             destroy_signal_memory(p0, p1);
 
             d = 1;
         }
     }
+
+    destroy_integer((void*) &r);
 }
 
 /* CREATOR_SOURCE */

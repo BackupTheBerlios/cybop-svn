@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.50 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
+ * @version $Revision: 1.51 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,7 +68,7 @@
  * - destroy internals
  * - destroy global variables
  *
- * @param p0 the argument count (argc)
+ * @param p0 the argument count (argc), the first argument being the command
  * @param p1 the argument vector (argv)
  * @return the return value
  */
@@ -104,7 +104,7 @@ int main(int p0, char** p1) {
             // Internals.
             //
 
-            // The internal ist a pointer to array with 4 colums
+            // The internal is a pointer to array with 4 colums
             // colum 1:  pointer for the value
             // colum 2:  type for the value
             // colum 3:  count for the value
@@ -119,7 +119,7 @@ int main(int p0, char** p1) {
             // Signal memory.
             //
 
-            // The signal memory and its count and size.
+            // The signal memory.
             void** pp_m = NULL_POINTER;
             int* p_mc = NULL_POINTER;
             int* p_ms = NULL_POINTER;
@@ -288,7 +288,7 @@ int main(int p0, char** p1) {
 
             // get the new main signal id
             int main_sig_id = 0;
-            get_new_main_signal_id( pp_m, p_mc, &main_sig_id );
+            get_new_signal_id(pp_m, p_mc, &main_sig_id);
 
             // Add startup signal to signal memory.
             set_signal( pp_m, p_mc, p_ms,   //memory

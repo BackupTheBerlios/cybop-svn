@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2004-12-19 00:53:19 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -265,9 +265,8 @@ void remove_signal(void* p0, void* p1, void* p2, const void* p3) {
  * @param p9 the signal priority
  * @param main_sig_id the main signal id
  */
-void get_signal(const void* p0, const void* p1, const void* p2,
-    void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9,
-    int* main_signal_id) {
+void get_signal(const void* p0, const void* p1, const void* p2, void* p3, void* p4,
+    void* p5, void* p6, void* p7, void* p8, void* p9, int* main_signal_id) {
 
     if (p2 != NULL_POINTER) {
 
@@ -293,7 +292,7 @@ void get_signal(const void* p0, const void* p1, const void* p2,
                 // The main signal id.
                 void* ids = NULL_POINTER;
 
-                // Get abstractions, models, details, priorities.
+                // Get abstractions, models, details, priorities, ids.
                 get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) &ONE_ELEMENT_COUNT);
                 get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) &ONE_ELEMENT_COUNT);
                 get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &m, (void*) &ONE_ELEMENT_COUNT);
@@ -305,7 +304,7 @@ void get_signal(const void* p0, const void* p1, const void* p2,
 
                 if (**i < **c) {
 
-                    // Get abstraction, model, details, priority.
+                    // Get abstraction, model, details, priority, id.
                     get_array_elements((void*) &a, (void*) &POINTER_ARRAY, p2, p3, (void*) &ONE_ELEMENT_COUNT);
                     get_array_elements((void*) &ac, (void*) &POINTER_ARRAY, p2, p4, (void*) &ONE_ELEMENT_COUNT);
                     get_array_elements((void*) &m, (void*) &POINTER_ARRAY, p2, p5, (void*) &ONE_ELEMENT_COUNT);
@@ -420,7 +419,7 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
  * @param p1 the signal memory count
  * @param p2 the signal id
  */
-void* get_new_main_signal_id(const void* p0, const void* p1, void* p2) {
+void* get_new_signal_id(const void* p0, const void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
 

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2004-12-19 00:53:19 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -169,7 +169,7 @@ void send_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     if (p4 != NULL_POINTER) {
 
-        int* sc = (int*) p4;
+        int** sc = (int**) p4;
 
         if (p3 != NULL_POINTER) {
 
@@ -189,9 +189,12 @@ void send_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
                     // The temporary null-terminated message.
                     char* tmp = NULL_POINTER;
-                    int tmps = *sc + 1;
+                    int tmps = **sc + 1;
+
                     // The index.
-                    int i = 0;
+                    int* i = INTEGER_NULL_POINTER;
+                    create_integer((void*) &i);
+                    *i = 0;
 
                     // Create temporary null-terminated message.
                     create_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
@@ -199,9 +202,11 @@ void send_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                     // Copy original message to temporary null-terminated message.
                     set_array_elements((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
                     // This is used as index to set the termination character.
-                    i = *sc;
+                    *i = **sc;
                     // Add string termination to temporary null-terminated message.
                     set_array_elements((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CONTROL_CHARACTER, (void*) &NULL_CONTROL_CHARACTER_COUNT);
+
+                    destroy_integer((void*) &i);
 
                     fputs(tmp, (FILE*) *d);
                     fputs("\n", (FILE*) *d);

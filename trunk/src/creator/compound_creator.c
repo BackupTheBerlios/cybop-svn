@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a compound model in memory
  *
- * @version $Revision: 1.4 $ $Date: 2004-12-13 22:47:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,18 +79,18 @@ void create_compound(void* p0, const void* p1) {
 
     // Set names, abstractions, models, details.
     // CAUTION! Use ascending order, as compared to destruction!
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &nc);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_INDEX, (void*) &m);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_COUNTS_INDEX, (void*) &mc);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_SIZES_INDEX, (void*) &ms);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_INDEX, (void*) &d);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_COUNTS_INDEX, (void*) &dc);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_SIZES_INDEX, (void*) &ds);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n, (void*) &ONE_ELEMENT_COUNT);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &nc, (void*) &ONE_ELEMENT_COUNT);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns, (void*) &ONE_ELEMENT_COUNT);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a, (void*) &ONE_ELEMENT_COUNT);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) &ONE_ELEMENT_COUNT);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as, (void*) &ONE_ELEMENT_COUNT);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_INDEX, (void*) &m, (void*) &ONE_ELEMENT_COUNT);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_COUNTS_INDEX, (void*) &mc, (void*) &ONE_ELEMENT_COUNT);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_SIZES_INDEX, (void*) &ms, (void*) &ONE_ELEMENT_COUNT);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_INDEX, (void*) &d, (void*) &ONE_ELEMENT_COUNT);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_COUNTS_INDEX, (void*) &dc, (void*) &ONE_ELEMENT_COUNT);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_SIZES_INDEX, (void*) &ds, (void*) &ONE_ELEMENT_COUNT);
 }
 
 /**
@@ -118,33 +118,33 @@ void destroy_compound(void* p0, const void* p1) {
     void* ds = NULL_POINTER;
 
     // Get names, abstractions, models, details.
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &nc);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_INDEX, (void*) &m);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_COUNTS_INDEX, (void*) &mc);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_SIZES_INDEX, (void*) &ms);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_INDEX, (void*) &d);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_COUNTS_INDEX, (void*) &dc);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_SIZES_INDEX, (void*) &ds);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &nc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_INDEX, (void*) &m, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_COUNTS_INDEX, (void*) &mc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_SIZES_INDEX, (void*) &ms, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_INDEX, (void*) &d, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_COUNTS_INDEX, (void*) &dc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_SIZES_INDEX, (void*) &ds, (void*) &ONE_ELEMENT_COUNT);
 
     // Remove names, abstractions, models, details.
     // CAUTION! Use descending order, as compared to creation!
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &DETAILS_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &DETAILS_COUNTS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &DETAILS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &MODELS_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &MODELS_COUNTS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &MODELS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &ABSTRACTIONS_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &ABSTRACTIONS_COUNTS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &ABSTRACTIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &NAMES_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &NAMES_COUNTS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &NAMES_INDEX);
+    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &DETAILS_SIZES_INDEX, (void*) &ONE_ELEMENT_COUNT);
+    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &DETAILS_COUNTS_INDEX, (void*) &ONE_ELEMENT_COUNT);
+    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &DETAILS_INDEX, (void*) &ONE_ELEMENT_COUNT);
+    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &MODELS_SIZES_INDEX, (void*) &ONE_ELEMENT_COUNT);
+    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &MODELS_COUNTS_INDEX, (void*) &ONE_ELEMENT_COUNT);
+    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &MODELS_INDEX, (void*) &ONE_ELEMENT_COUNT);
+    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &ONE_ELEMENT_COUNT);
+    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &ONE_ELEMENT_COUNT);
+    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &ABSTRACTIONS_INDEX, (void*) &ONE_ELEMENT_COUNT);
+    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &NAMES_SIZES_INDEX, (void*) &ONE_ELEMENT_COUNT);
+    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &NAMES_COUNTS_INDEX, (void*) &ONE_ELEMENT_COUNT);
+    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &NAMES_INDEX, (void*) &ONE_ELEMENT_COUNT);
 
     // Destroy names, abstractions, models, details.
     destroy_array((void*) &n, (void*) &POINTER_ARRAY, p1);

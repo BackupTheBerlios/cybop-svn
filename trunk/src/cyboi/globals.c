@@ -21,13 +21,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-12-20 00:19:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef GLOBALS_SOURCE
 #define GLOBALS_SOURCE
 
+#include "../global/log_constants.c"
 #include "../global/variables.c"
 
 /**

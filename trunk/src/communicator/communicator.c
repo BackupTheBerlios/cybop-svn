@@ -25,7 +25,7 @@
  * - receive data into a byte array
  * - send data from a byte array
  *
- * @version $Revision: 1.3 $ $Date: 2004-09-08 23:34:11 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,14 +62,17 @@ void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p
 
     // The done flag.
     int d = 0;
+
     // The comparison result.
-    int r = 0;
+    int* r = INTEGER_NULL_POINTER;
+    create_integer((void*) &r);
+    *r = 0;
 
     if (d == 0) {
 
         compare_arrays(p5, p6, (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             receive_inline(p0, p1, p2, p3, p4);
 
@@ -81,7 +84,7 @@ void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p
 
         compare_arrays(p5, p6, (void*) &FILE_CHANNEL, (void*) &FILE_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             receive_file(p0, p1, p2, p3, p4);
 
@@ -93,7 +96,7 @@ void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p
 
         compare_arrays(p5, p6, (void*) &FTP_CHANNEL, (void*) &FTP_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             receive_ftp(p0, p1, p2, p3, p4);
 
@@ -105,13 +108,15 @@ void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p
 
         compare_arrays(p5, p6, (void*) &HTTP_CHANNEL, (void*) &HTTP_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             receive_http(p0, p1, p2, p3, p4);
 
             d = 1;
         }
     }
+
+    destroy_integer((void*) &r);
 }
 
 /**
@@ -134,14 +139,17 @@ void send_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
     // The done flag.
     int d = 0;
+
     // The comparison result.
-    int r = 0;
+    int* r = INTEGER_NULL_POINTER;
+    create_integer((void*) &r);
+    *r = 0;
 
     if (d == 0) {
 
         compare_arrays(p5, p6, (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             send_inline(p0, p1, p2, p3, p4);
 
@@ -153,7 +161,7 @@ void send_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         compare_arrays(p5, p6, (void*) &FILE_CHANNEL, (void*) &FILE_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             send_file(p0, p1, p2, p3, p4);
 
@@ -165,7 +173,7 @@ void send_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         compare_arrays(p5, p6, (void*) &FTP_CHANNEL, (void*) &FTP_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             send_ftp(p0, p1, p2, p3, p4);
 
@@ -177,13 +185,15 @@ void send_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         compare_arrays(p5, p6, (void*) &HTTP_CHANNEL, (void*) &HTTP_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             send_http(p0, p1, p2, p3, p4);
 
             d = 1;
         }
     }
+
+    destroy_integer((void*) &r);
 }
 
 /* COMMUNICATOR_SOURCE */

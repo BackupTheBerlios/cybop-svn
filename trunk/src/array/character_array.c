@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.16 $ $Date: 2004-12-19 00:53:19 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -539,8 +539,7 @@ void get_character_array_elements_index(const void* p0, const void* p1, const vo
                         // The element.
                         void* e = NULL_POINTER;
                         // The comparison result.
-                        int* r = INTEGER_NULL_POINTER;
-                        create_integer((void*) &r);
+                        int* r = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
                         *r = 0;
                         // The size.
                         int s = 0;
@@ -572,7 +571,7 @@ void get_character_array_elements_index(const void* p0, const void* p1, const vo
                             j++;
                         }
 
-                        destroy_integer((void*) &r);
+                        free(r);
 
                     } else {
 

@@ -25,7 +25,7 @@
  * - receive an inline stream into a byte array
  * - send an inline stream from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-14 22:20:33 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,29 +50,33 @@ void receive_inline(void* p0, void* p1, void* p2, const void* p3, const void* p4
 
     if (p4 != NULL_POINTER) {
 
-        int* ic = (int*) p4;
+        int** sc = (int**) p4;
 
         if (p2 != NULL_POINTER) {
 
-            int* as = (int*) p2;
+            int** ds = (int**) p2;
 
             if (p1 != NULL_POINTER) {
 
-                int* ac = (int*) p1;
+                int** dc = (int**) p1;
 
                 // Set new array size.
-                *as = *ic;
+                **ds = **sc;
 
                 // Resize array.
                 resize_array(p0, (void*) &CHARACTER_ARRAY, p2);
 
-                // The array index to start writing at.
-                int i = 0;
+                // The destination array index to start writing at.
+                int* i = INTEGER_NULL_POINTER;
+                create_integer((void*) &i);
+                *i = 0;
 
                 set_array_elements(p0, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
 
+                destroy_integer((void*) &i);
+
                 // Set new array count.
-                *ac = *ic;
+                **dc = **sc;
 
             } else {
 

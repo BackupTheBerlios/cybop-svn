@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2004-12-08 14:08:19 $ $Author: rholzmueller $
+ * @version $Revision: 1.13 $ $Date: 2004-12-20 00:19:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -67,7 +67,7 @@
  * @param p6 the double internals
  * @param pp_thread_parameter the only one thread parameter (typ void**)
  */
-void activate_internals( void** pp_internals ) {
+void activate_internals(void** pp_internals) {
 
     //
     // Unix socket.
@@ -87,7 +87,7 @@ void activate_internals( void** pp_internals ) {
 //    }
 
     //
-    // tcp socket
+    // TCP socket.
     //
 
     int* p_tcp_socket_active = NULL_POINTER;
@@ -102,7 +102,6 @@ void activate_internals( void** pp_internals ) {
 
         //activate_tcp_socket( pp_internals );
     }
-}
 
 /*??
     //
@@ -123,7 +122,7 @@ void activate_internals( void** pp_internals ) {
 
     init_x();
 */
-
+}
 
 /**
  * Waits for signals.
@@ -139,124 +138,112 @@ void activate_internals( void** pp_internals ) {
  * @param p8 the pointer internals
  * @param p9 the double internals
  */
-void  wait( void** pp_internal ) {
+void wait(void** pp_internal) {
 
-    // activate internal mechanisms for signal reception
-    activate_internals( pp_internal );
+    // Activate internal mechanisms for signal reception.
+    activate_internals(pp_internal);
 
     int internal_type = 0;
 
-    //separated paramter from the internals
-    void** pp_sig_memory = NULL_POINTER;
-    void* p_sig_memory_count = NULL_POINTER;
-    void* p_sig_memory_size = NULL_POINTER;
+    // The signal memory and knowledge model.
+    void* m = NULL_POINTER;
+    void* mc = NULL_POINTER;
+    void* ms = NULL_POINTER;
+    void* k = NULL_POINTER;
+    void* kc = NULL_POINTER;
+    void* ks = NULL_POINTER;
 
-    void** pp_knowledge = NULL_POINTER;
-    void* p_knowledge_count = NULL_POINTER;
-    void* p_knowledge_size = NULL_POINTER;
-
-    get_internal( pp_internal, (void*) &pp_sig_memory,
-                  (void*) &internal_type,
-                  (void*) &INTERNAL_SIGNAL_MEMORY_INDEX );
-    get_internal( pp_internal, (void*) &p_sig_memory_count,
-                  (void*) &internal_type,
-                  (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX );
-    get_internal( pp_internal, (void*) &p_sig_memory_size,
-                  (void*) &internal_type,
-                  (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX );
-
-    get_internal( pp_internal, (void*) &pp_knowledge,
-              (void*) &internal_type,
-              (void*) &INTERNAL_KNOWLEDGE_MODEL_INDEX );
-    get_internal( pp_internal, (void*) &p_knowledge_count,
-              (void*) &internal_type,
-              (void*) &INTERNAL_KNOWLEDGE_MODEL_COUNT_INDEX );
-    get_internal( pp_internal, (void*) &p_knowledge_size,
-              (void*) &internal_type,
-              (void*) &INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX );
+    // Get signal memory and knowledge model.
+    get_internal(pp_internal, (void*) &m, (void*) &internal_type, (void*) &INTERNAL_SIGNAL_MEMORY_INDEX);
+    get_internal(pp_internal, (void*) &mc, (void*) &internal_type, (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX);
+    get_internal(pp_internal, (void*) &ms, (void*) &internal_type, (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX);
+    get_internal(pp_internal, (void*) &k, (void*) &internal_type, (void*) &INTERNAL_KNOWLEDGE_MODEL_INDEX);
+    get_internal(pp_internal, (void*) &kc, (void*) &internal_type, (void*) &INTERNAL_KNOWLEDGE_MODEL_COUNT_INDEX);
+    get_internal(pp_internal, (void*) &ks, (void*) &internal_type, (void*) &INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX);
 
     // The shutdown flag.
-    int f = 0;
-
+    int* f = INTEGER_NULL_POINTER;
+    create_integer((void*) &f);
+    *f = 0;
     // The abstraction.
     void* a = NULL_POINTER;
-    int ac = 0;
+    void* ac = NULL_POINTER;
     // The signal (operation).
     void* s = NULL_POINTER;
-    int sc = 0;
+    void* sc = NULL_POINTER;
     // The parameters (details).
     void* p = NULL_POINTER;
-    int pc = 0;
+    void* pc = NULL_POINTER;
     // The priority.
-    int pr = NORMAL_PRIORITY;
+    void* pr = NULL_POINTER;
     // The main signal id
-    int main_sig_id = 0;
-
+    void* id = NULL_POINTER;
     // The highest priority index.
-    int i = -1;
-
+    int* i = INTEGER_NULL_POINTER;
+    create_integer((void*) &i);
+    *i = -1;
     // The done flag.
     int d = 0;
     // The comparison result.
-    int r = 0;
+    int* r = INTEGER_NULL_POINTER;
+    create_integer((void*) &r);
+    *r = 0;
 
     log_message((void*) &INFO_LOG_LEVEL, (void*) &WAIT_FOR_SIGNALS_MESSAGE, (void*) &WAIT_FOR_SIGNALS_MESSAGE_COUNT);
 
     // Run endless loop checking signal memory for signals.
     while (1) {
 
-        if (f == 1) {
+        if (*f == 1) {
 
             // Leave loop if the shutdown flag was set.
             break;
         }
 
-        sleep(1);
+        //?? For testing only. TODO: Delete this line later!
+//??        sleep(1);
 
-        //test_knowledge_model( pp_knowledge, p_knowledge_count );
+        //?? Test knowledge model. TODO: Delete later!
+//??        test_knowledge_model((void*) &k, (void*) &kc);
 
         // Get index of the top priority signal.
-        get_highest_priority_index( pp_sig_memory,
-                                    p_sig_memory_count,
-                                    (void*) &i );
+        get_highest_priority_index((void*) &m, (void*) &mc, (void*) &i);
 
-        //fals kein Signal anliegt, so auf eingabe von Web warten
-        if (i<0) {
+/*??
+        //?? Wait for web input, if no signal is in memory. TODO: Use a thread for this!
+        if (i < 0) {
 
-            run_tcp_socket( pp_internal );
+            run_tcp_socket((void*) &pp_internal);
         }
+*/
 
-        if (i >= 0) {
+        if (*i >= 0) {
 
             // Get signal.
-            get_signal( pp_sig_memory, p_sig_memory_count,
-                        (void*) &i,
-                        (void*) &a, (void*) &ac,
-                        (void*) &s, (void*) &sc,
-                        (void*) &p, (void*) &pc,
-                        (void*) &pr, (void*) &main_sig_id );
+            get_signal((void*) &m, (void*) &mc, (void*) &i,
+                (void*) &a, (void*) &ac, (void*) &s, (void*) &sc,
+                (void*) &p, (void*) &pc, (void*) &pr, (void*) &id);
 
-    fprintf(stderr, "wait i: %i\n", i);
-    fprintf(stderr, "wait a: %s\n", a);
-    fprintf(stderr, "wait ac: %i\n", ac);
-    fprintf(stderr, "wait s: %s\n", s);
-    fprintf(stderr, "wait sc: %i\n", sc);
-    fprintf(stderr, "wait p: %i\n", p);
-    fprintf(stderr, "wait pc: %i\n", pc);
-    fprintf(stderr, "wait pr: %i\n", pr);
-    fprintf(stderr, "wait id: %i\n", main_sig_id);
+            //?? For testing only. TODO: Delete these lines later!
+            fprintf(stderr, "wait i: %i\n", *i);
+            fprintf(stderr, "wait a: %s\n", a);
+            fprintf(stderr, "wait ac: %i\n", **((int**) ac));
+            fprintf(stderr, "wait s: %s\n", s);
+            fprintf(stderr, "wait sc: %i\n", **((int**) sc));
+            fprintf(stderr, "wait p: %i\n", p);
+            fprintf(stderr, "wait pc: %i\n", **((int**) pc));
+            fprintf(stderr, "wait pr: %i\n", **((int**) pr));
+            fprintf(stderr, "wait id: %i\n", **((int**) id));
+            fprintf(stderr, "wait knowledge model: %s\n", "");
 
-    fprintf(stderr, "wait knowledge model: %s\n", "");
-//??    test_knowledge_model(p3, p4);
-
-            // Remove signal.
-            remove_signal( pp_sig_memory, p_sig_memory_count,
-                           p_sig_memory_size,
-                           (void*) &i);
+            // Remove signal from signal memory.
+            remove_signal((void*) &m, (void*) &mc, (void*) &ms, (void*) &i);
 
             // CAUTION! Do NOT destroy signal here!
-            // Signals are static and stored in the logic knowledge tree
-            // which gets created at system startup and destroyed at system shutdown.
+            // Signals are stored in the logic knowledge tree which gets created
+            // at system startup and destroyed at system shutdown.
+            //?? TODO: Is this still true? A signal only encapsulates a logic model.
+            //?? So the signal possibly needs to be destroyed, only not the logic model!
 
             //
             // Handle compound signal.
@@ -266,13 +253,10 @@ void  wait( void** pp_internal ) {
 
                 compare_arrays((void*) &a, (void*) &ac, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                if (r == 1) {
+                if (*r == 1) {
 
-                    handle_compound_signal(
-                        (void*) &s, (void*) &sc, (void*) &pr,
-                        (void*) &main_sig_id,
-                        (void*) pp_sig_memory,
-                        (void*) p_sig_memory_count, (void*) p_sig_memory_size );
+                    handle_compound_signal((void*) &s, (void*) &sc, (void*) &pr,
+                        (void*) &id, (void*) &m, (void*) &mc, (void*) &ms);
 
                     d = 1;
                 }
@@ -286,15 +270,11 @@ void  wait( void** pp_internal ) {
 
                 compare_arrays((void*) &a, (void*) &ac, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                if (r == 1) {
+                if (*r == 1) {
 
-                    handle_operation_signal(
-                        (void*) &s, (void*) &sc,
-                        (void*) &p, (void*) &pc,
-                        (void*) pp_knowledge,
-                        (void*) p_knowledge_count, (void*) p_knowledge_size,
-                        (void*) &main_sig_id, pp_internal,
-                        (void*) &f );
+                    handle_operation_signal((void*) &s, (void*) &sc, (void*) &p, (void*) &pc,
+                        (void*) &k, (void*) &kc, (void*) &ks,
+                        (void*) &id, (void*) &pp_internal, (void*) &f);
 
                     d = 1;
                 }
@@ -311,25 +291,29 @@ void  wait( void** pp_internal ) {
 
             // Reset abstraction.
             a = NULL_POINTER;
-            ac = 0;
+            ac = NULL_POINTER;
             // Reset signal (operation).
             s = NULL_POINTER;
-            sc = 0;
+            sc = NULL_POINTER;
             // Reset parameters (details).
             p = NULL_POINTER;
-            pc = 0;
+            pc = NULL_POINTER;
             // Reset priority.
-            pr = NORMAL_PRIORITY;
+            pr = NULL_POINTER;
             // Reset main signal id.
-            main_sig_id = 0;
+            id = NULL_POINTER;
             // Reset highest priority index.
-            i = -1;
+            *i = -1;
             // Reset done flag.
             d = 0;
             // Reset comparison result.
-            r = 0;
+            *r = 0;
         }
     }
+
+    destroy_integer((void*) &r);
+    destroy_integer((void*) &i);
+    destroy_integer((void*) &f);
 }
 
 /* SIGNAL_WAITER_SOURCE */

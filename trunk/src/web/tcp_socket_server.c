@@ -23,7 +23,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.8 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-12-20 00:19:44 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -299,20 +299,22 @@ void handle_request( void** pp_internals, int* p_client_socket_number ) {
             //
     
             int main_sig_id = 0;
-            get_new_main_signal_id( pp_signal_memory, p_signal_memory_count, 
-                                    (void*) &main_sig_id );
+
+            get_new_signal_id(pp_signal_memory, p_signal_memory_count, (void*) &main_sig_id);
+
             set_signal( pp_signal_memory, p_signal_memory_count, p_signal_memory_size,   //memory
                         (void*) &da, (void*) &dac,              //dest abtsraction
                         (void*) &dm, (void*) &dmc,              //dest model
                         (void*) &dd, (void*) &ddc,              //dest details
                         (void*) &NORMAL_PRIORITY,
                         (void*) &main_sig_id );
+
             log_message_debug( "set start signals" );
-            
+
             //
             add_main_signal_id( pp_internals, (void*) &main_sig_id );
             add_client_socket_number( pp_internals, p_client_socket_number );
-        }  // comp_res<>1  favicon must ignoried    
+        }  // comp_res<>1  favicon must ignoried
     }
 }
 

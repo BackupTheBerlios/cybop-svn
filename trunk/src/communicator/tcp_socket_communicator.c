@@ -25,7 +25,7 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.2 $ $Date: 2004-12-08 14:13:27 $ $Author: rholzmueller $
+ * @version $Revision: 1.3 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,35 +52,51 @@ void receive_tcp_socket(void* p0, void* p1, void* p2, const void* p3, const void
 /**
  * Sends an http stream that was read from a byte array.
  *
- * @param p0 the destination (socket number)
+ * @param p0 the destination (client socket number)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source (byte array)
  * @param p4 the source count
  */
-void send_tcp_socket( int* p_client_socket_number, void* p1, void* p2, 
-                      const void** pp_source, const void* p_source_count ) {
+void send_tcp_socket(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
-    if ( p_client_socket_number == NULL_POINTER ) {
-        log_message_debug( "p_client_socket_number is a NULL pointer" );
-    }
-    else if ( pp_source == NULL_POINTER ) {
-        log_message_debug( "pp_source is a NULL pointer" );
-    }
-    else if ( p_source_count == NULL_POINTER ) {
-        log_message_debug( "p_source_count is a NULL pointer" );
-    }
-    else {
+    if (p4 != NULL_POINTER) {
 
-        char* ausgabe = *((char**) pp_source);
-        int ausgabe_count = *((int*) p_source_count);
-        int send_byte = 0;
-        
-        send_byte = send (*p_client_socket_number, ausgabe, ausgabe_count, 0);
-        if ( send_byte < 0 ) {
-         
-            log_message_debug( "error on sending off the tcp socket" );
+        int** sc = (int**) p4;
+
+        if (p3 != NULL_POINTER) {
+
+            void** s = (void**) p3;
+
+            if (p0 != NULL_POINTER) {
+
+                int** d = (int**) p0;
+
+                // The output.
+                void* o = *s;
+                // The output count.
+                int oc = **sc;
+                // The send byte gets returned.
+                int b = send(**d, o, oc, 0);
+
+                if (b < 0) {
+
+                    log_message_debug("ERROR: Could not send via tcp socket.");
+                }
+
+            } else {
+
+                log_message_debug("ERROR: The destination (client socket number) is null.");
+            }
+
+        } else {
+
+            log_message_debug("ERROR: The source is null.");
         }
+
+    } else {
+
+        log_message_debug("ERROR: The source count is null.");
     }
 }
 
