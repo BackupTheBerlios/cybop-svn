@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.25 $ $Date: 2004-04-22 08:54:56 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2004-04-28 14:35:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -158,7 +158,7 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
                     int i = -1;
                     get_array_element_index(p2, (void*) &CHARACTER_ARRAY, p3, (void*) &OPERATION_PARAMETER_SEPARATOR, (void*) &i);
 
-                    if (i != -1) {
+                    if (i >= 0) {
 
                         // Reset parameter size if a separator is found and more parameters exist.
                         // Example: "operation,parameter"
@@ -175,7 +175,10 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
                         void* pas = NULL_POINTER;
 
                         // Get elements.
+    fprintf(stderr, "s1: %d\n", s);
                         get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARAMETERS_SIZE_INDEX, (void*) &s);
+    //?? size is wrong! negative!
+    fprintf(stderr, "s2: %d\n", s);
                         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &pa);
                         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_INDEX, (void*) &pas);
 
@@ -187,15 +190,19 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
 
                         // Resize elements.
                         resize_array(pa, (void*) &s);
+    fputs("TEST B\n", stderr);
                         resize_array(pas, (void*) &s);
 
                         // Set size.
+    fputs("TEST C\n", stderr);
                         set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARAMETERS_SIZE_INDEX, (void*) &s);
+    fputs("TEST D\n", stderr);
 
                         if (index < s) {
 
                             // Set parameter.
                             set_array_element((void*) &pa, (void*) &POINTER_ARRAY, (void*) &index, p0);
+    fputs("TEST E\n", stderr);
                             set_array_element((void*) &pas, (void*) &INTEGER_ARRAY, (void*) &index, (void*) &size);
 
                             if (i != -1) {

@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.5 $ $Date: 2004-04-22 13:25:32 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-04-28 14:35:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -89,9 +89,12 @@ void test_pointer_cast() {
  */
 void test_character_array_single_element() {
 
-    char* m = CHARACTER_NULL_POINTER;
-    int s = 5;
-    create_array((void*) &m, (void*) &s);
+    // Character array.
+    fputs("Character array:\n", stdout);
+
+    void* ca = NULL_POINTER;
+    int cas = 5;
+    create_array((void*) &ca, (void*) &cas);
 
     int i1 = 0;
     char c1 = 'a';
@@ -104,15 +107,56 @@ void test_character_array_single_element() {
     int i5 = 4;
     char c5 = '\0';
 
-    set_array_element((void*) &m, (void*) &CHARACTER_ARRAY, (void*) &i1, (void*) &c1);
-    set_array_element((void*) &m, (void*) &CHARACTER_ARRAY, (void*) &i2, (void*) &c2);
-    set_array_element((void*) &m, (void*) &CHARACTER_ARRAY, (void*) &i3, (void*) &c3);
-    set_array_element((void*) &m, (void*) &CHARACTER_ARRAY, (void*) &i4, (void*) &c4);
-    set_array_element((void*) &m, (void*) &CHARACTER_ARRAY, (void*) &i5, (void*) &c5);
+    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &i1, (void*) &c1);
+    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &i2, (void*) &c2);
+    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &i3, (void*) &c3);
+    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &i4, (void*) &c4);
+    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &i5, (void*) &c5);
 
-    fputs(m, stdout);
+    fputs((char*) ca, stdout);
 
-    destroy_array((void*) &m, (void*) &s);
+    destroy_array((void*) &ca, (void*) &cas);
+
+    // Integer array.
+    fputs("Integer array:\n", stdout);
+
+    void* ia = NULL_POINTER;
+    int ias = 5;
+    create_array((void*) &ia, (void*) &ias);
+
+    int ia1s = 0;
+    int ia1 = 'a';
+    int i2 = 1;
+    char c2 = 'b';
+    int i3 = 2;
+    char c3 = 'c';
+    int i4 = 3;
+    char c4 = '\n';
+    int i5 = 4;
+    char c5 = '\0';
+
+    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &i1, (void*) &c1);
+    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &i2, (void*) &c2);
+    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &i3, (void*) &c3);
+    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &i4, (void*) &c4);
+    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &i5, (void*) &c5);
+
+    // Print out array contents.
+    int j = 0;
+
+    while (1) {
+
+        if (j >= ias) {
+
+            break;
+        }
+
+        fprintf(stderr, "ia: %d\n", ia[j]);
+
+        j++;
+    }
+
+    destroy_array((void*) &ia, (void*) &ias);
 }
 
 /**
@@ -121,7 +165,7 @@ void test_character_array_single_element() {
 void test_character_array_multiple_elements() {
 
     // The destination array.
-    char* d = CHARACTER_NULL_POINTER;
+    void* d = NULL_POINTER;
     int ds = 20;
     create_array((void*) &d, (void*) &ds);
 
@@ -185,8 +229,8 @@ void test() {
 //    test_stdout_stderr();
 //    test_character_array_with_termination();
 //    test_pointer_cast();
-//    test_character_array_single_element();
-    test_character_array_multiple_elements();
+    test_character_array_single_element();
+//    test_character_array_multiple_elements();
 }
 
 /* TEST_SOURCE */
