@@ -37,7 +37,7 @@
  *         map = position_abstraction_attribute
  *         (attributes 0..9 = size 10)
  *
- * @version $Revision: 1.4 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-06-11 19:34:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,7 +45,7 @@
 #define CYBOL_SOURCE
 
 #include <stdio.h>
-#include "../constants/constants.c"
+#include "../constant/constant.c"
 #include "../logger/logger.c"
 
 //

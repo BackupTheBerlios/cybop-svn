@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.1 $ $Date: 2004-06-11 19:10:25 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-06-11 19:34:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,16 +32,16 @@
 
 #include "../cybol/file.c"
 #include "../logger/logger.c"
-#include "../statics/boolean.c"
-#include "../statics/complex.c"
-#include "../statics/compound.c"
-#include "../statics/double.c"
-#include "../statics/fraction.c"
-#include "../statics/integer.c"
-#include "../statics/operation.c"
-#include "../statics/string.c"
-#include "../statics/time.c"
-#include "../statics/vector.c"
+#include "../state/boolean.c"
+#include "../state/complex.c"
+#include "../state/compound.c"
+#include "../state/double.c"
+#include "../state/fraction.c"
+#include "../state/integer.c"
+#include "../state/operation.c"
+#include "../state/string.c"
+#include "../state/time.c"
+#include "../state/vector.c"
 
 /**
  * Reads a persistent model into an array.

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-06-11 19:10:25 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-06-11 19:34:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,7 +29,7 @@
 #define ADD_SOURCE
 
 #include "../logger/logger.c"
-#include "../statics/compound.c"
+#include "../state/compound.c"
 
 /**
  * Adds two summands resulting in the sum.

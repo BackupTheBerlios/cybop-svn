@@ -25,7 +25,7 @@
  *
  * It controls the input and output of x windows.
  *
- * @version $Revision: 1.20 $ $Date: 2004-05-26 14:13:50 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2004-06-11 19:34:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,11 +38,11 @@
 //?? #include <X11/X.h>
 //?? #include <X11/Xatom.h>
 //?? #include <X11/Xfuncs.h>
-#include <X11/Xlib.h>
+//??#include <X11/Xlib.h>
 //?? #include <X11/Xos.h>
 //?? #include <X11/Xproto.h>
 //?? #include <X11/Xresource.h>
-#include <X11/Xutil.h>
+//??#include <X11/Xutil.h>
 #include "../logger/logger.c"
 #include "../x_windows/x_windows.c"
 
@@ -136,6 +136,7 @@ void init_x() {
  */
 void send_x_windows_output(void* p0, void* p1, void* p2) {
 
+/*??
     struct x_windows* x = (struct x_windows*) p2;
 
     if (x != NULL_POINTER) {
@@ -240,6 +241,7 @@ void send_x_windows_output(void* p0, void* p1, void* p2) {
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle send x windows output. The x windows is null.");
     }
+*/
 }
 
 //
@@ -257,6 +259,7 @@ void send_x_windows_output(void* p0, void* p1, void* p2) {
  */
 void receive_expose_x_windows_input(void* p0, void* p1, void* p2) {
 
+/*??
     struct x_windows* x = (struct x_windows*) p1;
 
     if (x != NULL_POINTER) {
@@ -364,6 +367,7 @@ void receive_expose_x_windows_input(void* p0, void* p1, void* p2) {
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not receive expose x windows input. The x windows is null.");
     }
+*/
 }
 
 /**
@@ -375,7 +379,7 @@ void receive_expose_x_windows_input(void* p0, void* p1, void* p2) {
  */
 void receive_mapping_notify_x_windows_input(void* p0) {
 
-    XRefreshKeyboardMapping((XMappingEvent*) p0);
+//??    XRefreshKeyboardMapping((XMappingEvent*) p0);
 }
 
 /**
@@ -389,6 +393,7 @@ void receive_mapping_notify_x_windows_input(void* p0) {
  */
 void receive_key_press_x_windows_input(void* p0, void* p1, void* p2) {
 
+/*??
     struct x_windows* x = (struct x_windows*) p1;
 
     if (x != NULL_POINTER) {
@@ -450,6 +455,7 @@ void receive_key_press_x_windows_input(void* p0, void* p1, void* p2) {
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not receive key press x windows input. The x windows is null.");
     }
+*/
 }
 
 /**
@@ -463,6 +469,7 @@ void receive_key_press_x_windows_input(void* p0, void* p1, void* p2) {
  */
 void receive_button_press_x_windows_input(void* p0, void* p1, void* p2) {
 
+/*??
     struct x_windows* x = (struct x_windows*) p1;
 
     if (x != NULL_POINTER) {
@@ -517,6 +524,7 @@ void receive_button_press_x_windows_input(void* p0, void* p1, void* p2) {
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not receive button press x windows input. The x windows is null.");
     }
+*/
 }
 
 /**
@@ -527,6 +535,7 @@ void receive_button_press_x_windows_input(void* p0, void* p1, void* p2) {
  */
 void receive_x_windows_input(void* p0, void* p1) {
 
+/*??
     struct x_windows* x = (struct x_windows*) p1;
 
     if (x != NULL_POINTER) {
@@ -567,6 +576,7 @@ void receive_x_windows_input(void* p0, void* p1) {
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not receive x windows input. The x windows is null.");
     }
+*/
 }
 
 //??

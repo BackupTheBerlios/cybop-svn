@@ -29,7 +29,7 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.1 $ $Date: 2004-06-11 19:10:25 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-06-11 19:34:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,7 +37,7 @@
 #define BOOLEAN_SOURCE
 
 #include "../array/array.c"
-#include "../constants/constants.c"
+#include "../constant/constant.c"
 #include "../logger/logger.c"
 
 //

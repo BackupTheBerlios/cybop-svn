@@ -32,7 +32,7 @@
  * A signal is a transient logic model.
  * It is stored in the computer's random access memory (ram).
  *
- * @version $Revision: 1.24 $ $Date: 2004-06-11 18:50:16 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2004-06-11 19:34:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,12 +40,12 @@
 #define SIGNAL_MEMORY_SOURCE
 
 #include "../array/array.c"
-#include "../constants/constants.c"
-#include "../dynamics/add.c"
-#include "../dynamics/create_model.c"
-#include "../dynamics/destroy_model.c"
+#include "../constant/constant.c"
+#include "../logic/add.c"
+#include "../logic/create_model.c"
+#include "../logic/destroy_model.c"
 #include "../logger/logger.c"
-#include "../statics/compound.c"
+#include "../state/compound.c"
 #include "../x_windows/x_windows_handler.c"
 
 //

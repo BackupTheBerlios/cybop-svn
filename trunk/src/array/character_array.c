@@ -39,14 +39,14 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.5 $ $Date: 2004-05-29 15:15:15 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-06-11 19:34:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CHARACTER_ARRAY_SOURCE
 #define CHARACTER_ARRAY_SOURCE
 
-#include "../constants/constants.c"
+#include "../constant/constant.c"
 #include "../logger/logger.c"
 
 //
