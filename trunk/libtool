@@ -41,7 +41,7 @@ available_tags=" CXX GCJ"
 
 # ### BEGIN LIBTOOL CONFIG
 
-# Libtool was configured on host pi24:
+# Libtool was configured on host chris.tuxtax:
 
 # Shell to use when invoking shell scripts.
 SHELL="/bin/sh"
@@ -79,7 +79,7 @@ CC="gcc"
 with_gcc=yes
 
 # The linker used to build libraries.
-LD="/usr/i486-suse-linux/bin/ld"
+LD="/usr/bin/ld"
 
 # Whether we need hard or soft links.
 LN_S="ln -s"
@@ -144,19 +144,19 @@ need_lib_prefix=no
 need_version=no
 
 # Whether dlopen is supported.
-dlopen_support=yes
+dlopen_support=unknown
 
 # Whether dlopen of programs is supported.
-dlopen_self=yes
+dlopen_self=unknown
 
 # Whether dlopen of statically linked programs is supported.
-dlopen_self_static=yes
+dlopen_self_static=unknown
 
 # Compiler flag to prevent dynamic linking.
 link_static_flag="-static"
 
 # Compiler flag to turn off builtin functions.
-no_builtin_flag=" -fno-builtin -fno-rtti -fno-exceptions"
+no_builtin_flag=" -fno-builtin"
 
 # Compiler flag to allow reflexive dlopens.
 export_dynamic_flag_spec="\${wl}--export-dynamic"
@@ -5893,7 +5893,7 @@ build_old_libs=`case $build_libtool_libs in yes) echo no;; *) echo yes;; esac`
 # End:
 # ### BEGIN LIBTOOL TAG CONFIG: CXX
 
-# Libtool was configured on host pi24:
+# Libtool was configured on host chris.tuxtax:
 
 # Shell to use when invoking shell scripts.
 SHELL="/bin/sh"
@@ -5931,7 +5931,7 @@ CC="g++"
 with_gcc=no
 
 # The linker used to build libraries.
-LD="/usr/i486-suse-linux/bin/ld"
+LD="/usr/bin/ld"
 
 # Whether we need hard or soft links.
 LN_S="ln -s"
@@ -5996,13 +5996,13 @@ need_lib_prefix=no
 need_version=no
 
 # Whether dlopen is supported.
-dlopen_support=yes
+dlopen_support=unknown
 
 # Whether dlopen of programs is supported.
-dlopen_self=yes
+dlopen_self=unknown
 
 # Whether dlopen of statically linked programs is supported.
-dlopen_self_static=yes
+dlopen_self_static=unknown
 
 # Compiler flag to prevent dynamic linking.
 link_static_flag=""
@@ -6170,7 +6170,7 @@ include_expsyms=""
 
 # ### BEGIN LIBTOOL TAG CONFIG: GCJ
 
-# Libtool was configured on host pi24:
+# Libtool was configured on host chris.tuxtax:
 
 # Shell to use when invoking shell scripts.
 SHELL="/bin/sh"
@@ -6254,7 +6254,7 @@ libext="a"
 exeext=""
 
 # Additional compiler flags for building library objects.
-pic_flag=" -fPIC -DPIC"
+pic_flag=" -DPIC"
 pic_mode=default
 
 # What is the maximum length of a command?
@@ -6273,19 +6273,19 @@ need_lib_prefix=no
 need_version=no
 
 # Whether dlopen is supported.
-dlopen_support=yes
+dlopen_support=unknown
 
 # Whether dlopen of programs is supported.
-dlopen_self=yes
+dlopen_self=unknown
 
 # Whether dlopen of statically linked programs is supported.
-dlopen_self_static=yes
+dlopen_self_static=unknown
 
 # Compiler flag to prevent dynamic linking.
 link_static_flag="-static"
 
 # Compiler flag to turn off builtin functions.
-no_builtin_flag=" -fno-builtin -fno-rtti -fno-exceptions"
+no_builtin_flag=" -fno-builtin"
 
 # Compiler flag to allow reflexive dlopens.
 export_dynamic_flag_spec=""

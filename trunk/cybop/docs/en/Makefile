@@ -1,6 +1,5 @@
-# Generated automatically from Makefile.in by config.pl.
 # Makefile.in generated automatically by automake 1.5 from Makefile.am.
-# KDE tags expanded automatically by am_edit - $Revision: 1.1 $ 
+# KDE tags expanded automatically by am_edit - $Revision: 1.2 $ 
 
 # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001
 # Free Software Foundation, Inc.
@@ -21,7 +20,7 @@ SHELL = /bin/sh
 
 srcdir = .
 top_srcdir = ../../..
-VPATH = .
+
 prefix = /usr/local
 exec_prefix = ${prefix}
 
@@ -42,12 +41,12 @@ pkglibdir = $(libdir)/cybop
 pkgincludedir = $(includedir)/cybop
 top_builddir = ../../..
 
-ACLOCAL = ${SHELL} /home/cybop/admin/missing --run aclocal
-AUTOCONF = ${SHELL} /home/cybop/admin/missing --run autoconf
-AUTOMAKE = ${SHELL} /home/cybop/admin/missing --run automake
-AUTOHEADER = ${SHELL} /home/cybop/admin/missing --run autoheader
+ACLOCAL = aclocal
+AUTOCONF = autoconf
+AUTOMAKE = automake
+AUTOHEADER = autoheader
 
-INSTALL = /usr/bin/ginstall -c -p
+INSTALL = /usr/bin/install -c -p
 INSTALL_PROGRAM = ${INSTALL} $(INSTALL_STRIP_FLAG)
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_SCRIPT = ${INSTALL}
@@ -65,11 +64,11 @@ host_alias = i386-linux
 host_triplet = i386-pc-linux-gnu
 target_alias = i386-linux
 target_triplet = i386-pc-linux-gnu
-AMTAR = ${SHELL} /home/cybop/admin/missing --run tar
+AMTAR = @AMTAR@
 ARTSCCONFIG = @ARTSCCONFIG@
 AS = @AS@
 AUTODIRS = 
-AWK = gawk
+AWK = @AWK@
 CC = gcc
 CONF_FILES =  $(top_srcdir)/configure.in.in
 CPP = cpp
@@ -78,7 +77,7 @@ CXXCPP = g++ -E
 DCOPIDL = @DCOPIDL@
 DCOPIDL2CPP = @DCOPIDL2CPP@
 DCOP_DEPENDENCIES = @DCOP_DEPENDENCIES@
-DEPDIR = .deps
+DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 DOXYGEN = @DOXYGEN@
 DOXYGEN_PROJECT_NAME = @DOXYGEN_PROJECT_NAME@
@@ -94,7 +93,7 @@ GLLIB = @GLLIB@
 GMSGFMT = @GMSGFMT@
 IDL = @IDL@
 IDL_DEPENDENCIES = @IDL_DEPENDENCIES@
-INSTALL_STRIP_PROGRAM = ${SHELL} $(install_sh) -c -s
+INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 JAR = @JAR@
 JAVAC = @JAVAC@
 JAVAH = @JAVAH@
@@ -123,7 +122,7 @@ LIBDL = @LIBDL@
 LIBGEN = @LIBGEN@
 LIBJPEG = @LIBJPEG@
 LIBMICO = @LIBMICO@
-LIBOBJS = @LIBOBJS@
+LIBOBJS = 
 LIBPNG = @LIBPNG@
 LIBPTHREAD = @LIBPTHREAD@
 LIBPYTHON = @LIBPYTHON@
@@ -203,10 +202,10 @@ X_LDFLAGS = @X_LDFLAGS@
 X_PRE_LIBS = @X_PRE_LIBS@
 all_includes =  
 all_libraries =  
-am__include = include
-am__quote = 
+am__include = @am__include@
+am__quote = @am__quote@
 idldir = @idldir@
-install_sh = /home/cybop/admin/install-sh
+install_sh = @install_sh@
 jni_includes = @jni_includes@
 kde_appsdir = @kde_appsdir@
 kde_bindir = @kde_bindir@
