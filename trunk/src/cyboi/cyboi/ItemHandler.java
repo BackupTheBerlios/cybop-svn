@@ -65,7 +65,7 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.8 $ $Date: 2003-07-22 12:04:39 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-07-22 15:05:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -173,7 +173,7 @@ class ItemHandler {
             
         } else {
             
-            java.lang.System.out.println("ERROR: The abstraction is null.");
+            java.lang.System.out.println("ERROR: Could not create item element. The abstraction is null.");
         }
 
         return item;
@@ -374,197 +374,208 @@ class ItemHandler {
     /**
      * Initializes the item.
      *
-     * @param item the item
+     * Parses the file of the given category.
+     *
+     * @param i the item
      * @param c the category
      */
-    static void initialize(java.lang.Object item, java.lang.Object c) throws Exception {
+    static void initialize(java.lang.Object i, java.lang.Object c) throws Exception {
 
         org.apache.xerces.parsers.DOMParser p = (org.apache.xerces.parsers.DOMParser) ItemHandler.xml_parser;
-        org.w3c.dom.Document doc = new org.apache.xerces.dom.DocumentImpl();
-        java.lang.String f = c + ".cybol";
 
         if (p != null) {
             
+            java.lang.String f = c + ".cybol";
+
             p.parse(f);
             java.lang.System.out.println("INFO: Parsed file: " + f);
             
-            doc = p.getDocument();
+            org.w3c.dom.Document d = p.getDocument();
+
+            ItemHandler.process_document(i, d);
             
-            if (doc != null) {
-                
-                doc.normalize();
-        
-                org.w3c.dom.NodeList l = null;
-                org.w3c.dom.Node n = null;
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not initialize item. The parser is null.");
+        }
+    }
 
-/*??
-                l = doc.getElementsByTagName("name");
-                
-                if (l != null) {
-                    
-                    n = l.item(0);
-                    
-                    if (n != null) {
-                        
-                        String name = n.getNodeValue();
-                        java.lang.System.out.println("INFO: Read name: " + name);
-                        
-                    } else {
-                        
-                        java.lang.System.out.println("ERROR: The node is null.");
-                    }
-                    
-                } else {
-                    
-                    java.lang.System.out.println("ERROR: The node list is null.");
-                }
-                    
-                l = doc.getElementsByTagName("super");
-                
-                if (l != null) {
-                    
-                    n = l.item(0);
-                    
-                    if (n != null) {
-                        
-                        String superCategory = n.getNodeValue();
-                        java.lang.System.out.println("INFO: Read super: " + superCategory);
-                        
-                    } else {
-                        
-                        java.lang.System.out.println("ERROR: The node is null.");
-                    }
-                    
-                } else {
-                    
-                    java.lang.System.out.println("ERROR: The node list is null.");
-                }
-*/
-                    
-                l = doc.getElementsByTagName("item");
+    /**
+     * Processes the item document.
+     *
+     * @param i the item
+     * @param d the document
+     */
+    static void process_document(java.lang.Object item, java.lang.Object d) {
 
-                if (l != null) {
-                    
-                    int size = l.getLength();
-                    int i = 0;
-                    org.w3c.dom.NamedNodeMap m = null;
-                    int msize = 0;
-                    int j = 0;
-                    org.w3c.dom.Node a = null;
-                    java.lang.String name = null;
-                    java.lang.String abstraction = null;
-                    java.lang.String category = null;
-       
-                    while (i < size) {
-                    
-                        n = l.item(i);
+        org.w3c.dom.Document doc = (org.w3c.dom.Document) d;
 
-                        if (n != null) {
-                                
-/*??
-                            item = n.getNodeValue();
-                            java.lang.System.out.println("INFO: Read item: " + item);
-*/
-                        
-                            m = n.getAttributes();
+        if (doc != null) {
+            
+            doc.normalize();
     
-                            name = ItemHandler.getAttribute(m, "name");
-                            java.lang.System.out.println(name);
+            org.w3c.dom.NodeList l = null;
+
+            l = doc.getElementsByTagName("name");
+            ItemHandler.process_name(i, l);
+            
+            l = doc.getElementsByTagName("super");
+            ItemHandler.process_super(i, l);
+                
+            l = doc.getElementsByTagName("item");
+            ItemHandler.process_items(i, l);
+
+        } else {
+            
+            java.lang.System.out.println("ERROR: The document is null.");
+        }
+    }
     
-                            category_abstraction = ItemHandler.getAttribute(m, "category_abstraction");
-                            java.lang.System.out.println(category_abstraction);
-                            category = ItemHandler.getAttribute(m, "category");
-                            java.lang.System.out.println(category);
-                            java.lang.Object category_child = create_item_element(category_abstraction, category);
-                            add_item_element(item, name, category_child);
-    
-                            space_abstraction = ItemHandler.getAttribute(m, "space_abstraction");
-                            java.lang.System.out.println(space_abstraction);
-                            space = ItemHandler.getAttribute(m, "space");
-                            java.lang.System.out.println(space);
-                            java.lang.Object space_child = create_item_element(space_abstraction, space);
-                            add_item_element(item, name, space_child);
+    /**
+     * Processes the name node element.
+     *
+     * @param i the item
+     * @param l the node list
+     */
+    static void process_name(java.lang.Object i, java.lang.Object l) {
 
-                            time_abstraction = ItemHandler.getAttribute(m, "time_abstraction");
-                            java.lang.System.out.println(time_abstraction);
-                            time = ItemHandler.getAttribute(m, "time");
-                            java.lang.System.out.println(time);
-                            java.lang.Object time_child = create_item_element(time_abstraction, time);
-                            add_item_element(item, name, time_child);
-
-                        } else {
-                            
-                            java.lang.System.out.println("ERROR: The node is null.");
-                        }
-                        
-                        i++;
-                    }
-                    
-                } else {
-                    
-                    java.lang.System.out.println("ERROR: The node list is null.");
-                }
-
+        if (l != null) {
+            
+            org.w3c.dom.Node n = l.item(0);
+            
+            if (n != null) {
+                
+                java.lang.Object name = n.getNodeValue();
+                java.lang.System.out.println("INFO: Read name: " + name);
+                
             } else {
                 
-                java.lang.System.out.println("ERROR: The document is null.");
+                java.lang.System.out.println("ERROR: Could not process the name. The node is null.");
             }
             
         } else {
             
-            java.lang.System.out.println("ERROR: The parser is null.");
+            java.lang.System.out.println("ERROR: Could not process the name. The node list is null.");
         }
-            
-/*??
-        File f = new File(c);
-        XmlItem xml = null;
+    }
 
-        while (f != eof) {
+    /**
+     * Processes the super node element.
+     *
+     * @param i the item
+     * @param l the node list
+     */
+    static void process_super(java.lang.Object i, java.lang.Object l) {
 
-            xml = readNextItem(f);
-
-            initialize(i, xml);
-        }
-*/
-
-/*??
-        File f = new File("/home/cybop/src/cybol/cybol/test.xml");
-        FileReader r = new FileReader(f);
-        int ci;
+        if (l != null) {
         
-        while (true) {
-        
-            ci = r.read();
+            org.w3c.dom.Node n = l.item(0);
             
-            if (ci != -1) {
-            
-               System.out.println(ci);
-            
+            if (n != null) {
+                
+                java.lang.Object super_category = n.getNodeValue();
+                java.lang.System.out.println("INFO: Read super: " + super_category);
+                
             } else {
                 
-                break;
+                java.lang.System.out.println("ERROR: Could not process the super. The node is null.");
             }
+            
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not process the super. The node list is null.");
         }
+    }
+
+    /**
+     * Processes the item node elements.
+     *
+     * @param i the item
+     * @param l the node list
+     */
+    static void process_items(java.lang.Object i, java.lang.Object l) {
+
+        if (l != null) {
         
-        r.close();
+            int j = 0;
+            int size = l.getLength();
+            org.w3c.dom.Node n = null;
+            org.w3c.dom.NamedNodeMap m = null;
+            java.lang.Object item = null;
+
+            while (j < size) {
+            
+                n = l.item(j);
+
+                if (n != null) {
+
+                    // Read and process attributes.
+                    m = n.getAttributes();
+                    process_node_map(i, m);
+
+/*??
+                    // Read serialized child items.
+                    item = n.getNodeValue();
+                    java.lang.System.out.println("INFO: Read item.");
 */
+                
+                } else {
+                    
+                    java.lang.System.out.println("ERROR: Could not process the items. The node is null.");
+                }
+                
+                i++;
+            }
+            
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not process the items. The node list is null.");
+        }
+    }
+
+    /**
+     * Processes the attribute node map.
+     *
+     * @param i the item
+     * @param m the node map
+     */
+    static void process_node_map(java.lang.Object i, java.lang.Object m) {
+
+        name = ItemHandler.getAttribute(m, ItemElement.NAME);
+        
+        category_abstraction = ItemHandler.getAttribute(m, ItemElement.CATEGORY_ABSTRACTION);
+        category = ItemHandler.getAttribute(m, ItemElement.CATEGORY);
+        java.lang.Object category_child = create_item_element(category_abstraction, category);
+        add_item_element(item, name, category_child);
+        
+        space_abstraction = ItemHandler.getAttribute(m, ItemElement.SPACE_ABSTRACTION);
+        space = ItemHandler.getAttribute(m, ItemElement.SPACE);
+        java.lang.Object space_child = create_item_element(space_abstraction, space);
+        add_item_element(item, name, space_child);
+        
+        time_abstraction = ItemHandler.getAttribute(m, ItemElement.TIME_ABSTRACTION);
+        time = ItemHandler.getAttribute(m, ItemElement.TIME);
+        java.lang.Object time_child = create_item_element(time_abstraction, time);
+        add_item_element(item, name, time_child);
+        
+        java.lang.System.out.println("INFO: Successfully read item: " + name);
     }
 
     /**
      * Returns the attribute.
      *
-     * @param c the attributes container
+     * @param m the node map
      * @param n the name
      * @return the attribute
      */
-    static java.lang.Object get_attribute(java.lang.Object c, java.lang.Object n) {
+    static java.lang.Object get_attribute(java.lang.Object m, java.lang.Object n) {
     
         java.lang.Object a = null;
-        org.w3c.dom.NamedNodeMap ac = (org.w3c.dom.NamedNodeMap) c;
+        org.w3c.dom.NamedNodeMap am = (org.w3c.dom.NamedNodeMap) m;
 
-        if (ac != null) {
+        if (am != null) {
     
-            org.w3c.dom.Node e = ac.getNamedItem(n);
+            org.w3c.dom.Node e = am.getNamedItem(n);
             
             if (e != null) {
                 
@@ -577,73 +588,12 @@ class ItemHandler {
         
         } else {
             
-            java.lang.System.out.println("ERROR: Could not get attribute. The attributes container is null.");
+            java.lang.System.out.println("ERROR: Could not get attribute. The node map is null.");
         }
 
         return a;
     }
     
-    /**
-     * Reads a sub array as a sequence of bytes.
-     *
-     * @param b the byte array into which the data are written
-     * @param o the offset in the data
-     * @param n the number of bytes to be written
-     */
-/*??
-    static void readbytes(byte[] b, int o, int n) {
-
-        // Code.
-        
-        // See: Aelfred XMLParser!
-    }
-
-    /**
-     * Initializes the item.
-     *
-     * @param i the item
-     * @param c the category
-     */
-/*??
-    static void initialize(java.lang.Object i, java.lang.Object c) {
-
-        String name = tmp.name;
-        String abstraction = tmp.abstraction;
-        String category = tmp.category;
-        String position = tmp.position;
-
-        if (abstraction != null) {
-
-            if (abstraction.equals(Main.INTEGER_PRIMITIVE)) {
-
-                i = createIntegerPrimitive(category);
-
-            } else if (abstraction.equals(Main.FLOAT_PRIMITIVE)) {
-
-                i = createFloatPrimitive(category);
-
-            } else if (abstraction.equals(Main.CHAR_PRIMITIVE)) {
-
-                i = createCharPrimitive(category);
-
-            } else if (abstraction.equals(Main.STRING_PRIMITIVE)) {
-
-                i = createStringPrimitive(category);
-
-            } else if (abstraction.equals(Main.COMPLEX)) {
-
-                i = createItem(category);
-            }
-            
-            add(i);
-
-        } else {
-
-            java.lang.System.out.println("ERROR: Could not read item. The abstraction is null.");
-        }
-    }
-*/
-
     /**
      * Finalizes this item.
      *
@@ -654,7 +604,6 @@ class ItemHandler {
      * This method will be renamed to <code>finalize</code> as soon as the new
      * and simplified CYBOL computer language is used.
      */
-/*??
     static void finalizz() {
     }
 

@@ -30,10 +30,31 @@ package cyboi;
  * An item element represents an item node in an XML-based
  * <i>Cybernetics Oriented Language</i> (CYBOL) file.
  *
- * @version $Revision: 1.2 $ $Date: 2003-07-22 12:04:39 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-07-22 15:05:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemElement extends Element {
+
+    /** The name constant. */
+    static java.lang.String NAME = "name";
+
+    /** The category abstraction constant. */
+    static java.lang.String CATEGORY_ABSTRACTION = "category_abstraction";
+
+    /** The category constant. */
+    static java.lang.String CATEGORY = "category";
+
+    /** The space abstraction constant. */
+    static java.lang.String SPACE_ABSTRACTION = "space_abstraction";
+
+    /** The space constant. */
+    static java.lang.String SPACE = "space";
+
+    /** The time abstraction constant. */
+    static java.lang.String TIME_ABSTRACTION = "time_abstraction";
+
+    /** The time constant. */
+    static java.lang.String TIME = "time";
 
     /** The name element. */
     static java.lang.Object name;
