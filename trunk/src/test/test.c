@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.40 $ $Date: 2005-01-28 23:30:52 $ $Author: christian $
+ * @version $Revision: 1.41 $ $Date: 2005-02-08 18:24:43 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -470,12 +470,26 @@ void test_integer_parser() {
  * But also a part of the knowledge model can be handed over,
  * in which case that part and its parts will be printed on screen.
  *
- * @param p0 the knowledge model
- * @param p1 the knowledge model count
+ * @param p0 the knowledge model item
+ * @param p1 the knowledge model itemcount
+ * @param level the level for the tree
  */
-void test_knowledge_model(const void* p0, const void* p1) {
+void test_knowledge_model( const void* p0, const void* p1, 
+                           int level ) {
 
     fputs("Test knowledge model:\n", stdout);
+    
+    char prefix[level*3+1];
+    int level_count;
+    int char_count;
+    for ( level_count=0; level_count<level; level_count++) {
+     
+        for ( char_count=0; char_count<=2; char_count++) {
+            prefix[level_count*3+char_count] = '_';
+        }
+    }
+    prefix[level*3]='\0';
+    level++;
 
     if (p1 != NULL_POINTER) {
 
@@ -484,21 +498,21 @@ void test_knowledge_model(const void* p0, const void* p1) {
         // The loop index.
         int i = 0;
         // The element name.
-        char* n = CHARACTER_NULL_POINTER;
-        int* nc = INTEGER_NULL_POINTER;
-        int* ns = INTEGER_NULL_POINTER;
+        void** n = POINTER_NULL_POINTER;
+        void** nc = POINTER_NULL_POINTER;
+        void** ns = POINTER_NULL_POINTER;
         // The element abstraction.
-        char* a = CHARACTER_NULL_POINTER;
-        int* ac = INTEGER_NULL_POINTER;
-        int* as = INTEGER_NULL_POINTER;
+        void** a = POINTER_NULL_POINTER;
+        void** ac = POINTER_NULL_POINTER;
+        void** as = POINTER_NULL_POINTER;
         // The element model.
-        void* m = NULL_POINTER;
-        int* mc = INTEGER_NULL_POINTER;
-        int* ms = INTEGER_NULL_POINTER;
+        void** m = POINTER_NULL_POINTER;
+        void** mc = POINTER_NULL_POINTER;
+        void** ms = POINTER_NULL_POINTER;
         // The element details.
-        void* d = NULL_POINTER;
-        int* dc = INTEGER_NULL_POINTER;
-        int* ds = INTEGER_NULL_POINTER;
+        void** d = POINTER_NULL_POINTER;
+        void** dc = POINTER_NULL_POINTER;
+        void** ds = POINTER_NULL_POINTER;
         // The comparison result.
         int r = 0;
 
@@ -516,48 +530,48 @@ void test_knowledge_model(const void* p0, const void* p1) {
             get_compound_element_by_index(p0, p1, (void*) &i, (void*) &a, (void*) &ac, (void*) &as, (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds);
 
             // Print element name.
-            fprintf(stderr, "name:              %s\n", n);
-            fprintf(stderr, "name count:        %i\n", *nc);
-            fprintf(stderr, "name size:         %i\n", *ns);
+            fprintf(stderr, "name:              %s%s\n", prefix,*n);
+            fprintf(stderr, "name count:        %s%i\n", prefix,**((int**)nc) );
+            fprintf(stderr, "name size:         %s%i\n", prefix,**((int**)ns) );
 
             // Print element abstraction.
-            fprintf(stderr, "abstraction:       %s\n", a);
-            fprintf(stderr, "abstraction count: %i\n", *ac);
-            fprintf(stderr, "abstraction size:  %i\n", *as);
+            fprintf(stderr, "abstraction:       %s%s\n", prefix,*a);
+            fprintf(stderr, "abstraction count: %s%i\n", prefix,**((int**)ac));
+            fprintf(stderr, "abstraction size:  %s%i\n", prefix,**((int**)as));
 
             // Handle element model.
             if (r != 1) {
 
-                compare_arrays((void*) &a, (void*) &ac, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+                compare_arrays((void*) *a, (void*) *ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 
                     fprintf(stderr, "model: %s\n", "");
-                    test_knowledge_model((void*) &m, (void*) &mc);
+                    test_knowledge_model((void*) *m, (void*) *mc, level);
                 }
             }
 
             if (r != 1) {
 
-                compare_arrays((void*) &a, (void*) &ac, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+                compare_arrays((void*) *a, (void*) *ac, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 
-                    fprintf(stderr, "model:         %i\n", m);
-                    fprintf(stderr, "model count:   %i\n", *mc);
-                    fprintf(stderr, "model size:    %i\n", *ms);
+                    fprintf(stderr, "model:         %i\n", *m);
+                    fprintf(stderr, "model count:   %i\n", **((int**)mc) );
+                    fprintf(stderr, "model size:    %i\n", **((int**)ms) );
                 }
             }
 
             if (r != 1) {
 
-                compare_arrays((void*) &a, (void*) &ac, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+                compare_arrays((void*) *a, (void*) *ac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 
-                    fprintf(stderr, "model:             %i\n", m);
-                    fprintf(stderr, "model count:       %i\n", *mc);
-                    fprintf(stderr, "model size:        %i\n", *ms);
+                    fprintf(stderr, "model:             %i\n", *m);
+                    fprintf(stderr, "model count:       %i\n", **((int**)mc) );
+                    fprintf(stderr, "model size:        %i\n", **((int**)ms) );
                 }
             }
 
@@ -565,25 +579,25 @@ void test_knowledge_model(const void* p0, const void* p1) {
             if (d != NULL_POINTER) {
 
                 fprintf(stderr, "details: %s\n", "");
-                test_knowledge_model((void*) &d, (void*) &dc);
+                test_knowledge_model((void*) *d, (void*) *dc, level);
             }
 
             // Reset element name.
-            n = NULL_POINTER;
-            *nc = 0;
-            *ns = 0;
+            n = POINTER_NULL_POINTER;
+            nc = POINTER_NULL_POINTER;
+            ns = POINTER_NULL_POINTER;
             // Reset element abstraction.
-            a = NULL_POINTER;
-            *ac = 0;
-            *as = 0;
+            a = POINTER_NULL_POINTER;
+            ac = POINTER_NULL_POINTER;
+            as = POINTER_NULL_POINTER;
             // Reset element model.
-            m = NULL_POINTER;
-            *mc = 0;
-            *ms = 0;
+            m = POINTER_NULL_POINTER;
+            mc = POINTER_NULL_POINTER;
+            ms = POINTER_NULL_POINTER;
             // Reset element details.
-            d = NULL_POINTER;
-            *dc = 0;
-            *ds = 0;
+            d = POINTER_NULL_POINTER;
+            dc = POINTER_NULL_POINTER;
+            ds = POINTER_NULL_POINTER;
             // Reset comparison result.
             r = 0;
 

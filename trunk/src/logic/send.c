@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-01-18 15:07:01 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-02-08 18:21:59 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -72,57 +72,56 @@ void send_message(const void* p0, const void* p1,
     const void* p2, const void* p3, const void* p4, const void* p5, void* p6) {
 
     // The language abstraction.
-    void* la = NULL_POINTER;
-    void* lac = NULL_POINTER;
-    void* las = NULL_POINTER;
+    void** la = NULL_POINTER;
+    void** lac = NULL_POINTER;
+    void** las = NULL_POINTER;
     // The language model.
-    void* lm = NULL_POINTER;
-    void* lmc = NULL_POINTER;
-    void* lms = NULL_POINTER;
+    void** lm = NULL_POINTER;
+    void** lmc = NULL_POINTER;
+    void** lms = NULL_POINTER;
     // The language details.
-    void* ld = NULL_POINTER;
-    void* ldc = NULL_POINTER;
-    void* lds = NULL_POINTER;
+    void** ld = NULL_POINTER;
+    void** ldc = NULL_POINTER;
+    void** lds = NULL_POINTER;
 
     // The sender abstraction.
-    void* sa = NULL_POINTER;
-    void* sac = NULL_POINTER;
-    void* sas = NULL_POINTER;
+    void** sa = NULL_POINTER;
+    void**  sac = NULL_POINTER;
+    void** sas = NULL_POINTER;
     // The sender model.
-    void* sm = NULL_POINTER;
-    void* smc = NULL_POINTER;
-    void* sms = NULL_POINTER;
+    void** sm = NULL_POINTER;
+    void** smc = NULL_POINTER;
+    void** sms = NULL_POINTER;
     // The sender details.
-    void* sd = NULL_POINTER;
-    void* sdc = NULL_POINTER;
-    void* sds = NULL_POINTER;
+    void** sd = NULL_POINTER;
+    void** sdc = NULL_POINTER;
+    void** sds = NULL_POINTER;
 
     // The receiver abstraction.
-    void* ra = NULL_POINTER;
-    void* rac = NULL_POINTER;
-    void* ras = NULL_POINTER;
+    void** ra = NULL_POINTER;
+    void** rac = NULL_POINTER;
+    void** ras = NULL_POINTER;
     // The receiver model.
-    void* rm = NULL_POINTER;
-    void* rmc = NULL_POINTER;
-    void* rms = NULL_POINTER;
+    void** rm = NULL_POINTER;
+    void** rmc = NULL_POINTER;
+    void** rms = NULL_POINTER;
     // The receiver details.
-    void* rd = NULL_POINTER;
-    void* rdc = NULL_POINTER;
-    void* rds = NULL_POINTER;
+    void** rd = NULL_POINTER;
+    void** rdc = NULL_POINTER;
+    void** rds = NULL_POINTER;
 
     // The message abstraction.
-    void* ma = NULL_POINTER;
-    void* mac = NULL_POINTER;
-    void* mas = NULL_POINTER;
+    void** ma = NULL_POINTER;
+    void** mac = NULL_POINTER;
+    void** mas = NULL_POINTER;
     // The message model.
-    void* mm = NULL_POINTER;
-    void* mmc = NULL_POINTER;
-    void* mms = NULL_POINTER;
+    void** mm = NULL_POINTER;
+    void** mmc = NULL_POINTER;
+    void** mms = NULL_POINTER;
     // The message details.
-    void* md = NULL_POINTER;
-    void* mdc = NULL_POINTER;
-    void* mds = NULL_POINTER;
-
+    void** md = NULL_POINTER;
+    void** mdc = NULL_POINTER;
+    void** mds = NULL_POINTER;
     //
     // The language name is taken directly.
     // All other parameters are hierarchical names and used to
@@ -136,21 +135,43 @@ void send_message(const void* p0, const void* p1,
         (void*) &lm, (void*) &lmc, (void*) &lms,
         (void*) &ld, (void*) &ldc, (void*) &lds);
 
+//    // Get sender.
+//    get_compound_element_by_encapsulated_name(p0, p1,
+//        (void*) SENDER_NAME_ABSTRACTION, (void*) SENDER_NAME_ABSTRACTION_COUNT,
+//        (void*) &sa, (void*) &sac, (void*) &sas,
+//        (void*) &sm, (void*) &smc, (void*) &sms,
+//        (void*) &sd, (void*) &sdc, (void*) &sds,
+//        p2, p3);
+//
+//    // Get receiver.
+//    get_compound_element_by_encapsulated_name(p0, p1,
+//        (void*) RECEIVER_NAME_ABSTRACTION, (void*) RECEIVER_NAME_ABSTRACTION_COUNT,
+//        (void*) &ra, (void*) &rac, (void*) &ras,
+//        (void*) &rm, (void*) &rmc, (void*) &rms,
+//        (void*) &rd, (void*) &rdc, (void*) &rds,
+//        p2, p3);
+//
+//    // Get message.
+//    get_compound_element_by_encapsulated_name(p0, p1,
+//        (void*) MESSAGE_NAME_ABSTRACTION, (void*) MESSAGE_NAME_ABSTRACTION_COUNT,
+//        (void*) &ma, (void*) &mac, (void*) &mas,
+//        (void*) &mm, (void*) &mmc, (void*) &mms,
+//        (void*) &md, (void*) &mdc, (void*) &mds,
+//        p2, p3);
+
     // Get sender.
-    get_compound_element_by_encapsulated_name(p0, p1,
+    get_compound_element_by_name(p0, p1,
         (void*) SENDER_NAME_ABSTRACTION, (void*) SENDER_NAME_ABSTRACTION_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
-        (void*) &sd, (void*) &sdc, (void*) &sds,
-        p2, p3);
+        (void*) &sd, (void*) &sdc, (void*) &sds );
 
     // Get receiver.
-    get_compound_element_by_encapsulated_name(p0, p1,
+    get_compound_element_by_name(p0, p1,
         (void*) RECEIVER_NAME_ABSTRACTION, (void*) RECEIVER_NAME_ABSTRACTION_COUNT,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
-        (void*) &rd, (void*) &rdc, (void*) &rds,
-        p2, p3);
+        (void*) &rd, (void*) &rdc, (void*) &rds );
 
     // Get message.
     get_compound_element_by_encapsulated_name(p0, p1,
@@ -165,7 +186,7 @@ void send_message(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays((void*) lm, (void*) lmc, (void*) TUI_LANGUAGE, (void*) TUI_LANGUAGE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *lm, (void*) *lmc, (void*) TUI_LANGUAGE, (void*) TUI_LANGUAGE_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
@@ -175,13 +196,13 @@ void send_message(const void* p0, const void* p1,
             void* tmpdc = NULL_POINTER;
             void* tmpds = NULL_POINTER;
 
-            send_tui((void*) tmpd, (void*) tmpdc, (void*) tmpds, (void*) mm, (void*) mmc);
+            send_tui((void*) tmpd, (void*) tmpdc, (void*) tmpds, (void*) *mm, (void*) *mmc);
         }
     }
 
     if (r != 1) {
 
-        compare_arrays((void*) lm, (void*) lmc, (void*) UNIX_SOCKET_CHANNEL, (void*) UNIX_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *lm, (void*) *lmc, (void*) UNIX_SOCKET_CHANNEL, (void*) UNIX_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
@@ -196,7 +217,7 @@ void send_message(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays((void*) lm, (void*) lmc, (void*) TCP_SOCKET_CHANNEL, (void*) TCP_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *lm, (void*) *lmc, (void*) TCP_SOCKET_CHANNEL, (void*) TCP_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
