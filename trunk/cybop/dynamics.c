@@ -30,7 +30,7 @@
  *
  * It defines constants for dynamic operations.
  *
- * @version $Revision: 1.2 $ $Date: 2003-10-07 23:07:40 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-10-09 10:54:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

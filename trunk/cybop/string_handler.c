@@ -30,7 +30,7 @@
  *
  * It contains some operations for easier handling of strings.
  *
- * @version $Revision: 1.1 $ $Date: 2003-10-07 23:07:41 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-10-09 10:54:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,6 +41,7 @@
  * @param p1 the element
  * @param p2 the index
  */
+/*??
 static void get_string_element_index(void* p0, void* p1, void* p2) {
 
     char* s = (char*) p0;
@@ -62,6 +63,7 @@ static void get_string_element_index(void* p0, void* p1, void* p2) {
  * @param p1 the start index
  * @param p2 the remaining suffix
  */
+/*??
 static void get_string_suffix(void* p0, void* p1, void* p2) {
     
 }
@@ -72,6 +74,7 @@ static void get_string_suffix(void* p0, void* p1, void* p2) {
  * @param p0 the string
  * @param p1 the numerical value
  */
+/*??
 static void get_string_value(void* p0, void* p1) {
     
 }
@@ -82,6 +85,7 @@ static void get_string_value(void* p0, void* p1) {
  * @param p0 the numerical value
  * @param p1 the string
  */
+/*??
 static void get_value_string(void* p0, void* p1) {
     
 }

@@ -33,7 +33,7 @@
  *
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.11 $ $Date: 2003-10-07 23:07:40 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-10-09 10:54:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -113,9 +113,11 @@ static void log(void* p0, void* p1) {
     if (*l <= *ll) {
 
         void* n = malloc(0);
-        
+
         get_log_level_name(n, p0);
-        show_message(strcat(strcat(n, ": "), p1));
+        strcat((char*) n, ": ");
+        strcat((char*) n, p1);
+        show_message(n);
         
         free(n);
     }

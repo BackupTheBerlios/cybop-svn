@@ -34,7 +34,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.5 $ $Date: 2003-10-07 23:07:40 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-10-09 10:54:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -189,7 +189,7 @@ static void set_complex_element(void* p0, void* p1, void* p2) {
             // The given complex is the parent of another parent.
             void* child = 0;
             
-            get_map_element(c->children, n, child);
+            get_map_element_with_name(c->children, n, child);
             
             // Continue to process along the hierarchical name.
             set_complex_element(child, r, p2);

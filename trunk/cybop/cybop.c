@@ -40,7 +40,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.9 $ $Date: 2003-10-07 23:07:40 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-10-09 10:54:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,10 +79,11 @@ static void wait(void* p0) {
         if (*sf == FALSE_VALUE) {
 
             // Receive signal.
+
             receive_signal(p0, s);
 
             // Handle signal.
-            handle_signal(s, FALSE_VALUE, sf);
+            handle_signal(s, (void*) &FALSE_VALUE, sf);
 
             // Send signal.
             send_signal(p0, s);
@@ -126,7 +127,7 @@ int main(int p0, char** p1) {
 
     //?? Temporary character based screen output test.
     show_character_screen();
-
+    
     if (p1 != 0) {
 
         if ((p0 == 3) && (p1[1] != 0) && (p1[2] != 0)) {
@@ -162,18 +163,28 @@ int main(int p0, char** p1) {
                 tmp->predicate = (void*) p1[1];
                 tmp->object = (void*) p1[2];
 
-/*??
                 // Caution! Adding of signals must be synchronized between:
                 // - send for adding internal CYBOP signals
                 // - JavaEventHandler.dispatchEvent for adding transformed java event signals
                 // These are the only procedures accessing the signal
                 // memory for adding signals.
-                synchronized (signal_memory) {
+//??                synchronized (signal_memory) {
 
                     // Add signal to signal memory (interrupt vector table).
-                    add_map_element(signal_memory, SIGNAL, tmp);
-                }
+                    add_map_element(signal_memory, (void*) SIGNAL, (void*) tmp);
+
+/*??
+                    struct signal* tmp = 0;
+                    int i = 0;
+                    get_map_element_at_index(signal_memory, (void*) &i, (void*) tmp);
+                    if (tmp != 0) {
+                        puts("o.k.");
+                    } else {
+                        puts("null");
+                    }
 */
+
+//??                }
 
             } else {
 

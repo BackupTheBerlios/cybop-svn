@@ -35,7 +35,7 @@
  * Basically, every complex can become a model (template) itself,
  * if copies (other instances) of this complex are created.
  *
- * @version $Revision: 1.5 $ $Date: 2003-10-07 23:07:40 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-10-09 10:54:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct complex {

@@ -45,7 +45,7 @@
  * int** a = 0; // Array of integer pointers
  * void** a = 0; // Array of void pointers
  *
- * @version $Revision: 1.11 $ $Date: 2003-10-07 23:07:40 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-10-09 10:54:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -124,8 +124,15 @@ static void set_array_element(void** p0, void* p1, void* p2) {
             extend_array(p0);
         }
 
-        // Set element.
-        p0[*i] = p2;
+        if (*i != INVALID_VALUE) {
+                
+            // Set element.
+            p0[*i] = p2;
+        
+        } else {
+    
+            log((void*) &WARNING_LOG_LEVEL, "Could not set array element. The index is invalid.");
+        }
         
     } else {
 
@@ -160,6 +167,10 @@ static void remove_array_element(void** p0, void* p1) {
 
             // Set former last element to 0.
             p0[*i] = 0;
+        
+        } else {
+    
+            log((void*) &WARNING_LOG_LEVEL, "Could not remove array element. The index is invalid.");
         }
 
     } else {
@@ -184,6 +195,10 @@ static void get_array_element(void** p0, void* p1, void* p2) {
         if (*i != INVALID_VALUE) {
             
             p2 = p0[*i];
+        
+        } else {
+    
+            log((void*) &WARNING_LOG_LEVEL, "Could not get array element. The index is invalid.");
         }
 
     } else {
