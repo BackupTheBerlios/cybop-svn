@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.65 $ $Date: 2005-01-09 20:30:21 $ $Author: christian $
+ * @version $Revision: 1.66 $ $Date: 2005-01-10 11:04:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 #define CYBOI_SOURCE
 
 #include "../creator/integer_creator.c"
+#include "../creator/pointer_creator.c"
 #include "../cyboi/globals_handler.c"
 #include "../cyboi/system_handler.c"
 #include "../global/channel_constants.c"
@@ -81,27 +82,27 @@ int main(int p0, char** p1) {
 
             // The internals memory.
             void* i = NULL_POINTER;
-            // The configuration file name.
+            // The configuration file name and count.
             void** c = POINTER_NULL_POINTER;
-            // The configuration file name count.
             int* cc = INTEGER_NULL_POINTER;
 
-            // Create configuration file name.
+            // Create configuration file name and count.
+            create_pointer((void*) &c);
             create_integer((void*) &cc);
-            *cc = 0;
-//??            create_array((void*) &c, (void*) &CHARACTER_ARRAY, (void*) &cc);
 
-            // Get configuration file name.
+            // Get configuration file name and count.
             get_array_elements((void*) &p1, (void*) &POINTER_ARRAY, (void*) &CONFIGURATION_FILE_PARAMETER_INDEX, (void*) &c, (void*) &ONE_ELEMENT_COUNT);
-
-//??            set_array_elements((void*) &p1, (void*) &POINTER_ARRAY, (void*) &CONFIGURATION_FILE_PARAMETER_INDEX, (void*) &c, (void*) &cc);
-//??    char** tmp = (char**) (((void*) p1) + (*CONFIGURATION_FILE_PARAMETER_INDEX * sizeof(void*)));
-//??    fprintf(stderr, "FILENAME orig: %s\n", *tmp);
-//??    fprintf(stderr, "FILENAME copy: %s\n", (char*) *c);
-//??    fputs("TEST\n", stdout);
-
-            // Get configuration file name count.
+            // CAUTION! This is a DIRTY workaround!
+            // The configuration file count (number of file path characters)
+            // is not known. There are two possibilities to determine it:
+            // 1 Force the user to give it as third command line parameter
+            // (this would be rather weird and not very user-friendly)
+            // 2 Rely on the null termination character to determine it
+            // (in this case, the strlen function can be used)
+            // Possibility 2 is applied here.
             *cc = strlen((char*) *c);
+
+    fputs("TEST 0\n", stdout);
 
             // Create internals memory.
             // Fill it with the parameters read from the configuration file.
@@ -109,6 +110,7 @@ int main(int p0, char** p1) {
                 (void*) &c, (void*) &cc,
                 (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT,
                 (void*) &FILE_CHANNEL, (void*) &FILE_CHANNEL_COUNT);
+    fputs("TEST 1\n", stdout);
 
             // Handle system.
             handle_system((void*) &i);

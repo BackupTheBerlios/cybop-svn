@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2005-01-09 01:30:13 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2005-01-10 11:04:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -76,6 +76,18 @@ static const int* INTEGER_COUNT = INTEGER_COUNT_ARRAY;
 /** The integer value index. */
 static const int INTEGER_VALUE_INDEX_ARRAY[] = {0};
 static const int* INTEGER_VALUE_INDEX = INTEGER_VALUE_INDEX_ARRAY;
+
+//
+// Pointer.
+//
+
+/** The pointer count. */
+static const int POINTER_COUNT_ARRAY[] = {1};
+static const int* POINTER_COUNT = POINTER_COUNT_ARRAY;
+
+/** The pointer value index. */
+static const int POINTER_VALUE_INDEX_ARRAY[] = {0};
+static const int* POINTER_VALUE_INDEX = POINTER_VALUE_INDEX_ARRAY;
 
 //
 // Double.
