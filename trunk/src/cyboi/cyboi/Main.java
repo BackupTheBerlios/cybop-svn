@@ -32,7 +32,7 @@ package cyboi;
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) format.
  *
- * @version $Revision: 1.28 $ $Date: 2003-08-12 20:10:35 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2003-08-12 21:17:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -97,8 +97,8 @@ class Main {
     
                     // Event handler.
                     JavaEventHandler.signal_memory = signal_memory;
-                    java.lang.Object event_handler = new EventHandler();
-                    JavaEventHandler.replaceEventQueue(event_handler);
+                    java.lang.Object event_handler = new JavaEventHandler();
+                    JavaEventHandler.set_event_handler(event_handler);
 
                     // The system is now started up and complete so that a loop
                     // can be entered, waiting for signals (events/ interrupts)
@@ -108,7 +108,7 @@ class Main {
                     // The loop above is left as soon as its shutdown flag is set.
     
                     // Event handler.
-//??                    JavaEventHandler.replaceEventQueue(null);
+                    JavaEventHandler.remove_event_handler(event_handler);
                     event_handler = null;
                     JavaEventHandler.signal_memory = null;
                     

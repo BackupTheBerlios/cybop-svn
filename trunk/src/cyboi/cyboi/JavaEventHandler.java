@@ -32,7 +32,7 @@ package cyboi;
  *
  * Unfortunately, handling of most events is done via graphical components in java.
  *
- * @version $Revision: 1.3 $ $Date: 2003-08-12 20:10:35 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-08-12 21:17:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaEventHandler extends java.awt.EventQueue {
@@ -118,11 +118,17 @@ class JavaEventHandler extends java.awt.EventQueue {
                     // Otherwise, the chain of signals/ actions finishes here, until a new
                     // hardware event (interrupt) occurs.
     
-                    //?? Caution! Todo: Synchronize adding of signals between
-                    //?? SignalHandler.send and EventHandler.dispatchEvent!!
+                    // Caution! Adding of signals must be synchronized between
+                    // SignalHandler.send and EventHandler.dispatchEvent!
+                    // These are the only two procedures accessing the signal
+                    // memory for adding signals.
+                    // SignalHandler is for adding internal CYBOP signals.
+                    // EventHandler is for adding transformed java event signals.
+                    synchronized (JavaEventHandler.signal_memory) {
 
-                    // Add signal to signal memory (interrupt vector table).
-                    MapHandler.add_map_element(JavaEventHandler.signal_memory, s, SignalHandler.SIGNAL);
+                        // Add signal to signal memory (interrupt vector table).
+                        MapHandler.add_map_element(JavaEventHandler.signal_memory, s, SignalHandler.SIGNAL);
+                    }
 
                 } else {
                     
@@ -545,15 +551,15 @@ class JavaEventHandler extends java.awt.EventQueue {
     }
 
     //
-    // Event queue.
-    //    
+    // Event handler.
+    //
 
     /**
-     * Replaces the event queue with the event handler.
+     * Sets the event handler.
      *
      * @param p0 the event handler
      */
-    static void replaceEventQueue(java.lang.Object p0) {
+    static void set_event_handler(java.lang.Object p0) {
 
         // Start the awt event thread by calling getDefaultToolkit().
         // Otherwise, the event thread is started by calling the show method
@@ -566,17 +572,37 @@ class JavaEventHandler extends java.awt.EventQueue {
 
             if (q != null) {
 
-                // Replace the system event queue with the event handler.
+                java.lang.System.out.println("INFO: Replace java event queue for dispatching events.");
                 q.push((JavaEventHandler) p0);
 
             } else {
 
-                java.lang.System.out.println("ERROR: Could not replace event queue. The event queue is null.");
+                java.lang.System.out.println("ERROR: Could not set event handler. The java awt event queue is null.");
             }
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not replace event queue. The java awt toolkit is null.");
+            java.lang.System.out.println("ERROR: Could not set event handler. The java awt toolkit is null.");
+        }
+    }
+
+    /**
+     * Removes the event handler.
+     *
+     * @param p0 the event handler
+     */
+    static void remove_event_handler(java.lang.Object p0) {
+
+        JavaEventHandler h = (JavaEventHandler) p0;
+
+        if (h != null) {
+                
+            java.lang.System.out.println("INFO: Stop dispatching events using java event queue.");
+            h.pop();
+
+        } else {
+
+            java.lang.System.out.println("ERROR: Could not remove event handler. The java event handler is null.");
         }
     }
 }

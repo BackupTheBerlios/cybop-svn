@@ -33,7 +33,7 @@ package cyboi;
  * - send
  * - reset
  *
- * @version $Revision: 1.10 $ $Date: 2003-08-12 20:10:35 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-08-12 21:17:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -238,11 +238,17 @@ class SignalHandler {
                     tmp.adverbial = s.adverbial;
                     tmp.condition = s.condition;
 
-                    //?? Caution! Todo: Synchronize adding of signals between
-                    //?? SignalHandler.send and EventHandler.dispatchEvent!!
+                    // Caution! Adding of signals must be synchronized between
+                    // SignalHandler.send and EventHandler.dispatchEvent!
+                    // These are the only two procedures accessing the signal
+                    // memory for adding signals.
+                    // SignalHandler is for adding internal CYBOP signals.
+                    // EventHandler is for adding transformed java event signals.
+                    synchronized (p0) {
 
-                    // Add signal to signal memory (interrupt vector table).
-                    MapHandler.add_map_element(p0, tmp, SignalHandler.SIGNAL);
+                        // Add signal to signal memory (interrupt vector table).
+                        MapHandler.add_map_element(p0, tmp, SignalHandler.SIGNAL);
+                    }
 
                 } else {
         
