@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.38 $ $Date: 2004-10-27 13:45:50 $ $Author: rholzmueller $
+ * @version $Revision: 1.39 $ $Date: 2004-10-28 18:42:33 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,6 +51,7 @@
 #include "../logger/logger.c"
 #include "../socket/unix_socket.c"
 #include "../test/test.c"
+//#include "../web/tcp_socket_server.c"
 #include "../x_windows/x_windows_handler.c"
 
 /**
@@ -220,6 +221,23 @@ int main(int p0, char** p1) {
 			initialize_internals( p1[CONFIG_STARTUP_PARAMETER_INDEX],
 								  pi,
 								  ii );
+
+
+			// tcp socket 
+			
+            int active;
+            get_array_element( (void*) &ii, 
+                               (void*) &INTEGER_ARRAY, 
+                               (void*) &INTEGER_INTERNALS_TCPSOCKET_ACTIVE_INDEX, 
+                               (void*) &active ); 
+            printf( "active:  %d \n", active );
+            int port;
+            get_array_element( (void*) &ii, 
+                               (void*) &INTEGER_ARRAY, 
+                               (void*) &INTEGER_INTERNALS_TCPSOCKET_PORT_INDEX, 
+                               (void*) &port ); 
+            printf( "port:  %d \n", port );
+            //start_tcp_socket_server( (void*) &active, (void*) &port );
 			
 
             //
