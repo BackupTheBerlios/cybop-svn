@@ -69,7 +69,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.9 $ $Date: 2003-03-22 09:19:53 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-04-17 14:50:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family /*??implements
@@ -118,9 +118,6 @@ public class Launcher extends Family /*??implements
 
     /** The java event catcher. */
     private JavaEventCatcher javaEventCatcher;
-
-    /** The signal. */
-    private Signal signal;
 
     /** The shutdown hook. */
     public static final String SHUTDOWN_HOOK = new String("shutdown_hook");
@@ -452,30 +449,6 @@ public class Launcher extends Family /*??implements
     }
 
     //
-    // Signal.
-    //
-
-    /*
-     * Sets the signal.
-     *
-     * @param s the signal
-     */
-    public void setSignal(Signal s) {
-
-        this.signal = s;
-    }
-
-    /**
-     * Returns the signal.
-     *
-     * @return the signal
-     */
-    public Signal getSignal() {
-
-        return this.signal;
-    }
-
-    //
     // Shutdown hook.
     //
 
@@ -605,9 +578,6 @@ public class Launcher extends Family /*??implements
             set(Launcher.LIFECYCLE_ACTION, getArgument(Launcher.LIFECYCLE_ACTION_ARGUMENT, getDefaultLifecycleAction()));
             //?? Temporary until event handling doesn't need java awt EventQueue anymore.
             setJavaEventCatcher(createJavaEventCatcher());
-            //?? The set/get methods of the Item class are not used here to
-            //?? speed up finding the signal when accessing it directly as attribute.
-            setSignal((Signal) createItem(getDefaultSignal()));
             set(Launcher.SHUTDOWN_HOOK, createShutdownHook());
             set(Launcher.SHUTDOWN_FLAG, getDefaultShutdownFlag());
         }
@@ -625,11 +595,6 @@ public class Launcher extends Family /*??implements
         ShutdownHook shutdownHook = (ShutdownHook) get(Launcher.SHUTDOWN_HOOK);
         remove(Launcher.SHUTDOWN_HOOK);
         destroyComponent(shutdownHook);
-
-        //?? The set/get methods of the Item class are not used here to
-        //?? speed up finding the signal when accessing it directly as attribute.
-        destroyItem(getSignal());
-        setSignal(null);
 
         //?? Temporary until event handling doesn't need java awt EventQueue anymore.
         destroyJavaEventCatcher(getJavaEventCatcher());
@@ -665,10 +630,8 @@ public class Launcher extends Family /*??implements
 
         Signal s = (Signal) createItem(getDefaultSignal());
 
-        receive(s, Signal.TUI_LANGUAGE, get(Launcher.USER), (String) get(Launcher.LIFECYCLE_ACTION), null);
-        handle(s, new Boolean(Boolean.FALSE));
-        send(s);
-        destroyItem(s);
+        transform(s, Signal.TUI_LANGUAGE, get(Launcher.USER), (String) get(Launcher.LIFECYCLE_ACTION), null);
+        storeSignal(s);
     }
 
     //
@@ -687,7 +650,9 @@ public class Launcher extends Family /*??implements
      */
     public void await() throws Exception {
 
-//??        Signal s = (Signal) createItem(getDefaultSignal());
+        Signal s = (Signal) createItem(getDefaultSignal());
+        //?? Temporary for handling signals which stem from java event queue.
+        Signal queued = null;
         Boolean b = null;
 
         while (true) {
@@ -707,30 +672,36 @@ public class Launcher extends Family /*??implements
                 throw new NullPointerException("Could not wait for signals. The shutdown flag is null.");
             }
 
-/*??
-            // Check for changed flags on computer (currently done by operating system),
-            // e.g. to receive a keyboard or mouse event and then create a CYBOP signal of it.
-            receive(s);
-            // Handle the signal by sending it through the whole system.
-            handle(s, new Boolean(Boolean.FALSE));
-            // After having handled the signal in this system, its answer will be sent -
-            // again by changing flags on the computer (done by operating system),
-            // e.g. a gui drawn onto the screen, a printout or a network message.
-            send(s);
-            reset(s);
-*/
+            queued = fetchSignal();
 
-            // Run garbage collector. Since java has no destructor methods,
-            // all unreferenced objects are hanging in memory until the gc is run.
-            // Because a signal is created in every cycle of the waiting loop,
-            // it has to be garbage collected here. Otherwise, too many objects
-            // would be hanging in memory.
-            // This garbage collector run is also useful to destruct all objects
-            // which were created during handling of the signal.
-//??            java.lang.System.gc();
+            if (queued != null) {
+
+                //?? Temporary code block for handling of signals that came from the
+                //?? java event queue and were stored in the signal memory.
+                //?? These signals were created outside this method but must be
+                //?? destroyed here!
+                handle(s, new Boolean(Boolean.FALSE));
+                send(s);
+                destroyItem(queued);
+
+            } else {
+
+/*??
+                // Check for changed flags on computer (currently done by operating system),
+                // e.g. to receive a keyboard or mouse event and then create a CYBOP signal of it.
+                receive(s);
+                // Handle the signal by sending it through the whole system.
+                handle(s, new Boolean(Boolean.FALSE));
+                // After having handled the signal in this system, its answer will be sent -
+                // again by changing flags on the computer (done by operating system),
+                // e.g. a gui drawn onto the screen, a printout or a network message.
+                send(s);
+                reset(s);
+*/
+            }
         }
 
-//??        destroyItem(s);
+        destroyItem(s);
 
 /*??
         String port = (String) get(System.SHUTDOWN_PORT);
@@ -841,31 +812,6 @@ public class Launcher extends Family /*??implements
         // inherits from the java.awt.EventQueue class.
         // That's why another receive method has to be used for now,
         // to hand over parameters from java events to the new CYBOP signals.
-    }
-
-    /**
-     * Receives the signal.<br><br>
-     *
-     * @param s the signal
-     * @param l the language
-     * @param subj the subject
-     * @param p the predicate
-     * @param o the object
-     * @exception NullPointerException if the signal is null
-     */
-    public void receive(Signal s, String l, Item subj, Item p, Model o) throws NullPointerException {
-
-        if (s != null) {
-
-            s.set(Signal.LANGUAGE, l);
-            s.set(Signal.SUBJECT, subj);
-            s.set(Signal.PREDICATE, p);
-            s.set(Signal.OBJECT, o);
-
-        } else {
-
-            throw new NullPointerException("Could not receive signal. The signal is null.");
-        }
     }
 
     /**
@@ -1023,10 +969,8 @@ public class Launcher extends Family /*??implements
 
         Signal sig = (Signal) createItem(getDefaultSignal());
 
-        receive(sig, Signal.GUI_LANGUAGE, get(Launcher.USER), Controller.SHOW_SYSTEM_USER_INTERFACE_ACTION, null);
-        handle(sig, new Boolean(Boolean.FALSE));
-        send(sig);
-        destroyItem(sig);
+        transform(sig, Signal.GUI_LANGUAGE, get(Launcher.USER), Controller.SHOW_SYSTEM_USER_INTERFACE_ACTION, null);
+        storeSignal(sig);
 
         setupJavaEventHandling();
     }
@@ -1108,22 +1052,18 @@ public class Launcher extends Family /*??implements
         Signal s = (Signal) createItem(getDefaultSignal());
         ShutdownSocket socket = (ShutdownSocket) createComponent(getDefaultShutdownSocket());
 
-        receive(s, Signal.GUI_LANGUAGE, get(Launcher.USER), (String) get(Launcher.SHUTDOWN_SYSTEM_ACTION), null);
+        transform(s, Signal.GUI_LANGUAGE, get(Launcher.USER), (String) get(Launcher.SHUTDOWN_SYSTEM_ACTION), null);
 
         if (socket != null) {
 
-            socket.handle(s, new Boolean(Boolean.TRUE));
+            socket.storeSignal(s);
+//??            socket.handle(s, new Boolean(Boolean.TRUE));
 
         } else {
 
             throw new NullPointerException("Could not shutdown system using socket. The shutdown socket is null.");
         }
 
-        // These methods will probably not be reached anymore, as the previous
-        // command already causes the whole java virtual machine to exit.
-        // But, to be proper, the methods were added here anyway.
-        send(s);
-        destroyItem(s);
         destroyComponent(socket);
     }
 
@@ -1409,29 +1349,44 @@ public class Launcher extends Family /*??implements
             // In this case it does NOT make sense to continue the signal handling.
             if (a != null) {
 
-                Signal s = getSignal();
+                Signal s = (Signal) createItem(getDefaultSignal());
 
                 // Check for changed flags on computer (currently done by operating system),
                 // e.g. to receive a keyboard or mouse event and then create a CYBOP signal of it.
                 // In our case here we have checked the coming java events and will now
                 // transform them into a CYBOP signal.
-                receive(s, l, get(Launcher.USER), a, m);
-                // Actually handle the signal by broadcasting it through the whole system.
-                handle(s, new Boolean(Boolean.FALSE));
-                // After having handled the signal in this system, its answer will be sent -
-                // again by changing flags on the computer (done by operating system),
-                // e.g. a gui drawn onto the screen, a printout or a network message.
-                send(s);
-                // Reset the signal instead of destroying it and creating a new one all the time.
-                // This launcher contains only one single signal which is created on startup
-                // and destroyed on shutdown. That's why the signal needs to be resetted
-                // between occurences of the single events.
-                reset(s);
+                transform(s, l, get(Launcher.USER), a, m);
+                storeSignal(s);
             }
 
         } else {
 
             throw new NullPointerException("Could not handle java event. The java event is null.");
+        }
+    }
+
+    /**
+     * Transforms the single java event parameters into a CYBOP signal.<br><br>
+     *
+     * @param s the signal
+     * @param l the language
+     * @param subj the subject
+     * @param p the predicate
+     * @param o the object
+     * @exception NullPointerException if the signal is null
+     */
+    public void transform(Signal s, String l, Item subj, Item p, Model o) throws NullPointerException {
+
+        if (s != null) {
+
+            s.set(Signal.LANGUAGE, l);
+            s.set(Signal.SUBJECT, subj);
+            s.set(Signal.PREDICATE, p);
+            s.set(Signal.OBJECT, o);
+
+        } else {
+
+            throw new NullPointerException("Could not receive signal. The signal is null.");
         }
     }
 
@@ -1531,7 +1486,7 @@ public class Launcher extends Family /*??implements
                     l.handle(evt);
 
                 } else {
-    
+
                     throw new NullPointerException("Could not dispatch java awt event. The launcher is null.");
                 }
     

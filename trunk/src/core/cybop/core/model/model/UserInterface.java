@@ -34,7 +34,7 @@ import cybop.core.model.organizer.*;
 /**
  * This class represents a user interface.
  *
- * @version $Revision: 1.6 $ $Date: 2003-03-18 00:18:01 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-04-17 14:50:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class UserInterface extends Model {
@@ -44,7 +44,7 @@ public class UserInterface extends Model {
     //
 
     /** The user interface mode. */
-    public static final String USER_INTERFACE_MODE = new String("view_model_mode");
+    public static final String USER_INTERFACE_MODE = new String("user_interface_mode");
 
     /** The title. */
     public static final String TITLE = new String("title");
@@ -77,7 +77,7 @@ public class UserInterface extends Model {
     public static final String LOOK_AND_FEEL = new String("look_and_feel");
 
     //
-    // View modes.
+    // User interface modes.
     //
 
     /** The applet user interface mode. */

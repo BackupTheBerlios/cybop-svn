@@ -28,6 +28,7 @@ import cybop.core.basic.*;
 import cybop.core.basic.Boolean;
 import cybop.core.basic.Integer;
 import cybop.core.basic.String;
+import cybop.core.signal.*;
 import cybop.core.system.chain.*;
 
 /**
@@ -43,10 +44,6 @@ import cybop.core.system.chain.*;
  *      <li>Component</li>
  *      <li>Part</li>
  *      <li>Chain</li>
- *      <li>Term</li>
- *      <li>Sign</li>
- *      <li>Number</li>
- *      <li>Digit</li>
  *  </ul>
  *
  * A component corresponds to a cell in biology.
@@ -55,13 +52,11 @@ import cybop.core.system.chain.*;
  *  <ul>
  *      <li>constructor(): called without any parameters on keyword <code>new</code></li>
  *      <li>globalize(Structure globals): hands over global items for reuse to save time and memory</li>
- *      <li>[several local set methods]: hands over local items (context parameters)</li>
- *      <li>initialize(): creates items (attributes) that are specific to this item; allocates necessary memory</li>
  *      <li>configure(): adapts the properties of an item to the preferences of a user; read from a source</li>
- *      <li>link(): associates children of an item among each other</li>
- *      <li>unlink(): cuts associations between children of an item</li>
- *      <li>deconfigure(): writes system settings to configuration and makes it persistent</li>
+ *      <li>initialize(): creates items (attributes) that are specific to this item; allocates necessary memory</li>
  *      <li>finalize(): destroys items (attributes) that are specific to this item; deallocates memory</li>
+ *      <li>deconfigure(): writes system settings to configuration and makes it persistent</li>
+ *      <li>deglobalize(Structure globals)</li>
  *      <li>destructor(): called without any parameters; not available for Java where a garbage collector destroys objects incidentally!</li>
  *  </ul>
  *
@@ -69,7 +64,7 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.6 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-04-17 14:50:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends Chain {
@@ -96,11 +91,11 @@ public class Component extends Chain {
     /** The finalize log record flag. */
     public static final String FINALIZE_LOG_RECORD_FLAG = new String("finalize_log_record_flag");
 
-    //?? Temporary, to assign the root system as action listener to gui components.
-    //?? To be removed, when CYBOP supports its own mouse input handling,
-    //?? replacing the java AWT/Swing stuff.
-    /** The finalize signal handler flag. */
-    public static final String FINALIZE_SIGNAL_HANDLER_FLAG = new String("finalize_signal_handler_flag");
+    /** The signal memory. */
+    public static final String SIGNAL_MEMORY = new String("signal_memory");
+
+    /** The finalize signal memory flag. */
+    public static final String FINALIZE_SIGNAL_MEMORY_FLAG = new String("finalize_signal_memory_flag");
 
     /** The named subsystem. */
     public static final String NAMED_SUBSYSTEM = new String("named_subsystem");
@@ -130,7 +125,7 @@ public class Component extends Chain {
     /** The log level providing tracing information. */
     public static final Integer DEBUG_LOG_LEVEL = new Integer(4);
 
-    /** The log level printing all messages, including every signal (event) occuring in the system. */
+    /** The log level printing all messages, including every signal occuring in the system. */
     public static final Integer EVENT_LOG_LEVEL = new Integer(5);
 
     //
@@ -228,26 +223,6 @@ public class Component extends Chain {
     }
 
     /**
-     * Returns the default configuration.
-     *
-     * @return the default configuration
-     */
-    public String getDefaultConfiguration() {
-
-        return new String("cybop.core.system.chain.Configuration");
-    }
-
-    /**
-     * Returns the default log record.
-     *
-     * @return the default log record
-     */
-    public String getDefaultLogRecord() {
-
-        return new String("cybop.core.system.chain.LogRecord");
-    }
-
-    /**
      * Returns the default finalize globals flag.
      *
      * @return the default finalize globals flag
@@ -255,6 +230,16 @@ public class Component extends Chain {
     public Boolean getDefaultFinalizeGlobalsFlag() {
 
         return new Boolean(Boolean.FALSE);
+    }
+
+    /**
+     * Returns the default configuration.
+     *
+     * @return the default configuration
+     */
+    public String getDefaultConfiguration() {
+
+        return new String("cybop.core.system.chain.Configuration");
     }
 
     /**
@@ -268,6 +253,16 @@ public class Component extends Chain {
     }
 
     /**
+     * Returns the default log record.
+     *
+     * @return the default log record
+     */
+    public String getDefaultLogRecord() {
+
+        return new String("cybop.core.system.chain.LogRecord");
+    }
+
+    /**
      * Returns the default finalize log record flag.
      *
      * @return the default finalize log record flag
@@ -277,15 +272,22 @@ public class Component extends Chain {
         return new Boolean(Boolean.FALSE);
     }
 
-    //?? Temporary, to assign the root system as action listener to gui components.
-    //?? To be removed, when CYBOP supports its own mouse input handling,
-    //?? replacing the java AWT/Swing stuff.
     /**
-     * Returns the default finalize signal handler flag.
+     * Returns the default signal memory.
      *
-     * @return the default finalize signal handler flag
+     * @return the default signal memory
      */
-    public Boolean getDefaultFinalizeSignalHandlerFlag() {
+    public String getDefaultSignalMemory() {
+
+        return new String("cybop.core.system.chain.SignalMemory");
+    }
+
+    /**
+     * Returns the default finalize signal memory flag.
+     *
+     * @return the default finalize signal memory flag
+     */
+    public Boolean getDefaultFinalizeSignalMemoryFlag() {
 
         return new Boolean(Boolean.FALSE);
     }
@@ -321,7 +323,7 @@ public class Component extends Chain {
     }
 
     //
-    // Globalizable.
+    // Globalization.
     //
 
     /**
@@ -337,10 +339,7 @@ public class Component extends Chain {
             set(Component.GLOBALS, g);
             set(Component.CONFIGURATION, g.get(Component.CONFIGURATION));
             set(Component.LOG_RECORD, g.get(Component.LOG_RECORD));
-            //?? Temporary, to assign the root system as action listener to gui components.
-            //?? To be removed, when CYBOP supports its own mouse input handling,
-            //?? replacing the java AWT/Swing stuff.
-//??            setSignalHandler(g.getSignalHandler());
+            set(Component.SIGNAL_MEMORY, g.get(Component.SIGNAL_MEMORY));
 
         } else {
 
@@ -358,10 +357,7 @@ public class Component extends Chain {
 
         if (g != null) {
 
-            //?? Temporary, to assign the root system as action listener to gui components.
-            //?? To be removed, when CYBOP supports its own mouse input handling,
-            //?? replacing the java AWT/Swing stuff.
-//??            setSignalHandler(null);
+            remove(Component.SIGNAL_MEMORY);
             remove(Component.LOG_RECORD);
             remove(Component.CONFIGURATION);
             remove(Component.GLOBALS);
@@ -377,7 +373,7 @@ public class Component extends Chain {
     //
 
     /**
-     * Configures this system.
+     * Configures this component.
      *
      * @exception NullPointerException if the configuration is null
      */
@@ -394,7 +390,7 @@ public class Component extends Chain {
     }
 
     /**
-     * Deconfigures this system.
+     * Deconfigures this component.
      *
      * @exception NullPointerException if the configuration is null
      */
@@ -411,7 +407,7 @@ public class Component extends Chain {
     }
 
     //
-    // Initializable.
+    // Initialization.
     //
 
     /**
@@ -427,10 +423,7 @@ public class Component extends Chain {
         set(Component.FINALIZE_GLOBALS_FLAG, getDefaultFinalizeGlobalsFlag());
         set(Component.FINALIZE_CONFIGURATION_FLAG, getDefaultFinalizeConfigurationFlag());
         set(Component.FINALIZE_LOG_RECORD_FLAG, getDefaultFinalizeLogRecordFlag());
-        //?? Temporary, to assign the root system as action listener to gui components.
-        //?? To be removed, when CYBOP supports its own mouse input handling,
-        //?? replacing the java AWT/Swing stuff.
-//??        set(Component.FINALIZE_SIGNAL_HANDLER_FLAG, getDefaultFinalizeSignalHandlerFlag());
+        set(Component.FINALIZE_SIGNAL_MEMORY_FLAG, getDefaultFinalizeSignalMemoryFlag());
 
         // If no globals item was set in the globalize method,
         // then create a globals item here.
@@ -462,19 +455,14 @@ public class Component extends Chain {
                 g.set(Component.LOG_RECORD, get(Component.LOG_RECORD));
             }
 
-            //?? Temporary, to assign the root system as action listener to gui components.
-            //?? To be removed, when CYBOP supports its own mouse input handling,
-            //?? replacing the java AWT/Swing stuff.
-            // If no global signal handler was set in the globalize method,
-            // then set it here to this object which is the root of the whole system.
-/*??
-            if (getSignalHandler() == null) {
+            // If no global signal memory was set in the globalize method,
+            // then create a signal memory here.
+            if (get(Component.SIGNAL_MEMORY) == null) {
 
-                setSignalHandler(this);
-                set(Component.FINALIZE_SIGNAL_HANDLER_FLAG, new Boolean(Boolean.TRUE));
-                g.setSignalHandler(getSignalHandler());
+                set(Component.SIGNAL_MEMORY, createItem(getDefaultSignalMemory()));
+                set(Component.FINALIZE_SIGNAL_MEMORY_FLAG, new Boolean(Boolean.TRUE));
+                g.set(Component.SIGNAL_MEMORY, get(Component.SIGNAL_MEMORY));
             }
-*/
 
         } else {
 
@@ -529,25 +517,22 @@ public class Component extends Chain {
             
             if (g != null) {
 
-                //?? Temporary, to assign the root system as action listener to gui components.
-                //?? To be removed, when CYBOP supports its own mouse input handling,
-                //?? replacing the java AWT/Swing stuff.
-                // Only destroy signal handler, if it was also set
-                // in this component, which can be seen on the flag.            
-/*??
-                if (get(Component.FINALIZE_SIGNAL_HANDLER_FLAG) != null) {
+                // Only destroy signal memory, if it was also created
+                // in this component, which can be seen on the flag.
+                if (get(Component.FINALIZE_SIGNAL_MEMORY_FLAG) != null) {
 
-                    if (((Boolean) get(Component.FINALIZE_SIGNAL_HANDLER_FLAG)).isEqualTo(Boolean.TRUE)) {
+                    if (((Boolean) get(Component.FINALIZE_SIGNAL_MEMORY_FLAG)).isEqualTo(Boolean.TRUE)) {
 
-                        g.setSignalHandler(null);
-                        setSignalHandler(null);
+                        Item signalMemory = (Item) get(Component.SIGNAL_MEMORY);
+                        g.remove(Component.SIGNAL_MEMORY);
+                        remove(Component.SIGNAL_MEMORY);
+                        destroyItem(signalMemory);
                     }
 
                 } else {
-
-                    throw new NullPointerException("Could not finalize component. The finalize signal handler flag is null.");
+                    
+                    throw new NullPointerException("Could not finalize component. The finalize configuration item is null.");
                 }
-*/
 
                 // Only destroy log record, if it was also created
                 // in this component, which can be seen on the flag.            
@@ -604,24 +589,21 @@ public class Component extends Chain {
                 throw new NullPointerException("Could not finalize component. The finalize globals item is null.");
             }
 
-            //?? Temporary, to assign the root system as action listener to gui components.
-            //?? To be removed, when CYBOP supports its own mouse input handling,
-            //?? replacing the java AWT/Swing stuff.
-            Boolean finalizeSignalHandler = (Boolean) get(Component.FINALIZE_SIGNAL_HANDLER_FLAG);
-            remove(Component.FINALIZE_SIGNAL_HANDLER_FLAG);
-            destroyItem(finalizeSignalHandler);
+            Boolean finalizeSignalMemoryFlag = (Boolean) get(Component.FINALIZE_SIGNAL_MEMORY_FLAG);
+            remove(Component.FINALIZE_SIGNAL_MEMORY_FLAG);
+            destroyItem(finalizeSignalMemoryFlag);
 
-            Boolean finalizeLogRecord = (Boolean) get(Component.FINALIZE_LOG_RECORD_FLAG);
+            Boolean finalizeLogRecordFlag = (Boolean) get(Component.FINALIZE_LOG_RECORD_FLAG);
             remove(Component.FINALIZE_LOG_RECORD_FLAG);
-            destroyItem(finalizeLogRecord);
+            destroyItem(finalizeLogRecordFlag);
 
-            Boolean finalizeConfiguration = (Boolean) get(Component.FINALIZE_CONFIGURATION_FLAG);
+            Boolean finalizeConfigurationFlag = (Boolean) get(Component.FINALIZE_CONFIGURATION_FLAG);
             remove(Component.FINALIZE_CONFIGURATION_FLAG);
-            destroyItem(finalizeConfiguration);
+            destroyItem(finalizeConfigurationFlag);
 
-            Boolean finalizeGlobals = (Boolean) get(Component.FINALIZE_GLOBALS_FLAG);
+            Boolean finalizeGlobalsFlag = (Boolean) get(Component.FINALIZE_GLOBALS_FLAG);
             remove(Component.FINALIZE_GLOBALS_FLAG);
-            destroyItem(finalizeGlobals);
+            destroyItem(finalizeGlobalsFlag);
 
         } else {
 
@@ -632,7 +614,7 @@ public class Component extends Chain {
     }
 
     //
-    // Loggable.
+    // Logging.
     //
 
     /**
@@ -762,5 +744,52 @@ public class Component extends Chain {
     public void showMessage(Level lev, String msg, Throwable t) throws Exception {
     }
 */
+
+    //
+    // Signal storage.
+    //
+
+    /**
+     * Store the signal by keeping it in the signal memory.
+     *
+     * @param s the signal
+     * @exception NullPointerException if the signal memory is null
+     */
+    public void storeSignal(Signal s) throws NullPointerException {
+
+        SignalMemory mem = (SignalMemory) get(Component.SIGNAL_MEMORY);
+
+        if (mem != null) {
+
+            mem.storeSignal(s);
+
+        } else {
+
+            throw new NullPointerException("Could not remember signal. The signal memory is null.");
+        }
+    }
+
+    /**
+     * Fetch the next signal to be handled from the signal memory.
+     *
+     * @return the signal
+     * @exception NullPointerException if the signal memory is null
+     */
+    public Signal fetchSignal() throws NullPointerException {
+
+        Signal s = null;
+        SignalMemory mem = (SignalMemory) get(Component.SIGNAL_MEMORY);
+
+        if (mem != null) {
+
+            s = mem.fetchSignal();
+
+        } else {
+
+            throw new NullPointerException("Could not place signal. The signal memory is null.");
+        }
+        
+        return s;
+    }
 }
 

@@ -76,7 +76,7 @@ import cybop.core.model.principle.*;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.14 $ $Date: 2003-03-26 07:48:00 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-04-17 14:50:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -865,7 +865,7 @@ public class Item extends State {
 
                 int index = 0;
                 Item child = null;
-                
+
                 while (index < getChildrenNumber()) {
 
                     child = c[index];

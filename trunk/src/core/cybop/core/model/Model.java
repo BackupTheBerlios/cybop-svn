@@ -32,9 +32,54 @@ import cybop.core.basic.String;
  * Synonyms for <i>model</i> are <i>protocol</i> or <i>language</i>,
  * i.e. everything that defines a structure for how systems exchange data.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-17 14:50:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Model extends GraphicItem {
+
+    //
+    // Children names.
+    //
+
+    /** The owner. */
+    public static final String OWNER = new String("owner");
+
+    //
+    // Default children.
+    //
+
+    /**
+     * Returns the default owner.
+     *
+     * @return the default owner
+     */
+    public String getDefaultOwner() {
+
+        return null;
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this model.
+     */
+    public void initialize() throws Exception {
+
+        super.initialize();
+
+        set(Model.OWNER, getDefaultOwner());
+    }
+
+    /**
+     * Finalizes this model.
+     */
+    public void finalizz() throws Exception {
+
+        remove(Model.OWNER);
+
+        super.finalizz();
+    }
 }
 

@@ -25,6 +25,7 @@
 package cybop.core.signal;
 
 import cybop.core.basic.*;
+import cybop.core.basic.Integer;
 import cybop.core.basic.String;
 
 /**
@@ -32,7 +33,7 @@ import cybop.core.basic.String;
  *
  * It serves as container transporting information of communication.
  *
- * @version $Revision: 1.6 $ $Date: 2003-03-22 09:19:53 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-04-17 14:50:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Signal extends Item {
@@ -40,6 +41,9 @@ public class Signal extends Item {
     //
     // Children names.
     //
+
+    /** The priority. */
+    public static final String PRIORITY = new String("priority");
 
     /** The language. */
     public static final String LANGUAGE = new String("language");
@@ -93,6 +97,16 @@ public class Signal extends Item {
     //
     // Default children.
     //
+
+    /**
+     * Returns the default priority.
+     *
+     * @return the default priority
+     */
+    public Integer getDefaultPriority() {
+
+        return new Integer(1);
+    }
 
     /**
      * Returns the default language.
@@ -182,6 +196,7 @@ public class Signal extends Item {
         remove(Signal.PREDICATE);
         remove(Signal.SUBJECT);
         remove(Signal.LANGUAGE);
+        remove(Signal.PRIORITY);
     }
 }
 
