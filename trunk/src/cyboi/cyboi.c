@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.39 $ $Date: 2004-10-28 18:42:33 $ $Author: rholzmueller $
+ * @version $Revision: 1.40 $ $Date: 2004-10-28 18:43:18 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
