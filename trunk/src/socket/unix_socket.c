@@ -1,7 +1,7 @@
 /*
  * $RCSfile: unix_socket.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -23,7 +23,7 @@
  *
  * This file handles a server UNIX FILE socket.
  *
- * @version $Revision: 1.7 $ $Date: 2004-12-20 21:05:15 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-01-08 14:28:19 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -45,6 +45,8 @@
  */
 void create_unix_socket(void* p0, const void* p1) {
 
+//?? TODO: Read UNIX_SERVER_SOCKET_FILENAME from internals!!
+
     if (p1 != NULL_POINTER) {
 
         void** n = (void**) p1;
@@ -52,6 +54,8 @@ void create_unix_socket(void* p0, const void* p1) {
         if (p0 != NULL_POINTER) {
 
             int** s = (int**) p0;
+
+            log_message_debug("Create unix socket.");
 
             // Open socket and get its number.
             // AF stands for address format. AF_LOCAL is a synonym for AF_UNIX.

@@ -1,7 +1,7 @@
 /*
- * $RCSfile: globals.c,v $
+ * $RCSfile: globals_handler.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -21,12 +21,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2004-12-20 00:19:44 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-01-08 14:28:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef GLOBALS_SOURCE
-#define GLOBALS_SOURCE
+#ifndef GLOBALS_HANDLER_SOURCE
+#define GLOBALS_HANDLER_SOURCE
 
 #include "../global/log_constants.c"
 #include "../global/variables.c"
@@ -38,6 +38,8 @@
  * /globals/variables.c because then constant values are expected!
  */
 void create_globals() {
+
+    log_message_debug("Create globals.");
 
     //
     // Null pointers.
@@ -113,6 +115,8 @@ void create_globals() {
  */
 void destroy_globals() {
 
+    log_message_debug("Destroy globals.");
+
     //
     // Primitive type sizes.
     //
@@ -137,5 +141,5 @@ void destroy_globals() {
     destroy_integer((void*) &MAXIMUM_LOG_MESSAGE_COUNT);
 }
 
-/* GLOBALS_SOURCE */
+/* GLOBALS_HANDLER_SOURCE */
 #endif

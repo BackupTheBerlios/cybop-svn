@@ -1,7 +1,7 @@
 /*
  * $RCSfile: signal_waiter.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2005-01-08 01:24:02 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2005-01-08 14:28:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,56 +61,50 @@
  */
 void activate_internals(void* p0) {
 
-    //
-    // Unix socket.
-    //
+    log_message_debug("Activate internals.");
 
-//    char unix_server_socket_flag = 0;
-//
-//    get_array_element(p3, (void*) &CHARACTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FLAG_INDEX, (void*) &unix_server_socket_flag);
-//
-//    if (unix_server_socket_flag == 1) {
-//
-//        int unix_server_socket = -1;
-//
-//        get_array_element(p4, (void*) &INTEGER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INDEX, (void*) &unix_server_socket);
-//
-//        receive_unix_socket((void*) &unix_server_socket);
-//    }
+    // The activation flag.
+    int* f = INTEGER_NULL_POINTER;
+    create_integer((void*) &f);
+    *f = 0;
 
-    //
+    // UNIX socket.
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
+
+    if (*f == 1) {
+
+        receive_unix_socket(p0);
+
+        *f = 0;
+    }
+
     // TCP socket.
-    //
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
 
-    int* p_tcp_socket_active = NULL_POINTER;
+    if (*f == 1) {
 
-    // get the active flag for tcp socket
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &p_tcp_socket_active, (void*) &ONE_ELEMENT_COUNT);
+        receive_tcp_socket(p0);
 
-    if (*p_tcp_socket_active == 1) {
-
-//??        activate_tcp_socket(p0);
+        *f = 0;
     }
 
-/*??
-    //
     // X windows.
-    //
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
 
-    send_x_windows_output(NULL, NULL, p5);
-    sleep(4);
+    if (*f == 1) {
 
-    int x_windows_flag = 0;
+        receive_x_windows(p0);
 
-    get_array_element(p6, (void*) &INTEGER_ARRAY, (void*) &X_WINDOWS_FLAG_INDEX, (void*) &x_windows_flag);
-
-    if (x_windows_flag == 1) {
-
-        receive_x_windows_input(p0, x_windows);
+        *f = 0;
     }
 
-    init_x();
-*/
+//?? TEST only!
+//??    send_x_windows_output(NULL, NULL, p5);
+//??    sleep(4);
+//??    init_x();
+
+    // Destroy activation flag.
+    destroy_integer((void*) &f);
 }
 
 /**
@@ -119,6 +113,8 @@ void activate_internals(void* p0) {
  * @param p0 the internals memory
  */
 void wait(void* p0) {
+
+    log_message_debug("Run signal waiting loop.");
 
     // Activate internal mechanisms for signal reception.
     activate_internals(p0);

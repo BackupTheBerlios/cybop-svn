@@ -23,7 +23,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.11 $ $Date: 2005-01-08 01:24:03 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-01-08 14:28:19 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -306,7 +306,7 @@ void handle_request(void** pp_internals, int* p_client_socket_number) {
  */
 void create_tcp_socket(void** pp_internals) {
 
-    log_message_debug("create_tcp_socket is started");
+    log_message_debug("Create tcp socket.");
 
     if (pp_internals == NULL_POINTER) {
 
@@ -494,11 +494,11 @@ void run_tcp_socket(void** pp_internals) {
 }
 
 /**
- * Start the tcp socket server.
+ * Receives tcp socket server signals.
  *
  * @param pp_internals the internals
  */
-void activate_tcp_socket(void** pp_internals) {
+void receive_tcp_socket(void** pp_internals) {
 
     log_message_debug("activate_tcp_spcket is started");
 
