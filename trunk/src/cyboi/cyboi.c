@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.3 $ $Date: 2004-05-11 08:32:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-05-11 11:36:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -221,8 +221,8 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 int main(int p0, char** p1) {
 
     // Calls testing procedures. Comment/ uncomment this as needed.
-    test();
-    return 0;
+//    test();
+//    return 0;
 
     // Return 1 to indicate an error, by default.
     int r = 1;

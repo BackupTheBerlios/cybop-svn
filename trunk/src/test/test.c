@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.11 $ $Date: 2004-05-11 08:32:38 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-05-11 11:36:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -246,6 +246,8 @@ void test_file_read() {
 
     // The array.
     void* a = NULL_POINTER;
+    // The array size.
+    int as = 0;
     // The array count.
     int ac = 0;
     // The file name array.
@@ -255,8 +257,14 @@ void test_file_read() {
     // The file name count.
     int fnc = 26;
 
-    create_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &ac);
-    read_file((void*) &a, (void*) &ac, (void*) &fn, (void*) &fnc);
+    create_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &as);
+    read_file((void*) &a, (void*) &as, (void*) &ac, (void*) &fn, (void*) &fnc);
+
+    fprintf(stderr, "a: %i\n", a);
+    fprintf(stderr, "as: %i\n", as);
+    fprintf(stderr, "ac: %i\n", ac);
+    fprintf(stderr, "fn: %i\n", fn);
+    fprintf(stderr, "fnc: %i\n", fnc);
 
     int j = 0;
     char c = NULL_CHARACTER;
@@ -268,19 +276,36 @@ void test_file_read() {
             break;
         }
 
-        get_array_element((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &fnc, (void*) &c);
+        get_array_element((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &j, (void*) &c);
         fputc(c, stdout);
 
         j++;
     }
 
-    destroy_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &ac);
+    destroy_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &as);
 }
 
 /**
  * Tests the file write.
  */
 void test_file_write() {
+
+    // The character array.
+    char aa[] = {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!', '\n'};
+    // The array.
+    void* a = aa;
+    // The array size.
+    int as = 14;
+    // The array count.
+    int ac = 14;
+    // The file name array.
+    char fna[] = {'/', 'h', 'o', 'm', 'e', '/', 'c', 'y', 'b', 'o', 'p', '/', 't', 'm', 'p', '/', 't', 'e', 's', 't', '.', 'c', 'y', 'b', 'o', 'l'};
+    // The file name.
+    char* fn = fna;
+    // The file name count.
+    int fnc = 26;
+
+    write_file((void*) &a, (void*) &as, (void*) &ac, (void*) &fn, (void*) &fnc);
 }
 
 /**
@@ -303,8 +328,8 @@ void test() {
 //    test_pointer_cast();
 //    test_character_array_single_element();
 //    test_character_array_multiple_elements();
-    test_file_read();
-//    test_file_write();
+//    test_file_read();
+    test_file_write();
 }
 
 /* TEST_SOURCE */

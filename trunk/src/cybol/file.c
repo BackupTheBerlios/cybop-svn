@@ -23,7 +23,7 @@
  *
  * This file handles a file.
  *
- * @version $Revision: 1.2 $ $Date: 2004-05-11 08:32:38 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-05-11 11:36:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,74 +39,88 @@
  *
  * @param p0 the array
  * @param p1 the array size
- * @param p2 the file name
- * @param p3 the file name count
+ * @param p2 the array count
+ * @param p3 the file name
+ * @param p4 the file name count
  */
-void read_file(void* p0, void* p1, const void* p2, const void* p3) {
+void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
-    if (p3 != NULL_POINTER) {
+    if (p4 != NULL_POINTER) {
 
-        int* fnc = (int*) p3;
+        int* fnc = (int*) p4;
 
-        if (p1 != NULL_POINTER) {
+        if (p2 != NULL_POINTER) {
 
-            int* as = (int*) p1;
+            int* ac = (int*) p2;
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Read file.");
+            if (p1 != NULL_POINTER) {
 
-            // The index for the original file name.
-            int oi = 0;
-            // The new file name count.
-            int nc = *fnc + 1;
-            // The file name.
-            void* n = NULL_POINTER;
+                int* as = (int*) p1;
 
-            // Create temporary file name with extended size
-            // for string termination character.
-            create_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
-            // Add original file name.
-            set_array_elements((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &oi, p2, p3);
-            // Add string termination character using file name count as index.
-            set_array_element((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &fnc, (void*) &NULL_CHARACTER);
+                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Read file.");
 
-            FILE* f = fopen((char*) n, "r");
+                // The file name.
+                void* n = NULL_POINTER;
+                // The new file name count.
+                int nc = *fnc + 1;
+                // The index for the original file name.
+                int oi = 0;
 
-            if (f != NULL_POINTER) {
+                // Create temporary file name with extended size
+                // for string termination character.
+                create_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
+                // Add original file name.
+                set_array_elements((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &oi, p3, p4);
+                // Add string termination character using file name count as index.
+                set_array_element((void*) &n, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CHARACTER);
 
-                char c = fgetc(f);
-                int j = 0;
+                FILE* f = fopen((char*) n, "r");
 
-                while (1) {
+                if (f != NULL_POINTER) {
 
-                    if (c == EOF) {
+                    char c = fgetc(f);
+                    int j = 0;
 
-                        break;
+                    while (1) {
+
+                        if (c == EOF) {
+
+                            break;
+                        }
+
+                        if (j >= *as) {
+
+                            *as = *as * 2 + 1;
+                            resize_array(p0, (void*) &CHARACTER_ARRAY, p1);
+                        }
+
+                        set_array_element(p0, (void*) &CHARACTER_ARRAY, (void*) &j, (void*) &c);
+
+                        c = fgetc(f);
+                        j++;
                     }
 
-                    if (j >= *as) {
+                    // Set array count to last valid index incremented by one.
+                    *ac = j;
 
-                        *as = *as * 2 + 1;
-                        resize_array(p0, (void*) &CHARACTER_ARRAY, p1);
-                    }
+                    fclose(f);
 
-                    set_array_element(p0, (void*) &CHARACTER_ARRAY, (void*) &j, (void*) &c);
-                    c = fgetc(f);
-                    j++;
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The file is null.");
                 }
 
-                fclose(f);
+                // Destroy temporary file name.
+                destroy_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The file is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The array size is null.");
             }
-
-            // Destroy temporary file name.
-            destroy_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The array size is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The array count is null.");
         }
 
     } else {
@@ -120,76 +134,87 @@ void read_file(void* p0, void* p1, const void* p2, const void* p3) {
  *
  * @param p0 the array
  * @param p1 the array size
- * @param p2 the file name
- * @param p3 the file name count
+ * @param p2 the array count
+ * @param p3 the file name
+ * @param p4 the file name count
  */
-void write_file(const void* p0, const void* p1, void* p2, void* p3) {
+void write_file(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
 
-    if (p3 != NULL_POINTER) {
+    if (p4 != NULL_POINTER) {
 
-        int* fnc = (int*) p3;
+        int* fnc = (int*) p4;
 
-        if (p1 != NULL_POINTER) {
+        if (p2 != NULL_POINTER) {
 
-            int* as = (int*) p1;
+            int* ac = (int*) p2;
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Write file.");
+            if (p1 != NULL_POINTER) {
 
-            // The index for the original file name.
-            int oi = 0;
-            // The new file name count.
-            int nc = *fnc + 1;
-            // The file name.
-            void* n = NULL_POINTER;
+                int* as = (int*) p1;
 
-            // Create temporary file name with extended size
-            // for string termination character.
-            create_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
-            // Add original file name.
-            set_array_elements((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &oi, p2, p3);
-            // Add string termination character using file name count as index.
-            set_array_element((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &fnc, (void*) &NULL_CHARACTER);
+                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Write file.");
 
-            FILE* f = fopen((char*) n, "r");
+                // The file name.
+                void* n = NULL_POINTER;
+                // The new file name count.
+                int nc = *fnc + 1;
+                // The index for the original file name.
+                int oi = 0;
 
-            if (f != NULL_POINTER) {
+                // Create temporary file name with extended size
+                // for string termination character.
+                create_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
+                // Add original file name.
+                set_array_elements((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &oi, p3, p4);
+                // Add string termination character using file name count as index.
+                set_array_element((void*) &n, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CHARACTER);
 
-                char r = NULL_CHARACTER;
-                int j = 0;
-                char c = NULL_CHARACTER;
+                FILE* f = fopen((char*) n, "w");
 
-                while (1) {
+                if (f != NULL_POINTER) {
 
-                    if (j >= *as) {
+                    char r = NULL_CHARACTER;
+                    int j = 0;
+                    char c = NULL_CHARACTER;
 
-                        break;
+                    while (1) {
+
+                        if (j >= *as) {
+
+                            break;
+                        }
+
+                        if (r == EOF) {
+
+                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. A write error occured.");
+
+                            break;
+                        }
+
+                        get_array_element(p0, (void*) &CHARACTER_ARRAY, (void*) &j, (void*) &c);
+
+                        r = fputc(c, f);
+                        j++;
                     }
 
-                    if (r == EOF) {
+                    fclose(f);
 
-                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. A write error occured.");
+                } else {
 
-                        break;
-                    }
-
-                    get_array_element(p0, (void*) &CHARACTER_ARRAY, (void*) &j, (void*) &c);
-                    r = fputc(c, f);
-                    j++;
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. The file is null.");
                 }
 
-                fclose(f);
+                // Destroy temporary file name.
+                destroy_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. The file is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. The array size is null.");
             }
-
-            // Destroy temporary file name.
-            destroy_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. The array size is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. The array count is null.");
         }
 
     } else {
