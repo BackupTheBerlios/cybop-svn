@@ -51,7 +51,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.20 $ $Date: 2004-02-29 19:55:27 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2004-02-29 23:32:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -345,18 +345,12 @@ void destroy_signal_memory(void* p0) {
             // together with the signal.
             remove_signal(p0, (void*) &i);
 
-            log_message((void*) &INFO_LOG_LEVEL, "TEST A");
-
             // Destroy signal. Do not destroy the signal's abstraction and
             // priority here; they are static within CYBOI.
             destroy_model(s, (void*) 0, (void*) 0, (void*) a);
 
-            log_message((void*) &INFO_LOG_LEVEL, "TEST B");
-
             i--;
         }
-
-        log_message((void*) &INFO_LOG_LEVEL, "TEST C");
 
         log_message((void*) &INFO_LOG_LEVEL, "Destroy signal memory.");
 

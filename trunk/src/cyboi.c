@@ -43,7 +43,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.9 $ $Date: 2004-02-29 19:55:27 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-02-29 23:32:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -99,31 +99,36 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
             if (f == 0) {
 
                 //?? test x windows
-                send_x_windows_output((void*) 0, (void*) 0, p3);
+//??                send_x_windows_output((void*) 0, (void*) 0, p3);
                 sleep(4);
 
                 // Check for x windows events and send them as cyboi signals.
                 if (i->x_windows_flag == 1) {
 
-                    receive_x_windows_input(p0, i->x_windows);
+//??                    receive_x_windows_input(p0, i->x_windows);
                 }
 
-                break;
+//??                break;
 
-/*??
                 // Get top priority signal from signal memory and remove it from there.
-                get_highest_priority_index(p0, (void*) &index);
+//??                get_highest_priority_index(p0, (void*) &index);
+                index = 0;
+
                 s = get_signal(p0, (void*) &index);
                 a = (char*) get_abstraction(p0, (void*) &index);
                 p = get_priority(p0, (void*) &index);
+
+                // Abstraction and priority are removed internally,
+                // together with the signal.
                 remove_signal(p0, (void*) &index);
+
                 // Destroy signal. Do not destroy the signal's abstraction and
                 // priority here; they are static within CYBOI.
-                destroy_dynamics(ss, (void*) p1[1], (void*) 0, (void*) 0, (void*) DYNAMICS_COMPOUND);
+                destroy_model(s, (void*) 0, (void*) 0, (void*) a);
 
                 // Handle signal.
                 log_message((void*) &INFO_LOG_LEVEL, "0");
-                if (strcmp(a, DYNAMICS_COMPOUND) == 0) {
+                if (strcmp(a, COMPOUND_MODEL) == 0) {
 
                     log_message((void*) &INFO_LOG_LEVEL, "1");
                     handle_compound_signal(p0, s, p);
@@ -133,7 +138,6 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
                     log_message((void*) &INFO_LOG_LEVEL, "2");
                     handle_operation_signal(s, a, p1, p2, p3, (void*) &f);
                 }
-*/
 
             } else {
 
@@ -191,10 +195,10 @@ int main(int p0, char** p1) {
             create_signal_memory(sm);
 
             // Create startup signal.
-            void* ss = create_model((void*) p1[1], (void*) 0, (void*) COMPOUND_MODEL);
+            void* ss = create_model((void*) p1[1], (void*) 0, (void*) OPERATION_MODEL);
 
             // Add startup signal to signal memory.
-            add_signal(sm, ss, (void*) COMPOUND_MODEL, (void*) &NORMAL_PRIORITY);
+            add_signal(sm, ss, (void*) OPERATION_MODEL, (void*) &NORMAL_PRIORITY);
 
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)
@@ -206,9 +210,7 @@ int main(int p0, char** p1) {
             // Signals are destroyed when being read from signal memory.
 
             // Destroy signal memory.
-            log_message((void*) &INFO_LOG_LEVEL, "TEST 0");
             destroy_signal_memory(sm);
-            log_message((void*) &INFO_LOG_LEVEL, "TEST 1");
             free(sm);
 
             // Destroy internals.
