@@ -27,7 +27,7 @@ package cyboi;
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.9 $ $Date: 2003-08-05 21:52:21 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-08-06 12:43:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryHandler {
@@ -88,14 +88,50 @@ class CategoryHandler {
     static java.lang.String INTERACTION_ABSTRACTION = "interaction_abstraction";
 
     //
-    // Global variables.
+    // Category.
     //
     
-    /** The xml parser. */
-    static java.lang.Object xml_parser;
+    /**
+     * Initializes the category.
+     *
+     * Reads the file of the given category.
+     *
+     * @param p0 the category
+     * @param p1 the category name
+     */
+    static void initialize_category(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
+
+        org.apache.xerces.parsers.DOMParser p = new org.apache.xerces.parsers.DOMParser();
+        CategoryHandler.initialize_xml_parser(p);
+    
+        if (p != null) {
+            
+            java.lang.System.out.println("INFO: Initialize category: " + p1);
+            p.parse(CategoryHandler.PATH + p1 + CategoryHandler.CYBOL);
+            CategoryHandler.read_document(p0, (org.apache.xerces.dom.DocumentImpl) p.getDocument());
+    
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not initialize category elements. The xml parser is null.");
+        }
+
+        CategoryHandler.finalize_xml_parser(p);
+        p = null;
+    }
+
+    /**
+     * Finalizes the category.
+     *
+     * Writes the file of the given category.
+     *
+     * @param p0 the category
+     * @param p1 the category name
+     */
+    static void finalize_category(java.lang.Object p0, java.lang.Object p1) {
+    }
 
     //
-    // Parser.
+    // XML Parser.
     //
 
     /**
@@ -126,45 +162,6 @@ class CategoryHandler {
     static void finalize_xml_parser(java.lang.Object p0) {
 
         java.lang.System.out.println("INFO: Finalize xml parser.");
-    }
-
-    //
-    // Category.
-    //
-    
-    /**
-     * Initializes the category.
-     *
-     * Reads the file of the given category.
-     *
-     * @param p0 the category
-     * @param p1 the category name
-     */
-    static void initialize_category(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
-
-        org.apache.xerces.parsers.DOMParser p = (org.apache.xerces.parsers.DOMParser) CategoryHandler.xml_parser;
-    
-        if (p != null) {
-            
-            java.lang.System.out.println("INFO: Initialize category: " + p1);
-            p.parse(CategoryHandler.PATH + p1 + CategoryHandler.CYBOL);
-            CategoryHandler.read_document(p0, (org.apache.xerces.dom.DocumentImpl) p.getDocument());
-    
-        } else {
-            
-            java.lang.System.out.println("ERROR: Could not initialize category elements. The xml parser is null.");
-        }
-    }
-
-    /**
-     * Finalizes the category.
-     *
-     * Writes the file of the given category.
-     *
-     * @param p0 the category
-     * @param p1 the category name
-     */
-    static void finalize_category(java.lang.Object p0, java.lang.Object p1) {
     }
 
     //

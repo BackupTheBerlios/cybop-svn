@@ -38,14 +38,14 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.22 $ $Date: 2003-08-05 00:00:12 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2003-08-06 12:43:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
 
     //?? See for example:
     //?? java.io.ObjectOutputStream::writeArray
-    //?? for how to transfer a Object into a byte[]
+    //?? for how to transfer an Object into a byte[]
 
     /*
      * The main method.
@@ -64,10 +64,6 @@ class Main {
                     java.lang.Object statics_category_name = args[0];
                     java.lang.Object dynamics_category_name = args[1];
                     java.lang.Object signal_category_name = "cybol/core/signal/signal";
-
-                    // XML parser.
-                    CategoryHandler.xml_parser = new org.apache.xerces.parsers.DOMParser();
-                    CategoryHandler.initialize_xml_parser(CategoryHandler.xml_parser);
 
                     // Statics.
                     java.lang.Object statics = new Item();
@@ -123,10 +119,6 @@ class Main {
                     ItemHandler.finalize_item(statics, statics_category_name);
                     ItemHandler.finalize_item_containers(statics);
                     statics = null;
-
-                    // XML parser.
-                    CategoryHandler.finalize_xml_parser(CategoryHandler.xml_parser);
-                    CategoryHandler.xml_parser = null;
 
                     //
                     // Runtime.getRuntime().exit(0);
