@@ -1,0 +1,43 @@
+\section{ReForm Module}
+\label{reform_module_section}
+
+The practical background for the application of CYBOP is \emph{Res Medicinae}.
+A modern clinical information system is the aim of all efforts in this project.
+In the future, it shall serve medical documentation, laboratory data, billing etc.
+\emph{Res Medicinae} is separated into single modules solving different tasks.\\
+One of these modules is \emph{Record} -- an application for documenting medical
+information. In addition to new documentation models, it also contains a tool
+for topological documentation (figure \ref{record_module_figure}).
+
+\begin{figure}[ht]
+    \begin{center}
+       \includegraphics[scale=0.27]{images/record_modul.eps}
+       \caption{Record Module \cite{urban}}
+       \label{record_module_figure}
+    \end{center}
+\end{figure}
+
+A second module in which the \emph{CYBOP/Layer PerCom} concepts were applied,
+is \emph{ReForm} (figure \ref{reform_module_figure}). It offers a number of
+medical forms that can be filled in and printed out. Since one of the main reasons
+to implement this module was the testing and proof of the new persistence and
+communication concepts, it includes a dialog for choosing the communication protocol
+or persistence mechanism, respectively. This is the only remaining part where users
+have to care about the underlaying techniques. They also have to decide whether to
+use the local file system via XML-format or to store the data in a central database.
+In the future, the same XML file format may as well be used for remote communication,
+e.g. via SOAP.\\
+Because of the component-based architecture of Res Medicinae, it is possible to
+start more than one instance of ReForm. In this way, the data exchange between
+modules can be tested. A module X looks for another registered module Y at the
+naming service (of RMI, CORBA or some other). X gets the address of the remote
+service Y (depending on the communication mechanism). The stub and skeleton of X
+and Y marshal, send and unmarshal the data for further working.
+
+\begin{figure}[ht]
+    \begin{center}
+       \includegraphics[scale=0.24]{images/reform_module.eps}
+       \caption{ReForm Module}
+       \label{reform_module_figure}
+    \end{center}
+\end{figure}

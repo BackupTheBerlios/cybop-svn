@@ -1,0 +1,18 @@
+\section{Summary}
+\label{summary_section}
+
+Persistence, communication and user interface mechanisms have common properties.
+Classical system architectures treat them as \emph{Backend}, \emph{DataTransfer}
+and \emph{Frontend} and use different methods and design patterns (\emph{DataMapper},
+\emph{DataTransferObject}, \emph{ModelViewController}) to implement them.\\
+This paper proposes to sum up their common properties and behaviour in parent
+classes and to merge them all into one architecture, avoiding redundant parts.
+The resulting design is a good solution for the implementation of highly flexible,
+easily extensible and maintainable, reusable source code. The interdependency of
+domain data, persistence layer, communication layer and user interface is abolished.\\
+The time needed to create such an architecture (like in form of the CYBOP framework)
+is more than for the classical way. But once the architecture is there -- it can
+save a tremendous amount of time when deriving modules being capable of communicating
+across various mechanisms. Due to its flexibility and low dependencies, it also
+ensures that extensions (e.g. new communication mechanisms) and modifications
+can be done anytime later without destroying already existing solutions.

@@ -1,0 +1,170 @@
+ %
+ % $RCSfile: kompBasSwe.tex,v $
+ %
+ % Copyright (c) 1999-2002. Jens Bohl. All rights reserved.
+ %
+ % This software is published under the GPL GNU General Public License.
+ % This program is free software; you can redistribute it and/or
+ % modify it under the terms of the GNU General Public License
+ % as published by the Free Software Foundation; either version 2
+ % of the License, or (at your option) any later version.
+ %
+ % This program is distributed in the hope that it will be useful,
+ % but WITHOUT ANY WARRANTY; without even the implied warranty of
+ % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ % GNU General Public License for more details.
+ %
+ % You should have received a copy of the GNU General Public License
+ % along with this program; if not, write to the Free Software
+ % Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ %
+ % http://www.resmedicinae.org
+ % - Information in Medicine -
+
+ %A chapter about component based software engineering and the component lifecycle.
+
+\chapter{Komponentenbasierte Softwareentwicklung}
+    Das Wort {\it Softwarekomponente} ist ein sehr abstrakter Begriff der Softwaretechnik. Softwarekomponenten
+    können Anwendungen, Module oder einfach nur -- im Sinne der objektorientierten Programmierung -- Entitäten
+    darstellen, die Daten sowie Funktionalität kapseln.\\
+    Einfache Instanzen des objektorientierten Paradigmas stehen stets in Beziehung zueinander. Sie können miteinander
+    über Nachrichten kommunizieren und sich auf diese Weise gegenseitig beeinflussen. Ein großer Nachteil besteht aber
+    in den Abhängigkeiten, die zwischen diesen Instanzen entstehen können. Dadurch sind sie nicht mehr einfach
+    ersetzbar.\\Komponentenbasierte Softwareentwicklung geht deshalb einen Schritt weiter. Eine einfache und umfassende
+    Kontrolle der Objektreferenzen wird angestrebt. Komponenten sollen die
+    Eigenschaft der einfachen Ersetzbarkeit besitzen und somit die objektorientierte Programmierung bzw. Modellierung
+    ihren eigentlichen Zielen von Intuitivität, Wartbarkeit, Erweiterbarkeit und Wiederverwendbarkeit näher bringen.
+    \section{Der Komponenten-Lebenszyklus}
+    Die Natur ist der beste Lehrer.
+    Über Jahrmillionen entstandene, sich durch Selektion und Mutation stetig
+    verbessernde Anpassungen des Lebens an sich ständig verändernde Umwelteinflüsse bieten hervorragende, wenn auch sehr
+    komplexe Vorlagen für technische Systeme.
+    Schon seit Jahrzehnten versucht man auf dem Gebiet der Neuroinformatik, Kybernetik und der biomedizinischen
+    Technik dynamische Vorgänge in der Natur mathematisch zu erfassen und die ''Ideen'' der Natur auf diese Art und
+    Weise für den Menschen nutzbar zu machen. Neuronale Netze sind wohl die besten Beispiele für solche
+    künstlichen Systeme. Aber auch die Automatisierungstechnik und Fuzzy-Logik nehmen die Natur zum
+    Vorbild und versuchen durch selbstregelnde Prozesse solche Konzepte technisch zu verwirklichen.
+    \\
+    Angelehnt an den natürlichen Lebenszyklus von organischen Zellen kann man auch
+    Softwarekomponenten einem ähnlichen Kreislauf unterwerfen. Diese Vorgehensweise verfolgt das Ziel, die
+    oft sehr komplexe Dynamik von Software besser beschreiben und definierte Abhängigkeiten zwischen
+    Komponenten effizienter erkennen und nachbilden zu können.
+    \paragraph{Grundlegende Idee}
+        Organische Zellen enstehen in einem komplexen Teilungsprozess. Dabei übernehmen
+        sie das komplette Erbmaterial der Elternzelle. Dieser Umstand impliziert, dass Zellen ihre meisten
+        Eigenschaften über unzählige Generationen hinweg vererbt bekommen. Zudem werden auch neue
+        Eigenschaften entsprechend der jeweilig vorhandenen Umgebung neu erworben. Der
+        Zelle ist es somit möglich, sich anzupassen.\\
+        Während ihres Lebens wächst die Zelle, es bilden sich entsprechend der übergebenen Erbinformation alle
+        notwendigen Organellen aus. Die Zelle ist ab diesem Zeitpunkt voll lebensfähig und - was gerade im Zellverband von
+        grosser Bedeutung ist - sie ist funktionsfähig, kann die an sie gestellten Aufgaben erfüllen. Hat sie ein
+        gewisses Alter erreicht bzw. ihren Nutzen im Zellverband eines Organismus' erfüllt, stirbt sie und der
+        Kreis schliesst sich.\\
+    \paragraph{Modellierung}
+        Diese Idee ist nun Vorbild für den Lebenszyklus von Softwarekomponenten \cite{avalon}.\\
+        Jede Komponente wird innerhalb der sie beinhaltenden Umgebung diesem Kreislauf unterworfen.
+        Methoden, die auf den Komponenten aufgerufen werden, bestimmen den Ablauf des Zyklus und damit auch
+        die Reihenfolge der Aktionen. So existieren Operationen für das Anlegen, die Initialisierung,
+        Konfiguration und die Bedienung, aber auch für das Löschen bzw. Verwerfen von
+        Komponenten. \\
+        Das folgende Bild (siehe Abb. \ref{Abstrakter Lebenszyklus von Komponenten}) zeigt im Stile eines Zustandsübergangsgraphen den Lebenszyklus einer solchen
+        Software-Komponente.
+
+        \includepicture{15}{eps/lebenszyklus.eps}{Abstrakter Lebenszyklus von Komponenten}{Abstrakter Lebenszyklus von Komponenten}{Abstrakter Lebenszyklus von Komponenten}
+
+        Prinzipiell existieren zwei elementare Grundzustände, die eine Komponente annehmen kann: {\it nicht existent} und
+        {\it existent}.
+        Vom Zustand {\it Komponente ist nicht existent} wird die Komponente durch Konstruktoraufrufe in den Zustand
+        {\it Komponente existent} gebracht. In diesem Status ist es möglich, ihr grundlegende
+        Eigenschaften über Konfiguration, Initialisierung und Komposition zu zuweisen. Die dabei verwendeten Methoden werden
+        {\tt globalize}, {\tt initialize} und {\tt link} genannt und in dieser Reihenfolge ausgeführt. Durch diese Anwendung der
+        Operationen gelangt die Komponente wiederum in Unter-Zustände, welche sie zunächst als konfiguriert, dann
+        initialisiert und zuletzt voll einsatzfähig charakterisieren.
+        Nun ist die Komponente bereit, genutzt zu werden, also ihren Zweck innerhalb der Umgebung zu erfüllen. Die sich
+        jetzt anschließenden Operationen hängen von der spezifischen Aufgabe der Komponente innerhalb des Systems ab.\\
+        Besteht nach einer bestimmten Zeit keine Verwendung mehr für die Komponente, wird sie durch {\tt unlink},
+        {\tt finalize} und {\tt deglobalize} dekonfiguriert und kann durch einen Destruktionsoperator
+        wieder gelöscht werden. Dieser letzte Umstand macht zudem {\it Garbage Collection}\footnote{Als {\it Garbage Collection} bezeichnet man das Finden und Löschen
+        von Objekten, die nicht mehr referenziert werden. Dieser Prozess ersetzt in Java die aktive Anwendung von Destruktoren durch den Programmierer.} überflüssig, da das Beseitigen von
+        Objekten explizit überwacht werden kann.\\
+        Tabelle \ref{Operationen des Komponentenlebenszyklus'} stellt diese Schritte noch einmal in chronologischer
+        Reihenfolge dar, wobei in der letzten Spalte die zu jedem Methodenaufruf gehörenden natürlichen
+        \begin{center}
+            \begin{table}
+            \caption[Operationen des Komponentenlebenszyklus']{Operationen des Komponentenlebenszyklus'}
+            \label{Operationen des Komponentenlebenszyklus'}
+            \begin{tabular}{|c||c|p{5cm}|p{6cm}|}
+            % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+            \hline
+            \bf{Schritt} & \bf{Operation} & \bf{Erläuterung} & \bf{Natürlicher Vergleich} \\
+            \hline
+            \hline
+            1 & \tt{new} & Konstruktoraufruf & Zellteilung (Mitose), Zellentstehen \\
+            \hline
+            2 & \tt{globalize} & Übergabe globaler Konfigurationsparameter & Weitergabe der DNS an Kindzellen \\
+            \hline
+            3 & \tt{initialize} & Erzeugung von abhängigen Unterobjekten & Ausbildung von Zellorganellen (Zellkern, Plasma usw.) \\
+            \hline
+            4 & \tt{link} & Assoziationen zwischen Unterobjekten & Bindung in Zellverband\\
+            \hline
+            5 & \tt{operation} & Komponentennutzung & Aufgabenerfüllung der Zelle im Verband, (z.B. Transport von Sauerstoff durch rote Blutkörperchen, Verarbeitung von Signalen in Nervenzelle)  \\
+            \hline
+            6 & \tt{unlink} & Lösen der Assoziationen & \\\cline{1-3}
+            7 & \tt{finalize} & Beginn der Zerstörung von Unterobjekte & Zellverfall, Sterben der Zelle \\\cline{1-3}
+            8 & \tt{deglobalize} & Trennung aus Gesamtsystem &  \\
+            \hline
+            9 & (\tt{delete}) & Destruktoraufruf, existiert nicht in allen OO-Programmiersprachen & Zelltod \\
+            \hline
+            \end{tabular}
+            \end{table}
+        \end{center}
+
+        Vergleiche dargelegt werden. Dies soll dem Verständnis des Lebenszyklus' einer Komponente dienen.
+    \section{Weiterführende Konzepte und Ausblick}
+        \subsection{Separation of Concerns}
+        Erste Versuche, den Lebenszyklus von Komponenten im Verlauf der Realisierung von {\it Res Medicinae} zu gestalten,
+        gingen in die Richtung der bereits bekannten Trennung von Zuständigkeiten ({\it Separation of Concerns}).
+        Sollten Komponenten befähigt werden,
+        eine bestimmte Aufgabe abarbeiten oder Funktionalität im Komponentensystem anbieten zu können, war es
+        notwendig, eine ensprechende Schnittstelle für diese Komponenten einzurichten und durch eine
+        konkrete Klasse zu implementieren.
+        Dementsprechend gab es für die unterschiedlichsten Belange ({\it Concerns}) verschiedenste Schnittstellen. So
+        existierten Interfaces zur Initialisierung, Kopplung, Trennung sowie Zerstörung von Komponenten.
+        Vorteil dieser Idee war es, Objekte zur Laufzeit nicht direkt über ihre Klassen,
+        sondern die entsprechenden zuständigen Schnittstellen ansprechen zu können, um so eine gewisse Unabhängigkeit
+        von der konkreten Implementierung zu erreichen.
+
+        \subsection{Aspektorientierte Programmierung}
+        Aspektorientierte Softwareentwicklung vermeidet, Verantwortlichkeiten von Klassen in ihnen selbst zu
+        behandeln, sondern nimmt eine Modellierung über sogenannte {\it Aspekte} vor \cite{ch:aspekte}. Diese sind klassenähnliche
+        Strukturen, die Zuständigkeiten an bestimmte Objekte delegieren. Objekte bzw. ihre
+        Klassendefinitionen dienen in Form von Entitäten lediglich der Datenkapselung und Aspekte der Bereitstellung
+        der zugehörigen Logik. Dieser sehr junge Ansatz, bislang nur in der aspektorientierten Erweiterung von Java (AspectJ)
+        umgesetzt \cite{aspectj}, versucht, die Modellierungsschwächen von objektorientierten
+        Sprachen zu beheben. Diese Treten insbesondere dann auf, wenn es darum geht, Konzepte zu realisieren, die die
+        Klassenhierarchie durchschneiden, wie beispielsweise {\it Tracing}\footnote{Protokollierung technischer Vorfälle, wie Fehlermeldungen oder Ausnahmen}
+        oder {\it Logging}\footnote{Protokollierung aufgetretener fachlicher Ereignisse, wie Zugriffe und Transaktionen.}.
+
+        \subsection{Ausblick}
+        Beide Ideen, {\it Separation of Concern} und {\it Aspektorientierte Programmierung} wurden zwar während des Entwurfes
+        von {\it Res Medicinae} untersucht, fanden jedoch keine praktische Umsetzung. Hierfür einige Gründe:\\
+        Die auf der Verwendung von {\it Separation of Concern} basierende
+        Aspektorientierte Programmierung erschien für die Arbeit an diesem Projekt ungeeignet, da die Klassenhierarchie
+        durchschneidende Konzepte zum Großteil durch die Einführung des Komponentenlebenszyklus verwirklicht werden können.
+        Objekte werden durch diesen erzeugt, initialisiert und auf die Verwendung vorbereitet. Ebenso denkbar wäre
+        also auch, {\it Tracing}, {\it Logging} oder andere {\it Concerns} über entsprechende Lebenszyklus-Methoden zu realisieren.
+        Ein anderer Punkt ist der zusätzliche, recht gewöhnungsbedürftige ''Aspekt''-Code im Quelltext:
+        Zwar amortisiert sich der relativ hohe Lernaufwand bei
+        mittleren und grossen Projekten mit umfangreichen Concerns, jedoch beschränkt die Anzahl möglicher {\it Join
+        Points}\footnote{Join Points sind wohldefinierte Punkte im Ablauf eines Programmes, wie z. B. Zuweisungen und
+        Referenzierungen, Methodenaufrufe oder der Empfang von Nachrichten.} wiederum die relevanten Einsatzmöglichkeiten.
+        Die alleinige Umsetzung dieser Idee in Java (AspectJ) verhindert
+        weiterhin die Portierbarkeit zwischen Programmiersprachen.\\
+        Ein weiterer Grund gegen ein Verwendung von {\it Concerns} liegt in der speziellen Struktur
+        des Frameworks von {\it Res Medicinae}: Sein hierarchischer Charakter basiert auf der Implementation von Klassen, die
+        im Stile eines Schichtensystems an die Granularität der Anwendung angepasst sind. Der Vorteil von {\it Concerns}
+        liegt in der Möglichkeit, Objekte zur Laufzeit statt über ihre konkrete Klassen, über Schnittstellen (für die
+        jeweilige Aufgabe vorgesehene Signaturen) verwenden zu können.
+        Diesen Umstand kann man aber auch durch die Wahl einer streng hierarchischen Klassenstruktur erzielen,
+         innerhalb der die Instanzen über die Schnittstelle einer (Ober)-Klasse angesprochen werden.\\
+        Eine genauere Erläuterung dieser Idee folgt im nächsten Kapitel.

@@ -1,0 +1,239 @@
+ %
+ % $RCSfile: muster.tex,v $
+ %
+ % Copyright (c) 1999-2002. Jens Bohl. All rights reserved.
+ %
+ % This software is published under the GPL GNU General Public License.
+ % This program is free software; you can redistribute it and/or
+ % modify it under the terms of the GNU General Public License
+ % as published by the Free Software Foundation; either version 2
+ % of the License, or (at your option) any later version.
+ %
+ % This program is distributed in the hope that it will be useful,
+ % but WITHOUT ANY WARRANTY; without even the implied warranty of
+ % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ % GNU General Public License for more details.
+ %
+ % You should have received a copy of the GNU General Public License
+ % along with this program; if not, write to the Free Software
+ % Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ %
+ % http://www.resmedicinae.org
+ % - Information in Medicine -
+
+ %A chapter about design patterns.
+
+\chapter{Muster}
+    Allgemein betrachtet, beschreiben Muster in Architektur, Wirtschaftswissenschaften und eben auch in der
+    Softwaretechnik Lösungen für immer wieder auftretende Probleme, die denselben oder zumindest einen sehr ähnlichen
+    Charakter aufweisen. Es werden keine völlig neuen Lösungen gesucht, sondern auf bereits bekanntes Wissen
+    zurückgegriffen.\\
+    Christopher Alexander schreibt: ''{\it Jedes Muster beschreibt ein in unserer Umwelt beständig wiederkehrendes Problem
+    und erläutert den Kern für dieses Problem, so dass  Sie diese Lösung beliebig oft anwenden können, ohne sie jemals ein
+    zweites Mal gleich auszuführen.}''\cite{ch:patternlanguage}\\
+    Zwar steht diese Definition eines Musters für immer wiederkehrende Entwurfsprobleme an Gebäuden und Städten, jedoch
+    kann sie ebenfalls ohne weiteres auf das objektorientierte Paradigma bezogen werden.\\
+    Bezüglich der Abstraktionsebene kann man Muster in drei Kategorien einteilen:
+    \begin{itemize}
+        \item{Idiome}
+        \item{Entwurfsmuster}
+        \item{Architekturmuster}
+    \end{itemize}
+
+    \section{Idiome}
+        Idiome sind programmiersprachenspezifische Muster auf einer niedrigen Abstraktionsebene
+        \cite{ch:patternarchitektur}.
+        Ein Idiom beschreibt, wie man bestimmte Aspekte von Komponenten oder Beziehungen zwischen ihnen mit den
+        Mitteln einer bestimmten Programmiersprache implementieren kann. Sie können zur konkreten Umsetzung
+        von Entwurfsmustern verwendet werden, d.h. direkt die Implementierung eines
+        Entwurfsmusters beschreiben.\\
+        Ein Beispiel für ein Idiom ist der {\it Counted-Pointer} \cite{ch:idioms}. Benutzt man beispielsweise C++ als
+        objektorientierte Programmiersprache, kommt man an dem Thema der Speicherverwaltung nicht vorbei.
+        Dieses Idiom dient der
+        Verwaltung von dynamisch erzeugten, mehrfach referenzierten Objekten in C++. Grundgedanke hierbei ist
+        die Implementierung eines Referenzzählers für eine Rumpfklasse, die von den Zugriffsobjekten
+        aktualisiert wird. Durch dieses Zählen der Referenzen verhindert man zum Einen, dass ein Objekt durch
+        einen Klienten gelöscht wird, obwohl es ein anderer noch referenziert. Zum Anderen wird vermieden, dass
+        nicht mehr referenzierte Objekte als solche unerkannt bleiben, nicht gelöscht werden und somit unnötig Arbeitsspeicher belegen.\\
+        Da im Rahmen der vorliegenden Diplomarbeit Idiome eine untergeordnete Rolle spielen, soll die Betrachtung dieses
+        Mustertyps hier abgeschlossen werden.
+    \section{Entwurfsmuster}
+    Entwurfsmuster sind Muster auf einer höheren Abstraktionsebene.
+    Nach Gamma \cite{ch:entwurfsmuster} stellen Entwurfsmuster Beschreibungen zusammenarbeitender Objekte und Klassen dar,
+    die maßgeschneidert sind, um ein allgemeines Entwurfsproblem in einem bestimmten Kontext zu lösen.
+    Grundsätzlich gliedert sich ein solches Muster strukturell in vier Teile: Zunächst erhält es einen ausdrucksstarken
+    Namen, der das Muster verbal charakterisiert, eindeutig ist, und den Entwicklern zur Kommunikation untereinander
+    dient. Der zweite Teil ist der sogenannte Problemabschnitt, welcher beschreibt, wann das Muster anzuwenden ist. Der dritte Teil eines Entwurfsmusters
+    ist der Lösungsabschnitt, der die Elemente darlegt, aus denen der Entwurf besteht, sowie die Beziehungen zwischen diesen
+    beschreibt. Als letztes wird noch der Konsequenzenabschnitt angeführt, in dem Vor- und Nachteile einer Verwendung dieses Musters
+    zu finden sind.\\
+    Entwurfsmuster sollen die Entwicklung, Wartung und Erweiterung von großen Softwaresystemen unterstützen
+    und sind generell unabhängig von verwendeten Programmiersprachen. Sie sind Denkmodelle zur strukturierten
+    und dementsprechend wiederverwendbaren Lösung ein und desselben Entwurfsproblems. Solche Muster stehen vielerorts in
+    Beziehung zu einander - sie können untereinander  verfeinert oder kombiniert werden um komplexere
+    Aufgabenstellungen zu bewältigen.\\
+    Man unterscheidet im Wesentlichen zwischen drei Kategorien \cite{ch:entwurfsmuster}:
+    \begin{itemize}
+        \item{Erzeugungsmuster}
+        \item{Strukturmuster}
+        \item{Verhaltensmuster}
+    \end{itemize}
+
+
+    Diese drei Arten werden im Folgenden kurz erläutert. Jedes der angeführten Beispiele findet auch in der einen oder anderen
+    Form innerhalb des implementierten Prototypen zu {\it Res Medicinae} Anwendung.
+
+    \paragraph{Erzeugungsmuster}
+        Diese Entwurfsmuster dienen der Erzeugung von Objekten und sind besonders dann anzuwenden, wenn Systeme mehr von
+        Objektkomposition als von Vererbung abhängen.\\
+        Ein Vertreter dieser Kategorie ist die {\it Abstract Factory} (Abstrakte
+        Fabrik). Mit Hilfe dieses Musters können Objekte zur Laufzeit instanziiert werden, von denen die zugehörige
+        Klasse und Implementierung nicht notwendigerweise bekannt sein muss. Um beispielsweise von unterschiedlichen
+        Betriebssystemen und den damit verbundenen {\it Look-And-Feel}-Standards unabhängig zu sein, sollte sich eine Anwendung
+        nicht auf spezifische grafische Bedienelemente festlegen. Vielmehr wird angestrebt, unter
+        Verwendung einer {\it Abstract Factory} die für die jeweilige Plattform notwendigen Elemente zur Laufzeit zu
+        erzeugen.\\
+        Die Schnittstelle einer solchen {\it Factory}-Klasse besitzt für jedes {\it Look-And-Feel} eine Unterklasse
+        und diese enthalten dann jeweils für jedes grafische Bedienelement eine Methode, die das
+        entsprechende Element zurückliefert. Klienten rufen also auf der Super-Klasse Operationen auf, ohne die konkreten Sub-Klassen zu
+        kennen und bleiben so unabhängig vom aktuellen {\it Look-And-Feel}.\\
+        Abbildung \ref{Klassendiagramm der Abstract Factory} stellt die {\it Factory} in UML dar. Es existieren zwei konkrete Unterklassen der
+        abstrakten {\it Factory}-Klasse: eine zur Realisierung von Windows- und eine weitere zur Umsetzung von
+        OSF-Motif-{\it Look-And-Feel}.
+        \includepicture{12}{eps/factory.eps}{Klassendiagramm der Abstract Factory}{Klassendiagramm der Abstract Factory}{Klassendiagramm der Abstract Factory}
+
+    \paragraph{Strukturmuster}
+        Wie aus dem Namen bereits hervor geht, dienen diese Muster der Strukturierung von Softwaresystemen. Sie
+        fügen meist primitive Elemente zu komplexen Strukturen zusammen.\\
+        Ein Beispiel hierfür ist das {\it Composite} (Kompositum). Dieses Muster repräsentiert Objekte innerhalb einer Baumstruktur
+        und realisiert auf diese Art und Weise ''Teil-Ganzes''-Hierarchien. Ein solches Strukturmuster ist als
+        wichtiges Grundkonzept im gesamten {\it Res Medicinae}-Framework wiederzufinden (vgl. Abb. \ref{Klassendiagramm des Composite}).
+        \clearpage
+        \includepicture{12}{eps/compositum.eps}{Klassendiagramm des Composite}{Klassendiagramm des Composite}{Klassendiagramm des Composite}
+
+    \paragraph{Verhaltensmuster}
+        Verhaltensmuster können Funktionalität in Form von Algorithmen kapseln oder die Interaktion zwischen mehreren Objekten
+        beschreiben. Bestes Beispiel hierfür ist der {\it Observer} (Beobachter) (vgl. Abb. \ref{Klassendiagramm des Observer}). Er definiert und verwaltet die
+        Abhängigkeiten zwischen Objekten. Eine Änderung des Zustandes eines Objektes bewirkt die Benachrichtigung
+        anderer Objekte, der sogenannten {\it Observer}. Dieses Muster findet Anwendung bei der Entwicklung von
+        {\it Model-View-Controller}-basierten Schnittstellen.
+
+        \includepicture{9}{eps/observer.eps}{Klassendiagramm des Observer}{Klassendiagramm des Observer}{Klassendiagramm des Observer}
+
+    \section{Architekturmuster}
+        Architekturmuster beschreiben die unter allen Mustern abstrakteste Form des Softwareentwurfes.
+        Sie sind Schablonen für konkrete Softwarearchitekturen \cite{ch:patternarchitektur} und geben
+        grundsätzliche Strukturprinzipien vor. Wie Entwurfsmuster, können auch Architekturmuster in verschiedene Arten
+        kategorisiert werden. Man unterscheidet zwischen Mustern für:
+        \begin{itemize}
+            \item{Strukturierung}
+            \item{Verteilung}
+            \item{Adaption}
+            \item{Interaktion.}
+        \end{itemize}
+
+        {\it Strukturmuster} dienen dazu, Softwarekomponenten logisch zu gliedern, um so eine gewisse Ordnung innerhalb des
+        Systems zu erreichen. Das bekannteste Muster dieser Kategorie ist das {\it Layer}-Muster, zu dem auch die
+        im ersten Kapitel besprochene {\it 3-Tier}-Architektur gehört. Das Wesen dieses Musters liegt in der sinnvollen
+        Zerlegung der Systemkomponenten in mehrere kooperierende Schichten mit unterschiedlichen  Teilaufgaben. Dabei
+        müssen nicht notwendigerweise nur drei Schichten existieren. Je nach Komplexität des Systems sind auch
+        mehrere denkbar. Man spricht daher im Allgemeinen von einer {\it n-Tier}-Architektur.
+        \\
+        Das {\it Broker}-Muster als {\it verteiltes Muster} realisiert eine umfangreiche Infrastruktur für verteilte
+        Anwendungen und wurde von der {\it Object Management Group}\footnote{Die OMG ist ein 1989 gegründeter Zusammenschluss
+        von mehreren Firmen wie Hewlett-Packard, Philips Telecommunications N.V., Sun Microsystems oder Canon, um eine standardisierte Architektur für verteilte Anwendungen zu schaffen.}
+         (OMG) standardisiert \cite{ch:omg}.\\
+        Eine weitere Kategorie von Architekturmustern sind Muster zur Realisierung von {\it Adaptierbaren Systemen}. Das
+        {\it Reflection}-Muster unterstützt zum Beispiel die Erweiterung von Anwendungen und ihre Anpassung an sich ständig
+        ändernde funktionale Anforderungen.\\
+        {\it Interaktive Systeme}, wie die bereits besprochenen grafische Benutzeroberflächen, werden
+        entweder nach dem {\it Presentation-Abstraction-Control} oder dem weit verbreiteten {\it Model-View-Controller} Muster
+        entworfen. Letzteres wird im weiteren Verlauf dieses Kapitels noch ausführlich behandelt.
+
+        \paragraph{Model-View-Controller (MVC)}
+            Das mit der Programmiersprache Smalltalk 80 entstandene MVC-Muster ist heute die
+            gebräuchlichste Art, grafische Benutzerschnittstellen umzusetzen. In diesem typischen
+            Architekturmuster wird  die logische und funktionale Aufteilung in drei Klassen vorgenommen: {\it Model},
+            {\it View} und {\it Controller} (vgl. Abb. \ref{MVC-Paradigma und darin enthaltene Entwurfsmuster}). Das Model-Objekt repräsentiert die der
+            \includepicture{10}{eps/mvc.eps}{MVC-Paradigma und darin enthaltene Entwurfsmuster}{MVC-Paradigma und darin enthaltene Entwurfsmuster}{MVC-Paradigma und darin enthaltene Entwurfsmuster}
+
+            Präsentationsschicht zu Grunde liegenden Daten, welche durch das View-Objekt dargestellt und über das
+            Controller-Objekt manipuliert werden können. Bevor MVC Bedeutung erlangte, fasste man die drei genannten
+            Bestandteile in einem Objekt zusammen.\\
+            Wie eigentlich die gesamte objektorientierte Programmierung sollte auch dieses MVC-Muster Flexibilität
+            und Wiederverwendbarkeit von Software erhöhen. In vielen Veröffentlichungen wird von MVC als einem
+            Entwurfsmuster gesprochen. Gamma \cite{ch:entwurfsmuster} bezeichnet MVC sogar als ein Paradigma, in dem mehrere
+            Entwurfsmuster Anwendung finden. So gleicht zum Beispiel die Beziehung des View-Objektes zum Model-Objekt
+            der eines {\it Observers}. Änderungen des Models sollen dementsprechend auch zu Änderungen des Views führen,
+            wobei notwendiger Weise nicht beide Objekte einander bekannt gemacht werden müssen.\\
+            Weiterhin kann ein View-Objekt mehrere andere View-Objekte geschachtelt referenzieren ({\it Composite}, vgl. Abb. \ref{Klassendiagramm des Composite}).
+            Primitive Objekte fügen sich in hierarchischer Form zu komplexeren
+            Komponenten zusammen.
+            Zum Beispiel könnte
+            ein Anwendungsfenster als ein View-Objekt angesehen werden, das weitere in Form von grafischen
+            Oberflächen-Komponenten wie zum Beispiel Buttons, Textfeldern, Menüs oder Schiebereglern enthält.\\
+            Das Controller-Objekt selbst ist ein typisches Beispiel für ein {\it Strategy}-Muster. Diese Art von
+            Entwurfsmustern kapselt Funktionalität. {\it Strategy}-Objekte repräsentieren Algorithmen. Eine derartige
+             Kapselung bringt
+            den Vorteil mit sich, Funktionalität der mit Hilfe von MVC implementierten Software bei Bedarf ohne
+            Veränderung der anderen Objekte austauschen zu können.
+            Will man beispielsweise die Arbeitsweise eines Menüpunktes
+            ändern, bedarf dies lediglich der Ersetzung des entsprechenden Controller-Objektes.\\
+            Diese drei Muster - {\it Observer}, {\it Composite} und {\it Strategy} - beschreiben die zentralen Beziehungen zwischen
+            den Objekten des {\it Model-View-Controller}-
+            Paradigmas.\\
+            Weiterhin können {\it Factorys} (vgl. Abb. \ref{Klassendiagramm der Abstract Factory}) dazu verwendet werden, die Klasse der Controller- oder View-Instanzen zur Laufzeit
+            festzulegen. {\it Decorators} (Dekorierer)\footnote{Ein {\it Decorator} ist ein Entwurfsmuster, das ein Objekt dynamisch um Zuständigkeiten
+            erweitert. Im Allgemeinen sind dies zusätzliche Objekte, die neue Methoden oder Zustände beinhalten.}
+            erweitern das View-Objekt um zusätzliche, jedoch von dem Objekt unabhängige, Funktionalität.\\
+            Das MVC-Paradigma, welches im Rahmen dieser Diplomarbeit eine übergeordnete Rolle spielt, kann also mit Hilfe
+            einiger weniger Entwurfsmuster detailliert beschrieben werden. Jedoch ist in diesem Zusammenhang auch zu
+            erwähnen, dass die konkrete Umsetzung noch stark abhängig von den
+            zugrundeliegenden Programmiersprachen sowie eingesetzten Frameworks und keinesfalls als statisches und
+            zwischen einzelnen Anwendungen frei portierbares Konstrukt anzusehen ist. Die Trennung von Model,
+            View und Controller ist dabei die einzige Richtlinie. Genauere Designentscheidungen, wie Schnittstellen,
+            Vererbung und Klassenanzahl müssen an das jeweilige Problem angepasst werden.
+                \paragraph{Hierarchisches Model-View-Controller (HMVC)}
+                Wie bereits angedeutet, steht die Weiterentwicklung von MVC keineswegs still. Zwar wird der
+                grundlegende Gedanke immer derselbe bleiben, jedoch existieren bereits Überlegungen, das schon seit den
+                achtziger Jahren des letzten Jahrhunderts existierende Architekturmuster an die komplexen Anforderungen heutiger
+                Benutzeroberflächen anzupassen.\\
+                Das {\it Hierarchische Model-View-Controller} Muster \cite{hmvc} unterteilt eine
+                Benutzeroberfläche und die auf ihr enthaltenen Komponenten logisch in mehrere Schichten ({\it Layers}).
+                 Diese Trennung entspricht dem bereits besprochenen {\it n-Tier} Strukturmuster. Es existieren mehrere
+                MVC-Triaden\footnote{Eine Triade ist eine Gruppe bestehend aus drei Objekten, die in Relation zu einander
+                stehen.}
+                innerhalb dieser Schichten, wobei die entsprechenden Controller-Objekte hierarchisch auf einander
+                referenzieren (vgl. Abb. \ref{HMVC-Muster}). Dieser Umstand impliziert den Aufbau von
+                Eltern-Kind-Beziehungen zwischen den einzelnen Komponenten.\\
+
+                \includepicture{11}{eps/hmvc.eps}{HMVC-Muster}{HMVC-Muster [JC]}{HMVC-Muster}
+
+                An einem praktischen Beispiel erläutert, sähe eine solche Anordnung wie folgt aus: Auf oberster Ebene
+                ({\it Tier}) befindet sich ein {\it Top-Level-Container} wie beispielsweise ein {\it Dialog}. Auf der darunterliegenden Schicht,
+                d.h. in diesem Dialog selbst, existiert ein weiterer {\it Container}, wie z. B. ein {\it Panel}. In diesem
+                wiederum ist eine Navigationsleiste plaziert. {\it Dialog}, {\it Panel} und Navigationsleiste entsprechen jeweils
+                einer MVC-Triade bestehend aus Model-, View- und Controller-Objekt. Über den Controller erfolgt
+                nun entweder die direkte Verarbeitung von Ereignissen oder die Weiterleitung an das Controller-Objekt
+                der darunterliegenden Schicht. So entsteht eine {\it Chain of Responsibility} (Kette von Zuständigkeiten),
+                in der Ereignisse bis an den Ort ihrer endgültigen Auswertung geleitet werden. Ist ein Controller nicht
+                in der Lage, auf ein Ereignis zu reagieren, nimmt er die Weiterleitung vor.\\
+                Neben der herkömmlichen Separierung der Komponenten in die drei Objekte des MVC, gelingt durch das
+                {\it Hierarchische Model-View-Controller} Muster die Einführung einer weiteren Dimension in der
+                Strukturierung von Oberflächenelementen und ihren Beziehungen zueinander. Die Vorteile des
+                Architekturmusters {\it Layers} sowie des Entwurfsmusters {\it Chain of Responsibility} nutzend, verspricht
+                man sich durch den Einsatz von HMVC vor allem eine Verringerung der Abhängigkeiten zwischen einzelnen,
+                austauschbaren Programmelementen sowie die einfache Erweiter- und Wartbarkeit solcher
+                Implementierungen.\par
+                \paragraph{Fazit}
+                Es wurde gezeigt, dass sowohl View-, als auch Controller-Objekte einer logischen Hierarchie unterworfen
+                werden können. Auch die Model-Komponente kann ohne weiteres eine solche Struktur
+                aufweisen: die dem MVC zugrundeliegenden Daten bestehen in den meisten Fällen aus kompositiv
+                zusammengesetzten Objekten.\\
+                Diese Überlegungen implizieren folgende Idee:
+                Die generalisierte Verwendung des {\it Composite}-Musters auf oberster Ebene der Klassenhierarchie
+                garantiert, dass alle Objekte in ein Hierarchie von ''Teil-Ganzes''-Beziehungen eingegliedert werden
+                können, ohne dass jede Klasse diese Eigenschaften selbst bereitstellen und redundant implementieren
+                muss.
+                Eine Klasse namens {\it Item} verwirklicht dieses Muster als Wurzelklasse des Frameworks von {\it Res Medicinae}.
+                Auf beide -- Framework und {\it Item} -- wird in Kapitel fünf eingegangen.

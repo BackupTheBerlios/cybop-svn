@@ -1,0 +1,47 @@
+/*
+ * $RCSfile: HelloWorld.java,v $
+ *
+ * Copyright (c) 1999-2002. Christian Heller. All rights reserved.
+ *
+ * This software is published under the GPL GNU General Public License.
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ * http://www.resmedicinae.org
+ * - Information in Medicine -
+ */
+
+package org.resmedicinae.application.sample.helloworld;
+
+import org.resmedicinae.resmedlib.*;
+
+/**
+ * This class represents the HelloWorld system.
+ *
+ * @version $Revision: 1.1 $ $Date: 2003-04-16 10:59:44 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
+ */
+public class HelloWorld extends org.resmedicinae.resmedlib.System {
+
+    /**
+     * Says "Hello World!".
+     */
+    public void sayHelloWorld() {
+
+        java.lang.System.out.println("\n\n\n");
+        java.lang.System.out.println("Hello World!");
+        java.lang.System.out.println("\n\n\n");
+    }
+}
+

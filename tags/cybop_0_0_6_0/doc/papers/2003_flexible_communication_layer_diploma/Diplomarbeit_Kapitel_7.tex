@@ -1,0 +1,64 @@
+\chapter{Ausblick}
+
+\section{Erweiterungsvorschläge}
+In Abschnitt ref{Kunden, Dienstleister und Schichtenmodelle} wurde zwar gesagt,
+dass es aus Kostengründen nicht möglich ist, eine Middleware zur Verwaltung der
+Datenbankzugriffe zu erwerben, jedoch wäre zu überlegen, ob es nicht sinnvoll
+ist eine eigene Mittelschicht zu entwerfen. Sie muss nicht in allen
+Einzelheiten vollständig sein und mehrere Datenbank-Treiber unterstützen.
+Vielmehr genügt, es wenn sie den Anforderungen entsprechend erweiterbar ist und
+vorerst die Grundoperationen realisiert. Da eine Kommunikation mit CORBA und
+RMI im Projekt vorgesehen ist, wäre nach deren Umsetzung das Einfügen dieser
+Mittelschicht ein gute Lösung, um die momentan aufgeblähten Fat-Clients in
+Thin-Clients zu konvertieren, welche dann hauptsächlich nur noch Domain- und
+Präsentionslogik enthalten. Das erspart dem Anwender auch die Konfiguration der
+Datenbankserveranbindung und vereinfacht einen möglichen Lokationswechsel der
+Datenbank.
+
+
+\section{Einsatzgebiete von Resemedicinae}
+
+\subsection{Zwei Anwendungsbeispiele}
+Die wesentliche Neuerung bei Resmedicinae ist, die Vorteile des Internets und
+verteilter Anwendungen auch für Patientenkarteien nutzbar zu machen.
+Patientendaten ein und der selben Person können an verschiedenen Stellen der
+Welt gleichzeitig abgerufen und bearbeitet werden. So entfallen langwierige
+Wartezeiten beim Überweisen eines Patienten an einen Facharzt, da das versenden
+der Patientenakte entfällt. Alle notwendigen Informationen werden in einer
+Zentralen Datenbank abgespeichert. Die Transaktionen erfolgen unter Beachtung
+von § X Absatz U des Bundesdatenschutzgesetz (BDSG), wonach keine medizinischen
+Daten im Internet gespeichert werden dürfen.
+
+\begin{figure}[ht]
+    \begin{center}
+       \includegraphics[scale=0.8]{Bilder/Anwendungen1_Internet.eps}
+       \caption{Einsatz von Resmedicinae im Internet}
+       \label{fig:Einsatz von Resmedicinae im Internet}
+    \end{center}
+\end{figure}
+
+\newpage
+
+Eine andere Möglichkeit wäre, Resmedicinae einrichtungsintern beschränkt zu
+nutzen, beispielsweise innerhalb eines Krankenhauses, um lediglich interne
+Daten zu verwalten. Diese Daten können aber ebenso, wie in erstem Beispiel, von
+jedem Arzt an einem Terminal abgerufen und modifiziert werden. Denkbar wäre
+auch, die Ärzte mit einer Art Handhelt (einer tragbaren Rechnerversion)
+auszustatten, der über Funk mit der Datenbank des Krankenhauses verbunden ist.
+Dabei darf das Sende- / Empfangssignal energetisch nur ein sehr niedriges
+Niveau erreichen, um die empfindlichen medizinischen Apparaturen nicht zu
+beeinflussen, wie es beispielsweise bei Handys der Fall sein kann. Es sind
+jedoch nur sehr kurze Distanzen innerhalb innerhalb der Einrichtung zu
+überwinden und deshalb keine starken Signale von nöten.\\
+Somit besteht im Bereich des Funknetzes eine Ortsunabhängigkeit. Dem Arzt
+bleibt es erspart nach einzelnen Patientenbesuchen einen Terminal oder eine
+Workstation aufsuchen zu müssen, sondern kann seine elektronischen Akten gleich
+an Ort und Stelle verwalten.
+
+\begin{figure}[ht]
+    \begin{center}
+       \includegraphics[scale=0.8]{Bilder/Anwendungen2_Krankenhaus.eps}
+       \caption{Einsatz von Resmedicinae einrichtungsintern}
+       \label{fig:Einrichtungsinterner Einsatz von Resmedicinae}
+    \end{center}
+\end{figure}

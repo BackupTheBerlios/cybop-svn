@@ -1,0 +1,115 @@
+\chapter{Einleitung und Motivation}
+Für medizinische Sachverhalte gibt es bereits eine Vielzahl an kommerziellen Programmen, die beim
+Lösen von Problemen oder Verwalten von Daten helfen sollen. Diese Diplomarbeit leistet neben den
+anschließend beschriebenen theoretischen Betrachtungen einen Teil zur Entwicklung einer
+\myglossary{Open Source}{Im Gegensatz zu kommerziellen Anwendungen werden Open Source Projekte
+nicht mit dem Ziel einer entgeltlichen Profitierung entwickelt. Der Quellcode ist frei zugänglich
+und erweiterbar. Man erhofft sich dadurch eine schnellere Verbreitung und eine große Zahl
+zusätzlicher, freiwilliger Entwickler, die ihren Ideen entsprechend, die Projekte weiterentwickeln.
+Zur Vermeidung des Missbrauches des frei zugänglichen Quellcodes unterliegen Open Source
+Applikationen meist gewissen Lizenzvereinbarungen (siehe Abschnitt \ref{Res Medicinae}).}
+Applikation für die Arbeit mit Patientendaten \mbox{beliebiger Art.}\\
+Die Problematik bei den meisten Programmen besteht in der eingeschränkten Flexibilität bezüglich
+ihrer Erweiterbarkeit und in der schlechten Robustheit gegenüber Änderungen. Daher sollen
+Untersuchungen angestellt werden, ob die Verwendung von Software-Mustern diese Probleme minimiert.\\
+Die Patientendaten werden in sogenannten \emph{Electronic Health Records} (EHR) abgelegt und zur
+Verarbeitung im Programm gehalten. Es handelt sich deshalb bei einem EHR um einen eigens kreierten
+Datentyp, der aus mehreren unterschiedlichen, zusammengesetzten Datentypen besteht und
+patientenspezifische, medizinische Informationen enthält.\\
+Werden die Daten nur auf eine Art gespeichert, so schränkt das die Flexibilität der Software sehr
+ein. Bei einer lokalen Speicherung bedarf es bei Anforderung von elektronischen Informationen einer
+direkten Kopie auf ein Wechselmedium und dessen physischen Transport zum anderen Rechner. Neben
+einer nicht vernachlässigbaren Zeitdauer und einem zusätzlichen personellen Arbeitsaufwand für
+diesen Vorgang treten häufig durch unsachgemäße Behandlung des Wechselmediums (z.B.
+heruntergefallene Diskette oder zerkratzte CD) Fehler auf, die bis zur völligen Unbrauchbarkeit der
+Daten führen können. Das etwaige Verlieren des Datenträgers kommt als Sicherheitsrisiko hinzu. Noch
+häufiger werden die Daten ausgedruckt, per Post versendet und dann von einem anderen Arzt erneut in
+sein System übertragen. Auch hier handelt es sich um einen sehr zeitaufwendigen und unsicheren
+Prozess. Eine zentrale Datenbank innerhalb eines Netzwerkes schließt derartige Nachteile zwar aus,
+verhindert allerdings die Möglichkeit weiterzuarbeiten, falls das Netzwerk ausfällt. Daher wurde
+untersucht, inwieweit sich mehrere unterschiedliche Persistenzmechanismen (Dateisystem, Datenbank)
+in einer Anwendung vereinen lassen, ohne die Benutzerfreundlichkeit und Bedienbarkeit einzuschränken
+oder spezielles Fachwissen vom Anwender voraussetzen zu müssen.\\
+Zu den theoretischen Betrachtungen dieser Diplomarbeit zählt noch ein weiterer Abschnitt, der sich
+damit befasst, wie Daten zwischen Prozessen ausgetauscht werden können. Da, wie bereits erwähnt,
+bei der Entwicklung der Anwendung Flexibilität und Erweiterbarkeit im Vordergrund stehen, darf die
+Einschränkung und Spezialisierung auf einige wenige Kommunikationsparadigmen, wie RMI, CORBA und
+JMS nicht erfolgen. Vielmehr soll eine Möglichkeit gefunden werden, den Anwender zur Laufzeit
+entscheiden zu lassen, welches Kommunikationsparadigma er verwenden möchte, wiederum ohne dass er
+über fachliche Kompetenz verfügen muss.\\
+Eine Interprozesskommunikation ist für \emph{Res Medicinae} notwendig, da dieses Softwaresystem aus
+einzelnen Modulen bestehen soll, von denen jedes als separater Prozess agiert, aber über die
+Möglichkeit verfügen muss, auf den selben Daten zu arbeiten, wie ein anderes Modul. Die
+Patientendaten zwischen zwei lokalen Prozessen auszutauschen ist der eine Aspekt. Ein Weiterer ist
+der Datentransfer zwischen mehreren Rechnern, denn damit können die lokal abgespeicherten Daten auf
+einem Rechner an einen anderen zur parallelen Weiterverabeitung gesendet werden.\\
+In absehbarer Zeit wird das Projekt dahingehend erweitert werden, dass die Persistenzmechanismen
+auf einem entfernten Rechner installiert werden. Das macht die Entwicklung eines Konzepts zur
+Anbindung verschiedener Kommunikationsparadigmen ebenfalls zwingend erforderlich. Die
+Untersuchungen auf die Einbindung einer Art der Interprozesskommunikation in das System zu
+beschränken hätte nicht ausgereicht. Es soll für eine etwaige Notwendigkeit spezialisierter
+Protokolle die Möglichkeit der zukünftigen Anbindung gewährleistet werden.\\
+Der medizinische Formulardruck dient als prototypische Beispiel- und Testanwendung, um persistent
+abgelegte Daten wieder zu laden und sinnvoll zu verarbeiten.
+
+\section{Kapitelübersicht}
+Im Anschluss an diese Einleitung wird im zweiten Kapitel mit den Grundlagen für die in der
+Diplomarbeit verwendeten Software-Technologien begonnen. Es gibt eine Einteilung zu Mustern im
+Allgemeinen, bevor auf einige spezielle Beispiele eingegangen wird. Kapitel 3 beschäftigt sich mit
+der Einführung in die oben bereits angesprochenen Persistenzmechanismen und belegt deren
+Notwendigkeit. Während das zweite und dritte Kapitel den \myglossary{State of the Art}{Der aktuelle
+Zustand bestehender Technologien, wird in der Diplomarbeit in den Kapiteln 2 und 3 beschrieben, um
+eine Abgrenzung zur und die Notwendigkeit für die Neuerung der Entwicklung zu begründen.}
+beschreiben, diskutieren die anschließenden Abschnitte den Eigenanteil an der Diplomarbeit. So
+erläutert das vierte Kapitel die Umsetzung der in den vorangegangenen Abschnitten beschriebenen
+Technologien. Der fünfte Abschnitt stellt den zum Testen und Anwenden der Modelle entwickelten
+Prototyp vor. Ein letzter Punkt zieht noch einmal Rückschlüsse aus der Umsetzung und gibt
+Empfehlungen für weiterführende Realisierungsmöglichkeiten.
+
+\section{Besondere stilistische Kennzeichnungen}
+Im laufenden Text sind einige Begriffe durch \emph{kursive Schrift}  hervorgehoben. Hierbei handelt
+es sich fast ausschließlich um fremdsprachige, meist englische Bezeichnungen, die entweder im
+laufenden Text oder im Glossar des Anhanges Erläuterung finden.\\
+Der Stil \tt Typewriter Typeface \rm wurde verwendet, um Java-Programmzeilen hervorzuheben. An den
+entsprechenden Stellen wird zusätzlich gesondert darauf hingewiesen.
+
+\section{Res Medicinae}
+    \label{Res Medicinae}
+Ein Wort noch zu dem Softwaresystem \emph{Res Medicinae} im Ganzen.\\
+Unterstützung findet das Projekt durch die weltweit größte \emph{Open Source} Software
+Entwicklungswebseite im Internet. Es handelt sich hierbei um SourceForge.net
+\cite{Sourceforge.net}. Hier werden Dienste für \emph{Open Source} Entwickler frei angeboten. So
+findet man ausführliche Dokumentationen und Mailinglisten zu sämtlichen unterstützten Projekten,
+die im umfangreichsten momentan existierenden \emph{Open Source} Repository des Internets hinterlegt sind.\\
+Der Name \emph{Res Medicinae} stammt, wie es für die Medizin typisch ist, aus dem lateinischen
+Sprachgebrauch und bedeutet übersetzt \emph{Sache der Medizin}. Damit ist das Einsatzgebiet der
+Anwendung bereits abgesteckt. Sie dient der Verwaltung und Darstellung medizinischer Daten, die
+während der Bearbeitung in dem bereits beschriebenen, eigens spezifizierten Datenmodell
+\emph{\mbox{Electronic} \mbox{Health} \mbox{Record}} gehalten werden.\\
+Viele in den Arzt-Praxen und Krankenhäusern verwendete Softwaresysteme zur Verwaltung von
+Patientendaten sind veraltet und neue sehr teuer. Res Medicinae steht als \emph{Open Source}
+Projekt unter GNU GPL/FDL Lizenzvereinbarungen \cite{GNU} und ist damit kostenfrei erhältlich. Den
+große Vorteil gegenüber kommerzieller Software stellt der frei verfügbare Quellcode dar. Jeder
+Entwickler kann Anpassungen und Erweiterungen an den Applikationen vornehmen, sofern er die
+resultierende Software nicht zu kommerziellem Vertrieb weiterverwendet und sie ebenfalls offenlegt.
+Gleiches gilt auch für die Dokumentation des Projektes. Die uneingeschränkte Zugänglichkeit und
+Erweiterbarkeit des Quell\mbox{codes} soll ein rasches Wachstum und eine möglichst weite
+Verbreitung gewährleisten.\\
+Für das Gesamtsystem wurde sich ebenfalls bemüht, ausschließlich \emph{Open Source} Programme,
+beispielsweise das Datenbankmanagementsystem PostgreSQL zu verwenden, um somit keine Kosten für
+den späteren Anwender entstehen zu lassen.\\
+Die Programmierung erfolgte ausschließlich in Java. Damit wird die Plattformunabhängigkeit
+sichergestellt.\\
+Es gibt verschiedene Möglichkeiten, Daten persistent abzulegen. Entweder lokal in Dateien oder aber
+auch auf einem entfernten Rechner in einer zentralen Datenbank für Zugriffe von mehreren
+Workstations aus. Für die lokale Speicherung existiert eine Vielzahl weiterer Möglichkeiten. Jedoch
+wurde hier ein XML-Format gewählt, weil es sich dabei um einen anerkannten Standard \cite{XML.ORG}
+handelt, der im Zuge der Entwicklung des Internets permanent an Bedeutung gewinnt und bereits in
+den verbreitetsten Programmiersprachen verwendbar ist.\\
+Die meisten Softwareprojekte basieren auf derartigen Standards. Doch oftmals wird zu spät erkannt,
+dass zwar komplexe Features implementiert wurden, aber eine Erweiterung um andere Standards nur
+schwer realisierbar ist. Mit Hilfe von Softwaremustern kann man dieses Problem minimieren.
+Allerdings bedeutet es oftmals einen nicht geringen Mehraufwand an Entwurfs- und
+Implementierungsarbeit.\\
+Der im Rahmen dieser Diplomarbeit entwickelte Ansatz ermöglicht eine flexible Expandierung des
+Projektes, was den erweiterten Realisierungsaufwand rechtfertigt.

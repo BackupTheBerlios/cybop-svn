@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+
+<!--
+    $RCSfile: build_core.xml,v $
+
+    Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+
+    This software is published under the GPL GNU General Public License.
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+    http://www.cybop.net
+    - Cybernetics Oriented Programming -
+
+    This file contains configuration parameters which are necessary for building
+    the specified project using the "Ant" tool of the "Jakarta" tool suite.
+
+    @see http://www.apache.org
+    @version $Revision: 1.2 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+    @author Michael Simon <michael.simon@gmx.net>
+    @author Henrik Brandes <henrik-b@gmx.de>
+/-->
+
+<project name="core" default="compile" basedir="../">
+
+    <!-- Global properties for this build. -->
+    <property name="builddir" value="${basedir}/build"/>
+    <property name="libdir" value="${basedir}/lib"/>
+    <property name="sub_srcdir" value="${basedir}/src/core"/>
+    <property name="sub_builddir" value="${basedir}/build/core"/>
+    <property name="name" value="cybop-core"/>
+    <property name="package" value="cybop.core"/>
+    <property name="packagedir" value="cybop/core"/>
+<!--
+    <property name="allbuilddir" value="
+        ${builddir}/resmedlib/
+        :${builddir}/domain/healthcare/
+        :${builddir}/application/sample/helloworld/
+        :${builddir}/application/healthcare/record/
+        :${builddir}/application/healthcare/restore/
+        :${builddir}/application/healthcare/resadmin/
+    "/>
+-->
+
+    <!-- The classpath. -->
+    <path id="classpath">
+       <pathelement path="${classpath}"/>
+<!--       <pathelement path="${allbuilddir}"/> -->
+       <fileset dir="${libdir}">
+           <include name="**/*.jar"/>
+       </fileset>
+    </path>
+
+    <!-- Cleans up old files and directories. -->
+    <target name="clean">
+        <delete dir="${sub_builddir}"/>
+        <delete>
+            <fileset dir="${libdir}">
+                <include name="${name}.jar"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <!-- Compiles sources. -->
+    <target name="compile">
+        <!-- Create the time stamp. -->
+        <tstamp/>
+        <!-- Create the build directory used by compile. -->
+        <mkdir dir="${sub_builddir}/"/>
+        <!-- Compile sources. -->
+        <javac srcdir="${sub_srcdir}" destdir="${sub_builddir}" classpath="${classpath}" debug="on" deprecation="on" optimize="on">
+            <classpath refid="classpath"/>
+        </javac>
+	<!-- Copy images. -->
+	<copy todir="${sub_builddir}/${packagedir}">
+	  <fileset dir="${sub_srcdir}/${packagedir}">
+	    <include name="**/*.jpeg"/>
+            <include name="**/*.gif"/>
+            <include name="**/*.png"/>
+	  </fileset>
+	</copy>        
+    </target>
+
+    <!-- Creates a distribution directory containing packed file archives. -->
+    <target name="archive">
+        <!-- Create the directory containing libraries. -->
+        <mkdir dir="${libdir}"/>
+        <!-- Put everything into a .jar file. -->
+        <jar jarfile="${libdir}/${name}.jar" basedir="${sub_builddir}" includes="**/*.class,**/*.gif,**/*.jpeg,**/*.png"/>
+    </target>
+
+</project>
+
