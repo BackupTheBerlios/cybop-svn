@@ -43,7 +43,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.8 $ $Date: 2004-02-29 18:33:29 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-02-29 19:55:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -176,12 +176,12 @@ int main(int p0, char** p1) {
         if (p0 == 2) {
 
             // Create statics.
-            void* s = malloc(sizeof(struct statics_model));
-            create_statics_model_containers(s);
+            void* s = malloc(sizeof(struct model));
+            create_model_containers(s);
 
             // Create dynamics.
-            void* d = malloc(sizeof(struct dynamics_model));
-            create_dynamics_model_containers(d);
+            void* d = malloc(sizeof(struct model));
+            create_model_containers(d);
 
             // Create internals.
             void* i = malloc(sizeof(struct internals));
@@ -191,10 +191,10 @@ int main(int p0, char** p1) {
             create_signal_memory(sm);
 
             // Create startup signal.
-            void* ss = create_dynamics((void*) p1[1], (void*) 0, (void*) 0, (void*) DYNAMICS_COMPOUND);
+            void* ss = create_model((void*) p1[1], (void*) 0, (void*) COMPOUND_MODEL);
 
             // Add startup signal to signal memory.
-            add_signal(sm, ss, (void*) DYNAMICS_COMPOUND, (void*) &NORMAL_PRIORITY);
+            add_signal(sm, ss, (void*) COMPOUND_MODEL, (void*) &NORMAL_PRIORITY);
 
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)
@@ -215,11 +215,11 @@ int main(int p0, char** p1) {
             free(i);
 
             // Destroy dynamics.
-            destroy_dynamics_model_containers(d);
+            destroy_model_containers(d);
             free(d);
 
             // Destroy statics.
-            destroy_statics_model_containers(s);
+            destroy_model_containers(s);
             free(s);
 
             log_message((void*) &INFO_LOG_LEVEL, "Exit CYBOI normally.");

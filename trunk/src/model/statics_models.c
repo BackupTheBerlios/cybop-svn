@@ -34,9 +34,16 @@
  * Complex models consist of other complex models and primitive models.
  * Primitive models are the final abstraction in software.
  *
- * @version $Revision: 1.3 $ $Date: 2004-02-29 18:33:30 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-02-29 19:55:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+//
+// Operation models.
+//
+
+/** The operation model. */
+static const char* OPERATION_MODEL = "operation";
 
 //
 // Primitive models.

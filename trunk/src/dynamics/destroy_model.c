@@ -26,9 +26,9 @@
 #define DESTROY_MODEL_SOURCE
 
 #include "../cybol/cybol_model_handler.c"
-#include "../model/dynamics_models.c"
 #include "../logger/log_handler.c"
 #include "../model/map.c"
+#include "../model/models.c"
 #include "../model/statics_models.c"
 #include "../statics/boolean_handler.c"
 #include "../statics/complex_handler.c"
@@ -44,7 +44,7 @@
  *
  * It destroys a statics or dynamics memory model to a cybol model.
  *
- * @version $Revision: 1.2 $ $Date: 2004-02-29 18:33:29 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-02-29 19:55:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -206,7 +206,7 @@ void finalize_parts(void* p0, void* p1) {
  * @param p0 the memory model
  * @param p1 the cybol model
  */
-void finalize_statics_model(void* p0, void* p1) {
+void finalize_model(void* p0, void* p1) {
 
     struct model* m = (struct model*) p0;
 
@@ -266,50 +266,50 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3) {
             log_message((void*) &INFO_LOG_LEVEL, p1);
 
             // Compound model.
-            if (strcmp(a, STATICS_COMPOUND) == 0) {
+            if (strcmp(a, COMPOUND_MODEL) == 0) {
 
-                finalize_statics_model(p0, p1);
-                destroy_statics_model_containers(p0);
+                finalize_model(p0, p1);
+                destroy_model_containers(p0);
                 free(p0);
 
             // Dynamics model.
-            } else if (strcmp(a, OPERATION) == 0) {
+            } else if (strcmp(a, OPERATION_MODEL) == 0) {
 
                 finalize_operation_model(p0, p1);
                 free(p0);
 
             // Statics models.
-            } else if (strcmp(a, TIME_PRIMITIVE) == 0) {
+            } else if (strcmp(a, TIME_MODEL) == 0) {
 
                 finalize_time_model(p0, p1);
                 free(p0);
 
-            } else if (strcmp(a, STRING_PRIMITIVE) == 0) {
+            } else if (strcmp(a, STRING_MODEL) == 0) {
 
                 finalize_string_model(p0, p1);
                 free(p0);
 
-            } else if (strcmp(a, VECTOR_PRIMITIVE) == 0) {
+            } else if (strcmp(a, VECTOR_MODEL) == 0) {
 
                 finalize_vector_model(p0, p1);
                 free(p0);
 
-            } else if (strcmp(a, COMPLEX_PRIMITIVE) == 0) {
+            } else if (strcmp(a, COMPLEX_MODEL) == 0) {
 
                 finalize_complex_model(p0, p1);
                 free(p0);
 
-            } else if (strcmp(a, FRACTION_PRIMITIVE) == 0) {
+            } else if (strcmp(a, FRACTION_MODEL) == 0) {
 
                 finalize_fraction_model(p0, p1);
                 free(p0);
 
-            } else if (strcmp(a, INTEGER_PRIMITIVE) == 0) {
+            } else if (strcmp(a, INTEGER_MODEL) == 0) {
 
                 finalize_integer_model(p0, p1);
                 free(p0);
 
-            } else if (strcmp(a, BOOLEAN_PRIMITIVE) == 0) {
+            } else if (strcmp(a, BOOLEAN_MODEL) == 0) {
 
                 finalize_boolean_model(p0, p1);
                 free(p0);

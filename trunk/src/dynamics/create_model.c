@@ -26,9 +26,9 @@
 #define CREATE_MODEL_SOURCE
 
 #include "../cybol/cybol_model_handler.c"
-#include "../model/dynamics_models.c"
 #include "../logger/log_handler.c"
 #include "../model/map.c"
+#include "../model/models.c"
 #include "../model/statics_models.c"
 #include "../statics/boolean_handler.c"
 #include "../statics/complex_handler.c"
@@ -44,7 +44,7 @@
  *
  * It creates a statics or dynamics memory model from a cybol model.
  *
- * @version $Revision: 1.2 $ $Date: 2004-02-29 18:33:29 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-02-29 19:55:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -286,43 +286,43 @@ void* create_model(void* p0, void* p1, void* p2) {
                 initialize_model(m, p0);
 
             // Dynamics model.
-            } else if (strcmp(a, OPERATION) == 0) {
+            } else if (strcmp(a, OPERATION_MODEL) == 0) {
 
                 m = (void*) malloc(sizeof(struct operation));
                 initialize_operation_model(m, p0);
 
             // Statics models.
-            } else if (strcmp(a, TIME_PRIMITIVE) == 0) {
+            } else if (strcmp(a, TIME_MODEL) == 0) {
 
                 m = (void*) malloc(sizeof(struct time));
                 initialize_time_model(m, p0);
 
-            } else if (strcmp(a, STRING_PRIMITIVE) == 0) {
+            } else if (strcmp(a, STRING_MODEL) == 0) {
 
                 m = (void*) malloc(sizeof(struct string));
                 initialize_string_model(m, p0);
 
-            } else if (strcmp(a, VECTOR_PRIMITIVE) == 0) {
+            } else if (strcmp(a, VECTOR_MODEL) == 0) {
 
                 m = (void*) malloc(sizeof(struct vector));
                 initialize_vector_model(m, p0);
 
-            } else if (strcmp(a, COMPLEX_PRIMITIVE) == 0) {
+            } else if (strcmp(a, COMPLEX_MODEL) == 0) {
 
                 m = (void*) malloc(sizeof(struct complex));
                 initialize_complex_model(m, p0);
 
-            } else if (strcmp(a, FRACTION_PRIMITIVE) == 0) {
+            } else if (strcmp(a, FRACTION_MODEL) == 0) {
 
                 m = (void*) malloc(sizeof(struct fraction));
                 initialize_fraction_model(m, p0);
 
-            } else if (strcmp(a, INTEGER_PRIMITIVE) == 0) {
+            } else if (strcmp(a, INTEGER_MODEL) == 0) {
 
                 m = (void*) malloc(sizeof(struct integer));
                 initialize_integer_model(m, p0);
 
-            } else if (strcmp(a, BOOLEAN_PRIMITIVE) == 0) {
+            } else if (strcmp(a, BOOLEAN_MODEL) == 0) {
 
                 m = (void*) malloc(sizeof(struct boolean));
                 initialize_boolean_model(m, p0);

@@ -37,7 +37,7 @@
  * http://home.arcor.de/cpp_kurs/cpp/le07/k2_09_d1.htm
  * ... or try a Google search.
  *
- * @version $Revision: 1.3 $ $Date: 2004-02-29 18:33:30 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-02-29 19:55:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,11 +90,17 @@ static const char* DIVIDE_MODEL = "divide";
 // Memory management models.
 //
 
-/** The create model model. */
-static const char* CREATE_MODEL_MODEL = "create_model";
+/** The create statics model. */
+static const char* CREATE_STATICS_MODEL = "create_statics";
 
-/** The destroy model model. */
-static const char* DESTROY_MODEL_MODEL = "destroy_model";
+/** The destroy statics model. */
+static const char* DESTROY_STATICS_MODEL = "destroy_statics";
+
+/** The create dynamics model. */
+static const char* CREATE_DYNAMICS_MODEL = "create_dynamics";
+
+/** The destroy dynamics model. */
+static const char* DESTROY_DYNAMICS_MODEL = "destroy_dynamics";
 
 //
 // Input output models.

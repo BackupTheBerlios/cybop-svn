@@ -1,7 +1,7 @@
 /*
  * $RCSfile: signal_memory_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -51,9 +51,43 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.19 $ $Date: 2004-02-29 18:33:30 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2004-02-29 19:55:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+//
+// Constants.
+//
+
+/** The zero number. */
+static const int ZERO_NUMBER = 0;
+
+/** The one number. */
+static const int ONE_NUMBER = 1;
+
+/** The two number. */
+static const int TWO_NUMBER = 2;
+
+/** The three number. */
+static const int THREE_NUMBER = 3;
+
+/** The four number. */
+static const int FOUR_NUMBER = 4;
+
+/** The five number. */
+static const int FIVE_NUMBER = 5;
+
+/** The six number. */
+static const int SIX_NUMBER = 6;
+
+/** The seven number. */
+static const int SEVEN_NUMBER = 7;
+
+/** The eight number. */
+static const int EIGHT_NUMBER = 8;
+
+/** The nine number. */
+static const int NINE_NUMBER = 9;
 
 //
 // Signal.
@@ -150,7 +184,7 @@ void* get_signal(void* p0, void* p1) {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get signal. The signal memory is null.");
     }
-    
+
     return s;
 }
 
@@ -315,7 +349,7 @@ void destroy_signal_memory(void* p0) {
 
             // Destroy signal. Do not destroy the signal's abstraction and
             // priority here; they are static within CYBOI.
-            destroy_dynamics(s, (void*) 0, (void*) 0, (void*) 0, (void*) a);
+            destroy_model(s, (void*) 0, (void*) 0, (void*) a);
 
             log_message((void*) &INFO_LOG_LEVEL, "TEST B");
 
@@ -426,86 +460,93 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         char* a = (char*) p1;
         void* io = o->inputs_outputs;
-    
+
         if (io != (void*) 0) {
-    
-            if (strcmp(a, ADD_ARITHMETIC) == 0) {
-                
-                // Dereference function pointer and hand over inputs and outputs.
-                add(get_map_element_with_name(io, "summand_0"), get_map_element_with_name(io, "summand_1"), get_map_element_with_name(io, "sum"));
 
-            } else if (strcmp(a, CREATE_STATICS_MEMORY_MANAGEMENT) == 0) {
-        
-                struct statics_model* s = (struct statics_model*) p2;
-                
-                if (s != (void*) 0) {
-                        
-                    void* m = create_statics(get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
-                    set_map_element_with_name(s->parts, get_map_element_with_name(io, "name"), m);
-        
-                } else {
-            
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle create statics operation signal. The statics is null.");
-                }
+            if (strcmp(a, ADD_MODEL) == 0) {
 
-            } else if (strcmp(a, DESTROY_STATICS_MEMORY_MANAGEMENT) == 0) {
-        
-                struct statics_model* s = (struct statics_model*) p2;
-                
+                add(get_array_element(io, (void*) &ZERO_NUMBER), get_array_element(io, (void*) &ONE_NUMBER), get_array_element(io, (void*) &TWO_NUMBER));
+
+            } else if (strcmp(a, CREATE_STATICS_MODEL) == 0) {
+
+                struct model* s = (struct model*) p2;
+
                 if (s != (void*) 0) {
 
-                    void* m = get_map_element_with_name(s->parts, get_map_element_with_name(io, "name"));
-                    destroy_statics(m, get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
-        
+                    //?? Work this out! Hand over 9 or just 3 parameters,
+                    //?? for only part or also position and constraint?
+                    void* m = create_model(get_array_element(io, (void*) &ONE_NUMBER), get_array_element(io, (void*) &TWO_NUMBER), get_array_element(io, (void*) &THREE_NUMBER));
+                    set_map_element_with_name(s->part_models, get_array_element(io, (void*) &ZERO_NUMBER), m);
+
                 } else {
-            
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle destroy statics operation signal. The statics is null.");
+
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle create statics model. The statics is null.");
                 }
 
-            } else if (strcmp(a, CREATE_DYNAMICS_MEMORY_MANAGEMENT) == 0) {
-        
-                struct dynamics_model* d = (struct dynamics_model*) p3;
-                
+            } else if (strcmp(a, DESTROY_STATICS_MODEL) == 0) {
+
+                struct model* s = (struct model*) p2;
+
+                if (s != (void*) 0) {
+
+                    //?? Work this out! Hand over 9 or just 3 parameters,
+                    //?? for only part or also position and constraint?
+                    void* m = get_map_element_with_name(s->part_models, get_map_element_with_name(io, (void*) &ZERO_NUMBER));
+                    destroy_model(m, get_array_element(io, (void*) &ONE_NUMBER), get_array_element(io, (void*) &TWO_NUMBER), get_array_element(io, (void*) &THREE_NUMBER));
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle destroy statics model. The statics is null.");
+                }
+
+            } else if (strcmp(a, CREATE_DYNAMICS_MODEL) == 0) {
+
+                struct model* d = (struct model*) p3;
+
                 if (d != (void*) 0) {
 
-                    void* m = create_dynamics(get_map_element_with_name(io, "model"), get_map_element_with_name(io, "io_names"), get_map_element_with_name(io, "io_values"), get_map_element_with_name(io, "abstraction"));
-                    set_map_element_with_name(d->parts, get_map_element_with_name(io, "name"), m);
-        
+                    //?? Work this out! Hand over 9 or just 3 parameters,
+                    //?? for only part or also position and constraint?
+                    void* m = create_model(get_array_element(io, (void*) &ONE_NUMBER), get_array_element(io, (void*) &TWO_NUMBER), get_array_element(io, (void*) &THREE_NUMBER));
+                    set_map_element_with_name(d->part_models, get_array_element(io, (void*) &ZERO_NUMBER), m);
+
                 } else {
-            
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle create dynamics operation signal. The dynamics is null.");
+
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle create dynamics model. The dynamics is null.");
                 }
 
-            } else if (strcmp(a, DESTROY_DYNAMICS_MEMORY_MANAGEMENT) == 0) {
-        
-                struct dynamics_model* d = (struct dynamics_model*) p3;
-                
+            } else if (strcmp(a, DESTROY_DYNAMICS_MODEL) == 0) {
+
+                struct model* d = (struct model*) p3;
+
                 if (d != (void*) 0) {
-                        
-                    void* m = get_map_element_with_name(d->parts, get_map_element_with_name(io, "name"));
-                    destroy_dynamics(m, get_map_element_with_name(io, "model"), get_map_element_with_name(io, "io_names"), get_map_element_with_name(io, "io_values"), get_map_element_with_name(io, "abstraction"));
-        
+
+                    //?? Work this out! Hand over 9 or just 3 parameters,
+                    //?? for only part or also position and constraint?
+                    void* m = get_map_element_with_name(d->part_models, get_map_element_with_name(io, (void*) &ZERO_NUMBER));
+                    destroy_model(m, get_array_element(io, (void*) &ONE_NUMBER), get_array_element(io, (void*) &TWO_NUMBER), get_array_element(io, (void*) &THREE_NUMBER));
+
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle destroy dynamics operation signal. The dynamics is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle destroy dynamics model. The dynamics is null.");
                 }
 
-            } else if (strcmp(a, SEND_INPUT_OUTPUT) == 0) {
+            } else if (strcmp(a, SEND_MODEL) == 0) {
 
                 void* l = get_map_element_with_name(io, "language");
 
                 if (strcmp(l, X_WINDOWS_LANGUAGE) == 0) {
-                    
-                    send_x_windows_output(get_map_element_with_name(io, "addressee"), get_map_element_with_name(io, "message"), p4);
-        
+
+                    send_x_windows_output(get_array_element(io, (void*) &ZERO_NUMBER), get_array_element(io, (void*) &ONE_NUMBER), p4);
+
                 } else if (strcmp(l, TUI_LANGUAGE) == 0) {
 
                 }
-                
-            } else if (strcmp(a, RECEIVE_INPUT_OUTPUT) == 0) {
-        
-            } else if (strcmp(a, EXIT_LIFECYCLE_STEP) == 0) {
-        
+
+            } else if (strcmp(a, RECEIVE_MODEL) == 0) {
+
+            } else if (strcmp(a, EXIT_MODEL) == 0) {
+
                 // Set shutdown flag.
                 int* f = (int*) p5;
                 *f = 1;
@@ -514,36 +555,36 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, v
 /*??
             //?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
             if (strcmp(l, "mouse_moved") == 0) {
-        
+
                 Model statics = statics;
-                
+
                 set_model_element(statics, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
                 set_model_element(statics, "mouse.pointer_position.x_distance.unit", "pixel");
                 set_model_element(statics, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
                 set_model_element(statics, "mouse.pointer_position.y_distance.unit", "pixel");
-        
+
             } else if (strcmp(l, "mouse_clicked") == 0) {
-        
+
                 void* main_frame = get_statics_model_part(statics, (void*) "main_frame");
                 struct vector* pointer_position = get_statics_model_part(statics, (void*) "mouse.pointer_position");
-                
+
                 reset_signal(s);
-        
+
                 if (pointer_position != (void*) 0) {
-                 
+
     //??            mouse_clicked_action(main_frame, (void*) pointer_position->x, (void*) pointer_position->y, (void*) pointer_position->z, s->predicate);
-                    
+
                 } else {
-                    
+
                     log_message((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is null.");
                 }
             }
 */
         } else {
-    
+
             log_message((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The inputs/outputs is null.");
         }
-    
+
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The signal dynamics model is null.");
