@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2005-01-28 23:30:52 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2005-03-02 07:30:21 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -35,12 +35,22 @@
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
 #include "../logic/add.c"
+#include "../logic/compare.c"
 #include "../logic/create.c"
 #include "../logic/destroy.c"
+#include "../logic/loop.c"
 #include "../logic/receive.c"
 #include "../logic/send.c"
+#include "../logic/set.c"
 #include "../test/test.c"
 #include "../x_windows/x_windows_handler.c"
+
+
+void loop( const void* param, const int* param_count, 
+           const void* priority, const void* signal_id, void* shutdownflag,
+           void* internal );
+void handle_signal(const void* p0, const void* p1, const void* p2, const void* p3,
+    const void* p4, const void* p5,const  void* p6, const void* p7, void* p8, void* p9, void* p10);
 
 /**
  * Handles the compound signal.
@@ -49,9 +59,9 @@
  * @param p1 the signal count
  * @param p2 the signal priority
  * @param p3 the signal id
- * @param p4 the signal memory
- * @param p5 the signal memory count
- * @param p6 the signal memory size
+ * @param p4 the shutdown flag
+ * @param p5 the internal
+ * @param p6 the direct execution flag
  */
 void handle_compound_signal(const void* p0, const void* p1, const void* p2,
     const void* p3, void* p4, void* p5, void* p6) {
@@ -59,9 +69,23 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
     if (p1 != NULL_POINTER) {
 
         int* sc = (int*) p1;
+        
+        int direct_execution_flag = 0;
+        //direct execution flag
+        if (p6 != NULL_POINTER) {
+         
+            direct_execution_flag = *((int*)p6);
+        };
+        
+        // The signal memory.
+        void** sm = POINTER_NULL_POINTER;
+        void** smc = POINTER_NULL_POINTER;
+        void** sms = POINTER_NULL_POINTER;
 
-        int index = 0;
-//??        test_compound(p0, (int*) p1, &index);
+        // Get signal memory.
+        get_array_elements(p5, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &sm, (void*) POINTER_ARRAY);
+        get_array_elements(p5, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &smc, (void*) POINTER_ARRAY);
+        get_array_elements(p5, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &sms, (void*) POINTER_ARRAY);
 
         log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_COMPOUND_SIGNAL_MESSAGE, (void*) HANDLE_COMPOUND_SIGNAL_MESSAGE_COUNT);
 
@@ -135,8 +159,12 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
                                                             // (Each signal has a priority. A signal may consist of part
                                                             // signals. The part signals cannot have higher / lower priority
                                                             // than their original whole signal.)
-                                                            set_signal(p4, p5, p6, *a, *ac, *m, *mc, *d, *dc, p2, p3);
-
+                                                            if ( direct_execution_flag == 0 ) {
+                                                                set_signal(*sm, *smc, *sms, *a, *ac, *m, *mc, *d, *dc, p2, p3);
+                                                            }
+                                                            else {
+                                                                handle_signal( *a, *ac, *m, *mc, *d, *dc, p2, p3, p4, p5, p6 );
+                                                            }
                                                         } else {
 
                                                             log_message_debug("Could not handle compound signal. The details count is null.");
@@ -221,15 +249,13 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
  * @param p1 the signal count
  * @param p2 the parameters (details)
  * @param p3 the parameters count
- * @param p4 the knowledge
- * @param p5 the knowledge count
- * @param p6 the knowledge size
- * @param p7 the signal id
- * @param p8 the internals
- * @param p9 the shutdown flag
+ * @param p4 the signal priority
+ * @param p5 the signal id
+ * @param p6 the shutdown flag
+ * @param p7 the internals
  */
 void handle_operation_signal(const void* p0, const void* p1, const void* p2, const void* p3,
-    void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+    const void* p4, const void* p5, void* p6, void* p7) {
 
     log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_OPERATION_SIGNAL_MESSAGE, (void*) HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT);
 
@@ -239,13 +265,23 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
     fprintf(stderr, "TEST operation: %s\n", (char*) p0);
     fprintf(stderr, "TEST operation count: %i\n", *((int*) p1));
 
+    // The knowledge memory.
+    void** km = POINTER_NULL_POINTER;
+    void** kmc = POINTER_NULL_POINTER;
+    void** kms = POINTER_NULL_POINTER;
+
+    // Get knowledge memory.
+    get_array_elements(p7, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
+    get_array_elements(p7, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
+    get_array_elements(p7, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
+
     if (r != 1) {
 
         compare_arrays(p0, p1, (void*) ADD_ABSTRACTION, (void*) ADD_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            add(p2, p3, p4, p5, p6);
+            add(p2, p3, *km, *kmc, *kms );
         }
     }
 
@@ -255,7 +291,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            create_part(p2, p3, p4, p5, p6);
+            create_part(p2, p3, *km, *kmc, *kms );
         }
     }
 
@@ -265,7 +301,37 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            destroy_part(p2, p3, p4, p5, p6);
+            destroy_part(p2, p3, *km, *kmc, *kms );
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p0, p1, (void*) COMPARE_ABSTRACTION, (void*) COMPARE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            compare(p2, p3, p4, p5, p7 );
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p0, p1, (void*) LOOP_ABSTRACTION, (void*) LOOP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            loop(p2, p3, p4, p5, p6, p7 );
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p0, p1, (void*) SET_ABSTRACTION, (void*) SET_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            set(p2, p3, p4, p5, p7 );
         }
     }
 
@@ -275,7 +341,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            send_message(p2, p3, p4, p5, p6, p7, p8);
+            send_message(p2, p3, *km, *kmc, *kms, p5, p7);
         }
     }
 
@@ -285,7 +351,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            receive_message(p2, p3, p4, p5, p6, p8);
+            receive_message(p2, p3, *km, *kmc, *kms, p7);
         }
     }
 
@@ -297,7 +363,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
             log_message((void*) INFO_LOG_LEVEL, (void*) SET_SHUTDOWN_FLAG_MESSAGE, (void*) SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
 
-            int* f = (int*) p9;
+            int* f = (int*) p6;
             *f = 1;
         }
     }
@@ -331,6 +397,81 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
     }
 */
 }
+
+/**
+ * Handles the signal.
+ *
+ * @param p0 the abctraction 
+ * @param p1 the abstraction count
+ * @param p2 the signal
+ * @param p3 the signal count
+ * @param p4 the parameters (details)
+ * @param p5 the parameters count
+ * @param p6 the priority
+ * @param p7 the signal id
+ * @param p8 the shutdown flag
+ * @param p9 the internals
+ * @param p10 the direct execution flag
+ */
+void handle_signal(const void* p0, const void* p1, const void* p2, const void* p3,
+    const void* p4, const void* p5,const  void* p6, const void* p7, void* p8, void* p9, void* p10) {
+
+//    // The knowledge memory.
+//    void** k = POINTER_NULL_POINTER;
+//    void** kc = POINTER_NULL_POINTER;
+//    void** ks = POINTER_NULL_POINTER;
+//    // The signal memory.
+//    void** s = POINTER_NULL_POINTER;
+//    void** sc = POINTER_NULL_POINTER;
+//    void** ss = POINTER_NULL_POINTER;
+//
+//    // Get knowledge memory.
+//    get_array_elements(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_ARRAY);
+//    get_array_elements(p0, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) POINTER_ARRAY);
+//    get_array_elements(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) POINTER_ARRAY);
+//    // Get signal memory.
+//    get_array_elements(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_ARRAY);
+//    get_array_elements(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_ARRAY);
+//    get_array_elements(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_ARRAY);
+
+
+    int r = 0;
+
+    if (r != 1) {
+
+        compare_arrays(p0, p1, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            handle_compound_signal(p2, p3, p6, p7, p8, p9, p10 );
+        }
+    }
+
+    //
+    // Handle operation signal.
+    //
+
+    if (r != 1) {
+
+        compare_arrays(p0, p1, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            handle_operation_signal( p2, p3, p4, p5, p6, p7, p8, p9 );
+        }
+    }
+
+    //
+    // Unknown signal abstraction.
+    //
+
+    if (r != 1) {
+
+        log_message((void*) WARNING_LOG_LEVEL, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT);
+    }
+
+}
+
 
 /* SIGNAL_HANDLER_SOURCE */
 #endif
