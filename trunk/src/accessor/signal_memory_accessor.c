@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-11-25 09:46:58 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,6 +97,16 @@ void set_signal(void* p0, void* p1, void* p2, const void* p3, const void* p4,
                     resize_array((void*) &d, (void*) &POINTER_ARRAY, p2);
                     resize_array((void*) &dc, (void*) &INTEGER_ARRAY, p2);
                     resize_array((void*) &p, (void*) &INTEGER_ARRAY, p2);
+
+                    //after resize can the reference changed
+                    //in consequence muss the new set the array element
+                    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a);
+                    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
+                    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &m);
+                    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &mc);
+                    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &d);
+                    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc);
+                    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p);
                 }
 
                 if (i < *s) {

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2004-10-28 23:32:19 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-11-25 09:46:37 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -330,6 +330,21 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2,
                         resize_array((void*) &d, (void*) &POINTER_ARRAY, p2);
                         resize_array((void*) &dc, (void*) &INTEGER_ARRAY, p2);
                         resize_array((void*) &ds, (void*) &INTEGER_ARRAY, p2);
+
+                        //after resize can the reference changed
+                        //in consequence muss the new set the array element
+                        set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
+                        set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &nc);
+                        set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
+                        set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
+                        set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
+                        set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
+                        set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_INDEX, (void*) &m);
+                        set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_COUNTS_INDEX, (void*) &mc);
+                        set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_SIZES_INDEX, (void*) &ms);
+                        set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_INDEX, (void*) &d);
+                        set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_COUNTS_INDEX, (void*) &dc);
+                        set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_SIZES_INDEX, (void*) &ds);
                     }
 
                     if (*i < *cs) {
