@@ -34,7 +34,9 @@ import cybop.core.model.String;
  * A point is just a minimal space and always relative to the referenced object.
  * The absolute point does not exist as any point can consist of yet smaller points.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-23 11:57:28 $ $Author: christian $
+ * It is measured in Meter * Meter * Meter [m * m * m].
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-06-07 07:18:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Space extends Map {
