@@ -28,14 +28,21 @@
 #include <string.h>
 #include "../logger/log_handler.c"
 #include "../model/array_handler.c"
-#include "../model/map.c"
 
 /**
  * This is the map handler.
  *
- * Map elements are accessed over their name or index.
+ * A map is like a table. One column (array) contains the element names.
+ * A second column (array) contains the actual element references.
  *
- * @version $Revision: 1.14 $ $Date: 2004-03-11 22:44:31 $ $Author: christian $
+ * The map itself is a pointer array consisting of:
+ * - array size
+ * - names array
+ * - references array
+ *
+ * A map's elements can such be accessed over their name or index.
+ *
+ * @version $Revision: 1.15 $ $Date: 2004-03-25 08:39:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,22 +64,38 @@ static const int SEPARATION = 95;
  */
 void initialize_map(void* p0) {
 
-    struct map* m = (struct map*) p0;
+    log_message((void*) &INFO_LOG_LEVEL, "Initialize map.");
 
-    if (m != (void*) 0) {
+    // The map size.
+    int s = 3;
+    // The map.
+    initialize_array(p0, (void*) &s);
+    // The index.
+    int i;
 
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize map.");
+    //?? Actually, the array size should be stored in an own integer_array.
+    //?? But since probably in the future, only the integer_array will
+    //?? stay and a pointer in the end is also an integer, the array size
+    //?? is just added at first, before the names and references arrays,
+    //?? to the pointer array which represents the map.
+    //?? Caution! INTEGER_ARRAY needs to be given as type for the array size.
 
-        m->names = malloc(sizeof(struct array));
-        initialize_array(m->names, (void*) &POINTER_ARRAY);
+    // The array size which is always equal for both arrays.
+    i = 0;
+    int as = 0;
+    set_array_element(m, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &as);
 
-        m->references = malloc(sizeof(struct array));
-        initialize_array(m->references, (void*) &POINTER_ARRAY);
+    // The names array.
+    i = 1;
+    void* n = (void*) 0;
+    initialize_array((void*) &n, (void*) &as);
+    set_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
 
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize map. The map is null.");
-    }
+    // The references array.
+    i = 2;
+    void* r = (void*) 0;
+    initialize_array((void*) &r, (void*) &as);
+    set_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
 }
 
 /**
@@ -82,42 +105,39 @@ void initialize_map(void* p0) {
  */
 void finalize_map(void* p0) {
 
-    struct map* m = (struct map*) p0;
+    log_message((void*) &INFO_LOG_LEVEL, "Finalize map.");
 
-    if (m != (void*) 0) {
+    // The map size.
+    int s = 3;
+    // The index.
+    int i = 0;
 
-        log_message((void*) &INFO_LOG_LEVEL, "Finalize map.");
+    // The references array.
+    i = 2;
+    void* r = (void*) 0;
+    get_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
+    remove_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    finalize_array((void*) &r, (void*) &as);
 
-        finalize_array(m->references);
-        free(m->references);
+    // The names array.
+    i = 1;
+    void* n = (void*) 0;
+    get_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
+    remove_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    finalize_array((void*) &n, (void*) &as);
 
-        finalize_array(m->names);
-        free(m->names);
+    //?? Actually, the array size should be stored in an own integer_array.
+    //?? Caution! INTEGER_ARRAY needs to be given as type for the array size.
+    //?? The remove procedure moves all pointer elements and deletes the
+    //?? last element. Since the size is the last remaining element,
+    //?? no pointer elements are found which would be wrongly casted to (int*).
 
-    } else {
+    // The array size which is always equal for both arrays.
+    i = 0;
+    remove_array_element(m, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i);
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize map. The map is null.");
-    }
-}
-
-/**
- * Returns the map size.
- *
- * @param p0 the map
- * @param p1 the size
- */
-void get_map_size(const void* p0, void* p1) {
-
-    struct map* m = (struct map*) p0;
-
-    if (m != (void*) 0) {
-
-        get_array_size(m->names, p1);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get map size. The map is null.");
-    }
+    // The map.
+    finalize_array(p0, (void*) &s);
 }
 
 //
@@ -127,7 +147,7 @@ void get_map_size(const void* p0, void* p1) {
 /**
  * Gets the map element index.
  *
- * @param p0 the names
+ * @param p0 the names array
  * @param p1 the name
  * @param p2 the index
  */
@@ -312,17 +332,31 @@ void build_next_map_element_name(const void* p0, const void* p1, void* p2) {
  */
 void set_map_element_at_index(void* p0, const void* p1, const void* p2, const void* p3) {
 
-    struct map* m = (struct map*) p0;
+    // The map size.
+    int s = 3;
+    // The index.
+    int i;
 
-    if (m != (void*) 0) {
+    // The array size which is always equal for both arrays.
+    i = 0;
+    int as = 0;
+    get_array_element(m, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &as);
 
-        set_array_element(m->names, p1, p2);
-        set_array_element(m->references, p1, p3);
+    // The names array.
+    i = 1;
+    void* n = (void*) 0;
+    get_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
+    set_array_element((void*) &n, (void*) &as, (void*) &POINTER_ARRAY, p1, p2);
 
-    } else {
+    // The references array.
+    i = 2;
+    void* r = (void*) 0;
+    get_array_element(m, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
+    set_array_element((void*) &r, (void*) &as, (void*) &POINTER_ARRAY, p1, p3);
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not set map element at index. The map is null.");
-    }
+    //?? Change array size!
+    //?? Error: array size gets incremented twice above, by names and references
+    //?? array handling.
 }
 
 /**

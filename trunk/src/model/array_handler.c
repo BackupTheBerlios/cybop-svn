@@ -27,7 +27,6 @@
 
 #include <stdlib.h>
 #include "../logger/log_handler.c"
-#include "../model/array.c"
 #include "../model/character_array_handler.c"
 #include "../model/double_array_handler.c"
 #include "../model/integer_array_handler.c"
@@ -63,7 +62,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.18 $ $Date: 2004-03-19 16:24:01 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2004-03-25 08:39:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -148,12 +147,12 @@ void finalize_array(void* p0, const void* p1) {
 
         if (a != (void*) 0) {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Initialize array.");
+            log_message((void*) &INFO_LOG_LEVEL, "Finalize array.");
 
-            // An array CANNOT have ZERO length, so that dereferencing a pointer to
-            // the first element of an array always returns a valid result.
-            // There is no NULL array.
-            // See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
+            //?? TODO: Destroy all array elements in a loop,
+            //?? which is the same as Garbage Collection!
+            //?? SEE: signal_memory_handler
+
             free(*a);
 
         } else {
@@ -308,7 +307,8 @@ void set_array_element(void* p0, void* p1, const void* p2, const void* p3, const
 
                 if (*i >= 0) {
 
-                    if (*i = *s) {
+                    // If index is equal to array size, then add element.
+                    if (*i == *s) {
 
                         // Extend array if element is added.
                         resize_array(p0, p1);
