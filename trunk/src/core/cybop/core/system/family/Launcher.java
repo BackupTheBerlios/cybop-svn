@@ -70,7 +70,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.30 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2003-06-19 16:20:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -79,11 +79,11 @@ public class Launcher extends Family {
     // Children names.
     //
 
-    /** The screen. */
-    public static final String SCREEN = new String("screen");
-
     /** The command line arguments container. */
     private java.lang.String[] arguments;
+
+    /** The screen. */
+    public static final String SCREEN = new String("screen");
 
     /** The lifecycle action. */
     public static final String LIFECYCLE_ACTION = new String("lifecycle_action");
@@ -91,11 +91,11 @@ public class Launcher extends Family {
     /** The java event catcher. */
     private JavaEventCatcher javaEventCatcher;
 
-    /** The shutdown hook. */
-    public static final String SHUTDOWN_HOOK = new String("shutdown_hook");
-
     /** The shutdown flag. */
     public static final String SHUTDOWN_FLAG = new String("shutdown_flag");
+
+    /** The shutdown hook. */
+    public static final String SHUTDOWN_HOOK = new String("shutdown_hook");
 
     //
     // Command line arguments.
@@ -103,9 +103,6 @@ public class Launcher extends Family {
 
     /** The system category argument. */
     public static final String SYSTEM_ARGUMENT = new String("-system");
-
-    /** The system configuration location argument. */
-    public static final String SYSTEM_CONFIGURATION_LOCATION_ARGUMENT = new String("-configuration");
 
     /** The lifecycle action argument. */
     public static final String LIFECYCLE_ACTION_ARGUMENT = new String("-action");
@@ -331,16 +328,6 @@ public class Launcher extends Family {
     }
 
     /**
-     * Returns the default shutdown socket category.
-     *
-     * @return the default shutdown socket category
-     */
-    public Item getDefaultShutdownSocketCategory() {
-
-        return new String("cybop.core.system.system.ShutdownSocket");
-    }
-
-    /**
      * Returns the default lifecycle action category.
      *
      * @return the default lifecycle action category
@@ -358,6 +345,26 @@ public class Launcher extends Family {
     public Item getDefaultShutdownFlagCategory() {
 
         return new Boolean(Boolean.FALSE);
+    }
+
+    /**
+     * Returns the default shutdown hook category.
+     *
+     * @return the default shutdown hook category
+     */
+    public Item getDefaultShutdownHookCategory() {
+
+        return new String("cybop.core.system.system.ShutdownHook");
+    }
+
+    /**
+     * Returns the default shutdown socket category.
+     *
+     * @return the default shutdown socket category
+     */
+    public Item getDefaultShutdownSocketCategory() {
+
+        return new String("cybop.core.system.system.ShutdownSocket");
     }
 
     //
@@ -504,94 +511,43 @@ public class Launcher extends Family {
     /**
      * Creates the shutdown hook.
      *
+     * @param n the category name
      * @return the shutdown hook
      * @exception Exception if the shutdown hook is null
      */
-    public ShutdownHook createShutdownHook() throws Exception {
+    public ShutdownHook createShutdownHook(Array n) throws Exception {
 
-        ShutdownHook sh = new ShutdownHook();
+        ShutdownHook s = (ShutdownHook) createChild(n);
 
-        if (sh != null) {
-
-            java.lang.System.out.println("INFO: Abstract child to get an abstraction.");
-            sh.abstracc();
-
-            java.lang.System.out.println("INFO: Name child to get a category.");
-            sh.name();
-
-            java.lang.System.out.println("INFO: Inherit child to get an inheritance.");
-            sh.inherit();
-
-            java.lang.System.out.println("INFO: Categorize child to get a hierarchy.");
-            sh.categorize();
-
-            java.lang.System.out.println("INFO: Position child to get a structure.");
-            sh.position();
-
-            java.lang.System.out.println("INFO: Constrain child to get a definition.");
-            sh.constrain();
-
-            java.lang.System.out.println("INFO: Behave child to get a behaviour.");
-            sh.behave();
-
-            java.lang.System.out.println("INFO: Connect child to signal memory.");
-            sh.setChild(Launcher.SIGNAL_MEMORY, getChild(Launcher.SIGNAL_MEMORY));
-
-            java.lang.System.out.println("INFO: Initialize child to get an item.");
-            sh.initialize();
+        if (s != null) {
 
             // This is an exceptional setting.
             // Normally, child items should not know about the parent item.
             // However, this shutdown hook as thread running in parallel to this launcher,
             // needs to know this launcher so that it can eventually send a shutdown signal. 
-            sh.setSystem(this);
+            s.setSystem(this);
 
         } else {
     
             throw new Exception("Could not create shutdown hook. The shutdown hook is null.");
         }
 
-        return sh;
+        return s;
     }
 
     /*
      * Destroys the shutdown hook.
      *
-     * @param sh the shutdown hook
-     * @exception Exception if the shutdown hook is null
+     * @param i the child
+     * @exception Exception if the child is null
      */
-    public void destroyShutdownHook(ShutdownHook sh) throws Exception {
+    public void destroyShutdownHook(ShutdownHook s) throws Exception {
 
-        if (sh != null) {
+        if (s != null) {
 
-            sh.setSystem(null);
+            s.setSystem(null);
 
-            java.lang.System.out.println("INFO: Finalize child.");
-            sh.finalizz();
-
-            java.lang.System.out.println("INFO: Disconnect child from signal memory.");
-            sh.removeChild(Launcher.SIGNAL_MEMORY);
-
-            java.lang.System.out.println("INFO: Unbehave child.");
-            sh.unbehave();
-
-            java.lang.System.out.println("INFO: Unconstrain child.");
-            sh.unconstrain();
-
-            java.lang.System.out.println("INFO: Deposition child.");
-            sh.deposition();
-
-            java.lang.System.out.println("INFO: Decategorize child.");
-            sh.decategorize();
-
-            java.lang.System.out.println("INFO: Uninherit child.");
-            sh.uninherit();
-
-            java.lang.System.out.println("INFO: Unname child.");
-            sh.unname();
-
-            java.lang.System.out.println("INFO: Deabstract child.");
-            sh.deabstract();
+            destroyChild(s);
 
         } else {
     
@@ -602,19 +558,19 @@ public class Launcher extends Family {
     /**
      * Sets the shutdown hook.
      *
-     * @param sh the shutdown hook
+     * @param s the shutdown hook
      * @exception Exception if the java runtime is null
      * @exception Exception if the shutdown hook is null
      */
-    private void setShutdownHook(ShutdownHook sh) throws Exception {
+    private void setShutdownHook(ShutdownHook s) throws Exception {
 
         java.lang.Runtime r = java.lang.Runtime.getRuntime();
 
         if (r != null) {
 
-            if (sh != null) {
+            if (s != null) {
 
-                r.addShutdownHook((java.lang.Thread) sh.getJavaObject());
+                r.addShutdownHook((java.lang.Thread) s.getJavaObject());
 
             } else {
     
@@ -630,19 +586,19 @@ public class Launcher extends Family {
     /**
      * Removes the shutdown hook.
      *
-     * @param sh the shutdown hook
+     * @param s the shutdown hook
      * @exception Exception if the java runtime is null
      * @exception Exception if the shutdown hook is null
      */
-    private void removeShutdownHook(ShutdownHook sh) throws Exception {
+    private void removeShutdownHook(ShutdownHook s) throws Exception {
 
         java.lang.Runtime r = java.lang.Runtime.getRuntime();
         
         if (r != null) {
     
-            if (sh != null) {
+            if (s != null) {
 
-                r.removeShutdownHook((java.lang.Thread) sh.getJavaObject());
+                r.removeShutdownHook((java.lang.Thread) s.getJavaObject());
 
             } else {
     
@@ -666,8 +622,13 @@ public class Launcher extends Family {
 
         super.categorize();
 
-        setCategory(Launcher.SYSTEM, getArgument(Launcher.SYSTEM_ARGUMENT, getDefaultSystemCategory()));
         setCategory(Launcher.SCREEN, getDefaultScreenCategory());
+        setCategory(Launcher.LIFECYCLE_ACTION, getArgument(Launcher.LIFECYCLE_ACTION_ARGUMENT, getDefaultLifecycleActionCategory()));
+        setCategory(Launcher.SHUTDOWN_FLAG, getDefaultShutdownFlagCategory());
+        setCategory(Launcher.SHUTDOWN_HOOK, getDefaultShutdownHookCategory());
+        // This system category is normally set and removed in the Family class.
+        // It is here overwritten with the command line argument.
+        setCategory(Launcher.SYSTEM, getArgument(Launcher.SYSTEM_ARGUMENT, getDefaultSystemCategory()));
     }
 
     /**
@@ -675,8 +636,10 @@ public class Launcher extends Family {
      */
     public void decategorize() throws Exception {
 
+        removeCategory(Launcher.SHUTDOWN_HOOK);
+        removeCategory(Launcher.SHUTDOWN_FLAG);
+        removeCategory(Launcher.LIFECYCLE_ACTION);
         removeCategory(Launcher.SCREEN);
-        removeCategory(Launcher.SYSTEM);
 
         super.decategorize();
     }
@@ -699,11 +662,11 @@ public class Launcher extends Family {
         } else {
 
             setChild(Launcher.SCREEN, createChild(getCategory(Launcher.SCREEN)));
-            setChild(Launcher.LIFECYCLE_ACTION, getArgument(Launcher.LIFECYCLE_ACTION_ARGUMENT, (String) getDefaultLifecycleActionCategory()));
+            setChild(Launcher.LIFECYCLE_ACTION, getCategory(Launcher.LIFECYCLE_ACTION_ARGUMENT));
             //?? Temporary until event handling doesn't need java awt EventQueue anymore.
             setJavaEventCatcher(createJavaEventCatcher());
-            setChild(Launcher.SHUTDOWN_HOOK, createShutdownHook());
-            setChild(Launcher.SHUTDOWN_FLAG, createChild(getCategory(Launcher.SHUTDOWN_FLAG)));
+            setChild(Launcher.SHUTDOWN_FLAG, getCategory(Launcher.SHUTDOWN_FLAG));
+            setChild(Launcher.SHUTDOWN_HOOK, createShutdownHook(getCategory(Launcher.SHUTDOWN_HOOK)));
         }
     }
 
@@ -712,13 +675,15 @@ public class Launcher extends Family {
      */
     public void finalizz() throws Exception {
 
-        removeChild(Launcher.SHUTDOWN_FLAG);
-
         // Remove shutdown hook first to avoid another shutdown call
         // from the java virtual machine to this system.
         Item shutdownHook = getChild(Launcher.SHUTDOWN_HOOK);
         removeChild(Launcher.SHUTDOWN_HOOK);
         destroyChild(shutdownHook);
+
+        Item shutdownFlag = getChild(Launcher.SHUTDOWN_FLAG);
+        removeChild(Launcher.SHUTDOWN_FLAG);
+        destroyChild(shutdownFlag);
 
         //?? Temporary until event handling doesn't need java awt EventQueue anymore.
         destroyJavaEventCatcher(getJavaEventCatcher());

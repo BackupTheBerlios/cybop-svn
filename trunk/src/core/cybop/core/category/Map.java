@@ -33,7 +33,7 @@ package cybop.core.category;
  * the index of the wanted element -- and then returning the corresponding
  * reference.
  *
- * @version $Revision: 1.7 $ $Date: 2003-06-19 12:24:41 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-06-19 16:20:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Map {
@@ -275,16 +275,8 @@ public class Map {
 
         int i = getIndex(n);
 
-//??        java.lang.System.out.println("\n\n\nTEST size: " + getSize());
-
-        java.lang.System.out.println("\n\n\nTEST return: " + get(i));
-
-/*??
-        for (int j = 0; j < getSize(); j++) {
-
-            java.lang.System.out.println("\n\n\nTEST loop: " + get(j));
-        }
-*/
+        java.lang.System.out.println("\n\n\nTEST i: " + i);
+        java.lang.System.out.println("\nTEST get(i): " + get(i) + "\n\n\n");
 
         return get(i);
     }
@@ -360,7 +352,7 @@ public class Map {
                 name = names.get(i);
 
                 // If a null name is reached, then the name was not found.
-                // In this case, reset index to -1.
+                // In this case, the current value of i is the next free index.
                 if (name == null) {
 
                     index = i;
@@ -369,7 +361,8 @@ public class Map {
                 } else {
 
                     // If a name equal to the searched one is found,
-                    // then its index is the one to be returned.
+                    // then its index is the one to be returned since
+                    // this element will have to be replaced.
                     if (name.isEqualTo(n)) {
 
                         index = i;

@@ -83,7 +83,7 @@ import cybop.core.model.String;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.10 $ $Date: 2003-06-19 12:24:41 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-06-19 16:20:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends Behaviour {
@@ -314,7 +314,7 @@ public class Item extends Behaviour {
 
         if (m != null) {
 
-            c = (Item) m.get(n);
+            c = m.get(n);
 
         } else {
 

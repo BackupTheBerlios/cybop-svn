@@ -34,7 +34,7 @@ package cybop.core.category;
  * In the case of computer science, everything gets abstracted to 0 and 1.
  * But that also means that every abstraction has a bytecode representation.
  *
- * @version $Revision: 1.8 $ $Date: 2003-06-19 12:24:41 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-06-19 16:20:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Array {
@@ -182,8 +182,6 @@ public class Array {
             // extended length is created and delivered back.
             if (i >= a.length) {
 
-                java.lang.System.out.println("\n\n\nTEST size i: " + i + " length: " + a.length);
-
                 Array[] old = getElements();
                 a = createElements(old);
                 destroyElements(old);
@@ -215,8 +213,6 @@ public class Array {
         Array[] a = getElements();
 
         if (a != null) {
-
-            java.lang.System.out.println("DEBUG: Remove element: " + i + " in: " + this);
 
             //?? Temporary: Remove java tree node.
             removeTreeNode(a[i]);
