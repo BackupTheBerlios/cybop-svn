@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.5 $ $Date: 2004-08-14 22:20:33 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-08-15 22:11:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,205 +47,6 @@
 #include "../state/vector.c"
 #include "../state/xml_tag.c"
 #include "../translator/xml_translator.c"
-
-/**
- * Creates a transient model.
- *
- * @param p0 the transient model
- * @param p1 the transient model count
- * @param p2 the transient model size
- * @param p3 the abstraction
- * @param p4 the abstraction count
- */
-void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
-
-    // The done flag.
-    int d = 0;
-    // The comparison result.
-    int r = 0;
-
-    if (p4 != NULL_POINTER) {
-
-        int* ac = (int*) p4;
-
-        //
-        // Three comparisons are done:
-        // 1 done flag (no further processing if an abstraction already matched)
-        // 2 abstraction size
-        // 3 abstraction characters
-        //
-        // The order is important!
-        // The size needs to be checked before the arrays are handed over to the
-        // comparison procedure. Otherwise, array boundaries might get crossed.
-        //
-
-        //
-        // Compound.
-        //
-
-        if (d == 0) {
-
-            if (*ac == COMPOUND_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p3, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    create_compound(p0, p2);
-
-                    d = 1;
-                }
-            }
-        }
-
-        //
-        // Logic.
-        //
-
-        if (d == 0) {
-
-            if (*ac == OPERATION_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p3, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    create_operation(p0, p2);
-
-                    d = 1;
-                }
-            }
-        }
-
-        //
-        // State.
-        //
-
-        if (d == 0) {
-
-            if (*ac == STRING_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p3, (void*) &STRING_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &STRING_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    create_string(p0, p2);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*ac == BOOLEAN_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p3, (void*) &BOOLEAN_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &BOOLEAN_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    // No creation because primitive type.
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*ac == INTEGER_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p3, (void*) &INTEGER_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &INTEGER_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    // No creation because primitive type.
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*ac == VECTOR_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p3, (void*) &VECTOR_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &VECTOR_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    create_vector(p0, p2);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*ac == DOUBLE_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p3, (void*) &DOUBLE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DOUBLE_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    // No creation because primitive type.
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*ac == FRACTION_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p3, (void*) &FRACTION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &FRACTION_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    create_fraction(p0, p2);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*ac == COMPLEX_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p3, (void*) &COMPLEX_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPLEX_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    create_complex(p0, p2);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*ac == TIME_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p3, (void*) &TIME_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &TIME_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    create_time(p0, p2);
-
-                    d = 1;
-                }
-            }
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not interpret model. The abstraction count is null.");
-    }
-}
 
 /**
  * Initializes a transient model from a persistent model.
@@ -515,7 +316,7 @@ void initialize_model(void* p0, void* p1, void* p2, const void* p3, const void* 
  * @param p5 the knowledge count
  * @param p6 the knowledge size
  */
-void create(const void* p0, const void* p1, const void* p2, const void* p3,
+void handle_create(const void* p0, const void* p1, const void* p2, const void* p3,
     void* p4, void* p5, void* p6) {
 
     if (p6 != NULL_POINTER) {

@@ -32,7 +32,7 @@
  * A signal is a transient logic model.
  * It is stored in the computer's random access memory (ram).
  *
- * @version $Revision: 1.35 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
+ * @version $Revision: 1.36 $ $Date: 2004-08-15 22:11:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,129 +49,6 @@
 #include "../logic/send.c"
 #include "../state/compound.c"
 #include "../x_windows/x_windows_handler.c"
-
-//
-// Signal memory.
-//
-
-/**
- * Creates the signal memory.
- *
- * @param p0 the signal memory
- * @param p1 the signal memory size
- */
-void create_signal_memory(void* p0, void* p1) {
-
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_SIGNAL_MEMORY_MESSAGE, (void*) &CREATE_SIGNAL_MEMORY_MESSAGE_COUNT);
-
-    // Create signal memory.
-    create_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);
-
-    // Initialize signal models, priorities, abstractions
-    // and their counts.
-    void* sm = NULL_POINTER;
-    void* smc = NULL_POINTER;
-    void* sp = NULL_POINTER;
-    void* sa = NULL_POINTER;
-    void* sac = NULL_POINTER;
-
-    // Create signal models, priorities, abstractions
-    // and their counts.
-    create_array((void*) &sm, (void*) &POINTER_ARRAY, p1);
-    create_array((void*) &smc, (void*) &INTEGER_ARRAY, p1);
-    create_array((void*) &sp, (void*) &INTEGER_ARRAY, p1);
-    create_array((void*) &sa, (void*) &POINTER_ARRAY, p1);
-    create_array((void*) &sac, (void*) &INTEGER_ARRAY, p1);
-
-    //
-    // Use ascending order.
-    //
-
-    // Set signal models, priorities, abstractions
-    // and their counts.
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &sm);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &smc);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &sp);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &sa);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &sac);
-}
-
-/**
- * Destroys the signal memory.
- *
- * @param p0 the signal memory
- * @param p1 the signal memory size
- */
-void destroy_signal_memory(void* p0, void* p1) {
-
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_SIGNAL_MEMORY_MESSAGE, (void*) &DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT);
-
-    // Initialize signal models, priorities, abstractions
-    // and their counts.
-    void* sm = NULL_POINTER;
-    void* smc = NULL_POINTER;
-    void* sp = NULL_POINTER;
-    void* sa = NULL_POINTER;
-    void* sac = NULL_POINTER;
-
-/*??
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy all signals left in signal memory.");
-
-    int i = 0;
-    get_array_count(m->signals, (void*) &i);
-    i--;
-    void* s = NULL_POINTER;
-    void* a = NULL_POINTER;
-
-    while (i >= 0) {
-
-        s = (void*) get_signal(p0, (void*) &i);
-        a = (void*) get_abstraction(p0, (void*) &i);
-        // Priority is not needed to destroy the signal.
-
-        // Abstraction and priority are removed internally,
-        // together with the signal.
-        remove_signal(p0, (void*) &i);
-
-        // Destroy signal. Do not destroy the signal's abstraction and
-        // priority here; they are static within CYBOI.
-        destroy_model(s, NULL, NULL, (void*) a);
-
-        i--;
-    }
-*/
-
-    // Get signal models, priorities, abstractions
-    // and their counts.
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &sm);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &smc);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &sp);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &sa);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &sac);
-
-    //
-    // Use descending order.
-    //
-
-    // Remove signal models, priorities, abstractions
-    // and their counts.
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_ABSTRACTIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_PRIORITIES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_MODELS_COUNTS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_MODELS_INDEX);
-
-    // Destroy signal models, priorities, abstractions
-    // and their counts.
-    destroy_array((void*) &sm, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &smc, (void*) &INTEGER_ARRAY, p1);
-    destroy_array((void*) &sp, (void*) &INTEGER_ARRAY, p1);
-    destroy_array((void*) &sa, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &sac, (void*) &INTEGER_ARRAY, p1);
-
-    // Destroy signal memory.
-    destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);
-}
 
 //
 // Signal memory element (signal).
@@ -643,7 +520,7 @@ void handle_operation_signal(const void* p0, const void* p1,
 
                     if (r == 1) {
 
-                        create(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p4);
+                        handle_create(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p4);
 
                         d = 1;
                     }
@@ -659,7 +536,7 @@ void handle_operation_signal(const void* p0, const void* p1,
                     if (r == 1) {
 
 /*??
-                        destroy(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p4);
+                        handle_destroy(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p4);
 */
 
                         d = 1;

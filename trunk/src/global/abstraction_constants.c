@@ -28,12 +28,21 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-08-15 22:11:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ABSTRACTION_CONSTANTS_SOURCE
 #define ABSTRACTION_CONSTANTS_SOURCE
+
+//
+// Signal memory abstraction.
+//
+
+/** The signal memory abstraction array, pointer, count. */
+static const char SIGNAL_MEMORY_ABSTRACTION_ARRAY[] = {'s', 'i', 'g', 'n', 'a', 'l', ' ', 'm', 'e', 'm', 'o', 'r', 'y'};
+static const char* SIGNAL_MEMORY_ABSTRACTION = SIGNAL_MEMORY_ABSTRACTION_ARRAY;
+static const int SIGNAL_MEMORY_ABSTRACTION_COUNT = 8;
 
 //
 // Compound abstraction.

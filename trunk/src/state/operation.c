@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.7 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-08-15 22:11:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,72 +51,10 @@
 #define OPERATION_SOURCE
 
 #include "../array/array.c"
+#include "../creator/creator.c"
 #include "../global/abstraction_constants.c"
 #include "../global/constant.c"
 #include "../logger/logger.c"
-
-/**
- * Creates the operation.
- *
- * @param p0 the transient model
- * @param p1 the transient model size
- */
-void create_operation(void* p0, const void* p1) {
-
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_OPERATION_MESSAGE, (void*) &CREATE_OPERATION_MESSAGE_COUNT);
-
-    // Create operation.
-    create_array(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT);
-
-    // Initialize elements.
-    void* p = NULL_POINTER;
-    void* pc = NULL_POINTER;
-    void* ps = NULL_POINTER;
-
-    // Create elements.
-    create_array((void*) &p, (void*) &POINTER_ARRAY, p1);
-    create_array((void*) &pc, (void*) &INTEGER_ARRAY, p1);
-    create_array((void*) &ps, (void*) &INTEGER_ARRAY, p1);
-
-    // Set elements in ascending order.
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &p);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &pc);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_INDEX, (void*) &ps);
-}
-
-/**
- * Destroys the operation.
- *
- * @param p0 the transient model
- * @param p1 the transient model size
- */
-void destroy_operation(void* p0, const void* p1) {
-
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_OPERATION_MESSAGE, (void*) &DESTROY_OPERATION_MESSAGE_COUNT);
-
-    // Initialize elements.
-    void* p = NULL_POINTER;
-    void* pc = NULL_POINTER;
-    void* ps = NULL_POINTER;
-
-    // Get elements.
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &p);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &pc);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_INDEX, (void*) &ps);
-
-    // Remove elements in descending order.
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT, (void*) &PARAMETERS_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT, (void*) &PARAMETERS_COUNTS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT, (void*) &PARAMETERS_INDEX);
-
-    // Destroy elements.
-    destroy_array((void*) &p, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &pc, (void*) &INTEGER_ARRAY, p1);
-    destroy_array((void*) &ps, (void*) &INTEGER_ARRAY, p1);
-
-    // Destroy operation.
-    destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT);
-}
 
 //
 // Forward declarations.
@@ -125,15 +63,14 @@ void destroy_operation(void* p0, const void* p1) {
 //
 
 /**
- * Creates a transient model.
+ * Creates the model.
  *
- * @param p0 the transient model
- * @param p1 the transient model count
- * @param p2 the transient model size
- * @param p3 the abstraction
- * @param p4 the abstraction count
+ * @param p0 the model
+ * @param p1 the model size
+ * @param p2 the abstraction
+ * @param p3 the abstraction count
  */
-void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4);
+void create(void* p0, const void* p1, const void* p2, const void* p3);
 
 /**
  * Initializes a transient model from a persistent model.
@@ -246,7 +183,7 @@ void initialize_operation(void* p0, void* p1, void* p2, const void* p3, const vo
 
                                     // Create transient parameter
                                     // and its count and size.
-                                    create_model((void*) &tp, (void*) &tpc, (void*) &tps,
+                                    create((void*) &tp, (void*) &tps,
                                         (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
 
     fprintf(stderr, "initop tp before: %s\n", tp);

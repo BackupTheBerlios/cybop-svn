@@ -25,7 +25,7 @@
  *
  * A string is a chain of characters.
  *
- * @version $Revision: 1.6 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-08-15 22:11:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,32 +34,6 @@
 
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
-
-/**
- * Creates the string.
- *
- * @param p0 the transient model
- * @param p1 the transient model size
- */
-void create_string(void* p0, void* p1) {
-
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_STRING_MESSAGE, (void*) &CREATE_STRING_MESSAGE_COUNT);
-
-    create_array(p0, (void*) &CHARACTER_ARRAY, p1);
-}
-
-/**
- * Destroys the string.
- *
- * @param p0 the transient model
- * @param p1 the transient model size
- */
-void destroy_string(void* p0, void* p1) {
-
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_STRING_MESSAGE, (void*) &DESTROY_STRING_MESSAGE_COUNT);
-
-    destroy_array(p0, (void*) &CHARACTER_ARRAY, p1);
-}
 
 /**
  * Initializes the string.

@@ -28,7 +28,7 @@
  * For higher performance, it is mostly better to use floating point numbers
  * (float) which can be calculated by the Arithmetic Logic Unit (ALU).
  *
- * @version $Revision: 1.4 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-08-15 22:11:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,34 +38,6 @@
 #include "../array/array.c"
 #include "../global/constant.c"
 #include "../logger/logger.c"
-
-/**
- * Creates the fraction.
- *
- * @param p0 the transient model
- * @param p1 the transient model size
- */
-void create_fraction(void* p0, void* p1) {
-
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create fraction.");
-
-    // The fraction.
-    create_array(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT);
-}
-
-/**
- * Destroys the fraction.
- *
- * @param p0 the transient model
- * @param p1 the transient model size
- */
-void destroy_fraction(void* p0, void* p1) {
-
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy fraction.");
-
-    // The fraction.
-    destroy_array(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT);
-}
 
 /**
  * Initializes the fraction.

@@ -25,7 +25,7 @@
  *
  * A complex consists of two floats, a real and an imaginary.
  *
- * @version $Revision: 1.4 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-08-15 22:11:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,34 +35,6 @@
 #include "../array/array.c"
 #include "../global/constant.c"
 #include "../logger/logger.c"
-
-/**
- * Creates the complex.
- *
- * @param p0 the transient model
- * @param p1 the transient model size
- */
-void create_complex(void* p0, void* p1) {
-
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create complex.");
-
-    // The complex.
-    create_array(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT);
-}
-
-/**
- * Destroys the complex.
- *
- * @param p0 the transient model
- * @param p1 the transient model size
- */
-void destroy_complex(void* p0, void* p1) {
-
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy complex.");
-
-    // The complex.
-    destroy_array(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT);
-}
 
 /**
  * Initializes the complex.

@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.29 $ $Date: 2004-08-14 22:47:54 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2004-08-15 22:11:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,7 @@
 #include <stdio.h>
 //??#include <stdlib.h>
 #include "../communicator/communicator.c"
+#include "../creator/creator.c"
 #include "../cyboi/character_internals.c"
 #include "../cyboi/double_internals.c"
 #include "../cyboi/integer_internals.c"
@@ -392,7 +393,7 @@ int main(int p0, char** p1) {
             int ks = 0;
 
             // Create knowledge container.
-            create_compound((void*) &k, (void*) &ks);
+            create((void*) &k, (void*) &ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
 
             //
             // Internals containers.
@@ -421,7 +422,7 @@ int main(int p0, char** p1) {
             int ss = 0;
 
             // Create signal container.
-            create_signal_memory((void*) &s, (void*) &ss);
+            create((void*) &s, (void*) &ss, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
             //
             //?? Test to set internals values.
@@ -475,9 +476,9 @@ int main(int p0, char** p1) {
             int tpms = 0;
 
             // Create transient part abstraction, model and their counts and sizes.
-            create_model((void*) &tpa, (void*) &tpac, (void*) &tpas,
+            create((void*) &tpa, (void*) &tpas,
                 (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-            create_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
+            create((void*) &tpm, (void*) &tpms,
                 (void*) &ppa, (void*) &ppac);
 
             // Initialize part model buffer and its count and size.
@@ -544,7 +545,7 @@ int main(int p0, char** p1) {
             }
 
             // Destroy signal container.
-            destroy_signal_memory((void*) &s, (void*) &ss);
+            destroy((void*) &s, (void*) &ss, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
             // Destroy character-, integer-, pointer- and double internals.
             destroy_character_internals((void*) &ci, (void*) &CHARACTER_INTERNALS_COUNT);
@@ -553,7 +554,7 @@ int main(int p0, char** p1) {
             destroy_double_internals((void*) &di, (void*) &DOUBLE_INTERNALS_COUNT);
 
             // Destroy knowledge.
-            destroy_compound((void*) &k, (void*) &ks);
+            destroy((void*) &k, (void*) &ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 
