@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.9 $ $Date: 2004-04-25 21:25:58 $ $Author: christian $
+# @version $Revision: 1.10 $ $Date: 2004-04-28 20:14:17 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -53,9 +53,9 @@ SRC = $(ROOT)/src
 BINARY = cyboi
 COMPILER = gcc
 #-Wall -pedantic
-#COMPILER_FLAGS = -g -I/usr/X11R6/include #-fsjlj-exceptions
+COMPILER_FLAGS = -g -I/usr/X11R6/include #-fsjlj-exceptions
 # Compile with profiling support.
-COMPILER_FLAGS = -pg -I/usr/X11R6/include
+#COMPILER_FLAGS = -pg -I/usr/X11R6/include
 #-pedantic
 
 #
