@@ -37,7 +37,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.4 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,17 +53,17 @@
  * @param p2 the part
  * @param p3 the position
  */
-static void set_statics_model_part(void* p0, void* p1, void* p2, void* p3) {
+void set_statics_model_part(void* p0, void* p1, void* p2, void* p3) {
 
     struct statics_model* m = (struct statics_model*) p0;
 
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Set statics model part: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "Set statics model part: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = get_part_name(p1);
-        void* r = get_remaining_name(p1);
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
         if (r != 0) {
 
@@ -82,7 +82,7 @@ static void set_statics_model_part(void* p0, void* p1, void* p2, void* p3) {
         
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not set statics model part. The statics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not set statics model part. The statics model is null.");
     }
 }
 
@@ -92,17 +92,17 @@ static void set_statics_model_part(void* p0, void* p1, void* p2, void* p3) {
  * @param p0 the statics model
  * @param p1 the hierarchical statics model name
  */
-static void remove_statics_model_part(void* p0, void* p1) {
+void remove_statics_model_part(void* p0, void* p1) {
 
     struct statics_model* m = (struct statics_model*) p0;
 
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Remove statics model part: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "Remove statics model part: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = get_part_name(p1);
-        void* r = get_remaining_name(p1);
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
         if (r != 0) {
             
@@ -121,7 +121,7 @@ static void remove_statics_model_part(void* p0, void* p1) {
         
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not remove statics model part. The statics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove statics model part. The statics model is null.");
     }
 }
 
@@ -132,18 +132,18 @@ static void remove_statics_model_part(void* p0, void* p1) {
  * @param p1 the hierarchical statics model name
  * @return the part
  */
-static void* get_statics_model_part(void* p0, void* p1) {
+void* get_statics_model_part(void* p0, void* p1) {
 
     void* p = 0;
     struct statics_model* m = (struct statics_model*) p0;
 
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Get statics model part: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "Get statics model part: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = get_part_name(p1);
-        void* r = get_remaining_name(p1);
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
         if (r != 0) {
             
@@ -161,7 +161,7 @@ static void* get_statics_model_part(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get statics model part. The statics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get statics model part. The statics model is null.");
     }
     
     return p;
@@ -174,18 +174,18 @@ static void* get_statics_model_part(void* p0, void* p1) {
  * @param p1 the hierarchical statics model name
  * @return the part position
  */
-static void* get_statics_model_part_position(void* p0, void* p1) {
+void* get_statics_model_part_position(void* p0, void* p1) {
 
     void* p = 0;
     struct statics_model* m = (struct statics_model*) p0;
 
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Get statics model part position: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "Get statics model part position: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = get_part_name(p1);
-        void* r = get_remaining_name(p1);
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
         if (r != 0) {
             
@@ -203,7 +203,7 @@ static void* get_statics_model_part_position(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get statics model part position. The statics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get statics model part position. The statics model is null.");
     }
     
     return p;

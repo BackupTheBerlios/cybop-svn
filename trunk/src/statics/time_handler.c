@@ -31,7 +31,7 @@
 /**
  * This is the time handler.
  *
- * @version $Revision: 1.3 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-12-11 13:42:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,20 +52,20 @@ static const char* DEFAULT_TIME_VALUE = "01.01.0000 00:00:00";
  * @param p0 the time model
  * @param p1 the model source
  */
-static void initialize_time_model(void* p0, void* p1) {
+void initialize_time_model(void* p0, void* p1) {
 
     struct time* m = (struct time*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Initialize time model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Initialize time model.");
 
         // Read input stream and transform to time.
 //??        fscanf(p1, %d, &(m->value));
 
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize time model. The time model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize time model. The time model is null.");
     }
 }
 
@@ -75,20 +75,20 @@ static void initialize_time_model(void* p0, void* p1) {
  * @param p0 the time model
  * @param p1 the model source
  */
-static void finalize_time_model(void* p0, void* p1) {
+void finalize_time_model(void* p0, void* p1) {
 
     struct time* m = (struct time*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Finalize time model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Finalize time model.");
         
         // Write output stream and transform from time.
 //??        fprintf(p1, %d, &(m->value));
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize time model. The time model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize time model. The time model is null.");
     }
 }
 

@@ -30,7 +30,7 @@
 /**
  * This is the fraction handler.
  *
- * @version $Revision: 1.3 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,20 +51,20 @@ static const double DEFAULT_FRACTION_VALUE = 0.0;
  * @param p0 the fraction model
  * @param p1 the model source
  */
-static void initialize_fraction_model(void* p0, void* p1) {
+void initialize_fraction_model(void* p0, void* p1) {
 
     struct fraction* m = (struct fraction*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Initialize fraction model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Initialize fraction model.");
 
         // Read input stream and transform to fraction.
 //??        sscanf(p1, %l, (void*) &(m->value));
 
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize fraction model. The fraction model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize fraction model. The fraction model is null.");
     }
 }
 
@@ -73,20 +73,20 @@ static void initialize_fraction_model(void* p0, void* p1) {
  *
  * @param p0 the fraction model
  */
-static void finalize_fraction_model(void* p0, void* p1) {
+void finalize_fraction_model(void* p0, void* p1) {
 
     struct fraction* m = (struct fraction*) p0;
     
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Finalize fraction model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Finalize fraction model.");
 
         // Write output stream and transform from fraction.
 //??        sprintf(p1, %l, (void*) &(m->value));
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize fraction model. The fraction model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize fraction model. The fraction model is null.");
     }
 }
 

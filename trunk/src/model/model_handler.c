@@ -36,16 +36,13 @@
  * It contains functions which are used by both, the statics and the
  * dynamics model handler.
  *
- * @version $Revision: 1.2 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 //
 // Constants.
 //
-
-/** The null pointer. */
-static const char* NULL_POINTER = (void*) 0;
 
 /** The empty string. */
 static const char* EMPTY_STRING = "";
@@ -58,6 +55,13 @@ static const char* DOT_SEPARATOR = ".";
 
 /** The comma separator. */
 static const char* COMMA_SEPARATOR = ",";
+
+//
+// Macros.
+//
+
+/** The null pointer. */
+void* NULL_POINTER = (void*) 0;
 
 //
 // Helper functions.
@@ -73,7 +77,7 @@ static const char* COMMA_SEPARATOR = ",";
  * @param p1 the separation
  * @return the part name
  */
-static void* get_part_name(void* p0, void* p1) {
+void* get_part_name(void* p0, void* p1) {
     
     void* p = 0;
     char* n = (char*) p0;
@@ -95,7 +99,7 @@ static void* get_part_name(void* p0, void* p1) {
         
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not get part name. The hierarchical model name is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get part name. The hierarchical model name is null.");
     }
     
     return p;
@@ -110,7 +114,7 @@ static void* get_part_name(void* p0, void* p1) {
  * @param p1 the separation
  * @return the remaining name
  */
-static void* get_remaining_name(void* p0, void* p1) {
+void* get_remaining_name(void* p0, void* p1) {
 
     void* r = 0;    
     char* n = (char*) p0;
@@ -128,7 +132,7 @@ static void* get_remaining_name(void* p0, void* p1) {
         
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical model name is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical model name is null.");
     }
     
     return r;

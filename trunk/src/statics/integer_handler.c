@@ -30,7 +30,7 @@
 /**
  * This is the integer handler.
  *
- * @version $Revision: 1.3 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,20 +51,20 @@ static const int DEFAULT_INTEGER_VALUE = 0;
  * @param p0 the integer model
  * @param p1 the model source
  */
-static void initialize_integer_model(void* p0, void* p1) {
+void initialize_integer_model(void* p0, void* p1) {
 
     struct integer* m = (struct integer*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Initialize integer model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Initialize integer model.");
 
         // Read input stream and transform to integer.
 //??        sscanf(p1, %d, (void*) &(m->value));
 
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize integer model. The integer model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize integer model. The integer model is null.");
     }
 }
 
@@ -74,20 +74,20 @@ static void initialize_integer_model(void* p0, void* p1) {
  * @param p0 the integer model
  * @param p1 the model source
  */
-static void finalize_integer_model(void* p0, void* p1) {
+void finalize_integer_model(void* p0, void* p1) {
 
     struct integer* m = (struct integer*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Finalize integer model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Finalize integer model.");
         
         // Write output stream and transform from integer.
 //??        sprintf(p1, %d, (void*) &(m->value));
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize integer model. The integer model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize integer model. The integer model is null.");
     }
 }
 

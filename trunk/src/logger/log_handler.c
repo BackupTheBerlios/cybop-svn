@@ -33,7 +33,7 @@
  *
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,12 +53,21 @@ static const int WARNING_LOG_LEVEL = 2;
 /** The info log level. */
 static const int INFO_LOG_LEVEL = 3;
 
+/** The error log level name. */
+static const char* ERROR_LOG_LEVEL_NAME = "ERROR";
+
+/** The warning log level name. */
+static const char* WARNING_LOG_LEVEL_NAME = "WARNING";
+
+/** The info log level name. */
+static const char* INFO_LOG_LEVEL_NAME = "INFO";
+
 //
 // Attributes.
 //
 
 /** The log level. */    
-static void* log_level;
+static int* log_level;
 
 //
 // Log entry.
@@ -67,26 +76,28 @@ static void* log_level;
 /**
  * Returns the log level name.
  *
- * @param p0 the log level name
- * @param p1 the level
+ * @param p0 the level
+ * @return the log level name
  */
-static void get_log_level_name(void* p0, void* p1) {
+void* get_log_level_name(void* p0) {
 
-    char* n = (char*) p0;
-    int* l = (int*) p1;
+    void* n = (void*) 0;
+    int* l = (int*) p0;
     
     if (*l == INFO_LOG_LEVEL) {
 
-        strcat(n, "INFO");
+        n = (void*) INFO_LOG_LEVEL_NAME;
         
     } else if (*l == WARNING_LOG_LEVEL) {
 
-        strcat(n, "WARNING");
+        n = (void*) WARNING_LOG_LEVEL_NAME;
     
     } else if (*l == ERROR_LOG_LEVEL) {
 
-        strcat(n, "ERROR");
+        n = (void*) ERROR_LOG_LEVEL_NAME;
     }
+    
+    return n;
 }
 
 /**
@@ -94,7 +105,7 @@ static void get_log_level_name(void* p0, void* p1) {
  *
  * @param p0 the message
  */
-static void show_message(void* p0) {
+void show_message(void* p0) {
 
     puts((char*) p0);
 }
@@ -105,21 +116,21 @@ static void show_message(void* p0) {
  * @param p0 the level
  * @param p1 the message
  */
-static void log(void* p0, void* p1) {
+void log_message(void* p0, void* p1) {
     
     int* l = (int*) p0;
-    int* ll = (int*) log_level;
 
-    if (*l <= *ll) {
+    if (*l <= *log_level) {
 
-        void* n = malloc(0);
+        char* m = (char*) malloc(0);
 
-        get_log_level_name(n, p0);
-        strcat((char*) n, ": ");
-        strcat((char*) n, p1);
-        show_message(n);
+        char* n = (char*) get_log_level_name(p0);
+        strcat(m, n);
+        strcat(m, ": ");
+        strcat(m, (char*) p1);
+        show_message(m);
         
-        free(n);
+//??        free(m);
     }
 }
 

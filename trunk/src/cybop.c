@@ -41,14 +41,14 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.4 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 /**
  * Shows the usage information.
  */
-static void show_usage_information() {
+void show_usage_information() {
 
     show_message("Usage: cyboi signal");
     show_message("Example: cyboi cybop.sample.hello_world.dynamics.startup");
@@ -67,7 +67,7 @@ static void show_usage_information() {
  * @param p1 the statics
  * @param p2 the dynamics
  */
-static void wait(void* p0, void* p1, void* p2) {
+void wait(void* p0, void* p1, void* p2) {
 
     // Create shutdown flag and initialize to false.
     int* f = (int*) malloc(sizeof(int));
@@ -145,7 +145,7 @@ int main(int p0, char** p1) {
             initialize_map(sm);
 
             // Create startup signal.
-            void* ss = create_dynamics_model((void*) p1[1], (void*) DYNAMICS_COMPOUND);
+            void* ss = create_dynamics((void*) p1[1], NULL_POINTER, NULL_POINTER, (void*) DYNAMICS_COMPOUND);
 
             // Add startup signal to signal memory.
             // Caution! Adding of signals must be synchronized between:
@@ -170,7 +170,7 @@ int main(int p0, char** p1) {
             // The loop above is left as soon as its shutdown flag is set.
 
             // Destroy startup signal.
-            destroy_dynamics_model(ss, (void*) p1[1], (void*) DYNAMICS_COMPOUND);
+            destroy_dynamics(ss, (void*) p1[1], NULL_POINTER, NULL_POINTER, (void*) DYNAMICS_COMPOUND);
 
             // Destroy signal memory.
             finalize_map(sm);
@@ -184,20 +184,20 @@ int main(int p0, char** p1) {
             destroy_statics_model_containers(s);
             free(s);
             
-            log((void*) &INFO_LOG_LEVEL, "Exit CYBOI normally.");
+            log_message((void*) &INFO_LOG_LEVEL, "Exit CYBOI normally.");
 
             // Return 0 to indicate proper shutdown.
             r = 0;
 
         } else {
 
-            log((void*) &ERROR_LOG_LEVEL, "Could not execute CYBOI. The command line argument number is incorrect.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not execute CYBOI. The command line argument number is incorrect.");
             show_usage_information();
         }
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not execute CYBOI. The command line argument vector is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not execute CYBOI. The command line argument vector is null.");
     }
 
     return r;

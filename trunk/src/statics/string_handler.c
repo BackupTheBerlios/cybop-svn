@@ -30,7 +30,7 @@
 /**
  * This is the string handler.
  *
- * @version $Revision: 1.3 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,13 +51,13 @@ static const char* DEFAULT_STRING_VALUE = "";
  * @param p0 the string model
  * @param p1 the model source
  */
-static void initialize_string_model(void* p0, void* p1) {
+void initialize_string_model(void* p0, void* p1) {
 
     struct string* m = (struct string*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Initialize string model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Initialize string model.");
 
         // Read input stream and transform to string.
 //??        sscanf(p1, %10c, (void*) m->value);
@@ -65,7 +65,7 @@ static void initialize_string_model(void* p0, void* p1) {
 
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize string model. The string model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize string model. The string model is null.");
     }
 }
 
@@ -75,20 +75,20 @@ static void initialize_string_model(void* p0, void* p1) {
  * @param p0 the string model
  * @param p1 the model source
  */
-static void finalize_string_model(void* p0, void* p1) {
+void finalize_string_model(void* p0, void* p1) {
 
     struct string* m = (struct string*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Finalize string model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Finalize string model.");
         
         // Write output stream and transform from string.
 //??        sprintf(p1, %c, (void*) m->value);
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize string model. The string model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize string model. The string model is null.");
     }
 }
 
@@ -100,7 +100,7 @@ static void finalize_string_model(void* p0, void* p1) {
  * @param p2 the index
  */
 /*??
-static void get_string_element_index(void* p0, void* p1, void* p2) {
+void get_string_element_index(void* p0, void* p1, void* p2) {
 
     char* s = (char*) p0;
     int l = strlen(s);
@@ -122,7 +122,7 @@ static void get_string_element_index(void* p0, void* p1, void* p2) {
  * @param p2 the remaining suffix
  */
 /*??
-static void get_string_suffix(void* p0, void* p1, void* p2) {
+void get_string_suffix(void* p0, void* p1, void* p2) {
     
 }
 
@@ -133,7 +133,7 @@ static void get_string_suffix(void* p0, void* p1, void* p2) {
  * @param p1 the numerical value
  */
 /*??
-static void get_string_value(void* p0, void* p1) {
+void get_string_value(void* p0, void* p1) {
     
 }
 
@@ -144,7 +144,7 @@ static void get_string_value(void* p0, void* p1) {
  * @param p1 the string
  */
 /*??
-static void get_value_string(void* p0, void* p1) {
+void get_value_string(void* p0, void* p1) {
     
 }
 

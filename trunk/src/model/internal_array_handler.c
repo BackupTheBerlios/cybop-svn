@@ -32,7 +32,7 @@
  *
  * Internal array elements are accessed over their index.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,7 +55,7 @@ static const int INVALID_INDEX_VALUE = -1;
  * @param p2 the new size
  * @return the new internal array
  */
-static void** extend_internal_array(void** p0, void* p1, void* p2) {
+void** extend_internal_array(void** p0, void* p1, void* p2) {
 
     void** a = 0;
     
@@ -85,12 +85,12 @@ static void** extend_internal_array(void** p0, void* p1, void* p2) {
 
         } else {
 
-            log((void*) &ERROR_LOG_LEVEL, "Could not extend internal array. The new internal array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not extend internal array. The new internal array is null.");
         }
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not extend internal array. The old internal array is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not extend internal array. The old internal array is null.");
     }
     
     return a;
@@ -107,7 +107,7 @@ static void** extend_internal_array(void** p0, void* p1, void* p2) {
  * @param p1 the index
  * @param p2 the element
  */
-static void set_internal_array_element(void** p0, void* p1, void* p2) {
+void set_internal_array_element(void** p0, void* p1, void* p2) {
 
     if (p0 != 0) {
 
@@ -120,12 +120,12 @@ static void set_internal_array_element(void** p0, void* p1, void* p2) {
         
         } else {
     
-            log((void*) &WARNING_LOG_LEVEL, "Could not set internal array element. The index is invalid.");
+            log_message((void*) &WARNING_LOG_LEVEL, "Could not set internal array element. The index is invalid.");
         }
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not set internal array element. The internal array is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not set internal array element. The internal array is null.");
     }
 }
 
@@ -136,7 +136,7 @@ static void set_internal_array_element(void** p0, void* p1, void* p2) {
  * @param p1 the index
  * @param p2 the count
  */
-static void remove_internal_array_element(void** p0, void* p1, void* p2) {
+void remove_internal_array_element(void** p0, void* p1, void* p2) {
 
     if (p0 != 0) {
 
@@ -160,12 +160,12 @@ static void remove_internal_array_element(void** p0, void* p1, void* p2) {
         
         } else {
     
-            log((void*) &WARNING_LOG_LEVEL, "Could not remove internal array element. The index is invalid.");
+            log_message((void*) &WARNING_LOG_LEVEL, "Could not remove internal array element. The index is invalid.");
         }
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not remove internal array element. The internal array is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove internal array element. The internal array is null.");
     }
 }
 
@@ -176,7 +176,7 @@ static void remove_internal_array_element(void** p0, void* p1, void* p2) {
  * @param p1 the index
  * @return the element
  */
-static void* get_internal_array_element(void** p0, void* p1) {
+void* get_internal_array_element(void** p0, void* p1) {
 
     void* e = 0;
     
@@ -191,12 +191,12 @@ static void* get_internal_array_element(void** p0, void* p1) {
         
         } else {
     
-            log((void*) &WARNING_LOG_LEVEL, "Could not get internal array element. The index is invalid.");
+            log_message((void*) &WARNING_LOG_LEVEL, "Could not get internal array element. The index is invalid.");
         }
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get internal array element. The internal array is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get internal array element. The internal array is null.");
     }
     
     return e;

@@ -37,7 +37,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.4 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,17 +57,17 @@
  * @param p6 the output 1
  * @param p7 the position
  */
-static void set_dynamics_model_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void set_dynamics_model_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Set dynamics model part: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "Set dynamics model part: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = get_part_name(p1);
-        void* r = get_remaining_name(p1);
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
         if (r != 0) {
 
@@ -90,7 +90,7 @@ static void set_dynamics_model_part(void* p0, void* p1, void* p2, void* p3, void
         
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not set dynamics model part. The dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not set dynamics model part. The dynamics model is null.");
     }
 }
 
@@ -100,17 +100,17 @@ static void set_dynamics_model_part(void* p0, void* p1, void* p2, void* p3, void
  * @param p0 the dynamics model
  * @param p1 the hierarchical dynamics model name
  */
-static void remove_dynamics_model_part(void* p0, void* p1) {
+void remove_dynamics_model_part(void* p0, void* p1) {
 
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Remove dynamics model part: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "Remove dynamics model part: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = get_part_name(p1);
-        void* r = get_remaining_name(p1);
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
         if (r != 0) {
             
@@ -133,7 +133,7 @@ static void remove_dynamics_model_part(void* p0, void* p1) {
         
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not remove dynamics model part. The dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove dynamics model part. The dynamics model is null.");
     }
 }
 
@@ -144,18 +144,18 @@ static void remove_dynamics_model_part(void* p0, void* p1) {
  * @param p1 the hierarchical dynamics model name
  * @return the part
  */
-static void* get_dynamics_model_part(void* p0, void* p1) {
+void* get_dynamics_model_part(void* p0, void* p1) {
 
     void* p = 0;
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Get dynamics model part: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "Get dynamics model part: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = get_part_name(p1);
-        void* r = get_remaining_name(p1);
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
         if (r != 0) {
             
@@ -173,7 +173,7 @@ static void* get_dynamics_model_part(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get dynamics model part. The dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get dynamics model part. The dynamics model is null.");
     }
     
     return p;
@@ -186,18 +186,18 @@ static void* get_dynamics_model_part(void* p0, void* p1) {
  * @param p1 the hierarchical dynamics model name
  * @return the part input 0
  */
-static void* get_dynamics_model_part_input_0(void* p0, void* p1) {
+void* get_dynamics_model_part_input_0(void* p0, void* p1) {
 
     void* i = 0;
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Get dynamics model part input 0: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "Get dynamics model part input 0: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = get_part_name(p1);
-        void* r = get_remaining_name(p1);
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
         if (r != 0) {
             
@@ -215,7 +215,7 @@ static void* get_dynamics_model_part_input_0(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get dynamics model part input 0. The dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get dynamics model part input 0. The dynamics model is null.");
     }
     
     return i;
@@ -228,18 +228,18 @@ static void* get_dynamics_model_part_input_0(void* p0, void* p1) {
  * @param p1 the hierarchical dynamics model name
  * @return the part input 1
  */
-static void* get_dynamics_model_part_input_1(void* p0, void* p1) {
+void* get_dynamics_model_part_input_1(void* p0, void* p1) {
 
     void* i = 0;
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Get dynamics model part input 1: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "Get dynamics model part input 1: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = get_part_name(p1);
-        void* r = get_remaining_name(p1);
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
         if (r != 0) {
             
@@ -257,7 +257,7 @@ static void* get_dynamics_model_part_input_1(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get dynamics model part input 1. The dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get dynamics model part input 1. The dynamics model is null.");
     }
     
     return i;
@@ -270,18 +270,18 @@ static void* get_dynamics_model_part_input_1(void* p0, void* p1) {
  * @param p1 the hierarchical dynamics model name
  * @return the part output 0
  */
-static void* get_dynamics_model_part_output_0(void* p0, void* p1) {
+void* get_dynamics_model_part_output_0(void* p0, void* p1) {
 
     void* o = 0;
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Get dynamics model part output 0: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "Get dynamics model part output 0: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = get_part_name(p1);
-        void* r = get_remaining_name(p1);
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
         if (r != 0) {
             
@@ -299,7 +299,7 @@ static void* get_dynamics_model_part_output_0(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get dynamics model part output 0. The dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get dynamics model part output 0. The dynamics model is null.");
     }
     
     return o;
@@ -312,18 +312,18 @@ static void* get_dynamics_model_part_output_0(void* p0, void* p1) {
  * @param p1 the hierarchical dynamics model name
  * @return the part output 1
  */
-static void* get_dynamics_model_part_output_1(void* p0, void* p1) {
+void* get_dynamics_model_part_output_1(void* p0, void* p1) {
 
     void* o = 0;
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Get dynamics model part output 1: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "Get dynamics model part output 1: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = get_part_name(p1);
-        void* r = get_remaining_name(p1);
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
         if (r != 0) {
             
@@ -341,7 +341,7 @@ static void* get_dynamics_model_part_output_1(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get dynamics model part output 1. The dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get dynamics model part output 1. The dynamics model is null.");
     }
     
     return o;
@@ -354,18 +354,18 @@ static void* get_dynamics_model_part_output_1(void* p0, void* p1) {
  * @param p1 the hierarchical dynamics model name
  * @return the part position
  */
-static void* get_dynamics_model_part_position(void* p0, void* p1) {
+void* get_dynamics_model_part_position(void* p0, void* p1) {
 
     void* p = 0;
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Get dynamics model part position: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "Get dynamics model part position: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = get_part_name(p1);
-        void* r = get_remaining_name(p1);
+        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
         if (r != 0) {
             
@@ -383,7 +383,7 @@ static void* get_dynamics_model_part_position(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get dynamics model part position. The dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get dynamics model part position. The dynamics model is null.");
     }
     
     return p;

@@ -34,7 +34,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,13 +47,13 @@
  *
  * @param p0 the array
  */
-static void initialize_array(void* p0) {
+void initialize_array(void* p0) {
 
     struct array* a = (struct array*) p0;
 
     if (a != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Initialize array.");
+        log_message((void*) &INFO_LOG_LEVEL, "Initialize array.");
 
         // An array CANNOT have ZERO length, so that dereferencing a pointer to
         // the first element of an array always returns a valid result.
@@ -65,7 +65,7 @@ static void initialize_array(void* p0) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize array. The array is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize array. The array is null.");
     }
 }
 
@@ -74,13 +74,13 @@ static void initialize_array(void* p0) {
  *
  * @param p0 the array
  */
-static void finalize_array(void* p0) {
+void finalize_array(void* p0) {
 
     struct array* a = (struct array*) p0;
     
     if (a != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Finalize array.");
+        log_message((void*) &INFO_LOG_LEVEL, "Finalize array.");
 
         free(a->internal_array);
         a->count = -1;
@@ -88,7 +88,7 @@ static void finalize_array(void* p0) {
         
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize array. The array is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize array. The array is null.");
     }
 }
 
@@ -98,7 +98,7 @@ static void finalize_array(void* p0) {
  * @param p0 the array
  * @return the array size
  */
-static void* get_array_size(void* p0) {
+void* get_array_size(void* p0) {
 
     void* s = 0;
     struct array* a = (struct array*) p0;
@@ -109,7 +109,7 @@ static void* get_array_size(void* p0) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get array size. The array is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get array size. The array is null.");
     }
     
     return s;
@@ -121,7 +121,7 @@ static void* get_array_size(void* p0) {
  * @param p0 the array
  * @return the array count
  */
-static void* get_array_count(void* p0) {
+void* get_array_count(void* p0) {
 
     void* c = 0;
     struct array* a = (struct array*) p0;
@@ -132,7 +132,7 @@ static void* get_array_count(void* p0) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get array count. The array is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get array count. The array is null.");
     }
     
     return c;
@@ -149,7 +149,7 @@ static void* get_array_count(void* p0) {
  * @param p1 the index
  * @param p2 the element
  */
-static void set_array_element(void* p0, void* p1, void* p2) {
+void set_array_element(void* p0, void* p1, void* p2) {
 
     struct array* a = (struct array*) p0;
 
@@ -181,7 +181,7 @@ static void set_array_element(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not set array element. The array is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not set array element. The array is null.");
     }
 }
 
@@ -191,7 +191,7 @@ static void set_array_element(void* p0, void* p1, void* p2) {
  * @param p0 the array
  * @param p1 the index
  */
-static void remove_array_element(void* p0, void* p1) {
+void remove_array_element(void* p0, void* p1) {
 
     struct array* a = (struct array*) p0;
 
@@ -202,7 +202,7 @@ static void remove_array_element(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not remove array element. The array is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove array element. The array is null.");
     }
 }
 
@@ -213,7 +213,7 @@ static void remove_array_element(void* p0, void* p1) {
  * @param p1 the index
  * @return the element
  */
-static void* get_array_element(void* p0, void* p1) {
+void* get_array_element(void* p0, void* p1) {
 
     void* e = 0;
     struct array* a = (struct array*) p0;
@@ -224,7 +224,7 @@ static void* get_array_element(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get array element. The array is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get array element. The array is null.");
     }
     
     return e;

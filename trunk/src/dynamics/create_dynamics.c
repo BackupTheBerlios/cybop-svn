@@ -38,7 +38,7 @@
  *
  * It creates a dynamics memory model from a given dynamics cybol model.
  *
- * @version $Revision: 1.2 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,13 +51,17 @@
 //
 
 /**
- * Creates a dynamics.
+ * This is the create dynamics operation.
  *
- * @param p0 the model source
- * @param p1 the abstraction
+ * It creates a dynamics memory model from a given dynamics cybol model.
+ *
+ * @param p0 the dynamics cybol model path
+ * @param p1 the dynamics cybol input output names
+ * @param p2 the dynamics cybol input output values
+ * @param p3 the abstraction
  * @return the dynamics model
  */
-void* create_dynamics(void* p0, void* p1, void* p2);
+void* create_dynamics(void* p0, void* p1, void* p2, void* p3);
 
 /**
  * Creates a statics model.
@@ -77,13 +81,13 @@ void* create_statics(void* p0, void* p1);
  *
  * @param p0 the dynamics model
  */
-static void create_dynamics_model_containers(void* p0) {
+void create_dynamics_model_containers(void* p0) {
 
     struct dynamics_model* m = (struct dynamics_model*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Create dynamics model containers.");
+        log_message((void*) &INFO_LOG_LEVEL, "Create dynamics model containers.");
 
         m->parts = malloc(sizeof(struct map));
         initialize_map(m->parts);
@@ -96,7 +100,7 @@ static void create_dynamics_model_containers(void* p0) {
         
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not create dynamics model containers. The dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not create dynamics model containers. The dynamics model is null.");
     }
 }
 
@@ -110,7 +114,7 @@ static void create_dynamics_model_containers(void* p0) {
  * @param p0 the dynamics model
  * @param p1 the dynamics cybol model part attributes
  */
-static void initialize_dynamics_part(void* p0, void* p1) {
+void initialize_dynamics_part(void* p0, void* p1) {
         
     struct dynamics_model* m = (struct dynamics_model*) p0;
     
@@ -139,7 +143,7 @@ static void initialize_dynamics_part(void* p0, void* p1) {
 
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize dynamics part. The dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize dynamics part. The dynamics model is null.");
     }
 }
 
@@ -153,7 +157,7 @@ static void initialize_dynamics_part(void* p0, void* p1) {
  * @param p0 the dynamics model
  * @param p1 the dynamics cybol model parts
  */
-static void initialize_dynamics_parts(void* p0, void* p1) {
+void initialize_dynamics_parts(void* p0, void* p1) {
 
     struct map* m = (struct map*) p1;
     int count = 0;
@@ -170,7 +174,7 @@ static void initialize_dynamics_parts(void* p0, void* p1) {
 
         } else {
             
-            log((void*) &ERROR_LOG_LEVEL, "Could not initialize dynamics parts. A dynamics cybol model part is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize dynamics parts. A dynamics cybol model part is null.");
         }
         
         count++;
@@ -187,14 +191,15 @@ static void initialize_dynamics_parts(void* p0, void* p1) {
  * @param p0 the dynamics model
  * @param p1 the dynamics cybol model
  */
-static void initialize_dynamics_model(void* p0, void* p1) {
+void initialize_dynamics_model(void* p0, void* p1) {
 
     struct dynamics_model* m = (struct dynamics_model*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Initialize dynamics model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Initialize dynamics model.");
 
+/*??
         // Create temporary dynamics cybol model.
         struct dynamics_model* cybol = (struct dynamics_model*) malloc(sizeof(struct dynamics_model));
         create_dynamics_model_containers((void*) cybol);
@@ -209,16 +214,17 @@ static void initialize_dynamics_model(void* p0, void* p1) {
             
         } else {
             
-            log((void*) &ERROR_LOG_LEVEL, "Could not initialize dynamics model. The dynamics cybol model is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize dynamics model. The dynamics cybol model is null.");
         }
     
         // Destroy temporary dynamics cybol model.
         destroy_dynamics_model_containers((void*) cybol);
         free((void*) cybol);
+*/
     
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize dynamics model. The dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize dynamics model. The dynamics model is null.");
     }
 }
 
@@ -238,8 +244,8 @@ void* create_dynamics(void* p0, void* p1, void* p2, void* p3) {
     void* m = 0;
     char* a = (char*) p3;
     
-    log((void*) &INFO_LOG_LEVEL, "Create dynamics model: ");
-    log((void*) &INFO_LOG_LEVEL, p0);
+    log_message((void*) &INFO_LOG_LEVEL, "Create dynamics model: ");
+    log_message((void*) &INFO_LOG_LEVEL, p0);
 
     if (strcmp(a, DYNAMICS_COMPOUND) == 0) {
 

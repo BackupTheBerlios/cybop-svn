@@ -30,7 +30,7 @@
 /**
  * This is the boolean handler.
  *
- * @version $Revision: 1.3 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,13 +57,13 @@ static const char* DEFAULT_BOOLEAN_VALUE = "false";
  * @param p0 the boolean model
  * @param p1 the model source
  */
-static void initialize_boolean_model(void* p0, void* p1) {
+void initialize_boolean_model(void* p0, void* p1) {
 
     struct boolean* m = (struct boolean*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Initialize boolean model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Initialize boolean model.");
 
         if (strcmp((char*) p1, TRUE_VALUE) == 0) {
             
@@ -77,7 +77,7 @@ static void initialize_boolean_model(void* p0, void* p1) {
 
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize boolean model. The boolean model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize boolean model. The boolean model is null.");
     }
 }
 
@@ -87,13 +87,13 @@ static void initialize_boolean_model(void* p0, void* p1) {
  * @param p0 the boolean model
  * @param p1 the model source
  */
-static void finalize_boolean_model(void* p0, void* p1) {
+void finalize_boolean_model(void* p0, void* p1) {
 
     struct boolean* m = (struct boolean*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Finalize boolean model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Finalize boolean model.");
 
         if (m->value == 1) {
             
@@ -106,7 +106,7 @@ static void finalize_boolean_model(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize boolean model. The boolean model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize boolean model. The boolean model is null.");
     }
 }
 

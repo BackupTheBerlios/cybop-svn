@@ -38,7 +38,7 @@
  *
  * It destroys a dynamics memory model to a given dynamics cybol model.
  *
- * @version $Revision: 1.2 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,13 +51,17 @@
 //
 
 /**
- * Destroys the dynamics.
+ * This is the destroy dynamics operation.
  *
- * @param p0 the dynamics model
- * @param p1 the model source
- * @param p2 the abstraction
+ * It destroys a dynamics memory model to a given dynamics cybol model.
+ *
+ * @param p0 the dynamics memory model
+ * @param p1 the dynamics cybol model path
+ * @param p2 the dynamics cybol input output names
+ * @param p3 the dynamics cybol input output values
+ * @param p4 the abstraction
  */
-void destroy_dynamics(void* p0, void* p1, void* p2, void* p3);
+void destroy_dynamics(void* p0, void* p1, void* p2, void* p3, void* p4);
 
 /**
  * Destroys the statics model.
@@ -77,13 +81,13 @@ void destroy_statics(void* p0, void* p1, void* p2);
  *
  * @param p0 the dynamics model
  */
-static void destroy_dynamics_model_containers(void* p0) {
+void destroy_dynamics_model_containers(void* p0) {
 
     struct dynamics_model* m = (struct dynamics_model*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Destroy dynamics model containers.");
+        log_message((void*) &INFO_LOG_LEVEL, "Destroy dynamics model containers.");
 
         finalize_map(m->positions);
         free(m->positions);
@@ -96,7 +100,7 @@ static void destroy_dynamics_model_containers(void* p0) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not destroy dynamics model containers. The dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not destroy dynamics model containers. The dynamics model is null.");
     }
 }
 
@@ -110,7 +114,7 @@ static void destroy_dynamics_model_containers(void* p0) {
  * @param p0 the dynamics model
  * @param p1 the dynamics cybol model part attributes
  */
-static void finalize_dynamics_part(void* p0, void* p1) {
+void finalize_dynamics_part(void* p0, void* p1) {
 
     struct dynamics_model* m = (struct dynamics_model*) p0;
     
@@ -118,7 +122,8 @@ static void finalize_dynamics_part(void* p0, void* p1) {
 
         void* name = get_map_element_with_name(p1, (void*) NAME);                
         void* model = 0;
-        void* io = 0;
+        void* io_names = 0;
+        void* io_values = 0;
         void* abstraction = 0;
         void* memory_model = 0;
 
@@ -131,13 +136,14 @@ static void finalize_dynamics_part(void* p0, void* p1) {
         // Part.
         memory_model = get_map_element_with_name(m->parts, name);
         model = get_map_element_with_name(p1, (void*) PART_MODEL);
-        io = get_map_element_with_name(p1, (void*) PART_INPUT_OUTPUT);
+        io_names = get_map_element_with_name(p1, (void*) PART_INPUT_OUTPUT_NAMES);
+        io_values = get_map_element_with_name(p1, (void*) PART_INPUT_OUTPUT_VALUES);
         abstraction = get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
-        destroy_dynamics(memory_model, model, io, abstraction);
+        destroy_dynamics(memory_model, model, io_names, io_values, abstraction);
 
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize dynamics part. The dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize dynamics part. The dynamics model is null.");
     }
 }
 
@@ -151,7 +157,7 @@ static void finalize_dynamics_part(void* p0, void* p1) {
  * @param p0 the dynamics model
  * @param p1 the dynamics cybol model parts
  */
-static void finalize_dynamics_parts(void* p0, void* p1) {
+void finalize_dynamics_parts(void* p0, void* p1) {
 
     struct map* m = (struct map*) p1;
     int count = 0;
@@ -168,7 +174,7 @@ static void finalize_dynamics_parts(void* p0, void* p1) {
 
         } else {
             
-            log((void*) &ERROR_LOG_LEVEL, "Could not finalize dynamics parts. A dynamics cybol model part is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize dynamics parts. A dynamics cybol model part is null.");
         }
         
         count++;
@@ -185,14 +191,15 @@ static void finalize_dynamics_parts(void* p0, void* p1) {
  * @param p0 the dynamics model
  * @param p1 the dynamics cybol model
  */
-static void finalize_dynamics_model(void* p0, void* p1) {
+void finalize_dynamics_model(void* p0, void* p1) {
 
     struct dynamics_model* m = (struct dynamics_model*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Finalize dynamics model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Finalize dynamics model.");
 
+/*??
         // Create temporary dynamics cybol model.
         struct dynamics_model* cybol = (struct dynamics_model*) malloc(sizeof(struct dynamics_model));
         create_dynamics_model_containers((void*) cybol);
@@ -204,7 +211,7 @@ static void finalize_dynamics_model(void* p0, void* p1) {
             
         } else {
             
-            log((void*) &ERROR_LOG_LEVEL, "Could not finalize dynamics model. The dynamics cybol model is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize dynamics model. The dynamics cybol model is null.");
         }
     
         // Write dynamics cybol model to file.
@@ -213,10 +220,11 @@ static void finalize_dynamics_model(void* p0, void* p1) {
         // Destroy temporary dynamics cybol model.
         destroy_dynamics_model_containers((void*) cybol);
         free((void*) cybol);
+*/
     
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize dynamics model. The dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize dynamics model. The dynamics model is null.");
     }
 }
 
@@ -231,14 +239,14 @@ static void finalize_dynamics_model(void* p0, void* p1) {
  * @param p3 the dynamics cybol input output values
  * @param p4 the abstraction
  */
-void destroy_dynamics(void* p0, void* p1, void* p2, void* p3) {
+void destroy_dynamics(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     char* a = (char*) p4;
 
     if (p0 != 0) {
             
-        log((void*) &INFO_LOG_LEVEL, "Destroy dynamics model: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "Destroy dynamics model: ");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
     
         if (strcmp(a, DYNAMICS_COMPOUND) == 0) {
     

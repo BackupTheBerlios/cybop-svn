@@ -33,7 +33,7 @@
 /**
  * This is the operation handler.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,14 +48,14 @@
  * @param p1 the input output names
  * @param p2 the input output values
  */
-static void initialize_operation_input_and_output(void* p0, void* p1, void* p2) {
+void initialize_operation_input_and_output(void* p0, void* p1, void* p2) {
 
     struct operation* m = (struct operation*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Initialize operation input and output.");
-        log((void*) &INFO_LOG_LEVEL, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "Initialize operation input and output.");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
 
         void* io_name = get_part_name(p1, (void*) COMMA_SEPARATOR);
         void* rem_name = get_remaining_name(p1, (void*) COMMA_SEPARATOR);
@@ -71,7 +71,7 @@ static void initialize_operation_input_and_output(void* p0, void* p1, void* p2) 
 
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize operation input and output. The operation is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize operation input and output. The operation is null.");
     }
 }
 
@@ -82,21 +82,21 @@ static void initialize_operation_input_and_output(void* p0, void* p1, void* p2) 
  * @param p1 the input output names
  * @param p2 the input output values
  */
-static void finalize_operation_input_and_output(void* p0, void* p1, void* p2) {
+void finalize_operation_input_and_output(void* p0, void* p1, void* p2) {
 
     struct operation* m = (struct operation*) p0;
     
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Finalize operation input and output.");
-        log((void*) &INFO_LOG_LEVEL, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "Finalize operation input and output.");
+        log_message((void*) &INFO_LOG_LEVEL, p1);
 
         // Write output stream and transform from fraction.
 //??        sprintf(p1, %l, (void*) &(m->value));
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize operation input and output. The operation is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize operation input and output. The operation is null.");
     }
 }
 

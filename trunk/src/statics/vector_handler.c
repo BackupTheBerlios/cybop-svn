@@ -31,7 +31,7 @@
 /**
  * This is the vector handler.
  *
- * @version $Revision: 1.3 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-12-11 13:42:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,13 +52,13 @@ static const char* DEFAULT_VECTOR_VALUE = "0.0,0.0,0.0";
  * @param p0 the vector model
  * @param p1 the model source
  */
-static void initialize_vector_model(void* p0, void* p1) {
+void initialize_vector_model(void* p0, void* p1) {
 
     struct vector* m = (struct vector*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Initialize vector model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Initialize vector model.");
 
         // Read input stream and transform to vector.
 //??        fscanf(p1, %d, &(m->x));
@@ -85,18 +85,18 @@ static void initialize_vector_model(void* p0, void* p1) {
 
             } else {
             
-                log((void*) &ERROR_LOG_LEVEL, "Could not create vector model. The vector does not contain a z coordinate.");
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not create vector model. The vector does not contain a z coordinate.");
             }
             
         } else {
         
-            log((void*) &ERROR_LOG_LEVEL, "Could not create vector model. The vector does not contain an y coordinate.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not create vector model. The vector does not contain an y coordinate.");
         }
 */
 
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize vector model. The vector model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize vector model. The vector model is null.");
     }
 }
 
@@ -106,13 +106,13 @@ static void initialize_vector_model(void* p0, void* p1) {
  * @param p0 the vector model
  * @param p1 the model source
  */
-static void finalize_vector_model(void* p0, void* p1) {
+void finalize_vector_model(void* p0, void* p1) {
 
     struct vector* m = (struct vector*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Finalize vector model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Finalize vector model.");
         
         // Write output stream and transform from vector.
 //??        fprintf(p1, %d, &(m->x));
@@ -121,7 +121,7 @@ static void finalize_vector_model(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize vector model. The vector model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize vector model. The vector model is null.");
     }
 }
 

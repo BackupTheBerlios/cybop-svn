@@ -33,7 +33,7 @@
  * It can read and write CYBOL source files.
  * CYBOL's syntax is based on the Extensible Markup Language (XML).
  *
- * @version $Revision: 1.3 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,7 +48,7 @@
  * @param p1 the statics cybol attribute name
  * @param p2 the statics cybol source attribute
  */
-static void read_statics_cybol_attribute(void* p0, void* p1, void* p2) {
+void read_statics_cybol_attribute(void* p0, void* p1, void* p2) {
 
 /*??
     org.apache.xerces.dom.NamedNodeMapImpl m = (org.apache.xerces.dom.NamedNodeMapImpl) p0;
@@ -59,17 +59,17 @@ static void read_statics_cybol_attribute(void* p0, void* p1, void* p2) {
         
         if (n != 0) {
             
-            log((void*) &INFO_LOG_LEVEL, "Read child attribute.");
+            log_message((void*) &INFO_LOG_LEVEL, "Read child attribute.");
             p2 = n.getNodeValue();
     
         } else {
             
-            log((void*) &WARNING_LOG_LEVEL, "Could not read child attribute. The child attribute node is null.");
+            log_message((void*) &WARNING_LOG_LEVEL, "Could not read child attribute. The child attribute node is null.");
         }
     
     } else {
         
-        log((void*) &WARNING_LOG_LEVEL, "Could not read child attribute. The child attributes map is null.");
+        log_message((void*) &WARNING_LOG_LEVEL, "Could not read child attribute. The child attributes map is null.");
     }
 */
 }
@@ -81,7 +81,7 @@ static void read_statics_cybol_attribute(void* p0, void* p1, void* p2) {
  * @param p1 the statics cybol attribute name
  * @param p2 the statics cybol source attribute
  */
-static void write_statics_cybol_attribute(void* p0, void* p1, void* p2) {
+void write_statics_cybol_attribute(void* p0, void* p1, void* p2) {
 }
 
 //
@@ -94,10 +94,10 @@ static void write_statics_cybol_attribute(void* p0, void* p1, void* p2) {
  * @param p0 the statics cybol attributes
  * @param p1 the statics cybol source attributes
  */
-static void read_statics_cybol_attributes(void* p0, void* p1) {
+void read_statics_cybol_attributes(void* p0, void* p1) {
 
 /*??
-    log((void*) &INFO_LOG_LEVEL, "Read statics cybol attributes.");
+    log_message((void*) &INFO_LOG_LEVEL, "Read statics cybol attributes.");
     int a = 0;
 
     a = read_statics_cybol_attribute(p1, NAME);
@@ -123,7 +123,7 @@ static void read_statics_cybol_attributes(void* p0, void* p1) {
  * @param p0 the statics cybol attributes
  * @param p1 the statics cybol source attributes
  */
-static void write_statics_cybol_attributes(void* p0, void* p1) {
+void write_statics_cybol_attributes(void* p0, void* p1) {
 }
 
 //
@@ -136,7 +136,7 @@ static void write_statics_cybol_attributes(void* p0, void* p1) {
  * @param p0 the statics cybol part model
  * @param p1 the statics cybol part source model
  */
-static void read_statics_cybol_part_model(void* p0, void* p1) {
+void read_statics_cybol_part_model(void* p0, void* p1) {
     
 /*??
     Item i = (Item) p0;
@@ -147,17 +147,17 @@ static void read_statics_cybol_part_model(void* p0, void* p1) {
         
         if (n != 0) {
             
-            log((void*) &INFO_LOG_LEVEL, "Read statics cybol part model.");
+            log_message((void*) &INFO_LOG_LEVEL, "Read statics cybol part model.");
             read_statics_cybol_attributes(i.items, (org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes());
     
         } else {
             
-            log((void*) &WARNING_LOG_LEVEL, "Could not initialize child model. The child model node is null.");
+            log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize child model. The child model node is null.");
         }
 
     } else {
         
-        log((void*) &WARNING_LOG_LEVEL, "Could not initialize child model. The child model is null.");
+        log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize child model. The child model is null.");
     }
 */
 }
@@ -168,7 +168,7 @@ static void read_statics_cybol_part_model(void* p0, void* p1) {
  * @param p0 the statics cybol part model
  * @param p1 the statics cybol part source model
  */
-static void write_statics_cybol_part_model(void* p0, void* p1) {
+void write_statics_cybol_part_model(void* p0, void* p1) {
 }
 
 //
@@ -181,7 +181,7 @@ static void write_statics_cybol_part_model(void* p0, void* p1) {
  * @param p0 the statics cybol model
  * @param p1 the statics cybol super source models
  */
-static void read_statics_cybol_super_models(void* p0, void* p1) {
+void read_statics_cybol_super_models(void* p0, void* p1) {
 
 /*??
     org.apache.xerces.dom.DeepNodeListImpl l = (org.apache.xerces.dom.DeepNodeListImpl) p1;
@@ -192,18 +192,18 @@ static void read_statics_cybol_super_models(void* p0, void* p1) {
         
         if (n != 0) {
 
-            log((void*) &INFO_LOG_LEVEL, "Initialize cybol super models.");
+            log_message((void*) &INFO_LOG_LEVEL, "Initialize cybol super models.");
             int s = read_statics_cybol_attribute((org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes(), MODEL);
             initialize_statics_cybol_model(p0, s);
             
         } else {
             
-            log((void*) &WARNING_LOG_LEVEL, "Could not initialize super model. The super model node is null.");
+            log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize super model. The super model node is null.");
         }
         
     } else {
         
-        log((void*) &WARNING_LOG_LEVEL, "Could not initialize super model. The super model list is null.");
+        log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize super model. The super model list is null.");
     }
 */
 }
@@ -214,7 +214,7 @@ static void read_statics_cybol_super_models(void* p0, void* p1) {
  * @param p0 the statics cybol model
  * @param p1 the statics cybol super models
  */
-static void write_statics_cybol_super_models(void* p0, void* p1) {
+void write_statics_cybol_super_models(void* p0, void* p1) {
 }
 
 //
@@ -227,14 +227,14 @@ static void write_statics_cybol_super_models(void* p0, void* p1) {
  * @param p0 the statics cybol part models
  * @param p1 the statics cybol part source models
  */
-static void read_statics_cybol_part_models(void* p0, void* p1) {
+void read_statics_cybol_part_models(void* p0, void* p1) {
 
 /*??
     org.apache.xerces.dom.DeepNodeListImpl l = (org.apache.xerces.dom.DeepNodeListImpl) p1;
 
     if (l != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Initialize children models.");
+        log_message((void*) &INFO_LOG_LEVEL, "Initialize children models.");
         int count = 0;
         int size = l.getLength();
         org.apache.xerces.dom.NodeImpl n = 0;
@@ -264,12 +264,12 @@ static void read_statics_cybol_part_models(void* p0, void* p1) {
 /*??
                 } else {
                     
-                    log((void*) &ERROR_LOG_LEVEL, "Could not initialize children models. A model is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize children models. A model is null.");
                 }
         
             } else {
                 
-                log((void*) &INFO_LOG_LEVEL, "Could not initialize children models. The model item node is null.");
+                log_message((void*) &INFO_LOG_LEVEL, "Could not initialize children models. The model item node is null.");
             }
                     
             count++;
@@ -277,7 +277,7 @@ static void read_statics_cybol_part_models(void* p0, void* p1) {
         
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize children models. The model items list is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize children models. The model items list is null.");
     }
 */
 }
@@ -288,7 +288,7 @@ static void read_statics_cybol_part_models(void* p0, void* p1) {
  * @param p0 the statics cybol part models
  * @param p1 the statics cybol part source models
  */
-static void write_statics_cybol_part_models(void* p0, void* p1) {
+void write_statics_cybol_part_models(void* p0, void* p1) {
 }
 
 //
@@ -301,14 +301,14 @@ static void write_statics_cybol_part_models(void* p0, void* p1) {
  * @param p0 the statics cybol model
  * @param p1 the statics cybol source
  */
-static void read_statics_cybol_source(void* p0, void* p1) {
+void read_statics_cybol_source(void* p0, void* p1) {
 
 /*??
     org.apache.xerces.dom.DocumentImpl doc = (org.apache.xerces.dom.DocumentImpl) p1;
 
     if (doc != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Read document.");
+        log_message((void*) &INFO_LOG_LEVEL, "Read document.");
         doc.normalize();
         org.apache.xerces.dom.DeepNodeListImpl l = 0;
 
@@ -322,12 +322,12 @@ static void read_statics_cybol_source(void* p0, void* p1) {
 
         } else {
             
-            log((void*) &ERROR_LOG_LEVEL, "Could not read structure. The model is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not read structure. The model is null.");
         }
 
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not read structure. The structure is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not read structure. The structure is null.");
     }
 */
 }
@@ -338,7 +338,7 @@ static void read_statics_cybol_source(void* p0, void* p1) {
  * @param p0 the statics cybol model
  * @param p1 the statics cybol source
  */
-static void write_statics_cybol_source(void* p0, void* p1) {
+void write_statics_cybol_source(void* p0, void* p1) {
 }
 
 //
@@ -351,10 +351,10 @@ static void write_statics_cybol_source(void* p0, void* p1) {
  * @param p0 the statics cybol model
  * @param p1 the statics cybol model name
  */
-static void initialize_statics_cybol_model(void* p0, void* p1) {
+void initialize_statics_cybol_model(void* p0, void* p1) {
 
 /*??
-    log((void*) &INFO_LOG_LEVEL, "Initialize statics cybol model: " + p1);
+    log_message((void*) &INFO_LOG_LEVEL, "Initialize statics cybol model: " + p1);
 
     void* s = parse_file(PATH + p1 + CYBOL);
     read_statics_cybol_source(p0, s);
@@ -367,7 +367,7 @@ static void initialize_statics_cybol_model(void* p0, void* p1) {
  * @param p0 the statics cybol model
  * @param p1 the statics cybol model name
  */
-static void finalize_statics_cybol_model(void* p0, void* p1) {
+void finalize_statics_cybol_model(void* p0, void* p1) {
 }
 
 /* STATICS_CYBOL_MODEL_HANDLER_SOURCE */

@@ -26,6 +26,7 @@
 #define SIGNAL_MEMORY_HANDLER_SOURCE
 
 #include <string.h>
+#include "add.c"
 #include "array_handler.c"
 #include "create_dynamics.c"
 #include "create_statics.c"
@@ -48,7 +49,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.4 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -105,13 +106,13 @@ static const char* SOAP_LANGUAGE = "soap";
  *
  * @param p0 the signal memory
  */
-static void create_signal_memory(void* p0) {
+void create_signal_memory(void* p0) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Create signal memory.");
+        log_message((void*) &INFO_LOG_LEVEL, "Create signal memory.");
 
         m->signals = malloc(sizeof(struct array));
         initialize_array(m->signals);
@@ -121,7 +122,7 @@ static void create_signal_memory(void* p0) {
         
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not create signal memory. The signal memory is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not create signal memory. The signal memory is null.");
     }
 }
 
@@ -130,13 +131,13 @@ static void create_signal_memory(void* p0) {
  *
  * @param p0 the signal memory
  */
-static void destroy_signal_memory(void* p0) {
+void destroy_signal_memory(void* p0) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Destroy signal memory.");
+        log_message((void*) &INFO_LOG_LEVEL, "Destroy signal memory.");
 
         finalize_array(m->priorities);
         free(m->priorities);
@@ -146,7 +147,7 @@ static void destroy_signal_memory(void* p0) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not destroy signal memory. The signal memory is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not destroy signal memory. The signal memory is null.");
     }
 }
 
@@ -163,7 +164,7 @@ static void destroy_signal_memory(void* p0) {
  * @param p3 the abstraction
  * @param p4 the priority
  */
-static void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
     
@@ -175,7 +176,7 @@ static void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not set signal. The signal memory is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not set signal. The signal memory is null.");
     }
 }
 
@@ -187,7 +188,7 @@ static void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p2 the abstraction
  * @param p3 the priority
  */
-static void add_signal(void* p0, void* p1, void* p2, void* p3) {
+void add_signal(void* p0, void* p1, void* p2, void* p3) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
 
@@ -198,7 +199,7 @@ static void add_signal(void* p0, void* p1, void* p2, void* p3) {
         
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not add signal. The signal memory is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not add signal. The signal memory is null.");
     }
 }
 
@@ -208,7 +209,7 @@ static void add_signal(void* p0, void* p1, void* p2, void* p3) {
  * @param p0 the signal memory
  * @param p1 the index
  */
-static void remove_signal(void* p0, void* p1) {
+void remove_signal(void* p0, void* p1) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
     
@@ -220,7 +221,7 @@ static void remove_signal(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not remove signal. The signal memory is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove signal. The signal memory is null.");
     }
 }
 
@@ -231,7 +232,7 @@ static void remove_signal(void* p0, void* p1) {
  * @param p1 the index
  * @return the signal
  */
-static void* get_signal(void* p0, void* p1) {
+void* get_signal(void* p0, void* p1) {
 
     void* s = 0;
     struct signal_memory* m = (struct signal_memory*) p0;
@@ -242,7 +243,7 @@ static void* get_signal(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get signal. The signal memory is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get signal. The signal memory is null.");
     }
     
     return s;
@@ -255,7 +256,7 @@ static void* get_signal(void* p0, void* p1) {
  * @param p1 the index
  * @return the abstraction
  */
-static void* get_abstraction(void* p0, void* p1) {
+void* get_abstraction(void* p0, void* p1) {
 
     void* a = 0;
     struct signal_memory* m = (struct signal_memory*) p0;
@@ -266,7 +267,7 @@ static void* get_abstraction(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get abstraction. The signal memory is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get abstraction. The signal memory is null.");
     }
     
     return a;
@@ -279,7 +280,7 @@ static void* get_abstraction(void* p0, void* p1) {
  * @param p1 the index
  * @return the priority
  */
-static void* get_priority(void* p0, void* p1) {
+void* get_priority(void* p0, void* p1) {
 
     void* p = 0;
     struct signal_memory* m = (struct signal_memory*) p0;
@@ -290,7 +291,7 @@ static void* get_priority(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get priority. The signal memory is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get priority. The signal memory is null.");
     }
     
     return p;
@@ -301,7 +302,7 @@ static void* get_priority(void* p0, void* p1) {
  *
  * @param p0 the signal memory
  */
-static int get_highest_priority_index(void* p0) {
+int get_highest_priority_index(void* p0) {
     
     int index = -1;
     struct signal_memory* m = (struct signal_memory*) p0;
@@ -331,7 +332,7 @@ static int get_highest_priority_index(void* p0) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get index of the signal with highest priority. The signal memory is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get index of the signal with highest priority. The signal memory is null.");
     }
     
     return index;
@@ -348,9 +349,9 @@ static int get_highest_priority_index(void* p0) {
  * @param p1 the compound signal
  * @param p2 the priority
  */
-static void handle_compound_signal(void* p0, void* p1, void* p2) {
+void handle_compound_signal(void* p0, void* p1, void* p2) {
 
-    log((void*) &INFO_LOG_LEVEL, "Handle compound signal:");
+    log_message((void*) &INFO_LOG_LEVEL, "Handle compound signal:");
 
     struct dynamics_model* m = (struct dynamics_model*) p1;
     
@@ -405,7 +406,7 @@ static void handle_compound_signal(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not handle compound signal. The signal dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not handle compound signal. The signal dynamics model is null.");
     }
 }
 
@@ -418,9 +419,9 @@ static void handle_compound_signal(void* p0, void* p1, void* p2) {
  * @param p3 the dynamics
  * @param p4 the shutdown flag
  */
-static void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log((void*) &INFO_LOG_LEVEL, "Handle operation signal:");
+    log_message((void*) &INFO_LOG_LEVEL, "Handle operation signal:");
 
     struct operation* o = (struct operation*) p0;
     
@@ -447,7 +448,7 @@ static void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void
         
                 } else {
             
-                    log((void*) &ERROR_LOG_LEVEL, "Could not handle create statics operation signal. The statics is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle create statics operation signal. The statics is null.");
                 }
 
             } else if (strcmp(a, DESTROY_STATICS_MEMORY_MANAGEMENT) == 0) {
@@ -461,7 +462,7 @@ static void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void
         
                 } else {
             
-                    log((void*) &ERROR_LOG_LEVEL, "Could not handle destroy statics operation signal. The statics is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle destroy statics operation signal. The statics is null.");
                 }
 
             } else if (strcmp(a, CREATE_DYNAMICS_MEMORY_MANAGEMENT) == 0) {
@@ -470,12 +471,12 @@ static void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void
                 
                 if (d != 0) {
                         
-                    void* m = create_dynamics(get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
+                    void* m = create_dynamics(get_map_element_with_name(io, "model"), get_map_element_with_name(io, "io_names"), get_map_element_with_name(io, "io_values"), get_map_element_with_name(io, "abstraction"));
                     set_map_element_with_name(d->parts, get_map_element_with_name(io, "name"), m);
         
                 } else {
             
-                    log((void*) &ERROR_LOG_LEVEL, "Could not handle create dynamics operation signal. The dynamics is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle create dynamics operation signal. The dynamics is null.");
                 }
 
             } else if (strcmp(a, DESTROY_DYNAMICS_MEMORY_MANAGEMENT) == 0) {
@@ -485,11 +486,11 @@ static void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void
                 if (d != 0) {
                         
                     void* m = get_map_element_with_name(d->parts, get_map_element_with_name(io, "name"));
-                    destroy_dynamics(m, get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
+                    destroy_dynamics(m, get_map_element_with_name(io, "model"), get_map_element_with_name(io, "io_names"), get_map_element_with_name(io, "io_values"), get_map_element_with_name(io, "abstraction"));
         
                 } else {
             
-                    log((void*) &ERROR_LOG_LEVEL, "Could not handle destroy dynamics operation signal. The dynamics is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle destroy dynamics operation signal. The dynamics is null.");
                 }
 
             } else if (strcmp(a, EXIT_LIFECYCLE_STEP) == 0) {
@@ -523,18 +524,18 @@ static void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void
                     
                 } else {
                     
-                    log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is null.");
                 }
             }
 */
         } else {
     
-            log((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The inputs/outputs is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The inputs/outputs is null.");
         }
     
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The signal dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The signal dynamics model is null.");
     }
 }
 
@@ -552,7 +553,7 @@ static void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void
  * @param p4 the action
  */
 /*??
-static void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p0 != 0) {
 
@@ -619,17 +620,17 @@ static void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p
 
                     } else {
                         
-                        log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. An expansion is null.");
+                        log_message((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. An expansion is null.");
                     }
 
                 } else {
                     
-                    log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. A position is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. A position is null.");
                 }
 
             } else {
                 
-                log((void*) &INFO_LOG_LEVEL, "Could not handle mouse clicked action. A child is not of type Item.");
+                log_message((void*) &INFO_LOG_LEVEL, "Could not handle mouse clicked action. A child is not of type Item.");
             }
             
             count++;

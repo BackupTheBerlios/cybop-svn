@@ -35,7 +35,7 @@
  * @param p0 the summand 0
  * @param p1 the summand 1
  * @param p2 the sum
- * @version $Revision: 1.4 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 void add(void* p0, void* p1, void* p2) {
@@ -54,17 +54,17 @@ void add(void* p0, void* p1, void* p2) {
         
             } else {
                 
-                log((void*) &ERROR_LOG_LEVEL, "Could not execute add. The sum is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not execute add. The sum is null.");
             }
             
         } else {
             
-            log((void*) &ERROR_LOG_LEVEL, "Could not execute add. The summand 1 is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not execute add. The summand 1 is null.");
         }
         
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not execute add. The summand 0 is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not execute add. The summand 0 is null.");
     }
 };
 

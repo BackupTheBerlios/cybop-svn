@@ -34,7 +34,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,13 +54,13 @@ static const int SEPARATION = 95;
  *
  * @param p0 the map
  */
-static void initialize_map(void* p0) {
+void initialize_map(void* p0) {
 
     struct map* m = (struct map*) p0;
 
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Initialize map.");
+        log_message((void*) &INFO_LOG_LEVEL, "Initialize map.");
 
         m->names = malloc(sizeof(struct array));
         initialize_array(m->names);
@@ -70,7 +70,7 @@ static void initialize_map(void* p0) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize map. The map is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize map. The map is null.");
     }
 }
 
@@ -79,13 +79,13 @@ static void initialize_map(void* p0) {
  *
  * @param p0 the map
  */
-static void finalize_map(void* p0) {
+void finalize_map(void* p0) {
 
     struct map* m = (struct map*) p0;
     
     if (m != 0) {
 
-        log((void*) &INFO_LOG_LEVEL, "Finalize map.");
+        log_message((void*) &INFO_LOG_LEVEL, "Finalize map.");
 
         finalize_array(m->references);
         free(m->references);
@@ -95,7 +95,7 @@ static void finalize_map(void* p0) {
         
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize map. The map is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize map. The map is null.");
     }
 }
 
@@ -105,7 +105,7 @@ static void finalize_map(void* p0) {
  * @param p0 the map
  * @return the map size
  */
-static void* get_map_size(void* p0) {
+void* get_map_size(void* p0) {
 
     void* s = 0;
     struct map* m = (struct map*) p0;
@@ -116,7 +116,7 @@ static void* get_map_size(void* p0) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get map size. The map is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get map size. The map is null.");
     }
     
     return s;
@@ -133,7 +133,7 @@ static void* get_map_size(void* p0) {
  * @param p1 the name
  * @return the index
  */
-static int get_map_element_index(void* p0, void* p1) {
+int get_map_element_index(void* p0, void* p1) {
 
     int index = -1;
     int i = 0;
@@ -173,7 +173,7 @@ static int get_map_element_index(void* p0, void* p1) {
  * @param p1 the name
  * @return the next index
  */
-static int get_next_map_element_index(void* p0, void* p1) {
+int get_next_map_element_index(void* p0, void* p1) {
 
     int index = -1;
     int i = 0;
@@ -213,7 +213,7 @@ static int get_next_map_element_index(void* p0, void* p1) {
  * @param p1 the base name
  * @return the number of map elements whose name starts with the given base name
  */
-static int get_map_element_count(void* p0, void* p1) {
+int get_map_element_count(void* p0, void* p1) {
 
     int name_count = 0;
     int i = 0;
@@ -268,7 +268,7 @@ static int get_map_element_count(void* p0, void* p1) {
  * @param p1 the base name
  * @param p2 the extended name
  */
-static void build_next_map_element_name(void* p0, void* p1, void* p2) {
+void build_next_map_element_name(void* p0, void* p1, void* p2) {
 
     int count = get_map_element_count(p0, p1);
 
@@ -297,7 +297,7 @@ static void build_next_map_element_name(void* p0, void* p1, void* p2) {
  * @param p2 the name
  * @param p3 the element
  */
-static void set_map_element_at_index(void* p0, void* p1, void* p2, void* p3) {
+void set_map_element_at_index(void* p0, void* p1, void* p2, void* p3) {
 
     struct map* m = (struct map*) p0;
     
@@ -308,7 +308,7 @@ static void set_map_element_at_index(void* p0, void* p1, void* p2, void* p3) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not set map element at index. The map is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not set map element at index. The map is null.");
     }
 }
 
@@ -319,7 +319,7 @@ static void set_map_element_at_index(void* p0, void* p1, void* p2, void* p3) {
  * @param p1 the name
  * @param p2 the element
  */
-static void set_map_element_with_name(void* p0, void* p1, void* p2) {
+void set_map_element_with_name(void* p0, void* p1, void* p2) {
 
     struct map* m = (struct map*) p0;
     
@@ -330,7 +330,7 @@ static void set_map_element_with_name(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not set map element with name. The map is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not set map element with name. The map is null.");
     }
 }
 
@@ -341,7 +341,7 @@ static void set_map_element_with_name(void* p0, void* p1, void* p2) {
  * @param p1 the name
  * @param p2 the element
  */
-static void add_map_element(void* p0, void* p1, void* p2) {
+void add_map_element(void* p0, void* p1, void* p2) {
 
     struct map* m = (struct map*) p0;
 
@@ -356,7 +356,7 @@ static void add_map_element(void* p0, void* p1, void* p2) {
         
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not add map element. The map is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not add map element. The map is null.");
     }
 }
 
@@ -366,7 +366,7 @@ static void add_map_element(void* p0, void* p1, void* p2) {
  * @param p0 the map
  * @param p1 the index
  */
-static void remove_map_element_at_index(void* p0, void* p1) {
+void remove_map_element_at_index(void* p0, void* p1) {
 
     struct map* m = (struct map*) p0;
     
@@ -377,7 +377,7 @@ static void remove_map_element_at_index(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not remove map element at index. The map is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove map element at index. The map is null.");
     }
 }
 
@@ -387,7 +387,7 @@ static void remove_map_element_at_index(void* p0, void* p1) {
  * @param p0 the map
  * @param p1 the name
  */
-static void remove_map_element_with_name(void* p0, void* p1) {
+void remove_map_element_with_name(void* p0, void* p1) {
 
     struct map* m = (struct map*) p0;
 
@@ -398,7 +398,7 @@ static void remove_map_element_with_name(void* p0, void* p1) {
         
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not remove map element with name. The map is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove map element with name. The map is null.");
     }
 
     // This element name was created (malloc) in add_map_element.
@@ -412,7 +412,7 @@ static void remove_map_element_with_name(void* p0, void* p1) {
  * @param p1 the index
  * @return the element
  */
-static void* get_map_element_at_index(void* p0, void* p1) {
+void* get_map_element_at_index(void* p0, void* p1) {
 
     void* e = 0;
     struct map* m = (struct map*) p0;
@@ -423,7 +423,7 @@ static void* get_map_element_at_index(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get map element at index. The map is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get map element at index. The map is null.");
     }
     
     return e;
@@ -436,7 +436,7 @@ static void* get_map_element_at_index(void* p0, void* p1) {
  * @param p1 the name
  * @return the element
  */
-static void* get_map_element_with_name(void* p0, void* p1) {
+void* get_map_element_with_name(void* p0, void* p1) {
 
     void* e = 0;
     struct map* m = (struct map*) p0;
@@ -448,7 +448,7 @@ static void* get_map_element_with_name(void* p0, void* p1) {
     
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get map element with name. The map is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get map element with name. The map is null.");
     }
 
     return e;

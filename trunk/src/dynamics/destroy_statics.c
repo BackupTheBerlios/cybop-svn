@@ -42,7 +42,7 @@
  *
  * It destroys a statics memory model to a given statics cybol model.
  *
- * @version $Revision: 1.3 $ $Date: 2003-12-09 15:49:45 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,13 +72,13 @@ void destroy_statics(void* p0, void* p1, void* p2);
  *
  * @param p0 the statics model
  */
-static void destroy_statics_model_containers(void* p0) {
+void destroy_statics_model_containers(void* p0) {
 
     struct statics_model* m = (struct statics_model*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Destroy statics model containers.");
+        log_message((void*) &INFO_LOG_LEVEL, "Destroy statics model containers.");
 
         finalize_map(m->positions);
         free(m->positions);
@@ -88,7 +88,7 @@ static void destroy_statics_model_containers(void* p0) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not destroy statics model containers. The statics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not destroy statics model containers. The statics model is null.");
     }
 }
 
@@ -102,7 +102,7 @@ static void destroy_statics_model_containers(void* p0) {
  * @param p0 the statics model
  * @param p1 the statics cybol model part attributes
  */
-static void finalize_statics_part(void* p0, void* p1) {
+void finalize_statics_part(void* p0, void* p1) {
 
     struct statics_model* m = (struct statics_model*) p0;
     
@@ -127,7 +127,7 @@ static void finalize_statics_part(void* p0, void* p1) {
 
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize statics part. The statics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize statics part. The statics model is null.");
     }
 }
 
@@ -141,7 +141,7 @@ static void finalize_statics_part(void* p0, void* p1) {
  * @param p0 the statics model
  * @param p1 the statics cybol model parts
  */
-static void finalize_statics_parts(void* p0, void* p1) {
+void finalize_statics_parts(void* p0, void* p1) {
 
     struct map* m = (struct map*) p1;
     int count = 0;
@@ -158,7 +158,7 @@ static void finalize_statics_parts(void* p0, void* p1) {
 
         } else {
             
-            log((void*) &ERROR_LOG_LEVEL, "Could not finalize statics parts. A statics cybol model part is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize statics parts. A statics cybol model part is null.");
         }
         
         count++;
@@ -175,14 +175,15 @@ static void finalize_statics_parts(void* p0, void* p1) {
  * @param p0 the statics model
  * @param p1 the statics cybol model path
  */
-static void finalize_statics_model(void* p0, void* p1) {
+void finalize_statics_model(void* p0, void* p1) {
 
     struct statics_model* m = (struct statics_model*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Finalize statics model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Finalize statics model.");
 
+/*??
         // Create temporary statics cybol model.
         struct statics_model* cybol = (struct statics_model*) malloc(sizeof(struct statics_model));
         create_statics_model_containers((void*) cybol);
@@ -194,7 +195,7 @@ static void finalize_statics_model(void* p0, void* p1) {
             
         } else {
             
-            log((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The statics cybol model is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The statics cybol model is null.");
         }
     
         // Write statics cybol model to file path.
@@ -203,10 +204,11 @@ static void finalize_statics_model(void* p0, void* p1) {
         // Destroy temporary statics cybol model.
         destroy_statics_model_containers((void*) cybol);
         free((void*) cybol);
+*/
     
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The statics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The statics model is null.");
     }
 }
 
@@ -228,8 +230,8 @@ void destroy_statics(void* p0, void* p1, void* p2) {
         
         if (p != 0) {
             
-            log((void*) &INFO_LOG_LEVEL, "Destroy statics: ");
-            log((void*) &INFO_LOG_LEVEL, p1);
+            log_message((void*) &INFO_LOG_LEVEL, "Destroy statics: ");
+            log_message((void*) &INFO_LOG_LEVEL, p1);
         
             if (strcmp(a, STATICS_COMPOUND) == 0) {
         
