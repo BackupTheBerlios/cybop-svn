@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-01-12 19:18:55 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-01-13 11:38:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,13 +97,13 @@ void handle_system(void* p0) {
     log_message_debug("Create startup model.");
 
     // The startup model abstraction, model, details.
-    void* ma = NULL_POINTER;
+    void** ma = POINTER_NULL_POINTER;
     int* mac = INTEGER_NULL_POINTER;
     int* mas = INTEGER_NULL_POINTER;
-    void* mm = NULL_POINTER;
+    void** mm = POINTER_NULL_POINTER;
     int* mmc = INTEGER_NULL_POINTER;
     int* mms = INTEGER_NULL_POINTER;
-    void* md = NULL_POINTER;
+    void** md = POINTER_NULL_POINTER;
     int* mdc = INTEGER_NULL_POINTER;
     int* mds = INTEGER_NULL_POINTER;
 
