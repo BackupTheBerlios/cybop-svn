@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2004-11-30 15:34:00 $ $Author: rholzmueller $
+ * @version $Revision: 1.7 $ $Date: 2004-12-08 14:11:34 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,12 +29,14 @@
 #define SEND_SOURCE
 
 #include "../communicator/tui_communicator.c"
+#include "../communicator/tcp_socket_communicator.c"
 #include "../global/abstraction_constants.c"
 #include "../global/channel_constants.c"
 #include "../global/name_constants.c"
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
 #include "../socket/unix_socket.c"
+#include "../web/socket_number_accessor.c"
 
 /**
  * Sends a message in a special language.
@@ -65,6 +67,7 @@
  */
 void send_message(const void* p0, const void* p1,
     const void* p2, const void* p3, const void* p4,
+    int* p_main_signal_id,
     void** pp_internal ) {
 
     // The language abstraction.
@@ -208,18 +211,48 @@ void send_message(const void* p0, const void* p1,
     
     if (d == 0) {
 
-        compare_arrays((void*) &lm, (void*) &lmc, (void*) &TCP_SOCKET_CHANNEL, (void*) &TCP_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays( (void*) &lm, (void*) &lmc, 
+                        (void*) &TCP_SOCKET_CHANNEL, 
+                        (void*) &TCP_SOCKET_CHANNEL_COUNT, 
+                        (void*) &r, (void*) &CHARACTER_ARRAY);
 
         if (r == 1) {
+         
+            //get the socket number for the main signal id
+            //the index for the main signal id in the array
+            //is the same index in the client socket number array
+            int main_signal_index = -1;
+            get_index_for_main_signal_id( pp_internal, p_main_signal_id,
+                                          (void*) &main_signal_index );
+            if (main_signal_index<0) {
+             
+                log_message_debug( "no main signal id index found" );
+                exit;
+            }
 
-/*??
-            send_tcp_socket      
- 
-            send_unix_socket((void*) &dn, (void*) &dnc, (void*) &dns,
-                (void*) &snm, (void*) &snmc,
-                (void*) &sna, (void*) &snac,
-                (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
-*/
+            int client_socket_number = -1;
+            get_client_socket_number_for_index( pp_internal, 
+                                                (void*) &main_signal_index,
+                                                (void*) &client_socket_number );
+            if (client_socket_number<0) {
+             
+                log_message_debug( "no client socket number found" );
+                exit;
+            }
+            
+            int tmp_count = 0;
+            int tmp_size = 0;
+            send_tcp_socket( (void*) &client_socket_number,
+                             (void*) &tmp_count, (void*) &tmp_size,
+                             (void*) &mm, (void*) &mmc );
+
+            //remove client_socket number and main signal id from the internal
+            remove_relation_clientsocketnumber_mainsignalid( 
+                pp_internal, (void*) &main_signal_index );
+            
+
+            //close the socket
+            close( client_socket_number );
 
             d = 1;
         }
