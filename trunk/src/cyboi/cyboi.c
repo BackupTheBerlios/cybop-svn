@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.4 $ $Date: 2004-05-11 11:36:50 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,8 +49,8 @@
  */
 void show_usage_information() {
 
-    show_message((void*) &USAGE_MESSAGE, (void*) &USAGE_MESSAGE_SIZE);
-    show_message((void*) &EXAMPLE_MESSAGE, (void*) &EXAMPLE_MESSAGE_SIZE);
+    show_message((void*) &USAGE_MESSAGE, (void*) &USAGE_MESSAGE_COUNT);
+    show_message((void*) &EXAMPLE_MESSAGE, (void*) &EXAMPLE_MESSAGE_COUNT);
 }
 
 /**
@@ -134,8 +134,9 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
                 // together with the signal.
                 remove_signal(p0, (void*) &i);
 
-                // Destroy signal.
-                destroy_model((void*) &s, (void*) &ss, (void*) &pers, (void*) &perss, (void*) &a, (void*) &as);
+                // Do NOT destroy signal here!
+                // Signals are static and stored in the logic knowledge tree
+                // which gets created at system startup and destroyed at system shutdown.
 
                 //
                 // Handle compound signal.
@@ -143,9 +144,9 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
                 if (d == 0) {
 
-                    if (as == COMPOUND_ABSTRACTION_SIZE) {
+                    if (as == COMPOUND_ABSTRACTION_COUNT) {
 
-                        compare_array_elements((void*) &a, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_SIZE, (void*) &r);
+                        compare_array_elements((void*) &a, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r);
 
                         if (r == 1) {
 
@@ -162,9 +163,9 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
                 if (d == 0) {
 
-                    if (as == OPERATION_ABSTRACTION_SIZE) {
+                    if (as == OPERATION_ABSTRACTION_COUNT) {
 
-                        compare_array_elements((void*) &a, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_SIZE, (void*) &r);
+                        compare_array_elements((void*) &a, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r);
 
                         if (r == 1) {
 
@@ -236,11 +237,13 @@ int main(int p0, char** p1) {
 
             // Create statics.
             void* s = NULL_POINTER;
-            create_compound((void*) &s);
+            int sc = 0;
+            create_compound((void*) &s, (void*) &sc);
 
             // Create dynamics.
             void* d = NULL_POINTER;
-            create_compound((void*) &d);
+            int dc = 0;
+            create_compound((void*) &d, (void*) &dc);
 
             // Create internals.
             void* i = NULL_POINTER;
@@ -248,19 +251,28 @@ int main(int p0, char** p1) {
 
             // Create signal memory.
             void* sm = NULL_POINTER;
-            create_signal_memory((void*) &sm);
+            int sms = 0;
+            int smc = 0;
+            create_signal_memory((void*) &sm, (void*) &sms, (void*) &smc);
 
-            // Create (transient) startup signal from (persistent) cybol source
-            // whose location was given at command line.
-            void* ss = NULL_POINTER;
-            int sss = 0;
+            // Create startup signal.
+            void* sig = NULL_POINTER;
+            int sigc = 0;
             void* p = (void*) p1[1];
-            int ps = strlen(p1[1]);
+            int pc = strlen(p1[1]);
+            void* a = (void*) OPERATION_ABSTRACTION;
+            int ac = OPERATION_ABSTRACTION_COUNT;
+            void* l = (void*) FILE_LOCATION;
+            int lc = FILE_LOCATION_COUNT;
 
-            create_model((void*) &ss, (void*) &sss, (void*) &p, (void*) &ps, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);
+            // The transient signal gets initialized from a persistent
+            // cybol source whose location was given at command line.
+            //?? CHANGE OPERATION_ABSTRACTION to COMPOUND_ABSTRACTION,
+            //?? when testing with only EXIT_SIGNAL is over!
+            create_model((void*) &sig, (void*) &sigc, (void*) &p, (void*) &pc, (void*) &a, (void*) &ac, (void*) &l, (void*) &lc);
 
             // Add startup signal to signal memory.
-            set_signal((void*) &sm, (void*) &ss, (void*) &NORMAL_PRIORITY, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);
+            set_signal((void*) &sm, (void*) &sig, (void*) &NORMAL_PRIORITY, (void*) &a, (void*) &ac);
 
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)
@@ -268,20 +280,20 @@ int main(int p0, char** p1) {
             wait((void*) &sm, (void*) &s, (void*) &d, (void*) &i);
             // The loop above is left as soon as its shutdown flag is set.
 
-            // Startup signal does not get destroyed here.
-            // Signals are destroyed when being read from signal memory.
+            // Destroy startup signal.
+            destroy_model((void*) &sig, (void*) &sigc, (void*) &p, (void*) &pc, (void*) &a, (void*) &ac, (void*) &l, (void*) &lc);
 
             // Destroy signal memory.
-            destroy_signal_memory((void*) &sm);
+            destroy_signal_memory((void*) &sm, (void*) &sms, (void*) &smc);
 
             // Destroy internals.
 //??            free(i);
 
             // Destroy dynamics.
-            destroy_compound((void*) &d);
+            destroy_compound((void*) &d, (void*) &dc);
 
             // Destroy statics.
-            destroy_compound((void*) &s);
+            destroy_compound((void*) &s, (void*) &sc);
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &"Exit CYBOI normally.");
 

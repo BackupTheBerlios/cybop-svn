@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.13 $ $Date: 2004-05-13 08:24:10 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,8 +59,10 @@
  * Creates the signal memory.
  *
  * @param p0 the signal memory
+ * @param p1 the signal memory size
+ * @param p2 the signal memory count
  */
-void create_signal_memory(void* p0) {
+void create_signal_memory(void* p0, void* p1, void* p2) {
 
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create signal memory.");
 
@@ -87,15 +89,17 @@ void create_signal_memory(void* p0) {
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &sig);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &as);
 }
 
 /**
  * Destroys the signal memory.
  *
  * @param p0 the signal memory
+ * @param p1 the signal memory size
+ * @param p2 the signal memory count
  */
-void destroy_signal_memory(void* p0) {
+void destroy_signal_memory(void* p0, void* p1, void* p2) {
 
     // Initialize elements.
     int s = 0;
@@ -140,10 +144,10 @@ void destroy_signal_memory(void* p0) {
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &sig);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &as);
 
     // Remove elements in descending order.
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &ABSTRACTIONS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &ABSTRACTIONS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &ABSTRACTIONS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &PRIORITIES_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_INDEX);
@@ -189,7 +193,7 @@ void set_signal(void* p0, const void* p1, const void* p2, const void* p3, const 
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &sig);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &as);
 
     // The index.
     int i = c;
@@ -264,7 +268,7 @@ void remove_signal(void* p0, const void* p1) {
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &sig);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &as);
 
             if (*i < c) {
 
@@ -328,7 +332,7 @@ void get_signal(const void* p0, const void* p1, void* p2, void* p3, void* p4, vo
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &sig);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &as);
 
             if (*i < c) {
 
@@ -436,7 +440,7 @@ void handle_compound_signal(void* p0, const void* p1, const void* p2) {
     // Get elements.
     get_array_element(p1, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
     get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
-    get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
+    get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX, (void*) &pas);
     get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
 
     // The part signal model.
@@ -486,9 +490,9 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
     void* ps = NULL_POINTER;
 
     // Get elements.
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARAMETERS_SIZE_INDEX, (void*) &s);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARAMETERS_COUNT_INDEX, (void*) &s);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &p);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_INDEX, (void*) &ps);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &ps);
 
     // Initialize parameter names.
     // The first parameter p0 is the operation name.
@@ -610,9 +614,9 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
     // Add.
     if (d == 0) {
 
-        if (param0s == ADD_ABSTRACTION_SIZE) {
+        if (param0s == ADD_ABSTRACTION_COUNT) {
 
-            compare_array_elements((void*) &param0, (void*) &ADD_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &ADD_ABSTRACTION_SIZE, (void*) &r);
+            compare_array_elements((void*) &param0, (void*) &ADD_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &ADD_ABSTRACTION_COUNT, (void*) &r);
 
             if (r == 1) {
 
@@ -626,9 +630,9 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
     // Create model.
     if (d == 0) {
 
-        if (param0s == CREATE_MODEL_ABSTRACTION_SIZE) {
+        if (param0s == CREATE_MODEL_ABSTRACTION_COUNT) {
 
-            compare_array_elements((void*) &param0, (void*) &CREATE_MODEL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CREATE_MODEL_ABSTRACTION_SIZE, (void*) &r);
+            compare_array_elements((void*) &param0, (void*) &CREATE_MODEL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CREATE_MODEL_ABSTRACTION_COUNT, (void*) &r);
 
             if (r == 1) {
 
@@ -655,9 +659,9 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
     // Destroy model.
     if (d == 0) {
 
-        if (param0s == DESTROY_MODEL_ABSTRACTION_SIZE) {
+        if (param0s == DESTROY_MODEL_ABSTRACTION_COUNT) {
 
-            compare_array_elements((void*) &param0, (void*) &DESTROY_MODEL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_MODEL_ABSTRACTION_SIZE, (void*) &r);
+            compare_array_elements((void*) &param0, (void*) &DESTROY_MODEL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_MODEL_ABSTRACTION_COUNT, (void*) &r);
 
             if (r == 1) {
 
@@ -669,9 +673,9 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
     // Send.
     if (d == 0) {
 
-        if (param0s == SEND_ABSTRACTION_SIZE) {
+        if (param0s == SEND_ABSTRACTION_COUNT) {
 
-            compare_array_elements((void*) &param0, (void*) &SEND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &SEND_ABSTRACTION_SIZE, (void*) &r);
+            compare_array_elements((void*) &param0, (void*) &SEND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &SEND_ABSTRACTION_COUNT, (void*) &r);
 
             if (r == 1) {
 
@@ -695,9 +699,9 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
     // Receive.
     if (d == 0) {
 
-        if (param0s == RECEIVE_ABSTRACTION_SIZE) {
+        if (param0s == RECEIVE_ABSTRACTION_COUNT) {
 
-            compare_array_elements((void*) &param0, (void*) &RECEIVE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &RECEIVE_ABSTRACTION_SIZE, (void*) &r);
+            compare_array_elements((void*) &param0, (void*) &RECEIVE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &RECEIVE_ABSTRACTION_COUNT, (void*) &r);
 
             if (r == 1) {
 
@@ -709,9 +713,9 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
     // Exit.
     if (d == 0) {
 
-        if (param0s == EXIT_ABSTRACTION_SIZE) {
+        if (param0s == EXIT_ABSTRACTION_COUNT) {
 
-            compare_array_elements((void*) &param0, (void*) &EXIT_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &EXIT_ABSTRACTION_SIZE, (void*) &r);
+            compare_array_elements((void*) &param0, (void*) &EXIT_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &EXIT_ABSTRACTION_COUNT, (void*) &r);
 
             if (r == 1) {
 

@@ -23,7 +23,7 @@
  *
  * This file handles a file.
  *
- * @version $Revision: 1.3 $ $Date: 2004-05-11 11:36:50 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,6 +43,7 @@
  * @param p3 the file name
  * @param p4 the file name count
  */
+/*??
 void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     if (p4 != NULL_POINTER) {
@@ -128,6 +129,7 @@ void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
         log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The file name count is null.");
     }
 }
+*/
 
 /**
  * Writes the array into the file.
@@ -138,6 +140,7 @@ void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
  * @param p3 the file name
  * @param p4 the file name count
  */
+/*??
 void write_file(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
 
     if (p4 != NULL_POINTER) {
@@ -221,6 +224,99 @@ void write_file(const void* p0, const void* p1, const void* p2, const void* p3, 
 
         log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. The file name count is null.");
     }
+}
+*/
+
+/**
+ * Reads inline.
+ *
+ * @param p0 the array
+ * @param p1 the array count
+ * @param p2 the inline byte stream
+ * @param p3 the inline byte stream count
+ */
+void read_inline(void* p0, void* p1, const void* p2, const void* p3) {
+}
+
+/**
+ * Writes inline.
+ *
+ * @param p0 the array
+ * @param p1 the array count
+ * @param p2 the inline byte stream
+ * @param p3 the inline byte stream count
+ */
+void write_inline(const void* p0, const void* p1, void* p2, void* p3) {
+}
+
+/**
+ * Reads file.
+ *
+ * @param p0 the array
+ * @param p1 the array count
+ * @param p2 the file name
+ * @param p3 the file name count
+ */
+void read_file(void* p0, void* p1, const void* p2, const void* p3) {
+}
+
+/**
+ * Writes file.
+ *
+ * @param p0 the array
+ * @param p1 the array count
+ * @param p2 the file name
+ * @param p3 the file name count
+ */
+void write_file(const void* p0, const void* p1, void* p2, void* p3) {
+}
+
+/**
+ * Reads ftp.
+ *
+ * @param p0 the array
+ * @param p1 the array count
+ * @param p2 the ftp url
+ * @param p3 the ftp url count
+ * ?? login
+ * ?? password
+ */
+void read_ftp(void* p0, void* p1, const void* p2, const void* p3) {
+}
+
+/**
+ * Writes ftp.
+ *
+ * @param p0 the array
+ * @param p1 the array count
+ * @param p2 the ftp url
+ * @param p3 the ftp url count
+ * ?? login
+ * ?? password
+ */
+void write_ftp(const void* p0, const void* p1, void* p2, void* p3) {
+}
+
+/**
+ * Reads http.
+ *
+ * @param p0 the array
+ * @param p1 the array count
+ * @param p2 the http url
+ * @param p3 the http url count
+ */
+void read_http(void* p0, void* p1, const void* p2, const void* p3) {
+}
+
+/**
+ * Writes http.
+ *
+ * @param p0 the array
+ * @param p1 the array count
+ * @param p2 the http url
+ * @param p3 the http url count
+ */
+void write_http(const void* p0, const void* p1, void* p2, void* p3) {
 }
 
 /* FILE_SOURCE */

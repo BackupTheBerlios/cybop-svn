@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.12 $ $Date: 2004-05-11 11:36:50 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -258,7 +258,7 @@ void test_file_read() {
     int fnc = 26;
 
     create_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &as);
-    read_file((void*) &a, (void*) &as, (void*) &ac, (void*) &fn, (void*) &fnc);
+//??    read_file((void*) &a, (void*) &as, (void*) &ac, (void*) &fn, (void*) &fnc);
 
     fprintf(stderr, "a: %i\n", a);
     fprintf(stderr, "as: %i\n", as);
@@ -305,7 +305,7 @@ void test_file_write() {
     // The file name count.
     int fnc = 26;
 
-    write_file((void*) &a, (void*) &as, (void*) &ac, (void*) &fn, (void*) &fnc);
+//??    write_file((void*) &a, (void*) &as, (void*) &ac, (void*) &fn, (void*) &fnc);
 }
 
 /**

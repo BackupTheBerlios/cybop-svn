@@ -29,7 +29,7 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.4 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,14 +48,15 @@
  * Initializes the boolean.
  *
  * @param p0 the transient model
- * @param p1 the persistent model
- * @param p2 the persistent model size
+ * @param p1 the transient model count
+ * @param p2 the persistent model
+ * @param p3 the persistent model count
  */
-void initialize_boolean(void* p0, const void* p1, const void* p2) {
+void initialize_boolean(void* p0, void* p1, const void* p2, const void* p3) {
 
-    if (p2 != NULL_POINTER) {
+    if (p3 != NULL_POINTER) {
 
-        int* ps = (int*) p2;
+        int* pc = (int*) p3;
 
         if (p0 != NULL_POINTER) {
 
@@ -69,9 +70,9 @@ void initialize_boolean(void* p0, const void* p1, const void* p2) {
             // The comparison result.
             int r = 0;
 
-            if (*ps == TRUE_BOOLEAN_SIZE) {
+            if (*pc == TRUE_BOOLEAN_COUNT) {
 
-                compare_array_elements(p1, (void*) &TRUE_BOOLEAN, (void*) &CHARACTER_ARRAY, (void*) &TRUE_BOOLEAN_SIZE, (void*) &r);
+                compare_array_elements(p1, (void*) &TRUE_BOOLEAN, (void*) &CHARACTER_ARRAY, (void*) &TRUE_BOOLEAN_COUNT, (void*) &r);
 
                 if (r == 1) {
 
@@ -86,7 +87,7 @@ void initialize_boolean(void* p0, const void* p1, const void* p2) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize boolean. The persistent model size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize boolean. The persistent model count is null.");
     }
 }
 
@@ -94,18 +95,19 @@ void initialize_boolean(void* p0, const void* p1, const void* p2) {
  * Finalizes the boolean.
  *
  * @param p0 the transient model
- * @param p1 the persistent model
- * @param p2 the persistent model size
+ * @param p1 the transient model count
+ * @param p2 the persistent model
+ * @param p3 the persistent model count
  */
-void finalize_boolean(const void* p0, void* p1, void* p2) {
+void finalize_boolean(const void* p0, const void* p1, void* p2, void* p3) {
 
-    if (p2 != NULL_POINTER) {
+    if (p3 != NULL_POINTER) {
 
-        int* ps = (int*) p2;
+        int* pc = (int*) p3;
 
         if (p1 != NULL_POINTER) {
 
-            char* p = (char*) p1;
+            char* p = (char*) p2;
 
             if (p0 != NULL_POINTER) {
 
@@ -116,13 +118,13 @@ void finalize_boolean(const void* p0, void* p1, void* p2) {
                 if (*t == 1) {
 
 //??                    *p = TRUE_BOOLEAN;
-                    *ps = TRUE_BOOLEAN_SIZE;
+                    *pc = TRUE_BOOLEAN_COUNT;
 
                 } else {
 
                     // The default.
 //??                    *p = FALSE_BOOLEAN;
-                    *ps = FALSE_BOOLEAN_SIZE;
+                    *pc = FALSE_BOOLEAN_COUNT;
                 }
 
             } else {
@@ -137,7 +139,7 @@ void finalize_boolean(const void* p0, void* p1, void* p2) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize boolean. The persistent model size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize boolean. The persistent model count is null.");
     }
 }
 

@@ -59,7 +59,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,9 +78,10 @@
 /**
  * Creates the compound.
  *
- * @param p0 the compound
+ * @param p0 the transient model
+ * @param p1 the transient model count
  */
-void create_compound(void* p0) {
+void create_compound(void* p0, void* p1) {
 
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create compound.");
 
@@ -137,33 +138,34 @@ void create_compound(void* p0) {
     set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
     set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &ns);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX, (void*) &pas);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_SIZES_INDEX, (void*) &pls);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_COUNTS_INDEX, (void*) &pls);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_SIZES_INDEX, (void*) &pms);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &pms);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_SIZES_INDEX, (void*) &poas);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_COUNTS_INDEX, (void*) &poas);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_SIZES_INDEX, (void*) &pols);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_COUNTS_INDEX, (void*) &pols);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_SIZES_INDEX, (void*) &poms);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_COUNTS_INDEX, (void*) &poms);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_SIZES_INDEX, (void*) &cas);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_COUNTS_INDEX, (void*) &cas);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_SIZES_INDEX, (void*) &cls);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_COUNTS_INDEX, (void*) &cls);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_SIZES_INDEX, (void*) &cms);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_COUNTS_INDEX, (void*) &cms);
 }
 
 /**
  * Destroys the compound.
  *
- * @param p0 the compound
+ * @param p0 the transient model
+ * @param p1 the transient model count
  */
-void destroy_compound(void* p0) {
+void destroy_compound(void* p0, void* p1) {
 
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy compound.");
 
@@ -195,46 +197,46 @@ void destroy_compound(void* p0) {
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &ns);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX, (void*) &pas);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_SIZES_INDEX, (void*) &pls);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_COUNTS_INDEX, (void*) &pls);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_SIZES_INDEX, (void*) &pms);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &pms);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_SIZES_INDEX, (void*) &poas);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_COUNTS_INDEX, (void*) &poas);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_SIZES_INDEX, (void*) &pols);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_COUNTS_INDEX, (void*) &pols);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_SIZES_INDEX, (void*) &poms);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_COUNTS_INDEX, (void*) &poms);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_SIZES_INDEX, (void*) &cas);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_COUNTS_INDEX, (void*) &cas);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_SIZES_INDEX, (void*) &cls);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_COUNTS_INDEX, (void*) &cls);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_SIZES_INDEX, (void*) &cms);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_COUNTS_INDEX, (void*) &cms);
 
     // Remove elements in descending order.
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &CONSTRAINT_MODELS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &CONSTRAINT_MODELS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &CONSTRAINT_MODELS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &CONSTRAINT_LOCATIONS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &CONSTRAINT_LOCATIONS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &CONSTRAINT_LOCATIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &CONSTRAINT_ABSTRACTIONS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &CONSTRAINT_ABSTRACTIONS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_MODELS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_MODELS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_MODELS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_LOCATIONS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_LOCATIONS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_LOCATIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_ABSTRACTIONS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_ABSTRACTIONS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_ABSTRACTIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_MODELS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_MODELS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_MODELS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_LOCATIONS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_LOCATIONS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_LOCATIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_ABSTRACTIONS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_ABSTRACTIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &NAMES_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &NAMES_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &NAMES_INDEX);
     remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MODEL_COUNT, (void*) &PARTS_COUNT_INDEX);
     remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MODEL_COUNT, (void*) &PARTS_SIZE_INDEX);
@@ -273,7 +275,7 @@ void destroy_compound(void* p0) {
 //
 
 /**
- * Creates a transient model from a persistent model.
+ * Creates a model.
  *
  * @param p0 the transient model
  * @param p1 the transient model size
@@ -281,11 +283,13 @@ void destroy_compound(void* p0) {
  * @param p3 the persistent model size
  * @param p4 the abstraction
  * @param p5 the abstraction size
+ * @param p6 the location
+ * @param p7 the location size
  */
-void create_model(void* p0, void* p1, const void* p2, const void* p3, const void* p4, const void* p5);
+void create_model(void* p0, void* p1, const void* p2, const void* p3, const void* p4, const void* p5, const void* p6, const void* p7);
 
 /**
- * Destroys a transient model to a persistent model.
+ * Destroys a model.
  *
  * @param p0 the transient model
  * @param p1 the transient model size
@@ -293,8 +297,10 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
  * @param p3 the persistent model size
  * @param p4 the abstraction
  * @param p5 the abstraction size
+ * @param p6 the location
+ * @param p7 the location size
  */
-void destroy_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const void* p5);
+void destroy_model(void* p0, void* p1, const void* p2, const void* p3, const void* p4, const void* p5, const void* p6, const void* p7);
 
 //
 // Part.
@@ -457,123 +463,22 @@ void finalize_parts(void* p0, const void* p1) {
  * Initializes the compound.
  *
  * @param p0 the transient model
- * @param p1 the persistent model
- * @param p2 the persistent model size
+ * @param p1 the transient model count
+ * @param p2 the persistent model
+ * @param p3 the persistent model count
  */
-void initialize_compound(void* p0, const void* p1, const void* p2) {
-
-    if (p2 != NULL_POINTER) {
-
-        int* ps = (int*) p2;
-
-        if (p1 != NULL_POINTER) {
-
-            void** p = (void**) p1;
-
-            // The location separator index.
-            int i = -1;
-            // The done flag.
-            int d = 0;
-            // The comparison result.
-            int r = 0;
-            // The path.
-            void* path = NULL_POINTER;
-            // The path count.
-            int pc = 0;
-            // The buffer.
-            void* b = NULL_POINTER;
-
-            get_array_elements_index(p1, (void*) &CHARACTER_ARRAY, p2, (void*) &MODEL_LOCATION_SEPARATOR, (void*) &MODEL_LOCATION_SEPARATOR_COUNT, (void*) &i);
-
-            if (i > -1) {
-
-                if (i > 0) {
-
-                    // Example: "file:/path"
-                    // FILE_LOCATION_COUNT = 4
-                    // *p = 0
-                    // *ps = 10
-                    // path = *p + FILE_LOCATION_COUNT + MODEL_LOCATION_SEPARATOR_COUNT = 0 + 4 + 1 = 5
-                    // pc = *ps - (FILE_LOCATION_COUNT + MODEL_LOCATION_SEPARATOR_COUNT) = 10 - (4 + 1) = 10 - 5 = 5
-                    path = *p + FILE_LOCATION_COUNT + MODEL_LOCATION_SEPARATOR_COUNT;
-                    pc = *ps - (FILE_LOCATION_COUNT + MODEL_LOCATION_SEPARATOR_COUNT);
-
-                    //?? search file ending with backward loop!
-
-                    if (d == 0) {
-
-                        // The location count has the same value as
-                        // the index of the location separator.
-                        // Example:
-                        // p = "file:/some/path"
-                        // ps = 15
-                        // i = 4
-                        // location count of "file" = 4
-                        if (i == FILE_LOCATION_COUNT) {
-
-                            compare_array_elements(p1, (void*) &FILE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FILE_LOCATION_COUNT, (void*) &r);
-
-                            if (r == 1) {
-
-/*??
-                                read_source_from_file((void*) &b, (void*) &path, (void*) &pc);
-                                initialize_compound_from_cybol(p0, (void*) &b);
-                                ... from_text
-                                ... from_html
-*/
-
-                                d = 1;
-                            }
-                        }
-                    }
-
-                    if (d == 0) {
-
-                        if (i == INLINE_LOCATION_COUNT) {
-
-                            //?? compare...
-                            // inline:/
-                            // http://
-                            // ftp://
-
-                            if (r == 1) {
-
-                                //?? initialize_compound_from_...
-
-                                d = 1;
-                            }
-                        }
-                    }
-
-                } else {
-
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize compound model. The persistent model starts with a model location separator.");
-                }
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize compound model. The persistent model does not contain a model location separator.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize compound model. The persistent model is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize compound model. The persistent model size is null.");
-    }
+void initialize_compound(void* p0, void* p1, const void* p2, const void* p3) {
 }
 
 /**
  * Finalizes the compound.
  *
  * @param p0 the transient model
- * @param p1 the persistent model
- * @param p2 the persistent model size
+ * @param p1 the transient model count
+ * @param p2 the persistent model
+ * @param p3 the persistent model count
  */
-void finalize_compound(void* p0, void* p1, void* p2) {
+void finalize_compound(const void* p0, const void* p1, void* p2, void* p3) {
 }
 
 //
@@ -606,7 +511,7 @@ void get_model_part_index(const void* p0, const void* p1, const void* p2, void* 
             // Get elements.
             get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &ns);
 
             // The comparison loop.
             int j = 0;
@@ -680,7 +585,7 @@ int get_next_map_element_index(const void* p0, const void* p1) {
 
     while (i < count) {
 
-        name = get_array_element(p0, (void*) &NAMES_SIZES_ARRAY_INDEX);
+        name = get_array_element(p0, (void*) &NAMES_COUNTS_ARRAY_INDEX);
 
         // If a name equal to the searched one is found,
         // then its index is the one to be returned
@@ -722,7 +627,7 @@ int get_map_element_count(const void* p0, const void* p1) {
 
     while (i < count) {
 
-        name = get_array_element(p0, (void*) &NAMES_SIZES_ARRAY_INDEX);
+        name = get_array_element(p0, (void*) &NAMES_COUNTS_ARRAY_INDEX);
 
         if (name != NULL_POINTER) {
 
@@ -856,25 +761,25 @@ void set_model_part_by_index(void* p0, const void* p1, const void* p2, const voi
             get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
             get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &ns);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX, (void*) &pas);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_SIZES_INDEX, (void*) &pls);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_COUNTS_INDEX, (void*) &pls);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_SIZES_INDEX, (void*) &pms);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &pms);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_SIZES_INDEX, (void*) &poas);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_COUNTS_INDEX, (void*) &poas);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_SIZES_INDEX, (void*) &pols);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_COUNTS_INDEX, (void*) &pols);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_SIZES_INDEX, (void*) &poms);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_COUNTS_INDEX, (void*) &poms);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_SIZES_INDEX, (void*) &cas);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_COUNTS_INDEX, (void*) &cas);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_SIZES_INDEX, (void*) &cls);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_COUNTS_INDEX, (void*) &cls);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_SIZES_INDEX, (void*) &cms);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_COUNTS_INDEX, (void*) &cms);
 
             if (*i == s) {
 
@@ -1138,11 +1043,11 @@ void add_model_part(void* p0, const void* p1, const void* p2, const void* p3, co
 
     int i = -1;
 
-    get_map_size(p0, (void*) &NAMES_SIZES_ARRAY_INDEX);
+    get_map_size(p0, (void*) &NAMES_COUNTS_ARRAY_INDEX);
 
     if (i != -1) {
 
-        set_map_element_at_index(p0, (void*) &NAMES_SIZES_ARRAY_INDEX, p1, p3);
+        set_map_element_at_index(p0, (void*) &NAMES_COUNTS_ARRAY_INDEX, p1, p3);
     }
 */
 }
@@ -1191,25 +1096,25 @@ void remove_model_part_by_index(void* p0, const void* p1) {
             get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
             get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &ns);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX, (void*) &pas);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_SIZES_INDEX, (void*) &pls);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_COUNTS_INDEX, (void*) &pls);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_SIZES_INDEX, (void*) &pms);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &pms);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_SIZES_INDEX, (void*) &poas);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_COUNTS_INDEX, (void*) &poas);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_SIZES_INDEX, (void*) &pols);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_COUNTS_INDEX, (void*) &pols);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_SIZES_INDEX, (void*) &poms);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_COUNTS_INDEX, (void*) &poms);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_SIZES_INDEX, (void*) &cas);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_COUNTS_INDEX, (void*) &cas);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_SIZES_INDEX, (void*) &cls);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_COUNTS_INDEX, (void*) &cls);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_SIZES_INDEX, (void*) &cms);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_COUNTS_INDEX, (void*) &cms);
 
             if (*i < c) {
 
@@ -1451,23 +1356,23 @@ void get_model_part_by_index(const void* p0, const void* p1,
             get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
             get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX, (void*) &pas);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_SIZES_INDEX, (void*) &pls);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_COUNTS_INDEX, (void*) &pls);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_SIZES_INDEX, (void*) &pms);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &pms);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_SIZES_INDEX, (void*) &poas);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_COUNTS_INDEX, (void*) &poas);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_SIZES_INDEX, (void*) &pols);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_COUNTS_INDEX, (void*) &pols);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_SIZES_INDEX, (void*) &poms);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_COUNTS_INDEX, (void*) &poms);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_SIZES_INDEX, (void*) &cas);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_COUNTS_INDEX, (void*) &cas);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_SIZES_INDEX, (void*) &cls);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_COUNTS_INDEX, (void*) &cls);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_SIZES_INDEX, (void*) &cms);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_COUNTS_INDEX, (void*) &cms);
 
             if (*i < c) {
 

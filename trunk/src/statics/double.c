@@ -25,7 +25,7 @@
  *
  * A double is a floating point number.
  *
- * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,10 +43,11 @@
  * Initializes the double.
  *
  * @param p0 the transient model
- * @param p1 the persistent model
- * @param p2 the persistent model size
+ * @param p1 the transient model count
+ * @param p2 the persistent model
+ * @param p3 the persistent model count
  */
-void initialize_double(void* p0, const void* p1, const void* p2) {
+void initialize_double(void* p0, void* p1, const void* p2, const void* p3) {
 
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize double.");
 
@@ -58,10 +59,11 @@ void initialize_double(void* p0, const void* p1, const void* p2) {
  * Finalizes the double.
  *
  * @param p0 the transient model
- * @param p1 the persistent model
- * @param p2 the persistent model size
+ * @param p1 the transient model count
+ * @param p2 the persistent model
+ * @param p3 the persistent model count
  */
-void finalize_double(const void* p0, void* p1, void* p2) {
+void finalize_double(const void* p0, const void* p1, void* p2, void* p3) {
 
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize double.");
 

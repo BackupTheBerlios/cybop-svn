@@ -59,7 +59,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.4 $ $Date: 2004-05-11 08:32:38 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -130,7 +130,7 @@ static const int DOUBLE_ARRAY = 3;
 // Fraction.
 //
 
-/** The fraction size. */
+/** The fraction count. */
 static const int FRACTION_COUNT = 2;
 
 /** The numerator index. */
@@ -143,7 +143,7 @@ static const int DENOMINATOR_INDEX = 1;
 // Vector.
 //
 
-/** The vector size. */
+/** The vector count. */
 static const int VECTOR_COUNT = 3;
 
 /** The x index. */
@@ -159,7 +159,7 @@ static const int Z_INDEX = 2;
 // Time.
 //
 
-/** The time size. */
+/** The time count. */
 static const int TIME_COUNT = 6;
 
 /** The year index. */
@@ -184,7 +184,7 @@ static const int SECOND_INDEX = 5;
 // Complex.
 //
 
-/** The complex size. */
+/** The complex count. */
 static const int COMPLEX_COUNT = 2;
 
 /** The real index. */
@@ -197,23 +197,23 @@ static const int IMAGINARY_INDEX = 1;
 // Operation.
 //
 
-/** The operation size. */
+/** The operation count. */
 static const int OPERATION_COUNT = 3;
 
-/** The parameters size index. */
-static const int PARAMETERS_SIZE_INDEX = 0;
+/** The parameters count index. */
+static const int PARAMETERS_COUNT_INDEX = 0;
 
 /** The parameters index. */
 static const int PARAMETERS_INDEX = 1;
 
-/** The parameters sizes index. */
-static const int PARAMETERS_SIZES_INDEX = 2;
+/** The parameters counts index. */
+static const int PARAMETERS_COUNTS_INDEX = 2;
 
 //
 // Model.
 //
 
-/** The model size. */
+/** The model count. */
 static const int MODEL_COUNT = 22;
 
 /** The parts size index. */
@@ -225,68 +225,68 @@ static const int PARTS_COUNT_INDEX = 1;
 /** The names index. */
 static const int NAMES_INDEX = 2;
 
-/** The names sizes index. */
-static const int NAMES_SIZES_INDEX = 3;
+/** The names counts index. */
+static const int NAMES_COUNTS_INDEX = 3;
 
 /** The part abstractions index. */
 static const int PART_ABSTRACTIONS_INDEX = 4;
 
-/** The part abstractions sizes index. */
-static const int PART_ABSTRACTIONS_SIZES_INDEX = 5;
+/** The part abstractions counts index. */
+static const int PART_ABSTRACTIONS_COUNTS_INDEX = 5;
 
 /** The part locations index. */
 static const int PART_LOCATIONS_INDEX = 6;
 
-/** The part locations sizes index. */
-static const int PART_LOCATIONS_SIZES_INDEX = 7;
+/** The part locations counts index. */
+static const int PART_LOCATIONS_COUNTS_INDEX = 7;
 
 /** The part models index. */
 static const int PART_MODELS_INDEX = 8;
 
-/** The part models sizes index. */
-static const int PART_MODELS_SIZES_INDEX = 9;
+/** The part models counts index. */
+static const int PART_MODELS_COUNTS_INDEX = 9;
 
 /** The position abstractions index. */
 static const int POSITION_ABSTRACTIONS_INDEX = 10;
 
-/** The position abstractions sizes index. */
-static const int POSITION_ABSTRACTIONS_SIZES_INDEX = 11;
+/** The position abstractions counts index. */
+static const int POSITION_ABSTRACTIONS_COUNTS_INDEX = 11;
 
 /** The position locations index. */
 static const int POSITION_LOCATIONS_INDEX = 12;
 
-/** The position locations sizes index. */
-static const int POSITION_LOCATIONS_SIZES_INDEX = 13;
+/** The position locations counts index. */
+static const int POSITION_LOCATIONS_COUNTS_INDEX = 13;
 
 /** The position models index. */
 static const int POSITION_MODELS_INDEX = 14;
 
-/** The position models sizes index. */
-static const int POSITION_MODELS_SIZES_INDEX = 15;
+/** The position models counts index. */
+static const int POSITION_MODELS_COUNTS_INDEX = 15;
 
 /** The constraint abstractions index. */
 static const int CONSTRAINT_ABSTRACTIONS_INDEX = 16;
 
-/** The constraint abstractions sizes index. */
-static const int CONSTRAINT_ABSTRACTIONS_SIZES_INDEX = 17;
+/** The constraint abstractions counts index. */
+static const int CONSTRAINT_ABSTRACTIONS_COUNTS_INDEX = 17;
 
 /** The constraint locations index. */
 static const int CONSTRAINT_LOCATIONS_INDEX = 18;
 
-/** The constraint locations sizes index. */
-static const int CONSTRAINT_LOCATIONS_SIZES_INDEX = 19;
+/** The constraint locations counts index. */
+static const int CONSTRAINT_LOCATIONS_COUNTS_INDEX = 19;
 
 /** The constraint models index. */
 static const int CONSTRAINT_MODELS_INDEX = 20;
 
-/** The constraint models sizes index. */
-static const int CONSTRAINT_MODELS_SIZES_INDEX = 21;
+/** The constraint models counts index. */
+static const int CONSTRAINT_MODELS_COUNTS_INDEX = 21;
 
 //
 // Signal memory.
 //
 
-/** The signal memory size. */
+/** The signal memory count. */
 static const int SIGNAL_MEMORY_COUNT = 6;
 
 /** The signals size index. */
@@ -304,8 +304,8 @@ static const int PRIORITIES_INDEX = 3;
 /** The abstractions index. */
 static const int ABSTRACTIONS_INDEX = 4;
 
-/** The abstractions sizes index. */
-static const int ABSTRACTIONS_SIZES_INDEX = 5;
+/** The abstractions counts index. */
+static const int ABSTRACTIONS_COUNTS_INDEX = 5;
 
 //
 // Signal priorities.
@@ -324,17 +324,17 @@ static const char CYBOL_LANGUAGE_ARRAY[] = {'c', 'y', 'b', 'o', 'l'};
 /** The cybol language. */
 static const char* CYBOL_LANGUAGE = CYBOL_LANGUAGE_ARRAY;
 
-/** The cybol language size. */
-static const int CYBOL_LANGUAGE_SIZE = 5;
+/** The cybol language count. */
+static const int CYBOL_LANGUAGE_COUNT = 5;
 
-/** The inline (serialized) language array. */
+/** The inline language array. */
 static const char INLINE_LANGUAGE_ARRAY[] = {'i', 'n', 'l', 'i', 'n', 'e'};
 
-/** The inline (serialized) language. */
+/** The inline language. */
 static const char* INLINE_LANGUAGE = INLINE_LANGUAGE_ARRAY;
 
-/** The inline (serialized) language size. */
-static const int INLINE_LANGUAGE_SIZE = 6;
+/** The inline language count. */
+static const int INLINE_LANGUAGE_COUNT = 6;
 
 /** The textual user interface (tui) language array. */
 static const char TUI_LANGUAGE_ARRAY[] = {'t', 'u', 'i'};
@@ -342,8 +342,8 @@ static const char TUI_LANGUAGE_ARRAY[] = {'t', 'u', 'i'};
 /** The textual user interface (tui) language. */
 static const char* TUI_LANGUAGE = TUI_LANGUAGE_ARRAY;
 
-/** The textual user interface (tui) language size. */
-static const int TUI_LANGUAGE_SIZE = 3;
+/** The textual user interface (tui) language count. */
+static const int TUI_LANGUAGE_COUNT = 3;
 
 /** The mouse language array. */
 static const char MOUSE_LANGUAGE_ARRAY[] = {'m', 'o', 'u', 's', 'e'};
@@ -351,8 +351,8 @@ static const char MOUSE_LANGUAGE_ARRAY[] = {'m', 'o', 'u', 's', 'e'};
 /** The mouse language. */
 static const char* MOUSE_LANGUAGE = MOUSE_LANGUAGE_ARRAY;
 
-/** The mouse language size. */
-static const int MOUSE_LANGUAGE_SIZE = 5;
+/** The mouse language count. */
+static const int MOUSE_LANGUAGE_COUNT = 5;
 
 /** The x windows language array. */
 static const char X_WINDOWS_LANGUAGE_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', 's'};
@@ -360,8 +360,8 @@ static const char X_WINDOWS_LANGUAGE_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o
 /** The x windows language. */
 static const char* X_WINDOWS_LANGUAGE = X_WINDOWS_LANGUAGE_ARRAY;
 
-/** The x windows language size. */
-static const int X_WINDOWS_LANGUAGE_SIZE = 9;
+/** The x windows language count. */
+static const int X_WINDOWS_LANGUAGE_COUNT = 9;
 
 /** The socket language array. */
 static const char SOCKET_LANGUAGE_ARRAY[] = {'s', 'o', 'c', 'k', 'e', 't'};
@@ -369,8 +369,8 @@ static const char SOCKET_LANGUAGE_ARRAY[] = {'s', 'o', 'c', 'k', 'e', 't'};
 /** The socket language. */
 static const char* SOCKET_LANGUAGE = SOCKET_LANGUAGE_ARRAY;
 
-/** The socket language size. */
-static const int SOCKET_LANGUAGE_SIZE = 6;
+/** The socket language count. */
+static const int SOCKET_LANGUAGE_COUNT = 6;
 
 /** The structured query language (sql) array. */
 static const char SQ_LANGUAGE_ARRAY[] = {'s', 'q'};
@@ -378,8 +378,8 @@ static const char SQ_LANGUAGE_ARRAY[] = {'s', 'q'};
 /** The structured query language (sql). */
 static const char* SQ_LANGUAGE = SQ_LANGUAGE_ARRAY;
 
-/** The structured query language (sql) size. */
-static const int SQ_LANGUAGE_SIZE = 2;
+/** The structured query language (sql) count. */
+static const int SQ_LANGUAGE_COUNT = 2;
 
 /** The java messaging service (jms) language array. */
 static const char JMS_LANGUAGE_ARRAY[] = {'j', 'm', 's'};
@@ -387,8 +387,8 @@ static const char JMS_LANGUAGE_ARRAY[] = {'j', 'm', 's'};
 /** The java messaging service (jms) language. */
 static const char* JMS_LANGUAGE = JMS_LANGUAGE_ARRAY;
 
-/** The java messaging service (jms) language size. */
-static const int JMS_LANGUAGE_SIZE = 3;
+/** The java messaging service (jms) language count. */
+static const int JMS_LANGUAGE_COUNT = 3;
 
 /** The remote method invocation (rmi) language array. */
 static const char RMI_LANGUAGE_ARRAY[] = {'r', 'm', 'i'};
@@ -396,8 +396,8 @@ static const char RMI_LANGUAGE_ARRAY[] = {'r', 'm', 'i'};
 /** The remote method invocation (rmi) language. */
 static const char* RMI_LANGUAGE = RMI_LANGUAGE_ARRAY;
 
-/** The remote method invocation (rmi) language size. */
-static const int RMI_LANGUAGE_SIZE = 3;
+/** The remote method invocation (rmi) language count. */
+static const int RMI_LANGUAGE_COUNT = 3;
 
 /** The common object request broker architecture (corba) language array. */
 static const char CORBA_LANGUAGE_ARRAY[] = {'c', 'o', 'r', 'b', 'a'};
@@ -405,8 +405,8 @@ static const char CORBA_LANGUAGE_ARRAY[] = {'c', 'o', 'r', 'b', 'a'};
 /** The common object request broker architecture (corba) language. */
 static const char* CORBA_LANGUAGE = CORBA_LANGUAGE_ARRAY;
 
-/** The common object request broker architecture (corba) language size. */
-static const int CORBA_LANGUAGE_SIZE = 5;
+/** The common object request broker architecture (corba) language count. */
+static const int CORBA_LANGUAGE_COUNT = 5;
 
 /** The extensible markup language (xml) array. */
 static const char XML_LANGUAGE_ARRAY[] = {'x', 'm', 'l'};
@@ -414,8 +414,8 @@ static const char XML_LANGUAGE_ARRAY[] = {'x', 'm', 'l'};
 /** The extensible markup language (xml). */
 static const char* XML_LANGUAGE = XML_LANGUAGE_ARRAY;
 
-/** The extensible markup language (xml) size. */
-static const int XML_LANGUAGE_SIZE = 3;
+/** The extensible markup language (xml) count. */
+static const int XML_LANGUAGE_COUNT = 3;
 
 /** The simple object access protocol (soap) language array. */
 static const char SOAP_LANGUAGE_ARRAY[] = {'s', 'o', 'a', 'p'};
@@ -423,8 +423,8 @@ static const char SOAP_LANGUAGE_ARRAY[] = {'s', 'o', 'a', 'p'};
 /** The simple object access protocol (soap) language. */
 static const char* SOAP_LANGUAGE = SOAP_LANGUAGE_ARRAY;
 
-/** The simple object access protocol (soap) language size. */
-static const int SOAP_LANGUAGE_SIZE = 4;
+/** The simple object access protocol (soap) language count. */
+static const int SOAP_LANGUAGE_COUNT = 4;
 
 /** The file language array. */
 static const char FILE_LANGUAGE_ARRAY[] = {'f', 'i', 'l', 'e'};
@@ -432,8 +432,8 @@ static const char FILE_LANGUAGE_ARRAY[] = {'f', 'i', 'l', 'e'};
 /** The file language. */
 static const char* FILE_LANGUAGE = FILE_LANGUAGE_ARRAY;
 
-/** The file language size. */
-static const int FILE_LANGUAGE_SIZE = 4;
+/** The file language count. */
+static const int FILE_LANGUAGE_COUNT = 4;
 
 /** The floppy language array. */
 static const char FLOPPY_LANGUAGE_ARRAY[] = {'f', 'l', 'o', 'p', 'p', 'y'};
@@ -441,8 +441,8 @@ static const char FLOPPY_LANGUAGE_ARRAY[] = {'f', 'l', 'o', 'p', 'p', 'y'};
 /** The floppy language. */
 static const char* FLOPPY_LANGUAGE = FLOPPY_LANGUAGE_ARRAY;
 
-/** The floppy language size. */
-static const int FLOPPY_LANGUAGE_SIZE = 6;
+/** The floppy language count. */
+static const int FLOPPY_LANGUAGE_COUNT = 6;
 
 /** The ftp language array. */
 static const char FTP_LANGUAGE_ARRAY[] = {'f', 't', 'p'};
@@ -450,8 +450,8 @@ static const char FTP_LANGUAGE_ARRAY[] = {'f', 't', 'p'};
 /** The ftp language. */
 static const char* FTP_LANGUAGE = FTP_LANGUAGE_ARRAY;
 
-/** The ftp language size. */
-static const int FTP_LANGUAGE_SIZE = 3;
+/** The ftp language count. */
+static const int FTP_LANGUAGE_COUNT = 3;
 
 /** The sftp language array. */
 static const char SFTP_LANGUAGE_ARRAY[] = {'s', 'f', 't', 'p'};
@@ -459,8 +459,8 @@ static const char SFTP_LANGUAGE_ARRAY[] = {'s', 'f', 't', 'p'};
 /** The sftp language. */
 static const char* SFTP_LANGUAGE = SFTP_LANGUAGE_ARRAY;
 
-/** The sftp language size. */
-static const int SFTP_LANGUAGE_SIZE = 4;
+/** The sftp language count. */
+static const int SFTP_LANGUAGE_COUNT = 4;
 
 /** The imap language array. */
 static const char IMAP_LANGUAGE_ARRAY[] = {'i', 'm', 'a', 'p'};
@@ -468,8 +468,8 @@ static const char IMAP_LANGUAGE_ARRAY[] = {'i', 'm', 'a', 'p'};
 /** The imap language. */
 static const char* IMAP_LANGUAGE = IMAP_LANGUAGE_ARRAY;
 
-/** The imap language size. */
-static const int IMAP_LANGUAGE_SIZE = 4;
+/** The imap language count. */
+static const int IMAP_LANGUAGE_COUNT = 4;
 
 /** The imaps language array. */
 static const char IMAPS_LANGUAGE_ARRAY[] = {'i', 'm', 'a', 'p', 's'};
@@ -477,8 +477,8 @@ static const char IMAPS_LANGUAGE_ARRAY[] = {'i', 'm', 'a', 'p', 's'};
 /** The imaps language. */
 static const char* IMAPS_LANGUAGE = IMAPS_LANGUAGE_ARRAY;
 
-/** The imaps language size. */
-static const int IMAPS_LANGUAGE_SIZE = 5;
+/** The imaps language count. */
+static const int IMAPS_LANGUAGE_COUNT = 5;
 
 /** The ldap language array. */
 static const char LDAP_LANGUAGE_ARRAY[] = {'l', 'd', 'a', 'p'};
@@ -486,8 +486,8 @@ static const char LDAP_LANGUAGE_ARRAY[] = {'l', 'd', 'a', 'p'};
 /** The ldap language. */
 static const char* LDAP_LANGUAGE = LDAP_LANGUAGE_ARRAY;
 
-/** The ldap language size. */
-static const int LDAP_LANGUAGE_SIZE = 4;
+/** The ldap language count. */
+static const int LDAP_LANGUAGE_COUNT = 4;
 
 /** The nfs language array. */
 static const char NFS_LANGUAGE_ARRAY[] = {'n', 'f', 's'};
@@ -495,8 +495,8 @@ static const char NFS_LANGUAGE_ARRAY[] = {'n', 'f', 's'};
 /** The nfs language. */
 static const char* NFS_LANGUAGE = NFS_LANGUAGE_ARRAY;
 
-/** The nfs language size. */
-static const int NFS_LANGUAGE_SIZE = 3;
+/** The nfs language count. */
+static const int NFS_LANGUAGE_COUNT = 3;
 
 /** The nntp language array. */
 static const char NNTP_LANGUAGE_ARRAY[] = {'n', 'n', 't', 'p'};
@@ -504,8 +504,8 @@ static const char NNTP_LANGUAGE_ARRAY[] = {'n', 'n', 't', 'p'};
 /** The nntp language. */
 static const char* NNTP_LANGUAGE = NNTP_LANGUAGE_ARRAY;
 
-/** The nntp language size. */
-static const int NNTP_LANGUAGE_SIZE = 4;
+/** The nntp language count. */
+static const int NNTP_LANGUAGE_COUNT = 4;
 
 /** The smb language array. */
 static const char SMB_LANGUAGE_ARRAY[] = {'s', 'm', 'b'};
@@ -513,8 +513,8 @@ static const char SMB_LANGUAGE_ARRAY[] = {'s', 'm', 'b'};
 /** The smb language. */
 static const char* SMB_LANGUAGE = SMB_LANGUAGE_ARRAY;
 
-/** The smb language size. */
-static const int SMB_LANGUAGE_SIZE = 3;
+/** The smb language count. */
+static const int SMB_LANGUAGE_COUNT = 3;
 
 /** The smtp language array. */
 static const char SMTP_LANGUAGE_ARRAY[] = {'s', 'm', 't', 'p'};
@@ -522,8 +522,8 @@ static const char SMTP_LANGUAGE_ARRAY[] = {'s', 'm', 't', 'p'};
 /** The smtp language. */
 static const char* SMTP_LANGUAGE = SMTP_LANGUAGE_ARRAY;
 
-/** The smtp language size. */
-static const int SMTP_LANGUAGE_SIZE = 4;
+/** The smtp language count. */
+static const int SMTP_LANGUAGE_COUNT = 4;
 
 /** The smtps language array. */
 static const char SMTPS_LANGUAGE_ARRAY[] = {'s', 'm', 't', 'p', 's'};
@@ -531,8 +531,8 @@ static const char SMTPS_LANGUAGE_ARRAY[] = {'s', 'm', 't', 'p', 's'};
 /** The smtps language. */
 static const char* SMTPS_LANGUAGE = SMTPS_LANGUAGE_ARRAY;
 
-/** The smtps language size. */
-static const int SMTPS_LANGUAGE_SIZE = 5;
+/** The smtps language count. */
+static const int SMTPS_LANGUAGE_COUNT = 5;
 
 /** The tar language array. */
 static const char TAR_LANGUAGE_ARRAY[] = {'t', 'a', 'r'};
@@ -540,8 +540,8 @@ static const char TAR_LANGUAGE_ARRAY[] = {'t', 'a', 'r'};
 /** The tar language. */
 static const char* TAR_LANGUAGE = TAR_LANGUAGE_ARRAY;
 
-/** The tar language size. */
-static const int TAR_LANGUAGE_SIZE = 3;
+/** The tar language count. */
+static const int TAR_LANGUAGE_COUNT = 3;
 
 /** The zip language array. */
 static const char ZIP_LANGUAGE_ARRAY[] = {'z', 'i', 'p'};
@@ -549,8 +549,8 @@ static const char ZIP_LANGUAGE_ARRAY[] = {'z', 'i', 'p'};
 /** The zip language. */
 static const char* ZIP_LANGUAGE = ZIP_LANGUAGE_ARRAY;
 
-/** The zip language size. */
-static const int ZIP_LANGUAGE_SIZE = 3;
+/** The zip language count. */
+static const int ZIP_LANGUAGE_COUNT = 3;
 
 //
 // Cybol file.
@@ -575,8 +575,8 @@ static const char MODEL_TAG_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
 /** The model tag. */
 static const char* MODEL_TAG = MODEL_TAG_ARRAY;
 
-/** The model tag size. */
-static const int MODEL_TAG_SIZE = 5;
+/** The model tag count. */
+static const int MODEL_TAG_COUNT = 5;
 
 /** The part tag array. */
 static const char PART_TAG_ARRAY[] = {'p', 'a', 'r', 't'};
@@ -584,8 +584,8 @@ static const char PART_TAG_ARRAY[] = {'p', 'a', 'r', 't'};
 /** The part tag. */
 static const char* PART_TAG = PART_TAG_ARRAY;
 
-/** The part tag size. */
-static const int PART_TAG_SIZE = 4;
+/** The part tag count. */
+static const int PART_TAG_COUNT = 4;
 
 /** The super tag array. */
 static const char SUPER_TAG_ARRAY[] = {'s', 'u', 'p', 'e', 'r'};
@@ -593,8 +593,8 @@ static const char SUPER_TAG_ARRAY[] = {'s', 'u', 'p', 'e', 'r'};
 /** The super tag. */
 static const char* SUPER_TAG = SUPER_TAG_ARRAY;
 
-/** The super tag size. */
-static const int SUPER_TAG_SIZE = 5;
+/** The super tag count. */
+static const int SUPER_TAG_COUNT = 5;
 
 //
 // Cybol attributes.
@@ -606,8 +606,8 @@ static const char NAME_ATTRIBUTE_ARRAY[] = {'n', 'a', 'm', 'e'};
 /** The name attribute. */
 static const char* NAME_ATTRIBUTE = NAME_ATTRIBUTE_ARRAY;
 
-/** The name attribute size. */
-static const int NAME_ATTRIBUTE_SIZE = 4;
+/** The name attribute count. */
+static const int NAME_ATTRIBUTE_COUNT = 4;
 
 /** The part abstraction attribute array. */
 static const char PART_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'a', 'r', 't', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
@@ -615,8 +615,8 @@ static const char PART_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'a', 'r', 't', '_',
 /** The part abstraction attribute. */
 static const char* PART_ABSTRACTION_ATTRIBUTE = PART_ABSTRACTION_ATTRIBUTE_ARRAY;
 
-/** The part abstraction attribute size. */
-static const int PART_ABSTRACTION_ATTRIBUTE_SIZE = 16;
+/** The part abstraction attribute count. */
+static const int PART_ABSTRACTION_ATTRIBUTE_COUNT = 16;
 
 /** The part location attribute array. */
 static const char PART_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'a', 'r', 't', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
@@ -624,8 +624,8 @@ static const char PART_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'a', 'r', 't', '_', 'l
 /** The part location attribute. */
 static const char* PART_LOCATION_ATTRIBUTE = PART_LOCATION_ATTRIBUTE_ARRAY;
 
-/** The part location attribute size. */
-static const int PART_LOCATION_ATTRIBUTE_SIZE = 13;
+/** The part location attribute count. */
+static const int PART_LOCATION_ATTRIBUTE_COUNT = 13;
 
 /** The part model attribute array. */
 static const char PART_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'a', 'r', 't', '_', 'm', 'o', 'd', 'e', 'l'};
@@ -633,8 +633,8 @@ static const char PART_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'a', 'r', 't', '_', 'm', 
 /** The part model attribute. */
 static const char* PART_MODEL_ATTRIBUTE = PART_MODEL_ATTRIBUTE_ARRAY;
 
-/** The part model attribute size. */
-static const int PART_MODEL_ATTRIBUTE_SIZE = 10;
+/** The part model attribute count. */
+static const int PART_MODEL_ATTRIBUTE_COUNT = 10;
 
 /** The position abstraction attribute array. */
 static const char POSITION_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
@@ -642,8 +642,8 @@ static const char POSITION_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 
 /** The position abstraction attribute. */
 static const char* POSITION_ABSTRACTION_ATTRIBUTE = POSITION_ABSTRACTION_ATTRIBUTE_ARRAY;
 
-/** The position abstraction attribute size. */
-static const int POSITION_ABSTRACTION_ATTRIBUTE_SIZE = 20;
+/** The position abstraction attribute count. */
+static const int POSITION_ABSTRACTION_ATTRIBUTE_COUNT = 20;
 
 /** The position location attribute array. */
 static const char POSITION_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
@@ -651,8 +651,8 @@ static const char POSITION_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't'
 /** The position location attribute. */
 static const char* POSITION_LOCATION_ATTRIBUTE = POSITION_LOCATION_ATTRIBUTE_ARRAY;
 
-/** The position location attribute size. */
-static const int POSITION_LOCATION_ATTRIBUTE_SIZE = 17;
+/** The position location attribute count. */
+static const int POSITION_LOCATION_ATTRIBUTE_COUNT = 17;
 
 /** The position model attribute array. */
 static const char POSITION_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'm', 'o', 'd', 'e', 'l'};
@@ -660,8 +660,8 @@ static const char POSITION_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', '
 /** The position model attribute. */
 static const char* POSITION_MODEL_ATTRIBUTE = POSITION_MODEL_ATTRIBUTE_ARRAY;
 
-/** The position model attribute size. */
-static const int POSITION_MODEL_ATTRIBUTE_SIZE = 14;
+/** The position model attribute count. */
+static const int POSITION_MODEL_ATTRIBUTE_COUNT = 14;
 
 /** The constraint abstraction attribute array. */
 static const char CONSTRAINT_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
@@ -669,8 +669,8 @@ static const char CONSTRAINT_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's'
 /** The constraint abstraction attribute. */
 static const char* CONSTRAINT_ABSTRACTION_ATTRIBUTE = CONSTRAINT_ABSTRACTION_ATTRIBUTE_ARRAY;
 
-/** The constraint abstraction attribute size. */
-static const int CONSTRAINT_ABSTRACTION_ATTRIBUTE_SIZE = 22;
+/** The constraint abstraction attribute count. */
+static const int CONSTRAINT_ABSTRACTION_ATTRIBUTE_COUNT = 22;
 
 /** The constraint location attribute array. */
 static const char CONSTRAINT_LOCATION_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
@@ -678,8 +678,8 @@ static const char CONSTRAINT_LOCATION_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', '
 /** The constraint location attribute. */
 static const char* CONSTRAINT_LOCATION_ATTRIBUTE = CONSTRAINT_LOCATION_ATTRIBUTE_ARRAY;
 
-/** The constraint location attribute size. */
-static const int CONSTRAINT_LOCATION_ATTRIBUTE_SIZE = 19;
+/** The constraint location attribute count. */
+static const int CONSTRAINT_LOCATION_ATTRIBUTE_COUNT = 19;
 
 /** The constraint model attribute array. */
 static const char CONSTRAINT_MODEL_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '_', 'm', 'o', 'd', 'e', 'l'};
@@ -687,8 +687,8 @@ static const char CONSTRAINT_MODEL_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't',
 /** The constraint model attribute. */
 static const char* CONSTRAINT_MODEL_ATTRIBUTE = CONSTRAINT_MODEL_ATTRIBUTE_ARRAY;
 
-/** The constraint model attribute size. */
-static const int CONSTRAINT_MODEL_ATTRIBUTE_SIZE = 16;
+/** The constraint model attribute count. */
+static const int CONSTRAINT_MODEL_ATTRIBUTE_COUNT = 16;
 
 //
 // Cybol abstraction values:
@@ -709,8 +709,8 @@ static const char COMPOUND_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'o', 'u', 
 /** The compound abstraction. */
 static const char* COMPOUND_ABSTRACTION = COMPOUND_ABSTRACTION_ARRAY;
 
-/** The compound abstraction size. */
-static const int COMPOUND_ABSTRACTION_SIZE = 8;
+/** The compound abstraction count. */
+static const int COMPOUND_ABSTRACTION_COUNT = 8;
 
 //
 // Statics abstractions.
@@ -730,8 +730,8 @@ static const char OPERATION_ABSTRACTION_ARRAY[] = {'o', 'p', 'e', 'r', 'a', 't',
 /** The operation abstraction. */
 static const char* OPERATION_ABSTRACTION = OPERATION_ABSTRACTION_ARRAY;
 
-/** The operation abstraction size. */
-static const int OPERATION_ABSTRACTION_SIZE = 9;
+/** The operation abstraction count. */
+static const int OPERATION_ABSTRACTION_COUNT = 9;
 
 //
 // Primitive abstractions.
@@ -743,8 +743,8 @@ static const char BOOLEAN_ABSTRACTION_ARRAY[] = {'b', 'o', 'o', 'l', 'e', 'a', '
 /** The boolean abstraction. */
 static const char* BOOLEAN_ABSTRACTION = BOOLEAN_ABSTRACTION_ARRAY;
 
-/** The boolean abstraction size. */
-static const int BOOLEAN_ABSTRACTION_SIZE = 7;
+/** The boolean abstraction count. */
+static const int BOOLEAN_ABSTRACTION_COUNT = 7;
 
 /** The integer abstraction array. */
 static const char INTEGER_ABSTRACTION_ARRAY[] = {'i', 'n', 't', 'e', 'g', 'e', 'r'};
@@ -752,8 +752,8 @@ static const char INTEGER_ABSTRACTION_ARRAY[] = {'i', 'n', 't', 'e', 'g', 'e', '
 /** The integer abstraction. */
 static const char* INTEGER_ABSTRACTION = INTEGER_ABSTRACTION_ARRAY;
 
-/** The integer abstraction size. */
-static const int INTEGER_ABSTRACTION_SIZE = 7;
+/** The integer abstraction count. */
+static const int INTEGER_ABSTRACTION_COUNT = 7;
 
 /** The double abstraction array. */
 static const char DOUBLE_ABSTRACTION_ARRAY[] = {'d', 'o', 'u', 'b', 'l', 'e'};
@@ -761,8 +761,8 @@ static const char DOUBLE_ABSTRACTION_ARRAY[] = {'d', 'o', 'u', 'b', 'l', 'e'};
 /** The double abstraction. */
 static const char* DOUBLE_ABSTRACTION = DOUBLE_ABSTRACTION_ARRAY;
 
-/** The double abstraction size. */
-static const int DOUBLE_ABSTRACTION_SIZE = 6;
+/** The double abstraction count. */
+static const int DOUBLE_ABSTRACTION_COUNT = 6;
 
 /** The fraction abstraction array. */
 static const char FRACTION_ABSTRACTION_ARRAY[] = {'f', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
@@ -770,8 +770,8 @@ static const char FRACTION_ABSTRACTION_ARRAY[] = {'f', 'r', 'a', 'c', 't', 'i', 
 /** The fraction abstraction. */
 static const char* FRACTION_ABSTRACTION = FRACTION_ABSTRACTION_ARRAY;
 
-/** The fraction abstraction size. */
-static const int FRACTION_ABSTRACTION_SIZE = 8;
+/** The fraction abstraction count. */
+static const int FRACTION_ABSTRACTION_COUNT = 8;
 
 /** The complex abstraction array. */
 static const char COMPLEX_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'l', 'e', 'x'};
@@ -779,8 +779,8 @@ static const char COMPLEX_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'l', 'e', '
 /** The complex abstraction. */
 static const char* COMPLEX_ABSTRACTION = COMPLEX_ABSTRACTION_ARRAY;
 
-/** The complex abstraction size. */
-static const int COMPLEX_ABSTRACTION_SIZE = 7;
+/** The complex abstraction count. */
+static const int COMPLEX_ABSTRACTION_COUNT = 7;
 
 /** The vector abstraction array. */
 static const char VECTOR_ABSTRACTION_ARRAY[] = {'v', 'e', 'c', 't', 'o', 'r'};
@@ -788,8 +788,8 @@ static const char VECTOR_ABSTRACTION_ARRAY[] = {'v', 'e', 'c', 't', 'o', 'r'};
 /** The vector abstraction. */
 static const char* VECTOR_ABSTRACTION = VECTOR_ABSTRACTION_ARRAY;
 
-/** The vector abstraction size. */
-static const int VECTOR_ABSTRACTION_SIZE = 6;
+/** The vector abstraction count. */
+static const int VECTOR_ABSTRACTION_COUNT = 6;
 
 /** The string abstraction array. */
 static const char STRING_ABSTRACTION_ARRAY[] = {'s', 't', 'r', 'i', 'n', 'g'};
@@ -797,8 +797,8 @@ static const char STRING_ABSTRACTION_ARRAY[] = {'s', 't', 'r', 'i', 'n', 'g'};
 /** The string abstraction. */
 static const char* STRING_ABSTRACTION = STRING_ABSTRACTION_ARRAY;
 
-/** The string abstraction size. */
-static const int STRING_ABSTRACTION_SIZE = 6;
+/** The string abstraction count. */
+static const int STRING_ABSTRACTION_COUNT = 6;
 
 /** The time abstraction array. */
 static const char TIME_ABSTRACTION_ARRAY[] = {'t', 'i', 'm', 'e'};
@@ -806,8 +806,8 @@ static const char TIME_ABSTRACTION_ARRAY[] = {'t', 'i', 'm', 'e'};
 /** The time abstraction. */
 static const char* TIME_ABSTRACTION = TIME_ABSTRACTION_ARRAY;
 
-/** The time abstraction size. */
-static const int TIME_ABSTRACTION_SIZE = 4;
+/** The time abstraction count. */
+static const int TIME_ABSTRACTION_COUNT = 4;
 
 //
 // Audio abstractions.
@@ -819,8 +819,8 @@ static const char MP3_MODEL_ARRAY[] = {'m', 'p', '3'};
 /** The mp3 abstraction. */
 static const char* MP3_MODEL = MP3_MODEL_ARRAY;
 
-/** The mp3 abstraction size. */
-static const int MP3_ABSTRACTION_SIZE = 3;
+/** The mp3 abstraction count. */
+static const int MP3_ABSTRACTION_COUNT = 3;
 
 //
 // Image abstractions.
@@ -832,8 +832,8 @@ static const char JPEG_ABSTRACTION_ARRAY[] = {'j', 'p', 'e', 'g'};
 /** The jpeg abstraction. */
 static const char* JPEG_ABSTRACTION = JPEG_ABSTRACTION_ARRAY;
 
-/** The jpeg abstraction size. */
-static const int JPEG_ABSTRACTION_SIZE = 4;
+/** The jpeg abstraction count. */
+static const int JPEG_ABSTRACTION_COUNT = 4;
 
 /** The gif abstraction array. */
 static const char GIF_ABSTRACTION_ARRAY[] = {'g', 'i', 'f'};
@@ -841,8 +841,8 @@ static const char GIF_ABSTRACTION_ARRAY[] = {'g', 'i', 'f'};
 /** The gif abstraction. */
 static const char* GIF_ABSTRACTION = GIF_ABSTRACTION_ARRAY;
 
-/** The gif abstraction size. */
-static const int GIF_ABSTRACTION_SIZE = 3;
+/** The gif abstraction count. */
+static const int GIF_ABSTRACTION_COUNT = 3;
 
 /** The bmp abstraction array. */
 static const char BMP_ABSTRACTION_ARRAY[] = {'b', 'm', 'p'};
@@ -850,8 +850,8 @@ static const char BMP_ABSTRACTION_ARRAY[] = {'b', 'm', 'p'};
 /** The bmp abstraction. */
 static const char* BMP_ABSTRACTION = BMP_ABSTRACTION_ARRAY;
 
-/** The bmp abstraction size. */
-static const int BMP_ABSTRACTION_SIZE = 3;
+/** The bmp abstraction count. */
+static const int BMP_ABSTRACTION_COUNT = 3;
 
 //
 // Text abstractions.
@@ -863,8 +863,8 @@ static const char SGML_ABSTRACTION_ARRAY[] = {'s', 'g', 'm', 'l'};
 /** The sgml abstraction. */
 static const char* SGML_ABSTRACTION = SGML_ABSTRACTION_ARRAY;
 
-/** The sgml abstraction size. */
-static const int SGML_ABSTRACTION_SIZE = 4;
+/** The sgml abstraction count. */
+static const int SGML_ABSTRACTION_COUNT = 4;
 
 /** The xml abstraction array. */
 static const char XML_ABSTRACTION_ARRAY[] = {'x', 'm', 'l'};
@@ -872,8 +872,8 @@ static const char XML_ABSTRACTION_ARRAY[] = {'x', 'm', 'l'};
 /** The xml abstraction. */
 static const char* XML_ABSTRACTION = XML_ABSTRACTION_ARRAY;
 
-/** The xml abstraction size. */
-static const int XML_ABSTRACTION_SIZE = 3;
+/** The xml abstraction count. */
+static const int XML_ABSTRACTION_COUNT = 3;
 
 /** The html abstraction array. */
 static const char HTML_ABSTRACTION_ARRAY[] = {'h', 't', 'm', 'l'};
@@ -881,8 +881,8 @@ static const char HTML_ABSTRACTION_ARRAY[] = {'h', 't', 'm', 'l'};
 /** The html abstraction. */
 static const char* HTML_ABSTRACTION = HTML_ABSTRACTION_ARRAY;
 
-/** The html abstraction size. */
-static const int HTML_ABSTRACTION_SIZE = 4;
+/** The html abstraction count. */
+static const int HTML_ABSTRACTION_COUNT = 4;
 
 /** The rtf abstraction array. */
 static const char RTF_ABSTRACTION_ARRAY[] = {'r', 't', 'f'};
@@ -890,8 +890,8 @@ static const char RTF_ABSTRACTION_ARRAY[] = {'r', 't', 'f'};
 /** The rtf abstraction. */
 static const char* RTF_ABSTRACTION = RTF_ABSTRACTION_ARRAY;
 
-/** The rtf abstraction size. */
-static const int RTF_ABSTRACTION_SIZE = 3;
+/** The rtf abstraction count. */
+static const int RTF_ABSTRACTION_COUNT = 3;
 
 /** The tex abstraction array. */
 static const char TEX_ABSTRACTION_ARRAY[] = {'t', 'e', 'x'};
@@ -899,8 +899,8 @@ static const char TEX_ABSTRACTION_ARRAY[] = {'t', 'e', 'x'};
 /** The tex abstraction. */
 static const char* TEX_ABSTRACTION = TEX_ABSTRACTION_ARRAY;
 
-/** The tex abstraction size. */
-static const int TEX_ABSTRACTION_SIZE = 3;
+/** The tex abstraction count. */
+static const int TEX_ABSTRACTION_COUNT = 3;
 
 //
 // Video abstractions.
@@ -912,8 +912,8 @@ static const char MPEG_ABSTRACTION_ARRAY[] = {'m', 'p', 'e', 'g'};
 /** The mpeg abstraction. */
 static const char* MPEG_ABSTRACTION = MPEG_ABSTRACTION_ARRAY;
 
-/** The mpeg abstraction size. */
-static const int MPEG_ABSTRACTION_SIZE = 4;
+/** The mpeg abstraction count. */
+static const int MPEG_ABSTRACTION_COUNT = 4;
 
 /** The quicktime abstraction array. */
 static const char QT_ABSTRACTION_ARRAY[] = {'q', 't'};
@@ -921,8 +921,8 @@ static const char QT_ABSTRACTION_ARRAY[] = {'q', 't'};
 /** The quicktime abstraction. */
 static const char* QT_ABSTRACTION = QT_ABSTRACTION_ARRAY;
 
-/** The quicktime abstraction size. */
-static const int QT_ABSTRACTION_SIZE = 2;
+/** The quicktime abstraction count. */
+static const int QT_ABSTRACTION_COUNT = 2;
 
 //
 // Application abstractions.
@@ -934,8 +934,8 @@ static const char KWD_ABSTRACTION_ARRAY[] = {'k', 'w', 'd'};
 /** The koffice kword abstraction. */
 static const char* KWD_ABSTRACTION = KWD_ABSTRACTION_ARRAY;
 
-/** The koffice kword abstraction size. */
-static const int KWORD_ABSTRACTION_SIZE = 5;
+/** The koffice kword abstraction count. */
+static const int KWORD_ABSTRACTION_COUNT = 5;
 
 /** The open office writer abstraction array. */
 static const char SXW_ABSTRACTION_ARRAY[] = {'s', 'x', 'w'};
@@ -943,8 +943,8 @@ static const char SXW_ABSTRACTION_ARRAY[] = {'s', 'x', 'w'};
 /** The open office writer abstraction. */
 static const char* SXW_ABSTRACTION = SXW_ABSTRACTION_ARRAY;
 
-/** The open office writer abstraction size. */
-static const int SXW_ABSTRACTION_SIZE = 3;
+/** The open office writer abstraction count. */
+static const int SXW_ABSTRACTION_COUNT = 3;
 
 //
 // Dynamics abstractions.
@@ -964,8 +964,8 @@ static const char AND_ABSTRACTION_ARRAY[] = {'a', 'n', 'd'};
 /** The and abstraction. */
 static const char* AND_ABSTRACTION = AND_ABSTRACTION_ARRAY;
 
-/** The and abstraction size. */
-static const int AND_ABSTRACTION_SIZE = 3;
+/** The and abstraction count. */
+static const int AND_ABSTRACTION_COUNT = 3;
 
 /** The or abstraction array. */
 static const char OR_ABSTRACTION_ARRAY[] = {'o', 'r'};
@@ -973,8 +973,8 @@ static const char OR_ABSTRACTION_ARRAY[] = {'o', 'r'};
 /** The or abstraction. */
 static const char* OR_ABSTRACTION = OR_ABSTRACTION_ARRAY;
 
-/** The or abstraction size. */
-static const int OR_ABSTRACTION_SIZE = 2;
+/** The or abstraction count. */
+static const int OR_ABSTRACTION_COUNT = 2;
 
 //
 // Comparison abstractions.
@@ -986,8 +986,8 @@ static const char EQUAL_ABSTRACTION_ARRAY[] = {'e', 'q', 'u', 'a', 'l'};
 /** The equal abstraction. */
 static const char* EQUAL_ABSTRACTION = EQUAL_ABSTRACTION_ARRAY;
 
-/** The equal abstraction size. */
-static const int EQUAL_ABSTRACTION_SIZE = 5;
+/** The equal abstraction count. */
+static const int EQUAL_ABSTRACTION_COUNT = 5;
 
 /** The smaller abstraction array. */
 static const char SMALLER_ABSTRACTION_ARRAY[] = {'s', 'm', 'a', 'l', 'l', 'e', 'r'};
@@ -995,8 +995,8 @@ static const char SMALLER_ABSTRACTION_ARRAY[] = {'s', 'm', 'a', 'l', 'l', 'e', '
 /** The smaller abstraction. */
 static const char* SMALLER_ABSTRACTION = SMALLER_ABSTRACTION_ARRAY;
 
-/** The smaller abstraction size. */
-static const int SMALLER_ABSTRACTION_SIZE = 7;
+/** The smaller abstraction count. */
+static const int SMALLER_ABSTRACTION_COUNT = 7;
 
 /** The greater abstraction array. */
 static const char GREATER_ABSTRACTION_ARRAY[] = {'g', 'r', 'e', 'a', 't', 'e', 'r'};
@@ -1004,8 +1004,8 @@ static const char GREATER_ABSTRACTION_ARRAY[] = {'g', 'r', 'e', 'a', 't', 'e', '
 /** The greater abstraction. */
 static const char* GREATER_ABSTRACTION = GREATER_ABSTRACTION_ARRAY;
 
-/** The greater abstraction size. */
-static const int GREATER_ABSTRACTION_SIZE = 7;
+/** The greater abstraction count. */
+static const int GREATER_ABSTRACTION_COUNT = 7;
 
 /** The smaller or equal abstraction array. */
 static const char SMALLER_OR_EQUAL_ABSTRACTION_ARRAY[] = {'s', 'm', 'a', 'l', 'l', 'e', 'r', '_', 'o', 'r', '_', 'e', 'q', 'u', 'a', 'l'};
@@ -1013,8 +1013,8 @@ static const char SMALLER_OR_EQUAL_ABSTRACTION_ARRAY[] = {'s', 'm', 'a', 'l', 'l
 /** The smaller or equal abstraction. */
 static const char* SMALLER_OR_EQUAL_ABSTRACTION = SMALLER_OR_EQUAL_ABSTRACTION_ARRAY;
 
-/** The smaller or equal abstraction size. */
-static const int SMALLER_OR_EQUAL_ABSTRACTION_SIZE = 16;
+/** The smaller or equal abstraction count. */
+static const int SMALLER_OR_EQUAL_ABSTRACTION_COUNT = 16;
 
 /** The greater or equal abstraction array. */
 static const char GREATER_OR_EQUAL_ABSTRACTION_ARRAY[] = {'g', 'r', 'e', 'a', 't', 'e', 'r', '_', 'o', 'r', '_', 'e', 'q', 'u', 'a', 'l'};
@@ -1022,8 +1022,8 @@ static const char GREATER_OR_EQUAL_ABSTRACTION_ARRAY[] = {'g', 'r', 'e', 'a', 't
 /** The greater or equal abstraction. */
 static const char* GREATER_OR_EQUAL_ABSTRACTION = GREATER_OR_EQUAL_ABSTRACTION_ARRAY;
 
-/** The greater or equal abstraction size. */
-static const int GREATER_OR_EQUAL_ABSTRACTION_SIZE = 16;
+/** The greater or equal abstraction count. */
+static const int GREATER_OR_EQUAL_ABSTRACTION_COUNT = 16;
 
 //
 // Arithmetic abstractions.
@@ -1035,8 +1035,8 @@ static const char ADD_ABSTRACTION_ARRAY[] = {'a', 'd', 'd'};
 /** The add abstraction. */
 static const char* ADD_ABSTRACTION = ADD_ABSTRACTION_ARRAY;
 
-/** The add abstraction size. */
-static const int ADD_ABSTRACTION_SIZE = 3;
+/** The add abstraction count. */
+static const int ADD_ABSTRACTION_COUNT = 3;
 
 /** The subtract abstraction array. */
 static const char SUBTRACT_ABSTRACTION_ARRAY[] = {'s', 'u', 'b', 't', 'r', 'a', 'c', 't'};
@@ -1044,8 +1044,8 @@ static const char SUBTRACT_ABSTRACTION_ARRAY[] = {'s', 'u', 'b', 't', 'r', 'a', 
 /** The subtract abstraction. */
 static const char* SUBTRACT_ABSTRACTION = SUBTRACT_ABSTRACTION_ARRAY;
 
-/** The subtract abstraction size. */
-static const int SUBTRACT_ABSTRACTION_SIZE = 8;
+/** The subtract abstraction count. */
+static const int SUBTRACT_ABSTRACTION_COUNT = 8;
 
 /** The multiply abstraction array. */
 static const char MULTIPLY_ABSTRACTION_ARRAY[] = {'m', 'u', 'l', 't', 'i', 'p', 'l', 'y'};
@@ -1053,8 +1053,8 @@ static const char MULTIPLY_ABSTRACTION_ARRAY[] = {'m', 'u', 'l', 't', 'i', 'p', 
 /** The multiply abstraction. */
 static const char* MULTIPLY_ABSTRACTION = MULTIPLY_ABSTRACTION_ARRAY;
 
-/** The multiply abstraction size. */
-static const int MULTIPLY_ABSTRACTION_SIZE = 8;
+/** The multiply abstraction count. */
+static const int MULTIPLY_ABSTRACTION_COUNT = 8;
 
 /** The divide abstraction array. */
 static const char DIVIDE_ABSTRACTION_ARRAY[] = {'d', 'i', 'v', 'i', 'd', 'e'};
@@ -1062,8 +1062,8 @@ static const char DIVIDE_ABSTRACTION_ARRAY[] = {'d', 'i', 'v', 'i', 'd', 'e'};
 /** The divide abstraction. */
 static const char* DIVIDE_ABSTRACTION = DIVIDE_ABSTRACTION_ARRAY;
 
-/** The divide abstraction size. */
-static const int DIVIDE_ABSTRACTION_SIZE = 6;
+/** The divide abstraction count. */
+static const int DIVIDE_ABSTRACTION_COUNT = 6;
 
 //
 // Memory management abstractions.
@@ -1075,8 +1075,8 @@ static const char CREATE_MODEL_ABSTRACTION_ARRAY[] = {'c', 'r', 'e', 'a', 't', '
 /** The create model abstraction. */
 static const char* CREATE_MODEL_ABSTRACTION = CREATE_MODEL_ABSTRACTION_ARRAY;
 
-/** The create model abstraction size. */
-static const int CREATE_MODEL_ABSTRACTION_SIZE = 14;
+/** The create model abstraction count. */
+static const int CREATE_MODEL_ABSTRACTION_COUNT = 14;
 
 /** The destroy model abstraction array. */
 static const char DESTROY_MODEL_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't', 'r', 'o', 'y', '_', 's', 't', 'a', 't', 'i', 'c', 's'};
@@ -1084,8 +1084,8 @@ static const char DESTROY_MODEL_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't', 'r', 
 /** The destroy model abstraction. */
 static const char* DESTROY_MODEL_ABSTRACTION = DESTROY_MODEL_ABSTRACTION_ARRAY;
 
-/** The destroy model abstraction size. */
-static const int DESTROY_MODEL_ABSTRACTION_SIZE = 15;
+/** The destroy model abstraction count. */
+static const int DESTROY_MODEL_ABSTRACTION_COUNT = 15;
 
 //
 // Input output abstractions.
@@ -1097,8 +1097,8 @@ static const char SEND_ABSTRACTION_ARRAY[] = {'s', 'e', 'n', 'd'};
 /** The send abstraction. */
 static const char* SEND_ABSTRACTION = SEND_ABSTRACTION_ARRAY;
 
-/** The send abstraction size. */
-static const int SEND_ABSTRACTION_SIZE = 4;
+/** The send abstraction count. */
+static const int SEND_ABSTRACTION_COUNT = 4;
 
 /** The receive abstraction array. */
 static const char RECEIVE_ABSTRACTION_ARRAY[] = {'r', 'e', 'c', 'e', 'i', 'v', 'e'};
@@ -1106,8 +1106,8 @@ static const char RECEIVE_ABSTRACTION_ARRAY[] = {'r', 'e', 'c', 'e', 'i', 'v', '
 /** The receive abstraction. */
 static const char* RECEIVE_ABSTRACTION = RECEIVE_ABSTRACTION_ARRAY;
 
-/** The receive abstraction size. */
-static const int RECEIVE_ABSTRACTION_SIZE = 7;
+/** The receive abstraction count. */
+static const int RECEIVE_ABSTRACTION_COUNT = 7;
 
 //
 // Lifecycle step abstractions.
@@ -1119,8 +1119,8 @@ static const char EXIT_ABSTRACTION_ARRAY[] = {'e', 'x', 'i', 't'};
 /** The exit abstraction. */
 static const char* EXIT_ABSTRACTION = EXIT_ABSTRACTION_ARRAY;
 
-/** The exit abstraction size. */
-static const int EXIT_ABSTRACTION_SIZE = 4;
+/** The exit abstraction count. */
+static const int EXIT_ABSTRACTION_COUNT = 4;
 
 //
 // Opcodes.
@@ -1132,8 +1132,8 @@ static const int EXIT_ABSTRACTION_SIZE = 4;
 /** The nop abstraction. */
 //??static const char* NOP_ABSTRACTION = NOP_ABSTRACTION_ARRAY;
 
-/** The nop abstraction size. */
-//??static const int NOP_ABSTRACTION_SIZE = 3;
+/** The nop abstraction count. */
+//??static const int NOP_ABSTRACTION_COUNT = 3;
 
 /*??
 //
@@ -1586,8 +1586,8 @@ static const char TRUE_BOOLEAN_ARRAY[] = {'t', 'r', 'u', 'e'};
 /** The true boolean. */
 static const char* TRUE_BOOLEAN = TRUE_BOOLEAN_ARRAY;
 
-/** The true boolean size. */
-static const int TRUE_BOOLEAN_SIZE = 4;
+/** The true boolean count. */
+static const int TRUE_BOOLEAN_COUNT = 4;
 
 /** The false boolean array. */
 static const char FALSE_BOOLEAN_ARRAY[] = {'f', 'a', 'l', 's', 'e'};
@@ -1595,8 +1595,8 @@ static const char FALSE_BOOLEAN_ARRAY[] = {'f', 'a', 'l', 's', 'e'};
 /** The false boolean. */
 static const char* FALSE_BOOLEAN = FALSE_BOOLEAN_ARRAY;
 
-/** The false boolean size. */
-static const int FALSE_BOOLEAN_SIZE = 5;
+/** The false boolean count. */
+static const int FALSE_BOOLEAN_COUNT = 5;
 
 //
 // Logging:
@@ -1653,8 +1653,8 @@ static const char USAGE_MESSAGE_ARRAY[] = {'U', 's', 'a', 'g', 'e', ':', ' ', 'c
 // The usage message.
 static const char* USAGE_MESSAGE = USAGE_MESSAGE_ARRAY;
 
-// The usage message size.
-static const int USAGE_MESSAGE_SIZE = 19;
+// The usage message count.
+static const int USAGE_MESSAGE_COUNT = 19;
 
 // The example message array.
 static const char EXAMPLE_MESSAGE_ARRAY[] = {'E', 'x', 'a', 'm', 'p', 'l', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'y', 'b', 'o', 'p', '.', 's', 'a', 'm', 'p', 'l', 'e', '.', 'h', 'e', 'l', 'l', 'o', '_', 'w', 'o', 'r', 'l', 'd', '.', 'd', 'y', 'n', 'a', 'm', 'i', 'c', 's', '.', 's', 't', 'a', 'r', 't', 'u', 'p'};
@@ -1662,8 +1662,8 @@ static const char EXAMPLE_MESSAGE_ARRAY[] = {'E', 'x', 'a', 'm', 'p', 'l', 'e', 
 // The example message.
 static const char* EXAMPLE_MESSAGE = EXAMPLE_MESSAGE_ARRAY;
 
-// The example message size.
-static const int EXAMPLE_MESSAGE_SIZE = 56;
+// The example message count.
+static const int EXAMPLE_MESSAGE_COUNT = 56;
 
 /*??
 log_message((void*) &INFO_LOG_LEVEL, (void*) &"Wait for signals.");

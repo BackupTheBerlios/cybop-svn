@@ -25,7 +25,7 @@
  *
  * A string is a chain of characters.
  *
- * @version $Revision: 1.4 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,15 +43,15 @@
  * Initializes the string.
  *
  * @param p0 the transient model
- * @param p1 the transient model size
+ * @param p1 the transient model count
  * @param p2 the persistent model
- * @param p3 the persistent model size
+ * @param p3 the persistent model count
  */
 void initialize_string(void* p0, void* p1, const void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
-        int* ps = (int*) p3;
+        int* pc = (int*) p3;
 
         if (p2 != NULL_POINTER) {
 
@@ -59,7 +59,7 @@ void initialize_string(void* p0, void* p1, const void* p2, const void* p3) {
 
             if (p1 != NULL_POINTER) {
 
-                int* ts = (int*) p1;
+                int* tc = (int*) p1;
 
                 if (p0 != NULL_POINTER) {
 
@@ -68,7 +68,7 @@ void initialize_string(void* p0, void* p1, const void* p2, const void* p3) {
                     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize string.");
 
                     *t = *p;
-                    *ts = *ps;
+                    *tc = *pc;
 
                 } else {
 
@@ -77,7 +77,7 @@ void initialize_string(void* p0, void* p1, const void* p2, const void* p3) {
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The transient model size is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The transient model count is null.");
             }
 
         } else {
@@ -87,7 +87,7 @@ void initialize_string(void* p0, void* p1, const void* p2, const void* p3) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The persistent model size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The persistent model count is null.");
     }
 }
 
@@ -95,15 +95,15 @@ void initialize_string(void* p0, void* p1, const void* p2, const void* p3) {
  * Finalizes the string.
  *
  * @param p0 the transient model
- * @param p1 the transient model size
+ * @param p1 the transient model count
  * @param p2 the persistent model
- * @param p3 the persistent model size
+ * @param p3 the persistent model count
  */
 void finalize_string(const void* p0, const void* p1, void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
-        int* ps = (int*) p3;
+        int* pc = (int*) p3;
 
         if (p2 != NULL_POINTER) {
 
@@ -111,7 +111,7 @@ void finalize_string(const void* p0, const void* p1, void* p2, void* p3) {
 
             if (p1 != NULL_POINTER) {
 
-                int* ts = (int*) p1;
+                int* tc = (int*) p1;
 
                 if (p0 != NULL_POINTER) {
 
@@ -120,7 +120,7 @@ void finalize_string(const void* p0, const void* p1, void* p2, void* p3) {
                     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize string.");
 
                     *p = *t;
-                    *ps = *ts;
+                    *pc = *tc;
 
                 } else {
 
@@ -129,7 +129,7 @@ void finalize_string(const void* p0, const void* p1, void* p2, void* p3) {
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The transient model size is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The transient model count is null.");
             }
 
         } else {
@@ -139,7 +139,7 @@ void finalize_string(const void* p0, const void* p1, void* p2, void* p3) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The persistent model size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The persistent model count is null.");
     }
 }
 

@@ -23,7 +23,7 @@
  *
  * This file handles an integer.
  *
- * @version $Revision: 1.4 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,10 +41,11 @@
  * Initializes the integer.
  *
  * @param p0 the transient model
- * @param p1 the persistent model
- * @param p2 the persistent model size
+ * @param p1 the transient model count
+ * @param p2 the persistent model
+ * @param p3 the persistent model count
  */
-void initialize_integer(void* p0, const void* p1, const void* p2) {
+void initialize_integer(void* p0, void* p1, const void* p2, const void* p3) {
 
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize integer.");
 
@@ -56,10 +57,11 @@ void initialize_integer(void* p0, const void* p1, const void* p2) {
  * Finalizes the integer.
  *
  * @param p0 the transient model
- * @param p1 the persistent model
- * @param p2 the persistent model size
+ * @param p1 the transient model count
+ * @param p2 the persistent model
+ * @param p3 the persistent model count
  */
-void finalize_integer(const void* p0, void* p1, void* p2) {
+void finalize_integer(void* p0, void* p1, void* p2, void* p3) {
 
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize integer.");
 
