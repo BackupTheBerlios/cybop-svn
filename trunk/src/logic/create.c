@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.26 $ $Date: 2005-01-28 23:30:52 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2005-01-30 20:42:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -375,69 +375,69 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
     log_message_debug("Create part.");
 
     // The name name abstraction.
-    void** na = NULL_POINTER;
-    void** nac = NULL_POINTER;
-    void** nas = NULL_POINTER;
+    void** na = POINTER_NULL_POINTER;
+    void** nac = POINTER_NULL_POINTER;
+    void** nas = POINTER_NULL_POINTER;
     // The name name model.
-    void** nm = NULL_POINTER;
-    void** nmc = NULL_POINTER;
-    void** nms = NULL_POINTER;
+    void** nm = POINTER_NULL_POINTER;
+    void** nmc = POINTER_NULL_POINTER;
+    void** nms = POINTER_NULL_POINTER;
     // The name name details.
-    void** nd = NULL_POINTER;
-    void** ndc = NULL_POINTER;
-    void** nds = NULL_POINTER;
+    void** nd = POINTER_NULL_POINTER;
+    void** ndc = POINTER_NULL_POINTER;
+    void** nds = POINTER_NULL_POINTER;
 
     // The channel name abstraction.
-    void** ca = NULL_POINTER;
-    void** cac = NULL_POINTER;
-    void** cas = NULL_POINTER;
+    void** ca = POINTER_NULL_POINTER;
+    void** cac = POINTER_NULL_POINTER;
+    void** cas = POINTER_NULL_POINTER;
     // The channel name model.
-    void** cm = NULL_POINTER;
-    void** cmc = NULL_POINTER;
-    void** cms = NULL_POINTER;
+    void** cm = POINTER_NULL_POINTER;
+    void** cmc = POINTER_NULL_POINTER;
+    void** cms = POINTER_NULL_POINTER;
     // The channel name details.
-    void** cd = NULL_POINTER;
-    void** cdc = NULL_POINTER;
-    void** cds = NULL_POINTER;
+    void** cd = POINTER_NULL_POINTER;
+    void** cdc = POINTER_NULL_POINTER;
+    void** cds = POINTER_NULL_POINTER;
 
     // The abstraction name abstraction.
-    void** aa = NULL_POINTER;
-    void** aac = NULL_POINTER;
-    void** aas = NULL_POINTER;
+    void** aa = POINTER_NULL_POINTER;
+    void** aac = POINTER_NULL_POINTER;
+    void** aas = POINTER_NULL_POINTER;
     // The abstraction name model.
-    void** am = NULL_POINTER;
-    void** amc = NULL_POINTER;
-    void** ams = NULL_POINTER;
+    void** am = POINTER_NULL_POINTER;
+    void** amc = POINTER_NULL_POINTER;
+    void** ams = POINTER_NULL_POINTER;
     // The abstraction name details.
-    void** ad = NULL_POINTER;
-    void** adc = NULL_POINTER;
-    void** ads = NULL_POINTER;
+    void** ad = POINTER_NULL_POINTER;
+    void** adc = POINTER_NULL_POINTER;
+    void** ads = POINTER_NULL_POINTER;
 
     // The model name abstraction.
-    void** ma = NULL_POINTER;
-    void** mac = NULL_POINTER;
-    void** mas = NULL_POINTER;
+    void** ma = POINTER_NULL_POINTER;
+    void** mac = POINTER_NULL_POINTER;
+    void** mas = POINTER_NULL_POINTER;
     // The model name model.
-    void** mm = NULL_POINTER;
-    void** mmc = NULL_POINTER;
-    void** mms = NULL_POINTER;
+    void** mm = POINTER_NULL_POINTER;
+    void** mmc = POINTER_NULL_POINTER;
+    void** mms = POINTER_NULL_POINTER;
     // The model name details.
-    void** md = NULL_POINTER;
-    void** mdc = NULL_POINTER;
-    void** mds = NULL_POINTER;
+    void** md = POINTER_NULL_POINTER;
+    void** mdc = POINTER_NULL_POINTER;
+    void** mds = POINTER_NULL_POINTER;
 
     // The whole abstraction.
-    void** wa = NULL_POINTER;
-    void** wac = NULL_POINTER;
-    void** was = NULL_POINTER;
+    void** wa = POINTER_NULL_POINTER;
+    void** wac = POINTER_NULL_POINTER;
+    void** was = POINTER_NULL_POINTER;
     // The whole model.
-    void** wm = NULL_POINTER;
-    void** wmc = NULL_POINTER;
-    void** wms = NULL_POINTER;
+    void** wm = POINTER_NULL_POINTER;
+    void** wmc = POINTER_NULL_POINTER;
+    void** wms = POINTER_NULL_POINTER;
     // The whole details.
-    void** wd = NULL_POINTER;
-    void** wdc = NULL_POINTER;
-    void** wds = NULL_POINTER;
+    void** wd = POINTER_NULL_POINTER;
+    void** wdc = POINTER_NULL_POINTER;
+    void** wds = POINTER_NULL_POINTER;
 
     // Get name name.
     get_compound_element_by_name(p0, p1,
@@ -475,70 +475,124 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
         (void*) &wd, (void*) &wdc, (void*) &wds,
         p2, p3);
 
-//?? TODO: TEST all void** variables for POINTER_NULL_POINTER!
+    // Check name name.
+    if ((na != POINTER_NULL_POINTER)
+        && (nac != POINTER_NULL_POINTER)
+        && (nas != POINTER_NULL_POINTER)
+        && (nm != POINTER_NULL_POINTER)
+        && (nmc != POINTER_NULL_POINTER)
+        && (nms != POINTER_NULL_POINTER)
+        && (nd != POINTER_NULL_POINTER)
+        && (ndc != POINTER_NULL_POINTER)
+        && (nds != POINTER_NULL_POINTER)
+        // Check channel name.
+        && (ca != POINTER_NULL_POINTER)
+        && (cac != POINTER_NULL_POINTER)
+        && (cas != POINTER_NULL_POINTER)
+        && (cm != POINTER_NULL_POINTER)
+        && (cmc != POINTER_NULL_POINTER)
+        && (cms != POINTER_NULL_POINTER)
+        && (cd != POINTER_NULL_POINTER)
+        && (cdc != POINTER_NULL_POINTER)
+        && (cds != POINTER_NULL_POINTER)
+        // Check abstraction name.
+        && (aa != POINTER_NULL_POINTER)
+        && (aac != POINTER_NULL_POINTER)
+        && (aas != POINTER_NULL_POINTER)
+        && (am != POINTER_NULL_POINTER)
+        && (amc != POINTER_NULL_POINTER)
+        && (ams != POINTER_NULL_POINTER)
+        && (ad != POINTER_NULL_POINTER)
+        && (adc != POINTER_NULL_POINTER)
+        && (ads != POINTER_NULL_POINTER)
+        // Check model name.
+        && (ma != POINTER_NULL_POINTER)
+        && (mac != POINTER_NULL_POINTER)
+        && (mas != POINTER_NULL_POINTER)
+        && (mm != POINTER_NULL_POINTER)
+        && (mmc != POINTER_NULL_POINTER)
+        && (mms != POINTER_NULL_POINTER)
+        && (md != POINTER_NULL_POINTER)
+        && (mdc != POINTER_NULL_POINTER)
+        && (mds != POINTER_NULL_POINTER)
+        // Check whole name.
+        && (wa != POINTER_NULL_POINTER)
+        && (wac != POINTER_NULL_POINTER)
+        && (was != POINTER_NULL_POINTER)
+        && (wm != POINTER_NULL_POINTER)
+        && (wmc != POINTER_NULL_POINTER)
+        && (wms != POINTER_NULL_POINTER)
+        && (wd != POINTER_NULL_POINTER)
+        && (wdc != POINTER_NULL_POINTER)
+        && (wds != POINTER_NULL_POINTER)) {
 
-    // The part name.
-    void* pn = NULL_POINTER;
-    int* pnc = INTEGER_NULL_POINTER;
-    int* pns = INTEGER_NULL_POINTER;
-    // The part abstraction.
-    void* pa = NULL_POINTER;
-    int* pac = INTEGER_NULL_POINTER;
-    int* pas = INTEGER_NULL_POINTER;
-    // The part model.
-    void* pm = NULL_POINTER;
-    int* pmc = INTEGER_NULL_POINTER;
-    int* pms = INTEGER_NULL_POINTER;
-    // The part details.
-    void* pd = NULL_POINTER;
-    int* pdc = INTEGER_NULL_POINTER;
-    int* pds = INTEGER_NULL_POINTER;
+        // The part name.
+        void* pn = NULL_POINTER;
+        int* pnc = INTEGER_NULL_POINTER;
+        int* pns = INTEGER_NULL_POINTER;
+        // The part abstraction.
+        void* pa = NULL_POINTER;
+        int* pac = INTEGER_NULL_POINTER;
+        int* pas = INTEGER_NULL_POINTER;
+        // The part model.
+        void* pm = NULL_POINTER;
+        int* pmc = INTEGER_NULL_POINTER;
+        int* pms = INTEGER_NULL_POINTER;
+        // The part details.
+        void* pd = NULL_POINTER;
+        int* pdc = INTEGER_NULL_POINTER;
+        int* pds = INTEGER_NULL_POINTER;
 
-    // Create part name.
-    create_integer((void*) &pnc);
-    *pnc = 0;
-    create_integer((void*) &pns);
-    *pns = 0;
-    create_model((void*) &pn, (void*) pnc, (void*) pns, *nm, *nmc, *na, *nac,
-        (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+        // Create part name.
+        create_integer((void*) &pnc);
+        *pnc = 0;
+        create_integer((void*) &pns);
+        *pns = 0;
+        create_model((void*) &pn, (void*) pnc, (void*) pns, *nm, *nmc, *na, *nac,
+            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
-    // A part channel is not created, since that is only needed temporarily
-    // for model loading.
+        // A part channel is not created, since that is only needed temporarily
+        // for model loading.
 
-    // Create part abstraction.
-    create_integer((void*) &pac);
-    *pac = 0;
-    create_integer((void*) &pas);
-    *pas = 0;
-    create_model((void*) &pa, (void*) pac, (void*) pas, *am, *amc, *aa, *aac,
-        (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+        // Create part abstraction.
+        create_integer((void*) &pac);
+        *pac = 0;
+        create_integer((void*) &pas);
+        *pas = 0;
+        create_model((void*) &pa, (void*) pac, (void*) pas, *am, *amc, *aa, *aac,
+            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
-    // Create part model.
-    create_integer((void*) &pmc);
-    *pmc = 0;
-    create_integer((void*) &pms);
-    *pms = 0;
-    create_model((void*) &pm, (void*) pmc, (void*) pms, *mm, *mmc, *am, *amc,
-        *cm, *cmc);
+        // Create part model.
+        create_integer((void*) &pmc);
+        *pmc = 0;
+        create_integer((void*) &pms);
+        *pms = 0;
+        create_model((void*) &pm, (void*) pmc, (void*) pms, *mm, *mmc, *am, *amc,
+            *cm, *cmc);
 
-    // Add part to whole.
-    if (wm == NULL_POINTER) {
+        // Add part to whole.
+        if (wm == NULL_POINTER) {
 
-        // Use the knowledge model root if the determined whole model is null.
-        set_compound_element_by_name(p2, p3, p4,
-            pn, (void*) pnc, (void*) pns,
-            pa, (void*) pac, (void*) pas,
-            pm, (void*) pmc, (void*) pms,
-            pd, (void*) pdc, (void*) pds);
+            // Use the knowledge model root if the determined whole model is null.
+            set_compound_element_by_name(p2, p3, p4,
+                pn, (void*) pnc, (void*) pns,
+                pa, (void*) pac, (void*) pas,
+                pm, (void*) pmc, (void*) pms,
+                pd, (void*) pdc, (void*) pds);
+
+        } else {
+
+            // Use the determined whole model normally, if it exists.
+            set_compound_element_by_name(wm, wmc, wms,
+                pn, (void*) pnc, (void*) pns,
+                pa, (void*) pac, (void*) pas,
+                pm, (void*) pmc, (void*) pms,
+                pd, (void*) pdc, (void*) pds);
+        }
 
     } else {
 
-        // Use the determined whole model normally, if it exists.
-        set_compound_element_by_name(wm, wmc, wms,
-            pn, (void*) pnc, (void*) pns,
-            pa, (void*) pac, (void*) pas,
-            pm, (void*) pmc, (void*) pms,
-            pd, (void*) pdc, (void*) pds);
+        log_message_debug("Could not create part. At least one of the given parameters is null.");
     }
 }
 
