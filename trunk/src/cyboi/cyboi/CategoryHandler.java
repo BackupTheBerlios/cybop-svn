@@ -27,7 +27,7 @@ package cyboi;
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.10 $ $Date: 2003-08-06 12:43:28 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-08-08 19:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryHandler {
@@ -146,7 +146,7 @@ class CategoryHandler {
         if (p != null) {
             
             java.lang.System.out.println("INFO: Initialize xml parser.");
-            p.setFeature("http://xml.org/sax/features/validation", true);
+//??            p.setFeature("http://xml.org/sax/features/validation", true);
             
         } else {
             
