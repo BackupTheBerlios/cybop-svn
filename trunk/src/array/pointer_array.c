@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.7 $ $Date: 2004-06-13 23:13:30 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-06-15 11:31:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -164,104 +164,65 @@ void resize_pointer_array(void* p0, const void* p1) {
  * Copies the pointer array.
  *
  * @param p0 the source array
- * @param p1 the source array size
- * @param p2 the source array count
- * @param p3 the destination array
- * @param p4 the destination array size
- * @param p5 the destination array count
+ * @param p1 the destination array
+ * @param p2 the count
  */
-void copy_pointer_array(const void* p0, const void* p1, const void* p2, void* p3, void* p4, void* p5) {
+void copy_pointer_array(const void* p0, void* p1, void* p2) {
 
-    if (p5 != NULL_POINTER) {
+    if (p2 != NULL_POINTER) {
 
-        int* dac = (int*) p5;
+        int* c = (int*) p2;
 
-        if (p4 != NULL_POINTER) {
+        if (p1 != NULL_POINTER) {
 
-            int* das = (int*) p4;
+            void** da = (void**) p1;
 
-            if (p3 != NULL_POINTER) {
+            if (p0 != NULL_POINTER) {
 
-                void** da = (void**) p3;
+                void** sa = (void**) p0;
 
-                if (p2 != NULL_POINTER) {
+                // The loop variable.
+                int j = 0;
+                // The source array element.
+                void** sae = POINTER_NULL_POINTER;
+                // The destination array element.
+                void** dae = POINTER_NULL_POINTER;
+                // The size.
+                int s = 0;
 
-                    int* sac = (int*) p2;
+                while (1) {
 
-                    if (p1 != NULL_POINTER) {
+                    if (j >= *c) {
 
-                        int* sas = (int*) p1;
-
-                        if (p0 != NULL_POINTER) {
-
-                            void** sa = (void**) p0;
-
-                            // Copy array size.
-                            *das = *sas;
-
-                            // Create destination array.
-                            create_pointer_array(p3, p4);
-
-                            // The loop variable.
-                            int j = 0;
-                            // The source array element.
-                            void** sae = POINTER_NULL_POINTER;
-                            // The destination array element.
-                            void** dae = POINTER_NULL_POINTER;
-                            // The size.
-                            int s = 0;
-
-                            while (1) {
-
-                                if (j >= *sac) {
-
-                                    break;
-                                }
-
-                                // Determine size.
-                                s = j * POINTER_PRIMITIVE_SIZE;
-
-                                // Determine the next elements at array plus index.
-                                sae = (void**) (*sa + s);
-                                dae = (void**) (*da + s);
-
-                                // Copy array element.
-                                *dae = *sae;
-
-                                // Increment destination array count.
-                                (*dac)++;
-
-                                j++;
-                            }
-
-                        } else {
-
-//??                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
-                        }
-
-                    } else {
-
-//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_SOURCE_ARRAY_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_SOURCE_ARRAY_SIZE_IS_NULL_MESSAGE_COUNT);
+                        break;
                     }
 
-                } else {
+                    // Determine size.
+                    s = j * POINTER_PRIMITIVE_SIZE;
 
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_SOURCE_ARRAY_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_SOURCE_ARRAY_COUNT_IS_NULL_MESSAGE_COUNT);
+                    // Determine the next elements at array plus index.
+                    sae = (void**) (*sa + s);
+                    dae = (void**) (*da + s);
+
+                    // Copy array element.
+                    *dae = *sae;
+
+                    j++;
                 }
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_DESTINATION_ARRAY_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_DESTINATION_ARRAY_SIZE_IS_NULL_MESSAGE_COUNT);
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_DESTINATION_ARRAY_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_DESTINATION_ARRAY_COUNT_IS_NULL_MESSAGE_COUNT);
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_COPY_POINTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
     }
 }
 

@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.16 $ $Date: 2004-06-14 23:56:29 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-06-15 11:31:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,24 +69,28 @@ void test_character_array_with_termination() {
  */
 void test_character_array_copy() {
 
-    // Initialize transient destination array.
+    // The warning log level name is taken as example source array.
+
+    // Initialize transient destination array
+    // and its count and size.
+    // The source array's count and size are copied.
     void* a = NULL_POINTER;
     int ac = 0;
     int as = 0;
 
-    //?? TODO: Simplify copy_array procedure, similar to compare_array_elements!
-    //?? Do handle size, count, create_array (for destination array)
-    //?? outside the copy_array procedure!
-    //?? Possibly create new procedures "copy_abstraction" etc.
-    //?? wherein size etc. are handled.
-
-    // Copy source into destination array.
-    // The warning log level name is taken as example source array.
-    copy_array((void*) &WARNING_LOG_LEVEL_NAME, (void*) &WARNING_LOG_LEVEL_NAME_COUNT, (void*) &INFO_LOG_LEVEL_NAME_COUNT, (void*) &a, (void*) &as, (void*) &ac, (void*) &CHARACTER_ARRAY);
+    // Create transient destination array
+    // and its count and size.
+    create_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &WARNING_LOG_LEVEL_NAME_COUNT);
+    as = WARNING_LOG_LEVEL_NAME_COUNT;
+    copy_array((void*) &WARNING_LOG_LEVEL_NAME, (void*) &a, (void*) &WARNING_LOG_LEVEL_NAME_COUNT, (void*) &CHARACTER_ARRAY);
+    ac = WARNING_LOG_LEVEL_NAME_COUNT;
 
     // Print destination array to screen.
-    fputs("\n\n", stdout);
-    fputs((char*) a, stdout);
+    fputs("\n", stdout);
+    fprintf(stdout, "a: %s\n", a);
+    fprintf(stdout, "as: %i\n", as);
+    fprintf(stdout, "ac: %i\n", ac);
+    fputs("\n", stdout);
 }
 
 /**
@@ -351,12 +355,12 @@ void test() {
 
 //    test_stdout_stderr();
 //    test_character_array_with_termination();
-    test_character_array_copy();
+//    test_character_array_copy();
 //    test_pointer_cast();
 //    test_character_array_single_element();
 //    test_character_array_multiple_elements();
 //    test_file_read();
-//    test_file_write();
+    test_file_write();
 }
 
 /* TEST_SOURCE */

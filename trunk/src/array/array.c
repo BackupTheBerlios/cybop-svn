@@ -50,7 +50,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.7 $ $Date: 2004-06-13 23:13:30 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-06-15 11:31:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -180,34 +180,31 @@ void resize_array(void* p0, const void* p1, const void* p2) {
  * Copies the array.
  *
  * @param p0 the source array
- * @param p1 the source array size
- * @param p2 the source array count
- * @param p3 the destination array
- * @param p4 the destination array size
- * @param p5 the destination array count
- * @param p6 the type
+ * @param p1 the destination array
+ * @param p2 the count
+ * @param p3 the type
  */
-void copy_array(const void* p0, const void* p1, const void* p2, void* p3, void* p4, void* p5, const void* p6) {
+void copy_array(const void* p0, void* p1, void* p2, const void* p3) {
 
-    if (p6 != NULL_POINTER) {
+    if (p3 != NULL_POINTER) {
 
-        int* t = (int*) p6;
+        int* t = (int*) p3;
 
         if (*t == POINTER_ARRAY) {
 
-            copy_pointer_array(p0, p1, p2, p3, p4, p5);
+            copy_pointer_array(p0, p1, p2);
 
         } else if (*t == INTEGER_ARRAY) {
 
-            copy_integer_array(p0, p1, p2, p3, p4, p5);
+            copy_integer_array(p0, p1, p2);
 
         } else if (*t == DOUBLE_ARRAY) {
 
-            copy_double_array(p0, p1, p2, p3, p4, p5);
+            copy_double_array(p0, p1, p2);
 
         } else if (*t == CHARACTER_ARRAY) {
 
-            copy_character_array(p0, p1, p2, p3, p4, p5);
+            copy_character_array(p0, p1, p2);
         }
 
     } else {

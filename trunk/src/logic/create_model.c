@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.3 $ $Date: 2004-06-14 23:56:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-06-15 11:31:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -212,7 +212,16 @@ void interpret_model(void* p0, void* p1, void* p2, const void* p3, const void* p
                         if (r == 1) {
 
                             create_operation(p0, p2);
+
+    fprintf(stderr, "pa 1: %i\n", *((void**) p0));
+    fprintf(stderr, "pac 1: %i\n", *((int*) p2));
+
                             initialize_operation(p0, p1, p2, p3, p4);
+
+    //?? The ERROR lies in initialize_operation!!
+
+    fprintf(stderr, "pa 2: %i\n", *((void**) p0));
+    fprintf(stderr, "pac 2: %i\n", *((int*) p2));
 
                             d = 1;
                         }
@@ -400,11 +409,27 @@ void create_model(void* p0, void* p1, void* p2,
                 // Create buffer array of type character to read single bytes.
                 create_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
 
+    fprintf(stderr, "pl: %s\n", *((char**) p5));
+    fprintf(stderr, "plc: %i\n", *((int*) p6));
+    fprintf(stderr, "pm: %s\n", *((char**) p7));
+    fprintf(stderr, "pmc: %i\n", *((int*) p8));
+
                 // Read persistent model from location into buffer array.
                 read_model((void*) &b, (void*) &bc, (void*) &bs, p5, p6, p7, p8);
 
+    fprintf(stderr, "b: %s\n", b);
+    fprintf(stderr, "bs: %i\n", bs);
+    fprintf(stderr, "bc: %i\n", bc);
+
+    fprintf(stderr, "pa: %s\n", *((char**) p3));
+    fprintf(stderr, "pac: %i\n", *((int*) p4));
+
                 // Create and initialize transient model from buffer array.
                 interpret_model((void*) &tm, (void*) &tmc, (void*) &tms, (void*) &b, (void*) &bc, p3, p4);
+
+    fprintf(stderr, "tm: %i\n", tm);
+    fprintf(stderr, "tms: %i\n", tms);
+    fprintf(stderr, "tmc: %i\n", tmc);
 
                 // Destroy buffer array.
                 destroy_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);

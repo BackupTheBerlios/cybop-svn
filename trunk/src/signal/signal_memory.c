@@ -32,7 +32,7 @@
  * A signal is a transient logic model.
  * It is stored in the computer's random access memory (ram).
  *
- * @version $Revision: 1.27 $ $Date: 2004-06-14 23:56:29 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2004-06-15 11:31:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -795,19 +795,34 @@ void handle_create_model_signal(const void* p0,
                         // part abstraction, model, constraint,
                         // position abstraction, model, constraint,
                         // and their counts and sizes.
-                        copy_array((void*) &ppn, (void*) &ppns, (void*) &ppnc, (void*) &tpn, (void*) &tpns, (void*) &tpnc, (void*) &CHARACTER_ARRAY);
-                        copy_array((void*) &ppa, (void*) &ppas, (void*) &ppac, (void*) &tpa, (void*) &tpas, (void*) &tpac, (void*) &CHARACTER_ARRAY);
+                        create_array((void*) &tpn, (void*) &CHARACTER_ARRAY, (void*) &ppns);
+                        tpns = ppns;
+                        copy_array((void*) &ppn, (void*) &tpn, (void*) &ppnc, (void*) &CHARACTER_ARRAY);
+                        tpnc = ppnc;
+                        create_array((void*) &tpa, (void*) &CHARACTER_ARRAY, (void*) &ppas);
+                        tpas = ppas;
+                        copy_array((void*) &ppa, (void*) &tpa, (void*) &ppac, (void*) &CHARACTER_ARRAY);
+                        tpac = ppac;
                         create_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
                             (void*) &ppa, (void*) &ppac,
                             (void*) &ppl, (void*) &pplc,
                             (void*) &ppm, (void*) &ppmc);
-                        copy_array((void*) &ppc, (void*) &ppcs, (void*) &ppcc, (void*) &tpc, (void*) &tpcs, (void*) &tpcc, (void*) &CHARACTER_ARRAY);
-                        copy_array((void*) &ppoa, (void*) &ppoas, (void*) &ppoac, (void*) &tpoa, (void*) &tpoas, (void*) &tpoac, (void*) &CHARACTER_ARRAY);
+                        create_array((void*) &tpc, (void*) &CHARACTER_ARRAY, (void*) &ppcs);
+                        tpcs = ppcs;
+                        copy_array((void*) &ppc, (void*) &tpc, (void*) &ppcc, (void*) &CHARACTER_ARRAY);
+                        tpcc = ppcc;
+                        create_array((void*) &tpoa, (void*) &CHARACTER_ARRAY, (void*) &ppoas);
+                        tpoas = ppoas;
+                        copy_array((void*) &ppoa, (void*) &tpoa, (void*) &ppoac, (void*) &CHARACTER_ARRAY);
+                        tpoac = ppoac;
                         create_model((void*) &tpom, (void*) &tpomc, (void*) &tpoms,
                             (void*) &ppoa, (void*) &ppoac,
                             (void*) &ppol, (void*) &ppolc,
                             (void*) &ppom, (void*) &ppomc);
-                        copy_array((void*) &ppoc, (void*) &ppocs, (void*) &ppocc, (void*) &tpoc, (void*) &tpocs, (void*) &tpocc, (void*) &CHARACTER_ARRAY);
+                        create_array((void*) &tpoc, (void*) &CHARACTER_ARRAY, (void*) &ppocs);
+                        tpocs = ppocs;
+                        copy_array((void*) &ppoc, (void*) &tpoc, (void*) &ppocc, (void*) &CHARACTER_ARRAY);
+                        tpocc = ppocc;
 
                         //?? If "add", then first check if name exists in whole;
                         //?? if yes, add "_0" or "_1" or "_2" etc.

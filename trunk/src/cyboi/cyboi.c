@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.16 $ $Date: 2004-06-14 23:56:29 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-06-15 11:31:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -323,8 +323,8 @@ int main(int p0, char** p1) {
     // CAUTION!
     // This has to stand AFTER the initialization of the
     // global variables because these are used by the testing code.
-    test();
-    return 0;
+//    test();
+//    return 0;
 
     if (p1 != NULL_POINTER) {
 
@@ -398,11 +398,16 @@ int main(int p0, char** p1) {
 
             // Create transient part abstraction, model
             // and their counts and sizes.
-            copy_array((void*) &ppa, (void*) &ppas, (void*) &ppac, (void*) &tpa, (void*) &tpas, (void*) &tpac, (void*) &CHARACTER_ARRAY);
+            create_array((void*) &tpa, (void*) &CHARACTER_ARRAY, (void*) &ppas);
+            tpas = ppas;
+            copy_array((void*) &ppa, (void*) &tpa, (void*) &ppac, (void*) &CHARACTER_ARRAY);
+            tpac = ppac;
             create_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
                 (void*) &ppa, (void*) &ppac,
                 (void*) &ppl, (void*) &pplc,
                 (void*) &ppm, (void*) &ppmc);
+
+    //?? HERE is the ERROR! The signal model is NULL. Check out create_model!
 
     fprintf(stderr, "tpa: %s\n", tpa);
     fprintf(stderr, "tpac: %i\n", tpac);
