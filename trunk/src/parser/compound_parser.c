@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-21 10:09:38 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,53 @@
 
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
+
+//
+// This file handles a compound model which represents state or logic knowledge.
+//
+// A persistent compound model consists of:
+// - part name
+// - part abstraction
+// - part location
+// - part model (either inline or path to model at location)
+// - part constraint
+// - position abstraction
+// - position location
+// - position model (either inline or path to model at location)
+// - position constraint
+//
+// CYBOL Examples:
+// <part name="example_0" abstraction="compound" location="ftp,address,login,password" model="/test_compound.cybol"/>
+// <part name="example_1" abstraction="string" location="file" model="/test_string.txt"/>
+// <part name="example_2" abstraction="string" location="inline" model="This is a test string."/>
+// <part name="example_3" abstraction="integer" location="inline" model="5" constraint="minimum=1,maximum=10,area=1..10"/>
+//
+// A transient compound model keeps the following meta information about its parts:
+// - part model
+// - part abstraction
+// - part constraint
+// - position model
+// - position abstraction
+// - position constraint
+//
+// CAUTION!
+// The part/position location is not stored as it is not needed at runtime.
+//
+// A compound is like a table, the first column (array) containing the part names
+// and the following columns (arrays) containing the meta information about the parts.
+// Model parts can such be accessed over their index or name.
+// They can also be accessed hierarchically, using a dot-separated name like:
+// "system.frame.menu_bar.exit_menu_item.action"
+//
+// A compound model represents an abstract description of some real world item
+// in one of the physical measurements (dimensions):
+// - space
+// - time
+// - mass
+//
+// A compound model can be created by cloning an existing model template so that
+// some space gets allocated in the computer's memory.
+//
 
 /**
  * Parses the byte stream and creates a compound model from it.

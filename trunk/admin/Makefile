@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.17 $ $Date: 2004-08-14 22:47:54 $ $Author: christian $
+# @version $Revision: 1.18 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 # @author Michael Simon <michael.simon@gmx.net>
 #
@@ -68,10 +68,14 @@ COMPILER_FLAGS = -g -I/usr/X11R6/include -I/usr/include/libxml2 # -fsjlj-excepti
 MAIN_SOURCE = $(SRC)/cyboi/cyboi.c
 #ROOT_SOURCES = $(wildcard $(SRC)/*.c)
 #ROOT_OBJECTS = $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(ROOT_SOURCES))
+ACCESSOR_SOURCES = $(wildcard $(SRC)/accessor/*.c)
+ACCESSOR_OBJECTS = $(patsubst $(SRC)/accessor/%.c,$(OBJ)/accessor/%.o,$(ACCESSOR_SOURCES))
 ARRAY_SOURCES = $(wildcard $(SRC)/array/*.c)
 ARRAY_OBJECTS = $(patsubst $(SRC)/array/%.c,$(OBJ)/array/%.o,$(ARRAY_SOURCES))
 COMMUNICATOR_SOURCES = $(wildcard $(SRC)/communicator/*.c)
 COMMUNICATOR_OBJECTS = $(patsubst $(SRC)/communicator/%.c,$(OBJ)/communicator/%.o,$(COMMUNICATOR_SOURCES))
+CREATOR_SOURCES = $(wildcard $(SRC)/creator/*.c)
+CREATOR_OBJECTS = $(patsubst $(SRC)/creator/%.c,$(OBJ)/creator/%.o,$(CREATOR_SOURCES))
 CYBOI_SOURCES = $(wildcard $(SRC)/cyboi/*.c)
 CYBOI_OBJECTS = $(patsubst $(SRC)/cyboi/%.c,$(OBJ)/cyboi/%.o,$(CYBOI_SOURCES))
 GLOBAL_SOURCES = $(wildcard $(SRC)/global/*.c)
@@ -107,7 +111,7 @@ X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WIN
 #
 #	$(COMPILER) -I /usr/X11R6/include -L /usr/X11R6/lib $(OBJ)/cyboi.o -o $(BIN)/$(BINARY)
 #
-all: create $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CYBOI_OBJECTS) $(GLOBAL_OBJECTS) $(LOGGER_OBJECTS) $(LOGIC_OBJECTS) $(PARSER_OBJECTS) $(SIGNAL_OBJECTS) $(SOCKET_OBJECTS) $(STATE_OBJECTS) $(TEST_OBJECTS) $(TRANSLATOR_OBJECTS) $(X_WINDOWS_OBJECTS)
+all: create $(ACCESSOR_OBJECTS) $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CREATOR_OBJECTS) $(CYBOI_OBJECTS) $(GLOBAL_OBJECTS) $(LOGGER_OBJECTS) $(LOGIC_OBJECTS) $(PARSER_OBJECTS) $(SIGNAL_OBJECTS) $(SOCKET_OBJECTS) $(STATE_OBJECTS) $(TEST_OBJECTS) $(TRANSLATOR_OBJECTS) $(X_WINDOWS_OBJECTS)
 	$(COMPILER) -L/usr/X11R6/lib -L/usr/lib \
 		-o $(BIN)/$(BINARY) $(OBJ)/cyboi/cyboi.o -lX11 -lxml2
 	@echo Compiled cyboi files.
@@ -120,8 +124,10 @@ all: create $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CYBOI_OBJECTS) $(GLOBAL_O
 #
 create:
 	-cd ..; mkdir obj
+	-cd $(OBJ); mkdir accessor
 	-cd $(OBJ); mkdir array
 	-cd $(OBJ); mkdir communicator
+	-cd $(OBJ); mkdir creator
 	-cd $(OBJ); mkdir cyboi
 	-cd $(OBJ); mkdir global
 	-cd $(OBJ); mkdir logger
@@ -137,7 +143,13 @@ create:
 #$(OBJ)/%.o: $(SRC)/%.c
 #	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
+$(OBJ)/accessor/%.o: $(SRC)/accessor/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
 $(OBJ)/array/%.o: $(SRC)/array/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/creator/%.o: $(SRC)/creator/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/communicator/%.o: $(SRC)/communicator/%.c

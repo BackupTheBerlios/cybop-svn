@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-21 10:09:38 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,17 @@
 
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
+
+//
+// A time is used to measure the duration of dynamics or in other words,
+// the difference between two static states/ instants.
+//
+// Time format:
+// dd.mm.yyyy hh:mm:ss";
+// Examples:
+// 01.01.2000 00:00:00";
+// 31.12.1999 23:59:59";
+//
 
 /**
  * Parses the byte stream and creates a time model from it.
@@ -53,6 +64,28 @@ void parse_time(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
             if (p0 != NULL_POINTER) {
 
                 void** d = (void**) p0;
+
+/*??
+            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize time.");
+
+            //??    fscanf(p1, %d, &(m->value));
+
+                // Initialize elements.
+                int s = 0;
+                int min = 0;
+                int h = 0;
+                int d = 0;
+                int m = 0;
+                int y = 0;
+
+                // Set elements.
+                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &YEAR_INDEX, (void*) &y);
+                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MONTH_INDEX, (void*) &m);
+                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DAY_INDEX, (void*) &d);
+                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &HOUR_INDEX, (void*) &h);
+                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MINUTE_INDEX, (void*) &min);
+                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SECOND_INDEX, (void*) &s);
+*/
 
             } else {
 
@@ -80,6 +113,36 @@ void parse_time(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
  * @param p4 the source count
  */
 void serialize_time(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+
+/*??
+            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize time.");
+
+                // Initialize elements.
+                int s = 0;
+                int min = 0;
+                int h = 0;
+                int d = 0;
+                int m = 0;
+                int y = 0;
+
+                // Get elements.
+                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SECOND_INDEX, (void*) &s);
+                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MINUTE_INDEX, (void*) &min);
+                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &HOUR_INDEX, (void*) &h);
+                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DAY_INDEX, (void*) &d);
+                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MONTH_INDEX, (void*) &m);
+                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &YEAR_INDEX, (void*) &y);
+
+                // Remove elements in descending order.
+                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &SECOND_INDEX);
+                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &MINUTE_INDEX);
+                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &HOUR_INDEX);
+                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &DAY_INDEX);
+                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &MONTH_INDEX);
+                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &YEAR_INDEX);
+
+            //??    fprintf(p1, %d, &(m->value));
+*/
 }
 
 /* TIME_PARSER_SOURCE */

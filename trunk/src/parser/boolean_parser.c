@@ -21,15 +21,26 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-21 10:09:38 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BOOLEAN_PARSER_SOURCE
 #define BOOLEAN_PARSER_SOURCE
 
+#include "../array/array.c"
+#include "../global/constant.c"
 #include "../global/log_constants.c"
+#include "../global/structure_constants.c"
 #include "../logger/logger.c"
+
+//
+// A boolean can have just one of the two values: TRUE or FALSE
+// Synonyms are:
+// - one and zero
+// - 1 and 0
+// - on and off
+//
 
 /**
  * Parses the byte stream and creates a boolean model from it.
@@ -46,22 +57,29 @@ void parse_boolean(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 
         int* sc = (int*) p4;
 
-        if (p3 != NULL_POINTER) {
+        if (p0 != NULL_POINTER) {
 
-            void** s = (void**) p3;
+            int* d = (int*) p0;
 
-            if (p0 != NULL_POINTER) {
+//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Parse boolean.");
 
-                void** d = (void**) p0;
+            // The comparison result.
+            int r = 0;
 
-            } else {
+            if (*sc == TRUE_BOOLEAN_COUNT) {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
+                compare_array_elements(p3, (void*) &TRUE_BOOLEAN, (void*) &CHARACTER_ARRAY, (void*) &TRUE_BOOLEAN_COUNT, (void*) &r);
+
+                if (r == 1) {
+
+                    // Set boolean to 'true'.
+                    *d = 1;
+                }
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE_COUNT);
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
@@ -80,6 +98,43 @@ void parse_boolean(void* p0, void* p1, void* p2, const void* p3, const void* p4)
  * @param p4 the source count
  */
 void serialize_boolean(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+
+    if (p3 != NULL_POINTER) {
+
+        int* s = (int*) p3;
+
+        if (p1 != NULL_POINTER) {
+
+            int* dc = (int*) p1;
+
+//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Serialize boolean.");
+
+            if (*s == 1) {
+
+/*??
+                set_array_elements(TRUE_BOOLEAN ...);
+                set_size
+                set_count
+*/
+
+            } else {
+
+/*??
+                set_array_elements(FALSE_BOOLEAN ...);
+                set_size
+                set_count
+*/
+            }
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE_COUNT);
+    }
 }
 
 /* BOOLEAN_PARSER_SOURCE */

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: xml_attribute.c,v $
+ * $RCSfile: xml_property_creator.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -21,25 +21,26 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef XML_ATTRIBUTE
-#define XML_ATTRIBUTE
+#ifndef XML_PROPERTY_CREATOR_SOURCE
+#define XML_PROPERTY_CREATOR_SOURCE
 
 #include "../global/structure_constants.c"
+#include "../global/log_constants.c"
 #include "../logger/logger.c"
 
 /**
- * Creates the xml attribute.
+ * Creates the xml property.
  *
- * @param p0 the xml attribute
- * @param p1 the xml attribute size
+ * @param p0 the model
+ * @param p1 the model size
  */
-void create_xml_attribute(void* p0, void* p1) {
+void create_xml_property(void* p0, const void* p1) {
 
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_SIGNAL_MEMORY_MESSAGE, (void*) &CREATE_SIGNAL_MEMORY_MESSAGE_COUNT);
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTEGER_MESSAGE, (void*) &CREATE_INTEGER_MESSAGE_COUNT);
 
     // Create xml attribute.
     create_array(p0, (void*) &POINTER_ARRAY, (void*) &XML_ATTRIBUTE_COUNT);
@@ -65,14 +66,14 @@ void create_xml_attribute(void* p0, void* p1) {
 }
 
 /**
- * Destroys the xml attribute.
+ * Destroys the xml property.
  *
- * @param p0 the xml attribute
- * @param p1 the xml attribute size
+ * @param p0 the model
+ * @param p1 the model size
  */
-void destroy_xml_attribute(void* p0, void* p1) {
+void destroy_xml_property(void* p0, const void* p1) {
 
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_SIGNAL_MEMORY_MESSAGE, (void*) &CREATE_SIGNAL_MEMORY_MESSAGE_COUNT);
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_INTEGER_MESSAGE, (void*) &DESTROY_INTEGER_MESSAGE_COUNT);
 
     // Initialize xml attribute name, value
     // and their counts.
@@ -102,5 +103,5 @@ void destroy_xml_attribute(void* p0, void* p1) {
     destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &XML_ATTRIBUTE_COUNT);
 }
 
-/* XML_ATTRIBUTE */
+/* XML_PROPERTY_CREATOR_SOURCE */
 #endif

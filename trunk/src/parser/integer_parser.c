@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-21 10:09:38 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,6 +54,13 @@ void parse_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 
                 void** d = (void**) p0;
 
+/*??
+            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize integer.");
+
+                // Transform string to integer.
+            //??    sscanf(p1, %d, (void*) &(m->value));
+*/
+
             } else {
 
 //??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
@@ -80,6 +87,13 @@ void parse_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4)
  * @param p4 the source count
  */
 void serialize_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+
+/*??
+            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize integer.");
+
+                // Transform integer to string.
+            //??    sprintf(p1, %d, (void*) &(m->value));
+*/
 }
 
 /* INTEGER_PARSER_SOURCE */

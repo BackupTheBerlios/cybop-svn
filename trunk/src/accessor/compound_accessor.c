@@ -1,5 +1,5 @@
 /*
- * $RCSfile: compound.c,v $
+ * $RCSfile: compound_accessor.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -21,118 +21,18 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles a compound model which represents state or logic knowledge.
- *
- * A persistent compound model consists of:
- * - part name
- * - part abstraction
- * - part location
- * - part model (either inline or path to model at location)
- * - part constraint
- * - position abstraction
- * - position location
- * - position model (either inline or path to model at location)
- * - position constraint
- *
- * CYBOL Examples:
- * <part name="example_0" abstraction="compound" location="ftp,address,login,password" model="/test_compound.cybol"/>
- * <part name="example_1" abstraction="string" location="file" model="/test_string.txt"/>
- * <part name="example_2" abstraction="string" location="inline" model="This is a test string."/>
- * <part name="example_3" abstraction="integer" location="inline" model="5" constraint="minimum=1,maximum=10,area=1..10"/>
- *
- * A transient compound model keeps the following meta information about its parts:
- * - part model
- * - part abstraction
- * - part constraint
- * - position model
- * - position abstraction
- * - position constraint
- *
- * CAUTION!
- * The part/position location is not stored as it is not needed at runtime.
- *
- * A compound is like a table, the first column (array) containing the part names
- * and the following columns (arrays) containing the meta information about the parts.
- * Model parts can such be accessed over their index or name.
- * They can also be accessed hierarchically, using a dot-separated name like:
- * "system.frame.menu_bar.exit_menu_item.action"
- *
- * A compound model represents an abstract description of some real world item
- * in one of the physical measurements (dimensions):
- * - space
- * - time
- * - mass
- *
- * A compound model can be created by cloning an existing model template so that
- * some space gets allocated in the computer's memory.
- *
- * @version $Revision: 1.12 $ $Date: 2004-08-15 22:11:29 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef COMPOUND_SOURCE
-#define COMPOUND_SOURCE
+#ifndef COMPOUND_ACCESSOR_SOURCE
+#define COMPOUND_ACCESSOR_SOURCE
 
 #include "../array/array.c"
 #include "../global/constant.c"
+#include "../global/log_constants.c"
+#include "../global/structure_constants.c"
 #include "../logger/logger.c"
-
-//
-// Forward declarations.
-//
-// These functions are the only forward declarations. They are needed because
-// compounds can recursively create/ destroy other models.
-//
-
-/**
- * Creates a model.
- *
- * @param p0 the transient model
- * @param p1 the transient model count
- * @param p2 the transient model size
- * @param p3 the persistent abstraction
- * @param p4 the persistent abstraction count
- * @param p5 the persistent location
- * @param p6 the persistent location count
- * @param p7 the persistent model
- * @param p8 the persistent model count
- */
-/*??
-void create_model(void* p0, void* p1, void* p2,
-    const void* p3, const void* p4,
-    const void* p5, const void* p6,
-    const void* p7, const void* p8);
-
-/**
- * Destroys a model.
- *
- * @param p0 the transient model
- * @param p1 the transient model count
- * @param p2 the transient model size
- * @param p3 the transient position model
- * @param p4 the transient position model count
- * @param p5 the transient position model size
- * @param p6 the persistent part abstraction
- * @param p7 the persistent part abstraction count
- * @param p8 the persistent part location
- * @param p9 the persistent part location count
- * @param p10 the persistent part model
- * @param p11 the persistent part model count
- * @param p12 the persistent position abstraction
- * @param p13 the persistent position abstraction count
- * @param p14 the persistent position location
- * @param p15 the persistent position location count
- * @param p16 the persistent position model
- * @param p17 the persistent position model count
- */
-/*??
-void destroy_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    const void* p6, const void* p7, const void* p8, const void* p9, const void* p10, const void* p11,
-    const void* p12, const void* p13, const void* p14, const void* p15, const void* p16, const void* p17);
-
-//
-// Compound part.
-//
 
 /**
  * Gets the compound part index.
@@ -1562,5 +1462,5 @@ void get_compound_part_by_name(const void* p0, const void* p1, const void* p2,
     }
 }
 
-/* COMPOUND_SOURCE */
+/* COMPOUND_ACCESSOR_SOURCE */
 #endif

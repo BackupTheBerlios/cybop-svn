@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-21 10:09:38 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,13 @@
 
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
+
+//
+// A fraction consists of two integers, a numerator and a denominator.
+//
+// For higher performance, it is mostly better to use floating point numbers
+// (float) which can be calculated by the Arithmetic Logic Unit (ALU).
+//
 
 /**
  * Parses the byte stream and creates a fraction model from it.
@@ -53,6 +60,20 @@ void parse_fraction(void* p0, void* p1, void* p2, const void* p3, const void* p4
             if (p0 != NULL_POINTER) {
 
                 void** d = (void**) p0;
+
+/*??
+            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize fraction.");
+
+            //??    sscanf(p1, %l, (void*) &(m->value));
+
+                // Initialize elements.
+                int d = 0;
+                int n = 0;
+
+                // Set elements.
+                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX, (void*) &n);
+                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DENOMINATOR_INDEX, (void*) &d);
+*/
 
             } else {
 
@@ -80,6 +101,24 @@ void parse_fraction(void* p0, void* p1, void* p2, const void* p3, const void* p4
  * @param p4 the source count
  */
 void serialize_fraction(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+
+/*??
+            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize fraction.");
+
+                // Initialize elements.
+                int d = 0;
+                int n = 0;
+
+                // Get elements.
+                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DENOMINATOR_INDEX, (void*) &d);
+                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX, (void*) &n);
+
+                // Remove elements.
+                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT, (void*) &DENOMINATOR_INDEX);
+                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT, (void*) &NUMERATOR_INDEX);
+
+            //??    sprintf(p1, %l, (void*) &(m->value));
+*/
 }
 
 /* FRACTION_PARSER_SOURCE */

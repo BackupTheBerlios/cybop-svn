@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-21 10:09:38 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,10 @@
 
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
+
+//
+// A complex consists of two floats, a real and an imaginary.
+//
 
 /**
  * Parses the byte stream and creates a complex model from it.
@@ -54,6 +58,20 @@ void parse_complex(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 
                 void** d = (void**) p0;
 
+/*??
+            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize complex.");
+
+            //??    fscanf(p1, %d, (void*) &(t->real));
+            //??    fscanf(p1, %d, (void*) &(t->imaginary));
+
+                // Initialize elements.
+                int i = 0;
+                int r = 0;
+
+                // Set elements.
+                set_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &REAL_INDEX, (void*) &r);
+                set_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
+*/
             } else {
 
 //??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
@@ -80,6 +98,25 @@ void parse_complex(void* p0, void* p1, void* p2, const void* p3, const void* p4)
  * @param p4 the source count
  */
 void serialize_complex(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+
+/*??
+            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize complex.");
+
+                // Initialize elements.
+                int i = 0;
+                int r = 0;
+
+                // Get elements.
+                get_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
+                get_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &REAL_INDEX, (void*) &r);
+
+                // Remove elements.
+                remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT, (void*) &IMAGINARY_INDEX);
+                remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT, (void*) &REAL_INDEX);
+
+            //??    fprintf(p1, %d, (void*) &(t->real));
+            //??    fprintf(p1, %d, (void*) &(t->imaginary));
+*/
 }
 
 /* COMPLEX_PARSER_SOURCE */

@@ -21,16 +21,17 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ADD_SOURCE
 #define ADD_SOURCE
 
+#include "../accessor/compound_accessor.c"
 #include "../global/abstraction_constants.c"
+#include "../global/log_constants.c"
 #include "../logger/logger.c"
-#include "../state/compound.c"
 
 /**
  * Adds two integer summands resulting in the integer sum.

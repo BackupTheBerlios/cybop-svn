@@ -1,5 +1,5 @@
 /*
- * $RCSfile: signal_memory.c,v $
+ * $RCSfile: signal_handler.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.37 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,7 @@
 
 #include "../array/array.c"
 #include "../global/abstraction_constants.c"
+#include "../global/log_constants.c"
 #include "../logger/logger.c"
 #include "../logic/add.c"
 #include "../logic/create.c"

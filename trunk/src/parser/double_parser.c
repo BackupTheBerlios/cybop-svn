@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-21 10:09:38 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,10 @@
 
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
+
+//
+// A double is a floating point number.
+//
 
 /**
  * Parses the byte stream and creates a double model from it.

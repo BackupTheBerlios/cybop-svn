@@ -23,7 +23,7 @@
  *
  * This file handles a server UNIX FILE socket.
  *
- * @version $Revision: 1.3 $ $Date: 2004-07-04 09:49:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -33,6 +33,7 @@
 
 #include <sys/socket.h>
 #include <sys/un.h>
+#include "../accessor/compound_accessor.c"
 #include "../global/constant.c"
 #include "../global/variable.c"
 
