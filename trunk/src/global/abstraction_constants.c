@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-01-08 19:55:18 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-03-02 07:12:37 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,6 +57,17 @@ static const char SIGNAL_MEMORY_ABSTRACTION_ARRAY[] = {'s', 'i', 'g', 'n', 'a', 
 static const char* SIGNAL_MEMORY_ABSTRACTION = SIGNAL_MEMORY_ABSTRACTION_ARRAY;
 static const int SIGNAL_MEMORY_ABSTRACTION_COUNT_ARRAY[] = {13};
 static const int* SIGNAL_MEMORY_ABSTRACTION_COUNT = SIGNAL_MEMORY_ABSTRACTION_COUNT_ARRAY;
+
+
+//
+// Knowledge memory abstraction.
+//
+
+/** The signal memory abstraction. */
+static const char KNOWLEDGE_MEMORY_ABSTRACTION_ARRAY[] = {'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e', '_', 'm', 'e', 'm', 'o', 'r', 'y'};
+static const char* KNOWLEDGE_MEMORY_ABSTRACTION = KNOWLEDGE_MEMORY_ABSTRACTION_ARRAY;
+static const int KNOWLEDGE_MEMORY_ABSTRACTION_COUNT_ARRAY[] = {16};
+static const int* KNOWLEDGE_MEMORY_ABSTRACTION_COUNT = KNOWLEDGE_MEMORY_ABSTRACTION_COUNT_ARRAY;
 
 //
 // Compound abstraction.
@@ -442,6 +453,29 @@ static const char EXIT_ABSTRACTION_ARRAY[] = {'e', 'x', 'i', 't'};
 static const char* EXIT_ABSTRACTION = EXIT_ABSTRACTION_ARRAY;
 static const int EXIT_ABSTRACTION_COUNT_ARRAY[] = {4};
 static const int* EXIT_ABSTRACTION_COUNT = EXIT_ABSTRACTION_COUNT_ARRAY;
+
+
+//
+// Operations abstractions.
+//
+
+/** The loop abstraction. */
+static const char LOOP_ABSTRACTION_ARRAY[] = {'l', 'o', 'o', 'p'};
+static const char* LOOP_ABSTRACTION = LOOP_ABSTRACTION_ARRAY;
+static const int LOOP_ABSTRACTION_COUNT_ARRAY[] = {4};
+static const int* LOOP_ABSTRACTION_COUNT = LOOP_ABSTRACTION_COUNT_ARRAY;
+
+/** The compare abstraction. */
+static const char COMPARE_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'a', 'r', 'e'};
+static const char* COMPARE_ABSTRACTION = COMPARE_ABSTRACTION_ARRAY;
+static const int COMPARE_ABSTRACTION_COUNT_ARRAY[] = {7};
+static const int* COMPARE_ABSTRACTION_COUNT = COMPARE_ABSTRACTION_COUNT_ARRAY;
+
+/** The set abstraction. */
+static const char SET_ABSTRACTION_ARRAY[] = {'s', 'e', 't'};
+static const char* SET_ABSTRACTION = SET_ABSTRACTION_ARRAY;
+static const int SET_ABSTRACTION_COUNT_ARRAY[] = {3};
+static const int* SET_ABSTRACTION_COUNT = SET_ABSTRACTION_COUNT_ARRAY;
 
 //
 // Opcodes.
