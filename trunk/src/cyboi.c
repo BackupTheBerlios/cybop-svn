@@ -43,7 +43,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.3 $ $Date: 2004-02-07 00:04:55 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-02-08 23:21:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -92,20 +92,26 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
         //?? Testing!
         init_x();
-        
+
         // Run endless loop handling signals.
         while (TRUE_VALUE) {
 
             if (f == 0) {
 
+                //?? test x windows
+                send_x_windows_output((void*) 0, (void*) 0, p3);
+                sleep(5);
+
                 // Check for x windows events and send them as cyboi signals.
                 if (i->x_windows_flag == 1) {
 
-                    receive_x_windows_input(i->x_windows);
+                    receive_x_windows_input(p0, i->x_windows);
                 }
 
-                //?? test x windows
-                send_x_windows_output((void*) 0, (void*) 0, p3);
+                //?? Testing.
+                sleep(5);
+                XCloseDisplay(((struct x_windows*) i->x_windows)->display);
+
                 break;
 
 /*??
@@ -189,20 +195,7 @@ int main(int p0, char** p1) {
             void* ss = create_dynamics((void*) p1[1], (void*) 0, (void*) 0, (void*) DYNAMICS_COMPOUND);
 
             // Add startup signal to signal memory.
-            // Caution! Adding of signals must be synchronized between:
-            // - internal CYBOI signals added here
-            // - hardware interrupt signals sent from the operating system
-            // These are the only two accessing the signal memory for adding.
-//??            synchronized (p0) {
-
-                // Add "part" signal to signal memory,
-                // using the "whole" signal's priority.
-                // (Each signal/action has a priority.
-                // An action may consist of "part" actions.
-                // The "part" actions cannot have higher/lower priority
-                // than their original "whole" action.)
-                add_signal(sm, ss, (void*) DYNAMICS_COMPOUND, (void*) &NORMAL_PRIORITY);
-//??            }
+            add_signal(sm, ss, (void*) DYNAMICS_COMPOUND, (void*) &NORMAL_PRIORITY);
 
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)
