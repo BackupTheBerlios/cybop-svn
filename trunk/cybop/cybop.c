@@ -39,7 +39,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.24 $ $Date: 2003-11-25 13:30:41 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2003-11-26 14:40:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -133,22 +133,9 @@ int main(int p0, char** p1) {
 
         if ((p0 == 3) && (p1[1] != 0) && (p1[2] != 0)) {
 
-/*??
-            // XML parser.
-            xml_parser = new org.apache.xerces.parsers.DOMParser();
-            initialize_xml_parser(xml_parser);
-*/
-
             // Signal memory (signal queue).
             void* signal_memory = malloc(sizeof(struct map));
             initialize_map(signal_memory);
-
-/*??
-            // Event handler.
-            JavaEventHandler.signal_memory = signal_memory;
-            int event_handler = new JavaEventHandler();
-            JavaEventHandler.set_event_handler(event_handler);
-*/
 
             // Create signal for storage in signal memory.
             // It will get destroyed (freed) when received by signal handler.
@@ -165,7 +152,7 @@ int main(int p0, char** p1) {
 
                 // Caution! Adding of signals must be synchronized between:
                 // - send for adding internal CYBOP signals
-                // - JavaEventHandler.dispatchEvent for adding transformed java event signals
+                // - system signals catched by C library functions
                 // These are the only procedures accessing the signal
                 // memory for adding signals.
 //??                synchronized (signal_memory) {
@@ -185,22 +172,9 @@ int main(int p0, char** p1) {
             wait(signal_memory);
             // The loop above is left as soon as its shutdown flag is set.
 
-/*??
-            // Event handler.
-            JavaEventHandler.remove_event_handler(event_handler);
-            event_handler = 0;
-            JavaEventHandler.signal_memory = 0;
-*/
-
             // Signal memory (signal queue).
             finalize_map(signal_memory);
             free(signal_memory);
-
-/*??
-            // XML parser.
-            finalize_xml_parser(xml_parser);
-            xml_parser = 0;
-*/
 
             log((void*) &INFO_LOG_LEVEL, "Exit CYBOI normally.");
 
@@ -210,7 +184,6 @@ int main(int p0, char** p1) {
         } else {
 
             log((void*) &ERROR_LOG_LEVEL, "Could not execute CYBOI. The command line parameters are incorrect.");
-
             show_usage_information();
         }
 

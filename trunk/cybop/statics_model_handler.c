@@ -50,7 +50,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.2 $ $Date: 2003-11-25 13:30:41 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-11-26 14:40:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
