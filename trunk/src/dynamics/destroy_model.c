@@ -21,134 +21,147 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file destroys a transient model into a persistent model.
+ * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.6 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-04-02 16:13:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DESTROY_MODEL_SOURCE
 #define DESTROY_MODEL_SOURCE
 
-#include "../cybol/cybol_model_handler.c"
 #include "../logger/log_handler.c"
 #include "../model/models.c"
 #include "../model/statics_models.c"
 #include "../statics/boolean_handler.c"
 #include "../statics/complex_handler.c"
+#include "../statics/float_handler.c"
 #include "../statics/fraction_handler.c"
 #include "../statics/integer_handler.c"
+#include "../statics/model_handler.c"
 #include "../statics/operation_handler.c"
 #include "../statics/string_handler.c"
 #include "../statics/time_handler.c"
 #include "../statics/vector_handler.c"
 
 /**
- * Destroys a memory model to a cybol model.
+ * Destroys a transient model to a persistent model.
  *
- * @param p0 the memory model
- * @param p1 the cybol model
- * @param p2 the location
- * @param p3 the abstraction
+ * @param p0 the transient model
+ * @param p1 the transient model size
+ * @param p2 the persistent model
+ * @param p3 the persistent model size
+ * @param p4 the abstraction
+ * @param p5 the abstraction size
  */
-void destroy_model(void* p0, void* p1, void* p2, void* p3) {
+void destroy_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const void* p5) {
 
-    void** m = (void**) p3;
+    // The comparison result.
+    int r = 0;
 
-    if (m != (void*) 0) {
+    // Do not consider an empty persistent model further.
+    int* s = (int*) p3;
 
-        int r = 0;
+    if (*s != 0) {
 
-        // Do not consider empty cybol models further.
-        compare_arrays(p0, (void*) &EMPTY_STRING, (void*) &r);
+        //
+        // Compound.
+        //
 
-        if (r == 0) {
+        compare_arrays(p4, p5, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
-            log_message((void*) &INFO_LOG_LEVEL, "Destroy model.");
+        if (r == 1) {
 
-            // Compound model.
-            compare_arrays(p2, (void*) &COMPOUND_MODEL, (void*) &r);
+            finalize_compound(p0, p2, p3);
+            destroy_compound(p0);
+
+        } else {
+
+            //
+            // Logic and Dynamics.
+            //
+
+            compare_arrays(p4, p5, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
             if (r == 1) {
 
-                finalize_model(p0, p1);
-                destroy_model_containers(p0);
-                free(p0);
+                finalize_operation(p0, p1, p2, p3);
+                destroy_operation(p0, p1);
 
             } else {
 
-                // Dynamics model.
-                compare_arrays(p2, (void*) &OPERATION_MODEL, (void*) &r);
+                //
+                // Statics.
+                //
+
+                compare_arrays(p4, p5, (void*) &CHARACTER_ARRAY, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
                 if (r == 1) {
 
-                    finalize_operation_model(p0, p1);
-                    destroy_operation_container(p0);
-                    free(p0);
+                    finalize_string(p0, p2, p3);
 
                 } else {
 
-                    // Statics models.
-                    compare_arrays(p2, (void*) &TIME_MODEL, (void*) &r);
+                    compare_arrays(p4, p5, (void*) &CHARACTER_ARRAY, (void*) &BOOLEAN_ABSTRACTION, (void*) &BOOLEAN_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
                     if (r == 1) {
 
-                        finalize_time_model(p0, p1);
-                        free(p0);
+                        // No destruction because primitive type.
+                        finalize_boolean(p0, p2, p3);
 
                     } else {
 
-                        compare_arrays(p2, (void*) &STRING_MODEL, (void*) &r);
+                        compare_arrays(p4, p5, (void*) &CHARACTER_ARRAY, (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
                         if (r == 1) {
 
-                            finalize_string_model(p0, p1);
-                            free(p0);
+                            // No destruction because primitive type.
+                            finalize_integer(p0, p2, p3);
 
                         } else {
 
-                            compare_arrays(p2, (void*) &VECTOR_MODEL, (void*) &r);
+                            compare_arrays(p4, p5, (void*) &CHARACTER_ARRAY, (void*) &VECTOR_ABSTRACTION, (void*) &VECTOR_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
                             if (r == 1) {
 
-                                finalize_vector_model(p0, p1);
-                                free(p0);
+                                finalize_vector(p0, p2, p3);
+                                destroy_vector(p0);
 
                             } else {
 
-                                compare_arrays(p2, (void*) &COMPLEX_MODEL, (void*) &r);
+                                compare_arrays(p4, p5, (void*) &CHARACTER_ARRAY, (void*) &FLOAT_ABSTRACTION, (void*) &FLOAT_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
                                 if (r == 1) {
 
-                                    finalize_complex_model(p0, p1);
-                                    free(p0);
+                                    // No destruction because primitive type.
+                                    finalize_float(p0, p2, p3);
 
                                 } else {
 
-                                    compare_arrays(p2, (void*) &FRACTION_MODEL, (void*) &r);
+                                    compare_arrays(p4, p5, (void*) &CHARACTER_ARRAY, (void*) &FRACTION_ABSTRACTION, (void*) &FRACTION_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
                                     if (r == 1) {
 
-                                        finalize_fraction_model(p0, p1);
-                                        free(p0);
+                                        finalize_fraction(p0, p2, p3);
+                                        destroy_fraction(p0);
 
                                     } else {
 
-                                        compare_arrays(p2, (void*) &INTEGER_MODEL, (void*) &r);
+                                        compare_arrays(p4, p5, (void*) &CHARACTER_ARRAY, (void*) &COMPLEX_ABSTRACTION, (void*) &COMPLEX_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
                                         if (r == 1) {
 
-                                            finalize_integer_model(p0, p1);
-                                            free(p0);
+                                            finalize_complex(p0, p2, p3);
+                                            destroy_complex(p0);
 
                                         } else {
 
-                                            compare_arrays(p2, (void*) &BOOLEAN_MODEL, (void*) &r);
+                                            compare_arrays(p4, p5, (void*) &CHARACTER_ARRAY, (void*) &TIME_ABSTRACTION, (void*) &TIME_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
                                             if (r == 1) {
 
-                                                finalize_boolean_model(p0, p1);
-                                                free(p0);
+                                                finalize_time(p0, p2, p3);
+                                                destroy_time(p0);
                                             }
                                         }
                                     }
@@ -159,10 +172,6 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3) {
                 }
             }
         }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not create model. The model is null.");
     }
 }
 

@@ -25,113 +25,150 @@
  *
  * A vector contains the three coordinates: x, y, z.
  *
- * @version $Revision: 1.9 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-04-02 16:13:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef VECTOR_HANDLER_SOURCE
 #define VECTOR_HANDLER_SOURCE
 
-#include <string.h>
 #include "../logger/log_handler.c"
 
 //
 // Constants.
 //
 
-/** The default vector value. */
-static const char* DEFAULT_VECTOR_VALUE = "0.0,0.0,0.0";
+/** The vector size. */
+static const int VECTOR_SIZE = 3;
 
-/** The x coordinate. */
-int x;
+/** The x index. */
+static const int X_INDEX = 0;
 
-/** The y coordinate. */
-int y;
+/** The y index. */
+static const int Y_INDEX = 1;
 
-/** The z coordinate. */
-int z;
+/** The z index. */
+static const int Z_INDEX = 2;
 
 //
-// Vector model.
+// Vector.
 //
 
 /**
- * Initializes the vector model.
+ * Creates the vector.
  *
- * @param p0 the vector model
- * @param p1 the model source
+ * @param p0 the transient model
  */
-void initialize_vector_model(void* p0, void* p1) {
+void create_vector(void* p0) {
 
-    struct vector* m = (struct vector*) p0;
+    log_message((void*) &INFO_LOG_LEVEL, "Create vector.");
 
-    if (m != (void*) 0) {
-
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize vector model.");
-
-        // Read input stream and transform to vector.
-//??        fscanf(p1, %d, &(m->x));
-//??        fscanf(p1, %d, &(m->y));
-//??        fscanf(p1, %d, &(m->z));
-
-/*??
-        int i1 = s.indexOf(",");
-
-        if (i1 != -1) {
-
-            char[] x = s.substring(0, i1);
-            char[] yz = s.substring(i1 + 1);
-            int i2 = yz.indexOf(",");
-
-            if (i2 != -1) {
-
-                char[] y = yz.substring(0, i2);
-                char[] z = yz.substring(i2 + 1);
-
-                p.x = java.lang.Integer.parseInt(x);
-                p.y = java.lang.Integer.parseInt(y);
-                p.z = java.lang.Integer.parseInt(z);
-
-            } else {
-            
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not create vector model. The vector does not contain a z coordinate.");
-            }
-            
-        } else {
-        
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not create vector model. The vector does not contain an y coordinate.");
-        }
-*/
-
-    } else {
-        
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize vector model. The vector model is null.");
-    }
+    // The vector.
+    create_array(p0, (void*) &VECTOR_SIZE);
 }
 
 /**
- * Finalizes the vector model.
+ * Destroys the vector.
  *
- * @param p0 the vector model
- * @param p1 the model source
+ * @param p0 the transient model
  */
-void finalize_vector_model(void* p0, void* p1) {
+void destroy_vector(void* p0) {
 
-    struct vector* m = (struct vector*) p0;
-    
-    if (m != (void*) 0) {
-        
-        log_message((void*) &INFO_LOG_LEVEL, "Finalize vector model.");
-        
-        // Write output stream and transform from vector.
-//??        fprintf(p1, %d, &(m->x));
-//??        fprintf(p1, %d, &(m->y));
-//??        fprintf(p1, %d, &(m->z));
+    log_message((void*) &INFO_LOG_LEVEL, "Destroy vector.");
+
+    // The vector.
+    destroy_array(p0, (void*) &VECTOR_SIZE);
+}
+
+/**
+ * Initializes the vector.
+ *
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
+ */
+void initialize_vector(void* p0, const void* p1, const void* p2) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Initialize vector.");
+
+    // Read input stream and transform to vector.
+//??    fscanf(p1, %d, &(m->x));
+//??    fscanf(p1, %d, &(m->y));
+//??    fscanf(p1, %d, &(m->z));
+
+    // The x.
+    int x = 0;
+    set_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
+
+    // The y.
+    int y = 0;
+    set_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
+
+    // The z.
+    int z = 0;
+    set_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
+
+/*??
+    int i1 = s.indexOf(",");
+
+    if (i1 != -1) {
+
+        char[] x = s.substring(0, i1);
+        char[] yz = s.substring(i1 + 1);
+        int i2 = yz.indexOf(",");
+
+        if (i2 != -1) {
+
+            char[] y = yz.substring(0, i2);
+            char[] z = yz.substring(i2 + 1);
+
+            p.x = java.lang.Integer.parseInt(x);
+            p.y = java.lang.Integer.parseInt(y);
+            p.z = java.lang.Integer.parseInt(z);
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not create vector. The vector does not contain a z coordinate.");
+        }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize vector model. The vector model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not create vector. The vector does not contain an y coordinate.");
     }
+*/
+}
+
+/**
+ * Finalizes the vector.
+ *
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
+ */
+void finalize_vector(const void* p0, void* p1, void* p2) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Finalize vector.");
+
+    // Write output stream and transform from vector.
+
+    // The z.
+    int z = 0;
+    get_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
+    remove_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &Z_INDEX);
+
+    // The y.
+    int y = 0;
+    get_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
+    remove_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX);
+
+    // The x.
+    int x = 0;
+    get_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
+    remove_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &X_INDEX);
+
+//??    fprintf(p1, %d, &(m->x));
+//??    fprintf(p1, %d, &(m->y));
+//??    fprintf(p1, %d, &(m->z));
 }
 
 /* VECTOR_HANDLER_SOURCE */

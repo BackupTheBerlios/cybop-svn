@@ -23,9 +23,9 @@
  *
  * This file handles a complex.
  *
- * A complex consists of two fraction numbers, a real and an imaginary value.
+ * A complex consists of two floats, a real and an imaginary.
  *
- * @version $Revision: 1.9 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-04-02 16:13:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,42 +33,73 @@
 #define COMPLEX_HANDLER_SOURCE
 
 #include "../logger/log_handler.c"
-#include "../statics/complex.c"
 
 //
 // Constants.
 //
 
-/** The default complex value. */
-static const char* DEFAULT_COMPLEX_VALUE = "0.0,0.0";
+/** The complex size. */
+static const int COMPLEX_SIZE = 2;
+
+/** The real index. */
+static const int REAL_INDEX = 0;
+
+/** The imaginary index. */
+static const int IMAGINARY_INDEX = 1;
 
 //
-// Complex model.
+// Complex.
 //
 
 /**
- * Initializes the complex model.
+ * Creates the complex.
+ *
+ * @param p0 the transient model
+ */
+void create_complex(void* p0) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Create complex.");
+
+    // The complex.
+    create_array(p0, (void*) &COMPLEX_SIZE);
+}
+
+/**
+ * Destroys the complex.
+ *
+ * @param p0 the transient model
+ */
+void destroy_complex(void* p0) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Destroy complex.");
+
+    // The complex.
+    destroy_array(p0, (void*) &COMPLEX_SIZE);
+}
+
+/**
+ * Initializes the complex.
  *
  * @param p0 the transient model
  * @param p1 the persistent model
  * @param p2 the persistent model size
  */
-void initialize_complex_model(void* p0, void* p1) {
+void initialize_complex(void* p0, const void* p1, const void* p2) {
 
-    struct complex* t = (struct complex*) p0;
+    log_message((void*) &INFO_LOG_LEVEL, "Initialize complex.");
 
-    if (t != (void*) 0) {
+    // Read input stream and transform to complex.
 
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize complex model.");
+//??    fscanf(p1, %d, (void*) &(t->real));
+//??    fscanf(p1, %d, (void*) &(t->imaginary));
 
-        // Read input stream and transform to complex.
-//??        fscanf(p1, %d, (void*) &(t->real));
-//??        fscanf(p1, %d, (void*) &(t->imaginary));
+    // The real.
+    int r = 0;
+    set_array_element(p0, (void*) &COMPLEX_SIZE, (void*) &INTEGER_ARRAY, (void*) &REAL_INDEX, (void*) &r);
 
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize complex model. The transient model is null.");
-    }
+    // The imaginary.
+    int i = 0;
+    set_array_element(p0, (void*) &COMPLEX_SIZE, (void*) &INTEGER_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
 }
 
 /**
@@ -78,22 +109,24 @@ void initialize_complex_model(void* p0, void* p1) {
  * @param p1 the persistent model
  * @param p2 the persistent model size
  */
-void finalize_complex_model(void* p0, void* p1) {
+void finalize_complex(const void* p0, void* p1, void* p2) {
 
-    struct complex* t = (struct complex*) p0;
+    log_message((void*) &INFO_LOG_LEVEL, "Finalize complex.");
 
-    if (t != (void*) 0) {
+    // Write output stream and transform from complex.
 
-        log_message((void*) &INFO_LOG_LEVEL, "Finalize complex model.");
+    // The imaginary.
+    int i = 0;
+    get_array_element(p0, (void*) &COMPLEX_SIZE, (void*) &INTEGER_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
+    remove_array_element(p0, (void*) &COMPLEX_SIZE, (void*) &INTEGER_ARRAY, (void*) &IMAGINARY_INDEX);
 
-        // Write output stream and transform from complex.
-//??        fprintf(p1, %d, (void*) &(t->real));
-//??        fprintf(p1, %d, (void*) &(t->imaginary));
+    // The real.
+    int r = 0;
+    get_array_element(p0, (void*) &COMPLEX_SIZE, (void*) &INTEGER_ARRAY, (void*) &REAL_INDEX, (void*) &r);
+    remove_array_element(p0, (void*) &COMPLEX_SIZE, (void*) &INTEGER_ARRAY, (void*) &REAL_INDEX);
 
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize complex model. The transient model is null.");
-    }
+//??    fprintf(p1, %d, (void*) &(t->real));
+//??    fprintf(p1, %d, (void*) &(t->imaginary));
 }
 
 /* COMPLEX_HANDLER_SOURCE */

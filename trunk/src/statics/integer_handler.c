@@ -23,7 +23,7 @@
  *
  * This file handles an integer.
  *
- * @version $Revision: 1.10 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-04-02 16:13:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,41 +33,34 @@
 #include "../logger/log_handler.c"
 
 //
-// Constants.
-//
-
-/** The default integer value. */
-static const int DEFAULT_INTEGER_VALUE = 0;
-
-//
-// Integer model.
+// Integer.
 //
 
 /**
- * Initializes the integer model.
+ * Initializes the integer.
  *
  * @param p0 the transient model
  * @param p1 the persistent model
  * @param p2 the persistent model size
  */
-void initialize_integer_model(void* p0, const void* p1, const void* p2) {
+void initialize_integer(void* p0, const void* p1, const void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Initialize integer model.");
+    log_message((void*) &INFO_LOG_LEVEL, "Initialize integer.");
 
     // Transform string to integer.
 //??    sscanf(p1, %d, (void*) &(m->value));
 }
 
 /**
- * Finalizes the integer model.
+ * Finalizes the integer.
  *
  * @param p0 the transient model
  * @param p1 the persistent model
  * @param p2 the persistent model size
  */
-void finalize_integer_model(const void* p0, void* p1, void* p2) {
+void finalize_integer(const void* p0, void* p1, void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Finalize integer model.");
+    log_message((void*) &INFO_LOG_LEVEL, "Finalize integer.");
 
     // Transform integer to string.
 //??    sprintf(p1, %d, (void*) &(m->value));

@@ -26,101 +26,160 @@
  * A time is used to measure the duration of dynamics or in other words,
  * the difference between two static states/ instants.
  *
- * @version $Revision: 1.9 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * Time format:
+ * dd.mm.yyyy hh:mm:ss";
+ * Examples:
+ * 01.01.2000 00:00:00";
+ * 31.12.1999 23:59:59";
+ *
+ * @version $Revision: 1.10 $ $Date: 2004-04-02 16:13:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef TIME_HANDLER_SOURCE
 #define TIME_HANDLER_SOURCE
 
-#include <string.h>
 #include "../logger/log_handler.c"
 
 //
 // Constants.
 //
 
-/** The default time value. */
-static const char* DEFAULT_TIME_VALUE = "01.01.0000 00:00:00";
+/** The time size. */
+static const int TIME_SIZE = 6;
 
-/** The years. */
-int years;
+/** The year index. */
+static const int YEAR_INDEX = 0;
 
-/** The months. */
-int months;
+/** The month index. */
+static const int MONTH_INDEX = 1;
 
-/** The weeks. */
-int weeks;
+/** The day index. */
+static const int DAY_INDEX = 2;
 
-/** The days. */
-int days;
+/** The hour index. */
+static const int HOUR_INDEX = 3;
 
-/** The hours. */
-int hours;
+/** The minute index. */
+static const int MINUTE_INDEX = 4;
 
-/** The minutes. */
-int minutes;
-
-/** The seconds. */
-int seconds;
-
-/** The milli seconds. */
-int milli_seconds;
-
-/** The micro seconds. */
-int micro_seconds;
-
-/** The nano seconds. */
-int nano_seconds;
+/** The second index. */
+static const int SECOND_INDEX = 5;
 
 //
-// Time model.
+// Time.
 //
 
 /**
- * Initializes the time model.
+ * Creates the time.
  *
- * @param p0 the time model
- * @param p1 the model source
+ * @param p0 the transient model
  */
-void initialize_time_model(void* p0, void* p1) {
+void create_time(void* p0) {
 
-    struct time* m = (struct time*) p0;
+    log_message((void*) &INFO_LOG_LEVEL, "Create time.");
 
-    if (m != (void*) 0) {
-
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize time model.");
-
-        // Read input stream and transform to time.
-//??        fscanf(p1, %d, &(m->value));
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize time model. The time model is null.");
-    }
+    // The time.
+    create_array(p0, (void*) &TIME_SIZE);
 }
 
 /**
- * Finalizes the time model.
+ * Destroys the time.
  *
- * @param p0 the time model
- * @param p1 the model source
+ * @param p0 the transient model
  */
-void finalize_time_model(void* p0, void* p1) {
+void destroy_time(void* p0) {
 
-    struct time* m = (struct time*) p0;
-    
-    if (m != (void*) 0) {
-        
-        log_message((void*) &INFO_LOG_LEVEL, "Finalize time model.");
-        
-        // Write output stream and transform from time.
-//??        fprintf(p1, %d, &(m->value));
+    log_message((void*) &INFO_LOG_LEVEL, "Destroy time.");
 
-    } else {
+    // The time.
+    destroy_array(p0, (void*) &TIME_SIZE);
+}
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize time model. The time model is null.");
-    }
+/**
+ * Initializes the time.
+ *
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
+ */
+void initialize_time(void* p0, const void* p1, const void* p2) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Initialize time.");
+
+    // Read input stream and transform to time.
+
+//??    fscanf(p1, %d, &(m->value));
+
+    // The year.
+    int y = 0;
+    set_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &YEAR_INDEX, (void*) &y);
+
+    // The month.
+    int m = 0;
+    set_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &MONTH_INDEX, (void*) &m);
+
+    // The day.
+    int d = 0;
+    set_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &DAY_INDEX, (void*) &d);
+
+    // The hour.
+    int h = 0;
+    set_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &HOUR_INDEX, (void*) &h);
+
+    // The minute.
+    int min = 0;
+    set_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &MINUTE_INDEX, (void*) &min);
+
+    // The second.
+    int s = 0;
+    set_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &SECOND_INDEX, (void*) &s);
+}
+
+/**
+ * Finalizes the time.
+ *
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
+ */
+void finalize_time(const void* p0, void* p1, void* p2) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Finalize time.");
+
+    // Write output stream and transform from time.
+
+    // The second.
+    int s = 0;
+    get_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &SECOND_INDEX, (void*) &s);
+    remove_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &SECOND_INDEX);
+
+    // The minute.
+    int min = 0;
+    get_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &MINUTE_INDEX, (void*) &min);
+    remove_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &MINUTE_INDEX);
+
+    // The hour.
+    int h = 0;
+    get_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &HOUR_INDEX, (void*) &h);
+    remove_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &HOUR_INDEX);
+
+    // The day.
+    int d = 0;
+    get_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &DAY_INDEX, (void*) &d);
+    remove_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &DAY_INDEX);
+
+    // The month.
+    int m = 0;
+    get_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &MONTH_INDEX, (void*) &m);
+    remove_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &MONTH_INDEX);
+
+    // The year.
+    int y = 0;
+    get_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &YEAR_INDEX, (void*) &y);
+    remove_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &YEAR_INDEX);
+
+//??    fprintf(p1, %d, &(m->value));
 }
 
 /* TIME_HANDLER_SOURCE */

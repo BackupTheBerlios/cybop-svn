@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles an operation (also known as system).
+ * This file handles an operation, also known as system.
  *
  * An operation transports an input state through logics to an output state.
  * The logics is kept as function pointer.
@@ -33,7 +33,7 @@
  * Operation, input and output are stored in the following form:
  * operation, operand1, operand2, operand3, ...
  *
- * @version $Revision: 1.14 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-04-02 16:13:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,91 +41,78 @@
 #define OPERATION_HANDLER_SOURCE
 
 #include "../logger/log_handler.c"
-#include "../model/map_handler.c"
-#include "../model/model_handler.c"
-#include "../statics/operation.c"
 
 //
-// Operation container.
+// Operation.
 //
 
 /**
- * Creates the operation container.
+ * Creates the operation.
  *
- * @param p0 the operation memory model
+ * @param p0 the transient model
+ * @param p1 the transient model size
  */
-void create_operation_container(void* p0) {
+void create_operation(void* p0, const void* p1) {
 
-    struct operation* m = (struct operation*) p0;
+    log_message((void*) &INFO_LOG_LEVEL, "Create operation.");
 
-    if (m != (void*) 0) {
-
-        log_message((void*) &INFO_LOG_LEVEL, "Create operation container.");
-
-/*??
-        m->value = (void*) malloc(sizeof(struct array));
-        initialize_array(m->value, (void*) &CHARACTER_ARRAY);
-*/
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not create operation container. The operation memory model is null.");
-    }
+    // The operation.
+    create_array(p0, p1);
 }
 
 /**
- * Destroys the operation container.
+ * Destroys the operation.
  *
- * @param p0 the operation memory model
+ * @param p0 the transient model
+ * @param p1 the transient model size
  */
-void destroy_operation_container(void* p0) {
+void destroy_operation(void* p0, const void* p1) {
 
-    struct operation* m = (struct operation*) p0;
+    log_message((void*) &INFO_LOG_LEVEL, "Destroy operation.");
 
-    if (m != (void*) 0) {
-
-        log_message((void*) &INFO_LOG_LEVEL, "Destroy operation container.");
-
-/*??
-        finalize_array(m->value);
-        free(m->value);
-*/
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not destroy operation container. The operation memory model is null.");
-    }
+    // The operation.
+    destroy_array(p0, p1);
 }
 
-//
-// Operation model.
-//
-
 /**
- * Initializes the operation model.
+ * Initializes the operation.
  *
- * @param p0 the operation model
- * @param p1 the model source
+ * @param p0 the transient model
+ * @param p1 the transient model size
+ * @param p2 the persistent model
+ * @param p3 the persistent model size
  */
-void initialize_operation_model(void* p0, void* p1) {
+void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
 
-    struct operation* m = (struct operation*) p0;
+    int* ps = (int*) p3;
 
-    if (m != (void*) 0) {
+    if (ps != (void*) 0) {
 
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize operation model.");
+        log_message((void*) &INFO_LOG_LEVEL, "Initialize operation.");
 
-/*??
-        // Read input stream and transform to operation with operands.
-        int length = 0;
-        get_string_length(p1, (void*) &length);
-        int start = 0;
-        int end = 0;
+        // Find pointers to the single string parts which are separated by a comma.
+        // Identify sizes of the single string parts.
+        // Add these pointers and the corresponding sizes as separate string elements
+        // to the operation array. Transform to operation with operands.
+
+        int i = -1;
+        get_array_element_index(p2, p3, (void*) &CHARACTER_ARRAY, (void*) &COMMA_CHARACTER, i);
+
+        if (i != -1) {
+
+            //?? Store pointer and size in arrays!
+
+            // Add element.
+            get_array_element(p0, p1, (void*) &POINTER_ARRAY, index-0, (void*) &pointers);
+            get_array_element(p0, p1, (void*) &POINTER_ARRAY, index-1, (void*) &sizes);
+
+            set_array_element(p0-pointers, p0-size, (void*) &POINTER_ARRAY, p1, (void*) &element-part-name-begin-pointer);
+            set_array_element(p0-sizes, p0-size, (void*) &INTEGER_ARRAY, p1, (void*) &element-part-name-size);
+
+
+--
         get_character_index(p1, (void*) &COMMA_CHARACTER, (void*) &length, (void*) &end);
-        void* s = malloc(0);
-
-        copy_sub_string(p1, (void*) &start, (void*) &end, s);
-        add_array_element(m->value, s);
+        add_array_element(p0, s);
 
         char* r = (char*) p1 + end;
 
@@ -135,59 +122,66 @@ void initialize_operation_model(void* p0, void* p1) {
             // Set index of remaining string to one after the comma character.
             initialize_operation_model(p0, r + 1);
         }
-*/
 
-    } else {
+                } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize operation model. The operation model is null.");
-    }
-}
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize operation. The transient model is null.");
+                }
 
-/**
- * Finalizes the operation model.
- *
- * @param p0 the operation model
- * @param p1 the model source
- */
-void finalize_operation_model(void* p0, void* p1) {
+            } else {
 
-    struct operation* m = (struct operation*) p0;
-
-    if (m != (void*) 0) {
-
-        log_message((void*) &INFO_LOG_LEVEL, "Finalize operation model.");
-
-/*??
-        if (p1 != (void*) 0) {
-
-            // Write output stream by transforming from operation with operands.
-            int c = 0;
-            get_array_count(m->value, (void*) &c);
-
-            if (c > 0) {
-
-                int i = c - 1;
-                void* s = get_array_element(m->value, (void*) &i);
-                remove_array_element(m->value, (void*) &i);
-
-                strcat((char*) p1, &COMMA_CHARACTER);
-                strcat((char*) p1, (char*) s);
-
-                free(s);
-
-                finalize_operation_model(p0, p1);
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize operation. The transient model size is null.");
             }
 
         } else {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Did not finalize operation model. The cybol model is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize operation. The persistent model is null.");
         }
-*/
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize operation model. The operation model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize operation. The persistent model size is null.");
     }
+}
+
+/**
+ * Finalizes the operation.
+ *
+ * @param p0 the transient model
+ * @param p1 the transient model size
+ * @param p2 the persistent model
+ * @param p3 the persistent model size
+ */
+void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Finalize operation.");
+
+/*??
+    if (p1 != (void*) 0) {
+
+        // Write output stream by transforming from operation with operands.
+        int c = 0;
+        get_array_count(m->value, (void*) &c);
+
+        if (c > 0) {
+
+            int i = c - 1;
+            void* s = get_array_element(m->value, (void*) &i);
+            remove_array_element(m->value, (void*) &i);
+
+            strcat((char*) p1, &COMMA_CHARACTER);
+            strcat((char*) p1, (char*) s);
+
+            free(s);
+
+            finalize_operation_model(p0, p1);
+        }
+
+    } else {
+
+        log_message((void*) &INFO_LOG_LEVEL, "Did not finalize operation model. The cybol model is null.");
+    }
+*/
 }
 
 /* OPERATION_HANDLER_SOURCE */

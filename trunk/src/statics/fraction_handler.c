@@ -23,12 +23,12 @@
  *
  * This file handles a fraction.
  *
- * A fraction consists of two integer numbers, a numerator and a denominator.
+ * A fraction consists of two integers, a numerator and a denominator.
  *
  * For higher performance, it is mostly better to use floating point numbers
  * (float) which can be calculated by the Arithmetic Logic Unit (ALU).
  *
- * @version $Revision: 1.9 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-04-02 16:13:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,7 +36,6 @@
 #define FRACTION_HANDLER_SOURCE
 
 #include "../logger/log_handler.c"
-#include "../statics/fraction.c"
 
 //
 // Constants.
@@ -58,7 +57,7 @@ static const int DENOMINATOR_INDEX = 1;
 /**
  * Creates the fraction.
  *
- * @param p0 the fraction
+ * @param p0 the transient model
  */
 void create_fraction(void* p0) {
 
@@ -66,6 +65,35 @@ void create_fraction(void* p0) {
 
     // The fraction.
     create_array(p0, (void*) &FRACTION_SIZE);
+}
+
+/**
+ * Destroys the fraction.
+ *
+ * @param p0 the transient model
+ */
+void destroy_fraction(void* p0) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Destroy fraction.");
+
+    // The fraction.
+    destroy_array(p0, (void*) &FRACTION_SIZE);
+}
+
+/**
+ * Initializes the fraction.
+ *
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
+ */
+void initialize_fraction(void* p0, const void* p1, const void* p2) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Initialize fraction.");
+
+    // Read input stream and transform to fraction.
+
+//??    sscanf(p1, %l, (void*) &(m->value));
 
     // The numerator.
     int n = 0;
@@ -77,67 +105,29 @@ void create_fraction(void* p0) {
 }
 
 /**
- * Destroys the fraction.
+ * Finalizes the fraction.
  *
- * @param p0 the fraction
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
  */
-void destroy_fraction(void* p0) {
+void finalize_fraction_model(const void* p0, void* p1, void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Destroy fraction.");
+    log_message((void*) &INFO_LOG_LEVEL, "Finalize fraction.");
+
+    // Write output stream and transform from fraction.
 
     // The denominator.
+    int d = 0;
+    get_array_element(p0, (void*) &FRACTION_SIZE, (void*) &INTEGER_ARRAY, (void*) &DENOMINATOR_INDEX, (void*) &d);
     remove_array_element(p0, (void*) &FRACTION_SIZE, (void*) &INTEGER_ARRAY, (void*) &DENOMINATOR_INDEX);
 
     // The numerator.
+    int n = 0;
+    get_array_element(p0, (void*) &FRACTION_SIZE, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX, (void*) &n);
     remove_array_element(p0, (void*) &FRACTION_SIZE, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX);
 
-    // The fraction.
-    destroy_array(p0, (void*) &FRACTION_SIZE);
-}
-
-/**
- * Initializes the fraction.
- *
- * @param p0 the fraction model
- * @param p1 the model source
- */
-void initialize_fraction_model(void* p0, void* p1) {
-
-    struct fraction* m = (struct fraction*) p0;
-
-    if (m != (void*) 0) {
-
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize fraction model.");
-
-        // Read input stream and transform to fraction.
-//??        sscanf(p1, %l, (void*) &(m->value));
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize fraction model. The fraction model is null.");
-    }
-}
-
-/**
- * Finalizes the fraction model.
- *
- * @param p0 the fraction model
- */
-void finalize_fraction_model(void* p0, void* p1) {
-
-    struct fraction* m = (struct fraction*) p0;
-
-    if (m != (void*) 0) {
-
-        log_message((void*) &INFO_LOG_LEVEL, "Finalize fraction model.");
-
-        // Write output stream and transform from fraction.
-//??        sprintf(p1, %l, (void*) &(m->value));
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize fraction model. The fraction model is null.");
-    }
+//??    sprintf(p1, %l, (void*) &(m->value));
 }
 
 /* FRACTION_HANDLER_SOURCE */

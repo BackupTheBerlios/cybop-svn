@@ -25,7 +25,7 @@
  *
  * A string is a chain of characters.
  *
- * @version $Revision: 1.9 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-04-02 16:13:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,154 +35,111 @@
 #include "../logger/log_handler.c"
 
 //
-// Constants.
-//
-
-/** The default string value. */
-static const char* DEFAULT_STRING_VALUE = "";
-
-//
-// String model.
+// String.
 //
 
 /**
- * Creates the string model.
+ * Initializes the string.
  *
- * @param p0 the string model
+ * @param p0 the transient model
+ * @param p1 the transient model size
+ * @param p2 the persistent model
+ * @param p3 the persistent model size
  */
-void create_string_model(void* p0) {
+void initialize_string(void* p0, void* p1, const void* p2, const void* p3) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Create string model.");
+    int* ps = (int*) p3;
 
-    // The string model.
-    create_array(p0, (void*) &MODEL_SIZE);
+    if (ps != (void*) 0) {
 
-    // The value.
-    void* pa = (void*) 0;
-    create_map((void*) &pa);
-    set_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
-}
+        char* p = (char*) p2;
 
-/**
- * Destroys the string model.
- *
- * @param p0 the string model
- */
-void destroy_string_model(void* p0) {
+        if (p != (void*) 0) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Destroy string model.");
+            int* ts = (int*) p1;
 
-    // The part abstractions.
-    void* pa = (void*) 0;
-    get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
-    remove_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX);
-    destroy_map((void*) &pa);
+            if (ts != (void*) 0) {
 
-    // The model.
-    destroy_array(p0, (void*) &MODEL_SIZE);
-}
+                char* t = (char*) p0;
 
-/**
- * Initializes the string model.
- *
- * @param p0 the string model
- * @param p1 the model source
- */
-void initialize_string_model(void* p0, void* p1) {
+                if (t != (void*) 0) {
 
-    struct string* m = (struct string*) p0;
+                    log_message((void*) &INFO_LOG_LEVEL, "Initialize string.");
 
-    if (m != (void*) 0) {
+                    *t = *p;
+                    *ts = *ps;
 
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize string model.");
+                } else {
 
-        // Read input stream and transform to string.
-//??        sscanf(p1, %10c, (void*) m->value);
-//??        strcat(m->value, "\n");
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize string. The transient model is null.");
+                }
 
-    } else {
+            } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize string model. The string model is null.");
-    }
-}
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize string. The transient model size is null.");
+            }
 
-/**
- * Finalizes the string model.
- *
- * @param p0 the string model
- * @param p1 the model source
- */
-void finalize_string_model(void* p0, void* p1) {
+        } else {
 
-    struct string* m = (struct string*) p0;
-    
-    if (m != (void*) 0) {
-        
-        log_message((void*) &INFO_LOG_LEVEL, "Finalize string model.");
-        
-        // Write output stream and transform from string.
-//??        sprintf(p1, %c, (void*) m->value);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize string model. The string model is null.");
-    }
-}
-
-/**
- * Returns the string element index.
- *
- * @param p0 the string
- * @param p1 the element
- * @param p2 the index
- */
-/*??
-void get_string_element_index(void* p0, void* p1, void* p2) {
-
-    char* s = (char*) p0;
-    int l = strlen(s);
-    int i = 0;
-    
-    while (i < l) {
-
-        if (strcmp() == 0) {
-            
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize string. The persistent model is null.");
         }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize string. The persistent model size is null.");
     }
 }
 
 /**
- * Returns the string suffix.
+ * Finalizes the string.
  *
- * @param p0 the string
- * @param p1 the start index
- * @param p2 the remaining suffix
+ * @param p0 the transient model
+ * @param p1 the transient model size
+ * @param p2 the persistent model
+ * @param p3 the persistent model size
  */
-/*??
-void get_string_suffix(void* p0, void* p1, void* p2) {
-    
-}
+void finalize_string(const void* p0, const void* p1, void* p2, void* p3) {
 
-/**
- * Returns the string value.
- *
- * @param p0 the string
- * @param p1 the numerical value
- */
-/*??
-void get_string_value(void* p0, void* p1) {
-    
-}
+    int* ps = (int*) p3;
 
-/**
- * Returns the value as string.
- *
- * @param p0 the numerical value
- * @param p1 the string
- */
-/*??
-void get_value_string(void* p0, void* p1) {
-    
+    if (ps != (void*) 0) {
+
+        char* p = (char*) p2;
+
+        if (p != (void*) 0) {
+
+            int* ts = (int*) p1;
+
+            if (ts != (void*) 0) {
+
+                char* t = (char*) p0;
+
+                if (t != (void*) 0) {
+
+                    log_message((void*) &INFO_LOG_LEVEL, "Finalize string.");
+
+                    *p = *t;
+                    *ps = *ts;
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize string. The transient model is null.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize string. The transient model size is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize string. The persistent model is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize string. The persistent model size is null.");
+    }
 }
 
 /* STRING_HANDLER_SOURCE */
