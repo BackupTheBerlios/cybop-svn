@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-02-25 01:35:09 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-03-02 07:22:38 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -75,9 +75,21 @@ void parse_boolean(void* p0, void* p1, void* p2, const void* p3, const void* p4)
                 if (r == 1) {
 
                     // Set boolean value to 'true'.
-                    set_array_elements(*d, (void*) INTEGER_VALUE_INDEX, (void*) &ONE_NUMBER, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                    set_array_elements(*d, (void*) INTEGER_VALUE_INDEX, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
                 }
             }
+
+            if (*sc == *FALSE_BOOLEAN_COUNT) {
+
+                compare_array_elements(p3, (void*) FALSE_BOOLEAN, (void*) FALSE_BOOLEAN_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r == 1) {
+
+                    // Set boolean value to 'true'.
+                    set_array_elements(*d, (void*) INTEGER_VALUE_INDEX, (void*) ZERO_NUMBER, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                }
+            }
+
 
         } else {
 
