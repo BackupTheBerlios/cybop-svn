@@ -1,0 +1,6 @@
+cyboi (0.1.0.0) unstable; urgency=low
+
+  * Create first example applications "exit" and "helloworld"
+  * Prepare "resadmin" application with web frontend
+
+-- Christian Heller <christian.heller@tuxtax.de> Mon, 14 Feb 2005 02:00:00 +0100
