@@ -38,6 +38,8 @@
 #include "../model/map.c"
 #include "../model/map_handler.c"
 #include "../model/statics_model_handler.c"
+#include "../signal/languages.c"
+#include "../signal/priorities.c"
 #include "../signal/signal_memory.c"
 #include "../statics/vector.c"
 #include "../x_windows/x_windows_handler.c"
@@ -52,50 +54,9 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.17 $ $Date: 2004-02-28 19:43:30 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-02-29 15:24:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-
-//
-// Priorities.
-//
-
-/** The normal priority. */
-static const int NORMAL_PRIORITY = 0;
-
-//
-// Languages.
-//
-
-/** The textual user interface (tui) language. */
-static const char* TUI_LANGUAGE = "tui";
-
-/** The mouse language. */
-static const char* MOUSE_LANGUAGE = "mouse";
-
-/** The x windows language. */
-static const char* X_WINDOWS_LANGUAGE = "x_windows";
-
-/** The socket language. */
-static const char* SOCKET_LANGUAGE = "socket";
-
-/** The structured query language (sql). */
-static const char* SQ_LANGUAGE = "sq";
-
-/** The java messaging service (jms) language. */
-static const char* JMS_LANGUAGE = "jms";
-
-/** The remote method invocation (rmi) language. */
-static const char* RMI_LANGUAGE = "rmi";
-
-/** The common object request broker architecture (corba) language. */
-static const char* CORBA_LANGUAGE = "corba";
-
-/** The extensible markup language (xml). */
-static const char* XML_LANGUAGE = "xml";
-
-/** The simple object access protocol (soap) language. */
-static const char* SOAP_LANGUAGE = "soap";
 
 //
 // Signal.

@@ -39,7 +39,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.8 $ $Date: 2004-02-29 12:51:05 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-02-29 15:24:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,74 +64,74 @@ static const char* COMMA_SEPARATOR = ",";
 //
 
 /**
- * Returns the part name.
+ * Returns the first element in the given string.
  *
- * It is the most left name before the first dot/point "." in the given string
- * or, if there is no dot, then it is the given name itself.
+ * It is the most left element before the first separation.
+ * If there is no separation, then it is the given name itself.
  *
- * @param p0 the hierarchical model name
+ * @param p0 the string
  * @param p1 the separation
- * @return the part name
+ * @return the element
  */
-void* get_part_name(void* p0, void* p1) {
+void* get_string_element(void* p0, void* p1) {
 
-    void* p = (void*) 0;
-    char* n = (char*) p0;
+    void* e = (void*) 0;
+    char* s = (char*) p0;
 
-    if (n != (void*) 0) {
+    if (s != (void*) 0) {
 
 /*??
-        int i = n->indexOf(p1);
+        int i = s->indexOf(p1);
 
         if (i != -1) {
 
-            p = n->substring(0, i);
+            e = s->substring(0, i);
 
         } else {
 
-            p = n;
+            e = s;
         }
 */
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get part name. The hierarchical model name is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get string element. The string is null.");
     }
 
-    return p;
+    return e;
 }
 
 /**
- * Returns the remaining name.
+ * Returns the remaining elements in the given string.
  *
- * It is the whole string after the first dot/point ".".
+ * It is the whole string after the first separation.
  *
- * @param p0 the hierarchical model name
+ * @param p0 the string
  * @param p1 the separation
- * @return the remaining name
+ * @return the remaining elements
  */
-void* get_remaining_name(void* p0, void* p1) {
+void* get_remaining_elements(void* p0, void* p1) {
 
-    void* r = (void*) 0;
-    char* n = (char*) p0;
+    void* e = (void*) 0;
+    char* s = (char*) p0;
 
-    if (n != (void*) 0) {
+    if (s != (void*) 0) {
 
 /*??
-        int i = n->indexOf(p1);
+        int i = s->indexOf(p1);
 
         if (i != -1) {
 
-            r = n->substring(i + 1);
+            e = s->substring(i + 1);
         }
 */
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical model name is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get remaining string elements. The string is null.");
     }
 
-    return r;
+    return e;
 }
 
 //

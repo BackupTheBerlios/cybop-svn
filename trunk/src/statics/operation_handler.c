@@ -1,7 +1,7 @@
 /*
  * $RCSfile: operation_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -34,73 +34,67 @@
 /**
  * This is the operation handler.
  *
- * @version $Revision: 1.4 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-02-29 15:24:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 //
-// Operation input and output.
+// Operation model.
 //
 
 /**
- * Initializes the operation input and output.
+ * Initializes the operation model.
  *
- * @param p0 the dynamics operation model
- * @param p1 the input output names
- * @param p2 the input output values
+ * @param p0 the operation model
+ * @param p1 the model source
  */
-void initialize_operation_input_and_output(void* p0, void* p1, void* p2) {
+void initialize_operation_model(void* p0, void* p1) {
 
     struct operation* m = (struct operation*) p0;
-    
+
     if (m != (void*) 0) {
-        
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize operation input and output.");
-        log_message((void*) &INFO_LOG_LEVEL, p1);
 
-        void* io_name = get_part_name(p1, (void*) COMMA_SEPARATOR);
-        void* rem_name = get_remaining_name(p1, (void*) COMMA_SEPARATOR);
-        void* io_value = get_part_name(p2, (void*) COMMA_SEPARATOR);
-        void* rem_value = get_remaining_name(p2, (void*) COMMA_SEPARATOR);
+        log_message((void*) &INFO_LOG_LEVEL, "Initialize operation model.");
 
-        set_map_element_with_name(m->inputs_outputs, io_name, io_value);
+        // Read input stream and transform to inputs and outputs.
+        void* io = get_string_element(p1, (void*) COMMA_SEPARATOR);
+        void* r = get_remaining_elements(p1, (void*) COMMA_SEPARATOR);
 
-        if (rem_name != (void*) 0) {
+        add_array_element(m->inputs_outputs, io);
 
-            initialize_operation_input_and_output(p0, rem_name, rem_value);
+        if (r != (void*) 0) {
+
+            initialize_operation_model(p0, r);
         }
 
     } else {
-        
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize operation input and output. The operation is null.");
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize operation model. The operation model is null.");
     }
 }
 
 /**
- * Finalizes the operation input and output.
+ * Finalizes the operation model.
  *
- * @param p0 the dynamics operation model
- * @param p1 the input output names
- * @param p2 the input output values
+ * @param p0 the operation model
+ * @param p1 the model source
  */
-void finalize_operation_input_and_output(void* p0, void* p1, void* p2) {
+void finalize_operation_model(void* p0, void* p1) {
 
     struct operation* m = (struct operation*) p0;
-    
+
     if (m != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Finalize operation input and output.");
-        log_message((void*) &INFO_LOG_LEVEL, p1);
 
-        // Write output stream and transform from fraction.
+        // Write output stream and transform from inputs and outputs.
 //??        sprintf(p1, %l, (void*) &(m->value));
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize operation input and output. The operation is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize operation model. The operation model is null.");
     }
 }
 
 /* OPERATION_HANDLER_SOURCE */
 #endif
-
