@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+
+<model>
+    <part
+        name="add_row_number"
+        location="inline"
+        position="1"
+        abstraction="operation"
+        model="add,
+               example1.domain.row_number,
+               1"
+    />
+
+    <part
+        name="set_row_number"
+        location="inline"
+        position="2"
+        abstraction="operation"
+        model="set
+               example1.domain.current_number,
+               example1.web.list_number[]"
+    />
+
+    <part
+        name="equal_max_number"
+        location="inline"
+        position="3"
+        abstraction="operation"
+        model="equal,
+               example1.domain.current_number,
+               example1.domain.max_number,
+               set_
+               "
+    />

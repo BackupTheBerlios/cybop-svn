@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+
+<model>
+
+    <part
+        name="max_number"
+        location="inline"
+        abstraction="integer"
+        model="100"
+    />
+    
+    <part
+        name="current_number"
+        location="inline"
+        abstraction="integer"
+        model="0"
+    />
+
+</model>
+
+

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+<model>
+
+    <part
+        name="start_application"
+        location="inline"
+        position="1"
+        abstraction="operation"
+        model="send,
+               example1.logic.start_appllication,
+               example1.domain.loop_flag,
+               TRUE"
+    />
+    
+
+    <part
+        name="create_row"
+        location="inline"
+        activation="example1.domain.loop-flag"
+        abstraction="file"
+        model="createrow.cybol"
+    />
+        
+    <part
+        name="set_loop_flag_active"
+        location="inline"
+        abstraction="inline"
+        model="set,
+               example.domain.loop-flag,
+               ACTIVE"
+    />
+        
+        
+        <part
+            name="add_row_number"
+            location="inline"
+            abstraction="operation"
+            model="add,
+                   example1.domain.row_number,
+                   1"
+        />
+
+        <part
+            name="add_row_number"
+            location="inline"
+            abstraction="operation"
+            model="add,
+                   example1.domain.row_number,
+                   1"
+        />
+        
+        equals,
+               example1.domain.current_number,
+               example1.domain.max_number,
+               example1.domain.loop_break_flag"
+    />
+
+    <part
+        name="less_max_number"
+        location="inline"
+        abstraction="operation"
+        model="equals,
+               example1.domain.current_number,
+               example1.domain.max_number,
+               example1.domain.loop_break_flag"
+    />
+    
+    <part
+        name="set_number"
+        location="inline"
+        abstraction="operation"
+        model="set
+               example1.domain.current_number,
+               example1.web.rownumber[]
+    
+    
+</model>
