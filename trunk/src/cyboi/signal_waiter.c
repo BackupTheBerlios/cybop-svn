@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -47,7 +47,7 @@
  */
 void wait(void* p0) {
 
-    log_message_debug("Run signal waiting loop.");
+    log_message_debug("Wait for signals.");
 
     // Activate input output mechanisms for signal reception.
     activate_input_output(p0);
@@ -62,13 +62,13 @@ void wait(void* p0) {
     void* ss = NULL_POINTER;
 
     // Get knowledge memory.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) &ONE_NUMBER);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) &ONE_NUMBER);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_INTERNAL, (void*) &k);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks);
     // Get signal memory.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) &ONE_NUMBER);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) &ONE_NUMBER);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &s);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss);
 
     // The shutdown flag.
     int* f = INTEGER_NULL_POINTER;

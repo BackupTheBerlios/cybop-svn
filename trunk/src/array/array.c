@@ -50,7 +50,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.18 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-01-10 23:54:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -189,13 +189,12 @@ void remove_array_elements(void* p0, const void* p1, const void* p2, const void*
 /**
  * Gets the array elements.
  *
- * @param p0 the source array
+ * @param p0 the array
  * @param p1 the type
- * @param p2 the source array index
- * @param p3 the destination array
- * @param p4 the count
+ * @param p2 the index
+ * @param p3 the element
  */
-void get_array_elements(const void* p0, const void* p1, const void* p2, void* p3, const void* p4) {
+void get_array_elements(const void* p0, const void* p1, const void* p2, void* p3) {
 
     if (p1 != NULL_POINTER) {
 
@@ -203,19 +202,19 @@ void get_array_elements(const void* p0, const void* p1, const void* p2, void* p3
 
         if (**t == *POINTER_ARRAY) {
 
-            get_pointer_array_elements(p0, p2, p3, p4);
+            get_pointer_array_elements(p0, p2, p3);
 
         } else if (**t == *INTEGER_ARRAY) {
 
-            get_integer_array_elements(p0, p2, p3, p4);
+            get_integer_array_elements(p0, p2, p3);
 
         } else if (**t == *DOUBLE_ARRAY) {
 
-            get_double_array_elements(p0, p2, p3, p4);
+            get_double_array_elements(p0, p2, p3);
 
         } else if (**t == *CHARACTER_ARRAY) {
 
-            get_character_array_elements(p0, p2, p3, p4);
+            get_character_array_elements(p0, p2, p3);
         }
 
     } else {

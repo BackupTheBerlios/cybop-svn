@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.18 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-01-10 23:54:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -423,78 +423,40 @@ void remove_character_array_elements(void* p0, const void* p1, const void* p2, c
 /**
  * Gets the character array elements.
  *
- * @param p0 the source array
- * @param p1 the source array index
- * @param p2 the destination array
- * @param p3 the count
+ * @param p0 the array
+ * @param p1 the index
+ * @param p2 the elements
  */
-void get_character_array_elements(const void* p0, const void* p1, void* p2, const void* p3) {
+void get_character_array_elements(const void* p0, const void* p1, void* p2) {
 
-    if (p3 != NULL_POINTER) {
+    if (p2 != NULL_POINTER) {
 
-        int** c = (int**) p3;
+        void** e = (void**) p2;
 
-        if (p2 != NULL_POINTER) {
+        if (p1 != NULL_POINTER) {
 
-            void** da = (void**) p2;
+            int** i = (int**) p1;
 
-            if (p1 != NULL_POINTER) {
+            if (p0 != NULL_POINTER) {
 
-                int** i = (int**) p1;
+                void** a = (void**) p0;
 
-                if (p0 != NULL_POINTER) {
-
-                    void** sa = (void**) p0;
-
-                    // The loop variable.
-                    int j = 0;
-                    // The source base to start copying from.
-                    void* sb = (void*) (*sa + **i * *CHARACTER_PRIMITIVE_SIZE);
-                    // The source element.
-                    char* se = CHARACTER_NULL_POINTER;
-                    // The destination element.
-                    char* de = CHARACTER_NULL_POINTER;
-                    // The size.
-                    int s = 0;
-
-                    while (1) {
-
-                        if (j >= **c) {
-
-                            break;
-                        }
-
-                        // Determine size.
-                        s = j * *CHARACTER_PRIMITIVE_SIZE;
-
-                        // Determine source and destination element.
-                        se = (char*) (sb + s);
-                        de = (char*) (*da + s);
-
-                        // Set destination element.
-                        *de = *se;
-
-                        j++;
-                    }
-
-                } else {
-
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
-                }
+                // Determine element.
+                *e = (void*) (*a + (**i * *CHARACTER_PRIMITIVE_SIZE));
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
     }
 }
 

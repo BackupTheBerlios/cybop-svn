@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -82,7 +82,7 @@ void destroy_internals_memory(void* p0, const void* p1) {
             // Get all configuration parameters from internals memory and
             // destroy those which are existent (unequal NULL_POINTER).
 
-            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &j, (void*) &p, (void*) &ONE_NUMBER);
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &j, (void*) &p);
 
             // CAUTION! Do not try to remove the parameters!
             // Each configuration parameter has a fixed position within the
@@ -198,6 +198,9 @@ void destroy_internals_memory(void* p0, const void* p1) {
 
                 //?? TODO: some variables are missing here which causes memory leaks!!
             }
+
+            // Reset configuration parameter.
+            p = NULL_POINTER;
 
             (*j)++;
         }

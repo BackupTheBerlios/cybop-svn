@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-01-10 23:54:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,6 +63,8 @@ void set_signal(void* p0, void* p1, void* p2,
 
             int** c = (int**) p1;
 
+            log_message_debug("Set signal.");
+
             // The abstractions.
             void* a = NULL_POINTER;
             void* ac = NULL_POINTER;
@@ -78,14 +80,14 @@ void set_signal(void* p0, void* p1, void* p2,
             void* ids = NULL_POINTER;
 
             // Get abstractions, models, details, priorities.
-            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) &ONE_NUMBER);
-            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) &ONE_NUMBER);
-            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &m, (void*) &ONE_NUMBER);
-            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &mc, (void*) &ONE_NUMBER);
-            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &d, (void*) &ONE_NUMBER);
-            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc, (void*) &ONE_NUMBER);
-            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) &ONE_NUMBER);
-            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ids, (void*) &ONE_NUMBER);
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a);
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &m);
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &mc);
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &d);
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc);
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p);
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ids);
 
             // The index.
             int* i = INTEGER_NULL_POINTER;
@@ -184,6 +186,8 @@ void remove_signal(void* p0, void* p1, void* p2, const void* p3) {
 
                 int** c = (int**) p1;
 
+                log_message_debug("Remove signal.");
+
                 if (**i >= 0) {
 
                     // The abstractions.
@@ -201,14 +205,14 @@ void remove_signal(void* p0, void* p1, void* p2, const void* p3) {
                     void* ids = NULL_POINTER;
 
                     // Get abstractions, models, details, priorities.
-                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) &ONE_NUMBER);
-                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) &ONE_NUMBER);
-                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &m, (void*) &ONE_NUMBER);
-                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &mc, (void*) &ONE_NUMBER);
-                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &d, (void*) &ONE_NUMBER);
-                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc, (void*) &ONE_NUMBER);
-                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) &ONE_NUMBER);
-                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &ids, (void*) &ONE_NUMBER);
+                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a);
+                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
+                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &m);
+                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &mc);
+                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &d);
+                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc);
+                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p);
+                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &ids);
 
                     if (**i < **c) {
 
@@ -277,6 +281,8 @@ void get_signal(const void* p0, const void* p1, const void* p2, void* p3, void* 
 
             int** c = (int**) p1;
 
+            log_message_debug("Get signal.");
+
             if (**i >= 0) {
 
                 // The abstractions.
@@ -294,26 +300,26 @@ void get_signal(const void* p0, const void* p1, const void* p2, void* p3, void* 
                 void* ids = NULL_POINTER;
 
                 // Get abstractions, models, details, priorities, ids.
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) &ONE_NUMBER);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) &ONE_NUMBER);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &m, (void*) &ONE_NUMBER);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &mc, (void*) &ONE_NUMBER);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &d, (void*) &ONE_NUMBER);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc, (void*) &ONE_NUMBER);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) &ONE_NUMBER);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ids, (void*) &ONE_NUMBER);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &m);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &mc);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &d);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ids);
 
                 if (**i < **c) {
 
                     // Get abstraction, model, details, priority, id.
-                    get_array_elements((void*) &a, (void*) &POINTER_ARRAY, p2, p3, (void*) &ONE_NUMBER);
-                    get_array_elements((void*) &ac, (void*) &POINTER_ARRAY, p2, p4, (void*) &ONE_NUMBER);
-                    get_array_elements((void*) &m, (void*) &POINTER_ARRAY, p2, p5, (void*) &ONE_NUMBER);
-                    get_array_elements((void*) &mc, (void*) &POINTER_ARRAY, p2, p6, (void*) &ONE_NUMBER);
-                    get_array_elements((void*) &d, (void*) &POINTER_ARRAY, p2, p7, (void*) &ONE_NUMBER);
-                    get_array_elements((void*) &dc, (void*) &POINTER_ARRAY, p2, p8, (void*) &ONE_NUMBER);
-                    get_array_elements((void*) &p, (void*) &POINTER_ARRAY, p2, p9, (void*) &ONE_NUMBER);
-                    get_array_elements((void*) &ids, (void*) &POINTER_ARRAY, p2, main_signal_id, (void*) &ONE_NUMBER);
+                    get_array_elements((void*) &a, (void*) &POINTER_ARRAY, p2, p3);
+                    get_array_elements((void*) &ac, (void*) &POINTER_ARRAY, p2, p4);
+                    get_array_elements((void*) &m, (void*) &POINTER_ARRAY, p2, p5);
+                    get_array_elements((void*) &mc, (void*) &POINTER_ARRAY, p2, p6);
+                    get_array_elements((void*) &d, (void*) &POINTER_ARRAY, p2, p7);
+                    get_array_elements((void*) &dc, (void*) &POINTER_ARRAY, p2, p8);
+                    get_array_elements((void*) &p, (void*) &POINTER_ARRAY, p2, p9);
+                    get_array_elements((void*) &ids, (void*) &POINTER_ARRAY, p2, main_signal_id);
 
                 } else {
 
@@ -357,7 +363,7 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
             void* sp = NULL_POINTER;
 
             // Get signal priorities.
-            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &sp, (void*) &ONE_NUMBER);
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &sp);
 
             // The loop variable.
             int* j = INTEGER_NULL_POINTER;
@@ -366,8 +372,6 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
 
             // The priority.
             int* prio = INTEGER_NULL_POINTER;
-            create_integer((void*) &prio);
-            *prio = -1;
 
             // The highest priority.
             // CAUTION! Do not set it to zero, because then the priority
@@ -383,7 +387,7 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
                 }
 
                 // Get signal priority.
-                get_array_elements((void*) &sp, (void*) &POINTER_ARRAY, (void*) &j, (void*) &prio, (void*) &ONE_NUMBER);
+                get_array_elements((void*) &sp, (void*) &POINTER_ARRAY, (void*) &j, (void*) &prio);
 
                 if (*prio > h) {
 
@@ -397,7 +401,6 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
                 (*j)++;
             }
 
-            destroy_integer((void*) &prio);
             destroy_integer((void*) &j);
 
         } else {
@@ -434,7 +437,7 @@ void get_new_signal_id(const void* p0, const void* p1, void* p2) {
             void* ids = NULL_POINTER;
 
             // Get signal ids.
-            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ids, (void*) &ONE_NUMBER);
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ids);
 
             // The loop variable.
             int* j = INTEGER_NULL_POINTER;
@@ -446,8 +449,6 @@ void get_new_signal_id(const void* p0, const void* p1, void* p2) {
 
             // The id.
             int* id = INTEGER_NULL_POINTER;
-            create_integer((void*) &id);
-            *id = 0;
 
             while (1) {
 
@@ -456,7 +457,7 @@ void get_new_signal_id(const void* p0, const void* p1, void* p2) {
                     break;
                 }
 
-                get_array_elements((void*) &ids, (void*) &POINTER_ARRAY, (void*) &j, (void*) &id, (void*) &ONE_NUMBER);
+                get_array_elements((void*) &ids, (void*) &POINTER_ARRAY, (void*) &j, (void*) &id);
 
                 if (*id > max) {
 
@@ -468,7 +469,6 @@ void get_new_signal_id(const void* p0, const void* p1, void* p2) {
 
             **i = max + 1;
 
-            destroy_integer((void*) &id);
             destroy_integer((void*) &j);
 
         } else {

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -146,11 +146,9 @@ void serialize_double(void* p0, void* p1, void* p2, const void* p3, const void* 
 
                 // The double value.
                 double* v = DOUBLE_NULL_POINTER;
-                create_double((void*) &v);
-                *v = 0;
 
                 // Get double value.
-                get_array_elements(p3, (void*) &DOUBLE_ARRAY, (void*) &DOUBLE_VALUE_INDEX, (void*) &v, (void*) &ONE_NUMBER);
+                get_array_elements(p3, (void*) &DOUBLE_ARRAY, (void*) &DOUBLE_VALUE_INDEX, (void*) &v);
 
                 // Transform source double to destination string.
                 **dc = snprintf(*d, **ds, "%d", *v);
@@ -174,9 +172,6 @@ void serialize_double(void* p0, void* p1, void* p2, const void* p3, const void* 
                 // As usual, the string count does NOT contain the terminating
                 // null character.
                 **dc = strlen(*d);
-
-                // Destroy double value.
-                destroy_double((void*) &v);
 
             } else {
 

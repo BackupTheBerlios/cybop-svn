@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -87,58 +87,51 @@ void handle_system(void* p0) {
     void* pmc = NULL_POINTER;
 
     // Get startup parameters channel, abstraction, model.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_INTERNAL, (void*) &pc, (void*) &ONE_NUMBER);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_COUNT_INTERNAL, (void*) &pcc, (void*) &ONE_NUMBER);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_INTERNAL, (void*) &pa, (void*) &ONE_NUMBER);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_COUNT_INTERNAL, (void*) &pac, (void*) &ONE_NUMBER);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_INTERNAL, (void*) &pm, (void*) &ONE_NUMBER);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_COUNT_INTERNAL, (void*) &pmc, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_INTERNAL, (void*) &pc);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_COUNT_INTERNAL, (void*) &pcc);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_INTERNAL, (void*) &pa);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_COUNT_INTERNAL, (void*) &pac);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_INTERNAL, (void*) &pm);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_COUNT_INTERNAL, (void*) &pmc);
 
-    log_message_debug("Create startup model abstraction.");
+    log_message_debug("Create startup model.");
 
-    // The startup model abstraction count.
-    int* mac = INTEGER_NULL_POINTER;
-    create_integer((void*) &mac);
-    *mac = 0;
-
-    // The startup model abstraction size.
-    int* mas = INTEGER_NULL_POINTER;
-    create_integer((void*) &mas);
-    *mas = 0;
-
-    // The startup model abstraction.
+    // The startup model abstraction, model, details.
     void* ma = NULL_POINTER;
+    int* mac = INTEGER_NULL_POINTER;
+    int* mas = INTEGER_NULL_POINTER;
+    void* mm = NULL_POINTER;
+    int* mmc = INTEGER_NULL_POINTER;
+    int* mms = INTEGER_NULL_POINTER;
+    void* md = NULL_POINTER;
+    int* mdc = INTEGER_NULL_POINTER;
+    int* mds = INTEGER_NULL_POINTER;
+
+    // Create startup model abstraction, model, details.
+    create_integer((void*) &mac);
+    create_integer((void*) &mas);
+    create_integer((void*) &mmc);
+    create_integer((void*) &mms);
+    // CAUTION! Do not create startup model details!
+    // It is not needed for the startup signal.
+
+    // Initialize startup model abstraction, model, details.
+    *mac = 0;
+    *mas = 0;
+    *mmc = 0;
+    *mms = 0;
+    // CAUTION! Do not create startup model details!
+    // It is not needed for the startup signal.
+
+    // Create startup model abstraction, model, details.
     create_model((void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &pa, (void*) &pac,
         (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
         (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
-
-    log_message_debug("Create startup model model.");
-
-    // The startup model model count.
-    int* mmc = INTEGER_NULL_POINTER;
-    create_integer((void*) &mmc);
-    *mmc = 0;
-
-    // The startup model model size.
-    int* mms = INTEGER_NULL_POINTER;
-    create_integer((void*) &mms);
-    *mms = 0;
-
-    // The startup model model.
-    void* mm = NULL_POINTER;
     create_model((void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &pm, (void*) &pmc,
         (void*) &pa, (void*) &pac,
         (void*) &pc, (void*) &pcc);
-
-    log_message_debug("Do not create unnecessary startup model details.");
-
-    // The startup model details.
-    int* mdc = INTEGER_NULL_POINTER;
-    int* mds = INTEGER_NULL_POINTER;
-    void* md = NULL_POINTER;
-
     // CAUTION! Do not create startup model details!
     // It is not needed for the startup signal.
 
@@ -150,16 +143,14 @@ void handle_system(void* p0) {
     void* ss = NULL_POINTER;
 
     // Get signal memory.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) &ONE_NUMBER);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) &ONE_NUMBER);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &s);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss);
 
     // The signal id.
     int* id = INTEGER_NULL_POINTER;
     create_integer((void*) &id);
     *id = 0;
-
-    // Get new main signal id.
     get_new_signal_id((void*) &s, (void*) &sc, (void*) &id);
 
     // Add startup signal to signal memory.
@@ -180,22 +171,23 @@ void handle_system(void* p0) {
     // it MUST NOT be destroyed here!
     // However, the startup signal's MODEL needs to be destroyed.
 
-    log_message_debug("Do not destroy nonexistent startup model details.");
+    log_message_debug("Destroy startup model.");
 
-    log_message_debug("Destroy startup model model.");
-
+    // CAUTION! Do not destroy startup model details!
+    // It was not needed for the startup signal.
     destroy_model((void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &pm, (void*) &pmc,
         (void*) &pa, (void*) &pac,
         (void*) &pc, (void*) &pcc);
-    destroy_integer((void*) &mms);
-    destroy_integer((void*) &mmc);
-
-    log_message_debug("Destroy startup model abstraction.");
     destroy_model((void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &pa, (void*) &pac,
         (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
         (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+
+    // CAUTION! Do not destroy startup model details!
+    // It was not needed for the startup signal.
+    destroy_integer((void*) &mms);
+    destroy_integer((void*) &mmc);
     destroy_integer((void*) &mas);
     destroy_integer((void*) &mac);
 

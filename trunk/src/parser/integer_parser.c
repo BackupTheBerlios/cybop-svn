@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -136,11 +136,9 @@ void serialize_integer(void* p0, void* p1, void* p2, const void* p3, const void*
 
                 // The integer value.
                 int* v = INTEGER_NULL_POINTER;
-                create_integer((void*) &v);
-                *v = 0;
 
                 // Get integer value.
-                get_array_elements(p3, (void*) &INTEGER_ARRAY, (void*) &INTEGER_VALUE_INDEX, (void*) &v, (void*) &ONE_NUMBER);
+                get_array_elements(p3, (void*) &INTEGER_ARRAY, (void*) &INTEGER_VALUE_INDEX, (void*) &v);
 
                 // Transform source integer to destination string.
                 **dc = snprintf(*d, **ds, "%i", *v);
@@ -164,9 +162,6 @@ void serialize_integer(void* p0, void* p1, void* p2, const void* p3, const void*
                 // As usual, the string count does NOT contain the terminating
                 // null character.
                 **dc = strlen(*d);
-
-                // Destroy integer value.
-                destroy_integer((void*) &v);
 
             } else {
 

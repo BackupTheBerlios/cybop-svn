@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -66,11 +66,9 @@ void activate_input_output(void* p0) {
 
     // The activation flag.
     int* f = INTEGER_NULL_POINTER;
-    create_integer((void*) &f);
-    *f = 0;
 
     // UNIX socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f);
 
     if (*f == 1) {
 
@@ -80,7 +78,7 @@ void activate_input_output(void* p0) {
     }
 
     // TCP socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f);
 
     if (*f == 1) {
 
@@ -90,7 +88,7 @@ void activate_input_output(void* p0) {
     }
 
     // X windows.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f);
 
     if (*f == 1) {
 
@@ -103,9 +101,6 @@ void activate_input_output(void* p0) {
 //??    send_x_windows_output(NULL, NULL, p5);
 //??    sleep(4);
 //??    init_x();
-
-    // Destroy activation flag.
-    destroy_integer((void*) &f);
 }
 
 /* INPUT_OUTPUT_ACTIVATOR_SOURCE */

@@ -23,7 +23,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.16 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
@@ -87,7 +87,7 @@ void create_tcp_server_socket(void* p0) {
     int* p = INTEGER_NULL_POINTER;
 
     // Get tcp server socket port.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &p, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &p);
 
     if (p != INTEGER_NULL_POINTER) {
 
@@ -183,7 +183,7 @@ void destroy_tcp_server_socket(void* p0) {
     int* p = INTEGER_NULL_POINTER;
 
     // Get tcp server socket port.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &p, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &p);
 
     if (p != INTEGER_NULL_POINTER) {
 
@@ -191,7 +191,7 @@ void destroy_tcp_server_socket(void* p0) {
         int* s = INTEGER_NULL_POINTER;
 
         // Get tcp server socket.
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_NUMBER);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s);
 
         if (s != INTEGER_NULL_POINTER) {
 
@@ -244,7 +244,7 @@ void get_request_row(char** req, int* req_count, char** req_row, int* req_row_co
             break;
         }
 
-        get_array_elements(req, (void*) &CHARACTER_ARRAY, req_row_count, (void*) &e, (void*) &ONE_NUMBER);
+        get_array_elements(req, (void*) &CHARACTER_ARRAY, req_row_count, (void*) &e);
 
         if (*e == *CARRIAGE_RETURN_CONTROL_CHARACTER) {
 
@@ -290,7 +290,7 @@ void get_param_from_request_row(char** req_row, int* req_row_count, char** param
             break;
         }
 
-        get_array_elements(req_row, (void*) &CHARACTER_ARRAY, (void*) &req_row_index, (void*) &e, (void*) &ONE_NUMBER);
+        get_array_elements(req_row, (void*) &CHARACTER_ARRAY, (void*) &req_row_index, (void*) &e);
 
         // Check of ending the paramaters.
         if ((start_param_flag == 1) && (*e == *CARRIAGE_RETURN_CONTROL_CHARACTER)) {
@@ -401,13 +401,15 @@ void handle_tcp_socket_request(void* p0, int* cs) {
         //            exit(1);
         //        }
 
+                // The signal memory.
                 void* m = NULL_POINTER;
                 void* mc = NULL_POINTER;
                 void* ms = NULL_POINTER;
 
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) &ONE_NUMBER);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) &ONE_NUMBER);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) &ONE_NUMBER);
+                // Get signal memory.
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &m);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms);
 
                 // The source channel.
                 char c_sc[] = "inline";
@@ -504,7 +506,7 @@ void run_tcp_socket(void* p0) {
     int* s = INTEGER_NULL_POINTER;
 
     // Get tcp server socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_INTERNAL, (void*) &s);
 
     if (s != INTEGER_NULL_POINTER) {
 
@@ -516,9 +518,9 @@ void run_tcp_socket(void* p0) {
         void* ms = NULL_POINTER;
 
         // Get signal memory.
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) &ONE_NUMBER);
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) &ONE_NUMBER);
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) &ONE_NUMBER);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &m);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms);
 
         // The client socket address.
         struct sockaddr_in ca;

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,11 +52,9 @@ void startup_input_output(void* p0) {
 
     // The activation flag.
     int* f = INTEGER_NULL_POINTER;
-    create_integer((void*) &f);
-    *f = 0;
 
     // Unix server socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f);
 
     if (*f == 1) {
 
@@ -66,7 +64,7 @@ void startup_input_output(void* p0) {
     }
 
     // Tcp server socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f);
 
     if (*f == 1) {
 
@@ -76,7 +74,7 @@ void startup_input_output(void* p0) {
     }
 
     // X windows server.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f);
 
     if (*f == 1) {
 
@@ -84,9 +82,6 @@ void startup_input_output(void* p0) {
 
         *f = 0;
     }
-
-    // Destroy activation flag.
-    destroy_integer((void*) &f);
 }
 
 /**
@@ -105,11 +100,9 @@ void shutdown_input_output(void* p0) {
 
     // The activation flag.
     int* f = INTEGER_NULL_POINTER;
-    create_integer((void*) &f);
-    *f = 0;
 
     // X windows server.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f);
 
     if (*f == 1) {
 
@@ -119,7 +112,7 @@ void shutdown_input_output(void* p0) {
     }
 
     // Tcp server socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f);
 
     if (*f == 1) {
 
@@ -129,7 +122,7 @@ void shutdown_input_output(void* p0) {
     }
 
     // Unix server socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f);
 
     if (*f == 1) {
 
@@ -137,9 +130,6 @@ void shutdown_input_output(void* p0) {
 
         *f = 0;
     }
-
-    // Destroy activation flag.
-    destroy_integer((void*) &f);
 }
 
 /* INPUT_OUTPUT_HANDLER_SOURCE */

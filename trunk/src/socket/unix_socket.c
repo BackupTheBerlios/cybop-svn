@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -47,7 +47,7 @@ void create_unix_server_socket(void* p0) {
     void** f = POINTER_NULL_POINTER;
 
     // Get unix server socket filename.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f);
 
     if (f != POINTER_NULL_POINTER) {
 
@@ -132,7 +132,7 @@ void destroy_unix_server_socket(void* p0) {
     void** f = POINTER_NULL_POINTER;
 
     // Get unix server socket filename.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f);
 
     if (f != POINTER_NULL_POINTER) {
 
@@ -140,7 +140,7 @@ void destroy_unix_server_socket(void* p0) {
         int* s = INTEGER_NULL_POINTER;
 
         // Get unix server socket.
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_NUMBER);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s);
 
         if (s != INTEGER_NULL_POINTER) {
 
@@ -276,7 +276,7 @@ void receive_unix_socket(void* p0) {
     int* s = INTEGER_NULL_POINTER;
 
     // Get unix server socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s);
 
     if (s != INTEGER_NULL_POINTER) {
 
