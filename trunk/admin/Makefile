@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.7 $ $Date: 2004-02-08 12:39:47 $ $Author: christian $
+# @version $Revision: 1.8 $ $Date: 2004-04-20 07:50:03 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -78,6 +78,8 @@ SIGNAL_SOURCES = $(wildcard $(SRC)/signal/*.c)
 SIGNAL_OBJECTS = $(patsubst $(SRC)/signal/%.c,$(OBJ)/signal/%.o,$(SIGNAL_SOURCES))
 STATICS_SOURCES = $(wildcard $(SRC)/statics/*.c)
 STATICS_OBJECTS = $(patsubst $(SRC)/statics/%.c,$(OBJ)/statics/%.o,$(STATICS_SOURCES))
+TEST_SOURCES = $(wildcard $(SRC)/test/*.c)
+TEST_OBJECTS = $(patsubst $(SRC)/test/%.c,$(OBJ)/test/%.o,$(TEST_SOURCES))
 X_WINDOWS_SOURCES = $(wildcard $(SRC)/x_windows/*.c)
 X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WINDOWS_SOURCES))
 
@@ -93,7 +95,7 @@ X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WIN
 #
 #	$(COMPILER) -I /usr/X11R6/include -L /usr/X11R6/lib $(OBJ)/cyboi.o -o $(BIN)/$(BINARY)
 #
-all: create $(ROOT_OBJECTS) $(CYBOL_OBJECTS) $(DYNAMICS_OBJECTS) $(LOGGER_OBJECTS) $(MODEL_OBJECTS) $(SIGNAL_OBJECTS) $(STATICS_OBJECTS) $(X_WINDOWS_OBJECTS)
+all: create $(ROOT_OBJECTS) $(CYBOL_OBJECTS) $(DYNAMICS_OBJECTS) $(LOGGER_OBJECTS) $(MODEL_OBJECTS) $(SIGNAL_OBJECTS) $(STATICS_OBJECTS) $(TEST_OBJECTS) $(X_WINDOWS_OBJECTS)
 	$(COMPILER) -L/usr/X11R6/lib \
 		-o $(BIN)/$(BINARY) $(OBJ)/cyboi.o -lX11
 	@echo Compiled cyboi files.
@@ -112,6 +114,7 @@ create:
 	-cd $(OBJ); mkdir model
 	-cd $(OBJ); mkdir signal
 	-cd $(OBJ); mkdir statics
+	-cd $(OBJ); mkdir test
 	-cd $(OBJ); mkdir x_windows
 
 $(OBJ)/%.o: $(SRC)/%.c
@@ -133,6 +136,9 @@ $(OBJ)/signal/%.o: $(SRC)/signal/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/statics/%.o: $(SRC)/statics/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/test/%.o: $(SRC)/test/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/x_windows/%.o: $(SRC)/x_windows/%.c
@@ -172,6 +178,7 @@ clean:
 #	-rm -r $(OBJ)/model
 #	-rm -r $(OBJ)/signal
 #	-rm -r $(OBJ)/statics
+#	-rm -r $(OBJ)/test
 #	-rm -r $(OBJ)/x_windows
 #	-rm -f $(OBJ)/*.o
 	@echo Cleaned cyboi files.
