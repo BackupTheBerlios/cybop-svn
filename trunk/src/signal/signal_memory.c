@@ -33,7 +33,7 @@
  * - priority
  * - language
  *
- * @version $Revision: 1.5 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-02-25 09:09:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct signal_memory {
@@ -50,4 +50,3 @@ struct signal_memory {
 
 /* SIGNAL_MEMORY_SOURCE */
 #endif
-

@@ -32,7 +32,7 @@
  *
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.5 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-02-25 09:09:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -106,8 +106,11 @@ void* get_log_level_name(void* p0) {
  */
 void show_message(void* p0) {
 
-//??    fputs((char*) p0, stdout);
-    fputs((char*) p0, stderr);
+    if (p0 != (void*) 0) {
+
+//??        fputs((char*) p0, stdout);
+        fputs((char*) p0, stderr);
+    }
 }
 
 /**

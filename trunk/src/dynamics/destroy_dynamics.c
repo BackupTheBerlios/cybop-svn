@@ -38,7 +38,7 @@
  *
  * It destroys a dynamics memory model to a given dynamics cybol model.
  *
- * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-02-25 09:09:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -177,7 +177,7 @@ void finalize_dynamics_parts(void* p0, void* p1) {
             
             log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize dynamics parts. A dynamics cybol model part is null.");
         }
-        
+
         count++;
     }
 }
@@ -245,27 +245,29 @@ void destroy_dynamics(void* p0, void* p1, void* p2, void* p3, void* p4) {
     char* a = (char*) p4;
 
     if (p0 != (void*) 0) {
-            
+
         log_message((void*) &INFO_LOG_LEVEL, "Destroy dynamics model: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
 
         if (strcmp(a, DYNAMICS_COMPOUND) == 0) {
-    
+
             char* p = (char*) p1;
-        
-            if (p != (void*) 0) {
-                
+
+//??            if (p != (void*) 0) {
+
                 finalize_dynamics_model(p0, p1);
+                log_message((void*) &INFO_LOG_LEVEL, "TEST dyn 0");
                 destroy_dynamics_model_containers(p0);
+                log_message((void*) &INFO_LOG_LEVEL, "TEST dyn 1");
                 free(p0);
-            }
+//??            }
 
         } else {
-    
+
             char* io = (char*) p2;
-            
+
             if (io != (void*) 0) {
-                
+
                 finalize_operation_input_and_output(p0, p2, p3);
                 free(p0);
             }
@@ -275,4 +277,3 @@ void destroy_dynamics(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /* DESTROY_DYNAMICS_SOURCE */
 #endif
-

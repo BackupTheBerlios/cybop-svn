@@ -31,7 +31,7 @@
 /**
  * This is the integer handler.
  *
- * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-02-25 09:09:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -94,4 +94,3 @@ void finalize_integer_model(void* p0, void* p1) {
 
 /* INTEGER_HANDLER_SOURCE */
 #endif
-

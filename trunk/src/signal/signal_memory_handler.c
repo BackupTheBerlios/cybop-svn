@@ -52,7 +52,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.15 $ $Date: 2004-02-11 00:11:16 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-02-25 09:09:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,86 +96,6 @@ static const char* XML_LANGUAGE = "xml";
 
 /** The simple object access protocol (soap) language. */
 static const char* SOAP_LANGUAGE = "soap";
-
-//
-// Signal memory.
-//
-
-/**
- * Creates the signal memory.
- *
- * @param p0 the signal memory
- */
-void create_signal_memory(void* p0) {
-
-    struct signal_memory* m = (struct signal_memory*) p0;
-
-    if (m != (void*) 0) {
-
-        log_message((void*) &INFO_LOG_LEVEL, "Create signal memory.");
-
-        m->signals = malloc(sizeof(struct array));
-        initialize_array(m->signals);
-
-        m->abstractions = malloc(sizeof(struct array));
-        initialize_array(m->abstractions);
-
-        m->priorities = malloc(sizeof(struct array));
-        initialize_array(m->priorities);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not create signal memory. The signal memory is null.");
-    }
-}
-
-/**
- * Destroys the signal memory.
- *
- * @param p0 the signal memory
- */
-void destroy_signal_memory(void* p0) {
-
-    struct signal_memory* m = (struct signal_memory*) p0;
-
-    if (m != (void*) 0) {
-
-        log_message((void*) &INFO_LOG_LEVEL, "Destroy signal memory.");
-
-        // Destroy all signals left in signal memory.
-/*??
-        int i = count - 1;
-            get_highest_priority_index(p0, (void*) &index);
-
-        while (i >= 0) {
-
-            s = get_signal(p0, (void*) &index);
-            a = (char*) get_abstraction(p0, (void*) &index);
-            p = get_priority(p0, (void*) &index);
-            remove_signal(p0, (void*) &index);
-            // Destroy signal. Do not destroy the signal's abstraction and
-            // priority here; they are static within CYBOI.
-            destroy_dynamics(ss, (void*) p1[1], (void*) 0, (void*) 0, (void*) DYNAMICS_COMPOUND);
-
-            i--;
-        }
-*/
-
-        // Destroy containers.
-        finalize_array(m->priorities);
-        free(m->priorities);
-
-        finalize_array(m->abstractions);
-        free(m->abstractions);
-
-        finalize_array(m->signals);
-        free(m->signals);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not destroy signal memory. The signal memory is null.");
-    }
-}
 
 //
 // Signal.
@@ -276,6 +196,10 @@ void* get_signal(void* p0, void* p1) {
     return s;
 }
 
+//
+// Abstraction.
+//
+
 /**
  * Gets the abstraction.
  *
@@ -296,9 +220,13 @@ void* get_abstraction(void* p0, void* p1) {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get abstraction. The signal memory is null.");
     }
-    
+
     return a;
 }
+
+//
+// Priority.
+//
 
 /**
  * Gets the priority.
@@ -320,7 +248,7 @@ void* get_priority(void* p0, void* p1) {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get priority. The signal memory is null.");
     }
-    
+
     return p;
 }
 
@@ -342,25 +270,115 @@ void get_highest_priority_index(void* p0, void* p1) {
         get_array_count(m->priorities, (void*) &count);
         int* p = (void*) 0;
         int h = *index;
-    
+
         while (i < count) {
-    
+
             p = (int*) get_array_element(m->priorities, (void*) &i);
-    
+
             // If a signal with higher priority is found,
             // then its index is the one to be returned.
             if (*p > h) {
-            
+
                 *index = i;
                 h = *p;
             }
-    
+
             i++;
         }
 
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get index of the signal with highest priority. The signal memory is null.");
+    }
+}
+
+//
+// Signal memory.
+//
+
+/**
+ * Creates the signal memory.
+ *
+ * @param p0 the signal memory
+ */
+void create_signal_memory(void* p0) {
+
+    struct signal_memory* m = (struct signal_memory*) p0;
+
+    if (m != (void*) 0) {
+
+        log_message((void*) &INFO_LOG_LEVEL, "Create signal memory.");
+
+        // Create containers.
+        m->signals = malloc(sizeof(struct array));
+        initialize_array(m->signals);
+
+        m->abstractions = malloc(sizeof(struct array));
+        initialize_array(m->abstractions);
+
+        m->priorities = malloc(sizeof(struct array));
+        initialize_array(m->priorities);
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not create signal memory. The signal memory is null.");
+    }
+}
+
+/**
+ * Destroys the signal memory.
+ *
+ * @param p0 the signal memory
+ */
+void destroy_signal_memory(void* p0) {
+
+    struct signal_memory* m = (struct signal_memory*) p0;
+
+    if (m != (void*) 0) {
+
+        log_message((void*) &INFO_LOG_LEVEL, "Destroy signal memory.");
+
+        // Destroy all signals left in signal memory.
+        int i = 0;
+        get_array_count(m->signals, (void*) &i);
+        i--;
+        void* s = (void*) 0;
+        void* a = (void*) 0;
+
+        while (i >= 0) {
+
+            s = (void*) get_signal(p0, (void*) &i);
+            a = (void*) get_abstraction(p0, (void*) &i);
+            // Priority is not needed to destroy the signal.
+
+            // Abstraction and priority are removed internally,
+            // together with the signal.
+            remove_signal(p0, (void*) &i);
+
+            // Destroy signal. Do not destroy the signal's abstraction and
+            // priority here; they are static within CYBOI.
+            destroy_dynamics(s, (void*) 0, (void*) 0, (void*) 0, (void*) a);
+
+            log_message((void*) &INFO_LOG_LEVEL, "TEST A");
+
+            i--;
+        }
+
+        log_message((void*) &INFO_LOG_LEVEL, "TEST B");
+
+        // Destroy containers.
+        finalize_array(m->priorities);
+        free(m->priorities);
+
+        finalize_array(m->abstractions);
+        free(m->abstractions);
+
+        finalize_array(m->signals);
+        free(m->signals);
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not destroy signal memory. The signal memory is null.");
     }
 }
 
@@ -380,7 +398,7 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
     log_message((void*) &INFO_LOG_LEVEL, "Handle compound signal.");
 
     struct dynamics_model* m = (struct dynamics_model*) p1;
-    
+
     if (m != (void*) 0) {
 
         int count = 0;

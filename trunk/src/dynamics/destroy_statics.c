@@ -42,7 +42,7 @@
  *
  * It destroys a statics memory model to a given statics cybol model.
  *
- * @version $Revision: 1.9 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-02-25 09:09:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -228,57 +228,56 @@ void destroy_statics(void* p0, void* p1, void* p2) {
     char* a = (char*) p2;
 
     if (p0 != (void*) 0) {
-        
-        if (p != (void*) 0) {
-            
+
+//??        if (p != (void*) 0) {
+
             log_message((void*) &INFO_LOG_LEVEL, "Destroy statics: ");
             log_message((void*) &INFO_LOG_LEVEL, p1);
-        
+
             if (strcmp(a, STATICS_COMPOUND) == 0) {
-        
+
                 finalize_statics_model(p0, p1);
                 destroy_statics_model_containers(p0);
                 free(p0);
 
             } else if (strcmp(a, TIME_PRIMITIVE) == 0) {
-        
+
                 finalize_time_model(p0, p1);
                 free(p0);
-                
+
             } else if (strcmp(a, STRING_PRIMITIVE) == 0) {
-        
+
                 finalize_string_model(p0, p1);
                 free(p0);
-        
+
             } else if (strcmp(a, VECTOR_PRIMITIVE) == 0) {
-        
+
                 finalize_vector_model(p0, p1);
                 free(p0);
-        
+
             } else if (strcmp(a, COMPLEX_PRIMITIVE) == 0) {
-        
+
                 finalize_complex_model(p0, p1);
                 free(p0);
-        
+
             } else if (strcmp(a, FRACTION_PRIMITIVE) == 0) {
-        
+
                 finalize_fraction_model(p0, p1);
                 free(p0);
-        
+
             } else if (strcmp(a, INTEGER_PRIMITIVE) == 0) {
-        
+
                 finalize_integer_model(p0, p1);
                 free(p0);
-        
+
             } else if (strcmp(a, BOOLEAN_PRIMITIVE) == 0) {
-        
+
                 finalize_boolean_model(p0, p1);
                 free(p0);
             }
-        }
+//??        }
     }
 }
 
 /* DESTROY_STATICS_SOURCE */
 #endif
-

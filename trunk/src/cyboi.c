@@ -43,7 +43,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.5 $ $Date: 2004-02-11 00:11:16 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-02-25 09:09:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -206,10 +206,10 @@ int main(int p0, char** p1) {
             // Signals are destroyed when being read from signal memory.
 
             // Destroy signal memory.
+            log_message((void*) &INFO_LOG_LEVEL, "TEST 0");
             destroy_signal_memory(sm);
-            log_message((void*) &INFO_LOG_LEVEL, "TEST 1");
+            log_message((void*) &INFO_LOG_LEVEL, "TEST 1: still destroy signals left in memory!!");
             free(sm);
-            log_message((void*) &INFO_LOG_LEVEL, "TEST 2");
 
             // Destroy internals.
             free(i);
