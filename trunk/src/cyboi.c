@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.24 $ $Date: 2004-04-25 21:25:58 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2004-04-27 16:57:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,19 +72,32 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
-        // These are internal data and flags for legacy stuff and
+        // The internal data and flags for legacy stuff and
         // handling of various platforms and graphical user interfaces
         // such as X-Windows, Macintosh or MS Windows.
 //??        struct internals* intern = (struct internals*) p3;
-
-        // Initialize shutdown flag to false.
+        // The shutdown flag.
         int f = 0;
+        // The highest priority index.
         int i = -1;
+        // The signal.
         void* s = NULL_POINTER;
+        // The priority.
         int p = NORMAL_PRIORITY;
+        // The abstraction.
         char* a = CHARACTER_NULL_POINTER;
+        // The abstraction size.
         int as = 0;
-
+        // The signal size.
+        int ss = 0;
+        // The persistent model.
+        void* pers = NULL_POINTER;
+        // The persistent model size.
+        int perss = 0;
+        // The done flag.
+        int d = 0;
+        // The comparison result.
+        int r = 0;
         //?? Testing!
 //??        init_x();
 
@@ -113,59 +126,90 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
             // Get top priority signal from signal memory and remove it from there.
 //??            get_highest_priority_index(p0, (void*) &i);
-            i = 0;
+            i = 0; //?? temporary test; delete this line later
 
-            get_signal(p0, (void*) &i, (void*) &s, (void*) &p, (void*) &a, (void*) &as);
+            if (i >= 0) {
 
-            fprintf(stderr, "wait s: %d\n", s);
-            fprintf(stderr, "wait p: %d\n", p);
-            fprintf(stderr, "wait a: %d\n", a);
-            fprintf(stderr, "wait astr: %s\n", a);
-            fprintf(stderr, "wait as: %d\n", as);
+                get_signal(p0, (void*) &i, (void*) &s, (void*) &p, (void*) &a, (void*) &as);
 
-            // Abstraction and priority are removed internally,
-            // together with the signal.
-            fputs("wait TEST 0\n", stderr);
-            remove_signal(p0, (void*) &i);
+                fprintf(stderr, "wait s: %d\n", s);
+                fprintf(stderr, "wait p: %d\n", p);
+                fprintf(stderr, "wait a: %d\n", a);
+                fprintf(stderr, "wait astr: %s\n", a);
+                fprintf(stderr, "wait as: %d\n", as);
 
-            // Destroy signal.
-            int ss = 0;
-            void* pers = NULL_POINTER;
-            int perss = 0;
-            fputs("wait TEST 1\n", stderr);
-            destroy_model((void*) &s, (void*) &ss, (void*) &pers, (void*) &perss, (void*) &a, (void*) &as);
+                // Abstraction and priority are removed internally,
+                // together with the signal.
+                fputs("wait TEST 0\n", stderr);
+                remove_signal(p0, (void*) &i);
 
-            // The comparison result.
-            int r = 0;
+                // Destroy signal.
+                fputs("wait TEST 1\n", stderr);
+                destroy_model((void*) &s, (void*) &ss, (void*) &pers, (void*) &perss, (void*) &a, (void*) &as);
 
-            // Handle compound signal.
-            //?? CAUTION! Still compare sizes here!
-            fputs("wait TEST 2\n", stderr);
-            compare_array_elements((void*) &a, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_SIZE, (void*) &r);
+                fputs("wait TEST 2\n", stderr);
 
-            if (r == 1) {
+                //
+                // Handle compound signal.
+                //
 
-                fputs("wait TEST 3\n", stderr);
-                handle_compound_signal(p0, (void*) &s, (void*) &p);
+                if (d == 0) {
 
-            } else {
+                    if (as == COMPOUND_ABSTRACTION_SIZE) {
 
-            // Handle operation signal.
-            //?? CAUTION! Still compare sizes here!
-            compare_array_elements((void*) &a, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_SIZE, (void*) &r);
+                        compare_array_elements((void*) &a, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_SIZE, (void*) &r);
 
-            if (r == 1) {
+                        if (r == 1) {
 
-                fputs("TEST 4\n", stderr);
-                handle_operation_signal((void*) &s, p1, p2, p3, (void*) &f);
+                            fputs("wait TEST 3\n", stderr);
+                            handle_compound_signal(p0, (void*) &s, (void*) &p);
 
-            } else {
+                            d == 1;
+                        }
+                    }
+                }
 
-                fputs("TEST 5\n", stderr);
-                log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not handle signal. The signal abstraction is unknown.");
+                //
+                // Handle operation signal.
+                //
 
-            } // Operation signal.
-            } // Compound signal.
+                if (d == 0) {
+
+                    if (as == OPERATION_ABSTRACTION_SIZE) {
+
+                        compare_array_elements((void*) &a, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_SIZE, (void*) &r);
+
+                        if (r == 1) {
+
+                            fputs("TEST 4\n", stderr);
+                            handle_operation_signal((void*) &s, p1, p2, p3, (void*) &f);
+
+                            d == 1;
+                        }
+                    }
+                }
+
+                if (d == 0) {
+
+                    fputs("TEST 5\n", stderr);
+                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not handle signal. The signal abstraction is unknown.");
+                }
+
+                // Reset signal.
+                s = NULL_POINTER;
+                // Reset priority.
+                p = NORMAL_PRIORITY;
+                // Reset abstraction.
+                a = CHARACTER_NULL_POINTER;
+                // Reset abstraction size.
+                as = 0;
+                // Reset highest priority index.
+                i == -1;
+                // Reset done flag.
+                d == 0;
+                // Reset comparison result.
+                r == 0;
+            }
         }
 
     } else {
@@ -221,8 +265,6 @@ int main(int p0, char** p1) {
             void* sm = NULL_POINTER;
             create_signal_memory((void*) &sm);
 
-    fputs("TEST 0\n", stdout);
-
             // Create (transient) startup signal from (persistent) cybol source
             // whose location was given at command line.
             void* ss = NULL_POINTER;
@@ -230,8 +272,6 @@ int main(int p0, char** p1) {
             char* p = p1[1];
             int ps = strlen(p1[1]);
             create_model((void*) &ss, (void*) &sss, (void*) &p, (void*) &ps, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);
-
-    fputs("TEST 1\n", stdout);
 
             // Add startup signal to signal memory.
             set_signal((void*) &sm, (void*) &ss, (void*) &NORMAL_PRIORITY, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);

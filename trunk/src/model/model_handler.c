@@ -59,7 +59,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.36 $ $Date: 2004-04-22 08:54:55 $ $Author: christian $
+ * @version $Revision: 1.37 $ $Date: 2004-04-27 16:57:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -471,6 +471,8 @@ void initialize_compound(void* p0, const void* p1, const void* p2) {
 
             void** p = (void**) p1;
 
+            // The done flag.
+            int d = 0;
             // The comparison result.
             int r = 0;
             // The path.
@@ -478,32 +480,41 @@ void initialize_compound(void* p0, const void* p1, const void* p2) {
             // The size.
             int s = 0;
 
-            //?? CAUTION! Compare sizes here!
+            if (d == 0) {
 
-            compare_array_elements(p1, (void*) &FILE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FILE_LOCATION_SIZE, (void*) &r);
+                if (*ps == FILE_LOCATION_SIZE) {
 
-            if (r == 1) {
+                    compare_array_elements(p1, (void*) &FILE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FILE_LOCATION_SIZE, (void*) &r);
 
-                // Example: "file:/path"
-                // FILE_LOCATION_SIZE = 6
-                // p1 = 0
-                // p2 = 10
-                // path = *p + FILE_LOCATION_SIZE = 0 + 6 = 6
-                // s = *ps - FILE_LOCATION_SIZE = 4
-                path = *p + FILE_LOCATION_SIZE;
-                s = *ps - FILE_LOCATION_SIZE;
+                    if (r == 1) {
 
-                //?? read_from_file (or http, ftp etc.)
-                //?? create_cybol_model (byte array, read in from persistent source)
-                //?? create_transient_model (in memory model structure, created from byte array)
+                        // Example: "file:/path"
+                        // FILE_LOCATION_SIZE = 6
+                        // p1 = 0
+                        // p2 = 10
+                        // path = *p + FILE_LOCATION_SIZE = 0 + 6 = 6
+                        // s = *ps - FILE_LOCATION_SIZE = 4
+                        path = *p + FILE_LOCATION_SIZE;
+                        s = *ps - FILE_LOCATION_SIZE;
 
-//??                initialize_compound_model_from_file(p0, (void*) &path, (void*) &s);
+                        //?? read_from_file (or http, ftp etc.)
+                        //?? create_cybol_model (byte array, read in from persistent source)
+                        //?? create_transient_model (in memory model structure, created from byte array)
 
-            } else {
+        //??                initialize_compound_model_from_file(p0, (void*) &path, (void*) &s);
+                    }
+                }
+            }
 
-                // inline:/
-                // http://
-                // ftp://
+            if (d == 0) {
+
+                if (*ps == INLINE_LOCATION_SIZE) {
+
+                    //?? compare...
+                    // inline:/
+                    // http://
+                    // ftp://
+                }
             }
 
         } else {
@@ -545,42 +556,59 @@ void get_model_part_index(const void* p0, const void* p1, const void* p2, void* 
 
         int* i = (int*) p3;
 
-        // Initialize elements.
-        int c = 0;
-        void* n = NULL_POINTER;
-        void* ns = NULL_POINTER;
+        if (p2 != NULL_POINTER) {
 
-        // Get elements.
-        get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
-        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
-        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
+            int* s = (int*) p2;
 
-        // The comparison loop.
-        int j = 0;
-        void* name = NULL_POINTER;
-        int count = 0;
-        int r = 0;
+            // Initialize elements.
+            int c = 0;
+            void* n = NULL_POINTER;
+            void* ns = NULL_POINTER;
 
-        while (1) {
+            // Get elements.
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
 
-            if (j >= c) {
+            // The comparison loop.
+            int j = 0;
+            // The name.
+            void* name = NULL_POINTER;
+            // The name length.
+            int count = 0;
+            // The comparison result.
+            int r = 0;
 
-                break;
+            while (1) {
+
+                if (j >= c) {
+
+                    break;
+                }
+
+                // Get element.
+                get_array_element((void*) &n, (void*) &POINTER_ARRAY, (void*) &j, (void*) &name);
+                get_array_element((void*) &ns, (void*) &POINTER_ARRAY, (void*) &j, (void*) &count);
+
+                if (*s == count) {
+
+                    compare_array_elements(p1, (void*) &name, (void*) &CHARACTER_ARRAY, (void*) &count, (void*) &r);
+
+                    if (r == 1) {
+
+                        *i = j;
+                        break;
+                    }
+                }
+
+                // Reset name length.
+                count = 0;
+                j++;
             }
 
-            // Get element.
-            get_array_element((void*) &n, (void*) &POINTER_ARRAY, (void*) &j, (void*) &name);
-            get_array_element((void*) &ns, (void*) &POINTER_ARRAY, (void*) &j, (void*) &count);
+        } else {
 
-            //?? CAUTION! Compare sizes here!
-            
-            compare_array_elements(p1, (void*) &name, (void*) &CHARACTER_ARRAY, (void*) &count, (void*) &r);
-
-            if (r == 1) {
-
-                *i = j;
-                break;
-            }
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part index. The name size is null.");
         }
 
     } else {

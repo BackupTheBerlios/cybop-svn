@@ -23,7 +23,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.14 $ $Date: 2004-04-22 13:25:31 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-04-27 16:57:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,135 +54,195 @@
  */
 void destroy_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const void* p5) {
 
+    // The done flag.
+    int d = 0;
     // The comparison result.
     int r = 0;
 
-    // Do not consider an empty persistent model further.
     if (p3 != NULL_POINTER) {
 
         int* s = (int*) p3;
 
-        if (*s != 0) {
+        //
+        // Three comparisons are done:
+        // 1 done flag (no further processing if an abstraction already matched)
+        // 2 abstraction size
+        // 3 abstraction characters
+        //
+        // The order is important!
+        // The size needs to be checked before the arrays are handed over to the
+        // comparison procedure. Otherwise, array boundaries might get crossed.
+        //
 
-            //
-            // Compound.
-            //
+        //
+        // Compound.
+        //
 
-            //?? CAUTION! Still compare sizes here!
-            compare_array_elements(p4, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_SIZE, (void*) &r);
+        if (d == 0) {
 
-            if (r == 1) {
+            if (*s == COMPOUND_ABSTRACTION_SIZE) {
 
-                finalize_compound(p0, p2, p3);
-                destroy_compound(p0);
+                compare_array_elements(p4, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_SIZE, (void*) &r);
 
-            } else {
+                if (r == 1) {
 
-            //
-            // Logic and Dynamics.
-            //
+                    finalize_compound(p0, p2, p3);
+                    destroy_compound(p0);
 
-            //?? CAUTION! Still compare sizes here!
-            compare_array_elements(p4, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_SIZE, (void*) &r);
+                    d == 1;
+                }
+            }
+        }
 
-            if (r == 1) {
+        //
+        // Logic and Dynamics.
+        //
 
-                finalize_operation(p0, p1, p2, p3);
-                destroy_operation(p0, p1);
+        if (d == 0) {
 
-            } else {
+            if (*s == OPERATION_ABSTRACTION_SIZE) {
 
-            //
-            // Statics.
-            //
+                compare_array_elements(p4, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_SIZE, (void*) &r);
 
-            //?? CAUTION! Still compare sizes here!
-            compare_array_elements(p4, (void*) &STRING_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &STRING_ABSTRACTION_SIZE, (void*) &r);
+                if (r == 1) {
 
-            if (r == 1) {
+                    finalize_operation(p0, p1, p2, p3);
+                    destroy_operation(p0, p1);
 
-                finalize_string(p0, p1, p2, p3);
+                    d == 1;
+                }
+            }
+        }
 
-            } else {
+        //
+        // Statics.
+        //
 
-            //?? CAUTION! Still compare sizes here!
-            compare_array_elements(p4, (void*) &BOOLEAN_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &BOOLEAN_ABSTRACTION_SIZE, (void*) &r);
+        if (d == 0) {
 
-            if (r == 1) {
+            if (*s == STRING_ABSTRACTION_SIZE) {
 
-                // No destruction because primitive type.
-                finalize_boolean(p0, p2, p3);
+                compare_array_elements(p4, (void*) &STRING_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &STRING_ABSTRACTION_SIZE, (void*) &r);
 
-            } else {
+                if (r == 1) {
 
-            //?? CAUTION! Still compare sizes here!
-            compare_array_elements(p4, (void*) &INTEGER_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &INTEGER_ABSTRACTION_SIZE, (void*) &r);
+                    finalize_string(p0, p1, p2, p3);
 
-            if (r == 1) {
+                    d == 1;
+                }
+            }
+        }
 
-                // No destruction because primitive type.
-                finalize_integer(p0, p2, p3);
+        if (d == 0) {
 
-            } else {
+            if (*s == BOOLEAN_ABSTRACTION_SIZE) {
 
-            //?? CAUTION! Still compare sizes here!
-            compare_array_elements(p4, (void*) &VECTOR_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &VECTOR_ABSTRACTION_SIZE, (void*) &r);
+                compare_array_elements(p4, (void*) &BOOLEAN_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &BOOLEAN_ABSTRACTION_SIZE, (void*) &r);
 
-            if (r == 1) {
+                if (r == 1) {
 
-                finalize_vector(p0, p2, p3);
-                destroy_vector(p0);
+                    // No destruction because primitive type.
+                    finalize_boolean(p0, p2, p3);
 
-            } else {
+                    d == 1;
+                }
+            }
+        }
 
-            //?? CAUTION! Still compare sizes here!
-            compare_array_elements(p4, (void*) &DOUBLE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DOUBLE_ABSTRACTION_SIZE, (void*) &r);
+        if (d == 0) {
 
-            if (r == 1) {
+            if (*s == INTEGER_ABSTRACTION_SIZE) {
 
-                // No destruction because primitive type.
-                finalize_double(p0, p2, p3);
+                compare_array_elements(p4, (void*) &INTEGER_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &INTEGER_ABSTRACTION_SIZE, (void*) &r);
 
-            } else {
+                if (r == 1) {
 
-            //?? CAUTION! Still compare sizes here!
-            compare_array_elements(p4, (void*) &FRACTION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &FRACTION_ABSTRACTION_SIZE, (void*) &r);
+                    // No destruction because primitive type.
+                    finalize_integer(p0, p2, p3);
 
-            if (r == 1) {
+                    d == 1;
+                }
+            }
+        }
 
-                finalize_fraction(p0, p2, p3);
-                destroy_fraction(p0);
+        if (d == 0) {
 
-            } else {
+            if (*s == VECTOR_ABSTRACTION_SIZE) {
 
-            //?? CAUTION! Still compare sizes here!
-            compare_array_elements(p4, (void*) &COMPLEX_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPLEX_ABSTRACTION_SIZE, (void*) &r);
+                compare_array_elements(p4, (void*) &VECTOR_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &VECTOR_ABSTRACTION_SIZE, (void*) &r);
 
-            if (r == 1) {
+                if (r == 1) {
 
-                finalize_complex(p0, p2, p3);
-                destroy_complex(p0);
+                    finalize_vector(p0, p2, p3);
+                    destroy_vector(p0);
 
-            } else {
+                    d == 1;
+                }
+            }
+        }
 
-            //?? CAUTION! Still compare sizes here!
-            compare_array_elements(p4, (void*) &TIME_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &TIME_ABSTRACTION_SIZE, (void*) &r);
+        if (d == 0) {
 
-            if (r == 1) {
+            if (*s == DOUBLE_ABSTRACTION_SIZE) {
 
-                finalize_time(p0, p2, p3);
-                destroy_time(p0);
+                compare_array_elements(p4, (void*) &DOUBLE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DOUBLE_ABSTRACTION_SIZE, (void*) &r);
 
-            } // Time.
-            } // Complex.
-            } // Fraction.
-            } // Float.
-            } // Vector.
-            } // Integer.
-            } // Boolean.
-            } // String.
-            } // Operation.
-            } // Compound.
+                if (r == 1) {
+
+                    // No destruction because primitive type.
+                    finalize_double(p0, p2, p3);
+
+                    d == 1;
+                }
+            }
+        }
+
+        if (d == 0) {
+
+            if (*s == FRACTION_ABSTRACTION_SIZE) {
+
+                compare_array_elements(p4, (void*) &FRACTION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &FRACTION_ABSTRACTION_SIZE, (void*) &r);
+
+                if (r == 1) {
+
+                    finalize_fraction(p0, p2, p3);
+                    destroy_fraction(p0);
+
+                    d == 1;
+                }
+            }
+        }
+
+        if (d == 0) {
+
+            if (*s == COMPLEX_ABSTRACTION_SIZE) {
+
+                compare_array_elements(p4, (void*) &COMPLEX_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPLEX_ABSTRACTION_SIZE, (void*) &r);
+
+                if (r == 1) {
+
+                    finalize_complex(p0, p2, p3);
+                    destroy_complex(p0);
+
+                    d == 1;
+                }
+            }
+        }
+
+        if (d == 0) {
+
+            if (*s == TIME_ABSTRACTION_SIZE) {
+
+                compare_array_elements(p4, (void*) &TIME_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &TIME_ABSTRACTION_SIZE, (void*) &r);
+
+                if (r == 1) {
+
+                    finalize_time(p0, p2, p3);
+                    destroy_time(p0);
+
+                    d == 1;
+                }
+            }
         }
 
     } else {

@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.37 $ $Date: 2004-04-25 21:25:58 $ $Author: christian $
+ * @version $Revision: 1.38 $ $Date: 2004-04-27 16:57:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -630,164 +630,208 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
         j++;
     }
 
+    // The done flag.
+    int d = 0;
     // The comparison result.
     int r = 0;
 
     // Add.
-    //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &ADD_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &ADD_ABSTRACTION_SIZE, (void*) &r);
+    if (d == 0) {
 
-    if (r == 1) {
+        if (param0s == ADD_ABSTRACTION_SIZE) {
 
-        add(p1, (void*) &param1, (void*) &param1s, (void*) &param2, (void*) &param2s, (void*) &param3, (void*) &param3s);
+            compare_array_elements((void*) &param0, (void*) &ADD_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &ADD_ABSTRACTION_SIZE, (void*) &r);
 
-    } else {
+            if (r == 1) {
+
+                add(p1, (void*) &param1, (void*) &param1s, (void*) &param2, (void*) &param2s, (void*) &param3, (void*) &param3s);
+
+                d = 1;
+            }
+        }
+    }
 
     // Create statics.
-    //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &CREATE_STATICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CREATE_STATICS_ABSTRACTION_SIZE, (void*) &r);
+    if (d == 0) {
 
-    if (r == 1) {
+        if (param0s == CREATE_STATICS_ABSTRACTION_SIZE) {
+
+            compare_array_elements((void*) &param0, (void*) &CREATE_STATICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CREATE_STATICS_ABSTRACTION_SIZE, (void*) &r);
+
+            if (r == 1) {
 
 /*??
-        void* m = NULL_POINTER;
-        int ms = 0;
+                void* m = NULL_POINTER;
+                int ms = 0;
 
-        * @param p0 the transient model
-        * @param p1 the transient model size
-        * @param p2 the persistent model
-        * @param p3 the persistent model size
-        * @param p4 the abstraction
-        * @param p5 the abstraction size
-        //?? Work this out! Hand over 9 or just 3 parameters,
-        //?? for only part or also position and constraint?
-        //?? ATTENTION! One of the given cybol parameters must specify
-        //?? the whole model that the newly created part model will be attached to.
-        create_model(get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
-        set_map_element_with_name(s->part_models, get_array_element(v, (void*) &ONE_NUMBER), m);
+                * @param p0 the transient model
+                * @param p1 the transient model size
+                * @param p2 the persistent model
+                * @param p3 the persistent model size
+                * @param p4 the abstraction
+                * @param p5 the abstraction size
+                //?? Work this out! Hand over 9 or just 3 parameters,
+                //?? for only part or also position and constraint?
+                //?? ATTENTION! One of the given cybol parameters must specify
+                //?? the whole model that the newly created part model will be attached to.
+                create_model(get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
+                set_map_element_with_name(s->part_models, get_array_element(v, (void*) &ONE_NUMBER), m);
 */
 
-    } else {
+                d = 1;
+            }
+        }
+    }
 
     // Destroy statics.
-    //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &DESTROY_STATICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_STATICS_ABSTRACTION_SIZE, (void*) &r);
+    if (d == 0) {
 
-    if (r == 1) {
+        if (param0s == DESTROY_STATICS_ABSTRACTION_SIZE) {
+
+            compare_array_elements((void*) &param0, (void*) &DESTROY_STATICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_STATICS_ABSTRACTION_SIZE, (void*) &r);
+
+            if (r == 1) {
 
 /*??
-        struct model* s = (struct model*) p1;
+                struct model* s = (struct model*) p1;
 
-        if (s != NULL_POINTER) {
+                if (s != NULL_POINTER) {
 
-            //?? Work this out! Hand over 9 or just 3 parameters,
-            //?? for only part or also position and constraint?
-            void* m = get_map_element_with_name(s->part_models, get_map_element_with_name(v, (void*) &ONE_NUMBER));
-            destroy_model(m, get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
+                    //?? Work this out! Hand over 9 or just 3 parameters,
+                    //?? for only part or also position and constraint?
+                    void* m = get_map_element_with_name(s->part_models, get_map_element_with_name(v, (void*) &ONE_NUMBER));
+                    destroy_model(m, get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
 
-        } else {
+                } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle destroy statics model. The statics is null.");
-        }
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle destroy statics model. The statics is null.");
+                }
 */
 
-    } else {
+                d = 1;
+            }
+        }
+    }
 
     // Create dynamics.
-    //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &CREATE_DYNAMICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CREATE_DYNAMICS_ABSTRACTION_SIZE, (void*) &r);
+    if (d == 0) {
 
-    if (r == 1) {
+        if (param0s == CREATE_DYNAMICS_ABSTRACTION_SIZE) {
+
+            compare_array_elements((void*) &param0, (void*) &CREATE_DYNAMICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CREATE_DYNAMICS_ABSTRACTION_SIZE, (void*) &r);
+
+            if (r == 1) {
 
 /*??
-        struct model* d = (struct model*) p2;
+                struct model* d = (struct model*) p2;
 
-        if (d != NULL_POINTER) {
+                if (d != NULL_POINTER) {
 
-            //?? Work this out! Hand over 9 or just 3 parameters,
-            //?? for only part or also position and constraint?
-            void* m = create_model(get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
-            set_map_element_with_name(d->part_models, get_array_element(v, (void*) &ONE_NUMBER), m);
+                    //?? Work this out! Hand over 9 or just 3 parameters,
+                    //?? for only part or also position and constraint?
+                    void* m = create_model(get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
+                    set_map_element_with_name(d->part_models, get_array_element(v, (void*) &ONE_NUMBER), m);
 
-        } else {
+                } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle create dynamics model. The dynamics is null.");
-        }
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle create dynamics model. The dynamics is null.");
+                }
 */
 
-    } else {
+                d = 1;
+            }
+        }
+    }
 
     // Destroy dynamics.
-    //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &DESTROY_DYNAMICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_DYNAMICS_ABSTRACTION_SIZE, (void*) &r);
+    if (d == 0) {
 
-    if (r == 1) {
+        if (param0s == DESTROY_DYNAMICS_ABSTRACTION_SIZE) {
+
+            compare_array_elements((void*) &param0, (void*) &DESTROY_DYNAMICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_DYNAMICS_ABSTRACTION_SIZE, (void*) &r);
+
+            if (r == 1) {
 
 /*??
-        struct model* d = (struct model*) p2;
+                struct model* d = (struct model*) p2;
 
-        if (d != NULL_POINTER) {
+                if (d != NULL_POINTER) {
 
-            //?? Work this out! Hand over 9 or just 3 parameters,
-            //?? for only part or also position and constraint?
-            void* m = get_map_element_with_name(d->part_models, get_map_element_with_name(v, (void*) &ONE_NUMBER));
-            destroy_model(m, get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
+                    //?? Work this out! Hand over 9 or just 3 parameters,
+                    //?? for only part or also position and constraint?
+                    void* m = get_map_element_with_name(d->part_models, get_map_element_with_name(v, (void*) &ONE_NUMBER));
+                    destroy_model(m, get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
 
-        } else {
+                } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle destroy dynamics model. The dynamics is null.");
-        }
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle destroy dynamics model. The dynamics is null.");
+                }
 */
 
-    } else {
+                d = 1;
+            }
+        }
+    }
 
     // Send.
-    //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &SEND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &SEND_ABSTRACTION_SIZE, (void*) &r);
+    if (d == 0) {
 
-    if (r == 1) {
+        if (param0s == SEND_ABSTRACTION_SIZE) {
+
+            compare_array_elements((void*) &param0, (void*) &SEND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &SEND_ABSTRACTION_SIZE, (void*) &r);
+
+            if (r == 1) {
 
 /*??
-        void* l = get_map_element_with_name(v, "language");
+                void* l = get_map_element_with_name(v, "language");
 
-        if (strcmp(l, X_WINDOWS_LANGUAGE) == 0) {
+                if (strcmp(l, X_WINDOWS_LANGUAGE) == 0) {
 
-            send_x_windows_output(get_array_element(v, (void*) &ONE_NUMBER), get_array_element(v, (void*) &TWO_NUMBER), p3);
+                    send_x_windows_output(get_array_element(v, (void*) &ONE_NUMBER), get_array_element(v, (void*) &TWO_NUMBER), p3);
 
-        } else if (strcmp(l, TUI_LANGUAGE) == 0) {
+                } else if (strcmp(l, TUI_LANGUAGE) == 0) {
 
-        }
+                }
 */
 
-    } else {
+                d = 1;
+            }
+        }
+    }
 
     // Receive.
-    //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &RECEIVE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &RECEIVE_ABSTRACTION_SIZE, (void*) &r);
+    if (d == 0) {
 
-    if (r == 1) {
+        if (param0s == RECEIVE_ABSTRACTION_SIZE) {
 
-    } else {
+            compare_array_elements((void*) &param0, (void*) &RECEIVE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &RECEIVE_ABSTRACTION_SIZE, (void*) &r);
+
+            if (r == 1) {
+
+
+                d = 1;
+            }
+        }
+    }
 
     // Exit.
-    //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &EXIT_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &EXIT_ABSTRACTION_SIZE, (void*) &r);
+    if (d == 0) {
 
-    if (r == 1) {
+        if (param0s == EXIT_ABSTRACTION_SIZE) {
 
-        log_message((void*) &INFO_LOG_LEVEL, (void*) &"Set shutdown flag.");
+            compare_array_elements((void*) &param0, (void*) &EXIT_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &EXIT_ABSTRACTION_SIZE, (void*) &r);
 
-        int* f = (int*) p4;
-        *f = 1;
+            if (r == 1) {
 
-    } // Exit.
-    } // Receive.
-    } // Send.
-    } // Destroy dynamics.
-    } // Create dynamics.
-    } // Destroy statics.
-    } // Create statics.
-    } // Add.
+                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Set shutdown flag.");
+
+                int* f = (int*) p4;
+                *f = 1;
+
+                d = 1;
+            }
+        }
+    }
 
 /*??
         //?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.

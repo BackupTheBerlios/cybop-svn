@@ -29,7 +29,7 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.19 $ $Date: 2004-04-22 08:54:56 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2004-04-27 16:57:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,28 +53,40 @@
  */
 void initialize_boolean(void* p0, const void* p1, const void* p2) {
 
-    if (p0 != NULL_POINTER) {
+    if (p2 != NULL_POINTER) {
 
-        int* t = (int*) p0;
+        int* ps = (int*) p2;
 
-        log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize boolean.");
+        if (p0 != NULL_POINTER) {
 
-        int r = 0;
-        compare_array_elements(p1, (void*) &TRUE_BOOLEAN, (void*) &CHARACTER_ARRAY, (void*) &TRUE_BOOLEAN_SIZE, (void*) &r);
-
-        if (r == 1) {
-
-            *t = 1;
-
-        } else {
+            int* t = (int*) p0;
 
             // The default.
             *t = 0;
+
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize boolean.");
+
+            // The comparison result.
+            int r = 0;
+
+            if (*ps == TRUE_BOOLEAN_SIZE) {
+
+                compare_array_elements(p1, (void*) &TRUE_BOOLEAN, (void*) &CHARACTER_ARRAY, (void*) &TRUE_BOOLEAN_SIZE, (void*) &r);
+
+                if (r == 1) {
+
+                    *t = 1;
+                }
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize boolean. The transient model is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize boolean. The transient model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize boolean. The persistent model size is null.");
     }
 }
 
@@ -87,17 +99,17 @@ void initialize_boolean(void* p0, const void* p1, const void* p2) {
  */
 void finalize_boolean(const void* p0, void* p1, void* p2) {
 
-    if (p0 != NULL_POINTER) {
+    if (p2 != NULL_POINTER) {
 
-        int* t = (int*) p0;
+        int* ps = (int*) p2;
 
         if (p1 != NULL_POINTER) {
 
             char* p = (char*) p1;
 
-            if (p2 != NULL_POINTER) {
+            if (p0 != NULL_POINTER) {
 
-                int* ps = (int*) p2;
+                int* t = (int*) p0;
 
                 log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize boolean.");
 
@@ -115,7 +127,7 @@ void finalize_boolean(const void* p0, void* p1, void* p2) {
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize boolean. The persistent model size is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize boolean. The transient model is null.");
             }
 
         } else {
@@ -125,7 +137,7 @@ void finalize_boolean(const void* p0, void* p1, void* p2) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize boolean. The transient model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize boolean. The persistent model size is null.");
     }
 }
 
