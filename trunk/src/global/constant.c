@@ -48,7 +48,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.15 $ $Date: 2004-10-27 11:52:47 $ $Author: rholzmueller $
+ * @version $Revision: 1.16 $ $Date: 2004-10-27 13:27:39 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -70,29 +70,34 @@ static const int UNIX_SERVER_SOCKET_FLAG_INDEX = 0;
 //
 
 /** The integer internals count. */
-static const int INTEGER_INTERNALS_COUNT = 1;
+static const int INTEGER_INTERNALS_COUNT = 6;
 
 /** The unix server socket index. */
 static const int UNIX_SERVER_SOCKET_INDEX = 0;
 
 /** The tcp socket index. */
-static const int INTEGER_INTERNALS_TCPSOCKET_PORT_INDEX = 0;
-static const int INTEGER_INTERNALS_TCPSOCKET_ACTIVE_INDEX = 1;
+static const int INTEGER_INTERNALS_TCPSOCKET_PORT_INDEX = 1;
+static const int INTEGER_INTERNALS_TCPSOCKET_ACTIVE_INDEX = 2;
 
 /** The start parameter index. */
-static const int INTEGER_INTERNALS_START_ABSTRACTION_COUNT_INDEX = 2;
-static const int INTEGER_INTERNALS_START_CHANNEL_COUNT_INDEX = 3;
-static const int INTEGER_INTERNALS_START_MODEL_COUNT_INDEX = 4;
+static const int INTEGER_INTERNALS_START_ABSTRACTION_COUNT_INDEX = 3;
+static const int INTEGER_INTERNALS_START_CHANNEL_COUNT_INDEX = 4;
+static const int INTEGER_INTERNALS_START_MODEL_COUNT_INDEX = 5;
 
 //
 // Pointer internals.
 //
 
 /** The pointer internals count. */
-static const int POINTER_INTERNALS_COUNT = 1;
+static const int POINTER_INTERNALS_COUNT = 4;
 
 /** The unix server socket filename index. */
 static const int UNIX_SERVER_SOCKET_FILENAME_INDEX = 0;
+
+/** The start parameter index. */
+static const int POINTER_INTERNALS_START_ABSTRACTION_INDEX = 1;
+static const int POINTER_INTERNALS_START_CHANNEL_INDEX = 2;
+static const int POINTER_INTERNALS_START_MODEL_INDEX = 3;
 
 //
 // Double internals.
@@ -270,19 +275,22 @@ static const int FALSE_BOOLEAN_COUNT = 5;
 //
 
 /** The startup parameters count. */
-static const int STARTUP_PARAMETERS_COUNT = 4;
+static const int STARTUP_PARAMETERS_COUNT = 2;
+
+/** The config file startup parameter index. */
+static const int CONFIG_STARTUP_PARAMETER_INDEX = 1;
 
 /** The command startup parameter index. */
-static const int COMMAND_STARTUP_PARAMETER_INDEX = 0;
+//static const int COMMAND_STARTUP_PARAMETER_INDEX = 0;
 
 /** The channel startup parameter index. */
-static const int CHANNEL_STARTUP_PARAMETER_INDEX = 1;
+//static const int CHANNEL_STARTUP_PARAMETER_INDEX = 1;
 
 /** The abstraction startup parameter index. */
-static const int ABSTRACTION_STARTUP_PARAMETER_INDEX = 2;
+//static const int ABSTRACTION_STARTUP_PARAMETER_INDEX = 2;
 
 /** The model startup parameter index. */
-static const int MODEL_STARTUP_PARAMETER_INDEX = 3;
+//static const int MODEL_STARTUP_PARAMETER_INDEX = 3;
 
 /* CONSTANT_SOURCE */
 #endif

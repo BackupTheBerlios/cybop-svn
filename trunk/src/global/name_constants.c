@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.1 $ $Date: 2004-10-18 20:39:53 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-10-27 13:27:39 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,6 +63,21 @@ static const int MODEL_NAME_ABSTRACTION_COUNT = 5;
 static const char WHOLE_NAME_ABSTRACTION_ARRAY[] = {'w', 'h', 'o', 'l', 'e'};
 static const char* WHOLE_NAME_ABSTRACTION = WHOLE_NAME_ABSTRACTION_ARRAY;
 static const int WHOLE_NAME_ABSTRACTION_COUNT = 5;
+
+//
+// Config names.
+//
+
+/** The config start abstraction. */
+static const char CONFIG_START_NAME_ABSTRACTION_ARRAY[] = {'s', 't', 'a', 'r', 't'};
+static const char* CONFIG_START_NAME_ABSTRACTION = CONFIG_START_NAME_ABSTRACTION_ARRAY;
+static const int CONFIG_START_NAME_ABSTRACTION_COUNT = 5;
+
+/** The tcp socket abstraction. */
+static const char CONFIG_TCP_SOCKET_NAME_ABSTRACTION_ARRAY[] = {'t', 'c', 'p', '_', 's','o','c','k','e','t'};
+static const char* CONFIG_TCP_SOCKET_NAME_ABSTRACTION =CONFIG_TCP_SOCKET_NAME_ABSTRACTION_ARRAY;
+static const int CONFIG_TCP_SOCKET_NAME_ABSTRACTION_COUNT = 10;
+
 
 //
 // Communication names.
