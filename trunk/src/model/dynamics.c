@@ -37,7 +37,7 @@
  * http://home.arcor.de/cpp_kurs/cpp/le07/k2_09_d1.htm
  * ... or try a Google search.
  *
- * @version $Revision: 1.4 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-12-15 14:48:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -108,6 +108,16 @@ static const char* CREATE_DYNAMICS_MEMORY_MANAGEMENT = "create_dynamics";
 
 /** The destroy dynamics memory management. */
 static const char* DESTROY_DYNAMICS_MEMORY_MANAGEMENT = "destroy_dynamics";
+
+//
+// Input output models.
+//
+
+/** The send input output. */
+static const char* SEND_INPUT_OUTPUT = "send";
+
+/** The receive input output. */
+static const char* RECEIVE_INPUT_OUTPUT = "receive";
 
 //
 // Lifecycle step models.

@@ -36,6 +36,7 @@
 #include "dynamics_model.c"
 #include "map.c"
 #include "map_handler.c"
+#include "send_graphical_screen_message.c"
 #include "statics_model_handler.c"
 #include "vector.c"
 
@@ -49,7 +50,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.8 $ $Date: 2003-12-15 12:14:18 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-12-15 14:48:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,9 +64,6 @@ static const int NORMAL_PRIORITY = 0;
 //
 // Languages.
 //
-
-/** The system internal language. */
-static const char* INTERNAL_LANGUAGE = "internal";
 
 /** The textual user interface (tui) language. */
 static const char* TUI_LANGUAGE = "tui";
@@ -500,6 +498,20 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     log_message((void*) &ERROR_LOG_LEVEL, "Could not handle destroy dynamics operation signal. The dynamics is null.");
                 }
 
+            } else if (strcmp(a, SEND_INPUT_OUTPUT) == 0) {
+
+                void* l = get_map_element_with_name(io, "language");
+
+                if (strcmp(l, GUI_LANGUAGE) == 0) {
+                    
+                    send_graphical_screen_message(get_map_element_with_name(io, "addressee"), get_map_element_with_name(io, "message"));
+        
+                } else if (strcmp(l, TUI_LANGUAGE) == 0) {
+
+                }
+                
+            } else if (strcmp(a, RECEIVE_INPUT_OUTPUT) == 0) {
+        
             } else if (strcmp(a, EXIT_LIFECYCLE_STEP) == 0) {
         
                 // Set shutdown flag.

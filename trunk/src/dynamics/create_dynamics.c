@@ -38,7 +38,7 @@
  *
  * It creates a dynamics memory model from a given dynamics cybol model.
  *
- * @version $Revision: 1.4 $ $Date: 2003-12-15 12:14:18 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-12-15 14:48:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
