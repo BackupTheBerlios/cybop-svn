@@ -30,7 +30,7 @@ package cyboi;
  * It is necessary only as long as the Cybernetics Oriented Interpreter (CYBOI)
  * is implemented in the Java programming language.
  *
- * @version $Revision: 1.8 $ $Date: 2003-08-18 06:59:38 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-08-18 13:31:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaObjectHandler {
@@ -91,18 +91,29 @@ class JavaObjectHandler {
         
         if (p0 != null) {
 
-            // Find class by name.
-            java.lang.Class cl = java.lang.Class.forName((java.lang.String) p0);
-
-            if (cl != null) {
-
-                java.lang.System.out.println("INFO: Create java object.");
+            // If a swing jpanel with border layout is to be created, the layout
+            // has to be handed over in the constructor! Later assignment via:
+            //     panel.setLayout(new BorderLayout);
+            // will NOT work! Therefore, jpanel needs some extra code here.
+            if (p0.equals("javax.swing.JPanel")) {
+                
+                o = new javax.swing.JPanel(new java.awt.BorderLayout());
             
-                o = cl.newInstance();
-
             } else {
 
-                java.lang.System.out.println("ERROR: Could not create java object. The class is null.");
+                // Find class by name.
+                java.lang.Class cl = java.lang.Class.forName((java.lang.String) p0);
+    
+                if (cl != null) {
+    
+                    java.lang.System.out.println("INFO: Create java object.");
+                
+                    o = cl.newInstance();
+                    
+                } else {
+    
+                    java.lang.System.out.println("ERROR: Could not create java object. The class is null.");
+                }
             }
 
         } else {
@@ -741,9 +752,15 @@ class JavaObjectHandler {
                 java.lang.Integer.parseInt(bottom_border)));
 */
             
-            if ((positioning != null) && (positioning.equals("border"))) {
+            // Border layout can not be assigned here! It has to be handed over
+            // in the jpanel constructor! See: JavaObjectHandler.create_java_object
+            // However, other layouts can be assigned here using panel.setLayout(...);
+            if (positioning != null) {
                 
-                p.setLayout(new java.awt.BorderLayout());
+                if (positioning.equals("box")) {
+                
+//??                    p.setLayout(new javax.swing.BoxLayout());
+                }
             }
             
         } else {
