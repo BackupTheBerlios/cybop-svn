@@ -44,7 +44,7 @@
  *
  * A map's elements can such be accessed over their name or index.
  *
- * @version $Revision: 1.18 $ $Date: 2004-03-29 21:54:13 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2004-03-30 17:50:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,7 +62,7 @@ void create_map(void* p0) {
     log_message((void*) &INFO_LOG_LEVEL, "Create map.");
 
     // The map size.
-    int s = 4;
+    int s = 5;
     // The map.
     create_array(p0, (void*) &s);
     // The index.
@@ -97,6 +97,12 @@ void create_map(void* p0) {
     void* r = (void*) 0;
     create_array((void*) &r, (void*) &as);
     set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
+
+    // The references sizes array.
+    i = 4;
+    void* rs = (void*) 0;
+    create_array((void*) &rs, (void*) &as);
+    set_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &rs);
 }
 
 /**
@@ -109,9 +115,16 @@ void destroy_map(void* p0) {
     log_message((void*) &INFO_LOG_LEVEL, "Destroy map.");
 
     // The map size.
-    int s = 4;
+    int s = 5;
     // The index.
     int i;
+
+    // The references sizes array.
+    i = 4;
+    void* rs = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &rs);
+    remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
+    destroy_array((void*) &rs, (void*) &as);
 
     // The references array.
     i = 3;
@@ -125,7 +138,7 @@ void destroy_map(void* p0) {
     void* ns = (void*) 0;
     get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ns);
     remove_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i);
-    destroy_array((void*) &sn, (void*) &as);
+    destroy_array((void*) &ns, (void*) &as);
 
     // The names array.
     i = 1;
@@ -357,12 +370,13 @@ void build_next_map_element_name(const void* p0, const void* p1, void* p2) {
  * @param p1 the index
  * @param p2 the name
  * @param p3 the name size
- * @param p4 the element
+ * @param p4 the reference
+ * @param p5 the reference size
  */
-void set_map_element_at_index(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
+void set_map_element_at_index(void* p0, const void* p1, const void* p2, const void* p3, const void* p4, const void* p5) {
 
     // The map size.
-    int s = 4;
+    int s = 5;
     // The index.
     int i;
 
@@ -394,6 +408,12 @@ void set_map_element_at_index(void* p0, const void* p1, const void* p2, const vo
     void* r = (void*) 0;
     get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
     set_array_element((void*) &r, (void*) &as, (void*) &POINTER_ARRAY, p1, p4);
+
+    // The references sizes array.
+    i = 4;
+    void* rs = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &rs);
+    set_array_element((void*) &rs, (void*) &as, (void*) &POINTER_ARRAY, p1, p5);
 }
 
 /**
@@ -402,9 +422,10 @@ void set_map_element_at_index(void* p0, const void* p1, const void* p2, const vo
  * @param p0 the map
  * @param p1 the name
  * @param p2 the name size
- * @param p3 the element
+ * @param p3 the reference
+ * @param p4 the reference size
  */
-void add_map_element(void* p0, const void* p1, const void* p2, const void* p3) {
+void add_map_element(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
 
 /*??
     // This element name will get destroyed (free) in remove_map_element.
@@ -431,12 +452,13 @@ void add_map_element(void* p0, const void* p1, const void* p2, const void* p3) {
  * @param p0 the map
  * @param p1 the name
  * @param p2 the name size
- * @param p3 the element
+ * @param p3 the reference
+ * @param p4 the reference size
  */
-void set_map_element_with_name(void* p0, const void* p1, const void* p2, const void* p3) {
+void set_map_element_with_name(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
 
     // The map size.
-    int s = 4;
+    int s = 5;
     // The index.
     int i;
 
@@ -456,11 +478,11 @@ void set_map_element_with_name(void* p0, const void* p1, const void* p2, const v
 
     if (index != -1) {
 
-        set_map_element_at_index(p0, (void*) &index, p1, p2, p3);
+        set_map_element_at_index(p0, (void*) &index, p1, p2, p3, p4);
 
     } else {
 
-        add_map_element(p0, p1, p2, p3);
+        add_map_element(p0, p1, p2, p3, p4);
     }
 }
 
@@ -473,7 +495,7 @@ void set_map_element_with_name(void* p0, const void* p1, const void* p2, const v
 void remove_map_element_at_index(void* p0, const void* p1) {
 
     // The map size.
-    int s = 4;
+    int s = 5;
     // The index.
     int i;
 
@@ -505,6 +527,12 @@ void remove_map_element_at_index(void* p0, const void* p1) {
     void* r = (void*) 0;
     get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
     remove_array_element((void*) &r, (void*) &as, (void*) &POINTER_ARRAY, p1);
+
+    // The references sizes array.
+    i = 4;
+    void* rs = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &rs);
+    remove_array_element((void*) &rs, (void*) &as, (void*) &POINTER_ARRAY, p1);
 }
 
 /**
@@ -517,7 +545,7 @@ void remove_map_element_at_index(void* p0, const void* p1) {
 void remove_map_element_with_name(void* p0, const void* p1, const void* p2) {
 
     // The map size.
-    int s = 4;
+    int s = 5;
     // The index.
     int i;
 
@@ -549,12 +577,13 @@ void remove_map_element_with_name(void* p0, const void* p1, const void* p2) {
  *
  * @param p0 the map
  * @param p1 the index
- * @param p2 the element
+ * @param p2 the reference
+ * @param p3 the reference size
  */
-void get_map_element_at_index(const void* p0, const void* p1, void* p2) {
+void get_map_element_at_index(const void* p0, const void* p1, void* p2, void* p3) {
 
     // The map size.
-    int s = 4;
+    int s = 5;
     // The index.
     int i;
 
@@ -568,6 +597,12 @@ void get_map_element_at_index(const void* p0, const void* p1, void* p2) {
     void* r = (void*) 0;
     get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &r);
     get_array_element((void*) &r, (void*) &as, (void*) &POINTER_ARRAY, p1, p2);
+
+    // The references sizes array.
+    i = 4;
+    void* rs = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &rs);
+    get_array_element((void*) &rs, (void*) &as, (void*) &POINTER_ARRAY, p1, p3);
 }
 
 /**
@@ -576,12 +611,13 @@ void get_map_element_at_index(const void* p0, const void* p1, void* p2) {
  * @param p0 the map
  * @param p1 the name
  * @param p2 the name size
- * @param p3 the element
+ * @param p3 the reference
+ * @param p4 the reference size
  */
-void get_map_element_with_name(const void* p0, const void* p1, const void* p2, void* p3) {
+void get_map_element_with_name(const void* p0, const void* p1, const void* p2, void* p3, void* p4) {
 
     // The map size.
-    int s = 4;
+    int s = 5;
     // The index.
     int i;
 
@@ -601,7 +637,7 @@ void get_map_element_with_name(const void* p0, const void* p1, const void* p2, v
 
     if (index != -1) {
 
-        get_map_element_at_index(p0, (void*) &index, p3);
+        get_map_element_at_index(p0, (void*) &index, p3, p4);
     }
 }
 

@@ -50,7 +50,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.18 $ $Date: 2004-03-29 21:54:13 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2004-03-30 17:50:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -525,80 +525,144 @@ void finalize_model(void* p0, const void* p1) {
  *
  * @param p0 the model
  * @param p1 the name
- * @param p2 the part abstraction
- * @param p3 the part location
- * @param p4 the part model
- * @param p5 the position abstraction
- * @param p6 the position location
- * @param p7 the position model
- * @param p8 the constraint abstraction
- * @param p9 the constraint location
- * @param p10 the constraint model
+ * @param p2 the name size
+ * @param p3 the part abstraction
+ * @param p4 the part abstraction size
+ * @param p5 the part location
+ * @param p6 the part location size
+ * @param p7 the part model
+ * @param p8 the part model size
+ * @param p9 the position abstraction
+ * @param p10 the position abstraction size
+ * @param p11 the position location
+ * @param p12 the position location size
+ * @param p13 the position model
+ * @param p14 the position model size
+ * @param p15 the constraint abstraction
+ * @param p16 the constraint abstraction size
+ * @param p17 the constraint location
+ * @param p18 the constraint location size
+ * @param p19 the constraint model
+ * @param p20 the constraint model size
  */
-void set_model_part(void* p0, const void* p1, const void* p2, const void* p3, const void* p4, const void* p5, const void* p6, const void* p7, const void* p8, const void* p9, const void* p10) {
+void set_model_part(void* p0, const void* p1, const void* p2, const void* p3, const void* p4,
+    const void* p5, const void* p6, const void* p7, const void* p8, const void* p9,
+    const void* p10, const void* p11, const void* p12, const void* p13, const void* p14,
+    const void* p15, const void* p16, const void* p17, const void* p18, const void* p19, const void* p20) {
 
-    struct model* m = (struct model*) p0;
+    log_message((void*) &INFO_LOG_LEVEL, "Set model part.");
 
-    if (m != (void*) 0) {
+    // The model size.
+    int s = 10;
+    // The index.
+    int i;
 
-        log_message((void*) &INFO_LOG_LEVEL, "Set model part: ");
+    //??
+    //?? SUPER kann weg!! Loeschen! Nur in CYBOL noetig, nicht in transient model!
+    //??
 
-        set_map_element_with_name(m->part_abstractions, p1, p2);
-        set_map_element_with_name(m->part_locations, p1, p3);
-        set_map_element_with_name(m->part_models, p1, p4);
-        set_map_element_with_name(m->position_abstractions, p1, p5);
-        set_map_element_with_name(m->position_locations, p1, p6);
-        set_map_element_with_name(m->position_models, p1, p7);
-        set_map_element_with_name(m->constraint_abstractions, p1, p8);
-        set_map_element_with_name(m->constraint_locations, p1, p9);
-        set_map_element_with_name(m->constraint_models, p1, p10);
+    // The super location.
+    i = 0;
+    void* sl = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &sl);
+    //?? Still unclear!
+    set_map_element_with_name((void*) &sl, (void*) &as, (void*) &POINTER_ARRAY, p1, p2);
+
+    // The part abstractions.
+    i = 1;
+    void* pa = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pa);
+    set_map_element_with_name((void*) &pa, p1, p2, p3, p4);
+
+    // The part locations.
+    i = 2;
+    void* pl = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pl);
+    set_map_element_with_name((void*) &pl, p1, p2, p5, p6);
+
+    // The part models.
+    i = 3;
+    void* pm = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pm);
+    set_map_element_with_name((void*) &pm, p1, p2, p7, p8);
+
+    // The position abstractions.
+    i = 4;
+    void* poa = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &poa);
+    set_map_element_with_name((void*) &poa, p1, p2, p9, p10);
+
+    // The position locations.
+    i = 5;
+    void* pol = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pol);
+    set_map_element_with_name((void*) &pol, p1, p2, p11, p12);
+
+    // The position models.
+    i = 6;
+    void* pom = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pom);
+    set_map_element_with_name((void*) &pom, p1, p2, p13, p14);
+
+    // The constraint abstractions.
+    i = 7;
+    void* ca = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ca);
+    set_map_element_with_name((void*) &ca, p1, p2, p15, p16);
+
+    // The constraint locations.
+    i = 8;
+    void* cl = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cl);
+    set_map_element_with_name((void*) &cl, p1, p2, p17, p18);
+
+    // The constraint models.
+    i = 9;
+    void* cm = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cm);
+    set_map_element_with_name((void*) &cm, p1, p2, p19, p20);
 
 /*??
-        int length = 0;
-        get_string_length(p1, (void*) &length);
-        int start = 0;
-        int end = 0;
-        get_character_index(p1, (void*) &DOT_CHARACTER, (void*) &length, (void*) &end);
-        void* n = malloc(0);
+    int length = 0;
+    get_string_length(p1, (void*) &length);
+    int start = 0;
+    int end = 0;
+    get_character_index(p1, (void*) &DOT_CHARACTER, (void*) &length, (void*) &end);
+    void* n = malloc(0);
 
-        copy_sub_string(p1, (void*) &start, (void*) &end, n);
+    copy_sub_string(p1, (void*) &start, (void*) &end, n);
 
-        char* r = (char*) p1 + end;
+    char* r = (char*) p1 + end;
 
-        // Only call procedure recursively if the remaining string is not empty.
-        if (*r != '\0') {
+    // Only call procedure recursively if the remaining string is not empty.
+    if (*r != '\0') {
 
-            // The given model contains compound models.
-            void* part = get_map_element_with_name(m->part_models, n);
+        // The given model contains compound models.
+        void* part = get_map_element_with_name(m->part_models, n);
 
-            // Continue to process along the hierarchical name.
-            set_model_part(part, r + 1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+        // Continue to process along the hierarchical name.
+        set_model_part(part, r + 1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
 
-            // The name served only as a temporary model identificator.
-            free(n);
-
-        } else {
-
-            // The given model contains primitive models.
-            set_map_element_with_name(m->part_abstractions, n, p2);
-            set_map_element_with_name(m->part_locations, n, p3);
-            set_map_element_with_name(m->part_models, n, p4);
-            set_map_element_with_name(m->position_abstractions, n, p5);
-            set_map_element_with_name(m->position_locations, n, p6);
-            set_map_element_with_name(m->position_models, n, p7);
-            set_map_element_with_name(m->constraint_abstractions, n, p8);
-            set_map_element_with_name(m->constraint_locations, n, p9);
-            set_map_element_with_name(m->constraint_models, n, p10);
-
-            // Do not free(n) here! The name is referenced by the model maps.
-            // It will get freed when removing a model part.
-        }
-*/
+        // The name served only as a temporary model identificator.
+        free(n);
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part. The model is null.");
+        // The given model contains primitive models.
+        set_map_element_with_name(m->part_abstractions, n, p2);
+        set_map_element_with_name(m->part_locations, n, p3);
+        set_map_element_with_name(m->part_models, n, p4);
+        set_map_element_with_name(m->position_abstractions, n, p5);
+        set_map_element_with_name(m->position_locations, n, p6);
+        set_map_element_with_name(m->position_models, n, p7);
+        set_map_element_with_name(m->constraint_abstractions, n, p8);
+        set_map_element_with_name(m->constraint_locations, n, p9);
+        set_map_element_with_name(m->constraint_models, n, p10);
+
+        // Do not free(n) here! The name is referenced by the model maps.
+        // It will get freed when removing a model part.
     }
+*/
 }
 
 /**
@@ -606,71 +670,119 @@ void set_model_part(void* p0, const void* p1, const void* p2, const void* p3, co
  *
  * @param p0 the model
  * @param p1 the name
+ * @param p2 the name size
  */
 void remove_model_part(void* p0, const void* p1) {
 
-    struct model* m = (struct model*) p0;
+    log_message((void*) &INFO_LOG_LEVEL, "Remove model part.");
 
-    if (m != (void*) 0) {
+    // The model size.
+    int s = 5;
+    // The index.
+    int i;
 
-        log_message((void*) &INFO_LOG_LEVEL, "Remove model part: ");
+    // The super location.
+    i = 0;
+    void* sl = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &sl);
+    //?? Still unclear!
+    remove_map_element_with_name((void*) &sl, (void*) &as, (void*) &POINTER_ARRAY, p1);
 
-        remove_map_element_with_name(m->part_abstractions, p1);
-        remove_map_element_with_name(m->part_locations, p1);
-        remove_map_element_with_name(m->part_models, p1);
-        remove_map_element_with_name(m->position_abstractions, p1);
-        remove_map_element_with_name(m->position_locations, p1);
-        remove_map_element_with_name(m->position_models, p1);
-        remove_map_element_with_name(m->constraint_abstractions, p1);
-        remove_map_element_with_name(m->constraint_locations, p1);
-        remove_map_element_with_name(m->constraint_models, p1);
+    // The part abstractions.
+    i = 1;
+    void* pa = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pa);
+    remove_map_element_with_name((void*) &pa, p1, p2);
+
+    // The part locations.
+    i = 2;
+    void* pl = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pl);
+    set_map_element_with_name((void*) &pl, p1, p2, p5, p6);
+
+    // The part models.
+    i = 3;
+    void* pm = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pm);
+    set_map_element_with_name((void*) &pm, p1, p2, p7, p8);
+
+    // The position abstractions.
+    i = 4;
+    void* poa = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &poa);
+    set_map_element_with_name((void*) &poa, p1, p2, p9, p10);
+
+    // The position locations.
+    i = 5;
+    void* pol = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pol);
+    set_map_element_with_name((void*) &pol, p1, p2, p11, p12);
+
+    // The position models.
+    i = 6;
+    void* pom = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pom);
+    set_map_element_with_name((void*) &pom, p1, p2, p13, p14);
+
+    // The constraint abstractions.
+    i = 7;
+    void* ca = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ca);
+    set_map_element_with_name((void*) &ca, p1, p2, p15, p16);
+
+    // The constraint locations.
+    i = 8;
+    void* cl = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cl);
+    set_map_element_with_name((void*) &cl, p1, p2, p17, p18);
+
+    // The constraint models.
+    i = 9;
+    void* cm = (void*) 0;
+    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cm);
+    set_map_element_with_name((void*) &cm, p1, p2, p19, p20);
 
 /*??
-        int length = 0;
-        get_string_length(p1, (void*) &length);
-        int start = 0;
-        int end = 0;
-        get_character_index(p1, (void*) &DOT_CHARACTER, (void*) &length, (void*) &end);
-        void* n = malloc(0);
+    int length = 0;
+    get_string_length(p1, (void*) &length);
+    int start = 0;
+    int end = 0;
+    get_character_index(p1, (void*) &DOT_CHARACTER, (void*) &length, (void*) &end);
+    void* n = malloc(0);
 
-        copy_sub_string(p1, (void*) &start, (void*) &end, n);
+    copy_sub_string(p1, (void*) &start, (void*) &end, n);
 
-        char* r = (char*) p1 + end;
+    char* r = (char*) p1 + end;
 
-        // Only call procedure recursively if the remaining string is not empty.
-        if (*r != '\0') {
+    // Only call procedure recursively if the remaining string is not empty.
+    if (*r != '\0') {
 
-            // The given model contains compound models.
-            void* part = get_map_element_with_name(m->part_models, n);
+        // The given model contains compound models.
+        void* part = get_map_element_with_name(m->part_models, n);
 
-            // Continue to process along the hierarchical name.
-            remove_model_part(part, r + 1);
+        // Continue to process along the hierarchical name.
+        remove_model_part(part, r + 1);
 
-            // The name served only as a temporary model identificator.
-            free(n);
-
-        } else {
-
-            // The given model contains primitive models.
-            remove_map_element_with_name(m->part_abstractions, n);
-            remove_map_element_with_name(m->part_locations, n);
-            remove_map_element_with_name(m->part_models, n);
-            remove_map_element_with_name(m->position_abstractions, n);
-            remove_map_element_with_name(m->position_locations, n);
-            remove_map_element_with_name(m->position_models, n);
-            remove_map_element_with_name(m->constraint_abstractions, n);
-            remove_map_element_with_name(m->constraint_locations, n);
-            remove_map_element_with_name(m->constraint_models, n);
-
-            // Do not free(n) here! The name is referenced by the model maps.
-            // It will get freed when removing a model part.
-        }
-*/
+        // The name served only as a temporary model identificator.
+        free(n);
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part. The model is null.");
+        // The given model contains primitive models.
+        remove_map_element_with_name(m->part_abstractions, n);
+        remove_map_element_with_name(m->part_locations, n);
+        remove_map_element_with_name(m->part_models, n);
+        remove_map_element_with_name(m->position_abstractions, n);
+        remove_map_element_with_name(m->position_locations, n);
+        remove_map_element_with_name(m->position_models, n);
+        remove_map_element_with_name(m->constraint_abstractions, n);
+        remove_map_element_with_name(m->constraint_locations, n);
+        remove_map_element_with_name(m->constraint_models, n);
+
+        // Do not free(n) here! The name is referenced by the model maps.
+        // It will get freed when removing a model part.
     }
+*/
 }
 
 /**
