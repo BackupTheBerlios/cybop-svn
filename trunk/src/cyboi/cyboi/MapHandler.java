@@ -29,7 +29,7 @@ package cyboi;
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.13 $ $Date: 2003-07-31 00:52:20 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-07-31 11:09:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class MapHandler {
@@ -180,35 +180,38 @@ class MapHandler {
      * Returns the map element with the index.
      *
      * @param p0 the map
-     * @param p1 the element
-     * @param p2 the index
+     * @param p1 the index
+     * @return the element
      */
-    static void get_map_element(java.lang.Object p0, java.lang.Object p1, int p2) {
+    static java.lang.Object get_map_element(java.lang.Object p0, int p1) {
 
+        java.lang.Object e = null;
         Map m = (Map) p0;
 
         if (m != null) {
     
-            ArrayHandler.get_array_element(m.references, p1, p2);
+            e = ArrayHandler.get_array_element(m.references, p1);
 
         } else {
 
             java.lang.System.out.println("ERROR: Could not get map element. The map is null.");
         }
+        
+        return e;
     }
 
     /**
      * Returns the map element with the name.
      *
      * @param p0 the map
-     * @param p1 the element
-     * @param p2 the name
+     * @param p1 the name
+     * @return the element
      */
-    static void get_map_element(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
+    static java.lang.Object get_map_element(java.lang.Object p0, java.lang.Object p1) {
 
-        int i = MapHandler.get_map_element_index(p0, p2);
+        int i = MapHandler.get_map_element_index(p0, p1);
 
-        MapHandler.get_map_element(p0, p1, i);
+        return MapHandler.get_map_element(p0, i);
     }
 
     /**
@@ -232,7 +235,7 @@ class MapHandler {
 
             while (i < size) {
 
-                ArrayHandler.get_array_element(a, name, i);
+                name = ArrayHandler.get_array_element(a, i);
 
                 // If a null name is reached, then the name was not found.
                 // In this case, reset index to -1.
@@ -291,7 +294,7 @@ class MapHandler {
 
             while (i < size) {
 
-                ArrayHandler.get_array_element(a, name, i);
+                name = ArrayHandler.get_array_element(a, i);
 
                 // If a null name is reached, then the name was not found.
                 // In this case, the current value of i is the next free index.
@@ -383,7 +386,7 @@ class MapHandler {
 
             while (i < size) {
 
-                ArrayHandler.get_array_element(a, name, i);
+                name = ArrayHandler.get_array_element(a, i);
 
                 if (name != null) {
 

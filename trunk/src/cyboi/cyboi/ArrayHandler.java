@@ -29,7 +29,7 @@ package cyboi;
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.10 $ $Date: 2003-07-31 00:52:20 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-07-31 11:09:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ArrayHandler {
@@ -44,30 +44,42 @@ class ArrayHandler {
      * All elements are copied from the old to the new array.
      *
      * @param p0 the array
+     * @return the extended array
      */
-    static void extend_array(java.lang.Object[] p0) {
+    static java.lang.Object[] extend_array(java.lang.Object[] p0) {
 
+        java.lang.Object[] a = null;
+        
         if (p0 != null) {
 
             int old_length = p0.length;
             int new_length = old_length * 2 + 1;
-            java.lang.Object[] a = new java.lang.Object[new_length];
-            int i = 0;
+            a = new java.lang.Object[new_length];
+            
+            if (a != null) {
+                    
+                int i = 0;
+    
+                while (i < old_length) {
+    
+                    a[i] = p0[i];
+    
+                    i++;
+                }
+    
+                p0 = null;
 
-            while (i < old_length) {
-
-                a[i] = p0[i];
-
-                i++;
+            } else {
+    
+                System.out.println("ERROR: Could not extend array. The new array is null.");
             }
-
-            p0 = null;
-            p0 = a;
 
         } else {
 
             System.out.println("ERROR: Could not extend array. The array is null.");
         }
+        
+        return a;
     }
 
     /**
@@ -147,7 +159,7 @@ class ArrayHandler {
             // is created and delivered back.
             if (p2 >= p0.length) {
 
-                ArrayHandler.extend_array(p0);
+                p0 = ArrayHandler.extend_array(p0);
             }
 
             //?? Temporary: Remove old and add new java tree node.
@@ -202,19 +214,30 @@ class ArrayHandler {
      * Returns the element.
      *
      * @param p0 the array
-     * @param p1 the element
-     * @param p2 the index
+     * @param p1 the index
+     * @return the element
      */
-    static void get_array_element(java.lang.Object[] p0, java.lang.Object p1, int p2) {
+    static java.lang.Object get_array_element(java.lang.Object[] p0, int p1) {
 
+        java.lang.Object e = null;
+        
         if (p0 != null) {
 
-            p1 = p0[p2];
+            if (p1 != -1) {
+                
+                e = p0[p1];
+                
+            } else {
+                
+                e = null;
+            }
 
         } else {
 
             System.out.println("ERROR: Could not get array element. The array is null.");
         }
+        
+        return e;
     }
 }
 

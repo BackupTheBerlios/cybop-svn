@@ -30,7 +30,7 @@ package cyboi;
  * It is necessary only as long as the Cybernetics Oriented Interpreter (CYBOI)
  * is implemented in the Java programming language.
  *
- * @version $Revision: 1.3 $ $Date: 2003-07-31 00:52:20 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-07-31 11:09:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaObjectHandler {
@@ -39,9 +39,6 @@ class JavaObjectHandler {
     // Constants.
     //
     
-    /** The category. */
-    static java.lang.String CATEGORY = "category";
-
     /** The width. */
     static java.lang.String WIDTH = "width";
 
@@ -49,26 +46,28 @@ class JavaObjectHandler {
     static java.lang.String HEIGHT = "height";
 
     //
-    // Creation.
+    // Java object.
     //
 
     /**
      * Creates a java object.
      *
-     * @param p0 the java object
-     * @param p1 the category
+     * @param p0 the category
+     * @return the java object
      */
-    static void create_java_object(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
+    static java.lang.Object create_java_object(java.lang.Object p0) throws java.lang.Exception {
 
-        if (p1 != null) {
+        java.lang.Object o = null;
+        
+        if (p0 != null) {
 
             // Find class by name.
-            java.lang.Class cl = java.lang.Class.forName((java.lang.String) p1);
+            java.lang.Class cl = java.lang.Class.forName((java.lang.String) p0);
 
             if (cl != null) {
 
                 // Create java object from class.
-                p0 = cl.newInstance();
+                o = cl.newInstance();
 
             } else {
 
@@ -79,6 +78,8 @@ class JavaObjectHandler {
 
             java.lang.System.out.println("ERROR: Could not create java object. The category is null.");
         }
+        
+        return o;
     }
 
     /**
@@ -94,16 +95,16 @@ class JavaObjectHandler {
     }
 
     //
-    // Initialization.
+    // Java object attributes.
     //
     
     /**
-     * Initializes the java object.
+     * Initializes the java object attributes.
      *
      * @param p0 the java object
-     * @param p1 the attributes map
+     * @param p1 the attributes
      */
-    static void initialize_java_object(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
+    static void initialize_java_object_attributes(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
         if (p0 != null) {
 
@@ -111,17 +112,15 @@ class JavaObjectHandler {
             
             if (p0 instanceof javax.swing.JFrame) {
                     
-/*??
-                java.lang.String width = (java.lang.String) CategoryHandler.read_attribute(p1, JavaObjectHandler.WIDTH);
-                java.lang.String height = (java.lang.String) CategoryHandler.read_attribute(p1, JavaObjectHandler.HEIGHT);
+                java.lang.String width = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.WIDTH);
+                java.lang.String height = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.HEIGHT);
                 ((javax.swing.JFrame) p0).setSize(java.lang.Integer.parseInt(width), java.lang.Integer.parseInt(height));
                 ((javax.swing.JFrame) p0).setVisible(true);
-*/
             }
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize java object. The java object is null.");
+            java.lang.System.out.println("ERROR: Could not initialize java object attributes. The java object is null.");
         }
     }
 }

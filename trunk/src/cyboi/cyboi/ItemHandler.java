@@ -29,7 +29,7 @@ package cyboi;
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.21 $ $Date: 2003-07-31 00:52:20 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2003-07-31 11:09:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -132,36 +132,43 @@ class ItemHandler {
      * Initializes the item.
      *
      * @param p0 the item
-     * @param p1 the category
+     * @param p1 the category name
      */
     static void initialize_item(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
         java.lang.System.out.println("INFO: Initialize item: " + p1);
         
-        Category c = new Category();
-
-        CategoryHandler.initialize_category(c, p1);
-
         ItemHandler.initialize_item_containers(p0);
+
+        Category c = new Category();
+        CategoryHandler.initialize_category(c, p1);
+        java.lang.System.out.println("TEST category: " + c);
+        java.lang.System.out.println("TEST java object: " + c.java_object);
+        java.lang.System.out.println("TEST items: " + c.items);
+        java.lang.System.out.println("TEST items length: " + ((Map) c.items).names.length);
+        for (int i = 0; i < ((Map) c.items).names.length; i++) {
+            java.lang.System.out.println("TEST item: " + i + " " + ((Map) c.items).names[i]);
+        }
         ItemHandler.initialize_item_elements(p0, c);
+        c = null;
     }
 
     /**
      * Finalizes the item.
      *
      * @param p0 the item
-     * @param p1 the category
+     * @param p1 the category name
      */
     static void finalize_item(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
         java.lang.System.out.println("INFO: Finalize item: " + p1);
         
         Category c = new Category();
-
         ItemHandler.finalize_item_elements(p0, c);
-        ItemHandler.finalize_item_containers(p0);
-
         CategoryHandler.finalize_category(c, p1);
+        c = null;
+
+        ItemHandler.finalize_item_containers(p0);
     }
 
     //
@@ -255,11 +262,11 @@ class ItemHandler {
                 
                 int count = 0;
                 int size = MapHandler.get_map_size(cm);
-                CategoryItem ci = null;
+                java.lang.Object ci = null;
                 
                 while (count < size) {
                     
-                    MapHandler.get_map_element(cm, ci, count);
+                    ci = MapHandler.get_map_element(cm, count);
 
                     ItemHandler.initialize_item_element(p0, ci);
                 }
@@ -305,16 +312,27 @@ class ItemHandler {
      * Initializes the java object.
      *
      * @param p0 the item
-     * @param p1 the java object category
+     * @param p1 the category java object
      */
     static void initialize_java_object(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
-    
+
         Item i = (Item) p0;
         
         if (i != null) {
+                
+            CategoryJavaObject o = (CategoryJavaObject) p1;
+            
+            if (o != null) {
+        
+                java.lang.System.out.println("INFO: Initialize java object.");
+
+                i.java_object = JavaObjectHandler.create_java_object(o.category);
+                JavaObjectHandler.initialize_java_object_attributes(i.java_object, o.attributes);
     
-            java.lang.System.out.println("INFO: Initialize java object.");
-            JavaObjectHandler.create_java_object(i.java_object, p1);
+            } else {
+                
+                java.lang.System.out.println("ERROR: Could not initialize java object. The java object is null.");
+            }
 
         } else {
             
@@ -330,6 +348,7 @@ class ItemHandler {
      */
     static void finalize_java_object(java.lang.Object p0, java.lang.Object p1) {
     
+/*??
         Item i = (Item) p0;
         
         if (i != null) {
@@ -341,6 +360,7 @@ class ItemHandler {
             
             java.lang.System.out.println("ERROR: Could not finalize java object. The item is null.");
         }
+*/
     }
 
     //
@@ -414,23 +434,19 @@ class ItemHandler {
 
                 java.lang.Object o = null;
 
-                o = null;
-                MapHandler.get_map_element(i.items, o, ci.name);
+                o = MapHandler.get_map_element(i.items, ci.name);
                 ItemHandler.finalize_object(o, ci.item_category, ci.item_abstraction);
                 MapHandler.remove_map_element(i.items, ci.name);
     
-                o = null;
-                MapHandler.get_map_element(i.positions, o, ci.name);
+                o = MapHandler.get_map_element(i.positions, ci.name);
                 ItemHandler.finalize_object(o, ci.position_category, ci.position_abstraction);
                 MapHandler.remove_map_element(i.positions, ci.name);
     
-                o = null;
-                MapHandler.get_map_element(i.instances, o, ci.name);
+                o = MapHandler.get_map_element(i.instances, ci.name);
                 ItemHandler.finalize_object(o, ci.instance_category, ci.instance_abstraction);
                 MapHandler.remove_map_element(i.instances, ci.name);
     
-                o = null;
-                MapHandler.get_map_element(i.interactions, o, ci.name);
+                o = MapHandler.get_map_element(i.interactions, ci.name);
                 ItemHandler.finalize_object(o, ci.interaction_category, ci.interaction_abstraction);
                 MapHandler.remove_map_element(i.interactions, ci.name);
     

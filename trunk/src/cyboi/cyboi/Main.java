@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.20 $ $Date: 2003-07-31 00:52:20 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2003-07-31 11:09:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -61,9 +61,9 @@ class Main {
                 if (args.length == 2) {
 
                     // Arguments.
-                    java.lang.Object statics_category = args[0];
-                    java.lang.Object dynamics_category = args[1];
-                    java.lang.Object signal_category = "cybol/core/signal/signal";
+                    java.lang.Object statics_category_name = args[0];
+                    java.lang.Object dynamics_category_name = args[1];
+                    java.lang.Object signal_category_name = "cybol/core/signal/signal";
 
                     // Event handler.
                     java.lang.Object event_handler = new EventHandler();
@@ -71,12 +71,12 @@ class Main {
 
                     // Statics.
                     java.lang.Object statics = new Item();
-                    ItemHandler.initialize_item(statics, statics_category);
+                    ItemHandler.initialize_item(statics, statics_category_name);
 
 /*??
                     // Dynamics.
                     java.lang.Object dynamics = new Item();
-                    ItemHandler.initialize_item(dynamics, dynamics_category);
+                    ItemHandler.initialize_item(dynamics, dynamics_category_name);
 */
 
                     // Signal memory.
@@ -85,7 +85,7 @@ class Main {
 
                     // Signal.
                     java.lang.Object signal = new Item();
-                    ItemHandler.initialize_item(signal, signal_category);
+                    ItemHandler.initialize_item(signal, signal_category_name);
 
                     // The system is now started up and complete so that a loop
                     // can be entered, waiting for signals (events/ interrupts).
@@ -94,7 +94,7 @@ class Main {
                     // The loop above is left as soon as its shutdown flag is set.
     
                     // Signal.
-                    ItemHandler.finalize_item(signal, signal_category);
+                    ItemHandler.finalize_item(signal, signal_category_name);
                     signal = null;
                     
                     // Signal memory.
@@ -103,12 +103,12 @@ class Main {
 
 /*??
                     // Dynamics.
-                    ItemHandler.finalize_item(dynamics, dynamics_category);
+                    ItemHandler.finalize_item(dynamics, dynamics_category_name);
                     dynamics = null;
 */
 
                     // Statics.
-                    ItemHandler.finalize_item(statics, statics_category);
+                    ItemHandler.finalize_item(statics, statics_category_name);
                     statics = null;
 
                     // Event handler.
