@@ -25,7 +25,7 @@
  * - parse an xml stream into an xml model
  * - serialize an xml model into an xml stream
  *
- * @version $Revision: 1.2 $ $Date: 2004-07-29 22:30:05 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-08-02 11:12:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -205,6 +205,9 @@ void parse_xml_tag(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 
                             // Set leave flag.
                             l = 1;
+
+                            // Set done flag.
+                            d = 1;
                         }
                     }
                 }

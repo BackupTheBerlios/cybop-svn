@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.20 $ $Date: 2004-07-31 10:57:05 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2004-08-02 11:12:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -330,7 +330,7 @@ void test_console() {
         char* s;
 
         // Beep \007 twice with system loudspeaker.
-        s = "This test beeps twice:\n\007";
+        s = "Beep:\n\007";
         fputs(s, stdout);
 
         //
