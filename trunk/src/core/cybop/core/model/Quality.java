@@ -24,14 +24,16 @@
 
 package cybop.core.model;
 
+import cybop.core.category.*;
+
 /**
  * This class represents a quality.
  *
  * A quality describes some real world item in an abstract way.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Quality extends Abstraction {
+public class Quality extends Item {
 }
 

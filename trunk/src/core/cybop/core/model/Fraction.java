@@ -31,7 +31,7 @@ package cybop.core.model;
  * In computing, it is also known as floating point- or double number,
  * having a part "before and after the point/comma".
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-13 16:58:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Fraction extends Quantity {

@@ -24,10 +24,6 @@
 
 package cybop.core.category;
 
-import cybop.core.model.*;
-import cybop.core.model.Integer;
-import cybop.core.model.String;
-
 /**
  * This class represents an item.<br><br>
  *
@@ -84,7 +80,7 @@ import cybop.core.model.String;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends Behaviour {
@@ -150,7 +146,7 @@ public class Item extends Behaviour {
      * @exception Exception if the category is null
      * @exception Exception if the child is null
      */
-    public Item createChild(String n) throws Exception {
+    public Item createChild(Array n) throws Exception {
 
         Item i = null;
 
@@ -256,7 +252,7 @@ public class Item extends Behaviour {
      * @param c the child
      * @exception Exception if the children is null
      */
-    public void setChild(String n, Item c) throws Exception {
+    public void setChild(Array n, Item c) throws Exception {
 
         Map m = getChildren();
 
@@ -276,7 +272,7 @@ public class Item extends Behaviour {
      * @param n the name
      * @exception Exception if the children is null
      */
-    public void removeChild(String n) throws Exception {
+    public void removeChild(Array n) throws Exception {
 
         Map m = getChildren();
 
@@ -297,7 +293,7 @@ public class Item extends Behaviour {
      * @return the child
      * @exception Exception if the children is null
      */
-    public Item getChild(String n) throws Exception {
+    public Item getChild(Array n) throws Exception {
 
         Item c = null;
         Map m = getChildren();
@@ -322,7 +318,7 @@ public class Item extends Behaviour {
      * @return the child
      * @exception Exception if the children is null
      */
-    public Item getChild(String n, Item d) throws Exception {
+    public Item getChild(Array n, Item d) throws Exception {
 
         Item c = getChild(n);
 
@@ -396,9 +392,9 @@ public class Item extends Behaviour {
      * @exception Exception if the word base of the name is null
      * @exception Exception if the number string is null
      */
-    public String buildName(String base) throws Exception {
+    public Array buildName(Array base) throws Exception {
 
-        String n = null;
+        Array n = null;
 /*??
         Integer i = getHighestNameNumber(base);
         
@@ -441,7 +437,7 @@ public class Item extends Behaviour {
      * @exception Exception if the name is null
      * @exception Exception if the number is null
      */
-    public Integer getHighestNameNumber(String base) throws Exception {
+    public Integer getHighestNameNumber(Array base) throws Exception {
 
         Integer i = new Integer(-1);
 /*??

@@ -24,16 +24,13 @@
 
 package cybop.core.category;
 
-import cybop.core.model.*;
-import cybop.core.model.String;
-
 /**
  * This class represents a structure.
  *
  * A structure knows about the positions of its children, relative to each other.
  * That means that this structure also is a special constellation of children.
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Structure extends Hierarchy {
@@ -43,22 +40,22 @@ public class Structure extends Hierarchy {
     //
 
     /** The index positioning. */
-    public static final String INDEX_POSITIONING = new String("index_positioning");
+//??    public static final String INDEX_POSITIONING = new String("index_positioning");
 
     /** The list positioning. */
-    public static final String LIST_POSITIONING = new String("list_positioning");
+//??    public static final String LIST_POSITIONING = new String("list_positioning");
 
     /** The compass positioning. */
-    public static final String COMPASS_POSITIONING = new String("compass_positioning");
+//??    public static final String COMPASS_POSITIONING = new String("compass_positioning");
 
     /** The box positioning. */
-    public static final String BOX_POSITIONING = new String("box_positioning");
+//??    public static final String BOX_POSITIONING = new String("box_positioning");
 
     /** The card positioning. */
-    public static final String CARD_POSITIONING = new String("card_positioning");
+//??    public static final String CARD_POSITIONING = new String("card_positioning");
 
     /** The grid bag positioning. */
-    public static final String GRID_BAG_POSITIONING = new String("grid_bag_positioning");
+//??    public static final String GRID_BAG_POSITIONING = new String("grid_bag_positioning");
 
     //
     // Meta attributes.
@@ -120,7 +117,7 @@ public class Structure extends Hierarchy {
      * @param p the position
      * @exception Exception if the positions is null
      */
-    public void setPosition(String n, Structure p) throws Exception {
+    public void setPosition(Array n, Structure p) throws Exception {
 
         Map m = getPositions();
 
@@ -140,7 +137,7 @@ public class Structure extends Hierarchy {
      * @param n the name
      * @exception Exception if the positions is null
      */
-    public void removePosition(String n) throws Exception {
+    public void removePosition(Array n) throws Exception {
 
         Map m = getPositions();
 
@@ -161,7 +158,7 @@ public class Structure extends Hierarchy {
      * @return the position
      * @exception Exception if the positions is null
      */
-    public Structure getPosition(String n) throws Exception {
+    public Structure getPosition(Array n) throws Exception {
 
         Structure p = null;
         Map m = getPositions();

@@ -22,7 +22,7 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model;
+package cybop.core.category;
 
 /**
  * This class represents a map.
@@ -33,10 +33,10 @@ package cybop.core.model;
  * the index of the wanted element -- and then returning the corresponding
  * reference.
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Map extends Array {
+public class Map {
 
     //
     // Meta attributes.
@@ -173,7 +173,7 @@ public class Map extends Array {
      * @param n the name
      * @exception Exception if the references is null
      */
-    public void remove(String n) throws Exception {
+    public void remove(Array n) throws Exception {
 
         Array refs = getReferences();
 

@@ -24,18 +24,16 @@
 
 package cybop.core.category;
 
-import cybop.core.model.*;
-
 /**
  * This class represents a category.
  *
  * A category classifies items with common properties into one group.
  * The category can be named using the corresponding name attribute.
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Category extends Array {
+public class Category {
 
     //
     // Meta attributes.

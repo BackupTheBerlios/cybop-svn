@@ -24,15 +24,12 @@
 
 package cybop.core.category;
 
-import cybop.core.model.*;
-import cybop.core.model.String;
-
 /**
  * This class represents a behaviour.
  *
  * A behaviour is determined by its procedures.
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Behaviour extends Definition {
@@ -97,7 +94,7 @@ public class Behaviour extends Definition {
      * @param p the procedure
      * @exception Exception if the procedures is null
      */
-    public void setProcedure(String n, Behaviour p) throws Exception {
+    public void setProcedure(Array n, Behaviour p) throws Exception {
 
         Map m = getProcedures();
 
@@ -117,7 +114,7 @@ public class Behaviour extends Definition {
      * @param n the name
      * @exception Exception if the procedures is null
      */
-    public void removeProcedure(String n) throws Exception {
+    public void removeProcedure(Array n) throws Exception {
 
         Map m = getProcedures();
 
@@ -138,7 +135,7 @@ public class Behaviour extends Definition {
      * @return the procedure
      * @exception Exception if the procedures is null
      */
-    public Behaviour getProcedure(String n) throws Exception {
+    public Behaviour getProcedure(Array n) throws Exception {
 
         Behaviour p = null;
         Map m = getProcedures();

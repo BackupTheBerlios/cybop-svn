@@ -24,15 +24,12 @@
 
 package cybop.core.category;
 
-import cybop.core.model.*;
-import cybop.core.model.String;
-
 /**
  * This class represents a definition.
  *
  * A definition specifies several constraints for its children.
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Definition extends Structure {
@@ -97,7 +94,7 @@ public class Definition extends Structure {
      * @param c the constraint
      * @exception Exception if the constraints is null
      */
-    public void setConstraint(String n, Definition c) throws Exception {
+    public void setConstraint(Array n, Definition c) throws Exception {
 
         Map m = getConstraints();
 
@@ -117,7 +114,7 @@ public class Definition extends Structure {
      * @param n the name
      * @exception Exception if the constraints is null
      */
-    public void removeConstraint(String n) throws Exception {
+    public void removeConstraint(Array n) throws Exception {
 
         Map m = getConstraints();
 
@@ -138,7 +135,7 @@ public class Definition extends Structure {
      * @return the constraint
      * @exception Exception if the constraints is null
      */
-    public Definition getConstraint(String n) throws Exception {
+    public Definition getConstraint(Array n) throws Exception {
 
         Definition c = null;
         Map m = getConstraints();

@@ -24,9 +24,6 @@
 
 package cybop.core.category;
 
-import cybop.core.model.*;
-import cybop.core.model.String;
-
 /**
  * This class represents a hierarchy.
  *
@@ -40,7 +37,7 @@ import cybop.core.model.String;
  * They are coded in binaries within the machine and that is the final abstraction.
  * Towards macrocosm, it depends on the modeller how far he/she wants to go.<br><br>
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Hierarchy extends Inheritance {
@@ -105,7 +102,7 @@ public class Hierarchy extends Inheritance {
      * @param c the category
      * @exception Exception if the categories is null
      */
-    public void setCategory(String n, Hierarchy c) throws Exception {
+    public void setCategory(Array n, Hierarchy c) throws Exception {
 
         Map m = getCategories();
 
@@ -125,7 +122,7 @@ public class Hierarchy extends Inheritance {
      * @param n the name
      * @exception Exception if the categories is null
      */
-    public void removeCategory(String n) throws Exception {
+    public void removeCategory(Array n) throws Exception {
 
         Map m = getCategories();
 
@@ -146,7 +143,7 @@ public class Hierarchy extends Inheritance {
      * @return the category
      * @exception Exception if the categories is null
      */
-    public Hierarchy getCategory(String n) throws Exception {
+    public Hierarchy getCategory(Array n) throws Exception {
 
         Hierarchy c = null;
         Map m = getCategories();

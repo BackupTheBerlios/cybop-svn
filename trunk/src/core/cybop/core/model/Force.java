@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Time.java,v $
+ * $RCSfile: Force.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,26 +22,26 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.category;
-
-import cybop.core.model.*;
+package cybop.core.model;
 
 /**
- * This class represents a time.
+ * This class represents a force.
  *
- * A time specifies the duration of change between two states. 
+ * A force is an interaction between two categories.
  *
- * A time is often called the fourth dimension in our abstract model
- * of the real world. It is determined by only one integer number but
- * can have various representations. The most famous representation
- * of time for us humans is the calendar. There are several types of
- * calendars that can be used, e.g. the Gregorian calendar. 
+ * The modern physics knows four different kinds of forces:
+ * <ul>
+ *     <li>gravitation</li>
+ *     <li>electromagnetic</li>
+ *     <li>strong force</li>
+ *     <li>weak force</li>
+ * </ul>
  *
- * It is measured in seconds [s].
+ * It is measured in Newton [N].
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Time extends Array {
+public class Force extends Quantity {
 }
 

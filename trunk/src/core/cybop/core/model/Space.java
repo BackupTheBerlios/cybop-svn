@@ -22,9 +22,8 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.category;
+package cybop.core.model;
 
-import cybop.core.model.*;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
 
@@ -37,10 +36,10 @@ import cybop.core.model.String;
  *
  * It is measured in Meter * Meter * Meter [m * m * m].
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Space extends Array {
+public class Space extends Quantity {
 
     //
     // Children names.
