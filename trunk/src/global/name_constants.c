@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.2 $ $Date: 2004-10-27 13:27:39 $ $Author: rholzmueller $
+ * @version $Revision: 1.3 $ $Date: 2004-10-28 18:44:21 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,7 +78,15 @@ static const char CONFIG_TCP_SOCKET_NAME_ABSTRACTION_ARRAY[] = {'t', 'c', 'p', '
 static const char* CONFIG_TCP_SOCKET_NAME_ABSTRACTION =CONFIG_TCP_SOCKET_NAME_ABSTRACTION_ARRAY;
 static const int CONFIG_TCP_SOCKET_NAME_ABSTRACTION_COUNT = 10;
 
+/** The tcp socket activ abstraction. */
+static const char CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_ARRAY[] = {'a', 'c', 't', 'i', 'v','e'};
+static const char* CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION =CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_ARRAY;
+static const int CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_COUNT = 6;
 
+/** The tcp socket port abstraction. */
+static const char CONFIG_TCP_SOCKET_PORT_ABSTRACTION_ARRAY[] = {'p', 'o', 'r', 't'};
+static const char* CONFIG_TCP_SOCKET_PORT_ABSTRACTION =CONFIG_TCP_SOCKET_PORT_ABSTRACTION_ARRAY;
+static const int CONFIG_TCP_SOCKET_PORT_ABSTRACTION_COUNT = 4;
 //
 // Communication names.
 //
