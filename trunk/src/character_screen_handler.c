@@ -26,6 +26,7 @@
 #define CHARACTER_SCREEN_HANDLER_SOURCE
 
 #include <stdio.h>
+#include "vector.c"
 
 /**
  * This is the character screen handler.
@@ -37,7 +38,7 @@
  * - Textual User Interface (TUI)
  * - Curses (termcap, ncurses)
  *
- * @version $Revision: 1.4 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-01-11 15:32:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,42 +46,122 @@
 // Character screen.
 //
 
-/**
- * Send character screen signal to communication partner (probably the human user).
- */
-void send_character_screen() {
+struct textual_screen {
     
+    void* button;
+};
+
+struct button {
+
+    void* size;
+    void* label;
+};
+
+void create_test(void* p0) {
+
+    struct textual_screen* s = (struct textual_screen*) p0;
+    s->button = malloc(sizeof(struct button));
+
+    struct button* b = (struct button*) s->button;
+    b->size = malloc(sizeof(struct vector));
+
+    struct vector* v = (struct vector*) b->size;
+    v->x = 10;
+    v->y = 3;
+    v->z = 1;
+
+    b->label = (void*) "Exit";
+}
+
+void destroy_test(void* p0) {
+    
+    struct textual_screen* s = (struct textual_screen*) p0;
+    struct button* b = (struct button*) s->button;
+    struct vector* v = (struct vector*) b->size;
+
+    free(v);
+    free(b);
+}
+
+void write_button_label(void* p0, void* p1) {
+
+    char* c = (char*) p0;
+    FILE* f = (FILE*) p1;
+
+    fputs(c, f);
+    fputc(10, stdout);
+    fputc(10, stdout);
     fflush(stdout);
 }
 
+void paint_button(void* p0, void* p1) {
+
+    struct vector* s = (struct vector*) p0;
+    FILE* f = (FILE*) p1;
+    int w = s->x;
+    int h = s->y;
+    int d = s->z;
+    int x_pos = 8;
+    int y_pos = 10;
+    int z_pos = 0;
+    int x = x_pos;
+    int y = y_pos;
+    int z = z_pos;
+    
+    while (z < (z_pos + d)) {
+        
+        while (y < (y_pos + h)) {
+            
+            while (x < (x_pos + w)) {
+                
+                fputc(95, f);
+                
+                x++;
+            }
+            
+            y++;
+        }
+        
+        z++;
+    }
+    
+    fputc(10, stdout);
+    fputc(10, stdout);
+    fflush(stdout);
+}
+
+void send_button(void* p0) {
+
+    struct button* b = (struct button*) p0;
+    paint_button(b->size, stdout);
+    write_button_label(b->label, stdout);
+}
+
 /**
- * Builds the character screen.
+ * Send character screen signal to communication partner (probably the human user).
+ *
+ * @param p0 the textual screen
+ */
+void send_textual_screen(void* p0) {
+
+    struct textual_screen* s = (struct textual_screen*) p0;
+    send_button(s->button);
+}
+
+/**
+ * Tests the textual screen.
  *
  * ?? Probably temporary; CYBOI should read hierarchy from CYBOL files later.
  */
-void show_character_screen() {
-    
-    int i = 0;
-    
-    while (i < 30) {
-        
-        fputc(95, stdout);
-        i++;
-    }
-    
-    fputc(10, stdout);
+void test_textual_screen() {
 
-    i = 0;
+    void* s = malloc(sizeof(struct textual_screen));
+    create_test(s);
     
-    while (i < 20) {
-        
-        fputc(95, stdout);
-        i++;
-    }
+    send_textual_screen(s);
 
-    fputc(10, stdout);
-
-    send_character_screen();
+    destroy_test(s);
+    free(s);
 }
 
 /* CHARACTER_SCREEN_HANDLER_SOURCE */
