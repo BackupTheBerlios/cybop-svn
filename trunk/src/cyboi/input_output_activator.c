@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-01-18 10:54:22 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-02-12 11:46:02 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -73,8 +73,6 @@ void activate_input_output(void* p0) {
     if (*f == 1) {
 
         receive_unix_socket(p0);
-
-        *f = 0;
     }
 
     // TCP socket.
@@ -83,8 +81,6 @@ void activate_input_output(void* p0) {
     if (*f == 1) {
 
         receive_tcp_socket(p0);
-
-        *f = 0;
     }
 
     // X windows.
@@ -93,8 +89,6 @@ void activate_input_output(void* p0) {
     if (*f == 1) {
 
         receive_x_windows(p0);
-
-        *f = 0;
     }
 
 //?? TEST only!

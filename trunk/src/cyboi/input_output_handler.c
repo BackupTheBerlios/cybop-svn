@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-01-18 10:54:22 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-02-12 11:46:01 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,8 +59,6 @@ void startup_input_output(void* p0) {
     if (*f == 1) {
 
         create_unix_server_socket(p0);
-
-        *f = 0;
     }
 
     // Tcp server socket.
@@ -69,8 +67,6 @@ void startup_input_output(void* p0) {
     if (*f == 1) {
 
         create_tcp_server_socket(p0);
-
-        *f = 0;
     }
 
     // X windows server.
@@ -79,8 +75,6 @@ void startup_input_output(void* p0) {
     if (*f == 1) {
 
 //??        create_x_windows_server(p0);
-
-        *f = 0;
     }
 }
 
