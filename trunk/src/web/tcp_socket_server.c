@@ -23,7 +23,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.19 $ $Date: 2005-01-19 19:31:21 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2005-03-02 07:29:02 $ $Author: rholzmueller $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
@@ -84,88 +84,94 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 void create_tcp_server_socket(void* p0) {
 
     // The tcp server socket port.
-    int* p = INTEGER_NULL_POINTER;
+    void** p = POINTER_NULL_POINTER;
 
     // Get tcp server socket port.
     get_array_elements(p0, (void*) TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &p, (void*) POINTER_ARRAY);
 
-    if (p != INTEGER_NULL_POINTER) {
+    if (p != POINTER_NULL_POINTER) {
+      
+        if ( *p!=NULL_POINTER ) {
 
-        log_message_debug("Create tcp server socket.");
-
-        fprintf(stderr, "DEBUG: The port is: %d \n", *p);
-
-        // The tcp server socket.
-        int* s = INTEGER_NULL_POINTER;
-        // The tcp client sockets.
-        void* cs = NULL_POINTER;
-        int* csc = INTEGER_NULL_POINTER;
-        int* css = INTEGER_NULL_POINTER;
-        // The tcp signal ids.
-        void* id = NULL_POINTER;
-        int* idc = INTEGER_NULL_POINTER;
-        int* ids = INTEGER_NULL_POINTER;
-
-        // Create tcp server socket.
-        create_integer((void*) &s);
-        *s = socket(PF_INET, SOCK_STREAM, 0);
-        // Create tcp client sockets.
-        create_integer((void*) &csc);
-        *csc = 0;
-        create_integer((void*) &css);
-        *css = 0;
-        create_array((void*) &cs, (void*) css, (void*) INTEGER_ARRAY);
-        // Create tcp signal ids.
-        create_integer((void*) &idc);
-        *idc = 0;
-        create_integer((void*) &ids);
-        *ids = 0;
-        create_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY);
-
-        // Set tcp server socket.
-        set_array_elements(p0, (void*) TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        // Set tcp client sockets.
-        set_array_elements(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        // Set tcp signal ids.
-        set_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-
-        if (*s >= 0) {
-
-            fprintf(stderr, "DEBUG: The tcp server socket is: %d \n", *s);
-
-            // The socket address.
-            struct sockaddr_in a;
-
-            // Set address format.
-            a.sin_family = AF_INET;
-            a.sin_addr.s_addr = INADDR_ANY;
-            a.sin_port = htons(*p);
-
-            // Determine socket address size.
-            int as = sizeof(struct sockaddr_in);
-
-            // Bind number to address.
-            if (bind(*s, (struct sockaddr*) &a, as) >= 0) {
-
-                // Set the number of possible pending client connection requests.
-                // The maximum number is usually 5.
-                // It is NOT necessary to use this function, but it's good practice.
-                listen(*s, 1);
-
+            log_message_debug("Create tcp server socket.");
+    
+            fprintf(stderr, "DEBUG: The port is: %d \n", *p);
+    
+            // The tcp server socket.
+            int* s = INTEGER_NULL_POINTER;
+            // The tcp client sockets.
+            void* cs = NULL_POINTER;
+            int* csc = INTEGER_NULL_POINTER;
+            int* css = INTEGER_NULL_POINTER;
+            // The tcp signal ids.
+            void* id = NULL_POINTER;
+            int* idc = INTEGER_NULL_POINTER;
+            int* ids = INTEGER_NULL_POINTER;
+    
+            // Create tcp server socket.
+            create_integer((void*) &s);
+            *s = socket(PF_INET, SOCK_STREAM, 0);
+            // Create tcp client sockets.
+            create_integer((void*) &csc);
+            *csc = 0;
+            create_integer((void*) &css);
+            *css = 0;
+            create_array((void*) &cs, (void*) css, (void*) INTEGER_ARRAY);
+            // Create tcp signal ids.
+            create_integer((void*) &idc);
+            *idc = 0;
+            create_integer((void*) &ids);
+            *ids = 0;
+            create_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY);
+    
+            // Set tcp server socket.
+            set_array_elements(p0, (void*) TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+            // Set tcp client sockets.
+            set_array_elements(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+            set_array_elements(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+            set_array_elements(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+            // Set tcp signal ids.
+            set_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+            set_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+            set_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+    
+            if (*s >= 0) {
+    
+                fprintf(stderr, "DEBUG: The tcp server socket is: %d \n", *s);
+    
+                // The socket address.
+                struct sockaddr_in a;
+    
+                // Set address format.
+                a.sin_family = AF_INET;
+                a.sin_addr.s_addr = INADDR_ANY;
+                a.sin_port = htons(*((int*)*p) );
+    
+                // Determine socket address size.
+                int as = sizeof(struct sockaddr_in);
+    
+                // Bind number to address.
+                if (bind(*s, (struct sockaddr*) &a, as) >= 0) {
+    
+                    // Set the number of possible pending client connection requests.
+                    // The maximum number is usually 5.
+                    // It is NOT necessary to use this function, but it's good practice.
+                    listen(*s, 1);
+    
+                } else {
+    
+                    log_message_debug("Could not create tcp server socket. The socket could not be bound to the address.");
+                }
+    
             } else {
-
-                log_message_debug("Could not create tcp server socket. The socket could not be bound to the address.");
+    
+                log_message_debug("Could not create tcp server socket. The socket is smaller than zero.");
             }
 
         } else {
-
-            log_message_debug("Could not create tcp server socket. The socket is smaller than zero.");
+    
+            log_message_debug("Could not create tcp server socket. The port is null.");
         }
-
     } else {
 
         log_message_debug("Could not create tcp server socket. The port is null.");
@@ -230,11 +236,11 @@ void destroy_tcp_server_socket(void* p0) {
  * @param req_row return the request row
  * @param reg_row_count return the count of the request row
  */
-void get_request_row(char* req, int* req_count, char* req_row, int* req_row_count) {
+void get_request_row(char* req, int* req_count, char** req_row, int* req_row_count) {
 
     *req_row_count = 0;
     // The element.
-    char e = -1;
+    char* e = CHARACTER_NULL_POINTER;
 
     while (1) {
 
@@ -245,7 +251,7 @@ void get_request_row(char* req, int* req_count, char* req_row, int* req_row_coun
 
         get_array_elements(req, req_row_count, (void*) &e, (void*) CHARACTER_ARRAY);
 
-        if (e == *CARRIAGE_RETURN_CONTROL_CHARACTER) {
+        if (*e == *CARRIAGE_RETURN_CONTROL_CHARACTER) {
 
             // Reached end of request line.
             break;
@@ -253,9 +259,9 @@ void get_request_row(char* req, int* req_count, char* req_row, int* req_row_coun
 
         int max_count = *req_row_count + 1;
 
-        resize_array((void*) &req_row, (void*) &max_count, (void*) CHARACTER_ARRAY);
+        resize_array((void*) req_row, (void*) &max_count, (void*) CHARACTER_ARRAY);
 
-        set_array_elements(req_row, req_row_count, (void*) &e, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
+        set_array_elements(*req_row, req_row_count, (void*) e, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
 
         *req_row_count = *req_row_count + 1;
     }
@@ -275,13 +281,14 @@ void get_request_row(char* req, int* req_count, char* req_row, int* req_row_coun
  * @param param the parameter from the request
  * @param param_count the count from the parameter
  */
-void get_param_from_request_row(char* req_row, int* req_row_count, char* param, int* param_count) {
+void get_param_from_request_row(char* req_row, int* req_row_count, char** param, int* param_count) {
 
     *param_count = 0;
     int req_row_index = 0;
     int start_param_flag = 0;
+    int max_count = 0;
     // The element.
-    char e = -1;
+    char* e = CHARACTER_NULL_POINTER;
 
     while (1) {
 
@@ -293,7 +300,7 @@ void get_param_from_request_row(char* req_row, int* req_row_count, char* param, 
         get_array_elements(req_row, (void*) &req_row_index, (void*) &e, (void*) CHARACTER_ARRAY);
 
         // Check of ending the paramaters.
-        if ((start_param_flag == 1) && (e == *CARRIAGE_RETURN_CONTROL_CHARACTER)) {
+        if ((start_param_flag == 1) && (*e == *SPACE_CHARACTER)) {
 
             break;
         }
@@ -304,17 +311,17 @@ void get_param_from_request_row(char* req_row, int* req_row_count, char* param, 
             //?? ROLF: Nehme diese Initialisierung bitte VOR die Schleife,
             //?? da sonst bei jedem Schleifendurchlauf Speicherplatz fuer
             //?? eine neue lokale Variable belegt wird!
-            int max_count = *param_count + 1;
+            max_count = *param_count + 1;
 
-            resize_array((void*) &param, (void*) &max_count, (void*) CHARACTER_ARRAY);
+            resize_array((void*) param, (void*) &max_count, (void*) CHARACTER_ARRAY);
 
-            set_array_elements(param, param_count, (void*) &e, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
+            set_array_elements(*param, param_count, (void*) e, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
 
             *param_count = *param_count + 1;
         }
 
         // Check of beginning the paramaters.
-        if (e == *SOLIDUS_CHARACTER) {
+        if (*e == *SOLIDUS_CHARACTER) {
 
             // Begin from the parameters.
             start_param_flag = 1;
@@ -368,7 +375,7 @@ void handle_tcp_socket_request(void* p0, void* p1) {
             create_array((void*) &msg_row, (void*) &msg_row_count, (void*) CHARACTER_ARRAY);
 
             // Get message row.
-            get_request_row(msg, &msg_count, msg_row, &msg_row_count);
+            get_request_row(msg, &msg_count, &msg_row, &msg_row_count);
 
             // The parameters.
             char* param = NULL_POINTER;
@@ -378,7 +385,7 @@ void handle_tcp_socket_request(void* p0, void* p1) {
             create_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
 
             // Get parameters.
-            get_param_from_request_row(msg_row, &msg_row_count, param, &param_count);
+            get_param_from_request_row(msg_row, &msg_row_count, &param, &param_count);
 
             // The firefox web browser makes a second request
             // to determine the favicon.
@@ -399,44 +406,114 @@ void handle_tcp_socket_request(void* p0, void* p1) {
         //            log_message_debug("error while replying");
         //            exit(1);
         //        }
-
+ 
                 log_message_debug("Create destination abstraction, model, details.");
 
+//                // The startup model abstraction, model, details.
+//                void* ma = NULL_POINTER;
+//                int* mac = INTEGER_NULL_POINTER;
+//                int* mas = INTEGER_NULL_POINTER;
+//                void* mm = NULL_POINTER;
+//                int* mmc = INTEGER_NULL_POINTER;
+//                int* mms = INTEGER_NULL_POINTER;
+//                void* md = NULL_POINTER;
+//                int* mdc = INTEGER_NULL_POINTER;
+//                int* mds = INTEGER_NULL_POINTER;
+//
+//                // Create startup model abstraction, model, details.
+//                create_integer((void*) &mac);
+//                create_integer((void*) &mas);
+//                create_integer((void*) &mmc);
+//                create_integer((void*) &mms);
+//                // CAUTION! Do not create startup model details!
+//                // It is not needed for the startup signal.
+//
+//                // Initialize startup model abstraction, model, details.
+//                *mac = 0;
+//                *mas = 0;
+//                *mmc = 0;
+//                *mms = 0;
+//                // CAUTION! Do not create startup model details!
+//                // It is not needed for the startup signal.
+//
+//
+//                // Create startup model abstraction, model, details.
+//                create_model((void*) &ma, (void*) mac, (void*) mas, *pa, *pac,
+//                    (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+//                    (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+//
+//                fprintf(stderr, "ma: %s\n", (char*) ma);
+//                fprintf(stderr, "mac: %i\n", *mac);
+//
+//                create_model((void*) &mm, (void*) mmc, (void*) mms,
+//                    *pm, *pmc, *pa, *pac, *pc, *pcc);
+//                // CAUTION! Do not create startup model details!
+//                // It is not needed for the startup signal.
+//
+//                fprintf(stderr, "mm: %i\n", mm);
+//                fprintf(stderr, "mmc: %i\n", *mmc);
+//                //?? DO NOT try to print details and its count. They are NULL.
+//
+//                log_message_debug("Add startup model as signal to signal memory.");
+
                 // The source channel.
-                char c_sc[] = "inline";
+                char c_sc[] = "file";
                 char* sc = &c_sc[0];
-                int scc = 6;
+                int* scc = INTEGER_NULL_POINTER;
+                create_integer( &scc );
+                *scc = 4;
+
                 // The source abstraction.
                 char c_sa[] = "cybol";
                 char* sa = &c_sa[0];
-                int sac = 5;
+                int* sac = INTEGER_NULL_POINTER;
+                create_integer( &sac );
+                *sac = 5;
+
                 // The source model.
                 char* sm = param;
-                int smc = param_count;
+                int* smc = INTEGER_NULL_POINTER;
+                create_integer( &smc );
+                *smc = param_count;
+
                 // The destination abstraction.
                 void* da = NULL_POINTER;
-                int dac = 0;
-                int das = 0;
+                int* dac = INTEGER_NULL_POINTER;
+                create_integer( &dac );
+                *dac = 0;
+                int* das = INTEGER_NULL_POINTER;
+                create_integer( &das );
+                *das = 0;
+
                 // The destination model.
                 void* dm = NULL_POINTER;
-                int dmc = 0;
-                int dms = 0;
+                int* dmc = INTEGER_NULL_POINTER;
+                create_integer( &dmc );
+                *dmc = 0;
+                int* dms = INTEGER_NULL_POINTER;
+                create_integer( &dms );
+                *dms = 0;
+
                 // The destination details.
                 void* dd = NULL_POINTER;
-                int ddc = 0;
-                int dds = 0;
+                int* ddc = INTEGER_NULL_POINTER;
+                create_integer( &ddc );
+                *ddc = 0;
+                int* dds = INTEGER_NULL_POINTER;
+                create_integer( &dds );
+                *dds = 0;
 
                 // Create destination abstraction.
-                create_model((void*) &da, (void*) &dac, (void*) &das,
-                    (void*) &sa, (void*) &sac,
-                    (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
-                    (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+                create_model((void*) &da, (void*) dac, (void*) das,
+                    (void*) sa, (void*) sac,
+                    (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+                    (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
                 // Create destination model.
-                create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-                    (void*) &sm, (void*) &smc,
-                    (void*) &sa, (void*) &sac,
-                    (void*) &sc, (void*) &scc);
+                create_model((void*) &dm, (void*) dmc, (void*) dms,
+                    (void*) sm, (void*) smc,
+                    (void*) sa, (void*) sac,
+                    (void*) sc, (void*) scc);
 
                 //
                 // Signal.
@@ -445,9 +522,9 @@ void handle_tcp_socket_request(void* p0, void* p1) {
                 log_message_debug("Set start signal.");
 
                 // The signal memory.
-                void* m = NULL_POINTER;
-                void* mc = NULL_POINTER;
-                void* ms = NULL_POINTER;
+                void** m = NULL_POINTER;
+                void** mc = NULL_POINTER;
+                void** ms = NULL_POINTER;
 
                 // Get signal memory.
                 get_array_elements(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) POINTER_ARRAY);
@@ -456,12 +533,12 @@ void handle_tcp_socket_request(void* p0, void* p1) {
 
                 // The signal id.
                 int* id = INTEGER_NULL_POINTER;
-                create_integer((void*) &id);
+                create_integer( &id);
                 *id = 0;
-                get_new_signal_id(m, mc, (void*) &id);
+                get_new_signal_id(*m, *mc, (void*) id);
 
                 // Set signal.
-                set_signal(m, mc, ms,
+                set_signal(*m, *mc,* ms,
                     (void*) da, (void*) dac,
                     (void*) dm, (void*) dmc,
                     (void*) dd, (void*) ddc,
@@ -497,56 +574,61 @@ void handle_tcp_socket_request(void* p0, void* p1) {
 void run_tcp_socket(void* p0) {
 
     // The tcp server socket.
-    int* s = INTEGER_NULL_POINTER;
+    void** s = POINTER_NULL_POINTER;
 
     // Get tcp server socket.
     get_array_elements(p0, (void*) TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_ARRAY);
 
-    if (s != INTEGER_NULL_POINTER) {
+    if (s != POINTER_NULL_POINTER) {
+      
+        if (*s != NULL_POINTER ) {
 
-        log_message_debug("Run tcp server socket.");
+            log_message_debug("Run tcp server socket.");
+    
+            // The signal memory.
+            void** m = NULL_POINTER;
+            void** mc = NULL_POINTER;
+            void** ms = NULL_POINTER;
+    
+            // Get signal memory.
+            get_array_elements(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) POINTER_ARRAY);
+            get_array_elements(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) POINTER_ARRAY);
+            get_array_elements(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) POINTER_ARRAY);
+    
+            // The client socket address.
+            struct sockaddr_in ca;
+    
+            // Determine client socket address size.
+            int cas = sizeof(ca);
+    
+    //??        while (1) {
+    
+            // Accept client socket request and store client socket.
+            int cs = accept(**((int**)s), (struct sockaddr*) &ca, &cas);
+    
+            if (cs >= 0) {
+    
+                log_message_debug("DEBUG: Accepted tcp client socket request.");
+    
+    //??            char ausgabe[] = "Hello World";
+    //??            send(cs, ausgabe, strlen(ausgabe), 0);
+    
+                handle_tcp_socket_request(p0, (void*) &cs);
+    
+    //??            // Close socket connection.
+    //??            close(cs);
+    
+            } else {
+    
+                fprintf(stderr, "Could not run tcp server socket. The accept failed.");
+                pthread_exit(NULL_POINTER);
+            }
 
-        // The signal memory.
-        void* m = NULL_POINTER;
-        void* mc = NULL_POINTER;
-        void* ms = NULL_POINTER;
+        }else {
 
-        // Get signal memory.
-        get_array_elements(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) POINTER_ARRAY);
-        get_array_elements(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) POINTER_ARRAY);
-        get_array_elements(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) POINTER_ARRAY);
-
-        // The client socket address.
-        struct sockaddr_in ca;
-
-        // Determine client socket address size.
-        int cas = sizeof(ca);
-
-//??        while (1) {
-
-        // Accept client socket request and store client socket.
-        int cs = accept(*s, (struct sockaddr*) &ca, &cas);
-
-        if (cs >= 0) {
-
-            log_message_debug("DEBUG: Accepted tcp client socket request.");
-
-//??            char ausgabe[] = "Hello World";
-//??            send(cs, ausgabe, strlen(ausgabe), 0);
-
-            handle_tcp_socket_request(p0, (void*) &cs);
-
-//??            // Close socket connection.
-//??            close(cs);
-
-        } else {
-
-            fprintf(stderr, "Could not run tcp server socket. The accept failed.");
-            pthread_exit(NULL_POINTER);
-        }
-
-//??        }
-
+            log_message_debug("Could not run tcp server socket. The socket is null.");
+        
+        }   
     } else {
 
         log_message_debug("Could not run tcp server socket. The socket is null.");
