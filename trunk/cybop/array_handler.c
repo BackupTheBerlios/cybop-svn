@@ -27,7 +27,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.5 $ $Date: 2003-09-26 06:59:16 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-09-27 00:22:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,7 +59,7 @@ void* extend_array(void* p0) {
 
             while (i < old_length) {
 
-                *a[i] = *p0[i];
+                a[i] = p0[i];
 
                 i++;
             }

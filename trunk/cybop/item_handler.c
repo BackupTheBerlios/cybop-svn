@@ -29,7 +29,7 @@
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.4 $ $Date: 2003-09-26 06:59:17 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-09-27 00:22:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

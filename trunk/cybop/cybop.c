@@ -29,6 +29,7 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "log_handler.c"
 #include "map.c"
 #include "map_handler.c"
@@ -41,7 +42,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.3 $ $Date: 2003-09-26 06:59:17 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-09-27 00:22:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,11 +91,11 @@ int main(int p0, char** p1) {
 
             if (tmp != 0) {
 
-                log(INFO_LOG_LEVEL, "Send signal: " + dynamics);
+                log(INFO_LOG_LEVEL, strcat("Send signal: ", dynamics));
 
                 // Set signal elements.
-                tmp->priority = NORMAL_PRIORITY;
-                tmp->language = NEURO_LANGUAGE;
+                tmp->priority = &NORMAL_PRIORITY;
+                tmp->language = &NEURO_LANGUAGE;
                 tmp->predicate = dynamics;
                 tmp->object = statics;
 

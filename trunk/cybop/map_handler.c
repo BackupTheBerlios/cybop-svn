@@ -30,7 +30,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.5 $ $Date: 2003-09-26 06:59:17 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-09-27 00:22:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -65,7 +65,7 @@ void initialize_map(void* p0) {
  *
  * @param p0 the map
  */
-void finalize_map(int p0) {
+void finalize_map(void* p0) {
 
     struct map* m = (struct map*) p0;
     
@@ -352,7 +352,7 @@ int get_next_map_element_index(void* p0, void* p1) {
 void* get_map_element_name(void* p0, void* p1) {
 
     void* n = 0;
-    char* index = java.lang.String.valueOf(get_map_element_count(p0, p1));
+    char* index = ?? valueOf(get_map_element_count(p0, p1));
 
     if (p1 != 0) {
 
@@ -398,7 +398,7 @@ int get_map_element_count(void* p0, void* p1) {
 
             if (name != 0) {
 
-                if ((name).startsWith(p1)) {
+                if (strncmp(name, p1, strlen(p1))) {
 
 /*??
                     int begin = 0;
