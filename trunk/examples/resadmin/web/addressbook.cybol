@@ -32,5 +32,7 @@
     </part>
     <part name="addresstable" channel="file" abstraction="cybol" model="examples/resadmin/web/addresstable.cybol">
         <property name="html_tag" channel="inline" abstraction="string" model="table"/>
+        <property name="html_tag_properties" channel="inline" abstraction="string" model="border='1'"/>
     </part>
 </model>
+

@@ -103,7 +103,32 @@
         <property name="model" channel="inline" abstraction="string" model=""/>
     </part>
 
+    <part name="create_listname_web_delete" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
+        <property name="name" channel="inline" abstraction="string" model="loop_listname_web_delete"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
 
+    <part name="create_delete_button_property" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
+        <property name="name" channel="inline" abstraction="string" model="delete_button_property"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+
+
+    <part name="create_delete_address" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
+        <property name="name" channel="inline" abstraction="string" model="delete_address"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model="standard"/>
+    </part>
+
+    
     <!-- init loop variables -->    
     <part name="set_index" channel="inline" abstraction="operation" model="set">
         <property name="source" channel="inline" abstraction="integer" model="0"/>
@@ -127,7 +152,7 @@
     <part name="creat_table_body" channel="inline" abstraction="operation" model="loop">
         <property name="break" channel="inline" abstraction="knowledge" model="domain.loop_breakflag"/>
         <property name="index" channel="inline" abstraction="knowledge" model="domain.loop_index"/>
-        <property name="model" channel="inline" abstraction="cybol" model="examples/resadmin/logic/create_table_rows.cybol"/>
+        <property name="model" channel="file" abstraction="cybol" model="examples/resadmin/logic/create_table_rows.cybol"/>
     </part>
     
     <!-- send the result -->
