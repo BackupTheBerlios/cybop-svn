@@ -36,9 +36,9 @@
 #include "dynamics_model.c"
 #include "map.c"
 #include "map_handler.c"
-#include "send_graphical_screen_message.c"
 #include "statics_model_handler.c"
 #include "vector.c"
+#include "x_windows_handler.c"
 
 /**
  * This is the signal memory handler.
@@ -50,7 +50,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.9 $ $Date: 2003-12-15 14:48:59 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-12-17 17:16:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -355,7 +355,7 @@ void get_highest_priority_index(void* p0, void* p1) {
  */
 void handle_compound_signal(void* p0, void* p1, void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Handle compound signal:");
+    log_message((void*) &INFO_LOG_LEVEL, "Handle compound signal.");
 
     struct dynamics_model* m = (struct dynamics_model*) p1;
     
@@ -426,7 +426,7 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
  */
 void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Handle operation signal:");
+    log_message((void*) &INFO_LOG_LEVEL, "Handle operation signal.");
 
     struct operation* o = (struct operation*) p0;
     
@@ -504,7 +504,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (strcmp(l, GUI_LANGUAGE) == 0) {
                     
-                    send_graphical_screen_message(get_map_element_with_name(io, "addressee"), get_map_element_with_name(io, "message"));
+                    send_x_windows_output(get_map_element_with_name(io, "addressee"), get_map_element_with_name(io, "message"));
         
                 } else if (strcmp(l, TUI_LANGUAGE) == 0) {
 
@@ -555,121 +555,6 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The signal dynamics model is null.");
-    }
-}
-
-//??
-//?? Old signal handling. Delete this block later!
-//??
-
-/**
- * Handles the mouse clicked action.
- *
- * @param p0 the screen item
- * @param p1 the x coordinate
- * @param p2 the y coordinate
- * @param p3 the z coordinate
- * @param p4 the action
- */
-/*??
-void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p0 != 0) {
-
-        // Determine the action of the clicked child screen item.
-        int count = 0;
-        int size = get_map_size(p0->items);
-        void* child = 0;
-        struct vector* position = 0;
-        struct vector* expansion = 0;
-        int x = -1;
-        int y = -1;
-        int z = -1;
-        int width = -1;
-        int height = -1;
-        int depth = -1;
-        int contains = 0;
-        void* action = 0;
-        
-        while (count < size) {
-
-            // Determine child, its position and expansion within the given screen item.
-            child = get_map_element(p0->items, count);
-            position = (vector*) get_map_element(p0->positions, count);
-            
-            if (child instanceof item) {
-                    
-                expansion = (vector) get_item_element(child, "expansion");
-                
-                if (position != 0) {
-                        
-                    // Translate the given coordinates according to the child's position.
-                    x = p1 - position->x;
-                    y = p2 - position->y;
-                    z = p3 - position->z;
-
-                    if (expansion != 0) {
-
-                        // Determine child's expansion.
-                        width = expansion->x;
-                        height = expansion->y;
-                        depth = expansion->z;
-        
-                        // Check if the given coordinates are in the child's screen area.
-                        // The "if" conditions had to be inserted because in classical
-                        // graphical user interfaces, the depth is normally 0 and
-                        // such the boolean comparison would deliver "false".
-                        // Using the conditions, the coordinates that are set to "0"
-                        // are not considered for comparison.
-                        contains = (x >= 0);
-                        contains = contains && (x < width);
-                        contains = contains && (y >= 0);
-                        contains = contains && (y < height);
-                        contains = contains && (z >= 0);
-                        contains = contains && (z < depth);
-        
-                        if (contains == 1) {
-        
-                            // The given coordinates are in the child's screen area.
-                            // Therefore, use the child's action.
-                            action = mouse_clicked_action(child, x, y, z, p4);
-                
-                            break;
-                        }
-
-                    } else {
-                        
-                        log_message((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. An expansion is null.");
-                    }
-
-                } else {
-                    
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. A position is null.");
-                }
-
-            } else {
-                
-                log_message((void*) &INFO_LOG_LEVEL, "Could not handle mouse clicked action. A child is not of type Item.");
-            }
-            
-            count++;
-        }
-        
-        // Only use child screen item's action if it exists.
-        // Otherwise, use the parent screen item's action.
-        if (action != 0) {
-            
-            p4 = action;
-
-        } else {
-            
-            // Determine the action of the given screen item.
-            get_map_element(i->items, "mouse_clicked_action", p4);
-        }
-
-    } else {
-        
-        puts("ERROR: Could not handle mouse clicked action. The item is null.");
     }
 }
 

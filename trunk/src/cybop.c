@@ -27,6 +27,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "internals.c"
 #include "log_handler.c"
 #include "signal_memory.c"
 #include "signal_memory_handler.c"
@@ -41,7 +42,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.9 $ $Date: 2003-12-15 14:48:58 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-12-17 17:16:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,48 +69,66 @@ void show_usage_information() {
  * @param p0 the signal memory
  * @param p1 the statics
  * @param p2 the dynamics
+ * @param p3 the internals
  */
-void wait(void* p0, void* p1, void* p2) {
+void wait(void* p0, void* p1, void* p2, void* p3) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Wait for signals.");
 
-    // Initialize shutdown flag to false.
-    int f = 0;
-    int i = -1;
-    void* s = (void*) 0;
-    char* a = (void*) 0;
-    void* p = (void*) 0;
+    // These are internal data and flags for legacy stuff and
+    // handling of various platforms and graphical user interfaces
+    // such as X-Windows, Macintosh or MS Windows.
+    struct internals* i = (struct internals*) p3;
     
-    // Run endless loop handling signals.
-    while (TRUE_VALUE) {
+    if (i != (void*) 0) {
+        
+        // Initialize shutdown flag to false.
+        int f = 0;
+        int index = -1;
+        void* s = (void*) 0;
+        char* a = (void*) 0;
+        void* p = (void*) 0;
+        
+        // Run endless loop handling signals.
+        while (TRUE_VALUE) {
+    
+            if (f == 0) {
+    
+                if (i->x_windows_flag == 1) {
 
-        if (f == 0) {
-
-            // Get top priority signal from signal memory and remove it from there.
-            get_highest_priority_index(p0, (void*) &i);
-            s = get_signal(p0, (void*) &i);
-            a = (char*) get_abstraction(p0, (void*) &i);
-            p = get_priority(p0, (void*) &i);
-            remove_signal(p0, (void*) &i);
-
-            // Handle signal.
-            log_message((void*) &INFO_LOG_LEVEL, "0");
-            if (strcmp(a, DYNAMICS_COMPOUND) == 0) {
+                    receive_x_windows_input(i->x_windows);
+                }
                 
-                log_message((void*) &INFO_LOG_LEVEL, "1");
-                handle_compound_signal(p0, s, p);
-        
+                // Get top priority signal from signal memory and remove it from there.
+                get_highest_priority_index(p0, (void*) &index);
+                s = get_signal(p0, (void*) &index);
+                a = (char*) get_abstraction(p0, (void*) &index);
+                p = get_priority(p0, (void*) &index);
+                remove_signal(p0, (void*) &index);
+    
+                // Handle signal.
+                log_message((void*) &INFO_LOG_LEVEL, "0");
+                if (strcmp(a, DYNAMICS_COMPOUND) == 0) {
+                    
+                    log_message((void*) &INFO_LOG_LEVEL, "1");
+                    handle_compound_signal(p0, s, p);
+            
+                } else {
+            
+                    log_message((void*) &INFO_LOG_LEVEL, "2");
+                    handle_operation_signal(s, a, p1, p2, (void*) &f);
+                }
+    
             } else {
-        
-                log_message((void*) &INFO_LOG_LEVEL, "2");
-                handle_operation_signal(s, a, p1, p2, (void*) &f);
+    
+                // Leave loop if the shutdown flag was set.
+                break;
             }
-
-        } else {
-
-            // Leave loop if the shutdown flag was set.
-            break;
         }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not wait for signals. The internals is null.");
     }
 }
 
@@ -148,6 +167,9 @@ int main(int p0, char** p1) {
             void* d = malloc(sizeof(struct dynamics_model));
             create_dynamics_model_containers(d);
             
+            // Create internals.
+            void* i = malloc(sizeof(struct internals));
+            
             // Create signal memory.
             void* sm = malloc(sizeof(struct signal_memory));
             create_signal_memory(sm);
@@ -174,7 +196,7 @@ int main(int p0, char** p1) {
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)
             // which are stored/ found in the signal memory.
-            wait(sm, s, d);
+            wait(sm, s, d, i);
             // The loop above is left as soon as its shutdown flag is set.
 
             // Destroy startup signal.
@@ -184,6 +206,9 @@ int main(int p0, char** p1) {
             destroy_signal_memory(sm);
             free(sm);
 
+            // Destroy internals.
+            free(i);
+            
             // Destroy dynamics.
             destroy_dynamics_model_containers(d);
             free(d);
