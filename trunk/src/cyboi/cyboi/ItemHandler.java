@@ -65,7 +65,7 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.14 $ $Date: 2003-07-24 20:36:56 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-07-24 22:20:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -77,8 +77,20 @@ class ItemHandler {
     /** The cybol file suffix constant. */
     static java.lang.String CYBOL = ".cybol";
 
+    /** The cybol path constant. */
+    static java.lang.String PATH = "/home/cybop/src/";
+
     /** The name constant. */
     static java.lang.String NAME = "name";
+
+    /** The super constant. */
+    static java.lang.String SUPER = "super";
+
+    /** The java object constant. */
+    static java.lang.String JAVA_OBJECT = "java_object";
+
+    /** The item constant. */
+    static java.lang.String ITEM = "item";
 
     /** The item abstraction constant. */
     static java.lang.String ITEM_ABSTRACTION = "item_abstraction";
@@ -323,7 +335,7 @@ class ItemHandler {
 
         if (p != null) {
             
-            java.lang.String f = c + ItemHandler.CYBOL;
+            java.lang.String f = ItemHandler.PATH + c + ItemHandler.CYBOL;
 
             java.lang.System.out.println("INFO: Parse file: " + f);
             p.parse(f);
@@ -370,13 +382,16 @@ class ItemHandler {
     
             org.w3c.dom.NodeList l = null;
 
-            l = doc.getElementsByTagName("name");
+            l = doc.getElementsByTagName(ItemHandler.NAME);
             ItemHandler.process_name(i, l);
             
-            l = doc.getElementsByTagName("super");
+            l = doc.getElementsByTagName(ItemHandler.SUPER);
             ItemHandler.process_super(i, l);
                 
-            l = doc.getElementsByTagName("item");
+            l = doc.getElementsByTagName(ItemHandler.JAVA_OBJECT);
+            ItemHandler.process_java_object(i, l);
+                
+            l = doc.getElementsByTagName(ItemHandler.ITEM);
             ItemHandler.process_items(i, l);
 
         } else {
@@ -436,12 +451,46 @@ class ItemHandler {
                 
             } else {
                 
-                java.lang.System.out.println("ERROR: Could not process the super. The node is null.");
+                java.lang.System.out.println("WARNING: Could not process the super. The node is null.");
             }
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not process the super. The node list is null.");
+            java.lang.System.out.println("WARNING: Could not process the super. The node list is null.");
+        }
+    }
+
+    /**
+     * Processes the java object node element.
+     *
+     * @param i the item
+     * @param l the node list
+     */
+    static void process_java_object(java.lang.Object i, java.lang.Object l) {
+
+        org.w3c.dom.NodeList nl = (org.w3c.dom.NodeList) l;
+
+        if (nl != null) {
+            
+            org.w3c.dom.Node n = nl.item(0);
+            
+            if (n != null) {
+                
+                java.lang.Object java_object = n.getNodeValue();
+                java.lang.System.out.println("INFO: Read java object: " + java_object);
+--
+                // Read and process attributes.
+                m = n.getAttributes();
+                process_node_map(i, m);
+                
+            } else {
+                
+                java.lang.System.out.println("WARNING: Could not process the java object. The node is null.");
+            }
+            
+        } else {
+            
+            java.lang.System.out.println("WARNING: Could not process the java object. The node list is null.");
         }
     }
 
