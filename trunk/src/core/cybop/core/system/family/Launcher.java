@@ -69,7 +69,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.26 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -935,7 +935,7 @@ public class Launcher extends Family {
                     if (scr != null) {
 
                         java.lang.System.out.println("DEBUG: Show on screen.");
-                        scr.show((ScreenModel) s.getChild(Signal.OBJECT));
+                        scr.show((Display) s.getChild(Signal.OBJECT));
 
                     } else {
 

@@ -30,10 +30,10 @@ import cybop.core.screen.*;
 /**
  * This class represents a combo box.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class ComboBox extends ScreenComponent {
+public class ComboBox extends DisplayComponent {
     
     //?? JComboBox
 }

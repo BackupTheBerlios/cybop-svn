@@ -35,10 +35,10 @@ import cybop.core.screen.region.*;
 /**
  * This class represents a frame model.
  *
- * @version $Revision: 1.1 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class FrameModel extends ScreenModel {
+public class FrameModel extends Display {
 
     //
     // Children names.
@@ -203,7 +203,7 @@ public class FrameModel extends ScreenModel {
 
             } else if (n.isEqualTo(UserInterface.CONTENTS_PANEL)) {
 
-                setContentsPanel((ScreenRegion) i);
+                setContentsPanel((DisplayRegion) i);
 
             } else if (n.isEqualTo(UserInterface.STATUS_BAR)) {     
 
@@ -253,7 +253,7 @@ public class FrameModel extends ScreenModel {
 
             } else if (n.isEqualTo(UserInterface.CONTENTS_PANEL)) {
 
-                removeContentsPanel((ScreenRegion) getChild(n));
+                removeContentsPanel((DisplayRegion) getChild(n));
 
             } else if (n.isEqualTo(UserInterface.STATUS_BAR)) {
 
@@ -340,7 +340,7 @@ public class FrameModel extends ScreenModel {
      */
     public String getDefaultContentsPanel() {
 
-        return new String("cybop.core.model.organizer.ScreenRegion");
+        return new String("cybop.core.model.organizer.DisplayRegion");
     }
 
     /**
@@ -667,7 +667,7 @@ public class FrameModel extends ScreenModel {
      * @exception Exception if the contents panel is null
      * @exception Exception if the content pane is null
      */
-    public void setContentsPanel(ScreenRegion c) throws Exception {
+    public void setContentsPanel(DisplayRegion c) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
 
@@ -705,7 +705,7 @@ public class FrameModel extends ScreenModel {
      * @exception Exception if the contents panel is null
      * @exception Exception if the content pane is null
      */
-    public void removeContentsPanel(ScreenRegion c) throws Exception {
+    public void removeContentsPanel(DisplayRegion c) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
 

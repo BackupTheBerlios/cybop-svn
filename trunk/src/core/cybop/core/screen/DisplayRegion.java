@@ -32,10 +32,10 @@ import cybop.core.screen.component.*;
 /**
  * This class represents a screen region.
  *
- * @version $Revision: 1.1 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class ScreenRegion extends ScreenItem {
+public class DisplayRegion extends DisplayItem {
 
     //
     // Children names.

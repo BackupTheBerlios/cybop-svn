@@ -31,10 +31,10 @@ import cybop.core.model.String;
 /**
  * This class represents a screen item.<br><br>
  *
- * @version $Revision: 1.1 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class ScreenItem extends Item {
+public class DisplayItem extends Item {
 
     //
     // Children names.

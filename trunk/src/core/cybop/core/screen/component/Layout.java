@@ -32,10 +32,10 @@ import cybop.core.screen.*;
  *
  * It specifies the form in which components of a region are ordered.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Layout extends ScreenComponent {
+public class Layout extends DisplayComponent {
 
     //
     // Encapsulated java awt layout manager.

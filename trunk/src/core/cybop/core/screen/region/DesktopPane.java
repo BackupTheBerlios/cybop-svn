@@ -30,10 +30,10 @@ import cybop.core.screen.*;
 /**
  * This class represents a desktop pane.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class DesktopPane extends ScreenRegion {
+public class DesktopPane extends DisplayRegion {
 
     //?? JDesktopPane
 }

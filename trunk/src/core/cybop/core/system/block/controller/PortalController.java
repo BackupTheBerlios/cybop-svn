@@ -35,7 +35,7 @@ import cybop.core.system.region.controller.translator.*;
 /**
  * This class represents a portal controller.
  *
- * @version $Revision: 1.8 $ $Date: 2003-06-16 18:25:35 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalController extends Controller {
@@ -69,7 +69,7 @@ public class PortalController extends Controller {
      *
      * @return the default system user interface category
      */
-    public Item getDefaultScreenModelCategory() {
+    public Item getDefaultDisplayCategory() {
 
         return new String("cybop.core.model.model.user.system.PortalUserInterface");
     }

@@ -32,10 +32,10 @@ import cybop.core.screen.*;
 /**
  * This class represents a text panel.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class TextPanel extends ScreenRegion {
+public class TextPanel extends DisplayRegion {
 
     //
     // Children names.

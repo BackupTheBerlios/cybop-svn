@@ -51,7 +51,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.19 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
@@ -315,7 +315,7 @@ public class Controller extends Block {
      *
      * @return the default system user interface category
      */
-    public Item getDefaultScreenModelCategory() {
+    public Item getDefaultDisplayCategory() {
 
         return null;
     }
@@ -393,7 +393,7 @@ public class Controller extends Block {
 
         setCategory(Controller.PROCESSOR_CATEGORY, getDefaultProcessorCategory());
         setCategory(Controller.DOMAIN_MODEL_CATEGORY, getDefaultKnowledgeModelCategory());
-        setCategory(Controller.SYSTEM_USER_INTERFACE_CATEGORY, getDefaultScreenModelCategory());
+        setCategory(Controller.SYSTEM_USER_INTERFACE_CATEGORY, getDefaultDisplayCategory());
         setCategory(Controller.MOUSE_MODEL_CATEGORY, getDefaultMouseModelCategory());
         setCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_CATEGORY, getDefaultSystemInformationUserInterfaceCategory());
         setCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR_CATEGORY, getDefaultSystemInformationUserInterfaceTranslatorCategory());
@@ -506,11 +506,11 @@ public class Controller extends Block {
 
                 if (a.isEqualTo(Controller.SHOW_SYSTEM_USER_INTERFACE_ACTION)) {
 
-                    showScreenModel(s);
+                    showDisplay(s);
     
                 } else if (a.isEqualTo(Controller.HIDE_SYSTEM_USER_INTERFACE_ACTION)) {
     
-                    hideScreenModel(s);
+                    hideDisplay(s);
 
                 } else if (a.isEqualTo(Controller.SHOW_SYSTEM_INFORMATION_USER_INTERFACE_ACTION)) {
 
@@ -542,7 +542,7 @@ public class Controller extends Block {
      * @param s the signal
      * @exception Exception if the signal is null
      */
-    protected void showScreenModel(Signal s) throws Exception {
+    protected void showDisplay(Signal s) throws Exception {
 
         if (s != null) {
 
@@ -562,7 +562,7 @@ public class Controller extends Block {
      * @param s the signal
      * @exception Exception if the signal is null
      */
-    protected void hideScreenModel(Signal s) throws Exception {
+    protected void hideDisplay(Signal s) throws Exception {
 
         if (s != null) {
 
@@ -650,7 +650,7 @@ public class Controller extends Block {
                 s.setChild(Signal.LANGUAGE, Signal.NEURO_LANGUAGE);
 
 /*??
-                ScreenItem i = getItem((Space) m.getChild(MouseModel.POINTER_POSITION));
+                DisplayItem i = getItem((Space) m.getChild(MouseModel.POINTER_POSITION));
 
                 if (i != null) {
 
@@ -659,7 +659,7 @@ public class Controller extends Block {
                     //?? s.setChild(Signal.SUBJECT, system belonging to the clicked window);
     
                     // Predicate.
-                    String a = (String) i.getChild(ScreenItem.ACTION);
+                    String a = (String) i.getChild(DisplayItem.ACTION);
 
                     s.setChild(Signal.PREDICATE, a);
 
@@ -694,7 +694,7 @@ public class Controller extends Block {
     protected Item getItem(Space p) throws Exception {
 
         Item i = null;
-        ScreenModel c = (ScreenModel) getChild(Controller.SYSTEM_USER_INTERFACE);
+        Display c = (Display) getChild(Controller.SYSTEM_USER_INTERFACE);
 
         if (c != null) {
 
