@@ -63,100 +63,83 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.1 $ $Date: 2003-07-15 09:44:20 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-07-15 13:21:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ItemHandler {
 
     //
-    // Children.
+    // Creation and destruction.
     //
 
     /**
-     * Creates the children.
+     * Creates an item.
      *
-     * @return the children
+     * @return the item
      */
-    public Map createChildren() throws Exception {
+    public static Item createItem() {
 
-        Map m = new Map();
-        
-        if (m != null) {
+        Item i = new Item();
 
-            m.abstracc();
+        if (i != null) {
+
+            i.abstractions = createMap();
+            i.categories = createMap();
+            i.positions = createMap();
+            i.items = createMap();
 
         } else {
 
-            throw new Exception("Could not create children. The children is null.");
+            System.out.println("ERROR: Could not create item. The item is null.");
         }
 
-        return m;
+        return i;
     }
 
     /**
-     * Destroys the children.
+     * Destroys the item.
      *
-     * @param c the children
+     * @param i the item
      */
-    public void destroyChildren(Map c) throws Exception {
-    }
+    public static void destroyItem(Item i) {
 
-    /**
-     * Sets the children.
-     *
-     * @param c the children
-     */
-    public void setChildren(Map c) {
+        if (i != null) {
 
-        this.children = c;
-    }
+            Map items = i.items;
+            i.items = null;
+            destroyMap(items);
 
-    /**
-     * Returns the children.
-     *
-     * @return the children
-     */
-    public Map getChildren() {
+            Map positions = i.positions;
+            i.positions = null;
+            destroyMap(positions);
 
-        return this.children;
-    }
+            Map categories = i.categories;
+            i.categories = null;
+            destroyMap(categories);
 
-    /**
-     * Returns the size.
-     *
-     * @return the size
-     */
-    public int getChildrenSize() throws Exception {
-
-        int s = 0;
-        Map c = getChildren();
-
-        if (c != null) {
-
-            s = c.getSize();
+            Map abstractions = i.abstractions;
+            i.abstractions = null;
+            destroyMap(abstractions);
 
         } else {
 
-            throw new Exception("Could not get size. The children is null.");
+            System.out.println("ERROR: Could not destroy item. The item is null.");
         }
-
-        return s;
     }
 
     //
-    // Child management.
+    // Item element management.
     //
 
     /**
-     * Sets the child.
+     * Sets the item.
      *
      * @param n the name
-     * @param c the child
-     * @exception Exception if the children is null
+     * @param c the item
      */
-    public void setChild(Array n, Item c) throws Exception {
+    public static void setItem(Object n, Item c) {
 
-        Map m = getChildren();
+        Map m = getItemren();
 
         if (m != null) {
 
@@ -164,22 +147,21 @@ public class ItemHandler {
 
         } else {
 
-            throw new Exception("Could not set child. The children is null.");
+            System.out.println("Could not set item. The itemren is null.");
         }
     }
 
     /**
-     * Adds the child.
+     * Adds the item.
      *
      * @param n the base name
-     * @param c the child
-     * @return the child name
-     * @exception Exception if the children is null
+     * @param c the item
+     * @return the item name
      */
-    public Array addChild(Array n, Item c) throws Exception {
+    public static Object addItem(Object n, Item c) {
 
-        Array cn = null;
-        Map m = getChildren();
+        Object cn = null;
+        Map m = getItemren();
 
         if (m != null) {
 
@@ -187,21 +169,20 @@ public class ItemHandler {
 
         } else {
 
-            throw new Exception("Could not add child. The children is null.");
+            System.out.println("Could not add item. The itemren is null.");
         }
         
         return cn;
     }
 
     /**
-     * Removes the child.
+     * Removes the item.
      *
      * @param i the index
-     * @exception Exception if the children is null
      */
-    public void removeChild(int i) throws Exception {
+    public static void removeItem(int i) {
 
-        Map m = getChildren();
+        Map m = getItemren();
 
         if (m != null) {
 
@@ -209,19 +190,18 @@ public class ItemHandler {
 
         } else {
 
-            throw new Exception("Could not remove child. The children is null.");
+            System.out.println("Could not remove item. The itemren is null.");
         }
     }
 
     /**
-     * Removes the child.
+     * Removes the item.
      *
      * @param n the name
-     * @exception Exception if the children is null
      */
-    public void removeChild(Array n) throws Exception {
+    public static void removeItem(Object n) {
 
-        Map m = getChildren();
+        Map m = getItemren();
 
         if (m != null) {
 
@@ -229,21 +209,20 @@ public class ItemHandler {
 
         } else {
 
-            throw new Exception("Could not remove child. The children is null.");
+            System.out.println("Could not remove item. The itemren is null.");
         }
     }
 
     /**
-     * Returns the child with the index.
+     * Returns the item with the index.
      *
      * @param i the index
-     * @return the child
-     * @exception Exception if the children is null
+     * @return the item
      */
-    public Item getChild(int i) throws Exception {
+    public static Item getItem(int i) {
 
         Item c = null;
-        Map m = getChildren();
+        Map m = getItemren();
 
         if (m != null) {
 
@@ -251,23 +230,22 @@ public class ItemHandler {
 
         } else {
 
-            throw new Exception("Could not get child. The children is null.");
+            System.out.println("Could not get item. The itemren is null.");
         }
 
         return c;
     }
 
     /**
-     * Returns the child.
+     * Returns the item.
      *
      * @param n the name
-     * @return the child
-     * @exception Exception if the children is null
+     * @return the item
      */
-    public Item getChild(Array n) throws Exception {
+    public static Item getItem(Object n) {
 
         Item c = null;
-        Map m = getChildren();
+        Map m = getItemren();
 
         if (m != null) {
 
@@ -275,23 +253,22 @@ public class ItemHandler {
 
         } else {
 
-            throw new Exception("Could not get child. The children is null.");
+            System.out.println("Could not get item. The itemren is null.");
         }
 
         return c;
     }
 
     /**
-     * Returns the child.
+     * Returns the item.
      *
      * @param n the name
-     * @param d the default child
-     * @return the child
-     * @exception Exception if the children is null
+     * @param d the default item
+     * @return the item
      */
-    public Item getChild(Array n, Item d) throws Exception {
+    public static Item getItem(Object n, Item d) {
 
-        Item c = getChild(n);
+        Item c = getItem(n);
 
         if (c == null) {
 
@@ -302,15 +279,14 @@ public class ItemHandler {
     }
 
     /**
-     * Returns the number of children whose name starts with the given name as word base.
+     * Returns the number of itemren whose name starts with the given name as word base.
      *
      * @param n the name
-     * @exception Exception if the children is null
      */
-    public int getCount(Array n) throws Exception {
+    public static int getCount(Object n) {
 
         int c = -1;
-        Map m = getChildren();
+        Map m = getItemren();
 
         if (m != null) {
 
@@ -318,36 +294,10 @@ public class ItemHandler {
 
         } else {
 
-            throw new Exception("Could not get children count. The children is null.");
+            System.out.println("Could not get itemren count. The itemren is null.");
         }
         
         return c;
-    }
-
-    //
-    // Abstraction.
-    //
-
-    /**
-     * Abstracts this abstraction.
-     */
-    public void abstracc() throws Exception {
-
-        super.abstracc();
-
-        setChildren(createChildren());
-    }
-
-    /**
-     * Deabstracts this abstraction.
-     */
-    public void deabstract() throws Exception {
-
-        Map children = getChildren();
-        setChildren(null);
-        destroyChildren(children);
-
-        super.deabstract();
     }
 
     //
@@ -357,7 +307,7 @@ public class ItemHandler {
     /**
      * Initializes this item.
      */
-    public void initialize() throws Exception {
+    public static void initialize() {
     }
 
     /**
@@ -370,7 +320,7 @@ public class ItemHandler {
      * This method will be renamed to <code>finalize</code> as soon as the new
      * and simplified CYBOL computer language is used.
      */
-    public void finalizz() throws Exception {
+    public static void finalizz() {
     }
 
     //
@@ -378,15 +328,13 @@ public class ItemHandler {
     //
 
     /**
-     * Returns the child item at the given position.
+     * Returns the item at the given position.
      *
      * @param p the position relative to this container item
-     * @return the child item
-     * @exception Exception if the children array is null
-     * @exception Exception if the child item is null
+     * @return the item
      */
 /*??
-    public Item getChild(Space p) throws Exception {
+    public static Item getChild(Space p) {
 
         Item child = null;
         Item[] c = getChildren();
@@ -434,7 +382,7 @@ public class ItemHandler {
     
                 } else {
         
-                    throw new Exception("Could not get child item. An item is null.");
+                    System.out.println("Could not get child item. An item is null.");
                 }
                 
                 i++;
@@ -442,7 +390,7 @@ public class ItemHandler {
 
         } else {
 
-            throw new Exception("Could not get child item. The children array is null.");
+            System.out.println("Could not get child item. The children array is null.");
         }
 
         return child;
@@ -454,10 +402,9 @@ public class ItemHandler {
      * @param p the position relative to this item
      * @return true if this item contains the given position;
      * false otherwise
-     * @exception Exception if the space is null
      */
 /*??
-    public boolean contains(Structure p) throws Exception {
+    public static boolean contains(Structure p) {
 
         boolean b = false;
         Structure s = null; //?? getChild(Item.SPACE);
@@ -468,7 +415,7 @@ public class ItemHandler {
 
         } else {
 
-            throw new Exception("Could not check position. The space is null.");
+            System.out.println("Could not check position. The space is null.");
         }
 
         return b;

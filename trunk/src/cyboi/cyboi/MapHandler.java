@@ -30,7 +30,7 @@ package cyboi;
  * A map element is accessed either directly by using its index or by first checking
  * for its name to determine its index and then returning the corresponding reference.
  *
- * @version $Revision: 1.1 $ $Date: 2003-07-15 09:44:20 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-07-15 13:21:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class MapHandler {
@@ -50,8 +50,8 @@ public class MapHandler {
 
         if (m != null) {
 
-            m.names = createNames();
-            m.references = createReferences();
+            m.names = createArray();
+            m.references = createArray();
 
         } else {
 
@@ -70,12 +70,12 @@ public class MapHandler {
 
             Object[] references = m.references;
             m.references = null;
-            destroyReferences(references);
-    
+            destroyArray(references);
+
             Object[] names = m.names;
             m.names = null;
-            destroyNames(names);
-            
+            destroyArray(names);
+
         } else {
 
             System.out.println("ERROR: Could not destroy map. The map is null.");
@@ -102,50 +102,6 @@ public class MapHandler {
         }
 
         return s;
-    }
-
-    //
-    // Names.
-    //
-
-    /**
-     * Creates the names.
-     *
-     * @return the names
-     */
-    public static Object[] createNames() {
-
-        return createArray();
-    }
-
-    /**
-     * Destroys the names.
-     *
-     * @param n the names
-     */
-    public static void destroyNames(Object[] n) {
-    }
-
-    //
-    // References.
-    //
-
-    /**
-     * Creates the references.
-     *
-     * @return the references
-     */
-    public static Object[] createReferences() {
-
-        return createArray();
-    }
-
-    /**
-     * Destroys the references.
-     *
-     * @param r the references
-     */
-    public static void destroyReferences(Object[] r) {
     }
 
     //

@@ -32,14 +32,14 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.1 $ $Date: 2003-07-15 09:44:20 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-07-15 13:21:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Main extends Object {
 
     //?? See for example:
     //?? java.io.ObjectOutputStream::writeArray
-    //?? for how to transfer a java.lang.Object into a byte[]
+    //?? for how to transfer a Object into a byte[]
 
     //
     // Complex constant.
@@ -169,7 +169,7 @@ public class Main extends Object {
 
             } else {
 
-                throw new Exception("Could not execute cyboi. The argument array is null.");
+                System.out.println("Could not execute cyboi. The argument array is null.");
             }
 
         } catch (Exception e) {
@@ -188,23 +188,29 @@ public class Main extends Object {
         }
     }
 
-    public Item read(String s) {
-        
+    /**
+     * Creates an item.
+     *
+     * @param c the category
+     */
+    public static Item createItem(Object c) {
+
         Item i = null;
-        Item child = null;
+        Item tmp = null;
         String name = null;
         String abstraction = null;
         String category = null;
 
         while (file != eof) {
 
-            child = nextChild();
+            tmp = readNextItem();
 
-            if (child != null) {
+            if (tmp != null) {
 
-                name = child.getName();
-                abstraction = child.getAbstraction();
-                category = child.getCategory();
+                name = tmp.name;
+                abstraction = tmp.abstraction;
+                category = tmp.category;
+                position = tmp.position;
 
                 if (abstraction != null) {
 
@@ -228,15 +234,17 @@ public class Main extends Object {
 
                         i = createItem(category);
                     }
+                    
+                    add(i);
 
                 } else {
 
-                    System.out.println("DEBUG: Could not read child. The category is null.");
+                    System.out.println("DEBUG: Could not read item. The category is null.");
                 }
 
             } else {
 
-                System.out.println("DEBUG: Could not read child. The child is null.");
+                System.out.println("DEBUG: Could not read item. The item is null.");
             }
         }
 
@@ -255,7 +263,7 @@ public class Main extends Object {
      * @param s the integer primitive as string
      * @return the integer primitive
      */
-    public Object createIntegerPrimitive(String s) {
+    public static Object createIntegerPrimitive(String s) {
 
         return Integer.valueOf(s);
     }
@@ -266,7 +274,7 @@ public class Main extends Object {
      * @param s the float primitive as string
      * @return the float primitive
      */
-    public Object createFloatPrimitive(String s) {
+    public static Object createFloatPrimitive(String s) {
 
         return Double.valueOf(s);
     }
@@ -277,7 +285,7 @@ public class Main extends Object {
      * @param s the string primitive as string
      * @return the string primitive
      */
-    public Object createStringPrimitive(String s) {
+    public static Object createStringPrimitive(String s) {
 
         return s;
     }
@@ -290,7 +298,7 @@ public class Main extends Object {
      * @exception Exception if the category is null
      * @exception Exception if the item is null
      */
-    public static Item createItem(String s) throws Exception {
+    public static Item createItem(String s) {
 
         Item i = null;
 
@@ -333,12 +341,12 @@ public class Main extends Object {
 
                 } else {
 
-                    throw new Exception("Could not create item. The item is null.");
+                    System.out.println("Could not create item. The item is null.");
                 }
 
             } else {
 
-                throw new Exception("Could not create item. The category is null.");
+                System.out.println("Could not create item. The category is null.");
             }
 
         } else {
@@ -355,7 +363,7 @@ public class Main extends Object {
      * @param i the item
      * @exception Exception if the item is null
      */
-    public static void destroyItem(Item i) throws Exception {
+    public static void destroyItem(Item i) {
 
         if (i != null) {
 
@@ -390,7 +398,7 @@ public class Main extends Object {
     }
 
 /*??
-    public void abstracc() throws Exception {
+    public static void abstracc() {
 
         // As long as the CYBOP framework is built on Java, every
         // item needs to be capable of encapsulating a pure Java object.
@@ -403,7 +411,7 @@ public class Main extends Object {
         setJavaTreeNode(createJavaTreeNode());
     }
 
-    public void deabstract() throws Exception {
+    public static void deabstract() {
 
         // This java tree node can contain children.
         // It is only used as long as Java objects are used in the CYBOP framework,
@@ -415,7 +423,7 @@ public class Main extends Object {
 
         // As long as the CYBOP framework is built on Java, every
         // item needs to be capable of encapsulating a pure Java object.
-        java.lang.Object javaObject = getJavaObject();
+        Object javaObject = getJavaObject();
         setJavaObject(null);
         destroyJavaObject(javaObject);
     }
@@ -431,7 +439,7 @@ public class Main extends Object {
      * @exception Exception if the encapsulated java object is null
      */
 /*??
-    public java.lang.Object createJavaObject() throws Exception {
+    public static Object createJavaObject() {
 
         return null;
     }
@@ -442,7 +450,7 @@ public class Main extends Object {
      * @param o the encapsulated java object
      */
 /*??
-    public void destroyJavaObject(java.lang.Object o) throws Exception {
+    public static void destroyJavaObject(Object o) {
     }
 
     /**
@@ -451,7 +459,7 @@ public class Main extends Object {
      * @param o the encapsulated java object
      */
 /*??
-    public void setJavaObject(java.lang.Object o) {
+    public static void setJavaObject(Object o) {
 
         this.javaObject = o;
     }
@@ -462,7 +470,7 @@ public class Main extends Object {
      * @return the encapsulated java object
      */
 /*??
-    public java.lang.Object getJavaObject() {
+    public static Object getJavaObject() {
 
         return this.javaObject;
     }
@@ -478,7 +486,7 @@ public class Main extends Object {
      * @exception Exception if the java tree node is null
      */
 /*??
-    public javax.swing.tree.DefaultMutableTreeNode createJavaTreeNode() throws Exception {
+    public static javax.swing.tree.DefaultMutableTreeNode createJavaTreeNode() {
 
         javax.swing.tree.DefaultMutableTreeNode tn = new javax.swing.tree.DefaultMutableTreeNode();
 
@@ -488,7 +496,7 @@ public class Main extends Object {
 
         } else {
 
-            throw new Exception("Could not create java tree node. The java tree node is null.");
+            System.out.println("Could not create java tree node. The java tree node is null.");
         }
 
         return tn;
@@ -500,7 +508,7 @@ public class Main extends Object {
      * @param tn the java tree node
      */
 /*??
-    public void destroyJavaTreeNode(javax.swing.tree.DefaultMutableTreeNode tn) throws Exception {
+    public static void destroyJavaTreeNode(javax.swing.tree.DefaultMutableTreeNode tn) {
     }
 
     /**
@@ -509,7 +517,7 @@ public class Main extends Object {
      * @param tn the java tree node
      */
 /*??
-    public void setJavaTreeNode(javax.swing.tree.DefaultMutableTreeNode tn) {
+    public static void setJavaTreeNode(javax.swing.tree.DefaultMutableTreeNode tn) {
 
         this.javaTreeNode = tn;
     }
@@ -520,7 +528,7 @@ public class Main extends Object {
      * @return the java tree node
      */
 /*??
-    public javax.swing.tree.DefaultMutableTreeNode getJavaTreeNode() {
+    public static javax.swing.tree.DefaultMutableTreeNode getJavaTreeNode() {
 
         return this.javaTreeNode;
     }
@@ -537,7 +545,7 @@ public class Main extends Object {
      * @exception Exception if the array is null
      */
 /*??
-    public void addTreeNode(Array a) throws Exception {
+    public static void addTreeNode(Array a) {
 
         javax.swing.tree.DefaultMutableTreeNode tn = getJavaTreeNode();
 
@@ -561,12 +569,12 @@ public class Main extends Object {
 
             } else {
 
-//??                java.lang.System.out.println("DEBUG: Could not add java tree node. The array is null.");
+//??                System.out.println("DEBUG: Could not add java tree node. The array is null.");
             }
 
         } else {
 
-            throw new Exception("Could not add java tree node. The java tree node is null.");
+            System.out.println("Could not add java tree node. The java tree node is null.");
         }
     }
 
@@ -578,7 +586,7 @@ public class Main extends Object {
      * @exception Exception if the array is null
      */
 /*??
-    public void removeTreeNode(Array a) throws Exception {
+    public static void removeTreeNode(Array a) {
 
         javax.swing.tree.DefaultMutableTreeNode tn = getJavaTreeNode();
 
@@ -604,12 +612,12 @@ public class Main extends Object {
 
             } else {
 
-//??                java.lang.System.out.println("DEBUG: Could not remove java tree node. The array is null.");
+//??                System.out.println("DEBUG: Could not remove java tree node. The array is null.");
             }
 
         } else {
 
-            throw new Exception("Could not remove java tree node. The java tree node is null.");
+            System.out.println("Could not remove java tree node. The java tree node is null.");
         }
     }
 */
