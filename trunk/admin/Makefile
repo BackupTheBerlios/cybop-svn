@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.19 $ $Date: 2004-11-12 15:36:42 $ $Author: christian $
+# @version $Revision: 1.20 $ $Date: 2004-11-12 15:39:53 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 # @author Michael Simon <michael.simon@gmx.net>
 #
@@ -117,7 +117,7 @@ X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WIN
 #
 all: create $(ACCESSOR_OBJECTS) $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CREATOR_OBJECTS) $(CYBOI_OBJECTS) $(GLOBAL_OBJECTS) $(LOGGER_OBJECTS) $(LOGIC_OBJECTS) $(PARSER_OBJECTS) $(SIGNAL_OBJECTS) $(SOCKET_OBJECTS) $(STATE_OBJECTS) $(TEST_OBJECTS) $(TRANSLATOR_OBJECTS) $(X_WINDOWS_OBJECTS)
 	$(COMPILER) -c $(COMPILER_FLAGS) $(SRC)/cyboi/cyboi.c \
-		-o $(BIN)/$(BINARY) $(OBJ)/cyboi/cyboi.o
+		-o $(OBJ)/cyboi/cyboi.o
 	@echo Compiled cyboi files.
 
 #
