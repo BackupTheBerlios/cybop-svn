@@ -14,18 +14,26 @@
     - Cybernetics Oriented Programming -
 /-->
 
-<!ELEMENT model (super?,part*)>
-<!ELEMENT super EMPTY>
-<!ELEMENT part (model*)>
+<!ELEMENT model (part*)>
+<!ELEMENT part (property*)>
+<!ELEMENT property (constraint*)>
+<!ELEMENT constraint EMPTY>
 
-<!ATTLIST super
-    name CDATA #REQUIRED
-    model CDATA #REQUIRED
-    model_abstraction CDATA #REQUIRED>
 
 <!ATTLIST part
     name CDATA #REQUIRED
-    model CDATA #REQUIRED
-    model_abstraction CDATA #REQUIRED
-    position CDATA #IMPLIED
-    position_abstraction CDATA #IMPLIED>
+    channel CDATA #REQUIRED
+    abstraction CDATA #REQUIRED
+    model CDATA #REQUIRED>
+
+<!ATTLIST property
+    name CDATA #REQUIRED
+    channel CDATA #REQUIRED
+    abstraction CDATA #REQUIRED
+    model CDATA #REQUIRED>
+
+<!ATTLIST constraint
+    name CDATA #REQUIRED
+    channel CDATA #REQUIRED
+    abstraction CDATA #REQUIRED
+    model CDATA #REQUIRED>
