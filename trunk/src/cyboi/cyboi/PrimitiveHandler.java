@@ -29,7 +29,7 @@ package cyboi;
  *
  * It contains procedures to create items of primitive type.
  *
- * @version $Revision: 1.10 $ $Date: 2003-07-27 17:55:11 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-07-27 22:50:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class PrimitiveHandler {
@@ -257,51 +257,6 @@ class PrimitiveHandler {
         destroyJavaObject(javaObject);
     }
 */
-    //
-    // Encapsulated java object.
-    //
-
-    /**
-     * Creates an encapsulated java object.
-     *
-     * @return the encapsulated java object
-     */
-/*??
-    static java.lang.Object createJavaObject() {
-
-        return null;
-    }
-
-    /**
-     * Destroys the encapsulated java object.
-     *
-     * @param o the encapsulated java object
-     */
-/*??
-    static void destroyJavaObject(java.lang.Object o) {
-    }
-
-    /**
-     * Sets the encapsulated java object.
-     *
-     * @param o the encapsulated java object
-     */
-/*??
-    static void setJavaObject(java.lang.Object o) {
-
-        this.javaObject = o;
-    }
-
-    /**
-     * Returns the encapsulated java object.
-     *
-     * @return the encapsulated java object
-     */
-/*??
-    static java.lang.Object getJavaObject() {
-
-        return this.javaObject;
-    }
 
     //
     // Java tree node.
@@ -336,28 +291,6 @@ class PrimitiveHandler {
      */
 /*??
     static void destroyJavaTreeNode(javax.swing.tree.DefaultMutableTreeNode tn) {
-    }
-
-    /**
-     * Sets the java tree node.
-     *
-     * @param tn the java tree node
-     */
-/*??
-    static void setJavaTreeNode(javax.swing.tree.DefaultMutableTreeNode tn) {
-
-        this.javaTreeNode = tn;
-    }
-
-    /**
-     * Returns the java tree node.
-     *
-     * @return the java tree node
-     */
-/*??
-    static javax.swing.tree.DefaultMutableTreeNode getJavaTreeNode() {
-
-        return this.javaTreeNode;
     }
 
     //

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Item.java,v $
+ * $RCSfile: Category.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -25,35 +25,19 @@
 package cyboi;
 
 /**
- * This is an item.
+ * This is a category.
  *
- * It represents an abstract description of some real world item.
+ * It represents a category file with all its contents.
  *
- * An item can be created by instantiating (cloning) an existing category.
- * Instantiating means allocating some place in the computer's memory.
- * Basically, every item can become a category if copies of this item are created.
- *
- * @version $Revision: 1.7 $ $Date: 2003-07-27 22:50:34 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-07-27 22:50:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class Item {
+class Category {
 
-    /** The java object. */
-    static java.lang.Object java_object;
+    /** The java object class. */
+    static java.lang.Object java_object_class;
 
-    /** The java tree node. */
-    static java.lang.Object java_tree_node;
-
-    /** The items. */
-    static java.lang.Object items;
-
-    /** The positions. */
-    static java.lang.Object positions;
-
-    /** The instances. */
-    static java.lang.Object instances;
-
-    /** The interactions. */
-    static java.lang.Object interactions;
+    /** The category items. */
+    static java.lang.Object[] category_items;
 }
 

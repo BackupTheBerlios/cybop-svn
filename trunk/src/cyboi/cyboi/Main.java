@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.17 $ $Date: 2003-07-27 17:55:11 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2003-07-27 22:50:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -72,9 +72,6 @@ class Main {
                     java.lang.Object event_handler = Main.create_event_handler();
                     Main.replaceEventQueue(event_handler);
 
-                    // Signal memory.
-                    java.lang.Object signal_memory = MapHandler.create_map();
-
                     // Statics.
                     java.lang.Object statics = ItemHandler.create_item();
                     ItemHandler.initialize(statics, statics_category);
@@ -84,6 +81,9 @@ class Main {
                     java.lang.Object dynamics = ItemHandler.create_item();
                     ItemHandler.initialize(dynamics, dynamics_category);
 */
+
+                    // Signal memory.
+                    java.lang.Object signal_memory = MapHandler.create_map();
 
                     // Signal.
                     java.lang.Object signal = ItemHandler.create_item();
@@ -99,6 +99,9 @@ class Main {
                     ItemHandler.finalizz(signal, signal_category);
                     ItemHandler.destroy_item(signal);
                     
+                    // Signal memory.
+                    MapHandler.destroy_map(signal_memory);
+
 /*??
                     // Dynamics.
                     ItemHandler.finalizz(dynamics, dynamics_category);
@@ -108,9 +111,6 @@ class Main {
                     // Statics.
                     ItemHandler.finalizz(statics, statics_category);
                     ItemHandler.destroy_item(statics);
-
-                    // Signal memory.
-                    MapHandler.destroy_map(signal_memory);
 
                     // Event handler.
                     Main.destroy_event_handler(event_handler);
