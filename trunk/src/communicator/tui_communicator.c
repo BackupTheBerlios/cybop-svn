@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-10-18 20:39:53 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-11-30 15:20:37 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -202,8 +202,9 @@ void send_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                     i = *sc;
                     // Add string termination to temporary null-terminated message.
                     set_array_element((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CHARACTER);
-
+                    
                     fputs(tmp, (FILE*) *d);
+                    fputs("\n", (FILE*) *d);
 
                     // Beep \007 twice with system loudspeaker.
 //??                    fputs("Beep:\n\007", (FILE*) *d);
