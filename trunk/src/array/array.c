@@ -50,7 +50,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.14 $ $Date: 2004-12-13 22:47:20 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-12-15 07:49:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -159,7 +159,9 @@ void set_array_elements(void* p0, const void* p1, const void* p2, const void* p3
 void set_array_element(void* p0, const void* p1, const void* p2, const void* p3) {
 
     // The elements count.
-    int c = 1;
+    int* c = INTEGER_NULL_POINTER;
+    create_integer((void*) &c);
+    *c = 1;
 
     // The element p3 needs to be handed over as array to set_array_elements.
     // Therefore, it has to be transformed into a pointer.
@@ -172,6 +174,8 @@ void set_array_element(void* p0, const void* p1, const void* p2, const void* p3)
     // - element p3: string char* handed over as char**
     // - the element of type char** gets transformed to type char*** with &p3
     set_array_elements(p0, p1, p2, (void*) &p3, (void*) &c);
+
+    destroy_integer((void*) &c);
 }
 
 /**
@@ -223,9 +227,13 @@ void remove_array_elements(void* p0, const void* p1, const void* p2, const void*
 void remove_array_element(void* p0, const void* p1, const void* p2, const void* p3) {
 
     // The elements count.
-    int c = 1;
+    int* c = INTEGER_NULL_POINTER;
+    create_integer((void*) &c);
+    *c = 1;
 
     remove_array_elements(p0, p1, p2, p3, (void*) &c);
+
+    destroy_integer((void*) &c);
 }
 
 /**
@@ -277,7 +285,9 @@ void get_array_elements(const void* p0, const void* p1, const void* p2, void* p3
 void get_array_element(const void* p0, const void* p1, const void* p2, void* p3) {
 
     // The elements count.
-    int c = 1;
+    int* c = INTEGER_NULL_POINTER;
+    create_integer((void*) &c);
+    *c = 1;
 
     // The element needs to be handed over as array.
     // Therefore, it has to be transformed into a pointer.
@@ -286,6 +296,8 @@ void get_array_element(const void* p0, const void* p1, const void* p2, void* p3)
     // - element: char handed over as char*
     // - the element of type char* gets transformed to type char** with &element
     get_array_elements(p0, p1, p2, (void*) &p3, (void*) &c);
+
+    destroy_integer((void*) &c);
 }
 
 /**
@@ -339,7 +351,9 @@ void get_array_elements_index(const void* p0, const void* p1, const void* p2, co
 void get_array_element_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
 
     // The elements count.
-    int c = 1;
+    int* c = INTEGER_NULL_POINTER;
+    create_integer((void*) &c);
+    *c = 1;
 
     // The element needs to be handed over as array.
     // Therefore, it has to be transformed into a pointer.
@@ -348,6 +362,8 @@ void get_array_element_index(const void* p0, const void* p1, const void* p2, con
     // - element: char handed over as char*
     // - the element of type char* gets transformed to type char** with &element
     get_array_elements_index(p0, p1, p2, (void*) &p3, (void*) &c, p4);
+
+    destroy_integer((void*) &c);
 }
 
 //
@@ -477,13 +493,13 @@ void compare_arrays(const void* p0, const void* p1, const void* p2, const void* 
 
     if (p3 != NULL_POINTER) {
 
-        int* sc = (int*) p3;
+        int** sc = (int**) p3;
 
         if (p1 != NULL_POINTER) {
 
-            int* fc = (int*) p1;
+            int** fc = (int**) p1;
 
-            if (*fc == *sc) {
+            if (**fc == **sc) {
 
                 compare_array_elements(p0, p2, p5, p3, p4);
             }

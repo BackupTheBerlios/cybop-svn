@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.13 $ $Date: 2004-12-07 11:11:50 $ $Author: rholzmueller $
+ * @version $Revision: 1.14 $ $Date: 2004-12-15 07:49:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -65,7 +65,7 @@ void create_integer_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
-        int* c = (int*) p1;
+        int** c = (int**) p1;
 
         if (p0 != NULL_POINTER) {
 
@@ -74,7 +74,7 @@ void create_integer_array(void* p0, const void* p1) {
             log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTEGER_ARRAY_MESSAGE, (void*) &CREATE_INTEGER_ARRAY_MESSAGE_COUNT);
 
             // Determine size as product of element count and type size.
-            int s = *c * INTEGER_PRIMITIVE_SIZE;
+            int s = **c * INTEGER_PRIMITIVE_SIZE;
 
             // A minimal space in memory is always allocated,
             // even if the requested size is zero.
@@ -102,7 +102,7 @@ void destroy_integer_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
-        int* c = (int*) p1;
+        int** c = (int**) p1;
 
         if (p0 != NULL_POINTER) {
 
@@ -133,7 +133,7 @@ void resize_integer_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
-        int* c = (int*) p1;
+        int** c = (int**) p1;
 
         if (p0 != NULL_POINTER) {
 
@@ -142,7 +142,7 @@ void resize_integer_array(void* p0, const void* p1) {
             log_message((void*) &INFO_LOG_LEVEL, (void*) &RESIZE_INTEGER_ARRAY_MESSAGE, (void*) &RESIZE_INTEGER_ARRAY_MESSAGE_COUNT);
 
             // Determine size as product of element count and type size.
-            int s = *c * INTEGER_PRIMITIVE_SIZE;
+            int s = **c * INTEGER_PRIMITIVE_SIZE;
 
             // Create a new array with extended size.
             *a = (void*) realloc(*a, s);
@@ -177,11 +177,11 @@ void compare_integer_array_elements(const void* p0, const void* p1, const void* 
 
     if (p3 != NULL_POINTER) {
 
-        int* r = (int*) p3;
+        int** r = (int**) p3;
 
         if (p2 != NULL_POINTER) {
 
-            int* c = (int*) p2;
+            int** c = (int**) p2;
 
             if (p1 != NULL_POINTER) {
 
@@ -202,10 +202,10 @@ void compare_integer_array_elements(const void* p0, const void* p1, const void* 
 
                     while (1) {
 
-                        if (j >= *c) {
+                        if (j >= **c) {
 
                             // All elements have been compared and are equal.
-                            *r = 1;
+                            **r = 1;
 
                             break;
                         }
@@ -259,7 +259,7 @@ void set_integer_array_elements(void* p0, const void* p1, const void* p2, const 
 
     if (p3 != NULL_POINTER) {
 
-        int* c = (int*) p3;
+        int** c = (int**) p3;
 
         if (p2 != NULL_POINTER) {
 
@@ -267,7 +267,7 @@ void set_integer_array_elements(void* p0, const void* p1, const void* p2, const 
 
             if (p1 != NULL_POINTER) {
 
-                int* i = (int*) p1;
+                int** i = (int**) p1;
 
                 if (p0 != NULL_POINTER) {
 
@@ -276,7 +276,7 @@ void set_integer_array_elements(void* p0, const void* p1, const void* p2, const 
                     // The loop variable.
                     int j = 0;
                     // The destination base to start copying to.
-                    void* db = (void*) (*da + *i * INTEGER_PRIMITIVE_SIZE);
+                    void* db = (void*) (*da + **i * INTEGER_PRIMITIVE_SIZE);
                     // The source element.
                     int* se = INTEGER_NULL_POINTER;
                     // The destination element.
@@ -286,7 +286,7 @@ void set_integer_array_elements(void* p0, const void* p1, const void* p2, const 
 
                     while (1) {
 
-                        if (j >= *c) {
+                        if (j >= **c) {
 
                             break;
                         }
@@ -337,15 +337,15 @@ void remove_integer_array_elements(void* p0, const void* p1, const void* p2, con
 
     if (p3 != NULL_POINTER) {
 
-        int* c = (int*) p3;
+        int** c = (int**) p3;
 
         if (p2 != NULL_POINTER) {
 
-            int* i = (int*) p2;
+            int** i = (int**) p2;
 
             if (p1 != NULL_POINTER) {
 
-                int* m = (int*) p1;
+                int** m = (int**) p1;
 
                 if (p0 != NULL_POINTER) {
 
@@ -354,11 +354,11 @@ void remove_integer_array_elements(void* p0, const void* p1, const void* p2, con
                     // The loop variable.
                     int j = 0;
                     // The remaining elements count.
-                    int r = *m - (*i + *c);
+                    int r = **m - (**i + **c);
                     // The destination base.
-                    void* db = (void*) (*a + *i * INTEGER_PRIMITIVE_SIZE);
+                    void* db = (void*) (*a + **i * INTEGER_PRIMITIVE_SIZE);
                     // The source base.
-                    void* sb = (void*) (*a + *i * INTEGER_PRIMITIVE_SIZE + *c * INTEGER_PRIMITIVE_SIZE);
+                    void* sb = (void*) (*a + **i * INTEGER_PRIMITIVE_SIZE + **c * INTEGER_PRIMITIVE_SIZE);
                     // The source element.
                     int* se = INTEGER_NULL_POINTER;
                     // The destination element.
@@ -432,7 +432,7 @@ void get_integer_array_elements(const void* p0, const void* p1, void* p2, const 
 
     if (p3 != NULL_POINTER) {
 
-        int* c = (int*) p3;
+        int** c = (int**) p3;
 
         if (p2 != NULL_POINTER) {
 
@@ -440,7 +440,7 @@ void get_integer_array_elements(const void* p0, const void* p1, void* p2, const 
 
             if (p1 != NULL_POINTER) {
 
-                int* i = (int*) p1;
+                int** i = (int**) p1;
 
                 if (p0 != NULL_POINTER) {
 
@@ -449,7 +449,7 @@ void get_integer_array_elements(const void* p0, const void* p1, void* p2, const 
                     // The loop variable.
                     int j = 0;
                     // The source base to start copying from.
-                    void* sb = (void*) (*sa + *i * INTEGER_PRIMITIVE_SIZE);
+                    void* sb = (void*) (*sa + **i * INTEGER_PRIMITIVE_SIZE);
                     // The source element.
                     int* se = INTEGER_NULL_POINTER;
                     // The destination element.
@@ -459,7 +459,7 @@ void get_integer_array_elements(const void* p0, const void* p1, void* p2, const 
 
                     while (1) {
 
-                        if (j >= *c) {
+                        if (j >= **c) {
 
                             break;
                         }
@@ -514,11 +514,11 @@ void get_integer_array_elements_index(const void* p0, const void* p1, const void
 
     if (p4 != NULL_POINTER) {
 
-        int* i = (int*) p4;
+        int** i = (int**) p4;
 
         if (p3 != NULL_POINTER) {
 
-            int* c = (int*) p3;
+            int** c = (int**) p3;
 
             if (p2 != NULL_POINTER) {
 
@@ -526,7 +526,7 @@ void get_integer_array_elements_index(const void* p0, const void* p1, const void
 
                 if (p1 != NULL_POINTER) {
 
-                    int* m = (int*) p1;
+                    int** m = (int**) p1;
 
                     if (p0 != NULL_POINTER) {
 
@@ -535,7 +535,7 @@ void get_integer_array_elements_index(const void* p0, const void* p1, const void
                         // The loop variable.
                         int j = 0;
                         // The iteration limit.
-                        int l = *m - *c + 1;
+                        int l = **m - **c + 1;
                         // The element.
                         void* e = NULL_POINTER;
                         // The comparison result.
@@ -562,7 +562,7 @@ void get_integer_array_elements_index(const void* p0, const void* p1, const void
                             if (r == 1) {
 
                                 // The element has been found.
-                                *i = j;
+                                **i = j;
 
                                 break;
                             }

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2004-12-14 12:27:04 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-12-15 07:49:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -412,60 +412,76 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
 }
 
 /**
- * Gets the new main signal id.
- * This is the max signal id + 1
+ * Gets the new signal id.
+ *
+ * The new id is: maximum signal id + 1
  *
  * @param p0 the signal memory
  * @param p1 the signal memory count
  * @param p2 the signal id
  */
-void* get_new_main_signal_id(void** sig_memory,
-                             int* sig_memory_count,
-                             int* new_main_signal_id) {
+void* get_new_main_signal_id(const void* p0, const void* p1, void* p2) {
 
-    if ( sig_memory == NULL_POINTER ) {
+    if (p2 != NULL_POINTER) {
 
-        log_message_debug( "sig_memory is a NULL POINTER" );
+        int** i = (int**) p2;
 
-    } else if ( sig_memory_count == NULL_POINTER ) {
+        if (p1 != NULL_POINTER) {
 
-        log_message_debug( "sig_memory_count is a NULL POINTER" );
+            int** mc = (int**) p1;
 
-    } else if ( new_main_signal_id == NULL_POINTER ) {
+            // The signal ids.
+            void* ids = NULL_POINTER;
 
-        log_message_debug( "new_main_signal_id is a NULL POINTER" );
+            // Get signal ids.
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ids);
+
+            // The loop variable.
+            int* j = INTEGER_NULL_POINTER;
+            create_integer((void*) &j);
+            *j = 0;
+
+            // The maximum signal id.
+            int* max = INTEGER_NULL_POINTER;
+            create_integer((void*) &max);
+            *max = 0;
+
+            // The id.
+            int* id = INTEGER_NULL_POINTER;
+            create_integer((void*) &id);
+            *id = 0;
+
+            while (1) {
+
+                if (*j >= **mc) {
+
+                    break;
+                }
+
+                get_array_element((void*) &ids, (void*) &POINTER_ARRAY, (void*) &j, (void*) &id);
+
+                if (*id > *max) {
+
+                    *max = *id;
+                }
+
+                (*j)++;
+            }
+
+            **i = *max + 1;
+
+            destroy_integer((void*) &id);
+            destroy_integer((void*) &max);
+            destroy_integer((void*) &j);
+
+        } else {
+
+            log_message_debug("The signal memory count is null.");
+        }
 
     } else {
 
-        int i = 0;
-        int max_main_signal_id = 0;
-        int id = 0;
-        void* ids = NULL_POINTER;
-
-        //get the signal memories main signal id
-        get_array_element(sig_memory, (void*) &POINTER_ARRAY,
-                          (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX,
-                          (void*) &ids);
-
-        while (1) {
-
-            if (i >= *sig_memory_count) {
-
-                break;
-            }
-
-            get_array_element((void*) &ids, (void*) &POINTER_ARRAY,
-                              (void*) &i, (void*) &id);
-
-            if (id > max_main_signal_id) {
-
-                max_main_signal_id = id;
-            }
-
-            i = i + 1;
-        }
-
-        *new_main_signal_id = max_main_signal_id + 1;
+        log_message_debug("The new signal id is null.");
     }
 }
 
