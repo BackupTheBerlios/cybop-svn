@@ -22,6 +22,8 @@
  * - Cybernetics Oriented Programming -
  */
 
+#include "signal.c"
+
 /**
  * This is a signal handler.
  *
@@ -31,7 +33,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.2 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-09-23 23:43:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,80 +42,80 @@
 //
 
 /** The signal. */
-static const char[] SIGNAL = "signal";
+static const char* SIGNAL = "signal";
 
 //
 // Priorities.
 //
 
 /** The normal priority. */
-static const char[] NORMAL_PRIORITY = "1";
+static const char* NORMAL_PRIORITY = "1";
 
 //
 // Languages.
 //
 
 /** The system internal (neuro) language. */
-static const char[] NEURO_LANGUAGE = "neuro";
+static const char* NEURO_LANGUAGE = "neuro";
 
 /** The textual user interface (tui) language. */
-static const char[] TUI_LANGUAGE = "tui";
+static const char* TUI_LANGUAGE = "tui";
 
 /** The mouse language. */
-static const char[] MOUSE_LANGUAGE = "mouse";
+static const char* MOUSE_LANGUAGE = "mouse";
 
 /** The graphical user interface (gui) language. */
-static const char[] GUI_LANGUAGE = "gui";
+static const char* GUI_LANGUAGE = "gui";
 
 /** The socket language. */
-static const char[] SOCKET_LANGUAGE = "socket";
+static const char* SOCKET_LANGUAGE = "socket";
 
 /** The structured query language (sql). */
-static const char[] SQ_LANGUAGE = "sq";
+static const char* SQ_LANGUAGE = "sq";
 
 /** The java messaging service (jms) language. */
-static const char[] JMS_LANGUAGE = "jms";
+static const char* JMS_LANGUAGE = "jms";
 
 /** The remote method invocation (rmi) language. */
-static const char[] RMI_LANGUAGE = "rmi";
+static const char* RMI_LANGUAGE = "rmi";
 
 /** The common object request broker architecture (corba) language. */
-static const char[] CORBA_LANGUAGE = "corba";
+static const char* CORBA_LANGUAGE = "corba";
 
 /** The extensible markup language (xml). */
-static const char[] XML_LANGUAGE = "xml";
+static const char* XML_LANGUAGE = "xml";
 
 /** The simple object access protocol (soap) language. */
-static const char[] SOAP_LANGUAGE = "soap";
+static const char* SOAP_LANGUAGE = "soap";
 
 //
 // Actions.
 //
 
 /** The show system information action. */
-static const char[] SHOW_SYSTEM_INFORMATION_ACTION = "show_system_information";
+static const char* SHOW_SYSTEM_INFORMATION_ACTION = "show_system_information";
 
 /** The startup action. */
-static const char[] STARTUP_ACTION = "startup";
+static const char* STARTUP_ACTION = "startup";
 
 /** The shutdown action. */
-static const char[] SHUTDOWN_ACTION = "shutdown";
+static const char* SHUTDOWN_ACTION = "shutdown";
 
 /** The receive action. */
-static const char[] RECEIVE_ACTION = "receive";
+static const char* RECEIVE_ACTION = "receive";
 
 /** The send action. */
-static const char[] SEND_ACTION = "send";
+static const char* SEND_ACTION = "send";
 
 //
 // Attributes.
 //
 
 /** The statics. */
-static item statics;
+static struct item* statics;
 
 /** The dynamics. */
-static item dynamics;
+static struct item* dynamics;
 
 //
 // Signal.
@@ -140,12 +142,12 @@ static item dynamics;
  */
 void receive_signal(int p0, int p1) {
 
-    signal s = (signal) p1;
+    struct signal* s = (struct signal*) p1;
     
     if (s != NULL) {
 
         // Read and remove signal from signal memory (interrupt vector table).
-        signal tmp = (signal) get_map_element(p0, 0);
+        struct signal* tmp = (struct signal*) get_map_element(p0, 0);
         remove_map_element(p0, 0);
         
         if (tmp != NULL) {
@@ -189,8 +191,8 @@ void receive_signal(int p0, int p1) {
 int handle_signal(int p0, int p1) {
 
     int sf = 0;
-    signal s = (signal) p0;
-            
+    struct signal* s = (struct signal*) p0;
+
     if (s != NULL) {
 
         int a = s->predicate;
@@ -214,15 +216,15 @@ int handle_signal(int p0, int p1) {
 
             } else if (a.equals("mouse_clicked")) {
 
-                Item statics = statics;
+                struct item* statics = statics;
                 int main_frame = get_item_element(statics, "main_frame");
-                Vector pointer_position = (Vector) get_item_element(statics, "mouse.pointer_position");
+                struct vector* pointer_position = (struct vector*) get_item_element(statics, "mouse.pointer_position");
                 
                 reset_signal(s);
 
                 if (pointer_position != NULL) {
                  
-                    s->predicate = mouse_clicked_action(main_frame, pointer_position.x, pointer_position.y, pointer_position.z);
+                    s->predicate = mouse_clicked_action(main_frame, pointer_position->x, pointer_position->y, pointer_position->z);
                     
                 } else {
                     
@@ -251,10 +253,11 @@ int handle_signal(int p0, int p1) {
 */
             } else if (a.equals(SEND_ACTION)) {
                 
-                Item o = (Item) s->object;
+                struct item* o = (struct item*) s->object;
 
                 if (o != NULL) {
                     
+/*??
                     int j = o.java_object;
 
                     if (j != NULL) {
@@ -272,6 +275,7 @@ int handle_signal(int p0, int p1) {
                         
                         log(ERROR_LOG_LEVEL, "Could not handle send action. The java object is NULL.");
                     }
+*/
                 
                 } else {
                     
@@ -283,12 +287,12 @@ int handle_signal(int p0, int p1) {
             } else if (a.equals(STARTUP_ACTION)) {
                 
                 // Root (statics).
-                statics = (Item) create_object(s->object, CATEGORY);
+                statics = (struct item*) create_object(s->object, CATEGORY);
 
                 reset_signal(s);
                 
                 s->predicate = SEND_ACTION;
-                s->object = get_map_element(((Item) statics).items, "main_frame");
+                s->object = get_map_element(((struct item*) statics)->items, "main_frame");
 
             } else if (a.equals(SHUTDOWN_ACTION)) {
                 
@@ -325,7 +329,7 @@ int handle_signal(int p0, int p1) {
  */
 void send_signal(int p0, int p1) {
 
-    signal s = (signal) p1;
+    struct signal* s = (struct signal*) p1;
     
     if (s != NULL) {
 
@@ -335,7 +339,7 @@ void send_signal(int p0, int p1) {
         if (s->predicate != NULL) {
             
             // Create signal for storage in signal memory.
-            signal* tmp = (signal*) malloc(sizeof(signal));
+            struct signal* tmp = (struct signal*) malloc(sizeof(struct signal));
     
             if (tmp != NULL) {
             
@@ -387,7 +391,7 @@ void send_signal(int p0, int p1) {
  */
 void reset_signal(int p0) {
     
-    Signal s = (Signal) p0;
+    struct signal* s = (struct signal*) p0;
     
     if (s != NULL) {
 
@@ -427,16 +431,16 @@ void reset_signal(int p0) {
 int mouse_clicked_action(int p0, int p1, int p2, int p3) {
 
     int a = NULL;
-    Item i = (Item) p0;
+    struct item* i = (struct item*) p0;
     
     if (i != NULL) {
 
         // Determine the action of the clicked child screen item.
         int count = 0;
-        int size = get_map_size(i.items);
+        int size = get_map_size(i->items);
         int child = NULL;
-        vector position = NULL;
-        vector expansion = NULL;
+        struct vector* position = NULL;
+        struct vector* expansion = NULL;
         int x = -1;
         int y = -1;
         int z = -1;
@@ -449,9 +453,10 @@ int mouse_clicked_action(int p0, int p1, int p2, int p3) {
         while (count < size) {
 
             // Determine child, its position and expansion within the given screen item.
-            child = get_map_element(i.items, count);
-            position = (vector) get_map_element(i.positions, count);
+            child = get_map_element(i->items, count);
+            position = (vector) get_map_element(i->positions, count);
             
+/*??
             if (child instanceof item) {
                     
                 expansion = (vector) get_item_element(child, "expansion");
@@ -506,6 +511,7 @@ int mouse_clicked_action(int p0, int p1, int p2, int p3) {
                 
                 log(INFO_LOG_LEVEL, "Could not handle mouse clicked action. A child is not of type Item.");
             }
+*/
             
             count++;
         }
@@ -519,7 +525,7 @@ int mouse_clicked_action(int p0, int p1, int p2, int p3) {
         } else {
             
             // Determine the action of the given screen item.
-            a = get_map_element(i.items, "mouse_clicked_action");
+            a = get_map_element(i->items, "mouse_clicked_action");
         }
 
     } else {

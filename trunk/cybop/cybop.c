@@ -1,5 +1,5 @@
 /*
- * $RCSfile: main.c,v $
+ * $RCSfile: cybop.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -28,7 +28,12 @@
 #endif
 */
 
-//??#include <stdlib.h>
+#include <stdlib.h>
+#include "log_handler.c"
+#include "map.c"
+#include "map_handler.c"
+#include "signal.c"
+#include "signal_handler.c"
 
 /**
  * This is the main function to execute the Cybernetics Oriented Interpreter (CYBOI).
@@ -36,7 +41,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.4 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-09-23 23:44:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,17 +52,17 @@
  * @param p1 the argument vector (argv)
  * @return the return value
  */
-int main(int p0, char[]* p1) {
+int main(int p0, char** p1) {
 
     int r = EXIT_FAILURE;
 
-    if (argv != NULL) {
+    if (p1 != NULL) {
 
         if ((p0 == 3) && (p1[1] != NULL) && (p1[2] != NULL)) {
 
             // Arguments.
-            char[]* dynamics = p1[1];
-            char[]* statics = p1[2];
+            int dynamics = (int) p1[1];
+            int statics = (int) p1[2];
 
             // Log handler.
             log_level = 3;
@@ -69,7 +74,7 @@ int main(int p0, char[]* p1) {
 */
 
             // Signal memory (signal queue).
-            map* signal_memory = (map*) malloc(sizeof(map));
+            struct map* signal_memory = (struct map*) malloc(sizeof(struct map));
             initialize_map(signal_memory);
 
 /*??
@@ -80,17 +85,17 @@ int main(int p0, char[]* p1) {
 */
 
             // Create signal for storage in signal memory.
-            signal* tmp = (signal*) malloc(sizeof(signal));
+            struct signal* tmp = (struct signal*) malloc(sizeof(struct signal));
 
             if (tmp != NULL) {
 
                 log(INFO_LOG_LEVEL, "Send signal: " + dynamics);
 
                 // Set signal elements.
-                tmp.priority = NORMAL_PRIORITY;
-                tmp.language = NEURO_LANGUAGE;
-                tmp.predicate = dynamics;
-                tmp.object = statics;
+//??                tmp->priority = NORMAL_PRIORITY;
+//??                tmp->language = NEURO_LANGUAGE;
+                tmp->predicate = dynamics;
+                tmp->object = statics;
 
 /*??
                 // Caution! Adding of signals must be synchronized between:
@@ -142,8 +147,8 @@ int main(int p0, char[]* p1) {
         } else {
 
             // Show help information.
-            log(ERROR_LOG_LEVEL, "Usage:\n"
-                + "cyboi startup cybol.core.system.system");
+            log(ERROR_LOG_LEVEL, "Usage:\n\
+                cyboi startup cybol.core.system.system");
         }
 
     } else {
@@ -165,14 +170,14 @@ int main(int p0, char[]* p1) {
  *
  * @param p0 the signal memory
  */
-void await(map* p0) {
+void await(struct map* p0) {
 
     // The shutdown flag.
     int sf = 0;
     // Transporting signal.
-    signal* s = (signal*) malloc(sizeof(signal));
+    struct signal* s = (struct signal*) malloc(sizeof(struct signal));
 
-    while (true) {
+    while (1) {
 
         if (sf == 0) {
 

@@ -27,7 +27,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.2 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-09-23 23:43:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,15 +43,15 @@
  * @param p0 the array
  * @return the extended array
  */
-int[]* extend_array(int[]* p0) {
+int extend_array(int p0) {
 
-    int[]* a = NULL;
+    int a = NULL;
     
     if (p0 != NULL) {
 
         int old_length = sizeof(p0);
         int new_length = old_length * 2 + 1;
-        a = (int[]*) malloc(sizeof(int[new_length]));
+        a = (int) malloc(sizeof(int[new_length]));
 
         if (a != NULL) {
                 
@@ -91,9 +91,9 @@ int[]* extend_array(int[]* p0) {
  * @param p2 the element
  * @return the extended array
  */
-int[]* set_array_element(int[]* p0, int p1, int p2) {
+int set_array_element(int p0, int p1, int p2) {
 
-    int[]* a = NULL;
+    int a = NULL;
     
     if (p0 != NULL) {
 
@@ -109,7 +109,7 @@ int[]* set_array_element(int[]* p0, int p1, int p2) {
         }
 
         // Set element.
-        *a[p1] = p2;
+        a[p1] = p2;
 
     } else {
 
@@ -125,7 +125,7 @@ int[]* set_array_element(int[]* p0, int p1, int p2) {
  * @param p0 the array
  * @param p1 the index
  */
-void remove_array_element(int[]* p0, int p1) {
+void remove_array_element(int p0, int p1) {
 
     if (p0 != NULL) {
 
@@ -159,7 +159,7 @@ void remove_array_element(int[]* p0, int p1) {
  * @param p1 the index
  * @return the element
  */
-int get_array_element(int[]* p0, int p1) {
+int get_array_element(int p0, int p1) {
 
     int e = NULL;
     

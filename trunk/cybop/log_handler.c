@@ -29,7 +29,7 @@
  *
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.2 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-09-23 23:43:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -84,19 +84,19 @@ void log(int p0, int p1) {
  */
 int get_log_level_name(int p0) {
 
-    int l = NULL;
+    int l = (int) NULL;
     
     if (p0 == INFO_LOG_LEVEL) {
 
-        l = "INFO";
+        l = (int) "INFO";
         
     } else if (p0 == WARNING_LOG_LEVEL) {
 
-        l = "WARNING";
+        l = (int) "WARNING";
         
     } else if (p0 == ERROR_LOG_LEVEL) {
 
-        l = "ERROR";
+        l = (int) "ERROR";
     }
 
     return l;

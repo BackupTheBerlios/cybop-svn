@@ -28,7 +28,7 @@
  * It is used to measure the duration of dynamics or in other words,
  * the difference between two static states/ instants.
  *
- * @version $Revision: 1.2 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-09-23 23:43:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct time {
@@ -62,5 +62,5 @@ struct time {
     
     /** The nano seconds. */
     int nano_seconds;
-}
+};
 

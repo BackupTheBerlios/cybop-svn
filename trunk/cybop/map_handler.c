@@ -22,12 +22,14 @@
  * - Cybernetics Oriented Programming -
  */
 
+#include "array_handler.c"
+
 /**
  * This is a map handler.
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.2 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-09-23 23:43:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,14 +44,14 @@
  */
 void initialize_map(int p0) {
 
-    Map m = (Map) p0;
+    struct map* m = (struct map*) p0;
 
     if (m != NULL) {
 
         log(INFO_LOG_LEVEL, "Initialize map.");
 
-        m.names = (int[]*) malloc(sizeof(int[0]));
-        m.references = (int[]*) malloc(sizeof(int[0]));
+        m->names = (int[]*) malloc(sizeof(int[0]));
+        m->references = (int[]*) malloc(sizeof(int[0]));
 
     } else {
 
@@ -64,14 +66,14 @@ void initialize_map(int p0) {
  */
 void finalize_map(int p0) {
 
-    Map m = (Map) p0;
+    struct map* m = (struct map*) p0;
     
     if (m != NULL) {
 
         log(INFO_LOG_LEVEL, "Finalize map.");
 
-        free(m.references);
-        free(m.names);
+        free(m->references);
+        free(m->names);
 
     } else {
 
@@ -88,11 +90,11 @@ void finalize_map(int p0) {
 int get_map_size(int p0) {
 
     int s = -1;
-    Map m = (Map) p0;
+    struct map* m = (struct map*) p0;
 
     if (m != NULL) {
 
-        s = sizeof(m.names);
+        s = sizeof(m->names);
 
     } else {
 
@@ -128,14 +130,14 @@ void add_map_element(int p0, int p1, int p2) {
  */
 void set_map_element(int p0, int p1, int p2) {
 
-    Map m = (Map) p0;
+    struct map* m = (struct map*) p0;
     
     if (m != NULL) {
         
         int i = determine_next_map_element_index(m, p1);
 
-        m.names = set_array_element(m.names, i, p1);
-        m.references = set_array_element(m.references, i, p2);
+        m->names = set_array_element(m->names, i, p1);
+        m->references = set_array_element(m->references, i, p2);
 
     } else {
 
@@ -151,12 +153,12 @@ void set_map_element(int p0, int p1, int p2) {
  */
 void remove_map_element(int p0, int p1) {
 
-    Map m = (Map) p0;
+    struct map* m = (struct map*) p0;
     
     if (m != NULL) {
 
-        remove_array_element(m.names, p1);
-        remove_array_element(m.references, p1);
+        remove_array_element(m->names, p1);
+        remove_array_element(m->references, p1);
 
     } else {
 
@@ -187,11 +189,11 @@ void remove_map_element(int p0, int p1) {
 int get_map_element(int p0, int p1) {
 
     int e = NULL;
-    Map m = (Map) p0;
+    struct map* m = (struct map*) p0;
 
     if (m != NULL) {
 
-        e = get_array_element(m.references, p1);
+        e = get_array_element(m->references, p1);
 
     } else {
 
@@ -225,11 +227,11 @@ int get_map_element(int p0, int p1) {
 int get_map_element_index(int p0, int p1) {
 
     int index = -1;
-    Map m = (Map) p0;
+    struct map* m = (struct map*) p0;
 
     if (m != NULL) {
         
-        int a = m.names;
+        int a = m->names;
         int i = index + 1;
         int size = sizeof(a);
         int name = NULL;
@@ -284,11 +286,11 @@ int get_map_element_index(int p0, int p1) {
 int determine_next_map_element_index(int p0, int p1) {
 
     int index = -1;
-    Map m = (Map) p0;
+    struct map* m = (struct map*) p0;
 
     if (m != NULL) {
 
-        int a = m.names;
+        int a = m->names;
         int i = index + 1;
         int size = sizeof(a);
         int name = NULL;
@@ -349,7 +351,7 @@ int determine_next_map_element_index(int p0, int p1) {
 int determine_map_element_name(int p0, int p1) {
 
     int n = NULL;
-    char[] index = char[].valueOf(get_map_element_count(p0, p1));
+    char* index = java.lang.String.valueOf(get_map_element_count(p0, p1));
 
     if (p1 != NULL) {
 
@@ -380,11 +382,11 @@ int determine_map_element_name(int p0, int p1) {
 int get_map_element_count(int p0, int p1) {
 
     int count = 0;
-    Map m = (Map) p0;
+    struct map* m = (struct map*) p0;
 
     if (m != NULL) {
 
-        int a = m.names;
+        int a = m->names;
         int i = 0;
         int size = sizeof(a);
         int name = NULL;
@@ -395,7 +397,7 @@ int get_map_element_count(int p0, int p1) {
 
             if (name != NULL) {
 
-                if (((char[]) name).startsWith((char[]) p1)) {
+                if ((name).startsWith(p1)) {
 
 /*??
                     int begin = 0;

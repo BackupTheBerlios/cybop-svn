@@ -27,7 +27,7 @@
  *
  * It contains the three coordinates: x, y, z.
  *
- * @version $Revision: 1.2 $ $Date: 2003-09-22 06:50:53 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-09-23 23:43:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct vector {
@@ -40,5 +40,5 @@ struct vector {
 
     /** The z coordinate. */
     int z;
-}
+};
 
