@@ -43,7 +43,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.3 $ $Date: 2004-03-11 14:33:52 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-03-19 16:24:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,9 +72,13 @@ void compare_pointer_arrays(const void* p0, const void* p1, const void* p2, void
 
         if (s != (void*) 0) {
 
-            if (p1 != (void*) 0) {
+            void** a1 = (void**) p1;
 
-                if (p0 != (void*) 0) {
+            if (a1 != (void*) 0) {
+
+                void** a0 = (void**) p0;
+
+                if (a0 != (void*) 0) {
 
                     int i = 0;
                     void** e0 = (void*) 0;
@@ -91,8 +95,8 @@ void compare_pointer_arrays(const void* p0, const void* p1, const void* p2, void
                         }
 
                         // Determine the next elements at array plus index.
-                        e0 = (void**) (p0 + i);
-                        e1 = (void**) (p1 + i);
+                        e0 = (void**) (*a0 + i);
+                        e1 = (void**) (*a1 + i);
 
                         if (*e0 != *e1) {
 
@@ -145,10 +149,12 @@ void set_pointer_array_element(const void* p0, const void* p1, const void* p2) {
 
         if (i != (void*) 0) {
 
-            if (p0 != (void*) 0) {
+            void** a = (void**) p0;
+
+            if (a != (void*) 0) {
 
                 // Set element.
-                void** e1 = (void**) (p0 + *i);
+                void** e1 = (void**) (*a + *i);
                 *e1 = *e0;
 
             } else {
@@ -171,20 +177,22 @@ void set_pointer_array_element(const void* p0, const void* p1, const void* p2) {
  * Removes the pointer array element.
  *
  * @param p0 the pointer array
- * @param p1 the index
- * @param p2 the size
+ * @param p1 the size
+ * @param p2 the index
  */
 void remove_pointer_array_element(const void* p0, const void* p1, const void* p2) {
 
-    int* s = (int*) p2;
+    int* i = (int*) p2;
 
-    if (s != (void*) 0) {
+    if (i != (void*) 0) {
 
-        int* i = (int*) p1;
+        int* s = (int*) p1;
 
-        if (i != (void*) 0) {
+        if (s != (void*) 0) {
 
-            if (p0 != (void*) 0) {
+            void** a = (void**) p0;
+
+            if (a != (void*) 0) {
 
                 // Initialize loop variable with index.
                 // Do not use the index itself as it was handed over as constant parameter!
@@ -201,15 +209,15 @@ void remove_pointer_array_element(const void* p0, const void* p1, const void* p2
                         break;
                     }
 
-                    e0 = (void**) (p0 + j);
-                    e1 = (void**) (p0 + j + 1);
+                    e0 = (void**) (*a + j);
+                    e1 = (void**) (*a + j + 1);
                     *e0 = *e1;
 
                     j++;
                 }
 
                 // Set former last element to null.
-                e0 = (void**) (p0 + j);
+                e0 = (void**) (*a + j);
                 *e0 = (void*) 0;
 
             } else {
@@ -219,12 +227,12 @@ void remove_pointer_array_element(const void* p0, const void* p1, const void* p2
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not remove pointer array element. The index is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not remove pointer array element. The size is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove pointer array element. The size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove pointer array element. The index is null.");
     }
 }
 
@@ -245,10 +253,12 @@ void get_pointer_array_element(const void* p0, const void* p1, void* p2) {
 
         if (i != (void*) 0) {
 
-            if (p0 != (void*) 0) {
+            void** a = (void**) p0;
+
+            if (a != (void*) 0) {
 
                 // Get element.
-                void** e1 = (void**) (p0 + *i);
+                void** e1 = (void**) (*a + *i);
                 *e0 = *e1;
 
             } else {
@@ -274,8 +284,8 @@ void get_pointer_array_element(const void* p0, const void* p1, void* p2) {
  * The given index remains unchanged if no element is found.
  *
  * @param p0 the pointer array
- * @param p1 the element
- * @param p2 the size
+ * @param p1 the size
+ * @param p2 the element
  * @param p3 the index
  */
 void get_pointer_array_element_index(const void* p0, const void* p1, const void* p2, void* p3) {
@@ -284,15 +294,17 @@ void get_pointer_array_element_index(const void* p0, const void* p1, const void*
 
     if (i != (void*) 0) {
 
-        int* s = (int*) p2;
+        void** e0 = (void**) p2;
 
-        if (s != (void*) 0) {
+        if (e0 != (void*) 0) {
 
-            void** e0 = (void**) p1;
+            int* s = (int*) p1;
 
-            if (e0 != (void*) 0) {
+            if (s != (void*) 0) {
 
-                if (p0 != (void*) 0) {
+                void** a = (void**) p0;
+
+                if (a != (void*) 0) {
 
                     int j = 0;
                     void** e1 = (void*) 0;
@@ -306,7 +318,7 @@ void get_pointer_array_element_index(const void* p0, const void* p1, const void*
                         }
 
                         // Compare given element with the next integer element at array plus index.
-                        e1 = (void**) (p0 + j);
+                        e1 = (void**) (*a + j);
 
                         if (*e0 == *e1) {
 
@@ -325,12 +337,12 @@ void get_pointer_array_element_index(const void* p0, const void* p1, const void*
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not get pointer array element index. The element is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not get pointer array element index. The size is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not get pointer array element index. The size is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get pointer array element index. The element is null.");
         }
 
     } else {
