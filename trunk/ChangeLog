@@ -1,7 +1,0 @@
-0.1.0.0 11/09/2003
-__________________
-
-- split former Java source code of CYBOP into the language CYBOL (XML)
-and its interpreter CYBOI (currently written in Java)
-- create static system structures
-- handle signals
