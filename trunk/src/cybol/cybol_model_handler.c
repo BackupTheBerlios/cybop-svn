@@ -37,7 +37,7 @@
  *         map = position_abstraction_attribute
  *         (attributes 0..9 = size 10)
  *
- * @version $Revision: 1.13 $ $Date: 2004-04-07 15:47:51 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,6 +46,7 @@
 
 #include <stdio.h>
 #include "../constants.c"
+#include "../logger/log_handler.c"
 
 //
 // Constants.
@@ -160,7 +161,7 @@ static const int CONSTRAINT_MODEL_ATTRIBUTE_SIZE = 16;
  */
 void initialize_compound_model_from_file(void* p0, const void* p1, const void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Initialize compound model from file.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize compound model from file.");
 
 /*??
     // Create temporary cybol model.
@@ -177,7 +178,7 @@ void initialize_compound_model_from_file(void* p0, const void* p1, const void* p
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize statics model. The statics cybol model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize statics model. The statics cybol model is null.");
     }
 
     // Destroy temporary statics cybol model.
@@ -195,7 +196,7 @@ void initialize_compound_model_from_file(void* p0, const void* p1, const void* p
  */
 void finalize_compound_model_to_file(void* p0, const void* p1, const void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Finalize compound model to file.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize compound model to file.");
 
 /*??
     // Create temporary statics cybol model.
@@ -209,7 +210,7 @@ void finalize_compound_model_to_file(void* p0, const void* p1, const void* p2) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The statics cybol model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize statics model. The statics cybol model is null.");
     }
 
     // Write statics cybol model to file path.
@@ -244,17 +245,17 @@ void read_child_attribute(void* p0, void* p1, void* p2) {
 
         if (n != NULL_POINTER) {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Read child attribute.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Read child attribute.");
             p2 = n.getNodeValue();
 
         } else {
 
-            log_message((void*) &WARNING_LOG_LEVEL, "Could not read child attribute. The child attribute node is null.");
+            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not read child attribute. The child attribute node is null.");
         }
 
     } else {
         
-        log_message((void*) &WARNING_LOG_LEVEL, "Could not read child attribute. The child attributes map is null.");
+        log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not read child attribute. The child attributes map is null.");
     }
 */
 /*??
@@ -285,7 +286,7 @@ void write_child_attribute(void* p0, void* p1, void* p2) {
 void initialize_child_attributes(void* p0, void* p1) {
 
 /*??
-    log_message((void*) &INFO_LOG_LEVEL, "Initialize child attributes.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize child attributes.");
     int a = 0;
 
     a = read_child_attribute(p1, NAME);
@@ -350,17 +351,17 @@ void initialize_child_model(void* p0, void* p1) {
 
         if (n != NULL_POINTER) {
             
-            log_message((void*) &INFO_LOG_LEVEL, "Initialize child model.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize child model.");
             initialize_attributes(i.items, (org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes());
     
         } else {
             
-            log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize child model. The child model node is null.");
+            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize child model. The child model node is null.");
         }
 
     } else {
         
-        log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize child model. The child model is null.");
+        log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize child model. The child model is null.");
     }
 */
 /*??
@@ -394,7 +395,7 @@ void initialize_children_models(void* p0, void* p1) {
 
     if (l != NULL_POINTER) {
         
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize children models.");
+        log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize children models.");
         int count = 0;
         int size = l.getLength();
         org.apache.xerces.dom.NodeImpl n = NULL_POINTER;
@@ -424,12 +425,12 @@ void initialize_children_models(void* p0, void* p1) {
 /*??
                 } else {
                     
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize children models. A model is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize children models. A model is null.");
                 }
         
             } else {
                 
-                log_message((void*) &INFO_LOG_LEVEL, "Could not initialize children models. The model item node is null.");
+                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Could not initialize children models. The model item node is null.");
             }
                     
             count++;
@@ -437,7 +438,7 @@ void initialize_children_models(void* p0, void* p1) {
         
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize children models. The model items list is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize children models. The model items list is null.");
     }
 */
 /*??
@@ -475,18 +476,18 @@ void initialize_super_model(void* p0, void* p1) {
 
         if (n != NULL_POINTER) {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Initialize super model.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize super model.");
             int s = read_attribute((org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes(), CATEGORY);
             initialize_category(p0, s);
 
         } else {
 
-            log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize super model. The super model node is null.");
+            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize super model. The super model node is null.");
         }
 
     } else {
 
-        log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize super model. The super model list is null.");
+        log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize super model. The super model list is null.");
     }
 */
 /*??
@@ -519,7 +520,7 @@ void read_into_model(void* p0, void* p1) {
 
     if (doc != NULL_POINTER) {
         
-        log_message((void*) &INFO_LOG_LEVEL, "Read document.");
+        log_message((void*) &INFO_LOG_LEVEL, (void*) &"Read document.");
         doc.normalize();
         org.apache.xerces.dom.DeepNodeListImpl l = NULL_POINTER;
 
@@ -533,12 +534,12 @@ void read_into_model(void* p0, void* p1) {
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not read structure. The model is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read structure. The model is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not read structure. The structure is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read structure. The structure is null.");
     }
 */
 }
@@ -776,7 +777,7 @@ void read_cybol_file(void* p0, const void* p1) {
 void initialize_source_model(void* p0, void* p1) {
 
 /*??
-    log_message((void*) &INFO_LOG_LEVEL, "Initialize model.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize model.");
 
     char* n[] = {''};
     n = strcat(n, CYBOL_PATH);
@@ -792,7 +793,7 @@ void initialize_source_model(void* p0, void* p1) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize source model. The file is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize source model. The file is null.");
     }
 */
 }

@@ -48,7 +48,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.26 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -108,22 +108,22 @@ void create_array(void* p0, const void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) &INFO_LOG_LEVEL, "Create array.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create array.");
 
             // An array CANNOT have ZERO length, so that dereferencing a pointer to
             // the first element of an array always returns a valid result.
             // There is no NULL array.
             // See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
-            *a = malloc(*s);
+            *a = (void*) malloc(*s);
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not create array. The array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create array. The array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not create array. The size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create array. The size is null.");
     }
 }
 
@@ -143,7 +143,7 @@ void destroy_array(void* p0, const void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) &INFO_LOG_LEVEL, "Destroy array.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy array.");
 
             //?? TODO: Destroy all array elements in a loop??
             //?? Which is the same as Garbage Collection!
@@ -153,12 +153,12 @@ void destroy_array(void* p0, const void* p1) {
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not destroy array. The array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy array. The array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not destroy array. The size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy array. The size is null.");
     }
 }
 
@@ -213,17 +213,17 @@ void compare_arrays(const void* p0, const void* p1, const void* p2, const void* 
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not compare arrays. The first size is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare arrays. The first size is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not compare arrays. The second size is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare arrays. The second size is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not compare arrays. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare arrays. The type is null.");
     }
 }
 
@@ -244,16 +244,16 @@ void resize_array(void* p0, const void* p1) {
             void** a = (void**) p0;
 
             // Create a new array with extended size.
-            *a = realloc(*a, *s);
+            *a = (void*) realloc(*a, *s);
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not resize array. The array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize array. The array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not resize array. The size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize array. The size is null.");
     }
 }
 
@@ -294,7 +294,7 @@ void set_array_element(void* p0, const void* p1, const void* p2, const void* p3)
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not set array element. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set array element. The type is null.");
     }
 }
 
@@ -331,7 +331,7 @@ void remove_array_element(void* p0, const void* p1, const void* p2, const void* 
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove array element. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove array element. The type is null.");
     }
 }
 
@@ -368,7 +368,7 @@ void get_array_element(const void* p0, const void* p1, const void* p2, void* p3)
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get array element. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get array element. The type is null.");
     }
 }
 
@@ -406,7 +406,7 @@ void get_array_element_index(const void* p0, const void* p1, const void* p2, con
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get array element index. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get array element index. The type is null.");
     }
 }
 

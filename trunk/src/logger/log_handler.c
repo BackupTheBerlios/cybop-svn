@@ -24,7 +24,7 @@
  * This file handles log messages.
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.11 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,7 +69,7 @@ static const char* INFO_LOG_LEVEL_NAME = "Info";
 //
 
 /** The log level. */
-static int* log_level;
+static int log_level;
 
 //
 // Log entry.
@@ -83,6 +83,8 @@ static int* log_level;
  */
 void get_log_level_name(const void* p0, void* p1) {
 
+    fputs("TEST x0\n", stdout);
+
     if (p1 != NULL_POINTER) {
 
         char** n = (char**) p1;
@@ -91,9 +93,15 @@ void get_log_level_name(const void* p0, void* p1) {
 
             int* l = (int*) p0;
 
-            if (*l == INFO_LOG_LEVEL) {
+            fputs("TEST x1\n", stderr);
+
+            if (INFO_LOG_LEVEL) {
+
+                fputs("TEST x2\n", stdout);
 
                 strcat(*n, INFO_LOG_LEVEL_NAME);
+
+                fputs("TEST x3\n", stdout);
 
             } else if (*l == WARNING_LOG_LEVEL) {
 
@@ -106,12 +114,12 @@ void get_log_level_name(const void* p0, void* p1) {
 
         } else {
 
-            show_message((void*) "Error: Could not get log level name. The level is null.\n");
+            fputs("Error: Could not get log level name. The level is null.\n", stderr);
         }
 
     } else {
 
-        show_message((void*) "Error: Could not get log level name. The level name is null.\n");
+        fputs("Error: Could not get log level name. The level name is null.\n", stderr);
     }
 }
 
@@ -120,14 +128,13 @@ void get_log_level_name(const void* p0, void* p1) {
  *
  * @param p0 the message
  */
-void show_message(const void* p0) {
+void show_message(void* p0) {
 
     if (p0 != NULL_POINTER) {
 
-        char* m = (char*) p0;
+        char** m = (char**) p0;
 
-//??        fputs(m, stdout);
-        fputs(m, stderr);
+        fputs(*m, stdout);
 
     } else {
 
@@ -143,26 +150,68 @@ void show_message(const void* p0) {
  */
 void log_message(const void* p0, const void* p1) {
 
-    if (p0 != NULL_POINTER) {
+/*??
+    fputs("TEST 6\n", stdout);
 
-        int* l = (int*) p0;
+    if (p1 != NULL_POINTER) {
 
-        if (*l <= *log_level) {
+        char** m = (char**) p1;
 
-            char* n = "";
+        if (p0 != NULL_POINTER) {
 
-            get_log_level_name(p0, (void*) &n);
-            strcat(n, ": ");
-            strcat(n, (char*) p1);
-            strcat(n, "\n");
+            int* l = (int*) p0;
 
-            show_message((void*) n);
+            // Only log message if log level matches.
+            if (*l <= log_level) {
+
+                fputs("TEST 7\n", stdout);
+
+//??                char n[] = {'\0'};
+                char* n = NULL_POINTER;
+                int s = 0;
+                create_array((void*) &n, (void*) &s);
+
+                fputs("TEST 8\n", stdout);
+
+                int test_index = 0;
+                int test_size = 4;
+                set_character_array_string((void*) &n, (void*) &test_index, p1, (void*) &test_size);
+
+                int termination_index = 4;
+                char termination = '\0';
+                set_character_array_element((void*) &n, (void*) &termination_index, (void*) &termination);
+
+//??                get_log_level_name(p0, (void*) &n);
+
+                fputs("TEST 9\n", stdout);
+
+//??                strcat(n, ": ");
+
+                fputs("TEST 10\n", stdout);
+
+//??                strcat(n, *m);
+
+                fputs("TEST 11\n", stdout);
+
+//??                strcat(n, "\n");
+
+                fputs("TEST 12\n", stdout);
+
+                show_message((void*) &n);
+
+//??                destroy_array((void*) &n, (void*) &s);
+            }
+
+        } else {
+
+            show_message((void*) &"Error: Could not log message. The message is null.\n");
         }
 
     } else {
 
-        show_message((void*) "Error: Could not log message. The level is null.\n");
+        show_message((void*) &"Error: Could not log message. The level is null.\n");
     }
+*/
 }
 
 /* LOG_HANDLER_SOURCE */

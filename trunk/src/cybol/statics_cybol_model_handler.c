@@ -25,7 +25,7 @@
  *
  * It contains read and write procedures.
  *
- * @version $Revision: 1.8 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,17 +56,17 @@ void read_statics_cybol_attribute(void* p0, void* p1, void* p2) {
         
         if (n != NULL_POINTER) {
             
-            log_message((void*) &INFO_LOG_LEVEL, "Read child attribute.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Read child attribute.");
             p2 = n.getNodeValue();
     
         } else {
             
-            log_message((void*) &WARNING_LOG_LEVEL, "Could not read child attribute. The child attribute node is null.");
+            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not read child attribute. The child attribute node is null.");
         }
     
     } else {
         
-        log_message((void*) &WARNING_LOG_LEVEL, "Could not read child attribute. The child attributes map is null.");
+        log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not read child attribute. The child attributes map is null.");
     }
 */
 }
@@ -94,7 +94,7 @@ void write_statics_cybol_attribute(void* p0, void* p1, void* p2) {
 void read_statics_cybol_attributes(void* p0, void* p1) {
 
 /*??
-    log_message((void*) &INFO_LOG_LEVEL, "Read statics cybol attributes.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Read statics cybol attributes.");
     int a = 0;
 
     a = read_statics_cybol_attribute(p1, NAME);
@@ -144,17 +144,17 @@ void read_statics_cybol_part_model(void* p0, void* p1) {
         
         if (n != NULL_POINTER) {
             
-            log_message((void*) &INFO_LOG_LEVEL, "Read statics cybol part model.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Read statics cybol part model.");
             read_statics_cybol_attributes(i.items, (org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes());
     
         } else {
             
-            log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize child model. The child model node is null.");
+            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize child model. The child model node is null.");
         }
 
     } else {
         
-        log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize child model. The child model is null.");
+        log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize child model. The child model is null.");
     }
 */
 }
@@ -189,18 +189,18 @@ void read_statics_cybol_super_models(void* p0, void* p1) {
         
         if (n != NULL_POINTER) {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Initialize cybol super models.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize cybol super models.");
             int s = read_statics_cybol_attribute((org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes(), MODEL);
             initialize_statics_cybol_model(p0, s);
             
         } else {
             
-            log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize super model. The super model node is null.");
+            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize super model. The super model node is null.");
         }
         
     } else {
         
-        log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize super model. The super model list is null.");
+        log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize super model. The super model list is null.");
     }
 */
 }
@@ -231,7 +231,7 @@ void read_statics_cybol_part_models(void* p0, void* p1) {
 
     if (l != NULL_POINTER) {
         
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize children models.");
+        log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize children models.");
         int count = 0;
         int size = l.getLength();
         org.apache.xerces.dom.NodeImpl n = NULL_POINTER;
@@ -261,12 +261,12 @@ void read_statics_cybol_part_models(void* p0, void* p1) {
 /*??
                 } else {
                     
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize children models. A model is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize children models. A model is null.");
                 }
         
             } else {
                 
-                log_message((void*) &INFO_LOG_LEVEL, "Could not initialize children models. The model item node is null.");
+                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Could not initialize children models. The model item node is null.");
             }
                     
             count++;
@@ -274,7 +274,7 @@ void read_statics_cybol_part_models(void* p0, void* p1) {
         
     } else {
         
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize children models. The model items list is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize children models. The model items list is null.");
     }
 */
 }
@@ -305,7 +305,7 @@ void read_statics_cybol_source(void* p0, void* p1) {
 
     if (doc != NULL_POINTER) {
         
-        log_message((void*) &INFO_LOG_LEVEL, "Read document.");
+        log_message((void*) &INFO_LOG_LEVEL, (void*) &"Read document.");
         doc.normalize();
         org.apache.xerces.dom.DeepNodeListImpl l = NULL_POINTER;
 
@@ -319,12 +319,12 @@ void read_statics_cybol_source(void* p0, void* p1) {
 
         } else {
             
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not read structure. The model is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read structure. The model is null.");
         }
 
     } else {
         
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not read structure. The structure is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read structure. The structure is null.");
     }
 */
 }
@@ -351,7 +351,7 @@ void write_statics_cybol_source(void* p0, void* p1) {
 void initialize_statics_cybol_model(void* p0, void* p1) {
 
 /*??
-    log_message((void*) &INFO_LOG_LEVEL, "Initialize statics cybol model: " + p1);
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize statics cybol model: " + p1);
 
     void* s = parse_file(PATH + p1 + CYBOL);
     read_statics_cybol_source(p0, s);

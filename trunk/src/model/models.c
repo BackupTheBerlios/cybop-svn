@@ -23,7 +23,7 @@
  *
  * This file defines model constants.
  *
- * @version $Revision: 1.5 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,11 +34,11 @@
 // Compound models.
 //
 
-/** The compound model. */
-static const char COMPOUND_MODEL[] = {'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd'};
+/** The compound abstraction. */
+static const char COMPOUND_ABSTRACTION[] = {'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd'};
 
-/** The compound model size. */
-static const int COMPOUND_MODEL_SIZE = 8;
+/** The compound abstraction size. */
+static const int COMPOUND_ABSTRACTION_SIZE = 8;
 
 /* MODELS_SOURCE */
 #endif

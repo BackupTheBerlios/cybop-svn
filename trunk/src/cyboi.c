@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.17 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,18 +40,36 @@
 #include "logger/log_handler.c"
 #include "model/statics_models.c"
 #include "signal/signal_memory_handler.c"
+#include "test/test.c"
 #include "x_windows/x_windows_handler.c"
 
 //?? Temporary for character screen testing.
 #include "character_screen_handler.c"
+
+//
+// Message constants.
+//
+
+// The usage message array.
+static const char USAGE_MESSAGE_ARRAY[] = {'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 's', 'i', 'g', 'n', 'a', 'l'};
+
+// The usage message.
+//??static const char* USAGE_MESSAGE = USAGE_MESSAGE_ARRAY;
+static const char* USAGE_MESSAGE = (char*) {'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 's', 'i', 'g', 'n', 'a', 'l'};
+
+// The example message array.
+static const char EXAMPLE_MESSAGE_ARRAY[] = {'E', 'x', 'a', 'm', 'p', 'l', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'y', 'b', 'o', 'p', '.', 's', 'a', 'm', 'p', 'l', 'e', '.', 'h', 'e', 'l', 'l', 'o', '_', 'w', 'o', 'r', 'l', 'd', '.', 'd', 'y', 'n', 'a', 'm', 'i', 'c', 's', '.', 's', 't', 'a', 'r', 't', 'u', 'p'};
+
+// The example message.
+static const char* EXAMPLE_MESSAGE = EXAMPLE_MESSAGE_ARRAY;
 
 /**
  * Shows the usage information.
  */
 void show_usage_information() {
 
-    show_message((void*) "Usage: cyboi signal\n");
-    show_message((void*) "Example: cyboi cybop.sample.hello_world.dynamics.startup\n");
+    show_message((void*) &USAGE_MESSAGE);
+    show_message((void*) &EXAMPLE_MESSAGE);
 }
 
 /**
@@ -88,7 +106,7 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
         //?? Testing!
 //??        init_x();
 
-        log_message((void*) &INFO_LOG_LEVEL, "Wait for signals.");
+        log_message((void*) &INFO_LOG_LEVEL, (void*) &"Wait for signals.");
 
         // Run endless loop handling signals.
         while (1) {
@@ -130,29 +148,29 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
             // The comparison result.
             int r = 0;
 
-            log_message((void*) &INFO_LOG_LEVEL, "TEST 0");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"TEST 0");
 
             // Handle compound signal.
-            compare_arrays((void*) &a, (void*) &as, (void*) &COMPOUND_MODEL, (void*) &COMPOUND_MODEL_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+            compare_arrays((void*) &a, (void*) &as, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
             if (r == 1) {
 
-                log_message((void*) &INFO_LOG_LEVEL, "TEST 1");
+                log_message((void*) &INFO_LOG_LEVEL, (void*) &"TEST 1");
                 handle_compound_signal(p0, (void*) &s, (void*) &p);
 
             } else {
 
             // Handle operation signal.
-            compare_arrays((void*) &a, (void*) &as, (void*) &OPERATION_MODEL, (void*) &OPERATION_MODEL_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+            compare_arrays((void*) &a, (void*) &as, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
             if (r == 1) {
 
-                log_message((void*) &INFO_LOG_LEVEL, "TEST 2");
+                log_message((void*) &INFO_LOG_LEVEL, (void*) &"TEST 2");
                 handle_operation_signal((void*) &s, p1, p2, p3, (void*) &f);
 
             } else {
 
-                log_message((void*) &WARNING_LOG_LEVEL, "Could not handle signal. The signal abstraction is unknown.");
+                log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not handle signal. The signal abstraction is unknown.");
 
             } // Operation signal.
             } // Compound signal.
@@ -160,7 +178,7 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not wait for signals. The internals is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not wait for signals. The internals is null.");
     }
 }
 
@@ -173,7 +191,7 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
  * - statics
  *
  * Example:
- * cyboi application.dynamics.startup application.statics.system
+ * cyboi application.dynamics.startup
  *
  * @param p0 the argument count (argc)
  * @param p1 the argument vector (argv)
@@ -181,23 +199,33 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
  */
 int main(int p0, char** p1) {
 
+    // Calls testing procedures. Comment/ uncomment this as needed.
+//    test();
+//    return 0;
+
     // Return 1 to indicate an error, by default.
     int r = 1;
 
     // Log level as static (global) variable.
-    *log_level = INFO_LOG_LEVEL;
+    log_level = INFO_LOG_LEVEL;
 
     if (p1 != NULL_POINTER) {
 
+        fputs("TEST 0\n", stderr);
+
         if (p0 == 2) {
+
+            fputs("TEST 1\n", stdout);
 
             // Create statics.
             void* s = NULL_POINTER;
-            create_compound_model((void*) &s);
+            create_compound((void*) &s);
+
+            fputs("TEST 2\n", stdout);
 
             // Create dynamics.
             void* d = NULL_POINTER;
-            create_compound_model((void*) &d);
+            create_compound((void*) &d);
 
             // Create internals.
             void* i = NULL_POINTER;
@@ -212,10 +240,10 @@ int main(int p0, char** p1) {
             int sss = 0;
             char* p = p1[1];
             int ps = strlen(p1[1]);
-            create_model((void*) &ss, (void*) &sss, (void*) &p, (void*) &ps, (void*) &OPERATION_MODEL, (void*) &OPERATION_MODEL_SIZE);
+            create_model((void*) &ss, (void*) &sss, (void*) &p, (void*) &ps, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);
 
             // Add startup signal to signal memory.
-            set_signal((void*) &sm, (void*) &ss, (void*) &NORMAL_PRIORITY, (void*) &OPERATION_MODEL, (void*) &OPERATION_MODEL_SIZE);
+            set_signal((void*) &sm, (void*) &ss, (void*) &NORMAL_PRIORITY, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);
 
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)
@@ -233,25 +261,26 @@ int main(int p0, char** p1) {
 //??            free(i);
 
             // Destroy dynamics.
-            destroy_compound_model((void*) &d);
+            destroy_compound((void*) &d);
 
             // Destroy statics.
-            destroy_compound_model((void*) &s);
+            destroy_compound((void*) &s);
 
-            log_message((void*) &INFO_LOG_LEVEL, "Exit CYBOI normally.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Exit CYBOI normally.");
 
             // Return 0 to indicate proper shutdown.
             r = 0;
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not execute CYBOI. The command line argument number is incorrect.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not execute CYBOI. The command line argument number is incorrect.");
+
             show_usage_information();
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not execute CYBOI. The command line argument vector is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not execute CYBOI. The command line argument vector is null.");
     }
 
     return r;

@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.11 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -107,22 +107,22 @@ void compare_character_arrays(const void* p0, const void* p1, const void* p2, vo
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not compare character arrays. The first character array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character arrays. The first character array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not compare character arrays. The second character array is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character arrays. The second character array is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not compare character arrays. The size is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character arrays. The size is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not compare character arrays. The result is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character arrays. The result is null.");
     }
 }
 
@@ -149,7 +149,7 @@ void set_character_array_element(const void* p0, const void* p1, const void* p2)
 
             if (p0 != NULL_POINTER) {
 
-                void** a = (void**) p0;
+                char** a = (char**) p0;
 
                 // Set element.
                 char* e1 = (char*) (*a + *i);
@@ -157,17 +157,17 @@ void set_character_array_element(const void* p0, const void* p1, const void* p2)
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not set character array element. The character array is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array element. The character array is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not set character array element. The index is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array element. The index is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not set character array element. The element is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array element. The element is null.");
     }
 }
 
@@ -220,17 +220,17 @@ void remove_character_array_element(const void* p0, const void* p1, const void* 
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove character array element. The character array is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array element. The character array is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not remove character array element. The size is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array element. The size is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove character array element. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array element. The index is null.");
     }
 }
 
@@ -261,17 +261,17 @@ void get_character_array_element(const void* p0, const void* p1, void* p2) {
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array element. The character array is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element. The character array is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array element. The index is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element. The index is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array element. The element is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element. The element is null.");
     }
 }
 
@@ -330,38 +330,218 @@ void get_character_array_element_index(const void* p0, const void* p1, const voi
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array element index. The character array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The character array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array element index. The size is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The size is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array element index. The element is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The element is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array element index. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The index is null.");
+    }
+}
+
+//
+// Character array string.
+//
+
+/**
+ * Sets the character array string.
+ *
+ * @param p0 the character array
+ * @param p1 the index
+ * @param p2 the string
+ * @param p3 the string size
+ */
+void set_character_array_string(void* p0, const void* p1, const void* p2, const void* p3) {
+
+    if (p3 != NULL_POINTER) {
+
+        int* ss = (int*) p3;
+
+        if (p2 != NULL_POINTER) {
+
+            char* s = (char*) p2;
+
+            if (p1 != NULL_POINTER) {
+
+                int* i = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    char** a = (char**) p0;
+
+                    // Set string elements.
+                    int j = 0;
+                    // The base pointer to start at.
+                    char* base = (char*) (*a + *i);
+                    // The array element.
+                    char* ae = NULL_CHARACTER_POINTER;
+                    // The string element.
+                    char* se = NULL_CHARACTER_POINTER;
+
+                    while (1) {
+
+                        if (j >= *ss) {
+
+                            break;
+                        }
+
+                        ae = (char*) (base + j);
+                        se = (char*) (s + j);
+                        *ae = *se;
+                    }
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array string. The character array is null.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array string. The index is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array string. The string is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array string. The string size is null.");
     }
 }
 
 /**
- * Gets the character array elements index.
- *
- * The first occurence of the elements will be considered.
- * The given index remains unchanged if no elements are found.
+ * Removes the character array string.
  *
  * @param p0 the character array
  * @param p1 the size
- * @param p2 the elements character array
- * @param p3 the elements size
+ * @param p2 the index
+ */
+void remove_character_array_string(const void* p0, const void* p1, const void* p2) {
+
+/*??
+    if (p2 != NULL_POINTER) {
+
+        int* i = (int*) p2;
+
+        if (p1 != NULL_POINTER) {
+
+            int* s = (int*) p1;
+
+            if (p0 != NULL_POINTER) {
+
+                void** a = (void**) p0;
+
+                // Initialize loop variable with index.
+                // Do not use the index itself as it was handed over as constant parameter!
+                int j = *i;
+                char* e0 = NULL_CHARACTER_POINTER;
+                char* e1 = NULL_CHARACTER_POINTER;
+
+                // Starting from the given index, move all remaining elements one
+                // place towards the beginning of the elements.
+                while (1) {
+
+                    if ((j + 1) >= *s) {
+
+                        break;
+                    }
+
+                    e0 = (char*) (*a + j);
+                    e1 = (char*) (*a + j + 1);
+                    *e0 = *e1;
+
+                    j++;
+                }
+
+                // Set former last element to ''. The ASCII of '' is 0.
+                e0 = (char*) (*a + j);
+                *e0 = 0;
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array element. The character array is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array element. The size is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array element. The index is null.");
+    }
+*/
+}
+
+/**
+ * Gets the character array string.
+ *
+ * @param p0 the character array
+ * @param p1 the index
+ * @param p2 the string
+ */
+void get_character_array_string(const void* p0, const void* p1, void* p2) {
+
+/*??
+    if (p2 != NULL_POINTER) {
+
+        char* e0 = (char*) p2;
+
+        if (p1 != NULL_POINTER) {
+
+            int* i = (int*) p1;
+
+            if (p0 != NULL_POINTER) {
+
+                void** a = (void**) p0;
+
+                // Get element.
+                char* e1 = (char*) (*a + *i);
+                *e0 = *e1;
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element. The character array is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element. The index is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element. The element is null.");
+    }
+*/
+}
+
+/**
+ * Gets the character array string index.
+ *
+ * The first occurence of the string will be considered.
+ * The given index remains unchanged if no string is found.
+ *
+ * @param p0 the character array
+ * @param p1 the size
+ * @param p2 the string
+ * @param p3 the string size
  * @param p4 the index
  */
-void get_character_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
+void get_character_array_string_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -369,70 +549,62 @@ void get_character_array_elements_index(const void* p0, const void* p1, const vo
 
         if (p3 != NULL_POINTER) {
 
-            int* es = (int*) p3;
+            int* strs = (int*) p3;
 
-            if (p2 != NULL_POINTER) {
+            if (p1 != NULL_POINTER) {
 
-                char* e1 = (char*) p2;
+                int* s = (int*) p1;
 
-                if (p1 != NULL_POINTER) {
+                if (p0 != NULL_POINTER) {
 
-                    int* s = (int*) p1;
+                    void** a = (void**) p0;
 
-                    if (p0 != NULL_POINTER) {
+                    int j = 0;
+                    char* e0 = NULL_CHARACTER_POINTER;
+                    int r = 0;
 
-                        void** a = (void**) p0;
+                    while (1) {
 
-                        int j = 0;
-                        char* e0 = NULL_CHARACTER_POINTER;
-                        int r = 0;
+                        if (j >= (*s - *strs)) {
 
-                        while (1) {
-
-                            if (j >= (*s - *es)) {
-
-                                // The element has not been found.
-                                break;
-                            }
-
-                            // Compare given element with the next elements at array plus index.
-                            e0 = (char*) (*a + j);
-
-                            compare_character_arrays((void*) &e0, p2, p3, (void*) &r);
-
-                            if (r == 1) {
-
-                                // The element has been found.
-                                *i = j;
-                                break;
-                            }
-
-                            j++;
+                            // The element has not been found.
+                            break;
                         }
 
-                    } else {
+                        // Compare given element with the next elements at array plus index.
+                        e0 = (char*) (*a + j);
 
-                        log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array elements index. The character array is null.");
+//??                            compare_character_arrays((void*) &e0, p2, p3, (void*) &r);
+
+                        if (r == 1) {
+
+                            // The element has been found.
+                            *i = j;
+
+                            break;
+                        }
+
+                        j++;
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array elements index. The size is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array string index. The character array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array elements index. The elements character array is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array string index. The size is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array elements index. The elements size is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array string index. The string size is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array elements index. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array string index. The index is null.");
     }
 }
 

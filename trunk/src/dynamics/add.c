@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,7 @@
 #define ADD_SOURCE
 
 #include "../logger/log_handler.c"
+#include "../model/model_handler.c"
 
 /**
  * Adds two summands resulting in the sum.
@@ -105,19 +106,19 @@ void add(void* p0, const void* p1, const void* p2, const void* p3, const void* p
 
     // Get operands.
     get_model_part_by_name(p0, p1, p2,
-        summand_1_pa, summand_1_pas, summand_1_pl, summand_1_pls, summand_1_pm, summand_1_pms,
-        summand_1_poa, summand_1_poas, summand_1_pol, summand_1_pols, summand_1_pom, summand_1_poms,
-        summand_1_ca, summand_1_cas, summand_1_cl, summand_1_cls, summand_1_cm, summand_1_cms);
+        (void*) &summand_1_pa, (void*) &summand_1_pas, (void*) &summand_1_pl, (void*) &summand_1_pls, (void*) &summand_1_pm, (void*) &summand_1_pms,
+        (void*) &summand_1_poa, (void*) &summand_1_poas, (void*) &summand_1_pol, (void*) &summand_1_pols, (void*) &summand_1_pom, (void*) &summand_1_poms,
+        (void*) &summand_1_ca, (void*) &summand_1_cas, (void*) &summand_1_cl, (void*) &summand_1_cls, (void*) &summand_1_cm, (void*) &summand_1_cms);
 
     get_model_part_by_name(p0, p3, p4,
-        summand_2_pa, summand_2_pas, summand_2_pl, summand_2_pls, summand_2_pm, summand_2_pms,
-        summand_2_poa, summand_2_poas, summand_2_pol, summand_2_pols, summand_2_pom, summand_2_poms,
-        summand_2_ca, summand_2_cas, summand_2_cl, summand_2_cls, summand_2_cm, summand_2_cms);
+        (void*) &summand_2_pa, (void*) &summand_2_pas, (void*) &summand_2_pl, (void*) &summand_2_pls, (void*) &summand_2_pm, (void*) &summand_2_pms,
+        (void*) &summand_2_poa, (void*) &summand_2_poas, (void*) &summand_2_pol, (void*) &summand_2_pols, (void*) &summand_2_pom, (void*) &summand_2_poms,
+        (void*) &summand_2_ca, (void*) &summand_2_cas, (void*) &summand_2_cl, (void*) &summand_2_cls, (void*) &summand_2_cm, (void*) &summand_2_cms);
 
     get_model_part_by_name(p0, p5, p6,
-        sum_pa, sum_pas, sum_pl, sum_pls, sum_pm, sum_pms,
-        sum_poa, sum_poas, sum_pol, sum_pols, sum_pom, sum_poms,
-        sum_ca, sum_cas, sum_cl, sum_cls, sum_cm, sum_cms);
+        (void*) &sum_pa, (void*) &sum_pas, (void*) &sum_pl, (void*) &sum_pls, (void*) &sum_pm, (void*) &sum_pms,
+        (void*) &sum_poa, (void*) &sum_poas, (void*) &sum_pol, (void*) &sum_pols, (void*) &sum_pom, (void*) &sum_poms,
+        (void*) &sum_ca, (void*) &sum_cas, (void*) &sum_cl, (void*) &sum_cls, (void*) &sum_cm, (void*) &sum_cms);
 
     // Execute addition.
     sum_pm = summand_1_pm + summand_2_pm;
@@ -138,7 +139,7 @@ void add(void* p0, const void* p1, const void* p2, const void* p3, const void* p
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not execute add. The summand 0 is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not execute add. The summand 0 is null.");
     }
 */
 };

@@ -29,7 +29,7 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.14 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -73,7 +73,7 @@ void initialize_boolean(void* p0, const void* p1, const void* p2) {
 
         int* t = (int*) p0;
 
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize boolean.");
+        log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize boolean.");
 
         int r = 0;
         compare_arrays(p1, p2, (void*) &TRUE_BOOLEAN, (void*) &TRUE_BOOLEAN_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
@@ -90,7 +90,7 @@ void initialize_boolean(void* p0, const void* p1, const void* p2) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize boolean. The transient model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize boolean. The transient model is null.");
     }
 }
 
@@ -115,7 +115,7 @@ void finalize_boolean(const void* p0, void* p1, void* p2) {
 
                 int* ps = (int*) p2;
 
-                log_message((void*) &INFO_LOG_LEVEL, "Finalize boolean.");
+                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize boolean.");
 
                 if (*t == 1) {
 
@@ -131,17 +131,17 @@ void finalize_boolean(const void* p0, void* p1, void* p2) {
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize boolean. The persistent model size is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize boolean. The persistent model size is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize boolean. The persistent model is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize boolean. The persistent model is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize boolean. The transient model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize boolean. The transient model is null.");
     }
 }
 

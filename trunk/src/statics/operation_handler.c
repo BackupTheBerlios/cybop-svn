@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.20 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -85,7 +85,7 @@ static const char OPERATION_PARAMETER_SEPARATOR = ',';
  */
 void create_operation(void* p0, const void* p1) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Create operation.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create operation.");
 
     // Create operation.
     create_array(p0, (void*) &OPERATION_SIZE);
@@ -113,7 +113,7 @@ void create_operation(void* p0, const void* p1) {
  */
 void destroy_operation(void* p0, const void* p1) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Destroy operation.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy operation.");
 
     // Initialize elements.
     int s = 0;
@@ -168,7 +168,7 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
 
                     void** t = (void**) p0;
 
-                    log_message((void*) &INFO_LOG_LEVEL, "Initialize operation.");
+                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize operation.");
 
                     // The parameter size initially set to the persistent model size.
                     int size = *ps;
@@ -237,38 +237,38 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
 
                                 } else {
 
-                                    log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize operation. There are no remaining parameters after the separator.");
+                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize operation. There are no remaining parameters after the separator.");
                                 }
                             }
 
                         } else {
 
-                            log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize operation. The index exceeds the size.");
+                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The index exceeds the size.");
                         }
 
                     } else {
 
-                        log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize operation. There is no parameter before the separator.");
+                        log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize operation. There is no parameter before the separator.");
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize operation. The transient model is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The transient model is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize operation. The transient model size is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The transient model size is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize operation. The persistent model is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The persistent model is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize operation. The persistent model size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The persistent model size is null.");
     }
 }
 
@@ -301,7 +301,7 @@ void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
 
                     void** t = (void**) p0;
 
-                    log_message((void*) &INFO_LOG_LEVEL, "Finalize operation.");
+                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize operation.");
 
                     // Initialize elements.
                     int s = 0;
@@ -369,34 +369,34 @@ void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
 
                             } else {
 
-                                log_message((void*) &WARNING_LOG_LEVEL, "Could not finalize operation. There are no remaining parameters after the separator.");
+                                log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not finalize operation. There are no remaining parameters after the separator.");
                             }
                         }
 
                     } else {
 
-                        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize operation. The index exceeds the size.");
+                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The index exceeds the size.");
                     }
 */
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize operation. The transient model is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The transient model is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize operation. The transient model size is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The transient model size is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize operation. The persistent model is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The persistent model is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize operation. The persistent model size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The persistent model size is null.");
     }
 }
 

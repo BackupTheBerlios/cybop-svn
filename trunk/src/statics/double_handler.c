@@ -25,7 +25,7 @@
  *
  * A double is a floating point number.
  *
- * @version $Revision: 1.1 $ $Date: 2004-04-07 15:52:16 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,7 +48,7 @@
  */
 void initialize_double(void* p0, const void* p1, const void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Initialize double.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize double.");
 
     // Transform string to double.
 //??    sscanf(p1, %d, (void*) &(m->value));
@@ -63,7 +63,7 @@ void initialize_double(void* p0, const void* p1, const void* p2) {
  */
 void finalize_double(const void* p0, void* p1, void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Finalize double.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize double.");
 
     // Transform double to string.
 //??    sprintf(p1, %d, (void*) &(m->value));

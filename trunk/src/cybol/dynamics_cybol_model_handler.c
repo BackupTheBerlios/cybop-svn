@@ -25,7 +25,7 @@
  *
  * It contains read and write procedures.
  *
- * @version $Revision: 1.8 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,7 +50,7 @@
 //?? void initialize_source_model(void* p0, void* p1) {
 
 /*??
-    log_message((void*) &INFO_LOG_LEVEL, "Initialize model: " + p1);
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize model: " + p1);
 
     void* s = parse_file(PATH + p1 + CYBOL);
     read_structure(p0, s);
@@ -85,7 +85,7 @@
 
     if (doc != NULL_POINTER) {
         
-        log_message((void*) &INFO_LOG_LEVEL, "Read document.");
+        log_message((void*) &INFO_LOG_LEVEL, (void*) &"Read document.");
         doc.normalize();
         org.apache.xerces.dom.DeepNodeListImpl l = NULL_POINTER;
 
@@ -102,12 +102,12 @@
 
         } else {
             
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not read structure. The model is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read structure. The model is null.");
         }
 
     } else {
         
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not read structure. The structure is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read structure. The structure is null.");
     }
 */
 //?? }
@@ -144,18 +144,18 @@ void initialize_super_model(void* p0, void* p1) {
         
         if (n != NULL_POINTER) {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Initialize super model.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize super model.");
             int s = read_attribute((org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes(), CATEGORY);
             initialize_category(p0, s);
             
         } else {
             
-            log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize super model. The super model node is null.");
+            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize super model. The super model node is null.");
         }
         
     } else {
         
-        log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize super model. The super model list is null.");
+        log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize super model. The super model list is null.");
     }
 */
 /*??
@@ -189,7 +189,7 @@ void initialize_children_models(void* p0, void* p1) {
 
     if (l != NULL_POINTER) {
         
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize children models.");
+        log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize children models.");
         int count = 0;
         int size = l.getLength();
         org.apache.xerces.dom.NodeImpl n = NULL_POINTER;
@@ -219,12 +219,12 @@ void initialize_children_models(void* p0, void* p1) {
 /*??
                 } else {
                     
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize children models. A model is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize children models. A model is null.");
                 }
         
             } else {
                 
-                log_message((void*) &INFO_LOG_LEVEL, "Could not initialize children models. The model item node is null.");
+                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Could not initialize children models. The model item node is null.");
             }
                     
             count++;
@@ -232,7 +232,7 @@ void initialize_children_models(void* p0, void* p1) {
         
     } else {
         
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize children models. The model items list is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize children models. The model items list is null.");
     }
 */
 /*??
@@ -270,17 +270,17 @@ void initialize_child_model(void* p0, void* p1) {
         
         if (n != NULL_POINTER) {
             
-            log_message((void*) &INFO_LOG_LEVEL, "Initialize child model.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize child model.");
             initialize_attributes(i.items, (org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes());
     
         } else {
             
-            log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize child model. The child model node is null.");
+            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize child model. The child model node is null.");
         }
 
     } else {
         
-        log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize child model. The child model is null.");
+        log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize child model. The child model is null.");
     }
 */
 /*??
@@ -310,7 +310,7 @@ void finalize_child_model(void* p0, void* p1) {
 void initialize_child_attributes(void* p0, void* p1) {
 
 /*??
-    log_message((void*) &INFO_LOG_LEVEL, "Initialize child attributes.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize child attributes.");
     int a = 0;
 
     a = read_child_attribute(p1, NAME);
@@ -376,17 +376,17 @@ void read_child_attribute(void* p0, void* p1, void* p2) {
         
         if (n != NULL_POINTER) {
             
-            log_message((void*) &INFO_LOG_LEVEL, "Read child attribute.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Read child attribute.");
             p2 = n.getNodeValue();
     
         } else {
             
-            log_message((void*) &WARNING_LOG_LEVEL, "Could not read child attribute. The child attribute node is null.");
+            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not read child attribute. The child attribute node is null.");
         }
     
     } else {
         
-        log_message((void*) &WARNING_LOG_LEVEL, "Could not read child attribute. The child attributes map is null.");
+        log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not read child attribute. The child attributes map is null.");
     }
 */
 /*??

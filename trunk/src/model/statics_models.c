@@ -27,7 +27,7 @@
  * Complex models consist of other complex models and primitive models.
  * Primitive models are the final abstraction in software.
  *
- * @version $Revision: 1.8 $ $Date: 2004-04-07 15:47:51 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,57 +38,63 @@
 // Operation models.
 //
 
-/** The operation model. */
-static const char OPERATION_MODEL[] = {'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n'};
+/** The operation abstraction. */
+static const char OPERATION_ABSTRACTION[] = {'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n'};
 
-/** The operation model size. */
-static const int OPERATION_MODEL_SIZE = 9;
+/** The operation abstraction size. */
+static const int OPERATION_ABSTRACTION_SIZE = 9;
 
 //
 // Primitive models.
 //
 
-/** The boolean model. */
-static const char BOOLEAN_MODEL[] = {'b', 'o', 'o', 'l', 'e', 'a', 'n'};
+/** The boolean abstraction. */
+static const char BOOLEAN_ABSTRACTION[] = {'b', 'o', 'o', 'l', 'e', 'a', 'n'};
 
-/** The boolean model size. */
-static const int BOOLEAN_MODEL_SIZE = 7;
+/** The boolean abstraction size. */
+static const int BOOLEAN_ABSTRACTION_SIZE = 7;
 
-/** The integer model. */
-static const char INTEGER_MODEL[] = {'i', 'n', 't', 'e', 'g', 'e', 'r'};
+/** The integer abstraction. */
+static const char INTEGER_ABSTRACTION[] = {'i', 'n', 't', 'e', 'g', 'e', 'r'};
 
-/** The integer model size. */
-static const int INTEGER_MODEL_SIZE = 7;
+/** The integer abstraction size. */
+static const int INTEGER_ABSTRACTION_SIZE = 7;
 
-/** The fraction model. */
-static const char FRACTION_MODEL[] = {'f', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+/** The double abstraction. */
+static const char DOUBLE_ABSTRACTION[] = {'d', 'o', 'u', 'b', 'l', 'e'};
 
-/** The fraction model size. */
-static const int FRACTION_MODEL_SIZE = 8;
+/** The double abstraction size. */
+static const int DOUBLE_ABSTRACTION_SIZE = 6;
 
-/** The complex model. */
-static const char COMPLEX_MODEL[] = {'c', 'o', 'm', 'p', 'l', 'e', 'x'};
+/** The fraction abstraction. */
+static const char FRACTION_ABSTRACTION[] = {'f', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
 
-/** The complex model size. */
-static const int COMPLEX_MODEL_SIZE = 7;
+/** The fraction abstraction size. */
+static const int FRACTION_ABSTRACTION_SIZE = 8;
 
-/** The vector model. */
-static const char VECTOR_MODEL[] = {'v', 'e', 'c', 't', 'o', 'r'};
+/** The complex abstraction. */
+static const char COMPLEX_ABSTRACTION[] = {'c', 'o', 'm', 'p', 'l', 'e', 'x'};
 
-/** The vector model size. */
-static const int VECTOR_MODEL_SIZE = 6;
+/** The complex abstraction size. */
+static const int COMPLEX_ABSTRACTION_SIZE = 7;
 
-/** The string model. */
-static const char STRING_MODEL[] = {'s', 't', 'r', 'i', 'n', 'g'};
+/** The vector abstraction. */
+static const char VECTOR_ABSTRACTION[] = {'v', 'e', 'c', 't', 'o', 'r'};
 
-/** The string model size. */
-static const int STRING_MODEL_SIZE = 6;
+/** The vector abstraction size. */
+static const int VECTOR_ABSTRACTION_SIZE = 6;
 
-/** The time model. */
-static const char TIME_MODEL[] = {'t', 'i', 'm', 'e'};
+/** The string abstraction. */
+static const char STRING_ABSTRACTION[] = {'s', 't', 'r', 'i', 'n', 'g'};
 
-/** The time model size. */
-static const int TIME_MODEL_SIZE = 4;
+/** The string abstraction size. */
+static const int STRING_ABSTRACTION_SIZE = 6;
+
+/** The time abstraction. */
+static const char TIME_ABSTRACTION[] = {'t', 'i', 'm', 'e'};
+
+/** The time abstraction size. */
+static const int TIME_ABSTRACTION_SIZE = 4;
 
 //
 // Audio models.

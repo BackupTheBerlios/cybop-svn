@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.10 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -107,22 +107,22 @@ void compare_pointer_arrays(const void* p0, const void* p1, const void* p2, void
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not compare pointer arrays. The first pointer array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare pointer arrays. The first pointer array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not compare pointer arrays. The second pointer array is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare pointer arrays. The second pointer array is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not compare pointer arrays. The size is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare pointer arrays. The size is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not compare pointer arrays. The result is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare pointer arrays. The result is null.");
     }
 }
 
@@ -157,17 +157,17 @@ void set_pointer_array_element(const void* p0, const void* p1, const void* p2) {
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not set pointer array element. The pointer array is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set pointer array element. The pointer array is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not set pointer array element. The index is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set pointer array element. The index is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not set pointer array element. The element is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set pointer array element. The element is null.");
     }
 }
 
@@ -220,17 +220,17 @@ void remove_pointer_array_element(const void* p0, const void* p1, const void* p2
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove pointer array element. The pointer array is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove pointer array element. The pointer array is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not remove pointer array element. The size is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove pointer array element. The size is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove pointer array element. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove pointer array element. The index is null.");
     }
 }
 
@@ -261,17 +261,17 @@ void get_pointer_array_element(const void* p0, const void* p1, void* p2) {
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not get pointer array element. The pointer array is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get pointer array element. The pointer array is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not get pointer array element. The index is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get pointer array element. The index is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get pointer array element. The element is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get pointer array element. The element is null.");
     }
 }
 
@@ -330,22 +330,22 @@ void get_pointer_array_element_index(const void* p0, const void* p1, const void*
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not get pointer array element index. The pointer array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get pointer array element index. The pointer array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not get pointer array element index. The size is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get pointer array element index. The size is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not get pointer array element index. The element is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get pointer array element index. The element is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get pointer array element index. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get pointer array element index. The index is null.");
     }
 }
 

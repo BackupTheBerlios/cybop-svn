@@ -59,7 +59,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.31 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
+ * @version $Revision: 1.32 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -188,13 +188,13 @@ static const int FTP_LOCATION_SIZE = 6;
 //
 
 /**
- * Creates the compound model.
+ * Creates the compound.
  *
- * @param p0 the model
+ * @param p0 the compound
  */
-void create_compound_model(void* p0) {
+void create_compound(void* p0) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Create compound model.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create compound.");
 
     // Create model.
     create_array(p0, (void*) &MODEL_SIZE);
@@ -271,13 +271,13 @@ void create_compound_model(void* p0) {
 }
 
 /**
- * Destroys the compound model.
+ * Destroys the compound.
  *
- * @param p0 the model
+ * @param p0 the compound
  */
-void destroy_compound_model(void* p0) {
+void destroy_compound(void* p0) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Destroy compound model.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy compound.");
 
     // Initialize elements.
     int s = 0;
@@ -521,7 +521,7 @@ void initialize_parts(void* p0, const void* p1) {
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize parts. A cybol part is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize parts. A cybol part is null.");
         }
 
         count++;
@@ -554,7 +554,7 @@ void finalize_parts(void* p0, const void* p1) {
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize parts. A cybol part is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize parts. A cybol part is null.");
         }
 
         count++;
@@ -567,13 +567,13 @@ void finalize_parts(void* p0, const void* p1) {
 //
 
 /**
- * Initializes the compound model.
+ * Initializes the compound.
  *
  * @param p0 the transient model
  * @param p1 the persistent model
  * @param p2 the persistent model size
  */
-void initialize_compound_model(void* p0, const void* p1, const void* p2) {
+void initialize_compound(void* p0, const void* p1, const void* p2) {
 
     if (p2 != NULL_POINTER) {
 
@@ -618,23 +618,23 @@ void initialize_compound_model(void* p0, const void* p1, const void* p2) {
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize compound model. The persistent model is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize compound model. The persistent model is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize compound model. The persistent model size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize compound model. The persistent model size is null.");
     }
 }
 
 /**
- * Finalizes the model to a cybol model.
+ * Finalizes the compound.
  *
  * @param p0 the transient model
  * @param p1 the persistent model
  * @param p2 the persistent model size
  */
-void finalize_compound_model(void* p0, void* p1, void* p2) {
+void finalize_compound(void* p0, void* p1, void* p2) {
 }
 
 //
@@ -692,7 +692,7 @@ void get_model_part_index(const void* p0, const void* p1, const void* p2, void* 
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part index. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part index. The index is null.");
     }
 }
 
@@ -867,7 +867,7 @@ void set_model_part_by_index(void* p0, const void* p1, const void* p2, const voi
 
         if (*i >= 0) {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Set model part by index.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Set model part by index.");
 
             // Initialize elements.
             int s = 0;
@@ -980,17 +980,17 @@ void set_model_part_by_index(void* p0, const void* p1, const void* p2, const voi
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by index. The index exceeds the size.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by index. The index exceeds the size.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by index. The index is negativ.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by index. The index is negativ.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by index. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by index. The index is null.");
     }
 }
 
@@ -1092,37 +1092,37 @@ void set_model_part_by_name(void* p0, const void* p1, const void* p2,
 
                                 } else {
 
-                                    log_message((void*) &WARNING_LOG_LEVEL, "Could not set model part by name. A part with that name does not exist.");
+                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not set model part by name. A part with that name does not exist.");
                                 }
 
                             } else {
 
-                                log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The full name ends with a separator.");
+                                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by name. The full name ends with a separator.");
                             }
 
                         } else {
 
-                            log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The full name starts with a separator.");
+                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by name. The full name starts with a separator.");
                         }
 
                     } else {
 
-                        log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The separator index exceeds the full name size.");
+                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by name. The separator index exceeds the full name size.");
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The separator index is negative.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by name. The separator index is negative.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The name is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by name. The name is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part by name. The name size is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set model part by name. The name size is null.");
         }
 
     } else {
@@ -1137,7 +1137,7 @@ void set_model_part_by_name(void* p0, const void* p1, const void* p2,
 
         if (index != -1) {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Set model part by name.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Set model part by name.");
 
             set_model_part_by_index(p0, (void*) &index, p1, p2,
                 p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
@@ -1145,7 +1145,7 @@ void set_model_part_by_name(void* p0, const void* p1, const void* p2,
 
         } else {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Add model part by name.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Add model part by name.");
 
             // Get parts count.
             int c = 0;
@@ -1202,7 +1202,7 @@ void remove_model_part_by_index(void* p0, const void* p1) {
 
         if (*i >= 0) {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Remove model part by index.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Remove model part by index.");
 
             // Initialize elements.
             int s = 0;
@@ -1284,17 +1284,17 @@ void remove_model_part_by_index(void* p0, const void* p1) {
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by index. The index exceeds the size.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by index. The index exceeds the size.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by index. The index is negativ.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by index. The index is negativ.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by index. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by index. The index is null.");
     }
 }
 
@@ -1373,37 +1373,37 @@ void remove_model_part_by_name(void* p0, const void* p1, const void* p2) {
 
                                 } else {
 
-                                    log_message((void*) &WARNING_LOG_LEVEL, "Could not remove model part by name. A part with that name does not exist.");
+                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not remove model part by name. A part with that name does not exist.");
                                 }
 
                             } else {
 
-                                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The full name ends with a separator.");
+                                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by name. The full name ends with a separator.");
                             }
 
                         } else {
 
-                            log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The full name starts with a separator.");
+                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by name. The full name starts with a separator.");
                         }
 
                     } else {
 
-                        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The separator index exceeds the full name size.");
+                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by name. The separator index exceeds the full name size.");
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The separator index is negative.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by name. The separator index is negative.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The name is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by name. The name is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part by name. The name size is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove model part by name. The name size is null.");
         }
 
     } else {
@@ -1418,13 +1418,13 @@ void remove_model_part_by_name(void* p0, const void* p1, const void* p2) {
 
         if (index != -1) {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Remove model part by name.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Remove model part by name.");
 
             remove_model_part_by_index(p0, (void*) &index);
 
         } else {
 
-            log_message((void*) &WARNING_LOG_LEVEL, "Could not remove model part by name. A part with that name does not exist.");
+            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not remove model part by name. A part with that name does not exist.");
         }
     }
 }
@@ -1434,31 +1434,29 @@ void remove_model_part_by_name(void* p0, const void* p1, const void* p2) {
  *
  * @param p0 the model
  * @param p1 the index
- * @param p2 the name
- * @param p3 the name size
- * @param p4 the part abstraction
- * @param p5 the part abstraction size
- * @param p6 the part location
- * @param p7 the part location size
- * @param p8 the part model
- * @param p9 the part model size
- * @param p10 the position abstraction
- * @param p11 the position abstraction size
- * @param p12 the position location
- * @param p13 the position location size
- * @param p14 the position model
- * @param p15 the position model size
- * @param p16 the constraint abstraction
- * @param p17 the constraint abstraction size
- * @param p18 the constraint location
- * @param p19 the constraint location size
- * @param p20 the constraint model
- * @param p21 the constraint model size
+ * @param p2 the part abstraction
+ * @param p3 the part abstraction size
+ * @param p4 the part location
+ * @param p5 the part location size
+ * @param p6 the part model
+ * @param p7 the part model size
+ * @param p8 the position abstraction
+ * @param p9 the position abstraction size
+ * @param p10 the position location
+ * @param p11 the position location size
+ * @param p12 the position model
+ * @param p13 the position model size
+ * @param p14 the constraint abstraction
+ * @param p15 the constraint abstraction size
+ * @param p16 the constraint location
+ * @param p17 the constraint location size
+ * @param p18 the constraint model
+ * @param p19 the constraint model size
  */
-void get_model_part_by_index(const void* p0, const void* p1, void* p2, void* p3,
-    void* p4, void* p5, void* p6, void* p7, void* p8, void* p9,
-    void* p10, void* p11, void* p12, void* p13, void* p14, void* p15,
-    void* p16, void* p17, void* p18, void* p19, void* p20, void* p21) {
+void get_model_part_by_index(const void* p0, const void* p1,
+    void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
+    void* p8, void* p9, void* p10, void* p11, void* p12, void* p13,
+    void* p14, void* p15, void* p16, void* p17, void* p18, void* p19) {
 
     if (p1 != NULL_POINTER) {
 
@@ -1466,13 +1464,11 @@ void get_model_part_by_index(const void* p0, const void* p1, void* p2, void* p3,
 
         if (*i >= 0) {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Get model part by index.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Get model part by index.");
 
             // Initialize elements.
             int s = 0;
             int c = 0;
-            void* n = NULL_POINTER;
-            void* ns = NULL_POINTER;
             void* pa = NULL_POINTER;
             void* pas = NULL_POINTER;
             void* pl = NULL_POINTER;
@@ -1495,8 +1491,6 @@ void get_model_part_by_index(const void* p0, const void* p1, void* p2, void* p3,
             // Get elements.
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
@@ -1519,40 +1513,38 @@ void get_model_part_by_index(const void* p0, const void* p1, void* p2, void* p3,
             if (*i < c) {
 
                 // Get part.
-                get_array_element((void*) &n, (void*) &POINTER_ARRAY, p1, p2);
-                get_array_element((void*) &ns, (void*) &POINTER_ARRAY, p1, p3);
-                get_array_element((void*) &pa, (void*) &POINTER_ARRAY, p1, p4);
-                get_array_element((void*) &pas, (void*) &POINTER_ARRAY, p1, p5);
-                get_array_element((void*) &pl, (void*) &POINTER_ARRAY, p1, p6);
-                get_array_element((void*) &pls, (void*) &POINTER_ARRAY, p1, p7);
-                get_array_element((void*) &pm, (void*) &POINTER_ARRAY, p1, p8);
-                get_array_element((void*) &pms, (void*) &POINTER_ARRAY, p1, p9);
-                get_array_element((void*) &poa, (void*) &POINTER_ARRAY, p1, p10);
-                get_array_element((void*) &poas, (void*) &POINTER_ARRAY, p1, p11);
-                get_array_element((void*) &pol, (void*) &POINTER_ARRAY, p1, p12);
-                get_array_element((void*) &pols, (void*) &POINTER_ARRAY, p1, p13);
-                get_array_element((void*) &pom, (void*) &POINTER_ARRAY, p1, p14);
-                get_array_element((void*) &poms, (void*) &POINTER_ARRAY, p1, p15);
-                get_array_element((void*) &ca, (void*) &POINTER_ARRAY, p1, p16);
-                get_array_element((void*) &cas, (void*) &POINTER_ARRAY, p1, p17);
-                get_array_element((void*) &cl, (void*) &POINTER_ARRAY, p1, p18);
-                get_array_element((void*) &cls, (void*) &POINTER_ARRAY, p1, p19);
-                get_array_element((void*) &cm, (void*) &POINTER_ARRAY, p1, p20);
-                get_array_element((void*) &cms, (void*) &POINTER_ARRAY, p1, p21);
+                get_array_element((void*) &pa, (void*) &POINTER_ARRAY, p1, p2);
+                get_array_element((void*) &pas, (void*) &POINTER_ARRAY, p1, p3);
+                get_array_element((void*) &pl, (void*) &POINTER_ARRAY, p1, p4);
+                get_array_element((void*) &pls, (void*) &POINTER_ARRAY, p1, p5);
+                get_array_element((void*) &pm, (void*) &POINTER_ARRAY, p1, p6);
+                get_array_element((void*) &pms, (void*) &POINTER_ARRAY, p1, p7);
+                get_array_element((void*) &poa, (void*) &POINTER_ARRAY, p1, p8);
+                get_array_element((void*) &poas, (void*) &POINTER_ARRAY, p1, p9);
+                get_array_element((void*) &pol, (void*) &POINTER_ARRAY, p1, p10);
+                get_array_element((void*) &pols, (void*) &POINTER_ARRAY, p1, p11);
+                get_array_element((void*) &pom, (void*) &POINTER_ARRAY, p1, p12);
+                get_array_element((void*) &poms, (void*) &POINTER_ARRAY, p1, p13);
+                get_array_element((void*) &ca, (void*) &POINTER_ARRAY, p1, p14);
+                get_array_element((void*) &cas, (void*) &POINTER_ARRAY, p1, p15);
+                get_array_element((void*) &cl, (void*) &POINTER_ARRAY, p1, p16);
+                get_array_element((void*) &cls, (void*) &POINTER_ARRAY, p1, p17);
+                get_array_element((void*) &cm, (void*) &POINTER_ARRAY, p1, p18);
+                get_array_element((void*) &cms, (void*) &POINTER_ARRAY, p1, p19);
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by index. The index exceeds the size.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by index. The index exceeds the size.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by index. The index is negativ.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by index. The index is negativ.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by index. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by index. The index is null.");
     }
 }
 
@@ -1654,37 +1646,37 @@ void get_model_part_by_name(const void* p0, const void* p1, const void* p2,
 
                                 } else {
 
-                                    log_message((void*) &WARNING_LOG_LEVEL, "Could not get model part by name. A part with that name does not exist.");
+                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not get model part by name. A part with that name does not exist.");
                                 }
 
                             } else {
 
-                                log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The full name ends with a separator.");
+                                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by name. The full name ends with a separator.");
                             }
 
                         } else {
 
-                            log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The full name starts with a separator.");
+                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by name. The full name starts with a separator.");
                         }
 
                     } else {
 
-                        log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The separator index exceeds the full name size.");
+                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by name. The separator index exceeds the full name size.");
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The separator index is negative.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by name. The separator index is negative.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The name is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by name. The name is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part by name. The name size is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get model part by name. The name size is null.");
         }
 
     } else {
@@ -1699,15 +1691,15 @@ void get_model_part_by_name(const void* p0, const void* p1, const void* p2,
 
         if (index != -1) {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Get model part by name.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Get model part by name.");
 
-            get_model_part_by_index(p0, (void*) &index, p1, p2,
+            get_model_part_by_index(p0, (void*) &index,
                 p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
                 p15, p16, p17, p18, p19, p20);
 
         } else {
 
-            log_message((void*) &WARNING_LOG_LEVEL, "Could not get model part by name. A part with that name does not exist.");
+            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not get model part by name. A part with that name does not exist.");
         }
     }
 }

@@ -23,7 +23,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.9 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -129,12 +129,12 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const
 
         } else {
 
-        compare_arrays(p4, p5, (void*) &FLOAT_ABSTRACTION, (void*) &FLOAT_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+        compare_arrays(p4, p5, (void*) &DOUBLE_ABSTRACTION, (void*) &DOUBLE_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
         if (r == 1) {
 
             // No destruction because primitive type.
-            finalize_float(p0, p2, p3);
+            finalize_double(p0, p2, p3);
 
         } else {
 

@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.11 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,70 +43,6 @@
 #include "../statics/string_handler.c"
 #include "../statics/time_handler.c"
 #include "../statics/vector_handler.c"
-
-//
-// Constants.
-//
-
-/** The compound abstraction. */
-static const char COMPOUND_ABSTRACTION[] = {'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd'};
-
-/** The compound abstraction size. */
-static const int COMPOUND_ABSTRACTION_SIZE = 8;
-
-/** The operation abstraction. */
-static const char OPERATION_ABSTRACTION[] = {'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n'};
-
-/** The operation abstraction size. */
-static const int OPERATION_ABSTRACTION_SIZE = 9;
-
-/** The string abstraction. */
-static const char STRING_ABSTRACTION[] = {'s', 't', 'r', 'i', 'n', 'g'};
-
-/** The string abstraction size. */
-static const int STRING_ABSTRACTION_SIZE = 6;
-
-/** The boolean abstraction. */
-static const char BOOLEAN_ABSTRACTION[] = {'b', 'o', 'o', 'l', 'e', 'a', 'n'};
-
-/** The boolean abstraction size. */
-static const int BOOLEAN_ABSTRACTION_SIZE = 7;
-
-/** The integer abstraction. */
-static const char INTEGER_ABSTRACTION[] = {'i', 'n', 't', 'e', 'g', 'e', 'r'};
-
-/** The integer abstraction size. */
-static const int INTEGER_ABSTRACTION_SIZE = 7;
-
-/** The vector abstraction. */
-static const char VECTOR_ABSTRACTION[] = {'v', 'e', 'c', 't', 'o', 'r'};
-
-/** The vector abstraction size. */
-static const int VECTOR_ABSTRACTION_SIZE = 6;
-
-/** The float abstraction. */
-static const char FLOAT_ABSTRACTION[] = {'f', 'l', 'o', 'a', 't'};
-
-/** The float abstraction size. */
-static const int FLOAT_ABSTRACTION_SIZE = 5;
-
-/** The fraction abstraction. */
-static const char FRACTION_ABSTRACTION[] = {'f', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-
-/** The fraction abstraction size. */
-static const int FRACTION_ABSTRACTION_SIZE = 8;
-
-/** The complex abstraction. */
-static const char COMPLEX_ABSTRACTION[] = {'c', 'o', 'm', 'p', 'l', 'e', 'x'};
-
-/** The complex abstraction size. */
-static const int COMPLEX_ABSTRACTION_SIZE = 7;
-
-/** The time abstraction. */
-static const char TIME_ABSTRACTION[] = {'t', 'i', 'm', 'e'};
-
-/** The time abstraction size. */
-static const int TIME_ABSTRACTION_SIZE = 4;
 
 /**
  * Creates a transient model from a persistent model.
@@ -193,12 +129,12 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
 
         } else {
 
-        compare_arrays(p4, p5, (void*) &FLOAT_ABSTRACTION, (void*) &FLOAT_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+        compare_arrays(p4, p5, (void*) &DOUBLE_ABSTRACTION, (void*) &DOUBLE_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
         if (r == 1) {
 
             // No creation because primitive type.
-            initialize_float(p0, p2, p3);
+            initialize_double(p0, p2, p3);
 
         } else {
 

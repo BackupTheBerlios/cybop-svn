@@ -32,7 +32,7 @@
  * 01.01.2000 00:00:00";
  * 31.12.1999 23:59:59";
  *
- * @version $Revision: 1.12 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,6 +41,7 @@
 
 #include "../constants.c"
 #include "../logger/log_handler.c"
+#include "../model/array_handler.c"
 
 //
 // Constants.
@@ -78,7 +79,7 @@ static const int SECOND_INDEX = 5;
  */
 void create_time(void* p0) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Create time.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create time.");
 
     // The time.
     create_array(p0, (void*) &TIME_SIZE);
@@ -91,7 +92,7 @@ void create_time(void* p0) {
  */
 void destroy_time(void* p0) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Destroy time.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy time.");
 
     // The time.
     destroy_array(p0, (void*) &TIME_SIZE);
@@ -106,7 +107,7 @@ void destroy_time(void* p0) {
  */
 void initialize_time(void* p0, const void* p1, const void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Initialize time.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize time.");
 
 //??    fscanf(p1, %d, &(m->value));
 
@@ -136,7 +137,7 @@ void initialize_time(void* p0, const void* p1, const void* p2) {
  */
 void finalize_time(void* p0, void* p1, void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Finalize time.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize time.");
 
     // Initialize elements.
     int s = 0;

@@ -23,7 +23,7 @@
  *
  * This file handles internals.
  *
- * @version $Revision: 1.7 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,7 +49,7 @@ void initialize_internals(void* p0) {
 
     if (i != NULL_POINTER) {
 
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize internals.");
+        log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize internals.");
 
         i->x_windows_flag = 1;
         i->x_windows = (void*) malloc(sizeof(struct x_windows));
@@ -67,7 +67,7 @@ void initialize_internals(void* p0) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize internals. The internals is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize internals. The internals is null.");
     }
 }
 
@@ -82,7 +82,7 @@ void finalize_internals(void* p0) {
 
     if (i != NULL_POINTER) {
 
-        log_message((void*) &INFO_LOG_LEVEL, "Finalize internals.");
+        log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize internals.");
 
 /*??
         finalize_ms_windows(i->ms_windows);
@@ -100,7 +100,7 @@ void finalize_internals(void* p0) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize internals. The internals is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize internals. The internals is null.");
     }
 }
 

@@ -28,7 +28,7 @@
  * For higher performance, it is mostly better to use floating point numbers
  * (float) which can be calculated by the Arithmetic Logic Unit (ALU).
  *
- * @version $Revision: 1.12 $ $Date: 2004-04-21 11:02:33 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,7 +63,7 @@ static const int DENOMINATOR_INDEX = 1;
  */
 void create_fraction(void* p0) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Create fraction.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create fraction.");
 
     // The fraction.
     create_array(p0, (void*) &FRACTION_SIZE);
@@ -76,7 +76,7 @@ void create_fraction(void* p0) {
  */
 void destroy_fraction(void* p0) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Destroy fraction.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy fraction.");
 
     // The fraction.
     destroy_array(p0, (void*) &FRACTION_SIZE);
@@ -91,7 +91,7 @@ void destroy_fraction(void* p0) {
  */
 void initialize_fraction(void* p0, const void* p1, const void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Initialize fraction.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize fraction.");
 
 //??    sscanf(p1, %l, (void*) &(m->value));
 
@@ -111,9 +111,9 @@ void initialize_fraction(void* p0, const void* p1, const void* p2) {
  * @param p1 the persistent model
  * @param p2 the persistent model size
  */
-void finalize_fraction_model(void* p0, void* p1, void* p2) {
+void finalize_fraction(void* p0, void* p1, void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Finalize fraction.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize fraction.");
 
     // Initialize elements.
     int d = 0;
