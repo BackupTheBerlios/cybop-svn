@@ -50,7 +50,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.11 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-10-27 13:27:16 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -475,28 +475,39 @@ void resize_array(void* p0, const void* p1, const void* p2) {
 void compare_arrays(const void* p0, const void* p1, const void* p2, const void* p3,
     void* p4, const void* p5) {
 
-    if (p3 != NULL_POINTER) {
+    // return value standard 0 (rolf)
+    if ( p4 != NULL_POINTER ) {
+    	
+    	int* r = (int*) p4;
+    	*r = 0;
 
-        int* sc = (int*) p3;
-
-        if (p1 != NULL_POINTER) {
-
-            int* fc = (int*) p1;
-
-            if (*fc == *sc) {
-
-                compare_array_elements(p0, p2, p5, p3, p4);
-            }
-
-        } else {
-
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
-        }
-
+	    if (p3 != NULL_POINTER) {
+	
+	        int* sc = (int*) p3;
+	
+	        if (p1 != NULL_POINTER) {
+	
+	            int* fc = (int*) p1;
+	
+	            if (*fc == *sc) {
+	
+	                compare_array_elements(p0, p2, p5, p3, p4);
+	            }
+	
+	        } else {
+	
+	//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
+	        }
+	
+	    } else {
+	
+	//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
+	    }
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
+	//??    log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
     }
+    	
 }
 
 /* ARRAY_SOURCE */
