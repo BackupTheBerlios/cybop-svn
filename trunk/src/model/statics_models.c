@@ -27,7 +27,7 @@
  * Complex models consist of other complex models and primitive models.
  * Primitive models are the final abstraction in software.
  *
- * @version $Revision: 1.11 $ $Date: 2004-04-21 11:10:53 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,8 +38,11 @@
 // Operation models.
 //
 
+/** The operation abstraction array. */
+static const char OPERATION_ABSTRACTION_ARRAY[] = {'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n'};
+
 /** The operation abstraction. */
-static const char OPERATION_ABSTRACTION[] = {'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n'};
+static const char* OPERATION_ABSTRACTION = OPERATION_ABSTRACTION_ARRAY;
 
 /** The operation abstraction size. */
 static const int OPERATION_ABSTRACTION_SIZE = 9;

@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.20 $ $Date: 2004-04-21 11:10:52 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -114,7 +114,7 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
         int i = -1;
         void* s = NULL_POINTER;
         int p = NORMAL_PRIORITY;
-        void* a = NULL_POINTER;
+        char* a = NULL_CHARACTER_POINTER;
         int as = 0;
 
         //?? Testing!
@@ -149,28 +149,36 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
             get_signal(p0, (void*) &i, (void*) &s, (void*) &p, (void*) &a, (void*) &as);
 
+            fprintf(stderr, "wait s: %d\n", s);
+            fprintf(stderr, "wait p: %d\n", p);
+            fprintf(stderr, "wait a: %d\n", a);
+            fprintf(stderr, "wait astr: %s\n", "test");
+            fprintf(stderr, "wait astr: %s\n", a);
+            fprintf(stderr, "wait as: %d\n", as);
+
             // Abstraction and priority are removed internally,
             // together with the signal.
+            fputs("wait TEST 0\n", stderr);
             remove_signal(p0, (void*) &i);
 
             // Destroy signal.
             int ss = 0;
             void* pers = NULL_POINTER;
             int perss = 0;
+            fputs("wait TEST 1\n", stderr);
             destroy_model((void*) &s, (void*) &ss, (void*) &pers, (void*) &perss, (void*) &a, (void*) &as);
 
             // The comparison result.
             int r = 0;
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &"TEST 0");
-
             // Handle compound signal.
             //?? CAUTION! Still compare sizes here!
+            fputs("wait TEST 2\n", stderr);
             compare_array_elements((void*) &a, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_SIZE, (void*) &r);
 
             if (r == 1) {
 
-                log_message((void*) &INFO_LOG_LEVEL, (void*) &"TEST 1");
+                fputs("wait TEST 3\n", stderr);
                 handle_compound_signal(p0, (void*) &s, (void*) &p);
 
             } else {
@@ -181,11 +189,12 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
             if (r == 1) {
 
-                log_message((void*) &INFO_LOG_LEVEL, (void*) &"TEST 2");
+                fputs("TEST 4\n", stderr);
                 handle_operation_signal((void*) &s, p1, p2, p3, (void*) &f);
 
             } else {
 
+                fputs("TEST 5\n", stderr);
                 log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not handle signal. The signal abstraction is unknown.");
 
             } // Operation signal.
@@ -245,21 +254,21 @@ int main(int p0, char** p1) {
             void* sm = NULL_POINTER;
             create_signal_memory((void*) &sm);
 
-            fputs("TEST 0\n", stderr);
-
-            // Create (transient) startup signal from (persistent) cybol source.
+            // Create (transient) startup signal from (persistent) cybol source
+            // whose location was given at command line.
             void* ss = NULL_POINTER;
             int sss = 0;
             char* p = p1[1];
             int ps = strlen(p1[1]);
-//??            create_model((void*) &ss, (void*) &sss, (void*) &p, (void*) &ps, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);
-
-            fputs("TEST 1\n", stderr);
+            create_model((void*) &ss, (void*) &sss, (void*) &p, (void*) &ps, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);
 
             // Add startup signal to signal memory.
             set_signal((void*) &sm, (void*) &ss, (void*) &NORMAL_PRIORITY, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);
-
-            fputs("TEST 2\n", stderr);
+            fprintf(stderr, "set sm: %d\n", sm);
+            fprintf(stderr, "set ss: %d\n", ss);
+            fprintf(stderr, "set sss: %d\n", sss);
+            fprintf(stderr, "set o: %d\n", OPERATION_ABSTRACTION);
+            fprintf(stderr, "set ostr: %s\n", OPERATION_ABSTRACTION);
 
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)

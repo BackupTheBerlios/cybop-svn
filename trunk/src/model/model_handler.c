@@ -59,7 +59,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.34 $ $Date: 2004-04-21 11:10:53 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -899,8 +899,8 @@ void set_model_part_by_index(void* p0, const void* p1, const void* p2, const voi
             void* cms = NULL_POINTER;
 
             // Get elements.
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
@@ -928,26 +928,26 @@ void set_model_part_by_index(void* p0, const void* p1, const void* p2, const voi
                 s = s * 2 + 1;
 
                 // Resize elements.
-                resize_array(n, (void*) &s);
-                resize_array(ns, (void*) &s);
-                resize_array(pa, (void*) &s);
-                resize_array(pas, (void*) &s);
-                resize_array(pl, (void*) &s);
-                resize_array(pls, (void*) &s);
-                resize_array(pm, (void*) &s);
-                resize_array(pms, (void*) &s);
-                resize_array(poa, (void*) &s);
-                resize_array(poas, (void*) &s);
-                resize_array(pol, (void*) &s);
-                resize_array(pols, (void*) &s);
-                resize_array(pom, (void*) &s);
-                resize_array(poms, (void*) &s);
-                resize_array(ca, (void*) &s);
-                resize_array(cas, (void*) &s);
-                resize_array(cl, (void*) &s);
-                resize_array(cls, (void*) &s);
-                resize_array(cm, (void*) &s);
-                resize_array(cms, (void*) &s);
+                resize_array((void*) &n, (void*) &s);
+                resize_array((void*) &ns, (void*) &s);
+                resize_array((void*) &pa, (void*) &s);
+                resize_array((void*) &pas, (void*) &s);
+                resize_array((void*) &pl, (void*) &s);
+                resize_array((void*) &pls, (void*) &s);
+                resize_array((void*) &pm, (void*) &s);
+                resize_array((void*) &pms, (void*) &s);
+                resize_array((void*) &poa, (void*) &s);
+                resize_array((void*) &poas, (void*) &s);
+                resize_array((void*) &pol, (void*) &s);
+                resize_array((void*) &pols, (void*) &s);
+                resize_array((void*) &pom, (void*) &s);
+                resize_array((void*) &poms, (void*) &s);
+                resize_array((void*) &ca, (void*) &s);
+                resize_array((void*) &cas, (void*) &s);
+                resize_array((void*) &cl, (void*) &s);
+                resize_array((void*) &cls, (void*) &s);
+                resize_array((void*) &cm, (void*) &s);
+                resize_array((void*) &cms, (void*) &s);
 
                 // Set array size.
                 set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
@@ -1048,7 +1048,7 @@ void set_model_part_by_name(void* p0, const void* p1, const void* p2,
             if (p1 != NULL_POINTER) {
 
                 // The name.
-                void** n = (void**) p1;
+                char** n = (char**) p1;
 
                 if (i >= 0) {
 
@@ -1062,7 +1062,7 @@ void set_model_part_by_name(void* p0, const void* p1, const void* p2,
                                 // Example: "hello.test"
                                 // The index of the separator is 5.
                                 // The starting index of the remaining name "test" is 6 = 5 + 1.
-                                void* r = (void*) (n + i + 1);
+                                char* r = (char*) (*n + i + 1);
 
                                 // The remaining name size is the full name size decreased
                                 // by the separator index increased by one.
@@ -1234,8 +1234,8 @@ void remove_model_part_by_index(void* p0, const void* p1) {
             void* cms = NULL_POINTER;
 
             // Get elements.
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
@@ -1282,7 +1282,7 @@ void remove_model_part_by_index(void* p0, const void* p1) {
                 remove_array_element((void*) &cms, (void*) &POINTER_ARRAY, (void*) &c, p1);
 
                 // Decrement count.
-                c++;
+                c--;
 
                 // Set array count.
                 set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
@@ -1345,7 +1345,7 @@ void remove_model_part_by_name(void* p0, const void* p1, const void* p2) {
                                 // Example: "hello.test"
                                 // The index of the separator is 5.
                                 // The starting index of the remaining name "test" is 6 = 5 + 1.
-                                void* r = (void*) (n + i + 1);
+                                void* r = (void*) (*n + i + 1);
 
                                 // The remaining name size is the full name size decreased
                                 // by the separator index increased by one.
@@ -1494,8 +1494,8 @@ void get_model_part_by_index(const void* p0, const void* p1,
             void* cms = NULL_POINTER;
 
             // Get elements.
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
+            get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
@@ -1616,7 +1616,7 @@ void get_model_part_by_name(const void* p0, const void* p1, const void* p2,
                                 // Example: "hello.test"
                                 // The index of the separator is 5.
                                 // The starting index of the remaining name "test" is 6 = 5 + 1.
-                                void* r = (void*) (n + i + 1);
+                                void* r = (void*) (*n + i + 1);
 
                                 // The remaining name size is the full name size decreased
                                 // by the separator index increased by one.

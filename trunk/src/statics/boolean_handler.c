@@ -29,7 +29,7 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.17 $ $Date: 2004-04-21 11:10:53 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

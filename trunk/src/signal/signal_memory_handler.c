@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.33 $ $Date: 2004-04-21 11:10:53 $ $Author: christian $
+ * @version $Revision: 1.34 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,7 +96,7 @@ void create_signal_memory(void* p0) {
     create_array(p0, (void*) &SIGNAL_MEMORY_SIZE);
 
     // Initialize elements.
-    int s = 0;
+    int s = 10; //?? CHANGE to int s = 0;
     int c = 0;
     void* sig = NULL_POINTER;
     void* p = NULL_POINTER;
@@ -229,11 +229,22 @@ void set_signal(void* p0, const void* p1, const void* p2, const void* p3, const 
             // Increase size.
             s = s * 2 + 1;
 
+            fprintf(stderr, "set signal s: %d\n", s);
+            fprintf(stderr, "set signal c: %d\n", c);
+            fprintf(stderr, "set signal sig: %d\n", sig);
+            fprintf(stderr, "set signal p: %d\n", p);
+            fprintf(stderr, "set signal a: %d\n", a);
+            fprintf(stderr, "set signal as: %d\n", as);
+
             // Resize elements.
-            resize_array(sig, (void*) &s);
-            resize_array(p, (void*) &s);
-            resize_array(a, (void*) &s);
-            resize_array(as, (void*) &s);
+            resize_array((void*) &sig, (void*) &s);
+            fputs("set signal TEST 0\n", stderr);
+            resize_array((void*) &p, (void*) &s);
+            fputs("set signal TEST 1\n", stderr);
+            resize_array((void*) &a, (void*) &s);
+            fputs("set signal TEST 2\n", stderr);
+            resize_array((void*) &as, (void*) &s);
+            fputs("set signal TEST 3\n", stderr);
 
             // Set array size which is equal for all arrays.
             set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_SIZE_INDEX, (void*) &s);
@@ -245,7 +256,7 @@ void set_signal(void* p0, const void* p1, const void* p2, const void* p3, const 
             set_array_element((void*) &sig, (void*) &POINTER_ARRAY, (void*) &i, p1);
             set_array_element((void*) &p, (void*) &INTEGER_ARRAY, (void*) &i, p2);
             set_array_element((void*) &a, (void*) &POINTER_ARRAY, (void*) &i, p3);
-            set_array_element((void*) &as, (void*) &POINTER_ARRAY, (void*) &i, p4);
+            set_array_element((void*) &as, (void*) &INTEGER_ARRAY, (void*) &i, p4);
 
             // Increment count.
             c++;
@@ -294,19 +305,31 @@ void remove_signal(void* p0, const void* p1) {
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
 
+            fprintf(stderr, "i: %d\n", *i);
+            fprintf(stderr, "s: %d\n", s);
+            fprintf(stderr, "c: %d\n", c);
+            fprintf(stderr, "sig: %d\n", sig);
+            fprintf(stderr, "p: %d\n", p);
+            fprintf(stderr, "a: %d\n", a);
+            fprintf(stderr, "as: %d\n", as);
+
             if (*i < c) {
 
+                fputs("TEST a\n", stderr);
                 // Remove signal.
                 remove_array_element((void*) &sig, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                fputs("TEST d\n", stderr);
                 remove_array_element((void*) &p, (void*) &INTEGER_ARRAY, (void*) &c, p1);
                 remove_array_element((void*) &a, (void*) &POINTER_ARRAY, (void*) &c, p1);
-                remove_array_element((void*) &as, (void*) &POINTER_ARRAY, (void*) &c, p1);
+                remove_array_element((void*) &as, (void*) &INTEGER_ARRAY, (void*) &c, p1);
 
                 // Decrement count.
                 c--;
 
                 // Set count.
+                fputs("TEST e\n", stderr);
                 set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_COUNT_INDEX, (void*) &c);
+                fputs("TEST f\n", stderr);
 
             } else {
 
@@ -364,7 +387,7 @@ void get_signal(const void* p0, const void* p1, void* p2, void* p3, void* p4, vo
                 get_array_element((void*) &sig, (void*) &POINTER_ARRAY, p1, p2);
                 get_array_element((void*) &p, (void*) &INTEGER_ARRAY, p1, p3);
                 get_array_element((void*) &a, (void*) &POINTER_ARRAY, p1, p4);
-                get_array_element((void*) &as, (void*) &POINTER_ARRAY, p1, p5);
+                get_array_element((void*) &as, (void*) &INTEGER_ARRAY, p1, p5);
 
             } else {
 
@@ -459,10 +482,10 @@ void handle_compound_signal(void* p0, const void* p1, const void* p2) {
     void* pm = NULL_POINTER;
 
     // Get elements.
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+    get_array_element(p1, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
+    get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
+    get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
+    get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
 
     // The part signal model.
     int j = 0;

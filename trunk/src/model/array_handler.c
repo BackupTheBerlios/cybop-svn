@@ -48,7 +48,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.29 $ $Date: 2004-04-21 11:10:53 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -172,21 +172,26 @@ void resize_array(void* p0, const void* p1) {
     if (p1 != NULL_POINTER) {
 
         int* s = (int*) p1;
+        fprintf(stderr, "resize s: %d\n", *s);
 
         if (p0 != NULL_POINTER) {
 
             void** a = (void**) p0;
+            fprintf(stderr, "resize a1: %d\n", *a);
 
             // Create a new array with extended size.
             *a = (void*) realloc(*a, *s);
+            fprintf(stderr, "resize a2: %d\n", *a);
 
         } else {
 
+            fputs("ERROR array\n", stderr);
             log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize array. The array is null.");
         }
 
     } else {
 
+        fputs("ERROR size\n", stderr);
         log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize array. The size is null.");
     }
 }

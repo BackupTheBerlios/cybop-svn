@@ -25,7 +25,7 @@
  *
  * It contains read and write procedures.
  *
- * @version $Revision: 1.11 $ $Date: 2004-04-21 11:10:52 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

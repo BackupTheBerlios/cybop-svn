@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.14 $ $Date: 2004-04-21 11:10:52 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,129 +60,136 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
     int r = 0;
 
     // Do not consider an empty persistent model further.
-    int* s = (int*) p3;
+    if (p3 != NULL_POINTER) {
 
-    if (*s != 0) {
+        int* s = (int*) p3;
 
-        //
-        // Compound.
-        //
+        if (*s != 0) {
 
-        //?? CAUTION! Still compare sizes here!
-        compare_array_elements(p4, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_SIZE, (void*) &r);
+            //
+            // Compound.
+            //
 
-        if (r == 1) {
+            //?? CAUTION! Still compare sizes here!
+            compare_array_elements(p4, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_SIZE, (void*) &r);
 
-            create_compound(p0);
-            initialize_compound(p0, p2, p3);
+            if (r == 1) {
 
-        } else {
+                create_compound(p0);
+                initialize_compound(p0, p2, p3);
 
-        //
-        // Logic and Dynamics.
-        //
+            } else {
 
-        //?? CAUTION! Still compare sizes here!
-        compare_array_elements(p4, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_SIZE, (void*) &r);
+            //
+            // Logic and Dynamics.
+            //
 
-        if (r == 1) {
+            //?? CAUTION! Still compare sizes here!
+            compare_array_elements(p4, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_SIZE, (void*) &r);
 
-            create_operation(p0, p1);
-            initialize_operation(p0, p1, p2, p3);
+            if (r == 1) {
 
-        } else {
+                create_operation(p0, p1);
+                initialize_operation(p0, p1, p2, p3);
 
-        //
-        // Statics.
-        //
+            } else {
 
-        //?? CAUTION! Still compare sizes here!
-        compare_array_elements(p4, (void*) &STRING_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &STRING_ABSTRACTION_SIZE, (void*) &r);
+            //
+            // Statics.
+            //
 
-        if (r == 1) {
+            //?? CAUTION! Still compare sizes here!
+            compare_array_elements(p4, (void*) &STRING_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &STRING_ABSTRACTION_SIZE, (void*) &r);
 
-            initialize_string(p0, p1, p2, p3);
+            if (r == 1) {
 
-        } else {
+                initialize_string(p0, p1, p2, p3);
 
-        //?? CAUTION! Still compare sizes here!
-        compare_array_elements(p4, (void*) &BOOLEAN_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &BOOLEAN_ABSTRACTION_SIZE, (void*) &r);
+            } else {
 
-        if (r == 1) {
+            //?? CAUTION! Still compare sizes here!
+            compare_array_elements(p4, (void*) &BOOLEAN_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &BOOLEAN_ABSTRACTION_SIZE, (void*) &r);
 
-            // No creation because primitive type.
-            initialize_boolean(p0, p2, p3);
+            if (r == 1) {
 
-        } else {
+                // No creation because primitive type.
+                initialize_boolean(p0, p2, p3);
 
-        //?? CAUTION! Still compare sizes here!
-        compare_array_elements(p4, (void*) &INTEGER_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &INTEGER_ABSTRACTION_SIZE, (void*) &r);
+            } else {
 
-        if (r == 1) {
+            //?? CAUTION! Still compare sizes here!
+            compare_array_elements(p4, (void*) &INTEGER_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &INTEGER_ABSTRACTION_SIZE, (void*) &r);
 
-            // No creation because primitive type.
-            initialize_integer(p0, p2, p3);
+            if (r == 1) {
 
-        } else {
+                // No creation because primitive type.
+                initialize_integer(p0, p2, p3);
 
-        //?? CAUTION! Still compare sizes here!
-        compare_array_elements(p4, (void*) &VECTOR_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &VECTOR_ABSTRACTION_SIZE, (void*) &r);
+            } else {
 
-        if (r == 1) {
+            //?? CAUTION! Still compare sizes here!
+            compare_array_elements(p4, (void*) &VECTOR_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &VECTOR_ABSTRACTION_SIZE, (void*) &r);
 
-            create_vector(p0);
-            initialize_vector(p0, p2, p3);
+            if (r == 1) {
 
-        } else {
+                create_vector(p0);
+                initialize_vector(p0, p2, p3);
 
-        //?? CAUTION! Still compare sizes here!
-        compare_array_elements(p4, (void*) &DOUBLE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DOUBLE_ABSTRACTION_SIZE, (void*) &r);
+            } else {
 
-        if (r == 1) {
+            //?? CAUTION! Still compare sizes here!
+            compare_array_elements(p4, (void*) &DOUBLE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DOUBLE_ABSTRACTION_SIZE, (void*) &r);
 
-            // No creation because primitive type.
-            initialize_double(p0, p2, p3);
+            if (r == 1) {
 
-        } else {
+                // No creation because primitive type.
+                initialize_double(p0, p2, p3);
 
-        //?? CAUTION! Still compare sizes here!
-        compare_array_elements(p4, (void*) &FRACTION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &FRACTION_ABSTRACTION_SIZE, (void*) &r);
+            } else {
 
-        if (r == 1) {
+            //?? CAUTION! Still compare sizes here!
+            compare_array_elements(p4, (void*) &FRACTION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &FRACTION_ABSTRACTION_SIZE, (void*) &r);
 
-            create_fraction(p0);
-            initialize_fraction(p0, p2, p3);
+            if (r == 1) {
 
-        } else {
+                create_fraction(p0);
+                initialize_fraction(p0, p2, p3);
 
-        //?? CAUTION! Still compare sizes here!
-        compare_array_elements(p4, (void*) &COMPLEX_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPLEX_ABSTRACTION_SIZE, (void*) &r);
+            } else {
 
-        if (r == 1) {
+            //?? CAUTION! Still compare sizes here!
+            compare_array_elements(p4, (void*) &COMPLEX_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPLEX_ABSTRACTION_SIZE, (void*) &r);
 
-            create_complex(p0);
-            initialize_complex(p0, p2, p3);
+            if (r == 1) {
 
-        } else {
+                create_complex(p0);
+                initialize_complex(p0, p2, p3);
 
-        //?? CAUTION! Still compare sizes here!
-        compare_array_elements(p4, (void*) &TIME_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &TIME_ABSTRACTION_SIZE, (void*) &r);
+            } else {
 
-        if (r == 1) {
+            //?? CAUTION! Still compare sizes here!
+            compare_array_elements(p4, (void*) &TIME_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &TIME_ABSTRACTION_SIZE, (void*) &r);
 
-            create_time(p0);
-            initialize_time(p0, p2, p3);
+            if (r == 1) {
 
-        } // Time.
-        } // Complex.
-        } // Fraction.
-        } // Float.
-        } // Vector.
-        } // Integer.
-        } // Boolean.
-        } // String.
-        } // Operation.
-        } // Compound.
+                create_time(p0);
+                initialize_time(p0, p2, p3);
+
+            } // Time.
+            } // Complex.
+            } // Fraction.
+            } // Float.
+            } // Vector.
+            } // Integer.
+            } // Boolean.
+            } // String.
+            } // Operation.
+            } // Compound.
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create model. The persistent model size is null.");
     }
 }
 

@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.3 $ $Date: 2004-04-21 11:10:53 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -174,6 +174,13 @@ void test_character_array_multiple_elements() {
  * by simply commenting/ uncommenting the corresponding lines.
  */
 void test() {
+
+    // How to use printf to check parameter values.
+    // The printf function uses stdout for output, but nothing appears on console.
+    // Therefore, fprintf is used and stderr is given for output.
+    // Example:
+    // int x = 2;
+    // fprintf(stderr, "The value of x is: %d\n", x);
 
 //    test_stdout_stderr();
 //    test_character_array_with_termination();

@@ -23,7 +23,7 @@
  *
  * This file contains global constants.
  *
- * @version $Revision: 1.6 $ $Date: 2004-04-21 11:10:52 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
