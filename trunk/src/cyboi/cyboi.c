@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.7 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-05-27 14:47:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,7 +34,6 @@
 #define CYBOI_SOURCE
 
 #include <stdlib.h>
-#include <string.h>
 #include "../constants/constants.c"
 #include "../cyboi/internals.c"
 #include "../logger/logger.c"
@@ -46,12 +45,6 @@
 
 /**
  * Waits for signals.
- *
- * The processing of signals follows this sequence:
- * - receive
- * - handle
- * - send
- * - reset
  *
  * @param p0 the signal memory
  * @param p1 the statics
@@ -76,8 +69,8 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
         int p = NORMAL_PRIORITY;
         // The abstraction.
         char* a = CHARACTER_NULL_POINTER;
-        // The abstraction size.
-        int as = 0;
+        // The abstraction count.
+        int ac = 0;
         // The signal size.
         int ss = 0;
         // The persistent model.
@@ -119,7 +112,7 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
             if (i >= 0) {
 
-                get_signal(p0, (void*) &i, (void*) &s, (void*) &p, (void*) &a, (void*) &as);
+                get_signal(p0, (void*) &i, (void*) &s, (void*) &p, (void*) &a, (void*) &ac);
 
                 // Abstraction and priority are removed internally,
                 // together with the signal.
@@ -135,7 +128,7 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
                 if (d == 0) {
 
-                    if (as == COMPOUND_ABSTRACTION_COUNT) {
+                    if (ac == COMPOUND_ABSTRACTION_COUNT) {
 
                         compare_array_elements((void*) &a, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r);
 
@@ -154,7 +147,7 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
                 if (d == 0) {
 
-                    if (as == OPERATION_ABSTRACTION_COUNT) {
+                    if (ac == OPERATION_ABSTRACTION_COUNT) {
 
                         compare_array_elements((void*) &a, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r);
 
@@ -178,8 +171,8 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
                 p = NORMAL_PRIORITY;
                 // Reset abstraction.
                 a = CHARACTER_NULL_POINTER;
-                // Reset abstraction size.
-                as = 0;
+                // Reset abstraction count.
+                ac = 0;
                 // Reset highest priority index.
                 i == -1;
                 // Reset done flag.

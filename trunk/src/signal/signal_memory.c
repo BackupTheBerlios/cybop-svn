@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.16 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-05-27 14:47:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -490,9 +490,13 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
     void* ps = NULL_POINTER;
 
     // Get elements.
+    fputs("TEST 0\n", stderr);
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARAMETERS_COUNT_INDEX, (void*) &s);
+    fputs("TEST 1\n", stderr);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &p);
+    fputs("TEST 2\n", stderr);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &ps);
+    fputs("TEST 3\n", stderr);
 
     // Initialize parameter names.
     // The first parameter p0 is the operation name.
