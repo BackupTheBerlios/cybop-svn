@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.6 $ $Date: 2004-08-15 22:11:29 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-08-23 07:52:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,264 +32,21 @@
 
 //?? #include <libxml/parser.h>
 //?? #include <libxml/tree.h>
+#include "../creator/boolean_creator.c"
+#include "../creator/complex_creator.c"
+#include "../creator/compound_creator.c"
+#include "../creator/double_creator.c"
+#include "../creator/fraction_creator.c"
+#include "../creator/integer_creator.c"
+#include "../creator/operation_creator.c"
+#include "../creator/string_creator.c"
+#include "../creator/time_creator.c"
+#include "../creator/vector_creator.c"
+#include "../creator/xml_node_creator.c"
 #include "../global/abstraction_constants.c"
 #include "../logger/logger.c"
 #include "../parser/xml_parser.c"
-#include "../state/boolean.c"
-#include "../state/complex.c"
-#include "../state/compound.c"
-#include "../state/double.c"
-#include "../state/fraction.c"
-#include "../state/integer.c"
-#include "../state/operation.c"
-#include "../state/string.c"
-#include "../state/time.c"
-#include "../state/vector.c"
-#include "../state/xml_tag.c"
 #include "../translator/xml_translator.c"
-
-/**
- * Initializes a transient model from a persistent model.
- *
- * @param p0 the transient model
- * @param p1 the transient model count
- * @param p2 the transient model size
- * @param p3 the persistent model
- * @param p4 the persistent model count
- * @param p5 the abstraction
- * @param p6 the abstraction count
- */
-void initialize_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, const void* p5, const void* p6) {
-
-    // The done flag.
-    int d = 0;
-    // The comparison result.
-    int r = 0;
-
-    if (p6 != NULL_POINTER) {
-
-        int* ac = (int*) p6;
-
-        //
-        // Three comparisons are done:
-        // 1 done flag (no further processing if an abstraction already matched)
-        // 2 abstraction size
-        // 3 abstraction characters
-        //
-        // The order is important!
-        // The size needs to be checked before the arrays are handed over to the
-        // comparison procedure. Otherwise, array boundaries might get crossed.
-        //
-
-        //
-        // Compound.
-        //
-
-        if (d == 0) {
-
-            if (*ac == COMPOUND_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p5, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    // Initialize xml model
-                    // and its count and size.
-                    void* m = NULL_POINTER;
-                    int mc = 0;
-                    int ms = 0;
-
-                    // Create xml model.
-                    create_xml_tag((void*) &m, (void*) &ms);
-
-                    // Parse persistent stream into xml model.
-                    parse_xml((void*) &m, (void*) &mc, (void*) &ms, p3, p4);
-
-                    // Decode xml model into knowledge model compound.
-                    decode_xml(p0, p1, p2, (void*) &m, (void*) &mc);
-
-                    // Destroy xml model.
-                    destroy_xml_tag((void*) &m, (void*) &ms);
-
-                    d = 1;
-                }
-            }
-        }
-
-        //
-        // Logic.
-        //
-
-        if (d == 0) {
-
-            if (*ac == OPERATION_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p5, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    initialize_operation(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
-        }
-
-        //
-        // State.
-        //
-
-        if (d == 0) {
-
-            if (*ac == STRING_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p5, (void*) &STRING_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &STRING_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    initialize_string(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*ac == BOOLEAN_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p5, (void*) &BOOLEAN_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &BOOLEAN_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    initialize_boolean(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*ac == INTEGER_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p5, (void*) &INTEGER_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &INTEGER_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    initialize_integer(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*ac == VECTOR_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p5, (void*) &VECTOR_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &VECTOR_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    initialize_vector(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*ac == DOUBLE_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p5, (void*) &DOUBLE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DOUBLE_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    initialize_double(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*ac == FRACTION_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p5, (void*) &FRACTION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &FRACTION_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    initialize_fraction(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*ac == COMPLEX_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p5, (void*) &COMPLEX_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPLEX_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    initialize_complex(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*ac == TIME_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p5, (void*) &TIME_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &TIME_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    initialize_time(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
-        }
-
-/*??
-        if (d == 0) {
-
-            if (*ac == SXW_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p5, (void*) &SXW_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &SXW_ABSTRACTION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    //?? For other kinds of file (stream) formats,
-                    //?? for example from special applications like Open Office,
-                    //?? use a similar handling like for compound above!
-
-                    //?? Images possibly also have to be handled that way.
-                    //?? At first, the single image parameters have to be parsed
-                    //?? and written into a special parameter model in memory;
-                    //?? then that model has to be decoded into a knowledge model!
-                    //?? May be this idea is rubbish and will not work!
-                    //?? For the beginning, better handle images as primitve types.
-
-                    d = 1;
-                }
-            }
-        }
-*/
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not interpret model. The abstraction count is null.");
-    }
-}
 
 /**
  * Creates a transient copy of a persistent source.
@@ -556,12 +313,12 @@ void handle_create(const void* p0, const void* p1, const void* p2, const void* p
                         // The "read model" and "parsed model" are temporary helper models;
                         // they get created and destroyed during creation handling.
                         //
-                        //                 read                    parse                    decode
-                        // source code  ----------> read model  ----------> parsed model ----------> decoded model
-                        // (persistent)             (transient)             (transient)              (transient)
+                        //                receive                           parse                   decode
+                        // source code  ----------> received/read model  ----------> parsed model ----------> decoded model
+                        // (persistent)             (transient)                      (transient)              (transient)
                         //
                         // The counterparts of the creation procedures are:
-                        // - read <--> write
+                        // - receive (read) <--> send (write)
                         // - parse <--> serialize
                         // - decode <--> encode
                         //
@@ -740,6 +497,32 @@ void handle_create(const void* p0, const void* p1, const void* p2, const void* p
                             (void*) &tpom, (void*) &tpomc, (void*) &tpoms,
                             (void*) &tpoa, (void*) &tpoac, (void*) &tpoas,
                             (void*) &tpoc, (void*) &tpocc, (void*) &tpocs);
+*/
+
+/*??
+                        //
+                        // This is an older example taken from the old compound.c
+                        // Integrate this block into the procedures above and
+                        // then delete these code lines!
+                        //
+
+                        // Initialize xml model
+                        // and its count and size.
+                        void* m = NULL_POINTER;
+                        int mc = 0;
+                        int ms = 0;
+
+                        // Create xml model.
+                        create_xml_node((void*) &m, (void*) &ms);
+
+                        // Parse persistent stream into xml model.
+                        parse_xml((void*) &m, (void*) &mc, (void*) &ms, p3, p4);
+
+                        // Decode xml model into knowledge model compound.
+                        decode_xml(p0, p1, p2, (void*) &m, (void*) &mc);
+
+                        // Destroy xml model.
+                        destroy_xml_node((void*) &m, (void*) &ms);
 */
 
                     } else {

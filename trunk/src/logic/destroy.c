@@ -23,7 +23,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.4 $ $Date: 2004-08-15 22:11:29 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-08-23 07:52:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,16 +31,6 @@
 #define DESTROY_SOURCE
 
 #include "../logger/logger.c"
-#include "../state/boolean.c"
-#include "../state/complex.c"
-#include "../state/compound.c"
-#include "../state/double.c"
-#include "../state/fraction.c"
-#include "../state/integer.c"
-#include "../state/operation.c"
-#include "../state/string.c"
-#include "../state/time.c"
-#include "../state/vector.c"
 
 /**
  * Serializes a transient model to a persistent model.

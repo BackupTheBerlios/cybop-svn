@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2004-08-21 10:09:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-08-23 07:52:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -237,6 +237,32 @@ void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
                 }
             }
         }
+
+/*??
+        if (d == 0) {
+
+            if (*ac == SXW_ABSTRACTION_COUNT) {
+
+                compare_array_elements(p5, (void*) &SXW_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &SXW_ABSTRACTION_COUNT, (void*) &r);
+
+                if (r == 1) {
+
+                    //?? For other kinds of file (stream) formats,
+                    //?? for example from special applications like Open Office,
+                    //?? use a similar handling like for compound above!
+
+                    //?? Images possibly also have to be handled that way.
+                    //?? At first, the single image parameters have to be parsed
+                    //?? and written into a special parameter model in memory;
+                    //?? then that model has to be decoded into a knowledge model!
+                    //?? May be this idea is rubbish and will not work!
+                    //?? For the beginning, better handle images as primitve types.
+
+                    d = 1;
+                }
+            }
+        }
+*/
 
     } else {
 

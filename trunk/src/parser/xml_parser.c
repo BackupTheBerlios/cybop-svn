@@ -25,7 +25,7 @@
  * - parse an xml stream into an xml model
  * - serialize an xml model into an xml stream
  *
- * @version $Revision: 1.4 $ $Date: 2004-08-13 22:37:50 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-08-23 07:52:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,11 +34,11 @@
 
 #include <libxml/parser.h>
 #include "../array/array.c"
+#include "../creator/xml_node_creator.c"
+#include "../creator/xml_property_creator.c"
 #include "../global/character_constants.c"
 #include "../global/constant.c"
 #include "../logger/logger.c"
-#include "../state/xml_attribute.c"
-#include "../state/xml_tag.c"
 
 //
 // Xml comment tag.
