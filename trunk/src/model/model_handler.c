@@ -28,9 +28,7 @@
 #include <string.h>
 #include "../cybol/cybol_model_handler.c"
 #include "../logger/log_handler.c"
-#include "../model/map.c"
 #include "../model/map_handler.c"
-#include "../model/model.c"
 
 /**
  * This is the model handler.
@@ -41,13 +39,56 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.16 $ $Date: 2004-03-11 22:44:31 $ $Author: christian $
+ * A model represents an abstract description of some real world item
+ * in one of the physical measurements (dimensions):
+ * - space
+ * - time
+ * - mass
+ *
+ * A model can be created by cloning an existing model so that
+ * some place gets allocated in the computer's memory.
+ * Basically, every model can become a template itself,
+ * if copies (other instances) of this model are created.
+ *
+ * @version $Revision: 1.17 $ $Date: 2004-03-29 08:15:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 //
 // Model.
 //
+
+//?? TEMPORARY: old model --> delete later!
+
+//??struct model {
+
+    /** The part abstractions. */
+//??    void* part_abstractions;
+
+    /** The part locations. */
+//??    void* part_locations;
+
+    /** The part models. */
+//??    void* part_models;
+
+    /** The position abstractions. */
+//??    void* position_abstractions;
+
+    /** The position locations. */
+//??    void* position_locations;
+
+    /** The position models. */
+//??    void* position_models;
+
+    /** The constraint abstractions. */
+//??    void* constraint_abstractions;
+
+    /** The constraint locations. */
+//??    void* constraint_locations;
+
+    /** The constraint models. */
+//??    void* constraint_models;
+//??};
 
 /**
  * Creates the model containers.

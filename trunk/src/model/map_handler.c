@@ -44,7 +44,7 @@
  *
  * A map's elements can such be accessed over their name or index.
  *
- * @version $Revision: 1.16 $ $Date: 2004-03-28 22:35:13 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-03-29 08:15:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -158,6 +158,70 @@ void finalize_map(void* p0) {
 //
 // Map element.
 //
+
+/**
+ * Gets the map element index.
+ *
+ * @param p0 the map
+ * @param p1 the name
+ * @param p2 the name size
+ * @param p3 the index
+ */
+void get_map_element_index(const void* p0, const void* p1, const void* p2, void* p3) {
+
+    int* index = (int*) p3;
+
+    if (index != (void*) 0) {
+
+        // The map size.
+        int s = 4;
+        // The index.
+        int i;
+
+        // The array size which is always equal for both arrays.
+        i = 0;
+        int as = 0;
+        get_array_element(p0, (void*) &s, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &as);
+
+        // The names array.
+        i = 1;
+        void* n = (void*) 0;
+        get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &n);
+
+        // The names sizes array.
+        i = 2;
+        void* ns = (void*) 0;
+        get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ns);
+
+        // The comparison loop.
+        int j = 0;
+        void* name = (void*) 0;
+        int size = 0;
+        int r = 0;
+
+        while (1) {
+
+            if (j >= as) {
+
+                break;
+            }
+
+            get_array_element((void*) &n, (void*) &as, (void*) &POINTER_ARRAY, (void*) &j, (void*) &name);
+            get_array_element((void*) &ns, (void*) &as, (void*) &POINTER_ARRAY, (void*) &j, (void*) &size);
+            compare_arrays(p1, p2, (void*) &CHARACTER_ARRAY, name, size, (void*) &CHARACTER_ARRAY, (void*) &r);
+
+            if (r == 1) {
+
+                *index = j;
+                break;
+            }
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get map element index. The index is null.");
+    }
+}
 
 /**
  * Returns the next index that can be used to set a map element.
@@ -392,7 +456,7 @@ void set_map_element_with_name(void* p0, const void* p1, const void* p2, const v
 
     // The index of the given name.
     int index = -1;
-    get_array_element_index((void*) &n, (void*) &as, (void*) &POINTER_ARRAY, p1, index);
+    get_map_element_index(p0, p1, p2, index);
 
     if (index != -1) {
 
@@ -473,7 +537,7 @@ void remove_map_element_with_name(void* p0, const void* p1, const void* p2) {
 
     // The index of the given name.
     int index = -1;
-    get_array_element_index((void*) &n, (void*) &as, (void*) &POINTER_ARRAY, p1, index);
+    get_map_element_index(p0, p1, p2, index);
 
     if (index != -1) {
 
@@ -537,11 +601,7 @@ void get_map_element_with_name(const void* p0, const void* p1, const void* p2, v
 
     // The index of the given name.
     int index = -1;
-    get_array_element_index((void*) &n, (void*) &as, (void*) &POINTER_ARRAY, p1, index);
-
-    //?? TODO: insert loop here that compares two string arrays
-    //?? and remembers index when arrays are equal!
-    //?? Also insert this loop to all similar procedures above!
+    get_map_element_index(p0, p1, p2, index);
 
     if (index != -1) {
 
