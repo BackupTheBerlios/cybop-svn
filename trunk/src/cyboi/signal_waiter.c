@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.29 $ $Date: 2005-01-28 23:30:52 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2005-02-08 18:29:29 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -141,6 +141,8 @@ void wait(void* p0) {
 
                                                                 if (id != POINTER_NULL_POINTER) {
 
+                                                                    test_knowledge_model(*k, *kc, 0 );
+
                                                                     //?? For testing only. TODO: Delete these lines later!
                                                                     fprintf(stderr, "wait i: %i\n", i);
                                                                     fprintf(stderr, "wait a: %s\n", (char*) *a);
@@ -151,9 +153,6 @@ void wait(void* p0) {
                                                                     fprintf(stderr, "wait p: %i\n", *((int*) *p));
                                                                     fprintf(stderr, "wait id: %i\n", *((int*) *id));
                                                                     fprintf(stderr, "wait knowledge model: %s\n", "");
-
-                                                                    // Remove signal from signal memory.
-                                                                    remove_signal(*s, *sc, *ss, (void*) &i);
 
                                                                     // CAUTION! Do NOT destroy signal here!
                                                                     // Signals are stored in the logic knowledge tree which gets created
@@ -197,6 +196,9 @@ void wait(void* p0) {
 
                                                                         log_message((void*) WARNING_LOG_LEVEL, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT);
                                                                     }
+
+                                                                    // Remove signal from signal memory.
+                                                                    remove_signal(*s, *sc, *ss, (void*) &i);
 
                                                                     // Destroy signal id.
                                                                     // CAUTION! Do NOT hand over as reference!
