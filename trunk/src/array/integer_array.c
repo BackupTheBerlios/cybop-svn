@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.8 $ $Date: 2004-06-15 11:31:08 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-07-03 08:07:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -157,72 +157,6 @@ void resize_integer_array(void* p0, const void* p1) {
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_RESIZE_INTEGER_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_RESIZE_INTEGER_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
-    }
-}
-
-/**
- * Copies the integer array.
- *
- * @param p0 the source array
- * @param p1 the destination array
- * @param p2 the count
- */
-void copy_integer_array(const void* p0, void* p1, void* p2) {
-
-    if (p2 != NULL_POINTER) {
-
-        int* c = (int*) p2;
-
-        if (p1 != NULL_POINTER) {
-
-            void** da = (void**) p1;
-
-            if (p0 != NULL_POINTER) {
-
-                void** sa = (void**) p0;
-
-                // The loop variable.
-                int j = 0;
-                // The source array element.
-                int* sae = INTEGER_NULL_POINTER;
-                // The destination array element.
-                int* dae = INTEGER_NULL_POINTER;
-                // The size.
-                int s = 0;
-
-                while (1) {
-
-                    if (j >= *c) {
-
-                        break;
-                    }
-
-                    // Determine size.
-                    s = j * INTEGER_PRIMITIVE_SIZE;
-
-                    // Determine the next elements at array plus index.
-                    sae = (int*) (*sa + s);
-                    dae = (int*) (*da + s);
-
-                    // Copy array element.
-                    *dae = *sae;
-
-                    j++;
-                }
-
-            } else {
-
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COPY_INTEGER_ARRAY_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) &COULD_NOT_COPY_INTEGER_ARRAY_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
-            }
-
-        } else {
-
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COPY_INTEGER_ARRAY_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) &COULD_NOT_COPY_INTEGER_ARRAY_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COPY_INTEGER_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_COPY_INTEGER_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
     }
 }
 

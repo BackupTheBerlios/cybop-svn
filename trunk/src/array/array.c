@@ -50,7 +50,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.8 $ $Date: 2004-06-15 11:31:08 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-07-03 08:07:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -173,43 +173,6 @@ void resize_array(void* p0, const void* p1, const void* p2) {
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
-    }
-}
-
-/**
- * Copies the array.
- *
- * @param p0 the source array
- * @param p1 the destination array
- * @param p2 the count
- * @param p3 the type
- */
-void copy_array(const void* p0, void* p1, void* p2, const void* p3) {
-
-    if (p3 != NULL_POINTER) {
-
-        int* t = (int*) p3;
-
-        if (*t == POINTER_ARRAY) {
-
-            copy_pointer_array(p0, p1, p2);
-
-        } else if (*t == INTEGER_ARRAY) {
-
-            copy_integer_array(p0, p1, p2);
-
-        } else if (*t == DOUBLE_ARRAY) {
-
-            copy_double_array(p0, p1, p2);
-
-        } else if (*t == CHARACTER_ARRAY) {
-
-            copy_character_array(p0, p1, p2);
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COPY_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_COPY_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 

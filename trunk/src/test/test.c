@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.17 $ $Date: 2004-06-15 11:31:09 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-07-03 08:07:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,35 +62,6 @@ void test_character_array_with_termination() {
     char test[] = {'t', 'e', 's', 't', ' ', 'c', 'h', 'a', 'r', ' ', 'a', 'r', 'r', 'a', 'y', ' ', 'o', 'k', '\n', '\0'};
 
     fputs(test, stdout);
-}
-
-/**
- * Tests the copying of one source into a destination character array.
- */
-void test_character_array_copy() {
-
-    // The warning log level name is taken as example source array.
-
-    // Initialize transient destination array
-    // and its count and size.
-    // The source array's count and size are copied.
-    void* a = NULL_POINTER;
-    int ac = 0;
-    int as = 0;
-
-    // Create transient destination array
-    // and its count and size.
-    create_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &WARNING_LOG_LEVEL_NAME_COUNT);
-    as = WARNING_LOG_LEVEL_NAME_COUNT;
-    copy_array((void*) &WARNING_LOG_LEVEL_NAME, (void*) &a, (void*) &WARNING_LOG_LEVEL_NAME_COUNT, (void*) &CHARACTER_ARRAY);
-    ac = WARNING_LOG_LEVEL_NAME_COUNT;
-
-    // Print destination array to screen.
-    fputs("\n", stdout);
-    fprintf(stdout, "a: %s\n", a);
-    fprintf(stdout, "as: %i\n", as);
-    fprintf(stdout, "ac: %i\n", ac);
-    fputs("\n", stdout);
 }
 
 /**
@@ -355,7 +326,6 @@ void test() {
 
 //    test_stdout_stderr();
 //    test_character_array_with_termination();
-//    test_character_array_copy();
 //    test_pointer_cast();
 //    test_character_array_single_element();
 //    test_character_array_multiple_elements();

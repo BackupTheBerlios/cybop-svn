@@ -32,7 +32,7 @@
  * A signal is a transient logic model.
  * It is stored in the computer's random access memory (ram).
  *
- * @version $Revision: 1.32 $ $Date: 2004-07-02 20:51:15 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2004-07-03 08:07:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -498,7 +498,8 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
  * @param p4 the signal memory count
  * @param p5 the signal memory size
  */
-void handle_compound_signal(const void* p0, const void* p1, const void* p2, void* p3, void* p4, void* p5) {
+void handle_compound_signal(const void* p0, const void* p1, const void* p2,
+    void* p3, void* p4, void* p5) {
 
     if (p2 != NULL_POINTER) {
 
@@ -586,7 +587,7 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2, void
  */
 void handle_create_model_signal(const void* p0,
     const void* p1, const void* p2, const void* p3,
-    const void* p4, const void* p5, const void* p6) {
+    void* p4, void* p5, void* p6) {
 
     if (p6 != NULL_POINTER) {
 
@@ -937,7 +938,7 @@ void handle_create_model_signal(const void* p0,
  */
 void handle_send_signal(const void* p0,
     const void* p1, const void* p2, const void* p3,
-    const void* p4, const void* p5, void* p6,
+    const void* p4, const void* p5, const void* p6,
     void* p7, void* p8, void* p9) {
 
     if (p0 != NULL_POINTER) {
@@ -979,7 +980,7 @@ void handle_send_signal(const void* p0,
             }
 
             // Initialize part model, abstraction,
-            // and their count and size.
+            // and their counts and sizes.
             void* pm = NULL_POINTER;
             int pmc = 0;
             int pms = 0;
@@ -988,7 +989,7 @@ void handle_send_signal(const void* p0,
             int pas = 0;
 
             // Get part model, abstraction,
-            // and their count and size.
+            // and their counts and sizes.
             get_compound_part_by_name(p4, p5, p6,
                 (void*) &sn, (void*) &snc, (void*) &sns,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
