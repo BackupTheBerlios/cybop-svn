@@ -25,7 +25,7 @@
 
     Description ...
 
-    @version $Revision: 1.1 $ $Date: 2005-02-16 18:50:55 $ $Author: christian $
+    @version $Revision: 1.2 $ $Date: 2005-03-01 14:37:38 $ $Author: rholzmueller $
     @author Rolf Holzmüller <rolf.holzmueller@gmx.de>
 /-->
 
@@ -36,7 +36,7 @@
         <property name="name" channel="inline" abstraction="string" model="web"/>
         <property name="channel" channel="inline" abstraction="string" model="file"/>
         <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
-        <property name="model" channel="inline" abstraction="string" model="/example/resdata/web/resdata.cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="/examples/resdata/web/resdata.cybol"/>
     </part>
 
     <part name="create_domain" channel="inline" abstraction="operation" model="create">
@@ -44,7 +44,7 @@
         <property name="name" channel="inline" abstraction="string" model="domain"/>
         <property name="channel" channel="inline" abstraction="string" model="file"/>
         <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
-        <property name="model" channel="inline" abstraction="string" model="/example/resdata/domain/adressbook.cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="/examples/resdata/domain/adressbook.cybol"/>
     </part>
 
     <part name="create_logic" channel="inline" abstraction="operation" model="create">
@@ -52,7 +52,7 @@
         <property name="name" channel="inline" abstraction="string" model="logic"/>
         <property name="channel" channel="inline" abstraction="string" model="file"/>
         <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
-        <property name="model" channel="inline" abstraction="string" model="/example/resdata/logic/logic.cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="/examples/resdata/logic/logic.cybol"/>
     </part>
 
 </model>
