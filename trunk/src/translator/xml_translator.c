@@ -21,11 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file contains the functionality to:
- * - encode a cyboi knowledge tree (compound) into an xml (dom) tree
- * - decode an xml (dom) tree into a cyboi knowledge tree (compound)
- *
- * @version $Revision: 1.2 $ $Date: 2004-08-13 22:37:50 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-08-21 10:09:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -178,19 +174,7 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
 //
 
 /**
- * Encodes the cyboi model into an xml model.
- *
- * @param p0 the destination
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- */
-void encode_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
-}
-
-/**
- * Decodes the xml model into a cyboi model.
+ * Decodes the xml model and creates a cyboi compound from it.
  *
  * @param p0 the destination
  * @param p1 the destination count
@@ -242,6 +226,18 @@ void decode_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
     //??
     //?? END of temporary workaround for using the libxml2 parser.
     //??
+}
+
+/**
+ * Encodes the cyboi compound and creates an xml model from it.
+ *
+ * @param p0 the destination
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source
+ * @param p4 the source count
+ */
+void encode_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /* XML_TRANSLATOR_SOURCE */

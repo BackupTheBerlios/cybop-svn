@@ -25,7 +25,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-15 22:11:29 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-08-21 10:09:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,9 +33,12 @@
 #define CREATOR_SOURCE
 
 #include "../array/array.c"
+#include "../creator/boolean_creator.c"
 #include "../creator/complex_creator.c"
 #include "../creator/compound_creator.c"
+#include "../creator/double_creator.c"
 #include "../creator/fraction_creator.c"
+#include "../creator/integer_creator.c"
 #include "../creator/operation_creator.c"
 #include "../creator/signal_memory_creator.c"
 #include "../creator/string_creator.c"
@@ -117,7 +120,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
                 if (r == 1) {
 
-                    // No creation because primitive type.
+                    create_boolean(p0, p1);
 
                     d = 1;
                 }
@@ -132,7 +135,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
                 if (r == 1) {
 
-                    // No creation because primitive type.
+                    create_integer(p0, p1);
 
                     d = 1;
                 }
@@ -162,7 +165,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
                 if (r == 1) {
 
-                    // No creation because primitive type.
+                    create_double(p0, p1);
 
                     d = 1;
                 }
@@ -307,7 +310,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
                 if (r == 1) {
 
-                    // No creation because primitive type.
+                    destroy_boolean(p0, p1);
 
                     d = 1;
                 }
@@ -322,7 +325,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
                 if (r == 1) {
 
-                    // No creation because primitive type.
+                    destroy_integer(p0, p1);
 
                     d = 1;
                 }
@@ -352,7 +355,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
                 if (r == 1) {
 
-                    // No creation because primitive type.
+                    destroy_double(p0, p1);
 
                     d = 1;
                 }
