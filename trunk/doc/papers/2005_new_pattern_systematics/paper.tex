@@ -1,0 +1,71 @@
+%
+% $RCSfile: paper.tex,v $
+%
+% Copyright (c) 2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+%
+% The document class specifying the type of document.
+%
+\documentclass[a4paper,10pt]{llncs}
+
+%
+% The usepackages for document class.
+%
+
+% Paper format and font.
+\usepackage{a4,times,helvet}
+
+% Graphics.
+\usepackage{graphicx}
+
+%
+% The space settings for edges (left, top, right, bottom).
+%
+\setlength{\hoffset}{-3,9cm}
+\setlength{\voffset}{-3,6cm}
+\setlength{\oddsidemargin}{4cm}
+\setlength{\evensidemargin}{3cm}
+\setlength{\topmargin}{1,5cm}
+\setlength{\textwidth}{17cm}
+\setlength{\textheight}{25cm}
+
+%
+% The hyphenation list.
+%
+\input{hyphenation}
+
+%
+% This document is a scientific paper to be handed in for a conference.
+%
+% @version $Revision: 1.1 $ $Date: 2005-03-14 21:46:26 $ $Author: christian $
+% @author Christian Heller <christian.heller@tuxtax.de>
+% @author Christian Heller <christian.heller@tu-ilmenau.de>
+%
+\begin{document}
+    \twocolumn
+    \input{title}
+    \maketitle
+    \input{abstract}
+    \input{introduction}
+    \input{pattern}
+    \input{problems}
+    \input{new_systematics}
+    \input{summary}
+    \label{references_heading}
+    \bibliographystyle{plain}
+    \bibliography{references}
+\end{document}

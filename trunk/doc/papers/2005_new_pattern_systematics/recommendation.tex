@@ -1,0 +1,58 @@
+%
+% $RCSfile: recommendation.tex,v $
+%
+% Copyright (c) 2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Recommendation}
+\label{recommendation_heading}
+
+The first category \emph{Itemization} (objectification) is the base of any
+modelling activity and clearly necessary.
+
+The next three categories \emph{1:1 Association}, \emph{1:n Association} and
+\emph{Recursion} are special kinds of associations that rely exclusively on
+\emph{unidirectional} relations and result in a clean architecture which is why
+their usage is strongly recommended.
+
+\emph{Bidirectionalism}, on the other hand, is an \emph{ill} variant of the three
+aforementioned categories and should be avoided wherever possible. Patterns in
+this category are one reason for endless loops and unpredictable behaviour since
+it becomes very difficult to trace the effects that changes in one place of a
+system have on others (section \ref{bidirectional_dependency_heading}).
+
+\emph{Polymorphism} is a good thing. It relies on categorization and due to
+inheritance can avoid a tremendous amount of otherwise redundant source code.
+However, it also makes understanding a system more difficult, since the whole
+architecture must be understood before being able to manipulate code correctly.
+Unwanted source code changes caused by inheritance dependencies are often
+described with the term \emph{Fragile Base Class Problem}
+\cite[section \emph{Layers}]{buschmann}. They are just the opposite of what
+inheritance was actually intended to be for: \emph{Reusability}
+\cite[Vorwort]{gruhn}.
+
+\emph{Grouping} models is essential to keep overview in a complex software
+system. A very promising technology to support this are \emph{Ontologies}
+\cite{hellerkunze}. A lot of thought-work has to go into them but if they are
+well thought-out, they are clearly recommended.
+
+The habit of globally accessing models is banned since OOP became popular.
+However, it is not banned completely. Patterns like \emph{Singleton}
+encapsulate and bundle global access but they still permit it. They disregard
+any dependencies and relations in a system, such are a security risk and reason
+for untraceable data changes. This paper sees the whole category of
+\emph{Global Access} as potentially dangerous and can \emph{not} recommend its
+patterns.
