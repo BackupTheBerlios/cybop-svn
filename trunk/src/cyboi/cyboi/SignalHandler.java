@@ -33,7 +33,7 @@ package cyboi;
  * - send
  * - reset
  *
- * @version $Revision: 1.11 $ $Date: 2003-08-12 21:17:16 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-08-14 12:13:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -173,7 +173,13 @@ class SignalHandler {
 
                 java.lang.System.out.println("INFO: Handle signal: " + a);
 
-                if (a.equals("startup")) {
+                if (a.equals("mouse_moved_event")) {
+
+//??                    set_position;
+
+                    SignalHandler.reset(s);
+
+                } else if (a.equals("startup")) {
                     
                     SignalHandler.reset(s);
 

@@ -29,7 +29,7 @@ package cyboi;
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.28 $ $Date: 2003-08-10 22:34:31 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2003-08-14 12:13:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -214,7 +214,7 @@ class ItemHandler {
 
         java.lang.System.out.println("INFO: Initialize item: " + p1);
 
-        // Create temporary category item.        
+        // Create temporary category item.
         Item c = new Item();
         ItemHandler.initialize_item_containers(c);
 
@@ -223,9 +223,10 @@ class ItemHandler {
 
         // Initialize elements with category.
         if (c != null) {
-            
+
             ItemHandler.initialize_java_object(p0, c.java_object);
             ItemHandler.initialize_child_items(p0, c.items);
+            ItemHandler.initialize_java_object_attributes(p0);
             
         } else {
             
@@ -254,12 +255,13 @@ class ItemHandler {
         // Finalize elements with category.
         if (c != null) {
             
+            ItemHandler.finalize_java_object_attributes(p0);
             ItemHandler.finalize_child_items(p0, c.items);
             ItemHandler.finalize_java_object(p0, c.java_object);
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize item elements. The category is null.");
+            java.lang.System.out.println("ERROR: Could not finalize item elements. The category is null.");
         }
 
         // Write category to file.
@@ -278,7 +280,7 @@ class ItemHandler {
      * Initializes the java object.
      *
      * @param p0 the item
-     * @param p1 the category java object attributes
+     * @param p1 the category java object
      */
     static void initialize_java_object(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
@@ -294,7 +296,6 @@ class ItemHandler {
 
                 java.lang.Object c = MapHandler.get_map_element(o.items, CategoryHandler.CATEGORY);
                 i.java_object = JavaObjectHandler.create_java_object(c);
-                JavaObjectHandler.initialize_java_object_attributes(i.java_object, o.items);
     
             } else {
                 
@@ -311,9 +312,51 @@ class ItemHandler {
      * Finalizes the java object.
      *
      * @param p0 the item
-     * @param p1 the category java object attributes
+     * @param p1 the category java object
      */
     static void finalize_java_object(java.lang.Object p0, java.lang.Object p1) {
+    }
+
+    //
+    // Java object attributes.
+    //
+
+    /**
+     * Initializes the java object attributes.
+     *
+     * @param p0 the item
+     */
+    static void initialize_java_object_attributes(java.lang.Object p0) throws java.lang.Exception {
+
+        Item i = (Item) p0;
+        
+        if (i != null) {
+                
+            JavaObjectHandler.initialize_java_object_attributes(i.java_object, i.items);
+
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not initialize java object attributes. The item is null.");
+        }
+    }
+
+    /**
+     * Finalizes the java object attributes.
+     *
+     * @param p0 the item
+     */
+    static void finalize_java_object_attributes(java.lang.Object p0) {
+
+        Item i = (Item) p0;
+        
+        if (i != null) {
+                
+            JavaObjectHandler.finalize_java_object_attributes(i.java_object, i.items);
+
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not initialize java object attributes. The item is null.");
+        }
     }
 
     //
