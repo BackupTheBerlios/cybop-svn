@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-04-05 16:33:53 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -81,7 +81,7 @@ static const int X_WINDOW_SYSTEM_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY[] = {22};
 static const int* X_WINDOW_SYSTEM_ACTIVE_CONFIGURATION_NAME_COUNT = X_WINDOW_SYSTEM_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY;
 
 //
-// Creation names.
+// Creation names and destroy names.
 //
 
 /** The name name. */
@@ -141,6 +141,13 @@ static const char MESSAGE_NAME_ABSTRACTION_ARRAY[] = {'m', 'e', 's', 's', 'a', '
 static const char* MESSAGE_NAME_ABSTRACTION = MESSAGE_NAME_ABSTRACTION_ARRAY;
 static const int MESSAGE_NAME_ABSTRACTION_COUNT_ARRAY[] = {7};
 static const int* MESSAGE_NAME_ABSTRACTION_COUNT = MESSAGE_NAME_ABSTRACTION_COUNT_ARRAY;
+
+
+/** The url name. */
+static const char URL_NAME_ABSTRACTION_ARRAY[] = {'u', 'r', 'l'};
+static const char* URL_NAME_ABSTRACTION = URL_NAME_ABSTRACTION_ARRAY;
+static const int URL_NAME_ABSTRACTION_COUNT_ARRAY[] = {3};
+static const int* URL_NAME_ABSTRACTION_COUNT = URL_NAME_ABSTRACTION_COUNT_ARRAY;
 
 //
 // Startup and shutdown names.

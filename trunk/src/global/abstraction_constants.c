@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2005-04-05 16:33:20 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -516,6 +516,12 @@ static const char* RECEIVE_ABSTRACTION = RECEIVE_ABSTRACTION_ARRAY;
 static const int RECEIVE_ABSTRACTION_COUNT_ARRAY[] = {7};
 static const int* RECEIVE_ABSTRACTION_COUNT = RECEIVE_ABSTRACTION_COUNT_ARRAY;
 
+/** The url refresh abstraction. */
+static const char URL_REFRESH_ABSTRACTION_ARRAY[] = {'u', 'r', 'l', '_', 'r', 'e', 'f', 'r', 'e', 's', 'h' };
+static const char* URL_REFRESH_ABSTRACTION = URL_REFRESH_ABSTRACTION_ARRAY;
+static const int URL_REFRESH_ABSTRACTION_COUNT_ARRAY[] = {11};
+static const int* URL_REFRESH_ABSTRACTION_COUNT = URL_REFRESH_ABSTRACTION_COUNT_ARRAY;
+
 //
 // Lifecycle abstractions.
 //
@@ -537,6 +543,13 @@ static const char EXIT_ABSTRACTION_ARRAY[] = {'e', 'x', 'i', 't'};
 static const char* EXIT_ABSTRACTION = EXIT_ABSTRACTION_ARRAY;
 static const int EXIT_ABSTRACTION_COUNT_ARRAY[] = {4};
 static const int* EXIT_ABSTRACTION_COUNT = EXIT_ABSTRACTION_COUNT_ARRAY;
+
+
+/** The start model abstraction. */
+static const char START_MODEL_ABSTRACTION_ARRAY[] = {'s', 't', 'a', 'r', 't', '_', 'm', 'o', 'd', 'e', 'l' };
+static const char* START_MODEL_ABSTRACTION = START_MODEL_ABSTRACTION_ARRAY;
+static const int START_MODEL_ABSTRACTION_COUNT_ARRAY[] = {11};
+static const int* START_MODEL_ABSTRACTION_COUNT = START_MODEL_ABSTRACTION_COUNT_ARRAY;
 
 //
 //

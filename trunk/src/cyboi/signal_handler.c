@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.27 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2005-04-05 16:32:38 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -286,6 +286,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
     get_array_elements(p7, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
     get_array_elements(p7, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
 
+
     if (r != 1) {
 
         compare_arrays(p0, p1, (void*) ADD_ABSTRACTION, (void*) ADD_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
@@ -388,6 +389,16 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
     if (r != 1) {
 
+        compare_arrays(p0, p1, (void*) URL_REFRESH_ABSTRACTION, (void*) URL_REFRESH_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            send_url_refresh(p2, p3, *km, *kmc, *kms, p5, p7);
+        }
+    }
+
+    if (r != 1) {
+
         compare_arrays(p0, p1, (void*) SEND_ABSTRACTION, (void*) SEND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
@@ -423,6 +434,16 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
         if (r == 1) {
 
             shutdown_service(p2, p3, *km, *kmc, *kms, p7);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p0, p1, (void*) START_MODEL_ABSTRACTION, (void*) START_MODEL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            startup_model(p2, p3, *km, *kmc, *kms, p7, p5);
         }
     }
 
