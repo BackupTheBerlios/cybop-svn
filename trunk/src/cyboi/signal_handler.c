@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2005-03-10 09:55:01 $ $Author: rholzmueller $
+ * @version $Revision: 1.23 $ $Date: 2005-03-11 10:06:04 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -42,6 +42,7 @@
 #include "../logic/destroy.c"
 #include "../logic/loop.c"
 #include "../logic/receive.c"
+#include "../logic/selection.c"
 #include "../logic/send.c"
 #include "../logic/set.c"
 #include "../test/test.c"
@@ -49,6 +50,9 @@
 
 
 void loop( const void* param, const int* param_count, 
+           const void* priority, const void* signal_id, void* shutdownflag,
+           void* internal );
+void selection( const void* param, const int* param_count, 
            const void* priority, const void* signal_id, void* shutdownflag,
            void* internal );
 void handle_signal(const void* p0, const void* p1, const void* p2, const void* p3,
@@ -344,6 +348,16 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
         if (r == 1) {
 
             loop(p2, p3, p4, p5, p6, p7 );
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p0, p1, (void*) SELECTION_ABSTRACTION, (void*) SELECTION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            selection(p2, p3, p4, p5, p6, p7 );
         }
     }
 

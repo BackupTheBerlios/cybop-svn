@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-03-10 09:55:41 $ $Author: rholzmueller $
+ * @version $Revision: 1.14 $ $Date: 2005-03-11 10:05:52 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -495,6 +495,12 @@ static const char BUILD_LISTNAME_ABSTRACTION_ARRAY[] = {'b', 'u', 'i', 'l', 'd',
 static const char* BUILD_LISTNAME_ABSTRACTION = BUILD_LISTNAME_ABSTRACTION_ARRAY;
 static const int BUILD_LISTNAME_ABSTRACTION_COUNT_ARRAY[] = {14};
 static const int* BUILD_LISTNAME_ABSTRACTION_COUNT = BUILD_LISTNAME_ABSTRACTION_COUNT_ARRAY;
+
+/** The  selection abstraction. */
+static const char SELECTION_ABSTRACTION_ARRAY[] = {'s', 'e', 'l', 'e', 'c', 't', 'i', 'o', 'n' };
+static const char* SELECTION_ABSTRACTION = SELECTION_ABSTRACTION_ARRAY;
+static const int SELECTION_ABSTRACTION_COUNT_ARRAY[] = {9};
+static const int* SELECTION_ABSTRACTION_COUNT = SELECTION_ABSTRACTION_COUNT_ARRAY;
 
 
 //

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-03-10 10:04:24 $ $Author: rholzmueller $
+ * @version $Revision: 1.11 $ $Date: 2005-03-11 10:05:52 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -260,7 +260,7 @@ static const int BUILD_LISTNAME_RESULT_NAME_ABSTRACTION_COUNT_ARRAY[] = {6};
 static const int* BUILD_LISTNAME_RESULT_NAME_ABSTRACTION_COUNT = BUILD_LISTNAME_RESULT_NAME_ABSTRACTION_COUNT_ARRAY;
 
 //
-// Property names operation build_listname.
+// Property names operation count_part.
 //
 
 /** The basisname name array, pointer, count. */
@@ -280,6 +280,30 @@ static const char COUNT_PART_RESULT_NAME_ABSTRACTION_ARRAY[] = {'r', 'e', 's', '
 static const char* COUNT_PART_RESULT_NAME_ABSTRACTION = COUNT_PART_RESULT_NAME_ABSTRACTION_ARRAY;
 static const int COUNT_PART_RESULT_NAME_ABSTRACTION_COUNT_ARRAY[] = {6};
 static const int* COUNT_PART_RESULT_NAME_ABSTRACTION_COUNT = COUNT_PART_RESULT_NAME_ABSTRACTION_COUNT_ARRAY;
+
+
+//
+// Property names operation selection.
+//
+
+/** The comparison name array, pointer, count. */
+static const char SELECTION_COMPARISON_NAME_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'a', 'r', 'i', 's', 'o', 'n' };
+static const char* SELECTION_COMPARISON_NAME_ABSTRACTION = SELECTION_COMPARISON_NAME_ABSTRACTION_ARRAY;
+static const int SELECTION_COMPARISON_NAME_ABSTRACTION_COUNT_ARRAY[] = {10};
+static const int* SELECTION_COMPARISON_NAME_ABSTRACTION_COUNT = SELECTION_COMPARISON_NAME_ABSTRACTION_COUNT_ARRAY;
+
+/** The true model name array, pointer, count. */
+static const char SELECTION_TRUE_MODEL_NAME_ABSTRACTION_ARRAY[] = {'t', 'r', 'u', 'e', '_', 'm', 'o', 'd', 'e', 'l' };
+static const char* SELECTION_TRUE_MODEL_NAME_ABSTRACTION = SELECTION_TRUE_MODEL_NAME_ABSTRACTION_ARRAY;
+static const int SELECTION_TRUE_MODEL_NAME_ABSTRACTION_COUNT_ARRAY[] = {10};
+static const int* SELECTION_TRUE_MODEL_NAME_ABSTRACTION_COUNT = SELECTION_TRUE_MODEL_NAME_ABSTRACTION_COUNT_ARRAY;
+
+/** The false model name array, pointer, count. */
+static const char SELECTION_FALSE_MODEL_NAME_ABSTRACTION_ARRAY[] = {'f', 'a', 'l', 's', 'e', '_', 'm', 'o', 'd', 'e', 'l' };
+static const char* SELECTION_FALSE_MODEL_NAME_ABSTRACTION = SELECTION_FALSE_MODEL_NAME_ABSTRACTION_ARRAY;
+static const int SELECTION_FALSE_MODEL_NAME_ABSTRACTION_COUNT_ARRAY[] = {11};
+static const int* SELECTION_FALSE_MODEL_NAME_ABSTRACTION_COUNT = SELECTION_FALSE_MODEL_NAME_ABSTRACTION_COUNT_ARRAY;
+
 
 /* NAME_CONSTANTS_SOURCE */
 #endif
