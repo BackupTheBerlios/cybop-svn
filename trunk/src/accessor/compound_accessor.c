@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2005-01-28 23:30:52 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2005-02-10 23:45:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -538,7 +538,9 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
 
     get_array_elements_index(p3, p4, (void*) COMPOUND_ELEMENT_SEPARATOR, (void*) ONE_NUMBER, (void*) &i, (void*) CHARACTER_ARRAY);
 
-    fprintf(stdout, "TEST set_compound_element_by_name: %s\n", (char*) p3);
+    fprintf(stderr, "TEST set_compound_element_by_name n: %s\n", (char*) p3);
+    fprintf(stderr, "TEST set_compound_element_by_name nc: %i\n", *((int*) p4));
+    fprintf(stderr, "TEST set_compound_element_by_name ns: %i\n", *((int*) p5));
 
     if (i != -1) {
 
@@ -971,7 +973,8 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
 
     get_array_elements_index(p3, p4, (void*) COMPOUND_ELEMENT_SEPARATOR, (void*) ONE_NUMBER, (void*) &i, (void*) CHARACTER_ARRAY);
 
-    fprintf(stdout, "TEST remove_compound_element_by_name: %s\n", (char*) p3);
+    fprintf(stderr, "TEST remove_compound_element_by_name n: %s\n", (char*) p3);
+    fprintf(stderr, "TEST remove_compound_element_by_name nc: %i\n", *((int*) p4));
 
     if (i != -1) {
 
@@ -1326,7 +1329,8 @@ void get_compound_element_by_name(const void* p0, const void* p1,
 
     get_array_elements_index(p2, p3, (void*) COMPOUND_ELEMENT_SEPARATOR, (void*) ONE_NUMBER, (void*) &i, (void*) CHARACTER_ARRAY);
 
-    fprintf(stdout, "TEST get_compound_element_by_name: %s\n", (char*) p2);
+    fprintf(stderr, "TEST get_compound_element_by_name n: %s\n", (char*) p2);
+    fprintf(stderr, "TEST get_compound_element_by_name nc: %i\n", *((int*) p3));
 
     if (i != -1) {
 
@@ -1656,6 +1660,9 @@ void get_compound_element_by_encapsulated_name(const void* p0, const void* p1,
             // Example of a hierarchical name:
             // application.communication.partners.hostname.address
             //
+
+    fprintf(stderr, "TEST get_compound_element_by_encapsulated_name m: %s\n", (char*) *m);
+    fprintf(stderr, "TEST get_compound_element_by_encapsulated_name mc: %i\n", *((int*) *mc));
 
             // Get knowledge element.
             get_compound_element_by_name(p13, p14, *m, *mc,
