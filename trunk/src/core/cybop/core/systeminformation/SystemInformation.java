@@ -33,7 +33,7 @@ import cybop.core.model.String;
  *
  * It contains information about a system.
  *
- * @version $Revision: 1.1 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformation extends Item {
@@ -228,18 +228,18 @@ public class SystemInformation extends Item {
 
         super.categorize();
 
-        setCategory(SystemInformation.NAME, getDefaultSystemInformation());
-        setCategory(SystemInformation.VERSION, getDefaultSystemInformation());
-        setCategory(SystemInformation.DATE, getDefaultSystemInformation());
-        setCategory(SystemInformation.SLOGAN, getDefaultSystemInformation());
-        setCategory(SystemInformation.LOGO, getDefaultSystemInformation());
-        setCategory(SystemInformation.COPYRIGHT, getDefaultSystemInformation());
-        setCategory(SystemInformation.CONTACT, getDefaultSystemInformation());
-        setCategory(SystemInformation.DESCRIPTION, getDefaultSystemInformation());
-        setCategory(SystemInformation.AUTHORS, getDefaultSystemInformation());
-        setCategory(SystemInformation.HELPERS, getDefaultSystemInformation());
-        setCategory(SystemInformation.INSPIRATIONS, getDefaultSystemInformation());
-        setCategory(SystemInformation.LICENSE, getDefaultSystemInformation());
+        setCategory(SystemInformation.NAME, getDefaultNameCategory());
+        setCategory(SystemInformation.VERSION, getDefaultVersionCategory());
+        setCategory(SystemInformation.DATE, getDefaultDateCategory());
+        setCategory(SystemInformation.SLOGAN, getDefaultSloganCategory());
+        setCategory(SystemInformation.LOGO, getDefaultLogoCategory());
+        setCategory(SystemInformation.COPYRIGHT, getDefaultCopyrightCategory());
+        setCategory(SystemInformation.CONTACT, getDefaultContactCategory());
+        setCategory(SystemInformation.DESCRIPTION, getDefaultDescriptionCategory());
+        setCategory(SystemInformation.AUTHORS, getDefaultAuthorsCategory());
+        setCategory(SystemInformation.HELPERS, getDefaultHelpersCategory());
+        setCategory(SystemInformation.INSPIRATIONS, getDefaultInspirationsCategory());
+        setCategory(SystemInformation.LICENSE, getDefaultLicenseCategory());
     }
 
     /**

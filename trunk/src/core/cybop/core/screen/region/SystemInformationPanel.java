@@ -32,7 +32,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a system information contents panel.
  *
- * @version $Revision: 1.6 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationPanel extends DisplayRegion {
@@ -41,8 +41,8 @@ public class SystemInformationPanel extends DisplayRegion {
     // Children names.
     //
 
-    /** The head panel. */
-    public static final String HEAD_PANEL = new String("head_panel");
+    /** The system version panel. */
+    public static final String SYSTEM_VERSION_PANEL = new String("system_version_panel");
 
     /** The tabbed pane. */
     public static final String TABBED_PANE = new String("tabbed_pane");
@@ -112,7 +112,7 @@ public class SystemInformationPanel extends DisplayRegion {
 
         if (n != null) {
 
-            if (n.isEqualTo(SystemInformationPanel.HEAD_PANEL)) {
+            if (n.isEqualTo(SystemInformationPanel.SYSTEM_VERSION_PANEL)) {
 
                 setSystemVersionPanel((SystemVersionPanel) i);
 
@@ -141,7 +141,7 @@ public class SystemInformationPanel extends DisplayRegion {
 
         if (n != null) {
 
-            if (n.isEqualTo(SystemInformationPanel.HEAD_PANEL)) {
+            if (n.isEqualTo(SystemInformationPanel.SYSTEM_VERSION_PANEL)) {
 
                 removeSystemVersionPanel((SystemVersionPanel) getChild(n));
 
@@ -167,13 +167,13 @@ public class SystemInformationPanel extends DisplayRegion {
     //
 
     /**
-     * Returns the default head panel.
+     * Returns the default system version panel.
      *
-     * @return the default head panel
+     * @return the default system version panel
      */
     public String getDefaultSystemVersionPanel() {
 
-        return new String("cybop.core.model.organizer.SystemVersionPanel");
+        return new String("cybop.core.screen.region.SystemVersionPanel");
     }
 
     /**
@@ -183,7 +183,7 @@ public class SystemInformationPanel extends DisplayRegion {
      */
     public String getDefaultTabbedPane() {
 
-        return new String("cybop.core.model.organizer.TabbedPane");
+        return new String("cybop.core.screen.region.TabbedPane");
     }
 
     /**
@@ -193,66 +193,66 @@ public class SystemInformationPanel extends DisplayRegion {
      */
     public String getDefaultButtonPanel() {
 
-        return new String("cybop.core.model.organizer.CloseButtonPanel");
+        return new String("cybop.core.screen.region.CloseButtonPanel");
     }
 
     //
-    // Head panel.
+    // System version panel.
     //
 
     /**
-     * Sets the head panel.
+     * Sets the system version panel.
      *
-     * @param hp the head panel
+     * @param vp the system version panel
      * @exception Exception if the java panel is null
-     * @exception Exception if the head panel is null
+     * @exception Exception if the system version panel is null
      */
-    public void setSystemVersionPanel(SystemVersionPanel hp) throws Exception {
+    public void setSystemVersionPanel(SystemVersionPanel vp) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
         if (p != null) {
 
-            if (hp != null) {
+            if (vp != null) {
 
-                p.add((javax.swing.JPanel) hp.getJavaObject(), java.awt.BorderLayout.NORTH);
+                p.add((javax.swing.JPanel) vp.getJavaObject(), java.awt.BorderLayout.NORTH);
 
             } else {
     
-                throw new Exception("Could not set head panel. The head panel is null.");
+                throw new Exception("Could not set system version panel. The system version panel is null.");
             }
 
         } else {
 
-            throw new Exception("Could not set head panel. The java panel is null.");
+            throw new Exception("Could not set system version panel. The java panel is null.");
         }
     }
 
     /**
-     * Removes the head panel.
+     * Removes the system version panel.
      *
-     * @param hp the head panel
+     * @param vp the system version panel
      * @exception Exception if the java panel is null
-     * @exception Exception if the head panel is null
+     * @exception Exception if the system version panel is null
      */
-    public void removeSystemVersionPanel(SystemVersionPanel hp) throws Exception {
+    public void removeSystemVersionPanel(SystemVersionPanel vp) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
         if (p != null) {
 
-            if (hp != null) {
+            if (vp != null) {
 
-                p.remove((javax.swing.JPanel) hp.getJavaObject());
+                p.remove((javax.swing.JPanel) vp.getJavaObject());
 
             } else {
-    
-                throw new Exception("Could not remove head panel. The head panel is null.");
+
+                throw new Exception("Could not remove system version panel. The system version panel is null.");
             }
 
         } else {
 
-            throw new Exception("Could not remove head panel. The java panel is null.");
+            throw new Exception("Could not remove system version panel. The java panel is null.");
         }
     }
 
@@ -377,37 +377,37 @@ public class SystemInformationPanel extends DisplayRegion {
     }
 
     //
-    // Initializable.
+    // Initialization.
     //
 
     /**
-     * Initializes this portal contents panel.
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
         super.initialize();
 
-        setChild(SystemInformationPanel.HEAD_PANEL, createChild(getDefaultSystemVersionPanel()));
+        setChild(SystemInformationPanel.SYSTEM_VERSION_PANEL, createChild(getDefaultSystemVersionPanel()));
         setChild(SystemInformationPanel.TABBED_PANE, createChild(getDefaultTabbedPane()));
         setChild(SystemInformationPanel.BUTTON_PANEL, createChild(getDefaultButtonPanel()));
     }
 
     /**
-     * Finalizes this portal contents panel.
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
-        ButtonPanel buttonPanel = (ButtonPanel) getChild(SystemInformationPanel.BUTTON_PANEL);
+        Item buttonPanel = getChild(SystemInformationPanel.BUTTON_PANEL);
         removeChild(SystemInformationPanel.BUTTON_PANEL);
         destroyChild(buttonPanel);
 
-        TabbedPane tabbedPane = (TabbedPane) getChild(SystemInformationPanel.TABBED_PANE);
+        Item tabbedPane = getChild(SystemInformationPanel.TABBED_PANE);
         removeChild(SystemInformationPanel.TABBED_PANE);
         destroyChild(tabbedPane);
 
-        SystemVersionPanel headPanel = (SystemVersionPanel) getChild(SystemInformationPanel.HEAD_PANEL);
-        removeChild(SystemInformationPanel.HEAD_PANEL);
-        destroyChild(headPanel);
+        Item systemVersionPanel = getChild(SystemInformationPanel.SYSTEM_VERSION_PANEL);
+        removeChild(SystemInformationPanel.SYSTEM_VERSION_PANEL);
+        destroyChild(systemVersionPanel);
 
         super.finalizz();
     }

@@ -59,7 +59,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.20 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends SystemItem implements java.lang.Runnable {
@@ -503,6 +503,7 @@ public class System extends SystemItem implements java.lang.Runnable {
      */
     public void log(Signal s) throws Exception {
 
+/*??
         LogRecord r = (LogRecord) getChild(System.LOG_RECORD);
 
         if (r != null) {
@@ -535,6 +536,7 @@ public class System extends SystemItem implements java.lang.Runnable {
 
             throw new Exception("Could not log signal. The log record is null.");
         }
+*/
     }
 }
 

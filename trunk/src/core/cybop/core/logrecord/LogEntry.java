@@ -32,7 +32,7 @@ import cybop.core.model.String;
  *
  * A log entry consists of the time this entry was made, a log level and a message.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class LogEntry extends LogItem {
@@ -118,17 +118,9 @@ public class LogEntry extends LogItem {
      */
     public void decategorize() throws Exception {
 
-        Hierarchy messageCategory = getCategory(LogEntry.MESSAGE_CATEGORY);
         removeCategory(LogEntry.MESSAGE_CATEGORY);
-        destroyCategory(messageCategory);
-
-        Hierarchy levelCategory = getCategory(LogEntry.LEVEL_CATEGORY);
         removeCategory(LogEntry.LEVEL_CATEGORY);
-        destroyCategory(levelCategory);
-
-        Hierarchy timeCategory = getCategory(LogEntry.TIME_CATEGORY);
         removeCategory(LogEntry.TIME_CATEGORY);
-        destroyCategory(timeCategory);
 
         super.decategorize();
     }
@@ -144,9 +136,9 @@ public class LogEntry extends LogItem {
 
         super.initialize();
 
-        setChild(LogEntry.TIME, getDefaultTime());
-        setChild(LogEntry.LEVEL, getDefaultLevel());
-        setChild(LogEntry.MESSAGE, getDefaultMessage());
+        setChild(LogEntry.TIME, createChild(getCategory(LogEntry.TIME)));
+        setChild(LogEntry.LEVEL, createChild(getCategory(LogEntry.LEVEL)));
+        setChild(LogEntry.MESSAGE, createChild(getCategory(LogEntry.MESSAGE)));
     }
 
     /**
@@ -156,15 +148,15 @@ public class LogEntry extends LogItem {
 
         Item message = getChild(LogEntry.MESSAGE);
         removeChild(LogEntry.MESSAGE);
-        destroyItem(message);
+        destroyChild(message);
 
         Item level = getChild(LogEntry.LEVEL);
         removeChild(LogEntry.LEVEL);
-        destroyItem(level);
+        destroyChild(level);
 
         Item time = getChild(LogEntry.TIME);
         removeChild(LogEntry.TIME);
-        destroyItem(time);
+        destroyChild(time);
 
         super.finalizz();
     }

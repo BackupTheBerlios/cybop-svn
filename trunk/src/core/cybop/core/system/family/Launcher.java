@@ -70,7 +70,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.28 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -1045,7 +1045,7 @@ public class Launcher extends Family {
             s.setChild(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
             s.setChild(Signal.LANGUAGE, Signal.NEURO_LANGUAGE);
             s.setChild(Signal.SUBJECT, Launcher.SYSTEM);
-            s.setChild(Signal.PREDICATE, Controller.SHOW_DISPLAY_ACTION);
+            s.setChild(Signal.PREDICATE, Controller.SHOW_SYSTEM_DISPLAY_ACTION);
             s.setChild(Signal.SENDER_OBJECT, Launcher.USER);
 
         } else {

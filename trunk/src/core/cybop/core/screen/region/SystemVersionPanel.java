@@ -33,7 +33,7 @@ import cybop.core.screen.component.*;
 /**
  * This class represents a system version panel.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemVersionPanel extends DisplayRegion {
@@ -116,19 +116,19 @@ public class SystemVersionPanel extends DisplayRegion {
 
         if (n != null) {
 
-            if (n.isEqualTo(HeadPanel.NAME_LABEL)) {
+            if (n.isEqualTo(SystemVersionPanel.NAME_LABEL)) {
 
                 setNameLabel((Label) i);
 
-            } else if (n.isEqualTo(HeadPanel.VERSION_LABEL)) {
+            } else if (n.isEqualTo(SystemVersionPanel.VERSION_LABEL)) {
 
                 setVersionLabel((Label) i);
             
-            } else if (n.isEqualTo(HeadPanel.DATE_LABEL)) {
+            } else if (n.isEqualTo(SystemVersionPanel.DATE_LABEL)) {
 
                 setDateLabel((Label) i);
             
-            } else if (n.isEqualTo(HeadPanel.SLOGAN_LABEL)) {
+            } else if (n.isEqualTo(SystemVersionPanel.SLOGAN_LABEL)) {
 
                 setSloganLabel((Label) i);
             }
@@ -149,19 +149,19 @@ public class SystemVersionPanel extends DisplayRegion {
 
         if (n != null) {
 
-            if (n.isEqualTo(HeadPanel.NAME_LABEL)) {
+            if (n.isEqualTo(SystemVersionPanel.NAME_LABEL)) {
 
                 removeNameLabel((Label) getChild(n));
 
-            } else if (n.isEqualTo(HeadPanel.VERSION_LABEL)) {
+            } else if (n.isEqualTo(SystemVersionPanel.VERSION_LABEL)) {
 
                 removeVersionLabel((Label) getChild(n));
             
-            } else if (n.isEqualTo(HeadPanel.DATE_LABEL)) {
+            } else if (n.isEqualTo(SystemVersionPanel.DATE_LABEL)) {
 
                 removeDateLabel((Label) getChild(n));
             
-            } else if (n.isEqualTo(HeadPanel.SLOGAN_LABEL)) {
+            } else if (n.isEqualTo(SystemVersionPanel.SLOGAN_LABEL)) {
 
                 removeSloganLabel((Label) getChild(n));
             }
@@ -175,47 +175,47 @@ public class SystemVersionPanel extends DisplayRegion {
     }
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default name label.
+     * Returns the default name label category.
      *
-     * @return the default name label
+     * @return the default name label category
      */
-    public String getDefaultNameLabel() {
+    public String getDefaultNameLabelCategory() {
 
-        return new String("cybop.core.model.organizer.Label");
+        return new String("cybop.core.screen.component.Label");
     }
 
     /**
-     * Returns the default version label.
+     * Returns the default version label category.
      *
-     * @return the default version label
+     * @return the default version label category
      */
-    public String getDefaultVersionLabel() {
+    public String getDefaultVersionLabelCategory() {
 
-        return new String("cybop.core.model.organizer.Label");
+        return new String("cybop.core.screen.component.Label");
     }
 
     /**
-     * Returns the default date label.
+     * Returns the default date label category.
      *
-     * @return the default date label
+     * @return the default date label category
      */
-    public String getDefaultDateLabel() {
+    public String getDefaultDateLabelCategory() {
 
-        return new String("cybop.core.model.organizer.Label");
+        return new String("cybop.core.screen.component.Label");
     }
 
     /**
-     * Returns the default slogan label.
+     * Returns the default slogan label category.
      *
-     * @return the default slogan label
+     * @return the default slogan label category
      */
-    public String getDefaultSloganLabel() {
+    public String getDefaultSloganLabelCategory() {
 
-        return new String("cybop.core.model.organizer.Label");
+        return new String("cybop.core.screen.component.Label");
     }
 
     //
@@ -470,43 +470,74 @@ public class SystemVersionPanel extends DisplayRegion {
      * Creates the date label.
      *
             l.setHorizontalAlignment(ResLabel.RIGHT);
+//?? ===================================================
 
     //
-    // Initializable.
+    // Categorization.
     //
 
     /**
-     * Initializes this head panel.
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(SystemVersionPanel.NAME_LABEL, getDefaultNameLabelCategory());
+        setCategory(SystemVersionPanel.VERSION_LABEL, getDefaultVersionLabelCategory());
+        setCategory(SystemVersionPanel.DATE_LABEL, getDefaultDateLabelCategory());
+        setCategory(SystemVersionPanel.SLOGAN_LABEL, getDefaultSloganLabelCategory());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(SystemVersionPanel.SLOGAN_LABEL);
+        removeCategory(SystemVersionPanel.DATE_LABEL);
+        removeCategory(SystemVersionPanel.VERSION_LABEL);
+        removeCategory(SystemVersionPanel.NAME_LABEL);
+
+        super.decategorize();
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
         super.initialize();
 
-        setChild(HeadPanel.NAME_LABEL, createChild(getDefaultNameLabel()));
-        setChild(HeadPanel.VERSION_LABEL, createChild(getDefaultVersionLabel()));
-        setChild(HeadPanel.DATE_LABEL, createChild(getDefaultDateLabel()));
-        setChild(HeadPanel.SLOGAN_LABEL, createChild(getDefaultSloganLabel()));
+        setChild(SystemVersionPanel.NAME_LABEL, createChild(SystemVersionPanel.NAME_LABEL));
+        setChild(SystemVersionPanel.VERSION_LABEL, createChild(SystemVersionPanel.VERSION_LABEL));
+        setChild(SystemVersionPanel.DATE_LABEL, createChild(SystemVersionPanel.DATE_LABEL));
+        setChild(SystemVersionPanel.SLOGAN_LABEL, createChild(SystemVersionPanel.SLOGAN_LABEL));
     }
 
     /**
-     * Finalizes this head panel.
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
-        Label sloganLabel = (Label) getChild(HeadPanel.SLOGAN_LABEL);
-        removeChild(HeadPanel.SLOGAN_LABEL);
+        Item sloganLabel = getChild(SystemVersionPanel.SLOGAN_LABEL);
+        removeChild(SystemVersionPanel.SLOGAN_LABEL);
         destroyChild(sloganLabel);
 
-        Label dateLabel = (Label) getChild(HeadPanel.DATE_LABEL);
-        removeChild(HeadPanel.DATE_LABEL);
+        Item dateLabel = getChild(SystemVersionPanel.DATE_LABEL);
+        removeChild(SystemVersionPanel.DATE_LABEL);
         destroyChild(dateLabel);
 
-        Label versionLabel = (Label) getChild(HeadPanel.VERSION_LABEL);
-        removeChild(HeadPanel.VERSION_LABEL);
+        Item versionLabel = getChild(SystemVersionPanel.VERSION_LABEL);
+        removeChild(SystemVersionPanel.VERSION_LABEL);
         destroyChild(versionLabel);
 
-        Label nameLabel = (Label) getChild(HeadPanel.NAME_LABEL);
-        removeChild(HeadPanel.NAME_LABEL);
+        Item nameLabel = getChild(SystemVersionPanel.NAME_LABEL);
+        removeChild(SystemVersionPanel.NAME_LABEL);
         destroyChild(nameLabel);
 
         super.finalizz();

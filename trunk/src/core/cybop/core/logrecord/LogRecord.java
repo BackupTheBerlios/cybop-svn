@@ -24,6 +24,7 @@
 
 package cybop.core.logrecord;
 
+import cybop.core.category.*;
 import cybop.core.model.String;
 
 /**
@@ -36,7 +37,7 @@ import cybop.core.model.String;
  * This may be writing out the record to console or a file or to another medium
  * or location, using mechanisms offered by the framework.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-16 18:27:08 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class LogRecord extends LogItem {
@@ -81,11 +82,35 @@ public class LogRecord extends LogItem {
      */
     public void decategorize() throws Exception {
 
-        Hierarchy entryCategory = getCategory(LogRecord.ENTRY_CATEGORY);
-        removeCategory(LogRecord.ENTRY_CATEGORY);
-        destroyCategory(entryCategory);
+        removeCategory(LogRecord.ENTRY);
 
         super.decategorize();
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this item.
+     */
+    public void initialize() throws Exception {
+
+        super.initialize();
+
+        setChild(LogRecord.ENTRY, createChild(getCategory(LogRecord.ENTRY)));
+    }
+
+    /**
+     * Finalizes this item.
+     */
+    public void finalizz() throws Exception {
+
+        Item entry = getChild(LogRecord.ENTRY);
+        removeChild(LogRecord.ENTRY);
+        destroyChild(entry);
+
+        super.finalizz();
     }
 }
 

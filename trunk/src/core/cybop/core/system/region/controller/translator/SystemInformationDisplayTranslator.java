@@ -24,6 +24,7 @@
 
 package cybop.core.system.region.controller.translator;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
 import cybop.core.screen.component.*;
@@ -35,7 +36,7 @@ import cybop.core.systeminformation.*;
 /**
  * This class represents a system information display translator.
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationDisplayTranslator extends Translator {
@@ -47,50 +48,41 @@ public class SystemInformationDisplayTranslator extends Translator {
     /**
      * Encodes the knowledge model.
      *
-     * @param dm the knowledge model
+     * @param i the system information
      * @param m the encoded model
      * @exception Exception if the system information display is null
-     * @exception Exception if the system information contents panel is null
-     * @exception Exception if the knowledge model is null
+     * @exception Exception if the system information panel is null
+     * @exception Exception if the system information is null
      */
-    public void encode(Item dm, Item m) throws Exception {
+    public void encode(Item i, Item m) throws Exception {
 
-        SystemInformationDisplay ui = (SystemInformationDisplay) m;
+        SystemInformationDisplay d = (SystemInformationDisplay) m;
 
-        if (ui != null) {
-            
-            SystemInformationPanel p = (SystemInformationPanel) ui.getChild(SystemInformationDisplay.CONTENTS_PANEL);
+        if (d != null) {
+
+            SystemInformationPanel p = (SystemInformationPanel) d.getChild(SystemInformationDisplay.CONTENTS_PANEL);
 
             if (p != null) {
 
-                if (dm != null) {
+                if (i != null) {
 
-                    encodeSystemVersionPanel((SystemInformationDisplay) dm.getChild(KnowledgeModel.SYSTEM_INFORMATION), (SystemVersionPanel) p.getChild(SystemInformationPanel.HEAD_PANEL));
-                    encodeTabbedPane((SystemInformationDisplay) dm.getChild(KnowledgeModel.SYSTEM_INFORMATION), (TabbedPane) p.getChild(SystemInformationPanel.TABBED_PANE));
+                    encodeSystemVersionPanel((SystemInformation) i, (SystemVersionPanel) p.getChild(SystemInformationPanel.SYSTEM_VERSION_PANEL));
+                    encodeTabbedPane((SystemInformation) i, (TabbedPane) p.getChild(SystemInformationPanel.TABBED_PANE));
 
                 } else {
 
-                    throw new Exception("Could not encode knowledge model. The knowledge model is null.");
+                    throw new Exception("Could not encode model. The system information is null.");
                 }
     
             } else {
 
-                throw new Exception("Could not encode knowledge model. The system information contents panel is null.");
+                throw new Exception("Could not encode model. The system information panel is null.");
             }
     
         } else {
 
-            throw new Exception("Could not encode knowledge model. The system information display is null.");
+            throw new Exception("Could not encode model. The system information display is null.");
         }
-    }
-
-    /**
-     * Decodes the model.
-     *
-     * @param m the encoded model
-     * @param dm the knowledge model
-     */
-    public void decode(Item m, Item dm) {
     }
 
     //
@@ -98,32 +90,32 @@ public class SystemInformationDisplayTranslator extends Translator {
     //
 
     /**
-     * Encodes into the head panel.
+     * Encodes into the system version panel.
      *
      * @param i the system information
-     * @param p the head panel
+     * @param p the system version panel
      * @exception Exception if the system information is null
-     * @exception Exception if the head panel is null
+     * @exception Exception if the system version panel is null
      */
-    private void encodeSystemVersionPanel(SystemInformationDisplay i, SystemVersionPanel p) {
+    private void encodeSystemVersionPanel(SystemInformation i, SystemVersionPanel p) {
 
         if (i != null) {
 
             if (p != null) {
 
-                encodeLabel((Label) p.getChild(SystemVersionPanel.NAME_LABEL), (String) i.getChild(SystemInformationDisplay.NAME));
-                encodeLabel((Label) p.getChild(SystemVersionPanel.VERSION_LABEL), (String) i.getChild(SystemInformationDisplay.VERSION));
-                encodeLabel((Label) p.getChild(SystemVersionPanel.DATE_LABEL), (String) i.getChild(SystemInformationDisplay.DATE));
-                encodeLabel((Label) p.getChild(SystemVersionPanel.SLOGAN_LABEL), (String) i.getChild(SystemInformationDisplay.SLOGAN));
+                encodeLabel((Label) p.getChild(SystemVersionPanel.NAME_LABEL), (String) i.getChild(SystemInformation.NAME));
+                encodeLabel((Label) p.getChild(SystemVersionPanel.VERSION_LABEL), (String) i.getChild(SystemInformation.VERSION));
+                encodeLabel((Label) p.getChild(SystemVersionPanel.DATE_LABEL), (String) i.getChild(SystemInformation.DATE));
+                encodeLabel((Label) p.getChild(SystemVersionPanel.SLOGAN_LABEL), (String) i.getChild(SystemInformation.SLOGAN));
 
             } else {
 
-                throw new Exception("Could not encode into head panel. The head panel is null.");
+                throw new Exception("Could not encode into system version panel. The system version panel is null.");
             }
     
         } else {
 
-            throw new Exception("Could not encode into head panel. The system information is null.");
+            throw new Exception("Could not encode into system version panel. The system information is null.");
         }
     }
 
@@ -154,7 +146,7 @@ public class SystemInformationDisplayTranslator extends Translator {
      * @exception Exception if the system information is null
      * @exception Exception if the tabbed pane is null
      */
-    private void encodeTabbedPane(SystemInformationDisplay i, TabbedPane p) {
+    private void encodeTabbedPane(SystemInformation i, TabbedPane p) {
     }
 }
 

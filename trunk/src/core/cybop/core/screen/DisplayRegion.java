@@ -32,7 +32,7 @@ import cybop.core.screen.component.*;
 /**
  * This class represents a screen region.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class DisplayRegion extends DisplayItem {
@@ -75,7 +75,7 @@ public class DisplayRegion extends DisplayItem {
 
         if (n != null) {
 
-            if (n.isEqualTo(Panel.LAYOUT)) {
+            if (n.isEqualTo(DisplayRegion.LAYOUT)) {
 
                 setLayout((Layout) i);
             }
@@ -96,7 +96,7 @@ public class DisplayRegion extends DisplayItem {
 
         if (n != null) {
 
-            if (n.isEqualTo(Panel.LAYOUT)) {
+            if (n.isEqualTo(DisplayRegion.LAYOUT)) {
                 
                 removeLayout((Layout) getChild(n));
             }
@@ -194,7 +194,7 @@ public class DisplayRegion extends DisplayItem {
 
         super.initialize();
 
-        setChild(Panel.LAYOUT, createChild(getDefaultLayout()));
+        setChild(DisplayRegion.LAYOUT, createChild(getDefaultLayout()));
     }
 
     /**
@@ -202,8 +202,8 @@ public class DisplayRegion extends DisplayItem {
      */
     public void finalizz() throws Exception {
 
-        Layout layout = (Layout) getChild(Panel.LAYOUT);
-        removeChild(Panel.LAYOUT);
+        Layout layout = (Layout) getChild(DisplayRegion.LAYOUT);
+        removeChild(DisplayRegion.LAYOUT);
         destroyChild(layout);
 
         super.finalizz();

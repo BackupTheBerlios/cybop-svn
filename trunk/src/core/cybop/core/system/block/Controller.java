@@ -51,7 +51,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.21 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
@@ -63,20 +63,23 @@ public class Controller extends Block {
     /** The processor id. */
     public static final String PROCESSOR = new String("processor");
 
-    /** The knowledge model. */
-    public static final String KNOWLEDGE_MODEL = new String("knowledge_model");
-
     /** The system display. */
     public static final String SYSTEM_DISPLAY = new String("system_display");
 
-    /** The mouse model. */
-    public static final String MOUSE_MODEL = new String("mouse_model");
+    /** The system information. */
+    public static final String SYSTEM_INFORMATION = new String("system_information");
 
     /** The system information display. */
     public static final String SYSTEM_INFORMATION_DISPLAY = new String("system_information_display");
 
     /** The system information display translator. */
     public static final String SYSTEM_INFORMATION_DISPLAY_TRANSLATOR = new String("system_information_display_translator");
+
+    /** The mouse model. */
+    public static final String MOUSE_MODEL = new String("mouse_model");
+
+    /** The knowledge model. */
+    public static final String KNOWLEDGE_MODEL = new String("knowledge_model");
 
 //?? --- Move the following translators into some i/o class, to handle i/o devices (receive/send signal)!
 
@@ -270,16 +273,6 @@ public class Controller extends Block {
     }
 
     /**
-     * Returns the default knowledge model category.
-     *
-     * @return the default knowledge model category
-     */
-    public Item getDefaultKnowledgeModelCategory() {
-
-        return null;
-    }
-
-    /**
      * Returns the default system display category.
      *
      * @return the default system display category
@@ -290,13 +283,13 @@ public class Controller extends Block {
     }
 
     /**
-     * Returns the default mouse model category.
+     * Returns the default system information category.
      *
-     * @return the default mouse model category
+     * @return the default system information category
      */
-    public Item getDefaultMouseModelCategory() {
+    public String getDefaultSystemInformationCategory() {
 
-        return null;
+        return new String("cybop.core.systeminformation.SystemInformation");
     }
 
     /**
@@ -315,6 +308,26 @@ public class Controller extends Block {
      * @return the default system information display translator category
      */
     public Item getDefaultSystemInformationDisplayTranslatorCategory() {
+
+        return null;
+    }
+
+    /**
+     * Returns the default mouse model category.
+     *
+     * @return the default mouse model category
+     */
+    public Item getDefaultMouseModelCategory() {
+
+        return null;
+    }
+
+    /**
+     * Returns the default knowledge model category.
+     *
+     * @return the default knowledge model category
+     */
+    public Item getDefaultKnowledgeModelCategory() {
 
         return null;
     }
@@ -361,11 +374,12 @@ public class Controller extends Block {
         super.categorize();
 
         setCategory(Controller.PROCESSOR, getDefaultProcessorCategory());
-        setCategory(Controller.KNOWLEDGE_MODEL, getDefaultKnowledgeModelCategory());
         setCategory(Controller.SYSTEM_DISPLAY, getDefaultSystemDisplayCategory());
-        setCategory(Controller.MOUSE_MODEL, getDefaultMouseModelCategory());
+        setCategory(Controller.SYSTEM_INFORMATION, getDefaultSystemInformationCategory());
         setCategory(Controller.SYSTEM_INFORMATION_DISPLAY, getDefaultSystemInformationDisplayCategory());
         setCategory(Controller.SYSTEM_INFORMATION_DISPLAY_TRANSLATOR, getDefaultSystemInformationDisplayTranslatorCategory());
+        setCategory(Controller.MOUSE_MODEL, getDefaultMouseModelCategory());
+        setCategory(Controller.KNOWLEDGE_MODEL, getDefaultKnowledgeModelCategory());
         setCategory(Controller.TUI_TRANSLATOR, getDefaultTuiTranslatorCategory());
         setCategory(Controller.GUI_TRANSLATOR, getDefaultGuiTranslatorCategory());
         setCategory(Controller.SOCKET_TRANSLATOR, getDefaultSocketTranslatorCategory());
@@ -379,11 +393,12 @@ public class Controller extends Block {
         removeCategory(Controller.SOCKET_TRANSLATOR);
         removeCategory(Controller.GUI_TRANSLATOR);
         removeCategory(Controller.TUI_TRANSLATOR);
+        removeCategory(Controller.MOUSE_MODEL);
+        removeCategory(Controller.KNOWLEDGE_MODEL);
         removeCategory(Controller.SYSTEM_INFORMATION_DISPLAY_TRANSLATOR);
         removeCategory(Controller.SYSTEM_INFORMATION_DISPLAY);
-        removeCategory(Controller.MOUSE_MODEL);
+        removeCategory(Controller.SYSTEM_INFORMATION);
         removeCategory(Controller.SYSTEM_DISPLAY);
-        removeCategory(Controller.KNOWLEDGE_MODEL);
         removeCategory(Controller.PROCESSOR);
 
         super.decategorize();
@@ -401,11 +416,12 @@ public class Controller extends Block {
         super.initialize();
 
         setChild(Controller.PROCESSOR, createChild(getCategory(Controller.PROCESSOR)));
-        setChild(Controller.KNOWLEDGE_MODEL, createChild(getCategory(Controller.KNOWLEDGE_MODEL)));
         setChild(Controller.SYSTEM_DISPLAY, createChild(getCategory(Controller.SYSTEM_DISPLAY)));
-        setChild(Controller.MOUSE_MODEL, createChild(getCategory(Controller.MOUSE_MODEL)));
+        setChild(Controller.SYSTEM_INFORMATION, createChild(getCategory(Controller.SYSTEM_INFORMATION)));
         setChild(Controller.SYSTEM_INFORMATION_DISPLAY, createChild(getCategory(Controller.SYSTEM_INFORMATION_DISPLAY)));
         setChild(Controller.SYSTEM_INFORMATION_DISPLAY_TRANSLATOR, createChild(getCategory(Controller.SYSTEM_INFORMATION_DISPLAY_TRANSLATOR)));
+        setChild(Controller.MOUSE_MODEL, createChild(getCategory(Controller.MOUSE_MODEL)));
+        setChild(Controller.KNOWLEDGE_MODEL, createChild(getCategory(Controller.KNOWLEDGE_MODEL)));
         setChild(Controller.TUI_TRANSLATOR, createChild(getCategory(Controller.TUI_TRANSLATOR)));
         setChild(Controller.GUI_TRANSLATOR, createChild(getCategory(Controller.GUI_TRANSLATOR)));
         setChild(Controller.SOCKET_TRANSLATOR, createChild(getCategory(Controller.SOCKET_TRANSLATOR)));
@@ -428,25 +444,29 @@ public class Controller extends Block {
         removeChild(Controller.TUI_TRANSLATOR);
         destroyChild(tuiTranslator);
 
-        Item systemInformationFrameDisplayTranslator = getChild(Controller.SYSTEM_INFORMATION_DISPLAY_TRANSLATOR);
-        removeChild(Controller.SYSTEM_INFORMATION_DISPLAY_TRANSLATOR);
-        destroyChild(systemInformationFrameDisplayTranslator);
-
-        Item systemInformationFrameDisplay = getChild(Controller.SYSTEM_INFORMATION_DISPLAY);
-        removeChild(Controller.SYSTEM_INFORMATION_DISPLAY);
-        destroyChild(systemInformationFrameDisplay);
+        Item knowledgeModel = getChild(Controller.KNOWLEDGE_MODEL);
+        removeChild(Controller.KNOWLEDGE_MODEL);
+        destroyChild(knowledgeModel);
 
         Item mouseModel = getChild(Controller.MOUSE_MODEL);
         removeChild(Controller.MOUSE_MODEL);
         destroyChild(mouseModel);
 
-        Item systemFrameDisplay = getChild(Controller.SYSTEM_DISPLAY);
-        removeChild(Controller.SYSTEM_DISPLAY);
-        destroyChild(systemFrameDisplay);
+        Item systemInformationDisplayTranslator = getChild(Controller.SYSTEM_INFORMATION_DISPLAY_TRANSLATOR);
+        removeChild(Controller.SYSTEM_INFORMATION_DISPLAY_TRANSLATOR);
+        destroyChild(systemInformationDisplayTranslator);
 
-        Item domainModel = getChild(Controller.KNOWLEDGE_MODEL);
-        removeChild(Controller.KNOWLEDGE_MODEL);
-        destroyChild(domainModel);
+        Item systemInformationDisplay = getChild(Controller.SYSTEM_INFORMATION_DISPLAY);
+        removeChild(Controller.SYSTEM_INFORMATION_DISPLAY);
+        destroyChild(systemInformationDisplay);
+
+        Item systemInformation = getChild(Controller.SYSTEM_INFORMATION);
+        removeChild(Controller.SYSTEM_INFORMATION);
+        destroyChild(systemInformation);
+
+        Item systemDisplay = getChild(Controller.SYSTEM_DISPLAY);
+        removeChild(Controller.SYSTEM_DISPLAY);
+        destroyChild(systemDisplay);
 
         Item processor = getChild(Controller.PROCESSOR);
         removeChild(Controller.PROCESSOR);
@@ -475,11 +495,11 @@ public class Controller extends Block {
 
                 if (a.isEqualTo(Controller.SHOW_SYSTEM_DISPLAY_ACTION)) {
 
-                    showDisplay(s);
+                    showSystemDisplay(s);
     
                 } else if (a.isEqualTo(Controller.HIDE_SYSTEM_DISPLAY_ACTION)) {
     
-                    hideDisplay(s);
+                    hideSystemDisplay(s);
 
                 } else if (a.isEqualTo(Controller.SHOW_SYSTEM_INFORMATION_DISPLAY_ACTION)) {
 

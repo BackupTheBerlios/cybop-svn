@@ -35,7 +35,7 @@ import cybop.core.screen.region.*;
 /**
  * This class represents a frame model.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class FrameDisplay extends Display {
@@ -44,8 +44,8 @@ public class FrameDisplay extends Display {
     // Children names.
     //
 
-    /** The user interface mode. */
-    public static final String USER_INTERFACE_MODE = new String("user_interface_mode");
+    /** The mode. */
+    public static final String MODE = new String("mode");
 
     /** The title. */
     public static final String TITLE = new String("title");
@@ -78,28 +78,28 @@ public class FrameDisplay extends Display {
     public static final String LOOK_AND_FEEL = new String("look_and_feel");
 
     //
-    // User interface modes.
+    // Modes.
     //
 
-    /** The applet user interface mode. */
+    /** The applet mode. */
     public static final Integer APPLET_MODE = new Integer(0);
 
-    /** The window user interface mode. */
+    /** The window mode. */
     public static final Integer WINDOW_MODE = new Integer(1);
 
-    /** The modal dialog user interface mode. */
+    /** The modal dialog mode. */
     public static final Integer MODAL_DIALOG_MODE = new Integer(2);
 
-    /** The modeless dialog user interface mode. */
+    /** The modeless dialog mode. */
     public static final Integer MODELESS_DIALOG_MODE = new Integer(3);
 
-    /** The frame user interface mode. */
+    /** The frame mode. */
     public static final Integer FRAME_MODE = new Integer(4);
 
-    /** The internal frame user interface mode. */
-    public static final Integer INTERNAL_FRAME_MODE = new Integer(5);
+    /** The internal frame mode. */
+    public static final Integer INTERNAL_MODE = new Integer(5);
 
-    /** The tab page user interface mode. */
+    /** The tab page mode. */
     public static final Integer TAB_PAGE_MODE = new Integer(6);
 
     //
@@ -115,7 +115,7 @@ public class FrameDisplay extends Display {
 
         java.awt.Container c = null;
 /*??
-        Integer i = (Integer) getChild(FrameDisplay.USER_INTERFACE_MODE);
+        Integer i = (Integer) getChild(FrameDisplay.MODE);
 
         if (i != null) {
 
@@ -135,7 +135,7 @@ public class FrameDisplay extends Display {
     
                 c = new javax.swing.JDialog();
     
-            } else if (i.isEqualTo(FrameDisplay.FRAME_MODE)) {
+            } else if (i.isEqualTo(FrameDisplay.MODE)) {
 */
     
                 c = new javax.swing.JFrame();
@@ -150,7 +150,7 @@ public class FrameDisplay extends Display {
                 }
 
 /*??
-            } else if (i.isEqualTo(FrameDisplay.INTERNAL_FRAME_MODE)) {
+            } else if (i.isEqualTo(FrameDisplay.INTERNAL_MODE)) {
     
                 c = new javax.swing.JInternalFrame();
     
@@ -161,7 +161,7 @@ public class FrameDisplay extends Display {
 
         } else {
 
-            throw new Exception("Could not create frame. The user interface mode is null.");
+            throw new Exception("Could not create frame. The mode is null.");
         }
 */
 
@@ -278,79 +278,77 @@ public class FrameDisplay extends Display {
     }
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default user interface mode.
+     * Returns the default mode category.
      *
-     * The default is: System.INTERNAL_FRAME_MODE
-     *
-     * @return the default user interface mode
+     * @return the default mode category
      */
-    public Integer getDefaultFrameDisplayMode() {
+    public Item getDefaultModeCategory() {
 
-        return FrameDisplay.FRAME_MODE;
+        return FrameDisplay.MODE;
     }
 
     /**
-     * Returns the default title.
+     * Returns the default title category.
      *
-     * @return the default title
+     * @return the default title category
      */
-    public String getDefaultTitle() {
+    public Item getDefaultTitleCategory() {
 
         return new String("Res Medicinae");
     }
 
     /**
-     * Returns the default icon.
+     * Returns the default icon category.
      *
-     * @return the default icon
+     * @return the default icon category
      */
-    public String getDefaultIcon() {
+    public Item getDefaultIconCategory() {
 
         return new String("icon");
     }
 
     /**
-     * Returns the default menu bar.
+     * Returns the default menu bar category.
      *
-     * @return the default menu bar
+     * @return the default menu bar category
      */
-    public String getDefaultMenuBar() {
+    public Item getDefaultMenuBarCategory() {
 
-        return new String("cybop.core.model.organizer.MenuBar");
+        return new String("cybop.core.screen.region.MenuBar");
     }
 
     /**
-     * Returns the default tool bar.
+     * Returns the default tool bar category.
      *
-     * @return the default tool bar
+     * @return the default tool bar category
      */
-    public String getDefaultToolBar() {
+    public Item getDefaultToolBarCategory() {
 
-        return new String("cybop.core.model.organizer.ToolBar");
+        return new String("cybop.core.screen.region.ToolBar");
     }
 
     /**
-     * Returns the default contents panel.
+     * Returns the default contents panel category.
      *
-     * @return the default contents panel
+     * @return the default contents panel category
      */
-    public String getDefaultContentsPanel() {
+    public Item getDefaultContentsPanelCategory() {
 
-        return new String("cybop.core.model.organizer.DisplayRegion");
+        return new String("cybop.core.screen.DisplayRegion");
     }
 
     /**
-     * Returns the default status bar.
+     * Returns the default status bar category.
      *
-     * @return the default status bar
+     * @return the default status bar category
      */
-    public String getDefaultStatusBar() {
+    public Item getDefaultStatusBarCategory() {
 
-        return new String("cybop.core.model.organizer.StatusBar");
+        return new String("cybop.core.screen.region.StatusBar");
     }
 
     /**
@@ -376,11 +374,11 @@ public class FrameDisplay extends Display {
     }
 
     /**
-     * Returns the default resizable flag.
+     * Returns the default resizable flag category.
      *
-     * @return the default resizable flag
+     * @return the default resizable flag category
      */
-    public Boolean getDefaultResizableFlag() {
+    public Item getDefaultResizableFlagCategory() {
 
         return new Boolean(Boolean.TRUE);
     }
@@ -1113,66 +1111,103 @@ public class FrameDisplay extends Display {
     }
 
     //
+    // Categorization.
+    //
+
+    /**
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(FrameDisplay.MODE, getDefaultModeCategory());
+        setCategory(FrameDisplay.TITLE, getDefaultTitleCategory());
+        setCategory(FrameDisplay.ICON, getDefaultIconCategory());
+        setCategory(FrameDisplay.MENU_BAR, getDefaultMenuBarCategory());
+        setCategory(FrameDisplay.TOOL_BAR, getDefaultToolBarCategory());
+        setCategory(FrameDisplay.CONTENTS_PANEL, getDefaultContentsPanelCategory());
+        setCategory(FrameDisplay.STATUS_BAR, getDefaultStatusBarCategory());
+        setCategory(FrameDisplay.RESIZABLE_FLAG, getDefaultResizableFlagCategory());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(FrameDisplay.RESIZABLE_FLAG);
+        removeCategory(FrameDisplay.STATUS_BAR);
+        removeCategory(FrameDisplay.CONTENTS_PANEL);
+        removeCategory(FrameDisplay.TOOL_BAR);
+        removeCategory(FrameDisplay.MENU_BAR);
+        removeCategory(FrameDisplay.ICON);
+        removeCategory(FrameDisplay.TITLE);
+        removeCategory(FrameDisplay.MODE);
+
+        super.decategorize();
+    }
+
+    //
     // Initialization.
     //
 
     /**
-     * Initializes this swing view.
-     *
-     * @exception Exception if the configuration is null
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
         super.initialize();
 
         javax.swing.UIManager.setLookAndFeel(getDefaultLookAndFeel());
-        setChild(FrameDisplay.USER_INTERFACE_MODE, getDefaultFrameDisplayMode());
+        setChild(FrameDisplay.MODE, createChild(getCategory(FrameDisplay.MODE)));
 /*??
         setChild(FrameDisplay.WINDOW_BOUNDS, configureWindowBounds(getDefaultWindowBounds()));
         setChild(FrameDisplay.DIALOG_BOUNDS, configureDialogBounds(getDefaultDialogBounds()));
         setChild(FrameDisplay.FRAME_BOUNDS, configureFrameBounds(getDefaultFrameBounds()));
         setChild(FrameDisplay.INTERNAL_FRAME_BOUNDS, configureInternalFrameBounds(getDefaultInternalFrameBounds()));
 */
-        setChild(FrameDisplay.TITLE, getDefaultTitle());
-        setChild(FrameDisplay.ICON, getDefaultIcon());
-        setChild(FrameDisplay.MENU_BAR, createChild(getDefaultMenuBar()));
-        setChild(FrameDisplay.TOOL_BAR, createChild(getDefaultToolBar()));
-        setChild(FrameDisplay.CONTENTS_PANEL, createChild(getDefaultContentsPanel()));
-        setChild(FrameDisplay.STATUS_BAR, createChild(getDefaultStatusBar()));
-        setChild(FrameDisplay.RESIZABLE_FLAG, getDefaultResizableFlag());
+        setChild(FrameDisplay.TITLE, createChild(getCategory(FrameDisplay.TITLE)));
+        setChild(FrameDisplay.ICON, createChild(getCategory(FrameDisplay.ICON)));
+        setChild(FrameDisplay.MENU_BAR, createChild(getCategory(FrameDisplay.MENU_BAR)));
+        setChild(FrameDisplay.TOOL_BAR, createChild(getCategory(FrameDisplay.TOOL_BAR)));
+        setChild(FrameDisplay.CONTENTS_PANEL, createChild(getCategory(FrameDisplay.CONTENTS_PANEL)));
+        setChild(FrameDisplay.STATUS_BAR, createChild(getCategory(FrameDisplay.STATUS_BAR)));
+        setChild(FrameDisplay.RESIZABLE_FLAG, createChild(getCategory(FrameDisplay.RESIZABLE_FLAG)));
     }
 
     /**
-     * Finalizes this swing view.
-     *
-     * @exception Exception if the configuration is null
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
-        Boolean resizable = (Boolean) getChild(FrameDisplay.RESIZABLE_FLAG);
+        Item resizableFlag = getChild(FrameDisplay.RESIZABLE_FLAG);
         removeChild(FrameDisplay.RESIZABLE_FLAG);
+        destroyChild(resizableFlag);
 
-        StatusBar statusBar = (StatusBar) getChild(FrameDisplay.STATUS_BAR);
+        Item statusBar = getChild(FrameDisplay.STATUS_BAR);
         removeChild(FrameDisplay.STATUS_BAR);
         destroyChild(statusBar);
 
-        ContentsPanel contentsPanel = (ContentsPanel) getChild(FrameDisplay.CONTENTS_PANEL);
+        Item contentsPanel = getChild(FrameDisplay.CONTENTS_PANEL);
         removeChild(FrameDisplay.CONTENTS_PANEL);
         destroyChild(contentsPanel);
 
-        ToolBar toolBar = (ToolBar) getChild(FrameDisplay.TOOL_BAR);
+        Item toolBar = getChild(FrameDisplay.TOOL_BAR);
         removeChild(FrameDisplay.TOOL_BAR);
         destroyChild(toolBar);
 
-        MenuBar menuBar = (MenuBar) getChild(FrameDisplay.MENU_BAR);
+        Item menuBar = getChild(FrameDisplay.MENU_BAR);
         removeChild(FrameDisplay.MENU_BAR);
         destroyChild(menuBar);
 
-        String icon = (String) getChild(FrameDisplay.ICON);
+        Item icon = getChild(FrameDisplay.ICON);
         removeChild(FrameDisplay.ICON);
+        destroyChild(icon);
 
-        String title = (String) getChild(FrameDisplay.TITLE);
+        Item title = getChild(FrameDisplay.TITLE);
         removeChild(FrameDisplay.TITLE);
+        destroyChild(title);
 
 /*??
         deconfigureInternalFrameBounds((java.awt.Rectangle) getChild(FrameDisplay.INTERNAL_FRAME_BOUNDS));
@@ -1192,8 +1227,9 @@ public class FrameDisplay extends Display {
         destroyChild((java.awt.Rectangle) getChild(FrameDisplay.WINDOW_BOUNDS));
 */
 
-        Integer viewModelMode = (Integer) getChild(FrameDisplay.USER_INTERFACE_MODE);
-        removeChild(FrameDisplay.USER_INTERFACE_MODE);
+        Item mode = getChild(FrameDisplay.MODE);
+        removeChild(FrameDisplay.MODE);
+        destroyChild(mode);
 
         super.finalizz();
     }

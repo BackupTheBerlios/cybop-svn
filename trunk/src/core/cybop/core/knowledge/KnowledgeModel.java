@@ -24,89 +24,15 @@
 
 package cybop.core.knowledge;
 
-import cybop.core.model.*;
-import cybop.core.model.String;
-
 /**
  * This class represents a knowledge model.
  *
  * It is able to store general knowledge, that is hierarchical information.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Torsten Kunze <zone3@gmx.de>
  */
 public class KnowledgeModel extends KnowledgeItem {
-
-    //
-    // Children names.
-    //
-
-    /** The system information. */
-    public static final String SYSTEM_INFORMATION = new String("system_information");
-
-    //
-    // Default categories.
-    //
-
-    /**
-     * Returns the default system information.
-     *
-     * @return the default system information
-     */
-    public String getDefaultSystemInformation() {
-
-        return new String("cybop.core.model.unit.SystemInformation");
-    }
-
-    //
-    // Categorization.
-    //
-
-    /**
-     * Categorizes this hierarchy.
-     */
-    public void categorize() throws Exception {
-
-        super.categorize();
-
-        setCategory(KnowledgeModel.SYSTEM_INFORMATION, getDefaultSystemInformation());
-    }
-
-    /**
-     * Decategorizes this hierarchy.
-     */
-    public void decategorize() throws Exception {
-
-        removeCategory(KnowledgeModel.SYSTEM_INFORMATION);
-
-        super.decategorize();
-    }
-
-    //
-    // Initialization.
-    //
-
-    /**
-     * Initializes this item.
-     */
-    public void initialize() throws Exception {
-
-        super.initialize();
-
-        setChild(KnowledgeModel.SYSTEM_INFORMATION, createChild(getCategory(KnowledgeModel.SYSTEM_INFORMATION)));
-    }
-
-    /**
-     * Finalizes this item.
-     */
-    public void finalizz() throws Exception {
-
-        SystemInformationDisplay systemInformationModel = (SystemInformationDisplay) getChild(KnowledgeModel.SYSTEM_INFORMATION);
-        removeChild(KnowledgeModel.SYSTEM_INFORMATION);
-        destroyChild(systemInformationModel);
-
-        super.finalizz();
-    }
 }
 

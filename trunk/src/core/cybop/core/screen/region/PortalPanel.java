@@ -33,7 +33,7 @@ import cybop.core.screen.region.splitpane.*;
 /**
  * This class represents a portal contents panel.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalPanel extends DisplayRegion {
@@ -62,7 +62,7 @@ public class PortalPanel extends DisplayRegion {
 
         if (n != null) {
 
-            if (n.isEqualTo(PortalContentsPanel.PORTAL_SPLIT_PANE)) {
+            if (n.isEqualTo(PortalPanel.PORTAL_SPLIT_PANE)) {
 
                 setPortalSplitPane((PortalSplitPane) i);
             }
@@ -83,7 +83,7 @@ public class PortalPanel extends DisplayRegion {
 
         if (n != null) {
 
-            if (n.isEqualTo(PortalContentsPanel.PORTAL_SPLIT_PANE)) {
+            if (n.isEqualTo(PortalPanel.PORTAL_SPLIT_PANE)) {
 
                 removePortalSplitPane((PortalSplitPane) getChild(n));
             }
@@ -181,7 +181,7 @@ public class PortalPanel extends DisplayRegion {
 
         super.initialize();
 
-        setChild(PortalContentsPanel.PORTAL_SPLIT_PANE, createChild(getDefaultPortalSplitPane()));
+        setChild(PortalPanel.PORTAL_SPLIT_PANE, createChild(getDefaultPortalSplitPane()));
     }
 
     /**
@@ -189,8 +189,8 @@ public class PortalPanel extends DisplayRegion {
      */
     public void finalizz() throws Exception {
 
-        PortalSplitPane portalSplitPane = (PortalSplitPane) getChild(PortalContentsPanel.PORTAL_SPLIT_PANE);
-        removeChild(PortalContentsPanel.PORTAL_SPLIT_PANE);
+        PortalSplitPane portalSplitPane = (PortalSplitPane) getChild(PortalPanel.PORTAL_SPLIT_PANE);
+        removeChild(PortalPanel.PORTAL_SPLIT_PANE);
         destroyChild(portalSplitPane);
 
         super.finalizz();
