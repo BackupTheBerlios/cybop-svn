@@ -29,7 +29,7 @@ package cyboi;
  *
  * Map elements are accessed over their index or name.
  *
- * @version $Revision: 1.6 $ $Date: 2003-07-20 22:46:20 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-07-22 20:42:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class MapHandler {
@@ -120,7 +120,7 @@ class MapHandler {
      */
     static void set_map_element(java.lang.Object c, java.lang.Object e) {
 
-        Map mc = (Map) c;
+        MapContainer mc = (MapContainer) c;
         
         if (mc != null) {
             
@@ -151,7 +151,7 @@ class MapHandler {
      * @param e the map element
      * @return the map element name
      */
-    static java.lang.Object add_map_element(java.lang.Object c, java.lang.Object e) {
+    static void add_map_element(java.lang.Object c, java.lang.Object e) {
 
         MapElement me = (MapElement) e;
         
@@ -166,8 +166,6 @@ class MapHandler {
 
             System.out.println("ERROR: Could not add map element. The map element is null.");
         }
-
-        return name;
     }
 
     /**
@@ -221,7 +219,7 @@ class MapHandler {
 
         if (mc != null) {
     
-            e = ArrayHandler.get_array_element(m.references, i);
+            e = ArrayHandler.get_array_element(mc.references, i);
 
         } else {
 
@@ -259,7 +257,9 @@ class MapHandler {
 
         if (mc != null) {
             
-            if (e != null) {
+            MapElement me = (MapElement) e;
+            
+            if (me != null) {
     
                 int i = index + 1;
                 int size = MapHandler.get_map_container_size(c);
@@ -279,7 +279,7 @@ class MapHandler {
     
                         // If a name equal to the searched one is found,
                         // then its index is the one to be returned.
-                        if (name.equals((java.lang.String) e.name)) {
+                        if (name.equals((java.lang.String) me.name)) {
     
                             index = i;
                             break;
@@ -323,7 +323,9 @@ class MapHandler {
 
         if (mc != null) {
 
-            if (e != null) {
+            MapElement me = (MapElement) e;
+            
+            if (me != null) {
                     
                 int i = index + 1;
                 int size = MapHandler.get_map_container_size(mc);
@@ -345,7 +347,7 @@ class MapHandler {
                         // If a name equal to the searched one is found,
                         // then its index is the one to be returned since
                         // this element will have to be replaced.
-                        if (name.equals((java.lang.String) e.name)) {
+                        if (name.equals((java.lang.String) me.name)) {
     
                             index = i;
                             break;
@@ -425,7 +427,9 @@ class MapHandler {
 
         if (mc != null) {
 
-            if (e != null) {
+            MapElement me = (MapElement) e;
+            
+            if (me != null) {
                     
                 int i = 0;
                 int size = MapHandler.get_map_container_size(mc);
@@ -437,7 +441,7 @@ class MapHandler {
     
                     if (name != null) {
     
-                        if (((java.lang.String) name).startsWith((java.lang.String) e.name)) {
+                        if (((java.lang.String) name).startsWith((java.lang.String) me.name)) {
     
 /*??
                             int begin = 0;

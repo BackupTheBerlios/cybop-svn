@@ -29,7 +29,7 @@ package cyboi;
  *
  * It contains procedures to create items of primitive type.
  *
- * @version $Revision: 1.5 $ $Date: 2003-07-20 22:46:20 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-07-22 20:42:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class PrimitiveHandler {
@@ -44,9 +44,9 @@ class PrimitiveHandler {
      * @param s the integer primitive as string
      * @return the integer primitive
      */
-    static java.lang.Object create_integer_primitive(java.lang.String s) {
+    static java.lang.Object create_integer_primitive(java.lang.Object s) {
 
-        return java.lang.Integer.valueOf(s);
+        return java.lang.Integer.valueOf((java.lang.String) s);
     }
 
     /**
@@ -55,9 +55,9 @@ class PrimitiveHandler {
      * @param s the float primitive as string
      * @return the float primitive
      */
-    static java.lang.Object create_float_primitive(java.lang.String s) {
+    static java.lang.Object create_float_primitive(java.lang.Object s) {
 
-        return java.lang.Double.valueOf(s);
+        return java.lang.Double.valueOf((java.lang.String) s);
     }
 
     /**
@@ -66,9 +66,9 @@ class PrimitiveHandler {
      * @param s the character primitive as string
      * @return the character primitive
      */
-    static java.lang.Object create_character_primitive(java.lang.String s) {
+    static java.lang.Object create_character_primitive(java.lang.Object s) {
 
-        return null; //?? java.lang.Double.valueOf(s);
+        return null; //?? java.lang.Double.valueOf((java.lang.String) s);
     }
 
     /**
@@ -77,7 +77,7 @@ class PrimitiveHandler {
      * @param s the string primitive as string
      * @return the string primitive
      */
-    static java.lang.Object create_string_primitive(java.lang.String s) {
+    static java.lang.Object create_string_primitive(java.lang.Object s) {
 
         return s;
     }

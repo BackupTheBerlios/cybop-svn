@@ -29,10 +29,10 @@ package cyboi;
  *
  * It contains all dynamic operation sequences.
  *
- * @version $Revision: 1.3 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-07-22 20:42:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class Dynamics extends Item {
+class Dynamics {
 
     //
     // Complex constant.

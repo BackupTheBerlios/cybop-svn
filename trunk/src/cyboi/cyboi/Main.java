@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.9 $ $Date: 2003-07-22 12:04:39 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-07-22 20:42:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -46,18 +46,6 @@ class Main {
     //?? See for example:
     //?? java.io.ObjectOutputStream::writeArray
     //?? for how to transfer a Object into a byte[]
-
-    /** The event handler. */
-    static java.lang.Object event_handler;
-
-    /** The signal memory. */
-    static java.lang.Object signal_memory;
-
-    /** The statics. */
-    static java.lang.Object statics;
-
-    /** The dynamics. */
-    static java.lang.Object dynamics;
 
     /*
      * The main method.
@@ -75,18 +63,18 @@ class Main {
                     java.lang.String dynamics_category = args[0];
                     java.lang.String statics_category = args[1];
 
-                    ItemHandler.xml_parser = Main.create_xml_parser();
+                    ItemHandler.xml_parser = ItemHandler.create_xml_parser();
 
-                    Main.event_handler = Main.create_event_handler();
-                    Main.replaceEventQueue(Main.event_handler);
+                    java.lang.Object event_handler = Main.create_event_handler();
+                    Main.replaceEventQueue(event_handler);
 
-                    Main.signal_memory = Main.create_signal_memory();
+                    java.lang.Object signal_memory = MapHandler.create_map_container();
 
-                    Main.statics = ItemHandler.create_item();
-                    ItemHandler.initialize(Main.statics, statics_category);
+                    java.lang.Object statics = ItemHandler.create_item_container();
+                    ItemHandler.initialize(statics, statics_category);
 
-                    Main.dynamics = ItemHandler.create_item();
-                    ItemHandler.initialize(Main.dynamics, dynamics_category);
+                    java.lang.Object dynamics = ItemHandler.create_item_container();
+                    ItemHandler.initialize(dynamics, dynamics_category);
     
                     // Alternative to Java Event Handler
                     // (if it gets replaced one day, once CYBOI is implemented in C):
@@ -100,15 +88,11 @@ class Main {
     
 //??                    Main.finalizz(i);
     
-                    Dynamics.destroy_dynamics((ItemContainer) Main.dynamics);
-                    Main.dynamics = null;
-                    Statics.destroy_statics((ItemContainer) Main.statics);
-                    Main.statics = null;
-                    Main.destroy_signal_memory((MapContainer) Main.signal_memory);
-                    Main.signal_memory = null;
-                    Main.destroy_event_handler((EventHandler) Main.event_handler);
-                    Main.event_handler = null;
-                    Main.destroy_xml_parser((org.apache.xerces.parsers.DOMParser) ItemHandler.xml_parser);
+                    ItemHandler.destroy_item_container(dynamics);
+                    ItemHandler.destroy_item_container(statics);
+                    MapHandler.destroy_map_container(signal_memory);
+                    Main.destroy_event_handler(event_handler);
+                    ItemHandler.destroy_xml_parser(ItemHandler.xml_parser);
                     ItemHandler.xml_parser = null;
     
                     //
@@ -145,39 +129,6 @@ class Main {
             e.printStackTrace();
             java.lang.System.exit(1);
         }
-    }
-
-    //
-    // XML parser.
-    //
-
-    /**
-     * Creates an xml parser.
-     *
-     * @return the xml parser
-     */
-    static java.lang.Object create_xml_parser() {
-
-        org.apache.xerces.parsers.DOMParser p = new org.apache.xerces.parsers.DOMParser();
-
-        if (p != null) {
-            
-            p.setFeature("http://xml.org/sax/features/validation", true);
-            
-        } else {
-            
-            java.lang.System.out.println("ERROR: The parser is null.");
-        }
-        
-        return p;
-    }
-
-    /**
-     * Destroys the xml parser.
-     *
-     * @param p the xml parser
-     */
-    static void destroy_xml_parser(java.lang.Object p) {
     }
 
     //
@@ -234,28 +185,6 @@ class Main {
         }
     }
     
-    //
-    // Signal memory.
-    //
-    
-    /**
-     * Creates a signal memory.
-     */
-    static java.lang.Object create_signal_memory() {
-
-        return MapHandler.create_map();
-    }
-
-    /**
-     * Destroys the signal memory.
-     *
-     * @param m the signal memory
-     */
-    static void destroy_signal_memory(java.lang.Object m) {
-
-        MapHandler.destroy_map(m);
-    }
-
     /**
      * Waits for signals.
      */

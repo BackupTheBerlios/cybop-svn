@@ -29,10 +29,10 @@ package cyboi;
  *
  * It contains all static data structures.
  *
- * @version $Revision: 1.3 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-07-22 20:42:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class Statics extends Item {
+class Statics {
 
     //
     // Complex constant.

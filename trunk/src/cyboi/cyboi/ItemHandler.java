@@ -65,13 +65,46 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.9 $ $Date: 2003-07-22 15:05:10 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-07-22 20:42:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
 
     /** The xml parser. */
     static java.lang.Object xml_parser;
+
+    //
+    // XML parser.
+    //
+
+    /**
+     * Creates an xml parser.
+     *
+     * @return the xml parser
+     */
+    static java.lang.Object create_xml_parser() {
+
+        org.apache.xerces.parsers.DOMParser p = new org.apache.xerces.parsers.DOMParser();
+
+        if (p != null) {
+            
+            p.setFeature("http://xml.org/sax/features/validation", true);
+            
+        } else {
+            
+            java.lang.System.out.println("ERROR: The parser is null.");
+        }
+        
+        return p;
+    }
+
+    /**
+     * Destroys the xml parser.
+     *
+     * @param p the xml parser
+     */
+    static void destroy_xml_parser(java.lang.Object p) {
+    }
 
     //
     // Item container management.
@@ -82,16 +115,16 @@ class ItemHandler {
      *
      * @return the item container
      */
-    static ItemContainer create_item_container() {
+    static java.lang.Object create_item_container() {
 
         ItemContainer c = new ItemContainer();
 
         if (c != null) {
 
-            c.abstractions = MapHandler.create_map();
-            c.categories = MapHandler.create_map();
-            c.positions = MapHandler.create_map();
-            c.items = MapHandler.create_map();
+            c.abstractions = MapHandler.create_map_container();
+            c.categories = MapHandler.create_map_container();
+            c.positions = MapHandler.create_map_container();
+            c.items = MapHandler.create_map_container();
 
         } else {
 
@@ -106,24 +139,26 @@ class ItemHandler {
      *
      * @param c the item container
      */
-    static void destroy_item_container(ItemContainer c) {
+    static void destroy_item_container(java.lang.Object c) {
 
-        if (c != null) {
+        ItemContainer ic = (ItemContainer) c;
+        
+        if (ic != null) {
 
-            Map items = c.items;
-            c.items = null;
+            java.lang.Object items = ic.items;
+            ic.items = null;
             MapHandler.destroy_map_container(items);
 
-            Map positions = c.positions;
-            c.positions = null;
+            java.lang.Object positions = ic.positions;
+            ic.positions = null;
             MapHandler.destroy_map_container(positions);
 
-            Map categories = c.categories;
-            c.categories = null;
+            java.lang.Object categories = ic.categories;
+            ic.categories = null;
             MapHandler.destroy_map_container(categories);
 
-            Map abstractions = c.abstractions;
-            c.abstractions = null;
+            java.lang.Object abstractions = ic.abstractions;
+            ic.abstractions = null;
             MapHandler.destroy_map_container(abstractions);
 
         } else {
@@ -145,30 +180,30 @@ class ItemHandler {
      */
     static java.lang.Object create_item_element(java.lang.Object a, java.lang.Object c) {
 
-        java.lang.Object item = null;
+        java.lang.Object i = null;
 
-        if (abstraction != null) {
+        if (a != null) {
 
-            if (abstraction.equals(Statics.INTEGER_PRIMITIVE)) {
+            if (a.equals(Statics.INTEGER_PRIMITIVE)) {
 
-                item = PrimitiveHandler.create_integer_primitive(category);
+                i = PrimitiveHandler.create_integer_primitive(c);
 
-            } else if (abstraction.equals(Statics.FLOAT_PRIMITIVE)) {
+            } else if (a.equals(Statics.FLOAT_PRIMITIVE)) {
 
-                item = PrimitiveHandler.create_float_primitive(category);
+                i = PrimitiveHandler.create_float_primitive(c);
 
-            } else if (abstraction.equals(Statics.CHAR_PRIMITIVE)) {
+            } else if (a.equals(Statics.CHAR_PRIMITIVE)) {
 
-                item = PrimitiveHandler.create_character_primitive(category);
+                i = PrimitiveHandler.create_character_primitive(c);
 
-            } else if (abstraction.equals(Statics.STRING_PRIMITIVE)) {
+            } else if (a.equals(Statics.STRING_PRIMITIVE)) {
 
-                item = PrimitiveHandler.create_string_primitive(category);
+                i = PrimitiveHandler.create_string_primitive(c);
 
-            } else if (abstraction.equals(Statics.COMPLEX)) {
+            } else if (a.equals(Statics.COMPLEX)) {
 
-                item = ItemHandler.create_item_container();
-                ItemHandler.initialize(item, category);
+                i = ItemHandler.create_item_container();
+                ItemHandler.initialize(i, c);
             }
             
         } else {
@@ -176,7 +211,7 @@ class ItemHandler {
             java.lang.System.out.println("ERROR: Could not create item element. The abstraction is null.");
         }
 
-        return item;
+        return i;
     }
 
     /**
@@ -195,10 +230,10 @@ class ItemHandler {
             
             if (ie != null) {
 
-                MapHandler.set_map_element(ic.abstractions, ie.name, e.abstraction);
-                MapHandler.set_map_element(ic.categories, ie.name, e.category);
-                MapHandler.set_map_element(ic.positions, ie.name, e.position);
-                MapHandler.set_map_element(ic.items, ie.name, e.item);
+                MapHandler.set_map_element(ic.abstractions, ie.name, ie.abstraction);
+                MapHandler.set_map_element(ic.categories, ie.name, ie.category);
+                MapHandler.set_map_element(ic.positions, ie.name, ie.position);
+                MapHandler.set_map_element(ic.items, ie.name, ie.item);
 
             } else {
     
@@ -216,24 +251,20 @@ class ItemHandler {
      *
      * @param c the item container
      * @param n the base name
-     * @param c the item
-     * @return the item name
+     * @param e the element
      */
-    static java.lang.Object add_item_element(java.lang.Object c, java.lang.Object n, java.lang.Object c) {
+    static void add_item_element(java.lang.Object c, java.lang.Object n, java.lang.Object e) {
 
-        java.lang.Object cn = null;
-        Map m = getItem();
+        MapContainer mc = (MapContainer) c;
 
-        if (m != null) {
+        if (mc != null) {
 
-            cn = m.add(n, c);
+            MapHandler.add_map_element(mc, n, e);
 
         } else {
 
             java.lang.System.out.println("ERROR: Could not add item element. The item element is null.");
         }
-        
-        return cn;
     }
 
     /**
@@ -244,11 +275,11 @@ class ItemHandler {
      */
     static void remove_item_element(java.lang.Object c, int i) {
 
-        Map m = getItem();
+        MapContainer mc = (MapContainer) c;
 
-        if (m != null) {
+        if (mc != null) {
 
-            m.remove(i);
+            MapHandler.remove_map_element(mc, i);
 
         } else {
 
@@ -264,11 +295,11 @@ class ItemHandler {
      */
     static void remove_item_element(java.lang.Object c, java.lang.Object n) {
 
-        Map m = getItem();
+        MapContainer mc = (MapContainer) c;
 
-        if (m != null) {
+        if (mc != null) {
 
-            m.remove(n);
+            MapHandler.remove_map_element(mc, n);
 
         } else {
 
@@ -281,23 +312,23 @@ class ItemHandler {
      *
      * @param c the item container
      * @param i the index
-     * @return the item
+     * @return the item element
      */
-    static ItemContainer get_item_element(java.lang.Object c, int i) {
+    static java.lang.Object get_item_element(java.lang.Object c, int i) {
 
-        ItemContainer c = null;
-        Map m = getItem();
+        java.lang.Object e = null;
+        MapContainer mc = (MapContainer) c;
 
-        if (m != null) {
+        if (mc != null) {
 
-            c = (ItemContainer) m.get(i);
+            e = get_map_element(mc, i);
 
         } else {
 
             java.lang.System.out.println("ERROR: Could not get item element. The item element is null.");
         }
 
-        return c;
+        return e;
     }
 
     /**
@@ -305,43 +336,23 @@ class ItemHandler {
      *
      * @param c the item container
      * @param n the name
-     * @return the item
+     * @return the item element
      */
     static ItemContainer get_item_element(java.lang.Object c, java.lang.Object n) {
 
-        ItemContainer c = null;
-        Map m = getItem();
+        java.lang.Object e = null;
+        MapContainer mc = (MapContainer) c;
 
-        if (m != null) {
+        if (mc != null) {
 
-            c = (ItemContainer) m.get(n);
+            e = get_map_element(mc, n);
 
         } else {
 
             java.lang.System.out.println("ERROR: Could not get item element. The item element is null.");
         }
 
-        return c;
-    }
-
-    /**
-     * Returns the item element.
-     *
-     * @param c the item container
-     * @param n the name
-     * @param d the default item
-     * @return the item
-     */
-    static ItemContainer get_item_element(java.lang.Object c, java.lang.Object n, java.lang.Object d) {
-
-        ItemContainer c = getItem(n);
-
-        if (c == null) {
-
-            c = d;
-        }
-
-        return c;
+        return e;
     }
 
     /**
@@ -349,22 +360,23 @@ class ItemHandler {
      *
      * @param c the item container
      * @param n the name
+     * @return the number of items whose name starts with the given name as word base
      */
     static int get_element_count(java.lang.Object c, java.lang.Object n) {
 
-        int c = -1;
-        Map m = getItem();
+        int i = -1;
+        MapContainer mc = (MapContainer) c;
 
-        if (m != null) {
+        if (mc != null) {
 
-            c = m.getCount(n);
+            i = mc.getCount(n);
 
         } else {
 
             java.lang.System.out.println("ERROR: Could not get item element count. The item element is null.");
         }
         
-        return c;
+        return i;
     }
 
     //
