@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.33 $ $Date: 2005-03-02 07:43:58 $ $Author: rholzmueller $
+ * @version $Revision: 1.34 $ $Date: 2005-03-02 08:03:09 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -125,7 +125,7 @@ void wait(void* p0) {
                                     
                                     if (*socket_flag != NULL_POINTER) {
                                     
-                                        if ( ( *((int*)socket_flag)==1 ) && (i < 0) ) {
+                                        if ( ( **((int**)socket_flag)==1 ) && (i < 0) ) {
 
                                             run_tcp_socket( p0);
                                         }
