@@ -23,7 +23,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.1 $ $Date: 2003-07-15 09:44:19 $ $Author: christian $
+# @version $Revision: 1.2 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Henrik Brandes <henrik-b@gmx.de>
 # @author Christian Heller <christian.heller@tuxtax.de>
@@ -38,5 +38,5 @@
 #
 # Startup resmedportal.
 #
-java -classpath $CLASSPATH cyboi.Main "${*}"
+java -classpath $CLASSPATH cyboi.Main "${@}"
 

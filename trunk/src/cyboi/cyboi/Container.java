@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Map.java,v $
+ * $RCSfile: Container.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -25,20 +25,13 @@
 package cyboi;
 
 /**
- * This is a map.
+ * This is a container.
  *
- * A map is like a table. One column (array) contains the element names.
- * A second column (array) contains the actual element references.
+ * It contains elements.
  *
- * @version $Revision: 1.3 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class Map extends Container {
-
-    /** The names container. */
-    static java.lang.Object[] names;
-
-    /** The references container. */
-    static java.lang.Object[] references;
+class Container extends java.lang.Object {
 }
 

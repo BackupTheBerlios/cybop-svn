@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Map.java,v $
+ * $RCSfile: MapElement.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -25,20 +25,19 @@
 package cyboi;
 
 /**
- * This is a map.
+ * This is a map element.
  *
- * A map is like a table. One column (array) contains the element names.
- * A second column (array) contains the actual element references.
+ * A map element is represented by a name and an object reference.
  *
- * @version $Revision: 1.3 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class Map extends Container {
+class MapElement extends Element {
 
-    /** The names container. */
-    static java.lang.Object[] names;
+    /** The name element. */
+    static Element name;
 
-    /** The references container. */
-    static java.lang.Object[] references;
+    /** The reference element. */
+    static Element reference;
 }
 

@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.6 $ $Date: 2003-07-18 14:55:01 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -46,9 +46,6 @@ class Main {
     //?? See for example:
     //?? java.io.ObjectOutputStream::writeArray
     //?? for how to transfer a Object into a byte[]
-
-    /** The xml parser. */
-    static java.lang.Object xml_parser;
 
     /** The event handler. */
     static java.lang.Object event_handler;
@@ -73,16 +70,12 @@ class Main {
 
             if (args != null) {
 
-                java.lang.System.out.println("INFO: array length: " + args.length);
-                java.lang.System.out.println("INFO: array length: " + args[0]);
-                java.lang.System.out.println("INFO: array length: " + args[1]);
-
                 if (args.length == 2) {
-                        
-                    String statics_category = args[0];
-                    String dynamics_category = args[1];
 
-                    Main.xml_parser = Main.create_xml_parser();
+                    String dynamics_category = args[0];
+                    String statics_category = args[1];
+
+                    ItemHandler.xml_parser = Main.create_xml_parser();
 
                     Main.event_handler = Main.create_event_handler();
                     Main.replaceEventQueue(Main.event_handler);
@@ -90,9 +83,10 @@ class Main {
                     Main.signal_memory = Main.create_signal_memory();
 
                     Main.statics = Statics.create_statics();
-                    ItemHandler.initialize(Main.statics, args[0]);
+                    ItemHandler.initialize(Main.statics, statics_category);
 
                     Main.dynamics = Dynamics.create_dynamics();
+                    ItemHandler.initialize(Main.dynamics, dynamics_category);
     
                     // Alternative to Java Event Handler
                     // (if it gets replaced one day, once CYBOI is implemented in C):
@@ -114,8 +108,8 @@ class Main {
                     Main.signal_memory = null;
                     Main.destroy_event_handler((EventHandler) Main.event_handler);
                     Main.event_handler = null;
-                    Main.destroy_xml_parser((org.apache.xerces.parsers.DOMParser) Main.xml_parser);
-                    Main.xml_parser = null;
+                    Main.destroy_xml_parser((org.apache.xerces.parsers.DOMParser) ItemHandler.xml_parser);
+                    ItemHandler.xml_parser = null;
     
                     //
                     // Runtime.getRuntime().exit(0);

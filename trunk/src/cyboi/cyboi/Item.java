@@ -25,30 +25,41 @@
 package cyboi;
 
 /**
- * This is an item.<br><br>
+ * This is an item.
+ *
+ * It represents an abstract description of some real world item.
  *
  * An item can be created by instantiating (cloning) an existing category.
  * Instantiating means allocating some place in the computer's memory.
  * Basically, every item can become a category if copies of this item are created.
- * The meta-level classes that form a category follow this order:<br><br>
  *
- * Item is the super class of all other classes in the framework.
- *
- * @version $Revision: 1.3 $ $Date: 2003-07-17 09:03:04 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class Item {
+class Item extends Container {
 
-    /** The abstractions. */
-    static Map abstractions;
+    /** The name. */
+    static java.lang.Object name;
 
-    /** The categories. */
-    static Map categories;
+    /** The super category. */
+    static java.lang.Object super_category;
 
-    /** The positions. */
-    static Map positions;
+    /** The java object. */
+    static java.lang.Object java_object;
 
-    /** The items. */
-    static Map items;
+    /** The java tree node. */
+    static java.lang.Object java_tree_node;
+
+    /** The abstractions container. */
+    static java.lang.Object abstractions;
+
+    /** The categories container. */
+    static java.lang.Object categories;
+
+    /** The positions container. */
+    static java.lang.Object positions;
+
+    /** The items container. */
+    static java.lang.Object items;
 }
 

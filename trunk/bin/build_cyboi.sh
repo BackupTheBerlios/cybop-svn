@@ -28,7 +28,7 @@
 # The building is done by the "Ant" tool of the "Jakarta" tool suite.
 #
 # @see http://www.apache.org
-# @version $Revision: 1.1 $ $Date: 2003-07-15 09:44:19 $ $Author: christian $
+# @version $Revision: 1.2 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -40,5 +40,5 @@
 #
 # Starts build process.
 #
-java -mx64m -classpath ${CLASSPATH} -Dant.home=${CYBOP_HOME}/lib org.apache.tools.ant.Main "${*}" -buildfile ${CYBOP_HOME}/src/build_cyboi.xml
+java -mx64m -classpath ${CLASSPATH} -Dant.home=${CYBOP_HOME}/lib org.apache.tools.ant.Main "${@}" -buildfile ${CYBOP_HOME}/src/build_cyboi.xml
 

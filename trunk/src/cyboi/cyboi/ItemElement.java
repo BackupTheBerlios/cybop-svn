@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Category.java,v $
+ * $RCSfile: ItemElement.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -25,28 +25,26 @@
 package cyboi;
 
 /**
- * This is a category.<br><br>
+ * This is an item element.<br><br>
  *
- * A category represents an abstract description of some real world item.
+ * An item element represents an item node in an XML-based
+ * <i>Cybernetics Oriented Language</i> (CYBOL) file.
  *
- * @version $Revision: 1.1 $ $Date: 2003-07-17 09:03:04 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class Category {
+class ItemElement extends Element {
 
-    /** The name. */
-    static String name;
+    /** The name element. */
+    static Element name;
 
-    /** The super category. */
-    static String super_category;
+    /** The abstraction element. */
+    static Element abstraction;
 
-    /** The java object. */
-    static String java_object;
+    /** The category element. */
+    static Element category;
 
-    /** The java tree node. */
-    static String java_tree_node;
-
-    /** The items. */
-    static Object[] items;
+    /** The position element. */
+    static Element position;
 }
 

@@ -27,6 +27,8 @@ package cyboi;
 /**
  * This is an item handler.<br><br>
  *
+ * Item elements are accessed over their index or name.
+ *
  * An item has well-defined methods useable by outside entities. An outside
  * entity which contains items is called their container. Containers have a contract
  * with the items they contain, in that methods are called in a specific order,
@@ -63,10 +65,13 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.5 $ $Date: 2003-07-18 14:55:01 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
+
+    /** The xml parser. */
+    static java.lang.Object xml_parser;
 
     //
     // Creation and destruction.
@@ -90,7 +95,7 @@ class ItemHandler {
 
         } else {
 
-            System.out.println("ERROR: Could not create item. The item is null.");
+            java.lang.System.out.println("ERROR: Could not create item. The item is null.");
         }
 
         return i;
@@ -123,46 +128,47 @@ class ItemHandler {
 
         } else {
 
-            System.out.println("ERROR: Could not destroy item. The item is null.");
+            java.lang.System.out.println("ERROR: Could not destroy item. The item is null.");
         }
     }
 
     //
-    // Item element management.
+    // Element management.
     //
 
     /**
-     * Sets the item.
+     * Sets the item element.
      *
+     * @param i the item
      * @param n the name
-     * @param c the item
+     * @param e the xml category element
      */
-/*??
-    static void setItem(Object n, Item c) {
+    static void set_item_element(java.lang.Object i, java.lang.Object n, java.lang.Object e) {
 
-        Map m = getItemren();
+        if (i != null) {
 
-        if (m != null) {
-
-            m.set(n, c);
+            MapHandler.set_map_element(i.abstractions, n, e);
+            MapHandler.set_map_element(i.categories, n, e);
+            MapHandler.set_map_element(i.positions, n, e);
+            MapHandler.set_map_element(i.items, n, e);
 
         } else {
 
-            System.out.println("Could not set item. The itemren is null.");
+            java.lang.System.out.println("ERROR: Could not set item. The item is null.");
         }
     }
 
     /**
      * Adds the item.
      *
+     * @param i the item
      * @param n the base name
      * @param c the item
      * @return the item name
      */
-/*??
-    static Object addItem(Object n, Item c) {
+    static java.lang.Object addItem(java.lang.Object n, java.lang.Object c) {
 
-        Object cn = null;
+        java.lang.Object cn = null;
         Map m = getItemren();
 
         if (m != null) {
@@ -171,7 +177,7 @@ class ItemHandler {
 
         } else {
 
-            System.out.println("Could not add item. The itemren is null.");
+            java.lang.System.out.println("ERROR: Could not add item. The item is null.");
         }
         
         return cn;
@@ -180,9 +186,9 @@ class ItemHandler {
     /**
      * Removes the item.
      *
+     * @param i the item
      * @param i the index
      */
-/*??
     static void removeItem(int i) {
 
         Map m = getItemren();
@@ -193,17 +199,17 @@ class ItemHandler {
 
         } else {
 
-            System.out.println("Could not remove item. The itemren is null.");
+            java.lang.System.out.println("ERROR: Could not remove item. The item is null.");
         }
     }
 
     /**
      * Removes the item.
      *
+     * @param i the item
      * @param n the name
      */
-/*??
-    static void removeItem(Object n) {
+    static void removeItem(java.lang.Object n) {
 
         Map m = getItemren();
 
@@ -213,17 +219,17 @@ class ItemHandler {
 
         } else {
 
-            System.out.println("Could not remove item. The itemren is null.");
+            java.lang.System.out.println("ERROR: Could not remove item. The item is null.");
         }
     }
 
     /**
      * Returns the item with the index.
      *
+     * @param i the item
      * @param i the index
      * @return the item
      */
-/*??
     static Item getItem(int i) {
 
         Item c = null;
@@ -235,7 +241,7 @@ class ItemHandler {
 
         } else {
 
-            System.out.println("Could not get item. The itemren is null.");
+            java.lang.System.out.println("ERROR: Could not get item. The item is null.");
         }
 
         return c;
@@ -244,11 +250,11 @@ class ItemHandler {
     /**
      * Returns the item.
      *
+     * @param i the item
      * @param n the name
      * @return the item
      */
-/*??
-    static Item getItem(Object n) {
+    static Item getItem(java.lang.Object n) {
 
         Item c = null;
         Map m = getItemren();
@@ -259,7 +265,7 @@ class ItemHandler {
 
         } else {
 
-            System.out.println("Could not get item. The itemren is null.");
+            java.lang.System.out.println("ERROR: Could not get item. The item is null.");
         }
 
         return c;
@@ -268,12 +274,12 @@ class ItemHandler {
     /**
      * Returns the item.
      *
+     * @param i the item
      * @param n the name
      * @param d the default item
      * @return the item
      */
-/*??
-    static Item getItem(Object n, Item d) {
+    static Item getItem(java.lang.Object n, java.lang.Object d) {
 
         Item c = getItem(n);
 
@@ -288,10 +294,10 @@ class ItemHandler {
     /**
      * Returns the number of itemren whose name starts with the given name as word base.
      *
+     * @param i the item
      * @param n the name
      */
-/*??
-    static int getCount(Object n) {
+    static int getCount(java.lang.Object n) {
 
         int c = -1;
         Map m = getItemren();
@@ -302,7 +308,7 @@ class ItemHandler {
 
         } else {
 
-            System.out.println("Could not get itemren count. The itemren is null.");
+            java.lang.System.out.println("ERROR: Could not get item count. The item is null.");
         }
         
         return c;
@@ -318,9 +324,9 @@ class ItemHandler {
      * @param item the item
      * @param c the category
      */
-    static void initialize(java.lang.Object item, Object c) throws Exception {
+    static void initialize(java.lang.Object item, java.lang.Object c) throws Exception {
 
-        org.apache.xerces.parsers.DOMParser p = (org.apache.xerces.parsers.DOMParser) Main.xml_parser;
+        org.apache.xerces.parsers.DOMParser p = (org.apache.xerces.parsers.DOMParser) ItemHandler.xml_parser;
         org.w3c.dom.Document doc = new org.apache.xerces.dom.DocumentImpl();
         java.lang.String f = c + ".cybol";
 
@@ -459,8 +465,10 @@ class ItemHandler {
             
                         } else if (abstraction.equals(Statics.COMPLEX)) {
             
-//??                            child = ItemHandler.create_item(category);
+                            child = ItemHandler.initialize(category_item);
                         }
+                        
+                        item.add_item(child);
                     
                     } else {
                         
@@ -539,7 +547,7 @@ class ItemHandler {
      * @param c the category
      */
 /*??
-    static void initialize(Item i, Object c) {
+    static void initialize(java.lang.Object i, java.lang.Object c) {
 
         String name = tmp.name;
         String abstraction = tmp.abstraction;
@@ -573,7 +581,7 @@ class ItemHandler {
 
         } else {
 
-            java.lang.System.out.println("DEBUG: Could not read item. The abstraction is null.");
+            java.lang.System.out.println("ERROR: Could not read item. The abstraction is null.");
         }
     }
 */
@@ -651,7 +659,7 @@ class ItemHandler {
     
                 } else {
         
-                    System.out.println("Could not get child item. An item is null.");
+                    java.lang.System.out.println("Could not get child item. An item is null.");
                 }
                 
                 i++;
@@ -659,7 +667,7 @@ class ItemHandler {
 
         } else {
 
-            System.out.println("Could not get child item. The children array is null.");
+            java.lang.System.out.println("Could not get child item. The children array is null.");
         }
 
         return child;
@@ -684,7 +692,7 @@ class ItemHandler {
 
         } else {
 
-            System.out.println("Could not check position. The space is null.");
+            java.lang.System.out.println("Could not check position. The space is null.");
         }
 
         return b;
