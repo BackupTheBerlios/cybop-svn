@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2004-10-28 23:32:19 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,7 @@
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
 #include "../socket/unix_socket.c"
+#include "../test/test.c"
 
 /**
  * Activates the internals.
@@ -177,7 +178,7 @@ void wait(void* p0, void* p1, void* p2,
     fprintf(stderr, "wait pr: %i\n", pr);
 
     fprintf(stderr, "wait knowledge model: %s\n", "");
-    test_knowledge_model(p3, p4);
+//??    test_knowledge_model(p3, p4);
 
             // Remove signal.
             remove_signal(p0, p1, p2, (void*) &i);

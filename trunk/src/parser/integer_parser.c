@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,50 +49,44 @@ void parse_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 
         int* sc = (int*) p4;
 
-        if (p0 != NULL_POINTER) {
+//??        log_message((void*) &INFO_LOG_LEVEL, (void*) &PARSE_INTEGER_MESSAGE, (void*) &PARSE_INTEGER_MESSAGE_COUNT);
 
-            int* d = (int*) p0;
+        // The temporary null-terminated string.
+        char* tmp = NULL_POINTER;
+        int tmps = *sc + 1;
+        // The index.
+        int i = 0;
 
-//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &PARSE_INTEGER_MESSAGE, (void*) &PARSE_INTEGER_MESSAGE_COUNT);
+        // Create temporary null-terminated string.
+        create_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
 
-            // The temporary null-terminated string.
-            char* tmp = NULL_POINTER;
-            int tmps = *sc + 1;
-            // The index.
-            int i = 0;
+        // Copy original string to temporary null-terminated string.
+        set_array_elements((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
+        // This is used as index to set the termination character.
+        i = *sc;
+        // Add string termination to temporary null-terminated string.
+        set_array_element((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CHARACTER);
 
-            // Create temporary null-terminated string.
-            create_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
+        // The tail variable is useless here and only needed for the string
+        // transformation function. If the whole string array consists of
+        // many sub strings, separated by space characters, then each sub
+        // string gets interpreted as integer number.
+        // The tail variable in this case points to the remaining sub string.
+        char* tail = NULL_POINTER;
 
-            // Copy original string to temporary null-terminated string.
-            set_array_elements((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
-            // This is used as index to set the termination character.
-            i = *sc;
-            // Add string termination to temporary null-terminated string.
-            set_array_element((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CHARACTER);
+        // Transform string to integer value.
+        // The third parameter is the number base:
+        // 0 - tries to automatically identify the correct number base
+        // 8 - octal
+        // 10 - decimal
+        // 16 - hexadecimal
+        int v = strtol(tmp, &tail, 10);
 
-            // The tail variable is useless here and only needed for the string
-            // transformation function. If the whole string array consists of
-            // many sub strings, separated by space characters, then each sub
-            // string gets interpreted as integer number.
-            // The tail variable in this case points to the remaining sub string.
-            char* tail = NULL_POINTER;
+        // Set integer value.
+        set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &INTEGER_VALUE_INDEX, (void*) &v);
 
-            // Transform string to integer.
-            // The third parameter is the number base:
-            // 0 - tries to automatically identify the correct number base
-            // 8 - octal
-            // 10 - decimal
-            // 16 - hexadecimal
-            *d = strtol(tmp, &tail, 10);
-
-            // Destroy temporary null-terminated string.
-            destroy_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
-
-        } else {
-
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
-        }
+        // Destroy temporary null-terminated string.
+        destroy_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
 
     } else {
 
@@ -111,65 +105,62 @@ void parse_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4)
  */
 void serialize_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
-    if (p3 != NULL_POINTER) {
+    if (p2 != NULL_POINTER) {
 
-        int* s = (int*) p3;
+        int* ds = (int*) p2;
 
-        if (p2 != NULL_POINTER) {
+        if (p1 != NULL_POINTER) {
 
-            int* ds = (int*) p2;
+            int* dc = (int*) p1;
 
-            if (p1 != NULL_POINTER) {
+            if (p0 != NULL_POINTER) {
 
-                int* dc = (int*) p1;
+                char** d = (char**) p0;
 
-                if (p0 != NULL_POINTER) {
+//??                log_message((void*) &INFO_LOG_LEVEL, (void*) &SERIALIZE_INTEGER_MESSAGE, (void*) &SERIALIZE_INTEGER_MESSAGE_COUNT);
 
-                    char** d = (char**) p0;
+                // The integer value.
+                int v = 0;
 
-//??                    log_message((void*) &INFO_LOG_LEVEL, (void*) &SERIALIZE_INTEGER_MESSAGE, (void*) &SERIALIZE_INTEGER_MESSAGE_COUNT);
+                // Get integer value.
+                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &INTEGER_VALUE_INDEX, (void*) &v);
 
-                    // Transform source integer to destination string.
-                    *dc = snprintf(*d, *ds, "%i", *s);
+                // Transform source integer to destination string.
+                *dc = snprintf(*d, *ds, "%i", v);
 
-                    // Set destination string size one greater than the count
-                    // to have space for the terminating null character.
-                    *ds = *dc + 1;
+                // Set destination string size one greater than the count
+                // to have space for the terminating null character.
+                *ds = *dc + 1;
 
-                    // Resize destination string.
-                    resize_array(p0, (void*) &CHARACTER_ARRAY, p2);
+                // Resize destination string.
+                resize_array(p0, (void*) &CHARACTER_ARRAY, p2);
 
-                    // Transform source integer to destination string.
-                    *dc = snprintf(*d, *ds, "%i", *s);
+                // Transform source integer to destination string.
+                *dc = snprintf(*d, *ds, "%i", v);
 
-                    // CAUTION! Recalculate string count because only in versions
-                    // of the GNU C library prior to 2.1, the snprintf function
-                    // returns the number of characters stored, not including the
-                    // terminating null; unless there was not enough space in the
-                    // string to store the result in which case -1 is returned.
-                    // This was CHANGED in order to comply with the ISO C99 standard.
-                    // As usual, the string count does NOT contain the terminating
-                    // null character.
-                    *dc = strlen(*d);
-
-                } else {
-
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
-                }
+                // CAUTION! Recalculate string count because only in versions
+                // of the GNU C library prior to 2.1, the snprintf function
+                // returns the number of characters stored, not including the
+                // terminating null; unless there was not enough space in the
+                // string to store the result in which case -1 is returned.
+                // This was CHANGED in order to comply with the ISO C99 standard.
+                // As usual, the string count does NOT contain the terminating
+                // null character.
+                *dc = strlen(*d);
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE_COUNT);
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_SIZE_IS_NULL_MESSAGE_COUNT);
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE_COUNT);
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_SIZE_IS_NULL_MESSAGE_COUNT);
     }
 }
 

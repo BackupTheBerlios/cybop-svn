@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.3 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,6 +57,26 @@ static const int DOUBLE_ARRAY = 3;
 
 /** The string resize factor. */
 static const int STRING_RESIZE_FACTOR = 2;
+
+//
+// Integer.
+//
+
+/** The integer count. */
+static const int INTEGER_COUNT = 1;
+
+/** The integer value index. */
+static const int INTEGER_VALUE_INDEX = 0;
+
+//
+// Double.
+//
+
+/** The double count. */
+static const int DOUBLE_COUNT = 1;
+
+/** The double value index. */
+static const int DOUBLE_VALUE_INDEX = 0;
 
 //
 // Fraction.

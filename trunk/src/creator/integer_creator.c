@@ -21,13 +21,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-21 10:09:38 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTEGER_CREATOR_SOURCE
 #define INTEGER_CREATOR_SOURCE
 
+#include "../array/array.c"
 #include "../global/structure_constants.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
@@ -40,18 +41,10 @@
  */
 void create_integer(void* p0, const void* p1) {
 
-    if (p0 != NULL_POINTER) {
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTEGER_MESSAGE, (void*) &CREATE_INTEGER_MESSAGE_COUNT);
 
-        int* m = (int*) p0;
-
-//??        log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTEGER_MESSAGE, (void*) &CREATE_INTEGER_MESSAGE_COUNT);
-
-        *m = 0;
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_INTEGER_THE_MODEL_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_INTEGER_THE_MODEL_IS_NULL_MESSAGE_COUNT);
-    }
+    // Create integer array containing the actual integer value.
+    create_array(p0, (void*) &INTEGER_ARRAY, (void*) &INTEGER_COUNT);
 }
 
 /**
@@ -62,16 +55,10 @@ void create_integer(void* p0, const void* p1) {
  */
 void destroy_integer(void* p0, const void* p1) {
 
-    if (p0 != NULL_POINTER) {
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_INTEGER_MESSAGE, (void*) &DESTROY_INTEGER_MESSAGE_COUNT);
 
-        int* m = (int*) p0;
-
-//??        log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_INTEGER_MESSAGE, (void*) &DESTROY_INTEGER_MESSAGE_COUNT);
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_DESTROY_INTEGER_THE_MODEL_IS_NULL_MESSAGE, (void*) &COULD_NOT_DESTROY_INTEGER_THE_MODEL_IS_NULL_MESSAGE_COUNT);
-    }
+    // Destroy integer array containing the actual integer value.
+    destroy_array(p0, (void*) &INTEGER_ARRAY, (void*) &INTEGER_COUNT);
 }
 
 /* INTEGER_CREATOR_SOURCE */

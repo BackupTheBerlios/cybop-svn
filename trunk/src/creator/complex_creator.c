@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a complex model in memory
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-15 22:11:29 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,7 +46,7 @@ void create_complex(void* p0, const void* p1) {
 
 //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create complex.");
 
-    // The complex.
+    // Create complex.
     create_array(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT);
 }
 
@@ -60,7 +60,7 @@ void destroy_complex(void* p0, const void* p1) {
 
 //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy complex.");
 
-    // The complex.
+    // Destroy complex.
     destroy_array(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT);
 }
 

@@ -25,7 +25,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.5 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,7 +33,6 @@
 #define CREATOR_SOURCE
 
 #include "../array/array.c"
-#include "../creator/boolean_creator.c"
 #include "../creator/complex_creator.c"
 #include "../creator/compound_creator.c"
 #include "../creator/double_creator.c"
@@ -106,7 +105,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_boolean(p0, p1);
+            create_integer(p0, p1);
 
             d = 1;
         }
@@ -278,7 +277,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_boolean(p0, p1);
+            destroy_integer(p0, p1);
 
             d = 1;
         }

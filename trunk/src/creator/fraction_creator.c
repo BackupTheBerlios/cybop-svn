@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a fraction model in memory
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-15 22:11:29 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,6 +46,7 @@ void create_fraction(void* p0, const void* p1) {
 
 //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create fraction.");
 
+    // Create fraction.
     create_array(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT);
 }
 
@@ -59,6 +60,7 @@ void destroy_fraction(void* p0, const void* p1) {
 
 //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy fraction.");
 
+    // Destroy fraction.
     destroy_array(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT);
 }
 

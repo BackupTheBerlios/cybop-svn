@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.40 $ $Date: 2004-10-28 18:43:18 $ $Author: rholzmueller $
+ * @version $Revision: 1.41 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -162,10 +162,8 @@ int main(int p0, char** p1) {
     // Testing.
     //
 
-    // Call testing procedures.
-    // Comment/ uncomment this as needed.
-    // CAUTION!
-    // This has to stand AFTER the initialization of the
+    // Call testing procedures. Comment/ uncomment this as needed.
+    // CAUTION! This has to stand AFTER the initialization of the
     // global variables because these are used by the testing code.
 //??    test();
 //??    return 0;
@@ -213,40 +211,36 @@ int main(int p0, char** p1) {
             int ms = 0;
 
             // Create signal container.
-            create((void*) &m, (void*) &ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
+            create((void*) &m, (void*) &ms, (void*) &SIGNAL_MEMORY_ABSTRACTION,
+                (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
             //
-            // config file into internals
+            // Copy configuration file parameters into internals.
             //
-			initialize_internals( p1[CONFIG_STARTUP_PARAMETER_INDEX],
-								  pi,
-								  ii );
+            initialize_internals(p1[CONFIG_STARTUP_PARAMETER_INDEX], pi, ii);
 
+            //
+            // TCP socket.
+            //
 
-			// tcp socket 
-			
+            // The active flag and port.
             int active;
-            get_array_element( (void*) &ii, 
-                               (void*) &INTEGER_ARRAY, 
-                               (void*) &INTEGER_INTERNALS_TCPSOCKET_ACTIVE_INDEX, 
-                               (void*) &active ); 
-            printf( "active:  %d \n", active );
             int port;
-            get_array_element( (void*) &ii, 
-                               (void*) &INTEGER_ARRAY, 
-                               (void*) &INTEGER_INTERNALS_TCPSOCKET_PORT_INDEX, 
-                               (void*) &port ); 
+
+            // Get active flag and port.
+            get_array_element( (void*) &ii, (void*) &INTEGER_ARRAY,
+                (void*) &INTEGER_INTERNALS_TCPSOCKET_ACTIVE_INDEX, (void*) &active );
+            printf( "active:  %d \n", active );
+
+            get_array_element( (void*) &ii, (void*) &INTEGER_ARRAY,
+                (void*) &INTEGER_INTERNALS_TCPSOCKET_PORT_INDEX, (void*) &port );
             printf( "port:  %d \n", port );
-            //start_tcp_socket_server( (void*) &active, (void*) &port );
-			
+
+            // Start tcp socket server.
+            //start_tcp_socket_server((void*) &active, (void*) &port);
 
             //
-            //?? Test to set internals values.
-            //?? Either take them from command line arguments or
-            //?? from an extra cyboi configuration file?
-            //?? Much later, all internals shall be created by default;
-            //?? a cybol application can then choose if it wants to use a
-            //?? certain communication mechanism that cyboi offers or not.
+            // UNIX socket.
             //
 
             // Initialize unix server socket.
@@ -267,52 +261,33 @@ int main(int p0, char** p1) {
             // Startup model.
             //
 
-            // Determine source channel.
+            // The source channel.
             void* sc = NULL_POINTER;
-            get_array_element( (void*) &pi, 
-                               (void*) &POINTER_ARRAY, 
-                               (void*) &POINTER_INTERNALS_START_CHANNEL_INDEX, 
-                               (void*) &sc ); 
             int scc;
-            get_array_element( (void*) &ii, 
-                               (void*) &INTEGER_ARRAY, 
-                               (void*) &INTEGER_INTERNALS_START_CHANNEL_COUNT_INDEX, 
-                               (void*) &scc ); 
-            // Determine source abstraction.
+            // The source abstraction.
             void* sa = NULL_POINTER;
-            get_array_element( (void*) &pi, 
-                               (void*) &POINTER_ARRAY, 
-                               (void*) &POINTER_INTERNALS_START_ABSTRACTION_INDEX, 
-                               (void*) &sa ); 
             int sac = 0;
-            get_array_element( (void*) &ii, 
-                               (void*) &INTEGER_ARRAY, 
-                               (void*) &INTEGER_INTERNALS_START_ABSTRACTION_COUNT_INDEX, 
-                               (void*) &sac ); 
-            // Determine source model.
+            // The source model.
             void* sm = NULL_POINTER;
-            get_array_element( (void*) &pi, 
-                               (void*) &POINTER_ARRAY, 
-                               (void*) &POINTER_INTERNALS_START_MODEL_INDEX, 
-                               (void*) &sm ); 
             int smc;
-            get_array_element( (void*) &ii, 
-                               (void*) &INTEGER_ARRAY, 
-                               (void*) &INTEGER_INTERNALS_START_MODEL_COUNT_INDEX, 
-                               (void*) &smc ); 
 
+            // Get source channel.
+            get_array_element((void*) &pi, (void*) &POINTER_ARRAY,
+                (void*) &POINTER_INTERNALS_START_CHANNEL_INDEX, (void*) &sc);
+            get_array_element((void*) &ii, (void*) &INTEGER_ARRAY,
+                (void*) &INTEGER_INTERNALS_START_CHANNEL_COUNT_INDEX, (void*) &scc);
 
-            // Determine source channel.
-            //void* sc = (void*) p1[CHANNEL_STARTUP_PARAMETER_INDEX];
-            //int scc = strlen(p1[CHANNEL_STARTUP_PARAMETER_INDEX]);
-            
-            // Determine source abstraction.
-            //void* sa = (void*) p1[ABSTRACTION_STARTUP_PARAMETER_INDEX];
-            //int sac = strlen(p1[ABSTRACTION_STARTUP_PARAMETER_INDEX]);
-            
-            // Determine source model.
-            //void* sm = (void*) p1[MODEL_STARTUP_PARAMETER_INDEX];
-            //int smc = strlen(p1[MODEL_STARTUP_PARAMETER_INDEX]);
+            // Get source abstraction.
+            get_array_element((void*) &pi, (void*) &POINTER_ARRAY,
+                (void*) &POINTER_INTERNALS_START_ABSTRACTION_INDEX, (void*) &sa);
+            get_array_element((void*) &ii, (void*) &INTEGER_ARRAY,
+                (void*) &INTEGER_INTERNALS_START_ABSTRACTION_COUNT_INDEX, (void*) &sac);
+
+            // Get source model.
+            get_array_element((void*) &pi, (void*) &POINTER_ARRAY,
+                (void*) &POINTER_INTERNALS_START_MODEL_INDEX, (void*) &sm);
+            get_array_element((void*) &ii, (void*) &INTEGER_ARRAY,
+                (void*) &INTEGER_INTERNALS_START_MODEL_COUNT_INDEX, (void*) &smc);
 
             // The destination abstraction.
             void* da = NULL_POINTER;
@@ -339,7 +314,7 @@ int main(int p0, char** p1) {
                 (void*) &sa, (void*) &sac,
                 (void*) &sc, (void*) &scc);
 
-            // Do not create destination details!
+            // CAUTION! Do not create destination details!
             // It is not needed for the startup signal.
 
             //
