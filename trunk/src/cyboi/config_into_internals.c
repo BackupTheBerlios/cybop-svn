@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.4 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-11-09 07:30:48 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -88,6 +88,7 @@ void initialize_internals_start(xmlNode* root_element, void* pPointerInternals, 
                 int comp_result;
 
                 //channel
+                comp_result = 0;
                 compare_arrays( (void*) &sn, (void*) &snc,
                                 (void*) &CHANNEL_NAME_ABSTRACTION,
                                 (void*) &CHANNEL_NAME_ABSTRACTION_COUNT,
@@ -95,7 +96,7 @@ void initialize_internals_start(xmlNode* root_element, void* pPointerInternals, 
 
                 if ( comp_result==1 ) {
 
-                      //printf(" Modellvalue channel gefunden \n" );
+                    log_message_debug( "Modellvalue channel gefunden" );
                     set_array_element( (void*) &pPointerInternals,
                                        (void*) &POINTER_ARRAY,
                                        (void*) &POINTER_INTERNALS_START_CHANNEL_INDEX,
@@ -108,6 +109,7 @@ void initialize_internals_start(xmlNode* root_element, void* pPointerInternals, 
                 }
 
                 //abstraction
+                comp_result = 0;
                 compare_arrays( (void*) &sn, (void*) &snc,
                                 (void*) &ABSTRACTION_NAME_ABSTRACTION,
                                 (void*) &ABSTRACTION_NAME_ABSTRACTION_COUNT,
@@ -115,7 +117,7 @@ void initialize_internals_start(xmlNode* root_element, void* pPointerInternals, 
 
                 if ( comp_result==1 ) {
 
-                    //printf(" Modellvalue abstraction gefunden \n" );
+                    log_message_debug( "Modellvalue abstraction gefunden" );
                     set_array_element( (void*) &pPointerInternals,
                                        (void*) &POINTER_ARRAY,
                                        (void*) &POINTER_INTERNALS_START_ABSTRACTION_INDEX,
@@ -127,6 +129,7 @@ void initialize_internals_start(xmlNode* root_element, void* pPointerInternals, 
                 }
 
                 //model
+                comp_result = 0;
                 compare_arrays( (void*) &sn, (void*) &snc,
                                 (void*) &MODEL_NAME_ABSTRACTION,
                                 (void*) &MODEL_NAME_ABSTRACTION_COUNT,
@@ -134,7 +137,7 @@ void initialize_internals_start(xmlNode* root_element, void* pPointerInternals, 
 
                 if ( comp_result==1 ) {
 
-                    //printf(" Modellvalue modelgefunden \n" );
+                    log_message_debug( "Modellvalue model gefunden" );
                     set_array_element( (void*) &pPointerInternals,
                                        (void*) &POINTER_ARRAY,
                                        (void*) &POINTER_INTERNALS_START_MODEL_INDEX,
@@ -157,7 +160,7 @@ void initialize_internals_tcp_socket( xmlNode* root_element, void* pPointerInter
 
     if ( root_element == NULL_POINTER ) {
 
-       }
+    }
     else if ( pPointerInternals == NULL_POINTER ) {
 
     }
@@ -194,6 +197,7 @@ void initialize_internals_tcp_socket( xmlNode* root_element, void* pPointerInter
                 int comp_result;
 
                 //port
+                comp_result = 0;
                 compare_arrays( (void*) &sn, (void*) &snc,
                                 (void*) &CONFIG_TCP_SOCKET_PORT_ABSTRACTION,
                                 (void*) &CONFIG_TCP_SOCKET_PORT_ABSTRACTION_COUNT,
@@ -201,19 +205,28 @@ void initialize_internals_tcp_socket( xmlNode* root_element, void* pPointerInter
 
                 if ( comp_result==1 ) {
 
-                      //printf(" Modellvalue channel gefunden \n" );
+                    log_message_debug( "found the model value port" );
 
                     // The destination integer.
-                    int di = -1;
-                    int dic = -1;
                     int dis = -1;
+                    
+                    void* pIntArray = NULL_POINTER;
+                    create_array( (void*) &pIntArray, 
+                                  (void*) &INTEGER_ARRAY, 
+                                  (void*) &INTEGER_COUNT );
 
-                    parse( (void*) &di, (void*) &dic, (void*) &dis,
+                    parse( (void*) &pIntArray, (void*) &INTEGER_COUNT, (void*) &dis,
                            (void*) &sm, (void*) &smc,
                            (void*) &INTEGER_ABSTRACTION,
                            (void*) &INTEGER_ABSTRACTION_COUNT );
 
-                    int port=di;
+                    int port = 0;
+                    get_array_element( (void*) &pIntArray,
+                                       (void*) &INTEGER_ARRAY,
+                                       (void*) &INTEGER_VALUE_INDEX, 
+                                       (void*) &port );
+                                       
+
                     set_array_element( (void*) &pIntInternals,
                                        (void*) &INTEGER_ARRAY,
                                        (void*) &INTEGER_INTERNALS_TCPSOCKET_PORT_INDEX,
@@ -221,6 +234,7 @@ void initialize_internals_tcp_socket( xmlNode* root_element, void* pPointerInter
                 }
 
                 //active
+                comp_result = 0;
                 compare_arrays( (void*) &sn, (void*) &snc,
                                 (void*) &CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION,
                                 (void*) &CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_COUNT,
@@ -228,18 +242,26 @@ void initialize_internals_tcp_socket( xmlNode* root_element, void* pPointerInter
 
                 if ( comp_result==1 ) {
 
-                    //printf(" Modellvalue abstraction gefunden \n" );
-                    // The destination integer.
-                    int di = -1;
-                    int dic = -1;
-                    int dis = -1;
+                    log_message_debug( "found the model value active" );
 
-                    parse( (void*) &di, (void*) &dic, (void*) &dis,
+                    // The destination integer.
+                    int dis = -1;
+                    
+                    void* pIntArray = NULL_POINTER;
+                    create_array( (void*) &pIntArray, 
+                                  (void*) &INTEGER_ARRAY, 
+                                  (void*) &INTEGER_COUNT );
+
+                    parse( (void*) &pIntArray, (void*) &INTEGER_COUNT, (void*) &dis,
                            (void*) &sm, (void*) &smc,
                            (void*) &INTEGER_ABSTRACTION,
                            (void*) &INTEGER_ABSTRACTION_COUNT );
 
-                    int active = di;
+                    int active = 0;    
+                    get_array_element( (void*) &pIntArray,
+                                       (void*) &INTEGER_ARRAY,
+                                       (void*) &INTEGER_VALUE_INDEX, 
+                                       (void*) &active );
 
                     set_array_element( (void*) &pIntInternals,
                                        (void*) &INTEGER_ARRAY,
@@ -281,10 +303,11 @@ int initialize_internals( void* pConfigFile, void* pPointerInternals, void* pInt
         doc = xmlParseFile( (char*)pConfigFile );
         if (doc == NULL) {
 
-              char error[] = "Config-file not parse";
-           log_message((void*) &ERROR_LOG_LEVEL, (void*) error , (void*) strlen(error));
+           log_message_debug("Config-file not parse");
            return -1;
         }
+        log_message_debug("Config-file parse");
+        
 
         root_element = xmlDocGetRootElement( doc )->children;
 
@@ -306,10 +329,10 @@ int initialize_internals( void* pConfigFile, void* pPointerInternals, void* pInt
                 void* sm = NULL_POINTER;
                 int smc = 0;
                 decode_cybol_property( (void*) &cur_node,
-                                       &sn, (void*) &snc,
-                                       &sc, (void*) &scc,
-                                       &sa, (void*) &sac,
-                                       &sm, (void*) &smc );
+                                       (void*) &sn, (void*) &snc,
+                                       (void*) &sc, (void*) &scc,
+                                       (void*) &sa, (void*) &sac,
+                                       (void*) &sm, (void*) &smc );
 
                 int comp_result = 0;
 
@@ -320,10 +343,10 @@ int initialize_internals( void* pConfigFile, void* pPointerInternals, void* pInt
 
                 if ( comp_result==1 ) {
 
-                    //printf(" Model start gefunden" );
-                      initialize_internals_start( cur_node->children,
-                                                   pPointerInternals,
-                                                     pIntInternals );
+                    log_message_debug( "Model start gefunden" );
+                    initialize_internals_start( cur_node->children,
+                                                pPointerInternals,
+                                                pIntInternals );
 
                 }
 
@@ -334,10 +357,10 @@ int initialize_internals( void* pConfigFile, void* pPointerInternals, void* pInt
 
                 if ( comp_result==1 ) {
 
-                    //printf(" Model tcp_socket gefunden" );
-                      initialize_internals_tcp_socket( cur_node->children,
-                                                        pPointerInternals,
-                                                          pIntInternals );
+                    log_message_debug( "Model tcp_socket gefunden" );
+                    initialize_internals_tcp_socket( cur_node->children,
+                                                     pPointerInternals,
+                                                     pIntInternals );
                 }
 
             }  //if (cur_node->type == XML_ELEMENT_NODE) {

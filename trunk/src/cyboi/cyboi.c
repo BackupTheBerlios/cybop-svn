@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.41 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
+ * @version $Revision: 1.42 $ $Date: 2004-11-09 07:35:48 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,7 +64,7 @@ void initialize_global_variables() {
     //
 
     // Initialize log level.
-    LOG_LEVEL = INFO_LOG_LEVEL;
+    LOG_LEVEL = DEBUG_LOG_LEVEL;
 
     // Initialize maximum log message count.
     MAXIMUM_LOG_MESSAGE_COUNT = 300;
@@ -157,6 +157,7 @@ int main(int p0, char** p1) {
     // They have to be initialized before the command line parameter check below!
     // Otherwise, the logger may not be able to log possible error messages.
     initialize_global_variables();
+    log_message_debug( "init global varibales" );
 
     //
     // Testing.
@@ -183,6 +184,7 @@ int main(int p0, char** p1) {
 
             // Create knowledge container.
             create((void*) &k, (void*) &ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
+            log_message_debug( "init knowledge container" );
 
             //
             // Internals containers.
@@ -200,6 +202,7 @@ int main(int p0, char** p1) {
             create_integer_internals((void*) &ii, (void*) &INTEGER_INTERNALS_COUNT);
             create_pointer_internals((void*) &pi, (void*) &POINTER_INTERNALS_COUNT);
             create_double_internals((void*) &di, (void*) &DOUBLE_INTERNALS_COUNT);
+            log_message_debug( "init internals" );
 
             //
             // Signal memory.
@@ -213,11 +216,13 @@ int main(int p0, char** p1) {
             // Create signal container.
             create((void*) &m, (void*) &ms, (void*) &SIGNAL_MEMORY_ABSTRACTION,
                 (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
+            log_message_debug( "init signal container" );
 
             //
             // Copy configuration file parameters into internals.
             //
             initialize_internals(p1[CONFIG_STARTUP_PARAMETER_INDEX], pi, ii);
+            log_message_debug( "init internals with parameters" );
 
             //
             // TCP socket.
@@ -230,11 +235,9 @@ int main(int p0, char** p1) {
             // Get active flag and port.
             get_array_element( (void*) &ii, (void*) &INTEGER_ARRAY,
                 (void*) &INTEGER_INTERNALS_TCPSOCKET_ACTIVE_INDEX, (void*) &active );
-            printf( "active:  %d \n", active );
 
             get_array_element( (void*) &ii, (void*) &INTEGER_ARRAY,
                 (void*) &INTEGER_INTERNALS_TCPSOCKET_PORT_INDEX, (void*) &port );
-            printf( "port:  %d \n", port );
 
             // Start tcp socket server.
             //start_tcp_socket_server((void*) &active, (void*) &port);
