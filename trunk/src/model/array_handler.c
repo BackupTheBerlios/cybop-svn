@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.10 $ $Date: 2004-02-29 18:33:29 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-03-02 07:34:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -161,7 +161,7 @@ void set_array_element(void* p0, void* p1, void* p2) {
         // still zero. Therefore, an integer summand of 1 is added here.
         while (*i >= s) {
 
-            s = 2 * s + 1;
+            s = s * 2 + 1;
         }
 
         if (s != a->size) {

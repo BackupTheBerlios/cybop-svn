@@ -34,7 +34,7 @@
 /**
  * This is the operation handler.
  *
- * @version $Revision: 1.8 $ $Date: 2004-03-01 17:08:58 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-03-02 07:34:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -105,14 +105,23 @@ void initialize_operation_model(void* p0, void* p1) {
         log_message((void*) &INFO_LOG_LEVEL, "Initialize operation model.");
 
         // Read input stream and transform to operation with operands.
-        void* s = get_sub_string(p1, (void*) COMMA_CHARACTER);
-        void* r = get_remaining_string(p1, (void*) COMMA_CHARACTER);
+        int length = 0;
+        get_string_length(p1, (void*) &length);
+        int start = 0;
+        int end = 0;
+        get_character_index(p1, (void*) &COMMA_CHARACTER, (void*) &length, (void*) &end);
+        void* s = malloc(0);
 
+        copy_sub_string(p1, (void*) &start, (void*) &end, s);
         add_array_element(m->value, s);
 
-        if (r != (void*) 0) {
+        char* r = (char*) p1 + end;
 
-            initialize_operation_model(p0, r);
+        // Only call procedure recursively if the remaining string is not empty.
+        if (*r != '\0') {
+
+            // Set index of remaining string to one after the comma character.
+            initialize_operation_model(p0, r + 1);
         }
 
     } else {
@@ -149,6 +158,8 @@ void finalize_operation_model(void* p0, void* p1) {
 
                 strcat((char*) p1, COMMA_CHARACTER);
                 strcat((char*) p1, (char*) s);
+
+                free(s);
 
                 finalize_operation_model(p0, p1);
             }

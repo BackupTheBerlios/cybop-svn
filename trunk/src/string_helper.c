@@ -25,13 +25,14 @@
 #ifndef STRING_HELPER_SOURCE
 #define STRING_HELPER_SOURCE
 
+#include <stdlib.h>
 #include <string.h>
 #include "logger/log_handler.c"
 
 /**
  * This is the string helper.
  *
- * @version $Revision: 1.3 $ $Date: 2004-03-01 17:08:58 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-03-02 07:34:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,182 +60,160 @@ static const char* EMPTY_STRING = "";
 //
 
 /**
+ * Returns the index of the character within the string.
+ *
+ * @param p0 the string
+ * @param p1 the character
+ * @param p2 the length
+ * @param p3 the index
+ */
+void get_character_index(const void* p0, const void* p1, const void* p2, void* p3) {
+
+    if (p0 != (void*) 0) {
+
+        char* s = (char*) p0;
+
+        if (p1 != (void*) 0) {
+
+            char* c = (char*) p1;
+
+            if (p3 != (void*) 0) {
+
+                int* i = (int*) p3;
+
+                if (p2 != (void*) 0) {
+
+                    int* l = (int*) p2;
+
+                    while (1) {
+
+                        if (*i >= *l) {
+
+                            break;
+                        }
+
+                        // Since the string pointer is constant, it cannot be incremented
+                        // itself. The index i is incremented instead, until the searched
+                        // character is found.
+                        if (*(s + *i) == *c) {
+
+                            break;
+                        }
+
+                        (*i)++;
+                    }
+
+                } else {
+
+                    while (1) {
+
+                        // Since the string pointer is constant, it cannot be incremented
+                        // itself. The index i is incremented instead, until the searched
+                        // character is found.
+                        if (*(s + *i) == *c) {
+
+                            break;
+                        }
+
+                        (*i)++;
+                    }
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not get character index. The index is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get character index. The character is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get character index. The string is null.");
+    }
+}
+
+/**
  * Returns the string length.
  *
  * It counts the number of characters within the string,
- * until the string termination character "\0" is reached.
+ * until the string termination character '\0' is reached.
  *
  * @param p0 the string
  * @param p1 the length
  */
 void get_string_length(const void* p0, void* p1) {
 
-    if (p0 != (void*) 0) {
+    get_character_index(p0, TERMINATION_CHARACTER, (void*) 0, p1);
+}
 
-        // Pointer to the first character of the string.
-        char* c = (char*) p0;
+/**
+ * Copies the string characters between start and end index into sub string.
+ *
+ * @param p0 the string
+ * @param p1 the start index
+ * @param p2 the end index
+ * @param p3 the sub string
+ */
+void copy_sub_string(const void* p0, const void* p1, const void* p2, void* p3) {
 
-        if (p1 != (void*) 0) {
+    char* s = (char*) p0;
 
-            // Pointer to the length integer.
-            int* i = (int*) p1;
+    if (s != (void*) 0) {
 
-            if (*i == 0) {
+        int* start = (int*) p1;
 
-                // Since the string pointer is constant, it cannot be incremented
-                // itself. The i variable is incremented instead, until the string
-                // termination character is reached.
-                while (*(c + *i) != TERMINATION_CHARACTER) {
+        if (start != (void*) 0) {
 
-                    (*i)++;
+            int* end = (int*) p2;
+
+            if (end != (void*) 0) {
+
+                char* ss = (char*) p3;
+
+                if (ss != (void*) 0) {
+
+                    int i = 0;
+                    int max = *end - *start;
+
+                    while (1) {
+
+                        if (i == max) {
+
+                            break;
+                        }
+
+                        ss = realloc(ss, length * 2 + 1);
+
+                        *(ss + i) = *(s + *start + i);
+
+                        i++;
+                    }
+
+                    // Add string termination character to sub string.
+                    *(ss + i) = '\0';
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not get sub string. The sub string is null.");
                 }
 
             } else {
 
-                log_message((void*) &WARNING_LOG_LEVEL, "The initial string length should be zero.");
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not get sub string. The end index is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not get string length. The length is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get sub string. The start index is null.");
         }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get string length. The string is null.");
-    }
-}
-
-/**
- * Returns the first sub string in the given string.
- *
- * It is the most left sub string before the first separation.
- * If there is no separation, then it is the given string itself.
- *
- * @param p0 the string
- * @param p1 the separation
- * @param p2 the sub string
- */
-void get_sub_string(void* p0, void* p1) {
-
-    void* ss = (void*) 0;
-    char* s = (char*) p0;
-    char* sep = (void*) 0;
-
-/*??
-    int l = 0;
-    get_string_length(p0, (void*) &l);
-    int i = 0;
-
-    while (i < l) {
-
-    }
-*/
-
-    if (s != (void*) 0) {
-
-        sep = strchr(s, *p1);
-        diff = sep - s;
-
-/*??
-        int i = s->indexOf(p1);
-
-        if (i != -1) {
-
-            ss = s->substring(0, i);
-
-        } else {
-
-            ss = s;
-        }
-*/
 
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get sub string. The string is null.");
     }
-}
-
-/**
- * Returns the remaining string after the first separation.
- *
- * @param p0 the string
- * @param p1 the separation
- * @param p2 the remaining string
- */
-void get_remaining_string(void* p0, void* p1) {
-
-    void* rs = (void*) 0;
-    char* s = (char*) p0;
-    char* sep = (void*) 0;
-
-    if (s != (void*) 0) {
-
-/*??
-        sep = strchr(s, *p1);
-        rs = sep + 1;
-*/
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get remaining string. The string is null.");
-    }
-}
-
-/**
- * Returns the string element index.
- *
- * @param p0 the string
- * @param p1 the element
- * @param p2 the index
- */
-/*??
-void get_string_element_index(void* p0, void* p1, void* p2) {
-
-    char* s = (char*) p0;
-    int l = strlen(s);
-    int i = 0;
-
-    while (i < l) {
-
-        if (strcmp() == 0) {
-
-        }
-    }
-}
-
-/**
- * Returns the string suffix.
- *
- * @param p0 the string
- * @param p1 the start index
- * @param p2 the remaining suffix
- */
-/*??
-void get_string_suffix(void* p0, void* p1, void* p2) {
-
-}
-
-/**
- * Returns the string value.
- *
- * @param p0 the string
- * @param p1 the numerical value
- */
-/*??
-void get_string_value(void* p0, void* p1) {
-
-}
-
-/**
- * Returns the value as string.
- *
- * @param p0 the numerical value
- * @param p1 the string
- */
-/*??
-void get_value_string(void* p0, void* p1) {
-
 }
 
 /* STRING_HELPER_SOURCE */

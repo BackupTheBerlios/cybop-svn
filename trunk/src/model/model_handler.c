@@ -42,7 +42,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.12 $ $Date: 2004-03-01 17:08:58 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-03-02 07:34:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -456,16 +456,28 @@ void set_model_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
         log_message((void*) &INFO_LOG_LEVEL, "Set model part: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
 
-        void* n = get_sub_string(p1, (void*) DOT_CHARACTER);
-        void* r = get_remaining_string(p1, (void*) DOT_CHARACTER);
+        int length = 0;
+        get_string_length(p1, (void*) &length);
+        int start = 0;
+        int end = 0;
+        get_character_index(p1, (void*) &DOT_CHARACTER, (void*) &length, (void*) &end);
+        void* n = malloc(0);
 
-        if (r != (void*) 0) {
+        copy_sub_string(p1, (void*) &start, (void*) &end, n);
+
+        char* r = (char*) p1 + end;
+
+        // Only call procedure recursively if the remaining string is not empty.
+        if (*r != '\0') {
 
             // The given model contains compound models.
             void* part = get_map_element_with_name(m->part_models, n);
 
             // Continue to process along the hierarchical name.
-            set_model_part(part, r, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+            set_model_part(part, r + 1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+
+            // The name served only as a temporary model identificator.
+            free(n);
 
         } else {
 
@@ -479,6 +491,8 @@ void set_model_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
             set_map_element_with_name(m->constraint_abstractions, n, p8);
             set_map_element_with_name(m->constraint_locations, n, p9);
             set_map_element_with_name(m->constraint_models, n, p10);
+
+            // Do not free(n) here! The name is referenced by the model maps.
         }
 
     } else {
@@ -502,16 +516,25 @@ void remove_model_part(void* p0, void* p1) {
         log_message((void*) &INFO_LOG_LEVEL, "Remove model part: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
 
-        void* n = get_sub_string(p1, (void*) DOT_CHARACTER);
-        void* r = get_remaining_string(p1, (void*) DOT_CHARACTER);
+        int length = 0;
+        get_string_length(p1, (void*) &length);
+        int start = 0;
+        int end = 0;
+        get_character_index(p1, (void*) &DOT_CHARACTER, (void*) &length, (void*) &end);
+        void* n = malloc(0);
 
-        if (r != (void*) 0) {
+        copy_sub_string(p1, (void*) &start, (void*) &end, n);
+
+        char* r = (char*) p1 + end;
+
+        // Only call procedure recursively if the remaining string is not empty.
+        if (*r != '\0') {
 
             // The given model contains compound models.
             void* part = get_map_element_with_name(m->part_models, n);
 
             // Continue to process along the hierarchical name.
-            remove_model_part(part, r);
+            remove_model_part(part, r + 1);
 
         } else {
 
@@ -550,16 +573,17 @@ void* get_model_part(void* p0, void* p1) {
         log_message((void*) &INFO_LOG_LEVEL, "Get model part: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
 
-        void* n = get_sub_string(p1, (void*) DOT_CHARACTER);
-        void* r = get_remaining_string(p1, (void*) DOT_CHARACTER);
+        void* n = get_sub_string(p1, (void*) &DOT_CHARACTER);
+        void* r = get_remaining_string(p1, (void*) &DOT_CHARACTER);
 
-        if (r != (void*) 0) {
+        // Only call procedure recursively if the remaining string is not empty.
+        if (*r != '\0') {
 
             // The given model contains compound models.
             void* part = get_map_element_with_name(m->part_models, n);
 
             // Continue to process along the hierarchical name.
-            p = get_model_part(part, r);
+            p = get_model_part(part, r + 1);
 
         } else {
 
@@ -592,16 +616,17 @@ void* get_model_part_position(void* p0, void* p1) {
         log_message((void*) &INFO_LOG_LEVEL, "Get model part position: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
 
-        void* n = get_sub_string(p1, (void*) DOT_CHARACTER);
-        void* r = get_remaining_string(p1, (void*) DOT_CHARACTER);
+        void* n = get_sub_string(p1, (void*) &DOT_CHARACTER);
+        void* r = get_remaining_string(p1, (void*) &DOT_CHARACTER);
 
-        if (r != (void*) 0) {
+        // Only call procedure recursively if the remaining string is not empty.
+        if (*r != '\0') {
 
             // The given model contains compound models.
             void* part = get_map_element_with_name(m->part_models, n);
 
             // Continue to process along the hierarchical name.
-            p = get_model_part(part, r);
+            p = get_model_part(part, r + 1);
 
         } else {
 
