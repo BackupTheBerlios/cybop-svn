@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.6 $ $Date: 2004-09-12 23:04:40 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-10-18 10:53:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -349,26 +349,6 @@ static const int CREATE_PART_ABSTRACTION_COUNT = 11;
 static const char DESTROY_PART_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't', 'r', 'o', 'y', '_', 'p', 'a', 'r', 't'};
 static const char* DESTROY_PART_ABSTRACTION = DESTROY_PART_ABSTRACTION_ARRAY;
 static const int DESTROY_PART_ABSTRACTION_COUNT = 12;
-
-/** The create/destroy part name abstraction. */
-static const char CREATE_DESTROY_PART_NAME_ABSTRACTION_ARRAY[] = {'n', 'a', 'm', 'e'};
-static const char* CREATE_DESTROY_PART_NAME_ABSTRACTION = CREATE_DESTROY_PART_NAME_ABSTRACTION_ARRAY;
-static const int CREATE_DESTROY_PART_NAME_ABSTRACTION_COUNT = 4;
-
-/** The create/destroy part channel abstraction. */
-static const char CREATE_DESTROY_PART_CHANNEL_ABSTRACTION_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
-static const char* CREATE_DESTROY_PART_CHANNEL_ABSTRACTION = CREATE_DESTROY_PART_CHANNEL_ABSTRACTION_ARRAY;
-static const int CREATE_DESTROY_PART_CHANNEL_ABSTRACTION_COUNT = 7;
-
-/** The create/destroy part abstraction abstraction. */
-static const char CREATE_DESTROY_PART_ABSTRACTION_ABSTRACTION_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-static const char* CREATE_DESTROY_PART_ABSTRACTION_ABSTRACTION = CREATE_DESTROY_PART_ABSTRACTION_ABSTRACTION_ARRAY;
-static const int CREATE_DESTROY_PART_ABSTRACTION_ABSTRACTION_COUNT = 11;
-
-/** The create/destroy part model abstraction. */
-static const char CREATE_DESTROY_PART_MODEL_ABSTRACTION_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
-static const char* CREATE_DESTROY_PART_MODEL_ABSTRACTION = CREATE_DESTROY_PART_MODEL_ABSTRACTION_ARRAY;
-static const int CREATE_DESTROY_PART_MODEL_ABSTRACTION_COUNT = 5;
 
 //
 // Input output abstractions.

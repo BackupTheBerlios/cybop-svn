@@ -21,14 +21,17 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-10-18 10:54:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SEND_SOURCE
 #define SEND_SOURCE
 
+#include "../communicator/tui_communicator.c"
+#include "../global/abstraction_constants.c"
 #include "../global/channel_constants.c"
+#include "../global/name_constants.c"
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
 #include "../socket/unix_socket.c"
@@ -36,83 +39,16 @@
 /**
  * Sends a message in a special language.
  *
- * @param p0 the language
- * @param p1 the language count
- * @param p2 the sender address
- * @param p3 the sender address count
- * @param p4 the receiver address
- * @param p5 the receiver address count
- * @param p6 the message
- * @param p7 the message count
- * @param p8 the character internals
- * @param p9 the integer internals
- * @param p10 the pointer internals
- * @param p11 the double internals
- */
-void send_in_language(const void* p0, const void* p1, const void* p2, const void* p3,
-    const void* p4, const void* p5, const void* p6, const void* p7,
-    const void* p8, const void* p9, const void* p10, const void* p11) {
-
-    if (p1 != NULL_POINTER) {
-
-        int* lc = (int*) p1;
-
-        // The done flag.
-        int d = 0;
-        // The comparison result.
-        int r = 0;
-
-        if (d == 0) {
-
-            if (*lc == UNIX_SOCKET_CHANNEL_COUNT) {
-
-                compare_array_elements(p0, (void*) &UNIX_SOCKET_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &UNIX_SOCKET_CHANNEL_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-//??                    send_unix_socket(p4, p5, p6, p7);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*lc == INTERNAL_CHANNEL_COUNT) {
-
-                compare_array_elements(p0, (void*) &INTERNAL_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &INTERNAL_CHANNEL_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-//??                    send_internal(p0, p1, p2);
-
-                    d = 1;
-                }
-            }
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE_COUNT);
-    }
-}
-
-/**
- * Sends a message to another system.
- *
  * CAUTION! Do NOT rename this procedure to "send",
  * as that name is already used by socket functionality.
  *
- * The contents of communication is described by the "Laswell Formula".
- * After it, communication consists of the elements:
- * - language (Channel): internal, tui, gui, socket, http
- * - sender (Who): ip address, socket port
- * - receiver (Whom): ip address, socket port
- * - message (What): knowledge model to be sent in serialized form
- * - result (Effect): ignored because not relevant for sender
+ * Expected parameters:
+ * - language (channel): internal, tui, gui, socket, http
+ * - sender (who): ip address, socket port
+ * - receiver (whom): ip address, socket port
+ * - message (what): knowledge model to be sent in serialized form
  *
- * CYBOL Examples:
+ * (OLD!!) CYBOL Examples:
  *
  * <!-- Operation parameters (as value of part_model tag):
  *      logic name,language,sender,receiver,message /-->
@@ -120,155 +56,157 @@ void send_in_language(const void* p0, const void* p1, const void* p2, const void
  * <part name="send_to_socket" part_abstraction="operation" part_location="inline"
  *      part_model="send,application.language,application.sender,application.receiver,application.message"/>
  *
- * @param p0 the signal parameters count
- * @param p1 the parameters
- * @param p2 the parameters counts
- * @param p3 the parameters sizes
- * @param p4 the knowledge
- * @param p5 the knowledge count
- * @param p6 the knowledge size
- * @param p7 the character internals
- * @param p8 the integer internals
- * @param p9 the pointer internals
- * @param p10 the double internals
+ * @param p0 the parameters
+ * @param p1 the parameters count
+ * @param p2 the knowledge
+ * @param p3 the knowledge count
+ * @param p4 the knowledge size
+ * @param p5 the character internals
+ * @param p6 the integer internals
+ * @param p7 the pointer internals
+ * @param p8 the double internals
  */
-void send_message(const void* p0, const void* p1, const void* p2, const void* p3,
-    const void* p4, const void* p5, const void* p6,
-    const void* p7, const void* p8, const void* p9, const void* p10) {
+void send_message(const void* p0, const void* p1,
+    const void* p2, const void* p3, const void* p4,
+    const void* p5, const void* p6, const void* p7, const void* p8) {
 
-    if (p0 != NULL_POINTER) {
+    // The language abstraction.
+    void* la = NULL_POINTER;
+    int lac = 0;
+    int las = 0;
+    // The language model.
+    void* lm = NULL_POINTER;
+    int lmc = 0;
+    int lms = 0;
+    // The language details.
+    void* ld = NULL_POINTER;
+    int ldc = 0;
+    int lds = 0;
 
-        int* sc = (int*) p0;
+    // The sender abstraction.
+    void* sa = NULL_POINTER;
+    int sac = 0;
+    int sas = 0;
+    // The sender model.
+    void* sm = NULL_POINTER;
+    int smc = 0;
+    int sms = 0;
+    // The sender details.
+    void* sd = NULL_POINTER;
+    int sdc = 0;
+    int sds = 0;
 
-        if (*sc == 5) {
+    // The receiver abstraction.
+    void* ra = NULL_POINTER;
+    int rac = 0;
+    int ras = 0;
+    // The receiver model.
+    void* rm = NULL_POINTER;
+    int rmc = 0;
+    int rms = 0;
+    // The receiver details.
+    void* rd = NULL_POINTER;
+    int rdc = 0;
+    int rds = 0;
 
-            // Initialize persistent language-, sender-, receiver-, message name
-            // and their counts and sizes.
-            void* pl = NULL_POINTER;
-            int plc = 0;
-            int pls = 0;
-            void* ps = NULL_POINTER;
-            int psc = 0;
-            int pss = 0;
-            void* pr = NULL_POINTER;
-            int prc = 0;
-            int prs = 0;
-            void* pm = NULL_POINTER;
-            int pmc = 0;
-            int pms = 0;
+    // The message abstraction.
+    void* ma = NULL_POINTER;
+    int mac = 0;
+    int mas = 0;
+    // The message model.
+    void* mm = NULL_POINTER;
+    int mmc = 0;
+    int mms = 0;
+    // The message details.
+    void* md = NULL_POINTER;
+    int mdc = 0;
+    int mds = 0;
 
-            // CAUTION! The parameter at index 0 is the logic/ operation name.
-            // Input and output parameters start with index 1.
-
-            // The loop variable.
-            int j = 1;
-
-            while (1) {
-
-                if (j >= *sc) {
-
-                    break;
-                }
-
-                // CAUTION! The parameter at index 0 is the logic/ operation name.
-                // Input and output parameters start with index 1.
-
-                if (j == 1) {
-
-                    // Get persistent language name and its count and size.
-                    get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pl);
-                    get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &plc);
-                    get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pls);
-
-                } else if (j == 2) {
-
-                    // Get persistent sender name and its count and size.
-                    get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ps);
-                    get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &psc);
-                    get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pss);
-
-                } else if (j == 3) {
-
-                    // Get persistent receiver name and its count and size.
-                    get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pr);
-                    get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &prc);
-                    get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &prs);
-
-                } else if (j == 4) {
-
-                    // Get persistent message name and its count and size.
-                    get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pm);
-                    get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pmc);
-                    get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pms);
-                }
-
-                j++;
-            }
-
-            // Initialize transient language, sender, receiver, message
-            // and their counts and sizes.
-            void* tl = NULL_POINTER;
-            int tlc = 0;
-            int tls = 0;
-            void* ts = NULL_POINTER;
-            int tsc = 0;
-            int tss = 0;
-            void* tr = NULL_POINTER;
-            int trc = 0;
-            int trs = 0;
-            void* tm = NULL_POINTER;
-            int tmc = 0;
-            int tms = 0;
+    //
+    // The language name is taken directly.
+    // All other parameters are hierarchical names and used to
+    // determine the actual item from the knowledge tree.
+    //
 
 /*??
-            // Get transient language, sender, receiver, message
-            // and their counts and sizes.
-            get_compound_part_by_name(p4, p5, p6,
-                (void*) &pl, (void*) &plc, (void*) &pls,
-                (void*) &tl, (void*) &tlc, (void*) &tls,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
-            get_compound_part_by_name(p4, p5, p6,
-                (void*) &ps, (void*) &psc, (void*) &pss,
-                (void*) &ts, (void*) &tsc, (void*) &tss,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
-            get_compound_part_by_name(p4, p5, p6,
-                (void*) &pr, (void*) &prc, (void*) &prs,
-                (void*) &tr, (void*) &trc, (void*) &trs,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
-            get_compound_part_by_name(p4, p5, p6,
-                (void*) &pm, (void*) &pmc, (void*) &pms,
-                (void*) &tm, (void*) &tmc, (void*) &tms,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
+    // Get language.
+    get_compound_element_by_encapsulated_name(p0, p1,
+        (void*) &LANGUAGE_NAME_ABSTRACTION, (void*) &LANGUAGE_NAME_ABSTRACTION_COUNT,
+        (void*) &la, (void*) &lac, (void*) &las,
+        (void*) &lm, (void*) &lmc, (void*) &lms,
+        (void*) &ld, (void*) &ldc, (void*) &lds,
+        p2, p3);
 */
 
-            // Send message in a special language.
-            send_in_language((void*) &tl, (void*) &tlc, (void*) &ts, (void*) &tsc,
-                (void*) &tr, (void*) &trc, (void*) &tm, (void*) &tmc, p7, p8, p9, p10);
+    // Get language.
+    get_compound_element_by_name(p0, p1,
+        (void*) &LANGUAGE_NAME_ABSTRACTION, (void*) &LANGUAGE_NAME_ABSTRACTION_COUNT,
+        (void*) &la, (void*) &lac, (void*) &las,
+        (void*) &lm, (void*) &lmc, (void*) &lms,
+        (void*) &ld, (void*) &ldc, (void*) &lds);
 
-        } else {
+    // Get sender.
+    get_compound_element_by_encapsulated_name(p0, p1,
+        (void*) &SENDER_NAME_ABSTRACTION, (void*) &SENDER_NAME_ABSTRACTION_COUNT,
+        (void*) &sa, (void*) &sac, (void*) &sas,
+        (void*) &sm, (void*) &smc, (void*) &sms,
+        (void*) &sd, (void*) &sdc, (void*) &sds,
+        p2, p3);
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_SEND_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_DOES_NOT_MATCH_MESSAGE, (void*) &COULD_NOT_HANDLE_SEND_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_DOES_NOT_MATCH_MESSAGE_COUNT);
+    // Get receiver.
+    get_compound_element_by_encapsulated_name(p0, p1,
+        (void*) &RECEIVER_NAME_ABSTRACTION, (void*) &RECEIVER_NAME_ABSTRACTION_COUNT,
+        (void*) &ra, (void*) &rac, (void*) &ras,
+        (void*) &rm, (void*) &rmc, (void*) &rms,
+        (void*) &rd, (void*) &rdc, (void*) &rds,
+        p2, p3);
+
+    // Get message.
+    get_compound_element_by_encapsulated_name(p0, p1,
+        (void*) &MESSAGE_NAME_ABSTRACTION, (void*) &MESSAGE_NAME_ABSTRACTION_COUNT,
+        (void*) &ma, (void*) &mac, (void*) &mas,
+        (void*) &mm, (void*) &mmc, (void*) &mms,
+        (void*) &md, (void*) &mdc, (void*) &mds,
+        p2, p3);
+
+    // The done flag.
+    int d = 0;
+    // The comparison result.
+    int r = 0;
+
+    if (d == 0) {
+
+        compare_arrays((void*) &lm, (void*) &lmc, (void*) &TUI_LANGUAGE, (void*) &TUI_LANGUAGE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            //?? The temporary standard console output as destination.
+            //?? Possibly use "sender" information instead, later.
+            void* tmpd = (void*) stdout;
+            int tmpdc = 0;
+            int tmpds = 0;
+
+            send_tui((void*) &tmpd, (void*) &tmpdc, (void*) &tmpds, (void*) &mm, (void*) &mmc);
+
+            d = 1;
         }
+    }
 
-    } else {
+    if (d == 0) {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_SEND_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_SEND_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE_COUNT);
+        compare_arrays((void*) &lm, (void*) &lmc, (void*) &UNIX_SOCKET_CHANNEL, (void*) &UNIX_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+/*??
+            send_unix_socket((void*) &dn, (void*) &dnc, (void*) &dns,
+                (void*) &snm, (void*) &snmc,
+                (void*) &sna, (void*) &snac,
+                (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+*/
+
+            d = 1;
+        }
     }
 }
 

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2004-09-12 23:04:40 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-10-18 10:53:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -188,7 +188,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-//??            handle_destroy(p1, p2, p3, (void*) &ps, p4, p5, p6);
+            destroy_part(p2, p3, p4, p5, p6);
 
             d = 1;
         }
@@ -200,7 +200,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-//??            send_message(p1, p2, p3, (void*) &ps, p4, p5, p6, p7, p8, p9, p10);
+            send_message(p2, p3, p4, p5, p6, p7, p8, p9, p10);
 
             d = 1;
         }
@@ -212,7 +212,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-//??            receive_message(p1, p2, p3, (void*) &ps, p4, p5, p6, p7, p8, p9, p10);
+            receive_message(p2, p3, p4, p5, p6, p7, p8, p9, p10);
 
             d = 1;
         }

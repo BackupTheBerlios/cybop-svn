@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2004-09-14 23:37:12 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-10-18 10:53:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1090,6 +1090,73 @@ void get_compound_element_by_name(const void* p0, const void* p1,
 //??            log_message((void*) &WARNING_LOG_LEVEL, (void*) &COULD_NOT_GET_COMPOUND_BY_NAME_A_WITH_THAT_NAME_DOES_NOT_EXIST_MESSAGE, (void*) &COULD_NOT_GET_COMPOUND_BY_NAME_A_WITH_THAT_NAME_DOES_NOT_EXIST_MESSAGE_COUNT);
         }
     }
+}
+
+/**
+ * Gets the compound element by encapsulated name.
+ *
+ * At first, the element name needs to be determined within
+ *
+ * @param p0 the compound
+ * @param p1 the compound count
+ * @param p2 the name
+ * @param p3 the name count
+ * @param p4 the abstraction
+ * @param p5 the abstraction count
+ * @param p6 the abstraction size
+ * @param p7 the model
+ * @param p8 the model count
+ * @param p9 the model size
+ * @param p10 the details
+ * @param p11 the details count
+ * @param p12 the details size
+ * @param p13 the knowledge
+ * @param p14 the knowledge count
+ */
+void get_compound_element_by_encapsulated_name(const void* p0, const void* p1,
+    const void* p2, const void* p3, void* p4, void* p5, void* p6,
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12,
+    const void* p13, const void* p14) {
+
+    // The abstraction.
+    void* a = NULL_POINTER;
+    int ac = 0;
+    int as = 0;
+    // The model.
+    void* m = NULL_POINTER;
+    int mc = 0;
+    int ms = 0;
+    // The details.
+    void* d = NULL_POINTER;
+    int dc = 0;
+    int ds = 0;
+
+    // Get knowledge element name.
+    get_compound_element_by_name(p0, p1,
+        p2, p3,
+        (void*) &a, (void*) &ac, (void*) &as,
+        (void*) &m, (void*) &mc, (void*) &ms,
+        (void*) &d, (void*) &dc, (void*) &ds);
+
+    //
+    // CAUTION!
+    // The element below must be determined within the knowledge model,
+    // NOT within the logic operation's parameters as before!
+    //
+    // The abstraction of an encapsulated name must always be "string".
+    // The details are uninteresting, since an encapsulated name cannot have
+    // constraints. That is, only the model is of interest. It contains the
+    // hierarchical name of the knowledge element to be retrieved. This
+    // hierarchical name is finally used to determine the actual element.
+    //
+    // Example of a hierarchical name:
+    // application.communication.partners.hostname.address
+    //
+
+    // Get knowledge element.
+    get_compound_element_by_name(p13, p14,
+        (void*) &m, (void*) &mc,
+        p4, p5, p6, p7, p8, p9, p10, p11, p12);
 }
 
 /* COMPOUND_ACCESSOR_SOURCE */

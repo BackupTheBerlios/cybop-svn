@@ -28,16 +28,12 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-10-18 10:53:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CHANNEL_CONSTANTS_SOURCE
 #define CHANNEL_CONSTANTS_SOURCE
-
-//
-// Communication channels.
-//
 
 /** The internal channel array, pointer, count. */
 static const char INTERNAL_CHANNEL_ARRAY[] = {'i', 'n', 't', 'e', 'r', 'n', 'a', 'l'};

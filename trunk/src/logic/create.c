@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.14 $ $Date: 2004-09-14 23:37:12 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-10-18 10:53:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,7 @@
 #include "../communicator/communicator.c"
 #include "../global/abstraction_constants.c"
 #include "../global/log_constants.c"
+#include "../global/name_constants.c"
 #include "../logger/logger.c"
 #include "../parser/parser.c"
 #include "../translator/translator.c"
@@ -57,6 +58,16 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 
         // The following comparisons could also be done one after the other,
         // without "done" flag. But the done flag avoids unnecessary comparisons.
+
+        if (d == 0) {
+
+            compare_arrays(p1, p2, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+
+            if (*p == 1) {
+
+                d = 1;
+            }
+        }
 
         if (d == 0) {
 
@@ -397,152 +408,164 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  */
 void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
-    // The source name abstraction.
-    void* sna = NULL_POINTER;
-    int snac = 0;
-    int snas = 0;
-    // The source name model.
-    void* snm = NULL_POINTER;
-    int snmc = 0;
-    int snms = 0;
-    // The source name details.
-    void* snd = NULL_POINTER;
-    int sndc = 0;
-    int snds = 0;
+    // The name name abstraction.
+    void* na = NULL_POINTER;
+    int nac = 0;
+    int nas = 0;
+    // The name name model.
+    void* nm = NULL_POINTER;
+    int nmc = 0;
+    int nms = 0;
+    // The name name details.
+    void* nd = NULL_POINTER;
+    int ndc = 0;
+    int nds = 0;
 
-    // The source channel abstraction.
-    void* sca = NULL_POINTER;
-    int scac = 0;
-    int scas = 0;
-    // The source channel model.
-    void* scm = NULL_POINTER;
-    int scmc = 0;
-    int scms = 0;
-    // The source channel details.
-    void* scd = NULL_POINTER;
-    int scdc = 0;
-    int scds = 0;
+    // The channel name abstraction.
+    void* ca = NULL_POINTER;
+    int cac = 0;
+    int cas = 0;
+    // The channel name model.
+    void* cm = NULL_POINTER;
+    int cmc = 0;
+    int cms = 0;
+    // The channel name details.
+    void* cd = NULL_POINTER;
+    int cdc = 0;
+    int cds = 0;
 
-    // The source abstraction abstraction.
-    void* saa = NULL_POINTER;
-    int saac = 0;
-    int saas = 0;
-    // The source abstraction model.
-    void* sam = NULL_POINTER;
-    int samc = 0;
-    int sams = 0;
-    // The source abstraction details.
-    void* sad = NULL_POINTER;
-    int sadc = 0;
-    int sads = 0;
+    // The abstraction name abstraction.
+    void* aa = NULL_POINTER;
+    int aac = 0;
+    int aas = 0;
+    // The abstraction name model.
+    void* am = NULL_POINTER;
+    int amc = 0;
+    int ams = 0;
+    // The abstraction name details.
+    void* ad = NULL_POINTER;
+    int adc = 0;
+    int ads = 0;
 
-    // The source model abstraction.
-    void* sma = NULL_POINTER;
-    int smac = 0;
-    int smas = 0;
-    // The source model model.
-    void* smm = NULL_POINTER;
-    int smmc = 0;
-    int smms = 0;
-    // The source model details.
-    void* smd = NULL_POINTER;
-    int smdc = 0;
-    int smds = 0;
+    // The model name abstraction.
+    void* ma = NULL_POINTER;
+    int mac = 0;
+    int mas = 0;
+    // The model name model.
+    void* mm = NULL_POINTER;
+    int mmc = 0;
+    int mms = 0;
+    // The model name details.
+    void* md = NULL_POINTER;
+    int mdc = 0;
+    int mds = 0;
 
-    // The destination name.
-    void* dn = NULL_POINTER;
-    int dnc = 0;
-    int dns = 0;
-    // The destination abstraction.
-    void* da = NULL_POINTER;
-    int dac = 0;
-    int das = 0;
-    // The destination model.
-    void* dm = NULL_POINTER;
-    int dmc = 0;
-    int dms = 0;
-    // The destination details.
-    void* dd = NULL_POINTER;
-    int ddc = 0;
-    int dds = 0;
+    // The whole abstraction.
+    void* wa = NULL_POINTER;
+    int wac = 0;
+    int was = 0;
+    // The whole model.
+    void* wm = NULL_POINTER;
+    int wmc = 0;
+    int wms = 0;
+    // The whole details.
+    void* wd = NULL_POINTER;
+    int wdc = 0;
+    int wds = 0;
 
-    fprintf(stderr, "TEST 0: %i\n", p0);
+    // The part name.
+    void* pn = NULL_POINTER;
+    int pnc = 0;
+    int pns = 0;
+    // The part abstraction.
+    void* pa = NULL_POINTER;
+    int pac = 0;
+    int pas = 0;
+    // The part model.
+    void* pm = NULL_POINTER;
+    int pmc = 0;
+    int pms = 0;
+    // The part details.
+    void* pd = NULL_POINTER;
+    int pdc = 0;
+    int pds = 0;
 
-    // Get source name.
+    // Get name name.
     get_compound_element_by_name(p0, p1,
-        (void*) &CREATE_DESTROY_PART_NAME_ABSTRACTION,
-        (void*) &CREATE_DESTROY_PART_NAME_ABSTRACTION_COUNT,
-        (void*) &sna, (void*) &snac, (void*) &snas,
-        (void*) &snm, (void*) &snac, (void*) &snas,
-        (void*) &snd, (void*) &sndc, (void*) &snds);
+        (void*) &NAME_NAME_ABSTRACTION, (void*) &NAME_NAME_ABSTRACTION_COUNT,
+        (void*) &na, (void*) &nac, (void*) &nas,
+        (void*) &nm, (void*) &nmc, (void*) &nms,
+        (void*) &nd, (void*) &ndc, (void*) &nds);
 
-    fprintf(stderr, "TEST 1: %i\n", snm);
-
-    // Get source channel.
+    // Get channel name.
     get_compound_element_by_name(p0, p1,
-        (void*) &CREATE_DESTROY_PART_CHANNEL_ABSTRACTION,
-        (void*) &CREATE_DESTROY_PART_CHANNEL_ABSTRACTION_COUNT,
-        (void*) &sca, (void*) &scac, (void*) &scas,
-        (void*) &scm, (void*) &scmc, (void*) &scms,
-        (void*) &scd, (void*) &scdc, (void*) &scds);
+        (void*) &CHANNEL_NAME_ABSTRACTION, (void*) &CHANNEL_NAME_ABSTRACTION_COUNT,
+        (void*) &ca, (void*) &cac, (void*) &cas,
+        (void*) &cm, (void*) &cmc, (void*) &cms,
+        (void*) &cd, (void*) &cdc, (void*) &cds);
 
-    fprintf(stderr, "TEST 2: %i\n", scm);
-
-    // Get source abstraction.
+    // Get abstraction name.
     get_compound_element_by_name(p0, p1,
-        (void*) &CREATE_DESTROY_PART_ABSTRACTION_ABSTRACTION,
-        (void*) &CREATE_DESTROY_PART_ABSTRACTION_ABSTRACTION_COUNT,
-        (void*) &saa, (void*) &saac, (void*) &saas,
-        (void*) &sam, (void*) &samc, (void*) &sams,
-        (void*) &sad, (void*) &sadc, (void*) &sads);
+        (void*) &ABSTRACTION_NAME_ABSTRACTION, (void*) &ABSTRACTION_NAME_ABSTRACTION_COUNT,
+        (void*) &aa, (void*) &aac, (void*) &aas,
+        (void*) &am, (void*) &amc, (void*) &ams,
+        (void*) &ad, (void*) &adc, (void*) &ads);
 
-    fprintf(stderr, "TEST 3: %i\n", sam);
-
-    // Get source model.
+    // Get model name.
     get_compound_element_by_name(p0, p1,
-        (void*) &CREATE_DESTROY_PART_MODEL_ABSTRACTION,
-        (void*) &CREATE_DESTROY_PART_MODEL_ABSTRACTION_COUNT,
-        (void*) &sma, (void*) &smac, (void*) &smas,
-        (void*) &smm, (void*) &smmc, (void*) &smms,
-        (void*) &smd, (void*) &smdc, (void*) &smds);
+        (void*) &MODEL_NAME_ABSTRACTION, (void*) &MODEL_NAME_ABSTRACTION_COUNT,
+        (void*) &ma, (void*) &mac, (void*) &mas,
+        (void*) &mm, (void*) &mmc, (void*) &mms,
+        (void*) &md, (void*) &mdc, (void*) &mds);
 
-    fprintf(stderr, "TEST 4: %i\n", smm);
+    // Get whole.
+    get_compound_element_by_encapsulated_name(p0, p1,
+        (void*) &WHOLE_NAME_ABSTRACTION, (void*) &WHOLE_NAME_ABSTRACTION_COUNT,
+        (void*) &wa, (void*) &wac, (void*) &was,
+        (void*) &wm, (void*) &wmc, (void*) &wms,
+        (void*) &wd, (void*) &wdc, (void*) &wds,
+        p2, p3);
 
-    // Create destination name.
-    create_model((void*) &dn, (void*) &dnc, (void*) &dns,
-        (void*) &snm, (void*) &snmc,
-        (void*) &sna, (void*) &snac,
+    // Create part name.
+    create_model((void*) &pn, (void*) &pnc, (void*) &pns,
+        (void*) &nm, (void*) &nmc,
+        (void*) &na, (void*) &nac,
         (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
 
-    fprintf(stderr, "TEST 5: %i\n", dn);
+    // A part channel is not created, since that is only needed temporarily for
+    // model loading.
 
-    // CAUTION! A (transient) destination channel is not created,
-    // since that is only needed temporarily for model loading.
-
-    // Create destination abstraction.
-    create_model((void*) &da, (void*) &dac, (void*) &das,
-        (void*) &sam, (void*) &samc,
-        (void*) &saa, (void*) &saac,
+    // Create part abstraction.
+    create_model((void*) &pa, (void*) &pac, (void*) &pas,
+        (void*) &am, (void*) &amc,
+        (void*) &aa, (void*) &aac,
         (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
 
-    fprintf(stderr, "TEST 6: %i\n", da);
-
-    // Create destination model.
-    create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-        (void*) &smm, (void*) &smmc,
-        (void*) &sam, (void*) &samc,
-        (void*) &scm, (void*) &scmc);
-
-    fprintf(stderr, "TEST 7: %i\n", dm);
+    // Create part model.
+    create_model((void*) &pm, (void*) &pmc, (void*) &pms,
+        (void*) &mm, (void*) &mmc,
+        (void*) &am, (void*) &amc,
+        (void*) &cm, (void*) &cmc);
 
     // Add part to whole.
-    set_compound_element_by_name(p2, p3, p4,
-        (void*) &dn, (void*) &dnc, (void*) &dns,
-        (void*) &da, (void*) &dac, (void*) &das,
-        (void*) &dm, (void*) &dmc, (void*) &dms,
-        (void*) &dd, (void*) &ddc, (void*) &dds);
+    if (wm == NULL_POINTER) {
 
-    fprintf(stderr, "TEST 8: %i\n", p2);
+        // Use the knowledge model root if the determined whole model is null.
+        set_compound_element_by_name(p2, p3, p4,
+            (void*) &pn, (void*) &pnc, (void*) &pns,
+            (void*) &pa, (void*) &pac, (void*) &pas,
+            (void*) &pm, (void*) &pmc, (void*) &pms,
+            (void*) &pd, (void*) &pdc, (void*) &pds);
+
+    } else {
+
+        // Use the determined whole model normally, if it exists.
+        set_compound_element_by_name((void*) &wm, (void*) &wmc, (void*) &wms,
+            (void*) &pn, (void*) &pnc, (void*) &pns,
+            (void*) &pa, (void*) &pac, (void*) &pas,
+            (void*) &pm, (void*) &pmc, (void*) &pms,
+            (void*) &pd, (void*) &pdc, (void*) &pds);
+    }
 }
 
 /* CREATE_SOURCE */
