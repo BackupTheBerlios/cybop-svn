@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-02-12 11:46:01 $ $Author: rholzmueller $
+ * @version $Revision: 1.9 $ $Date: 2005-02-14 07:26:27 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,6 +54,7 @@ void startup_input_output(void* p0) {
     int* f = INTEGER_NULL_POINTER;
 
     // Unix server socket.
+    f = INTEGER_NULL_POINTER;
     get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (*f == 1) {
@@ -62,6 +63,7 @@ void startup_input_output(void* p0) {
     }
 
     // Tcp server socket.
+    f = INTEGER_NULL_POINTER;
     get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (*f == 1) {
@@ -70,6 +72,7 @@ void startup_input_output(void* p0) {
     }
 
     // X windows server.
+    f = INTEGER_NULL_POINTER;
     get_array_elements(p0, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (*f == 1) {
@@ -96,33 +99,31 @@ void shutdown_input_output(void* p0) {
     int* f = INTEGER_NULL_POINTER;
 
     // X windows server.
+    f = INTEGER_NULL_POINTER;
     get_array_elements(p0, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (*f == 1) {
 
 //??        destroy_x_windows_server(p0);
 
-        *f = 0;
     }
 
     // Tcp server socket.
+    f = INTEGER_NULL_POINTER;
     get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (*f == 1) {
 
         destroy_tcp_server_socket(p0);
-
-        *f = 0;
     }
 
     // Unix server socket.
+    f = INTEGER_NULL_POINTER;
     get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (*f == 1) {
 
         destroy_unix_server_socket(p0);
-
-        *f = 0;
     }
 }
 

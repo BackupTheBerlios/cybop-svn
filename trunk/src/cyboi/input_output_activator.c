@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-02-12 11:46:02 $ $Author: rholzmueller $
+ * @version $Revision: 1.8 $ $Date: 2005-02-14 07:26:27 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -68,6 +68,7 @@ void activate_input_output(void* p0) {
     int* f = INTEGER_NULL_POINTER;
 
     // UNIX socket.
+    f = INTEGER_NULL_POINTER;
     get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (*f == 1) {
@@ -76,6 +77,7 @@ void activate_input_output(void* p0) {
     }
 
     // TCP socket.
+    f = INTEGER_NULL_POINTER;
     get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (*f == 1) {
@@ -84,6 +86,7 @@ void activate_input_output(void* p0) {
     }
 
     // X windows.
+    f = INTEGER_NULL_POINTER;
     get_array_elements(p0, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (*f == 1) {
