@@ -34,7 +34,7 @@
  * In the case of computer science, everything gets abstracted to 0 and 1.
  * But that also means that every abstraction has a bytecode representation.
  *
- * @version $Revision: 1.1 $ $Date: 2003-10-12 12:33:42 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-10-12 14:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct array {

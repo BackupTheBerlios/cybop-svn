@@ -34,7 +34,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.13 $ $Date: 2003-10-12 12:33:42 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-10-12 14:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,7 +79,9 @@ static void finalize_map(void* p0) {
 
         log((void*) &INFO_LOG_LEVEL, "Finalize map.");
 
+        finalize_array(m->references);
         free(m->references);
+        finalize_array(m->names);
         free(m->names);
         
     } else {

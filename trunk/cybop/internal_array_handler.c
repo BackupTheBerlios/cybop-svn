@@ -1,5 +1,5 @@
 /*
- * $RCSfile: array_handler.c,v $
+ * $RCSfile: internal_array_handler.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,161 +22,22 @@
  * - Cybernetics Oriented Programming -
  */
 
-#ifndef ARRAY_HANDLER_SOURCE
-#define ARRAY_HANDLER_SOURCE
+#ifndef INTERNAL_ARRAY_HANDLER_SOURCE
+#define INTERNAL_ARRAY_HANDLER_SOURCE
 
-#include "array.c"
-#include "dynamics_handler.c"
 #include "log_handler.c"
-#include "statics.c"
 
 /**
- * This is the array handler.
+ * This is the internal array handler.
  *
- * Array elements are accessed over their index.
+ * Internal array elements are accessed over their index.
  *
- * @version $Revision: 1.14 $ $Date: 2003-10-12 14:25:27 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-10-12 14:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 //
-// Array.
-//
-
-/**
- * Initializes the array.
- *
- * @param p0 the array
- */
-static void initialize_array(void* p0) {
-
-    struct array* a = (struct array*) p0;
-
-    if (a != 0) {
-
-        log((void*) &INFO_LOG_LEVEL, "Initialize array.");
-
-        // An array CANNOT have ZERO length, so that dereferencing a pointer to
-        // the first element of an array always returns a valid result.
-        // There is no NULL array.
-        // See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
-        a->size = 0;
-        a->internal_array = malloc(a->size);
-
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize array. The array is null.");
-    }
-}
-
-/**
- * Finalizes the array.
- *
- * @param p0 the array
- */
-static void finalize_array(void* p0) {
-
-    struct array* a = (struct array*) p0;
-    
-    if (a != 0) {
-
-        log((void*) &INFO_LOG_LEVEL, "Finalize array.");
-
-        free(a->internal_array);
-        a->size = -1;
-        
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize array. The array is null.");
-    }
-}
-
-/**
- * Returns the array size.
- *
- * @param p0 the array
- * @param p1 the array size
- */
-static void get_array_size(void* p0, void* p1) {
-
-    struct array* a = (struct array*) p0;
-
-    if (a != 0) {
-
-        int* s = (int*) p1;
-        *s = a->size;
-
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not get array size. The array is null.");
-    }
-}
-
-/**
- * Extends the array by doubling its length.
- *
- * All elements are copied from the old to the new array.
- * The rest of the new array is just left empty as it is; no zeros are set.
- *
- * @param p0 the array
- */
-static void extend_array(void* p0) {
-
-    struct array* a = (struct array*) p0;
-
-    if (a != 0) {
-
-        // Get internal array and its size.
-        int old_size = a->size;
-        void** old_array = a->internal_array;
-
-        //?? Distinguish between null array (not existant) or empty array!
-        if ((old_size != 0) && (old_array != 0)) {
-    
-            // Create new array (with extended size) and set its size.
-            // If the initial size is zero and multiplied by two, the result is still zero.
-            // Therefore, an integer summand of 1 is added here.
-            int new_size = old_size * 2 + 1;
-            void** new_array = malloc(new_size);
-    
-            if ((new_size != 0) && (new_array != 0)) {
-                    
-                // Copy all elements of the old into the new array.
-                int i = 0;
-    
-                while (i < old_size) {
-    
-                    new_array[i] = old_array[i];
-    
-                    i++;
-                }
-    
-                // Free old array and reset its size.
-                free(old_array);
-                old_size = 0;
-                
-                // Set internal array and its size.
-                a->size = new_size;
-                a->internal_array = new_array;
-    
-            } else {
-    
-                log((void*) &ERROR_LOG_LEVEL, "Could not extend array. The new internal array is null.");
-            }
-    
-        } else {
-    
-            log((void*) &ERROR_LOG_LEVEL, "Could not extend array. The old internal array is null.");
-        }
-
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not extend array. The array is null.");
-    }
-}
-
-//
-// Array element.
+// Internal array element.
 //
 
 /**
@@ -186,11 +47,9 @@ static void extend_array(void* p0) {
  * @param p1 the index
  * @param p2 the element
  */
-static void set_array_element(void* p0, void* p1, void* p2) {
+static void set_array_element(void** p0, void* p1, void* p2) {
 
-    struct array* a = (struct array*) p0;
-
-    if (a != 0) {
+    if (p0 != 0) {
 
         int* i = (int*) p1;
         int size = a->size;
@@ -321,6 +180,6 @@ static void get_array_element(void* p0, void* p1, void* p2) {
     }
 }
 
-/* ARRAY_HANDLER_SOURCE */
+/* INTERNAL_ARRAY_HANDLER_SOURCE */
 #endif
 

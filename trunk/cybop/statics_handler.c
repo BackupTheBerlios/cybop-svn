@@ -39,7 +39,7 @@
  * It implements static operators.
  * An instance is retrieved by instantiating a model.
  *
- * @version $Revision: 1.7 $ $Date: 2003-10-12 12:33:42 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-10-12 14:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
