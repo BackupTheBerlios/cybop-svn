@@ -40,7 +40,7 @@ import cybop.core.screen.model.*;
  * - authors
  * - helpers
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationDisplay extends FrameDisplay {
@@ -89,7 +89,7 @@ public class SystemInformationDisplay extends FrameDisplay {
      */
     public String getDefaultContentsPanel() {
 
-        return new String("cybop.core.model.organizer.SystemInformationPanel");
+        return new String("cybop.core.screen.region.SystemInformationPanel");
     }
 
     /**

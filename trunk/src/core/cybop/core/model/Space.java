@@ -36,7 +36,7 @@ import cybop.core.model.String;
  *
  * It is measured in Meter * Meter * Meter [m * m * m].
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Space extends Quantity {
@@ -74,7 +74,7 @@ public class Space extends Quantity {
      */
     public String getDefaultOriginXCoordinate() {
 
-        return new String("cybop.core.basic.Integer");
+        return new String("cybop.core.model.Integer");
     }
 
     /**
@@ -84,7 +84,7 @@ public class Space extends Quantity {
      */
     public String getDefaultOriginYCoordinate() {
 
-        return new String("cybop.core.basic.Integer");
+        return new String("cybop.core.model.Integer");
     }
 
     /**
@@ -94,7 +94,7 @@ public class Space extends Quantity {
      */
     public String getDefaultOriginZCoordinate() {
 
-        return new String("cybop.core.basic.Integer");
+        return new String("cybop.core.model.Integer");
     }
 
     /**
@@ -104,7 +104,7 @@ public class Space extends Quantity {
      */
     public String getDefaultExpanseXCoordinate() {
 
-        return new String("cybop.core.basic.Integer");
+        return new String("cybop.core.model.Integer");
     }
 
     /**
@@ -114,7 +114,7 @@ public class Space extends Quantity {
      */
     public String getDefaultExpanseYCoordinate() {
 
-        return new String("cybop.core.basic.Integer");
+        return new String("cybop.core.model.Integer");
     }
 
     /**
@@ -124,7 +124,7 @@ public class Space extends Quantity {
      */
     public String getDefaultExpanseZCoordinate() {
 
-        return new String("cybop.core.basic.Integer");
+        return new String("cybop.core.model.Integer");
     }
 
     //

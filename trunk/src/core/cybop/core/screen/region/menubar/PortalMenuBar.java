@@ -33,7 +33,7 @@ import cybop.core.screen.region.menu.*;
 /**
  * This class represents a portal menu bar.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalMenuBar extends MenuBar {
@@ -180,7 +180,7 @@ public class PortalMenuBar extends MenuBar {
      */
     public String getDefaultSystemsMenu() {
 
-        return new String("cybop.core.model.organizer.menu.SystemsMenu");
+        return new String("cybop.core.screen.region.menu.SystemsMenu");
 /*??
         SystemsMenu m = new SystemsMenu();
 
@@ -210,7 +210,7 @@ public class PortalMenuBar extends MenuBar {
      */
     public String getDefaultEditorMenu() {
 
-        return new String("cybop.core.model.organizer.menu.EditorMenu");
+        return new String("cybop.core.screen.region.menu.EditorMenu");
 
 /*??
         // Create menu and its menu items.
@@ -283,7 +283,7 @@ public class PortalMenuBar extends MenuBar {
      */
     public String getDefaultViewMenu() {
 
-        return new String("cybop.core.model.organizer.menu.ViewMenu");
+        return new String("cybop.core.screen.region.menu.ViewMenu");
 
 /*??
         // Create menu and its menu items.
@@ -356,7 +356,7 @@ public class PortalMenuBar extends MenuBar {
      */
     public String getDefaultContextMenu() {
 
-        return new String("cybop.core.model.organizer.menu.ContextMenu");
+        return new String("cybop.core.screen.region.menu.ContextMenu");
 
 /*??
         // Create menu and its menu items.
@@ -380,7 +380,7 @@ public class PortalMenuBar extends MenuBar {
      */
     public String getDefaultSettingsMenu() {
 
-        return new String("cybop.core.model.organizer.menu.SettingsMenu");
+        return new String("cybop.core.screen.region.menu.SettingsMenu");
 
 /*??
         // Create menu and its menu items.
@@ -499,7 +499,7 @@ public class PortalMenuBar extends MenuBar {
      */
     public String getDefaultWindowMenu() {
 
-        return new String("cybop.core.model.organizer.menu.WindowMenu");
+        return new String("cybop.core.screen.region.menu.WindowMenu");
 
 /*??
         // Create menu and its menu items.
@@ -576,7 +576,7 @@ public class PortalMenuBar extends MenuBar {
      */
     public String getDefaultHelpMenu() {
 
-        return new String("cybop.core.model.organizer.menu.HelpMenu");
+        return new String("cybop.core.screen.region.menu.HelpMenu");
 
 /*??
         // Create menu and its menu items.
@@ -776,7 +776,7 @@ public class PortalMenuBar extends MenuBar {
      */
     public String getDefaultPlacingMenu() {
 
-        return new String("cybop.core.model.organizer.menu.PlacingMenu");
+        return new String("cybop.core.screen.region.menu.PlacingMenu");
 
 /*??
         // Create menu and its menu items.
@@ -849,7 +849,7 @@ public class PortalMenuBar extends MenuBar {
      */
     public String getDefaultModeMenu() {
 
-        return new String("cybop.core.model.organizer.menu.ModeMenu");
+        return new String("cybop.core.screen.region.menu.ModeMenu");
 
 /*??
         // Create menu and its menu items.

@@ -32,7 +32,7 @@ import cybop.core.screen.component.*;
 /**
  * This class represents a screen region.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class DisplayRegion extends DisplayItem {
@@ -120,7 +120,7 @@ public class DisplayRegion extends DisplayItem {
      */
     public String getDefaultLayout() {
 
-        return new String("cybop.core.model.organizer.Layout");
+        return new String("cybop.core.screen.component.Layout");
     }
 
     //

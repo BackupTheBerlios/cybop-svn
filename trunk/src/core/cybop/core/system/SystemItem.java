@@ -37,7 +37,7 @@ import cybop.core.system.chain.*;
  * A system item has special properties like configuration or log record and
  * is able to create and send signals.
  *
- * @version $Revision: 1.9 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemItem extends Item {
@@ -63,7 +63,7 @@ public class SystemItem extends Item {
      */
     public Item getDefaultSignalMemoryCategory() {
 
-        return new String("cybop.core.system.chain.SignalMemory");
+        return new String("cybop.core.category.Item");
     }
 
     /**

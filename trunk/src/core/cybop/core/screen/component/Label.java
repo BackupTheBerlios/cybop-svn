@@ -33,7 +33,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a label.
  *
- * @version $Revision: 1.6 $ $Date: 2003-06-18 11:54:34 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Label extends DisplayComponent {
@@ -185,7 +185,7 @@ public class Label extends DisplayComponent {
      */
     public String getDefaultFontCategory() {
 
-        return new String("cybop.core.model.organizer.Font");
+        return new String("cybop.core.screen.component.Font");
     }
 
     /**

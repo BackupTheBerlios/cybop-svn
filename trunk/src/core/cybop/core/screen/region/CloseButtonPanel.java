@@ -30,7 +30,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a close button panel.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class CloseButtonPanel extends ButtonPanel {
@@ -46,7 +46,7 @@ public class CloseButtonPanel extends ButtonPanel {
      */
     public String getDefaultCloseButton() {
 
-        return new String("cybop.core.model.organizer.CloseButton");
+        return new String("cybop.core.screen.component.button.CloseButton");
     }
 }
 

@@ -34,7 +34,7 @@ import cybop.core.model.String;
  * It contains information about how to talk to a mouse, that is its pointer and
  * position etc.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-16 18:26:48 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class MouseModel extends Item {
@@ -57,7 +57,7 @@ public class MouseModel extends Item {
      */
     public String getDefaultPointerPosition() {
 
-        return new String("cybop.core.category.Space");
+        return new String("cybop.core.model.Space");
     }
 
     //

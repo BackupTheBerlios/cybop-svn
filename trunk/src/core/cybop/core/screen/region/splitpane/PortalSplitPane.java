@@ -31,7 +31,7 @@ import cybop.core.screen.region.*;
 /**
  * This class represents a portal split pane.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalSplitPane extends SplitPane {
@@ -47,7 +47,7 @@ public class PortalSplitPane extends SplitPane {
      */
     public String getDefaultLeftOrganizer() {
 
-        return new String("cybop.core.model.organizer.Tree");
+        return new String("cybop.core.screen.region.Tree");
     }
 }
 

@@ -35,7 +35,7 @@ import cybop.core.system.region.controller.translator.*;
 /**
  * This class represents a portal controller.
  *
- * @version $Revision: 1.10 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalController extends Controller {
@@ -61,7 +61,7 @@ public class PortalController extends Controller {
      */
     public Item getDefaultKnowledgeModelCategory() {
 
-        return new String("cybop.core.model.model.KnowledgeModel");
+        return null;
     }
 
     /**
@@ -71,7 +71,7 @@ public class PortalController extends Controller {
      */
     public Item getDefaultDisplayCategory() {
 
-        return new String("cybop.core.model.model.user.system.PortalFrameDisplay");
+        return new String("cybop.core.screen.model.frame.PortalDisplay");
     }
 
     /**
@@ -81,7 +81,7 @@ public class PortalController extends Controller {
      */
     public Item getDefaultMouseModelCategory() {
 
-        return new String("cybop.core.model.model.MouseModel");
+        return new String("cybop.core.mouse.MouseModel");
     }
 
     /**
@@ -91,7 +91,7 @@ public class PortalController extends Controller {
      */
     public Item getDefaultSystemInformationDisplayCategory() {
 
-        return new String("cybop.core.model.model.user.SystemInformationDisplay");
+        return new String("cybop.core.screen.model.frame.SystemInformationDisplay");
     }
 
     /**

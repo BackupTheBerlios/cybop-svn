@@ -24,12 +24,14 @@
 
 package cybop.core.model;
 
+import cybop.core.category.*;
+
 /**
  * This class represents a string.
  *
  * A string is an addition of characters, in other words a character array.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-13 15:24:32 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class String extends Quality {
@@ -119,104 +121,132 @@ public class String extends Quality {
     }
 
     //
-    // Algebraic methods.
+    // Elements.
     //
 
     /**
-     * Compares if this string is equal to the given string.
+     * Returns the size.
      *
-     * @param s the string
-     * @return true - if this string is equal to the given string;
-     * false - otherwise
-     * @exception Exception if the string is null
-     * @exception Exception if the java object is null
+     * @return the size
      */
-    public boolean isEqualTo(String s) throws Exception {
+    public int getSize() throws Exception {
 
-        boolean result = Boolean.FALSE;
+        java.lang.System.out.println("\n\n\nTEST: getSize\n\n\n");
 
-        if (s != null) {
-
-            java.lang.String o = (java.lang.String) getJavaObject();
-
-            if (o != null) {
-
-                if (o.equals(s.getJavaObject())) {
-
-                    result = Boolean.TRUE;
-                }
-
-            } else {
-
-                throw new Exception("Could not compare string. The java object is null.");
-            }
-
-        } else {
-
-            throw new Exception("Could not compare string. The string is null.");
-        }
-
-        return result;
-    }
-    
-    /**
-     * Compares if this string is unequal to the given string.
-     *
-     * @param s the string
-     * @return true - if this string is equal to the given string;
-     * false - otherwise
-     * @exception Exception if the string is null
-     * @exception Exception if the java object is null
-     */
-    public boolean isUnequalTo(String s) throws Exception {
-
-        boolean result = Boolean.FALSE;
-
-        if (s != null) {
-
-            java.lang.String o = (java.lang.String) getJavaObject();
-
-            if (o != null) {
-
-                if (!o.equals(s.getJavaObject())) {
-
-                    result = Boolean.TRUE;
-                }
-
-            } else {
-
-                throw new Exception("Could not compare string. The java object is null.");
-            }
-
-        } else {
-
-            throw new Exception("Could not compare string. The string is null.");
-        }
-
-        return result;
-    }
-    
-    /**
-     * Returns the length.
-     *
-     * @return the length
-     * @exception Exception if the java object is null
-     */
-    public int getLength() throws Exception {
-
-        int l = 0;
+        int s = 0;
         java.lang.String o = (java.lang.String) getJavaObject();
 
         if (o != null) {
 
-            l = o.length();
+            s = o.length();
 
         } else {
 
-            throw new Exception("Could not return length. The java object is null.");
+            throw new Exception("Could not get size. The java object is null.");
         }
 
-        return l;
+        return s;
+    }
+
+    //
+    // Element management.
+    //
+
+    /**
+     * Sets the element.
+     *
+     * @param i the index
+     * @param e the element
+     * @exception Exception if the elements is null
+     */
+    public void set(int i, Array e) throws Exception {
+
+        java.lang.String o = (java.lang.String) getJavaObject();
+
+        if (o != null) {
+
+            java.lang.System.out.println("ERROR: Set method not implemented yet!!");
+
+        } else {
+
+            throw new Exception("Could not set element. The java object is null.");
+        }
+    }
+
+    /**
+     * Removes the element.
+     *
+     * @param i the index
+     * @exception Exception if the elements is null
+     */
+    public void remove(int i) throws Exception {
+
+        java.lang.String o = (java.lang.String) getJavaObject();
+
+        if (o != null) {
+
+            java.lang.System.out.println("ERROR: Remove method not implemented yet!!");
+
+        } else {
+
+            throw new Exception("Could not remove element. The java object is null.");
+        }
+    }
+
+    /**
+     * Returns the element.
+     *
+     * @return the element
+     * @exception Exception if the elements is null
+     */
+    public Array get(int i) throws Exception {
+
+        Array e = null;
+        java.lang.String o = (java.lang.String) getJavaObject();
+
+        if (o != null) {
+
+            e = new cybop.core.model.String(java.lang.String.valueOf(o.charAt(i)));
+
+        } else {
+
+            throw new Exception("Could not get element. The java object is null.");
+        }
+
+        return e;
+    }
+
+    /**
+     * Checks if this array is equal to the given array.
+     *
+     * @param a the array
+     * @return true - if the size and contents of both arrays are equal;
+     * false - otherwise
+     * @exception Exception if the array is null
+     */
+    public boolean isEqualTo(Array a) throws Exception {
+
+        boolean b = false;
+
+        if (a != null) {
+
+            java.lang.String o = (java.lang.String) getJavaObject();
+
+            if (o != null) {
+
+                b = o.equals(a.getJavaObject());
+
+            } else {
+    
+                throw new Exception("Could not compare arrays. The java object is null.");
+            }
+
+        } else {
+
+            throw new Exception("Could not compare arrays. The array is null.");
+        }
+
+        return b;
     }
 
     /**

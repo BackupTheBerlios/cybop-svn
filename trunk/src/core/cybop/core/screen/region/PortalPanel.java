@@ -33,7 +33,7 @@ import cybop.core.screen.region.splitpane.*;
 /**
  * This class represents a portal contents panel.
  *
- * @version $Revision: 1.6 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalPanel extends DisplayRegion {
@@ -107,7 +107,7 @@ public class PortalPanel extends DisplayRegion {
      */
     public String getDefaultPortalSplitPane() {
 
-        return new String("cybop.core.model.organizer.PortalSplitPane");
+        return new String("cybop.core.screen.region.splitpane.PortalSplitPane");
     }
 
     //

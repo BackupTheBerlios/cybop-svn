@@ -32,7 +32,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a split pane.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SplitPane extends DisplayRegion {
@@ -147,7 +147,7 @@ public class SplitPane extends DisplayRegion {
      */
     public String getDefaultLeftOrganizer() {
 
-        return new String("cybop.core.model.organizer.Panel");
+        return new String("cybop.core.screen.region.Panel");
     }
 
     /**
@@ -157,7 +157,7 @@ public class SplitPane extends DisplayRegion {
      */
     public String getDefaultRightOrganizer() {
 
-        return new String("cybop.core.model.organizer.Panel");
+        return new String("cybop.core.screen.region.Panel");
     }
 
     //

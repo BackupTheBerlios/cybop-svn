@@ -33,7 +33,7 @@ import cybop.core.screen.component.*;
 /**
  * This class represents a scroll pane.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ScrollPane extends DisplayRegion {
@@ -219,7 +219,7 @@ public class ScrollPane extends DisplayRegion {
      */
     public String getDefaultViewport() {
 
-        return new String("cybop.core.model.organizer.Viewport");
+        return new String("cybop.core.screen.region.Viewport");
     }
 
     /**
@@ -229,7 +229,7 @@ public class ScrollPane extends DisplayRegion {
      */
     public String getDefaultHorizontalScrollBar() {
 
-        return new String("cybop.core.model.organizer.ScrollBar");
+        return new String("cybop.core.screen.component.ScrollBar");
     }
 
     /**
@@ -239,7 +239,7 @@ public class ScrollPane extends DisplayRegion {
      */
     public String getDefaultVerticalScrollBar() {
 
-        return new String("cybop.core.model.organizer.ScrollBar");
+        return new String("cybop.core.screen.component.ScrollBar");
     }
 
     /**

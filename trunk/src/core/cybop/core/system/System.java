@@ -59,7 +59,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.21 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends SystemItem implements java.lang.Runnable {
@@ -307,7 +307,7 @@ public class System extends SystemItem implements java.lang.Runnable {
         super.initialize();
 
         setChild(System.CONTROLLER, createChild(getCategory(System.CONTROLLER)));
-        setChild(System.LOG_LEVEL, createChild(getCategory(System.LOG_LEVEL)));
+        setChild(System.LOG_LEVEL, getCategory(System.LOG_LEVEL));
         setChild(System.LOG_RECORD, createChild(getCategory(System.LOG_RECORD)));
         setChild(System.SOCKET_ADDRESS, createChild(getCategory(System.SOCKET_ADDRESS)));
         setChild(System.IP6_ADDRESS, createChild(getCategory(System.IP6_ADDRESS)));

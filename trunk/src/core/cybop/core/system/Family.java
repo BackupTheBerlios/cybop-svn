@@ -50,7 +50,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.19 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -88,7 +88,7 @@ public class Family extends System {
      */
     public Item getDefaultAvailableSystemsCategory() {
 
-        return new String("cybop.core.basic.Item");
+        return new String("cybop.core.category.Item");
     }
 
     /**

@@ -24,6 +24,9 @@
 
 package cybop.core.category;
 
+import cybop.core.model.Integer;
+import cybop.core.model.String;
+
 /**
  * This class represents an item.<br><br>
  *
@@ -80,7 +83,7 @@ package cybop.core.category;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.9 $ $Date: 2003-06-18 13:20:38 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-06-19 12:24:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends Behaviour {
@@ -406,9 +409,8 @@ public class Item extends Behaviour {
     public Array buildName(Array base) throws Exception {
 
         Array n = null;
-/*??
         Integer i = getHighestNameNumber(base);
-        
+
         if (i != null) {
 
             String no = new String(java.lang.String.valueOf(i.getJavaPrimitive() + 1));
@@ -433,7 +435,6 @@ public class Item extends Behaviour {
 
             throw new Exception("Could not build name. The highest name number is null.");
         }
-*/
 
         return n;        
     }

@@ -34,7 +34,7 @@ import cybop.core.screen.region.*;
 /**
  * This class represents a help menu.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class HelpMenu extends Menu {
@@ -118,7 +118,7 @@ public class HelpMenu extends Menu {
      */
     public String getDefaultAboutMenuItem() {
 
-        return new String("cybop.core.model.organizer.menuitem.AboutMenuItem");
+        return new String("cybop.core.screen.component.menuitem.AboutMenuItem");
     }
 
     //

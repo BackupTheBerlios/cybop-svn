@@ -33,7 +33,7 @@ package cybop.core.category;
  * the index of the wanted element -- and then returning the corresponding
  * reference.
  *
- * @version $Revision: 1.6 $ $Date: 2003-06-18 13:20:38 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-19 12:24:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Map {
@@ -195,7 +195,7 @@ public class Map {
 
         if (refs != null) {
 
-            int i = getIndex(n);
+            int i = getNextIndex(n);
 
             if (i == -1) {
 
@@ -275,6 +275,17 @@ public class Map {
 
         int i = getIndex(n);
 
+//??        java.lang.System.out.println("\n\n\nTEST size: " + getSize());
+
+        java.lang.System.out.println("\n\n\nTEST return: " + get(i));
+
+/*??
+        for (int j = 0; j < getSize(); j++) {
+
+            java.lang.System.out.println("\n\n\nTEST loop: " + get(j));
+        }
+*/
+
         return get(i);
     }
 
@@ -322,6 +333,56 @@ public class Map {
         } else {
 
             throw new Exception("Could not get index. The names is null.");
+        }
+
+        return index;
+    }
+
+    /**
+     * Returns the next index.
+     *
+     * @param n the name
+     * @return the next index
+     * @exception Exception if the names is null
+     */
+    public int getNextIndex(Array n) throws Exception {
+
+        int index = -1;
+        Array names = getNames();
+
+        if (names != null) {
+
+            int i = index + 1;
+            Array name = null;
+
+            while (i < names.getSize()) {
+
+                name = names.get(i);
+
+                // If a null name is reached, then the name was not found.
+                // In this case, reset index to -1.
+                if (name == null) {
+
+                    index = i;
+                    break;
+
+                } else {
+
+                    // If a name equal to the searched one is found,
+                    // then its index is the one to be returned.
+                    if (name.isEqualTo(n)) {
+
+                        index = i;
+                        break;
+                    }
+                }
+
+                i++;
+            }
+
+        } else {
+
+            throw new Exception("Could not get next free index. The names is null.");
         }
 
         return index;

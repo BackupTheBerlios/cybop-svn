@@ -70,7 +70,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.29 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -156,6 +156,8 @@ public class Launcher extends Family {
 
             if (l != null) {
 
+                l.setArguments(args);
+
                 java.lang.System.out.println("INFO: Abstract child to get an abstraction.");
                 l.abstracc();
 
@@ -180,10 +182,10 @@ public class Launcher extends Family {
                 java.lang.System.out.println("INFO: Connect child to signal memory.");
                 l.setChild(Launcher.SIGNAL_MEMORY, l.createChild(l.getCategory(Launcher.SIGNAL_MEMORY)));
 
+                java.lang.System.out.println("\n\n\nTEST signal memory: " + l.getChild(Launcher.SIGNAL_MEMORY) + "\n\n\n");
+
                 java.lang.System.out.println("INFO: Initialize child to get an item.");
                 l.initialize();
-
-                l.setArguments(args);
 
                 // Set meta attributes for child.
                 // DO NOT use the normal method setChild(name, item);
@@ -200,8 +202,6 @@ public class Launcher extends Family {
                 // so that the system can be shut down now.
 
 //??                l.setName(null);
-
-                l.setArguments(null);
 
                 java.lang.System.out.println("INFO: Finalize child.");
                 l.finalizz();
@@ -231,6 +231,8 @@ public class Launcher extends Family {
     
                 java.lang.System.out.println("INFO: Deabstract child.");
                 l.deabstract();
+
+                l.setArguments(null);
 
                 //
                 // Runtime.getRuntime().exit(0);
@@ -511,6 +513,31 @@ public class Launcher extends Family {
 
         if (sh != null) {
 
+            java.lang.System.out.println("INFO: Abstract child to get an abstraction.");
+            sh.abstracc();
+
+            java.lang.System.out.println("INFO: Name child to get a category.");
+            sh.name();
+
+            java.lang.System.out.println("INFO: Inherit child to get an inheritance.");
+            sh.inherit();
+
+            java.lang.System.out.println("INFO: Categorize child to get a hierarchy.");
+            sh.categorize();
+
+            java.lang.System.out.println("INFO: Position child to get a structure.");
+            sh.position();
+
+            java.lang.System.out.println("INFO: Constrain child to get a definition.");
+            sh.constrain();
+
+            java.lang.System.out.println("INFO: Behave child to get a behaviour.");
+            sh.behave();
+
+            java.lang.System.out.println("INFO: Connect child to signal memory.");
+            sh.setChild(Launcher.SIGNAL_MEMORY, getChild(Launcher.SIGNAL_MEMORY));
+
+            java.lang.System.out.println("INFO: Initialize child to get an item.");
             sh.initialize();
 
             // This is an exceptional setting.
@@ -538,7 +565,33 @@ public class Launcher extends Family {
         if (sh != null) {
 
             sh.setSystem(null);
+
+            java.lang.System.out.println("INFO: Finalize child.");
             sh.finalizz();
+
+            java.lang.System.out.println("INFO: Disconnect child from signal memory.");
+            sh.removeChild(Launcher.SIGNAL_MEMORY);
+
+            java.lang.System.out.println("INFO: Unbehave child.");
+            sh.unbehave();
+
+            java.lang.System.out.println("INFO: Unconstrain child.");
+            sh.unconstrain();
+
+            java.lang.System.out.println("INFO: Deposition child.");
+            sh.deposition();
+
+            java.lang.System.out.println("INFO: Decategorize child.");
+            sh.decategorize();
+
+            java.lang.System.out.println("INFO: Uninherit child.");
+            sh.uninherit();
+
+            java.lang.System.out.println("INFO: Unname child.");
+            sh.unname();
+
+            java.lang.System.out.println("INFO: Deabstract child.");
+            sh.deabstract();
 
         } else {
     
