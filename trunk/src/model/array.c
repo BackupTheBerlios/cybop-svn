@@ -55,7 +55,7 @@ static const int CHARACTER_ARRAY = 3;
  * - the size (allocated memory)
  * - the count (number of elements)
  *
- * @version $Revision: 1.5 $ $Date: 2004-03-11 09:13:37 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-03-11 14:33:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct array {
@@ -68,15 +68,16 @@ struct array {
 
     /**
      * The size.
+     *
+     * It specifies the number of elements, at the same time. There is no extra
+     * "count" value. Arrays are always as big as the number of elements they contain.
+     *
      * The sizeof operation can only be used for real arrays, expressed with [].
      * Since CYBOI allocates arrays dynamically and stores them as *,
      * the array size needs to be stored extra here because sizeof will not work.
      * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
      */
     int size;
-
-    /** The elements count. */
-    int count;
 };
 
 /* ARRAY_SOURCE */

@@ -31,7 +31,6 @@
 #include "../model/map.c"
 #include "../model/map_handler.c"
 #include "../model/model.c"
-#include "../string_helper.c"
 
 /**
  * This is the model handler.
@@ -42,12 +41,12 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.14 $ $Date: 2004-03-02 16:22:03 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-03-11 14:33:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 //
-// Model containers.
+// Model.
 //
 
 /**
@@ -158,7 +157,7 @@ void destroy_model_containers(void* p0) {
  * @param p2 the abstraction
  * @return the memory model
  */
-void* create_model(void* p0, void* p1, void* p2);
+void* create_model(const void* p0, const void* p1, const void* p2);
 
 /**
  * Destroys a memory model to a cybol model.
@@ -168,7 +167,7 @@ void* create_model(void* p0, void* p1, void* p2);
  * @param p2 the location
  * @param p3 the abstraction
  */
-void destroy_model(void* p0, void* p1, void* p2, void* p3);
+void destroy_model(void* p0, const void* p1, const void* p2, const void* p3);
 
 //
 // Part.
@@ -180,7 +179,7 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3);
  * @param p0 the memory model
  * @param p1 the cybol part attributes
  */
-void initialize_part(void* p0, void* p1) {
+void initialize_part(void* p0, const void* p1) {
 
     struct model* m = (struct model*) p0;
 
@@ -233,7 +232,7 @@ void initialize_part(void* p0, void* p1) {
  * @param p0 the memory model
  * @param p1 the cybol part attributes
  */
-void finalize_part(void* p0, void* p1) {
+void finalize_part(void* p0, const void* p1) {
 
     struct model* m = (struct model*) p0;
 
@@ -278,7 +277,7 @@ void finalize_part(void* p0, void* p1) {
  * @param p0 the memory model
  * @param p1 the cybol parts
  */
-void initialize_parts(void* p0, void* p1) {
+void initialize_parts(void* p0, const void* p1) {
 
     struct map* m = (struct map*) p1;
     int count = 0;
@@ -309,7 +308,7 @@ void initialize_parts(void* p0, void* p1) {
  * @param p0 the memory model
  * @param p1 the cybol parts
  */
-void finalize_parts(void* p0, void* p1) {
+void finalize_parts(void* p0, const void* p1) {
 
     struct map* m = (struct map*) p1;
     int count = 0;
@@ -344,7 +343,7 @@ void finalize_parts(void* p0, void* p1) {
  * @param p0 the memory model
  * @param p1 the cybol model
  */
-void initialize_model(void* p0, void* p1) {
+void initialize_model(void* p0, const void* p1) {
 
     struct model* m = (struct model*) p0;
 
@@ -389,7 +388,7 @@ void initialize_model(void* p0, void* p1) {
  * @param p0 the memory model
  * @param p1 the cybol model
  */
-void finalize_model(void* p0, void* p1) {
+void finalize_model(void* p0, const void* p1) {
 
     struct model* m = (struct model*) p0;
 
@@ -447,7 +446,7 @@ void finalize_model(void* p0, void* p1) {
  * @param p9 the constraint location
  * @param p10 the constraint model
  */
-void set_model_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+void set_model_part(void* p0, const void* p1, const void* p2, const void* p3, const void* p4, const void* p5, const void* p6, const void* p7, const void* p8, const void* p9, const void* p10) {
 
     struct model* m = (struct model*) p0;
 
@@ -508,7 +507,7 @@ void set_model_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
  * @param p0 the model
  * @param p1 the hierarchical model name
  */
-void remove_model_part(void* p0, void* p1) {
+void remove_model_part(void* p0, const void* p1) {
 
     struct model* m = (struct model*) p0;
 
@@ -564,66 +563,71 @@ void remove_model_part(void* p0, void* p1) {
 }
 
 /**
- * Returns the model part.
+ * Gets the model part.
  *
  * @param p0 the model
- * @param p1 the hierarchical model name
- * @return the part
+ * @param p1 the hierarchical name
+ * @param p2 the part
  */
-void* get_model_part(void* p0, void* p1) {
+void get_model_part(const void* p0, const void* p1, void* p2) {
 
-    void* p = (void*) 0;
-    struct model* m = (struct model*) p0;
+    char* h = (char*) p1;
 
-    if (m != (void*) 0) {
+    if (h != (void*) 0) {
 
-        log_message((void*) &INFO_LOG_LEVEL, "Get model part: ");
-        log_message((void*) &INFO_LOG_LEVEL, p1);
+        struct model* m = (struct model*) p0;
 
-        int length = 0;
-        get_string_length(p1, (void*) &length);
-        int start = 0;
-        int end = 0;
-        get_character_index(p1, (void*) &DOT_CHARACTER, (void*) &length, (void*) &end);
-        void* n = malloc(0);
+        if (m != (void*) 0) {
 
-        copy_sub_string(p1, (void*) &start, (void*) &end, n);
+            log_message((void*) &INFO_LOG_LEVEL, "Get model part: ");
+            log_message((void*) &INFO_LOG_LEVEL, p1);
 
-        char* r = (char*) p1 + end;
+            struct array n = (void*) 0;
+
+
 --
-        void* n = p1 + 
+            int s = p1->size;
+            int i = INVALID_INDEX;
+            get_array_element_index(p1, (void*) &DOT_CHARACTER, (void*) &i);
 
-        // Only call procedure recursively if the remaining string is not empty.
-        if (*r != '\0') {
+            void* n = (p1 + i - 1);
 
-            // The given model contains compound models.
-            void* part = get_map_element_with_name(m->part_models, n);
+            // Only call procedure recursively if the remaining string is not empty.
+            if (i != INVALID_INDEX) {
 
-            // Continue to process along the hierarchical name.
-            p = get_model_part(part, r + 1);
+                char* r = (char*) (p1 + i + 1);
+
+                // The given model contains compound models.
+                void* part = get_map_element_with_name(m->part_models, n);
+
+                // Continue to process along the hierarchical name.
+                p = get_model_part(part, r + 1);
+
+            } else {
+
+                // The given model contains primitive models.
+                p = get_map_element_with_name(m->part_models, n);
+            }
 
         } else {
 
-            // The given model contains primitive models.
-            p = get_map_element_with_name(m->part_models, n);
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part. The model is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part. The model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part. The hierarchical name is null.");
     }
-
-    return p;
 }
 
 /**
- * Returns the model part position.
+ * Gets the model part position.
  *
  * @param p0 the model
  * @param p1 the hierarchical model name
  * @return the part position
  */
-void* get_model_part_position(void* p0, void* p1) {
+void* get_model_part_position(const void* p0, const void* p1) {
 
     void* p = (void*) 0;
     struct model* m = (struct model*) p0;

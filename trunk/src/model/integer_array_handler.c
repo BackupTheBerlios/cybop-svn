@@ -43,7 +43,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.2 $ $Date: 2004-03-11 09:13:37 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-03-11 14:33:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,7 +55,7 @@
  * Compares the integer arrays.
  *
  * Returns 1 if the integer elements are equal.
- * Otherwise, the result value that was initially handed over is returned unchanged.
+ * The given result remains unchanged if the arrays are unequal.
  *
  * @param p0 the first integer array
  * @param p1 the second integer array
@@ -172,13 +172,13 @@ void set_integer_array_element(const void* p0, const void* p1, const void* p2) {
  *
  * @param p0 the integer array
  * @param p1 the index
- * @param p2 the count
+ * @param p2 the size
  */
 void remove_integer_array_element(const void* p0, const void* p1, const void* p2) {
 
-    int* c = (int*) p2;
+    int* s = (int*) p2;
 
-    if (c != (void*) 0) {
+    if (s != (void*) 0) {
 
         int* i = (int*) p1;
 
@@ -196,7 +196,7 @@ void remove_integer_array_element(const void* p0, const void* p1, const void* p2
                 // place towards the beginning of the elements.
                 while (1) {
 
-                    if ((j + 1) >= *c) {
+                    if ((j + 1) >= *s) {
 
                         break;
                     }
@@ -224,7 +224,7 @@ void remove_integer_array_element(const void* p0, const void* p1, const void* p2
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove integer array element. The count is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove integer array element. The size is null.");
     }
 }
 
@@ -271,10 +271,11 @@ void get_integer_array_element(const void* p0, const void* p1, void* p2) {
  * Gets the integer array element index.
  *
  * The first occurence of the element will be considered.
+ * The given index remains unchanged if no element is found.
  *
  * @param p0 the integer array
  * @param p1 the element
- * @param p2 the count
+ * @param p2 the size
  * @param p3 the index
  */
 void get_integer_array_element_index(const void* p0, const void* p1, const void* p2, void* p3) {
@@ -283,9 +284,9 @@ void get_integer_array_element_index(const void* p0, const void* p1, const void*
 
     if (i != (void*) 0) {
 
-        int* c = (int*) p2;
+        int* s = (int*) p2;
 
-        if (c != (void*) 0) {
+        if (s != (void*) 0) {
 
             int* e0 = (int*) p1;
 
@@ -298,10 +299,9 @@ void get_integer_array_element_index(const void* p0, const void* p1, const void*
 
                     while (1) {
 
-                        if (j >= *c) {
+                        if (j >= *s) {
 
                             // The element has not been found.
-                            *i = INVALID_INDEX;
                             break;
                         }
 
@@ -330,7 +330,7 @@ void get_integer_array_element_index(const void* p0, const void* p1, const void*
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not get integer array element index. The count is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get integer array element index. The size is null.");
         }
 
     } else {

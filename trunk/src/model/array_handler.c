@@ -38,7 +38,7 @@
  *
  * It contains procedures for handling an array and its elements.
  *
- * @version $Revision: 1.16 $ $Date: 2004-03-11 09:13:37 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-03-11 14:33:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -70,7 +70,6 @@ void initialize_array(void* p0, const void* p1) {
             // See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
             a->type = *t;
             a->size = 0;
-            a->count = 0;
             a->internal_array = malloc(a->size);
 
         } else {
@@ -98,9 +97,8 @@ void finalize_array(void* p0) {
         log_message((void*) &INFO_LOG_LEVEL, "Finalize array.");
 
         free(a->internal_array);
-        a->count = -1;
-        a->size = -1;
-        a->type = -1;
+        a->size = INVALID_INDEX;
+        a->type = INVALID_INDEX;
 
     } else {
 
@@ -130,27 +128,6 @@ void get_array_size(const void* p0, void* p1) {
 }
 
 /**
- * Returns the array count.
- *
- * @param p0 the array
- * @param p1 the count
- */
-void get_array_count(const void* p0, void* p1) {
-
-    struct array* a = (struct array*) p0;
-    int* c = (int*) p1;
-
-    if (a != (void*) 0) {
-
-        *c = a->count;
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get array count. The array is null.");
-    }
-}
-
-/**
  * Returns the array type.
  *
  * @param p0 the array
@@ -176,9 +153,8 @@ void get_array_type(const void* p0, void* p1) {
  *
  * Returns 1 if the arrays are equal in:
  * - size
- * - count (number of elements)
  * - elements
- * Otherwise, the result value that was initially handed over is returned unchanged.
+ * The given result remains unchanged if the arrays are unequal.
  *
  * @param p0 the first array
  * @param p1 the second array
@@ -194,34 +170,30 @@ void compare_arrays(const void* p0, const void* p1, void* p2) {
 
         if (a0 != (void*) 0) {
 
-            // The count must be equal.
-            if (a0->count == a1->count) {
+            // The size must be equal.
+            if (a0->size == a1->size) {
 
-                // The size must be equal.
-                if (a0->size == a1->size) {
+                // The type must be equal.
+                if (a0->type == a1->type) {
 
-                    // The type must be equal.
-                    if (a0->type == a1->type) {
+                    // The elements must be equal.
+                    int t = a0->type;
 
-                        // The elements must be equal.
-                        int t = a0->type;
+                    if (t == POINTER_ARRAY) {
 
-                        if (t == POINTER_ARRAY) {
+                        compare_pointer_arrays(a0->internal_array, a1->internal_array, (void*) &(a0->size), p2);
 
-                            compare_pointer_arrays(a0->internal_array, a1->internal_array, (void*) &(a0->size), p2);
+                    } else if (t == INTEGER_ARRAY) {
 
-                        } else if (t == INTEGER_ARRAY) {
+                        compare_integer_arrays(a0->internal_array, a1->internal_array, (void*) &(a0->size), p2);
 
-                            compare_integer_arrays(a0->internal_array, a1->internal_array, (void*) &(a0->size), p2);
+                    } else if (t == DOUBLE_ARRAY) {
 
-                        } else if (t == DOUBLE_ARRAY) {
+                        compare_double_arrays(a0->internal_array, a1->internal_array, (void*) &(a0->size), p2);
 
-                            compare_double_arrays(a0->internal_array, a1->internal_array, (void*) &(a0->size), p2);
+                    } else if (t == CHARACTER_ARRAY) {
 
-                        } else if (t == CHARACTER_ARRAY) {
-
-                            compare_character_arrays(a0->internal_array, a1->internal_array, (void*) &(a0->size), p2);
-                        }
+                        compare_character_arrays(a0->internal_array, a1->internal_array, (void*) &(a0->size), p2);
                     }
                 }
             }
@@ -238,53 +210,33 @@ void compare_arrays(const void* p0, const void* p1, void* p2) {
 }
 
 /**
- * Extends the array until the index falls into its size.
+ * Resizes the array with the given size.
  *
  * @param p0 the array
- * @param p1 the index
+ * @param p1 the size
  */
-void extend_array(void* p0, const void* p1) {
+void resize_array(void* p0, const void* p1) {
 
-    int* i = (int*) p1;
+    int* s = (int*) p1;
 
-    if (i != (void*) 0) {
+    if (s != (void*) 0) {
 
         struct array* a = (struct array*) p0;
 
         if (a != (void*) 0) {
 
-            // The current array size.
-            int s = a->size;
-
-            // If the index exceeds the array size, extend (double) size until
-            // the index matches.
-            // If the initial size is zero and multiplied by two, the result is
-            // still zero. Therefore, an integer summand of 1 is added here.
-            while (1) {
-
-                if (*i < s) {
-
-                    break;
-                }
-
-                s = s * 2 + 1;
-            }
-
-            if (s > a->size) {
-
-                // Create a new array with extended size.
-                a->size = s;
-                a->internal_array = realloc(a->internal_array, s);
-            }
+            // Create a new array with extended size.
+            a->size = *s;
+            a->internal_array = realloc(a->internal_array, *s);
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not extend array. The array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not resize array. The array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not extend array. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not resize array. The size is null.");
     }
 }
 
@@ -301,37 +253,55 @@ void extend_array(void* p0, const void* p1) {
  */
 void set_array_element(void* p0, const void* p1, const void* p2) {
 
-    // Extend array if index exceeds its size.
-    extend_array(p0, p1);
+    int* i = (int*) p1;
 
-    struct array* a = (struct array*) p0;
+    if (i != (void*) 0) {
 
-    if (a != (void*) 0) {
+        struct array* a = (struct array*) p0;
 
-        int t = a->type;
+        if (a != (void*) 0) {
 
-        if (t == POINTER_ARRAY) {
+            if (*i >= 0) {
 
-            set_pointer_array_element(a->internal_array, p1, p2);
+                if (*i >= a->size) {
 
-        } else if (t == INTEGER_ARRAY) {
+                    // Extend array if index exceeds its size.
+                    int s = *i + 1;
+                    resize_array(p0, (void*) &s);
+                }
 
-            set_integer_array_element(a->internal_array, p1, p2);
+                int t = a->type;
 
-        } else if (t == DOUBLE_ARRAY) {
+                if (t == POINTER_ARRAY) {
 
-            set_double_array_element(a->internal_array, p1, p2);
+                    set_pointer_array_element(a->internal_array, p1, p2);
 
-        } else if (t == CHARACTER_ARRAY) {
+                } else if (t == INTEGER_ARRAY) {
 
-            set_character_array_element(a->internal_array, p1, p2);
+                    set_integer_array_element(a->internal_array, p1, p2);
+
+                } else if (t == DOUBLE_ARRAY) {
+
+                    set_double_array_element(a->internal_array, p1, p2);
+
+                } else if (t == CHARACTER_ARRAY) {
+
+                    set_character_array_element(a->internal_array, p1, p2);
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove array element. The index understeps the array size.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not set array element. The array is null.");
         }
-
-        (a->count)++;
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not set array element. The array is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not set array element. The index is null.");
     }
 }
 
@@ -347,7 +317,7 @@ void add_array_element(void* p0, const void* p1) {
 
     if (a != (void*) 0) {
 
-        set_array_element(p0, (void*) &(a->count), p1);
+        set_array_element(p0, (void*) &(a->size), p1);
 
     } else {
 
@@ -373,37 +343,39 @@ void remove_array_element(void* p0, const void* p1) {
 
             if (*i >= 0) {
 
-                if (*i < a->count) {
+                if (*i < a->size) {
 
                     int t = a->type;
 
                     if (t == POINTER_ARRAY) {
 
-                        remove_pointer_array_element(a->internal_array, p1, (void*) &(a->count));
+                        remove_pointer_array_element(a->internal_array, p1, (void*) &(a->size));
 
                     } else if (t == INTEGER_ARRAY) {
 
-                        remove_integer_array_element(a->internal_array, p1, (void*) &(a->count));
+                        remove_integer_array_element(a->internal_array, p1, (void*) &(a->size));
 
                     } else if (t == DOUBLE_ARRAY) {
 
-                        remove_double_array_element(a->internal_array, p1, (void*) &(a->count));
+                        remove_double_array_element(a->internal_array, p1, (void*) &(a->size));
 
                     } else if (t == CHARACTER_ARRAY) {
 
-                        remove_character_array_element(a->internal_array, p1, (void*) &(a->count));
+                        remove_character_array_element(a->internal_array, p1, (void*) &(a->size));
                     }
 
-                    (a->count)--;
+                    // Reduce array size.
+                    int s = a->size - 1;
+                    resize_array(p0, (void*) &s);
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not remove array element. The index oversteps the array count.");
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not remove array element. The index oversteps the array size.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove array element. The index understeps the array count.");
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove array element. The index understeps the array size.");
             }
 
         } else {
@@ -436,7 +408,7 @@ void get_array_element(const void* p0, const void* p1, void* p2) {
 
             if (*i >= 0) {
 
-                if (*i < a->count) {
+                if (*i < a->size) {
 
                     int t = a->type;
 
@@ -459,12 +431,12 @@ void get_array_element(const void* p0, const void* p1, void* p2) {
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, "Could not get array element. The index oversteps the array count.");
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not get array element. The index oversteps the array size.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not get array element. The index understeps the array count.");
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not get array element. The index understeps the array size.");
             }
 
         } else {
@@ -495,19 +467,19 @@ void get_array_element_index(const void* p0, const void* p1, void* p2) {
 
         if (t == POINTER_ARRAY) {
 
-            get_pointer_array_element_index(a->internal_array, p1, (void*) &(a->count), p2);
+            get_pointer_array_element_index(a->internal_array, p1, (void*) &(a->size), p2);
 
         } else if (t == INTEGER_ARRAY) {
 
-            get_integer_array_element_index(a->internal_array, p1, (void*) &(a->count), p2);
+            get_integer_array_element_index(a->internal_array, p1, (void*) &(a->size), p2);
 
         } else if (t == DOUBLE_ARRAY) {
 
-            get_double_array_element_index(a->internal_array, p1, (void*) &(a->count), p2);
+            get_double_array_element_index(a->internal_array, p1, (void*) &(a->size), p2);
 
         } else if (t == CHARACTER_ARRAY) {
 
-            get_character_array_element_index(a->internal_array, p1, (void*) &(a->count), p2);
+            get_character_array_element_index(a->internal_array, p1, (void*) &(a->size), p2);
         }
 
     } else {

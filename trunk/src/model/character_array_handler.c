@@ -43,7 +43,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.2 $ $Date: 2004-03-11 09:13:37 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-03-11 14:33:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,7 +55,7 @@
  * Compares the character arrays.
  *
  * Returns 1 if the character elements are equal.
- * Otherwise, 0 is returned.
+ * The given result remains unchanged if the arrays are unequal.
  *
  * @param p0 the first character array
  * @param p1 the second character array
@@ -67,8 +67,6 @@ void compare_character_arrays(const void* p0, const void* p1, const void* p2, vo
     int* r = (int*) p3;
 
     if (r != (void*) 0) {
-
-        *r = 0;
 
         int* s = (int*) p2;
 
@@ -174,13 +172,13 @@ void set_character_array_element(const void* p0, const void* p1, const void* p2)
  *
  * @param p0 the character array
  * @param p1 the index
- * @param p2 the count
+ * @param p2 the size
  */
 void remove_character_array_element(const void* p0, const void* p1, const void* p2) {
 
-    int* c = (int*) p2;
+    int* s = (int*) p2;
 
-    if (c != (void*) 0) {
+    if (s != (void*) 0) {
 
         int* i = (int*) p1;
 
@@ -198,7 +196,7 @@ void remove_character_array_element(const void* p0, const void* p1, const void* 
                 // place towards the beginning of the elements.
                 while (1) {
 
-                    if ((j + 1) >= *c) {
+                    if ((j + 1) >= *s) {
 
                         break;
                     }
@@ -226,7 +224,7 @@ void remove_character_array_element(const void* p0, const void* p1, const void* 
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove character array element. The count is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove character array element. The size is null.");
     }
 }
 
@@ -273,10 +271,11 @@ void get_character_array_element(const void* p0, const void* p1, void* p2) {
  * Gets the character array element index.
  *
  * The first occurence of the element will be considered.
+ * The given index remains unchanged if no element is found.
  *
  * @param p0 the character array
  * @param p1 the element
- * @param p2 the count
+ * @param p2 the size
  * @param p3 the index
  */
 void get_character_array_element_index(const void* p0, const void* p1, const void* p2, void* p3) {
@@ -285,9 +284,9 @@ void get_character_array_element_index(const void* p0, const void* p1, const voi
 
     if (i != (void*) 0) {
 
-        int* c = (int*) p2;
+        int* s = (int*) p2;
 
-        if (c != (void*) 0) {
+        if (s != (void*) 0) {
 
             char* e0 = (char*) p1;
 
@@ -300,10 +299,9 @@ void get_character_array_element_index(const void* p0, const void* p1, const voi
 
                     while (1) {
 
-                        if (j >= *c) {
+                        if (j >= *s) {
 
                             // The element has not been found.
-                            *i = INVALID_INDEX;
                             break;
                         }
 
@@ -332,7 +330,7 @@ void get_character_array_element_index(const void* p0, const void* p1, const voi
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array element index. The count is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array element index. The size is null.");
         }
 
     } else {

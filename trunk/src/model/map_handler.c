@@ -35,7 +35,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.12 $ $Date: 2004-03-11 10:25:28 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-03-11 14:33:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -120,26 +120,6 @@ void get_map_size(const void* p0, void* p1) {
     }
 }
 
-/**
- * Returns the map count.
- *
- * @param p0 the map
- * @param p1 the count
- */
-void get_map_count(const void* p0, void* p1) {
-
-    struct map* m = (struct map*) p0;
-
-    if (m != (void*) 0) {
-
-        get_array_count(m->names, p1);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get map count. The map is null.");
-    }
-}
-
 //
 // Map element.
 //
@@ -159,7 +139,7 @@ void get_map_element_index(const void* p0, const void* p1, void* p2) {
 
         int j = 0;
         int c = 0;
-        get_array_count(p0, (void*) &c);
+        get_array_size(p0, (void*) &c);
         void* n = (void*) 0;
         int r = 0;
 
@@ -207,7 +187,7 @@ void get_map_element_index(const void* p0, const void* p1, void* p2) {
 /*??
 int get_next_map_element_index(const void* p0, const void* p1) {
 
-    int index = -1;
+    int index = INVALID_INDEX;
     int i = 0;
     int count = 0;
     get_array_count(p0, (void*) &count);
@@ -231,7 +211,7 @@ int get_next_map_element_index(const void* p0, const void* p1) {
     }
 
     // Neither element matched. The next index will be the current element count.
-    if (index == -1) {
+    if (index == INVALID_INDEX) {
 
         index = count;
     }
@@ -366,11 +346,11 @@ void add_map_element(void* p0, const void* p1, const void* p2) {
         set_map_element_with_name(p0, n, p2);
 */
 
-        int i = -1;
+        int i = INVALID_INDEX;
 
-        get_map_count(p0, (void*) &i);
+        get_map_size(p0, (void*) &i);
 
-        if (i != -1) {
+        if (i != INVALID_INDEX) {
 
             set_map_element_at_index(p0, (void*) &i, p1, p2);
         }
@@ -394,12 +374,12 @@ void set_map_element_with_name(void* p0, const void* p1, const void* p2) {
 
     if (m != (void*) 0) {
 
-        int i = -1;
+        int i = INVALID_INDEX;
 
         get_map_element_index(m->names, p1, (void*) &i);
 //??        get_next_map_element_index(m->names, p1, (void*) &i);
 
-        if (i != -1) {
+        if (i != INVALID_INDEX) {
 
             set_map_element_at_index(p0, (void*) &i, p1, p2);
 
@@ -447,11 +427,11 @@ void remove_map_element_with_name(void* p0, const void* p1) {
 
     if (m != (void*) 0) {
 
-        int i = -1;
+        int i = INVALID_INDEX;
 
         get_map_element_index(m->names, p1, (void*) &i);
 
-        if (i != -1) {
+        if (i != INVALID_INDEX) {
 
             remove_map_element_at_index(p0, (void*) &i);
         }
@@ -499,11 +479,11 @@ void get_map_element_with_name(const void* p0, const void* p1, void* p2) {
 
     if (m != (void*) 0) {
 
-        int i = -1;
+        int i = INVALID_INDEX;
 
         get_map_element_index(m->names, p1, (void*) &i);
 
-        if (i != -1) {
+        if (i != INVALID_INDEX) {
 
             get_map_element_at_index(p0, (void*) &i, p2);
         }
