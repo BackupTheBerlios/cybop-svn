@@ -32,7 +32,7 @@
  * A signal is a transient logic model.
  * It is stored in the computer's random access memory (ram).
  *
- * @version $Revision: 1.20 $ $Date: 2004-05-29 15:15:15 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2004-05-31 17:49:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -680,6 +680,9 @@ void handle_operation_signal(const void* p0, const void* p1, void* p2, void* p3,
 
                 if (r == 1) {
 
+                    //?? Check parameter array size to avoid accessing
+                    //?? not existing array element/ crossing array limits!
+
                     add(p2, (void*) &param1, (void*) &param1c, (void*) &param2, (void*) &param2c, (void*) &param3, (void*) &param3c);
 
                     d = 1;
@@ -696,11 +699,13 @@ void handle_operation_signal(const void* p0, const void* p1, void* p2, void* p3,
 
                 if (r == 1) {
 
-                    void* m = NULL_POINTER;
-                    int mc = 0;
-                    int ms = 0;
+                    //?? Check parameter array size to avoid accessing
+                    //?? not existing array element/ crossing array limits!
 
 /*??
+<!-- create operation,whole model,part name,part abstraction,part location,part model /-->
+<part name="create_domain" part_abstraction="operation" part_location="inline" part_model="create,root,domain,compound,file,/helloworld/domain.cybol"/>
+
                     create_model((void*) &param1, (void*) &param1s,
                         (void*) &param2, (void*) &param2s,
                         (void*) &param3, (void*) &param3s,
@@ -713,8 +718,6 @@ void handle_operation_signal(const void* p0, const void* p1, void* p2, void* p3,
                         (void*) &param10, (void*) &param10s,
                         (void*) &param11, (void*) &param11s,
                         (void*) &param12, (void*) &param12s);
-
-                    set_array_element();
 */
 
                     d = 1;

@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.11 $ $Date: 2004-05-29 15:15:15 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-05-31 17:49:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,7 +62,7 @@
  * Creates the operation.
  *
  * @param p0 the transient model
- * @param p1 the transient model count
+ * @param p1 the transient model size
  */
 void create_operation(void* p0, const void* p1) {
 
@@ -88,7 +88,7 @@ void create_operation(void* p0, const void* p1) {
  * Destroys the operation.
  *
  * @param p0 the transient model
- * @param p1 the transient model count
+ * @param p1 the transient model size
  */
 void destroy_operation(void* p0, const void* p1) {
 

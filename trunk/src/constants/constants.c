@@ -30,7 +30,7 @@
  *   - time
  *   - complex
  *   - operation
- *   - model
+ *   - compound
  *   - signal memory
  * - signal priorities
  * - signal languages
@@ -39,8 +39,8 @@
  * - cybol attributes
  * - cybol abstraction values:
  *   - compound
- *   - statics
- *   - dynamics
+ *   - state
+ *   - logic
  * - cybol location values:
  *   - model locations
  *   - location separators
@@ -59,7 +59,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.11 $ $Date: 2004-05-29 15:15:15 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-05-31 17:49:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -241,67 +241,49 @@ static const int PARAMETERS_SIZES_INDEX = 2;
 static const int MODEL_RESIZE_FACTOR = 2;
 
 /** The model count. */
-static const int MODEL_COUNT = 20;
+static const int MODEL_COUNT = 14;
 
-/** The names index. */
-static const int NAMES_INDEX = 0;
+/** The part names index. */
+static const int PART_NAMES_INDEX = 0;
 
-/** The names counts index. */
-static const int NAMES_COUNTS_INDEX = 1;
-
-/** The part abstractions index. */
-static const int PART_ABSTRACTIONS_INDEX = 2;
-
-/** The part abstractions counts index. */
-static const int PART_ABSTRACTIONS_COUNTS_INDEX = 3;
-
-/** The part locations index. */
-static const int PART_LOCATIONS_INDEX = 4;
-
-/** The part locations counts index. */
-static const int PART_LOCATIONS_COUNTS_INDEX = 5;
+/** The part names counts index. */
+static const int PART_NAMES_COUNTS_INDEX = 1;
 
 /** The part models index. */
-static const int PART_MODELS_INDEX = 6;
+static const int PART_MODELS_INDEX = 2;
 
 /** The part models counts index. */
-static const int PART_MODELS_COUNTS_INDEX = 7;
+static const int PART_MODELS_COUNTS_INDEX = 3;
 
-/** The position abstractions index. */
-static const int POSITION_ABSTRACTIONS_INDEX = 8;
+/** The part abstractions index. */
+static const int PART_ABSTRACTIONS_INDEX = 4;
 
-/** The position abstractions counts index. */
-static const int POSITION_ABSTRACTIONS_COUNTS_INDEX = 9;
+/** The part abstractions counts index. */
+static const int PART_ABSTRACTIONS_COUNTS_INDEX = 5;
 
-/** The position locations index. */
-static const int POSITION_LOCATIONS_INDEX = 10;
+/** The part constraints index. */
+static const int PART_CONSTRAINTS_INDEX = 6;
 
-/** The position locations counts index. */
-static const int POSITION_LOCATIONS_COUNTS_INDEX = 11;
+/** The part constraints counts index. */
+static const int PART_CONSTRAINTS_COUNTS_INDEX = 7;
 
 /** The position models index. */
-static const int POSITION_MODELS_INDEX = 12;
+static const int POSITION_MODELS_INDEX = 8;
 
 /** The position models counts index. */
-static const int POSITION_MODELS_COUNTS_INDEX = 13;
+static const int POSITION_MODELS_COUNTS_INDEX = 9;
 
-/** The constraint abstractions index. */
-static const int CONSTRAINT_ABSTRACTIONS_INDEX = 14;
+/** The position abstractions index. */
+static const int POSITION_ABSTRACTIONS_INDEX = 10;
 
-/** The constraint abstractions counts index. */
-static const int CONSTRAINT_ABSTRACTIONS_COUNTS_INDEX = 15;
+/** The position abstractions counts index. */
+static const int POSITION_ABSTRACTIONS_COUNTS_INDEX = 11;
 
-/** The constraint locations index. */
-static const int CONSTRAINT_LOCATIONS_INDEX = 16;
+/** The position constraints index. */
+static const int POSITION_CONSTRAINTS_INDEX = 12;
 
-/** The constraint locations counts index. */
-static const int CONSTRAINT_LOCATIONS_COUNTS_INDEX = 17;
-
-/** The constraint models index. */
-static const int CONSTRAINT_MODELS_INDEX = 18;
-
-/** The constraint models counts index. */
-static const int CONSTRAINT_MODELS_COUNTS_INDEX = 19;
+/** The position constraints counts index. */
+static const int POSITION_CONSTRAINTS_COUNTS_INDEX = 13;
 
 //
 // Signal memory.
@@ -630,50 +612,41 @@ static const char* NAME_ATTRIBUTE = NAME_ATTRIBUTE_ARRAY;
 /** The name attribute count. */
 static const int NAME_ATTRIBUTE_COUNT = 4;
 
-/** The part abstraction attribute array. */
-static const char PART_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'a', 'r', 't', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-
-/** The part abstraction attribute. */
-static const char* PART_ABSTRACTION_ATTRIBUTE = PART_ABSTRACTION_ATTRIBUTE_ARRAY;
-
-/** The part abstraction attribute count. */
-static const int PART_ABSTRACTION_ATTRIBUTE_COUNT = 16;
-
-/** The part location attribute array. */
-static const char PART_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'a', 'r', 't', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
-
-/** The part location attribute. */
-static const char* PART_LOCATION_ATTRIBUTE = PART_LOCATION_ATTRIBUTE_ARRAY;
-
-/** The part location attribute count. */
-static const int PART_LOCATION_ATTRIBUTE_COUNT = 13;
-
 /** The part model attribute array. */
-static const char PART_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'a', 'r', 't', '_', 'm', 'o', 'd', 'e', 'l'};
+static const char PART_MODEL_ATTRIBUTE_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
 
 /** The part model attribute. */
 static const char* PART_MODEL_ATTRIBUTE = PART_MODEL_ATTRIBUTE_ARRAY;
 
 /** The part model attribute count. */
-static const int PART_MODEL_ATTRIBUTE_COUNT = 10;
+static const int PART_MODEL_ATTRIBUTE_COUNT = 5;
 
-/** The position abstraction attribute array. */
-static const char POSITION_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+/** The part abstraction attribute array. */
+static const char PART_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
 
-/** The position abstraction attribute. */
-static const char* POSITION_ABSTRACTION_ATTRIBUTE = POSITION_ABSTRACTION_ATTRIBUTE_ARRAY;
+/** The part abstraction attribute. */
+static const char* PART_ABSTRACTION_ATTRIBUTE = PART_ABSTRACTION_ATTRIBUTE_ARRAY;
 
-/** The position abstraction attribute count. */
-static const int POSITION_ABSTRACTION_ATTRIBUTE_COUNT = 20;
+/** The part abstraction attribute count. */
+static const int PART_ABSTRACTION_ATTRIBUTE_COUNT = 11;
 
-/** The position location attribute array. */
-static const char POSITION_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
+/** The part constraint attribute array. */
+static const char PART_CONSTRAINT_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't'};
 
-/** The position location attribute. */
-static const char* POSITION_LOCATION_ATTRIBUTE = POSITION_LOCATION_ATTRIBUTE_ARRAY;
+/** The part constraint attribute. */
+static const char* PART_CONSTRAINT_ATTRIBUTE = PART_CONSTRAINT_ATTRIBUTE_ARRAY;
 
-/** The position location attribute count. */
-static const int POSITION_LOCATION_ATTRIBUTE_COUNT = 17;
+/** The part constraint attribute count. */
+static const int PART_CONSTRAINT_ATTRIBUTE_COUNT = 10;
+
+/** The part location attribute array. */
+static const char PART_LOCATION_ATTRIBUTE_ARRAY[] = {'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
+
+/** The part location attribute. */
+static const char* PART_LOCATION_ATTRIBUTE = PART_LOCATION_ATTRIBUTE_ARRAY;
+
+/** The part location attribute count. */
+static const int PART_LOCATION_ATTRIBUTE_COUNT = 8;
 
 /** The position model attribute array. */
 static const char POSITION_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'm', 'o', 'd', 'e', 'l'};
@@ -684,38 +657,38 @@ static const char* POSITION_MODEL_ATTRIBUTE = POSITION_MODEL_ATTRIBUTE_ARRAY;
 /** The position model attribute count. */
 static const int POSITION_MODEL_ATTRIBUTE_COUNT = 14;
 
-/** The constraint abstraction attribute array. */
-static const char CONSTRAINT_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+/** The position abstraction attribute array. */
+static const char POSITION_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
 
-/** The constraint abstraction attribute. */
-static const char* CONSTRAINT_ABSTRACTION_ATTRIBUTE = CONSTRAINT_ABSTRACTION_ATTRIBUTE_ARRAY;
+/** The position abstraction attribute. */
+static const char* POSITION_ABSTRACTION_ATTRIBUTE = POSITION_ABSTRACTION_ATTRIBUTE_ARRAY;
 
-/** The constraint abstraction attribute count. */
-static const int CONSTRAINT_ABSTRACTION_ATTRIBUTE_COUNT = 22;
+/** The position abstraction attribute count. */
+static const int POSITION_ABSTRACTION_ATTRIBUTE_COUNT = 20;
 
-/** The constraint location attribute array. */
-static const char CONSTRAINT_LOCATION_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
+/** The position constraint attribute array. */
+static const char POSITION_CONSTRAINT_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't'};
 
-/** The constraint location attribute. */
-static const char* CONSTRAINT_LOCATION_ATTRIBUTE = CONSTRAINT_LOCATION_ATTRIBUTE_ARRAY;
+/** The position constraint attribute. */
+static const char* POSITION_CONSTRAINT_ATTRIBUTE = POSITION_CONSTRAINT_ATTRIBUTE_ARRAY;
 
-/** The constraint location attribute count. */
-static const int CONSTRAINT_LOCATION_ATTRIBUTE_COUNT = 19;
+/** The position constraint attribute count. */
+static const int POSITION_CONSTRAINT_ATTRIBUTE_COUNT = 19;
 
-/** The constraint model attribute array. */
-static const char CONSTRAINT_MODEL_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '_', 'm', 'o', 'd', 'e', 'l'};
+/** The position location attribute array. */
+static const char POSITION_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
 
-/** The constraint model attribute. */
-static const char* CONSTRAINT_MODEL_ATTRIBUTE = CONSTRAINT_MODEL_ATTRIBUTE_ARRAY;
+/** The position location attribute. */
+static const char* POSITION_LOCATION_ATTRIBUTE = POSITION_LOCATION_ATTRIBUTE_ARRAY;
 
-/** The constraint model attribute count. */
-static const int CONSTRAINT_MODEL_ATTRIBUTE_COUNT = 16;
+/** The position location attribute count. */
+static const int POSITION_LOCATION_ATTRIBUTE_COUNT = 17;
 
 //
 // Cybol abstraction values:
 // - compound
-// - statics
-// - dynamics
+// - state
+// - logic
 //
 
 //
@@ -734,9 +707,9 @@ static const char* COMPOUND_ABSTRACTION = COMPOUND_ABSTRACTION_ARRAY;
 static const int COMPOUND_ABSTRACTION_COUNT = 8;
 
 //
-// Statics abstractions.
+// State abstractions.
 //
-// There are compound and primitive statics models.
+// There are compound and primitive state models.
 // The compound abstraction constant is defined above.
 // Primitive models as defined below are the final abstraction in software.
 //
@@ -968,15 +941,15 @@ static const char* SXW_ABSTRACTION = SXW_ABSTRACTION_ARRAY;
 static const int SXW_ABSTRACTION_COUNT = 3;
 
 //
-// Dynamics abstractions.
+// Logic abstractions.
 //
-// There are compound and primitive dynamics models.
+// There are compound and primitive logic models.
 // The compound abstraction constant is defined above.
 // Primitive models as defined below are the final abstraction in software.
 //
 
 //
-// Logics abstractions.
+// Boolean logic abstractions.
 //
 
 /** The and abstraction array. */
@@ -1091,22 +1064,22 @@ static const int DIVIDE_ABSTRACTION_COUNT = 6;
 //
 
 /** The create model abstraction array. */
-static const char CREATE_MODEL_ABSTRACTION_ARRAY[] = {'c', 'r', 'e', 'a', 't', 'e', '_', 's', 't', 'a', 't', 'i', 'c', 's'};
+static const char CREATE_MODEL_ABSTRACTION_ARRAY[] = {'c', 'r', 'e', 'a', 't', 'e'};
 
 /** The create model abstraction. */
 static const char* CREATE_MODEL_ABSTRACTION = CREATE_MODEL_ABSTRACTION_ARRAY;
 
 /** The create model abstraction count. */
-static const int CREATE_MODEL_ABSTRACTION_COUNT = 14;
+static const int CREATE_MODEL_ABSTRACTION_COUNT = 6;
 
 /** The destroy model abstraction array. */
-static const char DESTROY_MODEL_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't', 'r', 'o', 'y', '_', 's', 't', 'a', 't', 'i', 'c', 's'};
+static const char DESTROY_MODEL_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't', 'r', 'o', 'y'};
 
 /** The destroy model abstraction. */
 static const char* DESTROY_MODEL_ABSTRACTION = DESTROY_MODEL_ABSTRACTION_ARRAY;
 
 /** The destroy model abstraction count. */
-static const int DESTROY_MODEL_ABSTRACTION_COUNT = 15;
+static const int DESTROY_MODEL_ABSTRACTION_COUNT = 7;
 
 //
 // Input output abstractions.
