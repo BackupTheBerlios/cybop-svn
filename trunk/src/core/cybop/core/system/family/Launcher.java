@@ -69,7 +69,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.8 $ $Date: 2003-03-16 22:28:21 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-03-22 09:19:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family /*??implements
@@ -1023,7 +1023,7 @@ public class Launcher extends Family /*??implements
 
         Signal sig = (Signal) createItem(getDefaultSignal());
 
-        receive(sig, Signal.TUI_LANGUAGE, get(Launcher.USER), Controller.SHOW_SYSTEM_USER_INTERFACE_ACTION, null);
+        receive(sig, Signal.GUI_LANGUAGE, get(Launcher.USER), Controller.SHOW_SYSTEM_USER_INTERFACE_ACTION, null);
         handle(sig, new Boolean(Boolean.FALSE));
         send(sig);
         destroyItem(sig);

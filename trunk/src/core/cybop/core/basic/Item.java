@@ -76,7 +76,7 @@ import cybop.core.model.principle.*;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.11 $ $Date: 2003-03-21 17:12:42 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-03-22 09:19:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -360,8 +360,18 @@ public class Item extends State {
             int oldLength = old.length;
             int newLength = oldLength * 2 + 1;
             c = new Item[newLength];
-            int index = 0;
+            int i = 0;
+
+            while (i < oldLength) {
+
+                c[i] = old[i];
+
+                i++;
+            }
+
+/*??
             Item oldItem = null;
+            int index = 0;
 
             for (int i = oldLength; i-- > 0;) {
 
@@ -379,6 +389,7 @@ public class Item extends State {
                     }
                 }
             }
+*/
 
         } else {
 
@@ -845,25 +856,7 @@ public class Item extends State {
 
             if (replace(n, i) == false) {
 
-                //?? testing
-                java.lang.System.out.println("\n--------------\n");
-                java.lang.System.out.println("old children number: " + getChildrenNumber());
-                for (int pre = 0; pre < getChildren().length; pre++) {
-                    java.lang.System.out.println("old array with child number: " + pre + " and child: " + getChildren()[pre]);
-                }
-
                 add(n, i, p);
-
-                //?? testing
-                for (int post = 0; post < getChildren().length; post++) {
-                    java.lang.System.out.println("new array with child number: " + post + " and child: " + getChildren()[post]);
-                }
-                java.lang.System.out.println("new children number: " + getChildrenNumber());
-            }
-            //?? temporary test.
-            else {
-
-                java.lang.System.out.println("test: Replaced child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
             }
 
         } else {
@@ -887,27 +880,18 @@ public class Item extends State {
      */
     public void add(String n, Item i, Position p) throws NullPointerException {
 
-        //?? testing
-        java.lang.System.out.println("old array length: " + getChildren().length);
-
         Item[] c = adjust(getChildren());
-
-        //?? testing
-        java.lang.System.out.println("new array length: " + getChildren().length);
 
         if (c != null) {
 
             if (n != null) {
 
                 // Avoid division by zero.
-                if (c.length != 0) {
+                if (c.length >= 0) {
 
                     int h = n.hashCode();
-                    int index = (h & 0x7FFFFFFF) % c.length;
-
-                    //?? testing
-                    java.lang.System.out.println("hash: " + h);
-                    java.lang.System.out.println("index: " + index);
+//??                    int index = (h & 0x7FFFFFFF) % c.length;
+                    int index = getChildrenNumber();
 
                     if (i != null) {
 
@@ -918,7 +902,7 @@ public class Item extends State {
                         i.setName(n);
                         i.setHashCode(h);
                         i.setFollower(c[index]);
-    
+
                         java.lang.System.out.println("DEBUG: Add child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
                         addTreeNode(i);
         
@@ -965,18 +949,43 @@ public class Item extends State {
                 // If this item is new, its children array has a length of zero.
                 // On addition of the first child, this replace method is called first.
                 // A division by zero would occur below (index calculation).
-                if (c.length != 0) {
+                if (c.length >= 0) {
 
                     int h = n.hashCode();
-                    int index = (h & 0x7FFFFFFF) % c.length;
+//??                    int index = (h & 0x7FFFFFFF) % c.length;
+                    int index = 0;
                     Item child = null;
-    
-                    for (child = c[index]; child != null; child = child.getFollower()) {
-    
+                    
+                    while (index < getChildrenNumber()) {
+
+                        child = c[index];
+                        index++;
+
                         if (child != null) {
+
+                            if (n.isEqualTo(child.getName())) {
+                             
+                                java.lang.System.out.println("DEBUG: Replace child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
+                                addTreeNode(i);
     
+                                child = i;
+                                b = true;
+                                
+                                break;
+                            }
+                            
+                        } else {
+    
+                            throw new NullPointerException("Could not set item. A child is null.");
+                        }
+                    }
+/*??
+                    for (child = c[index]; child != null; child = child.getFollower()) {
+
+                        if (child != null) {
+
                             if ((h == child.getHashCode()) && n.isEqualTo(child.getName())) {
-    
+
                                 java.lang.System.out.println("DEBUG: Replace child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
                                 addTreeNode(i);
     
@@ -989,6 +998,7 @@ public class Item extends State {
                             throw new NullPointerException("Could not set item. A child is null.");
                         }
                     }
+*/
                 }
         
             } else {
@@ -1020,29 +1030,61 @@ public class Item extends State {
             if (n != null) {
 
                 int h = n.hashCode();
-                int index = (h & 0x7FFFFFFF) % c.length;
-                Item i = null;
+//??                int i = (h & 0x7FFFFFFF) % c.length;
+                int i = 0;
+                Item item = null;
                 Item preceder = null;
+                int no = getChildrenNumber();
+                
+/*??
+                while (i < no) {
 
-                for (i = c[index], preceder = null; i != null; preceder = i, i = i.getFollower()) {
+                    item = c[i];
+                    
+                    if (item != null) {
 
-                    if (i != null) {
+                        if (n.isEqualTo(item.getName())) {
 
-                        if ((h == i.getHashCode()) && n.isEqualTo(i.getName())) {
+                            // The order of these method calls is important for removal of the tree node!
+                            java.lang.System.out.println("DEBUG: Remove child: " + get(n) + " with name: " + n.getJavaObject() + " in item: " + this);
+                            item = null;
+                            removeTreeNode(get(n));
+                            setChildrenNumber(no - 1);
+                            i++;
+
+                            while (i < no) {
+
+                                c[i - 1] = c[i];
+                            }
+                            
+                            break;
+                        }
+
+                    } else {
+
+                        throw new NullPointerException("Could not remove item. An item is null.");
+                    }
+                }
+
+/*??
+                for (item = c[i], preceder = null; item != null; preceder = item, item = item.getFollower()) {
+
+                    if (item != null) {
+
+                        if ((h == item.getHashCode()) && n.isEqualTo(item.getName())) {
 
                             if (preceder != null) {
 
-                                preceder.setFollower(i.getFollower());
+                                preceder.setFollower(item.getFollower());
 
                             } else {
-        
-                                c[index] = i.getFollower();
+
+                                c[i] = item.getFollower();
                             }
 
                             // The order of these method calls is important for removal of the tree node!
-                            // ?? Reason unclear.
                             java.lang.System.out.println("DEBUG: Remove child: " + get(n) + " with name: " + n.getJavaObject() + " in item: " + this);
-                            i = null;
+                            item = null;
                             removeTreeNode(get(n));
                             setChildrenNumber(getChildrenNumber() - 1);
                         }
@@ -1052,6 +1094,7 @@ public class Item extends State {
                         throw new NullPointerException("Could not remove item. An item is null.");
                     }
                 }
+*/
 
             } else {
 
@@ -1084,11 +1127,33 @@ public class Item extends State {
 
                 // Avoid division by zero.
                 if (c.length != 0) {
-    
+
                     int h = n.hashCode();
-                    int index = (h & 0x7FFFFFFF) % c.length;
+//??                    int index = (h & 0x7FFFFFFF) % c.length;
+                    int index = 0;
                     Item child = null;
+
+                    while (index < getChildrenNumber()) {
+                        
+                        child = c[index];
+                        index++;
+
+                        if (child != null) {
+
+                            if (n.isEqualTo(child.getName())) {
+
+                                i = child;
+                                
+                                break;
+                            }
     
+                        } else {
+    
+                            throw new NullPointerException("Could not get item. A child is null.");
+                        }
+                    }
+
+/*??
                     for (child = c[index]; child != null; child = child.getFollower()) {
     
                         if (child != null) {
@@ -1103,6 +1168,7 @@ public class Item extends State {
                             throw new NullPointerException("Could not get item. A child is null.");
                         }
                     }
+*/
                 }
 
             } else {

@@ -32,7 +32,7 @@ import cybop.core.basic.String;
  *
  * It serves as container transporting information of communication.
  *
- * @version $Revision: 1.5 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-03-22 09:19:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Signal extends Item {
@@ -161,11 +161,7 @@ public class Signal extends Item {
      */
     public void finalizz() throws Exception {
 
-        remove(Signal.ADVERBIAL);
-        remove(Signal.OBJECT);
-        remove(Signal.PREDICATE);
-        remove(Signal.SUBJECT);
-        remove(Signal.LANGUAGE);
+        reset();
 
         super.finalizz();
     }

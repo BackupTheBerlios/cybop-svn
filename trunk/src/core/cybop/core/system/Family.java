@@ -49,7 +49,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.6 $ $Date: 2003-03-16 22:28:21 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-03-22 09:19:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -469,14 +469,14 @@ public class Family extends System {
             String str = null;
             System sys = null;
 
-            for (int i = 0; i < count.getJavaPrimitive(); i++) {
+//??            for (int i = 0; i < count.getJavaPrimitive(); i++) {
 
                 //?? Delete this line later and use the one below!
                 str = Family.SYSTEM;
                 //?? When more modules are used, use the following line!
                 //?? To be implemented yet.
 //??                str = new String(Family.SYSTEM.getJavaObject() + "_" + java.lang.String.valueOf(i));
-                sys = (System) get(str);
+                sys = (System) getSystem(str);
 
                 if (sys != null) {
 
@@ -484,9 +484,9 @@ public class Family extends System {
 
                 } else {
 
-                    throw new NullPointerException("Could not handle signal. A system is null.");
+//??                    throw new NullPointerException("Could not handle signal. A system is null.");
                 }
-            }
+//??            }
 
         } else {
 
