@@ -29,7 +29,7 @@ package cyboi;
  *
  * It contains procedures to create items of primitive type.
  *
- * @version $Revision: 1.12 $ $Date: 2003-08-10 22:34:31 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-08-18 17:30:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class PrimitiveHandler {
@@ -52,17 +52,17 @@ class PrimitiveHandler {
             
             if (!s.equals("")) {
                 
-                java.lang.System.out.println("INFO: Create boolean primitive.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Create boolean primitive.");
                 p = java.lang.Boolean.valueOf((java.lang.String) s);
                 
             } else {
                 
-                java.lang.System.out.println("INFO: Could not create boolean primitive. The string is empty.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Could not create boolean primitive. The string is empty.");
             }
         
         } else {
             
-            java.lang.System.out.println("ERROR: Could not create boolean primitive. The string is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not create boolean primitive. The string is null.");
         }
         
         return p;
@@ -75,7 +75,7 @@ class PrimitiveHandler {
      */
     static void destroy_boolean_primitive(java.lang.Object p) {
 
-        java.lang.System.out.println("INFO: Destroy boolean primitive.");
+        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Destroy boolean primitive.");
     }
 
     //
@@ -96,17 +96,17 @@ class PrimitiveHandler {
             
             if (!s.equals("")) {
                 
-                java.lang.System.out.println("INFO: Create integer primitive.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Create integer primitive.");
                 p = java.lang.Integer.valueOf((java.lang.String) s);
                 
             } else {
                 
-                java.lang.System.out.println("INFO: Could not create integer primitive. The string is empty.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Could not create integer primitive. The string is empty.");
             }
         
         } else {
             
-            java.lang.System.out.println("ERROR: Could not create integer primitive. The string is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not create integer primitive. The string is null.");
         }
         
         return p;
@@ -119,7 +119,7 @@ class PrimitiveHandler {
      */
     static void destroy_integer_primitive(java.lang.Object p) {
 
-        java.lang.System.out.println("INFO: Destroy integer primitive.");
+        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Destroy integer primitive.");
     }
 
     //
@@ -140,17 +140,17 @@ class PrimitiveHandler {
             
             if (!s.equals("")) {
                 
-                java.lang.System.out.println("INFO: Create float primitive.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Create float primitive.");
                 p = java.lang.Double.valueOf((java.lang.String) s);
                 
             } else {
                 
-                java.lang.System.out.println("INFO: Could not create float primitive. The string is empty.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Could not create float primitive. The string is empty.");
             }
         
         } else {
             
-            java.lang.System.out.println("ERROR: Could not create float primitive. The string is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not create float primitive. The string is null.");
         }
         
         return p;
@@ -163,7 +163,7 @@ class PrimitiveHandler {
      */
     static void destroy_float_primitive(java.lang.Object p) {
 
-        java.lang.System.out.println("INFO: Destroy float primitive.");
+        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Destroy float primitive.");
     }
 
     //
@@ -184,7 +184,7 @@ class PrimitiveHandler {
             
             if (!s.equals("")) {
                 
-                java.lang.System.out.println("INFO: Create character primitive.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Create character primitive.");
                 char[] a = ((java.lang.String) s).toCharArray();
                 
                 if (a != null) {
@@ -195,22 +195,22 @@ class PrimitiveHandler {
                 
                     } else {
                         
-                        java.lang.System.out.println("INFO: Could not create character primitive. The character array is empty.");
+                        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Could not create character primitive. The character array is empty.");
                     }
                 
                 } else {
                     
-                    java.lang.System.out.println("INFO: Could not create character primitive. The character array is null.");
+                    LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Could not create character primitive. The character array is null.");
                 }
     
             } else {
                 
-                java.lang.System.out.println("INFO: Could not create character primitive. The string is empty.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Could not create character primitive. The string is empty.");
             }
         
         } else {
             
-            java.lang.System.out.println("ERROR: Could not create character primitive. The string is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not create character primitive. The string is null.");
         }
         
         return p;
@@ -223,7 +223,7 @@ class PrimitiveHandler {
      */
     static void destroy_character_primitive(java.lang.Object p) {
 
-        java.lang.System.out.println("INFO: Destroy character primitive.");
+        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Destroy character primitive.");
     }
 
     //
@@ -244,17 +244,17 @@ class PrimitiveHandler {
             
             if (!s.equals("")) {
                 
-                java.lang.System.out.println("INFO: Create string primitive.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Create string primitive.");
                 p = s;
                 
             } else {
                 
-                java.lang.System.out.println("INFO: Could not create string primitive. The string is empty.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Could not create string primitive. The string is empty.");
             }
         
         } else {
             
-            java.lang.System.out.println("ERROR: Could not create string primitive. The string is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not create string primitive. The string is null.");
         }
         
         return p;
@@ -267,7 +267,7 @@ class PrimitiveHandler {
      */
     static void destroy_string_primitive(java.lang.Object p) {
 
-        java.lang.System.out.println("INFO: Destroy string primitive.");
+        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Destroy string primitive.");
     }
 
 /*??

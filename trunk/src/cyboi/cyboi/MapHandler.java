@@ -29,7 +29,7 @@ package cyboi;
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.15 $ $Date: 2003-08-01 09:25:04 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-08-18 17:30:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class MapHandler {
@@ -49,14 +49,14 @@ class MapHandler {
 
         if (m != null) {
 
-            java.lang.System.out.println("INFO: Initialize map.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize map.");
 
             m.names = new java.lang.Object[0];
             m.references = new java.lang.Object[0];
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not initialize map. The map is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize map. The map is null.");
         }
     }
 
@@ -71,14 +71,14 @@ class MapHandler {
         
         if (m != null) {
 
-            java.lang.System.out.println("INFO: Finalize map.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Finalize map.");
 
             m.references = null;
             m.names = null;
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not finalize map. The map is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not finalize map. The map is null.");
         }
     }
 
@@ -99,7 +99,7 @@ class MapHandler {
 
         } else {
 
-            System.out.println("ERROR: Could not get map size. The map is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not get map size. The map is null.");
         }
 
         return s;
@@ -142,7 +142,7 @@ class MapHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not set map element. The map is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not set map element. The map is null.");
         }
     }
 
@@ -163,7 +163,7 @@ class MapHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not remove map element. The map is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove map element. The map is null.");
         }
     }
 
@@ -198,7 +198,7 @@ class MapHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not get map element. The map is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not get map element. The map is null.");
         }
         
         return e;
@@ -264,7 +264,7 @@ class MapHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not get map element index. The map is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not get map element index. The map is null.");
         }
 
         return index;
@@ -331,7 +331,7 @@ class MapHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not get next map element index. The map is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not get next map element index. The map is null.");
         }
 
         return index;
@@ -362,12 +362,12 @@ class MapHandler {
 
             } else {
 
-                java.lang.System.out.println("ERROR: Could not determine map element name. The index string is null.");
+                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not determine map element name. The index string is null.");
             }
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not determine map element name. The name is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not determine map element name. The name is null.");
         }
         
         return n;
@@ -429,7 +429,7 @@ class MapHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not get element count. The map is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not get element count. The map is null.");
         }
 
         return count;

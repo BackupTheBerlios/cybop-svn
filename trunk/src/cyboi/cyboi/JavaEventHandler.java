@@ -32,7 +32,7 @@ package cyboi;
  *
  * Unfortunately, handling of most events is done via graphical components in java.
  *
- * @version $Revision: 1.6 $ $Date: 2003-08-15 09:34:24 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-08-18 17:30:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaEventHandler extends java.awt.EventQueue {
@@ -103,7 +103,7 @@ class JavaEventHandler extends java.awt.EventQueue {
      */
     protected void dispatchEvent(java.awt.AWTEvent evt) {
 
-        java.lang.System.out.println("INFO: Dispatch event: " + evt);
+        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Dispatch event: " + evt);
 
         //?? For now, we also call the AWT event handling.
         //?? Later, we will cut it off by removing this line.
@@ -148,12 +148,12 @@ class JavaEventHandler extends java.awt.EventQueue {
     
             } else {
     
-                java.lang.System.out.println("ERROR: Could not dispatch event. The signal is null.");
+                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not dispatch event. The signal is null.");
             }
 
         } catch (Exception e) {
 
-            java.lang.System.out.println("ERROR: Could not dispatch event. An exception occured:\n" + e);
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not dispatch event. An exception occured:\n" + e);
         }
     }
 
@@ -163,7 +163,7 @@ class JavaEventHandler extends java.awt.EventQueue {
      * @param p0 the signal
      * @param p1 the java event
      */
-    static void transform_event(java.lang.Object p0, java.lang.Object p1) throws Exception {
+    static void transform_event(java.lang.Object p0, java.lang.Object p1) {
 
         Signal s = (Signal) p0;
         
@@ -177,7 +177,7 @@ class JavaEventHandler extends java.awt.EventQueue {
     
             if (evt != null) {
     
-                java.lang.System.out.println("INFO: Transform event.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Transform event.");
                 
                 int id = evt.getID();
     
@@ -518,12 +518,12 @@ class JavaEventHandler extends java.awt.EventQueue {
 
             } else {
     
-                throw new Exception("Could not transform java event. The java event is null.");
+                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not transform java event. The java event is null.");
             }
 
         } else {
 
-            throw new Exception("Could not transform java event. The signal is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not transform java event. The signal is null.");
         }
     }
 
@@ -549,17 +549,17 @@ class JavaEventHandler extends java.awt.EventQueue {
 
             if (q != null) {
 
-                java.lang.System.out.println("INFO: Replace java event queue for dispatching events.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Replace java event queue for dispatching events.");
                 q.push((JavaEventHandler) p0);
 
             } else {
 
-                java.lang.System.out.println("ERROR: Could not set event handler. The java awt event queue is null.");
+                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not set event handler. The java awt event queue is null.");
             }
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not set event handler. The java awt toolkit is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not set event handler. The java awt toolkit is null.");
         }
     }
 
@@ -574,12 +574,12 @@ class JavaEventHandler extends java.awt.EventQueue {
 
         if (h != null) {
                 
-            java.lang.System.out.println("INFO: Stop dispatching events using java event queue.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Stop dispatching events using java event queue.");
             h.pop();
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not remove event handler. The java event handler is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove event handler. The java event handler is null.");
         }
     }
 }

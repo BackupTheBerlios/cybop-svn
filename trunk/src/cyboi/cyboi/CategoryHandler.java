@@ -27,7 +27,7 @@ package cyboi;
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.13 $ $Date: 2003-08-11 19:30:40 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-08-18 17:30:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryHandler {
@@ -112,13 +112,13 @@ class CategoryHandler {
     
         if (p != null) {
             
-            java.lang.System.out.println("INFO: Initialize category: " + p1);
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize category: " + p1);
             p.parse(CategoryHandler.PATH + p1 + CategoryHandler.CYBOL);
             CategoryHandler.read_document(p0, (org.apache.xerces.dom.DocumentImpl) p.getDocument());
     
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize category elements. The xml parser is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize category elements. The xml parser is null.");
         }
     }
 
@@ -148,12 +148,12 @@ class CategoryHandler {
 
         if (p != null) {
             
-            java.lang.System.out.println("INFO: Initialize xml parser.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize xml parser.");
             p.setFeature("http://xml.org/sax/features/validation", true);
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize xml parser. The xml parser is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize xml parser. The xml parser is null.");
         }
     }
 
@@ -164,7 +164,7 @@ class CategoryHandler {
      */
     static void finalize_xml_parser(java.lang.Object p0) {
 
-        java.lang.System.out.println("INFO: Finalize xml parser.");
+        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Finalize xml parser.");
     }
 
     //
@@ -183,7 +183,7 @@ class CategoryHandler {
 
         if (doc != null) {
             
-            java.lang.System.out.println("INFO: Read document.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Read document.");
             doc.normalize();
             org.apache.xerces.dom.DeepNodeListImpl l = null;
 
@@ -200,12 +200,12 @@ class CategoryHandler {
 
             } else {
                 
-                java.lang.System.out.println("ERROR: Could not read document. The category is null.");
+                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not read document. The category is null.");
             }
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not read document. The document is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not read document. The document is null.");
         }
     }
 
@@ -238,18 +238,18 @@ class CategoryHandler {
             
             if (n != null) {
 
-                java.lang.System.out.println("INFO: Initialize super category.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize super category.");
                 java.lang.Object s = CategoryHandler.read_attribute((org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes(), CategoryHandler.CATEGORY);
                 CategoryHandler.initialize_category(p0, s);
                 
             } else {
                 
-                java.lang.System.out.println("WARNING: Could not initialize super category. The super category node is null.");
+                LogHandler.log(LogHandler.WARNING_LOG_LEVEL, "Could not initialize super category. The super category node is null.");
             }
             
         } else {
             
-            java.lang.System.out.println("WARNING: Could not initialize super category. The super category list is null.");
+            LogHandler.log(LogHandler.WARNING_LOG_LEVEL, "Could not initialize super category. The super category list is null.");
         }
     }
 
@@ -278,7 +278,7 @@ class CategoryHandler {
 
         if (l != null) {
 
-            java.lang.System.out.println("INFO: Initialize java objects.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize java objects.");
             org.apache.xerces.dom.NodeImpl n = (org.apache.xerces.dom.NodeImpl) l.item(0);
 
             if (n != null) {
@@ -307,17 +307,17 @@ class CategoryHandler {
 
                 } else {
                     
-                    java.lang.System.out.println("ERROR: Could not initialize java objects. The category is null.");
+                    LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize java objects. The category is null.");
                 }
             
             } else {
                 
-                java.lang.System.out.println("INFO: Could not initialize java objects. The java object node is null.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Could not initialize java objects. The java object node is null.");
             }
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize java objects. The java objects list is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize java objects. The java objects list is null.");
         }
     }
 
@@ -343,7 +343,7 @@ class CategoryHandler {
 
         if (n != null) {
             
-            java.lang.System.out.println("INFO: Check if java object is null.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Check if java object is null.");
             org.apache.xerces.dom.NamedNodeMapImpl m = (org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes();
             java.lang.String a = (java.lang.String) CategoryHandler.read_attribute(m, CategoryHandler.CATEGORY);
         
@@ -354,7 +354,7 @@ class CategoryHandler {
 
         } else {
             
-            java.lang.System.out.println("WARNING: Could not initialize java object. The java object node is null.");
+            LogHandler.log(LogHandler.WARNING_LOG_LEVEL, "Could not initialize java object. The java object node is null.");
         }
         
         return b;
@@ -380,17 +380,17 @@ class CategoryHandler {
             
             if (n != null) {
                 
-                java.lang.System.out.println("INFO: Initialize java object.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize java object.");
                 CategoryHandler.initialize_java_object_attributes(o.items, (org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes());
         
             } else {
                 
-                java.lang.System.out.println("WARNING: Could not initialize java object. The java object node is null.");
+                LogHandler.log(LogHandler.WARNING_LOG_LEVEL, "Could not initialize java object. The java object node is null.");
             }
 
         } else {
             
-            java.lang.System.out.println("WARNING: Could not initialize java object. The java object is null.");
+            LogHandler.log(LogHandler.WARNING_LOG_LEVEL, "Could not initialize java object. The java object is null.");
         }
     }
     
@@ -415,7 +415,7 @@ class CategoryHandler {
      */
     static void initialize_java_object_attributes(java.lang.Object p0, java.lang.Object p1) {
 
-        java.lang.System.out.println("INFO: Initialize java object attributes.");
+        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize java object attributes.");
         java.lang.Object a = null;
 
         a = CategoryHandler.read_attribute(p1, CategoryHandler.CATEGORY);
@@ -453,7 +453,7 @@ class CategoryHandler {
 
         if (l != null) {
             
-            java.lang.System.out.println("INFO: Initialize items.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize items.");
             int count = 0;
             int size = l.getLength();
             org.apache.xerces.dom.NodeImpl n = null;
@@ -482,12 +482,12 @@ class CategoryHandler {
                 
                     } else {
                         
-                        java.lang.System.out.println("ERROR: Could not initialize items. An item is null.");
+                        LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize items. An item is null.");
                     }
             
                 } else {
                     
-                    java.lang.System.out.println("INFO: Could not initialize items. The category item node is null.");
+                    LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Could not initialize items. The category item node is null.");
                 }
                         
                 count++;
@@ -495,7 +495,7 @@ class CategoryHandler {
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize items. The category items list is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize items. The category items list is null.");
         }
     }
 
@@ -528,17 +528,17 @@ class CategoryHandler {
             
             if (n != null) {
                 
-                java.lang.System.out.println("INFO: Initialize item.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize item.");
                 CategoryHandler.initialize_attributes(i.items, (org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes());
         
             } else {
                 
-                java.lang.System.out.println("WARNING: Could not initialize item. The item node is null.");
+                LogHandler.log(LogHandler.WARNING_LOG_LEVEL, "Could not initialize item. The item node is null.");
             }
 
         } else {
             
-            java.lang.System.out.println("WARNING: Could not initialize item. The item is null.");
+            LogHandler.log(LogHandler.WARNING_LOG_LEVEL, "Could not initialize item. The item is null.");
         }
     }
     
@@ -563,7 +563,7 @@ class CategoryHandler {
      */
     static void initialize_attributes(java.lang.Object p0, java.lang.Object p1) {
 
-        java.lang.System.out.println("INFO: Initialize attributes.");
+        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize attributes.");
         java.lang.Object a = null;
 
         a = CategoryHandler.read_attribute(p1, CategoryHandler.NAME);
@@ -625,17 +625,17 @@ class CategoryHandler {
             
             if (n != null) {
                 
-                java.lang.System.out.println("INFO: Read attribute.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Read attribute.");
                 a = n.getNodeValue();
         
             } else {
                 
-                java.lang.System.out.println("WARNING: Could not read attribute. The attribute node is null.");
+                LogHandler.log(LogHandler.WARNING_LOG_LEVEL, "Could not read attribute. The attribute node is null.");
             }
         
         } else {
             
-            java.lang.System.out.println("WARNING: Could not read attribute. The attributes map is null.");
+            LogHandler.log(LogHandler.WARNING_LOG_LEVEL, "Could not read attribute. The attributes map is null.");
         }
         
         return a;

@@ -29,7 +29,7 @@ package cyboi;
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.30 $ $Date: 2003-08-15 09:34:24 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2003-08-18 17:30:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -52,7 +52,7 @@ class ItemHandler {
         
         if (a != null) {
 
-            java.lang.System.out.println("INFO: Create object: " + p0);
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Create object: " + p0);
 
             if (a.equals(Statics.BOOLEAN_PRIMITIVE)) {
 
@@ -83,7 +83,7 @@ class ItemHandler {
             
         } else {
             
-            java.lang.System.out.println("WARNING: Could not create object. The abstraction is null.");
+            LogHandler.log(LogHandler.WARNING_LOG_LEVEL, "Could not create object. The abstraction is null.");
         }
         
         return o;
@@ -102,7 +102,7 @@ class ItemHandler {
         
         if (a != null) {
 
-            java.lang.System.out.println("INFO: Destroy object: " + p1);
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Destroy object: " + p1);
 
             if (a.equals(Statics.BOOLEAN_PRIMITIVE)) {
 
@@ -133,7 +133,7 @@ class ItemHandler {
             
         } else {
             
-            java.lang.System.out.println("WARNING: Could not destroy object. The abstraction is null.");
+            LogHandler.log(LogHandler.WARNING_LOG_LEVEL, "Could not destroy object. The abstraction is null.");
         }
     }
 
@@ -149,7 +149,7 @@ class ItemHandler {
      */
     static void initialize_item(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
-        java.lang.System.out.println("INFO: Initialize item: " + p1);
+        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize item: " + p1);
 
         // Create temporary category item.
         Item c = new Item();
@@ -167,7 +167,7 @@ class ItemHandler {
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize item elements. The category is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize item elements. The category is null.");
         }
 
         // Destroy temporary category item.        
@@ -183,7 +183,7 @@ class ItemHandler {
      */
     static void finalize_item(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
-        java.lang.System.out.println("INFO: Finalize item: " + p1);
+        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Finalize item: " + p1);
         
         // Create temporary category item.        
         Item c = new Item();
@@ -198,7 +198,7 @@ class ItemHandler {
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not finalize item elements. The category is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not finalize item elements. The category is null.");
         }
 
         // Write category to file.
@@ -224,7 +224,7 @@ class ItemHandler {
         
         if (i != null) {
             
-            java.lang.System.out.println("INFO: Initialize item containers.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize item containers.");
 
             i.items = new Map();
             MapHandler.initialize_map(i.items);
@@ -237,7 +237,7 @@ class ItemHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize item containers. The item is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize item containers. The item is null.");
         }
     }
 
@@ -252,7 +252,7 @@ class ItemHandler {
         
         if (i != null) {
 
-            java.lang.System.out.println("INFO: Finalize item containers.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Finalize item containers.");
 
             MapHandler.finalize_map(i.interactions);
             i.interactions = null;
@@ -268,7 +268,7 @@ class ItemHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not finalize item containers. The item is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not finalize item containers. The item is null.");
         }
     }
 
@@ -292,19 +292,19 @@ class ItemHandler {
             
             if (o != null) {
         
-                java.lang.System.out.println("INFO: Initialize java object.");
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize java object.");
 
                 java.lang.Object c = MapHandler.get_map_element(o.items, CategoryHandler.CATEGORY);
                 i.java_object = JavaObjectHandler.create_java_object(c);
     
             } else {
                 
-                java.lang.System.out.println("ERROR: Could not initialize java object. The java object is null.");
+                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize java object. The java object is null.");
             }
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize java object. The item is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize java object. The item is null.");
         }
     }
 
@@ -336,7 +336,7 @@ class ItemHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize java object attributes. The item is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize java object attributes. The item is null.");
         }
     }
 
@@ -355,7 +355,7 @@ class ItemHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize java object attributes. The item is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize java object attributes. The item is null.");
         }
     }
 
@@ -387,7 +387,7 @@ class ItemHandler {
 
             } else {
                 
-                java.lang.System.out.println("ERROR: Could not initialize items. A category item is null.");
+                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize items. A category item is null.");
             }
             
             count++;
@@ -419,7 +419,7 @@ class ItemHandler {
         
         if (i != null) {
                 
-            java.lang.System.out.println("INFO: Initialize item element.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize item element.");
             java.lang.Object name = MapHandler.get_map_element(p1, CategoryHandler.NAME);                
             java.lang.Object category = null;                
             java.lang.Object abstraction = null;                
@@ -461,17 +461,17 @@ class ItemHandler {
     
                 } else {
                     
-                    java.lang.System.out.println("WARNING: Could not initialize item element. The java object item is not an instance of item.");
+                    LogHandler.log(LogHandler.WARNING_LOG_LEVEL, "Could not initialize item element. The java object item is not an instance of item.");
                 }
 
             } else {
                 
-                java.lang.System.out.println("ERROR: Could not initialize item element. The java object item is null.");
+                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize item element. The java object item is null.");
             }
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize item element. The item is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize item element. The item is null.");
         }
     }
     
@@ -522,7 +522,7 @@ class ItemHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not set map element. The map is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not set map element. The map is null.");
         }
     }
 
@@ -544,7 +544,7 @@ class ItemHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not remove map element. The map is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove map element. The map is null.");
         }
     }
 
@@ -581,7 +581,7 @@ class ItemHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not get map element. The map is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not get map element. The map is null.");
         }
         
         return e;

@@ -32,7 +32,7 @@ package cyboi;
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) format.
  *
- * @version $Revision: 1.31 $ $Date: 2003-08-18 06:59:38 $ $Author: christian $
+ * @version $Revision: 1.32 $ $Date: 2003-08-18 17:30:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -58,6 +58,9 @@ class Main {
                     java.lang.Object dynamics = args[0];
                     java.lang.Object statics = args[1];
 
+                    // Log handler.
+                    LogHandler.log_level = 2;
+                    
                     // XML parser.
                     CategoryHandler.xml_parser = new org.apache.xerces.parsers.DOMParser();
                     CategoryHandler.initialize_xml_parser(CategoryHandler.xml_parser);
@@ -87,7 +90,7 @@ class Main {
         
                     } else {
             
-                        java.lang.System.out.println("ERROR: Could not create initial signal. The signal is null.");
+                        LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not create initial signal. The signal is null.");
                     }
     
                     // The system is now started up and complete so that a loop
@@ -116,7 +119,7 @@ class Main {
                     // do the same thing.
                     // The program exits normally, when the last non-daemon thread exits.
                     //
-                    java.lang.System.out.println("INFO: Exit cyboi normally.");
+                    LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Exit cyboi normally.");
                     java.lang.System.exit(0);
 
                 } else {
@@ -128,7 +131,7 @@ class Main {
 
             } else {
 
-                java.lang.System.out.println("ERROR: Could not execute cyboi. The argument array is null.");
+                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not execute cyboi. The argument array is null.");
             }
 
         } catch (Exception e) {
@@ -141,7 +144,7 @@ class Main {
             // The system exits normally, when the last non-daemon thread exits.
             // Since an exception was caught here, the system exits unnormally.
             //
-            java.lang.System.out.println("ERROR: Exit cyboi unnormally. Undiscovered exception:\n");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Exit cyboi unnormally. Undiscovered exception:\n");
             e.printStackTrace();
             java.lang.System.exit(1);
         }

@@ -33,7 +33,7 @@ package cyboi;
  * - send
  * - reset
  *
- * @version $Revision: 1.14 $ $Date: 2003-08-18 06:59:38 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-08-18 17:30:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -102,6 +102,12 @@ class SignalHandler {
     /** The shutdown action. */
     static java.lang.String SHUTDOWN_ACTION = "shutdown";
     
+    /** The receive action. */
+    static java.lang.String RECEIVE_ACTION = "receive";
+
+    /** The send action. */
+    static java.lang.String SEND_ACTION = "send";
+
     //
     // Attributes.
     //
@@ -143,7 +149,7 @@ class SignalHandler {
             
             if (tmp != null) {
             
-                java.lang.System.out.println("INFO: Receive signal: " + tmp.predicate);
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Receive signal: " + tmp.predicate);
 
                 // Copy signal memory signal to the transporting signal given as parameter.
                 s.priority = tmp.priority;
@@ -168,7 +174,7 @@ class SignalHandler {
     
         } else {
 
-            java.lang.System.out.println("ERROR: Could not receive signal. The signal is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not receive signal. The signal is null.");
         }
     }
 
@@ -190,7 +196,7 @@ class SignalHandler {
 
             if (a != null) {
 
-                java.lang.System.out.println("INFO: Handle signal: " + a);
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Handle signal: " + a);
 
                 if (a.equals(JavaEventHandler.MOUSE_MOVED_EVENT)) {
 
@@ -222,12 +228,46 @@ class SignalHandler {
                     SignalHandler.reset(s);
 
 */
+                } else if (a.equals(SignalHandler.SEND_ACTION)) {
+                    
+                    Item i = (Item) s.object;
+
+                    if (i != null) {
+                        
+                        java.lang.Object o = i.java_object;
+
+                        if (o != null) {
+                            
+                            if (o instanceof java.awt.Component) {
+                                
+                                ((java.awt.Component) o).setVisible(true);
+                            
+                            } else {
+                                
+                                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not show object. The java object is not a component.");
+                            }
+                    
+                        } else {
+                            
+                            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not show object. The java object is null.");
+                        }
+                    
+                    } else {
+                        
+                        LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not show object. The item is null.");
+                    }
+
+                    SignalHandler.reset(s);
+                    
                 } else if (a.equals(SignalHandler.STARTUP_ACTION)) {
                     
                     // Root (statics).
                     SignalHandler.root = ItemHandler.create_object(s.object, Statics.CATEGORY);
 
                     SignalHandler.reset(s);
+                    
+                    s.predicate = SignalHandler.SEND_ACTION;
+                    s.object = MapHandler.get_map_element(((Item) root).items, "system_screen_model");
 
                 } else if (a.equals(SignalHandler.SHUTDOWN_ACTION)) {
                     
@@ -247,7 +287,7 @@ class SignalHandler {
     
         } else {
 
-            java.lang.System.out.println("ERROR: Could not handle signal. The signal is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not handle signal. The signal is null.");
         }
         
         return sf;
@@ -279,7 +319,7 @@ class SignalHandler {
         
                 if (tmp != null) {
                 
-                    java.lang.System.out.println("INFO: Send signal: " + s.predicate);
+                    LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Send signal: " + s.predicate);
 
                     // Copy transporting signal given as parameter to the signal memory signal.
                     tmp.priority = s.priority;
@@ -306,7 +346,7 @@ class SignalHandler {
 
                 } else {
         
-                    java.lang.System.out.println("ERROR: Could not send signal. The signal memory signal is null.");
+                    LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not send signal. The signal memory signal is null.");
                 }
 
             } else {
@@ -317,7 +357,7 @@ class SignalHandler {
     
         } else {
 
-            java.lang.System.out.println("ERROR: Could not send signal. The signal is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not send signal. The signal is null.");
         }
     }
 
@@ -344,7 +384,7 @@ class SignalHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not reset signal. The signal is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not reset signal. The signal is null.");
         }
     }
 }

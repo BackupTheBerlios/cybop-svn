@@ -29,7 +29,7 @@ package cyboi;
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.13 $ $Date: 2003-08-11 19:30:40 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-08-18 17:30:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ArrayHandler {
@@ -71,12 +71,12 @@ class ArrayHandler {
 
             } else {
     
-                System.out.println("ERROR: Could not extend array. The new array is null.");
+                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not extend array. The new array is null.");
             }
 
         } else {
 
-            System.out.println("ERROR: Could not extend array. The array is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not extend array. The array is null.");
         }
         
         return a;
@@ -98,7 +98,7 @@ class ArrayHandler {
 
         } else {
 
-            System.out.println("ERROR: Could not get array size. The array is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not get array size. The array is null.");
         }
 
         return s;
@@ -180,7 +180,7 @@ class ArrayHandler {
 
         } else {
 
-            System.out.println("ERROR: Could not set array element. The array is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not set array element. The array is null.");
         }
         
         return a;
@@ -218,7 +218,7 @@ class ArrayHandler {
 
         } else {
 
-            System.out.println("ERROR: Could not remove array element. The array is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove array element. The array is null.");
         }
     }
 
@@ -242,7 +242,7 @@ class ArrayHandler {
 
         } else {
 
-            System.out.println("ERROR: Could not get array element. The array is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not get array element. The array is null.");
         }
         
         return e;

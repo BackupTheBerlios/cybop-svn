@@ -30,7 +30,7 @@ package cyboi;
  * It is necessary only as long as the Cybernetics Oriented Interpreter (CYBOI)
  * is implemented in the Java programming language.
  *
- * @version $Revision: 1.9 $ $Date: 2003-08-18 13:31:47 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-08-18 17:30:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaObjectHandler {
@@ -106,19 +106,19 @@ class JavaObjectHandler {
     
                 if (cl != null) {
     
-                    java.lang.System.out.println("INFO: Create java object.");
+                    LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Create java object.");
                 
                     o = cl.newInstance();
                     
                 } else {
     
-                    java.lang.System.out.println("ERROR: Could not create java object. The class is null.");
+                    LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not create java object. The class is null.");
                 }
             }
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not create java object. The category is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not create java object. The category is null.");
         }
         
         return o;
@@ -148,7 +148,7 @@ class JavaObjectHandler {
      */
     static void initialize_java_object_attributes(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
-        java.lang.System.out.println("INFO: Initialize java object attributes.");
+        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize java object attributes.");
         
         if (p0 instanceof javax.swing.JFrame) {
 
@@ -212,7 +212,7 @@ class JavaObjectHandler {
 
         if (p0 != null) {
 
-            java.lang.System.out.println("INFO: Add to java object.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Add to java object.");
             
             if (p0 instanceof javax.swing.JFrame) {
                     
@@ -241,7 +241,7 @@ class JavaObjectHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not add to java object. The java object is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not add to java object. The java object is null.");
         }
     }
 
@@ -256,7 +256,7 @@ class JavaObjectHandler {
 
         if (p0 != null) {
 
-            java.lang.System.out.println("INFO: Remove from java object.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Remove from java object.");
             
             if (p0 instanceof javax.swing.JFrame) {
                     
@@ -285,7 +285,7 @@ class JavaObjectHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not remove from java object. The java object is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove from java object. The java object is null.");
         }
     }
 
@@ -305,7 +305,7 @@ class JavaObjectHandler {
         
         if (f != null) {
 
-            java.lang.System.out.println("INFO: Initialize jframe.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize jframe.");
             
             java.lang.String width = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.WIDTH);
             java.lang.String height = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.HEIGHT);
@@ -313,7 +313,7 @@ class JavaObjectHandler {
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize jframe. The jframe is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize jframe. The jframe is null.");
         }
     }
     
@@ -339,7 +339,7 @@ class JavaObjectHandler {
         
         if (f != null) {
 
-            java.lang.System.out.println("INFO: Add to jframe.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Add to jframe.");
             
             if (p1 instanceof javax.swing.JMenuBar) {
                     
@@ -355,16 +355,13 @@ class JavaObjectHandler {
         
                 } else {
                     
-                    java.lang.System.out.println("ERROR: Could not add to jframe. The content pane is null.");
+                    LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not add to jframe. The content pane is null.");
                 }
             }
             
-            //?? Temporary until SHOW communication signal is sent!
-            f.setVisible(true);
-
         } else {
             
-            java.lang.System.out.println("ERROR: Could not add to jframe. The jframe is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not add to jframe. The jframe is null.");
         }
     }
     
@@ -381,7 +378,7 @@ class JavaObjectHandler {
         
         if (f != null) {
 
-            java.lang.System.out.println("INFO: Remove from jframe.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Remove from jframe.");
             
             if (p1 instanceof javax.swing.JMenuBar) {
                     
@@ -397,13 +394,13 @@ class JavaObjectHandler {
         
                 } else {
                     
-                    java.lang.System.out.println("ERROR: Could not remove from jframe. The content pane is null.");
+                    LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove from jframe. The content pane is null.");
                 }
             }
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not remove from jframe. The jframe is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove from jframe. The jframe is null.");
         }
     }
 
@@ -423,7 +420,7 @@ class JavaObjectHandler {
         
         if (d != null) {
 
-            java.lang.System.out.println("INFO: Initialize jdialog.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize jdialog.");
             
             java.lang.String width = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.WIDTH);
             java.lang.String height = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.HEIGHT);
@@ -431,7 +428,7 @@ class JavaObjectHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize jdialog. The jdialog is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize jdialog. The jdialog is null.");
         }
     }
     
@@ -457,7 +454,7 @@ class JavaObjectHandler {
         
         if (d != null) {
 
-            java.lang.System.out.println("INFO: Add to jdialog.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Add to jdialog.");
                 
             if (p1 instanceof java.awt.Component) {
                     
@@ -469,16 +466,13 @@ class JavaObjectHandler {
         
                 } else {
                     
-                    java.lang.System.out.println("ERROR: Could not add to jdialog. The content pane is null.");
+                    LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not add to jdialog. The content pane is null.");
                 }
             }
             
-            //?? Temporary until SHOW communication signal is sent!
-            d.setVisible(true);
-
         } else {
             
-            java.lang.System.out.println("ERROR: Could not add to jdialog. The jdialog is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not add to jdialog. The jdialog is null.");
         }
     }
     
@@ -495,7 +489,7 @@ class JavaObjectHandler {
         
         if (d != null) {
 
-            java.lang.System.out.println("INFO: Remove from jdialog.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Remove from jdialog.");
             
             if (p1 instanceof java.awt.Component) {
                     
@@ -507,13 +501,13 @@ class JavaObjectHandler {
         
                 } else {
                     
-                    java.lang.System.out.println("ERROR: Could not remove from jdialog. The content pane is null.");
+                    LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove from jdialog. The content pane is null.");
                 }
             }
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not remove from jdialog. The jdialog is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove from jdialog. The jdialog is null.");
         }
     }
 
@@ -552,7 +546,7 @@ class JavaObjectHandler {
         
         if (mb != null) {
 
-            java.lang.System.out.println("INFO: Add to jmenubar.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Add to jmenubar.");
             
             if (p1 instanceof javax.swing.JMenu) {
                     
@@ -561,7 +555,7 @@ class JavaObjectHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not add to jmenubar. The jmenubar is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not add to jmenubar. The jmenubar is null.");
         }
     }
     
@@ -578,7 +572,7 @@ class JavaObjectHandler {
         
         if (mb != null) {
 
-            java.lang.System.out.println("INFO: Remove from jmenubar.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Remove from jmenubar.");
             
             if (p1 instanceof javax.swing.JMenu) {
                     
@@ -587,7 +581,7 @@ class JavaObjectHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not remove from jmenubar. The jmenubar is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove from jmenubar. The jmenubar is null.");
         }
     }
 
@@ -607,14 +601,14 @@ class JavaObjectHandler {
         
         if (m != null) {
 
-            java.lang.System.out.println("INFO: Initialize jmenu.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize jmenu.");
             
             java.lang.String name = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.NAME);
             m.setText(name);
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize jmenu. The jmenu is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize jmenu. The jmenu is null.");
         }
     }
     
@@ -640,7 +634,7 @@ class JavaObjectHandler {
         
         if (m != null) {
 
-            java.lang.System.out.println("INFO: Add to jmenu.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Add to jmenu.");
             
             if (p1 instanceof javax.swing.JMenuItem) {
                     
@@ -649,7 +643,7 @@ class JavaObjectHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not add to jmenu. The jmenu is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not add to jmenu. The jmenu is null.");
         }
     }
     
@@ -666,7 +660,7 @@ class JavaObjectHandler {
         
         if (m != null) {
 
-            java.lang.System.out.println("INFO: Remove from jmenu.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Remove from jmenu.");
             
             if (p1 instanceof javax.swing.JMenuItem) {
                     
@@ -675,7 +669,7 @@ class JavaObjectHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not remove from jmenu. The jmenu is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove from jmenu. The jmenu is null.");
         }
     }
 
@@ -695,7 +689,7 @@ class JavaObjectHandler {
         
         if (mi != null) {
 
-            java.lang.System.out.println("INFO: Initialize jmenuitem.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize jmenuitem.");
             
             java.lang.String name = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.NAME);
             java.lang.String key_binding = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.KEY_BINDING);
@@ -708,7 +702,7 @@ class JavaObjectHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize jmenuitem. The jmenuitem is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize jmenuitem. The jmenuitem is null.");
         }
     }
     
@@ -737,7 +731,7 @@ class JavaObjectHandler {
         
         if (p != null) {
 
-            java.lang.System.out.println("INFO: Initialize jpanel.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize jpanel.");
             
             java.lang.String left_border = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.LEFT_BORDER);
             java.lang.String right_border = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.RIGHT_BORDER);
@@ -765,7 +759,7 @@ class JavaObjectHandler {
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize jpanel. The jpanel is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize jpanel. The jpanel is null.");
         }
     }
     
@@ -791,7 +785,7 @@ class JavaObjectHandler {
         
         if (p != null) {
 
-            java.lang.System.out.println("INFO: Add to jpanel.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Add to jpanel.");
             
             if (p1 instanceof java.awt.Component) {
                     
@@ -800,7 +794,7 @@ class JavaObjectHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not add to jpanel. The jpanel is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not add to jpanel. The jpanel is null.");
         }
     }
     
@@ -817,7 +811,7 @@ class JavaObjectHandler {
         
         if (p != null) {
 
-            java.lang.System.out.println("INFO: Remove from jpanel.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Remove from jpanel.");
             
             if (p1 instanceof java.awt.Component) {
                     
@@ -826,7 +820,7 @@ class JavaObjectHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not remove from jpanel. The jpanel is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove from jpanel. The jpanel is null.");
         }
     }
 
@@ -846,11 +840,11 @@ class JavaObjectHandler {
         
         if (tp != null) {
 
-            java.lang.System.out.println("INFO: Initialize jtabbedpane.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize jtabbedpane.");
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize jtabbedpane. The jtabbedpane is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize jtabbedpane. The jtabbedpane is null.");
         }
     }
     
@@ -876,7 +870,7 @@ class JavaObjectHandler {
         
         if (tp != null) {
 
-            java.lang.System.out.println("INFO: Add to jtabbedpane.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Add to jtabbedpane.");
             
             if (p1 instanceof javax.swing.JMenuItem) {
                     
@@ -885,7 +879,7 @@ class JavaObjectHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not add to jtabbedpane. The jtabbedpane is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not add to jtabbedpane. The jtabbedpane is null.");
         }
     }
     
@@ -902,7 +896,7 @@ class JavaObjectHandler {
         
         if (tp != null) {
 
-            java.lang.System.out.println("INFO: Remove from jtabbedpane.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Remove from jtabbedpane.");
             
             if (p1 instanceof javax.swing.JMenuItem) {
                     
@@ -911,7 +905,7 @@ class JavaObjectHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not remove from jtabbedpane. The jtabbedpane is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not remove from jtabbedpane. The jtabbedpane is null.");
         }
     }
 
@@ -931,7 +925,7 @@ class JavaObjectHandler {
         
         if (b != null) {
 
-            java.lang.System.out.println("INFO: Initialize jbutton.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize jbutton.");
             
             java.lang.String name = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.NAME);
             java.lang.String key_binding = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.KEY_BINDING);
@@ -944,7 +938,7 @@ class JavaObjectHandler {
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize jbutton. The jbutton is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize jbutton. The jbutton is null.");
         }
     }
     
@@ -973,7 +967,7 @@ class JavaObjectHandler {
         
         if (l != null) {
 
-            java.lang.System.out.println("INFO: Initialize jlabel.");
+            LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Initialize jlabel.");
             
             java.lang.String left_border = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.LEFT_BORDER);
             java.lang.String right_border = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.RIGHT_BORDER);
@@ -997,7 +991,7 @@ class JavaObjectHandler {
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize jlabel. The jlabel is null.");
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not initialize jlabel. The jlabel is null.");
         }
     }
     
