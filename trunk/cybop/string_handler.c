@@ -30,7 +30,7 @@
 /**
  * This is the string handler.
  *
- * @version $Revision: 1.7 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-11-12 11:11:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

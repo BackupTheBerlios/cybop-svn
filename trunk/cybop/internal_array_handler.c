@@ -26,14 +26,13 @@
 #define INTERNAL_ARRAY_HANDLER_SOURCE
 
 #include "log_handler.c"
-#include "statics.c"
 
 /**
  * This is the internal array handler.
  *
  * Internal array elements are accessed over their index.
  *
- * @version $Revision: 1.10 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-11-12 11:11:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -135,7 +134,7 @@ static void set_internal_array_element(void** p0, void* p1, void* p2) {
  *
  * @param p0 the internal array
  * @param p1 the index
- * @param p2 the size
+ * @param p2 the count
  */
 static void remove_internal_array_element(void** p0, void* p1, void* p2) {
 
@@ -145,11 +144,11 @@ static void remove_internal_array_element(void** p0, void* p1, void* p2) {
 
         if (*i != INVALID_INDEX_VALUE) {
 
-            int* size = (int*) p2;
+            int* count = (int*) p2;
             
             // Starting from the given index, move all remaining elements one
             // place towards the beginning of the elements.
-            while ((*i + 1) < *size) {
+            while ((*i + 1) < *count) {
 
                 p0[*i] = p0[*i + 1];
 

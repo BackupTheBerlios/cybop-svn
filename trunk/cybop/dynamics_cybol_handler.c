@@ -1,5 +1,5 @@
 /*
- * $RCSfile: xml_handler.c,v $
+ * $RCSfile: dynamics_cybol_handler.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -29,7 +29,7 @@
  *
  * It can read and write CYBOL source files.
  *
- * @version $Revision: 1.12 $ $Date: 2003-10-23 15:23:49 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-11-12 11:11:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,34 +38,34 @@
 //
 
 /** The cybol path. */
-static const char* CYBOL_PATH = "/home/cybop/lib/cybop/";
+//?? static const char* CYBOL_PATH = "/home/cybop/lib/cybop/";
 
 /** The cybol file suffix. */
-static const char* FILE_SUFFIX = ".cybol";
+//?? static const char* FILE_SUFFIX = ".cybol";
 
 /** The super model. */
-static const char* SUPER_MODEL = "super";
+//?? static const char* SUPER_MODEL = "super";
 
 /** The null model. */
-static const char* NULL_MODEL = "null";
+//?? static const char* NULL_MODEL = "null";
 
 /** The child. */
-static const char* CHILD = "child";
+//?? static const char* CHILD = "child";
 
 /** The name. */
-static const char* NAME = "name";
+//?? static const char* NAME = "name";
 
 /** The child model. */
-static const char* CHILD_MODEL = "child_model";
+//?? static const char* CHILD_MODEL = "child_model";
 
 /** The child abstraction. */
-static const char* CHILD_ABSTRACTION = "child_abstraction";
+//?? static const char* CHILD_ABSTRACTION = "child_abstraction";
 
 /** The position model. */
-static const char* POSITION_MODEL = "position_model";
+//?? static const char* POSITION_MODEL = "position_model";
 
 /** The position abstraction. */
-static const char* POSITION_ABSTRACTION = "position_abstraction";
+//?? static const char* POSITION_ABSTRACTION = "position_abstraction";
 
 //
 // Source model.
@@ -79,7 +79,7 @@ static const char* POSITION_ABSTRACTION = "position_abstraction";
  * @param p0 the model
  * @param p1 the model name
  */
-static void initialize_source_model(void* p0, void* p1) {
+//?? static void initialize_source_model(void* p0, void* p1) {
 
 /*??
     log((void*) &INFO_LOG_LEVEL, "Initialize model: " + p1);
@@ -87,7 +87,7 @@ static void initialize_source_model(void* p0, void* p1) {
     void* s = parse_file(PATH + p1 + CYBOL);
     read_structure(p0, s);
 */
-}
+//?? }
 
 /**
  * Finalizes the source model.
@@ -97,8 +97,8 @@ static void initialize_source_model(void* p0, void* p1) {
  * @param p0 the model
  * @param p1 the model name
  */
-static void finalize_source_model(void* p0, void* p1) {
-}
+//?? static void finalize_source_model(void* p0, void* p1) {
+//?? }
 
 //
 // Model.
@@ -110,7 +110,7 @@ static void finalize_source_model(void* p0, void* p1) {
  * @param p0 the model
  * @param p1 the structure
  */
-static void read_structure(void* p0, void* p1) {
+//?? static void read_structure(void* p0, void* p1) {
 
 /*??
     org.apache.xerces.dom.DocumentImpl doc = (org.apache.xerces.dom.DocumentImpl) p1;
@@ -142,7 +142,7 @@ static void read_structure(void* p0, void* p1) {
         log((void*) &ERROR_LOG_LEVEL, "Could not read structure. The structure is null.");
     }
 */
-}
+//?? }
 
 /**
  * Writes the structure.
@@ -150,6 +150,7 @@ static void read_structure(void* p0, void* p1) {
  * @param p0 the model
  * @param p1 the structure
  */
+/*??
 static void write_structure(void* p0, void* p1) {
 }
 
@@ -163,6 +164,7 @@ static void write_structure(void* p0, void* p1) {
  * @param p0 the model
  * @param p1 the super model list
  */
+/*??
 static void initialize_super_model(void* p0, void* p1) {
 
 /*??
@@ -188,6 +190,7 @@ static void initialize_super_model(void* p0, void* p1) {
         log((void*) &WARNING_LOG_LEVEL, "Could not initialize super model. The super model list is null.");
     }
 */
+/*??
 }
 
 /**
@@ -196,6 +199,7 @@ static void initialize_super_model(void* p0, void* p1) {
  * @param p0 the model
  * @param p1 the super model list
  */
+/*??
 static void finalize_super_model(void* p0, void* p1) {
 }
 
@@ -209,6 +213,7 @@ static void finalize_super_model(void* p0, void* p1) {
  * @param p0 the model children
  * @param p1 the model children list
  */
+/*??
 static void initialize_children_models(void* p0, void* p1) {
 
 /*??
@@ -262,6 +267,7 @@ static void initialize_children_models(void* p0, void* p1) {
         log((void*) &ERROR_LOG_LEVEL, "Could not initialize children models. The model items list is null.");
     }
 */
+/*??
 }
 
 /**
@@ -270,6 +276,7 @@ static void initialize_children_models(void* p0, void* p1) {
  * @param p0 the children models
  * @param p1 the children models list
  */
+/*??
 static void finalize_items(void* p0, void* p1) {
 }
 
@@ -283,6 +290,7 @@ static void finalize_items(void* p0, void* p1) {
  * @param p0 the child model
  * @param p1 the child model node
  */
+/*??
 static void initialize_child_model(void* p0, void* p1) {
     
 /*??
@@ -307,6 +315,7 @@ static void initialize_child_model(void* p0, void* p1) {
         log((void*) &WARNING_LOG_LEVEL, "Could not initialize child model. The child model is null.");
     }
 */
+/*??
 }
 
 /**
@@ -315,6 +324,7 @@ static void initialize_child_model(void* p0, void* p1) {
  * @param p0 the child model
  * @param p1 the child model node
  */
+/*??
 static void finalize_child_model(void* p0, void* p1) {
 }
 
@@ -328,6 +338,7 @@ static void finalize_child_model(void* p0, void* p1) {
  * @param p0 the child attribute items
  * @param p1 the child attributes map
  */
+/*??
 static void initialize_child_attributes(void* p0, void* p1) {
 
 /*??
@@ -361,6 +372,7 @@ static void initialize_child_attributes(void* p0, void* p1) {
     a = read_child_attribute(p1, INTERACTION_ABSTRACTION);
     set_map_element(p0, INTERACTION_ABSTRACTION, a);
 */
+/*??
 }
 
 /**
@@ -369,6 +381,7 @@ static void initialize_child_attributes(void* p0, void* p1) {
  * @param p0 the child attribute items
  * @param p1 the child attributes map
  */
+/*??
 static void finalize_child_attributes(void* p0, void* p1) {
 }
 
@@ -383,6 +396,7 @@ static void finalize_child_attributes(void* p0, void* p1) {
  * @param p1 the child attribute name
  * @param p2 the child attribute
  */
+/*??
 static void read_child_attribute(void* p0, void* p1, void* p2) {
 
 /*??
@@ -407,6 +421,7 @@ static void read_child_attribute(void* p0, void* p1, void* p2) {
         log((void*) &WARNING_LOG_LEVEL, "Could not read child attribute. The child attributes map is null.");
     }
 */
+/*??
 }
 
 /**
@@ -416,6 +431,7 @@ static void read_child_attribute(void* p0, void* p1, void* p2) {
  * @param p1 the child attribute name
  * @param p2 the child attribute
  */
+/*??
 static void write_child_attribute(void* p0, void* p1, void* p2) {
 }
 

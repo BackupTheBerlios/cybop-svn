@@ -34,7 +34,7 @@
  * In the case of computer science, everything gets abstracted to 0 and 1.
  * But that also means that every abstraction has a bytecode representation.
  *
- * @version $Revision: 1.4 $ $Date: 2003-10-13 13:55:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-11-12 11:11:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct array {
@@ -43,13 +43,16 @@ struct array {
     void** internal_array;
 
     /**
-     * The array size.
+     * The size.
      * The sizeof operation can only be used for real arrays, expressed with [].
      * Since CYBOI allocates arrays dynamically and stores them as *,
      * the array size needs to be stored extra here because sizeof will not work.
      * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
      */
     int size;
+    
+    /** The elements count. */
+    int count;
 };
 
 /* ARRAY_SOURCE */

@@ -25,10 +25,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "log_handler.c"
-#include "map.c"
-#include "map_handler.c"
 #include "signal.c"
-#include "signal_handler.c"
+#include "signal_memory.c"
+#include "signal_memory_handler.c"
 #include "statics.c"
 
 //?? Temporary for character screen testing.
@@ -40,7 +39,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.22 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2003-11-12 11:11:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -73,13 +72,18 @@ static void wait(void* p0) {
     // Transporting signal.
     void* s = malloc(sizeof(struct signal));
 
+    // Priority.
+    void* p = 0;
+    
+    // Language.
+    void* l = 0;
+    
     // Run endless loop handling any signals.
     while (TRUE_VALUE) {
 
         if (*sf == 1) {
 
             // Receive signal.
-
             receive_signal(p0, s);
 
             // Handle signal.
@@ -169,7 +173,7 @@ int main(int p0, char** p1) {
 //??                synchronized (signal_memory) {
 
                     // Add signal to signal memory (interrupt vector table).
-                    add_map_element(signal_memory, (void*) SIGNAL, (void*) tmp);
+                    add_map_element(signal_memory, (void*) tmp, (void*) &NORMAL_PRIORITY, (void*) NEURO_LANGUAGE);
 //??                }
 
             } else {

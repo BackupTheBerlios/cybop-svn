@@ -36,7 +36,7 @@
  * http://home.arcor.de/cpp_kurs/cpp/le07/k2_09_d1.htm
  * ... or try a Google search.
  *
- * @version $Revision: 1.11 $ $Date: 2003-10-23 15:23:49 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-11-12 11:11:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

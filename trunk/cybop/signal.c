@@ -32,16 +32,10 @@
  *
  * Signals can be stored in a memory.
  * 
- * @version $Revision: 1.16 $ $Date: 2003-10-13 13:55:21 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2003-11-12 11:11:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct signal {
-
-    /** The priority. */
-    void* priority;
-
-    /** The language. */
-    void* language;
 
     /** The subject. */
     void* subject;

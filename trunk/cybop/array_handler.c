@@ -26,7 +26,6 @@
 #define ARRAY_HANDLER_SOURCE
 
 #include "array.c"
-#include "dynamics_handler.c"
 #include "internal_array_handler.c"
 #include "log_handler.c"
 
@@ -35,7 +34,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.23 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2003-11-12 11:11:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,6 +60,7 @@ static void initialize_array(void* p0) {
         // There is no NULL array.
         // See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
         a->size = 0;
+        a->count = 0;
         a->internal_array = malloc(a->size);
 
     } else {
@@ -83,6 +83,7 @@ static void finalize_array(void* p0) {
         log((void*) &INFO_LOG_LEVEL, "Finalize array.");
 
         free(a->internal_array);
+        a->count = -1;
         a->size = -1;
         
     } else {
@@ -99,19 +100,42 @@ static void finalize_array(void* p0) {
  */
 static void* get_array_size(void* p0) {
 
-    int* s = 0;
+    void* s = 0;
     struct array* a = (struct array*) p0;
 
     if (a != 0) {
 
-        s = &(a->size);
+        s = (void*) &(a->size);
 
     } else {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not get array size. The array is null.");
     }
     
-    return (void*) s;
+    return s;
+}
+
+/**
+ * Returns the array count.
+ *
+ * @param p0 the array
+ * @return the array count
+ */
+static void* get_array_count(void* p0) {
+
+    void* c = 0;
+    struct array* a = (struct array*) p0;
+
+    if (a != 0) {
+
+        c = (void*) &(a->count);
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not get array count. The array is null.");
+    }
+    
+    return c;
 }
 
 //
@@ -134,10 +158,10 @@ static void set_array_element(void* p0, void* p1, void* p2) {
         int* i = (int*) p1;
         int size = a->size;
         
-        // If the array length is exceeded, create a new array with extended length
-        // so that the index matches.
-        // If the initial size is zero and multiplied by two, the result is still zero.
-        // Therefore, an integer summand of 1 is added here.
+        // If the array length is exceeded, create a new array with extended
+        // (doubled) length so that the index matches.
+        // If the initial size is zero and multiplied by two, the result is
+        // still zero. Therefore, an integer summand of 1 is added here.
         while (*i >= size) {
 
             size = 2 * size + 1;
@@ -153,6 +177,7 @@ static void set_array_element(void* p0, void* p1, void* p2) {
         }
 
         set_internal_array_element(a->internal_array, p1, p2);
+        a->count = a->count + 1;
 
     } else {
 
@@ -173,6 +198,7 @@ static void remove_array_element(void* p0, void* p1) {
     if (a != 0) {
 
         remove_internal_array_element(a->internal_array, p1, (void*) &(a->size));
+        a->count = a->count - 1;
 
     } else {
 

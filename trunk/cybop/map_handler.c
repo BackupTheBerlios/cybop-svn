@@ -34,7 +34,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.23 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2003-11-12 11:11:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,6 +64,7 @@ static void initialize_map(void* p0) {
 
         m->names = malloc(sizeof(struct array));
         initialize_array(m->names);
+
         m->references = malloc(sizeof(struct array));
         initialize_array(m->references);
 
@@ -88,6 +89,7 @@ static void finalize_map(void* p0) {
 
         finalize_array(m->references);
         free(m->references);
+
         finalize_array(m->names);
         free(m->names);
         
@@ -127,7 +129,7 @@ static void* get_map_size(void* p0) {
 /**
  * Returns the map element index.
  *
- * @param p0 the name array
+ * @param p0 the names array
  * @param p1 the name
  * @return the index
  */
@@ -135,31 +137,20 @@ static int get_map_element_index(void* p0, void* p1) {
 
     int index = -1;
     int i = 0;
-    int* size = (int*) get_array_size(p0);
+    int* count = (int*) get_array_count(p0);
     void* name = 0;
 
-    while (i < *size) {
+    while (i < *count) {
 
         name = get_array_element(p0, (void*) &i);
 
-        // If a 0 name is reached, then the name was not found.
-        // In this case, reset index to 0 pointer.
-        if (name == 0) {
+        // If a name equal to the searched one is found,
+        // then its index is the one to be returned.
+        if (strcmp((char*) name, (char*) p1) == 0) {
 
-            index = -1;
+            index = i;
 
             break;
-        
-        } else {
-
-            // If a name equal to the searched one is found,
-            // then its index is the one to be returned.
-            if (strcmp((char*) name, (char*) p1) == 0) {
-
-                index = i;
-
-                break;
-            }
         }
 
         i++;
@@ -178,7 +169,7 @@ static int get_map_element_index(void* p0, void* p1) {
  * If neither an element matches nor a 0 element is reached, then the
  * map is full and its size will be returned as next available index.
  *
- * @param p0 the name array
+ * @param p0 the names array
  * @param p1 the name
  * @return the next index
  */
@@ -186,42 +177,30 @@ static int get_next_map_element_index(void* p0, void* p1) {
 
     int index = -1;
     int i = 0;
-    int* size = (int*) get_array_size(p0);
+    int* count = (int*) get_array_count(p0);
     void* name = 0;
 
-    while (i < *size) {
+    while (i < *count) {
 
         name = get_array_element(p0, (void*) &i);
 
-        // If a 0 name is reached, then the name was not found.
-        // In this case, the current value of i is the next free index.
-        if (name == 0) {
+        // If a name equal to the searched one is found,
+        // then its index is the one to be returned
+        // since this element will have to be replaced.
+        if (strcmp((char*) name, (char*) p1) == 0) {
 
             index = i;
 
             break;
-
-        } else {
-
-            // If a name equal to the searched one is found,
-            // then its index is the one to be returned since
-            // this element will have to be replaced.
-            if (strcmp((char*) name, (char*) p1) == 0) {
-
-                index = i;
-
-                break;
-            }
         }
 
         i++;
     }
     
-    // Neither element matched, nor was a 0 element found.
-    // The map is full and such its size will be the next index to be used.
+    // Neither element matched. The next index will be the current element count.
     if (index == -1) {
 
-        index = *size;
+        index = *count;
     }
 
     return index;
@@ -230,18 +209,18 @@ static int get_next_map_element_index(void* p0, void* p1) {
 /**
  * Returns the number of map elements whose name starts with the given base name.
  *
- * @param p0 the name array
+ * @param p0 the names array
  * @param p1 the base name
  * @return the number of map elements whose name starts with the given base name
  */
 static int get_map_element_count(void* p0, void* p1) {
 
-    int count = 0;
+    int name_count = 0;
     int i = 0;
-    int* size = (int*) get_array_size(p0);
+    int* count = (int*) get_array_count(p0);
     void* name = 0;
 
-    while (i < *size) {
+    while (i < *count) {
 
         name = get_array_element(p0, (void*) &i);
 
@@ -258,9 +237,9 @@ static int get_map_element_count(void* p0, void* p1) {
 
                     int number = atoi(suffix + 1);
 
-                    if (number > count) {
+                    if (number > name_count) {
                         
-                        count = number;
+                        name_count = number;
                     }
                 }
             }
@@ -274,7 +253,7 @@ static int get_map_element_count(void* p0, void* p1) {
         i++;
     }
 
-    return count;
+    return name_count;
 }
 
 /**
@@ -285,7 +264,7 @@ static int get_map_element_count(void* p0, void* p1) {
  * It is determined by the current number of names containing the given
  * word base and finally increasing the highest index by one.
  *
- * @param p0 the name array
+ * @param p0 the names array
  * @param p1 the base name
  * @param p2 the extended name
  */

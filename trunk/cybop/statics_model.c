@@ -1,5 +1,5 @@
 /*
- * $RCSfile: model.c,v $
+ * $RCSfile: statics_model.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -35,7 +35,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.3 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-11-12 11:11:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct model {

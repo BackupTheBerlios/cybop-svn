@@ -22,27 +22,14 @@
  * - Cybernetics Oriented Programming -
  */
 
-#include "boolean.c"
+#include "add.c"
 
 /**
- * This is the boolean handler.
+ * This is the add handler.
  *
- * @version $Revision: 1.1 $ $Date: 2003-10-23 15:23:49 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-11-12 11:11:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-
-//
-// Constants.
-//
-
-/** The true boolean value. */
-static const char* TRUE_VALUE = "true";
-
-/** The false boolean value. */
-static const char* FALSE_VALUE = "false";
-
-/** The default boolean value. */
-static const char* DEFAULT_BOOLEAN_VALUE = "false";
 
 //
 // Boolean model.
@@ -54,6 +41,7 @@ static const char* DEFAULT_BOOLEAN_VALUE = "false";
  * @param p0 the boolean model
  * @param p1 the model source
  */
+/*??
 static void initialize_boolean_model(void* p0, void* p1) {
 
     struct boolean* m = (struct boolean*) p0;
@@ -84,6 +72,7 @@ static void initialize_boolean_model(void* p0, void* p1) {
  * @param p0 the boolean model
  * @param p1 the model source
  */
+/*??
 static void finalize_boolean_model(void* p0, void* p1) {
 
     struct boolean* m = (struct boolean*) p0;
@@ -106,4 +95,5 @@ static void finalize_boolean_model(void* p0, void* p1) {
         log((void*) &ERROR_LOG_LEVEL, "Could not finalize boolean model. The boolean model is null.");
     }
 }
+*/
 

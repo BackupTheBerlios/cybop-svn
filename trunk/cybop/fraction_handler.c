@@ -27,7 +27,7 @@
 /**
  * This is the fraction handler.
  *
- * @version $Revision: 1.3 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-11-12 11:11:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

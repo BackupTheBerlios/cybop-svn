@@ -30,8 +30,8 @@
  *
  * It calculates the sum of two summands.
  *
- * @param p0 the operand (model)
- * @version $Revision: 1.1 $ $Date: 2003-10-23 15:23:49 $ $Author: christian $
+ * @param p0 the operands
+ * @version $Revision: 1.2 $ $Date: 2003-11-12 11:11:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 void add(void* p0) {
@@ -42,20 +42,33 @@ void add(void* p0) {
         
         void* summand_1 = get_map_element_with_name(m->children, "summand_1");
         void* summand_2 = get_map_element_with_name(m->children, "summand_2");
+        void* sum = get_map_element_with_name(m->children, "sum");
 
-        if (summand_1 != null) {
+        if (summand_1 != 0) {
             
-            int* summand_1_value = (int*) summand_1->value;
+            int summand_1_value = summand_1->value;
             
-            if (summand_2 != null) {
+            if (summand_2 != 0) {
+
+                int summand_2_value = summand_2->value;
+
+                if (sum != 0) {
+                        
+                    sum->value = summand_1_value + summand_2_value;
         
-                int* summand_2_value = (int*) summand_2->value;
-
-                int sum = *summand_1_value + *summand_2_value;
-
-                //?? Caution! Does not work with sum as locally defined variable!
-                set_map_element_with_name(m->children, "sum", (void*) &sum);
+                } else {
+                    
+                    log((void*) &ERROR_LOG_LEVEL, "Could not execute add operation. The sum is null.");
+                }
+    
+            } else {
+                
+                log((void*) &ERROR_LOG_LEVEL, "Could not execute add operation. The summand 2 is null.");
             }
+    
+        } else {
+            
+            log((void*) &ERROR_LOG_LEVEL, "Could not execute add operation. The summand 1 is null.");
         }
         
     } else {

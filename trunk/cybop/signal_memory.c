@@ -1,5 +1,5 @@
 /*
- * $RCSfile: fraction.c,v $
+ * $RCSfile: signal_memory.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,34 +22,32 @@
  * - Cybernetics Oriented Programming -
  */
 
-#ifndef FRACTION_SOURCE
-#define FRACTION_SOURCE
-
-#include "integer.c"
+#ifndef SIGNAL_MEMORY_SOURCE
+#define SIGNAL_MEMORY_SOURCE
 
 /**
- * This is a fraction.
+ * This is a signal memory.
  *
- * It consists of two integer numbers, a numerator and a denominator.
+ * It is capable of storing signals.
+ * For each signal, the following meta information is stored:
+ * - priority
+ * - language
  *
- * @version $Revision: 1.5 $ $Date: 2003-11-12 11:11:25 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-11-12 11:11:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-struct fraction {
+struct signal_memory {
 
-    //?? Temporarily, a double (float) is used here to let the
-    //?? Algorithmic Logic Unit (ALU) calculate everything.
-    
-    /** The value. */
-    double value;
-    
-    /** The numerator. */
-//??    struct integer numerator;
-    
-    /** The denominator. */
-//??    struct integer denominator;
+    /** The signals. */
+    void* signals;
+
+    /** The priorities. */
+    void* priorities;
+
+    /** The languages. */
+    void* languages;
 };
 
-/* FRACTION_SOURCE */
+/* SIGNAL_MEMORY_SOURCE */
 #endif
 

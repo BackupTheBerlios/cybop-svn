@@ -1,5 +1,5 @@
 /*
- * $RCSfile: signal_handler.c,v $
+ * $RCSfile: signal_memory_handler.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,39 +22,37 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef SIGNAL_MEMORY_HANDLER_SOURCE
+#define SIGNAL_MEMORY_HANDLER_SOURCE
+
 #include <string.h>
+#include "array_handler.c"
+#include "map.c"
 #include "map_handler.c"
-#include "model_handler.c"
 #include "signal.c"
-#include "statics_handler.c"
+#include "statics_model_handler.c"
 #include "vector.c"
 
 /**
- * This is a signal handler.
+ * This is the signal memory handler.
  *
- * It offers signal processing procedures which should be called in the following order:
+ * It offers signal processing procedures which should be called in the
+ * following order:
  * - receive
  * - handle
  * - send
  * - reset
  *
- * @version $Revision: 1.24 $ $Date: 2003-10-23 14:27:06 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-11-12 11:11:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-
-//
-// Constants.
-//
-
-/** The signal. */
-static const char* SIGNAL = "signal";
 
 //
 // Priorities.
 //
 
 /** The normal priority. */
-static const int NORMAL_PRIORITY = 1;
+static const int NORMAL_PRIORITY = 0;
 
 //
 // Languages.
@@ -104,8 +102,227 @@ static void* statics;
 static void* dynamics;
 
 //
+// Signal memory.
+//
+
+/**
+ * Creates the signal memory.
+ *
+ * @param p0 the signal memory
+ */
+static void create_signal_memory(void* p0) {
+
+    struct signal_memory* m = (struct signal_memory*) p0;
+    
+    if (m != 0) {
+        
+        log((void*) &INFO_LOG_LEVEL, "Create signal memory.");
+
+        m->signals = malloc(sizeof(struct array));
+        initialize_array(m->signals);
+
+        m->priorities = malloc(sizeof(struct array));
+        initialize_array(m->priorities);
+        
+        m->languages = malloc(sizeof(struct array));
+        initialize_array(m->languages);
+
+    } else {
+        
+        log((void*) &ERROR_LOG_LEVEL, "Could not create signal memory. The signal memory is null.");
+    }
+}
+
+/**
+ * Destroys the signal memory.
+ *
+ * @param p0 the signal memory
+ */
+static void destroy_signal_memory(void* p0) {
+
+    struct signal_memory* m = (struct signal_memory*) p0;
+    
+    if (m != 0) {
+        
+        log((void*) &INFO_LOG_LEVEL, "Destroy signal memory.");
+
+        finalize_array(m->languages);
+        free(m->languages);
+
+        finalize_array(m->priorities);
+        free(m->priorities);
+
+        finalize_array(m->signals);
+        free(m->signals);
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not destroy signal memory. The signal memory is null.");
+    }
+}
+
+//
 // Signal.
 //
+
+/**
+ * Sets the signal.
+ *
+ * @param p0 the signal memory
+ * @param p1 the index
+ * @param p2 the signal
+ * @param p3 the priority
+ * @param p4 the language
+ */
+static void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    struct signal_memory* m = (struct signal_memory*) p0;
+    
+    if (m != 0) {
+        
+        set_array_element(m->signals, p1, p2);
+        set_array_element(m->priorities, p1, p3);
+        set_array_element(m->languages, p1, p4);
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not set signal. The signal memory is null.");
+    }
+}
+
+/**
+ * Adds the signal.
+ *
+ * @param p0 the signal memory
+ * @param p1 the signal
+ * @param p2 the priority
+ * @param p3 the language
+ */
+static void add_signal(void* p0, void* p1, void* p2, void* p3) {
+
+    struct signal_memory* m = (struct signal_memory*) p0;
+
+    if (m != 0) {
+
+        int i = get_array_count(m->signals);
+        set_signal(p0, (void*) &i, p1, p2, p3);
+        
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not add signal. The signal memory is null.");
+    }
+}
+
+/**
+ * Removes the signal.
+ *
+ * @param p0 the signal memory
+ * @param p1 the index
+ */
+static void remove_signal(void* p0, void* p1) {
+
+    struct signal_memory* m = (struct signal_memory*) p0;
+    
+    if (m != 0) {
+
+        remove_array_element(m->signals, p1);
+        remove_array_element(m->priorities, p1);
+        remove_array_element(m->languages, p1);
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not remove signal. The signal memory is null.");
+    }
+}
+
+/**
+ * Returns the signal.
+ *
+ * @param p0 the signal memory
+ * @param p1 the index
+ * @return the signal
+ */
+static void* get_signal(void* p0, void* p1) {
+
+    void* s = 0;
+    struct signal_memory* m = (struct signal_memory*) p0;
+
+    if (m != 0) {
+
+        s = get_array_element(m->signals, p1);
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not get signal. The signal memory is null.");
+    }
+    
+    return s;
+}
+
+/**
+ * Returns the index of the signal with highest priority.
+ *
+ * @param p0 the signal memory
+ */
+static int get_highest_priority_index(void* p0) {
+    
+    int index = -1;
+    struct signal_memory* m = (struct signal_memory*) p0;
+
+    if (m != 0) {
+
+        int i = 0;
+        int* count = (int*) get_array_count(m->priorities);
+        int* p = 0;
+        int h = 0;
+    
+        while (i < *count) {
+    
+            p = (int*) get_array_element(m->priorities, (void*) &i);
+    
+            // If a name equal to the searched one is found,
+            // then its index is the one to be returned
+            // since this element will have to be replaced.
+            if (*p > h) {
+    
+                index = i;
+                h = *p;
+            }
+    
+            i++;
+        }
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not get signal. The signal memory is null.");
+    }
+    
+    return index;
+}
+
+/**
+ * Returns the language.
+ *
+ * @param p0 the signal memory
+ * @param p1 the index
+ * @return the language
+ */
+static void* get_language(void* p0, void* p1) {
+
+    void* l = 0;
+    struct signal_memory* m = (struct signal_memory*) p0;
+
+    if (m != 0) {
+
+        l = get_array_element(m->languages, p1);
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not get language. The signal memory is null.");
+    }
+    
+    return l;
+}
 
 /**
  * Resets the signal.
@@ -118,8 +335,6 @@ static void reset_signal(void* p0) {
     
     if (s != 0) {
 
-        s->priority = 0;
-        s->language = 0;
         s->subject = 0;
         s->predicate = 0;
         s->owner = 0;
@@ -137,14 +352,14 @@ static void reset_signal(void* p0) {
 /**
  * Sends the signal.
  *
- * If a signal's action is 0, it will get destroyed.
- * Otherwise, the signal will be stored in the signal memory for further
- * handling.
+ * The signal will be stored in the signal memory for further handling.
  *
  * @param p0 the signal memory
  * @param p1 the signal
+ * @param p2 the priority
+ * @param p3 the language
  */
-static void send_signal(void* p0, void* p1) {
+static void send_signal(void* p0, void* p1, void* p2, void* p3) {
 
     struct signal* s = (struct signal*) p1;
     
@@ -163,9 +378,7 @@ static void send_signal(void* p0, void* p1) {
                 log((void*) &INFO_LOG_LEVEL, "Send signal:");
                 log((void*) &INFO_LOG_LEVEL, s->predicate);
 
-                // Copy transporting signal given as parameter to the signal memory signal.
-                tmp->priority = s->priority;
-                tmp->language = s->language;
+                // Copy transporting signal given as parameter to the signal.
                 tmp->subject = s->subject;
                 tmp->predicate = s->predicate;
                 tmp->owner = s->owner;
@@ -182,12 +395,12 @@ static void send_signal(void* p0, void* p1) {
 //??                synchronized (p0) {
 
                     // Add signal to signal memory (interrupt vector table).
-                    add_map_element(p0, (void*) SIGNAL, (void*) tmp);
+                    add_signal(p0, (void*) tmp, p2, p3);
 //??                }
 
             } else {
     
-                log((void*) &ERROR_LOG_LEVEL, "Could not send signal. The signal memory signal is null.");
+                log((void*) &ERROR_LOG_LEVEL, "Could not send signal. The signal is null.");
             }
 
         } else {
@@ -211,7 +424,7 @@ static void send_signal(void* p0, void* p1) {
  *
  * This method:
  * - gets the top priority signal from the signal memory and removes it from there
- * - copies that signal memory signal to the transporting signal handed over as parameter
+ * - copies that signal to the transporting signal handed over as parameter
  *
  * The idea is that one day, signals (interrupts) might be read from the
  * interrupt vector table.
@@ -226,21 +439,18 @@ static void receive_signal(void* p0, void* p1) {
     struct signal* s = (struct signal*) p1;
     
     if (s != 0) {
-
-        // Read and remove signal from signal memory (interrupt vector table).
-        int i = 0;
-        struct signal* tmp = get_map_element_at_index(p0, (void*) &i);
-
-        remove_map_element_at_index(p0, (void*) &i);
+        
+        int index = get_highest_priority_index(p0);
+        char* language = (char*) get_language(p0, (void*) &index);
+        struct signal* tmp = get_signal(p0, (void*) &index);
+        remove_signal(p0, (void*) &index);
 
         if (tmp != 0) {
         
             log((void*) &INFO_LOG_LEVEL, "Receive signal:");
             log((void*) &INFO_LOG_LEVEL, tmp->predicate);
 
-            // Copy signal memory signal to the transporting signal given as parameter.
-            s->priority = tmp->priority;
-            s->language = tmp->language;
+            // Copy signal to the transporting signal given as parameter.
             s->subject = tmp->subject;
             s->predicate = tmp->predicate;
             s->owner = tmp->owner;
@@ -249,7 +459,7 @@ static void receive_signal(void* p0, void* p1) {
             s->adverbial = tmp->adverbial;
             s->condition = tmp->condition;
 
-            // Destroy signal memory signal.
+            // Destroy signal.
             free(tmp);
     
         } else {
@@ -277,8 +487,6 @@ static void handle_signal(void* p0, void* p1, void* p2) {
     int* sf = (int*) p2;
 
     if (s != 0) {
-
-//??        create_instance(statics, s->object, &COMPLEX_MODEL);
 
         char* a = (char*) s->predicate;
 
@@ -406,4 +614,7 @@ static void handle_signal(void* p0, void* p1, void* p2) {
         log((void*) &ERROR_LOG_LEVEL, "Could not handle signal. The signal is null.");
     }
 }
+
+/* SIGNAL_MEMORY_HANDLER_SOURCE */
+#endif
 

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: model_handler.c,v $
+ * $RCSfile: statics_model_handler.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -25,11 +25,27 @@
 #ifndef MODEL_HANDLER_SOURCE
 #define MODEL_HANDLER_SOURCE
 
+// General.
 #include <string.h>
-#include "model.c"
+#include "dynamics.c"
+#include "log_handler.c"
 #include "map.c"
 #include "map_handler.c"
+#include "model.c"
+#include "statics.c"
 #include "xml_handler.c"
+
+// Statics.
+#include "boolean_handler.c"
+#include "complex_handler.c"
+#include "fraction_handler.c"
+#include "integer_handler.c"
+#include "string_handler.c"
+#include "time_handler.c"
+#include "vector_handler.c"
+
+// Dynamics.
+#include "add_handler.c"
 
 /**
  * This is the model handler.
@@ -38,16 +54,16 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.6 $ $Date: 2003-10-23 15:23:49 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-11-12 11:11:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 //
 // Forward declaration.
 //
-// These two functions are the only forward declarations. They are needed
+// These functions are the only forward declarations. They are needed
 // because models can recursively create/ destroy child models using
-// functions which are defined in statics_handler.
+// functions which are defined in statics_handler and dynamics_handler.
 //
 
 /**
@@ -69,21 +85,21 @@ static void* create_statics_model(void* p0, void* p1);
 static void destroy_statics_model(void* p0, void* p1, void* p2);
 
 //
-// Statics model containers.
+// Model containers.
 //
 
 /**
- * Creates the statics model containers.
+ * Creates the model containers.
  *
- * @param p0 the statics model
+ * @param p0 the model
  */
-static void create_statics_model_containers(void* p0) {
+static void create_model_containers(void* p0) {
 
     struct model* m = (struct model*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Create statics model containers.");
+        log((void*) &INFO_LOG_LEVEL, "Create model containers.");
 
         m->children = malloc(sizeof(struct map));
         initialize_map(m->children);
@@ -93,22 +109,22 @@ static void create_statics_model_containers(void* p0) {
         
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not create statics model containers. The statics model is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not create model containers. The model is null.");
     }
 }
 
 /**
- * Destroys the statics model containers.
+ * Destroys the model containers.
  *
- * @param p0 the statics model
+ * @param p0 the model
  */
-static void destroy_statics_model_containers(void* p0) {
+static void destroy_model_containers(void* p0) {
 
     struct model* m = (struct model*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Destroy statics model containers.");
+        log((void*) &INFO_LOG_LEVEL, "Destroy model containers.");
 
         finalize_map(m->positions);
         free(m->positions);
@@ -118,7 +134,7 @@ static void destroy_statics_model_containers(void* p0) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not destroy statics model containers. The statics model is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not destroy model containers. The model is null.");
     }
 }
 
@@ -129,7 +145,7 @@ static void destroy_statics_model_containers(void* p0) {
 /**
  * Initializes the child.
  *
- * @param p0 the statics model
+ * @param p0 the model
  * @param p1 the CYBOL model source child attributes
  */
 static void initialize_child(void* p0, void* p1) {
@@ -146,25 +162,25 @@ static void initialize_child(void* p0, void* p1) {
         // Child.
         model = get_map_element_with_name(p1, (void*) CHILD_MODEL);
         abstraction = get_map_element_with_name(p1, (void*) CHILD_ABSTRACTION);
-        o = create_statics_model(model, abstraction);
+        o = create_model(model, abstraction);
         set_map_element_with_name(m->children, name, o);
 
         // Position.
         model = get_map_element_with_name(p1, (void*) POSITION_MODEL);
         abstraction = get_map_element_with_name(p1, (void*) POSITION_ABSTRACTION);
-        o = create_statics_model(model, abstraction);
+        o = create_model(model, abstraction);
         set_map_element_with_name(m->positions, name, o);
 
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize child. The statics model is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not initialize child. The model is null.");
     }
 }
 
 /**
  * Finalizes the child.
  *
- * @param p0 the statics model
+ * @param p0 the model
  * @param p1 the CYBOL model source child attributes
  */
 static void finalize_child(void* p0, void* p1) {
@@ -182,19 +198,19 @@ static void finalize_child(void* p0, void* p1) {
         // Child.
         model = get_map_element_with_name(p1, (void*) CHILD_MODEL);
         abstraction = get_map_element_with_name(p1, (void*) CHILD_ABSTRACTION);
-        o = destroy_statics_model(model, abstraction);
+        o = destroy_model(model, abstraction);
         o = get_map_element_with_name(m->children, name);
 
         // Position.
         model = get_map_element_with_name(p1, (void*) POSITION_MODEL);
         abstraction = get_map_element_with_name(p1, (void*) POSITION_ABSTRACTION);
-        o = destroy_statics_model(model, abstraction);
+        o = destroy_model(model, abstraction);
         set_map_element_with_name(m->positions, name, o);
 */
 
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize child. The statics model is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not finalize child. The model is null.");
     }
 }
 
@@ -205,7 +221,7 @@ static void finalize_child(void* p0, void* p1) {
 /**
  * Initializes the children.
  *
- * @param p0 the statics model
+ * @param p0 the model
  * @param p1 the CYBOL model source children
  */
 static void initialize_children(void* p0, void* p1) {
@@ -235,7 +251,7 @@ static void initialize_children(void* p0, void* p1) {
 /**
  * Finalizes the children.
  *
- * @param p0 the statics model
+ * @param p0 the model
  * @param p1 the CYBOL model source children
  */
 static void finalize_children(void* p0, void* p1) {
@@ -263,88 +279,214 @@ static void finalize_children(void* p0, void* p1) {
 }
 
 //
-// Statics model.
+// Model.
 //
 
 /**
- * Initializes the statics model from a CYBOL model source.
+ * Initializes the model from a CYBOL model source.
  *
- * @param p0 the statics model
+ * @param p0 the model
  * @param p1 the model source
  */
-static void initialize_statics_model(void* p0, void* p1) {
+static void initialize_model(void* p0, void* p1) {
 
     struct model* m = (struct model*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Initialize statics model.");
+        log((void*) &INFO_LOG_LEVEL, "Initialize model.");
 
         // Create temporary source model.
         struct model* src = (struct model*) malloc(sizeof(struct model));
-        create_statics_model_containers((void*) src);
+        create_model_containers((void*) src);
 
         // Read source model from CYBOL file.
         initialize_source_model((void*) src, p1);
     
-        // Initialize statics model elements with source model.
+        // Initialize model elements with source model.
         if (src != 0) {
     
             initialize_children(p0, src->children);
             
         } else {
             
-            log((void*) &ERROR_LOG_LEVEL, "Could not initialize statics model. The source model is null.");
+            log((void*) &ERROR_LOG_LEVEL, "Could not initialize model. The source model is null.");
         }
     
         // Destroy temporary source model.
-        destroy_statics_model_containers((void*) src);
+        destroy_model_containers((void*) src);
         free((void*) src);
     
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize statics model. The statics model is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not initialize model. The model is null.");
     }
 }
 
 /**
- * Finalizes the statics model from a CYBOL model source.
+ * Finalizes the model from a CYBOL model source.
  *
- * @param p0 the statics model
+ * @param p0 the model
  * @param p1 the model source
  */
-static void finalize_statics_model(void* p0, void* p1) {
+static void finalize_model(void* p0, void* p1) {
 
     struct model* m = (struct model*) p0;
     
     if (m != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Finalize statics model.");
+        log((void*) &INFO_LOG_LEVEL, "Finalize model.");
 
         // Create temporary source model.
         struct model* src = (struct model*) malloc(sizeof(struct model));
-        create_statics_model_containers((void*) src);
+        create_model_containers((void*) src);
 
-        // Finalize statics model elements with source model.
+        // Finalize model elements with source model.
         if (src != 0) {
             
             finalize_children(p0, src->children);
             
         } else {
             
-            log((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The source model is null.");
+            log((void*) &ERROR_LOG_LEVEL, "Could not finalize model. The source model is null.");
         }
     
         // Write source model to CYBOL file.
         finalize_source_model((void*) src, p1);
     
         // Destroy temporary source model.
-        destroy_statics_model_containers((void*) src);
+        destroy_model_containers((void*) src);
         free((void*) src);
     
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The statics model is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not finalize model. The model is null.");
+    }
+}
+
+/**
+ * Creates a model.
+ *
+ * @param p0 the model source
+ * @param p1 the abstraction
+ * @return the model
+ */
+static void* create_model(void* p0, void* p1) {
+
+    void* m = 0;
+    
+    if (p0 != 0) {
+        
+        if (strcmp((char*) p0, "") != 0) {
+            
+            log((void*) &INFO_LOG_LEVEL, "Create model: ");
+            log((void*) &INFO_LOG_LEVEL, p0);
+
+            if (strcmp(p1, COMPLEX_MODEL) == 0) {
+        
+                m = malloc(sizeof(struct model));
+                create_model_containers(m);
+                initialize_model(m, p0);
+        
+            } else if (strcmp(p1, TIME_PRIMITIVE) == 0) {
+        
+                m = malloc(sizeof(struct time));
+                initialize_time_model(m, p0);
+                
+            } else if (strcmp(p1, STRING_PRIMITIVE) == 0) {
+        
+                m = malloc(sizeof(struct string));
+                initialize_string_model(m, p0);
+        
+            } else if (strcmp(p1, VECTOR_PRIMITIVE) == 0) {
+        
+                m = malloc(sizeof(struct vector));
+                initialize_vector_model(m, p0);
+        
+            } else if (strcmp(p1, COMPLEX_PRIMITIVE) == 0) {
+        
+                m = malloc(sizeof(struct complex));
+                initialize_complex_model(m, p0);
+        
+            } else if (strcmp(p1, FRACTION_PRIMITIVE) == 0) {
+        
+                m = malloc(sizeof(struct fraction));
+                initialize_fraction_model(m, p0);
+        
+            } else if (strcmp(p1, INTEGER_PRIMITIVE) == 0) {
+        
+                m = malloc(sizeof(struct integer));
+                initialize_integer_model(m, p0);
+        
+            } else if (strcmp(p1, BOOLEAN_PRIMITIVE) == 0) {
+        
+                m = malloc(sizeof(struct boolean));
+                initialize_boolean_model(m, p0);
+            }
+        }
+    }
+        
+    return m;
+}
+
+/**
+ * Destroys the model.
+ *
+ * @param p0 the model
+ * @param p1 the model source
+ * @param p2 the abstraction
+ */
+static void destroy_model(void* p0, void* p1, void* p2) {
+
+    if (p0 != 0) {
+        
+        if (p1 != 0) {
+            
+            log((void*) &INFO_LOG_LEVEL, "Destroy model: ");
+            log((void*) &INFO_LOG_LEVEL, p1);
+        
+            if (strcmp(p2, COMPLEX_MODEL) == 0) {
+        
+                finalize_model(p0, p1);
+                destroy_model_containers(p0);
+                free(p0);
+
+            } else if (strcmp(p2, TIME_PRIMITIVE) == 0) {
+        
+                finalize_time_model(p0, p1);
+                free(p0);
+                
+            } else if (strcmp(p2, STRING_PRIMITIVE) == 0) {
+        
+                finalize_string_model(p0, p1);
+                free(p0);
+        
+            } else if (strcmp(p2, VECTOR_PRIMITIVE) == 0) {
+        
+                finalize_vector_model(p0, p1);
+                free(p0);
+        
+            } else if (strcmp(p2, COMPLEX_PRIMITIVE) == 0) {
+        
+                finalize_complex_model(p0, p1);
+                free(p0);
+        
+            } else if (strcmp(p2, FRACTION_PRIMITIVE) == 0) {
+        
+                finalize_fraction_model(p0, p1);
+                free(p0);
+        
+            } else if (strcmp(p2, INTEGER_PRIMITIVE) == 0) {
+        
+                finalize_integer_model(p0, p1);
+                free(p0);
+        
+            } else if (strcmp(p2, BOOLEAN_PRIMITIVE) == 0) {
+        
+                finalize_boolean_model(p0, p1);
+                free(p0);
+            }
+        }
     }
 }
 
@@ -422,7 +564,7 @@ static void* get_remaining_name(void* p0) {
 }
 
 //
-// Statics model element.
+// Model element.
 //
 
 /**
@@ -542,6 +684,122 @@ static void* get_model_element(void* p0, void* p1) {
     }
     
     return e;
+}
+
+//
+// Signal handling.
+//
+
+/**
+ * Handles the mouse clicked action.
+ *
+ * @param p0 the screen item
+ * @param p1 the x coordinate
+ * @param p2 the y coordinate
+ * @param p3 the z coordinate
+ * @param p4 the action
+ */
+static void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p0 != 0) {
+
+/*??
+        // Determine the action of the clicked child screen item.
+        int count = 0;
+        int size = get_map_size(p0->items);
+        void* child = 0;
+        struct vector* position = 0;
+        struct vector* expansion = 0;
+        int x = -1;
+        int y = -1;
+        int z = -1;
+        int width = -1;
+        int height = -1;
+        int depth = -1;
+        int contains = 0;
+        void* action = 0;
+        
+        while (count < size) {
+
+            // Determine child, its position and expansion within the given screen item.
+            child = get_map_element(p0->items, count);
+            position = (vector*) get_map_element(p0->positions, count);
+            
+            if (child instanceof item) {
+                    
+                expansion = (vector) get_item_element(child, "expansion");
+                
+                if (position != 0) {
+                        
+                    // Translate the given coordinates according to the child's position.
+                    x = p1 - position->x;
+                    y = p2 - position->y;
+                    z = p3 - position->z;
+
+                    if (expansion != 0) {
+
+                        // Determine child's expansion.
+                        width = expansion->x;
+                        height = expansion->y;
+                        depth = expansion->z;
+        
+                        // Check if the given coordinates are in the child's screen area.
+                        // The "if" conditions had to be inserted because in classical
+                        // graphical user interfaces, the depth is normally 0 and
+                        // such the boolean comparison would deliver "false".
+                        // Using the conditions, the coordinates that are set to "0"
+                        // are not considered for comparison.
+                        contains = (x >= 0);
+                        contains = contains && (x < width);
+                        contains = contains && (y >= 0);
+                        contains = contains && (y < height);
+                        contains = contains && (z >= 0);
+                        contains = contains && (z < depth);
+        
+                        if (contains == 1) {
+        
+                            // The given coordinates are in the child's screen area.
+                            // Therefore, use the child's action.
+                            action = mouse_clicked_action(child, x, y, z, p4);
+                
+                            break;
+                        }
+
+                    } else {
+                        
+                        log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. An expansion is null.");
+                    }
+
+                } else {
+                    
+                    log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. A position is null.");
+                }
+
+            } else {
+                
+                log((void*) &INFO_LOG_LEVEL, "Could not handle mouse clicked action. A child is not of type Item.");
+            }
+            
+            count++;
+        }
+        
+        // Only use child screen item's action if it exists.
+        // Otherwise, use the parent screen item's action.
+        if (action != 0) {
+            
+            p4 = action;
+
+        } else {
+            
+            // Determine the action of the given screen item.
+            get_map_element(i->items, "mouse_clicked_action", p4);
+        }
+*/
+
+    } else {
+        
+        puts("ERROR: Could not handle mouse clicked action. The item is null.");
+    }
 }
 
 /* MODEL_HANDLER_SOURCE */
