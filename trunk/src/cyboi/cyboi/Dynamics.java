@@ -29,7 +29,7 @@ package cyboi;
  *
  * It contains all dynamic operation sequences.
  *
- * @version $Revision: 1.1 $ $Date: 2003-07-18 11:24:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-07-18 14:55:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Dynamics {
@@ -115,5 +115,29 @@ class Dynamics {
 
     /** The quicktime video constant. */
     static final String QUICKTIME_VIDEO = new String("quicktime_video");
+
+    //
+    // Creation and destruction.
+    //
+
+    /**
+     * Creates a dynamics.
+     *
+     * @return the dynamics
+     */
+    static java.lang.Object create_dynamics() {
+
+        return ItemHandler.create_item();
+    }
+
+    /**
+     * Destroys the dynamics.
+     *
+     * @param d the dynamics
+     */
+    static void destroy_dynamics(java.lang.Object d) {
+
+        ItemHandler.destroy_item((Item) d);
+    }
 }
 

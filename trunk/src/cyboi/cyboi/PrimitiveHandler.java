@@ -29,10 +29,14 @@ package cyboi;
  *
  * It contains procedures to create items of primitive type.
  *
- * @version $Revision: 1.3 $ $Date: 2003-07-18 11:24:32 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-07-18 14:55:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class PrimitiveHandler {
+
+    //
+    // Creation and destruction.
+    //
 
     /**
      * Creates an integer primitive.

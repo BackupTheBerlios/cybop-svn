@@ -63,7 +63,7 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.4 $ $Date: 2003-07-18 11:24:32 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-07-18 14:55:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -311,13 +311,272 @@ class ItemHandler {
     //
     // Initialization.
     //
+    
+    /**
+     * Initializes the item.
+     *
+     * @param item the item
+     * @param c the category
+     */
+    static void initialize(java.lang.Object item, Object c) throws Exception {
+
+        org.apache.xerces.parsers.DOMParser p = (org.apache.xerces.parsers.DOMParser) Main.xml_parser;
+        org.w3c.dom.Document doc = new org.apache.xerces.dom.DocumentImpl();
+        java.lang.String f = c + ".cybol";
+
+        if (p != null) {
+            
+            p.setFeature("http://xml.org/sax/features/validation", true);
+            p.parse(f);
+            java.lang.System.out.println("INFO: Parsed file: " + f);
+            
+            doc = p.getDocument();
+            
+            if (doc != null) {
+                
+                doc.normalize();
+        
+                org.w3c.dom.NodeList l = null;
+                org.w3c.dom.Node n = null;
+
+/*??
+                l = doc.getElementsByTagName("name");
+                
+                if (l != null) {
+                    
+                    n = l.item(0);
+                    
+                    if (n != null) {
+                        
+                        String name = n.getNodeValue();
+                        java.lang.System.out.println("INFO: Read name: " + name);
+                        
+                    } else {
+                        
+                        java.lang.System.out.println("ERROR: The node is null.");
+                    }
+                    
+                } else {
+                    
+                    java.lang.System.out.println("ERROR: The node list is null.");
+                }
+                    
+                l = doc.getElementsByTagName("super");
+                
+                if (l != null) {
+                    
+                    n = l.item(0);
+                    
+                    if (n != null) {
+                        
+                        String superCategory = n.getNodeValue();
+                        java.lang.System.out.println("INFO: Read super: " + superCategory);
+                        
+                    } else {
+                        
+                        java.lang.System.out.println("ERROR: The node is null.");
+                    }
+                    
+                } else {
+                    
+                    java.lang.System.out.println("ERROR: The node list is null.");
+                }
+*/
+                    
+                l = doc.getElementsByTagName("item");
+
+                if (l != null) {
+                    
+                    int size = l.getLength();
+                    int i = 0;
+                    org.w3c.dom.NamedNodeMap m = null;
+                    int msize = 0;
+                    int j = 0;
+                    org.w3c.dom.Node a = null;
+                    java.lang.String name = null;
+                    java.lang.String abstraction = null;
+                    java.lang.String category = null;
+       
+                    while (i < size) {
+                    
+                        n = l.item(i);
+
+                        if (n != null) {
+                                
+/*??
+                            item = n.getNodeValue();
+                            java.lang.System.out.println("INFO: Read item: " + item);
+*/
+                        
+                            m = n.getAttributes();
+        
+                            if (m != null) {
+                
+                                a = m.getNamedItem("name");
+                                name = a.getNodeValue();
+                                java.lang.System.out.println(name);
+            
+                                a = m.getNamedItem("abstraction");
+                                abstraction = a.getNodeValue();
+                                java.lang.System.out.println(abstraction);
+            
+                                a = m.getNamedItem("category");
+                                category = a.getNodeValue();
+                                java.lang.System.out.println(category);
+
+                            } else {
+                                
+                                java.lang.System.out.println("ERROR: The named node map is null.");
+                            }
+
+                        } else {
+                            
+                            java.lang.System.out.println("ERROR: The node is null.");
+                        }
+                        
+                        i++;
+                    }
+                    
+                    java.lang.Object child = null;
+                    
+                    if (abstraction != null) {
+            
+                        if (abstraction.equals(Statics.INTEGER_PRIMITIVE)) {
+            
+                            child = PrimitiveHandler.create_integer_primitive(category);
+            
+                        } else if (abstraction.equals(Statics.FLOAT_PRIMITIVE)) {
+            
+                            child = PrimitiveHandler.create_float_primitive(category);
+            
+                        } else if (abstraction.equals(Statics.CHAR_PRIMITIVE)) {
+            
+                            child = PrimitiveHandler.create_character_primitive(category);
+            
+                        } else if (abstraction.equals(Statics.STRING_PRIMITIVE)) {
+            
+                            child = PrimitiveHandler.create_string_primitive(category);
+            
+                        } else if (abstraction.equals(Statics.COMPLEX)) {
+            
+//??                            child = ItemHandler.create_item(category);
+                        }
+                    
+                    } else {
+                        
+                        java.lang.System.out.println("ERROR: The abstraction is null.");
+                    }
+                    
+                } else {
+                    
+                    java.lang.System.out.println("ERROR: The node list is null.");
+                }
+
+            } else {
+                
+                java.lang.System.out.println("ERROR: The document is null.");
+            }
+            
+        } else {
+            
+            java.lang.System.out.println("ERROR: The parser is null.");
+        }
+            
+/*??
+        File f = new File(c);
+        XmlItem xml = null;
+
+        while (f != eof) {
+
+            xml = readNextItem(f);
+
+            initialize(i, xml);
+        }
+*/
+
+/*??
+        File f = new File("/home/cybop/src/cybol/cybol/test.xml");
+        FileReader r = new FileReader(f);
+        int ci;
+        
+        while (true) {
+        
+            ci = r.read();
+            
+            if (ci != -1) {
+            
+               System.out.println(ci);
+            
+            } else {
+                
+                break;
+            }
+        }
+        
+        r.close();
+*/
+    }
 
     /**
-     * Initializes this item.
+     * Reads a sub array as a sequence of bytes.
+     *
+     * @param b the byte array into which the data are written
+     * @param o the offset in the data
+     * @param n the number of bytes to be written
      */
 /*??
-    static void initialize() {
+    static void readbytes(byte[] b, int o, int n) {
+
+        // Code.
+        
+        // See: Aelfred XMLParser!
     }
+
+    /**
+     * Initializes the item.
+     *
+     * @param i the item
+     * @param c the category
+     */
+/*??
+    static void initialize(Item i, Object c) {
+
+        String name = tmp.name;
+        String abstraction = tmp.abstraction;
+        String category = tmp.category;
+        String position = tmp.position;
+
+        if (abstraction != null) {
+
+            if (abstraction.equals(Main.INTEGER_PRIMITIVE)) {
+
+                i = createIntegerPrimitive(category);
+
+            } else if (abstraction.equals(Main.FLOAT_PRIMITIVE)) {
+
+                i = createFloatPrimitive(category);
+
+            } else if (abstraction.equals(Main.CHAR_PRIMITIVE)) {
+
+                i = createCharPrimitive(category);
+
+            } else if (abstraction.equals(Main.STRING_PRIMITIVE)) {
+
+                i = createStringPrimitive(category);
+
+            } else if (abstraction.equals(Main.COMPLEX)) {
+
+                i = createItem(category);
+            }
+            
+            add(i);
+
+        } else {
+
+            java.lang.System.out.println("DEBUG: Could not read item. The abstraction is null.");
+        }
+    }
+*/
 
     /**
      * Finalizes this item.

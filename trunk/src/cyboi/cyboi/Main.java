@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.5 $ $Date: 2003-07-18 11:24:32 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-07-18 14:55:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -47,14 +47,20 @@ class Main {
     //?? java.io.ObjectOutputStream::writeArray
     //?? for how to transfer a Object into a byte[]
 
-    /** The xml dom parser. */
-    static org.apache.xerces.parsers.DOMParser parser;
+    /** The xml parser. */
+    static java.lang.Object xml_parser;
 
-    /** The java event handler. */
-    static JavaEventHandler java_event_handler;
+    /** The event handler. */
+    static java.lang.Object event_handler;
 
     /** The signal memory. */
-    static Map signal_memory;
+    static java.lang.Object signal_memory;
+
+    /** The statics. */
+    static java.lang.Object statics;
+
+    /** The dynamics. */
+    static java.lang.Object dynamics;
 
     /*
      * The main method.
@@ -67,49 +73,68 @@ class Main {
 
             if (args != null) {
 
-                Main.java_event_handler = create_java_event_handling();
-                create_signal_memory();
-                create_statics();
-                create_dynamics();
+                java.lang.System.out.println("INFO: array length: " + args.length);
+                java.lang.System.out.println("INFO: array length: " + args[0]);
+                java.lang.System.out.println("INFO: array length: " + args[1]);
 
-                // Alternative to Java Event Handler
-                // (if it gets replaced one day, once CYBOI is implemented in C):
-                // Enter waiting loop and read events (IRQs) from devices (IVT?).
+                if (args.length == 2) {
+                        
+                    String statics_category = args[0];
+                    String dynamics_category = args[1];
 
-                // The system is now started up and complete so that a loop
-                // can be entered, waiting for signals (events).
-                Main.await();
+                    Main.xml_parser = Main.create_xml_parser();
 
-                Item i = ItemHandler.create_item();
+                    Main.event_handler = Main.create_event_handler();
+                    Main.replaceEventQueue(Main.event_handler);
 
-                Main.initialize(i, args[0]); //?? dynamics
-//??                Main.initialize(i, args[1]); //?? statics
+                    Main.signal_memory = Main.create_signal_memory();
 
-                // The loop above is left as soon as the shutdown flag is set.
+                    Main.statics = Statics.create_statics();
+                    ItemHandler.initialize(Main.statics, args[0]);
 
-//??                Main.finalizz(i);
+                    Main.dynamics = Dynamics.create_dynamics();
+    
+                    // Alternative to Java Event Handler
+                    // (if it gets replaced one day, once CYBOI is implemented in C):
+                    // Enter waiting loop and read events (IRQs) from devices (IVT?).
+    
+                    // The system is now started up and complete so that a loop
+                    // can be entered, waiting for signals (events).
+                    Main.await();
+    
+                    // The loop above is left as soon as the shutdown flag is set.
+    
+//??                    Main.finalizz(i);
+    
+                    Dynamics.destroy_dynamics((Item) Main.dynamics);
+                    Main.dynamics = null;
+                    Statics.destroy_statics((Item) Main.statics);
+                    Main.statics = null;
+                    Main.destroy_signal_memory((Map) Main.signal_memory);
+                    Main.signal_memory = null;
+                    Main.destroy_event_handler((EventHandler) Main.event_handler);
+                    Main.event_handler = null;
+                    Main.destroy_xml_parser((org.apache.xerces.parsers.DOMParser) Main.xml_parser);
+                    Main.xml_parser = null;
+    
+                    //
+                    // Runtime.getRuntime().exit(0);
+                    // and
+                    // System.exit(0);
+                    // do the same thing.
+                    // The program exits normally, when the last non-daemon thread exits.
+                    //
+                    java.lang.System.out.println("INFO: Exit system normally.");
+                    java.lang.System.exit(0);
 
-                ItemHandler.destroy_item(i);
-
-                destroy_dynamics();
-                destroy_statics();
-                destroy_signal_memory();
-                destroy_java_event_handling();
-                destroy_xml_environment();
-
-                //
-                // Runtime.getRuntime().exit(0);
-                // and
-                // System.exit(0);
-                // do the same thing.
-                // The program exits normally, when the last non-daemon thread exits.
-                //
-                java.lang.System.out.println("INFO: Exit system normally.");
-                java.lang.System.exit(0);
+                } else {
+    
+                    java.lang.System.out.println("ERROR: Could not execute cyboi. The argument array length is unequal to two.");
+                }
 
             } else {
 
-                java.lang.System.out.println("Could not execute cyboi. The argument array is null.");
+                java.lang.System.out.println("ERROR: Could not execute cyboi. The argument array is null.");
             }
 
         } catch (Exception e) {
@@ -128,31 +153,57 @@ class Main {
         }
     }
 
-    /**
-     * Initializes the signal memory.
-     */
-    static void initialize_signal_memory() throws Exception {
-
-        Main.signal_memory = MapHandler.create_map();
-    }
+    //
+    // XML parser.
+    //
 
     /**
-     * Initializes the xml environment.
-     */
-    static void initialize_xml_environment() throws Exception {
-
-        Main.parser = new org.apache.xerces.parsers.DOMParser();
-    }
-
-    /**
-     * Creates the java event handler.
+     * Creates an xml parser.
      *
-     * @return the java event handler
+     * @return the xml parser
      */
-    static JavaEventHandler create_java_event_handler() throws Exception {
+    static java.lang.Object create_xml_parser() {
 
-        JavaEventHandler h = new JavaEventHandler();
-        
+        return new org.apache.xerces.parsers.DOMParser();
+    }
+
+    /**
+     * Destroys the xml parser.
+     *
+     * @param p the xml parser
+     */
+    static void destroy_xml_parser(java.lang.Object p) {
+    }
+
+    //
+    // Event handler.
+    //
+    
+    /**
+     * Creates an event handler.
+     *
+     * @return the event handler
+     */
+    static java.lang.Object create_event_handler() throws Exception {
+
+        return new EventHandler();
+    }
+
+    /**
+     * Destroys the event handler.
+     *
+     * @param h the event handler
+     */
+    static void destroy_event_handler(java.lang.Object h) {
+    }
+
+    /**
+     * Replaces the event queue with the event handler.
+     *
+     * @param h the event handler
+     */
+    static void replaceEventQueue(java.lang.Object h) {
+
         // Start the awt event thread by calling getDefaultToolkit().
         // Otherwise, the event thread is started by calling the show method
         // on a java awt frame.
@@ -164,300 +215,41 @@ class Main {
 
             if (q != null) {
 
-                // Replace the system event queue with the java event handler.
-                q.push(h);
+                // Replace the system event queue with the event handler.
+                q.push((EventHandler) h);
 
             } else {
 
-                java.lang.System.out.println("Could not create java event handler. The java event queue is null.");
+                java.lang.System.out.println("ERROR: Could not replace event queue. The event queue is null.");
             }
 
         } else {
 
-            java.lang.System.out.println("Could not startup system. The java awt toolkit is null.");
+            java.lang.System.out.println("ERROR: Could not replace event queue. The java awt toolkit is null.");
         }
-        
-        return h;
     }
-
-    /**
-     * Destroys the java event handler.
-     *
-     * @param h the java event handler
-     */
-    static void destroy_java_event_handler(JavaEventHandler h) {
-
-        Main.java_event_handler = null;
-    }
-
+    
     //
-    // Initialization.
+    // Signal memory.
     //
     
     /**
-     * Initializes the item.
-     *
-     * @param item the item
-     * @param c the category
+     * Creates a signal memory.
      */
-    static void initialize(Item item, Object c) throws Exception {
+    static java.lang.Object create_signal_memory() {
 
-        java.lang.String f = c + ".cybol";
-        org.w3c.dom.Document doc = new org.apache.xerces.dom.DocumentImpl();
-
-        if (Main.parser != null) {
-            
-            Main.parser.setFeature("http://xml.org/sax/features/validation", true);
-            Main.parser.parse(f);
-            java.lang.System.out.println("INFO: Parsed file: " + f);
-            
-            doc = Main.parser.getDocument();
-            
-            if (doc != null) {
-                
-                doc.normalize();
-        
-                org.w3c.dom.NodeList l = null;
-                org.w3c.dom.Node n = null;
-
-/*??
-                l = doc.getElementsByTagName("name");
-                
-                if (l != null) {
-                    
-                    n = l.item(0);
-                    
-                    if (n != null) {
-                        
-                        String name = n.getNodeValue();
-                        java.lang.System.out.println("INFO: Read name: " + name);
-                        
-                    } else {
-                        
-                        java.lang.System.out.println("ERROR: The node is null.");
-                    }
-                    
-                } else {
-                    
-                    java.lang.System.out.println("ERROR: The node list is null.");
-                }
-                    
-                l = doc.getElementsByTagName("super");
-                
-                if (l != null) {
-                    
-                    n = l.item(0);
-                    
-                    if (n != null) {
-                        
-                        String superCategory = n.getNodeValue();
-                        java.lang.System.out.println("INFO: Read super: " + superCategory);
-                        
-                    } else {
-                        
-                        java.lang.System.out.println("ERROR: The node is null.");
-                    }
-                    
-                } else {
-                    
-                    java.lang.System.out.println("ERROR: The node list is null.");
-                }
-*/
-                    
-                l = doc.getElementsByTagName("item");
-
-                if (l != null) {
-                    
-                    int size = l.getLength();
-                    int i = 0;
-                    org.w3c.dom.NamedNodeMap m = null;
-                    int msize = 0;
-                    int j = 0;
-                    org.w3c.dom.Node a = null;
-                    java.lang.String name = null;
-                    java.lang.String abstraction = null;
-                    java.lang.String category = null;
-       
-                    while (i < size) {
-                    
-                        n = l.item(i);
-
-                        if (n != null) {
-                                
-/*??
-                            item = n.getNodeValue();
-                            java.lang.System.out.println("INFO: Read item: " + item);
-*/
-                        
-                            m = n.getAttributes();
-        
-                            if (m != null) {
-                
-                                a = m.getNamedItem("name");
-                                name = a.getNodeValue();
-                                java.lang.System.out.println(name);
-            
-                                a = m.getNamedItem("abstraction");
-                                abstraction = a.getNodeValue();
-                                java.lang.System.out.println(abstraction);
-            
-                                a = m.getNamedItem("category");
-                                category = a.getNodeValue();
-                                java.lang.System.out.println(category);
-
-                            } else {
-                                
-                                java.lang.System.out.println("ERROR: The named node map is null.");
-                            }
-
-                        } else {
-                            
-                            java.lang.System.out.println("ERROR: The node is null.");
-                        }
-                        
-                        i++;
-                    }
-                    
-                    java.lang.Object child = null;
-                    
-                    if (abstraction != null) {
-            
-                        if (abstraction.equals(Statics.INTEGER_PRIMITIVE)) {
-            
-                            child = PrimitiveHandler.create_integer_primitive(category);
-            
-                        } else if (abstraction.equals(Statics.FLOAT_PRIMITIVE)) {
-            
-                            child = PrimitiveHandler.create_float_primitive(category);
-            
-                        } else if (abstraction.equals(Statics.CHAR_PRIMITIVE)) {
-            
-                            child = PrimitiveHandler.create_character_primitive(category);
-            
-                        } else if (abstraction.equals(Statics.STRING_PRIMITIVE)) {
-            
-                            child = PrimitiveHandler.create_string_primitive(category);
-            
-                        } else if (abstraction.equals(Statics.COMPLEX)) {
-            
-//??                            child = ItemHandler.create_item(category);
-                        }
-                    
-                    } else {
-                        
-                        java.lang.System.out.println("ERROR: The abstraction is null.");
-                    }
-                    
-                } else {
-                    
-                    java.lang.System.out.println("ERROR: The node list is null.");
-                }
-
-            } else {
-                
-                java.lang.System.out.println("ERROR: The document is null.");
-            }
-            
-        } else {
-            
-            java.lang.System.out.println("ERROR: The parser is null.");
-        }
-            
-/*??
-        File f = new File(c);
-        XmlItem xml = null;
-
-        while (f != eof) {
-
-            xml = readNextItem(f);
-
-            initialize(i, xml);
-        }
-*/
-
-/*??
-        File f = new File("/home/cybop/src/cybol/cybol/test.xml");
-        FileReader r = new FileReader(f);
-        int ci;
-        
-        while (true) {
-        
-            ci = r.read();
-            
-            if (ci != -1) {
-            
-               System.out.println(ci);
-            
-            } else {
-                
-                break;
-            }
-        }
-        
-        r.close();
-*/
+        return MapHandler.create_map();
     }
 
     /**
-     * Reads a sub array as a sequence of bytes.
+     * Destroys the signal memory.
      *
-     * @param b the byte array into which the data are written
-     * @param o the offset in the data
-     * @param n the number of bytes to be written
+     * @param m the signal memory
      */
-/*??
-    static void readbytes(byte[] b, int o, int n) {
+    static void destroy_signal_memory(java.lang.Object m) {
 
-        // Code.
-        
-        // See: Aelfred XMLParser!
+        MapHandler.destroy_map((Map) m);
     }
-
-    /**
-     * Initializes the item.
-     *
-     * @param i the item
-     * @param c the category
-     */
-/*??
-    static void initialize(Item i, Object c) {
-
-        String name = tmp.name;
-        String abstraction = tmp.abstraction;
-        String category = tmp.category;
-        String position = tmp.position;
-
-        if (abstraction != null) {
-
-            if (abstraction.equals(Main.INTEGER_PRIMITIVE)) {
-
-                i = createIntegerPrimitive(category);
-
-            } else if (abstraction.equals(Main.FLOAT_PRIMITIVE)) {
-
-                i = createFloatPrimitive(category);
-
-            } else if (abstraction.equals(Main.CHAR_PRIMITIVE)) {
-
-                i = createCharPrimitive(category);
-
-            } else if (abstraction.equals(Main.STRING_PRIMITIVE)) {
-
-                i = createStringPrimitive(category);
-
-            } else if (abstraction.equals(Main.COMPLEX)) {
-
-                i = createItem(category);
-            }
-            
-            add(i);
-
-        } else {
-
-            java.lang.System.out.println("DEBUG: Could not read item. The abstraction is null.");
-        }
-    }
-*/
 
     /**
      * Waits for signals.

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: JavaEventHandler.java,v $
+ * $RCSfile: EventHandler.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -25,17 +25,17 @@
 package cyboi;
 
 /**
- * This is the java event handler.
+ * This is the event handler.
  *
  * It dispatches java.awt.AWTEvent events, transforms them into CYBOI signals
  * and finally sends them through the whole system.
  *
  * Unfortunately, handling of most events is done via graphical components in java.
  *
- * @version $Revision: 1.1 $ $Date: 2003-07-18 11:24:32 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-07-18 14:55:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class JavaEventHandler extends java.awt.EventQueue {
+class EventHandler extends java.awt.EventQueue {
 
     /**
      * Dispatches an event.

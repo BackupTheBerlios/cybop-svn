@@ -29,7 +29,7 @@ package cyboi;
  *
  * It contains all static data structures.
  *
- * @version $Revision: 1.1 $ $Date: 2003-07-18 11:24:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-07-18 14:55:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Statics {
@@ -115,5 +115,27 @@ class Statics {
 
     /** The quicktime video constant. */
     static final String QUICKTIME_VIDEO = new String("quicktime_video");
+
+    //
+    // Creation and destruction.
+    //
+
+    /**
+     * Creates a statics.
+     */
+    static java.lang.Object create_statics() {
+
+        return ItemHandler.create_item();
+    }
+
+    /**
+     * Destroys the statics.
+     *
+     * @param s the statics
+     */
+    static void destroy_statics(java.lang.Object s) {
+
+        ItemHandler.destroy_item((Item) s);
+    }
 }
 
