@@ -1,0 +1,7 @@
+cyboi for Debian
+----------------
+
+ The file config.cybol will be copy in the directory: /etc/cyboi.
+ To start cyboi type the following in the shell: cyboi /ect/cyboi/config.cybol.
+ 
+ -- Dennis Reichenbach <dennis.reichenbach@gmx.net>, Mon,  6 Dec 2004 15:00:00 +0100
