@@ -1,8 +1,8 @@
 #
 # $RCSfile: Makefile,v $
 #
-# Copyright (c) 2003-2004. Michael Simon. All rights reserved.
-# Copyright (c) 2004-2004. Christian Heller. All rights reserved.
+# Copyright (c) 2003. Michael Simon. All rights reserved.
+# Copyright (c) 2004. Christian Heller. All rights reserved.
 #
 # This software is published under the GPL GNU General Public License.
 # This program is free software; you can redistribute it and/or
@@ -22,9 +22,9 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.10 $ $Date: 2004-04-28 20:14:17 $ $Author: christian $
-# @author Michael Simon <michael.simon@gmx.net>
+# @version $Revision: 1.11 $ $Date: 2004-05-06 18:40:16 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
+# @author Michael Simon <michael.simon@gmx.net>
 #
 
 #
@@ -65,17 +65,21 @@ COMPILER_FLAGS = -g -I/usr/X11R6/include #-fsjlj-exceptions
 #vpath %.c $(SRC)
 #vpath %.o $(OBJ)
 
-MAIN_SOURCE = $(SRC)/cyboi.c
-ROOT_SOURCES = $(wildcard $(SRC)/*.c)
-ROOT_OBJECTS = $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(ROOT_SOURCES))
+MAIN_SOURCE = $(SRC)/cyboi/cyboi.c
+#ROOT_SOURCES = $(wildcard $(SRC)/*.c)
+#ROOT_OBJECTS = $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(ROOT_SOURCES))
+ARRAY_SOURCES = $(wildcard $(SRC)/array/*.c)
+ARRAY_OBJECTS = $(patsubst $(SRC)/array/%.c,$(OBJ)/array/%.o,$(ARRAY_SOURCES))
+CONSTANTS_SOURCES = $(wildcard $(SRC)/constants/*.c)
+CONSTANTS_OBJECTS = $(patsubst $(SRC)/constants/%.c,$(OBJ)/constants/%.o,$(CONSTANTS_SOURCES))
+CYBOI_SOURCES = $(wildcard $(SRC)/cyboi/*.c)
+CYBOI_OBJECTS = $(patsubst $(SRC)/cyboi/%.c,$(OBJ)/cyboi/%.o,$(CYBOI_SOURCES))
 CYBOL_SOURCES = $(wildcard $(SRC)/cybol/*.c)
 CYBOL_OBJECTS = $(patsubst $(SRC)/cybol/%.c,$(OBJ)/cybol/%.o,$(CYBOL_SOURCES))
 DYNAMICS_SOURCES = $(wildcard $(SRC)/dynamics/*.c)
 DYNAMICS_OBJECTS = $(patsubst $(SRC)/dynamics/%.c,$(OBJ)/dynamics/%.o,$(DYNAMICS_SOURCES))
 LOGGER_SOURCES = $(wildcard $(SRC)/logger/*.c)
 LOGGER_OBJECTS = $(patsubst $(SRC)/logger/%.c,$(OBJ)/logger/%.o,$(LOGGER_SOURCES))
-MODEL_SOURCES = $(wildcard $(SRC)/model/*.c)
-MODEL_OBJECTS = $(patsubst $(SRC)/model/%.c,$(OBJ)/model/%.o,$(MODEL_SOURCES))
 SIGNAL_SOURCES = $(wildcard $(SRC)/signal/*.c)
 SIGNAL_OBJECTS = $(patsubst $(SRC)/signal/%.c,$(OBJ)/signal/%.o,$(SIGNAL_SOURCES))
 STATICS_SOURCES = $(wildcard $(SRC)/statics/*.c)
@@ -97,9 +101,9 @@ X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WIN
 #
 #	$(COMPILER) -I /usr/X11R6/include -L /usr/X11R6/lib $(OBJ)/cyboi.o -o $(BIN)/$(BINARY)
 #
-all: create $(ROOT_OBJECTS) $(CYBOL_OBJECTS) $(DYNAMICS_OBJECTS) $(LOGGER_OBJECTS) $(MODEL_OBJECTS) $(SIGNAL_OBJECTS) $(STATICS_OBJECTS) $(TEST_OBJECTS) $(X_WINDOWS_OBJECTS)
+all: create $(ARRAY_OBJECTS) $(CONSTANTS_OBJECTS) $(CYBOI_OBJECTS) $(CYBOL_OBJECTS) $(DYNAMICS_OBJECTS) $(LOGGER_OBJECTS) $(SIGNAL_OBJECTS) $(STATICS_OBJECTS) $(TEST_OBJECTS) $(X_WINDOWS_OBJECTS)
 	$(COMPILER) -L/usr/X11R6/lib \
-		-o $(BIN)/$(BINARY) $(OBJ)/cyboi.o -lX11
+		-o $(BIN)/$(BINARY) $(OBJ)/cyboi/cyboi.o -lX11
 	@echo Compiled cyboi files.
 
 #
@@ -110,16 +114,27 @@ all: create $(ROOT_OBJECTS) $(CYBOL_OBJECTS) $(DYNAMICS_OBJECTS) $(LOGGER_OBJECT
 #
 create:
 	-cd ..; mkdir obj
+	-cd $(OBJ); mkdir array
+	-cd $(OBJ); mkdir constants
+	-cd $(OBJ); mkdir cyboi
 	-cd $(OBJ); mkdir cybol
 	-cd $(OBJ); mkdir dynamics
 	-cd $(OBJ); mkdir logger
-	-cd $(OBJ); mkdir model
 	-cd $(OBJ); mkdir signal
 	-cd $(OBJ); mkdir statics
 	-cd $(OBJ); mkdir test
 	-cd $(OBJ); mkdir x_windows
 
-$(OBJ)/%.o: $(SRC)/%.c
+#$(OBJ)/%.o: $(SRC)/%.c
+#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/array/%.o: $(SRC)/array/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/constants/%.o: $(SRC)/constants/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/cyboi/%.o: $(SRC)/cyboi/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/cybol/%.o: $(SRC)/cybol/%.c
@@ -129,9 +144,6 @@ $(OBJ)/dynamics/%.o: $(SRC)/dynamics/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/logger/%.o: $(SRC)/logger/%.c
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
-
-$(OBJ)/model/%.o: $(SRC)/model/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/signal/%.o: $(SRC)/signal/%.c
@@ -158,7 +170,7 @@ $(OBJ)/x_windows/%.o: $(SRC)/x_windows/%.c
 dist:
 	clean
 	-cd ..; mkdir dist
-	tar -cvzf dist/cybol.tar.gz * -X admin/exclude
+	tar -cvzf dist/cyboi.tar.gz * -X admin/exclude
 	@echo Created distribution file.
 
 #
