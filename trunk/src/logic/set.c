@@ -23,7 +23,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.1 $ $Date: 2005-03-02 07:19:05 $ $Author: rholzmueller $
+ * @version $Revision: 1.2 $ $Date: 2005-03-10 10:00:39 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
  
@@ -55,16 +55,28 @@ void set_integer( void* source, int* source_count,
 }
 
 
-void set_string( void* source, int* source_count,
-                 void* dest, int* dest_count ) {
+void set_string( void* source, int* source_count, int* source_size,
+                 void** dest, int* dest_count, int* dest_size ) {
  
     //the source and the destinatione are arrays of string
 
     if ( (source != NULL_POINTER) &&
-         (dest   != NULL_POINTER) ) {
-  
-        //???
-    }
+         (source_count != NULL_POINTER) &&
+         (source_size != NULL_POINTER) &&
+         (dest   != NULL_POINTER)  &&
+         (dest_count   != NULL_POINTER)  &&
+         (dest_size   != NULL_POINTER)  )
+    {
+     
+        *dest_count=*source_count;
+        *dest_size=*dest_count;
+        
+        resize_array( dest, dest_size, CHARACTER_ARRAY );
+        
+        set_array_elements( *dest, (void*) ZERO_NUMBER,  
+                            source, source_count, 
+                            (void*) CHARACTER_ARRAY);
+    }         
 }
 
 /* 
@@ -197,7 +209,7 @@ void set( const void* param, const int* param_count,
         
         if ( (r1 == 1) && (r2 == 1) ) {
            
-            set_string( *sm, *smc, *dm, *dmc);
+            set_string( *sm, *smc, *sms, dm, *dmc, *dms );
         }
         
     }

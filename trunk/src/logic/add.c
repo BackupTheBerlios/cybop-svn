@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-03-02 07:20:28 $ $Author: rholzmueller $
+ * @version $Revision: 1.14 $ $Date: 2005-03-10 09:58:22 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -80,42 +80,86 @@ void add_integers(void* p0, const void* p1, const void* p2) {
     }
 }
 
+
 /**
- * Adds two primitive summands resulting in the primitive sum.
+ * Adds two strings (concate)
  *
- * @param p0 the sum
- * @param p1 the summand 1
- * @param p2 the summand 2
- * @param p3 the abstraction
- * @param p4 the abstraction count
+ * @param p0 the result
+ * @param p1 the string 1
+ * @param p2 the string 2
  */
-void add_primitives(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
+void add_strings( void** res, int* res_count, int* res_size,
+                  void* op1, int* op1_count, int* op1_size, 
+                  void* op2, int* op2_count, int* op2_size ) 
+{
 
-    if (p4 != NULL_POINTER) {
-
-        int* ac = (int*) p4;
-
-        // The comparison result.
-        int r = 0;
-
-        if (r != 1) {
-
-            if (*ac == *INTEGER_ABSTRACTION_COUNT) {
-
-                compare_array_elements(p3, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                if (r == 1) {
-
-                    add_integers(p0, p1, p2);
-                }
-            }
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE_COUNT);
-    }
+    //check operanden
+    if ( (op1 != NULL_POINTER) &&
+         (op1_count != NULL_POINTER) &&
+         (op1_size != NULL_POINTER) &&
+         (op2 != NULL_POINTER) &&
+         (op2_count != NULL_POINTER) &&
+         (op2_size != NULL_POINTER) )  
+    {
+     
+        //check result
+        if ( (res != NULL_POINTER) &&
+             (res_count != NULL_POINTER) &&
+             (res_size != NULL_POINTER) )
+        {
+         
+            //resize the result array
+            *res_size = *op1_count + *op2_count;
+            *res_count = *op1_count + *op2_count;
+            resize_array( res, res_size, CHARACTER_ARRAY );
+            
+            //set the result array
+            set_array_elements( *res, (void*) ZERO_NUMBER, 
+                                op1, op1_count,  (void*) CHARACTER_ARRAY);
+            
+            set_array_elements( *res, op1_count, 
+                                op2, op2_count,  (void*) CHARACTER_ARRAY);
+        }  //check result
+             
+    } //check operanden
 }
+
+///**
+// * Adds two primitive summands resulting in the primitive sum.
+// *
+// * @param p0 the sum
+// * @param p1 the summand 1
+// * @param p2 the summand 2
+// * @param p3 the abstraction
+// * @param p4 the abstraction count
+// */
+//void add_primitives(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
+//
+//    if (p4 != NULL_POINTER) {
+//
+//        int* ac = (int*) p4;
+//
+//        // The comparison result.
+//        int r = 0;
+//
+//        if (r != 1) {
+//
+//            if (*ac == *INTEGER_ABSTRACTION_COUNT) {
+//
+//                compare_array_elements(p3, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+//
+//                if (r == 1) {
+//
+//                    add_integers(p0, p1, p2);
+//                }
+//            }
+//        }
+//
+//    } else {
+//
+////??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE_COUNT);
+//    }
+//}
 
 /**
  * Adds two summands resulting in the sum.
@@ -240,7 +284,7 @@ void add(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
         int r2 = 0;
         int r3 = 0;
         //check the abstracton from operand_1 and operand_2
-        //the abstarction msut be the same
+        //the abstrcation msut be the same
         compare_arrays( *op1a, *op1ac, 
                         (void*) INTEGER_ABSTRACTION, 
                         (void*) INTEGER_ABSTRACTION_COUNT, 
@@ -258,6 +302,32 @@ void add(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
          
             add_integers( *rm, *op1m, *op2m );  
         }        
+        
+        r1 = 0;
+        r2 = 0;
+        r3 = 0;
+        //check the abstracton from operand_1 and operand_2
+        //the abstrcation msut be the same
+        compare_arrays( *op1a, *op1ac, 
+                        (void*) STRING_ABSTRACTION, 
+                        (void*) STRING_ABSTRACTION_COUNT, 
+                        (void*) &r1, (void*) CHARACTER_ARRAY);
+        compare_arrays( *op2a, *op2ac, 
+                        (void*) STRING_ABSTRACTION, 
+                        (void*) STRING_ABSTRACTION_COUNT, 
+                        (void*) &r2, (void*) CHARACTER_ARRAY);
+        compare_arrays( *ra, *rac, 
+                        (void*) STRING_ABSTRACTION, 
+                        (void*) STRING_ABSTRACTION_COUNT, 
+                        (void*) &r3, (void*) CHARACTER_ARRAY);
+
+        if ( (r1==1) && (r2==1) && (r3==1) ) {
+         
+            add_strings( rm, *rmc, *rms, 
+                         *op1m, *op1mc, *op1ms, 
+                         *op2m, *op2mc, *op2ms );  
+        } 
+        
     }
 /*??
     if (p0 != NULL_POINTER) {
