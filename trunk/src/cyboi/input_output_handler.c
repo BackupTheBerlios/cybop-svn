@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-01-09 01:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,9 +30,9 @@
 
 #include "../global/structure_constants.c"
 #include "../global/variables.c"
-//??#include "../socket/unix_socket.c"
-//??#include "../web/tcp_socket_server.c"
-//??#include "../x_windows/x_windows_handler.c"
+#include "../socket/unix_socket.c"
+#include "../web/tcp_socket_server.c"
+#include "../x_windows/x_windows_handler.c"
 
 /**
  * Starts up the input output.
@@ -74,11 +74,11 @@ void startup_input_output(void* p0) {
     }
 
     // X windows server.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
 
     if (*f == 1) {
 
-        create_x_windows_server(p0);
+//??        create_x_windows_server(p0);
 
         *f = 0;
     }
@@ -107,11 +107,11 @@ void shutdown_input_output(void* p0) {
     *f = 0;
 
     // X windows server.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
 
     if (*f == 1) {
 
-        destroy_x_windows_server(p0);
+//??        destroy_x_windows_server(p0);
 
         *f = 0;
     }

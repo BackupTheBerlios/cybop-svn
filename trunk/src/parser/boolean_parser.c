@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2004-12-20 14:41:02 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-01-09 01:30:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,7 @@
 #define BOOLEAN_PARSER_SOURCE
 
 #include "../array/array.c"
+#include "../creator/integer_creator.c"
 #include "../global/constant.c"
 #include "../global/log_constants.c"
 #include "../global/structure_constants.c"

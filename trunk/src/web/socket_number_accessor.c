@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-01-08 19:55:19 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-01-09 01:30:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -36,169 +36,156 @@
 #include "../logger/logger.c"
 
 /**
- * Add the client socket number in a integer array.
+ * Adds the client socket.
  *
- * @param pp_internals the pointer to the internals
- * @param p_socket_number the client socket number
+ * @param p0 the internals memory
+ * @param p1 the client socket
  */
-void add_client_socket_number(void** pp_internals, int* p_socket_number) {
+void add_client_socket_number(void* p0, void* p1) {
 
-    // get the client socket number from internal
-    void** pp_clientsocketnumbers = NULL_POINTER;
-    int* p_clientsocketnumbers_count = NULL_POINTER;
-    int* p_clientsocketnumbers_size = NULL_POINTER;
-    int internal_type = 0;
+    // The client sockets.
+    void* cs = NULL_POINTER;
+    int* csc = INTEGER_NULL_POINTER;
+    int* css = INTEGER_NULL_POINTER;
 
-    get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_INTERNAL, (void*) &pp_clientsocketnumbers, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &p_clientsocketnumbers_count, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &p_clientsocketnumbers_size, (void*) &ONE_ELEMENT_COUNT);
+    // Get client sockets.
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) &ONE_ELEMENT_COUNT);
 
-    // Resize the array for the client socket number as a requirement.
-    if (*p_clientsocketnumbers_count >= *p_clientsocketnumbers_size) {
+    // Resize client sockets array.
+    if (*csc >= *css) {
 
-        *p_clientsocketnumbers_size = *p_clientsocketnumbers_size + 1;
+        (*css)++;
 
-        resize_array(pp_clientsocketnumbers, (void*) &INTEGER_ARRAY, p_clientsocketnumbers_size);
+        resize_array((void*) &cs, (void*) &INTEGER_ARRAY, (void*) &css);
 
-        set_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_INTERNAL, (void*) &pp_clientsocketnumbers, (void*) &ONE_ELEMENT_COUNT);
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) &ONE_ELEMENT_COUNT);
     }
 
-    // Add the socket number.
-    set_array_elements(pp_clientsocketnumbers, (void*) &INTEGER_ARRAY, p_clientsocketnumbers_count, p_socket_number, (void*) &ONE_ELEMENT_COUNT);
+    // Add socket number.
+    set_array_elements((void*) &cs, (void*) &INTEGER_ARRAY, (void*) &csc, p1, (void*) &ONE_ELEMENT_COUNT);
 
-    *p_clientsocketnumbers_count = *p_clientsocketnumbers_count + 1;
+    (*csc)++;
 }
 
 /**
- * Adds the main signal id in a integer array.
+ * Adds the signal id.
  *
- * @param pp_internals the pointer to the internals
- * @param p_main_signal_id the main signal id
+ * @param p0 the internals memory
+ * @param p1 the signal identification
  */
-void add_main_signal_id(void** pp_internals, int* main_signal_id) {
+void add_signal_id(void* p0, void* p1) {
 
     // get the main signal id from internal
-    void** pp_mainsignal_ids = NULL_POINTER;
-    int* p_mainsignal_ids_count = NULL_POINTER;
-    int* p_mainsignal_ids_size = NULL_POINTER;
+    void* id = NULL_POINTER;
+    int* idc = INTEGER_NULL_POINTER;
+    int* ids = INTEGER_NULL_POINTER;
 
-    int internal_type = 0;
-
-    get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &pp_mainsignal_ids, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &p_mainsignal_ids_count, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &p_mainsignal_ids_size, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) &ONE_ELEMENT_COUNT);
 
     // Resize the array for the client socket number as a requirement.
-    if (*p_mainsignal_ids_count >= *p_mainsignal_ids_size) {
+    if (*idc >= *ids) {
 
-        *p_mainsignal_ids_size = *p_mainsignal_ids_size + 1;
+        (*ids)++;
 
-        resize_array(pp_mainsignal_ids, (void*) &INTEGER_ARRAY, p_mainsignal_ids_size);
+        resize_array((void*) &id, (void*) &INTEGER_ARRAY, (void*) &ids);
 
-        set_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &pp_mainsignal_ids, (void*) &ONE_ELEMENT_COUNT);
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) &ONE_ELEMENT_COUNT);
     }
 
     // Add the socket number.
-    set_array_elements(pp_mainsignal_ids, (void*) &INTEGER_ARRAY, p_mainsignal_ids_count, main_signal_id, (void*) &ONE_ELEMENT_COUNT);
+    set_array_elements((void*) &id, (void*) &INTEGER_ARRAY, (void*) &idc, p1, (void*) &ONE_ELEMENT_COUNT);
 
-    *p_mainsignal_ids_count = *p_mainsignal_ids_count + 1;
+    (*idc)++;
 }
 
 /**
- * Remove the client socket number and the main signal id from the internals.
-  *
- * @param pp_internals the pointer to the internals
- * @param p_index the index to remove from the array in the internals
- */
-void remove_relation_clientsocketnumber_mainsignalid(void** pp_internals, int* p_index) {
-
-    if (pp_internals == NULL_POINTER) {
-
-        log_message_debug("pp_internals is a NULL POINTER");
-
-    } else if (p_index == NULL_POINTER) {
-
-        log_message_debug("p_index is a NULl POINTER");
-
-    } else {
-
-        // get the main signal id from internal
-        void** pp_mainsignal_ids = NULL_POINTER;
-        int* p_mainsignal_ids_count = NULL_POINTER;
-        int* p_mainsignal_ids_size = NULL_POINTER;
-
-        int internal_type = 0;
-
-        get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &pp_mainsignal_ids, (void*) &ONE_ELEMENT_COUNT);
-        get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &p_mainsignal_ids_count, (void*) &ONE_ELEMENT_COUNT);
-        get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &p_mainsignal_ids_size, (void*) &ONE_ELEMENT_COUNT);
-
-        // Remove the main signal id.
-        remove_array_element(pp_mainsignal_ids, (void*) &INTEGER_ARRAY, p_mainsignal_ids_size, p_index);
-
-        *p_mainsignal_ids_count = *p_mainsignal_ids_count - 1;
-
-        // Get the client socket number from internal.
-        void** pp_clientsocketnumbers = NULL_POINTER;
-        int* p_clientsocketnumbers_count = NULL_POINTER;
-        int* p_clientsocketnumbers_size = NULL_POINTER;
-
-        get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_INTERNAL, (void*) &pp_clientsocketnumbers, (void*) &ONE_ELEMENT_COUNT);
-        get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &p_clientsocketnumbers_count, (void*) &ONE_ELEMENT_COUNT);
-        get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &p_clientsocketnumbers_size, (void*) &ONE_ELEMENT_COUNT);
-
-        // Remove the client socket number.
-        remove_array_element(pp_clientsocketnumbers, (void*) &INTEGER_ARRAY, p_clientsocketnumbers_size, p_index);
-
-        *p_clientsocketnumbers_count = *p_clientsocketnumbers_count - 1;
-    }
-}
-
-/**
- * Get the index from the main signal id from the internals array.
+ * Removes the client socket.
  *
- * @param pp_internals the pointer to the internals
- * @param p_main_signal_id the main signal id
- * @oaram p_index return the index in the array
+ * Its signal id is removed as well.
+ *
+ * @param p0 the internals memory
+ * @param p1 the index
  */
-void get_index_for_signal_id(void** pp_internals, int* p_main_signal_id, void** p_index) {
+void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
 
-    // Get the main signal id from internal.
-    void** pp_mainsignal_ids = NULL_POINTER;
-    int* p_mainsignal_ids_count = NULL_POINTER;
-    int* p_mainsignal_ids_size = NULL_POINTER;
+    // The signal id.
+    void* id = NULL_POINTER;
+    int* idc = INTEGER_NULL_POINTER;
+    int* ids = INTEGER_NULL_POINTER;
 
-    int internal_type = 0;
+    // Get signal id.
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) &ONE_ELEMENT_COUNT);
 
-    get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &pp_mainsignal_ids, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &p_mainsignal_ids_count, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &p_mainsignal_ids_size, (void*) &ONE_ELEMENT_COUNT);
+    // Remove signal id.
+    remove_array_elements((void*) &id, (void*) &INTEGER_ARRAY, (void*) &ids, p1, (void*) &ONE_ELEMENT_COUNT);
 
-    // Get the index.
-    get_array_element_index(pp_mainsignal_ids, (void*) &INTEGER_ARRAY, p_mainsignal_ids_size, p_main_signal_id, p_index);
+    (*idc)--;
+
+    // Get client socket.
+    void* cs = NULL_POINTER;
+    int* csc = INTEGER_NULL_POINTER;
+    int* css = INTEGER_NULL_POINTER;
+
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) &ONE_ELEMENT_COUNT);
+
+    // Remove client socket.
+    remove_array_elements((void*) &cs, (void*) &INTEGER_ARRAY, (void*) &css, p1, (void*) &ONE_ELEMENT_COUNT);
+
+    (*csc)--;
 }
 
 /**
- * get the client socket number from the internal on the array index
+ * Gets the index for the signal id.
  *
- * @param pp_internals the pointer to the internals
- * @oaram p_index the index in the array
- * @param p_client_socket_number the client socket number in the array
+ * @param p0 the internals memory
+ * @param p1 the signal identification
+ * @param p2 the index
  */
-void get_client_socket_number_for_index(void** pp_internals, int* p_index, int* p_client_socket_number) {
+void get_index_for_signal_id(void* p0, const void* p1, void* p2) {
 
-    // Get the client socket number from internal.
-    void** pp_clientsocketnumbers = NULL_POINTER;
-    int* p_clientsocketnumbers_count = NULL_POINTER;
-    int* p_clientsocketnumbers_size = NULL_POINTER;
+    // The signal id.
+    void* id = NULL_POINTER;
+    void* idc = NULL_POINTER;
+    void* ids = NULL_POINTER;
 
-    int internal_type = 0;
+    // Get signal id.
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) &ONE_ELEMENT_COUNT);
 
-    get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_INTERNAL, (void*) &pp_clientsocketnumbers, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &p_clientsocketnumbers_count, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &p_clientsocketnumbers_size, (void*) &ONE_ELEMENT_COUNT);
+    // Get index.
+    get_array_elements_index((void*) &id, (void*) &INTEGER_ARRAY, (void*) &ids, p1, (void*) &ONE_ELEMENT_COUNT, p2);
+}
 
-    get_array_element(pp_clientsocketnumbers, (void*) &INTEGER_ARRAY, p_index, p_client_socket_number);
+/**
+ * Gets the client socket.
+ *
+ * @param p0 the internals memory
+ * @oaram p1 the index
+ * @param p2 the client socket
+ */
+void get_client_socket_number_for_index(void* p0, void* p1, void* p2) {
+
+    // The client sockets.
+    void* cs = NULL_POINTER;
+    void* csc = NULL_POINTER;
+    void* css = NULL_POINTER;
+
+    // Get client sockets.
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) &ONE_ELEMENT_COUNT);
+
+    // Get client socket.
+    get_array_elements((void*) &cs, (void*) &INTEGER_ARRAY, p1, p2, (void*) &ONE_ELEMENT_COUNT);
 }
 
 /* SOCKET_NUMBER_ACCESSOR_SOURCE */

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: compound_accessor.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2004-12-19 00:53:19 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-01-09 01:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -439,7 +439,7 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
     create_integer((void*) &i);
     *i = -1;
 
-    get_array_element_index(p3, (void*) &CHARACTER_ARRAY, p4, (void*) &COMPOUND_ELEMENT_SEPARATOR, (void*) &i);
+    get_array_elements_index(p3, (void*) &CHARACTER_ARRAY, p4, (void*) &COMPOUND_ELEMENT_SEPARATOR, (void*) &ONE_ELEMENT_COUNT, (void*) &i);
 
     if (*i != -1) {
 
@@ -762,7 +762,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
     create_integer((void*) &i);
     *i = -1;
 
-    get_array_element_index(p3, (void*) &CHARACTER_ARRAY, p4, (void*) &COMPOUND_ELEMENT_SEPARATOR, (void*) &i);
+    get_array_elements_index(p3, (void*) &CHARACTER_ARRAY, p4, (void*) &COMPOUND_ELEMENT_SEPARATOR, (void*) &ONE_ELEMENT_COUNT, (void*) &i);
 
     if (*i != -1) {
 
@@ -1089,7 +1089,7 @@ void get_compound_element_by_name(const void* p0, const void* p1,
     create_integer((void*) &i);
     *i = -1;
 
-    get_array_element_index(p2, (void*) &CHARACTER_ARRAY, p3, (void*) &COMPOUND_ELEMENT_SEPARATOR, (void*) &i);
+    get_array_elements_index(p2, (void*) &CHARACTER_ARRAY, p3, (void*) &COMPOUND_ELEMENT_SEPARATOR, (void*) &ONE_ELEMENT_COUNT, (void*) &i);
 
     if (*i != -1) {
 

@@ -25,7 +25,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.5 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-01-09 01:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,7 +77,7 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
                 // Set terminated file name by first copying the actual name and then
                 // adding the null termination character.
                 set_array_elements((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
-                set_array_element((void*) &tn, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CONTROL_CHARACTER);
+                set_array_elements((void*) &tn, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CONTROL_CHARACTER, (void*) &ONE_ELEMENT_COUNT);
 
                 // Open file.
                 // CAUTION! The file name cannot be handed over as is.
@@ -111,7 +111,7 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
                             // Set character in destination array.
                             // The array count serves as index for setting the character.
-                            set_array_element(p0, (void*) &CHARACTER_ARRAY, p1, (void*) &c);
+                            set_array_elements(p0, (void*) &CHARACTER_ARRAY, p1, (void*) &c, (void*) &ONE_ELEMENT_COUNT);
 
                             // Increase array count.
                             (**dc)++;

@@ -26,15 +26,18 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.63 $ $Date: 2005-01-08 19:55:18 $ $Author: christian $
+ * @version $Revision: 1.64 $ $Date: 2005-01-09 01:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOI_SOURCE
 #define CYBOI_SOURCE
 
+#include "../creator/integer_creator.c"
+#include "../cyboi/globals_handler.c"
 #include "../cyboi/system_handler.c"
 #include "../global/channel_constants.c"
+#include "../logic/create.c"
 #include "../test/test.c"
 
 /**
@@ -56,8 +59,6 @@
  */
 int main(int p0, char** p1) {
 
-    log_message_debug("Run CYBOI.");
-
     // Return 1 to indicate an error, by default.
     int r = 1;
 
@@ -75,6 +76,8 @@ int main(int p0, char** p1) {
     if (p1 != NULL_POINTER) {
 
         if (p0 == *STARTUP_PARAMETERS_COUNT) {
+
+            log_message_debug("Run CYBOI.");
 
             // The internals memory.
             void* i = NULL_POINTER;

@@ -2,7 +2,7 @@
 # $RCSfile: Makefile,v $
 #
 # Copyright (c) 2003. Michael Simon. All rights reserved.
-# Copyright (c) 2004. Christian Heller. All rights reserved.
+# Copyright (c) 2004-2005. Christian Heller. All rights reserved.
 #
 # This software is published under the GPL GNU General Public License.
 # This program is free software; you can redistribute it and/or
@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.21 $ $Date: 2004-11-12 16:52:21 $ $Author: christian $
+# @version $Revision: 1.22 $ $Date: 2005-01-09 01:33:17 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 # @author Michael Simon <michael.simon@gmx.net>
 #
@@ -132,7 +132,7 @@ all: create $(ACCESSOR_OBJECTS) $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CREAT
 # the "cd" command of the first line has no effect for the following lines.
 #
 create:
-	-cd ..; mkdir obj
+	-cd ..; mkdir obj; mkdir bin
 	-cd $(OBJ); mkdir accessor
 	-cd $(OBJ); mkdir array
 	-cd $(OBJ); mkdir communicator

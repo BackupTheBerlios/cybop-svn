@@ -21,12 +21,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2005-01-08 19:55:18 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2005-01-09 01:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CONSTANT_SOURCE
 #define CONSTANT_SOURCE
+
+#include "../global/character_constants.c"
 
 //
 // Signal priorities.

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-01-08 19:55:18 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-01-09 01:30:13 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -81,39 +81,32 @@ void create_unix_server_socket(void* p0) {
             // The socket address.
             struct sockaddr_un a;
 
-            if (a != NULL_POINTER) {
+            // Set address format.
+            a.sun_family = AF_UNIX;
 
-                // Set address format.
-                a.sun_family = AF_UNIX;
+            // Set path/file name to use as socket address.
+            strcpy(a.sun_path, (char*) *f);
+//??            strncpy(a.sun_path, *f, sizeof(a.sun_path));
 
-                // Set path/file name to use as socket address.
-                strcpy(a.sun_path, (char*) *f);
-//??                strncpy(a.sun_path, *f, sizeof(a.sun_path));
+            // CAUTION! The path/file length is normally limited to 108.
+            // This solution works around that limitation by determining
+            // the real path/file size.
 
-                // CAUTION! The path/file length is normally limited to 108.
-                // This solution works around that limitation by determining
-                // the real path/file size.
+            // Determine socket address size.
+            int as = sizeof(struct sockaddr_un);
+//??            int as = (offsetof(struct sockaddr_un, sun_path) + strlen(a.sun_path) + 1);
 
-                // Determine socket address size.
-                int as = sizeof(struct sockaddr_un);
-//??                int as = (offsetof(struct sockaddr_un, sun_path) + strlen(a.sun_path) + 1);
+            // Bind number to address.
+            if (bind(*s, (struct sockaddr*) &a, as) >= 0) {
 
-                // Bind number to address.
-                if (bind(*s, (struct sockaddr*) &a, as) >= 0) {
-
-                    // Set the number of possible pending client connection requests.
-                    // The maximum number is usually 5.
-                    // It is NOT necessary to use this function, but it's good practice.
-                    listen(*s, 1);
-
-                } else {
-
-                    log_message_debug("Could not create unix server socket. The socket could not be bound to the address.");
-                }
+                // Set the number of possible pending client connection requests.
+                // The maximum number is usually 5.
+                // It is NOT necessary to use this function, but it's good practice.
+                listen(*s, 1);
 
             } else {
 
-                log_message_debug("Could not create unix server socket. The address is null.");
+                log_message_debug("Could not create unix server socket. The socket could not be bound to the address.");
             }
 
         } else {

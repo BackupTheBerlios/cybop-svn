@@ -21,13 +21,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-01-09 01:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SIGNAL_MEMORY_HANDLER_SOURCE
 #define SIGNAL_MEMORY_HANDLER_SOURCE
 
+#include "../creator/creator.c"
 #include "../global/abstraction_constants.c"
 #include "../global/structure_constants.c"
 #include "../global/variables.c"

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-01-09 01:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,11 @@
 #define SYSTEM_HANDLER_SOURCE
 
 #include "../array/array.c"
+#include "../creator/integer_creator.c"
+#include "../cyboi/knowledge_memory_handler.c"
+#include "../cyboi/signal_memory_handler.c"
+#include "../cyboi/input_output_handler.c"
+#include "../cyboi/signal_waiter.c"
 #include "../global/abstraction_constants.c"
 #include "../global/channel_constants.c"
 #include "../global/constant.c"
@@ -36,6 +41,8 @@
 #include "../global/structure_constants.c"
 #include "../global/variables.c"
 #include "../logger/logger.c"
+#include "../logic/create.c"
+#include "../logic/destroy.c"
 
 /**
  * Handles the system.
@@ -62,9 +69,9 @@ void handle_system(void* p0) {
 
     log_message_debug("Handle system.");
 
-    startup_knowledge_memory();
-    startup_signal_memory();
-    startup_input_output();
+    startup_knowledge_memory(p0);
+    startup_signal_memory(p0);
+    startup_input_output(p0);
 
     log_message_debug("Get startup parameters.");
 
@@ -191,9 +198,9 @@ void handle_system(void* p0) {
     destroy_integer((void*) &mas);
     destroy_integer((void*) &mac);
 
-    shutdown_input_output();
-    shutdown_signal_memory();
-    shutdown_knowledge_memory();
+    shutdown_input_output(p0);
+    shutdown_signal_memory(p0);
+    shutdown_knowledge_memory(p0);
 }
 
 /* SYSTEM_HANDLER_SOURCE */

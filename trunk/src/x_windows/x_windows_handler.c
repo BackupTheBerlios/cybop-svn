@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2005-01-08 19:55:19 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2005-01-09 01:30:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -527,9 +527,10 @@ void receive_button_press_x_windows_input(void* p0, void* p1, void* p2) {
  * Receives an x windows input.
  *
  * @param p0 the signal memory
- * @param p1 the internal x windows data
  */
-void receive_x_windows(void* p0, void* p1) {
+void receive_x_windows(void* p0) {
+
+//?? @param p1 the internal x windows data
 
 /*??
     struct x_windows* x = (struct x_windows*) p1;

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-01-07 00:06:42 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-01-09 01:30:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,7 @@
 #define TRANSLATOR_SOURCE
 
 #include "../array/array.c"
+#include "../creator/integer_creator.c"
 #include "../global/abstraction_constants.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"

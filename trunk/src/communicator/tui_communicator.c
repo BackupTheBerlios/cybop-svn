@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-01-09 01:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,7 @@
 #define TUI_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
+#include <unistd.h>
 #include "../array/array.c"
 #include "../global/character_constants.c"
 #include "../global/structure_constants.c"
@@ -183,6 +184,7 @@ void send_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
                     fputs("TEST: This is a linux console.\n", (FILE*) *d);
 
+/*??
                     // Determine device name of controlling terminal.
                     int n = ttyname();
                     fprintf((FILE*) *d, "TEST: The terminal device name is: %i\n", n);
@@ -230,6 +232,7 @@ void send_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
                     // Destroy temporary null-terminated message.
                     destroy_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
+*/
 
 /*??
                 } else {

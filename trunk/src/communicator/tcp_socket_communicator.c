@@ -25,7 +25,7 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.4 $ $Date: 2005-01-08 19:55:18 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-01-09 01:30:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -47,8 +47,10 @@
  * @param p3 the source (http url)
  * @param p4 the source count
  */
+/*??
 void receive_tcp_socket(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
+*/
 
 /**
  * Sends an http stream that was read from a byte array.

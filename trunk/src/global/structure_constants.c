@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-01-08 19:55:18 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-01-09 01:30:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -329,9 +329,9 @@ static const int* TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL = TCP_CLIENT_SOCKE
 static const int TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL_ARRAY[] = {26};
 static const int* TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL = TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL_ARRAY;
 
-/** The x windows. */
-static const int X_WINDOWS_ACTIVE_INTERNAL_ARRAY[] = {27};
-static const int* X_WINDOWS_ACTIVE_INTERNAL = X_WINDOWS_ACTIVE_INTERNAL_ARRAY;
+/** The x windows server. */
+static const int X_WINDOWS_SERVER_ACTIVE_INTERNAL_ARRAY[] = {27};
+static const int* X_WINDOWS_SERVER_ACTIVE_INTERNAL = X_WINDOWS_SERVER_ACTIVE_INTERNAL_ARRAY;
 
 //
 // Signal memory.
