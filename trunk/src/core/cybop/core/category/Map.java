@@ -33,7 +33,7 @@ package cybop.core.category;
  * the index of the wanted element -- and then returning the corresponding
  * reference.
  *
- * @version $Revision: 1.8 $ $Date: 2003-06-19 16:20:03 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-06-19 19:41:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Map {
@@ -205,6 +205,12 @@ public class Map {
             names.set(i, n);
             refs.set(i, e);
 
+            if (cybop.core.system.SystemItem.SIGNAL_MEMORY.isEqualTo(n)) {
+                java.lang.System.out.println("\n\n\nset i: " + i);
+                java.lang.System.out.println("\nset n: " + n.getJavaObject());
+                java.lang.System.out.println("\nset e: " + e + "\n\n\n");
+            }
+    
         } else {
 
             throw new Exception("Could not set element. The references is null.");
@@ -275,8 +281,11 @@ public class Map {
 
         int i = getIndex(n);
 
-        java.lang.System.out.println("\n\n\nTEST i: " + i);
-        java.lang.System.out.println("\nTEST get(i): " + get(i) + "\n\n\n");
+        if (cybop.core.system.SystemItem.SIGNAL_MEMORY.isEqualTo(n)) {
+            java.lang.System.out.println("\n\n\nget i: " + i);
+            java.lang.System.out.println("\nget n: " + n.getJavaObject());
+            java.lang.System.out.println("\nget e: " + get(i) + "\n\n\n");
+        }
 
         return get(i);
     }

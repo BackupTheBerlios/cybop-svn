@@ -70,7 +70,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.31 $ $Date: 2003-06-19 16:20:03 $ $Author: christian $
+ * @version $Revision: 1.32 $ $Date: 2003-06-19 19:41:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -179,8 +179,6 @@ public class Launcher extends Family {
                 java.lang.System.out.println("INFO: Connect child to signal memory.");
                 l.setChild(Launcher.SIGNAL_MEMORY, l.createChild(l.getCategory(Launcher.SIGNAL_MEMORY)));
 
-                java.lang.System.out.println("\n\n\nTEST signal memory: " + l.getChild(Launcher.SIGNAL_MEMORY) + "\n\n\n");
-
                 java.lang.System.out.println("INFO: Initialize child to get an item.");
                 l.initialize();
 
@@ -207,7 +205,7 @@ public class Launcher extends Family {
                 Item signalMemory = l.getChild(Launcher.SIGNAL_MEMORY);
                 l.removeChild(Launcher.SIGNAL_MEMORY);
                 l.destroyChild(signalMemory);
-        
+
                 java.lang.System.out.println("INFO: Unbehave child.");
                 l.unbehave();
     
@@ -273,6 +271,7 @@ public class Launcher extends Family {
      * @param i the item
      * @exception Exception if the name is null
      */
+/*??
     public void setChild(String n, Item i) throws Exception {
 
         super.setChild(n, i);
@@ -296,6 +295,7 @@ public class Launcher extends Family {
      * @param n the name
      * @exception Exception if the name is null
      */
+/*??
     public void removeChild(String n) throws Exception {
 
         if (n != null) {
@@ -662,10 +662,10 @@ public class Launcher extends Family {
         } else {
 
             setChild(Launcher.SCREEN, createChild(getCategory(Launcher.SCREEN)));
-            setChild(Launcher.LIFECYCLE_ACTION, getCategory(Launcher.LIFECYCLE_ACTION_ARGUMENT));
+            setChild(Launcher.LIFECYCLE_ACTION, (Item) getCategory(Launcher.LIFECYCLE_ACTION_ARGUMENT));
             //?? Temporary until event handling doesn't need java awt EventQueue anymore.
             setJavaEventCatcher(createJavaEventCatcher());
-            setChild(Launcher.SHUTDOWN_FLAG, getCategory(Launcher.SHUTDOWN_FLAG));
+            setChild(Launcher.SHUTDOWN_FLAG, (Item) getCategory(Launcher.SHUTDOWN_FLAG));
             setChild(Launcher.SHUTDOWN_HOOK, createShutdownHook(getCategory(Launcher.SHUTDOWN_HOOK)));
         }
     }
@@ -679,7 +679,7 @@ public class Launcher extends Family {
         // from the java virtual machine to this system.
         Item shutdownHook = getChild(Launcher.SHUTDOWN_HOOK);
         removeChild(Launcher.SHUTDOWN_HOOK);
-        destroyChild(shutdownHook);
+        destroyShutdownHook((ShutdownHook) shutdownHook);
 
         Item shutdownFlag = getChild(Launcher.SHUTDOWN_FLAG);
         removeChild(Launcher.SHUTDOWN_FLAG);
@@ -717,7 +717,7 @@ public class Launcher extends Family {
 
             s.setChild(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
             s.setChild(Signal.LANGUAGE, Signal.NEURO_LANGUAGE);
-            s.setChild(Signal.SUBJECT, getName());
+            s.setChild(Signal.SUBJECT, (Item) getName());
             s.setChild(Signal.PREDICATE, getChild(Launcher.LIFECYCLE_ACTION));
 
         } else {
@@ -1717,7 +1717,7 @@ public class Launcher extends Family {
 
                     s.setChild(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
                     s.setChild(Signal.LANGUAGE, l);
-                    s.setChild(Signal.SUBJECT, getName());
+                    s.setChild(Signal.SUBJECT, (Item) getName());
                     s.setChild(Signal.PREDICATE, a);
                     s.setChild(Signal.OBJECT, m);
 

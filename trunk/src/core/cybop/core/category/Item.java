@@ -83,7 +83,7 @@ import cybop.core.model.String;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.11 $ $Date: 2003-06-19 16:20:03 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-06-19 19:41:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends Behaviour {
@@ -266,7 +266,7 @@ public class Item extends Behaviour {
      * @param c the child
      * @exception Exception if the children is null
      */
-    public void setChild(Array n, Array c) throws Exception {
+    public void setChild(Array n, Item c) throws Exception {
 
         Map m = getChildren();
 
@@ -307,14 +307,14 @@ public class Item extends Behaviour {
      * @return the child
      * @exception Exception if the children is null
      */
-    public Array getChild(Array n) throws Exception {
+    public Item getChild(Array n) throws Exception {
 
-        Array c = null;
+        Item c = null;
         Map m = getChildren();
 
         if (m != null) {
 
-            c = m.get(n);
+            c = (Item) m.get(n);
 
         } else {
 
@@ -332,9 +332,9 @@ public class Item extends Behaviour {
      * @return the child
      * @exception Exception if the children is null
      */
-    public Array getChild(Array n, Array d) throws Exception {
+    public Item getChild(Array n, Item d) throws Exception {
 
-        Array c = getChild(n);
+        Item c = getChild(n);
 
         if (c == null) {
 
@@ -528,10 +528,10 @@ public class Item extends Behaviour {
      * @exception Exception if the children array is null
      * @exception Exception if the child item is null
      */
-    public Item getChild(Structure p) throws Exception {
+/*??
+    public Item getChild(Space p) throws Exception {
 
         Item child = null;
-/*??
         Item[] c = getChildren();
 
         if (c != null) {
@@ -587,7 +587,6 @@ public class Item extends Behaviour {
 
             throw new Exception("Could not get child item. The children array is null.");
         }
-*/
 
         return child;
     }
@@ -600,10 +599,10 @@ public class Item extends Behaviour {
      * false otherwise
      * @exception Exception if the space is null
      */
+/*??
     public boolean contains(Structure p) throws Exception {
 
         boolean b = false;
-/*??
         Structure s = null; //?? getChild(Item.SPACE);
 
         if (s != null) {
@@ -614,9 +613,9 @@ public class Item extends Behaviour {
 
             throw new Exception("Could not check position. The space is null.");
         }
-*/
 
         return b;
     }
+*/
 }
 

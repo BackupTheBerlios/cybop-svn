@@ -35,7 +35,7 @@ import cybop.core.screen.region.*;
 /**
  * This class represents a frame model.
  *
- * @version $Revision: 1.6 $ $Date: 2003-06-19 16:20:03 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-19 19:41:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class FrameDisplay extends Display {
@@ -1160,20 +1160,20 @@ public class FrameDisplay extends Display {
         super.initialize();
 
         javax.swing.UIManager.setLookAndFeel(getDefaultLookAndFeel());
-        setChild(FrameDisplay.MODE, getCategory(FrameDisplay.MODE));
+        setChild(FrameDisplay.MODE, (Item) getCategory(FrameDisplay.MODE));
 /*??
         setChild(FrameDisplay.WINDOW_BOUNDS, configureWindowBounds(getDefaultWindowBounds()));
         setChild(FrameDisplay.DIALOG_BOUNDS, configureDialogBounds(getDefaultDialogBounds()));
         setChild(FrameDisplay.FRAME_BOUNDS, configureFrameBounds(getDefaultFrameBounds()));
         setChild(FrameDisplay.INTERNAL_FRAME_BOUNDS, configureInternalFrameBounds(getDefaultInternalFrameBounds()));
 */
-        setChild(FrameDisplay.TITLE, getCategory(FrameDisplay.TITLE));
-        setChild(FrameDisplay.ICON, getCategory(FrameDisplay.ICON));
+        setChild(FrameDisplay.TITLE, (Item) getCategory(FrameDisplay.TITLE));
+        setChild(FrameDisplay.ICON, (Item) getCategory(FrameDisplay.ICON));
         setChild(FrameDisplay.MENU_BAR, createChild(getCategory(FrameDisplay.MENU_BAR)));
         setChild(FrameDisplay.TOOL_BAR, createChild(getCategory(FrameDisplay.TOOL_BAR)));
         setChild(FrameDisplay.CONTENTS_PANEL, createChild(getCategory(FrameDisplay.CONTENTS_PANEL)));
         setChild(FrameDisplay.STATUS_BAR, createChild(getCategory(FrameDisplay.STATUS_BAR)));
-        setChild(FrameDisplay.RESIZABLE_FLAG, getCategory(FrameDisplay.RESIZABLE_FLAG));
+        setChild(FrameDisplay.RESIZABLE_FLAG, (Item) getCategory(FrameDisplay.RESIZABLE_FLAG));
     }
 
     /**

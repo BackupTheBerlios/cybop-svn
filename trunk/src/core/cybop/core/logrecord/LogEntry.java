@@ -32,23 +32,10 @@ import cybop.core.model.String;
  *
  * A log entry consists of the time this entry was made, a log level and a message.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-19 19:41:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class LogEntry extends LogItem {
-
-    //
-    // Children categories.
-    //
-
-    /** The time category. */
-    public static final String TIME_CATEGORY = new String("time_category");
-
-    /** The level category. */
-    public static final String LEVEL_CATEGORY = new String("level_category");
-
-    /** The message category. */
-    public static final String MESSAGE_CATEGORY = new String("message_category");
 
     //
     // Children names.
@@ -108,9 +95,9 @@ public class LogEntry extends LogItem {
         
         super.categorize();
 
-        setCategory(LogEntry.TIME_CATEGORY, getDefaultTimeCategory());
-        setCategory(LogEntry.LEVEL_CATEGORY, getDefaultLevelCategory());
-        setCategory(LogEntry.MESSAGE_CATEGORY, getDefaultMessageCategory());
+        setCategory(LogEntry.TIME, getDefaultTimeCategory());
+        setCategory(LogEntry.LEVEL, getDefaultLevelCategory());
+        setCategory(LogEntry.MESSAGE, getDefaultMessageCategory());
     }
 
     /**
@@ -118,9 +105,9 @@ public class LogEntry extends LogItem {
      */
     public void decategorize() throws Exception {
 
-        removeCategory(LogEntry.MESSAGE_CATEGORY);
-        removeCategory(LogEntry.LEVEL_CATEGORY);
-        removeCategory(LogEntry.TIME_CATEGORY);
+        removeCategory(LogEntry.MESSAGE);
+        removeCategory(LogEntry.LEVEL);
+        removeCategory(LogEntry.TIME);
 
         super.decategorize();
     }
