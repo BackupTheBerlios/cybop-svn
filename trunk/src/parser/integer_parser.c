@@ -21,13 +21,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-08-25 07:17:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTEGER_PARSER_SOURCE
 #define INTEGER_PARSER_SOURCE
 
+#include <stdlib.h>
+#include "../global/structure_constants.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
 
@@ -46,29 +48,52 @@ void parse_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 
         int* sc = (int*) p4;
 
-        if (p3 != NULL_POINTER) {
+        if (p0 != NULL_POINTER) {
 
-            void** s = (void**) p3;
+            int* d = (int*) p0;
 
-            if (p0 != NULL_POINTER) {
+//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &PARSE_INTEGER_MESSAGE, (void*) &PARSE_INTEGER_MESSAGE_COUNT);
 
-                void** d = (void**) p0;
+            // The temporary null-terminated string.
+            char* tmp = NULL_POINTER;
+            int tmps = *sc + 1;
+            // The index.
+            int i = 0;
 
-/*??
-            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize integer.");
+            // Create temporary null-terminated string.
+            create_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
 
-                // Transform string to integer.
-            //??    sscanf(p1, %d, (void*) &(m->value));
-*/
+            // Copy original string to temporary null-terminated string.
+            set_array_elements((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
+            // This is used as index to set the termination character.
+            i = *sc;
+            // Add string termination to temporary null-terminated string.
+            set_array_element((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CHARACTER);
 
-            } else {
+            // The tail variable is useless here and only needed for the string
+            // transformation function. If the whole string array consists of
+            // many sub strings, separated by space characters, then each sub
+            // string gets interpreted as integer number.
+            // The tail variable in this case points to the remaining sub string.
+            char* tail = NULL_POINTER;
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
-            }
+            // Transform string to integer.
+            // The third parameter is the number base:
+            // 0 - tries to automatically identify the correct number base
+            // 8 - octal
+            // 10 - decimal
+            // 16 - hexadecimal
+            *d = strtol(tmp, &tail, 10);
+
+//??            double example:
+//??            test = strtod(tmp, &tail);
+
+            // Destroy temporary null-terminated string.
+            destroy_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE_COUNT);
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
@@ -88,12 +113,57 @@ void parse_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4)
  */
 void serialize_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
-/*??
-            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize integer.");
+    if (p3 != NULL_POINTER) {
 
-                // Transform integer to string.
-            //??    sprintf(p1, %d, (void*) &(m->value));
-*/
+        int* s = (int*) p3;
+
+        if (p2 != NULL_POINTER) {
+
+            int* ds = (int*) p2;
+
+            if (p1 != NULL_POINTER) {
+
+                int* dc = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    void** d = (void**) p0;
+
+//??                    log_message((void*) &INFO_LOG_LEVEL, (void*) &SERIALIZE_INTEGER_MESSAGE, (void*) &SERIALIZE_INTEGER_MESSAGE_COUNT);
+
+                    // Transform integer to string.
+                    // A temporary null-terminated string gets created inside.
+//??                    *d = (void*) itoa(*s);
+//?? USE sprintf here!
+//??    fprintf(p1, %i, &(m->value));
+
+                    // Determine temporary null-terminated string size and count.
+                    *ds = sizeof((char*) *d);
+                    *dc = strlen((char*) *d);
+
+                    // Reduce temporary null-terminated string count by one so that
+                    // the string termination is not considered.
+                    (*dc)--;
+
+                } else {
+
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
+                }
+
+            } else {
+
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE_COUNT);
+            }
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_SIZE_IS_NULL_MESSAGE_COUNT);
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE_COUNT);
+    }
 }
 
 /* INTEGER_PARSER_SOURCE */

@@ -21,14 +21,17 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-08-25 07:17:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef OPERATION_PARSER_SOURCE
 #define OPERATION_PARSER_SOURCE
 
+#include "../global/abstraction_constants.c"
+#include "../global/constant.c"
 #include "../global/log_constants.c"
+#include "../global/structure_constants.c"
 #include "../logger/logger.c"
 
 //
@@ -78,36 +81,18 @@ void parse_operation(void* p0, void* p1, void* p2, const void* p3, const void* p
 
             void** s = (void**) p3;
 
-            if (p0 != NULL_POINTER) {
-
-                void** d = (void**) p0;
-
-/*??
-
-    if (p4 != NULL_POINTER) {
-
-        int* pc = (int*) p4;
-
-        if (p3 != NULL_POINTER) {
-
-            void** p = (void**) p3;
-
             if (p2 != NULL_POINTER) {
 
-                int* ts = (int*) p2;
+                int* ds = (int*) p2;
 
                 if (p1 != NULL_POINTER) {
 
-                    int* tc = (int*) p1;
-
-                    if (p0 != NULL_POINTER) {
-
-                        void** t = (void**) p0;
+                    int* dc = (int*) p1;
 
                         log_message((void*) &INFO_LOG_LEVEL, (void*) &INITIALIZE_OPERATION_MESSAGE, (void*) &INITIALIZE_OPERATION_MESSAGE_COUNT);
 
                         // The parameter count initially set to the persistent model count.
-                        int count = *pc;
+                        int count = *sc;
 
     fprintf(stderr, "initop p3: %s\n", *((char**) p3));
     fprintf(stderr, "initop p4: %i\n", *((int*) p4));
@@ -140,16 +125,16 @@ void parse_operation(void* p0, void* p1, void* p2, const void* p3, const void* p
                             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_INDEX, (void*) &pas);
 
                             // The index for adding the parameter and its count.
-                            int i = *tc;
+                            int i = *dc;
 
     fprintf(stderr, "initop i: %i\n", i);
 
                             if (i >= 0) {
 
-                                if (i == *ts) {
+                                if (i == *ds) {
 
                                     // Increase size.
-                                    *ts = *ts * OPERATION_RESIZE_FACTOR + 1;
+                                    *ds = *ds * OPERATION_RESIZE_FACTOR + 1;
 
                                     // Resize elements.
                                     resize_array((void*) &pa, (void*) &POINTER_ARRAY, p2);
@@ -157,7 +142,7 @@ void parse_operation(void* p0, void* p1, void* p2, const void* p3, const void* p
                                     resize_array((void*) &pas, (void*) &INTEGER_ARRAY, p2);
                                 }
 
-                                if (i < *ts) {
+                                if (i < *ds) {
 
                                     // Initialize transient parameter
                                     // and its count and size.
@@ -191,7 +176,7 @@ void parse_operation(void* p0, void* p1, void* p2, const void* p3, const void* p
                                     set_array_element((void*) &pas, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &tps);
 
                                     // Increment count.
-                                    (*tc)++;
+                                    (*dc)++;
 
                                     // If separator was found, then process
                                     // the remaining parameters.
@@ -199,15 +184,15 @@ void parse_operation(void* p0, void* p1, void* p2, const void* p3, const void* p
 
                                         // The size of the remaining parameters.
                                         // Example: "operation,parameter"
-                                        // *pc = 19
+                                        // *sc = 19
                                         // si = 9
-                                        // rc = *pc - (si + 1) = 9
-                                        int rc = *pc - (si + 1);
+                                        // rc = *sc - (si + 1) = 9
+                                        int rc = *sc - (si + 1);
 
                                         if (rc > 0) {
 
                                             // The remaining parameters.
-                                            void* r = *p + si + 1;
+                                            void* r = *s + si + 1;
 
                                             // Call procedure recursively if more parameters
                                             // are following after the separator.
@@ -235,11 +220,6 @@ void parse_operation(void* p0, void* p1, void* p2, const void* p3, const void* p
 //??                            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize operation. There is no parameter before the separator.");
                         }
 
-                    } else {
-
-//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The transient model is null.");
-                    }
-
                 } else {
 
 //??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The transient model count is null.");
@@ -248,21 +228,6 @@ void parse_operation(void* p0, void* p1, void* p2, const void* p3, const void* p
             } else {
 
 //??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The transient model size is null.");
-            }
-
-        } else {
-
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The persistent model is null.");
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The persistent model count is null.");
-    }
-*/
-            } else {
-
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
