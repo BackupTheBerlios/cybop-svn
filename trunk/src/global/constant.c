@@ -64,7 +64,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.9 $ $Date: 2004-07-22 23:18:22 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-07-23 22:15:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -526,138 +526,132 @@ static const int FILE_RESIZE_FACTOR = 2;
 //?? static const char NULL_MODEL[] = {'null'};
 
 //
-// Cybol tags.
-//
-
-/** The comment tag array, pointer, count. */
-static const char COMMENT_TAG_ARRAY[] = {'<', '!', '-', '-'};
-static const char* COMMENT_TAG = COMMENT_TAG_ARRAY;
-static const int COMMENT_TAG_COUNT = 4;
-
-/** The comment end array, pointer, count. */
-static const char COMMENT_END_ARRAY[] = {'/', '-', '-', '>'};
-static const char* COMMENT_END = COMMENT_END_ARRAY;
-static const int COMMENT_END_COUNT = 4;
-
-/** The tag end array, pointer, count. */
-static const char TAG_END_ARRAY[] = {'/', '>'};
-static const char* TAG_END = TAG_END_ARRAY;
-static const int TAG_END_COUNT = 2;
-
-/** The super tag array, pointer, count. */
-static const char SUPER_TAG_ARRAY[] = {'<', 's', 'u', 'p', 'e', 'r', ' '};
-static const char* SUPER_TAG = SUPER_TAG_ARRAY;
-static const int SUPER_TAG_COUNT = 7;
-
-/** The part tag array, pointer, count. */
-static const char PART_TAG_ARRAY[] = {'<', 'p', 'a', 'r', 't', ' '};
-static const char* PART_TAG = PART_TAG_ARRAY;
-static const int PART_TAG_COUNT = 6;
-
-//
 // Cybol attributes.
 //
 
-/** The attribute end array, pointer, count. */
-static const char ATTRIBUTE_END_ARRAY[] = {'"'};
-static const char* ATTRIBUTE_END = ATTRIBUTE_END_ARRAY;
-static const int ATTRIBUTE_END_COUNT = 1;
-
 /** The name attribute array, pointer, count. */
-static const char NAME_ATTRIBUTE_ARRAY[] = {'n', 'a', 'm', 'e', '=', '"'};
+static const char NAME_ATTRIBUTE_ARRAY[] = {'n', 'a', 'm', 'e'};
 static const char* NAME_ATTRIBUTE = NAME_ATTRIBUTE_ARRAY;
-static const int NAME_ATTRIBUTE_COUNT = 6;
+static const int NAME_ATTRIBUTE_COUNT = 4;
 
 /** The abstraction attribute array, pointer, count. */
-static const char ABSTRACTION_ATTRIBUTE_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n', '=', '"'};
+static const char ABSTRACTION_ATTRIBUTE_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
 static const char* ABSTRACTION_ATTRIBUTE = ABSTRACTION_ATTRIBUTE_ARRAY;
-static const int ABSTRACTION_ATTRIBUTE_COUNT = 13;
+static const int ABSTRACTION_ATTRIBUTE_COUNT = 11;
 
 /** The location attribute array, pointer, count. */
-static const char LOCATION_ATTRIBUTE_ARRAY[] = {'l', 'o', 'c', 'a', 't', 'i', 'o', 'n', '=', '"'};
+static const char LOCATION_ATTRIBUTE_ARRAY[] = {'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
 static const char* LOCATION_ATTRIBUTE = LOCATION_ATTRIBUTE_ARRAY;
-static const int LOCATION_ATTRIBUTE_COUNT = 10;
+static const int LOCATION_ATTRIBUTE_COUNT = 8;
 
 /** The model attribute array, pointer, count. */
-static const char MODEL_ATTRIBUTE_ARRAY[] = {'m', 'o', 'd', 'e', 'l', '=', '"'};
+static const char MODEL_ATTRIBUTE_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
 static const char* MODEL_ATTRIBUTE = MODEL_ATTRIBUTE_ARRAY;
-static const int MODEL_ATTRIBUTE_COUNT = 7;
+static const int MODEL_ATTRIBUTE_COUNT = 5;
 
 /** The constraint attribute array, pointer, count. */
-static const char CONSTRAINT_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '=', '"'};
+static const char CONSTRAINT_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't'};
 static const char* CONSTRAINT_ATTRIBUTE = CONSTRAINT_ATTRIBUTE_ARRAY;
-static const int CONSTRAINT_ATTRIBUTE_COUNT = 12;
+static const int CONSTRAINT_ATTRIBUTE_COUNT = 10;
 
 /** The position location attribute array, pointer, count. */
-static const char POSITION_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n', '=', '"'};
+static const char POSITION_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
 static const char* POSITION_LOCATION_ATTRIBUTE = POSITION_LOCATION_ATTRIBUTE_ARRAY;
-static const int POSITION_LOCATION_ATTRIBUTE_COUNT = 19;
+static const int POSITION_LOCATION_ATTRIBUTE_COUNT = 17;
 
 /** The position abstraction attribute array, pointer, count. */
-static const char POSITION_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n', '=', '"'};
+static const char POSITION_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
 static const char* POSITION_ABSTRACTION_ATTRIBUTE = POSITION_ABSTRACTION_ATTRIBUTE_ARRAY;
-static const int POSITION_ABSTRACTION_ATTRIBUTE_COUNT = 22;
+static const int POSITION_ABSTRACTION_ATTRIBUTE_COUNT = 20;
 
 /** The position model attribute array, pointer, count. */
-static const char POSITION_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'm', 'o', 'd', 'e', 'l', '=', '"'};
+static const char POSITION_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'm', 'o', 'd', 'e', 'l'};
 static const char* POSITION_MODEL_ATTRIBUTE = POSITION_MODEL_ATTRIBUTE_ARRAY;
-static const int POSITION_MODEL_ATTRIBUTE_COUNT = 16;
+static const int POSITION_MODEL_ATTRIBUTE_COUNT = 14;
 
 /** The position constraint attribute array, pointer, count. */
-static const char POSITION_CONSTRAINT_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '=', '"'};
+static const char POSITION_CONSTRAINT_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't'};
 static const char* POSITION_CONSTRAINT_ATTRIBUTE = POSITION_CONSTRAINT_ATTRIBUTE_ARRAY;
-static const int POSITION_CONSTRAINT_ATTRIBUTE_COUNT = 21;
+static const int POSITION_CONSTRAINT_ATTRIBUTE_COUNT = 19;
 
 //
-// General cybol parse modes.
+// Xml tags.
+//
+
+/** The begin comment tag array, pointer, count. */
+static const char BEGIN_COMMENT_TAG_ARRAY[] = {'<', '!', '-', '-'};
+static const char* BEGIN_COMMENT_TAG = BEGIN_COMMENT_TAG_ARRAY;
+static const int BEGIN_COMMENT_TAG_COUNT = 4;
+
+/** The end comment tag array, pointer, count. */
+static const char END_COMMENT_TAG_ARRAY[] = {'/', '-', '-', '>'};
+static const char* END_COMMENT_TAG = END_COMMENT_TAG_ARRAY;
+static const int END_COMMENT_TAG_COUNT = 4;
+
+/** The short end comment tag array, pointer, count. */
+static const char SHORT_END_COMMENT_TAG_ARRAY[] = {'-', '-', '>'};
+static const char* SHORT_END_COMMENT_TAG = SHORT_END_COMMENT_TAG_ARRAY;
+static const int SHORT_END_COMMENT_TAG_COUNT = 3;
+
+/** The begin tag begin array, pointer, count. */
+static const char BEGIN_TAG_BEGIN_ARRAY[] = {'<'};
+static const char* BEGIN_TAG_BEGIN = BEGIN_TAG_BEGIN_ARRAY;
+static const int BEGIN_TAG_BEGIN_COUNT = 1;
+
+/** The end tag begin array, pointer, count. */
+static const char END_TAG_BEGIN_ARRAY[] = {'<', '/'};
+static const char* END_TAG_BEGIN = END_TAG_BEGIN_ARRAY;
+static const int END_TAG_BEGIN_COUNT = 2;
+
+/** The tag end array, pointer, count. */
+static const char TAG_END_ARRAY[] = {'>'};
+static const char* TAG_END = TAG_END_ARRAY;
+static const int TAG_END_COUNT = 1;
+
+/** The empty tag end array, pointer, count. */
+static const char EMPTY_TAG_END_ARRAY[] = {'/', '>'};
+static const char* EMPTY_TAG_END = EMPTY_TAG_END_ARRAY;
+static const int EMPTY_TAG_END_COUNT = 2;
+
+/** The attribute begin array, pointer, count. */
+static const char ATTRIBUTE_BEGIN_ARRAY[] = {' '};
+static const char* ATTRIBUTE_BEGIN = ATTRIBUTE_BEGIN_ARRAY;
+static const int ATTRIBUTE_BEGIN_COUNT = 1;
+
+/** The attribute value begin array, pointer, count. */
+static const char ATTRIBUTE_VALUE_BEGIN_ARRAY[] = {'=', '"'};
+static const char* ATTRIBUTE_VALUE_BEGIN = ATTRIBUTE_VALUE_BEGIN_ARRAY;
+static const int ATTRIBUTE_VALUE_BEGIN_COUNT = 1;
+
+/** The attribute value end array, pointer, count. */
+static const char ATTRIBUTE_VALUE_END_ARRAY[] = {'"'};
+static const char* ATTRIBUTE_VALUE_END = ATTRIBUTE_VALUE_END_ARRAY;
+static const int ATTRIBUTE_VALUE_END_COUNT = 1;
+
+//
+// Xml parse modes.
 //
 
 /** The zero parse mode. */
 static const int ZERO_PARSE_MODE = 0;
 
-//
-// Tag level cybol parse modes.
-//
-
 /** The comment tag parse mode. */
 static const int COMMENT_TAG_PARSE_MODE = 1;
 
-/** The super tag parse mode. */
-static const int SUPER_TAG_PARSE_MODE = 2;
+/** The begin tag parse mode. */
+static const int BEGIN_TAG_PARSE_MODE = 2;
 
-/** The part tag parse mode. */
-static const int PART_TAG_PARSE_MODE = 3;
+/** The end tag parse mode. */
+static const int END_TAG_PARSE_MODE = 3;
 
-//
-// Attribute level cybol parse modes.
-//
+/** The tag value parse mode. */
+static const int TAG_VALUE_PARSE_MODE = 4;
 
-/** The name attribute parse mode. */
-static const int NAME_ATTRIBUTE_PARSE_MODE = 1;
+/** The attribute name parse mode. */
+static const int ATTRIBUTE_NAME_PARSE_MODE = 5;
 
-/** The abstraction attribute parse mode. */
-static const int ABSTRACTION_ATTRIBUTE_PARSE_MODE = 2;
-
-/** The location attribute parse mode. */
-static const int LOCATION_ATTRIBUTE_PARSE_MODE = 3;
-
-/** The model attribute parse mode. */
-static const int MODEL_ATTRIBUTE_PARSE_MODE = 4;
-
-/** The constraint attribute parse mode. */
-static const int CONSTRAINT_ATTRIBUTE_PARSE_MODE = 5;
-
-/** The position abstraction attribute parse mode. */
-static const int POSITION_ABSTRACTION_ATTRIBUTE_PARSE_MODE = 6;
-
-/** The position location attribute parse mode. */
-static const int POSITION_LOCATION_ATTRIBUTE_PARSE_MODE = 7;
-
-/** The position model attribute parse mode. */
-static const int POSITION_MODEL_ATTRIBUTE_PARSE_MODE = 8;
-
-/** The position constraint attribute parse mode. */
-static const int POSITION_CONSTRAINT_ATTRIBUTE_PARSE_MODE = 9;
+/** The attribute value parse mode. */
+static const int ATTRIBUTE_VALUE_PARSE_MODE = 6;
 
 //
 // Cybol abstraction values:

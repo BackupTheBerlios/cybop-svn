@@ -66,7 +66,7 @@
  * A compound model can be created by cloning an existing model template so that
  * some space gets allocated in the computer's memory.
  *
- * @version $Revision: 1.8 $ $Date: 2004-07-22 23:18:22 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-07-23 22:15:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -524,6 +524,7 @@ void serialize_position_constraint_value(const void* p0, const void* p1) {
  */
 void interpret_super_attributes(const void* p0, const void* p1) {
 
+/*??
     if (p1 != NULL_POINTER) {
 
         int* pc = (int*) p1;
@@ -1100,6 +1101,7 @@ void interpret_super_attributes(const void* p0, const void* p1) {
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not interpret super attributes. The persistent attributes count is null.");
     }
+*/
 }
 
 /**
@@ -1112,12 +1114,33 @@ void serialize_super_attributes(const void* p0, const void* p1) {
 }
 
 /**
- * Interprets part attributes.
+ * Initializes the part.
  *
- * @param p0 the persistent attributes pointer
- * @param p1 the persistent attributes count
+ * @param p0 the transient model
+ * @param p1 the transient model count
+ * @param p2 the transient model size
+ * @param p3 the persistent attributes pointer
+ * @param p4 the persistent attributes count
  */
-void interpret_part_attributes(const void* p0, const void* p1) {
+void initialize_part(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+
+    if (p4 != NULL_POINTER) {
+
+        int* pc = (int*) p4;
+
+        if (p3 != NULL_POINTER) {
+
+            void** p = (void**) p3;
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize part. The persistent attributes pointer is null.");
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize part. The persistent attributes count is null.");
+    }
 }
 
 /**
@@ -1144,6 +1167,19 @@ void serialize_part_attributes(const void* p0, const void* p1) {
  */
 void initialize_compound(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
+/*??
+    void* m = NULL_POINTER;
+    int mc = 0;
+    int ms = 0;
+
+    parse_xml((void*) &m, (void*) &mc, (void*) &ms, p3, p4);
+    //?? create_xml_model(xml_model, size);
+    //?? Erzeuge root tree node intern, aber nur,
+    //?? wenn root tag in xml model vorhanden!
+    interpret_cybol(p0, p1, p2, (void*) &m, (void*) &mc);
+*/
+
+/*??
     if (p4 != NULL_POINTER) {
 
         int* pc = (int*) p4;
@@ -1338,11 +1374,17 @@ void initialize_compound(void* p0, void* p1, void* p2, const void* p3, const voi
                             // and the current count.
                             ac = ab - bc;
 
-                            // Interpret attributes.
+                            // Initialize part.
                             // Hand over the formerly stored attribute begin pointer
                             // and its count.
-                            interpret_part_attributes((void*) &a, (void*) &ac);
+/*??
+                            initialize_part(p0, p1, p2, (void*) &a, (void*) &ac);
 
+                            create(whole, name, abstraction, ...);
+                            set(whole, name, ...);
+*/
+
+/*??
                             // Move current byte pointer
                             // and remaining bytes count.
                             b = b + TAG_END_COUNT;
@@ -1372,6 +1414,7 @@ void initialize_compound(void* p0, void* p1, void* p2, const void* p3, const voi
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize compound. The persistent model count is null.");
     }
+*/
 }
 
 /**
