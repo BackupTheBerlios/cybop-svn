@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2004-11-30 15:23:23 $ $Author: rholzmueller $
+ * @version $Revision: 1.10 $ $Date: 2004-12-08 14:07:28 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -141,11 +141,13 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
  * @param p4 the knowledge
  * @param p5 the knowledge count
  * @param p6 the knowledge size
+ * @param p_main_signal_id
  * @param pp_internal the internals
  * @param p11 the shutdown flag
  */
 void handle_operation_signal(const void* p0, const void* p1, const void* p2, const void* p3,
-    void* p4, void* p5, void* p6, void** pp_internal, void* p11) {
+    void* p4, void* p5, void* p6, 
+    int* p_main_signal_id, void** pp_internal, void* p11) {
 
     log_message((void*) &INFO_LOG_LEVEL, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT);
 
@@ -199,7 +201,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            send_message(p2, p3, p4, p5, p6, pp_internal );
+            send_message(p2, p3, p4, p5, p6, p_main_signal_id, pp_internal );
 
             d = 1;
         }

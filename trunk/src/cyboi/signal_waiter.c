@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2004-11-30 15:23:13 $ $Author: rholzmueller $
+ * @version $Revision: 1.12 $ $Date: 2004-12-08 14:08:19 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -293,7 +293,7 @@ void  wait( void** pp_internal ) {
                         (void*) &p, (void*) &pc,
                         (void*) pp_knowledge,
                         (void*) p_knowledge_count, (void*) p_knowledge_size,
-                        pp_internal,
+                        (void*) &main_sig_id, pp_internal,
                         (void*) &f );
 
                     d = 1;
@@ -320,6 +320,8 @@ void  wait( void** pp_internal ) {
             pc = 0;
             // Reset priority.
             pr = NORMAL_PRIORITY;
+            // Reset main signal id.
+            main_sig_id = 0;
             // Reset highest priority index.
             i = -1;
             // Reset done flag.
