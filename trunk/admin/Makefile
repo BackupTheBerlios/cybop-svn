@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.24 $ $Date: 2005-03-20 17:53:33 $ $Author: christian $
+# @version $Revision: 1.25 $ $Date: 2005-03-31 08:03:43 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 # @author Michael Simon <michael.simon@gmx.net>
 #
@@ -84,10 +84,14 @@ LOGGER_SOURCES = $(wildcard $(SRC)/logger/*.c)
 LOGGER_OBJECTS = $(patsubst $(SRC)/logger/%.c,$(OBJ)/logger/%.o,$(LOGGER_SOURCES))
 LOGIC_SOURCES = $(wildcard $(SRC)/logic/*.c)
 LOGIC_OBJECTS = $(patsubst $(SRC)/logic/%.c,$(OBJ)/logic/%.o,$(LOGIC_SOURCES))
-LOGIC_STARTUP_SOURCES = $(wildcard $(SRC)/logic/startup/*.c)
-LOGIC_STARTUP_OBJECTS = $(patsubst $(SRC)/logic/startup/%.c,$(OBJ)/logic/startup/%.o,$(LOGIC_STARTUP_SOURCES))
+LOGIC_RECEIVE_SOURCES = $(wildcard $(SRC)/logic/receive/*.c)
+LOGIC_RECEIVE_OBJECTS = $(patsubst $(SRC)/logic/receive/%.c,$(OBJ)/logic/receive/%.o,$(LOGIC_RECEIVE_SOURCES))
+LOGIC_SEND_SOURCES = $(wildcard $(SRC)/logic/send/*.c)
+LOGIC_SEND_OBJECTS = $(patsubst $(SRC)/logic/send/%.c,$(OBJ)/logic/send/%.o,$(LOGIC_SEND_SOURCES))
 LOGIC_SHUTDOWN_SOURCES = $(wildcard $(SRC)/logic/shutdown/*.c)
 LOGIC_SHUTDOWN_OBJECTS = $(patsubst $(SRC)/logic/shutdown/%.c,$(OBJ)/logic/shutdown/%.o,$(LOGIC_SHUTDOWN_SOURCES))
+LOGIC_STARTUP_SOURCES = $(wildcard $(SRC)/logic/startup/*.c)
+LOGIC_STARTUP_OBJECTS = $(patsubst $(SRC)/logic/startup/%.c,$(OBJ)/logic/startup/%.o,$(LOGIC_STARTUP_SOURCES))
 PARSER_SOURCES = $(wildcard $(SRC)/parser/*.c)
 PARSER_OBJECTS = $(patsubst $(SRC)/parser/%.c,$(OBJ)/parser/%.o,$(PARSER_SOURCES))
 SIGNAL_SOURCES = $(wildcard $(SRC)/signal/*.c)
@@ -119,7 +123,7 @@ X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WIN
 #	$(COMPILER) -L/usr/X11R6/lib -L/usr/lib \
 #		-o $(BIN)/$(BINARY) $(OBJ)/cyboi/cyboi.o -lX11 -lxml2
 #
-all: create $(ACCESSOR_OBJECTS) $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CREATOR_OBJECTS) $(CYBOI_OBJECTS) $(GLOBAL_OBJECTS) $(LOGGER_OBJECTS) $(LOGIC_OBJECTS) $(LOGIC_STARTUP_OBJECTS) $(LOGIC_SHUTDOWN_OBJECTS) $(PARSER_OBJECTS) $(SIGNAL_OBJECTS) $(SOCKET_OBJECTS) $(STATE_OBJECTS) $(TEST_OBJECTS) $(TRANSLATOR_OBJECTS) $(X_WINDOWS_OBJECTS)
+all: create $(ACCESSOR_OBJECTS) $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CREATOR_OBJECTS) $(CYBOI_OBJECTS) $(GLOBAL_OBJECTS) $(LOGGER_OBJECTS) $(LOGIC_OBJECTS) $(LOGIC_RECEIVE_OBJECTS) $(LOGIC_SEND_OBJECTS) $(LOGIC_SHUTDOWN_OBJECTS) $(LOGIC_STARTUP_OBJECTS) $(PARSER_OBJECTS) $(SIGNAL_OBJECTS) $(SOCKET_OBJECTS) $(STATE_OBJECTS) $(TEST_OBJECTS) $(TRANSLATOR_OBJECTS) $(X_WINDOWS_OBJECTS)
 # Compile source files.
 	$(COMPILER) -c $(COMPILER_FLAGS) $(SRC)/cyboi/cyboi.c \
 		-o $(OBJ)/cyboi/cyboi.o
@@ -145,8 +149,10 @@ create:
 	-cd $(OBJ); mkdir global
 	-cd $(OBJ); mkdir logger
 	-cd $(OBJ); mkdir logic
-	-cd $(OBJ)/logic; mkdir startup
+	-cd $(OBJ)/logic; mkdir receive
+	-cd $(OBJ)/logic; mkdir send
 	-cd $(OBJ)/logic; mkdir shutdown
+	-cd $(OBJ)/logic; mkdir startup
 	-cd $(OBJ); mkdir parser
 	-cd $(OBJ); mkdir signal
 	-cd $(OBJ); mkdir socket
@@ -182,10 +188,16 @@ $(OBJ)/logger/%.o: $(SRC)/logger/%.c
 $(OBJ)/logic/%.o: $(SRC)/logic/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/logic/startup/%.o: $(SRC)/logic/startup/%.c
+$(OBJ)/logic/receive/%.o: $(SRC)/logic/receive/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/logic/send/%.o: $(SRC)/logic/send/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/logic/shutdown/%.o: $(SRC)/logic/shutdown/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/logic/startup/%.o: $(SRC)/logic/startup/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/parser/%.o: $(SRC)/parser/%.c

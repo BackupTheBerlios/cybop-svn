@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2005-03-31 08:03:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -51,6 +51,7 @@
  * - sender (who): ip address, socket port
  * - receiver (whom): ip address, socket port
  * - message (what): knowledge model to be sent in serialized form
+ * - waiting (blocking): whether the system shall wait until message is sent
  *
  * @param p0 the parameters
  * @param p1 the parameters count
@@ -244,7 +245,7 @@ void send_message(const void* p0, const void* p1,
         if (r == 1) {
 
 /*??
-            translate
+            encode-translate
             serialise
             send_vga
 */
