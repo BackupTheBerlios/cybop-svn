@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.13 $ $Date: 2003-07-24 09:59:11 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-07-24 20:36:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -115,7 +115,8 @@ class Main {
 
                 } else {
     
-                    java.lang.System.out.println("ERROR: Could not execute cyboi. The argument array length is unequal to two.");
+                    java.lang.System.out.println("Usage:\n"
+                        + "startup_cyboi cybol/OperatingSystem dynamic");
                 }
 
             } else {

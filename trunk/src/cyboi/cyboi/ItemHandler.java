@@ -65,7 +65,7 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.13 $ $Date: 2003-07-24 09:59:11 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-07-24 20:36:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -74,6 +74,9 @@ class ItemHandler {
     // Constants.
     //
     
+    /** The cybol file suffix constant. */
+    static java.lang.String CYBOL = ".cybol";
+
     /** The name constant. */
     static java.lang.String NAME = "name";
 
@@ -146,6 +149,7 @@ class ItemHandler {
 
         if (c != null) {
 
+            java.lang.System.out.println("INFO: Create item.");
             c.item_abstractions = MapHandler.create_map();
             c.items = MapHandler.create_map();
             c.space_abstractions = MapHandler.create_map();
@@ -174,6 +178,7 @@ class ItemHandler {
         
         if (ic != null) {
 
+            java.lang.System.out.println("INFO: Destroy item.");
             java.lang.Object forces = ic.forces;
             ic.forces = null;
             MapHandler.destroy_map(forces);
@@ -318,7 +323,7 @@ class ItemHandler {
 
         if (p != null) {
             
-            java.lang.String f = c + ".cybol";
+            java.lang.String f = c + ItemHandler.CYBOL;
 
             java.lang.System.out.println("INFO: Parse file: " + f);
             p.parse(f);

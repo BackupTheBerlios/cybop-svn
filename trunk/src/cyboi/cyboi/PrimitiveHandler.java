@@ -29,7 +29,7 @@ package cyboi;
  *
  * It contains procedures to create items of primitive type.
  *
- * @version $Revision: 1.8 $ $Date: 2003-07-24 09:46:18 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-07-24 20:36:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class PrimitiveHandler {
@@ -46,6 +46,7 @@ class PrimitiveHandler {
      */
     static java.lang.Object create_integer_primitive(java.lang.Object s) {
 
+        java.lang.System.out.println("INFO: Create integer primitive.");
         return java.lang.Integer.valueOf((java.lang.String) s);
     }
 
@@ -55,6 +56,8 @@ class PrimitiveHandler {
      * @param p the integer primitive
      */
     static void destroy_integer_primitive(java.lang.Object p) {
+
+        java.lang.System.out.println("INFO: Destroy integer primitive.");
     }
 
     //
@@ -69,6 +72,7 @@ class PrimitiveHandler {
      */
     static java.lang.Object create_float_primitive(java.lang.Object s) {
 
+        java.lang.System.out.println("INFO: Create float primitive.");
         return java.lang.Double.valueOf((java.lang.String) s);
     }
 
@@ -78,6 +82,8 @@ class PrimitiveHandler {
      * @param p the float primitive
      */
     static void destroy_float_primitive(java.lang.Object p) {
+
+        java.lang.System.out.println("INFO: Destroy float primitive.");
     }
 
     //
@@ -92,7 +98,8 @@ class PrimitiveHandler {
      */
     static java.lang.Object create_character_primitive(java.lang.Object s) {
 
-        return null; //?? java.lang.Double.valueOf((java.lang.String) s);
+        java.lang.System.out.println("INFO: Create character primitive.");
+        return s; //?? java.lang.Double.valueOf((java.lang.String) s);
     }
 
     /**
@@ -101,6 +108,8 @@ class PrimitiveHandler {
      * @param p the character primitive
      */
     static void destroy_character_primitive(java.lang.Object p) {
+
+        java.lang.System.out.println("INFO: Destroy character primitive.");
     }
 
     //
@@ -115,6 +124,7 @@ class PrimitiveHandler {
      */
     static java.lang.Object create_string_primitive(java.lang.Object s) {
 
+        java.lang.System.out.println("INFO: Create string primitive.");
         return s;
     }
 
@@ -124,6 +134,8 @@ class PrimitiveHandler {
      * @param p the string primitive
      */
     static void destroy_string_primitive(java.lang.Object p) {
+
+        java.lang.System.out.println("INFO: Destroy string primitive.");
     }
 
 /*??
