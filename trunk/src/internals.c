@@ -32,7 +32,7 @@
  * handling of various platforms and graphical user interfaces
  * such as X-Windows, Macintosh or MS Windows.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-17 17:16:36 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-02-08 12:39:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct internals {
@@ -58,4 +58,3 @@ struct internals {
 
 /* INTERNALS_SOURCE */
 #endif
-

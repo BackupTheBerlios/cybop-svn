@@ -44,7 +44,7 @@
  *
  * It controls the input and output of x windows.
  *
- * @version $Revision: 1.8 $ $Date: 2004-02-07 00:04:55 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-02-08 12:39:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -134,7 +134,6 @@ void init_x() {
  */
 void send_x_windows_output(void* p0, void* p1, void* p2) {
 
-/*??
     struct x_windows* x = (struct x_windows*) p2;
 
     if (x != (void*) 0) {
@@ -186,23 +185,23 @@ void send_x_windows_output(void* p0, void* p1, void* p2) {
         x->light_gray.red = 56000;
         x->light_gray.green = 58000;
         x->light_gray.blue = 60000;
-        
+
         XAllocColor(x->display, x->cmap, &(x->light_gray));
         x->vlight_gray.red = 60000;
         x->vlight_gray.green = 61000;
         x->vlight_gray.blue = 62000;
-        
+
         XAllocColor(x->display, x->cmap, &(x->vlight_gray));
         x->dark_gray.red = 32768;
         x->dark_gray.green = 32768;
         x->dark_gray.blue = 32768;
 
         XAllocColor(x->display, x->cmap, &(x->dark_gray));
-        
+
         x->gc_menu = XCreateGC(x->display, x->window, 0, 0);
         XSetBackground(x->display, x->gc_menu, x->background);
         XSetForeground(x->display, x->gc_menu, x->light_gray.pixel);
-        
+
         x->gc_menu_border_top = XCreateGC(x->display, x->window, 0, 0);
         XSetBackground(x->display, x->gc_menu_border_top, x->background);
         XSetForeground(x->display, x->gc_menu_border_top, x->vlight_gray.pixel);
@@ -227,11 +226,16 @@ void send_x_windows_output(void* p0, void* p1, void* p2) {
         // Map windows.
         XMapRaised(x->display, x->window);
 
+        //?? From xlib tutorial. Remove later when event loop (MappingNotify) functions!
+        XFlush(x->display);
+        sleep(5);
+
+        XCloseDisplay(x->display);
+
     } else {
 
-        puts("ERROR: Could not handle send x windows output. The x windows is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not handle send x windows output. The x windows is null.");
     }
-*/
 }
 
 /**
@@ -247,7 +251,6 @@ void receive_x_windows_input(void* p0) {
 
     if (x != (void*) 0) {
 
-/*??
         // Read signal.
         XNextEvent(x->display, &(x->event));
 
@@ -258,9 +261,15 @@ void receive_x_windows_input(void* p0) {
             // Bei mehreren Expose-Events nur der letzte beachtet
             if (x->event.xexpose.count == 0) {
 
+                int indent_x;
+                int indent_y;
+                int count_menu;
+                int count_item;
+                int indent_menu_item_x;
+
                 XGetWindowAttributes(x->display, x->window, &(x->window_attributes));
-                //XDrawImageString (myevent.xexpose.display, myevent.xexpose.window, mygc, 50, 50, "hello", strlen("hello"));
-                //XRectangle (myevent.xexpose.display, myevent.xexpose.window, gc_menu, 2, 2, (window_attributes.width-4), 30);
+                //XDrawImageString (x->event.xexpose.display, x->event.xexpose.window, x->gc, 50, 50, "hello", strlen("hello"));
+                //XRectangle (x->event.xexpose.display, x->event.xexpose.window, gc_menu, 2, 2, (window_attributes.width-4), 30);
 
                 // Menuleiste zeichnen
                 XDrawLine(x->display, x->window, x->gc_menu_border_bottom, 0, 21, x->window_attributes.width, 21);
@@ -280,41 +289,41 @@ void receive_x_windows_input(void* p0) {
                 //,".menu1.name";
                 //printf("%s",dort);
                 //Anwendung.menu_bar1.Datei.menu_item1.name
-                //XDrawImageString (myevent.xexpose.display, myevent.xexpose.window, mygc, 50, 50, Anwendung.menu_bar1.Datei.name, strlen(Anwendung.menu_bar1.Datei.name));
-                //XDrawImageString (myevent.xexpose.display, myevent.xexpose.window, mygc, 50, 50, str_test, strlen(str_test));
-                //XDrawImageString (myevent.xexpose.display, myevent.xexpose.window, mygc, 50, 50, Anwendung.menu_bar1.menu1.name, strlen(Anwendung.menu_bar1.menu1.name));
+                //XDrawImageString (x->event.xexpose.display, x->event.xexpose.window, x->gc, 50, 50, Anwendung.menu_bar1.Datei.name, strlen(Anwendung.menu_bar1.Datei.name));
+                //XDrawImageString (x->event.xexpose.display, x->event.xexpose.window, x->gc, 50, 50, str_test, strlen(str_test));
+                //XDrawImageString (x->event.xexpose.display, x->event.xexpose.window, x->gc, 50, 50, Anwendung.menu_bar1.menu1.name, strlen(Anwendung.menu_bar1.menu1.name));
                 //}
-    
+
                 indent_x = 0;
                 indent_y = 0;
                 indent_menu_item_x = 0;
-                
+
                 for (count_menu = 0; count_menu < 5; count_menu++) {
-        
+
                     if (strlen(Anwendung.menu_bar1.menus[count_menu].name) > 0) {
-                        
+
                         XDrawImageString(x->event.xexpose.display, x->event.xexpose.window, x->gc_menu_font, (5 + indent_x), 16, Anwendung.menu_bar1.menus[count_menu].name, strlen(Anwendung.menu_bar1.menus[count_menu].name));
 
                         for (count_item = 0; ((count_item < 9) && (Anwendung.menu_bar1.menus[count_menu].angeklickt == 1)); count_item++) {
-                            
+
                             if ((strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name) * 6) + 6 > indent_menu_item_x) {
-                                
+
                                 indent_menu_item_x = (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name) * 6) + 6;
                             }
                         }
-                
+
                         for (count_item = 0; ((count_item < 9) && (Anwendung.menu_bar1.menus[count_menu].angeklickt == 1)); count_item++) {
-    
+
                             if (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name) > 0) {
-                        
+
                                 indent_y = indent_y + 17;
-    
+
                                 //if ((strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6 > indent_menu_item_x) {
-                                //  XFillRectangle (myevent.xexpose.display, myevent.xexpose.window, gc_menu_border_bottom, indent_menu_item_x, 20 + (count_item*17), (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6, 19);
+                                //  XFillRectangle (x->event.xexpose.display, x->event.xexpose.window, gc_menu_border_bottom, indent_menu_item_x, 20 + (count_item*17), (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6, 19);
                                 //  indent_menu_item_x = (strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name)*6)+6;
                                 //
                                 //}
-                                //XFillRectangle (myevent.xexpose.display, myevent.xexpose.window, gc_menu, (5+indent_x), 20 + (count_item*17), (5+indent_x+50), 19);
+                                //XFillRectangle (x->event.xexpose.display, x->event.xexpose.window, gc_menu, (5+indent_x), 20 + (count_item*17), (5+indent_x+50), 19);
 
                                 XFillRectangle(
                                     x->event.xexpose.display,
@@ -324,7 +333,7 @@ void receive_x_windows_input(void* p0) {
                                     20 + (count_item * 17),
                                     indent_menu_item_x,
                                     19);
-    
+
                                 XDrawImageString(
                                     x->event.xexpose.display,
                                     x->event.xexpose.window,
@@ -334,59 +343,59 @@ void receive_x_windows_input(void* p0) {
                                     Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name,
                                     strlen(Anwendung.menu_bar1.menus[count_menu].menu_items[count_item].name));
                             }
-                            
+
                         }
-                
+
                         if (Anwendung.menu_bar1.menus[count_menu].angeklickt == 1) {
-                
+
                             XDrawLine(x->display, x->window, x->gc_menu_border_bottom, (3 + indent_x), (21 + indent_y), (3 + indent_x + indent_menu_item_x), (21 + indent_y));
                             XDrawLine(x->display, x->window, x->gc_menu_border_bottom, (3 + indent_x + indent_menu_item_x), 20, (3 + indent_x + indent_menu_item_x), (21 + indent_y));
                             XDrawLine(x->display, x->window, x->gc_menu_border_top, (3 + indent_x), 19, (3 + indent_x + indent_menu_item_x), 19);
                             XDrawLine(x->display, x->window, x->gc_menu_border_top, (3 + indent_x), 19, (3 + indent_x), (20 + indent_y));
                         }
-                        
+
                         indent_x = indent_x + (strlen(Anwendung.menu_bar1.menus[count_menu].name) * 6) + 10;
                     }
                 }
             }
-            
+
         } else if (x->event.type == MappingNotify) {
-            
+
             // Process keyboard mapping changes.
-            XRefreshKeyboardMapping(&x->event);
-            
+            XRefreshKeyboardMapping((XMappingEvent*) &(x->event));
+
         } else if (x->event.type == ButtonPress) {
-    
+
             // Process mouse events.
-            
+
             //struct XButtonEvent w;
-            //w = myevent.xbutton.window;
+            //w = x->event.xbutton.window;
             //if ()
-            //w = myevent.xbutton.x;
+            //w = x->event.xbutton.x;
             //printf("%d", w);
-            //XDrawImageString (myevent.xexpose.display, myevent.xexpose.window, gc_menu_font, 100, 100, w.xbutton.x, strlen(w.xbutton.x));
+            //XDrawImageString (x->event.xexpose.display, x->event.xexpose.window, gc_menu_font, 100, 100, w.xbutton.x, strlen(w.xbutton.x));
             //printf("%s", w.xbutton.x);
-    
-            if ((myevent.xbutton.x<30) && (myevent.xbutton.x>3) && (myevent.xbutton.y<21) && (myevent.xbutton.x>1)) {
-              XClearArea (mydisplay, mywindow, 0, 0, 0, 0, True);
+
+            if ((x->event.xbutton.x<30) && (x->event.xbutton.x>3) && (x->event.xbutton.y<21) && (x->event.xbutton.x>1)) {
+              XClearArea (x->display, x->window, 0, 0, 0, 0, True);
               Anwendung.menu_bar1.menus[0].angeklickt = 1;
               Anwendung.menu_bar1.menus[1].angeklickt = 0;
               Anwendung.menu_bar1.menus[2].angeklickt = 0;
             }
-            else if ((myevent.xbutton.x<65) && (myevent.xbutton.x>38) && (myevent.xbutton.y<21) && (myevent.xbutton.x>1)) {
-              XClearArea (mydisplay, mywindow, 0, 0, 0, 0, True);
+            else if ((x->event.xbutton.x<65) && (x->event.xbutton.x>38) && (x->event.xbutton.y<21) && (x->event.xbutton.x>1)) {
+              XClearArea (x->display, x->window, 0, 0, 0, 0, True);
               Anwendung.menu_bar1.menus[0].angeklickt = 0;
               Anwendung.menu_bar1.menus[1].angeklickt = 1;
               Anwendung.menu_bar1.menus[2].angeklickt = 0;
             }
-            else if ((myevent.xbutton.x<120) && (myevent.xbutton.x>70) && (myevent.xbutton.y<21) && (myevent.xbutton.x>1)) {
-              XClearArea (mydisplay, mywindow, 0, 0, 0, 0, True);
+            else if ((x->event.xbutton.x<120) && (x->event.xbutton.x>70) && (x->event.xbutton.y<21) && (x->event.xbutton.x>1)) {
+              XClearArea (x->display, x->window, 0, 0, 0, 0, True);
               Anwendung.menu_bar1.menus[0].angeklickt = 0;
               Anwendung.menu_bar1.menus[1].angeklickt = 0;
               Anwendung.menu_bar1.menus[2].angeklickt = 1;
             }
             else {
-              XClearArea (mydisplay, mywindow, 0, 0, 0, 0, True);
+              XClearArea (x->display, x->window, 0, 0, 0, 0, True);
               Anwendung.menu_bar1.menus[0].angeklickt = 0;
               Anwendung.menu_bar1.menus[1].angeklickt = 0;
               Anwendung.menu_bar1.menus[2].angeklickt = 0;
@@ -395,46 +404,44 @@ void receive_x_windows_input(void* p0) {
         } else if (x->event.type == KeyPress) {
 
             // Process keyboard events.
-    
-            i = XLookupString(&(x->event), text, 10, &(x->key), 0);
-            
+            int i = XLookupString((XKeyEvent*) &(x->event), x->text, 10, &(x->key), 0);
+
             //// Das gehoert hier eigentlich nicht her, nur zu Demonstartionszwecken
             //// Bei Tastendruck 'a' wird erstes Menue gezeichenet, bei b das Zweite, bei c das Dritte
-            if (i == 1 && text[0] == 'a') {
-    
+            if (i == 1 && x->text[0] == 'a') {
+
                 XClearArea(x->display, x->window, 0, 0, 0, 0, True);
                 Anwendung.menu_bar1.menus[0].angeklickt = 1;
                 Anwendung.menu_bar1.menus[1].angeklickt = 0;
                 Anwendung.menu_bar1.menus[2].angeklickt = 0;
-            
-            } else if (i == 1 && text[0] == 'b') {
-                    
+
+            } else if (i == 1 && x->text[0] == 'b') {
+
                 XClearArea(x->display, x->window, 0, 0, 0, 0, True);
                 Anwendung.menu_bar1.menus[0].angeklickt = 0;
                 Anwendung.menu_bar1.menus[1].angeklickt = 1;
                 Anwendung.menu_bar1.menus[2].angeklickt = 0;
-            
-            } else if (i == 1 && text[0] == 'c') {
-    
+
+            } else if (i == 1 && x->text[0] == 'c') {
+
                 XClearArea(x->display, x->window, 0, 0, 0, 0, True);
                 Anwendung.menu_bar1.menus[0].angeklickt = 0;
                 Anwendung.menu_bar1.menus[1].angeklickt = 0;
                 Anwendung.menu_bar1.menus[2].angeklickt = 1;
-            
-            } if (i == 1 && text[0] == 'x') {
-    
+
+            } if (i == 1 && x->text[0] == 'x') {
+
                 XClearArea(x->display, x->window, 0, 0, 0, 0, True);
                 Anwendung.menu_bar1.menus[0].angeklickt = 0;
                 Anwendung.menu_bar1.menus[1].angeklickt = 0;
                 Anwendung.menu_bar1.menus[2].angeklickt = 0;
 
-            } else if (i == 1 && text[0] == 'q') {
-                
-                done = 1;
+            } else if (i == 1 && x->text[0] == 'q') {
+
+//??                done = 1;
             }
         }
-*/
-    
+
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not handle x windows signal. The x windows is null.");

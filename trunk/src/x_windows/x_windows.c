@@ -33,7 +33,7 @@
  *
  * It keeps data which are necessary to control an x windows.
  *
- * @version $Revision: 1.3 $ $Date: 2004-02-07 00:04:55 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-02-08 12:39:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct x_windows {
@@ -46,22 +46,22 @@ struct x_windows {
 
     /** The window. */
     Window window;
-    
+
     /** The graphics context. */
     GC gc;
-    
+
     /** The menu graphics context. */
     GC gc_menu;
-    
+
     /** The menu border top graphics context. */
     GC gc_menu_border_top;
-    
+
     /** The menu border bottom graphics context. */
     GC gc_menu_border_bottom;
-    
+
     /** The menu font graphics context. */
     GC gc_menu_font;
-    
+
     /** The event. */
     XEvent event;
 
@@ -93,14 +93,8 @@ struct x_windows {
     /*??unsigned long*/ double menu_foreground;
 
     /** The temporary variables. */
-    int i;
     int k;
     int menu_eintrage_ende;
-    int count_menu;
-    int count_item;
-    int indent_x;
-    int indent_y;
-    int indent_menu_item_x;
 
     /** The color map. */
     Colormap cmap;

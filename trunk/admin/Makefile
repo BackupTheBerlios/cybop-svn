@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.6 $ $Date: 2004-02-04 10:58:14 $ $Author: christian $
+# @version $Revision: 1.7 $ $Date: 2004-02-08 12:39:47 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -53,7 +53,7 @@ SRC = $(ROOT)/src
 BINARY = cyboi
 COMPILER = gcc
 #-Wall -pedantic
-COMPILER_FLAGS = -g
+COMPILER_FLAGS = -g -I/usr/X11R6/include #-fsjlj-exceptions
 #-pedantic
 
 #
@@ -91,8 +91,11 @@ X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WIN
 # Do NOT add a "$@" at the end!
 # Otherwise, a compiler error will occur, because "make $@" is already used internally.
 #
+#	$(COMPILER) -I /usr/X11R6/include -L /usr/X11R6/lib $(OBJ)/cyboi.o -o $(BIN)/$(BINARY)
+#
 all: create $(ROOT_OBJECTS) $(CYBOL_OBJECTS) $(DYNAMICS_OBJECTS) $(LOGGER_OBJECTS) $(MODEL_OBJECTS) $(SIGNAL_OBJECTS) $(STATICS_OBJECTS) $(X_WINDOWS_OBJECTS)
-	$(COMPILER) -o $(BIN)/$(BINARY) $(MAIN_SOURCE)
+	$(COMPILER) -L/usr/X11R6/lib \
+		-o $(BIN)/$(BINARY) $(OBJ)/cyboi.o -lX11
 	@echo Compiled cyboi files.
 
 #
@@ -114,26 +117,26 @@ create:
 $(OBJ)/%.o: $(SRC)/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-#$(OBJ)/cybol/%.o: $(SRC)/cybol/%.c
-#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+$(OBJ)/cybol/%.o: $(SRC)/cybol/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-#$(OBJ)/dynamics/%.o: $(SRC)/dynamics/%.c
-#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+$(OBJ)/dynamics/%.o: $(SRC)/dynamics/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-#$(OBJ)/logger/%.o: $(SRC)/logger/%.c
-#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+$(OBJ)/logger/%.o: $(SRC)/logger/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-#$(OBJ)/model/%.o: $(SRC)/model/%.c
-#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+$(OBJ)/model/%.o: $(SRC)/model/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-#$(OBJ)/signal/%.o: $(SRC)/signal/%.c
-#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+$(OBJ)/signal/%.o: $(SRC)/signal/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-#$(OBJ)/statics/%.o: $(SRC)/statics/%.c
-#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+$(OBJ)/statics/%.o: $(SRC)/statics/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-#$(OBJ)/x_windows/%.o: $(SRC)/x_windows/%.c
-#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+$(OBJ)/x_windows/%.o: $(SRC)/x_windows/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 #
 # Creates distribution file.
@@ -159,15 +162,17 @@ dist:
 #
 .PHONY: clean
 clean:
-	-rm -r $(OBJ)/cybol
-	-rm -r $(OBJ)/dynamics
-	-rm -r $(OBJ)/logger
-	-rm -r $(OBJ)/model
-	-rm -r $(OBJ)/signal
-	-rm -r $(OBJ)/statics
-	-rm -r $(OBJ)/x_windows
-	-rm -f $(OBJ)/*.o
-#	-rm -f $(BINARY)
+#	-rm -r $(BIN)
+	-rm -f $(BIN)/cyboi
 	-rm -f $(DIST)/cybol.tar.gz
+	-rm -r $(OBJ)
+#	-rm -r $(OBJ)/cybol
+#	-rm -r $(OBJ)/dynamics
+#	-rm -r $(OBJ)/logger
+#	-rm -r $(OBJ)/model
+#	-rm -r $(OBJ)/signal
+#	-rm -r $(OBJ)/statics
+#	-rm -r $(OBJ)/x_windows
+#	-rm -f $(OBJ)/*.o
 	@echo Cleaned cyboi files.
 
