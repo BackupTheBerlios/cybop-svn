@@ -28,7 +28,10 @@
 #include "map.c"
 #include "map_handler.c"
 #include "signal.c"
-#include "signal_handler.c"
+//?? #include "signal_handler.c"
+
+//?? Temporary for character screen testing.
+#include "character_screen_handler.c"
 
 /**
  * This is the Cybernetics Oriented Interpreter (CYBOI).
@@ -36,9 +39,18 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.5 $ $Date: 2003-09-27 19:50:33 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+/**
+ * Shows the usage information.
+ */
+static void show_usage_information() {
+
+    show_message("Usage: cyboi dynamics statics");
+    show_message("Example: cyboi startup cybol.core.system.system");
+}
 
 /**
  * The main entry function.
@@ -47,21 +59,24 @@
  * @param p1 the argument vector (argv)
  * @return the return value
  */
-int main(int p0, char** p1) {
+int main(int p0, char* p1) {
 
     // Return 1 to indicate an error, by default.
     int r = 1;
+
+    // Log handler.
+    log_level = (void*) &INFO_LOG_LEVEL;
+
+    //?? Temporary character based screen output test.
+    show_character_screen();
 
     if (p1 != 0) {
 
         if ((p0 == 3) && (p1[1] != 0) && (p1[2] != 0)) {
 
             // Arguments.
-            void* dynamics = (void*) p1[1];
-            void* statics = (void*) p1[2];
-
-            // Log handler.
-            log_level = 3;
+            void* dynamics_argument = (void*) p1[1];
+            void* statics_argument = (void*) p1[2];
 
 /*??
             // XML parser.
@@ -80,6 +95,7 @@ int main(int p0, char** p1) {
             JavaEventHandler.set_event_handler(event_handler);
 */
 
+/*??
             // Create signal for storage in signal memory.
             struct signal* tmp = (struct signal*) malloc(sizeof(struct signal));
 
@@ -106,6 +122,7 @@ int main(int p0, char** p1) {
                 }
 */
 
+/*??
             } else {
 
                 log(ERROR_LOG_LEVEL, "Could not send initial signal. The signal is null.");
@@ -134,20 +151,21 @@ int main(int p0, char** p1) {
             xml_parser = 0;
 */
 
-            log(INFO_LOG_LEVEL, "Exit cyboi normally.");
+            log((void*) &INFO_LOG_LEVEL, "Exit CYBOI normally.");
+
             // Return 0 to indicate proper shutdown.
             r = 0;
 
         } else {
 
-            // Show help information.
-            log(ERROR_LOG_LEVEL, "Usage:\n\
-                cyboi startup cybol.core.system.system");
+            log((void*) &ERROR_LOG_LEVEL, "Could not execute CYBOI. The command line parameters are incorrect.");
+
+            show_usage_information();
         }
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not execute cyboi. The argument vector is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not execute CYBOI. The argument vector is null.");
     }
 
     return r;
@@ -164,29 +182,31 @@ int main(int p0, char** p1) {
  *
  * @param p0 the signal memory
  */
-void await(void* p0) {
+static void await(void* p0) {
 
     // The shutdown flag.
-    int sf = 0;
+    void* sf = malloc(0);
     // Transporting signal.
     void* s = malloc(sizeof(struct signal));
 
     // Run endless loop handling any signals.
     while (1) {
 
-        if (sf == 0) {
+        if (equal(sf, 0)) {
 
+/*??
             // Receive signal.
             receive_signal(p0, s);
 
             // Handle signal.
-            sf = handle_signal(s, 0);
+            handle_signal(s, 0, sf);
 
             // Send signal.
             send_signal(p0, s);
 
             // Reset signal.
             reset_signal(s);
+*/
 
         } else {
 
@@ -194,5 +214,7 @@ void await(void* p0) {
             break;
         }
     }
+    
+    free(sf);
 }
 

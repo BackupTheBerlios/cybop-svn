@@ -22,6 +22,9 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef COMPLEX_SOURCE
+#define COMPLEX_SOURCE
+
 /**
  * This is a complex.
  *
@@ -32,7 +35,7 @@
  * Basically, every complex can become a model (template) itself,
  * if copies (other instances) of this complex are created.
  *
- * @version $Revision: 1.1 $ $Date: 2003-09-27 19:50:33 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct complex {
@@ -43,4 +46,7 @@ struct complex {
     /** The positions. */
     void* positions;
 };
+
+/* COMPLEX_SOURCE */
+#endif
 

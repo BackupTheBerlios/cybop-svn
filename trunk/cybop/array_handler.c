@@ -22,6 +22,9 @@
  * - Cybernetics Oriented Programming -
  */
 
+#include "dynamics_handler.c"
+#include "log_handler.c"
+
 /**
  * This is the array handler.
  *
@@ -33,7 +36,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.7 $ $Date: 2003-09-27 19:50:33 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,13 +52,13 @@
  * @param p0 the array
  * @param p1 the extended array
  */
-void extend_array(void* p0, void* p1) {
+static void extend_array(void* p0, void* p1) {
 
     if (p0 != 0) {
 
         int old_length = sizeof(p0);
         int new_length = old_length * 2 + 1;
-        p1 = malloc(sizeof(new_length));
+        p1 = malloc(new_length);
 
         if (p1 != 0) {
                 
@@ -72,12 +75,12 @@ void extend_array(void* p0, void* p1) {
 
         } else {
 
-            log(ERROR_LOG_LEVEL, "Could not extend array. The new array is null.");
+            log((void*) &ERROR_LOG_LEVEL, "Could not extend array. The new array is null.");
         }
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not extend array. The array is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not extend array. The array is null.");
     }
 }
 
@@ -93,13 +96,17 @@ void extend_array(void* p0, void* p1) {
  * @param p2 the element
  * @param p3 the same or an extended array
  */
-void set_array_element(void* p0, void* p1, void* p2, void* p3) {
+static void set_array_element(void* p0, void* p1, void* p2, void* p3) {
+
+    int* i = (int*) p1;
 
     if (p0 != 0) {
 
+        int size = sizeof(p0);
+        
         // If the array length is exceeded, a new array with extended length
         // is created and delivered back.
-        if (p1 >= sizeof(p0)) {
+        if (greater_or_equal(p1, &size)) {
 
             extend_array(p0, p3);
         
@@ -109,11 +116,11 @@ void set_array_element(void* p0, void* p1, void* p2, void* p3) {
         }
 
         // Set element.
-        p3[p1] = p2;
+//??        p3[*i] = p2;
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not set array element. The array is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not set array element. The array is null.");
     }
 }
 
@@ -123,30 +130,32 @@ void set_array_element(void* p0, void* p1, void* p2, void* p3) {
  * @param p0 the array
  * @param p1 the index
  */
-void remove_array_element(void* p0, void* p1) {
+static void remove_array_element(void* p0, void* p1) {
 
+    int* i = (int*) p1;
+    
     if (p0 != 0) {
 
-        if (*p1 != -1) {
+        if (*i != -1) {
             
             // Move all remaining elements one place towards the
             // beginning of the elements.
             int size = sizeof(p0);
 
-            while ((*p1 + 1) < size) {
+            while ((*i + 1) < size) {
 
-//??                p0[p1] = p0[p1 + 1];
+//??                p0[*i] = p0[*i + 1];
 
-                (*p1)++;
+                (*i)++;
             }
 
             // Set former last element to 0.
-            p0[*p1] = 0;
+//??            p0[*i] = 0;
         }
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not remove array element. The array is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not remove array element. The array is null.");
     }
 }
 
@@ -157,18 +166,20 @@ void remove_array_element(void* p0, void* p1) {
  * @param p1 the index
  * @param p2 the element
  */
-void get_array_element(void* p0, void* p1, void* p2) {
+static void get_array_element(void* p0, void* p1, void* p2) {
+
+    int* i = (int*) p1;
 
     if (p0 != 0) {
 
-        if (*p1 != -1) {
+        if (*i != -1) {
             
-//??            p2 = p0[*p1];
+//??            p2 = p0[*i];
         }
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not get array element. The array is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not get array element. The array is null.");
     }
 }
 

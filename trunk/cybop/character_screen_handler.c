@@ -1,5 +1,5 @@
 /*
- * $RCSfile: signal.c,v $
+ * $RCSfile: character_screen_handler.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,49 +22,61 @@
  * - Cybernetics Oriented Programming -
  */
 
-#ifndef SIGNAL_SOURCE
-#define SIGNAL_SOURCE
+#include <stdio.h>
 
 /**
- * This is a signal.
+ * This is the character screen handler.
  *
- * A signal transports an input state through a system to an output state.
+ * It contains functionality for the input and output of data using a
+ * character-based screen.
  *
- * Signals can be stored in a memory.
- * 
- * @version $Revision: 1.8 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
+ * Synonyms and Keywords:
+ * - Textual User Interface (TUI)
+ * - Curses (termcap, ncurses)
+ *
+ * @version $Revision: 1.1 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-struct signal {
 
-    /** The priority. */
-    void* priority;
+//
+// Character screen.
+//
 
-    /** The language. */
-    void* language;
+/**
+ * Send character screen signal to communication partner (probably the human user).
+ */
+static void send_character_screen() {
+    
+    fflush(stdout);
+}
 
-    /** The subject. */
-    void* subject;
+/**
+ * Builds the character screen.
+ *
+ * ?? Probably temporary; CYBOI should read hierarchy from CYBOL files later.
+ */
+static void show_character_screen() {
+    
+    int i = 0;
+    
+    while (i < 30) {
+        
+        fputc(95, stdout);
+        i++;
+    }
+    
+    fputc(10, stdout);
 
-    /** The predicate. */
-    void* predicate;
+    i = 0;
+    
+    while (i < 20) {
+        
+        fputc(95, stdout);
+        i++;
+    }
 
-    /** The owner. */
-    void* owner;
+    fputc(10, stdout);
 
-    /** The sender. */
-    void* sender;
-
-    /** The object. */
-    void* object;
-
-    /** The adverbial. */
-    void* adverbial;
-
-    /** The condition. */
-    void* condition;
-};
-
-/* SIGNAL_SOURCE */
-#endif
+    send_character_screen();
+}
 

@@ -22,12 +22,12 @@
  * - Cybernetics Oriented Programming -
  */
 
-#include <libxml.h>
+//?? #include <libxml.h>
 
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.1 $ $Date: 2003-09-27 19:50:33 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -89,22 +89,25 @@ static const void* INTERACTION_ABSTRACTION = "interaction_abstraction";
  * @param p0 the model
  * @param p1 the model name
  */
-void initialize_model(void* p0, void* p1) {
+static void initialize_model(void* p0, void* p1) {
 
-    log(INFO_LOG_LEVEL, "Initialize model: " + p1);
+/*??
+    log((void*) &INFO_LOG_LEVEL, "Initialize model: " + p1);
+
     void* s = parse_file(PATH + p1 + CYBOL);
     read_structure(p0, s);
+*/
 }
 
 /**
- * Finalizes the category.
+ * Finalizes the model.
  *
- * Writes the file of the given category.
+ * Writes the file of the given model.
  *
- * @param p0 the category
- * @param p1 the category name
+ * @param p0 the model
+ * @param p1 the model name
  */
-void finalize_category(void* p0, void* p1) {
+static void finalize_model(void* p0, void* p1) {
 }
 
 //
@@ -117,13 +120,14 @@ void finalize_category(void* p0, void* p1) {
  * @param p0 the model
  * @param p1 the structure
  */
-void read_structure(void* p0, void* p1) {
+static void read_structure(void* p0, void* p1) {
 
+/*??
     org.apache.xerces.dom.DocumentImpl doc = (org.apache.xerces.dom.DocumentImpl) p1;
 
     if (doc != 0) {
         
-        log(INFO_LOG_LEVEL, "Read document.");
+        log((void*) &INFO_LOG_LEVEL, "Read document.");
         doc.normalize();
         org.apache.xerces.dom.DeepNodeListImpl l = 0;
 
@@ -140,13 +144,14 @@ void read_structure(void* p0, void* p1) {
 
         } else {
             
-            log(ERROR_LOG_LEVEL, "Could not read structure. The model is null.");
+            log((void*) &ERROR_LOG_LEVEL, "Could not read structure. The model is null.");
         }
 
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not read structure. The structure is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not read structure. The structure is null.");
     }
+*/
 }
 
 /**
@@ -155,7 +160,7 @@ void read_structure(void* p0, void* p1) {
  * @param p0 the model
  * @param p1 the structure
  */
-void write_structure(void* p0, void* p1) {
+static void write_structure(void* p0, void* p1) {
 }
 
 //
@@ -168,8 +173,9 @@ void write_structure(void* p0, void* p1) {
  * @param p0 the model
  * @param p1 the super model list
  */
-void initialize_super_model(void* p0, void* p1) {
+static void initialize_super_model(void* p0, void* p1) {
 
+/*??
     org.apache.xerces.dom.DeepNodeListImpl l = (org.apache.xerces.dom.DeepNodeListImpl) p1;
 
     if (l != 0) {
@@ -178,19 +184,20 @@ void initialize_super_model(void* p0, void* p1) {
         
         if (n != 0) {
 
-            log(INFO_LOG_LEVEL, "Initialize super model.");
+            log((void*) &INFO_LOG_LEVEL, "Initialize super model.");
             int s = read_attribute((org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes(), CATEGORY);
             initialize_category(p0, s);
             
         } else {
             
-            log(WARNING_LOG_LEVEL, "Could not initialize super model. The super model node is null.");
+            log((void*) &WARNING_LOG_LEVEL, "Could not initialize super model. The super model node is null.");
         }
         
     } else {
         
-        log(WARNING_LOG_LEVEL, "Could not initialize super model. The super model list is null.");
+        log((void*) &WARNING_LOG_LEVEL, "Could not initialize super model. The super model list is null.");
     }
+*/
 }
 
 /**
@@ -199,7 +206,7 @@ void initialize_super_model(void* p0, void* p1) {
  * @param p0 the model
  * @param p1 the super model list
  */
-void finalize_super_model(void* p0, void* p1) {
+static void finalize_super_model(void* p0, void* p1) {
 }
 
 //
@@ -212,13 +219,14 @@ void finalize_super_model(void* p0, void* p1) {
  * @param p0 the model children
  * @param p1 the model children list
  */
-void initialize_children_models(void* p0, void* p1) {
+static void initialize_children_models(void* p0, void* p1) {
 
+/*??
     org.apache.xerces.dom.DeepNodeListImpl l = (org.apache.xerces.dom.DeepNodeListImpl) p1;
 
     if (l != 0) {
         
-        log(INFO_LOG_LEVEL, "Initialize children models.");
+        log((void*) &INFO_LOG_LEVEL, "Initialize children models.");
         int count = 0;
         int size = l.getLength();
         org.apache.xerces.dom.NodeImpl n = 0;
@@ -244,15 +252,16 @@ void initialize_children_models(void* p0, void* p1) {
                     // Initialize serialized item.
                     i = n.getNodeValue();
 */
-            
+
+/*??
                 } else {
                     
-                    log(ERROR_LOG_LEVEL, "Could not initialize children models. A model is null.");
+                    log((void*) &ERROR_LOG_LEVEL, "Could not initialize children models. A model is null.");
                 }
         
             } else {
                 
-                log(INFO_LOG_LEVEL, "Could not initialize children models. The model item node is null.");
+                log((void*) &INFO_LOG_LEVEL, "Could not initialize children models. The model item node is null.");
             }
                     
             count++;
@@ -260,8 +269,9 @@ void initialize_children_models(void* p0, void* p1) {
         
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not initialize children models. The model items list is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not initialize children models. The model items list is null.");
     }
+*/
 }
 
 /**
@@ -270,7 +280,7 @@ void initialize_children_models(void* p0, void* p1) {
  * @param p0 the children models
  * @param p1 the children models list
  */
-void finalize_items(void* p0, void* p1) {
+static void finalize_items(void* p0, void* p1) {
 }
 
 //
@@ -283,8 +293,9 @@ void finalize_items(void* p0, void* p1) {
  * @param p0 the child model
  * @param p1 the child model node
  */
-void initialize_child_model(void* p0, void* p1) {
+static void initialize_child_model(void* p0, void* p1) {
     
+/*??
     Item i = (Item) p0;
     
     if (i != 0) {
@@ -293,18 +304,19 @@ void initialize_child_model(void* p0, void* p1) {
         
         if (n != 0) {
             
-            log(INFO_LOG_LEVEL, "Initialize child model.");
+            log((void*) &INFO_LOG_LEVEL, "Initialize child model.");
             initialize_attributes(i.items, (org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes());
     
         } else {
             
-            log(WARNING_LOG_LEVEL, "Could not initialize child model. The child model node is null.");
+            log((void*) &WARNING_LOG_LEVEL, "Could not initialize child model. The child model node is null.");
         }
 
     } else {
         
-        log(WARNING_LOG_LEVEL, "Could not initialize child model. The child model is null.");
+        log((void*) &WARNING_LOG_LEVEL, "Could not initialize child model. The child model is null.");
     }
+*/
 }
 
 /**
@@ -313,7 +325,7 @@ void initialize_child_model(void* p0, void* p1) {
  * @param p0 the child model
  * @param p1 the child model node
  */
-void finalize_child_model(void* p0, void* p1) {
+static void finalize_child_model(void* p0, void* p1) {
 }
 
 //
@@ -326,9 +338,10 @@ void finalize_child_model(void* p0, void* p1) {
  * @param p0 the child attribute items
  * @param p1 the child attributes map
  */
-void initialize_child_attributes(void* p0, void* p1) {
+static void initialize_child_attributes(void* p0, void* p1) {
 
-    log(INFO_LOG_LEVEL, "Initialize child attributes.");
+/*??
+    log((void*) &INFO_LOG_LEVEL, "Initialize child attributes.");
     int a = 0;
 
     a = read_child_attribute(p1, NAME);
@@ -357,6 +370,7 @@ void initialize_child_attributes(void* p0, void* p1) {
 
     a = read_child_attribute(p1, INTERACTION_ABSTRACTION);
     set_map_element(p0, INTERACTION_ABSTRACTION, a);
+*/
 }
 
 /**
@@ -365,7 +379,7 @@ void initialize_child_attributes(void* p0, void* p1) {
  * @param p0 the child attribute items
  * @param p1 the child attributes map
  */
-void finalize_child_attributes(void* p0, void* p1) {
+static void finalize_child_attributes(void* p0, void* p1) {
 }
 
 //
@@ -377,11 +391,11 @@ void finalize_child_attributes(void* p0, void* p1) {
  *
  * @param p0 the child attributes map
  * @param p1 the child attribute name
- * @return the child attribute
+ * @param p2 the child attribute
  */
-int read_child_attribute(void* p0, void* p1) {
+static void read_child_attribute(void* p0, void* p1, void* p2) {
 
-    int a = 0;
+/*??
     org.apache.xerces.dom.NamedNodeMapImpl m = (org.apache.xerces.dom.NamedNodeMapImpl) p0;
 
     if (m != 0) {
@@ -390,20 +404,19 @@ int read_child_attribute(void* p0, void* p1) {
         
         if (n != 0) {
             
-            log(INFO_LOG_LEVEL, "Read child attribute.");
-            a = n.getNodeValue();
+            log((void*) &INFO_LOG_LEVEL, "Read child attribute.");
+            p2 = n.getNodeValue();
     
         } else {
             
-            log(WARNING_LOG_LEVEL, "Could not read child attribute. The child attribute node is null.");
+            log((void*) &WARNING_LOG_LEVEL, "Could not read child attribute. The child attribute node is null.");
         }
     
     } else {
         
-        log(WARNING_LOG_LEVEL, "Could not read child attribute. The child attributes map is null.");
+        log((void*) &WARNING_LOG_LEVEL, "Could not read child attribute. The child attributes map is null.");
     }
-    
-    return a;
+*/
 }
 
 /**
@@ -413,6 +426,6 @@ int read_child_attribute(void* p0, void* p1) {
  * @param p1 the child attribute name
  * @param p2 the child attribute
  */
-void write_child_attribute(void* p0, void* p1, void* p2) {
+static void write_child_attribute(void* p0, void* p1, void* p2) {
 }
 

@@ -33,7 +33,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.1 $ $Date: 2003-09-27 19:50:33 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,13 +46,13 @@
  *
  * @param p0 the complex
  */
-void initialize_complex(void* p0) {
+static void initialize_complex(void* p0) {
 
     struct complex* c = (struct complex*) p0;
     
     if (c != 0) {
         
-        log(INFO_LOG_LEVEL, "Initialize complex.");
+        log((void*) &INFO_LOG_LEVEL, "Initialize complex.");
 
         c->children = malloc(sizeof(map));
         initialize_map(c->children);
@@ -61,7 +61,7 @@ void initialize_complex(void* p0) {
 
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not initialize complex. The complex is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not initialize complex. The complex is null.");
     }
 }
 
@@ -70,13 +70,13 @@ void initialize_complex(void* p0) {
  *
  * @param p0 the complex
  */
-void finalize_complex(void* p0) {
+static void finalize_complex(void* p0) {
 
     struct complex* c = (struct complex*) p0;
     
     if (c != 0) {
 
-        log(INFO_LOG_LEVEL, "Finalize complex.");
+        log((void*) &INFO_LOG_LEVEL, "Finalize complex.");
 
         finalize_map(c->positions);
         free(c->positions);
@@ -86,7 +86,7 @@ void finalize_complex(void* p0) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not finalize complex. The complex is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not finalize complex. The complex is null.");
     }
 }
 
@@ -101,13 +101,13 @@ void finalize_complex(void* p0) {
  * @param p1 the hierarchical complex name
  * @param p2 the element
  */
-void set_complex_element(void* p0, void* p1, void* p2) {
+static void set_complex_element(void* p0, void* p1, void* p2) {
 
     struct complex* c = (struct complex*) p0;
 
     if (c != 0) {
 
-        log(INFO_LOG_LEVEL, "Set complex element: " + p1);
+        log((void*) &INFO_LOG_LEVEL, "Set complex element: " + p1);
         
         void* n = 0;
         void* r = 0;
@@ -133,7 +133,7 @@ void set_complex_element(void* p0, void* p1, void* p2) {
         
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not set complex element. The complex is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not set complex element. The complex is null.");
     }
 }
 
@@ -143,13 +143,13 @@ void set_complex_element(void* p0, void* p1, void* p2) {
  * @param p0 the complex
  * @param p1 the hierarchical complex name
  */
-void remove_complex_element(void* p0, void* p1) {
+static void remove_complex_element(void* p0, void* p1) {
 
     struct complex* c = (struct complex*) p0;
 
     if (c != 0) {
 
-        log(INFO_LOG_LEVEL, "Remove complex element: " + p1);
+        log((void*) &INFO_LOG_LEVEL, "Remove complex element: " + p1);
         
         void* n = 0;
         void* r = 0;
@@ -175,7 +175,7 @@ void remove_complex_element(void* p0, void* p1) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not remove complex element. The complex is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not remove complex element. The complex is null.");
     }
 }
 
@@ -186,13 +186,13 @@ void remove_complex_element(void* p0, void* p1) {
  * @param p1 the hierarchical complex name
  * @param p2 the element
  */
-void get_complex_element(void* p0, void* p1, void* p2) {
+static void get_complex_element(void* p0, void* p1, void* p2) {
 
     struct complex* c = (struct complex*) p0;
 
     if (c != 0) {
 
-        log(INFO_LOG_LEVEL, "Get complex element: " + p1);
+        log((void*) &INFO_LOG_LEVEL, "Get complex element: " + p1);
         
         void* n = 0;
         void* r = 0;
@@ -218,7 +218,7 @@ void get_complex_element(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not get complex element. The complex is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not get complex element. The complex is null.");
     }
 }
 
@@ -231,7 +231,7 @@ void get_complex_element(void* p0, void* p1, void* p2) {
  * @param p0 the hierarchical complex name
  * @param p1 the child name
  */
-void get_child_name(void* p0, void* p1) {
+static void get_child_name(void* p0, void* p1) {
     
     char* n = (char*) p0;
     
@@ -250,7 +250,7 @@ void get_child_name(void* p0, void* p1) {
         
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not get child name. The hierarchical name is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not get child name. The hierarchical name is null.");
     }
 }
 
@@ -262,7 +262,7 @@ void get_child_name(void* p0, void* p1) {
  * @param p0 the hierarchical complex name
  * @param p1 the remaining name
  */
-void get_remaining_name(void* p0, void* p1) {
+static void get_remaining_name(void* p0, void* p1) {
     
     char* n = (char*) p0;
     
@@ -277,7 +277,7 @@ void get_remaining_name(void* p0, void* p1) {
         
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical name is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical name is null.");
     }
 }
 

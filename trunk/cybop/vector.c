@@ -22,12 +22,15 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef VECTOR_SOURCE
+#define VECTOR_SOURCE
+
 /**
  * This is a vector.
  *
  * It contains the three coordinates: x, y, z.
  *
- * @version $Revision: 1.7 $ $Date: 2003-09-27 19:50:33 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct vector {
@@ -41,4 +44,7 @@ struct vector {
     /** The z coordinate. */
     int z;
 };
+
+/* VECTOR_SOURCE */
+#endif
 

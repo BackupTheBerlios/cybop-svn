@@ -22,13 +22,16 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef TIME_SOURCE
+#define TIME_SOURCE
+
 /**
  * This is a time.
  *
  * It is used to measure the duration of dynamics or in other words,
  * the difference between two static states/ instants.
  *
- * @version $Revision: 1.7 $ $Date: 2003-09-27 19:50:33 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct time {
@@ -63,4 +66,7 @@ struct time {
     /** The nano seconds. */
     int nano_seconds;
 };
+
+/* TIME_SOURCE */
+#endif
 

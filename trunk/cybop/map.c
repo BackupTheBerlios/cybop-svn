@@ -22,13 +22,16 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef MAP_SOURCE
+#define MAP_SOURCE
+
 /**
  * This is a map.
  *
  * A map is like a table. One column (array) contains the element names.
  * A second column (array) contains the actual element references.
  *
- * @version $Revision: 1.7 $ $Date: 2003-09-27 19:50:33 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct map {
@@ -39,4 +42,7 @@ struct map {
     /** The references. */
     void* references;
 };
+
+/* MAP_SOURCE */
+#endif
 

@@ -24,6 +24,7 @@
 
 #include <string.h>
 #include "signal.c"
+#include "statics_handler.c"
 #include "vector.c"
 
 /**
@@ -35,7 +36,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.7 $ $Date: 2003-09-27 19:50:33 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,80 +45,80 @@
 //
 
 /** The signal. */
-static const void* SIGNAL = "signal";
+static const char* SIGNAL = "signal";
 
 //
 // Priorities.
 //
 
 /** The normal priority. */
-static const void* NORMAL_PRIORITY = "1";
+static const int NORMAL_PRIORITY = 1;
 
 //
 // Languages.
 //
 
 /** The system internal (neuro) language. */
-static const void* NEURO_LANGUAGE = "neuro";
+static const char* NEURO_LANGUAGE = "neuro";
 
 /** The textual user interface (tui) language. */
-static const void* TUI_LANGUAGE = "tui";
+static const char* TUI_LANGUAGE = "tui";
 
 /** The mouse language. */
-static const void* MOUSE_LANGUAGE = "mouse";
+static const char* MOUSE_LANGUAGE = "mouse";
 
 /** The graphical user interface (gui) language. */
-static const void* GUI_LANGUAGE = "gui";
+static const char* GUI_LANGUAGE = "gui";
 
 /** The socket language. */
-static const void* SOCKET_LANGUAGE = "socket";
+static const char* SOCKET_LANGUAGE = "socket";
 
 /** The structured query language (sql). */
-static const void* SQ_LANGUAGE = "sq";
+static const char* SQ_LANGUAGE = "sq";
 
 /** The java messaging service (jms) language. */
-static const void* JMS_LANGUAGE = "jms";
+static const char* JMS_LANGUAGE = "jms";
 
 /** The remote method invocation (rmi) language. */
-static const void* RMI_LANGUAGE = "rmi";
+static const char* RMI_LANGUAGE = "rmi";
 
 /** The common object request broker architecture (corba) language. */
-static const void* CORBA_LANGUAGE = "corba";
+static const char* CORBA_LANGUAGE = "corba";
 
 /** The extensible markup language (xml). */
-static const void* XML_LANGUAGE = "xml";
+static const char* XML_LANGUAGE = "xml";
 
 /** The simple object access protocol (soap) language. */
-static const void* SOAP_LANGUAGE = "soap";
+static const char* SOAP_LANGUAGE = "soap";
 
 //
 // Actions.
 //
 
 /** The show system information action. */
-static const void* SHOW_SYSTEM_INFORMATION_ACTION = "show_system_information";
+static const char* SHOW_SYSTEM_INFORMATION_ACTION = "show_system_information";
 
 /** The startup action. */
-static const void* STARTUP_ACTION = "startup";
+static const char* STARTUP_ACTION = "startup";
 
 /** The shutdown action. */
-static const void* SHUTDOWN_ACTION = "shutdown";
+static const char* SHUTDOWN_ACTION = "shutdown";
 
 /** The receive action. */
-static const void* RECEIVE_ACTION = "receive";
+static const char* RECEIVE_ACTION = "receive";
 
 /** The send action. */
-static const void* SEND_ACTION = "send";
+static const char* SEND_ACTION = "send";
 
 //
 // Attributes.
 //
 
 /** The statics. */
-void* statics;
+static void* statics;
 
 /** The dynamics. */
-void* dynamics;
+static void* dynamics;
 
 //
 // Signal.
@@ -142,7 +143,7 @@ void* dynamics;
  * @param p0 the signal memory
  * @param p1 the signal
  */
-void receive_signal(void* p0, void* p1) {
+static void receive_signal(void* p0, void* p1) {
 
     struct signal* s = (struct signal*) p1;
     
@@ -154,7 +155,7 @@ void receive_signal(void* p0, void* p1) {
         
         if (tmp != 0) {
         
-            log(INFO_LOG_LEVEL, strcat("Receive signal: ", tmp->predicate));
+            log((void*) &INFO_LOG_LEVEL, strcat("Receive signal: ", tmp->predicate));
 
             // Copy signal memory signal to the transporting signal given as parameter.
             s->priority = tmp->priority;
@@ -179,7 +180,7 @@ void receive_signal(void* p0, void* p1) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not receive signal. The signal is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not receive signal. The signal is null.");
     }
 }
 
@@ -188,11 +189,10 @@ void receive_signal(void* p0, void* p1) {
  *
  * @param p0 the signal
  * @param p1 the remote flag
- * @return the shutdown flag
+ * @param p2 the shutdown flag
  */
-int handle_signal(void* p0, int p1) {
+static void handle_signal(void* p0, void* p1, void* p2) {
 
-    int sf = 0;
     struct signal* s = (struct signal*) p0;
 
     if (s != 0) {
@@ -201,7 +201,7 @@ int handle_signal(void* p0, int p1) {
 
         if (a != 0) {
 
-            log(INFO_LOG_LEVEL, strcat("Handle signal: ", a));
+            log((void*) &INFO_LOG_LEVEL, strcat("Handle signal: ", a));
 
             if (strcmp(a, "mouse_moved") == 0) {
 
@@ -230,7 +230,7 @@ int handle_signal(void* p0, int p1) {
                     
                 } else {
                     
-                    log(ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is null.");
+                    log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is null.");
                 }
 
             } else if (strcmp(a, SHOW_SYSTEM_INFORMATION_ACTION) == 0) {
@@ -255,11 +255,11 @@ int handle_signal(void* p0, int p1) {
 */
             } else if (strcmp(a, SEND_ACTION) == 0) {
                 
+/*??
                 struct item* o = (struct item*) s->object;
 
                 if (o != 0) {
                     
-/*??
                     int j = o.java_object;
 
                     if (j != 0) {
@@ -270,37 +270,39 @@ int handle_signal(void* p0, int p1) {
                         
                         } else {
                             
-                            log(ERROR_LOG_LEVEL, "Could not handle send action. The java object is not a component.");
+                            log((void*) &ERROR_LOG_LEVEL, "Could not handle send action. The java object is not a component.");
                         }
                 
                     } else {
                         
-                        log(ERROR_LOG_LEVEL, "Could not handle send action. The java object is null.");
+                        log((void*) &ERROR_LOG_LEVEL, "Could not handle send action. The java object is null.");
                     }
-*/
                 
                 } else {
                     
-                    log(ERROR_LOG_LEVEL, "Could not handle send action. The signal object is null.");
+                    log((void*) &ERROR_LOG_LEVEL, "Could not handle send action. The signal object is null.");
                 }
+*/
 
                 reset_signal(s);
                 
             } else if (strcmp(a, STARTUP_ACTION) == 0) {
                 
                 // Root (statics).
-                statics = create_object(s->object, COMPLEX);
+                create_instance(statics, s->object, COMPLEX_MODEL);
 
                 reset_signal(s);
                 
+/*??
                 s->predicate = SEND_ACTION;
                 s->object = get_map_element(statics->children, "main_frame");
+*/
 
             } else if (strcmp(a, SHUTDOWN_ACTION) == 0) {
                 
                 // Root (statics).
-                destroy_object(statics, s->object, CATEGORY);
-                sf = 1;
+                destroy_instance(statics, s->object, COMPLEX_MODEL);
+                *p2 = 1;
 
                 reset_signal(s);
             }
@@ -313,10 +315,8 @@ int handle_signal(void* p0, int p1) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not handle signal. The signal is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not handle signal. The signal is null.");
     }
-    
-    return sf;
 }
 
 /**
@@ -329,7 +329,7 @@ int handle_signal(void* p0, int p1) {
  * @param p0 the signal memory
  * @param p1 the signal
  */
-void send_signal(void* p0, void* p1) {
+static void send_signal(void* p0, void* p1) {
 
     struct signal* s = (struct signal*) p1;
     
@@ -345,7 +345,7 @@ void send_signal(void* p0, void* p1) {
     
             if (tmp != 0) {
             
-                log(INFO_LOG_LEVEL, strcat("Send signal: ", s->predicate));
+                log((void*) &INFO_LOG_LEVEL, strcat("Send signal: ", s->predicate));
 
                 // Copy transporting signal given as parameter to the signal memory signal.
                 tmp->priority = s->priority;
@@ -373,7 +373,7 @@ void send_signal(void* p0, void* p1) {
 
             } else {
     
-                log(ERROR_LOG_LEVEL, "Could not send signal. The signal memory signal is null.");
+                log((void*) &ERROR_LOG_LEVEL, "Could not send signal. The signal memory signal is null.");
             }
 
         } else {
@@ -384,7 +384,7 @@ void send_signal(void* p0, void* p1) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not send signal. The signal is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not send signal. The signal is null.");
     }
 }
 
@@ -393,7 +393,7 @@ void send_signal(void* p0, void* p1) {
  *
  * @param p0 the signal
  */
-void reset_signal(void* p0) {
+static void reset_signal(void* p0) {
     
     struct signal* s = (struct signal*) p0;
     
@@ -411,13 +411,9 @@ void reset_signal(void* p0) {
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not reset signal. The signal is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not reset signal. The signal is null.");
     }
 }
-
-//??
-//?? Temporary operations. To be replaced by CYBOL action files.
-//??
 
 //
 // Signal handling.
@@ -430,14 +426,13 @@ void reset_signal(void* p0) {
  * @param p1 the x coordinate
  * @param p2 the y coordinate
  * @param p3 the z coordinate
- * @return the action
+ * @param p4 the action
  */
-void* mouse_clicked_action(void* p0, int p1, int p2, int p3) {
+static void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    void* a = 0;
-    
     if (p0 != 0) {
 
+/*??
         // Determine the action of the clicked child screen item.
         int count = 0;
         int size = get_map_size(p0->items);
@@ -459,7 +454,6 @@ void* mouse_clicked_action(void* p0, int p1, int p2, int p3) {
             child = get_map_element(p0->items, count);
             position = (vector*) get_map_element(p0->positions, count);
             
-/*??
             if (child instanceof item) {
                     
                 expansion = (vector) get_item_element(child, "expansion");
@@ -495,26 +489,25 @@ void* mouse_clicked_action(void* p0, int p1, int p2, int p3) {
         
                             // The given coordinates are in the child's screen area.
                             // Therefore, use the child's action.
-                            action = mouse_clicked_action(child, x, y, z);
+                            action = mouse_clicked_action(child, x, y, z, p4);
                 
                             break;
                         }
 
                     } else {
                         
-                        log(ERROR_LOG_LEVEL, "Could not handle mouse clicked action. An expansion is null.");
+                        log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. An expansion is null.");
                     }
 
                 } else {
                     
-                    log(ERROR_LOG_LEVEL, "Could not handle mouse clicked action. A position is null.");
+                    log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. A position is null.");
                 }
 
             } else {
                 
-                log(INFO_LOG_LEVEL, "Could not handle mouse clicked action. A child is not of type Item.");
+                log((void*) &INFO_LOG_LEVEL, "Could not handle mouse clicked action. A child is not of type Item.");
             }
-*/
             
             count++;
         }
@@ -523,447 +516,18 @@ void* mouse_clicked_action(void* p0, int p1, int p2, int p3) {
         // Otherwise, use the parent screen item's action.
         if (action != 0) {
             
-            a = action;
+            p4 = action;
 
         } else {
             
             // Determine the action of the given screen item.
-            a = get_map_element(i->items, "mouse_clicked_action");
+            get_map_element(i->items, "mouse_clicked_action", p4);
         }
-
-    } else {
-        
-        log(ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The item is null.");
-    }
-    
-    return a;
-}
-
-//
-// Algebra.
-//
-
-/**
- * Adds the parameters.
- *
- * @param p0 the first parameter
- * @param p1 the second parameter
- * @return the sum
- */
-/*??
-int add(int p0, int p1) {
-
-    int sum = 0;
-    java.lang.Integer i0 = (java.lang.Integer) p0;
-    java.lang.Integer i1 = (java.lang.Integer) p1;
-    
-    if (i0 != 0) {
-
-        if (i1 != 0) {
-
-            sum = new java.lang.Integer(i0.intValue() + i1.intValue());
-
-        } else {
-            
-            log(ERROR_LOG_LEVEL, "Could not add. The second parameter is null.");
-        }
-            
-    } else {
-        
-        log(ERROR_LOG_LEVEL, "Could not add. The first parameter is null.");
-    }
-    
-    return sum;
-}
-
-/**
- * Subtracts the parameters.
- *
- * @param p0 the first parameter
- * @param p1 the second parameter
- * @return the difference
- */
-/*??
-int subtract(int p0, int p1) {
-
-    int difference = 0;
-    java.lang.Integer i0 = (java.lang.Integer) p0;
-    java.lang.Integer i1 = (java.lang.Integer) p1;
-    
-    if (i0 != 0) {
-
-        if (i1 != 0) {
-
-            difference = new java.lang.Integer(i0.intValue() - i1.intValue());
-
-        } else {
-            
-            log(ERROR_LOG_LEVEL, "Could not subtract. The second parameter is null.");
-        }
-            
-    } else {
-        
-        log(ERROR_LOG_LEVEL, "Could not subtract. The first parameter is null.");
-    }
-    
-    return difference;
-}
-
-/**
- * Multiplies the parameters.
- *
- * @param p0 the first parameter
- * @param p1 the second parameter
- * @return the product
- */
-/*??
-int multiply(int p0, int p1) {
-
-    int product = 0;
-    java.lang.Integer i0 = (java.lang.Integer) p0;
-    java.lang.Integer i1 = (java.lang.Integer) p1;
-    
-    if (i0 != 0) {
-
-        if (i1 != 0) {
-
-            product = new java.lang.Integer(i0.intValue() * i1.intValue());
-
-        } else {
-            
-            log(ERROR_LOG_LEVEL, "Could not multiply. The second parameter is null.");
-        }
-            
-    } else {
-        
-        log(ERROR_LOG_LEVEL, "Could not multiply. The first parameter is null.");
-    }
-    
-    return product;
-}
-
-/**
- * Divides the parameters.
- *
- * @param p0 the first parameter
- * @param p1 the second parameter
- * @return the integer quotient (without rest)
- */
-/*??
-int divide(int p0, int p1) {
-
-    int quotient = 0;
-    java.lang.Integer i0 = (java.lang.Integer) p0;
-    java.lang.Integer i1 = (java.lang.Integer) p1;
-    
-    if (i0 != 0) {
-
-        if (i1 != 0) {
-
-            quotient = new java.lang.Integer(i0.intValue() / i1.intValue());
-            //?? Rest of integer division is determined with:
-            //?? rest = new java.lang.Integer(i0.intValue() % i1.intValue());
-
-        } else {
-            
-            log(ERROR_LOG_LEVEL, "Could not divide. The second parameter is null.");
-        }
-            
-    } else {
-        
-        log(ERROR_LOG_LEVEL, "Could not divide. The first parameter is null.");
-    }
-    
-    return quotient;
-}
-
-/**
- * Compares if this integer is dividable by the integer without rest.
- *
- * @param i the integer
- * @return true - if this integer is dividable by the integer without rest;
- * false - otherwise
- */
-/*??
-boolean isDividableWithoutRest(Integer i) {
-
-    boolean result = Boolean.FALSE;
-    
-    if (i != 0) {
-
-        java.lang.Integer j2 = (java.lang.Integer) i.getJavaObject();
-
-        if (j2 != 0) {
-
-            java.lang.Integer j1 = (java.lang.Integer) getJavaObject();
-
-            if (j1 != 0) {
-
-                int rest = j1.intValue() % j2.intValue();
-
-                if (rest == 0) {
-                    
-                    result = Boolean.TRUE;
-                }
-
-            } else {
-                
-                log(ERROR_LOG_LEVEL, "Could not divide integer. This java integer 1 is null.");
-            }
-
-        } else {
-            
-            log(ERROR_LOG_LEVEL, "Could not divide integer. The java integer 2 is null.");
-        }
-            
-    } else {
-        
-        log(ERROR_LOG_LEVEL, "Could not divide integer. The integer is null.");
-    }
-    
-    return result;
-}
-
-/**
- * Returns the absolute value (without sign) of this integer.
- *
- * @return the absolute value (without sign) of this integer
- */
-/*??
-Integer absolute() {
-
-    Integer abs = 0;
-    
-/*??
-    java.lang.Integer j = (java.lang.Integer) getJavaObject();
-
-    if (j != 0) {
-        
-        int i = abs(j.intValue());
-        abs = new java.lang.Integer(i);
-
-    } else {
-        
-        log(ERROR_LOG_LEVEL, "Could not determine absolute value. The java integer is null.");
-    }
 */
-/*??
 
-    return abs;
-}
-
-//
-// Comparison.
-//
-
-/**
- * Compares if the first parameter is equal to the second parameter.
- *
- * @param p0 the first parameter
- * @param p1 the second parameter
- * @return true if equal; false otherwise
- */
-/*??
-int equal(int p0, int p1) {
-
-    int result = 0;
-    java.lang.Integer i0 = (java.lang.Integer) p0;
-    java.lang.Integer i1 = (java.lang.Integer) p1;
-
-    if (i0 != 0) {
-
-        if (i1 != 0) {
-
-            if (i0.intValue() == i1.intValue()) {
-
-                result = 1;
-            }
-
-        } else {
-            
-            log(ERROR_LOG_LEVEL, "Could not compare equal. The second parameter is null.");
-        }
-            
     } else {
         
-        log(ERROR_LOG_LEVEL, "Could not compare equal. The first parameter is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The item is null.");
     }
-
-    return result;        
 }
-
-/**
- * Compares if the first parameter is smaller than the second parameter.
- *
- * @param p0 the first parameter
- * @param p1 the second parameter
- * @return true if smaller; false otherwise
- */
-/*??
-int smaller(int p0, int p1) {
-
-    int result = false;
-    java.lang.Integer i0 = (java.lang.Integer) p0;
-    java.lang.Integer i1 = (java.lang.Integer) p1;
-
-    if (i0 != 0) {
-
-        if (i1 != 0) {
-
-            if (i0.intValue() < i1.intValue()) {
-
-                result = 1;
-            }
-
-        } else {
-            
-            log(ERROR_LOG_LEVEL, "Could not compare smaller. The second parameter is null.");
-        }
-            
-    } else {
-        
-        log(ERROR_LOG_LEVEL, "Could not compare smaller. The first parameter is null.");
-    }
-
-    return result;        
-}
-
-/**
- * Compares if the first parameter is greater than the second parameter.
- *
- * @param p0 the first parameter
- * @param p1 the second parameter
- * @return true if greater; false otherwise
- */
-/*??
-int greater(int p0, int p1) {
-
-    int result = false;
-    java.lang.Integer i0 = (java.lang.Integer) p0;
-    java.lang.Integer i1 = (java.lang.Integer) p1;
-
-    if (i0 != 0) {
-
-        if (i1 != 0) {
-
-            if (i0.intValue() > i1.intValue()) {
-
-                result = 1;
-            }
-
-        } else {
-            
-            log(ERROR_LOG_LEVEL, "Could not compare greater. The second parameter is null.");
-        }
-            
-    } else {
-        
-        log(ERROR_LOG_LEVEL, "Could not compare greater. The first parameter is null.");
-    }
-
-    return result;        
-}
-
-/**
- * Compares if the first parameter is smaller than or equal to the second parameter.
- *
- * @param p0 the first parameter
- * @param p1 the second parameter
- * @return true if smaller or equal; false otherwise
- */
-/*??
-int smaller_or_equal(int p0, int p1) {
-
-    int result = false;
-    java.lang.Integer i0 = (java.lang.Integer) p0;
-    java.lang.Integer i1 = (java.lang.Integer) p1;
-
-    if (i0 != 0) {
-
-        if (i1 != 0) {
-
-            if (i0.intValue() <= i1.intValue()) {
-
-                result = 1;
-            }
-
-        } else {
-            
-            log(ERROR_LOG_LEVEL, "Could not compare smaller or equal. The second parameter is null.");
-        }
-            
-    } else {
-        
-        log(ERROR_LOG_LEVEL, "Could not compare smaller or equal. The first parameter is null.");
-    }
-
-    return result;        
-}
-
-/**
- * Compares if the first parameter is greater than or equal to the second parameter.
- *
- * @param p0 the first parameter
- * @param p1 the second parameter
- * @return true if greater or equal; false otherwise
- */
-/*??
-int greater_or_equal(int p0, int p1) {
-
-    int result = false;
-    java.lang.Integer i0 = (java.lang.Integer) p0;
-    java.lang.Integer i1 = (java.lang.Integer) p1;
-
-    if (i0 != 0) {
-
-        if (i1 != 0) {
-
-            if (i0.intValue() >= i1.intValue()) {
-
-                result = 1;
-            }
-
-        } else {
-            
-            log(ERROR_LOG_LEVEL, "Could not compare greater or equal. The second parameter is null.");
-        }
-            
-    } else {
-        
-        log(ERROR_LOG_LEVEL, "Could not compare greater or equal. The first parameter is null.");
-    }
-
-    return result;        
-}
-
-//
-// Bool operations.
-//
-
-/**
- * Logical AND.
- *
- * @param p0 the first parameter
- * @param p1 the second parameter
- * @return the boolean result
- */
-/*??
-int and(int p0, int p1) {
-
-    return p0 && p1;
-}
-
-/**
- * Logical OR.
- *
- * @param p0 the first parameter
- * @param p1 the second parameter
- * @return the boolean result
- */
-/*??
-int or(int p0, int p1) {
-
-    return p0 || p1;
-}
-*/
 

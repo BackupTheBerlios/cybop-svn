@@ -22,15 +22,19 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef LOG_HANDLER_SOURCE
+#define LOG_HANDLER_SOURCE
+
 #include <stdio.h>
 #include <string.h>
+#include "dynamics_handler.c"
 
 /**
  * This is a log handler.
  *
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.7 $ $Date: 2003-09-27 19:50:33 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-10-05 08:45:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,11 +59,43 @@ static const int INFO_LOG_LEVEL = 3;
 //
 
 /** The log level. */    
-static int log_level;
+static void* log_level;
 
 //
 // Log entry.
 //
+
+/**
+ * Returns the log level name.
+ *
+ * @param p0 the log level name
+ * @param p1 the level
+ */
+static void get_log_level_name(void* p0, void* p1) {
+
+    if (equal(p1, (void*) &INFO_LOG_LEVEL)) {
+
+        strcat((char*) p0, "INFO");
+        
+    } else if (equal(p1, (void*) &WARNING_LOG_LEVEL)) {
+
+        strcat((char*) p0, "WARNING");
+        
+    } else if (equal(p1, (void*) &ERROR_LOG_LEVEL)) {
+
+        strcat((char*) p0, "ERROR");
+    }
+}
+
+/**
+ * Shows the message on screen.
+ *
+ * @param p0 the message
+ */
+static void show_message(void* p0) {
+    
+    puts((char*) p0);
+}
 
 /**
  * Logs the log entry.
@@ -67,39 +103,19 @@ static int log_level;
  * @param p0 the level
  * @param p1 the message
  */
-void log(int p0, void* p1) {
+static void log(void* p0, void* p1) {
 
-    if (p0 <= log_level) {
+    if (smaller_or_equal(p0, log_level)) {
 
-        void* l = get_log_level_name(p0);
+        void* n = malloc(0);
         
-        printf(strcat(strcat(l, ": "), p1));
+        get_log_level_name(n, p0);
+        show_message(strcat(strcat(n, ": "), p1));
+        
+        free(n);
     }
 }
 
-/**
- * Returns the log level name.
- *
- * @param p0 the level
- * @return the log level name
- */
-void* get_log_level_name(int p0) {
-
-    void* l = 0;
-    
-    if (p0 == INFO_LOG_LEVEL) {
-
-        l = "INFO";
-        
-    } else if (p0 == WARNING_LOG_LEVEL) {
-
-        l = "WARNING";
-        
-    } else if (p0 == ERROR_LOG_LEVEL) {
-
-        l = "ERROR";
-    }
-
-    return l;
-}
+/* LOG_HANDLER_SOURCE */
+#endif
 
