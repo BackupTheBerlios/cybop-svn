@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.7 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-07-20 22:46:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -64,7 +64,7 @@ class Main {
      *
      * @param args the arguments
      */
-    public static void main(String[] args) {
+    public static void main(java.lang.String[] args) {
 
         try {
 
@@ -72,8 +72,8 @@ class Main {
 
                 if (args.length == 2) {
 
-                    String dynamics_category = args[0];
-                    String statics_category = args[1];
+                    java.lang.String dynamics_category = args[0];
+                    java.lang.String statics_category = args[1];
 
                     ItemHandler.xml_parser = Main.create_xml_parser();
 
@@ -100,11 +100,11 @@ class Main {
     
 //??                    Main.finalizz(i);
     
-                    Dynamics.destroy_dynamics((Item) Main.dynamics);
+                    Dynamics.destroy_dynamics((ItemContainer) Main.dynamics);
                     Main.dynamics = null;
-                    Statics.destroy_statics((Item) Main.statics);
+                    Statics.destroy_statics((ItemContainer) Main.statics);
                     Main.statics = null;
-                    Main.destroy_signal_memory((Map) Main.signal_memory);
+                    Main.destroy_signal_memory((MapContainer) Main.signal_memory);
                     Main.signal_memory = null;
                     Main.destroy_event_handler((EventHandler) Main.event_handler);
                     Main.event_handler = null;
@@ -242,7 +242,7 @@ class Main {
      */
     static void destroy_signal_memory(java.lang.Object m) {
 
-        MapHandler.destroy_map((Map) m);
+        MapHandler.destroy_map(m);
     }
 
     /**
@@ -282,10 +282,10 @@ class Main {
                 //?? These signals were created outside this method but must be
                 //?? destroyed here!
 
-                java.lang.java.lang.System.out.println("DEBUG: Handle signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChild(Signal.PREDICATE)).getJavaObject());
+                java.lang.java.lang.System.out.println("DEBUG: Handle signal " + queued.getName().getJavaObject() + " with action: " + ((java.lang.String) queued.getChild(Signal.PREDICATE)).getJavaObject());
                 handle(queued, new Boolean(Boolean.FALSE));
 
-                java.lang.java.lang.System.out.println("DEBUG: Send signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChild(Signal.PREDICATE)).getJavaObject());
+                java.lang.java.lang.System.out.println("DEBUG: Send signal " + queued.getName().getJavaObject() + " with action: " + ((java.lang.String) queued.getChild(Signal.PREDICATE)).getJavaObject());
                 send(queued);
 
                 destroyChild(queued);

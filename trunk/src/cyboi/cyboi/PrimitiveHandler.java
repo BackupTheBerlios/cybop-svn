@@ -29,7 +29,7 @@ package cyboi;
  *
  * It contains procedures to create items of primitive type.
  *
- * @version $Revision: 1.4 $ $Date: 2003-07-18 14:55:01 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-07-20 22:46:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class PrimitiveHandler {
@@ -44,9 +44,9 @@ class PrimitiveHandler {
      * @param s the integer primitive as string
      * @return the integer primitive
      */
-    static Object create_integer_primitive(String s) {
+    static java.lang.Object create_integer_primitive(java.lang.String s) {
 
-        return Integer.valueOf(s);
+        return java.lang.Integer.valueOf(s);
     }
 
     /**
@@ -55,9 +55,9 @@ class PrimitiveHandler {
      * @param s the float primitive as string
      * @return the float primitive
      */
-    static Object create_float_primitive(String s) {
+    static java.lang.Object create_float_primitive(java.lang.String s) {
 
-        return Double.valueOf(s);
+        return java.lang.Double.valueOf(s);
     }
 
     /**
@@ -66,9 +66,9 @@ class PrimitiveHandler {
      * @param s the character primitive as string
      * @return the character primitive
      */
-    static Object create_character_primitive(String s) {
+    static java.lang.Object create_character_primitive(java.lang.String s) {
 
-        return null; //?? Double.valueOf(s);
+        return null; //?? java.lang.Double.valueOf(s);
     }
 
     /**
@@ -77,7 +77,7 @@ class PrimitiveHandler {
      * @param s the string primitive as string
      * @return the string primitive
      */
-    static Object create_string_primitive(String s) {
+    static java.lang.Object create_string_primitive(java.lang.String s) {
 
         return s;
     }
@@ -108,7 +108,7 @@ class PrimitiveHandler {
 
         // As long as the CYBOP framework is built on Java, every
         // item needs to be capable of encapsulating a pure Java object.
-        Object javaObject = getJavaObject();
+        java.lang.Object javaObject = getJavaObject();
         setJavaObject(null);
         destroyJavaObject(javaObject);
     }
@@ -124,7 +124,7 @@ class PrimitiveHandler {
      * @exception Exception if the encapsulated java object is null
      */
 /*??
-    static Object createJavaObject() {
+    static java.lang.Object createJavaObject() {
 
         return null;
     }
@@ -135,7 +135,7 @@ class PrimitiveHandler {
      * @param o the encapsulated java object
      */
 /*??
-    static void destroyJavaObject(Object o) {
+    static void destroyJavaObject(java.lang.Object o) {
     }
 
     /**
@@ -144,7 +144,7 @@ class PrimitiveHandler {
      * @param o the encapsulated java object
      */
 /*??
-    static void setJavaObject(Object o) {
+    static void setJavaObject(java.lang.Object o) {
 
         this.javaObject = o;
     }
@@ -155,7 +155,7 @@ class PrimitiveHandler {
      * @return the encapsulated java object
      */
 /*??
-    static Object getJavaObject() {
+    static java.lang.Object getJavaObject() {
 
         return this.javaObject;
     }

@@ -29,7 +29,7 @@ package cyboi;
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.4 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-07-20 22:46:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ArrayHandler {
@@ -53,58 +53,58 @@ class ArrayHandler {
      *
      * All elements are copied from the old to the new array container.
      *
-     * @param old the old array container
+     * @param c the array container
      * @return the extended array container
      */
-    static java.lang.Object[] create_array_container(java.lang.Object[] old) {
+    static java.lang.Object[] create_array_container(java.lang.Object[] c) {
 
-        java.lang.Object[] a = null;
+        java.lang.Object[] ac = null;
 
-        if (old != null) {
+        if (c != null) {
 
-            int old_length = old.length;
+            int old_length = c.length;
             int new_length = old_length * 2 + 1;
-            a = new java.lang.Object[new_length];
+            ac = new java.lang.Object[new_length];
             int i = 0;
 
             while (i < old_length) {
 
-                a[i] = old[i];
+                ac[i] = c[i];
 
                 i++;
             }
 
-            ArrayHandler.destroy_array_container(old);
+            ArrayHandler.destroy_array_container(c);
 
         } else {
 
             System.out.println("ERROR: Could not create array container. The old array container is null.");
         }
 
-        return a;
+        return ac;
     }
 
     /**
      * Destroys the array container.
      *
-     * @param a the array container
+     * @param c the array container
      */
-    static void destroy_array_container(java.lang.Object[] a) {
+    static void destroy_array_container(java.lang.Object[] c) {
     }
 
     /**
      * Returns the size of the array container.
      *
-     * @param a the array container
+     * @param c the array container
      * @return the size of the array container
      */
-    static int get_array_container_size(java.lang.Object[] a) {
+    static int get_array_container_size(java.lang.Object[] c) {
 
         int s = -1;
 
-        if (a != null) {
+        if (c != null) {
 
-            s = a.length;
+            s = c.length;
 
         } else {
 
@@ -117,18 +117,18 @@ class ArrayHandler {
     /**
      * Compares both array containers.
      *
-     * @param a the first array container
-     * @param sa the second array container
+     * @param c1 the first array container
+     * @param c2 the second array container
      * @return true - if the size and contents of both array containers are equal;
      * false - otherwise
      */
-    static boolean compare(java.lang.Object[] a, java.lang.Object[] sa) {
+    static boolean compare(java.lang.Object[] c1, java.lang.Object[] c2) {
 
         boolean b = true;
-        int i = ArrayHandler.get_array_container_size(a);
+        int i = ArrayHandler.get_array_container_size(c1);
 
         // Compares the array container sizes.
-        if (i != ArrayHandler.get_array_container_size(sa)) {
+        if (i != ArrayHandler.get_array_container_size(c2)) {
 
             b = false;
             
@@ -137,7 +137,7 @@ class ArrayHandler {
             // Compares the array elements.
             while (i-- != 0) {
 
-                if (ArrayHandler.get_array_element(a, i) != ArrayHandler.get_array_element(sa, i)) {
+                if (ArrayHandler.get_array_element(c1, i) != ArrayHandler.get_array_element(c2, i)) {
 
                     b = false;
 
@@ -156,11 +156,11 @@ class ArrayHandler {
     /**
      * Sets the array element.
      *
-     * @param c the old array container
+     * @param c the array container
      * @param i the index
      * @param e the array element
      */
-    static void set_array_element(java.lang.Object[] c, int i, Element e) {
+    static void set_array_element(java.lang.Object[] c, int i, java.lang.Object e) {
 
         if (c != null) {
 
@@ -193,63 +193,64 @@ class ArrayHandler {
 
         } else {
 
-            System.out.println("ERROR: Could not set array element. The old array container is null.");
+            System.out.println("ERROR: Could not set array element. The array container is null.");
         }
     }
 
     /**
      * Removes the array element.
      *
-     * @param a the array container
+     * @param c the array container
      * @param i the index
      */
-    static void remove_array_element(java.lang.Object[] a, int i) {
+    static void remove_array_element(java.lang.Object[] c, int i) {
 
-        if (a != null) {
+        if (c != null) {
 
             //?? Temporary: Remove java tree node.
-//??            ArrayHandler.remove_tree_node(a[i]);
+//??            ArrayHandler.remove_tree_node(c[i]);
 
             // Move all remaining elements one place towards the
             // beginning of the elements.
             int index = i;
+            int size = c.length;
 
-            while ((index + 1) < a.length) {
+            while ((index + 1) < size) {
 
-                a[index] = a[index + 1];
+                c[index] = c[index + 1];
 
                 index++;
             }
 
             // Set former last element to null.
-            a[index] = null;
+            c[index] = null;
 
         } else {
 
-            System.out.println("ERROR: Could not remove array element. The array is null.");
+            System.out.println("ERROR: Could not remove array element. The array container is null.");
         }
     }
 
     /**
      * Returns the array element.
      *
-     * @param a the array
+     * @param c the array container
      * @return the array element
      */
-    static Element get_array_element(java.lang.Object[] a, int i) {
+    static java.lang.Object get_array_element(java.lang.Object[] c, int i) {
 
-        Element e = null;
+        java.lang.Object e = null;
 
-        if (a != null) {
+        if (c != null) {
 
 //??            if (i > -1) {
 
-                e = (Element) a[i];
+                e = c[i];
 //??            }
 
         } else {
 
-            System.out.println("ERROR: Could not get array element. The array is null.");
+            System.out.println("ERROR: Could not get array element. The array container is null.");
         }
 
         return e;

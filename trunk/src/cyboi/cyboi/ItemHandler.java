@@ -65,7 +65,7 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.6 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-07-20 22:46:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -74,87 +74,97 @@ class ItemHandler {
     static java.lang.Object xml_parser;
 
     //
-    // Creation and destruction.
+    // Item container management.
     //
 
     /**
-     * Creates an item.
+     * Creates an item container.
      *
-     * @return the item
+     * @return the item container
      */
-    static Item create_item() {
+    static ItemContainer create_item_container() {
 
-        Item i = new Item();
+        ItemContainer c = new ItemContainer();
 
-        if (i != null) {
+        if (c != null) {
 
-            i.abstractions = MapHandler.create_map();
-            i.categories = MapHandler.create_map();
-            i.positions = MapHandler.create_map();
-            i.items = MapHandler.create_map();
+            c.abstractions = MapHandler.create_map();
+            c.categories = MapHandler.create_map();
+            c.positions = MapHandler.create_map();
+            c.items = MapHandler.create_map();
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not create item. The item is null.");
+            java.lang.System.out.println("ERROR: Could not create item container. The item container is null.");
         }
 
-        return i;
+        return c;
     }
 
     /**
-     * Destroys the item.
+     * Destroys the item container.
      *
-     * @param i the item
+     * @param c the item container
      */
-    static void destroy_item(Item i) {
+    static void destroy_item_container(ItemContainer c) {
 
-        if (i != null) {
+        if (c != null) {
 
-            Map items = i.items;
-            i.items = null;
-            MapHandler.destroy_map(items);
+            Map items = c.items;
+            c.items = null;
+            MapHandler.destroy_map_container(items);
 
-            Map positions = i.positions;
-            i.positions = null;
-            MapHandler.destroy_map(positions);
+            Map positions = c.positions;
+            c.positions = null;
+            MapHandler.destroy_map_container(positions);
 
-            Map categories = i.categories;
-            i.categories = null;
-            MapHandler.destroy_map(categories);
+            Map categories = c.categories;
+            c.categories = null;
+            MapHandler.destroy_map_container(categories);
 
-            Map abstractions = i.abstractions;
-            i.abstractions = null;
-            MapHandler.destroy_map(abstractions);
+            Map abstractions = c.abstractions;
+            c.abstractions = null;
+            MapHandler.destroy_map_container(abstractions);
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not destroy item. The item is null.");
+            java.lang.System.out.println("ERROR: Could not destroy item container. The item container is null.");
         }
     }
 
     //
-    // Element management.
+    // Item element management.
     //
 
     /**
      * Sets the item element.
      *
-     * @param i the item
-     * @param n the name
-     * @param e the xml category element
+     * @param c the item container
+     * @param e the item element
      */
-    static void set_item_element(java.lang.Object i, java.lang.Object n, java.lang.Object e) {
+    static void set_item_element(java.lang.Object c, java.lang.Object e) {
 
-        if (i != null) {
+        ItemContainer c = (ItemContainer) c;
+        
+        if (c != null) {
+            
+            ItemElement ie = (ItemElement) e;
+            
+            if (ie != null) {
 
-            MapHandler.set_map_element(i.abstractions, n, e);
-            MapHandler.set_map_element(i.categories, n, e);
-            MapHandler.set_map_element(i.positions, n, e);
-            MapHandler.set_map_element(i.items, n, e);
+                MapHandler.set_map_element(c.abstractions, ie.name, e);
+                MapHandler.set_map_element(c.categories, ie.name, e);
+                MapHandler.set_map_element(c.positions, ie.name, e);
+                MapHandler.set_map_element(c.items, ie.name, e);
+
+            } else {
+    
+                java.lang.System.out.println("ERROR: Could not set item container. The item element is null.");
+            }
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not set item. The item is null.");
+            java.lang.System.out.println("ERROR: Could not set item container. The item container is null.");
         }
     }
 

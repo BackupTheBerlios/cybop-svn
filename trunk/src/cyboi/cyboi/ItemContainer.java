@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Item.java,v $
+ * $RCSfile: ItemContainer.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -33,10 +33,10 @@ package cyboi;
  * Instantiating means allocating some place in the computer's memory.
  * Basically, every item can become a category if copies of this item are created.
  *
- * @version $Revision: 1.4 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-07-20 22:46:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class Item extends Container {
+class ItemContainer extends Container {
 
     /** The name. */
     static java.lang.Object name;
