@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.6 $ $Date: 2004-05-26 14:13:50 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -212,15 +212,31 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
  */
 int main(int p0, char** p1) {
 
-    // Calls testing procedures. Comment/ uncomment this as needed.
-//    test();
-//    return 0;
-
     // Return 1 to indicate an error, by default.
     int r = 1;
 
-    // Log level as static (global) variable.
+    //
+    // Calls testing procedures.
+    // Comment/ uncomment this as needed.
+    //
+
+//    test();
+//    return 0;
+
+    //
+    // Global variables for logger.
+    //
+
+    // Set log level.
     log_level = INFO_LOG_LEVEL;
+    // Set maximum log message count.
+    maximum_log_message_count = 200;
+    // Set log output.
+    log_output = stderr;
+
+    //
+    // System lifecycle.
+    //
 
     if (p1 != NULL_POINTER) {
 
@@ -294,8 +310,7 @@ int main(int p0, char** p1) {
         } else {
 
             log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE_COUNT);
-            show_message((void*) &USAGE_MESSAGE, (void*) &USAGE_MESSAGE_COUNT);
-            show_message((void*) &EXAMPLE_MESSAGE, (void*) &EXAMPLE_MESSAGE_COUNT);
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &USAGE_MESSAGE, (void*) &USAGE_MESSAGE_COUNT);
         }
 
     } else {

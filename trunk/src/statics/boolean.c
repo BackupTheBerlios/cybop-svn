@@ -29,7 +29,7 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.5 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -65,7 +65,7 @@ void initialize_boolean(void* p0, void* p1, const void* p2, const void* p3) {
             // The default.
             *t = 0;
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize boolean.");
+//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize boolean.");
 
             // The comparison result.
             int r = 0;
@@ -82,12 +82,12 @@ void initialize_boolean(void* p0, void* p1, const void* p2, const void* p3) {
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize boolean. The transient model is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize boolean. The transient model is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize boolean. The persistent model count is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize boolean. The persistent model count is null.");
     }
 }
 
@@ -113,7 +113,7 @@ void finalize_boolean(const void* p0, const void* p1, void* p2, void* p3) {
 
                 int* t = (int*) p0;
 
-                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize boolean.");
+//??                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize boolean.");
 
                 if (*t == 1) {
 
@@ -129,17 +129,17 @@ void finalize_boolean(const void* p0, const void* p1, void* p2, void* p3) {
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize boolean. The transient model is null.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize boolean. The transient model is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize boolean. The persistent model is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize boolean. The persistent model is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize boolean. The persistent model count is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize boolean. The persistent model count is null.");
     }
 }
 

@@ -28,7 +28,7 @@
  * For higher performance, it is mostly better to use floating point numbers
  * (float) which can be calculated by the Arithmetic Logic Unit (ALU).
  *
- * @version $Revision: 1.6 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,7 +51,7 @@
  */
 void create_fraction(void* p0, void* p1) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create fraction.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create fraction.");
 
     // The fraction.
     create_array(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT);
@@ -65,7 +65,7 @@ void create_fraction(void* p0, void* p1) {
  */
 void destroy_fraction(void* p0, void* p1) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy fraction.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy fraction.");
 
     // The fraction.
     destroy_array(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT);
@@ -81,7 +81,7 @@ void destroy_fraction(void* p0, void* p1) {
  */
 void initialize_fraction(void* p0, void* p1, const void* p2, const void* p3) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize fraction.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize fraction.");
 
 //??    sscanf(p1, %l, (void*) &(m->value));
 
@@ -104,7 +104,7 @@ void initialize_fraction(void* p0, void* p1, const void* p2, const void* p3) {
  */
 void finalize_fraction(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize fraction.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize fraction.");
 
     // Initialize elements.
     int d = 0;

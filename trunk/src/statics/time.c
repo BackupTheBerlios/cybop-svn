@@ -32,7 +32,7 @@
  * 01.01.2000 00:00:00";
  * 31.12.1999 23:59:59";
  *
- * @version $Revision: 1.5 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,7 +55,7 @@
  */
 void create_time(void* p0, void* p1) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create time.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create time.");
 
     // The time.
     create_array(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT);
@@ -69,7 +69,7 @@ void create_time(void* p0, void* p1) {
  */
 void destroy_time(void* p0, void* p1) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy time.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy time.");
 
     // The time.
     destroy_array(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT);
@@ -85,7 +85,7 @@ void destroy_time(void* p0, void* p1) {
  */
 void initialize_time(void* p0, void* p1, const void* p2, const void* p3) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize time.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize time.");
 
 //??    fscanf(p1, %d, &(m->value));
 
@@ -116,7 +116,7 @@ void initialize_time(void* p0, void* p1, const void* p2, const void* p3) {
  */
 void finalize_time(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize time.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize time.");
 
     // Initialize elements.
     int s = 0;

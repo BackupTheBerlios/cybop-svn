@@ -48,7 +48,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.3 $ $Date: 2004-05-26 22:37:39 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -98,7 +98,7 @@ void create_array(void* p0, const void* p1, const void* p2) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create array. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -134,7 +134,7 @@ void destroy_array(void* p0, const void* p1, const void* p2) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy array. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -170,7 +170,7 @@ void resize_array(void* p0, const void* p1, const void* p2) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize array. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -215,7 +215,7 @@ void compare_array_elements(const void* p0, const void* p1, const void* p2, cons
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare array elements. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COMPARE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_COMPARE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -253,7 +253,7 @@ void set_array_elements(void* p0, const void* p1, const void* p2, const void* p3
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set array elements. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_SET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_SET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -317,7 +317,7 @@ void remove_array_elements(void* p0, const void* p1, const void* p2, const void*
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove array elements. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -371,7 +371,7 @@ void get_array_elements(const void* p0, const void* p1, const void* p2, void* p3
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get array elements. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -432,7 +432,7 @@ void get_array_elements_index(const void* p0, const void* p1, const void* p2, co
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get array elements index. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 

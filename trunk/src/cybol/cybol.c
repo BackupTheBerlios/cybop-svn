@@ -37,7 +37,7 @@
  *         map = position_abstraction_attribute
  *         (attributes 0..9 = size 10)
  *
- * @version $Revision: 1.3 $ $Date: 2004-05-11 08:32:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,7 +61,7 @@
  */
 void initialize_compound_from_file(void* p0, const void* p1, const void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize compound from file.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize compound from file.");
 
 /*??
     // Create temporary cybol model.
@@ -96,7 +96,7 @@ void initialize_compound_from_file(void* p0, const void* p1, const void* p2) {
  */
 void finalize_compound_model_to_file(void* p0, const void* p1, const void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize compound model to file.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize compound model to file.");
 
 /*??
     // Create temporary statics cybol model.
@@ -154,7 +154,7 @@ void read_child_attribute(void* p0, void* p1, void* p2) {
         }
 
     } else {
-        
+
         log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not read child attribute. The child attributes map is null.");
     }
 */
@@ -250,17 +250,17 @@ void initialize_child_model(void* p0, void* p1) {
         org.apache.xerces.dom.NodeImpl n = (org.apache.xerces.dom.NodeImpl) p1;
 
         if (n != NULL_POINTER) {
-            
+
             log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize child model.");
             initialize_attributes(i.items, (org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes());
-    
+
         } else {
-            
+
             log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize child model. The child model node is null.");
         }
 
     } else {
-        
+
         log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize child model. The child model is null.");
     }
 */
@@ -294,7 +294,7 @@ void initialize_children_models(void* p0, void* p1) {
     org.apache.xerces.dom.DeepNodeListImpl l = (org.apache.xerces.dom.DeepNodeListImpl) p1;
 
     if (l != NULL_POINTER) {
-        
+
         log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize children models.");
         int count = 0;
         int size = l.getLength();
@@ -303,11 +303,11 @@ void initialize_children_models(void* p0, void* p1) {
         int name = 0;
 
         while (count < size) {
-        
+
             n = (org.apache.xerces.dom.NodeImpl) l.item(count);
 
             if (n != NULL_POINTER) {
-                    
+
                 i = new Item();
                 initialize_item_containers(i);
                 initialize_item(i, n);
@@ -316,7 +316,7 @@ void initialize_children_models(void* p0, void* p1) {
 
                     name = get_map_element(i.items, NAME);
                     set_map_element(p0, name, i);
-                    
+
 /*??
                     // Initialize serialized item.
                     i = n.getNodeValue();
@@ -324,18 +324,18 @@ void initialize_children_models(void* p0, void* p1) {
 
 /*??
                 } else {
-                    
+
                     log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize children models. A model is null.");
                 }
-        
+
             } else {
-                
+
                 log_message((void*) &INFO_LOG_LEVEL, (void*) &"Could not initialize children models. The model item node is null.");
             }
-                    
+
             count++;
         }
-        
+
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize children models. The model items list is null.");
@@ -419,13 +419,13 @@ void read_into_model(void* p0, void* p1) {
     org.apache.xerces.dom.DocumentImpl doc = (org.apache.xerces.dom.DocumentImpl) p1;
 
     if (doc != NULL_POINTER) {
-        
+
         log_message((void*) &INFO_LOG_LEVEL, (void*) &"Read document.");
         doc.normalize();
         org.apache.xerces.dom.DeepNodeListImpl l = NULL_POINTER;
 
         if (p0 != NULL_POINTER) {
-            
+
             l = (org.apache.xerces.dom.DeepNodeListImpl) doc.getElementsByTagName(SUPER_CATEGORY);
             initialize_super_category(p0, l);
 
@@ -486,15 +486,15 @@ int read_cybol_attribute(void* p0, void* p1) {
         mode = 5;
 
     } else if (strcmp(s, "logics_abstraction=") == 0) {
-        
+
         mode = 6;
-    
+
     } else if (strcmp(s, "input_0=") == 0) {
-        
+
         mode = 7;
-    
+
     } else if (strcmp(s, "output_0=") == 0) {
-        
+
         mode = 8;
 
     } else if (strcmp(s, "input_1=") == 0) {

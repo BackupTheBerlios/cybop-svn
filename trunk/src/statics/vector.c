@@ -25,7 +25,7 @@
  *
  * A vector contains the three coordinates: x, y, z.
  *
- * @version $Revision: 1.5 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,7 +48,7 @@
  */
 void create_vector(void* p0, void* p1) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create vector.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create vector.");
 
     // The vector.
     create_array(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_COUNT);
@@ -62,7 +62,7 @@ void create_vector(void* p0, void* p1) {
  */
 void destroy_vector(void* p0, void* p1) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy vector.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy vector.");
 
     // The vector.
     destroy_array(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_COUNT);
@@ -78,7 +78,7 @@ void destroy_vector(void* p0, void* p1) {
  */
 void initialize_vector(void* p0, void* p1, const void* p2, const void* p3) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize vector.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize vector.");
 
     // Read input stream and transform to vector.
 //??    fscanf(p1, %d, &(m->x));
@@ -115,12 +115,12 @@ void initialize_vector(void* p0, void* p1, const void* p2, const void* p3) {
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create vector. The vector does not contain a z coordinate.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create vector. The vector does not contain a z coordinate.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create vector. The vector does not contain an y coordinate.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create vector. The vector does not contain an y coordinate.");
     }
 */
 }
@@ -135,7 +135,7 @@ void initialize_vector(void* p0, void* p1, const void* p2, const void* p3) {
  */
 void finalize_vector(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize vector.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize vector.");
 
     // Write output stream and transform from vector.
 

@@ -25,7 +25,7 @@
  *
  * A string is a chain of characters.
  *
- * @version $Revision: 1.5 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -65,29 +65,29 @@ void initialize_string(void* p0, void* p1, const void* p2, const void* p3) {
 
                     char* t = (char*) p0;
 
-                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize string.");
+//??                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize string.");
 
                     *t = *p;
                     *tc = *pc;
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The transient model is null.");
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The transient model is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The transient model count is null.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The transient model count is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The persistent model is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The persistent model is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The persistent model count is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize string. The persistent model count is null.");
     }
 }
 
@@ -117,29 +117,29 @@ void finalize_string(const void* p0, const void* p1, void* p2, void* p3) {
 
                     char* t = (char*) p0;
 
-                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize string.");
+//??                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize string.");
 
                     *p = *t;
                     *pc = *tc;
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The transient model is null.");
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The transient model is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The transient model count is null.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The transient model count is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The persistent model is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The persistent model is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The persistent model count is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize string. The persistent model count is null.");
     }
 }
 

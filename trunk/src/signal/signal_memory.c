@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.15 $ $Date: 2004-05-26 14:13:50 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,7 +64,7 @@
  */
 void create_signal_memory(void* p0, void* p1, void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create signal memory.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create signal memory.");
 
     // Create signal memory.
     create_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);
@@ -101,7 +101,7 @@ void create_signal_memory(void* p0, void* p1, void* p2) {
  */
 void destroy_signal_memory(void* p0, void* p1, void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy signal memory.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy signal memory.");
 
     // Initialize elements.
     int s = 0;
@@ -231,12 +231,12 @@ void set_signal(void* p0, const void* p1, const void* p2, const void* p3, const 
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set signal. The index exceeds the size.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set signal. The index exceeds the size.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set signal. The index is negativ.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set signal. The index is negativ.");
     }
 }
 
@@ -286,17 +286,17 @@ void remove_signal(void* p0, const void* p1) {
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove signal. The index exceeds the count.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove signal. The index exceeds the count.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove signal. The index is negativ.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove signal. The index is negativ.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove signal. The index is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove signal. The index is null.");
     }
 }
 
@@ -344,17 +344,17 @@ void get_signal(const void* p0, const void* p1, void* p2, void* p3, void* p4, vo
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get signal. The index exceeds the count.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get signal. The index exceeds the count.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get signal. The index is negativ.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get signal. The index is negativ.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get signal. The index is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get signal. The index is null.");
     }
 }
 
@@ -412,7 +412,7 @@ void get_highest_priority_index(const void* p0, void* p1) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get highest priority index. The index is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get highest priority index. The index is null.");
     }
 }
 
@@ -429,7 +429,7 @@ void get_highest_priority_index(const void* p0, void* p1) {
  */
 void handle_compound_signal(void* p0, const void* p1, const void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Handle compound signal.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Handle compound signal.");
 
     // Initialize elements.
     int c = 0;
@@ -482,7 +482,7 @@ void handle_compound_signal(void* p0, const void* p1, const void* p2) {
  */
 void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Handle operation signal.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Handle operation signal.");
 
     // Initialize elements.
     int s = 0;
@@ -719,7 +719,7 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
 
             if (r == 1) {
 
-                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Set shutdown flag.");
+//??                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Set shutdown flag.");
 
                 int* f = (int*) p4;
                 *f = 1;
@@ -753,7 +753,7 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle mouse clicked action. The pointer position is null.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle mouse clicked action. The pointer position is null.");
             }
         }
 */

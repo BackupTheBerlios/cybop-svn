@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.8 $ $Date: 2004-05-26 14:13:50 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,7 +66,7 @@
  */
 void create_operation(void* p0, const void* p1) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create operation.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create operation.");
 
     // Create operation.
     create_array(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT);
@@ -94,7 +94,7 @@ void create_operation(void* p0, const void* p1) {
  */
 void destroy_operation(void* p0, const void* p1) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy operation.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy operation.");
 
     // Initialize elements.
     int tc = 0;
@@ -149,7 +149,7 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
 
                     void** t = (void**) p0;
 
-                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize operation.");
+//??                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize operation.");
 
                     // The parameter count initially set to the persistent model count.
                     int count = *pc;
@@ -220,38 +220,38 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
 
                                 } else {
 
-                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize operation. There are no remaining parameters after the separator.");
+//??                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize operation. There are no remaining parameters after the separator.");
                                 }
                             }
 
                         } else {
 
-                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The index exceeds the count.");
+//??                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The index exceeds the count.");
                         }
 
                     } else {
 
-                        log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize operation. There is no parameter before the separator.");
+//??                        log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize operation. There is no parameter before the separator.");
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The transient model is null.");
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The transient model is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The transient model count is null.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The transient model count is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The persistent model is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The persistent model is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The persistent model count is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The persistent model count is null.");
     }
 }
 
@@ -285,7 +285,7 @@ void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
 
                     void** t = (void**) p0;
 
-                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize operation.");
+//??                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize operation.");
 
                     // Initialize elements.
                     int c = 0;
@@ -353,33 +353,33 @@ void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
 
                             } else {
 
-                                log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not finalize operation. There are no remaining parameters after the separator.");
+//??                                log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not finalize operation. There are no remaining parameters after the separator.");
                             }
                         }
 
                     } else {
 
-                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The index exceeds the count.");
+//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The index exceeds the count.");
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The transient model is null.");
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The transient model is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The transient model count is null.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The transient model count is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The persistent model is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The persistent model is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The persistent model count is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The persistent model count is null.");
     }
 */
 }

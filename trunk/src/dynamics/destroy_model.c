@@ -23,7 +23,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.19 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -132,7 +132,7 @@ void write_model(const void* p0, const void* p1, void* p2, void* p3, const void*
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write model. The location count is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write model. The location count is null.");
     }
 }
 
@@ -351,12 +351,12 @@ void serialize_model(void* p0, void* p1, void* p2, void* p3, const void* p4, con
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not serialize model. The persistent model count is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not serialize model. The persistent model count is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not serialize model. The abstraction count is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not serialize model. The abstraction count is null.");
     }
 }
 

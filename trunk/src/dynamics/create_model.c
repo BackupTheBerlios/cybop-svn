@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.23 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -132,7 +132,7 @@ void read_model(void* p0, void* p1, const void* p2, const void* p3, const void* 
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read model. The location count is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read model. The location count is null.");
     }
 }
 
@@ -351,12 +351,12 @@ void interpret_model(void* p0, void* p1, const void* p2, const void* p3, const v
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not interpret model. The persistent model count is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not interpret model. The persistent model count is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not interpret model. The abstraction count is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not interpret model. The abstraction count is null.");
     }
 }
 

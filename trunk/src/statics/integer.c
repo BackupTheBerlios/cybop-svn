@@ -23,7 +23,7 @@
  *
  * This file handles an integer.
  *
- * @version $Revision: 1.5 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,7 +47,7 @@
  */
 void initialize_integer(void* p0, void* p1, const void* p2, const void* p3) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize integer.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize integer.");
 
     // Transform string to integer.
 //??    sscanf(p1, %d, (void*) &(m->value));
@@ -63,7 +63,7 @@ void initialize_integer(void* p0, void* p1, const void* p2, const void* p3) {
  */
 void finalize_integer(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize integer.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize integer.");
 
     // Transform integer to string.
 //??    sprintf(p1, %d, (void*) &(m->value));

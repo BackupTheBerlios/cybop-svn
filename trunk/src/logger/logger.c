@@ -24,7 +24,11 @@
  * This file handles log messages.
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.4 $ $Date: 2004-05-26 22:37:39 $ $Author: christian $
+ * CAUTION! This logger must NOT use the CYBOI array procedures!
+ * Otherwise, an ENDLESS LOOP will be created, because cyboi's
+ * array procedures call the logger in turn.
+ *
+ * @version $Revision: 1.5 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,68 +36,121 @@
 #define LOGGER_SOURCE
 
 #include <stdio.h>
-#include <string.h>
 #include "../constants/constants.c"
 
 //
-// Attributes.
+// Global variables.
 //
 
 /** The log level. */
 static int log_level;
 
-//
-// Forward declarations.
-//
+/** The maximum log message count. */
+static int maximum_log_message_count;
 
-/**
- * Creates the array.
- *
- * @param p0 the array
- * @param p1 the size
- */
-void create_array(void* p0, const void* p1, const void* p2);
-
-/**
- * Destroys the array.
- *
- * @param p0 the array
- * @param p1 the size
- */
-void destroy_array(void* p0, const void* p1, const void* p2);
-
-/**
- * Resizes the array with the given size.
- *
- * @param p0 the array
- * @param p1 the size
- */
-void resize_array(void* p0, const void* p1, const void* p2);
-
-/**
- * Sets the array elements.
- *
- * @param p0 the destination array
- * @param p1 the type
- * @param p2 the index
- * @param p3 the source array
- * @param p4 the count
- */
-void set_array_elements(void* p0, const void* p1, const void* p2, const void* p3, const void* p4);
-
-/**
- * Sets the array element.
- *
- * @param p0 the array
- * @param p1 the type
- * @param p2 the index
- * @param p3 the element
- */
-void set_array_element(void* p0, const void* p1, const void* p2, const void* p3);
+/** The log output. */
+static FILE* log_output;
 
 //
 // Log entry.
 //
+
+/**
+ * Adds the log details.
+ *
+ * @param p0 the log entry
+ * @param p1 the log entry index
+ * @param p2 the log details
+ * @param p3 the log details count
+ */
+void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
+
+    if (p3 != NULL_POINTER) {
+
+        int* dc = (int*) p3;
+
+        if (p2 != NULL_POINTER) {
+
+            void** d = (void**) p2;
+
+            if (p1 != NULL_POINTER) {
+
+                int* ei = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    void** e = (void**) p0;
+
+                    // The loop index.
+                    int j = 0;
+                    // The destination character.
+                    char* dest = CHARACTER_NULL_POINTER;
+                    // The source character.
+                    char* src = CHARACTER_NULL_POINTER;
+
+                    while (1) {
+
+                        if (j >= *dc) {
+
+                            break;
+                        }
+
+                        // Determine log entry pointer as destination.
+                        dest = (char*) (*e + *ei + j);
+                        // Determine log details pointer as source.
+                        src = (char*) (*d + j);
+
+                        // Copy log details elements to log entry.
+                        *dest = *src;
+
+                        j++;
+                    }
+
+                } else {
+
+                    fputs("Error: Could not add log details. The log entry index is null.\n", log_output);
+                }
+
+            } else {
+
+                fputs("Error: Could not add log details. The log entry index is null.\n", log_output);
+            }
+
+        } else {
+
+            fputs("Error: Could not add log details. The log entry index is null.\n", log_output);
+        }
+
+    } else {
+
+        fputs("Error: Could not add log details. The log details count is null.\n", log_output);
+    }
+}
+
+/**
+ * Adds the log detail.
+ *
+ * @param p0 the log entry
+ * @param p1 the log entry index
+ * @param p2 the log details
+ */
+void add_log_detail(void* p0, const void* p1, const void* p2) {
+
+    // The detail count.
+    int dc = 1;
+
+    // The element p2 needs to be handed over as array to add_log_details.
+    // Therefore, it has to be transformed into a pointer.
+    // Example 1:
+    // - array p0: char* handed over as char**
+    // - element p2: single char handed over as char*
+    // - the element of type char* gets transformed to type char** with &p2
+    // Example 2:
+    // - array p0: char** handed over as char***
+    // - element p2: string char* handed over as char**
+    // - the element of type char** gets transformed to type char*** with &p2
+    add_log_details(p0, p1, (void*) &p2, (void*) &dc);
+}
 
 /**
  * Adds the log level name.
@@ -101,47 +158,76 @@ void set_array_element(void* p0, const void* p1, const void* p2, const void* p3)
  * @param p0 the log level
  * @param p1 the log entry
  * @param p2 the log entry count
+ * @param p3 the log entry index
  */
-void add_log_level_name(const void* p0, void* p1, void* p2) {
+void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
 
-    if (p2 != NULL_POINTER) {
+    //
+    // CAUTION! CYBOI's array procedures are NOT used to avoid an endless loop!
+    //
 
-        int* ec = (int*) p2;
+    if (p3 != NULL_POINTER) {
 
-        if (p0 != NULL_POINTER) {
+        int* ei = (int*) p3;
 
-            int* l = (int*) p0;
+        if (p2 != NULL_POINTER) {
 
-            // The message index.
-            int i = 0;
+            int* ec = (int*) p2;
 
-            if (*l == INFO_LOG_LEVEL) {
+            if (p0 != NULL_POINTER) {
 
-                *ec = INFO_LOG_LEVEL_NAME_COUNT;
-                resize_array(p1, (void*) ec);
-                set_array_elements(p1, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &INFO_LOG_LEVEL_NAME, (void*) ec);
+                int* l = (int*) p0;
 
-            } else if (*l == WARNING_LOG_LEVEL) {
+                if (*l == INFO_LOG_LEVEL) {
 
-                *ec = WARNING_LOG_LEVEL_NAME_COUNT;
-                resize_array(p1, (void*) ec);
-                set_array_elements(p1, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &WARNING_LOG_LEVEL_NAME, (void*) ec);
+                    if ((*ei + INFO_LOG_LEVEL_NAME_COUNT) < *ec) {
 
-            } else if (*l == ERROR_LOG_LEVEL) {
+                        add_log_details(p1, p3, (void*) &INFO_LOG_LEVEL_NAME, (void*) &INFO_LOG_LEVEL_NAME_COUNT);
+                        *ei = *ei + INFO_LOG_LEVEL_NAME_COUNT;
 
-                *ec = ERROR_LOG_LEVEL_NAME_COUNT;
-                resize_array(p1, (void*) ec);
-                set_array_elements(p1, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &ERROR_LOG_LEVEL_NAME, (void*) ec);
+                    } else {
+
+                        fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", log_output);
+                    }
+
+                } else if (*l == WARNING_LOG_LEVEL) {
+
+                    if ((*ei + WARNING_LOG_LEVEL_NAME_COUNT) < *ec) {
+
+                        add_log_details(p1, p3, (void*) &WARNING_LOG_LEVEL_NAME, (void*) &WARNING_LOG_LEVEL_NAME_COUNT);
+                        *ei = *ei + WARNING_LOG_LEVEL_NAME_COUNT;
+
+                    } else {
+
+                        fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", log_output);
+                    }
+
+                } else if (*l == ERROR_LOG_LEVEL) {
+
+                    if ((*ei + ERROR_LOG_LEVEL_NAME_COUNT) < *ec) {
+
+                        add_log_details(p1, p3, (void*) &ERROR_LOG_LEVEL_NAME, (void*) &ERROR_LOG_LEVEL_NAME_COUNT);
+                        *ei = *ei + ERROR_LOG_LEVEL_NAME_COUNT;
+
+                    } else {
+
+                        fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", log_output);
+                    }
+                }
+
+            } else {
+
+                fputs("Error: Could not add log level name. The log level is null.\n", log_output);
             }
 
         } else {
 
-            fputs("Error: Could not add log level name. The log level is null.\n", stderr);
+            fputs("Error: Could not add log level name. The log entry count is null.\n", log_output);
         }
 
     } else {
 
-        fputs("Error: Could not add log level name. The log entry count is null.\n", stderr);
+        fputs("Error: Could not add log level name. The log entry index is null.\n", log_output);
     }
 }
 
@@ -153,6 +239,10 @@ void add_log_level_name(const void* p0, void* p1, void* p2) {
  * @param p2 the log message count
  */
 void log_message(const void* p0, const void* p1, const void* p2) {
+
+    //
+    // CAUTION! CYBOI's array procedures are NOT used to avoid an endless loop!
+    //
 
     if (p2 != NULL_POINTER) {
 
@@ -168,61 +258,86 @@ void log_message(const void* p0, const void* p1, const void* p2) {
                 // The log entry.
                 void* e = NULL_POINTER;
                 // The log entry count.
-                int ec = 0;
-                // The index for adding characters.
-                int i = 0;
+                const int ec = maximum_log_message_count;
+                // The log entry index for adding characters.
+                int ei = 0;
 
                 // Create log entry.
-                create_array((void*) &e, (void*) &ec);
+                e = (void*) malloc(ec);
 
-                // Add name of the given log level to entry.
-                add_log_level_name(p0, (void*) &e, (void*) &ec);
+                // Add name of the given log level to log entry.
+                add_log_level_name(p0, (void*) &e, (void*) &ec, (void*) &ei);
 
-                // Add colon to message.
-                i = ec;
-                ec++;
-                resize_array((void*) &e, (void*) &ec);
-                set_array_element((void*) &e, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &COLON_CHARACTER);
+                // Add colon to log entry.
+                if ((ei + 1) < ec) {
 
-                // Add space to message.
-                i = ec;
-                ec++;
-                resize_array((void*) &e, (void*) &ec);
-                set_array_element((void*) &e, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &SPACE_CHARACTER);
+                    add_log_detail((void*) &e, (void*) &ei, (void*) &COLON_CHARACTER);
+                    ei = ei + 1;
 
-                // Add message to message.
-                i = ec;
-                ec = ec + *mc;
-                resize_array((void*) &e, (void*) &ec);
-                set_array_elements((void*) &e, (void*) &CHARACTER_ARRAY, (void*) &i, p1, p2);
+                } else {
 
-                // Add new line to message.
-                i = ec;
-                ec++;
-                resize_array((void*) &e, (void*) &ec);
-                set_array_element((void*) &e, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NEW_LINE_CHARACTER);
+                    fputs("Warning: Could not add colon to log entry. The log entry count is exceeded.\n", log_output);
+                }
 
-                // Add string termination to message.
-                i = ec;
-                ec++;
-                resize_array((void*) &e, (void*) &ec);
-                set_array_element((void*) &e, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &STRING_TERMINATION_CHARACTER);
+                // Add space to log entry.
+                if ((ei + 1) < ec) {
+
+                    add_log_detail((void*) &e, (void*) &ei, (void*) &SPACE_CHARACTER);
+                    ei = ei + 1;
+
+                } else {
+
+                    fputs("Warning: Could not add space to log entry. The log entry count is exceeded.\n", log_output);
+                }
+
+                // Add message to log entry.
+                if ((ei + *mc) < ec) {
+
+                    add_log_details((void*) &e, (void*) &ei, p1, p2);
+                    ei = ei + *mc;
+
+                } else {
+
+                    fputs("Warning: Could not add message to log entry. The log entry count is exceeded.\n", log_output);
+                }
+
+                // Add new line to log entry.
+                if ((ei + 1) < ec) {
+
+                    add_log_detail((void*) &e, (void*) &ei, (void*) &NEW_LINE_CHARACTER);
+                    ei = ei + 1;
+
+                } else {
+
+                    fputs("Warning: Could not add new line to log entry. The log entry count is exceeded.\n", log_output);
+                }
+
+                // Add string termination to log entry.
+                if ((ei + 1) < ec) {
+
+                    add_log_detail((void*) &e, (void*) &ei, (void*) &NULL_CHARACTER);
+                    ei = ei + 1;
+
+                } else {
+
+                    fputs("Warning: Could not add string termination to log entry. The log entry count is exceeded.\n", log_output);
+                }
 
                 // Log entry to output.
-                fputs((char*) e, stdout);
+                fputs((char*) e, log_output);
 
                 // Destroy log entry.
-                destroy_array((void*) &e, (void*) &ec);
+                free(e);
             }
 
         } else {
 
-            show_message((void*) &"Error: Could not log message. The message count is null.\n");
+            fputs("Error: Could not log message. The message count is null.\n", log_output);
         }
 
     } else {
 
-        show_message((void*) &"Error: Could not log message. The log level is null.\n");
+        fputs("Error: Could not log message. The log level is null.\n", log_output);
     }
 }
 

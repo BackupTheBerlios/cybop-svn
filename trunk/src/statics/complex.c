@@ -25,7 +25,7 @@
  *
  * A complex consists of two floats, a real and an imaginary.
  *
- * @version $Revision: 1.6 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,7 +48,7 @@
  */
 void create_complex(void* p0, void* p1) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create complex.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create complex.");
 
     // The complex.
     create_array(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT);
@@ -62,7 +62,7 @@ void create_complex(void* p0, void* p1) {
  */
 void destroy_complex(void* p0, void* p1) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy complex.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy complex.");
 
     // The complex.
     destroy_array(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT);
@@ -78,7 +78,7 @@ void destroy_complex(void* p0, void* p1) {
  */
 void initialize_complex(void* p0, void* p1, const void* p2, const void* p3) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize complex.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize complex.");
 
 //??    fscanf(p1, %d, (void*) &(t->real));
 //??    fscanf(p1, %d, (void*) &(t->imaginary));
@@ -102,7 +102,7 @@ void initialize_complex(void* p0, void* p1, const void* p2, const void* p3) {
  */
 void finalize_complex(void* p0, void* p1, void* p2, void* p3) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize complex.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize complex.");
 
     // Initialize elements.
     int i = 0;
