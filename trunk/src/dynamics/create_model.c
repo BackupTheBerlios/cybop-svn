@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.29 $ $Date: 2004-06-06 21:34:21 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2004-06-11 18:50:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -371,12 +371,12 @@ void interpret_model(void* p0, void* p1, void* p2, const void* p3, const void* p
  * @param p3 the transient position model
  * @param p4 the transient position model count
  * @param p5 the transient position model size
- * @param p6 the persistent abstraction
- * @param p7 the persistent abstraction count
- * @param p8 the persistent location
- * @param p9 the persistent location count
- * @param p10 the persistent model
- * @param p11 the persistent model count
+ * @param p6 the persistent part abstraction
+ * @param p7 the persistent part abstraction count
+ * @param p8 the persistent part location
+ * @param p9 the persistent part location count
+ * @param p10 the persistent part model
+ * @param p11 the persistent part model count
  * @param p12 the persistent position abstraction
  * @param p13 the persistent position abstraction count
  * @param p14 the persistent position location

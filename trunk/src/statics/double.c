@@ -25,7 +25,7 @@
  *
  * A double is a floating point number.
  *
- * @version $Revision: 1.4 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-06-11 18:50:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,10 +44,11 @@
  *
  * @param p0 the transient model
  * @param p1 the transient model count
- * @param p2 the persistent model
- * @param p3 the persistent model count
+ * @param p2 the transient model size
+ * @param p3 the persistent model
+ * @param p4 the persistent model count
  */
-void initialize_double(void* p0, void* p1, const void* p2, const void* p3) {
+void initialize_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
 //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize double.");
 
@@ -60,10 +61,11 @@ void initialize_double(void* p0, void* p1, const void* p2, const void* p3) {
  *
  * @param p0 the transient model
  * @param p1 the transient model count
- * @param p2 the persistent model
- * @param p3 the persistent model count
+ * @param p2 the transient model size
+ * @param p3 the persistent model
+ * @param p4 the persistent model count
  */
-void finalize_double(const void* p0, const void* p1, void* p2, void* p3) {
+void finalize_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
 //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize double.");
 

@@ -28,7 +28,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.5 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-06-11 18:50:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,12 +41,6 @@
 //
 // Global variables.
 //
-
-/** The log level. */
-static int log_level;
-
-/** The maximum log message count. */
-static int maximum_log_message_count;
 
 /** The log output. */
 static FILE* log_output;
@@ -253,12 +247,12 @@ void log_message(const void* p0, const void* p1, const void* p2) {
             int* l = (int*) p0;
 
             // Only log message if log level matches.
-            if (*l <= log_level) {
+            if (*l <= *LOG_LEVEL) {
 
                 // The log entry.
                 void* e = NULL_POINTER;
                 // The log entry count.
-                const int ec = maximum_log_message_count;
+                const int ec = MAXIMUM_LOG_MESSAGE_COUNT;
                 // The log entry index for adding characters.
                 int ei = 0;
 

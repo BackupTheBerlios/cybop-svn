@@ -23,7 +23,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.21 $ $Date: 2004-05-27 22:15:50 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2004-06-11 18:50:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,6 +61,7 @@
  */
 void write_model(const void* p0, const void* p1, void* p2, void* p3, const void* p4, const void* p5) {
 
+/*??
     if (p5 != NULL_POINTER) {
 
         int* lc = (int*) p5;
@@ -134,6 +135,7 @@ void write_model(const void* p0, const void* p1, void* p2, void* p3, const void*
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write model. The location count is null.");
     }
+*/
 }
 
 /**
@@ -150,6 +152,7 @@ void write_model(const void* p0, const void* p1, void* p2, void* p3, const void*
  */
 void serialize_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const void* p5) {
 
+/*??
     // The done flag.
     int d = 0;
     // The comparison result.
@@ -358,6 +361,7 @@ void serialize_model(void* p0, void* p1, void* p2, void* p3, const void* p4, con
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not serialize model. The abstraction count is null.");
     }
+*/
 }
 
 /**
@@ -365,31 +369,119 @@ void serialize_model(void* p0, void* p1, void* p2, void* p3, const void* p4, con
  *
  * @param p0 the transient model
  * @param p1 the transient model count
- * @param p2 the persistent model
- * @param p3 the persistent model count
- * @param p4 the abstraction
- * @param p5 the abstraction count
- * @param p6 the location
- * @param p7 the location count
+ * @param p2 the transient model size
+ * @param p3 the transient position model
+ * @param p4 the transient position model count
+ * @param p5 the transient position model size
+ * @param p6 the persistent part abstraction
+ * @param p7 the persistent part abstraction count
+ * @param p8 the persistent part location
+ * @param p9 the persistent part location count
+ * @param p10 the persistent part model
+ * @param p11 the persistent part model count
+ * @param p12 the persistent position abstraction
+ * @param p13 the persistent position abstraction count
+ * @param p14 the persistent position location
+ * @param p15 the persistent position location count
+ * @param p16 the persistent position model
+ * @param p17 the persistent position model count
  */
-void destroy_model(void* p0, void* p1, const void* p2, const void* p3, const void* p4, const void* p5, const void* p6, const void* p7) {
+void destroy_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    const void* p6, const void* p7, const void* p8, const void* p9, const void* p10, const void* p11,
+    const void* p12, const void* p13, const void* p14, const void* p15, const void* p16, const void* p17) {
 
-    // The buffer array.
-    void* b = NULL_POINTER;
-    // The buffer array count.
-    int bc = 0;
+/*??
+    if (p5 != NULL_POINTER) {
 
-    // Create buffer array.
-    create_array((void*) &b, (void*) &INTEGER_ARRAY, (void*) &bc);
+        int* pos = (int*) p5;
 
-    // Finalize transient model to buffer array and destroy it.
-    serialize_model(p0, p1, (void*) &b, (void*) &bc, p4, p5);
+        if (p4 != NULL_POINTER) {
 
-    // Write buffer array as persistent model to location.
-//??    write_model((void*) &b, (void*) &bc, p2, p3, p6, p7);
+            int* poc = (int*) p4;
 
-    // Destroy buffer array.
-    destroy_array((void*) &b, (void*) &INTEGER_ARRAY, (void*) &bc);
+            if (p3 != NULL_POINTER) {
+
+                void** po = (void**) p3;
+
+                if (p2 != NULL_POINTER) {
+
+                    int* ps = (int*) p2;
+
+                    if (p1 != NULL_POINTER) {
+
+                        int* pc = (int*) p1;
+
+                        if (p0 != NULL_POINTER) {
+
+                            void** p = (void**) p0;
+
+                            //
+                            // Buffer.
+                            //
+
+                            // The buffer array.
+                            void* b = NULL_POINTER;
+                            // The buffer array count.
+                            int bc = 0;
+                            // The buffer array size.
+                            int bs = 0;
+
+                            //
+                            // Part.
+                            //
+
+                            // Create buffer array of type character to read single bytes.
+                            create_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
+                            // Read persistent model from location into buffer array.
+                            read_model((void*) &b, (void*) &bc, (void*) &bs, p8, p9, p10, p11);
+                            // Create and initialize transient model from buffer array.
+                            interpret_model((void*) &p, (void*) &pc, (void*) &ps, (void*) &b, (void*) &bc, p6, p7);
+                            // Destroy buffer array.
+                            destroy_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
+
+                            //
+                            // Position.
+                            //
+
+                            // Create buffer array of type character to read single bytes.
+                            create_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
+                            // Read persistent model from location into buffer array.
+                            read_model((void*) &b, (void*) &bc, (void*) &bs, p14, p15, p16, p17);
+                            // Create and initialize transient model from buffer array.
+                            interpret_model((void*) &po, (void*) &poc, (void*) &pos, (void*) &b, (void*) &bc, p12, p13);
+                            // Destroy buffer array.
+                            destroy_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
+
+                        } else {
+
+//??                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_IS_NULL_MESSAGE_COUNT);
+                        }
+
+                    } else {
+
+//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_COUNT_IS_NULL_MESSAGE_COUNT);
+                    }
+
+                } else {
+
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_SIZE_IS_NULL_MESSAGE_COUNT);
+                }
+
+            } else {
+
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_POSITION_MODEL_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_POSITION_MODEL_IS_NULL_MESSAGE_COUNT);
+            }
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_POSITION_MODEL_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_POSITION_MODEL_COUNT_IS_NULL_MESSAGE_COUNT);
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_POSITION_MODEL_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_POSITION_MODEL_SIZE_IS_NULL_MESSAGE_COUNT);
+    }
+*/
 }
 
 /* DESTROY_MODEL_SOURCE */

@@ -26,14 +26,15 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.12 $ $Date: 2004-06-06 21:34:21 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-06-11 18:50:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOI_SOURCE
 #define CYBOI_SOURCE
 
-#include <stdlib.h>
+#include <stdio.h>
+//??#include <stdlib.h>
 #include "../constants/constants.c"
 #include "../cyboi/internals.c"
 #include "../logger/logger.c"
@@ -122,7 +123,8 @@ void wait(void* p0, void* p1, void* p2,
 
             if (i >= 0) {
 
-                get_signal(p0, p1, (void*) &i, (void*) &s, (void*) &sc, (void*) &p, (void*) &a, (void*) &ac);
+                get_signal(p0, p1, (void*) &i,
+                    (void*) &s, (void*) &sc, (void*) &p, (void*) &a, (void*) &ac);
 
                 // Abstraction and priority are removed internally,
                 // together with the signal.
@@ -135,6 +137,8 @@ void wait(void* p0, void* p1, void* p2,
                 //
                 // Handle compound signal.
                 //
+
+    fprintf(stderr, "a: %s\n", a);
 
                 if (d == 0) {
 
@@ -206,12 +210,19 @@ void wait(void* p0, void* p1, void* p2,
  * The main entry function.
  *
  * Command line arguments have to be in order:
- * - command
- * - dynamics
- * - statics
+ * - command (cyboi)
+ * - abstraction (compound|operation)
+ * - location (inline|file|ftp|http)
+ * - model (a compound model or primitive operation, for example: exit or model.submodel)
  *
- * Example:
- * cyboi application.dynamics.startup
+ * Usage:
+ * cyboi compound|operation inline|file|ftp|http model.submodel
+ *
+ * Example 1 (starts up and right away shuts down the system):
+ * cyboi operation inline exit
+ *
+ * Example 2 (calls the startup routine of some application):
+ * cyboi compound file /application/logic/startup.cybol
  *
  * @param p0 the argument count (argc)
  * @param p1 the argument vector (argv)
@@ -232,14 +243,10 @@ int main(int p0, char** p1) {
 //    return 0;
 
     //
-    // Global variables for logger.
+    // Global variables.
     //
 
-    // Set log level.
-    log_level = INFO_LOG_LEVEL;
-    // Set maximum log message count.
-    maximum_log_message_count = 200;
-    // Set log output.
+    /** The log output. */
     log_output = stderr;
 
     //
@@ -248,35 +255,31 @@ int main(int p0, char** p1) {
 
     if (p1 != NULL_POINTER) {
 
-        if (p0 == 2) {
+        if (p0 == STARTUP_PARAMETERS_COUNT) {
 
             //
             // Knowledge container.
             //
 
-            // The knowledge container.
+            // The knowledge container and its count and size.
             void* k = NULL_POINTER;
-            // The knowledge container count.
             int kc = 0;
-            // The knowledge container size.
             int ks = 0;
 
             // Create knowledge container.
-            create_compound((void*) &s, (void*) &sc, (void*) &ss);
+            create_compound((void*) &k, (void*) &ks);
 
             //
             // Internals container.
             //
 
-            // The internals container.
+            // The internals container and its count and size.
             void* i = NULL_POINTER;
-            // The internals container count.
             int ic = 0;
-            // The internals container size.
             int is = 0;
 
             // Create internals container.
-//??            create_internals((void*) &i);
+//??            create_internals((void*) &i, (void*) &ic, (void*) &is);
 
             //
             // Signal container.
@@ -284,46 +287,65 @@ int main(int p0, char** p1) {
             // for storing the startup signal.
             //
 
-            // The signal container.
+            // The signal container and its count and size.
             void* s = NULL_POINTER;
-            // The signal container count.
             int sc = 1;
-            // The signal container size.
             int ss = 1;
 
             // Create signal container.
-            create_signal_memory((void*) &s, (void*) &sc, (void*) &ss);
+            create_signal_memory((void*) &s, (void*) &ss);
+
+            //
+            // Startup model.
+            //
+
+            // The transient model and its count and size.
+            void* t = NULL_POINTER;
+            int tc = 0;
+            int ts = 0;
+
+            // The persistent part abstraction and its count.
+            void* pa = (void*) p1[ABSTRACTION_STARTUP_PARAMETER_INDEX];
+            int pac = strlen(p1[ABSTRACTION_STARTUP_PARAMETER_INDEX]);
+
+            // The persistent part location and its count.
+            void* pl = (void*) p1[LOCATION_STARTUP_PARAMETER_INDEX];
+            int plc = strlen(p1[LOCATION_STARTUP_PARAMETER_INDEX]);
+
+            // The persistent part model and its count.
+            void* pm = (void*) p1[MODEL_STARTUP_PARAMETER_INDEX];
+            int pmc = strlen(p1[MODEL_STARTUP_PARAMETER_INDEX]);
+
+    fprintf(stderr, "pa: %s\n", pa);
+    fprintf(stderr, "pac: %i\n", pac);
+    fprintf(stderr, "pl: %s\n", pl);
+    fprintf(stderr, "plc: %i\n", plc);
+    fprintf(stderr, "pm: %s\n", pm);
+    fprintf(stderr, "pmc: %i\n", pmc);
+
+            // Create startup model.
+            create_model((void*) &t, (void*) &tc, (void*) &ts,
+                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
+                (void*) &pa, (void*) &pac,
+                (void*) &pl, (void*) &plc,
+                (void*) &pm, (void*) &pmc,
+                (void*) &NULL_POINTER, (void*) &NULL_POINTER,
+                (void*) &NULL_POINTER, (void*) &NULL_POINTER,
+                (void*) &NULL_POINTER, (void*) &NULL_POINTER);
+
+    fprintf(stderr, "t: %i\n", t);
+    fprintf(stderr, "tc: %i\n", tc);
+    fprintf(stderr, "ts: %i\n", ts);
 
             //
             // Startup signal.
             //
 
-            // The startup signal.
-            void* sig = NULL_POINTER;
-            // The startup signal count.
-            int sigc = 0;
-            // The startup signal size.
-            int sigs = 0;
-            // The startup signal model.
-            void* sigm = (void*) p1[1];
-            // The startup signal model count.
-            int sigmc = strlen(p1[1]);
-            // The startup signal abstraction.
-            void* siga = (void*) OPERATION_ABSTRACTION; //?? COMPOUND_ABSTRACTION
-            // The startup signal abstraction count.
-            int sigac = OPERATION_ABSTRACTION_COUNT; //?? COMPOUND_ABSTRACTION_COUNT
-            // The startup signal location.
-            void* sigl = (void*) INLINE_LOCATION; //?? FILE_LOCATION;
-            // The startup signal location count.
-            int siglc = INLINE_LOCATION_COUNT; //?? FILE_LOCATION_COUNT;
-
-            // Create startup signal.
-            // The transient signal gets initialized from a persistent
-            // cybol source whose location was given at command line.
-            create_model((void*) &sig, (void*) &sigc, (void*) &sigs, (void*) &sigm, (void*) &sigmc, (void*) &siga, (void*) &sigac, (void*) &sigl, (void*) &siglc);
-
             // Add startup signal to signal memory.
-            set_signal((void*) &s, (void*) &sc, (void*) &ss, (void*) &sig, (void*) &NORMAL_PRIORITY, (void*) &siga, (void*) &sigac);
+            set_signal((void*) &s, (void*) &sc, (void*) &ss,
+                (void*) &t, (void*) &tc,
+                (void*) &NORMAL_PRIORITY,
+                (void*) &pa, (void*) &pac);
 
             //
             // Waiting loop.
@@ -332,26 +354,33 @@ int main(int p0, char** p1) {
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)
             // which are stored/ found in the signal memory.
+            // The loop is left as soon as its shutdown flag is set.
             wait((void*) &s, (void*) &sc, (void*) &ss,
                 (void*) &k, (void*) &kc, (void*) &ks,
                 (void*) &i, (void*) &ic, (void*) &is);
-            // The loop above is left as soon as its shutdown flag is set.
 
             //
             // Destruction.
             //
 
-            // Destroy startup signal.
-            destroy_model((void*) &sig, (void*) &sigc, (void*) &sigm, (void*) &sigmc, (void*) &siga, (void*) &sigac, (void*) &sigl, (void*) &siglc);
+            // Destroy startup model.
+            destroy_model((void*) &t, (void*) &tc, (void*) &ts,
+                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
+                (void*) &pa, (void*) &pac,
+                (void*) &pl, (void*) &plc,
+                (void*) &pm, (void*) &pmc,
+                (void*) &NULL_POINTER, (void*) &NULL_POINTER,
+                (void*) &NULL_POINTER, (void*) &NULL_POINTER,
+                (void*) &NULL_POINTER, (void*) &NULL_POINTER);
 
             // Destroy signal container.
-            destroy_signal_memory((void*) &s, (void*) &sc, (void*) &ss);
+            destroy_signal_memory((void*) &s, (void*) &ss);
 
             // Destroy internals container.
-//??            destroy_internals(i);
+//??            destroy_internals((void*) &i, (void*) &ic, (void*) &is);
 
             // Destroy knowledge container.
-            destroy_compound((void*) &k, (void*) &kc, (void*) &ks);
+            destroy_compound((void*) &k, (void*) &ks);
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 

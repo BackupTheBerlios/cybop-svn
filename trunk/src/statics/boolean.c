@@ -29,7 +29,7 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.6 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-06-11 18:50:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,10 +49,11 @@
  *
  * @param p0 the transient model
  * @param p1 the transient model count
- * @param p2 the persistent model
- * @param p3 the persistent model count
+ * @param p2 the transient model size
+ * @param p3 the persistent model
+ * @param p4 the persistent model count
  */
-void initialize_boolean(void* p0, void* p1, const void* p2, const void* p3) {
+void initialize_boolean(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     if (p3 != NULL_POINTER) {
 
@@ -96,10 +97,11 @@ void initialize_boolean(void* p0, void* p1, const void* p2, const void* p3) {
  *
  * @param p0 the transient model
  * @param p1 the transient model count
- * @param p2 the persistent model
- * @param p3 the persistent model count
+ * @param p2 the transient model size
+ * @param p3 the persistent model
+ * @param p4 the persistent model count
  */
-void finalize_boolean(const void* p0, const void* p1, void* p2, void* p3) {
+void finalize_boolean(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     if (p3 != NULL_POINTER) {
 

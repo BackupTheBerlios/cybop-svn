@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2004-06-11 18:50:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,6 +44,7 @@
  */
 void add(void* p0, const void* p1, const void* p2, const void* p3, const void* p4, const void* p5, const void* p6) {
 
+/*??
     // Initialize summand 1.
     char* summand_1_pa = CHARACTER_NULL_POINTER;
     int summand_1_pas = 0;

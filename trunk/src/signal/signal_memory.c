@@ -32,7 +32,7 @@
  * A signal is a transient logic model.
  * It is stored in the computer's random access memory (ram).
  *
- * @version $Revision: 1.23 $ $Date: 2004-06-06 21:34:21 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2004-06-11 18:50:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,55 +56,61 @@
  * Creates the signal memory.
  *
  * @param p0 the signal memory
- * @param p1 the signal memory count
- * @param p2 the signal memory size
+ * @param p1 the signal memory size
  */
-void create_signal_memory(void* p0, void* p1, void* p2) {
+void create_signal_memory(void* p0, void* p1) {
 
     log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_SIGNAL_MEMORY_MESSAGE, (void*) &CREATE_SIGNAL_MEMORY_MESSAGE_COUNT);
 
     // Create signal memory.
     create_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);
 
-    // Initialize elements.
-    void* s = NULL_POINTER;
-    void* sc = NULL_POINTER;
-    void* p = NULL_POINTER;
-    void* a = NULL_POINTER;
-    void* ac = NULL_POINTER;
+    // Initialize signal models, priorities, abstractions
+    // and their counts.
+    void* sm = NULL_POINTER;
+    void* smc = NULL_POINTER;
+    void* sp = NULL_POINTER;
+    void* sa = NULL_POINTER;
+    void* sac = NULL_POINTER;
 
-    // Create elements.
-    create_array((void*) &s, (void*) &POINTER_ARRAY, p2);
-    create_array((void*) &sc, (void*) &INTEGER_ARRAY, p2);
-    create_array((void*) &p, (void*) &INTEGER_ARRAY, p2);
-    create_array((void*) &a, (void*) &POINTER_ARRAY, p2);
-    create_array((void*) &ac, (void*) &INTEGER_ARRAY, p2);
+    // Create signal models, priorities, abstractions
+    // and their counts.
+    create_array((void*) &sm, (void*) &POINTER_ARRAY, p1);
+    create_array((void*) &smc, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &sp, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &sa, (void*) &POINTER_ARRAY, p1);
+    create_array((void*) &sac, (void*) &INTEGER_ARRAY, p1);
 
-    // Set elements in ascending order.
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &s);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_COUNTS_INDEX, (void*) &sc);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
+    //
+    // Use ascending order.
+    //
+
+    // Set signal models, priorities, abstractions
+    // and their counts.
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &sm);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &smc);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &sp);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &sa);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &sac);
 }
 
 /**
  * Destroys the signal memory.
  *
  * @param p0 the signal memory
- * @param p1 the signal memory count
- * @param p2 the signal memory size
+ * @param p1 the signal memory size
  */
-void destroy_signal_memory(void* p0, void* p1, void* p2) {
+void destroy_signal_memory(void* p0, void* p1) {
 
     log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_SIGNAL_MEMORY_MESSAGE, (void*) &DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT);
 
-    // Initialize elements.
-    void* s = NULL_POINTER;
-    void* sc = NULL_POINTER;
-    void* p = NULL_POINTER;
-    void* a = NULL_POINTER;
-    void* ac = NULL_POINTER;
+    // Initialize signal models, priorities, abstractions
+    // and their counts.
+    void* sm = NULL_POINTER;
+    void* smc = NULL_POINTER;
+    void* sp = NULL_POINTER;
+    void* sa = NULL_POINTER;
+    void* sac = NULL_POINTER;
 
 /*??
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy all signals left in signal memory.");
@@ -133,26 +139,33 @@ void destroy_signal_memory(void* p0, void* p1, void* p2) {
     }
 */
 
-    // Get elements.
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &s);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_COUNTS_INDEX, (void*) &sc);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
+    // Get signal models, priorities, abstractions
+    // and their counts.
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &sm);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &smc);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &sp);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &sa);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &sac);
 
-    // Remove elements in descending order.
+    //
+    // Use descending order.
+    //
+
+    // Remove signal models, priorities, abstractions
+    // and their counts.
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_ABSTRACTIONS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_PRIORITIES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_COUNTS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_MODELS_COUNTS_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_MODELS_INDEX);
 
-    // Destroy elements.
-    destroy_array((void*) &s, (void*) &POINTER_ARRAY, p2);
-    destroy_array((void*) &sc, (void*) &INTEGER_ARRAY, p2);
-    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, p2);
-    destroy_array((void*) &a, (void*) &POINTER_ARRAY, p2);
-    destroy_array((void*) &ac, (void*) &INTEGER_ARRAY, p2);
+    // Destroy signal models, priorities, abstractions
+    // and their counts.
+    destroy_array((void*) &sm, (void*) &POINTER_ARRAY, p1);
+    destroy_array((void*) &smc, (void*) &INTEGER_ARRAY, p1);
+    destroy_array((void*) &sp, (void*) &INTEGER_ARRAY, p1);
+    destroy_array((void*) &sa, (void*) &POINTER_ARRAY, p1);
+    destroy_array((void*) &sac, (void*) &INTEGER_ARRAY, p1);
 
     // Destroy signal memory.
     destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);
@@ -168,13 +181,14 @@ void destroy_signal_memory(void* p0, void* p1, void* p2) {
  * @param p0 the signal memory
  * @param p1 the signal memory count
  * @param p2 the signal memory size
- * @param p3 the model
- * @param p4 the model count
- * @param p5 the priority
- * @param p6 the abstraction
- * @param p7 the abstraction count
+ * @param p3 the signal model
+ * @param p4 the signal model count
+ * @param p5 the signal priority
+ * @param p6 the signal abstraction
+ * @param p7 the signal abstraction count
  */
-void set_signal(void* p0, void* p1, void* p2, const void* p3, const void* p4, const void* p5, const void* p6, const void* p7) {
+void set_signal(void* p0, void* p1, void* p2,
+    const void* p3, const void* p4, const void* p5, const void* p6, const void* p7) {
 
     if (p2 != NULL_POINTER) {
 
@@ -184,19 +198,21 @@ void set_signal(void* p0, void* p1, void* p2, const void* p3, const void* p4, co
 
             int* c = (int*) p1;
 
-            // Initialize elements.
-            void* s = NULL_POINTER;
-            void* sc = NULL_POINTER;
-            void* p = NULL_POINTER;
-            void* a = NULL_POINTER;
-            void* ac = NULL_POINTER;
+            // Initialize signal models, priorities, abstractions
+            // and their counts.
+            void* sm = NULL_POINTER;
+            void* smc = NULL_POINTER;
+            void* sp = NULL_POINTER;
+            void* sa = NULL_POINTER;
+            void* sac = NULL_POINTER;
 
-            // Get elements.
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &s);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_COUNTS_INDEX, (void*) &sc);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
+            // Get signal models, priorities, abstractions
+            // and their counts.
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &sm);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &smc);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &sp);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &sa);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &sac);
 
             // The index.
             int i = *c;
@@ -208,22 +224,24 @@ void set_signal(void* p0, void* p1, void* p2, const void* p3, const void* p4, co
                     // Increase size.
                     *s = *s * SIGNAL_MEMORY_RESIZE_FACTOR + 1;
 
-                    // Resize elements.
-                    resize_array((void*) &s, (void*) &POINTER_ARRAY, p2);
-                    resize_array((void*) &sc, (void*) &INTEGER_ARRAY, p2);
-                    resize_array((void*) &p, (void*) &INTEGER_ARRAY, p2);
-                    resize_array((void*) &a, (void*) &POINTER_ARRAY, p2);
-                    resize_array((void*) &ac, (void*) &INTEGER_ARRAY, p2);
+                    // Resize signal models, priorities, abstractions
+                    // and their counts.
+                    resize_array((void*) &sm, (void*) &POINTER_ARRAY, p2);
+                    resize_array((void*) &smc, (void*) &INTEGER_ARRAY, p2);
+                    resize_array((void*) &sp, (void*) &INTEGER_ARRAY, p2);
+                    resize_array((void*) &sa, (void*) &POINTER_ARRAY, p2);
+                    resize_array((void*) &sac, (void*) &INTEGER_ARRAY, p2);
                 }
 
                 if (i < *s) {
 
-                    // Set signal.
-                    set_array_element((void*) &s, (void*) &POINTER_ARRAY, (void*) &i, p3);
-                    set_array_element((void*) &sc, (void*) &INTEGER_ARRAY, (void*) &i, p4);
-                    set_array_element((void*) &p, (void*) &INTEGER_ARRAY, (void*) &i, p5);
-                    set_array_element((void*) &a, (void*) &POINTER_ARRAY, (void*) &i, p6);
-                    set_array_element((void*) &ac, (void*) &INTEGER_ARRAY, (void*) &i, p7);
+                    // Set signal model, priority, abstraction
+                    // and their count.
+                    set_array_element((void*) &sm, (void*) &POINTER_ARRAY, (void*) &i, p3);
+                    set_array_element((void*) &smc, (void*) &INTEGER_ARRAY, (void*) &i, p4);
+                    set_array_element((void*) &sp, (void*) &INTEGER_ARRAY, (void*) &i, p5);
+                    set_array_element((void*) &sa, (void*) &POINTER_ARRAY, (void*) &i, p6);
+                    set_array_element((void*) &sac, (void*) &INTEGER_ARRAY, (void*) &i, p7);
 
                     // Increment count.
                     (*c)++;
@@ -273,28 +291,31 @@ void remove_signal(void* p0, void* p1, void* p2, const void* p3) {
 
                 if (*i >= 0) {
 
-                    // Initialize elements.
-                    void* s = NULL_POINTER;
-                    void* sc = NULL_POINTER;
-                    void* p = NULL_POINTER;
-                    void* a = NULL_POINTER;
-                    void* ac = NULL_POINTER;
+                    // Initialize signal models, priorities, abstractions
+                    // and their counts.
+                    void* sm = NULL_POINTER;
+                    void* smc = NULL_POINTER;
+                    void* sp = NULL_POINTER;
+                    void* sa = NULL_POINTER;
+                    void* sac = NULL_POINTER;
 
-                    // Get elements.
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &s);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_COUNTS_INDEX, (void*) &sc);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
+                    // Get signal models, priorities, abstractions
+                    // and their counts.
+                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &sm);
+                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &smc);
+                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &sp);
+                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &sa);
+                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &sac);
 
-                    if (*i < c) {
+                    if (*i < *c) {
 
-                        // Remove signal.
-                        remove_array_element((void*) &s, (void*) &POINTER_ARRAY, (void*) c, p3);
-                        remove_array_element((void*) &sc, (void*) &INTEGER_ARRAY, (void*) c, p3);
-                        remove_array_element((void*) &p, (void*) &INTEGER_ARRAY, (void*) c, p3);
-                        remove_array_element((void*) &a, (void*) &POINTER_ARRAY, (void*) c, p3);
-                        remove_array_element((void*) &ac, (void*) &INTEGER_ARRAY, (void*) c, p3);
+                        // Remove signal model, priority, abstraction
+                        // and their count.
+                        remove_array_element((void*) &sm, (void*) &POINTER_ARRAY, (void*) c, p3);
+                        remove_array_element((void*) &smc, (void*) &INTEGER_ARRAY, (void*) c, p3);
+                        remove_array_element((void*) &sp, (void*) &INTEGER_ARRAY, (void*) c, p3);
+                        remove_array_element((void*) &sa, (void*) &POINTER_ARRAY, (void*) c, p3);
+                        remove_array_element((void*) &sac, (void*) &INTEGER_ARRAY, (void*) c, p3);
 
                         // Decrement count.
                         (*c)--;
@@ -331,13 +352,14 @@ void remove_signal(void* p0, void* p1, void* p2, const void* p3) {
  * @param p0 the signal memory
  * @param p1 the signal memory count
  * @param p2 the index
- * @param p3 the signal
- * @param p4 the signal count
+ * @param p3 the signal model
+ * @param p4 the signal model count
  * @param p5 the signal priority
  * @param p6 the signal abstraction
- * @param p7 the signal abstraction size
+ * @param p7 the signal abstraction count
  */
-void get_signal(const void* p0, const void* p1, const void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void get_signal(const void* p0, const void* p1, const void* p2,
+    void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p2 != NULL_POINTER) {
 
@@ -349,28 +371,31 @@ void get_signal(const void* p0, const void* p1, const void* p2, void* p3, void* 
 
             if (*i >= 0) {
 
-                // Initialize elements.
-                void* s = NULL_POINTER;
-                void* sc = NULL_POINTER;
-                void* p = NULL_POINTER;
-                void* a = NULL_POINTER;
-                void* ac = NULL_POINTER;
+                // Initialize signal models, priorities, abstractions
+                // and their counts.
+                void* sm = NULL_POINTER;
+                void* smc = NULL_POINTER;
+                void* sp = NULL_POINTER;
+                void* sa = NULL_POINTER;
+                void* sac = NULL_POINTER;
 
-                // Get elements.
-                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &s);
-                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_COUNTS_INDEX, (void*) &sc);
-                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p);
-                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a);
-                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
+                // Get signal models, priorities, abstractions
+                // and their counts.
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &sm);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &smc);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &sp);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &sa);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &sac);
 
                 if (*i < *c) {
 
-                    // Get signal.
-                    get_array_element((void*) &s, (void*) &POINTER_ARRAY, p2, p3);
-                    get_array_element((void*) &sc, (void*) &INTEGER_ARRAY, p2, p4);
-                    get_array_element((void*) &p, (void*) &INTEGER_ARRAY, p2, p5);
-                    get_array_element((void*) &a, (void*) &POINTER_ARRAY, p2, p6);
-                    get_array_element((void*) &ac, (void*) &INTEGER_ARRAY, p2, p7);
+                    // Get signal model, priority, abstraction
+                    // and their count.
+                    get_array_element((void*) &sm, (void*) &POINTER_ARRAY, p2, p3);
+                    get_array_element((void*) &smc, (void*) &INTEGER_ARRAY, p2, p4);
+                    get_array_element((void*) &sp, (void*) &INTEGER_ARRAY, p2, p5);
+                    get_array_element((void*) &sa, (void*) &POINTER_ARRAY, p2, p6);
+                    get_array_element((void*) &sac, (void*) &INTEGER_ARRAY, p2, p7);
 
                 } else {
 
@@ -410,11 +435,11 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
 
             int* c = (int*) p1;
 
-            // Initialize elements.
-            void* p = NULL_POINTER;
+            // Initialize signal priorities.
+            void* sp = NULL_POINTER;
 
-            // Get elements.
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p);
+            // Get signal priorities.
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &sp);
 
             // The loop variable.
             int j = 0;
@@ -433,8 +458,8 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
                     break;
                 }
 
-                // Get element (signal) priority.
-                get_array_element((void*) &p, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &prio);
+                // Get signal priority.
+                get_array_element((void*) &sp, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &prio);
 
                 if (prio > h) {
 
@@ -481,24 +506,24 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2, void
 
         log_message((void*) &INFO_LOG_LEVEL, (void*) &HANDLE_COMPOUND_SIGNAL_MESSAGE, (void*) &HANDLE_COMPOUND_SIGNAL_MESSAGE_COUNT);
 
-        // The part model, count.
+        // Initialize part models, abstractions
+        // and their counts.
         void* pm = NULL_POINTER;
         void* pmc = NULL_POINTER;
-        // The part abstraction, count.
         void* pa = NULL_POINTER;
         void* pac = NULL_POINTER;
 
-        // Get part model.
+        // Get part models, abstractions
+        // and their counts.
         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &pmc);
-        // Get part abstraction.
         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX, (void*) &pac);
 
-        // The part signal model, count.
+        // Initialize part model, abstraction
+        // and their count.
         void* m = NULL_POINTER;
         int mc = 0;
-        // The part signal abstraction, count.
         void* a = NULL_POINTER;
         int ac = 0;
 
@@ -512,14 +537,14 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2, void
                 break;
             }
 
-            // Get part signal model.
+            // Get part model, abstraction
+            // and their count.
             get_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &j, (void*) &m);
             get_array_element((void*) &pmc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &mc);
-            // Get part signal abstraction.
             get_array_element((void*) &pa, (void*) &POINTER_ARRAY, (void*) &j, (void*) &a);
             get_array_element((void*) &pac, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ac);
 
-            // Add part signal to memory, using the whole signal's priority.
+            // Add part model (signal) to memory, using the whole signal's priority.
             // (Each signal has a priority. A signal may consist of part
             // signals. The part signals cannot have higher/lower priority
             // than their original whole signal.)
@@ -560,7 +585,7 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2, void
  */
 void handle_create_model_signal(const void* p0,
     const void* p1, const void* p2, const void* p3,
-    const void* p4, const void* p5) {
+    const void* p4, const void* p5, const void* p6) {
 
     if (p6 != NULL_POINTER) {
 
@@ -580,43 +605,43 @@ void handle_create_model_signal(const void* p0,
 
                     if (*sc == 11) {
 
-                        // The whole name, count, size.
+                        // Initialize whole name and its count and size.
                         void* wn = NULL_POINTER;
                         int wnc = 0;
                         int wns = 0;
-                        // The part name, count, size.
+                        // Initialize part name and its count and size.
                         void* pn = NULL_POINTER;
                         int pnc = 0;
                         int pns = 0;
-                        // The part abstraction, count, size.
+                        // Initialize part abstraction and its count and size.
                         void* pa = NULL_POINTER;
                         int pac = 0;
                         int pas = 0;
-                        // The part location, count, size.
+                        // Initialize part location and its count and size.
                         void* pl = NULL_POINTER;
                         int plc = 0;
                         int pls = 0;
-                        // The part model, count, size.
+                        // Initialize part model and its count and size.
                         void* pm = NULL_POINTER;
                         int pmc = 0;
                         int pms = 0;
-                        // The part constraints, count, size.
+                        // Initialize part constraints and its count and size.
                         void* pc = NULL_POINTER;
                         int pcc = 0;
                         int pcs = 0;
-                        // The position abstraction, count, size.
+                        // Initialize position abstraction and its count and size.
                         void* poa = NULL_POINTER;
                         int poac = 0;
                         int poas = 0;
-                        // The position location, count, size.
+                        // Initialize position location and its count and size.
                         void* pol = NULL_POINTER;
                         int polc = 0;
                         int pols = 0;
-                        // The position model, count, size.
+                        // Initialize position model and its count and size.
                         void* pom = NULL_POINTER;
                         int pomc = 0;
                         int poms = 0;
-                        // The position constraints, count, size.
+                        // Initialize position constraints and its count and size.
                         void* poc = NULL_POINTER;
                         int pocc = 0;
                         int pocs = 0;
@@ -639,70 +664,70 @@ void handle_create_model_signal(const void* p0,
 
                             if (j == 1) {
 
-                                // Get whole name, count, size.
+                                // Get whole name and its count and size.
                                 get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &wn);
                                 get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &wnc);
                                 get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &wns);
 
                             } else if (j == 2) {
 
-                                // Get part name, count, size.
+                                // Get part name and its count and size.
                                 get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pn);
                                 get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pnc);
                                 get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pns);
 
                             } else if (j == 3) {
 
-                                // Get part abstraction, count, size.
+                                // Get part abstraction and its count and size.
                                 get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pa);
                                 get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pac);
                                 get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pas);
 
                             } else if (j == 4) {
 
-                                // Get part location, count, size.
+                                // Get part location and its count and size.
                                 get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pl);
                                 get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &plc);
                                 get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pls);
 
                             } else if (j == 5) {
 
-                                // Get part model, count, size.
+                                // Get part model and its count and size.
                                 get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pm);
                                 get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pmc);
                                 get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pms);
 
                             } else if (j == 6) {
 
-                                // Get part constraints, count, size.
+                                // Get part constraints and its count and size.
                                 get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pc);
                                 get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pcc);
                                 get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pcs);
 
                             } else if (j == 7) {
 
-                                // Get position abstraction, count, size.
+                                // Get position abstraction and its count and size.
                                 get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &poa);
                                 get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &poac);
                                 get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &poas);
 
                             } else if (j == 8) {
 
-                                // Get position location, count, size.
+                                // Get position location and its count and size.
                                 get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pol);
                                 get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &polc);
                                 get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pols);
 
                             } else if (j == 9) {
 
-                                // Get position model, count, size.
+                                // Get position model and its count and size.
                                 get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pom);
                                 get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pomc);
                                 get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &poms);
 
                             } else if (j == 10) {
 
-                                // Get position constraints, count, size.
+                                // Get position constraints and its count and size.
                                 get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &poc);
                                 get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pocc);
                                 get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pocs);
@@ -711,12 +736,12 @@ void handle_create_model_signal(const void* p0,
                             j++;
                         }
 
-                        // The whole model, count, size.
+                        // Initialize whole model and its count and size.
                         void* wm = NULL_POINTER;
                         int wmc = 0;
                         int wms = 0;
 
-                        // Determine whole model.
+                        // Get whole model.
                         if (wn == NULL_POINTER) {
 
                             // If the whole model name is null, the knowledge
@@ -731,7 +756,7 @@ void handle_create_model_signal(const void* p0,
                             // determined within the knowledge root.
                             // Abstraction and constraints as well as the model's
                             // position within the knowledge root are not of interest.
-                            get_compound_part_by_name(p4, p5,
+                            get_compound_part_by_name(p4, p5, p6,
                                 (void*) &wn, (void*) &wnc, (void*) &wns,
                                 (void*) &wm, (void*) &wmc, (void*) &wms,
                                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
@@ -741,32 +766,25 @@ void handle_create_model_signal(const void* p0,
                                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
                         }
 
-                        // The transient part model.
+                        // Initialize transient part model, position
+                        // and their count and size.
                         void* tpm = NULL_POINTER;
-                        // The transient part model count.
                         int tpmc = 0;
-                        // The transient part model size.
                         int tpms = 0;
-
-                        // The transient position model.
                         void* tpom = NULL_POINTER;
-                        // The transient position model count.
                         int tpomc = 0;
-                        // The transient position model size.
                         int tpoms = 0;
 
-                        // Create part model.
+                        // Create transient part model, position
+                        // and their count and size.
                         create_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
                             (void*) &tpom, (void*) &tpomc, (void*) &tpoms,
-                            (void*) &pn, (void*) &pnc,
                             (void*) &pa, (void*) &pac,
                             (void*) &pl, (void*) &plc,
                             (void*) &pm, (void*) &pmc,
-                            (void*) &pc, (void*) &pcc,
                             (void*) &poa, (void*) &poac,
                             (void*) &pol, (void*) &polc,
-                            (void*) &pom, (void*) &pomc,
-                            (void*) &poc, (void*) &pocc);
+                            (void*) &pom, (void*) &pomc);
 
                         //?? If "add", then first check if name exists in whole;
                         //?? if yes, add "_0" or "_1" or "_2" etc.
@@ -775,7 +793,8 @@ void handle_create_model_signal(const void* p0,
                         //?? with equal name; but where to destroy it if
                         //?? no whole keeps a reference to it anymore?
 
-                        // Add part model to compound.
+                        // Set transient part model, position
+                        // and their count and size.
                         set_compound_part_by_name((void*) &wm, (void*) &wmc, (void*) &wms,
                             (void*) &pn, (void*) &pnc, (void*) &pns,
                             (void*) &pm, (void*) &pmc, (void*) &pms,
@@ -826,14 +845,15 @@ void handle_create_model_signal(const void* p0,
  * @param p3 the parameters sizes
  * @param p4 the knowledge
  * @param p5 the knowledge count
- * @param p6 the signal memory
- * @param p7 the signal memory count
- * @param p8 the signal memory size
+ * @param p6 the knowledge size
+ * @param p7 the signal memory
+ * @param p8 the signal memory count
+ * @param p9 the signal memory size
  */
 void handle_send_signal(const void* p0,
     const void* p1, const void* p2, const void* p3,
-    const void* p4, const void* p5,
-    void* p6, void* p7, void* p8) {
+    const void* p4, const void* p5, void* p6,
+    void* p7, void* p8, void* p9) {
 
     if (p0 != NULL_POINTER) {
 
@@ -841,7 +861,7 @@ void handle_send_signal(const void* p0,
 
         if (*sc == 2) {
 
-            // The signal name, count, size.
+            // Initialize signal name and its count and size.
             void* sn = NULL_POINTER;
             int snc = 0;
             int sns = 0;
@@ -864,6 +884,7 @@ void handle_send_signal(const void* p0,
 
                 if (j == 1) {
 
+                    // Get signal name and its count and size.
                     get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &sn);
                     get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &snc);
                     get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &sns);
@@ -872,21 +893,18 @@ void handle_send_signal(const void* p0,
                 j++;
             }
 
-            // The part model.
+            // Initialize part model, abstraction,
+            // and their count and size.
             void* pm = NULL_POINTER;
-            // The part model count.
             int pmc = 0;
-            // The part model size.
             int pms = 0;
-            // The part abstraction.
             void* pa = NULL_POINTER;
-            // The part abstraction count.
             int pac = 0;
-            // The part abstraction size.
             int pas = 0;
 
-            // Determine signal.
-            get_compound_part_by_name(p4, p5,
+            // Get part model, abstraction,
+            // and their count and size.
+            get_compound_part_by_name(p4, p5, p6,
                 (void*) &sn, (void*) &snc, (void*) &sns,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
                 (void*) &pa, (void*) &pac, (void*) &pas,
@@ -895,8 +913,11 @@ void handle_send_signal(const void* p0,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
 
-            // Add signal to signal memory.
-            set_signal(p6, p7, p8, (void*) &pm, (void*) &pmc, (void*) &NORMAL_PRIORITY, (void*) &pa, (void*) &pac);
+            // Add part model (signal) to signal memory.
+            set_signal(p7, p8, p9,
+                (void*) &pm, (void*) &pmc,
+                (void*) &NORMAL_PRIORITY,
+                (void*) &pa, (void*) &pac);
 
         } else {
 
@@ -940,26 +961,30 @@ void handle_operation_signal(const void* p0, const void* p1,
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT);
 
-            // The parameters, counts, sizes.
+            // Initialize parameters
+            // and their counts and sizes.
             void* p = NULL_POINTER;
-            int pc = NULL_POINTER;
-            int ps = NULL_POINTER;
+            int pc = 0;
+            int ps = 0;
 
-            // Get parameters.
+            // Get parameters
+            // and their counts and sizes.
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &p);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &pc);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_INDEX, (void*) &ps);
 
-            // The logic (operation) name, count.
+            // Initialize logic (operation) name
+            // and its count.
             // The first parameter param0 is the operation name.
             // Following parameters param1 .. are input and output names.
             void* l = NULL_POINTER;
             int lc = 0;
 
-            // The parameter index.
+            // The logic (operation) name parameter index.
             int i = 0;
 
-            // Get logic name.
+            // Get logic (operation) name
+            // and its count.
             get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &i, (void*) &l);
             get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &lc);
 
@@ -996,7 +1021,9 @@ void handle_operation_signal(const void* p0, const void* p1,
 
                     if (r == 1) {
 
-                        handle_create_model_signal(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p4);
+                        handle_create_model_signal(p1,
+                            (void*) &p, (void*) &pc, (void*) &ps,
+                            p2, p3, p4);
 
                         d = 1;
                     }
@@ -1026,7 +1053,10 @@ void handle_operation_signal(const void* p0, const void* p1,
 
                     if (r == 1) {
 
-                        handle_send_signal(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p8, p9, p10);
+                        handle_send_signal(p1,
+                            (void*) &p, (void*) &pc, (void*) &ps,
+                            p2, p3, p4,
+                            p8, p9, p10);
 
                         d = 1;
                     }

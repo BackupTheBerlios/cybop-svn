@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.13 $ $Date: 2004-06-08 22:35:23 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-06-11 18:50:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -282,7 +282,7 @@ void initialize_operation(void* p0, void* p1, void* p2, const void* p3, const vo
  * @param p3 the persistent model
  * @param p4 the persistent model count
  */
-void finalize_operation(const void* p0, const void* p1, const void* p2, void* p3, void* p4) {
+void finalize_operation(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
 /*??
     if (p3 != NULL_POINTER) {

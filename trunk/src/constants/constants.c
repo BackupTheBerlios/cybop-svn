@@ -47,9 +47,11 @@
  * - cybol model values:
  *   - model separators
  *   - boolean
+ * - cyboi
  * - logging:
  *   - log levels
  *   - log level names
+ *   - log settings
  *   - log messages
  *
  * It was decided to keep them bundled in this place to ease their maintenance.
@@ -59,7 +61,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.15 $ $Date: 2004-06-09 22:29:00 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-06-11 18:50:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -309,11 +311,11 @@ static const int SIGNAL_MEMORY_RESIZE_FACTOR = 2;
 /** The signal memory count. */
 static const int SIGNAL_MEMORY_COUNT = 5;
 
-/** The signals index. */
-static const int SIGNALS_INDEX = 0;
+/** The signals models index. */
+static const int SIGNALS_MODELS_INDEX = 0;
 
-/** The signals counts index. */
-static const int SIGNALS_COUNTS_INDEX = 1;
+/** The signals models counts index. */
+static const int SIGNALS_MODELS_COUNTS_INDEX = 1;
 
 /** The signals priorities index. */
 static const int SIGNALS_PRIORITIES_INDEX = 2;
@@ -1612,9 +1614,29 @@ static const char* FALSE_BOOLEAN = FALSE_BOOLEAN_ARRAY;
 static const int FALSE_BOOLEAN_COUNT = 5;
 
 //
+// Cyboi.
+//
+
+/** The startup parameters count. */
+static const int STARTUP_PARAMETERS_COUNT = 4;
+
+/** The command startup parameter index. */
+static const int COMMAND_STARTUP_PARAMETER_INDEX = 0;
+
+/** The abstraction startup parameter index. */
+static const int ABSTRACTION_STARTUP_PARAMETER_INDEX = 1;
+
+/** The location startup parameter index. */
+static const int LOCATION_STARTUP_PARAMETER_INDEX = 2;
+
+/** The model startup parameter index. */
+static const int MODEL_STARTUP_PARAMETER_INDEX = 3;
+
+//
 // Logging:
 // - log levels
 // - log level names
+// - log settings
 // - log messages
 //
 
@@ -1664,6 +1686,16 @@ static const char* INFO_LOG_LEVEL_NAME = INFO_LOG_LEVEL_NAME_ARRAY;
 
 /** The info log level name count. */
 static const int INFO_LOG_LEVEL_NAME_COUNT = 4;
+
+//
+// Log settings.
+//
+
+/** The log level. */
+static const int* LOG_LEVEL = &INFO_LOG_LEVEL;
+
+/** The maximum log message count. */
+static const int MAXIMUM_LOG_MESSAGE_COUNT = 300;
 
 //
 // Logger log messages.
@@ -2228,7 +2260,7 @@ static const char CREATE_CHARACTER_ARRAY_MESSAGE_ARRAY[] = {'C', 'r', 'e', 'a', 
 static const char* CREATE_CHARACTER_ARRAY_MESSAGE = CREATE_CHARACTER_ARRAY_MESSAGE_ARRAY;
 
 /** The "Create character array." message count. */
-static const int CREATE_CHARACTER_ARRAY_MESSAGE_COUNT = 21;
+static const int CREATE_CHARACTER_ARRAY_MESSAGE_COUNT = 23;
 
 /** The "Could not create character array. The array is null." message array. */
 static const char COULD_NOT_CREATE_CHARACTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'c', 'r', 'e', 'a', 't', 'e', ' ', 'c', 'h', 'a', 'r', 'a', 'c', 't', 'e', 'r', ' ', 'a', 'r', 'r', 'a', 'y', '.', ' ', 'T', 'h', 'e', ' ', 'a', 'r', 'r', 'a', 'y', ' ', 'i', 's', ' ', 'n', 'u', 'l', 'l', '.'};
@@ -2255,7 +2287,7 @@ static const char DESTROY_CHARACTER_ARRAY_MESSAGE_ARRAY[] = {'D', 'e', 's', 't',
 static const char* DESTROY_CHARACTER_ARRAY_MESSAGE = DESTROY_CHARACTER_ARRAY_MESSAGE_ARRAY;
 
 /** The "Destroy character array." message count. */
-static const int DESTROY_CHARACTER_ARRAY_MESSAGE_COUNT = 22;
+static const int DESTROY_CHARACTER_ARRAY_MESSAGE_COUNT = 24;
 
 /** The "Could not destroy character array. The array is null." message array. */
 static const char COULD_NOT_DESTROY_CHARACTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'd', 'e', 's', 't', 'r', 'o', 'y', ' ', 'c', 'h', 'a', 'r', 'a', 'c', 't', 'e', 'r', ' ', 'a', 'r', 'r', 'a', 'y', '.', ' ', 'T', 'h', 'e', ' ', 'a', 'r', 'r', 'a', 'y', ' ', 'i', 's', ' ', 'n', 'u', 'l', 'l', '.'};
@@ -3199,13 +3231,17 @@ static const char* COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_I
 static const int COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE_COUNT = 71;
 
 /** The "Usage: " message array. */
-static const char USAGE_MESSAGE_ARRAY[] = {'\n', 'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 's', 'i', 'g', 'n', 'a', 'l', '\n', 'E', 'x', 'a', 'm', 'p', 'l', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'y', 'b', 'o', 'p', '.', 's', 'a', 'm', 'p', 'l', 'e', '.', 'h', 'e', 'l', 'l', 'o', '_', 'w', 'o', 'r', 'l', 'd', '.', 'd', 'y', 'n', 'a', 'm', 'i', 'c', 's', '.', 's', 't', 'a', 'r', 't', 'u', 'p'};
+static const char USAGE_MESSAGE_ARRAY[] = {
+    'P', 'a', 'r', 'a', 'm', 'e', 't', 'e', 'r', 's', ' ', 'h', 'a', 'v', 'e', ' ', 't', 'o', ' ', 'b', 'e', ' ', 'g', 'i', 'v', 'e', 'n', '!', '\n',
+    'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd', '|', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 'i', 'n', 'l', 'i', 'n', 'e', '|', 'f', 'i', 'l', 'e', '|', 'f', 't', 'p', '|', 'h', 't', 't', 'p', ' ', 'm', 'o', 'd', 'e', 'l', '.', 's', 'u', 'b', 'm', 'o', 'd', 'e', 'l', '\n',
+    'E', 'x', 'a', 'm', 'p', 'l', 'e', ' ', '1', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 'i', 'n', 'l', 'i', 'n', 'e', ' ', 'e', 'x', 'i', 't', '\n',
+    'E', 'x', 'a', 'm', 'p', 'l', 'e', ' ', '2', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd', ' ', 'f', 'i', 'l', 'e', ' ', '/', 'a', 'p', 'p', 'l', 'i', 'c', 'a', 't', 'i', 'o', 'n', '/', 'l', 'o', 'g', 'i', 'c', '/', 's', 't', 'a', 'r', 't', 'u', 'p', '.', 'c', 'y', 'b', 'o', 'l'};
 
 /** The "Usage: " message. */
 static const char* USAGE_MESSAGE = USAGE_MESSAGE_ARRAY;
 
 /** The "Usage: " message count. */
-static const int USAGE_MESSAGE_COUNT = 77;
+static const int USAGE_MESSAGE_COUNT = 199;
 
 /** The "Could not execute CYBOI. The command line argument vector is null." message array. */
 static const char COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'e', 'x', 'e', 'c', 'u', 't', 'e', ' ', 'C', 'Y', 'B', 'O', 'I', '.', ' ', 'T', 'h', 'e', ' ', 'c', 'o', 'm', 'm', 'a', 'n', 'd', ' ', 'l', 'i', 'n', 'e', ' ', 'a', 'r', 'g', 'u', 'm', 'e', 'n', 't', ' ', 'v', 'e', 'c', 't', 'o', 'r', ' ', 'i', 's', ' ', 'n', 'u', 'l', 'l', '.'};
