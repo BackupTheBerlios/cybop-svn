@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.12 $ $Date: 2004-09-23 00:12:48 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-11-23 13:37:31 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,6 +47,7 @@
 #define POINTER_ARRAY_SOURCE
 
 #include <stdlib.h>
+#include <string.h>
 #include "../global/log_constants.c"
 #include "../global/variable.c"
 #include "../logger/logger.c"
@@ -80,6 +81,9 @@ void create_pointer_array(void* p0, const void* p1) {
             // even if the requested size is zero.
             // In other words, a handle to the new instance is always returned.
             *a = (void*) malloc(s);
+            
+            // init the pointer with NULL POINTER
+            memset( *a, 0, s );
 
         } else {
 
