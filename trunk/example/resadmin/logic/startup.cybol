@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
 
 <!--
-    $RCSfile$
+    $RCSfile: startup.cybol,v $
 
-    Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+    Copyright (c) 1999-2003. Christian Heller. All rights reserved.
 
     This software is published under the GPL GNU General Public License.
     This program is free software; you can redistribute it and/or
@@ -23,10 +23,20 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision$ $Date$ $Author: christian $
-    @author Christian Heller <christian.heller@tuxtax.de>
+    Description ...
+
+    @version $Revision: 1.1 $ $Date: 2005-02-11 17:18:41 $ $Author: christian $
+    @author Rolf Holzmüller <rolf.holzmueller@gmx.de>
 /-->
 
 <model>
-    <part name="label" part_abstraction="compound" part_location="file" part_model="/helloworld/label.cybol"/>
+
+    <part name="create_resdata" channel="inline" abstraction="operation" model="create">
+        <property name="whole" channel="inline" abstraction="string" model=""/>
+        <property name="name" channel="inline" abstraction="string" model="resdata"/>
+        <property name="channel" channel="inline" abstraction="string" model="file"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="/example/resdata/logic/resdata.cybol"/>
+    </part>
+
 </model>

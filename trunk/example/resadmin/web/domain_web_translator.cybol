@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
 
 <!--
-    $RCSfile: address.cybol,v $
+    $RCSfile: domain_web_translator.cybol,v $
 
     Copyright (c) 1999-2003. Christian Heller. All rights reserved.
 
@@ -25,14 +25,10 @@
 
     Description ...
 
-    @version $Revision: 1.1 $ $Date: 2004-09-15 13:26:55 $ $Author: christian $
-    @author Rolf Holzmüller <rolf.holzmueller@gmx.de>
+    @version $Revision: 1.1 $ $Date: 2005-02-11 17:18:41 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
 /-->
 
 <model>
-    <part name="first_name" channel="inline" abstraction="string" model=""/>
-    <part name="last_name" channel="inline" abstraction="string" model=""/>
-    <part name="street" channel="inline" abstraction="string"  model=""/>
-    <part name="code" channel="inline" abstraction="string" model=""/>
-    <part name="city" channel="inline" abstraction="string" model=""/>
+    <part name="set_last_name" location="inline" abstraction="operation" model="set,address.last_name,web.row_1.column_1"/>
 </model>
