@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.19 $ $Date: 2004-07-28 22:46:28 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2004-07-31 10:57:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -313,6 +313,48 @@ void test_file_write() {
 }
 
 /**
+ * Tests the console.
+ */
+void test_console() {
+
+    if (strcmp("linux", getenv("TERM")) == 0) {
+
+        // This is a linux console.
+        fputs("This is a linux console.\n", stdout);
+
+        // Determine device name of controlling terminal.
+        int n = ttyname();
+        fprintf(stdout, "The terminal device name is: %i\n", n);
+
+        // Declare test string.
+        char* s;
+
+        // Beep \007 twice with system loudspeaker.
+        s = "This test beeps twice:\n\007";
+        fputs(s, stdout);
+
+        //
+        // Start ESCAPE CSI sequence with: \033[
+        //
+
+        // Print bold word.
+        fputs("This is a \033[1mbold\033[0m word.\n", stdout);
+
+        // Set colours.
+        // CAUTION! The "m" has to stand after the colour number
+        // and it must NOT be a capital letter.
+        fputs("Set colour to \033[32mgreen\033[0m.\n", stdout);
+        fputs("Set colour to \033[32myellow\041[0m.\n", stdout);
+        fputs("Set colour to \033[32mred\031[0m.\n", stdout);
+
+    } else {
+
+        // This is a normal serial terminal.
+        fputs("This is a normal serial terminal.\n", stdout);
+    }
+}
+
+/**
  * The main test procedure.
  *
  * Sub test procedure call can be activated/ deactivated here
@@ -333,7 +375,8 @@ void test() {
 //    test_character_array_single_element();
 //    test_character_array_multiple_elements();
 //    test_file_read();
-    test_file_write();
+//    test_file_write();
+    test_console();
 }
 
 /* TEST_SOURCE */
