@@ -33,7 +33,7 @@
  *
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.15 $ $Date: 2003-10-13 08:36:34 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-10-13 13:55:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

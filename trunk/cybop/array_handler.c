@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.15 $ $Date: 2003-10-13 08:36:34 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-10-13 13:55:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -144,7 +144,7 @@ static void set_array_element(void* p0, void* p1, void* p2) {
         if (size != a->size) {
                 
             a->size = size;
-            extend_internal_array(a->internal_array, size);
+            extend_internal_array(a->internal_array, (void*) &size);
         }
         
         set_internal_array_element(a->internal_array, p1, p2);
@@ -167,8 +167,7 @@ static void remove_array_element(void* p0, void* p1) {
 
     if (a != 0) {
 
-        remove_internal_array_element(a->internal_array, p1, a->size);
-        //?? size als pointer?
+        remove_internal_array_element(a->internal_array, p1, (void*) &(a->size));
 
     } else {
 

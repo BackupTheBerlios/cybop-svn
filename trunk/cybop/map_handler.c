@@ -34,7 +34,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.15 $ $Date: 2003-10-13 08:36:34 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-10-13 13:55:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -131,10 +131,12 @@ static void get_map_element_index(void* p0, void* p1, void* p2) {
         int* index = (int*) p2;
         *index = -1;
         int i = 0;
-        int size = sizeof(a);
-        void* name = 0;
+        int* size = (int*) malloc(0);
+        *size = 0;
+        get_array_size(a, (void*) size);
+        void* name = malloc(0);
 
-        while (i < size) {
+        while (i < *size) {
 
             get_array_element(a, (void*) &i, name);
 
@@ -160,6 +162,9 @@ static void get_map_element_index(void* p0, void* p1, void* p2) {
 
             i++;
         }
+        
+        free(name);
+        free(size);
         
     } else {
 
@@ -311,7 +316,7 @@ static void get_map_element_count(void* p0, void* p1, void* p2) {
 static void get_map_element_name(void* p0, void* p1, void* p2) {
 
     int* count = (int*) malloc(0);
-
+    *count = 0;
     get_map_element_count(p0, p1, (void*) count);
 
     //?? The count value arrives here correctly.
@@ -346,7 +351,7 @@ static void set_map_element(void* p0, void* p1, void* p2) {
     if (m != 0) {
         
         void* i = malloc(0);
-        
+        *i = -1;
         get_next_map_element_index(p0, p1, i);
         
         puts("TEST i");
@@ -401,6 +406,7 @@ static void set_map_element(void* p0, void* p1, void* p2) {
 static void add_map_element(void* p0, void* p1, void* p2) {
 
     char* n = (char*) malloc(0);
+    *n = '0';
 
     // Get name extended by next index.
     get_map_element_name(p0, p1, (void*) n);
@@ -418,7 +424,7 @@ static void add_map_element(void* p0, void* p1, void* p2) {
     }
 */
     
-//??    free(n);
+    free(n);
 }
 
 /**
@@ -450,10 +456,11 @@ static void remove_map_element_at_index(void* p0, void* p1) {
  */
 static void remove_map_element_with_name(void* p0, void* p1) {
 
-    void* i = malloc(0);
+    int* i = (int*) malloc(0);
+    *i = -1;
     
-    get_map_element_index(p0, p1, i);
-    remove_map_element_at_index(p0, i);
+    get_map_element_index(p0, p1, (void*) i);
+    remove_map_element_at_index(p0, (void*) i);
     
     free(i);
 }
@@ -488,10 +495,11 @@ static void get_map_element_at_index(void* p0, void* p1, void* p2) {
  */
 static void get_map_element_with_name(void* p0, void* p1, void* p2) {
 
-    void* i = malloc(0);
+    int* i = (int*) malloc(0);
+    *i = -1;
     
-    get_map_element_index(p0, p1, i);
-    get_map_element_at_index(p0, i, p2);
+    get_map_element_index(p0, p1, (void*) i);
+    get_map_element_at_index(p0, (void*) i, p2);
     
     free(i);
 }

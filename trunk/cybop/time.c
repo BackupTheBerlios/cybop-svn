@@ -31,7 +31,7 @@
  * It is used to measure the duration of dynamics or in other words,
  * the difference between two static states/ instants.
  *
- * @version $Revision: 1.15 $ $Date: 2003-10-13 08:36:34 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-10-13 13:55:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct time {

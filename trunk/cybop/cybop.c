@@ -41,7 +41,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.13 $ $Date: 2003-10-13 08:36:34 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-10-13 13:55:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -138,6 +138,7 @@ int main(int p0, char** p1) {
     set_array_element(a, (void*) &i, c);
 
     void* result = malloc(0);
+    *result = "default";
     puts("TEST A");
     get_array_element(a, (void*) &i, result);
     puts("TEST B");
@@ -182,6 +183,7 @@ int main(int p0, char** p1) {
 */
 
             // Create signal for storage in signal memory.
+            // It will get destroyed (freed) when received by signal handler.
             struct signal* tmp = (struct signal*) malloc(sizeof(struct signal));
 
             if (tmp != 0) {
