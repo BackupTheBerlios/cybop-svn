@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.10 $ $Date: 2004-05-06 22:29:58 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-05-07 17:03:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -621,36 +621,28 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
                 void* m = NULL_POINTER;
                 int ms = 0;
 
-                create_model((void*) &m, (void*) &ms, (void*) &param1, (void*) &param1s, (void*) &param2, (void*) &param2s);
+                // Example:
+                // <part name="create_find_dialog"
+                //     part_abstraction="operation"
+                //     part_location="inline"
+                //     part_model="create_model, find_dialog, compound, file, application/find_dialog.cybol"/>
+//??                create_model((void*) &m, (void*) &ms, (void*) &param2, (void*) &param2s, (void*) &param3, (void*) &param3s, (void*) &param4, (void*) &param4s);
+
+                // TODO: Move reading from: inline, file, ftp etc.
+                // out of compound::initialize into general create_model procedure!
+                // Reason: also a boolean or integer value may be read from file,
+                // and not only inline.
+                // --> add additional "location" parameter to create_model procedure!
+
                 // Add to statics.
-/*??
-                * @param p0 the model
-                * @param p1 the name
-                * @param p2 the name size
-                * @param p3 the part abstraction
-                * @param p4 the part abstraction size
-                * @param p5 the part location
-                * @param p6 the part location size
-                * @param p7 the part model
-                * @param p8 the part model size
-                * @param p9 the position abstraction
-                * @param p10 the position abstraction size
-                * @param p11 the position location
-                * @param p12 the position location size
-                * @param p13 the position model
-                * @param p14 the position model size
-                * @param p15 the constraint abstraction
-                * @param p16 the constraint abstraction size
-                * @param p17 the constraint location
-                * @param p18 the constraint location size
-                * @param p19 the constraint model
-                * @param p20 the constraint model size
-*/
                 // Models of statics root do not need position or constraints!
                 // Just store part abstraction, location, model.
                 // Hand over (void*) &NULL_POINTER for all others!
                 // Name must be given as create_model operation parameter, in cybol.
-//??                set_model_part_by_name(p1, (void*) &POINTER_ARRAY, size, (void*) &m);
+                set_model_part_by_name(p1, (void*) &param1, (void*) &param1s,
+                    (void*) &param2, (void*) &param2s, (void*) &param3, (void*) &param3s, (void*) &param4, (void*) &param4s,
+                    (void*) &param5, (void*) &param5s, (void*) &param6, (void*) &param6s, (void*) &param7, (void*) &param7s,
+                    (void*) &param8, (void*) &param8s, (void*) &param9, (void*) &param9s, (void*) &param10, (void*) &param10s);
 
                 d = 1;
             }
