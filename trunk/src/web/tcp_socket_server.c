@@ -22,7 +22,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.21 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2005-04-02 10:00:07 $ $Author: rholzmueller $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
@@ -280,7 +280,75 @@ void get_request_row(char* req, int* req_count, char** req_row, int* req_row_cou
  * @param param the parameter from the request
  * @param param_count the count from the parameter
  */
-void get_param_from_request_row(char* req_row, int* req_row_count, char** param, int* param_count) {
+void get_url_basename_from_request_row( char* req_row, int* req_row_count, 
+                                        char** urlbase, int* urlbase_count) {
+
+    *urlbase_count = 0;
+    int req_row_index = 0;
+    int start_urlbase_flag = 0;
+    int max_count = 0;
+    // The element.
+    char* e = CHARACTER_NULL_POINTER;
+
+    while (1) {
+
+        if (req_row_index >= *req_row_count) {
+
+            break;
+        }
+
+        get_array_elements(req_row, (void*) &req_row_index, (void*) &e, (void*) CHARACTER_ARRAY);
+
+        // Check of ending the paramaters.
+        if ( (start_urlbase_flag == 1) && 
+             ( (*e == *SPACE_CHARACTER) || (*e == *QUESTION_MARK_CHARACTER) ) ) {
+
+            break;
+        }
+
+        // Complete the parameters.
+        if (start_urlbase_flag == 1) {
+
+            //?? ROLF: Nehme diese Initialisierung bitte VOR die Schleife,
+            //?? da sonst bei jedem Schleifendurchlauf Speicherplatz fuer
+            //?? eine neue lokale Variable belegt wird!
+            max_count = *urlbase_count + 1;
+
+            resize_array((void*) urlbase, (void*) &max_count, (void*) CHARACTER_ARRAY);
+
+            set_array_elements(*urlbase, urlbase_count, (void*) e, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
+
+            *urlbase_count = *urlbase_count + 1;
+        }
+
+        // Check of beginning the paramaters.
+        if (*e == *SOLIDUS_CHARACTER) {
+
+            // Begin from the parameters.
+            start_urlbase_flag = 1;
+        }
+
+        req_row_index++;
+    }
+}
+
+
+/**
+ * Gets the request query from the param row.
+ *
+ * Example request row:
+ * GET /lib/ausgabe.cybol?param1=value1&param2=value2 HTTP/1.1
+ *
+ * The result of the function is:
+ * param1=value1&param2=value2
+ *
+ * @param param_row the parameter row
+ * @param param_row_count the count of the parameter row
+ * @param query the query from the parameter
+ * @param query_count the count from the query
+ */
+void get_parameter_from_request_row( char* req_row, int* req_row_count, 
+                                 char** param, int* param_count) {
 
     *param_count = 0;
     int req_row_index = 0;
@@ -299,7 +367,7 @@ void get_param_from_request_row(char* req_row, int* req_row_count, char** param,
         get_array_elements(req_row, (void*) &req_row_index, (void*) &e, (void*) CHARACTER_ARRAY);
 
         // Check of ending the paramaters.
-        if ((start_param_flag == 1) && (*e == *SPACE_CHARACTER)) {
+        if ( (start_param_flag == 1) && (*e == *SPACE_CHARACTER) ) {
 
             break;
         }
@@ -307,9 +375,6 @@ void get_param_from_request_row(char* req_row, int* req_row_count, char** param,
         // Complete the parameters.
         if (start_param_flag == 1) {
 
-            //?? ROLF: Nehme diese Initialisierung bitte VOR die Schleife,
-            //?? da sonst bei jedem Schleifendurchlauf Speicherplatz fuer
-            //?? eine neue lokale Variable belegt wird!
             max_count = *param_count + 1;
 
             resize_array((void*) param, (void*) &max_count, (void*) CHARACTER_ARRAY);
@@ -320,7 +385,7 @@ void get_param_from_request_row(char* req_row, int* req_row_count, char** param,
         }
 
         // Check of beginning the paramaters.
-        if (*e == *SOLIDUS_CHARACTER) {
+        if (*e == *QUESTION_MARK_CHARACTER) {
 
             // Begin from the parameters.
             start_param_flag = 1;
@@ -329,6 +394,399 @@ void get_param_from_request_row(char* req_row, int* req_row_count, char** param,
         req_row_index++;
     }
 }
+
+/**
+ * create a signal with the set operation
+ * dest must for the abstraction a knowledge
+ * source must be a string, depenc from the abstraction
+ * of the source 
+ * 
+ * Bsp.
+ * dest zeigt auf eine Model from typ Integer, so ist 
+ * source als Integer zu interprtieren, d.b. der übergebene String ist 
+ * in eine Integer umzuwandeln. 
+ * 
+ * 
+ */
+void set_signal_for_parameter( void* source, int* source_count, 
+                               void* dest, int* dest_count,
+                               void* internal ){
+
+    //check of null pointer
+    if ( (source != NULL_POINTER) &&
+         (source_count != NULL_POINTER) &&
+         (dest != NULL_POINTER) &&
+         (dest_count != NULL_POINTER) &&
+         (internal != NULL_POINTER) )
+    {
+
+            // The knowledge memory.
+            void** km = POINTER_NULL_POINTER;
+            void** kmc = POINTER_NULL_POINTER;
+            void** kms = POINTER_NULL_POINTER;
+        
+            // Get knowledge memory.
+            get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
+            get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
+            get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
+
+
+            //
+            //  the signal 
+            //
+
+            // The signal abstraction.
+            void* sa = NULL_POINTER;
+            int* sac = INTEGER_NULL_POINTER;
+            int* sas = INTEGER_NULL_POINTER;
+
+            // The signal model.
+            void* sm = NULL_POINTER;
+            int* smc = INTEGER_NULL_POINTER;
+            int* sms = INTEGER_NULL_POINTER;
+
+            // The signal details.
+            void* sd = NULL_POINTER;
+            int* sdc = INTEGER_NULL_POINTER;
+            int* sds = INTEGER_NULL_POINTER;
+
+            // Create signal abstraction.
+            create_integer( &sac );
+            *sac = 0;
+            create_integer( &sas );
+            *sas = 0;
+            create_model((void*) &sa, (void*) sac, (void*) sas,
+                (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT,
+                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+
+            // Create signal model.
+            create_integer( &smc );
+            *smc = 0;
+            create_integer( &sms );
+            *sms = 0;
+            create_model((void*) &sm, (void*) smc, (void*) sms,
+                (void*) SET_ABSTRACTION, (void*) SET_ABSTRACTION_COUNT,
+                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+
+            // Create signal detail.
+            create_integer( &sdc );
+            *sdc = 0;
+            create_integer( &sds );
+            *sds = 0;
+            create_model((void*) &sd, (void*) sdc, (void*) sds,
+                (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
+                (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
+                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+
+
+            //
+            //  the property destination
+            //
+
+            // The property destination name.
+            void* pdn = NULL_POINTER;
+            int* pdnc = INTEGER_NULL_POINTER;
+            int* pdns = INTEGER_NULL_POINTER;
+
+            // The property destination abstraction.
+            void* pda = POINTER_NULL_POINTER;
+            int* pdac = INTEGER_NULL_POINTER;
+            int* pdas = INTEGER_NULL_POINTER;
+
+            // The property destination model.
+            void* pdm = POINTER_NULL_POINTER;
+            int* pdmc = INTEGER_NULL_POINTER;
+            int* pdms = INTEGER_NULL_POINTER;
+
+            // The property destination details.
+            void* pdd = POINTER_NULL_POINTER;
+            int* pddc = INTEGER_NULL_POINTER;
+            int* pdds = INTEGER_NULL_POINTER;
+
+            // Create property destination name.
+            create_integer( &pdnc );
+            *pdnc = 0;
+            create_integer( &pdns );
+            *pdns = 0;
+            create_model((void*) &pdn, (void*) pdnc, (void*) pdns,
+                (void*) SET_DESTINATION_NAME_ABSTRACTION, 
+                (void*) SET_DESTINATION_NAME_ABSTRACTION_COUNT, 
+                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+
+            // Create property destination abstraction.
+            create_integer( &pdac );
+            *pdac = 0;
+            create_integer( &pdas );
+            *pdas = 0;
+            create_model((void*) &pda, (void*) pdac, (void*) pdas,
+                (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, 
+                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+
+            // Create property destination model.
+            create_integer( &pdmc );
+            *pdmc = 0;
+            create_integer( &pdms );
+            *pdms = 0;
+            create_model((void*) &pdm, (void*) pdmc, (void*) pdms,
+                (void*) dest, (void*) dest_count,
+                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+
+            // Create property source detail.
+            // is empty
+
+//            get_compound_element_by_name( *km, *kmc,
+//                (void*) dest, 
+//                (void*) dest_count,
+//                (void*) &pda, (void*) &pdac, (void*) &pdas,
+//                (void*) &pdm, (void*) &pdmc, (void*) &pdms,
+//                (void*) &pdd, (void*) &pddc, (void*) &pdds );
+
+            //
+            //  the property source
+            //
+
+            // The property source name.
+            void* psn = NULL_POINTER;
+            int* psnc = INTEGER_NULL_POINTER;
+            int* psns = INTEGER_NULL_POINTER;
+
+            // The property  source abstraction.
+            void* psa = NULL_POINTER;
+            int* psac = INTEGER_NULL_POINTER;
+            int* psas = INTEGER_NULL_POINTER;
+
+            // The property  source model.
+            void* psm = NULL_POINTER;
+            int* psmc = INTEGER_NULL_POINTER;
+            int* psms = INTEGER_NULL_POINTER;
+
+            // The property  source details.
+            void* psd = NULL_POINTER;
+            int* psdc = INTEGER_NULL_POINTER;
+            int* psds = INTEGER_NULL_POINTER;
+
+            // Create property source name.
+            create_integer( &psnc );
+            *psnc = 0;
+            create_integer( &psns );
+            *psns = 0;
+            create_model((void*) &psn, (void*) psnc, (void*) psns,
+                (void*) SET_SOURCE_NAME_ABSTRACTION, 
+                (void*) SET_SOURCE_NAME_ABSTRACTION_COUNT, 
+                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+
+
+            // Create property source abstraction.
+            create_integer( &psac );
+            *psac = 0;
+            create_integer( &psas );
+            *psas = 0;
+            create_model((void*) &psa, (void*) psac, (void*) psas,
+                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, 
+                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+
+            // Create property source model.
+            // todo: expansion for other types
+            create_integer( &psmc );
+            *psmc = 0;
+            create_integer( &psms );
+            *psms = 0;
+            create_model((void*) &psm, (void*) psmc, (void*) psms,
+                (void*) source, (void*) source_count,
+                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+
+            // Create property source detail.
+            // is empty
+
+            // Add property source to the signal detail compound.
+            set_compound_element_by_name( sd, sdc, sds,
+                psn, (void*) psnc, (void*) psns,
+                psa, (void*) psac, (void*) psas,
+                psm, (void*) psmc, (void*) psms,
+                psd, (void*) psdc, (void*) psds);
+
+            // Add property destination to the detail compound.
+            set_compound_element_by_name( sd, sdc, sds,
+                pdn, (void*) pdnc, (void*) pdns,
+                pda, (void*) pdac, (void*) pdas,
+                pdm, (void*) pdmc, (void*) pdms,
+                pdd, (void*) pddc, (void*) pdds);
+
+
+            //
+            // Signal.
+            //
+
+            log_message_debug("Set start signal.");
+
+            // The signal memory.
+            void** m = NULL_POINTER;
+            void** mc = NULL_POINTER;
+            void** ms = NULL_POINTER;
+
+            // Get signal memory.
+            get_array_elements(internal, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) POINTER_ARRAY);
+            get_array_elements(internal, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) POINTER_ARRAY);
+            get_array_elements(internal, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) POINTER_ARRAY);
+
+            // The signal id.
+            int* id = INTEGER_NULL_POINTER;
+            create_integer( &id);
+            *id = 0;
+            get_new_signal_id(*m, *mc, (void*) id);
+
+            // Set signal.
+            set_signal(*m, *mc, *ms,
+                (void*) sa, (void*) sac,
+                (void*) sm, (void*) smc,
+                (void*) sd, (void*) sdc,
+                (void*) NORMAL_PRIORITY, (void*) id);
+                
+    }         
+    
+}
+
+
+/**
+ *  Zerlegt den Querystring in die einzelnen Elemenet 
+ *  und erzeugt frür alle Parameter ein Signal
+ * 
+ * ein Qruery ist z.B. domain.teststring1=Hallo&domain.teststring2=Rolf
+ * 
+ */
+void set_signals_for_all_parameters( void* query, int* query_count, 
+                                     void* internal ){
+
+    //check of null pointer
+    if ( (query != NULL_POINTER) &&
+         (query_count != NULL_POINTER) &&
+         (internal != NULL_POINTER) )
+    {
+     
+        int query_counter=0;
+        
+        char* param = CHARACTER_NULL_POINTER;
+        int* param_count = INTEGER_NULL_POINTER;
+        int* param_size = INTEGER_NULL_POINTER;
+     
+        char* value = CHARACTER_NULL_POINTER;
+        int* value_count = INTEGER_NULL_POINTER;
+        int* value_size = INTEGER_NULL_POINTER;
+        
+        create_integer( &param_count );
+        *param_count = *query_count;
+        create_integer( &param_size );
+        *param_size = *query_count;
+        create_string( &param, param_size );
+
+        create_integer( &value_count );
+        *value_count = *query_count;
+        create_integer( &value_size );
+        *value_size = *query_count;
+        create_string( &value, value_size );
+        
+        //result flag fpor comparision
+        int r = 0;
+        
+        //elements from the array
+        void* element = NULL_POINTER;
+        
+        //temp count  for comparision
+        int temp_count= 1;
+
+        while (1) {
+           
+            if ( query_counter >= *query_count ) {
+                
+                break;
+            }
+            
+            //param
+            *param_count = 0;
+            r = 0;
+            
+            while ( 1 ) {
+             
+                get_array_elements( (void*) query, (void*) &query_counter, 
+                                    (void*) &element, CHARACTER_ARRAY );
+             
+                compare_arrays( element, &temp_count, 
+                                EQUALS_SIGN_CHARACTER, 
+                                EQUALS_SIGN_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY ); 
+                                
+                if ( (query_counter >= *query_count) ||
+                     (r==1) ) 
+                {
+                
+                    query_counter = query_counter + 1;
+                    break;       
+                }
+                
+                //the element must insert into the param
+                set_array_elements( param, param_count,
+                                    element, &temp_count,
+                                    CHARACTER_ARRAY );
+                
+                
+                query_counter = query_counter + 1;
+                *param_count = *param_count + 1;
+            }
+
+            //value
+            *value_count = 0;
+            r = 0;
+
+            while ( 1 ) {
+             
+                get_array_elements( (void*) query, (void*) &query_counter, 
+                                    (void*) &element, CHARACTER_ARRAY );
+             
+                compare_arrays( element, &temp_count, 
+                                AMPERSAND_CHARACTER, 
+                                AMPERSAND_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY ); 
+                                
+                if ( (query_counter >= *query_count) ||
+                     (r==1) ) 
+                {
+                
+                    query_counter = query_counter + 1;
+                    break;       
+                }
+                
+                //the element must insert into the value
+                set_array_elements( value, value_count,
+                                    element, &temp_count,
+                                    CHARACTER_ARRAY );
+                
+                
+                query_counter = query_counter + 1;
+                *value_count = *value_count + 1;
+            }
+            
+            
+            //
+            if ( *param_count > 0 ) {
+             
+                set_signal_for_parameter( value, value_count,
+                                          param, param_count,
+                                          internal );
+            }
+        }
+        
+    }         
+    
+}
+
 
 /**
  * Handles a tcp socket request.
@@ -353,7 +811,7 @@ void handle_tcp_socket_request(void* p0, void* p1) {
         // The message.
         char* msg = CHARACTER_NULL_POINTER;
         // The maximum message count.
-        int max_msg_count = 1024;
+        int max_msg_count = 2048;
 
         // Create message.
         create_array((void*) &msg, (void*) &max_msg_count, (void*) CHARACTER_ARRAY);
@@ -367,24 +825,39 @@ void handle_tcp_socket_request(void* p0, void* p1) {
             // TODO: parameter aus empfangenen Daten ermitteln
 
             // Create message row.
-            char* msg_row = CHARACTER_NULL_POINTER;
-            int msg_row_count = 0;
+            char* req_row = CHARACTER_NULL_POINTER;
+            int req_row_count = 0;
 
             // Create message row.
-            create_array((void*) &msg_row, (void*) &msg_row_count, (void*) CHARACTER_ARRAY);
+            create_array((void*) &req_row, (void*) &req_row_count, (void*) CHARACTER_ARRAY);
 
             // Get message row.
-            get_request_row(msg, &msg_count, &msg_row, &msg_row_count);
+            get_request_row(msg, &msg_count, &req_row, &req_row_count);
 
             // The parameters.
+            char* url_basename = NULL_POINTER;
+            int url_basename_count = 0;
+
+            // Create parameters.
+            create_array( (void*) &url_basename, (void*) &url_basename_count, 
+                          (void*) CHARACTER_ARRAY);
+
+            // Get url base name .
+            get_url_basename_from_request_row( req_row, &req_row_count, 
+                                               &url_basename, 
+                                               &url_basename_count );
+
+
+            // The query.
             char* param = NULL_POINTER;
             int param_count = 0;
 
-            // Create parameters.
+            // Create query.
             create_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
 
             // Get parameters.
-            get_param_from_request_row(msg_row, &msg_row_count, &param, &param_count);
+            get_parameter_from_request_row( req_row, &req_row_count, 
+                                            &param, &param_count);
 
             // The firefox web browser makes a second request
             // to determine the favicon.
@@ -395,65 +868,15 @@ void handle_tcp_socket_request(void* p0, void* p1) {
             // The comparison result.
             int r = 0;
 
-            compare_arrays((void*) param, (void*) &param_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) CHARACTER_ARRAY);
 
             if (r != 1) {
+             
+                //query string handling
+                set_signals_for_all_parameters( (void*) param, (void*) &param_count, p0 );
 
-                /* write the answer to the client  */
-        //        if(send(*p_client_socketnumber, msg, msg_count, 0) == -1) {
-        //
-        //            log_message_debug("error while replying");
-        //            exit(1);
-        //        }
  
                 log_message_debug("Create destination abstraction, model, details.");
-
-//                // The startup model abstraction, model, details.
-//                void* ma = NULL_POINTER;
-//                int* mac = INTEGER_NULL_POINTER;
-//                int* mas = INTEGER_NULL_POINTER;
-//                void* mm = NULL_POINTER;
-//                int* mmc = INTEGER_NULL_POINTER;
-//                int* mms = INTEGER_NULL_POINTER;
-//                void* md = NULL_POINTER;
-//                int* mdc = INTEGER_NULL_POINTER;
-//                int* mds = INTEGER_NULL_POINTER;
-//
-//                // Create startup model abstraction, model, details.
-//                create_integer((void*) &mac);
-//                create_integer((void*) &mas);
-//                create_integer((void*) &mmc);
-//                create_integer((void*) &mms);
-//                // CAUTION! Do not create startup model details!
-//                // It is not needed for the startup signal.
-//
-//                // Initialize startup model abstraction, model, details.
-//                *mac = 0;
-//                *mas = 0;
-//                *mmc = 0;
-//                *mms = 0;
-//                // CAUTION! Do not create startup model details!
-//                // It is not needed for the startup signal.
-//
-//
-//                // Create startup model abstraction, model, details.
-//                create_model((void*) &ma, (void*) mac, (void*) mas, *pa, *pac,
-//                    (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
-//                    (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-//
-//                fprintf(stderr, "ma: %s\n", (char*) ma);
-//                fprintf(stderr, "mac: %i\n", *mac);
-//
-//                create_model((void*) &mm, (void*) mmc, (void*) mms,
-//                    *pm, *pmc, *pa, *pac, *pc, *pcc);
-//                // CAUTION! Do not create startup model details!
-//                // It is not needed for the startup signal.
-//
-//                fprintf(stderr, "mm: %i\n", mm);
-//                fprintf(stderr, "mmc: %i\n", *mmc);
-//                //?? DO NOT try to print details and its count. They are NULL.
-//
-//                log_message_debug("Add startup model as signal to signal memory.");
 
                 // The source channel.
                 char c_sc[] = "file";
@@ -470,10 +893,10 @@ void handle_tcp_socket_request(void* p0, void* p1) {
                 *sac = 5;
 
                 // The source model.
-                char* sm = param;
+                char* sm = url_basename;
                 int* smc = INTEGER_NULL_POINTER;
                 create_integer( &smc );
-                *smc = param_count;
+                *smc = url_basename_count;
 
                 // The destination abstraction.
                 void* da = NULL_POINTER;
@@ -609,13 +1032,8 @@ void run_tcp_socket(void* p0) {
     
                 log_message_debug("DEBUG: Accepted tcp client socket request.");
     
-    //??            char ausgabe[] = "Hello World";
-    //??            send(cs, ausgabe, strlen(ausgabe), 0);
-    
                 handle_tcp_socket_request(p0, (void*) &cs);
     
-    //??            // Close socket connection.
-    //??            close(cs);
     
             } else {
     
