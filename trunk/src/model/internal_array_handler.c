@@ -30,9 +30,11 @@
 /**
  * This is the internal array handler.
  *
- * Internal array elements are accessed over their index.
+ * An internal array is one provided by the programming language.
+ * Its syntax mostly looks like: type[size].
+ * Internal array elements are accessed over an index.
  *
- * @version $Revision: 1.3 $ $Date: 2003-12-15 07:16:07 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-12-15 12:14:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,8 +42,8 @@
 // Constants.
 //
 
-/** The invalid index value. */
-static const int INVALID_INDEX_VALUE = -1;
+/** The invalid index. */
+static const int INVALID_INDEX = -1;
 
 //
 // Internal array.
@@ -109,13 +111,13 @@ void** extend_internal_array(void** p0, void* p1, void* p2) {
  * @param p1 the index
  * @param p2 the element
  */
-void set_internal_array_element(void** p0, const void* p1, void* p2) {
+void set_internal_array_element(void** p0, void* p1, void* p2) {
 
     if (p0 != (void*) 0) {
 
         int* i = (int*) p1;
 
-        if (*i != INVALID_INDEX_VALUE) {
+        if (*i != INVALID_INDEX) {
                 
             // Set element.
             p0[*i] = p2;
@@ -138,13 +140,13 @@ void set_internal_array_element(void** p0, const void* p1, void* p2) {
  * @param p1 the index
  * @param p2 the count
  */
-void remove_internal_array_element(void** p0, const void* p1, void* p2) {
+void remove_internal_array_element(void** p0, void* p1, void* p2) {
 
     if (p0 != (void*) 0) {
 
         int* index = (int*) p1;
 
-        if (*index != INVALID_INDEX_VALUE) {
+        if (*index != INVALID_INDEX) {
 
             // Initialize loop variable with index.
             // Do not use the index itself as it was handed over as constant parameter!
@@ -181,7 +183,7 @@ void remove_internal_array_element(void** p0, const void* p1, void* p2) {
  * @param p1 the index
  * @return the element
  */
-void* get_internal_array_element(void** p0, const void* p1) {
+void* get_internal_array_element(void** p0, void* p1) {
 
     void* e = (void*) 0;
     
@@ -189,7 +191,7 @@ void* get_internal_array_element(void** p0, const void* p1) {
 
         int* i = (int*) p1;
 
-        if (*i != INVALID_INDEX_VALUE) {
+        if (*i != INVALID_INDEX) {
             
             // Get element.
             e = p0[*i];

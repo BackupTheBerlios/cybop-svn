@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.4 $ $Date: 2003-12-15 07:16:07 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-12-15 12:14:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,46 +97,42 @@ void finalize_array(void* p0) {
  * Returns the array size.
  *
  * @param p0 the array
- * @return the array size
+ * @param p1 the array size
  */
-void* get_array_size(void* p0) {
+void get_array_size(void* p0, void* p1) {
 
-    void* s = (void*) 0;
     struct array* a = (struct array*) p0;
+    int* s = (int*) p1;
 
     if (a != (void*) 0) {
 
-        s = (void*) &(a->size);
+        *s = a->size;
 
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get array size. The array is null.");
     }
-    
-    return s;
 }
 
 /**
  * Returns the array count.
  *
  * @param p0 the array
- * @return the array count
+ * @param p1 the array count
  */
-void* get_array_count(void* p0) {
+void get_array_count(void* p0, void* p1) {
 
-    void* c = (void*) 0;
     struct array* a = (struct array*) p0;
+    int* c = (int*) p1;
 
     if (a != (void*) 0) {
 
-        c = (void*) &(a->count);
+        *c = a->count;
 
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get array count. The array is null.");
     }
-    
-    return c;
 }
 
 //
@@ -150,7 +146,7 @@ void* get_array_count(void* p0) {
  * @param p1 the index
  * @param p2 the element
  */
-void set_array_element(void* p0, const void* p1, void* p2) {
+void set_array_element(void* p0, void* p1, void* p2) {
 
     struct array* a = (struct array*) p0;
 
@@ -159,14 +155,6 @@ void set_array_element(void* p0, const void* p1, void* p2) {
         int* i = (int*) p1;
         int size = a->size;
         
-        log_message((void*) &INFO_LOG_LEVEL, "index");
-        fprintf(stderr, "%d", *i);
-        fputs("\n", stderr);
-
-        log_message((void*) &INFO_LOG_LEVEL, "size");
-        fprintf(stderr, "%d", size);
-        fputs("\n", stderr);
-
         // If the array length is exceeded, create a new array with extended
         // (doubled) length so that the index matches.
         // If the initial size is zero and multiplied by two, the result is
@@ -185,17 +173,7 @@ void set_array_element(void* p0, const void* p1, void* p2) {
             //?? a->internal_array = extend_internal_array(a->internal_array, (void*) &(a->size), (void*) &size);
         }
 
-        log_message((void*) &INFO_LOG_LEVEL, "abstraction A");
-        fprintf(stderr, "%d", p2);
-        fputs("\n", stderr);
-
         set_internal_array_element(a->internal_array, p1, p2);
-
-        void* test = get_internal_array_element(a->internal_array, p1);
-        log_message((void*) &INFO_LOG_LEVEL, "abstraction B");
-        fprintf(stderr, "%d", test);
-        fputs("\n", stderr);
-
         (a->count)++;
 
     } else {
@@ -210,7 +188,7 @@ void set_array_element(void* p0, const void* p1, void* p2) {
  * @param p0 the array
  * @param p1 the index
  */
-void remove_array_element(void* p0, const void* p1) {
+void remove_array_element(void* p0, void* p1) {
 
     struct array* a = (struct array*) p0;
 
@@ -232,7 +210,7 @@ void remove_array_element(void* p0, const void* p1) {
  * @param p1 the index
  * @return the element
  */
-void* get_array_element(void* p0, const void* p1) {
+void* get_array_element(void* p0, void* p1) {
 
     void* e = (void*) 0;
     struct array* a = (struct array*) p0;

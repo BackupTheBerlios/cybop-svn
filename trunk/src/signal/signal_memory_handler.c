@@ -49,7 +49,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.7 $ $Date: 2003-12-15 07:16:07 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-12-15 12:14:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -170,48 +170,15 @@ void destroy_signal_memory(void* p0) {
  * @param p3 the abstraction
  * @param p4 the priority
  */
-void set_signal(void* p0, const void* p1, void* p2, void* p3, void* p4) {
+void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
     
     if (m != (void*) 0) {
         
-        log_message((void*) &INFO_LOG_LEVEL, "index");
-        fprintf(stderr, "%d", *((int*) p1));
-        fputs("\n", stderr);
-
-        log_message((void*) &INFO_LOG_LEVEL, "signal");
-        fprintf(stderr, "%d", p2);
-        fputs("\n", stderr);
-
-        log_message((void*) &INFO_LOG_LEVEL, "abstraction");
-        fprintf(stderr, "%s", (char*) p3);
-        fputs("\n", stderr);
-
-        log_message((void*) &INFO_LOG_LEVEL, "priority");
-        fprintf(stderr, "%d", *((int*) p4));
-        fputs("\n", stderr);
-
-        log_message((void*) &INFO_LOG_LEVEL, "p1 a");
-        fprintf(stderr, "%d", *((int*) p1));
-        fputs("\n", stderr);
         set_array_element(m->signals, p1, p2);
-        log_message((void*) &INFO_LOG_LEVEL, "p1 b");
-        fprintf(stderr, "%d", *((int*) p1));
-        fputs("\n", stderr);
         set_array_element(m->abstractions, p1, p3);
-        log_message((void*) &INFO_LOG_LEVEL, "p1 c");
-        fprintf(stderr, "%d", *((int*) p1));
-        fputs("\n", stderr);
         set_array_element(m->priorities, p1, p4);
-        log_message((void*) &INFO_LOG_LEVEL, "p1 d");
-        fprintf(stderr, "%d", *((int*) p1));
-        fputs("\n", stderr);
-
-        void* test = get_array_element(m->abstractions, p1);
-        log_message((void*) &INFO_LOG_LEVEL, "stored abstraction");
-        fprintf(stderr, "%d", test);
-        fputs("\n", stderr);
 
     } else {
 
@@ -233,8 +200,9 @@ void add_signal(void* p0, void* p1, void* p2, void* p3) {
 
     if (m != (void*) 0) {
 
-        void* c = get_array_count(m->signals);
-        set_signal(p0, c, p1, p2, p3);
+        int i = 0;
+        get_array_count(m->signals, (void*) &i);
+        set_signal(p0, (void*) &i, p1, p2, p3);
         
     } else {
 
@@ -350,27 +318,19 @@ void get_highest_priority_index(void* p0, void* p1) {
     if (m != (void*) 0) {
 
         int i = 0;
-        int* count = (int*) get_array_count(m->priorities);
+        int count = 0;
+        get_array_count(m->priorities, (void*) &count);
         int* p = (void*) 0;
-        int h = 0;
+        int h = *index;
     
-        while (i < *count) {
+        while (i < count) {
     
-            log_message((void*) &INFO_LOG_LEVEL, "signal index");
-            fprintf(stderr, "%d", i);
-            fputs("\n", stderr);
-
             p = (int*) get_array_element(m->priorities, (void*) &i);
     
-            log_message((void*) &INFO_LOG_LEVEL, "signal priority");
-            fprintf(stderr, "%d", *p);
-            fputs("\n", stderr);
-
             // If a signal with higher priority is found,
             // then its index is the one to be returned.
             if (*p > h) {
             
-                log_message((void*) &INFO_LOG_LEVEL, "signal 1");
                 *index = i;
                 h = *p;
             }
@@ -403,7 +363,8 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
     
     if (m != (void*) 0) {
 
-        int* count = (int*) get_array_count(m->parts);
+        int count = 0;
+        get_array_count(m->parts, (void*) &count);
         int pos = 0;
         int i = 0;
         int* position = (void*) 0;
@@ -411,10 +372,10 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
         void* part = (void*) 0;
 
         // All positions.
-        while (pos < *count) {
+        while (pos < count) {
             
             // All parts.
-            while (i < *count) {
+            while (i < count) {
                 
                 // Determine position.
                 position = (int*) get_map_element_at_index(m->positions, (void*) &i);

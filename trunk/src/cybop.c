@@ -41,7 +41,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.7 $ $Date: 2003-12-15 07:16:07 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-12-15 12:14:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,7 +51,9 @@
 void show_usage_information() {
 
     show_message("Usage: cyboi signal");
+    show_message((void*) "\n");
     show_message("Example: cyboi cybop.sample.hello_world.dynamics.startup");
+    show_message((void*) "\n");
 }
 
 /**
@@ -84,26 +86,22 @@ void wait(void* p0, void* p1, void* p2) {
         if (f == 0) {
 
             // Get top priority signal from signal memory and remove it from there.
-            log_message((void*) &INFO_LOG_LEVEL, "0");
             get_highest_priority_index(p0, (void*) &i);
-            log_message((void*) &INFO_LOG_LEVEL, "1");
             s = get_signal(p0, (void*) &i);
-            log_message((void*) &INFO_LOG_LEVEL, "2");
             a = (char*) get_abstraction(p0, (void*) &i);
-            log_message((void*) &INFO_LOG_LEVEL, "3");
             p = get_priority(p0, (void*) &i);
-            log_message((void*) &INFO_LOG_LEVEL, "4");
             remove_signal(p0, (void*) &i);
 
             // Handle signal.
+            log_message((void*) &INFO_LOG_LEVEL, "0");
             if (strcmp(a, DYNAMICS_COMPOUND) == 0) {
                 
-                log_message((void*) &INFO_LOG_LEVEL, "5");
+                log_message((void*) &INFO_LOG_LEVEL, "1");
                 handle_compound_signal(p0, s, p);
         
             } else {
         
-                log_message((void*) &INFO_LOG_LEVEL, "6");
+                log_message((void*) &INFO_LOG_LEVEL, "2");
                 handle_operation_signal(s, a, p1, p2, (void*) &f);
             }
 

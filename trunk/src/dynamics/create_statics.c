@@ -42,7 +42,7 @@
  *
  * It creates a statics memory model from a given statics cybol model.
  *
- * @version $Revision: 1.4 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-12-15 12:14:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -145,10 +145,11 @@ void initialize_statics_parts(void* p0, void* p1) {
 
     struct map* m = (struct map*) p1;
     int count = 0;
-    int* size = (int*) get_map_size(m);
+    int size = 0;
+    get_map_size(m, (void*) &size);
     struct statics_model* e = 0;
 
-    while (count < *size) {
+    while (count < size) {
     
         e = (struct statics_model*) get_map_element_at_index(m, (void*) &count);
 

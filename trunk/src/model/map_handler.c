@@ -35,7 +35,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.3 $ $Date: 2003-12-15 07:16:07 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-12-15 12:14:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -104,23 +104,20 @@ void finalize_map(void* p0) {
  * Returns the map size.
  *
  * @param p0 the map
- * @return the map size
+ * @param p1 the map size
  */
-void* get_map_size(void* p0) {
+void get_map_size(void* p0, void* p1) {
 
-    void* s = (void*) 0;
     struct map* m = (struct map*) p0;
 
     if (m != (void*) 0) {
 
-        s = get_array_size(m->names);
+        get_array_size(m->names, p1);
 
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get map size. The map is null.");
     }
-    
-    return s;
 }
 
 //
@@ -138,10 +135,11 @@ int get_map_element_index(void* p0, void* p1) {
 
     int index = -1;
     int i = 0;
-    int* count = (int*) get_array_count(p0);
+    int count = 0;
+    get_array_count(p0, (void*) &count);
     void* name = (void*) 0;
 
-    while (i < *count) {
+    while (i < count) {
 
         name = get_array_element(p0, (void*) &i);
 
@@ -178,10 +176,11 @@ int get_next_map_element_index(void* p0, void* p1) {
 
     int index = -1;
     int i = 0;
-    int* count = (int*) get_array_count(p0);
+    int count = 0;
+    get_array_count(p0, (void*) &count);
     void* name = (void*) 0;
 
-    while (i < *count) {
+    while (i < count) {
 
         name = get_array_element(p0, (void*) &i);
 
@@ -201,7 +200,7 @@ int get_next_map_element_index(void* p0, void* p1) {
     // Neither element matched. The next index will be the current element count.
     if (index == -1) {
 
-        index = *count;
+        index = count;
     }
 
     return index;
@@ -218,10 +217,11 @@ int get_map_element_count(void* p0, void* p1) {
 
     int name_count = 0;
     int i = 0;
-    int* count = (int*) get_array_count(p0);
+    int count = 0;
+    get_array_count(p0, (void*) &count);
     void* name = (void*) 0;
 
-    while (i < *count) {
+    while (i < count) {
 
         name = get_array_element(p0, (void*) &i);
 
