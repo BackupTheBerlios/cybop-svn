@@ -23,7 +23,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.6 $ $Date: 2004-12-08 14:12:52 $ $Author: rholzmueller $
+ * @version $Revision: 1.7 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -49,7 +49,7 @@
 #include "../global/log_constants.c"
 #include "../global/name_constants.c"
 #include "../global/structure_constants.c"
-#include "../global/variable.c"
+#include "../global/variables.c"
 #include "../logger/logger.c"
 #include "../web/socket_number_accessor.c"
 

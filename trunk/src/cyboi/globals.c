@@ -21,17 +21,18 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-12-16 16:34:57 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef GLOBALS_SOURCE
 #define GLOBALS_SOURCE
 
-#include <stdio.h>
-
 /**
  * Initializes the global variables.
+ *
+ * CAUTION! These global variables can NOT be initialized in
+ * /globals/variables.c because then constant values are expected!
  */
 void create_globals() {
 
@@ -44,59 +45,59 @@ void create_globals() {
     //
 
     // The null pointer.
-    static void* NULL_POINTER = (void*) 0;
+    NULL_POINTER = (void*) 0;
 
     // The pointer null pointer.
-    static void** POINTER_NULL_POINTER = (void**) 0;
+    POINTER_NULL_POINTER = (void**) 0;
 
     // The integer null pointer.
-    static int* INTEGER_NULL_POINTER = (int*) 0;
+    INTEGER_NULL_POINTER = (int*) 0;
 
     // The character null pointer.
-    static char* CHARACTER_NULL_POINTER = (char*) 0;
+    CHARACTER_NULL_POINTER = (char*) 0;
 
     // The double null pointer.
-    static double* DOUBLE_NULL_POINTER = (double*) 0;
+    DOUBLE_NULL_POINTER = (double*) 0;
 
     // The file null pointer.
-    static FILE* FILE_NULL_POINTER = (FILE*) 0;
+    FILE_NULL_POINTER = (FILE*) 0;
 
     //
     // Logging.
     //
 
     // The log level.
-    static int* LOG_LEVEL = DEBUG_LOG_LEVEL;
+    LOG_LEVEL = DEBUG_LOG_LEVEL;
 
     // The maximum log message count.
-    static int* MAXIMUM_LOG_MESSAGE_COUNT = INTEGER_NULL_POINTER;
+    MAXIMUM_LOG_MESSAGE_COUNT = INTEGER_NULL_POINTER;
     create_integer((void*) &MAXIMUM_LOG_MESSAGE_COUNT);
     *MAXIMUM_LOG_MESSAGE_COUNT = 300;
 
     // The log output.
-    static FILE* LOG_OUTPUT = stderr;
+    LOG_OUTPUT = stderr;
 
     //
     // Primitive type sizes.
     //
 
     // The pointer primitive size.
-    static int* POINTER_PRIMITIVE_SIZE = INTEGER_NULL_POINTER;
+    POINTER_PRIMITIVE_SIZE = INTEGER_NULL_POINTER;
     create_integer((void*) &POINTER_PRIMITIVE_SIZE);
     *POINTER_PRIMITIVE_SIZE = sizeof(void*);
 
     // The integer primitive size.
-    static int* INTEGER_PRIMITIVE_SIZE = INTEGER_NULL_POINTER;
+    INTEGER_PRIMITIVE_SIZE = INTEGER_NULL_POINTER;
     create_integer((void*) &INTEGER_PRIMITIVE_SIZE);
     *INTEGER_PRIMITIVE_SIZE = sizeof(int);
 
     // The character primitive size.
-    static int* CHARACTER_PRIMITIVE_SIZE = INTEGER_NULL_POINTER;
+    CHARACTER_PRIMITIVE_SIZE = INTEGER_NULL_POINTER;
     create_integer((void*) &CHARACTER_PRIMITIVE_SIZE);
     *CHARACTER_PRIMITIVE_SIZE = sizeof(char);
 
     // The double primitive size.
-    static int* DOUBLE_PRIMITIVE_SIZE = INTEGER_NULL_POINTER;
+    DOUBLE_PRIMITIVE_SIZE = INTEGER_NULL_POINTER;
     create_integer((void*) &DOUBLE_PRIMITIVE_SIZE);
     *DOUBLE_PRIMITIVE_SIZE = sizeof(double);
 }

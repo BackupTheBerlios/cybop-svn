@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.4 $ $Date: 2004-12-17 12:48:43 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -306,7 +306,8 @@ static const int AMPERSAND_CHARACTER_COUNT_ARRAY[] = {1};
 static const int* AMPERSAND_CHARACTER_COUNT = AMPERSAND_CHARACTER_COUNT_ARRAY;
 
 /** The apostrophe character. U+0027 */
-static const char APOSTROPHE_CHARACTER_ARRAY[] = {'''};
+//?? TODO: How to write a ' here? ''' does not work!
+static const char APOSTROPHE_CHARACTER_ARRAY[] = {'\''};
 static const char* APOSTROPHE_CHARACTER = APOSTROPHE_CHARACTER_ARRAY;
 static const int APOSTROPHE_CHARACTER_COUNT_ARRAY[] = {1};
 static const int* APOSTROPHE_CHARACTER_COUNT = APOSTROPHE_CHARACTER_COUNT_ARRAY;
@@ -341,11 +342,11 @@ static const char* COMMA_CHARACTER = COMMA_CHARACTER_ARRAY;
 static const int COMMA_CHARACTER_COUNT_ARRAY[] = {1};
 static const int* COMMA_CHARACTER_COUNT = COMMA_CHARACTER_COUNT_ARRAY;
 
-/** The hyphen-minus character. U+002D */
-static const char HYPHEN-MINUS_CHARACTER_ARRAY[] = {'-'};
-static const char* HYPHEN-MINUS_CHARACTER = HYPHEN-MINUS_CHARACTER_ARRAY;
-static const int HYPHEN-MINUS_CHARACTER_COUNT_ARRAY[] = {1};
-static const int* HYPHEN-MINUS_CHARACTER_COUNT = HYPHEN-MINUS_CHARACTER_COUNT_ARRAY;
+/** The hyphen minus character. U+002D */
+static const char HYPHEN_MINUS_CHARACTER_ARRAY[] = {'-'};
+static const char* HYPHEN_MINUS_CHARACTER = HYPHEN_MINUS_CHARACTER_ARRAY;
+static const int HYPHEN_MINUS_CHARACTER_COUNT_ARRAY[] = {1};
+static const int* HYPHEN_MINUS_CHARACTER_COUNT = HYPHEN_MINUS_CHARACTER_COUNT_ARRAY;
 
 /** The full stop character. U+002E */
 static const char FULL_STOP_CHARACTER_ARRAY[] = {'.'};
@@ -431,11 +432,11 @@ static const char* SEMICOLON_CHARACTER = SEMICOLON_CHARACTER_ARRAY;
 static const int SEMICOLON_CHARACTER_COUNT_ARRAY[] = {1};
 static const int* SEMICOLON_CHARACTER_COUNT = SEMICOLON_CHARACTER_COUNT_ARRAY;
 
-/** The less-than sign character. U+003C */
-static const char LESS-THAN_SIGN_CHARACTER_ARRAY[] = {'<'};
-static const char* LESS-THAN_SIGN_CHARACTER = LESS-THAN_SIGN_CHARACTER_ARRAY;
-static const int LESS-THAN_SIGN_CHARACTER_COUNT_ARRAY[] = {1};
-static const int* LESS-THAN_SIGN_CHARACTER_COUNT = LESS-THAN_SIGN_CHARACTER_COUNT_ARRAY;
+/** The less than sign character. U+003C */
+static const char LESS_THAN_SIGN_CHARACTER_ARRAY[] = {'<'};
+static const char* LESS_THAN_SIGN_CHARACTER = LESS_THAN_SIGN_CHARACTER_ARRAY;
+static const int LESS_THAN_SIGN_CHARACTER_COUNT_ARRAY[] = {1};
+static const int* LESS_THAN_SIGN_CHARACTER_COUNT = LESS_THAN_SIGN_CHARACTER_COUNT_ARRAY;
 
 /** The equals sign character. U+003D */
 static const char EQUALS_SIGN_CHARACTER_ARRAY[] = {'='};
@@ -443,11 +444,11 @@ static const char* EQUALS_SIGN_CHARACTER = EQUALS_SIGN_CHARACTER_ARRAY;
 static const int EQUALS_SIGN_CHARACTER_COUNT_ARRAY[] = {1};
 static const int* EQUALS_SIGN_CHARACTER_COUNT = EQUALS_SIGN_CHARACTER_COUNT_ARRAY;
 
-/** The greater-than sign character. U+003E */
-static const char GREATER-THAN_SIGN_CHARACTER_ARRAY[] = {'>'};
-static const char* GREATER-THAN_SIGN_CHARACTER = GREATER-THAN_SIGN_CHARACTER_ARRAY;
-static const int GREATER-THAN_SIGN_CHARACTER_COUNT_ARRAY[] = {1};
-static const int* GREATER-THAN_SIGN_CHARACTER_COUNT = GREATER-THAN_SIGN_CHARACTER_COUNT_ARRAY;
+/** The greater than sign character. U+003E */
+static const char GREATER_THAN_SIGN_CHARACTER_ARRAY[] = {'>'};
+static const char* GREATER_THAN_SIGN_CHARACTER = GREATER_THAN_SIGN_CHARACTER_ARRAY;
+static const int GREATER_THAN_SIGN_CHARACTER_COUNT_ARRAY[] = {1};
+static const int* GREATER_THAN_SIGN_CHARACTER_COUNT = GREATER_THAN_SIGN_CHARACTER_COUNT_ARRAY;
 
 /** The question mark character. U+003F */
 static const char QUESTION_MARK_CHARACTER_ARRAY[] = {'?'};
@@ -624,7 +625,7 @@ static const int LEFT_SQUARE_BRACKET_CHARACTER_COUNT_ARRAY[] = {1};
 static const int* LEFT_SQUARE_BRACKET_CHARACTER_COUNT = LEFT_SQUARE_BRACKET_CHARACTER_COUNT_ARRAY;
 
 /** The reverse solidus character. U+005C */
-static const char REVERSE_SOLIDUS_CHARACTER_ARRAY[] = {'\'};
+static const char REVERSE_SOLIDUS_CHARACTER_ARRAY[] = {'\\'};
 static const char* REVERSE_SOLIDUS_CHARACTER = REVERSE_SOLIDUS_CHARACTER_ARRAY;
 static const int REVERSE_SOLIDUS_CHARACTER_COUNT_ARRAY[] = {1};
 static const int* REVERSE_SOLIDUS_CHARACTER_COUNT = REVERSE_SOLIDUS_CHARACTER_COUNT_ARRAY;

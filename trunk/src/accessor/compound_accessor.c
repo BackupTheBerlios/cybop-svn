@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2004-12-16 09:52:33 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -325,7 +325,7 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2,
                     if (**i == **cs) {
 
                         // Increase size.
-                        **cs = (**cs * COMPOUND_RESIZE_FACTOR) + 1;
+                        **cs = (**cs * *COMPOUND_RESIZE_FACTOR) + 1;
 
                         // Resize names, models, abstractions, details.
                         resize_array((void*) &n, (void*) &POINTER_ARRAY, p2);

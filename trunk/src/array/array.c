@@ -50,7 +50,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.16 $ $Date: 2004-12-16 09:52:33 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -85,21 +85,21 @@ void compare_array_elements(const void* p0, const void* p1, const void* p2, cons
 
     if (p2 != NULL_POINTER) {
 
-        int* t = (int*) p2;
+        int** t = (int**) p2;
 
-        if (*t == POINTER_ARRAY) {
+        if (**t == *POINTER_ARRAY) {
 
             compare_pointer_array_elements(p0, p1, p3, p4);
 
-        } else if (*t == INTEGER_ARRAY) {
+        } else if (**t == *INTEGER_ARRAY) {
 
             compare_integer_array_elements(p0, p1, p3, p4);
 
-        } else if (*t == DOUBLE_ARRAY) {
+        } else if (**t == *DOUBLE_ARRAY) {
 
             compare_double_array_elements(p0, p1, p3, p4);
 
-        } else if (*t == CHARACTER_ARRAY) {
+        } else if (**t == *CHARACTER_ARRAY) {
 
             compare_character_array_elements(p0, p1, p3, p4);
         }
@@ -123,21 +123,21 @@ void set_array_elements(void* p0, const void* p1, const void* p2, const void* p3
 
     if (p1 != NULL_POINTER) {
 
-        int* t = (int*) p1;
+        int** t = (int**) p1;
 
-        if (*t == POINTER_ARRAY) {
+        if (**t == *POINTER_ARRAY) {
 
             set_pointer_array_elements(p0, p2, p3, p4);
 
-        } else if (*t == INTEGER_ARRAY) {
+        } else if (**t == *INTEGER_ARRAY) {
 
             set_integer_array_elements(p0, p2, p3, p4);
 
-        } else if (*t == DOUBLE_ARRAY) {
+        } else if (**t == *DOUBLE_ARRAY) {
 
             set_double_array_elements(p0, p2, p3, p4);
 
-        } else if (*t == CHARACTER_ARRAY) {
+        } else if (**t == *CHARACTER_ARRAY) {
 
             set_character_array_elements(p0, p2, p3, p4);
         }
@@ -161,21 +161,21 @@ void remove_array_elements(void* p0, const void* p1, const void* p2, const void*
 
     if (p1 != NULL_POINTER) {
 
-        int* t = (int*) p1;
+        int** t = (int**) p1;
 
-        if (*t == POINTER_ARRAY) {
+        if (**t == *POINTER_ARRAY) {
 
             remove_pointer_array_elements(p0, p2, p3, p4);
 
-        } else if (*t == INTEGER_ARRAY) {
+        } else if (**t == *INTEGER_ARRAY) {
 
             remove_integer_array_elements(p0, p2, p3, p4);
 
-        } else if (*t == DOUBLE_ARRAY) {
+        } else if (**t == *DOUBLE_ARRAY) {
 
             remove_double_array_elements(p0, p2, p3, p4);
 
-        } else if (*t == CHARACTER_ARRAY) {
+        } else if (**t == *CHARACTER_ARRAY) {
 
             remove_character_array_elements(p0, p2, p3, p4);
         }
@@ -199,21 +199,21 @@ void get_array_elements(const void* p0, const void* p1, const void* p2, void* p3
 
     if (p1 != NULL_POINTER) {
 
-        int* t = (int*) p1;
+        int** t = (int**) p1;
 
-        if (*t == POINTER_ARRAY) {
+        if (**t == *POINTER_ARRAY) {
 
             get_pointer_array_elements(p0, p2, p3, p4);
 
-        } else if (*t == INTEGER_ARRAY) {
+        } else if (**t == *INTEGER_ARRAY) {
 
             get_integer_array_elements(p0, p2, p3, p4);
 
-        } else if (*t == DOUBLE_ARRAY) {
+        } else if (**t == *DOUBLE_ARRAY) {
 
             get_double_array_elements(p0, p2, p3, p4);
 
-        } else if (*t == CHARACTER_ARRAY) {
+        } else if (**t == *CHARACTER_ARRAY) {
 
             get_character_array_elements(p0, p2, p3, p4);
         }
@@ -238,21 +238,21 @@ void get_array_elements_index(const void* p0, const void* p1, const void* p2, co
 
     if (p1 != NULL_POINTER) {
 
-        int* t = (int*) p1;
+        int** t = (int**) p1;
 
-        if (*t == POINTER_ARRAY) {
+        if (**t == *POINTER_ARRAY) {
 
             get_pointer_array_elements_index(p0, p2, p3, p4, p5);
 
-        } else if (*t == INTEGER_ARRAY) {
+        } else if (**t == *INTEGER_ARRAY) {
 
             get_integer_array_elements_index(p0, p2, p3, p4, p5);
 
-        } else if (*t == DOUBLE_ARRAY) {
+        } else if (**t == *DOUBLE_ARRAY) {
 
             get_double_array_elements_index(p0, p2, p3, p4, p5);
 
-        } else if (*t == CHARACTER_ARRAY) {
+        } else if (**t == *CHARACTER_ARRAY) {
 
             get_character_array_elements_index(p0, p2, p3, p4, p5);
         }
@@ -278,21 +278,21 @@ void create_array(void* p0, const void* p1, const void* p2) {
 
     if (p1 != NULL_POINTER) {
 
-        int* t = (int*) p1;
+        int** t = (int**) p1;
 
-        if (*t == POINTER_ARRAY) {
+        if (**t == *POINTER_ARRAY) {
 
             create_pointer_array(p0, p2);
 
-        } else if (*t == INTEGER_ARRAY) {
+        } else if (**t == *INTEGER_ARRAY) {
 
             create_integer_array(p0, p2);
 
-        } else if (*t == DOUBLE_ARRAY) {
+        } else if (**t == *DOUBLE_ARRAY) {
 
             create_double_array(p0, p2);
 
-        } else if (*t == CHARACTER_ARRAY) {
+        } else if (**t == *CHARACTER_ARRAY) {
 
             create_character_array(p0, p2);
         }
@@ -314,21 +314,21 @@ void destroy_array(void* p0, const void* p1, const void* p2) {
 
     if (p1 != NULL_POINTER) {
 
-        int* t = (int*) p1;
+        int** t = (int**) p1;
 
-        if (*t == POINTER_ARRAY) {
+        if (**t == *POINTER_ARRAY) {
 
             destroy_pointer_array(p0, p2);
 
-        } else if (*t == INTEGER_ARRAY) {
+        } else if (**t == *INTEGER_ARRAY) {
 
             destroy_integer_array(p0, p2);
 
-        } else if (*t == DOUBLE_ARRAY) {
+        } else if (**t == *DOUBLE_ARRAY) {
 
             destroy_double_array(p0, p2);
 
-        } else if (*t == CHARACTER_ARRAY) {
+        } else if (**t == *CHARACTER_ARRAY) {
 
             destroy_character_array(p0, p2);
         }
@@ -350,21 +350,21 @@ void resize_array(void* p0, const void* p1, const void* p2) {
 
     if (p1 != NULL_POINTER) {
 
-        int* t = (int*) p1;
+        int** t = (int**) p1;
 
-        if (*t == POINTER_ARRAY) {
+        if (**t == *POINTER_ARRAY) {
 
             resize_pointer_array(p0, p2);
 
-        } else if (*t == INTEGER_ARRAY) {
+        } else if (**t == *INTEGER_ARRAY) {
 
             resize_integer_array(p0, p2);
 
-        } else if (*t == DOUBLE_ARRAY) {
+        } else if (**t == *DOUBLE_ARRAY) {
 
             resize_double_array(p0, p2);
 
-        } else if (*t == CHARACTER_ARRAY) {
+        } else if (**t == *CHARACTER_ARRAY) {
 
             resize_character_array(p0, p2);
         }

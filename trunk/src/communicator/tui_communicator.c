@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2004-12-17 12:48:43 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,7 +32,7 @@
 #include "../array/array.c"
 #include "../global/character_constants.c"
 #include "../global/structure_constants.c"
-#include "../global/variable.c"
+#include "../global/variables.c"
 
 /**
  * Receives a tui source and writes it into a destination byte array.

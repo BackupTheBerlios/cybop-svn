@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.27 $ $Date: 2004-12-17 12:48:44 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,7 +35,7 @@
 #include <stdio.h>
 #include "../array/array.c"
 #include "../global/structure_constants.c"
-#include "../global/variable.c"
+#include "../global/variables.c"
 #include "../parser/parser.c"
 
 /**

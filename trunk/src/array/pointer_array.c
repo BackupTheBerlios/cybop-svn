@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.15 $ $Date: 2004-12-15 12:50:28 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,7 +49,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../global/log_constants.c"
-#include "../global/variable.c"
+#include "../global/variables.c"
 #include "../logger/logger.c"
 
 //
@@ -77,7 +77,7 @@ void create_pointer_array(void* p0, const void* p1) {
             // Determine size as product of element count and type size.
             int* s = INTEGER_NULL_POINTER;
             create_integer((void*) &s);
-            *s = **c * POINTER_PRIMITIVE_SIZE;
+            *s = **c * *POINTER_PRIMITIVE_SIZE;
 
             // A minimal space in memory is always allocated,
             // even if the requested size is zero.
@@ -152,7 +152,7 @@ void resize_pointer_array(void* p0, const void* p1) {
             // Determine size as product of element count and type size.
             int* s = INTEGER_NULL_POINTER;
             create_integer((void*) &s);
-            *s = **c * POINTER_PRIMITIVE_SIZE;
+            *s = **c * *POINTER_PRIMITIVE_SIZE;
 
             // Create a new array with extended size.
             *a = (void*) realloc(*a, *s);
@@ -227,7 +227,7 @@ void compare_pointer_array_elements(const void* p0, const void* p1, const void* 
                         }
 
                         // Determine size.
-                        *s = *j * POINTER_PRIMITIVE_SIZE;
+                        *s = *j * *POINTER_PRIMITIVE_SIZE;
 
                         // Determine the next elements at array plus index.
                         e0 = (void**) (*a0 + *s);
@@ -297,7 +297,7 @@ void set_pointer_array_elements(void* p0, const void* p1, const void* p2, const 
                     create_integer((void*) &j);
                     *j = 0;
                     // The destination base to start copying to.
-                    void* db = (void*) (*da + **i * POINTER_PRIMITIVE_SIZE);
+                    void* db = (void*) (*da + **i * *POINTER_PRIMITIVE_SIZE);
                     // The source element.
                     void** se = POINTER_NULL_POINTER;
                     // The destination element.
@@ -315,7 +315,7 @@ void set_pointer_array_elements(void* p0, const void* p1, const void* p2, const 
                         }
 
                         // Determine size.
-                        *s = *j * POINTER_PRIMITIVE_SIZE;
+                        *s = *j * *POINTER_PRIMITIVE_SIZE;
 
                         // Determine source and destination element.
                         se = (void**) (*sa + *s);
@@ -386,9 +386,9 @@ void remove_pointer_array_elements(void* p0, const void* p1, const void* p2, con
                     create_integer((void*) &r);
                     *r = **m - (**i + **c);
                     // The destination base.
-                    void* db = (void*) (*a + **i * POINTER_PRIMITIVE_SIZE);
+                    void* db = (void*) (*a + **i * *POINTER_PRIMITIVE_SIZE);
                     // The source base.
-                    void* sb = (void*) (*a + **i * POINTER_PRIMITIVE_SIZE + **c * POINTER_PRIMITIVE_SIZE);
+                    void* sb = (void*) (*a + **i * *POINTER_PRIMITIVE_SIZE + **c * *POINTER_PRIMITIVE_SIZE);
                     // The source element.
                     void** se = POINTER_NULL_POINTER;
                     // The destination element.
@@ -413,7 +413,7 @@ void remove_pointer_array_elements(void* p0, const void* p1, const void* p2, con
                         }
 
                         // Determine size.
-                        *s = *j * POINTER_PRIMITIVE_SIZE;
+                        *s = *j * *POINTER_PRIMITIVE_SIZE;
 
                         // Determine source and destination element.
                         de = (void**) (db + *s);
@@ -487,7 +487,7 @@ void get_pointer_array_elements(const void* p0, const void* p1, void* p2, const 
                     create_integer((void*) &j);
                     *j = 0;
                     // The source base to start copying from.
-                    void* sb = (void*) (*sa + **i * POINTER_PRIMITIVE_SIZE);
+                    void* sb = (void*) (*sa + **i * *POINTER_PRIMITIVE_SIZE);
                     // The source element.
                     void** se = POINTER_NULL_POINTER;
                     // The destination element.
@@ -505,7 +505,7 @@ void get_pointer_array_elements(const void* p0, const void* p1, void* p2, const 
                         }
 
                         // Determine size.
-                        *s = *j * POINTER_PRIMITIVE_SIZE;
+                        *s = *j * *POINTER_PRIMITIVE_SIZE;
 
                         // Determine source and destination element.
                         se = (void**) (sb + *s);
@@ -603,7 +603,7 @@ void get_pointer_array_elements_index(const void* p0, const void* p1, const void
                             }
 
                             // Determine size.
-                            *s = *j * POINTER_PRIMITIVE_SIZE;
+                            *s = *j * *POINTER_PRIMITIVE_SIZE;
 
                             // Determine element.
                             e = (void*) (*a + *s);

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2004-12-15 07:49:39 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -95,7 +95,7 @@ void set_signal(void* p0, void* p1, void* p2,
                 if (*i == **s) {
 
                     // Increase size.
-                    **s = **s * SIGNAL_MEMORY_RESIZE_FACTOR + 1;
+                    **s = **s * *SIGNAL_MEMORY_RESIZE_FACTOR + 1;
 
                     // Resize abstractions, models, details, priorities.
                     resize_array((void*) &a, (void*) &POINTER_ARRAY, p2);
