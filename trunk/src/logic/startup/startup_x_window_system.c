@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-03-20 17:53:34 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-03-21 01:26:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -52,10 +52,10 @@
  */
 void startup_x_window_system(void* p0, const void* p1, const void* p2, const void* p3) {
 
-    // The x window system display.
+    // The display.
     void* d = POINTER_NULL_POINTER;
 
-    // Get x window system display.
+    // Get display.
     get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_ARRAY);
 
     if (d != NULL_POINTER) {
@@ -76,8 +76,30 @@ void startup_x_window_system(void* p0, const void* p1, const void* p2, const voi
         // xserver, screens, hardware (input devices etc.).
         d = (void*) XOpenDisplay(n);
 
-        // Set x window system display.
+        // Create screen.
+        int* s = INTEGER_NULL_POINTER;
+        create_integer((void*) &s);
+        *s = DefaultScreen(d);
+
+/*??
+        // Preset background pixel values.
+        unsigned long* bg = UNSIGNED_LONG_NULL_POINTER;
+        create_integer((void*) &bg);
+        *bg = WhitePixel(d, s);
+
+        // Preset foreground pixel values.
+        unsigned long * fg = UNSIGNED_LONG_NULL_POINTER;
+        create_integer((void*) &fg);
+        *fg = (int) BlackPixel(d, s);
+*/
+
+        // Set x window system parameters as internals.
         set_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_SCREEN_INTERNAL, (void*) &s, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+/*??
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL, (void*) &bg, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL, (void*) &fg, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+*/
     }
 }
 

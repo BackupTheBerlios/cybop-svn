@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-03-20 17:53:34 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-03-21 01:26:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -67,6 +67,7 @@ void shutdown_service(const void* p0, const void* p1,
     void** sdc = NULL_POINTER;
     void** sds = NULL_POINTER;
 
+/*??
     // Get parameters.
     get_compound_element_by_name(p0, p1,
         (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
@@ -107,18 +108,23 @@ void shutdown_service(const void* p0, const void* p1,
         }
     }
 
-    // Reset comparison result.
-    r = 0;
+    // Only shutdown x window system, if a correct abstraction was found above.
+    if (r == 1) {
 
-    if (r != 1) {
+        // Reset comparison result.
+        r = 0;
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        if (r != 1) {
 
-        if (r == 1) {
+            compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-            shutdown_x_window_system(p5, p2, p3, p4);
+            if (r == 1) {
+
+                shutdown_x_window_system(p5, p2, p3, p4);
+            }
         }
     }
+*/
 }
 
 /* SHUTDOWN_SOURCE */

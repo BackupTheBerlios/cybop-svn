@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-03-20 01:43:33 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-03-21 01:26:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -41,7 +41,7 @@
  * To the mechanisms belong:
  * - unix socket
  * - tcp socket
- * - x windows
+ * - x window system
  *
  * These have their own internal signal/ action/ event/ interrupt
  * waiting loops which get activated here.
@@ -89,22 +89,6 @@ void activate_input_output(void* p0) {
         if (r == 1) {
 
 //??            receive_tcp_socket(p0);
-            r = 0;
-        }
-
-        f = POINTER_NULL_POINTER;
-    }
-
-    // X windows.
-    get_array_elements(p0, (void*) X_WINDOWS_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
-
-    if (f != NULL_POINTER) {
-
-        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
-
-        if (r == 1) {
-
-//??            receive_x_windows(p0);
             r = 0;
         }
 

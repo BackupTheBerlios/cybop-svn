@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2005-03-20 17:53:33 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2005-03-21 01:26:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -257,12 +257,6 @@ void send_message(const void* p0, const void* p1,
 //??            init_x();
 
 /*??
-            // The output screen.
-            x->screen = DefaultScreen(x->display);
-            // Voreinstellung fuer Pixelwerte
-            x->background = WhitePixel(x->display, x->screen);
-            x->foreground = BlackPixel(x->display, x->screen);
-
             // Window-position
             x->hint.x = 100;
             x->hint.y = 100;

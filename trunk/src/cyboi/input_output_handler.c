@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-03-20 01:43:33 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-03-21 01:26:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
  * To the mechanisms belong:
  * - unix socket
  * - tcp socket
- * - x windows
+ * - x window system
  *
  * @param p0 the internals memory
  */
@@ -86,29 +86,13 @@ void startup_input_output(void* p0) {
 
         f = POINTER_NULL_POINTER;
     }
-
-    // X windows.
-    get_array_elements(p0, (void*) X_WINDOWS_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
-
-    if (f != NULL_POINTER) {
-
-        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
-
-        if (r == 1) {
-
-//??            create_x_windows_display(p0);
-            r = 0;
-        }
-
-        f = POINTER_NULL_POINTER;
-    }
 }
 
 /**
  * Shuts down the input output mechanisms.
  *
  * To the mechanisms belong:
- * - x windows
+ * - x window system
  * - tcp socket
  * - unix socket
  *
@@ -149,22 +133,6 @@ void shutdown_input_output(void* p0) {
         if (r == 1) {
 
             destroy_tcp_server_socket(p0);
-            r = 0;
-        }
-
-        f = POINTER_NULL_POINTER;
-    }
-
-    // X windows.
-    get_array_elements(p0, (void*) X_WINDOWS_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
-
-    if (f != NULL_POINTER) {
-
-        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
-
-        if (r == 1) {
-
-//??            destroy_x_windows_display(p0);
             r = 0;
         }
 

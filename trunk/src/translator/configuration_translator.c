@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2005-03-20 01:43:34 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2005-03-21 01:26:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -275,25 +275,6 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
 
                                 // Set configuration parameter in internals memory.
                                 set_array_elements(*d, (void*) TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &dm, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                            }
-                        }
-
-                        if (r != 1) {
-
-                            compare_arrays(sn, (void*) &snc, (void*) X_WINDOWS_ACTIVE_CONFIGURATION_NAME, (void*) X_WINDOWS_ACTIVE_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-                            if (r == 1) {
-
-                                log_message_debug("Found x windows server active configuration name.");
-
-                                // Create destination model.
-                                create_model((void*) &dm, (void*) ONE_NUMBER, (void*) ONE_NUMBER,
-                                    sm, (void*) &smc,
-                                    sa, (void*) &sac,
-                                    sc, (void*) &scc);
-
-                                // Set configuration parameter in internals memory.
-                                set_array_elements(*d, (void*) X_WINDOWS_ACTIVE_INTERNAL, (void*) &dm, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
                             }
                         }
 

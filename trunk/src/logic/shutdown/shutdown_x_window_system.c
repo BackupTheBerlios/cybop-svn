@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-03-20 17:53:34 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-03-21 01:26:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -58,6 +58,21 @@ void shutdown_x_window_system(void* p0, const void* p1, const void* p2, const vo
     get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_ARRAY);
 
     if (d != POINTER_NULL_POINTER) {
+
+        // Destroy foreground pixel values.
+        void** fg = POINTER_NULL_POINTER;
+        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL, (void*) &fg, (void*) POINTER_ARRAY);
+        destroy_integer((void*) fg);
+
+        // Destroy background pixel values.
+        void** bg = POINTER_NULL_POINTER;
+        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL, (void*) &bg, (void*) POINTER_ARRAY);
+        destroy_integer((void*) bg);
+
+        // Destroy screen.
+        void** s = POINTER_NULL_POINTER;
+        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_SCREEN_INTERNAL, (void*) &s, (void*) POINTER_ARRAY);
+        destroy_integer((void*) s);
 
         XCloseDisplay(*d);
 
