@@ -34,9 +34,57 @@
 /**
  * This is the operation handler.
  *
- * @version $Revision: 1.7 $ $Date: 2004-02-29 18:33:30 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-03-01 17:08:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+//
+// Operation container.
+//
+
+/**
+ * Creates the operation container.
+ *
+ * @param p0 the operation memory model
+ */
+void create_operation_container(void* p0) {
+
+    struct operation* m = (struct operation*) p0;
+
+    if (m != (void*) 0) {
+
+        log_message((void*) &INFO_LOG_LEVEL, "Create operation container.");
+
+        m->value = (void*) malloc(sizeof(struct array));
+        initialize_array(m->value);
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not create operation container. The operation memory model is null.");
+    }
+}
+
+/**
+ * Destroys the operation container.
+ *
+ * @param p0 the operation memory model
+ */
+void destroy_operation_container(void* p0) {
+
+    struct operation* m = (struct operation*) p0;
+
+    if (m != (void*) 0) {
+
+        log_message((void*) &INFO_LOG_LEVEL, "Destroy operation container.");
+
+        finalize_array(m->value);
+        free(m->value);
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not destroy operation container. The operation memory model is null.");
+    }
+}
 
 //
 // Operation model.
@@ -56,11 +104,11 @@ void initialize_operation_model(void* p0, void* p1) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Initialize operation model.");
 
-        // Read input stream and transform to inputs and outputs.
-        void* io = get_sub_string(p1, (void*) COMMA_SEPARATOR);
-        void* r = get_remaining_string(p1, (void*) COMMA_SEPARATOR);
+        // Read input stream and transform to operation with operands.
+        void* s = get_sub_string(p1, (void*) COMMA_CHARACTER);
+        void* r = get_remaining_string(p1, (void*) COMMA_CHARACTER);
 
-        add_array_element(m->inputs_outputs, io);
+        add_array_element(m->value, s);
 
         if (r != (void*) 0) {
 
@@ -87,20 +135,27 @@ void finalize_operation_model(void* p0, void* p1) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Finalize operation model.");
 
-        // Write output stream and transform from inputs and outputs.
-        int c = 0;
-        get_array_count(m->inputs_outputs, (void*) &c);
+        if (p1 != (void*) 0) {
 
-        if (c > 0) {
+            // Write output stream by transforming from operation with operands.
+            int c = 0;
+            get_array_count(m->value, (void*) &c);
 
-            int i = c - 1;
-            void* io = get_array_element(m->inputs_outputs, (void*) &i);
-            remove_array_element(m->inputs_outputs, (void*) &i);
+            if (c > 0) {
 
-            strcat((char*) p1, COMMA_SEPARATOR);
-            strcat((char*) p1, (char*) io);
+                int i = c - 1;
+                void* s = get_array_element(m->value, (void*) &i);
+                remove_array_element(m->value, (void*) &i);
 
-            finalize_operation_model(p0, p1);
+                strcat((char*) p1, COMMA_CHARACTER);
+                strcat((char*) p1, (char*) s);
+
+                finalize_operation_model(p0, p1);
+            }
+
+        } else {
+
+            log_message((void*) &INFO_LOG_LEVEL, "Did not finalize operation model. The cybol model is null.");
         }
 
     } else {

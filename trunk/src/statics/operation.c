@@ -36,13 +36,16 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.2 $ $Date: 2004-02-29 15:24:26 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-03-01 17:08:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct operation {
 
-    /** The inputs and outputs. */
-    void* inputs_outputs;
+    /**
+     * The value in the form:
+     * operation, operand1, operand2, operand3, ...
+     */
+    void* value;
 };
 
 /* OPERATION_SOURCE */

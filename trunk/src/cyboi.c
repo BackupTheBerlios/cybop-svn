@@ -1,7 +1,7 @@
 /*
  * $RCSfile: cyboi.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -43,7 +43,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.10 $ $Date: 2004-02-29 23:32:51 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-03-01 17:08:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -133,10 +133,15 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
                     log_message((void*) &INFO_LOG_LEVEL, "1");
                     handle_compound_signal(p0, s, p);
 
-                } else {
+                } else if (strcmp(a, OPERATION_MODEL) == 0) {
 
                     log_message((void*) &INFO_LOG_LEVEL, "2");
-                    handle_operation_signal(s, a, p1, p2, p3, (void*) &f);
+                    handle_operation_signal(s, p1, p2, p3, (void*) &f);
+
+                } else {
+
+                    log_message((void*) &WARNING_LOG_LEVEL, "Could not handle signal. The signal abstraction is unknown.");
+                    log_message((void*) &WARNING_LOG_LEVEL, a);
                 }
 
             } else {

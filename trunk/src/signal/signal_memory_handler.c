@@ -51,7 +51,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.22 $ $Date: 2004-03-01 07:31:13 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2004-03-01 17:08:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -390,30 +390,30 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
 
         int count = 0;
         get_array_count(m->part_models, (void*) &count);
-        int pos = 0;
+        int p = 0;
         int i = 0;
-        int* p = (void*) 0;
-        void* a = (void*) 0;
-        void* l = (void*) 0;
+        int* position = (void*) 0;
+        void* abstraction = (void*) 0;
+        void* location = (void*) 0;
         void* part = (void*) 0;
 
         // All positions.
-        while (pos < count) {
+        while (p < count) {
 
             // All parts.
             while (i < count) {
 
                 // Determine position.
-                p = (int*) get_map_element_at_index(m->position_models, (void*) &i);
+                position = (int*) get_map_element_at_index(m->position_models, (void*) &i);
 
                 // All parts at the current position.
-                if (*p == pos) {
+                if (*position == p) {
 
                     // Determine abstraction.
-                    a = get_map_element_at_index(m->part_abstractions, (void*) &i);
+                    abstraction = get_map_element_at_index(m->part_abstractions, (void*) &i);
 
                     // Determine abstraction.
-                    l = get_map_element_at_index(m->part_locations, (void*) &i);
+                    location = get_map_element_at_index(m->part_locations, (void*) &i);
 
                     // Determine part signal as dynamics model.
                     part = get_map_element_at_index(m->part_models, (void*) &i);
@@ -423,7 +423,7 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
                     // (Each signal has a priority. A signal may consist of "part"
                     // signals. The "part" signals cannot have higher/lower priority
                     // than their original "whole" signal.)
-                    add_signal(p0, part, abstr, p2);
+                    add_signal(p0, part, abstraction, p2);
 
                     break;
                 }
@@ -431,12 +431,12 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
                 i++;
             }
 
-            pos++;
+            p++;
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not handle compound signal. The signal dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not handle compound signal. The signal model is null.");
     }
 }
 
@@ -444,13 +444,12 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
  * Handles the operation signal.
  *
  * @param p0 the operation signal
- * @param p1 the abstraction
- * @param p2 the statics
- * @param p3 the dynamics
- * @param p4 the internals
- * @param p5 the shutdown flag
+ * @param p1 the statics
+ * @param p2 the dynamics
+ * @param p3 the internals
+ * @param p4 the shutdown flag
  */
-void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Handle operation signal.");
 
@@ -458,25 +457,30 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     if (o != (void*) 0) {
 
-        char* a = (char*) p1;
-        void* io = o->inputs_outputs;
+        void* v = o->value;
 
-        if (io != (void*) 0) {
+        if (v != (void*) 0) {
+
+            log_message((void*) &INFO_LOG_LEVEL, "TEST 0");
+
+            char* a = (char*) get_array_element(v, (void*) &ZERO_NUMBER);
+
+            log_message((void*) &INFO_LOG_LEVEL, "TEST 1");
 
             if (strcmp(a, ADD_MODEL) == 0) {
 
-                add(get_array_element(io, (void*) &ZERO_NUMBER), get_array_element(io, (void*) &ONE_NUMBER), get_array_element(io, (void*) &TWO_NUMBER));
+                add(get_array_element(v, (void*) &ONE_NUMBER), get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER));
 
             } else if (strcmp(a, CREATE_STATICS_MODEL) == 0) {
 
-                struct model* s = (struct model*) p2;
+                struct model* s = (struct model*) p1;
 
                 if (s != (void*) 0) {
 
                     //?? Work this out! Hand over 9 or just 3 parameters,
                     //?? for only part or also position and constraint?
-                    void* m = create_model(get_array_element(io, (void*) &ONE_NUMBER), get_array_element(io, (void*) &TWO_NUMBER), get_array_element(io, (void*) &THREE_NUMBER));
-                    set_map_element_with_name(s->part_models, get_array_element(io, (void*) &ZERO_NUMBER), m);
+                    void* m = create_model(get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
+                    set_map_element_with_name(s->part_models, get_array_element(v, (void*) &ONE_NUMBER), m);
 
                 } else {
 
@@ -485,14 +489,14 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
             } else if (strcmp(a, DESTROY_STATICS_MODEL) == 0) {
 
-                struct model* s = (struct model*) p2;
+                struct model* s = (struct model*) p1;
 
                 if (s != (void*) 0) {
 
                     //?? Work this out! Hand over 9 or just 3 parameters,
                     //?? for only part or also position and constraint?
-                    void* m = get_map_element_with_name(s->part_models, get_map_element_with_name(io, (void*) &ZERO_NUMBER));
-                    destroy_model(m, get_array_element(io, (void*) &ONE_NUMBER), get_array_element(io, (void*) &TWO_NUMBER), get_array_element(io, (void*) &THREE_NUMBER));
+                    void* m = get_map_element_with_name(s->part_models, get_map_element_with_name(v, (void*) &ONE_NUMBER));
+                    destroy_model(m, get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
 
                 } else {
 
@@ -501,14 +505,14 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
             } else if (strcmp(a, CREATE_DYNAMICS_MODEL) == 0) {
 
-                struct model* d = (struct model*) p3;
+                struct model* d = (struct model*) p2;
 
                 if (d != (void*) 0) {
 
                     //?? Work this out! Hand over 9 or just 3 parameters,
                     //?? for only part or also position and constraint?
-                    void* m = create_model(get_array_element(io, (void*) &ONE_NUMBER), get_array_element(io, (void*) &TWO_NUMBER), get_array_element(io, (void*) &THREE_NUMBER));
-                    set_map_element_with_name(d->part_models, get_array_element(io, (void*) &ZERO_NUMBER), m);
+                    void* m = create_model(get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
+                    set_map_element_with_name(d->part_models, get_array_element(v, (void*) &ONE_NUMBER), m);
 
                 } else {
 
@@ -517,14 +521,14 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
             } else if (strcmp(a, DESTROY_DYNAMICS_MODEL) == 0) {
 
-                struct model* d = (struct model*) p3;
+                struct model* d = (struct model*) p2;
 
                 if (d != (void*) 0) {
 
                     //?? Work this out! Hand over 9 or just 3 parameters,
                     //?? for only part or also position and constraint?
-                    void* m = get_map_element_with_name(d->part_models, get_map_element_with_name(io, (void*) &ZERO_NUMBER));
-                    destroy_model(m, get_array_element(io, (void*) &ONE_NUMBER), get_array_element(io, (void*) &TWO_NUMBER), get_array_element(io, (void*) &THREE_NUMBER));
+                    void* m = get_map_element_with_name(d->part_models, get_map_element_with_name(v, (void*) &ONE_NUMBER));
+                    destroy_model(m, get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
 
                 } else {
 
@@ -533,11 +537,11 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
             } else if (strcmp(a, SEND_MODEL) == 0) {
 
-                void* l = get_map_element_with_name(io, "language");
+                void* l = get_map_element_with_name(v, "language");
 
                 if (strcmp(l, X_WINDOWS_LANGUAGE) == 0) {
 
-                    send_x_windows_output(get_array_element(io, (void*) &ZERO_NUMBER), get_array_element(io, (void*) &ONE_NUMBER), p4);
+                    send_x_windows_output(get_array_element(v, (void*) &ONE_NUMBER), get_array_element(v, (void*) &TWO_NUMBER), p3);
 
                 } else if (strcmp(l, TUI_LANGUAGE) == 0) {
 
@@ -547,8 +551,9 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
             } else if (strcmp(a, EXIT_MODEL) == 0) {
 
-                // Set shutdown flag.
-                int* f = (int*) p5;
+                log_message((void*) &INFO_LOG_LEVEL, "Set shutdown flag.");
+
+                int* f = (int*) p4;
                 *f = 1;
             }
 
@@ -582,12 +587,12 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, v
 */
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The inputs/outputs is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The operation value is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The signal dynamics model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The signal model is null.");
     }
 }
 

@@ -26,6 +26,7 @@
 #define MODEL_HANDLER_SOURCE
 
 #include <string.h>
+#include "../cybol/cybol_model_handler.c"
 #include "../logger/log_handler.c"
 #include "../model/map.c"
 #include "../model/map_handler.c"
@@ -41,9 +42,391 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.11 $ $Date: 2004-02-29 18:33:30 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-03-01 17:08:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+//
+// Model containers.
+//
+
+/**
+ * Creates the model containers.
+ *
+ * @param p0 the memory model
+ */
+void create_model_containers(void* p0) {
+
+    struct model* m = (struct model*) p0;
+
+    if (m != (void*) 0) {
+
+        log_message((void*) &INFO_LOG_LEVEL, "Create model containers.");
+
+        m->part_abstractions = (void*) malloc(sizeof(struct map));
+        initialize_map(m->part_abstractions);
+
+        m->part_locations = (void*) malloc(sizeof(struct map));
+        initialize_map(m->part_locations);
+
+        m->part_models = (void*) malloc(sizeof(struct map));
+        initialize_map(m->part_models);
+
+        m->position_abstractions = (void*) malloc(sizeof(struct map));
+        initialize_map(m->position_abstractions);
+
+        m->position_locations = (void*) malloc(sizeof(struct map));
+        initialize_map(m->position_locations);
+
+        m->position_models = (void*) malloc(sizeof(struct map));
+        initialize_map(m->position_models);
+
+        m->constraint_abstractions = (void*) malloc(sizeof(struct map));
+        initialize_map(m->constraint_abstractions);
+
+        m->constraint_locations = (void*) malloc(sizeof(struct map));
+        initialize_map(m->constraint_locations);
+
+        m->constraint_models = (void*) malloc(sizeof(struct map));
+        initialize_map(m->constraint_models);
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not create model containers. The memory model is null.");
+    }
+}
+
+/**
+ * Destroys the model containers.
+ *
+ * @param p0 the memory model
+ */
+void destroy_model_containers(void* p0) {
+
+    struct model* m = (struct model*) p0;
+
+    if (m != (void*) 0) {
+
+        log_message((void*) &INFO_LOG_LEVEL, "Destroy model containers.");
+
+        finalize_map(m->constraint_models);
+        free(m->constraint_models);
+
+        finalize_map(m->constraint_locations);
+        free(m->constraint_locations);
+
+        finalize_map(m->constraint_abstractions);
+        free(m->constraint_abstractions);
+
+        finalize_map(m->position_models);
+        free(m->position_models);
+
+        finalize_map(m->position_locations);
+        free(m->position_locations);
+
+        finalize_map(m->position_abstractions);
+        free(m->position_abstractions);
+
+        finalize_map(m->part_models);
+        free(m->part_models);
+
+        finalize_map(m->part_locations);
+        free(m->part_locations);
+
+        finalize_map(m->part_abstractions);
+        free(m->part_abstractions);
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not destroy model containers. The memory model is null.");
+    }
+}
+
+//
+// Forward declarations.
+//
+// These functions are the only forward declarations. They are needed because
+// models can recursively create/ destroy compound models using functions which
+// are defined in model_handler.c.
+//
+
+/**
+ * Creates a memory model from a cybol model.
+ *
+ * @param p0 the cybol model
+ * @param p1 the location
+ * @param p2 the abstraction
+ * @return the memory model
+ */
+void* create_model(void* p0, void* p1, void* p2);
+
+/**
+ * Destroys a memory model to a cybol model.
+ *
+ * @param p0 the memory model
+ * @param p1 the cybol model
+ * @param p2 the location
+ * @param p3 the abstraction
+ */
+void destroy_model(void* p0, void* p1, void* p2, void* p3);
+
+//
+// Part.
+//
+
+/**
+ * Initializes the part.
+ *
+ * @param p0 the memory model
+ * @param p1 the cybol part attributes
+ */
+void initialize_part(void* p0, void* p1) {
+
+    struct model* m = (struct model*) p0;
+
+    if (m != (void*) 0) {
+
+        void* name = (void*) get_map_element_with_name(p1, (void*) NAME);
+        void* abstraction = (void*) 0;
+        void* location = (void*) 0;
+        // The model read as string from a cybol file.
+        void* model = (void*) 0;
+        // The model as stored in computer memory (RAM).
+        void* part = (void*) 0;
+
+        // Part.
+        abstraction = (void*) get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
+        location = (void*) get_map_element_with_name(p1, (void*) PART_LOCATION);
+        model = (void*) get_map_element_with_name(p1, (void*) PART_MODEL);
+        part = (void*) create_model(model, location, abstraction);
+        set_map_element_with_name(m->part_abstractions, name, abstraction);
+        set_map_element_with_name(m->part_locations, name, location);
+        set_map_element_with_name(m->part_models, name, part);
+
+        // Position.
+        abstraction = (void*) get_map_element_with_name(p1, (void*) POSITION_ABSTRACTION);
+        location = (void*) get_map_element_with_name(p1, (void*) POSITION_LOCATION);
+        model = (void*) get_map_element_with_name(p1, (void*) POSITION_MODEL);
+        part = (void*) create_model(model, location, abstraction);
+        set_map_element_with_name(m->position_abstractions, name, abstraction);
+        set_map_element_with_name(m->position_locations, name, location);
+        set_map_element_with_name(m->position_models, name, part);
+
+        // Constraint.
+        abstraction = (void*) get_map_element_with_name(p1, (void*) CONSTRAINT_ABSTRACTION);
+        location = (void*) get_map_element_with_name(p1, (void*) CONSTRAINT_LOCATION);
+        model = (void*) get_map_element_with_name(p1, (void*) CONSTRAINT_MODEL);
+        part = (void*) create_model(model, location, abstraction);
+        set_map_element_with_name(m->constraint_abstractions, name, abstraction);
+        set_map_element_with_name(m->constraint_locations, name, location);
+        set_map_element_with_name(m->constraint_models, name, part);
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize part. The memory model is null.");
+    }
+}
+
+/**
+ * Finalizes the part.
+ *
+ * @param p0 the memory model
+ * @param p1 the cybol part attributes
+ */
+void finalize_part(void* p0, void* p1) {
+
+    struct model* m = (struct model*) p0;
+
+    if (m != (void*) 0) {
+
+        void* name = (void*) get_map_element_with_name(p1, (void*) NAME);
+        void* abstraction = (void*) 0;
+        void* location = (void*) 0;
+        // The model read as string from a cybol file.
+        void* model = (void*) 0;
+        // The model as stored in computer memory (RAM).
+        void* part = (void*) 0;
+
+/*??
+        // Position.
+        memory_model = (void*) get_map_element_with_name(m->positions, name);
+        model = (void*) get_map_element_with_name(p1, (void*) POSITION_MODEL);
+        abstraction = (void*) get_map_element_with_name(p1, (void*) POSITION_ABSTRACTION);
+        destroy_statics(memory_model, model, abstraction);
+
+        // Part.
+        abstraction = (void*) get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
+        location = (void*) get_map_element_with_name(p1, (void*) PART_LOCATION);
+        model = (void*) get_map_element_with_name(p1, (void*) PART_MODEL);
+        part = (void*) get_map_element_with_name(m->part_models, name);
+        destroy_model(part, model, location, abstraction);
+*/
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize part. The memory model is null.");
+    }
+}
+
+//
+// Parts.
+//
+
+/**
+ * Initializes the parts.
+ *
+ * @param p0 the memory model
+ * @param p1 the cybol parts
+ */
+void initialize_parts(void* p0, void* p1) {
+
+    struct map* m = (struct map*) p1;
+    int count = 0;
+    int size = 0;
+    get_map_size(m, (void*) &size);
+    struct model* e = (void*) 0;
+
+    while (count < size) {
+
+        e = (struct model*) get_map_element_at_index(m, (void*) &count);
+
+        if (e != (void*) 0) {
+
+            initialize_part(p0, e->part_models);
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize parts. A cybol part is null.");
+        }
+
+        count++;
+    }
+}
+
+/**
+ * Finalizes the parts.
+ *
+ * @param p0 the memory model
+ * @param p1 the cybol parts
+ */
+void finalize_parts(void* p0, void* p1) {
+
+    struct map* m = (struct map*) p1;
+    int count = 0;
+    int size = 0;
+    get_map_size(m, (void*) &size);
+    struct model* e = (void*) 0;
+
+    while (count < size) {
+
+        e = (struct model*) get_map_element_at_index(m, (void*) &count);
+
+        if (e != (void*) 0) {
+
+            finalize_part(p0, e->part_models);
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize parts. A cybol part is null.");
+        }
+
+        count++;
+    }
+}
+
+//
+// Model.
+//
+
+/**
+ * Initializes the model from a cybol model.
+ *
+ * @param p0 the memory model
+ * @param p1 the cybol model
+ */
+void initialize_model(void* p0, void* p1) {
+
+    struct model* m = (struct model*) p0;
+
+    if (m != (void*) 0) {
+
+        log_message((void*) &INFO_LOG_LEVEL, "Initialize model.");
+
+/*??
+        //?? USE ARRAYS in ARRAY (instead of model with maps) here!!
+
+        // Create temporary cybol model.
+        struct statics_model* cybol = (struct statics_model*) malloc(sizeof(struct statics_model));
+        create_statics_model_containers((void*) cybol);
+
+        // Read statics cybol model from file path.
+        read_statics_cybol_model((void*) cybol, p1);
+
+        // Initialize statics model parts with statics cybol model.
+        if (cybol != (void*) 0) {
+
+            initialize_statics_parts(p0, cybol->parts);
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize statics model. The statics cybol model is null.");
+        }
+
+        // Destroy temporary statics cybol model.
+        destroy_statics_model_containers((void*) cybol);
+        free((void*) cybol);
+*/
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize model. The memory model is null.");
+    }
+}
+
+/**
+ * Finalizes the model to a cybol model.
+ *
+ * @param p0 the memory model
+ * @param p1 the cybol model
+ */
+void finalize_model(void* p0, void* p1) {
+
+    struct model* m = (struct model*) p0;
+
+    if (m != (void*) 0) {
+
+        log_message((void*) &INFO_LOG_LEVEL, "Finalize model.");
+
+/*??
+        //?? USE ARRAYS in ARRAY (instead of model with maps) here!!
+
+        // Create temporary statics cybol model.
+        struct statics_model* cybol = (struct statics_model*) malloc(sizeof(struct statics_model));
+        create_statics_model_containers((void*) cybol);
+
+        // Finalize statics model parts with statics cybol model.
+        if (cybol != (void*) 0) {
+
+            finalize_statics_parts(p0, cybol->parts);
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The statics cybol model is null.");
+        }
+
+        // Write statics cybol model to file path.
+        write_statics_cybol_model((void*) cybol, p1);
+
+        // Destroy temporary statics cybol model.
+        destroy_statics_model_containers((void*) cybol);
+        free((void*) cybol);
+*/
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize model. The memory model is null.");
+    }
+}
 
 //
 // Model part.
@@ -73,8 +456,8 @@ void set_model_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
         log_message((void*) &INFO_LOG_LEVEL, "Set model part: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
 
-        void* n = get_sub_string(p1, (void*) DOT_SEPARATOR);
-        void* r = get_remaining_string(p1, (void*) DOT_SEPARATOR);
+        void* n = get_sub_string(p1, (void*) DOT_CHARACTER);
+        void* r = get_remaining_string(p1, (void*) DOT_CHARACTER);
 
         if (r != (void*) 0) {
 
@@ -119,8 +502,8 @@ void remove_model_part(void* p0, void* p1) {
         log_message((void*) &INFO_LOG_LEVEL, "Remove model part: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
 
-        void* n = get_sub_string(p1, (void*) DOT_SEPARATOR);
-        void* r = get_remaining_string(p1, (void*) DOT_SEPARATOR);
+        void* n = get_sub_string(p1, (void*) DOT_CHARACTER);
+        void* r = get_remaining_string(p1, (void*) DOT_CHARACTER);
 
         if (r != (void*) 0) {
 
@@ -167,8 +550,8 @@ void* get_model_part(void* p0, void* p1) {
         log_message((void*) &INFO_LOG_LEVEL, "Get model part: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
 
-        void* n = get_sub_string(p1, (void*) DOT_SEPARATOR);
-        void* r = get_remaining_string(p1, (void*) DOT_SEPARATOR);
+        void* n = get_sub_string(p1, (void*) DOT_CHARACTER);
+        void* r = get_remaining_string(p1, (void*) DOT_CHARACTER);
 
         if (r != (void*) 0) {
 
@@ -209,8 +592,8 @@ void* get_model_part_position(void* p0, void* p1) {
         log_message((void*) &INFO_LOG_LEVEL, "Get model part position: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
 
-        void* n = get_sub_string(p1, (void*) DOT_SEPARATOR);
-        void* r = get_remaining_string(p1, (void*) DOT_SEPARATOR);
+        void* n = get_sub_string(p1, (void*) DOT_CHARACTER);
+        void* r = get_remaining_string(p1, (void*) DOT_CHARACTER);
 
         if (r != (void*) 0) {
 

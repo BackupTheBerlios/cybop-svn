@@ -31,7 +31,7 @@
 /**
  * This is the string helper.
  *
- * @version $Revision: 1.2 $ $Date: 2004-02-29 18:33:29 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-03-01 17:08:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,21 +39,71 @@
 // Constants.
 //
 
+/** The comma ',' character with ascii code 44. */
+static const char COMMA_CHARACTER = ',';
+
+/** The dot '.' character with ascii code 46. */
+static const char DOT_CHARACTER = '.';
+
+/** The slash '/' character with ascii code 47. */
+static const char SLASH_CHARACTER = '/';
+
+/** The string termination character '\0' with ascii code ??. */
+static const char TERMINATION_CHARACTER = '\0';
+
 /** The empty string. */
 static const char* EMPTY_STRING = "";
-
-/** The slash separator. */
-static const char* SLASH_SEPARATOR = "/";
-
-/** The dot separator. */
-static const char* DOT_SEPARATOR = ".";
-
-/** The comma separator. */
-static const char* COMMA_SEPARATOR = ",";
 
 //
 // Helper functions.
 //
+
+/**
+ * Returns the string length.
+ *
+ * It counts the number of characters within the string,
+ * until the string termination character "\0" is reached.
+ *
+ * @param p0 the string
+ * @param p1 the length
+ */
+void get_string_length(const void* p0, void* p1) {
+
+    if (p0 != (void*) 0) {
+
+        // Pointer to the first character of the string.
+        char* c = (char*) p0;
+
+        if (p1 != (void*) 0) {
+
+            // Pointer to the length integer.
+            int* i = (int*) p1;
+
+            if (*i == 0) {
+
+                // Since the string pointer is constant, it cannot be incremented
+                // itself. The i variable is incremented instead, until the string
+                // termination character is reached.
+                while (*(c + *i) != TERMINATION_CHARACTER) {
+
+                    (*i)++;
+                }
+
+            } else {
+
+                log_message((void*) &WARNING_LOG_LEVEL, "The initial string length should be zero.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get string length. The length is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get string length. The string is null.");
+    }
+}
 
 /**
  * Returns the first sub string in the given string.
@@ -63,14 +113,28 @@ static const char* COMMA_SEPARATOR = ",";
  *
  * @param p0 the string
  * @param p1 the separation
- * @return the sub string
+ * @param p2 the sub string
  */
-void* get_sub_string(void* p0, void* p1) {
+void get_sub_string(void* p0, void* p1) {
 
     void* ss = (void*) 0;
     char* s = (char*) p0;
+    char* sep = (void*) 0;
+
+/*??
+    int l = 0;
+    get_string_length(p0, (void*) &l);
+    int i = 0;
+
+    while (i < l) {
+
+    }
+*/
 
     if (s != (void*) 0) {
+
+        sep = strchr(s, *p1);
+        diff = sep - s;
 
 /*??
         int i = s->indexOf(p1);
@@ -89,8 +153,6 @@ void* get_sub_string(void* p0, void* p1) {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get sub string. The string is null.");
     }
-
-    return ss;
 }
 
 /**
@@ -98,30 +160,25 @@ void* get_sub_string(void* p0, void* p1) {
  *
  * @param p0 the string
  * @param p1 the separation
- * @return the remaining string
+ * @param p2 the remaining string
  */
-void* get_remaining_string(void* p0, void* p1) {
+void get_remaining_string(void* p0, void* p1) {
 
     void* rs = (void*) 0;
     char* s = (char*) p0;
+    char* sep = (void*) 0;
 
     if (s != (void*) 0) {
 
 /*??
-        int i = s->indexOf(p1);
-
-        if (i != -1) {
-
-            rs = s->substring(i + 1);
-        }
+        sep = strchr(s, *p1);
+        rs = sep + 1;
 */
 
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get remaining string. The string is null.");
     }
-
-    return rs;
 }
 
 /**

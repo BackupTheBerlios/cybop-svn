@@ -44,206 +44,9 @@
  *
  * It destroys a statics or dynamics memory model to a cybol model.
  *
- * @version $Revision: 1.3 $ $Date: 2004-02-29 19:55:27 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-03-01 17:08:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-
-//
-// Forward declaration.
-//
-// This function is the only forward declaration. It is needed because models
-// can recursively create/ destroy compound models using functions which are
-// defined in model_handler.c.
-//
-
-/**
- * Destroys a memory model to a cybol model.
- *
- * @param p0 the memory model
- * @param p1 the cybol model
- * @param p2 the location
- * @param p3 the abstraction
- */
-void destroy_model(void* p0, void* p1, void* p2, void* p3);
-
-//
-// Model containers.
-//
-
-/**
- * Destroys the model containers.
- *
- * @param p0 the memory model
- */
-void destroy_model_containers(void* p0) {
-
-    struct model* m = (struct model*) p0;
-
-    if (m != (void*) 0) {
-
-        log_message((void*) &INFO_LOG_LEVEL, "Destroy model containers.");
-
-        finalize_map(m->constraint_models);
-        free(m->constraint_models);
-
-        finalize_map(m->constraint_locations);
-        free(m->constraint_locations);
-
-        finalize_map(m->constraint_abstractions);
-        free(m->constraint_abstractions);
-
-        finalize_map(m->position_models);
-        free(m->position_models);
-
-        finalize_map(m->position_locations);
-        free(m->position_locations);
-
-        finalize_map(m->position_abstractions);
-        free(m->position_abstractions);
-
-        finalize_map(m->part_models);
-        free(m->part_models);
-
-        finalize_map(m->part_locations);
-        free(m->part_locations);
-
-        finalize_map(m->part_abstractions);
-        free(m->part_abstractions);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not destroy model containers. The memory model is null.");
-    }
-}
-
-//
-// Part.
-//
-
-/**
- * Finalizes the part.
- *
- * @param p0 the memory model
- * @param p1 the cybol part attributes
- */
-void finalize_part(void* p0, void* p1) {
-
-    struct model* m = (struct model*) p0;
-
-    if (m != (void*) 0) {
-
-        void* name = (void*) get_map_element_with_name(p1, (void*) NAME);
-        void* abstraction = (void*) 0;
-        void* location = (void*) 0;
-        // The model read as string from a cybol file.
-        void* model = (void*) 0;
-        // The model as stored in computer memory (RAM).
-        void* part = (void*) 0;
-
-/*??
-        // Position.
-        memory_model = (void*) get_map_element_with_name(m->positions, name);
-        model = (void*) get_map_element_with_name(p1, (void*) POSITION_MODEL);
-        abstraction = (void*) get_map_element_with_name(p1, (void*) POSITION_ABSTRACTION);
-        destroy_statics(memory_model, model, abstraction);
-
-        // Part.
-        abstraction = (void*) get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
-        location = (void*) get_map_element_with_name(p1, (void*) PART_LOCATION);
-        model = (void*) get_map_element_with_name(p1, (void*) PART_MODEL);
-        part = (void*) get_map_element_with_name(m->part_models, name);
-        destroy_model(part, model, location, abstraction);
-*/
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize part. The memory model is null.");
-    }
-}
-
-//
-// Parts.
-//
-
-/**
- * Finalizes the parts.
- *
- * @param p0 the memory model
- * @param p1 the cybol parts
- */
-void finalize_parts(void* p0, void* p1) {
-
-    struct map* m = (struct map*) p1;
-    int count = 0;
-    int size = 0;
-    get_map_size(m, (void*) &size);
-    struct model* e = (void*) 0;
-
-    while (count < size) {
-
-        e = (struct model*) get_map_element_at_index(m, (void*) &count);
-
-        if (e != (void*) 0) {
-
-            finalize_part(p0, e->part_models);
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize parts. A cybol part is null.");
-        }
-
-        count++;
-    }
-}
-
-//
-// Model.
-//
-
-/**
- * Finalizes the model to a cybol model.
- *
- * @param p0 the memory model
- * @param p1 the cybol model
- */
-void finalize_model(void* p0, void* p1) {
-
-    struct model* m = (struct model*) p0;
-
-    if (m != (void*) 0) {
-
-        log_message((void*) &INFO_LOG_LEVEL, "Finalize model.");
-
-/*??
-        //?? USE ARRAYS in ARRAY (instead of model with maps) here!!
-
-        // Create temporary statics cybol model.
-        struct statics_model* cybol = (struct statics_model*) malloc(sizeof(struct statics_model));
-        create_statics_model_containers((void*) cybol);
-
-        // Finalize statics model parts with statics cybol model.
-        if (cybol != (void*) 0) {
-
-            finalize_statics_parts(p0, cybol->parts);
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The statics cybol model is null.");
-        }
-
-        // Write statics cybol model to file path.
-        write_statics_cybol_model((void*) cybol, p1);
-
-        // Destroy temporary statics cybol model.
-        destroy_statics_model_containers((void*) cybol);
-        free((void*) cybol);
-*/
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize model. The memory model is null.");
-    }
-}
 
 /**
  * Destroys a memory model to a cybol model.
@@ -262,7 +65,7 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3) {
 
 //??        if (p != (void*) 0) {
 
-            log_message((void*) &INFO_LOG_LEVEL, "Destroy model: ");
+            log_message((void*) &INFO_LOG_LEVEL, "Destroy model.");
             log_message((void*) &INFO_LOG_LEVEL, p1);
 
             // Compound model.
@@ -276,6 +79,7 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3) {
             } else if (strcmp(a, OPERATION_MODEL) == 0) {
 
                 finalize_operation_model(p0, p1);
+                destroy_operation_container(p0);
                 free(p0);
 
             // Statics models.
