@@ -34,7 +34,7 @@ package cybop.core.category;
  * In the case of computer science, everything gets abstracted to 0 and 1.
  * But that also means that every abstraction has a bytecode representation.
  *
- * @version $Revision: 1.10 $ $Date: 2003-06-20 11:32:31 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-06-29 21:31:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Array {
@@ -438,7 +438,7 @@ public class Array {
 
             } else {
 
-                java.lang.System.out.println("DEBUG: Could not add java tree node. The array is null.");
+//??                java.lang.System.out.println("DEBUG: Could not add java tree node. The array is null.");
             }
 
         } else {
@@ -480,7 +480,7 @@ public class Array {
 
             } else {
 
-                java.lang.System.out.println("DEBUG: Could not remove java tree node. The array is null.");
+//??                java.lang.System.out.println("DEBUG: Could not remove java tree node. The array is null.");
             }
 
         } else {

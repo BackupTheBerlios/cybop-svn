@@ -34,7 +34,7 @@ import cybop.core.model.String;
  * It contains information about how to talk to a mouse, that is its pointer and
  * position etc.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-29 21:31:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class MouseModel extends Item {
@@ -47,17 +47,41 @@ public class MouseModel extends Item {
     public static final String POINTER_POSITION = new String("pointer_position");
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default pointer position.
+     * Returns the default pointer position category.
      *
-     * @return the default pointer position
+     * @return the default pointer position category
      */
-    public String getDefaultPointerPosition() {
+    public String getDefaultPointerPositionCategory() {
 
         return new String("cybop.core.model.Space");
+    }
+
+    //
+    // Categorization.
+    //
+
+    /**
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(MouseModel.POINTER_POSITION, getDefaultPointerPositionCategory());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(MouseModel.POINTER_POSITION);
+
+        super.decategorize();
     }
 
     //
@@ -65,21 +89,21 @@ public class MouseModel extends Item {
     //
 
     /**
-     * Initializes this mouse model.
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
         super.initialize();
 
-        setChild(MouseModel.POINTER_POSITION, createChild(getDefaultPointerPosition()));
+        setChild(MouseModel.POINTER_POSITION, createChild(getCategory(MouseModel.POINTER_POSITION)));
     }
 
     /**
-     * Finalizes this mouse model.
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
-        Space pointerPosition = (Space) getChild(MouseModel.POINTER_POSITION);
+        Item pointerPosition = getChild(MouseModel.POINTER_POSITION);
         removeChild(MouseModel.POINTER_POSITION);
         destroyChild(pointerPosition);
 

@@ -70,7 +70,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.35 $ $Date: 2003-06-23 10:23:10 $ $Author: christian $
+ * @version $Revision: 1.36 $ $Date: 2003-06-29 21:31:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -311,6 +311,16 @@ public class Launcher extends Family {
     //
     // Default categories.
     //
+
+    /**
+     * Returns the default controller category.
+     *
+     * @return the default controller category
+     */
+    public Item getDefaultControllerCategory() {
+
+        return new String("cybop.core.system.block.controller.OperatingSystemController");
+    }
 
     /**
      * Returns the default screen category.
@@ -1831,67 +1841,12 @@ public class Launcher extends Family {
 
                     throw new Exception("Could not dispatch java awt event. The launcher is null.");
                 }
-    
+
             } catch (Exception e) {
 
                 java.lang.System.out.println("ERROR: Could not dispatch java awt event. An exception occured:\n" + e);
             }
         }
     }
-
-    /**
-     * ?? OLD method !! Only kept here for reference purposes.
-     * Remove this method once the signal is handled by controller or processor!
-     *
-     * Listens and reacts to tree selection events.
-     *
-     * @param evt the event
-     */
-/*??
-    public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
-
-        // Determine application tree view as the event's source.
-        ResTree tv = (ResTree) evt.getSource();
-
-        if (tv != null) {
-
-            // Determine selected application tree node.
-            ApplicationTreeNode n = (ApplicationTreeNode) tv.getLastSelectedPathComponent();
-
-            if (n != null) {
-
-                if (n.isLeaf()) {
-
-                    if (n.isExternal() == false) {
-
-                        try {
-
-                            // Create the application corresponding to the clicked tree node.
-                            createApplication(n.getLocation(), n.getArguments(), n.getWorkPath());
-
-                        } catch (Exception e) {
-
-//??                            log(Level.SEVERE, "Error while creating application.", e);
-                            java.lang.System.out.println("Error while creating application." + e);
-                        }
-
-                    } else {
-
-                        try {
-
-                            // Create the external application corresponding to the clicked tree node.
-                            createExternalApplication(n.getLocation()/*??getCommand()*//*??, n.getArguments(), n.getWorkPath());
-
-                        } catch (Exception e) {
-
-//??                            log(Level.SEVERE, "Error while creating external application.", e);
-                            java.lang.System.out.println("Error while creating external application." + e);
-                        }
-                    }
-                }
-            }
-        }
-    }
-*/
 }
 

@@ -31,7 +31,7 @@ import cybop.core.model.String;
 /**
  * This class represents a screen item.<br><br>
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-29 21:31:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class DisplayItem extends Item {
@@ -70,6 +70,9 @@ public class DisplayItem extends Item {
     /** The orientation. */
     public static final String ORIENTATION = new String("orientation");
 
+    /** The child positioning. */
+    public static final String CHILD_POSITIONING = new String("child_positioning");
+
     //
     // Orientations.
     //
@@ -85,5 +88,21 @@ public class DisplayItem extends Item {
 
     /** The 270 degree orientation. */
     public static final String DEGREE_270_ORIENTATION = new String("270_degree_orientation");
+
+    //
+    // Child positionings.
+    //
+
+    /** The compass positioning. */
+    public static final String COMPASS_POSITIONING = new String("compass_positioning");
+
+    /** The box positioning. */
+    public static final String BOX_POSITIONING = new String("box_positioning");
+
+    /** The card positioning. */
+    public static final String CARD_POSITIONING = new String("card_positioning");
+
+    /** The grid bag positioning. */
+    public static final String GRID_BAG_POSITIONING = new String("grid_bag_positioning");
 }
 

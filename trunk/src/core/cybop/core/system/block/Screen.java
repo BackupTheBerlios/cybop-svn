@@ -24,7 +24,9 @@
 
 package cybop.core.system.block;
 
+import cybop.core.category.*;
 import cybop.core.model.Boolean;
+import cybop.core.model.String;
 import cybop.core.screen.*;
 import cybop.core.system.*;
 
@@ -33,10 +35,94 @@ import cybop.core.system.*;
  *
  * A screen is an output device that displays optical (graphical) information. 
  *
- * @version $Revision: 1.11 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-06-29 21:31:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Screen extends Block {
+
+    //
+    // Children names.
+    //
+
+    /** The resolution. */
+    public static final String RESOLUTION = new String("resolution");
+
+    //
+    // Resolutions.
+    //
+    
+    /** The 640x480 resolution. */
+    public static final String THE_640_480_RESOLUTION = new String("640_480_resolution");
+
+    /** The 800x600 resolution. */
+    public static final String THE_800_600_RESOLUTION = new String("800_600_resolution");
+
+    /** The 1024x768 resolution. */
+    public static final String THE_1024_768_RESOLUTION = new String("1024_768_resolution");
+
+    //
+    // Default categories.
+    //
+
+    /**
+     * Returns the default resolution category.
+     *
+     * @return the default resolution category
+     */
+    public Item getDefaultResolutionCategory() {
+
+        return null; //?? Screen.THE_640_480_RESOLUTION;
+    }
+
+    //
+    // Categorization.
+    //
+
+    /**
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(Screen.RESOLUTION, getDefaultResolutionCategory());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(Screen.RESOLUTION);
+
+        super.decategorize();
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this item.
+     */
+    public void initialize() throws Exception {
+
+        super.initialize();
+
+        setChild(Screen.RESOLUTION, createChild(getCategory(Screen.RESOLUTION)));
+    }
+
+    /**
+     * Finalizes this item.
+     */
+    public void finalizz() throws Exception {
+
+        Item resolution = getChild(Screen.RESOLUTION);
+        removeChild(Screen.RESOLUTION);
+        destroyChild(resolution);
+
+        super.finalizz();
+    }
 
     //
     // Showing models.

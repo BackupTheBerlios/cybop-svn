@@ -24,15 +24,113 @@
 
 package cybop.core.screen.model;
 
+import cybop.core.category.*;
 import cybop.core.model.String;
 import cybop.core.screen.*;
 
 /**
  * This class represents a desktop model.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-29 21:31:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class DesktopDisplay extends Display {
+
+    //
+    // Children names.
+    //
+
+    /** The menu. */
+    public static final String MENU = new String("menu");
+
+    /** The panel. */
+    public static final String PANEL = new String("panel");
+
+    /** The entry. */
+    public static final String ENTRY = new String("entry");
+
+    /** The window. */
+    public static final String WINDOW = new String("window");
+
+    //
+    // Default categories.
+    //
+
+    /**
+     * Returns the default menu category.
+     *
+     * @return the default menu category
+     */
+    public Item getDefaultMenuCategory() {
+
+        return null;
+    }
+
+    /**
+     * Returns the default panel category.
+     *
+     * @return the default panel category
+     */
+    public Item getDefaultPanelCategory() {
+
+        return null;
+    }
+
+    //
+    // Categorization.
+    //
+
+    /**
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(DesktopDisplay.MENU, getDefaultMenuCategory());
+        setCategory(DesktopDisplay.PANEL, getDefaultPanelCategory());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(DesktopDisplay.PANEL);
+        removeCategory(DesktopDisplay.MENU);
+
+        super.decategorize();
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this item.
+     */
+    public void initialize() throws Exception {
+
+        super.initialize();
+
+        setChild(DesktopDisplay.MENU, createChild(getCategory(DesktopDisplay.MENU)));
+        setChild(DesktopDisplay.PANEL, createChild(getCategory(DesktopDisplay.PANEL)));
+    }
+
+    /**
+     * Finalizes this item.
+     */
+    public void finalizz() throws Exception {
+
+        Item panel = getChild(DesktopDisplay.PANEL);
+        removeChild(DesktopDisplay.PANEL);
+        destroyChild(panel);
+
+        Item menu = getChild(DesktopDisplay.MENU);
+        removeChild(DesktopDisplay.MENU);
+        destroyChild(menu);
+
+        super.finalizz();
+    }
 }
 

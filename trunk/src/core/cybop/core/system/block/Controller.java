@@ -51,7 +51,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.23 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2003-06-29 21:31:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
@@ -508,10 +508,6 @@ public class Controller extends Block {
                 } else if (a.isEqualTo(Controller.HIDE_SYSTEM_INFORMATION_DISPLAY_ACTION)) {
 
                     hideSystemInformationDisplay(s);
-    
-                } else if (a.isEqualTo(Controller.MOUSE_CLICKED_ACTION)) {
-
-                    mouseClicked(s);
                 }
 
             } else {
@@ -620,82 +616,59 @@ public class Controller extends Block {
     }
 
     /**
-     * Reacts on mouse clicked action.
+     * ?? OLD method !! Only kept here for reference purposes.
+     * Remove this method once the signal is handled by controller or processor!
      *
-     * @param s the signal
-     * @exception Exception if the signal is null
+     * Listens and reacts to tree selection events.
+     *
+     * @param evt the event
      */
-    protected void mouseClicked(Signal s) throws Exception {
-
-        java.lang.System.out.println("\n\n\n\n\n mouseClicked \n\n\n\n\n");
-
-        if (s != null) {
-
-            MouseModel m = (MouseModel) s.getChild(Signal.OBJECT);
-
-            if (m != null) {
-
-                // Language.
-                s.setChild(Signal.LANGUAGE, Signal.NEURO_LANGUAGE);
-
 /*??
-                DisplayItem i = getItem((Space) m.getChild(MouseModel.POINTER_POSITION));
+    public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
 
-                if (i != null) {
+        // Determine application tree view as the event's source.
+        ResTree tv = (ResTree) evt.getSource();
 
-                    // Subject.
-                    // Determine the system which belongs to the clicked window.
-                    //?? s.setChild(Signal.SUBJECT, system belonging to the clicked window);
-    
-                    // Predicate.
-                    String a = (String) i.getChild(DisplayItem.ACTION);
+        if (tv != null) {
 
-                    s.setChild(Signal.PREDICATE, a);
+            // Determine selected application tree node.
+            ApplicationTreeNode n = (ApplicationTreeNode) tv.getLastSelectedPathComponent();
 
-                    // Sender object.
-                    // Determine the active console to identify the user.
-                    //?? s.setChild(Signal.SENDER_OBJECT, USER);
+            if (n != null) {
 
-                } else {
+                if (n.isLeaf()) {
 
-                    throw new Exception("Could not react on mouse clicked action. The graphic item is null.");
+                    if (n.isExternal() == false) {
+
+                        try {
+
+                            // Create the application corresponding to the clicked tree node.
+                            createApplication(n.getLocation(), n.getArguments(), n.getWorkPath());
+
+                        } catch (Exception e) {
+
+//??                            log(Level.SEVERE, "Error while creating application.", e);
+                            java.lang.System.out.println("Error while creating application." + e);
+                        }
+
+                    } else {
+
+                        try {
+
+                            // Create the external application corresponding to the clicked tree node.
+                            createExternalApplication(n.getLocation()/*??getCommand()*//*??, n.getArguments(), n.getWorkPath());
+
+                        } catch (Exception e) {
+
+//??                            log(Level.SEVERE, "Error while creating external application.", e);
+                            java.lang.System.out.println("Error while creating external application." + e);
+                        }
+                    }
                 }
-*/
-
-            } else {
-    
-                throw new Exception("Could not react on mouse clicked action. The mouse model is null.");
             }
-
-        } else {
-
-            throw new Exception("Could not react on mouse clicked action. The signal is null.");
         }
     }
-
-    /**
-     * Returns the item at the given position.
-     *
-     * @param p the position
-     * @return the item
-     * @exception Exception if the display is null
-     */
-    protected Item getItem(Space p) throws Exception {
-
-        Item i = null;
-        Display c = (Display) getChild(Controller.SYSTEM_DISPLAY);
-
-        if (c != null) {
-
-            i = c.getChild(p);
-
-        } else {
-
-            throw new Exception("Could not get item. The display is null.");
-        }
-
-        return i;
-    }
+*/
 
     /**
      * Controls the signal as server dummy.

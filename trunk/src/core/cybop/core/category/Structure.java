@@ -30,32 +30,10 @@ package cybop.core.category;
  * A structure knows about the positions of its children, relative to each other.
  * That means that this structure also is a special constellation of children.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-18 13:20:38 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-29 21:31:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Structure extends Hierarchy {
-
-    //
-    // Positions.
-    //
-
-    /** The index positioning. */
-//??    public static final String INDEX_POSITIONING = new String("index_positioning");
-
-    /** The list positioning. */
-//??    public static final String LIST_POSITIONING = new String("list_positioning");
-
-    /** The compass positioning. */
-//??    public static final String COMPASS_POSITIONING = new String("compass_positioning");
-
-    /** The box positioning. */
-//??    public static final String BOX_POSITIONING = new String("box_positioning");
-
-    /** The card positioning. */
-//??    public static final String CARD_POSITIONING = new String("card_positioning");
-
-    /** The grid bag positioning. */
-//??    public static final String GRID_BAG_POSITIONING = new String("grid_bag_positioning");
 
     //
     // Meta attributes.
