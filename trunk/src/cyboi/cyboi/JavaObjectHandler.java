@@ -30,7 +30,7 @@ package cyboi;
  * It is necessary only as long as the Cybernetics Oriented Interpreter (CYBOI)
  * is implemented in the Java programming language.
  *
- * @version $Revision: 1.7 $ $Date: 2003-08-14 12:13:20 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-08-18 06:59:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaObjectHandler {
@@ -50,6 +50,30 @@ class JavaObjectHandler {
 
     /** The height. */
     static java.lang.String HEIGHT = "height";
+
+    /** The left border. */
+    static java.lang.String LEFT_BORDER = "left_border";
+
+    /** The right border. */
+    static java.lang.String RIGHT_BORDER = "right_border";
+
+    /** The top border. */
+    static java.lang.String TOP_BORDER = "top_border";
+
+    /** The bottom border. */
+    static java.lang.String BOTTOM_BORDER = "bottom_border";
+
+    /** The positioning. */
+    static java.lang.String POSITIONING = "positioning";
+
+    /** The horizontal alignment. */
+    static java.lang.String HORIZONTAL_ALIGNMENT = "horizontal_alignment";
+
+    /** The vertical alignment. */
+    static java.lang.String VERTICAL_ALIGNMENT = "vertical_alignment";
+
+    /** The font. */
+    static java.lang.String FONT = "font";
 
     //
     // Java object.
@@ -119,6 +143,10 @@ class JavaObjectHandler {
 
             JavaObjectHandler.initialize_jframe((javax.swing.JFrame) p0, p1);                    
 
+        } else if (p0 instanceof javax.swing.JDialog) {
+
+            JavaObjectHandler.initialize_jdialog((javax.swing.JDialog) p0, p1);                    
+
         } else if (p0 instanceof javax.swing.JMenuBar) {
             
             JavaObjectHandler.initialize_jmenubar((javax.swing.JMenuBar) p0, p1);
@@ -130,6 +158,22 @@ class JavaObjectHandler {
         } else if (p0 instanceof javax.swing.JMenuItem) {
             
             JavaObjectHandler.initialize_jmenuitem((javax.swing.JMenuItem) p0, p1);
+
+        } else if (p0 instanceof javax.swing.JPanel) {
+            
+            JavaObjectHandler.initialize_jpanel((javax.swing.JPanel) p0, p1);
+
+        } else if (p0 instanceof javax.swing.JTabbedPane) {
+            
+            JavaObjectHandler.initialize_jtabbedpane((javax.swing.JTabbedPane) p0, p1);
+
+        } else if (p0 instanceof javax.swing.JButton) {
+            
+            JavaObjectHandler.initialize_jbutton((javax.swing.JButton) p0, p1);
+
+        } else if (p0 instanceof javax.swing.JLabel) {
+            
+            JavaObjectHandler.initialize_jlabel((javax.swing.JLabel) p0, p1);
         }
     }
 
@@ -163,6 +207,10 @@ class JavaObjectHandler {
                     
                 JavaObjectHandler.add_to_jframe((javax.swing.JFrame) p0, p1, p2);
 
+            } else if (p0 instanceof javax.swing.JDialog) {
+                    
+                JavaObjectHandler.add_to_jdialog((javax.swing.JDialog) p0, p1, p2);
+
             } else if (p0 instanceof javax.swing.JMenuBar) {
                 
                 JavaObjectHandler.add_to_jmenubar((javax.swing.JMenuBar) p0, p1, p2);
@@ -171,9 +219,13 @@ class JavaObjectHandler {
                 
                 JavaObjectHandler.add_to_jmenu((javax.swing.JMenu) p0, p1, p2);
     
-            } else if (p0 instanceof javax.swing.JMenuItem) {
+            } else if (p0 instanceof javax.swing.JPanel) {
                 
-                JavaObjectHandler.add_to_jmenuitem((javax.swing.JMenuItem) p0, p1, p2);
+                JavaObjectHandler.add_to_jpanel((javax.swing.JPanel) p0, p1, p2);
+    
+            } else if (p0 instanceof javax.swing.JTabbedPane) {
+                
+                JavaObjectHandler.add_to_jtabbedpane((javax.swing.JTabbedPane) p0, p1, p2);
             }
 
         } else {
@@ -193,16 +245,36 @@ class JavaObjectHandler {
 
         if (p0 != null) {
 
-            java.lang.System.out.println("INFO: Add to java object.");
+            java.lang.System.out.println("INFO: Remove from java object.");
             
             if (p0 instanceof javax.swing.JFrame) {
                     
                 JavaObjectHandler.remove_from_jframe((javax.swing.JFrame) p0, p1, p2);
+
+            } else if (p0 instanceof javax.swing.JDialog) {
+                    
+                JavaObjectHandler.remove_from_jdialog((javax.swing.JDialog) p0, p1, p2);
+
+            } else if (p0 instanceof javax.swing.JMenuBar) {
+                
+                JavaObjectHandler.remove_from_jmenubar((javax.swing.JMenuBar) p0, p1, p2);
+    
+            } else if (p0 instanceof javax.swing.JMenu) {
+                
+                JavaObjectHandler.remove_from_jmenu((javax.swing.JMenu) p0, p1, p2);
+    
+            } else if (p0 instanceof javax.swing.JPanel) {
+                
+                JavaObjectHandler.remove_from_jpanel((javax.swing.JPanel) p0, p1, p2);
+    
+            } else if (p0 instanceof javax.swing.JTabbedPane) {
+                
+                JavaObjectHandler.remove_from_jtabbedpane((javax.swing.JTabbedPane) p0, p1, p2);
             }
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not add to java object. The java object is null.");
+            java.lang.System.out.println("ERROR: Could not remove from java object. The java object is null.");
         }
     }
 
@@ -228,17 +300,6 @@ class JavaObjectHandler {
             java.lang.String height = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.HEIGHT);
             f.setSize(java.lang.Integer.parseInt(width), java.lang.Integer.parseInt(height));
             
-            java.awt.Container c = (java.awt.Container) f.getContentPane();
-            
-            if (c != null) {
-                
-                c.setLayout(new java.awt.BorderLayout());
-
-            } else {
-                
-                java.lang.System.out.println("ERROR: Could not initialize jframe. The content pane is null.");
-            }
-
         } else {
             
             java.lang.System.out.println("ERROR: Could not initialize jframe. The jframe is null.");
@@ -273,9 +334,22 @@ class JavaObjectHandler {
                     
                 f.setJMenuBar((javax.swing.JMenuBar) p1);
                 
-                //?? Temporary until SHOW communication signal is sent!
-                f.setVisible(true);
+            } else if (p1 instanceof java.awt.Component) {
+                    
+                java.awt.Container c = (java.awt.Container) f.getContentPane();
+                
+                if (c != null) {
+                    
+                    c.add((java.awt.Component) p1, p2);
+        
+                } else {
+                    
+                    java.lang.System.out.println("ERROR: Could not add to jframe. The content pane is null.");
+                }
             }
+            
+            //?? Temporary until SHOW communication signal is sent!
+            f.setVisible(true);
 
         } else {
             
@@ -301,11 +375,134 @@ class JavaObjectHandler {
             if (p1 instanceof javax.swing.JMenuBar) {
                     
                 f.setJMenuBar(null);
+                
+            } else if (p1 instanceof java.awt.Component) {
+                    
+                java.awt.Container c = (java.awt.Container) f.getContentPane();
+                
+                if (c != null) {
+                    
+                    c.remove((java.awt.Component) p1);
+        
+                } else {
+                    
+                    java.lang.System.out.println("ERROR: Could not remove from jframe. The content pane is null.");
+                }
             }
 
         } else {
             
             java.lang.System.out.println("ERROR: Could not remove from jframe. The jframe is null.");
+        }
+    }
+
+    //
+    // JDialog.
+    //
+
+    /**
+     * Initializes the jdialog.
+     *
+     * @param p0 the jdialog
+     * @param p1 the attributes
+     */
+    static void initialize_jdialog(java.lang.Object p0, java.lang.Object p1) {
+
+        javax.swing.JDialog d = (javax.swing.JDialog) p0;
+        
+        if (d != null) {
+
+            java.lang.System.out.println("INFO: Initialize jdialog.");
+            
+            java.lang.String width = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.WIDTH);
+            java.lang.String height = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.HEIGHT);
+            d.setSize(java.lang.Integer.parseInt(width), java.lang.Integer.parseInt(height));
+
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not initialize jdialog. The jdialog is null.");
+        }
+    }
+    
+    /**
+     * Finalizes the jdialog.
+     *
+     * @param p0 the jdialog
+     * @param p1 the attributes
+     */
+    static void finalize_jdialog(java.lang.Object p0, java.lang.Object p1) {
+    }
+    
+    /**
+     * Adds to the jdialog.
+     *
+     * @param p0 the jdialog
+     * @param p1 the child java object
+     * @param p2 the child position
+     */
+    static void add_to_jdialog(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
+
+        javax.swing.JDialog d = (javax.swing.JDialog) p0;
+        
+        if (d != null) {
+
+            java.lang.System.out.println("INFO: Add to jdialog.");
+                
+            if (p1 instanceof java.awt.Component) {
+                    
+                java.awt.Container c = (java.awt.Container) d.getContentPane();
+                
+                if (c != null) {
+                    
+                    c.add((java.awt.Component) p1, p2);
+        
+                } else {
+                    
+                    java.lang.System.out.println("ERROR: Could not add to jdialog. The content pane is null.");
+                }
+            }
+            
+            //?? Temporary until SHOW communication signal is sent!
+            d.setVisible(true);
+
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not add to jdialog. The jdialog is null.");
+        }
+    }
+    
+    /**
+     * Removes from the jdialog.
+     *
+     * @param p0 the jdialog
+     * @param p1 the child java object
+     * @param p2 the child position
+     */
+    static void remove_from_jdialog(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
+
+        javax.swing.JDialog d = (javax.swing.JDialog) p0;
+        
+        if (d != null) {
+
+            java.lang.System.out.println("INFO: Remove from jdialog.");
+            
+            if (p1 instanceof java.awt.Component) {
+                    
+                java.awt.Container c = (java.awt.Container) d.getContentPane();
+                
+                if (c != null) {
+                    
+                    c.remove((java.awt.Component) p1);
+        
+                } else {
+                    
+                    java.lang.System.out.println("ERROR: Could not remove from jdialog. The content pane is null.");
+                }
+            }
+            
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not remove from jdialog. The jdialog is null.");
         }
     }
 
@@ -513,24 +710,287 @@ class JavaObjectHandler {
     static void finalize_jmenuitem(java.lang.Object p0, java.lang.Object p1) {
     }
     
+    //
+    // JPanel.
+    //
+
     /**
-     * Adds to the jmenuitem.
+     * Initializes the jpanel.
      *
-     * @param p0 the jmenuitem
-     * @param p1 the child java object
-     * @param p2 the child position
+     * @param p0 the jpanel
+     * @param p1 the attributes
      */
-    static void add_to_jmenuitem(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
+    static void initialize_jpanel(java.lang.Object p0, java.lang.Object p1) {
+
+        javax.swing.JPanel p = (javax.swing.JPanel) p0;
+        
+        if (p != null) {
+
+            java.lang.System.out.println("INFO: Initialize jpanel.");
+            
+            java.lang.String left_border = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.LEFT_BORDER);
+            java.lang.String right_border = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.RIGHT_BORDER);
+            java.lang.String top_border = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.TOP_BORDER);
+            java.lang.String bottom_border = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.BOTTOM_BORDER);
+            java.lang.String positioning = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.POSITIONING);
+/*??
+            p.setBorder(javax.swing.BorderFactory.createEmptyBorder(
+                java.lang.Integer.parseInt(left_border),
+                java.lang.Integer.parseInt(right_border),
+                java.lang.Integer.parseInt(top_border),
+                java.lang.Integer.parseInt(bottom_border)));
+*/
+            
+            if ((positioning != null) && (positioning.equals("border"))) {
+                
+                p.setLayout(new java.awt.BorderLayout());
+            }
+            
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not initialize jpanel. The jpanel is null.");
+        }
     }
     
     /**
-     * Removes from the jmenuitem.
+     * Finalizes the jpanel.
      *
-     * @param p0 the jmenuitem
+     * @param p0 the jpanel
+     * @param p1 the attributes
+     */
+    static void finalize_jpanel(java.lang.Object p0, java.lang.Object p1) {
+    }
+    
+    /**
+     * Adds to the jpanel.
+     *
+     * @param p0 the jpanel
      * @param p1 the child java object
      * @param p2 the child position
      */
-    static void remove_from_jmenuitem(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
+    static void add_to_jpanel(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
+
+        javax.swing.JPanel p = (javax.swing.JPanel) p0;
+        
+        if (p != null) {
+
+            java.lang.System.out.println("INFO: Add to jpanel.");
+            
+            if (p1 instanceof java.awt.Component) {
+                    
+                p.add((java.awt.Component) p1, p2);
+            }
+
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not add to jpanel. The jpanel is null.");
+        }
+    }
+    
+    /**
+     * Removes from the jpanel.
+     *
+     * @param p0 the jpanel
+     * @param p1 the child java object
+     * @param p2 the child position
+     */
+    static void remove_from_jpanel(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
+
+        javax.swing.JPanel p = (javax.swing.JPanel) p0;
+        
+        if (p != null) {
+
+            java.lang.System.out.println("INFO: Remove from jpanel.");
+            
+            if (p1 instanceof java.awt.Component) {
+                    
+                p.remove((java.awt.Component) p1);
+            }
+
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not remove from jpanel. The jpanel is null.");
+        }
+    }
+
+    //
+    // JTabbedPane.
+    //
+
+    /**
+     * Initializes the jtabbedpane.
+     *
+     * @param p0 the jtabbedpane
+     * @param p1 the attributes
+     */
+    static void initialize_jtabbedpane(java.lang.Object p0, java.lang.Object p1) {
+
+        javax.swing.JTabbedPane tp = (javax.swing.JTabbedPane) p0;
+        
+        if (tp != null) {
+
+            java.lang.System.out.println("INFO: Initialize jtabbedpane.");
+            
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not initialize jtabbedpane. The jtabbedpane is null.");
+        }
+    }
+    
+    /**
+     * Finalizes the jtabbedpane.
+     *
+     * @param p0 the jtabbedpane
+     * @param p1 the attributes
+     */
+    static void finalize_jtabbedpane(java.lang.Object p0, java.lang.Object p1) {
+    }
+    
+    /**
+     * Adds to the jtabbedpane.
+     *
+     * @param p0 the jtabbedpane
+     * @param p1 the child java object
+     * @param p2 the child position
+     */
+    static void add_to_jtabbedpane(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
+
+        javax.swing.JTabbedPane tp = (javax.swing.JTabbedPane) p0;
+        
+        if (tp != null) {
+
+            java.lang.System.out.println("INFO: Add to jtabbedpane.");
+            
+            if (p1 instanceof javax.swing.JMenuItem) {
+                    
+                tp.add("Panel", (java.awt.Component) p1);
+            }
+
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not add to jtabbedpane. The jtabbedpane is null.");
+        }
+    }
+    
+    /**
+     * Removes from the jtabbedpane.
+     *
+     * @param p0 the jtabbedpane
+     * @param p1 the child java object
+     * @param p2 the child position
+     */
+    static void remove_from_jtabbedpane(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
+
+        javax.swing.JTabbedPane tp = (javax.swing.JTabbedPane) p0;
+        
+        if (tp != null) {
+
+            java.lang.System.out.println("INFO: Remove from jtabbedpane.");
+            
+            if (p1 instanceof javax.swing.JMenuItem) {
+                    
+                tp.remove((java.awt.Component) p1);
+            }
+
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not remove from jtabbedpane. The jtabbedpane is null.");
+        }
+    }
+
+    //
+    // JButton.
+    //
+
+    /**
+     * Initializes the jbutton.
+     *
+     * @param p0 the jbutton
+     * @param p1 the attributes
+     */
+    static void initialize_jbutton(java.lang.Object p0, java.lang.Object p1) {
+
+        javax.swing.JButton b = (javax.swing.JButton) p0;
+        
+        if (b != null) {
+
+            java.lang.System.out.println("INFO: Initialize jbutton.");
+            
+            java.lang.String name = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.NAME);
+            java.lang.String key_binding = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.KEY_BINDING);
+            b.setText(name);
+            
+            if (key_binding != null) {
+                
+                b.setMnemonic(java.lang.Integer.parseInt(key_binding));
+            }
+
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not initialize jbutton. The jbutton is null.");
+        }
+    }
+    
+    /**
+     * Finalizes the jbutton.
+     *
+     * @param p0 the jbutton
+     * @param p1 the attributes
+     */
+    static void finalize_jbutton(java.lang.Object p0, java.lang.Object p1) {
+    }
+
+    //
+    // JLabel.
+    //
+
+    /**
+     * Initializes the jlabel.
+     *
+     * @param p0 the jlabel
+     * @param p1 the attributes
+     */
+    static void initialize_jlabel(java.lang.Object p0, java.lang.Object p1) {
+
+        javax.swing.JLabel l = (javax.swing.JLabel) p0;
+        
+        if (l != null) {
+
+            java.lang.System.out.println("INFO: Initialize jlabel.");
+            
+            java.lang.String left_border = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.LEFT_BORDER);
+            java.lang.String right_border = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.RIGHT_BORDER);
+            java.lang.String top_border = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.TOP_BORDER);
+            java.lang.String bottom_border = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.BOTTOM_BORDER);
+            java.lang.String name = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.NAME);
+            java.lang.String horizontal_alignment = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.HORIZONTAL_ALIGNMENT);
+            java.lang.String vertical_alignment = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.VERTICAL_ALIGNMENT);
+            java.lang.String font = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.FONT);
+/*??
+            l.setBorder(javax.swing.BorderFactory.createEmptyBorder(
+                java.lang.Integer.parseInt(left_border),
+                java.lang.Integer.parseInt(right_border),
+                java.lang.Integer.parseInt(top_border),
+                java.lang.Integer.parseInt(bottom_border)));
+*/
+            l.setText(name);
+//??            l.setHorizontalAlignment(horizontal_alignment);
+//??            l.setVerticalAlignment(vertical_alignment);
+//??            l.setFont(new Font(null, Font.BOLD, 18));
+            
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not initialize jlabel. The jlabel is null.");
+        }
+    }
+    
+    /**
+     * Finalizes the jlabel.
+     *
+     * @param p0 the jlabel
+     * @param p1 the attributes
+     */
+    static void finalize_jlabel(java.lang.Object p0, java.lang.Object p1) {
     }
 }
 

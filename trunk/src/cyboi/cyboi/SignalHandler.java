@@ -33,7 +33,7 @@ package cyboi;
  * - send
  * - reset
  *
- * @version $Revision: 1.13 $ $Date: 2003-08-15 09:34:25 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-08-18 06:59:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -106,7 +106,7 @@ class SignalHandler {
     // Attributes.
     //
     
-    static java.lang.Object statics;
+    static java.lang.Object root;
 
     //
     // Signal.
@@ -204,19 +204,35 @@ class SignalHandler {
 
                 } else if (a.equals(SignalHandler.SHOW_SYSTEM_INFORMATION_ACTION)) {
                     
+/*??
+                    encode("system.controller.system_information_screen_model");
+                    
+                    show();
+*/
+                    
                     SignalHandler.reset(s);
 
+/*??
+                } else if (a.equals(SignalHandler.RECALL_PATIENT_ACTION)) {
+                    
+                    SignalHandler.reset(s);
+
+                } else if (a.equals(SignalHandler.REMEMBER_PATIENT_ACTION)) {
+                    
+                    SignalHandler.reset(s);
+
+*/
                 } else if (a.equals(SignalHandler.STARTUP_ACTION)) {
                     
-                    // Statics (system).
-                    SignalHandler.statics = ItemHandler.create_object(s.object, Statics.CATEGORY);
+                    // Root (statics).
+                    SignalHandler.root = ItemHandler.create_object(s.object, Statics.CATEGORY);
 
                     SignalHandler.reset(s);
 
                 } else if (a.equals(SignalHandler.SHUTDOWN_ACTION)) {
                     
-                    // Statics (system).
-                    ItemHandler.destroy_object(SignalHandler.statics, s.object, Statics.CATEGORY);
+                    // Root (statics).
+                    ItemHandler.destroy_object(SignalHandler.root, s.object, Statics.CATEGORY);
 
                     sf = true;
 
