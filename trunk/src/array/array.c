@@ -49,7 +49,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.24 $ $Date: 2005-03-30 14:15:41 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2005-04-05 16:22:53 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -269,6 +269,116 @@ void compare_arrays(const void* p0, const void* p1, const void* p2, const void* 
     }
 }
 
+
+/**
+ * Gets the array elements.
+ *
+ * @param p0 the array
+ * @param p1 the index
+ * @param p2 the elements (Hand over as array reference!)
+ * @param p3 the type
+ */
+void get_array_elements(const void* p0, const void* p1, void* p2, const void* p3) {
+
+    if (p3 != NULL_POINTER) {
+
+        int* t = (int*) p3;
+
+        if (*t == *POINTER_ARRAY) {
+
+            get_pointer_array_elements(p0, p1, p2);
+
+        } else if (*t == *INTEGER_ARRAY) {
+
+            get_integer_array_elements(p0, p1, p2);
+
+        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+
+            get_unsigned_long_array_elements(p0, p1, p2);
+
+        } else if (*t == *DOUBLE_ARRAY) {
+
+            get_double_array_elements(p0, p1, p2);
+
+        } else if (*t == *CHARACTER_ARRAY) {
+
+            get_character_array_elements(p0, p1, p2);
+        }
+
+    } else {
+
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+    }
+}
+
+
+/**
+ * get the firts position of the serach array in the array.
+ * 
+ * if found the search array then the position ist the position in the array
+ * else ist the position -1
+ *
+ * @param p0 the array
+ * @param p1 the array count
+ * @param p2 the search array
+ * @param p3 the search array count
+ * @param p4 the position (Hand over as reference!)
+ * @param p5 the type
+ */
+void get_index_in_array(const void* p0, const void* p1, const void* p2, const void* p3, void* p4, const void* p5) {
+
+    if (p4 != NULL_POINTER) {
+     
+        int* position = (int*) p4; 
+        *position = -1;
+
+        if (p3 != NULL_POINTER) {
+    
+            int* sc = (int*) p3;
+    
+            if (p1 != NULL_POINTER) {
+    
+                int* ac = (int*) p1;
+    
+                int array_counter = 0;
+                int comp_res = 0;
+                void* start_comp = NULL_POINTER;
+                
+                while (1) {
+                 
+                    if ( array_counter >= *ac-*sc+1 ) {
+    
+                        break;
+                    }
+    
+                    get_array_elements( p0, &array_counter, &start_comp, p5 );
+                    comp_res = 0;
+                    compare_array_elements( start_comp, p2, p3, &comp_res, p5);
+    
+                    if ( comp_res == 1 ) {
+                        
+                        //the search array is founded in array
+                        *position = array_counter;
+                        break;
+                    }                
+                             
+                    array_counter = array_counter+1;                                  
+                }
+                
+            } else {
+    
+    //??            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
+            }
+    
+        } else {
+    
+    //??        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
+        }
+    } else {
+      
+    }
+}
+
 /**
  * Sets the array elements.
  *
@@ -353,46 +463,6 @@ void remove_array_elements(void* p0, const void* p1, const void* p2, const void*
     }
 }
 
-/**
- * Gets the array elements.
- *
- * @param p0 the array
- * @param p1 the index
- * @param p2 the elements (Hand over as array reference!)
- * @param p3 the type
- */
-void get_array_elements(const void* p0, const void* p1, void* p2, const void* p3) {
-
-    if (p3 != NULL_POINTER) {
-
-        int* t = (int*) p3;
-
-        if (*t == *POINTER_ARRAY) {
-
-            get_pointer_array_elements(p0, p1, p2);
-
-        } else if (*t == *INTEGER_ARRAY) {
-
-            get_integer_array_elements(p0, p1, p2);
-
-        } else if (*t == *UNSIGNED_LONG_ARRAY) {
-
-            get_unsigned_long_array_elements(p0, p1, p2);
-
-        } else if (*t == *DOUBLE_ARRAY) {
-
-            get_double_array_elements(p0, p1, p2);
-
-        } else if (*t == *CHARACTER_ARRAY) {
-
-            get_character_array_elements(p0, p1, p2);
-        }
-
-    } else {
-
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
-    }
-}
 
 /**
  * Gets the array elements index.
