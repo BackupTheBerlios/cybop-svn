@@ -6,8 +6,8 @@
 
 char *pfad = "/home/cybop/object/socket/server_unix.o";
 
-int main()
-{
+int main() {
+
     int socketnummer;
     int laenge;
     struct sockaddr_un adressstruktur;
@@ -20,12 +20,16 @@ int main()
     char eingabe[sizeof (*stdin)];
     scanf("%s",eingabe);
 
-    socketnummer=socket(AF_UNIX,SOCK_STREAM,0);
+    socketnummer = socket(AF_UNIX, SOCK_STREAM, 0);
 
+    // Server wird aus Client gestartet, nur zum Testen!!
+    // Server kann auch als eigener Prozess von Kommandozeile ausgefuehrt werden,
+    // dann aber dieses "fork" beseitigen, da nicht mehr notwendig!
     serverprocess=fork();
 
     if (serverprocess<0) fprintf(stderr,"Fehler beim Aufruf von fork()");
     if (serverprocess==0) execl(pfad,NULL);
+    // ... fork bis hier loeschen!
 
     sleep(2);
 
@@ -33,27 +37,34 @@ int main()
     strcpy(adressstruktur.sun_path, "server_socket");
     laenge=sizeof(adressstruktur);
 
-    result=connect(socketnummer, (struct sockaddr *)&adressstruktur, laenge);
+    // Establish connection.
+    result = connect(socketnummer, (struct sockaddr*) &adressstruktur, laenge);
 
-    if(result== -1) {
-	perror("huch der client hat einen Fehler");
-	return(1);//exit(1);
-    }
-    else{
-	printf("Verbindung zum Server hergestellt\n");
-    }
+    if (result == -1) {
 
-    sleep(2);
+        perror("huch der client hat einen Fehler");
+
+        return(1);//exit(1);
+        // Socket must be closed in case of error!!
+        // Otherwise socket program is still executed, even if this program has exited.
+
+    } else {
+
+        printf("Verbindung zum Server hergestellt\n");
+    }
 
     while (i<10) {
-	sleep(2);
-	write(socketnummer, &eingabe, 300);
-	printf("sende: %s\n",eingabe);
-	read(socketnummer, &eingabe,300);
-	printf("empfange: %s\n",eingabe);
-	i++;
+
+        write(socketnummer, &eingabe, 300);
+        printf("sende: %s\n", eingabe);
+
+        read(socketnummer, &eingabe, 300);
+        printf("empfange: %s\n", eingabe);
+
+        i++;
     }
 
- close(socketnummer);
- return(0);//exit(0);
+    close(socketnummer);
+
+    return(0);//exit(0);
 }
