@@ -27,14 +27,29 @@ Section \ref{design_principles_heading} introduced essential design patterns
 that represent the main structure of the CYBOP framework. Section
 \ref{an_extended_component_lifecycle_heading} explained the Component Lifecycle
 and section \ref{ontology_heading} the well-known idea of ontology. Now these
-design principles and conceptual architectures will be combined to comprise
-their advantages and to increase the demanded quality characteristics: high
-flexibility and maintainability.\\
-\emph{Structure by Hierarchy} -- this is the basic idea behind CYBOP. Extending
-the concept of Hierarchical Model-View-Controller to whole software architectures,
-CYBOP was designed to be the domain-independent backbone for information systems
-of any kind. Originally designed for medical purposes, it should also be usable
-for insurance, financial or any other standard applications in future.
+design principles and concepts will be combined to comprise their advantages and
+to increase the demanded quality characteristics: high flexibility and
+maintainability.\\
+\emph{Structure by Hierarchy} -- this is the basic idea behind CYBOP. While this
+principle has been applied to many domain and knowledge models, especially in the
+field of \emph{Artificial Intelligence} (AI), it apparently has not been used
+for the design of systems yet.\\
+Let us recall the \emph{Model View Controller} design pattern which is used in
+one or another form by a majority of systems, today. There is a \emph{View} which
+mostly is a \emph{Graphical User Interface} (GUI). It consists of for example a
+frame, panel, menubar and smaller components which are all part of the frame's
+hierarchy. Then, there is the \emph{Controller}. The \emph{Hierarchical MVC}
+pattern suggested to use a controller hierarchy consisting of \emph{MVC Triads}.
+Finally, there is the \emph{Model}. Not only AI systems use a \emph{Hierarchy}
+to structure their domain data. The OpenEHR project \cite{openehr} does the same.\\
+Reflecting these facts, one question is at hand: If view, controller and model
+ideally have a hierarchical structure, why not creating whole software systems
+after this paradigm? Isn't every system essentially a \emph{Tree} of objects?\\
+Extending the concept of Hierarchical Model-View-Controller to whole software
+architectures, CYBOP was designed to be the domain-independent backbone for
+information systems of any kind. Originally designed for medical purposes, it
+should also become usable for insurance, financial or other standard applications
+in future.
 
 \subsection{Class Item}
 \label{class_item_heading}

@@ -23,13 +23,12 @@
 \section{An Extended Component Lifecycle}
 \label{an_extended_component_lifecycle_heading}
 
-The CYBOP lifecycle of components is an extension of the lifecycle idea of Apache
--- basically the same idea but another background and realization.\\
-All \emph{Whole-Part associations} between objects were organized under the rules
-of the component lifecycle. Analogous to the lifecycle of organic cells, the
-relations were created and destroyed in a sequence of lifecycle steps. These
-steps are realized as method calls on the components (figure
-\ref{component_lifecycle_figure}).
+The CYBOP lifecycle of components is an extension of the lifecycle idea of
+Apache -- basically the same idea but another background and realization.\\
+All \emph{Whole-Part associations} between objects were organized under the
+rules of the component lifecycle. The relations were created and destroyed in
+a sequence of lifecycle steps. These steps are realized as method calls on the
+components (figure \ref{component_lifecycle_figure}).
 
 \begin{figure}[ht]
     \begin{center}
@@ -38,4 +37,11 @@ steps are realized as method calls on the components (figure
        \label{component_lifecycle_figure}
     \end{center}
 \end{figure}
+
+Contrary to Apache's lifecycle, this one introduces a \emph{globalize} method
+by which global parameters can be forwarded throughout the whole framework.
+Static methods or \emph{manager} classes such become superfluous.
+Analogous to the lifecycle of organic cells where the genetic information in form
+of a Desoxyribo Nuklein Acid (DNA) is shared before separation, the globalize
+method allows to forward a configuration object to any new instance.
 

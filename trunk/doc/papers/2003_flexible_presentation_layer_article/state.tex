@@ -100,17 +100,16 @@ manipulated by the controller (figure \ref{model_view_controller_figure}).
 \label{hierarchical_model_view_controller_heading}
 
 The Hierarchical Model-View-Controller \cite{cai} combines the essential design
-patterns \emph{Composite}, \emph{Layers}, and \emph{Chain of Responsibility}
+patterns \emph{Composite}, \emph{Layers} and \emph{Chain of Responsibility}
 into one conceptual architecture (figure \ref{hierarchical_model_view_controller_figure}).
-It consists of hierarchical layers containing \emph{MVC-Triads}. These triads
-conventionally separate the presentation layer into model, view and controller.
-Triads communicate with each other by relating over the controller object.
+This architecture divides the presentation layer into hierarchical sections
+containing \emph{MVC-Triads}. The triads conventionally consist of model, view
+and controller parts. Triads communicate with each other by relating over their
+controller object.\\
 Here is a short explanation of this concept, using a practical example:
-The upper-most triad could represent a dialog, the middle one a container such as
-a panel. In this container, a third triad -- for example a button -- can be held.
-All Triads communicate with each other by using the controller component. The
-basic idea behind this concept is to divide the presentation layer into hierarchical
-sections.
+The upper-most triad could represent a dialog and the middle one a container
+such as a panel. In this container, a third triad -- for example a button --
+could be held.
 
 \begin{figure}[ht]
     \begin{center}
@@ -134,7 +133,9 @@ in the right order. In other words, such an entity or \emph{Component Container}
 can control and use the component. The Avalon documentation \cite{jakarta} says:
 
 \begin{quotation}
-It is up to each container to indicate which lifecycle methods it will honor.
-This should be clearly documented together with the description of the container.
+    \textit{
+        It is up to each container to indicate which lifecycle methods it will honor.
+        This should be clearly documented together with the description of the container.
+    }
 \end{quotation}
 
