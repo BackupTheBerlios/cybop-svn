@@ -37,7 +37,7 @@
  *         map = position_abstraction_attribute
  *         (attributes 0..9 = size 10)
  *
- * @version $Revision: 1.18 $ $Date: 2004-04-22 08:54:55 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2004-05-02 23:24:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,15 +53,15 @@
 //
 
 /**
- * Initializes the compound model from a file.
+ * Initializes the compound from a file.
  *
  * @param p0 the transient model
  * @param p1 the persistent model
  * @param p2 the persistent model size
  */
-void initialize_compound_model_from_file(void* p0, const void* p1, const void* p2) {
+void initialize_compound_from_file(void* p0, const void* p1, const void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize compound model from file.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize compound from file.");
 
 /*??
     // Create temporary cybol model.

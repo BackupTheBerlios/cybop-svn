@@ -59,7 +59,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.38 $ $Date: 2004-04-29 11:37:08 $ $Author: christian $
+ * @version $Revision: 1.39 $ $Date: 2004-05-02 23:24:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -471,50 +471,87 @@ void initialize_compound(void* p0, const void* p1, const void* p2) {
 
             void** p = (void**) p1;
 
+            // The location separator index.
+            int i = -1;
             // The done flag.
             int d = 0;
             // The comparison result.
             int r = 0;
             // The path.
             void* path = NULL_POINTER;
-            // The size.
-            int s = 0;
+            // The path count.
+            int pc = 0;
+            // The buffer.
+            void* b = NULL_POINTER;
 
-            if (d == 0) {
+            get_array_elements_index(p1, (void*) &CHARACTER_ARRAY, p2, (void*) &MODEL_LOCATION_SEPARATOR, (void*) &MODEL_LOCATION_SEPARATOR_COUNT, (void*) &i);
 
-                if (*ps == FILE_LOCATION_SIZE) {
+            if (i > -1) {
 
-                    compare_array_elements(p1, (void*) &FILE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FILE_LOCATION_SIZE, (void*) &r);
+                if (i > 0) {
 
-                    if (r == 1) {
+                    // Example: "file:/path"
+                    // FILE_LOCATION_COUNT = 4
+                    // *p = 0
+                    // *ps = 10
+                    // path = *p + FILE_LOCATION_COUNT + MODEL_LOCATION_SEPARATOR_COUNT = 0 + 4 + 1 = 5
+                    // pc = *ps - (FILE_LOCATION_COUNT + MODEL_LOCATION_SEPARATOR_COUNT) = 10 - (4 + 1) = 10 - 5 = 5
+                    path = *p + FILE_LOCATION_COUNT + MODEL_LOCATION_SEPARATOR_COUNT;
+                    pc = *ps - (FILE_LOCATION_COUNT + MODEL_LOCATION_SEPARATOR_COUNT);
 
-                        // Example: "file:/path"
-                        // FILE_LOCATION_SIZE = 6
-                        // p1 = 0
-                        // p2 = 10
-                        // path = *p + FILE_LOCATION_SIZE = 0 + 6 = 6
-                        // s = *ps - FILE_LOCATION_SIZE = 4
-                        path = *p + FILE_LOCATION_SIZE;
-                        s = *ps - FILE_LOCATION_SIZE;
+                    //?? search file ending with backward loop!
 
-                        //?? read_from_file (or http, ftp etc.)
-                        //?? create_cybol_model (byte array, read in from persistent source)
-                        //?? create_transient_model (in memory model structure, created from byte array)
+                    if (d == 0) {
 
-        //??                initialize_compound_model_from_file(p0, (void*) &path, (void*) &s);
+                        // The location count has the same value as
+                        // the index of the location separator.
+                        // Example:
+                        // p = "file:/some/path"
+                        // ps = 15
+                        // i = 4
+                        // location count of "file" = 4
+                        if (i == FILE_LOCATION_COUNT) {
+
+                            compare_array_elements(p1, (void*) &FILE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FILE_LOCATION_COUNT, (void*) &r);
+
+                            if (r == 1) {
+
+                                read_source_from_file((void*) &b, (void*) &path, (void*) &pc);
+                                initialize_compound_from_cybol(p0, (void*) &b);
+                                ... from_text
+                                ... from_html
+
+                                d = 1;
+                            }
+                        }
                     }
+
+                    if (d == 0) {
+
+                        if (i == INLINE_LOCATION_COUNT) {
+
+                            //?? compare...
+                            // inline:/
+                            // http://
+                            // ftp://
+
+                            if (r == 1) {
+
+                                //?? initialize_compound_from_...
+
+                                d = 1;
+                            }
+                        }
+                    }
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize compound model. The persistent model starts with a model location separator.");
                 }
-            }
 
-            if (d == 0) {
+            } else {
 
-                if (*ps == INLINE_LOCATION_SIZE) {
-
-                    //?? compare...
-                    // inline:/
-                    // http://
-                    // ftp://
-                }
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize compound model. The persistent model does not contain a model location separator.");
             }
 
         } else {
