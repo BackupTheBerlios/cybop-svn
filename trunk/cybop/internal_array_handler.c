@@ -26,13 +26,14 @@
 #define INTERNAL_ARRAY_HANDLER_SOURCE
 
 #include "log_handler.c"
+#include "statics.c"
 
 /**
  * This is the internal array handler.
  *
  * Internal array elements are accessed over their index.
  *
- * @version $Revision: 1.2 $ $Date: 2003-10-13 08:36:34 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-10-14 07:34:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
  
@@ -44,18 +45,16 @@
  * Extends the internal array.
  *
  * @param p0 the internal array
- * @param p1 the size
+ * @param p1 the old size
+ * @param p2 the new size
  */
-static void extend_internal_array(void** p0, void* p1) {
+static void extend_internal_array(void** p0, void* p1, void* p2) {
 
-    void** old_array = p0;
+    if (p0 != 0) {
 
-    //?? Distinguish between null array (not existant) or empty array!
-    if (old_array != 0) {
-
-        int* size = (int*) p1;
-        // Create new array with extended size.
-        void** new_array = malloc(size);
+        int* old_size = (int*) p1;
+        int* new_size = (int*) p2;
+        void** new_array = malloc(*new_size);
 
         if (new_array != 0) {
                 
@@ -64,29 +63,24 @@ static void extend_internal_array(void** p0, void* p1) {
             // no zeros are set.
             int i = 0;
 
-            while (i < old_size) {
+            while (i < *old_size) {
 
-                new_array[i] = old_array[i];
+                new_array[i] = p0[i];
 
                 i++;
             }
 
-            // Free old array and reset its size.
-            free(old_array);
-            old_size = 0;
-            
-            // Set internal array and its size.
-            a->size = new_size;
-            a->internal_array = new_array;
+            free(p0);
+            p0 = new_array;
 
         } else {
 
-            log((void*) &ERROR_LOG_LEVEL, "Could not extend array. The new internal array is null.");
+            log((void*) &ERROR_LOG_LEVEL, "Could not extend internal array. The new internal array is null.");
         }
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not extend array. The old internal array is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not extend internal array. The internal array is null.");
     }
 }
 

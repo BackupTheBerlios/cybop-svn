@@ -27,15 +27,15 @@
 
 #include "array.c"
 #include "dynamics_handler.c"
+#include "internal_array_handler.c"
 #include "log_handler.c"
-#include "statics.c"
 
 /**
  * This is the array handler.
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.16 $ $Date: 2003-10-13 13:55:20 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2003-10-14 07:34:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -144,7 +144,7 @@ static void set_array_element(void* p0, void* p1, void* p2) {
         if (size != a->size) {
                 
             a->size = size;
-            extend_internal_array(a->internal_array, (void*) &size);
+            extend_internal_array(a->internal_array, (void*) &(a->size), (void*) &size);
         }
         
         set_internal_array_element(a->internal_array, p1, p2);

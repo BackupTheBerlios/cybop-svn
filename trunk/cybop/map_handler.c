@@ -34,7 +34,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.16 $ $Date: 2003-10-13 13:55:20 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2003-10-14 07:34:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -350,9 +350,9 @@ static void set_map_element(void* p0, void* p1, void* p2) {
     
     if (m != 0) {
         
-        void* i = malloc(0);
+        int* i = (int*) malloc(0);
         *i = -1;
-        get_next_map_element_index(p0, p1, i);
+        get_next_map_element_index(p0, p1, (void*) i);
         
         puts("TEST i");
         int* test = (int*) i;
