@@ -27,10 +27,8 @@
 /-->
 
 <model>
-    <part name="head" channel="file" abstraction="cybol" model="examples/resadmin/web/web_meta.cybol">
-        <property name="html_tag" channel="inline" abstraction="string" model="head"/>
-    </part>
-    <part name="body" channel="file" abstraction="cybol" model="examples/resadmin/web/addressbook.cybol">
-        <property name="html_tag" channel="inline" abstraction="string" model="body"/>
+    <part name="meta" channel="inline" abstraction="string" model="">
+        <property name="html_tag" channel="inline" abstraction="string" model="meta"/>
+        <property name="html_tag_properties" channel="inline" abstraction="string" model="http-equiv='expires' content='0'"/>
     </part>
 </model>

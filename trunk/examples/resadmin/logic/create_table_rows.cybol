@@ -92,7 +92,7 @@
     </part>
 
     <part name="create_listname_web_delete_property1" channel="inline" abstraction="operation" model="add">
-        <property name="operand_1" channel="inline" abstraction="string" model="href='/examples/resadmin/logic/send_name.cybol?domain.delete_address="/>
+        <property name="operand_1" channel="inline" abstraction="string" model="href='/examples/resadmin/logic/delete_address.cybol?domain.delete_address="/>
         <property name="operand_2" channel="inline" abstraction="knowledge" model="domain.loop_listname_domain"/>
         <property name="result" channel="inline" abstraction="knowledge" model="domain.delete_button_property"/>
     </part>

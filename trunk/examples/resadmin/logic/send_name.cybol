@@ -28,6 +28,19 @@
 
 <model>
 
+
+    <!--
+        root of the web describtion
+    -->
+
+    <part name="create_body" channel="inline" abstraction="operation" model="create_part">
+        <property name="name" channel="inline" abstraction="string" model="web"/>
+        <property name="channel" channel="inline" abstraction="string" model="file"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/web/body.cybol"/>
+    </part>
+
+
     <!-- create loop variables -->
     <part name="create_loop_break_flag" channel="inline" abstraction="operation" model="create_part">
         <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
@@ -159,7 +172,7 @@
     <part name="send_name_to_web" channel="inline" abstraction="operation" model="send">
         <property name="language" channel="inline" abstraction="string" model="tcp_socket"/>
         <property name="receiver" channel="inline" abstraction="string" model="user"/>
-        <property name="message" channel="inline" abstraction="knowledge" model="web.body"/>
+        <property name="message" channel="inline" abstraction="knowledge" model="web"/>
     </part>
     
 </model>

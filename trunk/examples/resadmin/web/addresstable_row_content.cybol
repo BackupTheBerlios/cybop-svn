@@ -40,5 +40,8 @@
     <part name="test" channel="inline" abstraction="knowledge" model="domain.delete_address">
         <property name="html_tag" channel="inline" abstraction="string" model="td"/>
     </part>
+    <part name="test2" channel="inline" abstraction="knowledge" model="domain.addressbook.addresses.address_count">
+        <property name="html_tag" channel="inline" abstraction="string" model="td"/>
+    </part>
 
 </model>
