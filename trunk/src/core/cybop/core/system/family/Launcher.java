@@ -69,7 +69,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.7 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-03-16 22:28:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family /*??implements
@@ -860,7 +860,7 @@ public class Launcher extends Family /*??implements
             s.set(Signal.LANGUAGE, l);
             s.set(Signal.SUBJECT, subj);
             s.set(Signal.PREDICATE, p);
-            s.set(Signal.PREDICATE, o);
+            s.set(Signal.OBJECT, o);
 
         } else {
 
@@ -1019,9 +1019,7 @@ public class Launcher extends Family /*??implements
      */
     public void startupSystem(String s, String c) throws Exception {
 
-        java.lang.System.out.println("\n\n\n\n\n pre: " + getSystem(Launcher.SYSTEM) + "\n\n\n\n\n");
         setSystem(Launcher.SYSTEM, createComponent(s/*??, c*/));
-        java.lang.System.out.println("\n\n\n\n\n post: " + getSystem(Launcher.SYSTEM) + "\n\n\n\n\n");
 
         Signal sig = (Signal) createItem(getDefaultSignal());
 
@@ -1275,34 +1273,32 @@ public class Launcher extends Family /*??implements
 
             } else if (id == java.awt.event.MouseEvent.MOUSE_CLICKED) {
 
-                java.lang.System.out.println("\n\n\n\n\n CLICKED 0 \n\n\n\n\n");
                 a = Controller.MOUSE_CLICKED_ACTION;
                 l = Signal.GUI_LANGUAGE;
 
                 //?? Find out which child system is active (top window)
                 //?? to use its controller here.
-                System sys = getSystem(new String("system_0"));
+                System sys = getSystem(Launcher.SYSTEM);
 
                 if (sys != null) {
 
-                    Controller c = (Controller) sys.get(Launcher.CONTROLLER);
+                    Controller c = (Controller) sys.get(System.CONTROLLER);
     
                     if (c != null) {
     
                         m = (MouseModel) c.get(Controller.MOUSE_MODEL);
     
                         if (m != null) {
-    
+
                             Space sp = (Space) m.get(MouseModel.POINTER_POSITION);
-    
+
                             if (sp != null) {
-                                
+
                                 sp.set(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
                                 sp.set(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
-                                java.lang.System.out.println("\n\n\n\n\n CLICKED 1 \n\n\n\n\n");
-    
+
                             } else {
-                    
+
                                 throw new NullPointerException("Could not handle java event. The pointer position is null.");
                             }
     

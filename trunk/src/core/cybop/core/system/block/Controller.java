@@ -50,7 +50,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.5 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-03-16 22:28:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
@@ -525,7 +525,7 @@ public class Controller extends Block {
      */
     protected void mouseClicked(Signal s) throws Exception, NullPointerException {
 
-        java.lang.System.out.println("\n\n\n\n\n CLICKED 2 \n\n\n\n\n");
+        java.lang.System.out.println("\n\n\n\n\n mouseClicked \n\n\n\n\n");
 
         if (s != null) {
 
@@ -533,21 +533,21 @@ public class Controller extends Block {
 
             if (m != null) {
 
-                GraphicItem i = getGraphicItem((Space) m.get(MouseModel.POINTER_POSITION));
+//??                GraphicItem i = getGraphicItem((Space) m.get(MouseModel.POINTER_POSITION));
 
-                if (i != null) {
+//??                if (i != null) {
 
                     String a = Controller.SHOW_SYSTEM_INFORMATION_USER_INTERFACE_ACTION; //?? (String) i.get(GraphicItem.ACTION);
 
-                    s.set(Signal.LANGUAGE, Signal.NEURO_LANGUAGE);
+                    s.set(Signal.LANGUAGE, Signal.GUI_LANGUAGE/*??NEURO_LANGUAGE*/);
                     s.set(Signal.PREDICATE, a);
 
                     control(s);
 
-                } else {
+//??                } else {
         
-                    throw new NullPointerException("Could not react on mouse clicked action. The graphic item is null.");
-                }
+//??                    throw new NullPointerException("Could not react on mouse clicked action. The graphic item is null.");
+//??                }
 
             } else {
     

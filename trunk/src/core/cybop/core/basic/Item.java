@@ -74,7 +74,7 @@ import cybop.core.basic.String;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.7 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-03-16 22:28:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -589,7 +589,7 @@ public class Item extends State {
      * @return the number of children
      * @exception NullPointerException if the children structure is null
      */
-    public Integer getChildCount() throws NullPointerException {
+    public Integer getChildrenNumber() throws NullPointerException {
 
         Integer c = null;
         java.util.Map s = getChildren();
@@ -600,7 +600,7 @@ public class Item extends State {
 
         } else {
 
-            throw new NullPointerException("Could not get child count. The children structure is null.");
+            throw new NullPointerException("Could not get children number. The children structure is null.");
         }
 
         return c;

@@ -49,7 +49,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.5 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-03-16 22:28:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -151,6 +151,24 @@ public class Family extends System {
     //
 
     /**
+     * Removes the child system from this family.
+     *
+     * @param n the name
+     * @exception NullPointerException if the name is null
+     */
+    public void removeSystem(String n) throws NullPointerException {
+
+        if (n != null) {
+
+            super.remove(n);
+
+        } else {
+
+            throw new NullPointerException("Could not remove system. The name is null.");
+        }
+    }
+
+    /**
      * Adds the system to become a child of this family.
      *
      * @param n the name
@@ -165,7 +183,11 @@ public class Family extends System {
 
             if (n != null) {
 
-                String ext = new String(n.getJavaObject() + "_" + java.lang.String.valueOf(c.getJavaPrimitive()));
+                //?? Delete this line later and use the one below!
+                String ext = Family.SYSTEM;
+                //?? When more modules are used, use the following line!
+                //?? To be implemented yet.
+//??                String ext = new String(n.getJavaObject() + "_" + java.lang.String.valueOf(c.getJavaPrimitive()));
 
                 super.set(ext, s);
                 set(Family.SYSTEMS_COUNT, new Integer(c.getJavaPrimitive() + 1));
@@ -201,24 +223,6 @@ public class Family extends System {
         }
         
         return s;
-    }
-
-    /**
-     * Removes the child system from this family.
-     *
-     * @param n the name
-     * @exception NullPointerException if the name is null
-     */
-    public void removeSystem(String n) throws NullPointerException {
-
-        if (n != null) {
-
-            super.remove(n);
-
-        } else {
-
-            throw new NullPointerException("Could not remove system. The name is null.");
-        }
     }
 
     //
@@ -467,7 +471,11 @@ public class Family extends System {
 
             for (int i = 0; i < count.getJavaPrimitive(); i++) {
 
-                str = new String(Family.SYSTEM.getJavaObject() + "_" + java.lang.String.valueOf(i));
+                //?? Delete this line later and use the one below!
+                str = Family.SYSTEM;
+                //?? When more modules are used, use the following line!
+                //?? To be implemented yet.
+//??                str = new String(Family.SYSTEM.getJavaObject() + "_" + java.lang.String.valueOf(i));
                 sys = (System) get(str);
 
                 if (sys != null) {
