@@ -51,7 +51,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.21 $ $Date: 2004-02-29 23:32:51 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2004-03-01 07:31:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -392,8 +392,9 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
         get_array_count(m->part_models, (void*) &count);
         int pos = 0;
         int i = 0;
-        int* position = (void*) 0;
-        void* abstr = (void*) 0;
+        int* p = (void*) 0;
+        void* a = (void*) 0;
+        void* l = (void*) 0;
         void* part = (void*) 0;
 
         // All positions.
@@ -403,16 +404,19 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
             while (i < count) {
 
                 // Determine position.
-                position = (int*) get_map_element_at_index(m->position_models, (void*) &i);
+                p = (int*) get_map_element_at_index(m->position_models, (void*) &i);
 
                 // All parts at the current position.
-                if (*position == pos) {
+                if (*p == pos) {
+
+                    // Determine abstraction.
+                    a = get_map_element_at_index(m->part_abstractions, (void*) &i);
+
+                    // Determine abstraction.
+                    l = get_map_element_at_index(m->part_locations, (void*) &i);
 
                     // Determine part signal as dynamics model.
                     part = get_map_element_at_index(m->part_models, (void*) &i);
-
-                    // Determine abstraction.
-                    abstr = get_map_element_at_index(m->part_abstractions, (void*) &i);
 
                     // Add "part" signal to signal memory,
                     // using the "whole" signal's priority.
@@ -420,6 +424,8 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
                     // signals. The "part" signals cannot have higher/lower priority
                     // than their original "whole" signal.)
                     add_signal(p0, part, abstr, p2);
+
+                    break;
                 }
 
                 i++;
