@@ -46,12 +46,12 @@ import cybop.core.system.region.controller.translator.*;
  *
  * Following this order of actions, the controller consists of three types of regions:
  *  <ul>
- *      <li><code>Translator (sensing signals)</code></li>
+ *      <li><code>Translator (receiving signals)</code></li>
  *      <li><code>Processor (processing signals)</code></li>
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.7 $ $Date: 2003-03-18 00:18:01 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-04-14 20:37:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
