@@ -1,5 +1,5 @@
 /*
- * $RCSfile: complex.c,v $
+ * $RCSfile: model.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -25,23 +25,26 @@
 #ifndef COMPLEX_SOURCE
 #define COMPLEX_SOURCE
 
-#include "fraction.c"
-
 /**
  * This is a complex.
  *
- * It consists of two fraction numbers, a real and an imaginary value.
+ * It represents an abstract description of some real world thing.
  *
- * @version $Revision: 1.11 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
+ * A complex can be created by instantiating (cloning) an existing model.
+ * Instantiating means allocating some place in the computer's memory.
+ * Basically, every complex can become a model (template) itself,
+ * if copies (other instances) of this complex are created.
+ *
+ * @version $Revision: 1.1 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct complex {
 
-    /** The real part. */
-    struct fraction real;
-    
-    /** The imaginary part. */
-    struct fraction imaginary;
+    /** The children. */
+    void* children;
+
+    /** The positions. */
+    void* positions;
 };
 
 /* COMPLEX_SOURCE */

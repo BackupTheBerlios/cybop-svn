@@ -33,7 +33,7 @@
  *
  * It implements dynamic operations.
  *
- * @version $Revision: 1.10 $ $Date: 2003-10-13 13:55:20 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,14 +46,16 @@
  *
  * @param p0 the first parameter
  * @param p1 the second parameter
- * @param p2 the boolean result
+ * @return the boolean result
  */
-static void and(void* p0, void* p1, void* p2) {
+static int and(void* p0, void* p1) {
 
+    int result = 0;
     int* i0 = (int*) p0;
     int* i1 = (int*) p1;
-    int result = *i0 && *i1;
-    p2 = (void*) &result;
+    result = *i0 && *i1;
+
+    return result;
 }
 
 /**
@@ -61,14 +63,16 @@ static void and(void* p0, void* p1, void* p2) {
  *
  * @param p0 the first parameter
  * @param p1 the second parameter
- * @param p2 the boolean result
+ * @return the boolean result
  */
-static void or(void* p0, void* p1, void* p2) {
+static int or(void* p0, void* p1) {
 
+    int result = 0;
     int* i0 = (int*) p0;
     int* i1 = (int*) p1;
-    int result = *i0 || *i1;
-    p2 = (void*) &result;
+    result = *i0 || *i1;
+
+    return result;
 }
 
 //
@@ -80,14 +84,16 @@ static void or(void* p0, void* p1, void* p2) {
  *
  * @param p0 the first parameter
  * @param p1 the second parameter
- * @param p2 the boolean result
+ * @return the boolean result
  */
-static void equal(void* p0, void* p1, void* p2) {
+static int equal(void* p0, void* p1) {
 
+    int result = 0;
     int* i0 = (int*) p0;
     int* i1 = (int*) p1;
-    int result = (*i0 == *i1);
-    p2 = (void*) &result;
+    result = *i0 == *i1;
+
+    return result;
 }
 
 /**
@@ -95,14 +101,16 @@ static void equal(void* p0, void* p1, void* p2) {
  *
  * @param p0 the first parameter
  * @param p1 the second parameter
- * @param p2 the boolean result
+ * @return the boolean result
  */
-static int smaller(void* p0, void* p1, void* p2) {
+static int smaller(void* p0, void* p1) {
 
+    int result = 0;
     int* i0 = (int*) p0;
     int* i1 = (int*) p1;
-    int result = (*i0 < *i1);
-    p2 = (void*) &result;
+    result = *i0 < *i1;
+
+    return result;
 }
 
 /**
@@ -110,14 +118,16 @@ static int smaller(void* p0, void* p1, void* p2) {
  *
  * @param p0 the first parameter
  * @param p1 the second parameter
- * @param p2 the boolean result
+ * @return the boolean result
  */
-static int greater(void* p0, void* p1, void* p2) {
+static int greater(void* p0, void* p1) {
 
+    int result = 0;
     int* i0 = (int*) p0;
     int* i1 = (int*) p1;
-    int result = (*i0 > *i1);
-    p2 = (void*) &result;
+    result = *i0 > *i1;
+
+    return result;
 }
 
 /**
@@ -125,14 +135,16 @@ static int greater(void* p0, void* p1, void* p2) {
  *
  * @param p0 the first parameter
  * @param p1 the second parameter
- * @param p2 the boolean result
+ * @return the boolean result
  */
-static int smaller_or_equal(void* p0, void* p1, void* p2) {
+static int smaller_or_equal(void* p0, void* p1) {
 
+    int result = 0;
     int* i0 = (int*) p0;
     int* i1 = (int*) p1;
-    int result = (*i0 <= *i1);
-    p2 = (void*) &result;
+    result = *i0 <= *i1;
+
+    return result;
 }
 
 /**
@@ -140,14 +152,16 @@ static int smaller_or_equal(void* p0, void* p1, void* p2) {
  *
  * @param p0 the first parameter
  * @param p1 the second parameter
- * @param p2 the boolean result
+ * @return the boolean result
  */
-static int greater_or_equal(void* p0, void* p1, void* p2) {
+static int greater_or_equal(void* p0, void* p1) {
 
+    int result = 0;
     int* i0 = (int*) p0;
     int* i1 = (int*) p1;
-    int result = (*i0 >= *i1);
-    p2 = (void*) &result;
+    result = *i0 >= *i1;
+
+    return result;
 }
 
 //
@@ -159,14 +173,16 @@ static int greater_or_equal(void* p0, void* p1, void* p2) {
  *
  * @param p0 the first parameter
  * @param p1 the second parameter
- * @param p2 the sum
+ * @return the sum
  */
-static int add(void* p0, void* p1, void* p2) {
+static int add(void* p0, void* p1) {
 
+    int result = 0;
     int* i0 = (int*) p0;
     int* i1 = (int*) p1;
-    int result = (*i0 + *i1);
-    p2 = (void*) &result;
+    result = *i0 + *i1;
+
+    return result;
 }
 
 /**
@@ -174,14 +190,16 @@ static int add(void* p0, void* p1, void* p2) {
  *
  * @param p0 the first parameter
  * @param p1 the second parameter
- * @param p2 the difference
+ * @return the difference
  */
-static int subtract(void* p0, void* p1, void* p2) {
+static int subtract(void* p0, void* p1) {
 
+    int result = 0;
     int* i0 = (int*) p0;
     int* i1 = (int*) p1;
-    int result = (*i0 - *i1);
-    p2 = (void*) &result;
+    result = *i0 - *i1;
+
+    return result;
 }
 
 /**
@@ -189,14 +207,16 @@ static int subtract(void* p0, void* p1, void* p2) {
  *
  * @param p0 the first parameter
  * @param p1 the second parameter
- * @param p2 the product
+ * @return the product
  */
-static int multiply(void* p0, void* p1, void* p2) {
+static int multiply(void* p0, void* p1) {
 
+    int result = 0;
     int* i0 = (int*) p0;
     int* i1 = (int*) p1;
-    int result = (*i0 * *i1);
-    p2 = (void*) &result;
+    result = *i0 * *i1;
+
+    return result;
 }
 
 /**
@@ -204,16 +224,18 @@ static int multiply(void* p0, void* p1, void* p2) {
  *
  * @param p0 the first parameter
  * @param p1 the second parameter
- * @param p2 the integer quotient (without rest)
+ * @return the integer quotient (without rest)
  */
-static int divide(void* p0, void* p1, void* p2) {
+static int divide(void* p0, void* p1) {
 
+    int result = 0;
     int* i0 = (int*) p0;
     int* i1 = (int*) p1;
-    int result = (*i0 / *i1);
+    result = *i0 / *i1;
     // Rest of integer division is determined with:
     // rest = i0 % i1;
-    p2 = (void*) &result;
+
+    return result;
 }
 
 //
@@ -333,92 +355,132 @@ static void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p
 }
 
 //
-// Instance.
+// Dynamics instance.
 //
 
 /**
- * Creates an instance.
+ * Creates a dynamics instance.
  *
- * @param p0 the instance
- * @param p1 the model
- * @param p2 the abstraction
+ * @param p0 the model
+ * @param p1 the abstraction
+ * @return the instance
  */
-/*??
-static void create_instance(void* p0, void* p1, void* p2) {
+static void* create_dynamics_instance(void* p0, void* p1) {
 
-    log((void*) &INFO_LOG_LEVEL, "Create instance: ");
-    log((void*) &INFO_LOG_LEVEL, p1);
+    void* i = 0;
+    
+    log((void*) &INFO_LOG_LEVEL, "Create dynamics instance: ");
+    log((void*) &INFO_LOG_LEVEL, p0);
 
-    if (strcmp(p2, COMPLEX_MODEL) == 0) {
+    if (strcmp(p1, COMPLEX_DYNAMICS_MODEL) == 0) {
 
-        create_complex_instance(p0, p1);
+        i = create_complex_dynamics_instance(p0);
 
-    } else if (strcmp(p2, BOOLEAN_PRIMITIVE) == 0) {
+    } else if (strcmp(p1, AND_OPERATION) == 0) {
 
-        create_boolean_instance(p0, p1);
+        i = create_and_instance(p0);
 
-    } else if (strcmp(p2, INTEGER_PRIMITIVE) == 0) {
+    } else if (strcmp(p1, OR_OPERATION) == 0) {
 
-        create_integer_instance(p0, p1);
+        i = create_or_instance(p0);
 
-    } else if (strcmp(p2, FLOAT_PRIMITIVE) == 0) {
+    } else if (strcmp(p1, EQUAL_OPERATION) == 0) {
 
-        create_float_instance(p0, p1);
+        i = create_equal_instance(p0);
 
-    } else if (strcmp(p2, VECTOR_PRIMITIVE) == 0) {
+    } else if (strcmp(p1, SMALLER_OPERATION) == 0) {
 
-        create_vector_instance(p0, p1);
+        i = create_smaller_instance(p0);
 
-    } else if (strcmp(p2, STRING_PRIMITIVE) == 0) {
+    } else if (strcmp(p1, GREATER_OPERATION) == 0) {
 
-        create_string_instance(p0, p1);
+        i = create_greater_instance(p0);
 
-    } else if (strcmp(p2, TIME_PRIMITIVE) == 0) {
+    } else if (strcmp(p1, SMALLER_OR_EQUAL_OPERATION) == 0) {
 
-        create_time_instance(p0, p1);
+        i = create_smaller_or_equal_instance(p0);
+
+    } else if (strcmp(p1, GREATER_OR_EQUAL_OPERATION) == 0) {
+
+        i = create_greater_or_equal_instance(p0);
+
+    } else if (strcmp(p1, ADD_OPERATION) == 0) {
+
+        i = create_add_instance(p0);
+
+    } else if (strcmp(p1, SUBTRACT_OPERATION) == 0) {
+
+        i = create_subtract_instance(p0);
+
+    } else if (strcmp(p1, MULTIPLY_OPERATION) == 0) {
+
+        i = create_multiply_instance(p0);
+
+    } else if (strcmp(p1, DIVIDE_OPERATION) == 0) {
+
+        i = create_divide_instance(p0);
     }
 }
 
 /**
- * Destroys the instance.
+ * Destroys the dynamics instance.
  *
  * @param p0 the instance
  * @param p1 the model
  * @param p2 the abstraction
  */
-/*??
-static void destroy_instance(void* p0, void* p1, void* p2) {
+static void destroy_dynamics_instance(void* p0, void* p1, void* p2) {
 
-    log((void*) &INFO_LOG_LEVEL, "Destroy instance: ");
+    log((void*) &INFO_LOG_LEVEL, "Destroy dynamics instance: ");
     log((void*) &INFO_LOG_LEVEL, p1);
 
-    if (strcmp(p2, COMPLEX_MODEL) == 0) {
+    if (strcmp(p2, COMPLEX_DYNAMICS_MODEL) == 0) {
 
-        destroy_complex_instance(p0, p1);
+        destroy_complex_dynamics_instance(p0, p1);
         
-    } else if (strcmp(p2, BOOLEAN_PRIMITIVE) == 0) {
+    } else if (strcmp(p2, AND_OPERATION) == 0) {
 
-        destroy_boolean_instance(p0, p1);
+        destroy_and_instance(p0, p1);
 
-    } else if (strcmp(p2, INTEGER_PRIMITIVE) == 0) {
+    } else if (strcmp(p2, OR_OPERATION) == 0) {
 
-        destroy_integer_instance(p0, p1);
+        destroy_or_instance(p0, p1);
 
-    } else if (strcmp(p2, FLOAT_PRIMITIVE) == 0) {
+    } else if (strcmp(p2, EQUAL_OPERATION) == 0) {
 
-        destroy_float_instance(p0, p1);
+        destroy_equal_instance(p0, p1);
 
-    } else if (strcmp(p2, VECTOR_PRIMITIVE) == 0) {
+    } else if (strcmp(p2, SMALLER_OPERATION) == 0) {
 
-        destroy_vector_instance(p0, p1);
+        destroy_smaller_instance(p0, p1);
 
-    } else if (strcmp(p2, STRING_PRIMITIVE) == 0) {
+    } else if (strcmp(p2, GREATER_OPERATION) == 0) {
 
-        destroy_string_instance(p0, p1);
+        destroy_greater_instance(p0, p1);
 
-    } else if (strcmp(p2, TIME_PRIMITIVE) == 0) {
+    } else if (strcmp(p2, SMALLER_OR_EQUAL_OPERATION) == 0) {
 
-        destroy_time_instance(p0, p1);
+        destroy_smaller_or_equal_instance(p0, p1);
+
+    } else if (strcmp(p2, GREATER_OR_EQUAL_OPERATION) == 0) {
+
+        destroy_greater_or_equal_instance(p0, p1);
+
+    } else if (strcmp(p2, ADD_OPERATION) == 0) {
+
+        destroy_add_instance(p0, p1);
+
+    } else if (strcmp(p2, SUBTRACT_OPERATION) == 0) {
+
+        destroy_subtract_instance(p0, p1);
+
+    } else if (strcmp(p2, MULTIPLY_OPERATION) == 0) {
+
+        destroy_multiply_instance(p0, p1);
+
+    } else if (strcmp(p2, DIVIDE_OPERATION) == 0) {
+
+        destroy_divide_instance(p0, p1);
     }
 }
 

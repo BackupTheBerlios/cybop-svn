@@ -38,7 +38,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.19 $ $Date: 2003-10-16 09:22:37 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -372,19 +372,24 @@ static void handle_signal(void* p0, void* p1, void* p2) {
             } else if (strcmp(a, STARTUP_ACTION) == 0) {
                 
                 // Root (statics).
-                create_instance(statics, s->object, &COMPLEX_MODEL);
-
+//??                create_instance(statics, s->object, &COMPLEX_MODEL);
+                //?? Temporary replacement: Character based screen output test.
+//??                statics = create_character_screen();
+            
                 reset_signal(s);
                 
 /*??
                 s->predicate = SEND_ACTION;
                 s->object = get_map_element(statics->children, "main_frame");
+                s->receiver = ALL;
 */
+                //?? Temporary replacement.
+//??                show_character_screen(statics);
 
             } else if (strcmp(a, SHUTDOWN_ACTION) == 0) {
                 
                 // Root (statics).
-                destroy_instance(statics, s->object, &COMPLEX_MODEL);
+                destroy_instance(statics, s->object, &COMPLEX_STATICS_MODEL);
                 *sf = 1;
 
                 reset_signal(s);

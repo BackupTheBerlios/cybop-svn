@@ -1,5 +1,5 @@
 /*
- * $RCSfile: complex.c,v $
+ * $RCSfile: fraction.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,28 +22,34 @@
  * - Cybernetics Oriented Programming -
  */
 
-#ifndef COMPLEX_SOURCE
-#define COMPLEX_SOURCE
+#ifndef FRACTION_SOURCE
+#define FRACTION_SOURCE
 
-#include "fraction.c"
+#include "integer.c"
 
 /**
- * This is a complex.
+ * This is a fraction.
  *
- * It consists of two fraction numbers, a real and an imaginary value.
+ * It consists of two integer numbers, a numerator and a denominator.
  *
- * @version $Revision: 1.11 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-struct complex {
+struct fraction {
 
-    /** The real part. */
-    struct fraction real;
+    //?? Temporarily, a double (float) is used here to let the
+    //?? Algorithmic Logic Unit (ALU) calculate everything.
     
-    /** The imaginary part. */
-    struct fraction imaginary;
+    /** The value. */
+    double value;
+    
+    /** The numerator. */
+//??    integer numerator;
+    
+    /** The denominator. */
+//??    integer denominator;
 };
 
-/* COMPLEX_SOURCE */
+/* FRACTION_SOURCE */
 #endif
 

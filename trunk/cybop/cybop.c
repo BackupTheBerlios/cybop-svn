@@ -40,7 +40,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.18 $ $Date: 2003-10-16 09:22:37 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -124,9 +124,6 @@ int main(int p0, char** p1) {
 
     // Log handler.
     log_level = (void*) &INFO_LOG_LEVEL;
-
-    //?? Temporary character based screen output test.
-    show_character_screen();
 
     if (p1 != 0) {
 

@@ -30,16 +30,53 @@
  *
  * It defines constants for dynamic operations.
  *
- * @version $Revision: 1.7 $ $Date: 2003-10-13 13:55:20 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+//
+// Complex dynamics model.
+//
+
+/** The complex dynamics model. */
+static const char* COMPLEX_DYNAMICS_MODEL = "complex";
 
 //
 // Primitive operations.
 //
 
+/** The and operation. */
+static const char* AND_OPERATION = "and";
+
+/** The or operation. */
+static const char* OR_OPERATION = "or";
+
+/** The equal operation. */
+static const char* EQUAL_OPERATION = "equal";
+
+/** The smaller operation. */
+static const char* SMALLER_OPERATION = "smaller";
+
+/** The greater operation. */
+static const char* GREATER_OPERATION = "greater";
+
+/** The smaller or equal operation. */
+static const char* SMALLER_OR_EQUAL_OPERATION = "smaller_or_equal";
+
+/** The greater or equal operation. */
+static const char* GREATER_OR_EQUAL_OPERATION = "greater_or_equal";
+
 /** The add operation. */
 static const char* ADD_OPERATION = "add";
+
+/** The subtract operation. */
+static const char* SUBTRACT_OPERATION = "subtract";
+
+/** The multiply operation. */
+static const char* MULTIPLY_OPERATION = "multiply";
+
+/** The divide operation. */
+static const char* DIVIDE_OPERATION = "divide";
 
 /*??
 //

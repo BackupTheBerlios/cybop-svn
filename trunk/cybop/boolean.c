@@ -1,5 +1,5 @@
 /*
- * $RCSfile: complex.c,v $
+ * $RCSfile: boolean.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,28 +22,24 @@
  * - Cybernetics Oriented Programming -
  */
 
-#ifndef COMPLEX_SOURCE
-#define COMPLEX_SOURCE
-
-#include "fraction.c"
+#ifndef BOOLEAN_SOURCE
+#define BOOLEAN_SOURCE
 
 /**
- * This is a complex.
+ * This is a boolean.
  *
- * It consists of two fraction numbers, a real and an imaginary value.
+ * It can have just one of the two values:
+ * TRUE or FALSE which correspond to one and zero, that is 1 or 0.
  *
- * @version $Revision: 1.11 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-struct complex {
+struct boolean {
 
-    /** The real part. */
-    struct fraction real;
-    
-    /** The imaginary part. */
-    struct fraction imaginary;
+    /** The value. */
+    int value;
 };
 
-/* COMPLEX_SOURCE */
+/* BOOLEAN_SOURCE */
 #endif
 
