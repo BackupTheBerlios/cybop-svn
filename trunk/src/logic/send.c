@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2005-02-11 11:02:54 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2005-03-02 07:22:03 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -38,6 +38,7 @@
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
 #include "../socket/unix_socket.c"
+#include "../translator/translator.c"
 #include "../web/socket_number_accessor.c"
 
 /**
@@ -268,24 +269,62 @@ void send_message(const void* p0, const void* p1,
             if (i >= 0) {
 
                 // The client socket.
-                int cs = -1;
+                int* cs = INTEGER_NULL_POINTER;
 
                 get_client_socket_number_for_index(p6, (void*) &i, (void*) &cs);
 
-                if (cs >= 0) {
+                if (*cs >= 0) {
+                   
+                    //in abhängigkeit vom empfänger
+                    //müssen die Daten verschieden aufbereitet werden
+                    //zur Zeit nur TCP socket für webanwednung
+                    //darum z.Z. immer html-Aufbereitung
+                    //--> das bedeuet, das ermittelte Modell
+                    //muss noch für die Ausgabe aufbereuitet (tranlate) werden.
+                    
+                    //create the destination for the send model
+                    void* dest = NULL_POINTER;
+                    int* dest_count = INTEGER_NULL_POINTER;
+                    int* dest_size = INTEGER_NULL_POINTER;
+                    
+                    create( &dest_count, INTEGER_COUNT, 
+                            INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
+                    create( &dest_size, INTEGER_COUNT, 
+                            INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
+                    *dest_count = 0;
+                    *dest_size  = 0;
+                    create( &dest, dest_size, 
+                            STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT );
+                    
+                    encode_model( &dest, dest_count, dest_size,
+                                  *ma, *mac, 
+                                  *mm, *mmc,
+                                  *md, *mdc,
+                                  (void*) HTML_ABSTRACTION, 
+                                  (void*) HTML_ABSTRACTION_COUNT,
+                                  p2, p3 );
 
                     // The temporary count, size.
                     int tc = 0;
                     int ts = 0;
 
-                    send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts, (void*) &mm, (void*) &mmc);
+                    send_tcp_socket( (void*) &cs, (void*) &tc, (void*) &ts, 
+                                     (void*) dest, (void*) dest_count );
 
                     // Remove client socket number and main signal id from internals.
                     remove_relation_clientsocketnumber_mainsignalid(p6, (void*) &i);
 
                     // Close socket.
-                    close(cs);
-
+                    close(*cs);
+                    
+                    //destroy destination 
+                    destroy( &dest, dest_size, 
+                             STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT );
+                    destroy( &dest_count, INTEGER_COUNT, 
+                             INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
+                    destroy( &dest_size, INTEGER_COUNT, 
+                             INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
+                                                 
                 } else {
 
                     log_message_debug("Could not send tcp socket message. The client socket number was not found.");
