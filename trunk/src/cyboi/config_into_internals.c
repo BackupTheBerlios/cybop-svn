@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.7 $ $Date: 2004-11-23 08:17:54 $ $Author: rholzmueller $
+ * @version $Revision: 1.8 $ $Date: 2004-11-23 13:34:11 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -298,6 +298,9 @@ int initialize_internals_tcp_socket( xmlNode* root_element, void** pp_internal )
                            (void*) &sm, (void*) &smc,
                            (void*) &INTEGER_ABSTRACTION,
                            (void*) &INTEGER_ABSTRACTION_COUNT );
+                    set_internal( pp_internal, (void*) &p_port,
+                                  (void*) &INTERNAL_TYPE_INTEGER,
+                                  (void*) &INTERNAL_TCPSOCKET_PORT_INDEX );
                 }
 
                 //active
@@ -322,6 +325,9 @@ int initialize_internals_tcp_socket( xmlNode* root_element, void** pp_internal )
                            (void*) &sm, (void*) &smc,
                            (void*) &INTEGER_ABSTRACTION,
                            (void*) &INTEGER_ABSTRACTION_COUNT );
+                    set_internal( pp_internal, (void*) &p_active,
+                                  (void*) &INTERNAL_TYPE_INTEGER,
+                                  (void*) &INTERNAL_TCPSOCKET_ACTIVE_INDEX );
                 }
 
             }  // if (cur_node->type == XML_ELEMENT_NODE)
@@ -409,7 +415,6 @@ int initialize_internals( char* p_configfile, void** pp_internal ) {
                     log_message_debug( "Model start gefunden" );
                     initialize_internals_start( cur_node->children,
                                                 pp_internal );
-
                 }
 
                 comp_result = 0;

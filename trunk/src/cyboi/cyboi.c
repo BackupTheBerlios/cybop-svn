@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.44 $ $Date: 2004-11-23 08:21:42 $ $Author: rholzmueller $
+ * @version $Revision: 1.45 $ $Date: 2004-11-23 13:34:43 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -182,22 +182,6 @@ int main(int p0, char** p1) {
             //
             void* p_internal = NULL_POINTER;
             create_internals_structur( (void*) &p_internal );
-            
-//            int valuetype = 0;
-//            void* p_internalvalue = NULL_POINTER;
-//            create_internal( (void*) &p_internalvalue, (void*) &INTERNAL_TYPE_INTEGER );
-//                          
-//            int port = 5678;
-//            set_internal( (void*) &p_internal, (void*) &p_internalvalue,
-//                          (void*) &INTERNAL_TYPE_INTEGER, 
-//                          (void*) &port,
-//                          (void*) &INTERNAL_TCPSOCKET_PORT_INDEX );
-//
-//            valuetype = 0;
-//            p_internalvalue = NULL_POINTER;
-//            get_internal( (void*) &p_internal, (void*) &p_internalvalue,
-//                          (void*) &valuetype, 
-//                          (void*) &INTERNAL_TCPSOCKET_PORT_INDEX );
 
             //
             // copy configuration file parameters into internals
@@ -285,73 +269,7 @@ int main(int p0, char** p1) {
             //
             // TCP socket.
             //
-
-//            // The active flag and port.
-//            int* p_tcp_socket_active = NULL_POINTER;
-//            int* p_tcp_socket_port = NULL_POINTER;
-//            int* p_tcp_socket_number = NULL_POINTER;
-//            
-//            int dummy_type;
-//            int dummy_count;
-//            int dummy_size;
-//
-//            // Get active flag and port.
-//            get_internal( (void*) &p_internal, (void*) &p_tcp_socket_active,
-//                          (void*) &dummy_type, 
-//                          (void*) &dummy_count, 
-//                          (void*) &dummy_size,
-//                          (void*) &INTERNAL_TCPSOCKET_ACTIVE_INDEX );
-//            
-//            get_internal( (void*) &p_internal, (void*) &p_tcp_socket_port,
-//                          (void*) &dummy_type, 
-//                          (void*) &dummy_count, 
-//                          (void*) &dummy_size,
-//                          (void*) &INTERNAL_TCPSOCKET_PORT_INDEX );
-//
-//            // Start tcp socket server.
-//            if ( *p_tcp_socket_active==1 ) {
-//
-//                int err = 0;
-//                err = create_tcp_socket( p_tcp_socket_port, 
-//                                         p_tcp_socket_number );
-//                    
-//                if ( err == 0 ) {
-//                  
-//                    log_message_debug( "create tcp socket was successful");
-//                    
-//                    //the socket number must into the internals
-//                    dummy_count = 1;
-//                    set_internal( (void*) &p_internal, (void*) &p_tcp_socket_number,
-//                                  (void*) &INTERNAL_TYPE_INTEGER, 
-//                                  (void*) &dummy_count, 
-//                                  (void*) &INTEGER_PRIMITIVE_SIZE,
-//                                  (void*) &INTERNAL_TCPSOCKET_SERVERSOCKETNUMBER_INDEX );
-//                    
-//                    set_array_element( 
-//                        (void*) &pi,
-//                        (void*) &INTEGER_ARRAY,
-//                        (void*) &INTEGER_INTERNALS_TCPSOCKET_SERVERSOCKETNUMBER_INDEX,
-//                        (void*) &tcp_socket_number );                    
-//                }
-//                else {
-//                    
-//                    log_message_debug( "create tcp socket was incorrect");
-//                    
-//                    //deactivat the active flag for tcp socket 
-//                    *p_tcp_socket_active = 0;
-//                    dummy_count = 1;
-//                    set_internal( (void*) &p_internal, (void*) &p_tcp_socket_active,
-//                                  (void*) &INTERNAL_TYPE_INTEGER, 
-//                                  (void*) &dummy_count, 
-//                                  (void*) &INTEGER_PRIMITIVE_SIZE,
-//                                  (void*) &INTERNAL_TCPSOCKET_ACTIVE_INDEX );
-//                    set_array_element( 
-//                        (void*) &pi,
-//                        (void*) &INTEGER_ARRAY,
-//                        (void*) &INTEGER_INTERNALS_TCPSOCKET_ACTIVE_INDEX,
-//                        (void*) &tcp_socket_active );                    
-//                }
-//            }
+            create_tcp_socket( (void*) &p_internal );
 
             //
             // UNIX socket.
@@ -442,8 +360,6 @@ int main(int p0, char** p1) {
             //
             // Startup signal.
             //
-
-
 
             // Add startup signal to signal memory.
             set_signal( pp_m, p_mc, p_ms,   //memory

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2004-11-23 08:20:02 $ $Author: rholzmueller $
+ * @version $Revision: 1.10 $ $Date: 2004-11-23 13:35:12 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,17 +90,17 @@ void activate_internals( void** pp_internals ) {
     // tcp socket
     //
 
-    int tcp_socket_active = 0;
+    int* p_tcp_socket_active = NULL_POINTER;
     int internal_type = 0;
 
     // get the active flag for tcp socket
-    get_internal( pp_internals, (void*) &tcp_socket_active,
+    get_internal( pp_internals, (void*) &p_tcp_socket_active,
                   (void*) &internal_type, 
                   (void*) &INTERNAL_TCPSOCKET_ACTIVE_INDEX );
 
-    if ( tcp_socket_active == 1) {
+    if ( *p_tcp_socket_active == 1) {
 
-//        activate_tcp_socket( pp_internals );
+        activate_tcp_socket( pp_internals );
     }
 
 
