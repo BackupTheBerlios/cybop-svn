@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.47 $ $Date: 2004-12-13 22:47:20 $ $Author: christian $
+ * @version $Revision: 1.48 $ $Date: 2004-12-16 16:34:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,89 +52,21 @@
 #include "../x_windows/x_windows_handler.c"
 
 /**
- * Initializes the global variables.
- */
-void initialize_global_variables() {
-
-    //
-    // Logging.
-    //
-
-    // Initialize log level.
-    LOG_LEVEL = DEBUG_LOG_LEVEL;
-
-    // Initialize maximum log message count.
-    MAXIMUM_LOG_MESSAGE_COUNT = 300;
-
-    // Initialize log output.
-    LOG_OUTPUT = stderr;
-
-    //
-    // Primitive type sizes.
-    //
-
-    // Initialize pointer primitive.
-    POINTER_PRIMITIVE_SIZE = sizeof(void*);
-
-    // Initialize integer primitive.
-    INTEGER_PRIMITIVE_SIZE = sizeof(int);
-
-    // Initialize character primitive.
-    CHARACTER_PRIMITIVE_SIZE = sizeof(char);
-
-    // Initialize double primitive.
-    DOUBLE_PRIMITIVE_SIZE = sizeof(double);
-
-    //
-    // Null pointers.
-    //
-    // CAUTION!
-    // These cannot be constant, because otherwise
-    // one could not alter their values later.
-    //
-
-    /** The null pointer. */
-    NULL_POINTER = (void*) 0;
-
-    /** The pointer null pointer. */
-    POINTER_NULL_POINTER = (void**) 0;
-
-    /** The integer null pointer. */
-    INTEGER_NULL_POINTER = (int*) 0;
-
-    /** The character null pointer. */
-    CHARACTER_NULL_POINTER = (char*) 0;
-
-    /** The double null pointer. */
-    DOUBLE_NULL_POINTER = (double*) 0;
-}
-
-/**
  * The main entry function.
- *
- * Command line arguments have to be in order:
- * - command (cyboi)
- * - abstraction (compound|operation)
- * - location (inline|file|ftp|http)
- * - model (a compound model or primitive operation, for example: exit or model.submodel)
- *
- * Usage:
- * cyboi compound|operation inline|file|ftp|http model.submodel
- *
- * Example 1 (starts up and right away shuts down the system):
- * cyboi operation inline exit
- *
- * Example 2 (calls the startup routine of some application):
- * cyboi compound file /application/logic/startup.cybol
  *
  * The main function follows a system lifecycle to start up,
  * run and shut down the CYBOI system, in the following order:
- * 1 initialize global variables
- * 2 create statics (state/ logic knowledge container etc.)
- * 3 create startup signal and add to signal memory
- * 4 run dynamics (signal waiting loop)
- * 5 destroy startup signal
- * 6 destroy statics (state/ logic knowledge container etc.)
+ * - create global variables
+ * - create internals
+ * - create signal memory
+ * - create statics (state/ logic knowledge container etc.)
+ * - create startup signal and add to signal memory
+ * - run dynamics (signal waiting loop)
+ * - destroy startup signal
+ * - destroy statics (state/ logic knowledge container etc.)
+ * - destroy signal memory
+ * - destroy internals
+ * - destroy global variables
  *
  * @param p0 the argument count (argc)
  * @param p1 the argument vector (argv)
@@ -149,12 +81,10 @@ int main(int p0, char** p1) {
     // Global variables.
     //
 
-    // Initialize global variables.
-    // CAUTION!
-    // They have to be initialized before the command line parameter check below!
+    // Create global variables.
+    // CAUTION! They have to be created BEFORE the command line parameter check below!
     // Otherwise, the logger may not be able to log possible error messages.
-    initialize_global_variables();
-    log_message_debug( "init global variables" );
+    create_globals();
 
     //
     // Testing.
@@ -169,26 +99,21 @@ int main(int p0, char** p1) {
     if (p1 != NULL_POINTER) {
 
         if (p0 == STARTUP_PARAMETERS_COUNT) {
-         
+
             //
-            // create internal
-            // the internal ist a pointer to array with 4 colums
+            // Internals.
+            //
+
+            // The internal ist a pointer to array with 4 colums
             // colum 1:  pointer for the value
             // colum 2:  type for the value
             // colum 3:  count for the value
             // colum 4:  size for the value
-            //
             void* p_internal = NULL_POINTER;
             create_internals_structur( (void*) &p_internal );
 
-            //
-            // copy configuration file parameters into internals
-            //
-
-            initialize_internals( p1[CONFIG_STARTUP_PARAMETER_INDEX], 
-                                  (void*) &p_internal );
-            //log_message_debug( "init internals with parameters" );
-
+            // Copy configuration file parameters into internals.
+            initialize_internals(p1[CONFIG_STARTUP_PARAMETER_INDEX], (void*) &p_internal);
 
             //
             // Signal memory.
@@ -198,34 +123,34 @@ int main(int p0, char** p1) {
             void** pp_m = NULL_POINTER;
             int* p_mc = NULL_POINTER;
             int* p_ms = NULL_POINTER;
-            
-            // create the internal
-            create_internal( (void*) &pp_m, (void*) &INTERNAL_TYPE_POINTER );
-            create_internal( (void*) &p_mc, (void*) &INTERNAL_TYPE_INTEGER );
-            create_internal( (void*) &p_ms, (void*) &INTERNAL_TYPE_INTEGER );
-            
+
+            // Create internals.
+            create_internal((void*) &pp_m, (void*) &INTERNAL_TYPE_POINTER);
+            create_internal((void*) &p_mc, (void*) &INTERNAL_TYPE_INTEGER);
+            create_internal((void*) &p_ms, (void*) &INTERNAL_TYPE_INTEGER);
+
             *p_mc = 0;
             *p_ms = 0;
-            
+
             // Create signal container.
-            create( pp_m, p_ms, 
+            create( pp_m, p_ms,
                     (void*) &SIGNAL_MEMORY_ABSTRACTION,
-                    (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT );
-                    
-            // set the signal container into internals
-            set_internal( (void*) &p_internal, (void*) &pp_m,  
-                          (void*) &INTERNAL_TYPE_POINTER,
-                          (void*) &INTERNAL_SIGNAL_MEMORY_INDEX );
+                    (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
-            set_internal( (void*) &p_internal, (void*) &p_mc,  
-                          (void*) &INTERNAL_TYPE_INTEGER,
-                          (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX );
+            // Set signal container into internals.
+            set_internal((void*) &p_internal, (void*) &pp_m,
+                         (void*) &INTERNAL_TYPE_POINTER,
+                         (void*) &INTERNAL_SIGNAL_MEMORY_INDEX);
 
-            set_internal( (void*) &p_internal, (void*) &p_ms,  
-                          (void*) &INTERNAL_TYPE_INTEGER,
-                          (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX );
+            set_internal((void*) &p_internal, (void*) &p_mc,
+                         (void*) &INTERNAL_TYPE_INTEGER,
+                         (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX);
 
-            log_message_debug( "init signal container" );
+            set_internal((void*) &p_internal, (void*) &p_ms,
+                         (void*) &INTERNAL_TYPE_INTEGER,
+                         (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX);
+
+            log_message_debug("Initialized signal container.");
 
             //
             // Knowledge container.
@@ -236,7 +161,7 @@ int main(int p0, char** p1) {
             int* p_kc = NULL_POINTER;
             int* p_ks = NULL_POINTER;
 
-            // create the internal
+            // Create internal.
             create_internal( (void*) &pp_k, (void*) &INTERNAL_TYPE_POINTER );
             create_internal( (void*) &p_kc, (void*) &INTERNAL_TYPE_INTEGER );
             create_internal( (void*) &p_ks, (void*) &INTERNAL_TYPE_INTEGER );
@@ -245,20 +170,20 @@ int main(int p0, char** p1) {
             *p_ks = 0;
 
             // Create knowledge container.
-            create( pp_k, p_ks, 
-                    (void*) &COMPOUND_ABSTRACTION, 
+            create( pp_k, p_ks,
+                    (void*) &COMPOUND_ABSTRACTION,
                     (void*) &COMPOUND_ABSTRACTION_COUNT );
 
             // set the knowledge container into internals
-            set_internal( (void*) &p_internal, (void*) &pp_k,  
+            set_internal( (void*) &p_internal, (void*) &pp_k,
                           (void*) &INTERNAL_TYPE_POINTER,
                           (void*) &INTERNAL_KNOWLEDGE_MODEL_INDEX );
 
-            set_internal( (void*) &p_internal, (void*) &p_kc,  
+            set_internal( (void*) &p_internal, (void*) &p_kc,
                           (void*) &INTERNAL_TYPE_INTEGER,
                           (void*) &INTERNAL_KNOWLEDGE_MODEL_COUNT_INDEX );
 
-            set_internal( (void*) &p_internal, (void*) &p_ks,  
+            set_internal( (void*) &p_internal, (void*) &p_ks,
                           (void*) &INTERNAL_TYPE_INTEGER,
                           (void*) &INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX );
             log_message_debug( "init knowledge container" );
@@ -267,6 +192,7 @@ int main(int p0, char** p1) {
             //
             // TCP socket.
             //
+
             create_tcp_socket( (void*) &p_internal );
 
             //
@@ -300,29 +226,29 @@ int main(int p0, char** p1) {
             int* smc = NULL_POINTER;
 
             int internal_type = 0;
-            
+
             // Get source channel.
             get_internal( (void*) &p_internal, (void*) &sc,
-                          (void*) &internal_type, 
+                          (void*) &internal_type,
                           (void*) &INTERNAL_START_CHANNEL_INDEX );
             get_internal( (void*) &p_internal, (void*) &scc,
-                          (void*) &internal_type, 
+                          (void*) &internal_type,
                           (void*) &INTERNAL_START_CHANNEL_COUNT_INDEX );
 
             // Get source abstraction.
             get_internal( (void*) &p_internal, (void*) &sa,
-                          (void*) &internal_type, 
+                          (void*) &internal_type,
                           (void*) &INTERNAL_START_ABSTRACTION_INDEX );
             get_internal( (void*) &p_internal, (void*) &sac,
-                          (void*) &internal_type, 
+                          (void*) &internal_type,
                           (void*) &INTERNAL_START_ABSTRACTION_COUNT_INDEX );
 
             // Get source model.
             get_internal( (void*) &p_internal, (void*) &sm,
-                          (void*) &internal_type, 
+                          (void*) &internal_type,
                           (void*) &INTERNAL_START_MODEL_INDEX );
             get_internal( (void*) &p_internal, (void*) &smc,
-                          (void*) &internal_type, 
+                          (void*) &internal_type,
                           (void*) &INTERNAL_START_MODEL_COUNT_INDEX );
 
             // The destination abstraction.
@@ -363,7 +289,7 @@ int main(int p0, char** p1) {
             // get the new main signal id
             int main_sig_id = 0;
             get_new_main_signal_id( pp_m, p_mc, &main_sig_id );
-            
+
             // Add startup signal to signal memory.
             set_signal( pp_m, p_mc, p_ms,   //memory
                         (void*) &da, (void*) &dac,              //dest abtsraction
@@ -411,14 +337,18 @@ int main(int p0, char** p1) {
             // Destroy knowledge.
             destroy( pp_k, p_ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
 
-
             // Destroy signal memory.
             destroy( pp_m, p_ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
-            // destroy the internals
-            destroy_internals_structur( (void*) &p_internal );
+            // Destroy internals.
+            destroy_internals_structur((void*) &p_internal);
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
+
+            // Destroy global variables.
+            // CAUTION! They have to be destroyed AFTER the last log message above!
+            // Otherwise, the logger may not be able to log possible error messages.
+            destroy_globals();
 
             // Set return value to 0, to indicate proper shutdown.
             r = 0;

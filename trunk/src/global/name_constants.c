@@ -28,12 +28,40 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.4 $ $Date: 2004-12-13 22:47:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-12-16 16:34:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef NAME_CONSTANTS_SOURCE
 #define NAME_CONSTANTS_SOURCE
+
+//
+// Configuration names.
+//
+
+/** The config start abstraction. */
+static const char CONFIG_START_NAME_ABSTRACTION_ARRAY[] = {'s', 't', 'a', 'r', 't'};
+static const char* CONFIG_START_NAME_ABSTRACTION = CONFIG_START_NAME_ABSTRACTION_ARRAY;
+static const int CONFIG_START_NAME_ABSTRACTION_COUNT_ARRAY[] = {5};
+static const int* CONFIG_START_NAME_ABSTRACTION_COUNT = CONFIG_START_NAME_ABSTRACTION_COUNT_ARRAY;
+
+/** The tcp socket abstraction. */
+static const char CONFIG_TCP_SOCKET_NAME_ABSTRACTION_ARRAY[] = {'t', 'c', 'p', '_', 's','o','c','k','e','t'};
+static const char* CONFIG_TCP_SOCKET_NAME_ABSTRACTION =CONFIG_TCP_SOCKET_NAME_ABSTRACTION_ARRAY;
+static const int CONFIG_TCP_SOCKET_NAME_ABSTRACTION_COUNT_ARRAY[] = {10};
+static const int* CONFIG_TCP_SOCKET_NAME_ABSTRACTION_COUNT = CONFIG_TCP_SOCKET_NAME_ABSTRACTION_COUNT_ARRAY;
+
+/** The tcp socket activ abstraction. */
+static const char CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_ARRAY[] = {'a', 'c', 't', 'i', 'v','e'};
+static const char* CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION = CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_ARRAY;
+static const int CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_COUNT_ARRAY[] = {6};
+static const int* CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_COUNT = CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_COUNT_ARRAY;
+
+/** The tcp socket port abstraction. */
+static const char CONFIG_TCP_SOCKET_PORT_ABSTRACTION_ARRAY[] = {'p', 'o', 'r', 't'};
+static const char* CONFIG_TCP_SOCKET_PORT_ABSTRACTION =CONFIG_TCP_SOCKET_PORT_ABSTRACTION_ARRAY;
+static const int CONFIG_TCP_SOCKET_PORT_ABSTRACTION_COUNT_ARRAY[] = {4};
+static const int* CONFIG_TCP_SOCKET_PORT_ABSTRACTION_COUNT = CONFIG_TCP_SOCKET_PORT_ABSTRACTION_COUNT_ARRAY;
 
 //
 // Creation names.
@@ -42,51 +70,32 @@
 /** The name name abstraction. */
 static const char NAME_NAME_ABSTRACTION_ARRAY[] = {'n', 'a', 'm', 'e'};
 static const char* NAME_NAME_ABSTRACTION = NAME_NAME_ABSTRACTION_ARRAY;
-static const int NAME_NAME_ABSTRACTION_COUNT = 4;
+static const int NAME_NAME_ABSTRACTION_COUNT_ARRAY[] = {4};
+static const int* NAME_NAME_ABSTRACTION_COUNT = NAME_NAME_ABSTRACTION_COUNT_ARRAY;
 
 /** The channel name abstraction. */
 static const char CHANNEL_NAME_ABSTRACTION_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
 static const char* CHANNEL_NAME_ABSTRACTION = CHANNEL_NAME_ABSTRACTION_ARRAY;
-static const int CHANNEL_NAME_ABSTRACTION_COUNT = 7;
+static const int CHANNEL_NAME_ABSTRACTION_COUNT_ARRAY[] = {7};
+static const int* CHANNEL_NAME_ABSTRACTION_COUNT = CHANNEL_NAME_ABSTRACTION_COUNT_ARRAY;
 
 /** The abstraction name abstraction. */
 static const char ABSTRACTION_NAME_ABSTRACTION_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
 static const char* ABSTRACTION_NAME_ABSTRACTION = ABSTRACTION_NAME_ABSTRACTION_ARRAY;
-static const int ABSTRACTION_NAME_ABSTRACTION_COUNT = 11;
+static const int ABSTRACTION_NAME_ABSTRACTION_COUNT_ARRAY[] = {11};
+static const int* ABSTRACTION_NAME_ABSTRACTION_COUNT = ABSTRACTION_NAME_ABSTRACTION_COUNT_ARRAY;
 
 /** The model name abstraction. */
 static const char MODEL_NAME_ABSTRACTION_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
 static const char* MODEL_NAME_ABSTRACTION = MODEL_NAME_ABSTRACTION_ARRAY;
-static const int MODEL_NAME_ABSTRACTION_COUNT = 5;
+static const int MODEL_NAME_ABSTRACTION_COUNT_ARRAY[] = {5};
+static const int* MODEL_NAME_ABSTRACTION_COUNT = MODEL_NAME_ABSTRACTION_COUNT_ARRAY;
 
 /** The whole name abstraction. */
 static const char WHOLE_NAME_ABSTRACTION_ARRAY[] = {'w', 'h', 'o', 'l', 'e'};
 static const char* WHOLE_NAME_ABSTRACTION = WHOLE_NAME_ABSTRACTION_ARRAY;
-static const int WHOLE_NAME_ABSTRACTION_COUNT = 5;
-
-//
-// Config names.
-//
-
-/** The config start abstraction. */
-static const char CONFIG_START_NAME_ABSTRACTION_ARRAY[] = {'s', 't', 'a', 'r', 't'};
-static const char* CONFIG_START_NAME_ABSTRACTION = CONFIG_START_NAME_ABSTRACTION_ARRAY;
-static const int CONFIG_START_NAME_ABSTRACTION_COUNT = 5;
-
-/** The tcp socket abstraction. */
-static const char CONFIG_TCP_SOCKET_NAME_ABSTRACTION_ARRAY[] = {'t', 'c', 'p', '_', 's','o','c','k','e','t'};
-static const char* CONFIG_TCP_SOCKET_NAME_ABSTRACTION =CONFIG_TCP_SOCKET_NAME_ABSTRACTION_ARRAY;
-static const int CONFIG_TCP_SOCKET_NAME_ABSTRACTION_COUNT = 10;
-
-/** The tcp socket activ abstraction. */
-static const char CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_ARRAY[] = {'a', 'c', 't', 'i', 'v','e'};
-static const char* CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION =CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_ARRAY;
-static const int CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_COUNT = 6;
-
-/** The tcp socket port abstraction. */
-static const char CONFIG_TCP_SOCKET_PORT_ABSTRACTION_ARRAY[] = {'p', 'o', 'r', 't'};
-static const char* CONFIG_TCP_SOCKET_PORT_ABSTRACTION =CONFIG_TCP_SOCKET_PORT_ABSTRACTION_ARRAY;
-static const int CONFIG_TCP_SOCKET_PORT_ABSTRACTION_COUNT = 4;
+static const int WHOLE_NAME_ABSTRACTION_COUNT_ARRAY[] = {5};
+static const int* WHOLE_NAME_ABSTRACTION_COUNT = WHOLE_NAME_ABSTRACTION_COUNT_ARRAY;
 
 //
 // Communication names.
@@ -95,22 +104,26 @@ static const int CONFIG_TCP_SOCKET_PORT_ABSTRACTION_COUNT = 4;
 /** The language name array, pointer, count. */
 static const char LANGUAGE_NAME_ABSTRACTION_ARRAY[] = {'l', 'a', 'n', 'g', 'u', 'a', 'g', 'e'};
 static const char* LANGUAGE_NAME_ABSTRACTION = LANGUAGE_NAME_ABSTRACTION_ARRAY;
-static const int LANGUAGE_NAME_ABSTRACTION_COUNT = 8;
+static const int LANGUAGE_NAME_ABSTRACTION_COUNT_ARRAY[] = {8};
+static const int* LANGUAGE_NAME_ABSTRACTION_COUNT = LANGUAGE_NAME_ABSTRACTION_COUNT_ARRAY;
 
 /** The sender name array, pointer, count. */
 static const char SENDER_NAME_ABSTRACTION_ARRAY[] = {'s', 'e', 'n', 'd', 'e', 'r'};
 static const char* SENDER_NAME_ABSTRACTION = SENDER_NAME_ABSTRACTION_ARRAY;
-static const int SENDER_NAME_ABSTRACTION_COUNT = 6;
+static const int SENDER_NAME_ABSTRACTION_COUNT_ARRAY[] = {6};
+static const int* SENDER_NAME_ABSTRACTION_COUNT = SENDER_NAME_ABSTRACTION_COUNT_ARRAY;
 
 /** The receiver name array, pointer, count. */
 static const char RECEIVER_NAME_ABSTRACTION_ARRAY[] = {'r', 'e', 'c', 'e', 'i', 'v', 'e', 'r'};
 static const char* RECEIVER_NAME_ABSTRACTION = RECEIVER_NAME_ABSTRACTION_ARRAY;
-static const int RECEIVER_NAME_ABSTRACTION_COUNT = 8;
+static const int RECEIVER_NAME_ABSTRACTION_COUNT_ARRAY[] = {8};
+static const int* RECEIVER_NAME_ABSTRACTION_COUNT = RECEIVER_NAME_ABSTRACTION_COUNT_ARRAY;
 
 /** The message name array, pointer, count. */
 static const char MESSAGE_NAME_ABSTRACTION_ARRAY[] = {'m', 'e', 's', 's', 'a', 'g', 'e'};
 static const char* MESSAGE_NAME_ABSTRACTION = MESSAGE_NAME_ABSTRACTION_ARRAY;
-static const int MESSAGE_NAME_ABSTRACTION_COUNT = 7;
+static const int MESSAGE_NAME_ABSTRACTION_COUNT_ARRAY[] = {7};
+static const int* MESSAGE_NAME_ABSTRACTION_COUNT = MESSAGE_NAME_ABSTRACTION_COUNT_ARRAY;
 
 /* NAME_CONSTANTS_SOURCE */
 #endif
