@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.12 $ $Date: 2004-05-09 22:43:49 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-05-13 08:24:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -515,6 +515,10 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
     int param9s = 0;
     void* param10 = NULL_POINTER;
     int param10s = 0;
+    void* param11 = NULL_POINTER;
+    int param11s = 0;
+    void* param12 = NULL_POINTER;
+    int param12s = 0;
 
     // Get parameter names.
     int j = 0;
@@ -580,6 +584,16 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
 
             get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param10);
             get_array_element((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param10s);
+
+        } else if (j == 11) {
+
+            get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param11);
+            get_array_element((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param11s);
+
+        } else if (j == 12) {
+
+            get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &j, (void*) &param12);
+            get_array_element((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &param12s);
         }
 
         j++;
@@ -618,47 +632,20 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
 
             if (r == 1) {
 
-                void* m = NULL_POINTER;
-                int ms = 0;
-
-                //
-                // Structure of part_model for create_model or destroy_model operation:
-                // - operation
-                // - whole model of created/destroyed part model
-                // - name
-                // - abstraction
-                // - location
-                // - model
-                //
-                // Example:
-                // <part name="create_find_dialog"
-                //     part_abstraction="operation"
-                //     part_location="inline"
-                //     part_model="
-                //         create_model,
-                //         application.gui,
-                //         find_dialog,
-                //         compound,
-                //         file,
-                //         application/find_dialog.cybol"/>
-                //
-//??                create_model((void*) &m, (void*) &ms, (void*) &param2, (void*) &param2s, (void*) &param3, (void*) &param3s, (void*) &param4, (void*) &param4s);
-
-                // TODO: Move reading from: inline, file, ftp etc.
-                // out of compound::initialize into general create_model procedure!
-                // Reason: also a boolean or integer value may be read from file,
-                // and not only inline.
-                // --> add additional "location" parameter to create_model procedure!
-
-                // Add to statics.
-                // Models of statics root do not need position or constraints!
-                // Just store part abstraction, location, model.
-                // Hand over (void*) &NULL_POINTER for all others!
-                // Name must be given as create_model operation parameter, in cybol.
-                set_model_part_by_name(p1, (void*) &param1, (void*) &param1s,
-                    (void*) &param2, (void*) &param2s, (void*) &param3, (void*) &param3s, (void*) &param4, (void*) &param4s,
-                    (void*) &param5, (void*) &param5s, (void*) &param6, (void*) &param6s, (void*) &param7, (void*) &param7s,
-                    (void*) &param8, (void*) &param8s, (void*) &param9, (void*) &param9s, (void*) &param10, (void*) &param10s);
+/*??
+                create_model((void*) &param1, (void*) &param1s,
+                    (void*) &param2, (void*) &param2s,
+                    (void*) &param3, (void*) &param3s,
+                    (void*) &param4, (void*) &param4s,
+                    (void*) &param5, (void*) &param5s,
+                    (void*) &param6, (void*) &param6s,
+                    (void*) &param7, (void*) &param7s,
+                    (void*) &param8, (void*) &param8s,
+                    (void*) &param9, (void*) &param9s,
+                    (void*) &param10, (void*) &param10s,
+                    (void*) &param11, (void*) &param11s,
+                    (void*) &param12, (void*) &param12s);
+*/
 
                 d = 1;
             }
@@ -673,22 +660,6 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
             compare_array_elements((void*) &param0, (void*) &DESTROY_MODEL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_MODEL_ABSTRACTION_SIZE, (void*) &r);
 
             if (r == 1) {
-
-/*??
-                struct model* s = (struct model*) p1;
-
-                if (s != NULL_POINTER) {
-
-                    //?? Work this out! Hand over 9 or just 3 parameters,
-                    //?? for only part or also position and constraint?
-                    void* m = get_map_element_with_name(s->part_models, get_map_element_with_name(v, (void*) &ONE_NUMBER));
-                    destroy_model(m, get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
-
-                } else {
-
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle destroy statics model. The statics is null.");
-                }
-*/
 
                 d = 1;
             }
@@ -729,7 +700,6 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
             compare_array_elements((void*) &param0, (void*) &RECEIVE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &RECEIVE_ABSTRACTION_SIZE, (void*) &r);
 
             if (r == 1) {
-
 
                 d = 1;
             }

@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.21 $ $Date: 2004-05-09 22:43:49 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2004-05-13 08:24:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,14 +45,67 @@
 /**
  * Creates a transient model from a persistent model.
  *
- * @param p0 the transient model
- * @param p1 the transient model size
- * @param p2 the persistent model
- * @param p3 the persistent model size
- * @param p4 the abstraction
- * @param p5 the abstraction size
+ * Structure of part_model for create_model or destroy_model operation:
+ * - operation
+ * - whole model of created/destroyed part model
+ * - name
+ * - part_abstraction
+ * - part_location
+ * - part_model
+ * - position_abstraction
+ * - position_location
+ * - position_model
+ * - constraint_abstraction
+ * - constraint_location
+ * - constraint_model
+ *
+ * Not all of these parameters are needed. Those at the end
+ * (for example for position and constraint) can be left out.
+ * Caution:
+ * It is not possible to leave out parameters in between,
+ * because then the order of parameters will get mixed up!
+ *
+ * Example:
+ * <part name="create_find_dialog"
+ *     part_abstraction="operation"
+ *     part_location="inline"
+ *     part_model="
+ *         create_model,
+ *         application.gui,
+ *         find_dialog,
+ *         compound,
+ *         file,
+ *         application/find_dialog.cybol"/>
+ *
+ * @param p0 the whole
+ * @param p1 the ??
+ * @param p2 the name
+ * @param p3 the name size
+ * @param p4 the part abstraction
+ * @param p5 the part abstraction size
+ * @param p6 the part location
+ * @param p7 the part location size
+ * @param p8 the part model
+ * @param p9 the part model size
+ * @param p10 the position abstraction
+ * @param p11 the position abstraction size
+ * @param p12 the position location
+ * @param p13 the position location size
+ * @param p14 the position model
+ * @param p15 the position model size
+ * @param p16 the constraint abstraction
+ * @param p17 the constraint abstraction size
+ * @param p18 the constraint location
+ * @param p19 the constraint location size
+ * @param p20 the constraint model
+ * @param p21 the constraint model size
  */
-void create_model(void* p0, void* p1, const void* p2, const void* p3, const void* p4, const void* p5) {
+/*??
+void create_model(void* p0, void* p1,
+    const void* p2, const void* p3,
+    const void* p4, const void* p5, const void* p6, const void* p7, const void* p8, const void* p9,
+    const void* p10, const void* p11, const void* p12, const void* p13, const void* p14, const void* p15,
+    const void* p16, const void* p17, const void* p18, const void* p19, const void* p20, const void* p21) {
 
     // 1 read location --> call according procedure, e.g. read_from_file
     // 2 read byte data from location://model or inline:/model into array
@@ -64,6 +117,38 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
     //   to name, taking first non-existing suffix
     // 6 add transient model to whole with procedure:
     //   set_model_part_by_name(whole_model, name, name_size, ...)
+
+                void* m = NULL_POINTER;
+                int ms = 0;
+
+                // TODO: Move reading from: inline, file, ftp etc.
+                // out of compound::initialize into general create_model procedure!
+                // Reason: also a boolean or integer value may be read from file,
+                // and not only inline.
+                // --> add additional "location" parameter to create_model procedure!
+
+/*??
+                // Add to whole model (for example statics).
+                set_model_part_by_name(p1, (void*) &param1, (void*) &param1s,
+                    (void*) &param2, (void*) &param2s, (void*) &param3, (void*) &param3s, (void*) &param4, (void*) &param4s,
+                    (void*) &param5, (void*) &param5s, (void*) &param6, (void*) &param6s, (void*) &param7, (void*) &param7s,
+                    (void*) &param8, (void*) &param8s, (void*) &param9, (void*) &param9s, (void*) &param10, (void*) &param10s);
+*/
+/*??
+}
+*/
+
+/**
+ * Creates a transient model from a persistent model.
+ *
+ * @param p0 the transient model
+ * @param p1 the transient model size
+ * @param p2 the persistent model
+ * @param p3 the persistent model size
+ * @param p4 the abstraction
+ * @param p5 the abstraction size
+ */
+void create_model(void* p0, void* p1, const void* p2, const void* p3, const void* p4, const void* p5) {
 
     // The done flag.
     int d = 0;
