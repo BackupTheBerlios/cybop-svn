@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.26 $ $Date: 2004-12-20 21:05:15 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2004-12-21 17:49:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -226,9 +226,13 @@ static const int* FALSE_BOOLEAN_COUNT = FALSE_BOOLEAN_COUNT_ARRAY;
 static const int STARTUP_PARAMETERS_COUNT_ARRAY[] = {2};
 static const int* STARTUP_PARAMETERS_COUNT = STARTUP_PARAMETERS_COUNT_ARRAY;
 
-/** The config file startup parameter index. */
-static const int CONFIG_STARTUP_PARAMETER_INDEX_ARRAY[] = {1};
-static const int* CONFIG_STARTUP_PARAMETER_INDEX = CONFIG_STARTUP_PARAMETER_INDEX_ARRAY;
+/** The command parameter index. */
+static const int COMMAND_PARAMETER_INDEX_ARRAY[] = {0};
+static const int* COMMAND_PARAMETER_INDEX = COMMAND_PARAMETER_INDEX_ARRAY;
+
+/** The configuration file parameter index. */
+static const int CONFIGURATION_FILE_PARAMETER_INDEX_ARRAY[] = {1};
+static const int* CONFIGURATION_FILE_PARAMETER_INDEX = CONFIGURATION_FILE_PARAMETER_INDEX_ARRAY;
 
 /* CONSTANT_SOURCE */
 #endif

@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.8 $ $Date: 2004-12-16 09:52:33 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-12-21 17:49:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,6 +78,12 @@ static const int* OPERATION_ABSTRACTION_COUNT = OPERATION_ABSTRACTION_COUNT_ARRA
 //
 // Primitive abstractions.
 //
+
+/** The pointer abstraction. */
+static const char POINTER_ABSTRACTION_ARRAY[] = {'p', 'o', 'i', 'n', 't', 'e', 'r'};
+static const char* POINTER_ABSTRACTION = POINTER_ABSTRACTION_ARRAY;
+static const int POINTER_ABSTRACTION_COUNT_ARRAY[] = {7};
+static const int* POINTER_ABSTRACTION_COUNT = POINTER_ABSTRACTION_COUNT_ARRAY;
 
 /** The boolean abstraction. */
 static const char BOOLEAN_ABSTRACTION_ARRAY[] = {'b', 'o', 'o', 'l', 'e', 'a', 'n'};

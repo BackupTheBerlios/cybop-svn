@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.53 $ $Date: 2004-12-21 10:53:22 $ $Author: christian $
+ * @version $Revision: 1.54 $ $Date: 2004-12-21 17:49:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,6 +39,7 @@
 #include "../accessor/signal_memory_accessor.c"
 #include "../communicator/communicator.c"
 #include "../creator/creator.c"
+#include "../creator/integer_creator.c"
 #include "../cyboi/internals.c"
 #include "../cyboi/signal_waiter.c"
 #include "../cyboi/config_into_internals.c"
@@ -110,10 +111,45 @@ int main(int p0, char** p1) {
 
             // The internals memory.
             void* i = NULL_POINTER;
-            create_internals_memory((void*) &i, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT);
+            create_array((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT);
 
-            // Copy configuration file parameters into internals.
-            initialize_internals(p1[*CONFIG_STARTUP_PARAMETER_INDEX], (void*) &i);
+            //
+            // Configuration parameters.
+            //
+
+            // The configuration file name.
+            void* c = NULL_POINTER;
+            get_array_elements(p1, (void*) &POINTER_ARRAY, (void*) &CONFIGURATION_FILE_PARAMETER_INDEX, (void*) &c, (void*) &ONE_ELEMENT_COUNT);
+
+            // Read parameters from configuration file given at command line
+            // and copy them into the internals memory.
+            create_startup_parameters((void*) &c, (void*) &i);
+//??OLD:            create_startup_parameters(p1[*CONFIGURATION_FILE_PARAMETER_INDEX], (void*) &i);
+
+            //
+            // Knowledge memory.
+            //
+
+            log_message_debug("Create knowledge memory.");
+
+            // The knowledge memory count.
+            int* kc = INTEGER_NULL_POINTER;
+            create_integer((void*) &kc);
+            *kc = 0;
+
+            // The knowledge memory size.
+            int* ks = INTEGER_NULL_POINTER;
+            create_integer((void*) &ks);
+            *ks = 0;
+
+            // The knowledge memory.
+            void* k = NULL_POINTER;
+            create((void*) &k, (void*) &ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
+
+            // Set knowledge memory into internals.
+            set_internal((void*) &i, (void*) &k, (void*) &POINTER_ABSTRACTION, (void*) &INTERNALS_KNOWLEDGE_MEMORY);
+            set_internal((void*) &i, (void*) &kc, (void*) &POINTER_ABSTRACTION, (void*) &INTERNALS_KNOWLEDGE_MEMORY_COUNT);
+            set_internal((void*) &i, (void*) &ks, (void*) &POINTER_ABSTRACTION, (void*) &INTERNALS_KNOWLEDGE_MEMORY_SIZE);
 
             //
             // Signal memory.
@@ -122,69 +158,23 @@ int main(int p0, char** p1) {
             log_message_debug("Create signal memory.");
 
             // The signal memory count.
-            int* mc = INTEGER_NULL_POINTER;
-            create_integer((void*) &mc);
-            *mc = 0;
+            int* sc = INTEGER_NULL_POINTER;
+            create_integer((void*) &sc);
+            *sc = 0;
 
             // The signal memory size.
-            int* ms = INTEGER_NULL_POINTER;
-            create_integer((void*) &ms);
-            *ms = 0;
+            int* ss = INTEGER_NULL_POINTER;
+            create_integer((void*) &ss);
+            *ss = 0;
 
             // The signal memory.
-            void* m = NULL_POINTER;
-            create((void*) &m, (void*) &ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
-
-            //?? TODO: Delete the following lines!?
-            //?? Replace with standard data values.
-            // Create internals.
-            create_internal((void*) &m, (void*) &INTERNAL_TYPE_POINTER);
-            create_internal((void*) &mc, (void*) &INTERNAL_TYPE_INTEGER);
-            create_internal((void*) &ms, (void*) &INTERNAL_TYPE_INTEGER);
+            void* s = NULL_POINTER;
+            create((void*) &s, (void*) &ss, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
             // Set signal memory into internals.
-            set_internal((void*) &i, (void*) &m, (void*) &INTERNAL_TYPE_POINTER, (void*) &INTERNAL_SIGNAL_MEMORY_INDEX);
-            set_internal((void*) &i, (void*) &mc, (void*) &INTERNAL_TYPE_INTEGER, (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX);
-            set_internal((void*) &i, (void*) &ms, (void*) &INTERNAL_TYPE_INTEGER, (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX);
-
-            //
-            // Knowledge memory.
-            //
-
-            log_message_debug("Create knowledge memory.");
-
-            // Initialize knowledge and its count and size.
-            void* pp_k = NULL_POINTER;
-            int* p_kc = NULL_POINTER;
-            int* p_ks = NULL_POINTER;
-
-            // Create internal.
-            create_internal( (void*) &pp_k, (void*) &INTERNAL_TYPE_POINTER );
-            create_internal( (void*) &p_kc, (void*) &INTERNAL_TYPE_INTEGER );
-            create_internal( (void*) &p_ks, (void*) &INTERNAL_TYPE_INTEGER );
-
-            *p_kc = 0;
-            *p_ks = 0;
-
-            // Create knowledge memory.
-            create( pp_k, p_ks,
-                    (void*) &COMPOUND_ABSTRACTION,
-                    (void*) &COMPOUND_ABSTRACTION_COUNT );
-
-            // set the knowledge memory into internals
-            set_internal( (void*) &i, (void*) &pp_k,
-                          (void*) &INTERNAL_TYPE_POINTER,
-                          (void*) &INTERNAL_KNOWLEDGE_MODEL_INDEX );
-
-            set_internal( (void*) &i, (void*) &p_kc,
-                          (void*) &INTERNAL_TYPE_INTEGER,
-                          (void*) &INTERNAL_KNOWLEDGE_MODEL_COUNT_INDEX );
-
-            set_internal( (void*) &i, (void*) &p_ks,
-                          (void*) &INTERNAL_TYPE_INTEGER,
-                          (void*) &INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX );
-            log_message_debug( "init knowledge memory" );
-
+            set_internal((void*) &i, (void*) &s, (void*) &POINTER_ABSTRACTION, (void*) &INTERNALS_SIGNAL_MEMORY);
+            set_internal((void*) &i, (void*) &sc, (void*) &POINTER_ABSTRACTION, (void*) &INTERNALS_SIGNAL_MEMORY_COUNT);
+            set_internal((void*) &i, (void*) &ss, (void*) &POINTER_ABSTRACTION, (void*) &INTERNALS_SIGNAL_MEMORY_SIZE);
 
             //
             // TCP socket.
@@ -204,7 +194,7 @@ int main(int p0, char** p1) {
 //            int unix_server_socket = -1;
 //            //?? Set unix server socket flag so that unix server socket gets created.
 //            char unix_server_socket_flag = 0;
-//            set_array_element((void*) &ci, (void*) &CHARACTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FLAG_INDEX, (void*) &unix_server_socket_flag);
+//            set_array_element((void*) &i, (void*) &CHARACTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FLAG_INDEX, (void*) &unix_server_socket_flag);
 //
 //            if (unix_server_socket_flag == 1) {
 //
@@ -231,28 +221,16 @@ int main(int p0, char** p1) {
             int internal_type = 0;
 
             // Get source channel.
-            get_internal( (void*) &i, (void*) &sc,
-                          (void*) &internal_type,
-                          (void*) &INTERNAL_START_CHANNEL_INDEX );
-            get_internal( (void*) &i, (void*) &scc,
-                          (void*) &internal_type,
-                          (void*) &INTERNAL_START_CHANNEL_COUNT_INDEX );
+            get_internal((void*) &i, (void*) &sc, (void*) &internal_type, (void*) &INTERNAL_START_CHANNEL);
+            get_internal((void*) &i, (void*) &scc, (void*) &internal_type, (void*) &INTERNAL_START_CHANNEL_COUNT);
 
             // Get source abstraction.
-            get_internal( (void*) &i, (void*) &sa,
-                          (void*) &internal_type,
-                          (void*) &INTERNAL_START_ABSTRACTION_INDEX );
-            get_internal( (void*) &i, (void*) &sac,
-                          (void*) &internal_type,
-                          (void*) &INTERNAL_START_ABSTRACTION_COUNT_INDEX );
+            get_internal((void*) &i, (void*) &sa, (void*) &internal_type, (void*) &INTERNAL_START_ABSTRACTION);
+            get_internal((void*) &i, (void*) &sac, (void*) &internal_type, (void*) &INTERNAL_START_ABSTRACTION_COUNT);
 
             // Get source model.
-            get_internal( (void*) &i, (void*) &sm,
-                          (void*) &internal_type,
-                          (void*) &INTERNAL_START_MODEL_INDEX );
-            get_internal( (void*) &i, (void*) &smc,
-                          (void*) &internal_type,
-                          (void*) &INTERNAL_START_MODEL_COUNT_INDEX );
+            get_internal((void*) &i, (void*) &sm, (void*) &internal_type, (void*) &INTERNAL_START_MODEL);
+            get_internal((void*) &i, (void*) &smc, (void*) &internal_type, (void*) &INTERNAL_START_MODEL_COUNT);
 
             // The destination abstraction.
             void* da = NULL_POINTER;
@@ -293,15 +271,12 @@ int main(int p0, char** p1) {
 
             // get the new main signal id
             int id = 0;
-            get_new_signal_id(m, mc, &id);
+            get_new_signal_id((void*) &s, (void*) &sc, (void*) &id);
 
             // Add startup signal to signal memory.
-            set_signal(m, mc, ms,   //memory
-                (void*) &da, (void*) &dac,              //dest abtsraction
-                (void*) &dm, (void*) &dmc,              //dest model
-                (void*) &dd, (void*) &ddc,              //dest details
-                (void*) &NORMAL_PRIORITY,
-                (void*) &id);
+            set_signal((void*) &s, (void*) &sc, (void*) &ss,
+                (void*) &da, (void*) &dac, (void*) &dm, (void*) &dmc,
+                (void*) &dd, (void*) &ddc, (void*) &NORMAL_PRIORITY, (void*) &id);
 
             log_message_debug( "set start signals" );
 
@@ -344,17 +319,24 @@ int main(int p0, char** p1) {
 //                destroy_unix_socket((void*) &unix_server_socket, (void*) &UNIX_SERVER_SOCKET_FILENAME);
 //            }
 
-            // Destroy knowledge.
-            log_message_debug("Destroy knowledge memory.");
-            destroy(pp_k, p_ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
-
             // Destroy signal memory.
             log_message_debug("Destroy signal memory.");
-            destroy(m, ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
+            destroy((void*) &s, (void*) &ss, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
+            destroy_integer((void*) &ss);
+            destroy_integer((void*) &sc);
+
+            // Destroy knowledge.
+            log_message_debug("Destroy knowledge memory.");
+            destroy((void*) &k, (void*) &ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
+            destroy_integer((void*) &ks);
+            destroy_integer((void*) &kc);
+
+            // Destroy startup parameters.
+            destroy_startup_parameters((void*) &c, (void*) &i);
 
             // Destroy internals.
             log_message_debug("Destroy internals memory.");
-            destroy_internals_memory((void*) &i, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT);
+            destroy_array((void*) &i, (void*) &POINTER_ARRAY, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT);
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 

@@ -23,7 +23,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.9 $ $Date: 2004-12-20 00:19:44 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-12-21 17:49:51 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -245,13 +245,13 @@ void handle_request( void** pp_internals, int* p_client_socket_number ) {
     
             get_internal( pp_internals, (void*) &pp_signal_memory, 
                           (void*) &internal_type, 
-                          (void*) &INTERNAL_SIGNAL_MEMORY_INDEX );
+                          (void*) &INTERNAL_SIGNAL_MEMORY );
             get_internal( pp_internals, (void*) &p_signal_memory_count, 
                           (void*) &internal_type, 
-                          (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX );
+                          (void*) &INTERNAL_SIGNAL_MEMORY_COUNT );
             get_internal( pp_internals, (void*) &p_signal_memory_size, 
                           (void*) &internal_type, 
-                          (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX );
+                          (void*) &INTERNAL_SIGNAL_MEMORY_SIZE );
     
     
             // The source channel.
@@ -341,7 +341,7 @@ void create_tcp_socket( void** pp_internals ) {
                          (void*) &INTERNAL_TYPE_INTEGER );
         set_internal( pp_internals, (void*) &p_server_socket_number,
                       (void*) &INTERNAL_TYPE_INTEGER, 
-                      (void*) &INTERNAL_TCPSOCKET_SERVERSOCKETNUMBER_INDEX );
+                      (void*) &INTERNAL_TCPSOCKET_SERVERSOCKETNUMBER );
                       
         //create the client socket number internals
         void** pp_client_socket_numbers = NULL_POINTER;
@@ -349,7 +349,7 @@ void create_tcp_socket( void** pp_internals ) {
                          (void*) &INTERNAL_TYPE_POINTER );
         set_internal( pp_internals, (void*) &pp_client_socket_numbers,
                       (void*) &INTERNAL_TYPE_POINTER, 
-                      (void*) &INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_INDEX );
+                      (void*) &INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER );
                               
         //create the client socket number count internals
         int* p_client_socket_numbers_count = NULL_POINTER;
@@ -358,7 +358,7 @@ void create_tcp_socket( void** pp_internals ) {
         *p_client_socket_numbers_count = 0;
         set_internal( pp_internals, (void*) &p_client_socket_numbers_count,
                       (void*) &INTERNAL_TYPE_INTEGER, 
-                      (void*) &INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_COUNT_INDEX );
+                      (void*) &INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_COUNT );
 
         //create the client socket number size internals
         int* p_client_socket_numbers_size = NULL_POINTER;
@@ -367,7 +367,7 @@ void create_tcp_socket( void** pp_internals ) {
         *p_client_socket_numbers_size = 0;
         set_internal( pp_internals, (void*) &p_client_socket_numbers_size,
                       (void*) &INTERNAL_TYPE_INTEGER, 
-                      (void*) &INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_SIZE_INDEX );
+                      (void*) &INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_SIZE );
 
         //create the main signal id internals
         void** pp_main_signal_ids = NULL_POINTER;
@@ -375,7 +375,7 @@ void create_tcp_socket( void** pp_internals ) {
                          (void*) &INTERNAL_TYPE_POINTER );
         set_internal( pp_internals, (void*) &pp_main_signal_ids,
                       (void*) &INTERNAL_TYPE_POINTER, 
-                      (void*) &INTERNAL_TCPSOCKET_MAINSIGNALID_INDEX );
+                      (void*) &INTERNAL_TCPSOCKET_MAINSIGNALID );
                               
         //create the main signal id count internals
         int* p_main_signal_ids_count = NULL_POINTER;
@@ -384,7 +384,7 @@ void create_tcp_socket( void** pp_internals ) {
         *p_main_signal_ids_count = 0;
         set_internal( pp_internals, (void*) &p_main_signal_ids_count,
                       (void*) &INTERNAL_TYPE_INTEGER, 
-                      (void*) &INTERNAL_TCPSOCKET_MAINSIGNALID_COUNT_INDEX );
+                      (void*) &INTERNAL_TCPSOCKET_MAINSIGNALID_COUNT );
 
         //create the main signal id size internals
         int* p_main_signal_ids_size = NULL_POINTER;
@@ -393,7 +393,7 @@ void create_tcp_socket( void** pp_internals ) {
         *p_main_signal_ids_size = 0;
         set_internal( pp_internals, (void*) &p_main_signal_ids_size,
                       (void*) &INTERNAL_TYPE_INTEGER, 
-                      (void*) &INTERNAL_TCPSOCKET_MAINSIGNALID_SIZE_INDEX );
+                      (void*) &INTERNAL_TCPSOCKET_MAINSIGNALID_SIZE );
 
             
         // The active flag and port.
@@ -403,12 +403,12 @@ void create_tcp_socket( void** pp_internals ) {
         // get active flag 
         get_internal( pp_internals, (void*) &p_tcp_socket_active,
                       (void*) &internal_type, 
-                      (void*) &INTERNAL_TCPSOCKET_ACTIVE_INDEX );
+                      (void*) &INTERNAL_TCPSOCKET_ACTIVE );
         
         // get port
         get_internal( pp_internals, (void*) &p_tcp_socket_port,
                       (void*) &internal_type, 
-                      (void*) &INTERNAL_TCPSOCKET_PORT_INDEX );
+                      (void*) &INTERNAL_TCPSOCKET_PORT );
 
         // Start tcp socket server.
         if ( *p_tcp_socket_active==1 ) {
@@ -501,18 +501,18 @@ void run_tcp_socket( void** pp_internals ) {
 
         get_internal( pp_internals, (void*) &pp_signal_memory, 
                       (void*) &internal_type, 
-                      (void*) &INTERNAL_SIGNAL_MEMORY_INDEX );
+                      (void*) &INTERNAL_SIGNAL_MEMORY );
         get_internal( pp_internals, (void*) &p_signal_memory_count, 
                       (void*) &internal_type, 
-                      (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX );
+                      (void*) &INTERNAL_SIGNAL_MEMORY_COUNT );
         get_internal( pp_internals, (void*) &p_signal_memory_size, 
                       (void*) &internal_type, 
-                      (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX );
+                      (void*) &INTERNAL_SIGNAL_MEMORY_SIZE );
 
         int* p_tcp_server_socket_number = NULL_POINTER;
         get_internal( pp_internals, (void*) &p_tcp_server_socket_number, 
                       (void*) &internal_type, 
-                      (void*) &INTERNAL_TCPSOCKET_SERVERSOCKETNUMBER_INDEX );
+                      (void*) &INTERNAL_TCPSOCKET_SERVERSOCKETNUMBER );
 
         int client_socketnumber;
         struct sockaddr_in client_address;
