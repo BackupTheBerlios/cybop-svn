@@ -25,7 +25,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.13 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-03-02 07:11:48 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -201,6 +201,17 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
             create_internals_memory(p0, p1);
         }
     }
+    
+    if (r != 1) {
+
+        compare_arrays(p2, p3, (void*) KNOWLEDGE_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            create_string(p0, p1);
+        }
+    }
+    
 }
 
 /**
