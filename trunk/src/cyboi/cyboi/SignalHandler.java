@@ -33,7 +33,7 @@ package cyboi;
  * - send
  * - reset
  *
- * @version $Revision: 1.9 $ $Date: 2003-08-12 17:14:48 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-08-12 20:10:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -124,12 +124,7 @@ class SignalHandler {
             
             if (tmp != null) {
             
-/*??
-
-                Signal is resent again and again, in "send" procedure! --> Debug this!
-
-*/
-                java.lang.System.out.println("TEST pre: " + tmp.predicate);
+                java.lang.System.out.println("INFO: Receive signal: " + tmp.predicate);
 
                 // Copy signal memory signal to the transporting signal given as parameter.
                 s.priority = tmp.priority;
@@ -143,8 +138,6 @@ class SignalHandler {
                 s.condition = tmp.condition;
 
                 // Reset and destroy signal memory signal.
-                // CAUTION! Reset is essential to avoid the accidential destruction of
-                // items transported by the signal.
                 SignalHandler.reset(tmp);
                 tmp = null;
         
@@ -169,7 +162,6 @@ class SignalHandler {
      */
     static boolean handle(java.lang.Object p0, int p1) {
 
-        // The shutdown flag.
         boolean sf = false;
         Signal s = (Signal) p0;
                 
@@ -179,10 +171,19 @@ class SignalHandler {
 
             if (a != null) {
 
-                if (a.equals("shutdown")) {
+                java.lang.System.out.println("INFO: Handle signal: " + a);
+
+                if (a.equals("startup")) {
+                    
+                    SignalHandler.reset(s);
+
+                } else if (a.equals("shutdown")) {
                     
                     sf = true;
+
+                    SignalHandler.reset(s);
                 }
+                
                 
             } else {
     
@@ -224,6 +225,8 @@ class SignalHandler {
         
                 if (tmp != null) {
                 
+                    java.lang.System.out.println("INFO: Send signal: " + s.predicate);
+
                     // Copy transporting signal given as parameter to the signal memory signal.
                     tmp.priority = s.priority;
                     tmp.language = s.language;

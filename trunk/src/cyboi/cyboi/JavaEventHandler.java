@@ -1,5 +1,5 @@
 /*
- * $RCSfile: EventHandler.java,v $
+ * $RCSfile: JavaEventHandler.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -25,17 +25,17 @@
 package cyboi;
 
 /**
- * This is the event handler.
+ * This is the java event handler.
  *
  * It dispatches java.awt.AWTEvent events, transforms them into CYBOI signals
  * and finally sends them through the whole system.
  *
  * Unfortunately, handling of most events is done via graphical components in java.
  *
- * @version $Revision: 1.3 $ $Date: 2003-08-12 17:14:48 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-08-12 20:10:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-class EventHandler extends java.awt.EventQueue {
+class JavaEventHandler extends java.awt.EventQueue {
 
     //
     // Attributes.
@@ -110,7 +110,7 @@ class EventHandler extends java.awt.EventQueue {
     
             if (s != null) {
     
-                EventHandler.transform_event(s, evt);
+                JavaEventHandler.transform_event(s, evt);
                 
                 if (s.predicate != null) {
                     
@@ -122,7 +122,7 @@ class EventHandler extends java.awt.EventQueue {
                     //?? SignalHandler.send and EventHandler.dispatchEvent!!
 
                     // Add signal to signal memory (interrupt vector table).
-                    MapHandler.add_map_element(EventHandler.signal_memory, s, SignalHandler.SIGNAL);
+                    MapHandler.add_map_element(JavaEventHandler.signal_memory, s, SignalHandler.SIGNAL);
 
                 } else {
                     
@@ -567,7 +567,7 @@ class EventHandler extends java.awt.EventQueue {
             if (q != null) {
 
                 // Replace the system event queue with the event handler.
-                q.push((EventHandler) p0);
+                q.push((JavaEventHandler) p0);
 
             } else {
 
