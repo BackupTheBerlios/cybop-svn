@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-01-07 00:06:42 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-01-07 11:59:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -119,6 +119,11 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
             void* dmc = NULL_POINTER;
             void* dms = NULL_POINTER;
 
+            // The comparison result.
+            int* r = INTEGER_NULL_POINTER;
+            create_integer((void*) &r);
+            *r = 0;
+
             while (1) {
 
                 if (c == NULL_POINTER) {
@@ -133,18 +138,13 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                         (void*) &sn, (void*) &snc, (void*) &sc, (void*) &scc,
                         (void*) &sa, (void*) &sac, (void*) &sm, (void*) &smc);
 
-                    if (r == 0) {
+                    if (*r == 0) {
 
-                        compare_arrays((void*) &sn, (void*) &snc, (void*) &CHANNEL_NAME_ABSTRACTION, (void*) &CHANNEL_NAME_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+                        compare_arrays((void*) &sn, (void*) &snc, (void*) &STARTUP_CHANNEL_CONFIGURATION_NAME, (void*) &STARTUP_CHANNEL_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                        if (r == 1) {
+                        if (*r == 1) {
 
-                            log_message_debug("Found channel.");
-
-                            // create the internals
-                            char** pp_channel = NULL_POINTER;
-                            int* p_channel_count = NULL_POINTER;
-                            int* p_channel_size = NULL_POINTER;
+                            log_message_debug("Found startup channel configuration name.");
 
                             // Create destination model.
                             create_model((void*) &dm, (void*) &dmc, (void*) &dms,
@@ -152,18 +152,90 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                                 (void*) &sa, (void*) &sac,
                                 (void*) &sc, (void*) &scc);
 
-                            create_internal( (void*) &pp_channel, (void*) &INTERNAL_TYPE_POINTER );
-                            create_internal( (void*) &p_channel_count, (void*) &INTERNAL_TYPE_INTEGER );
-                            create_internal( (void*) &p_channel_size, (void*) &INTERNAL_TYPE_INTEGER );
+                            // Set configuration parameter in internals memory.
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_COUNT_INTERNAL, (void*) &dmc, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_SIZE_INTERNAL, (void*) &dms, (void*) &ONE_ELEMENT_COUNT);
+                        }
+                    }
 
-                            //parse the internals
-                            *p_channel_count = 0;
-                            *p_channel_size = 0;
-                            parse(pp_channel, p_channel_count, p_channel_size, (void*) &sm, (void*) &smc,
-                                (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+                    if (*r == 0) {
+
+                        compare_arrays((void*) &sn, (void*) &snc, (void*) &STARTUP_ABSTRACTION_CONFIGURATION_NAME, (void*) &STARTUP_ABSTRACTION_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+                        if (*r == 1) {
+
+                            log_message_debug("Found startup abstraction configuration name.");
+
+                            // Create destination model.
+                            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
+                                (void*) &sm, (void*) &smc,
+                                (void*) &sa, (void*) &sac,
+                                (void*) &sc, (void*) &scc);
 
                             // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &INTERNALS_STARTUP_CHANNEL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_COUNT_INTERNAL, (void*) &dmc, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_SIZE_INTERNAL, (void*) &dms, (void*) &ONE_ELEMENT_COUNT);
+                        }
+                    }
+
+                    if (*r == 0) {
+
+                        compare_arrays((void*) &sn, (void*) &snc, (void*) &STARTUP_MODEL_CONFIGURATION_NAME, (void*) &STARTUP_MODEL_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+                        if (*r == 1) {
+
+                            log_message_debug("Found startup model configuration name.");
+
+                            // Create destination model.
+                            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
+                                (void*) &sm, (void*) &smc,
+                                (void*) &sa, (void*) &sac,
+                                (void*) &sc, (void*) &scc);
+
+                            // Set configuration parameter in internals memory.
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_COUNT_INTERNAL, (void*) &dmc, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_SIZE_INTERNAL, (void*) &dms, (void*) &ONE_ELEMENT_COUNT);
+                        }
+                    }
+
+                    if (*r == 0) {
+
+                        compare_arrays((void*) &sn, (void*) &snc, (void*) &TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME, (void*) &TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+                        if (*r == 1) {
+
+                            log_message_debug("Found tcp server socket port configuration name.");
+
+                            // Create destination model.
+                            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
+                                (void*) &sm, (void*) &smc,
+                                (void*) &sa, (void*) &sac,
+                                (void*) &sc, (void*) &scc);
+
+                            // Set configuration parameter in internals memory.
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
+                        }
+                    }
+
+                    if (*r == 0) {
+
+                        compare_arrays((void*) &sn, (void*) &snc, (void*) &TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME, (void*) &TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+                        if (*r == 1) {
+
+                            log_message_debug("Found tcp server socket active configuration name.");
+
+                            // Create destination model.
+                            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
+                                (void*) &sm, (void*) &smc,
+                                (void*) &sa, (void*) &sac,
+                                (void*) &sc, (void*) &scc);
+
+                            // Set configuration parameter in internals memory.
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
                         }
                     }
 
@@ -184,11 +256,15 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                     dm = NULL_POINTER;
                     dmc = NULL_POINTER;
                     dms = NULL_POINTER;
+
+                    // Reset comparison result.
+                    *r = 0;
                 }
 
                 c = c->next;
             }
 
+            destroy_integer((void*) &r);
             destroy_integer((void*) &smc);
             destroy_integer((void*) &sac);
             destroy_integer((void*) &scc);

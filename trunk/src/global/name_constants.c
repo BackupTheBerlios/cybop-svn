@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.5 $ $Date: 2004-12-16 16:34:57 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-01-07 11:59:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,29 +39,35 @@
 // Configuration names.
 //
 
-/** The config start abstraction. */
-static const char CONFIG_START_NAME_ABSTRACTION_ARRAY[] = {'s', 't', 'a', 'r', 't'};
-static const char* CONFIG_START_NAME_ABSTRACTION = CONFIG_START_NAME_ABSTRACTION_ARRAY;
-static const int CONFIG_START_NAME_ABSTRACTION_COUNT_ARRAY[] = {5};
-static const int* CONFIG_START_NAME_ABSTRACTION_COUNT = CONFIG_START_NAME_ABSTRACTION_COUNT_ARRAY;
+/** The startup channel configuration name. */
+static const char STARTUP_CHANNEL_CONFIGURATION_NAME_ARRAY[] = {'s', 't', 'a', 'r', 't', 'u', 'p', '_', 'c', 'h', 'a', 'n', 'n', 'e', 'l'};
+static const char* STARTUP_CHANNEL_CONFIGURATION_NAME = STARTUP_CHANNEL_CONFIGURATION_NAME_ARRAY;
+static const int STARTUP_CHANNEL_CONFIGURATION_NAME_COUNT_ARRAY[] = {15};
+static const int* STARTUP_CHANNEL_CONFIGURATION_NAME_COUNT = STARTUP_CHANNEL_CONFIGURATION_NAME_COUNT_ARRAY;
 
-/** The tcp socket abstraction. */
-static const char CONFIG_TCP_SOCKET_NAME_ABSTRACTION_ARRAY[] = {'t', 'c', 'p', '_', 's','o','c','k','e','t'};
-static const char* CONFIG_TCP_SOCKET_NAME_ABSTRACTION =CONFIG_TCP_SOCKET_NAME_ABSTRACTION_ARRAY;
-static const int CONFIG_TCP_SOCKET_NAME_ABSTRACTION_COUNT_ARRAY[] = {10};
-static const int* CONFIG_TCP_SOCKET_NAME_ABSTRACTION_COUNT = CONFIG_TCP_SOCKET_NAME_ABSTRACTION_COUNT_ARRAY;
+/** The startup abstraction configuration name. */
+static const char STARTUP_ABSTRACTION_CONFIGURATION_NAME_ARRAY[] = {'s', 't', 'a', 'r', 't', 'u', 'p', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+static const char* STARTUP_ABSTRACTION_CONFIGURATION_NAME = STARTUP_ABSTRACTION_CONFIGURATION_NAME_ARRAY;
+static const int STARTUP_ABSTRACTION_CONFIGURATION_NAME_COUNT_ARRAY[] = {19};
+static const int* STARTUP_ABSTRACTION_CONFIGURATION_NAME_COUNT = STARTUP_ABSTRACTION_CONFIGURATION_NAME_COUNT_ARRAY;
 
-/** The tcp socket activ abstraction. */
-static const char CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_ARRAY[] = {'a', 'c', 't', 'i', 'v','e'};
-static const char* CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION = CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_ARRAY;
-static const int CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_COUNT_ARRAY[] = {6};
-static const int* CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_COUNT = CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_COUNT_ARRAY;
+/** The startup model configuration name. */
+static const char STARTUP_MODEL_CONFIGURATION_NAME_ARRAY[] = {'s', 't', 'a', 'r', 't', 'u', 'p', '_', 'm', 'o', 'd', 'e', 'l'};
+static const char* STARTUP_MODEL_CONFIGURATION_NAME = STARTUP_MODEL_CONFIGURATION_NAME_ARRAY;
+static const int STARTUP_MODEL_CONFIGURATION_NAME_COUNT_ARRAY[] = {13};
+static const int* STARTUP_MODEL_CONFIGURATION_NAME_COUNT = STARTUP_MODEL_CONFIGURATION_NAME_COUNT_ARRAY;
 
-/** The tcp socket port abstraction. */
-static const char CONFIG_TCP_SOCKET_PORT_ABSTRACTION_ARRAY[] = {'p', 'o', 'r', 't'};
-static const char* CONFIG_TCP_SOCKET_PORT_ABSTRACTION =CONFIG_TCP_SOCKET_PORT_ABSTRACTION_ARRAY;
-static const int CONFIG_TCP_SOCKET_PORT_ABSTRACTION_COUNT_ARRAY[] = {4};
-static const int* CONFIG_TCP_SOCKET_PORT_ABSTRACTION_COUNT = CONFIG_TCP_SOCKET_PORT_ABSTRACTION_COUNT_ARRAY;
+/** The tcp server socket port configuration name. */
+static const char TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_ARRAY[] = {'t', 'c', 'p', '_', 's', 'e', 'r', 'v', 'e', 'r', '_', 's', 'o', 'c', 'k', 'e', 't', '_', 'p', 'o', 'r', 't'};
+static const char* TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME = TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_ARRAY;
+static const int TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT_ARRAY[] = {22};
+static const int* TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT = TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT_ARRAY;
+
+/** The tcp server socket active configuration name. */
+static const char TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_ARRAY[] = {'t', 'c', 'p', '_', 's', 'e', 'r', 'v', 'e', 'r', '_', 's', 'o', 'c', 'k', 'e', 't', '_', 'a', 'c', 't', 'i', 'v', 'e'};
+static const char* TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME = TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_ARRAY;
+static const int TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY[] = {24};
+static const int* TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT = TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY;
 
 //
 // Creation names.

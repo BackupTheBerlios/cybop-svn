@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2004-12-21 20:37:05 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-01-07 11:59:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,7 +30,6 @@
 
 #include "../accessor/signal_memory_accessor.c"
 #include "../array/array.c"
-#include "../cyboi/internals.c"
 #include "../cyboi/signal_handler.c"
 #include "../global/abstraction_constants.c"
 #include "../global/constant.c"

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2004-12-21 17:49:51 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-01-07 11:59:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,7 +29,6 @@
 #define SOCKET_NUMBER_ACCESSOR_SOURCE
 
 #include "../array/array.c"
-#include "../cyboi/internals.c"
 #include "../global/constant.c"
 #include "../global/log_constants.c"
 #include "../global/structure_constants.c"
