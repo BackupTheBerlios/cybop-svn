@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2004-09-12 18:51:00 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-10-28 23:32:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -175,6 +175,9 @@ void wait(void* p0, void* p1, void* p2,
     fprintf(stderr, "wait p: %i\n", p);
     fprintf(stderr, "wait pc: %i\n", pc);
     fprintf(stderr, "wait pr: %i\n", pr);
+
+    fprintf(stderr, "wait knowledge model: %s\n", "");
+    test_knowledge_model(p3, p4);
 
             // Remove signal.
             remove_signal(p0, p1, p2, (void*) &i);

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2004-10-18 10:53:59 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-10-28 23:32:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -839,6 +839,69 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
 
 //??            log_message((void*) &WARNING_LOG_LEVEL, (void*) &COULD_NOT_REMOVE_COMPOUND_BY_NAME_A_WITH_THAT_NAME_DOES_NOT_EXIST_MESSAGE, (void*) &COULD_NOT_REMOVE_COMPOUND_BY_NAME_A_WITH_THAT_NAME_DOES_NOT_EXIST_MESSAGE_COUNT);
         }
+    }
+}
+
+/**
+ * Gets the compound element name by index.
+ *
+ * @param p0 the compound
+ * @param p1 the compound count
+ * @param p2 the index
+ * @param p3 the name
+ * @param p4 the name count
+ * @param p5 the name size
+ */
+void get_compound_element_name_by_index(const void* p0, const void* p1, const void* p2,
+    void* p3, void* p4, void* p5) {
+
+    if (p2 != NULL_POINTER) {
+
+        int* i = (int*) p2;
+
+        if (p1 != NULL_POINTER) {
+
+            int* cc = (int*) p1;
+
+            if (*i >= 0) {
+
+//??                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Get compound element by index.");
+
+                // The names.
+                void* n = NULL_POINTER;
+                void* nc = NULL_POINTER;
+                void* ns = NULL_POINTER;
+
+                // Get names.
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &nc);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
+
+                if (*i < *cc) {
+
+                    // Get element name.
+                    get_array_element((void*) &n, (void*) &POINTER_ARRAY, p2, p3);
+                    get_array_element((void*) &nc, (void*) &INTEGER_ARRAY, p2, p4);
+                    get_array_element((void*) &ns, (void*) &INTEGER_ARRAY, p2, p5);
+
+                } else {
+
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound element by index. The index exceeds the count.");
+                }
+
+            } else {
+
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound element by index. The index is negativ.");
+            }
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound element by index. The count is null.");
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound element by index. The index is null.");
     }
 }
 

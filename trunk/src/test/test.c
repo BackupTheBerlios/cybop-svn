@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.23 $ $Date: 2004-08-26 23:44:06 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2004-10-28 23:32:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -391,6 +391,133 @@ void test_integer_parser() {
 }
 
 /**
+ * Tests the knowledge model.
+ *
+ * The knowledge model is the root of a compound (tree).
+ * But also a part of the knowledge model can be handed over,
+ * in which case that part and its parts will be printed on screen.
+ *
+ * @param p0 the knowledge model
+ * @param p1 the knowledge model count
+ */
+void test_knowledge_model(const void* p0, const void* p1) {
+
+    int* c = (int*) p1;
+
+    if (c != NULL_POINTER) {
+
+        // The loop index.
+        int i = 0;
+        // The element name.
+        void* n = NULL_POINTER;
+        int nc = 0;
+        int ns = 0;
+        // The element abstraction.
+        void* a = NULL_POINTER;
+        int ac = 0;
+        int as = 0;
+        // The element model.
+        void* m = NULL_POINTER;
+        int mc = 0;
+        int ms = 0;
+        // The element details.
+        void* d = NULL_POINTER;
+        int dc = 0;
+        int ds = 0;
+        // The comparison result.
+        int r = 0;
+
+        while (1) {
+
+            if (i >= *c) {
+
+                break;
+            }
+
+            // Get element name.
+            get_compound_element_name_by_index(p0, p1, (void*) &i,
+                (void*) &n, (void*) &nc, (void*) &ns);
+
+            // Get element.
+            get_compound_element_by_index(p0, p1, (void*) &i,
+                (void*) &a, (void*) &ac, (void*) &as,
+                (void*) &m, (void*) &mc, (void*) &ms,
+                (void*) &d, (void*) &dc, (void*) &ds);
+
+            // Print element name.
+            fprintf(stderr, "name: %s\n", n);
+
+            // Print element abstraction.
+            fprintf(stderr, "abstraction: %s\n", a);
+
+            // Handle element model.
+            if (r == 0) {
+
+                compare_arrays((void*) &a, (void*) &ac, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+                if (r == 1) {
+
+                    fprintf(stderr, "model: %s\n", "");
+                    test_knowledge_model((void*) &m, (void*) &mc);
+                }
+            }
+
+            if (r == 0) {
+
+                compare_arrays((void*) &a, (void*) &ac, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+                if (r == 1) {
+
+                    fprintf(stderr, "model: %s\n", (char*) m);
+                }
+            }
+
+            if (r == 0) {
+
+                compare_arrays((void*) &a, (void*) &ac, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+                if (r == 1) {
+
+                    fprintf(stderr, "model: %s\n", (char*) m);
+                }
+            }
+
+            // Handle element details.
+            if (d != NULL_POINTER) {
+
+                fprintf(stderr, "details: %s\n", "");
+                test_knowledge_model((void*) &d, (void*) &dc);
+            }
+
+            // Reset element name.
+            n = NULL_POINTER;
+            nc = 0;
+            ns = 0;
+            // Reset element abstraction.
+            a = NULL_POINTER;
+            ac = 0;
+            as = 0;
+            // Reset element model.
+            m = NULL_POINTER;
+            mc = 0;
+            ms = 0;
+            // Reset element details.
+            d = NULL_POINTER;
+            dc = 0;
+            ds = 0;
+            // Reset comparison result.
+            r = 0;
+
+            i++;
+        }
+
+    } else {
+
+        fputs("ERROR: Could not test knowledge model. The knowledge model is null.", stdout);
+    }
+}
+
+/**
  * The main test procedure.
  *
  * Sub test procedure call can be activated/ deactivated here
@@ -413,7 +540,7 @@ void test() {
 //    test_file_read();
 //    test_file_write();
 //    test_console();
-    test_integer_parser();
+//    test_integer_parser();
 }
 
 /* TEST_SOURCE */
