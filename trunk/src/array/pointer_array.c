@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.23 $ $Date: 2005-01-17 17:11:02 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,7 +96,7 @@ void create_pointer_array(void* p0, const void* p1) {
 /**
  * Destroys the pointer array.
  *
- * @param p0 the array
+ * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  */
 void destroy_pointer_array(void* p0, const void* p1) {
@@ -127,7 +127,7 @@ void destroy_pointer_array(void* p0, const void* p1) {
 /**
  * Resizes the pointer array.
  *
- * @param p0 the array
+ * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  */
 void resize_pointer_array(void* p0, const void* p1) {

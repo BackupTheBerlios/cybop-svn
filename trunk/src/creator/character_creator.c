@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,27 +36,27 @@
 /**
  * Creates the character.
  *
- * @param p0 the model
+ * @param p0 the model (Hand over as reference!)
  */
 void create_character(void* p0) {
 
     log_message_debug("Create character.");
 
     // Create character array containing the actual character value.
-    create_array(p0, (void*) &CHARACTER_ARRAY, (void*) &CHARACTER_COUNT);
+    create_array(p0, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
 }
 
 /**
  * Destroys the character.
  *
- * @param p0 the model
+ * @param p0 the model (Hand over as reference!)
  */
 void destroy_character(void* p0) {
 
     log_message_debug("Destroy character.");
 
     // Destroy character array containing the actual character value.
-    destroy_array(p0, (void*) &CHARACTER_ARRAY, (void*) &CHARACTER_COUNT);
+    destroy_array(p0, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
 }
 
 /* CHARACTER_CREATOR_SOURCE */

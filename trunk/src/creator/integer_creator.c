@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,27 +36,27 @@
 /**
  * Creates the integer.
  *
- * @param p0 the model
+ * @param p0 the model (Hand over as reference!)
  */
 void create_integer(void* p0) {
 
     log_message_debug("Create integer.");
 
     // Create integer array containing the actual integer value.
-    create_array(p0, (void*) &INTEGER_ARRAY, (void*) &INTEGER_COUNT);
+    create_array(p0, (void*) INTEGER_COUNT, (void*) INTEGER_ARRAY);
 }
 
 /**
  * Destroys the integer.
  *
- * @param p0 the model
+ * @param p0 the model (Hand over as reference!)
  */
 void destroy_integer(void* p0) {
 
     log_message_debug("Destroy integer.");
 
     // Destroy integer array containing the actual integer value.
-    destroy_array(p0, (void*) &INTEGER_ARRAY, (void*) &INTEGER_COUNT);
+    destroy_array(p0, (void*) INTEGER_COUNT, (void*) INTEGER_ARRAY);
 }
 
 /* INTEGER_CREATOR_SOURCE */

@@ -50,7 +50,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.20 $ $Date: 2005-01-17 17:11:02 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2005-01-17 23:46:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -104,7 +104,7 @@ void create_array(void* p0, const void* p1, const void* p2) {
 /**
  * Destroys the array.
  *
- * @param p0 the array
+ * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  * @param p2 the type
  */
@@ -140,7 +140,7 @@ void destroy_array(void* p0, const void* p1, const void* p2) {
 /**
  * Resizes the array.
  *
- * @param p0 the array
+ * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  * @param p2 the type
  */

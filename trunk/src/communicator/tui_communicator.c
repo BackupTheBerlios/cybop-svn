@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -170,19 +170,19 @@ void send_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     if (p4 != NULL_POINTER) {
 
-        int** sc = (int**) p4;
+        int* sc = (int*) p4;
 
         if (p3 != NULL_POINTER) {
 
-            void** s = (void**) p3;
+            void* s = (void*) p3;
 
             if (p0 != NULL_POINTER) {
 
-                void** d = (void**) p0;
+                void* d = (void*) p0;
 
 //??                if (strcmp("linux", getenv("TERM")) == 0) {
 
-                    fputs("TEST: This is a linux console.\n", (FILE*) *d);
+                    fputs("TEST: This is a linux console.\n", (FILE*) d);
 
 /*??
                     // Determine device name of controlling terminal.

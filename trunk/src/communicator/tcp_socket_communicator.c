@@ -25,7 +25,7 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.5 $ $Date: 2005-01-09 01:30:12 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -65,22 +65,22 @@ void send_tcp_socket(void* p0, void* p1, void* p2, const void* p3, const void* p
 
     if (p4 != NULL_POINTER) {
 
-        int** sc = (int**) p4;
+        int* sc = (int*) p4;
 
         if (p3 != NULL_POINTER) {
 
-            void** s = (void**) p3;
+            void* s = (void*) p3;
 
             if (p0 != NULL_POINTER) {
 
-                int** d = (int**) p0;
+                int* d = (int*) p0;
 
                 // The output.
-                void* o = *s;
+                void* o = s;
                 // The output count.
-                int oc = **sc;
+                int oc = *sc;
                 // The send byte gets returned.
-                int b = send(**d, o, oc, 0);
+                int b = send(*d, o, oc, 0);
 
                 if (b < 0) {
 

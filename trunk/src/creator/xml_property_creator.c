@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-01-17 23:46:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,7 +35,7 @@
 /**
  * Creates the xml property.
  *
- * @param p0 the model
+ * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void create_xml_property(void* p0, const void* p1) {
@@ -43,15 +43,15 @@ void create_xml_property(void* p0, const void* p1) {
     log_message_debug("Create xml property.");
 
     // Create xml attribute.
-    create_array(p0, (void*) &POINTER_ARRAY, (void*) &XML_ATTRIBUTE_COUNT);
+    create_array(p0, (void*) XML_ATTRIBUTE_COUNT, (void*) POINTER_ARRAY);
 
     // Initialize xml attribute name, value.
     void* nv = NULL_POINTER;
     void* c = NULL_POINTER;
 
     // Create xml attribute name, value.
-    create_array((void*) &nv, (void*) &POINTER_ARRAY, p1);
-    create_array((void*) &c, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &nv, p1, (void*) POINTER_ARRAY);
+    create_array((void*) &c, p1, (void*) INTEGER_ARRAY);
 
     //
     // Use ascending order.
@@ -65,7 +65,7 @@ void create_xml_property(void* p0, const void* p1) {
 /**
  * Destroys the xml property.
  *
- * @param p0 the model
+ * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void destroy_xml_property(void* p0, const void* p1) {
@@ -89,11 +89,11 @@ void destroy_xml_property(void* p0, const void* p1) {
 //??    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_ATTRIBUTE_COUNT, (void*) &XML_ATTRIBUTE_NAME_VALUE_INDEX);
 
     // Destroy xml attribute name, value.
-    destroy_array((void*) &nv, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &c, (void*) &INTEGER_ARRAY, p1);
+    destroy_array((void*) &nv, p1, (void*) POINTER_ARRAY);
+    destroy_array((void*) &c, p1, (void*) INTEGER_ARRAY);
 
     // Destroy xml attribute.
-    destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &XML_ATTRIBUTE_COUNT);
+    destroy_array(p0, (void*) XML_ATTRIBUTE_COUNT, (void*) POINTER_ARRAY);
 }
 
 /* XML_PROPERTY_CREATOR_SOURCE */

@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a string model in memory
  *
- * @version $Revision: 1.3 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,27 +39,27 @@
 /**
  * Creates the string.
  *
- * @param p0 the model
+ * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void create_string(void* p0, const void* p1) {
 
     log_message_debug("Create string.");
 
-    create_array(p0, (void*) &CHARACTER_ARRAY, p1);
+    create_array(p0, p1, (void*) CHARACTER_ARRAY);
 }
 
 /**
  * Destroys the string.
  *
- * @param p0 the model
+ * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
 void destroy_string(void* p0, const void* p1) {
 
     log_message_debug("Destroy string.");
 
-    destroy_array(p0, (void*) &CHARACTER_ARRAY, p1);
+    destroy_array(p0, p1, (void*) CHARACTER_ARRAY);
 }
 
 /* STRING_CREATOR_SOURCE */

@@ -28,7 +28,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.16 $ $Date: 2005-01-09 20:30:21 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2005-01-17 23:46:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -56,19 +56,15 @@ void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
-        int** dc = (int**) p3;
+        int* dc = (int*) p3;
 
         if (p2 != NULL_POINTER) {
-
-            void** d = (void**) p2;
 
             if (p1 != NULL_POINTER) {
 
                 int* ei = (int*) p1;
 
                 if (p0 != NULL_POINTER) {
-
-                    void** e = (void**) p0;
 
                     // The loop index.
                     int j = 0;
@@ -79,15 +75,15 @@ void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
 
                     while (1) {
 
-                        if (j >= **dc) {
+                        if (j >= *dc) {
 
                             break;
                         }
 
                         // Determine log entry pointer as destination.
-                        dest = (char*) (*e + *ei + j);
+                        dest = (char*) (p0 + *ei + j);
                         // Determine log details pointer as source.
-                        src = (char*) (*d + j);
+                        src = (char*) (p2 + j);
 
                         // Copy log details elements to log entry.
                         *dest = *src;
@@ -144,17 +140,17 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
 
         if (p2 != NULL_POINTER) {
 
-            int** ec = (int**) p2;
+            int* ec = (int*) p2;
 
             if (p0 != NULL_POINTER) {
 
-                int** l = (int**) p0;
+                int* l = (int*) p0;
 
-                if (**l == *DEBUG_LOG_LEVEL) {
+                if (*l == *DEBUG_LOG_LEVEL) {
 
-                    if ((*ei + *DEBUG_LOG_LEVEL_NAME_COUNT) < **ec) {
+                    if ((*ei + *DEBUG_LOG_LEVEL_NAME_COUNT) < *ec) {
 
-                        add_log_details(p1, p3, (void*) &DEBUG_LOG_LEVEL_NAME, (void*) &DEBUG_LOG_LEVEL_NAME_COUNT);
+                        add_log_details(p1, p3, (void*) DEBUG_LOG_LEVEL_NAME, (void*) DEBUG_LOG_LEVEL_NAME_COUNT);
                         *ei = *ei + *DEBUG_LOG_LEVEL_NAME_COUNT;
 
                     } else {
@@ -164,11 +160,11 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
                         fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
                     }
 
-                } else if (**l == *INFO_LOG_LEVEL) {
+                } else if (*l == *INFO_LOG_LEVEL) {
 
-                    if ((*ei + *INFO_LOG_LEVEL_NAME_COUNT) < **ec) {
+                    if ((*ei + *INFO_LOG_LEVEL_NAME_COUNT) < *ec) {
 
-                        add_log_details(p1, p3, (void*) &INFO_LOG_LEVEL_NAME, (void*) &INFO_LOG_LEVEL_NAME_COUNT);
+                        add_log_details(p1, p3, (void*) INFO_LOG_LEVEL_NAME, (void*) INFO_LOG_LEVEL_NAME_COUNT);
                         *ei = *ei + *INFO_LOG_LEVEL_NAME_COUNT;
 
                     } else {
@@ -178,11 +174,11 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
                         fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
                     }
 
-                } else if (**l == *WARNING_LOG_LEVEL) {
+                } else if (*l == *WARNING_LOG_LEVEL) {
 
-                    if ((*ei + *WARNING_LOG_LEVEL_NAME_COUNT) < **ec) {
+                    if ((*ei + *WARNING_LOG_LEVEL_NAME_COUNT) < *ec) {
 
-                        add_log_details(p1, p3, (void*) &WARNING_LOG_LEVEL_NAME, (void*) &WARNING_LOG_LEVEL_NAME_COUNT);
+                        add_log_details(p1, p3, (void*) WARNING_LOG_LEVEL_NAME, (void*) WARNING_LOG_LEVEL_NAME_COUNT);
                         *ei = *ei + *WARNING_LOG_LEVEL_NAME_COUNT;
 
                     } else {
@@ -192,11 +188,11 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
                         fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
                     }
 
-                } else if (**l == *ERROR_LOG_LEVEL) {
+                } else if (*l == *ERROR_LOG_LEVEL) {
 
-                    if ((*ei + *ERROR_LOG_LEVEL_NAME_COUNT) < **ec) {
+                    if ((*ei + *ERROR_LOG_LEVEL_NAME_COUNT) < *ec) {
 
-                        add_log_details(p1, p3, (void*) &ERROR_LOG_LEVEL_NAME, (void*) &ERROR_LOG_LEVEL_NAME_COUNT);
+                        add_log_details(p1, p3, (void*) ERROR_LOG_LEVEL_NAME, (void*) ERROR_LOG_LEVEL_NAME_COUNT);
                         *ei = *ei + *ERROR_LOG_LEVEL_NAME_COUNT;
 
                     } else {
@@ -244,14 +240,14 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
     if (p2 != NULL_POINTER) {
 
-        int** mc = (int**) p2;
+        int* mc = (int*) p2;
 
         if (p0 != NULL_POINTER) {
 
-            int** l = (int**) p0;
+            int* l = (int*) p0;
 
             // Only log message if log level matches.
-            if (**l <= *LOG_LEVEL) {
+            if (*l <= *LOG_LEVEL) {
 
                 // The log entry.
                 void* e = NULL_POINTER;
@@ -264,12 +260,12 @@ void log_message(const void* p0, const void* p1, const void* p2) {
                 e = (void*) malloc(*ec);
 
                 // Add name of the given log level to log entry.
-                add_log_level_name(p0, (void*) &e, (void*) &ec, (void*) &ei);
+                add_log_level_name(p0, e, (void*) ec, (void*) &ei);
 
                 // Add colon to log entry.
                 if ((ei + 1) < *ec) {
 
-                    add_log_details((void*) &e, (void*) &ei, (void*) &COLON_CHARACTER, (void*) &COLON_CHARACTER_COUNT);
+                    add_log_details((void*) e, (void*) &ei, (void*) COLON_CHARACTER, (void*) COLON_CHARACTER_COUNT);
                     ei = ei + 1;
 
                 } else {
@@ -282,7 +278,7 @@ void log_message(const void* p0, const void* p1, const void* p2) {
                 // Add space to log entry.
                 if ((ei + 1) < *ec) {
 
-                    add_log_details((void*) &e, (void*) &ei, (void*) &SPACE_CHARACTER, (void*) &SPACE_CHARACTER_COUNT);
+                    add_log_details((void*) e, (void*) &ei, (void*) SPACE_CHARACTER, (void*) SPACE_CHARACTER_COUNT);
                     ei = ei + 1;
 
                 } else {
@@ -293,10 +289,10 @@ void log_message(const void* p0, const void* p1, const void* p2) {
                 }
 
                 // Add message to log entry.
-                if ((ei + **mc) < *ec) {
+                if ((ei + *mc) < *ec) {
 
-                    add_log_details((void*) &e, (void*) &ei, p1, p2);
-                    ei = ei + **mc;
+                    add_log_details((void*) e, (void*) &ei, p1, p2);
+                    ei = ei + *mc;
 
                 } else {
 
@@ -308,7 +304,7 @@ void log_message(const void* p0, const void* p1, const void* p2) {
                 // Add new line to log entry.
                 if ((ei + 1) < *ec) {
 
-                    add_log_details((void*) &e, (void*) &ei, (void*) &LINE_FEED_CONTROL_CHARACTER, (void*) &LINE_FEED_CONTROL_CHARACTER_COUNT);
+                    add_log_details((void*) e, (void*) &ei, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) LINE_FEED_CONTROL_CHARACTER_COUNT);
                     ei = ei + 1;
 
                 } else {
@@ -321,7 +317,7 @@ void log_message(const void* p0, const void* p1, const void* p2) {
                 // Add string termination to log entry.
                 if ((ei + 1) < *ec) {
 
-                    add_log_details((void*) &e, (void*) &ei, (void*) &NULL_CONTROL_CHARACTER, (void*) &NULL_CONTROL_CHARACTER_COUNT);
+                    add_log_details((void*) e, (void*) &ei, (void*) NULL_CONTROL_CHARACTER, (void*) NULL_CONTROL_CHARACTER_COUNT);
                     ei = ei + 1;
 
                 } else {
@@ -368,7 +364,7 @@ void log_message_debug(const char* m) {
     int* c = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *c = strlen(m);
 
-    log_message((void*) &DEBUG_LOG_LEVEL, (void*) &m, (void*) &c);
+    log_message((void*) DEBUG_LOG_LEVEL, (void*) m, (void*) c);
 
     free(c);
 }

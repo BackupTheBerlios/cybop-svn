@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,27 +36,27 @@
 /**
  * Creates the double.
  *
- * @param p0 the model
+ * @param p0 the model (Hand over as reference!)
  */
 void create_double(void* p0) {
 
     log_message_debug("Create double.");
 
     // Create double array containing the actual double value.
-    create_array(p0, (void*) &DOUBLE_ARRAY, (void*) &DOUBLE_COUNT);
+    create_array(p0, (void*) DOUBLE_COUNT, (void*) DOUBLE_ARRAY);
 }
 
 /**
  * Destroys the double.
  *
- * @param p0 the model
+ * @param p0 the model (Hand over as reference!)
  */
 void destroy_double(void* p0) {
 
     log_message_debug("Destroy double.");
 
     // Destroy double array containing the actual double value.
-    destroy_array(p0, (void*) &DOUBLE_ARRAY, (void*) &DOUBLE_COUNT);
+    destroy_array(p0, (void*) DOUBLE_COUNT, (void*) DOUBLE_ARRAY);
 }
 
 /* DOUBLE_CREATOR_SOURCE */

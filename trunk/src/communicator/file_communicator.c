@@ -25,7 +25,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.7 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,69 +53,65 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
     if (p4 != NULL_POINTER) {
 
-        int** sc = (int**) p4;
+        int* sc = (int*) p4;
 
         if (p2 != NULL_POINTER) {
 
-            int** ds = (int**) p2;
+            int* ds = (int*) p2;
 
             if (p1 != NULL_POINTER) {
 
-                int** dc = (int**) p1;
+                int* dc = (int*) p1;
 
                 // The terminated file name.
-                char* tn = CHARACTER_NULL_POINTER;
+                void* tn = CHARACTER_NULL_POINTER;
                 // The terminated file name size.
-                int* tns = INTEGER_NULL_POINTER;
-                create_integer((void*) &tns);
-                *tns = **sc + 1;
+                int tns = *sc + 1;
 
                 // Create terminated file name.
-                create_array((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &tns);
+                create_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
 
-                // Set terminated file name by first copying the actual name and then
-                // adding the null termination character.
-                set_array_elements((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &ZERO_NUMBER, p3, p4);
-                set_array_elements((void*) &tn, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CONTROL_CHARACTER, (void*) &ONE_NUMBER);
+                // Set terminated file name by first copying the actual name
+                // and then adding the null termination character.
+                set_array_elements(tn, (void*) ZERO_NUMBER, p3, p4, (void*) CHARACTER_ARRAY);
+                set_array_elements(tn, p4, (void*) NULL_CONTROL_CHARACTER, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
 
                 // Open file.
                 // CAUTION! The file name cannot be handed over as is.
                 // CYBOI strings are NOT terminated with the null character '\0'.
                 // Since 'fopen' expects a null terminated string, the termination character
                 // must be added to the string before that is used to open the file.
-                FILE* f = fopen(tn, "r");
+                FILE* f = fopen((char*) tn, "r");
 
                 if (f != NULL_POINTER) {
 
                     // Read first character.
-                    char* c = CHARACTER_NULL_POINTER;
-                    create_character((void*) &c);
-                    *c = fgetc(f);
+                    char c = fgetc(f);
 
                     while (1) {
 
-                        if (*c == EOF) {
+                        if (c == EOF) {
 
                             break;
                         }
 
-                        if (**dc == **ds) {
+                        if (*dc == *ds) {
 
                             // Increase size.
-                            **ds = **ds * *FILE_RESIZE_FACTOR + 1;
+                            *ds = (*ds * *FILE_RESIZE_FACTOR) + 1;
 
                             // Resize array.
-                            resize_array(p0, (void*) &CHARACTER_ARRAY, p2);
+                            resize_array((void*) &p0, p2, (void*) CHARACTER_ARRAY);
                         }
 
-                        if (**dc < **ds) {
+                        if (*dc < *ds) {
 
                             // Set character in destination array.
                             // The array count serves as index for setting the character.
-                            set_array_elements(p0, (void*) &CHARACTER_ARRAY, p1, (void*) &c, (void*) &ONE_NUMBER);
+                            set_array_elements(p0, p1, (void*) &c, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
 
                             // Increase array count.
-                            (**dc)++;
+                            (*dc)++;
 
                         } else {
 
@@ -123,11 +119,8 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
                         }
 
                         // Read next character.
-                        *c = fgetc(f);
+                        c = fgetc(f);
                     }
-
-                    // Destroy character.
-                    destroy_character((void*) &c);
 
                     // Close file.
                     fclose(f);
@@ -138,8 +131,7 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
                 }
 
                 // Destroy terminated file name and its size.
-                destroy_array((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &tns);
-                destroy_integer((void*) &tns);
+                destroy_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
 
             } else {
 

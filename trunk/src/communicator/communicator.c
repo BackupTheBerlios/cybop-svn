@@ -25,7 +25,7 @@
  * - receive data into a byte array
  * - send data from a byte array
  *
- * @version $Revision: 1.5 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,51 +61,47 @@ void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p
     const void* p5, const void* p6) {
 
     // The comparison result.
-    int* r = INTEGER_NULL_POINTER;
-    create_integer((void*) &r);
-    *r = 0;
+    int r = 0;
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             receive_inline(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &FILE_CHANNEL, (void*) &FILE_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             receive_file(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &FTP_CHANNEL, (void*) &FTP_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) FTP_CHANNEL, (void*) FTP_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             receive_ftp(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &HTTP_CHANNEL, (void*) &HTTP_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) HTTP_CHANNEL, (void*) HTTP_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             receive_http(p0, p1, p2, p3, p4);
         }
     }
-
-    destroy_integer((void*) &r);
 }
 
 /**
@@ -127,51 +123,47 @@ void send_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6) {
 
     // The comparison result.
-    int* r = INTEGER_NULL_POINTER;
-    create_integer((void*) &r);
-    *r = 0;
+    int r = 0;
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             send_inline(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &FILE_CHANNEL, (void*) &FILE_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             send_file(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &FTP_CHANNEL, (void*) &FTP_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) FTP_CHANNEL, (void*) FTP_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             send_ftp(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &HTTP_CHANNEL, (void*) &HTTP_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) HTTP_CHANNEL, (void*) HTTP_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             send_http(p0, p1, p2, p3, p4);
         }
     }
-
-    destroy_integer((void*) &r);
 }
 
 /* COMMUNICATOR_SOURCE */

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-01-17 23:46:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,115 +59,113 @@ void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6) {
 
     // The comparison result.
-    int* r = INTEGER_NULL_POINTER;
-    create_integer((void*) &r);
-    *r = 0;
+    int r = 0;
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             parse_xml(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
-
-            parse_string(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (*r != 1) {
-
-        compare_arrays(p5, p6, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-        if (*r == 1) {
+        if (r == 1) {
 
             parse_string(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &BOOLEAN_ABSTRACTION, (void*) &BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
+
+            parse_string(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p5, p6, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
 
             parse_boolean(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             parse_integer(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &VECTOR_ABSTRACTION, (void*) &VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             parse_vector(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &DOUBLE_ABSTRACTION, (void*) &DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             parse_double(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &FRACTION_ABSTRACTION, (void*) &FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) FRACTION_ABSTRACTION, (void*) FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             parse_fraction(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &COMPLEX_ABSTRACTION, (void*) &COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) COMPLEX_ABSTRACTION, (void*) COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             parse_complex(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &TIME_ABSTRACTION, (void*) &TIME_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) TIME_ABSTRACTION, (void*) TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             parse_time(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             parse_xml(p0, p1, p2, p3, p4);
         }
@@ -179,11 +177,11 @@ void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     //?? adl (from OpenEHR), KIF, ODL etc.!
     //?? For now, only the cybol file format is considered.
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &SXW_ABSTRACTION, (void*) &SXW_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) SXW_ABSTRACTION, (void*) SXW_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             //?? For other kinds of file (stream) formats,
             //?? for example from special applications like Open Office,
@@ -198,8 +196,6 @@ void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
         }
     }
 */
-
-    destroy_integer((void*) &r);
 }
 
 /**
@@ -218,105 +214,103 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6) {
 
     // The comparison result.
-    int* r = INTEGER_NULL_POINTER;
-    create_integer((void*) &r);
-    *r = 0;
+    int r = 0;
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             serialize_xml(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
-
-            serialize_string(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (*r != 1) {
-
-        compare_arrays(p5, p6, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-        if (*r == 1) {
+        if (r == 1) {
 
             serialize_string(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &BOOLEAN_ABSTRACTION, (void*) &BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
+
+            serialize_string(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p5, p6, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
 
             serialize_boolean(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             serialize_integer(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &VECTOR_ABSTRACTION, (void*) &VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) VECTOR_ABSTRACTION, (void*) VECTOR_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             serialize_vector(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &DOUBLE_ABSTRACTION, (void*) &DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             serialize_double(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &FRACTION_ABSTRACTION, (void*) &FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) FRACTION_ABSTRACTION, (void*) FRACTION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             serialize_fraction(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &COMPLEX_ABSTRACTION, (void*) &COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) COMPLEX_ABSTRACTION, (void*) COMPLEX_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             serialize_complex(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &TIME_ABSTRACTION, (void*) &TIME_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) TIME_ABSTRACTION, (void*) TIME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             serialize_time(p0, p1, p2, p3, p4);
         }
@@ -334,8 +328,6 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     //?? for example xml, html, sxi, txt, rtf,
     //?? adl (from OpenEHR), KIF, ODL etc.!
     //?? For now, only the cybol file format is considered.
-
-    destroy_integer((void*) &r);
 }
 
 /* PARSER_SOURCE */

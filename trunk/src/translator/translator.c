@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-01-17 23:46:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,25 +52,23 @@ void decode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6) {
 
     // The comparison result.
-    int* r = INTEGER_NULL_POINTER;
-    create_integer((void*) &r);
-    *r = 0;
+    int r = 0;
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             decode_cybol(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             decode_configuration(p0, p1, p2, p3, p4);
         }
@@ -78,8 +76,6 @@ void decode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
     //?? Later, additional formats besides cybol might be read,
     //?? for example html, sxi, hdx.sf.net etc.
-
-    destroy_integer((void*) &r);
 }
 
 /**
@@ -98,25 +94,23 @@ void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6) {
 
     // The comparison result.
-    int* r = INTEGER_NULL_POINTER;
-    create_integer((void*) &r);
-    *r = 0;
+    int r = 0;
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             encode_cybol(p0, p1, p2, p3, p4);
         }
     }
 
-    if (*r != 1) {
+    if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (*r == 1) {
+        if (r == 1) {
 
             encode_configuration(p0, p1, p2, p3, p4);
         }
@@ -124,8 +118,6 @@ void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
     //?? Later, additional formats besides cybol might be read,
     //?? for example html, sxi, hdx.sf.net etc.
-
-    destroy_integer((void*) &r);
 }
 
 /* TRANSLATOR_SOURCE */

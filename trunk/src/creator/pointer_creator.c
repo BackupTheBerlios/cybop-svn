@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,27 +36,27 @@
 /**
  * Creates the pointer.
  *
- * @param p0 the model
+ * @param p0 the model (Hand over as reference!)
  */
 void create_pointer(void* p0) {
 
     log_message_debug("Create pointer.");
 
     // Create pointer array containing the actual pointer value.
-    create_array(p0, (void*) &POINTER_ARRAY, (void*) &POINTER_COUNT);
+    create_array(p0, (void*) POINTER_COUNT, (void*) POINTER_ARRAY);
 }
 
 /**
  * Destroys the pointer.
  *
- * @param p0 the model
+ * @param p0 the model (Hand over as reference!)
  */
 void destroy_pointer(void* p0) {
 
     log_message_debug("Destroy pointer.");
 
     // Destroy pointer array containing the actual pointer value.
-    destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &POINTER_COUNT);
+    destroy_array(p0, (void*) POINTER_COUNT, (void*) POINTER_ARRAY);
 }
 
 /* POINTER_CREATOR_SOURCE */

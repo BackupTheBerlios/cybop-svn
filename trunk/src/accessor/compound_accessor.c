@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2005-01-17 17:11:02 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-01-17 23:46:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -917,7 +917,7 @@ void get_compound_element_by_index(const void* p0, const void* p1, const void* p
 
                 if (*i < *cc) {
 
-                    // Get element abstraction, model, details.
+                    // Get abstraction, model, details.
                     get_array_elements(a, p2, p3, (void*) POINTER_ARRAY);
                     get_array_elements(ac, p2, p4, (void*) POINTER_ARRAY);
                     get_array_elements(as, p2, p5, (void*) POINTER_ARRAY);
