@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.36 $ $Date: 2004-04-22 13:25:32 $ $Author: christian $
+ * @version $Revision: 1.37 $ $Date: 2004-04-25 21:25:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -201,13 +201,6 @@ void set_signal(void* p0, const void* p1, const void* p2, const void* p3, const 
             // Increase size.
             s = s * 2 + 1;
 
-            fprintf(stderr, "set signal s: %d\n", s);
-            fprintf(stderr, "set signal c: %d\n", c);
-            fprintf(stderr, "set signal sig: %d\n", sig);
-            fprintf(stderr, "set signal p: %d\n", p);
-            fprintf(stderr, "set signal a: %d\n", a);
-            fprintf(stderr, "set signal as: %d\n", as);
-
             // Resize elements.
             resize_array((void*) &sig, (void*) &s);
             fputs("set signal TEST 0\n", stderr);
@@ -224,10 +217,34 @@ void set_signal(void* p0, const void* p1, const void* p2, const void* p3, const 
 
         if (i < s) {
 
+            fprintf(stderr, "set signal i: %d\n", i);
+            fprintf(stderr, "set signal s: %d\n", s);
+            fprintf(stderr, "set signal c: %d\n", c);
+            fprintf(stderr, "set signal sig: %d\n", sig);
+            fprintf(stderr, "set signal p: %d\n", p);
+            fprintf(stderr, "set signal a: %d\n", a);
+            fprintf(stderr, "set signal as: %d\n", as);
+
             // Set signal.
             set_array_element((void*) &sig, (void*) &POINTER_ARRAY, (void*) &i, p1);
+
+            void* test1 = NULL_POINTER;
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &test1);
+            fprintf(stderr, "set signal a test1: %d\n", test1);
+
             set_array_element((void*) &p, (void*) &INTEGER_ARRAY, (void*) &i, p2);
+
+            void* test2 = NULL_POINTER;
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &test2);
+            fprintf(stderr, "set signal a test2: %d\n", test2);
+
+            //?? Here is the bug!! Use set_array_elements??
             set_array_element((void*) &a, (void*) &POINTER_ARRAY, (void*) &i, p3);
+
+            void* test3 = NULL_POINTER;
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &test3);
+            fprintf(stderr, "set signal a test3: %d\n", test3);
+
             set_array_element((void*) &as, (void*) &INTEGER_ARRAY, (void*) &i, p4);
 
             // Increment count.
@@ -277,13 +294,13 @@ void remove_signal(void* p0, const void* p1) {
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
 
-            fprintf(stderr, "i: %d\n", *i);
-            fprintf(stderr, "s: %d\n", s);
-            fprintf(stderr, "c: %d\n", c);
-            fprintf(stderr, "sig: %d\n", sig);
-            fprintf(stderr, "p: %d\n", p);
-            fprintf(stderr, "a: %d\n", a);
-            fprintf(stderr, "as: %d\n", as);
+            fprintf(stderr, "remove signal i: %d\n", *i);
+            fprintf(stderr, "remove signal s: %d\n", s);
+            fprintf(stderr, "remove signal c: %d\n", c);
+            fprintf(stderr, "remove signal sig: %d\n", sig);
+            fprintf(stderr, "remove signal p: %d\n", p);
+            fprintf(stderr, "remove signal a: %d\n", a);
+            fprintf(stderr, "remove signal as: %d\n", as);
 
             if (*i < c) {
 
@@ -352,6 +369,14 @@ void get_signal(const void* p0, const void* p1, void* p2, void* p3, void* p4, vo
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
+
+            fprintf(stderr, "get signal i: %d\n", *i);
+            fprintf(stderr, "get signal s: %d\n", s);
+            fprintf(stderr, "get signal c: %d\n", c);
+            fprintf(stderr, "get signal sig: %d\n", sig);
+            fprintf(stderr, "get signal p: %d\n", p);
+            fprintf(stderr, "get signal a: %d\n", a);
+            fprintf(stderr, "get signal as: %d\n", as);
 
             if (*i < c) {
 

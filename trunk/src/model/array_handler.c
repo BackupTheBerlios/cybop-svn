@@ -48,7 +48,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.31 $ $Date: 2004-04-22 08:54:55 $ $Author: christian $
+ * @version $Revision: 1.32 $ $Date: 2004-04-25 21:25:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -266,12 +266,16 @@ void set_array_element(void* p0, const void* p1, const void* p2, const void* p3)
     // The elements count.
     int c = 1;
 
-    // The element needs to be handed over as array.
+    // The element p3 needs to be handed over as array to set_array_elements.
     // Therefore, it has to be transformed into a pointer.
-    // Example:
-    // - array: char* handed over as char**
-    // - element: char handed over as char*
-    // - the element of type char* gets transformed to type char** with &element
+    // Example 1:
+    // - array p0: char* handed over as char**
+    // - element p3: single char handed over as char*
+    // - the element of type char* gets transformed to type char** with &p3
+    // Example 2:
+    // - array p0: char** handed over as char***
+    // - element p3: string char* handed over as char**
+    // - the element of type char** gets transformed to type char*** with &p3
     set_array_elements(p0, p1, p2, (void*) &p3, (void*) &c);
 }
 

@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.15 $ $Date: 2004-04-22 13:25:32 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-04-25 21:25:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,11 +72,11 @@ void compare_pointer_array_elements(const void* p0, const void* p1, const void* 
 
             if (p1 != NULL_POINTER) {
 
-                void*** a1 = (void***) p1;
+                void** a1 = (void**) p1;
 
                 if (p0 != NULL_POINTER) {
 
-                    void*** a0 = (void***) p0;
+                    void** a0 = (void**) p0;
 
                     int j = 0;
                     void** e0 = POINTER_NULL_POINTER;
@@ -142,7 +142,7 @@ void set_pointer_array_elements(void* p0, const void* p1, const void* p2, const 
 
         if (p2 != NULL_POINTER) {
 
-            void*** s = (void***) p2;
+            void** s = (void**) p2;
 
             if (p1 != NULL_POINTER) {
 
@@ -150,12 +150,12 @@ void set_pointer_array_elements(void* p0, const void* p1, const void* p2, const 
 
                 if (p0 != NULL_POINTER) {
 
-                    void*** d = (void***) p0;
+                    void** d = (void**) p0;
 
                     // The loop variable.
                     int j = 0;
                     // The destination base to start copying to.
-                    void** db = (void**) (*d + *i);
+                    void* db = (void*) (*d + *i);
                     // The source element.
                     void** se = POINTER_NULL_POINTER;
                     // The destination element.
@@ -223,16 +223,16 @@ void remove_pointer_array_elements(void* p0, const void* p1, const void* p2, con
 
                 if (p0 != NULL_POINTER) {
 
-                    void*** a = (void***) p0;
+                    void** a = (void**) p0;
 
                     // The loop variable.
                     int j = 0;
                     // The remaining elements size.
                     int r = *s - (*i + *c);
                     // The destination base.
-                    void** db = (void**) (*a + *i);
+                    void* db = (void*) (*a + *i);
                     // The source base.
-                    void** sb = (void**) (*a + *i + *c);
+                    void* sb = (void*) (*a + *i + *c);
                     // The source element.
                     void** se = POINTER_NULL_POINTER;
                     // The destination element.
@@ -305,7 +305,7 @@ void get_pointer_array_elements(const void* p0, const void* p1, void* p2, const 
 
         if (p2 != NULL_POINTER) {
 
-            void*** d = (void***) p2;
+            void** d = (void**) p2;
 
             if (p1 != NULL_POINTER) {
 
@@ -313,12 +313,12 @@ void get_pointer_array_elements(const void* p0, const void* p1, void* p2, const 
 
                 if (p0 != NULL_POINTER) {
 
-                    void*** s = (void***) p0;
+                    void** s = (void**) p0;
 
                     // The loop variable.
                     int j = 0;
                     // The source base to start copying from.
-                    void** sb = (void**) (*s + *i);
+                    void* sb = (void*) (*s + *i);
                     // The source element.
                     void** se = POINTER_NULL_POINTER;
                     // The destination element.
@@ -386,7 +386,7 @@ void get_pointer_array_elements_index(const void* p0, const void* p1, const void
 
             if (p2 != NULL_POINTER) {
 
-                void*** ca = (void***) p2;
+                void** ca = (void**) p2;
 
                 if (p1 != NULL_POINTER) {
 
@@ -394,14 +394,14 @@ void get_pointer_array_elements_index(const void* p0, const void* p1, const void
 
                     if (p0 != NULL_POINTER) {
 
-                        void*** a = (void***) p0;
+                        void** a = (void**) p0;
 
                         // The loop variable.
                         int j = 0;
                         // The iteration limit.
                         int l = *s - *c;
                         // The element.
-                        void** e = POINTER_NULL_POINTER;
+                        void* e = NULL_POINTER;
                         // The comparison result.
                         int r = 0;
 
@@ -414,7 +414,7 @@ void get_pointer_array_elements_index(const void* p0, const void* p1, const void
                             }
 
                             // Determine element.
-                            e = (void**) (*a + j);
+                            e = (void*) (*a + j);
 
                             compare_pointer_array_elements((void*) &e, p2, p3, (void*) &r);
 

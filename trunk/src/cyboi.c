@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.23 $ $Date: 2004-04-22 13:25:31 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2004-04-25 21:25:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -120,7 +120,6 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
             fprintf(stderr, "wait s: %d\n", s);
             fprintf(stderr, "wait p: %d\n", p);
             fprintf(stderr, "wait a: %d\n", a);
-            fprintf(stderr, "wait astr: %s\n", "test");
             fprintf(stderr, "wait astr: %s\n", a);
             fprintf(stderr, "wait as: %d\n", as);
 
@@ -222,6 +221,8 @@ int main(int p0, char** p1) {
             void* sm = NULL_POINTER;
             create_signal_memory((void*) &sm);
 
+    fputs("TEST 0\n", stdout);
+
             // Create (transient) startup signal from (persistent) cybol source
             // whose location was given at command line.
             void* ss = NULL_POINTER;
@@ -229,6 +230,8 @@ int main(int p0, char** p1) {
             char* p = p1[1];
             int ps = strlen(p1[1]);
             create_model((void*) &ss, (void*) &sss, (void*) &p, (void*) &ps, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);
+
+    fputs("TEST 1\n", stdout);
 
             // Add startup signal to signal memory.
             set_signal((void*) &sm, (void*) &ss, (void*) &NORMAL_PRIORITY, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);
