@@ -51,11 +51,11 @@ import cybop.core.basic.String;
  *
  * Since humans don't know where this hierarchy stops in the real world
  * - to microcosm as well as towards macrocosm -, a black box has to be assumed
- * at some poInteger towards microcosm. In the case of programming, this is mostly
+ * at some point towards microcosm. In the case of programming, this is mostly
  * the basic items of programming language, namely Boolean and Numbers.
  * They are coded in binaries within the machine and that is the final abstraction.
  * Towards macrocosm, it depends on the modeller how far he/she wants to go.
- * At the time of writing this, the ResMedLib framework's highest class in its
+ * At the time of writing this, the CYBOP framework's highest class in its
  * ontology is Network, consisting of Families which consist of Systems.<br><br>
  *
  * An item has well-defined public methods useable by outside entities. An outside
@@ -75,7 +75,10 @@ import cybop.core.basic.String;
  *      <li>destructor(): called without any parameters; not available for Java where a garbage collector destroys objects incidentally!</li>
  *  </ul>
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * Children of an item can have a special position, relative to each other.
+ * This constellation can be enforced by constraints - a constellation.
+ *
+ * @version $Revision: 1.4 $ $Date: 2003-02-23 00:19:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -84,19 +87,36 @@ public class Item extends State {
     // Children.
     //
 
-    /** The children. */
+    /**
+     * The children.
+     *
+     * ?? This map is temporary and can be removed later, when this Item class
+     * contains the array handling - necessary to provide map behaviour - itself.
+     */
     private java.util.Map children;
 
-    /** The java tree node. */
+    /**
+     * The java tree node.
+     *
+     * ?? Temporary until CYBOP framework doesn't rely on java classes anymore.
+     */
     private javax.swing.tree.DefaultMutableTreeNode javaTreeNode;
 
-    /** The encapsulated java object. */
+    /**
+     * The encapsulated java object.
+     *
+     * ?? Temporary until CYBOP framework doesn't rely on java classes anymore.
+     */
     private java.lang.Object javaObject;
 
-    //?? Temporary, to assign the root system as action listener to gui components.
-    //?? To be removed, when CYBOP supports its own mouse input handling,
-    //?? replacing the java AWT/Swing stuff.
-    /** The signal handler. */
+    /**
+     * The signal handler.
+     *
+     * ?? Temporary until CYBOP framework doesn't rely on java classes anymore.
+     * Needed to assign the root system as action listener to gui components.
+     * To be removed, when CYBOP supports its own mouse input handling,
+     * replacing the java AWT/Swing stuff.
+     */
     private Item signalHandler;
 
     //
@@ -389,8 +409,6 @@ public class Item extends State {
      * @param i the item
      * @exception NullPointerException if the children structure is null
      * @exception NullPointerException if the name is null
-     * @exception NullPointerException if the item exists already
-     * @exception NullPointerException if the item is null
      */
     public void set(String n, Item i) throws NullPointerException {
 
@@ -400,33 +418,19 @@ public class Item extends State {
 
             if (n != null) {
 
-                // This test checks whether the item already exists in the children
-                // container. In this case, the program developer has forgotten
-                // to first remove and destroy the old child item.
-/*??
-                if (s.get(n.getJavaObject()) == null) {
-*/
+                // This test is necessary because java maps do not allow null values.
+                // Otherwise, this test would be superfluous because the item i variable
+                // is not accessed directly but only handed over to another method.
+                if (i != null) {
 
-                    // This test is necessary because java maps do not allow null values.
-                    // Otherwise, this test would be superfluous because the item i variable
-                    // is not accessed directly but only handed over to another method.
-                    if (i != null) {
-    
-                        java.lang.System.out.println("DEBUG: Set child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
-                        addTreeNode(i);
-                        s.put(n.getJavaObject(), i);
-    
-                    } else {
-    
-                        java.lang.System.out.println("DEBUG: Could not set item. The item is null.");
-                    }
+                    java.lang.System.out.println("DEBUG: Set child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
+                    addTreeNode(i);
+                    s.put(n.getJavaObject(), i);
 
-/*??
                 } else {
 
-                    java.lang.System.out.println("DEBUG: Replaced an already existing item.");
+                    java.lang.System.out.println("DEBUG: Could not set item. The item is null.");
                 }
-*/
 
             } else {
 
@@ -437,6 +441,22 @@ public class Item extends State {
 
             throw new NullPointerException("Could not set item. The children structure is null.");
         }
+    }
+
+    /**
+     * Adds the item to become a child of this item.
+     *
+     * The constellation (constraints) for children of this item are taken
+     * into consideration.
+     *
+     * @param n the name
+     * @param i the item
+     * @param p the position
+     * @exception NullPointerException if the children structure is null
+     * @exception NullPointerException if the name is null
+     */
+    public void set(String n, Item i, Position p) throws NullPointerException {
+
     }
 
     /**
