@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-01-13 11:38:16 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-01-18 10:54:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -87,12 +87,12 @@ void handle_system(void* p0) {
     void* pmc = NULL_POINTER;
 
     // Get startup parameters channel, abstraction, model.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_INTERNAL, (void*) &pc);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_COUNT_INTERNAL, (void*) &pcc);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_INTERNAL, (void*) &pa);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_COUNT_INTERNAL, (void*) &pac);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_INTERNAL, (void*) &pm);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_COUNT_INTERNAL, (void*) &pmc);
+    get_array_elements(p0, (void*) STARTUP_CHANNEL_INTERNAL, (void*) &pc, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) STARTUP_CHANNEL_COUNT_INTERNAL, (void*) &pcc, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) STARTUP_ABSTRACTION_INTERNAL, (void*) &pa, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) STARTUP_ABSTRACTION_COUNT_INTERNAL, (void*) &pac, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) STARTUP_MODEL_INTERNAL, (void*) &pm, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) STARTUP_MODEL_COUNT_INTERNAL, (void*) &pmc, (void*) POINTER_ARRAY);
 
     log_message_debug("Create startup model.");
 
@@ -124,11 +124,10 @@ void handle_system(void* p0) {
     // It is not needed for the startup signal.
 
     // Create startup model abstraction, model, details.
-    create_model((void*) &ma, (void*) &mac, (void*) &mas, pa, pac,
-        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
-        (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
-    create_model((void*) &mm, (void*) &mmc, (void*) &mms,
-        pm, pmc, pa, pac, pc, pcc);
+    create_model((void*) &ma, (void*) mac, (void*) mas, pa, pac,
+        (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+        (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+    create_model((void*) &mm, (void*) mmc, (void*) mms, pm, pmc, pa, pac, pc, pcc);
     // CAUTION! Do not create startup model details!
     // It is not needed for the startup signal.
 
@@ -140,15 +139,15 @@ void handle_system(void* p0) {
     void* ss = NULL_POINTER;
 
     // Get signal memory.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &s);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss);
+    get_array_elements(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_ARRAY);
 
     // The signal id.
     int* id = INTEGER_NULL_POINTER;
     create_integer((void*) &id);
     *id = 0;
-    get_new_signal_id(s, (void*) &sc, (void*) &id);
+    get_new_signal_id(s, (void*) sc, (void*) id);
 
     fprintf(stderr, "sm: %i\n", s);
     fprintf(stderr, "smc: %i\n", *((int*) sc));
@@ -164,9 +163,9 @@ void handle_system(void* p0) {
     fprintf(stderr, "id: %i\n", *id);
 
     // Add startup signal to signal memory.
-    set_signal(s, (void*) &sc, (void*) &ss,
-        (void*) &ma, (void*) &mac, (void*) &mm, (void*) &mmc,
-        (void*) &md, (void*) &mdc, (void*) &NORMAL_PRIORITY, (void*) &id);
+    set_signal(s, (void*) sc, (void*) ss,
+        (void*) ma, (void*) mac, (void*) mm, (void*) mmc,
+        (void*) md, (void*) mdc, (void*) NORMAL_PRIORITY, (void*) id);
 
     // The system is now started up and complete so that a loop
     // can be entered, waiting for signals (events/ interrupts)
@@ -185,11 +184,10 @@ void handle_system(void* p0) {
 
     // CAUTION! Do not destroy startup model details!
     // It was not needed for the startup signal.
-    destroy_model((void*) &mm, (void*) &mmc, (void*) &mms,
-        pm, pmc, pa, pac, pc, pcc);
-    destroy_model((void*) &ma, (void*) &mac, (void*) &mas, pa, pac,
-        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
-        (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+    destroy_model((void*) &mm, (void*) mmc, (void*) mms, pm, pmc, pa, pac, pc, pcc);
+    destroy_model((void*) &ma, (void*) mac, (void*) mas, pa, pac,
+        (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+        (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
     // CAUTION! Do not destroy startup model details!
     // It was not needed for the startup signal.

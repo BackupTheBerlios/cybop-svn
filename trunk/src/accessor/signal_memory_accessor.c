@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2005-01-17 23:46:28 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-01-18 10:54:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -343,7 +343,7 @@ void get_signal(const void* p0, const void* p1, const void* p2, void* p3, void* 
  *
  * @param p0 the signal memory
  * @param p1 the signal memory count
- * @param p2 the index
+ * @param p2 the index (Hand over as reference!)
  */
 void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
 
@@ -411,7 +411,7 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
  *
  * @param p0 the signal memory
  * @param p1 the signal memory count
- * @param p2 the signal id
+ * @param p2 the signal id (Hand over as reference!)
  */
 void get_new_signal_id(const void* p0, const void* p1, void* p2) {
 

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-01-18 10:54:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,7 +54,7 @@ void startup_input_output(void* p0) {
     int* f = INTEGER_NULL_POINTER;
 
     // Unix server socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f);
+    get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (*f == 1) {
 
@@ -64,7 +64,7 @@ void startup_input_output(void* p0) {
     }
 
     // Tcp server socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f);
+    get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (*f == 1) {
 
@@ -74,7 +74,7 @@ void startup_input_output(void* p0) {
     }
 
     // X windows server.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f);
+    get_array_elements(p0, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (*f == 1) {
 
@@ -102,7 +102,7 @@ void shutdown_input_output(void* p0) {
     int* f = INTEGER_NULL_POINTER;
 
     // X windows server.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f);
+    get_array_elements(p0, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (*f == 1) {
 
@@ -112,7 +112,7 @@ void shutdown_input_output(void* p0) {
     }
 
     // Tcp server socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f);
+    get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (*f == 1) {
 
@@ -122,7 +122,7 @@ void shutdown_input_output(void* p0) {
     }
 
     // Unix server socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f);
+    get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (*f == 1) {
 
