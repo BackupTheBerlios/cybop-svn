@@ -25,7 +25,7 @@
  *
  * A complex consists of two floats, a real and an imaginary.
  *
- * @version $Revision: 1.8 $ $Date: 2004-06-11 18:50:16 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-06-11 19:10:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -64,7 +64,7 @@
  * A compound model can be created by cloning an existing model template so that
  * some space gets allocated in the computer's memory.
  *
- * @version $Revision: 1.13 $ $Date: 2004-06-11 18:50:16 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-06-11 19:10:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

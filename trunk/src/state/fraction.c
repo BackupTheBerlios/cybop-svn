@@ -28,7 +28,7 @@
  * For higher performance, it is mostly better to use floating point numbers
  * (float) which can be calculated by the Arithmetic Logic Unit (ALU).
  *
- * @version $Revision: 1.8 $ $Date: 2004-06-11 18:50:17 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-06-11 19:10:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

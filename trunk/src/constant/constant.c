@@ -1,5 +1,5 @@
 /*
- * $RCSfile: constants.c,v $
+ * $RCSfile: constant.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -61,7 +61,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.16 $ $Date: 2004-06-11 18:50:16 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-06-11 19:10:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
