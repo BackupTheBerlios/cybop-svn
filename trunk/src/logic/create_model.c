@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.5 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-06-20 22:10:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,16 +55,16 @@
  * @param p0 the buffer array
  * @param p1 the buffer array count
  * @param p2 the buffer array size
- * @param p3 the persistent location
- * @param p4 the persistent location count
- * @param p5 the persistent model
- * @param p6 the persistent model count
+ * @param p3 the persistent model
+ * @param p4 the persistent model count
+ * @param p5 the persistent location
+ * @param p6 the persistent location count
  */
 void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, const void* p5, const void* p6) {
 
-    if (p4 != NULL_POINTER) {
+    if (p6 != NULL_POINTER) {
 
-        int* lc = (int*) p4;
+        int* lc = (int*) p6;
 
         // The done flag.
         int d = 0;
@@ -75,7 +75,7 @@ void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, co
 
             if (*lc == INLINE_LOCATION_COUNT) {
 
-                compare_array_elements(p3, (void*) &INLINE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &INLINE_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p5, (void*) &INLINE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &INLINE_LOCATION_COUNT, (void*) &r);
 
                 if (r == 1) {
 
@@ -90,7 +90,7 @@ void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, co
 
             if (*lc == FILE_LOCATION_COUNT) {
 
-                compare_array_elements(p3, (void*) &FILE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FILE_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p5, (void*) &FILE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FILE_LOCATION_COUNT, (void*) &r);
 
                 if (r == 1) {
 
@@ -105,7 +105,7 @@ void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, co
 
             if (*lc == FTP_LOCATION_COUNT) {
 
-                compare_array_elements(p3, (void*) &FTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FTP_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p5, (void*) &FTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FTP_LOCATION_COUNT, (void*) &r);
 
                 if (r == 1) {
 
@@ -120,7 +120,7 @@ void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, co
 
             if (*lc == HTTP_LOCATION_COUNT) {
 
-                compare_array_elements(p3, (void*) &HTTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &HTTP_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p5, (void*) &HTTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &HTTP_LOCATION_COUNT, (void*) &r);
 
                 if (r == 1) {
 
@@ -390,33 +390,21 @@ void interpret_located_model(void* p0, void* p1, void* p2,
     const void* p5, const void* p6,
     const void* p7, const void* p8) {
 
-    if (p2 != NULL_POINTER) {
+    // Initialize buffer array and its count and size.
+    void* b = NULL_POINTER;
+    int bc = 0;
+    int bs = 0;
 
-        int* tms = (int*) p2;
-
-        if (p1 != NULL_POINTER) {
-
-            int* tmc = (int*) p1;
-
-            if (p0 != NULL_POINTER) {
-
-                void** tm = (void**) p0;
-
-                // Initialize buffer array and its count and size.
-                void* b = NULL_POINTER;
-                int bc = 0;
-                int bs = 0;
-
-                // Create buffer array of type character to read single bytes.
-                create_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
+    // Create buffer array of type character to read single bytes.
+    create_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
 
     fprintf(stderr, "pl: %s\n", *((char**) p5));
     fprintf(stderr, "plc: %i\n", *((int*) p6));
     fprintf(stderr, "pm: %s\n", *((char**) p7));
     fprintf(stderr, "pmc: %i\n", *((int*) p8));
 
-                // Read persistent model from location into buffer array.
-                read_model((void*) &b, (void*) &bc, (void*) &bs, p5, p6, p7, p8);
+    // Read persistent model from location into buffer array.
+    read_model((void*) &b, (void*) &bc, (void*) &bs, p7, p8, p5, p6);
 
     fprintf(stderr, "b: %s\n", b);
     fprintf(stderr, "bs: %i\n", bs);
@@ -425,30 +413,15 @@ void interpret_located_model(void* p0, void* p1, void* p2,
     fprintf(stderr, "pa: %s\n", *((char**) p3));
     fprintf(stderr, "pac: %i\n", *((int*) p4));
 
-                // Create and initialize transient model from buffer array.
-                interpret_model((void*) &tm, (void*) &tmc, (void*) &tms, (void*) &b, (void*) &bc, p3, p4);
+    // Create and initialize transient model from buffer array.
+    interpret_model(p0, p1, p2, (void*) &b, (void*) &bc, p3, p4);
 
-    fprintf(stderr, "tm: %i\n", tm);
-    fprintf(stderr, "tms: %i\n", tms);
-    fprintf(stderr, "tmc: %i\n", tmc);
+    fprintf(stderr, "tm: %i\n", *((int*) p0));
+    fprintf(stderr, "tmc: %i\n", *((int*) p1));
+    fprintf(stderr, "tms: %i\n", *((int*) p2));
 
-                // Destroy buffer array.
-                destroy_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
-
-            } else {
-
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_IS_NULL_MESSAGE_COUNT);
-            }
-
-        } else {
-
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_COUNT_IS_NULL_MESSAGE_COUNT);
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_MODEL_THE_TRANSIENT_MODEL_SIZE_IS_NULL_MESSAGE_COUNT);
-    }
+    // Destroy buffer array.
+    destroy_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
 }
 
 /* CREATE_MODEL_SOURCE */

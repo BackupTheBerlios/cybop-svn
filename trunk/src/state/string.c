@@ -25,7 +25,7 @@
  *
  * A string is a chain of characters.
  *
- * @version $Revision: 1.4 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-06-20 22:10:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,61 +72,85 @@ void destroy_string(void* p0, void* p1) {
  */
 void initialize_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
-    if (p2 != NULL_POINTER) {
+    if (p4 != NULL_POINTER) {
 
-        int* s = (int*) p2;
+        int* pc = (int*) p4;
 
-        if (p1 != NULL_POINTER) {
+        if (p2 != NULL_POINTER) {
 
-            int* c = (int*) p1;
+            int* ts = (int*) p2;
 
-            // The destination array index.
-            int i = 0;
+            if (p1 != NULL_POINTER) {
 
-            if (i >= 0) {
+                int* tc = (int*) p1;
+
+                // The destination array index.
+                int i = 0;
+
+                // The new transient array size.
+                // (Not exactly the size, but the transient array index
+                // increased by the persistent array count.)
+                int nts = i + *pc;
+
+                if (i >= 0) {
 
 //??                log_message((void*) &INFO_LOG_LEVEL, (void*) &INITIALIZE_STRING_MESSAGE, (void*) &INITIALIZE_STRING_MESSAGE_COUNT);
 
-                if (i == *s) {
+                    if (nts >= *ts) {
 
-                    // Increase size.
-                    *s = (*s * STRING_RESIZE_FACTOR) + 1;
+                        while (nts >= *ts) {
 
-                    // Resize string.
-                    resize_array(p0, (void*) &CHARACTER_ARRAY, p2);
-                }
+                            // Increase size.
+                            *ts = (*ts * STRING_RESIZE_FACTOR) + 1;
+                        }
 
-                if (i < *s) {
-
-                    // Set string.
-                    // CAUTION! Parameter is only set, when not null.
-
-                    if (p3 != NULL_POINTER) {
-
-                        set_array_elements(p0, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
+                        // Resize string.
+                        resize_array(p0, (void*) &CHARACTER_ARRAY, p2);
                     }
 
-                    // Increment count.
-                    (*c)++;
+                    if (i < (*ts - *pc)) {
+
+                        // Set string.
+                        // CAUTION! Parameter is only set, when not null.
+
+                        if (p3 != NULL_POINTER) {
+
+                            set_array_elements(p0, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
+                        }
+
+                        // Increment count.
+                        // Example:
+                        // t = "helloworld"
+                        // i = 5
+                        // p = "universe"
+                        // pc = 8
+                        // t (after set) = "hellouniverse"
+                        // tc = i + pc = 13
+                        *tc = i + *pc;
+
+                    } else {
+
+//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The index exceeds the size.");
+                    }
 
                 } else {
 
-//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The index exceeds the size.");
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The index is negativ.");
                 }
 
             } else {
 
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The index is negativ.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The transient count is null.");
             }
 
         } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The count is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The transient size is null.");
         }
 
     } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The size is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The persistent count is null.");
     }
 }
 

@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.4 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-06-20 22:10:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -70,14 +70,17 @@ void create_operation(void* p0, const void* p1) {
     // Initialize elements.
     void* p = NULL_POINTER;
     void* pc = NULL_POINTER;
+    void* ps = NULL_POINTER;
 
     // Create elements.
     create_array((void*) &p, (void*) &POINTER_ARRAY, p1);
     create_array((void*) &pc, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &ps, (void*) &INTEGER_ARRAY, p1);
 
     // Set elements in ascending order.
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &p);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &pc);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_INDEX, (void*) &ps);
 }
 
 /**
@@ -93,18 +96,22 @@ void destroy_operation(void* p0, const void* p1) {
     // Initialize elements.
     void* p = NULL_POINTER;
     void* pc = NULL_POINTER;
+    void* ps = NULL_POINTER;
 
     // Get elements.
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &p);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &pc);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_INDEX, (void*) &ps);
 
     // Remove elements in descending order.
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT, (void*) &PARAMETERS_SIZES_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT, (void*) &PARAMETERS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT, (void*) &PARAMETERS_INDEX);
 
     // Destroy elements.
     destroy_array((void*) &p, (void*) &POINTER_ARRAY, p1);
     destroy_array((void*) &pc, (void*) &INTEGER_ARRAY, p1);
+    destroy_array((void*) &ps, (void*) &INTEGER_ARRAY, p1);
 
     // Destroy operation.
     destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT);
@@ -150,6 +157,10 @@ void initialize_operation(void* p0, void* p1, void* p2, const void* p3, const vo
                         // The parameter count initially set to the persistent model count.
                         int count = *pc;
 
+    fprintf(stderr, "initop p3: %s\n", *((char**) p3));
+    fprintf(stderr, "initop p4: %i\n", *((int*) p4));
+    fprintf(stderr, "initop count: %i\n", count);
+
                         // The separator index.
                         int si = -1;
                         get_array_element_index(p3, (void*) &CHARACTER_ARRAY, p4, (void*) &OPERATION_PARAMETER_SEPARATOR, (void*) &si);
@@ -169,13 +180,17 @@ void initialize_operation(void* p0, void* p1, void* p2, const void* p3, const vo
                             // Initialize elements.
                             void* pa = NULL_POINTER;
                             void* pac = NULL_POINTER;
+                            void* pas = NULL_POINTER;
 
                             // Get elements.
                             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &pa);
                             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &pac);
+                            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_INDEX, (void*) &pas);
 
                             // The index for adding the parameter and its count.
                             int i = *tc;
+
+    fprintf(stderr, "initop i: %i\n", i);
 
                             if (i >= 0) {
 
@@ -187,13 +202,36 @@ void initialize_operation(void* p0, void* p1, void* p2, const void* p3, const vo
                                     // Resize elements.
                                     resize_array((void*) &pa, (void*) &POINTER_ARRAY, p2);
                                     resize_array((void*) &pac, (void*) &INTEGER_ARRAY, p2);
+                                    resize_array((void*) &pas, (void*) &INTEGER_ARRAY, p2);
                                 }
 
                                 if (i < *ts) {
 
-                                    // Set parameter.
-                                    set_array_element((void*) &pa, (void*) &POINTER_ARRAY, (void*) &i, p3);
-                                    set_array_element((void*) &pac, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &count);
+                                    // Initialize transient parameter
+                                    // and its count and size.
+                                    void* tp = NULL_POINTER;
+                                    int tpc = 0;
+                                    int tps = 0;
+
+    fprintf(stderr, "initop tp before: %s\n", tp);
+    fprintf(stderr, "initop tpc before: %i\n", tpc);
+    fprintf(stderr, "initop tps before: %i\n", tps);
+
+                                    // Create transient parameter
+                                    // and its count and size.
+                                    interpret_model((void*) &tp, (void*) &tpc, (void*) &tps,
+                                        p3, (void*) &count,
+                                        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+
+    fprintf(stderr, "initop tp after: %s\n", tp);
+    fprintf(stderr, "initop tpc after: %i\n", tpc);
+    fprintf(stderr, "initop tps after: %i\n", tps);
+
+                                    // Set transient parameter
+                                    // and its count and size.
+                                    set_array_element((void*) &pa, (void*) &POINTER_ARRAY, (void*) &i, (void*) &tp);
+                                    set_array_element((void*) &pac, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &tpc);
+                                    set_array_element((void*) &pas, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &tps);
 
                                     // Increment count.
                                     (*tc)++;

@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.18 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2004-06-20 22:10:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -80,7 +80,7 @@ void wait(void* p0, void* p1, void* p2,
         // The priority.
         int p = NORMAL_PRIORITY;
         // The abstraction.
-        char* a = CHARACTER_NULL_POINTER;
+        void* a = NULL_POINTER;
         // The abstraction count.
         int ac = 0;
         // The signal size.
@@ -127,8 +127,12 @@ void wait(void* p0, void* p1, void* p2,
                 get_signal(p0, p1, (void*) &i,
                     (void*) &s, (void*) &sc, (void*) &p, (void*) &a, (void*) &ac);
 
-    //?? HERE is the segmentation fault error!
-    fprintf(stderr, "TEST 4: %i\n", f);
+    fprintf(stderr, "wait i: %i\n", i);
+    fprintf(stderr, "wait s: %i\n", s);
+    fprintf(stderr, "wait sc: %i\n", sc);
+    fprintf(stderr, "wait p: %i\n", p);
+    fprintf(stderr, "wait a: %i\n", a);
+    fprintf(stderr, "wait ac: %i\n", ac);
 
                 // Abstraction and priority are removed internally,
                 // together with the signal.
@@ -141,8 +145,6 @@ void wait(void* p0, void* p1, void* p2,
                 //
                 // Handle compound signal.
                 //
-
-    fprintf(stderr, "a: %s\n", a);
 
                 if (d == 0) {
 
@@ -192,7 +194,7 @@ void wait(void* p0, void* p1, void* p2,
                 // Reset priority.
                 p = NORMAL_PRIORITY;
                 // Reset abstraction.
-                a = CHARACTER_NULL_POINTER;
+                a = NULL_POINTER;
                 // Reset abstraction count.
                 ac = 0;
                 // Reset highest priority index.
@@ -405,16 +407,6 @@ int main(int p0, char** p1) {
                 (void*) &ppa, (void*) &ppac,
                 (void*) &ppl, (void*) &pplc,
                 (void*) &ppm, (void*) &ppmc);
-
-    //?? HERE is the ERROR! The signal model is NULL. Check out create_model!
-
-    fprintf(stderr, "tpa: %s\n", tpa);
-    fprintf(stderr, "tpac: %i\n", tpac);
-    fprintf(stderr, "tpas: %i\n", tpas);
-
-    fprintf(stderr, "tpm: %i\n", tpm);
-    fprintf(stderr, "tpmc: %i\n", tpmc);
-    fprintf(stderr, "tpms: %i\n", tpms);
 
             //
             // Startup signal.

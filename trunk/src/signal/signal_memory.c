@@ -32,7 +32,7 @@
  * A signal is a transient logic model.
  * It is stored in the computer's random access memory (ram).
  *
- * @version $Revision: 1.29 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2004-06-20 22:10:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1123,7 +1123,7 @@ void handle_operation_signal(const void* p0, const void* p1,
 
                         log_message((void*) &INFO_LOG_LEVEL, (void*) &SET_SHUTDOWN_FLAG_MESSAGE, (void*) &SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
 
-                        int* f = (int*) p5;
+                        int* f = (int*) p11;
                         *f = 1;
 
                         d = 1;
