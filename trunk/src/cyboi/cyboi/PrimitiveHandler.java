@@ -29,7 +29,7 @@ package cyboi;
  *
  * It contains procedures to create items of primitive type.
  *
- * @version $Revision: 1.1 $ $Date: 2003-07-17 09:03:04 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-07-17 23:26:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class PrimitiveHandler {
@@ -54,6 +54,17 @@ class PrimitiveHandler {
     static Object createFloatPrimitive(String s) {
 
         return Double.valueOf(s);
+    }
+
+    /**
+     * Creates a character primitive.
+     *
+     * @param s the character primitive as string
+     * @return the character primitive
+     */
+    static Object createCharacterPrimitive(String s) {
+
+        return null; //?? Double.valueOf(s);
     }
 
     /**

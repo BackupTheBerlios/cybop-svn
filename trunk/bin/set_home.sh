@@ -25,7 +25,7 @@
 #
 # This file sets the path and classpath.
 #
-# @version $Revision: 1.2 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+# @version $Revision: 1.3 $ $Date: 2003-07-17 23:26:15 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Henrik Brandes <henrik-b@gmx.de>
 # @author Christian Heller <christian.heller@tuxtax.de>
@@ -53,7 +53,7 @@
 # 2 Now, build/start your system.
 # The build/start scripts use this set_home script automatically.
 #
-# @version $Revision: 1.2 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+# @version $Revision: 1.3 $ $Date: 2003-07-17 23:26:15 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -119,6 +119,6 @@ export PATH
 #
 # Sets and exports the class path.
 #
-CLASSPATH=${CLASSPATH}:${JAVA_HOME}/jre/lib/rt.jar:${JAVA_HOME}/lib/tools.jar:${JAVAEE_HOME}/lib/j2ee.jar:${CYBOP_HOME}/lib/ant.jar
+CLASSPATH=${CLASSPATH}:${JAVA_HOME}/jre/lib/rt.jar:${JAVA_HOME}/lib/tools.jar:${JAVAEE_HOME}/lib/j2ee.jar:${CYBOP_HOME}/lib/ant.jar:${CYBOP_HOME}/lib/xerces.jar
 export CLASSPATH
 
