@@ -24,7 +24,7 @@
  * This file handles log messages.
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.16 $ $Date: 2004-04-22 08:54:55 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-04-22 13:25:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -156,7 +156,7 @@ void show_message(void* p0, void* p1) {
         int* s = (int*) p1;
 
         // The log message.
-        char* m = NULL_CHARACTER_POINTER;
+        char* m = CHARACTER_NULL_POINTER;
         // The log size, including two places for new line and
         // string termination.
         int ls = *s + 2;

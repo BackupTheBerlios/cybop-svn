@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-04-22 13:25:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,61 +45,61 @@
 void add(void* p0, const void* p1, const void* p2, const void* p3, const void* p4, const void* p5, const void* p6) {
 
     // Initialize summand 1.
-    char* summand_1_pa = NULL_CHARACTER_POINTER;
+    char* summand_1_pa = CHARACTER_NULL_POINTER;
     int summand_1_pas = 0;
-    char* summand_1_pl = NULL_CHARACTER_POINTER;
+    char* summand_1_pl = CHARACTER_NULL_POINTER;
     int summand_1_pls = 0;
     int summand_1_pm = 0;
     int summand_1_pms = 0;
-    char* summand_1_poa = NULL_CHARACTER_POINTER;
+    char* summand_1_poa = CHARACTER_NULL_POINTER;
     int summand_1_poas = 0;
-    char* summand_1_pol = NULL_CHARACTER_POINTER;
+    char* summand_1_pol = CHARACTER_NULL_POINTER;
     int summand_1_pols = 0;
     void* summand_1_pom = NULL_POINTER;
     int summand_1_poms = 0;
-    char* summand_1_ca = NULL_CHARACTER_POINTER;
+    char* summand_1_ca = CHARACTER_NULL_POINTER;
     int summand_1_cas = 0;
-    char* summand_1_cl = NULL_CHARACTER_POINTER;
+    char* summand_1_cl = CHARACTER_NULL_POINTER;
     int summand_1_cls = 0;
     void* summand_1_cm = NULL_POINTER;
     int summand_1_cms = 0;
 
     // Initialize summand 2.
-    char* summand_2_pa = NULL_CHARACTER_POINTER;
+    char* summand_2_pa = CHARACTER_NULL_POINTER;
     int summand_2_pas = 0;
-    char* summand_2_pl = NULL_CHARACTER_POINTER;
+    char* summand_2_pl = CHARACTER_NULL_POINTER;
     int summand_2_pls = 0;
     int summand_2_pm = 0;
     int summand_2_pms = 0;
-    char* summand_2_poa = NULL_CHARACTER_POINTER;
+    char* summand_2_poa = CHARACTER_NULL_POINTER;
     int summand_2_poas = 0;
-    char* summand_2_pol = NULL_CHARACTER_POINTER;
+    char* summand_2_pol = CHARACTER_NULL_POINTER;
     int summand_2_pols = 0;
     void* summand_2_pom = NULL_POINTER;
     int summand_2_poms = 0;
-    char* summand_2_ca = NULL_CHARACTER_POINTER;
+    char* summand_2_ca = CHARACTER_NULL_POINTER;
     int summand_2_cas = 0;
-    char* summand_2_cl = NULL_CHARACTER_POINTER;
+    char* summand_2_cl = CHARACTER_NULL_POINTER;
     int summand_2_cls = 0;
     void* summand_2_cm = NULL_POINTER;
     int summand_2_cms = 0;
 
     // Initialize sum.
-    char* sum_pa = NULL_CHARACTER_POINTER;
+    char* sum_pa = CHARACTER_NULL_POINTER;
     int sum_pas = 0;
-    char* sum_pl = NULL_CHARACTER_POINTER;
+    char* sum_pl = CHARACTER_NULL_POINTER;
     int sum_pls = 0;
     int sum_pm = 0;
     int sum_pms = 0;
-    char* sum_poa = NULL_CHARACTER_POINTER;
+    char* sum_poa = CHARACTER_NULL_POINTER;
     int sum_poas = 0;
-    char* sum_pol = NULL_CHARACTER_POINTER;
+    char* sum_pol = CHARACTER_NULL_POINTER;
     int sum_pols = 0;
     void* sum_pom = NULL_POINTER;
     int sum_poms = 0;
-    char* sum_ca = NULL_CHARACTER_POINTER;
+    char* sum_ca = CHARACTER_NULL_POINTER;
     int sum_cas = 0;
-    char* sum_cl = NULL_CHARACTER_POINTER;
+    char* sum_cl = CHARACTER_NULL_POINTER;
     int sum_cls = 0;
     void* sum_cm = NULL_POINTER;
     int sum_cms = 0;

@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.35 $ $Date: 2004-04-22 08:54:56 $ $Author: christian $
+ * @version $Revision: 1.36 $ $Date: 2004-04-22 13:25:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,10 +48,7 @@
 #include "../dynamics/destroy_model.c"
 #include "../logger/log_handler.c"
 #include "../model/array_handler.c"
-#include "../model/dynamics_models.c"
 #include "../model/model_handler.c"
-#include "../signal/languages.c"
-#include "../signal/priorities.c"
 #include "../x_windows/x_windows_handler.c"
 
 //
@@ -613,7 +610,7 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
 
     // Add.
     //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &ADD_MODEL, (void*) &CHARACTER_ARRAY, (void*) &ADD_MODEL_SIZE, (void*) &r);
+    compare_array_elements((void*) &param0, (void*) &ADD_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &ADD_ABSTRACTION_SIZE, (void*) &r);
 
     if (r == 1) {
 
@@ -623,7 +620,7 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
 
     // Create statics.
     //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &CREATE_STATICS_MODEL, (void*) &CHARACTER_ARRAY, (void*) &CREATE_STATICS_MODEL_SIZE, (void*) &r);
+    compare_array_elements((void*) &param0, (void*) &CREATE_STATICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CREATE_STATICS_ABSTRACTION_SIZE, (void*) &r);
 
     if (r == 1) {
 
@@ -649,7 +646,7 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
 
     // Destroy statics.
     //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &DESTROY_STATICS_MODEL, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_STATICS_MODEL_SIZE, (void*) &r);
+    compare_array_elements((void*) &param0, (void*) &DESTROY_STATICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_STATICS_ABSTRACTION_SIZE, (void*) &r);
 
     if (r == 1) {
 
@@ -673,7 +670,7 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
 
     // Create dynamics.
     //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &CREATE_DYNAMICS_MODEL, (void*) &CHARACTER_ARRAY, (void*) &CREATE_DYNAMICS_MODEL_SIZE, (void*) &r);
+    compare_array_elements((void*) &param0, (void*) &CREATE_DYNAMICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CREATE_DYNAMICS_ABSTRACTION_SIZE, (void*) &r);
 
     if (r == 1) {
 
@@ -697,7 +694,7 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
 
     // Destroy dynamics.
     //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &DESTROY_DYNAMICS_MODEL, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_DYNAMICS_MODEL_SIZE, (void*) &r);
+    compare_array_elements((void*) &param0, (void*) &DESTROY_DYNAMICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_DYNAMICS_ABSTRACTION_SIZE, (void*) &r);
 
     if (r == 1) {
 
@@ -721,7 +718,7 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
 
     // Send.
     //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &SEND_MODEL, (void*) &CHARACTER_ARRAY, (void*) &SEND_MODEL_SIZE, (void*) &r);
+    compare_array_elements((void*) &param0, (void*) &SEND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &SEND_ABSTRACTION_SIZE, (void*) &r);
 
     if (r == 1) {
 
@@ -741,7 +738,7 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
 
     // Receive.
     //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &RECEIVE_MODEL, (void*) &CHARACTER_ARRAY, (void*) &RECEIVE_MODEL_SIZE, (void*) &r);
+    compare_array_elements((void*) &param0, (void*) &RECEIVE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &RECEIVE_ABSTRACTION_SIZE, (void*) &r);
 
     if (r == 1) {
 
@@ -749,7 +746,7 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
 
     // Exit.
     //?? CAUTION! Still compare sizes here!
-    compare_array_elements((void*) &param0, (void*) &EXIT_MODEL, (void*) &CHARACTER_ARRAY, (void*) &EXIT_MODEL_SIZE, (void*) &r);
+    compare_array_elements((void*) &param0, (void*) &EXIT_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &EXIT_ABSTRACTION_SIZE, (void*) &r);
 
     if (r == 1) {
 

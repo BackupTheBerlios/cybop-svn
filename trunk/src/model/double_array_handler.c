@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.13 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-04-22 13:25:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,8 +79,8 @@ void compare_double_array_elements(const void* p0, const void* p1, const void* p
                     double** a0 = (double**) p0;
 
                     int j = 0;
-                    double* e0 = NULL_DOUBLE_POINTER;
-                    double* e1 = NULL_DOUBLE_POINTER;
+                    double* e0 = DOUBLE_NULL_POINTER;
+                    double* e1 = DOUBLE_NULL_POINTER;
 
                     while (1) {
 
@@ -157,9 +157,9 @@ void set_double_array_elements(void* p0, const void* p1, const void* p2, const v
                     // The destination base to start copying to.
                     double* db = (double*) (*d + *i);
                     // The source element.
-                    double* se = NULL_DOUBLE_POINTER;
+                    double* se = DOUBLE_NULL_POINTER;
                     // The destination element.
-                    double* de = NULL_DOUBLE_POINTER;
+                    double* de = DOUBLE_NULL_POINTER;
 
                     while (1) {
 
@@ -234,9 +234,9 @@ void remove_double_array_elements(void* p0, const void* p1, const void* p2, cons
                     // The source base.
                     double* sb = (double*) (*a + *i + *c);
                     // The source element.
-                    double* se = NULL_DOUBLE_POINTER;
+                    double* se = DOUBLE_NULL_POINTER;
                     // The destination element.
-                    double* de = NULL_DOUBLE_POINTER;
+                    double* de = DOUBLE_NULL_POINTER;
 
                     // Starting from the given index, move all remaining elements
                     // one place towards the beginning of the elements.
@@ -320,9 +320,9 @@ void get_double_array_elements(const void* p0, const void* p1, void* p2, const v
                     // The source base to start copying from.
                     double* sb = (double*) (*s + *i);
                     // The source element.
-                    double* se = NULL_DOUBLE_POINTER;
+                    double* se = DOUBLE_NULL_POINTER;
                     // The destination element.
-                    double* de = NULL_DOUBLE_POINTER;
+                    double* de = DOUBLE_NULL_POINTER;
 
                     while (1) {
 
@@ -401,7 +401,7 @@ void get_double_array_elements_index(const void* p0, const void* p1, const void*
                         // The iteration limit.
                         int l = *s - *c;
                         // The element.
-                        double* e = NULL_DOUBLE_POINTER;
+                        double* e = DOUBLE_NULL_POINTER;
                         // The comparison result.
                         int r = 0;
 

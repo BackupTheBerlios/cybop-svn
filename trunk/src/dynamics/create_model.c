@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.15 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-04-22 13:25:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,8 +32,6 @@
 
 #include "../logger/log_handler.c"
 #include "../model/model_handler.c"
-#include "../model/models.c"
-#include "../model/statics_models.c"
 #include "../statics/boolean_handler.c"
 #include "../statics/complex_handler.c"
 #include "../statics/double_handler.c"

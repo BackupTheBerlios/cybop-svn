@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.4 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-04-22 13:25:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -89,7 +89,7 @@ void test_pointer_cast() {
  */
 void test_character_array_single_element() {
 
-    char* m = NULL_CHARACTER_POINTER;
+    char* m = CHARACTER_NULL_POINTER;
     int s = 5;
     create_array((void*) &m, (void*) &s);
 
@@ -121,7 +121,7 @@ void test_character_array_single_element() {
 void test_character_array_multiple_elements() {
 
     // The destination array.
-    char* d = NULL_CHARACTER_POINTER;
+    char* d = CHARACTER_NULL_POINTER;
     int ds = 20;
     create_array((void*) &d, (void*) &ds);
 

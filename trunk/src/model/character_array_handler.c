@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.15 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-04-22 13:25:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,8 +79,8 @@ void compare_character_array_elements(const void* p0, const void* p1, const void
                     char** a0 = (char**) p0;
 
                     int j = 0;
-                    char* e0 = NULL_CHARACTER_POINTER;
-                    char* e1 = NULL_CHARACTER_POINTER;
+                    char* e0 = CHARACTER_NULL_POINTER;
+                    char* e1 = CHARACTER_NULL_POINTER;
 
                     while (1) {
 
@@ -157,9 +157,9 @@ void set_character_array_elements(void* p0, const void* p1, const void* p2, cons
                     // The destination base to start copying to.
                     char* db = (char*) (*d + *i);
                     // The source element.
-                    char* se = NULL_CHARACTER_POINTER;
+                    char* se = CHARACTER_NULL_POINTER;
                     // The destination element.
-                    char* de = NULL_CHARACTER_POINTER;
+                    char* de = CHARACTER_NULL_POINTER;
 
                     while (1) {
 
@@ -234,9 +234,9 @@ void remove_character_array_elements(void* p0, const void* p1, const void* p2, c
                     // The source base.
                     char* sb = (char*) (*a + *i + *c);
                     // The source element.
-                    char* se = NULL_CHARACTER_POINTER;
+                    char* se = CHARACTER_NULL_POINTER;
                     // The destination element.
-                    char* de = NULL_CHARACTER_POINTER;
+                    char* de = CHARACTER_NULL_POINTER;
 
                     // Starting from the given index, move all remaining elements
                     // one place towards the beginning of the elements.
@@ -320,9 +320,9 @@ void get_character_array_elements(const void* p0, const void* p1, void* p2, cons
                     // The source base to start copying from.
                     char* sb = (char*) (*s + *i);
                     // The source element.
-                    char* se = NULL_CHARACTER_POINTER;
+                    char* se = CHARACTER_NULL_POINTER;
                     // The destination element.
-                    char* de = NULL_CHARACTER_POINTER;
+                    char* de = CHARACTER_NULL_POINTER;
 
                     while (1) {
 
@@ -401,7 +401,7 @@ void get_character_array_elements_index(const void* p0, const void* p1, const vo
                         // The iteration limit.
                         int l = *s - *c;
                         // The element.
-                        char* e = NULL_CHARACTER_POINTER;
+                        char* e = CHARACTER_NULL_POINTER;
                         // The comparison result.
                         int r = 0;
 
