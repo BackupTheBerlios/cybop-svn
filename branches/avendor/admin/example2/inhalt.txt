@@ -1,0 +1,4 @@
+Aufgabe: -
+- In einer HTML-Seite will ich den Vornamen und Nachnamen ausgeben lassen.
+- ist der Vorname Rolf, dann soll die Schriftfarbe rot sein
+- ist es ein anderer Vorname, so soll Schriftfarbe schwarz sein
