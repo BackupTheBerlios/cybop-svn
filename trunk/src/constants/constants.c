@@ -59,7 +59,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-05-06 22:29:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1062,41 +1062,23 @@ static const int DIVIDE_ABSTRACTION_SIZE = 6;
 // Memory management abstractions.
 //
 
-/** The create statics abstraction array. */
-static const char CREATE_STATICS_ABSTRACTION_ARRAY[] = {'c', 'r', 'e', 'a', 't', 'e', '_', 's', 't', 'a', 't', 'i', 'c', 's'};
+/** The create model abstraction array. */
+static const char CREATE_MODEL_ABSTRACTION_ARRAY[] = {'c', 'r', 'e', 'a', 't', 'e', '_', 's', 't', 'a', 't', 'i', 'c', 's'};
 
-/** The create statics abstraction. */
-static const char* CREATE_STATICS_ABSTRACTION = CREATE_STATICS_ABSTRACTION_ARRAY;
+/** The create model abstraction. */
+static const char* CREATE_MODEL_ABSTRACTION = CREATE_MODEL_ABSTRACTION_ARRAY;
 
-/** The create statics abstraction size. */
-static const int CREATE_STATICS_ABSTRACTION_SIZE = 14;
+/** The create model abstraction size. */
+static const int CREATE_MODEL_ABSTRACTION_SIZE = 14;
 
-/** The destroy statics abstraction array. */
-static const char DESTROY_STATICS_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't', 'r', 'o', 'y', '_', 's', 't', 'a', 't', 'i', 'c', 's'};
+/** The destroy model abstraction array. */
+static const char DESTROY_MODEL_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't', 'r', 'o', 'y', '_', 's', 't', 'a', 't', 'i', 'c', 's'};
 
-/** The destroy statics abstraction. */
-static const char* DESTROY_STATICS_ABSTRACTION = DESTROY_STATICS_ABSTRACTION_ARRAY;
+/** The destroy model abstraction. */
+static const char* DESTROY_MODEL_ABSTRACTION = DESTROY_MODEL_ABSTRACTION_ARRAY;
 
-/** The destroy statics abstraction size. */
-static const int DESTROY_STATICS_ABSTRACTION_SIZE = 15;
-
-/** The create dynamics abstraction array. */
-static const char CREATE_DYNAMICS_ABSTRACTION_ARRAY[] = {'c', 'r', 'e', 'a', 't', 'e', '_', 'd', 'y', 'n', 'a', 'm', 'i', 'c', 's'};
-
-/** The create dynamics abstraction. */
-static const char* CREATE_DYNAMICS_ABSTRACTION = CREATE_DYNAMICS_ABSTRACTION_ARRAY;
-
-/** The create dynamics abstraction size. */
-static const int CREATE_DYNAMICS_ABSTRACTION_SIZE = 15;
-
-/** The destroy dynamics abstraction array. */
-static const char DESTROY_DYNAMICS_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't', 'r', 'o', 'y', '_', 'd', 'y', 'n', 'a', 'm', 'i', 'c', 's'};
-
-/** The destroy dynamics abstraction. */
-static const char* DESTROY_DYNAMICS_ABSTRACTION = DESTROY_DYNAMICS_ABSTRACTION_ARRAY;
-
-/** The destroy dynamics abstraction size. */
-static const int DESTROY_DYNAMICS_ABSTRACTION_SIZE = 16;
+/** The destroy model abstraction size. */
+static const int DESTROY_MODEL_ABSTRACTION_SIZE = 15;
 
 //
 // Input output abstractions.

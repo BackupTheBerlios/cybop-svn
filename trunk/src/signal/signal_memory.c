@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.9 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-05-06 22:29:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -609,44 +609,60 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
         }
     }
 
-    // Create statics.
+    // Create model.
     if (d == 0) {
 
-        if (param0s == CREATE_STATICS_ABSTRACTION_SIZE) {
+        if (param0s == CREATE_MODEL_ABSTRACTION_SIZE) {
 
-            compare_array_elements((void*) &param0, (void*) &CREATE_STATICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CREATE_STATICS_ABSTRACTION_SIZE, (void*) &r);
+            compare_array_elements((void*) &param0, (void*) &CREATE_MODEL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CREATE_MODEL_ABSTRACTION_SIZE, (void*) &r);
 
             if (r == 1) {
 
-/*??
                 void* m = NULL_POINTER;
                 int ms = 0;
 
-                * @param p0 the transient model
-                * @param p1 the transient model size
-                * @param p2 the persistent model
-                * @param p3 the persistent model size
-                * @param p4 the abstraction
-                * @param p5 the abstraction size
-                //?? Work this out! Hand over 9 or just 3 parameters,
-                //?? for only part or also position and constraint?
-                //?? ATTENTION! One of the given cybol parameters must specify
-                //?? the whole model that the newly created part model will be attached to.
-                create_model(get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
-                set_map_element_with_name(s->part_models, get_array_element(v, (void*) &ONE_NUMBER), m);
+                create_model((void*) &m, (void*) &ms, (void*) &param1, (void*) &param1s, (void*) &param2, (void*) &param2s);
+                // Add to statics.
+/*??
+                * @param p0 the model
+                * @param p1 the name
+                * @param p2 the name size
+                * @param p3 the part abstraction
+                * @param p4 the part abstraction size
+                * @param p5 the part location
+                * @param p6 the part location size
+                * @param p7 the part model
+                * @param p8 the part model size
+                * @param p9 the position abstraction
+                * @param p10 the position abstraction size
+                * @param p11 the position location
+                * @param p12 the position location size
+                * @param p13 the position model
+                * @param p14 the position model size
+                * @param p15 the constraint abstraction
+                * @param p16 the constraint abstraction size
+                * @param p17 the constraint location
+                * @param p18 the constraint location size
+                * @param p19 the constraint model
+                * @param p20 the constraint model size
 */
+                // Models of statics root do not need position or constraints!
+                // Just store part abstraction, location, model.
+                // Hand over (void*) &NULL_POINTER for all others!
+                // Name must be given as create_model operation parameter, in cybol.
+//??                set_model_part_by_name(p1, (void*) &POINTER_ARRAY, size, (void*) &m);
 
                 d = 1;
             }
         }
     }
 
-    // Destroy statics.
+    // Destroy model.
     if (d == 0) {
 
-        if (param0s == DESTROY_STATICS_ABSTRACTION_SIZE) {
+        if (param0s == DESTROY_MODEL_ABSTRACTION_SIZE) {
 
-            compare_array_elements((void*) &param0, (void*) &DESTROY_STATICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_STATICS_ABSTRACTION_SIZE, (void*) &r);
+            compare_array_elements((void*) &param0, (void*) &DESTROY_MODEL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_MODEL_ABSTRACTION_SIZE, (void*) &r);
 
             if (r == 1) {
 
@@ -663,66 +679,6 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
                 } else {
 
                     log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle destroy statics model. The statics is null.");
-                }
-*/
-
-                d = 1;
-            }
-        }
-    }
-
-    // Create dynamics.
-    if (d == 0) {
-
-        if (param0s == CREATE_DYNAMICS_ABSTRACTION_SIZE) {
-
-            compare_array_elements((void*) &param0, (void*) &CREATE_DYNAMICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CREATE_DYNAMICS_ABSTRACTION_SIZE, (void*) &r);
-
-            if (r == 1) {
-
-/*??
-                struct model* d = (struct model*) p2;
-
-                if (d != NULL_POINTER) {
-
-                    //?? Work this out! Hand over 9 or just 3 parameters,
-                    //?? for only part or also position and constraint?
-                    void* m = create_model(get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
-                    set_map_element_with_name(d->part_models, get_array_element(v, (void*) &ONE_NUMBER), m);
-
-                } else {
-
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle create dynamics model. The dynamics is null.");
-                }
-*/
-
-                d = 1;
-            }
-        }
-    }
-
-    // Destroy dynamics.
-    if (d == 0) {
-
-        if (param0s == DESTROY_DYNAMICS_ABSTRACTION_SIZE) {
-
-            compare_array_elements((void*) &param0, (void*) &DESTROY_DYNAMICS_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_DYNAMICS_ABSTRACTION_SIZE, (void*) &r);
-
-            if (r == 1) {
-
-/*??
-                struct model* d = (struct model*) p2;
-
-                if (d != NULL_POINTER) {
-
-                    //?? Work this out! Hand over 9 or just 3 parameters,
-                    //?? for only part or also position and constraint?
-                    void* m = get_map_element_with_name(d->part_models, get_map_element_with_name(v, (void*) &ONE_NUMBER));
-                    destroy_model(m, get_array_element(v, (void*) &TWO_NUMBER), get_array_element(v, (void*) &THREE_NUMBER), get_array_element(v, (void*) &FOUR_NUMBER));
-
-                } else {
-
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle destroy dynamics model. The dynamics is null.");
                 }
 */
 
