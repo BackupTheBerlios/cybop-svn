@@ -38,7 +38,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.23 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2003-10-23 14:27:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -290,20 +290,20 @@ static void handle_signal(void* p0, void* p1, void* p2) {
             if (strcmp(a, "mouse_moved") == 0) {
 
 /*?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
-                Item statics = statics;
+                Model statics = statics;
                 
-                set_item_element(statics, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
-                set_item_element(statics, "mouse.pointer_position.x_distance.unit", "pixel");
-                set_item_element(statics, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
-                set_item_element(statics, "mouse.pointer_position.y_distance.unit", "pixel");
+                set_model_element(statics, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
+                set_model_element(statics, "mouse.pointer_position.x_distance.unit", "pixel");
+                set_model_element(statics, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
+                set_model_element(statics, "mouse.pointer_position.y_distance.unit", "pixel");
 */
 
                 reset_signal(s);
 
             } else if (strcmp(a, "mouse_clicked") == 0) {
 
-                void* main_frame = get_complex_element(statics, (void*) "main_frame");
-                struct vector* pointer_position = get_complex_element(statics, (void*) "mouse.pointer_position");
+                void* main_frame = get_model_element(statics, (void*) "main_frame");
+                struct vector* pointer_position = get_model_element(statics, (void*) "mouse.pointer_position");
                 
                 reset_signal(s);
 
@@ -372,7 +372,7 @@ static void handle_signal(void* p0, void* p1, void* p2) {
             } else if (strcmp(a, STARTUP_ACTION) == 0) {
                 
                 // Root (statics).
-//??                create_instance(statics, s->object, &COMPLEX_MODEL);
+//??                statics = create_statics_model(s->object, (void*) COMPLEX_STATICS_MODEL);
                 //?? Temporary replacement: Character based screen output test.
 //??                statics = create_character_screen();
             
@@ -380,7 +380,7 @@ static void handle_signal(void* p0, void* p1, void* p2) {
                 
 /*??
                 s->predicate = SEND_ACTION;
-                s->object = get_map_element(statics->children, "main_frame");
+                s->object = get_map_element_with_name(statics->children, "main_frame");
                 s->receiver = ALL;
 */
                 //?? Temporary replacement.
@@ -389,7 +389,7 @@ static void handle_signal(void* p0, void* p1, void* p2) {
             } else if (strcmp(a, SHUTDOWN_ACTION) == 0) {
                 
                 // Root (statics).
-                destroy_instance(statics, s->object, &COMPLEX_STATICS_MODEL);
+//??                destroy_statics_model(statics, s->object, (void*) COMPLEX_STATICS_MODEL);
                 *sf = 1;
 
                 reset_signal(s);

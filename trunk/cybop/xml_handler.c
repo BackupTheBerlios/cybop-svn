@@ -25,9 +25,11 @@
 //?? #include <libxml.h>
 
 /**
- * This is a category handler.
+ * This is the xml handler.
  *
- * @version $Revision: 1.10 $ $Date: 2003-10-13 13:55:21 $ $Author: christian $
+ * It can read and write CYBOL source files.
+ *
+ * @version $Revision: 1.11 $ $Date: 2003-10-23 14:27:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,49 +38,37 @@
 //
 
 /** The cybol path. */
-static const void* CYBOL_PATH = "/home/cybop/lib/";
+static const char* CYBOL_PATH = "/home/cybop/lib/cybop/";
 
 /** The cybol file suffix. */
-static const void* FILE_SUFFIX = ".cybol";
+static const char* FILE_SUFFIX = ".cybol";
 
 /** The super model. */
-static const void* SUPER_MODEL = "super";
+static const char* SUPER_MODEL = "super";
 
 /** The null model. */
-static const void* NULL_MODEL = "null";
+static const char* NULL_MODEL = "null";
 
 /** The child. */
-static const void* CHILD = "child";
+static const char* CHILD = "child";
 
 /** The name. */
-static const void* NAME = "name";
+static const char* NAME = "name";
 
 /** The child model. */
-static const void* CHILD_MODEL = "child_model";
+static const char* CHILD_MODEL = "child_model";
 
 /** The child abstraction. */
-static const void* CHILD_ABSTRACTION = "child_abstraction";
+static const char* CHILD_ABSTRACTION = "child_abstraction";
 
 /** The position model. */
-static const void* POSITION_MODEL = "position_model";
+static const char* POSITION_MODEL = "position_model";
 
 /** The position abstraction. */
-static const void* POSITION_ABSTRACTION = "position_abstraction";
-
-/** The instance model. */
-static const void* INSTANCE_MODEL = "instance_model";
-
-/** The instance abstraction. */
-static const void* INSTANCE_ABSTRACTION = "instance_abstraction";
-
-/** The interaction model. */
-static const void* INTERACTION_MODEL = "interaction_model";
-
-/** The interaction abstraction. */
-static const void* INTERACTION_ABSTRACTION = "interaction_abstraction";
+static const char* POSITION_ABSTRACTION = "position_abstraction";
 
 //
-// Model.
+// Source model.
 //
 
 /**

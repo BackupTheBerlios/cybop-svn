@@ -40,221 +40,12 @@
 /**
  * This is the statics handler.
  *
- * It implements static operators.
- * A model is retrieved by instantiating a model source.
+ * It implements static operators, called "Model".
+ * Models are allocated and initialized from a model source.
  *
- * @version $Revision: 1.14 $ $Date: 2003-10-22 14:41:33 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-10-23 14:27:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-
-//
-// Complex statics model.
-//
-
-/**
- * Initializes the child.
- *
- * @param p0 the complex statics model
- * @param p1 the child model source attributes
- */
-static void initialize_child(void* p0, void* p1) {
-
-/*??
-    struct item* i = (struct item*) p0;
-    
-    if (i != 0) {
-            
-        log((void*) &INFO_LOG_LEVEL, "Initialize item element.");
-        void* name = get_map_element(p1, NAME);                
-        void* category = 0;                
-        void* abstraction = 0;                
-        void* o = 0;
-
-        // Item.
-        category = get_map_element(p1, ITEM_CATEGORY);
-        abstraction = get_map_element(p1, ITEM_ABSTRACTION);
-        o = create_object(category, abstraction);
-        set_map_element(i->children, name, o);
-
-        // Position.
-        category = get_map_element(p1, POSITION_CATEGORY);
-        abstraction = get_map_element(p1, POSITION_ABSTRACTION);
-        o = create_object(category, abstraction);
-        set_map_element(i->positions, name, o);
-
-    } else {
-        
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize item element. The item is null.");
-    }
-*/
-}
-
-/**
- * Finalizes the child.
- *
- * @param p0 the complex statics model
- * @param p1 the child model source attributes
- */
-static void finalize_child(void* p0, void* p1) {
-}
-
-/**
- * Initializes the children.
- *
- * @param p0 the complex statics model
- * @param p1 the children models sources
- */
-static void initialize_children(void* p0, void* p1) {
-
-/*??
-    struct map* m = (struct map*) p1;
-    int count = 0;
-    int size = get_map_size(m);
-    struct item* ci = 0;
-    struct item* o = 0;
-
-    while (count < size) {
-    
-        ci = (struct item*) get_map_element(m, count);
-
-        if (ci != 0) {
-            
-            initialize_child_item(p0, ci->items);
-
-        } else {
-            
-            log((void*) &ERROR_LOG_LEVEL, "Could not initialize items. A category item is null.");
-        }
-        
-        count++;
-    }
-*/
-}
-
-/**
- * Finalizes the children.
- *
- * @param p0 the complex statics model
- * @param p1 the children models sources
- */
-static void finalize_children(void* p0, void* p1) {
-}
-
-/**
- * Initializes the complex statics.
- *
- * @param p0 the complex statics model
- * @param p1 the model source
- */
-static void initialize_complex_statics(void* p0, void* p1) {
-
-/*??
-    log((void*) &INFO_LOG_LEVEL, "Initialize item: " + p1);
-
-    // Create temporary category item.
-    struct item* c = (struct item*) malloc(sizeof(item));
-    initialize_item_containers(c);
-
-    // Read category from file.
-    initialize_category(c, p1);
-
-    // Initialize elements with category.
-    if (c != 0) {
-
-        initialize_child_items(p0, c->children);
-        
-    } else {
-        
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize item elements. The category is null.");
-    }
-
-    // Destroy temporary category item.        
-    finalize_item_containers(c);
-    free(c);
-*/
-}
-
-/**
- * Finalizes the complex statics.
- *
- * @param p0 the complex statics model
- * @param p1 the model source
- */
-static void finalize_complex_statics(void* p0, void* p1) {
-
-/*??
-    log((void*) &INFO_LOG_LEVEL, "Finalize item: " + p1);
-    
-    // Create temporary category item.
-    struct item* c = (struct item*) malloc(sizeof(item));
-    initialize_item_containers(c);
-
-    // Finalize elements with category.
-    if (c != 0) {
-        
-        finalize_child_items(p0, c->children);
-        
-    } else {
-        
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize item elements. The category is null.");
-    }
-
-    // Write category to file.
-    finalize_category(c, p1);
-
-    // Destroy temporary category item.        
-    finalize_item_containers(c);
-    free(c);
-*/
-}
-
-/**
- * Creates a complex statics model.
- *
- * @param p0 the model source
- * @return the complex statics model
- */
-static void* create_complex_statics_model(void* p0) {
-
-    void* i = 0;
-    
-    if (p0 != 0) {
-        
-        log((void*) &INFO_LOG_LEVEL, "Create complex statics model.");
-
-        if (strcmp(p0, "") != 0) {
-            
-            i = malloc(sizeof(struct model));
-
-            initialize_complex_statics(i, p0);
-            initialize_model(i, p0);
-        }
-    }
-    
-    return i;
-}
-
-/**
- * Destroys the complex statics model.
- *
- * @param p0 the complex statics model
- * @param p1 the model source
- */
-static void destroy_complex_statics_model(void* p0, void* p1) {
-
-    if (p0 != 0) {
-        
-        log((void*) &INFO_LOG_LEVEL, "Destroy complex statics model.");
-
-        if (strcmp(p1, "") != 0) {
-            
-            finalize_model(p0, p1);
-            finalize_complex_statics(p0, p1);
-        }
-
-        free(p0);
-    }
-}
 
 //
 // Statics model.
@@ -281,6 +72,7 @@ static void* create_statics_model(void* p0, void* p1) {
             if (strcmp(p1, COMPLEX_STATICS_MODEL) == 0) {
         
                 m = malloc(sizeof(struct model));
+                create_statics_model_containers(m);
                 initialize_statics_model(m, p0);
         
             } else if (strcmp(p1, TIME_PRIMITIVE) == 0) {
@@ -343,6 +135,7 @@ static void destroy_statics_model(void* p0, void* p1, void* p2) {
             if (strcmp(p2, COMPLEX_STATICS_MODEL) == 0) {
         
                 finalize_statics_model(p0, p1);
+                destroy_statics_model_containers(p0);
                 free(p0);
 
             } else if (strcmp(p2, TIME_PRIMITIVE) == 0) {
