@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.9 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-01-06 12:23:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,25 +34,25 @@
 #define CONFIG_INTO_INTERNALS_SOURCE
 
 #include <stdio.h>
-#include <libxml/tree.h>
 #include <libxml/parser.h>
-
+#include <libxml/tree.h>
 #include "../cyboi/internals.c"
 #include "../global/abstraction_constants.c"
 #include "../global/log_constants.c"
 #include "../global/name_constants.c"
+#include "../global/structure_constants.c"
 #include "../global/variables.c"
 #include "../logger/logger.c"
 
 /**
  * set the internals for the section start
- * 
- * @param root_element      pointer of the xmlNode 
- * @param pp_internal       pointer of die internals 
+ *
+ * @param root_element      pointer of the xmlNode
+ * @param pp_internal       pointer of die internals
  * @return                  error code
-*/
-int initialize_internals_start( xmlNode* root_element, void** pp_internal ) {
- 
+ */
+void initialize_internals_start(xmlNode* root_element, void** pp_internal) {
+
     if ( root_element == NULL_POINTER ) {
 
         log_message_debug("root_element is a NULL POINTER" );
@@ -90,39 +90,39 @@ int initialize_internals_start( xmlNode* root_element, void** pp_internal ) {
                                        (void*) &sa, (void*) &sac,
                                        (void*) &sm, (void*) &smc );
 
-                int comp_result;
+                int r;
 
                 //channel
-                comp_result = 0;
+                r = 0;
                 compare_arrays( (void*) &sn, (void*) &snc,
                                 (void*) &CHANNEL_NAME_ABSTRACTION,
                                 (void*) &CHANNEL_NAME_ABSTRACTION_COUNT,
-                                (void*) &comp_result, (void*) &CHARACTER_ARRAY);
+                                (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                if ( comp_result==1 ) {
+                if ( r==1 ) {
 
                     log_message_debug( "Modellvalue channel gefunden" );
-                    
-                    //create the internals 
+
+                    //create the internals
                     char** pp_channel = NULL_POINTER;
-                    create_internal( (void*) &pp_channel, 
+                    create_internal( (void*) &pp_channel,
                                      (void*) &INTERNAL_TYPE_POINTER );
                     int* p_channel_count = NULL_POINTER;
-                    create_internal( (void*) &p_channel_count, 
+                    create_internal( (void*) &p_channel_count,
                                      (void*) &INTERNAL_TYPE_INTEGER );
                     int* p_channel_size = NULL_POINTER;
-                    create_internal( (void*) &p_channel_size, 
+                    create_internal( (void*) &p_channel_size,
                                      (void*) &INTERNAL_TYPE_INTEGER );
 
                     //parse the internals
-                    *p_channel_count = 0;                                     
-                    *p_channel_size = 0;                                     
+                    *p_channel_count = 0;
+                    *p_channel_size = 0;
                     parse( pp_channel, p_channel_count, p_channel_size,
                            (void*) &sm, (void*) &smc,
                            (void*) &STRING_ABSTRACTION,
                            (void*) &STRING_ABSTRACTION_COUNT );
-                           
-                    //set the internals 
+
+                    //set the internals
                     set_internal( pp_internal, (void*) &pp_channel,
                                   (void*) &INTERNAL_TYPE_CHARACTER,
                                   (void*) &INTERNAL_START_CHANNEL_INDEX );
@@ -135,30 +135,30 @@ int initialize_internals_start( xmlNode* root_element, void** pp_internal ) {
                 }
 
                 //abstraction
-                comp_result = 0;
+                r = 0;
                 compare_arrays( (void*) &sn, (void*) &snc,
                                 (void*) &ABSTRACTION_NAME_ABSTRACTION,
                                 (void*) &ABSTRACTION_NAME_ABSTRACTION_COUNT,
-                                (void*) &comp_result, (void*) &CHARACTER_ARRAY);
+                                (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                if ( comp_result==1 ) {
+                if ( r==1 ) {
 
                     log_message_debug( "Modellvalue abstraction gefunden" );
 
                     // create the internals
                     char** pp_abst = NULL_POINTER;
-                    create_internal( (void*) &pp_abst, 
+                    create_internal( (void*) &pp_abst,
                                      (void*) &INTERNAL_TYPE_POINTER );
                     int* p_abst_count = NULL_POINTER;
                     create_internal( (void*) &p_abst_count, 
                                      (void*) &INTERNAL_TYPE_INTEGER );
                     int* p_abst_size = NULL_POINTER;
-                    create_internal( (void*) &p_abst_size, 
+                    create_internal( (void*) &p_abst_size,
                                      (void*) &INTERNAL_TYPE_INTEGER );
 
                     //parse the internals
                     *p_abst_count = 0;                                     
-                    *p_abst_size = 0;                                     
+                    *p_abst_size = 0;
                     parse( pp_abst, p_abst_count, p_abst_size,
                            (void*) &sm, (void*) &smc,
                            (void*) &STRING_ABSTRACTION,
@@ -177,13 +177,13 @@ int initialize_internals_start( xmlNode* root_element, void** pp_internal ) {
                 }
 
                 //model
-                comp_result = 0;
+                r = 0;
                 compare_arrays( (void*) &sn, (void*) &snc,
                                 (void*) &MODEL_NAME_ABSTRACTION,
                                 (void*) &MODEL_NAME_ABSTRACTION_COUNT,
-                                (void*) &comp_result, (void*) &CHARACTER_ARRAY);
+                                (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                if ( comp_result==1 ) {
+                if ( r==1 ) {
 
                     log_message_debug( "Modellvalue model gefunden" );
 
@@ -192,7 +192,7 @@ int initialize_internals_start( xmlNode* root_element, void** pp_internal ) {
                     create_internal( (void*) &pp_model, 
                                      (void*) &INTERNAL_TYPE_POINTER );
                     int* p_model_count = NULL_POINTER;
-                    create_internal( (void*) &p_model_count, 
+                    create_internal( (void*) &p_model_count,
                                      (void*) &INTERNAL_TYPE_INTEGER );
                     int* p_model_size = NULL_POINTER;
                     create_internal( (void*) &p_model_size, 
@@ -224,7 +224,7 @@ int initialize_internals_start( xmlNode* root_element, void** pp_internal ) {
         }  //for (cur_node = root_element; cur_node; cur_node = cur_node->next)
 
     } //else Parameter == NULL_POINTER
-    
+
     return 0;
 }
 
@@ -232,10 +232,10 @@ int initialize_internals_start( xmlNode* root_element, void** pp_internal ) {
  * set the internals for the section tcp socket
  * 
  * @param root_element      pointer of the xmlNode 
- * @param pp_internal       pointer of die internals 
+ * @param pp_internal       pointer of die internals
  * @return                  error code
-*/
-int initialize_internals_tcp_socket( xmlNode* root_element, void** pp_internal ) {
+ */
+void initialize_internals_tcp_socket( xmlNode* root_element, void** pp_internal ) {
 
     if ( root_element == NULL_POINTER ) {
 
@@ -274,16 +274,16 @@ int initialize_internals_tcp_socket( xmlNode* root_element, void** pp_internal )
                                        (void*) &sa, (void*) &sac,
                                        (void*) &sm, (void*) &smc );
 
-                int comp_result;
+                int r;
 
                 //port
-                comp_result = 0;
+                r = 0;
                 compare_arrays( (void*) &sn, (void*) &snc,
                                 (void*) &CONFIG_TCP_SOCKET_PORT_ABSTRACTION,
                                 (void*) &CONFIG_TCP_SOCKET_PORT_ABSTRACTION_COUNT,
-                                (void*) &comp_result, (void*) &CHARACTER_ARRAY);
+                                (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                if ( comp_result==1 ) {
+                if ( r==1 ) {
 
                     log_message_debug( "found the model value port" );
 
@@ -304,21 +304,21 @@ int initialize_internals_tcp_socket( xmlNode* root_element, void** pp_internal )
                 }
 
                 //active
-                comp_result = 0;
+                r = 0;
                 compare_arrays( (void*) &sn, (void*) &snc,
                                 (void*) &CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION,
                                 (void*) &CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_COUNT,
-                                (void*) &comp_result, (void*) &CHARACTER_ARRAY);
+                                (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                if ( comp_result==1 ) {
+                if ( r==1 ) {
 
                     log_message_debug( "found the model value active" );
 
                     // The destination integer.
                     int dis = -1;
-                    
+
                     void* p_active = NULL_POINTER;
-                    create_internal( (void*) &p_active, 
+                    create_internal( (void*) &p_active,
                                      (void*) &INTERNAL_TYPE_INTEGER );
 
                     parse( (void*) &p_active, (void*) &INTEGER_COUNT, (void*) &dis,
@@ -335,108 +335,163 @@ int initialize_internals_tcp_socket( xmlNode* root_element, void** pp_internal )
         }  //for (cur_node = root_element; cur_node; cur_node = cur_node->next)
 
     } //else Parameter == NULL_POINTER
-    
+
     return 0;
 }
 
 /**
- * 
- *  set the internals for all section
- * 
- * @param p_configfile      pointer of the config file 
- *                          this is a null terminated string
- * @param pp_internal       pointer of die internals 
- * @return                  errorcode (-1 configfile no parse)
-*/
-int initialize_internals( char* p_configfile, void** pp_internal ) {
+ * Decodes the configuration.
+ *
+ * @param p0 the configuration file name
+ * @param p1 the internals memory
+ */
+void decode_configuration(void* p0, void* p1) {
 
-    log_message_debug("initialize_internals s started test 6" );
+    if (p0 != NULL_POINTER) {
 
-    if ( p_configfile == NULL_POINTER ) {
+        char** f = (char**) p0;
 
-        log_message_debug("p_configfile is a NULL POINTER" );
-        return -2;
-    }
-    else if ( pp_internal == NULL_POINTER ) {
+        log_message_debug("Create startup parameters.");
 
-        log_message_debug("pp_internal is a NULL POINTER" );
-        return -3;
-    }
-    else {
+        // Parse file to get the DOM.
+        xmlDoc* doc = xmlParseFile(*f);
 
-        xmlDoc *doc = NULL;
-        xmlNode *root_element = NULL;
-        xmlNode *cur_node = NULL;
+        // Determine root element.
+        xmlNode* root_element = xmlDocGetRootElement(doc)->children;
 
-        /*parse the file and get the DOM */
-        doc = xmlParseFile( p_configfile );
-        if (doc == NULL) {
+        // The current node.
+        xmlNode* cur_node = NULL_POINTER;
 
-           log_message_debug("configfile not parse");
-           return -1;
-        }
-        log_message_debug("configfile parse");
-        
-
-        root_element = xmlDocGetRootElement( doc )->children;
+        // The comparison result.
+        int r = 0;
 
         for (cur_node = root_element; cur_node; cur_node = cur_node->next) {
 
-            /* jeden Part durchgehen */
+            // Go through each part.
             if (cur_node->type == XML_ELEMENT_NODE) {
 
                 // The source name.
                 void* sn = NULL_POINTER;
-                int snc = 0;
+                void* snc = NULL_POINTER;
                 // The source channel.
                 void* sc = NULL_POINTER;
-                int scc = 0;
+                void* scc = NULL_POINTER;
                 // The source abstraction.
                 void* sa = NULL_POINTER;
-                int sac = 0;
+                void* sac = NULL_POINTER;
                 // The source model.
                 void* sm = NULL_POINTER;
-                int smc = 0;
-                decode_cybol_property( (void*) &cur_node,
-                                       (void*) &sn, (void*) &snc,
-                                       (void*) &sc, (void*) &scc,
-                                       (void*) &sa, (void*) &sac,
-                                       (void*) &sm, (void*) &smc );
+                void* smc = NULL_POINTER;
 
-                int comp_result = 0;
+                decode_cybol_property((void*) &cur_node, (void*) &sn, (void*) &snc, (void*) &sc, (void*) &scc, (void*) &sa, (void*) &sac, (void*) &sm, (void*) &smc);
 
-                compare_arrays( (void*) &sm, (void*) &smc,
-                                (void*) &CONFIG_START_NAME_ABSTRACTION,
-                                 (void*) &CONFIG_START_NAME_ABSTRACTION_COUNT,
-                                (void*) &comp_result, (void*) &CHARACTER_ARRAY);
+                if (r == 0) {
 
-                if ( comp_result==1 ) {
+                    compare_arrays((void*) &sm, (void*) &smc, (void*) &CONFIG_START_NAME_ABSTRACTION, (void*) &CONFIG_START_NAME_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                    log_message_debug( "Model start gefunden" );
-                    initialize_internals_start( cur_node->children,
-                                                pp_internal );
+                    if (r == 1) {
+
+                        log_message_debug("Found model start.");
+
+                        initialize_internals_start(cur_node->children, p1);
+                    }
                 }
 
-                comp_result = 0;
-                compare_arrays( (void*) &sm, (void*) &smc,
-                                (void*) &CONFIG_TCP_SOCKET_NAME_ABSTRACTION,
-                                (void*) &CONFIG_TCP_SOCKET_NAME_ABSTRACTION_COUNT,
-                                (void*) &comp_result, (void*) &CHARACTER_ARRAY);
+                if (r == 0) {
 
-                if ( comp_result==1 ) {
+                compare_arrays((void*) &sm, (void*) &smc, (void*) &CONFIG_TCP_SOCKET_NAME_ABSTRACTION, (void*) &CONFIG_TCP_SOCKET_NAME_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                    log_message_debug( "Model tcp_socket gefunden" );
-                    initialize_internals_tcp_socket( cur_node->children,
-                                                     pp_internal );
+                if (r == 1) {
+
+                    log_message_debug("Found tcp socket model.");
+
+                    initialize_internals_tcp_socket(cur_node->children, p1);
                 }
 
-            }  //if (cur_node->type == XML_ELEMENT_NODE) {
+                // Reset comparison result.
+                r = 0;
+            }
+        }
+    }
+}
 
-        }  // for (cur_node = root_element; cur_node; cur_node = cur_node->next)
+/**
+ * Destroys the configuration parameters.
+ *
+ * @param p0 the internals memory
+ * @param p1 the internals memory count
+ */
+void destroy_configuration_parameters(void* p0, void* p1) {
 
-    } //else Parameter == NULL_POINTER
+    if (p1 != NULL_POINTER) {
 
-    return 0;
+        int** c = (int**) p1;
+
+        // The loop variable.
+        int* j = INTEGER_NULL_POINTER;
+        create_integer((void*) &j);
+        *j = 0;
+
+        // The configuration parameter.
+        void* p = NULL_POINTER;
+
+        while (1) {
+
+            if (*j >= **c) {
+
+                break;
+            }
+
+            // Get all configuration parameters from internals memory and
+            // destroy those which are existent (unequal NULL_POINTER).
+
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &j, (void*) &p, (void*) &ONE_ELEMENT_COUNT);
+
+            // CAUTION! DO NOT try to remove the parameters!
+            // Each configuration parameter has a fixed position within the
+            // internals memory and CANNOT be removed.
+
+            if (p != NULL_POINTER) {
+
+                if (*j == INTERNALS_STARTUP_CHANNEL) {
+
+                    remove_array_elements((void*) &nc, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_ELEMENT_COUNT);
+
+                } else if (*j == INTERNALS_STARTUP_CHANNEL_COUNT) {
+                } else if (*j == INTERNALS_STARTUP_CHANNEL_SIZE) {
+                } else if (*j == INTERNALS_STARTUP_ABSTRACTION) {
+                } else if (*j == INTERNALS_STARTUP_ABSTRACTION_COUNT) {
+                } else if (*j == INTERNALS_STARTUP_ABSTRACTION_SIZE) {
+                } else if (*j == INTERNALS_STARTUP_MODEL) {
+                } else if (*j == INTERNALS_STARTUP_MODEL_COUNT) {
+                } else if (*j == INTERNALS_STARTUP_MODEL_SIZE) {
+                } else if (*j == INTERNALS_KNOWLEDGE_MEMORY) {
+                } else if (*j == INTERNALS_KNOWLEDGE_MEMORY_COUNT) {
+                } else if (*j == INTERNALS_KNOWLEDGE_MEMORY_SIZE) {
+                } else if (*j == INTERNALS_SIGNAL_MEMORY) {
+                } else if (*j == INTERNALS_SIGNAL_MEMORY_COUNT) {
+                } else if (*j == INTERNALS_SIGNAL_MEMORY_SIZE) {
+                } else if (*j == INTERNALS_TCPSOCKET_PORT) {
+                } else if (*j == INTERNALS_TCPSOCKET_ACTIVE) {
+                } else if (*j == INTERNALS_TCPSOCKET_SERVERSOCKETNUMBER) {
+                } else if (*j == INTERNALS_TCPSOCKET_CLIENTSOCKETNUMBER) {
+                } else if (*j == INTERNALS_TCPSOCKET_CLIENTSOCKETNUMBER_COUNT) {
+                } else if (*j == INTERNALS_TCPSOCKET_CLIENTSOCKETNUMBER_SIZE) {
+                } else if (*j == INTERNALS_TCPSOCKET_MAINSIGNALID) {
+                } else if (*j == INTERNALS_TCPSOCKET_MAINSIGNALID_COUNT) {
+                } else if (*j == INTERNALS_TCPSOCKET_MAINSIGNALID_SIZE) {
+                }
+            }
+
+            (*j)++;
+        }
+
+        destroy_integer((void*) &j);
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get highest priority index. The signal memory count is null.");
+    }
 }
 
 /* CONFIG_INTO_INTERNALS_SOURCE */

@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.55 $ $Date: 2004-12-21 20:37:05 $ $Author: christian $
+ * @version $Revision: 1.56 $ $Date: 2005-01-06 12:23:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -117,13 +117,15 @@ int main(int p0, char** p1) {
             // Configuration parameters.
             //
 
+            log_message_debug("Decode configuration.");
+
             // The configuration file name.
             void* c = NULL_POINTER;
             get_array_elements(p1, (void*) &POINTER_ARRAY, (void*) &CONFIGURATION_FILE_PARAMETER_INDEX, (void*) &c, (void*) &ONE_ELEMENT_COUNT);
 
-            // Read parameters from configuration file given at command line
-            // and copy them into the internals memory.
-            create_startup_parameters((void*) &c, (void*) &i);
+            // Read configuration file given at command line and
+            // write parameters into the internals memory.
+            decode_configuration((void*) &c, (void*) &i);
 
             //
             // Knowledge memory.
@@ -353,9 +355,14 @@ int main(int p0, char** p1) {
             destroy_integer((void*) &ks);
             destroy_integer((void*) &kc);
 
-            // Destroy startup parameters.
-            log_message_debug("Destroy startup parameters.");
-            destroy_startup_parameters((void*) &c, (void*) &i);
+            // CAUTION!
+            // Parameters of the internals memory MUST NOT be written to the
+            // configuration file which was given at command line!
+            // That CYBOI configuration file can only be edited MANUALLY.
+            // All parameters that were read from the configuration file and
+            // created at system startup HAVE TO BE destroyed here,
+            // BEFORE the actual internals memory gets destroyed!
+            destroy_configuration_parameters((void*) &i, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT);
 
             // Destroy internals.
             log_message_debug("Destroy internals memory.");
