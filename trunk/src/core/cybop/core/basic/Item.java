@@ -26,6 +26,8 @@ package cybop.core.basic;
 
 import cybop.core.basic.Integer;
 import cybop.core.basic.String;
+//?? temporary!
+import cybop.core.model.principle.*;
 
 /**
  * This class represents a general abstract item.<br><br>
@@ -74,7 +76,7 @@ import cybop.core.basic.String;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.8 $ $Date: 2003-03-16 22:28:21 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-03-18 00:18:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -108,15 +110,8 @@ public class Item extends State {
      */
     private java.lang.Object javaObject;
 
-    /**
-     * The signal handler.
-     *
-     * ?? Temporary until CYBOP framework doesn't rely on java classes anymore.
-     * Needed to assign the root system as action listener to gui components.
-     * To be removed, when CYBOP supports its own mouse input handling,
-     * replacing the java AWT/Swing stuff.
-     */
-    private Item signalHandler;
+    /** The action. */
+    public static final String ACTION = new String("action");
 
     //
     // Children positioning.
@@ -180,13 +175,13 @@ public class Item extends State {
     //
 
     /**
-     * Returns the default signal handler.
+     * Returns the default action.
      *
-     * @return the default signal handler
+     * @return the default action
      */
-    public String getDefaultSignalHandler() {
+    public String getDefaultAction() {
 
-        return null;        
+        return null;
     }
 
     //
@@ -368,30 +363,6 @@ public class Item extends State {
     public java.lang.Object getJavaObject() {
 
         return this.javaObject;
-    }
-
-    //
-    // Signal handler.
-    //
-
-    /**
-     * Sets the signal handler.
-     *
-     * @param h the signal handler
-     */
-    public void setSignalHandler(Item h) {
-        
-        this.signalHandler = h;
-    }
-    
-    /**
-     * Returns the signal handler.
-     *
-     * @return the signal handler
-     */
-    public Item getSignalHandler() {
-
-        return this.signalHandler;        
     }
 
     //
@@ -742,12 +713,18 @@ public class Item extends State {
     public void initialize() throws Exception {
         
         super.initialize();
+
+        set(Item.ACTION, getDefaultAction());
     }
 
     /**
      * Finalizes this item.
      */
     public void finalizz() throws Exception {
+
+        String action = (String) get(Item.ACTION);
+        remove(Item.ACTION);
+        destroyItem(action);
 
         // The following objects MUST NOT be destroyed here!
         // They actually belong into a destructor method (if it existed in java).
@@ -773,6 +750,96 @@ public class Item extends State {
         // destroyChildren(children);
 
         super.finalizz();
+    }
+
+    //
+    // Functionality.
+    //
+
+    /**
+     * Returns the child item at the given position.
+     *
+     * @param p the position relative to this container item
+     * @return the child item
+     * @exception NullPointerException if the item is null
+     */
+    public Item get(Space p) throws Exception, NullPointerException {
+
+        Item child = null;
+/*??
+        Children[] c = getChildren();
+        int loops = c.length;
+//??        int loops = getChildrenNumber();
+        Item item = null;
+        Space rp = null;
+        Integer n = null;
+
+        for (int i = 0; i < loops; i++) {
+
+            item = c[i];
+
+            // Transform position into a position relative to (within) the child item.
+            rp = new Space(); //?? p.subtract(originPositionDesChildItems);
+
+            if (item != null) {
+
+                if (item.contains(rp)) {
+
+                    // Set resulting child item to the current item by default.
+                    // If the current item does not have children or none of the
+                    // child items contains the position, then the child item is
+                    // returned itself.
+                    // For example, a mouse may be clicked on a panel, in the gap between
+                    // two buttons. Then, none of the buttons contains the given position
+                    // but the panel as parent container of the buttons does.
+                    child = item;
+                    n = item.getChildrenNumber();
+
+                    if (n != null) {
+                        
+                        if (n.isGreaterThan(0)) {
+
+                            // The child item has children, so call this method
+                            // recursively on child item, to get the child item's
+                            // child item which is located at the given position.
+                            child = item.get(rp);
+                        }
+                    }
+                }
+
+            } else {
+    
+                throw new NullPointerException("Could not get child item. An item is null.");
+            }
+        }
+*/
+
+        return child;
+    }
+
+    /**
+     * Checks whether or not this item contains the given position.
+     *
+     * @param p the position relative to this item
+     * @return true if this item contains the given position;
+     * false otherwise
+     * @exception NullPointerException if the space is null
+     */
+    public boolean contains(Space p) throws Exception, NullPointerException {
+
+        boolean b = false;
+        Space s = null; //?? get(Item.SPACE);
+
+        if (s != null) {
+
+            b = s.contains(p);
+
+        } else {
+
+            throw new NullPointerException("Could not check position. The space is null.");
+        }
+
+        return b;
     }
 }
 

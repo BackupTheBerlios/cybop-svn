@@ -34,11 +34,7 @@ import cybop.core.model.organizer.*;
 /**
  * This class represents a user interface.
  *
- * A user interface's task is to support the data structure of a view,
- * i.e. to map the domain model's tree structure to simpler structures
- * such as a list supporting a combo box or a table structure.
- *
- * @version $Revision: 1.5 $ $Date: 2003-03-15 01:01:17 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-03-18 00:18:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class UserInterface extends Model {
@@ -1116,7 +1112,7 @@ public class UserInterface extends Model {
     }
 
     //
-    // Initializable.
+    // Initialization.
     //
 
     /**

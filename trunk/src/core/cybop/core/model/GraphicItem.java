@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a graphic item.<br><br>
  *
- * @version $Revision: 1.5 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-03-18 00:18:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class GraphicItem extends cybop.core.system.Component {
@@ -76,9 +76,6 @@ public class GraphicItem extends cybop.core.system.Component {
     /** The orientation. */
     public static final String ORIENTATION = new String("orientation");
 
-    /** The action. */
-    public static final String ACTION = new String("action");
-
     //
     // Orientations.
     //
@@ -99,16 +96,6 @@ public class GraphicItem extends cybop.core.system.Component {
     // Default children.
     //
 
-    /**
-     * Returns the default action.
-     *
-     * @return the default action
-     */
-    public String getDefaultAction() {
-
-        return null;
-    }
-
     //
     // Initialization.
     //
@@ -119,18 +106,12 @@ public class GraphicItem extends cybop.core.system.Component {
     public void initialize() throws Exception {
 
         super.initialize();
-
-        set(GraphicItem.ACTION, getDefaultAction());
     }
 
     /**
      * Finalizes this button.
      */
     public void finalizz() throws Exception {
-
-        String action = (String) get(GraphicItem.ACTION);
-        remove(GraphicItem.ACTION);
-        destroyItem(action);
 
         super.finalizz();
     }

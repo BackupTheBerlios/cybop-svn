@@ -24,6 +24,7 @@
 
 package cybop.core.system.block;
 
+import cybop.core.basic.*;
 import cybop.core.basic.Boolean;
 import cybop.core.basic.String;
 import cybop.core.model.*;
@@ -50,7 +51,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.6 $ $Date: 2003-03-16 22:28:21 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-03-18 00:18:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
@@ -533,21 +534,21 @@ public class Controller extends Block {
 
             if (m != null) {
 
-//??                GraphicItem i = getGraphicItem((Space) m.get(MouseModel.POINTER_POSITION));
+                Item i = getItem((Space) m.get(MouseModel.POINTER_POSITION));
 
-//??                if (i != null) {
+                if (i != null) {
 
-                    String a = Controller.SHOW_SYSTEM_INFORMATION_USER_INTERFACE_ACTION; //?? (String) i.get(GraphicItem.ACTION);
+                    String a = (String) i.get(Item.ACTION);
 
                     s.set(Signal.LANGUAGE, Signal.GUI_LANGUAGE/*??NEURO_LANGUAGE*/);
                     s.set(Signal.PREDICATE, a);
 
                     control(s);
 
-//??                } else {
+                } else {
         
-//??                    throw new NullPointerException("Could not react on mouse clicked action. The graphic item is null.");
-//??                }
+                    throw new NullPointerException("Could not react on mouse clicked action. The graphic item is null.");
+                }
 
             } else {
     
@@ -561,27 +562,27 @@ public class Controller extends Block {
     }
 
     /**
-     * Returns the graphic item at the given mouse position.
+     * Returns the item at the given position.
      *
-     * @param p the mouse pointer position
-     * @exception NullPointerException if the signal is null
+     * @param p the position
+     * @return the item
+     * @exception NullPointerException if the system user interface is null
      */
-    protected GraphicItem getGraphicItem(Space p) throws Exception, NullPointerException {
+    protected Item getItem(Space p) throws Exception, NullPointerException {
 
-/*??
-        Desktop d = ...;
+        Item i = null;
+        SystemUserInterface c = (SystemUserInterface) get(Controller.SYSTEM_USER_INTERFACE);
 
-        if (d != null) {
+        if (c != null) {
 
-            d.get(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
+            i = c.get(p);
 
         } else {
 
-            throw new NullPointerException("Could not show system information user interface. The signal is null.");
+            throw new NullPointerException("Could not get item. The system user interface is null.");
         }
-*/
 
-        return null;
+        return i;
     }
 
     /**

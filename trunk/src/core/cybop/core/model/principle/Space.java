@@ -35,7 +35,7 @@ import cybop.core.model.*;
  * A point is just a minimal space and always relative to the referenced object.
  * The absolute point does not exist as any point can consist of yet smaller points.
  *
- * @version $Revision: 1.5 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-03-18 00:18:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Space extends Principle {
@@ -175,6 +175,128 @@ public class Space extends Principle {
         destroyItem(originXCoordinate);
 
         super.finalizz();
+    }
+
+    //
+    // Functionality.
+    //
+
+    /**
+     * Checks whether or not this item contains the given position.
+     *
+     * @param p the position relative to this item
+     * @return true if this item contains the given position;
+     * false otherwise
+     * @exception NullPointerException if the position is null
+     */
+    public boolean contains(Space p) throws Exception, NullPointerException {
+
+        boolean b = false;
+
+        if (p != null) {
+
+            boolean xob = xContains((Integer) p.get(Space.ORIGIN_X_COORDINATE));
+            boolean xeb = xContains((Integer) p.get(Space.EXPANSE_X_COORDINATE));
+            boolean yob = yContains((Integer) p.get(Space.ORIGIN_Y_COORDINATE));
+            boolean yeb = yContains((Integer) p.get(Space.EXPANSE_Y_COORDINATE));
+            boolean zob = zContains((Integer) p.get(Space.ORIGIN_Z_COORDINATE));
+            boolean zeb = zContains((Integer) p.get(Space.EXPANSE_Z_COORDINATE));
+
+            if (xob && xeb && yob && yeb && zob && zeb) {
+
+                b = true;
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not check position. The position is null.");
+        }
+
+        return b;
+    }
+
+    /**
+     * Checks whether or not this item's x expanse contains the given x position.
+     *
+     * @param x the x position relative to this item
+     * @return true if this item's x expanse contains the given x position;
+     * false otherwise
+     * @exception NullPointerException if the x position is null
+     */
+    public boolean xContains(Integer x) throws Exception, NullPointerException {
+
+        boolean b = false;
+
+        if (x != null) {
+
+            if (x.isGreaterThanOrEqualTo((Integer) get(Space.ORIGIN_X_COORDINATE))
+                && x.isSmallerThan((Integer) get(Space.EXPANSE_X_COORDINATE))) {
+
+                b = true;
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not check x position. The x position is null.");
+        }
+
+        return b;
+    }
+
+    /**
+     * Checks whether or not this item's y expanse contains the given y position.
+     *
+     * @param y the y position relative to this item
+     * @return true if this item's y expanse contains the given y position;
+     * false otherwise
+     * @exception NullPointerException if the y position is null
+     */
+    public boolean yContains(Integer y) throws Exception, NullPointerException {
+
+        boolean b = false;
+
+        if (y != null) {
+
+            if (y.isGreaterThanOrEqualTo((Integer) get(Space.ORIGIN_Y_COORDINATE))
+                && y.isSmallerThan((Integer) get(Space.EXPANSE_Y_COORDINATE))) {
+
+                b = true;
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not check y position. The y position is null.");
+        }
+
+        return b;
+    }
+
+    /**
+     * Checks whether or not this item's z expanse contains the given z position.
+     *
+     * @param z the z position relative to this item
+     * @return true if this item's z expanse contains the given z position;
+     * false otherwise
+     * @exception NullPointerException if the z position is null
+     */
+    public boolean zContains(Integer z) throws Exception, NullPointerException {
+
+        boolean b = false;
+
+        if (z != null) {
+
+            if (z.isGreaterThanOrEqualTo((Integer) get(Space.ORIGIN_Z_COORDINATE))
+                && z.isSmallerThan((Integer) get(Space.EXPANSE_Z_COORDINATE))) {
+
+                b = true;
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not check z position. The z position is null.");
+        }
+
+        return b;
     }
 }
 
