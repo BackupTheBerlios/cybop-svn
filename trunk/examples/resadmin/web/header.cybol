@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
 
 <!--
-    $RCSfile: table.cybol,v $
+    $RCSfile: header.cybol,v $
 
     Copyright (c) 1999-2003. Christian Heller. All rights reserved.
 
@@ -25,18 +25,19 @@
 
     Description ...
 
-    @version $Revision: 1.1 $ $Date: 2005-02-11 17:18:41 $ $Author: christian $
+    @version $Revision: 1.1 $ $Date: 2005-02-16 18:50:55 $ $Author: christian $
     @author Rolf Holzmüller <rolf.holzmueller@gmx.de>
 /-->
 
 <model>
 
-    <part name="header" channel="file" abstraction="compound" unit="cybol" model="/resdata/web/header.cybol">
-        <property name="html_tag" channel="inline" abstraction="string" model="tr"/>
+    <part name="first_name" channel="inline" abstraction="string" model="Vorname">
+        <property name="html_tag" channel="inline" abstraction="string" model="th"/>
     </part>
 
-    <part name="table" channel="file" abstraction="compound" model="">
-        <property name="html_tag" channel="inline" abstraction="string" model="tr"/>
+    <part name="last_name" channel="inline" abstraction="string" model="Nachname">
+        <property name="html_tag" channel="inline" abstraction="string" model="th"/>
+        <property name="color" channel="inline" abstraction="vector" unit=rgb" model="2,3,4"/>
     </part>
 
 <\model>

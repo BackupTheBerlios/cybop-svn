@@ -22,19 +22,19 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.2 $ $Date: 2005-02-13 00:47:09 $ $Author: christian $
+    @version $Revision: 1.1 $ $Date: 2005-02-16 18:50:55 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
-    @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
 /-->
 
 <!--
-    This example contains just one "exit" operation.
-    It shuts down the application, right after startup.
-    That's all.
+    This example application creates a domain model consisting of three numbers.
+
+    Summand 1 and summand 2 are added and the result of that addition is
+    written into the sum, which is finally printed on screen.
 /-->
 
 <model>
-    <part name="startup_channel" channel="inline" abstraction="string" model="inline"/>
-    <part name="startup_abstraction" channel="inline" abstraction="string" model="operation"/>
-    <part name="startup_model" channel="inline" abstraction="string" model="exit"/>
+    <part name="startup_channel" channel="inline" abstraction="string" model="file"/>
+    <part name="startup_abstraction" channel="inline" abstraction="string" model="cybol"/>
+    <part name="startup_model" channel="inline" abstraction="string" model="example/addition/startup.cybol"/>
 </model>

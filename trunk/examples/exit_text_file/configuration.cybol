@@ -22,22 +22,27 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.2 $ $Date: 2005-02-13 00:47:10 $ $Author: christian $
+    @version $Revision: 1.1 $ $Date: 2005-02-16 18:50:55 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
     @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
 /-->
 
 <!--
-    This example creates a small, hierarchical domain model consisting
-    of a compound called "domain" and its part called "greeting".
-    The greeting model contains the famous "Hello, World!" string.
+    This example contains just one "exit" operation.
+    It shuts down the application, right after startup.
+    That's all.
 
-    As next step, the greeting model is sent to (printed on) the console.
-    Finally, an "exit" operation shuts down the application.
+    The difference to the simple "exit" example is that here,
+    the "exit" operation is NOT written directly into the model,
+    but is standing in another file instead. Therefore, the path
+    to that file is given as model.
+
+    The file is called "exit.txt" and contains only the word "exit"
+    as ASCII text.
 /-->
 
 <model>
     <part name="startup_channel" channel="inline" abstraction="string" model="file"/>
-    <part name="startup_abstraction" channel="inline" abstraction="string" model="cybol"/>
-    <part name="startup_model" channel="inline" abstraction="string" model="example/helloworld/startup.cybol"/>
+    <part name="startup_abstraction" channel="inline" abstraction="string" model="operation"/>
+    <part name="startup_model" channel="inline" abstraction="string" model="example/exit_text_file/exit.txt"/>
 </model>
