@@ -38,7 +38,7 @@
  *
  * It creates a dynamics memory model from a given dynamics cybol model.
  *
- * @version $Revision: 1.8 $ $Date: 2004-02-11 00:11:16 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-02-28 19:43:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -92,11 +92,11 @@ void create_dynamics_model_containers(void* p0) {
         m->parts = malloc(sizeof(struct map));
         initialize_map(m->parts);
 
-        m->positions = malloc(sizeof(struct map));
-        initialize_map(m->positions);
-
         m->abstractions = malloc(sizeof(struct map));
         initialize_map(m->abstractions);
+
+        m->positions = malloc(sizeof(struct map));
+        initialize_map(m->positions);
 
     } else {
 

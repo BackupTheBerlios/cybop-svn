@@ -1,7 +1,7 @@
 /*
- * $RCSfile: statics_model.c,v $
+ * $RCSfile: model.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,31 +22,46 @@
  * - Cybernetics Oriented Programming -
  */
 
-#ifndef STATICS_MODEL_SOURCE
-#define STATICS_MODEL_SOURCE
+#ifndef MODEL_SOURCE
+#define MODEL_SOURCE
 
 /**
- * This is the statics model.
+ * This is the model.
  *
- * It represents an abstract description of some real world thing.
+ * It represents an abstract description of some real world item
+ * in one of the physical measurements (dimensions):
+ * - space
+ * - time
+ * - mass
  *
  * A model can be created by instantiating (cloning) an existing model.
  * Instantiating means allocating some place in the computer's memory.
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-02-28 19:43:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-struct statics_model {
+struct model {
 
-    /** The parts. */
-    void* parts;
+    /** The part abstractions. */
+    void* part_abstractions;
 
-    /** The positions. */
-    void* positions;
+    /** The part models. */
+    void* part_models;
+
+    /** The position abstractions. */
+    void* position_abstractions;
+
+    /** The position models. */
+    void* position_models;
+
+    /** The constraint abstractions. */
+    void* constraint_abstractions;
+
+    /** The constraint models. */
+    void* constraint_models;
 };
 
-/* STATICS_MODEL_SOURCE */
+/* MODEL_SOURCE */
 #endif
-

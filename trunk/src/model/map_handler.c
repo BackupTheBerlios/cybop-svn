@@ -35,7 +35,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-02-28 19:43:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -88,12 +88,14 @@ void finalize_map(void* p0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Finalize map.");
 
+        log_message((void*) &INFO_LOG_LEVEL, "MAP TEST 0");
         finalize_array(m->references);
+        log_message((void*) &INFO_LOG_LEVEL, "MAP TEST 1");
         free(m->references);
 
         finalize_array(m->names);
         free(m->names);
-        
+
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize map. The map is null.");

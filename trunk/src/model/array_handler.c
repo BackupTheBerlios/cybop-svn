@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.7 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-02-28 19:43:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,7 +78,7 @@ void initialize_array(void* p0) {
 void finalize_array(void* p0) {
 
     struct array* a = (struct array*) p0;
-    
+
     if (a != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Finalize array.");
@@ -86,7 +86,7 @@ void finalize_array(void* p0) {
         free(a->internal_array);
         a->count = -1;
         a->size = -1;
-        
+
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize array. The array is null.");

@@ -52,7 +52,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.16 $ $Date: 2004-02-25 09:09:32 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-02-28 19:43:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -309,7 +309,6 @@ void create_signal_memory(void* p0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Create signal memory.");
 
-        // Create containers.
         m->signals = malloc(sizeof(struct array));
         initialize_array(m->signals);
 
@@ -336,9 +335,8 @@ void destroy_signal_memory(void* p0) {
 
     if (m != (void*) 0) {
 
-        log_message((void*) &INFO_LOG_LEVEL, "Destroy signal memory.");
+        log_message((void*) &INFO_LOG_LEVEL, "Destroy all signals left in signal memory.");
 
-        // Destroy all signals left in signal memory.
         int i = 0;
         get_array_count(m->signals, (void*) &i);
         i--;
@@ -355,18 +353,21 @@ void destroy_signal_memory(void* p0) {
             // together with the signal.
             remove_signal(p0, (void*) &i);
 
+            log_message((void*) &INFO_LOG_LEVEL, "TEST A");
+
             // Destroy signal. Do not destroy the signal's abstraction and
             // priority here; they are static within CYBOI.
             destroy_dynamics(s, (void*) 0, (void*) 0, (void*) 0, (void*) a);
 
-            log_message((void*) &INFO_LOG_LEVEL, "TEST A");
+            log_message((void*) &INFO_LOG_LEVEL, "TEST B");
 
             i--;
         }
 
-        log_message((void*) &INFO_LOG_LEVEL, "TEST B");
+        log_message((void*) &INFO_LOG_LEVEL, "TEST C");
 
-        // Destroy containers.
+        log_message((void*) &INFO_LOG_LEVEL, "Destroy signal memory.");
+
         finalize_array(m->priorities);
         free(m->priorities);
 
