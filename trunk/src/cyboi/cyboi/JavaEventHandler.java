@@ -32,7 +32,7 @@ package cyboi;
  *
  * Unfortunately, handling of most events is done via graphical components in java.
  *
- * @version $Revision: 1.7 $ $Date: 2003-08-18 17:30:07 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-09-05 14:02:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaEventHandler extends java.awt.EventQueue {
@@ -106,6 +106,7 @@ class JavaEventHandler extends java.awt.EventQueue {
         LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Dispatch event: " + evt);
 
         //?? For now, we also call the AWT event handling.
+        //?? (javax.swing.AbstractButton etc. still use java.awt.event.ActionListener)
         //?? Later, we will cut it off by removing this line.
         //?? I tried removing this line:
         //?? - the frame/window still gets created
@@ -128,12 +129,11 @@ class JavaEventHandler extends java.awt.EventQueue {
                     // Otherwise, the chain of signals/ actions finishes here, until a new
                     // hardware event (interrupt) occurs.
     
-                    // Caution! Adding of signals must be synchronized between
-                    // SignalHandler.send and EventHandler.dispatchEvent!
-                    // These are the only two procedures accessing the signal
+                    // Caution! Adding of signals must be synchronized between:
+                    // - SignalHandler.send for adding internal CYBOP signals
+                    // - JavaEventHandler.dispatchEvent for adding transformed java event signals
+                    // These are the only procedures accessing the signal
                     // memory for adding signals.
-                    // SignalHandler is for adding internal CYBOP signals.
-                    // EventHandler is for adding transformed java event signals.
                     synchronized (JavaEventHandler.signal_memory) {
 
                         // Add signal to signal memory (interrupt vector table).
@@ -253,19 +253,18 @@ class JavaEventHandler extends java.awt.EventQueue {
                     l = Signal.TUI_LANGUAGE;
     
                 } else */if (id == java.awt.event.MouseEvent.MOUSE_CLICKED) {
-    
+                    
                     s.predicate = JavaEventHandler.MOUSE_CLICKED_EVENT;
-
+                    
 /*??
-                    a = Controller.MOUSE_CLICKED_ACTION;
-                    l = Signal.MOUSE_LANGUAGE;
-                    ItemHandler.set_item_element("system.controller.mouse_model.pointer_position.x_distance.quantity", ((java.awt.event.MouseEvent) evt).getX());
-                    ItemHandler.set_item_element("system.controller.mouse_model.pointer_position.x_distance.unit", "pixel");
-                    ItemHandler.set_item_element("system.controller.mouse_model.pointer_position.y_distance.quantity", ((java.awt.event.MouseEvent) evt).getY());
-                    ItemHandler.set_item_element("system.controller.mouse_model.pointer_position.y_distance.unit", "pixel");
-                    m = "system.controller.mouse_model.pointer_position.y_distance.unit";
+                    s.object = "system.mouse.pointer_position";
+
+                    ItemHandler.set_item_element("system.mouse.pointer_position.x_distance.quantity", ((java.awt.event.MouseEvent) evt).getX());
+                    ItemHandler.set_item_element("system.mouse.pointer_position.x_distance.unit", "pixel");
+                    ItemHandler.set_item_element("system.mouse.pointer_position.y_distance.quantity", ((java.awt.event.MouseEvent) evt).getY());
+                    ItemHandler.set_item_element("system.mouse.pointer_position.y_distance.unit", "pixel");
 */
-    
+
                 }/*?? else if (id == java.awt.event.MouseEvent.MOUSE_DRAGGED) {
     
                     a = Controller.MOUSE_DRAGGED_ACTION;

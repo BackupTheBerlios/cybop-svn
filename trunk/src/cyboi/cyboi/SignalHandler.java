@@ -33,7 +33,7 @@ package cyboi;
  * - send
  * - reset
  *
- * @version $Revision: 1.18 $ $Date: 2003-09-05 07:57:32 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2003-09-05 14:02:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -207,7 +207,7 @@ class SignalHandler {
                 } else if (a.equals(JavaEventHandler.MOUSE_CLICKED_EVENT)) {
 
 //??                    java.lang.Object a = SignalHandler.root;
-                    
+
                     SignalHandler.reset(s);
 
 //??                    s.predicate = SignalHandler.SEND_ACTION;
@@ -249,17 +249,17 @@ class SignalHandler {
                             
                             } else {
                                 
-                                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not show object. The java object is not a component.");
+                                LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not handle send action. The java object is not a component.");
                             }
                     
                         } else {
                             
-                            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not show object. The java object is null.");
+                            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not handle send action. The java object is null.");
                         }
                     
                     } else {
                         
-                        LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not show object. The item is null.");
+                        LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not handle send action. The signal object is null.");
                     }
 
                     SignalHandler.reset(s);
@@ -337,12 +337,11 @@ class SignalHandler {
                     tmp.adverbial = s.adverbial;
                     tmp.condition = s.condition;
 
-                    // Caution! Adding of signals must be synchronized between
-                    // SignalHandler.send and EventHandler.dispatchEvent!
-                    // These are the only two procedures accessing the signal
+                    // Caution! Adding of signals must be synchronized between:
+                    // - SignalHandler.send for adding internal CYBOP signals
+                    // - JavaEventHandler.dispatchEvent for adding transformed java event signals
+                    // These are the only procedures accessing the signal
                     // memory for adding signals.
-                    // SignalHandler is for adding internal CYBOP signals.
-                    // EventHandler is for adding transformed java event signals.
                     synchronized (p0) {
 
                         // Add signal to signal memory (interrupt vector table).

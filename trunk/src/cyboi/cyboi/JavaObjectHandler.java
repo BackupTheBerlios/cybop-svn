@@ -30,7 +30,7 @@ package cyboi;
  * It is necessary only as long as the Cybernetics Oriented Interpreter (CYBOI)
  * is implemented in the Java programming language.
  *
- * @version $Revision: 1.10 $ $Date: 2003-08-18 17:30:07 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-09-05 14:02:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaObjectHandler {
@@ -42,8 +42,11 @@ class JavaObjectHandler {
     /** The name. */
     static java.lang.String NAME = "name";
 
-    /** The mnemonic. */
+    /** The key binding. */
     static java.lang.String KEY_BINDING = "key_binding";
+
+    /** The action. */
+    static java.lang.String ACTION = "action";
 
     /** The width. */
     static java.lang.String WIDTH = "width";
@@ -693,6 +696,7 @@ class JavaObjectHandler {
             
             java.lang.String name = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.NAME);
             java.lang.String key_binding = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.KEY_BINDING);
+
             mi.setText(name);
             
             if (key_binding != null) {
@@ -929,6 +933,7 @@ class JavaObjectHandler {
             
             java.lang.String name = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.NAME);
             java.lang.String key_binding = (java.lang.String) MapHandler.get_map_element(p1, JavaObjectHandler.KEY_BINDING);
+
             b.setText(name);
             
             if (key_binding != null) {

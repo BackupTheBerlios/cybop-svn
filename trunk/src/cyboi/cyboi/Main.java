@@ -32,7 +32,7 @@ package cyboi;
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) format.
  *
- * @version $Revision: 1.32 $ $Date: 2003-08-18 17:30:07 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2003-09-05 14:02:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -59,7 +59,7 @@ class Main {
                     java.lang.Object statics = args[1];
 
                     // Log handler.
-                    LogHandler.log_level = 2;
+                    LogHandler.log_level = 3;
                     
                     // XML parser.
                     CategoryHandler.xml_parser = new org.apache.xerces.parsers.DOMParser();
