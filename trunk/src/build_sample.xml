@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <!--
-    $RCSfile: build_hello_world.xml,v $
+    $RCSfile: build_sample.xml,v $
 
     Copyright (c) 1999-2002. The Res Medicinae Developers. All rights reserved.
 
@@ -27,7 +27,7 @@
     the specified project using the "Ant" tool of the "Jakarta" tool suite.
 
     @see http://jakarta.apache.org/ant/index.html
-    @version $Revision: 1.1 $ $Date: 2003-04-16 08:00:38 $ $Author: christian $
+    @version $Revision: 1.1 $ $Date: 2003-04-16 10:59:44 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
 

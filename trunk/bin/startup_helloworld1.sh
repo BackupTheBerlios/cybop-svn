@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# $RCSfile: startup_hello_world.sh,v $
+# $RCSfile: startup_helloworld1.sh,v $
 #
 # Copyright (c) 1999-2002. The Res Medicinae Developers. All rights reserved.
 #
@@ -25,7 +25,7 @@
 #
 # This file can be used to easily run the Hello World application.
 #
-# @version $Revision: 1.1 $ $Date: 2003-04-16 08:00:38 $ $Author: christian $
+# @version $Revision: 1.1 $ $Date: 2003-04-16 10:59:44 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Henrik Brandes <henrik-b@gmx.de>
 # @author Christian Heller <christian.heller@tuxtax.de>

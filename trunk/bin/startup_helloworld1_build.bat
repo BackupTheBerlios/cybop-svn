@@ -1,5 +1,5 @@
 rem
-rem $RCSfile: build_hello_world.bat,v $
+rem $RCSfile: startup_helloworld1_build.bat,v $
 rem
 rem Copyright (c) 1999-2002. The Res Medicinae Developers. All rights reserved.
 rem
@@ -21,12 +21,10 @@ rem
 rem http://www.resmedicinae.org
 rem - Information in Medicine -
 rem
-rem This file can be used to easily build the Hello World application.
-rem The project's directory must contain a "build.xml" file.
-rem The building is done by the "Ant" tool of the "Jakarta" tool suite.
+rem This file can be used to easily run the Hello World application.
 rem
-rem @see http://www.apache.org
-rem @version $Revision: 1.1 $ $Date: 2003-04-16 08:00:38 $ $Author: christian $
+rem @see http:\\www.apache.org
+rem @version $Revision: 1.1 $ $Date: 2003-04-16 10:59:44 $ $Author: christian $
 rem @author Michael Simon <michael.simon@gmx.net>
 rem @author Henrik Brandes <henrik-b@gmx.de>
 rem @author Saddia Malik <kermitmaliks@web.de>
@@ -37,9 +35,15 @@ rem
 rem Calls the set home script to set Java, ANT and Res Medicinae paths.
 rem
 CALL ..\..\..\set_home.bat
+CALL ..\..\..\classpath_build.bat
 
 rem
-rem Starts build process.
+rem Runs the application using the Sun JRE.
 rem
-java -mx64m -classpath %CLASSPATH% -Dant.home=%RESMEDICINAE_HOME%\lib org.apache.tools.ant.Main -quiet -buildfile %RESMEDICINAE_HOME%\bin\application\sample\helloworld\build.xml %*%
+rem java -classpath %CLASSPATH% org.resmedicinae.application.sample.helloworld.HelloWorldLauncher
+
+rem
+rem Runs the application using the JIT compiler.
+rem
+java -Djava.compiler=javacomp -classpath %CLASSPATH% org.resmedicinae.application.sample.helloworld.HelloWorldLauncher
 

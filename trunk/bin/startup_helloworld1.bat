@@ -1,5 +1,5 @@
 rem
-rem $RCSfile: startup_hello_world.bat,v $
+rem $RCSfile: startup_helloworld1.bat,v $
 rem
 rem Copyright (c) 1999-2002. The Res Medicinae Developers. All rights reserved.
 rem
@@ -24,7 +24,7 @@ rem
 rem This file can be used to easily run the Hello World application.
 rem
 rem @see http:\\www.apache.org
-rem @version $Revision: 1.1 $ $Date: 2003-04-16 08:00:38 $ $Author: christian $
+rem @version $Revision: 1.1 $ $Date: 2003-04-16 10:59:44 $ $Author: christian $
 rem @author Michael Simon <michael.simon@gmx.net>
 rem @author Henrik Brandes <henrik-b@gmx.de>
 rem @author Saddia Malik <kermitmaliks@web.de>

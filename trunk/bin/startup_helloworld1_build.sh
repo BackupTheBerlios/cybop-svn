@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# $RCSfile: build_hello_world.sh,v $
+# $RCSfile: startup_helloworld1_build.sh,v $
 #
 # Copyright (c) 1999-2002. The Res Medicinae Developers. All rights reserved.
 #
@@ -23,12 +23,9 @@
 # http://www.resmedicinae.org
 # - Information in Medicine -
 #
-# This file can be used to easily build the Hello World application.
-# The project's directory must contain a "build.xml" file.
-# The building is done by the "Ant" tool of the "Jakarta" tool suite.
+# This file can be used to easily run the Hello World application.
 #
-# @see http://jakarta.apache.org/ant/index.html
-# @version $Revision: 1.1 $ $Date: 2003-04-16 08:00:38 $ $Author: christian $
+# @version $Revision: 1.1 $ $Date: 2003-04-16 10:59:44 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Henrik Brandes <henrik-b@gmx.de>
 # @author Christian Heller <christian.heller@tuxtax.de>
@@ -38,6 +35,7 @@
 # Calls the set home script to set Java, ANT and Res Medicinae paths.
 #
 . ./bin/set_home.sh
+. ./bin/classpath_build.sh
 
 #
 # Sets and exports the class path.
@@ -46,7 +44,12 @@ CLASSPATH=${CLASSPATH}
 export CLASSPATH
 
 #
-# Starts build process.
+# Runs the application using the Sun JRE.
 #
-java -mx64m -classpath ${CLASSPATH} -Dant.home=${RESMEDICINAE_HOME}/lib org.apache.tools.ant.Main "${*}" -buildfile ${RESMEDICINAE_HOME}/bin/application/sample/helloworld/build.xml
+java -classpath $CLASSPATH org.resmedicinae.application.sample.helloworld.HelloWorldLauncher
+
+#
+# Runs the application using the JIT compiler.
+#
+#java -Djava.compiler=javacomp -classpath ${CLASSPATH} org.resmedicinae.application.sample.helloworld.HelloWorldLauncher
 
