@@ -25,7 +25,7 @@
  *
  * It controls the input and output of x windows.
  *
- * @version $Revision: 1.21 $ $Date: 2004-06-11 19:34:39 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -134,7 +134,7 @@ void init_x() {
  * @param p1 the message
  * @param p2 the internals
  */
-void send_x_windows_output(void* p0, void* p1, void* p2) {
+void send_x_windows(void* p0, void* p1, void* p2) {
 
 /*??
     struct x_windows* x = (struct x_windows*) p2;
@@ -257,7 +257,7 @@ void send_x_windows_output(void* p0, void* p1, void* p2) {
  * @param p1 the internal x windows data
  * @param p2 the event
  */
-void receive_expose_x_windows_input(void* p0, void* p1, void* p2) {
+void receive_expose_x_windows(void* p0, void* p1, void* p2) {
 
 /*??
     struct x_windows* x = (struct x_windows*) p1;
@@ -533,7 +533,7 @@ void receive_button_press_x_windows_input(void* p0, void* p1, void* p2) {
  * @param p0 the signal memory
  * @param p1 the internal x windows data
  */
-void receive_x_windows_input(void* p0, void* p1) {
+void receive_x_windows(void* p0, void* p1) {
 
 /*??
     struct x_windows* x = (struct x_windows*) p1;

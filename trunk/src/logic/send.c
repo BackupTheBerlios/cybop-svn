@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2004-12-20 14:41:02 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -215,7 +215,7 @@ void send_message(const void* p0, const void* p1,
             create_integer((void*) &i);
             *i = -1;
 
-            get_index_for_main_signal_id(p6, p5, (void*) &i);
+            get_index_for_signal_id(p6, p5, (void*) &i);
 
             if (*i >= 0) {
 
@@ -238,8 +238,7 @@ void send_message(const void* p0, const void* p1,
                     create_integer((void*) &ts);
                     *ts = 0;
 
-                    send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts,
-                        (void*) &mm, (void*) &mmc);
+                    send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts, (void*) &mm, (void*) &mmc);
 
                     destroy_integer((void*) &ts);
                     destroy_integer((void*) &tc);

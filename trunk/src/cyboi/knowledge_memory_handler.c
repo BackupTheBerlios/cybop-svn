@@ -21,12 +21,16 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-01-08 14:28:19 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef KNOWLEDGE_MEMORY_HANDLER_SOURCE
 #define KNOWLEDGE_MEMORY_HANDLER_SOURCE
+
+#include "../global/abstraction_constants.c"
+#include "../global/structure_constants.c"
+#include "../global/variables.c"
 
 /**
  * Starts up the knowledge memory.

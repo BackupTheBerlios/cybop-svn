@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-01-08 14:28:19 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,7 +72,9 @@ void create_globals() {
     //
 
     // The log level.
-    LOG_LEVEL = DEBUG_LOG_LEVEL;
+    LOG_LEVEL = INTEGER_NULL_POINTER;
+    create_integer((void*) &LOG_LEVEL);
+    *LOG_LEVEL = *DEBUG_LOG_LEVEL;
 
     // The maximum log message count.
     MAXIMUM_LOG_MESSAGE_COUNT = INTEGER_NULL_POINTER;
@@ -139,6 +141,9 @@ void destroy_globals() {
 
     // The maximum log message count.
     destroy_integer((void*) &MAXIMUM_LOG_MESSAGE_COUNT);
+
+    // The log level.
+    destroy_integer((void*) &LOG_LEVEL);
 }
 
 /* GLOBALS_HANDLER_SOURCE */

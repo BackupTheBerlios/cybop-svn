@@ -21,9 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles a server UNIX FILE socket.
- *
- * @version $Revision: 1.8 $ $Date: 2005-01-08 14:28:19 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -38,94 +36,101 @@
 #include "../global/variables.c"
 
 /**
- * Creates the unix socket.
+ * Creates the unix server socket.
  *
- * @param p0 the socket
- * @param p1 the filename
+ * @param p0 the internals memory
  */
-void create_unix_socket(void* p0, const void* p1) {
+void create_unix_server_socket(void* p0) {
 
-//?? TODO: Read UNIX_SERVER_SOCKET_FILENAME from internals!!
+    // The unix server socket filename.
+    void** f = POINTER_NULL_POINTER;
 
-    if (p1 != NULL_POINTER) {
+    // Get unix server socket filename.
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
 
-        void** n = (void**) p1;
+    if (f != POINTER_NULL_POINTER) {
 
-        if (p0 != NULL_POINTER) {
+        log_message_debug("Create unix server socket.");
 
-            int** s = (int**) p0;
+        // The unix server socket.
+        int* s = INTEGER_NULL_POINTER;
+        create_integer((void*) &s);
 
-            log_message_debug("Create unix socket.");
+        // Set unix server socket.
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
 
-            // Open socket and get its number.
-            // AF stands for address format. AF_LOCAL is a synonym for AF_UNIX.
-            // AF_LOCAL is mandated by POSIX.1g but AF_UNIX is portable to more systems.
-            // AF_UNIX was the traditional name stemming from BSD, so even most POSIX
-            // systems support it. It is also the name of choice in the Unix98
-            // specification.
-            // AF_FILE is another synonym for AF_LOCAL, for compatibility.
-            // 0 stands for the default protocol (recommended).
-            **s = socket(AF_UNIX, SOCK_STREAM, 0);
+        // Open socket and get its number.
+        // AF stands for address format. AF_LOCAL is a synonym for AF_UNIX.
+        // AF_LOCAL is mandated by POSIX.1g but AF_UNIX is portable to more systems.
+        // AF_UNIX was the traditional name stemming from BSD, so even most POSIX
+        // systems support it. It is also the name of choice in the Unix98
+        // specification.
+        // AF_FILE is another synonym for AF_LOCAL, for compatibility.
+        // 0 stands for the default protocol (recommended).
+        *s = socket(AF_UNIX, SOCK_STREAM, 0);
 
-            // Make socket non-blocking.
-//??            fcntl(*s, F_SETFL, FNDELAY);
+        // Make socket non-blocking.
+//??        fcntl(*s, F_SETFL, FNDELAY);
 
-            // Initialize socket address.
-            struct sockaddr_un a;
-            // Set address format.
-            a.sun_family = AF_UNIX;
-            // Set path/file name to use as socket address.
-            strcpy(a.sun_path, (char*) *n);
-//??            strncpy(a.sun_path, *sn, sizeof(a.sun_path));
+        // Initialize socket address.
+        struct sockaddr_un a;
+        // Set address format.
+        a.sun_family = AF_UNIX;
+        // Set path/file name to use as socket address.
+        strcpy(a.sun_path, (char*) *f);
+//??        strncpy(a.sun_path, *f, sizeof(a.sun_path));
 
-            // CAUTION! The path/file length is normally limited to 108.
-            // This solution works around that limitation by determining
-            // the real path/file size.
+        // CAUTION! The path/file length is normally limited to 108.
+        // This solution works around that limitation by determining
+        // the real path/file size.
 
-            // Determine socket address size.
-            int as = sizeof(struct sockaddr_un);
-//??            int as = (offsetof(struct sockaddr_un, sun_path) + strlen(a.sun_path) + 1);
+        // Determine socket address size.
+        int as = sizeof(struct sockaddr_un);
+//??        int as = (offsetof(struct sockaddr_un, sun_path) + strlen(a.sun_path) + 1);
 
-            // Bind number to address.
-            bind(**s, (struct sockaddr*) &a, as);
+        // Bind number to address.
+        bind(*s, (struct sockaddr*) &a, as);
 
-            // Set the number of possible pending client connection requests.
-            // The maximum number is usually 5.
-            // It is NOT necessary to use this function, but it's good practice.
-            listen(**s, 1);
-
-        } else {
-
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
-        }
+        // Set the number of possible pending client connection requests.
+        // The maximum number is usually 5.
+        // It is NOT necessary to use this function, but it's good practice.
+        listen(*s, 1);
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
+        log_message_debug("Could not create unix server socket. The filename is null.");
     }
 }
 
 /**
- * Destroys the unix socket.
+ * Destroys the unix server socket.
  *
- * @param p0 the socket
- * @param p1 the filename
+ * @param p0 the internals memory
  */
-void destroy_unix_socket(void* p0, const void* p1) {
+void destroy_unix_server_socket(void* p0) {
 
-    if (p1 != NULL_POINTER) {
+    // The unix server socket, filename.
+    int* s = INTEGER_NULL_POINTER;
+    void** f = POINTER_NULL_POINTER;
 
-        void** n = (void**) p1;
+    // Get unix server socket, filename.
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
 
-        if (p0 != NULL_POINTER) {
+    if (f != POINTER_NULL_POINTER) {
 
-            int** s = (int**) p0;
+        if (s != INTEGER_NULL_POINTER) {
+
+            log_message_debug("Destroy unix server socket.");
 
             // Close socket.
-            close(**s);
+            close(*s);
 
             // Unlink socket.
-            unlink((char*) *n);
+            unlink((char*) *f);
+
+            // Destroy unix server socket.
+            destroy_integer((void*) &s);
 
         } else {
 
@@ -141,14 +146,18 @@ void destroy_unix_socket(void* p0, const void* p1) {
 /**
  * Sends a unix socket output.
  *
- * @param p0 the receiver address
- * @param p1 the receiver address count
- * @param p2 the message
- * @param p3 the message count
+ * @param p0 the internals memory
  */
-void send_unix_socket(const void* p0, const void* p1, const void* p2, const void* p3,
-    const void* p4, const void* p5) {
+void send_unix_socket(void* p0) {
 
+/*??
+@param p0 the receiver address
+@param p1 the receiver address count
+@param p2 the message
+@param p3 the message count
+*/
+
+/*??
     if (p3 != NULL_POINTER) {
 
         int** mc = (int**) p3;
@@ -157,7 +166,7 @@ void send_unix_socket(const void* p0, const void* p1, const void* p2, const void
 
             void** m = (void**) p2;
 
-//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTERNALS_MESSAGE, (void*) &CREATE_INTERNALS_MESSAGE_COUNT);
+            log_message_debug("Send unix server socket.");
 
             // Open socket and get its number.
             // AF stands for address format. AF_LOCAL is a synonym for AF_UNIX.
@@ -185,6 +194,7 @@ void send_unix_socket(const void* p0, const void* p1, const void* p2, const void
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
 */
 
+/*??
             // Initialize socket address.
             struct sockaddr_un a;
             // Set address format.
@@ -229,20 +239,25 @@ void send_unix_socket(const void* p0, const void* p1, const void* p2, const void
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
     }
+*/
 }
 
 /**
  * Receives a unix socket input.
  *
- * @param p0 the server socket
+ * @param p0 the internals memory
  */
-void receive_unix_socket(const void* p0) {
+void receive_unix_socket(void* p0) {
 
-    if (p0 != NULL_POINTER) {
+    // The unix server socket, filename.
+    int* s = INTEGER_NULL_POINTER;
 
-        int** s = (int**) p0;
+    // Get unix server socket, filename.
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
 
-//??        log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTERNALS_MESSAGE, (void*) &CREATE_INTERNALS_MESSAGE_COUNT);
+    if (s != INTEGER_NULL_POINTER) {
+
+        log_message_debug("Receive unix server socket.");
 
         // Initialize client socket address and its size.
         struct sockaddr_un ca;
@@ -255,7 +270,7 @@ void receive_unix_socket(const void* p0) {
         // The return value is the file descriptor for the new client socket.
 
         // Accept client socket request and store client socket.
-        int cs = accept(**s, (struct sockaddr*) &ca, &cas);
+        int cs = accept(*s, (struct sockaddr*) &ca, &cas);
 
         // Receive message from socket.
 //??        read(cs, (char*) *m, *mc);

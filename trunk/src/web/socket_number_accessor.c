@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-01-08 01:24:03 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -160,7 +160,7 @@ void remove_relation_clientsocketnumber_mainsignalid(void** pp_internals, int* p
  * @param p_main_signal_id the main signal id
  * @oaram p_index return the index in the array
  */
-void get_index_for_main_signal_id(void** pp_internals, int* p_main_signal_id, void** p_index) {
+void get_index_for_signal_id(void** pp_internals, int* p_main_signal_id, void** p_index) {
 
     // Get the main signal id from internal.
     void** pp_mainsignal_ids = NULL_POINTER;

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,8 +34,8 @@
 // Null pointers.
 //
 // CAUTION!
-// These cannot be constant, because otherwise
-// one could not alter their values later.
+// These must not be constant, because otherwise
+// one could not alter the values they point to.
 //
 
 // The null pointer.

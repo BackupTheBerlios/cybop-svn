@@ -1,5 +1,5 @@
 /*
- * $RCSfile: input_output_handler.c,v $
+ * $RCSfile: input_output_activator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
@@ -21,124 +21,90 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INPUT_OUTPUT_HANDLER_SOURCE
-#define INPUT_OUTPUT_HANDLER_SOURCE
+#ifndef INPUT_OUTPUT_ACTIVATOR_SOURCE
+#define INPUT_OUTPUT_ACTIVATOR_SOURCE
 
+#include "../global/log_constants.c"
 #include "../global/structure_constants.c"
 #include "../global/variables.c"
-//??#include "../socket/unix_socket.c"
-//??#include "../web/tcp_socket_server.c"
-//??#include "../x_windows/x_windows_handler.c"
+#include "../logger/logger.c"
+#include "../socket/unix_socket.c"
+#include "../web/tcp_socket_server.c"
+#include "../x_windows/x_windows_handler.c"
 
 /**
- * Starts up the input output.
+ * Activates the input output mechanisms.
  *
+ * The signal waiting loop only catches cyboi internal signals.
+ * In order to also catch signals of various devices,
+ * special mechanisms for signal reception have to be started.
  * To the mechanisms belong:
  * - unix socket
  * - tcp socket
  * - x windows
  *
+ * These have their own internal signal/ action/ event/ interrupt
+ * waiting loops which get activated here.
+ * Whenever such a signal/ action/ event/ interrupt occurs, it gets transformed
+ * into a cyboi signal and is finally placed in cyboi's signal memory.
+ *
+ * TODO: Since many internal waiting loops run in parallel,
+ * the adding of signals to the signal memory must be synchronized!
+ * How to do this properly in C?
+ *
  * @param p0 the internals memory
  */
-void startup_input_output(void* p0) {
+void activate_input_output(void* p0) {
 
-    log_message_debug("Startup input output.");
+    log_message_debug("Activate internals.");
 
     // The activation flag.
     int* f = INTEGER_NULL_POINTER;
     create_integer((void*) &f);
     *f = 0;
 
-    // Unix server socket.
+    // UNIX socket.
     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
 
     if (*f == 1) {
 
-        create_unix_server_socket(p0);
+        receive_unix_socket(p0);
 
         *f = 0;
     }
 
-    // Tcp server socket.
+    // TCP socket.
     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
 
     if (*f == 1) {
 
-        create_tcp_server_socket(p0);
+        receive_tcp_socket(p0);
 
         *f = 0;
     }
 
-    // X windows server.
+    // X windows.
     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
 
     if (*f == 1) {
 
-        create_x_windows_server(p0);
+        receive_x_windows(p0);
 
         *f = 0;
     }
+
+//?? TEST only!
+//??    send_x_windows_output(NULL, NULL, p5);
+//??    sleep(4);
+//??    init_x();
 
     // Destroy activation flag.
     destroy_integer((void*) &f);
 }
 
-/**
- * Shuts down the input output mechanisms.
- *
- * To the mechanisms belong:
- * - x windows
- * - tcp socket
- * - unix socket
- *
- * @param p0 the internals memory
- */
-void shutdown_input_output(void* p0) {
-
-    log_message_debug("Shutdown input output.");
-
-    // The activation flag.
-    int* f = INTEGER_NULL_POINTER;
-    create_integer((void*) &f);
-    *f = 0;
-
-    // X windows server.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
-
-    if (*f == 1) {
-
-        destroy_x_windows_server(p0);
-
-        *f = 0;
-    }
-
-    // Tcp server socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
-
-    if (*f == 1) {
-
-        destroy_tcp_server_socket(p0);
-
-        *f = 0;
-    }
-
-    // Unix server socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
-
-    if (*f == 1) {
-
-        destroy_unix_server_socket(p0);
-
-        *f = 0;
-    }
-
-    // Destroy activation flag.
-    destroy_integer((void*) &f);
-}
-
-/* INPUT_OUTPUT_HANDLER_SOURCE */
+/* INPUT_OUTPUT_ACTIVATOR_SOURCE */
 #endif

@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.6 $ $Date: 2005-01-07 11:59:48 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,17 +57,35 @@ static const char* STARTUP_MODEL_CONFIGURATION_NAME = STARTUP_MODEL_CONFIGURATIO
 static const int STARTUP_MODEL_CONFIGURATION_NAME_COUNT_ARRAY[] = {13};
 static const int* STARTUP_MODEL_CONFIGURATION_NAME_COUNT = STARTUP_MODEL_CONFIGURATION_NAME_COUNT_ARRAY;
 
-/** The tcp server socket port configuration name. */
-static const char TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_ARRAY[] = {'t', 'c', 'p', '_', 's', 'e', 'r', 'v', 'e', 'r', '_', 's', 'o', 'c', 'k', 'e', 't', '_', 'p', 'o', 'r', 't'};
-static const char* TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME = TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_ARRAY;
-static const int TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT_ARRAY[] = {22};
-static const int* TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT = TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT_ARRAY;
+/** The unix server socket active configuration name. */
+static const char UNIX_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'e', 'r', 'v', 'e', 'r', '_', 's', 'o', 'c', 'k', 'e', 't', '_', 'a', 'c', 't', 'i', 'v', 'e'};
+static const char* UNIX_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME = UNIX_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_ARRAY;
+static const int UNIX_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY[] = {25};
+static const int* UNIX_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT = UNIX_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY;
+
+/** The unix server socket filename configuration name. */
+static const char UNIX_SERVER_SOCKET_FILENAME_CONFIGURATION_NAME_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'e', 'r', 'v', 'e', 'r', '_', 's', 'o', 'c', 'k', 'e', 't', '_', 'f', 'i', 'l', 'e', 'n', 'a', 'm', 'e'};
+static const char* UNIX_SERVER_SOCKET_FILENAME_CONFIGURATION_NAME = UNIX_SERVER_SOCKET_FILENAME_CONFIGURATION_NAME_ARRAY;
+static const int UNIX_SERVER_SOCKET_FILENAME_CONFIGURATION_NAME_COUNT_ARRAY[] = {27};
+static const int* UNIX_SERVER_SOCKET_FILENAME_CONFIGURATION_NAME_COUNT = UNIX_SERVER_SOCKET_FILENAME_CONFIGURATION_NAME_COUNT_ARRAY;
 
 /** The tcp server socket active configuration name. */
 static const char TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_ARRAY[] = {'t', 'c', 'p', '_', 's', 'e', 'r', 'v', 'e', 'r', '_', 's', 'o', 'c', 'k', 'e', 't', '_', 'a', 'c', 't', 'i', 'v', 'e'};
 static const char* TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME = TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_ARRAY;
 static const int TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY[] = {24};
 static const int* TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT = TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY;
+
+/** The tcp server socket port configuration name. */
+static const char TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_ARRAY[] = {'t', 'c', 'p', '_', 's', 'e', 'r', 'v', 'e', 'r', '_', 's', 'o', 'c', 'k', 'e', 't', '_', 'p', 'o', 'r', 't'};
+static const char* TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME = TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_ARRAY;
+static const int TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT_ARRAY[] = {22};
+static const int* TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT = TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT_ARRAY;
+
+/** The x windows server active configuration name. */
+static const char X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', 's', '_', 's', 'e', 'r', 'v', 'e', 'r', '_', 'a', 'c', 't', 'i', 'v', 'e'};
+static const char* X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME = X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME_ARRAY;
+static const int X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY[] = {23};
+static const int* X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME_COUNT = X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY;
 
 //
 // Creation names.

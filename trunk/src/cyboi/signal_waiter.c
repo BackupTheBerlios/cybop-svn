@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2005-01-08 14:28:19 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,83 +29,14 @@
 #define SIGNAL_WAITER_SOURCE
 
 #include "../accessor/signal_memory_accessor.c"
-#include "../array/array.c"
+#include "../cyboi/input_output_activator.c"
 #include "../cyboi/signal_handler.c"
-#include "../global/abstraction_constants.c"
-#include "../global/constant.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
-#include "../socket/unix_socket.c"
-#include "../web/tcp_socket_server.c"
-#include "../test/test.c"
 
-/**
- * Activates the internals.
- *
- * Before the actual signal waiting loop is entered, all internal mechanisms
- * for signal reception have to be started, for example:
- * - socket communication
- * - x windows events
- * - others more
- *
- * These have their own internal signal/ action/ event waiting loops
- * which get activated here.
- * Whenever such a signal/ action/ event occurs, it gets transformed
- * into a cyboi signal and is finally placed in cyboi's signal memory.
- *
- * TODO: Since many internal waiting loops run in parallel,
- * the adding of signals to the signal memory must be synchronized!
- * How to do this properly in C?
- *
- * @param p0 the internals memory
- */
-void activate_internals(void* p0) {
-
-    log_message_debug("Activate internals.");
-
-    // The activation flag.
-    int* f = INTEGER_NULL_POINTER;
-    create_integer((void*) &f);
-    *f = 0;
-
-    // UNIX socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
-
-    if (*f == 1) {
-
-        receive_unix_socket(p0);
-
-        *f = 0;
-    }
-
-    // TCP socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
-
-    if (*f == 1) {
-
-        receive_tcp_socket(p0);
-
-        *f = 0;
-    }
-
-    // X windows.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
-
-    if (*f == 1) {
-
-        receive_x_windows(p0);
-
-        *f = 0;
-    }
-
-//?? TEST only!
-//??    send_x_windows_output(NULL, NULL, p5);
-//??    sleep(4);
-//??    init_x();
-
-    // Destroy activation flag.
-    destroy_integer((void*) &f);
-}
+//??#include "../array/array.c"
+//??#include "../global/abstraction_constants.c"
+//??#include "../global/constant.c"
 
 /**
  * Waits for signals.
@@ -116,21 +47,23 @@ void wait(void* p0) {
 
     log_message_debug("Run signal waiting loop.");
 
-    // Activate internal mechanisms for signal reception.
-    activate_internals(p0);
+    // Activate input output mechanisms for signal reception.
+    activate_input_output(p0);
 
-    // The knowledge memory, signal memory.
+    // The knowledge memory.
     void* k = NULL_POINTER;
     void* kc = NULL_POINTER;
     void* ks = NULL_POINTER;
+    // The signal memory.
     void* s = NULL_POINTER;
     void* sc = NULL_POINTER;
     void* ss = NULL_POINTER;
 
-    // Get knowledge memory, signal memory.
+    // Get knowledge memory.
     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) &ONE_ELEMENT_COUNT);
     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) &ONE_ELEMENT_COUNT);
     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) &ONE_ELEMENT_COUNT);
+    // Get signal memory.
     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) &ONE_ELEMENT_COUNT);
     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) &ONE_ELEMENT_COUNT);

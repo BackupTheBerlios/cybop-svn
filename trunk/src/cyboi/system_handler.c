@@ -21,29 +21,21 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-01-08 14:28:19 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SYSTEM_HANDLER_SOURCE
 #define SYSTEM_HANDLER_SOURCE
 
-//??#include <stdio.h>
-//??#include "../accessor/compound_accessor.c"
-//??#include "../accessor/signal_memory_accessor.c"
-//??#include "../communicator/communicator.c"
-//??#include "../creator/creator.c"
-//??#include "../creator/integer_creator.c"
-//??#include "../cyboi/signal_waiter.c"
-//??#include "../global/abstraction_constants.c"
-//??#include "../global/channel_constants.c"
-//??#include "../global/log_constants.c"
-//??#include "../global/structure_constants.c"
-//??#include "../global/variables.c"
-//??#include "../logger/logger.c"
-//??#include "../socket/unix_socket.c"
-//??#include "../web/tcp_socket_server.c"
-//??#include "../x_windows/x_windows_handler.c"
+#include "../array/array.c"
+#include "../global/abstraction_constants.c"
+#include "../global/channel_constants.c"
+#include "../global/constant.c"
+#include "../global/log_constants.c"
+#include "../global/structure_constants.c"
+#include "../global/variables.c"
+#include "../logger/logger.c"
 
 /**
  * Handles the system.
@@ -87,12 +79,12 @@ void handle_system(void* p0) {
     void* pmc = NULL_POINTER;
 
     // Get startup parameters channel, abstraction, model.
-    get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_INTERNAL, (void*) &pc, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_COUNT_INTERNAL, (void*) &pcc, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_INTERNAL, (void*) &pa, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_COUNT_INTERNAL, (void*) &pac, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_INTERNAL, (void*) &pm, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements((void*) &i, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_COUNT_INTERNAL, (void*) &pmc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_INTERNAL, (void*) &pc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_COUNT_INTERNAL, (void*) &pcc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_INTERNAL, (void*) &pa, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_COUNT_INTERNAL, (void*) &pac, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_INTERNAL, (void*) &pm, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_COUNT_INTERNAL, (void*) &pmc, (void*) &ONE_ELEMENT_COUNT);
 
     log_message_debug("Create startup model abstraction.");
 
@@ -144,6 +136,16 @@ void handle_system(void* p0) {
 
     log_message_debug("Add startup model as signal to signal memory.");
 
+    // The signal memory.
+    void* s = NULL_POINTER;
+    void* sc = NULL_POINTER;
+    void* ss = NULL_POINTER;
+
+    // Get signal memory.
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) &ONE_ELEMENT_COUNT);
+
     // The signal id.
     int* id = INTEGER_NULL_POINTER;
     create_integer((void*) &id);
@@ -161,7 +163,7 @@ void handle_system(void* p0) {
     // can be entered, waiting for signals (events/ interrupts)
     // which are stored/ found in the signal memory.
     // The loop is left as soon as its shutdown flag is set.
-    wait((void*) &i);
+    wait(p0);
 
     // Destroy startup signal.
     // CAUTION! All signals are destroyed in the signal waiting loop,

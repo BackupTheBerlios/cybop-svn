@@ -23,7 +23,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.12 $ $Date: 2005-01-08 14:28:19 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -52,6 +52,152 @@
 #include "../global/variables.c"
 #include "../logger/logger.c"
 #include "../web/socket_number_accessor.c"
+
+/**
+ * Creates the tcp server socket.
+ *
+ * @param p0 the internals memory
+ */
+void create_tcp_server_socket(void* p0) {
+
+    // The tcp server socket port.
+    int* p = POINTER_NULL_POINTER;
+
+    // Get tcp server socket port.
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &p, (void*) &ONE_ELEMENT_COUNT);
+
+    if (p != INTEGER_NULL_POINTER) {
+
+        log_message_debug("Create tcp server socket.");
+
+        // The tcp server socket.
+        int* s = INTEGER_NULL_POINTER;
+        create_integer((void*) &s);
+
+        // Set tcp server socket.
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
+
+--
+        // Create the server socket number internals.
+        int* p_server_socket_number = NULL_POINTER;
+        create_internal((void*) &p_server_socket_number, (void*) &INTERNAL_TYPE_INTEGER);
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_INTERNAL, (void*) &p_server_socket_number, (void*) &ONE_ELEMENT_COUNT);
+
+        // Create the client socket number internals.
+        void** pp_client_socket_numbers = NULL_POINTER;
+        create_internal((void*) &pp_client_socket_numbers, (void*) &INTERNAL_TYPE_POINTER);
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_INTERNAL, (void*) &pp_client_socket_numbers, (void*) &ONE_ELEMENT_COUNT);
+
+        // Create the client socket number count internals.
+        int* p_client_socket_numbers_count = NULL_POINTER;
+        create_internal((void*) &p_client_socket_numbers_count, (void*) &INTERNAL_TYPE_INTEGER);
+        *p_client_socket_numbers_count = 0;
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &p_client_socket_numbers_count, (void*) &ONE_ELEMENT_COUNT);
+
+        // Create the client socket number size internals.
+        int* p_client_socket_numbers_size = NULL_POINTER;
+        create_internal((void*) &p_client_socket_numbers_size, (void*) &INTERNAL_TYPE_INTEGER);
+        *p_client_socket_numbers_size = 0;
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &p_client_socket_numbers_size, (void*) &ONE_ELEMENT_COUNT);
+
+        // Create the main signal id internals.
+        void** pp_main_signal_ids = NULL_POINTER;
+        create_internal((void*) &pp_main_signal_ids, (void*) &INTERNAL_TYPE_POINTER);
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &pp_main_signal_ids, (void*) &ONE_ELEMENT_COUNT);
+
+        // Create the main signal id count internals.
+        int* p_main_signal_ids_count = NULL_POINTER;
+        create_internal((void*) &p_main_signal_ids_count, (void*) &INTERNAL_TYPE_INTEGER);
+        *p_main_signal_ids_count = 0;
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &p_main_signal_ids_count, (void*) &ONE_ELEMENT_COUNT);
+
+        // Create the main signal id size internals.
+        int* p_main_signal_ids_size = NULL_POINTER;
+        create_internal((void*) &p_main_signal_ids_size, (void*) &INTERNAL_TYPE_INTEGER);
+        *p_main_signal_ids_size = 0;
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &p_main_signal_ids_size, (void*) &ONE_ELEMENT_COUNT);
+
+        // The active flag and port.
+        int* p_tcp_socket_active = NULL_POINTER;
+        int* p_tcp_socket_port = NULL_POINTER;
+        int internal_type;
+
+        // Get active flag.
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &p_tcp_socket_active, (void*) &ONE_ELEMENT_COUNT);
+
+        // Get port.
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &p_tcp_socket_port, (void*) &ONE_ELEMENT_COUNT);
+
+        // Start tcp socket server.
+        if (*p_tcp_socket_active == 1) {
+
+            int err = 0;
+
+            if (p_tcp_socket_port == NULL_POINTER) {
+
+                log_message_debug("p_tcp_socket_port is a NULL POINTER");
+                err = -1;
+
+            } else if (p_server_socket_number == NULL_POINTER) {
+
+                log_message_debug("p_server_socket_number is a NULL POINTER");
+                err = -2;
+
+            } else {
+
+                struct sockaddr_in server_address;
+                int server_address_size;
+
+                // Create the socket.
+                *p_server_socket_number = socket(PF_INET, SOCK_STREAM, 0);
+
+                if (*p_server_socket_number < 0) {
+
+                    // errormessage and close the thread
+                    log_message_debug("failed to create socket");
+                    err = -3;
+                }
+
+                fprintf(stderr, "create the socket - socketnumber: %d \n", *p_server_socket_number);
+
+                // Create the socket address of the server.
+                server_address.sin_family       = AF_INET;
+                server_address.sin_addr.s_addr  = INADDR_ANY;
+                server_address.sin_port         = htons(*p_tcp_socket_port);
+                server_address_size             = sizeof(server_address);
+
+                // Bind the socket to the server address.
+                if (bind(*p_server_socket_number, (struct sockaddr*) &server_address, server_address_size) < 0) {
+
+                    // errormessage and close the thread
+                    log_message_debug("failed to bind socket");
+                    err = -4;
+                }
+
+                fprintf(stderr, "bind the socket on the port %d \n", *p_tcp_socket_port);
+
+                // Listen for client requests.
+                listen(*p_server_socket_number, 1);
+            }
+
+            if (err == 0) {
+
+                log_message_debug("create tcp socket was successful");
+
+            } else {
+
+                log_message_debug("create tcp socket was incorrect");
+
+                // Deactivate the active flag for tcp socket.
+                *p_tcp_socket_active = 0;
+            }
+        }
+
+    } else {
+
+        log_message_debug("Could not create tcp server socket. The port is null.");
+    }
+}
 
 /**
  * Get the request row from the complet request
@@ -161,16 +307,16 @@ void get_param_from_request_row(char** req_row, int* req_row_count, char** param
  * and for the parameter must create a signal in the signal
  * queue
  *
- * @param pp_internals the pointer of the internals
+ * @param p0 the pointer of the internals
  * @param p_client_socket_number the client socket number for the request
  */
-void handle_request(void** pp_internals, int* p_client_socket_number) {
+void handle_request(void** p0, int* p_client_socket_number) {
 
     fprintf(stderr, "request registriert \n");
 
-    if (pp_internals == NULL_POINTER) {
+    if (p0 == NULL_POINTER) {
 
-        log_message_debug("pp_internals is a NULL POINTER");
+        log_message_debug("p0 is a NULL POINTER");
 
     } else if (p_client_socket_number == NULL_POINTER) {
 
@@ -233,9 +379,9 @@ void handle_request(void** pp_internals, int* p_client_socket_number) {
             int* p_signal_memory_count = NULL_POINTER;
             int* p_signal_memory_size = NULL_POINTER;
 
-            get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &pp_signal_memory, (void*) &ONE_ELEMENT_COUNT);
-            get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &p_signal_memory_count, (void*) &ONE_ELEMENT_COUNT);
-            get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &p_signal_memory_size, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &pp_signal_memory, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &p_signal_memory_count, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &p_signal_memory_size, (void*) &ONE_ELEMENT_COUNT);
 
             // The source channel.
             char c_sc[] = "inline";
@@ -293,141 +439,9 @@ void handle_request(void** pp_internals, int* p_client_socket_number) {
 
             log_message_debug("set start signals");
 
-            add_main_signal_id(pp_internals, (void*) &main_sig_id);
-            add_client_socket_number(pp_internals, p_client_socket_number);
+            add_main_signal_id(p0, (void*) &main_sig_id);
+            add_client_socket_number(p0, p_client_socket_number);
         }  // comp_res<>1  favicon must ignoried
-    }
-}
-
-/**
- * Creates the tcp socket.
- *
- * @param pp_internals the internals
- */
-void create_tcp_socket(void** pp_internals) {
-
-    log_message_debug("Create tcp socket.");
-
-    if (pp_internals == NULL_POINTER) {
-
-        log_message_debug("pp_internal is a NULL POINTER");
-
-    } else {
-
-        // Create the server socket number internals.
-        int* p_server_socket_number = NULL_POINTER;
-        create_internal((void*) &p_server_socket_number, (void*) &INTERNAL_TYPE_INTEGER);
-        set_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_INTERNAL, (void*) &p_server_socket_number, (void*) &ONE_ELEMENT_COUNT);
-
-        // Create the client socket number internals.
-        void** pp_client_socket_numbers = NULL_POINTER;
-        create_internal((void*) &pp_client_socket_numbers, (void*) &INTERNAL_TYPE_POINTER);
-        set_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_INTERNAL, (void*) &pp_client_socket_numbers, (void*) &ONE_ELEMENT_COUNT);
-
-        // Create the client socket number count internals.
-        int* p_client_socket_numbers_count = NULL_POINTER;
-        create_internal((void*) &p_client_socket_numbers_count, (void*) &INTERNAL_TYPE_INTEGER);
-        *p_client_socket_numbers_count = 0;
-        set_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &p_client_socket_numbers_count, (void*) &ONE_ELEMENT_COUNT);
-
-        // Create the client socket number size internals.
-        int* p_client_socket_numbers_size = NULL_POINTER;
-        create_internal((void*) &p_client_socket_numbers_size, (void*) &INTERNAL_TYPE_INTEGER);
-        *p_client_socket_numbers_size = 0;
-        set_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &p_client_socket_numbers_size, (void*) &ONE_ELEMENT_COUNT);
-
-        // Create the main signal id internals.
-        void** pp_main_signal_ids = NULL_POINTER;
-        create_internal((void*) &pp_main_signal_ids, (void*) &INTERNAL_TYPE_POINTER);
-        set_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &pp_main_signal_ids, (void*) &ONE_ELEMENT_COUNT);
-
-        // Create the main signal id count internals.
-        int* p_main_signal_ids_count = NULL_POINTER;
-        create_internal((void*) &p_main_signal_ids_count, (void*) &INTERNAL_TYPE_INTEGER);
-        *p_main_signal_ids_count = 0;
-        set_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &p_main_signal_ids_count, (void*) &ONE_ELEMENT_COUNT);
-
-        // Create the main signal id size internals.
-        int* p_main_signal_ids_size = NULL_POINTER;
-        create_internal((void*) &p_main_signal_ids_size, (void*) &INTERNAL_TYPE_INTEGER);
-        *p_main_signal_ids_size = 0;
-        set_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &p_main_signal_ids_size, (void*) &ONE_ELEMENT_COUNT);
-
-        // The active flag and port.
-        int* p_tcp_socket_active = NULL_POINTER;
-        int* p_tcp_socket_port = NULL_POINTER;
-        int internal_type;
-
-        // Get active flag.
-        get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &p_tcp_socket_active, (void*) &ONE_ELEMENT_COUNT);
-
-        // Get port.
-        get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &p_tcp_socket_port, (void*) &ONE_ELEMENT_COUNT);
-
-        // Start tcp socket server.
-        if (*p_tcp_socket_active == 1) {
-
-            int err = 0;
-
-            if (p_tcp_socket_port == NULL_POINTER) {
-
-                log_message_debug("p_tcp_socket_port is a NULL POINTER");
-                err = -1;
-
-            } else if (p_server_socket_number == NULL_POINTER) {
-
-                log_message_debug("p_server_socket_number is a NULL POINTER");
-                err = -2;
-
-            } else {
-
-                struct sockaddr_in server_address;
-                int server_address_size;
-
-                // Create the socket.
-                *p_server_socket_number = socket(PF_INET, SOCK_STREAM, 0);
-
-                if (*p_server_socket_number < 0) {
-
-                    // errormessage and close the thread
-                    log_message_debug("failed to create socket");
-                    err = -3;
-                }
-
-                fprintf(stderr, "create the socket - socketnumber: %d \n", *p_server_socket_number);
-
-                // Create the socket address of the server.
-                server_address.sin_family       = AF_INET;
-                server_address.sin_addr.s_addr  = INADDR_ANY;
-                server_address.sin_port         = htons(*p_tcp_socket_port);
-                server_address_size             = sizeof(server_address);
-
-                // Bind the socket to the server address.
-                if (bind(*p_server_socket_number, (struct sockaddr*) &server_address, server_address_size) < 0) {
-
-                    // errormessage and close the thread
-                    log_message_debug("failed to bind socket");
-                    err = -4;
-                }
-
-                fprintf(stderr, "bind the socket on the port %d \n", *p_tcp_socket_port);
-
-                // Listen for client requests.
-                listen(*p_server_socket_number, 1);
-            }
-
-            if (err == 0) {
-
-                log_message_debug("create tcp socket was successful");
-
-            } else {
-
-                log_message_debug("create tcp socket was incorrect");
-
-                // Deactivate the active flag for tcp socket.
-                *p_tcp_socket_active = 0;
-            }
-        }
     }
 }
 
@@ -437,13 +451,13 @@ void create_tcp_socket(void** pp_internals) {
  * The function is running in a thread, because the loop in the
  * function wait for request of the client.
  *
- * @param pp_internals the internals
+ * @param p0 the internals
  */
-void run_tcp_socket(void** pp_internals) {
+void run_tcp_socket(void** p0) {
 
     log_message_debug("run_tcp_socket is started");
 
-    if (pp_internals == NULL_POINTER) {
+    if (p0 == NULL_POINTER) {
 
         log_message_debug("pp_internal is a NULL POINTER");
 
@@ -455,13 +469,13 @@ void run_tcp_socket(void** pp_internals) {
         int* p_signal_memory_count = NULL_POINTER;
         int* p_signal_memory_size = NULL_POINTER;
 
-        get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &pp_signal_memory, (void*) &ONE_ELEMENT_COUNT);
-        get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &p_signal_memory_count, (void*) &ONE_ELEMENT_COUNT);
-        get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &p_signal_memory_size, (void*) &ONE_ELEMENT_COUNT);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &pp_signal_memory, (void*) &ONE_ELEMENT_COUNT);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &p_signal_memory_count, (void*) &ONE_ELEMENT_COUNT);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &p_signal_memory_size, (void*) &ONE_ELEMENT_COUNT);
 
         int* p_tcp_server_socket_number = NULL_POINTER;
 
-        get_array_elements(pp_internals, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_INTERNAL, (void*) &p_tcp_server_socket_number, (void*) &ONE_ELEMENT_COUNT);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_INTERNAL, (void*) &p_tcp_server_socket_number, (void*) &ONE_ELEMENT_COUNT);
 
         int client_socketnumber;
         struct sockaddr_in client_address;
@@ -484,7 +498,7 @@ void run_tcp_socket(void** pp_internals) {
             //char ausgabe[] = "Hello World";
             //send (client_socketnumber, ausgabe, strlen(ausgabe), 0);
 
-            handle_request(pp_internals, &client_socketnumber);
+            handle_request(p0, &client_socketnumber);
 
             // close the socket connection
         //}
@@ -496,15 +510,15 @@ void run_tcp_socket(void** pp_internals) {
 /**
  * Receives tcp socket server signals.
  *
- * @param pp_internals the internals
+ * @param p0 the internals
  */
-void receive_tcp_socket(void** pp_internals) {
+void receive_tcp_socket(void** p0) {
 
     log_message_debug("activate_tcp_spcket is started");
 
-    if (pp_internals == NULL_POINTER) {
+    if (p0 == NULL_POINTER) {
 
-        log_message_debug("pp_internals is a NULL POINTER");
+        log_message_debug("p0 is a NULL POINTER");
 
     } else {
 
@@ -512,7 +526,7 @@ void receive_tcp_socket(void** pp_internals) {
         pthread_t tcp_socket_thread;
 
         int err = 0;
-        err = pthread_create(&tcp_socket_thread, NULL, (void*) &run_tcp_socket, pp_internals);
+        err = pthread_create(&tcp_socket_thread, NULL, (void*) &run_tcp_socket, p0);
 
         if (err != 0) {
 

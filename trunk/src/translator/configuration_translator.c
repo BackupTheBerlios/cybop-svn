@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-01-07 11:59:48 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-01-08 17:19:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -203,11 +203,11 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
 
                     if (*r == 0) {
 
-                        compare_arrays((void*) &sn, (void*) &snc, (void*) &TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME, (void*) &TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+                        compare_arrays((void*) &sn, (void*) &snc, (void*) &UNIX_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME, (void*) &UNIX_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
                         if (*r == 1) {
 
-                            log_message_debug("Found tcp server socket port configuration name.");
+                            log_message_debug("Found unix server socket active configuration name.");
 
                             // Create destination model.
                             create_model((void*) &dm, (void*) &dmc, (void*) &dms,
@@ -216,7 +216,26 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                                 (void*) &sc, (void*) &scc);
 
                             // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
+                        }
+                    }
+
+                    if (*r == 0) {
+
+                        compare_arrays((void*) &sn, (void*) &snc, (void*) &UNIX_SERVER_SOCKET_FILENAME_CONFIGURATION_NAME, (void*) &UNIX_SERVER_SOCKET_FILENAME_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+                        if (*r == 1) {
+
+                            log_message_debug("Found unix server socket filename configuration name.");
+
+                            // Create destination model.
+                            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
+                                (void*) &sm, (void*) &smc,
+                                (void*) &sa, (void*) &sac,
+                                (void*) &sc, (void*) &scc);
+
+                            // Set configuration parameter in internals memory.
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
                         }
                     }
 
@@ -236,6 +255,44 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
 
                             // Set configuration parameter in internals memory.
                             set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
+                        }
+                    }
+
+                    if (*r == 0) {
+
+                        compare_arrays((void*) &sn, (void*) &snc, (void*) &TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME, (void*) &TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+                        if (*r == 1) {
+
+                            log_message_debug("Found tcp server socket port configuration name.");
+
+                            // Create destination model.
+                            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
+                                (void*) &sm, (void*) &smc,
+                                (void*) &sa, (void*) &sac,
+                                (void*) &sc, (void*) &scc);
+
+                            // Set configuration parameter in internals memory.
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
+                        }
+                    }
+
+                    if (*r == 0) {
+
+                        compare_arrays((void*) &sn, (void*) &snc, (void*) &X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME, (void*) &X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+                        if (*r == 1) {
+
+                            log_message_debug("Found x windows server active configuration name.");
+
+                            // Create destination model.
+                            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
+                                (void*) &sm, (void*) &smc,
+                                (void*) &sa, (void*) &sac,
+                                (void*) &sc, (void*) &scc);
+
+                            // Set configuration parameter in internals memory.
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
                         }
                     }
 
