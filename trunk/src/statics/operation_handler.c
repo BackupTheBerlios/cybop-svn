@@ -33,7 +33,7 @@
  * Operation, input and output are stored in the following form:
  * operation, operand1, operand2, operand3, ...
  *
- * @version $Revision: 1.15 $ $Date: 2004-04-02 16:13:46 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-04-04 22:09:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,6 +41,23 @@
 #define OPERATION_HANDLER_SOURCE
 
 #include "../logger/log_handler.c"
+#include "../model/array_handler.c"
+
+//
+// Constants.
+//
+
+/** The operation size. */
+static const int OPERATION_SIZE = 3;
+
+/** The array size index. */
+static const int ARRAY_SIZE_INDEX = 0;
+
+/** The parameters array index. */
+static const int PARAMETERS_ARRAY_INDEX = 1;
+
+/** The parameters sizes array index. */
+static const int PARAMETERS_SIZES_ARRAY_INDEX = 2;
 
 //
 // Operation.
@@ -57,7 +74,21 @@ void create_operation(void* p0, const void* p1) {
     log_message((void*) &INFO_LOG_LEVEL, "Create operation.");
 
     // The operation.
-    create_array(p0, p1);
+    create_array(p0, (void*) &OPERATION_SIZE);
+
+    // The array size which is always equal for both arrays.
+    int s = 0;
+    set_array_element(p0, (void*) &OPERATION_SIZE, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
+
+    // The parameters array.
+    void* p = (void*) 0;
+    create_array((void*) &p, (void*) &s);
+    set_array_element(p0, (void*) &OPERATION_SIZE, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_ARRAY_INDEX, (void*) &p);
+
+    // The parameters sizes array.
+    void* ps = (void*) 0;
+    create_array((void*) &ps, (void*) &s);
+    set_array_element(p0, (void*) &OPERATION_SIZE, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_ARRAY_INDEX, (void*) &ps);
 }
 
 /**
@@ -70,8 +101,27 @@ void destroy_operation(void* p0, const void* p1) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Destroy operation.");
 
+    // The array size which is always equal for both arrays.
+    int s = 0;
+    get_array_element(p0, (void*) &OPERATION_SIZE, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
+
+    // The parameters sizes array.
+    void* ps = (void*) 0;
+    get_array_element(p0, (void*) &OPERATION_SIZE, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_ARRAY_INDEX, (void*) &ps);
+    remove_array_element(p0, (void*) &OPERATION_SIZE, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_ARRAY_INDEX);
+    destroy_array((void*) &ps, (void*) &s);
+
+    // The parameters array.
+    void* p = (void*) 0;
+    get_array_element(p0, (void*) &OPERATION_SIZE, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_ARRAY_INDEX, (void*) &p);
+    remove_array_element(p0, (void*) &OPERATION_SIZE, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_ARRAY_INDEX);
+    destroy_array((void*) &p, (void*) &s);
+
+    // The array size which is always equal for both arrays.
+    remove_array_element(p0, (void*) &OPERATION_SIZE, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX);
+
     // The operation.
-    destroy_array(p0, p1);
+    destroy_array(p0, (void*) &OPERATION_SIZE);
 }
 
 /**
