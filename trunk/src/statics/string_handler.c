@@ -1,7 +1,7 @@
 /*
  * $RCSfile: string_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -21,10 +21,11 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles strings.
+ * This file handles a string.
+ *
  * A string is a chain of characters.
  *
- * @version $Revision: 1.8 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -186,4 +187,3 @@ void get_value_string(void* p0, void* p1) {
 
 /* STRING_HANDLER_SOURCE */
 #endif
-

@@ -21,10 +21,11 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles complexes.
+ * This file handles a complex.
+ *
  * A complex consists of two fraction numbers, a real and an imaginary value.
  *
- * @version $Revision: 1.8 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -20,6 +20,11 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file destroys a transient model into a persistent model.
+ *
+ * @version $Revision: 1.6 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DESTROY_MODEL_SOURCE
@@ -27,7 +32,6 @@
 
 #include "../cybol/cybol_model_handler.c"
 #include "../logger/log_handler.c"
-#include "../model/map.c"
 #include "../model/models.c"
 #include "../model/statics_models.c"
 #include "../statics/boolean_handler.c"
@@ -38,15 +42,6 @@
 #include "../statics/string_handler.c"
 #include "../statics/time_handler.c"
 #include "../statics/vector_handler.c"
-
-/**
- * This is the destroy model operation.
- *
- * It destroys a statics or dynamics memory model to a cybol model.
- *
- * @version $Revision: 1.5 $ $Date: 2004-03-11 22:44:31 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 /**
  * Destroys a memory model to a cybol model.

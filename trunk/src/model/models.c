@@ -20,17 +20,15 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file defines model constants.
+ *
+ * @version $Revision: 1.5 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MODELS_SOURCE
 #define MODELS_SOURCE
-
-/**
- * This is the model definition constants.
- *
- * @version $Revision: 1.4 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 //
 // Compound models.

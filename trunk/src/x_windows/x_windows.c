@@ -1,7 +1,7 @@
 /*
  * $RCSfile: x_windows.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -33,7 +33,7 @@
  *
  * It keeps data which are necessary to control an x windows.
  *
- * @version $Revision: 1.4 $ $Date: 2004-02-08 12:39:47 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct x_windows {

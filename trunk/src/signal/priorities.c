@@ -20,19 +20,15 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file defines constants for priorities that signals can have.
+ *
+ * @version $Revision: 1.2 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef PRIORITIES_SOURCE
 #define PRIORITIES_SOURCE
-
-/**
- * This is the priorities.
- *
- * It defines constants for priorities that signals can have.
- *
- * @version $Revision: 1.1 $ $Date: 2004-02-29 16:26:28 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 //
 // Priorities.

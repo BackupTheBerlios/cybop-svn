@@ -21,9 +21,9 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles operations (also known as systems).
- * An operation transports an input state through logics to an output state.
+ * This file handles an operation (also known as system).
  *
+ * An operation transports an input state through logics to an output state.
  * The logics is kept as function pointer.
  * Many inputs and outputs are possible.
  * Statics models are kept as hierarchical paths.
@@ -33,10 +33,9 @@
  * Operation, input and output are stored in the following form:
  * operation, operand1, operand2, operand3, ...
  *
- * @version $Revision: 1.13 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-
 
 #ifndef OPERATION_HANDLER_SOURCE
 #define OPERATION_HANDLER_SOURCE

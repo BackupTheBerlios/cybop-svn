@@ -20,19 +20,15 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file defines constants for languages that systems can use to communicate.
+ *
+ * @version $Revision: 1.3 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LANGUAGES_SOURCE
 #define LANGUAGES_SOURCE
-
-/**
- * This is the languages.
- *
- * It defines constants for languages that systems can use to communicate.
- *
- * @version $Revision: 1.2 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 //
 // Languages.

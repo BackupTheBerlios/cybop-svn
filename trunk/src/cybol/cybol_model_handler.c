@@ -21,10 +21,11 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles cybol models.
- * It can read and write cybol source files.
+ * This file handles a cybol model.
  *
- * @version $Revision: 1.9 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
+ * It can read and write a cybol source file.
+ *
+ * @version $Revision: 1.10 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: dynamics_cybol_model_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -20,6 +20,13 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file handles a dynamics cybol file.
+ *
+ * It contains read and write procedures.
+ *
+ * @version $Revision: 1.6 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DYNAMICS_CYBOL_MODEL_HANDLER_SOURCE
@@ -27,14 +34,6 @@
 
 //?? #include <libxml.h>
 
-/**
- * This is the xml handler.
- *
- * It can read and write CYBOL source files.
- *
- * @version $Revision: 1.5 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 //
 // Source model.
@@ -406,4 +405,3 @@ void write_child_attribute(void* p0, void* p1, void* p2) {
 
 /* DYNAMICS_CYBOL_MODEL_HANDLER_SOURCE */
 #endif
-

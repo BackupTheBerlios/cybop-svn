@@ -1,7 +1,7 @@
 /*
  * $RCSfile: add.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -20,6 +20,9 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * @version $Revision: 1.10 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ADD_SOURCE
@@ -29,18 +32,14 @@
 #include "../statics/integer.c"
 
 /**
- * This is the add operation.
- *
- * It calculates the sum of two summands.
+ * Adds two summands resulting in the sum.
  *
  * @param p0 the summand 0
  * @param p1 the summand 1
  * @param p2 the sum
- * @version $Revision: 1.9 $ $Date: 2004-02-11 00:11:16 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
  */
 void add(void* p0, void* p1, void* p2) {
-    
+
     struct integer* summand_0 = (struct integer*) p0;
     struct integer* summand_1 = (struct integer*) p1;
     struct integer* sum = (struct integer*) p2;

@@ -20,22 +20,8 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
- */
-
-#ifndef ARRAY_HANDLER_SOURCE
-#define ARRAY_HANDLER_SOURCE
-
-#include <stdlib.h>
-#include "../logger/log_handler.c"
-#include "../model/character_array_handler.c"
-#include "../model/double_array_handler.c"
-#include "../model/integer_array_handler.c"
-#include "../model/pointer_array_handler.c"
-
-/**
- * This is the array handler.
  *
- * It contains procedures for handling an array and its elements.
+ * This file handles an array.
  *
  * An array represents an allocated area in the computer's memory,
  * that can contain a number of abstract elements.
@@ -62,9 +48,19 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.20 $ $Date: 2004-03-29 21:54:13 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+#ifndef ARRAY_HANDLER_SOURCE
+#define ARRAY_HANDLER_SOURCE
+
+#include <stdlib.h>
+#include "../logger/log_handler.c"
+#include "../model/character_array_handler.c"
+#include "../model/double_array_handler.c"
+#include "../model/integer_array_handler.c"
+#include "../model/pointer_array_handler.c"
 
 //
 // Constants.

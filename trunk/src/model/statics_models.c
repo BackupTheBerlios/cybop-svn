@@ -20,23 +20,19 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
- */
-
-#ifndef STATICS_MODELS_SOURCE
-#define STATICS_MODELS_SOURCE
-
-/**
- * This is the statics models.
  *
- * It defines constants for static models.
+ * This file defines constants for static models.
  *
  * There are complex and primitive static models.
  * Complex models consist of other complex models and primitive models.
  * Primitive models are the final abstraction in software.
  *
- * @version $Revision: 1.6 $ $Date: 2004-03-31 15:52:06 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+#ifndef STATICS_MODELS_SOURCE
+#define STATICS_MODELS_SOURCE
 
 //
 // Operation models.

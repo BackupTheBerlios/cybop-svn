@@ -1,7 +1,7 @@
 /*
  * $RCSfile: internals.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -32,7 +32,7 @@
  * handling of various platforms and graphical user interfaces
  * such as X-Windows, Macintosh or MS Windows.
  *
- * @version $Revision: 1.2 $ $Date: 2004-02-08 12:39:47 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct internals {

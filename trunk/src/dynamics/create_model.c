@@ -20,6 +20,11 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file creates a transient model from a persistent model.
+ *
+ * @version $Revision: 1.8 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CREATE_MODEL_SOURCE
@@ -36,15 +41,6 @@
 #include "../statics/string_handler.c"
 #include "../statics/time_handler.c"
 #include "../statics/vector_handler.c"
-
-/**
- * This is the create model operation.
- *
- * It creates a statics or dynamics memory model from a cybol model.
- *
- * @version $Revision: 1.7 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 /**
  * Creates a memory model from a cybol model.

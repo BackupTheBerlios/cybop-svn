@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles models which represent statics or dynamics.
+ * This file handles a model which represents statics or dynamics.
  *
  * Model elements are accessed over their index or name.
  * They can also be accessed hierarchically, using a dot-separated name like:
@@ -38,7 +38,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.24 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

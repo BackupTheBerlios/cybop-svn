@@ -1,7 +1,7 @@
 /*
  * $RCSfile: statics_cybol_model_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -20,22 +20,19 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file handles a statics cybol file.
+ *
+ * It contains read and write procedures.
+ *
+ * @version $Revision: 1.6 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef STATICS_CYBOL_MODEL_HANDLER_SOURCE
 #define STATICS_CYBOL_MODEL_HANDLER_SOURCE
 
 //?? #include <libxml.h>
-
-/**
- * This is the statics cybol model handler.
- *
- * It can read and write CYBOL source files.
- * CYBOL's syntax is based on the Extensible Markup Language (XML).
- *
- * @version $Revision: 1.5 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 //
 // Statics cybol attribute.
@@ -372,4 +369,3 @@ void finalize_statics_cybol_model(void* p0, void* p1) {
 
 /* STATICS_CYBOL_MODEL_HANDLER_SOURCE */
 #endif
-

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: internals_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -20,6 +20,11 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file handles internals.
+ *
+ * @version $Revision: 1.5 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTERNALS_HANDLER_SOURCE
@@ -28,13 +33,6 @@
 #include "internals.c"
 #include "logger/log_handler.c"
 #include "x_windows/x_windows.c"
-
-/**
- * This is the internals handler.
- *
- * @version $Revision: 1.4 $ $Date: 2004-02-08 12:39:47 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 //
 // Internals.

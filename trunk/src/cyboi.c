@@ -20,6 +20,14 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This is the main file of the Cybernetics Oriented Interpreter (CYBOI).
+ *
+ * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
+ * which adhere to the Extended Markup Language (XML) syntax.
+ *
+ * @version $Revision: 1.14 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOI_SOURCE
@@ -30,22 +38,11 @@
 #include "internals.c"
 #include "logger/log_handler.c"
 #include "model/statics_models.c"
-#include "signal/signal_memory.c"
 #include "signal/signal_memory_handler.c"
 #include "x_windows/x_windows_handler.c"
 
 //?? Temporary for character screen testing.
 #include "character_screen_handler.c"
-
-/**
- * This is the Cybernetics Oriented Interpreter (CYBOI).
- *
- * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
- * which adhere to the Extended Markup Language (XML) syntax.
- *
- * @version $Revision: 1.13 $ $Date: 2004-03-31 15:52:06 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 /**
  * Shows the usage information.

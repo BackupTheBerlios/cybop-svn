@@ -20,21 +20,18 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file handles log messages.
+ * It writes log entries to an output, such as the screen.
+ *
+ * @version $Revision: 1.8 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LOG_HANDLER_SOURCE
 #define LOG_HANDLER_SOURCE
 
 #include <stdio.h>
-
-/**
- * This is a log handler.
- *
- * It writes log entries to an output, such as the screen.
- *
- * @version $Revision: 1.7 $ $Date: 2004-03-02 16:22:03 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 //
 // Constants.

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: character_screen_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -20,16 +20,8 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
- */
-
-#ifndef CHARACTER_SCREEN_HANDLER_SOURCE
-#define CHARACTER_SCREEN_HANDLER_SOURCE
-
-#include <stdio.h>
-#include "statics/vector.c"
-
-/**
- * This is the character screen handler.
+ *
+ * This file handles a character screen.
  *
  * It contains functionality for the input and output of data using a
  * character-based screen.
@@ -38,9 +30,14 @@
  * - Textual User Interface (TUI)
  * - Curses (termcap, ncurses)
  *
- * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+#ifndef CHARACTER_SCREEN_HANDLER_SOURCE
+#define CHARACTER_SCREEN_HANDLER_SOURCE
+
+#include <stdio.h>
 
 //
 // Character screen.

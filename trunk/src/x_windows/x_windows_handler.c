@@ -1,7 +1,7 @@
 /*
  * $RCSfile: x_windows_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -20,6 +20,13 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file handles graphics using x windows.
+ *
+ * It controls the input and output of x windows.
+ *
+ * @version $Revision: 1.12 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef X_WINDOWS_HANDLER_SOURCE
@@ -38,15 +45,6 @@
 #include <X11/Xutil.h>
 #include "../logger/log_handler.c"
 #include "../x_windows/x_windows.c"
-
-/**
- * This is the x windows handler.
- *
- * It controls the input and output of x windows.
- *
- * @version $Revision: 1.11 $ $Date: 2004-02-11 00:11:16 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 /**
  * Temporary! Initializes X-Windows testing variables.

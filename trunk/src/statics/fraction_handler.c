@@ -21,13 +21,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles fractions.
+ * This file handles a fraction.
+ *
  * A fraction consists of two integer numbers, a numerator and a denominator.
  *
  * For higher performance, it is mostly better to use floating point numbers
  * (float) which can be calculated by the Arithmetic Logic Unit (ALU).
  *
- * @version $Revision: 1.8 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

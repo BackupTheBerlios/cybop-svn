@@ -20,17 +20,8 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
- */
-
-#ifndef MAP_HANDLER_SOURCE
-#define MAP_HANDLER_SOURCE
-
-#include <string.h>
-#include "../logger/log_handler.c"
-#include "../model/array_handler.c"
-
-/**
- * This is the map handler.
+ *
+ * This file handles a map.
  *
  * A map is like a table. One column (array) contains the element names.
  * A second column (array) contains the actual element references.
@@ -44,9 +35,16 @@
  *
  * A map's elements can such be accessed over their name or index.
  *
- * @version $Revision: 1.21 $ $Date: 2004-03-31 15:52:06 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+#ifndef MAP_HANDLER_SOURCE
+#define MAP_HANDLER_SOURCE
+
+#include <string.h>
+#include "../logger/log_handler.c"
+#include "../model/array_handler.c"
 
 //
 // Constants.

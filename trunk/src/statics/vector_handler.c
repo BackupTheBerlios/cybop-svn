@@ -1,7 +1,7 @@
 /*
  * $RCSfile: vector_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -21,10 +21,11 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles vectors.
+ * This file handles a vector.
+ *
  * A vector contains the three coordinates: x, y, z.
  *
- * @version $Revision: 1.8 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -135,4 +136,3 @@ void finalize_vector_model(void* p0, void* p1) {
 
 /* VECTOR_HANDLER_SOURCE */
 #endif
-

@@ -20,15 +20,8 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
- */
-
-#ifndef INTEGER_ARRAY_HANDLER_SOURCE
-#define INTEGER_ARRAY_HANDLER_SOURCE
-
-#include "../logger/log_handler.c"
-
-/**
- * This is the integer array handler.
+ *
+ * This file handles an integer array.
  *
  * An array is a reserved (allocated) area in the computer memory.
  * A programming language like C provides primitive data types whose size
@@ -42,9 +35,14 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.5 $ $Date: 2004-03-31 15:52:06 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+#ifndef INTEGER_ARRAY_HANDLER_SOURCE
+#define INTEGER_ARRAY_HANDLER_SOURCE
+
+#include "../logger/log_handler.c"
 
 //
 // Integer array.

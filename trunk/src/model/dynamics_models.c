@@ -20,15 +20,8 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
- */
-
-#ifndef DYNAMICS_MODELS_SOURCE
-#define DYNAMICS_MODELS_SOURCE
-
-/**
- * This is the dynamics models.
  *
- * It defines constants for dynamic models.
+ * This file defines constants for dynamic models.
  *
  * Some knowledge about function pointers in the C programming language
  * is needed. See for instance the (German) tutorials:
@@ -37,9 +30,12 @@
  * http://home.arcor.de/cpp_kurs/cpp/le07/k2_09_d1.htm
  * ... or try a Google search.
  *
- * @version $Revision: 1.6 $ $Date: 2004-03-31 15:52:06 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+#ifndef DYNAMICS_MODELS_SOURCE
+#define DYNAMICS_MODELS_SOURCE
 
 //
 // Logics models.

@@ -20,6 +20,23 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file handles a signal memory.
+ *
+ * A signal memory is capable of storing signals.
+ * For each signal, the following meta information is stored:
+ * - signal
+ * - priority
+ * - language
+ *
+ * Signal processing procedures should be called in the following order:
+ * - receive
+ * - handle
+ * - send
+ * - reset
+ *
+ * @version $Revision: 1.25 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SIGNAL_MEMORY_HANDLER_SOURCE
@@ -39,20 +56,6 @@
 #include "../signal/signal_memory.c"
 #include "../statics/vector.c"
 #include "../x_windows/x_windows_handler.c"
-
-/**
- * This is the signal memory handler.
- *
- * It offers signal processing procedures which should be called in the
- * following order:
- * - receive
- * - handle
- * - send
- * - reset
- *
- * @version $Revision: 1.24 $ $Date: 2004-04-01 15:15:30 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
- */
 
 //
 // Constants.
@@ -87,6 +90,17 @@ static const int EIGHT_NUMBER = 8;
 
 /** The nine number. */
 static const int NINE_NUMBER = 9;
+
+...
+/** The signals. */
+void* signals;
+
+/** The abstractions. */
+void* abstractions;
+
+/** The priorities. */
+void* priorities;
+...
 
 //
 // Signal.
