@@ -23,13 +23,14 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 
 /**
  * This is a log handler.
  *
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.4 $ $Date: 2003-09-25 07:04:04 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-09-26 06:59:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,7 +73,7 @@ void log(int p0, void* p1) {
 
         void* l = get_log_level_name(p0);
         
-        printf(l + ": " + p1);
+        printf(strcat(strcat(l, ": "), p1));
     }
 }
 

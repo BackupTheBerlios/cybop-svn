@@ -29,7 +29,7 @@
  *
  * Signals can be stored in a memory.
  * 
- * @version $Revision: 1.4 $ $Date: 2003-09-25 07:04:04 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-09-26 06:59:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct signal {

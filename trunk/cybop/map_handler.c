@@ -22,6 +22,7 @@
  * - Cybernetics Oriented Programming -
  */
 
+#include <string.h>
 #include "array_handler.c"
 
 /**
@@ -29,7 +30,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.4 $ $Date: 2003-09-25 07:04:04 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-09-26 06:59:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -117,7 +118,7 @@ int get_map_size(int p0) {
  */
 void add_map_element(void* p0, void* p1, void* p2) {
 
-    void* n = determine_map_element_name(p0, p1);
+    void* n = get_map_element_name(p0, p1);
     set_map_element(p0, n, p2);
 }
 
@@ -134,7 +135,7 @@ void set_map_element(void* p0, void* p1, void* p2) {
     
     if (m != 0) {
         
-        int i = determine_next_map_element_index(m, p1);
+        int i = get_next_map_element_index(m, p1);
 
         m->names = set_array_element(m->names, i, p1);
         m->references = set_array_element(m->references, i, p2);
@@ -146,12 +147,12 @@ void set_map_element(void* p0, void* p1, void* p2) {
 }
 
 /**
- * Removes the map element with the index.
+ * Removes the map element at the index.
  *
  * @param p0 the map
  * @param p1 the index
  */
-void remove_map_element(void* p0, int p1) {
+void remove_map_element_at_index(void* p0, int p1) {
 
     struct map* m = (struct map*) p0;
     
@@ -172,21 +173,21 @@ void remove_map_element(void* p0, int p1) {
  * @param p0 the map
  * @param p1 the name
  */
-void remove_map_element(void* p0, void* p1) {
+void remove_map_element_with_name(void* p0, void* p1) {
 
     int i = get_map_element_index(p0, p1);
 
-    remove_map_element(p0, i);
+    remove_map_element_at_index(p0, i);
 }
 
 /**
- * Returns the map element with the index.
+ * Returns the map element at the index.
  *
  * @param p0 the map
  * @param p1 the index
  * @return the element
  */
-void* get_map_element(void* p0, int p1) {
+void* get_map_element_at_index(void* p0, int p1) {
 
     void* e = 0;
     struct map* m = (struct map*) p0;
@@ -210,11 +211,11 @@ void* get_map_element(void* p0, int p1) {
  * @param p1 the name
  * @return the element
  */
-void* get_map_element(void* p0, void* p1) {
+void* get_map_element_with_name(void* p0, void* p1) {
 
     int i = get_map_element_index(p0, p1);
 
-    return get_map_element(p0, i);
+    return get_map_element_at_index(p0, i);
 }
 
 /**
@@ -251,7 +252,7 @@ int get_map_element_index(void* p0, void* p1) {
 
                 // If a name equal to the searched one is found,
                 // then its index is the one to be returned.
-                if (name.equals((char[]) p1)) {
+                if (strcmp(name, p1) == 0) {
 
                     index = i;
                     break;
@@ -283,7 +284,7 @@ int get_map_element_index(void* p0, void* p1) {
  * @param p1 the name
  * @return the next index
  */
-int determine_next_map_element_index(void* p0, void* p1) {
+int get_next_map_element_index(void* p0, void* p1) {
 
     int index = -1;
     struct map* m = (struct map*) p0;
@@ -311,7 +312,7 @@ int determine_next_map_element_index(void* p0, void* p1) {
                 // If a name equal to the searched one is found,
                 // then its index is the one to be returned since
                 // this element will have to be replaced.
-                if (name.equals((char[]) p1)) {
+                if (strcmp(name, p1) == 0) {
 
                     index = i;
                     break;
@@ -337,7 +338,7 @@ int determine_next_map_element_index(void* p0, void* p1) {
 }
 
 /**
- * Determines the map element name.
+ * Returns the map element name.
  *
  * The given name is used as a word base for the new extended name.
  * Additionally, the new name will receive a number suffix.
@@ -348,7 +349,7 @@ int determine_next_map_element_index(void* p0, void* p1) {
  * @param p1 the base name
  * @return the name
  */
-void* determine_map_element_name(void* p0, void* p1) {
+void* get_map_element_name(void* p0, void* p1) {
 
     void* n = 0;
     char* index = java.lang.String.valueOf(get_map_element_count(p0, p1));
@@ -357,16 +358,16 @@ void* determine_map_element_name(void* p0, void* p1) {
 
         if (index != 0) {
 
-            n = p1 + "_" + index;
+            n = strcat(strcat(p1, "_"), index);
 
         } else {
 
-            log(ERROR_LOG_LEVEL, "Could not determine map element name. The index string is null.");
+            log(ERROR_LOG_LEVEL, "Could not get map element name. The index string is null.");
         }
 
     } else {
 
-        log(ERROR_LOG_LEVEL, "Could not determine map element name. The name is null.");
+        log(ERROR_LOG_LEVEL, "Could not get map element name. The name is null.");
     }
     
     return n;

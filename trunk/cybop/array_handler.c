@@ -27,7 +27,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.4 $ $Date: 2003-09-25 07:04:04 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-09-26 06:59:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,7 +59,7 @@ void* extend_array(void* p0) {
 
             while (i < old_length) {
 
-                a[i] = p0[i];
+                *a[i] = *p0[i];
 
                 i++;
             }
@@ -109,7 +109,7 @@ void* set_array_element(void* p0, int p1, void* p2) {
         }
 
         // Set element.
-        a[p1] = p2;
+        *a[p1] = p2;
 
     } else {
 

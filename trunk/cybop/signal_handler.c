@@ -22,6 +22,7 @@
  * - Cybernetics Oriented Programming -
  */
 
+#include <string.h>
 #include "signal.c"
 
 /**
@@ -33,7 +34,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.4 $ $Date: 2003-09-25 07:04:04 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-09-26 06:59:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,70 +43,70 @@
 //
 
 /** The signal. */
-static const char* SIGNAL = "signal";
+static const void* SIGNAL = "signal";
 
 //
 // Priorities.
 //
 
 /** The normal priority. */
-static const char* NORMAL_PRIORITY = "1";
+static const void* NORMAL_PRIORITY = "1";
 
 //
 // Languages.
 //
 
 /** The system internal (neuro) language. */
-static const char* NEURO_LANGUAGE = "neuro";
+static const void* NEURO_LANGUAGE = "neuro";
 
 /** The textual user interface (tui) language. */
-static const char* TUI_LANGUAGE = "tui";
+static const void* TUI_LANGUAGE = "tui";
 
 /** The mouse language. */
-static const char* MOUSE_LANGUAGE = "mouse";
+static const void* MOUSE_LANGUAGE = "mouse";
 
 /** The graphical user interface (gui) language. */
-static const char* GUI_LANGUAGE = "gui";
+static const void* GUI_LANGUAGE = "gui";
 
 /** The socket language. */
-static const char* SOCKET_LANGUAGE = "socket";
+static const void* SOCKET_LANGUAGE = "socket";
 
 /** The structured query language (sql). */
-static const char* SQ_LANGUAGE = "sq";
+static const void* SQ_LANGUAGE = "sq";
 
 /** The java messaging service (jms) language. */
-static const char* JMS_LANGUAGE = "jms";
+static const void* JMS_LANGUAGE = "jms";
 
 /** The remote method invocation (rmi) language. */
-static const char* RMI_LANGUAGE = "rmi";
+static const void* RMI_LANGUAGE = "rmi";
 
 /** The common object request broker architecture (corba) language. */
-static const char* CORBA_LANGUAGE = "corba";
+static const void* CORBA_LANGUAGE = "corba";
 
 /** The extensible markup language (xml). */
-static const char* XML_LANGUAGE = "xml";
+static const void* XML_LANGUAGE = "xml";
 
 /** The simple object access protocol (soap) language. */
-static const char* SOAP_LANGUAGE = "soap";
+static const void* SOAP_LANGUAGE = "soap";
 
 //
 // Actions.
 //
 
 /** The show system information action. */
-static const char* SHOW_SYSTEM_INFORMATION_ACTION = "show_system_information";
+static const void* SHOW_SYSTEM_INFORMATION_ACTION = "show_system_information";
 
 /** The startup action. */
-static const char* STARTUP_ACTION = "startup";
+static const void* STARTUP_ACTION = "startup";
 
 /** The shutdown action. */
-static const char* SHUTDOWN_ACTION = "shutdown";
+static const void* SHUTDOWN_ACTION = "shutdown";
 
 /** The receive action. */
-static const char* RECEIVE_ACTION = "receive";
+static const void* RECEIVE_ACTION = "receive";
 
 /** The send action. */
-static const char* SEND_ACTION = "send";
+static const void* SEND_ACTION = "send";
 
 //
 // Attributes.
@@ -152,7 +153,7 @@ void receive_signal(void* p0, void* p1) {
         
         if (tmp != 0) {
         
-            log(INFO_LOG_LEVEL, "Receive signal: " + tmp->predicate);
+            log(INFO_LOG_LEVEL, strcat("Receive signal: ", tmp->predicate));
 
             // Copy signal memory signal to the transporting signal given as parameter.
             s->priority = tmp->priority;
@@ -199,9 +200,9 @@ int handle_signal(void* p0, int p1) {
 
         if (a != 0) {
 
-            log(INFO_LOG_LEVEL, "Handle signal: " + a);
+            log(INFO_LOG_LEVEL, strcat("Handle signal: ", a));
 
-            if (a.equals("mouse_moved")) {
+            if (strcmp(a, "mouse_moved") == 0) {
 
 /*?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
                 Item statics = statics;
@@ -214,7 +215,7 @@ int handle_signal(void* p0, int p1) {
 
                 reset_signal(s);
 
-            } else if (a.equals("mouse_clicked")) {
+            } else if (strcmp(a, "mouse_clicked") == 0) {
 
                 void* statics = statics;
                 void* main_frame = get_item_element(statics, "main_frame");
@@ -231,7 +232,7 @@ int handle_signal(void* p0, int p1) {
                     log(ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is null.");
                 }
 
-            } else if (a.equals(SHOW_SYSTEM_INFORMATION_ACTION)) {
+            } else if (strcmp(a, SHOW_SYSTEM_INFORMATION_ACTION) == 0) {
 
 /*??
                 encode("system.controller.system_information_screen_model");
@@ -242,16 +243,16 @@ int handle_signal(void* p0, int p1) {
                 reset_signal(s);
 
 /*??
-            } else if (a.equals(RECALL_PATIENT_ACTION)) {
+            } else if (strcmp(a, RECALL_PATIENT_ACTION) == 0) {
                 
                 reset_signal(s);
 
-            } else if (a.equals(REMEMBER_PATIENT_ACTION)) {
+            } else if (strcmp(a, REMEMBER_PATIENT_ACTION) == 0) {
                 
                 reset_signal(s);
 
 */
-            } else if (a.equals(SEND_ACTION)) {
+            } else if (strcmp(a, SEND_ACTION) == 0) {
                 
                 struct item* o = (struct item*) s->object;
 
@@ -284,7 +285,7 @@ int handle_signal(void* p0, int p1) {
 
                 reset_signal(s);
                 
-            } else if (a.equals(STARTUP_ACTION)) {
+            } else if (strcmp(a, STARTUP_ACTION) == 0) {
                 
                 // Root (statics).
                 statics = create_object(s->object, CATEGORY);
@@ -294,11 +295,11 @@ int handle_signal(void* p0, int p1) {
                 s->predicate = SEND_ACTION;
                 s->object = get_map_element(((struct item*) statics)->children, "main_frame");
 
-            } else if (a.equals(SHUTDOWN_ACTION)) {
+            } else if (strcmp(a, SHUTDOWN_ACTION) == 0) {
                 
                 // Root (statics).
                 destroy_object(statics, s->object, CATEGORY);
-                sf = true;
+                sf = 1;
 
                 reset_signal(s);
             }
@@ -343,7 +344,7 @@ void send_signal(void* p0, void* p1) {
     
             if (tmp != 0) {
             
-                log(INFO_LOG_LEVEL, "Send signal: " + s->predicate);
+                log(INFO_LOG_LEVEL, strcat("Send signal: ", s->predicate));
 
                 // Copy transporting signal given as parameter to the signal memory signal.
                 tmp->priority = s->priority;
