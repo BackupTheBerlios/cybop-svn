@@ -34,6 +34,8 @@
  *   - compound
  *   - signal memory
  *   - internals
+ *   - unix socket
+ *   - x windows
  * - signal priorities
  * - signal languages
  * - cybol file
@@ -62,7 +64,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.4 $ $Date: 2004-06-27 00:59:43 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-06-29 13:57:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -321,10 +323,26 @@ static const int SIGNALS_ABSTRACTIONS_COUNTS_INDEX = 4;
 //
 
 /** The internals count. */
-static const int INTERNALS_COUNT = 1;
+static const int INTERNALS_COUNT = 2;
 
 /** The unix socket flag index. */
 static const int UNIX_SOCKET_FLAG_INDEX = 0;
+
+/** The unix socket index. */
+static const int UNIX_SOCKET_INDEX = 1;
+
+//
+// Unix socket.
+//
+
+/** The unix socket name array, pointer, count. */
+static const char UNIX_SOCKET_NAME_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'o', 'c', 'k', 'e', 't', '\0'};
+static const char* UNIX_SOCKET_NAME = UNIX_SOCKET_NAME_ARRAY;
+static const int UNIX_SOCKET_NAME_COUNT = 12;
+
+//
+// X windows.
+//
 
 //
 // Signal priorities.
