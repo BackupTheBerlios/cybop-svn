@@ -49,7 +49,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.13 $ $Date: 2003-04-29 07:15:17 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -384,7 +384,7 @@ public class Family extends System {
                 cl = new String(Family.SYSTEM_CLASS_NAME + "_" + java.lang.String.valueOf(i));
                 conf = new String(Family.SYSTEM_CONFIGURATION_LOCATION + "_" + java.lang.String.valueOf(i));
 
-//??                setChildItem(s, createComponent(c.getChildItem(cl, getDefaultSystemClassName())));
+//??                setChildItem(s, createChildItem(c.getChildItem(cl, getDefaultSystemClassName())));
 
                 i++;
             }
@@ -412,7 +412,7 @@ public class Family extends System {
                 s = new String(Family.EXTERNAL_SYSTEM + "_" + java.lang.String.valueOf(i));
                 cmd = new String(Family.EXTERNAL_SYSTEM_COMMAND + "_" + java.lang.String.valueOf(i));
 
-//??                setChildItem(s, createComponent(c.getChildItem(cmd, getDefaultExternalSystemCommand())));
+//??                setChildItem(s, createChildItem(c.getChildItem(cmd, getDefaultExternalSystemCommand())));
 
                 i++;
             }
@@ -452,7 +452,7 @@ public class Family extends System {
 
                 externalSystem = (ExternalSystem) getChildItem(s);
                 removeChildItem(s);
-                destroyComponent(externalSystem);
+                destroyChildItem(externalSystem);
                 
                 i++;
             }
@@ -489,7 +489,7 @@ public class Family extends System {
 
                 system = (System) getChildItem(s);
                 removeChildItem(s);
-                destroyComponent(system);
+                destroyChildItem(system);
 
                 i++;
             }

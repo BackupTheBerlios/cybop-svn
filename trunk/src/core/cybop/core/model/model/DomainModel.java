@@ -32,7 +32,7 @@ import cybop.core.system.chain.*;
 /**
  * This class represents a domain model.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Torsten Kunze <zone3@gmx.de>
  */
@@ -76,7 +76,7 @@ public class DomainModel extends Model {
 
         if (c != null) {
 
-            setChildItem(DomainModel.SYSTEM_INFORMATION, createComponent(getDefaultSystemInformation()));
+            setChildItem(DomainModel.SYSTEM_INFORMATION, createChildItem(getDefaultSystemInformation()));
 
         } else {
 
@@ -97,7 +97,7 @@ public class DomainModel extends Model {
 
             SystemInformation systemInformation = (SystemInformation) getChildItem(DomainModel.SYSTEM_INFORMATION);
             removeChildItem(DomainModel.SYSTEM_INFORMATION);
-            destroyComponent(systemInformation);
+            destroyChildItem(systemInformation);
 
         } else {
 

@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a system information tabbed pane.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationTabbedPane extends TabbedPane {
@@ -643,12 +643,12 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         super.initialize();
 
-        setChildItem(SystemInformationTabbedPane.IMAGE_PANEL, createComponent(getDefaultImagePanel()));
-        setChildItem(SystemInformationTabbedPane.COPYRIGHT_PANEL, createComponent(getDefaultCopyrightPanel()));
-        setChildItem(SystemInformationTabbedPane.AUTHORS_PANEL, createComponent(getDefaultAuthorsPanel()));
-        setChildItem(SystemInformationTabbedPane.HELPERS_PANEL, createComponent(getDefaultHelpersPanel()));
-        setChildItem(SystemInformationTabbedPane.INSPIRATIONS_PANEL, createComponent(getDefaultInspirationsPanel()));
-        setChildItem(SystemInformationTabbedPane.LICENSE_PANEL, createComponent(getDefaultLicensePanel()));
+        setChildItem(SystemInformationTabbedPane.IMAGE_PANEL, createChildItem(getDefaultImagePanel()));
+        setChildItem(SystemInformationTabbedPane.COPYRIGHT_PANEL, createChildItem(getDefaultCopyrightPanel()));
+        setChildItem(SystemInformationTabbedPane.AUTHORS_PANEL, createChildItem(getDefaultAuthorsPanel()));
+        setChildItem(SystemInformationTabbedPane.HELPERS_PANEL, createChildItem(getDefaultHelpersPanel()));
+        setChildItem(SystemInformationTabbedPane.INSPIRATIONS_PANEL, createChildItem(getDefaultInspirationsPanel()));
+        setChildItem(SystemInformationTabbedPane.LICENSE_PANEL, createChildItem(getDefaultLicensePanel()));
     }
 
     /**
@@ -658,27 +658,27 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         TextPanel licensePanel = (TextPanel) getChildItem(SystemInformationTabbedPane.LICENSE_PANEL);
         removeChildItem(SystemInformationTabbedPane.LICENSE_PANEL);
-        destroyComponent(licensePanel);
+        destroyChildItem(licensePanel);
 
         TextPanel inspirationsPanel = (TextPanel) getChildItem(SystemInformationTabbedPane.INSPIRATIONS_PANEL);
         removeChildItem(SystemInformationTabbedPane.INSPIRATIONS_PANEL);
-        destroyComponent(inspirationsPanel);
+        destroyChildItem(inspirationsPanel);
 
         TextPanel helpersPanel = (TextPanel) getChildItem(SystemInformationTabbedPane.HELPERS_PANEL);
         removeChildItem(SystemInformationTabbedPane.HELPERS_PANEL);
-        destroyComponent(helpersPanel);
+        destroyChildItem(helpersPanel);
 
         TextPanel authorsPanel = (TextPanel) getChildItem(SystemInformationTabbedPane.AUTHORS_PANEL);
         removeChildItem(SystemInformationTabbedPane.AUTHORS_PANEL);
-        destroyComponent(authorsPanel);
+        destroyChildItem(authorsPanel);
 
         TextPanel copyrightPanel = (TextPanel) getChildItem(SystemInformationTabbedPane.COPYRIGHT_PANEL);
         removeChildItem(SystemInformationTabbedPane.COPYRIGHT_PANEL);
-        destroyComponent(copyrightPanel);
+        destroyChildItem(copyrightPanel);
 
         ImagePanel imagePanel = (ImagePanel) getChildItem(SystemInformationTabbedPane.IMAGE_PANEL);
         removeChildItem(SystemInformationTabbedPane.IMAGE_PANEL);
-        destroyComponent(imagePanel);
+        destroyChildItem(imagePanel);
 
         super.finalizz();
     }

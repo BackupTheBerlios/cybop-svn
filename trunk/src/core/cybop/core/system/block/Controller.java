@@ -51,7 +51,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.13 $ $Date: 2003-04-28 21:19:55 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
@@ -470,15 +470,15 @@ public class Controller extends Block {
 
         super.initialize();
 
-        setChildItem(Controller.PROCESSOR, createComponent((String) getChildCategory(Controller.PROCESSOR_CATEGORY)));
-        setChildItem(Controller.DOMAIN_MODEL, createComponent((String) getChildCategory(Controller.DOMAIN_MODEL_CATEGORY)));
-        setChildItem(Controller.SYSTEM_USER_INTERFACE, createComponent((String) getChildCategory(Controller.SYSTEM_USER_INTERFACE_CATEGORY)));
-        setChildItem(Controller.MOUSE_MODEL, createComponent((String) getChildCategory(Controller.MOUSE_MODEL_CATEGORY)));
-        setChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE, createComponent((String) getChildCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_CATEGORY)));
-        setChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR, createComponent((String) getChildCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR_CATEGORY)));
-        setChildItem(Controller.TUI_TRANSLATOR, createComponent((String) getChildCategory(Controller.TUI_TRANSLATOR_CATEGORY)));
-        setChildItem(Controller.GUI_TRANSLATOR, createComponent((String) getChildCategory(Controller.GUI_TRANSLATOR_CATEGORY)));
-        setChildItem(Controller.SOCKET_TRANSLATOR, createComponent((String) getChildCategory(Controller.SOCKET_TRANSLATOR_CATEGORY)));
+        setChildItem(Controller.PROCESSOR, createChildItem((String) getChildCategory(Controller.PROCESSOR_CATEGORY)));
+        setChildItem(Controller.DOMAIN_MODEL, createChildItem((String) getChildCategory(Controller.DOMAIN_MODEL_CATEGORY)));
+        setChildItem(Controller.SYSTEM_USER_INTERFACE, createChildItem((String) getChildCategory(Controller.SYSTEM_USER_INTERFACE_CATEGORY)));
+        setChildItem(Controller.MOUSE_MODEL, createChildItem((String) getChildCategory(Controller.MOUSE_MODEL_CATEGORY)));
+        setChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE, createChildItem((String) getChildCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_CATEGORY)));
+        setChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR, createChildItem((String) getChildCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR_CATEGORY)));
+        setChildItem(Controller.TUI_TRANSLATOR, createChildItem((String) getChildCategory(Controller.TUI_TRANSLATOR_CATEGORY)));
+        setChildItem(Controller.GUI_TRANSLATOR, createChildItem((String) getChildCategory(Controller.GUI_TRANSLATOR_CATEGORY)));
+        setChildItem(Controller.SOCKET_TRANSLATOR, createChildItem((String) getChildCategory(Controller.SOCKET_TRANSLATOR_CATEGORY)));
     }
 
     /**
@@ -488,23 +488,23 @@ public class Controller extends Block {
 
         Item socketTranslator = getChildItem(Controller.SOCKET_TRANSLATOR);
         removeChildItem(Controller.SOCKET_TRANSLATOR);
-        destroyComponent((SocketTranslator) socketTranslator);
+        destroyChildItem((SocketTranslator) socketTranslator);
 
         Item guiTranslator = getChildItem(Controller.GUI_TRANSLATOR);
         removeChildItem(Controller.GUI_TRANSLATOR);
-        destroyComponent((Component) guiTranslator);
+        destroyChildItem((Component) guiTranslator);
 
         Item tuiTranslator = (TuiTranslator) getChildItem(Controller.TUI_TRANSLATOR);
         removeChildItem(Controller.TUI_TRANSLATOR);
-        destroyComponent((TuiTranslator) tuiTranslator);
+        destroyChildItem((TuiTranslator) tuiTranslator);
 
         Item systemInformationUserInterfaceTranslator = getChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);
         removeChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);
-        destroyComponent((SystemInformationUserInterfaceTranslator) systemInformationUserInterfaceTranslator);
+        destroyChildItem((SystemInformationUserInterfaceTranslator) systemInformationUserInterfaceTranslator);
 
         Item systemInformationUserInterface = getChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE);
         removeChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE);
-        destroyComponent((SystemInformationUserInterface) systemInformationUserInterface);
+        destroyChildItem((SystemInformationUserInterface) systemInformationUserInterface);
 
         Item mouseModel = getChildItem(Controller.MOUSE_MODEL);
         removeChildItem(Controller.MOUSE_MODEL);
@@ -520,7 +520,7 @@ public class Controller extends Block {
 
         Item processor = getChildItem(Controller.PROCESSOR);
         removeChildItem(Controller.PROCESSOR);
-        destroyComponent((Processor) processor);
+        destroyChildItem((Processor) processor);
 
         super.finalizz();
     }

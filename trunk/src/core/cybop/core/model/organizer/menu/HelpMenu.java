@@ -32,7 +32,7 @@ import cybop.core.model.organizer.menuitem.*;
 /**
  * This class represents a help menu.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class HelpMenu extends Menu {
@@ -190,7 +190,7 @@ public class HelpMenu extends Menu {
 
         super.initialize();
 
-        setChildItem(HelpMenu.ABOUT_MENU_ITEM, createComponent(getDefaultAboutMenuItem()));
+        setChildItem(HelpMenu.ABOUT_MENU_ITEM, createChildItem(getDefaultAboutMenuItem()));
     }
 
     /**
@@ -200,7 +200,7 @@ public class HelpMenu extends Menu {
 
         AboutMenuItem aboutMenuItem = (AboutMenuItem) getChildItem(HelpMenu.ABOUT_MENU_ITEM);
         removeChildItem(HelpMenu.ABOUT_MENU_ITEM);
-        destroyComponent(aboutMenuItem);
+        destroyChildItem(aboutMenuItem);
 
         super.finalizz();
     }

@@ -70,7 +70,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.20 $ $Date: 2003-04-29 07:15:17 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -165,17 +165,17 @@ public class Launcher extends Family {
 
                 l.setArguments(args);
 
-                java.lang.System.out.println("INFO: Set global launcher items.");
-//??                l.setChildItem(Launcher.CONFIGURATION, l.createChildItem(Launcher.CONFIGURATION_CATEGORY));
-                l.setChildItem(Launcher.CONFIGURATION, new cybop.core.system.chain.Configuration());
-                l.setChildItem(Launcher.LOG_RECORD, new cybop.core.system.chain.LogRecord());
-                l.setChildItem(Launcher.SIGNAL_MEMORY, new cybop.core.system.chain.SignalMemory());
+                java.lang.System.out.println("INFO: Globalize launcher.");
+                l.globalize(null, null, null);
 
                 java.lang.System.out.println("INFO: Configure launcher.");
                 l.configure();
 
                 java.lang.System.out.println("INFO: Initialize launcher.");
                 l.initialize();
+
+                java.lang.System.out.println("INFO: Position launcher.");
+                l.position();
 
                 // Set meta attributes for child.
                 // DO NOT use the normal method setChildItem(name, item);
@@ -192,21 +192,17 @@ public class Launcher extends Family {
 
                 l.setName(null);
 
+                java.lang.System.out.println("INFO: Deposition launcher.");
+                l.deposition();
+
                 java.lang.System.out.println("INFO: Finalize launcher.");
                 l.finalizz();
 
                 java.lang.System.out.println("INFO: Deconfigure launcher.");
                 l.deconfigure();
 
-                java.lang.System.out.println("INFO: Remove global launcher items.");
-                Item m = l.getChildItem(Component.SIGNAL_MEMORY);
-                l.removeChildItem(Component.SIGNAL_MEMORY);
-
-                Item h = l.getChildItem(Component.LOG_RECORD);
-                l.removeChildItem(Component.LOG_RECORD);
-
-                Item c = l.getChildItem(Component.CONFIGURATION);
-                l.removeChildItem(Component.CONFIGURATION);
+                java.lang.System.out.println("INFO: Deglobalize launcher.");
+                l.deglobalize();
 
                 l.setArguments(null);
 
@@ -648,7 +644,7 @@ public class Launcher extends Family {
         } else {
 
             setChildItem(Launcher.SYSTEM_CONFIGURATION_LOCATION, getArgument(Launcher.SYSTEM_CONFIGURATION_LOCATION_ARGUMENT, (String) getDefaultSystemConfigurationLocationCategory()));
-            setChildItem(Launcher.SCREEN, createComponent((String) getDefaultScreenCategory()));
+            setChildItem(Launcher.SCREEN, createChildItem((String) getDefaultScreenCategory()));
             setChildItem(Launcher.LIFECYCLE_ACTION, getArgument(Launcher.LIFECYCLE_ACTION_ARGUMENT, (String) getDefaultLifecycleActionCategory()));
             //?? Temporary until event handling doesn't need java awt EventQueue anymore.
             setJavaEventCatcher(createJavaEventCatcher());
@@ -668,7 +664,7 @@ public class Launcher extends Family {
         // from the java virtual machine to this system.
         Item shutdownHook = getChildItem(Launcher.SHUTDOWN_HOOK);
         removeChildItem(Launcher.SHUTDOWN_HOOK);
-        destroyComponent((ShutdownHook) shutdownHook);
+        destroyChildItem((ShutdownHook) shutdownHook);
 
         //?? Temporary until event handling doesn't need java awt EventQueue anymore.
         destroyJavaEventCatcher(getJavaEventCatcher());
@@ -1041,7 +1037,7 @@ public class Launcher extends Family {
     public void startupSystem(String sys, String c) throws Exception, NullPointerException {
 
         setupJavaEventHandling();
-        setSystem(Launcher.SYSTEM, createSystem(sys, c));
+        setSystem(Launcher.SYSTEM, createChildItem(sys/*??, c*/));
 
         Signal s = (Signal) createChildItem((String) getDefaultSignalCategory());
 
@@ -1110,7 +1106,7 @@ public class Launcher extends Family {
 
             // Remove and destroy the system the signal is coming from.
             removeSystem(ext);
-            destroySystem(system);
+            destroyChildItem(system);
 
             // If this launcher system has sent the exit signal, then set the
             // shutdown flag causing the waiting loop to break and by this to
@@ -1150,7 +1146,7 @@ public class Launcher extends Family {
             throw new NullPointerException("Could not shutdown system across socket. The signal is null.");
         }
 
-        ShutdownSocket socket = (ShutdownSocket) createComponent((String) getDefaultShutdownSocketCategory());
+        ShutdownSocket socket = (ShutdownSocket) createChildItem((String) getDefaultShutdownSocketCategory());
 
         if (socket != null) {
 
@@ -1162,7 +1158,7 @@ public class Launcher extends Family {
             throw new NullPointerException("Could not shutdown system using socket. The shutdown socket is null.");
         }
 
-        destroyComponent(socket);
+        destroyChildItem(socket);
     }
 
     /**
@@ -1280,7 +1276,7 @@ public class Launcher extends Family {
      */
     public void handle(java.awt.AWTEvent evt) throws Exception, NullPointerException {
 
-        log(Launcher.EVENT_LOG_LEVEL, evt.toString());
+        log(Launcher.SIGNAL_LOG_LEVEL, evt.toString());
 
         String l = null;
         String a = null;

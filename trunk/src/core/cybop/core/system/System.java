@@ -60,7 +60,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.11 $ $Date: 2003-04-29 07:15:17 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends Block implements 
@@ -140,99 +140,6 @@ public class System extends Block implements
     public java.lang.Object createJavaObject() {
 
         return new java.lang.Thread(this);
-    }
-
-    //
-    // Child management.
-    //
-
-    /**
-     * Creates a system.
-     *
-     * @param n the system class name
-     * @param l the configuration location
-     * @return the system
-     * @exception NullPointerException if the system class is null
-     * @exception NullPointerException if the system is null
-     */
-    public System createSystem(String n, String l) throws Exception, NullPointerException {
-
-        System s = null;
-
-        // If a system class name is set to null, then don't try to create the system.
-        if (n != null) {
-
-            // Find class by name.
-            Class cl = Class.forName((java.lang.String) n.getJavaObject());
-
-            if (cl != null) {
-
-                // Create system from given class.
-                s = (System) cl.newInstance();
-
-                if (s != null) {
-
-                    java.lang.System.out.println("INFO: Set global system items.");
-                    s.setChildItem(System.CONFIGURATION, createChildItem(new String("cybop.core.system.chain.Configuration")));
-                    s.setChildItem(System.LOG_RECORD, createChildItem(new String("cybop.core.system.chain.LogRecord")));
-                    s.setChildItem(System.SIGNAL_MEMORY, createChildItem(new String("cybop.core.system.chain.SignalMemory")));
-
-                    java.lang.System.out.println("INFO: Configure system.");
-                    s.configure();
-
-                    java.lang.System.out.println("INFO: Initialize system.");
-                    s.initialize();
-
-                } else {
-
-                    throw new NullPointerException("Could not create system. The system is null.");
-                }
-
-            } else {
-
-                throw new NullPointerException("Could not create system. The system class is null.");
-            }
-
-        } else {
-
-            java.lang.System.out.println("DEBUG: Could not create system. The system class name is null.");
-        }
-
-        return s;
-    }
-
-    /**
-     * Destroys the system.
-     *
-     * @param s the system
-     */
-    public void destroySystem(System s) throws Exception {
-
-        if (s != null) {
-
-            java.lang.System.out.println("INFO: Finalize system.");
-            s.finalizz();
-
-            java.lang.System.out.println("INFO: Deconfigure system.");
-            s.deconfigure();
-
-            java.lang.System.out.println("INFO: Remove global system items.");
-            SignalMemory m = (SignalMemory) s.getChildItem(System.SIGNAL_MEMORY);
-            s.removeChildItem(System.SIGNAL_MEMORY);
-            destroyChildItem(m);
-
-            LogRecord h = (LogRecord) s.getChildItem(System.LOG_RECORD);
-            s.removeChildItem(System.LOG_RECORD);
-            destroyChildItem(h);
-
-            Configuration c = (Configuration) s.getChildItem(System.CONFIGURATION);
-            s.removeChildItem(System.CONFIGURATION);
-            destroyChildItem(c);
-
-        } else {
-
-            java.lang.System.out.println("DEBUG: Could not destroy system. The system is null.");
-        }
     }
 
     //
@@ -330,6 +237,54 @@ public class System extends Block implements
     }
 
     //
+    // Globalization.
+    //
+
+    /**
+     * Globalizes this system.
+     *
+     * @param c the configuration
+     * @param r the log record
+     * @param m the signal memory
+     */
+    public void globalize(Item c, Item r, Item m) throws Exception {
+
+        // Normally, categories are set in the configure method. Since
+        // configure is called after globalize, the categories of global
+        // items have to be set before. They are needed because globalize
+        // creates the global items, if called on a system.
+        setChildCategory(System.CONFIGURATION_CATEGORY, getDefaultConfigurationCategory());
+        setChildCategory(System.LOG_RECORD_CATEGORY, getDefaultLogRecordCategory());
+        setChildCategory(System.SIGNAL_MEMORY_CATEGORY, getDefaultSignalMemoryCategory());
+
+        setChildItem(System.CONFIGURATION, createSimple((String) getChildCategory(System.CONFIGURATION_CATEGORY)));
+        setChildItem(System.LOG_RECORD, createSimple((String) getChildCategory(System.LOG_RECORD_CATEGORY)));
+        setChildItem(System.SIGNAL_MEMORY, createSimple((String) getChildCategory(System.SIGNAL_MEMORY_CATEGORY)));
+    }
+
+    /**
+     * Deglobalizes this system.
+     */
+    public void deglobalize() throws Exception {
+
+        Item signalMemory = getChildItem(System.SIGNAL_MEMORY);
+        removeChildItem(System.SIGNAL_MEMORY);
+        destroySimple(signalMemory);
+
+        Item logRecord = getChildItem(System.LOG_RECORD);
+        removeChildItem(System.LOG_RECORD);
+        destroySimple(logRecord);
+
+        Item configuration = getChildItem(System.CONFIGURATION);
+        removeChildItem(System.CONFIGURATION);
+        destroySimple(configuration);
+
+        removeChildCategory(System.SIGNAL_MEMORY_CATEGORY);
+        removeChildCategory(System.LOG_RECORD_CATEGORY);
+        removeChildCategory(System.CONFIGURATION_CATEGORY);
+    }
+
+    //
     // Configuration.
     //
 
@@ -419,13 +374,13 @@ public class System extends Block implements
 
         super.initialize();
 
-        setChildItem(System.CONTROLLER, createComponent((String) getChildCategory(System.CONTROLLER_CATEGORY)));
-        setChildItem(System.SOCKET_ADDRESS, createComponent((String) getChildCategory(System.SOCKET_ADDRESS_CATEGORY)));
-        setChildItem(System.IP6_ADDRESS, createComponent((String) getChildCategory(System.IP6_ADDRESS_CATEGORY)));
-        setChildItem(System.IP4_ADDRESS, createComponent((String) getChildCategory(System.IP4_ADDRESS_CATEGORY)));
+        setChildItem(System.CONTROLLER, createChildItem((String) getChildCategory(System.CONTROLLER_CATEGORY)));
+        setChildItem(System.SOCKET_ADDRESS, createChildItem((String) getChildCategory(System.SOCKET_ADDRESS_CATEGORY)));
+        setChildItem(System.IP6_ADDRESS, createChildItem((String) getChildCategory(System.IP6_ADDRESS_CATEGORY)));
+        setChildItem(System.IP4_ADDRESS, createChildItem((String) getChildCategory(System.IP4_ADDRESS_CATEGORY)));
         setChildItem(System.HOST_NAME, createChildItem((String) getChildCategory(System.HOST_NAME_CATEGORY)));
         setChildItem(System.DOMAIN_NAME, createChildItem((String) getChildCategory(System.DOMAIN_NAME_CATEGORY)));
-        setChildItem(System.USER, createComponent((String) getChildCategory(System.USER_CATEGORY)));
+        setChildItem(System.USER, createChildItem((String) getChildCategory(System.USER_CATEGORY)));
 
         //
         // Communication partners.
@@ -446,10 +401,10 @@ public class System extends Block implements
 
                 s = new String(System.SYSTEM + "_" + java.lang.String.valueOf(i));
 
-                setChildItem(s, createSystem(c.getChildItem(loc, new String("")), c.getChildItem(args, new String("")), c.getChildItem(wp, new String(""))));
+                setChildItem(s, createChildItem(c.getChildItem(loc, new String("")), c.getChildItem(args, new String("")), c.getChildItem(wp, new String(""))));
 
                 //?? Testing.
-                setChildItem(new String("system_test_user"), createSystem(c.getChildItem(loc, new String("cybop.core.system.system.User")), c.getChildItem(args, new String("")), c.getChildItem(wp, new String(""))));
+                setChildItem(new String("system_test_user"), createChildItem(c.getChildItem(loc, new String("cybop.core.system.system.User")), c.getChildItem(args, new String("")), c.getChildItem(wp, new String(""))));
                 
                 i++;
             }
@@ -488,7 +443,7 @@ public class System extends Block implements
 
                 system = (System) getChildItem(s);
                 removeChildItem(s);
-                destroySystem(system);
+                destroyChildItem(system);
                 
                 i++;
             }
@@ -505,7 +460,7 @@ public class System extends Block implements
 
         Item user = getChildItem(System.USER);
         removeChildItem(System.USER);
-        destroyComponent((User) user);
+        destroyChildItem((User) user);
 
         Item domainName = getChildItem(System.DOMAIN_NAME);
         removeChildItem(System.DOMAIN_NAME);
@@ -529,7 +484,7 @@ public class System extends Block implements
 
         Item controller = getChildItem(System.CONTROLLER);
         removeChildItem(System.CONTROLLER);
-        destroyComponent((Controller) controller);
+        destroyChildItem((Controller) controller);
 
         super.finalizz();
     }

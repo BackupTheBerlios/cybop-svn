@@ -28,6 +28,8 @@ import cybop.core.basic.Integer;
 import cybop.core.basic.String;
 //?? temporary!
 import cybop.core.model.principle.*;
+import cybop.core.signal.*;
+import cybop.core.system.chain.*;
 
 /**
  * This class represents a general abstract item.<br><br>
@@ -76,7 +78,7 @@ import cybop.core.model.principle.*;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.22 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -168,8 +170,67 @@ public class Item extends State {
     // Children names.
     //
 
+    /** The configuration. */
+    public static final String CONFIGURATION = new String("configuration");
+
+    /** The log record. */
+    public static final String LOG_RECORD = new String("log_record");
+
+    /** The log level. */
+    public static final String LOG_LEVEL = new String("log_level");
+
+    /** The signal memory. */
+    public static final String SIGNAL_MEMORY = new String("signal_memory");
+
+    /** The signal. */
+    public static final String SIGNAL = new String("signal");
+
     /** The action. */
     public static final String ACTION = new String("action");
+
+    //
+    // Children category names.
+    //
+
+    /** The configuration category. */
+    public static final String CONFIGURATION_CATEGORY = new String("configuration_category");
+
+    /** The log record category. */
+    public static final String LOG_RECORD_CATEGORY = new String("log_record_category");
+
+    /** The log level category. */
+    public static final String LOG_LEVEL_CATEGORY = new String("log_level_category");
+
+    /** The signal memory category. */
+    public static final String SIGNAL_MEMORY_CATEGORY = new String("signal_memory_category");
+
+    /** The signal category. */
+    public static final String SIGNAL_CATEGORY = new String("signal_category");
+
+    /** The action category. */
+    public static final String ACTION_CATEGORY = new String("action_category");
+
+    //
+    // Log levels.
+    //
+
+    /** The log level to turn off logging. */
+    public static final Integer OFF_LOG_LEVEL = new Integer(0);
+
+    /** The log level indicating a serious failure. */
+    public static final Integer ERROR_LOG_LEVEL = new Integer(1);
+
+    /** The log level indicating a potential problem. */
+    public static final Integer WARNING_LOG_LEVEL = new Integer(2);
+
+    /** The log level for informational messages. */
+    public static final Integer INFO_LOG_LEVEL = new Integer(3);
+
+    /** The log level providing tracing information. */
+    public static final Integer DEBUG_LOG_LEVEL = new Integer(4);
+
+    /** The log level printing all messages, including every signal occuring in the system. */
+    public static final Integer SIGNAL_LOG_LEVEL = new Integer(5);
 
     //
     // Children positions.
@@ -239,6 +300,70 @@ public class Item extends State {
         // since then one would especially need to call initialize
         // even for every primitive item (like String), being created.
         setJavaObject(createJavaObject());
+    }
+
+    //
+    // Default children categories.
+    //
+
+    /**
+     * Returns the default configuration category.
+     *
+     * @return the default configuration category
+     */
+    public Item getDefaultConfigurationCategory() {
+
+        return new String("cybop.core.system.chain.Configuration");
+    }
+
+    /**
+     * Returns the default log record category.
+     *
+     * @return the default log record category
+     */
+    public Item getDefaultLogRecordCategory() {
+
+        return new String("cybop.core.system.chain.LogRecord");
+    }
+
+    /**
+     * Returns the default log level category.
+     *
+     * @return the default log level category
+     */
+    public Item getDefaultLogLevelCategory() {
+
+        return Item.SIGNAL_LOG_LEVEL;
+    }
+
+    /**
+     * Returns the default signal memory category.
+     *
+     * @return the default signal memory category
+     */
+    public Item getDefaultSignalMemoryCategory() {
+
+        return new String("cybop.core.system.chain.SignalMemory");
+    }
+
+    /**
+     * Returns the default signal category.
+     *
+     * @return the default signal category
+     */
+    public Item getDefaultSignalCategory() {
+
+        return new String("cybop.core.signal.Signal");
+    }
+
+    /**
+     * Returns the default action category.
+     *
+     * @return the default action category
+     */
+    public Item getDefaultActionCategory() {
+
+        return null;
     }
 
     //
@@ -843,36 +968,22 @@ public class Item extends State {
     }
 
     //
-    // Default children.
+    // Child management.
     //
 
     /**
-     * Returns the default action.
+     * Creates a child.
      *
-     * @return the default action
-     */
-    public String getDefaultAction() {
-
-        return null;
-    }
-
-    //
-    // Child.
-    //
-
-    /**
-     * Creates a child item.
-     *
-     * @param n the child item category (class) name
-     * @return the child item
-     * @exception NullPointerException if the child item class is null
-     * @exception NullPointerException if the child item is null
+     * @param n the child category (class) name
+     * @return the child
+     * @exception NullPointerException if the child category is null
+     * @exception NullPointerException if the child is null
      */
     public Item createChildItem(String n) throws Exception, NullPointerException {
 
         Item i = null;
 
-        // If a child item category name is set to null, then don't try to create the item.
+        // If a child category name is set to null, then don't try to create the child.
         if (n != null) {
 
             // Find class by name.
@@ -885,43 +996,130 @@ public class Item extends State {
 
                 if (i != null) {
 
-                    java.lang.System.out.println("INFO: Initialize child item.");
+                    java.lang.System.out.println("INFO: Globalize child.");
+                    i.globalize(
+                        getChildItem(Item.CONFIGURATION),
+                        getChildItem(Item.LOG_RECORD),
+                        getChildItem(Item.SIGNAL_MEMORY)
+                    );
+
+                    java.lang.System.out.println("INFO: Configure child.");
+                    i.configure();
+
+                    java.lang.System.out.println("INFO: Initialize child.");
                     i.initialize();
 
+                    java.lang.System.out.println("INFO: Position child.");
+                    i.position();
+
                 } else {
-        
-                    throw new NullPointerException("Could not create child item. The child item is null.");
+
+                    throw new NullPointerException("Could not create child. The child is null.");
                 }
 
             } else {
 
-                throw new NullPointerException("Could not create child item. The child item class is null.");
+                throw new NullPointerException("Could not create child. The child category is null.");
             }
 
         } else {
 
-            java.lang.System.out.println("DEBUG: Could not create child item. The child item category name is null.");
+            java.lang.System.out.println("DEBUG: Could not create child. The child category name is null.");
         }
 
         return i;
     }
 
     /**
-     * Destroys the child item.
+     * Destroys the child.
      *
-     * @param i the child item
-     * @exception NullPointerException if the child item is null
+     * @param i the child
+     * @exception NullPointerException if the child is null
      */
     public void destroyChildItem(Item i) throws Exception {
 
         if (i != null) {
 
-            java.lang.System.out.println("INFO: Finalize child item.");
+            java.lang.System.out.println("INFO: Deposition child.");
+            i.deposition();
+
+            java.lang.System.out.println("INFO: Finalize child.");
+            i.finalizz();
+
+            java.lang.System.out.println("INFO: Deconfigure child.");
+            i.deconfigure();
+
+            java.lang.System.out.println("INFO: Deglobalize child.");
+            i.deglobalize();
+
+        } else {
+
+            java.lang.System.out.println("DEBUG: Could not destroy child. The child is null.");
+        }
+    }
+
+    /**
+     * Creates a child with simple lifecycle.
+     *
+     * @param n the child category (class) name
+     * @return the child
+     * @exception NullPointerException if the child category is null
+     * @exception NullPointerException if the child is null
+     */
+    public Item createSimple(String n) throws Exception, NullPointerException {
+
+        Item i = null;
+
+        // If a child category name is set to null, then don't try to create the child.
+        if (n != null) {
+
+            // Find class by name.
+            Class cl = Class.forName((java.lang.String) n.getJavaObject());
+
+            if (cl != null) {
+
+                // Create item from given class.
+                i = (Item) cl.newInstance();
+
+                if (i != null) {
+
+                    java.lang.System.out.println("INFO: Initialize child.");
+                    i.initialize();
+
+                } else {
+
+                    throw new NullPointerException("Could not create child. The child is null.");
+                }
+
+            } else {
+
+                throw new NullPointerException("Could not create child. The child category is null.");
+            }
+
+        } else {
+
+            java.lang.System.out.println("DEBUG: Could not create child with simple lifecycle. The child category name is null.");
+        }
+
+        return i;
+    }
+
+    /**
+     * Destroys the child with simple lifecycle.
+     *
+     * @param i the child
+     * @exception NullPointerException if the child is null
+     */
+    public void destroySimple(Item i) throws Exception {
+
+        if (i != null) {
+
+            java.lang.System.out.println("INFO: Finalize child.");
             i.finalizz();
 
         } else {
 
-            java.lang.System.out.println("DEBUG: Could not destroy child item. The child item is null.");
+            java.lang.System.out.println("DEBUG: Could not destroy child with simple lifecycle. The child is null.");
         }
     }
 
@@ -1010,7 +1208,7 @@ public class Item extends State {
     }
 
     //
-    // Child category.
+    // Child category management.
     //
 
     /**
@@ -1116,7 +1314,7 @@ public class Item extends State {
     }
 
     //
-    // Child position.
+    // Child position management.
     //
 
     /**
@@ -1240,7 +1438,15 @@ public class Item extends State {
     
             if (i != null) {
 
-                tn.add(i.getJavaTreeNode());
+                // It is bad coding style to use instanceof.
+                // However, since this method is a temporary solution anyway,
+                // it seems the simplest way to work with instanceof here.
+                // This check had to be inserted because signal items have
+                // children that are not child tree nodes of that signal.
+                if ((i instanceof Signal) == false) {
+
+                    tn.add(i.getJavaTreeNode());
+                }
 
             } else {
     
@@ -1268,9 +1474,14 @@ public class Item extends State {
     
             if (i != null) {
 
+                // It is bad coding style to use instanceof.
+                // However, since this method is a temporary solution anyway,
+                // it seems the simplest way to work with instanceof here.
                 // This check had to be inserted because signal items have
                 // children that are not child tree nodes of that signal.
-                if (tn.isNodeChild(i.getJavaTreeNode())) {
+                // Alternative:
+                // if (tn.isNodeChild(i.getJavaTreeNode())) {
+                if ((i instanceof Signal) == false) {
 
                     tn.remove(i.getJavaTreeNode());
                 }
@@ -1284,6 +1495,427 @@ public class Item extends State {
 
             throw new NullPointerException("Could not remove java tree node. The java tree node is null.");
         }
+    }
+
+    //
+    // Globalization.
+    //
+
+    /**
+     * Globalizes this item.
+     *
+     * @param c the configuration
+     * @param r the log record
+     * @param m the signal memory
+     */
+    public void globalize(Item c, Item r, Item m) throws Exception {
+
+        setChildItem(Item.CONFIGURATION, c);
+        setChildItem(Item.LOG_RECORD, r);
+        setChildItem(Item.SIGNAL_MEMORY, m);
+    }
+
+    /**
+     * Deglobalizes this item.
+     */
+    public void deglobalize() throws Exception {
+
+        removeChildItem(Item.CONFIGURATION);
+        removeChildItem(Item.LOG_RECORD);
+        removeChildItem(Item.SIGNAL_MEMORY);
+    }
+
+    //
+    // Configuration.
+    //
+
+    /**
+     * Configures this item.
+     *
+     * @exception NullPointerException if the item is null
+     */
+    public void configure() throws Exception, NullPointerException {
+
+        Configuration c = (Configuration) getChildItem(Item.CONFIGURATION);
+
+        if (c != null) {
+
+            setChildCategory(Item.LOG_LEVEL_CATEGORY, c.getChildItem(Item.LOG_LEVEL_CATEGORY, getDefaultLogLevelCategory()));
+            setChildCategory(Item.SIGNAL_CATEGORY, c.getChildItem(Item.SIGNAL_CATEGORY, getDefaultSignalCategory()));
+
+        } else {
+
+            throw new NullPointerException("Could not configure item. The configuration is null.");
+        }
+    }
+
+    /**
+     * Deconfigures this item.
+     *
+     * @exception NullPointerException if the configuration is null
+     */
+    public void deconfigure() throws Exception, NullPointerException {
+
+        Configuration c = (Configuration) getChildItem(Item.CONFIGURATION);
+
+        if (c != null) {
+
+            c.setChildItem(Item.SIGNAL_CATEGORY, getChildCategory(Item.SIGNAL_CATEGORY));
+            removeChildCategory(Item.SIGNAL_CATEGORY);
+
+            c.setChildItem(Item.LOG_LEVEL_CATEGORY, getChildCategory(Item.LOG_LEVEL_CATEGORY));
+            removeChildCategory(Item.LOG_LEVEL_CATEGORY);
+
+        } else {
+
+            throw new NullPointerException("Could not deconfigure item. The configuration is null.");
+        }
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this item.
+     */
+    public void initialize() throws Exception {
+
+        setChildItem(Item.LOG_LEVEL, getChildCategory(Item.LOG_LEVEL_CATEGORY));
+        setChildItem(Item.ACTION, (String) getDefaultActionCategory());
+    }
+
+    /**
+     * Finalizes this item.
+     */
+    public void finalizz() throws Exception {
+
+        String action = (String) getChildItem(Item.ACTION);
+        removeChildItem(Item.ACTION);
+        destroyChildItem(action);
+
+        Item logLevel = getChildItem(Item.LOG_LEVEL);
+        removeChildItem(Item.LOG_LEVEL);
+        destroyChildItem((Integer) logLevel);
+
+        // The following objects MUST NOT be destroyed here!
+        // They actually belong into a destructor method (if it existed in java).
+        //
+        // On shutdown, items call the finalize BEFORE the deglobalize method.
+        // If the children container or java tree node were destroyed here,
+        // an exception would occure since the deglobalize method still tries
+        // to remove e.g. log record and configuration and such accesses the children
+        // container and java tree node of this item AFTER finalize has been called.
+        //
+        // However, the code to destroy these objects would look like this:
+
+        // java.lang.Object javaObject = getJavaObject();
+        // setJavaObject(null);
+        // destroyJavaObject(javaObject);
+
+        // javax.swing.tree.DefaultMutableTreeNode javaTreeNode = getJavaTreeNode();
+        // setJavaTreeNode(null);
+        // destroyJavaTreeNode(javaTreeNode);
+
+        // java.util.Map children = getChildren();
+        // setChildren(null);
+        // destroyChildren(children);
+
+        // String name = getName();
+        // setName(null);
+        // destroyName(name);
+    }
+
+    //
+    // Positioning.
+    //
+
+    /**
+     * Positions this item.
+     *
+     * @exception NullPointerException if the configuration is null
+     */
+    public void position() throws Exception, NullPointerException {
+
+        Configuration c = (Configuration) getChildItem(Item.CONFIGURATION);
+
+        if (c != null) {
+
+//??            setChildPosition(Item.SIGNAL_POSITION, c.getChildItem(Item.SIGNAL_POSITION, getDefaultSignalPosition()));
+
+        } else {
+
+            throw new NullPointerException("Could not position item. The configuration is null.");
+        }
+    }
+
+    /**
+     * Depositions this item.
+     *
+     * @exception NullPointerException if the configuration is null
+     */
+    public void deposition() throws Exception, NullPointerException {
+
+        Configuration c = (Configuration) getChildItem(Item.CONFIGURATION);
+
+        if (c != null) {
+
+/*??
+            c.setChildItem(Item.SIGNAL_POSITION, getChildPosition(Item.SIGNAL_POSITION));
+            removeChildPosition(Item.SIGNAL_POSITION);
+*/
+
+        } else {
+
+            throw new NullPointerException("Could not deposition item. The configuration is null.");
+        }
+    }
+
+    //
+    // Logging.
+    //
+
+    /**
+     * Logs a message with no arguments.
+     *
+     * @param l the log level
+     * @param m the message
+     */
+    public void log(Integer l, java.lang.String m) throws Exception {
+
+        log(l, m, null);
+    }
+
+    /**
+     * Logs a message with associated throwable information.
+     *
+     * @param l the log level
+     * @param m the message
+     * @param t the throwable
+     * @exception NullPointerException if the log level is null
+     * @exception NullPointerException if the log record is null
+     */
+    public void log(Integer l, java.lang.String m, java.lang.Throwable t) throws Exception, NullPointerException {
+
+        if (l != null) {
+
+            if (l.isSmallerThanOrEqualTo((Integer) getChildItem(Item.LOG_LEVEL))) {
+
+                LogRecord r = (LogRecord) getChildItem(Item.LOG_RECORD);
+
+                if (r != null) {
+
+                    r.setChildItem(LogRecord.MESSAGE, new String(m));
+                    r.setThrowable(t);
+
+                } else {
+                    
+                    throw new NullPointerException("Could not log message. The log record is null.");
+                }
+    
+                log(r);
+            }
+
+        } else {
+            
+            throw new NullPointerException("Could not log message. The log level is null.");
+        }
+    }
+
+    /**
+     * Logs a log record.
+     *
+     * @param r the log record
+     * @exception NullPointerException if the log record is null
+     */
+    public void log(LogRecord r) throws Exception, NullPointerException {
+
+/*??
+        cybop.core.system.region.controller.Encoder e = (cybop.core.system.region.controller.Encoder) getChildItem(Item.ENCODER);
+
+        if (e != null) {
+
+            e.drive(r);
+            
+        } else {
+
+            /*??
+             * Temporary replacement for logging.
+             * The motor (output mechanism) has to be assigned here later.
+             * For now, the system console is used for message output.
+             */
+            if (r.getThrowable() != null) {
+
+                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChildItem(LogRecord.MESSAGE)).getJavaObject() + "\n" + r.getThrowable());
+                r.getThrowable().printStackTrace();
+
+            } else {
+
+                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChildItem(LogRecord.MESSAGE)).getJavaObject());
+            }
+
+/*??
+            throw new NullPointerException("Could not log record. The motor is null.");
+        }
+*/
+    }
+
+    /**
+     * Logs a message with associated throwable information.
+     *
+     * Displays a graphical message dialog, in addition to the pure logging
+     * being done in the parent class's log method.
+     *
+     * @param lev the level
+     * @param msg the message
+     * @param t the throwable
+     */
+/*??
+    public void log(Level lev, String msg, Throwable t) throws Exception {
+
+        super.log(lev, msg, t);
+
+        DisplayManager dm = getDisplayManager();
+
+        if (dm != null) {
+
+//??            dm.showMessage(lev, msg, t);
+
+            //?? Example for localization!
+            //?? showError(e.getLocalizedSourceControlName(), e.getLocalizedMessage());
+
+        } else {
+
+            // Don't throw exception here cause not all controllers/applications
+            // use a graphical display, i.e. not all have a display manager.
+        }
+    }
+
+    /**
+     * Shows a message dialog.
+     *
+     * @param lev the level
+     * @param msg the message
+     * @param t the throwable
+     */
+/*??
+    public void showMessage(Level lev, String msg, Throwable t) throws Exception {
+    }
+*/
+
+    //
+    // Signal storage.
+    //
+
+    /**
+     * Store the signal by keeping it in the signal memory.
+     *
+     * @param s the signal
+     * @exception NullPointerException if the signal memory is null
+     */
+    public void storeSignal(Signal s) throws NullPointerException {
+
+        SignalMemory mem = (SignalMemory) getChildItem(Item.SIGNAL_MEMORY);
+
+        if (mem != null) {
+
+            String n = mem.buildName(Item.SIGNAL);
+
+            mem.setChildItem(n, s);
+
+        } else {
+
+            throw new NullPointerException("Could not store signal. The signal memory is null.");
+        }
+    }
+
+    /**
+     * Fetch the next signal to be handled from the signal memory.
+     *
+     * The signal is determined by comparing the priority levels of all signals.
+     * Of these highest priority signals, the one which was first queued will
+     * be returned.
+     *
+     * @return the signal
+     * @exception NullPointerException if the signal memory is null
+     * @exception NullPointerException if a child is null
+     * @exception NullPointerException if the priority is null
+     */
+    public Signal fetchSignal() throws NullPointerException {
+
+        Signal s = null;
+        SignalMemory mem = (SignalMemory) getChildItem(Item.SIGNAL_MEMORY);
+
+        if (mem != null) {
+
+            Item[] c = mem.getChildren();
+            
+            if (c != null) {
+
+                int index = 0;
+                int no = mem.getChildrenNumber();
+                Signal child = null;
+                String n = null;
+                Integer priority = null;
+                Integer max = new Integer(0);
+    
+                while (index < no) {
+    
+                    child = (Signal) c[index];
+    
+                    if (child != null) {
+    
+                        n = child.getName();
+                        
+                        if (n != null) {
+    
+                            if (n.startsWith(Item.SIGNAL)) {
+
+                                priority = (Integer) child.getChildItem(Signal.PRIORITY);
+
+                                if (priority != null) {
+    
+                                    if (priority.isGreaterThan(max)) {
+    
+                                        max = priority;
+                                        s = child;
+                                    }
+
+                                } else {
+
+                                    throw new NullPointerException("Could not fetch signal. The priority is null.");
+                                }
+                            }
+    
+                        } else {
+            
+                            throw new NullPointerException("Could not fetch signal. The name is null.");
+                        }
+        
+                    } else {
+    
+                        throw new NullPointerException("Could not fetch signal. A child is null.");
+                    }
+    
+                    index++;
+                }
+
+                if (s != null) {
+
+                    mem.removeChildItem(s.getName());
+                }
+
+            } else {
+    
+                throw new NullPointerException("Could not place signal. The signal memory is null.");
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not place signal. The signal memory is null.");
+        }
+
+        return s;
     }
 
     //
@@ -1696,59 +2328,6 @@ public class Item extends State {
         }
 
         return i;
-    }
-
-    //
-    // Initializable.
-    //
-
-    /**
-     * Initializes this item.
-     */
-    public void initialize() throws Exception {
-        
-        super.initialize();
-
-        setChildItem(Item.ACTION, getDefaultAction());
-    }
-
-    /**
-     * Finalizes this item.
-     */
-    public void finalizz() throws Exception {
-
-        String action = (String) getChildItem(Item.ACTION);
-        removeChildItem(Item.ACTION);
-        destroyChildItem(action);
-
-        // The following objects MUST NOT be destroyed here!
-        // They actually belong into a destructor method (if it existed in java).
-        //
-        // On shutdown, items call the finalize BEFORE the deglobalize method.
-        // If the children container or java tree node were destroyed here,
-        // an exception would occure since the deglobalize method still tries
-        // to remove e.g. log record and configuration and such accesses the children
-        // container and java tree node of this item AFTER finalize has been called.
-        //
-        // However, the code to destroy these objects would look like this:
-
-        // java.lang.Object javaObject = getJavaObject();
-        // setJavaObject(null);
-        // destroyJavaObject(javaObject);
-
-        // javax.swing.tree.DefaultMutableTreeNode javaTreeNode = getJavaTreeNode();
-        // setJavaTreeNode(null);
-        // destroyJavaTreeNode(javaTreeNode);
-
-        // java.util.Map children = getChildren();
-        // setChildren(null);
-        // destroyChildren(children);
-
-        // String name = getName();
-        // setName(null);
-        // destroyName(name);
-
-        super.finalizz();
     }
 
     //

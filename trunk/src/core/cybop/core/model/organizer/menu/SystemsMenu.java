@@ -32,7 +32,7 @@ import cybop.core.model.organizer.menuitem.*;
 /**
  * This class represents a systems menu.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemsMenu extends Menu {
@@ -190,7 +190,7 @@ public class SystemsMenu extends Menu {
 
         super.initialize();
 
-        setChildItem(SystemsMenu.EXIT_MENU_ITEM, createComponent(getDefaultExitMenuItem()));
+        setChildItem(SystemsMenu.EXIT_MENU_ITEM, createChildItem(getDefaultExitMenuItem()));
     }
 
     /**
@@ -200,7 +200,7 @@ public class SystemsMenu extends Menu {
 
         ExitMenuItem exitMenuItem = (ExitMenuItem) getChildItem(SystemsMenu.EXIT_MENU_ITEM);
         removeChildItem(SystemsMenu.EXIT_MENU_ITEM);
-        destroyComponent(exitMenuItem);
+        destroyChildItem(exitMenuItem);
 
         super.finalizz();
     }

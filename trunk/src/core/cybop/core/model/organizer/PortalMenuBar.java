@@ -32,7 +32,7 @@ import cybop.core.model.organizer.menu.*;
 /**
  * This class represents a portal menu bar.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalMenuBar extends MenuBar {
@@ -957,7 +957,7 @@ public class PortalMenuBar extends MenuBar {
         m.add(createExitMenuItem());
 */
 
-        setChildItem(PortalMenuBar.SYSTEMS_MENU, createComponent(getDefaultSystemsMenu()));
+        setChildItem(PortalMenuBar.SYSTEMS_MENU, createChildItem(getDefaultSystemsMenu()));
 /*??
         setChildItem(PortalMenuBar.EDITOR_MENU, createChildItem(getDefaultEditorMenu()));
         setChildItem(PortalMenuBar.VIEW_MENU, createChildItem(getDefaultViewMenu()));
@@ -965,7 +965,7 @@ public class PortalMenuBar extends MenuBar {
         setChildItem(PortalMenuBar.SETTINGS_MENU, createChildItem(getDefaultSettingsMenu()));
         setChildItem(PortalMenuBar.WINDOW_MENU, createChildItem(getDefaultWindowMenu()));
 */
-        setChildItem(PortalMenuBar.HELP_MENU, createComponent(getDefaultHelpMenu()));
+        setChildItem(PortalMenuBar.HELP_MENU, createChildItem(getDefaultHelpMenu()));
     }
 
     /**
@@ -975,7 +975,7 @@ public class PortalMenuBar extends MenuBar {
 
         HelpMenu helpMenu = (HelpMenu) getChildItem(PortalMenuBar.HELP_MENU);
         removeChildItem(PortalMenuBar.HELP_MENU);
-        destroyComponent(helpMenu);
+        destroyChildItem(helpMenu);
 
 /*??
         removeChildItem(PortalMenuBar.WINDOW_MENU);
@@ -996,7 +996,7 @@ public class PortalMenuBar extends MenuBar {
 
         SystemsMenu systemsMenu = (SystemsMenu) getChildItem(PortalMenuBar.SYSTEMS_MENU);
         removeChildItem(PortalMenuBar.SYSTEMS_MENU);
-        destroyComponent(systemsMenu);
+        destroyChildItem(systemsMenu);
     }
 }
 

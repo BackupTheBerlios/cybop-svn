@@ -34,7 +34,7 @@ import cybop.core.model.organizer.*;
 /**
  * This class represents a user interface.
  *
- * @version $Revision: 1.8 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class UserInterface extends Model {
@@ -1134,10 +1134,10 @@ public class UserInterface extends Model {
 */
         setChildItem(UserInterface.TITLE, getDefaultTitle());
         setChildItem(UserInterface.ICON, getDefaultIcon());
-        setChildItem(UserInterface.MENU_BAR, createComponent(getDefaultMenuBar()));
-        setChildItem(UserInterface.TOOL_BAR, createComponent(getDefaultToolBar()));
-        setChildItem(UserInterface.CONTENTS_PANEL, createComponent(getDefaultContentsPanel()));
-        setChildItem(UserInterface.STATUS_BAR, createComponent(getDefaultStatusBar()));
+        setChildItem(UserInterface.MENU_BAR, createChildItem(getDefaultMenuBar()));
+        setChildItem(UserInterface.TOOL_BAR, createChildItem(getDefaultToolBar()));
+        setChildItem(UserInterface.CONTENTS_PANEL, createChildItem(getDefaultContentsPanel()));
+        setChildItem(UserInterface.STATUS_BAR, createChildItem(getDefaultStatusBar()));
         setChildItem(UserInterface.RESIZABLE_FLAG, getDefaultResizableFlag());
     }
 
@@ -1153,19 +1153,19 @@ public class UserInterface extends Model {
 
         StatusBar statusBar = (StatusBar) getChildItem(UserInterface.STATUS_BAR);
         removeChildItem(UserInterface.STATUS_BAR);
-        destroyComponent(statusBar);
+        destroyChildItem(statusBar);
 
         ContentsPanel contentsPanel = (ContentsPanel) getChildItem(UserInterface.CONTENTS_PANEL);
         removeChildItem(UserInterface.CONTENTS_PANEL);
-        destroyComponent(contentsPanel);
+        destroyChildItem(contentsPanel);
 
         ToolBar toolBar = (ToolBar) getChildItem(UserInterface.TOOL_BAR);
         removeChildItem(UserInterface.TOOL_BAR);
-        destroyComponent(toolBar);
+        destroyChildItem(toolBar);
 
         MenuBar menuBar = (MenuBar) getChildItem(UserInterface.MENU_BAR);
         removeChildItem(UserInterface.MENU_BAR);
-        destroyComponent(menuBar);
+        destroyChildItem(menuBar);
 
         String icon = (String) getChildItem(UserInterface.ICON);
         removeChildItem(UserInterface.ICON);

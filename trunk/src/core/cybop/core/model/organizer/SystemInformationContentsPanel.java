@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a system information contents panel.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationContentsPanel extends ContentsPanel {
@@ -385,9 +385,9 @@ public class SystemInformationContentsPanel extends ContentsPanel {
 
         super.initialize();
 
-        setChildItem(SystemInformationContentsPanel.HEAD_PANEL, createComponent(getDefaultHeadPanel()));
-        setChildItem(SystemInformationContentsPanel.TABBED_PANE, createComponent(getDefaultTabbedPane()));
-        setChildItem(SystemInformationContentsPanel.BUTTON_PANEL, createComponent(getDefaultButtonPanel()));
+        setChildItem(SystemInformationContentsPanel.HEAD_PANEL, createChildItem(getDefaultHeadPanel()));
+        setChildItem(SystemInformationContentsPanel.TABBED_PANE, createChildItem(getDefaultTabbedPane()));
+        setChildItem(SystemInformationContentsPanel.BUTTON_PANEL, createChildItem(getDefaultButtonPanel()));
     }
 
     /**
@@ -397,15 +397,15 @@ public class SystemInformationContentsPanel extends ContentsPanel {
 
         ButtonPanel buttonPanel = (ButtonPanel) getChildItem(SystemInformationContentsPanel.BUTTON_PANEL);
         removeChildItem(SystemInformationContentsPanel.BUTTON_PANEL);
-        destroyComponent(buttonPanel);
+        destroyChildItem(buttonPanel);
 
         TabbedPane tabbedPane = (TabbedPane) getChildItem(SystemInformationContentsPanel.TABBED_PANE);
         removeChildItem(SystemInformationContentsPanel.TABBED_PANE);
-        destroyComponent(tabbedPane);
+        destroyChildItem(tabbedPane);
 
         HeadPanel headPanel = (HeadPanel) getChildItem(SystemInformationContentsPanel.HEAD_PANEL);
         removeChildItem(SystemInformationContentsPanel.HEAD_PANEL);
-        destroyComponent(headPanel);
+        destroyChildItem(headPanel);
 
         super.finalizz();
     }

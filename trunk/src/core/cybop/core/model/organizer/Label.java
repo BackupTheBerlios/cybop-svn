@@ -32,7 +32,7 @@ import cybop.core.model.*;
 /**
  * This class represents a label.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Label extends Organizer {
@@ -468,7 +468,7 @@ public class Label extends Organizer {
 
         super.initialize();
 
-        setChildItem(Label.FONT, createComponent(getDefaultFont()));
+        setChildItem(Label.FONT, createChildItem(getDefaultFont()));
         setChildItem(Label.TEXT, getDefaultText());
         setChildItem(Label.HORIZONTAL_TEXT_POSITION, getDefaultHorizontalTextPosition());
         setChildItem(Label.VERTICAL_TEXT_POSITION, getDefaultVerticalTextPosition());
@@ -493,7 +493,7 @@ public class Label extends Organizer {
 
         Font font = (Font) getChildItem(Label.FONT);
         removeChildItem(Label.FONT);
-        destroyComponent(font);
+        destroyChildItem(font);
 
         super.finalizz();
     }

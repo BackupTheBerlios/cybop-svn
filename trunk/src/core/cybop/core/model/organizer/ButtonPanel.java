@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a button panel.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ButtonPanel extends Panel {
@@ -790,14 +790,14 @@ public class ButtonPanel extends Panel {
 
         super.initialize();
 
-        setChildItem(ButtonPanel.OK_BUTTON, createComponent(getDefaultOkButton()));
-        setChildItem(ButtonPanel.CANCEL_BUTTON, createComponent(getDefaultCancelButton()));
-        setChildItem(ButtonPanel.YES_BUTTON, createComponent(getDefaultYesButton()));
-        setChildItem(ButtonPanel.NO_BUTTON, createComponent(getDefaultNoButton()));
-        setChildItem(ButtonPanel.APPLY_BUTTON, createComponent(getDefaultApplyButton()));
-        setChildItem(ButtonPanel.RESET_BUTTON, createComponent(getDefaultResetButton()));
-        setChildItem(ButtonPanel.HELP_BUTTON, createComponent(getDefaultHelpButton()));
-        setChildItem(ButtonPanel.CLOSE_BUTTON, createComponent(getDefaultCloseButton()));
+        setChildItem(ButtonPanel.OK_BUTTON, createChildItem(getDefaultOkButton()));
+        setChildItem(ButtonPanel.CANCEL_BUTTON, createChildItem(getDefaultCancelButton()));
+        setChildItem(ButtonPanel.YES_BUTTON, createChildItem(getDefaultYesButton()));
+        setChildItem(ButtonPanel.NO_BUTTON, createChildItem(getDefaultNoButton()));
+        setChildItem(ButtonPanel.APPLY_BUTTON, createChildItem(getDefaultApplyButton()));
+        setChildItem(ButtonPanel.RESET_BUTTON, createChildItem(getDefaultResetButton()));
+        setChildItem(ButtonPanel.HELP_BUTTON, createChildItem(getDefaultHelpButton()));
+        setChildItem(ButtonPanel.CLOSE_BUTTON, createChildItem(getDefaultCloseButton()));
     }
 
     /**
@@ -807,35 +807,35 @@ public class ButtonPanel extends Panel {
 
         CloseButton closeButton = (CloseButton) getChildItem(ButtonPanel.CLOSE_BUTTON);
         removeChildItem(ButtonPanel.CLOSE_BUTTON);
-        destroyComponent(closeButton);
+        destroyChildItem(closeButton);
 
         HelpButton helpButton = (HelpButton) getChildItem(ButtonPanel.HELP_BUTTON);
         removeChildItem(ButtonPanel.HELP_BUTTON);
-        destroyComponent(helpButton);
+        destroyChildItem(helpButton);
 
         ResetButton resetButton = (ResetButton) getChildItem(ButtonPanel.RESET_BUTTON);
         removeChildItem(ButtonPanel.RESET_BUTTON);
-        destroyComponent(resetButton);
+        destroyChildItem(resetButton);
 
         ApplyButton applyButton = (ApplyButton) getChildItem(ButtonPanel.APPLY_BUTTON);
         removeChildItem(ButtonPanel.APPLY_BUTTON);
-        destroyComponent(applyButton);
+        destroyChildItem(applyButton);
 
         NoButton noButton = (NoButton) getChildItem(ButtonPanel.NO_BUTTON);
         removeChildItem(ButtonPanel.NO_BUTTON);
-        destroyComponent(noButton);
+        destroyChildItem(noButton);
 
         YesButton yesButton = (YesButton) getChildItem(ButtonPanel.YES_BUTTON);
         removeChildItem(ButtonPanel.YES_BUTTON);
-        destroyComponent(yesButton);
+        destroyChildItem(yesButton);
 
         CancelButton cancelButton = (CancelButton) getChildItem(ButtonPanel.CANCEL_BUTTON);
         removeChildItem(ButtonPanel.CANCEL_BUTTON);
-        destroyComponent(cancelButton);
+        destroyChildItem(cancelButton);
 
         OkButton okButton = (OkButton) getChildItem(ButtonPanel.OK_BUTTON);
         removeChildItem(ButtonPanel.OK_BUTTON);
-        destroyComponent(okButton);
+        destroyChildItem(okButton);
 
         super.finalizz();
     }

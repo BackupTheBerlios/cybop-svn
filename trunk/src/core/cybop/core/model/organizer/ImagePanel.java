@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a logo panel.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ImagePanel extends Panel {
@@ -223,7 +223,7 @@ public class ImagePanel extends Panel {
 
         super.initialize();
 
-        setChildItem(ImagePanel.IMAGE, createComponent(getDefaultImage()));
+        setChildItem(ImagePanel.IMAGE, createChildItem(getDefaultImage()));
     }
 
     /**
@@ -233,7 +233,7 @@ public class ImagePanel extends Panel {
 
         Image image = (Image) getChildItem(ImagePanel.IMAGE);
         removeChildItem(ImagePanel.IMAGE);
-        destroyComponent(image);
+        destroyChildItem(image);
 
         super.finalizz();
     }

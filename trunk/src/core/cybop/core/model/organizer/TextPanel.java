@@ -31,7 +31,7 @@ import cybop.core.model.*;
 /**
  * This class represents a text panel.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class TextPanel extends Panel {
@@ -234,7 +234,7 @@ public class TextPanel extends Panel {
 
 //??        TextPanel textPanel = (TextPanel) getChildItem(ImagePanel.TEXT);
         removeChildItem(TextPanel.TEXT);
-//??        destroyComponent(textPanel);
+//??        destroyChildItem(textPanel);
 
         super.finalizz();
     }

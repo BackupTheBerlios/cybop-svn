@@ -28,7 +28,6 @@ import cybop.core.basic.*;
 import cybop.core.basic.Boolean;
 import cybop.core.basic.Integer;
 import cybop.core.basic.String;
-import cybop.core.signal.*;
 import cybop.core.system.chain.*;
 
 /**
@@ -64,7 +63,7 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.15 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends Chain {
@@ -73,165 +72,19 @@ public class Component extends Chain {
     // Children names.
     //
 
-    /** The configuration. */
-    public static final String CONFIGURATION = new String("configuration");
-
-    /** The log record. */
-    public static final String LOG_RECORD = new String("log_record");
-
-    /** The signal memory. */
-    public static final String SIGNAL_MEMORY = new String("signal_memory");
-
-    /** The signal. */
-    public static final String SIGNAL = new String("signal");
-
     /** The logger output. */
     public static final String LOGGER_OUTPUT = new String("logger_output");
-
-    /** The log level. */
-    public static final String LOG_LEVEL = new String("log_level");
 
     //
     // Children category names.
     //
 
-    /** The configuration category. */
-    public static final String CONFIGURATION_CATEGORY = new String("configuration_category");
-
-    /** The log record category. */
-    public static final String LOG_RECORD_CATEGORY = new String("log_record_category");
-
-    /** The signal memory category. */
-    public static final String SIGNAL_MEMORY_CATEGORY = new String("signal_memory_category");
-
-    /** The signal category. */
-    public static final String SIGNAL_CATEGORY = new String("signal_category");
-
     /** The logger output category. */
     public static final String LOGGER_OUTPUT_CATEGORY = new String("logger_output_category");
-
-    /** The log level category. */
-    public static final String LOG_LEVEL_CATEGORY = new String("log_level_category");
-
-    //
-    // Log levels.
-    //
-
-    /** The log level to turn off logging. */
-    public static final Integer OFF_LOG_LEVEL = new Integer(0);
-
-    /** The log level indicating a serious failure. */
-    public static final Integer ERROR_LOG_LEVEL = new Integer(1);
-
-    /** The log level indicating a potential problem. */
-    public static final Integer WARNING_LOG_LEVEL = new Integer(2);
-
-    /** The log level for informational messages. */
-    public static final Integer INFO_LOG_LEVEL = new Integer(3);
-
-    /** The log level providing tracing information. */
-    public static final Integer DEBUG_LOG_LEVEL = new Integer(4);
-
-    /** The log level printing all messages, including every signal occuring in the system. */
-    public static final Integer EVENT_LOG_LEVEL = new Integer(5);
-
-    //
-    // Child management.
-    //
-
-    /**
-     * Creates a component.
-     *
-     * @param n the component class name
-     * @return the component
-     * @exception NullPointerException if the component class is null
-     * @exception NullPointerException if the component is null
-     */
-    public Component createComponent(String n) throws Exception, NullPointerException {
-
-        Component c = null;
-
-        // If a component class name is set to null, then don't try to create the component.
-        if (n != null) {
-
-            // Find class by name.
-            Class cl = Class.forName((java.lang.String) n.getJavaObject());
-
-            if (cl != null) {
-
-                // Create component from given class.
-                c = (Component) cl.newInstance();
-
-                if (c != null) {
-
-                    java.lang.System.out.println("INFO: Set global component items.");
-                    c.setChildItem(Component.CONFIGURATION, getChildItem(Component.CONFIGURATION));
-                    c.setChildItem(Component.LOG_RECORD, getChildItem(Component.LOG_RECORD));
-                    c.setChildItem(Component.SIGNAL_MEMORY, getChildItem(Component.SIGNAL_MEMORY));
-
-                    java.lang.System.out.println("INFO: Configure component.");
-                    c.configure();
-
-                    java.lang.System.out.println("INFO: Initialize component.");
-                    c.initialize();
-
-                } else {
-
-                    throw new NullPointerException("Could not create component. The component is null.");
-                }
-
-            } else {
-
-                throw new NullPointerException("Could not create component. The component class is null.");
-            }
-
-        } else {
-
-            java.lang.System.out.println("DEBUG: Could not create component. The component class name is null.");
-        }
-
-        return c;
-    }
-
-    /**
-     * Destroys the component.
-     *
-     * @param c the component
-     */
-    public void destroyComponent(Component c) throws Exception {
-
-        if (c != null) {
-
-            java.lang.System.out.println("INFO: Finalize component.");
-            c.finalizz();
-
-            java.lang.System.out.println("INFO: Deconfigure component.");
-            c.deconfigure();
-
-            java.lang.System.out.println("INFO: Remove global component items.");
-            c.removeChildItem(Component.SIGNAL_MEMORY);
-            c.removeChildItem(Component.LOG_RECORD);
-            c.removeChildItem(Component.CONFIGURATION);
-
-        } else {
-
-            java.lang.System.out.println("DEBUG: Could not destroy component. The component is null.");
-        }
-    }
 
     //
     // Default children categories.
     //
-
-    /**
-     * Returns the default signal category.
-     *
-     * @return the default signal category
-     */
-    public Item getDefaultSignalCategory() {
-
-        return new String("cybop.core.signal.Signal");
-    }
 
     /**
      * Returns the default logger output category.
@@ -241,16 +94,6 @@ public class Component extends Chain {
     public Item getDefaultLoggerOutputCategory() {
 
         return null;
-    }
-
-    /**
-     * Returns the default log level category.
-     *
-     * @return the default log level category
-     */
-    public Item getDefaultLogLevelCategory() {
-
-        return Component.EVENT_LOG_LEVEL;
     }
 
     //
@@ -263,14 +106,14 @@ public class Component extends Chain {
      * @exception NullPointerException if the configuration is null
      */
     public void configure() throws Exception, NullPointerException {
+        
+        super.configure();
 
         Configuration c = (Configuration) getChildItem(Component.CONFIGURATION);
 
         if (c != null) {
 
-            setChildCategory(Component.SIGNAL_CATEGORY, c.getChildItem(Component.SIGNAL_CATEGORY, getDefaultSignalCategory()));
             setChildCategory(Component.LOGGER_OUTPUT_CATEGORY, c.getChildItem(Component.LOGGER_OUTPUT_CATEGORY, getDefaultLoggerOutputCategory()));
-            setChildCategory(Component.LOG_LEVEL_CATEGORY, c.getChildItem(Component.LOG_LEVEL_CATEGORY, getDefaultLogLevelCategory()));
 
         } else {
 
@@ -289,19 +132,15 @@ public class Component extends Chain {
 
         if (c != null) {
 
-            c.setChildItem(Component.LOG_LEVEL_CATEGORY, getChildCategory(Component.LOG_LEVEL_CATEGORY));
-            removeChildCategory(Component.LOG_LEVEL_CATEGORY);
-
             c.setChildItem(Component.LOGGER_OUTPUT_CATEGORY, getChildCategory(Component.LOGGER_OUTPUT_CATEGORY));
             removeChildCategory(Component.LOGGER_OUTPUT_CATEGORY);
-
-            c.setChildItem(Component.SIGNAL_CATEGORY, getChildCategory(Component.SIGNAL_CATEGORY));
-            removeChildCategory(Component.SIGNAL_CATEGORY);
 
         } else {
 
             throw new NullPointerException("Could not deconfigure component. The configuration is null.");
         }
+
+        super.deconfigure();
     }
 
     //
@@ -316,7 +155,6 @@ public class Component extends Chain {
         super.initialize();
 
         setChildItem(Component.LOGGER_OUTPUT, getChildCategory(Component.LOGGER_OUTPUT_CATEGORY));
-        setChildItem(Component.LOG_LEVEL, getChildCategory(Component.LOG_LEVEL_CATEGORY));
     }
 
     /**
@@ -324,262 +162,11 @@ public class Component extends Chain {
      */
     public void finalizz() throws Exception {
 
-        Item logLevel = getChildItem(Component.LOG_LEVEL);
-        removeChildItem(Component.LOG_LEVEL);
-        destroyChildItem((Integer) logLevel);
-
         Item loggerOutput = getChildItem(Component.LOGGER_OUTPUT);
         removeChildItem(Component.LOGGER_OUTPUT);
         destroyChildItem((String) loggerOutput);
 
         super.finalizz();
-    }
-
-    //
-    // Logging.
-    //
-
-    /**
-     * Logs a message with no arguments.
-     *
-     * @param v the log level value
-     * @param m the message
-     */
-    public void log(Integer v, java.lang.String m) throws Exception {
-
-        log(v, m, null);
-    }
-
-    /**
-     * Logs a message with associated throwable information.
-     *
-     * @param v the log level
-     * @param m the message
-     * @param t the throwable
-     * @exception NullPointerException if the log level is null
-     * @exception NullPointerException if the log record is null
-     */
-    public void log(Integer l, java.lang.String m, java.lang.Throwable t) throws Exception, NullPointerException {
-
-        if (l != null) {
-
-            if (l.isSmallerThanOrEqualTo((Integer) getChildItem(Component.LOG_LEVEL))) {
-
-                LogRecord r = (LogRecord) getChildItem(Component.LOG_RECORD);
-    
-                if (r != null) {
-
-                    r.setChildItem(LogRecord.MESSAGE, new String(m));
-                    r.setThrowable(t);
-
-                } else {
-                    
-                    throw new NullPointerException("Could not log message. The log record is null.");
-                }
-    
-                log(r);
-            }
-
-        } else {
-            
-            throw new NullPointerException("Could not log message. The log level is null.");
-        }
-    }
-
-    /**
-     * Logs a log record.
-     *
-     * @param r the log record
-     * @exception NullPointerException if the log record is null
-     */
-    public void log(LogRecord r) throws Exception, NullPointerException {
-
-/*??
-        cybop.core.system.region.controller.Encoder e = (cybop.core.system.region.controller.Encoder) getChildItem(Component.ENCODER);
-
-        if (e != null) {
-
-            e.drive(r);
-            
-        } else {
-
-            /*??
-             * Temporary replacement for logging.
-             * The motor (output mechanism) has to be assigned here later.
-             * For now, the system console is used for message output.
-             */
-            if (r.getThrowable() != null) {
-
-                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChildItem(LogRecord.MESSAGE)).getJavaObject() + "\n" + r.getThrowable());
-                r.getThrowable().printStackTrace();
-
-            } else {
-
-                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChildItem(LogRecord.MESSAGE)).getJavaObject());
-            }
-
-/*??
-            throw new NullPointerException("Could not log record. The motor is null.");
-        }
-*/
-    }
-
-    /**
-     * Logs a message with associated throwable information.
-     *
-     * Displays a graphical message dialog, in addition to the pure logging
-     * being done in the parent class's log method.
-     *
-     * @param lev the level
-     * @param msg the message
-     * @param t the throwable
-     */
-/*??
-    public void log(Level lev, String msg, Throwable t) throws Exception {
-
-        super.log(lev, msg, t);
-
-        DisplayManager dm = getDisplayManager();
-
-        if (dm != null) {
-
-//??            dm.showMessage(lev, msg, t);
-
-            //?? Example for localization!
-            //?? showError(e.getLocalizedSourceControlName(), e.getLocalizedMessage());
-
-        } else {
-
-            // Don't throw exception here cause not all controllers/applications
-            // use a graphical display, i.e. not all have a display manager.
-        }
-    }
-
-    /**
-     * Shows a message dialog.
-     *
-     * @param lev the level
-     * @param msg the message
-     * @param t the throwable
-     */
-/*??
-    public void showMessage(Level lev, String msg, Throwable t) throws Exception {
-    }
-*/
-
-    //
-    // Signal storage.
-    //
-
-    /**
-     * Store the signal by keeping it in the signal memory.
-     *
-     * @param s the signal
-     * @exception NullPointerException if the signal memory is null
-     */
-    public void storeSignal(Signal s) throws NullPointerException {
-
-        SignalMemory mem = (SignalMemory) getChildItem(Component.SIGNAL_MEMORY);
-
-        if (mem != null) {
-
-            String n = mem.buildName(Component.SIGNAL);
-
-            mem.setChildItem(n, s);
-
-        } else {
-
-            throw new NullPointerException("Could not store signal. The signal memory is null.");
-        }
-    }
-
-    /**
-     * Fetch the next signal to be handled from the signal memory.
-     *
-     * The signal is determined by comparing the priority levels of all signals.
-     * Of these highest priority signals, the one which was first queued will
-     * be returned.
-     *
-     * @return the signal
-     * @exception NullPointerException if the signal memory is null
-     * @exception NullPointerException if a child is null
-     * @exception NullPointerException if the priority is null
-     */
-    public Signal fetchSignal() throws NullPointerException {
-
-        Signal s = null;
-        SignalMemory mem = (SignalMemory) getChildItem(Component.SIGNAL_MEMORY);
-
-        if (mem != null) {
-
-            Item[] c = mem.getChildren();
-            
-            if (c != null) {
-
-                int index = 0;
-                int no = mem.getChildrenNumber();
-                Signal child = null;
-                String n = null;
-                Integer priority = null;
-                Integer max = new Integer(0);
-    
-                while (index < no) {
-    
-                    child = (Signal) c[index];
-    
-                    if (child != null) {
-    
-                        n = child.getName();
-                        
-                        if (n != null) {
-    
-                            if (n.startsWith(Component.SIGNAL)) {
-    
-                                priority = (Integer) child.getChildItem(Signal.PRIORITY);
-    
-                                if (priority != null) {
-    
-                                    if (priority.isGreaterThan(max)) {
-    
-                                        max = priority;
-                                        s = child;
-                                    }
-    
-                                } else {
-    
-                                    throw new NullPointerException("Could not fetch signal. The priority is null.");
-                                }
-                            }
-    
-                        } else {
-            
-                            throw new NullPointerException("Could not fetch signal. The name is null.");
-                        }
-        
-                    } else {
-    
-                        throw new NullPointerException("Could not fetch signal. A child is null.");
-                    }
-    
-                    index++;
-                }
-
-                if (s != null) {
-
-                    mem.removeChildItem(s.getName());
-                }
-
-            } else {
-    
-                throw new NullPointerException("Could not place signal. The signal memory is null.");
-            }
-
-        } else {
-
-            throw new NullPointerException("Could not place signal. The signal memory is null.");
-        }
-
-        return s;
     }
 }
 

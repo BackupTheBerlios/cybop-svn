@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a head panel.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class HeadPanel extends Panel {
@@ -479,10 +479,10 @@ public class HeadPanel extends Panel {
 
         super.initialize();
 
-        setChildItem(HeadPanel.NAME_LABEL, createComponent(getDefaultNameLabel()));
-        setChildItem(HeadPanel.VERSION_LABEL, createComponent(getDefaultVersionLabel()));
-        setChildItem(HeadPanel.DATE_LABEL, createComponent(getDefaultDateLabel()));
-        setChildItem(HeadPanel.SLOGAN_LABEL, createComponent(getDefaultSloganLabel()));
+        setChildItem(HeadPanel.NAME_LABEL, createChildItem(getDefaultNameLabel()));
+        setChildItem(HeadPanel.VERSION_LABEL, createChildItem(getDefaultVersionLabel()));
+        setChildItem(HeadPanel.DATE_LABEL, createChildItem(getDefaultDateLabel()));
+        setChildItem(HeadPanel.SLOGAN_LABEL, createChildItem(getDefaultSloganLabel()));
     }
 
     /**
@@ -492,19 +492,19 @@ public class HeadPanel extends Panel {
 
         Label sloganLabel = (Label) getChildItem(HeadPanel.SLOGAN_LABEL);
         removeChildItem(HeadPanel.SLOGAN_LABEL);
-        destroyComponent(sloganLabel);
+        destroyChildItem(sloganLabel);
 
         Label dateLabel = (Label) getChildItem(HeadPanel.DATE_LABEL);
         removeChildItem(HeadPanel.DATE_LABEL);
-        destroyComponent(dateLabel);
+        destroyChildItem(dateLabel);
 
         Label versionLabel = (Label) getChildItem(HeadPanel.VERSION_LABEL);
         removeChildItem(HeadPanel.VERSION_LABEL);
-        destroyComponent(versionLabel);
+        destroyChildItem(versionLabel);
 
         Label nameLabel = (Label) getChildItem(HeadPanel.NAME_LABEL);
         removeChildItem(HeadPanel.NAME_LABEL);
-        destroyComponent(nameLabel);
+        destroyChildItem(nameLabel);
 
         super.finalizz();
     }

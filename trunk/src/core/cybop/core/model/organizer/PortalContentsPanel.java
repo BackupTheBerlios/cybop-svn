@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a portal contents panel.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalContentsPanel extends ContentsPanel {
@@ -178,7 +178,7 @@ public class PortalContentsPanel extends ContentsPanel {
 
         super.initialize();
 
-        setChildItem(PortalContentsPanel.PORTAL_SPLIT_PANE, createComponent(getDefaultPortalSplitPane()));
+        setChildItem(PortalContentsPanel.PORTAL_SPLIT_PANE, createChildItem(getDefaultPortalSplitPane()));
     }
 
     /**
@@ -188,7 +188,7 @@ public class PortalContentsPanel extends ContentsPanel {
 
         PortalSplitPane portalSplitPane = (PortalSplitPane) getChildItem(PortalContentsPanel.PORTAL_SPLIT_PANE);
         removeChildItem(PortalContentsPanel.PORTAL_SPLIT_PANE);
-        destroyComponent(portalSplitPane);
+        destroyChildItem(portalSplitPane);
 
         super.finalizz();
     }
