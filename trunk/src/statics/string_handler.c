@@ -25,13 +25,14 @@
  *
  * A string is a chain of characters.
  *
- * @version $Revision: 1.11 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef STRING_HANDLER_SOURCE
 #define STRING_HANDLER_SOURCE
 
+#include "../constants.c"
 #include "../logger/log_handler.c"
 
 //
@@ -48,21 +49,21 @@
  */
 void initialize_string(void* p0, void* p1, const void* p2, const void* p3) {
 
-    int* ps = (int*) p3;
+    if (p3 != NULL) {
 
-    if (ps != NULL) {
+        int* ps = (int*) p3;
 
-        char* p = (char*) p2;
+        if (p2 != NULL) {
 
-        if (p != NULL) {
+            char* p = (char*) p2;
 
-            int* ts = (int*) p1;
+            if (p1 != NULL) {
 
-            if (ts != NULL) {
+                int* ts = (int*) p1;
 
-                char* t = (char*) p0;
+                if (p0 != NULL) {
 
-                if (t != NULL) {
+                    char* t = (char*) p0;
 
                     log_message((void*) &INFO_LOG_LEVEL, "Initialize string.");
 
@@ -100,21 +101,21 @@ void initialize_string(void* p0, void* p1, const void* p2, const void* p3) {
  */
 void finalize_string(const void* p0, const void* p1, void* p2, void* p3) {
 
-    int* ps = (int*) p3;
+    if (p3 != NULL) {
 
-    if (ps != NULL) {
+        int* ps = (int*) p3;
 
-        char* p = (char*) p2;
+        if (p2 != NULL) {
 
-        if (p != NULL) {
+            char* p = (char*) p2;
 
-            int* ts = (int*) p1;
+            if (p1 != NULL) {
 
-            if (ts != NULL) {
+                int* ts = (int*) p1;
 
-                char* t = (char*) p0;
+                if (p0 != NULL) {
 
-                if (t != NULL) {
+                    char* t = (char*) p0;
 
                     log_message((void*) &INFO_LOG_LEVEL, "Finalize string.");
 

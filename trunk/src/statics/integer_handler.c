@@ -23,13 +23,14 @@
  *
  * This file handles an integer.
  *
- * @version $Revision: 1.11 $ $Date: 2004-04-02 16:13:46 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTEGER_HANDLER_SOURCE
 #define INTEGER_HANDLER_SOURCE
 
+#include "../constants.c"
 #include "../logger/log_handler.c"
 
 //

@@ -38,14 +38,14 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.26 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MODEL_HANDLER_SOURCE
 #define MODEL_HANDLER_SOURCE
 
-#include <string.h>
+#include "../constants.c"
 #include "../cybol/cybol_model_handler.c"
 #include "../logger/log_handler.c"
 #include "../model/map_handler.c"
@@ -106,47 +106,47 @@ void create_compound_model(void* p0) {
     // The part abstractions.
     void* pa = NULL;
     create_map((void*) &pa);
-    set_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
 
     // The part locations.
     void* pl = NULL;
     create_map((void*) &pl);
-    set_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
 
     // The part models.
     void* pm = NULL;
     create_map((void*) &pm);
-    set_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
 
     // The position abstractions.
     void* poa = NULL;
     create_map((void*) &poa);
-    set_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
 
     // The position locations.
     void* pol = NULL;
     create_map((void*) &pol);
-    set_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
 
     // The position models.
     void* pom = NULL;
     create_map((void*) &pom);
-    set_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
 
     // The constraint abstractions.
     void* ca = NULL;
     create_map((void*) &ca);
-    set_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
 
     // The constraint locations.
     void* cl = NULL;
     create_map((void*) &cl);
-    set_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
 
     // The constraint models.
     void* cm = NULL;
     create_map((void*) &cm);
-    set_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
 }
 
 /**
@@ -160,56 +160,56 @@ void destroy_compound_model(void* p0) {
 
     // The constraint models.
     void* cm = NULL;
-    get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
-    remove_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &CONSTRAINT_MODELS_INDEX);
     destroy_map((void*) &cm);
 
     // The constraint locations.
     void* cl = NULL;
-    get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
-    remove_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &CONSTRAINT_LOCATIONS_INDEX);
     destroy_map((void*) &cl);
 
     // The constraint abstractions.
     void* ca = NULL;
-    get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
-    remove_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX);
     destroy_map((void*) &ca);
 
     // The position models.
     void* pom = NULL;
-    get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
-    remove_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &POSITION_MODELS_INDEX);
     destroy_map((void*) &pom);
 
     // The position locations.
     void* pol = NULL;
-    get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
-    remove_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &POSITION_LOCATIONS_INDEX);
     destroy_map((void*) &pol);
 
     // The position abstractions.
     void* poa = NULL;
-    get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
-    remove_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &POSITION_ABSTRACTIONS_INDEX);
     destroy_map((void*) &poa);
 
     // The part models.
     void* pm = NULL;
-    get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
-    remove_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &PART_MODELS_INDEX);
     destroy_map((void*) &pm);
 
     // The part locations.
     void* pl = NULL;
-    get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
-    remove_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &PART_LOCATIONS_INDEX);
     destroy_map((void*) &pl);
 
     // The part abstractions.
     void* pa = NULL;
-    get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
-    remove_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &PART_ABSTRACTIONS_INDEX);
     destroy_map((void*) &pa);
 
     // The model.
@@ -517,7 +517,7 @@ void set_model_part(void* p0, const void* p1, const void* p2, const void* p3, co
         // The separator index.
         int i = -1;
 
-        get_array_element_index(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &MODEL_PART_SEPARATOR, (void*) &i);
+        get_array_element_index(p1, (void*) &CHARACTER_ARRAY, p2, (void*) &MODEL_PART_SEPARATOR, (void*) &i);
 
         if (i != -1) {
 
@@ -547,7 +547,7 @@ void set_model_part(void* p0, const void* p1, const void* p2, const void* p3, co
 
                             // The part models.
                             void* pm = NULL;
-                            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+                            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
 
                             // The index is used as part name size.
                             // Example: "hello.test"
@@ -591,47 +591,47 @@ void set_model_part(void* p0, const void* p1, const void* p2, const void* p3, co
 
             // The part abstractions.
             void* pa = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
             set_map_element_with_name((void*) &pa, p1, p2, p3, p4);
 
             // The part locations.
             void* pl = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
             set_map_element_with_name((void*) &pl, p1, p2, p5, p6);
 
             // The part models.
             void* pm = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
             set_map_element_with_name((void*) &pm, p1, p2, p7, p8);
 
             // The position abstractions.
             void* poa = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
             set_map_element_with_name((void*) &poa, p1, p2, p9, p10);
 
             // The position locations.
             void* pol = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
             set_map_element_with_name((void*) &pol, p1, p2, p11, p12);
 
             // The position models.
             void* pom = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
             set_map_element_with_name((void*) &pom, p1, p2, p13, p14);
 
             // The constraint abstractions.
             void* ca = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
             set_map_element_with_name((void*) &ca, p1, p2, p15, p16);
 
             // The constraint locations.
             void* cl = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
             set_map_element_with_name((void*) &cl, p1, p2, p17, p18);
 
             // The constraint models.
             void* cm = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
             set_map_element_with_name((void*) &cm, p1, p2, p19, p20);
         }
 
@@ -658,7 +658,7 @@ void remove_model_part(void* p0, const void* p1, const void* p2) {
         // The separator index.
         int i = -1;
 
-        get_array_element_index(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &MODEL_PART_SEPARATOR, (void*) &i);
+        get_array_element_index(p1, (void*) &CHARACTER_ARRAY, p2, (void*) &MODEL_PART_SEPARATOR, (void*) &i);
 
         if (i != -1) {
 
@@ -686,7 +686,7 @@ void remove_model_part(void* p0, const void* p1, const void* p2) {
 
                             // The part models.
                             void* pm = NULL;
-                            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+                            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
 
                             // The index is used as part name size.
                             // Example: "hello.test"
@@ -729,47 +729,47 @@ void remove_model_part(void* p0, const void* p1, const void* p2) {
 
             // The part abstractions.
             void* pa = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
             remove_map_element_with_name((void*) &pa, p1, p2);
 
             // The part locations.
             void* pl = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
             remove_map_element_with_name((void*) &pl, p1, p2);
 
             // The part models.
             void* pm = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
             remove_map_element_with_name((void*) &pm, p1, p2);
 
             // The position abstractions.
             void* poa = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
             remove_map_element_with_name((void*) &poa, p1, p2);
 
             // The position locations.
             void* pol = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
             remove_map_element_with_name((void*) &pol, p1, p2);
 
             // The position models.
             void* pom = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
             remove_map_element_with_name((void*) &pom, p1, p2);
 
             // The constraint abstractions.
             void* ca = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
             remove_map_element_with_name((void*) &ca, p1, p2);
 
             // The constraint locations.
             void* cl = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
             remove_map_element_with_name((void*) &cl, p1, p2);
 
             // The constraint models.
             void* cm = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
             remove_map_element_with_name((void*) &cm, p1, p2);
         }
 
@@ -817,7 +817,7 @@ void get_model_part(const void* p0, const void* p1, const void* p2, void* p3, vo
         // The separator index.
         int i = -1;
 
-        get_array_element_index(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &MODEL_PART_SEPARATOR, (void*) &i);
+        get_array_element_index(p1, (void*) &CHARACTER_ARRAY, p2, (void*) &MODEL_PART_SEPARATOR, (void*) &i);
 
         if (i != -1) {
 
@@ -845,7 +845,7 @@ void get_model_part(const void* p0, const void* p1, const void* p2, void* p3, vo
 
                             // The part models.
                             void* pm = NULL;
-                            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+                            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
 
                             // The index is used as part name size.
                             // Example: "hello.test"
@@ -889,47 +889,47 @@ void get_model_part(const void* p0, const void* p1, const void* p2, void* p3, vo
 
             // The part abstractions.
             void* pa = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
             get_map_element_with_name((void*) &pa, p1, p2, p3, p4);
 
             // The part locations.
             void* pl = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pl);
             get_map_element_with_name((void*) &pl, p1, p2, p5, p6);
 
             // The part models.
             void* pm = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
             get_map_element_with_name((void*) &pm, p1, p2, p7, p8);
 
             // The position abstractions.
             void* poa = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
             get_map_element_with_name((void*) &poa, p1, p2, p9, p10);
 
             // The position locations.
             void* pol = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &pol);
             get_map_element_with_name((void*) &pol, p1, p2, p11, p12);
 
             // The position models.
             void* pom = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
             get_map_element_with_name((void*) &pom, p1, p2, p13, p14);
 
             // The constraint abstractions.
             void* ca = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX, (void*) &ca);
             get_map_element_with_name((void*) &ca, p1, p2, p15, p16);
 
             // The constraint locations.
             void* cl = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_LOCATIONS_INDEX, (void*) &cl);
             get_map_element_with_name((void*) &cl, p1, p2, p17, p18);
 
             // The constraint models.
             void* cm = NULL;
-            get_array_element(p0, (void*) &MODEL_SIZE, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_INDEX, (void*) &cm);
             get_map_element_with_name((void*) &cm, p1, p2, p19, p20);
         }
 

@@ -25,13 +25,14 @@
  *
  * A vector contains the three coordinates: x, y, z.
  *
- * @version $Revision: 1.10 $ $Date: 2004-04-02 16:13:46 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef VECTOR_HANDLER_SOURCE
 #define VECTOR_HANDLER_SOURCE
 
+#include "../constants.c"
 #include "../logger/log_handler.c"
 
 //
@@ -98,15 +99,15 @@ void initialize_vector(void* p0, const void* p1, const void* p2) {
 
     // The x.
     int x = 0;
-    set_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
 
     // The y.
     int y = 0;
-    set_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
 
     // The z.
     int z = 0;
-    set_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
 
 /*??
     int i1 = s.indexOf(",");
@@ -153,18 +154,18 @@ void finalize_vector(const void* p0, void* p1, void* p2) {
 
     // The z.
     int z = 0;
-    get_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
-    remove_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &Z_INDEX);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_SIZE, (void*) &Z_INDEX);
 
     // The y.
     int y = 0;
-    get_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
-    remove_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_SIZE, (void*) &Y_INDEX);
 
     // The x.
     int x = 0;
-    get_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
-    remove_array_element(p0, (void*) &VECTOR_SIZE, (void*) &INTEGER_ARRAY, (void*) &X_INDEX);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_SIZE, (void*) &X_INDEX);
 
 //??    fprintf(p1, %d, &(m->x));
 //??    fprintf(p1, %d, &(m->y));

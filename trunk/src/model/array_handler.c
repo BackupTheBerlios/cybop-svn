@@ -48,7 +48,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.22 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,6 +56,7 @@
 #define ARRAY_HANDLER_SOURCE
 
 #include <stdlib.h>
+#include "../constants.c"
 #include "../logger/log_handler.c"
 #include "../model/character_array_handler.c"
 #include "../model/double_array_handler.c"
@@ -88,9 +89,6 @@ static const int CHARACTER_ARRAY = 3;
 /** The double array constant. */
 static const int DOUBLE_ARRAY = 2;
 
-/** The null pointer. */
-static const void* NULL = (void*) 0;
-
 //
 // Array.
 //
@@ -107,9 +105,9 @@ void create_array(void* p0, const void* p1) {
 
         int* s = (int*) p1;
 
-        void** a = (void**) p0;
+        if (p0 != NULL) {
 
-        if (a != NULL) {
+            void** a = (void**) p0;
 
             log_message((void*) &INFO_LOG_LEVEL, "Create array.");
 
@@ -138,18 +136,18 @@ void create_array(void* p0, const void* p1) {
  */
 void destroy_array(void* p0, const void* p1) {
 
-    int* s = (int*) p1;
+    if (p1 != NULL) {
 
-    if (s != NULL) {
+        int* s = (int*) p1;
 
-        void** a = (void**) p0;
+        if (p0 != NULL) {
 
-        if (a != NULL) {
+            void** a = (void**) p0;
 
             log_message((void*) &INFO_LOG_LEVEL, "Destroy array.");
 
-            //?? TODO: Destroy all array elements in a loop,
-            //?? which is the same as Garbage Collection!
+            //?? TODO: Destroy all array elements in a loop??
+            //?? Which is the same as Garbage Collection!
             //?? SEE: signal_memory_handler
 
             free(*a);
@@ -180,17 +178,17 @@ void destroy_array(void* p0, const void* p1) {
  */
 void compare_arrays(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4, void* p5) {
 
-    int* t = (int*) p4;
+    if (p4 != NULL) {
 
-    if (t != NULL) {
+        int* t = (int*) p4;
 
-        int* s2 = (int*) p3;
+        if (p3 != NULL) {
 
-        if (s2 != NULL) {
+            int* s2 = (int*) p3;
 
-            int* s1 = (int*) p1;
+            if (p1 != NULL) {
 
-            if (s1 != NULL) {
+                int* s1 = (int*) p1;
 
                 // The size must be equal.
                 if (*s1 == *s2) {
@@ -238,13 +236,13 @@ void compare_arrays(const void* p0, const void* p1, const void* p2, const void* 
  */
 void resize_array(void* p0, const void* p1) {
 
-    int* s = (int*) p1;
+    if (p1 != NULL) {
 
-    if (s != NULL) {
+        int* s = (int*) p1;
 
-        void** a = (void**) p0;
+        if (p0 != NULL) {
 
-        if (a != NULL) {
+            void** a = (void**) p0;
 
             // Create a new array with extended size.
             *a = realloc(*a, *s);
@@ -274,9 +272,9 @@ void resize_array(void* p0, const void* p1) {
  */
 void set_array_element(void* p0, const void* p1, const void* p2, const void* p3) {
 
-    int* t = (int*) p1;
+    if (p1 != NULL) {
 
-    if (t != NULL) {
+        int* t = (int*) p1;
 
         if (*t == POINTER_ARRAY) {
 
@@ -311,9 +309,9 @@ void set_array_element(void* p0, const void* p1, const void* p2, const void* p3)
  */
 void remove_array_element(void* p0, const void* p1, const void* p2, const void* p3) {
 
-    int* t = (int*) p1;
+    if (p1 != NULL) {
 
-    if (t != NULL) {
+        int* t = (int*) p1;
 
         if (*t == POINTER_ARRAY) {
 

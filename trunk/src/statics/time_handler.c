@@ -32,13 +32,14 @@
  * 01.01.2000 00:00:00";
  * 31.12.1999 23:59:59";
  *
- * @version $Revision: 1.10 $ $Date: 2004-04-02 16:13:46 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef TIME_HANDLER_SOURCE
 #define TIME_HANDLER_SOURCE
 
+#include "../constants.c"
 #include "../logger/log_handler.c"
 
 //
@@ -107,33 +108,31 @@ void initialize_time(void* p0, const void* p1, const void* p2) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Initialize time.");
 
-    // Read input stream and transform to time.
-
 //??    fscanf(p1, %d, &(m->value));
 
     // The year.
     int y = 0;
-    set_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &YEAR_INDEX, (void*) &y);
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &YEAR_INDEX, (void*) &y);
 
     // The month.
     int m = 0;
-    set_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &MONTH_INDEX, (void*) &m);
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MONTH_INDEX, (void*) &m);
 
     // The day.
     int d = 0;
-    set_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &DAY_INDEX, (void*) &d);
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DAY_INDEX, (void*) &d);
 
     // The hour.
     int h = 0;
-    set_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &HOUR_INDEX, (void*) &h);
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &HOUR_INDEX, (void*) &h);
 
     // The minute.
     int min = 0;
-    set_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &MINUTE_INDEX, (void*) &min);
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MINUTE_INDEX, (void*) &min);
 
     // The second.
     int s = 0;
-    set_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &SECOND_INDEX, (void*) &s);
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SECOND_INDEX, (void*) &s);
 }
 
 /**
@@ -147,37 +146,35 @@ void finalize_time(const void* p0, void* p1, void* p2) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Finalize time.");
 
-    // Write output stream and transform from time.
-
     // The second.
     int s = 0;
-    get_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &SECOND_INDEX, (void*) &s);
-    remove_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &SECOND_INDEX);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SECOND_INDEX, (void*) &s);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_SIZE, (void*) &SECOND_INDEX);
 
     // The minute.
     int min = 0;
-    get_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &MINUTE_INDEX, (void*) &min);
-    remove_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &MINUTE_INDEX);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MINUTE_INDEX, (void*) &min);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_SIZE, (void*) &MINUTE_INDEX);
 
     // The hour.
     int h = 0;
-    get_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &HOUR_INDEX, (void*) &h);
-    remove_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &HOUR_INDEX);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &HOUR_INDEX, (void*) &h);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_SIZE, (void*) &HOUR_INDEX);
 
     // The day.
     int d = 0;
-    get_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &DAY_INDEX, (void*) &d);
-    remove_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &DAY_INDEX);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DAY_INDEX, (void*) &d);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_SIZE, (void*) &DAY_INDEX);
 
     // The month.
     int m = 0;
-    get_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &MONTH_INDEX, (void*) &m);
-    remove_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &MONTH_INDEX);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MONTH_INDEX, (void*) &m);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_SIZE, (void*) &MONTH_INDEX);
 
     // The year.
     int y = 0;
-    get_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &YEAR_INDEX, (void*) &y);
-    remove_array_element(p0, (void*) &TIME_SIZE, (void*) &INTEGER_ARRAY, (void*) &YEAR_INDEX);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &YEAR_INDEX, (void*) &y);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_SIZE, (void*) &YEAR_INDEX);
 
 //??    fprintf(p1, %d, &(m->value));
 }

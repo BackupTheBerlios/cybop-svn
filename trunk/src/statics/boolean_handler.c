@@ -29,13 +29,14 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.11 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BOOLEAN_HANDLER_SOURCE
 #define BOOLEAN_HANDLER_SOURCE
 
+#include "../constants.c"
 #include "../logger/log_handler.c"
 
 //
@@ -67,14 +68,14 @@ static const int FALSE_BOOLEAN_SIZE = 5;
  */
 void initialize_boolean(void* p0, const void* p1, const void* p2) {
 
-    int* t = (int*) p0;
+    if (p0 != NULL) {
 
-    if (t != NULL) {
+        int* t = (int*) p0;
 
         log_message((void*) &INFO_LOG_LEVEL, "Initialize boolean.");
 
         int r = 0;
-        compare_arrays(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &TRUE_BOOLEAN, (void*) &TRUE_BOOLEAN_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+        compare_arrays(p1, p2, (void*) &TRUE_BOOLEAN, (void*) &TRUE_BOOLEAN_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
 
         if (r == 1) {
 
@@ -101,17 +102,17 @@ void initialize_boolean(void* p0, const void* p1, const void* p2) {
  */
 void finalize_boolean(const void* p0, void* p1, void* p2) {
 
-    int* t = (int*) p0;
+    if (p0 != NULL) {
 
-    if (t != NULL) {
+        int* t = (int*) p0;
 
-        char* p = (char*) p1;
+        if (p1 != NULL) {
 
-        if (p != NULL) {
+            char* p = (char*) p1;
 
-            int* ps = (int*) p2;
+            if (p2 != NULL) {
 
-            if (ps != NULL) {
+                int* ps = (int*) p2;
 
                 log_message((void*) &INFO_LOG_LEVEL, "Finalize boolean.");
 
