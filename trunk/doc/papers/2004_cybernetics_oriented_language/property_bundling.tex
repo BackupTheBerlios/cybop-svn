@@ -1,0 +1,87 @@
+%
+% $RCSfile: property_bundling.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Property Bundling}
+\label{property_bundling_heading}
+
+Software consists of data which can be processed by a computer. This is possible
+because \emph{qualitative} data are transformed into \emph{quantitative} data and,
+finally, to \emph{Zero} and \emph{One}. \emph{Mathematics} delivers the \emph{Logic}
+(\emph{Operations}) after which \emph{States} (\emph{Operands}) can be mapped,
+to deliver the expected results.
+
+When combining a number of operations in a certain order, an \emph{Algorithm} is
+retrieved. The operands it works with are stored in \emph{Variables}. As can be
+seen, there is always \emph{static} and \emph{dynamic} structures involved, the
+static holding the states and the dynamic holding the rules for mapping between
+states.
+
+\emph{Structured}/ \emph{Procedural Programming} languages were the first to
+explicitly provide the means to model static \emph{Structures} as well as dynamic
+\emph{Procedures} (or \emph{Functions}, respectively). Both can be cascaded in
+\emph{Hierarchies} and even use \emph{Recursion} for that.
+
+Yet other synonyms for static and dynamic structures that were introduced by the
+nowadays more popular \emph{Object Oriented Programming} (OOP) are \emph{Attribute}
+and \emph{Method}. Both can be properties of an \emph{Object} which is the runtime
+instance of a \emph{Class} which in turn represents the data \emph{Type}. A class
+can \emph{inherit} properties from a \emph{super} class. This \emph{Inheritance}
+was a truely new and innovative concept brought in by OOP. The \emph{Bundling} of
+static and dynamic properties (attributes and methods), on the other hand, causes
+more system interdependencies and complications than were predictable. It is a big
+disadvantage that affects all modern object-oriented systems.
+
+Certainly, the bundling stems from best intentions to receive cleaner code by
+keeping not only attributes but also methods in a common module, such avoiding
+\emph{wild} and \emph{global} procedures. But now, modules not only had to refer
+to other modules for accessing their data; the same was needed for accessing methods.
+With OOP, the number of cross-relations between modules and system interdependencies
+in general nearly always rise dramatically. In reality, static and dynamic
+properties are two \emph{different} things that have to be kept in different
+places! Both can have a similar, hierarchical structure but each is a concept on
+its own.
+
+\emph{Interface} inheritance is used to implement \emph{Concerns} in a system.
+\emph{Aspect Oriented Programming} (AOP) calls its concerns \emph{Aspects} and
+uses special language means to implement them. With standard class constellations,
+\emph{Design Patterns} provide clear solutions describing how best to combine
+(associate/ inherit) classes. As subsumption of many design patterns, a
+\emph{Framework} aims to provide basic functionality for the applications to be
+embedded into it. All these efforts are based upon OOP. The main idea behind them
+is to prevent code duplication and to minimize the interdependencies between
+parts of a system. But what if OOP is one reason for just those interdependencies?
+
+Big systems with a multitude of associations and dependencies often lead to a
+loss in overview which results in so called \emph{Spaghetti Code}.
+\emph{Component Oriented Programming} (COP) tries to solve this by encapsulating
+code in smaller \emph{Components} which shall make it easier to keep overview.
+People started to dream about a simple combination of such components and called
+it the \emph{LEGO Metapher} (with relation to the building blocks for children).
+But software models are not simple building blocks that could be built
+\emph{Stone-on-Stone}! They are concepts as known from \emph{Human Thinking}.
+
+The components described to here are \emph{passive} because they need a system
+to call them. More recent studies are about \emph{active} components, sometimes
+called \emph{Agents}. These are self-acting processes that solve special tasks.
+The concepts behind are called \emph{Agent Oriented Programming}.
+
+Passive components and all of the programming concepts described before them
+belong to the \emph{Logical Architecture} of a system. The term
+\emph{Physical Architecture} is used when it comes to active components, agents,
+processes or systems in general.
