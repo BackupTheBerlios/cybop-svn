@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-09-12 09:37:12 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-09-12 18:51:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -156,7 +156,7 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
 
                                                             // Get source name.
                                                             *n = pv->content;
-                                                            *nc = strlen((char*) n);
+                                                            *nc = strlen((char*) *n);
 
                                                             d = 1;
                                                         }
@@ -170,7 +170,7 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
 
                                                             // Get source channel.
                                                             *c = pv->content;
-                                                            *cc = strlen((char*) c);
+                                                            *cc = strlen((char*) *c);
 
                                                             d = 1;
                                                         }
@@ -184,7 +184,7 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
 
                                                             // Get source abstraction.
                                                             *a = pv->content;
-                                                            *ac = strlen((char*) a);
+                                                            *ac = strlen((char*) *a);
 
                                                             d = 1;
                                                         }
@@ -198,7 +198,7 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
 
                                                             // Get source model.
                                                             *m = pv->content;
-                                                            *mc = strlen((char*) m);
+                                                            *mc = strlen((char*) *m);
 
                                                             d = 1;
                                                         }
@@ -380,7 +380,7 @@ void decode_cybol_node(void* p0, void* p1, void* p2, const void* p3, const void*
                             (void*) &sc, (void*) &scc);
 
                         // If child node has children, then create details model for it.
-                        if ((*s)->children != NULL_POINTER) {
+                        if (c->children != NULL_POINTER) {
 
                             // Create details model.
                             create((void*) &dd, (void*) &dds,

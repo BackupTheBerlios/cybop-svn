@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.11 $ $Date: 2004-09-12 09:37:12 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-09-12 18:51:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -187,6 +187,8 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8) {
 
+    fputs("TEST: create primitive model\n", stdout);
+
     //
     // Receive.
     //
@@ -254,12 +256,18 @@ void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const 
 void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8) {
 
+    fputs("TEST: create compound model\n", stdout);
+
     // The temporary workaround flag to use the libxml2 parser.
     //?? Later, when an own xml parser is implemented in cyboi,
     //?? delete this flag and change the corresponding blocks below!
     int w = 0;
 
+    compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT,
+        (void*) &w, (void*) &CHARACTER_ARRAY);
     compare_arrays(p5, p6, (void*) &XML_ABSTRACTION, (void*) &XML_ABSTRACTION_COUNT,
+        (void*) &w, (void*) &CHARACTER_ARRAY);
+    compare_arrays(p5, p6, (void*) &HXP_ABSTRACTION, (void*) &HXP_ABSTRACTION_COUNT,
         (void*) &w, (void*) &CHARACTER_ARRAY);
 
     //
@@ -364,13 +372,9 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
     if (p == 1) {
 
-    fprintf(stderr, "TEST: create primitive model: %i\n", p5);
-
         create_primitive_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
 
     } else {
-
-    fprintf(stderr, "TEST: create compound model: %i\n", p5);
 
         create_compound_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
     }

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2004-09-12 09:37:12 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-09-12 18:51:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -141,12 +141,6 @@ void wait(void* p0, void* p1, void* p2,
 
     // The highest priority index.
     int i = -1;
-    // The signal size.
-    int ss = 0;
-    // The persistent model.
-    void* pers = NULL_POINTER;
-    // The persistent model size.
-    int perss = 0;
 
     // The done flag.
     int d = 0;
@@ -155,7 +149,7 @@ void wait(void* p0, void* p1, void* p2,
 
     log_message((void*) &INFO_LOG_LEVEL, (void*) &WAIT_FOR_SIGNALS_MESSAGE, (void*) &WAIT_FOR_SIGNALS_MESSAGE_COUNT);
 
-    // Run endless loop handling signals.
+    // Run endless loop checking signal memory for signals.
     while (1) {
 
         if (f == 1) {
@@ -164,24 +158,25 @@ void wait(void* p0, void* p1, void* p2,
             break;
         }
 
-        // Get top priority signal from signal memory and remove it from there.
+        // Get index of the top priority signal.
         get_highest_priority_index(p0, p1, (void*) &i);
 
         if (i >= 0) {
 
+            // Get signal.
             get_signal(p0, p1, (void*) &i, (void*) &a, (void*) &ac,
                 (void*) &s, (void*) &sc, (void*) &p, (void*) &pc, (void*) &pr);
 
     fprintf(stderr, "wait i: %i\n", i);
-    fprintf(stderr, "wait s: %i\n", s);
-    fprintf(stderr, "wait sc: %i\n", sc);
-    fprintf(stderr, "wait p: %i\n", pr);
-    fprintf(stderr, "wait a: %i\n", a);
+    fprintf(stderr, "wait a: %s\n", a);
     fprintf(stderr, "wait ac: %i\n", ac);
+    fprintf(stderr, "wait s: %s\n", s);
+    fprintf(stderr, "wait sc: %i\n", sc);
+    fprintf(stderr, "wait p: %i\n", p);
+    fprintf(stderr, "wait pc: %i\n", pc);
+    fprintf(stderr, "wait pr: %i\n", pr);
 
-    fprintf(stderr, "wait a: %s\n", (char*) a);
-
-            // Abstraction and priority are removed internally, together with the signal.
+            // Remove signal.
             remove_signal(p0, p1, p2, (void*) &i);
 
             // CAUTION! Do NOT destroy signal here!
@@ -244,11 +239,11 @@ void wait(void* p0, void* p1, void* p2,
             // Reset priority.
             pr = NORMAL_PRIORITY;
             // Reset highest priority index.
-            i == -1;
+            i = -1;
             // Reset done flag.
-            d == 0;
+            d = 0;
             // Reset comparison result.
-            r == 0;
+            r = 0;
         }
     }
 }
