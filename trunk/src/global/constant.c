@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2004-12-17 12:48:43 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2004-12-17 19:06:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -313,14 +313,16 @@ static const int* MODEL_LOCATION_SEPARATOR_COUNT = MODEL_LOCATION_SEPARATOR_COUN
 //
 
 /** The compound element separator. */
-static const char* COMPOUND_ELEMENT_SEPARATOR_ARRAY[] = {'.'};
+static const char* COMPOUND_ELEMENT_SEPARATOR = FULL_STOP_CHARACTER;
+static const int* COMPOUND_ELEMENT_SEPARATOR_COUNT = FULL_STOP_CHARACTER_COUNT;
 
 //
 // Operation.
 //
 
 /** The operation parameter separator. */
-static const char* OPERATION_PARAMETER_SEPARATOR = {','};
+static const char* OPERATION_PARAMETER_SEPARATOR = COMMA_CHARACTER;
+static const int* OPERATION_PARAMETER_SEPARATOR_COUNT = COMMA_CHARACTER_COUNT;
 
 //
 // Boolean.
