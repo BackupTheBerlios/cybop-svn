@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.13 $ $Date: 2004-03-02 18:24:39 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-03-03 08:22:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -159,7 +159,12 @@ void get_array_count(void* p0, void* p1) {
 /**
  * Compares the arrays.
  *
- * Returns 1 if the arrays are equal; 0 otherwise.
+ * Returns 1 if the arrays are equal in:
+ * - size
+ * - count (number of elements)
+ * - elements
+ *
+ * Otherwise, 0 is returned.
  *
  * @param p0 the first array
  * @param p1 the second array
@@ -175,21 +180,15 @@ void compare_arrays(void* p0, void* p1, void* p2) {
 
         if (a1 != (void*) 0) {
 
-            int* r = (int*) p2;
+            // The size must be equal.
+            if (a0->size == a1->size) {
 
-            if (r != (void*) 0) {
+                // The count must be equal.
+                if (a0->count == a1->count) {
 
-                if (a0->size == a1->size) {
-
-                    if (a0->count == a1->count) {
-
-                        compare_internal_array_elements(a0->internal_array, a1->internal_array, (void*) &(a0->count), p2);
-                    }
+                    // The elements must be equal.
+                    compare_character_arrays(a0->internal_array, a1->internal_array, (void*) &(a0->size), p2);
                 }
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, "Could not compare arrays. The result is null.");
             }
 
         } else {

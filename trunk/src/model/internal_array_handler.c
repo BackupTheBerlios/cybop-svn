@@ -34,7 +34,7 @@
  * Its syntax mostly looks like: type[size].
  * Internal array elements are accessed over an index.
  *
- * @version $Revision: 1.8 $ $Date: 2004-03-02 18:24:39 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-03-03 08:22:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -100,18 +100,22 @@ void** extend_internal_array(void** p0, void* p1, void* p2) {
 }
 */
 
+//
+// Comparison.
+//
+
 /**
- * Compares the internal arrays.
+ * Compares the character arrays.
  *
- * Returns 1 if the internal arrays are equal.
- * Otherwise, 0.
+ * Returns 1 if the character elements are equal.
+ * Otherwise, 0 is returned.
  *
  * @param p0 the first internal array
  * @param p1 the second internal array
- * @param p2 the count
+ * @param p2 the size
  * @param p3 the result
  */
-void compare_internal_arrays(void** p0, void** p1, void* p2, void* p3) {
+void compare_character_arrays(void** p0, void** p1, void* p2, void* p3) {
 
     int* r = (int*) p3;
 
@@ -119,20 +123,28 @@ void compare_internal_arrays(void** p0, void** p1, void* p2, void* p3) {
 
         *r = 0;
         int i = 0;
+        char* e0 = (void*) 0;
+        char* e1 = (void*) 0;
 
         while (1) {
 
-            if (i == count) {
+            if (i == size) {
 
-                // All internal array elements have been compared and are equal.
+                // All elements have been compared and are equal.
                 *r = 1;
 
                 break;
             }
 
+            // Determine the next character elements at array plus index.
+            e0 = (char*) (p0 + i);
+
+            if (*x == *e) {
+
+--
             if ((p0 + i) != (p1 + i)) {
 
-                // Stop comparison if two internal array elements are not equal.
+                // Stop comparison if two elements are not equal.
                 break;
             }
 
@@ -141,7 +153,7 @@ void compare_internal_arrays(void** p0, void** p1, void* p2, void* p3) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not compare internal arrays. The result is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not compare character arrays. The result is null.");
     }
 }
 
