@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.13 $ $Date: 2004-06-18 22:55:19 $ $Author: christian $
+# @version $Revision: 1.14 $ $Date: 2004-06-28 08:31:19 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 # @author Michael Simon <michael.simon@gmx.net>
 #
@@ -82,6 +82,8 @@ LOGIC_SOURCES = $(wildcard $(SRC)/logic/*.c)
 LOGIC_OBJECTS = $(patsubst $(SRC)/logic/%.c,$(OBJ)/logic/%.o,$(LOGIC_SOURCES))
 SIGNAL_SOURCES = $(wildcard $(SRC)/signal/*.c)
 SIGNAL_OBJECTS = $(patsubst $(SRC)/signal/%.c,$(OBJ)/signal/%.o,$(SIGNAL_SOURCES))
+SOCKET_SOURCES = $(wildcard $(SRC)/socket/*.c)
+SOCKET_OBJECTS = $(patsubst $(SRC)/socket/%.c,$(OBJ)/socket/%.o,$(SOCKET_SOURCES))
 STATE_SOURCES = $(wildcard $(SRC)/state/*.c)
 STATE_OBJECTS = $(patsubst $(SRC)/state/%.c,$(OBJ)/state/%.o,$(STATE_SOURCES))
 TEST_SOURCES = $(wildcard $(SRC)/test/*.c)
@@ -101,7 +103,7 @@ X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WIN
 #
 #	$(COMPILER) -I /usr/X11R6/include -L /usr/X11R6/lib $(OBJ)/cyboi.o -o $(BIN)/$(BINARY)
 #
-all: create $(ARRAY_OBJECTS) $(CYBOI_OBJECTS) $(CYBOL_OBJECTS) $(GLOBAL_OBJECTS) $(LOGGER_OBJECTS) $(LOGIC_OBJECTS) $(SIGNAL_OBJECTS) $(STATE_OBJECTS) $(TEST_OBJECTS) $(X_WINDOWS_OBJECTS)
+all: create $(ARRAY_OBJECTS) $(CYBOI_OBJECTS) $(CYBOL_OBJECTS) $(GLOBAL_OBJECTS) $(LOGGER_OBJECTS) $(LOGIC_OBJECTS) $(SIGNAL_OBJECTS) $(SOCKET_OBJECTS) $(STATE_OBJECTS) $(TEST_OBJECTS) $(X_WINDOWS_OBJECTS)
 	$(COMPILER) -L/usr/X11R6/lib \
 		-o $(BIN)/$(BINARY) $(OBJ)/cyboi/cyboi.o -lX11
 	@echo Compiled cyboi files.
@@ -121,6 +123,7 @@ create:
 	-cd $(OBJ); mkdir logger
 	-cd $(OBJ); mkdir logic
 	-cd $(OBJ); mkdir signal
+	-cd $(OBJ); mkdir socket
 	-cd $(OBJ); mkdir state
 	-cd $(OBJ); mkdir test
 	-cd $(OBJ); mkdir x_windows
@@ -147,6 +150,9 @@ $(OBJ)/logic/%.o: $(SRC)/logic/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/signal/%.o: $(SRC)/signal/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/socket/%.o: $(SRC)/socket/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/state/%.o: $(SRC)/state/%.c
