@@ -66,7 +66,7 @@
  * A compound model can be created by cloning an existing model template so that
  * some space gets allocated in the computer's memory.
  *
- * @version $Revision: 1.7 $ $Date: 2004-07-21 23:51:36 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-07-22 23:18:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -347,156 +347,786 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     const void* p12, const void* p13, const void* p14, const void* p15, const void* p16, const void* p17);
 
 //
-// Part.
+// Values.
 //
 
 /**
- * Initializes the part.
+ * Interprets the name value.
  *
- * @param p0 the memory model
- * @param p1 the cybol part attributes
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
  */
-void initialize_part(void* p0, const void* p1) {
-
-/*??
-        void* name = (void*) get_map_element_with_name(p1, (void*) NAME);
-        void* abstraction = NULL_POINTER;
-        void* location = NULL_POINTER;
-        // The model read as string from a cybol file.
-        void* model = NULL_POINTER;
-        // The model as stored in computer memory (RAM).
-        void* part = NULL_POINTER;
-
-        // Part.
-        abstraction = (void*) get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
-        location = (void*) get_map_element_with_name(p1, (void*) PART_LOCATION);
-        model = (void*) get_map_element_with_name(p1, (void*) PART_MODEL);
-        part = (void*) create_model(model, location, abstraction);
-        set_map_element_with_name(m->part_abstractions, name, abstraction);
-        set_map_element_with_name(m->part_locations, name, location);
-        set_map_element_with_name(m->part_models, name, part);
-
-        // Position.
-        abstraction = (void*) get_map_element_with_name(p1, (void*) POSITION_ABSTRACTION);
-        location = (void*) get_map_element_with_name(p1, (void*) POSITION_LOCATION);
-        model = (void*) get_map_element_with_name(p1, (void*) POSITION_MODEL);
-        part = (void*) create_model(model, location, abstraction);
-        set_map_element_with_name(m->position_abstractions, name, abstraction);
-        set_map_element_with_name(m->position_locations, name, location);
-        set_map_element_with_name(m->position_models, name, part);
-
-        // Constraint.
-        abstraction = (void*) get_map_element_with_name(p1, (void*) CONSTRAINT_ABSTRACTION);
-        location = (void*) get_map_element_with_name(p1, (void*) CONSTRAINT_LOCATION);
-        model = (void*) get_map_element_with_name(p1, (void*) CONSTRAINT_MODEL);
-        part = (void*) create_model(model, location, abstraction);
-        set_map_element_with_name(m->constraint_abstractions, name, abstraction);
-        set_map_element_with_name(m->constraint_locations, name, location);
-        set_map_element_with_name(m->constraint_models, name, part);
-*/
+void interpret_name_value(const void* p0, const void* p1) {
 }
 
 /**
- * Finalizes the part.
+ * Serializes the name value.
  *
- * @param p0 the memory model
- * @param p1 the cybol part attributes
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
  */
-void finalize_part(void* p0, const void* p1) {
+void serialize_name_value(const void* p0, const void* p1) {
+}
 
-/*??
-        void* name = (void*) get_map_element_with_name(p1, (void*) NAME);
-        void* abstraction = NULL_POINTER;
-        void* location = NULL_POINTER;
-        // The model read as string from a cybol file.
-        void* model = NULL_POINTER;
-        // The model as stored in computer memory (RAM).
-        void* part = NULL_POINTER;
+/**
+ * Interprets the abstraction value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void interpret_abstraction_value(const void* p0, const void* p1) {
+}
 
-/*??
-        // Position.
-        memory_model = (void*) get_map_element_with_name(m->positions, name);
-        model = (void*) get_map_element_with_name(p1, (void*) POSITION_MODEL);
-        abstraction = (void*) get_map_element_with_name(p1, (void*) POSITION_ABSTRACTION);
-        destroy_statics(memory_model, model, abstraction);
+/**
+ * Serializes the abstraction value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void serialize_abstraction_value(const void* p0, const void* p1) {
+}
 
-        // Part.
-        abstraction = (void*) get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
-        location = (void*) get_map_element_with_name(p1, (void*) PART_LOCATION);
-        model = (void*) get_map_element_with_name(p1, (void*) PART_MODEL);
-        part = (void*) get_map_element_with_name(m->part_models, name);
-        destroy_model(part, model, location, abstraction);
-*/
+/**
+ * Interprets the location value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void interpret_location_value(const void* p0, const void* p1) {
+}
+
+/**
+ * Serializes the location value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void serialize_location_value(const void* p0, const void* p1) {
+}
+
+/**
+ * Interprets the model value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void interpret_model_value(const void* p0, const void* p1) {
+}
+
+/**
+ * Serializes the model value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void serialize_model_value(const void* p0, const void* p1) {
+}
+
+/**
+ * Interprets the constraint value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void interpret_constraint_value(const void* p0, const void* p1) {
+}
+
+/**
+ * Serializes the constraint value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void serialize_constraint_value(const void* p0, const void* p1) {
+}
+
+/**
+ * Interprets the position abstraction value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void interpret_position_abstraction_value(const void* p0, const void* p1) {
+}
+
+/**
+ * Serializes the position abstraction value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void serialize_position_abstraction_value(const void* p0, const void* p1) {
+}
+
+/**
+ * Interprets the position location value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void interpret_position_location_value(const void* p0, const void* p1) {
+}
+
+/**
+ * Serializes the position location value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void serialize_position_location_value(const void* p0, const void* p1) {
+}
+
+/**
+ * Interprets the position model value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void interpret_position_model_value(const void* p0, const void* p1) {
+}
+
+/**
+ * Serializes the position model value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void serialize_position_model_value(const void* p0, const void* p1) {
+}
+
+/**
+ * Interprets the position constraint value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void interpret_position_constraint_value(const void* p0, const void* p1) {
+}
+
+/**
+ * Serializes the position constraint value.
+ *
+ * @param p0 the persistent value pointer
+ * @param p1 the persistent value count
+ */
+void serialize_position_constraint_value(const void* p0, const void* p1) {
 }
 
 //
-// Parts.
+// Attributes.
 //
 
 /**
- * Initializes the parts.
+ * Interprets super attributes.
  *
- * @param p0 the memory model
- * @param p1 the cybol parts
+ * @param p0 the persistent attributes pointer
+ * @param p1 the persistent attributes count
  */
-void initialize_parts(void* p0, const void* p1) {
+void interpret_super_attributes(const void* p0, const void* p1) {
 
-/*??
-    struct map* m = (struct map*) p1;
-    int count = 0;
-    int size = 0;
-    get_map_size(m, (void*) &size);
-    struct model* e = NULL_POINTER;
+    if (p1 != NULL_POINTER) {
 
-    while (count < size) {
+        int* pc = (int*) p1;
 
-        e = (struct model*) get_map_element_at_index(m, (void*) &count);
+        if (p0 != NULL_POINTER) {
 
-        if (e != NULL_POINTER) {
+            void** p = (void**) p0;
 
-            initialize_part(p0, e->part_models);
+            // The comparison result.
+            int r = 0;
+            // The current byte within the persistent model.
+            void* b = *p;
+            // The remaining bytes count.
+            int bc = *pc;
+            // The parse mode.
+            int m = ZERO_PARSE_MODE;
+            // The value begin pointer.
+            void* v = NULL_POINTER;
+            // The value count.
+            int vc = 0;
+            // The value begin count to be used for calculating the difference.
+            int vb = 0;
+
+            while (1) {
+
+                if (bc <= 0) {
+
+                    break;
+                }
+
+                //
+                // Zero parse mode.
+                //
+
+                if (m == ZERO_PARSE_MODE) {
+
+                    if (bc >= NAME_ATTRIBUTE_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &NAME_ATTRIBUTE, (void*) &CHARACTER_ARRAY, (void*) &NAME_ATTRIBUTE_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + NAME_ATTRIBUTE_COUNT;
+                            bc = bc - NAME_ATTRIBUTE_COUNT;
+
+                            // Set value begin pointer and count.
+                            v = b;
+                            vb = bc;
+
+                            // Set parse mode.
+                            m = NAME_ATTRIBUTE_PARSE_MODE;
+                        }
+                    }
+                }
+
+                if (m == ZERO_PARSE_MODE) {
+
+                    if (bc >= ABSTRACTION_ATTRIBUTE_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &ABSTRACTION_ATTRIBUTE, (void*) &CHARACTER_ARRAY, (void*) &ABSTRACTION_ATTRIBUTE_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + ABSTRACTION_ATTRIBUTE_COUNT;
+                            bc = bc - ABSTRACTION_ATTRIBUTE_COUNT;
+
+                            // Set value begin pointer and count.
+                            v = b;
+                            vb = bc;
+
+                            // Set parse mode.
+                            m = ABSTRACTION_ATTRIBUTE_PARSE_MODE;
+                        }
+                    }
+                }
+
+                if (m == ZERO_PARSE_MODE) {
+
+                    if (bc >= LOCATION_ATTRIBUTE_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &LOCATION_ATTRIBUTE, (void*) &CHARACTER_ARRAY, (void*) &LOCATION_ATTRIBUTE_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + LOCATION_ATTRIBUTE_COUNT;
+                            bc = bc - LOCATION_ATTRIBUTE_COUNT;
+
+                            // Set value begin pointer and count.
+                            v = b;
+                            vb = bc;
+
+                            // Set parse mode.
+                            m = LOCATION_ATTRIBUTE_PARSE_MODE;
+                        }
+                    }
+                }
+
+                if (m == ZERO_PARSE_MODE) {
+
+                    if (bc >= MODEL_ATTRIBUTE_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &MODEL_ATTRIBUTE, (void*) &CHARACTER_ARRAY, (void*) &MODEL_ATTRIBUTE_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + MODEL_ATTRIBUTE_COUNT;
+                            bc = bc - MODEL_ATTRIBUTE_COUNT;
+
+                            // Set value begin pointer and count.
+                            v = b;
+                            vb = bc;
+
+                            // Set parse mode.
+                            m = MODEL_ATTRIBUTE_PARSE_MODE;
+                        }
+                    }
+                }
+
+                if (m == ZERO_PARSE_MODE) {
+
+                    if (bc >= CONSTRAINT_ATTRIBUTE_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &CONSTRAINT_ATTRIBUTE, (void*) &CHARACTER_ARRAY, (void*) &CONSTRAINT_ATTRIBUTE_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + CONSTRAINT_ATTRIBUTE_COUNT;
+                            bc = bc - CONSTRAINT_ATTRIBUTE_COUNT;
+
+                            // Set value begin pointer and count.
+                            v = b;
+                            vb = bc;
+
+                            // Set parse mode.
+                            m = CONSTRAINT_ATTRIBUTE_PARSE_MODE;
+                        }
+                    }
+                }
+
+                if (m == ZERO_PARSE_MODE) {
+
+                    if (bc >= POSITION_ABSTRACTION_ATTRIBUTE_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &POSITION_ABSTRACTION_ATTRIBUTE, (void*) &CHARACTER_ARRAY, (void*) &POSITION_ABSTRACTION_ATTRIBUTE_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + POSITION_ABSTRACTION_ATTRIBUTE_COUNT;
+                            bc = bc - POSITION_ABSTRACTION_ATTRIBUTE_COUNT;
+
+                            // Set value begin pointer and count.
+                            v = b;
+                            vb = bc;
+
+                            // Set parse mode.
+                            m = POSITION_ABSTRACTION_ATTRIBUTE_PARSE_MODE;
+                        }
+                    }
+                }
+
+                if (m == ZERO_PARSE_MODE) {
+
+                    if (bc >= POSITION_LOCATION_ATTRIBUTE_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &POSITION_LOCATION_ATTRIBUTE, (void*) &CHARACTER_ARRAY, (void*) &POSITION_LOCATION_ATTRIBUTE_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + POSITION_LOCATION_ATTRIBUTE_COUNT;
+                            bc = bc - POSITION_LOCATION_ATTRIBUTE_COUNT;
+
+                            // Set value begin pointer and count.
+                            v = b;
+                            vb = bc;
+
+                            // Set parse mode.
+                            m = POSITION_LOCATION_ATTRIBUTE_PARSE_MODE;
+                        }
+                    }
+                }
+
+                if (m == ZERO_PARSE_MODE) {
+
+                    if (bc >= POSITION_MODEL_ATTRIBUTE_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &POSITION_MODEL_ATTRIBUTE, (void*) &CHARACTER_ARRAY, (void*) &POSITION_MODEL_ATTRIBUTE_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + POSITION_MODEL_ATTRIBUTE_COUNT;
+                            bc = bc - POSITION_MODEL_ATTRIBUTE_COUNT;
+
+                            // Set value begin pointer and count.
+                            v = b;
+                            vb = bc;
+
+                            // Set parse mode.
+                            m = POSITION_MODEL_ATTRIBUTE_PARSE_MODE;
+                        }
+                    }
+                }
+
+                if (m == ZERO_PARSE_MODE) {
+
+                    if (bc >= POSITION_CONSTRAINT_ATTRIBUTE_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &POSITION_CONSTRAINT_ATTRIBUTE, (void*) &CHARACTER_ARRAY, (void*) &POSITION_CONSTRAINT_ATTRIBUTE_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + POSITION_CONSTRAINT_ATTRIBUTE_COUNT;
+                            bc = bc - POSITION_CONSTRAINT_ATTRIBUTE_COUNT;
+
+                            // Set value begin pointer and count.
+                            v = b;
+                            vb = bc;
+
+                            // Set parse mode.
+                            m = POSITION_CONSTRAINT_ATTRIBUTE_PARSE_MODE;
+                        }
+                    }
+                }
+
+                // If this block is reached, then no known term was found before.
+                // The current byte pointer will just be incremented by one so
+                // that new characters are read and compared in the next loop cycle.
+                if (m == ZERO_PARSE_MODE) {
+
+                    // Increment current byte within persistent model.
+                    b++;
+                    // Decrement remaining bytes count.
+                    bc--;
+                }
+
+                //
+                // Special parse modes.
+                //
+                // These conditions are linked with else-if because if one term
+                // matches, the parse mode is switched back to ZERO_PARSE_MODE
+                // and no further terms have to be compared here.
+                //
+
+                // Reset comparison result.
+                // CAUTION! Do NOT delete this! One of the comparisons above
+                // may have set the result to 1 so that it has to be reset here.
+                r = 0;
+
+                if (m == NAME_ATTRIBUTE_PARSE_MODE) {
+
+                    if (bc >= ATTRIBUTE_END_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &ATTRIBUTE_END, (void*) &CHARACTER_ARRAY, (void*) &ATTRIBUTE_END_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Determine the value length as difference
+                            // of the formerly stored value begin count
+                            // and the current count.
+                            vc = vb - bc;
+
+                            // Interpret values.
+                            // Hand over the formerly stored value begin pointer
+                            // and its count.
+                            interpret_name_value((void*) &v, (void*) &vc);
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + ATTRIBUTE_END_COUNT;
+                            bc = bc - ATTRIBUTE_END_COUNT;
+
+                            // Reset values.
+                            v = NULL_POINTER;
+                            vc = 0;
+                            vb = 0;
+
+                            // Reset parse mode.
+                            m = ZERO_PARSE_MODE;
+                        }
+                    }
+
+                } else if (m == ABSTRACTION_ATTRIBUTE_PARSE_MODE) {
+
+                    if (bc >= ATTRIBUTE_END_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &ATTRIBUTE_END, (void*) &CHARACTER_ARRAY, (void*) &ATTRIBUTE_END_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Determine the value length as difference
+                            // of the formerly stored value begin count
+                            // and the current count.
+                            vc = vb - bc;
+
+                            // Interpret values.
+                            // Hand over the formerly stored value begin pointer
+                            // and its count.
+                            interpret_abstraction_value((void*) &v, (void*) &vc);
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + ATTRIBUTE_END_COUNT;
+                            bc = bc - ATTRIBUTE_END_COUNT;
+
+                            // Reset values.
+                            v = NULL_POINTER;
+                            vc = 0;
+                            vb = 0;
+
+                            // Reset parse mode.
+                            m = ZERO_PARSE_MODE;
+                        }
+                    }
+
+                } else if (m == LOCATION_ATTRIBUTE_PARSE_MODE) {
+
+                    if (bc >= ATTRIBUTE_END_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &ATTRIBUTE_END, (void*) &CHARACTER_ARRAY, (void*) &ATTRIBUTE_END_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Determine the value length as difference
+                            // of the formerly stored value begin count
+                            // and the current count.
+                            vc = vb - bc;
+
+                            // Interpret values.
+                            // Hand over the formerly stored value begin pointer
+                            // and its count.
+                            interpret_location_value((void*) &v, (void*) &vc);
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + ATTRIBUTE_END_COUNT;
+                            bc = bc - ATTRIBUTE_END_COUNT;
+
+                            // Reset values.
+                            v = NULL_POINTER;
+                            vc = 0;
+                            vb = 0;
+
+                            // Reset parse mode.
+                            m = ZERO_PARSE_MODE;
+                        }
+                    }
+
+                } else if (m == MODEL_ATTRIBUTE_PARSE_MODE) {
+
+                    if (bc >= ATTRIBUTE_END_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &ATTRIBUTE_END, (void*) &CHARACTER_ARRAY, (void*) &ATTRIBUTE_END_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Determine the value length as difference
+                            // of the formerly stored value begin count
+                            // and the current count.
+                            vc = vb - bc;
+
+                            // Interpret values.
+                            // Hand over the formerly stored value begin pointer
+                            // and its count.
+                            interpret_model_value((void*) &v, (void*) &vc);
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + ATTRIBUTE_END_COUNT;
+                            bc = bc - ATTRIBUTE_END_COUNT;
+
+                            // Reset values.
+                            v = NULL_POINTER;
+                            vc = 0;
+                            vb = 0;
+
+                            // Reset parse mode.
+                            m = ZERO_PARSE_MODE;
+                        }
+                    }
+
+                } else if (m == CONSTRAINT_ATTRIBUTE_PARSE_MODE) {
+
+                    if (bc >= ATTRIBUTE_END_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &ATTRIBUTE_END, (void*) &CHARACTER_ARRAY, (void*) &ATTRIBUTE_END_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Determine the value length as difference
+                            // of the formerly stored value begin count
+                            // and the current count.
+                            vc = vb - bc;
+
+                            // Interpret values.
+                            // Hand over the formerly stored value begin pointer
+                            // and its count.
+                            interpret_constraint_value((void*) &v, (void*) &vc);
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + ATTRIBUTE_END_COUNT;
+                            bc = bc - ATTRIBUTE_END_COUNT;
+
+                            // Reset values.
+                            v = NULL_POINTER;
+                            vc = 0;
+                            vb = 0;
+
+                            // Reset parse mode.
+                            m = ZERO_PARSE_MODE;
+                        }
+                    }
+
+                } else if (m == POSITION_ABSTRACTION_ATTRIBUTE_PARSE_MODE) {
+
+                    if (bc >= ATTRIBUTE_END_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &ATTRIBUTE_END, (void*) &CHARACTER_ARRAY, (void*) &ATTRIBUTE_END_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Determine the value length as difference
+                            // of the formerly stored value begin count
+                            // and the current count.
+                            vc = vb - bc;
+
+                            // Interpret values.
+                            // Hand over the formerly stored value begin pointer
+                            // and its count.
+                            interpret_position_abstraction_value((void*) &v, (void*) &vc);
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + ATTRIBUTE_END_COUNT;
+                            bc = bc - ATTRIBUTE_END_COUNT;
+
+                            // Reset values.
+                            v = NULL_POINTER;
+                            vc = 0;
+                            vb = 0;
+
+                            // Reset parse mode.
+                            m = ZERO_PARSE_MODE;
+                        }
+                    }
+
+                } else if (m == POSITION_LOCATION_ATTRIBUTE_PARSE_MODE) {
+
+                    if (bc >= ATTRIBUTE_END_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &ATTRIBUTE_END, (void*) &CHARACTER_ARRAY, (void*) &ATTRIBUTE_END_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Determine the value length as difference
+                            // of the formerly stored value begin count
+                            // and the current count.
+                            vc = vb - bc;
+
+                            // Interpret values.
+                            // Hand over the formerly stored value begin pointer
+                            // and its count.
+                            interpret_position_location_value((void*) &v, (void*) &vc);
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + ATTRIBUTE_END_COUNT;
+                            bc = bc - ATTRIBUTE_END_COUNT;
+
+                            // Reset values.
+                            v = NULL_POINTER;
+                            vc = 0;
+                            vb = 0;
+
+                            // Reset parse mode.
+                            m = ZERO_PARSE_MODE;
+                        }
+                    }
+
+                } else if (m == POSITION_MODEL_ATTRIBUTE_PARSE_MODE) {
+
+                    if (bc >= ATTRIBUTE_END_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &ATTRIBUTE_END, (void*) &CHARACTER_ARRAY, (void*) &ATTRIBUTE_END_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Determine the value length as difference
+                            // of the formerly stored value begin count
+                            // and the current count.
+                            vc = vb - bc;
+
+                            // Interpret values.
+                            // Hand over the formerly stored value begin pointer
+                            // and its count.
+                            interpret_position_model_value((void*) &v, (void*) &vc);
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + ATTRIBUTE_END_COUNT;
+                            bc = bc - ATTRIBUTE_END_COUNT;
+
+                            // Reset values.
+                            v = NULL_POINTER;
+                            vc = 0;
+                            vb = 0;
+
+                            // Reset parse mode.
+                            m = ZERO_PARSE_MODE;
+                        }
+                    }
+
+                } else if (m == POSITION_CONSTRAINT_ATTRIBUTE_PARSE_MODE) {
+
+                    if (bc >= ATTRIBUTE_END_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &ATTRIBUTE_END, (void*) &CHARACTER_ARRAY, (void*) &ATTRIBUTE_END_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Determine the value length as difference
+                            // of the formerly stored value begin count
+                            // and the current count.
+                            vc = vb - bc;
+
+                            // Interpret values.
+                            // Hand over the formerly stored value begin pointer
+                            // and its count.
+                            interpret_position_constraint_value((void*) &v, (void*) &vc);
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + ATTRIBUTE_END_COUNT;
+                            bc = bc - ATTRIBUTE_END_COUNT;
+
+                            // Reset values.
+                            v = NULL_POINTER;
+                            vc = 0;
+                            vb = 0;
+
+                            // Reset parse mode.
+                            m = ZERO_PARSE_MODE;
+                        }
+                    }
+                }
+
+                // Reset comparison result.
+                r = 0;
+            }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize parts. A cybol part is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not interpret super attributes. The persistent attributes is null.");
         }
 
-        count++;
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not interpret super attributes. The persistent attributes count is null.");
     }
-*/
 }
 
 /**
- * Finalizes the parts.
+ * Serializes super attributes.
  *
- * @param p0 the memory model
- * @param p1 the cybol parts
+ * @param p0 the persistent attributes pointer
+ * @param p1 the persistent attributes count
  */
-void finalize_parts(void* p0, const void* p1) {
+void serialize_super_attributes(const void* p0, const void* p1) {
+}
 
-/*??
-    struct map* m = (struct map*) p1;
-    int count = 0;
-    int size = 0;
-    get_map_size(m, (void*) &size);
-    struct model* e = NULL_POINTER;
+/**
+ * Interprets part attributes.
+ *
+ * @param p0 the persistent attributes pointer
+ * @param p1 the persistent attributes count
+ */
+void interpret_part_attributes(const void* p0, const void* p1) {
+}
 
-    while (count < size) {
-
-        e = (struct model*) get_map_element_at_index(m, (void*) &count);
-
-        if (e != NULL_POINTER) {
-
-            finalize_part(p0, e->part_models);
-
-        } else {
-
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize parts. A cybol part is null.");
-        }
-
-        count++;
-    }
-*/
+/**
+ * Serializes part attributes.
+ *
+ * @param p0 the persistent attributes pointer
+ * @param p1 the persistent attributes count
+ */
+void serialize_part_attributes(const void* p0, const void* p1) {
 }
 
 //
@@ -530,6 +1160,12 @@ void initialize_compound(void* p0, void* p1, void* p2, const void* p3, const voi
             int bc = *pc;
             // The parse mode.
             int m = ZERO_PARSE_MODE;
+            // The attribute begin pointer.
+            void* a = NULL_POINTER;
+            // The attribute count.
+            int ac = 0;
+            // The attribute begin count to be used for calculating the difference.
+            int ab = 0;
 
             //
             // ATTENTION!
@@ -538,18 +1174,193 @@ void initialize_compound(void* p0, void* p1, void* p2, const void* p3, const voi
             // can be viewed and edited using standard XML tools.
             //
 
-            if (bc >= PART_TAG_COUNT) {
+            while (1) {
 
-                compare_array_elements((void*) &b, (void*) &PART_TAG, (void*) &CHARACTER_ARRAY, (void*) &PART_TAG_COUNT, (void*) &r);
+                if (bc <= 0) {
 
-                if (r == 1) {
-
-                    m = PART_TAG_PARSE_MODE;
-                    b = b + PART_TAG_COUNT;
-                    bc = bc - PART_TAG_COUNT;
-
-//??                    interpret_part_attributes((void*) &m);
+                    break;
                 }
+
+                //
+                // Zero parse mode.
+                //
+
+                if (m == ZERO_PARSE_MODE) {
+
+                    if (bc >= COMMENT_TAG_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &COMMENT_TAG, (void*) &CHARACTER_ARRAY, (void*) &COMMENT_TAG_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + COMMENT_TAG_COUNT;
+                            bc = bc - COMMENT_TAG_COUNT;
+
+                            // Set parse mode.
+                            m = COMMENT_TAG_PARSE_MODE;
+                        }
+                    }
+                }
+
+                if (m == ZERO_PARSE_MODE) {
+
+                    if (bc >= SUPER_TAG_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &SUPER_TAG, (void*) &CHARACTER_ARRAY, (void*) &SUPER_TAG_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + SUPER_TAG_COUNT;
+                            bc = bc - SUPER_TAG_COUNT;
+
+                            // Set attribute begin pointer and count.
+                            a = b;
+                            ab = bc;
+
+                            // Set parse mode.
+                            m = SUPER_TAG_PARSE_MODE;
+                        }
+                    }
+                }
+
+                if (m == ZERO_PARSE_MODE) {
+
+                    if (bc >= PART_TAG_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &PART_TAG, (void*) &CHARACTER_ARRAY, (void*) &PART_TAG_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + PART_TAG_COUNT;
+                            bc = bc - PART_TAG_COUNT;
+
+                            // Set attribute values.
+                            a = b;
+                            ab = bc;
+
+                            // Set parse mode.
+                            m = PART_TAG_PARSE_MODE;
+                        }
+                    }
+                }
+
+                // If this block is reached, then no known term was found before.
+                // The current byte pointer will just be incremented by one so
+                // that new characters are read and compared in the next loop cycle.
+                if (m == ZERO_PARSE_MODE) {
+
+                    // Increment current byte within persistent model.
+                    b++;
+                    // Decrement remaining bytes count.
+                    bc--;
+                }
+
+                //
+                // Special parse modes.
+                //
+                // These conditions are linked with else-if because if one term
+                // matches, the parse mode is switched back to ZERO_PARSE_MODE
+                // and no further terms have to be compared here.
+                //
+
+                // Reset comparison result.
+                // CAUTION! Do NOT delete this! One of the comparisons above
+                // may have set the result to 1 so that it has to be reset here.
+                r = 0;
+
+                if (m == COMMENT_TAG_PARSE_MODE) {
+
+                    if (bc >= COMMENT_END_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &COMMENT_END, (void*) &CHARACTER_ARRAY, (void*) &COMMENT_END_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + COMMENT_END_COUNT;
+                            bc = bc - COMMENT_END_COUNT;
+
+                            // Reset parse mode.
+                            m = ZERO_PARSE_MODE;
+                        }
+                    }
+
+                } else if (m == SUPER_TAG_PARSE_MODE) {
+
+                    if (bc >= TAG_END_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &TAG_END, (void*) &CHARACTER_ARRAY, (void*) &TAG_END_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Determine the attributes length as difference
+                            // of the formerly stored attribute begin count
+                            // and the current count.
+                            ac = ab - bc;
+
+                            // Interpret attributes.
+                            // Hand over the formerly stored attribute begin pointer
+                            // and its count.
+                            interpret_super_attributes((void*) &a, (void*) &ac);
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + TAG_END_COUNT;
+                            bc = bc - TAG_END_COUNT;
+
+                            // Reset values.
+                            a = NULL_POINTER;
+                            ac = 0;
+                            ab = 0;
+
+                            // Reset parse mode.
+                            m = ZERO_PARSE_MODE;
+                        }
+                    }
+
+                } else if (m == PART_TAG_PARSE_MODE) {
+
+                    if (bc >= TAG_END_COUNT) {
+
+                        compare_array_elements((void*) &b, (void*) &TAG_END, (void*) &CHARACTER_ARRAY, (void*) &TAG_END_COUNT, (void*) &r);
+
+                        if (r == 1) {
+
+                            // Determine the attributes length as difference
+                            // of the formerly stored attribute begin count
+                            // and the current count.
+                            ac = ab - bc;
+
+                            // Interpret attributes.
+                            // Hand over the formerly stored attribute begin pointer
+                            // and its count.
+                            interpret_part_attributes((void*) &a, (void*) &ac);
+
+                            // Move current byte pointer
+                            // and remaining bytes count.
+                            b = b + TAG_END_COUNT;
+                            bc = bc - TAG_END_COUNT;
+
+                            // Reset values.
+                            a = NULL_POINTER;
+                            ac = 0;
+                            ab = 0;
+
+                            // Reset parse mode.
+                            m = ZERO_PARSE_MODE;
+                        }
+                    }
+                }
+
+                // Reset comparison result.
+                r = 0;
             }
 
         } else {
