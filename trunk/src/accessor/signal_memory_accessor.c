@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2005-04-01 14:55:40 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2005-04-05 16:17:01 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -601,7 +601,7 @@ void get_new_signal_id(const void* p0, const void* p1, void* p2) {
                 // The maximum signal identification.
                 int max = -1;
                 // The identification.
-                int* id = INTEGER_NULL_POINTER;
+                void** id = POINTER_NULL_POINTER;
 
                 while (1) {
 
@@ -613,13 +613,13 @@ void get_new_signal_id(const void* p0, const void* p1, void* p2) {
                     // Get signal identification.
                     get_array_elements(*ids, (void*) &j, (void*) &id, (void*) POINTER_ARRAY);
 
-                    if (*id > max) {
+                    if ( *((int*)*id) > max) {
 
-                        max = *id;
+                        max = *((int*)*id);
                     }
 
                     // Reset identification.
-                    id = INTEGER_NULL_POINTER;
+                    id = POINTER_NULL_POINTER;
 
                     j++;
                 }
