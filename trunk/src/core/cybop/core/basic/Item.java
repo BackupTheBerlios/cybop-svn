@@ -76,7 +76,7 @@ import cybop.core.model.principle.*;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.13 $ $Date: 2003-03-22 15:26:32 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-03-26 07:48:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -1332,56 +1332,67 @@ public class Item extends State {
      *
      * @param p the position relative to this container item
      * @return the child item
-     * @exception NullPointerException if the item is null
+     * @exception NullPointerException if the children array is null
+     * @exception NullPointerException if the child item is null
      */
     public Item get(Space p) throws Exception, NullPointerException {
 
         Item child = null;
 /*??
-        Children[] c = getChildren();
-        int loops = c.length;
-//??        int loops = getChildrenNumber();
-        Item item = null;
-        Space rp = null;
-        Integer n = null;
+        Item[] c = getChildren();
 
-        for (int i = 0; i < loops; i++) {
+        if (c != null) {
 
-            item = c[i];
+            int no = getChildrenNumber();
+            Item item = null;
+            Space rp = null;
+            Integer n = null;
+            int i = 0;
 
-            // Transform position into a position relative to (within) the child item.
-            rp = new Space(); //?? p.subtract(originPositionDesChildItems);
+            while (i < no) {
 
-            if (item != null) {
+                item = c[i];
 
-                if (item.contains(rp)) {
+                // Transform position into a position relative to (within) the child item.
+                rp = new Space(); //?? p.subtract(originPositionDesChildItems);
 
-                    // Set resulting child item to the current item by default.
-                    // If the current item does not have children or none of the
-                    // child items contains the position, then the child item is
-                    // returned itself.
-                    // For example, a mouse may be clicked on a panel, in the gap between
-                    // two buttons. Then, none of the buttons contains the given position
-                    // but the panel as parent container of the buttons does.
-                    child = item;
-                    n = item.getChildrenNumber();
+                if (item != null) {
 
-                    if (n != null) {
-                        
-                        if (n.isGreaterThan(0)) {
+                    if (item.contains(rp)) {
 
-                            // The child item has children, so call this method
-                            // recursively on child item, to get the child item's
-                            // child item which is located at the given position.
-                            child = item.get(rp);
+                        // Set resulting child item to the current item by default.
+                        // If the current item does not have children or none of the
+                        // child items contains the position, then the child item is
+                        // returned itself.
+                        // For example, a mouse may be clicked on a panel, in the gap between
+                        // two buttons. Then, none of the buttons contains the given position
+                        // but the panel as parent container of the buttons does.
+                        child = item;
+                        n = item.getChildrenNumber();
+    
+                        if (n != null) {
+                            
+                            if (n.isGreaterThan(0)) {
+    
+                                // The child item has children, so call this method
+                                // recursively on child item, to get the child item's
+                                // child item which is located at the given position.
+                                child = item.get(rp);
+                            }
                         }
                     }
-                }
-
-            } else {
     
-                throw new NullPointerException("Could not get child item. An item is null.");
+                } else {
+        
+                    throw new NullPointerException("Could not get child item. An item is null.");
+                }
+                
+                i++;
             }
+
+        } else {
+
+            throw new NullPointerException("Could not get child item. The children array is null.");
         }
 */
 
