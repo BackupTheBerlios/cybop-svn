@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2005-01-24 22:47:53 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2005-01-29 13:30:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -85,74 +85,130 @@ void set_signal(void* p0, void* p1, void* p2,
             get_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) POINTER_ARRAY);
             get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) POINTER_ARRAY);
 
-            // The index.
-            int i = *c;
+            if (a != POINTER_NULL_POINTER) {
 
-            if (i >= 0) {
+                if (ac != POINTER_NULL_POINTER) {
 
-                if (i == *s) {
+                    if (m != POINTER_NULL_POINTER) {
 
-                    // Increase size.
-                    *s = (*s * *SIGNAL_MEMORY_RESIZE_FACTOR) + 1;
+                        if (mc != POINTER_NULL_POINTER) {
 
-                    // Resize abstractions, models, details, priorities, identifications.
-                    resize_array(a, p2, (void*) POINTER_ARRAY);
-                    resize_array(ac, p2, (void*) POINTER_ARRAY);
-                    resize_array(m, p2, (void*) POINTER_ARRAY);
-                    resize_array(mc, p2, (void*) POINTER_ARRAY);
-                    resize_array(d, p2, (void*) POINTER_ARRAY);
-                    resize_array(dc, p2, (void*) POINTER_ARRAY);
-                    resize_array(p, p2, (void*) POINTER_ARRAY);
-                    resize_array(id, p2, (void*) POINTER_ARRAY);
+                            if (d != POINTER_NULL_POINTER) {
 
-                    // Set new array reference.
-                    // CAUTION! If an array gets resized, a new array is
-                    // created and the contents of the old array gets copied.
-                    // Therefore, the new array reference needs to be set.
-                    // The old array gets destroyed automatically by resize.
-                    set_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) a, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                    set_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) ac, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                    set_array_elements(p0, (void*) SIGNALS_MODELS_INDEX, (void*) m, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                    set_array_elements(p0, (void*) SIGNALS_MODELS_COUNTS_INDEX, (void*) mc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                    set_array_elements(p0, (void*) SIGNALS_DETAILS_INDEX, (void*) d, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                    set_array_elements(p0, (void*) SIGNALS_DETAILS_COUNTS_INDEX, (void*) dc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                    set_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                    set_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) id, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                }
+                                if (dc != POINTER_NULL_POINTER) {
 
-                if (i < *s) {
+                                    if (p != POINTER_NULL_POINTER) {
 
-                    // Set abstraction, model, details, priority, identification.
-                    set_array_elements(*a, (void*) &i, (void*) &p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                    set_array_elements(*ac, (void*) &i, (void*) &p4, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                    set_array_elements(*m, (void*) &i, (void*) &p5, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                    set_array_elements(*mc, (void*) &i, (void*) &p6, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                    set_array_elements(*d, (void*) &i, (void*) &p7, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                    set_array_elements(*dc, (void*) &i, (void*) &p8, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                    set_array_elements(*p, (void*) &i, (void*) &p9, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                    set_array_elements(*id, (void*) &i, (void*) &p10, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                        if (id != POINTER_NULL_POINTER) {
 
-                    // Increment count.
-                    (*c)++;
+                                            // The index.
+                                            int i = *c;
+
+                                            if (i >= 0) {
+
+                                                if (i == *s) {
+
+                                                    // Increase size.
+                                                    *s = (*s * *SIGNAL_MEMORY_RESIZE_FACTOR) + 1;
+
+                                                    // Resize abstractions, models, details, priorities, identifications.
+                                                    resize_array(a, p2, (void*) POINTER_ARRAY);
+                                                    resize_array(ac, p2, (void*) POINTER_ARRAY);
+                                                    resize_array(m, p2, (void*) POINTER_ARRAY);
+                                                    resize_array(mc, p2, (void*) POINTER_ARRAY);
+                                                    resize_array(d, p2, (void*) POINTER_ARRAY);
+                                                    resize_array(dc, p2, (void*) POINTER_ARRAY);
+                                                    resize_array(p, p2, (void*) POINTER_ARRAY);
+                                                    resize_array(id, p2, (void*) POINTER_ARRAY);
+
+                                                    // Set new array reference.
+                                                    // CAUTION! If an array gets resized, a new array is
+                                                    // created and the contents of the old array gets copied.
+                                                    // Therefore, the new array reference needs to be set.
+                                                    // The old array gets destroyed automatically by resize.
+                                                    set_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) a, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) ac, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(p0, (void*) SIGNALS_MODELS_INDEX, (void*) m, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(p0, (void*) SIGNALS_MODELS_COUNTS_INDEX, (void*) mc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(p0, (void*) SIGNALS_DETAILS_INDEX, (void*) d, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(p0, (void*) SIGNALS_DETAILS_COUNTS_INDEX, (void*) dc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) id, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                }
+
+                                                if (i < *s) {
+
+                                                    // Set abstraction, model, details, priority, identification.
+                                                    set_array_elements(*a, (void*) &i, (void*) &p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*ac, (void*) &i, (void*) &p4, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*m, (void*) &i, (void*) &p5, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*mc, (void*) &i, (void*) &p6, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*d, (void*) &i, (void*) &p7, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*dc, (void*) &i, (void*) &p8, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*p, (void*) &i, (void*) &p9, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*id, (void*) &i, (void*) &p10, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+
+                                                    // Increment count.
+                                                    (*c)++;
+
+                                                } else {
+
+                                                    log_message_debug("Could not set signal. The index exceeds the size.");
+                                                }
+
+                                            } else {
+
+                                                log_message_debug("Could not set signal. The index is negativ.");
+                                            }
+
+                                        } else {
+
+                                            log_message_debug("Could not set signal. The identifications is null.");
+                                        }
+
+                                    } else {
+
+                                        log_message_debug("Could not set signal. The priorities is null.");
+                                    }
+
+                                } else {
+
+                                    log_message_debug("Could not set signal. The details counts is null.");
+                                }
+
+                            } else {
+
+                                log_message_debug("Could not set signal. The details is null.");
+                            }
+
+                        } else {
+
+                            log_message_debug("Could not set signal. The models counts is null.");
+                        }
+
+                    } else {
+
+                        log_message_debug("Could not set signal. The models is null.");
+                    }
 
                 } else {
 
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set signal. The index exceeds the size.");
+                    log_message_debug("Could not set signal. The abstractions counts is null.");
                 }
 
             } else {
 
-//??              log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set signal. The index is negativ.");
+                log_message_debug("Could not set signal. The abstractions is null.");
             }
 
         } else {
 
-//??              log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set signal. The signal count is null.");
+            log_message_debug("Could not set signal. The signal memory count is null.");
         }
 
     } else {
 
-//??              log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set signal. The signal size is null.");
+        log_message_debug("Could not set signal. The signal memory size is null.");
     }
 }
 
@@ -180,66 +236,122 @@ void remove_signal(void* p0, void* p1, void* p2, const void* p3) {
 
                 log_message_debug("Remove signal.");
 
-                if (*i >= 0) {
+                // The abstractions, models, details, priorities, identifications.
+                void** a = POINTER_NULL_POINTER;
+                void** ac = POINTER_NULL_POINTER;
+                void** m = POINTER_NULL_POINTER;
+                void** mc = POINTER_NULL_POINTER;
+                void** d = POINTER_NULL_POINTER;
+                void** dc = POINTER_NULL_POINTER;
+                void** p = POINTER_NULL_POINTER;
+                void** id = POINTER_NULL_POINTER;
 
-                    // The abstractions, models, details, priorities, identifications.
-                    void** a = POINTER_NULL_POINTER;
-                    void** ac = POINTER_NULL_POINTER;
-                    void** m = POINTER_NULL_POINTER;
-                    void** mc = POINTER_NULL_POINTER;
-                    void** d = POINTER_NULL_POINTER;
-                    void** dc = POINTER_NULL_POINTER;
-                    void** p = POINTER_NULL_POINTER;
-                    void** id = POINTER_NULL_POINTER;
+                // Get abstractions, models, details, priorities, identifications.
+                get_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) POINTER_ARRAY);
+                get_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) POINTER_ARRAY);
+                get_array_elements(p0, (void*) SIGNALS_MODELS_INDEX, (void*) &m, (void*) POINTER_ARRAY);
+                get_array_elements(p0, (void*) SIGNALS_MODELS_COUNTS_INDEX, (void*) &mc, (void*) POINTER_ARRAY);
+                get_array_elements(p0, (void*) SIGNALS_DETAILS_INDEX, (void*) &d, (void*) POINTER_ARRAY);
+                get_array_elements(p0, (void*) SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc, (void*) POINTER_ARRAY);
+                get_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) POINTER_ARRAY);
+                get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) POINTER_ARRAY);
 
-                    // Get abstractions, models, details, priorities, identifications.
-                    get_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) POINTER_ARRAY);
-                    get_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) POINTER_ARRAY);
-                    get_array_elements(p0, (void*) SIGNALS_MODELS_INDEX, (void*) &m, (void*) POINTER_ARRAY);
-                    get_array_elements(p0, (void*) SIGNALS_MODELS_COUNTS_INDEX, (void*) &mc, (void*) POINTER_ARRAY);
-                    get_array_elements(p0, (void*) SIGNALS_DETAILS_INDEX, (void*) &d, (void*) POINTER_ARRAY);
-                    get_array_elements(p0, (void*) SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc, (void*) POINTER_ARRAY);
-                    get_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) POINTER_ARRAY);
-                    get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) POINTER_ARRAY);
+                if (a != POINTER_NULL_POINTER) {
 
-                    if (*i < *c) {
+                    if (ac != POINTER_NULL_POINTER) {
 
-                        // Remove abstraction, model, details, priority, identification.
-                        remove_array_elements(*a, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                        remove_array_elements(*ac, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                        remove_array_elements(*m, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                        remove_array_elements(*mc, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                        remove_array_elements(*d, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                        remove_array_elements(*dc, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                        remove_array_elements(*p, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                        remove_array_elements(*id, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                        if (m != POINTER_NULL_POINTER) {
 
-                        // Decrement count.
-                        (*c)--;
+                            if (mc != POINTER_NULL_POINTER) {
+
+                                if (d != POINTER_NULL_POINTER) {
+
+                                    if (dc != POINTER_NULL_POINTER) {
+
+                                        if (p != POINTER_NULL_POINTER) {
+
+                                            if (id != POINTER_NULL_POINTER) {
+
+                                                if (*i >= 0) {
+
+                                                    if (*i < *c) {
+
+                                                        // Remove abstraction, model, details, priority, identification.
+                                                        remove_array_elements(*a, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                        remove_array_elements(*ac, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                        remove_array_elements(*m, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                        remove_array_elements(*mc, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                        remove_array_elements(*d, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                        remove_array_elements(*dc, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                        remove_array_elements(*p, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                        remove_array_elements(*id, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+
+                                                        // Decrement count.
+                                                        (*c)--;
+
+                                                    } else {
+
+                                                        log_message_debug("Could not remove signal. The index exceeds the count.");
+                                                    }
+
+                                                } else {
+
+                                                    log_message_debug("Could not remove signal. The index is negativ.");
+                                                }
+
+                                            } else {
+
+                                                log_message_debug("Could not remove signal. The identifications is null.");
+                                            }
+
+                                        } else {
+
+                                            log_message_debug("Could not remove signal. The priorities is null.");
+                                        }
+
+                                    } else {
+
+                                        log_message_debug("Could not remove signal. The details counts is null.");
+                                    }
+
+                                } else {
+
+                                    log_message_debug("Could not remove signal. The details is null.");
+                                }
+
+                            } else {
+
+                                log_message_debug("Could not remove signal. The models counts is null.");
+                            }
+
+                        } else {
+
+                            log_message_debug("Could not remove signal. The models is null.");
+                        }
 
                     } else {
 
-//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove signal. The index exceeds the count.");
+                        log_message_debug("Could not remove signal. The abstractions counts is null.");
                     }
 
                 } else {
 
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove signal. The index is negativ.");
+                    log_message_debug("Could not remove signal. The abstractions is null.");
                 }
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove signal. The signal memory count is null.");
+                log_message_debug("Could not remove signal. The signal memory count is null.");
             }
 
         } else {
 
-//??           log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove signal. The signal memory size is null.");
+            log_message_debug("Could not remove signal. The signal memory size is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove signal. The index is null.");
+        log_message_debug("Could not remove signal. The index is null.");
     }
 }
 
@@ -271,58 +383,114 @@ void get_signal(const void* p0, const void* p1, const void* p2, void* p3, void* 
 
             log_message_debug("Get signal.");
 
-            if (*i >= 0) {
+            // The abstractions, models, details, priorities, identifications.
+            void** a = POINTER_NULL_POINTER;
+            void** ac = POINTER_NULL_POINTER;
+            void** m = POINTER_NULL_POINTER;
+            void** mc = POINTER_NULL_POINTER;
+            void** d = POINTER_NULL_POINTER;
+            void** dc = POINTER_NULL_POINTER;
+            void** p = POINTER_NULL_POINTER;
+            void** id = POINTER_NULL_POINTER;
 
-                // The abstractions, models, details, priorities, identifications.
-                void** a = POINTER_NULL_POINTER;
-                void** ac = POINTER_NULL_POINTER;
-                void** m = POINTER_NULL_POINTER;
-                void** mc = POINTER_NULL_POINTER;
-                void** d = POINTER_NULL_POINTER;
-                void** dc = POINTER_NULL_POINTER;
-                void** p = POINTER_NULL_POINTER;
-                void** id = POINTER_NULL_POINTER;
+            // Get abstractions, models, details, priorities, identifications.
+            get_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) POINTER_ARRAY);
+            get_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) POINTER_ARRAY);
+            get_array_elements(p0, (void*) SIGNALS_MODELS_INDEX, (void*) &m, (void*) POINTER_ARRAY);
+            get_array_elements(p0, (void*) SIGNALS_MODELS_COUNTS_INDEX, (void*) &mc, (void*) POINTER_ARRAY);
+            get_array_elements(p0, (void*) SIGNALS_DETAILS_INDEX, (void*) &d, (void*) POINTER_ARRAY);
+            get_array_elements(p0, (void*) SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc, (void*) POINTER_ARRAY);
+            get_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) POINTER_ARRAY);
+            get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) POINTER_ARRAY);
 
-                // Get abstractions, models, details, priorities, identifications.
-                get_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) POINTER_ARRAY);
-                get_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) POINTER_ARRAY);
-                get_array_elements(p0, (void*) SIGNALS_MODELS_INDEX, (void*) &m, (void*) POINTER_ARRAY);
-                get_array_elements(p0, (void*) SIGNALS_MODELS_COUNTS_INDEX, (void*) &mc, (void*) POINTER_ARRAY);
-                get_array_elements(p0, (void*) SIGNALS_DETAILS_INDEX, (void*) &d, (void*) POINTER_ARRAY);
-                get_array_elements(p0, (void*) SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc, (void*) POINTER_ARRAY);
-                get_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) POINTER_ARRAY);
-                get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) POINTER_ARRAY);
+            if (a != POINTER_NULL_POINTER) {
 
-                if (*i < *c) {
+                if (ac != POINTER_NULL_POINTER) {
 
-                    // Get abstraction, model, details, priority, identification.
-                    get_array_elements(*a, p2, p3, (void*) POINTER_ARRAY);
-                    get_array_elements(*ac, p2, p4, (void*) POINTER_ARRAY);
-                    get_array_elements(*m, p2, p5, (void*) POINTER_ARRAY);
-                    get_array_elements(*mc, p2, p6, (void*) POINTER_ARRAY);
-                    get_array_elements(*d, p2, p7, (void*) POINTER_ARRAY);
-                    get_array_elements(*dc, p2, p8, (void*) POINTER_ARRAY);
-                    get_array_elements(*p, p2, p9, (void*) POINTER_ARRAY);
-                    get_array_elements(*id, p2, p10, (void*) POINTER_ARRAY);
+                    if (m != POINTER_NULL_POINTER) {
+
+                        if (mc != POINTER_NULL_POINTER) {
+
+                            if (d != POINTER_NULL_POINTER) {
+
+                                if (dc != POINTER_NULL_POINTER) {
+
+                                    if (p != POINTER_NULL_POINTER) {
+
+                                        if (id != POINTER_NULL_POINTER) {
+
+                                            if (*i >= 0) {
+
+                                                if (*i < *c) {
+
+                                                    // Get abstraction, model, details, priority, identification.
+                                                    get_array_elements(*a, p2, p3, (void*) POINTER_ARRAY);
+                                                    get_array_elements(*ac, p2, p4, (void*) POINTER_ARRAY);
+                                                    get_array_elements(*m, p2, p5, (void*) POINTER_ARRAY);
+                                                    get_array_elements(*mc, p2, p6, (void*) POINTER_ARRAY);
+                                                    get_array_elements(*d, p2, p7, (void*) POINTER_ARRAY);
+                                                    get_array_elements(*dc, p2, p8, (void*) POINTER_ARRAY);
+                                                    get_array_elements(*p, p2, p9, (void*) POINTER_ARRAY);
+                                                    get_array_elements(*id, p2, p10, (void*) POINTER_ARRAY);
+
+                                                } else {
+
+                                                    log_message_debug("Could not get signal. The index exceeds the count.");
+                                                }
+
+                                            } else {
+
+                                                log_message_debug("Could not get signal. The index is negativ.");
+                                            }
+
+                                        } else {
+
+                                            log_message_debug("Could not get signal. The identifications is null.");
+                                        }
+
+                                    } else {
+
+                                        log_message_debug("Could not get signal. The priorities is null.");
+                                    }
+
+                                } else {
+
+                                    log_message_debug("Could not get signal. The details counts is null.");
+                                }
+
+                            } else {
+
+                                log_message_debug("Could not get signal. The details is null.");
+                            }
+
+                        } else {
+
+                            log_message_debug("Could not get signal. The models counts is null.");
+                        }
+
+                    } else {
+
+                        log_message_debug("Could not get signal. The models is null.");
+                    }
 
                 } else {
 
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get signal. The index exceeds the count.");
+                    log_message_debug("Could not get signal. The abstractions counts is null.");
                 }
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get signal. The index is negativ.");
+                log_message_debug("Could not get signal. The abstractions is null.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get signal. The signal memory count is null.");
+            log_message_debug("Could not get signal. The signal memory count is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get signal. The index is null.");
+        log_message_debug("Could not get signal. The index is null.");
     }
 }
 
@@ -349,46 +517,53 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
             // Get signal priorities.
             get_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &sp, (void*) POINTER_ARRAY);
 
-            // The loop variable.
-            int j = 0;
-            // The priority.
-            int* prio = INTEGER_NULL_POINTER;
-            // The highest priority.
-            // CAUTION! Do not set it to zero, because then the priority
-            // will not be set, due to the comparison: if (prio > h)
-            // The smallest possible priority is zero and greater than minus one.
-            int h = -1;
+            if (sp != POINTER_NULL_POINTER) {
 
-            while (1) {
+                // The loop variable.
+                int j = 0;
+                // The priority.
+                int* prio = INTEGER_NULL_POINTER;
+                // The highest priority.
+                // CAUTION! Do not set it to zero, because then the priority
+                // will not be set, due to the comparison: if (prio > h)
+                // The smallest possible priority is zero and greater than minus one.
+                int h = -1;
 
-                if (j >= *c) {
+                while (1) {
 
-                    break;
+                    if (j >= *c) {
+
+                        break;
+                    }
+
+                    // Get signal priority.
+                    get_array_elements(*sp, (void*) &j, (void*) &prio, (void*) POINTER_ARRAY);
+
+                    if (*prio > h) {
+
+                        h = *prio;
+
+                        // If a signal with higher priority is found,
+                        // then its index is the one to be returned.
+                        *i = j;
+                    }
+
+                    j++;
                 }
 
-                // Get signal priority.
-                get_array_elements(*sp, (void*) &j, (void*) &prio, (void*) POINTER_ARRAY);
+            } else {
 
-                if (*prio > h) {
-
-                    h = *prio;
-
-                    // If a signal with higher priority is found,
-                    // then its index is the one to be returned.
-                    *i = j;
-                }
-
-                j++;
+                log_message_debug("Could not get highest priority index. The priorities is null.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get highest priority index. The signal memory count is null.");
+            log_message_debug("Could not get highest priority index. The signal memory count is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get highest priority index. The index is null.");
+        log_message_debug("Could not get highest priority index. The index is null.");
     }
 }
 
@@ -399,7 +574,7 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
  *
  * @param p0 the signal memory
  * @param p1 the signal memory count
- * @param p2 the signal id (Hand over as reference!)
+ * @param p2 the signal identification (Hand over as reference!)
  */
 void get_new_signal_id(const void* p0, const void* p1, void* p2) {
 
@@ -417,41 +592,48 @@ void get_new_signal_id(const void* p0, const void* p1, void* p2) {
             // Get signal identifications.
             get_array_elements(p0, (void*) &SIGNALS_IDENTIFICATIONS_INDEX, (void*) &ids, (void*) POINTER_ARRAY);
 
-            // The loop variable.
-            int j = 0;
-            // The maximum signal identification.
-            int max = -1;
-            // The identification.
-            int* id = INTEGER_NULL_POINTER;
+            if (ids != POINTER_NULL_POINTER) {
 
-            while (1) {
+                // The loop variable.
+                int j = 0;
+                // The maximum signal identification.
+                int max = -1;
+                // The identification.
+                int* id = INTEGER_NULL_POINTER;
 
-                if (j >= *mc) {
+                while (1) {
 
-                    break;
+                    if (j >= *mc) {
+
+                        break;
+                    }
+
+                    // Get signal identification.
+                    get_array_elements(*ids, (void*) &j, (void*) &id, (void*) POINTER_ARRAY);
+
+                    if (*id > max) {
+
+                        max = *id;
+                    }
+
+                    j++;
                 }
 
-                // Get signal identification.
-                get_array_elements(*ids, (void*) &j, (void*) &id, (void*) POINTER_ARRAY);
+                *i = max + 1;
 
-                if (*id > max) {
+            } else {
 
-                    max = *id;
-                }
-
-                j++;
+                log_message_debug("Could not get new signal identification. The identifications is null.");
             }
-
-            *i = max + 1;
 
         } else {
 
-            log_message_debug("The signal memory count is null.");
+            log_message_debug("Could not get new signal identification. The signal memory count is null.");
         }
 
     } else {
 
-        log_message_debug("The new signal id is null.");
+        log_message_debug("Could not get new signal identification. The new signal id is null.");
     }
 }
 
