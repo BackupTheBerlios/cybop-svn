@@ -33,7 +33,6 @@ import cybop.core.mouse.*;
 import cybop.core.screen.*;
 import cybop.core.signal.*;
 import cybop.core.system.*;
-import cybop.core.system.chain.*;
 import cybop.core.system.region.controller.*;
 import cybop.core.system.region.controller.translator.*;
 
@@ -51,7 +50,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.24 $ $Date: 2003-06-29 21:31:58 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2003-06-30 09:49:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {

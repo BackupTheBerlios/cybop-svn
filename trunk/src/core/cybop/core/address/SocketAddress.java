@@ -22,7 +22,7 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.system.chain;
+package cybop.core.address;
 
 import cybop.core.model.Integer;
 import cybop.core.model.String;
@@ -30,10 +30,10 @@ import cybop.core.model.String;
 /**
  * This class represents a socket address.<br><br>
  *
- * @version $Revision: 1.7 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-30 09:49:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class SocketAddress extends Address {
+public class SocketAddress extends AddressItem {
 
     //
     // Children names.

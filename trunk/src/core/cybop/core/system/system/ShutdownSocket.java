@@ -27,7 +27,6 @@ package cybop.core.system.system;
 import cybop.core.model.Boolean;
 import cybop.core.model.String;
 import cybop.core.signal.*;
-import cybop.core.system.chain.*;
 
 /**
  * This class represents a shutdown socket.<br><br>
@@ -35,7 +34,7 @@ import cybop.core.system.chain.*;
  * It is the communication partner that can be asked by another system
  * to shutdown a system.
  *
- * @version $Revision: 1.8 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-06-30 09:49:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ShutdownSocket extends Socket {

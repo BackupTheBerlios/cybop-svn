@@ -27,14 +27,13 @@ package cybop.core.system.system;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
 import cybop.core.system.System;
-import cybop.core.system.chain.*;
 
 /**
  * This class represents a socket.<br><br>
  *
  * A socket is an endpoint for communication between two machines.
  *
- * @version $Revision: 1.7 $ $Date: 2003-06-18 11:54:34 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-06-30 09:49:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Socket extends System {

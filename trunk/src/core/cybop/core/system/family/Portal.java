@@ -32,7 +32,6 @@ import cybop.core.system.*;
 import cybop.core.system.System;
 import cybop.core.system.block.*;
 import cybop.core.system.block.controller.*;
-import cybop.core.system.chain.*;
 
 /**
  * This class represents a portal.<br><br>
@@ -49,7 +48,7 @@ import cybop.core.system.chain.*;
  * Child systems can be integrated into the portal system's Frame as Frame,
  * InternalFrame or TabPage.
  *
- * @version $Revision: 1.14 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-06-30 09:49:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Portal extends Family {

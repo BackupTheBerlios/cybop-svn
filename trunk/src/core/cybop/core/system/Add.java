@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Ip4Address.java,v $
+ * $RCSfile: Add.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,16 +22,33 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.system.chain;
+package cybop.core.system;
 
-import cybop.core.model.String;
+import cybop.core.category.*;
 
 /**
- * This class represents an internet protocol 4 address.<br><br>
+ * This is the add action.<br><br>
  *
- * @version $Revision: 1.4 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-30 09:49:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Ip4Address extends Address {
+public class Add extends Item {
+
+    /**
+     * Processes the data.
+     *
+     * @param d the data
+     */
+/*??
+    public void process(Data d) {
+
+        if (d != null) {
+
+//??            operation1(d1);            
+//??            operation2(d2);            
+//??            operation3(d3);            
+        }
+    }
+*/
 }
 

@@ -24,6 +24,7 @@
 
 package cybop.core.system;
 
+import cybop.core.address.*;
 import cybop.core.category.*;
 import cybop.core.logrecord.*;
 import cybop.core.model.*;
@@ -32,7 +33,6 @@ import cybop.core.model.Integer;
 import cybop.core.model.String;
 import cybop.core.signal.*;
 import cybop.core.system.block.*;
-import cybop.core.system.chain.*;
 import cybop.core.system.region.controller.*;
 import cybop.core.system.region.controller.translator.*;
 import cybop.core.system.system.*;
@@ -59,7 +59,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.24 $ $Date: 2003-06-23 10:23:10 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2003-06-30 09:49:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends SystemItem implements java.lang.Runnable {

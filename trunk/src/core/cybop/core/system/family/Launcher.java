@@ -34,7 +34,6 @@ import cybop.core.signal.*;
 import cybop.core.screen.*;
 import cybop.core.system.*;
 import cybop.core.system.System;
-import cybop.core.system.chain.*;
 import cybop.core.system.block.*;
 import cybop.core.system.system.*;
 
@@ -70,7 +69,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.36 $ $Date: 2003-06-29 21:31:58 $ $Author: christian $
+ * @version $Revision: 1.37 $ $Date: 2003-06-30 09:49:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {

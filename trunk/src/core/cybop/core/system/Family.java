@@ -30,7 +30,6 @@ import cybop.core.model.Boolean;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
 import cybop.core.signal.*;
-import cybop.core.system.chain.*;
 import cybop.core.system.system.*;
 
 /**
@@ -50,7 +49,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.24 $ $Date: 2003-06-23 10:23:10 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2003-06-30 09:49:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {

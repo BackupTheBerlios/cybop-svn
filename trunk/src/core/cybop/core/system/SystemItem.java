@@ -29,7 +29,6 @@ import cybop.core.model.*;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
 import cybop.core.signal.*;
-import cybop.core.system.chain.*;
 
 /**
  * This class represents a system item.<br><br>
@@ -37,7 +36,27 @@ import cybop.core.system.chain.*;
  * A system item has special properties like configuration or log record and
  * is able to create and send signals.
  *
- * @version $Revision: 1.13 $ $Date: 2003-06-23 10:23:10 $ $Author: christian $
+ * Subclasses of system item integrate with the following system ontology:<br><br>
+ * <table with="100%">
+ * <tr>
+ *     <th>System Name</th>
+ *     <th>Controled Actions (Operations, Instructions, Commands, Events)</th>
+ * </tr>
+ * <tr>
+ *     <td>Application</td>
+ *     <td>Domain-specific Actions</td>
+ * </tr>
+ * <tr>
+ *     <td>Operating System</td>
+ *     <td>Memory Organization, Parallel Execution of Programs</td>
+ * </tr>
+ * <tr>
+ *     <td>Micro Program</td>
+ *     <td>Instruction Set Architecture (ISA)</td>
+ * </tr>
+ * </table>
+ *
+ * @version $Revision: 1.14 $ $Date: 2003-06-30 09:49:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemItem extends Item {

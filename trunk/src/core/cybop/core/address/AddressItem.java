@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Ip6Address.java,v $
+ * $RCSfile: AddressItem.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,16 +22,18 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.system.chain;
+package cybop.core.address;
 
-import cybop.core.model.String;
+import cybop.core.category.*;
 
 /**
- * This class represents an internet protocol 6 address.<br><br>
+ * This class represents an address item.<br><br>
  *
- * @version $Revision: 1.4 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * It contains information of how to contact a system.
+ *
+ * @version $Revision: 1.1 $ $Date: 2003-06-30 09:49:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Ip6Address extends Address {
+public class AddressItem extends Item {
 }
 
