@@ -27,7 +27,7 @@ package cyboi;
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.16 $ $Date: 2003-09-09 14:37:26 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2003-09-11 07:12:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryHandler {
@@ -421,11 +421,17 @@ class CategoryHandler {
         a = CategoryHandler.read_attribute(p1, CategoryHandler.CATEGORY);
         MapHandler.set_map_element(p0, CategoryHandler.CATEGORY, a);
 
+        a = CategoryHandler.read_attribute(p1, JavaObjectHandler.NAME);
+        MapHandler.set_map_element(p0, JavaObjectHandler.NAME, a);
+
         a = CategoryHandler.read_attribute(p1, JavaObjectHandler.WIDTH);
         MapHandler.set_map_element(p0, JavaObjectHandler.WIDTH, a);
 
         a = CategoryHandler.read_attribute(p1, JavaObjectHandler.HEIGHT);
         MapHandler.set_map_element(p0, JavaObjectHandler.HEIGHT, a);
+
+        a = CategoryHandler.read_attribute(p1, JavaObjectHandler.KEY_BINDING);
+        MapHandler.set_map_element(p0, JavaObjectHandler.KEY_BINDING, a);
     }
 
     /**
