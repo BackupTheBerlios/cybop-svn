@@ -34,7 +34,7 @@ import cybop.core.screen.region.*;
 /**
  * This class represents a systems menu.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemsMenu extends Menu {
@@ -98,25 +98,25 @@ public class SystemsMenu extends Menu {
     }
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default label.
+     * Returns the default label category.
      *
-     * @return the default label
+     * @return the default label category
      */
-    public String getDefaultLabel() {
+    public Item getDefaultLabelCategory() {
 
         return new String("Systems");
     }
 
     /**
-     * Returns the default exit menu item.
+     * Returns the default exit menu item category.
      *
-     * @return the default exit menu item
+     * @return the default exit menu item category
      */
-    public String getDefaultExitMenuItem() {
+    public Item getDefaultExitMenuItemCategory() {
 
         return new String("cybop.core.screen.component.menuitem.ExitMenuItem");
     }
@@ -182,25 +182,49 @@ public class SystemsMenu extends Menu {
     }
 
     //
-    // Initializable.
+    // Categorization.
     //
 
     /**
-     * Initializes this systems menu.
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(SystemsMenu.EXIT_MENU_ITEM, getDefaultExitMenuItemCategory());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(SystemsMenu.EXIT_MENU_ITEM);
+
+        super.decategorize();
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
         super.initialize();
 
-        setChild(SystemsMenu.EXIT_MENU_ITEM, createChild(getDefaultExitMenuItem()));
+        setChild(SystemsMenu.EXIT_MENU_ITEM, createChild(getCategory(SystemsMenu.EXIT_MENU_ITEM)));
     }
 
     /**
-     * Finalizes this systems menu.
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
-        ExitMenuItem exitMenuItem = (ExitMenuItem) getChild(SystemsMenu.EXIT_MENU_ITEM);
+        Item exitMenuItem = getChild(SystemsMenu.EXIT_MENU_ITEM);
         removeChild(SystemsMenu.EXIT_MENU_ITEM);
         destroyChild(exitMenuItem);
 

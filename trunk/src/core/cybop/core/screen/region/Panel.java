@@ -33,7 +33,7 @@ import cybop.core.screen.component.*;
 /**
  * This class represents a screen region.
  *
- * @version $Revision: 1.1 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Panel extends DisplayRegion {
@@ -119,7 +119,7 @@ public class Panel extends DisplayRegion {
      *
      * @return the default layout category
      */
-    public String getDefaultLayoutCategory() {
+    public Item getDefaultLayoutCategory() {
 
         return new String("cybop.core.screen.component.Layout");
     }

@@ -32,7 +32,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a split pane.
  *
- * @version $Revision: 1.7 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SplitPane extends DisplayRegion {
@@ -41,11 +41,11 @@ public class SplitPane extends DisplayRegion {
     // Children names.
     //
 
-    /** The left organizer. */
-    public static final String LEFT_ORGANIZER = new String("left_organizer");
+    /** The left item. */
+    public static final String LEFT_ITEM = new String("left_item");
 
-    /** The right organizer. */
-    public static final String RIGHT_ORGANIZER = new String("right_organizer");
+    /** The right item. */
+    public static final String RIGHT_ITEM = new String("right_item");
 
     //
     // Child management.
@@ -64,13 +64,13 @@ public class SplitPane extends DisplayRegion {
 
         if (n != null) {
 
-            if (n.isEqualTo(SplitPane.LEFT_ORGANIZER)) {
+            if (n.isEqualTo(SplitPane.LEFT_ITEM)) {
 
-                setLeftDisplayItem((DisplayItem) i);
+                setLeftItem((DisplayItem) i);
 
-            } else if (n.isEqualTo(SplitPane.RIGHT_ORGANIZER)) {
+            } else if (n.isEqualTo(SplitPane.RIGHT_ITEM)) {
 
-                setRightDisplayItem((DisplayItem) i);
+                setRightItem((DisplayItem) i);
             }
 
         } else {
@@ -89,13 +89,13 @@ public class SplitPane extends DisplayRegion {
 
         if (n != null) {
 
-            if (n.isEqualTo(SplitPane.LEFT_ORGANIZER)) {
+            if (n.isEqualTo(SplitPane.LEFT_ITEM)) {
 
-                removeLeftDisplayItem((DisplayItem) getChild(n));
+                removeLeftItem((DisplayItem) getChild(n));
             
-            } else if (n.isEqualTo(SplitPane.RIGHT_ORGANIZER)) {
+            } else if (n.isEqualTo(SplitPane.RIGHT_ITEM)) {
 
-                removeRightDisplayItem((DisplayItem) getChild(n));
+                removeRightItem((DisplayItem) getChild(n));
             }
 
         } else {
@@ -137,41 +137,41 @@ public class SplitPane extends DisplayRegion {
     }
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the left organizer.
+     * Returns the left item category.
      *
-     * @return the left organizer
+     * @return the left item category
      */
-    public String getDefaultLeftDisplayItem() {
+    public Item getDefaultLeftItemCategory() {
 
         return new String("cybop.core.screen.region.Panel");
     }
 
     /**
-     * Returns the right organizer.
+     * Returns the right item category.
      *
-     * @return the right organizer
+     * @return the right item category
      */
-    public String getDefaultRightDisplayItem() {
+    public Item getDefaultRightItemCategory() {
 
         return new String("cybop.core.screen.region.Panel");
     }
 
     //
-    // Left organizer.
+    // Left item.
     //
 
     /**
-     * Sets the left organizer.
+     * Sets the left item.
      *
-     * @param c the left organizer
+     * @param c the left item
      * @exception Exception if the java split pane is null
-     * @exception Exception if the left organizer is null
+     * @exception Exception if the left item is null
      */
-    public void setLeftDisplayItem(DisplayItem c) throws Exception {
+    public void setLeftItem(DisplayItem c) throws Exception {
 
         javax.swing.JSplitPane sp = (javax.swing.JSplitPane) getJavaObject();
 
@@ -183,23 +183,23 @@ public class SplitPane extends DisplayRegion {
 
             } else {
     
-                throw new Exception("Could not set left organizer. The left organizer is null.");
+                throw new Exception("Could not set left item. The left item is null.");
             }
 
         } else {
 
-            throw new Exception("Could not set left organizer. The java split pane is null.");
+            throw new Exception("Could not set left item. The java split pane is null.");
         }
     }
 
     /**
-     * Removes the left organizer.
+     * Removes the left item.
      *
-     * @param c the left organizer
+     * @param c the left item
      * @exception Exception if the java split pane is null
-     * @exception Exception if the left organizer is null
+     * @exception Exception if the left item is null
      */
-    public void removeLeftDisplayItem(DisplayItem c) throws Exception {
+    public void removeLeftItem(DisplayItem c) throws Exception {
 
         javax.swing.JSplitPane sp = (javax.swing.JSplitPane) getJavaObject();
 
@@ -211,27 +211,27 @@ public class SplitPane extends DisplayRegion {
 
             } else {
 
-                throw new Exception("Could not remove left organizer. The left organizer is null.");
+                throw new Exception("Could not remove left item. The left item is null.");
             }
 
         } else {
 
-            throw new Exception("Could not remove left organizer. The java split pane is null.");
+            throw new Exception("Could not remove left item. The java split pane is null.");
         }
     }
 
     //
-    // Right organizer.
+    // Right item.
     //
 
     /**
-     * Sets the right organizer.
+     * Sets the right item.
      *
-     * @param c the right organizer
+     * @param c the right item
      * @exception Exception if the java split pane is null
-     * @exception Exception if the right organizer is null
+     * @exception Exception if the right item is null
      */
-    public void setRightDisplayItem(DisplayItem c) throws Exception {
+    public void setRightItem(DisplayItem c) throws Exception {
 
         javax.swing.JSplitPane sp = (javax.swing.JSplitPane) getJavaObject();
 
@@ -243,23 +243,23 @@ public class SplitPane extends DisplayRegion {
 
             } else {
     
-                throw new Exception("Could not set right organizer. The right organizer is null.");
+                throw new Exception("Could not set right item. The right item is null.");
             }
 
         } else {
 
-            throw new Exception("Could not set right organizer. The java split pane is null.");
+            throw new Exception("Could not set right item. The java split pane is null.");
         }
     }
 
     /**
-     * Removes the right organizer.
+     * Removes the right item.
      *
-     * @param c the right organizer
+     * @param c the right item
      * @exception Exception if the java split pane is null
-     * @exception Exception if the right organizer is null
+     * @exception Exception if the right item is null
      */
-    public void removeRightDisplayItem(DisplayItem c) throws Exception {
+    public void removeRightItem(DisplayItem c) throws Exception {
 
         javax.swing.JSplitPane sp = (javax.swing.JSplitPane) getJavaObject();
 
@@ -271,41 +271,67 @@ public class SplitPane extends DisplayRegion {
 
             } else {
     
-                throw new Exception("Could not remove right organizer. The right organizer is null.");
+                throw new Exception("Could not remove right item. The right item is null.");
             }
 
         } else {
 
-            throw new Exception("Could not remove right organizer. The java split pane is null.");
+            throw new Exception("Could not remove right item. The java split pane is null.");
         }
     }
 
     //
-    // Initializable.
+    // Categorization.
     //
 
     /**
-     * Initializes this split pane.
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(SplitPane.LEFT_ITEM, getDefaultLeftItemCategory());
+        setCategory(SplitPane.RIGHT_ITEM, getDefaultRightItemCategory());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(SplitPane.RIGHT_ITEM);
+        removeCategory(SplitPane.LEFT_ITEM);
+
+        super.decategorize();
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
         super.initialize();
 
-        setChild(SplitPane.LEFT_ORGANIZER, createChild(getDefaultLeftDisplayItem()));
-        setChild(SplitPane.RIGHT_ORGANIZER, createChild(getDefaultRightDisplayItem()));
+        setChild(SplitPane.LEFT_ITEM, createChild(getCategory(SplitPane.LEFT_ITEM)));
+        setChild(SplitPane.RIGHT_ITEM, createChild(getCategory(SplitPane.RIGHT_ITEM)));
     }
 
     /**
-     * Finalizes this split pane.
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
-        DisplayItem rightDisplayItem = (DisplayItem) getChild(SplitPane.RIGHT_ORGANIZER);
-        removeChild(SplitPane.RIGHT_ORGANIZER);
+        Item rightDisplayItem = getChild(SplitPane.RIGHT_ITEM);
+        removeChild(SplitPane.RIGHT_ITEM);
         destroyChild(rightDisplayItem);
 
-        DisplayItem leftDisplayItem = (DisplayItem) getChild(SplitPane.LEFT_ORGANIZER);
-        removeChild(SplitPane.LEFT_ORGANIZER);
+        Item leftDisplayItem = getChild(SplitPane.LEFT_ITEM);
+        removeChild(SplitPane.LEFT_ITEM);
         destroyChild(leftDisplayItem);
 
         super.finalizz();

@@ -24,6 +24,7 @@
 
 package cybop.core.screen.component.menuitem;
 
+import cybop.core.category.*;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
 import cybop.core.screen.component.*;
@@ -31,7 +32,7 @@ import cybop.core.screen.component.*;
 /**
  * This class represents an about menu item.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class AboutMenuItem extends MenuItem {
@@ -44,35 +45,35 @@ public class AboutMenuItem extends MenuItem {
     public static final String SHOW_SYSTEM_INFORMATION_ACTION = new String("show_system_information_display_action");
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default label.
+     * Returns the default label category.
      *
-     * @return the default label
+     * @return the default label category
      */
-    public String getDefaultLabel() {
+    public Item getDefaultLabelCategory() {
 
         return new String("About");
     }
 
     /**
-     * Returns the default mnemonic.
+     * Returns the default mnemonic category.
      *
-     * @return the default mnemonic
+     * @return the default mnemonic category
      */
-    public Integer getDefaultMnemonic() {
+    public Item getDefaultMnemonicCategory() {
 
         return new Integer(java.awt.event.KeyEvent.VK_A);
     }
 
     /**
-     * Returns the default action.
+     * Returns the default action category.
      *
-     * @return the default action
+     * @return the default action category
      */
-    public String getDefaultAction() {
+    public Item getDefaultActionCategory() {
 
         return AboutMenuItem.SHOW_SYSTEM_INFORMATION_ACTION;
     }

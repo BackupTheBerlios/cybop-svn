@@ -24,6 +24,7 @@
 
 package cybop.core.screen.component;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.Boolean;
 import cybop.core.model.Integer;
@@ -32,7 +33,7 @@ import cybop.core.model.String;
 /**
  * This class represents a menu item.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class MenuItem extends Button {
@@ -84,15 +85,15 @@ public class MenuItem extends Button {
     }
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default label.
+     * Returns the default label category.
      *
-     * @return the default label
+     * @return the default label category
      */
-    public String getDefaultLabel() {
+    public Item getDefaultLabelCategory() {
 
         return new String("Menu Item");
     }

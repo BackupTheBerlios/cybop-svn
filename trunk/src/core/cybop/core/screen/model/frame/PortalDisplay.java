@@ -24,6 +24,7 @@
 
 package cybop.core.screen.model.frame;
 
+import cybop.core.category.*;
 import cybop.core.model.String;
 import cybop.core.screen.model.*;
 
@@ -34,41 +35,41 @@ import cybop.core.screen.model.*;
  * The tree offers a hierarchy of categories with available system modules.
  * On the right side of the splitter, there is a container for child system views.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalDisplay extends FrameDisplay {
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default portal menu bar.
+     * Returns the default portal menu bar category.
      *
-     * @return the default portal menu bar
+     * @return the default portal menu bar category
      */
-    public String getDefaultMenuBar() {
+    public Item getDefaultMenuBarCategory() {
 
         return new String("cybop.core.screen.region.menubar.PortalMenuBar");
     }
 
     /**
-     * Returns the default portal tool bar.
+     * Returns the default portal tool bar category.
      *
-     * @return the default portal tool bar
+     * @return the default portal tool bar category
      */
-    public String getDefaultToolBar() {
+    public Item getDefaultToolBarCategory() {
 
         return new String("cybop.core.screen.region.toolbar.PortalToolBar");
     }
 
     /**
-     * Returns the default contents panel.
+     * Returns the default contents panel category.
      *
-     * @return the default contents panel
+     * @return the default contents panel category
      */
-    public String getDefaultContentsPanel() {
+    public Item getDefaultContentsPanelCategory() {
 
         return new String("cybop.core.screen.region.PortalPanel");
     }

@@ -30,7 +30,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a status bar.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class StatusBar extends DisplayRegion {
@@ -47,26 +47,6 @@ public class StatusBar extends DisplayRegion {
     public java.lang.Object createJavaObject() throws Exception {
         
         return new javax.swing.JLabel();
-    }
-
-    //
-    // Initializable.
-    //
-
-    /**
-     * Initializes this tool bar.
-     */
-    public void initialize() throws Exception {
-
-        super.initialize();
-    }
-
-    /**
-     * Finalizes this tool bar.
-     */
-    public void finalizz() throws Exception {
-
-        super.finalizz();
     }
 }
 

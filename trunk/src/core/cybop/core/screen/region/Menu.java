@@ -33,7 +33,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a menu.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Menu extends DisplayRegion {
@@ -123,15 +123,15 @@ public class Menu extends DisplayRegion {
     }
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default label.
+     * Returns the default label category.
      *
-     * @return the default label
+     * @return the default label category
      */
-    public String getDefaultLabel() {
+    public Item getDefaultLabelCategory() {
 
         return new String("Menu");
     }
@@ -197,27 +197,51 @@ public class Menu extends DisplayRegion {
     }
 
     //
-    // Initializable.
+    // Categorization.
     //
 
     /**
-     * Initializes this split pane.
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(Menu.LABEL, getDefaultLabelCategory());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(Menu.LABEL);
+
+        super.decategorize();
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
         super.initialize();
 
-        setChild(Menu.LABEL, getDefaultLabel());
+        setChild(Menu.LABEL, (String) getCategory(Menu.LABEL));
     }
 
     /**
-     * Finalizes this split pane.
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
-        String label = (String) getChild(Menu.LABEL);
+        Item label = getChild(Menu.LABEL);
         removeChild(Menu.LABEL);
-//??            destroyLabel(label);
+        destroyChild(label);
 
         super.finalizz();
     }

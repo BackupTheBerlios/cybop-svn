@@ -34,7 +34,7 @@ import cybop.core.screen.region.*;
 /**
  * This class represents a help menu.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class HelpMenu extends Menu {
@@ -98,25 +98,25 @@ public class HelpMenu extends Menu {
     }
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default label.
+     * Returns the default label category.
      *
-     * @return the default label
+     * @return the default label category
      */
-    public String getDefaultLabel() {
+    public Item getDefaultLabelCategory() {
 
         return new String("Help");
     }
 
     /**
-     * Returns the default about menu item.
+     * Returns the default about menu item category.
      *
-     * @return the default about menu item
+     * @return the default about menu item category
      */
-    public String getDefaultAboutMenuItem() {
+    public Item getDefaultAboutMenuItemCategory() {
 
         return new String("cybop.core.screen.component.menuitem.AboutMenuItem");
     }
@@ -182,25 +182,49 @@ public class HelpMenu extends Menu {
     }
 
     //
-    // Initializable.
+    // Categorization.
     //
 
     /**
-     * Initializes this help menu.
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(HelpMenu.ABOUT_MENU_ITEM, getDefaultAboutMenuItemCategory());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(HelpMenu.ABOUT_MENU_ITEM);
+
+        super.decategorize();
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
         super.initialize();
 
-        setChild(HelpMenu.ABOUT_MENU_ITEM, createChild(getDefaultAboutMenuItem()));
+        setChild(HelpMenu.ABOUT_MENU_ITEM, createChild(getCategory(HelpMenu.ABOUT_MENU_ITEM)));
     }
 
     /**
-     * Finalizes this help menu.
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
-        AboutMenuItem aboutMenuItem = (AboutMenuItem) getChild(HelpMenu.ABOUT_MENU_ITEM);
+        Item aboutMenuItem = getChild(HelpMenu.ABOUT_MENU_ITEM);
         removeChild(HelpMenu.ABOUT_MENU_ITEM);
         destroyChild(aboutMenuItem);
 

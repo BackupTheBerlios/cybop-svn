@@ -24,6 +24,7 @@
 
 package cybop.core.screen.component.menuitem;
 
+import cybop.core.category.*;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
 import cybop.core.screen.component.*;
@@ -31,7 +32,7 @@ import cybop.core.screen.component.*;
 /**
  * This class represents an exit menu item.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ExitMenuItem extends MenuItem {
@@ -44,35 +45,35 @@ public class ExitMenuItem extends MenuItem {
     public static final String SHUTDOWN_SYSTEM_ACTION = new String("shutdown_system_action");
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default label.
+     * Returns the default label category.
      *
-     * @return the default label
+     * @return the default label category
      */
-    public String getDefaultLabel() {
+    public Item getDefaultLabelCategory() {
 
         return new String("Exit");
     }
 
     /**
-     * Returns the default mnemonic.
+     * Returns the default mnemonic category.
      *
-     * @return the default mnemonic
+     * @return the default mnemonic category
      */
-    public Integer getDefaultMnemonic() {
+    public Item getDefaultMnemonicCategory() {
 
         return new Integer(java.awt.event.KeyEvent.VK_E);
     }
 
     /**
-     * Returns the default action.
+     * Returns the default action category.
      *
-     * @return the default action
+     * @return the default action category
      */
-    public String getDefaultAction() {
+    public Item getDefaultActionCategory() {
 
         return ExitMenuItem.SHUTDOWN_SYSTEM_ACTION;
     }

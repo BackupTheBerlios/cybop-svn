@@ -24,6 +24,7 @@
 
 package cybop.core.screen.region.splitpane;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
 import cybop.core.screen.region.*;
@@ -31,21 +32,21 @@ import cybop.core.screen.region.*;
 /**
  * This class represents a portal split pane.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalSplitPane extends SplitPane {
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default system tree.
+     * Returns the default system tree category.
      *
-     * @return the default system tree
+     * @return the default system tree category
      */
-    public String getDefaultLeftDisplayItem() {
+    public Item getDefaultLeftDisplayItemCategory() {
 
         return new String("cybop.core.screen.region.Tree");
     }

@@ -35,7 +35,7 @@ import cybop.core.screen.region.*;
 /**
  * This class represents a frame model.
  *
- * @version $Revision: 1.9 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class FrameDisplay extends Display {
@@ -352,9 +352,9 @@ public class FrameDisplay extends Display {
     }
 
     /**
-     * Returns the default rectangle storing the bounds.
+     * Returns the default rectangle storing the bounds category.
      *
-     * @return the default rectangle storing the bounds
+     * @return the default rectangle storing the bounds category
      */
     public java.awt.Rectangle getDefaultBounds() {
 
@@ -384,9 +384,9 @@ public class FrameDisplay extends Display {
     }
 
     /**
-     * Returns the default look and feel.
+     * Returns the default look and feel category.
      *
-     * @return the default look and feel
+     * @return the default look and feel category
      */
     public javax.swing.LookAndFeel getDefaultLookAndFeel() {
 

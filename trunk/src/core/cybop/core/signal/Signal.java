@@ -34,7 +34,7 @@ import cybop.core.model.String;
  *
  * It serves as container transporting information of communication.
  *
- * @version $Revision: 1.15 $ $Date: 2003-06-16 18:26:11 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Signal extends Item {
@@ -115,77 +115,113 @@ public class Signal extends Item {
     public static final String SOAP_LANGUAGE = new String("soap_language");
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default priority.
+     * Returns the default priority category.
      *
-     * @return the default priority
+     * @return the default priority category
      */
-    public Integer getDefaultPriority() {
+    public Integer getDefaultPriorityCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default language.
+     * Returns the default language category.
      *
-     * @return the default language
+     * @return the default language category
      */
-    public String getDefaultLanguage() {
+    public String getDefaultLanguageCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default subject.
+     * Returns the default subject category.
      *
-     * @return the default subject
+     * @return the default subject category
      */
-    public String getDefaultSubject() {
+    public String getDefaultSubjectCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default predicate.
+     * Returns the default predicate category.
      *
-     * @return the default predicate
+     * @return the default predicate category
      */
-    public String getDefaultPredicate() {
+    public String getDefaultPredicateCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default sender object.
+     * Returns the default sender object category.
      *
-     * @return the default sender object
+     * @return the default sender object category
      */
-    public String getDefaultSenderObject() {
+    public String getDefaultSenderObjectCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default object.
+     * Returns the default object category.
      *
-     * @return the default object
+     * @return the default object category
      */
-    public String getDefaultObject() {
+    public String getDefaultObjectCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default adverbial.
+     * Returns the default adverbial category.
      *
-     * @return the default adverbial
+     * @return the default adverbial category
      */
-    public String getDefaultAdverbial() {
+    public String getDefaultAdverbialCategory() {
 
         return null;
+    }
+
+    //
+    // Categorization.
+    //
+
+    /**
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(Signal.PRIORITY, getDefaultPriorityCategory());
+        setCategory(Signal.LANGUAGE, getDefaultLanguageCategory());
+        setCategory(Signal.SUBJECT, getDefaultSubjectCategory());
+        setCategory(Signal.PREDICATE, getDefaultPredicateCategory());
+        setCategory(Signal.SENDER_OBJECT, getDefaultSenderObjectCategory());
+        setCategory(Signal.OBJECT, getDefaultObjectCategory());
+        setCategory(Signal.ADVERBIAL, getDefaultAdverbialCategory());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(Signal.ADVERBIAL);
+        removeCategory(Signal.OBJECT);
+        removeCategory(Signal.SENDER_OBJECT);
+        removeCategory(Signal.PREDICATE);
+        removeCategory(Signal.SUBJECT);
+        removeCategory(Signal.LANGUAGE);
+        removeCategory(Signal.PRIORITY);
+
+        super.decategorize();
     }
 
     //
@@ -193,29 +229,29 @@ public class Signal extends Item {
     //
 
     /**
-     * Initializes this signal.
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
         super.initialize();
 
-        setChild(Signal.PRIORITY, getDefaultPriority());
-        setChild(Signal.LANGUAGE, getDefaultLanguage());
-        setChild(Signal.SUBJECT, getDefaultSubject());
-        setChild(Signal.PREDICATE, getDefaultPredicate());
-        setChild(Signal.SENDER_OBJECT, getDefaultSenderObject());
-        setChild(Signal.OBJECT, getDefaultObject());
-        setChild(Signal.ADVERBIAL, getDefaultAdverbial());
+        setChild(Signal.PRIORITY, (Integer) getCategory(Signal.PRIORITY));
+        setChild(Signal.LANGUAGE, (String) getCategory(Signal.LANGUAGE));
+        setChild(Signal.SUBJECT, (String) getCategory(Signal.SUBJECT));
+        setChild(Signal.PREDICATE, (String) getCategory(Signal.PREDICATE));
+        setChild(Signal.SENDER_OBJECT, (String) getCategory(Signal.SENDER_OBJECT));
+        setChild(Signal.OBJECT, (Item) getCategory(Signal.OBJECT));
+        setChild(Signal.ADVERBIAL, (Item) getCategory(Signal.ADVERBIAL));
     }
 
     /**
-     * Finalizes this signal.
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
         // Do not destroy children here!
         // There were created by external items and also have to be
-        // destroyed by them.
+        // destroyed by those.
 
         removeChild(Signal.ADVERBIAL);
         removeChild(Signal.OBJECT);

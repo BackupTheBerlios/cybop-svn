@@ -33,7 +33,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a button.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Button extends DisplayComponent {
@@ -108,25 +108,25 @@ public class Button extends DisplayComponent {
     }
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default label.
+     * Returns the default label category.
      *
-     * @return the default label
+     * @return the default label category
      */
-    public String getDefaultLabel() {
+    public Item getDefaultLabelCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default mnemonic.
+     * Returns the default mnemonic category.
      *
-     * @return the default mnemonic
+     * @return the default mnemonic category
      */
-    public Integer getDefaultMnemonic() {
+    public Item getDefaultMnemonicCategory() {
 
         return null;
     }
@@ -272,30 +272,56 @@ public class Button extends DisplayComponent {
     }
 
     //
+    // Categorization.
+    //
+
+    /**
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(Button.LABEL, getDefaultLabelCategory());
+        setCategory(Button.MNEMONIC, getDefaultMnemonicCategory());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(Button.MNEMONIC);
+        removeCategory(Button.LABEL);
+
+        super.decategorize();
+    }
+
+    //
     // Initialization.
     //
 
     /**
-     * Initializes this button.
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
         super.initialize();
 
-        setChild(Button.LABEL, getDefaultLabel());
-        setChild(Button.MNEMONIC, getDefaultMnemonic());
+        setChild(Button.LABEL, (String) getCategory(Button.LABEL));
+        setChild(Button.MNEMONIC, (Item) getCategory(Button.MNEMONIC));
     }
 
     /**
-     * Finalizes this button.
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
-        Integer mnemonic = (Integer) getChild(Button.MNEMONIC);
+        Item mnemonic = getChild(Button.MNEMONIC);
         removeChild(Button.MNEMONIC);
         destroyChild(mnemonic);
 
-        String label = (String) getChild(Button.LABEL);
+        Item label = getChild(Button.LABEL);
         removeChild(Button.LABEL);
         destroyChild(label);
 

@@ -31,9 +31,9 @@ import cybop.core.screen.*;
 import cybop.core.screen.region.splitpane.*;
 
 /**
- * This class represents a portal contents panel.
+ * This class represents a portal panel.
  *
- * @version $Revision: 1.8 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalPanel extends Panel {
@@ -97,15 +97,15 @@ public class PortalPanel extends Panel {
     }
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default portal split pane.
+     * Returns the default portal split pane category.
      *
-     * @return the default portal split pane
+     * @return the default portal split pane category
      */
-    public String getDefaultPortalSplitPane() {
+    public Item getDefaultPortalSplitPaneCategory() {
 
         return new String("cybop.core.screen.region.splitpane.PortalSplitPane");
     }
@@ -171,25 +171,49 @@ public class PortalPanel extends Panel {
     }
 
     //
-    // Initializable.
+    // Categorization.
     //
 
     /**
-     * Initializes this portal contents panel.
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(PortalPanel.PORTAL_SPLIT_PANE, getDefaultPortalSplitPaneCategory());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(PortalPanel.PORTAL_SPLIT_PANE);
+
+        super.decategorize();
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
         super.initialize();
 
-        setChild(PortalPanel.PORTAL_SPLIT_PANE, createChild(getDefaultPortalSplitPane()));
+        setChild(PortalPanel.PORTAL_SPLIT_PANE, createChild(getCategory(PortalPanel.PORTAL_SPLIT_PANE)));
     }
 
     /**
-     * Finalizes this portal contents panel.
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
-        PortalSplitPane portalSplitPane = (PortalSplitPane) getChild(PortalPanel.PORTAL_SPLIT_PANE);
+        Item portalSplitPane = getChild(PortalPanel.PORTAL_SPLIT_PANE);
         removeChild(PortalPanel.PORTAL_SPLIT_PANE);
         destroyChild(portalSplitPane);
 

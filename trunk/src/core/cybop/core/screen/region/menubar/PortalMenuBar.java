@@ -33,7 +33,7 @@ import cybop.core.screen.region.menu.*;
 /**
  * This class represents a portal menu bar.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalMenuBar extends MenuBar {
@@ -167,18 +167,18 @@ public class PortalMenuBar extends MenuBar {
     }
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default systems menu.
+     * Returns the default systems menu category.
      *
      * It is based on the available system tree of the view's controller.
      * The system will be displayed as a menu hierarchy using the SystemMenu class.
      *
      * @return the default systems menu
      */
-    public String getDefaultSystemsMenu() {
+    public Item getDefaultSystemsMenuCategory() {
 
         return new String("cybop.core.screen.region.menu.SystemsMenu");
 /*??
@@ -204,11 +204,11 @@ public class PortalMenuBar extends MenuBar {
     }
 
     /**
-     * Returns the default editor menu.
+     * Returns the default editor menu category.
      *
-     * @return the default editor menu
+     * @return the default editor menu category
      */
-    public String getDefaultEditorMenu() {
+    public Item getDefaultEditorMenuCategory() {
 
         return new String("cybop.core.screen.region.menu.EditorMenu");
 
@@ -277,11 +277,11 @@ public class PortalMenuBar extends MenuBar {
     }
 
     /**
-     * Returns the default view menu.
+     * Returns the default view menu category.
      *
-     * @return the default view menu
+     * @return the default view menu category
      */
-    public String getDefaultViewMenu() {
+    public Item getDefaultViewMenuCategory() {
 
         return new String("cybop.core.screen.region.menu.ViewMenu");
 
@@ -350,11 +350,11 @@ public class PortalMenuBar extends MenuBar {
     }
 
     /**
-     * Returns the default context menu.
+     * Returns the default context menu category.
      *
-     * @return the default context menu
+     * @return the default context menu category
      */
-    public String getDefaultContextMenu() {
+    public Item getDefaultContextMenuCategory() {
 
         return new String("cybop.core.screen.region.menu.ContextMenu");
 
@@ -374,11 +374,11 @@ public class PortalMenuBar extends MenuBar {
     }
 
     /**
-     * Returns the default settings menu.
+     * Returns the default settings menu category.
      *
-     * @return the default settings menu
+     * @return the default settings menu category
      */
-    public String getDefaultSettingsMenu() {
+    public Item getDefaultSettingsMenuCategory() {
 
         return new String("cybop.core.screen.region.menu.SettingsMenu");
 
@@ -493,11 +493,11 @@ public class PortalMenuBar extends MenuBar {
     }
 
     /**
-     * Returns the default window menu.
+     * Returns the default window menu category.
      *
-     * @return the default window menu
+     * @return the default window menu category
      */
-    public String getDefaultWindowMenu() {
+    public Item getDefaultWindowMenuCategory() {
 
         return new String("cybop.core.screen.region.menu.WindowMenu");
 
@@ -570,11 +570,11 @@ public class PortalMenuBar extends MenuBar {
     }
 
     /**
-     * Returns the default help menu.
+     * Returns the default help menu category.
      *
-     * @return the default help menu
+     * @return the default help menu category
      */
-    public String getDefaultHelpMenu() {
+    public Item getDefaultHelpMenuCategory() {
 
         return new String("cybop.core.screen.region.menu.HelpMenu");
 
@@ -774,7 +774,7 @@ public class PortalMenuBar extends MenuBar {
      *
      * @return the default placing menu
      */
-    public String getDefaultPlacingMenu() {
+    public Item getDefaultPlacingMenu() {
 
         return new String("cybop.core.screen.region.menu.PlacingMenu");
 
@@ -847,7 +847,7 @@ public class PortalMenuBar extends MenuBar {
      *
      * @return the default mode menu
      */
-    public String getDefaultModeMenu() {
+    public Item getDefaultModeMenu() {
 
         return new String("cybop.core.screen.region.menu.ModeMenu");
 
@@ -930,13 +930,41 @@ public class PortalMenuBar extends MenuBar {
     }
 
     //
-    // Initializable.
+    // Categorization.
     //
 
     /**
-     * Initializes this portal menu bar.
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(PortalMenuBar.SYSTEMS_MENU, getDefaultSystemsMenuCategory());
+        setCategory(PortalMenuBar.HELP_MENU, getDefaultHelpMenuCategory());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(PortalMenuBar.HELP_MENU);
+        removeCategory(PortalMenuBar.SYSTEMS_MENU);
+
+        super.decategorize();
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this item.
      */
     public void initialize() throws Exception {
+
+        super.initialize();
 
 /*??
         // Determine system tree model.
@@ -958,7 +986,7 @@ public class PortalMenuBar extends MenuBar {
         m.add(createExitMenuItem());
 */
 
-        setChild(PortalMenuBar.SYSTEMS_MENU, createChild(getDefaultSystemsMenu()));
+        setChild(PortalMenuBar.SYSTEMS_MENU, createChild(getCategory(PortalMenuBar.SYSTEMS_MENU)));
 /*??
         setChild(PortalMenuBar.EDITOR_MENU, createChild(getDefaultEditorMenu()));
         setChild(PortalMenuBar.VIEW_MENU, createChild(getDefaultViewMenu()));
@@ -966,7 +994,7 @@ public class PortalMenuBar extends MenuBar {
         setChild(PortalMenuBar.SETTINGS_MENU, createChild(getDefaultSettingsMenu()));
         setChild(PortalMenuBar.WINDOW_MENU, createChild(getDefaultWindowMenu()));
 */
-        setChild(PortalMenuBar.HELP_MENU, createChild(getDefaultHelpMenu()));
+        setChild(PortalMenuBar.HELP_MENU, createChild(getCategory(PortalMenuBar.HELP_MENU)));
     }
 
     /**
@@ -974,7 +1002,7 @@ public class PortalMenuBar extends MenuBar {
      */
     public void finalizz() throws Exception {
 
-        HelpMenu helpMenu = (HelpMenu) getChild(PortalMenuBar.HELP_MENU);
+        Item helpMenu = getChild(PortalMenuBar.HELP_MENU);
         removeChild(PortalMenuBar.HELP_MENU);
         destroyChild(helpMenu);
 
@@ -995,9 +1023,11 @@ public class PortalMenuBar extends MenuBar {
         destroyChild((EditorMenu) getChild(PortalMenuBar.EDITOR_MENU));
 */
 
-        SystemsMenu systemsMenu = (SystemsMenu) getChild(PortalMenuBar.SYSTEMS_MENU);
+        Item systemsMenu = getChild(PortalMenuBar.SYSTEMS_MENU);
         removeChild(PortalMenuBar.SYSTEMS_MENU);
         destroyChild(systemsMenu);
+        
+        super.finalizz();
     }
 }
 

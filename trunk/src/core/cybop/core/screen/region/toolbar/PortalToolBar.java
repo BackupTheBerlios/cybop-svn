@@ -31,17 +31,17 @@ import cybop.core.screen.region.*;
 /**
  * This class represents a portal tool bar.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-20 13:44:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalToolBar extends ToolBar {
 
     //
-    // Initializable.
+    // Initialization.
     //
 
     /**
-     * Initializes the tool bar.
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
@@ -64,7 +64,7 @@ public class PortalToolBar extends ToolBar {
     }
 
     /**
-     * Finalizes the tool bar.
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
         
@@ -78,13 +78,11 @@ public class PortalToolBar extends ToolBar {
      * @exception Exception if the button is null
      * @exception Exception if the image icon is null
      */
-    public Button createShowApplicationTreeButton() throws Exception
-    {
+    public Button createShowApplicationTreeButton() throws Exception {
 
         Button b = new Button();
 
-        if (b != null)
-        {
+        if (b != null) {
 
 /*??
             String file = "show_application_tree.gif";
@@ -94,9 +92,7 @@ public class PortalToolBar extends ToolBar {
             b.setActionCommand(MainApplication.SHOW_APPLICATION_TREE_CONTROL_ID);
 */
 
-        }
-        else
-        {
+        } else {
 
             throw new Exception("Could not create show application tree button. The button is null.");
         }
@@ -111,13 +107,11 @@ public class PortalToolBar extends ToolBar {
      * @exception Exception if the button is null
      * @exception Exception if the image icon is null
      */
-    public Button createConfigureApplicationTreeButton() throws Exception
-    {
+    public Button createConfigureApplicationTreeButton() throws Exception {
 
         Button b = new Button();
 
-        if (b != null)
-        {
+        if (b != null) {
 
 /*??
             String file = "configure_application_tree.gif";
@@ -127,9 +121,7 @@ public class PortalToolBar extends ToolBar {
             b.setActionCommand(MainApplication.CONFIGURE_APPLICATION_TREE_CONTROL_ID);
 */
 
-        }
-        else
-        {
+        } else {
 
             throw new Exception("Could not create configure application tree button. The button is null.");
         }
@@ -144,13 +136,11 @@ public class PortalToolBar extends ToolBar {
      * @exception Exception if the button is null
      * @exception Exception if the image icon is null
      */
-    public Button createConfigureResMedicinaeButton() throws Exception
-    {
+    public Button createConfigureResMedicinaeButton() throws Exception {
 
         Button b = new Button();
 
-        if (b != null)
-        {
+        if (b != null) {
 
 /*??
             String file = "configure_res_medicinae.gif";
@@ -160,9 +150,7 @@ public class PortalToolBar extends ToolBar {
             b.setActionCommand(MainApplication.CONFIGURE_RES_MEDICINAE_CONTROL_ID);
 */
 
-        }
-        else
-        {
+        } else {
 
             throw new Exception("Could not create configure Res Medicinae button. The button is null.");
         }
@@ -177,13 +165,11 @@ public class PortalToolBar extends ToolBar {
      * @exception Exception if the button is null
      * @exception Exception if the image icon is null
      */
-    public Button createShowHelpContentsButton() throws Exception
-    {
+    public Button createShowHelpContentsButton() throws Exception {
 
         Button b = new Button();
 
-        if (b != null)
-        {
+        if (b != null) {
 
 /*??
             String file = "show_help_contents.gif";
@@ -193,9 +179,7 @@ public class PortalToolBar extends ToolBar {
             b.setActionCommand(MainApplication.SHOW_HELP_CONTENTS_CONTROL_ID);
 */
 
-        }
-        else
-        {
+        } else {
 
             throw new Exception("Could not create show help contents button. The button is null.");
         }
@@ -210,13 +194,11 @@ public class PortalToolBar extends ToolBar {
      * @exception Exception if the button is null
      * @exception Exception if the image icon is null
      */
-    public Button createLinkToWebsiteButton() throws Exception
-    {
+    public Button createLinkToWebsiteButton() throws Exception {
 
         Button b = new Button();
 
-        if (b != null)
-        {
+        if (b != null) {
 
 /*??
             String file = "link_to_website.gif";
@@ -226,9 +208,7 @@ public class PortalToolBar extends ToolBar {
             b.setActionCommand(MainApplication.LINK_TO_WEBSITE_CONTROL_ID);
 */
 
-        }
-        else
-        {
+        } else {
 
             throw new Exception("Could not create link to website button. The button is null.");
         }
@@ -243,13 +223,11 @@ public class PortalToolBar extends ToolBar {
      * @exception Exception if the button is null
      * @exception Exception if the image icon is null
      */
-    public Button createAboutDialogControllerButton() throws Exception
-    {
+    public Button createAboutDialogControllerButton() throws Exception {
 
         Button b = new Button();
 
-        if (b != null)
-        {
+        if (b != null) {
 
 /*??
 //??            String file = "/opt/resmedicinae/src/application/main/resmedicinae/org/resmedicinae/application/main/resmedicinae/inform_about_res_medicinae.gif";
@@ -260,9 +238,7 @@ public class PortalToolBar extends ToolBar {
             b.setActionCommand(AboutDialog.CREATE_ABOUT_DIALOG_CONTROL_ID);
 */
 
-        }
-        else
-        {
+        } else {
 
             throw new Exception("Could not create about dialog controller button. The button is null.");
         }
