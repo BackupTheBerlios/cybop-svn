@@ -29,7 +29,7 @@ package cyboi;
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.32 $ $Date: 2003-09-08 06:48:49 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2003-09-09 14:37:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -429,25 +429,25 @@ class ItemHandler {
             category = MapHandler.get_map_element(p1, CategoryHandler.ITEM_CATEGORY);
             abstraction = MapHandler.get_map_element(p1, CategoryHandler.ITEM_ABSTRACTION);
             o = ItemHandler.create_object(category, abstraction);
-            MapHandler.set_map_element(i.items, o, name);
+            MapHandler.set_map_element(i.items, name, o);
 
             // Position.
             category = MapHandler.get_map_element(p1, CategoryHandler.POSITION_CATEGORY);
             abstraction = MapHandler.get_map_element(p1, CategoryHandler.POSITION_ABSTRACTION);
             o = ItemHandler.create_object(category, abstraction);
-            MapHandler.set_map_element(i.positions, o, name);
+            MapHandler.set_map_element(i.positions, name, o);
 
             // Instance.
             category = MapHandler.get_map_element(p1, CategoryHandler.INSTANCE_CATEGORY);
             abstraction = MapHandler.get_map_element(p1, CategoryHandler.INSTANCE_ABSTRACTION);
             o = ItemHandler.create_object(category, abstraction);
-            MapHandler.set_map_element(i.instances, o, name);
+            MapHandler.set_map_element(i.instances, name, o);
 
             // Interaction.
             category = MapHandler.get_map_element(p1, CategoryHandler.INTERACTION_CATEGORY);
             abstraction = MapHandler.get_map_element(p1, CategoryHandler.INTERACTION_ABSTRACTION);
             o = ItemHandler.create_object(category, abstraction);
-            MapHandler.set_map_element(i.interactions, o, name);
+            MapHandler.set_map_element(i.interactions, name, o);
 
             // Java object.
             java.lang.Object java_object_item = MapHandler.get_map_element(i.items, name);
@@ -502,13 +502,13 @@ class ItemHandler {
         if (i != null) {
 
             LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Set item element: " + p1);
-            java.lang.String n = get_child_name(p1);
-            java.lang.String r = get_remaining_name(p1);
+            java.lang.Object n = get_child_name(p1);
+            java.lang.Object r = get_remaining_name(p1);
             
             if (r != null) {
-                
+
                 // The given item is the parent of another parent.
-                Item child = MapHandler.get_map_element(i.items, n);
+                java.lang.Object child = MapHandler.get_map_element(i.items, n);
                 
                 // Continue to process along the hierarchical name.
                 ItemHandler.set_item_element(child, r, p2);
@@ -538,13 +538,13 @@ class ItemHandler {
         if (i != null) {
 
             LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Remove item element: " + p1);
-            java.lang.String n = get_child_name(p1);
-            java.lang.String r = get_remaining_name(p1);
+            java.lang.Object n = get_child_name(p1);
+            java.lang.Object r = get_remaining_name(p1);
             
             if (r != null) {
                 
                 // The given item is the parent of another parent.
-                Item child = MapHandler.get_map_element(i.items, n);
+                java.lang.Object child = MapHandler.get_map_element(i.items, n);
                 
                 // Continue to process along the hierarchical name.
                 ItemHandler.remove_item_element(child, r);
@@ -575,13 +575,13 @@ class ItemHandler {
         if (i != null) {
     
             LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Get item element: " + p1);
-            java.lang.String n = get_child_name(p1);
-            java.lang.String r = get_remaining_name(p1);
+            java.lang.Object n = get_child_name(p1);
+            java.lang.Object r = get_remaining_name(p1);
             
             if (r != null) {
                 
                 // The given item is the parent of another parent.
-                Item child = MapHandler.get_map_element(i.items, n);
+                java.lang.Object child = MapHandler.get_map_element(i.items, n);
                 
                 // Continue to process along the hierarchical name.
                 e = ItemHandler.get_item_element(child, r);
@@ -620,7 +620,7 @@ class ItemHandler {
             
             if (i != -1) {
                 
-                child = n.substring(0, i - 1);
+                child = n.substring(0, i);
             
             } else {
             

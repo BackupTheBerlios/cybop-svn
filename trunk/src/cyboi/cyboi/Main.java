@@ -32,7 +32,7 @@ package cyboi;
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) format.
  *
- * @version $Revision: 1.33 $ $Date: 2003-09-05 14:02:16 $ $Author: christian $
+ * @version $Revision: 1.34 $ $Date: 2003-09-09 14:37:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -74,23 +74,33 @@ class Main {
                     java.lang.Object event_handler = new JavaEventHandler();
                     JavaEventHandler.set_event_handler(event_handler);
 
-                    // Create and send signal (store in signal memory).
+                    // Create signal for storage in signal memory.
                     Signal tmp = new Signal();
             
                     if (tmp != null) {
                     
+                        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Send signal: " + dynamics);
+    
                         // Set signal elements.
                         tmp.priority = SignalHandler.NORMAL_PRIORITY;
                         tmp.language = SignalHandler.NEURO_LANGUAGE;
                         tmp.predicate = dynamics;
                         tmp.object = statics;
     
-                        // Add signal to signal memory (interrupt vector table).
-                        MapHandler.add_map_element(signal_memory, tmp, SignalHandler.SIGNAL);
-        
+                        // Caution! Adding of signals must be synchronized between:
+                        // - SignalHandler.send for adding internal CYBOP signals
+                        // - JavaEventHandler.dispatchEvent for adding transformed java event signals
+                        // These are the only procedures accessing the signal
+                        // memory for adding signals.
+                        synchronized (signal_memory) {
+    
+                            // Add signal to signal memory (interrupt vector table).
+                            MapHandler.add_map_element(signal_memory, SignalHandler.SIGNAL, tmp);
+                        }
+
                     } else {
             
-                        LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not create initial signal. The signal is null.");
+                        LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not send initial signal. The signal is null.");
                     }
     
                     // The system is now started up and complete so that a loop
@@ -191,39 +201,5 @@ class Main {
             }
         }
     }
-
-//?? ===================================================
-
-    //
-    // Orientations.
-    //
-
-    /** The 0 degree orientation. */
-    static java.lang.String DEGREE_0_ORIENTATION = "0_degree_orientation";
-
-    /** The 90 degree orientation. */
-    static java.lang.String DEGREE_90_ORIENTATION = "90_degree_orientation";
-
-    /** The 180 degree orientation. */
-    static java.lang.String DEGREE_180_ORIENTATION = "180_degree_orientation";
-
-    /** The 270 degree orientation. */
-    static java.lang.String DEGREE_270_ORIENTATION = "270_degree_orientation";
-
-    //
-    // Child positionings.
-    //
-
-    /** The compass positioning. */
-    static java.lang.String COMPASS_POSITIONING = "compass_positioning";
-
-    /** The box positioning. */
-    static java.lang.String BOX_POSITIONING = "box_positioning";
-
-    /** The card positioning. */
-    static java.lang.String CARD_POSITIONING = "card_positioning";
-
-    /** The grid bag positioning. */
-    static java.lang.String GRID_BAG_POSITIONING = "grid_bag_positioning";
 }
 

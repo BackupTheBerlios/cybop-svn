@@ -30,7 +30,7 @@ package cyboi;
  * It is necessary only as long as the Cybernetics Oriented Interpreter (CYBOI)
  * is implemented in the Java programming language.
  *
- * @version $Revision: 1.12 $ $Date: 2003-09-08 06:48:49 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-09-09 14:37:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaObjectHandler {
@@ -74,6 +74,38 @@ class JavaObjectHandler {
 
     /** The font. */
     static java.lang.String FONT = "font";
+
+    //
+    // Orientations.
+    //
+
+    /** The 0 degree orientation. */
+    static java.lang.String DEGREE_0_ORIENTATION = "0_degree_orientation";
+
+    /** The 90 degree orientation. */
+    static java.lang.String DEGREE_90_ORIENTATION = "90_degree_orientation";
+
+    /** The 180 degree orientation. */
+    static java.lang.String DEGREE_180_ORIENTATION = "180_degree_orientation";
+
+    /** The 270 degree orientation. */
+    static java.lang.String DEGREE_270_ORIENTATION = "270_degree_orientation";
+
+    //
+    // Child positionings.
+    //
+
+    /** The compass positioning. */
+    static java.lang.String COMPASS_POSITIONING = "compass_positioning";
+
+    /** The box positioning. */
+    static java.lang.String BOX_POSITIONING = "box_positioning";
+
+    /** The card positioning. */
+    static java.lang.String CARD_POSITIONING = "card_positioning";
+
+    /** The grid bag positioning. */
+    static java.lang.String GRID_BAG_POSITIONING = "grid_bag_positioning";
 
     //
     // Java object.

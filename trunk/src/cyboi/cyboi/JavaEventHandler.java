@@ -32,20 +32,10 @@ package cyboi;
  *
  * Unfortunately, handling of most events is done via graphical components in java.
  *
- * @version $Revision: 1.9 $ $Date: 2003-09-08 06:48:49 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-09-09 14:37:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaEventHandler extends java.awt.EventQueue {
-
-    //
-    // Events.
-    //
-    
-    /** The mouse clicked event. */
-    static java.lang.String MOUSE_CLICKED_EVENT = "mouse_clicked";
-
-    /** The mouse moved event. */
-    static java.lang.String MOUSE_MOVED_EVENT = "mouse_moved";
 
     //
     // Attributes.
@@ -111,6 +101,7 @@ class JavaEventHandler extends java.awt.EventQueue {
         //?? I tried removing this line:
         //?? - the frame/window still gets created
         //?? - but no contents (menue and other components) is shown
+        //?? - window events (such as close) are not caught
         //?? Checking this out later.
         super.dispatchEvent(evt);
 
@@ -136,7 +127,7 @@ class JavaEventHandler extends java.awt.EventQueue {
                     synchronized (JavaEventHandler.signal_memory) {
 
                         // Add signal to signal memory (interrupt vector table).
-                        MapHandler.add_map_element(JavaEventHandler.signal_memory, s, SignalHandler.SIGNAL);
+                        MapHandler.add_map_element(JavaEventHandler.signal_memory, SignalHandler.SIGNAL, s);
                     }
 
                 } else {
@@ -255,7 +246,7 @@ class JavaEventHandler extends java.awt.EventQueue {
     
                 } else */if (id == java.awt.event.MouseEvent.MOUSE_CLICKED) {
                     
-                    s.predicate = JavaEventHandler.MOUSE_CLICKED_EVENT;
+                    s.predicate = "mouse_clicked";
 
                 }/*?? else if (id == java.awt.event.MouseEvent.MOUSE_DRAGGED) {
     
@@ -397,14 +388,16 @@ class JavaEventHandler extends java.awt.EventQueue {
     
                 }*/ else if (id == java.awt.event.MouseEvent.MOUSE_MOVED) {
 
-                    Item it = SignalHandler.root;
+                    Item it = SignalHandler.statics;
 
                     ItemHandler.set_item_element(it, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
                     ItemHandler.set_item_element(it, "mouse.pointer_position.x_distance.unit", "pixel");
                     ItemHandler.set_item_element(it, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
                     ItemHandler.set_item_element(it, "mouse.pointer_position.y_distance.unit", "pixel");
+                    ItemHandler.set_item_element(it, "mouse.pointer_position.z_distance.quantity", new java.lang.Integer(0));
+                    ItemHandler.set_item_element(it, "mouse.pointer_position.z_distance.unit", "pixel");
 
-                    s.predicate = JavaEventHandler.MOUSE_MOVED_EVENT;
+                    s.predicate = "mouse_moved";
     
                 }/*?? else if (id == java.awt.event.MouseEvent.MOUSE_PRESSED) {
     

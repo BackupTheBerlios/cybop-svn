@@ -27,7 +27,7 @@ package cyboi;
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.15 $ $Date: 2003-09-05 07:57:32 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-09-09 14:37:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryHandler {
@@ -419,13 +419,13 @@ class CategoryHandler {
         java.lang.Object a = null;
 
         a = CategoryHandler.read_attribute(p1, CategoryHandler.CATEGORY);
-        MapHandler.set_map_element(p0, a, CategoryHandler.CATEGORY);
+        MapHandler.set_map_element(p0, CategoryHandler.CATEGORY, a);
 
         a = CategoryHandler.read_attribute(p1, JavaObjectHandler.WIDTH);
-        MapHandler.set_map_element(p0, a, JavaObjectHandler.WIDTH);
+        MapHandler.set_map_element(p0, JavaObjectHandler.WIDTH, a);
 
         a = CategoryHandler.read_attribute(p1, JavaObjectHandler.HEIGHT);
-        MapHandler.set_map_element(p0, a, JavaObjectHandler.HEIGHT);
+        MapHandler.set_map_element(p0, JavaObjectHandler.HEIGHT, a);
     }
 
     /**
@@ -473,7 +473,7 @@ class CategoryHandler {
                     if (i != null) {
                             
                         name = MapHandler.get_map_element(i.items, CategoryHandler.NAME);
-                        MapHandler.set_map_element(p0, i, name);
+                        MapHandler.set_map_element(p0, name, i);
                         
 /*??
                         // Initialize serialized item.
@@ -567,31 +567,31 @@ class CategoryHandler {
         java.lang.Object a = null;
 
         a = CategoryHandler.read_attribute(p1, CategoryHandler.NAME);
-        MapHandler.set_map_element(p0, a, CategoryHandler.NAME);
+        MapHandler.set_map_element(p0, CategoryHandler.NAME, a);
 
         a = CategoryHandler.read_attribute(p1, CategoryHandler.ITEM_CATEGORY);
-        MapHandler.set_map_element(p0, a, CategoryHandler.ITEM_CATEGORY);
+        MapHandler.set_map_element(p0, CategoryHandler.ITEM_CATEGORY, a);
 
         a = CategoryHandler.read_attribute(p1, CategoryHandler.ITEM_ABSTRACTION);
-        MapHandler.set_map_element(p0, a, CategoryHandler.ITEM_ABSTRACTION);
+        MapHandler.set_map_element(p0, CategoryHandler.ITEM_ABSTRACTION, a);
 
         a = CategoryHandler.read_attribute(p1, CategoryHandler.POSITION_CATEGORY);
-        MapHandler.set_map_element(p0, a, CategoryHandler.POSITION_CATEGORY);
+        MapHandler.set_map_element(p0, CategoryHandler.POSITION_CATEGORY, a);
 
         a = CategoryHandler.read_attribute(p1, CategoryHandler.POSITION_ABSTRACTION);
-        MapHandler.set_map_element(p0, a, CategoryHandler.POSITION_ABSTRACTION);
+        MapHandler.set_map_element(p0, CategoryHandler.POSITION_ABSTRACTION, a);
 
         a = CategoryHandler.read_attribute(p1, CategoryHandler.INSTANCE_CATEGORY);
-        MapHandler.set_map_element(p0, a, CategoryHandler.INSTANCE_CATEGORY);
+        MapHandler.set_map_element(p0, CategoryHandler.INSTANCE_CATEGORY, a);
 
         a = CategoryHandler.read_attribute(p1, CategoryHandler.INSTANCE_ABSTRACTION);
-        MapHandler.set_map_element(p0, a, CategoryHandler.INSTANCE_ABSTRACTION);
+        MapHandler.set_map_element(p0, CategoryHandler.INSTANCE_ABSTRACTION, a);
 
         a = CategoryHandler.read_attribute(p1, CategoryHandler.INTERACTION_CATEGORY);
-        MapHandler.set_map_element(p0, a, CategoryHandler.INTERACTION_CATEGORY);
+        MapHandler.set_map_element(p0, CategoryHandler.INTERACTION_CATEGORY, a);
 
         a = CategoryHandler.read_attribute(p1, CategoryHandler.INTERACTION_ABSTRACTION);
-        MapHandler.set_map_element(p0, a, CategoryHandler.INTERACTION_ABSTRACTION);
+        MapHandler.set_map_element(p0, CategoryHandler.INTERACTION_ABSTRACTION, a);
     }
 
     /**

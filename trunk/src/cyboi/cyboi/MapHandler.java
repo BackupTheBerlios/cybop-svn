@@ -29,7 +29,7 @@ package cyboi;
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.16 $ $Date: 2003-08-18 17:30:07 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2003-09-09 14:37:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class MapHandler {
@@ -113,21 +113,21 @@ class MapHandler {
      * Adds the map element.
      *
      * @param p0 the map
-     * @param p1 the element
-     * @param p2 the name
+     * @param p1 the name
+     * @param p2 the element
      */
     static void add_map_element(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
 
-        java.lang.Object n = MapHandler.determine_map_element_name(p0, p2);
-        MapHandler.set_map_element(p0, p1, n);
+        java.lang.Object n = MapHandler.determine_map_element_name(p0, p1);
+        MapHandler.set_map_element(p0, n, p2);
     }
 
     /**
      * Sets the map element.
      *
      * @param p0 the map
-     * @param p1 the element
-     * @param p2 the name
+     * @param p1 the name
+     * @param p2 the element
      */
     static void set_map_element(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
 
@@ -135,10 +135,10 @@ class MapHandler {
         
         if (m != null) {
             
-            int i = MapHandler.determine_next_map_element_index(m, p2);
+            int i = MapHandler.determine_next_map_element_index(m, p1);
 
-            m.names = ArrayHandler.set_array_element(m.names, p2, i);
-            m.references = ArrayHandler.set_array_element(m.references, p1, i);
+            m.names = ArrayHandler.set_array_element(m.names, i, p1);
+            m.references = ArrayHandler.set_array_element(m.references, i, p2);
 
         } else {
 

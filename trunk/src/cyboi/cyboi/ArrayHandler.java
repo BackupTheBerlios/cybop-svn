@@ -29,7 +29,7 @@ package cyboi;
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.14 $ $Date: 2003-08-18 17:30:06 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-09-09 14:37:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ArrayHandler {
@@ -148,11 +148,11 @@ class ArrayHandler {
      * Sets the array element.
      *
      * @param p0 the array
-     * @param p1 the element
-     * @param p2 the index
+     * @param p1 the index
+     * @param p2 the element
      * @return the extended array
      */
-    static java.lang.Object[] set_array_element(java.lang.Object[] p0, java.lang.Object p1, int p2) {
+    static java.lang.Object[] set_array_element(java.lang.Object[] p0, int p1, java.lang.Object p2) {
 
         java.lang.Object[] a = null;
         
@@ -160,7 +160,7 @@ class ArrayHandler {
 
             // If the array length is exceeded, a new array with extended length
             // is created and delivered back.
-            if (p2 >= p0.length) {
+            if (p1 >= p0.length) {
 
                 a = ArrayHandler.extend_array(p0);
             
@@ -176,7 +176,7 @@ class ArrayHandler {
 */
 
             // Set element.
-            a[p2] = p1;
+            a[p1] = p2;
 
         } else {
 
