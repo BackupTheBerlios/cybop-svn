@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>CYBOP 0.4.0.0</title>
+    <title>CYBOP 0.5.0.0</title>
     <!--
         $RCSfile: features.html,v $
 
@@ -18,7 +18,7 @@
         http://www.cybop.net
         - Cybernetics Oriented Programming -
     /-->
-    <meta name="date" content="$Revision: 1.3 $ $Date: 2005-02-12 22:44:23 $">
+    <meta name="date" content="$Revision: 1.1 $ $Date: 2005-02-12 22:44:23 $">
     <meta name="author" content="$Author: christian $">
     <!-- Includes Cascading Style Sheet. -->
     <link rel="stylesheet" type="text/css" href="../../cybop.css"/>
@@ -38,7 +38,7 @@
     <tr>
         <td>
             <!-- Contents. -->
-            <h4>CYBOP 0.4.0.0</h4>
+            <h4>CYBOP 0.5.0.0</h4>
             <table width="100%" bgcolor="#C0C0FF" cellspacing="0" cellpadding="0" border="0">
             <tr>
                 <td>
@@ -53,11 +53,12 @@
                         </th>
                     </tr>
                     <tr bgcolor="#000000">
-                        <td bgcolor="#C0FFC0"/>
+                        <td bgcolor="#FF8080"/>
                         <td align="left" valign="top">
                             <h6>Project</h6>
                             <ul>
-                                <li>Debian Packages <i>cyboi-doc</i> and <i>cybol-examples</i></li>
+                                <li>Debian Packages <i>cybop-papers</i>, <i>cybop-presentations</i>,
+                                    <i>cybol-core</i>, <i>cybol-healthcare</i></li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
@@ -66,59 +67,46 @@
                         </td>
                     </tr>
                     <tr bgcolor="#000000">
-                        <td bgcolor="#C0FFC0"/>
+                        <td bgcolor="#FFFFC0"/>
                         <td align="left" valign="top">
                             <h6>CYBOI</h6>
                             <ul>
-                                <li>Move global variables and constants into special files</li>
-                                <li>Use encapsulated primitives so that pointers
-                                    can be handed through the system, instead of
-                                    copies of char, int, double etc.;
-                                    encapsulation is also necessary to preserve a
-                                    primitive's value in memory -- otherwise, their value
-                                    gets lost as soon as a parser procedure is left</li>
-                                <li>Complete system lifecycle and waiting loop</li>
-                                <li>Simplify configuration file which now consists
-                                    of solely key-value pairs, on just one level,
-                                    NOT hierarchically</li>
-                                <li>Store configuration values internally in a simple
-                                    pointer array instead of an extra data structure;
-                                    it is not necessary to store additional type information
-                                    in a second column of the internals memory, because
-                                    internals are ALWAYS simple pointers to some date
-                                    structure that was created outside the internals memory</li>
-                                <li>Adapt whole system to new configuration handling</li>
-                                <li>Factor out code from cyboi main function into separate
-                                    files and procedures, for better overview</li>
-                                <li>Change all <i>get</i> procedures in arrays, so that only references,
-                                    but NOT copies are delivered back; change system accordingly</li>
-                                <li>Change complete CYBOI system from unnecessary triple-referenced
-                                    pointers to simple ones</li>
-                                <li>Only hand over those variables as double reference which:
-                                    <ol>
-                                        <li>will carry a result to be delivered back</li>
-                                        <li>have to be treated as array</li>
-                                    </ol></li>
-                                <li>Remove signal from signal_memory only AFTER
-                                    the signal has been handled</li>
-                                <li>Correct A LOT OF bugs causing segmentation faults at runtime</li>
-                                <li>Get <i>Hello, World!</i> application running</li>
+                                <li>Web interface by generating HTML from CYBOL (see XUL/ UIML)</li>
+                                <li>Textual (Curses-based) user interface
+                                    (see <a href="http://zemljanka.sourceforge.net/cursed/">Zemljanka</a>
+                                    and <a href="http://tvision.sourceforge.net/">TurboVision</a>)</li>
+                                <li>Improve X-Windows graphics drawing routines (xlibs)</li>
+                                <li>RPC Communication</li>
+                                <li>CORBA (Healthcare/ HDTF/ CORBAmed) Communication</li>
+                                <li>SOAP Communication</li>
+                                <li>HL7 Message Communication</li>
+                                <li>HL7 Clinical Document Architecture (CDA) Communication</li>
+                                <li>DICOM Communication</li>
+                                <li>Use colors for log messages on console (see SuSE Linux logs:
+                                    <i>Doing action ... ok (green)/failed (red)</i>,
+                                    <i>ok</i> on the right side of the screen)</li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
-                            Christian Heller<br>
-                            <<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>><br>
                             Rolf Holzmueller<br>
                             <<a href="mailto:rolf.holzmueller@gmx.de">rolf.holzmueller@gmx.de</a>><br>
+                            Stefan Zeisler<br>
+                            <<a href="mailto:fonziex@freenet.de">fonziex@freenet.de</a>><br>
+                            Christian Heller<br>
+                            <<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>><br>
                         </td>
                     </tr>
                     <tr bgcolor="#000000">
-                        <td bgcolor="#C0FFC0"/>
+                        <td bgcolor="#FF8080"/>
                         <td align="left" valign="top">
-                            <h6>CYBOL</h6>
+                            <h6>CYBOL Core</h6>
                             <ul>
-                                <li>Create first example applications <i>exit</i> and <i>helloworld</i></li>
-                                <li>Prepare <i>resadmin</i> application with web frontend</li>
+                                <li>Get <i>resadmin</i> application with web frontend running</li>
+                                <li>Think through ontology (package structure) once more</li>
+                                <li>Action: <i>start_progress</i> and <i>stop_progress</i>
+                                    to set Wait Cursor at beginning and end of <i>handle</i></li>
+                                <li>Action: <i>login</i> called at system startup</li>
+                                <li>For UnDo functionality see design patterns <i>Command</i> and <i>Memento</i></li>
                             </ul>
                         </td>
                         <td align="left" valign="top">

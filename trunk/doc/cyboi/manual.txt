@@ -1,0 +1,97 @@
+______________________________________________________________________
+
+$RCSfile: manual.txt,v $
+
+Copyright (c) 2002-2005. Christian Heller and the CYBOP developers.
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+Texts. A copy of the license is included in the section entitled
+"GNU Free Documentation License".
+
+http://www.cybop.net
+- Cybernetics Oriented Programming -
+
+@version $Revision: 1.1 $ $Date: 2005-02-12 22:44:23 $ $Author: christian $
+@author Christian Heller <christian.heller@tuxtax.de>
+______________________________________________________________________
+
+
+Cybernetics Oriented Interpreter (CYBOI)
+
+
+Contents
+________
+
+1 Introduction
+2 Usage
+3 Development
+
+
+1 Introduction
+______________
+
+The Cybernetics Oriented Interpreter (CYBOI) is a program that can process
+knowledge models defined in the XML-based Cybernetics Oriented Language (CYBOL).
+
+The theoretical concepts behind CYBOI and CYBOL are summarised by the name
+Cybernetics Oriented Programming (CYBOP).
+
+It is the aim of CYBOP to enable developers as well as users themselves to
+write whole application systems in an absolutely flexible, platform-independent
+way, using the CYBOL (XML) format.
+
+
+2 Usage
+_______
+
+CYBOI cannot be started alone, without additional configuration information.
+A special configuration file has to be given as command-line parameter,
+for successful startup.
+
+To run an application using CYBOI, just type in a shell/ console window:
+
+cyboi configuration.cybol
+
+A number of example applications can be found in package "cybol-examples".
+The are copied to /usr/share/cybol-examples. Run them with the following
+commands:
+
+cyboi /usr/share/cybol-examples/exit/configuration.cybol
+cyboi /usr/share/cybol-examples/exit_text_file/configuration.cybol
+cyboi /usr/share/cybol-examples/exit_cybol_file/configuration.cybol
+cyboi /usr/share/cybol-examples/helloworld/configuration.cybol
+
+Read the example CYBOL files to get more information!
+
+
+3 Development
+_____________
+
+CYBOI is written in pure ANSI C, currently tested under Debian GNU/Linux Sarge
+and in the CYGWIN environment under Windows.
+
+It serves -- so to say -- as interface between a computer's hardware and the
+application knowledge defined by some developer or user.
+
+CYBOI is the active instance that controls the hardware as well as processes
+the passive application knowledge.
+
+CYBOI currently relies on the existance of an Operating System (OS), whose
+hardware-driving functionality it uses. Over the years, CYBOI may take over
+more and more OS functionality for hardware control and -- one day --
+even replace the whole OS.
+
+The CYBOP architecture looks as follows:
+
+CYBOL
+  ^
+  |
+CYBOI
+  |
+OS
+  |
+  v
+Hardware

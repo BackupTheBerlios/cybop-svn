@@ -1,42 +1,81 @@
 
 debian_package_list.txt
 
+Copyright (c) 2004-2005. Christian Heller and the CYBOP developers.
+
+@author Dennis Reichenbach <dennis.reichenbach@gmx.net>
+@author Christian Heller <christian.heller@tuxtax.de>
+
+The following packages are sorted alphabetically.
+Packages which are NOT implemented yet are put in brackets [].
+
 
 cyboi.deb
-- depends: libc6, xlibs, libxml2, libxml2-dev (to compile the source code)
-- suggests: cyboi-doc, cybol-core
-- category: interpreters
-- files:    /usr/bin/cyboi
-            /etc/cyboi/config.cybol
-            /usr/share/doc/cyboi/README.Debian
-            /usr/share/doc/cyboi/changelog.gz
-            /usr/share/doc/cyboi/copyright
-            /usr/share/man/man1/cyboi1.gz
+- depends:      libc6, xlibs, libxml2, libxml2-dev (to compile the source code)
+- recommends:   cybol-core
+- suggests:     cyboi-doc
+- category:     interpreters
+- files:        /usr/bin/cyboi
+                /usr/share/doc/cyboi/README.Debian
+                /usr/share/doc/cyboi/changelog.gz
+                /usr/share/doc/cyboi/copyright
+                /usr/share/man/man1/cyboi1.gz
 
-cyboi-doc.deb
-- suggests: cyboi
-- category: doc
-- files: (Documentation)
+[cyboi-doc.deb]
+- recommends:   cybop-doc-papers, cybop-doc-presentations
+- suggests:     cyboi
+- category:     doc
+- files:        /usr/share/doc/cyboi/manual.txt
 
-cyboi-doc-papers.deb
+[cybol-core.deb]
+- depends:      cyboi
+- suggests:     cybol-healthcare
+- category:     misc (evtl. auch "lib")
+- files:        /usr/share/cybol/core/*
 
-cyboi-doc-presentations.deb
+cybol-examples.deb
+- depends:      cyboi
+- suggests:     cybop-doc-papers, cybop-doc-presentations
+- category:     misc
+- files:        /usr/share/cybol-examples/exit/*
+                /usr/share/cybol-examples/exit_cybol_file/*
+                /usr/share/cybol-examples/exit_text_file/*
+                /usr/share/cybol-examples/helloworld/*
 
-----------
+[cybol-healthcare.deb]
+- depends:      cyboi, cybol-core
+- suggests:     resmedicinae
+- category:     misc (evtl. auch "science"; "health" gibt's leider nicht)
+- files:        /usr/share/cybol/healthcare/*
 
-cybol-core.deb
-- depends: cyboi
-- suggests: cybol-healthcare
-- category: misc
-- files: CYBOL Core Files in /lib/cybop/core
+[resadmin.deb]
+- depends:      cyboi, cybol-core
+- category:     misc
+- files:        /usr/share/resadmin/*
 
-cybol-healthcare.deb
-- depends: cybol-core
-- suggests: res_medicinae
-- category: misc ("health" gibt's leider nicht)
-- files: CYBOL Healthcare Files in /lib/cybop/healthcare
+[resmedicinae.deb]
+- depends:      cyboi, cybol-healthcare
+- recommends:   resadmin
+- suggests:     resmedicinae-doc
+- category:     misc (evtl. auch "science"; "health" gibt's leider nicht)
+- files:        /usr/share/resmedicinae/*
 
-resmedicinae.deb
-- depends: cybol-healthcare
-- category: misc ("health" gibt's leider nicht)
-- file: CYBOL Files, Res Medicinae Anwendung in /lib/resmedicinae
+resmedicinae-doc.deb
+(ACHTUNG! Dieses Paket gibt es schon in "Sarge", wo es aber "resmed-doc" heiszt.
+Andreas Tille ist der Maintainer. Das Paket gehoert zum Meta-Package "med-doc".
+Es sollte umbenannt werden in "resmedicinae-doc". Dazu bitte Kontakt aufnehmen!)
+- recommends:   cyboi-doc
+- suggests:     linuxdoc-tools
+- category:     doc
+- files:        /usr/share/doc/resmedicinae/analysis.txt
+                /usr/share/doc/resmedicinae/manual.txt
+
+cybop-doc-papers.deb
+- suggests:     cyboi-doc
+- category:     doc
+- files:        /usr/share/doc/cybop/papers/*
+
+cybop-doc-presentations.deb
+- suggests:     cyboi-doc
+- category:     doc
+- files:        /usr/share/doc/cybop/presentations/*
