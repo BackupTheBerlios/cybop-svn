@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-03-02 07:12:37 $ $Author: rholzmueller $
+ * @version $Revision: 1.13 $ $Date: 2005-03-10 09:55:41 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,11 +63,17 @@ static const int* SIGNAL_MEMORY_ABSTRACTION_COUNT = SIGNAL_MEMORY_ABSTRACTION_CO
 // Knowledge memory abstraction.
 //
 
-/** The signal memory abstraction. */
-static const char KNOWLEDGE_MEMORY_ABSTRACTION_ARRAY[] = {'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e', '_', 'm', 'e', 'm', 'o', 'r', 'y'};
+/** The knowledge memory abstraction. */
+static const char KNOWLEDGE_MEMORY_ABSTRACTION_ARRAY[] = {'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e'};
 static const char* KNOWLEDGE_MEMORY_ABSTRACTION = KNOWLEDGE_MEMORY_ABSTRACTION_ARRAY;
-static const int KNOWLEDGE_MEMORY_ABSTRACTION_COUNT_ARRAY[] = {16};
+static const int KNOWLEDGE_MEMORY_ABSTRACTION_COUNT_ARRAY[] = {9};
 static const int* KNOWLEDGE_MEMORY_ABSTRACTION_COUNT = KNOWLEDGE_MEMORY_ABSTRACTION_COUNT_ARRAY;
+
+/** The encapsulated knowledge memory abstraction. */
+static const char ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_ARRAY[] = {'e', 'n', 'c', 'a', 'p', 's', 'u', 'l', 'a', 't', 'e', 'd', '_', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e'};
+static const char* ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION = ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_ARRAY;
+static const int ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_COUNT_ARRAY[] = {22};
+static const int* ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_COUNT = ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_COUNT_ARRAY;
 
 //
 // Compound abstraction.
@@ -477,6 +483,21 @@ static const char* SET_ABSTRACTION = SET_ABSTRACTION_ARRAY;
 static const int SET_ABSTRACTION_COUNT_ARRAY[] = {3};
 static const int* SET_ABSTRACTION_COUNT = SET_ABSTRACTION_COUNT_ARRAY;
 
+
+/** The count part abstraction. */
+static const char COUNT_PART_ABSTRACTION_ARRAY[] = {'c', 'o', 'u', 'n', 't', '_', 'p', 'a', 'r', 't' };
+static const char* COUNT_PART_ABSTRACTION = COUNT_PART_ABSTRACTION_ARRAY;
+static const int COUNT_PART_ABSTRACTION_COUNT_ARRAY[] = {10};
+static const int* COUNT_PART_ABSTRACTION_COUNT = COUNT_PART_ABSTRACTION_COUNT_ARRAY;
+
+/** The build listname abstraction. */
+static const char BUILD_LISTNAME_ABSTRACTION_ARRAY[] = {'b', 'u', 'i', 'l', 'd', '_', 'l', 'i', 's', 't', 'n', 'a', 'm', 'e' };
+static const char* BUILD_LISTNAME_ABSTRACTION = BUILD_LISTNAME_ABSTRACTION_ARRAY;
+static const int BUILD_LISTNAME_ABSTRACTION_COUNT_ARRAY[] = {14};
+static const int* BUILD_LISTNAME_ABSTRACTION_COUNT = BUILD_LISTNAME_ABSTRACTION_COUNT_ARRAY;
+
+
+//
 //
 // Opcodes.
 //

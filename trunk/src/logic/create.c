@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.30 $ $Date: 2005-03-02 07:20:01 $ $Author: rholzmueller $
+ * @version $Revision: 1.31 $ $Date: 2005-03-10 09:59:10 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -107,6 +107,10 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
         if (*p != 1) {
 
             compare_arrays(p1, p2, (void*) KNOWLEDGE_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_MEMORY_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
+        }
+        if (*p != 1) {
+
+            compare_arrays(p1, p2, (void*) ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
     } else {
@@ -445,35 +449,39 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
     void** wds = POINTER_NULL_POINTER;
 
     // Get name name.
-    get_compound_element_by_name(p0, p1,
+    get_real_compound_element_by_name(p0, p1,
         (void*) NAME_NAME_ABSTRACTION, (void*) NAME_NAME_ABSTRACTION_COUNT,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
-        (void*) &nd, (void*) &ndc, (void*) &nds);
+        (void*) &nd, (void*) &ndc, (void*) &nds,
+        p2, p3);
 
     // Get channel name.
-    get_compound_element_by_name(p0, p1,
+    get_real_compound_element_by_name(p0, p1,
         (void*) CHANNEL_NAME_ABSTRACTION, (void*) CHANNEL_NAME_ABSTRACTION_COUNT,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
-        (void*) &cd, (void*) &cdc, (void*) &cds);
+        (void*) &cd, (void*) &cdc, (void*) &cds,
+        p2, p3);
 
     // Get abstraction name.
-    get_compound_element_by_name(p0, p1,
+    get_real_compound_element_by_name(p0, p1,
         (void*) ABSTRACTION_NAME_ABSTRACTION, (void*) ABSTRACTION_NAME_ABSTRACTION_COUNT,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
-        (void*) &ad, (void*) &adc, (void*) &ads);
+        (void*) &ad, (void*) &adc, (void*) &ads,
+        p2, p3);
 
     // Get model name.
-    get_compound_element_by_name(p0, p1,
+    get_real_compound_element_by_name(p0, p1,
         (void*) MODEL_NAME_ABSTRACTION, (void*) MODEL_NAME_ABSTRACTION_COUNT,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
-        (void*) &md, (void*) &mdc, (void*) &mds);
+        (void*) &md, (void*) &mdc, (void*) &mds,
+        p2, p3);
 
     // Get whole.
-    get_compound_element_by_encapsulated_name(p0, p1,
+    get_real_compound_element_by_name(p0, p1,
         (void*) WHOLE_NAME_ABSTRACTION, (void*) WHOLE_NAME_ABSTRACTION_COUNT,
         (void*) &wa, (void*) &wac, (void*) &was,
         (void*) &wm, (void*) &wmc, (void*) &wms,

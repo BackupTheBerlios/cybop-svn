@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2005-03-02 07:05:55 $ $Author: rholzmueller $
+ * @version $Revision: 1.23 $ $Date: 2005-03-10 09:52:22 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1745,18 +1745,55 @@ void get_real_compound_element_by_name(const void* p0, const void* p1,
          (ms != POINTER_NULL_POINTER) ) 
     {
     
-        int r = 0;
-
+        int r1 = 0;
         compare_arrays( *a, *ac,
                         (void*) KNOWLEDGE_MEMORY_ABSTRACTION,
                         (void*) KNOWLEDGE_MEMORY_ABSTRACTION_COUNT,
-                        &r, (void*) CHARACTER_ARRAY );
+                        &r1, (void*) CHARACTER_ARRAY );
+
+        int r2 = 0;
+        compare_arrays( *a, *ac,
+                        (void*) ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION,
+                        (void*) ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_COUNT,
+                        &r2, (void*) CHARACTER_ARRAY );
                         
-        if ( r==1 ) {
+        if ( (r1==1) || (r2==1) ) {
+
+            // The abstraction, model, details for the encapsulated.
+            void** ea = POINTER_NULL_POINTER;
+            void** eac = POINTER_NULL_POINTER;
+            void** eas = POINTER_NULL_POINTER;
+            void** em = POINTER_NULL_POINTER;
+            void** emc = POINTER_NULL_POINTER;
+            void** ems = POINTER_NULL_POINTER;
+            void** ed = POINTER_NULL_POINTER;
+            void** edc = POINTER_NULL_POINTER;
+            void** eds = POINTER_NULL_POINTER;
+
 
             // Get knowledge element.
             get_compound_element_by_name(p13, p14, *m, *mc,
-                p4, p5, p6, p7, p8, p9, p10, p11, p12);
+                (void*) &ea, (void*) &eac, (void*) &eas,
+                (void*) &em, (void*) &emc, (void*) &ems,
+                (void*) &ed, (void*) &edc, (void*) &eds);
+            
+            if (r2==1) {
+              
+                get_compound_element_by_name(p13, p14, *em, *emc,
+                    p4, p5, p6, p7, p8, p9, p10, p11, p12);
+            }
+            else {
+                
+                *(void**)p4  = ea;
+                *(void**)p5  = eac;
+                *(void**)p6  = eas;
+                *(void**)p7  = em;
+                *(void**)p8  = emc;
+                *(void**)p9  = ems;
+                *(void**)p10 = ed;
+                *(void**)p11 = edc;
+                *(void**)p12 = eds;
+            }
         }
         else {
 
