@@ -1,7 +1,0 @@
-examples/exit/configuration.cybol usr/share/cybol-examples/exit
-examples/exit_text_file/configuration.cybol usr/share/cybol-examples/exit_text_file
-examples/exit_text_file/exit.txt usr/share/cybol-examples/exit_text_file
-examples/exit_cybol_file/configuration.cybol usr/share/cybol-examples/exit_cybol_file
-examples/exit_cybol_file/exit.cybol usr/share/cybol-examples/exit_cybol_file
-examples/helloworld/configuration.cybol usr/share/cybol-examples/helloworld
-examples/helloworld/startup.cybol usr/share/cybol-examples/helloworld
