@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-02-14 07:26:27 $ $Author: rholzmueller $
+ * @version $Revision: 1.10 $ $Date: 2005-02-24 17:01:14 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,33 +51,45 @@ void startup_input_output(void* p0) {
     log_message_debug("Startup input output.");
 
     // The activation flag.
-    int* f = INTEGER_NULL_POINTER;
+    void** f = POINTER_NULL_POINTER;
 
     // Unix server socket.
-    f = INTEGER_NULL_POINTER;
+    f = POINTER_NULL_POINTER;
     get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
-    if (*f == 1) {
-
-        create_unix_server_socket(p0);
+    if (f!= NULL_POINTER) {
+       if (*f!=NULL_POINTER) {
+            if (*((int*)*f) == 1) {
+        
+                create_unix_server_socket(p0);
+            }
+       }
     }
 
     // Tcp server socket.
-    f = INTEGER_NULL_POINTER;
+    f = POINTER_NULL_POINTER;
     get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
-    if (*f == 1) {
-
-        create_tcp_server_socket(p0);
+    if (f!= NULL_POINTER) {
+       if (*f!=NULL_POINTER) {
+            if (*((int*)*f) == 1) {
+        
+                create_tcp_server_socket(p0);
+            }
+       }
     }
 
     // X windows server.
-    f = INTEGER_NULL_POINTER;
+    f = POINTER_NULL_POINTER;
     get_array_elements(p0, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
-    if (*f == 1) {
-
-//??        create_x_windows_server(p0);
+    if (f!= NULL_POINTER) {
+       if (*f!=NULL_POINTER) {
+            if (*((int*)*f) == 1) {
+        
+        //??        create_x_windows_server(p0);
+            }
+       }
     }
 }
 

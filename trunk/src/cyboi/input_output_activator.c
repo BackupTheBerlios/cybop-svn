@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-02-14 07:26:27 $ $Author: rholzmueller $
+ * @version $Revision: 1.9 $ $Date: 2005-02-24 17:01:04 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -65,33 +65,45 @@ void activate_input_output(void* p0) {
     log_message_debug("Activate internals.");
 
     // The activation flag.
-    int* f = INTEGER_NULL_POINTER;
+    void** f = POINTER_NULL_POINTER;
 
     // UNIX socket.
-    f = INTEGER_NULL_POINTER;
+    f = POINTER_NULL_POINTER;
     get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
-    if (*f == 1) {
-
-        receive_unix_socket(p0);
+    if (f!= NULL_POINTER) {
+       if (*f!=NULL_POINTER) {
+            if (*((int*)*f) == 1) {
+        
+                receive_unix_socket(p0);
+            }
+       }
     }
 
     // TCP socket.
-    f = INTEGER_NULL_POINTER;
+    f = POINTER_NULL_POINTER;
     get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
-    if (*f == 1) {
-
-        receive_tcp_socket(p0);
+    if (f!= NULL_POINTER) {
+       if (*f!=NULL_POINTER) {
+            if (*((int*)*f) == 1) {
+        
+                //receive_tcp_socket(p0);
+            }
+       }
     }
 
     // X windows.
-    f = INTEGER_NULL_POINTER;
+    f = POINTER_NULL_POINTER;
     get_array_elements(p0, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
-    if (*f == 1) {
-
-        receive_x_windows(p0);
+    if (f!= NULL_POINTER) {
+       if (*f!=NULL_POINTER) {
+            if (*((int*)*f) == 1) {
+        
+                receive_x_windows(p0);
+            }
+       }
     }
 
 //?? TEST only!
