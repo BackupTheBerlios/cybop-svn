@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Term.java,v $
+ * $RCSfile: LogItem.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,18 +22,16 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model;
+package cybop.core.logrecord;
+
+import cybop.core.model.*;
 
 /**
- * This class represents a term.
+ * This class represents a log item.
  *
- * A term corresponds to an acknowledged word.
- * It contains translations into several languages.
- * Different codes reference various terminologies such as UMLS, GALEN etc.
- *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Term extends String {
+public class LogItem extends ModelItem {
 }
 

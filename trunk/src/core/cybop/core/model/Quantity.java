@@ -29,9 +29,9 @@ package cybop.core.model;
  *
  * A quantity can be used to count items.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Quantity extends ModelItem {
+public class Quantity extends Abstraction {
 }
 

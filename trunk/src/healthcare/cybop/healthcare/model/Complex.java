@@ -32,7 +32,7 @@ import cybop.core.model.String;
  * A complex number has two parts, one called "real" and a second
  * one called "imaginary".
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Complex extends Quantity {

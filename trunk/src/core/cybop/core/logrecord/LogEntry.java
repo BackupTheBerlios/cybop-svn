@@ -1,5 +1,5 @@
 /*
- * $RCSfile: LogRecordModel.java,v $
+ * $RCSfile: LogEntry.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -24,22 +24,15 @@
 
 package cybop.core.logrecord;
 
-import cybop.core.model.*;
-
 /**
- * This class represents a log record model.
+ * This class represents a log entry.
  *
- * A log record stores a history, mostly that of a system.
- * It keeps track of signals (events) occuring on the system.
+ * A log entry consists of the time this entry was made, a log level and a message.
  *
- * The system using a log record is responsible for providing access to it.
- * This may be writing out the record to console or a file or to another medium
- * or location, using mechanisms offered by the framework.
- *
- * @version $Revision: 1.1 $ $Date: 2003-06-11 14:22:23 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class LogRecordModel extends ModelItem {
+public class LogEntry extends LogItem {
 
     //
     // Children categories.
@@ -98,7 +91,7 @@ public class LogRecordModel extends ModelItem {
      */
     public String getDefaultMessageCategory() {
 
-        return null;
+        return new String("cybop.core.model.String");
     }
 
     //
@@ -112,9 +105,9 @@ public class LogRecordModel extends ModelItem {
         
         super.categorize();
 
-        setCategory(LogRecordModel.TIME, getDefaultTimeCategory());
-        setCategory(LogRecordModel.LEVEL, getDefaultLevelCategory());
-        setCategory(LogRecordModel.MESSAGE, getDefaultMessageCategory());
+        setCategory(LogEntry.TIME_CATEGORY, getDefaultTimeCategory());
+        setCategory(LogEntry.LEVEL_CATEGORY, getDefaultLevelCategory());
+        setCategory(LogEntry.MESSAGE_CATEGORY, getDefaultMessageCategory());
     }
 
     /**
@@ -122,11 +115,23 @@ public class LogRecordModel extends ModelItem {
      */
     public void decategorize() throws Exception {
 
+        Hierarchy messageCategory = getCategory(LogEntry.MESSAGE_CATEGORY);
+        removeCategory(LogEntry.MESSAGE_CATEGORY);
+        destroyCategory(messageCategory);
+
+        Hierarchy levelCategory = getCategory(LogEntry.LEVEL_CATEGORY);
+        removeCategory(LogEntry.LEVEL_CATEGORY);
+        destroyCategory(levelCategory);
+
+        Hierarchy timeCategory = getCategory(LogEntry.TIME_CATEGORY);
+        removeCategory(LogEntry.TIME_CATEGORY);
+        destroyCategory(timeCategory);
+
         super.decategorize();
     }
 
     //
-    // Initializable.
+    // Initialization.
     //
 
     /**
@@ -136,9 +141,9 @@ public class LogRecordModel extends ModelItem {
 
         super.initialize();
 
-        setChild(LogRecordModel.TIME, getDefaultTime());
-        setChild(LogRecordModel.LEVEL, getDefaultLevel());
-        setChild(LogRecordModel.MESSAGE, getDefaultMessage());
+        setChild(LogEntry.TIME, getDefaultTime());
+        setChild(LogEntry.LEVEL, getDefaultLevel());
+        setChild(LogEntry.MESSAGE, getDefaultMessage());
     }
 
     /**
@@ -146,16 +151,16 @@ public class LogRecordModel extends ModelItem {
      */
     public void finalizz() throws Exception {
 
-        Item message = getChild(LogRecordModel.MESSAGE);
-        removeChild(LogRecordModel.MESSAGE);
+        Item message = getChild(LogEntry.MESSAGE);
+        removeChild(LogEntry.MESSAGE);
         destroyItem(message);
 
-        Item level = getChild(LogRecordModel.LEVEL);
-        removeChild(LogRecordModel.LEVEL);
+        Item level = getChild(LogEntry.LEVEL);
+        removeChild(LogEntry.LEVEL);
         destroyItem(level);
 
-        Item time = getChild(LogRecordModel.TIME);
-        removeChild(LogRecord.TIME);
+        Item time = getChild(LogEntry.TIME);
+        removeChild(LogEntry.TIME);
         destroyItem(time);
 
         super.finalizz();

@@ -33,20 +33,10 @@ import cybop.core.model.*;
  * A system item has special properties like configuration or log record and
  * is able to create and send signals.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-11 14:22:23 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemItem extends ModelItem {
-
-    //
-    // Children categories.
-    //
-
-    /** The signal category. */
-    public static final String SIGNAL_CATEGORY = new String("signal_category");
-
-    /** The action category. */
-    public static final String ACTION_CATEGORY = new String("action_category");
 
     //
     // Children names.
@@ -83,6 +73,48 @@ public class SystemItem extends ModelItem {
     }
 
     //
+    // Child management.
+    //
+
+    /**
+     * Creates a child.
+     *
+     * @param n the category name
+     * @return the child
+     * @exception Exception if the category is null
+     * @exception Exception if the child is null
+     */
+    public Item createChild(String n) throws Exception {
+
+        Item i = super.createChildItem(n);
+
+        if (i != null) {
+
+            java.lang.System.out.println("INFO: Connect child to signal memory.");
+            i.set(SystemItem.SIGNAL_MEMORY);
+        }
+
+        return i;
+    }
+
+    /**
+     * Destroys the child.
+     *
+     * @param i the child
+     * @exception Exception if the child is null
+     */
+    public void destroyChild(Item i) throws Exception {
+
+        if (i != null) {
+
+            java.lang.System.out.println("INFO: Unconnect child from signal memory.");
+            i.remove(SystemItem.SIGNAL_MEMORY);
+        }
+
+        super.destroyChild();
+    }
+
+    //
     // Categorization.
     //
 
@@ -93,7 +125,7 @@ public class SystemItem extends ModelItem {
 
         super.categorize();
 
-        setChildCategory(Item.SIGNAL_CATEGORY, getDefaultSignalCategory());
+        setCategory(SystemItem.SIGNAL, getDefaultSignalCategory());
     }
 
     /**
@@ -101,9 +133,9 @@ public class SystemItem extends ModelItem {
      */
     public void decategorize() throws Exception {
 
-        //?? Write changes to local user configuration file.
-//??        c.setChildItem(Item.SIGNAL_CATEGORY, getChildCategory(Item.SIGNAL_CATEGORY));
-//??        removeChildCategory(Item.SIGNAL_CATEGORY);
+        Hierarchy signal = getCategory(SystemItem.SIGNAL);
+        removeCategory(SystemItem.SIGNAL);
+        destroyCategory(signal);
 
         super.decategorize();
     }
@@ -275,5 +307,137 @@ public class SystemItem extends ModelItem {
 
         return s;
     }
+
+    //
+    // Logging.
+    //
+
+    /**
+     * Logs a message with no arguments.
+     *
+     * @param l the log level
+     * @param m the message
+     */
+    public void log(Integer l, java.lang.String m) throws Exception {
+
+        log(l, m, null);
+    }
+
+    /**
+     * Logs a message with associated throwable information.
+     *
+     * @param l the log level
+     * @param m the message
+     * @param t the throwable
+     * @exception Exception if the log level is null
+     * @exception Exception if the log record is null
+     */
+    public void log(Integer l, java.lang.String m, java.lang.Throwable t) throws Exception {
+
+        if (l != null) {
+
+            if (l.isSmallerThanOrEqualTo((Integer) getChildItem(Item.LOG_LEVEL))) {
+
+                LogRecord r = (LogRecord) getChildItem(Item.LOG_RECORD);
+
+                if (r != null) {
+
+                    r.setChildItem(LogRecord.MESSAGE, new String(m));
+                    r.setThrowable(t);
+
+                } else {
+                    
+                    throw new Exception("Could not log message. The log record is null.");
+                }
+    
+                log(r);
+            }
+
+        } else {
+            
+            throw new Exception("Could not log message. The log level is null.");
+        }
+    }
+
+    /**
+     * Logs a log record.
+     *
+     * @param r the log record
+     * @exception Exception if the log record is null
+     */
+    public void log(LogRecord r) throws Exception {
+
+/*??
+        cybop.core.system.region.controller.Encoder e = (cybop.core.system.region.controller.Encoder) getChildItem(Item.ENCODER);
+
+        if (e != null) {
+
+            e.drive(r);
+            
+        } else {
+
+            /*??
+             * Temporary replacement for logging.
+             * The motor (output mechanism) has to be assigned here later.
+             * For now, the system console is used for message output.
+             */
+            if (r.getThrowable() != null) {
+
+                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChildItem(LogRecord.MESSAGE)).getJavaObject() + "\n" + r.getThrowable());
+                r.getThrowable().printStackTrace();
+
+            } else {
+
+                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChildItem(LogRecord.MESSAGE)).getJavaObject());
+            }
+
+/*??
+            throw new Exception("Could not log record. The motor is null.");
+        }
+*/
+    }
+
+    /**
+     * Logs a message with associated throwable information.
+     *
+     * Displays a graphical message dialog, in addition to the pure logging
+     * being done in the parent class's log method.
+     *
+     * @param lev the level
+     * @param msg the message
+     * @param t the throwable
+     */
+/*??
+    public void log(Level lev, String msg, Throwable t) throws Exception {
+
+        super.log(lev, msg, t);
+
+        DisplayManager dm = getDisplayManager();
+
+        if (dm != null) {
+
+//??            dm.showMessage(lev, msg, t);
+
+            //?? Example for localization!
+            //?? showError(e.getLocalizedSourceControlName(), e.getLocalizedMessage());
+
+        } else {
+
+            // Don't throw exception here cause not all controllers/applications
+            // use a graphical display, i.e. not all have a display manager.
+        }
+    }
+
+    /**
+     * Shows a message dialog.
+     *
+     * @param lev the level
+     * @param msg the message
+     * @param t the throwable
+     */
+/*??
+    public void showMessage(Level lev, String msg, Throwable t) throws Exception {
+    }
+*/
 }
 

@@ -22,7 +22,7 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.category;
+package cybop.core.model;
 
 /**
  * This class represents a map.
@@ -33,7 +33,7 @@ package cybop.core.category;
  * the index of the wanted element -- and then returning the corresponding
  * reference.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-23 11:57:28 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Map extends Array {

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: String.java,v $
+ * $RCSfile: Term.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -27,12 +27,12 @@ package cybop.core.model;
 /**
  * This class represents a string.
  *
- * A string is an addition of characters, in other words a character array.
+ * A string is an addition of characters.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class String extends Array {
+public class String extends Quality {
 
     //
     // Static values.

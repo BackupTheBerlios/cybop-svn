@@ -57,48 +57,20 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.15 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends SystemItem implements java.lang.Runnable {
 
     //
-    // Children names.
-    //
-
-    /** The controller. */
-    public static final String CONTROLLER = new String("controller");
-
-    /** The socket address. */
-    public static final String SOCKET_ADDRESS = new String("socket_address");
-
-    /** The internet protocol 6 address. */
-    public static final String IP6_ADDRESS = new String("ip6_address");
-
-    /** The internet protocol 4 address. */
-    public static final String IP4_ADDRESS = new String("ip4_address");
-
-    /** The host name. */
-    public static final String HOST_NAME = new String("host_name");
-
-    /** The domain name. */
-    public static final String DOMAIN_NAME = new String("domain_name");
-
-    /** The communication partners count. */
-    public static final String COMMUNICATION_PARTNERS_COUNT = new String("communication_partners_count");
-
-    /** The communication partner. */
-    public static final String COMMUNICATION_PARTNER = new String("communication_partner");
-
-    /** The user. */
-    public static final String USER = new String("user");
-
-    //
-    // Children category names.
+    // Category names.
     //
 
     /** The controller category. */
     public static final String CONTROLLER_CATEGORY = new String("controller_category");
+
+    /** The log level category. */
+    public static final String LOG_LEVEL_CATEGORY = new String("log_level_category");
 
     /** The socket address category. */
     public static final String SOCKET_ADDRESS_CATEGORY = new String("socket_address_category");
@@ -125,6 +97,62 @@ public class System extends SystemItem implements java.lang.Runnable {
     public static final String USER_CATEGORY = new String("user_category");
 
     //
+    // Children names.
+    //
+
+    /** The controller. */
+    public static final String CONTROLLER = new String("controller");
+
+    /** The log level. */
+    public static final String LOG_LEVEL = new String("log_level");
+
+    /** The socket address. */
+    public static final String SOCKET_ADDRESS = new String("socket_address");
+
+    /** The internet protocol 6 address. */
+    public static final String IP6_ADDRESS = new String("ip6_address");
+
+    /** The internet protocol 4 address. */
+    public static final String IP4_ADDRESS = new String("ip4_address");
+
+    /** The host name. */
+    public static final String HOST_NAME = new String("host_name");
+
+    /** The domain name. */
+    public static final String DOMAIN_NAME = new String("domain_name");
+
+    /** The communication partners count. */
+    public static final String COMMUNICATION_PARTNERS_COUNT = new String("communication_partners_count");
+
+    /** The communication partner. */
+    public static final String COMMUNICATION_PARTNER = new String("communication_partner");
+
+    /** The user. */
+    public static final String USER = new String("user");
+
+    //
+    // Log levels.
+    //
+
+    /** The log level to turn off logging. */
+    public static final Integer OFF_LOG_LEVEL = new Integer(0);
+
+    /** The log level indicating a serious failure. */
+    public static final Integer ERROR_LOG_LEVEL = new Integer(1);
+
+    /** The log level indicating a potential problem. */
+    public static final Integer WARNING_LOG_LEVEL = new Integer(2);
+
+    /** The log level for informational messages. */
+    public static final Integer INFO_LOG_LEVEL = new Integer(3);
+
+    /** The log level providing tracing information. */
+    public static final Integer DEBUG_LOG_LEVEL = new Integer(4);
+
+    /** The log level printing all messages, including every signal occuring in the system. */
+    public static final Integer SIGNAL_LOG_LEVEL = new Integer(5);
+
+    //
     // Encapsulated java thread.
     //
 
@@ -139,7 +167,7 @@ public class System extends SystemItem implements java.lang.Runnable {
     }
 
     //
-    // Default children categories.
+    // Default categories.
     //
 
     /**
@@ -150,6 +178,16 @@ public class System extends SystemItem implements java.lang.Runnable {
     public Item getDefaultControllerCategory() {
 
         return null;
+    }
+
+    /**
+     * Returns the default log level category.
+     *
+     * @return the default log level category
+     */
+    public Item getDefaultLogLevelCategory() {
+
+        return System.SIGNAL_LOG_LEVEL;
     }
 
     /**
@@ -281,6 +319,32 @@ public class System extends SystemItem implements java.lang.Runnable {
     }
 
     //
+    // Categorization.
+    //
+
+    /**
+     * Categorizes this item.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setChildCategory(Item.LOG_LEVEL_CATEGORY, c.getChildItem(Item.LOG_LEVEL_CATEGORY, getDefaultLogLevelCategory()));
+    }
+
+    /**
+     * Decategorizes this item.
+     */
+    public void decategorize() throws Exception {
+
+        //?? Write changes to local user configuration file.
+//??        c.setChildItem(Item.LOG_LEVEL_CATEGORY, getChildCategory(Item.LOG_LEVEL_CATEGORY));
+//??        removeChildCategory(Item.LOG_LEVEL_CATEGORY);
+
+        super.decategorize();
+    }
+
+    //
     // Configuration.
     //
 
@@ -371,6 +435,7 @@ public class System extends SystemItem implements java.lang.Runnable {
         super.initialize();
 
         setChildItem(System.CONTROLLER, createChildItem((String) getChildCategory(System.CONTROLLER_CATEGORY)));
+        setChildItem(System.LOG_LEVEL, getChildCategory(System.LOG_LEVEL_CATEGORY));
         setChildItem(System.SOCKET_ADDRESS, createChildItem((String) getChildCategory(System.SOCKET_ADDRESS_CATEGORY)));
         setChildItem(System.IP6_ADDRESS, createChildItem((String) getChildCategory(System.IP6_ADDRESS_CATEGORY)));
         setChildItem(System.IP4_ADDRESS, createChildItem((String) getChildCategory(System.IP4_ADDRESS_CATEGORY)));
@@ -477,6 +542,10 @@ public class System extends SystemItem implements java.lang.Runnable {
         Item socketAddress = getChildItem(System.SOCKET_ADDRESS);
         removeChildItem(System.SOCKET_ADDRESS);
         destroyChildItem((SocketAddress) socketAddress);
+
+        Item logLevel = getChildItem(System.LOG_LEVEL);
+        removeChildItem(System.LOG_LEVEL);
+        destroyChildItem((Integer) logLevel);
 
         Item controller = getChildItem(System.CONTROLLER);
         removeChildItem(System.CONTROLLER);

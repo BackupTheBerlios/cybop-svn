@@ -22,21 +22,18 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.category;
+package cybop.core.model;
 
 /**
  * This class represents an array.
  *
- * An array is an area in the computer memory that can contain a number of elements.
- * It such abstracts and represents a real world item.
- * In the case of computer science, everything gets abstracted to 0 and 1.
- * But that also means that every abstraction has a bytecode representation.
- * The abstraction can be seen as byte array itself.
+ * An array is an area in the computer memory that can contain a number of
+ * abstract elements.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Array extends java.lang.Object {
+public class Array extends Quality {
 
     //?? See for example:
     //?? java.io.ObjectOutputStream::writeArray
@@ -52,9 +49,6 @@ public class Array extends java.lang.Object {
     //
     // Temporary until CYBOP framework doesn't rely on java classes anymore.
     //
-
-    /** The encapsulated java object. */
-    private java.lang.Object javaObject;
 
     /** The java tree node. */
     private javax.swing.tree.DefaultMutableTreeNode javaTreeNode;
@@ -308,49 +302,6 @@ public class Array extends java.lang.Object {
     }
 
     //
-    // Encapsulated java object.
-    //
-
-    /**
-     * Creates an encapsulated java object.
-     *
-     * @return the encapsulated java object
-     * @exception Exception if the encapsulated java object is null
-     */
-    public java.lang.Object createJavaObject() {
-
-        return null;
-    }
-
-    /**
-     * Destroys the encapsulated java object.
-     *
-     * @param o the encapsulated java object
-     */
-    public void destroyJavaObject(java.lang.Object o) {
-    }
-
-    /**
-     * Sets the encapsulated java object.
-     *
-     * @param o the encapsulated java object
-     */
-    public void setJavaObject(java.lang.Object o) {
-
-        this.javaObject = o;
-    }
-
-    /**
-     * Returns the encapsulated java object.
-     *
-     * @return the encapsulated java object
-     */
-    public java.lang.Object getJavaObject() {
-
-        return this.javaObject;
-    }
-
-    //
     // Java tree node.
     //
 
@@ -487,25 +438,13 @@ public class Array extends java.lang.Object {
     //
 
     /**
-     * Abstracts this array.
-     *
-     * This is something like a meta method which sets up this category
-     * (class/type) with all its properties.
-     *
-     * This method's name is <code>abstracc</code> and not <code>abstract</code>
-     * because the java computer language already uses <code>abstract</code> as
-     * key word.
-     *
-     * This method will be renamed to <code>abstract</code> as soon as the new
-     * and simplified CYBOL computer language is used.
+     * Abstracts this abstraction.
      */
     public void abstracc() throws Exception {
 
-        setElements(createElements());
+        super.abstracc();
 
-        // As long as the CYBOP framework is built on Java, every
-        // item needs to be capable of encapsulating a pure Java object.
-        setJavaObject(createJavaObject());
+        setElements(createElements());
 
         // This java tree node can contain children.
         // It is only used as long as Java objects are used in the CYBOP framework,
@@ -515,7 +454,7 @@ public class Array extends java.lang.Object {
     }
 
     /**
-     * Deabstracts this array.
+     * Deabstracts this abstraction.
      */
     public void deabstract() throws Exception {
 
@@ -527,15 +466,11 @@ public class Array extends java.lang.Object {
         setJavaTreeNode(null);
         destroyJavaTreeNode(javaTreeNode);
 
-        // As long as the CYBOP framework is built on Java, every
-        // item needs to be capable of encapsulating a pure Java object.
-        java.lang.Object javaObject = getJavaObject();
-        setJavaObject(null);
-        destroyJavaObject(javaObject);
-
         Array[] elements = getElements();
         setElements(null);
         destroyElements(elements);
+
+        super.deabstract();
     }
 }
 

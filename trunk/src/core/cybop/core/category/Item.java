@@ -80,7 +80,7 @@ package cybop.core.category;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-11 14:22:23 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends Behaviour {
@@ -141,12 +141,12 @@ public class Item extends Behaviour {
     /**
      * Creates a child.
      *
-     * @param n the category (class) name
+     * @param n the category name
      * @return the child
      * @exception Exception if the category is null
      * @exception Exception if the child is null
      */
-    public Item createChildItem(String n) throws Exception {
+    public Item createChild(String n) throws Exception {
 
         Item i = null;
 
@@ -163,20 +163,32 @@ public class Item extends Behaviour {
 
                 if (i != null) {
 
-                    java.lang.System.out.println("INFO: Globalize child.");
-                    i.globalize(
-                        getChildItem(Item.LOG_RECORD),
-                        getChildItem(Item.SIGNAL_MEMORY)
-                    );
+                    java.lang.System.out.println("INFO: Abstract child to get an abstraction.");
+                    i.abstracc();
 
-                    java.lang.System.out.println("INFO: Configure child.");
-                    i.configure();
+                    java.lang.System.out.println("INFO: Name child to get a category.");
+                    i.name();
 
-                    java.lang.System.out.println("INFO: Initialize child.");
+                    java.lang.System.out.println("INFO: Inherit child to get an inheritance.");
+                    i.inherit();
+
+                    java.lang.System.out.println("INFO: Categorize child to get a hierarchy.");
+                    i.categorize();
+
+                    java.lang.System.out.println("INFO: Position child to get a structure.");
+                    i.position();
+
+                    java.lang.System.out.println("INFO: Constrain child to get a definition.");
+                    i.constrain();
+
+                    java.lang.System.out.println("INFO: Behave child to get a behaviour.");
+                    i.behave();
+
+                    java.lang.System.out.println("INFO: Initialize child to get an item.");
                     i.initialize();
 
-                    java.lang.System.out.println("INFO: Position child.");
-                    i.position();
+                    java.lang.System.out.println("INFO: Connect child to signal memory.");
+                    i.set(SystemItem.SIGNAL_MEMORY);
 
                 } else {
 
@@ -202,21 +214,33 @@ public class Item extends Behaviour {
      * @param i the child
      * @exception Exception if the child is null
      */
-    public void destroyChildItem(Item i) throws Exception {
+    public void destroyChild(Item i) throws Exception {
 
         if (i != null) {
-
-            java.lang.System.out.println("INFO: Deposition child.");
-            i.deposition();
 
             java.lang.System.out.println("INFO: Finalize child.");
             i.finalizz();
 
-            java.lang.System.out.println("INFO: Deconfigure child.");
-            i.deconfigure();
+            java.lang.System.out.println("INFO: Unbehave child.");
+            i.unbehave();
 
-            java.lang.System.out.println("INFO: Deglobalize child.");
-            i.deglobalize();
+            java.lang.System.out.println("INFO: Unconstrain child.");
+            i.unconstrain();
+
+            java.lang.System.out.println("INFO: Deposition child.");
+            i.deposition();
+
+            java.lang.System.out.println("INFO: Decategorize child.");
+            i.decategorize();
+
+            java.lang.System.out.println("INFO: Uninherit child.");
+            i.uninherit();
+
+            java.lang.System.out.println("INFO: Unname child.");
+            i.unname();
+
+            java.lang.System.out.println("INFO: Deabstract child.");
+            i.deabstracc();
 
         } else {
 
