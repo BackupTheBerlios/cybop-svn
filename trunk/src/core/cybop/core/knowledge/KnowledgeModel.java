@@ -32,7 +32,7 @@ import cybop.core.model.String;
  *
  * It is able to store general knowledge, that is hierarchical information.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Torsten Kunze <zone3@gmx.de>
  */
@@ -60,49 +60,51 @@ public class KnowledgeModel extends KnowledgeItem {
     }
 
     //
+    // Categorization.
+    //
+
+    /**
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(KnowledgeModel.SYSTEM_INFORMATION, getDefaultSystemInformation());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(KnowledgeModel.SYSTEM_INFORMATION);
+
+        super.decategorize();
+    }
+
+    //
     // Initialization.
     //
 
     /**
-     * Initializes this domain model.
-     *
-     * @exception Exception if the configuration is null
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
         super.initialize();
 
-        Configuration c = (Configuration) getChild(KnowledgeModel.CONFIGURATION);
-
-        if (c != null) {
-
-            setChild(KnowledgeModel.SYSTEM_INFORMATION, createChild(getDefaultSystemInformation()));
-
-        } else {
-
-            throw new Exception("Could not initialize domain model. The configuration is null.");
-        }
+        setChild(KnowledgeModel.SYSTEM_INFORMATION, createChild(getCategory(KnowledgeModel.SYSTEM_INFORMATION)));
     }
 
     /**
-     * Finalizes this domain model.
-     *
-     * @exception Exception if the configuration is null
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
-        Configuration c = (Configuration) getChild(KnowledgeModel.CONFIGURATION);
-
-        if (c != null) {
-
-            SystemInformation systemInformation = (SystemInformation) getChild(KnowledgeModel.SYSTEM_INFORMATION);
-            removeChild(KnowledgeModel.SYSTEM_INFORMATION);
-            destroyChild(systemInformation);
-
-        } else {
-
-            throw new Exception("Could not finalize domain model. The configuration is null.");
-        }
+        SystemInformationModel systemInformationModel = (SystemInformationModel) getChild(KnowledgeModel.SYSTEM_INFORMATION);
+        removeChild(KnowledgeModel.SYSTEM_INFORMATION);
+        destroyChild(systemInformationModel);
 
         super.finalizz();
     }

@@ -50,7 +50,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.18 $ $Date: 2003-06-16 18:25:35 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -65,9 +65,6 @@ public class Family extends System {
     /** The systems count. */
     public static final String SYSTEMS_COUNT = new String("systems_count");
 
-    /** The system configuration location. */
-    public static final String SYSTEM_CONFIGURATION_LOCATION = new String("system_configuration_location");
-
     /** The system. */
     public static final String SYSTEM = new String("system");
 
@@ -81,32 +78,7 @@ public class Family extends System {
     public static final String EXTERNAL_SYSTEM = new String("external_system");
 
     //
-    // Children category names.
-    //
-
-    /** The available systems category. */
-    public static final String AVAILABLE_SYSTEMS_CATEGORY = new String("available_systems_category");
-
-    /** The systems count category. */
-    public static final String SYSTEMS_COUNT_CATEGORY = new String("systems_count_category");
-
-    /** The system configuration location category. */
-    public static final String SYSTEM_CONFIGURATION_LOCATION_CATEGORY = new String("system_configuration_location_category");
-
-    /** The system category. */
-    public static final String SYSTEM_CATEGORY = new String("system_category");
-
-    /** The external systems count category. */
-    public static final String EXTERNAL_SYSTEMS_COUNT_CATEGORY = new String("external_systems_count_category");
-
-    /** The external system command category. */
-    public static final String EXTERNAL_SYSTEM_COMMAND_CATEGORY = new String("external_system_command_category");
-
-    /** The external system category. */
-    public static final String EXTERNAL_SYSTEM_CATEGORY = new String("external_system_category");
-
-    //
-    // Default children categories.
+    // Default categories.
     //
 
     /**
@@ -127,16 +99,6 @@ public class Family extends System {
     public Item getDefaultSystemsCountCategory() {
 
         return new Integer(0);
-    }
-
-    /**
-     * Returns the default system configuration location category.
-     *
-     * @return the default system configuration location category
-     */
-    public Item getDefaultSystemConfigurationLocationCategory() {
-
-        return null;
     }
 
     /**
@@ -184,24 +146,6 @@ public class Family extends System {
     //
 
     /**
-     * Removes the child system from this family.
-     *
-     * @param n the name
-     * @exception Exception if the name is null
-     */
-    public void removeSystem(String n) throws Exception {
-
-        if (n != null) {
-
-            super.removeChild(n);
-
-        } else {
-
-            throw new Exception("Could not remove system. The name is null.");
-        }
-    }
-
-    /**
      * Adds the system to become a child of this family.
      *
      * @param n the name
@@ -237,6 +181,24 @@ public class Family extends System {
     }
 
     /**
+     * Removes the child system from this family.
+     *
+     * @param n the name
+     * @exception Exception if the name is null
+     */
+    public void removeSystem(String n) throws Exception {
+
+        if (n != null) {
+
+            super.removeChild(n);
+
+        } else {
+
+            throw new Exception("Could not remove system. The name is null.");
+        }
+    }
+
+    /**
      * Returns the child system.
      *
      * @param n the name
@@ -259,74 +221,37 @@ public class Family extends System {
     }
 
     //
-    // Configuration.
+    // Categorization.
     //
 
     /**
-     * Configures this family.
-     *
-     * @exception Exception if the configuration is null
+     * Categorizes this hierarchy.
      */
-    public void configure() throws Exception {
+    public void categorize() throws Exception {
 
-        super.configure();
+        super.categorize();
 
-        Configuration c = (Configuration) getChild(Family.CONFIGURATION);
-
-        if (c != null) {
-
-            setCategory(Family.AVAILABLE_SYSTEMS_CATEGORY, c.getChild(Family.AVAILABLE_SYSTEMS_CATEGORY, getDefaultAvailableSystemsCategory()));
-            setCategory(Family.SYSTEMS_COUNT_CATEGORY, c.getChild(Family.SYSTEMS_COUNT_CATEGORY, getDefaultSystemsCountCategory()));
-            setCategory(Family.SYSTEM_CONFIGURATION_LOCATION_CATEGORY, c.getChild(Family.SYSTEM_CONFIGURATION_LOCATION_CATEGORY, getDefaultSystemConfigurationLocationCategory()));
-            setCategory(Family.SYSTEM_CATEGORY, c.getChild(Family.SYSTEM_CATEGORY, getDefaultSystemCategory()));
-            setCategory(Family.EXTERNAL_SYSTEMS_COUNT_CATEGORY, c.getChild(Family.EXTERNAL_SYSTEMS_COUNT_CATEGORY, getDefaultExternalSystemsCountCategory()));
-            setCategory(Family.EXTERNAL_SYSTEM_COMMAND_CATEGORY, c.getChild(Family.EXTERNAL_SYSTEM_COMMAND_CATEGORY, getDefaultExternalSystemCommandCategory()));
-            setCategory(Family.EXTERNAL_SYSTEM_CATEGORY, c.getChild(Family.EXTERNAL_SYSTEM_CATEGORY, getDefaultExternalSystemCategory()));
-
-        } else {
-
-            java.lang.System.out.println("WARNING: Could not configure family. The configuration is null.");
-        }
+        setCategory(Family.AVAILABLE_SYSTEMS, getDefaultAvailableSystemsCategory());
+        setCategory(Family.SYSTEMS_COUNT, getDefaultAvailableSystemsCategory());
+        setCategory(Family.SYSTEM, getDefaultAvailableSystemsCategory());
+        setCategory(Family.EXTERNAL_SYSTEMS_COUNT, getDefaultAvailableSystemsCategory());
+        setCategory(Family.EXTERNAL_SYSTEM_COMMAND, getDefaultAvailableSystemsCategory());
+        setCategory(Family.EXTERNAL_SYSTEM, getDefaultAvailableSystemsCategory());
     }
 
     /**
-     * Deconfigures this family.
-     *
-     * @exception Exception if the configuration is null
+     * Decategorizes this hierarchy.
      */
-    public void deconfigure() throws Exception {
+    public void decategorize() throws Exception {
 
-        Configuration c = (Configuration) getChild(Family.CONFIGURATION);
+        removeCategory(Family.EXTERNAL_SYSTEM);
+        removeCategory(Family.EXTERNAL_SYSTEM_COMMAND);
+        removeCategory(Family.EXTERNAL_SYSTEMS_COUNT);
+        removeCategory(Family.SYSTEM);
+        removeCategory(Family.SYSTEMS_COUNT);
+        removeCategory(Family.AVAILABLE_SYSTEMS);
 
-        if (c != null) {
-
-            c.setChild(Family.EXTERNAL_SYSTEM_CATEGORY, getCategory(Family.EXTERNAL_SYSTEM_CATEGORY));
-            removeCategory(Family.EXTERNAL_SYSTEM_CATEGORY);
-
-            c.setChild(Family.EXTERNAL_SYSTEM_COMMAND_CATEGORY, getCategory(Family.EXTERNAL_SYSTEM_COMMAND_CATEGORY));
-            removeCategory(Family.EXTERNAL_SYSTEM_COMMAND_CATEGORY);
-
-            c.setChild(Family.EXTERNAL_SYSTEMS_COUNT_CATEGORY, getCategory(Family.EXTERNAL_SYSTEMS_COUNT_CATEGORY));
-            removeCategory(Family.EXTERNAL_SYSTEMS_COUNT_CATEGORY);
-
-            c.setChild(Family.SYSTEM_CATEGORY, getCategory(Family.SYSTEM_CATEGORY));
-            removeCategory(Family.SYSTEM_CATEGORY);
-
-            c.setChild(Family.SYSTEM_CONFIGURATION_LOCATION_CATEGORY, getCategory(Family.SYSTEM_CONFIGURATION_LOCATION_CATEGORY));
-            removeCategory(Family.SYSTEM_CONFIGURATION_LOCATION_CATEGORY);
-
-            c.setChild(Family.SYSTEMS_COUNT_CATEGORY, getCategory(Family.SYSTEMS_COUNT_CATEGORY));
-            removeCategory(Family.SYSTEMS_COUNT_CATEGORY);
-
-            c.setChild(Family.AVAILABLE_SYSTEMS_CATEGORY, getCategory(Family.AVAILABLE_SYSTEMS_CATEGORY));
-            removeCategory(Family.AVAILABLE_SYSTEMS_CATEGORY);
-
-        } else {
-
-            java.lang.System.out.println("WARNING: Could not deconfigure family. The configuration is null.");
-        }
-
-        super.deconfigure();
+        super.decategorize();
     }
 
     //
@@ -334,7 +259,7 @@ public class Family extends System {
     //
 
     /**
-     * Initializes this family.
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
@@ -344,7 +269,7 @@ public class Family extends System {
         // Available systems.
         //
 
-        setChild(Family.AVAILABLE_SYSTEMS, createChild((String) getCategory(Family.AVAILABLE_SYSTEMS_CATEGORY)));
+        setChild(Family.AVAILABLE_SYSTEMS, createChild(getCategory(Family.AVAILABLE_SYSTEMS)));
 
 /*??
         Integer count = getAvailableSystemsCount();
@@ -368,7 +293,7 @@ public class Family extends System {
         // Systems.
         //
 
-        setChild(Family.SYSTEMS_COUNT, (Integer) getCategory(Family.SYSTEMS_COUNT_CATEGORY));
+        setChild(Family.SYSTEMS_COUNT, createChild(getCategory(Family.SYSTEMS_COUNT)));
 
 /*??
         if (getChild(Family.SYSTEMS_COUNT) != null) {
@@ -426,7 +351,7 @@ public class Family extends System {
     }
 
     /**
-     * Finalizes this family.
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
@@ -510,9 +435,9 @@ public class Family extends System {
         // Available systems.
         //
 
-        Item availableSystemsCategory = getChild(Family.AVAILABLE_SYSTEMS_CATEGORY);
-        removeChild(Family.AVAILABLE_SYSTEMS_CATEGORY);
-        destroyChild(availableSystemsCategory);
+        Item availableSystems = getChild(Family.AVAILABLE_SYSTEMS);
+        removeChild(Family.AVAILABLE_SYSTEMS);
+        destroyChild(availableSystems);
 
 /*??
         if (n != null) {

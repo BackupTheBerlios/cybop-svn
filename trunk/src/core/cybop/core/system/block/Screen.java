@@ -33,7 +33,7 @@ import cybop.core.system.*;
  *
  * A screen is an output device that displays optical (graphical) information. 
  *
- * @version $Revision: 1.7 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Screen extends Block {
@@ -55,7 +55,7 @@ public class Screen extends Block {
             //?? Temporary workaround using Java AWT's capabilities.
             //?? Let this screen class paint everything later,
             //?? when AWT gets replaced.
-            log(Screen.DEBUG_LOG_LEVEL, "Set java gui visible.");
+            java.lang.System.out.println("DEBUG: Set java gui visible.");
             ((java.awt.Component) m.getJavaObject()).setVisible(Boolean.TRUE);
 
         } else {
@@ -77,7 +77,7 @@ public class Screen extends Block {
             //?? Temporary workaround using Java AWT's capabilities.
             //?? Let this screen class paint everything later,
             //?? when AWT gets replaced.
-            log(Screen.DEBUG_LOG_LEVEL, "Set java gui invisible.");
+            java.lang.System.out.println("DEBUG: Set java gui invisible.");
             ((java.awt.Component) m.getJavaObject()).setVisible(Boolean.FALSE);
 
         } else {

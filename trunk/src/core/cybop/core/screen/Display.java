@@ -1,5 +1,5 @@
 /*
- * $RCSfile: ScreenComponent.java,v $
+ * $RCSfile: Display.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -24,15 +24,12 @@
 
 package cybop.core.screen;
 
-import cybop.core.model.*;
-
 /**
- * This class represents a screen component.<br><br>
+ * This class represents a screen model.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @see http://www.openehr.org http://www.gehr.org
  */
-public class ScreenComponent extends ScreenItem {
+public class ScreenModel extends ScreenItem {
 }
 

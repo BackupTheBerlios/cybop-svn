@@ -29,6 +29,7 @@ import cybop.core.model.*;
 import cybop.core.model.Boolean;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
+import cybop.core.mouse.*;
 import cybop.core.signal.*;
 import cybop.core.system.*;
 import cybop.core.system.System;
@@ -68,7 +69,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.25 $ $Date: 2003-06-16 18:25:35 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -96,18 +97,11 @@ public class Launcher extends Family {
     public static final String SHUTDOWN_FLAG = new String("shutdown_flag");
 
     //
-    // Children category names.
-    //
-
-    /** The screen category. */
-    public static final String SCREEN_CATEGORY = new String("screen_category");
-
-    //
     // Command line arguments.
     //
 
     /** The system category argument. */
-    public static final String SYSTEM_CATEGORY_ARGUMENT = new String("-system");
+    public static final String SYSTEM_ARGUMENT = new String("-system");
 
     /** The system configuration location argument. */
     public static final String SYSTEM_CONFIGURATION_LOCATION_ARGUMENT = new String("-configuration");
@@ -161,25 +155,41 @@ public class Launcher extends Family {
 
             if (l != null) {
 
-                l.setArguments(args);
+                java.lang.System.out.println("INFO: Abstract child to get an abstraction.");
+                l.abstracc();
 
-                java.lang.System.out.println("INFO: Globalize launcher.");
-                l.globalize(null, null, null);
+                java.lang.System.out.println("INFO: Name child to get a category.");
+                l.name();
 
-                java.lang.System.out.println("INFO: Configure launcher.");
-                l.configure();
+                java.lang.System.out.println("INFO: Inherit child to get an inheritance.");
+                l.inherit();
 
-                java.lang.System.out.println("INFO: Initialize launcher.");
+                java.lang.System.out.println("INFO: Categorize child to get a hierarchy.");
+                l.categorize();
+
+                java.lang.System.out.println("INFO: Position child to get a structure.");
+                l.position();
+
+                java.lang.System.out.println("INFO: Constrain child to get a definition.");
+                l.constrain();
+
+                java.lang.System.out.println("INFO: Behave child to get a behaviour.");
+                l.behave();
+
+                java.lang.System.out.println("INFO: Connect child to signal memory.");
+                l.setChild(Launcher.SIGNAL_MEMORY, l.createChild(l.getCategory(Launcher.SIGNAL_MEMORY)));
+
+                java.lang.System.out.println("INFO: Initialize child to get an item.");
                 l.initialize();
 
-                java.lang.System.out.println("INFO: Position launcher.");
-                l.position();
+                l.setArguments(args);
 
                 // Set meta attributes for child.
                 // DO NOT use the normal method setChild(name, item);
                 // This would lead to an endless loop since for example
                 // setChild(Item.NAME, n); would cause to be called repeatedly!
-                l.setName(n);
+//??                l.setName(n);
+
                 l.launch();
 
                 // The system is now started up and complete so that a loop
@@ -188,21 +198,38 @@ public class Launcher extends Family {
                 // The loop above is left as soon as the shutdown flag is set
                 // so that the system can be shut down now.
 
-                l.setName(null);
-
-                java.lang.System.out.println("INFO: Deposition launcher.");
-                l.deposition();
-
-                java.lang.System.out.println("INFO: Finalize launcher.");
-                l.finalizz();
-
-                java.lang.System.out.println("INFO: Deconfigure launcher.");
-                l.deconfigure();
-
-                java.lang.System.out.println("INFO: Deglobalize launcher.");
-                l.deglobalize();
+//??                l.setName(null);
 
                 l.setArguments(null);
+
+                java.lang.System.out.println("INFO: Finalize child.");
+                l.finalizz();
+    
+                java.lang.System.out.println("INFO: Disconnect child from signal memory.");
+                Item signalMemory = l.getChild(Launcher.SIGNAL_MEMORY);
+                l.removeChild(Launcher.SIGNAL_MEMORY);
+                l.destroyChild(signalMemory);
+        
+                java.lang.System.out.println("INFO: Unbehave child.");
+                l.unbehave();
+    
+                java.lang.System.out.println("INFO: Unconstrain child.");
+                l.unconstrain();
+    
+                java.lang.System.out.println("INFO: Deposition child.");
+                l.deposition();
+    
+                java.lang.System.out.println("INFO: Decategorize child.");
+                l.decategorize();
+    
+                java.lang.System.out.println("INFO: Uninherit child.");
+                l.uninherit();
+    
+                java.lang.System.out.println("INFO: Unname child.");
+                l.unname();
+    
+                java.lang.System.out.println("INFO: Deabstract child.");
+                l.deabstract();
 
                 //
                 // Runtime.getRuntime().exit(0);
@@ -287,7 +314,7 @@ public class Launcher extends Family {
     }
 
     //
-    // Default children categories.
+    // Default categories.
     //
 
     /**
@@ -575,53 +602,29 @@ public class Launcher extends Family {
     }
 
     //
-    // Configuration.
+    // Categorization.
     //
 
     /**
-     * Configures this component.
-     *
-     * @exception Exception if the configuration is null
+     * Categorizes this hierarchy.
      */
-    public void configure() throws Exception {
-        
-        super.configure();
+    public void categorize() throws Exception {
 
-        Configuration c = (Configuration) getChild(Component.CONFIGURATION);
+        super.categorize();
 
-        if (c != null) {
-
-            setCategory(Launcher.SYSTEM_CATEGORY, getArgument(Launcher.SYSTEM_CATEGORY_ARGUMENT, getDefaultSystemCategory()));
-            setCategory(Launcher.SCREEN_CATEGORY, c.getChild(Launcher.SCREEN_CATEGORY, getDefaultScreenCategory()));
-
-        } else {
-
-            throw new Exception("Could not configure component. The configuration is null.");
-        }
+        setCategory(Launcher.SYSTEM, getArgument(Launcher.SYSTEM_ARGUMENT, getDefaultSystemCategory()));
+        setCategory(Launcher.SCREEN, getDefaultScreenCategory());
     }
 
     /**
-     * Deconfigures this component.
-     *
-     * @exception Exception if the configuration is null
+     * Decategorizes this hierarchy.
      */
-    public void deconfigure() throws Exception {
+    public void decategorize() throws Exception {
 
-        Configuration c = (Configuration) getChild(Component.CONFIGURATION);
+        removeCategory(Launcher.SCREEN);
+        removeCategory(Launcher.SYSTEM);
 
-        if (c != null) {
-
-            c.setChild(Launcher.SCREEN_CATEGORY, getCategory(Launcher.SCREEN_CATEGORY));
-            removeCategory(Launcher.SCREEN_CATEGORY);
-
-            removeCategory(Launcher.SYSTEM_CATEGORY);
-
-        } else {
-
-            throw new Exception("Could not deconfigure component. The configuration is null.");
-        }
-
-        super.deconfigure();
+        super.decategorize();
     }
 
     //
@@ -629,7 +632,7 @@ public class Launcher extends Family {
     //
 
     /**
-     * Initializes this launcher.
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
@@ -641,18 +644,17 @@ public class Launcher extends Family {
 
         } else {
 
-            setChild(Launcher.SYSTEM_CONFIGURATION_LOCATION, getArgument(Launcher.SYSTEM_CONFIGURATION_LOCATION_ARGUMENT, (String) getDefaultSystemConfigurationLocationCategory()));
-            setChild(Launcher.SCREEN, createChild((String) getDefaultScreenCategory()));
+            setChild(Launcher.SCREEN, createChild(getCategory(Launcher.SCREEN)));
             setChild(Launcher.LIFECYCLE_ACTION, getArgument(Launcher.LIFECYCLE_ACTION_ARGUMENT, (String) getDefaultLifecycleActionCategory()));
             //?? Temporary until event handling doesn't need java awt EventQueue anymore.
             setJavaEventCatcher(createJavaEventCatcher());
             setChild(Launcher.SHUTDOWN_HOOK, createShutdownHook());
-            setChild(Launcher.SHUTDOWN_FLAG, (Boolean) getDefaultShutdownFlagCategory());
+            setChild(Launcher.SHUTDOWN_FLAG, createChild(getCategory(Launcher.SHUTDOWN_FLAG)));
         }
     }
 
     /**
-     * Finalizes this launcher.
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
@@ -662,7 +664,7 @@ public class Launcher extends Family {
         // from the java virtual machine to this system.
         Item shutdownHook = getChild(Launcher.SHUTDOWN_HOOK);
         removeChild(Launcher.SHUTDOWN_HOOK);
-        destroyChild((ShutdownHook) shutdownHook);
+        destroyChild(shutdownHook);
 
         //?? Temporary until event handling doesn't need java awt EventQueue anymore.
         destroyJavaEventCatcher(getJavaEventCatcher());
@@ -670,15 +672,11 @@ public class Launcher extends Family {
 
         Item lifecycleAction = getChild(Launcher.LIFECYCLE_ACTION);
         removeChild(Launcher.LIFECYCLE_ACTION);
-        destroyChild((String) lifecycleAction);
+        destroyChild(lifecycleAction);
 
         Item screen = getChild(Launcher.SCREEN);
         removeChild(Launcher.SCREEN);
-        destroyChild((Screen) screen);
-
-        Item systemConfigurationLocation = getChild(Launcher.SYSTEM_CONFIGURATION_LOCATION);
-        removeChild(Launcher.SYSTEM_CONFIGURATION_LOCATION);
-        destroyChild((String) systemConfigurationLocation);
+        destroyChild(screen);
 
         super.finalizz();
     }
@@ -936,8 +934,8 @@ public class Launcher extends Family {
 
                     if (scr != null) {
 
-                        log(Launcher.DEBUG_LOG_LEVEL, "Show on screen.");
-                        scr.show((UserInterface) s.getChild(Signal.OBJECT));
+                        java.lang.System.out.println("DEBUG: Show on screen.");
+                        scr.show((ScreenModel) s.getChild(Signal.OBJECT));
 
                     } else {
 
@@ -981,32 +979,32 @@ public class Launcher extends Family {
 
                 if (a.isEqualTo(Launcher.STARTUP_SYSTEM_ACTION)) {
 
-                    log(Launcher.INFO_LOG_LEVEL, "Startup system.");
-                    startupSystem((String) getCategory(Launcher.SYSTEM_CATEGORY), (String) getChild(Launcher.SYSTEM_CONFIGURATION_LOCATION));
+                    java.lang.System.out.println("INFO: Startup system.");
+                    startupSystem((String) getCategory(Launcher.SYSTEM), (String) getChild(Launcher.SYSTEM_CONFIGURATION_LOCATION));
 
                 } else if (a.isEqualTo(Launcher.SHUTDOWN_SYSTEM_ACTION)) {
 
-                    log(Launcher.INFO_LOG_LEVEL, "Shutdown system.");
+                    java.lang.System.out.println("INFO: Shutdown system.");
                     shutdownSystem();
 
                 } else if (a.isEqualTo(Launcher.SHUTDOWN_SYSTEM_ACROSS_SOCKET_ACTION)) {
             
-                    log(Launcher.INFO_LOG_LEVEL, "Shutdown system across socket.");
+                    java.lang.System.out.println("INFO: Shutdown system across socket.");
                     shutdownSystemAcrossSocket();
     
                 } else if (a.isEqualTo(Launcher.START_SYSTEM_ACTION)) {
             
-                    log(Launcher.INFO_LOG_LEVEL, "Start system.");
+                    java.lang.System.out.println("INFO: Start system.");
                     startSystem();
     
                 } else if (a.isEqualTo(Launcher.STOP_SYSTEM_ACTION)) {
         
-                    log(Launcher.INFO_LOG_LEVEL, "Stop system.");
+                    java.lang.System.out.println("INFO: Stop system.");
                     stopSystem();
     
                 } else if (a.isEqualTo(Launcher.RESTART_SYSTEM_ACTION)) {
 
-                    log(Launcher.INFO_LOG_LEVEL, "Restart system.");
+                    java.lang.System.out.println("INFO: Restart system.");
                     restartSystem();
 
                 } else if (a.isEqualTo(Launcher.SHOW_HELP_ACTION)) {
@@ -1277,11 +1275,11 @@ public class Launcher extends Family {
      */
     public void handle(java.awt.AWTEvent evt) throws Exception {
 
-        log(Launcher.SIGNAL_LOG_LEVEL, evt.toString());
+        java.lang.System.out.println("SIGNAL: " + evt.toString());
 
         String l = null;
         String a = null;
-        Model m = null;
+        Item m = null;
 
         if (evt != null) {
 

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: ScreenModel.java,v $
+ * $RCSfile: DesktopDisplay.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,14 +22,17 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.screen;
+package cybop.core.screen.model;
+
+import cybop.core.model.String;
+import cybop.core.screen.*;
 
 /**
- * This class represents a screen model.
+ * This class represents a desktop model.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class ScreenModel extends ScreenItem {
+public class DesktopModel extends ScreenModel {
 }
 

@@ -37,7 +37,7 @@ import cybop.core.system.chain.*;
  * A system item has special properties like configuration or log record and
  * is able to create and send signals.
  *
- * @version $Revision: 1.7 $ $Date: 2003-06-16 18:25:35 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemItem extends Item {
@@ -111,7 +111,7 @@ public class SystemItem extends Item {
 
         if (i != null) {
 
-            java.lang.System.out.println("INFO: Unconnect child from signal memory.");
+            java.lang.System.out.println("INFO: Disconnect child from signal memory.");
             i.removeChild(SystemItem.SIGNAL_MEMORY);
         }
 

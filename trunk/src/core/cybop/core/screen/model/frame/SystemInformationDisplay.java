@@ -1,5 +1,5 @@
 /*
- * $RCSfile: SystemInformationModel.java,v $
+ * $RCSfile: SystemInformationDisplay.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -40,7 +40,7 @@ import cybop.core.screen.model.*;
  * - authors
  * - helpers
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationModel extends FrameModel {

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: SystemInformationUserInterfaceTranslator.java,v $
+ * $RCSfile: SystemInformationDisplayTranslator.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -35,10 +35,10 @@ import cybop.core.system.region.controller.*;
 /**
  * This class represents a system information user interface translator.
  *
- * @version $Revision: 1.8 $ $Date: 2003-06-13 15:24:32 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class SystemInformationUserInterfaceTranslator extends Translator {
+public class SystemInformationDisplayTranslator extends Translator {
 
     //
     // Coding.
@@ -55,18 +55,18 @@ public class SystemInformationUserInterfaceTranslator extends Translator {
      */
     public void encode(KnowledgeModel dm, Model m) throws Exception {
 
-        SystemInformationUserInterface ui = (SystemInformationUserInterface) m;
+        SystemInformationDisplay ui = (SystemInformationDisplay) m;
 
         if (ui != null) {
             
-            SystemInformationContentsPanel p = (SystemInformationContentsPanel) ui.getChild(SystemInformationUserInterface.CONTENTS_PANEL);
+            SystemInformationPanel p = (SystemInformationPanel) ui.getChild(SystemInformationDisplay.CONTENTS_PANEL);
 
             if (p != null) {
 
                 if (dm != null) {
 
-                    encodeSystemVersionPanel((SystemInformationModel) dm.getChild(KnowledgeModel.SYSTEM_INFORMATION), (SystemVersionPanel) p.getChild(SystemInformationContentsPanel.HEAD_PANEL));
-                    encodeTabbedPane((SystemInformationModel) dm.getChild(KnowledgeModel.SYSTEM_INFORMATION), (TabbedPane) p.getChild(SystemInformationContentsPanel.TABBED_PANE));
+                    encodeSystemVersionPanel((SystemInformationModel) dm.getChild(KnowledgeModel.SYSTEM_INFORMATION), (SystemVersionPanel) p.getChild(SystemInformationPanel.HEAD_PANEL));
+                    encodeTabbedPane((SystemInformationModel) dm.getChild(KnowledgeModel.SYSTEM_INFORMATION), (TabbedPane) p.getChild(SystemInformationPanel.TABBED_PANE));
 
                 } else {
 

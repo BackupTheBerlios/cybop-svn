@@ -1,5 +1,5 @@
 /*
- * $RCSfile: PortalModel.java,v $
+ * $RCSfile: PortalDisplay.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -34,7 +34,7 @@ import cybop.core.screen.model.*;
  * The tree offers a hierarchy of categories with available system modules.
  * On the right side of the splitter, there is a container for child system views.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalModel extends FrameModel {

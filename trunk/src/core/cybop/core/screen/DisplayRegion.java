@@ -1,5 +1,5 @@
 /*
- * $RCSfile: ScreenRegion.java,v $
+ * $RCSfile: DisplayRegion.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -32,7 +32,7 @@ import cybop.core.screen.component.*;
 /**
  * This class represents a screen region.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ScreenRegion extends ScreenItem {

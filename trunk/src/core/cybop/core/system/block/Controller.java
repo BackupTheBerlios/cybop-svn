@@ -30,6 +30,7 @@ import cybop.core.model.*;
 import cybop.core.model.Boolean;
 import cybop.core.model.String;
 import cybop.core.mouse.*;
+import cybop.core.screen.*;
 import cybop.core.signal.*;
 import cybop.core.system.*;
 import cybop.core.system.chain.*;
@@ -50,7 +51,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.18 $ $Date: 2003-06-16 18:25:35 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
