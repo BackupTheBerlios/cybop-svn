@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-04-01 14:55:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,8 +57,8 @@ void create_xml_node(void* p0, const void* p1) {
     //
 
     // Set xml tag name, attributes, value.
-//??    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_NAME_ATTRIBUTE_VALUE_INDEX, (void*) &nav);
-//??    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_COUNTS_INDEX, (void*) &c);
+//??    set_array_elements(p0, (void*) POINTER_ARRAY, (void*) &XML_TAG_NAME_ATTRIBUTE_VALUE_INDEX, (void*) &nav);
+//??    set_array_elements(p0, (void*) POINTER_ARRAY, (void*) &XML_TAG_COUNTS_INDEX, (void*) &c);
 }
 
 /**
@@ -76,16 +76,16 @@ void destroy_xml_node(void* p0, const void* p1) {
     void* c = NULL_POINTER;
 
     // Get xml tag name, attributes, value.
-//??    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_NAME_ATTRIBUTE_VALUE_INDEX, (void*) &nav);
-//??    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_COUNTS_INDEX, (void*) &c);
+//??    get_array_elements(p0, (void*) POINTER_ARRAY, (void*) &XML_TAG_NAME_ATTRIBUTE_VALUE_INDEX, (void*) &nav);
+//??    get_array_elements(p0, (void*) POINTER_ARRAY, (void*) &XML_TAG_COUNTS_INDEX, (void*) &c);
 
     //
     // Use descending order.
     //
 
     // Remove xml tag name, attributes, value.
-//??    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_COUNT, (void*) &XML_TAG_COUNTS_INDEX);
-//??    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_TAG_COUNT, (void*) &XML_TAG_NAME_ATTRIBUTE_VALUE_INDEX);
+//??    remove_array_elements(p0, (void*) POINTER_ARRAY, (void*) &XML_TAG_COUNT, (void*) &XML_TAG_COUNTS_INDEX);
+//??    remove_array_elements(p0, (void*) POINTER_ARRAY, (void*) &XML_TAG_COUNT, (void*) &XML_TAG_NAME_ATTRIBUTE_VALUE_INDEX);
 
     // Destroy xml tag name, attributes, value.
     destroy_array((void*) &nav, p1, (void*) POINTER_ARRAY);

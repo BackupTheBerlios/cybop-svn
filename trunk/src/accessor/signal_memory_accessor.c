@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2005-03-30 14:15:41 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2005-04-01 14:55:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -592,7 +592,7 @@ void get_new_signal_id(const void* p0, const void* p1, void* p2) {
             void** ids = POINTER_NULL_POINTER;
 
             // Get signal identifications.
-            get_array_elements(p0, (void*) &SIGNALS_IDENTIFICATIONS_INDEX, (void*) &ids, (void*) POINTER_ARRAY);
+            get_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &ids, (void*) POINTER_ARRAY);
 
             if (ids != POINTER_NULL_POINTER) {
 

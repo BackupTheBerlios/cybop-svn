@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.44 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
+ * @version $Revision: 1.45 $ $Date: 2005-04-01 14:55:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -339,7 +339,7 @@ void test_file_read() {
             break;
         }
 
-        get_array_elements((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &j, (void*) &c, (void*) &cc);
+        get_array_elements((void*) &a, (void*) CHARACTER_ARRAY, (void*) &j, (void*) &c, (void*) &cc);
         fputs(c, stdout);
 
         j++;

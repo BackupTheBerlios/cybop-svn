@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-04-01 14:55:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,8 +57,8 @@ void create_xml_property(void* p0, const void* p1) {
     //
 
     // Set xml attribute name, value.
-//??    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_ATTRIBUTE_NAME_VALUE_INDEX, (void*) &nv);
-//??    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_ATTRIBUTE_COUNTS_INDEX, (void*) &c);
+//??    set_array_elements(p0, (void*) POINTER_ARRAY, (void*) &XML_ATTRIBUTE_NAME_VALUE_INDEX, (void*) &nv);
+//??    set_array_elements(p0, (void*) POINTER_ARRAY, (void*) &XML_ATTRIBUTE_COUNTS_INDEX, (void*) &c);
 }
 
 /**
@@ -76,16 +76,16 @@ void destroy_xml_property(void* p0, const void* p1) {
     void* c = NULL_POINTER;
 
     // Get xml attribute name, value.
-//??    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_ATTRIBUTE_NAME_VALUE_INDEX, (void*) &nv);
-//??    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_ATTRIBUTE_COUNTS_INDEX, (void*) &c);
+//??    get_array_elements(p0, (void*) POINTER_ARRAY, (void*) &XML_ATTRIBUTE_NAME_VALUE_INDEX, (void*) &nv);
+//??    get_array_elements(p0, (void*) POINTER_ARRAY, (void*) &XML_ATTRIBUTE_COUNTS_INDEX, (void*) &c);
 
     //
     // Use descending order.
     //
 
     // Remove xml attribute name, value.
-//??    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_ATTRIBUTE_COUNT, (void*) &XML_ATTRIBUTE_COUNTS_INDEX);
-//??    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &XML_ATTRIBUTE_COUNT, (void*) &XML_ATTRIBUTE_NAME_VALUE_INDEX);
+//??    remove_array_elements(p0, (void*) POINTER_ARRAY, (void*) &XML_ATTRIBUTE_COUNT, (void*) &XML_ATTRIBUTE_COUNTS_INDEX);
+//??    remove_array_elements(p0, (void*) POINTER_ARRAY, (void*) &XML_ATTRIBUTE_COUNT, (void*) &XML_ATTRIBUTE_NAME_VALUE_INDEX);
 
     // Destroy xml attribute name, value.
     destroy_array((void*) &nv, p1, (void*) POINTER_ARRAY);

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-03-30 14:15:41 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-04-01 14:55:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -74,8 +74,8 @@ void receive_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
                     // Set terminated file name by first copying the actual name and then
                     // adding the null termination character.
-                    set_array_elements((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
-                    set_array_elements((void*) &tn, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CONTROL_CHARACTER, (void*) &NULL_CONTROL_CHARACTER_COUNT);
+                    set_array_elements((void*) &tn, (void*) CHARACTER_ARRAY, (void*) &i, p3, p4);
+                    set_array_elements((void*) &tn, (void*) CHARACTER_ARRAY, p4, (void*) &NULL_CONTROL_CHARACTER, (void*) &NULL_CONTROL_CHARACTER_COUNT);
 
                     // Open file.
                     // CAUTION! The file name cannot be handed over as is.
@@ -109,7 +109,7 @@ void receive_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
                                 // Set character in destination array.
                                 // The array count serves as index for setting the character.
-                                set_array_elements(p0, (void*) &CHARACTER_ARRAY, p1, (void*) &c);
+                                set_array_elements(p0, (void*) CHARACTER_ARRAY, p1, (void*) &c);
 
                                 // Increase array count.
                                 (*ac)++;
@@ -204,11 +204,11 @@ void send_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                     create_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
 
                     // Copy original message to temporary null-terminated message.
-                    set_array_elements((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
+                    set_array_elements((void*) &tmp, (void*) CHARACTER_ARRAY, (void*) &i, p3, p4);
                     // This is used as index to set the termination character.
                     *i = **sc;
                     // Add string termination to temporary null-terminated message.
-                    set_array_elements((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CONTROL_CHARACTER, (void*) &NULL_CONTROL_CHARACTER_COUNT);
+                    set_array_elements((void*) &tmp, (void*) CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CONTROL_CHARACTER, (void*) &NULL_CONTROL_CHARACTER_COUNT);
 
                     destroy_integer((void*) &i);
 
