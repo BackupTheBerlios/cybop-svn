@@ -24,7 +24,7 @@
  * This file handles log messages.
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.12 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-04-21 11:08:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "../constants.c"
+#include "../model/array_handler.c"
 
 //
 // Log level constants.
@@ -70,6 +71,20 @@ static const char* INFO_LOG_LEVEL_NAME = "Info";
 
 /** The log level. */
 static int log_level;
+
+//
+// Forward declarations.
+//
+
+/**
+ * Sets the array element.
+ *
+ * @param p0 the array
+ * @param p1 the type
+ * @param p2 the index
+ * @param p3 the element
+ */
+void set_array_element(void* p0, const void* p1, const void* p2, const void* p3);
 
 //
 // Log entry.
@@ -127,10 +142,16 @@ void get_log_level_name(const void* p0, void* p1) {
  * Shows the message on screen.
  *
  * @param p0 the message
+ * @param p1 the message size
  */
-void show_message(void* p0) {
+void show_message(void* p0, void* p1) {
 
     if (p0 != NULL_POINTER) {
+
+        char n = '\n';
+        char t = '\0';
+        set_array_element(p0, (void*) &CHARACTER_ARRAY, p1, (void*) &n);
+        set_array_element(p0, (void*) &CHARACTER_ARRAY, p1, (void*) &t);
 
         char** m = (char**) p0;
 

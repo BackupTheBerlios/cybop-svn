@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.18 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2004-04-21 11:08:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,23 +53,28 @@
 // The usage message array.
 static const char USAGE_MESSAGE_ARRAY[] = {'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 's', 'i', 'g', 'n', 'a', 'l'};
 
+// The usage message size.
+static int USAGE_MESSAGE_SIZE = 19;
+
 // The usage message.
-//??static const char* USAGE_MESSAGE = USAGE_MESSAGE_ARRAY;
-static const char* USAGE_MESSAGE = (char*) {'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 's', 'i', 'g', 'n', 'a', 'l'};
+static char* USAGE_MESSAGE = USAGE_MESSAGE_ARRAY;
 
 // The example message array.
 static const char EXAMPLE_MESSAGE_ARRAY[] = {'E', 'x', 'a', 'm', 'p', 'l', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'y', 'b', 'o', 'p', '.', 's', 'a', 'm', 'p', 'l', 'e', '.', 'h', 'e', 'l', 'l', 'o', '_', 'w', 'o', 'r', 'l', 'd', '.', 'd', 'y', 'n', 'a', 'm', 'i', 'c', 's', '.', 's', 't', 'a', 'r', 't', 'u', 'p'};
 
+// The example message size.
+static int EXAMPLE_MESSAGE_SIZE = 56;
+
 // The example message.
-static const char* EXAMPLE_MESSAGE = EXAMPLE_MESSAGE_ARRAY;
+static char* EXAMPLE_MESSAGE = EXAMPLE_MESSAGE_ARRAY;
 
 /**
  * Shows the usage information.
  */
 void show_usage_information() {
 
-    show_message((void*) &USAGE_MESSAGE);
-    show_message((void*) &EXAMPLE_MESSAGE);
+    show_message((void*) &USAGE_MESSAGE, (void*) &USAGE_MESSAGE_SIZE);
+    show_message((void*) &EXAMPLE_MESSAGE, (void*) &EXAMPLE_MESSAGE_SIZE);
 }
 
 /**

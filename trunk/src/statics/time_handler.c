@@ -32,7 +32,7 @@
  * 01.01.2000 00:00:00";
  * 31.12.1999 23:59:59";
  *
- * @version $Revision: 1.13 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-04-21 11:08:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

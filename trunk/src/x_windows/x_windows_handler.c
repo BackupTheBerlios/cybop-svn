@@ -25,7 +25,7 @@
  *
  * It controls the input and output of x windows.
  *
- * @version $Revision: 1.15 $ $Date: 2004-04-21 11:06:16 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-04-21 11:08:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

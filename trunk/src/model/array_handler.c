@@ -48,7 +48,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.27 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2004-04-21 11:08:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.1 $ $Date: 2004-04-21 11:06:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-04-21 11:08:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
