@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.28 $ $Date: 2004-04-29 15:18:06 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2004-05-01 11:53:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -125,19 +125,11 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 //??            break;
 
             // Get top priority signal from signal memory and remove it from there.
-//??            get_highest_priority_index(p0, (void*) &i);
-            i = 0; //?? temporary test; delete this line later
-            fprintf(stderr, "wait i: %d\n", i);
+            get_highest_priority_index(p0, (void*) &i);
 
             if (i >= 0) {
 
                 get_signal(p0, (void*) &i, (void*) &s, (void*) &p, (void*) &a, (void*) &as);
-
-                fprintf(stderr, "wait s: %d\n", s);
-                fprintf(stderr, "wait p: %d\n", p);
-                fprintf(stderr, "wait a: %d\n", a);
-                fprintf(stderr, "wait astr: %s\n", a);
-                fprintf(stderr, "wait as: %d\n", as);
 
                 // Abstraction and priority are removed internally,
                 // together with the signal.

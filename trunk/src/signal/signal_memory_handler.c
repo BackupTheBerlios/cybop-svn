@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.40 $ $Date: 2004-04-29 15:18:06 $ $Author: christian $
+ * @version $Revision: 1.41 $ $Date: 2004-05-01 11:53:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -377,9 +377,12 @@ void get_highest_priority_index(const void* p0, void* p1) {
         // The loop variable.
         int j = 0;
         // The priority.
-        int prio = 0;
+        int prio = -1;
         // The highest priority.
-        int h = prio;
+        // Do not set it to zero, because then the priority will not be set,
+        // due to the comparison: if (prio > h)
+        // The smallest possible priority is zero and greater than minus one.
+        int h = -1;
 
         while (1) {
 
