@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.11 $ $Date: 2004-03-02 07:34:59 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-03-02 16:22:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -135,6 +135,53 @@ void get_array_count(void* p0, void* p1) {
     }
 }
 
+/**
+ * Compares the arrays.
+ *
+ * Returns 1 if the arrays are equal; 0 otherwise.
+ *
+ * @param p0 the first array
+ * @param p1 the second array
+ * @param p2 the result
+ */
+void compare_arrays(void* p0, void* p1, void* p2) {
+
+    struct array* a0 = (struct array*) p0;
+
+    if (a0 != (void*) 0) {
+
+        struct array* a1 = (struct array*) p1;
+
+        if (a1 != (void*) 0) {
+
+            int* r = (int*) p2;
+
+            if (r != (void*) 0) {
+
+                if (a0->size == a1->size) {
+
+                    if (a0->count == a1->count) {
+
+                        compare_internal_array_elements(a0->internal_array, a1->internal_array, (void*) &(a0->count), p2);
+                    }
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not compare arrays. The result is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not compare array elements. The second array is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not compare array elements. The first array is null.");
+    }
+}
+
 //
 // Array element.
 //
@@ -226,7 +273,7 @@ void remove_array_element(void* p0, void* p1) {
 }
 
 /**
- * Returns the array element.
+ * Gets the array element.
  *
  * @param p0 the array
  * @param p1 the index
@@ -249,6 +296,46 @@ void* get_array_element(void* p0, void* p1) {
     return e;
 }
 
+/**
+ * Gets the array element index.
+ *
+ * The first occurence of the element will be considered.
+ *
+ * @param p0 the array
+ * @param p1 the element
+ * @param p2 the type
+ * @param p3 the index
+ */
+void get_array_element_index(const void* p0, const void* p1, const void* p2, void* p3) {
+
+    struct array* a = (struct array*) p0;
+
+    if (a != (void*) 0) {
+
+        int* t = (int*) p2;
+
+        if (*t == POINTER) {
+
+            get_internal_array_pointer_element_index(a->internal_array, p1, (void*) &(a->count), p3);
+
+        } else if (*t == INTEGER) {
+
+            get_internal_array_integer_element_index(a->internal_array, p1, (void*) &(a->count), p3);
+
+        } else if (*t == DOUBLE) {
+
+            get_internal_array_double_element_index(a->internal_array, p1, (void*) &(a->count), p3);
+
+        } else if (*t == CHARACTER) {
+
+            get_internal_array_character_element_index(a->internal_array, p1, (void*) &(a->count), p3);
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get array element index. The array is null.");
+    }
+}
+
 /* ARRAY_HANDLER_SOURCE */
 #endif
-

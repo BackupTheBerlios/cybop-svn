@@ -34,7 +34,7 @@
 /**
  * This is the operation handler.
  *
- * @version $Revision: 1.9 $ $Date: 2004-03-02 07:34:59 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-03-02 16:22:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -156,7 +156,7 @@ void finalize_operation_model(void* p0, void* p1) {
                 void* s = get_array_element(m->value, (void*) &i);
                 remove_array_element(m->value, (void*) &i);
 
-                strcat((char*) p1, COMMA_CHARACTER);
+                strcat((char*) p1, &COMMA_CHARACTER);
                 strcat((char*) p1, (char*) s);
 
                 free(s);

@@ -32,7 +32,7 @@
 /**
  * This is the string helper.
  *
- * @version $Revision: 1.4 $ $Date: 2004-03-02 07:34:59 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-03-02 16:22:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,7 +53,7 @@ static const char SLASH_CHARACTER = '/';
 static const char TERMINATION_CHARACTER = '\0';
 
 /** The empty string. */
-static const char* EMPTY_STRING = "";
+static const char* EMPTY_STRING = {};
 
 //
 // Helper functions.
@@ -146,7 +146,7 @@ void get_character_index(const void* p0, const void* p1, const void* p2, void* p
  */
 void get_string_length(const void* p0, void* p1) {
 
-    get_character_index(p0, TERMINATION_CHARACTER, (void*) 0, p1);
+    get_character_index(p0, (void*) &TERMINATION_CHARACTER, (void*) 0, p1);
 }
 
 /**
@@ -185,7 +185,7 @@ void copy_sub_string(const void* p0, const void* p1, const void* p2, void* p3) {
                             break;
                         }
 
-                        ss = realloc(ss, length * 2 + 1);
+                        ss = realloc(ss, i + 1);
 
                         *(ss + i) = *(s + *start + i);
 

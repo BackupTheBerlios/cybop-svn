@@ -1,7 +1,7 @@
 /*
  * $RCSfile: internal_array_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -34,7 +34,7 @@
  * Its syntax mostly looks like: type[size].
  * Internal array elements are accessed over an index.
  *
- * @version $Revision: 1.6 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-03-02 16:22:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,7 +61,7 @@ static const int INVALID_INDEX = -1;
 void** extend_internal_array(void** p0, void* p1, void* p2) {
 
     void** a = (void*) 0;
-    
+
     if (p0 != (void*) 0) {
 
         int* old_size = (int*) p1;
@@ -70,7 +70,7 @@ void** extend_internal_array(void** p0, void* p1, void* p2) {
         a = malloc(*new_size);
 
         if (a != (void*) 0) {
-                
+
             // Copy all elements from the old to the new array.
             // The rest of the new array is just left empty as is;
             // no zeros are set.
@@ -78,7 +78,7 @@ void** extend_internal_array(void** p0, void* p1, void* p2) {
 
             while (i < *old_size) {
 
-                a[i] = p0[i];
+                a + i = p0 + i;
 
                 i++;
             }
@@ -95,10 +95,55 @@ void** extend_internal_array(void** p0, void* p1, void* p2) {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not extend internal array. The old internal array is null.");
     }
-    
+
     return a;
 }
 */
+
+/**
+ * Compares the internal arrays.
+ *
+ * Returns 1 if the internal arrays are equal.
+ * Otherwise, 0.
+ *
+ * @param p0 the first internal array
+ * @param p1 the second internal array
+ * @param p2 the count
+ * @param p3 the result
+ */
+void compare_internal_arrays(void** p0, void** p1, void* p2, void* p3) {
+
+    int* r = (int*) p3;
+
+    if (r != (void*) 0) {
+
+        *r = 0;
+        int i = 0;
+
+        while (1) {
+
+            if (i == count) {
+
+                // All internal array elements have been compared and are equal.
+                *r = 1;
+
+                break;
+            }
+
+            if ((p0 + i) != (p1 + i)) {
+
+                // Stop comparison if two internal array elements are not equal.
+                break;
+            }
+
+            i++;
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not compare internal arrays. The result is null.");
+    }
+}
 
 //
 // Internal array element.
@@ -118,12 +163,12 @@ void set_internal_array_element(void** p0, void* p1, void* p2) {
         int* i = (int*) p1;
 
         if (*i != INVALID_INDEX) {
-                
+
             // Set element.
-            p0[*i] = p2;
-        
+            p0 + *i = p2;
+
         } else {
-    
+
             log_message((void*) &WARNING_LOG_LEVEL, "Could not set internal array element. The index is invalid.");
         }
 
@@ -157,16 +202,16 @@ void remove_internal_array_element(void** p0, void* p1, void* p2) {
             // place towards the beginning of the elements.
             while ((i + 1) < *count) {
 
-                p0[i] = p0[i + 1];
+                p0 + i = p0 + (i + 1);
 
                 i++;
             }
 
             // Set former last element to 0.
-            p0[i] = (void*) 0;
-        
+            p0 + i = (void*) 0;
+
         } else {
-    
+
             log_message((void*) &WARNING_LOG_LEVEL, "Could not remove internal array element. The index is invalid.");
         }
 
@@ -177,7 +222,7 @@ void remove_internal_array_element(void** p0, void* p1, void* p2) {
 }
 
 /**
- * Returns the internal array element.
+ * Gets the internal array element.
  *
  * @param p0 the internal array
  * @param p1 the index
@@ -186,18 +231,18 @@ void remove_internal_array_element(void** p0, void* p1, void* p2) {
 void* get_internal_array_element(void** p0, void* p1) {
 
     void* e = (void*) 0;
-    
+
     if (p0 != (void*) 0) {
 
         int* i = (int*) p1;
 
         if (*i != INVALID_INDEX) {
-            
+
             // Get element.
-            e = p0[*i];
-        
+            e = p0 + *i;
+
         } else {
-    
+
             log_message((void*) &WARNING_LOG_LEVEL, "Could not get internal array element. The index is invalid.");
         }
 
@@ -205,10 +250,253 @@ void* get_internal_array_element(void** p0, void* p1) {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get internal array element. The internal array is null.");
     }
-    
+
     return e;
+}
+
+//
+// Pointer element.
+//
+
+/**
+ * Gets the pointer array element index.
+ *
+ * The first occurence of the element will be considered.
+ *
+ * @param p0 the pointer array
+ * @param p1 the element
+ * @param p2 the count
+ * @param p3 the index
+ */
+void get_pointer_array_element_index(const void** p0, const void* p1, const void* p2, void* p3) {
+
+    int* index = (int*) p3;
+
+    if (index != (void*) 0) {
+
+        int* c = (int*) p2;
+
+        if (c != (void*) 0) {
+
+            int* e = (int*) p1;
+            int i = 0;
+            int* x = (void*) 0;
+
+            while (1) {
+
+                if (i == *c) {
+
+                    // The element has not been found.
+                    *index = -1;
+                    break;
+                }
+
+                // Determine the next integer element at array plus index.
+                x = (int*) (p0 + i);
+
+                if (*x == *e) {
+
+                    // The element has been found.
+                    *index = i;
+                    break;
+                }
+
+                i++;
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get pointer array element index. The count is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get pointer array element index. The index is null.");
+    }
+}
+
+//
+// Integer element.
+//
+
+/**
+ * Gets the internal array integer element index.
+ *
+ * The first occurence of the element will be considered.
+ *
+ * @param p0 the internal array
+ * @param p1 the integer element
+ * @param p2 the count
+ * @param p3 the index
+ */
+void get_internal_array_integer_element_index(const void* p0, const void* p1, const void* p2, void* p3) {
+
+    int* index = (int*) p3;
+
+    if (index != (void*) 0) {
+
+        int* c = (int*) p2;
+
+        if (c != (void*) 0) {
+
+            int* e = (int*) p1;
+            int i = 0;
+            int* x = (void*) 0;
+
+            while (1) {
+
+                if (i == *c) {
+
+                    // The element has not been found.
+                    *index = -1;
+                    break;
+                }
+
+                // Determine the next integer element at array plus index.
+                x = (int*) (p0 + i);
+
+                if (*x == *e) {
+
+                    // The element has been found.
+                    *index = i;
+                    break;
+                }
+
+                i++;
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get internal array integer element index. The count is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get internal array integer element index. The index is null.");
+    }
+}
+
+//
+// Double element.
+//
+
+/**
+ * Gets the internal array pointer element index.
+ *
+ * The first occurence of the element will be considered.
+ *
+ * @param p0 the internal array
+ * @param p1 the pointer element
+ * @param p2 the count
+ * @param p3 the index
+ */
+void get_internal_array_pointer_element_index(const void** p0, const void* p1, const void* p2, void* p3) {
+
+    int* index = (int*) p3;
+
+    if (index != (void*) 0) {
+
+        int* c = (int*) p2;
+
+        if (c != (void*) 0) {
+
+            int* e = (int*) p1;
+            int i = 0;
+            int* x = (void*) 0;
+
+            while (1) {
+
+                if (i == *c) {
+
+                    // The element has not been found.
+                    *index = -1;
+                    break;
+                }
+
+                // Determine the next integer element at array plus index.
+                x = (int*) (p0 + i);
+
+                if (*x == *e) {
+
+                    // The element has been found.
+                    *index = i;
+                    break;
+                }
+
+                i++;
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get internal array integer element index. The count is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get internal array integer element index. The index is null.");
+    }
+}
+
+//
+// Character element.
+//
+
+/**
+ * Gets the internal array pointer element index.
+ *
+ * The first occurence of the element will be considered.
+ *
+ * @param p0 the internal array
+ * @param p1 the pointer element
+ * @param p2 the count
+ * @param p3 the index
+ */
+void get_internal_array_pointer_element_index(const void** p0, const void* p1, const void* p2, void* p3) {
+
+    int* index = (int*) p3;
+
+    if (index != (void*) 0) {
+
+        int* c = (int*) p2;
+
+        if (c != (void*) 0) {
+
+            int* e = (int*) p1;
+            int i = 0;
+            int* x = (void*) 0;
+
+            while (1) {
+
+                if (i == *c) {
+
+                    // The element has not been found.
+                    *index = -1;
+                    break;
+                }
+
+                // Determine the next integer element at array plus index.
+                x = (int*) (p0 + i);
+
+                if (*x == *e) {
+
+                    // The element has been found.
+                    *index = i;
+                    break;
+                }
+
+                i++;
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get internal array integer element index. The count is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get internal array integer element index. The index is null.");
+    }
 }
 
 /* INTERNAL_ARRAY_HANDLER_SOURCE */
 #endif
-
