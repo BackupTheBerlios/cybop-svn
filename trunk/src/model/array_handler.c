@@ -48,7 +48,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.32 $ $Date: 2004-04-25 21:25:58 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2004-04-28 22:45:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -70,33 +70,35 @@
  * Creates the array.
  *
  * @param p0 the array
- * @param p1 the size
+ * @param p1 the type
+ * @param p2 the count
  */
-void create_array(void* p0, const void* p1) {
+void create_array(void* p0, const void* p1, const void* p2) {
 
     if (p1 != NULL_POINTER) {
 
-        int* s = (int*) p1;
+        int* t = (int*) p1;
 
-        if (p0 != NULL_POINTER) {
+        if (*t == POINTER_ARRAY) {
 
-            void** a = (void**) p0;
+            create_pointer_array(p0, p2);
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create array.");
+        } else if (*t == INTEGER_ARRAY) {
 
-            // A minimal space in memory is always allocated,
-            // even if the requested size is zero.
-            // In other words, a handle to the new instance is always returned.
-            *a = (void*) malloc(*s);
+            create_integer_array(p0, p2);
 
-        } else {
+        } else if (*t == DOUBLE_ARRAY) {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create array. The array is null.");
+            create_double_array(p0, p2);
+
+        } else if (*t == CHARACTER_ARRAY) {
+
+            create_character_array(p0, p2);
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create array. The size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create array. The type is null.");
     }
 }
 
@@ -104,69 +106,71 @@ void create_array(void* p0, const void* p1) {
  * Destroys the array.
  *
  * @param p0 the array
- * @param p1 the size
+ * @param p1 the type
+ * @param p2 the count
  */
-void destroy_array(void* p0, const void* p1) {
+void destroy_array(void* p0, const void* p1, const void* p2) {
 
     if (p1 != NULL_POINTER) {
 
-        int* s = (int*) p1;
+        int* t = (int*) p1;
 
-        if (p0 != NULL_POINTER) {
+        if (*t == POINTER_ARRAY) {
 
-            void** a = (void**) p0;
+            destroy_pointer_array(p0, p2);
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy array.");
+        } else if (*t == INTEGER_ARRAY) {
 
-            //?? TODO: Destroy all array elements in a loop??
-            //?? Which is the same as Garbage Collection!
-            //?? SEE: signal_memory_handler
+            destroy_integer_array(p0, p2);
 
-            free(*a);
+        } else if (*t == DOUBLE_ARRAY) {
 
-        } else {
+            destroy_double_array(p0, p2);
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy array. The array is null.");
+        } else if (*t == CHARACTER_ARRAY) {
+
+            destroy_character_array(p0, p2);
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy array. The size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy array. The type is null.");
     }
 }
 
 /**
- * Resizes the array with the given size.
+ * Resizes the array.
  *
  * @param p0 the array
- * @param p1 the size
+ * @param p1 the type
+ * @param p2 the count
  */
-void resize_array(void* p0, const void* p1) {
+void resize_array(void* p0, const void* p1, const void* p2) {
 
     if (p1 != NULL_POINTER) {
 
-        int* s = (int*) p1;
-        fprintf(stderr, "resize s: %d\n", *s);
+        int* t = (int*) p1;
 
-        if (p0 != NULL_POINTER) {
+        if (*t == POINTER_ARRAY) {
 
-            void** a = (void**) p0;
-            fprintf(stderr, "resize a1: %d\n", *a);
+            resize_pointer_array(p0, p2);
 
-            // Create a new array with extended size.
-            *a = (void*) realloc(*a, *s);
-            fprintf(stderr, "resize a2: %d\n", *a);
+        } else if (*t == INTEGER_ARRAY) {
 
-        } else {
+            resize_integer_array(p0, p2);
 
-            fputs("ERROR array\n", stderr);
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize array. The array is null.");
+        } else if (*t == DOUBLE_ARRAY) {
+
+            resize_double_array(p0, p2);
+
+        } else if (*t == CHARACTER_ARRAY) {
+
+            resize_character_array(p0, p2);
         }
 
     } else {
 
-        fputs("ERROR size\n", stderr);
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize array. The size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize array. The type is null.");
     }
 }
 

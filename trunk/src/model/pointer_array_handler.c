@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.16 $ $Date: 2004-04-25 21:25:58 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-04-28 22:45:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,6 +48,123 @@
 
 #include "../constants.c"
 #include "../logger/log_handler.c"
+
+//
+// Array.
+//
+
+/**
+ * Creates the pointer array.
+ *
+ * @param p0 the array
+ * @param p1 the count
+ */
+void create_pointer_array(void* p0, const void* p1) {
+
+    if (p1 != NULL_POINTER) {
+
+        int* c = (int*) p1;
+
+        if (p0 != NULL_POINTER) {
+
+            void** a = (void**) p0;
+
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create pointer array.");
+
+            // Determine size as product of element count and type size.
+            int s = *c * sizeof(void*);
+
+            // A minimal space in memory is always allocated,
+            // even if the requested size is zero.
+            // In other words, a handle to the new instance is always returned.
+            *a = (void*) malloc(s);
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create pointer array. The array is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create pointer array. The count is null.");
+    }
+}
+
+/**
+ * Destroys the pointer array.
+ *
+ * @param p0 the array
+ * @param p1 the count
+ */
+void destroy_pointer_array(void* p0, const void* p1) {
+
+    if (p1 != NULL_POINTER) {
+
+        int* c = (int*) p1;
+
+        if (p0 != NULL_POINTER) {
+
+            void** a = (void**) p0;
+
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy pointer array.");
+
+            //?? TODO: Destroy all array elements in a loop??
+            //?? Which is the same as Garbage Collection!
+            //?? SEE: signal_memory_handler
+            free(*a);
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy pointer array. The array is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy pointer array. The count is null.");
+    }
+}
+
+/**
+ * Resizes the pointer array.
+ *
+ * @param p0 the array
+ * @param p1 the count
+ */
+void resize_pointer_array(void* p0, const void* p1) {
+
+    if (p1 != NULL_POINTER) {
+
+        int* c = (int*) p1;
+        fprintf(stderr, "resize s: %d\n", *c);
+
+        if (p0 != NULL_POINTER) {
+
+            void** a = (void**) p0;
+            fprintf(stderr, "resize a1: %d\n", *a);
+
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Resize pointer array.");
+
+            // Determine size as product of element count and type size.
+            int s = *c * sizeof(void*);
+
+            // Create a new array with extended size.
+            *a = (void*) realloc(*a, s);
+            fprintf(stderr, "resize a2: %d\n", *a);
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize pointer array. The array is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize pointer array. The count is null.");
+    }
+}
+
+//
+// Array element.
+//
 
 /**
  * Compares the pointer array elements.
@@ -93,8 +210,8 @@ void compare_pointer_array_elements(const void* p0, const void* p1, const void* 
                         }
 
                         // Determine the next elements at array plus index.
-                        e0 = (void**) (*a0 + j);
-                        e1 = (void**) (*a1 + j);
+                        e0 = (void**) (*a0 + j * sizeof(void*));
+                        e1 = (void**) (*a1 + j * sizeof(void*));
 
                         if (*e0 != *e1) {
 
@@ -155,7 +272,7 @@ void set_pointer_array_elements(void* p0, const void* p1, const void* p2, const 
                     // The loop variable.
                     int j = 0;
                     // The destination base to start copying to.
-                    void* db = (void*) (*d + *i);
+                    void* db = (void*) (*d + *i * sizeof(void*));
                     // The source element.
                     void** se = POINTER_NULL_POINTER;
                     // The destination element.
@@ -169,8 +286,8 @@ void set_pointer_array_elements(void* p0, const void* p1, const void* p2, const 
                         }
 
                         // Determine source and destination element.
-                        se = (void**) (*s + j);
-                        de = (void**) (db + j);
+                        se = (void**) (*s + j * sizeof(void*));
+                        de = (void**) (db + j * sizeof(void*));
 
                         // Set destination element.
                         *de = *se;
@@ -318,7 +435,7 @@ void get_pointer_array_elements(const void* p0, const void* p1, void* p2, const 
                     // The loop variable.
                     int j = 0;
                     // The source base to start copying from.
-                    void* sb = (void*) (*s + *i);
+                    void* sb = (void*) (*s + *i * sizeof(void*));
                     // The source element.
                     void** se = POINTER_NULL_POINTER;
                     // The destination element.
@@ -332,8 +449,8 @@ void get_pointer_array_elements(const void* p0, const void* p1, void* p2, const 
                         }
 
                         // Determine source and destination element.
-                        se = (void**) (sb + j);
-                        de = (void**) (*d + j);
+                        se = (void**) (sb + j * sizeof(void*));
+                        de = (void**) (*d + j * sizeof(void*));
 
                         // Set destination element.
                         *de = *se;

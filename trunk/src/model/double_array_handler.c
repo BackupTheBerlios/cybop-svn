@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.15 $ $Date: 2004-04-25 21:25:58 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-04-28 22:45:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,6 +48,120 @@
 
 #include "../constants.c"
 #include "../logger/log_handler.c"
+
+//
+// Array.
+//
+
+/**
+ * Creates the double array.
+ *
+ * @param p0 the array
+ * @param p1 the count
+ */
+void create_double_array(void* p0, const void* p1) {
+
+    if (p1 != NULL_POINTER) {
+
+        int* c = (int*) p1;
+
+        if (p0 != NULL_POINTER) {
+
+            void** a = (void**) p0;
+
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create double array.");
+
+            // Determine size as product of element count and type size.
+            int s = *c * sizeof(double);
+
+            // A minimal space in memory is always allocated,
+            // even if the requested size is zero.
+            // In other words, a handle to the new instance is always returned.
+            *a = (void*) malloc(s);
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create double array. The array is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create double array. The count is null.");
+    }
+}
+
+/**
+ * Destroys the double array.
+ *
+ * @param p0 the array
+ * @param p1 the count
+ */
+void destroy_double_array(void* p0, const void* p1) {
+
+    if (p1 != NULL_POINTER) {
+
+        int* c = (int*) p1;
+
+        if (p0 != NULL_POINTER) {
+
+            void** a = (void**) p0;
+
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy double array.");
+
+            //?? TODO: Destroy all array elements in a loop??
+            //?? Which is the same as Garbage Collection!
+            //?? SEE: signal_memory_handler
+            free(*a);
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy double array. The array is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy double array. The count is null.");
+    }
+}
+
+/**
+ * Resizes the double array.
+ *
+ * @param p0 the array
+ * @param p1 the count
+ */
+void resize_double_array(void* p0, const void* p1) {
+
+    if (p1 != NULL_POINTER) {
+
+        int* c = (int*) p1;
+
+        if (p0 != NULL_POINTER) {
+
+            void** a = (void**) p0;
+
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Resize double array.");
+
+            // Determine size as product of element count and type size.
+            int s = *c * sizeof(double);
+
+            // Create a new array with extended size.
+            *a = (void*) realloc(*a, s);
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize double array. The array is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize double array. The count is null.");
+    }
+}
+
+//
+// Array element.
+//
 
 /**
  * Compares the double array elements.
@@ -93,8 +207,8 @@ void compare_double_array_elements(const void* p0, const void* p1, const void* p
                         }
 
                         // Determine the next elements at array plus index.
-                        e0 = (double*) (*a0 + j);
-                        e1 = (double*) (*a1 + j);
+                        e0 = (double*) (*a0 + j * sizeof(double));
+                        e1 = (double*) (*a1 + j * sizeof(double));
 
                         if (*e0 != *e1) {
 
@@ -155,7 +269,7 @@ void set_double_array_elements(void* p0, const void* p1, const void* p2, const v
                     // The loop variable.
                     int j = 0;
                     // The destination base to start copying to.
-                    void* db = (void*) (*d + *i);
+                    void* db = (void*) (*d + *i * sizeof(double));
                     // The source element.
                     double* se = DOUBLE_NULL_POINTER;
                     // The destination element.
@@ -169,8 +283,8 @@ void set_double_array_elements(void* p0, const void* p1, const void* p2, const v
                         }
 
                         // Determine source and destination element.
-                        se = (double*) (*s + j);
-                        de = (double*) (db + j);
+                        se = (double*) (*s + j * sizeof(double));
+                        de = (double*) (db + j * sizeof(double));
 
                         // Set destination element.
                         *de = *se;
@@ -318,7 +432,7 @@ void get_double_array_elements(const void* p0, const void* p1, void* p2, const v
                     // The loop variable.
                     int j = 0;
                     // The source base to start copying from.
-                    void* sb = (void*) (*s + *i);
+                    void* sb = (void*) (*s + *i * sizeof(double));
                     // The source element.
                     double* se = DOUBLE_NULL_POINTER;
                     // The destination element.
@@ -332,8 +446,8 @@ void get_double_array_elements(const void* p0, const void* p1, void* p2, const v
                         }
 
                         // Determine source and destination element.
-                        se = (double*) (sb + j);
-                        de = (double*) (*d + j);
+                        se = (double*) (sb + j * sizeof(double));
+                        de = (double*) (*d + j * sizeof(double));
 
                         // Set destination element.
                         *de = *se;

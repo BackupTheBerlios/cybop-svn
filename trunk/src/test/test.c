@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.7 $ $Date: 2004-04-28 20:37:47 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-04-28 22:45:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,24 +96,41 @@ void test_character_array_single_element() {
     int cas = 5;
     create_array((void*) &ca, (void*) &cas);
 
-    int ca1s = 0;
+    int ca1i = 0;
     char ca1 = 'a';
-    int ca2s = 1;
+    int ca2i = 1;
     char ca2 = 'b';
-    int ca3s = 2;
+    int ca3i = 2;
     char ca3 = 'c';
-    int ca4s = 3;
+    int ca4i = 3;
     char ca4 = '\n';
-    int ca5s = 4;
+    int ca5i = 4;
     char ca5 = '\0';
 
-    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca1s, (void*) &ca1);
-    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca2s, (void*) &ca2);
-    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca3s, (void*) &ca3);
-    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca4s, (void*) &ca4);
-    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca5s, (void*) &ca5);
+    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca1i, (void*) &ca1);
+    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca2i, (void*) &ca2);
+    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca3i, (void*) &ca3);
+    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca4i, (void*) &ca4);
+    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca5i, (void*) &ca5);
 
+    // Print out array contents.
     fputs((char*) ca, stdout);
+
+    int i = 0;
+    char* catest = CHARACTER_NULL_POINTER;
+
+    while (1) {
+
+        if (i >= cas) {
+
+            break;
+        }
+
+        catest = (char*) (ca + i);
+        fprintf(stderr, "ca: %c\n", *catest);
+
+        i++;
+    }
 
     destroy_array((void*) &ca, (void*) &cas);
 
@@ -121,44 +138,49 @@ void test_character_array_single_element() {
     fputs("Integer array:\n", stdout);
 
     void* ia = NULL_POINTER;
-    int ias = 5;
+    int ias = 5 * sizeof(int);
     create_array((void*) &ia, (void*) &ias);
 
-    int ia1s = 0;
+    int ia1i = 0 * sizeof(int);
     int ia1 = 9;
-    int ia2s = 1;
+    int ia2i = 1 * sizeof(int);
     int ia2 = 8;
-    int ia3s = 2;
+    int ia3i = 2 * sizeof(int);
     int ia3 = 7;
-    int ia4s = 3;
+    int ia4i = 3 * sizeof(int);
     int ia4 = 6;
-    int ia5s = 4;
+    int ia5i = 4 * sizeof(int);
     int ia5 = 5;
 
-    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &ia1s, (void*) &ia1);
-//??    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &ia2s, (void*) &ia2);
-//??    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &ia3s, (void*) &ia3);
-//??    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &ia4s, (void*) &ia4);
-//??    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &ia5s, (void*) &ia5);
+    set_array_element((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ia1i, (void*) &ia1);
+    set_array_element((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ia2i, (void*) &ia2);
+    set_array_element((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ia3i, (void*) &ia3);
+    set_array_element((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ia4i, (void*) &ia4);
+    set_array_element((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ia5i, (void*) &ia5);
 
     // Print out array contents.
     int j = 0;
-    int* test = INTEGER_NULL_POINTER;
+    int* iatest = INTEGER_NULL_POINTER;
 
     while (1) {
 
-        if (j >= ias) {
+        if (j * sizeof(int) >= ias) {
 
             break;
         }
 
-        test = (int*) (ia + j);
-        fprintf(stderr, "ia: %d\n", *test);
+        iatest = (int*) (ia + j * sizeof(int));
+        fprintf(stderr, "ia: %d\n", *iatest);
 
         j++;
     }
 
     destroy_array((void*) &ia, (void*) &ias);
+
+    //
+    // Caution! In any case consider the size of the type, for all array!
+    // Example: index * sizeof(int)
+    //
 }
 
 /**
