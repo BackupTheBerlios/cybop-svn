@@ -24,7 +24,7 @@
 
 package cybop.core.system.region.controller.translator;
 
-import cybop.core.basic.String;
+import cybop.core.model.String;
 import cybop.core.model.*;
 import cybop.core.model.model.*;
 import cybop.core.model.model.user.*;
@@ -35,7 +35,7 @@ import cybop.core.system.region.controller.*;
 /**
  * This class represents a system information user interface translator.
  *
- * @version $Revision: 1.5 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationUserInterfaceTranslator extends Translator {

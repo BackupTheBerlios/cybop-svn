@@ -24,7 +24,7 @@
 
 package cybop.healthcare.model.unit;
 
-import cybop.core.basic.String;
+import cybop.core.model.String;
 import cybop.healthcare.model.*;
 import cybop.healthcare.model.heading.problem.Subjective;
 import cybop.healthcare.model.heading.problem.Assessment;
@@ -37,7 +37,7 @@ import cybop.healthcare.model.heading.problem.Objective;
  * A partial contact is a time extract of an episode.
  * It consists of problem headings.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Jens Bohl <jens.bohl@stud.tu-ilmenau.de>
  * @author Torsten Kunze <zone3@gmx.de>

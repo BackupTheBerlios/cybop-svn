@@ -22,89 +22,20 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model.model;
+package cybop.core.knowledge;
 
-import cybop.core.basic.String;
 import cybop.core.model.*;
-import cybop.core.model.unit.*;
-import cybop.core.system.chain.*;
 
 /**
- * This class represents a domain model.
+ * This class represents a knowledge item.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:58:15 $ $Author: christian $
+ * It is a general part of a knowledge model that is able to store
+ * knowledge, that is hierarchical information.
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Torsten Kunze <zone3@gmx.de>
  */
-public class DomainModel extends Model {
-
-    //
-    // Children names.
-    //
-
-    /** The system information. */
-    public static final String SYSTEM_INFORMATION = new String("system_information");
-
-    //
-    // Default children.
-    //
-
-    /**
-     * Returns the default system information.
-     *
-     * @return the default system information
-     */
-    public String getDefaultSystemInformation() {
-
-        return new String("cybop.core.model.unit.SystemInformation");
-    }
-
-    //
-    // Initialization.
-    //
-
-    /**
-     * Initializes this domain model.
-     *
-     * @exception Exception if the configuration is null
-     */
-    public void initialize() throws Exception {
-
-        super.initialize();
-
-        Configuration c = (Configuration) getChildItem(DomainModel.CONFIGURATION);
-
-        if (c != null) {
-
-            setChildItem(DomainModel.SYSTEM_INFORMATION, createChildItem(getDefaultSystemInformation()));
-
-        } else {
-
-            throw new Exception("Could not initialize domain model. The configuration is null.");
-        }
-    }
-
-    /**
-     * Finalizes this domain model.
-     *
-     * @exception Exception if the configuration is null
-     */
-    public void finalizz() throws Exception {
-
-        Configuration c = (Configuration) getChildItem(DomainModel.CONFIGURATION);
-
-        if (c != null) {
-
-            SystemInformation systemInformation = (SystemInformation) getChildItem(DomainModel.SYSTEM_INFORMATION);
-            removeChildItem(DomainModel.SYSTEM_INFORMATION);
-            destroyChildItem(systemInformation);
-
-        } else {
-
-            throw new Exception("Could not finalize domain model. The configuration is null.");
-        }
-
-        super.finalizz();
-    }
+public class KnowledgeItem extends ModelItem {
 }
 

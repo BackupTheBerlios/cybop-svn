@@ -24,12 +24,12 @@
 
 package cybop.core.system.chain;
 
-import cybop.core.basic.String;
+import cybop.core.model.String;
 
 /**
  * This class represents an internet protocol 4 address.<br><br>
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Ip4Address extends Address {

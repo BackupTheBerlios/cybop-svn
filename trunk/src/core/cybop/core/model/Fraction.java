@@ -22,7 +22,7 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.basic;
+package cybop.core.model;
 
 /**
  * This class represents a fraction.
@@ -31,7 +31,7 @@ package cybop.core.basic;
  * In computing, it is also known as floating point- or double number,
  * having a part "before and after the point/comma".
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:25:54 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Fraction extends Quantity {

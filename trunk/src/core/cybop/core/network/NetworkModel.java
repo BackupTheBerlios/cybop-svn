@@ -22,21 +22,21 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model.model;
+package cybop.core.network;
 
 import cybop.core.model.*;
 
 /**
- * This class represents a data transfer model.
+ * This class represents a network model.
  *
- * A data transfer model is a special, simplified model to be used for
+ * A network (data transfer) model is a special, simplified model to be used for
  * data transfer between remote machines. It has a reduced number of
  * attributes/methods to ease and speed up communication.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:58:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Torsten Kunze <zone3@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class DataTransferModel extends Model {
+public class NetworkModel extends ModelItem {
 }
 

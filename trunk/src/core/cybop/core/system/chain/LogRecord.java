@@ -24,7 +24,7 @@
 
 package cybop.core.system.chain;
 
-import cybop.core.basic.String;
+import cybop.core.model.String;
 import cybop.core.system.*;
 
 /**
@@ -40,7 +40,7 @@ import cybop.core.system.*;
  * A system is responsible for writing out the record to console or file or
  * another location/medium, using mechanisms offered by the framework.
  * 
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class LogRecord extends Chain {

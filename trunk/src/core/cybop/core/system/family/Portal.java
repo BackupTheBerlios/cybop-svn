@@ -24,9 +24,9 @@
 
 package cybop.core.system.family;
 
-import cybop.core.basic.*;
-import cybop.core.basic.Integer;
-import cybop.core.basic.String;
+import cybop.core.model.*;
+import cybop.core.model.Integer;
+import cybop.core.model.String;
 import cybop.core.model.model.user.*;
 import cybop.core.system.*;
 import cybop.core.system.System;
@@ -49,7 +49,7 @@ import cybop.core.system.chain.*;
  * Child systems can be integrated into the portal system's Frame as Frame,
  * InternalFrame or TabPage.
  *
- * @version $Revision: 1.9 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Portal extends Family {

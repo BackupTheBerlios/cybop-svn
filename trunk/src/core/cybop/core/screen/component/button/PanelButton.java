@@ -22,14 +22,14 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model.organizer;
+package cybop.core.screen.component;
 
-import cybop.core.basic.Boolean;
+import cybop.core.model.Boolean;
 
 /**
  * This class represents a panel button.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:58:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PanelButton extends Button {

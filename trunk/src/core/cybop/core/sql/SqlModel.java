@@ -22,21 +22,19 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model.model;
+package cybop.core.sql;
 
 import cybop.core.model.*;
 
 /**
- * This class represents a data transfer model.
+ * This class represents a structured query language (sql) model.
  *
- * A data transfer model is a special, simplified model to be used for
- * data transfer between remote machines. It has a reduced number of
- * attributes/methods to ease and speed up communication.
+ * An sql model is necessary to talk to database systems.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:22:09 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Torsten Kunze <zone3@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class PersistenceModel extends Model {
+public class SqlModel extends ModelItem {
 }
 

@@ -24,16 +24,16 @@
 
 package cybop.core.signal;
 
-import cybop.core.basic.*;
-import cybop.core.basic.Integer;
-import cybop.core.basic.String;
+import cybop.core.model.*;
+import cybop.core.model.Integer;
+import cybop.core.model.String;
 
 /**
  * This class represents a signal.<br><br>
  *
  * It serves as container transporting information of communication.
  *
- * @version $Revision: 1.11 $ $Date: 2003-04-25 11:23:56 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Signal extends Item {

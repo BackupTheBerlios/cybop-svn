@@ -24,7 +24,7 @@
 
 package cybop.core.system;
 
-import cybop.core.basic.String;
+import cybop.core.model.String;
 
 /**
  * This class represents a Region.
@@ -48,7 +48,7 @@ import cybop.core.basic.String;
  * A region corresponds to an area of an organ in a human's body,
  * e.g. the brain region responsible for seeing.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Region extends Component {

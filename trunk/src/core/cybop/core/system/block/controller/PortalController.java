@@ -24,8 +24,8 @@
 
 package cybop.core.system.block.controller;
 
-import cybop.core.basic.*;
-import cybop.core.basic.String;
+import cybop.core.model.*;
+import cybop.core.model.String;
 import cybop.core.system.block.*;
 import cybop.core.system.region.controller.*;
 import cybop.core.system.region.controller.processor.*;
@@ -34,7 +34,7 @@ import cybop.core.system.region.controller.translator.*;
 /**
  * This class represents a portal controller.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalController extends Controller {

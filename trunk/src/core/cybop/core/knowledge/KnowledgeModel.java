@@ -22,21 +22,21 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model.model;
+package cybop.core.knowledge;
 
-import cybop.core.basic.String;
 import cybop.core.model.*;
-import cybop.core.model.unit.*;
-import cybop.core.system.chain.*;
+import cybop.core.model.String;
 
 /**
- * This class represents a domain model.
+ * This class represents a knowledge model.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:58:15 $ $Author: christian $
+ * It is able to store general knowledge, that is hierarchical information.
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Torsten Kunze <zone3@gmx.de>
  */
-public class DomainModel extends Model {
+public class KnowledgeModel extends KnowledgeItem {
 
     //
     // Children names.

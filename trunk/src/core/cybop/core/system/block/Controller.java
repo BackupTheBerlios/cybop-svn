@@ -24,9 +24,9 @@
 
 package cybop.core.system.block;
 
-import cybop.core.basic.*;
-import cybop.core.basic.Boolean;
-import cybop.core.basic.String;
+import cybop.core.model.*;
+import cybop.core.model.Boolean;
+import cybop.core.model.String;
 import cybop.core.model.*;
 import cybop.core.model.model.*;
 import cybop.core.model.model.user.*;
@@ -51,7 +51,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.15 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {

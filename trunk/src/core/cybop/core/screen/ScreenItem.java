@@ -22,25 +22,18 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model;
+package cybop.core.screen;
 
-import cybop.core.basic.*;
-import cybop.core.basic.String;
+import cybop.core.model.*;
+import cybop.core.model.String;
 
 /**
- * This class represents a graphic item.<br><br>
+ * This class represents a screen item.<br><br>
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:58:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class GraphicItem extends cybop.core.system.Component {
-
-    //?? Only temporary inheritance from Component!
-    //?? The gui components need a signal handler which is set in the
-    //?? globalize method of Component.
-    //?? Remove this inheritance (replace with Item parent class),
-    //?? as soon as no signal handler has to be forwarded anymore
-    //?? (when CYBOP provides mouse/keyboard input handling itselfs.
+public class ScreenItem extends ModelItem {
 
     //
     // Children names.

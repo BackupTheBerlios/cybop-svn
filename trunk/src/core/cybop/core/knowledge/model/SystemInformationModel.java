@@ -22,21 +22,20 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model.unit;
+package cybop.core.knowledge.model;
 
-import cybop.core.basic.String;
 import cybop.core.model.*;
-import cybop.core.system.chain.*;
+import cybop.core.model.String;
 
 /**
  * This class represents a system information model.
  *
  * It contains information about a system.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:58:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class SystemInformation extends Unit {
+public class SystemInformationModel extends KnowledgeModel {
 
     //
     // Children names.

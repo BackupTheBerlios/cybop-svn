@@ -24,7 +24,7 @@
 
 package cybop.healthcare.model.unit;
 
-import cybop.core.basic.String;
+import cybop.core.model.String;
 import cybop.healthcare.model.*;
 
 /**
@@ -32,7 +32,7 @@ import cybop.healthcare.model.*;
  *
  * A problem is some artifact in the health of a patient.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Problem extends Unit {

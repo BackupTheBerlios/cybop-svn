@@ -24,7 +24,7 @@
 
 package cybop.core.system.system;
 
-import cybop.core.basic.String;
+import cybop.core.model.String;
 import cybop.core.system.System;
 
 /**
@@ -33,7 +33,7 @@ import cybop.core.system.System;
  * An external system is one that isn't built on the ResMedLib framework.
  * Such a system runs as process of the surrounding operating system.
  *
- * @version $Revision: 1.5 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ExternalSystem extends System {

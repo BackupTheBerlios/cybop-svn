@@ -24,7 +24,7 @@
 
 package cybop.core.system.chain;
 
-import cybop.core.basic.String;
+import cybop.core.model.String;
 import cybop.core.system.*;
 
 /**
@@ -32,7 +32,7 @@ import cybop.core.system.*;
  *
  * It contains information of how to contact a system.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Address extends Chain {

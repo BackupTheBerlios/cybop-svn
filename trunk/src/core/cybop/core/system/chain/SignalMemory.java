@@ -24,9 +24,9 @@
 
 package cybop.core.system.chain;
 
-import cybop.core.basic.*;
-import cybop.core.basic.Integer;
-import cybop.core.basic.String;
+import cybop.core.model.*;
+import cybop.core.model.Integer;
+import cybop.core.model.String;
 import cybop.core.signal.*;
 import cybop.core.system.*;
 
@@ -37,7 +37,7 @@ import cybop.core.system.*;
  * responsible for short-time storage of signals.<br><br>
  * [German: "Kurzzeitgedaechtnis"]
  *
- * @version $Revision: 1.4 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SignalMemory extends Chain {

@@ -24,13 +24,13 @@
 
 package cybop.core.system.chain;
 
-import cybop.core.basic.Integer;
-import cybop.core.basic.String;
+import cybop.core.model.Integer;
+import cybop.core.model.String;
 
 /**
  * This class represents a socket address.<br><br>
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SocketAddress extends Address {

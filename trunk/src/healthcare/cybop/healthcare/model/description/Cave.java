@@ -24,7 +24,7 @@
 
 package cybop.healthcare.model.description;
 
-import cybop.core.basic.String;
+import cybop.core.model.String;
 import cybop.healthcare.model.*;
 
 /**
@@ -33,7 +33,7 @@ import cybop.healthcare.model.*;
  * A CAVE entry is an important reminder for doctors, indicating
  * allergies, medication, special problems a patient may have.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Cave extends Description {

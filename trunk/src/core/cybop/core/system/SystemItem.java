@@ -24,13 +24,15 @@
 
 package cybop.core.system;
 
+import cybop.core.category.*;
+
 /**
  * This class represents a system item.<br><br>
  *
  * A system item has special properties like configuration or log record and
  * is able to create and send signals.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemItem extends Item {

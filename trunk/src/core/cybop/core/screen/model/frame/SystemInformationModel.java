@@ -24,9 +24,9 @@
 
 package cybop.core.model.model.user;
 
-import cybop.core.basic.Boolean;
-import cybop.core.basic.Integer;
-import cybop.core.basic.String;
+import cybop.core.model.Boolean;
+import cybop.core.model.Integer;
+import cybop.core.model.String;
 import cybop.core.model.model.*;
 import cybop.core.model.organizer.*;
 
@@ -41,7 +41,7 @@ import cybop.core.model.organizer.*;
  * - authors
  * - helpers
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:58:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationUserInterface extends UserInterface {

@@ -24,7 +24,7 @@
 
 package cybop.core.system.system;
 
-import cybop.core.basic.String;
+import cybop.core.model.String;
 import cybop.core.system.System;
 import cybop.core.system.block.*;
 
@@ -35,7 +35,7 @@ import cybop.core.system.block.*;
  * Systems can communicate with each other and it doesn't matter whether
  * the systems are machines or users.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class User extends System {

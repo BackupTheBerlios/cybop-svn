@@ -24,7 +24,7 @@
 
 package cybop.core.system.block;
 
-import cybop.core.basic.Boolean;
+import cybop.core.model.Boolean;
 import cybop.core.model.model.*;
 import cybop.core.system.*;
 
@@ -33,7 +33,7 @@ import cybop.core.system.*;
  *
  * A screen is an output device that displays optical (graphical) information. 
  *
- * @version $Revision: 1.6 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Screen extends Block {

@@ -24,7 +24,7 @@
 
 package cybop.core.model.model.user.system;
 
-import cybop.core.basic.String;
+import cybop.core.model.String;
 import cybop.core.model.model.user.*;
 
 /**
@@ -34,7 +34,7 @@ import cybop.core.model.model.user.*;
  * The tree offers a hierarchy of categories with available system modules.
  * On the right side of the splitter, there is a container for child system views.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:58:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalUserInterface extends SystemUserInterface {

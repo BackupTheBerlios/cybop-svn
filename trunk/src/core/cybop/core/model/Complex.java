@@ -22,10 +22,9 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model.principle;
+package cybop.core.model;
 
-import cybop.core.basic.String;
-import cybop.core.model.*;
+import cybop.core.model.String;
 
 /**
  * This class represents a complex number.
@@ -33,10 +32,10 @@ import cybop.core.model.*;
  * A complex number has two parts, one called "real" and a second
  * one called "imaginary".
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:25:54 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Complex extends Principle {
+public class Complex extends Quantity {
 
     //
     // Attribute ids.

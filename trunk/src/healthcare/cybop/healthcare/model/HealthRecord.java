@@ -24,8 +24,8 @@
 
 package cybop.healthcare.model;
 
-import cybop.core.basic.*;
-import cybop.core.basic.String;
+import cybop.core.model.*;
+import cybop.core.model.String;
 import cybop.healthcare.model.description.*;
 import cybop.healthcare.model.heading.problem.*;
 import cybop.healthcare.model.unit.*;
@@ -50,7 +50,7 @@ import cybop.healthcare.model.unit.*;
  * specification describes record (history) as:<br>
  * "Concepts relating to collections of information over the long term."
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @see http://www.openehr.org http://www.gehr.org
  */

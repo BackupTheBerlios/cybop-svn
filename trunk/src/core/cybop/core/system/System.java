@@ -24,10 +24,10 @@
 
 package cybop.core.system;
 
-import cybop.core.basic.*;
-import cybop.core.basic.Boolean;
-import cybop.core.basic.Integer;
-import cybop.core.basic.String;
+import cybop.core.model.*;
+import cybop.core.model.Boolean;
+import cybop.core.model.Integer;
+import cybop.core.model.String;
 import cybop.core.model.*;
 import cybop.core.model.model.*;
 import cybop.core.model.model.user.*;
@@ -60,7 +60,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.13 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends Block implements 

@@ -22,19 +22,18 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model.organizer;
+package cybop.core.screen;
 
-import cybop.core.basic.*;
-import cybop.core.basic.String;
 import cybop.core.model.*;
+import cybop.core.model.String;
 
 /**
- * This class represents a panel.
+ * This class represents a screen region.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:58:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Panel extends Organizer {
+public class ScreenRegion extends ScreenItem {
 
     //
     // Children names.

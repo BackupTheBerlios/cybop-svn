@@ -24,13 +24,13 @@
 
 package cybop.core.model.organizer;
 
-import cybop.core.basic.String;
+import cybop.core.model.String;
 import cybop.core.model.*;
 
 /**
  * This class represents a portal split pane.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:58:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalSplitPane extends SplitPane {

@@ -22,9 +22,7 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model.principle;
-
-import cybop.core.model.*;
+package cybop.core.model;
 
 /**
  * This class represents a time.
@@ -39,9 +37,9 @@ import cybop.core.model.*;
  *
  * It is measured in seconds [s].
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:25:54 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Time extends Principle {
+public class Time extends ModelItem {
 }
 

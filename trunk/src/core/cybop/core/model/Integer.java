@@ -22,7 +22,7 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.basic;
+package cybop.core.model;
 
 /**
  * This class represents an integer.<br><br>
@@ -32,7 +32,7 @@ package cybop.core.basic;
  * A number stands for some countable thing of the real world.
  * Possible compositions of Integer are Fraction (Float/Double) and Complex.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:25:54 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Integer extends Quantity {

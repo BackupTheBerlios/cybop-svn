@@ -24,7 +24,7 @@
 
 package cybop.healthcare.model;
 
-import cybop.core.basic.*;
+import cybop.core.model.*;
 
 /**
  * This class represents a heading.<br><br>
@@ -44,7 +44,7 @@ import cybop.core.basic.*;
  * "Structural information concepts whose purpose is to organise information
  * according to norms of practice, in the same way as headings in a paper document."
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @see http://www.openehr.org http://www.gehr.org
  */

@@ -24,7 +24,7 @@
 
 package cybop.core.system.region.controller;
 
-import cybop.core.basic.String;
+import cybop.core.model.String;
 import cybop.core.model.*;
 import cybop.core.model.model.*;
 import cybop.core.system.region.*;
@@ -46,7 +46,7 @@ import cybop.core.system.region.*;
  *
  * Synonyms: Assembler, Mapper, Sensor, Motor, Encoder, Decoder 
  *
- * @version $Revision: 1.5 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Translator extends ControllerRegion {

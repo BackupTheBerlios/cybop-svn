@@ -24,7 +24,7 @@
 
 package cybop.healthcare.model.heading.problem;
 
-import cybop.core.basic.String;
+import cybop.core.model.String;
 import cybop.healthcare.model.heading.*;
 
 /**
@@ -32,7 +32,7 @@ import cybop.healthcare.model.heading.*;
  *
  * A subjective problem heading is ...
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:15 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Subjective extends ProblemHeading {

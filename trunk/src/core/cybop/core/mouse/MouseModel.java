@@ -22,23 +22,21 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model.model;
+package cybop.core.mouse;
 
-import cybop.core.basic.String;
 import cybop.core.model.*;
-import cybop.core.model.principle.*;
-import cybop.core.model.unit.*;
-import cybop.core.system.chain.*;
+import cybop.core.model.String;
 
 /**
  * This class represents a mouse model.
  *
- * It contains meta information about a mouse, its pointer and position etc.
+ * It contains information about how to talk to a mouse, that is its pointer and
+ * position etc.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:58:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class MouseModel extends Model {
+public class MouseModel extends ModelItem {
 
     //
     // Children names.

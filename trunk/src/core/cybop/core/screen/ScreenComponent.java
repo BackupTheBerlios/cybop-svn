@@ -22,35 +22,17 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model;
+package cybop.core.screen;
 
-import cybop.core.basic.*;
+import cybop.core.model.*;
 
 /**
- * This class represents a principle.<br><br>
+ * This class represents a screen component.<br><br>
  *
- * It is a super class and forms an own level in the framework's domain ontology:
- *  <ul>
- *      <li>HealthRecord</li>
- *      <li>Unit</li>
- *      <li>Heading</li>
- *      <li>Description</li>
- *      <li>Principle</li>
- *  </ul>
- *
- * A principle corresponds to a word.
- *
- * Principles are basic terms of healthcare. They are mostly specified
- * in a collection of words, called terminology.<br><br>
- *
- * The OpenEHR specification describes principles as:<br>
- * "Vocabulary and quantitative semantics of domain; facts true for all
- * instances and all use contexts"
- *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:58:15 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @see http://www.openehr.org http://www.gehr.org
  */
-public class Principle extends Item {
+public class ScreenComponent extends ScreenItem {
 }
 

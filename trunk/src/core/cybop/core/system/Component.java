@@ -24,10 +24,10 @@
 
 package cybop.core.system;
 
-import cybop.core.basic.*;
-import cybop.core.basic.Boolean;
-import cybop.core.basic.Integer;
-import cybop.core.basic.String;
+import cybop.core.model.*;
+import cybop.core.model.Boolean;
+import cybop.core.model.Integer;
+import cybop.core.model.String;
 import cybop.core.system.chain.*;
 
 /**
@@ -63,7 +63,7 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.17 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends Chain {

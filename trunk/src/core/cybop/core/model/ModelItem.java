@@ -22,7 +22,7 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.category;
+package cybop.core.model;
 
 /**
  * This class represents a model item.
@@ -42,7 +42,7 @@ package cybop.core.category;
  * Because a model item can also represent a state, that is a snapshot in time,
  * it knows about its previous state and is such able to build up a timeline.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-18 17:25:54 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ModelItem extends Item {

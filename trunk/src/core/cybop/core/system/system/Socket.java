@@ -24,8 +24,8 @@
 
 package cybop.core.system.system;
 
-import cybop.core.basic.Integer;
-import cybop.core.basic.String;
+import cybop.core.model.Integer;
+import cybop.core.model.String;
 import cybop.core.system.System;
 import cybop.core.system.chain.*;
 
@@ -34,7 +34,7 @@ import cybop.core.system.chain.*;
  *
  * A socket is an endpoint for communication between two machines.
  *
- * @version $Revision: 1.5 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Socket extends System {

@@ -24,7 +24,7 @@
 
 package cybop.core.system.block;
 
-import cybop.core.basic.Boolean;
+import cybop.core.model.Boolean;
 import cybop.core.model.model.*;
 import cybop.core.system.*;
 
@@ -33,7 +33,7 @@ import cybop.core.system.*;
  *
  * A mouse is an input device with several buttons that can be clicked. 
  *
- * @version $Revision: 1.1 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Mouse extends Block {
