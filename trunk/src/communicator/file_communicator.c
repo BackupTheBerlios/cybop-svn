@@ -1,9 +1,8 @@
 /*
  * $RCSfile: file_communicator.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
- * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -25,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.11 $ $Date: 2005-02-11 21:44:05 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-03-30 14:15:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

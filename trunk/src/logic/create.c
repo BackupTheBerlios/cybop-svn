@@ -1,9 +1,8 @@
 /*
  * $RCSfile: create.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
- * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -23,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.32 $ $Date: 2005-03-20 01:43:34 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -223,12 +222,12 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
 
     log_message_debug("Create compound model.");
 
-    // The configuration flag.
+    //?The configuration flag.
     int c = 0;
 
     compare_arrays(p5, p6, (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT, (void*) &c, (void*) CHARACTER_ARRAY);
 
-    // The temporary workaround flag to use the libxml2 parser.
+    //?The temporary workaround flag to use the libxml2 parser.
     //?? Later, when an own xml parser is implemented in cyboi,
     //?? delete this flag and change the corresponding blocks below!
     int w = 0;
@@ -350,7 +349,7 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
     log_message_debug("Create model.");
 
-    // The comparison result.
+    //?The comparison result.
     int r = 0;
 
     // Check for primitive model.

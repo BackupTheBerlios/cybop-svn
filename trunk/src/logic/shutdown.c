@@ -1,9 +1,8 @@
 /*
  * $RCSfile: shutdown.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
- * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -21,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-03-21 01:26:59 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */

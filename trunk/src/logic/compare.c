@@ -1,9 +1,8 @@
 /*
  * $RCSfile: compare.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
- * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -23,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.1 $ $Date: 2005-03-02 07:19:05 $ $Author: rholzmueller $
+ * @version $Revision: 1.2 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
  
@@ -141,12 +140,12 @@ void compare( const void* param, const int* param_count,
               const void* priority, const void* signal_id, 
               void* internal )
 {
-    //als oparameter sollten übergeben werden
+    //als oparameter sollten ?bergeben werden
     //- operand_1    
     //- operand_2    
     //- operator   
     //- result 
-    //natürlich in Konstanten gekapselt :-) also jederzeit änderbar
+    //nat?rlich in Konstanten gekapselt :-) also jederzeit ?nderbar
     
     // The knowledge memory.
     void** km = POINTER_NULL_POINTER;

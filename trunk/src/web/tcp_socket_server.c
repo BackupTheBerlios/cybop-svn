@@ -1,9 +1,8 @@
 /*
  * $RCSfile: tcp_socket_server.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
- * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -23,7 +22,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.20 $ $Date: 2005-03-02 07:29:02 $ $Author: rholzmueller $
+ * @version $Revision: 1.21 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>

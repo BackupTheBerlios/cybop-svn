@@ -1,9 +1,8 @@
 /*
  * $RCSfile: loop.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
- * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -23,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.2 $ $Date: 2005-03-10 10:00:08 $ $Author: rholzmueller $
+ * @version $Revision: 1.3 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
  
@@ -57,12 +56,12 @@ void loop( const void* param, const int* param_count,
            void* internal )
 {
     //Vorgehen
-    //alle paramater ausflösen
+    //alle paramater ausfl?sen
     //Schleife von bis durchlaufen
     //signal virtuell erzeugen
     //und in der Schleifen abarbeiten
-    //nicht signal in signal memeory einfügen, da eventuell
-    //diese Operation vor den anderen ausgeführt werden müssen
+    //nicht signal in signal memeory einf?gen, da eventuell
+    //diese Operation vor den anderen ausgef?hrt werden m?ssen
     
     // The knowledge memory.
     void** km = POINTER_NULL_POINTER;

@@ -1,9 +1,8 @@
 /*
  * $RCSfile: signal_waiter.c,v $
  *
- * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
- * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -21,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.36 $ $Date: 2005-03-22 01:13:05 $ $Author: christian $
+ * @version $Revision: 1.37 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -119,7 +118,7 @@ void wait(void* p0) {
 
 
                                 //?? Wait for web input, if no signal is in memory. TODO: Use a thread for this!
-                                //debug for rolf Holzmüller
+                                //debug for rolf Holzm?ller
                                 if ( socket_flag != POINTER_NULL_POINTER ) {
 
                                     if (*socket_flag != NULL_POINTER) {
