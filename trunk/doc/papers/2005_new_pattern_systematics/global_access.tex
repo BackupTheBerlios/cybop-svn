@@ -1,0 +1,32 @@
+%
+% $RCSfile: global_access.tex,v $
+%
+% Copyright (c) 2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Global Access}
+\label{global_access_heading}
+
+A pure tree of instances in a computer's \emph{Random Access Memory} (RAM)
+represents an unidirectional structure that permits data access along
+\emph{well-defined} paths. Global access via static types, on the other hand,
+allows \emph{any} instance to address data in memory \emph{directly}, which not
+only complicates software development and maintenance, but, due to the
+uncontrollable access, is a potential security risk.
+
+The usage of static objects accessible by any other part in a system is an
+\emph{Anti Pattern} to \emph{Inversion of Control} (IoC) \cite{avalon}, highly
+insecure and hence undesirable.

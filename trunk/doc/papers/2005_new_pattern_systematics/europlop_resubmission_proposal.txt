@@ -1,0 +1,75 @@
+From andy@blueskyline.com Sun Mar 13 23:42:31 2005
+Return-Path: <andy@blueskyline.com>
+Received: from shield.tu-ilmenau.de (mond.rz.tu-ilmenau.de [141.24.4.169])
+        by ernie.rz.tu-ilmenau.de (8.12.10/8.12.10) with SMTP id j2DMgbl6003830
+        for hidden; Sun, 13 Mar 2005 23:42:42 +0100 (MET)
+Received: from (141.24.4.8) by shield.tu-ilmenau.de via smtp
+         id 66e3_fc47fdfc_9410_11d9_8508_001143376fdd;
+        Sun, 13 Mar 2005 22:41:05 +0000 (UTC)
+Received: from anchor-post-32.mail.demon.net (anchor-post-32.mail.demon.net [194.217.242.90])
+        by piggy.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id j2DMgTQX014868;
+        Sun, 13 Mar 2005 23:42:32 +0100 (MET)
+Received: from blueskyline.demon.co.uk ([80.177.171.230] helo=MOUSE.blueskyline.com)
+        by anchor-post-32.mail.demon.net with esmtp (Exim 4.42)
+        id 1DAbn3-0004Xg-7P; Sun, 13 Mar 2005 22:42:29 +0000
+Message-Id: <6.0.1.1.2.20050313204932.0220bb58@spamarrest.com>
+X-Sender: alongshaw@spamarrest.com
+X-Mailer: QUALCOMM Windows Eudora Version 6.0.1.1
+Date: Sun, 13 Mar 2005 22:42:31 +0000
+To: christian.heller@tu-ilmenau.de,
+ detlef.streitferdt@tu-ilmenau.de,
+ ilka.philippow@tu-ilmenau.de
+From: Andy Longshaw <andy@blueskyline.com>
+Subject: EuroPLoP 2005 submission
+Cc: Uwe Zdun <uwe.zdun@wu-wien.ac.at>
+Mime-Version: 1.0
+Content-Type: text/plain;
+  charset="us-ascii";
+  format=flowed
+X-Spam-Checker-Version: SpamAssassin 3.0.2 (2004-11-16) on jupiter.tuxtax
+X-Spam-Level:
+X-Spam-Status: No, score=-0.7 required=5.0 tests=AWL,BAYES_00,
+        FORGED_RCVD_HELO autolearn=ham version=3.0.2
+X-UID:
+X-Bogosity: Spam, tests=bogofilter, spamicity=0.999997, version=0.93.5
+Status: RO
+X-Status: RC
+X-KMail-EncryptionState: N
+X-KMail-SignatureState: N
+X-KMail-MDN-Sent:
+
+Dear Christian, Detlef and Ilka,
+
+Thank you for your recent submission to EuroPLoP 2005.
+The programme committee have now had time to review the
+submitted papers and determine how many of each category
+we have received.
+
+The paper you submitted - A new Pattern Systematics - was
+classified as a paper "about" or "using" patterns rather than
+a pattern or pattern collection.
+
+Unfortunately, this year we have not received enough papers
+"about" or "using" patterns to form a workshop in their own right.
+Because of this, we are unable to accept this paper for one of
+the workshops at EuroPLoP. However, similar papers have been
+successfully studied in previous years using the focus group
+format. We would welcome it if you decided to re-submit the
+paper for such a focus group.
+
+If you decide to re-submit as a focus group then please let me
+know. Otherwise I hope that you find a suitable forum for your
+paper - maybe even at EuroPLoP next year.
+
+Andy Longshaw
+Programme Chair
+EuroPLoP 2005
+
+___________________________________________________
+
+Andy Longshaw
+Blue Skyline - Independent Consultancy
+
+"Wisdom, justice, compassion, integrity"
+(The four words engraved on the mace of the Scottish
+Parliament which seems to sum things up nicely)

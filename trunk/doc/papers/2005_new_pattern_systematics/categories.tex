@@ -1,0 +1,62 @@
+%
+% $RCSfile: categories.tex,v $
+%
+% Copyright (c) 2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Categories}
+\label{categories_heading}
+
+Most patterns heavily rely on associations, too. This paper therefore suggests to:
+
+\begin{center}
+    \textbf{Take the Kind of Association as Criterion\\
+    to sort patterns in a completely new way.}
+\end{center}
+
+The opposite table shows a systematics of the new pattern categories with their
+equivalents in human thinking, some representative example patterns and a
+recommendation for their usage in software engineering. Patterns matching into
+more than one category are placed after the priority: \emph{Recursion} over
+\emph{Polymorphism}.
+
+\begin{table}[ht]
+    \begin{center}
+        \begin{tabular}{| p{22mm} | p{20mm} | p{23mm} | p{10mm} |}
+            \hline
+            \textbf{Category} & \textbf{Equivalent} & \textbf{Representative} & \textbf{Advice}\\
+            \hline
+            Itemization & Discrimination & Command, Data Transfer Object, State, Memento, Envelope-Letter, Prototype & :-)\\
+            \hline
+            1:1 Association & Composition & Delegator, Object Adapter, Proxy (Surrogat, Client-/Server Stub), Wrapper, Handle-Body, Bridge & :-)\\
+            \hline
+            1:n Association & Composition & Whole-Part, View Handler, Broker (Mediator), Master-Slave, Command Processor, Counted Pointer, Chain of Responsibility & :-)\\
+            \hline
+            Recursion & Composition & Composite, Interpreter, Decorator, Linked Wrapper & :-)\\
+            \hline
+            Bidirectionalism & -- & Observer (Callback, Publisher-Subscriber), Forwarder-Receiver, Chain of Responsibility, Visitor, Reflection & :-(\\
+            \hline
+            Polymorphism & Categorization & Template Method, Builder, Factory Method, Class Adapter, Abstract Factory (Kit), Strategy (Validator, Policy), Iterator (Cursor) & :-$\mid$\\
+            \hline
+            Grouping & Categorization & Layers, Domain Model, MVC & :-)\\
+            \hline
+            Global Access & -- & Singleton, Flyweight, Registry, Manager & :-(\\
+            \hline
+        \end{tabular}
+%        \caption{Pattern Systematics}
+        \label{pattern_systematics_table}
+    \end{center}
+\end{table}
