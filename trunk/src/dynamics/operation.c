@@ -31,29 +31,18 @@
  * It transports an input state through logics to an output state.
  *
  * The logics is kept as function pointer.
- * Input and output are kept as hierarchical paths to their statics models.
+ * Many inputs and outputs are possible.
+ * Statics models are kept as hierarchical paths.
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-03 15:10:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct operation {
 
-    /** The logics as function pointer. */
-    void* logics;
-
-    /** The input 0. */
-    void* input_0;
-
-    /** The input 1. */
-    void* input_1;
-
-    /** The output 0. */
-    void* output_0;
-
-    /** The output 1. */
-    void* output_1;
+    /** The inputs and outputs. */
+    void* inputs_outputs;
 };
 
 /* OPERATION_SOURCE */

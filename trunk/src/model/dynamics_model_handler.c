@@ -54,7 +54,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-03 15:10:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -444,71 +444,73 @@ static void finalize_dynamics_model(void* p0, void* p1) {
 static void* create_dynamics_model(void* p0, void* p1) {
 
     void* m = 0;
+    char* p = (char*) p0;
+    char* a = (char*) p1;
     
-    if (p0 != 0) {
+    if (p != 0) {
         
-        if (strcmp((char*) p0, "") != 0) {
+        if (strcmp(p, "") != 0) {
             
             log((void*) &INFO_LOG_LEVEL, "Create dynamics model: ");
             log((void*) &INFO_LOG_LEVEL, p0);
 
-            if (strcmp(p1, DYNAMICS_COMPOUND) == 0) {
+            if (strcmp(a, DYNAMICS_COMPOUND) == 0) {
         
                 m = malloc(sizeof(struct dynamics_model));
                 create_dynamics_model_containers(m);
                 initialize_dynamics_model(m, p0);
         
-            } else if (strcmp(p1, AND_OPERATION) == 0) {
+            } else if (strcmp(a, AND_OPERATION) == 0) {
         
                 m = malloc(sizeof(struct and));
                 initialize_and_model(m, p0);
                 
-            } else if (strcmp(p1, OR_OPERATION) == 0) {
+            } else if (strcmp(a, OR_OPERATION) == 0) {
         
                 m = malloc(sizeof(struct or));
                 initialize_or_model(m, p0);
                 
-            } else if (strcmp(p1, EQUAL_OPERATION) == 0) {
+            } else if (strcmp(a, EQUAL_OPERATION) == 0) {
         
                 m = malloc(sizeof(struct equal));
                 initialize_equal_model(m, p0);
         
-            } else if (strcmp(p1, SMALLER_OPERATION) == 0) {
+            } else if (strcmp(a, SMALLER_OPERATION) == 0) {
         
                 m = malloc(sizeof(struct smaller));
                 initialize_smaller_model(m, p0);
         
-            } else if (strcmp(p1, GREATER_OPERATION) == 0) {
+            } else if (strcmp(a, GREATER_OPERATION) == 0) {
         
                 m = malloc(sizeof(struct greater));
                 initialize_greater_model(m, p0);
         
-            } else if (strcmp(p1, SMALLER_OR_EQUAL_OPERATION) == 0) {
+            } else if (strcmp(a, SMALLER_OR_EQUAL_OPERATION) == 0) {
         
                 m = malloc(sizeof(struct smaller_or_equal));
                 initialize_smaller_or_equal_model(m, p0);
         
-            } else if (strcmp(p1, GREATER_OR_EQUAL_OPERATION) == 0) {
+            } else if (strcmp(a, GREATER_OR_EQUAL_OPERATION) == 0) {
         
                 m = malloc(sizeof(struct greater_or_equal));
                 initialize_greater_or_equal_model(m, p0);
         
-            } else if (strcmp(p1, ADD_OPERATION) == 0) {
+            } else if (strcmp(a, ADD_OPERATION) == 0) {
         
                 m = malloc(sizeof(struct add));
                 initialize_add_model(m, p0);
         
-            } else if (strcmp(p1, SUBTRACT_OPERATION) == 0) {
+            } else if (strcmp(a, SUBTRACT_OPERATION) == 0) {
         
                 m = malloc(sizeof(struct subtract));
                 initialize_subtract_model(m, p0);
         
-            } else if (strcmp(p1, MULTIPLY_OPERATION) == 0) {
+            } else if (strcmp(a, MULTIPLY_OPERATION) == 0) {
         
                 m = malloc(sizeof(struct multiply));
                 initialize_multiply_model(m, p0);
         
-            } else if (strcmp(p1, DIVIDE_OPERATION) == 0) {
+            } else if (strcmp(a, DIVIDE_OPERATION) == 0) {
         
                 m = malloc(sizeof(struct divide));
                 initialize_divide_model(m, p0);
@@ -528,70 +530,73 @@ static void* create_dynamics_model(void* p0, void* p1) {
  */
 static void destroy_dynamics_model(void* p0, void* p1, void* p2) {
 
+    char* p = (char*) p1;
+    char* a = (char*) p2;
+
     if (p0 != 0) {
         
-        if (p1 != 0) {
+        if (p != 0) {
             
             log((void*) &INFO_LOG_LEVEL, "Destroy dynamics model: ");
             log((void*) &INFO_LOG_LEVEL, p1);
         
-            if (strcmp(p2, DYNAMICS_COMPOUND) == 0) {
+            if (strcmp(a, DYNAMICS_COMPOUND) == 0) {
         
                 finalize_dynamics_model(p0, p1);
                 destroy_dynamics_model_containers(p0);
                 free(p0);
 
-            } else if (strcmp(p2, AND_OPERATION) == 0) {
+            } else if (strcmp(a, AND_OPERATION) == 0) {
         
                 finalize_and_model(p0, p1);
                 free(p0);
         
-            } else if (strcmp(p2, OR_OPERATION) == 0) {
+            } else if (strcmp(a, OR_OPERATION) == 0) {
         
                 finalize_or_model(p0, p1);
                 free(p0);
         
-            } else if (strcmp(p2, EQUAL_OPERATION) == 0) {
+            } else if (strcmp(a, EQUAL_OPERATION) == 0) {
         
                 finalize_equal_model(p0, p1);
                 free(p0);
         
-            } else if (strcmp(p2, SMALLER_OPERATION) == 0) {
+            } else if (strcmp(a, SMALLER_OPERATION) == 0) {
         
                 finalize_smaller_model(p0, p1);
                 free(p0);
         
-            } else if (strcmp(p2, GREATER_OPERATION) == 0) {
+            } else if (strcmp(a, GREATER_OPERATION) == 0) {
         
                 finalize_greater_model(p0, p1);
                 free(p0);
         
-            } else if (strcmp(p2, SMALLER_OR_EQUAL_OPERATION) == 0) {
+            } else if (strcmp(a, SMALLER_OR_EQUAL_OPERATION) == 0) {
         
                 finalize_smaller_or_equal_model(p0, p1);
                 free(p0);
         
-            } else if (strcmp(p2, GREATER_OR_EQUAL_OPERATION) == 0) {
+            } else if (strcmp(a, GREATER_OR_EQUAL_OPERATION) == 0) {
         
                 finalize_greater_or_equal_model(p0, p1);
                 free(p0);
         
-            } else if (strcmp(p2, ADD_OPERATION) == 0) {
+            } else if (strcmp(a, ADD_OPERATION) == 0) {
         
                 finalize_add_model(p0, p1);
                 free(p0);
         
-            } else if (strcmp(p2, SUBTRACT_OPERATION) == 0) {
+            } else if (strcmp(a, SUBTRACT_OPERATION) == 0) {
         
                 finalize_subtract_model(p0, p1);
                 free(p0);
         
-            } else if (strcmp(p2, MULTIPLY_OPERATION) == 0) {
+            } else if (strcmp(a, MULTIPLY_OPERATION) == 0) {
         
                 finalize_multiply_model(p0, p1);
                 free(p0);
         
-            } else if (strcmp(p2, DIVIDE_OPERATION) == 0) {
+            } else if (strcmp(a, DIVIDE_OPERATION) == 0) {
         
                 finalize_divide_model(p0, p1);
                 free(p0);

@@ -33,13 +33,16 @@
  * - priority
  * - language
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-03 15:10:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct signal_memory {
 
     /** The signals. */
     void* signals;
+
+    /** The abstractions. */
+    void* abstractions;
 
     /** The priorities. */
     void* priorities;

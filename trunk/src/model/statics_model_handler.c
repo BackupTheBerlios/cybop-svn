@@ -50,7 +50,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-03 15:10:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -280,7 +280,7 @@ static void finalize_statics_parts(void* p0, void* p1) {
  * Initializes the statics model from a statics cybol model.
  *
  * @param p0 the statics model
- * @param p1 the statics cybol model
+ * @param p1 the statics cybol model path
  */
 static void initialize_statics_model(void* p0, void* p1) {
 
@@ -294,8 +294,8 @@ static void initialize_statics_model(void* p0, void* p1) {
         struct statics_model* cybol = (struct statics_model*) malloc(sizeof(struct statics_model));
         create_statics_model_containers((void*) cybol);
 
-        // Read statics cybol model from file.
-        initialize_statics_cybol_model((void*) cybol, p1);
+        // Read statics cybol model from file path.
+        read_statics_cybol_model((void*) cybol, p1);
     
         // Initialize statics model parts with statics cybol model.
         if (cybol != 0) {
@@ -321,7 +321,7 @@ static void initialize_statics_model(void* p0, void* p1) {
  * Finalizes the statics model to a statics cybol model.
  *
  * @param p0 the statics model
- * @param p1 the statics cybol model
+ * @param p1 the statics cybol model path
  */
 static void finalize_statics_model(void* p0, void* p1) {
 
@@ -345,8 +345,8 @@ static void finalize_statics_model(void* p0, void* p1) {
             log((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The statics cybol model is null.");
         }
     
-        // Write statics cybol model to file.
-        finalize_statics_cybol_model((void*) cybol, p1);
+        // Write statics cybol model to file path.
+        write_statics_cybol_model((void*) cybol, p1);
     
         // Destroy temporary statics cybol model.
         destroy_statics_model_containers((void*) cybol);
@@ -355,132 +355,6 @@ static void finalize_statics_model(void* p0, void* p1) {
     } else {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The statics model is null.");
-    }
-}
-
-/**
- * Creates a statics model.
- *
- * @param p0 the statics cybol model
- * @param p1 the abstraction
- * @return the statics model
- */
-static void* create_statics_model(void* p0, void* p1) {
-
-    void* m = 0;
-    
-    if (p0 != 0) {
-        
-        if (strcmp((char*) p0, "") != 0) {
-            
-            log((void*) &INFO_LOG_LEVEL, "Create statics model: ");
-            log((void*) &INFO_LOG_LEVEL, p0);
-
-            if (strcmp(p1, STATICS_COMPOUND) == 0) {
-        
-                m = malloc(sizeof(struct statics_model));
-                create_statics_model_containers(m);
-                initialize_statics_model(m, p0);
-        
-            } else if (strcmp(p1, TIME_PRIMITIVE) == 0) {
-        
-                m = malloc(sizeof(struct time));
-                initialize_time_model(m, p0);
-                
-            } else if (strcmp(p1, STRING_PRIMITIVE) == 0) {
-        
-                m = malloc(sizeof(struct string));
-                initialize_string_model(m, p0);
-        
-            } else if (strcmp(p1, VECTOR_PRIMITIVE) == 0) {
-        
-                m = malloc(sizeof(struct vector));
-                initialize_vector_model(m, p0);
-        
-            } else if (strcmp(p1, COMPLEX_PRIMITIVE) == 0) {
-        
-                m = malloc(sizeof(struct complex));
-                initialize_complex_model(m, p0);
-        
-            } else if (strcmp(p1, FRACTION_PRIMITIVE) == 0) {
-        
-                m = malloc(sizeof(struct fraction));
-                initialize_fraction_model(m, p0);
-        
-            } else if (strcmp(p1, INTEGER_PRIMITIVE) == 0) {
-        
-                m = malloc(sizeof(struct integer));
-                initialize_integer_model(m, p0);
-        
-            } else if (strcmp(p1, BOOLEAN_PRIMITIVE) == 0) {
-        
-                m = malloc(sizeof(struct boolean));
-                initialize_boolean_model(m, p0);
-            }
-        }
-    }
-        
-    return m;
-}
-
-/**
- * Destroys the statics model.
- *
- * @param p0 the statics model
- * @param p1 the statics cybol model
- * @param p2 the abstraction
- */
-static void destroy_statics_model(void* p0, void* p1, void* p2) {
-
-    if (p0 != 0) {
-        
-        if (p1 != 0) {
-            
-            log((void*) &INFO_LOG_LEVEL, "Destroy statics model: ");
-            log((void*) &INFO_LOG_LEVEL, p1);
-        
-            if (strcmp(p2, STATICS_COMPOUND) == 0) {
-        
-                finalize_statics_model(p0, p1);
-                destroy_statics_model_containers(p0);
-                free(p0);
-
-            } else if (strcmp(p2, TIME_PRIMITIVE) == 0) {
-        
-                finalize_time_model(p0, p1);
-                free(p0);
-                
-            } else if (strcmp(p2, STRING_PRIMITIVE) == 0) {
-        
-                finalize_string_model(p0, p1);
-                free(p0);
-        
-            } else if (strcmp(p2, VECTOR_PRIMITIVE) == 0) {
-        
-                finalize_vector_model(p0, p1);
-                free(p0);
-        
-            } else if (strcmp(p2, COMPLEX_PRIMITIVE) == 0) {
-        
-                finalize_complex_model(p0, p1);
-                free(p0);
-        
-            } else if (strcmp(p2, FRACTION_PRIMITIVE) == 0) {
-        
-                finalize_fraction_model(p0, p1);
-                free(p0);
-        
-            } else if (strcmp(p2, INTEGER_PRIMITIVE) == 0) {
-        
-                finalize_integer_model(p0, p1);
-                free(p0);
-        
-            } else if (strcmp(p2, BOOLEAN_PRIMITIVE) == 0) {
-        
-                finalize_boolean_model(p0, p1);
-                free(p0);
-            }
-        }
     }
 }
 

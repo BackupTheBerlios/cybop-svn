@@ -27,9 +27,9 @@
 
 #include <string.h>
 #include "array_handler.c"
+#include "dynamics_model.c"
 #include "map.c"
 #include "map_handler.c"
-#include "signal.c"
 #include "statics_model_handler.c"
 #include "vector.c"
 
@@ -43,7 +43,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-03 15:10:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -92,16 +92,6 @@ static const char* XML_LANGUAGE = "xml";
 static const char* SOAP_LANGUAGE = "soap";
 
 //
-// Attributes.
-//
-
-/** The statics. */
-static void* statics;
-
-/** The dynamics. */
-static void* dynamics;
-
-//
 // Signal memory.
 //
 
@@ -124,9 +114,6 @@ static void create_signal_memory(void* p0) {
         m->priorities = malloc(sizeof(struct array));
         initialize_array(m->priorities);
         
-        m->languages = malloc(sizeof(struct array));
-        initialize_array(m->languages);
-
     } else {
         
         log((void*) &ERROR_LOG_LEVEL, "Could not create signal memory. The signal memory is null.");
@@ -145,9 +132,6 @@ static void destroy_signal_memory(void* p0) {
     if (m != 0) {
         
         log((void*) &INFO_LOG_LEVEL, "Destroy signal memory.");
-
-        finalize_array(m->languages);
-        free(m->languages);
 
         finalize_array(m->priorities);
         free(m->priorities);
@@ -171,8 +155,8 @@ static void destroy_signal_memory(void* p0) {
  * @param p0 the signal memory
  * @param p1 the index
  * @param p2 the signal
- * @param p3 the priority
- * @param p4 the language
+ * @param p3 the abstraction
+ * @param p4 the priority
  */
 static void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
@@ -181,8 +165,8 @@ static void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
     if (m != 0) {
         
         set_array_element(m->signals, p1, p2);
-        set_array_element(m->priorities, p1, p3);
-        set_array_element(m->languages, p1, p4);
+        set_array_element(m->abstractions, p1, p3);
+        set_array_element(m->priorities, p1, p4);
 
     } else {
 
@@ -195,8 +179,8 @@ static void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
  *
  * @param p0 the signal memory
  * @param p1 the signal
- * @param p2 the priority
- * @param p3 the language
+ * @param p2 the abstraction
+ * @param p3 the priority
  */
 static void add_signal(void* p0, void* p1, void* p2, void* p3) {
 
@@ -226,8 +210,8 @@ static void remove_signal(void* p0, void* p1) {
     if (m != 0) {
 
         remove_array_element(m->signals, p1);
+        remove_array_element(m->abstractions, p1);
         remove_array_element(m->priorities, p1);
-        remove_array_element(m->languages, p1);
 
     } else {
 
@@ -236,7 +220,7 @@ static void remove_signal(void* p0, void* p1) {
 }
 
 /**
- * Returns the signal.
+ * Gets the signal.
  *
  * @param p0 the signal memory
  * @param p1 the index
@@ -260,7 +244,55 @@ static void* get_signal(void* p0, void* p1) {
 }
 
 /**
- * Returns the index of the signal with highest priority.
+ * Gets the abstraction.
+ *
+ * @param p0 the signal memory
+ * @param p1 the index
+ * @return the abstraction
+ */
+static void* get_abstraction(void* p0, void* p1) {
+
+    void* a = 0;
+    struct signal_memory* m = (struct signal_memory*) p0;
+
+    if (m != 0) {
+
+        a = get_array_element(m->abstractions, p1);
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not get abstraction. The signal memory is null.");
+    }
+    
+    return a;
+}
+
+/**
+ * Gets the priority.
+ *
+ * @param p0 the signal memory
+ * @param p1 the index
+ * @return the priority
+ */
+static void* get_priority(void* p0, void* p1) {
+
+    void* p = 0;
+    struct signal_memory* m = (struct signal_memory*) p0;
+
+    if (m != 0) {
+
+        p = get_array_element(m->priorities, p1);
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not get priority. The signal memory is null.");
+    }
+    
+    return p;
+}
+
+/**
+ * Gets the index of the signal with highest priority.
  *
  * @param p0 the signal memory
  */
@@ -294,306 +326,207 @@ static int get_highest_priority_index(void* p0) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get signal. The signal memory is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not get index of the signal with highest priority. The signal memory is null.");
     }
     
     return index;
 }
 
+//
+// Signal handling.
+//
+
 /**
- * Returns the language.
+ * Handles the compound signal.
  *
  * @param p0 the signal memory
- * @param p1 the index
- * @return the language
- */
-static void* get_language(void* p0, void* p1) {
-
-    void* l = 0;
-    struct signal_memory* m = (struct signal_memory*) p0;
-
-    if (m != 0) {
-
-        l = get_array_element(m->languages, p1);
-
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not get language. The signal memory is null.");
-    }
-    
-    return l;
-}
-
-/**
- * Resets the signal.
- *
- * @param p0 the signal
- */
-static void reset_signal(void* p0) {
-    
-    struct signal* s = (struct signal*) p0;
-    
-    if (s != 0) {
-
-        s->logics = 0;
-        s->input_0 = 0;
-        s->input_1 = 0;
-        s->output_0 = 0;
-        s->output_1 = 0;
-
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not reset signal. The signal is null.");
-    }
-}
-
-/**
- * Sends the signal.
- *
- * The signal will be stored in the signal memory for further handling.
- *
- * @param p0 the signal memory
- * @param p1 the signal
+ * @param p1 the compound signal
  * @param p2 the priority
- * @param p3 the language
  */
-static void send_signal(void* p0, void* p1, void* p2, void* p3) {
+static void handle_compound_signal(void* p0, void* p1, void* p2) {
 
-    struct signal* s = (struct signal*) p1;
+    log((void*) &INFO_LOG_LEVEL, "Handle compound signal:");
+
+    struct dynamics_model* m = (struct dynamics_model*) p1;
     
-    if (s != 0) {
-
-        // Only send a new signal (store in signal memory) if an action exists.
-        // Otherwise, the chain of signals/ actions finishes here, until a new
-        // hardware event (interrupt) occurs.
-        if (s->predicate != 0) {
-            
-            // Create signal for storage in signal memory.
-            struct signal* tmp = (struct signal*) malloc(sizeof(struct signal));
-    
-            if (tmp != 0) {
-            
-                log((void*) &INFO_LOG_LEVEL, "Send signal:");
-                log((void*) &INFO_LOG_LEVEL, s->predicate);
-
-                // Copy transporting signal given as parameter to the signal.
-                tmp->subject = s->subject;
-                tmp->predicate = s->predicate;
-                tmp->owner = s->owner;
-                tmp->sender = s->sender;
-                tmp->object = s->object;
-                tmp->adverbial = s->adverbial;
-                tmp->condition = s->condition;
-
-                // Caution! Adding of signals must be synchronized between:
-                // - send for adding internal CYBOP signals
-                // - JavaEventHandler.dispatchEvent for adding transformed java event signals
-                // These are the only procedures accessing the signal
-                // memory for adding signals.
-//??                synchronized (p0) {
-
-                    // Add signal to signal memory (interrupt vector table).
-                    add_signal(p0, (void*) tmp, p2, p3);
-//??                }
-
-            } else {
-    
-                log((void*) &ERROR_LOG_LEVEL, "Could not send signal. The signal is null.");
-            }
-
-        } else {
-            
-            // Do not log this as the loop runs infinite and would stuff the log record!
-            // The action is 0. No signal gets stored in the signal memory.
-        }
-
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not send signal. The signal is null.");
-    }
-}
-
-/**
- * Receives the signal.
- *
- * The JDK sends java.awt.AWTEvent events.
- * The EventHandler catches these events in the EventHandler.dispatchEvent method,
- * transforms them into CYBOP signals and stores them in the signal memory.
- *
- * This method:
- * - gets the top priority signal from the signal memory and removes it from there
- * - copies that signal to the transporting signal handed over as parameter
- *
- * The idea is that one day, signals (interrupts) might be read from the
- * interrupt vector table.
- * Currently, the operating system checks for changed flags on the computer,
- * to receive for example keyboard or mouse events.
- *
- * @param p0 the signal memory
- * @param p1 the signal
- */
-static void receive_signal(void* p0, void* p1) {
-
-    struct signal* s = (struct signal*) p1;
-    
-    if (s != 0) {
-        
-        int index = get_highest_priority_index(p0);
-        char* language = (char*) get_language(p0, (void*) &index);
-        struct signal* tmp = get_signal(p0, (void*) &index);
-        remove_signal(p0, (void*) &index);
-
-        if (tmp != 0) {
-        
-            log((void*) &INFO_LOG_LEVEL, "Receive signal:");
-            log((void*) &INFO_LOG_LEVEL, tmp->predicate);
-
-            // Copy signal to the transporting signal given as parameter.
-            s->subject = tmp->subject;
-            s->predicate = tmp->predicate;
-            s->owner = tmp->owner;
-            s->sender = tmp->sender;
-            s->object = tmp->object;
-            s->adverbial = tmp->adverbial;
-            s->condition = tmp->condition;
-
-            // Destroy signal.
-            free(tmp);
-    
-        } else {
-
-            // No signal was received.
-            // Do not log this as the loop runs infinite and would stuff the log record.
-        }
-
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not receive signal. The signal is null.");
-    }
-}
-
-/**
- * Handles the signal.
- *
- * @param p0 the signal memory
- * @param p1 the signal as dynamics model
- * @param p2 the abstraction
- * @param p3 the priority
- * @param p4 the shutdown flag
- */
-static void handle_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    struct dynamics_model* m = (dynamics_model) p1;
-    char* a = (char*) p2;
-
     if (m != null) {
 
-        log((void*) &INFO_LOG_LEVEL, "Handle signal:");
-        log((void*) &INFO_LOG_LEVEL, l);
+        int count = get_array_count(m->parts);
+        int pos = 0;
+        int i = 0;
+        void* abstr = 0;
+        void* part = 0;
 
-        if (strcmp(a, COMPOUND) == 0) {
-
-            int count = get_array_count(m->parts);
-            int pos = 0;
-            int i = 0;
-            void* abstr = 0;
-            void* part = 0;
-
-            // All positions.
-            while (pos < count) {
+        // All positions.
+        while (pos < count) {
+            
+            // All parts.
+            while (i < count) {
                 
-                // All parts.
-                while (i < count) {
-                    
-                    // All parts at the current position.
-                    if (get_map_element_at_index(m->positions, i) == pos) {
+                // All parts at the current position.
+                if (get_map_element_at_index(m->positions, i) == pos) {
 
-                        // Determine abstraction.
-                        abstr = get_map_element_at_index(m->abstractions, i);
+                    // Determine part signal as dynamics model.
+                    part = get_map_element_at_index(m->parts, i);
+                
+                    // Determine abstraction.
+                    abstr = get_map_element_at_index(m->abstractions, i);
 
-                        // Determine part signal as dynamics model.
-                        part = get_map_element_at_index(m->parts, i);
-                    
+                    // Caution! Adding of signals must be synchronized between:
+                    // - internal CYBOI signals added here
+                    // - hardware interrupt signals sent from the operating system
+                    // These are the only two accessing the signal memory for adding.
+//??                    synchronized (p0) {
+    
                         // Add "part" signal to signal memory,
                         // using the "whole" signal's priority.
                         // (Each signal/action has a priority.
                         // An action may consist of "part" actions.
                         // The "part" actions cannot have higher/lower priority
                         // than their original "whole" action.)
-                        add_signal(p0, part, abstr, p3);
-                    }
-                    
-                    i++;
+                        add_signal(p0, part, abstr, p2);
+//??                    }
                 }
                 
-                pos++;
+                i++;
             }
-
-        } else if (strcmp(a, CREATE_OPERATION) == 0) {
-
-            statics = create_statics_model(s->object, (void*) COMPLEX_STATICS_MODEL);
-
-        } else if (strcmp(a, STARTUP_OPERATION) == 0) {
-
-            statics = create_statics_model(s->object, (void*) COMPLEX_STATICS_MODEL);
-            dynamics = create_statics_model(s->object, (void*) COMPLEX_STATICS_MODEL);
-        
-            show_character_screen(statics);
-
-        } else if (strcmp(a, SHUTDOWN_OPERATION) == 0) {
-
-            hide(??);
-            destroy_statics_model(statics, s->object, (void*) COMPLEX_STATICS_MODEL);
-
-            // Set shutdown flag.
-            int* sf = (int*) p4;
-            *sf = 1;
-
-        } else {
-
-            // Determine the input/output memory models from hierarchical model names,
-            // for example: "system_information_screen.panel.version_label"
-            void* ip0 = get_statics_model_part(statics, m->input_0);
-            void* ip1 = get_statics_model_part(statics, m->input_1);
-            void* op0 = get_statics_model_part(statics, m->output_0);
-            void* op1 = get_statics_model_part(statics, m->output_1);
-
-            // Dereference function pointer and hand over input, output, shutdown flag.
-            (*(m->logics))(ip0, ip1, op0, op1);
+            
+            pos++;
         }
 
-/*??
-        //?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
-        if (strcmp(l, "mouse_moved") == 0) {
-    
-            Model statics = statics;
-            
-            set_model_element(statics, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
-            set_model_element(statics, "mouse.pointer_position.x_distance.unit", "pixel");
-            set_model_element(statics, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
-            set_model_element(statics, "mouse.pointer_position.y_distance.unit", "pixel");
-    
-        } else if (strcmp(l, "mouse_clicked") == 0) {
-    
-            void* main_frame = get_statics_model_part(statics, (void*) "main_frame");
-            struct vector* pointer_position = get_statics_model_part(statics, (void*) "mouse.pointer_position");
-            
-            reset_signal(s);
-    
-            if (pointer_position != 0) {
-             
-//??            mouse_clicked_action(main_frame, (void*) pointer_position->x, (void*) pointer_position->y, (void*) pointer_position->z, s->predicate);
-                
-            } else {
-                
-                log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is null.");
-            }
-        }
-*/
-        
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not handle signal. The signal dynamics model is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not handle compound signal. The signal dynamics model is null.");
+    }
+}
+
+/**
+ * Handles the operation signal.
+ *
+ * @param p0 the operation signal
+ * @param p1 the abstraction
+ * @param p2 the statics
+ * @param p3 the dynamics
+ * @param p4 the shutdown flag
+ */
+static void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    log((void*) &INFO_LOG_LEVEL, "Handle operation signal:");
+    log((void*) &INFO_LOG_LEVEL, l);
+
+    struct operation* o = (struct operation*) p0;
+    
+    if (o != null) {
+
+        char* a = (char*) p1;
+        void* io = o->inputs_outputs;
+    
+        if (io != 0) {
+    
+            if (strcmp(a, ADD_OPERATION) == 0) {
+                
+                // Dereference function pointer and hand over inputs and outputs.
+                add(get_map_element_with_name(io, "summand_0"), get_map_element_with_name(io, "summand_1"), get_map_element_with_name(io, "sum"));
+
+            } else if (strcmp(a, CREATE_STATICS_OPERATION) == 0) {
+        
+                struct statics_model* s = (struct statics_model*) p2;
+                
+                if (s != null) {
+                        
+                    m = create_statics_model(get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
+                    set_map_element_with_name(s->parts, get_map_element_with_name(io, "name"), m);
+        
+                } else {
+            
+                    log((void*) &ERROR_LOG_LEVEL, "Could not handle create statics operation signal. The statics is null.");
+                }
+
+            } else if (strcmp(a, DESTROY_STATICS_OPERATION) == 0) {
+        
+                struct statics_model* s = (struct statics_model*) p2;
+                
+                if (s != null) {
+                        
+                    m = get_map_element_with_name(s->parts, get_map_element_with_name(io, "name"));
+                    destroy_statics_model(m, get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
+        
+                } else {
+            
+                    log((void*) &ERROR_LOG_LEVEL, "Could not handle destroy statics operation signal. The statics is null.");
+                }
+
+            } else if (strcmp(a, CREATE_DYNAMICS_OPERATION) == 0) {
+        
+                struct dynamics_model* d = (struct dynamics_model*) p3;
+                
+                if (d != null) {
+                        
+                    void* m = create_dynamics_model(get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
+                    set_map_element_with_name(d->parts, get_map_element_with_name(io, "name"), m);
+        
+                } else {
+            
+                    log((void*) &ERROR_LOG_LEVEL, "Could not handle create dynamics operation signal. The dynamics is null.");
+                }
+
+            } else if (strcmp(a, DESTROY_DYNAMICS_OPERATION) == 0) {
+        
+                struct dynamics_model* d = (struct dynamics_model*) p3;
+                
+                if (d != null) {
+                        
+                    void* m = get_map_element_with_name(d->parts, get_map_element_with_name(io, "name"));
+                    destroy_dynamics_model(m, get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
+        
+                } else {
+            
+                    log((void*) &ERROR_LOG_LEVEL, "Could not handle destroy dynamics operation signal. The dynamics is null.");
+                }
+
+            } else if (strcmp(a, EXIT_OPERATION) == 0) {
+        
+                // Set shutdown flag.
+                int* f = (int*) p4;
+                *f = 1;
+            }
+
+/*??
+            //?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
+            if (strcmp(l, "mouse_moved") == 0) {
+        
+                Model statics = statics;
+                
+                set_model_element(statics, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
+                set_model_element(statics, "mouse.pointer_position.x_distance.unit", "pixel");
+                set_model_element(statics, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
+                set_model_element(statics, "mouse.pointer_position.y_distance.unit", "pixel");
+        
+            } else if (strcmp(l, "mouse_clicked") == 0) {
+        
+                void* main_frame = get_statics_model_part(statics, (void*) "main_frame");
+                struct vector* pointer_position = get_statics_model_part(statics, (void*) "mouse.pointer_position");
+                
+                reset_signal(s);
+        
+                if (pointer_position != 0) {
+                 
+    //??            mouse_clicked_action(main_frame, (void*) pointer_position->x, (void*) pointer_position->y, (void*) pointer_position->z, s->predicate);
+                    
+                } else {
+                    
+                    log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is null.");
+                }
+            }
+*/
+        } else {
+    
+            log((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The inputs/outputs is null.");
+        }
+    
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The signal dynamics model is null.");
     }
 }
 

@@ -39,7 +39,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-03 15:10:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,8 +48,8 @@
  */
 static void show_usage_information() {
 
-    show_message("Usage: cyboi dynamics statics");
-    show_message("Example: cyboi application.dynamics.startup application.statics.system");
+    show_message("Usage: cyboi signal");
+    show_message("Example: cyboi cybop.sample.hello_world.dynamics.startup");
 }
 
 /**
@@ -62,38 +62,36 @@ static void show_usage_information() {
  * - reset
  *
  * @param p0 the signal memory
+ * @param p1 the statics
+ * @param p2 the dynamics
  */
-static void wait(void* p0) {
+static void wait(void* p0, void* p1, void* p2) {
 
-    // The shutdown flag.
-    int* sf = (int*) malloc(sizeof(int));
-    *sf = 0;
-
-    // Transporting signal.
-    void* s = malloc(sizeof(struct signal));
-
-    // Priority.
-    void* p = 0;
+    // Create shutdown flag and initialize to false.
+    int* f = (int*) malloc(sizeof(int));
+    *f = 0;
     
-    // Language.
-    void* l = 0;
-    
-    // Run endless loop handling any signals.
+    // Run endless loop handling signals.
     while (TRUE_VALUE) {
 
-        if (*sf != 1) {
+        if (*f != 1) {
 
-            // Receive signal.
-            receive_signal(p0, s);
+            // Get top priority signal from signal memory and remove it from there.
+            int i = get_highest_priority_index(p0);
+            void* s = get_signal(p0, (void*) &i);
+            char* a = (char*) get_abstraction(p0, (void*) &i);
+            void* p = get_priority(p0, (void*) &i);
+            remove_signal(p0, (void*) &i);
 
             // Handle signal.
-            handle_signal(s, (void*) &FALSE_VALUE, sf);
-
-            // Send signal.
-            send_signal(p0, s, (void*) &NORMAL_PRIORITY, (void*) &INTERNAL_LANGUAGE);
-
-            // Reset signal.
-            reset_signal(s);
+            if (strcmp(a, DYNAMICS_COMPOUND) == 0) {
+                
+                handle_compound_signal(p0, s, p);
+        
+            } else {
+        
+                handle_operation_signal(s, a, p1, p2, f);
+            }
 
         } else {
 
@@ -102,8 +100,7 @@ static void wait(void* p0) {
         }
     }
 
-    free(s);
-    free(sf);
+    free(f);
 }
 
 /**
@@ -126,56 +123,65 @@ int main(int p0, char** p1) {
     // Return 1 to indicate an error, by default.
     int r = 1;
 
-    // Log handler.
+    // Log level as static (global) variable.
     log_level = (void*) &INFO_LOG_LEVEL;
 
     if (p1 != 0) {
 
-        if ((p0 == 3) && (p1[1] != 0) && (p1[2] != 0)) {
+        if (p0 == 2) {
 
-            // Signal memory (signal queue).
-            void* signal_memory = malloc(sizeof(struct map));
-            initialize_map(signal_memory);
+            // Create statics.
+            void* s = malloc(sizeof(struct statics_model));
+            create_statics_model_containers(s);
+            
+            // Create dynamics.
+            void* d = malloc(sizeof(struct dynamics_model));
+            create_dynamics_model_containers(d);
+            
+            // Create signal memory.
+            void* sm = malloc(sizeof(struct map));
+            initialize_map(sm);
 
-            // Create signal for storage in signal memory.
-            // It will get destroyed (freed) when received by signal handler.
-            struct signal* tmp = (struct signal*) malloc(sizeof(struct signal));
+            // Create startup signal.
+            void* ss = create_dynamics_model((void*) p1[1], (void*) DYNAMICS_COMPOUND);
 
-            if (tmp != 0) {
+            // Add startup signal to signal memory.
+            // Caution! Adding of signals must be synchronized between:
+            // - internal CYBOI signals added here
+            // - hardware interrupt signals sent from the operating system
+            // These are the only two accessing the signal memory for adding.
+//??            synchronized (p0) {
 
-                log((void*) &INFO_LOG_LEVEL, "Send signal: ");
-                log((void*) &INFO_LOG_LEVEL, p1[1]);
-
-                // Set signal elements.
-                tmp->logics = (void*) p1[1];
-                tmp->input_0 = (void*) p1[2];
-
-                // Caution! Adding of signals must be synchronized between:
-                // - send for adding internal CYBOP signals
-                // - system signals catched by C library functions
-                // These are the only procedures accessing the signal
-                // memory for adding signals.
-//??                synchronized (signal_memory) {
-
-                    // Add signal to signal memory (interrupt vector table).
-                    add_signal(signal_memory, (void*) tmp, (void*) &NORMAL_PRIORITY, (void*) INTERNAL_LANGUAGE);
-//??                }
-
-            } else {
-
-                log((void*) &ERROR_LOG_LEVEL, "Could not send initial signal. The signal is null.");
-            }
+                // Add "part" signal to signal memory,
+                // using the "whole" signal's priority.
+                // (Each signal/action has a priority.
+                // An action may consist of "part" actions.
+                // The "part" actions cannot have higher/lower priority
+                // than their original "whole" action.)
+                add_signal(sm, ss, (void*) DYNAMICS_COMPOUND, (void*) NORMAL_PRIORITY);
+//??            }
 
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)
             // which are stored/ found in the signal memory.
-            wait(signal_memory);
+            wait(sm, s, d);
             // The loop above is left as soon as its shutdown flag is set.
 
-            // Signal memory (signal queue).
-            finalize_map(signal_memory);
-            free(signal_memory);
+            // Destroy startup signal.
+            destroy_dynamics_model(ss, (void*) p1[1], (void*) DYNAMICS_COMPOUND);
 
+            // Destroy signal memory.
+            finalize_map(sm);
+            free(sm);
+
+            // Destroy dynamics.
+            destroy_dynamics_model_containers(d);
+            free(d);
+            
+            // Destroy statics.
+            destroy_statics_model_containers(s);
+            free(s);
+            
             log((void*) &INFO_LOG_LEVEL, "Exit CYBOI normally.");
 
             // Return 0 to indicate proper shutdown.
@@ -183,13 +189,13 @@ int main(int p0, char** p1) {
 
         } else {
 
-            log((void*) &ERROR_LOG_LEVEL, "Could not execute CYBOI. The command line parameters are incorrect.");
+            log((void*) &ERROR_LOG_LEVEL, "Could not execute CYBOI. The command line argument number is incorrect.");
             show_usage_information();
         }
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not execute CYBOI. The argument vector is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not execute CYBOI. The command line argument vector is null.");
     }
 
     return r;
