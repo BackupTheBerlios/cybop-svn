@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.5 $ $Date: 2004-06-20 22:10:23 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-07-02 20:51:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -116,6 +116,36 @@ void destroy_operation(void* p0, const void* p1) {
     // Destroy operation.
     destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT);
 }
+
+//
+// Forward declarations.
+//
+// These are needed for the operation to be able to create/ destroy string models.
+//
+
+/**
+ * Creates a transient model.
+ *
+ * @param p0 the transient model
+ * @param p1 the transient model count
+ * @param p2 the transient model size
+ * @param p3 the abstraction
+ * @param p4 the abstraction count
+ */
+void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4);
+
+/**
+ * Initializes a transient model from a persistent model.
+ *
+ * @param p0 the transient model
+ * @param p1 the transient model count
+ * @param p2 the transient model size
+ * @param p3 the persistent model
+ * @param p4 the persistent model count
+ * @param p5 the abstraction
+ * @param p6 the abstraction count
+ */
+void initialize_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, const void* p5, const void* p6);
 
 /**
  * Initializes the operation.
@@ -213,13 +243,18 @@ void initialize_operation(void* p0, void* p1, void* p2, const void* p3, const vo
                                     int tpc = 0;
                                     int tps = 0;
 
+                                    // Create transient parameter
+                                    // and its count and size.
+                                    create_model((void*) &tp, (void*) &tpc, (void*) &tps,
+                                        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+
     fprintf(stderr, "initop tp before: %s\n", tp);
     fprintf(stderr, "initop tpc before: %i\n", tpc);
     fprintf(stderr, "initop tps before: %i\n", tps);
 
-                                    // Create transient parameter
+                                    // Initialize transient parameter
                                     // and its count and size.
-                                    interpret_model((void*) &tp, (void*) &tpc, (void*) &tps,
+                                    initialize_model((void*) &tp, (void*) &tpc, (void*) &tps,
                                         p3, (void*) &count,
                                         (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
 

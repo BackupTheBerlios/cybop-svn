@@ -23,7 +23,7 @@
  *
  * This file handles a file.
  *
- * @version $Revision: 1.11 $ $Date: 2004-06-23 21:48:10 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-07-02 20:51:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,200 +36,7 @@
 #include "../logger/logger.c"
 
 /**
- * Reads the file into the array.
- *
- * @param p0 the array
- * @param p1 the array size
- * @param p2 the array count
- * @param p3 the file name
- * @param p4 the file name count
- */
-/*??
-void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
-
-    if (p4 != NULL_POINTER) {
-
-        int* fnc = (int*) p4;
-
-        if (p2 != NULL_POINTER) {
-
-            int* ac = (int*) p2;
-
-            if (p1 != NULL_POINTER) {
-
-                int* as = (int*) p1;
-
-                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Read file.");
-
-                // The file name.
-                void* n = NULL_POINTER;
-                // The new file name count.
-                int nc = *fnc + 1;
-                // The index for the original file name.
-                int oi = 0;
-
-                // Create temporary file name with extended size
-                // for string termination character.
-                create_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
-                // Add original file name.
-                set_array_elements((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &oi, p3, p4);
-                // Add string termination character using file name count as index.
-                set_array_element((void*) &n, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CHARACTER);
-
-                FILE* f = fopen((char*) n, "r");
-
-                if (f != NULL_POINTER) {
-
-                    char c = fgetc(f);
-                    int j = 0;
-
-                    while (1) {
-
-                        if (c == EOF) {
-
-                            break;
-                        }
-
-                        if (j >= *as) {
-
-                            *as = *as * 2 + 1;
-                            resize_array(p0, (void*) &CHARACTER_ARRAY, p1);
-                        }
-
-                        set_array_element(p0, (void*) &CHARACTER_ARRAY, (void*) &j, (void*) &c);
-
-                        c = fgetc(f);
-                        j++;
-                    }
-
-                    // Set array count to last valid index incremented by one.
-                    *ac = j;
-
-                    fclose(f);
-
-                } else {
-
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The file is null.");
-                }
-
-                // Destroy temporary file name.
-                destroy_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The array size is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The array count is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The file name count is null.");
-    }
-}
-*/
-
-/**
- * Writes the array into the file.
- *
- * @param p0 the array
- * @param p1 the array size
- * @param p2 the array count
- * @param p3 the file name
- * @param p4 the file name count
- */
-/*??
-void write_file(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
-
-    if (p4 != NULL_POINTER) {
-
-        int* fnc = (int*) p4;
-
-        if (p2 != NULL_POINTER) {
-
-            int* ac = (int*) p2;
-
-            if (p1 != NULL_POINTER) {
-
-                int* as = (int*) p1;
-
-                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Write file.");
-
-                // The file name.
-                void* n = NULL_POINTER;
-                // The new file name count.
-                int nc = *fnc + 1;
-                // The index for the original file name.
-                int oi = 0;
-
-                // Create temporary file name with extended size
-                // for string termination character.
-                create_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
-                // Add original file name.
-                set_array_elements((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &oi, p3, p4);
-                // Add string termination character using file name count as index.
-                set_array_element((void*) &n, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CHARACTER);
-
-                FILE* f = fopen((char*) n, "w");
-
-                if (f != NULL_POINTER) {
-
-                    char r = NULL_CHARACTER;
-                    int j = 0;
-                    char c = NULL_CHARACTER;
-
-                    while (1) {
-
-                        if (j >= *as) {
-
-                            break;
-                        }
-
-                        if (r == EOF) {
-
-                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. A write error occured.");
-
-                            break;
-                        }
-
-                        get_array_element(p0, (void*) &CHARACTER_ARRAY, (void*) &j, (void*) &c);
-
-                        r = fputc(c, f);
-                        j++;
-                    }
-
-                    fclose(f);
-
-                } else {
-
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. The file is null.");
-                }
-
-                // Destroy temporary file name.
-                destroy_array((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &nc);
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. The array size is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. The array count is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. The file name count is null.");
-    }
-}
-*/
-
-/**
- * Reads inline.
+ * Reads inline stream into array.
  *
  * @param p0 the array
  * @param p1 the array count
@@ -282,7 +89,7 @@ void read_inline(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /**
- * Writes inline.
+ * Writes inline stream from array.
  *
  * @param p0 the array
  * @param p1 the array count
@@ -294,7 +101,7 @@ void write_inline(const void* p0, const void* p1, const void* p2, void* p3, void
 }
 
 /**
- * Reads file.
+ * Reads file stream into array.
  *
  * @param p0 the array
  * @param p1 the array count
@@ -417,7 +224,7 @@ void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /**
- * Writes file.
+ * Writes file stream from array.
  *
  * @param p0 the array
  * @param p1 the array count
@@ -426,10 +233,36 @@ void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
  * @param p4 the file name count
  */
 void write_file(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
+
+/*??
+    char r = NULL_CHARACTER;
+    int j = 0;
+    char c = NULL_CHARACTER;
+
+    while (1) {
+
+        if (j >= *as) {
+
+            break;
+        }
+
+        if (r == EOF) {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. A write error occured.");
+
+            break;
+        }
+
+        get_array_element(p0, (void*) &CHARACTER_ARRAY, (void*) &j, (void*) &c);
+
+        r = fputc(c, f);
+        j++;
+    }
+*/
 }
 
 /**
- * Reads ftp.
+ * Reads ftp stream into array.
  *
  * @param p0 the array
  * @param p1 the array count
@@ -443,7 +276,7 @@ void read_ftp(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /**
- * Writes ftp.
+ * Writes ftp stream from array.
  *
  * @param p0 the array
  * @param p1 the array count
@@ -457,7 +290,7 @@ void write_ftp(const void* p0, const void* p1, const void* p2, const void* p3, c
 }
 
 /**
- * Reads http.
+ * Reads http stream into array.
  *
  * @param p0 the array
  * @param p1 the array count
@@ -469,7 +302,7 @@ void read_http(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /**
- * Writes http.
+ * Writes http stream from array.
  *
  * @param p0 the array
  * @param p1 the array count

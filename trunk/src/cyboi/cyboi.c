@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.24 $ $Date: 2004-06-30 23:32:28 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2004-07-02 20:51:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -463,15 +463,34 @@ int main(int p0, char** p1) {
             int tpmc = 0;
             int tpms = 0;
 
-            // Create transient part abstraction, model
-            // and their counts and sizes.
-            interpret_model((void*) &tpa, (void*) &tpac, (void*) &tpas,
+            // Create transient part abstraction, model and their counts and sizes.
+            create_model((void*) &tpa, (void*) &tpac, (void*) &tpas,
+                (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+            create_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
+                (void*) &ppa, (void*) &ppac);
+
+            // Initialize part model buffer and its count and size.
+            void* pmb = NULL_POINTER;
+            int pmbc = 0;
+            int pmbs = 0;
+
+            // Create part model buffer of type character to read single bytes.
+            create_array((void*) &pmb, (void*) &CHARACTER_ARRAY, (void*) &pmbs);
+
+            // Read persistent model from location into part model buffer.
+            read_model((void*) &pmb, (void*) &pmbc, (void*) &pmbs,
+                (void*) &ppm, (void*) &ppmc, (void*) &ppl, (void*) &pplc);
+
+            // Initialize transient part abstraction, model, and their counts and sizes.
+            initialize_model((void*) &tpa, (void*) &tpac, (void*) &tpas,
                 (void*) &ppa, (void*) &ppac,
                 (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-            interpret_located_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
-                (void*) &ppa, (void*) &ppac,
-                (void*) &ppl, (void*) &pplc,
-                (void*) &ppm, (void*) &ppmc);
+            initialize_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
+                (void*) &pmb, (void*) &pmbc,
+                (void*) &ppa, (void*) &ppac);
+
+            // Destroy part model buffer.
+            destroy_array((void*) &pmb, (void*) &CHARACTER_ARRAY, (void*) &pmbs);
 
             //
             // Startup signal.

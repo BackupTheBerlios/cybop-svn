@@ -32,7 +32,7 @@
  * A signal is a transient logic model.
  * It is stored in the computer's random access memory (ram).
  *
- * @version $Revision: 1.31 $ $Date: 2004-07-01 11:00:41 $ $Author: christian $
+ * @version $Revision: 1.32 $ $Date: 2004-07-02 20:51:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -796,29 +796,71 @@ void handle_create_model_signal(const void* p0,
                         // part abstraction, model, constraint,
                         // position abstraction, model, constraint,
                         // and their counts and sizes.
-                        interpret_model((void*) &tpn, (void*) &tpnc, (void*) &tpns,
+                        create_model((void*) &tpn, (void*) &tpnc, (void*) &tpns,
+                            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+                        create_model((void*) &tpa, (void*) &tpac, (void*) &tpas,
+                            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+                        create_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
+                            (void*) &ppa, (void*) &ppac);
+                        create_model((void*) &tpc, (void*) &tpcc, (void*) &tpcs,
+                            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+                        create_model((void*) &tpoa, (void*) &tpoac, (void*) &tpoas,
+                            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+                        create_model((void*) &tpom, (void*) &tpomc, (void*) &tpoms,
+                            (void*) &ppoa, (void*) &ppoac);
+                        create_model((void*) &tpoc, (void*) &tpocc, (void*) &tpocs,
+                            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+
+                        // Initialize part model- and position model buffer
+                        // and their counts and sizes.
+                        void* pmb = NULL_POINTER;
+                        int pmbc = 0;
+                        int pmbs = 0;
+                        void* pomb = NULL_POINTER;
+                        int pombc = 0;
+                        int pombs = 0;
+
+                        // Create part model- and position model buffer
+                        // of type character to read single bytes.
+                        create_array((void*) &pmb, (void*) &CHARACTER_ARRAY, (void*) &pmbs);
+                        create_array((void*) &pomb, (void*) &CHARACTER_ARRAY, (void*) &pombs);
+
+                        // Read persistent model from location into
+                        // part model- and position model buffer.
+                        read_model((void*) &pmb, (void*) &pmbc, (void*) &pmbs,
+                            (void*) &ppm, (void*) &ppmc, (void*) &ppl, (void*) &pplc);
+                        read_model((void*) &pomb, (void*) &pombc, (void*) &pombs,
+                            (void*) &ppom, (void*) &ppomc, (void*) &ppol, (void*) &ppolc);
+
+                        // Initialize transient part name,
+                        // part abstraction, model, constraint,
+                        // position abstraction, model, constraint,
+                        // and their counts and sizes.
+                        initialize_model((void*) &tpn, (void*) &tpnc, (void*) &tpns,
                             (void*) &ppn, (void*) &ppnc,
                             (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-                        interpret_model((void*) &tpa, (void*) &tpac, (void*) &tpas,
+                        initialize_model((void*) &tpa, (void*) &tpac, (void*) &tpas,
                             (void*) &ppa, (void*) &ppac,
                             (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-                        interpret_located_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
-                            (void*) &ppa, (void*) &ppac,
-                            (void*) &ppl, (void*) &pplc,
-                            (void*) &ppm, (void*) &ppmc);
-                        interpret_model((void*) &tpc, (void*) &tpcc, (void*) &tpcs,
+                        initialize_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
+                            (void*) &pmb, (void*) &pmbc,
+                            (void*) &ppa, (void*) &ppac);
+                        initialize_model((void*) &tpc, (void*) &tpcc, (void*) &tpcs,
                             (void*) &ppc, (void*) &ppcc,
                             (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-                        interpret_model((void*) &tpoa, (void*) &tpoac, (void*) &tpoas,
+                        initialize_model((void*) &tpoa, (void*) &tpoac, (void*) &tpoas,
                             (void*) &ppoa, (void*) &ppoac,
                             (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-                        interpret_located_model((void*) &tpom, (void*) &tpomc, (void*) &tpoms,
-                            (void*) &ppoa, (void*) &ppoac,
-                            (void*) &ppol, (void*) &ppolc,
-                            (void*) &ppom, (void*) &ppomc);
-                        interpret_model((void*) &tpoc, (void*) &tpocc, (void*) &tpocs,
+                        initialize_model((void*) &tpom, (void*) &tpomc, (void*) &tpoms,
+                            (void*) &pomb, (void*) &pombc,
+                            (void*) &ppoa, (void*) &ppoac);
+                        initialize_model((void*) &tpoc, (void*) &tpocc, (void*) &tpocs,
                             (void*) &ppoc, (void*) &ppocc,
                             (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+
+                        // Destroy part model- and position model buffer.
+                        destroy_array((void*) &pmb, (void*) &CHARACTER_ARRAY, (void*) &pmbs);
+                        destroy_array((void*) &pomb, (void*) &CHARACTER_ARRAY, (void*) &pombs);
 
                         //?? If "add", then first check if name exists in whole;
                         //?? if yes, add "_0" or "_1" or "_2" etc.

@@ -64,7 +64,7 @@
  * A compound model can be created by cloning an existing model template so that
  * some space gets allocated in the computer's memory.
  *
- * @version $Revision: 1.4 $ $Date: 2004-06-14 23:56:29 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-07-02 20:51:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -311,6 +311,7 @@ void destroy_compound(void* p0, const void* p1) {
  * @param p7 the persistent model
  * @param p8 the persistent model count
  */
+/*??
 void create_model(void* p0, void* p1, void* p2,
     const void* p3, const void* p4,
     const void* p5, const void* p6,
@@ -338,6 +339,7 @@ void create_model(void* p0, void* p1, void* p2,
  * @param p16 the persistent position model
  * @param p17 the persistent position model count
  */
+/*??
 void destroy_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     const void* p6, const void* p7, const void* p8, const void* p9, const void* p10, const void* p11,
     const void* p12, const void* p13, const void* p14, const void* p15, const void* p16, const void* p17);
