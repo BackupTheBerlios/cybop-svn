@@ -29,78 +29,45 @@ package cyboi;
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.8 $ $Date: 2003-07-25 23:47:57 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-07-29 22:38:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ArrayHandler {
 
     //
-    // Array management.
+    // Array.
     //
 
     /**
-     * Creates an empty array.
-     *
-     * @return the array
-     */
-    static java.lang.Object[] create_array() {
-
-        return new java.lang.Object[0];
-    }
-
-    /**
-     * Creates an array with the size.
-     *
-     * @param s the size
-     * @return the array
-     */
-    static java.lang.Object[] create_array(int s) {
-
-        return new java.lang.Object[s];
-    }
-
-    /**
-     * Creates an extended array with double length of the old array.
+     * Extends the array by doubling its length.
      *
      * All elements are copied from the old to the new array.
      *
-     * @param c the array
-     * @return the extended array
+     * @param p0 the array
      */
-    static java.lang.Object[] create_array(java.lang.Object[] c) {
+    static void extend_array(java.lang.Object[] p0) {
 
-        java.lang.Object[] ac = null;
+        if (p0 != null) {
 
-        if (c != null) {
-
-            int old_length = c.length;
+            int old_length = p0.length;
             int new_length = old_length * 2 + 1;
-            ac = ArrayHandler.create_array(new_length);
+            a = new java.lang.Object[new_length];
             int i = 0;
 
             while (i < old_length) {
 
-                ac[i] = c[i];
+                a[i] = p0[i];
 
                 i++;
             }
 
-            ArrayHandler.destroy_array(c);
+            p0 = null;
+            p0 = a;
 
         } else {
 
-            System.out.println("ERROR: Could not create array. The old array is null.");
+            System.out.println("ERROR: Could not extend array. The array is null.");
         }
-
-        return ac;
-    }
-
-    /**
-     * Destroys the array.
-     *
-     * @param c the array
-     */
-    static void destroy_array(java.lang.Object[] c) {
     }
 
     /**
@@ -182,7 +149,7 @@ class ArrayHandler {
             // with extended length is created and delivered back.
             if (i >= c.length) {
 
-                ac = ArrayHandler.create_array(c);
+                ac = ArrayHandler.extend_array(c);
                 ArrayHandler.destroy_array(c);
 
             } else {

@@ -30,7 +30,7 @@ package cyboi;
  * It is necessary only as long as the Cybernetics Oriented Interpreter (CYBOI)
  * is implemented in the Java programming language.
  *
- * @version $Revision: 1.1 $ $Date: 2003-07-25 23:47:57 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-07-29 22:38:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaObjectHandler {
@@ -49,28 +49,26 @@ class JavaObjectHandler {
     static java.lang.String HEIGHT = "height";
 
     //
-    // Java object management.
+    // Creation.
     //
 
     /**
      * Creates a java object.
      *
-     * @param c the category
-     * @return the java object
+     * @param p0 the java object
+     * @param p1 the category
      */
-    static java.lang.Object create_java_object(java.lang.Object c) throws java.lang.Exception {
+    static void create_java_object(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
-        java.lang.Object o = null;
-        
-        if (c != null) {
+        if (p1 != null) {
 
             // Find class by name.
-            java.lang.Class cl = java.lang.Class.forName((java.lang.String) c);
+            java.lang.Class cl = java.lang.Class.forName((java.lang.String) p1);
 
             if (cl != null) {
 
                 // Create java object from class.
-                o = cl.newInstance();
+                p0 = cl.newInstance();
 
             } else {
 
@@ -81,8 +79,6 @@ class JavaObjectHandler {
 
             java.lang.System.out.println("ERROR: Could not create java object. The category is null.");
         }
-
-        return o;
     }
 
     /**
@@ -91,9 +87,40 @@ class JavaObjectHandler {
      * This procedure is actually superfluous as the Java Garbage Collector cleans
      * up (destroys) all unused java objects automatically, at an arbitrary time.
      *
-     * @param o the java object
+     * @param p0 the java object
+     * @param p1 the category
      */
-    static void destroy_java_object(java.lang.Object o) {
+    static void destroy_java_object(java.lang.Object p0, java.lang.Object p1) {
+    }
+
+    //
+    // Initialization.
+    //
+    
+    /**
+     * Initializes the java object.
+     *
+     * @param p0 the java object
+     * @param p1 the attributes map
+     */
+    static void initialize_java_object(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
+
+        if (p0 != null) {
+
+            java.lang.System.out.println("INFO: Initialize java object.");
+            
+            if (p0 instanceof javax.swing.JFrame) {
+                    
+                java.lang.String width = (java.lang.String) CategoryHandler.read_attribute(p1, JavaObjectHandler.WIDTH);
+                java.lang.String height = (java.lang.String) CategoryHandler.read_attribute(p1, JavaObjectHandler.HEIGHT);
+                ((javax.swing.JFrame) p0).setSize(java.lang.Integer.parseInt(width), java.lang.Integer.parseInt(height));
+                ((javax.swing.JFrame) p0).setVisible(true);
+            }
+
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not initialize java object. The java object is null.");
+        }
     }
 }
 

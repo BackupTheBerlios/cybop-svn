@@ -29,64 +29,57 @@ package cyboi;
  *
  * Map elements are accessed over their index or name.
  *
- * @version $Revision: 1.11 $ $Date: 2003-07-25 23:47:57 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-07-29 22:38:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class MapHandler {
 
     //
-    // Map management.
+    // Map.
     //
 
     /**
-     * Creates a map.
+     * Initializes the map.
      *
-     * @return the map
+     * @param p0 the map
      */
-    static java.lang.Object create_map() {
+    static void initialize_map(java.lang.Object p0) {
 
-        Map mc = new Map();
+        Map m = (Map) p0;
 
-        if (mc != null) {
+        if (m != null) {
 
-            mc.names = ArrayHandler.create_array();
-            mc.references = ArrayHandler.create_array();
+            m.names = new java.lang.Object[0];
+            m.references = new java.lang.Object[0];
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not create map. The map is null.");
+            java.lang.System.out.println("ERROR: Could not initialize map. The map is null.");
         }
-        
-        return mc;
     }
 
     /**
-     * Destroys the map.
+     * Finalizes the map.
      *
-     * @param c the map
+     * @param p0 the map
      */
-    static void destroy_map(java.lang.Object c) {
+    static void finalize_map(java.lang.Object p0) {
 
-        Map mc = (Map) c;
+        Map m = (Map) p0;
         
-        if (mc != null) {
+        if (m != null) {
 
-            java.lang.Object[] references = mc.references;
-            mc.references = null;
-            ArrayHandler.destroy_array(references);
-
-            java.lang.Object[] names = mc.names;
-            mc.names = null;
-            ArrayHandler.destroy_array(names);
+            m.references = null;
+            m.names = null;
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not destroy map. The map is null.");
+            java.lang.System.out.println("ERROR: Could not finalize map. The map is null.");
         }
     }
 
     //
-    // Map element management.
+    // Map element.
     //
 
     /**

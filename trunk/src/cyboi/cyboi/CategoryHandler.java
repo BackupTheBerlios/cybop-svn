@@ -27,7 +27,7 @@ package cyboi;
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.2 $ $Date: 2003-07-28 22:15:54 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-07-29 22:38:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryHandler {
@@ -124,7 +124,8 @@ class CategoryHandler {
 
             java.lang.System.out.println("INFO: Initialize category containers.");
 
-            c.items = MapHandler.create_map();
+            c.items = new Map();
+            MapHandler.initialize(c.items);
 
         } else {
 
@@ -178,14 +179,14 @@ class CategoryHandler {
 
             p.parse(CategoryHandler.PATH + p1 + CategoryHandler.CYBOL);
             CategoryHandler.initialize_document(p0, p.getDocument());
-            
-            CategoryHandler.finalize_xml_parser(p);
-            p = null;
     
         } else {
             
             java.lang.System.out.println("ERROR: Could not initialize category elements. The xml parser is null.");
         }
+        
+        CategoryHandler.finalize_xml_parser(p);
+        p = null;
     }
 
     /**
@@ -266,7 +267,6 @@ class CategoryHandler {
             java.lang.System.out.println("INFO: Initialize document.");
 
             doc.normalize();
-    
             org.w3c.dom.NodeList l = null;
 
             l = doc.getElementsByTagName(CategoryHandler.SUPER);
@@ -476,48 +476,12 @@ class CategoryHandler {
      */
     static void initialize_java_object_attributes(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
-        java.lang.Object o = p0;
+        java.lang.System.out.println("INFO: Initialize java object attributes.");
         
-        if (o != null) {
-                
-            java.lang.System.out.println("INFO: Initialize java object attributes.");
-            
-            java.lang.Object c = CategoryHandler.read_attribute(p1, JavaObjectHandler.CATEGORY);
-            java.lang.Object jo = JavaObjectHandler.create_java_object(c);
-            i.java_object = jo;
+        java.lang.Object c = CategoryHandler.read_attribute(p1, JavaObjectHandler.CATEGORY);
+        java.lang.Object p0 = JavaObjectHandler.create_java_object(c);
 
-            CategoryHandler.initialize_java_object(i.java_object, p1);
-
-        } else {
-            
-            java.lang.System.out.println("ERROR: Could not initialize java object attributes. The java object is null.");
-        }
-    }
-
-    /**
-     * Initializes the java object.
-     *
-     * @param p0 the java object
-     * @param m the attributes node map
-     */
-    static void initialize_java_object(java.lang.Object o, java.lang.Object m) throws java.lang.Exception {
-
-        if (o != null) {
-
-            java.lang.System.out.println("INFO: Initialize java object.");
-            
-            if (o instanceof javax.swing.JFrame) {
-                    
-                java.lang.String width = (java.lang.String) CategoryHandler.read_attribute(m, JavaObjectHandler.WIDTH);
-                java.lang.String height = (java.lang.String) CategoryHandler.read_attribute(m, JavaObjectHandler.HEIGHT);
-                ((javax.swing.JFrame) o).setSize(java.lang.Integer.parseInt(width), java.lang.Integer.parseInt(height));
-                ((javax.swing.JFrame) o).setVisible(true);
-            }
-
-        } else {
-            
-            java.lang.System.out.println("ERROR: Could not initialize java object. The java object is null.");
-        }
+        JavaObjectHandler.initialize_java_object(i.java_object, p1);
     }
 
     //
@@ -527,8 +491,8 @@ class CategoryHandler {
     /**
      * Initializes the items.
      *
-     * @param p0 the category
-     * @param p1 the items list
+     * @param p0 the category items
+     * @param p1 the item list
      */
     static void initialize_items(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
@@ -541,7 +505,6 @@ class CategoryHandler {
             int count = 0;
             int size = l.getLength();
             org.w3c.dom.Node n = null;
-            org.w3c.dom.NamedNodeMap m = null;
             java.lang.Object i = null;
 
             while (count < size) {
@@ -551,8 +514,17 @@ class CategoryHandler {
                 if (n != null) {
 
                     // Initialize attributes.
-                    m = n.getAttributes();
-                    initialize_item_attributes(p0, m);
+                    i = new CategoryItem();
+                    CategoryHandler.initialize_category_item(i, n.getAttributes());
+                    
+                    if (i != null) {
+                    
+                        MapHandler.add_map_element(p0, i.name, i);
+                
+                    } else {
+                        
+                        java.lang.System.out.println("ERROR: Could not initialize items. The item node is null.");
+                    }
 
 /*??
                     // Initialize serialized item.
@@ -574,116 +546,73 @@ class CategoryHandler {
     }
 
     //
-    // Item attributes.
+    // Category item.
     //
     
     /**
-     * Initializes the item attributes.
+     * Initializes the category item.
      *
-     * @param p0 the category
-     * @param p1 the item attributes map
+     * @param p0 the category item
+     * @param p1 the item attributes
      */
-    static void initialize_item_attributes(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
+    static void initialize_category_item(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
-        Category i = (Category) p0;
+        CategoryItem ci = (CategoryItem) p0;
         
-        if (i != null) {
+        if (ci != null) {
                 
-            java.lang.System.out.println("INFO: Initialize item attributes.");
+            java.lang.System.out.println("INFO: Initialize category item.");
 
-            java.lang.Object n = CategoryHandler.read_attribute(m, CategoryHandler.NAME);
-            java.lang.Object a = null;
-            java.lang.Object c = null;
-            java.lang.Object it = null;
-            
-            a = CategoryHandler.read_attribute(m, CategoryHandler.ITEM_ABSTRACTION);
-            c = CategoryHandler.read_attribute(m, CategoryHandler.ITEM_CATEGORY);
-            it = CategoryHandler.create_item_element(a, c);
-            MapHandler.add_map_element(i.items, n, it);
-
-            /*??
-                The following lines cause problems!
-                For some reason, all new items are added to all of
-                i.items, i.spaces, i.times
-                Or, also possible, that all three point to the same map.
-                But all maps are created correctly, independently. Hm :-(
-            */            
-/*??
-            a = CategoryHandler.read_attribute(m, CategoryHandler.SPACE_ABSTRACTION);
-            c = CategoryHandler.read_attribute(m, CategoryHandler.SPACE_CATEGORY);
-            it = CategoryHandler.create_item_element(a, c);
-            MapHandler.add_map_element(i.spaces, n, it);
-            
-            a = CategoryHandler.read_attribute(m, CategoryHandler.TIME_ABSTRACTION);
-            c = CategoryHandler.read_attribute(m, CategoryHandler.TIME_CATEGORY);
-            it = CategoryHandler.create_item_element(a, c);
-            MapHandler.add_map_element(i.times, n, it);
-*/
-            
-/*??
-            if (n.equals("date")) {
-            
-                java.lang.System.out.println("\n\n\n");
-                
-                for (int x = 0; x < ArrayHandler.get_array_size(((Map) i.times).names); x++) {
-                    
-                    java.lang.System.out.println(i.times);
-
-                    java.lang.Object test1 = ArrayHandler.get_array_element(((Map) i.times).names, x);
-                    java.lang.System.out.println(test1);
-
-                    java.lang.Object test2 = MapHandler.get_map_element(i.times, x);
-                    java.lang.System.out.println(test2);
-                }
-                
-                java.lang.System.out.println("\n\n\n");
-                java.lang.System.exit(0);
-            }
-*/
+            CategoryHandler.initialize_category_item_attribute(ci.name, p1, CategoryHandler.NAME);
+            CategoryHandler.initialize_category_item_attribute(ci.item_abstraction, p1, CategoryHandler.ITEM_ABSTRACTION);
+            CategoryHandler.initialize_category_item_attribute(ci.item_category, p1, CategoryHandler.ITEM_CATEGORY);
+            CategoryHandler.initialize_category_item_attribute(ci.position_abstraction, p1, CategoryHandler.POSITION_ABSTRACTION);
+            CategoryHandler.initialize_category_item_attribute(ci.position_category, p1, CategoryHandler.POSITION_CATEGORY);
+            CategoryHandler.initialize_category_item_attribute(ci.instance_abstraction, p1, CategoryHandler.INSTANCE_ABSTRACTION);
+            CategoryHandler.initialize_category_item_attribute(ci.instance_category, p1, CategoryHandler.INSTANCE_CATEGORY);
+            CategoryHandler.initialize_category_item_attribute(ci.force_abstraction, p1, CategoryHandler.FORCE_ABSTRACTION);
+            CategoryHandler.initialize_category_item_attribute(ci.force_category, p1, CategoryHandler.FORCE_CATEGORY);
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize item attributes. The category is null.");
+            java.lang.System.out.println("ERROR: Could not initialize category item. The category item is null.");
         }
     }
 
     //
-    // Item attribute.
+    // Category item attribute.
     //
     
     /**
-     * Reads the attribute.
+     * Initializes the category item attribute.
      *
-     * @param o the attributes node map
-     * @param n the name
-     * @return the attribute
+     * @param p0 the category item attribute
+     * @param p1 the item attributes
+     * @param p2 the name
      */
-    static java.lang.Object read_attribute(java.lang.Object o, java.lang.Object n) {
+    static void initialize_category_item_attribute(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
     
-        java.lang.Object a = null;
-        org.w3c.dom.NamedNodeMap m = (org.w3c.dom.NamedNodeMap) o;
+        org.w3c.dom.NamedNodeMap m = (org.w3c.dom.NamedNodeMap) p1;
 
         if (m != null) {
     
-            org.w3c.dom.Node e = m.getNamedItem((java.lang.String) n);
+            org.w3c.dom.Node n = m.getNamedItem((java.lang.String) p2);
             
-            if (e != null) {
+            if (n != null) {
                 
-                java.lang.System.out.println("INFO: Read attribute.");
+                java.lang.System.out.println("INFO: Initialize category item attribute.");
 
-                a = e.getNodeValue();
+                p0 = n.getNodeValue();
         
             } else {
                 
-                java.lang.System.out.println("WARNING: Could not get attribute. The attribute element is null.");
+                java.lang.System.out.println("WARNING: Could not initialize category item attribute. The attribute node is null.");
             }
         
         } else {
             
-            java.lang.System.out.println("ERROR: Could not get attribute. The node map is null.");
+            java.lang.System.out.println("WARNING: Could not initialize category item attribute. The node map is null.");
         }
-
-        return a;
     }
 }
 

@@ -29,7 +29,7 @@ package cyboi;
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.19 $ $Date: 2003-07-28 22:15:54 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2003-07-29 22:38:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -132,7 +132,7 @@ class ItemHandler {
      * Initializes the item.
      *
      * @param p0 the item
-     * @param p1 the category location
+     * @param p1 the category
      */
     static void initialize_item(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
@@ -150,7 +150,7 @@ class ItemHandler {
      * Finalizes the item.
      *
      * @param p0 the item
-     * @param p1 the category location
+     * @param p1 the category
      */
     static void finalize_item(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
@@ -246,7 +246,7 @@ class ItemHandler {
             java.lang.System.out.println("INFO: Initialize item elements.");
 
             // Java object.
-            initialize_java_object(p0, c.java_object_class);
+            initialize_java_object(p0, c.java_object);
 
             // Items.
             Map category_items = c.category_items;
@@ -305,7 +305,7 @@ class ItemHandler {
      * Initializes the java object.
      *
      * @param p0 the item
-     * @param p1 the java object class
+     * @param p1 the category java object
      */
     static void initialize_java_object(java.lang.Object p0, java.lang.Object p1) {
     
@@ -326,7 +326,7 @@ class ItemHandler {
      * Finalizes the java object.
      *
      * @param p0 the item
-     * @param p1 the java object class
+     * @param p1 the category java object
      */
     static void finalize_java_object(java.lang.Object p0, java.lang.Object p1) {
     
