@@ -32,7 +32,7 @@
  * 01.01.2000 00:00:00";
  * 31.12.1999 23:59:59";
  *
- * @version $Revision: 1.16 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-04-22 08:54:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,31 +42,6 @@
 #include "../constants.c"
 #include "../logger/log_handler.c"
 #include "../model/array_handler.c"
-
-//
-// Constants.
-//
-
-/** The time size. */
-static const int TIME_SIZE = 6;
-
-/** The year index. */
-static const int YEAR_INDEX = 0;
-
-/** The month index. */
-static const int MONTH_INDEX = 1;
-
-/** The day index. */
-static const int DAY_INDEX = 2;
-
-/** The hour index. */
-static const int HOUR_INDEX = 3;
-
-/** The minute index. */
-static const int MINUTE_INDEX = 4;
-
-/** The second index. */
-static const int SECOND_INDEX = 5;
 
 //
 // Time.

@@ -25,7 +25,7 @@
  *
  * A complex consists of two floats, a real and an imaginary.
  *
- * @version $Revision: 1.16 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-04-22 08:54:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,19 +35,6 @@
 #include "../constants.c"
 #include "../logger/log_handler.c"
 #include "../model/array_handler.c"
-
-//
-// Constants.
-//
-
-/** The complex size. */
-static const int COMPLEX_SIZE = 2;
-
-/** The real index. */
-static const int REAL_INDEX = 0;
-
-/** The imaginary index. */
-static const int IMAGINARY_INDEX = 1;
 
 //
 // Complex.

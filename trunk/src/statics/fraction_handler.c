@@ -28,7 +28,7 @@
  * For higher performance, it is mostly better to use floating point numbers
  * (float) which can be calculated by the Arithmetic Logic Unit (ALU).
  *
- * @version $Revision: 1.16 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-04-22 08:54:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,19 +38,6 @@
 #include "../constants.c"
 #include "../logger/log_handler.c"
 #include "../model/array_handler.c"
-
-//
-// Constants.
-//
-
-/** The fraction size. */
-static const int FRACTION_SIZE = 2;
-
-/** The numerator index. */
-static const int NUMERATOR_INDEX = 0;
-
-/** The denominator index. */
-static const int DENOMINATOR_INDEX = 1;
 
 //
 // Fraction.

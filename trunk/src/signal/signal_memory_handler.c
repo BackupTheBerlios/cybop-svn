@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.34 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2004-04-22 08:54:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,31 +53,6 @@
 #include "../signal/languages.c"
 #include "../signal/priorities.c"
 #include "../x_windows/x_windows_handler.c"
-
-//
-// Part constants.
-//
-
-/** The signal memory size. */
-static const int SIGNAL_MEMORY_SIZE = 6;
-
-/** The signals size index. */
-static const int SIGNALS_SIZE_INDEX = 0;
-
-/** The signals count index. */
-static const int SIGNALS_COUNT_INDEX = 1;
-
-/** The signals index. */
-static const int SIGNALS_INDEX = 2;
-
-/** The priorities index. */
-static const int PRIORITIES_INDEX = 3;
-
-/** The abstractions index. */
-static const int ABSTRACTIONS_INDEX = 4;
-
-/** The abstractions sizes index. */
-static const int ABSTRACTIONS_SIZES_INDEX = 5;
 
 //
 // Signal memory.

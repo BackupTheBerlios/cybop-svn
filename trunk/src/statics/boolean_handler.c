@@ -29,7 +29,7 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.18 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2004-04-22 08:54:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,22 +39,6 @@
 #include "../constants.c"
 #include "../logger/log_handler.c"
 #include "../model/array_handler.c"
-
-//
-// Constants.
-//
-
-/** The true boolean. */
-static const char TRUE_BOOLEAN[] = {'t', 'r', 'u', 'e'};
-
-/** The true boolean size. */
-static const int TRUE_BOOLEAN_SIZE = 4;
-
-/** The false boolean. */
-static const char FALSE_BOOLEAN[] = {'f', 'a', 'l', 's', 'e'};
-
-/** The false boolean size. */
-static const int FALSE_BOOLEAN_SIZE = 5;
 
 //
 // Boolean.

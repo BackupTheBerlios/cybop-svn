@@ -25,7 +25,7 @@
  *
  * A vector contains the three coordinates: x, y, z.
  *
- * @version $Revision: 1.16 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-04-22 08:54:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,22 +35,6 @@
 #include "../constants.c"
 #include "../logger/log_handler.c"
 #include "../model/array_handler.c"
-
-//
-// Constants.
-//
-
-/** The vector size. */
-static const int VECTOR_SIZE = 3;
-
-/** The x index. */
-static const int X_INDEX = 0;
-
-/** The y index. */
-static const int Y_INDEX = 1;
-
-/** The z index. */
-static const int Z_INDEX = 2;
 
 //
 // Vector.

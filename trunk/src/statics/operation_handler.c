@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.24 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2004-04-22 08:54:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,25 +53,6 @@
 #include "../constants.c"
 #include "../logger/log_handler.c"
 #include "../model/array_handler.c"
-
-//
-// Constants.
-//
-
-/** The operation size. */
-static const int OPERATION_SIZE = 3;
-
-/** The parameters size index. */
-static const int PARAMETERS_SIZE_INDEX = 0;
-
-/** The parameters index. */
-static const int PARAMETERS_INDEX = 1;
-
-/** The parameters sizes index. */
-static const int PARAMETERS_SIZES_INDEX = 2;
-
-/** The operation parameter separator. */
-static const char OPERATION_PARAMETER_SEPARATOR = ',';
 
 //
 // Operation.
