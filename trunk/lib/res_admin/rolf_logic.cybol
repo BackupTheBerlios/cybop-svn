@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<model>
+    <part name="compare" channel="inline" abstraction="operation" model="smaller">
+        <property name="left_argument" channel="inline" abstraction="integer" model="application.argument_1"/>
+        <property name="right_argument" channel="inline" abstraction="integer" model="application.argument_2"/>
+        <property name="true_activation" channel="inline" abstraction="integer" model="application.true_activation"/>
+        <property name="false_activation" channel="inline" abstraction="integer" model="application.false_activation"/>
+    </part>
+    <part name="add" channel="inline" abstraction="operation" model="add">
+        <property name="activation" channel="inline" abstraction="runtime" model="application.true_activation"/>
+        <property name="summand_1" channel="inline" abstraction="integer" model="2"/>
+        <property name="summand_2" channel="inline" abstraction="integer" model="app.y"/>
+        <property name="sum" channel="inline" abstraction="integer" model="app.z"/>
+    </part>
+    <part name="subtract" channel="inline" abstraction="operation" model="subtract">
+        <property name="activation" channel="inline" abstraction="runtime" model="application.false_activation"/>
+        <property name="summand_1" channel="inline" abstraction="integer" model="2"/>
+        <property name="summand_2" channel="inline" abstraction="integer" model="app.y"/>
+        <property name="sum" channel="inline" abstraction="integer" model="app.z"/>
+    </part>
+    <part name="exit" channel="inline" abstraction="operation" model="exit"/>
+</model>
