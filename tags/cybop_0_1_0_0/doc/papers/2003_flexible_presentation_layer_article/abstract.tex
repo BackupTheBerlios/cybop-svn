@@ -1,0 +1,47 @@
+%
+% $RCSfile: abstract.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1
+% or any later version published by the Free Software Foundation;
+% with no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+% @author Jens Bohl <info@jens-bohl.de>
+%
+
+\begin{center}
+    \textbf{\large{Abstract}}
+\end{center}
+\normalsize
+\textit{
+This document describes how existing design patterns can be combined to merge
+their advantages into one domain- independent software framework.
+This framework, called Cybernetics Oriented Programming (CYBOP), is characterized
+by flexibility and extensibility. Further, the concept of Ontology is used to
+structure the software architecture as well as to keep it maintainable. Its
+hierarchical appearance stems from a core design decision: all framework classes
+inherit from one super class Item which represents a Tree. A Component Lifecycle
+ensures the proper startup and shutdown of any systems built on top of CYBOP.\\
+The practical proof of these new concepts was accomplished within a diploma work
+which consisted of designing and developing a module called Record, of the Open
+Source Software (OSS) project Res Medicinae. The major task of this module is to
+provide a user interface for creating medical documentation.
+New structure models such as Episodes were considered and implemented. In this
+context, the integration of a graphical tool for Topological Documentation was
+highly demanded as well. The tool allows documentation by help of anatomical
+images and the setting of markers for pathological findings.\\
+\textbf{Keywords.} Design Pattern, Framework, Component Lifecycle, Ontology,
+CYBOP, Res Medicinae, Episode Based Documentation, Topological Documentation
+} \rm
+

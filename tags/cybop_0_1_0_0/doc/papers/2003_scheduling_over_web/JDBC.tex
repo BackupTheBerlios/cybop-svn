@@ -1,0 +1,60 @@
+\section{JDBC}
+
+  \subsection{Überblick}
+
+
+		JDBC steht für Java Database Connectivity und ist die Datenbankschnittstelle
+		für Java. Ab JDK 1.1 bietet Java durch JDBC eine vollständige 
+		Datenbankunterstützung zum Zugriff auf relationale Datenbanken an.
+		Dazu stellt JDBC folgende Funktionalität zur Verfügung:\cite{hajdbc}
+		
+		\begin{itemize}
+			\item Objekte für die Verbindung mit Datenbanken
+			\item Ausführen von SQL-Anweisungen mit gespeicherten Prozeduren
+			\item Methoden zur Ermittlung von Informationen über Objekte
+			      in der Datenbank
+		\end{itemize}
+		
+		Mittels JDBC wird ein Datenbankzugriff von Java-Anwendungen
+		über verschiedene Treiber möglich. Es gibt sowohl spezielle Treiber für 
+		einen native-Zugriff auf Datenbanken, als auch allgemeine Treiber 
+		für den Datenbankzugriff über ODBC (siehe Treibertypen). Durch 
+		die JDBC-Spezifikation
+		wird eine maximale Flexibilität sowohl für Datenbankbenutzer
+		als auch für Datenbankanbieter gewährleistet. 
+		
+		Um eine Austauschbarkeit der Datenbanken halbwegs zu gewährleisten, 
+		fordert SUN von den JDBC-Treiberherstellern, mindestens den 
+		SQL-2 Entry-Level-Standard von 1992 zu erfüllen. 
+		Verwendet der Programmierer darüber hinaus proprietäre SQL-Anweisungen
+		der Datenbanken, so ist eine Austauschbarkeit nur mit erheblichem Mehraufwand 
+		zu erreichen.
+		
+	
+	
+  \subsection{Treibertypen}
+  
+    JDBC ist keine eigene Datenbank, sondern eine Schnittstelle zwischen einer 
+    SQL-Datenbank und der Applikation, die sie benutzen will. Bezüglich der 
+    Architektur der zugehörigen Verbindungs-, Anweisungs- und Ergebnisklassen 
+    unterscheidet man vier Typen von JDBC-Treibern \cite{gkhjp}: 
+	
+		\begin{itemize}
+		  \item Steht bereits ein ODBC-Treiber zur Verfügung, so kann er mit Hilfe der 
+		  			im Lieferumfang enthaltenen JDBC-ODBC-Bridge in Java-Programmen 
+		  			verwendet werden. Diese Konstruktion bezeichnet man als Typ-1-Treiber. 
+		  			Mit seiner Hilfe können alle Datenquellen, für die ein ODBC-Treiber 
+		  			existiert, in Java-Programmen genutzt werden. 
+		  \item Zu vielen Datenbanken gibt es neben ODBC-Treibern auch spezielle 
+		  			Treiber des jeweiligen Datenbankherstellers. Setzt ein JDBC-Treiber 
+		  			auf einem solchen proprietären Treiber auf, bezeichnet man ihn 
+		  			als Typ-2-Treiber.
+		  \item Wenn ein JDBC-Treiber komplett in Java geschrieben und auf dem Client 
+		  			keine spezielle Installation erforderlich ist, der Treiber zur 
+		  			Kommunikation mit einer Datenbank aber auf eine funktionierende Middleware 
+		  			angewiesen ist, handelt es sich um einen Typ-3-Treiber. 
+			\item Falls ein JDBC-Treiber komplett in Java geschrieben ist und die JDBC-Calls 
+						direkt in das erforderliche Protokoll der jeweiligen Datenbank umsetzt, 
+						handelt es sich um einen Typ-4-Treiber. 
+		\end{itemize}
+	 

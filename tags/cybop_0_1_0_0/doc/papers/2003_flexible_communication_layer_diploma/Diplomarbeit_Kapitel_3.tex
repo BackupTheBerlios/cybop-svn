@@ -1,0 +1,470 @@
+\chapter{Persistenzmechanismen}
+    \label{Persistenzmechanismen}
+Ein wesentlicher Bestandteil der Diplomarbeit war die Erzeugung einer Mappingschicht, die
+verwendete Mechanismen zum Speichern, Laden und Modifizieren von Datensätzen dem Anwender gegenüber
+transparent erscheinen lassen soll. In diesem Kapitel werden die Grundlagen zu den beiden
+verwendeten Mechanismen beschrieben. \cite{ch:analysedoc}
+
+\section{Datenbanken und JDBC}
+Der große Vorteil beim Verwenden von zentralen Datenbanken auf einem entfernten Rechner ist die
+globale Zugänglichkeit sämtlicher Daten. Viele Anwender können simultan auf die gleichen
+Informationen zugreifen.
+
+Von einer guten Datenbankanwendung erwartet man, dass der Anwender nicht erkennt, dass er auf eine
+Datenbank zugreift, sowie in welcher Art diese Aktionen ausgelöst und abgearbeitet werden. Da
+\emph{Res Medicinae} eine reine Java-Applikation ist, beschäftigt sich dieses Kapitel hauptsächlich
+mit Datenbankanbindungen für diese Programmiersprache und Grundlagen zu JDBC, was für \emph{Java
+Database Connectivity} steht.
+
+Doch vorher ein paar Worte zu den notwendigen Bestandteilen einer lauffähigen Datenbankanwendung.
+
+\subsection{DBMS}
+Einer der wichtigsten Bestandteile ist das Datenbankmanagementsystem oder kurz DBMS. Wie der Name
+schon sagt, dient ein DBMS zur Verwaltung, d.h. Erstellen und Löschen von Datenbanken und Tabellen,
+sowie Einfügen, Abfragen und Aktualisieren von Datensätzen. Sollen Informationen aus einer
+Datenbank abgerufen werden, so erfolgt dass immer über das DBMS. Als erstes muss eine Verbindung zu
+diesem hergestellt werden. Es kennt die enthaltenen Datenbanken, kann somit die
+Anfragen entsprechend weiterleiten und die Ergebnisse an den Requestor zurücksenden.\\
+Datenbankmanagementsysteme verfügen aber nicht nur über die Möglichkeit, Informationen
+abzuspeichern, sondern müssen auch zusätzliche Anforderungen erfüllen. So enthalten sie
+\cite{DatabaseSystems}:
+\begin{itemize}
+\item{ein Sicherheitssystem}, um die Daten vor nicht autorisierten Zugriffen zu schützen,
+\item{ein Integritätssystem}, um die Konsistenz der Daten sicherzustellen,
+\item{ein Konkurenzkontrollsystem}, zum Verwalten simultaner Zugriffe,
+\item{ein Wiederherstellungssystem}, welches im Falle eines Fehlers den letzten bekannten konsistenten
+Zustand der Datenbank wiederherstellt,
+\item{einen Anwender-zugänglichen  Katalog}, der Beschreibungen der gespeicherten Daten enthält,
+sogenannte Metadaten.
+\end{itemize}
+
+\subsection{SQL}
+    \label{SQL}
+Die Definition der Datenbanken erfolgt mittels \emph{Data Definition Language} (DDL). Sie gestattet
+es dem Anwender Datentypen, Strukturen und Anweisungen zu spezifizieren. Eine \emph{Data
+Manipulation Language} (DML) hingegen erlaubt es, Daten einzufügen, zu aktualisieren, zu löschen
+und abzufragen. Verfügt man über ein zentrales Repository, wie eine Datenbank, so bietet die DML
+eine allgemeine Möglichkeit, um Daten und Metadaten in Erfahrung zu bringen. Man spricht hier von
+\emph{Query Languages} \cite{DatabaseSystems}.\\
+Die Bekannteste von ihnen ist SQL, die Structured Query Language. Sie hat sich zu einem Standard
+entwickelt. Anweisungen, die diesem Standard genügen versteht das DBMS.\\
+Da, wie bei anderen Standards auch, über die Zeit Weiterentwicklungen und Anpassungen vorgenommen
+wurden, haben sich bei SQL unterschiedliche Versionen etabliert. Das führt natürlich zu Problemen
+bei der Portierung von Applikationen auf unterschiedliche Datenbankmanagementsysteme, da sich die
+Hersteller nicht auf einen Standard einigen. Vielmehr verwendet jeder den für seine Anwendung
+passendsten. Selbst die Behauptung zweier unterschiedlicher Hersteller, jeweils SQL2 zu
+unterstützen, kann unterschiedliche Bedeutung haben. Während es für SQL2 bzw. SQL92 (ISO/IEC
+9075:1992 Information technology - Database language) drei Abstufungen gibt \cite{JDBC_Praxis}:
+
+\begin{enumerate}
+\item Entry Level: Enthält die wichtigsten Features und damit auch die
+geringsten Anforderungen an die Implementierung eines DBMS
+\item Intermediate: Baut auf Entry Level auf
+\item Full SQL: Das ist die oberste Stufe und unterstützt somit den gesamten
+Sprachumfang,
+\end{enumerate}
+
+enthält der aktuelle Standard (ISO/IEC 9075:1999(E)) Information technology -
+Database languages) auch bezeichnet als SQL3 oder SQL99 eine derartige
+Hierarchie nicht mehr. Er umschließt  eine Vielzahl neuer Features \cite{SQL3_Standardization}.\\
+Leider werden von vielen DBMS nicht alle Standards unterstützt. An Stelle dessen versuchen sie sich
+durch eigene Features von anderen Systemen abzuheben. Man spricht von sogenannten proprietären
+Schnittstellen, über die entsprechende Features genutzt werden können. Das macht es dem Entwickler
+nicht gerade einfach, eine portierbare Applikation zu entwickeln, muss er doch somit über eine
+genaue Kenntnis jedes verwendeten DBMS und seiner proprietären Eigenschaften verfügen.\\
+Inzwischen haben sich bereits sehr viele unterschiedliche Features in den verschiedenen DBMS
+herausgestellt, so dass es nicht möglich ist, eine SQL-konforme Testanwendung zu entwickeln, die
+herstellerunabhängig ist. Das wirkt sich natürlich auch enorm auf die Softwarekosten aus. Einige
+Entwickler beginnen bereits zu zweifeln, ob SQL noch als einheitlicher Standard anerkannt werden
+sollte \cite{Ist_SQL_noch_Standard}.
+
+\subsection{Embedded SQL}
+Schnittstellenfunktionen können nicht immer in SQL ausgedrückt werden, weil die Sprache nicht
+\emph{computational complete} ist, d.h. verschiedene Berechnungen und Operationen, wie
+beispielsweies Rekursionen, sind nicht in SQL ausführbar. Vielmehr ist ein zusätzlicher Befehlssatz
+notwendig, um fortgeschrittene Techniken für die Manipulation der Daten zu unterstützen. Die
+SQL-Anweisungen, man nennt sie auch SQL-Statements, müssen unmittelbar aus einer Applikation heraus
+gestartet und von dieser auch ausgewertet werden. Deshalb hat man es als sinnvoll erachtet,
+Programmiersprachen zu erweitern und SQL direkt in diese ''einzubetten''. Daher auch die
+Bezeichnung \emph{Embedded SQL}. Besonders die Auswertung der von dem Datenbanksystem
+zurückgelieferten Informationen wird somit wesentlich vereinfacht, denn die Ergebnisse können
+direkt oder zumindest mit geringem Aufwand in die eigens vorgesehenen Variablen geschrieben werden.
+
+\subsection{Der Weg zur Java Database Connectivity (JDBC)}
+Einen weitverbreiteten Mechanismus für Datenbankzugriffe stellt ODBC (\emph{Open Database
+Connectivity}), bestehend aus einem \emph{Application Programming Interface} (API) für C/C++ und
+einem für die Datenbankzugriffe verantwortlichen Treiber, dar. Das API bietet eine Anzahl
+einheitlicher Schnittstellen an, über die entsprechende Dienste aufgerufen werden können. Der
+Vorteil von Schnittstellen ist die Unabhängigkeit von der jeweiligen Implementation der
+Funktionalität des DBMS. Da die unterschiedlichen DBMS verschiedene Features beinhalten und selbst
+für einheitliche Dienste herstellerspezifische Algorithmik und Methodik verwenden, übernimmt es ein
+Treiber, die Anweisungen auf das jeweilige DBMS abzubilden. Diese ODBC-Treiber werden vom DBMS-Hersteller
+mitgeliefert.\\
+Nicht geregelt ist die Verwendung der SQL-Anweisungen, wie im vorangehenden Abschnitt \ref{SQL}
+bereits diskutiert wurde. Bei diesen handelt es sich meist um einfache Zeichenketten (Strings), die
+von dem Treiber an das darunterliegende DBMS durchgereicht werden.\\
+Aufgrund dessen, dass ODBC ein reines C/C++ -API ist, lässt es sich für Java-Applikationen nicht
+nutzen. Daher benötigte man einen neuen Standard, der gleichzeitig die wesentlichen Nachteile
+unterbindet. So wurde JDBC entwickelt, das folgende Verbesserungen enthält \cite{JDBC_Praxis}:
+
+\begin{itemize}
+
+\item Plattformunabhängigkeit und damit
+verbundene Verringerung bzw. Entfallen von Portierungsaufwand auf unterschiedliche
+Betriebssysteme.\\
+Die einzige Notwendigkeit ist das Vorhandensein einer \emph{Java Virtual Machine}.
+%Sie steht aber praktisch auf jeder Plattform zur Verfügung.
+
+\item Unabhängigkeit von der Serverplattform: damit spielt es für den Client keine Rolle,
+an welchem Ort sich der Server in einem Netzwerk befindet. Die konkrete Lokalisiation wird in
+Abschnitt \ref{Der Data Mapper als Persistenzsteuerung} genauer beschrieben.
+
+\item Möglichkeit der Nutzung von Datenbanken in Java-Applets
+
+\item Anwendung des objektorientierten Paradigmas,\\
+ODBC ist nicht objektorientiert, da es vollständig in C entwickelt wurde
+
+\item Verzicht auf Zeiger und Adressarithmetik vermindert die Fehlerträchtigkeit
+der Anwendungen
+
+\item Unabhängigkeit vom DBMS: Sofern sich die Anwendung an den allgemeinen
+Standards für Datenbankmanagementsysteme orientiert, sollten keine größeren
+Portierungsschwierigkeiten auf andere Datenbanksysteme auftreten. So wird von den meisten DBMS
+mindestens SQL92-Entrty Level unterstützt. Probleme könnten entstehen, wenn zusätzlich proprietäre
+Features genutzt werden.
+
+\end{itemize}
+
+JDBC arbeitet analog zu ODBC. Die Datenbankanwendung öffnet unter der Voraussetzung, dass ein
+entsprechender JDBC-Treiber vorhanden ist, eine Verbindung zu einem beliebigen DBMS. Der Treiber
+ist ebenfalls in Java geschrieben und schränkt somit die Protierbarkeit nicht ein. Er wird erst bei
+Bedarf zur Laufzeit geladen.
+
+\pagebreak Damit ergeben sich folgende vier Schritte für den Ablauf einer jeden JDBC-Anwendung:
+
+\begin{enumerate}
+\item {Laden eines JDBC-Treibers}
+\item {Öffnen einer Verbindung zur Datenbank}
+\item {Senden von SQL-Anweisungen an die Datenbank}
+\item {Empfangen und Auswerten der Ergebnisse}
+\end{enumerate}
+
+\subsection{JDBC-Treiber}
+Der JDBC-Treiber stellt die einheitliche Schnittstelle für den Client zur Verfügung. Wie auch beim
+ODBC-Treiber ist die interne Realisierung je nach DBMS und Schichtenmodell sehr unterschiedlich,
+daher muss ein entsprechender Treiber vom Hersteller des DBMS bereitgestellt werden. Das bedeutet
+wiederum, dass die Anbindung einer Applikation an unterschiedliche Datenbankmanagementsysteme auch
+erhöhten Verwaltungsaufwand im Programmcode erfordert und für jedes dieser DBMS ein eigener Treiber
+geladen werden muss.
+
+Man unterscheidet vier Typen von JDBC-Treibern \cite{JDBC_Database_Access}:
+
+\newcounter{driverTypeCounter}
+
+\begin{list}{\bf Typ \arabic{driverTypeCounter}:}{\usecounter{driverTypeCounter}}
+
+\item Auch bekannt als JDBC-ODBC-Bridge. Hierbei handelt es sich um eine einfache Lösung für
+beliebige ODBC-Datenbanken, die von JDBC genutzt werden sollen. Es wird allerdings empfohlen, sie
+nur als Übergang für solche Datenbanken zu betrachten, für die noch keine vollständigen
+Java-Treiber vom Typ 3 oder 4 vorhanden sind.\\
+Der Treiber nutzt nach unten hin den vorhanden ODBC-Treiber und greift über dessen Funktionalität
+auf die im DBMS enthaltenen Tabellen zu.\\
+Der große Nachteil bei diesem Verfahren ist die Plattformabhängikeit, da der ODBC-Treiber eine
+C-Implementierung verwendet.
+
+\item Dieser Treibertyp ist ebenfalls plattformspezifisch, aber sehr einfach und schnell zu
+realisieren. Auf einem existierenden in C geschriebenen ODBC-Treiber wird ein JDBC-Aufsatz erzeugt.
+
+\item Der erste der beiden völlig in Java implementierten Treiber verfügt über die größtmögliche
+Flexibilität. Er findet seinen Einsatz in Kapitel \ref{Das Dreischichtenmodell} erläutertem
+Dreischichtenmodell. Dabei schickt er seine Anfragen über das Netzwerk an eine sogenannte
+\emph{Middleware}, welche sich um die weitere Kommunikation mit der Datenbank kümmert und nicht
+zwingend eine Java-Applikation sein muss. Damit ist der Treiber nicht vom darunterliegenden DBMS
+abhängig, sondern nur von der jeweiligen Middleware.
+
+\item Der letzte und ebenfalls hundertprozentig in Java verfasste JDBC-Treibertyp wird im klassischen
+Zweischichtenmodell, dessen Struktur in Kapitel \ref{Das Zweischichtenmodell} beschrieben steht,
+verwendet. Hierbei wird auf eine Middlerware verzichtet, so dass der Treiber unmittelbar mit dem
+zugehörigen DBMS kommuniziert. Er ist unter anderem dazu gedacht, Übergangslösungen mit
+Typ-2-Treibern abzulösen.\\
+Ein Typ-4-Treiber ist eine sehr komplexe Software. Da die meisten verbreiteten DBMS keine
+Java-Implementierung sind und der Treiber somit nicht unmittelbar auf Klassen des DBMS zugreifen
+kann, muss er intern über eine eigene herstellerspezifische, dem Anwender verborgene Middleware
+verfügen.
+
+\end{list}
+
+\begin{figure}[ht]
+    \begin{center}
+       \includegraphics[scale=1.0]{Bilder/JDBC-Treibertypen.eps}
+       \caption{JDBC-Treibertypen}
+       \label{fig:JDBC-Treibertypen}
+    \end{center}
+\end{figure}
+Zusätzlich gewährleistet ein JDBC-Treiber die Unabhängigkeit von der Serverplattform. Da JDBC
+grundsätzlich netzwerkfähig ist und der Treiber ebenfalls, spielt es keine Rolle auf welchem
+Rechner und in welchem Netzwerktyp auf einen Datenbankserver zugegriffen wird. Die Adressierung
+erfolgt über einen JDBC-URL, der im Aufbau an den Uniform Resource Locator (URL) des
+Internet-Protokolls angelehnt ist. Damit ist es ebenfalls möglich, Daten von unterschiedlichen
+Plattformen und verschiedenen Datenbanken zusammenzuführen und gemeinsam zu verarbeiten oder
+darzustellen. Derartige Informationen-verknüpfende Zugriffe findet man häufig unter der englischen
+Bezeichnung \emph{Join} wieder \cite{JDBC_Database_Access}.
+
+\subsection{Transaktionen}
+    \label{Transaktionen}
+Häufig kommt es vor, dass Daten nicht nur mit einer einzigen Anweisung in die Datenbank geschrieben
+werden können, sondern eine ganze Anzahl zusammengehörender Operationen notwendig ist, damit am
+Ende wieder ein konsistenter Zustand erreicht wird. \cite{JDBC_Praxis}\\
+Um dies zu gewährleisten, werden derartige Anweisungen in einer Transaktion gruppiert. Man spricht
+hier von mehrstufigen Transaktionen, da mehrere Datenbankoperationen zusammengefasst sind.\\
+Zuerst informiert man die Datenbank, dass Informationen modifiziert, gespeichert oder gelöscht
+werden sollen, indem man den Zugriff auf diese Daten beschränkt. Dafür gibt es mehrere Ebenen, die
+im Anschluss noch erläutert werden. Nach Initiierung dieser Zugriffsbeschränkung werden alle
+notwendigen Operationen - das können durchaus auch Leseanweisungen sein - ausgeführt. Wenn alle
+Anweisungen erfolgreich abgeschlossen wurden, müssen sie noch bestätigt, man sagt auch
+\emph{committed}, werden. Erst jetzt erhalten sie ihre Gültigkeit in der Datenbank. Für den Fall,
+dass mindestens eine Operation nicht wie gewünscht ausgeführt wird, erfolgt auch keine Bestätigung
+der anderen. Vielmehr wird ein so genanntes \emph{Rollback} ausgeführt, das alle Änderungen
+unwirksam macht. Nach dem erfolgreichen Commit-Vorgang wird die Zugriffsbeschränkung der Tabellen
+wieder aufgehoben. Standardmäßig führt JDBC nach jedem Datenbankzugriff ein Commit aus, so dass es
+Aufgabe des Entwicklers ist, zusammen gehörende Anweisungen in Transaktionen zu gruppieren.\\
+Noch ein paar Anmerkungen zur zwingend erforderlichen Zugriffsbeschränkung. Bei Verzicht besteht
+unter Umständen die Gefahr, dass inkonsistente Daten verwendet werden. So könnten während einer
+nicht vollständig ausgeführten Schreiboperation von einem anderen Anwender teilweise alte und neue
+Daten gelesen werden. Das wäre fatal.\\
+Man unterscheidet mehrere Stufen bei der Zugriffsbeschränkung, die die englische Bezeichnung
+\emph{transaction isolation level} tragen. Ihren Einsatz muss der Entwickler je nach Bedarf für
+seine Anwendung abwägen. Je stärker die Einschränkung, desto länger werden die Zugriffszeiten.
+Andererseits erhöht sich das Risiko für die Entstehung inkonsistenter Daten, je schwächer die
+Beschränkung gewählt wird.
+\begin{table}[h]
+\begin{tabular}{|l|c|c|c|} \hline
+\bf{Isolationsgrad} & \bf{Dirty Reads} & \bf{Nonrepeatable Reads} & \bf{Phantom
+Reads}\\
+\hline
+READ UNCOMMITTED & Ja & Ja & Ja \\
+READ COMMITTED & Nein & Ja & Ja \\
+REPEATABLE READ & Nein & Nein & Ja \\
+SERIALIZABLE & Nein & Nein & Nein \\
+\hline
+\end{tabular}
+\caption{Die Transaktionsisolierungsstufen}
+\end{table}
+
+\subsubsection{Konfliktsituationen bei Transaktionen}
+\begin{itemize}
+\item \bf Inkonsistente Abfrageergebnisse (Dirty Reads) \rm \\
+Die Abfrage einer Transaktion liefert das Ergebnis einer anderen noch nicht abgeschlossenen
+Transaktion. Das kann nicht nur zu einem inkonsistenten Ergebnis führen, sondern auch dazu, dass
+die auslösende Transaktion zurückgesetzt wird und somit das ermittelte Resultat nicht mehr
+existiert bzw. aus logischer Sicht niemals existiert hätte.
+\item \bf Nicht wiederholbare Abfragen (Nonrepeatable Reads)\rm \\
+Bei Wiederholung der selben Abfrage innerhalb einer Transaktion werden abweichende Daten
+zurückgegeben. Eine andere, parallel ausgeführte und nun abgeschlossene Transaktion hat diese Daten
+modifiziert. Damit ist das erstmalige Ergebnis nicht mehr nachvollziehbar und nicht wieder
+herstellbar.
+
+\newpage
+
+\item \bf Phantomergebnisse (Phantom Reads) \rm \\
+Die wiederholte Ausführung einer Abfrage mit identischen Selektionsbedingungen innerhalb einer
+Transaktion gibt eine unterschiedliche Anzahl an Datensätzen als Ergebnis zurück, denn parallel hat
+eine andere, inzwischen abgeschlossene Transaktion zusätzliche, dieser Auswahlbedingung
+entsprechende Datensätze eingefügt. Die neuen Datensätze bezeichnet man als Phantomdatensätze, da
+sie im ersten Abfrageergebnis nicht enthalten waren.
+\end{itemize}
+
+\subsection{Kunden, Dienstleister und Schichtenmodelle}
+    \label{Kunden, Dienstleister und Schichtenmodelle}
+Wie bei Netzwerkanwendungen üblich, basieren auch Datenbankapplikationen auf dem Client-/
+Server-Prinzip, wobei ein Kunde (Client) eine Dienstleistung in Anspruch nehmen möchte und der
+Dienstleister (Server) diese erbringt. Ein Client umfasst Programmlogik sowie Benutzerschnittstelle
+und öffnet bei Bedarf einen Kommunikationskanal zum Datenbankserver um Daten einzutragen,
+abzurufen, zu modifizieren oder zu löschen.\\
+Ein Datenbankmanagementsystem stellt den Datenbankserver dar, der die Anfragen
+des Clients bearbeitet und beantwortet.\\
+Angewandt wird dieses Prinzip in den beiden nun folgenden Schichtenmodellen, die bereits vor der
+Entwicklung von JDBC eingesetzt wurden \cite{JDBC_Praxis}.
+
+\subsubsection{Das Zweischichtenmodell}
+        \label{Das Zweischichtenmodell}
+Das Zweischichtenmodell, auch bekannt als \emph{Two Tier Model} stellt einen einfachen, wie der
+Bezeichnung zu entnehmen ist, zweischichtigen Client-/Server-Datenbankzugang bereit, der im
+wesentlichen auch nur aus dem Kunden (Schicht 1) und dem Diensterbringer (Schicht 2) besteht.
+Abbildung \ref{fig:Schema einer Two-Tier-Applikation} soll dies verdeutlichen.
+\begin{figure}[h]
+    \begin{center}
+       \includegraphics[scale=1.0]{Bilder/TwoTierModel.eps}
+       \caption{Schema einer Two-Tier-Applikation}
+       \label{fig:Schema einer Two-Tier-Applikation}
+    \end{center}
+\end{figure}
+Aufgrund der recht einfachen Architektur bringt es eine Reihe Nachteile mit sich. So muss der
+Client für alle DBMS, auf die er zugreifen will, einen Treiber beinhalten. Bei hersteller- und
+DBMS-unabhängigen Datenbankanwendungen wird dem Entwickler einiges an Know How abverlangt, um diese
+Anforderungen zu realisieren.\\
+Ein weiterer Nachteil sind sogenannte \emph{Fat Clients}. Da die Zugriffslogik auf die Datenbank
+vollständig im Client steht, bläht es diesen enorm auf. Das macht sich besonders bemerkbar,
+wenn mehrere DBMS unterstützt werden sollen.\\
+Einige DBMS verlangen, dass Client und Server auf dem selben Rechner laufen müssen oder benötigen
+eine zusätzliche Software, um eine Verteilung auf das Netz umzusetzen.\\
+Alle diese Nachteile werden im Dreischichtenmodell vermieden.
+
+\subsubsection{Das Dreischichtenmodell}
+       \label{Das Dreischichtenmodell}
+Bei einem Dreischichtenmodel, auf Englisch \emph{Three Tier Model}, greift der Client nicht direkt
+auf das DBMS zu, sondern überlässt die Abbildung auf die einzelnen Systeme einer sogenannten
+Middleware, an die er auch seine Anfragen stellt. Die gewünschte Datenbank wird über den bereits
+angesprochenen JDBC-URL spezifiziert. Die Middleware lädt den benötigten DBMS-Treiber, der die
+Verbindung zur Datenbank herstellt. Nun kann der Client über diese Verbindung SQL-Anweisungen zum
+DBMS senden und die Ergebnistabellen in Empfang nehmen. Damit muss dem Client das zugrunde liegende
+Datenbanksystem nicht bekannt sein. Neben der Anwendungslogik enthält er lediglich ein
+Kommunikationsprotokoll für den Datenaustausch mit der Middleware.\\
+\begin{figure}[h]
+    \begin{center}
+       \includegraphics[scale=1.0]{Bilder/ThreeTierModel.eps}
+       \caption{Schema einer Three-Tier-Applikation}
+       \label{fig:Schema einer Three-Tier-Applikation}
+    \end{center}
+\end{figure}
+Abgesehen von den Standardprotokollen wie JDBC und ODBC gibt es noch die Möglichkeit, andere
+Protokolle bzw. Paradigmen zu nutzen, beispielsweise RMI oder CORBA. Sie bieten eine breite Palette
+an Diensten, sind allerdings mit einem erheblichen Mehraufwand an Implementierung verbunden.\\
+Alle drei Schichten sind unabhängig voneinander und können auch jeweils auf unterschiedlichen
+Rechnern im Netzwerk laufen. Ist das DBMS nicht netzwerkfähig, müssen Middleware und
+Managementsystem auf der selben Maschine eingesetzt werden. Abbildung \ref{fig:Schema einer
+Three-Tier-Applikation} zeigt die typische Architektur eines Dreischichtenmodells einschließlich
+der Kommunikationsprotokolle.\\
+Sicherlich eröffnet sich nun die Frage, warum nicht in allen Datenbankprojekten ein solches
+Mehrschichtenmodell zum Einsatz kommt, wenn es doch so enorme Vorteile bietet. Die Antwort ist
+ebenso simpel wie einleuchtend. Die Middleware ist keine \emph{Open Source} Software und damit
+teuer vom jeweiligen Softwareproduzenten zu erwerben.\\
+Da Res Medicinae kostenfrei zur Verfügung gestellt werden soll, kann man von zukünftigen Anwendern
+keine finanzielle Beteiligung an einer Lizenz für die Middleware erwarten. Somit verwendet man hier
+ebenfalls das Zweischichtenmodell. Eine Anbindung von CORBA oder RMI kann Alternativen bieten und
+wurde beim Entwurf des Systems berücksichtigt, so dass eine spätere Implementierung möglich ist.
+
+\subsection{PostgreSQL}
+    \label{PostgreSQL}
+Als Datenbankmanagementsystem wurde für die Realisierung von \emph{Res Medicinae} das \emph{Open
+Source} -Projekt PostgreSQL \cite{PostgreSQL_home} ausgewählt. Hierbei handelt es sich um ein
+objektrelationales DBMS, dessen Ursprung man bis ins Jahr 1977 zurückverfolgen kann. Damals
+erfolgte an der Universität Berkeley die Entwicklung des relationalen DBMS Ingres, das 1986 die
+Basis für das heutige PostgreSQL lieferte.\\
+Die für diese Diplomarbeit zugrunde gelegte aktuelle Version 7.2.1 unterstützt nach Aussage des
+Herstellers die Standards SQL92 und SQL99. Das umfasst unter anderem die \myglossary{referenzielle
+Integrität}{Durch die Vergabe von Fremdschlüsseln werden Datensätze verschiedener Tabellen einer
+Datenbank als zusammengehörig markiert. Mittels dieser Referenzierung wirken sich Aktualisierungen
+einer Tabelle automatisch auch auf die anderen aus, wodurch sich ''Datenleichen'' vermeiden lassen.
+Ebenfalls wird das unkontrollierte Löschen eines Datensatzes oder einer Tabelle verhindert.}, eine
+\myglossary{Transaktionssteuerung}{Unter Transaktionssteuerung versteht man den Einsatz von
+Transaktionen, um die Tabellen einer Datenbank von einem konsistenten Zustand vor Ausführung der
+Datenbank-Anweisungen in einen konsistenten Zustand nach Abarbeitung all dieser Anweisungen zu
+überführen. Transaktionen werden im Abschnitt \ref{Transaktionen} ausführlich besprochen.} und eine
+\myglossary{Cursorverarbeitung}{Ein Cursor ist eine logische Verbindung zur Datenbank. Er stellt
+verschiedene Mechanismen bereit, die dem Anwender einen kontrollierten Abruf von Abfrageergebnissen
+ermöglichen. So kann zuerst ein Teil und anschließend ein weiterer Teil der Ergebnismenge
+verarbeitet werden, ohne eine erneute Anfrage an die Datenbank senden zu müssen.}.\\
+Für den Mehrbenutzerbetrieb verwendet es das so genannte MVCC-Verfahren \cite{PostgreSQL_MVCC}. Die
+Abkürzung steht für \emph{Multiversion Concurrency Control}. Die meisten Datenbanksysteme benutzen
+Schlösser (\emph{locks}) für die Wahrung  der Konsistenz bei konkurrenten Zugriffen. PostgreSQL
+verwendet dafür ein Multiversions-Modell, d.h. jede Transaktion sieht nur einen Auszug der Daten,
+wie sie kurze Zeit zuvor vorlagen, unabhängig vom aktuellen Zustand der unterliegenden Daten.
+Dieser Mechanismus schützt die Transaktionen davor, inkonsistente Daten zu sehen, die von anderen
+parallel ausgeführten Transaktionen eingefügt worden sind. Im Unterschied zur Schloß-Methode
+blockieren
+Lese- niemals Schreiboperationen und umgekehrt blockieren Schreib- auch keine Leseoperationen.\\
+Von den Transaktions-Isolations-Stufen sind in PostgreSQL \emph{Read Commited} und
+\emph{Serializable} implementiert, wobei erstere als Voreinstellung verwendet wird.
+
+\subsubsection{Die OID}
+Unabhängig von den Primärschlüsseln der Tabellen erhält jeder Datensatz beim Speichern vom DBMS
+eine zusätzliche, systemweit eindeutige Nummer, eine Object Identity (OID). Bei der Initialisierung
+von PostgreSQL wird ein Zählmechanismus eingerichtet, der diese OIDs generiert.
+
+\section{Extensible Markup Language - XML}
+XML wurde von einer XML-Arbeitsgruppe entwickelt, die man 1996 unter der Schirmherrschaft des World
+Wide Web Consortium (W3C) gründete. Die erste Version wurde 1998 als Standard vom W3C \cite{W3C}
+beschlossen.\\
+XML bietet unter anderem die Möglichkeit, Daten zu speichern und im Internet
+zugänglich zu machen.
+\begin{figure}[h]
+    \begin{center}
+       \includegraphics[scale=1.0]{Bilder/xml_datei.eps}
+       \caption{Ein typisches XML-Dokument}
+       \label{fig:Ein typisches XML-Dokument}
+    \end{center}
+\end{figure}
+
+Die Idee liegt in der Entwicklung einer Syntax, die es erlaubt, besser strukturierte Informationen
+im World Wide Web bereitzustellen. Zudem gestattet es den Austausch von Daten zwischen
+verschiedenen Datenbanken und Anwendungen. Genaugenommen wird der Austausch von
+Informationen zwischen Datenbanken einer der wesentlichen Einsatzbereiche von XML sein.\\
+Wer heute HTML einsetzt, kümmert sich in erster Linie darum, wie die Informationen auf den
+Bildschirmen der Anwender erscheinen. XML ist dagegen stärker darauf ausgerichtet, Informationen so
+aufzubereiten, dass sie leicht weiterverarbeitet werden können. Es geht nicht darum, wie die
+Informationen auf dem Monitor dargestellt werden, sondern viel mehr, wie sie strukturiert sind. Die
+Vision von XML für die Zukunft ist, die Sprache als Basis für jede Art von Daten zu etablieren. Aus
+diesen Daten können dann fast beliebig, andere Dokumenttypen erzeugt werden. Die anfallende
+Doppelarbeit bei Erfassung und Konvertierung fällt weg. Deutlich wird dabei auch, dass nicht mehr
+einzig und allein die Verarbeitung von Dokumenten im Vordergrund steht, sondern selbst Datenbanken
+wie beispielsweise Artikelstammdaten mit Hilfe von XML verarbeitet werden können. Abbildung
+\ref{fig:Ein typisches XML-Dokument} zeigt ein typisches XML-Dokument. Kennzeichnend sind jeweils
+das einführende und abschließende Tag vor und hinter den Daten. Damit werden sie in einer
+baumartigen Hierarchie abgelegt. Diese Eigenschaft nutzen XML-Parser, um die Daten wieder aus den
+Dokumenten zu lesen. Zusätzlich überprüfen sie die syntaktische Korrektheit und somit die
+Wohlgeformtheit, beispielsweise ob für jedes öffnende Tag auch ein entsprechendes Ende-Tag
+existiert. Weiterhin können sie die Auszeichnung der Elemente von ihrem Inhalt trennen und
+Operationen auf diesen Elementen ausführen.\\
+Es gibt zwei Hauptarten von Parsern. Zum einen baumbasierte und zum anderen ereignisbasierte. Ein
+baumbasierter Parser übersetzt ein XML-Dokument in eine interne Baumstruktur und erlaubt dann einer
+Applikation in diesem Baum zu navigieren. Die Document Object Model (DOM) -Arbeitsgruppe im World
+Wide Web Consortium (W3C) entwickelte ein Standard-Baum-basiertes API für XML- und HTML-Dokumente
+\cite{DOM}.\\
+Auf der anderen Seite schickt ein ereignisbasiertes API Ereignisse, wie beispielsweise den Beginn
+und das Ende eines Elements, mittels \myglossary{Callback-Methoden}{Das sind Methoden, die an das
+Auftreten eines bestimmten Ereignisses (Events) gekoppelt sind, d.h. sie werden genau dann
+ausgeführt, wenn dieses ihnen zugewiesene Ereignis eintritt.} direkt an eine Anwendung und erstellt
+für gewöhnlich intern keine Baumstruktur. Die Applikation implementiert einen
+\emph{Document-Handler}, um die verschiedenen Ereignisse zu verwalten, ähnlich dem Verwalten der
+Ereignisse eines \emph{Graphical User Interfaces} (GUI). Im Speziellen reagiert ein solcher Parser
+auf das Auftreten bestimmter Typen von Tags. Das sind Dokumentbeginn, Dokumentende, Zeichenketten,
+Elementbeginn, Elementende. Das Simple API for XML (SAX) \cite{SAX} enthält einen ereignisbasierten
+Parser.\\
+An dieser Stelle wird auf eine weitere Erläuterung von DOM und SAX verzichtet und auf die
+Studienjahresarbeit \cite{studienjahresarbeit} des Diplomanden verwiesen, in der diese Themen
+ausführlich behandelt werden.
+
+\section{Konkretisierte Aufgabenstellung}
+Unter Zusammmenfassung des in den letzten beiden Kapiteln beschriebenen \emph{State of the Art}
+soll hier nun noch einmal die konkrete Aufgabenstellung für den eigenständig zu entwickelnden
+Anteil auf einen Blick dargestellt werden.\\
+Basierend auf bestehenden Softwaremustern sollen Persistenz- und Kommunikationsparadigmen in einer
+gemeinsamen, transparenten Schicht der Applikation vereinigt werden. Bisherige Ansätze in diesen
+Mustern beschreiben lediglich die Realisierung für jeweils einen Persistenzmechanismus bzw. ein
+Kommunikationsparadigma. Es sind Untersuchungen anzustellen, wie die verschiedenen
+Persistenzmechanismen sinnvoll für die Anwendung umgesetzt und ineinander überführt werden können,
+sowie auf welche Art verschiedene Kommunikationsparadigmen parallel in einer Applikation zum
+Einsatz kommen können.\\
+Die in Abschnitt \ref{Einige ausgewaehlte Muster im Detail} erörterten Softwaremuster sollen
+eingesetzt sowie entsprechend angepasst werden und helfen die Struktur möglichst flexibel,
+erweiterbar aber auch robust zu gestalten. Besonderes Augenmerk gilt dem Muster \emph{Data Mapper},
+da es einen guten Ansatz liefert, die direkte Abhängigkeit zwischen Domain-Modell und
+Persistenzschicht zu vermeiden. Mit \emph{Data Transfer Object} und \emph{Remote Facade} lassen
+sich Kommunikationsprozesse optimieren. Sie ermöglichen es, unnötig viele Datentransfers und
+Fernprozeduraufrufe zu unterbinden. Das Muster \emph{Model View Controller} dient bei \emph{Res
+Medicinae} als prinzipielles Architekturmuster zur Strukturierung der Präsentationsschicht
+sämtlicher Module und kommt daher auch bei dem zu entwickelnden Prototyp \emph{ReForm} zum Einsatz.
+\emph{ReForm} dient dem Testen der zu entwerfenden Modelle, indem eine Anwendung generiert wird,
+die das Drucken medizinischer Formulare unterstützt. Mit möglichst geringem Aufwand müssen die
+Patientendaten aus dem jeweiligen Persistenzmedium geladen und in medizinische Formularvordrucke
+ausgegeben werden können.\\
+Ein in Grundzügen bestehendes Domain-Modell muss an die permanent wachsenden Anforderungen
+angepasst und erweitert werden. Hierfür wird das gleichnamige Strukturmuster \emph{Domain Model}
+verwendet. Die Speicherung der enthaltenen Geschäftsdaten soll zum einen per XML in einer zu
+modellierenden Dateistruktur auf der lokalen Festplatte jedes einzelnen Anwenders und zum anderen
+in einer zentralen, über ein Netzwerk angebundenen Datenbank erfolgen. Für diese ist eine
+Tabellenstruktur zu entwerfen, welche den aktuellen Anforderungen an eine moderne Datenbank gerecht
+wird. Als Datenbankmanagementsystem ist PostgreSQL zu verwenden, das für JDBC einen Typ-4-Treiber
+zur Verfügung stellt. Die Anfragen sind in Embedded SQL zu formulieren und damit unmittelbar in den
+Java-Quellcode einzubinden.

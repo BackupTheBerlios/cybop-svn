@@ -1,0 +1,48 @@
+\section{Zusammenfassung, Ausblick}
+
+  Zusammenfassend läßt sich sagen, dass die Umsetzung 
+  von Webapplikationen mit JSP gut realisierbar sind. 
+  Dazu trägt einerseits die plattformunabhängige 
+  Programmiersprache Java und ihre definierten 
+  Schnittstellen (JDBC, Reflection, Tag) bei. Andererseits 
+  bietet JSP die Möglichkeit, über JavaBeans und Tags
+  die Anwendungslogik und die Darstellung zu trennen. 
+  Damit ist eine getrennte Entwicklung (Programmierer,
+  Designer) der Verarbeitungslogik und des Designs möglich.
+  Darauf muß aber bei der Erstellung der JSP-Seiten
+  Rücksicht genommen werden. Ziel ist es, so wenig wie möglich 
+  Quelltext in den JSP-Seiten zu verwenden. Dies ist aber nicht
+  zwingend bei JSP vorgeschrieben. 
+  Programmierer und Designer müssen sich auf eine Schnittstelle
+  für die Übergabe der Parameter und den Zugriff auf Modell
+  und Controller einigen. 
+  
+  Das MVC-Muster konnte teilweise für die Entwicklung
+  der Webapplikationen umgesetzt werden. Eine vollständige 
+  Realisierung war aufgrund der speziellen Kommunikationswege
+  der Webapplikation nicht möglich. Es besteht keine Möglichkeit,
+  Aktualisierungen der Darstellung nach Änderungen von Daten auf dem 
+  Sever vom Server zu veranlassen. Damit kann kein Beobachtungsmuster
+  implementiert werden. Die Umsetzung des MVC-Muster wurde für die 
+  Webapplikation neu erstellt. Eine weitere Möglichkeit wäre, auf ein 
+  bestehendes Framework die Applikation aufzubauen. Damit würde man auf
+  die Ressourcen und Erfahrungen von mehreren Entwicklern zugreifen
+  und Entwicklungsaufwand für ein eigenes Framework minimieren. 
+  
+  Durch die definierte Schnittstelle JDBC von SUN ist es möglich,
+  durch Einsatz entsprechender Treiber die Datenbank flexibel 
+  auszutauschen. Die Anwendung ist 	SQL-2 Entry-Level-Standard von 1992
+  konform umgesetzt worden, so daß keine datenbankspezifische Anpassungen 
+  vorzunehmen sind. In diesem Prototyp ist die Speicherung der Daten nicht 
+  in XML gemacht worden. Dies wäre eine weitere Möglichkeit, die
+  Daten abzulegen.
+  
+  Im Prinzip ist der Prototyp in dem jetzigen Umfang einsetzbar.
+  Zu beachten ist aber, das für die Konfiguration und Wartung
+  der Server (Webserver, Applikationserver) der Administrator
+  verantwortlich ist. Für Webapplikationen sind gewisse
+  Sicherheitsrichtlinien einzuhalten. Weiterhin ist eine Kontrolle 
+  der Sicherheitsrichtlinien und Wartung des Servers Aufgabe 
+  des Administrators. Dies ist nicht immer ganz einfach und deswegen 
+  ist hier Vorsicht geboten.
+  

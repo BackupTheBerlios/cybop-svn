@@ -1,0 +1,56 @@
+\section{Servlets}
+  \subsection{Überblick}
+    Eine normale Anfrage über das Web folgt immer dem gleichen Schema. Ein 
+    Benutzer stellt eine Anforderung (request) an einen Server. 
+    Dieser Server antwort (response) auf diese Anforderung und schickt das 
+    gewünschte Ergebnis an den Benutzer zurück. Der Browser 
+    stellt dann diese Antwort dar. An dieser Stelle wird zwischen zwei
+    verschiedenen Verarbeitungsformen unterschieden. 
+    
+    \begin{itemize}
+      \item Clientseitige Verarbeitung \newline
+            Die Antwort des Servers wird erst auf dem Client 
+            verarbeitet. Ein Beispiel für diese Techniken wären 
+            Javascripts und Applets.
+      \item Serverseitige Verarbeitung \newline
+            Die Anfrage des Benutzer wird auf dem Server verarbeitet.
+            Der Benutzer bekommt die generierte Antwort zurück
+            und muß diese nur noch darstellen. Ein Beispiel für diese Technik 
+            wäre PHP, ASP und Servlets.
+    \end{itemize}
+
+		Ein Servlet ist eine in Java geschriebene Softwarekomponente in Java geschrieben. 
+		Die Firma Sun entwickelte diese Anwendungsschnittstelle (API), um eine
+		einfache Möglichkeit der serverseitigen Programmausführung
+		bereitzustellen. Über diese Api ist es möglich, auf Objekte der 
+		Webkommunikation (request, response) zuzugreifen. Zu Ausführung
+		eines Servlets wird eine Servlet-Engine gebraucht. 
+		
+		Servlets unterstützen Session und Cookies. Sessions dienen dazu,
+		Sitzungen eines Benutzers zu verfolgen und eventuell Informationen
+		zu der Sitzung zu speichern. Cookies sind kleine Informationshappen, 
+		die auf der Clientseite gespeichert werden können.
+
+	\subsection{Arbeitsweise}
+		Wird eine Anfrage an das Servlet gestellt, so wird diese 
+		durch die Servlet-Engine (falls noch nicht geladen) mit
+		init(ServletConfig) initialisiert.
+		Nach der Initialisierung können mehrere Anfragen an das Servlet 
+		gestellt werden, ohne dass es dabei neu initialisiert wird.
+		Das bedeutet, dass ein Servlet mehrere Anfragen und damit mehrere 
+		Benutzer bedienen kann, obwohl es nur einmal im Speicher geladen
+		wird. 
+		
+		Bekommt ein Servlet eine Anfrage, so geschieht das mit
+		service(ServletRequest, ServletResponse). Das Servlet liest 
+		aus dem Request-Object
+		die Parameter und schreibt in das Response-Object die
+		Ausgabe an den Client. Dazwischen kann es jede Anwendungslogik 
+		ausführen, die mit Java realisierbar ist. Davon bekommt der 
+		Benutzer (Client) nichts mit, weil zum Client nur das
+		Ergebnis (z. B. HTML) geschickt wird. 
+		
+		Wird das Servlet nicht mehr gebraucht, so wird es mit destroy()
+		freigegeben.
+		
+		

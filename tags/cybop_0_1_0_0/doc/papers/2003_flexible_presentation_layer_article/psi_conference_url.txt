@@ -1,0 +1,38 @@
+From volker.langenhan@tu-ilmenau.de Wed Feb  5 08:58:49 2003
+Return-Path: <volker.langenhan@tu-ilmenau.de>
+Received: from virusgate.rz.tu-ilmenau.de (virusgate.rz.tu-ilmenau.de [141.24.4.19])
+	by ernie.rz.tu-ilmenau.de (8.9.3/8.9.3) with ESMTP id IAA27062
+	Wed, 5 Feb 2003 08:56:32 +0100 (MET)
+Received: from piggy.rz.tu-ilmenau.de (localhost [127.0.0.1])
+	by virusgate.rz.tu-ilmenau.de (8.11.2/8.11.2) with ESMTP id h157uVe07786
+	Wed, 5 Feb 2003 08:56:31 +0100 (MET)
+Received: from tu-ilmenau.de (pi11.theoinf.tu-ilmenau.de [141.24.205.44])
+	by piggy.rz.tu-ilmenau.de (8.9.3/8.9.3) with ESMTP id IAA10407
+	; Wed, 5 Feb 2003 08:56:30 +0100 (MET)
+Message-ID: <3E40C439.737294@tu-ilmenau.de>
+Date: Wed, 05 Feb 2003 08:58:49 +0100
+From: vla <volker.langenhan@tu-ilmenau.de>
+X-Mailer: Mozilla 4.7 [de] (WinNT; I)
+X-Accept-Language: de
+MIME-Version: 1.0
+To: Christian Heller <christian.heller@tu-ilmenau.de>
+Subject: Re: Konferenz - Paper
+References: <200302050759.30248.christian.heller@tu-ilmenau.de>
+Content-Type: text/plain;
+  charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Status: RO
+X-Status: O
+
+
+http://www.iis.nsk.su/PSI03/index_e.shtml
+Christian Heller schrieb:
+
+> Hallo Volker,
+>
+> 1 Gibt es eine Website der Konferenz in Wladiwostok?
+> 2 Gibt es StyleGuide-Vorschriften (.tex bzw. .cls) fuer das Paper?
+>
+> Christian
+
+

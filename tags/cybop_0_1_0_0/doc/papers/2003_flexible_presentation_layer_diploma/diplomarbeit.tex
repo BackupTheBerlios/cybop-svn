@@ -1,0 +1,53 @@
+ %
+ % $RCSfile: diplomarbeit.tex,v $
+ %
+ % Copyright (c) 1999-2002. Jens Bohl. All rights reserved.
+ %
+ % This software is published under the GPL GNU General Public License.
+ % This program is free software; you can redistribute it and/or
+ % modify it under the terms of the GNU General Public License
+ % as published by the Free Software Foundation; either version 2
+ % of the License, or (at your option) any later version.
+ %
+ % This program is distributed in the hope that it will be useful,
+ % but WITHOUT ANY WARRANTY; without even the implied warranty of
+ % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ % GNU General Public License for more details.
+ %
+ % You should have received a copy of the GNU General Public License
+ % along with this program; if not, write to the Free Software
+ % Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ %
+ % http://www.resmedicinae.org
+ % - Information in Medicine -
+
+ %This document is the main part of the latex document. It includes the cover sheet, the preamble, chapters and appendix of the diploma.
+
+\documentclass[a4paper,12pt]{diplom}
+
+\includeonly{Deckblatt, Preambel, einleitung, Praesentationsschichten, Muster, KompBasSwe, Frameworks, Record, ZusUndAusblick, appendix}
+
+%---these are settings for the space on the edges (top, left, down, right)
+\setlength{\hoffset}{-1,3in} \setlength{\voffset}{-1in} \setlength{\oddsidemargin}{3,5cm} \setlength{\topmargin}{1,3cm}
+\setlength{\headwidth}{16,5cm} \setlength{\textwidth}{16,5cm} \setlength{\textheight}{23,2cm}
+\setlength{\headheight}{0cm}
+\renewcommand{\footnoterule}{\rule{5cm}{0.1mm}\vspace{0.3cm}}
+
+
+\begin{document}
+\setFooter
+\include{Deckblatt}
+\maketitle
+%here is the preamble
+\include{Preambel}
+%here start the chapters
+\include{einleitung}
+\include{Praesentationsschichten}
+\include{Muster}
+\include{KompBasSwe}
+\include{Frameworks}
+\include{Record}
+\include{ZusUndAusblick}
+%here is the appendix
+\include{appendix}
+\end{document}
