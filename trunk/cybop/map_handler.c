@@ -34,9 +34,16 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.19 $ $Date: 2003-10-15 10:04:08 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2003-10-16 09:22:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+
+//
+// Constants.
+//
+
+/** The separation. The ASCII code for "_" is 95. */
+static const int SEPARATION = 95;
 
 //
 // Map.
@@ -179,21 +186,8 @@ static int get_next_map_element_index(void* p0, void* p1) {
 
     int index = -1;
     int i = 0;
-    int test = 0;
-    int* size = &test;
-//??    int* size = (int*) get_array_size(p0);
+    int* size = (int*) get_array_size(p0);
     void* name = 0;
-
-    puts("TEST size");
-    if (*size == 0) {
-        puts("size == 0");
-    }
-    if (*size == 1) {
-        puts("size == 1");
-    }
-    if (*size > 1) {
-        puts("size > 1");
-    }
 
     while (i < *size) {
 
@@ -256,10 +250,8 @@ static int get_map_element_count(void* p0, void* p1) {
             // Compares the current element's name with the searched base name.
             if (strncmp((char*) name, (char*) p1, strlen((char*) p1)) == 0) {
 
-                // The ASCII code for "_" is 95.
-                int separation = 95;
-                char* suffix = strchr((char*) name, separation);
-                char* check = strchr(suffix + 1, separation);
+                char* suffix = strchr((char*) name, SEPARATION);
+                char* check = strchr(suffix + 1, SEPARATION);
 
                 // If no second separation is found, the name really matches.                    
                 if (check == 0) {
@@ -306,6 +298,8 @@ static void build_next_map_element_name(void* p0, void* p1, void* p2) {
     //?? but here a normal integer number is to be converted into a string.
     char suffix = (char) count;
     p2 = (void*) strcat((char*) p2, (char*) p1);
+//??    char separation = (char) SEPARATION;
+//?? Use SEPARATION instead of "_"!
     p2 = (void*) strcat((char*) p2, "_");
 //??    p2 = (void*) strcat((char*) p2, &suffix);
     //?? Temporary solution adds "0" instead of real suffix.
@@ -317,50 +311,47 @@ static void build_next_map_element_name(void* p0, void* p1, void* p2) {
 //
 
 /**
- * Sets the map element.
+ * Sets the map element at the index.
  *
  * @param p0 the map
- * @param p1 the name
- * @param p2 the element
+ * @param p1 the index
+ * @param p2 the name
+ * @param p3 the element
  */
-static void set_map_element(void* p0, void* p1, void* p2) {
+static void set_map_element_at_index(void* p0, void* p1, void* p2, void* p3) {
 
     struct map* m = (struct map*) p0;
     
     if (m != 0) {
         
-        int i = get_next_map_element_index(p0, p1);
-
-        set_array_element(m->names, (void*) &i, p1);
-        set_array_element(m->references, (void*) &i, p2);
-
-        puts("TEST i");
-        if (i == 0) {
-            puts("i == 0");
-        } else if (i == 1) {
-            puts("i == 1");
-        } else if (i > 1) {
-            puts("i > 1");
-        }
-        puts("TEST name");
-        void* name = get_array_element(m->names, (void*) &i);
-        if (name != 0) {
-            puts("name is o.k.:");
-            puts((char*) name);
-        } else {
-            puts("name is null");
-        }
-        puts("TEST reference");
-        void* ref = get_array_element(m->references, (void*) &i);
-        if (ref != 0) {
-            puts("ref is o.k.");
-        } else {
-            puts("ref is null");
-        }
+        set_array_element(m->names, p1, p2);
+        set_array_element(m->references, p1, p3);
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not set map element. The map is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not set map element at index. The map is null.");
+    }
+}
+
+/**
+ * Sets the map element with the name.
+ *
+ * @param p0 the map
+ * @param p1 the name
+ * @param p2 the element
+ */
+static void set_map_element_with_name(void* p0, void* p1, void* p2) {
+
+    struct map* m = (struct map*) p0;
+    
+    if (m != 0) {
+        
+        int i = get_next_map_element_index(m->names, p1);
+        set_map_element_at_index(p0, (void*) &i, p1, p2);
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not set map element with name. The map is null.");
     }
 }
 
@@ -382,7 +373,7 @@ static void add_map_element(void* p0, void* p1, void* p2) {
 
         // Extend name with next free index.
         build_next_map_element_name(m->names, p1, n);
-        set_map_element(p0, n, p2);
+        set_map_element_with_name(p0, n, p2);
         
     } else {
 
@@ -407,7 +398,7 @@ static void remove_map_element_at_index(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not remove map element. The map is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not remove map element at index. The map is null.");
     }
 }
 
@@ -428,7 +419,7 @@ static void remove_map_element_with_name(void* p0, void* p1) {
         
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not remove map element. The map is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not remove map element with name. The map is null.");
     }
 
     // This element name was created (malloc) in add_map_element.
@@ -453,7 +444,7 @@ static void* get_map_element_at_index(void* p0, void* p1) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get map element. The map is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not get map element at index. The map is null.");
     }
     
     return e;
@@ -478,7 +469,7 @@ static void* get_map_element_with_name(void* p0, void* p1) {
     
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get map element. The map is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not get map element with name. The map is null.");
     }
 
     return e;

@@ -40,7 +40,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.17 $ $Date: 2003-10-15 10:04:08 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2003-10-16 09:22:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -175,24 +175,6 @@ int main(int p0, char** p1) {
                     add_map_element(signal_memory, (void*) SIGNAL, (void*) tmp);
 //??                }
 
-                int i = 0;
-                puts("TEST name");
-                struct map* m = (struct map*) signal_memory;
-                void* name = get_array_element(m->names, (void*) &i);
-                if (name != 0) {
-                    puts("name is o.k.:");
-                    puts((char*) name);
-                } else {
-                    puts("name is null");
-                }
-                puts("TEST reference");
-                void* ref = get_array_element(m->references, (void*) &i);
-                if (ref != 0) {
-                    puts("ref is o.k.");
-                } else {
-                    puts("ref is null");
-                }
-        
             } else {
 
                 log((void*) &ERROR_LOG_LEVEL, "Could not send initial signal. The signal is null.");
