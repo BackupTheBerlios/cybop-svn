@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-02-24 17:00:43 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,53 +50,61 @@ void parse_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4)
     if (p4 != NULL_POINTER) {
 
         int* sc = (int*) p4;
-
-//??        log_message((void*) &INFO_LOG_LEVEL, (void*) &PARSE_INTEGER_MESSAGE, (void*) &PARSE_INTEGER_MESSAGE_COUNT);
-
-        // The temporary null-terminated string.
-        char* tmp = NULL_POINTER;
-        int tmps = *sc + 1;
-
-        // Create temporary null-terminated string.
-        create_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
-
-        // The index.
-        int i = 0;
-
-        // Copy original string to temporary null-terminated string.
-        set_array_elements((void*) tmp, (void*) &i, p3, p4, (void*) CHARACTER_ARRAY);
-
-        // This is used as index to set the termination character.
-        i = *sc;
-
-        // Add string termination to temporary null-terminated string.
-        set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_CHARACTER, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
-
-        // The tail variable is useless here and only needed for the string
-        // transformation function. If the whole string array consists of
-        // many sub strings, separated by space characters, then each sub
-        // string gets interpreted as integer number.
-        // The tail variable in this case points to the remaining sub string.
-        char* tail = NULL_POINTER;
-
-        // Transform string to integer value.
-        // The third parameter is the number base:
-        // 0 - tries to automatically identify the correct number base
-        // 8 - octal
-        // 10 - decimal
-        // 16 - hexadecimal
-        int v = strtol(tmp, &tail, 10);
-
-        //?? p0 (Hand over as reference!)
-        //?? Doesn't p0 need to be resized from size 0 to size 1,
-        //?? to be able to take the double value?
-
-        // Set integer value.
-        set_array_elements(p0, (void*) INTEGER_VALUE_INDEX, (void*) &v, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-        // Destroy temporary null-terminated string.
-        destroy_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
-
+        
+        if (p0 != NULL_POINTER ) {
+        
+            void** dest = (void**)p0;            
+                
+    
+    //??        log_message((void*) &INFO_LOG_LEVEL, (void*) &PARSE_INTEGER_MESSAGE, (void*) &PARSE_INTEGER_MESSAGE_COUNT);
+    
+            // The temporary null-terminated string.
+            char* tmp = NULL_POINTER;
+            int tmps = *sc + 1;
+    
+            // Create temporary null-terminated string.
+            create_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+    
+            // The index.
+            int i = 0;
+    
+            // Copy original string to temporary null-terminated string.
+            set_array_elements((void*) tmp, (void*) &i, p3, p4, (void*) CHARACTER_ARRAY);
+    
+            // This is used as index to set the termination character.
+            i = *sc;
+    
+            // Add string termination to temporary null-terminated string.
+            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_CHARACTER, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
+    
+            // The tail variable is useless here and only needed for the string
+            // transformation function. If the whole string array consists of
+            // many sub strings, separated by space characters, then each sub
+            // string gets interpreted as integer number.
+            // The tail variable in this case points to the remaining sub string.
+            char* tail = NULL_POINTER;
+    
+            // Transform string to integer value.
+            // The third parameter is the number base:
+            // 0 - tries to automatically identify the correct number base
+            // 8 - octal
+            // 10 - decimal
+            // 16 - hexadecimal
+            int v = strtol(tmp, &tail, 10);
+    
+            //?? p0 (Hand over as reference!)
+            //?? Doesn't p0 need to be resized from size 0 to size 1,
+            //?? to be able to take the double value?
+    
+            // Set integer value.
+            set_array_elements(*dest, (void*) INTEGER_VALUE_INDEX, (void*) &v, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+    
+            // Destroy temporary null-terminated string.
+            destroy_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+        }
+        else {
+            
+        }
     } else {
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE_COUNT);
