@@ -65,7 +65,7 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.16 $ $Date: 2003-07-25 23:47:57 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2003-07-26 16:01:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -162,6 +162,7 @@ class ItemHandler {
         if (c != null) {
 
             java.lang.System.out.println("INFO: Create item.");
+
             c.item_abstractions = MapHandler.create_map();
             c.items = MapHandler.create_map();
             c.space_abstractions = MapHandler.create_map();
@@ -191,6 +192,7 @@ class ItemHandler {
         if (ic != null) {
 
             java.lang.System.out.println("INFO: Destroy item.");
+
             java.lang.Object forces = ic.forces;
             ic.forces = null;
             MapHandler.destroy_map(forces);
@@ -246,6 +248,8 @@ class ItemHandler {
 
         if (a != null) {
 
+            java.lang.System.out.println("INFO: Create item element.");
+
             if (a.equals(Statics.INTEGER_PRIMITIVE)) {
 
                 i = PrimitiveHandler.create_integer_primitive(c);
@@ -286,6 +290,8 @@ class ItemHandler {
     static java.lang.Object destroy_item_element(java.lang.Object a, java.lang.Object c, java.lang.Object i) throws java.lang.Exception {
 
         if (a != null) {
+
+            java.lang.System.out.println("INFO: Destroy item element.");
 
             if (a.equals(Statics.INTEGER_PRIMITIVE)) {
 
@@ -332,17 +338,14 @@ class ItemHandler {
     static void initialize(java.lang.Object i, java.lang.Object c) throws java.lang.Exception {
 
         org.apache.xerces.parsers.DOMParser p = (org.apache.xerces.parsers.DOMParser) ItemHandler.xml_parser;
+        java.lang.String f = ItemHandler.PATH + c + ItemHandler.CYBOL;
 
         if (p != null) {
             
-            java.lang.String f = ItemHandler.PATH + c + ItemHandler.CYBOL;
+            java.lang.System.out.println("INFO: Initialize item: " + c);
 
-            java.lang.System.out.println("INFO: Parse file: " + f);
             p.parse(f);
-            
-            org.w3c.dom.Document d = p.getDocument();
-
-            ItemHandler.read_document(i, d);
+            ItemHandler.read_document(i, p.getDocument());
             
         } else {
             
@@ -364,6 +367,8 @@ class ItemHandler {
      * @param c the category
      */
     static void finalizz(java.lang.Object i, java.lang.Object c) {
+
+        java.lang.System.out.println("INFO: Finalize item: " + c);
     }
 
     //
@@ -382,6 +387,8 @@ class ItemHandler {
 
         if (doc != null) {
             
+            java.lang.System.out.println("INFO: Read document.");
+
             doc.normalize();
     
             org.w3c.dom.NodeList l = null;
@@ -424,8 +431,8 @@ class ItemHandler {
             
             if (n != null) {
                 
+                java.lang.System.out.println("INFO: Read name.");
                 java.lang.Object name = n.getNodeValue();
-                java.lang.System.out.println("INFO: Read name: " + name);
                 
             } else {
                 
@@ -458,8 +465,8 @@ class ItemHandler {
             
             if (n != null) {
                 
+                java.lang.System.out.println("INFO: Read super.");
                 java.lang.Object super_category = n.getNodeValue();
-                java.lang.System.out.println("INFO: Read super: " + super_category);
                 
             } else {
                 
@@ -489,11 +496,10 @@ class ItemHandler {
         if (nl != null) {
             
             org.w3c.dom.Node n = nl.item(0);
-            java.lang.System.out.println("INFO: Read java object: " + n);
             
             if (n != null) {
                 
-                // Read and process attributes.
+                java.lang.System.out.println("INFO: Read java object.");
                 org.w3c.dom.NamedNodeMap m = n.getAttributes();
                 read_java_object_attributes(i, m);
                 
@@ -520,8 +526,8 @@ class ItemHandler {
         
         if (i != null) {
                 
+            java.lang.System.out.println("INFO: Read java object attributes.");
             java.lang.Object c = ItemHandler.read_attribute(m, JavaObjectHandler.CATEGORY);
-            java.lang.System.out.println("INFO: Read java object category: " + c);
             java.lang.Object jo = JavaObjectHandler.create_java_object(c);
             i.java_object = jo;
 
@@ -575,6 +581,8 @@ class ItemHandler {
 
         if (nl != null) {
             
+            java.lang.System.out.println("INFO: Read items.");
+
             int j = 0;
             int size = nl.getLength();
             org.w3c.dom.Node n = null;
@@ -623,6 +631,8 @@ class ItemHandler {
         
         if (i != null) {
                 
+            java.lang.System.out.println("INFO: Read item attributes.");
+
             java.lang.Object n = ItemHandler.read_attribute(m, ItemHandler.NAME);
             java.lang.Object a = null;
             java.lang.Object c = null;
@@ -632,37 +642,47 @@ class ItemHandler {
             c = ItemHandler.read_attribute(m, ItemHandler.ITEM_CATEGORY);
             it = ItemHandler.create_item_element(a, c);
             MapHandler.add_map_element(i.items, n, it);
-            
+
+            /*??
+                The following lines cause problems!
+                For some reason, all new items are added to all of
+                i.items, i.spaces, i.times
+                Or, also possible, that all three point to the same map.
+                But all maps are created correctly, independently. Hm :-(
+            */            
+/*??
             a = ItemHandler.read_attribute(m, ItemHandler.SPACE_ABSTRACTION);
             c = ItemHandler.read_attribute(m, ItemHandler.SPACE_CATEGORY);
             it = ItemHandler.create_item_element(a, c);
             MapHandler.add_map_element(i.spaces, n, it);
             
-            if ("date".equals(n)) {
+            a = ItemHandler.read_attribute(m, ItemHandler.TIME_ABSTRACTION);
+            c = ItemHandler.read_attribute(m, ItemHandler.TIME_CATEGORY);
+            it = ItemHandler.create_item_element(a, c);
+            MapHandler.add_map_element(i.times, n, it);
+*/
+            
+/*??
+            if (n.equals("date")) {
             
                 java.lang.System.out.println("\n\n\n");
                 
-                for (int x = 0; x < ArrayHandler.get_array_size(((Map) i.items).names); x++) {
+                for (int x = 0; x < ArrayHandler.get_array_size(((Map) i.times).names); x++) {
                     
-//??                    java.lang.Object test = MapHandler.get_map_element(i.items, n);
-                    java.lang.Object test1 = MapHandler.get_map_element(i.items, x);
+                    java.lang.System.out.println(i.times);
+
+                    java.lang.Object test1 = ArrayHandler.get_array_element(((Map) i.times).names, x);
                     java.lang.System.out.println(test1);
 
-                    java.lang.Object test2 = ArrayHandler.get_array_element(((Map) i.items).names, x);
+                    java.lang.Object test2 = MapHandler.get_map_element(i.times, x);
                     java.lang.System.out.println(test2);
                 }
                 
                 java.lang.System.out.println("\n\n\n");
                 java.lang.System.exit(0);
             }
+*/
 
-            a = ItemHandler.read_attribute(m, ItemHandler.TIME_ABSTRACTION);
-            c = ItemHandler.read_attribute(m, ItemHandler.TIME_CATEGORY);
-            it = ItemHandler.create_item_element(a, c);
-            MapHandler.add_map_element(i.times, n, it);
-            
-            java.lang.System.out.println("INFO: Read item: " + n);
-            
         } else {
             
             java.lang.System.out.println("ERROR: Could not read item attributes. The item is null.");
@@ -687,6 +707,8 @@ class ItemHandler {
             
             if (e != null) {
                 
+                java.lang.System.out.println("INFO: Read attribute.");
+
                 a = e.getNodeValue();
         
             } else {

@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.15 $ $Date: 2003-07-25 23:47:57 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-07-26 16:01:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -228,22 +228,24 @@ class Main {
         while (true) {
 
             // Check shutdown flag.
-            if (SignalHandler.shutdown_flag == 1) {
+            if (SignalHandler.shutdown_flag == 0) {
 
+                // Receive signal.
+                SignalHandler.receive(s);
+    
+                // Handle signal.
+                SignalHandler.handle(s, 0);
+    
+                // Send signal.
+                SignalHandler.send(s);
+    
+                // Reset signal.
+                SignalHandler.reset(s);
+                
+            } else {
+                
                 break;
             }
-
-            // Receive signal.
-            SignalHandler.receive(s);
-
-            // Handle signal.
-            SignalHandler.handle(s, 0);
-
-            // Send signal.
-            SignalHandler.send(s);
-
-            // Reset signal.
-            SignalHandler.reset(s);
         }
     }
 }
