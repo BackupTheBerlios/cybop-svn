@@ -64,7 +64,7 @@
  * A compound model can be created by cloning an existing model template so that
  * some space gets allocated in the computer's memory.
  *
- * @version $Revision: 1.5 $ $Date: 2004-07-02 20:51:15 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-07-04 09:49:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1584,198 +1584,189 @@ void get_compound_part_by_index(const void* p0, const void* p1, const void* p2,
 
         int* i = (int*) p3;
 
-        if (p2 != NULL_POINTER) {
+        if (p1 != NULL_POINTER) {
 
-            int* s = (int*) p2;
+            int* c = (int*) p1;
 
-            if (p1 != NULL_POINTER) {
+            if (*i >= 0) {
 
-                int* c = (int*) p1;
+//??                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Get compound part by index.");
 
-                if (*i >= 0) {
+                // Initialize part names, models, abstractions, constraints
+                // and position models, abstractions, constraints
+                // and their counts and sizes.
+                void* pn = NULL_POINTER;
+                void* pnc = NULL_POINTER;
+                void* pns = NULL_POINTER;
+                void* pm = NULL_POINTER;
+                void* pmc = NULL_POINTER;
+                void* pms = NULL_POINTER;
+                void* pa = NULL_POINTER;
+                void* pac = NULL_POINTER;
+                void* pas = NULL_POINTER;
+                void* pc = NULL_POINTER;
+                void* pcc = NULL_POINTER;
+                void* pcs = NULL_POINTER;
+                void* pom = NULL_POINTER;
+                void* pomc = NULL_POINTER;
+                void* poms = NULL_POINTER;
+                void* poa = NULL_POINTER;
+                void* poac = NULL_POINTER;
+                void* poas = NULL_POINTER;
+                void* poc = NULL_POINTER;
+                void* pocc = NULL_POINTER;
+                void* pocs = NULL_POINTER;
 
-//??                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Get compound part by index.");
+                // Get part names, models, abstractions, constraints
+                // and position models, abstractions, constraints
+                // and their counts and sizes.
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_NAMES_INDEX, (void*) &pn);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_NAMES_COUNTS_INDEX, (void*) &pnc);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_NAMES_SIZES_INDEX, (void*) &pns);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &pmc);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_SIZES_INDEX, (void*) &pms);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX, (void*) &pac);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_CONSTRAINTS_INDEX, (void*) &pc);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_CONSTRAINTS_COUNTS_INDEX, (void*) &pcc);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_CONSTRAINTS_SIZES_INDEX, (void*) &pcs);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_COUNTS_INDEX, (void*) &pomc);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_SIZES_INDEX, (void*) &poms);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_COUNTS_INDEX, (void*) &poac);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_SIZES_INDEX, (void*) &poas);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_CONSTRAINTS_INDEX, (void*) &poc);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_CONSTRAINTS_COUNTS_INDEX, (void*) &pocc);
+                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_CONSTRAINTS_SIZES_INDEX, (void*) &pocs);
 
-                    // Initialize part names, models, abstractions, constraints
-                    // and position models, abstractions, constraints
-                    // and their counts and sizes.
-                    void* pn = NULL_POINTER;
-                    void* pnc = NULL_POINTER;
-                    void* pns = NULL_POINTER;
-                    void* pm = NULL_POINTER;
-                    void* pmc = NULL_POINTER;
-                    void* pms = NULL_POINTER;
-                    void* pa = NULL_POINTER;
-                    void* pac = NULL_POINTER;
-                    void* pas = NULL_POINTER;
-                    void* pc = NULL_POINTER;
-                    void* pcc = NULL_POINTER;
-                    void* pcs = NULL_POINTER;
-                    void* pom = NULL_POINTER;
-                    void* pomc = NULL_POINTER;
-                    void* poms = NULL_POINTER;
-                    void* poa = NULL_POINTER;
-                    void* poac = NULL_POINTER;
-                    void* poas = NULL_POINTER;
-                    void* poc = NULL_POINTER;
-                    void* pocc = NULL_POINTER;
-                    void* pocs = NULL_POINTER;
+                if (*i < *c) {
 
-                    // Get part names, models, abstractions, constraints
-                    // and position models, abstractions, constraints
-                    // and their counts and sizes.
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_NAMES_INDEX, (void*) &pn);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_NAMES_COUNTS_INDEX, (void*) &pnc);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_NAMES_SIZES_INDEX, (void*) &pns);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &pmc);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_SIZES_INDEX, (void*) &pms);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX, (void*) &pac);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_CONSTRAINTS_INDEX, (void*) &pc);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_CONSTRAINTS_COUNTS_INDEX, (void*) &pcc);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_CONSTRAINTS_SIZES_INDEX, (void*) &pcs);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_COUNTS_INDEX, (void*) &pomc);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_SIZES_INDEX, (void*) &poms);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_COUNTS_INDEX, (void*) &poac);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_SIZES_INDEX, (void*) &poas);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_CONSTRAINTS_INDEX, (void*) &poc);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_CONSTRAINTS_COUNTS_INDEX, (void*) &pocc);
-                    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_CONSTRAINTS_SIZES_INDEX, (void*) &pocs);
+                    // Get part name, model, abstraction, constraint
+                    // and position model, abstraction, constraint
+                    // and their count and size.
+                    // CAUTION! Only those parameters are got, which are not null.
 
-                    if (*i < *c) {
+                    if (p4 != NULL_POINTER) {
 
-                        // Get part name, model, abstraction, constraint
-                        // and position model, abstraction, constraint
-                        // and their count and size.
-                        // CAUTION! Only those parameters are got, which are not null.
+                        get_array_element((void*) &pn, (void*) &POINTER_ARRAY, p3, p4);
+                    }
 
-                        if (p4 != NULL_POINTER) {
+                    if (p5 != NULL_POINTER) {
 
-                            get_array_element((void*) &pn, (void*) &POINTER_ARRAY, p3, p4);
-                        }
+                        get_array_element((void*) &pnc, (void*) &INTEGER_ARRAY, p3, p5);
+                    }
 
-                        if (p5 != NULL_POINTER) {
+                    if (p6 != NULL_POINTER) {
 
-                            get_array_element((void*) &pnc, (void*) &INTEGER_ARRAY, p3, p5);
-                        }
+                        get_array_element((void*) &pns, (void*) &INTEGER_ARRAY, p3, p6);
+                    }
 
-                        if (p6 != NULL_POINTER) {
+                    if (p7 != NULL_POINTER) {
 
-                            get_array_element((void*) &pns, (void*) &INTEGER_ARRAY, p3, p6);
-                        }
+                        get_array_element((void*) &pm, (void*) &POINTER_ARRAY, p3, p7);
+                    }
 
-                        if (p7 != NULL_POINTER) {
+                    if (p8 != NULL_POINTER) {
 
-                            get_array_element((void*) &pm, (void*) &POINTER_ARRAY, p3, p7);
-                        }
+                        get_array_element((void*) &pmc, (void*) &INTEGER_ARRAY, p3, p8);
+                    }
 
-                        if (p8 != NULL_POINTER) {
+                    if (p9 != NULL_POINTER) {
 
-                            get_array_element((void*) &pmc, (void*) &INTEGER_ARRAY, p3, p8);
-                        }
+                        get_array_element((void*) &pms, (void*) &INTEGER_ARRAY, p3, p9);
+                    }
 
-                        if (p9 != NULL_POINTER) {
+                    if (p10 != NULL_POINTER) {
 
-                            get_array_element((void*) &pms, (void*) &INTEGER_ARRAY, p3, p9);
-                        }
+                        get_array_element((void*) &pa, (void*) &POINTER_ARRAY, p3, p10);
+                    }
 
-                        if (p10 != NULL_POINTER) {
+                    if (p11 != NULL_POINTER) {
 
-                            get_array_element((void*) &pa, (void*) &POINTER_ARRAY, p3, p10);
-                        }
+                        get_array_element((void*) &pac, (void*) &INTEGER_ARRAY, p3, p11);
+                    }
 
-                        if (p11 != NULL_POINTER) {
+                    if (p12 != NULL_POINTER) {
 
-                            get_array_element((void*) &pac, (void*) &INTEGER_ARRAY, p3, p11);
-                        }
+                        get_array_element((void*) &pas, (void*) &INTEGER_ARRAY, p3, p12);
+                    }
 
-                        if (p12 != NULL_POINTER) {
+                    if (p13 != NULL_POINTER) {
 
-                            get_array_element((void*) &pas, (void*) &INTEGER_ARRAY, p3, p12);
-                        }
+                        get_array_element((void*) &pc, (void*) &POINTER_ARRAY, p3, p13);
+                    }
 
-                        if (p13 != NULL_POINTER) {
+                    if (p14 != NULL_POINTER) {
 
-                            get_array_element((void*) &pc, (void*) &POINTER_ARRAY, p3, p13);
-                        }
+                        get_array_element((void*) &pcc, (void*) &INTEGER_ARRAY, p3, p14);
+                    }
 
-                        if (p14 != NULL_POINTER) {
+                    if (p15 != NULL_POINTER) {
 
-                            get_array_element((void*) &pcc, (void*) &INTEGER_ARRAY, p3, p14);
-                        }
+                        get_array_element((void*) &pcs, (void*) &INTEGER_ARRAY, p3, p15);
+                    }
 
-                        if (p15 != NULL_POINTER) {
+                    if (p16 != NULL_POINTER) {
 
-                            get_array_element((void*) &pcs, (void*) &INTEGER_ARRAY, p3, p15);
-                        }
+                        get_array_element((void*) &pom, (void*) &POINTER_ARRAY, p3, p16);
+                    }
 
-                        if (p16 != NULL_POINTER) {
+                    if (p17 != NULL_POINTER) {
 
-                            get_array_element((void*) &pom, (void*) &POINTER_ARRAY, p3, p16);
-                        }
+                        get_array_element((void*) &pomc, (void*) &INTEGER_ARRAY, p3, p17);
+                    }
 
-                        if (p17 != NULL_POINTER) {
+                    if (p18 != NULL_POINTER) {
 
-                            get_array_element((void*) &pomc, (void*) &INTEGER_ARRAY, p3, p17);
-                        }
+                        get_array_element((void*) &poms, (void*) &INTEGER_ARRAY, p3, p18);
+                    }
 
-                        if (p18 != NULL_POINTER) {
+                    if (p19 != NULL_POINTER) {
 
-                            get_array_element((void*) &poms, (void*) &INTEGER_ARRAY, p3, p18);
-                        }
+                        get_array_element((void*) &poa, (void*) &POINTER_ARRAY, p3, p19);
+                    }
 
-                        if (p19 != NULL_POINTER) {
+                    if (p20 != NULL_POINTER) {
 
-                            get_array_element((void*) &poa, (void*) &POINTER_ARRAY, p3, p19);
-                        }
+                        get_array_element((void*) &poac, (void*) &INTEGER_ARRAY, p3, p20);
+                    }
 
-                        if (p20 != NULL_POINTER) {
+                    if (p21 != NULL_POINTER) {
 
-                            get_array_element((void*) &poac, (void*) &INTEGER_ARRAY, p3, p20);
-                        }
+                        get_array_element((void*) &poas, (void*) &INTEGER_ARRAY, p3, p21);
+                    }
 
-                        if (p21 != NULL_POINTER) {
+                    if (p22 != NULL_POINTER) {
 
-                            get_array_element((void*) &poas, (void*) &INTEGER_ARRAY, p3, p21);
-                        }
+                        get_array_element((void*) &poc, (void*) &POINTER_ARRAY, p3, p22);
+                    }
 
-                        if (p22 != NULL_POINTER) {
+                    if (p23 != NULL_POINTER) {
 
-                            get_array_element((void*) &poc, (void*) &POINTER_ARRAY, p3, p22);
-                        }
+                        get_array_element((void*) &pocc, (void*) &INTEGER_ARRAY, p3, p23);
+                    }
 
-                        if (p23 != NULL_POINTER) {
+                    if (p24 != NULL_POINTER) {
 
-                            get_array_element((void*) &pocc, (void*) &INTEGER_ARRAY, p3, p23);
-                        }
-
-                        if (p24 != NULL_POINTER) {
-
-                            get_array_element((void*) &pocs, (void*) &INTEGER_ARRAY, p3, p24);
-                        }
-
-                    } else {
-
-//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by index. The index exceeds the count.");
+                        get_array_element((void*) &pocs, (void*) &INTEGER_ARRAY, p3, p24);
                     }
 
                 } else {
 
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by index. The index is negativ.");
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by index. The index exceeds the count.");
                 }
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by index. The count is null.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by index. The index is negativ.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by index. The size is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound part by index. The count is null.");
         }
 
     } else {

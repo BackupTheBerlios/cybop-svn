@@ -1,5 +1,5 @@
 /*
- * $RCSfile: internals.c,v $
+ * $RCSfile: integer_internals.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -32,71 +32,59 @@
  * - Macintosh
  * - MS Windows
  *
- * @version $Revision: 1.2 $ $Date: 2004-06-27 00:59:43 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-07-04 09:49:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTERNALS_SOURCE
-#define INTERNALS_SOURCE
+#ifndef INTEGER_INTERNALS_SOURCE
+#define INTEGER_INTERNALS_SOURCE
 
 #include "../array/array.c"
 #include "../global/constant.c"
 #include "../logger/logger.c"
 
 /**
- * Creates the internals.
+ * Creates the integer internals.
  *
  * @param p0 the transient model
  * @param p1 the transient model size
  */
-void create_internals(void* p0, const void* p1) {
+void create_integer_internals(void* p0, const void* p1) {
 
 //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTERNALS_MESSAGE, (void*) &CREATE_INTERNALS_MESSAGE_COUNT);
 
-    // Create internals.
-    create_array(p0, (void*) &INTEGER_ARRAY, (void*) &INTERNALS_COUNT);
+    // Create integer internals.
+    create_array(p0, (void*) &INTEGER_ARRAY, p1);
 
     // Initialize elements.
-    int unix_socket_flag = 0;
-//??    int x_windows_flag = 0;
-//??    void* x_windows = NULL_POINTER;
-//??    int macintosh_flag = 0;
-//??    void* macintosh = NULL_POINTER;
-//??    int ms_windows_flag = 0;
-//??    void* ms_windows = NULL_POINTER;
-
-    // Create elements.
-//??    create_array((void*) &p, (void*) &POINTER_ARRAY, p1);
+    int unix_server_socket = -1;
 
     // Set elements in ascending order.
-    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &UNIX_SOCKET_FLAG_INDEX, (void*) &unix_socket_flag);
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INDEX, (void*) &unix_server_socket);
 }
 
 /**
- * Destroys the internals.
+ * Destroys the integer internals.
  *
  * @param p0 the transient model
  * @param p1 the transient model size
  */
-void destroy_internals(void* p0, const void* p1) {
+void destroy_integer_internals(void* p0, const void* p1) {
 
 //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_INTERNALS_MESSAGE, (void*) &DESTROY_INTERNALS_MESSAGE_COUNT);
 
     // Initialize elements.
-    int unix_socket_flag = 0;
+    int unix_server_socket = -1;
 
     // Get elements.
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &UNIX_SOCKET_FLAG_INDEX, (void*) &unix_socket_flag);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INDEX, (void*) &unix_server_socket);
 
     // Remove elements in descending order.
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &INTERNALS_COUNT, (void*) &UNIX_SOCKET_FLAG_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, p1, (void*) &UNIX_SERVER_SOCKET_INDEX);
 
-    // Destroy elements.
-//??    destroy_array((void*) &p, (void*) &POINTER_ARRAY, p1);
-
-    // Destroy internals.
-    destroy_array(p0, (void*) &INTEGER_ARRAY, (void*) &INTERNALS_COUNT);
+    // Destroy integer internals.
+    destroy_array(p0, (void*) &INTEGER_ARRAY, p1);
 }
 
-/* INTERNALS_SOURCE */
+/* INTEGER_INTERNALS_SOURCE */
 #endif

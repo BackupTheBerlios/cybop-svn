@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2004-07-03 08:07:42 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-07-04 09:49:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -138,7 +138,7 @@ void add(const void* p0,
 
         int* sc = (int*) p0;
 
-        if (*sc == 11) {
+        if (*sc == 4) {
 
             // Initialize persistent summand 1-, summand 2- and sum model
             // and their counts and sizes.
@@ -170,21 +170,21 @@ void add(const void* p0,
 
                 if (j == 1) {
 
-                    // Get transient summand 1 model and its count and size.
+                    // Get persistent summand 1 model and its count and size.
                     get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ps1m);
                     get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ps1mc);
                     get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ps1ms);
 
                 } else if (j == 2) {
 
-                    // Get transient summand 2 model and its count and size.
+                    // Get persistent summand 2 model and its count and size.
                     get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ps2m);
                     get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ps2mc);
                     get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ps2ms);
 
                 } else if (j == 3) {
 
-                    // Get transient sum model and its count and size.
+                    // Get persistent sum model and its count and size.
                     get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &psumm);
                     get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &psummc);
                     get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &psumms);
@@ -241,7 +241,9 @@ void add(const void* p0,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
 
+            //
             // CAUTION! Only addition of primitives with equal type is allowed!
+            //
 
             // The comparison result.
             int r = 0;

@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.25 $ $Date: 2004-07-02 20:51:15 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2004-07-04 09:49:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,7 +35,10 @@
 
 #include <stdio.h>
 //??#include <stdlib.h>
-#include "../cyboi/internals.c"
+#include "../cyboi/character_internals.c"
+#include "../cyboi/double_internals.c"
+#include "../cyboi/integer_internals.c"
+#include "../cyboi/pointer_internals.c"
 #include "../global/constant.c"
 #include "../global/variable.c"
 #include "../logger/logger.c"
@@ -67,28 +70,29 @@
  * @param p0 the signal memory
  * @param p1 the signal memory count
  * @param p2 the signal memory size
- * @param p3 the internals
- * @param p4 the internals count
- * @param p5 the internals size
+ * @param p3 the character internals
+ * @param p4 the integer internals
+ * @param p5 the pointer internals
+ * @param p6 the double internals
  */
 void activate_internals(void* p0, void* p1, void* p2,
-    void* p3, void* p4, void* p5) {
+    void* p3, void* p4, void* p5, void* p6) {
 
     //
     // Unix socket.
     //
 
-    int unix_socket_flag = 0;
+    char unix_server_socket_flag = 0;
 
-    get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &UNIX_SOCKET_FLAG_INDEX, (void*) &unix_socket_flag);
+    get_array_element(p3, (void*) &CHARACTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FLAG_INDEX, (void*) &unix_server_socket_flag);
 
-    if (unix_socket_flag == 1) {
+    if (unix_server_socket_flag == 1) {
 
-        int unix_socket = -1;
+        int unix_server_socket = -1;
 
-        get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &UNIX_SOCKET_INDEX, (void*) &unix_socket);
+        get_array_element(p4, (void*) &INTEGER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INDEX, (void*) &unix_server_socket);
 
-        receive_unix_socket_input((void*) &unix_socket);
+        receive_unix_socket((void*) &unix_server_socket);
     }
 
 /*??
@@ -121,16 +125,17 @@ void activate_internals(void* p0, void* p1, void* p2,
  * @param p3 the knowledge
  * @param p4 the knowledge count
  * @param p5 the knowledge size
- * @param p6 the internals
- * @param p7 the internals count
- * @param p8 the internals size
+ * @param p6 the character internals
+ * @param p7 the integer internals
+ * @param p8 the pointer internals
+ * @param p9 the double internals
  */
 void wait(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8) {
+    void* p6, void* p7, void* p8, void* p9) {
 
     // Activate internal mechanisms for signal reception.
-    activate_internals(p0, p1, p2, p3, p4, p5);
+    activate_internals(p0, p1, p2, p6, p7, p8, p9);
 
     // The shutdown flag.
     int f = 0;
@@ -223,8 +228,7 @@ void wait(void* p0, void* p1, void* p2,
                     if (r == 1) {
 
                         handle_operation_signal((void*) &s, (void*) &sc,
-                            p3, p4, p5, p6, p7, p8, p0, p1, p2,
-                            (void*) &f);
+                            p3, p4, p5, p6, p7, p8, p9, (void*) &f);
 
                         d = 1;
                     }
@@ -380,7 +384,7 @@ int main(int p0, char** p1) {
             // Knowledge container.
             //
 
-            // The knowledge container and its count and size.
+            // Initialize knowledge and its count and size.
             void* k = NULL_POINTER;
             int kc = 0;
             int ks = 0;
@@ -389,16 +393,21 @@ int main(int p0, char** p1) {
             create_compound((void*) &k, (void*) &ks);
 
             //
-            // Internals container.
+            // Internals containers.
             //
 
-            // The internals container and its count and size.
-            void* i = NULL_POINTER;
-            int ic = 0;
-            int is = 0;
+            // Initialize character-, integer-, pointer- and double internals.
+            // Internals have a fixed size, so counts or sizes are not needed.
+            void* ci = NULL_POINTER;
+            void* ii = NULL_POINTER;
+            void* pi = NULL_POINTER;
+            void* di = NULL_POINTER;
 
-            // Create internals container.
-            create_internals((void*) &i, (void*) &is);
+            // Create character-, integer-, pointer- and double internals.
+            create_character_internals((void*) &ci, (void*) &CHARACTER_INTERNALS_COUNT);
+            create_integer_internals((void*) &ii, (void*) &INTEGER_INTERNALS_COUNT);
+            create_pointer_internals((void*) &pi, (void*) &POINTER_INTERNALS_COUNT);
+            create_double_internals((void*) &di, (void*) &DOUBLE_INTERNALS_COUNT);
 
             //
             // Signal container.
@@ -421,19 +430,19 @@ int main(int p0, char** p1) {
             //?? certain communication mechanism that cyboi offers or not.
             //
 
-            // Initialize unix socket.
-            int unix_socket = -1;
-            //?? Set unix socket flag so that unix server socket gets created.
-            int unix_socket_flag = 1;
-            set_array_element((void*) &i, (void*) &INTEGER_ARRAY, (void*) &UNIX_SOCKET_FLAG_INDEX, (void*) &unix_socket_flag);
+            // Initialize unix server socket.
+            int unix_server_socket = -1;
+            //?? Set unix server socket flag so that unix server socket gets created.
+            char unix_server_socket_flag = 1;
+            set_array_element((void*) &ci, (void*) &CHARACTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FLAG_INDEX, (void*) &unix_server_socket_flag);
 
-            if (unix_socket_flag == 1) {
+            if (unix_server_socket_flag == 1) {
 
-                // Create unix socket.
-                create_unix_socket((void*) &unix_socket, (void*) &UNIX_SOCKET_NAME);
+                // Create unix server socket.
+                create_unix_socket((void*) &unix_server_socket, (void*) &UNIX_SERVER_SOCKET_FILENAME);
             }
 
-    fprintf(stderr, "unix_socket: %i\n", unix_socket);
+    fprintf(stderr, "unix_socket: %i\n", unix_server_socket);
 
             //
             // Startup model.
@@ -512,38 +521,36 @@ int main(int p0, char** p1) {
             // The loop is left as soon as its shutdown flag is set.
             wait((void*) &s, (void*) &sc, (void*) &ss,
                 (void*) &k, (void*) &kc, (void*) &ks,
-                (void*) &i, (void*) &ic, (void*) &is);
+                (void*) &ci, (void*) &ii, (void*) &pi, (void*) &di);
 
             //
             // Destruction.
             //
 
-            //?? Do not forget to destroy startup abstraction etc. HERE!
-
-            // Destroy startup model.
+/*??
+            // Destroy transient part abstraction, model and their counts and sizes.
+            destroy_model((void*) &tpa, (void*) &tpac, (void*) &tpas,
+                (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
             destroy_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &tpa, (void*) &tpac,
-                (void*) &tpa, (void*) &tpac,
-                (void*) &tpm, (void*) &tpmc,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER);
+                (void*) &ppa, (void*) &ppac);
+*/
 
-            //?? Set unix socket flag so that unix server socket gets created.
-            if (unix_socket_flag == 1) {
+            if (unix_server_socket_flag == 1) {
 
-                // Destroy unix socket.
-                destroy_unix_socket((void*) &unix_socket, (void*) &UNIX_SOCKET_NAME);
+                // Destroy unix server socket.
+                destroy_unix_socket((void*) &unix_server_socket, (void*) &UNIX_SERVER_SOCKET_FILENAME);
             }
 
             // Destroy signal container.
             destroy_signal_memory((void*) &s, (void*) &ss);
 
-            // Destroy internals container.
-            destroy_internals((void*) &i, (void*) &is);
+            // Destroy character-, integer-, pointer- and double internals.
+            destroy_character_internals((void*) &ci, (void*) &CHARACTER_INTERNALS_COUNT);
+            destroy_integer_internals((void*) &ii, (void*) &INTEGER_INTERNALS_COUNT);
+            destroy_pointer_internals((void*) &pi, (void*) &POINTER_INTERNALS_COUNT);
+            destroy_double_internals((void*) &di, (void*) &DOUBLE_INTERNALS_COUNT);
 
-            // Destroy knowledge container.
+            // Destroy knowledge.
             destroy_compound((void*) &k, (void*) &ks);
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);

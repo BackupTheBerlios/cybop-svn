@@ -64,7 +64,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.6 $ $Date: 2004-07-02 08:06:54 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-07-04 09:49:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -319,26 +319,55 @@ static const int SIGNALS_ABSTRACTIONS_INDEX = 3;
 static const int SIGNALS_ABSTRACTIONS_COUNTS_INDEX = 4;
 
 //
-// Internals.
+// Character internals.
 //
 
-/** The internals count. */
-static const int INTERNALS_COUNT = 2;
+/** The character internals count. */
+static const int CHARACTER_INTERNALS_COUNT = 1;
 
-/** The unix socket flag index. */
-static const int UNIX_SOCKET_FLAG_INDEX = 0;
+/** The unix server socket flag index. */
+static const int UNIX_SERVER_SOCKET_FLAG_INDEX = 0;
 
-/** The unix socket index. */
-static const int UNIX_SOCKET_INDEX = 1;
+//
+// Integer internals.
+//
+
+/** The integer internals count. */
+static const int INTEGER_INTERNALS_COUNT = 1;
+
+/** The unix server socket index. */
+static const int UNIX_SERVER_SOCKET_INDEX = 0;
+
+//
+// Pointer internals.
+//
+
+/** The pointer internals count. */
+static const int POINTER_INTERNALS_COUNT = 1;
+
+/** The unix server socket filename index. */
+static const int UNIX_SERVER_SOCKET_FILENAME_INDEX = 0;
+
+//
+// Double internals.
+//
+
+/** The double internals count. */
+static const int DOUBLE_INTERNALS_COUNT = 0;
 
 //
 // Unix socket.
 //
 
-/** The unix socket name array, pointer, count. */
-static const char UNIX_SOCKET_NAME_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'o', 'c', 'k', 'e', 't', '\0'};
-static const char* UNIX_SOCKET_NAME = UNIX_SOCKET_NAME_ARRAY;
-static const int UNIX_SOCKET_NAME_COUNT = 12;
+/** The unix server socket filename array, pointer, count. */
+static const char UNIX_SERVER_SOCKET_FILENAME_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'e', 'r', 'v', 'e', 'r', '_', 's', 'o', 'c', 'k', 'e', 't', '_', 'f', 'i', 'l', 'e', 'n', 'a', 'm', 'e'};
+static const char* UNIX_SERVER_SOCKET_FILENAME = UNIX_SERVER_SOCKET_FILENAME_ARRAY;
+static const int UNIX_SERVER_SOCKET_FILENAME_COUNT = 27;
+
+/** The unix socket filename name array, pointer, count. */
+static const char UNIX_SOCKET_FILENAME_NAME_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'o', 'c', 'k', 'e', 't', '_', 'f', 'i', 'l', 'e', 'n', 'a', 'm', 'e', '_', 'n', 'a', 'm', 'e'};
+static const char* UNIX_SOCKET_FILENAME_NAME = UNIX_SOCKET_FILENAME_NAME_ARRAY;
+static const int UNIX_SOCKET_FILENAME_NAME_COUNT = 25;
 
 //
 // X windows.
@@ -355,238 +384,129 @@ static const int NORMAL_PRIORITY = 0;
 // Signal languages.
 //
 
-/** The cybol language array. */
-static const char CYBOL_LANGUAGE_ARRAY[] = {'c', 'y', 'b', 'o', 'l'};
+/** The internal language array, pointer, count. */
+static const char INTERNAL_LANGUAGE_ARRAY[] = {'i', 'n', 't', 'e', 'r', 'n', 'a', 'l'};
+static const char* INTERNAL_LANGUAGE = INTERNAL_LANGUAGE_ARRAY;
+static const int INTERNAL_LANGUAGE_COUNT = 8;
 
-/** The cybol language. */
-static const char* CYBOL_LANGUAGE = CYBOL_LANGUAGE_ARRAY;
+/** The unix socket language array, pointer, count. */
+static const char UNIX_SOCKET_LANGUAGE_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'o', 'c', 'k', 'e', 't'};
+static const char* UNIX_SOCKET_LANGUAGE = UNIX_SOCKET_LANGUAGE_ARRAY;
+static const int UNIX_SOCKET_LANGUAGE_COUNT = 11;
 
-/** The cybol language count. */
-static const int CYBOL_LANGUAGE_COUNT = 5;
-
-/** The inline language array. */
-static const char INLINE_LANGUAGE_ARRAY[] = {'i', 'n', 'l', 'i', 'n', 'e'};
-
-/** The inline language. */
-static const char* INLINE_LANGUAGE = INLINE_LANGUAGE_ARRAY;
-
-/** The inline language count. */
-static const int INLINE_LANGUAGE_COUNT = 6;
-
-/** The textual user interface (tui) language array. */
+/** The character/ textual user interface (tui) language array, pointer, count. */
 static const char TUI_LANGUAGE_ARRAY[] = {'t', 'u', 'i'};
-
-/** The textual user interface (tui) language. */
 static const char* TUI_LANGUAGE = TUI_LANGUAGE_ARRAY;
-
-/** The textual user interface (tui) language count. */
 static const int TUI_LANGUAGE_COUNT = 3;
 
-/** The mouse language array. */
+/** The mouse language array, pointer, count. */
 static const char MOUSE_LANGUAGE_ARRAY[] = {'m', 'o', 'u', 's', 'e'};
-
-/** The mouse language. */
 static const char* MOUSE_LANGUAGE = MOUSE_LANGUAGE_ARRAY;
-
-/** The mouse language count. */
 static const int MOUSE_LANGUAGE_COUNT = 5;
 
-/** The x windows language array. */
+/** The x windows language array, pointer, count. */
 static const char X_WINDOWS_LANGUAGE_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', 's'};
-
-/** The x windows language. */
 static const char* X_WINDOWS_LANGUAGE = X_WINDOWS_LANGUAGE_ARRAY;
-
-/** The x windows language count. */
 static const int X_WINDOWS_LANGUAGE_COUNT = 9;
 
-/** The socket language array. */
-static const char SOCKET_LANGUAGE_ARRAY[] = {'s', 'o', 'c', 'k', 'e', 't'};
-
-/** The socket language. */
-static const char* SOCKET_LANGUAGE = SOCKET_LANGUAGE_ARRAY;
-
-/** The socket language count. */
-static const int SOCKET_LANGUAGE_COUNT = 6;
-
-/** The structured query language (sql) array. */
+/** The structured query language (sql) array, pointer, count. */
 static const char SQ_LANGUAGE_ARRAY[] = {'s', 'q'};
-
-/** The structured query language (sql). */
 static const char* SQ_LANGUAGE = SQ_LANGUAGE_ARRAY;
-
-/** The structured query language (sql) count. */
 static const int SQ_LANGUAGE_COUNT = 2;
 
-/** The java messaging service (jms) language array. */
+/** The java messaging service (jms) language array, pointer, count. */
 static const char JMS_LANGUAGE_ARRAY[] = {'j', 'm', 's'};
-
-/** The java messaging service (jms) language. */
 static const char* JMS_LANGUAGE = JMS_LANGUAGE_ARRAY;
-
-/** The java messaging service (jms) language count. */
 static const int JMS_LANGUAGE_COUNT = 3;
 
-/** The remote method invocation (rmi) language array. */
+/** The remote method invocation (rmi) language array, pointer, count. */
 static const char RMI_LANGUAGE_ARRAY[] = {'r', 'm', 'i'};
-
-/** The remote method invocation (rmi) language. */
 static const char* RMI_LANGUAGE = RMI_LANGUAGE_ARRAY;
-
-/** The remote method invocation (rmi) language count. */
 static const int RMI_LANGUAGE_COUNT = 3;
 
-/** The common object request broker architecture (corba) language array. */
+/** The common object request broker architecture (corba) language array, pointer, count. */
 static const char CORBA_LANGUAGE_ARRAY[] = {'c', 'o', 'r', 'b', 'a'};
-
-/** The common object request broker architecture (corba) language. */
 static const char* CORBA_LANGUAGE = CORBA_LANGUAGE_ARRAY;
-
-/** The common object request broker architecture (corba) language count. */
 static const int CORBA_LANGUAGE_COUNT = 5;
 
-/** The extensible markup language (xml) array. */
+/** The extensible markup language (xml) array, pointer, count. */
 static const char XML_LANGUAGE_ARRAY[] = {'x', 'm', 'l'};
-
-/** The extensible markup language (xml). */
 static const char* XML_LANGUAGE = XML_LANGUAGE_ARRAY;
-
-/** The extensible markup language (xml) count. */
 static const int XML_LANGUAGE_COUNT = 3;
 
-/** The simple object access protocol (soap) language array. */
+/** The simple object access protocol (soap) language array, pointer, count. */
 static const char SOAP_LANGUAGE_ARRAY[] = {'s', 'o', 'a', 'p'};
-
-/** The simple object access protocol (soap) language. */
 static const char* SOAP_LANGUAGE = SOAP_LANGUAGE_ARRAY;
-
-/** The simple object access protocol (soap) language count. */
 static const int SOAP_LANGUAGE_COUNT = 4;
 
-/** The file language array. */
+/** The file language array, pointer, count. */
 static const char FILE_LANGUAGE_ARRAY[] = {'f', 'i', 'l', 'e'};
-
-/** The file language. */
 static const char* FILE_LANGUAGE = FILE_LANGUAGE_ARRAY;
-
-/** The file language count. */
 static const int FILE_LANGUAGE_COUNT = 4;
 
-/** The floppy language array. */
+/** The floppy language array, pointer, count. */
 static const char FLOPPY_LANGUAGE_ARRAY[] = {'f', 'l', 'o', 'p', 'p', 'y'};
-
-/** The floppy language. */
 static const char* FLOPPY_LANGUAGE = FLOPPY_LANGUAGE_ARRAY;
-
-/** The floppy language count. */
 static const int FLOPPY_LANGUAGE_COUNT = 6;
 
-/** The ftp language array. */
+/** The ftp language array, pointer, count. */
 static const char FTP_LANGUAGE_ARRAY[] = {'f', 't', 'p'};
-
-/** The ftp language. */
 static const char* FTP_LANGUAGE = FTP_LANGUAGE_ARRAY;
-
-/** The ftp language count. */
 static const int FTP_LANGUAGE_COUNT = 3;
 
-/** The sftp language array. */
+/** The sftp language array, pointer, count. */
 static const char SFTP_LANGUAGE_ARRAY[] = {'s', 'f', 't', 'p'};
-
-/** The sftp language. */
 static const char* SFTP_LANGUAGE = SFTP_LANGUAGE_ARRAY;
-
-/** The sftp language count. */
 static const int SFTP_LANGUAGE_COUNT = 4;
 
-/** The imap language array. */
+/** The imap language array, pointer, count. */
 static const char IMAP_LANGUAGE_ARRAY[] = {'i', 'm', 'a', 'p'};
-
-/** The imap language. */
 static const char* IMAP_LANGUAGE = IMAP_LANGUAGE_ARRAY;
-
-/** The imap language count. */
 static const int IMAP_LANGUAGE_COUNT = 4;
 
-/** The imaps language array. */
+/** The imaps language array, pointer, count. */
 static const char IMAPS_LANGUAGE_ARRAY[] = {'i', 'm', 'a', 'p', 's'};
-
-/** The imaps language. */
 static const char* IMAPS_LANGUAGE = IMAPS_LANGUAGE_ARRAY;
-
-/** The imaps language count. */
 static const int IMAPS_LANGUAGE_COUNT = 5;
 
-/** The ldap language array. */
+/** The ldap language array, pointer, count. */
 static const char LDAP_LANGUAGE_ARRAY[] = {'l', 'd', 'a', 'p'};
-
-/** The ldap language. */
 static const char* LDAP_LANGUAGE = LDAP_LANGUAGE_ARRAY;
-
-/** The ldap language count. */
 static const int LDAP_LANGUAGE_COUNT = 4;
 
-/** The nfs language array. */
+/** The nfs language array, pointer, count. */
 static const char NFS_LANGUAGE_ARRAY[] = {'n', 'f', 's'};
-
-/** The nfs language. */
 static const char* NFS_LANGUAGE = NFS_LANGUAGE_ARRAY;
-
-/** The nfs language count. */
 static const int NFS_LANGUAGE_COUNT = 3;
 
-/** The nntp language array. */
+/** The nntp language array, pointer, count. */
 static const char NNTP_LANGUAGE_ARRAY[] = {'n', 'n', 't', 'p'};
-
-/** The nntp language. */
 static const char* NNTP_LANGUAGE = NNTP_LANGUAGE_ARRAY;
-
-/** The nntp language count. */
 static const int NNTP_LANGUAGE_COUNT = 4;
 
-/** The smb language array. */
+/** The smb language array, pointer, count. */
 static const char SMB_LANGUAGE_ARRAY[] = {'s', 'm', 'b'};
-
-/** The smb language. */
 static const char* SMB_LANGUAGE = SMB_LANGUAGE_ARRAY;
-
-/** The smb language count. */
 static const int SMB_LANGUAGE_COUNT = 3;
 
-/** The smtp language array. */
+/** The smtp language array, pointer, count. */
 static const char SMTP_LANGUAGE_ARRAY[] = {'s', 'm', 't', 'p'};
-
-/** The smtp language. */
 static const char* SMTP_LANGUAGE = SMTP_LANGUAGE_ARRAY;
-
-/** The smtp language count. */
 static const int SMTP_LANGUAGE_COUNT = 4;
 
-/** The smtps language array. */
+/** The smtps language array, pointer, count. */
 static const char SMTPS_LANGUAGE_ARRAY[] = {'s', 'm', 't', 'p', 's'};
-
-/** The smtps language. */
 static const char* SMTPS_LANGUAGE = SMTPS_LANGUAGE_ARRAY;
-
-/** The smtps language count. */
 static const int SMTPS_LANGUAGE_COUNT = 5;
 
-/** The tar language array. */
+/** The tar language array, pointer, count. */
 static const char TAR_LANGUAGE_ARRAY[] = {'t', 'a', 'r'};
-
-/** The tar language. */
 static const char* TAR_LANGUAGE = TAR_LANGUAGE_ARRAY;
-
-/** The tar language count. */
 static const int TAR_LANGUAGE_COUNT = 3;
 
-/** The zip language array. */
+/** The zip language array, pointer, count. */
 static const char ZIP_LANGUAGE_ARRAY[] = {'z', 'i', 'p'};
-
-/** The zip language. */
 static const char* ZIP_LANGUAGE = ZIP_LANGUAGE_ARRAY;
-
-/** The zip language count. */
 static const int ZIP_LANGUAGE_COUNT = 3;
 
 //
@@ -609,143 +529,83 @@ static const int FILE_RESIZE_FACTOR = 2;
 // Cybol tags.
 //
 
-/** The comment begin array. */
+/** The comment begin array, pointer, count. */
 static const char COMMENT_BEGIN_ARRAY[] = {'<', '!', '-', '-'};
-
-/** The comment begin. */
 static const char* COMMENT_BEGIN = COMMENT_BEGIN_ARRAY;
-
-/** The comment begin count. */
 static const int COMMENT_BEGIN_COUNT = 4;
 
-/** The comment end array. */
+/** The comment end array, pointer, count. */
 static const char COMMENT_END_ARRAY[] = {'/', '-', '-', '>'};
-
-/** The comment end. */
 static const char* COMMENT_END = COMMENT_END_ARRAY;
-
-/** The comment end count. */
 static const int COMMENT_END_COUNT = 4;
 
-/** The tag end array. */
+/** The tag end array, pointer, count. */
 static const char TAG_END_ARRAY[] = {'/', '>'};
-
-/** The tag end. */
 static const char* TAG_END = TAG_END_ARRAY;
-
-/** The tag end count. */
 static const int TAG_END_COUNT = 2;
 
-/** The part tag array. */
+/** The part tag array, pointer, count. */
 static const char PART_TAG_ARRAY[] = {'<', 'p', 'a', 'r', 't', ' '};
-
-/** The part tag. */
 static const char* PART_TAG = PART_TAG_ARRAY;
-
-/** The part tag count. */
 static const int PART_TAG_COUNT = 6;
 
-/** The super tag array. */
+/** The super tag array, pointer, count. */
 static const char SUPER_TAG_ARRAY[] = {'<', 's', 'u', 'p', 'e', 'r', ' '};
-
-/** The super tag. */
 static const char* SUPER_TAG = SUPER_TAG_ARRAY;
-
-/** The super tag count. */
 static const int SUPER_TAG_COUNT = 7;
 
 //
 // Cybol attributes.
 //
 
-/** The attribute end array. */
+/** The attribute end array, pointer, count. */
 static const char ATTRIBUTE_END_ARRAY[] = {'"'};
-
-/** The attribute end. */
 static const char* ATTRIBUTE_END = ATTRIBUTE_END_ARRAY;
-
-/** The attribute end count. */
 static const int ATTRIBUTE_END_COUNT = 1;
 
-/** The name attribute array. */
+/** The name attribute array, pointer, count. */
 static const char NAME_ATTRIBUTE_ARRAY[] = {'n', 'a', 'm', 'e', '=', '"'};
-
-/** The name attribute. */
 static const char* NAME_ATTRIBUTE = NAME_ATTRIBUTE_ARRAY;
-
-/** The name attribute count. */
 static const int NAME_ATTRIBUTE_COUNT = 6;
 
-/** The part location attribute array. */
+/** The part location attribute array, pointer, count. */
 static const char PART_LOCATION_ATTRIBUTE_ARRAY[] = {'l', 'o', 'c', 'a', 't', 'i', 'o', 'n', '=', '"'};
-
-/** The part location attribute. */
 static const char* PART_LOCATION_ATTRIBUTE = PART_LOCATION_ATTRIBUTE_ARRAY;
-
-/** The part location attribute count. */
 static const int PART_LOCATION_ATTRIBUTE_COUNT = 10;
 
-/** The part abstraction attribute array. */
+/** The part abstraction attribute array, pointer, count. */
 static const char PART_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n', '=', '"'};
-
-/** The part abstraction attribute. */
 static const char* PART_ABSTRACTION_ATTRIBUTE = PART_ABSTRACTION_ATTRIBUTE_ARRAY;
-
-/** The part abstraction attribute count. */
 static const int PART_ABSTRACTION_ATTRIBUTE_COUNT = 13;
 
-/** The part model attribute array. */
+/** The part model attribute array, pointer, count. */
 static const char PART_MODEL_ATTRIBUTE_ARRAY[] = {'m', 'o', 'd', 'e', 'l', '=', '"'};
-
-/** The part model attribute. */
 static const char* PART_MODEL_ATTRIBUTE = PART_MODEL_ATTRIBUTE_ARRAY;
-
-/** The part model attribute count. */
 static const int PART_MODEL_ATTRIBUTE_COUNT = 7;
 
-/** The part constraint attribute array. */
+/** The part constraint attribute array, pointer, count. */
 static const char PART_CONSTRAINT_ATTRIBUTE_ARRAY[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '=', '"'};
-
-/** The part constraint attribute. */
 static const char* PART_CONSTRAINT_ATTRIBUTE = PART_CONSTRAINT_ATTRIBUTE_ARRAY;
-
-/** The part constraint attribute count. */
 static const int PART_CONSTRAINT_ATTRIBUTE_COUNT = 12;
 
-/** The position location attribute array. */
+/** The position location attribute array, pointer, count. */
 static const char POSITION_LOCATION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n', '=', '"'};
-
-/** The position location attribute. */
 static const char* POSITION_LOCATION_ATTRIBUTE = POSITION_LOCATION_ATTRIBUTE_ARRAY;
-
-/** The position location attribute count. */
 static const int POSITION_LOCATION_ATTRIBUTE_COUNT = 19;
 
-/** The position abstraction attribute array. */
+/** The position abstraction attribute array, pointer, count. */
 static const char POSITION_ABSTRACTION_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n', '=', '"'};
-
-/** The position abstraction attribute. */
 static const char* POSITION_ABSTRACTION_ATTRIBUTE = POSITION_ABSTRACTION_ATTRIBUTE_ARRAY;
-
-/** The position abstraction attribute count. */
 static const int POSITION_ABSTRACTION_ATTRIBUTE_COUNT = 22;
 
-/** The position model attribute array. */
+/** The position model attribute array, pointer, count. */
 static const char POSITION_MODEL_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'm', 'o', 'd', 'e', 'l', '=', '"'};
-
-/** The position model attribute. */
 static const char* POSITION_MODEL_ATTRIBUTE = POSITION_MODEL_ATTRIBUTE_ARRAY;
-
-/** The position model attribute count. */
 static const int POSITION_MODEL_ATTRIBUTE_COUNT = 16;
 
-/** The position constraint attribute array. */
+/** The position constraint attribute array, pointer, count. */
 static const char POSITION_CONSTRAINT_ATTRIBUTE_ARRAY[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '=', '"'};
-
-/** The position constraint attribute. */
 static const char* POSITION_CONSTRAINT_ATTRIBUTE = POSITION_CONSTRAINT_ATTRIBUTE_ARRAY;
-
-/** The position constraint attribute count. */
 static const int POSITION_CONSTRAINT_ATTRIBUTE_COUNT = 21;
 
 //
@@ -761,13 +621,9 @@ static const int POSITION_CONSTRAINT_ATTRIBUTE_COUNT = 21;
 // Compound models consist of other compound or primitive models.
 //
 
-/** The compound abstraction array. */
+/** The compound abstraction array, pointer, count. */
 static const char COMPOUND_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd'};
-
-/** The compound abstraction. */
 static const char* COMPOUND_ABSTRACTION = COMPOUND_ABSTRACTION_ARRAY;
-
-/** The compound abstraction count. */
 static const int COMPOUND_ABSTRACTION_COUNT = 8;
 
 //
@@ -782,226 +638,138 @@ static const int COMPOUND_ABSTRACTION_COUNT = 8;
 // Operation abstraction.
 //
 
-/** The operation abstraction array. */
+/** The operation abstraction array, pointer, count. */
 static const char OPERATION_ABSTRACTION_ARRAY[] = {'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n'};
-
-/** The operation abstraction. */
 static const char* OPERATION_ABSTRACTION = OPERATION_ABSTRACTION_ARRAY;
-
-/** The operation abstraction count. */
 static const int OPERATION_ABSTRACTION_COUNT = 9;
 
 //
 // Primitive abstractions.
 //
 
-/** The boolean abstraction array. */
+/** The boolean abstraction array, pointer, count. */
 static const char BOOLEAN_ABSTRACTION_ARRAY[] = {'b', 'o', 'o', 'l', 'e', 'a', 'n'};
-
-/** The boolean abstraction. */
 static const char* BOOLEAN_ABSTRACTION = BOOLEAN_ABSTRACTION_ARRAY;
-
-/** The boolean abstraction count. */
 static const int BOOLEAN_ABSTRACTION_COUNT = 7;
 
-/** The integer abstraction array. */
+/** The integer abstraction array, pointer, count. */
 static const char INTEGER_ABSTRACTION_ARRAY[] = {'i', 'n', 't', 'e', 'g', 'e', 'r'};
-
-/** The integer abstraction. */
 static const char* INTEGER_ABSTRACTION = INTEGER_ABSTRACTION_ARRAY;
-
-/** The integer abstraction count. */
 static const int INTEGER_ABSTRACTION_COUNT = 7;
 
-/** The double abstraction array. */
+/** The double abstraction array, pointer, count. */
 static const char DOUBLE_ABSTRACTION_ARRAY[] = {'d', 'o', 'u', 'b', 'l', 'e'};
-
-/** The double abstraction. */
 static const char* DOUBLE_ABSTRACTION = DOUBLE_ABSTRACTION_ARRAY;
-
-/** The double abstraction count. */
 static const int DOUBLE_ABSTRACTION_COUNT = 6;
 
-/** The fraction abstraction array. */
+/** The fraction abstraction array, pointer, count. */
 static const char FRACTION_ABSTRACTION_ARRAY[] = {'f', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-
-/** The fraction abstraction. */
 static const char* FRACTION_ABSTRACTION = FRACTION_ABSTRACTION_ARRAY;
-
-/** The fraction abstraction count. */
 static const int FRACTION_ABSTRACTION_COUNT = 8;
 
-/** The complex abstraction array. */
+/** The complex abstraction array, pointer, count. */
 static const char COMPLEX_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'l', 'e', 'x'};
-
-/** The complex abstraction. */
 static const char* COMPLEX_ABSTRACTION = COMPLEX_ABSTRACTION_ARRAY;
-
-/** The complex abstraction count. */
 static const int COMPLEX_ABSTRACTION_COUNT = 7;
 
-/** The vector abstraction array. */
+/** The vector abstraction array, pointer, count. */
 static const char VECTOR_ABSTRACTION_ARRAY[] = {'v', 'e', 'c', 't', 'o', 'r'};
-
-/** The vector abstraction. */
 static const char* VECTOR_ABSTRACTION = VECTOR_ABSTRACTION_ARRAY;
-
-/** The vector abstraction count. */
 static const int VECTOR_ABSTRACTION_COUNT = 6;
 
-/** The string abstraction array. */
+/** The string abstraction array, pointer, count. */
 static const char STRING_ABSTRACTION_ARRAY[] = {'s', 't', 'r', 'i', 'n', 'g'};
-
-/** The string abstraction. */
 static const char* STRING_ABSTRACTION = STRING_ABSTRACTION_ARRAY;
-
-/** The string abstraction count. */
 static const int STRING_ABSTRACTION_COUNT = 6;
 
-/** The time abstraction array. */
+/** The time abstraction array, pointer, count. */
 static const char TIME_ABSTRACTION_ARRAY[] = {'t', 'i', 'm', 'e'};
-
-/** The time abstraction. */
 static const char* TIME_ABSTRACTION = TIME_ABSTRACTION_ARRAY;
-
-/** The time abstraction count. */
 static const int TIME_ABSTRACTION_COUNT = 4;
 
 //
 // Audio abstractions.
 //
 
-/** The mp3 abstraction array. */
+/** The mp3 abstraction array, pointer, count. */
 static const char MP3_MODEL_ARRAY[] = {'m', 'p', '3'};
-
-/** The mp3 abstraction. */
 static const char* MP3_MODEL = MP3_MODEL_ARRAY;
-
-/** The mp3 abstraction count. */
 static const int MP3_ABSTRACTION_COUNT = 3;
 
 //
 // Image abstractions.
 //
 
-/** The jpeg abstraction array. */
+/** The jpeg abstraction array, pointer, count. */
 static const char JPEG_ABSTRACTION_ARRAY[] = {'j', 'p', 'e', 'g'};
-
-/** The jpeg abstraction. */
 static const char* JPEG_ABSTRACTION = JPEG_ABSTRACTION_ARRAY;
-
-/** The jpeg abstraction count. */
 static const int JPEG_ABSTRACTION_COUNT = 4;
 
-/** The gif abstraction array. */
+/** The gif abstraction array, pointer, count. */
 static const char GIF_ABSTRACTION_ARRAY[] = {'g', 'i', 'f'};
-
-/** The gif abstraction. */
 static const char* GIF_ABSTRACTION = GIF_ABSTRACTION_ARRAY;
-
-/** The gif abstraction count. */
 static const int GIF_ABSTRACTION_COUNT = 3;
 
-/** The bmp abstraction array. */
+/** The bmp abstraction array, pointer, count. */
 static const char BMP_ABSTRACTION_ARRAY[] = {'b', 'm', 'p'};
-
-/** The bmp abstraction. */
 static const char* BMP_ABSTRACTION = BMP_ABSTRACTION_ARRAY;
-
-/** The bmp abstraction count. */
 static const int BMP_ABSTRACTION_COUNT = 3;
 
 //
 // Text abstractions.
 //
 
-/** The sgml abstraction array. */
+/** The sgml abstraction array, pointer, count. */
 static const char SGML_ABSTRACTION_ARRAY[] = {'s', 'g', 'm', 'l'};
-
-/** The sgml abstraction. */
 static const char* SGML_ABSTRACTION = SGML_ABSTRACTION_ARRAY;
-
-/** The sgml abstraction count. */
 static const int SGML_ABSTRACTION_COUNT = 4;
 
-/** The xml abstraction array. */
+/** The xml abstraction array, pointer, count. */
 static const char XML_ABSTRACTION_ARRAY[] = {'x', 'm', 'l'};
-
-/** The xml abstraction. */
 static const char* XML_ABSTRACTION = XML_ABSTRACTION_ARRAY;
-
-/** The xml abstraction count. */
 static const int XML_ABSTRACTION_COUNT = 3;
 
-/** The html abstraction array. */
+/** The html abstraction array, pointer, count. */
 static const char HTML_ABSTRACTION_ARRAY[] = {'h', 't', 'm', 'l'};
-
-/** The html abstraction. */
 static const char* HTML_ABSTRACTION = HTML_ABSTRACTION_ARRAY;
-
-/** The html abstraction count. */
 static const int HTML_ABSTRACTION_COUNT = 4;
 
-/** The rtf abstraction array. */
+/** The rtf abstraction array, pointer, count. */
 static const char RTF_ABSTRACTION_ARRAY[] = {'r', 't', 'f'};
-
-/** The rtf abstraction. */
 static const char* RTF_ABSTRACTION = RTF_ABSTRACTION_ARRAY;
-
-/** The rtf abstraction count. */
 static const int RTF_ABSTRACTION_COUNT = 3;
 
-/** The tex abstraction array. */
+/** The tex abstraction array, pointer, count. */
 static const char TEX_ABSTRACTION_ARRAY[] = {'t', 'e', 'x'};
-
-/** The tex abstraction. */
 static const char* TEX_ABSTRACTION = TEX_ABSTRACTION_ARRAY;
-
-/** The tex abstraction count. */
 static const int TEX_ABSTRACTION_COUNT = 3;
 
 //
 // Video abstractions.
 //
 
-/** The mpeg abstraction array. */
+/** The mpeg abstraction array, pointer, count. */
 static const char MPEG_ABSTRACTION_ARRAY[] = {'m', 'p', 'e', 'g'};
-
-/** The mpeg abstraction. */
 static const char* MPEG_ABSTRACTION = MPEG_ABSTRACTION_ARRAY;
-
-/** The mpeg abstraction count. */
 static const int MPEG_ABSTRACTION_COUNT = 4;
 
-/** The quicktime abstraction array. */
+/** The quicktime abstraction array, pointer, count. */
 static const char QT_ABSTRACTION_ARRAY[] = {'q', 't'};
-
-/** The quicktime abstraction. */
 static const char* QT_ABSTRACTION = QT_ABSTRACTION_ARRAY;
-
-/** The quicktime abstraction count. */
 static const int QT_ABSTRACTION_COUNT = 2;
 
 //
 // Application abstractions.
 //
 
-/** The koffice kword abstraction array. */
+/** The koffice kword abstraction array, pointer, count. */
 static const char KWD_ABSTRACTION_ARRAY[] = {'k', 'w', 'd'};
-
-/** The koffice kword abstraction. */
 static const char* KWD_ABSTRACTION = KWD_ABSTRACTION_ARRAY;
-
-/** The koffice kword abstraction count. */
 static const int KWORD_ABSTRACTION_COUNT = 5;
 
-/** The open office writer abstraction array. */
+/** The open office writer abstraction array, pointer, count. */
 static const char SXW_ABSTRACTION_ARRAY[] = {'s', 'x', 'w'};
-
-/** The open office writer abstraction. */
 static const char* SXW_ABSTRACTION = SXW_ABSTRACTION_ARRAY;
-
-/** The open office writer abstraction count. */
 static const int SXW_ABSTRACTION_COUNT = 3;
 
 //
@@ -1016,168 +784,104 @@ static const int SXW_ABSTRACTION_COUNT = 3;
 // Boolean logic abstractions.
 //
 
-/** The and abstraction array. */
+/** The and abstraction array, pointer, count. */
 static const char AND_ABSTRACTION_ARRAY[] = {'a', 'n', 'd'};
-
-/** The and abstraction. */
 static const char* AND_ABSTRACTION = AND_ABSTRACTION_ARRAY;
-
-/** The and abstraction count. */
 static const int AND_ABSTRACTION_COUNT = 3;
 
-/** The or abstraction array. */
+/** The or abstraction array, pointer, count. */
 static const char OR_ABSTRACTION_ARRAY[] = {'o', 'r'};
-
-/** The or abstraction. */
 static const char* OR_ABSTRACTION = OR_ABSTRACTION_ARRAY;
-
-/** The or abstraction count. */
 static const int OR_ABSTRACTION_COUNT = 2;
 
 //
 // Comparison abstractions.
 //
 
-/** The equal abstraction array. */
+/** The equal abstraction array, pointer, count. */
 static const char EQUAL_ABSTRACTION_ARRAY[] = {'e', 'q', 'u', 'a', 'l'};
-
-/** The equal abstraction. */
 static const char* EQUAL_ABSTRACTION = EQUAL_ABSTRACTION_ARRAY;
-
-/** The equal abstraction count. */
 static const int EQUAL_ABSTRACTION_COUNT = 5;
 
-/** The smaller abstraction array. */
+/** The smaller abstraction array, pointer, count. */
 static const char SMALLER_ABSTRACTION_ARRAY[] = {'s', 'm', 'a', 'l', 'l', 'e', 'r'};
-
-/** The smaller abstraction. */
 static const char* SMALLER_ABSTRACTION = SMALLER_ABSTRACTION_ARRAY;
-
-/** The smaller abstraction count. */
 static const int SMALLER_ABSTRACTION_COUNT = 7;
 
-/** The greater abstraction array. */
+/** The greater abstraction array, pointer, count. */
 static const char GREATER_ABSTRACTION_ARRAY[] = {'g', 'r', 'e', 'a', 't', 'e', 'r'};
-
-/** The greater abstraction. */
 static const char* GREATER_ABSTRACTION = GREATER_ABSTRACTION_ARRAY;
-
-/** The greater abstraction count. */
 static const int GREATER_ABSTRACTION_COUNT = 7;
 
-/** The smaller or equal abstraction array. */
+/** The smaller or equal abstraction array, pointer, count. */
 static const char SMALLER_OR_EQUAL_ABSTRACTION_ARRAY[] = {'s', 'm', 'a', 'l', 'l', 'e', 'r', '_', 'o', 'r', '_', 'e', 'q', 'u', 'a', 'l'};
-
-/** The smaller or equal abstraction. */
 static const char* SMALLER_OR_EQUAL_ABSTRACTION = SMALLER_OR_EQUAL_ABSTRACTION_ARRAY;
-
-/** The smaller or equal abstraction count. */
 static const int SMALLER_OR_EQUAL_ABSTRACTION_COUNT = 16;
 
-/** The greater or equal abstraction array. */
+/** The greater or equal abstraction array, pointer, count. */
 static const char GREATER_OR_EQUAL_ABSTRACTION_ARRAY[] = {'g', 'r', 'e', 'a', 't', 'e', 'r', '_', 'o', 'r', '_', 'e', 'q', 'u', 'a', 'l'};
-
-/** The greater or equal abstraction. */
 static const char* GREATER_OR_EQUAL_ABSTRACTION = GREATER_OR_EQUAL_ABSTRACTION_ARRAY;
-
-/** The greater or equal abstraction count. */
 static const int GREATER_OR_EQUAL_ABSTRACTION_COUNT = 16;
 
 //
 // Arithmetic abstractions.
 //
 
-/** The add abstraction array. */
+/** The add abstraction array, pointer, count. */
 static const char ADD_ABSTRACTION_ARRAY[] = {'a', 'd', 'd'};
-
-/** The add abstraction. */
 static const char* ADD_ABSTRACTION = ADD_ABSTRACTION_ARRAY;
-
-/** The add abstraction count. */
 static const int ADD_ABSTRACTION_COUNT = 3;
 
-/** The subtract abstraction array. */
+/** The subtract abstraction array, pointer, count. */
 static const char SUBTRACT_ABSTRACTION_ARRAY[] = {'s', 'u', 'b', 't', 'r', 'a', 'c', 't'};
-
-/** The subtract abstraction. */
 static const char* SUBTRACT_ABSTRACTION = SUBTRACT_ABSTRACTION_ARRAY;
-
-/** The subtract abstraction count. */
 static const int SUBTRACT_ABSTRACTION_COUNT = 8;
 
-/** The multiply abstraction array. */
+/** The multiply abstraction array, pointer, count. */
 static const char MULTIPLY_ABSTRACTION_ARRAY[] = {'m', 'u', 'l', 't', 'i', 'p', 'l', 'y'};
-
-/** The multiply abstraction. */
 static const char* MULTIPLY_ABSTRACTION = MULTIPLY_ABSTRACTION_ARRAY;
-
-/** The multiply abstraction count. */
 static const int MULTIPLY_ABSTRACTION_COUNT = 8;
 
-/** The divide abstraction array. */
+/** The divide abstraction array, pointer, count. */
 static const char DIVIDE_ABSTRACTION_ARRAY[] = {'d', 'i', 'v', 'i', 'd', 'e'};
-
-/** The divide abstraction. */
 static const char* DIVIDE_ABSTRACTION = DIVIDE_ABSTRACTION_ARRAY;
-
-/** The divide abstraction count. */
 static const int DIVIDE_ABSTRACTION_COUNT = 6;
 
 //
 // Memory management abstractions.
 //
 
-/** The create model abstraction array. */
+/** The create model abstraction array, pointer, count. */
 static const char CREATE_MODEL_ABSTRACTION_ARRAY[] = {'c', 'r', 'e', 'a', 't', 'e'};
-
-/** The create model abstraction. */
 static const char* CREATE_MODEL_ABSTRACTION = CREATE_MODEL_ABSTRACTION_ARRAY;
-
-/** The create model abstraction count. */
 static const int CREATE_MODEL_ABSTRACTION_COUNT = 6;
 
-/** The destroy model abstraction array. */
+/** The destroy model abstraction array, pointer, count. */
 static const char DESTROY_MODEL_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't', 'r', 'o', 'y'};
-
-/** The destroy model abstraction. */
 static const char* DESTROY_MODEL_ABSTRACTION = DESTROY_MODEL_ABSTRACTION_ARRAY;
-
-/** The destroy model abstraction count. */
 static const int DESTROY_MODEL_ABSTRACTION_COUNT = 7;
 
 //
 // Input output abstractions.
 //
 
-/** The send abstraction array. */
+/** The send abstraction array, pointer, count. */
 static const char SEND_ABSTRACTION_ARRAY[] = {'s', 'e', 'n', 'd'};
-
-/** The send abstraction. */
 static const char* SEND_ABSTRACTION = SEND_ABSTRACTION_ARRAY;
-
-/** The send abstraction count. */
 static const int SEND_ABSTRACTION_COUNT = 4;
 
-/** The receive abstraction array. */
+/** The receive abstraction array, pointer, count. */
 static const char RECEIVE_ABSTRACTION_ARRAY[] = {'r', 'e', 'c', 'e', 'i', 'v', 'e'};
-
-/** The receive abstraction. */
 static const char* RECEIVE_ABSTRACTION = RECEIVE_ABSTRACTION_ARRAY;
-
-/** The receive abstraction count. */
 static const int RECEIVE_ABSTRACTION_COUNT = 7;
 
 //
 // Lifecycle step abstractions.
 //
 
-/** The exit abstraction array. */
+/** The exit abstraction array, pointer, count. */
 static const char EXIT_ABSTRACTION_ARRAY[] = {'e', 'x', 'i', 't'};
-
-/** The exit abstraction. */
 static const char* EXIT_ABSTRACTION = EXIT_ABSTRACTION_ARRAY;
-
-/** The exit abstraction count. */
 static const int EXIT_ABSTRACTION_COUNT = 4;
 
 //
@@ -1569,53 +1273,33 @@ static const char _ABSTRACTION[] = {'invokevirtual_quick_optimised'};
 // Model locations.
 //
 
-/** The inline location array. */
+/** The inline location array, pointer, count. */
 static const char INLINE_LOCATION_ARRAY[] = {'i', 'n', 'l', 'i', 'n', 'e'};
-
-/** The inline location. */
 static const char* INLINE_LOCATION = INLINE_LOCATION_ARRAY;
-
-/** The inline location count. */
 static const int INLINE_LOCATION_COUNT = 6;
 
-/** The file location array. */
+/** The file location array, pointer, count. */
 static const char FILE_LOCATION_ARRAY[] = {'f', 'i', 'l', 'e'};
-
-/** The file location. */
 static const char* FILE_LOCATION = FILE_LOCATION_ARRAY;
-
-/** The file location count. */
 static const int FILE_LOCATION_COUNT = 4;
 
-/** The http location array. */
+/** The http location array, pointer, count. */
 static const char HTTP_LOCATION_ARRAY[] = {'h', 't', 't', 'p'};
-
-/** The http location. */
 static const char* HTTP_LOCATION = HTTP_LOCATION_ARRAY;
-
-/** The http location count. */
 static const int HTTP_LOCATION_COUNT = 4;
 
-/** The ftp location array. */
+/** The ftp location array, pointer, count. */
 static const char FTP_LOCATION_ARRAY[] = {'f', 't', 'p'};
-
-/** The ftp location. */
 static const char* FTP_LOCATION = FTP_LOCATION_ARRAY;
-
-/** The ftp location count. */
 static const int FTP_LOCATION_COUNT = 3;
 
 //
 // Location separators.
 //
 
-/** The model location separator array. */
+/** The model location separator array, pointer, count. */
 static const char MODEL_LOCATION_SEPARATOR_ARRAY[] = {':'};
-
-/** The model location separator. */
 static const char* MODEL_LOCATION_SEPARATOR = MODEL_LOCATION_SEPARATOR_ARRAY;
-
-/** The model location separator count. */
 static const int MODEL_LOCATION_SEPARATOR_COUNT = 1;
 
 //
@@ -1643,22 +1327,14 @@ static const char OPERATION_PARAMETER_SEPARATOR = ',';
 // Boolean.
 //
 
-/** The true boolean array. */
+/** The true boolean array, pointer, count. */
 static const char TRUE_BOOLEAN_ARRAY[] = {'t', 'r', 'u', 'e'};
-
-/** The true boolean. */
 static const char* TRUE_BOOLEAN = TRUE_BOOLEAN_ARRAY;
-
-/** The true boolean count. */
 static const int TRUE_BOOLEAN_COUNT = 4;
 
-/** The false boolean array. */
+/** The false boolean array, pointer, count. */
 static const char FALSE_BOOLEAN_ARRAY[] = {'f', 'a', 'l', 's', 'e'};
-
-/** The false boolean. */
 static const char* FALSE_BOOLEAN = FALSE_BOOLEAN_ARRAY;
-
-/** The false boolean count. */
 static const int FALSE_BOOLEAN_COUNT = 5;
 
 //
@@ -1707,31 +1383,19 @@ static const int INFO_LOG_LEVEL = 3;
 // Log level names.
 //
 
-/** The error log level name array. */
+/** The error log level name array, pointer, count. */
 static const char ERROR_LOG_LEVEL_NAME_ARRAY[] = {'E', 'r', 'r', 'o', 'r'};
-
-/** The error log level name. */
 static const char* ERROR_LOG_LEVEL_NAME = ERROR_LOG_LEVEL_NAME_ARRAY;
-
-/** The error log level name count. */
 static const int ERROR_LOG_LEVEL_NAME_COUNT = 5;
 
-/** The warning log level name array. */
+/** The warning log level name array, pointer, count. */
 static const char WARNING_LOG_LEVEL_NAME_ARRAY[] = {'W', 'a', 'r', 'n', 'i', 'n', 'g'};
-
-/** The warning log level name. */
 static const char* WARNING_LOG_LEVEL_NAME = WARNING_LOG_LEVEL_NAME_ARRAY;
-
-/** The warning log level name count. */
 static const int WARNING_LOG_LEVEL_NAME_COUNT = 7;
 
-/** The info log level name array. */
+/** The info log level name array, pointer, count. */
 static const char INFO_LOG_LEVEL_NAME_ARRAY[] = {'I', 'n', 'f', 'o'};
-
-/** The info log level name. */
 static const char* INFO_LOG_LEVEL_NAME = INFO_LOG_LEVEL_NAME_ARRAY;
-
-/** The info log level name count. */
 static const int INFO_LOG_LEVEL_NAME_COUNT = 4;
 
 //
@@ -1742,22 +1406,14 @@ static const int INFO_LOG_LEVEL_NAME_COUNT = 4;
 // Pointer array log messages.
 //
 
-/** The "Create pointer array." message array. */
+/** The "Create pointer array." message array, pointer, count. */
 static const char CREATE_POINTER_ARRAY_MESSAGE_ARRAY[] = {'C', 'r', 'e', 'a', 't', 'e', ' ', 'p', 'o', 'i', 'n', 't', 'e', 'r', ' ', 'a', 'r', 'r', 'a', 'y', '.'};
-
-/** The "Create pointer array." message. */
 static const char* CREATE_POINTER_ARRAY_MESSAGE = CREATE_POINTER_ARRAY_MESSAGE_ARRAY;
-
-/** The "Create pointer array." message count. */
 static const int CREATE_POINTER_ARRAY_MESSAGE_COUNT = 21;
 
-/** The "Could not create pointer array. The array is null." message array. */
+/** The "Could not create pointer array. The array is null." message array, pointer, count. */
 static const char COULD_NOT_CREATE_POINTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'c', 'r', 'e', 'a', 't', 'e', ' ', 'p', 'o', 'i', 'n', 't', 'e', 'r', ' ', 'a', 'r', 'r', 'a', 'y', '.', ' ', 'T', 'h', 'e', ' ', 'a', 'r', 'r', 'a', 'y', ' ', 'i', 's', ' ', 'n', 'u', 'l', 'l', '.'};
-
-/** The "Could not create pointer array. The array is null." message. */
 static const char* COULD_NOT_CREATE_POINTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE = COULD_NOT_CREATE_POINTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_ARRAY;
-
-/** The "Could not create pointer array. The array is null." message count. */
 static const int COULD_NOT_CREATE_POINTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT = 50;
 
 /** The "Could not create pointer array. The count is null." message array. */
@@ -3022,31 +2678,19 @@ static const int COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE_COU
 // Operation log messages.
 //
 
-/** The "Create operation." message array. */
+/** The "Create operation." message array, pointer, count. */
 static const char CREATE_OPERATION_MESSAGE_ARRAY[] = {'C', 'r', 'e', 'a', 't', 'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', '.'};
-
-/** The "Create operation." message. */
 static const char* CREATE_OPERATION_MESSAGE = CREATE_OPERATION_MESSAGE_ARRAY;
-
-/** The "Create operation." message count. */
 static const int CREATE_OPERATION_MESSAGE_COUNT = 17;
 
-/** The "Destroy operation." message array. */
+/** The "Destroy operation." message array, pointer, count. */
 static const char DESTROY_OPERATION_MESSAGE_ARRAY[] = {'D', 'e', 's', 't', 'r', 'o', 'y', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', '.'};
-
-/** The "Destroy operation." message. */
 static const char* DESTROY_OPERATION_MESSAGE = DESTROY_OPERATION_MESSAGE_ARRAY;
-
-/** The "Destroy operation." message count. */
 static const int DESTROY_OPERATION_MESSAGE_COUNT = 18;
 
-/** The "Initialize operation." message array. */
+/** The "Initialize operation." message array, pointer, count. */
 static const char INITIALIZE_OPERATION_MESSAGE_ARRAY[] = {'I', 'n', 'i', 't', 'i', 'a', 'l', 'i', 'z', 'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', '.'};
-
-/** The "Initialize operation." message. */
 static const char* INITIALIZE_OPERATION_MESSAGE = INITIALIZE_OPERATION_MESSAGE_ARRAY;
-
-/** The "Initialize operation." message count. */
 static const int INITIALIZE_OPERATION_MESSAGE_COUNT = 21;
 
 /*??
@@ -3061,13 +2705,9 @@ static const int INITIALIZE_OPERATION_MESSAGE_COUNT = 21;
 
 //?? copy the same 8 lines for finalize operation!
 
-/** The "Finalize operation." message array. */
+/** The "Finalize operation." message array, pointer, count. */
 static const char FINALIZE_OPERATION_MESSAGE_ARRAY[] = {'F', 'i', 'n', 'a', 'l', 'i', 'z', 'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', '.'};
-
-/** The "Finalize operation." message. */
 static const char* FINALIZE_OPERATION_MESSAGE = FINALIZE_OPERATION_MESSAGE_ARRAY;
-
-/** The "Finalize operation." message count. */
 static const int FINALIZE_OPERATION_MESSAGE_COUNT = 19;
 
 //
@@ -3149,22 +2789,14 @@ static const int FINALIZE_OPERATION_MESSAGE_COUNT = 19;
 // Signal memory log messages.
 //
 
-/** The "Create signal memory." message array. */
+/** The "Create signal memory." message array, pointer, count. */
 static const char CREATE_SIGNAL_MEMORY_MESSAGE_ARRAY[] = {'C', 'r', 'e', 'a', 't', 'e', ' ', 's', 'i', 'g', 'n', 'a', 'l', ' ', 'm', 'e', 'm', 'o', 'r', 'y', '.'};
-
-/** The "Create signal memory." message. */
 static const char* CREATE_SIGNAL_MEMORY_MESSAGE = CREATE_SIGNAL_MEMORY_MESSAGE_ARRAY;
-
-/** The "Create signal memory." message count. */
 static const int CREATE_SIGNAL_MEMORY_MESSAGE_COUNT = 21;
 
-/** The "Destroy signal memory." message array. */
+/** The "Destroy signal memory." message array, pointer, count. */
 static const char DESTROY_SIGNAL_MEMORY_MESSAGE_ARRAY[] = {'D', 'e', 's', 't', 'r', 'o', 'y', ' ', 's', 'i', 'g', 'n', 'a', 'l', ' ', 'm', 'e', 'm', 'o', 'r', 'y', '.'};
-
-/** The "Destroy signal memory." message. */
 static const char* DESTROY_SIGNAL_MEMORY_MESSAGE = DESTROY_SIGNAL_MEMORY_MESSAGE_ARRAY;
-
-/** The "Destroy signal memory." message count. */
 static const int DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT = 22;
 
 /*??
@@ -3179,31 +2811,19 @@ static const int DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT = 22;
 "Could not get highest priority index. The index is null."
 */
 
-/** The "Handle compound signal." message array. */
+/** The "Handle compound signal." message array, pointer, count. */
 static const char HANDLE_COMPOUND_SIGNAL_MESSAGE_ARRAY[] = {'H', 'a', 'n', 'd', 'l', 'e', ' ', 'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd', ' ', 's', 'i', 'g', 'n', 'a', 'l', '.'};
-
-/** The "Handle compound signal." message. */
 static const char* HANDLE_COMPOUND_SIGNAL_MESSAGE = HANDLE_COMPOUND_SIGNAL_MESSAGE_ARRAY;
-
-/** The "Handle compound signal." message count. */
 static const int HANDLE_COMPOUND_SIGNAL_MESSAGE_COUNT = 23;
 
-/** The "Handle operation signal." message array. */
+/** The "Handle operation signal." message array, pointer, count. */
 static const char HANDLE_OPERATION_SIGNAL_MESSAGE_ARRAY[] = {'H', 'a', 'n', 'd', 'l', 'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 's', 'i', 'g', 'n', 'a', 'l', '.'};
-
-/** The "Handle operation signal." message. */
 static const char* HANDLE_OPERATION_SIGNAL_MESSAGE = HANDLE_OPERATION_SIGNAL_MESSAGE_ARRAY;
-
-/** The "Handle operation signal." message count. */
 static const int HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT = 24;
 
-/** The "Set shutdown flag." message array. */
+/** The "Set shutdown flag." message array, pointer, count. */
 static const char SET_SHUTDOWN_FLAG_MESSAGE_ARRAY[] = {'S', 'e', 't', ' ', 's', 'h', 'u', 't', 'd', 'o', 'w', 'n', ' ', 'f', 'l', 'a', 'g', '.'};
-
-/** The "Set shutdown flag." message. */
 static const char* SET_SHUTDOWN_FLAG_MESSAGE = SET_SHUTDOWN_FLAG_MESSAGE_ARRAY;
-
-/** The "Set shutdown flag." message count. */
 static const int SET_SHUTDOWN_FLAG_MESSAGE_COUNT = 18;
 
 //
@@ -3222,71 +2842,43 @@ static const int SET_SHUTDOWN_FLAG_MESSAGE_COUNT = 18;
 // Cyboi log messages.
 //
 
-/** The "Wait for signals." message array. */
+/** The "Wait for signals." message array, pointer, count. */
 static const char WAIT_FOR_SIGNALS_MESSAGE_ARRAY[] = {'W', 'a', 'i', 't', ' ', 'f', 'o', 'r', ' ', 's', 'i', 'g', 'n', 'a', 'l', 's', '.'};
-
-/** The "Wait for signals." message. */
 static const char* WAIT_FOR_SIGNALS_MESSAGE = WAIT_FOR_SIGNALS_MESSAGE_ARRAY;
-
-/** The "Wait for signals." message count. */
 static const int WAIT_FOR_SIGNALS_MESSAGE_COUNT = 17;
 
-/** The "Could not handle signal. The signal abstraction is unknown." message array. */
+/** The "Could not handle signal. The signal abstraction is unknown." message array, pointer, count. */
 static const char COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'h', 'a', 'n', 'd', 'l', 'e', ' ', 's', 'i', 'g', 'n', 'a', 'l', '.', ' ', 'T', 'h', 'e', ' ', 's', 'i', 'g', 'n', 'a', 'l', ' ', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n', ' ', 'i', 's', ' ', 'u', 'n', 'k', 'n', 'o', 'w', 'n', '.'};
-
-/** The "Could not handle signal. The signal abstraction is unknown." message. */
 static const char* COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE = COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_ARRAY;
-
-/** The "Could not handle signal. The signal abstraction is unknown." message count. */
 static const int COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT = 59;
 
-/** The "Could not wait for signals. The internals is null." message array. */
+/** The "Could not wait for signals. The internals is null." message array, pointer, count. */
 static const char COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNALS_IS_NULL_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'w', 'a', 'i', 't', ' ', 'f', 'o', 'r', ' ', 's', 'i', 'g', 'n', 'a', 'l', 's', '.', ' ', 'T', 'h', 'e', ' ', 'i', 'n', 't', 'e', 'r', 'n', 'a', 'l', 's', ' ', 'i', 's', ' ', 'n', 'u', 'l', 'l', '.'};
-
-/** The "Could not wait for signals. The internals is null." message. */
 static const char* COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNALS_IS_NULL_MESSAGE = COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNALS_IS_NULL_MESSAGE_ARRAY;
-
-/** The "Could not wait for signals. The internals is null." message count. */
 static const int COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNALS_IS_NULL_MESSAGE_COUNT = 50;
 
-/** The "Exit CYBOI normally." message array. */
+/** The "Exit CYBOI normally." message array, pointer, count. */
 static const char EXIT_CYBOI_NORMALLY_MESSAGE_ARRAY[] = {'E', 'x', 'i', 't', ' ', 'C', 'Y', 'B', 'O', 'I', ' ', 'n', 'o', 'r', 'm', 'a', 'l', 'l', 'y', '.'};
-
-/** The "Exit CYBOI normally." message. */
 static const char* EXIT_CYBOI_NORMALLY_MESSAGE = EXIT_CYBOI_NORMALLY_MESSAGE_ARRAY;
-
-/** The "Exit CYBOI normally." message count. */
 static const int EXIT_CYBOI_NORMALLY_MESSAGE_COUNT = 20;
 
-/** The "Could not execute CYBOI. The command line argument number is incorrect." message array. */
+/** The "Could not execute CYBOI. The command line argument number is incorrect." message array, pointer, count. */
 static const char COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'e', 'x', 'e', 'c', 'u', 't', 'e', ' ', 'C', 'Y', 'B', 'O', 'I', '.', ' ', 'T', 'h', 'e', ' ', 'c', 'o', 'm', 'm', 'a', 'n', 'd', ' ', 'l', 'i', 'n', 'e', ' ', 'a', 'r', 'g', 'u', 'm', 'e', 'n', 't', ' ', 'n', 'u', 'm', 'b', 'e', 'r', ' ', 'i', 's', ' ', 'i', 'n', 'c', 'o', 'r', 'r', 'e', 'c', 't', '.'};
-
-/** The "Could not execute CYBOI. The command line argument number is incorrect." message. */
 static const char* COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE = COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE_ARRAY;
-
-/** The "Could not execute CYBOI. The command line argument number is incorrect." message count. */
 static const int COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE_COUNT = 71;
 
-/** The "Usage: " message array. */
+/** The "Usage: " message array, pointer, count. */
 static const char USAGE_MESSAGE_ARRAY[] = {
     'P', 'a', 'r', 'a', 'm', 'e', 't', 'e', 'r', 's', ' ', 'h', 'a', 'v', 'e', ' ', 't', 'o', ' ', 'b', 'e', ' ', 'g', 'i', 'v', 'e', 'n', '!', '\n',
     'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd', '|', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 'i', 'n', 'l', 'i', 'n', 'e', '|', 'f', 'i', 'l', 'e', '|', 'f', 't', 'p', '|', 'h', 't', 't', 'p', ' ', 'm', 'o', 'd', 'e', 'l', '.', 's', 'u', 'b', 'm', 'o', 'd', 'e', 'l', '\n',
     'E', 'x', 'a', 'm', 'p', 'l', 'e', ' ', '1', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 'i', 'n', 'l', 'i', 'n', 'e', ' ', 'e', 'x', 'i', 't', '\n',
     'E', 'x', 'a', 'm', 'p', 'l', 'e', ' ', '2', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd', ' ', 'f', 'i', 'l', 'e', ' ', '/', 'a', 'p', 'p', 'l', 'i', 'c', 'a', 't', 'i', 'o', 'n', '/', 'l', 'o', 'g', 'i', 'c', '/', 's', 't', 'a', 'r', 't', 'u', 'p', '.', 'c', 'y', 'b', 'o', 'l'};
-
-/** The "Usage: " message. */
 static const char* USAGE_MESSAGE = USAGE_MESSAGE_ARRAY;
-
-/** The "Usage: " message count. */
 static const int USAGE_MESSAGE_COUNT = 199;
 
-/** The "Could not execute CYBOI. The command line argument vector is null." message array. */
+/** The "Could not execute CYBOI. The command line argument vector is null." message array, pointer, count. */
 static const char COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'e', 'x', 'e', 'c', 'u', 't', 'e', ' ', 'C', 'Y', 'B', 'O', 'I', '.', ' ', 'T', 'h', 'e', ' ', 'c', 'o', 'm', 'm', 'a', 'n', 'd', ' ', 'l', 'i', 'n', 'e', ' ', 'a', 'r', 'g', 'u', 'm', 'e', 'n', 't', ' ', 'v', 'e', 'c', 't', 'o', 'r', ' ', 'i', 's', ' ', 'n', 'u', 'l', 'l', '.'};
-
-/** The "Could not execute CYBOI. The command line argument vector is null." message. */
 static const char* COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE = COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_ARRAY;
-
-/** The "Could not execute CYBOI. The command line argument vector is null." message count. */
 static const int COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT = 66;
 
 /* CONSTANT_SOURCE */
