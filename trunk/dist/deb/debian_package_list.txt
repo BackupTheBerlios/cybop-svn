@@ -1,0 +1,51 @@
+
+debian_package_list.txt
+
+
+cyboi.deb
+- depends: libc6, xlibs, libxml2
+- suggests: cybop-doc, cybop-core
+- category: interpreters
+- files:    CYBOI Binary file in usr/share/bin
+            /etc/cyboi/config.cybol
+            /usr/share/doc/cyboi/README.Debian
+            /usr/share/doc/cyboi/changelog.gz
+            /usr/share/doc/cyboi/copyright
+
+cyboi-dev.deb
+- depends: cyboi, (xlibs-dev,) libxml2-dev
+- recommends: cybop-doc
+- category: devel
+- files: Makefile etc. in /admin
+
+cyboi-doc.deb
+- suggests: cyboi
+- category: doc
+- files: Documentation, Papers, Presentations etc. in /doc
+
+----------
+
+cybol-core.deb
+- depends: cyboi
+- suggests: cybol-healthcare
+- category: misc
+- files: CYBOL Core Files in /lib/cybop/core
+
+cybol-healthcare.deb
+- depends: cybol-core
+- suggests: res_medicinae
+- category: misc ("health" gibt's leider nicht)
+- files: CYBOL Healthcare Files in /lib/cybop/healthcare
+
+resmedicinae.deb
+- depends: cybol-healthcare
+- category: misc ("health" gibt's leider nicht)
+- file: CYBOL Files, Res Medicinae Anwendung in /lib/resmedicinae
+
+/home/cybop/dist/deb/cyboi_0.4.0.0_i386/*
+/home/cybop/dist/deb/cyboi-doc_0.4.0.0_i386/*
+/home/cybop/dist/deb/cyboi-dev_0.4.0.0_i386/*
+/home/cybop/dist/deb/cybol-core_1.0.0.0/*
+/home/cybop/dist/deb/cybol-healthcare_1.0.0.0/*
+
+/etc/cyboi/config.cybol
