@@ -24,7 +24,7 @@
  * This file handles log messages.
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.3 $ $Date: 2004-05-26 14:13:50 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-05-26 22:37:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,106 +96,67 @@ void set_array_element(void* p0, const void* p1, const void* p2, const void* p3)
 //
 
 /**
- * Returns the log level name.
+ * Adds the log level name.
  *
- * @param p0 the level
- * @param p1 the level name
+ * @param p0 the log level
+ * @param p1 the log entry
+ * @param p2 the log entry count
  */
-void get_log_level_name(const void* p0, void* p1) {
+void add_log_level_name(const void* p0, void* p1, void* p2) {
 
-    fputs("TEST x0\n", stdout);
+    if (p2 != NULL_POINTER) {
 
-    if (p1 != NULL_POINTER) {
-
-        char** n = (char**) p1;
+        int* ec = (int*) p2;
 
         if (p0 != NULL_POINTER) {
 
             int* l = (int*) p0;
 
-            fputs("TEST x1\n", stderr);
+            // The message index.
+            int i = 0;
 
-            if (INFO_LOG_LEVEL) {
+            if (*l == INFO_LOG_LEVEL) {
 
-                fputs("TEST x2\n", stdout);
-
-                strcat(*n, INFO_LOG_LEVEL_NAME);
-
-                fputs("TEST x3\n", stdout);
+                *ec = INFO_LOG_LEVEL_NAME_COUNT;
+                resize_array(p1, (void*) ec);
+                set_array_elements(p1, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &INFO_LOG_LEVEL_NAME, (void*) ec);
 
             } else if (*l == WARNING_LOG_LEVEL) {
 
-                strcat(*n, WARNING_LOG_LEVEL_NAME);
+                *ec = WARNING_LOG_LEVEL_NAME_COUNT;
+                resize_array(p1, (void*) ec);
+                set_array_elements(p1, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &WARNING_LOG_LEVEL_NAME, (void*) ec);
 
             } else if (*l == ERROR_LOG_LEVEL) {
 
-                strcat(*n, ERROR_LOG_LEVEL_NAME);
+                *ec = ERROR_LOG_LEVEL_NAME_COUNT;
+                resize_array(p1, (void*) ec);
+                set_array_elements(p1, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &ERROR_LOG_LEVEL_NAME, (void*) ec);
             }
 
         } else {
 
-            fputs("Error: Could not get log level name. The level is null.\n", stderr);
+            fputs("Error: Could not add log level name. The log level is null.\n", stderr);
         }
 
     } else {
 
-        fputs("Error: Could not get log level name. The level name is null.\n", stderr);
+        fputs("Error: Could not add log level name. The log entry count is null.\n", stderr);
     }
 }
 
 /**
- * Shows the message on screen.
+ * Logs the message.
  *
- * @param p0 the message
- * @param p1 the message size
- */
-void show_message(void* p0, void* p1) {
-
-    if (p1 != NULL_POINTER) {
-
-        int* s = (int*) p1;
-
-        // The log message.
-        char* m = CHARACTER_NULL_POINTER;
-        // The log size, including two places for new line and
-        // string termination.
-        int ls = *s + 2;
-
-        create_array((void*) &m, (void*) &CHARACTER_ARRAY, (void*) &ls);
-
-        // The destination index to which to copy the source array.
-        int i = 0;
-        char n = '\n';
-        int ni = *s;
-        char t = '\0';
-        int ti = *s + 1;
-
-        set_array_elements((void*) &m, (void*) &CHARACTER_ARRAY, (void*) &i, p0, p1);
-        set_array_element((void*) &m, (void*) &CHARACTER_ARRAY, (void*) &ni, (void*) &n);
-        set_array_element((void*) &m, (void*) &CHARACTER_ARRAY, (void*) &ti, (void*) &t);
-
-        fputs(m, stdout);
-
-        destroy_array((void*) &m, (void*) &CHARACTER_ARRAY, (void*) &ls);
-
-    } else {
-
-        fputs("Error: Could not show message. The message size is null.\n", stdout);
-    }
-}
-
-/**
- * Logs the log entry.
- *
- * @param p0 the level
- * @param p1 the message
- * @param p2 the message count
+ * @param p0 the log level
+ * @param p1 the log message
+ * @param p2 the log message count
  */
 void log_message(const void* p0, const void* p1, const void* p2) {
 
-    if (p1 != NULL_POINTER) {
+    if (p2 != NULL_POINTER) {
 
-        char** m = (char**) p1;
+        int* mc = (int*) p2;
 
         if (p0 != NULL_POINTER) {
 
@@ -204,45 +165,64 @@ void log_message(const void* p0, const void* p1, const void* p2) {
             // Only log message if log level matches.
             if (*l <= log_level) {
 
-//??                char n[] = {'\0'};
-                void* n = NULL_POINTER;
-                int ns = 0;
-                create_array((void*) &n, (void*) &ns);
+                // The log entry.
+                void* e = NULL_POINTER;
+                // The log entry count.
+                int ec = 0;
+                // The index for adding characters.
+                int i = 0;
 
-                * @param p0 the destination array
-                * @param p1 the type
-                * @param p2 the index
-                * @param p3 the source array
-                * @param p4 the count
-                */
-                set_array_elements((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &ns, (void*) &log_level_name, (void*) &count);
+                // Create log entry.
+                create_array((void*) &e, (void*) &ec);
 
-                int test_index = 0;
-                int test_size = 4;
-                set_character_array_string((void*) &n, (void*) &test_index, p1, (void*) &test_size);
+                // Add name of the given log level to entry.
+                add_log_level_name(p0, (void*) &e, (void*) &ec);
 
-                int termination_index = 4;
-                char termination = '\0';
-                set_character_array_element((void*) &n, (void*) &termination_index, (void*) &termination);
+                // Add colon to message.
+                i = ec;
+                ec++;
+                resize_array((void*) &e, (void*) &ec);
+                set_array_element((void*) &e, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &COLON_CHARACTER);
 
-//??                get_log_level_name(p0, (void*) &n);
-//??                strcat(n, ": ");
-//??                strcat(n, *m);
-//??                strcat(n, "\n");
+                // Add space to message.
+                i = ec;
+                ec++;
+                resize_array((void*) &e, (void*) &ec);
+                set_array_element((void*) &e, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &SPACE_CHARACTER);
 
-                show_message((void*) &n);
+                // Add message to message.
+                i = ec;
+                ec = ec + *mc;
+                resize_array((void*) &e, (void*) &ec);
+                set_array_elements((void*) &e, (void*) &CHARACTER_ARRAY, (void*) &i, p1, p2);
 
-                destroy_array((void*) &n, (void*) &ns);
+                // Add new line to message.
+                i = ec;
+                ec++;
+                resize_array((void*) &e, (void*) &ec);
+                set_array_element((void*) &e, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NEW_LINE_CHARACTER);
+
+                // Add string termination to message.
+                i = ec;
+                ec++;
+                resize_array((void*) &e, (void*) &ec);
+                set_array_element((void*) &e, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &STRING_TERMINATION_CHARACTER);
+
+                // Log entry to output.
+                fputs((char*) e, stdout);
+
+                // Destroy log entry.
+                destroy_array((void*) &e, (void*) &ec);
             }
 
         } else {
 
-            show_message((void*) &"Error: Could not log message. The message is null.\n");
+            show_message((void*) &"Error: Could not log message. The message count is null.\n");
         }
 
     } else {
 
-        show_message((void*) &"Error: Could not log message. The level is null.\n");
+        show_message((void*) &"Error: Could not log message. The log level is null.\n");
     }
 }
 

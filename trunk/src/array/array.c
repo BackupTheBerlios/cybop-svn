@@ -48,7 +48,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-05-26 22:37:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -224,7 +224,7 @@ void compare_array_elements(const void* p0, const void* p1, const void* p2, cons
  *
  * @param p0 the destination array
  * @param p1 the type
- * @param p2 the index
+ * @param p2 the destination array index
  * @param p3 the source array
  * @param p4 the count
  */
@@ -262,7 +262,7 @@ void set_array_elements(void* p0, const void* p1, const void* p2, const void* p3
  *
  * @param p0 the array
  * @param p1 the type
- * @param p2 the index
+ * @param p2 the array index
  * @param p3 the element
  */
 void set_array_element(void* p0, const void* p1, const void* p2, const void* p3) {
@@ -289,7 +289,7 @@ void set_array_element(void* p0, const void* p1, const void* p2, const void* p3)
  * @param p0 the array
  * @param p1 the type
  * @param p2 the size
- * @param p3 the index
+ * @param p3 the array index
  * @param p4 the count
  */
 void remove_array_elements(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
@@ -327,7 +327,7 @@ void remove_array_elements(void* p0, const void* p1, const void* p2, const void*
  * @param p0 the array
  * @param p1 the type
  * @param p2 the size
- * @param p3 the index
+ * @param p3 the array index
  */
 void remove_array_element(void* p0, const void* p1, const void* p2, const void* p3) {
 
@@ -342,7 +342,7 @@ void remove_array_element(void* p0, const void* p1, const void* p2, const void* 
  *
  * @param p0 the source array
  * @param p1 the type
- * @param p2 the index
+ * @param p2 the source array index
  * @param p3 the destination array
  * @param p4 the count
  */
@@ -380,7 +380,7 @@ void get_array_elements(const void* p0, const void* p1, const void* p2, void* p3
  *
  * @param p0 the array
  * @param p1 the type
- * @param p2 the index
+ * @param p2 the array index
  * @param p3 the element
  */
 void get_array_element(const void* p0, const void* p1, const void* p2, void* p3) {
@@ -405,7 +405,7 @@ void get_array_element(const void* p0, const void* p1, const void* p2, void* p3)
  * @param p2 the size
  * @param p3 the comparison array
  * @param p4 the count
- * @param p5 the index
+ * @param p5 the index within array
  */
 void get_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4, void* p5) {
 
@@ -443,7 +443,7 @@ void get_array_elements_index(const void* p0, const void* p1, const void* p2, co
  * @param p1 the type
  * @param p2 the size
  * @param p3 the element
- * @param p4 the index
+ * @param p4 the index within array
  */
 void get_array_element_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
 

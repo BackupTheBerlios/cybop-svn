@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-05-26 22:37:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -260,7 +260,7 @@ void compare_pointer_array_elements(const void* p0, const void* p1, const void* 
  * Sets the pointer array elements.
  *
  * @param p0 the destination array
- * @param p1 the index
+ * @param p1 the destination array index
  * @param p2 the source array
  * @param p3 the count
  */
@@ -341,7 +341,7 @@ void set_pointer_array_elements(void* p0, const void* p1, const void* p2, const 
  *
  * @param p0 the array
  * @param p1 the maximum count
- * @param p2 the index
+ * @param p2 the array index
  * @param p3 the count
  */
 void remove_pointer_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
@@ -437,7 +437,7 @@ void remove_pointer_array_elements(void* p0, const void* p1, const void* p2, con
  * Gets the pointer array elements.
  *
  * @param p0 the source array
- * @param p1 the index
+ * @param p1 the source array index
  * @param p2 the destination array
  * @param p3 the count
  */
@@ -523,7 +523,7 @@ void get_pointer_array_elements(const void* p0, const void* p1, void* p2, const 
  * @param p1 the maximum count
  * @param p2 the comparison array
  * @param p3 the count
- * @param p4 the index
+ * @param p4 the index within array
  */
 void get_pointer_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
 
