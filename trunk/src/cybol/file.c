@@ -23,7 +23,7 @@
  *
  * This file handles a file.
  *
- * @version $Revision: 1.10 $ $Date: 2004-06-22 23:42:15 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-06-23 21:48:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -322,7 +322,7 @@ void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
                     // Initialize terminated file name and its size.
                     char* tn = CHARACTER_NULL_POINTER;
-                    int tns = nc + 1;
+                    int tns = *nc + 1;
 
                     // Create terminated file name.
                     create_array((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &tns);
@@ -334,6 +334,9 @@ void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                     // adding the null termination character.
                     set_array_elements((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
                     set_array_element((void*) &tn, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CHARACTER);
+
+    fprintf(stderr, "read file name: %s\n", tn);
+    fprintf(stderr, "read file name size: %i\n", tns);
 
                     // Open file.
                     // CAUTION! The file name cannot be handed over as is.
@@ -353,9 +356,6 @@ void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
                                 break;
                             }
-
-                            // Read next character.
-                            c = fgetc(f);
 
                             if (*ac == *as) {
 
@@ -379,6 +379,9 @@ void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
 //??                                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The index exceeds the array size.");
                             }
+
+                            // Read next character.
+                            c = fgetc(f);
                         }
 
                         // Close file.

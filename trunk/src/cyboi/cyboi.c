@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.19 $ $Date: 2004-06-20 22:10:23 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2004-06-23 21:48:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -358,14 +358,12 @@ int main(int p0, char** p1) {
 
             //
             // Signal container.
-            // The initial count and size is set to 1,
-            // for storing the startup signal.
             //
 
             // The signal container and its count and size.
             void* s = NULL_POINTER;
-            int sc = 1;
-            int ss = 1;
+            int sc = 0;
+            int ss = 0;
 
             // Create signal container.
             create_signal_memory((void*) &s, (void*) &ss);

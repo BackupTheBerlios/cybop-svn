@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.6 $ $Date: 2004-06-20 22:10:23 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-06-23 21:48:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -407,8 +407,8 @@ void interpret_located_model(void* p0, void* p1, void* p2,
     read_model((void*) &b, (void*) &bc, (void*) &bs, p7, p8, p5, p6);
 
     fprintf(stderr, "b: %s\n", b);
-    fprintf(stderr, "bs: %i\n", bs);
     fprintf(stderr, "bc: %i\n", bc);
+    fprintf(stderr, "bs: %i\n", bs);
 
     fprintf(stderr, "pa: %s\n", *((char**) p3));
     fprintf(stderr, "pac: %i\n", *((int*) p4));
