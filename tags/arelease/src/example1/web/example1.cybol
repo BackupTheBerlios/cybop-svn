@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+
+<model>
+
+    <part
+        name="list_number"
+        location="inline"
+        abstraction="list"
+        model=""
+    >
+    
+        <part
+            name="row_number"
+            location="inline"
+            abstraction="string"
+            model=""
+        />
+    
+        <part
+            name="row_break"
+            location="inline"
+            abstraction="string"
+            model="< /br>"
+        />
+    
+    </part>
+
+</model>
