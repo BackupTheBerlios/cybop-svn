@@ -26,13 +26,12 @@ package cybop.core.system.region.controller.processor;
 
 import cybop.core.model.Boolean;
 import cybop.core.model.String;
-import cybop.core.model.model.*;
 import cybop.core.system.region.controller.*;
 
 /**
  * This class represents a portal processor.
  *
- * @version $Revision: 1.4 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalProcessor extends Processor {

@@ -35,7 +35,7 @@ import cybop.core.screen.region.*;
 /**
  * This class represents a frame model.
  *
- * @version $Revision: 1.7 $ $Date: 2003-06-19 19:41:21 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class FrameDisplay extends Display {
@@ -135,9 +135,9 @@ public class FrameDisplay extends Display {
     
                 c = new javax.swing.JDialog();
     
-            } else if (i.isEqualTo(FrameDisplay.MODE)) {
+            } else if (i.isEqualTo(FrameDisplay.FRAME_MODE)) {
 */
-    
+
                 c = new javax.swing.JFrame();
 
                 if (c != null) {
@@ -288,7 +288,7 @@ public class FrameDisplay extends Display {
      */
     public Item getDefaultModeCategory() {
 
-        return FrameDisplay.MODE;
+        return FrameDisplay.FRAME_MODE;
     }
 
     /**

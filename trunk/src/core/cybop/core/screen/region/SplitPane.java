@@ -32,7 +32,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a split pane.
  *
- * @version $Revision: 1.6 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SplitPane extends DisplayRegion {
@@ -66,11 +66,11 @@ public class SplitPane extends DisplayRegion {
 
             if (n.isEqualTo(SplitPane.LEFT_ORGANIZER)) {
 
-                setLeftOrganizer((Organizer) i);
+                setLeftDisplayItem((DisplayItem) i);
 
             } else if (n.isEqualTo(SplitPane.RIGHT_ORGANIZER)) {
 
-                setRightOrganizer((Organizer) i);
+                setRightDisplayItem((DisplayItem) i);
             }
 
         } else {
@@ -91,11 +91,11 @@ public class SplitPane extends DisplayRegion {
 
             if (n.isEqualTo(SplitPane.LEFT_ORGANIZER)) {
 
-                removeLeftOrganizer((Organizer) getChild(n));
+                removeLeftDisplayItem((DisplayItem) getChild(n));
             
             } else if (n.isEqualTo(SplitPane.RIGHT_ORGANIZER)) {
 
-                removeRightOrganizer((Organizer) getChild(n));
+                removeRightDisplayItem((DisplayItem) getChild(n));
             }
 
         } else {
@@ -145,7 +145,7 @@ public class SplitPane extends DisplayRegion {
      *
      * @return the left organizer
      */
-    public String getDefaultLeftOrganizer() {
+    public String getDefaultLeftDisplayItem() {
 
         return new String("cybop.core.screen.region.Panel");
     }
@@ -155,7 +155,7 @@ public class SplitPane extends DisplayRegion {
      *
      * @return the right organizer
      */
-    public String getDefaultRightOrganizer() {
+    public String getDefaultRightDisplayItem() {
 
         return new String("cybop.core.screen.region.Panel");
     }
@@ -171,7 +171,7 @@ public class SplitPane extends DisplayRegion {
      * @exception Exception if the java split pane is null
      * @exception Exception if the left organizer is null
      */
-    public void setLeftOrganizer(Organizer c) throws Exception {
+    public void setLeftDisplayItem(DisplayItem c) throws Exception {
 
         javax.swing.JSplitPane sp = (javax.swing.JSplitPane) getJavaObject();
 
@@ -199,7 +199,7 @@ public class SplitPane extends DisplayRegion {
      * @exception Exception if the java split pane is null
      * @exception Exception if the left organizer is null
      */
-    public void removeLeftOrganizer(Organizer c) throws Exception {
+    public void removeLeftDisplayItem(DisplayItem c) throws Exception {
 
         javax.swing.JSplitPane sp = (javax.swing.JSplitPane) getJavaObject();
 
@@ -231,7 +231,7 @@ public class SplitPane extends DisplayRegion {
      * @exception Exception if the java split pane is null
      * @exception Exception if the right organizer is null
      */
-    public void setRightOrganizer(Organizer c) throws Exception {
+    public void setRightDisplayItem(DisplayItem c) throws Exception {
 
         javax.swing.JSplitPane sp = (javax.swing.JSplitPane) getJavaObject();
 
@@ -259,7 +259,7 @@ public class SplitPane extends DisplayRegion {
      * @exception Exception if the java split pane is null
      * @exception Exception if the right organizer is null
      */
-    public void removeRightOrganizer(Organizer c) throws Exception {
+    public void removeRightDisplayItem(DisplayItem c) throws Exception {
 
         javax.swing.JSplitPane sp = (javax.swing.JSplitPane) getJavaObject();
 
@@ -291,8 +291,8 @@ public class SplitPane extends DisplayRegion {
 
         super.initialize();
 
-        setChild(SplitPane.LEFT_ORGANIZER, createChild(getDefaultLeftOrganizer()));
-        setChild(SplitPane.RIGHT_ORGANIZER, createChild(getDefaultRightOrganizer()));
+        setChild(SplitPane.LEFT_ORGANIZER, createChild(getDefaultLeftDisplayItem()));
+        setChild(SplitPane.RIGHT_ORGANIZER, createChild(getDefaultRightDisplayItem()));
     }
 
     /**
@@ -300,13 +300,13 @@ public class SplitPane extends DisplayRegion {
      */
     public void finalizz() throws Exception {
 
-        Organizer rightOrganizer = (Organizer) getChild(SplitPane.RIGHT_ORGANIZER);
+        DisplayItem rightDisplayItem = (DisplayItem) getChild(SplitPane.RIGHT_ORGANIZER);
         removeChild(SplitPane.RIGHT_ORGANIZER);
-        destroyChild(rightOrganizer);
+        destroyChild(rightDisplayItem);
 
-        Organizer leftOrganizer = (Organizer) getChild(SplitPane.LEFT_ORGANIZER);
+        DisplayItem leftDisplayItem = (DisplayItem) getChild(SplitPane.LEFT_ORGANIZER);
         removeChild(SplitPane.LEFT_ORGANIZER);
-        destroyChild(leftOrganizer);
+        destroyChild(leftDisplayItem);
 
         super.finalizz();
     }

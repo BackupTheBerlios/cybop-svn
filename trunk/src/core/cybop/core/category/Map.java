@@ -33,7 +33,7 @@ package cybop.core.category;
  * the index of the wanted element -- and then returning the corresponding
  * reference.
  *
- * @version $Revision: 1.9 $ $Date: 2003-06-19 19:41:21 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Map {
@@ -162,11 +162,11 @@ public class Map {
     public int getSize() throws Exception {
 
         int size = 0;
-        Array refs = getReferences();
+        Array names = getNames();
 
-        if (refs != null) {
+        if (names != null) {
 
-            size = refs.getSize();
+            size = names.getSize();
 
         } else {
 
@@ -205,12 +205,6 @@ public class Map {
             names.set(i, n);
             refs.set(i, e);
 
-            if (cybop.core.system.SystemItem.SIGNAL_MEMORY.isEqualTo(n)) {
-                java.lang.System.out.println("\n\n\nset i: " + i);
-                java.lang.System.out.println("\nset n: " + n.getJavaObject());
-                java.lang.System.out.println("\nset e: " + e + "\n\n\n");
-            }
-    
         } else {
 
             throw new Exception("Could not set element. The references is null.");
@@ -280,12 +274,6 @@ public class Map {
     public Array get(Array n) throws Exception {
 
         int i = getIndex(n);
-
-        if (cybop.core.system.SystemItem.SIGNAL_MEMORY.isEqualTo(n)) {
-            java.lang.System.out.println("\n\n\nget i: " + i);
-            java.lang.System.out.println("\nget n: " + n.getJavaObject());
-            java.lang.System.out.println("\nget e: " + get(i) + "\n\n\n");
-        }
 
         return get(i);
     }

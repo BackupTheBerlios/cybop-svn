@@ -25,14 +25,13 @@
 package cybop.core.system.system;
 
 import cybop.core.model.String;
-import cybop.core.model.model.user.*;
 import cybop.core.system.System;
 import cybop.core.system.block.*;
 
 /**
  * This class represents a portal user.<br><br>
  *
- * @version $Revision: 1.4 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalUser extends User {

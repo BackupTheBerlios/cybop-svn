@@ -33,7 +33,7 @@ import cybop.core.screen.component.*;
 /**
  * This class represents a scroll pane.
  *
- * @version $Revision: 1.6 $ $Date: 2003-06-19 12:24:42 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ScrollPane extends DisplayRegion {
@@ -108,19 +108,19 @@ public class ScrollPane extends DisplayRegion {
 
             } else if (n.isEqualTo(ScrollPane.LEFT_TOP_CORNER)) {
 
-                setLeftTopCorner((Organizer) i);
+                setLeftTopCorner((DisplayItem) i);
 
             } else if (n.isEqualTo(ScrollPane.LEFT_BOTTOM_CORNER)) {
 
-                setLeftBottomCorner((Organizer) i);
+                setLeftBottomCorner((DisplayItem) i);
 
             } else if (n.isEqualTo(ScrollPane.RIGHT_TOP_CORNER)) {
 
-                setRightTopCorner((Organizer) i);
+                setRightTopCorner((DisplayItem) i);
 
             } else if (n.isEqualTo(ScrollPane.RIGHT_BOTTOM_CORNER)) {
 
-                setRightBottomCorner((Organizer) i);
+                setRightBottomCorner((DisplayItem) i);
             }
 
         } else {
@@ -473,7 +473,7 @@ public class ScrollPane extends DisplayRegion {
      * @exception Exception if the java scroll pane is null
      * @exception Exception if the left top corner is null
      */
-    public void setLeftTopCorner(Organizer c) throws Exception {
+    public void setLeftTopCorner(DisplayItem c) throws Exception {
 
         javax.swing.JScrollPane sp = (javax.swing.JScrollPane) getJavaObject();
 
@@ -505,7 +505,7 @@ public class ScrollPane extends DisplayRegion {
      * @exception Exception if the java scroll pane is null
      * @exception Exception if the left bottom corner is null
      */
-    public void setLeftBottomCorner(Organizer c) throws Exception {
+    public void setLeftBottomCorner(DisplayItem c) throws Exception {
 
         javax.swing.JScrollPane sp = (javax.swing.JScrollPane) getJavaObject();
 
@@ -537,7 +537,7 @@ public class ScrollPane extends DisplayRegion {
      * @exception Exception if the java scroll pane is null
      * @exception Exception if the right top corner is null
      */
-    public void setRightTopCorner(Organizer c) throws Exception {
+    public void setRightTopCorner(DisplayItem c) throws Exception {
 
         javax.swing.JScrollPane sp = (javax.swing.JScrollPane) getJavaObject();
 
@@ -569,7 +569,7 @@ public class ScrollPane extends DisplayRegion {
      * @exception Exception if the java scroll pane is null
      * @exception Exception if the right bottom corner is null
      */
-    public void setRightBottomCorner(Organizer c) throws Exception {
+    public void setRightBottomCorner(DisplayItem c) throws Exception {
 
         javax.swing.JScrollPane sp = (javax.swing.JScrollPane) getJavaObject();
 

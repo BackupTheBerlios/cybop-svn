@@ -32,7 +32,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a tree.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Tree extends DisplayRegion {
@@ -111,7 +111,7 @@ public class Tree extends DisplayRegion {
 
             if (n.isEqualTo(Tree.MODEL)) {
 
-                setModel((Model) i);
+                setModel(i);
             }
 
         } else {
@@ -132,7 +132,7 @@ public class Tree extends DisplayRegion {
 
             if (n.isEqualTo(Tree.MODEL)) {
 
-                removeModel((Model) getChild(n));
+                removeModel(getChild(n));
             }
 
         } else {
@@ -154,7 +154,7 @@ public class Tree extends DisplayRegion {
      * @exception Exception if the java tree node is null
      * @exception Exception if the model is null
      */
-    public void setModel(Model m) throws Exception {
+    public void setModel(Item m) throws Exception {
 
         javax.swing.JTree t = (javax.swing.JTree) getJavaObject();
 
@@ -181,7 +181,7 @@ public class Tree extends DisplayRegion {
      * @param m the model
      * @exception Exception if the java tree node is null
      */
-    public void removeModel(Model m) throws Exception {
+    public void removeModel(Item m) throws Exception {
 
         javax.swing.JTree t = (javax.swing.JTree) getJavaObject();
 

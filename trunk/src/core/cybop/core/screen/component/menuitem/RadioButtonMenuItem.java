@@ -25,15 +25,16 @@
 package cybop.core.screen.component.menuitem;
 
 import cybop.core.model.*;
+import cybop.core.screen.*;
 import cybop.core.screen.component.*;
 
 /**
  * This class represents a radio button menu item.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class RadioButtonMenuItem extends Organizer {
+public class RadioButtonMenuItem extends DisplayItem {
     
     //?? JRadioButtonMenuItem
 }

@@ -51,7 +51,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.22 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
@@ -584,7 +584,7 @@ public class Controller extends Block {
             if (t != null) {
 
                 // Write system information into user interface.
-                t.encode((KnowledgeModel) getChild(Controller.KNOWLEDGE_MODEL), (Model) getChild(Controller.SYSTEM_INFORMATION_DISPLAY));
+                t.encode((KnowledgeModel) getChild(Controller.KNOWLEDGE_MODEL), getChild(Controller.SYSTEM_INFORMATION_DISPLAY));
 
             } else {
 

@@ -83,7 +83,7 @@ import cybop.core.model.String;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.12 $ $Date: 2003-06-19 19:41:21 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends Behaviour {
@@ -148,6 +148,28 @@ public class Item extends Behaviour {
         return this.children;
     }
 
+    /**
+     * Returns the size.
+     *
+     * @return the size
+     */
+    public int getSize() throws Exception {
+
+        int size = 0;
+        Map c = getChildren();
+
+        if (c != null) {
+
+            size = c.getSize();
+
+        } else {
+
+            throw new Exception("Could not get size. The children is null.");
+        }
+
+        return size;
+    }
+
     //
     // Child management.
     //
@@ -181,7 +203,7 @@ public class Item extends Behaviour {
                     i.abstracc();
 
                     java.lang.System.out.println("INFO: Name child to get a category.");
-                    i.name();
+                    i.name(null);
 
                     java.lang.System.out.println("INFO: Inherit child to get an inheritance.");
                     i.inherit();
@@ -272,6 +294,14 @@ public class Item extends Behaviour {
 
         if (m != null) {
 
+            // The child must sometimes know its own name, just like people in real life.
+            // Signals for example can only be deleted from the signal memory
+            // if they carry their own name.
+            if (c != null) {
+
+                c.setName(n);
+            }
+
             m.set(n, c);
 
         } else {
@@ -293,6 +323,17 @@ public class Item extends Behaviour {
         if (m != null) {
 
             m.remove(n);
+
+/*??
+            // The child must sometimes know its own name, just like people in real life.
+            // Signals for example can only be deleted from the signal memory
+            // if they carry their own name.
+            //?? WHERE to best remove the name from child? In Array?
+            if (c != null) {
+
+                c.removeName(n);
+            }
+*/
 
         } else {
 

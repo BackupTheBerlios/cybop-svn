@@ -70,7 +70,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.32 $ $Date: 2003-06-19 19:41:21 $ $Author: christian $
+ * @version $Revision: 1.33 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -148,7 +148,6 @@ public class Launcher extends Family {
 
         try {
 
-            String n = new String("launcher");
             Launcher l = new Launcher();
 
             if (l != null) {
@@ -159,7 +158,7 @@ public class Launcher extends Family {
                 l.abstracc();
 
                 java.lang.System.out.println("INFO: Name child to get a category.");
-                l.name();
+                l.name(new String("launcher"));
 
                 java.lang.System.out.println("INFO: Inherit child to get an inheritance.");
                 l.inherit();
@@ -223,7 +222,7 @@ public class Launcher extends Family {
     
                 java.lang.System.out.println("INFO: Unname child.");
                 l.unname();
-    
+
                 java.lang.System.out.println("INFO: Deabstract child.");
                 l.deabstract();
 
@@ -662,7 +661,7 @@ public class Launcher extends Family {
         } else {
 
             setChild(Launcher.SCREEN, createChild(getCategory(Launcher.SCREEN)));
-            setChild(Launcher.LIFECYCLE_ACTION, (Item) getCategory(Launcher.LIFECYCLE_ACTION_ARGUMENT));
+            setChild(Launcher.LIFECYCLE_ACTION, (Item) getCategory(Launcher.LIFECYCLE_ACTION));
             //?? Temporary until event handling doesn't need java awt EventQueue anymore.
             setJavaEventCatcher(createJavaEventCatcher());
             setChild(Launcher.SHUTDOWN_FLAG, (Item) getCategory(Launcher.SHUTDOWN_FLAG));

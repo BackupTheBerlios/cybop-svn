@@ -33,7 +33,7 @@ import cybop.core.model.String;
  *
  * It contains information about a system.
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-19 22:25:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformation extends Item {
@@ -274,18 +274,18 @@ public class SystemInformation extends Item {
 
         super.initialize();
 
-        setChild(SystemInformation.NAME, createChild(getCategory(SystemInformation.NAME)));
-        setChild(SystemInformation.VERSION, createChild(getCategory(SystemInformation.VERSION)));
-        setChild(SystemInformation.DATE, createChild(getCategory(SystemInformation.DATE)));
-        setChild(SystemInformation.SLOGAN, createChild(getCategory(SystemInformation.SLOGAN)));
-        setChild(SystemInformation.LOGO, createChild(getCategory(SystemInformation.LOGO)));
-        setChild(SystemInformation.COPYRIGHT, createChild(getCategory(SystemInformation.COPYRIGHT)));
-        setChild(SystemInformation.CONTACT, createChild(getCategory(SystemInformation.CONTACT)));
-        setChild(SystemInformation.DESCRIPTION, createChild(getCategory(SystemInformation.DESCRIPTION)));
-        setChild(SystemInformation.AUTHORS, createChild(getCategory(SystemInformation.AUTHORS)));
-        setChild(SystemInformation.HELPERS, createChild(getCategory(SystemInformation.HELPERS)));
-        setChild(SystemInformation.INSPIRATIONS, createChild(getCategory(SystemInformation.INSPIRATIONS)));
-        setChild(SystemInformation.LICENSE, createChild(getCategory(SystemInformation.LICENSE)));
+        setChild(SystemInformation.NAME, (Item) getCategory(SystemInformation.NAME));
+        setChild(SystemInformation.VERSION, (Item) getCategory(SystemInformation.VERSION));
+        setChild(SystemInformation.DATE, (Item) getCategory(SystemInformation.DATE));
+        setChild(SystemInformation.SLOGAN, (Item) getCategory(SystemInformation.SLOGAN));
+        setChild(SystemInformation.LOGO, (Item) getCategory(SystemInformation.LOGO));
+        setChild(SystemInformation.COPYRIGHT, (Item) getCategory(SystemInformation.COPYRIGHT));
+        setChild(SystemInformation.CONTACT, (Item) getCategory(SystemInformation.CONTACT));
+        setChild(SystemInformation.DESCRIPTION, (Item) getCategory(SystemInformation.DESCRIPTION));
+        setChild(SystemInformation.AUTHORS, (Item) getCategory(SystemInformation.AUTHORS));
+        setChild(SystemInformation.HELPERS, (Item) getCategory(SystemInformation.HELPERS));
+        setChild(SystemInformation.INSPIRATIONS, (Item) getCategory(SystemInformation.INSPIRATIONS));
+        setChild(SystemInformation.LICENSE, (Item) getCategory(SystemInformation.LICENSE));
     }
 
     /**
