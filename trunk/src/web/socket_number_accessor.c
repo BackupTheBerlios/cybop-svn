@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-01-12 13:41:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -170,7 +170,7 @@ void get_index_for_signal_id(void* p0, const void* p1, void* p2) {
  * Gets the client socket.
  *
  * @param p0 the internals memory
- * @oaram p1 the index
+ * @param p1 the index
  * @param p2 the client socket
  */
 void get_client_socket_number_for_index(void* p0, void* p1, void* p2) {

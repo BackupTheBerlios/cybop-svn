@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-01-12 13:41:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -76,8 +76,8 @@ void shutdown_signal_memory(void* p0) {
 
     // The signal memory.
     void* s = NULL_POINTER;
-    int* sc = INTEGER_NULL_POINTER;
-    int* ss = INTEGER_NULL_POINTER;
+    void* sc = NULL_POINTER;
+    void* ss = NULL_POINTER;
 
     // Get signal memory.
     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &s);

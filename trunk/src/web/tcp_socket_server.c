@@ -23,7 +23,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.17 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2005-01-12 13:41:48 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
@@ -328,13 +328,15 @@ void get_param_from_request_row(char** req_row, int* req_row_count, char** param
  * A signal is created and added to the signal memory, for each parameter.
  *
  * @param p0 the internals memory
- * @param cs the client socket
+ * @param p1 the client socket
  */
-void handle_tcp_socket_request(void* p0, int* cs) {
+void handle_tcp_socket_request(void* p0, void* p1) {
 
-    log_message_debug("Handle tcp socket request.");
+    if (p1 != NULL_POINTER) {
 
-    if (cs != NULL_POINTER) {
+        int** cs = (int**) p1;
+
+        log_message_debug("Handle tcp socket request.");
 
         char* request = getenv("PATH");
 
@@ -348,11 +350,11 @@ void handle_tcp_socket_request(void* p0, int* cs) {
         create_array((void*) &msg, (void*) &CHARACTER_ARRAY, (void*) &max_msg_count);
 
         // Receive message from client.
-        int msg_count = recv(*cs, msg, *max_msg_count, 0);
+        int msg_count = recv(**cs, msg, *max_msg_count, 0);
 
         if (msg_count != -1) {
 
-            // TODO: auf get pr?fen
+            // TODO: auf get pruefen
             // TODO: parameter aus empfangenen Daten ermitteln
 
             // Create message row.
@@ -401,15 +403,7 @@ void handle_tcp_socket_request(void* p0, int* cs) {
         //            exit(1);
         //        }
 
-                // The signal memory.
-                void* m = NULL_POINTER;
-                void* mc = NULL_POINTER;
-                void* ms = NULL_POINTER;
-
-                // Get signal memory.
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &m);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms);
+                log_message_debug("Create destination abstraction, model, details.");
 
                 // The source channel.
                 char c_sc[] = "inline";
@@ -441,38 +435,49 @@ void handle_tcp_socket_request(void* p0, int* cs) {
                     (void*) &sa, (void*) &sac,
                     (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
                     (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
-                log_message_debug("create destination abstraction");
 
                 // Create destination model.
                 create_model((void*) &dm, (void*) &dmc, (void*) &dms,
                     (void*) &sm, (void*) &smc,
                     (void*) &sa, (void*) &sac,
                     (void*) &sc, (void*) &scc);
-                log_message_debug("create destination model");
 
                 //
-                // set the signal
+                // Signal.
                 //
 
-                int main_sig_id = 0;
+                log_message_debug("Set start signal.");
 
-                get_new_signal_id(m, mc, (void*) &main_sig_id);
+                // The signal memory.
+                void* m = NULL_POINTER;
+                void* mc = NULL_POINTER;
+                void* ms = NULL_POINTER;
 
+                // Get signal memory.
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &m);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms);
+
+                // The signal id.
+                int* id = INTEGER_NULL_POINTER;
+                create_integer((void*) &id);
+                *id = 0;
+                get_new_signal_id((void*) &m, (void*) &mc, (void*) &id);
+
+                // Set signal.
                 set_signal(m, mc, ms,
                     (void*) &da, (void*) &dac,
                     (void*) &dm, (void*) &dmc,
                     (void*) &dd, (void*) &ddc,
                     (void*) &NORMAL_PRIORITY,
-                    (void*) &main_sig_id);
+                    (void*) &id);
 
-                log_message_debug("set start signals");
-
-                add_signal_id(p0, (void*) &main_sig_id);
+                add_signal_id(p0, (void*) &id);
                 add_client_socket_number(p0, (void*) &cs);
 
             } else {
 
-                close(*cs);
+                close(**cs);
             }
 
             destroy_integer((void*) &r);
@@ -531,16 +536,18 @@ void run_tcp_socket(void* p0) {
 //??        while (1) {
 
         // Accept client socket request and store client socket.
-        int cs = accept(*s, (struct sockaddr*) &ca, &cas);
+        int* cs = INTEGER_NULL_POINTER;
+        create_integer((void*) &cs);
+        *cs = accept(*s, (struct sockaddr*) &ca, &cas);
 
-        if (cs >= 0) {
+        if (*cs >= 0) {
 
             log_message_debug("DEBUG: Accepted tcp client socket request.");
 
 //??            char ausgabe[] = "Hello World";
 //??            send(cs, ausgabe, strlen(ausgabe), 0);
 
-            handle_tcp_socket_request(p0, &cs);
+            handle_tcp_socket_request(p0, (void*) &cs);
 
 //??            // Close socket connection.
 //??            close(cs);
@@ -550,6 +557,8 @@ void run_tcp_socket(void* p0) {
             fprintf(stderr, "Could not run tcp server socket. The accept failed.");
             pthread_exit(NULL_POINTER);
         }
+
+        destroy_integer((void*) &cs);
 
 //??        }
 

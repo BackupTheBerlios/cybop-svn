@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-01-12 13:41:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -152,6 +152,19 @@ void handle_system(void* p0) {
     create_integer((void*) &id);
     *id = 0;
     get_new_signal_id((void*) &s, (void*) &sc, (void*) &id);
+
+    fprintf(stderr, "sm: %i\n", s);
+    fprintf(stderr, "smc: %i\n", *((int*) sc));
+    fprintf(stderr, "sms: %i\n", *((int*) ss));
+
+    fprintf(stderr, "ma: %i\n", ma);
+    fprintf(stderr, "mac: %i\n", mac);
+    fprintf(stderr, "mm: %i\n", mm);
+    fprintf(stderr, "mmc: %i\n", mmc);
+    fprintf(stderr, "md: %i\n", md);
+    fprintf(stderr, "mdc: %i\n", mdc);
+    fprintf(stderr, "p: %i\n", *NORMAL_PRIORITY);
+    fprintf(stderr, "id: %i\n", *id);
 
     // Add startup signal to signal memory.
     set_signal((void*) &s, (void*) &sc, (void*) &ss,

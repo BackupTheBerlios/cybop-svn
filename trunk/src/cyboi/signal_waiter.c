@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2005-01-12 13:41:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -194,6 +194,8 @@ void wait(void* p0) {
 
             // Destroy signal (id and priority).
             destroy_integer((void*) &id);
+            //?? TODO: Isn't the priority a FIXED constant?
+            //?? If so, then DO NOT try to destroy it!
             destroy_integer((void*) &p);
 
             // Reset abstraction.

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-01-10 23:54:00 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-01-12 13:41:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,12 +48,12 @@
  * @param p7 the signal details
  * @param p8 the signal details count
  * @param p9 the signal priority
- * @param main_sig_id the main signal id
+ * @param p10 the signal id
  */
 void set_signal(void* p0, void* p1, void* p2,
     const void* p3, const void* p4, const void* p5,
     const void* p6, const void* p7, const void* p8,
-    const void* p9, const int* main_sig_id) {
+    const void* p9, const void* p10) {
 
     if (p2 != NULL_POINTER) {
 
@@ -76,10 +76,10 @@ void set_signal(void* p0, void* p1, void* p2,
             void* dc = NULL_POINTER;
             // The priorities.
             void* p = NULL_POINTER;
-            // main signal id s.
-            void* ids = NULL_POINTER;
+            // The identifications.
+            void* id = NULL_POINTER;
 
-            // Get abstractions, models, details, priorities.
+            // Get abstractions, models, details, priorities, identifications.
             get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a);
             get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
             get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &m);
@@ -87,7 +87,7 @@ void set_signal(void* p0, void* p1, void* p2,
             get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &d);
             get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc);
             get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p);
-            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ids);
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id);
 
             // The index.
             int* i = INTEGER_NULL_POINTER;
@@ -101,7 +101,9 @@ void set_signal(void* p0, void* p1, void* p2,
                     // Increase size.
                     **s = **s * *SIGNAL_MEMORY_RESIZE_FACTOR + 1;
 
-                    // Resize abstractions, models, details, priorities.
+    fprintf(stderr, "a void*: %i\n", a);
+
+                    // Resize abstractions, models, details, priorities, identifications.
                     resize_array((void*) &a, (void*) &POINTER_ARRAY, p2);
                     resize_array((void*) &ac, (void*) &POINTER_ARRAY, p2);
                     resize_array((void*) &m, (void*) &POINTER_ARRAY, p2);
@@ -109,7 +111,7 @@ void set_signal(void* p0, void* p1, void* p2,
                     resize_array((void*) &d, (void*) &POINTER_ARRAY, p2);
                     resize_array((void*) &dc, (void*) &POINTER_ARRAY, p2);
                     resize_array((void*) &p, (void*) &POINTER_ARRAY, p2);
-                    resize_array((void*) &ids, (void*) &POINTER_ARRAY, p2);
+                    resize_array((void*) &id, (void*) &POINTER_ARRAY, p2);
 
                     // Set new array reference.
                     // CAUTION! If an array gets resized, a new array is
@@ -123,12 +125,12 @@ void set_signal(void* p0, void* p1, void* p2,
                     set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &d, (void*) &ONE_NUMBER);
                     set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc, (void*) &ONE_NUMBER);
                     set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) &ONE_NUMBER);
-                    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ids, (void*) &ONE_NUMBER);
+                    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) &ONE_NUMBER);
                 }
 
                 if (*i < **s) {
 
-                    // Set abstraction, model, details, priority.
+                    // Set abstraction, model, details, priority, identification.
                     set_array_elements((void*) &a, (void*) &POINTER_ARRAY, (void*) &i, p3, (void*) &ONE_NUMBER);
                     set_array_elements((void*) &ac, (void*) &POINTER_ARRAY, (void*) &i, p4, (void*) &ONE_NUMBER);
                     set_array_elements((void*) &m, (void*) &POINTER_ARRAY, (void*) &i, p5, (void*) &ONE_NUMBER);
@@ -136,7 +138,7 @@ void set_signal(void* p0, void* p1, void* p2,
                     set_array_elements((void*) &d, (void*) &POINTER_ARRAY, (void*) &i, p7, (void*) &ONE_NUMBER);
                     set_array_elements((void*) &dc, (void*) &POINTER_ARRAY, (void*) &i, p8, (void*) &ONE_NUMBER);
                     set_array_elements((void*) &p, (void*) &POINTER_ARRAY, (void*) &i, p9, (void*) &ONE_NUMBER);
-                    set_array_elements((void*) &ids, (void*) &POINTER_ARRAY, (void*) &i, main_sig_id, (void*) &ONE_NUMBER);
+                    set_array_elements((void*) &id, (void*) &POINTER_ARRAY, (void*) &i, p10, (void*) &ONE_NUMBER);
 
                     // Increment count.
                     (**c)++;
@@ -201,10 +203,10 @@ void remove_signal(void* p0, void* p1, void* p2, const void* p3) {
                     void* dc = NULL_POINTER;
                     // The priorities.
                     void* p = NULL_POINTER;
-                    // The main signal ids.
-                    void* ids = NULL_POINTER;
+                    // The identifications.
+                    void* id = NULL_POINTER;
 
-                    // Get abstractions, models, details, priorities.
+                    // Get abstractions, models, details, priorities, identifications.
                     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a);
                     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
                     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &m);
@@ -212,11 +214,11 @@ void remove_signal(void* p0, void* p1, void* p2, const void* p3) {
                     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &d);
                     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc);
                     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p);
-                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &ids);
+                    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id);
 
                     if (**i < **c) {
 
-                        // Remove abstraction, model, details, priority.
+                        // Remove abstraction, model, details, priority, identification.
                         remove_array_elements((void*) &a, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
                         remove_array_elements((void*) &ac, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
                         remove_array_elements((void*) &m, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
@@ -224,7 +226,7 @@ void remove_signal(void* p0, void* p1, void* p2, const void* p3) {
                         remove_array_elements((void*) &d, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
                         remove_array_elements((void*) &dc, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
                         remove_array_elements((void*) &p, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &ids, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements((void*) &id, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
 
                         // Decrement count.
                         (**c)--;
@@ -268,10 +270,10 @@ void remove_signal(void* p0, void* p1, void* p2, const void* p3) {
  * @param p7 the signal details
  * @param p8 the signal details count
  * @param p9 the signal priority
- * @param main_sig_id the main signal id
+ * @param p10 the main signal id
  */
 void get_signal(const void* p0, const void* p1, const void* p2, void* p3, void* p4,
-    void* p5, void* p6, void* p7, void* p8, void* p9, int* main_signal_id) {
+    void* p5, void* p6, void* p7, void* p8, void* p9, int* p10) {
 
     if (p2 != NULL_POINTER) {
 
@@ -296,10 +298,10 @@ void get_signal(const void* p0, const void* p1, const void* p2, void* p3, void* 
                 void* dc = NULL_POINTER;
                 // The priorities.
                 void* p = NULL_POINTER;
-                // The main signal id.
-                void* ids = NULL_POINTER;
+                // The identifications.
+                void* id = NULL_POINTER;
 
-                // Get abstractions, models, details, priorities, ids.
+                // Get abstractions, models, details, priorities, identifications.
                 get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a);
                 get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
                 get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &m);
@@ -307,11 +309,11 @@ void get_signal(const void* p0, const void* p1, const void* p2, void* p3, void* 
                 get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &d);
                 get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc);
                 get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ids);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id);
 
                 if (**i < **c) {
 
-                    // Get abstraction, model, details, priority, id.
+                    // Get abstraction, model, details, priority, identification.
                     get_array_elements((void*) &a, (void*) &POINTER_ARRAY, p2, p3);
                     get_array_elements((void*) &ac, (void*) &POINTER_ARRAY, p2, p4);
                     get_array_elements((void*) &m, (void*) &POINTER_ARRAY, p2, p5);
@@ -319,7 +321,7 @@ void get_signal(const void* p0, const void* p1, const void* p2, void* p3, void* 
                     get_array_elements((void*) &d, (void*) &POINTER_ARRAY, p2, p7);
                     get_array_elements((void*) &dc, (void*) &POINTER_ARRAY, p2, p8);
                     get_array_elements((void*) &p, (void*) &POINTER_ARRAY, p2, p9);
-                    get_array_elements((void*) &ids, (void*) &POINTER_ARRAY, p2, main_signal_id);
+                    get_array_elements((void*) &id, (void*) &POINTER_ARRAY, p2, p10);
 
                 } else {
 
@@ -433,21 +435,21 @@ void get_new_signal_id(const void* p0, const void* p1, void* p2) {
 
             int** mc = (int**) p1;
 
-            // The signal ids.
+            // The signal identifications.
             void* ids = NULL_POINTER;
 
-            // Get signal ids.
-            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ids);
+            // Get signal identifications.
+            get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_IDENTIFICATIONS_INDEX, (void*) &ids);
 
             // The loop variable.
             int* j = INTEGER_NULL_POINTER;
             create_integer((void*) &j);
             *j = 0;
 
-            // The maximum signal id.
-            int max = 0;
+            // The maximum signal identification.
+            int max = -1;
 
-            // The id.
+            // The identification.
             int* id = INTEGER_NULL_POINTER;
 
             while (1) {
@@ -457,6 +459,7 @@ void get_new_signal_id(const void* p0, const void* p1, void* p2) {
                     break;
                 }
 
+                // Get signal identification.
                 get_array_elements((void*) &ids, (void*) &POINTER_ARRAY, (void*) &j, (void*) &id);
 
                 if (*id > max) {
@@ -469,6 +472,7 @@ void get_new_signal_id(const void* p0, const void* p1, void* p2) {
 
             **i = max + 1;
 
+            // Destroy loop variable.
             destroy_integer((void*) &j);
 
         } else {

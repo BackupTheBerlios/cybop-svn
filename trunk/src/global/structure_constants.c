@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2005-01-12 13:41:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -389,9 +389,9 @@ static const int* SIGNALS_DETAILS_COUNTS_INDEX = SIGNALS_DETAILS_COUNTS_INDEX_AR
 static const int SIGNALS_PRIORITIES_INDEX_ARRAY[] = {6};
 static const int* SIGNALS_PRIORITIES_INDEX = SIGNALS_PRIORITIES_INDEX_ARRAY;
 
-/** The main signal ids index. */
-static const int SIGNALS_MAIN_SIGNAL_ID_INDEX_ARRAY[] = {7};
-static const int* SIGNALS_MAIN_SIGNAL_ID_INDEX = SIGNALS_MAIN_SIGNAL_ID_INDEX_ARRAY;
+/** The signals identifications index. */
+static const int SIGNALS_IDENTIFICATIONS_INDEX_ARRAY[] = {7};
+static const int* SIGNALS_IDENTIFICATIONS_INDEX = SIGNALS_IDENTIFICATIONS_INDEX_ARRAY;
 
 //
 // Xml tag.

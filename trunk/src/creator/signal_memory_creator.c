@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.8 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-01-12 13:41:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,36 +50,36 @@ void create_signal_memory(void* p0, const void* p1) {
     // Create signal memory.
     create_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);
 
-    // The abstractions, models, details, priorities, main signal id.
-    void* sa = NULL_POINTER;
-    void* sac = NULL_POINTER;
-    void* sm = NULL_POINTER;
-    void* smc = NULL_POINTER;
-    void* sd = NULL_POINTER;
-    void* sdc = NULL_POINTER;
-    void* sp = NULL_POINTER;
-    void* msid = NULL_POINTER;
+    // The abstractions, models, details, priorities, identifications.
+    void* a = NULL_POINTER;
+    void* ac = NULL_POINTER;
+    void* m = NULL_POINTER;
+    void* mc = NULL_POINTER;
+    void* d = NULL_POINTER;
+    void* dc = NULL_POINTER;
+    void* p = NULL_POINTER;
+    void* id = NULL_POINTER;
 
-    // Create abstractions, models, details, priorities.
-    create_array((void*) &sa, (void*) &POINTER_ARRAY, p1);
-    create_array((void*) &sac, (void*) &POINTER_ARRAY, p1);
-    create_array((void*) &sm, (void*) &POINTER_ARRAY, p1);
-    create_array((void*) &smc, (void*) &POINTER_ARRAY, p1);
-    create_array((void*) &sd, (void*) &POINTER_ARRAY, p1);
-    create_array((void*) &sdc, (void*) &POINTER_ARRAY, p1);
-    create_array((void*) &sp, (void*) &POINTER_ARRAY, p1);
-    create_array((void*) &msid, (void*) &POINTER_ARRAY, p1);
+    // Create abstractions, models, details, priorities, identifications.
+    create_array((void*) &a, (void*) &POINTER_ARRAY, p1);
+    create_array((void*) &ac, (void*) &POINTER_ARRAY, p1);
+    create_array((void*) &m, (void*) &POINTER_ARRAY, p1);
+    create_array((void*) &mc, (void*) &POINTER_ARRAY, p1);
+    create_array((void*) &d, (void*) &POINTER_ARRAY, p1);
+    create_array((void*) &dc, (void*) &POINTER_ARRAY, p1);
+    create_array((void*) &p, (void*) &POINTER_ARRAY, p1);
+    create_array((void*) &id, (void*) &POINTER_ARRAY, p1);
 
-    // Set abstractions, models, details, priorities.
+    // Set abstractions, models, details, priorities, identifications.
     // CAUTION! Use ascending order, as compared to destruction!
-    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &sa, (void*) &ONE_NUMBER);
-    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &sac, (void*) &ONE_NUMBER);
-    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &sm, (void*) &ONE_NUMBER);
-    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &smc, (void*) &ONE_NUMBER);
-    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &sd, (void*) &ONE_NUMBER);
-    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &sdc, (void*) &ONE_NUMBER);
-    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &sp, (void*) &ONE_NUMBER);
-    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &msid, (void*) &ONE_NUMBER);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) &ONE_NUMBER);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) &ONE_NUMBER);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &m, (void*) &ONE_NUMBER);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &mc, (void*) &ONE_NUMBER);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &d, (void*) &ONE_NUMBER);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc, (void*) &ONE_NUMBER);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) &ONE_NUMBER);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) &ONE_NUMBER);
 }
 
 /**
@@ -92,15 +92,15 @@ void destroy_signal_memory(void* p0, const void* p1) {
 
     log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_SIGNAL_MEMORY_MESSAGE, (void*) &DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT);
 
-    // The abstractions, models, details, priorities, main signal id.
-    void* sa = NULL_POINTER;
-    void* sac = NULL_POINTER;
-    void* sm = NULL_POINTER;
-    void* smc = NULL_POINTER;
-    void* sd = NULL_POINTER;
-    void* sdc = NULL_POINTER;
-    void* sp = NULL_POINTER;
-    void* ids = NULL_POINTER;
+    // The abstractions, models, details, priorities, identifications.
+    void* a = NULL_POINTER;
+    void* ac = NULL_POINTER;
+    void* m = NULL_POINTER;
+    void* mc = NULL_POINTER;
+    void* d = NULL_POINTER;
+    void* dc = NULL_POINTER;
+    void* p = NULL_POINTER;
+    void* id = NULL_POINTER;
 
 /*??
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy all signals left in signal memory.");
@@ -129,19 +129,19 @@ void destroy_signal_memory(void* p0, const void* p1) {
     }
 */
 
-    // Get abstractions, models, details, priorities.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &sa);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &sac);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &sm);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &smc);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &sd);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &sdc);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &sp);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ids);
+    // Get abstractions, models, details, priorities, identifications.
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &a);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_INDEX, (void*) &m);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MODELS_COUNTS_INDEX, (void*) &mc);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &d);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &p);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id);
 
-    // Remove abstractions, models, details, priorities.
+    // Remove abstractions, models, details, priorities, identifications.
     // CAUTION! Use descending order as compared to creation, for faster removal.
-    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ONE_NUMBER);
+    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_IDENTIFICATIONS_INDEX, (void*) &ONE_NUMBER);
     remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &ONE_NUMBER);
     remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &ONE_NUMBER);
     remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_DETAILS_INDEX, (void*) &ONE_NUMBER);
@@ -150,15 +150,15 @@ void destroy_signal_memory(void* p0, const void* p1) {
     remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ONE_NUMBER);
     remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &ONE_NUMBER);
 
-    // Destroy abstractions, models, details, priorities.
-    destroy_array((void*) &sa, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &sac, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &sm, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &smc, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &sd, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &sdc, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &sp, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &ids, (void*) &POINTER_ARRAY, p1);
+    // Destroy abstractions, models, details, priorities, identifications.
+    destroy_array((void*) &a, (void*) &POINTER_ARRAY, p1);
+    destroy_array((void*) &ac, (void*) &POINTER_ARRAY, p1);
+    destroy_array((void*) &m, (void*) &POINTER_ARRAY, p1);
+    destroy_array((void*) &mc, (void*) &POINTER_ARRAY, p1);
+    destroy_array((void*) &d, (void*) &POINTER_ARRAY, p1);
+    destroy_array((void*) &dc, (void*) &POINTER_ARRAY, p1);
+    destroy_array((void*) &p, (void*) &POINTER_ARRAY, p1);
+    destroy_array((void*) &id, (void*) &POINTER_ARRAY, p1);
 
     // Destroy signal memory.
     destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);
