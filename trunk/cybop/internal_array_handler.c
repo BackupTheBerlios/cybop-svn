@@ -32,151 +32,162 @@
  *
  * Internal array elements are accessed over their index.
  *
- * @version $Revision: 1.1 $ $Date: 2003-10-12 14:25:27 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-10-13 08:36:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
+ 
+//
+// Internal array.
+//
+
+/**
+ * Extends the internal array.
+ *
+ * @param p0 the internal array
+ * @param p1 the size
+ */
+static void extend_internal_array(void** p0, void* p1) {
+
+    void** old_array = p0;
+
+    //?? Distinguish between null array (not existant) or empty array!
+    if (old_array != 0) {
+
+        int* size = (int*) p1;
+        // Create new array with extended size.
+        void** new_array = malloc(size);
+
+        if (new_array != 0) {
+                
+            // Copy all elements from the old to the new array.
+            // The rest of the new array is just left empty as is;
+            // no zeros are set.
+            int i = 0;
+
+            while (i < old_size) {
+
+                new_array[i] = old_array[i];
+
+                i++;
+            }
+
+            // Free old array and reset its size.
+            free(old_array);
+            old_size = 0;
+            
+            // Set internal array and its size.
+            a->size = new_size;
+            a->internal_array = new_array;
+
+        } else {
+
+            log((void*) &ERROR_LOG_LEVEL, "Could not extend array. The new internal array is null.");
+        }
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not extend array. The old internal array is null.");
+    }
+}
 
 //
 // Internal array element.
 //
 
 /**
- * Sets the array element.
+ * Sets the internal array element.
  *
- * @param p0 the array
+ * @param p0 the internal array
  * @param p1 the index
  * @param p2 the element
  */
-static void set_array_element(void** p0, void* p1, void* p2) {
+static void set_internal_array_element(void** p0, void* p1, void* p2) {
 
     if (p0 != 0) {
 
         int* i = (int*) p1;
-        int size = a->size;
-        void** ia = a->internal_array;
 
-        if (ia != 0) {
+        if (*i != INVALID_VALUE) {
                 
-            puts("TEST 0");
-            
-            // If the array length is exceeded, create a new array with extended length.
-            // Do this as long as the given index is greater or equal to the array's size.
-            while (*i >= size) {
-    
-                puts("TEST 1");
-    
-                //?? Change this behaviour!
-                //?? First calculate the new array size and then create the new array!
-                //?? This avoids repeated copying of array elements.
-                //?? Possibly move the contents of the "extend_array" function to here!
-                extend_array(a);
-                size = a->size;
-            }
-    
-            if (*i != INVALID_VALUE) {
-                    
-                // Set element.
-                ia[*i] = p2;
-            
-            } else {
+            // Set element.
+            p0[*i] = p2;
         
-                log((void*) &WARNING_LOG_LEVEL, "Could not set array element. The index is invalid.");
-            }
-
         } else {
     
-            log((void*) &ERROR_LOG_LEVEL, "Could not set array element. The internal array is null.");
+            log((void*) &WARNING_LOG_LEVEL, "Could not set internal array element. The index is invalid.");
         }
-        
+
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not set array element. The array is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not set internal array element. The internal array is null.");
     }
 }
 
 /**
- * Removes the array element.
+ * Removes the internal array element.
  *
- * @param p0 the array
+ * @param p0 the internal array
  * @param p1 the index
+ * @param p2 the size
  */
-static void remove_array_element(void* p0, void* p1) {
+static void remove_internal_array_element(void** p0, void* p1, void* p2) {
 
-    struct array* a = (struct array*) p0;
-
-    if (a != 0) {
+    if (p0 != 0) {
 
         int* i = (int*) p1;
-        int size = a->size;
-        void** ia = a->internal_array;
-        
-        if (ia != 0) {
-                
-            if (*i != INVALID_VALUE) {
-    
-                // Starting from the given index, move all remaining elements one
-                // place towards the beginning of the elements.
-                while ((*i + 1) < size) {
-    
-                    ia[*i] = ia[*i + 1];
-    
-                    (*i)++;
-                }
-    
-                // Set former last element to 0.
-                ia[*i] = 0;
+
+        if (*i != INVALID_VALUE) {
+
+            int* size = (int*) p2;
             
-            } else {
-        
-                log((void*) &WARNING_LOG_LEVEL, "Could not remove array element. The index is invalid.");
+            // Starting from the given index, move all remaining elements one
+            // place towards the beginning of the elements.
+            while ((*i + 1) < *size) {
+
+                p0[*i] = p0[*i + 1];
+
+                (*i)++;
             }
-    
+
+            // Set former last element to 0.
+            p0[*i] = 0;
+        
         } else {
     
-            log((void*) &ERROR_LOG_LEVEL, "Could not remove array element. The internal array is null.");
+            log((void*) &WARNING_LOG_LEVEL, "Could not remove internal array element. The index is invalid.");
         }
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not remove array element. The array is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not remove internal array element. The internal array is null.");
     }
 }
 
 /**
- * Returns the element.
+ * Returns the internal array element.
  *
- * @param p0 the array
+ * @param p0 the internal array
  * @param p1 the index
  * @param p2 the element
  */
-static void get_array_element(void* p0, void* p1, void* p2) {
+static void get_internal_array_element(void** p0, void* p1, void* p2) {
 
-    struct array* a = (struct array*) p0;
-
-    if (a != 0) {
+    if (p0 != 0) {
 
         int* i = (int*) p1;
-        void** ia = a->internal_array;
 
-        if (ia != 0) {
-                
-            if (*i != INVALID_VALUE) {
-                
-                p2 = ia[*i];
+        if (*i != INVALID_VALUE) {
             
-            } else {
+            p2 = p0[*i];
         
-                log((void*) &WARNING_LOG_LEVEL, "Could not get array element. The index is invalid.");
-            }
-
         } else {
     
-            log((void*) &ERROR_LOG_LEVEL, "Could not get array element. The internal array is null.");
+            log((void*) &WARNING_LOG_LEVEL, "Could not get internal array element. The index is invalid.");
         }
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not get array element. The array is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not get internal array element. The internal array is null.");
     }
 }
 
