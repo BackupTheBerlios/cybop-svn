@@ -76,7 +76,7 @@ import cybop.core.model.principle.*;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.10 $ $Date: 2003-03-21 12:30:08 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-03-21 17:12:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -87,7 +87,7 @@ public class Item extends State {
 
     /** The name. */
     private String name;
-    
+
     /** The hash code. */
     private int hashCode;
     
@@ -337,7 +337,7 @@ public class Item extends State {
      */
     public Item[] createChildren() {
 
-        return new Item[1];
+        return new Item[0];
     }
 
     /**
@@ -361,10 +361,11 @@ public class Item extends State {
             int newLength = oldLength * 2 + 1;
             c = new Item[newLength];
             int index = 0;
+            Item oldItem = null;
 
             for (int i = oldLength; i-- > 0;) {
 
-                for (Item oldItem = old[i]; oldItem != null; oldItem = oldItem.getFollower()) {
+                for (oldItem = old[i]; oldItem != null; oldItem = oldItem.getFollower()) {
 
                     if (oldItem != null) {
 
@@ -409,9 +410,9 @@ public class Item extends State {
 
             int limit = (int) (old.length * getLimitFactor());
 
-            if (getChildrenNumber() == limit) {
+            if (getChildrenNumber() >= limit) {
 
-                // If the children number exceeds the limit,
+                // If the children number reaches/ exceeds the limit,
                 // the children array will be extended (rehashed).
                 c = recreate(old);
                 setChildren(c);
@@ -467,51 +468,48 @@ public class Item extends State {
      * @exception NullPointerException if a child is null
      * @exception NullPointerException if a child name is null
      */
-    public int hashCode() throws NullPointerException {
+/*??
+    public int hashCode() {
 
         int h = 0;
+        Item[] c = getChildren();
 
-        if (getChildrenNumber() > 0) {
+        if (c != null) {
 
-            Item[] c = getChildren();
+            int i = 0;
+            Item child = null;
+            String n = null;
             
-            if (c != null) {
-                
-                int i = 0;
-                Item child = null;
-                String n = null;
-                
-                for (i = 0; i < c.length; i++) {
+            for (i = 0; i < c.length; i++) {
 
-                    for (child = c[i]; child != null; child = child.getFollower()) {
+                for (child = c[i]; child != null; child = child.getFollower()) {
 
-                        if (child != null) {
+                    if (child != null) {
 
-                            n = child.getName();
+                        n = child.getName();
 
-                            if (n != null) {
+                        if (n != null) {
 
-                                h += n.hashCode() ^ child.getHashCode();
-
-                            } else {
-                    
-                                throw new NullPointerException("Could not calculate hash code. A child name is null.");
-                            }
+                            h += n.hashCode() ^ child.getHashCode();
 
                         } else {
                 
-                            throw new NullPointerException("Could not calculate hash code. A child is null.");
+                            throw new NullPointerException("Could not calculate hash code. A child name is null.");
                         }
+
+                    } else {
+            
+                        throw new NullPointerException("Could not calculate hash code. A child is null.");
                     }
                 }
-
-            } else {
-    
-                throw new NullPointerException("Could not calculate hash code. The children array is null.");
             }
+
+        } else {
+
+            throw new NullPointerException("Could not calculate hash code. The children array is null.");
         }
 
-	return h;
+        return h;
     }
 
     //
@@ -847,18 +845,25 @@ public class Item extends State {
 
             if (replace(n, i) == false) {
 
+                //?? testing
+                java.lang.System.out.println("\n--------------\n");
+                java.lang.System.out.println("old children number: " + getChildrenNumber());
+                for (int pre = 0; pre < getChildren().length; pre++) {
+                    java.lang.System.out.println("old array with child number: " + pre + " and child: " + getChildren()[pre]);
+                }
+
                 add(n, i, p);
 
-                //?? temporary test.
-                java.lang.System.out.println("test: Added child: " + i + " with name: " + n.getJavaObject() + " and meta name: " + i.getName().getJavaObject() + " in item: " + this);
-                if (this instanceof cybop.core.system.Family) {
-                    java.lang.System.out.println("\n\nconfig: " + ((cybop.core.system.Family) this).get(cybop.core.system.Family.CONFIGURATION) + "\n\n");
+                //?? testing
+                for (int post = 0; post < getChildren().length; post++) {
+                    java.lang.System.out.println("new array with child number: " + post + " and child: " + getChildren()[post]);
                 }
+                java.lang.System.out.println("new children number: " + getChildrenNumber());
             }
             //?? temporary test.
             else {
 
-                java.lang.System.out.println("test: Replaced child: " + i + " with name: " + i.getName().getJavaObject() + " in item: " + this);
+                java.lang.System.out.println("test: Replaced child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
             }
 
         } else {
@@ -878,41 +883,56 @@ public class Item extends State {
      * @param p the position
      * @exception NullPointerException if the children array is null
      * @exception NullPointerException if the name is null
+     * @exception NullPointerException if the item is null
      */
     public void add(String n, Item i, Position p) throws NullPointerException {
 
+        //?? testing
+        java.lang.System.out.println("old array length: " + getChildren().length);
+
         Item[] c = adjust(getChildren());
+
+        //?? testing
+        java.lang.System.out.println("new array length: " + getChildren().length);
 
         if (c != null) {
 
             if (n != null) {
 
-                int h = n.hashCode();
-                int index = (h & 0x7FFFFFFF) % c.length;
+                // Avoid division by zero.
+                if (c.length != 0) {
 
-                if (i != null) {
+                    int h = n.hashCode();
+                    int index = (h & 0x7FFFFFFF) % c.length;
+
+                    //?? testing
+                    java.lang.System.out.println("hash: " + h);
+                    java.lang.System.out.println("index: " + index);
+
+                    if (i != null) {
+
+                        // Set meta attributes for item.
+                        // DO NOT use the normal method set(name, item);
+                        // This would lead to an endless loop since for example
+                        // set(Item.NAME, n); would cause to be called repeatedly!
+                        i.setName(n);
+                        i.setHashCode(h);
+                        i.setFollower(c[index]);
     
-                    // Set meta attributes for item.
-                    // DO NOT use the normal method set(name, item);
-                    // This would lead to an endless loop since for example
-                    // set(Item.NAME, n); would cause to be called repeatedly!
-                    i.setName(n);
-                    i.setHashCode(h);
-                    i.setFollower(c[index]);
-
-                    java.lang.System.out.println("DEBUG: Add child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
-                    addTreeNode(i);
+                        java.lang.System.out.println("DEBUG: Add child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
+                        addTreeNode(i);
+        
+                        c[index] = i;
+                        setChildrenNumber(getChildrenNumber() + 1);
     
-                    c[index] = i;
-                    setChildrenNumber(getChildrenNumber() + 1);
-
-                } else {
-
-                    throw new NullPointerException("Could not add item. The item is null.");
+                    } else {
+    
+                        throw new NullPointerException("Could not add item. The item is null.");
+                    }
                 }
 
             } else {
-    
+
                 throw new NullPointerException("Could not set item. The name is null.");
             }
 
@@ -941,29 +961,36 @@ public class Item extends State {
 
             if (n != null) {
 
-                int h = n.hashCode();
-                int index = (h & 0x7FFFFFFF) % c.length;
-                Item child = null;
+                // Avoid division by zero.
+                // If this item is new, its children array has a length of zero.
+                // On addition of the first child, this replace method is called first.
+                // A division by zero would occur below (index calculation).
+                if (c.length != 0) {
 
-                for (child = c[index]; child != null; child = child.getFollower()) {
-
-                    if (child != null) {
-
-                        if ((h == child.getHashCode()) && n.isEqualTo(child.getName())) {
-
-                            java.lang.System.out.println("DEBUG: Replace child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
-                            addTreeNode(i);
-
-                            child = i;
-                            b = true;
+                    int h = n.hashCode();
+                    int index = (h & 0x7FFFFFFF) % c.length;
+                    Item child = null;
+    
+                    for (child = c[index]; child != null; child = child.getFollower()) {
+    
+                        if (child != null) {
+    
+                            if ((h == child.getHashCode()) && n.isEqualTo(child.getName())) {
+    
+                                java.lang.System.out.println("DEBUG: Replace child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
+                                addTreeNode(i);
+    
+                                child = i;
+                                b = true;
+                            }
+    
+                        } else {
+    
+                            throw new NullPointerException("Could not set item. A child is null.");
                         }
-
-                    } else {
-
-                        throw new NullPointerException("Could not set item. A child is null.");
                     }
                 }
-    
+        
             } else {
     
                 throw new NullPointerException("Could not set item. The name is null.");
@@ -1051,38 +1078,41 @@ public class Item extends State {
         Item i = null;
         Item[] c = getChildren();
 
-        if (n != null) {
+        if (c != null) {
 
-            int h = n.hashCode();
+            if (n != null) {
 
-            if (c != null) {
-
-                int index = (h & 0x7FFFFFFF) % c.length;
-                Item child = null;
-
-                for (child = c[index]; child != null; child = child.getFollower()) {
-
-                    if (child != null) {
-
-                        if ((h == child.getHashCode()) && n.isEqualTo(child.getName())) {
-
-                            i = child;
+                // Avoid division by zero.
+                if (c.length != 0) {
+    
+                    int h = n.hashCode();
+                    int index = (h & 0x7FFFFFFF) % c.length;
+                    Item child = null;
+    
+                    for (child = c[index]; child != null; child = child.getFollower()) {
+    
+                        if (child != null) {
+    
+                            if ((h == child.getHashCode()) && n.isEqualTo(child.getName())) {
+    
+                                i = child;
+                            }
+    
+                        } else {
+    
+                            throw new NullPointerException("Could not get item. A child is null.");
                         }
-
-                    } else {
-
-                        throw new NullPointerException("Could not get item. A child is null.");
                     }
                 }
 
             } else {
-
-                throw new NullPointerException("Could not get item. The children array is null.");
+    
+                throw new NullPointerException("Could not get item. The name is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not get item. The name is null.");
+            throw new NullPointerException("Could not get item. The children array is null.");
         }
 
         return i;
