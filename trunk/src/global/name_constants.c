@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-03-02 07:17:27 $ $Author: rholzmueller $
+ * @version $Revision: 1.10 $ $Date: 2005-03-10 10:04:24 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -208,12 +208,6 @@ static const char* LOOP_BREAKFLAG_NAME_ABSTRACTION = LOOP_BREAKFLAG_NAME_ABSTRAC
 static const int LOOP_BREAKFLAG_NAME_ABSTRACTION_COUNT_ARRAY[] = {5};
 static const int* LOOP_BREAKFLAG_NAME_ABSTRACTION_COUNT = LOOP_BREAKFLAG_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The loop index name array, pointer, count. */
-static const char LOOP_INDEX_NAME_ABSTRACTION_ARRAY[] = {'i', 'n', 'd', 'e', 'x'};
-static const char* LOOP_INDEX_NAME_ABSTRACTION = LOOP_INDEX_NAME_ABSTRACTION_ARRAY;
-static const int LOOP_INDEX_NAME_ABSTRACTION_COUNT_ARRAY[] = {5};
-static const int* LOOP_INDEX_NAME_ABSTRACTION_COUNT = LOOP_INDEX_NAME_ABSTRACTION_COUNT_ARRAY;
-
 /** The loop model name array, pointer, count. */
 static const char LOOP_MODEL_NAME_ABSTRACTION_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
 static const char* LOOP_MODEL_NAME_ABSTRACTION = LOOP_MODEL_NAME_ABSTRACTION_ARRAY;
@@ -243,6 +237,49 @@ static const char* ADD_RESULT_NAME_ABSTRACTION = ADD_RESULT_NAME_ABSTRACTION_ARR
 static const int ADD_RESULT_NAME_ABSTRACTION_COUNT_ARRAY[] = {6};
 static const int* ADD_RESULT_NAME_ABSTRACTION_COUNT = ADD_RESULT_NAME_ABSTRACTION_COUNT_ARRAY;
 
+//
+// Property names operation build_listname.
+//
+
+/** The basisname name array, pointer, count. */
+static const char BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION_ARRAY[] = {'b', 'a', 's', 'i', 's', 'n', 'a', 'm', 'e' };
+static const char* BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION = BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION_ARRAY;
+static const int BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION_COUNT_ARRAY[] = {9};
+static const int* BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION_COUNT = BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION_COUNT_ARRAY;
+
+/** The index name array, pointer, count. */
+static const char BUILD_LISTNAME_INDEX_NAME_ABSTRACTION_ARRAY[] = {'i', 'n', 'd', 'e', 'x' };
+static const char* BUILD_LISTNAME_INDEX_NAME_ABSTRACTION = BUILD_LISTNAME_INDEX_NAME_ABSTRACTION_ARRAY;
+static const int BUILD_LISTNAME_INDEX_NAME_ABSTRACTION_COUNT_ARRAY[] = {5};
+static const int* BUILD_LISTNAME_INDEX_NAME_ABSTRACTION_COUNT = BUILD_LISTNAME_INDEX_NAME_ABSTRACTION_COUNT_ARRAY;
+
+/** The result name array, pointer, count. */
+static const char BUILD_LISTNAME_RESULT_NAME_ABSTRACTION_ARRAY[] = {'r', 'e', 's', 'u', 'l', 't'};
+static const char* BUILD_LISTNAME_RESULT_NAME_ABSTRACTION = BUILD_LISTNAME_RESULT_NAME_ABSTRACTION_ARRAY;
+static const int BUILD_LISTNAME_RESULT_NAME_ABSTRACTION_COUNT_ARRAY[] = {6};
+static const int* BUILD_LISTNAME_RESULT_NAME_ABSTRACTION_COUNT = BUILD_LISTNAME_RESULT_NAME_ABSTRACTION_COUNT_ARRAY;
+
+//
+// Property names operation build_listname.
+//
+
+/** The basisname name array, pointer, count. */
+static const char COUNT_PART_BASISNAME_NAME_ABSTRACTION_ARRAY[] = {'b', 'a', 's', 'i', 's', 'n', 'a', 'm', 'e' };
+static const char* COUNT_PART_BASISNAME_NAME_ABSTRACTION = COUNT_PART_BASISNAME_NAME_ABSTRACTION_ARRAY;
+static const int COUNT_PART_BASISNAME_NAME_ABSTRACTION_COUNT_ARRAY[] = {9};
+static const int* COUNT_PART_BASISNAME_NAME_ABSTRACTION_COUNT = COUNT_PART_BASISNAME_NAME_ABSTRACTION_COUNT_ARRAY;
+
+/** The model name array, pointer, count. */
+static const char COUNT_PART_MODEL_NAME_ABSTRACTION_ARRAY[] = {'m', 'o', 'd', 'e', 'l' };
+static const char* COUNT_PART_MODEL_NAME_ABSTRACTION = COUNT_PART_MODEL_NAME_ABSTRACTION_ARRAY;
+static const int COUNT_PART_MODEL_NAME_ABSTRACTION_COUNT_ARRAY[] = {5};
+static const int* COUNT_PART_MODEL_NAME_ABSTRACTION_COUNT = COUNT_PART_MODEL_NAME_ABSTRACTION_COUNT_ARRAY;
+
+/** The result name array, pointer, count. */
+static const char COUNT_PART_RESULT_NAME_ABSTRACTION_ARRAY[] = {'r', 'e', 's', 'u', 'l', 't'};
+static const char* COUNT_PART_RESULT_NAME_ABSTRACTION = COUNT_PART_RESULT_NAME_ABSTRACTION_ARRAY;
+static const int COUNT_PART_RESULT_NAME_ABSTRACTION_COUNT_ARRAY[] = {6};
+static const int* COUNT_PART_RESULT_NAME_ABSTRACTION_COUNT = COUNT_PART_RESULT_NAME_ABSTRACTION_COUNT_ARRAY;
 
 /* NAME_CONSTANTS_SOURCE */
 #endif
