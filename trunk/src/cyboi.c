@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.27 $ $Date: 2004-04-28 22:45:40 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2004-04-29 15:18:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -127,6 +127,7 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
             // Get top priority signal from signal memory and remove it from there.
 //??            get_highest_priority_index(p0, (void*) &i);
             i = 0; //?? temporary test; delete this line later
+            fprintf(stderr, "wait i: %d\n", i);
 
             if (i >= 0) {
 
@@ -140,14 +141,10 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
                 // Abstraction and priority are removed internally,
                 // together with the signal.
-                fputs("wait TEST 0\n", stderr);
                 remove_signal(p0, (void*) &i);
 
                 // Destroy signal.
-                fputs("wait TEST 1\n", stderr);
                 destroy_model((void*) &s, (void*) &ss, (void*) &pers, (void*) &perss, (void*) &a, (void*) &as);
-
-                fputs("wait TEST 2\n", stderr);
 
                 //
                 // Handle compound signal.
@@ -161,10 +158,9 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
                         if (r == 1) {
 
-                            fputs("wait TEST 3\n", stderr);
                             handle_compound_signal(p0, (void*) &s, (void*) &p);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -181,17 +177,15 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
                         if (r == 1) {
 
-                            fputs("TEST 4\n", stderr);
                             handle_operation_signal((void*) &s, p1, p2, p3, (void*) &f);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
 
                 if (d == 0) {
 
-                    fputs("TEST 5\n", stderr);
                     log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not handle signal. The signal abstraction is unknown.");
                 }
 
@@ -269,17 +263,13 @@ int main(int p0, char** p1) {
             // whose location was given at command line.
             void* ss = NULL_POINTER;
             int sss = 0;
-            char* p = p1[1];
+            void* p = (void*) p1[1];
             int ps = strlen(p1[1]);
+
             create_model((void*) &ss, (void*) &sss, (void*) &p, (void*) &ps, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);
 
             // Add startup signal to signal memory.
             set_signal((void*) &sm, (void*) &ss, (void*) &NORMAL_PRIORITY, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);
-            fprintf(stderr, "set sm: %d\n", sm);
-            fprintf(stderr, "set ss: %d\n", ss);
-            fprintf(stderr, "set sss: %d\n", sss);
-            fprintf(stderr, "set o: %d\n", OPERATION_ABSTRACTION);
-            fprintf(stderr, "set ostr: %s\n", OPERATION_ABSTRACTION);
 
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)

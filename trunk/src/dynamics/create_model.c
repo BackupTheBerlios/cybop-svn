@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.18 $ $Date: 2004-04-28 14:35:37 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2004-04-29 15:18:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,7 +96,7 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
                             create_compound(p0);
                             initialize_compound(p0, p2, p3);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -116,7 +116,7 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
                             create_operation(p0, p1);
                             initialize_operation(p0, p1, p2, p3);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -135,7 +135,7 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
 
                             initialize_string(p0, p1, p2, p3);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -151,7 +151,7 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
                             // No creation because primitive type.
                             initialize_boolean(p0, p2, p3);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -167,7 +167,7 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
                             // No creation because primitive type.
                             initialize_integer(p0, p2, p3);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -183,7 +183,7 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
                             create_vector(p0);
                             initialize_vector(p0, p2, p3);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -199,7 +199,7 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
                             // No creation because primitive type.
                             initialize_double(p0, p2, p3);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -215,7 +215,7 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
                             create_fraction(p0);
                             initialize_fraction(p0, p2, p3);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -231,7 +231,7 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
                             create_complex(p0);
                             initialize_complex(p0, p2, p3);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -247,7 +247,7 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
                             create_time(p0);
                             initialize_time(p0, p2, p3);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }

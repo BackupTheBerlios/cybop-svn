@@ -23,7 +23,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.16 $ $Date: 2004-04-28 14:35:37 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-04-29 15:18:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,7 +96,7 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const
                             finalize_compound(p0, p2, p3);
                             destroy_compound(p0);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -116,7 +116,7 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const
                             finalize_operation(p0, p1, p2, p3);
                             destroy_operation(p0, p1);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -135,7 +135,7 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const
 
                             finalize_string(p0, p1, p2, p3);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -151,7 +151,7 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const
                             // No destruction because primitive type.
                             finalize_boolean(p0, p2, p3);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -167,7 +167,7 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const
                             // No destruction because primitive type.
                             finalize_integer(p0, p2, p3);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -183,7 +183,7 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const
                             finalize_vector(p0, p2, p3);
                             destroy_vector(p0);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -199,7 +199,7 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const
                             // No destruction because primitive type.
                             finalize_double(p0, p2, p3);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -215,7 +215,7 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const
                             finalize_fraction(p0, p2, p3);
                             destroy_fraction(p0);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -231,7 +231,7 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const
                             finalize_complex(p0, p2, p3);
                             destroy_complex(p0);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }
@@ -247,7 +247,7 @@ void destroy_model(void* p0, void* p1, void* p2, void* p3, const void* p4, const
                             finalize_time(p0, p2, p3);
                             destroy_time(p0);
 
-                            d == 1;
+                            d = 1;
                         }
                     }
                 }

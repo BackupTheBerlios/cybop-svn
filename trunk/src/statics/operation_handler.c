@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.27 $ $Date: 2004-04-29 11:37:08 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2004-04-29 15:18:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -175,10 +175,7 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
                         void* pas = NULL_POINTER;
 
                         // Get elements.
-    fprintf(stderr, "s1: %d\n", s);
                         get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARAMETERS_SIZE_INDEX, (void*) &s);
-    //?? size is wrong! negative!
-    fprintf(stderr, "s2: %d\n", s);
                         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &pa);
                         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_INDEX, (void*) &pas);
 
@@ -190,19 +187,15 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
 
                         // Resize elements.
                         resize_array(pa, (void*) &POINTER_ARRAY, (void*) &s);
-    fputs("TEST B\n", stderr);
                         resize_array(pas, (void*) &INTEGER_ARRAY, (void*) &s);
 
                         // Set size.
-    fputs("TEST C\n", stderr);
                         set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARAMETERS_SIZE_INDEX, (void*) &s);
-    fputs("TEST D\n", stderr);
 
                         if (index < s) {
 
                             // Set parameter.
-                            set_array_element((void*) &pa, (void*) &POINTER_ARRAY, (void*) &index, p0);
-    fputs("TEST E\n", stderr);
+                            set_array_element((void*) &pa, (void*) &POINTER_ARRAY, (void*) &index, p2);
                             set_array_element((void*) &pas, (void*) &INTEGER_ARRAY, (void*) &index, (void*) &size);
 
                             if (i != -1) {

@@ -48,7 +48,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.33 $ $Date: 2004-04-28 22:45:40 $ $Author: christian $
+ * @version $Revision: 1.34 $ $Date: 2004-04-29 15:18:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -334,13 +334,7 @@ void remove_array_element(void* p0, const void* p1, const void* p2, const void* 
     // The elements count.
     int c = 1;
 
-    // The element needs to be handed over as array.
-    // Therefore, it has to be transformed into a pointer.
-    // Example:
-    // - array: char* handed over as char**
-    // - element: char handed over as char*
-    // - the element of type char* gets transformed to type char** with &element
-    remove_array_elements(p0, p1, p2, (void*) &p3, (void*) &c);
+    remove_array_elements(p0, p1, p2, p3, (void*) &c);
 }
 
 /**

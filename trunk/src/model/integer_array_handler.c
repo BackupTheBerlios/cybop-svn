@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.17 $ $Date: 2004-04-29 09:17:57 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-04-29 15:18:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -138,12 +138,10 @@ void resize_integer_array(void* p0, const void* p1) {
     if (p1 != NULL_POINTER) {
 
         int* c = (int*) p1;
-        fprintf(stderr, "resize s: %d\n", *c);
 
         if (p0 != NULL_POINTER) {
 
             void** a = (void**) p0;
-            fprintf(stderr, "resize a1: %d\n", *a);
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &"Resize integer array.");
 
@@ -155,7 +153,6 @@ void resize_integer_array(void* p0, const void* p1) {
 
             // Create a new array with extended size.
             *a = (void*) realloc(*a, s);
-            fprintf(stderr, "resize a2: %d\n", *a);
 
         } else {
 
