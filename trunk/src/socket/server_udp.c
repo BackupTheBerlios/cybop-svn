@@ -1,7 +1,7 @@
 /*
  * $RCSfile: server_udp.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -23,7 +23,7 @@
  *
  * This file handles a server UDP socket.
  *
- * @version $Revision: 1.3 $ $Date: 2004-12-16 09:52:34 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */

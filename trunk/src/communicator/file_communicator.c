@@ -1,7 +1,7 @@
 /*
  * $RCSfile: file_communicator.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -25,7 +25,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.6 $ $Date: 2005-01-09 01:30:12 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,7 +34,10 @@
 
 #include <stdio.h>
 #include "../array/array.c"
+#include "../creator/character_creator.c"
 #include "../global/constant.c"
+#include "../global/integer_constants.c"
+#include "../global/structure_constants.c"
 #include "../logger/logger.c"
 
 /**
@@ -62,7 +65,6 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
                 // The terminated file name.
                 char* tn = CHARACTER_NULL_POINTER;
-
                 // The terminated file name size.
                 int* tns = INTEGER_NULL_POINTER;
                 create_integer((void*) &tns);
@@ -71,13 +73,10 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
                 // Create terminated file name.
                 create_array((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &tns);
 
-                // Initialize destination array index.
-                int i = 0;
-
                 // Set terminated file name by first copying the actual name and then
                 // adding the null termination character.
-                set_array_elements((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
-                set_array_elements((void*) &tn, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CONTROL_CHARACTER, (void*) &ONE_ELEMENT_COUNT);
+                set_array_elements((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &ZERO_NUMBER, p3, p4);
+                set_array_elements((void*) &tn, (void*) &CHARACTER_ARRAY, p4, (void*) &NULL_CONTROL_CHARACTER, (void*) &ONE_NUMBER);
 
                 // Open file.
                 // CAUTION! The file name cannot be handed over as is.
@@ -89,11 +88,13 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
                 if (f != NULL_POINTER) {
 
                     // Read first character.
-                    char c = fgetc(f);
+                    char* c = CHARACTER_NULL_POINTER;
+                    create_character((void*) &c);
+                    *c = fgetc(f);
 
                     while (1) {
 
-                        if (c == EOF) {
+                        if (*c == EOF) {
 
                             break;
                         }
@@ -111,7 +112,7 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
                             // Set character in destination array.
                             // The array count serves as index for setting the character.
-                            set_array_elements(p0, (void*) &CHARACTER_ARRAY, p1, (void*) &c, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &CHARACTER_ARRAY, p1, (void*) &c, (void*) &ONE_NUMBER);
 
                             // Increase array count.
                             (**dc)++;
@@ -122,8 +123,11 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
                         }
 
                         // Read next character.
-                        c = fgetc(f);
+                        *c = fgetc(f);
                     }
+
+                    // Destroy character.
+                    destroy_character((void*) &c);
 
                     // Close file.
                     fclose(f);

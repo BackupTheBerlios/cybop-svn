@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.66 $ $Date: 2005-01-10 11:04:05 $ $Author: christian $
+ * @version $Revision: 1.67 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,6 +38,7 @@
 #include "../cyboi/globals_handler.c"
 #include "../cyboi/system_handler.c"
 #include "../global/channel_constants.c"
+#include "../global/integer_constants.c"
 #include "../logic/create.c"
 #include "../test/test.c"
 
@@ -91,7 +92,7 @@ int main(int p0, char** p1) {
             create_integer((void*) &cc);
 
             // Get configuration file name and count.
-            get_array_elements((void*) &p1, (void*) &POINTER_ARRAY, (void*) &CONFIGURATION_FILE_PARAMETER_INDEX, (void*) &c, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements((void*) &p1, (void*) &POINTER_ARRAY, (void*) &CONFIGURATION_FILE_PARAMETER_INDEX, (void*) &c, (void*) &ONE_NUMBER);
             // CAUTION! This is a DIRTY workaround!
             // The configuration file count (number of file path characters)
             // is not known. There are two possibilities to determine it:
@@ -102,15 +103,14 @@ int main(int p0, char** p1) {
             // Possibility 2 is applied here.
             *cc = strlen((char*) *c);
 
-    fputs("TEST 0\n", stdout);
-
+    fputs("TEST BEGIN\n", stdout);
             // Create internals memory.
             // Fill it with the parameters read from the configuration file.
             create_model((void*) &i, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT,
-                (void*) &c, (void*) &cc,
+                c, (void*) &cc,
                 (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT,
                 (void*) &FILE_CHANNEL, (void*) &FILE_CHANNEL_COUNT);
-    fputs("TEST 1\n", stdout);
+    fputs("TEST END\n", stdout);
 
             // Handle system.
             handle_system((void*) &i);
@@ -122,9 +122,9 @@ int main(int p0, char** p1) {
                 (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT,
                 (void*) &FILE_CHANNEL, (void*) &FILE_CHANNEL_COUNT);
 
-            // Destroy configuration file name.
-            destroy_array((void*) &c, (void*) &CHARACTER_ARRAY, (void*) &cc);
+            // Destroy configuration file name and count.
             destroy_integer((void*) &cc);
+            destroy_pointer((void*) &c);
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 

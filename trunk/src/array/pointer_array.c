@@ -1,7 +1,7 @@
 /*
  * $RCSfile: pointer_array.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.18 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-01-09 01:30:13 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -39,6 +39,7 @@
 #include "../global/channel_constants.c"
 #include "../global/character_constants.c"
 #include "../global/cybol_constants.c"
+#include "../global/integer_constants.c"
 #include "../global/log_constants.c"
 #include "../global/name_constants.c"
 #include "../global/structure_constants.c"
@@ -83,6 +84,8 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
     if (p3 != NULL_POINTER) {
 
         xmlNode** s = (xmlNode**) p3;
+
+        log_message_debug("Decode configuration node.");
 
         if ((*s) != NULL_POINTER) {
 
@@ -154,9 +157,9 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                                 (void*) &sc, (void*) &scc);
 
                             // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_COUNT_INTERNAL, (void*) &dmc, (void*) &ONE_ELEMENT_COUNT);
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_SIZE_INTERNAL, (void*) &dms, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_COUNT_INTERNAL, (void*) &dmc, (void*) &ONE_NUMBER);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_SIZE_INTERNAL, (void*) &dms, (void*) &ONE_NUMBER);
                         }
                     }
 
@@ -175,9 +178,9 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                                 (void*) &sc, (void*) &scc);
 
                             // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_COUNT_INTERNAL, (void*) &dmc, (void*) &ONE_ELEMENT_COUNT);
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_SIZE_INTERNAL, (void*) &dms, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_COUNT_INTERNAL, (void*) &dmc, (void*) &ONE_NUMBER);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_SIZE_INTERNAL, (void*) &dms, (void*) &ONE_NUMBER);
                         }
                     }
 
@@ -196,9 +199,9 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                                 (void*) &sc, (void*) &scc);
 
                             // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_COUNT_INTERNAL, (void*) &dmc, (void*) &ONE_ELEMENT_COUNT);
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_SIZE_INTERNAL, (void*) &dms, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_COUNT_INTERNAL, (void*) &dmc, (void*) &ONE_NUMBER);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_SIZE_INTERNAL, (void*) &dms, (void*) &ONE_NUMBER);
                         }
                     }
 
@@ -217,7 +220,7 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                                 (void*) &sc, (void*) &scc);
 
                             // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
                         }
                     }
 
@@ -236,7 +239,7 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                                 (void*) &sc, (void*) &scc);
 
                             // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
                         }
                     }
 
@@ -255,7 +258,7 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                                 (void*) &sc, (void*) &scc);
 
                             // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
                         }
                     }
 
@@ -274,7 +277,7 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                                 (void*) &sc, (void*) &scc);
 
                             // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
                         }
                     }
 
@@ -293,7 +296,7 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                                 (void*) &sc, (void*) &scc);
 
                             // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &dm, (void*) &ONE_ELEMENT_COUNT);
+                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
                         }
                     }
 

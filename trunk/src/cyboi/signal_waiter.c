@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2005-01-08 19:55:18 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -32,6 +32,7 @@
 #include "../accessor/signal_memory_accessor.c"
 #include "../cyboi/input_output_activator.c"
 #include "../cyboi/signal_handler.c"
+#include "../global/integer_constants.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
 
@@ -61,13 +62,13 @@ void wait(void* p0) {
     void* ss = NULL_POINTER;
 
     // Get knowledge memory.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) &ONE_NUMBER);
     // Get signal memory.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) &ONE_NUMBER);
 
     // The shutdown flag.
     int* f = INTEGER_NULL_POINTER;

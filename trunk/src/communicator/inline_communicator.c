@@ -1,7 +1,7 @@
 /*
  * $RCSfile: inline_communicator.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -25,7 +25,7 @@
  * - receive an inline stream into a byte array
  * - send an inline stream from a byte array
  *
- * @version $Revision: 1.2 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

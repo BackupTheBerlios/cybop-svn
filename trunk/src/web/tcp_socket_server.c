@@ -23,7 +23,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.15 $ $Date: 2005-01-09 01:30:13 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
@@ -47,6 +47,7 @@
 #include "../global/channel_constants.c"
 #include "../global/character_constants.c"
 #include "../global/constant.c"
+#include "../global/integer_constants.c"
 #include "../global/log_constants.c"
 #include "../global/name_constants.c"
 #include "../global/structure_constants.c"
@@ -86,7 +87,7 @@ void create_tcp_server_socket(void* p0) {
     int* p = INTEGER_NULL_POINTER;
 
     // Get tcp server socket port.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &p, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &p, (void*) &ONE_NUMBER);
 
     if (p != INTEGER_NULL_POINTER) {
 
@@ -124,13 +125,13 @@ void create_tcp_server_socket(void* p0) {
         create_array((void*) &id, (void*) &INTEGER_ARRAY, (void*) &ids);
 
         // Set tcp server socket, client sockets, signal ids.
-        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
-        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) &ONE_ELEMENT_COUNT);
-        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) &ONE_ELEMENT_COUNT);
-        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) &ONE_ELEMENT_COUNT);
-        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) &ONE_ELEMENT_COUNT);
-        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) &ONE_ELEMENT_COUNT);
-        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) &ONE_ELEMENT_COUNT);
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_NUMBER);
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) &ONE_NUMBER);
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) &ONE_NUMBER);
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) &ONE_NUMBER);
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) &ONE_NUMBER);
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) &ONE_NUMBER);
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) &ONE_NUMBER);
 
         if (*s >= 0) {
 
@@ -182,7 +183,7 @@ void destroy_tcp_server_socket(void* p0) {
     int* p = INTEGER_NULL_POINTER;
 
     // Get tcp server socket port.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &p, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &p, (void*) &ONE_NUMBER);
 
     if (p != INTEGER_NULL_POINTER) {
 
@@ -190,7 +191,7 @@ void destroy_tcp_server_socket(void* p0) {
         int* s = INTEGER_NULL_POINTER;
 
         // Get tcp server socket.
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_NUMBER);
 
         if (s != INTEGER_NULL_POINTER) {
 
@@ -243,7 +244,7 @@ void get_request_row(char** req, int* req_count, char** req_row, int* req_row_co
             break;
         }
 
-        get_array_elements(req, (void*) &CHARACTER_ARRAY, req_row_count, (void*) &e, (void*) &ONE_ELEMENT_COUNT);
+        get_array_elements(req, (void*) &CHARACTER_ARRAY, req_row_count, (void*) &e, (void*) &ONE_NUMBER);
 
         if (*e == *CARRIAGE_RETURN_CONTROL_CHARACTER) {
 
@@ -255,7 +256,7 @@ void get_request_row(char** req, int* req_count, char** req_row, int* req_row_co
 
         resize_array(req_row, (void*) &CHARACTER_ARRAY, (void*) &max_count);
 
-        set_array_elements(req_row, (void*) &CHARACTER_ARRAY, req_row_count, (void*) &e, (void*) &ONE_ELEMENT_COUNT);
+        set_array_elements(req_row, (void*) &CHARACTER_ARRAY, req_row_count, (void*) &e, (void*) &ONE_NUMBER);
 
         *req_row_count = *req_row_count + 1;
     }
@@ -289,7 +290,7 @@ void get_param_from_request_row(char** req_row, int* req_row_count, char** param
             break;
         }
 
-        get_array_elements(req_row, (void*) &CHARACTER_ARRAY, (void*) &req_row_index, (void*) &e, (void*) &ONE_ELEMENT_COUNT);
+        get_array_elements(req_row, (void*) &CHARACTER_ARRAY, (void*) &req_row_index, (void*) &e, (void*) &ONE_NUMBER);
 
         // Check of ending the paramaters.
         if ((start_param_flag == 1) && (*e == *CARRIAGE_RETURN_CONTROL_CHARACTER)) {
@@ -304,7 +305,7 @@ void get_param_from_request_row(char** req_row, int* req_row_count, char** param
 
             resize_array(param, (void*) &CHARACTER_ARRAY, (void*) &max_count);
 
-            set_array_elements(param, (void*) &CHARACTER_ARRAY, param_count, (void*) &e, (void*) &ONE_ELEMENT_COUNT);
+            set_array_elements(param, (void*) &CHARACTER_ARRAY, param_count, (void*) &e, (void*) &ONE_NUMBER);
 
             *param_count = *param_count + 1;
         }
@@ -351,7 +352,7 @@ void handle_tcp_socket_request(void* p0, int* cs) {
 
         if (msg_count != -1) {
 
-            // TODO: auf get prüfen
+            // TODO: auf get pr?fen
             // TODO: parameter aus empfangenen Daten ermitteln
 
             // Create message row.
@@ -404,9 +405,9 @@ void handle_tcp_socket_request(void* p0, int* cs) {
                 void* mc = NULL_POINTER;
                 void* ms = NULL_POINTER;
 
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) &ONE_ELEMENT_COUNT);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) &ONE_ELEMENT_COUNT);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) &ONE_ELEMENT_COUNT);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) &ONE_NUMBER);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) &ONE_NUMBER);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) &ONE_NUMBER);
 
                 // The source channel.
                 char c_sc[] = "inline";
@@ -503,7 +504,7 @@ void run_tcp_socket(void* p0) {
     int* s = INTEGER_NULL_POINTER;
 
     // Get tcp server socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_NUMBER);
 
     if (s != INTEGER_NULL_POINTER) {
 
@@ -515,9 +516,9 @@ void run_tcp_socket(void* p0) {
         void* ms = NULL_POINTER;
 
         // Get signal memory.
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) &ONE_ELEMENT_COUNT);
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) &ONE_ELEMENT_COUNT);
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) &ONE_ELEMENT_COUNT);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) &ONE_NUMBER);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) &ONE_NUMBER);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) &ONE_NUMBER);
 
         // The client socket address.
         struct sockaddr_in ca;
@@ -581,7 +582,7 @@ void receive_tcp_socket(void* p0) {
 
 /**
  * Funktion liest Daten in der POST- oder GET-Methode ein.
- * Rückgabewert: String puffer mit den Daten
+ * R?ckgabewert: String puffer mit den Daten
  * bei Fehler  : NULL
  */
 /*??
@@ -593,7 +594,7 @@ char* getdata() {
    char *cont_len;
    char *cgi_string;
 
-   // Zuerst die Request-Methode überprüfen
+   // Zuerst die Request-Methode ?berpr?fen
    if(  NULL == request )
       return NULL;
    else if( strcmp(request, "GET") == 0 )
@@ -605,12 +606,12 @@ char* getdata() {
          else
             {
                puffer =(char *) Strdup(cgi_string);
-               return puffer; // Rückgabewert an den Aufrufer
+               return puffer; // R?ckgabewert an den Aufrufer
             }
       }
    else if( strcmp(request, "POST") == 0 )
       {
-         // Die Methode POST -> Länge des Strings
+         // Die Methode POST -> L?nge des Strings
          //   ermitteln (CONTENT_LENGTH)
          cont_len = getenv("CONTENT_LENGTH");
          if( NULL == cont_len)
@@ -634,7 +635,7 @@ char* getdata() {
                      free(puffer);
                      return NULL;
                   }
-               else  // Rückgabewerte an den Ausrufer
+               else  // R?ckgabewerte an den Ausrufer
                   return puffer;
             }
       }

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: time_parser.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2004-12-20 14:41:02 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

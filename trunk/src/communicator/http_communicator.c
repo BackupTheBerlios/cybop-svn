@@ -1,7 +1,7 @@
 /*
  * $RCSfile: http_communicator.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -25,7 +25,7 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-14 22:20:33 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

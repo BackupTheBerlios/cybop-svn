@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-01-09 01:30:12 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -29,6 +29,7 @@
 #ifndef INPUT_OUTPUT_ACTIVATOR_SOURCE
 #define INPUT_OUTPUT_ACTIVATOR_SOURCE
 
+#include "../global/integer_constants.c"
 #include "../global/log_constants.c"
 #include "../global/structure_constants.c"
 #include "../global/variables.c"
@@ -69,7 +70,7 @@ void activate_input_output(void* p0) {
     *f = 0;
 
     // UNIX socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
 
     if (*f == 1) {
 
@@ -79,7 +80,7 @@ void activate_input_output(void* p0) {
     }
 
     // TCP socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
 
     if (*f == 1) {
 
@@ -89,7 +90,7 @@ void activate_input_output(void* p0) {
     }
 
     // X windows.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
 
     if (*f == 1) {
 

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: double_parser.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-01-09 01:30:13 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,6 +32,7 @@
 #include <stdlib.h>
 #include "../creator/integer_creator.c"
 #include "../creator/double_creator.c"
+#include "../global/integer_constants.c"
 #include "../global/log_constants.c"
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
@@ -78,7 +79,7 @@ void parse_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
         // This is used as index to set the termination character.
         *i = **sc;
         // Add string termination to temporary null-terminated string.
-        set_array_elements((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CONTROL_CHARACTER, (void*) &ONE_ELEMENT_COUNT);
+        set_array_elements((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CONTROL_CHARACTER, (void*) &ONE_NUMBER);
 
         // The tail variable is useless here and only needed for the string
         // transformation function. If the whole string array consists of
@@ -103,7 +104,7 @@ void parse_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
         *v = strtod(tmp, &tail);
 
         // Set double value.
-        set_array_elements(p0, (void*) &DOUBLE_ARRAY, (void*) &DOUBLE_VALUE_INDEX, (void*) &v, (void*) &ONE_ELEMENT_COUNT);
+        set_array_elements(p0, (void*) &DOUBLE_ARRAY, (void*) &DOUBLE_VALUE_INDEX, (void*) &v, (void*) &ONE_NUMBER);
 
         // Destroy temporary null-terminated string.
         destroy_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
@@ -149,7 +150,7 @@ void serialize_double(void* p0, void* p1, void* p2, const void* p3, const void* 
                 *v = 0;
 
                 // Get double value.
-                get_array_elements(p3, (void*) &DOUBLE_ARRAY, (void*) &DOUBLE_VALUE_INDEX, (void*) &v, (void*) &ONE_ELEMENT_COUNT);
+                get_array_elements(p3, (void*) &DOUBLE_ARRAY, (void*) &DOUBLE_VALUE_INDEX, (void*) &v, (void*) &ONE_NUMBER);
 
                 // Transform source double to destination string.
                 **dc = snprintf(*d, **ds, "%d", *v);

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: translator.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-01-09 01:30:13 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,7 +56,7 @@ void decode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     create_integer((void*) &r);
     *r = 0;
 
-    if (*r == 0) {
+    if (*r != 1) {
 
         compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -66,7 +66,7 @@ void decode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
         }
     }
 
-    if (*r == 0) {
+    if (*r != 1) {
 
         compare_arrays(p5, p6, (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -102,7 +102,7 @@ void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     create_integer((void*) &r);
     *r = 0;
 
-    if (*r == 0) {
+    if (*r != 1) {
 
         compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -112,7 +112,7 @@ void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
         }
     }
 
-    if (*r == 0) {
+    if (*r != 1) {
 
         compare_arrays(p5, p6, (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 

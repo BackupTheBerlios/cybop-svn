@@ -1,7 +1,7 @@
 /*
  * $RCSfile: fraction_creator.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a fraction model in memory
  *
- * @version $Revision: 1.2 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.21 $ $Date: 2005-01-09 20:30:21 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,7 +44,7 @@
 /**
  * Checks for primitive model.
  *
- * @param p0 the primitive flag (1 if primitive; 0 otherwise)
+ * @param p0 the primitive flag (1 if primitive; unchanged otherwise)
  * @param p1 the abstraction
  * @param p2 the abstraction count
  */
@@ -54,110 +54,54 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 
         int** p = (int**) p0;
 
-        // The done flag.
-        int d = 0;
-
-        // The following comparisons could also be done one after the other,
-        // without "done" flag. But the done flag avoids unnecessary comparisons.
-
-        if (d == 0) {
+        if (**p != 1) {
 
             compare_arrays(p1, p2, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
-
-            if (**p == 1) {
-
-                d = 1;
-            }
         }
 
-        if (d == 0) {
+        if (**p != 1) {
 
             compare_arrays(p1, p2, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
-
-            if (**p == 1) {
-
-                d = 1;
-            }
         }
 
-        if (d == 0) {
+        if (**p != 1) {
 
             compare_arrays(p1, p2, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
-
-            if (**p == 1) {
-
-                d = 1;
-            }
         }
 
-        if (d == 0) {
+        if (**p != 1) {
 
             compare_arrays(p1, p2, (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
-
-            if (**p == 1) {
-
-                d = 1;
-            }
         }
 
-        if (d == 0) {
+        if (**p != 1) {
 
             compare_arrays(p1, p2, (void*) &DOUBLE_ABSTRACTION, (void*) &DOUBLE_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
-
-            if (**p == 1) {
-
-                d = 1;
-            }
         }
 
-        if (d == 0) {
+        if (**p != 1) {
 
             compare_arrays(p1, p2, (void*) &BOOLEAN_ABSTRACTION, (void*) &BOOLEAN_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
-
-            if (**p == 1) {
-
-                d = 1;
-            }
         }
 
-        if (d == 0) {
+        if (**p != 1) {
 
             compare_arrays(p1, p2, (void*) &VECTOR_ABSTRACTION, (void*) &VECTOR_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
-
-            if (**p == 1) {
-
-                d = 1;
-            }
         }
 
-        if (d == 0) {
+        if (**p != 1) {
 
             compare_arrays(p1, p2, (void*) &FRACTION_ABSTRACTION, (void*) &FRACTION_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
-
-            if (**p == 1) {
-
-                d = 1;
-            }
         }
 
-        if (d == 0) {
+        if (**p != 1) {
 
             compare_arrays(p1, p2, (void*) &TIME_ABSTRACTION, (void*) &TIME_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
-
-            if (**p == 1) {
-
-                d = 1;
-            }
         }
 
-        if (d == 0) {
+        if (**p != 1) {
 
             compare_arrays(p1, p2, (void*) &COMPLEX_ABSTRACTION, (void*) &COMPLEX_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
-
-            if (**p == 1) {
-
-                d = 1;
-            }
         }
 
     } else {

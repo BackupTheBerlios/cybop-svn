@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-01-09 01:30:12 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,6 +37,7 @@
 #include "../global/abstraction_constants.c"
 #include "../global/channel_constants.c"
 #include "../global/constant.c"
+#include "../global/integer_constants.c"
 #include "../global/log_constants.c"
 #include "../global/structure_constants.c"
 #include "../global/variables.c"
@@ -86,12 +87,12 @@ void handle_system(void* p0) {
     void* pmc = NULL_POINTER;
 
     // Get startup parameters channel, abstraction, model.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_INTERNAL, (void*) &pc, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_COUNT_INTERNAL, (void*) &pcc, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_INTERNAL, (void*) &pa, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_COUNT_INTERNAL, (void*) &pac, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_INTERNAL, (void*) &pm, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_COUNT_INTERNAL, (void*) &pmc, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_INTERNAL, (void*) &pc, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_COUNT_INTERNAL, (void*) &pcc, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_INTERNAL, (void*) &pa, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_COUNT_INTERNAL, (void*) &pac, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_INTERNAL, (void*) &pm, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_COUNT_INTERNAL, (void*) &pmc, (void*) &ONE_NUMBER);
 
     log_message_debug("Create startup model abstraction.");
 
@@ -149,9 +150,9 @@ void handle_system(void* p0) {
     void* ss = NULL_POINTER;
 
     // Get signal memory.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) &ONE_NUMBER);
 
     // The signal id.
     int* id = INTEGER_NULL_POINTER;

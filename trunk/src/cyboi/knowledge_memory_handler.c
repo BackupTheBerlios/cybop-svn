@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-01-09 01:30:12 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,7 @@
 
 #include "../creator/creator.c"
 #include "../global/abstraction_constants.c"
+#include "../global/integer_constants.c"
 #include "../global/structure_constants.c"
 #include "../global/variables.c"
 
@@ -59,9 +60,9 @@ void startup_knowledge_memory(void* p0) {
     create((void*) &k, (void*) &ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
 
     // Set knowledge memory to internals.
-    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) &ONE_ELEMENT_COUNT);
-    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) &ONE_ELEMENT_COUNT);
-    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) &ONE_ELEMENT_COUNT);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) &ONE_NUMBER);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) &ONE_NUMBER);
+    set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) &ONE_NUMBER);
 }
 
 /**
@@ -79,9 +80,9 @@ void shutdown_knowledge_memory(void* p0) {
     int* ks = INTEGER_NULL_POINTER;
 
     // Get knowledge memory.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) &ONE_ELEMENT_COUNT);
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) &ONE_NUMBER);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) &ONE_NUMBER);
 
     // Destroy knowledge memory.
     destroy((void*) &k, (void*) &ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);

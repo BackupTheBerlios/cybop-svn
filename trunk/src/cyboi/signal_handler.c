@@ -1,7 +1,7 @@
 /*
  * $RCSfile: signal_handler.c,v $
  *
- * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2004-12-20 00:19:44 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,7 @@
 
 #include "../array/array.c"
 #include "../global/abstraction_constants.c"
+#include "../global/integer_constants.c"
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
 #include "../logic/add.c"
@@ -70,12 +71,12 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
         void* pdc = NULL_POINTER;
 
         // Get abstractions, models, details.
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &pa, (void*) &ONE_ELEMENT_COUNT);
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &pac, (void*) &ONE_ELEMENT_COUNT);
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_INDEX, (void*) &pm, (void*) &ONE_ELEMENT_COUNT);
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_COUNTS_INDEX, (void*) &pmc, (void*) &ONE_ELEMENT_COUNT);
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_INDEX, (void*) &pd, (void*) &ONE_ELEMENT_COUNT);
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) &ONE_ELEMENT_COUNT);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &pa, (void*) &ONE_NUMBER);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &pac, (void*) &ONE_NUMBER);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_INDEX, (void*) &pm, (void*) &ONE_NUMBER);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_COUNTS_INDEX, (void*) &pmc, (void*) &ONE_NUMBER);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_INDEX, (void*) &pd, (void*) &ONE_NUMBER);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) &ONE_NUMBER);
 
         // The abstraction.
         void* a = NULL_POINTER;
@@ -100,12 +101,12 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
             }
 
             // Get abstraction, model, details.
-            get_array_elements((void*) &pa, (void*) &POINTER_ARRAY, (void*) &j, (void*) &a, (void*) &ONE_ELEMENT_COUNT);
-            get_array_elements((void*) &pac, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ac, (void*) &ONE_ELEMENT_COUNT);
-            get_array_elements((void*) &pm, (void*) &POINTER_ARRAY, (void*) &j, (void*) &m, (void*) &ONE_ELEMENT_COUNT);
-            get_array_elements((void*) &pmc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &mc, (void*) &ONE_ELEMENT_COUNT);
-            get_array_elements((void*) &pd, (void*) &POINTER_ARRAY, (void*) &j, (void*) &d, (void*) &ONE_ELEMENT_COUNT);
-            get_array_elements((void*) &pdc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &dc, (void*) &ONE_ELEMENT_COUNT);
+            get_array_elements((void*) &pa, (void*) &POINTER_ARRAY, (void*) &j, (void*) &a, (void*) &ONE_NUMBER);
+            get_array_elements((void*) &pac, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ac, (void*) &ONE_NUMBER);
+            get_array_elements((void*) &pm, (void*) &POINTER_ARRAY, (void*) &j, (void*) &m, (void*) &ONE_NUMBER);
+            get_array_elements((void*) &pmc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &mc, (void*) &ONE_NUMBER);
+            get_array_elements((void*) &pd, (void*) &POINTER_ARRAY, (void*) &j, (void*) &d, (void*) &ONE_NUMBER);
+            get_array_elements((void*) &pdc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &dc, (void*) &ONE_NUMBER);
 
             // Add part model (signal) to memory, using the whole signal's priority.
             // (Each signal has a priority. A signal may consist of part

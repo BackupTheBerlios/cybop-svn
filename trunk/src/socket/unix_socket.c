@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-01-09 01:30:13 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -33,6 +33,7 @@
 #include <sys/un.h>
 #include "../accessor/compound_accessor.c"
 #include "../global/constant.c"
+#include "../global/integer_constants.c"
 #include "../global/variables.c"
 
 /**
@@ -46,7 +47,7 @@ void create_unix_server_socket(void* p0) {
     void** f = POINTER_NULL_POINTER;
 
     // Get unix server socket filename.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
 
     if (f != POINTER_NULL_POINTER) {
 
@@ -69,7 +70,7 @@ void create_unix_server_socket(void* p0) {
         *s = socket(AF_UNIX, SOCK_STREAM, 0);
 
         // Set unix server socket.
-        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
+        set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_NUMBER);
 
         if (*s >= 0) {
 
@@ -131,7 +132,7 @@ void destroy_unix_server_socket(void* p0) {
     void** f = POINTER_NULL_POINTER;
 
     // Get unix server socket filename.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) &ONE_NUMBER);
 
     if (f != POINTER_NULL_POINTER) {
 
@@ -139,7 +140,7 @@ void destroy_unix_server_socket(void* p0) {
         int* s = INTEGER_NULL_POINTER;
 
         // Get unix server socket.
-        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
+        get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_NUMBER);
 
         if (s != INTEGER_NULL_POINTER) {
 
@@ -275,7 +276,7 @@ void receive_unix_socket(void* p0) {
     int* s = INTEGER_NULL_POINTER;
 
     // Get unix server socket.
-    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_ELEMENT_COUNT);
+    get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) &ONE_NUMBER);
 
     if (s != INTEGER_NULL_POINTER) {
 
