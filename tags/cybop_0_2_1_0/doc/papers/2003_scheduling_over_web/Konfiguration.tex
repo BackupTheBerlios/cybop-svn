@@ -1,0 +1,149 @@
+\section{Konfiguration}
+
+  \subsection{Inhalt}
+    In diesem Abschnitt kann nur eine Beispielkonfiguration
+    für die Webapplication beschrieben werden. Dies
+    beschränkt sich auf ein bestimmtes Betriebssystem und
+    auf bestimmte Tools. Bei anderen Betriebssystemen, bei
+    anderen Tools und anderen Versionen von Betriebssystemen und 
+    Tools kann die Konfiguration anders
+    aussehen. Im Prinzip sollte aber der Ablauf ähnlich
+    sein.
+
+    Abgrenzung:
+    An dieser Stelle wird nicht die Installation und
+    Konfiguration des Betriebssystems beschrieben.
+    Weiterhin wird hier auch nicht die Installation der
+    verwendeten Tools behandelt. Dies würde den Rahmen
+    des Kapitels sprengen. Dies ist die Aufgabe des
+    Administrators.
+
+  \subsection{Toolauswahl}
+
+    Für die Webapplication werden folgende Teile gebraucht.
+
+    \begin{itemize}
+      \item Betriebssystem
+      \item Java-Version
+      \item Webserver
+      \item Servlet- und JSP-Engine (Applicationserver)
+      \item Datenbank,
+    \end{itemize}
+    wobei bei der Beispielkonfiguration der Webserver und der 
+    Applicationserver
+    von Tomcat abgedeckt werden. Im normalen Betrieb werden Webserver
+    und Applicationserver getrennt und nur die Servlet- und
+    JSP-Anfragen werden zum Applicationserver weitergeleitet.
+
+    Die Beispielkonfiguration wurde unter folgendem
+    Betriebssystem und folgenden Tools realisiert:
+    \input{TabelleToolauswahl}
+
+ 
+  \subsection{Voraussetzung}
+    Für die Konfiguration und den Betrieb der Webanwendung wird folgendes
+    vorausgesetzt:
+
+    \begin{itemize}
+      \item installiertes Java
+      \item Applicationserver (Tomcat), läuft auf Port 8080
+      \item Datenbank (mySQL), läuft
+      \item Webanwendung ist auf dem Server unter folgendem Verzeichnis verfügbar:
+            \begin{quote}
+              /home/resmedicinae
+            \end{quote}
+            Dazu müssen von SourceForge vom Projekt "`Resmedicinae"' die Module
+            \begin{itemize}
+              \item lib
+              \item etc
+              \item share
+              \item src
+              \item bin
+            \end{itemize}
+            heruntergeladen werden.
+    \end{itemize}
+
+  \subsection{Konfiguration Tomcat}
+    Die allgemeine Serverkonfiguration von Tomcat erfolgt in folgender Datei:
+    \begin{quote}
+      \$\{TOMCAT\_HOME\}/conf/server.xml   
+    \end{quote}
+
+    Die Datei ist eine XML-Datei und folgt also der XML-Syntax. 
+    Die Änderung ist an folgender Stelle im XML-Syntaxbaum 
+    vorzunehmen:
+\begin{verbatim}
+<Server ...>
+  <Service name="Tomcat-Standalone" ...>
+    <Engine name="Standalone" ...>
+      <Host name="localhost" ...>
+   
+      </Host>
+    </Engine>
+  </Service>
+</Server>
+\end{verbatim}
+    
+    Folgende Änderung ist in dem Baum einzutragen:
+\begin{verbatim}
+<Context path="/resdata" 
+         docBase="/home/resmedicinae/share/application/healthcare/resdata">
+  <Parameter name="resdata.xml" 
+             value="/home/resmedicinae/etc/resdata.xml"> 
+  </Parameter>
+</Context>
+\end{verbatim}
+
+    wobei die Werte folgende Bedeutungen haben: 
+    
+    \input{TabelleKonfigTomcat}  
+    
+    Weiterhin sind die Variablen JAVA\_HOME  und der CLASSPATH für TOMCAT zu setzen.
+    Dies geschieht am besten in folgender Datei: 
+    \begin{quote}
+      \$\{TOMCAT\_HOME\}/bin/catalina.sh
+    \end{quote}
+     
+    \begin{itemize}
+      \item JAVA\_HOME \newline
+            Wird gleich am Anfang des Skriptes gesetzt: 
+            z.B. export JAVA\_HOME=/usr/local/java
+      \item CLASSPATH \newline
+            Wird nach der Sektion "\# Add on extra jar files to CLASSPATH\"
+            eingefügt. Ist alles standardmäßig eingerichtet worden, so muß hier 
+            folgende Zeile ergänzt werden:
+            \begin{quote}
+              CLASSPATH="\$CLASSPATH": \newline
+              /home/resmedicinae/lib/protomatter-1.1.7.jar: \newline
+              /home/resmedicinae/lib/mm.mysql-2.0.14-bin.jar: \newline
+              /home/resmedicinae/lib/mailapi.jar
+            \end{quote}
+    \end{itemize}
+     
+
+  \subsection{Konfiguration mySQL}
+  
+    Für die Konfiguration von mySQL sind keine speziellen 
+    Einstellungen nötig. Das einzige, was gemacht werden muß,
+    ist die Erstellung der Datenbank. Dies geschieht mit den 
+    mitgelieferten Scripten.
+    \begin{quote}
+      \$\{RESMEDICINAE\_HOME\}/bin/application/healthcare/resdata/build\_database.sh
+    \end{quote}
+    Ist mySQL im Standardverzeichnis installiert, sollte das Skript sofort 
+    funktionieren. Ansonsten muß in der 
+    \begin{quote}
+      \$\{RESMEDICINAE\_HOME\}/bin/set\_home.sh 
+    \end{quote}
+    der Parameter MYSQL\_HOME gesetzt werden.
+    
+  \subsection{Konfiguration der Webapplication}
+    Für die Anwendung werden alle veränderlichen Größen
+    in einer Konfigurationsdatei abgelegt. Diese 
+    Konfigurationsdatei ist im XML-Schema abgespeichert.
+    
+    An dieser Stelle werden die Einträge beschrieben:
+
+    \input{TabelleKonfigAnwendung}
+
+ \newpage 

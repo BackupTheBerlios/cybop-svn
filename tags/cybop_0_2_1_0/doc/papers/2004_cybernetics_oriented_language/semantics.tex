@@ -1,0 +1,56 @@
+%
+% $RCSfile: semantics.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Semantics}
+\label{semantics_heading}
+
+CYBOL files can be used to model either \emph{static} or \emph{dynamic} aspects.
+In both cases, the \emph{same} syntax (document structure) with \emph{identical}
+vocabulary (tags and attributes) is applied. It is the attribute \emph{Values}
+that make a difference in meaning. An \emph{Attribute} keeps meta information
+about the contents of a \emph{Tag}. In CYBOL, the tag of main interest is
+\emph{part}. Its attributes contain information about its:
+
+\begin{itemize}
+    \item{Name (to identify different parts)}
+    \item{Model (compound or primitive)}
+    \item{Position (in space, time or mass)}
+    \item{Constraint (minima, maxima and further limitations)}
+\end{itemize}
+
+What is missing is a means to keep such meta information about an attribute,
+too. How should an interpreter know if it deals with a \emph{compound} or a
+\emph{primitive} model, with a position in \emph{Space} or in \emph{Time}?
+It is therefore necessary to \emph{bundle} attributes in \emph{Pairs of Two},
+one attribute containing the actual value and the second attribute containing
+abstraction information about how the first attribute gets interpreted correctly.
+The only exception is the name which gets always interpreted as string of characters.
+The resulting attributes of the \emph{part} tag are:
+
+\begin{itemize}
+    \item{name}
+    \item{part\_abstraction}
+    \item{part\_model}
+    \item{position\_abstraction}
+    \item{position\_model}
+    \item{constraint\_abstraction}
+    \item{constraint\_model}
+\end{itemize}
+
+A list of defined, primitive abstraction values for CYBOL can be found in \cite{cybop}.

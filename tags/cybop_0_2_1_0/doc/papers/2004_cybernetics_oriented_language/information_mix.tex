@@ -1,0 +1,48 @@
+%
+% $RCSfile: information_mix.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Information Mix}
+\label{information_mix_heading}
+
+Of course, the bundling of static and dynamic properties as used in OOP is not
+the only factor causing interdependencies. Otherwise, traditional procedural
+programming languages had already delivered ideal systems. But this is not the
+case. Something else must be missing. The major problem of today's software is
+its \emph{Mix} of two very different kinds of information: \emph{System Control}
+and \emph{Application Knowledge}.
+
+A standard computer architecture consists of a \emph{Memory} (which stores data),
+a \emph{Processor} (that applies operations on the data), \emph{Input/Output Devices}
+(to correspond with the environment) and a \emph{Bus System} (that connects the
+before-mentioned parts). All these devices need to be controlled in some way.
+Variable values (instances) need to be written to and read from the memory;
+operations which the processor offers need to be called; input and output values
+need to be exchanged through the corresponding input/output devices.
+
+Most of this is done by an \emph{Operating System} (OS) and its hardware drivers.
+However, programming languages allow their users to access hardware, too. Software
+programmers can send processor instructions, they can allocate (instantiate)
+memory etc. It is these possibilities which lead to memory leaks and further
+software problems. If the operating system, for example, concentrated all memory
+allocation in one place, forgotten instances would belong to the past.
+
+The remaining code represents the actual \emph{Application}. It contains the
+\emph{Domain Knowledge}, the \emph{Concepts}, the \emph{Configuration} information.
+These models of real world phenomenons have nothing to do with hardware control
+and need to be treated differently.

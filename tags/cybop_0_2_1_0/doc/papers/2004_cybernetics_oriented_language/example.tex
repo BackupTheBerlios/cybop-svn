@@ -1,0 +1,49 @@
+%
+% $RCSfile: example.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Example}
+\label{example_heading}
+
+The following example shows a minimalistic model of a (static) \emph{Graphical
+User Interface} (GUI) frame.
+
+\begin{verbatim}
+<!--
+    frame_example.cybol
+/-->
+<model>
+    <part name="title"
+        part_abstraction="string"
+        part_model="Res Medicinae"/>
+    <part name="menu_bar"
+        part_abstraction="compound"
+        part_model="/gui/menu_bar.cybol"
+        position_abstraction="compass"
+        position_model="north"/>
+    <part name="status_bar"
+        part_abstraction="compound"
+        part_model="/gui/tool_bar.cybol"
+        position_abstraction="compass"
+        position_model="south"/>
+</model>
+\end{verbatim}
+
+Similar models can be built of (dynamic) workflows whereby the inputs and outputs
+of the part operations appear in a special order as attribute values. But this
+may become the topic of a follow-up paper.

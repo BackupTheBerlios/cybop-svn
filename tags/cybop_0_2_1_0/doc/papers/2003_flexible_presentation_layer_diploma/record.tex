@@ -1,0 +1,343 @@
+ %
+ % $RCSfile: record.tex,v $
+ %
+ % Copyright (c) 1999-2002. Jens Bohl. All rights reserved.
+ %
+ % This software is published under the GPL GNU General Public License.
+ % This program is free software; you can redistribute it and/or
+ % modify it under the terms of the GNU General Public License
+ % as published by the Free Software Foundation; either version 2
+ % of the License, or (at your option) any later version.
+ %
+ % This program is distributed in the hope that it will be useful,
+ % but WITHOUT ANY WARRANTY; without even the implied warranty of
+ % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ % GNU General Public License for more details.
+ %
+ % You should have received a copy of the GNU General Public License
+ % along with this program; if not, write to the Free Software
+ % Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ %
+ % http://www.resmedicinae.org
+ % - Information in Medicine -
+
+ %A chapter about the realization of the prototype.
+
+\chapter{Record - Modul zur medizinischen Dokumentation}
+    Nachdem in den vorangegangenen Kapiteln die theoretischen Konzepte dieser Diplomarbeit beschrieben wurden, soll
+    nun auf die praktische Umsetzung dieser Techniken eingegangen
+    werden.\\
+    Der im Rahmen dieser Arbeit implementierte Prototyp {\it Record} zur medizinischen Befundung ist Teil eines größeren
+    Projektes namens {\it Res Medicinae}, welches sich in mehrere voneinander unabhängige Softwaremodule gliedert.
+    Diese Module decken eigenständige Aufgabenbereiche der zukünftigen Anwendung ab. So existiert innerhalb von {\it Res
+    Medicinae}
+    beispielsweise ein weiteres
+    Modul {\it ReForm} für das Ausdrucken von Formularen \cite{reform}. Weiterhin
+    geplant sind Module für die Administration von Labordaten und die Archivierung und Bearbeitung von medizinischem
+    Bildmaterial.
+    \section{Ziele}
+        Elektronische Datenverarbeitung ist im medizinischen Bereich nicht mehr wegzudenken. Neben
+        Informationsgewinnung und -verarbeitung tut sich die Präsentation von Daten als ein Hauptaufgabengebiet der
+        Informatik hervor. Krankenhausinformationssysteme als monolithische Anwendungen oder über Rechenzentren
+        koordiniert, decken diese Aufgaben im klinischen Umfeld (mehr oder weniger zufriedenstellend) weitestgehend ab.\\
+        Ziel des {\it Record}-Moduls ist es, den Arzt bei der Erstellung von patientenbezogenen Diagnosen, d.h. bei
+        der {\bf medizinischen Dokumentation}, zu unterstützen. Mit Hilfe des folgenden Szenarios soll erläutert werden,
+        was hierunter zu verstehen ist:\\
+        Ein Patient konsultiert seinen Hausarzt bezüglich eines bestimmten Problems. Er schildert ihm dieses,
+        worauf hin der Mediziner die Anamnese\footnote{Anamnese {\it (lat.)}: Wiedererinnern, Krankheitsvorgeschichte}, also eine Dokumentation der Aussagen eines
+        Patienten über den Verlauf einer Krankheit, anfertigt.\\
+        Danach wird der Patient in den meisten Fällen problembezogen untersucht werden,
+        womit die eigentliche Befundung beginnt.
+        Eine solche Untersuchung kann von einem schlichten Messen des Blutdruckes über ein Abhören der Herzaktivität bis hin zur
+        Erstellung eines Elektro-Kardiogrammes (EKG) reichen. In anderen Fällen wird dieser Teil der Konsultation auch auf weiterführende
+        Diagnosemethoden ausgeweitet. So kann es der Arzt für notwendig erachten, eine radiologische Untersuchung (z. B. Röntgen) oder eine
+        Gastroskopie\footnote{Eine Gastroskopie (Magenspiegelung) ist eine endoskopische Untersuchung des Magens.} anzuordnen.
+        All diese Untersuchungsmethoden haben ein Ergebnis: den Befund. Dieser wiederum kann
+        die unterschiedlichsten Formen annehmen: Bei der Untersuchung des Blutdruckes werden die numerischen Werte für
+        Systole\footnote{Systole (griech.): Kontraktion des Herzmuskels, Druck des ausströmenden Blutes.} sowie
+        Diastole\footnote{Diastole (griech.): Erschlaffung des Herzmuskels, Druck des einströmenden Blutes.} gemessen und notiert, bei einer
+        Gastroskopie die Beschaffenheit der Magenschleimhaut bzw. ob an
+        ihr krankhafte Veränderungen sichtbar sind. Sind keine pathologischen\footnote{pathologisch (lat.): krankhaft} Erscheinungen festzustellen, spricht man
+        auch von {\it keinem Befund} ({\it  ohne Befund} bzw. {\it o. B.}). Ausgehend von Anamnese und Befund kann die
+        Diagnose erstellt werden. Inhalt dieser ist die Krankheitserkennung. Darauf aufbauend kann
+        die Therapie eingeleitet werden.
+        Therapeutisches Handeln umfasst Medikamentenverschreibungen, Überweisungen zu anderen Ärzten,
+        Verordnung von Kuren, Massagen oder
+        anderen physiotherapeutischen Maßnahmen, sowie Hinweise an den Patienten, wie seine Genesung durch
+        ihn selbst vorangebracht werden kann.\\
+        Der dargestellte Vorgang stellt natürlich einen Idealfall der Diagnose und Therapie dar. In vielen Fällen
+        kann nicht davon ausgegangen werden, bei der ersten Konsultation des Patienten sofort die optimalen
+        therapeutischen Maßnahmen einleiten zu können.\\
+        Aufgabe des {\it Record}-Modules ist die bestmögliche Unterstützung dieser dargestellten Abläufe auf Dokumentationsbasis.
+        In enger
+        Zusammenarbeit mit den Ärzten der {\it Res Medicinae}-Analyse-Mailingliste wurde versucht, das Modul als effektives
+        Werkzeug der medizinischen Dokumentation zu konzipieren.\\
+        Ein solches Vorgehen beinhaltet zunächst einmal den Entwurf einer grafischen Oberfläche nach ergonomischen
+        Gesichtspunkten, wie sie im ersten Kapitel
+        beschrieben wurden.\\
+        Die in den Kapiteln drei bis fünf enthaltenen theoretischen Konzepte zum erweiterten
+        Lebenszyklus von Softwarekomponenten sowie das ontologische Framework finden hier natürlich ebenfalls ihre praxisnahe
+        Umsetzung.\\
+        Ein weiterer Punkt ist die softwaretechnische Umsetzung neuester Modelle auf dem Gebiet der medizinischen
+        Befundung. Diese Modelle zeigen neue Sichtweisen auf und stellen alternative Strukturen für medizinische Daten vor. Die
+        einfache und sehr unübersichtliche Präsentation der gesamtem elektronischen Patientenakte in einer schlichten Tabelle oder
+        Liste hat sich in den
+        letzten Jahren als unvorteilhaft und zu wenig intuitiv herausgestellt. Vielmehr ist man an einer selektiven
+        Darstellung von Patienteninformationen interessiert, die statische wie auch dynamische Gesichtspunkte einer
+        Befundung repräsentiert.
+    \section{Modelle der Befundung}
+        Dieser Abschnitt soll die im Modul {\it Record} umgesetzten neuen Modelle der Befundung kurz vorstellen.
+        \subsection{Episodenbasierte Befundung}
+            Episodenbasierte Befundung stellt einen alternativen Weg dar, Konsultationen eines Arztes durch einen
+            Patienten zeitlich sowie problembezogen zu dokumentieren. An dieser Stelle sind die Begriffe
+            {\it Teilkontakt} und {\it Problem} zu erläutern. Ein Teilkontakt bezeichnet das Aufsuchen des Arztes durch
+            einen Patienten
+            aufgrund eines vorhandenen gesundheitlichen Problems. Klagt der Patient während einer Konsultation über
+            mehrere Probleme, so existieren dementsprechend auch mehrere Teilkontakte.\\
+            Als Problem bezeichnet man in
+            diesem Zusammenhang einen pathologischen Zustand, also eine Beeinträchtigung der Gesundheit über
+            eine bestimmte Zeitspanne.\\
+            Hierauf aufbauend, definiert sich die {\it Episode} als eine zeitliche Aneinanderreihung von Teilkontakten bezogen
+            auf das zugehörige Problem. Eine Episode kann aus einem oder mehreren solcher Kontakte bestehen
+            (vgl. Abb. \ref{Probleme und Episoden}).
+
+            \includepicture{15}{eps/episode.eps}{Probleme und Episoden}{Probleme und Episoden}{Probleme und Episoden}
+
+            Der erste Teilkontakt markiert den Anfang, der letzte das Ende einer Episode.\\
+            In der obigen Abbildung
+            existieren für das erste Problem insgesamt drei Episoden, wobei die erste aus drei Teilkontakten besteht
+            und die letzten beiden jeweils nur aus einem. Nimmt man beispielsweise an, bei dem Problem handelt es sich
+            um eine chronisch auftretende Speiseröhrenentzündung, so hätte der Patient den Arzt diesbezüglich fünf mal
+            in der betrachteten Zeitspanne (z. B. 2 Jahre) konsultiert. Der Abschluss der einzelnen Episoden könnte mit einem Abklingen
+            bzw. einer Beseitigung der Beschwerden in Verbindung gebracht werden. Durch Medikamentengabe wäre also
+            eine Heilung bis zum
+            dritten Teilkontakt eingetreten und die Episode beendet. Ein erneutes Auftreten der Symptome zu
+            einem späteren Zeitpunkt würde die Episoden zwei und drei notwendig machen, welche aber aufgrund einer
+            schnellen Abheilung aus lediglich einem Teilkontakt bestehen.
+
+
+        \subsection{SOAP-Modell}
+            Um von Anfang an Missverständnissen aus dem Weg zu gehen: Der Begriff {\it SOAP} bezeichnet in diesem Kontext {\bf nicht} das
+            gleichnamige XML-basierte Kommunikationsprotokoll, sondern steht für ein medizinisches
+            Dokumentationsmodell.\\
+            Ein Teilkontakt (siehe vorheriger Abschnitt) gliedert sich
+            gemäß des SOAP-Modells in die vier Abschnitte {\it{\bf S}ubjective} (Anamnese), {\it{\bf O}bjective} (Befund),
+            {\it{\bf A}ssessment} (Bemerkung bzw. Einschätzung) und {\it{\bf P}lan} (Vorgehen). Im weiteren Verlauf dieses Dokumentes wird zwar noch vom
+            SOAP-Modell gesprochen, jedoch werden die entsprechenden deutschen Begriffe für Subjective, Objective,
+            Assessment und Plan verwendet. Tabelle \ref{SOAP-Model mit Beispielen} soll einen möglichen Teilkontakt darstellen,
+            dessen Einteilung
+            nach dem SOAP-Model erfolgt. Dabei werden die medizinischen Begriffe Anamnese,
+            Befund, Bemerkung und Vorgehen durch Beispiele zusätzlich erläutert.\clearpage
+            \begin{center}
+            \begin{table}
+            \caption[SOAP-Model mit Beispielen]{SOAP-Model mit Beispielen}
+            \label{SOAP-Model mit Beispielen}
+            \begin{center}
+                \begin{tabular}[hb]{|c||p{3cm}|p{5cm}|p{5cm}|}
+                \hline
+                \bf{Abk.}& \bf{Begriff} & \bf{Erläuterung} & \bf{Beispiel} \\\hline\hline
+                \bf{\large{S}}&Anamnese & Schilderung des gesundheitlichen Problems durch den Patienten & Patient klagt über starke Schmerzen im Oberbauch, Völlegefühl, Sodbrennen, Durchfall seit 3 Tagen\\\hline
+                \bf{\large{O}}&Befund & Objektiver Eindruck des Mediziners, Feststellung auffälliger Merkmale  & Harte Bauchdecke,
+                Zungenbelag, Blutdruck: 150/110, Puls: 90
+                \\\hline
+                \bf{\large{A}}&Bemerkung, Einschätzung & Allgemeine Angaben: Körperlicher Allgemeinzustand, soziale nicht-medizinische Einflußfaktoren, Sonstiges& Übergewicht, Stress im Beruf, Choleriker, Scheidung\\\hline
+                \bf{\large{P}}&Vorgehen & Therapeutische Maßnahmen, Medikamentenverordnung & Gastroduodenoskopie (Magen-Darm-Spiegelung), Omeprazol (Magen-Darm-Therapeutikum) 300 mg   \\ \hline
+                \end{tabular}
+            \end{center}
+            \end{table}
+            \end{center}
+
+        \subsection{Topologische Befundung}
+            In vielen Fällen der Befundung von pathologischen Erscheinungen ist neben einer präzisen Darstellung
+            des eigentlichen Sachverhaltes auch eine Lokalisation der krankhaften Veränderung notwendig. Der
+            Mediziner kennt hierbei für jedes noch so kleine Körperteil und seine unterschiedlichen Ansichten
+            eine zumeist
+            lateinische Bezeichnung\footnote{
+            {\it Ventral} und {\it dorsal} bezeichnen beispielsweise Ansichten eines Körperteils von
+            der Vorder- und Rückseite, {\it lateral} die Seitenansicht.} und kann diese textuell notieren und zur Dokumentation anwenden.\\
+            Eine alternative Möglichkeit bietet
+            die sogenannte {\it Topologische Befundung}. Mit ihr ist es möglich, den betreffenden Abschnitt des
+            Körpers anhand eines grafischen Modells zu selektieren und an den gewünschten
+            Stellen Befunde zu dokumentieren. Gleichzeitig soll durch das Setzen von Markierungen die
+            exakte Positionierung von Befunden möglich sein.
+
+            \includepicture{15}{eps/topology.eps}{Hierarchie von Darstellungen des menschlichen Skelettsystems}{Hierarchie von Darstellungen des menschlichen Skelettsystems}{Topology}
+
+            Es existieren dabei anatomische Abbildungen des Menschen, die einen ausreichenden Detaillierungsgrad
+            aufweisen. Ausgehend von einer Gesamtdarstellung kann über Maus und Tastatur
+            in alle Regionen des menschlichen Organismus verzweigt werden.\\
+            Eine Hierarchie von Bildern
+            des Skelettsystems (vgl. Abb. \ref{Topology}) macht dies deutlich: Initiale Darstellung ist die ganze
+            Ansicht des menschlichen Skeletts. Hier sind Schädel, Brustkorb, Becken und die Extremitäten selektierbar,
+            die dann auf der zweiten Ebene zu sehen sind. Von hier aus kann wiederum noch tiefer in die Skelett-Anatomie
+            vorgedrungen werden. Abbildung \ref{Topology} zeigt jedoch nicht die alternativen Ansichten jeder Region, denn zu
+            fast allen Bildern existieren neben ventralen und dorsalen, auch laterale Abbildungen.\\
+            Die Idee der Umsetzung eines Prototypen zur Topologischen Befundung kam während der Formulierung dieser
+            Diplomarbeit, auch angeregt durch das Analysedokument von {\it Res Medicinae} \cite{ch:analysedoc}. Wie sich kurz darauf herausstellte,
+            ist diese Form der Befundungsunterstützung kein wirklich neues Konzept, jedoch hat es im Rahmen von klinischen
+            Informationssystemen noch kaum Anwendung gefunden. Grund hierfür ist einmal mehr der zeitliche Aspekt
+            einer solchen Methode. Vielen Ärzten ist die umständliche Bedienung einer Anwendung zum Erstellen einer
+            Befundung zu wider. Die meisten beschränken sich auf die Kurzform von Diagnosen in ICD\footnote{Die ICD
+            ({\it International Classification of Diseases}) ist eine international standardisierte Klassifikation von
+            Krankheiten und Todesursachen.}
+            -Form. Diese
+            Methode ist in ihrer Ausführung zeitlich sicher nicht zu unterbieten.\\
+            Dennoch stellt die Topologische Befundung kein redundantes Werkzeug dar. Sie sollte
+            diagnoseunterstützend gerade bei der Lokalisation und Markierung räumlich abgegrenzter, pathologischer
+            Befunde eingesetzt werden. Dies könnten beispielsweise Frakturen, Entzündungen, Verbrennungen,
+            Unfallverletzungen oder Tumore sein. Neben dieser notizblockähnlichen Gedächtnisstütze für den
+            behandelnden Mediziner sind diese Abbildungen auch zur Erläuterung medizinischer Sachverhalte während
+            der Sprechstunde geeignet.
+        \section{Realisierung}
+        In den letzten Abschnitten wurden die für das Verständnis notwendigen medizinischen Dokumentationsmodelle
+        beschrieben. Diese implizieren eine Klassenstruktur, die das Episoden- und das SOAP-Modell in sich vereint und
+        dabei den Regeln des ontologischen Framework von {\it Res Medicinae} folgt.\\
+        Zunächst wird das entworfene Domain-Modell dargelegt, danach auf die Treetable-Komponente von {\it Record}
+        eingegangen und schließlich die Realisierung der topologischen Befundung innerhalb des Prototypen vorgestellt.
+        \subsection{Domain-Modell}
+        Abbildung \ref{Domain-Modell unter Einordung in Model-Ontologie} zeigt dieses Domain-Modell.
+        \includepicture{11}{eps/domain.eps}{Domain-Modell unter Einordung in Model-Ontologie}{Domain-Modell unter Einordung in Model-Ontologie}{Domain-Modell unter Einordung in Model-Ontologie}{Domain-Modell unter Einordung in Model-Ontologie}
+        Die linke Seite entspricht der bereits vorgestellten Model-Ontologie (vgl. Abb. \ref{Model-Ontologie und konkrete Unterklassen}).
+        In der obersten Ebene ist der {\it HealthRecord} zu finden, der die gesamte elektronische Patientenakte verkörpert.
+        Problem, Episode und Teilkontakt folgen in dieser Reihenfolge.\\
+        Ein Problem (Klasse {\it Problem}) kann beliebig viele
+        Episoden (Klasse {\it Episode}) und diese wiederum eine unbegrenzte Anzahl an Teilkontakten (Klasse {\it PartialContact}) beinhalten.
+         Diese drei Klassen befinden sich in der ontologischen Ebene {\it Unit}.\\
+        Jeder Teilkontakt besteht aus je einem
+        Objekt der Klassen {\it Subjective}, {\it Objective}, {\it Assessment} und {\it Plan}, welche sich in der Ebene
+        {\it Heading} befinden
+        und sich über eine Klasse namens {\it SOAPHeading} in die Klassenhierarchie einfügen. {\it SOAPHeading} bündelt als
+        Hilfsklasse gemeinsame Eigenschaften.\\
+        Auf der untersten Ebene sind lediglich zwei Klassen angedeutet,
+        die in dem Domain-Modell eine Rolle spielen: Das Vorgehen kann als therapeutische Maßnahmen Medikamentenverschreibungen
+        (Klasse {\it Medication}) mit den entsprechenden Dosen (Klasse {\it Dose}) beinhalten.
+        \subsection{Treetable-Komponente}
+        Die beschriebenen medizinischen Modelle setzen eine optimale Präsentation der durch sie
+        in Struktur gebrachten Informationen vorraus. Patientenbezogene Daten, inhaltlich gegliedert nach dem
+        SOAP-Modell und durch die Zuordnung zu einer Episode in die korrekte zeitliche Reihenfolge gebracht, verlangen
+        nach einer ebenso strukturierten Darstellung. Diese wird durch eine baumartige Anzeige in einem {\it Treetable}
+        gewährleistet.\\
+        Eine solche Komponente vereint die Vorteile von Bäumen mit denen von Tabellen. Prinzipiell sind die Informationen
+        noch in Zeilen und Spalten organisiert, können aber zum Einen hierarchisch und zum Anderen platzoptimiert
+        untergebracht werden. Platzoptimiert deshalb, weil es durch die Bedienung eines solchen Baumes
+        möglich ist, bestimmte Teile der Tabelle auszublenden oder sichtbar zu machen, je nach
+        dem, welcher Detail-Level gewünscht wird.\\
+        Eine solche Form der Präsentation von Daten ist nichts grundlegend Neues. Zur
+        Verwaltung von großen Dateisystemen mit Ordnern und vielen verschiedenen Dateiformaten wird sie schon seit dem
+        Aufkommen grafischer Benutzeroberflächen verwendet.\\
+        Weiterhin kann die Anzeige durch Filtereinstellungen zusätzlich angepasst werden. Möchte man
+        beispielsweise nur die Befunde innerhalb einer bestimmten Episode bewerten, kann man diese mit Hilfe des Filters
+        separiert von den anderen Informationen darstellen. Dasselbe gilt für alle anderen Elemente des SOAP-Modells
+        sowie die vorhandenen Teilkontakte, Episoden und Probleme.
+
+        \subsection{Prototyp zur Topologischen Befundung}
+        Weiterer Bestandteil des {\it Record}-Moduls ist ein Prototyp zu der bereits besprochenen {\it Topologischen Befundung}. In ihm
+        enthalten ist ein {\it Homunculus}\footnote{Homunculus ({\it lat.}): künstlich erzeugter Mensch}, welcher das menschliche Skelett fast vollständig repräsentiert und in dem sowohl
+        mit Hilfe der Maus, als auch über die Tastatur navigiert werden kann.\\
+        Ausgehend von der Komplettdarstellung des menschlichen Skelettsystems kann der Nutzer in die unterschiedlichen
+        Bereiche des Knochengerüstes vordringen und an gegebener Stelle eine Befundung eingeben. Bei dieser Form der
+        Darstellung können Frakturen oder andere pathologische Veränderungen der Knochen dokumentiert werden. Zusätzlich
+        zur Erfassung von textuellen Notizen ist es auch möglich, Regionen im Bild zu markieren.
+        Dies kann besonders bei der
+        Lokalisation von Bruchstellen hilfreich sein und soll die Dokumentation von Befunden visuell unterstützen.
+        \paragraph{Anatomisches Bildmaterial}
+        Einen erheblichen Zeitaufwand verursachte die Beschaffung von geeignetem und verwendbarem Bildmaterial.
+        Dabei mussten die
+        einzelnen Abbildungen von Teilen des menschlichen Körpers bestimmten Kriterien genügen. Zum Einen war es
+        notwendig, dass diese Bilder zwar einen gewissen Detailgrad aufwiesen, jedoch in der absoluten Genauigkeit der
+        Darstellung nicht jede Einzelheit hervorhebten. Der {\it Homunculus} sollte die Befundung unterstützen und nicht
+        als detailgetreues, fotografisches  Anschauungsmaterial für Medizinstudenten dienen.
+        Auf der anderen Seite mussten Abbildungen gefunden werden,
+        die in der Form der grafischen Umsetzung untereinander stimmig und konsistent waren. Das bedeutet, dass die
+        Art der Zeichnung der Knochen zu der Darstellung von Weichteilen optisch passen musste.\\
+        In einem kommerziellen Atlas der Anatomie wurden genau solche Abbildungen gefunden. Auf Anfrage an den herausgebenden Verlag
+        durften diese auch unter Angabe des Produkt- und Verlagnamens unentgeltlich verwendet werden.
+        \paragraph{Overlays}
+        Alle ein solches anatomisches Bild betreffenden Informationen, wurden in einem dafür vorgesehenen XML-Format
+        gespeichert. XML stellte zum damaligen Zeitpunkt das einzige, im Rahmen von {\it Res
+        Medicinae} existierende, Persistenzmedium dar. Die in einer solchen Datei enthaltenen Informationen umfassen neben
+        trivialen Angaben wie dem Namen der Abbildung oder
+        der zugehörigen medizinischen Beschreibung auch Daten über die sensiblen Regionen des Bildes und eine Referenz
+        auf das zugrundeliegende Bild aus dem Atlas der Anatomie. Da dieses XML-Format einen fiktiven bzw. gedachten ''Überzug'' über
+        ein real existierendes digitales JPEG-Bild darstellt, wurde ihm der Name
+        {\it Overlay} gegeben. Abbildung \ref{Beispiel der XML-Darstellung eines Overlays} zeigt beispielhaft ein solches XML-Format
+        für ein Overlay des menschlichen Beines in der Skelettdarstellung und Vorderansicht.
+        \clearpage
+
+        \includepicture{11}{eps/overlayxml.eps}{Beispiel der XML-Darstellung eines Overlays}{Beispiel der XML-Darstellung eines Overlays}{Beispiel der XML-Darstellung eines Overlays}
+
+        Im Folgenden sind die dazu verwendeten XML-Elemente aufgeführt.
+        \begin{itemize}
+        \item{{\tt \(<\)Name\(>\) }}
+        Name des Overlays.
+        \item{{\tt \(<\)Image\(>\) }}
+        Name des zugehörigen JPEG-Bildes mit Pfadangabe.
+        \item{{\tt \(<\)Description\(>\) }}
+        Genauere medizinische Beschreibung des Overlays.
+        \item{{\tt \(<\)OverlayRegion\(>\) }}
+        Sensibler Bereich des Overlays. Genauere Erläuterung im nächsten Abschnitt.
+        \item{{\tt \(<\)OverlayRegionName\(>\) }}
+        Name des sensiblen Bereiches.
+        \item{{\tt \(<\)TargetOverlay\(>\) }}
+        Name des Overlays auf das mit Hilfe der OverlayRegion verzweigt wird.
+        \item{{\tt \(<\)Number\(>\) }}
+        Nummer der Overlay-Region innerhalb des Overlays.
+        \item{{\tt \(<\)Neighbours\(>\) }}
+        Nachbarregionen dieser Overlay-Region. Werden zur Navigation auf dem Overlay mit Hilfe der Pfeiltasten benötigt.
+        \item{{\tt \(<\)Top\(>\) }}
+        Oberer Nachbar.
+        \item{{\tt \(<\)Bottom\(>\) }}
+        Unterer Nachbar.
+        \item{{\tt \(<\)Left\(>\) }}
+        Linker Nachbar.
+        \item{{\tt \(<\)Right\(>\) }}
+        Rechter Nachbar.
+        \item{{\tt \(<\)Point\(>\) }}
+        X- und Y-Koordinaten der Overlay-Regionen.
+        \item{{\tt \(<\)X\(>\) }}
+        X-Koordinate.
+        \item{{\tt \(<\)Y\(>\) }}
+        Y-Koordinate.
+        \end{itemize}
+
+        Beim Start des {\it Record}-Moduls werden alle zur Verfügung stehenden Overlays mit Hilfe des XML-Parsers
+        {\it Xerces}
+        geparst und eingelesen. Dieser wandelt das Dateiformat XML in ein {\it Document Object Model} (DOM), das als
+        charakteristische
+        Objekt-Struktur allen Auszeichnungssprachen\footnote{In Auszeichnungssprachen sind verschiedene Befehle definiert,
+        die der optischen und inhaltlichen Strukturierung von Informationen dienen. Zu diesen Sprachen gehören neben XML z. B. auch die Standard
+        Generalized Markup Language (SGML) und die Hyper Text Markup Language (HTML).} zugrunde liegt. Das DOM stellt über
+        eine Programmierschnittstelle (API)
+        Operationen zur Bearbeitung der in ihm enthaltenen Objekte bereit und ermöglicht so eine Manipulation der
+        Elemente. Bei der Transformation eines XML-Formates
+        in ein Document Object Model bleibt der verschachtelte Charakter dieser Struktur erhalten. Die in dem
+        entstandenen DOM vorhandenen Informationen des Overlays können jetzt über die Funktionen der API gelesen
+        sowie dem Modell neue Elemente hinzugefügt werden.
+        \paragraph{Overlay-Regionen}
+        Overlay-Regionen bezeichnen die ''sensiblen'' Areale eines Overlays. Prinzipiell sind diese nichts anderes als
+        beliebige Polygone, die in Form von Flächenabschnitten bestimmte Bereiche von Overlays abgrenzen. Punkte dieser
+        Polygone werden durch die Tags namens {\tt \(<\)Point\(>\) } beschrieben (vgl. Abb. \ref{Beispiel der XML-Darstellung eines
+        Overlays}).\\
+        Geht man zum Beispiel von der bereits erwähnten Darstellung des menschlichen Beines aus,
+        existieren Overlay-Regionen für den Oberschenkel, das Knie, Teile des Beckens, das Schienbein und den Fuß (vgl. Abb. \ref{Overlay des menschlichen
+        Beines}).
+        Diese Regionen verfärben sich beim Überfahren mit dem Mauszeiger bzw. der Anwahl über die Pfeiltasten und
+        signalisieren so den Status der Selektion. Durch Anklicken mit der Maus oder Drücken von {\it Enter} erscheint dann
+        das mit dieser Region assoziierte Overlay. Bei einer Selektion des Schienbeines würde dieses also als
+        nächstes Overlay geladen werden. {\it Escape} bewirkt den Rücksprung auf das vorherige Overlay.
+        Auf diese Art und Weise kann sich der Nutzer ausgehend von der Gesamtdarstellung
+        des menschlichen Skeletts in jeden möglichen Abschnitt bewegen.
+
+
+        \includepicture{15}{eps/bein.eps}{Grafische Darstellung eines Overlays des menschlichen Beines}{Grafische Darstellung eines Overlays des menschlichen Beines}{Overlay des menschlichen Beines}
+
+        \paragraph{Overlay-Editor}
+        Um dem System neue Overlays hinzufügen und alte anpassen zu können, existiert ein Editor als integrativer Bestandteil
+        des {\it Record}-Moduls. Dieser
+        ermöglicht es, Bearbeitungsoperationen auf den Overlays ausführen zu können. So können damit z. B. alte
+        Overlays gelöscht und neue hinzugefügt werden. Es ist durch ihn möglich, Overlay-Regionen zu erstellen und zu entfernen
+        sowie
+        die Reihenfolge zur Navigation zwischen den einzelnen Overlays festzulegen.\\
+        Dieses zusätzliche Werkzeug soll auch nach
+        Beendigung der Arbeit an diesem Prototypen eine zukünftige Anpassung des
+        {\it Record}-Modules an neue anatomische Bilder und die damit verbundenen Overlays ermöglichen.

@@ -1,0 +1,26 @@
+
+RUN
+
+
+- currently, only one small system is working as demonstration;
+it can be started, a graphical frame will be shown and can be shutdown again
+- to startup the system, open a console window
+- in that console window, type the following commands:
+
+cd /home/cybop
+./bin/startup_cyboi.sh startup cybol/res_medicinae/res_medicinae
+
+- when the system is started, one can see a frame with menu
+- when moving the mouse, those signals are caught and produce an output
+  in the console window
+- when clicking about 1 cm from the top and 1 cm from the left,
+  the system should shutdown (exit) properly
+  (the menu is a dummy; in reality, the mouse coordinates are read)
+
+- that is all, for now.
+- we could fastly produce more and nicer windows, if not depending
+  on the java swing toolkit anymore
+- perhaps you know and would like to work with us on new graphics
+  drawing operations which probably requires some knowledge of C, X, Gtk
+- see the "How to help" menu on our website: http://www.cybop.net
+

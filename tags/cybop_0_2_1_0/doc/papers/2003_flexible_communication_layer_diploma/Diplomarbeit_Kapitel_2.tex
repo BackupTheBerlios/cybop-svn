@@ -1,0 +1,332 @@
+\chapter{Muster in der Softwaretechnik}
+    \label{Muster in der Softwaretechnik}
+Schon in frühen Zeiten hat der Mensch erkannt, dass in unterschiedlichen Vorgängen und Gebilden
+gewisse Äquivalenzen in Strukturen und Vorgehensweisen existieren. Beispielsweise wird ein Haus
+immer nach dem selben Schema gebaut: Es beginnt mit einer Drainage, darüber ein solides Fundament
+auf dem die Wände fußen, welche wiederum das Dach tragen. Somit existiert nicht nur ein
+Vorgehensmodell, sondern auch ein grobes Schema, welche Teile auf welche Weise zusammengehören. Der
+Vorteil dieses Musters für den Hausbau ist, dass das Haus immer ein Haus wird und beliebig
+erweitert bzw. modifiziert werden kann und daher trotz eines einheitlichen Grundkonzepts sehr
+individueller Gestalt sein kann.
+
+Allgemein gültig formuliert ist ein Muster die Abstraktion einer konkreten Form, welche sich in
+spezifischen, unwillkürlichen Kontexten wiederholt. Es bietet meist eine Lösungsidee aber keine
+Fertiglösung.
+
+Die resultierenden Vorteile zu nutzen, ist auch in der Softwaretechnik erwünscht. Es ist
+prinzipiell simpler und günstiger, auf ein bewährtes Modell aufzubauen und dieses seinen
+Bedürfnissen anzupassen, als zu einem bestehenden Problem eine vollständig neue Entwicklung zu
+versuchen.\\
+''Muster werden nicht erfunden, Muster werden gefunden'' \cite{MusterInDerSoftwaretechnik}. Die
+Muster basieren auf jahrelangen Erfahrungen vieler professioneller Softwareentwickler. Täglich
+stehen neue Anforderungen und werden neue Erfahrungen gemacht, so dass man nicht davon ausgehen
+darf, dass bereits für jedes Problem das perfekte Muster existiert. Ganz im Gegenteil. Man geht
+davon aus, dass bisher erst ein sehr kleiner Teil möglicher Muster erkannt wurde. Es ist nicht
+sinnvoll die Lösung eines Problems in ein oder mehrere Muster zu pressen, wenn sich der damit
+verbundene Aufwand ungerechtfertigt erhöht. Vielmehr sollen Muster genau das Gegenteil bewirken,
+die Wiederverwendbarkeit, \mbox{Portabilität}, Flexibilität, Verständlichkeit, Modularität erhöhen
+und Software damit robuster gegenüber Änderungen und Erweiterungen machen \cite{ch:entwurfsmuster}.\\
+Oftmals sind einzelne Muster in der Softwaretechnik nur wenig sinnvoll, aber im Verbund mit anderen
+Ausgewählten, erfüllen sie die eben angeführten Ziele.
+
+\section{Untergliederung von Mustern}
+    \label{Untergliederung von Mustern}
+Inzwischen gibt es eine Vielzahl an unterschiedlichen Mustern in den verschiedensten Bereichen der
+Softwaretechnik. Daher hat man gewisse Strukturierungen eingeführt, um sie ihrem Einsatzgebiet
+entsprechend zu sortieren und einen besseren Überblick zu erhalten.
+\begin{figure}[h]
+    \begin{center}
+       \includegraphics[scale=1.0]{Bilder/Muster_Einteilung.eps}
+       \caption{Einteilung der Muster}
+       \label{fig:Einteilung der Muster}
+    \end{center}
+\end{figure}
+
+%\begin{itemize}
+%\item{Software-Muster}
+%\begin{itemize}
+%\item{Architektur-Muster}
+%\item{Entwurfs-Muster}
+%\item{Idiome}
+%\end{itemize}
+%\item{Prozess-Muster}
+%\begin{itemize}
+%\item{Software-Entwicklung}
+%\item{Projektmanagement}
+%\item{Gesamtsystem- und Betriebsebene}
+%\end{itemize}
+%\end{itemize}
+Wie zu erkennen ist, gibt es in der Softwaretechnik eine grobe Untergliederung in Muster, die zum
+einen die praktische Realisierung von Softwaresystemen und zum anderen gesamte Prozesse auf jeweils
+unterschiedlichen Abstraktionsebenen betreffen. Da der Schwerpunkt der Diplomarbeit auf der ersten
+Gruppe liegt, wird im Folgenden hauptsächlich auf die Kategorien der Software-Muster
+\cite{ch:patternarchitektur} und nur kurz auf Prozess-Muster \cite{MusterInDerSoftwaretechnik}
+eingegangen.
+
+\subsection{Prozess-Muster}
+Ein Prozess-Muster befasst sich mit den Aktivitäten
+der Softwareentwicklung und deren Reihenfolge. Es beinhaltet Wissen über
+Organisation und Abläufe, die für die \mbox{Software}entwicklung wesentlich
+sind.\\
+Durch die Schnelllebigkeit von Technologien und Systemen ist die Interoperabilität zwischen
+Plattformen und Systemen ein wesentlicher Punkt, um überhaupt \mbox{funktions}fähige, erneuerbare
+Systeme zu erhalten. Daher hat die Object Management Group (OMG) einen Standard definiert, auf dem
+Systeme und Produkte aufbauen können, um somit eine Basis für eine funktionierende Interoperation
+zu legen. Dieser Standard nennt sich \emph{technology adoption process} \cite{OMG}.
+
+\subsection{Software-Muster}
+\subsubsection{Architekturmuster}
+Hierbei handelt es sich um Muster, die das gesamte \mbox{Software}system betreffen. Es werden
+Möglichkeiten beschrieben, die eine grundsätzliche Strukturierung umfassen, d.h. die Unterteilung
+in Subsysteme und das Festlegen von Schnittstellen zwischen diesen. Ein Beispiel für ein
+Architekturmuster ist \emph{Layers}. Damit lassen sich in Teilaufgaben zerlegbare Anwendungen auf
+verschiedene Ebenen strukturieren. Die Teilaufgaben werden zu Gruppen der selben Ebene
+zusammengefasst, z.B. das ISO-OSI-Schichtenmodell oder die in Abschnitt \ref{Kunden, Dienstleister
+und Schichtenmodelle} beschriebenen N-Tier-Schichtenmodelle.
+
+\subsubsection{Entwurfsmuster (Design Pattern)}
+Auf der nächst niedrigeren Abstraktionsebene greifen die Entwurfsmuster. Mit ihrer Hilfe können die
+Subsysteme, einzelne Komponenten oder Beziehungen zwischen diesen Komponenten strukturiert werden.
+Es existieren drei unterschiedliche Arten von Design Pattern \cite{ch:entwurfsmuster}:
+\begin{itemize}
+\item \bf Strukturmuster \rm \\
+Diese Kategorie der Entwurfsmuster beschreibt mögliche Kompositionen von Objekten und Klassen, um
+größere Strukturen zu bilden, die dennoch die zu Anfang des Kapitels angeführten Ziele von Mustern,
+wie Wiederverwendbarkeit und Erweiterbarkeit, gewährleisten.
+\item \bf Erzeugungsmuster \rm \\
+Sie dienen der Generierung von Objekten und zum Verstehen des Erzeugungsprozesses. Damit sollen
+komplette Softwaresysteme gebildet werden, die möglichst unabhängig von der Erzeugung,
+Zusammensetzung und Repräsentation ihrer Objekte sind.
+\item \bf Verhaltensmuster \rm \\
+Eine letzte Gruppe der Entwurfsmuster befasst sich mit Algorithmen und der Zuweisung von
+Zuständigkeiten zu Objekten. Sie beschreiben nicht nur Muster von Objekten und Klassen, sondern
+auch Interaktionen zwischen diesen und damit komplexe Kontrollflüsse, die zur Laufzeit nur schwer
+nachvollziehbar sind. Das heißt also, Verhaltensmuster beschreiben, wie Objekte untereinander
+interagieren.
+\end{itemize}
+Später werden in diesem Kapitel einige konkrete Beispiele zu diesen Mustertypen erläutert, die bei
+der Lösung der gestellten Aufgaben für diese Diplomarbeit zum Einsatz kommen.
+
+\subsubsection{Idiome}
+Sowohl Architekturmuster als auch Entwurfsmuster sind unabhängig von der ver\mbox{wendeten}
+Programmiersprache und dem zugrunde liegenden Programmierparadigma. Das ist bei Idiomen nicht der
+Fall. Sie stellen die unterste Ebene der Abstraktion dar und beziehen sich auf Problemlösungen für
+konkrete Programmiersprachen in Bezug auf Entwurf und Implementierung. Beispielsweise ist die
+Verwendung von Templates in C++ ein gern benutztes Verfahren, in Java jedoch nicht möglich.
+
+\par
+Gleichgültig ob bei der Analyse, dem Entwurf oder einzelnen Prozessen, können je nach Erfahrung des
+Entwicklers in jedem Bereich gute und schlechte Lösungen produziert werden. Eine Möglichkeit,
+weniger gute Lösungen zu verbessern oder alte Systeme zu erweitern, bieten die \emph{Anti Pattern}.
+Mit ihrer Hilfe lassen sich Muster in schlechten Lösungen finden. Diese geben Vorschläge und
+Methoden zur Verbesserung des Bestehenden. Man spricht dann auch von so genannten
+\emph{Amelioration Pattern}, den Verbesserungsmustern \cite{PatternsForBeginners}.
+
+\section {Einige ausgewählte Muster im Detail}
+    \label{Einige ausgewaehlte Muster im Detail}
+Die hier im folgenden aufgeführten Muster kommen in den für die Diplomarbeit zu entwickelnden
+Modellen und Lösungen zum Einsatz. Mit Ausnahme des MVCs handelt es sich dabei um einige
+ausgewählte Muster für \emph{\mbox{Enterprise Application Architectures}} \cite{enterprisepattern}.
+Wie in einem späteren Kapitel beschrieben, werden sie jedoch nicht in reiner Form übernommen,
+sondern den Anforderungen entsprechend angepasst.
+
+\subsection {Model View Controller - MVC}
+    \label{Der Model View Controller}
+Das wohl bekannteste Architekturmuster ist Model View Controller. Es dient zur Strukturierung der
+Präsentation interaktiver Softwaresysteme.\\
+Hierbei werden die unterschiedlichen Bereiche, bestehend aus Darstellung, Datenhaltung und
+Verwaltungsoperationen aus einem einzelnen Objekt entkoppelt und auf mehrere Objekte verteilt, um
+damit die Flexibilität und Wiederverwendbarkeit zu erhöhen. Es können durchaus mehrere View-Objekte
+existieren, die auf das selbe Model-Objekt zugreifen, aber unterschiedliche Darstellungsformen
+besitzen, beipielsweise Präsentation der Daten jeweils als Balken-, Kreis- oder Liniendiagramm.
+Allerdings müssen die View-Objekte sicherstellen, dass sie immer dem aktuellen Model-Zustand
+entsprechen. Um dies zu gewährleisten, kommt ein spezielles Entwurfsmuster zum Einsatz, das
+\emph{Observer}- oder Beobachtermuster. Es bewirkt, dass bei einer Veränderung des Models sämtliche
+angemeldeten View-Objekte informiert werden, worauf sich diese selbständig aktualisieren.\\
+Für die Umsetzung ergibt sich damit folgende Struktur:
+
+\begin{itemize}
+
+\item{Das Model-Objekt}: ist das Anwendungsobjekt. Es kapselt sämtliche Daten und enthält die
+Kernfunktionen.
+
+\item{Das View-Objekt}: stellt die Bildschirmpräsentation der Daten dar.
+
+\item{Das Controller-Objekt}: bestimmt die Möglichkeiten, wie
+Benutzungsschnittstellen auf Benutzereingaben reagieren.
+
+\item{Das Beobachter-Objekt}: ist ein zusätzlicher Bestandteil des MVC, der die Wahrung
+der Konsistenz zwischen Model und View gewährleistet.  Seine Nutzung wird im klassischen MVC
+empfohlen.
+
+\end{itemize}
+
+\label{Composite Pattern} Auch das \emph{Composite Pattern}, ein weiteres Entwurfsmuster, kann beim
+MVC zum Einsatz kommen. Es beschreibt, wie Objekte zusammengefasst und als eine Einheit behandelt
+werden können. So kann ein View-Objekt aus Unter-Views bestehen, die einzeln besser zu verwalten
+sind. Die damit entstehende Hierarchie kann bis zu primitiven Objekten wie Buchstaben
+heruntergebrochen werden.\\
+Ein vergleichbarer Ansatz dazu ist das HMVC \cite{enterprisepattern} (\emph{Hierarchical Model View
+Controller}). Hierbei wird, wie die Bezeichnung bereits vermuten lässt, eine Hierarchie einzelner
+Komponenten erzeugt, die jeweils über Model, Controller und View verfügen. Nur der Controller der
+darüber liegenden Ebene kennt die Controller der nächst niedrigeren Stufe. Die Beziehungen auf
+einer Ebene sind identisch zum MVC.\\
+Ein weiteres, jedoch nicht das letzte beim MVC anwendbare Muster soll kurz Erwähnung finden: das
+Strategy-Pattern. Die Art und Weise, wie der Controller auf bestimmte Nutzereingaben reagiert, soll
+nach Möglichkeit und entsprechend dem Einsatzgebiet austauschbar sein. Dafür werden seine
+Antwortalgorithmen in einem zusätzlichen, leicht ersetzbaren Objekt gekapselt, an welches der
+Controller die Anfragen delegiert. Die Delegation selber entspricht wiederum einem Strukturmuster.
+
+Das Model View Controller -Muster verdeutlicht noch einmal die in Abschnitt \ref{Untergliederung
+von Mustern} angeführte Einteilung in Abstraktionsebenen. Während das MVC ein Architekturmuster
+ist, verwendet es für die einzelnen Software-Subsysteme diverse Entwurfsmuster.
+
+\subsection {Layer Supertype}
+    \label{Layer Supertype}
+Eines der wohl bekanntesten und am häufigsten verwendeten Entwurfsmuster ist \emph{Layer
+Supertype}. Dabei wird für alle Klassen einer Ebene, die verwandten Typs sind, eine gemeinsame
+Superklasse entwickelt, die die gemeinsamen Attribute und Methoden in sich vereinigt. Damit wird
+das wiederholte Schreiben des selben Quellcodes in unterschiedlichen Klassen verhindert. Alle
+Subklassen erben damit die Eigenschaften des Supertyps.
+\begin{figure}[h]
+    \begin{center}
+       \includegraphics[scale=1.0]{Bilder/DynamischesBinden.eps}
+       \caption{Java-Code-Beispiel zu dynamischem Binden}
+       \label{fig:DynamischesBinden}
+    \end{center}
+\end{figure}
+Ein weiter Vorteil der sich daraus ergibt, ist das dynamische Binden. Im Gegensatz zum statischen
+Binden, bei dem der Typ einer Variablen bereits zur Übersetzungszeit feststeht, wird beim
+dynamischen oder auch späten Binden erst zur Laufzeit entschieden, welche konkrete Realisierung
+einer vom Supertyp geerbten Klasse als Datentyp zum Einsatz kommt. Ein Beispiel dazu zeigt
+Abbildung \ref{fig:DynamischesBinden}.
+
+\subsection {Domain Model}
+    \label{Domain Model}
+Es existiert bereits eine Vielzahl an Vorschlägen, wie man komplexe Geschäftsdaten mit Mustern
+strukturieren kann. Das hier beschriebene Domain Model \cite{enterprisepattern} ist einer von
+ihnen. Dabei wird ein Netz kommunizierender und unterschiedlich komplexer Objekte erzeugt. Sowohl
+Daten als auch Verarbeitungsalgorithmen bzw. ein eigenes Verhalten sind darin enthalten. Es gibt
+Objekte, die Daten enthalten und Objekte, die Logik implementieren. Weiterhin können auch Daten
+und Methoden zusammen in einem Objekt auftreten.\\
+Man kann ein Domain Model als eigenständige Schicht in einem Softwaresystem betrachten, die
+ebenfalls weitere Muster verwenden darf. So kommen häufig \emph{Layer Supertype} und das Strategiemuster
+zum Einsatz.\\
+Eine der wichtigsten Regeln für das Domain-Modell ist seine prinzipielle Unabhängigkeit von den
+externen Schnittstellen, so dass eine Veränderung eines der beiden keine Anpassung des anderen erzwingt.\\
+Liegt dem Softwaresystem eine Datenbank zugrunde und ist das Domain Model hinreichend komplex,
+kombiniert man es häufig mit einem \emph{Data Mapper}.
+
+\subsection {Data Mapper}
+    \label{Data Mapper}
+Sollen Datenbankschema und Objekt-Modell unabhängig voneinander entwickelt werden, so kommt der
+Data Mapper \cite{enterprisepattern} zum Einsatz. Er stellt eine, für den Anwender transparente
+Zwischenschicht dar, die sämtliche Daten von den Domain-Objekten in die Datenbank oder ein anderes
+Repository transferiert und auch wieder herausliest.\\
+Zum Strukturieren der jeweiligen Daten verfügen Objekte und relationale Datenbanken über völlig
+unterschiedliche Mechanismen und Datentypen. Daher benötigt man zusätzliche Operationen, die eine
+Möglichkeit des Datenaustausches bieten und somit als Vermittler zwischen diesen beiden Schichten
+arbeiten.\\
+Der enorme Vorteil des Data Mappers ergibt sich daraus, dass die Datenbank beim Arbeiten mit dem
+Domain-Modell vernachlässigt werden kann. Allerdings ist die zusätzliche Schicht mit einem
+erheblichen Mehraufwand an Implementierungsarbeit verbunden.\\
+Die Implementierung der SQL-Statements, das sind unter anderem die Finder-Methoden, sollte nicht in
+der Mapping-Schicht erfolgen, da sonst die Unabhängigkeit des Domain-Modells vom Mapper nicht mehr
+bestehen würde. Daher empfiehlt es sich, diese Methoden in einem separaten Package zu halten. Eine
+andere Möglichkeit ist die Definition von Finder-Schnittstellen im Domain-Modell, die von der
+Mappingschicht implementiert werden.\\
+
+\begin{figure}[ht]
+    \begin{center}
+       \includegraphics[scale=1.0]{Bilder/DataMapper.eps}
+       \caption{Abhängigkeiten der drei Schichten}
+       \label{fig:DataMapper}
+    \end{center}
+\end{figure}
+
+Abbildung \ref{fig:DataMapper} zeigt die Abhängigkeiten der drei Schichten. Der Mapper ist abhängig
+von der Datenbank und vom Domain-Modell. In entgegengesetzte Richtung gilt das nicht. Die
+Domain-Objekte kennen ihre zugehörigen Finder-Schnittstellen. Damit ist es ihnen beispielsweise
+möglich, ein eigenständiges Update bzw. Laden von Informationen aus der Datenbank zu initiieren.
+Die Implementation der entsprechenden Schnittstelle gehört zur Mappingschicht. Von dort werden die
+aktuellen Daten an die Domain-Objekte übergeben.
+
+\subsection {Remote Facade}
+    \label{Remote Facade}
+Während es sich anbietet beim objektorientierten Paradigma viele kleine feingranulare Objekte mit
+kurzen Methoden zu verwenden, führt dieses Modell bei Interprozesskommunikation zu einer weniger
+günstigen Performance. Bei lokalen Prozessen muss lediglich zwischen den Adressräumen gewechselt
+werden, was sich daher nicht ganz so stark in den Laufzeiten niederschlägt. Hingegen sind ferne
+Aufrufe erheblich langsamer. Daher empfiehlt es sich, zusammengehörige Daten gruppiert zu
+versenden, um die Anzahl der gegenseitigen Zugriffe von Client und Server zu verringern und damit
+die Prozessabarbeitung zu beschleunigen. Diese Aufgabe erfüllt die Remote Facade
+\cite{enterprisepattern}. Auf die feingranularen Objekte wird über eine grobgranulare Schnittstelle
+zugegriffen, deren Implementierung sich die notwendigen Daten zusammensucht. Weder verfügen die
+feingranularen Objekte über eine Remote-Schnittstelle, noch enthält die Remote Facade Teile der
+Domain-Logik. Damit besteht eine saubere Trennung zwischen Aufrufen von außerhalb des Prozesses und
+der internen Verarbeitung der Daten.\\
+Unter Anwendung dieses Musters können beispielsweise Informationen wie Adresse, Kontodaten,
+Dimensionen eines Gegenstandes usw. die sich alle aus mehreren Attributen zusammensetzen, jeweils
+durch einen einzigen fernen Aufruf der entsprechenden Server-Methode - auch als \emph{Remote Call}
+bezeichnet - übermittelt werden.\\
+Nachteil dieses Verfahrens ist der größere Implementierungsaufwand.\\
+Häufig werden die Daten in so genannten \emph{Data Transfer Object}s zusammengefaßt. Dieses Muster
+beschreibt der folgende Abschnitt.
+
+\subsection {Data Transfer Object (DTO)}
+    \label{Data Transfer Object}
+Oftmals muss beim Versenden von Daten über ein Netzwerk mit einem einzigen Transfer eine Vielzahl
+an Parametern übertragen werden. Bei Java dürfen Methoden aber maximal nur einen Rückgabewert
+haben. Daher wäre für jede Information ein eigener Aufruf notwendig, was sich wiederum zu Lasten
+der Performance auswirkt. Die Lösung bringt das Data Transfer Object \cite{enterprisepattern}. Es
+ist ein Objekt, das alle Informationen kapselt. Damit muss nur ein Parameter versendet werden.\\
+Auch wenn der Client nicht immer alle Daten, die das Data Transfer Object enthält, benötigt, so
+werden sie dennoch gesendet. Wie bereits im vorigen Abschnitt erläutert wurde, ist es aus Sicht der
+Performance jedoch günstiger, mehr Daten in einem Aufruf zu übermitteln, als viele kleine Sendungen
+durchzuführen.\\
+Nicht nur für den Transport von Daten über ein Netzwerk sind DTO's sinnvoll. Bei jeder
+Interprozesskommunikation können sie sich positiv auf den Datenverkehr und damit
+die Bearbeitungsgeschwindigkeit auswirken.\\
+Eine Antwort auf die Frage, wieviele DTO's verwendet werden sollen, ist nicht leicht zu geben. Das
+hängt davon ab, wofür sie verwendet werden. Gewöhnlich orientiert sich die Struktur an den
+Bedürfnissen des Clients. Ein einzelnes \emph{Data Transfer Object} ist leichter zu implementieren,
+während man bei spezialisierten DTO's einfacher erkennen kann, welche Daten zu welchem Aufruf
+versendet werden. Für sehr unterschiedliche Aufrufe sollten auch unterschiedliche DTO's verwendet
+werden, damit die Redundanz der gesendeten Daten hinreichend gering gehalten wird.\\
+Mittels \myglossary{Serialisierung}{Durch Serialisierung existiert eine Möglichkeit, ein Objekt,
+das sich im Hauptspeicher der Anwendung befindet, als Byte-Strom in eine Datei zu schreiben oder
+über eine Netzwerkverbindung zu transportieren. Das schließt natürlich auch den umgekehrten Weg mit
+ein, also das Rekonstruieren eines Objekts in das interne Format der laufenden Java-Maschine.
+Diesen umgekehrten Vorgang nennt man Deserialisierung.} werden die Daten in einem binären Format
+zurück zum Client übertragen. Hierbei können allerdings Probleme bei der Synchronisation von
+Client- und Server-Objekt auftreten. Wird die DTO-Struktur auf Serverseite modifiziert, so kann es
+passieren, dass der Client aufgrund nun bestehender Typdifferenzen das Objekt nicht deserialisieren
+kann und somit alle gesendeten Informationen verloren gehen. Selbst eine recht einfache Änderung
+des DTO, wie das Hinzufügen eines optionalen Feldes, ruft diesen Effekt hervor. Daher kommt man zur
+Überlegung, ob nicht andere Möglichkeiten der Serialisierung existieren, welche die Klassen
+toleranter gegenüber derartigen Änderungen machen. Der textbasierte Ansatz liefert eine Lösung.
+Mittels der \emph{Extensible Markup Language} (oder kurz: XML) können Daten recht einfach in
+textueller Form hinterlegt werden. Die populärsten Programmiersprachen, unter anderen auch Java,
+bieten bereits ausgereifte Algorithmen zur Verarbeitung dieses international anerkannten Standards
+an. Ein wesentlicher Nachteil ist die höhere Bandbreite, die im Gegensatz zur binären Form benötigt
+wird.
+
+\subsubsection{Zusammensetzung eines DTO aus dem Domain-Modell}
+Die in dem \emph{Data Transfer Object} gehaltenen Daten werden aus allen Server-Objekten
+zusammengesucht, von denen das Remote-Objekt und damit der Client, Informationen anfordert.\\
+\emph{Data Transfer Object} und Domain-Objekte dürfen nicht unmittelbar voneinander abhängen. Die
+Änderung eines der beiden soll nicht unbedingt auch eine Modifikation des anderen erzwingen. Daher
+verwendet man zusätzlich ein Assembler-Objekt, dass zum einen aus den Domain-Objekten das DTO
+zusammensetzt und zum anderen am anderen Ende des Kabels das erhaltene Data Transfer Object wieder
+zerlegt und die entsprechenden Daten an die Domain-Objekte übergibt.\\
+Die Attribute eines DTO können entweder einfache Objekte oder andere DTOs darstellen, so dass im
+Gegensatz zu der meist sehr aufwändigen Struktur des Domain-Modells eine recht simple hierarchische
+Struktur entsteht.
+
+\begin{figure}[ht]
+    \begin{center}
+       \includegraphics[scale=1.0]{Bilder/DataTransferObject.eps}
+       \caption{Beziehungen zwischen DTO, Assembler und Domain-Objekt}
+       \label{fig:DataTransferObject}
+    \end{center}
+\end{figure}

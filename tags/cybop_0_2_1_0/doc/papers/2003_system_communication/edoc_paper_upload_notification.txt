@@ -1,0 +1,49 @@
+From edoc-pc-chairs@dstc.edu.au Thu Feb 27 19:49:50 2003
+Return-Path: <www@obsolete.dstc.edu.au>
+Received: from virusgate.rz.tu-ilmenau.de (virusgate.rz.tu-ilmenau.de [141.24.4.19])
+	by ernie.rz.tu-ilmenau.de (8.9.3/8.9.3) with ESMTP id TAA10991
+	Thu, 27 Feb 2003 19:50:40 +0100 (MET)
+Received: from piggy.rz.tu-ilmenau.de (localhost [127.0.0.1])
+	by virusgate.rz.tu-ilmenau.de (8.11.2/8.11.2) with ESMTP id h1RIoWR28716
+	Thu, 27 Feb 2003 19:50:32 +0100 (MET)
+Received: from piglet.dstc.edu.au (piglet.dstc.edu.au [130.102.176.1])
+	by piggy.rz.tu-ilmenau.de (8.9.3/8.9.3) with ESMTP id TAA02326
+	; Thu, 27 Feb 2003 19:50:30 +0100 (MET)
+Received: from obsolete.dstc.edu.au (www.dstc.edu.au [130.102.181.60])
+	by piglet.dstc.edu.au (8.12.3/8.12.3) with ESMTP id h1RInu8b026009;
+	Fri, 28 Feb 2003 04:49:56 +1000 (EST)
+Received: (from www@localhost)
+	by obsolete.dstc.edu.au (8.9.3+Sun/8.8.8) id EAA12131;
+	Fri, 28 Feb 2003 04:49:50 +1000 (EST)
+Date: Fri, 28 Feb 2003 04:49:50 +1000 (EST)
+Message-Id: <200302271849.EAA12131@obsolete.dstc.edu.au>
+To: christian.heller@tu-ilmenau.de
+From: EDOC PC Chairs <edoc-pc-chairs@dstc.edu.au>
+Reply-To: EDOC PC Chairs <edoc-pc-chairs@dstc.edu.au>
+Cc: edoc-pc-chairs@dstc.edu.au
+Subject: EDOC 2003: Your paper is uploaded
+X-Spam-Checked: SPAMASSASSIN: This message probably not SPAM
+X-Spam-Score: -100, Required: 5
+X-Virus-Scanned: Message: ok
+X-Scanned-By: MIMEDefang 2.9 (www dot roaringpenguin dot com slash mimedefang)
+Status: R 
+X-Status: N
+
+Paper 6 is uploaded to the EDOC 2003 submission site.
+It is named 6-hrmenuianh.pdf.
+
+You will receive a confirmation email for your file within two workdays.
+
+If there are any further questions, please see our WWW page:
+http://edocconference.org/ 
+
+or contact us via email at: edoc-pc-chairs@dstc.edu.au
+
+
+
+Best regards,
+
+Maarten Steen & Barrett Bryant
+EDOC 2003 PC Chairs
+edoc-pc-chairs@dstc.edu.au
+

@@ -1,0 +1,188 @@
+From Nagib Callaos <sci2004@iiis.org>
+Return-Path: <sci2004@iiis.org>
+Received: from rudy.rz.tu-ilmenau.de (rudy.rz.tu-ilmenau.de [141.24.4.15])
+	by ernie.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id hBMJaFBx005081
+	for hidden; Mon, 22 Dec 2003 20:36:15 +0100 (MET)
+Received: from telly.rz.tu-ilmenau.de (localhost [127.0.0.1])
+	by rudy.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id hBMJUv7P020962
+	for <ai008@ernie.rz.tu-ilmenau.de>; Mon, 22 Dec 2003 20:30:57 +0100 (MET)
+Received: from localhost (localhost [127.0.0.1])
+	by telly.rz.tu-ilmenau.de (8.12.9/8.12.9/Debian-5) with ESMTP id hBMJVnn6031142
+	for <ai008@ernie.rz.tu-ilmenau.de>; Mon, 22 Dec 2003 20:31:49 +0100
+Received: from telly.rz.tu-ilmenau.de ([127.0.0.1])
+	by localhost (telly [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
+	id 30913-07 for <ai008@ernie.rz.tu-ilmenau.de>;
+	Mon, 22 Dec 2003 20:31:49 +0100 (CET)
+Received: from piggy.rz.tu-ilmenau.de (piggy.rz.tu-ilmenau.de [141.24.4.8])
+	by telly.rz.tu-ilmenau.de (8.12.9/8.12.9/Debian-5) with ESMTP id hBMJVlM5031137
+	for <ai008@ernie.rz.tu-ilmenau.de>; Mon, 22 Dec 2003 20:31:48 +0100
+Received: from callaosemail.iiisci.org ([206.48.79.70])
+	by piggy.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id hBMJaACb025767
+	for finalrecipients; Mon, 22 Dec 2003 20:36:11 +0100 (MET)
+Received: from callaos ([172.16.246.73]) by callaosemail.iiisci.org with Microsoft SMTPSVC(5.0.2195.6713);
+	 Mon, 22 Dec 2003 13:43:40 -0400
+Message-Id: <3.0.32.20031222110423.012ef178@iiis.org>
+X-Sender: sci2004@iiis.org (Unverified)
+X-Mailer: Windows Eudora Pro Version 3.0 (32)
+Date: Mon, 22 Dec 2003 13:43:33 -0400
+To: christian.heller@tu-ilmenau.de
+From: Nagib Callaos <sci2004@iiis.org>
+Subject: Inviting you to participate in SCI 2004
+Mime-Version: 1.0
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+X-OriginalArrivalTime: 22 Dec 2003 17:43:40.0437 (UTC) FILETIME=[22C25C50:01C3C8B3]
+
+Dear Dr. Christian  Heller:
+
+We are sorry to take a bit of your valuable time, however, we think it
+would be very important for you to be informed that we have extended both
+the paper submission and the acceptance notification deadlines for SCI
+2004. Consequently, we are sending you once again the invitation to
+participate in SCI 2004 and the respective Call for Papers, as follows.
+
+On behalf of the SCI 2004 Organizing Committee, I would like to invite you
+to participate in the Eighth World Multi-Conference on Systemics,
+Cybernetics and Informatics, which will be held in Orlando, Florida, USA,
+from July 18-21, 2004.
+
+Therefore, I am sending you the respective Call for Papers. The best 10% of
+the papers will be published in SCI Journal
+(http://www.iiisci.org/Journal/SCI/Home.asp), the hard copy version of
+which will be ready in about one month, and it will be sent to the largest
+university libraries.
+
+We are making emphasis on the area of applications of informatics on
+science and engineering , mainly Applications in Biology and Medicine which
+is related to your specific area.
+
+I would also like you to consider the possibility of organizing an invited
+session related to a topic of your research interest. Organizers of the
+best invited sessions will be co-editors of the proceedings volume where
+their sessions' papers were included and of the CD electronic proceedings.
+They will also be candidate for invited editors, or co-editors of a
+possible SCI journal issue related to their invited session papers.
+
+You can find information about the suggested steps to organize an invited
+session in the Call for Papers and in the conference web page
+http://www.iiisci.org/sci2004/ or http://www.iiis.org/sci2004.
+
+If by any reasons you are not able to access the page mentioned above,
+please, try the following pages: http://www.iiisci.org/sci2004/ or
+http://www.iiis.org/sci2004.
+
+If you are interested in organizing an invited session, please, fill the
+respective form provided in the conference web page, and we will send you a
+password, so you can include and modify papers in your invited session.
+
+Could you, please, deliver the Call for Papers I am sending you?
+
+If you need a detailed Call for Papers, don't hesitate in asking us for it.
+
+If the deadlines are tight and you need more time, let me know about a
+suitable time and I will inform you if it is feasible for us.
+
+Best regards,
+
+Professor Nagib Callaos
+SCI 2004 General Chair
+
+                                            CALL FOR PAPERS
+
+
+The 8th World Multi-Conference on
+SYSTEMICS , CYBERNETICS And INFORMATICS
+SCI 2004
+http://www.iiisci.org/sci2004, http://www.iiis.org/sci2004/
+
+July 18 - 21, 2004, Orlando, Florida(USA)
+The Rosen Plaza Hotel, http://www.rosenplaza.com/frames1.html
+
+
+Program Committee Chair: William Lesso
+General Chair: Nagib Callaos
+Organizing Committee Chair: Belkis Sanchez
+PROGRAM COMMITTEE: Integrated by (320) prestigious scholars/researchers
+from 54 countries:
+
+MAJOR THEMES
+* Information Systems, Technologies and Applications
+* Communication and Network Systems, Technologies and Applications
+* Control Systems, Technologies and Applications
+* Computer Science and Engineering
+* Optical Systems, Technologies and Applications
+* Image, Acoustic, Speech and Signal Processing
+* Applications of Informatics and Cybernetics in Science and Engineering
+* Systemics
+
+
+PARTICIPANTS
+Participation of both, researchers and practitioners is strongly
+encouraged. Papers may be submitted on: research in science and
+engineering, case studies drawn on professional practice and consulting,
+and position papers based on large and rich experience gained through
+executive/managerial practices and decision-making. For this reason, the
+Program Committee is conformed according to the criteria given above.
+
+
+EXTENDED ABSTRACTS AND PAPER DRAFTS SUBMISSION FORM
+Extended abstracts or paper drafts should be sent taking into account the
+following Format:
+
+1.  Major theme of the paper should be related to at least one of the major
+themes given above.
+2.  Paper title.
+3.  Extended abstract of 500 to 1500 words and/or paper drafts of 2000 to
+5000 words, in English.
+4.  Author(s) and/or co-author(s) with names, addresses, telephone and fax
+numbers, and e-mail addresses.
+
+Extended abstracts or paper drafts should be sent via the conference web
+site (http://www.iiisci.org/sci2004/), filling the respective form and
+uploading the respective paper or extended abstract. If the conference web
+site is not accessible for you, you can also make your submission by
+e-mail, attaching it to the following e-mail addresses:
+sci2004@telcel.net.ve, sci2004@cantv.net and sci2004@iiis.org
+
+DEADLINES
+=B7   January 21st, 2004: Submission of extended abstracts (500-1500 words)
+or paper drafts (2000-5000 words).
+=B7   January 21st, 2004: Invited Sessions proposals. Acceptation of invited
+session proposals will be done in about one week of its registration via
+the respective conference web form, and final approval will be done after
+the registration of at least five papers in the respective session.
+=B7   February 22nd, 2004: Acceptance notifications.
+=B7   March 31st, 2004: Submission of camera-ready papers: hard copies and
+electronic versions.
+
+
+PAPERS REVIEWING AND PUBLICATION
+
+Submitted papers will be sent to reviewers. Accepted papers, which should
+not exceed six single-spaced typed pages, will be published by means of
+paper and electronic proceedings.
+
+SCI Journal will publish, at least, the best 10% of the papers presented at
+the conference.
+
+INVITED SESSIONS
+Based on past conferences experience, we suggest the following steps in
+order to organize an invited session:
+
+1)  Identify a special topic in the scope of SCI 2004, and the invited
+session title.
+2)  Fill the invited session organization form, provided in the conference
+web page http://www.iiisci.org/sci2004/, and fill the respective form. If
+by any reasons you are not able to access the page mentioned above, please,
+try the following page: http://www.iiis.org/sci2004/.  If you don't have
+access to the web, contact us via e-mail.
+
+Invited sessions and symposia organizers with the best performance will be
+co-editors of the proceedings volume where their session or symposia paper
+were included.
+
+Best Invited sessions and symposia organizers are candidates for invited
+editors or co-editors of the SCI Journal special issue related to their
+field of research interest.
+
+

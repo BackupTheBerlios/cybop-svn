@@ -1,0 +1,86 @@
+ %
+ % $RCSfile: einleitung.tex,v $
+ %
+ % Copyright (c) 1999-2002. Jens Bohl. All rights reserved.
+ %
+ % This software is published under the GPL GNU General Public License.
+ % This program is free software; you can redistribute it and/or
+ % modify it under the terms of the GNU General Public License
+ % as published by the Free Software Foundation; either version 2
+ % of the License, or (at your option) any later version.
+ %
+ % This program is distributed in the hope that it will be useful,
+ % but WITHOUT ANY WARRANTY; without even the implied warranty of
+ % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ % GNU General Public License for more details.
+ %
+ % You should have received a copy of the GNU General Public License
+ % along with this program; if not, write to the Free Software
+ % Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ %
+ % http://www.resmedicinae.org
+ % - Information in Medicine -
+
+ %The introduction.
+
+\chapter{Einleitung}
+Dieses kurze Kapitel soll dazu dienen, die Motivation der vorliegenden Diplomarbeit darzulegen und das Ziel der
+theoretischen Ausarbeitung und der damit verbundenen praktischen Umsetzung zu beschreiben.
+\section{Motivation}
+Nach DIN 9126 ist {\bf Softwarequalität} ''{\it ...die Gesamtheit der Merkmale und Merkmalswerte eines
+Softwareprodukts, die sich auf dessen
+Eignung beziehen, festgelegte oder vorausgesetzte Erfordernisse zu erfüllen.}''\\
+Welche sind aber solche Merkmale?\\
+Im Bereich von Softwarearchitektur und -entwurf spricht man in diesem Zusammenhang von Kriterien wie {\it Korrektheit},
+{\it Robustheit}, {\it Erweiterbarkeit} und  {\it Wiederverwendbarkeit} -- um nur die wesentlichsten zu nennen. Solche
+Eigenschaften sind vor allem für den Entwickler interessant und definieren die ''innere'' Qualität von Software.  Diese
+wird also von programmiertechnischen Aspekten bestimmt und setzt eine stete Weiterentwicklung von Methodik und
+Technologie vorraus. Korrektheit und Robustheit sind dabei sicher die wichtigsten und gleichzeitig ältesten
+Anforderungen an die Qualität von Anwendungen. \\
+Doch gerade von der Einführung der objektorientierten Programmierung versprach man sich die Gewährleistung der beiden
+anderen Merkmale: eine hohe Erweiterbarkeit und Wiederverwendbarkeit von Software. Dass diese ehrgeizigen Ziele durch
+die alleinige Einführung eines weiteren Programmierparadigmas nicht erreicht wurden, ist heute bekannt. Gegenstand
+aktueller wie auch zukünftiger Arbeiten wird also der Versuch sein, die Schwächen der objektorientierten Programmierung
+zu überwinden.\\
+In diesem Zusammenhang sind Entwurfs- und Architekturmuster sowie Frameworks
+ zu betrachten, die in gewisser Weise den heutigen Stand der theoretischen, aber auch technologischen
+  Entwicklung in diesem Bereich repräsentieren.\\
+Hierauf aufbauend stellt die Komponentenbasierte Softwareentwicklung einen weiteren Schritt in diese Richtung dar: Der
+Komponenten-Lebenszyklus, {\it Cybernetic Oriented Programming} \cite{cybop} und die darin vorhandenen
+Software-Ontologien sind
+domänenunspezifische, portierbare und intuitive Konzepte, deren Darlegung Aufgabe dieser Diplomarbeit ist.\\
+Neben der Verwirklichung innerer Softwarequalität ist die optimale Erfüllung ''äußerer'' Qualitätsmerkmale eine zweite
+Herausforderung. In diesem Zusammenhang ist {\it Benutzbarkeit} von Software anzuführen. Benutzbarkeit bedeutet zum
+Einen, wie einfach das Programm zu bedienen ist, und zum Anderen, wie schnell seine Funktionalität erfasst und erlernt
+werden kann. Der Begriff der {\it Ergonomie} prägt dabei den Entwurf von Software und ist maßgebend für das Erreichen
+der äußeren Qualitätsmerkmale.\\
+Diese können aber auch nur dann verwirklicht werden, wenn das zugrundeliegende Datenmodell, mit dem über eine grafische
+Oberfläche interagiert werden soll, eine für das jeweilige Problem optimale Struktur aufweist. Konventionelle
+Dokumentationsformen -- bereitgestellt durch heutige Praxis-Software -- weisen diesbezüglich Mängel auf. In dem zu
+dieser Diplomarbeit gehörenden Prototypen wurden neue medizinische Dokumentationsmodelle umgesetzt, die diese
+Schwachstellen
+beheben, und dadurch ebenfalls einen Beitrag zur Verbesserung der Qualität dieser Software leisten sollen. \\
+Zunächst einige Worte zum Rahmenprojekt der praktischen Arbeit, das im Laufe des Dokuments immer wieder Erwähnung
+findet.
+    \section{Res Medicinae}
+        Der Kerngedanke bzw. die Intention des Projektes {\it Res Medicinae} besteht darin, ein stabiles, erweiterbares und
+        plattformunabhängiges, klinisches Informationssystem auf der Basis von Open Source
+        zu entwickeln.
+        {\it Res Medicinae} ist also völlig frei erhältlich. Der implementierte Code unterliegt der {\it General Public License} (GPL) und
+        darf somit unter Angabe des Autors weiterverwendet werden.\\
+        {\it Res Medicinae} hat sich zum Ziel gesetzt, der Kommerzialisierung heutiger Softwaresysteme sowie der damit verbundenen
+        Abhängigkeit von einem bestimmten Hersteller entgegenzuwirken. Das Projekt-Team setzt sich bisher fast
+        ausschließlich aus engagierten Studenten der Technischen Universität Ilmenau zusammen, ist aber offen für
+        internationale Beteiligung. Unterstützt wird
+        das Team dabei durch den kompetenten Rat zahlreicher Mediziner, die in den Mailinglisten
+        Fragen beantworten und über fachliche Probleme bei der Entstehung der Software mitdiskutieren.
+
+        \includepicture{12}{eps/ResMedicinae.eps}{Module von Res Medicinae}{Module von Res Medicinae}{Module von Res Medicinae}
+
+        {\it Res Medicinae} steht am Anfang seiner Entwicklung. Während der Implementation des Prototypen war die Struktur
+        des zugrundeliegenden Frameworks ständigen Anpassungen unterworfen. Die in jener Zeit entwickelten
+        Module\footnote{Der Leser wird an dieser Stelle um etwas Geduld gebeten -- eine genauere Erläuterung der Module
+        ({\it Record}, {\it ReForm})
+        und der in ihnen implementierten Funktionalität folgt in Kapitel sechs.}
+        gehören zu den ersten Softwarekomponenten dieses Systems und stellen entsprechend den Eigenschaften einer
+        prototypischen Implementierung auch nur rudimentäre Funktionalität bereit (siehe Abb. \ref{Module von Res Medicinae}).

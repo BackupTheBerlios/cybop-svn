@@ -1,0 +1,86 @@
+From informationsci2004@iiis.org Wed Mar 24 10:13:51 2004
+Return-Path: <informationsci2004@iiis.org>
+Received: from rudy.rz.tu-ilmenau.de (rudy.rz.tu-ilmenau.de [141.24.4.15])
+	by ernie.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id i2O9B1n9009793
+	for hidden; Wed, 24 Mar 2004 10:11:01 +0100 (MET)
+Received: from elmo.rz.tu-ilmenau.de (localhost [127.0.0.1])
+	by rudy.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id i2O95D7P005259
+	for <ai008@ernie.rz.tu-ilmenau.de>; Wed, 24 Mar 2004 10:05:13 +0100 (MET)
+Received: from localhost (localhost [127.0.0.1])
+	by elmo.rz.tu-ilmenau.de (8.12.9/8.12.9/Debian-5) with ESMTP id i2O96d6O000734
+	for <ai008@ernie.rz.tu-ilmenau.de>; Wed, 24 Mar 2004 10:06:39 +0100
+Received: from elmo.rz.tu-ilmenau.de ([127.0.0.1])
+	by localhost (elmo [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
+	id 00369-08 for <ai008@ernie.rz.tu-ilmenau.de>;
+	Wed, 24 Mar 2004 10:06:38 +0100 (CET)
+Received: from piggy.rz.tu-ilmenau.de (piggy.rz.tu-ilmenau.de [141.24.4.8])
+	by elmo.rz.tu-ilmenau.de (8.12.9/8.12.9/Debian-5) with ESMTP id i2O96cvP000726
+	for <ai008@ernie.rz.tu-ilmenau.de>; Wed, 24 Mar 2004 10:06:38 +0100
+Received: from ragnarok.iiisci.org (host-200-75-139-138.net-uno.net [200.75.139.138] (may be forged))
+	by piggy.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id i2O9Alm9008967
+	for finalrecipients; Wed, 24 Mar 2004 10:10:48 +0100 (MET)
+Received: from mail pickup service by ragnarok.iiisci.org with Microsoft SMTPSVC;
+	 Wed, 24 Mar 2004 05:13:52 -0400
+From: <informationsci2004@iiis.org>
+To: <christian.heller@tu-ilmenau.de>
+Subject: SCI2004 Information Camera Ready
+Date: Wed, 24 Mar 2004 05:13:51 -0400
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+  boundary="----=_NextPart_000_0648_01C4115E.CBD8FD50"
+X-MimeOLE: Produced By Microsoft MimeOLE V5.50.4927.1200
+Message-ID: <RAGNAROKIEAOeIiGXix00000193@ragnarok.iiisci.org>
+X-OriginalArrivalTime: 24 Mar 2004 09:13:52.0000 (UTC) FILETIME=[530C0800:01C41180]
+Status: RO
+X-Status: O
+X-KMail-EncryptionState: N
+X-KMail-SignatureState: N
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0648_01C4115E.CBD8FD50
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+*** PLEASE DO NOT REPLY TO THIS AUTO-ANSWER MESSAGE ***
+This e-mail address is a system e-mail account. So, this mailbox is not
+monitored for responses. 
+Mail sent to this address cannot be answered.
+
+Dear Dr. Christian Heller
+
+
+Thank you for submitting the Camera Ready version of your paper titled:
+Cybernetics Oriented Language (CYBOL) . 
+The submission has been successful and we have registered your
+electronical 
+version in the web. Eventhough, this is an automatic reply confirming
+only 
+the reception of the attachment, if we find any problem when openning
+the 
+file, we'll let you know as soon as possible.
+
+
+Regards,
+
+Nagib Callaos
+
+------=_NextPart_000_0648_01C4115E.CBD8FD50
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<font face=3D'Times New Roman'>*** PLEASE DO NOT REPLY TO THIS =
+AUTO-ANSWER MESSAGE ***<br>This e-mail address is a system e-mail =
+account. So, this mailbox is not monitored for responses. <br>Mail sent =
+to this address cannot be answered.<br><br>Dear Dr. Christian =
+Heller<br><br><br>Thank you for submitting the Camera Ready version of =
+your paper titled: Cybernetics Oriented Language (CYBOL)
+ <br>The submission has been successful and we have registered your =
+electronical <br>version in the web. Eventhough, this is an automatic =
+reply confirming only <br>the reception of the attachment, if we find =
+any problem when openning the <br>file, we'll let you know as soon as =
+possible.<br><br><br>Regards,<br><br>Nagib Callaos</font>
+------=_NextPart_000_0648_01C4115E.CBD8FD50--
+

@@ -1,0 +1,74 @@
+%
+% $RCSfile: introduction.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Introduction}
+\label{introduction_heading}
+
+One important area the science of \emph{Informatics} deals with is software --
+the art of \emph{representing} and \emph{processing} information. As such, one of
+its major aims is to find \emph{Abstract Models} which represent the real world
+best. The better this is done and the better information can be stored and
+processed, the better software can assist its human users.
+
+Since about 40 years, the same, often unsatisfying concepts are used in informatics,
+which caused some people to talk about an ongoing \emph{Software Crisis}.
+Since about 20 years, the \emph{Free and Open Source Software} (FOSS) Movement
+increasingly eases that pain by providing a tremendous amount of code containing
+plenty of new concepts but still -- the dream of true componentization and
+reusability has not been reached.
+\emph{Structured} and \emph{Object Oriented Programming} (OOP) delivered some new
+concepts, a major one of was the extension of data \emph{Type} to \emph{Class},
+owning inheritable properties and methods. However, there is a number of problems
+that still keep us away from clear, effective and above all flexible solutions,
+in particular the:
+
+\begin{itemize}
+    \item[-]{false combination and grouping of information}
+    \item[-]{mix of knowledge and system control information}
+    \item[-]{bundling of static and dynamic aspects}
+\end{itemize}
+
+A more detailed analysis of point one is given in \cite{hellerbohl}.
+\emph{Ontologies} are suggested as means for improvement in \cite{hellerkunze}.
+They help structuring data models by dividing a domain into singular \emph{Concepts}
+(as known from \emph{Knowledge Engineering}) which later get associated with each
+other. Elements of a concept are organized in strict layers which ensures
+flexibility for later extensions. This paper wants to use those results but also
+concentrate on point two and three, as listed above, and investigate their
+negative effects and possible solutions.
+
+As a system grows, the interdependencies between its single parts grow with.
+Why does this happen? Simply because a clear architecture is missing. Even if
+developers really try to follow a such -- on some point in the software's
+lifetime, compromises have to be made due to unforeseen requirements and
+dependencies:
+
+\begin{itemize}
+    \item[-]{multiple interfaces are used to realize new properties (Mix-In)}
+    \item[-]{static manager objects accessible by any other objects in the system
+        are introduced}
+    \item[-]{new layers are plugged in with varying mechanisms}
+    \item[-]{redundant code needs to be written to avoid too many unwanted
+        interdependencies}
+\end{itemize}
+
+These decisions, in turn, can lead to buggy code with: memory leaks, endless loops,
+false results, weak performance.
+Can all that be avoided? And if, then how? The author's opinion is yes and the
+new concepts and language introduced in this document show ways out of the misery.

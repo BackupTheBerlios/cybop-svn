@@ -1,0 +1,98 @@
+From becker@informatik.uni-hamburg.de Wed Sep 10 12:59:15 2003
+Return-Path: <becker@informatik.uni-hamburg.de>
+Received: from rudy.rz.tu-ilmenau.de (rudy.rz.tu-ilmenau.de [141.24.4.15])
+	by ernie.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h8AB1XUP011481
+	for hidden; Wed, 10 Sep 2003 13:01:33 +0200 (MET DST)
+Received: from localhost (localhost [127.0.0.1])
+	by rudy.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h8AAuESr025956
+	for <ai008@ernie.rz.tu-ilmenau.de>; Wed, 10 Sep 2003 12:56:14 +0200 (MEST)
+Received: from rudy.rz.tu-ilmenau.de ([127.0.0.1])
+ by localhost (rudy [127.0.0.1]) (amavisd-new, port 10028) with ESMTP
+ id 25270-03-2 for <ai008@ernie.rz.tu-ilmenau.de>;
+ Wed, 10 Sep 2003 12:55:43 +0200 (MEST)
+Received: from piggy.rz.tu-ilmenau.de (piggy.rz.tu-ilmenau.de [141.24.4.8])
+	by rudy.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h8AAsnRq025742
+	for <ai008@ernie.rz.tu-ilmenau.de>; Wed, 10 Sep 2003 12:54:50 +0200 (MEST)
+Received: from rzdspc1.informatik.uni-hamburg.de (rzdspc1.informatik.uni-hamburg.de [134.100.9.61])
+	by piggy.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h8AAxgKP021146
+	for <christian.heller@tu-ilmenau.de>; Wed, 10 Sep 2003 12:59:42 +0200 (MET DST)
+Received: from rzdspc2.informatik.uni-hamburg.de (root@rzdspc2.informatik.uni-hamburg.de [134.100.9.62])
+	by rzdspc1.informatik.uni-hamburg.de (8.12.9/8.12.9) with ESMTP id h8AAxbvi029005
+	(version=TLSv1/SSLv3 cipher=EDH-RSA-DES-CBC3-SHA bits=168 verify=FAIL)
+	for <christian.heller@tu-ilmenau.de>; Wed, 10 Sep 2003 12:59:37 +0200 (CEST)
+Received: from informatik.uni-hamburg.de (wpspc19.informatik.uni-hamburg.de [134.100.12.93])
+	by rzdspc2.informatik.uni-hamburg.de (8.12.9/8.12.9) with ESMTP id h8AAxZV8004636
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO)
+	for <christian.heller@tu-ilmenau.de>; Wed, 10 Sep 2003 12:59:36 +0200 (CEST)
+Message-ID: <3F5F0403.68A2A7C8@informatik.uni-hamburg.de>
+Date: Wed, 10 Sep 2003 12:59:15 +0200
+From: Petra Becker-Pechau <becker@informatik.uni-hamburg.de>
+X-Mailer: Mozilla 4.78 [en] (Windows NT 5.0; U)
+X-Accept-Language: en
+MIME-Version: 1.0
+To: Christian Heller <christian.heller@tu-ilmenau.de>
+Subject: OOPSLA workshop: notification of acceptance
+Content-Type: text/plain;
+  charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+Status: RO
+X-Status: O
+
+Guten Tag Herr Heller,
+
+leider können wir Ihren Artikel für den OOPSLA-Workshop "How to Use
+Ontologies and Modularization to Explicitly Describe the Concept Model
+of a Software Systems Architecture" so nicht akzeptieren. Wir haben eine
+Reihe von Kritikpunkten und Fragen. Die Kernaussage des Artikels ist
+leider nicht ganz klar, somit können wir auch nicht abschätzen, ob er zu
+dem Workshop-Thema passt. 
+
+Wir schlagen jedoch vor, dass Sie bei Interesse den Artikel noch einmal
+überarbeiten, genauere Hinweise von uns dazu folgen in Kürze. Wenn
+danach deutlich wird, dass das Thema in den Workshop-Themenkomplex
+eingeordnet werden kann, können wir die Entscheidung gerne revidieren.
+
+Selbst, wenn Ihr Artikel nicht angenommen wird, sind Sie natürlich gerne
+zu dem Workshop als Teilnehmer eingeladen, es könnte lediglich kein
+Vortrag über Ihren Artikel stattfinden.
+
+Wir würden uns freuen, von Ihnen zu hören, ob Sie dieses Angebot
+annehmen möchten!
+
+(Der Rest der E-Mail ist Englisch, da er an alle Autoren geht.)
+
+Concerning the workshop we have the following situation: 
+
+We got four interesting submission, of which we accepted three papers.
+The fourth will possibly be rewritten. If one author of each paper
+participates, we will be about 7 participants, including the organizers. 
+
+The question arises whether or not the workshop should take place, maybe
+in an altered way. As your travel expenses to OOPSLA and your
+participation are not cheap, we would like to know your point of view.
+Would you nevertheless be interested to participate, and how many
+authors would participate?
+
+We think, especially if we are a small group, we can be very productive! 
+We suggest the following organization for the workshop: 
+
+* reduce it to 4-6 hours
+* focus even more on discussions, including topics 
+  independent of the submitted papers (about concept models, 
+  Ontologies, architectures etc.)
+* start a joint effort to write a paper about the discussion results
+
+We - the organizers - are very interested in starting an ongoing
+discussion with you, but of course we would accept your decisions. We
+hope the workshop will take place together with you!
+
+Please answer quickly by Friday, September 12, if possible, as the
+workshop organization depends on it.
+
+BTW: We would like to remind you of the OOPSLA deadline for reduced
+rates: Thursday, 18 September 2003
+
+
+Kind regards,
+Petra Becker-Pechau, Joerg Pechau, Martin Lippert,
+

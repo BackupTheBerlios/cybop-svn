@@ -1,0 +1,98 @@
+From becker@informatik.uni-hamburg.de Fri Sep 12 18:45:40 2003
+Return-Path: <becker@informatik.uni-hamburg.de>
+Received: from rudy.rz.tu-ilmenau.de (rudy.rz.tu-ilmenau.de [141.24.4.15])
+	by ernie.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h8CGkoLL020830
+	for hidden; Fri, 12 Sep 2003 18:46:50 +0200 (MET DST)
+Received: from localhost (localhost [127.0.0.1])
+	by rudy.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h8CGfUSr021598
+	for <ai008@ernie.rz.tu-ilmenau.de>; Fri, 12 Sep 2003 18:41:30 +0200 (MEST)
+Received: from rudy.rz.tu-ilmenau.de ([127.0.0.1])
+ by localhost (rudy [127.0.0.1]) (amavisd-new, port 10028) with ESMTP
+ id 21450-01-3 for <ai008@ernie.rz.tu-ilmenau.de>;
+ Fri, 12 Sep 2003 18:41:28 +0200 (MEST)
+Received: from piggy.rz.tu-ilmenau.de (piggy.rz.tu-ilmenau.de [141.24.4.8])
+	by rudy.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h8CGewRq021489
+	for <ai008@ernie.rz.tu-ilmenau.de>; Fri, 12 Sep 2003 18:40:58 +0200 (MEST)
+Received: from rzdspc1.informatik.uni-hamburg.de (rzdspc1.informatik.uni-hamburg.de [134.100.9.61])
+	by piggy.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h8CGjqKP015988
+	for <christian.heller@tu-ilmenau.de>; Fri, 12 Sep 2003 18:45:52 +0200 (MET DST)
+Received: from rzdspc2.informatik.uni-hamburg.de (root@rzdspc2.informatik.uni-hamburg.de [134.100.9.62])
+	by rzdspc1.informatik.uni-hamburg.de (8.12.9/8.12.9) with ESMTP id h8CGjnvi003541
+	(version=TLSv1/SSLv3 cipher=EDH-RSA-DES-CBC3-SHA bits=168 verify=FAIL);
+	Fri, 12 Sep 2003 18:45:49 +0200 (CEST)
+Received: from informatik.uni-hamburg.de (fbipc0816.informatik.uni-hamburg.de [134.100.8.226])
+	by rzdspc2.informatik.uni-hamburg.de (8.12.9/8.12.9) with ESMTP id h8CGjdV8005108
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NO);
+	Fri, 12 Sep 2003 18:45:39 +0200 (CEST)
+Message-ID: <3F61F834.2050601@informatik.uni-hamburg.de>
+Date: Fri, 12 Sep 2003 18:45:40 +0200
+From: Petra Becker-Pechau <becker@informatik.uni-hamburg.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.3) Gecko/20030312
+X-Accept-Language: en-us, en
+MIME-Version: 1.0
+To: Christian Heller <christian.heller@tu-ilmenau.de>
+Subject: OOPSLA-Workshop: Reviewers' comments
+Content-Type: text/plain;
+  charset=ISO-8859-1;
+  format=flowed
+Content-Transfer-Encoding: 8bit
+Status: RO
+X-Status: O
+
+Hallo Herr Heller,
+anbei die versprochenen Review-Kommentare zu Ihrem Artikel:
+
+Der Workshop setzt sich als Themen:
+
+- Semantics of published APIs
+- Use of ontologies for architectures
+- Reification of architectures Enhancement of languages
+- Modularization and ontologies
+- Component models
+- Frameworks
+- Plug-in technologies
+
+Oberthema: Architekturen.
+
+Davon werden einige Themen angerissen, aber wo ordnet sich das Paper 
+selbst ein, wozu soll es einen Beitrag liefern? Dies sollte deutlich werden.
+
+- Über die Semantik von APIs, Komponentenmodellen, Spracherweiterungen 
+und Plug-In Technologien erfolgt keine Aussage
+- In der Einleitung wird ein Bezug zu Ontologien aufgebaut, dieser wird 
+aber nicht ausgeführt oder belegt. Weder zum Thema Modularisierung noch 
+zu Architekturen.
+- Der Bezug zur Architekturen ist offensichtlich vorhanden, aber es wird 
+nicht deutlich, was der eigentliche Architekturansatz ist.
+- Frameworks werden erwähnt aber nur in der Einleitung
+
+Wir verstehen das Paper derart, dass hier ein neues Pattern (Translator) 
+für eine neuartige Architektur vorgestellt werden soll, welches durch 
+Abstraktion von vorhandenen Pattern abgeleitet wird. Nur dieses neue 
+Pattern wird immer nur im Nebensatz erwähnt, so dass man sich das Wissen 
+darüber aus dem Kontext erschliessen muss. Sich diesen Kontext zu 
+erschliessen wird dadurch erschwert, dass in der Argumentation zwischen 
+abstrakter Argumentation und Implementierungsdetails gesprungen wird. 
+Anschliessend wird versucht die Grundzüge der Architektur darzulegen, 
+leidet aber unter dem gleichen Problem, insbesondere wird nicht 
+deutlich, was die Kernidee dieser Architektur nun wirklich ist, ausser 
+dass das Hauptkonzept auf der hierarchischen Struktur des Universums 
+beruht - ein ziemlicher Anspruch wie wir meinen.
+
+Einen Bezug zu Ontologien und Rahmenwerken können wir nicht erkennen, da 
+diese Begriffe zwar in der Argumentation auftauchen, aber eigentlich 
+kein Bezug zum Rest der Arbeit hergestellt wird. Der Begriff Ontologie 
+taucht z.B. nur in der Einleitung auf. Diese scheint insgesamt nicht 
+optimal abgestimmt mit dem Artikel-Inhalt.
+
+Wir denken, weniger wäre hier mehr, d.h. dass die Autoren sich auf eines 
+der vielen angerissenen Themen beschränken, z.B. die Architektur und die 
+Idee dieser Architektur klar auf einem Abstraktionsniveau herausarbeiten 
+und ggf. das Pattern (sofern es denn der Kern des Artikels ist) genau 
+beschreiben. Dann könnte evtl. kurz der Bogen zum interesssant wirkenden 
+Beispiel aus der Praxis geschlagen werden.
+
+Viele Grüße aus Hamburg
+Petra Becker-Pechau
+
+

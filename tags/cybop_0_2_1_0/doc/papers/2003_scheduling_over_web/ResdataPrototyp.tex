@@ -1,0 +1,280 @@
+\section{Prototyp Resdata}
+\label{PrototypResData}
+ 
+  \subsection{Überblick}
+     An dieser Stelle wird das Software-Design der Webanwendung beschrieben. 
+     Die Anwendung wurde mittels der Technologie Java Server Pages (JSP) umgesetzt. 
+     Als Softwaremuster wurde das Model-View-Control (MVC) verwendet. Zur 
+     Erklärung der allgemeinen Techniken (JSP, MVC) siehe bitte in den 
+     entsprechenden Abschnitten. 
+
+  \subsection{Aufgabe}
+    Um das Ziel umzusetzen, wurde folgende Aufgabe für die Beispielwebanwendung 
+    definiert: 
+    \begin{enumerate}
+      \item Ein Administrator hat die Möglichkeit, Ärzte anzulegen und zu löschen.
+      \item Die Ärzte haben die Möglichkeit, sich nach einer Authentifizierung
+            ihre Daten anzuschauen und zu ändern.
+      \item Die Patienten haben die Möglichkeiten, sich die Ärzte anzuschauen,
+            nach Ärzten zu suchen und sich freie Termine zum ausgesuchten Arzt 
+            anzuschauen. 
+      \item Weiterhin besteht die Möglichkeit für den Patienten, sich einen Termin 
+            bei einem Arzt geben zu lassen. Dazu muß er die Symptome und
+            seine eMail-Adresse angeben. Dieser Termin wird als Wunsch in die
+            Datenbank geschrieben und zusätzlich als eMail an den Arzt geschickt.
+      \item Der Arzt hat wiederum die Möglichkeit, dem Terminwunsch des Patienten 
+            zu entsprechen oder den Termin abzusagen. Dies geschieht wieder durch 
+            das Verschicken einer eMail an den Patienten. Erst nach einer Bestätigung
+            durch den Arzt ist der Termin als verbindlich zu betrachten.
+    \end{enumerate}
+    
+    Es bestände auch die Möglichkeit, die Termine automatisch durch das
+    System bestätigen oder absagen zu lassen. Doch dies würde nicht
+    den unterschiedlichen Beschwerden der Patienten gerecht werden. Die 
+    Behandlungszeit der Patienten ist zu unterschiedlich. Darum kann die 
+    Entscheidung effektiv nur durch den Arzt oder die Krankenschwester 
+    getroffen werden. Darum wurde
+    die manuelle Bestätigung für die Webanwendung umgesetzt. \newline
+    
+    Abgrenzung der Aufgabe: \newline
+    Es wird keine Patientenverwaltung realisiert. Weiterhin ist die
+    Umsetzung nur als Prototyp zu betrachten. 
+
+  \subsection{Besonderheiten des MVC-Musters für die Webanwendung}
+    
+    Ein typischer Ablauf einer Webanwendung läuft nach folgendem 
+    Schema ab. Der Client stellt eine Anforderung an den Server.
+    Der Server antwortet an den Client. Es ist aber keine
+    Kommunikation vom Server zu einem bestimmten Client vorgesehen, d.h.
+    der Server kann keine Kommunikation mit dem Client betreiben, wenn
+    der Client nicht vorher eine Anforderung an den Server gestellt hat.
+    Damit ist das Beobachtungsmuster, das im normalen MVC verwendet wird, 
+    nicht umsetzbar. Der Server kann von sich aus, z.B. durch Datenänderung,
+    nicht automatisch alle Clients zu einer Aktualisierung veranlassen. 
+    
+    Darum wird hier folgendes vom allgemeinen MVC-Model nicht umgesetzt:
+    
+    \begin{itemize}
+      \item Beobachter \\
+            Keine Implementierung eines 'Beobachters'. Im Standard MVC-Muster 
+            sollen bei Änderungen  des Models die Views benachrichtigt werden. 
+            Dies wird hier nicht umgesetzt.
+      \item Registrierungsmechanismus \\
+            Es wird kein Registrierungsmechanismus implemetiert.
+            Im normalen Framework werden die Views, Models und 
+            Controller in Listen registriert.
+            Dies ist für den 'Beobachter' notwendig.
+            Da dies aber nicht umgesetzt wird, so ist auch
+            der Registrierungsmechanismus nicht erforderlich.
+    \end{itemize}
+
+    Hier werden in Bezug auf die Webanwendung (JSP) die
+    verwendeten Komponenten des MVC-Musters erklärt.
+    Zusätzlich kommt die Komponente des Servlets dazu.
+    Diese hat die Aufgabe, die Kommunikation zwischen 
+    Client und Server herzustellen.
+    Um ein einfaches Design, aber auch eine Trennung zwischen 
+    Modell und Ansicht zu gewährleisten, wurde das Design folgendermaßen
+    umgesetzt:
+
+    \begin{itemize}
+      \item View \\
+            Die Views sind meine JSP-Seiten. Da die Views keine
+            Java-Anwendung sind, gibt es auch keine Hierarchie 
+            innerhalb der Views. In den Views werden das jeweilige 
+            Modell und der Controller bekanntgegeben.
+
+      \item Controller \\
+            Empfängt die gesamten Parameter vom Servlet. 
+            Entscheidet über die Parameter, was und mit 
+            welchem Modell etwas durchgeführt wird.
+            Als Ergebnis gibt es eine Seite an das Servlet 
+            zurück (Fehlerseite, Anzeigeseite, ...).
+
+      \item Model \\
+            Dieses führt entsprechend den Anweisungen des 
+            Controllers seine Aufgaben aus. Die Zustände
+            und Werte sind nur in dem Model bekannt. 
+            Darauf können der Controller und die View 
+            über Schnittstellen zugreifen. Weiterhin ist vom Modell
+            der Zugriff auf die Daten in der Datenbank
+            und das Verschicken von eMails möglich.
+
+      \item Servlet \\
+            Dient zur Kommunikation der Webanwendung und des 
+            Controllers. Hier werden die Parameter in eine 
+            Hashtabelle geschrieben. Zu den Parametern gehören:
+            \begin{itemize}
+              \item Model
+              \item Action
+              \item Controller
+              \item sonstige Parameter (aus Eingabefeldern)
+            \end{itemize}
+            Die Parameter werden an den entsprechenden Controller
+            gesendet. Dieser führt  für den Parameter 'Action'
+            die entsprechenden Aktionen im Model aus. Als Ergebnis
+            wird dem Servlet die Seite bekannt gegeben, die es
+            als nächstes ausgeben soll.
+      \end{itemize}
+      
+    Das MVC-Model sieht dann für die Umsetzung der Webapplication mittels JSP
+    folgendermaßen aus.
+ 		
+ 		\begin{center}
+      \includegraphics[width=15cm]{JSP-MVC2}
+    \end{center}
+      
+
+  \subsection{Zugriff auf die Datenbank}    
+    \subsubsection{Überblick}
+      Für die Datenhaltung des Moduls ResData des Projektes Resmedicinae 
+      wird die Datenbank mySQL genutzt.
+      Auf diese muß von Java aus zugegriffen werden. Dies erfolgt 
+      über die standardisierte Schnittstelle JDBC (Java Database Connectivity).
+      Da das allgemeine Vorgehen (Aufbau einer Verbindung, 
+      Anfrage/Anforderung stellen, Schließen einer Verbindung) sehr langsam ist, 
+      wird ein sogenannter Connection-Pool verwendet.
+      
+    \subsubsection{JDBC}
+      JDBC kapselt die Datenbank von der Anwendung. Durch diese standardisierte 
+      Schnittstelle ist es fast unwichtig, welche relationale Datenbank 
+      hinter der Schnittstelle arbeitet. Am Anfang muß nur ein entsprechender
+      Treiber geladen werden. Danach ist der Zugriff über diese Schnittstelle 
+      auf alle Datenbanken gleich. Dies erfolgt über die JDBC-API. Wird in der 
+      Anwendung darauf geachtet, daß der Zugriff auf die Datenbank nur
+      über Standard SQL(Structured Query Language) erfolgt, so ist
+      im allgemeinen der Austausch der Datenbank unproblematisch. Einzig
+      bei Verwendung von SQL-Konstrukten, die nicht dem Standard angehören, 
+      gibt es Probleme bei Umstellungen der Datenbanken.
+    
+    \subsubsection{Connection-Pool}     
+      Für jede Transaktion (Anfrage/Anforderung) wird eine neue Verbindung 
+      aufgebaut, benutzt und wieder geschlossen. Dies ist eine sehr aufwendige 
+      Operation und dauert entsprechend lange. Wird eine Seite viel besucht,
+      so wird die Seite durch den ständigen Auf- und Abbau der Datenbankverbindung 
+      in die Knie gezwungen. Eine übliche Lösung für dieses Problem ist die 
+      Verwendung eines Connection-Pools. Der Connection-Pool hält eine definierte 
+      Anzahl von Verbindungen zur Datenbank. Wird von der Anwendung eine Verbindung 
+      gebraucht, so baut sie die Verbindung nicht mehr auf, sondern stellt eine
+      Anfrage an den Connection-Pool. Dieser stellt eine unbenutzte Verbindung der 
+      Anwendung zur Verfügung. Nach dem Ende der Benutzung gibt die Anwendung 
+      die Verbindung zur weiteren Benutzung an den Connection-Pool zurück. Dadurch 
+      wird nicht jedesmal eine neue Verbindung aufgebaut, sondern eine bestehende
+      genutzt. Dies bedeutet bei vielen Anfragen einen enormen
+      Geschwindigkeitsvorteil
+      der Anwendung. Einzig
+      die Initialisierung des Connection-Pools dauert etwas länger. Dies passiert
+      aber nur nach einen Neustart des Applicationservers und 
+      der ersten Datenbankanfrage bzw. nach einem "`Reconnect"' zu der Datenbank. 
+      
+    \subsubsection{Besonderheiten zu mySQL}
+    	MySQL trennt standardmäßig die Datenbankverbindung nach 8 Stunden
+    	Nichtbenutzung. 
+    	Dadurch	muß ein Wiederverbinden nach der Trennung erfolgen. Dies passiert mit dem
+    	Parameter 'autoReconnect' beim Aufbau der Datenbankverbindung. In dem Modul 
+    	ResData wurde dies folgendermaßen umgesetzt:
+\begin{verbatim}
+  jdbcProperties.put("user",     ResDataConfig.getConfig().getDatabaseUser() );
+  jdbcProperties.put("password", ResDataConfig.getConfig().getDatabasePwd()  );
+  jdbcProperties.put("autoReconnect", "true");            
+\end{verbatim}
+    	
+
+  \subsection{Mail}
+  
+    \subsubsection{Überblick}
+      Für das Modul Resdata des Projektes ResMedicinae wird ein 
+      eMail-Account gebraucht. Diesr wurde speziell für das Modul 
+      angelegt. Als erstes wird hier das allgemeine Vorgehen in Java
+      und als zweites der spezielle eMail-Account beschrieben. 
+    
+    \subsubsection{Vorgehen}
+      Um eMails in Java zu verschicken, wird die mailapi.jar von SUN genutzt.
+      Diese stellt die Funktionen zum Versenden von eMails schon
+      bereit. Folgende Punkte sind für den Prototyp zu betrachten:
+      
+      \begin{itemize}
+        \item Protokoll \\
+              Im Prototyp wird das Versenden der eMails über das
+              Protokoll SMTP (simple mail transfer protocol) realisiert. Andere 
+              Protokolle werden in dem Prototyp nicht unterstützt. SMTP sollte
+              für fast alle Fälle ausreichend sein. 
+        \item Authentifizierung \\
+              Die meisten eMail-Provider schützen ihr SMTP-Protokoll
+              durch eine Authentifizierung. Dies wird auch durch die 
+              mailapi.jar abgedeckt. Dazu muß eine Klasse vom
+              Authenticator abgeleitet werden. In dieser muß die 
+              Funktion getPasswordAuthentication definiert werden, die 
+              die Anmeldung vornimmt. 
+      \end{itemize}
+      
+      Für weitere Infos zur Umsetzung des eMail-Versands in Java lesen
+      Sie den Quelltext folgenden zwei Klassen:
+      \begin{itemize}
+        \item org.resmedicinae.application.healthcare.resdata.ResDataMailAuthenticator
+        \item org.resmedicinae.application.healthcare.resdata.model.ResDataMail
+      \end{itemize}
+ 
+      
+    \subsubsection{Technische Daten}
+      Hier sehen Sie die technischen Kenndaten des Accounts.
+    
+      \input{TabelleEmail}
+    \newpage
+    
+  \subsection{URL-Rewriting}
+   
+    Für das URL-Rewriting sind vorher kurz folgende Begriffe zu erklären:
+    \begin{itemize}
+		  \item Session, Session-Id \\
+		    Eine Session ist eine Sitzung zwischen einem Server und einem Client.
+		    Das Erkennen der gleichen Session wird über
+		    eine Session-Id realisiert. 
+      \item Cookie \\
+		    Cookies erlauben es Servern, Informationen auf dem Client abzulegen.
+		    Diese Information kann der 
+		    Server wieder abrufen. Somit wird es auf einfachem 
+		    Wege möglich, den jeweiligen Client wiederzuerkennen, indem die Session-Id 
+		    im Cookie auf dem Client gespeichert wird.
+    \end{itemize}
+    
+    
+    Das normale Verhalten eines Servers ist das Ablegen der Session-Id
+    in ein Cookie. Wird von dem gleichen Client wieder eine Anfrage gestartet,
+    so liest der Server das Cookie, und anhand der Session-Id weiß der Server, dass er
+    sich in der gleichen Session befindet. Das Problem ist, dass Cookies clientseitig 
+    behandelt werden. Es gibt die Möglichkeit im Browser, Cookies prinzipiell
+    zu verbieten. Damit würde der Server die Session-Id nicht auslesen können,
+    und für den Server wäre jede Anfrage des Clients eine neue Anfrage und somit
+    eine neue Session. So kann man aber keine Information (wie z.B.  Benutzer X
+    am System angemeldet) speichern und keine personenbezogenen Dienste 
+    (Webshop, Ärzteverwaltung,...) anbieten. 
+    
+    Eine andere Möglichkeit der Übertragung der Session-Id ist das URL-Rewriting. 
+    Dabei wird die Session-Id als Parameter in der URL mit übergeben. Dazu ist aber 
+    eine Anpassung jeder URL notwendig, damit die Session-Id mit übergeben wird. 
+    Dies geschieht mit der Java-Funktion
+\begin{verbatim}
+  response.encodeURL(<URL>),
+\end{verbatim}
+    wobei <URL> durch die entsprechende URL zu ersetzen ist. Response ist ein 
+    implizites Objekt und somit in jeder JSP-Seite bekannt.
+    
+  \subsection{Verzeichnisstruktur}
+    
+    Hier wird auf die Verzeichnisstruktur der Web-Anwendung eingegangen. 
+    Dies kann von Applicationserver zu Applicationserver unterschiedlich
+    sein. Darum wird hier nur die Verzeichnisstruktur, wie sie unter
+    Tomcat benutzt wird, behandelt.
+    
+    
+/WEB-INF
+Dieses Verzeichnis muss im Wurzelverzeichnis jeder Web-Applikation vorhanden
+sein. Es enthält Ressourcen, welche nicht direkt an Clients geschickt
+werden. Der Zugriff auf Dateien in diesem Verzeichnis über HTTP
+ist nicht möglich. In WEB-INF werden unter anderem übersetzte Java-
+Klassen, JAR-Archive und Deployment-Deskriptoren abgelegt.
+Da Dateien im Verzeichnis WEB-INF nicht über HTTP erreichbar sind, stehen
+HTML-Dokumente, Bilder, CSS-Stylesheets etc. nicht in diesem Verzeichnis.
+Alle serverseitig ausgeführten Programme werden in WEB-INF
+gespeichert. 

@@ -1,0 +1,31 @@
+%
+% $RCSfile: time_stamp.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Time Stamp}
+\label{time_stamp_heading}
+
+Most database developers will know this technique. Each table has a separate
+column for storing the time at which the data were written into this table.
+If someone requests information from the database, the time stamp is delivered
+as well. After modifying the data, they have to be written back into the database.
+At this time, both timestamps (the one in the database table and the one delivered
+before) are compared. If there is a difference, the data were modified by another
+user. Then, one has to care about the update without overwriting the new data in
+the table.
+

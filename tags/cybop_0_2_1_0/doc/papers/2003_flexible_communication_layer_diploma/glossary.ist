@@ -1,0 +1,27 @@
+% MakeIndex-Stildatei fuer Glossare,
+% realisiert mit einer description-Umgebung
+
+% Folgende Befehle in die LaTeX Datei einbinden:
+% \makeglossary
+% \newcommand{\myglossary}[2]{#1\textsuperscript{S.\pageref{glossar}}\glossary{#1}\glossary{#1!#2}}
+% \input{name.glx}
+preamble         "\\noindent{\\Large\\bfseries Glossar}\\vspace{5mm}\n\\begin{description}\n\n"
+postamble        "\n\n\\end{description}\n"
+group_skip       "\n\\vspace{5mm}\n"
+keyword          "\\glossaryentry"
+
+item_0           "\\item["
+delim_0          ", S."
+item_01          "] "
+
+delim_1          " %"
+indent_space     "%"
+delim_t          "\n"
+
+headings_flag    1
+heading_prefix   "\n\\item[{\\Large\\bfseries "
+heading_suffix   "}]\n\n"
+symhead_positive "Symbole"
+numhead_positive "Zahlen"
+
+

@@ -1,0 +1,48 @@
+%
+% $RCSfile: summary.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Summary}
+\label{summary_heading}
+
+Major research objectives are to find concepts and principles to increase the
+reusability of software, their architectures as well as the resulting code.
+The aim of this work was to find an architecture that simplifies and unifies the
+implementation of any kind of communication mechanism.\\
+Persistence, remote communication and user interface mechanisms have common properties.
+Classical system architectures treat them as \emph{Backend}, \emph{Data Transfer}
+and \emph{Frontend} and use different methods and design patterns (\emph{DataMapper},
+\emph{DataTransferObject}, \emph{ModelViewController}) to implement them.\\
+This paper proposed to sum up their common properties and behaviour and to merge
+them into just one communication pattern called \emph{Translator}, thereby avoiding
+redundant parts. The new pattern required a new communication paradigm and this paper
+described one that follows the information processing procedure of the human brain.\\
+Finally, the pattern was integrated into a greater system context using ontologies.
+The proposed ontology framework consists of a \emph{Basic}, a \emph{Model} and a
+\emph{System} Ontology and seems to be a good solution for the implementation of
+highly flexible, easily extensible and maintainable source code. The interdependency
+of domain data, persistence layer, communication layer and user interface is
+abolished.\\
+The time needed to create such an architecture (like in form of the CYBOP framework)
+is clearly more than for the classical way. But once the architecture is there --
+it can save a tremendous amount of time when deriving modules being capable of
+communicating across various mechanisms at once. Due to its flexibility and low
+dependencies, it also ensures that extensions (e.g. new communication mechanisms)
+and modifications can be done anytime later without destroying already existing
+solutions.
+

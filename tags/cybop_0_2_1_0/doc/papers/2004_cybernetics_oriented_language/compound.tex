@@ -1,0 +1,76 @@
+%
+% $RCSfile: compound.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Compound}
+\label{compound_heading}
+
+\emph{Composition} is the third kind of abstraction that humans use to understand
+their environment. It is an important instrument for the human mind to associate
+information, that is to acquire, store and recall \emph{Knowledge}. Every item is
+recognized as a \emph{Compound} of smaller items and can therefore also be called
+\emph{Tree} or \emph{Hierarchy}. The subject of \emph{Artificial Intelligence} (AI)/
+\emph{Knowledge Engineering} talks of \emph{Concept} or \emph{Schema}.
+
+In software design, the terms \emph{Parent} and \emph{Child} are often used to
+describe both, the items in a composition as well as the items in a categorization
+relationship (section \ref{category_heading}).
+To avoid misunderstandings, this document sticks to the terms \emph{Super} and
+\emph{Sub} for categorization and to the terms \emph{Whole} and \emph{Part}
+\cite{sowa} for composition. Yet other terms to describe items of a composition
+would be \emph{Container} and \emph{Element}.
+
+To stick with the example of a \emph{Human Being}, one could say that it is
+composed of \emph{Organs} such as \emph{Eye}, \emph{Ear}, \emph{Heart},
+\emph{Brain}, \emph{Arm} and further, also smaller parts. Other examples are the
+concept of an \emph{Atom} consisting of a \emph{Core} and \emph{Electrons} or
+that of a physical \emph{Book} composed of a \emph{Paperback Cover} and
+\emph{Paper Pages}.
+However, knowledge representation always depends on what one wants to express in
+which context. The \emph{Book}, for example, can be represented in many other
+ways. Logically, it is usually separated into \emph{Part}, \emph{Chapter},
+\emph{Section}, \emph{Paragraph}, \emph{Sentence}, \emph{Word} and \emph{Character}.
+
+It is important to note the \emph{unidirectional} kind of relations: A human
+being is composed of organs but an organ is never composed of a human being!
+
+Not only \emph{static} items represent a compound; \emph{dynamic} items are
+hierarchical as well. The process \emph{Take Book from Library}, for example,
+may have the following structure:
+
+\begin{itemize}
+    \item{Check Catalogue}
+    \begin{itemize}
+        \item{Investigate suitable Books}
+        \item{Note Registration Number}
+    \end{itemize}
+    \item{Organize Book}
+    \begin{itemize}
+        \item{Look for Shelf}
+        \item{Take off Book}
+    \end{itemize}
+    \item{Borrow Book}
+\end{itemize}
+
+Returning to human thinking, one realizes that in the end, everything in universe
+can be put into variable hierarchical models, that is consists of smaller items
+and belongs to a bigger item. From the physical point of view, nobody knows where
+this hierarchy really stops, towards \emph{Microcosm} as well as towards
+\emph{Macrocosm}. There is no \emph{absolute}, \emph{basic} item.
+A \emph{Particle} as concept exists only in the human mind, placed somewhere
+between micro- and macrocosm, with hypothetic borders.
