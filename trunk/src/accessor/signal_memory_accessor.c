@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2005-01-29 13:30:45 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-02-12 17:11:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -548,6 +548,9 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
                         *i = j;
                     }
 
+                    // Reset priority.
+                    prio = INTEGER_NULL_POINTER;
+
                     j++;
                 }
 
@@ -615,6 +618,9 @@ void get_new_signal_id(const void* p0, const void* p1, void* p2) {
 
                         max = *id;
                     }
+
+                    // Reset identification.
+                    id = INTEGER_NULL_POINTER;
 
                     j++;
                 }
