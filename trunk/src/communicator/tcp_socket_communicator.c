@@ -25,7 +25,7 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2004-11-30 15:35:05 $ $Author: rholzmueller $
+ * @version $Revision: 1.2 $ $Date: 2004-12-08 14:13:27 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,16 +52,36 @@ void receive_tcp_socket(void* p0, void* p1, void* p2, const void* p3, const void
 /**
  * Sends an http stream that was read from a byte array.
  *
- * @param p0 the destination (http url)
+ * @param p0 the destination (socket number)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source (byte array)
  * @param p4 the source count
  */
-void send_tcp_socket(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
-  
- //   send (client_socketnumber, ausgabe, strlen(ausgabe), 0);
-      
+void send_tcp_socket( int* p_client_socket_number, void* p1, void* p2, 
+                      const void** pp_source, const void* p_source_count ) {
+
+    if ( p_client_socket_number == NULL_POINTER ) {
+        log_message_debug( "p_client_socket_number is a NULL pointer" );
+    }
+    else if ( pp_source == NULL_POINTER ) {
+        log_message_debug( "pp_source is a NULL pointer" );
+    }
+    else if ( p_source_count == NULL_POINTER ) {
+        log_message_debug( "p_source_count is a NULL pointer" );
+    }
+    else {
+
+        char* ausgabe = *((char**) pp_source);
+        int ausgabe_count = *((int*) p_source_count);
+        int send_byte = 0;
+        
+        send_byte = send (*p_client_socket_number, ausgabe, ausgabe_count, 0);
+        if ( send_byte < 0 ) {
+         
+            log_message_debug( "error on sending off the tcp socket" );
+        }
+    }
 }
 
 /* TCP_SOCKET_COMMUNICATOR_SOURCE */

@@ -23,7 +23,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.5 $ $Date: 2004-11-30 15:31:30 $ $Author: rholzmueller $
+ * @version $Revision: 1.6 $ $Date: 2004-12-08 14:12:52 $ $Author: rholzmueller $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -51,10 +51,17 @@
 #include "../global/structure_constants.c"
 #include "../global/variable.c"
 #include "../logger/logger.c"
+#include "../web/socket_number_accessor.c"
 
 /**
- * Ermmittelt aus einen request eines Browser die request Zeile
- * Bsp. für request zeile: GET /paramater HTTP/1.1
+ * get the request row from the complet request
+ * example for a request row: GET /paramater HTTP/1.1
+ * the request row end with the character \r\n
+ * 
+ * @param req the complet request
+ * @param req_count the count from the complet request
+ * @param req_row return the request row
+ * @param reg_row_count return the count of the request row
  */
 void get_request_row( char** req, int* req_count, 
                       char** req_row, int* req_row_count  ) {
@@ -86,10 +93,15 @@ void get_request_row( char** req, int* req_count,
 }
 
 /**
- * Ermmittelt aus einer request zeile die Parameter des request
- * Bsp. für request zeile: GET /lib/ausgabe.cybol HTTP/1.1
- *      Als Ergebnis möchte ich nur die Parameter haben
+ * get the request paramater from the request row
+ * example for a request row: GET /lib/ausgabe.cybol HTTP/1.1
+ *      the result for the function is 
  *      lib/ausgabe.cybol
+ *
+ * @param req_row the request row
+ * @param reg_row_count the count of the request row
+ * @param param the parameter from the request
+ * @param param_count the count from the parameter
  */
 void get_param_from_request_row( char** req_row, int* req_row_count, 
                                  char** param, int* param_count  ) {
@@ -138,77 +150,18 @@ void get_param_from_request_row( char** req_row, int* req_row_count,
     }
 }
 
+
 /**
- * Erstellt ein Compund mit einen Eintrag
- * Dieser Eintrag sieht folgendermaßen aus:
- *   - name=receiver
- *   - channel=inline
- *   - abstraction=integer
- *   - model=<client_socketnumber>
+ * this function hadle a request from the tcp_socket
+ * this tcp socket is a http request 
+ * the http request must parse for the parameter
+ * and for the parameter must create a signal in the signal
+ * queue 
+ *
+ * @param pp_internals the pointer of the internals
+ * @param p_client_socket_number the client socket number for the request
  */
-void create_detail_client_socketnumber( void** detail, int* detail_count,
-                                        int* detail_size, 
-                                        int* client_socketnumber ) {
-
-    //create the detail compound
-    create( detail, detail_count, 
-            (void*) &COMPOUND_ABSTRACTION, 
-            (void*) &COMPOUND_ABSTRACTION_COUNT );
-            
-    // The destination name.
-    void* dn = NULL_POINTER;
-    int dnc = 0;
-    int dns = 0;
-
-    // The destination abstraction.
-    void* da = NULL_POINTER;
-    int dac = 0;
-    int das = 0;
-    // The destination model.
-    void* dm = NULL_POINTER;
-    int dmc = 0;
-    int dms = 0;
-    // The destination details.
-    void* dd = NULL_POINTER;
-    int ddc = 0;
-    int dds = 0;
-
-    //create model destinantion name
-    create_model( (void*) &dn, (void*) &dnc, (void*) &dns,
-                  (void*) &RECEIVER_NAME_ABSTRACTION, 
-                  (void*) &RECEIVER_NAME_ABSTRACTION_COUNT,
-                  (void*) &STRING_ABSTRACTION, 
-                  (void*) &STRING_ABSTRACTION_COUNT,
-                  (void*) &INLINE_CHANNEL, 
-                  (void*) &INLINE_CHANNEL_COUNT );
-                
-    //create model destinantion abstraction
-    create_model( (void*) &da, (void*) &dac, (void*) &das,
-                  (void*) &INTEGER_ABSTRACTION, 
-                  (void*) &INTEGER_ABSTRACTION_COUNT,
-                  (void*) &STRING_ABSTRACTION, 
-                  (void*) &STRING_ABSTRACTION_COUNT,
-                  (void*) &INLINE_CHANNEL, 
-                  (void*) &INLINE_CHANNEL_COUNT );
-
-    //create model destinantion model
-    create_model( (void*) &da, (void*) &dac, (void*) &das,
-                  (void*) &client_socketnumber, 
-                  (void*) &INTEGER_COUNT,
-                  (void*) &INTEGER_ABSTRACTION, 
-                  (void*) &INTEGER_ABSTRACTION_COUNT,
-                  (void*) &INLINE_CHANNEL, 
-                  (void*) &INLINE_CHANNEL_COUNT );
-                
-    set_compound_element_by_name( 
-        detail, detail_count, detail_size,
-        (void*) &dn, (void*) &dnc, (void*) &dns,  
-        (void*) &da, (void*) &dac, (void*) &das,  
-        (void*) &dm, (void*) &dmc, (void*) &dms,  
-        (void*) &dd, (void*) &ddc, (void*) &dds );
-}
-
-void handle_request( void** pp_internals, int* p_client_socketnumber ) {
+void handle_request( void** pp_internals, int* p_client_socket_number ) {
  
     fprintf( stderr, "request registriert \n" );
     
@@ -216,7 +169,7 @@ void handle_request( void** pp_internals, int* p_client_socketnumber ) {
      
         log_message_debug( "pp_internals is a NULL POINTER");
     }
-    else if ( p_client_socketnumber == NULL_POINTER ) {
+    else if ( p_client_socket_number == NULL_POINTER ) {
      
         log_message_debug( "p_client_socketnumber is a NULL POINTER");
     }
@@ -231,7 +184,7 @@ void handle_request( void** pp_internals, int* p_client_socketnumber ) {
                       (void*) &max_msg_count );
         int msg_count = 0;
         
-        msg_count = recv( *p_client_socketnumber, msg, max_msg_count, 0 );
+        msg_count = recv( *p_client_socket_number, msg, max_msg_count, 0 );
         /* read the message from the client */
         if ( msg_count == -1 ) {
             log_message_debug( "error while receiving reply" );
@@ -253,92 +206,104 @@ void handle_request( void** pp_internals, int* p_client_socketnumber ) {
 
         get_param_from_request_row( &msg_row, &msg_row_count,
                                     &param, &param_count );
-                    
+                                    
+        //Firefox make als secon request a request for favicon
+        //this request must no handle
+        char firefox_request[] = "favicon.ico";
+        char* p_firefox_request = &firefox_request[0];
+        int firefox_request_count = 11;
+        int comp_res = 0;
+        compare_arrays( (void*) &param, (void*) &param_count,
+                        (void*) &p_firefox_request, (void*) &firefox_request_count,
+                        (void*) &comp_res, (void*) &CHARACTER_ARRAY );
+        if ( comp_res == 1 ) {
+          
+            close (*p_client_socket_number);
+        }
+        else {            
         
-        /* write the answer to the client  */
-//        if( send( *p_client_socketnumber, msg, msg_count, 0) == -1 ) {
-//            log_message_debug( "error while replying" );
-//            exit(1);
-//        }
-
-        int internal_type = 0;
-     
-        void** pp_signal_memory = NULL_POINTER;
-        int* p_signal_memory_count = NULL_POINTER;
-        int* p_signal_memory_size = NULL_POINTER;
-
-        get_internal( pp_internals, (void*) &pp_signal_memory, 
-                      (void*) &internal_type, 
-                      (void*) &INTERNAL_SIGNAL_MEMORY_INDEX );
-        get_internal( pp_internals, (void*) &p_signal_memory_count, 
-                      (void*) &internal_type, 
-                      (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX );
-        get_internal( pp_internals, (void*) &p_signal_memory_size, 
-                      (void*) &internal_type, 
-                      (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX );
-
-
-        // The source channel.
-        char c_sc[] = "inline";
-        char* sc = &c_sc[0];
-        int scc = 6;
-        // The source abstraction.
-        char c_sa[] = "cybol";
-        char* sa = &c_sa[0];
-        int sac = 5;
-        // The source model.
-        char* sm = param;
-        int smc = param_count;
-
-        // The destination abstraction.
-        void* da = NULL_POINTER;
-        int dac = 0;
-        int das = 0;
-        // The destination model.
-        void* dm = NULL_POINTER;
-        int dmc = 0;
-        int dms = 0;
-        // The destination details.
-        void* dd = NULL_POINTER;
-        int ddc = 0;
-        int dds = 0;
-
-        // Create destination abstraction.
-        create_model((void*) &da, (void*) &dac, (void*) &das,
-            (void*) &sa, (void*) &sac,
-            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
-            (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
-        log_message_debug( "create destination abstraction" );
-
-        // Create destination model.
-        create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-            (void*) &sm, (void*) &smc,
-            (void*) &sa, (void*) &sac,
-            (void*) &sc, (void*) &scc);
-        log_message_debug( "create destination model" );
-
-        
-        // Create destination detail
-        create_detail_client_socketnumber( 
-            (void*) &dd, (void*) &ddc, (void*) &dds,
-            p_client_socketnumber );
-        
-        
-        //
-        // set the signal 
-        //
-
-        int main_sig_id = 0;
-        get_new_main_signal_id( pp_signal_memory, p_signal_memory_count, 
-                                (void*) &main_sig_id );
-        set_signal( pp_signal_memory, p_signal_memory_count, p_signal_memory_size,   //memory
-                    (void*) &da, (void*) &dac,              //dest abtsraction
-                    (void*) &dm, (void*) &dmc,              //dest model
-                    (void*) &dd, (void*) &ddc,              //dest details
-                    (void*) &NORMAL_PRIORITY,
-                    (void*) &main_sig_id );
-        log_message_debug( "set start signals" );
-
+            /* write the answer to the client  */
+    //        if( send( *p_client_socketnumber, msg, msg_count, 0) == -1 ) {
+    //            log_message_debug( "error while replying" );
+    //            exit(1);
+    //        }
+    
+            int internal_type = 0;
+         
+            void** pp_signal_memory = NULL_POINTER;
+            int* p_signal_memory_count = NULL_POINTER;
+            int* p_signal_memory_size = NULL_POINTER;
+    
+            get_internal( pp_internals, (void*) &pp_signal_memory, 
+                          (void*) &internal_type, 
+                          (void*) &INTERNAL_SIGNAL_MEMORY_INDEX );
+            get_internal( pp_internals, (void*) &p_signal_memory_count, 
+                          (void*) &internal_type, 
+                          (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX );
+            get_internal( pp_internals, (void*) &p_signal_memory_size, 
+                          (void*) &internal_type, 
+                          (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX );
+    
+    
+            // The source channel.
+            char c_sc[] = "inline";
+            char* sc = &c_sc[0];
+            int scc = 6;
+            // The source abstraction.
+            char c_sa[] = "cybol";
+            char* sa = &c_sa[0];
+            int sac = 5;
+            // The source model.
+            char* sm = param;
+            int smc = param_count;
+    
+            // The destination abstraction.
+            void* da = NULL_POINTER;
+            int dac = 0;
+            int das = 0;
+            // The destination model.
+            void* dm = NULL_POINTER;
+            int dmc = 0;
+            int dms = 0;
+            // The destination details.
+            void* dd = NULL_POINTER;
+            int ddc = 0;
+            int dds = 0;
+    
+            // Create destination abstraction.
+            create_model((void*) &da, (void*) &dac, (void*) &das,
+                (void*) &sa, (void*) &sac,
+                (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
+                (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+            log_message_debug( "create destination abstraction" );
+    
+            // Create destination model.
+            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
+                (void*) &sm, (void*) &smc,
+                (void*) &sa, (void*) &sac,
+                (void*) &sc, (void*) &scc);
+            log_message_debug( "create destination model" );
+    
+            
+            //
+            // set the signal 
+            //
+    
+            int main_sig_id = 0;
+            get_new_main_signal_id( pp_signal_memory, p_signal_memory_count, 
+                                    (void*) &main_sig_id );
+            set_signal( pp_signal_memory, p_signal_memory_count, p_signal_memory_size,   //memory
+                        (void*) &da, (void*) &dac,              //dest abtsraction
+                        (void*) &dm, (void*) &dmc,              //dest model
+                        (void*) &dd, (void*) &ddc,              //dest details
+                        (void*) &NORMAL_PRIORITY,
+                        (void*) &main_sig_id );
+            log_message_debug( "set start signals" );
+            
+            //
+            add_main_signal_id( pp_internals, (void*) &main_sig_id );
+            add_client_socket_number( pp_internals, p_client_socket_number );
+        }  // comp_res<>1  favicon must ignoried    
     }
 }
 
@@ -358,20 +323,72 @@ void create_tcp_socket( void** pp_internals ) {
     }
     else {
         
+    
+        //create the server socket number internals
+        int* p_server_socket_number = NULL_POINTER;
+        create_internal( (void*) &p_server_socket_number, 
+                         (void*) &INTERNAL_TYPE_INTEGER );
+        set_internal( pp_internals, (void*) &p_server_socket_number,
+                      (void*) &INTERNAL_TYPE_INTEGER, 
+                      (void*) &INTERNAL_TCPSOCKET_SERVERSOCKETNUMBER_INDEX );
+                      
+        //create the client socket number internals
+        void** pp_client_socket_numbers = NULL_POINTER;
+        create_internal( (void*) &pp_client_socket_numbers, 
+                         (void*) &INTERNAL_TYPE_POINTER );
+        set_internal( pp_internals, (void*) &pp_client_socket_numbers,
+                      (void*) &INTERNAL_TYPE_POINTER, 
+                      (void*) &INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_INDEX );
+                              
+        //create the client socket number count internals
+        int* p_client_socket_numbers_count = NULL_POINTER;
+        create_internal( (void*) &p_client_socket_numbers_count, 
+                         (void*) &INTERNAL_TYPE_INTEGER );
+        *p_client_socket_numbers_count = 0;
+        set_internal( pp_internals, (void*) &p_client_socket_numbers_count,
+                      (void*) &INTERNAL_TYPE_INTEGER, 
+                      (void*) &INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_COUNT_INDEX );
+
+        //create the client socket number size internals
+        int* p_client_socket_numbers_size = NULL_POINTER;
+        create_internal( (void*) &p_client_socket_numbers_size, 
+                         (void*) &INTERNAL_TYPE_INTEGER );
+        *p_client_socket_numbers_size = 0;
+        set_internal( pp_internals, (void*) &p_client_socket_numbers_size,
+                      (void*) &INTERNAL_TYPE_INTEGER, 
+                      (void*) &INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_SIZE_INDEX );
+
+        //create the main signal id internals
+        void** pp_main_signal_ids = NULL_POINTER;
+        create_internal( (void*) &pp_main_signal_ids, 
+                         (void*) &INTERNAL_TYPE_POINTER );
+        set_internal( pp_internals, (void*) &pp_main_signal_ids,
+                      (void*) &INTERNAL_TYPE_POINTER, 
+                      (void*) &INTERNAL_TCPSOCKET_MAINSIGNALID_INDEX );
+                              
+        //create the main signal id count internals
+        int* p_main_signal_ids_count = NULL_POINTER;
+        create_internal( (void*) &p_main_signal_ids_count, 
+                         (void*) &INTERNAL_TYPE_INTEGER );
+        *p_main_signal_ids_count = 0;
+        set_internal( pp_internals, (void*) &p_main_signal_ids_count,
+                      (void*) &INTERNAL_TYPE_INTEGER, 
+                      (void*) &INTERNAL_TCPSOCKET_MAINSIGNALID_COUNT_INDEX );
+
+        //create the main signal id size internals
+        int* p_main_signal_ids_size = NULL_POINTER;
+        create_internal( (void*) &p_main_signal_ids_size, 
+                         (void*) &INTERNAL_TYPE_INTEGER );
+        *p_main_signal_ids_size = 0;
+        set_internal( pp_internals, (void*) &p_main_signal_ids_size,
+                      (void*) &INTERNAL_TYPE_INTEGER, 
+                      (void*) &INTERNAL_TCPSOCKET_MAINSIGNALID_SIZE_INDEX );
+
+            
         // The active flag and port.
         int* p_tcp_socket_active = NULL_POINTER;
         int* p_tcp_socket_port = NULL_POINTER;
-        int* p_tcp_socket_number = NULL_POINTER;
         int internal_type;
-    
-        //create the server socket number internals
-        create_internal( (void*) &p_tcp_socket_number, 
-                         (void*) &INTERNAL_TYPE_INTEGER );
-        set_internal( pp_internals, (void*) &p_tcp_socket_number,
-                      (void*) &INTERNAL_TYPE_INTEGER, 
-                      (void*) &INTERNAL_TCPSOCKET_SERVERSOCKETNUMBER_INDEX );
-            
-
         // get active flag 
         get_internal( pp_internals, (void*) &p_tcp_socket_active,
                       (void*) &internal_type, 
@@ -391,9 +408,9 @@ void create_tcp_socket( void** pp_internals ) {
                 log_message_debug( "p_tcp_socket_port is a NULL POINTER" );
                 err = -1;
             }
-            else if ( p_tcp_socket_number == NULL_POINTER ) {
+            else if ( p_server_socket_number == NULL_POINTER ) {
                
-                log_message_debug( "p_tcp_socket_number is a NULL POINTER" );
+                log_message_debug( "p_server_socket_number is a NULL POINTER" );
                 err = -2;
             }
             else {
@@ -402,14 +419,15 @@ void create_tcp_socket( void** pp_internals ) {
                 int server_address_size;
             
                 /* create the socket */
-                *p_tcp_socket_number = socket( PF_INET, SOCK_STREAM, 0);
-                if ( *p_tcp_socket_number < 0 ) {
+                *p_server_socket_number = socket( PF_INET, SOCK_STREAM, 0);
+                if ( *p_server_socket_number < 0 ) {
                     
                     //errormessage and close the thread
                     log_message_debug( "failed to create socket" );
                     err = -3;
                 }
-                fprintf( stderr, "create the socket - socketnumber: %d \n", *p_tcp_socket_number );
+                fprintf( stderr, "create the socket - socketnumber: %d \n", 
+                                 *p_server_socket_number );
             
                 /* create the socket address of the server */
                 server_address.sin_family       = AF_INET;
@@ -418,7 +436,7 @@ void create_tcp_socket( void** pp_internals ) {
                 server_address_size             = sizeof(server_address);
             
                 /* bind the socket to the server address */
-                if ( bind( *p_tcp_socket_number, (struct sockaddr *) &server_address,
+                if ( bind( *p_server_socket_number, (struct sockaddr *) &server_address,
                            server_address_size ) < 0 ) 
                 {
             
@@ -430,7 +448,7 @@ void create_tcp_socket( void** pp_internals ) {
                 fprintf( stderr, "bind the socket on the port %d \n", *p_tcp_socket_port );
                 
                 /* listen for request of the clients */
-                listen( *p_tcp_socket_number, 1);
+                listen( *p_server_socket_number, 1);
                 
             }
             if ( err == 0 ) {
@@ -510,7 +528,6 @@ void run_tcp_socket( void** pp_internals ) {
             handle_request( pp_internals, &client_socketnumber );        
     
             // close the socket connection 
-            close( client_socketnumber );
         //}
         
         //pthread_exit((void *) 0);
