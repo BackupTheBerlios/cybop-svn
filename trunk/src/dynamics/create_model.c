@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.27 $ $Date: 2004-05-31 17:49:23 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2004-06-03 07:11:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -365,14 +365,37 @@ void interpret_model(void* p0, void* p1, void* p2, const void* p3, const void* p
 /**
  * Creates a model.
  *
- * @param p0 the persistent model
- * @param p1 the persistent model count
- * @param p2 the abstraction
- * @param p3 the abstraction count
- * @param p4 the location
- * @param p5 the location count
+ * @param p0 the compound
+ * @param p1 the compound count
+ * @param p2 the compound size
+ * @param p3 the persistent name
+ * @param p4 the persistent name count
+ * @param p5 the persistent model
+ * @param p6 the persistent model count
+ * @param p7 the persistent location
+ * @param p8 the persistent location count
+ * @param p9 the persistent abstraction
+ * @param p10 the persistent abstraction count
+ * @param p11 the persistent constraints
+ * @param p12 the persistent constraints count
+ * @param p13 the persistent position model
+ * @param p14 the persistent position model count
+ * @param p15 the persistent position location
+ * @param p16 the persistent position location count
+ * @param p17 the persistent position abstraction
+ * @param p18 the persistent position abstraction count
+ * @param p19 the persistent position constraints
+ * @param p20 the persistent position constraints count
  */
-void create_model(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4, const void* p5) {
+void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
+    const void* p5, const void* p6, const void* p7, const void* p8,
+    const void* p9, const void* p10, const void* p11, const void* p12,
+    const void* p13, const void* p14, const void* p15, const void* p16,
+    const void* p17, const void* p18, const void* p19, const void* p20) {
+
+    //
+    // Buffer.
+    //
 
     // The buffer array.
     void* b = NULL_POINTER;
@@ -396,10 +419,10 @@ void create_model(const void* p0, const void* p1, const void* p2, const void* p3
     create_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
 
     // Read persistent model from location into buffer array.
-    read_model((void*) &b, (void*) &bc, (void*) &bs, p0, p1, p4, p5);
+    read_model((void*) &b, (void*) &bc, (void*) &bs, p5, p6, p7, p8);
 
     // Create and initialize transient model from buffer array.
-    interpret_model((void*) &p, (void*) &pc, (void*) &ps, (void*) &b, (void*) &bc, p2, p3);
+    interpret_model((void*) &p, (void*) &pc, (void*) &ps, (void*) &b, (void*) &bc, p9, p10);
 
     // Destroy buffer array.
     destroy_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
@@ -419,10 +442,10 @@ void create_model(const void* p0, const void* p1, const void* p2, const void* p3
     create_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
 
     // Read persistent model from location into buffer array.
-    read_model((void*) &b, (void*) &bc, (void*) &bs, p0, p1, p4, p5);
+    read_model((void*) &b, (void*) &bc, (void*) &bs, p13, p14, p15, p16);
 
     // Create and initialize transient model from buffer array.
-    interpret_model((void*) &po, (void*) &poc, (void*) &pos, (void*) &b, (void*) &bc, p2, p3);
+    interpret_model((void*) &po, (void*) &poc, (void*) &pos, (void*) &b, (void*) &bc, p17, p18);
 
     // Destroy buffer array.
     destroy_array((void*) &b, (void*) &CHARACTER_ARRAY, (void*) &bs);
@@ -431,10 +454,10 @@ void create_model(const void* p0, const void* p1, const void* p2, const void* p3
     // Model.
     //
 
-    <!-- create operation,whole model,part name,part abstraction,part location,part model /-->
+    <!-- create operation,whole model,name,abstraction,location,model /-->
     <part name="create_domain" part_abstraction="operation" part_location="inline" part_model="create,root,domain,compound,file,/helloworld/domain.cybol"/>
-    // Set transient model as part of a whole model.
-    set_model_part_by_name();
+    // Set transient model as part of the whole model.
+    set_compound_part_by_name(w, wc, ws, n, nc, m, mc, a, ac, c, cc, pm, pmc, pa, pac, pc, pcc);
 }
 
 /**

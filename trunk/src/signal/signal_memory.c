@@ -32,7 +32,7 @@
  * A signal is a transient logic model.
  * It is stored in the computer's random access memory (ram).
  *
- * @version $Revision: 1.21 $ $Date: 2004-05-31 17:49:23 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2004-06-03 07:11:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -533,12 +533,22 @@ void handle_compound_signal(void* p0, void* p1, void* p2, const void* p3, const 
  *
  * @param p0 the operation signal
  * @param p1 the operation signal parameters count
- * @param p2 the state root
- * @param p3 the logic root
- * @param p4 the internals
- * @param p5 the shutdown flag
+ * @param p2 the state knowledge
+ * @param p3 the state knowledge count
+ * @param p4 the state knowledge size
+ * @param p5 the logic knowledge
+ * @param p6 the logic knowledge count
+ * @param p7 the logic knowledge size
+ * @param p8 the internals
+ * @param p9 the internals count
+ * @param p10 the internals size
+ * @param p11 the shutdown flag
  */
-void handle_operation_signal(const void* p0, const void* p1, void* p2, void* p3, void* p4, void* p5) {
+void handle_operation_signal(const void* p0, const void* p1,
+    void* p2, void* p3, void* p4,
+    void* p5, void* p6, void* p7,
+    void* p8, void* p9, void* p10,
+    void* p11) {
 
     if (p1 != NULL_POINTER) {
 
@@ -557,6 +567,12 @@ void handle_operation_signal(const void* p0, const void* p1, void* p2, void* p3,
         // Initialize parameter names.
         // The first parameter param0 is the operation name.
         // Following parameters param1 .. are input and output names.
+
+        //?? Use a loop with a pointer array here??
+        //?? Fill this array with pointers to parameters,
+        //?? using one single help variable.
+        //?? The operation signal parameters count gives the size of the array.
+
         void* param0 = NULL_POINTER;
         int param0c = 0;
         void* param1 = NULL_POINTER;
@@ -702,11 +718,21 @@ void handle_operation_signal(const void* p0, const void* p1, void* p2, void* p3,
                     //?? Check parameter array size to avoid accessing
                     //?? not existing array element/ crossing array limits!
 
-/*??
 <!-- create operation,whole model,part name,part abstraction,part location,part model /-->
 <part name="create_domain" part_abstraction="operation" part_location="inline" part_model="create,root,domain,compound,file,/helloworld/domain.cybol"/>
 
-                    create_model((void*) &param1, (void*) &param1s,
+                    // Determine whole model.
+                    void* w = NULL_POINTER;
+                    int wc = 0;
+                    int ws = 0;
+
+                    get_compound_part_by_name(p2, p3, p4,
+                        wholenameparam, wholenamecountparam, wholenamesizeparam,
+                        (void*) &w, (void*) &wc, (void*) &ws,
+                        (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
+                        );
+
+                    create_model((void*) &whole, (void*) &wholes,
                         (void*) &param2, (void*) &param2s,
                         (void*) &param3, (void*) &param3s,
                         (void*) &param4, (void*) &param4s,

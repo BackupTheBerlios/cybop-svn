@@ -59,7 +59,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.12 $ $Date: 2004-05-31 17:49:23 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-06-03 07:11:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -234,14 +234,14 @@ static const int PARAMETERS_COUNTS_INDEX = 1;
 static const int PARAMETERS_SIZES_INDEX = 2;
 
 //
-// Model.
+// Compound.
 //
 
-/** The model resize factor. */
-static const int MODEL_RESIZE_FACTOR = 2;
+/** The compound resize factor. */
+static const int COMPOUND_RESIZE_FACTOR = 2;
 
-/** The model count. */
-static const int MODEL_COUNT = 14;
+/** The compound count. */
+static const int COMPOUND_COUNT = 14;
 
 /** The part names index. */
 static const int PART_NAMES_INDEX = 0;
@@ -1556,19 +1556,24 @@ static const int MODEL_LOCATION_SEPARATOR_COUNT = 1;
 
 //
 // Cybol model values:
-// - model separators
+// - compound
+// - operation
 // - boolean
 //
 
 //
-// Model separators.
+// Compound.
+//
+
+/** The compound part separator. */
+static const char COMPOUND_PART_SEPARATOR = '.';
+
+//
+// Operation.
 //
 
 /** The operation parameter separator. */
 static const char OPERATION_PARAMETER_SEPARATOR = ',';
-
-/** The model part separator. */
-static const char MODEL_PART_SEPARATOR = '.';
 
 //
 // Boolean.
