@@ -33,7 +33,7 @@ package cyboi;
  * - send
  * - reset
  *
- * @version $Revision: 1.17 $ $Date: 2003-09-04 14:04:32 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2003-09-05 07:57:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -272,7 +272,7 @@ class SignalHandler {
                     SignalHandler.reset(s);
                     
                     s.predicate = SignalHandler.SEND_ACTION;
-                    s.object = MapHandler.get_map_element(((Item) root).items, "login_screen");
+                    s.object = MapHandler.get_map_element(((Item) root).items, "main_frame");
 
                 } else if (a.equals(SignalHandler.SHUTDOWN_ACTION)) {
                     

@@ -27,7 +27,7 @@ package cyboi;
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.14 $ $Date: 2003-08-18 17:30:06 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-09-05 07:57:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryHandler {
@@ -37,7 +37,7 @@ class CategoryHandler {
     //
     
     /** The cybol path. */
-    static java.lang.String PATH = "/home/cybop/src/";
+    static java.lang.String PATH = "/home/cybop/lib/";
 
     /** The cybol file suffix. */
     static java.lang.String CYBOL = ".cybol";
