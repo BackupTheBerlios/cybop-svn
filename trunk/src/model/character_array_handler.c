@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.9 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-04-07 15:47:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -346,6 +346,93 @@ void get_character_array_element_index(const void* p0, const void* p1, const voi
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array element index. The index is null.");
+    }
+}
+
+/**
+ * Gets the character array elements index.
+ *
+ * The first occurence of the elements will be considered.
+ * The given index remains unchanged if no elements are found.
+ *
+ * @param p0 the character array
+ * @param p1 the size
+ * @param p2 the elements character array
+ * @param p3 the elements size
+ * @param p4 the index
+ */
+void get_character_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
+
+    if (p4 != NULL_POINTER) {
+
+        int* i = (int*) p4;
+
+        if (p3 != NULL_POINTER) {
+
+            int* es = (int*) p3;
+
+            if (p2 != NULL_POINTER) {
+
+                char* e1 = (char*) p2;
+
+                if (p1 != NULL_POINTER) {
+
+                    int* s = (int*) p1;
+
+                    if (p0 != NULL_POINTER) {
+
+                        void** a = (void**) p0;
+
+                        int j = 0;
+                        char* e0 = NULL_CHARACTER_ARRAY;
+                        int r = 0;
+
+                        while (1) {
+
+                            if (j >= (*s - *es)) {
+
+                                // The element has not been found.
+                                break;
+                            }
+
+                            // Compare given element with the next elements at array plus index.
+                            e0 = (char*) (*a + j);
+
+                            compare_character_arrays(e0, p2, p3, (void*) &r);
+
+                            if (r == 1) {
+
+                                // The element has been found.
+                                *i = j;
+                                break;
+                            }
+
+                            j++;
+                        }
+
+                    } else {
+
+                        log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array elements index. The character array is null.");
+                    }
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array elements index. The size is null.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array elements index. The elements character array is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array elements index. The elements size is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get character array elements index. The index is null.");
     }
 }
 

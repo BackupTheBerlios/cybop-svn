@@ -25,7 +25,19 @@
  *
  * It can read and write a cybol source file.
  *
- * @version $Revision: 1.12 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
+ * Structure of a cybol file:
+ * cybol_model
+ *     tags (0..n)
+ *         map = name_attribute
+ *             names array
+ *             references array
+ *         map = part_abstraction_attribute
+ *         map = part_location_attribute
+ *         map = part_model_attribute
+ *         map = position_abstraction_attribute
+ *         (attributes 0..9 = size 10)
+ *
+ * @version $Revision: 1.13 $ $Date: 2004-04-07 15:47:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,6 +45,7 @@
 #define CYBOL_MODEL_HANDLER_SOURCE
 
 #include <stdio.h>
+#include "../constants.c"
 
 //
 // Constants.
@@ -41,55 +54,172 @@
 /** The cybol path. */
 //?? static const char CYBOL_PATH[] = {'/home/cybop/lib/cybop/'};
 
+/** The open office writer model size. */
+//?? static const int SXW_MODEL_SIZE = 3;
+
 /** The cybol file suffix. */
 //?? static const char FILE_SUFFIX[] = {'.cybol'};
 
-/** The super model. */
-//?? static const char SUPER_MODEL[] = {'super'};
+/** The open office writer model size. */
+//?? static const int SXW_MODEL_SIZE = 3;
 
 /** The null model. */
 //?? static const char NULL_MODEL[] = {'null'};
 
-/** The name. */
-static const char NAME[] = {'n', 'a', 'm', 'e'};
+/** The open office writer model size. */
+//?? static const int SXW_MODEL_SIZE = 3;
 
-/** The part abstraction. */
-static const char PART_ABSTRACTION[] = {'p', 'a', 'r', 't', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+/** The model tag. */
+static const char MODEL_TAG[] = {'m', 'o', 'd', 'e', 'l'};
 
-/** The part location. */
-static const char PART_LOCATION[] = {'p', 'a', 'r', 't', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
+/** The model tag size. */
+static const int MODEL_TAG_SIZE = 5;
 
-/** The part model. */
-static const char PART_MODEL[] = {'p', 'a', 'r', 't', '_', 'm', 'o', 'd', 'e', 'l'};
+/** The part tag. */
+static const char PART_TAG[] = {'p', 'a', 'r', 't'};
 
-/** The position abstraction. */
-static const char POSITION_ABSTRACTION[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+/** The part tag size. */
+static const int PART_TAG_SIZE = 4;
 
-/** The position location. */
-static const char POSITION_LOCATION[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
+/** The super tag. */
+static const char SUPER_TAG[] = {'s', 'u', 'p', 'e', 'r'};
 
-/** The position model. */
-static const char POSITION_MODEL[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'm', 'o', 'd', 'e', 'l'};
+/** The super tag size. */
+static const int SUPER_TAG_SIZE = 5;
 
-/** The constraint abstraction. */
-static const char CONSTRAINT_ABSTRACTION[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+/** The name attribute. */
+static const char NAME_ATTRIBUTE[] = {'n', 'a', 'm', 'e'};
 
-/** The constraint location. */
-static const char CONSTRAINT_LOCATION[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
+/** The name attribute size. */
+static const int NAME_ATTRIBUTE_SIZE = 4;
 
-/** The constraint model. */
-static const char CONSTRAINT_MODEL[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '_', 'm', 'o', 'd', 'e', 'l'};
+/** The part abstraction attribute. */
+static const char PART_ABSTRACTION_ATTRIBUTE[] = {'p', 'a', 'r', 't', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
 
-cybol_model
-    tags (0..n)
-        map = name_attribute
-            names array
-            references array
-        map = part_abstraction_attribute
-        map = part_location_attribute
-        map = part_model_attribute
-        map = position_abstraction_attribute
-        (attributes 0..9 = size 10)
+/** The part abstraction attribute size. */
+static const int PART_ABSTRACTION_ATTRIBUTE_SIZE = 16;
+
+/** The part location attribute. */
+static const char PART_LOCATION_ATTRIBUTE[] = {'p', 'a', 'r', 't', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
+
+/** The part location attribute size. */
+static const int PART_LOCATION_ATTRIBUTE_SIZE = 13;
+
+/** The part model attribute. */
+static const char PART_MODEL_ATTRIBUTE[] = {'p', 'a', 'r', 't', '_', 'm', 'o', 'd', 'e', 'l'};
+
+/** The part model attribute size. */
+static const int PART_MODEL_ATTRIBUTE_SIZE = 10;
+
+/** The position abstraction attribute. */
+static const char POSITION_ABSTRACTION_ATTRIBUTE[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+
+/** The position abstraction attribute size. */
+static const int POSITION_ABSTRACTION_ATTRIBUTE_SIZE = 20;
+
+/** The position location attribute. */
+static const char POSITION_LOCATION_ATTRIBUTE[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
+
+/** The position location attribute size. */
+static const int POSITION_LOCATION_ATTRIBUTE_SIZE = 17;
+
+/** The position model attribute. */
+static const char POSITION_MODEL_ATTRIBUTE[] = {'p', 'o', 's', 'i', 't', 'i', 'o', 'n', '_', 'm', 'o', 'd', 'e', 'l'};
+
+/** The position model attribute size. */
+static const int POSITION_MODEL_ATTRIBUTE_SIZE = 14;
+
+/** The constraint abstraction attribute. */
+static const char CONSTRAINT_ABSTRACTION_ATTRIBUTE[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '_', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+
+/** The constraint abstraction attribute size. */
+static const int CONSTRAINT_ABSTRACTION_ATTRIBUTE_SIZE = 22;
+
+/** The constraint location attribute. */
+static const char CONSTRAINT_LOCATION_ATTRIBUTE[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '_', 'l', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
+
+/** The constraint location attribute size. */
+static const int CONSTRAINT_LOCATION_ATTRIBUTE_SIZE = 19;
+
+/** The constraint model attribute. */
+static const char CONSTRAINT_MODEL_ATTRIBUTE[] = {'c', 'o', 'n', 's', 't', 'r', 'a', 'i', 'n', 't', '_', 'm', 'o', 'd', 'e', 'l'};
+
+/** The constraint model attribute size. */
+static const int CONSTRAINT_MODEL_ATTRIBUTE_SIZE = 16;
+
+//
+// File.
+//
+
+/**
+ * Initializes the compound model from a file.
+ *
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
+ */
+void initialize_compound_model_from_file(void* p0, const void* p1, const void* p2) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Initialize compound model from file.");
+
+/*??
+    // Create temporary cybol model.
+    struct statics_model* cybol = (struct statics_model*) malloc(sizeof(struct statics_model));
+    create_statics_model_containers((void*) cybol);
+
+    // Read statics cybol model from file path.
+    read_statics_cybol_model((void*) cybol, p1);
+
+    // Initialize statics model parts with statics cybol model.
+    if (cybol != NULL_POINTER) {
+
+        initialize_statics_parts(p0, cybol->parts);
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize statics model. The statics cybol model is null.");
+    }
+
+    // Destroy temporary statics cybol model.
+    destroy_statics_model_containers((void*) cybol);
+    free((void*) cybol);
+*/
+}
+
+/**
+ * Finalizes the compound model to a file.
+ *
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
+ */
+void finalize_compound_model_to_file(void* p0, const void* p1, const void* p2) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Finalize compound model to file.");
+
+/*??
+    // Create temporary statics cybol model.
+    struct statics_model* cybol = (struct statics_model*) malloc(sizeof(struct statics_model));
+    create_statics_model_containers((void*) cybol);
+
+    // Finalize statics model parts with statics cybol model.
+    if (cybol != NULL_POINTER) {
+
+        finalize_statics_parts(p0, cybol->parts);
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The statics cybol model is null.");
+    }
+
+    // Write statics cybol model to file path.
+    write_statics_cybol_model((void*) cybol, p1);
+
+    // Destroy temporary statics cybol model.
+    destroy_statics_model_containers((void*) cybol);
+    free((void*) cybol);
+*/
+}
 
 //
 // Attribute.
@@ -282,7 +412,7 @@ void initialize_children_models(void* p0, void* p1) {
                 initialize_item(i, n);
 
                 if (i != NULL_POINTER) {
-                        
+
                     name = get_map_element(i.items, NAME);
                     set_map_element(p0, name, i);
                     
@@ -340,22 +470,22 @@ void initialize_super_model(void* p0, void* p1) {
     org.apache.xerces.dom.DeepNodeListImpl l = (org.apache.xerces.dom.DeepNodeListImpl) p1;
 
     if (l != NULL_POINTER) {
-        
+
         org.apache.xerces.dom.NodeImpl n = (org.apache.xerces.dom.NodeImpl) l.item(0);
-        
+
         if (n != NULL_POINTER) {
 
             log_message((void*) &INFO_LOG_LEVEL, "Initialize super model.");
             int s = read_attribute((org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes(), CATEGORY);
             initialize_category(p0, s);
-            
+
         } else {
-            
+
             log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize super model. The super model node is null.");
         }
-        
+
     } else {
-        
+
         log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize super model. The super model list is null.");
     }
 */
@@ -430,29 +560,30 @@ void write_from_model(void* p0, void* p1) {
  */
 int read_cybol_attribute(void* p0, void* p1) {
 
+/*??
     int mode = 0;
     char* s = (char*) p0;
-    
+
     if (strcmp(s, "name=") == 0) {
-        
+
         mode = 1;
 
     } else if (strcmp(s, "child_ab straction=") == 0) {
-        
+
         mode = 2;
-    
+
     } else if (strcmp(s, "child_model=") == 0) {
-        
+
         mode = 3;
-    
+
     } else if (strcmp(s, "position_abstraction=") == 0) {
-        
+
         mode = 4;
-    
+
     } else if (strcmp(s, "position_model=") == 0) {
-        
+
         mode = 5;
-    
+
     } else if (strcmp(s, "logics_abstraction=") == 0) {
         
         mode = 6;
@@ -483,6 +614,7 @@ int read_cybol_attribute(void* p0, void* p1) {
     }
 
     return mode;
+*/
 }
 
 /**
@@ -493,6 +625,7 @@ int read_cybol_attribute(void* p0, void* p1) {
  */
 int read_cybol_tag(void* p0, void* p1) {
 
+/*??
     int mode = 0;
     char* s = (char*) p0;
 
@@ -520,6 +653,7 @@ int read_cybol_tag(void* p0, void* p1) {
     }
 
     return mode;
+*/
 }
 
 /**
@@ -530,6 +664,7 @@ int read_cybol_tag(void* p0, void* p1) {
  */
 void read_cybol_file(void* p0, const void* p1) {
 
+/*??
     FILE* f = (FILE*) p1;
     //?? char* s = (char*) malloc(2000);
     char c = fgetc(f);
@@ -623,6 +758,7 @@ void read_cybol_file(void* p0, const void* p1) {
     }
 
 //??    free(s);
+*/
 }
 
 //
@@ -639,6 +775,7 @@ void read_cybol_file(void* p0, const void* p1) {
  */
 void initialize_source_model(void* p0, void* p1) {
 
+/*??
     log_message((void*) &INFO_LOG_LEVEL, "Initialize model.");
 
     char* n[] = {''};
@@ -657,6 +794,7 @@ void initialize_source_model(void* p0, void* p1) {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize source model. The file is null.");
     }
+*/
 }
 
 /**

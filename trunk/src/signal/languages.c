@@ -23,7 +23,7 @@
  *
  * This file defines constants for languages that systems can use to communicate.
  *
- * @version $Revision: 1.3 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-04-07 15:47:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,10 +37,16 @@
 /** The cybol language. */
 static const char CYBOL_LANGUAGE[] = {'c', 'y', 'b', 'o', 'l'};
 
+/** The cybol language size. */
+static const int CYBOL_LANGUAGE_SIZE = 5;
+
 /** The inline (serialized) language. */
 static const char INLINE_LANGUAGE[] = {'i', 'n', 'l', 'i', 'n', 'e'};
 
-//?? The following languages are not used yet.
+/** The inline (serialized) language size. */
+static const int INLINE_LANGUAGE_SIZE = 6;
+
+//?? ---------- The following languages are not used yet. ----------
 
 /** The textual user interface (tui) language. */
 static const char TUI_LANGUAGE[] = {'t', 'u', 'i'};

@@ -30,7 +30,7 @@
  * http://home.arcor.de/cpp_kurs/cpp/le07/k2_09_d1.htm
  * ... or try a Google search.
  *
- * @version $Revision: 1.7 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-04-07 15:47:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,8 +44,14 @@
 /** The and model. */
 static const char AND_MODEL[] = {'a', 'n', 'd'};
 
+/** The and model size. */
+static const int AND_MODEL_SIZE = 3;
+
 /** The or model. */
 static const char OR_MODEL[] = {'o', 'r'};
+
+/** The or model size. */
+static const int OR_MODEL_SIZE = 2;
 
 //
 // Comparison models.
@@ -54,17 +60,32 @@ static const char OR_MODEL[] = {'o', 'r'};
 /** The equal model. */
 static const char EQUAL_MODEL[] = {'e', 'q', 'u', 'a', 'l'};
 
+/** The equal model size. */
+static const int EQUAL_MODEL_SIZE = 5;
+
 /** The smaller model. */
 static const char SMALLER_MODEL[] = {'s', 'm', 'a', 'l', 'l', 'e', 'r'};
+
+/** The smaller model size. */
+static const int SMALLER_MODEL_SIZE = 7;
 
 /** The greater model. */
 static const char GREATER_MODEL[] = {'g', 'r', 'e', 'a', 't', 'e', 'r'};
 
+/** The greater model size. */
+static const int GREATER_MODEL_SIZE = 7;
+
 /** The smaller or equal model. */
 static const char SMALLER_OR_EQUAL_MODEL[] = {'s', 'm', 'a', 'l', 'l', 'e', 'r', '_', 'o', 'r', '_', 'e', 'q', 'u', 'a', 'l'};
 
+/** The smaller or equal model size. */
+static const int SMALLER_OR_EQUAL_MODEL_SIZE = 16;
+
 /** The greater or equal model. */
 static const char GREATER_OR_EQUAL_MODEL[] = {'g', 'r', 'e', 'a', 't', 'e', 'r', '_', 'o', 'r', '_', 'e', 'q', 'u', 'a', 'l'};
+
+/** The greater or equal model size. */
+static const int GREATER_OR_EQUAL_MODEL_SIZE = 16;
 
 //
 // Arithmetic models.
@@ -73,14 +94,26 @@ static const char GREATER_OR_EQUAL_MODEL[] = {'g', 'r', 'e', 'a', 't', 'e', 'r',
 /** The add model. */
 static const char ADD_MODEL[] = {'a', 'd', 'd'};
 
+/** The add model size. */
+static const int ADD_MODEL_SIZE = 3;
+
 /** The subtract model. */
 static const char SUBTRACT_MODEL[] = {'s', 'u', 'b', 't', 'r', 'a', 'c', 't'};
+
+/** The subtract model size. */
+static const int SUBTRACT_MODEL_SIZE = 8;
 
 /** The multiply model. */
 static const char MULTIPLY_MODEL[] = {'m', 'u', 'l', 't', 'i', 'p', 'l', 'y'};
 
+/** The multiply model size. */
+static const int MULTIPLY_MODEL_SIZE = 8;
+
 /** The divide model. */
 static const char DIVIDE_MODEL[] = {'d', 'i', 'v', 'i', 'd', 'e'};
+
+/** The divide model size. */
+static const int DIVIDE_MODEL_SIZE = 6;
 
 //
 // Memory management models.
@@ -89,14 +122,26 @@ static const char DIVIDE_MODEL[] = {'d', 'i', 'v', 'i', 'd', 'e'};
 /** The create statics model. */
 static const char CREATE_STATICS_MODEL[] = {'c', 'r', 'e', 'a', 't', 'e', '_', 's', 't', 'a', 't', 'i', 'c', 's'};
 
+/** The create statics model size. */
+static const int CREATE_STATICS_MODEL_SIZE = 14;
+
 /** The destroy statics model. */
 static const char DESTROY_STATICS_MODEL[] = {'d', 'e', 's', 't', 'r', 'o', 'y', '_', 's', 't', 'a', 't', 'i', 'c', 's'};
+
+/** The destroy statics model size. */
+static const int DESTROY_STATICS_MODEL_SIZE = 15;
 
 /** The create dynamics model. */
 static const char CREATE_DYNAMICS_MODEL[] = {'c', 'r', 'e', 'a', 't', 'e', '_', 'd', 'y', 'n', 'a', 'm', 'i', 'c', 's'};
 
+/** The create dynamics model size. */
+static const int CREATE_DYNAMICS_MODEL_SIZE = 15;
+
 /** The destroy dynamics model. */
 static const char DESTROY_DYNAMICS_MODEL[] = {'d', 'e', 's', 't', 'r', 'o', 'y', '_', 'd', 'y', 'n', 'a', 'm', 'i', 'c', 's'};
+
+/** The destroy dynamics model size. */
+static const int DESTROY_DYNAMICS_MODEL_SIZE = 16;
 
 //
 // Input output models.
@@ -105,8 +150,14 @@ static const char DESTROY_DYNAMICS_MODEL[] = {'d', 'e', 's', 't', 'r', 'o', 'y',
 /** The send model. */
 static const char SEND_MODEL[] = {'s', 'e', 'n', 'd'};
 
+/** The send model size. */
+static const int SEND_MODEL_SIZE = 4;
+
 /** The receive model. */
 static const char RECEIVE_MODEL[] = {'r', 'e', 'c', 'e', 'i', 'v', 'e'};
+
+/** The receive model size. */
+static const int RECEIVE_MODEL_SIZE = 7;
 
 //
 // Lifecycle step models.
@@ -114,6 +165,9 @@ static const char RECEIVE_MODEL[] = {'r', 'e', 'c', 'e', 'i', 'v', 'e'};
 
 /** The exit model. */
 static const char EXIT_MODEL[] = {'e', 'x', 'i', 't'};
+
+/** The exit model size. */
+static const int EXIT_MODEL_SIZE = 4;
 
 /*??
 //

@@ -35,14 +35,14 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.27 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2004-04-07 15:47:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SIGNAL_MEMORY_HANDLER_SOURCE
 #define SIGNAL_MEMORY_HANDLER_SOURCE
 
-#include <string.h>
+#include "../constants.c"
 #include "../dynamics/add.c"
 #include "../dynamics/create_model.c"
 #include "../dynamics/destroy_model.c"
@@ -53,12 +53,10 @@
 #include "../model/model_handler.c"
 #include "../signal/languages.c"
 #include "../signal/priorities.c"
-#include "../signal/signal_memory.c"
-#include "../statics/vector.c"
 #include "../x_windows/x_windows_handler.c"
 
 //
-// Constants.
+// Integer constants.
 //
 
 /** The zero number. */
@@ -91,19 +89,155 @@ static const int EIGHT_NUMBER = 8;
 /** The nine number. */
 static const int NINE_NUMBER = 9;
 
-...
-/** The signals. */
-void* signals;
+//
+// Constants.
+//
 
-/** The abstractions. */
-void* abstractions;
+/** The signal memory size. */
+static const int SIGNAL_MEMORY_SIZE = 5;
 
-/** The priorities. */
-void* priorities;
-...
+/** The array size index. */
+static const int ARRAY_SIZE_INDEX = 0;
+
+/** The signals array index. */
+static const int SIGNALS_ARRAY_INDEX = 1;
+
+/** The priorities array index. */
+static const int PRIORITIES_ARRAY_INDEX = 2;
+
+/** The abstractions array index. */
+static const int ABSTRACTIONS_ARRAY_INDEX = 3;
+
+/** The abstractions sizes array index. */
+static const int ABSTRACTIONS_SIZES_ARRAY_INDEX = 4;
 
 //
-// Signal.
+// Signal memory.
+//
+
+/**
+ * Creates the signal memory.
+ *
+ * @param p0 the signal memory
+ */
+void create_signal_memory(void* p0) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Create signal memory.");
+
+    // The signal memory.
+    create_array(p0, (void*) &SIGNAL_MEMORY_SIZE);
+
+    //?? Actually, the array size should be stored in an own integer_array.
+    //?? But since probably in the future, only the integer_array will
+    //?? stay and a pointer in the end is also an integer, the array size
+    //?? is just added at first, before the names and references arrays,
+    //?? to the pointer array which represents the map.
+    //?? Caution! INTEGER_ARRAY needs to be given as type for the array size.
+
+    // Set array size which is equal for all arrays.
+    int s = 0;
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
+
+    // The signals array.
+    void* sig = NULL_POINTER;
+    create_array((void*) &sig, (void*) &s);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ARRAY_INDEX, (void*) &sig);
+
+    // The priorities array.
+    void* p = NULL_POINTER;
+    create_array((void*) &p, (void*) &s);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
+
+    // The abstractions array.
+    void* a = NULL_POINTER;
+    create_array((void*) &a, (void*) &s);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_ARRAY_INDEX, (void*) &a);
+
+    // The abstractions sizes array.
+    void* as = NULL_POINTER;
+    create_array((void*) &as, (void*) &s);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX, (void*) &as);
+}
+
+/**
+ * Destroys the signal memory.
+ *
+ * @param p0 the signal memory
+ */
+void destroy_signal_memory(void* p0) {
+
+    log_message((void*) &INFO_LOG_LEVEL, "Destroy all signals left in signal memory.");
+
+/*??
+    int i = 0;
+    get_array_count(m->signals, (void*) &i);
+    i--;
+    void* s = NULL_POINTER;
+    void* a = NULL_POINTER;
+
+    while (i >= 0) {
+
+        s = (void*) get_signal(p0, (void*) &i);
+        a = (void*) get_abstraction(p0, (void*) &i);
+        // Priority is not needed to destroy the signal.
+
+        // Abstraction and priority are removed internally,
+        // together with the signal.
+        remove_signal(p0, (void*) &i);
+
+        // Destroy signal. Do not destroy the signal's abstraction and
+        // priority here; they are static within CYBOI.
+        destroy_model(s, NULL, NULL, (void*) a);
+
+        i--;
+    }
+*/
+
+    log_message((void*) &INFO_LOG_LEVEL, "Destroy signal memory.");
+
+    // Get array size which is equal for all arrays.
+    int s = 0;
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
+
+    // The abstractions sizes array.
+    void* as = NULL_POINTER;
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX, (void*) &as);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &ABSTRACTIONS_SIZES_ARRAY_INDEX);
+    destroy_array((void*) &as, (void*) &s);
+
+    // The abstractions array.
+    void* a = NULL_POINTER;
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_ARRAY_INDEX, (void*) &a);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &ABSTRACTIONS_ARRAY_INDEX);
+    destroy_array((void*) &a, (void*) &s);
+
+    // The priorities array.
+    void* p = NULL_POINTER;
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_ARRAY_INDEX, (void*) &p);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &PRIORITIES_ARRAY_INDEX);
+    destroy_array((void*) &p, (void*) &s);
+
+    // The signals array.
+    void* sig = NULL_POINTER;
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_ARRAY_INDEX, (void*) &sig);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &SIGNALS_ARRAY_INDEX);
+    destroy_array((void*) &sig, (void*) &s);
+
+    //?? Actually, the array size should be stored in an own integer_array.
+    //?? Caution! INTEGER_ARRAY needs to be given as type for the array size.
+    //?? The remove procedure moves all pointer elements and deletes the
+    //?? last element. Since the size is the last remaining element,
+    //?? no pointer elements are found which would be wrongly casted to (int*).
+
+    // Remove array size which is equal for all arrays.
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &ARRAY_SIZE_INDEX);
+
+    // The signal memory.
+    destroy_array(p0, (void*) &SIGNAL_MEMORY_SIZE);
+}
+
+//
+// Signal memory element.
 //
 
 /**
@@ -112,18 +246,20 @@ void* priorities;
  * @param p0 the signal memory
  * @param p1 the index
  * @param p2 the signal
- * @param p3 the abstraction
- * @param p4 the priority
+ * @param p3 the priority
+ * @param p4 the abstraction
+ * @param p5 the abstraction size
  */
-void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void set_signal(void* p0, const void* p1, const void* p2, const void* p3, const void* p4, const void* p5) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
 
     if (m != NULL_POINTER) {
 
         set_array_element(m->signals, p1, p2);
-        set_array_element(m->abstractions, p1, p3);
         set_array_element(m->priorities, p1, p4);
+        set_array_element(m->abstractions, p1, p3);
+        set_array_element(m->abstractions_sizes, p1, p3);
 
     } else {
 
@@ -238,91 +374,6 @@ void get_highest_priority_index(void* p0, void* p1) {
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get index of the signal with highest priority. The signal memory is null.");
-    }
-}
-
-//
-// Signal memory.
-//
-
-/**
- * Creates the signal memory.
- *
- * @param p0 the signal memory
- */
-void create_signal_memory(void* p0) {
-
-    struct signal_memory* m = (struct signal_memory*) p0;
-
-    if (m != NULL_POINTER) {
-
-        log_message((void*) &INFO_LOG_LEVEL, "Create signal memory.");
-
-        m->signals = malloc(sizeof(struct array));
-        initialize_array(m->signals);
-
-        m->abstractions = malloc(sizeof(struct array));
-        initialize_array(m->abstractions);
-
-        m->priorities = malloc(sizeof(struct array));
-        initialize_array(m->priorities);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not create signal memory. The signal memory is null.");
-    }
-}
-
-/**
- * Destroys the signal memory.
- *
- * @param p0 the signal memory
- */
-void destroy_signal_memory(void* p0) {
-
-    struct signal_memory* m = (struct signal_memory*) p0;
-
-    if (m != NULL_POINTER) {
-
-        log_message((void*) &INFO_LOG_LEVEL, "Destroy all signals left in signal memory.");
-
-        int i = 0;
-        get_array_count(m->signals, (void*) &i);
-        i--;
-        void* s = NULL_POINTER;
-        void* a = NULL_POINTER;
-
-        while (i >= 0) {
-
-            s = (void*) get_signal(p0, (void*) &i);
-            a = (void*) get_abstraction(p0, (void*) &i);
-            // Priority is not needed to destroy the signal.
-
-            // Abstraction and priority are removed internally,
-            // together with the signal.
-            remove_signal(p0, (void*) &i);
-
-            // Destroy signal. Do not destroy the signal's abstraction and
-            // priority here; they are static within CYBOI.
-            destroy_model(s, NULL, NULL, (void*) a);
-
-            i--;
-        }
-
-        log_message((void*) &INFO_LOG_LEVEL, "Destroy signal memory.");
-
-        finalize_array(m->priorities);
-        free(m->priorities);
-
-        finalize_array(m->abstractions);
-        free(m->abstractions);
-
-        finalize_array(m->signals);
-        free(m->signals);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not destroy signal memory. The signal memory is null.");
     }
 }
 

@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.8 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-04-07 15:47:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -315,7 +315,7 @@ void get_double_array_element_index(const void* p0, const void* p1, const void* 
                             break;
                         }
 
-                        // Compare given element with the next integer element at array plus index.
+                        // Compare given element with the next element at array plus index.
                         e1 = (double*) (*a + j);
 
                         if (*e0 == *e1) {

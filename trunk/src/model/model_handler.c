@@ -23,6 +23,14 @@
  *
  * This file handles a model which represents statics or dynamics.
  *
+ * A persistent compound model consists of a location and a path:
+ * model="location:path"
+ *
+ * CYBOL Examples:
+ * <part name="x" part_abstraction="compound" part_model="ftp://test_compound.cybol"/>
+ * <part name="y" part_abstraction="string" part_model="file:/test_string.txt"/>
+ * <part name="z" part_abstraction="string" part_model="inline:/This is a test string."/>
+ *
  * Model elements are accessed over their index or name.
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
@@ -38,7 +46,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.28 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2004-04-07 15:47:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,11 +59,15 @@
 #include "../model/map_handler.c"
 
 //
-// Constants.
+// Model size constants.
 //
 
 /** The model size. */
 static const int MODEL_SIZE = 9;
+
+//
+// Model index constants.
+//
 
 /** The part abstractions index. */
 static const int PART_ABSTRACTIONS_INDEX = 0;
@@ -84,8 +96,40 @@ static const int CONSTRAINT_LOCATIONS_INDEX = 7;
 /** The constraint models index. */
 static const int CONSTRAINT_MODELS_INDEX = 8;
 
+//
+// Model separator constants.
+//
+
 /** The model part separator. */
 static const char MODEL_PART_SEPARATOR = '.';
+
+//
+// Model location constants.
+//
+
+/** The inline location. */
+static const char INLINE_LOCATION[] = {'i', 'n', 'l', 'i', 'n', 'e', ':', '/'};
+
+/** The inline location size. */
+static const int INLINE_LOCATION_SIZE = 8;
+
+/** The file location. */
+static const char FILE_LOCATION[] = {'f', 'i', 'l', 'e', ':', '/'};
+
+/** The file location size. */
+static const int FILE_LOCATION_SIZE = 6;
+
+/** The http location. */
+static const char HTTP_LOCATION[] = {'h', 't', 't', 'p', ':', '/', '/'};
+
+/** The http location size. */
+static const int HTTP_LOCATION_SIZE = 7;
+
+/** The ftp location. */
+static const char FTP_LOCATION[] = {'f', 't', 'p', ':', '/', '/'};
+
+/** The ftp location size. */
+static const int FTP_LOCATION_SIZE = 6;
 
 //
 // Model.
@@ -401,11 +445,6 @@ void finalize_parts(void* p0, const void* p1) {
 // Model.
 //
 
-//?? CYBOL Examples:
-//?? part name="x" part_abstraction="compound" part_model="ftp://test_compound.cybol"
-//?? part name="y" part_abstraction="string" part_model="file://test_string.txt"
-//?? part name="z" part_abstraction="string" part_model="inline://This is a test string."
-
 /**
  * Initializes the compound model.
  *
@@ -415,64 +454,66 @@ void finalize_parts(void* p0, const void* p1) {
  */
 void initialize_compound_model(void* p0, const void* p1, const void* p2) {
 
-    if ("file://" ... if "inline://" ...
+    if (p2 != NULL_POINTER) {
 
-    // Create temporary cybol model.
-    struct statics_model* cybol = (struct statics_model*) malloc(sizeof(struct statics_model));
-    create_statics_model_containers((void*) cybol);
+        int* ps = (int*) p2;
 
-    // Read statics cybol model from file path.
-    read_statics_cybol_model((void*) cybol, p1);
+        if (p1 != NULL_POINTER) {
 
-    // Initialize statics model parts with statics cybol model.
-    if (cybol != NULL_POINTER) {
+            void** p = (void**) p1;
 
-        initialize_statics_parts(p0, cybol->parts);
+            // The comparison result.
+            int r = 0;
+            // The path.
+            void* path = NULL_POINTER;
+            // The size.
+            int s = 0;
+
+            compare_arrays(p1, p2, (void*) &FILE_LOCATION, (void*) &FILE_LOCATION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+
+            if (r == 1) {
+
+                // Example: "file:/path"
+                // FILE_LOCATION_SIZE = 6
+                // p1 = 0
+                // p2 = 10
+                // path = *p + FILE_LOCATION_SIZE = 0 + 6 = 6
+                // s = *ps - FILE_LOCATION_SIZE = 4
+                path = *p + FILE_LOCATION_SIZE;
+                s = *ps - FILE_LOCATION_SIZE;
+
+                //?? read_from_file (or http, ftp etc.)
+                //?? create_cybol_model (byte array, read in from persistent source)
+                //?? create_transient_model (in memory model structure, created from byte array)
+
+//??                initialize_compound_model_from_file(p0, (void*) &path, (void*) &s);
+
+            } else {
+
+                // inline:/
+                // http://
+                // ftp://
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize compound model. The persistent model is null.");
+        }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize statics model. The statics cybol model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize compound model. The persistent model size is null.");
     }
-
-    // Destroy temporary statics cybol model.
-    destroy_statics_model_containers((void*) cybol);
-    free((void*) cybol);
 }
 
 /**
  * Finalizes the model to a cybol model.
  *
- * @param p0 the memory model
- * @param p1 the cybol model
+ * @param p0 the transient model
+ * @param p1 the persistent model
+ * @param p2 the persistent model size
  */
-void finalize_model(void* p0, const void* p1) {
-
-        log_message((void*) &INFO_LOG_LEVEL, "Finalize model.");
-
-/*??
-        //?? USE ARRAYS in ARRAY (instead of model with maps) here!!
-
-        // Create temporary statics cybol model.
-        struct statics_model* cybol = (struct statics_model*) malloc(sizeof(struct statics_model));
-        create_statics_model_containers((void*) cybol);
-
-        // Finalize statics model parts with statics cybol model.
-        if (cybol != NULL_POINTER) {
-
-            finalize_statics_parts(p0, cybol->parts);
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The statics cybol model is null.");
-        }
-
-        // Write statics cybol model to file path.
-        write_statics_cybol_model((void*) cybol, p1);
-
-        // Destroy temporary statics cybol model.
-        destroy_statics_model_containers((void*) cybol);
-        free((void*) cybol);
-*/
+void finalize_compound_model(void* p0, void* p1, void* p2) {
 }
 
 //
