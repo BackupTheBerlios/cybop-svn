@@ -1,0 +1,197 @@
+/*
+ * $RCSfile: cybop.c,v $
+ *
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ *
+ * This software is published under the GPL GNU General Public License.
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ * http://www.cybop.net
+ * - Cybernetics Oriented Programming -
+ */
+
+#include <stdlib.h>
+#include <string.h>
+#include "log_handler.c"
+#include "signal.c"
+#include "signal_memory.c"
+#include "signal_memory_handler.c"
+#include "statics.c"
+
+//?? Temporary for character screen testing.
+#include "character_screen_handler.c"
+
+/**
+ * This is the Cybernetics Oriented Interpreter (CYBOI).
+ *
+ * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
+ * which adhere to the Extended Markup Language (XML) syntax.
+ *
+ * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
+ */
+
+/**
+ * Shows the usage information.
+ */
+static void show_usage_information() {
+
+    show_message("Usage: cyboi dynamics statics");
+    show_message("Example: cyboi application.dynamics.startup application.statics.system");
+}
+
+/**
+ * Waits for signals.
+ *
+ * The processing of signals follows this sequence:
+ * - receive
+ * - handle
+ * - send
+ * - reset
+ *
+ * @param p0 the signal memory
+ */
+static void wait(void* p0) {
+
+    // The shutdown flag.
+    int* sf = (int*) malloc(sizeof(int));
+    *sf = 0;
+
+    // Transporting signal.
+    void* s = malloc(sizeof(struct signal));
+
+    // Priority.
+    void* p = 0;
+    
+    // Language.
+    void* l = 0;
+    
+    // Run endless loop handling any signals.
+    while (TRUE_VALUE) {
+
+        if (*sf != 1) {
+
+            // Receive signal.
+            receive_signal(p0, s);
+
+            // Handle signal.
+            handle_signal(s, (void*) &FALSE_VALUE, sf);
+
+            // Send signal.
+            send_signal(p0, s, (void*) &NORMAL_PRIORITY, (void*) &INTERNAL_LANGUAGE);
+
+            // Reset signal.
+            reset_signal(s);
+
+        } else {
+
+            // Leave loop if the shutdown flag was set.
+            break;
+        }
+    }
+
+    free(s);
+    free(sf);
+}
+
+/**
+ * The main entry function.
+ *
+ * Command line arguments have to be in order:
+ * - command
+ * - dynamics
+ * - statics
+ *
+ * Example:
+ * cyboi application.dynamics.startup application.statics.system
+ *
+ * @param p0 the argument count (argc)
+ * @param p1 the argument vector (argv)
+ * @return the return value
+ */
+int main(int p0, char** p1) {
+
+    // Return 1 to indicate an error, by default.
+    int r = 1;
+
+    // Log handler.
+    log_level = (void*) &INFO_LOG_LEVEL;
+
+    if (p1 != 0) {
+
+        if ((p0 == 3) && (p1[1] != 0) && (p1[2] != 0)) {
+
+            // Signal memory (signal queue).
+            void* signal_memory = malloc(sizeof(struct map));
+            initialize_map(signal_memory);
+
+            // Create signal for storage in signal memory.
+            // It will get destroyed (freed) when received by signal handler.
+            struct signal* tmp = (struct signal*) malloc(sizeof(struct signal));
+
+            if (tmp != 0) {
+
+                log((void*) &INFO_LOG_LEVEL, "Send signal: ");
+                log((void*) &INFO_LOG_LEVEL, p1[1]);
+
+                // Set signal elements.
+                tmp->logics = (void*) p1[1];
+                tmp->input_0 = (void*) p1[2];
+
+                // Caution! Adding of signals must be synchronized between:
+                // - send for adding internal CYBOP signals
+                // - system signals catched by C library functions
+                // These are the only procedures accessing the signal
+                // memory for adding signals.
+//??                synchronized (signal_memory) {
+
+                    // Add signal to signal memory (interrupt vector table).
+                    add_signal(signal_memory, (void*) tmp, (void*) &NORMAL_PRIORITY, (void*) INTERNAL_LANGUAGE);
+//??                }
+
+            } else {
+
+                log((void*) &ERROR_LOG_LEVEL, "Could not send initial signal. The signal is null.");
+            }
+
+            // The system is now started up and complete so that a loop
+            // can be entered, waiting for signals (events/ interrupts)
+            // which are stored/ found in the signal memory.
+            wait(signal_memory);
+            // The loop above is left as soon as its shutdown flag is set.
+
+            // Signal memory (signal queue).
+            finalize_map(signal_memory);
+            free(signal_memory);
+
+            log((void*) &INFO_LOG_LEVEL, "Exit CYBOI normally.");
+
+            // Return 0 to indicate proper shutdown.
+            r = 0;
+
+        } else {
+
+            log((void*) &ERROR_LOG_LEVEL, "Could not execute CYBOI. The command line parameters are incorrect.");
+            show_usage_information();
+        }
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not execute CYBOI. The argument vector is null.");
+    }
+
+    return r;
+}
+
