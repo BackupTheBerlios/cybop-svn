@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2004-11-16 16:58:01 $ $Author: rholzmueller $
+ * @version $Revision: 1.4 $ $Date: 2004-12-20 14:41:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,11 +50,10 @@
  * @param p2 the knowledge
  * @param p3 the knowledge count
  * @param p4 the knowledge size
- * @param pp_internal the internals
+ * @param p5 the internals
  */
 void receive_message(const void* p0, const void* p1,
-    const void* p2, const void* p3, const void* p4,
-    void** pp_internal ) {
+    const void* p2, const void* p3, const void* p4, void* p5) {
 }
 
 /* RECEIVE_SOURCE */

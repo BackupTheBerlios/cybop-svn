@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-12-20 14:41:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,7 +51,7 @@ void parse_fraction(void* p0, void* p1, void* p2, const void* p3, const void* p4
 
     if (p4 != NULL_POINTER) {
 
-        int* sc = (int*) p4;
+        int** sc = (int**) p4;
 
         if (p3 != NULL_POINTER) {
 

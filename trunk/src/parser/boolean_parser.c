@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-12-20 14:41:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,27 +55,31 @@ void parse_boolean(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 
     if (p4 != NULL_POINTER) {
 
-        int* sc = (int*) p4;
+        int** sc = (int**) p4;
 
         if (p0 != NULL_POINTER) {
 
-            int* d = (int*) p0;
+            int** d = (int**) p0;
 
 //??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Parse boolean.");
 
             // The comparison result.
-            int r = 0;
+            int* r = INTEGER_NULL_POINTER;
+            create_integer((void*) &r);
+            *r = 0;
 
-            if (*sc == *TRUE_BOOLEAN_COUNT) {
+            if (**sc == *TRUE_BOOLEAN_COUNT) {
 
                 compare_array_elements(p3, (void*) &TRUE_BOOLEAN, (void*) &CHARACTER_ARRAY, (void*) &TRUE_BOOLEAN_COUNT, (void*) &r);
 
-                if (r == 1) {
+                if (*r == 1) {
 
                     // Set boolean to 'true'.
-                    *d = 1;
+                    **d = 1;
                 }
             }
+
+            destroy_integer((void*) &r);
 
         } else {
 
@@ -101,15 +105,15 @@ void serialize_boolean(void* p0, void* p1, void* p2, const void* p3, const void*
 
     if (p3 != NULL_POINTER) {
 
-        int* s = (int*) p3;
+        int** s = (int**) p3;
 
         if (p1 != NULL_POINTER) {
 
-            int* dc = (int*) p1;
+            int** dc = (int**) p1;
 
 //??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Serialize boolean.");
 
-            if (*s == 1) {
+            if (**s == 1) {
 
 /*??
                 set_array_elements(TRUE_BOOLEAN ...);

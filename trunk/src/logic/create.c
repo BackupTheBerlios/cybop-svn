@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.17 $ $Date: 2004-12-13 22:47:20 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-12-20 14:41:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,7 +52,7 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 
     if (p0 != NULL_POINTER) {
 
-        int* p = (int*) p0;
+        int** p = (int**) p0;
 
         // The done flag.
         int d = 0;
@@ -64,7 +64,7 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 
             compare_arrays(p1, p2, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
 
-            if (*p == 1) {
+            if (**p == 1) {
 
                 d = 1;
             }
@@ -74,7 +74,7 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 
             compare_arrays(p1, p2, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
 
-            if (*p == 1) {
+            if (**p == 1) {
 
                 d = 1;
             }
@@ -84,7 +84,7 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 
             compare_arrays(p1, p2, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
 
-            if (*p == 1) {
+            if (**p == 1) {
 
                 d = 1;
             }
@@ -94,7 +94,7 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 
             compare_arrays(p1, p2, (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
 
-            if (*p == 1) {
+            if (**p == 1) {
 
                 d = 1;
             }
@@ -104,7 +104,7 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 
             compare_arrays(p1, p2, (void*) &DOUBLE_ABSTRACTION, (void*) &DOUBLE_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
 
-            if (*p == 1) {
+            if (**p == 1) {
 
                 d = 1;
             }
@@ -114,7 +114,7 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 
             compare_arrays(p1, p2, (void*) &BOOLEAN_ABSTRACTION, (void*) &BOOLEAN_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
 
-            if (*p == 1) {
+            if (**p == 1) {
 
                 d = 1;
             }
@@ -124,7 +124,7 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 
             compare_arrays(p1, p2, (void*) &VECTOR_ABSTRACTION, (void*) &VECTOR_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
 
-            if (*p == 1) {
+            if (**p == 1) {
 
                 d = 1;
             }
@@ -134,7 +134,7 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 
             compare_arrays(p1, p2, (void*) &FRACTION_ABSTRACTION, (void*) &FRACTION_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
 
-            if (*p == 1) {
+            if (**p == 1) {
 
                 d = 1;
             }
@@ -144,7 +144,7 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 
             compare_arrays(p1, p2, (void*) &TIME_ABSTRACTION, (void*) &TIME_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
 
-            if (*p == 1) {
+            if (**p == 1) {
 
                 d = 1;
             }
@@ -154,7 +154,7 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 
             compare_arrays(p1, p2, (void*) &COMPLEX_ABSTRACTION, (void*) &COMPLEX_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
 
-            if (*p == 1) {
+            if (**p == 1) {
 
                 d = 1;
             }
@@ -205,14 +205,20 @@ void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const 
     // Receive.
     //
 
+    // The receive model count.
+    int* rmc = INTEGER_NULL_POINTER;
+    create_integer((void*) &rmc);
+    *rmc = 0;
+
+    // The receive model size.
+    int* rms = INTEGER_NULL_POINTER;
+    create_integer((void*) &rms);
+    *rms = 0;
+
     // The receive model.
     void* rm = NULL_POINTER;
-    int rmc = 0;
-    int rms = 0;
-
     // Create receive model of type character, to read single bytes.
-    create((void*) &rm, (void*) &rms,
-        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+    create((void*) &rm, (void*) &rms, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
 
     // Receive persistent byte stream over channel.
     receive_general((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
@@ -228,8 +234,9 @@ void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const 
     parse(p0, p1, p2, (void*) &rm, (void*) &rmc, p5, p6);
 
     // Destroy receive model.
-    destroy((void*) &rm, (void*) &rms,
-        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+    destroy((void*) &rm, (void*) &rms, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+    destroy_integer((void*) &rms);
+    destroy_integer((void*) &rmc);
 }
 
 /**
@@ -273,27 +280,32 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     // The temporary workaround flag to use the libxml2 parser.
     //?? Later, when an own xml parser is implemented in cyboi,
     //?? delete this flag and change the corresponding blocks below!
-    int w = 0;
+    int* w = INTEGER_NULL_POINTER;
+    create_integer((void*) &w);
+    *w = 0;
 
-    compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT,
-        (void*) &w, (void*) &CHARACTER_ARRAY);
-    compare_arrays(p5, p6, (void*) &XML_ABSTRACTION, (void*) &XML_ABSTRACTION_COUNT,
-        (void*) &w, (void*) &CHARACTER_ARRAY);
-    compare_arrays(p5, p6, (void*) &HXP_ABSTRACTION, (void*) &HXP_ABSTRACTION_COUNT,
-        (void*) &w, (void*) &CHARACTER_ARRAY);
+    compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &w, (void*) &CHARACTER_ARRAY);
+    compare_arrays(p5, p6, (void*) &XML_ABSTRACTION, (void*) &XML_ABSTRACTION_COUNT, (void*) &w, (void*) &CHARACTER_ARRAY);
+    compare_arrays(p5, p6, (void*) &HXP_ABSTRACTION, (void*) &HXP_ABSTRACTION_COUNT, (void*) &w, (void*) &CHARACTER_ARRAY);
 
     //
     // Receive.
     //
 
+    // The receive model count.
+    int* rmc = INTEGER_NULL_POINTER;
+    create_integer((void*) &rmc);
+    *rmc = 0;
+
+    // The receive model size.
+    int* rms = INTEGER_NULL_POINTER;
+    create_integer((void*) &rms);
+    *rms = 0;
+
     // The receive model.
     void* rm = NULL_POINTER;
-    int rmc = 0;
-    int rms = 0;
-
     // Create receive model of type character, to read single bytes.
-    create((void*) &rm, (void*) &rms,
-        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+    create((void*) &rm, (void*) &rms, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
 
     // Receive persistent byte stream over channel.
     receive_general((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
@@ -302,10 +314,18 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     // Parse.
     //
 
+    // The parse model count.
+    int* pmc = INTEGER_NULL_POINTER;
+    create_integer((void*) &pmc);
+    *pmc = 0;
+
+    // The parse model size.
+    int* pms = INTEGER_NULL_POINTER;
+    create_integer((void*) &pms);
+    *pms = 0;
+
     // The parse model.
     void* pm = NULL_POINTER;
-    int pmc = 0;
-    int pms = 0;
 
     if (w == 0) {
 
@@ -313,8 +333,7 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
         create((void*) &pm, (void*) &pms, p5, p6);
 
         // Parse byte stream according to given document type.
-        parse((void*) &pm, (void*) &pmc, (void*) &pms,
-            (void*) &rm, (void*) &rmc, p5, p6);
+        parse((void*) &pm, (void*) &pmc, (void*) &pms, (void*) &rm, (void*) &rmc, p5, p6);
 
     } else {
 
@@ -322,16 +341,17 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     }
 
     // Destroy receive model.
-    destroy((void*) &rm, (void*) &rms,
-        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+    destroy((void*) &rm, (void*) &rms, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+    destroy_integer((void*) &rms);
+    destroy_integer((void*) &rmc);
 
     //
     // Decode.
     //
-    
+
     // Create compound decode model.
     create(p0, p2, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
-    
+
     // Decode document model according to given document type.
     decode(p0, p1, p2, (void*) &pm, (void*) &pmc, p5, p6);
 
@@ -339,12 +359,16 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
 
         // Destroy parsed model.
         destroy((void*) &pm, (void*) &pms, p5, p6);
+        destroy_integer((void*) &pms);
+        destroy_integer((void*) &pmc);
 
     } else {
 
         // Free xml dom document.
         xmlFreeDoc((xmlDoc*) pm);
     }
+
+    destroy_integer((void*) &w);
 }
 
 /**
@@ -377,12 +401,14 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8) {
 
     // The primitive flag.
-    int p = 0;
+    int* p = INTEGER_NULL_POINTER;
+    create_integer((void*) &p);
+    *p = 0;
 
     // Check for primitive model.
     check_primitive_model((void*) &p, p5, p6);
 
-    if (p == 1) {
+    if (*p == 1) {
 
         create_primitive_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
 
@@ -390,6 +416,8 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         create_compound_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
     }
+
+    destroy_integer((void*) &p);
 }
 
 /**
@@ -411,85 +439,85 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
     // The name name abstraction.
     void* na = NULL_POINTER;
-    int nac = 0;
-    int nas = 0;
+    void* nac = NULL_POINTER;
+    void* nas = NULL_POINTER;
     // The name name model.
     void* nm = NULL_POINTER;
-    int nmc = 0;
-    int nms = 0;
+    void* nmc = NULL_POINTER;
+    void* nms = NULL_POINTER;
     // The name name details.
     void* nd = NULL_POINTER;
-    int ndc = 0;
-    int nds = 0;
+    void* ndc = NULL_POINTER;
+    void* nds = NULL_POINTER;
 
     // The channel name abstraction.
     void* ca = NULL_POINTER;
-    int cac = 0;
-    int cas = 0;
+    void* cac = NULL_POINTER;
+    void* cas = NULL_POINTER;
     // The channel name model.
     void* cm = NULL_POINTER;
-    int cmc = 0;
-    int cms = 0;
+    void* cmc = NULL_POINTER;
+    void* cms = NULL_POINTER;
     // The channel name details.
     void* cd = NULL_POINTER;
-    int cdc = 0;
-    int cds = 0;
+    void* cdc = NULL_POINTER;
+    void* cds = NULL_POINTER;
 
     // The abstraction name abstraction.
     void* aa = NULL_POINTER;
-    int aac = 0;
-    int aas = 0;
+    void* aac = NULL_POINTER;
+    void* aas = NULL_POINTER;
     // The abstraction name model.
     void* am = NULL_POINTER;
-    int amc = 0;
-    int ams = 0;
+    void* amc = NULL_POINTER;
+    void* ams = NULL_POINTER;
     // The abstraction name details.
     void* ad = NULL_POINTER;
-    int adc = 0;
-    int ads = 0;
+    void* adc = NULL_POINTER;
+    void* ads = NULL_POINTER;
 
     // The model name abstraction.
     void* ma = NULL_POINTER;
-    int mac = 0;
-    int mas = 0;
+    void* mac = NULL_POINTER;
+    void* mas = NULL_POINTER;
     // The model name model.
     void* mm = NULL_POINTER;
-    int mmc = 0;
-    int mms = 0;
+    void* mmc = NULL_POINTER;
+    void* mms = NULL_POINTER;
     // The model name details.
     void* md = NULL_POINTER;
-    int mdc = 0;
-    int mds = 0;
+    void* mdc = NULL_POINTER;
+    void* mds = NULL_POINTER;
 
     // The whole abstraction.
     void* wa = NULL_POINTER;
-    int wac = 0;
-    int was = 0;
+    void* wac = NULL_POINTER;
+    void* was = NULL_POINTER;
     // The whole model.
     void* wm = NULL_POINTER;
     void* wmc = NULL_POINTER;
     void* wms = NULL_POINTER;
     // The whole details.
     void* wd = NULL_POINTER;
-    int wdc = 0;
-    int wds = 0;
+    void* wdc = NULL_POINTER;
+    void* wds = NULL_POINTER;
 
     // The part name.
     void* pn = NULL_POINTER;
-    int pnc = 0;
-    int pns = 0;
+    void* pnc = NULL_POINTER;
+    void* pns = NULL_POINTER;
     // The part abstraction.
     void* pa = NULL_POINTER;
-    int pac = 0;
-    int pas = 0;
+    void* pac = NULL_POINTER;
+    void* pas = NULL_POINTER;
     // The part model.
     void* pm = NULL_POINTER;
-    int pmc = 0;
-    int pms = 0;
+    void* pmc = NULL_POINTER;
+    void* pms = NULL_POINTER;
     // The part details.
     void* pd = NULL_POINTER;
-    int pdc = 0;
-    int pds = 0;
+    void* pdc = NULL_POINTER;
+    void* pds = NULL_POINTER;
 
     // Get name name.
     get_compound_element_by_name(p0, p1,

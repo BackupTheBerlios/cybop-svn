@@ -25,7 +25,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.8 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-12-20 14:41:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -144,7 +144,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (*r == 1) {
 
-            create_double(p0, p1);
+            create_double(p0);
 
             d = 1;
         }
@@ -321,7 +321,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (*r == 1) {
 
-            destroy_double(p0, p1);
+            destroy_double(p0);
 
             d = 1;
         }

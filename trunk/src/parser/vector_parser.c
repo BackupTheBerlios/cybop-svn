@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-12-20 14:41:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,10 +30,6 @@
 
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
-
-//
-// A vector contains the three coordinates: x, y, z.
-//
 
 /**
  * Parses the byte stream and creates a vector model from it.
@@ -48,7 +44,7 @@ void parse_vector(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
     if (p4 != NULL_POINTER) {
 
-        int* sc = (int*) p4;
+        int** sc = (int**) p4;
 
         if (p3 != NULL_POINTER) {
 

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-12-20 14:41:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,29 +45,29 @@ void parse_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
     if (p4 != NULL_POINTER) {
 
-        int* sc = (int*) p4;
+        int** sc = (int**) p4;
 
         if (p2 != NULL_POINTER) {
 
-            int* ds = (int*) p2;
+            int** ds = (int**) p2;
 
             if (p1 != NULL_POINTER) {
 
-                int* dc = (int*) p1;
+                int** dc = (int**) p1;
 
-                if (*dc >= 0) {
+                if (**dc >= 0) {
 
 //??                log_message((void*) &INFO_LOG_LEVEL, (void*) &INITIALIZE_STRING_MESSAGE, (void*) &INITIALIZE_STRING_MESSAGE_COUNT);
 
                     // The new destination string size.
                     // (Not exactly the size, but the destination string index
                     // increased by the source array count.)
-                    *ds = *dc + *sc;
+                    **ds = **dc + **sc;
 
                     // Resize destination string.
                     resize_array(p0, (void*) &CHARACTER_ARRAY, p2);
 
-                    if (*dc <= (*ds - *sc)) {
+                    if (**dc <= (**ds - **sc)) {
 
                         // Set source into destination string.
                         set_array_elements(p0, (void*) &CHARACTER_ARRAY, p1, p3, p4);
@@ -80,7 +80,7 @@ void parse_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
                         // sc = 8
                         // d (after set) = "hellouniverse"
                         // dc = dc + sc = 13
-                        *dc = *dc + *sc;
+                        **dc = **dc + **sc;
 
                     } else {
 
