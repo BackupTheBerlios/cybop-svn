@@ -51,7 +51,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.12 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-04-28 21:19:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
@@ -690,26 +690,25 @@ public class Controller extends Block {
 
             if (m != null) {
 
+                // Language.
+                s.setChildItem(Signal.LANGUAGE, Signal.NEURO_LANGUAGE);
+
                 Item i = getItem((Space) m.getChildItem(MouseModel.POINTER_POSITION));
 
                 if (i != null) {
 
+                    // Subject.
+                    // Determine the system which belongs to the clicked window.
+                    //?? s.setChildItem(Signal.SUBJECT, system belonging to the clicked window);
+    
+                    // Predicate.
                     String a = (String) i.getChildItem(Item.ACTION);
 
-                    s.setChildItem(Signal.LANGUAGE, Signal.GUI_LANGUAGE/*??NEURO_LANGUAGE*/);
-                    //?? s.setChildItem(Signal.SUBJECT, system belonging to the clicked window);
                     s.setChildItem(Signal.PREDICATE, a);
-                    //?? s.setChildItem(Signal.SENDER_OBJECT, USER);
 
-                    // Uncorrect! Don't call the control method directly!
-                    // The system which belongs to the clicked window needs
-                    // to be identified and its name sent within a new signal.
-                    // The launcher (OS) then identifies the system and
-                    // calls its control method.
-                    // (Background: Many systems can have the same action,
-                    // so the signal handling needs to know which system to
-                    // send the signal to.
-//??                    control(s);
+                    // Sender object.
+                    // Determine the active console to identify the user.
+                    //?? s.setChildItem(Signal.SENDER_OBJECT, USER);
 
                 } else {
 
