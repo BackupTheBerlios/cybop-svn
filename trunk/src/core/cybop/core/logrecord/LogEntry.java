@@ -24,6 +24,7 @@
 
 package cybop.core.logrecord;
 
+import cybop.core.category.*;
 import cybop.core.model.String;
 
 /**
@@ -31,7 +32,7 @@ import cybop.core.model.String;
  *
  * A log entry consists of the time this entry was made, a log level and a message.
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class LogEntry extends LogItem {

@@ -35,7 +35,7 @@ import cybop.core.system.region.controller.translator.*;
 /**
  * This class represents a portal controller.
  *
- * @version $Revision: 1.9 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalController extends Controller {
@@ -55,9 +55,9 @@ public class PortalController extends Controller {
     }
 
     /**
-     * Returns the default domain model category.
+     * Returns the default knowledge model category.
      *
-     * @return the default domain model category
+     * @return the default knowledge model category
      */
     public Item getDefaultKnowledgeModelCategory() {
 
@@ -65,13 +65,13 @@ public class PortalController extends Controller {
     }
 
     /**
-     * Returns the default system user interface category.
+     * Returns the default display category.
      *
-     * @return the default system user interface category
+     * @return the default display category
      */
     public Item getDefaultDisplayCategory() {
 
-        return new String("cybop.core.model.model.user.system.PortalUserInterface");
+        return new String("cybop.core.model.model.user.system.PortalFrameDisplay");
     }
 
     /**
@@ -85,23 +85,23 @@ public class PortalController extends Controller {
     }
 
     /**
-     * Returns the default system information user interface category.
+     * Returns the default system information display category.
      *
-     * @return the default system information user interface category
+     * @return the default system information display category
      */
-    public Item getDefaultSystemInformationUserInterfaceCategory() {
+    public Item getDefaultSystemInformationDisplayCategory() {
 
-        return new String("cybop.core.model.model.user.SystemInformationUserInterface");
+        return new String("cybop.core.model.model.user.SystemInformationDisplay");
     }
 
     /**
-     * Returns the default system information user interface translator category.
+     * Returns the default system information display translator category.
      *
-     * @return the default system information user interface translator category
+     * @return the default system information display translator category
      */
-    public Item getDefaultSystemInformationUserInterfaceTranslatorCategory() {
+    public Item getDefaultSystemInformationDisplayTranslatorCategory() {
 
-        return new String("cybop.core.system.region.controller.translator.SystemInformationUserInterfaceTranslator");
+        return new String("cybop.core.system.region.controller.translator.SystemInformationDisplayTranslator");
     }
 }
 

@@ -35,10 +35,10 @@ import cybop.core.screen.region.*;
 /**
  * This class represents a frame model.
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class FrameModel extends Display {
+public class FrameDisplay extends Display {
 
     //
     // Children names.
@@ -115,27 +115,27 @@ public class FrameModel extends Display {
 
         java.awt.Container c = null;
 /*??
-        Integer i = (Integer) getChild(UserInterface.USER_INTERFACE_MODE);
+        Integer i = (Integer) getChild(FrameDisplay.USER_INTERFACE_MODE);
 
         if (i != null) {
 
-            if (i.isEqualTo(UserInterface.APPLET_MODE)) {
+            if (i.isEqualTo(FrameDisplay.APPLET_MODE)) {
     
                 c = new javax.swing.JApplet();
     
-            } else if (i.isEqualTo(UserInterface.WINDOW_MODE)) {
+            } else if (i.isEqualTo(FrameDisplay.WINDOW_MODE)) {
     
                 c = new javax.swing.JWindow();
     
-            } else if (i.isEqualTo(UserInterface.MODAL_DIALOG_MODE)) {
+            } else if (i.isEqualTo(FrameDisplay.MODAL_DIALOG_MODE)) {
     
                 c = new javax.swing.JDialog();
     
-            } else if (i.isEqualTo(UserInterface.MODELESS_DIALOG_MODE)) {
+            } else if (i.isEqualTo(FrameDisplay.MODELESS_DIALOG_MODE)) {
     
                 c = new javax.swing.JDialog();
     
-            } else if (i.isEqualTo(UserInterface.FRAME_MODE)) {
+            } else if (i.isEqualTo(FrameDisplay.FRAME_MODE)) {
 */
     
                 c = new javax.swing.JFrame();
@@ -150,11 +150,11 @@ public class FrameModel extends Display {
                 }
 
 /*??
-            } else if (i.isEqualTo(UserInterface.INTERNAL_FRAME_MODE)) {
+            } else if (i.isEqualTo(FrameDisplay.INTERNAL_FRAME_MODE)) {
     
                 c = new javax.swing.JInternalFrame();
     
-            } else if (i.isEqualTo(UserInterface.TAB_PAGE_MODE)) {
+            } else if (i.isEqualTo(FrameDisplay.TAB_PAGE_MODE)) {
     
                 c = new javax.swing.JPanel();
             }
@@ -185,36 +185,36 @@ public class FrameModel extends Display {
 
         if (n != null) {
 
-            if (n.isEqualTo(UserInterface.TITLE)) {
+            if (n.isEqualTo(FrameDisplay.TITLE)) {
 
                 setTitle((String) i);
 
-            } else if (n.isEqualTo(UserInterface.ICON)) {
+            } else if (n.isEqualTo(FrameDisplay.ICON)) {
 
                 setIcon((String) i);
 
-            } else if (n.isEqualTo(UserInterface.MENU_BAR)) {
+            } else if (n.isEqualTo(FrameDisplay.MENU_BAR)) {
 
                 setMenuBar((MenuBar) i);
 
-            } else if (n.isEqualTo(UserInterface.TOOL_BAR)) {
+            } else if (n.isEqualTo(FrameDisplay.TOOL_BAR)) {
 
                 setToolBar((ToolBar) i);
 
-            } else if (n.isEqualTo(UserInterface.CONTENTS_PANEL)) {
+            } else if (n.isEqualTo(FrameDisplay.CONTENTS_PANEL)) {
 
                 setContentsPanel((DisplayRegion) i);
 
-            } else if (n.isEqualTo(UserInterface.STATUS_BAR)) {     
+            } else if (n.isEqualTo(FrameDisplay.STATUS_BAR)) {     
 
                 setStatusBar((StatusBar) i);
 
-            } else if (n.isEqualTo(UserInterface.BOUNDS)) {
+            } else if (n.isEqualTo(FrameDisplay.BOUNDS)) {
 
 //??                setBounds((java.awt.Rectangle) i);
                 java.lang.System.out.println("WARNING: Bounds not set. Replace java.awt.Rectangle");
 
-            } else if (n.isEqualTo(UserInterface.RESIZABLE_FLAG)) {
+            } else if (n.isEqualTo(FrameDisplay.RESIZABLE_FLAG)) {
 
                 setResizable((Boolean) i);
             }
@@ -235,36 +235,36 @@ public class FrameModel extends Display {
 
         if (n != null) {
 
-            if (n.isEqualTo(UserInterface.TITLE)) {
+            if (n.isEqualTo(FrameDisplay.TITLE)) {
 
                 removeTitle((String) getChild(n));
 
-            } else if (n.isEqualTo(UserInterface.ICON)) {
+            } else if (n.isEqualTo(FrameDisplay.ICON)) {
 
                 removeIcon((String) getChild(n));
 
-            } else if (n.isEqualTo(UserInterface.MENU_BAR)) {
+            } else if (n.isEqualTo(FrameDisplay.MENU_BAR)) {
 
                 removeMenuBar((MenuBar) getChild(n));
 
-            } else if (n.isEqualTo(UserInterface.TOOL_BAR)) {
+            } else if (n.isEqualTo(FrameDisplay.TOOL_BAR)) {
 
                 removeToolBar((ToolBar) getChild(n));
 
-            } else if (n.isEqualTo(UserInterface.CONTENTS_PANEL)) {
+            } else if (n.isEqualTo(FrameDisplay.CONTENTS_PANEL)) {
 
                 removeContentsPanel((DisplayRegion) getChild(n));
 
-            } else if (n.isEqualTo(UserInterface.STATUS_BAR)) {
+            } else if (n.isEqualTo(FrameDisplay.STATUS_BAR)) {
 
                 removeStatusBar((StatusBar) getChild(n));
 
-            } else if (n.isEqualTo(UserInterface.BOUNDS)) {
+            } else if (n.isEqualTo(FrameDisplay.BOUNDS)) {
 
 //??                    removeBounds((java.awt.Rectangle) getChild(n));
                 java.lang.System.out.println("WARNING: Bounds not set. Replace java.awt.Rectangle");
 
-            } else if (n.isEqualTo(UserInterface.RESIZABLE_FLAG)) {
+            } else if (n.isEqualTo(FrameDisplay.RESIZABLE_FLAG)) {
                 
                 removeResizable((Boolean) getChild(n));
             }
@@ -288,9 +288,9 @@ public class FrameModel extends Display {
      *
      * @return the default user interface mode
      */
-    public Integer getDefaultUserInterfaceMode() {
+    public Integer getDefaultFrameDisplayMode() {
 
-        return UserInterface.FRAME_MODE;
+        return FrameDisplay.FRAME_MODE;
     }
 
     /**
@@ -887,7 +887,7 @@ public class FrameModel extends Display {
 
 /*??
         java.awt.Rectangle r = def;
-        Configuration c = (Configuration) getChild(UserInterface.CONFIGURATION);
+        Configuration c = (Configuration) getChild(FrameDisplay.CONFIGURATION);
 
         if (c != null) {
 
@@ -929,7 +929,7 @@ public class FrameModel extends Display {
     public void deconfigureBounds(java.awt.Rectangle r) throws Exception {
 
 /*??
-        Configuration c = (Configuration) getChild(UserInterface.CONFIGURATION);
+        Configuration c = (Configuration) getChild(FrameDisplay.CONFIGURATION);
 
         if (c != null) {
 
@@ -1029,7 +1029,7 @@ public class FrameModel extends Display {
     public javax.swing.LookAndFeel configureLookAndFeel(javax.swing.LookAndFeel def) throws Exception {
 
         javax.swing.LookAndFeel laf = def;
-        Configuration c = (Configuration) getChild(UserInterface.CONFIGURATION);
+        Configuration c = (Configuration) getChild(FrameDisplay.CONFIGURATION);
         
         if (c != null) {
             
@@ -1093,7 +1093,7 @@ public class FrameModel extends Display {
 /*??
     public void deconfigureLookAndFeel(javax.swing.LookAndFeel laf) throws Exception {
 
-        Configuration c = (Configuration) getChild(UserInterface.CONFIGURATION);
+        Configuration c = (Configuration) getChild(FrameDisplay.CONFIGURATION);
         
         if (c != null) {
 
@@ -1126,20 +1126,20 @@ public class FrameModel extends Display {
         super.initialize();
 
         javax.swing.UIManager.setLookAndFeel(getDefaultLookAndFeel());
-        setChild(UserInterface.USER_INTERFACE_MODE, getDefaultUserInterfaceMode());
+        setChild(FrameDisplay.USER_INTERFACE_MODE, getDefaultFrameDisplayMode());
 /*??
-        setChild(UserInterface.WINDOW_BOUNDS, configureWindowBounds(getDefaultWindowBounds()));
-        setChild(UserInterface.DIALOG_BOUNDS, configureDialogBounds(getDefaultDialogBounds()));
-        setChild(UserInterface.FRAME_BOUNDS, configureFrameBounds(getDefaultFrameBounds()));
-        setChild(UserInterface.INTERNAL_FRAME_BOUNDS, configureInternalFrameBounds(getDefaultInternalFrameBounds()));
+        setChild(FrameDisplay.WINDOW_BOUNDS, configureWindowBounds(getDefaultWindowBounds()));
+        setChild(FrameDisplay.DIALOG_BOUNDS, configureDialogBounds(getDefaultDialogBounds()));
+        setChild(FrameDisplay.FRAME_BOUNDS, configureFrameBounds(getDefaultFrameBounds()));
+        setChild(FrameDisplay.INTERNAL_FRAME_BOUNDS, configureInternalFrameBounds(getDefaultInternalFrameBounds()));
 */
-        setChild(UserInterface.TITLE, getDefaultTitle());
-        setChild(UserInterface.ICON, getDefaultIcon());
-        setChild(UserInterface.MENU_BAR, createChild(getDefaultMenuBar()));
-        setChild(UserInterface.TOOL_BAR, createChild(getDefaultToolBar()));
-        setChild(UserInterface.CONTENTS_PANEL, createChild(getDefaultContentsPanel()));
-        setChild(UserInterface.STATUS_BAR, createChild(getDefaultStatusBar()));
-        setChild(UserInterface.RESIZABLE_FLAG, getDefaultResizableFlag());
+        setChild(FrameDisplay.TITLE, getDefaultTitle());
+        setChild(FrameDisplay.ICON, getDefaultIcon());
+        setChild(FrameDisplay.MENU_BAR, createChild(getDefaultMenuBar()));
+        setChild(FrameDisplay.TOOL_BAR, createChild(getDefaultToolBar()));
+        setChild(FrameDisplay.CONTENTS_PANEL, createChild(getDefaultContentsPanel()));
+        setChild(FrameDisplay.STATUS_BAR, createChild(getDefaultStatusBar()));
+        setChild(FrameDisplay.RESIZABLE_FLAG, getDefaultResizableFlag());
     }
 
     /**
@@ -1149,51 +1149,51 @@ public class FrameModel extends Display {
      */
     public void finalizz() throws Exception {
 
-        Boolean resizable = (Boolean) getChild(UserInterface.RESIZABLE_FLAG);
-        removeChild(UserInterface.RESIZABLE_FLAG);
+        Boolean resizable = (Boolean) getChild(FrameDisplay.RESIZABLE_FLAG);
+        removeChild(FrameDisplay.RESIZABLE_FLAG);
 
-        StatusBar statusBar = (StatusBar) getChild(UserInterface.STATUS_BAR);
-        removeChild(UserInterface.STATUS_BAR);
+        StatusBar statusBar = (StatusBar) getChild(FrameDisplay.STATUS_BAR);
+        removeChild(FrameDisplay.STATUS_BAR);
         destroyChild(statusBar);
 
-        ContentsPanel contentsPanel = (ContentsPanel) getChild(UserInterface.CONTENTS_PANEL);
-        removeChild(UserInterface.CONTENTS_PANEL);
+        ContentsPanel contentsPanel = (ContentsPanel) getChild(FrameDisplay.CONTENTS_PANEL);
+        removeChild(FrameDisplay.CONTENTS_PANEL);
         destroyChild(contentsPanel);
 
-        ToolBar toolBar = (ToolBar) getChild(UserInterface.TOOL_BAR);
-        removeChild(UserInterface.TOOL_BAR);
+        ToolBar toolBar = (ToolBar) getChild(FrameDisplay.TOOL_BAR);
+        removeChild(FrameDisplay.TOOL_BAR);
         destroyChild(toolBar);
 
-        MenuBar menuBar = (MenuBar) getChild(UserInterface.MENU_BAR);
-        removeChild(UserInterface.MENU_BAR);
+        MenuBar menuBar = (MenuBar) getChild(FrameDisplay.MENU_BAR);
+        removeChild(FrameDisplay.MENU_BAR);
         destroyChild(menuBar);
 
-        String icon = (String) getChild(UserInterface.ICON);
-        removeChild(UserInterface.ICON);
+        String icon = (String) getChild(FrameDisplay.ICON);
+        removeChild(FrameDisplay.ICON);
 
-        String title = (String) getChild(UserInterface.TITLE);
-        removeChild(UserInterface.TITLE);
+        String title = (String) getChild(FrameDisplay.TITLE);
+        removeChild(FrameDisplay.TITLE);
 
 /*??
-        deconfigureInternalFrameBounds((java.awt.Rectangle) getChild(UserInterface.INTERNAL_FRAME_BOUNDS));
-        removeChild(UserInterface.INTERNAL_FRAME_BOUNDS);
-        destroyChild((java.awt.Rectangle) getChild(UserInterface.INTERNAL_FRAME_BOUNDS));
+        deconfigureInternalFrameBounds((java.awt.Rectangle) getChild(FrameDisplay.INTERNAL_FRAME_BOUNDS));
+        removeChild(FrameDisplay.INTERNAL_FRAME_BOUNDS);
+        destroyChild((java.awt.Rectangle) getChild(FrameDisplay.INTERNAL_FRAME_BOUNDS));
 
-        deconfigureFrameBounds((java.awt.Rectangle) getChild(UserInterface.FRAME_BOUNDS));
-        removeChild(UserInterface.FRAME_BOUNDS);
-        destroyChild((java.awt.Rectangle) getChild(UserInterface.FRAME_BOUNDS));
+        deconfigureFrameBounds((java.awt.Rectangle) getChild(FrameDisplay.FRAME_BOUNDS));
+        removeChild(FrameDisplay.FRAME_BOUNDS);
+        destroyChild((java.awt.Rectangle) getChild(FrameDisplay.FRAME_BOUNDS));
 
-        deconfigureDialogBounds((java.awt.Rectangle) getChild(UserInterface.DIALOG_BOUNDS));
-        removeChild(UserInterface.DIALOG_BOUNDS);
-        destroyChild((java.awt.Rectangle) getChild(UserInterface.DIALOG_BOUNDS));
+        deconfigureDialogBounds((java.awt.Rectangle) getChild(FrameDisplay.DIALOG_BOUNDS));
+        removeChild(FrameDisplay.DIALOG_BOUNDS);
+        destroyChild((java.awt.Rectangle) getChild(FrameDisplay.DIALOG_BOUNDS));
 
-        deconfigureWindowBounds((java.awt.Rectangle) getChild(UserInterface.WINDOW_BOUNDS));
-        removeChild(UserInterface.WINDOW_BOUNDS);
-        destroyChild((java.awt.Rectangle) getChild(UserInterface.WINDOW_BOUNDS));
+        deconfigureWindowBounds((java.awt.Rectangle) getChild(FrameDisplay.WINDOW_BOUNDS));
+        removeChild(FrameDisplay.WINDOW_BOUNDS);
+        destroyChild((java.awt.Rectangle) getChild(FrameDisplay.WINDOW_BOUNDS));
 */
 
-        Integer viewModelMode = (Integer) getChild(UserInterface.USER_INTERFACE_MODE);
-        removeChild(UserInterface.USER_INTERFACE_MODE);
+        Integer viewModelMode = (Integer) getChild(FrameDisplay.USER_INTERFACE_MODE);
+        removeChild(FrameDisplay.USER_INTERFACE_MODE);
 
         super.finalizz();
     }

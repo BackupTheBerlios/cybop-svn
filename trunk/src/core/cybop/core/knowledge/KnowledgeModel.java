@@ -32,7 +32,7 @@ import cybop.core.model.String;
  *
  * It is able to store general knowledge, that is hierarchical information.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Torsten Kunze <zone3@gmx.de>
  */
@@ -46,7 +46,7 @@ public class KnowledgeModel extends KnowledgeItem {
     public static final String SYSTEM_INFORMATION = new String("system_information");
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
@@ -102,7 +102,7 @@ public class KnowledgeModel extends KnowledgeItem {
      */
     public void finalizz() throws Exception {
 
-        SystemInformationModel systemInformationModel = (SystemInformationModel) getChild(KnowledgeModel.SYSTEM_INFORMATION);
+        SystemInformationDisplay systemInformationModel = (SystemInformationDisplay) getChild(KnowledgeModel.SYSTEM_INFORMATION);
         removeChild(KnowledgeModel.SYSTEM_INFORMATION);
         destroyChild(systemInformationModel);
 

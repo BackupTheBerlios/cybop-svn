@@ -50,7 +50,7 @@ import cybop.core.system.chain.*;
  * Child systems can be integrated into the portal system's Frame as Frame,
  * InternalFrame or TabPage.
  *
- * @version $Revision: 1.12 $ $Date: 2003-06-16 18:25:35 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Portal extends Family {
@@ -171,11 +171,11 @@ public class Portal extends Family {
     
             if (uc != null) {
 
-                PortalUserInterface m = (PortalUserInterface) uc.getChild(PortalUserController.MODEL);
+                PortalFrameDisplay m = (PortalFrameDisplay) uc.getChild(PortalUserController.MODEL);
 
                 if (m != null) {
                     
-                    cybop.model.organizer.PortalContentsPanel cp = (cybop.model.organizer.PortalContentsPanel) m.getChild(PortalUserInterface.CONTENTS_PANEL);
+                    cybop.model.organizer.PortalContentsPanel cp = (cybop.model.organizer.PortalContentsPanel) m.getChild(PortalFrameDisplay.CONTENTS_PANEL);
                     
                     if (cp != null) {
         

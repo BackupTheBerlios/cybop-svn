@@ -51,7 +51,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.20 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
@@ -63,20 +63,20 @@ public class Controller extends Block {
     /** The processor id. */
     public static final String PROCESSOR = new String("processor");
 
-    /** The domain model. */
-    public static final String DOMAIN_MODEL = new String("domain_model");
+    /** The knowledge model. */
+    public static final String KNOWLEDGE_MODEL = new String("knowledge_model");
 
-    /** The system user interface. */
-    public static final String SYSTEM_USER_INTERFACE = new String("system_user_interface");
+    /** The system display. */
+    public static final String SYSTEM_DISPLAY = new String("system_display");
 
     /** The mouse model. */
     public static final String MOUSE_MODEL = new String("mouse_model");
 
-    /** The system information user interface. */
-    public static final String SYSTEM_INFORMATION_USER_INTERFACE = new String("system_information_user_interface");
+    /** The system information display. */
+    public static final String SYSTEM_INFORMATION_DISPLAY = new String("system_information_display");
 
-    /** The system information user interface translator. */
-    public static final String SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR = new String("system_information_user_interface_translator");
+    /** The system information display translator. */
+    public static final String SYSTEM_INFORMATION_DISPLAY_TRANSLATOR = new String("system_information_display_translator");
 
 //?? --- Move the following translators into some i/o class, to handle i/o devices (receive/send signal)!
 
@@ -90,51 +90,20 @@ public class Controller extends Block {
     public static final String SOCKET_TRANSLATOR = new String("socket_translator");
 
     //
-    // Children category names.
-    //
-
-    /** The processor category. */
-    public static final String PROCESSOR_CATEGORY = new String("processor_category");
-
-    /** The domain model category. */
-    public static final String DOMAIN_MODEL_CATEGORY = new String("domain_model_category");
-
-    /** The system user interface category. */
-    public static final String SYSTEM_USER_INTERFACE_CATEGORY = new String("system_user_interface_category");
-
-    /** The mouse model category. */
-    public static final String MOUSE_MODEL_CATEGORY = new String("mouse_model_category");
-
-    /** The system information user interface category. */
-    public static final String SYSTEM_INFORMATION_USER_INTERFACE_CATEGORY = new String("system_information_user_interface_category");
-
-    /** The system information user interface translator category. */
-    public static final String SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR_CATEGORY = new String("system_information_user_interface_translator_category");
-
-    /** The tui translator category. */
-    public static final String TUI_TRANSLATOR_CATEGORY = new String("tui_translator_category");
-
-    /** The gui translator category. */
-    public static final String GUI_TRANSLATOR_CATEGORY = new String("gui_translator_category");
-
-    /** The socket translator category. */
-    public static final String SOCKET_TRANSLATOR_CATEGORY = new String("socket_translator_category");
-
-    //
     // Actions.
     //
 
-    /** The show system user interface action. */
-    public static final String SHOW_SYSTEM_USER_INTERFACE_ACTION = new String("show_system_user_interface_action");
+    /** The show system display action. */
+    public static final String SHOW_SYSTEM_DISPLAY_ACTION = new String("show_system_display_action");
 
-    /** The hide system user interface action. */
-    public static final String HIDE_SYSTEM_USER_INTERFACE_ACTION = new String("hide_system_user_interface_action");
+    /** The hide system display action. */
+    public static final String HIDE_SYSTEM_DISPLAY_ACTION = new String("hide_system_display_action");
 
-    /** The show system information user interface action. */
-    public static final String SHOW_SYSTEM_INFORMATION_USER_INTERFACE_ACTION = new String("show_system_information_user_interface_action");
+    /** The show system information display action. */
+    public static final String SHOW_SYSTEM_INFORMATION_DISPLAY_ACTION = new String("show_system_information_display_action");
 
-    /** The hide system information user interface action. */
-    public static final String HIDE_SYSTEM_INFORMATION_USER_INTERFACE_ACTION = new String("hide_system_information_user_interface_action");
+    /** The hide system information display action. */
+    public static final String HIDE_SYSTEM_INFORMATION_DISPLAY_ACTION = new String("hide_system_information_display_action");
 
     /** The focus gained action. */
     public static final String FOCUS_GAINED_ACTION = new String("focus_gained_action");
@@ -301,9 +270,9 @@ public class Controller extends Block {
     }
 
     /**
-     * Returns the default domain model category.
+     * Returns the default knowledge model category.
      *
-     * @return the default domain model category
+     * @return the default knowledge model category
      */
     public Item getDefaultKnowledgeModelCategory() {
 
@@ -311,11 +280,11 @@ public class Controller extends Block {
     }
 
     /**
-     * Returns the default system user interface category.
+     * Returns the default system display category.
      *
-     * @return the default system user interface category
+     * @return the default system display category
      */
-    public Item getDefaultDisplayCategory() {
+    public Item getDefaultSystemDisplayCategory() {
 
         return null;
     }
@@ -331,21 +300,21 @@ public class Controller extends Block {
     }
 
     /**
-     * Returns the default system information user interface category.
+     * Returns the default system information display category.
      *
-     * @return the default system information user interface category
+     * @return the default system information display category
      */
-    public Item getDefaultSystemInformationUserInterfaceCategory() {
+    public Item getDefaultSystemInformationDisplayCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default system information user interface translator category.
+     * Returns the default system information display translator category.
      *
-     * @return the default system information user interface translator category
+     * @return the default system information display translator category
      */
-    public Item getDefaultSystemInformationUserInterfaceTranslatorCategory() {
+    public Item getDefaultSystemInformationDisplayTranslatorCategory() {
 
         return null;
     }
@@ -391,15 +360,15 @@ public class Controller extends Block {
 
         super.categorize();
 
-        setCategory(Controller.PROCESSOR_CATEGORY, getDefaultProcessorCategory());
-        setCategory(Controller.DOMAIN_MODEL_CATEGORY, getDefaultKnowledgeModelCategory());
-        setCategory(Controller.SYSTEM_USER_INTERFACE_CATEGORY, getDefaultDisplayCategory());
-        setCategory(Controller.MOUSE_MODEL_CATEGORY, getDefaultMouseModelCategory());
-        setCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_CATEGORY, getDefaultSystemInformationUserInterfaceCategory());
-        setCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR_CATEGORY, getDefaultSystemInformationUserInterfaceTranslatorCategory());
-        setCategory(Controller.TUI_TRANSLATOR_CATEGORY, getDefaultTuiTranslatorCategory());
-        setCategory(Controller.GUI_TRANSLATOR_CATEGORY, getDefaultGuiTranslatorCategory());
-        setCategory(Controller.SOCKET_TRANSLATOR_CATEGORY, getDefaultSocketTranslatorCategory());
+        setCategory(Controller.PROCESSOR, getDefaultProcessorCategory());
+        setCategory(Controller.KNOWLEDGE_MODEL, getDefaultKnowledgeModelCategory());
+        setCategory(Controller.SYSTEM_DISPLAY, getDefaultSystemDisplayCategory());
+        setCategory(Controller.MOUSE_MODEL, getDefaultMouseModelCategory());
+        setCategory(Controller.SYSTEM_INFORMATION_DISPLAY, getDefaultSystemInformationDisplayCategory());
+        setCategory(Controller.SYSTEM_INFORMATION_DISPLAY_TRANSLATOR, getDefaultSystemInformationDisplayTranslatorCategory());
+        setCategory(Controller.TUI_TRANSLATOR, getDefaultTuiTranslatorCategory());
+        setCategory(Controller.GUI_TRANSLATOR, getDefaultGuiTranslatorCategory());
+        setCategory(Controller.SOCKET_TRANSLATOR, getDefaultSocketTranslatorCategory());
     }
 
     /**
@@ -407,15 +376,15 @@ public class Controller extends Block {
      */
     public void decategorize() throws Exception {
 
-        removeCategory(Controller.SOCKET_TRANSLATOR_CATEGORY);
-        removeCategory(Controller.GUI_TRANSLATOR_CATEGORY);
-        removeCategory(Controller.TUI_TRANSLATOR_CATEGORY);
-        removeCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR_CATEGORY);
-        removeCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_CATEGORY);
-        removeCategory(Controller.MOUSE_MODEL_CATEGORY);
-        removeCategory(Controller.SYSTEM_USER_INTERFACE_CATEGORY);
-        removeCategory(Controller.DOMAIN_MODEL_CATEGORY);
-        removeCategory(Controller.PROCESSOR_CATEGORY);
+        removeCategory(Controller.SOCKET_TRANSLATOR);
+        removeCategory(Controller.GUI_TRANSLATOR);
+        removeCategory(Controller.TUI_TRANSLATOR);
+        removeCategory(Controller.SYSTEM_INFORMATION_DISPLAY_TRANSLATOR);
+        removeCategory(Controller.SYSTEM_INFORMATION_DISPLAY);
+        removeCategory(Controller.MOUSE_MODEL);
+        removeCategory(Controller.SYSTEM_DISPLAY);
+        removeCategory(Controller.KNOWLEDGE_MODEL);
+        removeCategory(Controller.PROCESSOR);
 
         super.decategorize();
     }
@@ -431,15 +400,15 @@ public class Controller extends Block {
 
         super.initialize();
 
-        setChild(Controller.PROCESSOR, createChild(getCategory(Controller.PROCESSOR_CATEGORY)));
-        setChild(Controller.DOMAIN_MODEL, createChild(getCategory(Controller.DOMAIN_MODEL_CATEGORY)));
-        setChild(Controller.SYSTEM_USER_INTERFACE, createChild(getCategory(Controller.SYSTEM_USER_INTERFACE_CATEGORY)));
-        setChild(Controller.MOUSE_MODEL, createChild(getCategory(Controller.MOUSE_MODEL_CATEGORY)));
-        setChild(Controller.SYSTEM_INFORMATION_USER_INTERFACE, createChild(getCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_CATEGORY)));
-        setChild(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR, createChild(getCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR_CATEGORY)));
-        setChild(Controller.TUI_TRANSLATOR, createChild(getCategory(Controller.TUI_TRANSLATOR_CATEGORY)));
-        setChild(Controller.GUI_TRANSLATOR, createChild(getCategory(Controller.GUI_TRANSLATOR_CATEGORY)));
-        setChild(Controller.SOCKET_TRANSLATOR, createChild(getCategory(Controller.SOCKET_TRANSLATOR_CATEGORY)));
+        setChild(Controller.PROCESSOR, createChild(getCategory(Controller.PROCESSOR)));
+        setChild(Controller.KNOWLEDGE_MODEL, createChild(getCategory(Controller.KNOWLEDGE_MODEL)));
+        setChild(Controller.SYSTEM_DISPLAY, createChild(getCategory(Controller.SYSTEM_DISPLAY)));
+        setChild(Controller.MOUSE_MODEL, createChild(getCategory(Controller.MOUSE_MODEL)));
+        setChild(Controller.SYSTEM_INFORMATION_DISPLAY, createChild(getCategory(Controller.SYSTEM_INFORMATION_DISPLAY)));
+        setChild(Controller.SYSTEM_INFORMATION_DISPLAY_TRANSLATOR, createChild(getCategory(Controller.SYSTEM_INFORMATION_DISPLAY_TRANSLATOR)));
+        setChild(Controller.TUI_TRANSLATOR, createChild(getCategory(Controller.TUI_TRANSLATOR)));
+        setChild(Controller.GUI_TRANSLATOR, createChild(getCategory(Controller.GUI_TRANSLATOR)));
+        setChild(Controller.SOCKET_TRANSLATOR, createChild(getCategory(Controller.SOCKET_TRANSLATOR)));
     }
 
     /**
@@ -459,24 +428,24 @@ public class Controller extends Block {
         removeChild(Controller.TUI_TRANSLATOR);
         destroyChild(tuiTranslator);
 
-        Item systemInformationUserInterfaceTranslator = getChild(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);
-        removeChild(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);
-        destroyChild(systemInformationUserInterfaceTranslator);
+        Item systemInformationFrameDisplayTranslator = getChild(Controller.SYSTEM_INFORMATION_DISPLAY_TRANSLATOR);
+        removeChild(Controller.SYSTEM_INFORMATION_DISPLAY_TRANSLATOR);
+        destroyChild(systemInformationFrameDisplayTranslator);
 
-        Item systemInformationUserInterface = getChild(Controller.SYSTEM_INFORMATION_USER_INTERFACE);
-        removeChild(Controller.SYSTEM_INFORMATION_USER_INTERFACE);
-        destroyChild(systemInformationUserInterface);
+        Item systemInformationFrameDisplay = getChild(Controller.SYSTEM_INFORMATION_DISPLAY);
+        removeChild(Controller.SYSTEM_INFORMATION_DISPLAY);
+        destroyChild(systemInformationFrameDisplay);
 
         Item mouseModel = getChild(Controller.MOUSE_MODEL);
         removeChild(Controller.MOUSE_MODEL);
         destroyChild(mouseModel);
 
-        Item systemUserInterface = getChild(Controller.SYSTEM_USER_INTERFACE);
-        removeChild(Controller.SYSTEM_USER_INTERFACE);
-        destroyChild(systemUserInterface);
+        Item systemFrameDisplay = getChild(Controller.SYSTEM_DISPLAY);
+        removeChild(Controller.SYSTEM_DISPLAY);
+        destroyChild(systemFrameDisplay);
 
-        Item domainModel = getChild(Controller.DOMAIN_MODEL);
-        removeChild(Controller.DOMAIN_MODEL);
+        Item domainModel = getChild(Controller.KNOWLEDGE_MODEL);
+        removeChild(Controller.KNOWLEDGE_MODEL);
         destroyChild(domainModel);
 
         Item processor = getChild(Controller.PROCESSOR);
@@ -504,21 +473,21 @@ public class Controller extends Block {
 
             if (a != null) {
 
-                if (a.isEqualTo(Controller.SHOW_SYSTEM_USER_INTERFACE_ACTION)) {
+                if (a.isEqualTo(Controller.SHOW_SYSTEM_DISPLAY_ACTION)) {
 
                     showDisplay(s);
     
-                } else if (a.isEqualTo(Controller.HIDE_SYSTEM_USER_INTERFACE_ACTION)) {
+                } else if (a.isEqualTo(Controller.HIDE_SYSTEM_DISPLAY_ACTION)) {
     
                     hideDisplay(s);
 
-                } else if (a.isEqualTo(Controller.SHOW_SYSTEM_INFORMATION_USER_INTERFACE_ACTION)) {
+                } else if (a.isEqualTo(Controller.SHOW_SYSTEM_INFORMATION_DISPLAY_ACTION)) {
 
-                    showSystemInformationUserInterface(s);
+                    showSystemInformationDisplay(s);
     
-                } else if (a.isEqualTo(Controller.HIDE_SYSTEM_INFORMATION_USER_INTERFACE_ACTION)) {
+                } else if (a.isEqualTo(Controller.HIDE_SYSTEM_INFORMATION_DISPLAY_ACTION)) {
 
-                    hideSystemInformationUserInterface(s);
+                    hideSystemInformationDisplay(s);
     
                 } else if (a.isEqualTo(Controller.MOUSE_CLICKED_ACTION)) {
 
@@ -537,96 +506,96 @@ public class Controller extends Block {
     }
 
     /**
-     * Shows the system user interface.
+     * Shows the system display.
      *
      * @param s the signal
      * @exception Exception if the signal is null
      */
-    protected void showDisplay(Signal s) throws Exception {
+    protected void showSystemDisplay(Signal s) throws Exception {
 
         if (s != null) {
 
             s.setChild(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
             s.setChild(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
-            s.setChild(Signal.OBJECT, getChild(Controller.SYSTEM_USER_INTERFACE));
+            s.setChild(Signal.OBJECT, getChild(Controller.SYSTEM_DISPLAY));
 
         } else {
 
-            throw new Exception("Could not show system user interface. The signal is null.");
+            throw new Exception("Could not show system display. The signal is null.");
         }
     }
 
     /**
-     * Hides the system user interface.
+     * Hides the system display.
      *
      * @param s the signal
      * @exception Exception if the signal is null
      */
-    protected void hideDisplay(Signal s) throws Exception {
+    protected void hideSystemDisplay(Signal s) throws Exception {
 
         if (s != null) {
 
             s.setChild(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
-            s.setChild(Signal.OBJECT, getChild(Controller.SYSTEM_USER_INTERFACE));
+            s.setChild(Signal.OBJECT, getChild(Controller.SYSTEM_DISPLAY));
 
         } else {
 
-            throw new Exception("Could not hide system user interface. The signal is null.");
+            throw new Exception("Could not hide system display. The signal is null.");
         }
     }
 
     /**
-     * Shows the system information user interface.
+     * Shows the system information display.
      *
      * @param s the signal
      * @exception Exception if the signal is null
      */
-    protected void showSystemInformationUserInterface(Signal s) throws Exception {
+    protected void showSystemInformationDisplay(Signal s) throws Exception {
 
         if (s != null) {
 
             //??
-            //?? SystemInformation does not belong into the domain model!!
+            //?? SystemInformation does not belong into the knowledge model!!
             //?? Create an own model for meta information about systems!
             //??
 
-            SystemInformationUserInterfaceTranslator t = (SystemInformationUserInterfaceTranslator) getChild(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);
+            SystemInformationDisplayTranslator t = (SystemInformationDisplayTranslator) getChild(Controller.SYSTEM_INFORMATION_DISPLAY_TRANSLATOR);
 
             if (t != null) {
 
                 // Write system information into user interface.
-                t.encode((KnowledgeModel) getChild(Controller.DOMAIN_MODEL), (Model) getChild(Controller.SYSTEM_INFORMATION_USER_INTERFACE));
+                t.encode((KnowledgeModel) getChild(Controller.KNOWLEDGE_MODEL), (Model) getChild(Controller.SYSTEM_INFORMATION_DISPLAY));
 
             } else {
 
-                throw new Exception("Could not show system information user interface. The translator is null.");
+                throw new Exception("Could not show system information display. The translator is null.");
             }
 
             s.setChild(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
-            s.setChild(Signal.OBJECT, getChild(Controller.SYSTEM_INFORMATION_USER_INTERFACE));
+            s.setChild(Signal.OBJECT, getChild(Controller.SYSTEM_INFORMATION_DISPLAY));
 
         } else {
 
-            throw new Exception("Could not show system information user interface. The signal is null.");
+            throw new Exception("Could not show system information display. The signal is null.");
         }
     }
 
     /**
-     * Hides the system information user interface.
+     * Hides the system information display.
      *
      * @param s the signal
      * @exception Exception if the signal is null
      */
-    protected void hideSystemInformationUserInterface(Signal s) throws Exception {
+    protected void hideSystemInformationDisplay(Signal s) throws Exception {
 
         if (s != null) {
 
             s.setChild(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
-            s.setChild(Signal.OBJECT, getChild(Controller.SYSTEM_INFORMATION_USER_INTERFACE));
+            s.setChild(Signal.OBJECT, getChild(Controller.SYSTEM_INFORMATION_DISPLAY));
 
         } else {
 
-            throw new Exception("Could not hide system information user interface. The signal is null.");
+            throw new Exception("Could not hide system information display. The signal is null.");
         }
     }
 
@@ -689,12 +658,12 @@ public class Controller extends Block {
      *
      * @param p the position
      * @return the item
-     * @exception Exception if the system user interface is null
+     * @exception Exception if the display is null
      */
     protected Item getItem(Space p) throws Exception {
 
         Item i = null;
-        Display c = (Display) getChild(Controller.SYSTEM_USER_INTERFACE);
+        Display c = (Display) getChild(Controller.SYSTEM_DISPLAY);
 
         if (c != null) {
 
@@ -702,7 +671,7 @@ public class Controller extends Block {
 
         } else {
 
-            throw new Exception("Could not get item. The system user interface is null.");
+            throw new Exception("Could not get item. The display is null.");
         }
 
         return i;
@@ -719,13 +688,13 @@ public class Controller extends Block {
         if (s != null) {
 
 /*??
-            encode((String) s.getChild(Signal.LANGUAGE), (KnowledgeModel) getChild(Controller.DOMAIN_MODEL), (Model) s.getChild(Signal.OBJECT));
+            encode((String) s.getChild(Signal.LANGUAGE), (KnowledgeModel) getChild(Controller.KNOWLEDGE_MODEL), (Model) s.getChild(Signal.OBJECT));
             process((String) s.getChild(Signal.PREDICATE), (Model) s.getChild(Signal.OBJECT));
-            decode((String) s.getChild(Signal.LANGUAGE), (Model) s.getChild(Signal.OBJECT), (KnowledgeModel) getChild(Controller.DOMAIN_MODEL));
+            decode((String) s.getChild(Signal.LANGUAGE), (Model) s.getChild(Signal.OBJECT), (KnowledgeModel) getChild(Controller.KNOWLEDGE_MODEL));
 */
 
-//??            process((String) s.getChild(Signal.PREDICATE), (KnowledgeModel) getChild(Controller.DOMAIN_MODEL));
-//??            encode((String) s.getChild(Signal.LANGUAGE), (KnowledgeModel) getChild(Controller.DOMAIN_MODEL), (Model) s.getChild(Signal.OBJECT));
+//??            process((String) s.getChild(Signal.PREDICATE), (KnowledgeModel) getChild(Controller.KNOWLEDGE_MODEL));
+//??            encode((String) s.getChild(Signal.LANGUAGE), (KnowledgeModel) getChild(Controller.KNOWLEDGE_MODEL), (Model) s.getChild(Signal.OBJECT));
 
         } else {
 
@@ -737,7 +706,7 @@ public class Controller extends Block {
      * Processes a signal.
      *
      * @param a the action
-     * @param dm the domain model
+     * @param dm the knowledge model
      * @exception Exception if the processor is null
      */
     private void process(String a, KnowledgeModel dm) throws Exception {

@@ -31,7 +31,7 @@ import cybop.core.screen.component.*;
 /**
  * This class represents an about menu item.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class AboutMenuItem extends MenuItem {
@@ -40,8 +40,8 @@ public class AboutMenuItem extends MenuItem {
     // Actions.
     //
 
-    /** The show system information user interface action. */
-    public static final String SHOW_SYSTEM_INFORMATION_ACTION = new String("show_system_information_user_interface_action");
+    /** The show system information display action. */
+    public static final String SHOW_SYSTEM_INFORMATION_ACTION = new String("show_system_information_display_action");
 
     //
     // Default children.

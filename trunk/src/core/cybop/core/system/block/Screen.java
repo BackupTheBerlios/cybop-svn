@@ -26,6 +26,7 @@ package cybop.core.system.block;
 
 import cybop.core.model.Boolean;
 import cybop.core.model.model.*;
+import cybop.core.screen.model.*;
 import cybop.core.system.*;
 
 /**
@@ -33,7 +34,7 @@ import cybop.core.system.*;
  *
  * A screen is an output device that displays optical (graphical) information. 
  *
- * @version $Revision: 1.8 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Screen extends Block {
@@ -48,7 +49,7 @@ public class Screen extends Block {
      * @param m the gui model
      * @exception Exception if the model is null
      */
-    public void show(UserInterface m) throws Exception {
+    public void show(FrameDisplay m) throws Exception {
 
         if (m != null) {
 
@@ -70,7 +71,7 @@ public class Screen extends Block {
      * @param m the gui model
      * @exception Exception if the model is null
      */
-    public void hide(UserInterface m) throws Exception {
+    public void hide(FrameDisplay m) throws Exception {
 
         if (m != null) {
 

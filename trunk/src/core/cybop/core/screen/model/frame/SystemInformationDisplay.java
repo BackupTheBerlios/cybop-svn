@@ -40,10 +40,10 @@ import cybop.core.screen.model.*;
  * - authors
  * - helpers
  *
- * @version $Revision: 1.1 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class SystemInformationModel extends FrameModel {
+public class SystemInformationDisplay extends FrameDisplay {
 
     //
     // Default children.
@@ -56,9 +56,9 @@ public class SystemInformationModel extends FrameModel {
      *
      * @return the default user interface mode
      */
-    public Integer getDefaultUserInterfaceMode() {
+    public Integer getDefaultFrameDisplayMode() {
 
-        return SystemInformationUserInterface.MODAL_DIALOG_MODE;
+        return SystemInformationDisplay.MODAL_DIALOG_MODE;
     }
 
     /**
@@ -89,7 +89,7 @@ public class SystemInformationModel extends FrameModel {
      */
     public String getDefaultContentsPanel() {
 
-        return new String("cybop.core.model.organizer.SystemInformationContentsPanel");
+        return new String("cybop.core.model.organizer.SystemInformationPanel");
     }
 
     /**

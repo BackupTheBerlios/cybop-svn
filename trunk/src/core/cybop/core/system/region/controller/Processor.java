@@ -42,7 +42,7 @@ import cybop.core.system.region.*;
  * The processor is then responsible for forwarding the signal and results
  * to a motor.
  *
- * @version $Revision: 1.6 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Processor extends ControllerRegion {
@@ -72,10 +72,10 @@ public class Processor extends ControllerRegion {
     //
 
     /**
-     * Processes the action, possibly working on the domain model.
+     * Processes the action, possibly working on the knowledge model.
      *
      * @param a the action
-     * @param m the domain model
+     * @param m the knowledge model
      * @exception Exception if the action is null
      */
     public void process(String a, KnowledgeModel m) throws Exception {

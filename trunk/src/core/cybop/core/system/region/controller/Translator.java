@@ -24,7 +24,6 @@
 
 package cybop.core.system.region.controller;
 
-import cybop.core.knowledge.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
 import cybop.core.system.region.*;
@@ -33,20 +32,20 @@ import cybop.core.system.region.*;
  * This class represents a translator.
  *
  * It can be used to translate models.
- * A domain model may be translated into another kind of data model (encoding)
+ * A knowledge model may be translated into another kind of data model (encoding)
  * and vice versa (decoding).
  *
  * An encoder corresponds to the motoric nerve system of a human being.
- * For example, the brain center for muscle control encodes abstract domain model data
+ * For example, the brain center for muscle control encodes abstract knowledge model data
  * of our brain into a specific data model controlling a muscle reaction.
  *
  * A decoder corresponds to the sensoric nerve system of a human being.
  * For example, the brain region for seeing decodes optical data into the
- * proper abstract domain model of our brain.
+ * proper abstract knowledge model of our brain.
  *
  * Synonyms: Assembler, Mapper, Sensor, Motor, Encoder, Decoder 
  *
- * @version $Revision: 1.8 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Translator extends ControllerRegion {
@@ -326,12 +325,12 @@ public class Translator extends ControllerRegion {
     //
 
     /**
-     * Encodes the domain model.
+     * Encodes the knowledge model.
      *
-     * @param dm the domain model
+     * @param dm the knowledge model
      * @param m the encoded model
      */
-    public void encode(KnowledgeModel dm, Model m) throws Exception {
+    public void encode(Item dm, Item m) throws Exception {
     }
 
     //
@@ -342,9 +341,9 @@ public class Translator extends ControllerRegion {
      * Decodes the model.
      *
      * @param m the encoded model
-     * @param dm the domain model
+     * @param dm the knowledge model
      */
-    public void decode(Model m, KnowledgeModel dm) throws Exception {
+    public void decode(Item m, Item dm) throws Exception {
     }
 
     //

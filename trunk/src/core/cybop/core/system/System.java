@@ -59,7 +59,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.19 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends SystemItem implements java.lang.Runnable {
@@ -132,7 +132,7 @@ public class System extends SystemItem implements java.lang.Runnable {
      *
      * @return the encapsulated java thread
      */
-    public java.lang.Object createJavaObject() {
+    public java.lang.Object createJavaObject() throws Exception {
 
         return new java.lang.Thread(this);
     }

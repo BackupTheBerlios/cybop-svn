@@ -31,6 +31,7 @@ import cybop.core.model.Integer;
 import cybop.core.model.String;
 import cybop.core.mouse.*;
 import cybop.core.signal.*;
+import cybop.core.screen.*;
 import cybop.core.system.*;
 import cybop.core.system.System;
 import cybop.core.system.chain.*;
@@ -69,7 +70,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.27 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -980,7 +981,7 @@ public class Launcher extends Family {
                 if (a.isEqualTo(Launcher.STARTUP_SYSTEM_ACTION)) {
 
                     java.lang.System.out.println("INFO: Startup system.");
-                    startupSystem((String) getCategory(Launcher.SYSTEM), (String) getChild(Launcher.SYSTEM_CONFIGURATION_LOCATION));
+                    startupSystem((String) getCategory(Launcher.SYSTEM));
 
                 } else if (a.isEqualTo(Launcher.SHUTDOWN_SYSTEM_ACTION)) {
 
@@ -1030,13 +1031,12 @@ public class Launcher extends Family {
      * The user interface will be displayed by the screen, done in the send method.
      *
      * @param sys the system category
-     * @param c the configuration location
      * @exception Exception if the signal is null
      */
-    public void startupSystem(String sys, String c) throws Exception {
+    public void startupSystem(String sys) throws Exception {
 
         setupJavaEventHandling();
-        setSystem(Launcher.SYSTEM, createChild(sys/*??, c*/));
+        setSystem(Launcher.SYSTEM, createChild(sys));
 
         Signal s = (Signal) createChild(getDefaultSignalCategory());
 
@@ -1045,7 +1045,7 @@ public class Launcher extends Family {
             s.setChild(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
             s.setChild(Signal.LANGUAGE, Signal.NEURO_LANGUAGE);
             s.setChild(Signal.SUBJECT, Launcher.SYSTEM);
-            s.setChild(Signal.PREDICATE, Controller.SHOW_SYSTEM_USER_INTERFACE_ACTION);
+            s.setChild(Signal.PREDICATE, Controller.SHOW_DISPLAY_ACTION);
             s.setChild(Signal.SENDER_OBJECT, Launcher.USER);
 
         } else {

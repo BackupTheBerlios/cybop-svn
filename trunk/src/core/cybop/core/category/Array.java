@@ -34,7 +34,7 @@ package cybop.core.category;
  * In the case of computer science, everything gets abstracted to 0 and 1.
  * But that also means that every abstraction has a bytecode representation.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-16 18:29:19 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Array {
@@ -318,7 +318,7 @@ public class Array {
      * @return the encapsulated java object
      * @exception Exception if the encapsulated java object is null
      */
-    public java.lang.Object createJavaObject() {
+    public java.lang.Object createJavaObject() throws Exception {
 
         return null;
     }
@@ -328,7 +328,7 @@ public class Array {
      *
      * @param o the encapsulated java object
      */
-    public void destroyJavaObject(java.lang.Object o) {
+    public void destroyJavaObject(java.lang.Object o) throws Exception {
     }
 
     /**
@@ -382,7 +382,7 @@ public class Array {
      *
      * @param tn the java tree node
      */
-    public void destroyJavaTreeNode(javax.swing.tree.DefaultMutableTreeNode tn) {
+    public void destroyJavaTreeNode(javax.swing.tree.DefaultMutableTreeNode tn) throws Exception {
     }
 
     /**

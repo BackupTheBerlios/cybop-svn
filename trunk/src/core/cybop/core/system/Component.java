@@ -24,20 +24,12 @@
 
 package cybop.core.system;
 
-import cybop.core.category.*;
-import cybop.core.model.*;
-import cybop.core.model.Boolean;
-import cybop.core.model.Integer;
-import cybop.core.model.String;
-import cybop.core.system.*;
-import cybop.core.system.chain.*;
-
 /**
  * This class represents a component.
  *
  * A component corresponds to a cell in biology.
  *
- * @version $Revision: 1.21 $ $Date: 2003-06-17 08:17:00 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends SystemItem {

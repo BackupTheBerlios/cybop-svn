@@ -32,7 +32,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a system information contents panel.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationPanel extends DisplayRegion {
@@ -112,15 +112,15 @@ public class SystemInformationPanel extends DisplayRegion {
 
         if (n != null) {
 
-            if (n.isEqualTo(SystemInformationContentsPanel.HEAD_PANEL)) {
+            if (n.isEqualTo(SystemInformationPanel.HEAD_PANEL)) {
 
-                setHeadPanel((HeadPanel) i);
+                setSystemVersionPanel((SystemVersionPanel) i);
 
-            } else if (n.isEqualTo(SystemInformationContentsPanel.TABBED_PANE)) {
+            } else if (n.isEqualTo(SystemInformationPanel.TABBED_PANE)) {
 
                 setTabbedPane((TabbedPane) i);
             
-            } else if (n.isEqualTo(SystemInformationContentsPanel.BUTTON_PANEL)) {
+            } else if (n.isEqualTo(SystemInformationPanel.BUTTON_PANEL)) {
 
                 setButtonPanel((ButtonPanel) i);
             }
@@ -141,15 +141,15 @@ public class SystemInformationPanel extends DisplayRegion {
 
         if (n != null) {
 
-            if (n.isEqualTo(SystemInformationContentsPanel.HEAD_PANEL)) {
+            if (n.isEqualTo(SystemInformationPanel.HEAD_PANEL)) {
 
-                removeHeadPanel((HeadPanel) getChild(n));
+                removeSystemVersionPanel((SystemVersionPanel) getChild(n));
 
-            } else if (n.isEqualTo(SystemInformationContentsPanel.TABBED_PANE)) {
+            } else if (n.isEqualTo(SystemInformationPanel.TABBED_PANE)) {
 
                 removeTabbedPane((TabbedPane) getChild(n));
             
-            } else if (n.isEqualTo(SystemInformationContentsPanel.BUTTON_PANEL)) {
+            } else if (n.isEqualTo(SystemInformationPanel.BUTTON_PANEL)) {
 
                 removeButtonPanel((ButtonPanel) getChild(n));
             }
@@ -171,9 +171,9 @@ public class SystemInformationPanel extends DisplayRegion {
      *
      * @return the default head panel
      */
-    public String getDefaultHeadPanel() {
+    public String getDefaultSystemVersionPanel() {
 
-        return new String("cybop.core.model.organizer.HeadPanel");
+        return new String("cybop.core.model.organizer.SystemVersionPanel");
     }
 
     /**
@@ -207,7 +207,7 @@ public class SystemInformationPanel extends DisplayRegion {
      * @exception Exception if the java panel is null
      * @exception Exception if the head panel is null
      */
-    public void setHeadPanel(SystemVersionPanel hp) throws Exception {
+    public void setSystemVersionPanel(SystemVersionPanel hp) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -235,7 +235,7 @@ public class SystemInformationPanel extends DisplayRegion {
      * @exception Exception if the java panel is null
      * @exception Exception if the head panel is null
      */
-    public void removeHeadPanel(SystemVersionPanel hp) throws Exception {
+    public void removeSystemVersionPanel(SystemVersionPanel hp) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -387,9 +387,9 @@ public class SystemInformationPanel extends DisplayRegion {
 
         super.initialize();
 
-        setChild(SystemInformationContentsPanel.HEAD_PANEL, createChild(getDefaultHeadPanel()));
-        setChild(SystemInformationContentsPanel.TABBED_PANE, createChild(getDefaultTabbedPane()));
-        setChild(SystemInformationContentsPanel.BUTTON_PANEL, createChild(getDefaultButtonPanel()));
+        setChild(SystemInformationPanel.HEAD_PANEL, createChild(getDefaultSystemVersionPanel()));
+        setChild(SystemInformationPanel.TABBED_PANE, createChild(getDefaultTabbedPane()));
+        setChild(SystemInformationPanel.BUTTON_PANEL, createChild(getDefaultButtonPanel()));
     }
 
     /**
@@ -397,16 +397,16 @@ public class SystemInformationPanel extends DisplayRegion {
      */
     public void finalizz() throws Exception {
 
-        ButtonPanel buttonPanel = (ButtonPanel) getChild(SystemInformationContentsPanel.BUTTON_PANEL);
-        removeChild(SystemInformationContentsPanel.BUTTON_PANEL);
+        ButtonPanel buttonPanel = (ButtonPanel) getChild(SystemInformationPanel.BUTTON_PANEL);
+        removeChild(SystemInformationPanel.BUTTON_PANEL);
         destroyChild(buttonPanel);
 
-        TabbedPane tabbedPane = (TabbedPane) getChild(SystemInformationContentsPanel.TABBED_PANE);
-        removeChild(SystemInformationContentsPanel.TABBED_PANE);
+        TabbedPane tabbedPane = (TabbedPane) getChild(SystemInformationPanel.TABBED_PANE);
+        removeChild(SystemInformationPanel.TABBED_PANE);
         destroyChild(tabbedPane);
 
-        HeadPanel headPanel = (HeadPanel) getChild(SystemInformationContentsPanel.HEAD_PANEL);
-        removeChild(SystemInformationContentsPanel.HEAD_PANEL);
+        SystemVersionPanel headPanel = (SystemVersionPanel) getChild(SystemInformationPanel.HEAD_PANEL);
+        removeChild(SystemInformationPanel.HEAD_PANEL);
         destroyChild(headPanel);
 
         super.finalizz();
