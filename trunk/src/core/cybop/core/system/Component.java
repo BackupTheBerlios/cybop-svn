@@ -64,7 +64,7 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.8 $ $Date: 2003-04-19 09:12:25 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-04-20 22:21:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends Chain {
@@ -768,7 +768,7 @@ public class Component extends Chain {
      * @param s the signal
      * @exception NullPointerException if the signal memory is null
      */
-    public synchronized void storeSignal(Signal s) throws NullPointerException {
+    public void storeSignal(Signal s) throws NullPointerException {
 
         SignalMemory mem = (SignalMemory) get(Component.SIGNAL_MEMORY);
 
@@ -796,7 +796,7 @@ public class Component extends Chain {
      * @exception NullPointerException if a child is null
      * @exception NullPointerException if the priority is null
      */
-    public synchronized Signal fetchSignal() throws NullPointerException {
+    public Signal fetchSignal() throws NullPointerException {
 
         Signal s = null;
         SignalMemory mem = (SignalMemory) get(Component.SIGNAL_MEMORY);

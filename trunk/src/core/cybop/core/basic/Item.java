@@ -76,7 +76,7 @@ import cybop.core.model.principle.*;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.17 $ $Date: 2003-04-19 09:12:25 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2003-04-20 22:21:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -1370,7 +1370,12 @@ public class Item extends State {
     
             if (i != null) {
 
-                tn.remove(i.getJavaTreeNode());
+                // This check had to be inserted because signal items have
+                // children that are not child tree nodes of that signal.
+                if (tn.isNodeChild(i.getJavaTreeNode())) {
+
+                    tn.remove(i.getJavaTreeNode());
+                }
 
             } else {
     

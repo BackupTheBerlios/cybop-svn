@@ -33,7 +33,7 @@ import cybop.core.basic.String;
  *
  * It serves as container transporting information of communication.
  *
- * @version $Revision: 1.8 $ $Date: 2003-04-19 09:12:25 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-04-20 22:21:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Signal extends Item {
@@ -61,6 +61,13 @@ public class Signal extends Item {
     public static final String ADVERBIAL = new String("adverbial");
 
     //
+    // Priorities.
+    //
+
+    /** The normal priority. */
+    public static final Integer NORMAL_PRIORITY = new Integer(1);
+
+    //
     // Languages.
     //
 
@@ -69,6 +76,9 @@ public class Signal extends Item {
 
     /** The textual user interface (tui) language. */
     public static final String TUI_LANGUAGE = new String("tui_language");
+
+    /** The mouse language. */
+    public static final String MOUSE_LANGUAGE = new String("mouse_language");
 
     /** The graphical user interface (gui) language. */
     public static final String GUI_LANGUAGE = new String("gui_language");
@@ -105,7 +115,7 @@ public class Signal extends Item {
      */
     public Integer getDefaultPriority() {
 
-        return new Integer(1);
+        return null;
     }
 
     /**
@@ -182,46 +192,18 @@ public class Signal extends Item {
      */
     public void finalizz() throws Exception {
 
-        Item adverbial = get(Signal.ADVERBIAL);
+        // Do not destroy children here!
+        // There were created by external items and also have to be
+        // destroyed by them.
+
         remove(Signal.ADVERBIAL);
-        destroyItem(adverbial);
-
-        Item object = get(Signal.OBJECT);
         remove(Signal.OBJECT);
-        destroyItem(object);
-
-        Item predicate = get(Signal.PREDICATE);
         remove(Signal.PREDICATE);
-        destroyItem(predicate);
-
-        Item subject = get(Signal.SUBJECT);
         remove(Signal.SUBJECT);
-        destroyItem(subject);
-
-        Item language = get(Signal.LANGUAGE);
         remove(Signal.LANGUAGE);
-        destroyItem(language);
-
-        Item priority = get(Signal.PRIORITY);
         remove(Signal.PRIORITY);
-        destroyItem(priority);
 
         super.finalizz();
-    }
-
-    //
-    // Resetting.
-    //
-    
-    /**
-     * Resets the signal.
-     *
-     * Removes and then sets all children.
-     */
-    public void reset() throws Exception {
-
-        finalizz();
-        initialize();
     }
 }
 

@@ -69,7 +69,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.12 $ $Date: 2003-04-19 09:12:25 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-04-20 22:21:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family /*??implements
@@ -615,12 +615,25 @@ public class Launcher extends Family /*??implements
 
     /**
      * Launches the system.
+     *
+     * @exception NullPointerException if the signal is null
      */
-    public void launch() throws Exception {
+    public void launch() throws Exception, NullPointerException {
 
         Signal s = (Signal) createItem(getDefaultSignal());
 
-        transform(s, Signal.TUI_LANGUAGE, get(Launcher.USER), (String) get(Launcher.LIFECYCLE_ACTION), null);
+        if (s != null) {
+
+            s.set(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
+            s.set(Signal.LANGUAGE, Signal.TUI_LANGUAGE);
+            s.set(Signal.SUBJECT, get(Launcher.USER));
+            s.set(Signal.PREDICATE, get(Launcher.LIFECYCLE_ACTION));
+
+        } else {
+
+            throw new NullPointerException("Could not launch. The signal is null.");
+        }
+
         storeSignal(s);
     }
 
@@ -663,6 +676,9 @@ public class Launcher extends Family /*??implements
             }
 
             queued = fetchSignal();
+            if (queued != null) {
+                java.lang.System.out.println("\n\n\n\n\n Test fetch:\n" + queued.getName().getJavaObject());
+            }
 
             if (queued != null) {
 
@@ -686,7 +702,15 @@ public class Launcher extends Family /*??implements
                 // again by changing flags on the computer (done by operating system),
                 // e.g. a gui drawn onto the screen, a printout or a network message.
                 send(s);
-                reset(s);
+
+                if (s != null) {
+                    
+                    s.reset();
+        
+                } else {
+        
+                    throw new NullPointerException("Could not reset signal. The signal is null.");
+                }
 */
             }
         }
@@ -846,32 +870,14 @@ public class Launcher extends Family /*??implements
 
             } else {
 
-                throw new NullPointerException("Could not send signal. The language is null.");
+//?? Temporarily commented out, because not all signals created from java events have
+//?? a language yet!
+//??                throw new NullPointerException("Could not send signal. The language is null.");
             }
 
         } else {
 
             throw new NullPointerException("Could not send signal. The signal is null.");
-        }
-    }
-
-    /**
-     * Resets the signal.<br><br>
-     *
-     * All children of the signal will be removed.
-     *
-     * @param s the signal
-     * @exception NullPointerException if the signal is null
-     */
-    public void reset(Signal s) throws Exception, NullPointerException {
-
-        if (s != null) {
-            
-            s.reset();
-
-        } else {
-
-            throw new NullPointerException("Could not reset signal. The signal is null.");
         }
     }
 
@@ -893,10 +899,6 @@ public class Launcher extends Family /*??implements
         super.handle(s, b);
 
         if (s != null) {
-
-            if (s.getName() != null) {
-                java.lang.System.out.println("\n\n\n\n\n Test:\n" + s.getName().getJavaObject());
-            }
 
             String a = (String) s.get(Signal.PREDICATE);
 
@@ -954,18 +956,29 @@ public class Launcher extends Family /*??implements
      * Create user interface by sending the corresponding signal through the system.
      * The user interface will be displayed by the screen, done in the send method.
      *
-     * @param s the system class name
+     * @param sys the system class name
      * @param c the configuration location
+     * @exception NullPointerException if the signal is null
      */
-    public void startupSystem(String s, String c) throws Exception {
+    public void startupSystem(String sys, String c) throws Exception, NullPointerException {
 
-        setSystem(Launcher.SYSTEM, createComponent(s/*??, c*/));
+        setSystem(Launcher.SYSTEM, createComponent(sys/*??, c*/));
 
-        Signal sig = (Signal) createItem(getDefaultSignal());
+        Signal s = (Signal) createItem(getDefaultSignal());
 
-        transform(sig, Signal.GUI_LANGUAGE, get(Launcher.USER), Controller.SHOW_SYSTEM_USER_INTERFACE_ACTION, null);
-        storeSignal(sig);
+        if (s != null) {
+            
+            s.set(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
+            s.set(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
+            s.set(Signal.SUBJECT, get(Launcher.USER));
+            s.set(Signal.PREDICATE, Controller.SHOW_SYSTEM_USER_INTERFACE_ACTION);
 
+        } else {
+
+            throw new NullPointerException("Could not startup system. The signal is null.");
+        }
+
+        storeSignal(s);
         setupJavaEventHandling();
     }
 
@@ -1039,6 +1052,7 @@ public class Launcher extends Family /*??implements
     /**
      * Shuts down the system across a socket connection.
      *
+     * @exception NullPointerException if the signal is null
      * @exception NullPointerException if the shutdown socket is null
      */
     public void shutdownSystemAcrossSocket() throws Exception, NullPointerException {
@@ -1046,7 +1060,17 @@ public class Launcher extends Family /*??implements
         Signal s = (Signal) createItem(getDefaultSignal());
         ShutdownSocket socket = (ShutdownSocket) createComponent(getDefaultShutdownSocket());
 
-        transform(s, Signal.GUI_LANGUAGE, get(Launcher.USER), (String) get(Launcher.SHUTDOWN_SYSTEM_ACTION), null);
+        if (s != null) {
+            
+            s.set(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
+            s.set(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
+            s.set(Signal.SUBJECT, get(Launcher.USER));
+            s.set(Signal.PREDICATE, Launcher.SHUTDOWN_SYSTEM_ACTION);
+
+        } else {
+
+            throw new NullPointerException("Could not shutdown system across socket. The signal is null.");
+        }
 
         if (socket != null) {
 
@@ -1149,7 +1173,7 @@ public class Launcher extends Family /*??implements
     //
     // Java event handling and transformation into CYBOP signals.
     //
-    
+
     /**
      * Handles a java event.
      *
@@ -1168,6 +1192,7 @@ public class Launcher extends Family /*??implements
      *
      * @param evt the java event
      * @exception NullPointerException if the java event is null
+     * @exception NullPointerException if the signal is null
      * @exception NullPointerException if the system is null
      * @exception NullPointerException if the controller is null
      * @exception NullPointerException if the mouse model is null
@@ -1182,10 +1207,30 @@ public class Launcher extends Family /*??implements
         Model m = null;
 
         if (evt != null) {
-            
+
             int id = evt.getID();
 
-            if (id == java.awt.event.FocusEvent.FOCUS_GAINED) {
+            if (id == java.awt.event.ComponentEvent.COMPONENT_HIDDEN) {
+
+                a = Controller.COMPONENT_HIDDEN_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.ComponentEvent.COMPONENT_MOVED) {
+
+                a = Controller.COMPONENT_MOVED_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.ComponentEvent.COMPONENT_RESIZED) {
+
+                a = Controller.COMPONENT_RESIZED_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.ComponentEvent.COMPONENT_SHOWN) {
+
+                a = Controller.COMPONENT_SHOWN_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.FocusEvent.FOCUS_GAINED) {
 
                 a = Controller.FOCUS_GAINED_ACTION;
                 l = null;
@@ -1195,20 +1240,96 @@ public class Launcher extends Family /*??implements
                 a = Controller.FOCUS_LOST_ACTION;
                 l = null;
 
-            } else if (id == java.awt.event.MouseEvent.MOUSE_PRESSED) {
+            } else if (id == java.awt.event.HierarchyEvent.ANCESTOR_MOVED) {
 
-                a = Controller.MOUSE_PRESSED_ACTION;
-                l = Signal.GUI_LANGUAGE;
+                a = Controller.ANCESTOR_MOVED_ACTION;
+                l = null;
 
-            } else if (id == java.awt.event.MouseEvent.MOUSE_RELEASED) {
+            } else if (id == java.awt.event.HierarchyEvent.ANCESTOR_RESIZED) {
 
-                a = Controller.MOUSE_RELEASED_ACTION;
-                l = Signal.GUI_LANGUAGE;
+                a = Controller.ANCESTOR_RESIZED_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.HierarchyEvent.HIERARCHY_CHANGED) {
+
+                a = Controller.HIERARCHY_CHANGED_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.InputMethodEvent.CARET_POSITION_CHANGED) {
+
+                a = Controller.CARET_POSITION_CHANGED_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.InputMethodEvent.INPUT_METHOD_TEXT_CHANGED) {
+
+                a = Controller.INPUT_METHOD_TEXT_CHANGED_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.KeyEvent.KEY_PRESSED) {
+
+                a = Controller.KEY_PRESSED_ACTION;
+                l = Signal.TUI_LANGUAGE;
+
+            } else if (id == java.awt.event.KeyEvent.KEY_RELEASED) {
+
+                a = Controller.KEY_RELEASED_ACTION;
+                l = Signal.TUI_LANGUAGE;
+
+            } else if (id == java.awt.event.KeyEvent.KEY_TYPED) {
+
+                a = Controller.KEY_TYPED_ACTION;
+                l = Signal.TUI_LANGUAGE;
 
             } else if (id == java.awt.event.MouseEvent.MOUSE_CLICKED) {
 
                 a = Controller.MOUSE_CLICKED_ACTION;
-                l = Signal.GUI_LANGUAGE;
+                l = Signal.MOUSE_LANGUAGE;
+
+                //?? Find out which child system is active (top window)
+                //?? to use its controller here.
+                System sys = getSystem(Launcher.SYSTEM);
+
+                if (sys != null) {
+
+                    Controller c = (Controller) sys.get(System.CONTROLLER);
+    
+                    if (c != null) {
+    
+                        m = (MouseModel) c.get(Controller.MOUSE_MODEL);
+    
+                        if (m != null) {
+
+                            Space sp = (Space) m.get(MouseModel.POINTER_POSITION);
+
+                            if (sp != null) {
+
+                                sp.set(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
+                                sp.set(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
+
+                            } else {
+
+                                throw new NullPointerException("Could not handle java event. The pointer position is null.");
+                            }
+    
+                        } else {
+                
+                            throw new NullPointerException("Could not handle java event. The mouse model is null.");
+                        }
+    
+                    } else {
+            
+                        throw new NullPointerException("Could not handle java event. The controller is null.");
+                    }
+    
+                } else {
+        
+                    throw new NullPointerException("Could not handle java event. The system is null.");
+                }
+
+            } else if (id == java.awt.event.MouseEvent.MOUSE_DRAGGED) {
+
+                a = Controller.MOUSE_DRAGGED_ACTION;
+                l = Signal.MOUSE_LANGUAGE;
 
                 //?? Find out which child system is active (top window)
                 //?? to use its controller here.
@@ -1254,87 +1375,237 @@ public class Launcher extends Family /*??implements
             } else if (id == java.awt.event.MouseEvent.MOUSE_ENTERED) {
 
                 a = Controller.MOUSE_ENTERED_ACTION;
-                l = Signal.GUI_LANGUAGE;
+                l = Signal.MOUSE_LANGUAGE;
+
+                //?? Find out which child system is active (top window)
+                //?? to use its controller here.
+                System sys = getSystem(Launcher.SYSTEM);
+
+                if (sys != null) {
+
+                    Controller c = (Controller) sys.get(System.CONTROLLER);
+    
+                    if (c != null) {
+    
+                        m = (MouseModel) c.get(Controller.MOUSE_MODEL);
+    
+                        if (m != null) {
+
+                            Space sp = (Space) m.get(MouseModel.POINTER_POSITION);
+
+                            if (sp != null) {
+
+                                sp.set(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
+                                sp.set(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
+
+                            } else {
+
+                                throw new NullPointerException("Could not handle java event. The pointer position is null.");
+                            }
+    
+                        } else {
+                
+                            throw new NullPointerException("Could not handle java event. The mouse model is null.");
+                        }
+    
+                    } else {
+            
+                        throw new NullPointerException("Could not handle java event. The controller is null.");
+                    }
+    
+                } else {
+        
+                    throw new NullPointerException("Could not handle java event. The system is null.");
+                }
 
             } else if (id == java.awt.event.MouseEvent.MOUSE_EXITED) {
 
                 a = Controller.MOUSE_EXITED_ACTION;
-                l = Signal.GUI_LANGUAGE;
+                l = Signal.MOUSE_LANGUAGE;
 
-            } else if (id == java.awt.event.MouseEvent.MOUSE_DRAGGED) {
+                //?? Find out which child system is active (top window)
+                //?? to use its controller here.
+                System sys = getSystem(Launcher.SYSTEM);
 
-                a = Controller.MOUSE_DRAGGED_ACTION;
-                l = Signal.GUI_LANGUAGE;
+                if (sys != null) {
+
+                    Controller c = (Controller) sys.get(System.CONTROLLER);
+    
+                    if (c != null) {
+    
+                        m = (MouseModel) c.get(Controller.MOUSE_MODEL);
+    
+                        if (m != null) {
+
+                            Space sp = (Space) m.get(MouseModel.POINTER_POSITION);
+
+                            if (sp != null) {
+
+                                sp.set(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
+                                sp.set(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
+
+                            } else {
+
+                                throw new NullPointerException("Could not handle java event. The pointer position is null.");
+                            }
+    
+                        } else {
+                
+                            throw new NullPointerException("Could not handle java event. The mouse model is null.");
+                        }
+    
+                    } else {
+            
+                        throw new NullPointerException("Could not handle java event. The controller is null.");
+                    }
+    
+                } else {
+        
+                    throw new NullPointerException("Could not handle java event. The system is null.");
+                }
 
             } else if (id == java.awt.event.MouseEvent.MOUSE_MOVED) {
 
                 a = Controller.MOUSE_MOVED_ACTION;
-                l = Signal.GUI_LANGUAGE;
+                l = Signal.MOUSE_LANGUAGE;
+
+                //?? Find out which child system is active (top window)
+                //?? to use its controller here.
+                System sys = getSystem(Launcher.SYSTEM);
+
+                if (sys != null) {
+
+                    Controller c = (Controller) sys.get(System.CONTROLLER);
+    
+                    if (c != null) {
+    
+                        m = (MouseModel) c.get(Controller.MOUSE_MODEL);
+    
+                        if (m != null) {
+
+                            Space sp = (Space) m.get(MouseModel.POINTER_POSITION);
+
+                            if (sp != null) {
+
+                                sp.set(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
+                                sp.set(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
+
+                            } else {
+
+                                throw new NullPointerException("Could not handle java event. The pointer position is null.");
+                            }
+    
+                        } else {
+                
+                            throw new NullPointerException("Could not handle java event. The mouse model is null.");
+                        }
+    
+                    } else {
+            
+                        throw new NullPointerException("Could not handle java event. The controller is null.");
+                    }
+    
+                } else {
+        
+                    throw new NullPointerException("Could not handle java event. The system is null.");
+                }
+
+            } else if (id == java.awt.event.MouseEvent.MOUSE_PRESSED) {
+
+                a = Controller.MOUSE_PRESSED_ACTION;
+                l = Signal.MOUSE_LANGUAGE;
+
+                //?? Find out which child system is active (top window)
+                //?? to use its controller here.
+                System sys = getSystem(Launcher.SYSTEM);
+
+                if (sys != null) {
+
+                    Controller c = (Controller) sys.get(System.CONTROLLER);
+    
+                    if (c != null) {
+    
+                        m = (MouseModel) c.get(Controller.MOUSE_MODEL);
+    
+                        if (m != null) {
+
+                            Space sp = (Space) m.get(MouseModel.POINTER_POSITION);
+
+                            if (sp != null) {
+
+                                sp.set(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
+                                sp.set(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
+
+                            } else {
+
+                                throw new NullPointerException("Could not handle java event. The pointer position is null.");
+                            }
+    
+                        } else {
+                
+                            throw new NullPointerException("Could not handle java event. The mouse model is null.");
+                        }
+    
+                    } else {
+            
+                        throw new NullPointerException("Could not handle java event. The controller is null.");
+                    }
+    
+                } else {
+        
+                    throw new NullPointerException("Could not handle java event. The system is null.");
+                }
+
+            } else if (id == java.awt.event.MouseEvent.MOUSE_RELEASED) {
+
+                a = Controller.MOUSE_RELEASED_ACTION;
+                l = Signal.MOUSE_LANGUAGE;
+
+                //?? Find out which child system is active (top window)
+                //?? to use its controller here.
+                System sys = getSystem(Launcher.SYSTEM);
+
+                if (sys != null) {
+
+                    Controller c = (Controller) sys.get(System.CONTROLLER);
+    
+                    if (c != null) {
+    
+                        m = (MouseModel) c.get(Controller.MOUSE_MODEL);
+    
+                        if (m != null) {
+
+                            Space sp = (Space) m.get(MouseModel.POINTER_POSITION);
+
+                            if (sp != null) {
+
+                                sp.set(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
+                                sp.set(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
+
+                            } else {
+
+                                throw new NullPointerException("Could not handle java event. The pointer position is null.");
+                            }
+    
+                        } else {
+                
+                            throw new NullPointerException("Could not handle java event. The mouse model is null.");
+                        }
+    
+                    } else {
+            
+                        throw new NullPointerException("Could not handle java event. The controller is null.");
+                    }
+    
+                } else {
+        
+                    throw new NullPointerException("Could not handle java event. The system is null.");
+                }
 
             } else if (id == java.awt.event.MouseWheelEvent.MOUSE_WHEEL) {
 
                 a = Controller.MOUSE_WHEEL_ACTION;
-                l = Signal.GUI_LANGUAGE;
-
-            } else if (id == java.awt.event.KeyEvent.KEY_TYPED) {
-
-                a = Controller.KEY_TYPED_ACTION;
-                l = Signal.TUI_LANGUAGE;
-
-            } else if (id == java.awt.event.KeyEvent.KEY_RELEASED) {
-
-                a = Controller.KEY_RELEASED_ACTION;
-                l = Signal.TUI_LANGUAGE;
-
-            } else if (id == java.awt.event.KeyEvent.KEY_PRESSED) {
-
-                a = Controller.KEY_PRESSED_ACTION;
-                l = Signal.TUI_LANGUAGE;
-
-            } else if (id == java.awt.event.ComponentEvent.COMPONENT_RESIZED) {
-
-                a = Controller.COMPONENT_RESIZED_ACTION;
-                l = null;
-
-            } else if (id == java.awt.event.ComponentEvent.COMPONENT_MOVED) {
-
-                a = Controller.COMPONENT_MOVED_ACTION;
-                l = null;
-
-            } else if (id == java.awt.event.ComponentEvent.COMPONENT_SHOWN) {
-
-                a = Controller.COMPONENT_SHOWN_ACTION;
-                l = null;
-
-            } else if (id == java.awt.event.ComponentEvent.COMPONENT_HIDDEN) {
-
-                a = Controller.COMPONENT_HIDDEN_ACTION;
-                l = null;
-
-            } else if (id == java.awt.event.InputMethodEvent.INPUT_METHOD_TEXT_CHANGED) {
-
-                a = Controller.INPUT_METHOD_TEXT_CHANGED_ACTION;
-                l = null;
-
-            } else if (id == java.awt.event.InputMethodEvent.CARET_POSITION_CHANGED) {
-
-                a = Controller.CARET_POSITION_CHANGED_ACTION;
-                l = null;
-
-            } else if (id == java.awt.event.HierarchyEvent.HIERARCHY_CHANGED) {
-
-                a = Controller.HIERARCHY_CHANGED_ACTION;
-                l = null;
-
-            } else if (id == java.awt.event.HierarchyEvent.ANCESTOR_RESIZED) {
-
-                a = Controller.ANCESTOR_RESIZED_ACTION;
-                l = null;
-
-            } else if (id == java.awt.event.HierarchyEvent.ANCESTOR_MOVED) {
-
-                a = Controller.ANCESTOR_MOVED_ACTION;
-                l = null;
+                l = Signal.MOUSE_LANGUAGE;
             }
 
             // This condition is solely for speeding up the signal (event) handling.
@@ -1349,39 +1620,25 @@ public class Launcher extends Family /*??implements
                 // e.g. to receive a keyboard or mouse event and then create a CYBOP signal of it.
                 // In our case here we have checked the coming java events and will now
                 // transform them into a CYBOP signal.
-                transform(s, l, get(Launcher.USER), a, m);
+                if (s != null) {
+
+                    s.set(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
+                    s.set(Signal.LANGUAGE, l);
+                    s.set(Signal.SUBJECT, get(Launcher.USER));
+                    s.set(Signal.PREDICATE, a);
+                    s.set(Signal.OBJECT, m);
+
+                } else {
+        
+                    throw new NullPointerException("Could not handle java event. The signal is null.");
+                }
+
                 storeSignal(s);
             }
 
         } else {
 
             throw new NullPointerException("Could not handle java event. The java event is null.");
-        }
-    }
-
-    /**
-     * Transforms the single java event parameters into a CYBOP signal.<br><br>
-     *
-     * @param s the signal
-     * @param l the language
-     * @param subj the subject
-     * @param p the predicate
-     * @param o the object
-     * @exception NullPointerException if the signal is null
-     */
-    public void transform(Signal s, String l, Item subj, Item p, Model o) throws NullPointerException {
-
-        if (s != null) {
-
-//??            s.set(Signal.PRIORITY, new Integer(1));
-            s.set(Signal.LANGUAGE, l);
-            s.set(Signal.SUBJECT, subj);
-            s.set(Signal.PREDICATE, p);
-            s.set(Signal.OBJECT, o);
-
-        } else {
-
-            throw new NullPointerException("Could not receive signal. The signal is null.");
         }
     }
 
@@ -1463,6 +1720,8 @@ public class Launcher extends Family /*??implements
          * @param evt the java awt event sent directly from the JVM to here
          */
         protected void dispatchEvent(java.awt.AWTEvent evt) {
+
+            java.lang.System.out.println("\n\n\n\n\n Test dispatch:\n" + evt);
 
             //?? For now, we also call the AWT event handling.
             //?? Later, we will cut it off by removing this line.
