@@ -1,5 +1,5 @@
 /*
- * $RCSfile: float_handler.c,v $
+ * $RCSfile: double_handler.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -21,53 +21,53 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles a float.
+ * This file handles a double.
  *
- * A float is a floating point number.
+ * A double is a floating point number.
  *
- * @version $Revision: 1.1 $ $Date: 2004-04-07 15:49:11 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-04-07 15:52:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef FLOAT_HANDLER_SOURCE
-#define FLOAT_HANDLER_SOURCE
+#ifndef DOUBLE_HANDLER_SOURCE
+#define DOUBLE_HANDLER_SOURCE
 
 #include "../constants.c"
 #include "../logger/log_handler.c"
 
 //
-// Float.
+// Double.
 //
 
 /**
- * Initializes the float.
+ * Initializes the double.
  *
  * @param p0 the transient model
  * @param p1 the persistent model
  * @param p2 the persistent model size
  */
-void initialize_float(void* p0, const void* p1, const void* p2) {
+void initialize_double(void* p0, const void* p1, const void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Initialize float.");
+    log_message((void*) &INFO_LOG_LEVEL, "Initialize double.");
 
-    // Transform string to float.
+    // Transform string to double.
 //??    sscanf(p1, %d, (void*) &(m->value));
 }
 
 /**
- * Finalizes the float.
+ * Finalizes the double.
  *
  * @param p0 the transient model
  * @param p1 the persistent model
  * @param p2 the persistent model size
  */
-void finalize_float(const void* p0, void* p1, void* p2) {
+void finalize_double(const void* p0, void* p1, void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Finalize float.");
+    log_message((void*) &INFO_LOG_LEVEL, "Finalize double.");
 
-    // Transform float to string.
+    // Transform double to string.
 //??    sprintf(p1, %d, (void*) &(m->value));
 }
 
-/* FLOAT_HANDLER_SOURCE */
+/* DOUBLE_HANDLER_SOURCE */
 #endif
