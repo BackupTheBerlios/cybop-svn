@@ -24,7 +24,7 @@
  * This file handles log messages.
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.13 $ $Date: 2004-04-21 11:08:42 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-04-21 11:10:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,7 +34,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "../constants.c"
-#include "../model/array_handler.c"
 
 //
 // Log level constants.
@@ -75,6 +74,44 @@ static int log_level;
 //
 // Forward declarations.
 //
+
+/** The character array constant. */
+static const int CHARACTER_ARRAY;
+
+/**
+ * Creates the array.
+ *
+ * @param p0 the array
+ * @param p1 the size
+ */
+void create_array(void* p0, const void* p1);
+
+/**
+ * Destroys the array.
+ *
+ * @param p0 the array
+ * @param p1 the size
+ */
+void destroy_array(void* p0, const void* p1);
+
+/**
+ * Resizes the array with the given size.
+ *
+ * @param p0 the array
+ * @param p1 the size
+ */
+void resize_array(void* p0, const void* p1);
+
+/**
+ * Sets the array elements.
+ *
+ * @param p0 the destination array
+ * @param p1 the type
+ * @param p2 the index
+ * @param p3 the source array
+ * @param p4 the count
+ */
+void set_array_elements(void* p0, const void* p1, const void* p2, const void* p3, const void* p4);
 
 /**
  * Sets the array element.
@@ -146,20 +183,36 @@ void get_log_level_name(const void* p0, void* p1) {
  */
 void show_message(void* p0, void* p1) {
 
-    if (p0 != NULL_POINTER) {
+    if (p1 != NULL_POINTER) {
 
+        int* s = (int*) p1;
+
+        // The log message.
+        char* m = NULL_CHARACTER_POINTER;
+        // The log size, including two places for new line and
+        // string termination.
+        int ls = *s + 2;
+
+        create_array((void*) &m, (void*) &ls);
+
+        // The destination index to which to copy the source array.
+        int i = 0;
         char n = '\n';
+        int ni = *s;
         char t = '\0';
-        set_array_element(p0, (void*) &CHARACTER_ARRAY, p1, (void*) &n);
-        set_array_element(p0, (void*) &CHARACTER_ARRAY, p1, (void*) &t);
+        int ti = *s + 1;
 
-        char** m = (char**) p0;
+        set_array_elements((void*) &m, (void*) &CHARACTER_ARRAY, (void*) &i, p0, p1);
+        set_array_element((void*) &m, (void*) &CHARACTER_ARRAY, (void*) &ni, (void*) &n);
+        set_array_element((void*) &m, (void*) &CHARACTER_ARRAY, (void*) &ti, (void*) &t);
 
-        fputs(*m, stdout);
+        fputs(m, stdout);
+
+        destroy_array((void*) &m, (void*) &ls);
 
     } else {
 
-        fputs("Error: Could not show message. The message is null.\n", stderr);
+        fputs("Error: Could not show message. The message size is null.\n", stdout);
     }
 }
 

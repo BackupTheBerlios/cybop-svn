@@ -48,7 +48,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.28 $ $Date: 2004-04-21 11:08:42 $ $Author: christian $
+ * @version $Revision: 1.29 $ $Date: 2004-04-21 11:10:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,7 +78,7 @@ static const int INTEGER_ARRAY = 1;
 //?? identical to an integer primitive. Are they?
 
 /** The character array constant. */
-static const int CHARACTER_ARRAY = 3;
+static const int CHARACTER_ARRAY = 2;
 
 //?? Possibly remove double array, if a double primitive can be replaced by
 //?? a compound structure like "fraction". How would this effect performance
@@ -86,7 +86,7 @@ static const int CHARACTER_ARRAY = 3;
 //?? integers first?
 
 /** The double array constant. */
-static const int DOUBLE_ARRAY = 2;
+static const int DOUBLE_ARRAY = 3;
 
 //
 // Array.
@@ -110,10 +110,9 @@ void create_array(void* p0, const void* p1) {
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create array.");
 
-            // An array CANNOT have ZERO length, so that dereferencing a pointer to
-            // the first element of an array always returns a valid result.
-            // There is no NULL array.
-            // See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
+            // A minimal space in memory is always allocated,
+            // even if the requested size is zero.
+            // In other words, a handle to the new instance is always returned.
             *a = (void*) malloc(*s);
 
         } else {
@@ -163,71 +162,6 @@ void destroy_array(void* p0, const void* p1) {
 }
 
 /**
- * Compares the arrays.
- *
- * Returns 1 if the arrays are equal.
- * The given result remains unchanged if the arrays are unequal.
- *
- * @param p0 the first array
- * @param p1 the first size
- * @param p2 the second array
- * @param p3 the second size
- * @param p4 the type
- * @param p5 the result
- */
-void compare_arrays(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4, void* p5) {
-
-    if (p4 != NULL_POINTER) {
-
-        int* t = (int*) p4;
-
-        if (p3 != NULL_POINTER) {
-
-            int* s2 = (int*) p3;
-
-            if (p1 != NULL_POINTER) {
-
-                int* s1 = (int*) p1;
-
-                // The size must be equal.
-                if (*s1 == *s2) {
-
-                    // The elements must be equal.
-                    if (*t == POINTER_ARRAY) {
-
-                        compare_pointer_arrays(p0, p2, p1, p5);
-
-                    } else if (*t == INTEGER_ARRAY) {
-
-                        compare_integer_arrays(p0, p2, p1, p5);
-
-                    } else if (*t == DOUBLE_ARRAY) {
-
-                        compare_double_arrays(p0, p2, p1, p5);
-
-                    } else if (*t == CHARACTER_ARRAY) {
-
-                        compare_character_arrays(p0, p2, p1, p5);
-                    }
-                }
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare arrays. The first size is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare arrays. The second size is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare arrays. The type is null.");
-    }
-}
-
-/**
  * Resizes the array with the given size.
  *
  * @param p0 the array
@@ -262,6 +196,85 @@ void resize_array(void* p0, const void* p1) {
 //
 
 /**
+ * Compares the array elements.
+ *
+ * Returns 1 if the array elements are equal.
+ * The given result remains unchanged if the array elements are unequal.
+ *
+ * @param p0 the first array
+ * @param p1 the second array
+ * @param p2 the type
+ * @param p3 the count
+ * @param p4 the result
+ */
+void compare_array_elements(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
+
+    if (p2 != NULL_POINTER) {
+
+        int* t = (int*) p2;
+
+        if (*t == POINTER_ARRAY) {
+
+            compare_pointer_array_elements(p0, p1, p3, p4);
+
+        } else if (*t == INTEGER_ARRAY) {
+
+            compare_integer_array_elements(p0, p1, p3, p4);
+
+        } else if (*t == DOUBLE_ARRAY) {
+
+            compare_double_array_elements(p0, p1, p3, p4);
+
+        } else if (*t == CHARACTER_ARRAY) {
+
+            compare_character_array_elements(p0, p1, p3, p4);
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare array elements. The type is null.");
+    }
+}
+
+/**
+ * Sets the array elements.
+ *
+ * @param p0 the destination array
+ * @param p1 the type
+ * @param p2 the index
+ * @param p3 the source array
+ * @param p4 the count
+ */
+void set_array_elements(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
+
+    if (p1 != NULL_POINTER) {
+
+        int* t = (int*) p1;
+
+        if (*t == POINTER_ARRAY) {
+
+            set_pointer_array_elements(p0, p2, p3, p4);
+
+        } else if (*t == INTEGER_ARRAY) {
+
+            set_integer_array_elements(p0, p2, p3, p4);
+
+        } else if (*t == DOUBLE_ARRAY) {
+
+            set_double_array_elements(p0, p2, p3, p4);
+
+        } else if (*t == CHARACTER_ARRAY) {
+
+            set_character_array_elements(p0, p2, p3, p4);
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set array elements. The type is null.");
+    }
+}
+
+/**
  * Sets the array element.
  *
  * @param p0 the array
@@ -271,30 +284,53 @@ void resize_array(void* p0, const void* p1) {
  */
 void set_array_element(void* p0, const void* p1, const void* p2, const void* p3) {
 
+    // The elements count.
+    int c = 1;
+
+    // The element needs to be handed over as array.
+    // Therefore, it has to be transformed into a pointer.
+    // Example:
+    // - array: char* handed over as char**
+    // - element: char handed over as char*
+    // - the element of type char* gets transformed to type char** with &element
+    set_array_elements(p0, p1, p2, (void*) &p3, (void*) &c);
+}
+
+/**
+ * Removes the array elements.
+ *
+ * @param p0 the array
+ * @param p1 the type
+ * @param p2 the size
+ * @param p3 the index
+ * @param p4 the count
+ */
+void remove_array_elements(void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
+
     if (p1 != NULL_POINTER) {
 
         int* t = (int*) p1;
 
         if (*t == POINTER_ARRAY) {
 
-            set_pointer_array_element(p0, p2, p3);
+            remove_pointer_array_elements(p0, p2, p3, p4);
 
         } else if (*t == INTEGER_ARRAY) {
 
-            set_integer_array_element(p0, p2, p3);
+            remove_integer_array_elements(p0, p2, p3, p4);
 
         } else if (*t == DOUBLE_ARRAY) {
 
-            set_double_array_element(p0, p2, p3);
+            remove_double_array_elements(p0, p2, p3, p4);
 
         } else if (*t == CHARACTER_ARRAY) {
 
-            set_character_array_element(p0, p2, p3);
+            remove_character_array_elements(p0, p2, p3, p4);
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set array element. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove array elements. The type is null.");
     }
 }
 
@@ -308,30 +344,53 @@ void set_array_element(void* p0, const void* p1, const void* p2, const void* p3)
  */
 void remove_array_element(void* p0, const void* p1, const void* p2, const void* p3) {
 
+    // The elements count.
+    int c = 1;
+
+    // The element needs to be handed over as array.
+    // Therefore, it has to be transformed into a pointer.
+    // Example:
+    // - array: char* handed over as char**
+    // - element: char handed over as char*
+    // - the element of type char* gets transformed to type char** with &element
+    remove_array_elements(p0, p1, p2, (void*) &p3, (void*) &c);
+}
+
+/**
+ * Gets the array elements.
+ *
+ * @param p0 the source array
+ * @param p1 the type
+ * @param p2 the index
+ * @param p3 the destination array
+ * @param p4 the count
+ */
+void get_array_elements(const void* p0, const void* p1, const void* p2, void* p3, const void* p4) {
+
     if (p1 != NULL_POINTER) {
 
         int* t = (int*) p1;
 
         if (*t == POINTER_ARRAY) {
 
-            remove_pointer_array_element(p0, p2, p3);
+            get_pointer_array_elements(p0, p2, p3, p4);
 
         } else if (*t == INTEGER_ARRAY) {
 
-            remove_integer_array_element(p0, p2, p3);
+            get_integer_array_elements(p0, p2, p3, p4);
 
         } else if (*t == DOUBLE_ARRAY) {
 
-            remove_double_array_element(p0, p2, p3);
+            get_double_array_elements(p0, p2, p3, p4);
 
         } else if (*t == CHARACTER_ARRAY) {
 
-            remove_character_array_element(p0, p2, p3);
+            get_character_array_elements(p0, p2, p3, p4);
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove array element. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get array elements. The type is null.");
     }
 }
 
@@ -345,30 +404,54 @@ void remove_array_element(void* p0, const void* p1, const void* p2, const void* 
  */
 void get_array_element(const void* p0, const void* p1, const void* p2, void* p3) {
 
+    // The elements count.
+    int c = 1;
+
+    // The element needs to be handed over as array.
+    // Therefore, it has to be transformed into a pointer.
+    // Example:
+    // - array: char* handed over as char**
+    // - element: char handed over as char*
+    // - the element of type char* gets transformed to type char** with &element
+    get_array_elements(p0, p1, p2, (void*) &p3, (void*) &c);
+}
+
+/**
+ * Gets the array elements index.
+ *
+ * @param p0 the array
+ * @param p1 the type
+ * @param p2 the size
+ * @param p3 the comparison array
+ * @param p4 the count
+ * @param p5 the index
+ */
+void get_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4, void* p5) {
+
     if (p1 != NULL_POINTER) {
 
         int* t = (int*) p1;
 
         if (*t == POINTER_ARRAY) {
 
-            get_pointer_array_element(p0, p2, p3);
+            get_pointer_array_elements_index(p0, p2, p3, p4, p5);
 
         } else if (*t == INTEGER_ARRAY) {
 
-            get_integer_array_element(p0, p2, p3);
+            get_integer_array_elements_index(p0, p2, p3, p4, p5);
 
         } else if (*t == DOUBLE_ARRAY) {
 
-            get_double_array_element(p0, p2, p3);
+            get_double_array_elements_index(p0, p2, p3, p4, p5);
 
         } else if (*t == CHARACTER_ARRAY) {
 
-            get_character_array_element(p0, p2, p3);
+            get_character_array_elements_index(p0, p2, p3, p4, p5);
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get array element. The type is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get array elements index. The type is null.");
     }
 }
 
@@ -383,31 +466,16 @@ void get_array_element(const void* p0, const void* p1, const void* p2, void* p3)
  */
 void get_array_element_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
 
-    if (p1 != NULL_POINTER) {
+    // The elements count.
+    int c = 1;
 
-        int* t = (int*) p1;
-
-        if (*t == POINTER_ARRAY) {
-
-            get_pointer_array_element_index(p0, p2, p3, p4);
-
-        } else if (*t == INTEGER_ARRAY) {
-
-            get_integer_array_element_index(p0, p2, p3, p4);
-
-        } else if (*t == DOUBLE_ARRAY) {
-
-            get_double_array_element_index(p0, p2, p3, p4);
-
-        } else if (*t == CHARACTER_ARRAY) {
-
-            get_character_array_element_index(p0, p2, p3, p4);
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get array element index. The type is null.");
-    }
+    // The element needs to be handed over as array.
+    // Therefore, it has to be transformed into a pointer.
+    // Example:
+    // - array: char* handed over as char**
+    // - element: char handed over as char*
+    // - the element of type char* gets transformed to type char** with &element
+    get_array_elements_index(p0, p1, p2, (void*) &p3, (void*) &c, p4);
 }
 
 /* ARRAY_HANDLER_SOURCE */

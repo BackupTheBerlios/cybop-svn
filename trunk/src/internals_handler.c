@@ -23,7 +23,7 @@
  *
  * This file handles internals.
  *
- * @version $Revision: 1.9 $ $Date: 2004-04-21 11:08:42 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-04-21 11:10:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -25,7 +25,7 @@
  *
  * A double is a floating point number.
  *
- * @version $Revision: 1.3 $ $Date: 2004-04-21 11:08:43 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-04-21 11:10:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -23,7 +23,7 @@
  *
  * This file defines model constants.
  *
- * @version $Revision: 1.7 $ $Date: 2004-04-21 11:08:43 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-04-21 11:10:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -29,13 +29,17 @@
  * It is therefore possible to create and destroy arrays based on primitive types.
  *
  * The syntax of an array mostly looks like: type[size]
- * for example: int[]
- * But it can also be written as: type*
- * for example: int*
+ * Example: double[10]
+ *
+ * When working with an array, it is referenced by a pointer like: type* variable
+ * Example: double* array
+ *
+ * The array can be dereferenced accordingly: *variable
+ * Example: *array
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.11 $ $Date: 2004-04-21 11:08:43 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-04-21 11:10:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,22 +49,18 @@
 #include "../constants.c"
 #include "../logger/log_handler.c"
 
-//
-// Double array.
-//
-
 /**
- * Compares the double arrays.
+ * Compares the double array elements.
  *
  * Returns 1 if the double elements are equal.
- * The given result remains unchanged if the arrays are unequal.
+ * The given result remains unchanged if the array elements are unequal.
  *
- * @param p0 the first double array
- * @param p1 the second double array
- * @param p2 the size
+ * @param p0 the first array
+ * @param p1 the second array
+ * @param p2 the count
  * @param p3 the result
  */
-void compare_double_arrays(const void* p0, const void* p1, const void* p2, void* p3) {
+void compare_double_array_elements(const void* p0, const void* p1, const void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -68,23 +68,23 @@ void compare_double_arrays(const void* p0, const void* p1, const void* p2, void*
 
         if (p2 != NULL_POINTER) {
 
-            int* s = (int*) p2;
+            int* c = (int*) p2;
 
             if (p1 != NULL_POINTER) {
 
-                void** a1 = (void**) p1;
+                double** a1 = (double**) p1;
 
                 if (p0 != NULL_POINTER) {
 
-                    void** a0 = (void**) p0;
+                    double** a0 = (double**) p0;
 
-                    int i = 0;
+                    int j = 0;
                     double* e0 = NULL_DOUBLE_POINTER;
                     double* e1 = NULL_DOUBLE_POINTER;
 
                     while (1) {
 
-                        if (i >= *s) {
+                        if (j >= *c) {
 
                             // All elements have been compared and are equal.
                             *r = 1;
@@ -93,235 +93,12 @@ void compare_double_arrays(const void* p0, const void* p1, const void* p2, void*
                         }
 
                         // Determine the next elements at array plus index.
-                        e0 = (double*) (*a0 + i);
-                        e1 = (double*) (*a1 + i);
+                        e0 = (double*) (*a0 + j);
+                        e1 = (double*) (*a1 + j);
 
                         if (*e0 != *e1) {
 
                             // Stop comparison if two elements are not equal.
-                            break;
-                        }
-
-                        i++;
-                    }
-
-                } else {
-
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double arrays. The first double array is null.");
-                }
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double arrays. The second double array is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double arrays. The size is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double arrays. The result is null.");
-    }
-}
-
-//
-// Double array element.
-//
-
-/**
- * Sets the double array element.
- *
- * @param p0 the double array
- * @param p1 the index
- * @param p2 the element
- */
-void set_double_array_element(const void* p0, const void* p1, const void* p2) {
-
-    if (p2 != NULL_POINTER) {
-
-        double* e0 = (double*) p2;
-
-        if (p1 != NULL_POINTER) {
-
-            int* i = (int*) p1;
-
-            if (p0 != NULL_POINTER) {
-
-                void** a = (void**) p0;
-
-                // Set element.
-                double* e1 = (double*) (*a + *i);
-                *e1 = *e0;
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set double array element. The double array is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set double array element. The index is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set double array element. The element is null.");
-    }
-}
-
-/**
- * Removes the double array element.
- *
- * @param p0 the double array
- * @param p1 the size
- * @param p2 the index
- */
-void remove_double_array_element(const void* p0, const void* p1, const void* p2) {
-
-    if (p2 != NULL_POINTER) {
-
-        int* i = (int*) p2;
-
-        if (p1 != NULL_POINTER) {
-
-            int* s = (int*) p1;
-
-            if (p0 != NULL_POINTER) {
-
-                void** a = (void**) p0;
-
-                // Initialize loop variable with index.
-                // Do not use the index itself as it was handed over as constant parameter!
-                int j = *i;
-                double* e0 = NULL_DOUBLE_POINTER;
-                double* e1 = NULL_DOUBLE_POINTER;
-
-                // Starting from the given index, move all remaining elements one
-                // place towards the beginning of the elements.
-                while (1) {
-
-                    if ((j + 1) >= *s) {
-
-                        break;
-                    }
-
-                    e0 = (double*) (*a + j);
-                    e1 = (double*) (*a + j + 1);
-                    *e0 = *e1;
-
-                    j++;
-                }
-
-                // Set former last element to 0.0.
-                e0 = (double*) (*a + j);
-                *e0 = 0.0;
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove double array element. The double array is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove double array element. The size is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove double array element. The index is null.");
-    }
-}
-
-/**
- * Gets the double array element.
- *
- * @param p0 the double array
- * @param p1 the index
- * @param p2 the element
- */
-void get_double_array_element(const void* p0, const void* p1, void* p2) {
-
-    if (p2 != NULL_POINTER) {
-
-        double* e0 = (double*) p2;
-
-        if (p1 != NULL_POINTER) {
-
-            int* i = (int*) p1;
-
-            if (p0 != NULL_POINTER) {
-
-                void** a = (void**) p0;
-
-                // Get element.
-                double* e1 = (double*) (*a + *i);
-                *e0 = *e1;
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element. The double array is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element. The index is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element. The element is null.");
-    }
-}
-
-/**
- * Gets the double array element index.
- *
- * The first occurence of the element will be considered.
- * The given index remains unchanged if no element is found.
- *
- * @param p0 the double array
- * @param p1 the size
- * @param p2 the element
- * @param p3 the index
- */
-void get_double_array_element_index(const void* p0, const void* p1, const void* p2, void* p3) {
-
-    if (p3 != NULL_POINTER) {
-
-        int* i = (int*) p3;
-
-        if (p2 != NULL_POINTER) {
-
-            double* e0 = (double*) p2;
-
-            if (p1 != NULL_POINTER) {
-
-                int* s = (int*) p1;
-
-                if (p0 != NULL_POINTER) {
-
-                    void** a = (void**) p0;
-
-                    int j = 0;
-                    double* e1 = NULL_DOUBLE_POINTER;
-
-                    while (1) {
-
-                        if (j >= *s) {
-
-                            // The element has not been found.
-                            break;
-                        }
-
-                        // Compare given element with the next element at array plus index.
-                        e1 = (double*) (*a + j);
-
-                        if (*e0 == *e1) {
-
-                            // The element has been found.
-                            *i = j;
                             break;
                         }
 
@@ -330,17 +107,346 @@ void get_double_array_element_index(const void* p0, const void* p1, const void* 
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The double array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double array elements. The first array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The size is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double array elements. The second array is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The element is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double array elements. The count is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double array elements. The result is null.");
+    }
+}
+
+/**
+ * Sets the double array elements.
+ *
+ * @param p0 the destination array
+ * @param p1 the index
+ * @param p2 the source array
+ * @param p3 the count
+ */
+void set_double_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
+
+    if (p3 != NULL_POINTER) {
+
+        int* c = (int*) p3;
+
+        if (p2 != NULL_POINTER) {
+
+            double** s = (double**) p2;
+
+            if (p1 != NULL_POINTER) {
+
+                int* i = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    double** d = (double**) p0;
+
+                    // The loop variable.
+                    int j = 0;
+                    // The destination base to start copying to.
+                    double* db = (double*) (*d + *i);
+                    // The source element.
+                    double* se = NULL_DOUBLE_POINTER;
+                    // The destination element.
+                    double* de = NULL_DOUBLE_POINTER;
+
+                    while (1) {
+
+                        if (j >= *c) {
+
+                            break;
+                        }
+
+                        // Determine source and destination element.
+                        se = (double*) (*s + j);
+                        de = (double*) (db + j);
+
+                        // Set destination element.
+                        *de = *se;
+
+                        j++;
+                    }
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set double array elements. The destination array is null.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set double array elements. The index is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set double array elements. The source array is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set double array elements. The count is null.");
+    }
+}
+
+/**
+ * Removes the double array elements.
+ *
+ * @param p0 the array
+ * @param p1 the size
+ * @param p2 the index
+ * @param p3 the count
+ */
+void remove_double_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
+
+    if (p3 != NULL_POINTER) {
+
+        int* c = (int*) p3;
+
+        if (p2 != NULL_POINTER) {
+
+            int* i = (int*) p2;
+
+            if (p1 != NULL_POINTER) {
+
+                int* s = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    double** a = (double**) p0;
+
+                    // The loop variable.
+                    int j = 0;
+                    // The remaining elements size.
+                    int r = *s - (*i + *c);
+                    // The destination base.
+                    double* db = (double*) (*a + *i);
+                    // The source base.
+                    double* sb = (double*) (*a + *i + *c);
+                    // The source element.
+                    double* se = NULL_DOUBLE_POINTER;
+                    // The destination element.
+                    double* de = NULL_DOUBLE_POINTER;
+
+                    // Starting from the given index, move all remaining elements
+                    // one place towards the beginning of the elements.
+                    // Example: "test..array"
+                    // size = 11
+                    // index = 4 (remove "..")
+                    // count = 2
+                    // rest = 11 - (4 + 2) = 11 - 6 = 5
+                    while (1) {
+
+                        if (j >= r) {
+
+                            break;
+                        }
+
+                        // Determine source and destination element.
+                        de = (double*) (db + j);
+                        se = (double*) (sb + j);
+
+                        // Set destination element.
+                        *de = *se;
+
+                        j++;
+                    }
+
+                    // Set former last elements to 0.0.
+                    // This is disabled for now, since when creating an array,
+                    // its elements are also NOT initialized with ''.
+                    // The calling procedure may just cut off the remaining
+                    // elements by decreasing the array size (resizing).
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove double array elements. The array is null.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove double array elements. The size is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove double array elements. The index is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove double array elements. The count is null.");
+    }
+}
+
+/**
+ * Gets the double array elements.
+ *
+ * @param p0 the source array
+ * @param p1 the index
+ * @param p2 the destination array
+ * @param p3 the count
+ */
+void get_double_array_elements(const void* p0, const void* p1, void* p2, const void* p3) {
+
+    if (p3 != NULL_POINTER) {
+
+        int* c = (int*) p3;
+
+        if (p2 != NULL_POINTER) {
+
+            double** d = (double**) p2;
+
+            if (p1 != NULL_POINTER) {
+
+                int* i = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    double** s = (double**) p0;
+
+                    // The loop variable.
+                    int j = 0;
+                    // The source base to start copying from.
+                    double* sb = (double*) (*s + *i);
+                    // The source element.
+                    double* se = NULL_DOUBLE_POINTER;
+                    // The destination element.
+                    double* de = NULL_DOUBLE_POINTER;
+
+                    while (1) {
+
+                        if (j >= *c) {
+
+                            break;
+                        }
+
+                        // Determine source and destination element.
+                        se = (double*) (sb + j);
+                        de = (double*) (*d + j);
+
+                        // Set destination element.
+                        *de = *se;
+
+                        j++;
+                    }
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array elements. The source array is null.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array elements. The index is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array elements. The destination array is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array elements. The count is null.");
+    }
+}
+
+/**
+ * Gets the double array elements index.
+ *
+ * The first occurence of the element will be considered.
+ * The given index remains unchanged if no element is found.
+ *
+ * @param p0 the array
+ * @param p1 the size
+ * @param p2 the comparison array
+ * @param p3 the count
+ * @param p4 the index
+ */
+void get_double_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
+
+    if (p4 != NULL_POINTER) {
+
+        int* i = (int*) p4;
+
+        if (p3 != NULL_POINTER) {
+
+            int* c = (int*) p3;
+
+            if (p2 != NULL_POINTER) {
+
+                double** ca = (double**) p2;
+
+                if (p1 != NULL_POINTER) {
+
+                    int* s = (int*) p1;
+
+                    if (p0 != NULL_POINTER) {
+
+                        double** a = (double**) p0;
+
+                        // The loop variable.
+                        int j = 0;
+                        // The iteration limit.
+                        int l = *s - *c;
+                        // The element.
+                        double* e = NULL_DOUBLE_POINTER;
+                        // The comparison result.
+                        int r = 0;
+
+                        while (1) {
+
+                            if (j >= l) {
+
+                                // The element has not been found.
+                                break;
+                            }
+
+                            // Determine element.
+                            e = (double*) (*a + j);
+
+                            compare_double_array_elements((void*) &e, p2, p3, (void*) &r);
+
+                            if (r == 1) {
+
+                                // The element has been found.
+                                *i = j;
+
+                                break;
+                            }
+
+                            j++;
+                        }
+
+                    } else {
+
+                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The array is null.");
+                    }
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The size is null.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The comparison array is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The count is null.");
         }
 
     } else {

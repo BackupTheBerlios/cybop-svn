@@ -29,13 +29,17 @@
  * It is therefore possible to create and destroy arrays based on primitive types.
  *
  * The syntax of an array mostly looks like: type[size]
- * for example: int[]
- * But it can also be written as: type*
- * for example: int*
+ * Example: int[10]
+ *
+ * When working with an array, it is referenced by a pointer like: type* variable
+ * Example: int* array
+ *
+ * The array can be dereferenced accordingly: *variable
+ * Example: *array
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.11 $ $Date: 2004-04-21 11:08:43 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-04-21 11:10:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,22 +49,18 @@
 #include "../constants.c"
 #include "../logger/log_handler.c"
 
-//
-// Integer array.
-//
-
 /**
- * Compares the integer arrays.
+ * Compares the integer array elements.
  *
  * Returns 1 if the integer elements are equal.
- * The given result remains unchanged if the arrays are unequal.
+ * The given result remains unchanged if the array elements are unequal.
  *
- * @param p0 the first integer array
- * @param p1 the second integer array
- * @param p2 the size
+ * @param p0 the first array
+ * @param p1 the second array
+ * @param p2 the count
  * @param p3 the result
  */
-void compare_integer_arrays(const void* p0, const void* p1, const void* p2, void* p3) {
+void compare_integer_array_elements(const void* p0, const void* p1, const void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -68,23 +68,23 @@ void compare_integer_arrays(const void* p0, const void* p1, const void* p2, void
 
         if (p2 != NULL_POINTER) {
 
-            int* s = (int*) p2;
+            int* c = (int*) p2;
 
             if (p1 != NULL_POINTER) {
 
-                void** a1 = (void**) p1;
+                int** a1 = (int**) p1;
 
                 if (p0 != NULL_POINTER) {
 
-                    void** a0 = (void**) p0;
+                    int** a0 = (int**) p0;
 
-                    int i = 0;
+                    int j = 0;
                     int* e0 = NULL_INTEGER_POINTER;
                     int* e1 = NULL_INTEGER_POINTER;
 
                     while (1) {
 
-                        if (i >= *s) {
+                        if (j >= *c) {
 
                             // All elements have been compared and are equal.
                             *r = 1;
@@ -93,235 +93,12 @@ void compare_integer_arrays(const void* p0, const void* p1, const void* p2, void
                         }
 
                         // Determine the next elements at array plus index.
-                        e0 = (int*) (*a0 + i);
-                        e1 = (int*) (*a1 + i);
+                        e0 = (int*) (*a0 + j);
+                        e1 = (int*) (*a1 + j);
 
                         if (*e0 != *e1) {
 
                             // Stop comparison if two elements are not equal.
-                            break;
-                        }
-
-                        i++;
-                    }
-
-                } else {
-
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare integer arrays. The first integer array is null.");
-                }
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare integer arrays. The second integer array is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare integer arrays. The size is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare integer arrays. The result is null.");
-    }
-}
-
-//
-// Integer array element.
-//
-
-/**
- * Sets the integer array element.
- *
- * @param p0 the integer array
- * @param p1 the index
- * @param p2 the element
- */
-void set_integer_array_element(const void* p0, const void* p1, const void* p2) {
-
-    if (p2 != NULL_POINTER) {
-
-        int* e0 = (int*) p2;
-
-        if (p1 != NULL_POINTER) {
-
-            int* i = (int*) p1;
-
-            if (p0 != NULL_POINTER) {
-
-                void** a = (void**) p0;
-
-                // Set element.
-                int* e1 = (int*) (*a + *i);
-                *e1 = *e0;
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set integer array element. The integer array is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set integer array element. The index is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set integer array element. The element is null.");
-    }
-}
-
-/**
- * Removes the integer array element.
- *
- * @param p0 the integer array
- * @param p1 the size
- * @param p2 the index
- */
-void remove_integer_array_element(const void* p0, const void* p1, const void* p2) {
-
-    if (p2 != NULL_POINTER) {
-
-        int* i = (int*) p2;
-
-        if (p1 != NULL_POINTER) {
-
-            int* s = (int*) p1;
-
-            if (p0 != NULL_POINTER) {
-
-                void** a = (void**) p0;
-
-                // Initialize loop variable with index.
-                // Do not use the index itself as it was handed over as constant parameter!
-                int j = *i;
-                int* e0 = NULL_INTEGER_POINTER;
-                int* e1 = NULL_INTEGER_POINTER;
-
-                // Starting from the given index, move all remaining elements one
-                // place towards the beginning of the elements.
-                while (1) {
-
-                    if ((j + 1) >= *s) {
-
-                        break;
-                    }
-
-                    e0 = (int*) (*a + j);
-                    e1 = (int*) (*a + j + 1);
-                    *e0 = *e1;
-
-                    j++;
-                }
-
-                // Set former last element to 0.
-                e0 = (int*) (*a + j);
-                *e0 = 0;
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove integer array element. The integer array is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove integer array element. The size is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove integer array element. The index is null.");
-    }
-}
-
-/**
- * Gets the integer array element.
- *
- * @param p0 the integer array
- * @param p1 the index
- * @param p2 the element
- */
-void get_integer_array_element(const void* p0, const void* p1, void* p2) {
-
-    if (p2 != NULL_POINTER) {
-
-        int* e0 = (int*) p2;
-
-        if (p1 != NULL_POINTER) {
-
-            int* i = (int*) p1;
-
-            if (p0 != NULL_POINTER) {
-
-                void** a = (void**) p0;
-
-                // Get element.
-                int* e1 = (int*) (*a + *i);
-                *e0 = *e1;
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array element. The integer array is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array element. The index is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array element. The element is null.");
-    }
-}
-
-/**
- * Gets the integer array element index.
- *
- * The first occurence of the element will be considered.
- * The given index remains unchanged if no element is found.
- *
- * @param p0 the integer array
- * @param p1 the size
- * @param p2 the element
- * @param p3 the index
- */
-void get_integer_array_element_index(const void* p0, const void* p1, const void* p2, void* p3) {
-
-    if (p3 != NULL_POINTER) {
-
-        int* i = (int*) p3;
-
-        if (p2 != NULL_POINTER) {
-
-            int* e0 = (int*) p2;
-
-            if (p1 != NULL_POINTER) {
-
-                int* s = (int*) p1;
-
-                if (p0 != NULL_POINTER) {
-
-                    void** a = (void**) p0;
-
-                    int j = 0;
-                    int* e1 = NULL_INTEGER_POINTER;
-
-                    while (1) {
-
-                        if (j >= *s) {
-
-                            // The element has not been found.
-                            break;
-                        }
-
-                        // Compare given element with the next element at array plus index.
-                        e1 = (int*) (*a + j);
-
-                        if (*e0 == *e1) {
-
-                            // The element has been found.
-                            *i = j;
                             break;
                         }
 
@@ -330,17 +107,346 @@ void get_integer_array_element_index(const void* p0, const void* p1, const void*
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array element index. The integer array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare integer array elements. The first array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array element index. The size is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare integer array elements. The second array is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array element index. The element is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare integer array elements. The count is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare integer array elements. The result is null.");
+    }
+}
+
+/**
+ * Sets the integer array elements.
+ *
+ * @param p0 the destination array
+ * @param p1 the index
+ * @param p2 the source array
+ * @param p3 the count
+ */
+void set_integer_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
+
+    if (p3 != NULL_POINTER) {
+
+        int* c = (int*) p3;
+
+        if (p2 != NULL_POINTER) {
+
+            int** s = (int**) p2;
+
+            if (p1 != NULL_POINTER) {
+
+                int* i = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    int** d = (int**) p0;
+
+                    // The loop variable.
+                    int j = 0;
+                    // The destination base to start copying to.
+                    int* db = (int*) (*d + *i);
+                    // The source element.
+                    int* se = NULL_INTEGER_POINTER;
+                    // The destination element.
+                    int* de = NULL_INTEGER_POINTER;
+
+                    while (1) {
+
+                        if (j >= *c) {
+
+                            break;
+                        }
+
+                        // Determine source and destination element.
+                        se = (int*) (*s + j);
+                        de = (int*) (db + j);
+
+                        // Set destination element.
+                        *de = *se;
+
+                        j++;
+                    }
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set integer array elements. The destination array is null.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set integer array elements. The index is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set integer array elements. The source array is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set integer array elements. The count is null.");
+    }
+}
+
+/**
+ * Removes the integer array elements.
+ *
+ * @param p0 the array
+ * @param p1 the size
+ * @param p2 the index
+ * @param p3 the count
+ */
+void remove_integer_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
+
+    if (p3 != NULL_POINTER) {
+
+        int* c = (int*) p3;
+
+        if (p2 != NULL_POINTER) {
+
+            int* i = (int*) p2;
+
+            if (p1 != NULL_POINTER) {
+
+                int* s = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    int** a = (int**) p0;
+
+                    // The loop variable.
+                    int j = 0;
+                    // The remaining elements size.
+                    int r = *s - (*i + *c);
+                    // The destination base.
+                    int* db = (int*) (*a + *i);
+                    // The source base.
+                    int* sb = (int*) (*a + *i + *c);
+                    // The source element.
+                    int* se = NULL_INTEGER_POINTER;
+                    // The destination element.
+                    int* de = NULL_INTEGER_POINTER;
+
+                    // Starting from the given index, move all remaining elements
+                    // one place towards the beginning of the elements.
+                    // Example: "test..array"
+                    // size = 11
+                    // index = 4 (remove "..")
+                    // count = 2
+                    // rest = 11 - (4 + 2) = 11 - 6 = 5
+                    while (1) {
+
+                        if (j >= r) {
+
+                            break;
+                        }
+
+                        // Determine source and destination element.
+                        de = (int*) (db + j);
+                        se = (int*) (sb + j);
+
+                        // Set destination element.
+                        *de = *se;
+
+                        j++;
+                    }
+
+                    // Set former last elements to 0.0.
+                    // This is disabled for now, since when creating an array,
+                    // its elements are also NOT initialized with ''.
+                    // The calling procedure may just cut off the remaining
+                    // elements by decreasing the array size (resizing).
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove integer array elements. The array is null.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove integer array elements. The size is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove integer array elements. The index is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove integer array elements. The count is null.");
+    }
+}
+
+/**
+ * Gets the integer array elements.
+ *
+ * @param p0 the source array
+ * @param p1 the index
+ * @param p2 the destination array
+ * @param p3 the count
+ */
+void get_integer_array_elements(const void* p0, const void* p1, void* p2, const void* p3) {
+
+    if (p3 != NULL_POINTER) {
+
+        int* c = (int*) p3;
+
+        if (p2 != NULL_POINTER) {
+
+            int** d = (int**) p2;
+
+            if (p1 != NULL_POINTER) {
+
+                int* i = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    int** s = (int**) p0;
+
+                    // The loop variable.
+                    int j = 0;
+                    // The source base to start copying from.
+                    int* sb = (int*) (*s + *i);
+                    // The source element.
+                    int* se = NULL_INTEGER_POINTER;
+                    // The destination element.
+                    int* de = NULL_INTEGER_POINTER;
+
+                    while (1) {
+
+                        if (j >= *c) {
+
+                            break;
+                        }
+
+                        // Determine source and destination element.
+                        se = (int*) (sb + j);
+                        de = (int*) (*d + j);
+
+                        // Set destination element.
+                        *de = *se;
+
+                        j++;
+                    }
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array elements. The source array is null.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array elements. The index is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array elements. The destination array is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array elements. The count is null.");
+    }
+}
+
+/**
+ * Gets the integer array elements index.
+ *
+ * The first occurence of the element will be considered.
+ * The given index remains unchanged if no element is found.
+ *
+ * @param p0 the array
+ * @param p1 the size
+ * @param p2 the comparison array
+ * @param p3 the count
+ * @param p4 the index
+ */
+void get_integer_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
+
+    if (p4 != NULL_POINTER) {
+
+        int* i = (int*) p4;
+
+        if (p3 != NULL_POINTER) {
+
+            int* c = (int*) p3;
+
+            if (p2 != NULL_POINTER) {
+
+                int** ca = (int**) p2;
+
+                if (p1 != NULL_POINTER) {
+
+                    int* s = (int*) p1;
+
+                    if (p0 != NULL_POINTER) {
+
+                        int** a = (int**) p0;
+
+                        // The loop variable.
+                        int j = 0;
+                        // The iteration limit.
+                        int l = *s - *c;
+                        // The element.
+                        int* e = NULL_INTEGER_POINTER;
+                        // The comparison result.
+                        int r = 0;
+
+                        while (1) {
+
+                            if (j >= l) {
+
+                                // The element has not been found.
+                                break;
+                            }
+
+                            // Determine element.
+                            e = (int*) (*a + j);
+
+                            compare_integer_array_elements((void*) &e, p2, p3, (void*) &r);
+
+                            if (r == 1) {
+
+                                // The element has been found.
+                                *i = j;
+
+                                break;
+                            }
+
+                            j++;
+                        }
+
+                    } else {
+
+                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array element index. The array is null.");
+                    }
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array element index. The size is null.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array element index. The comparison array is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array element index. The count is null.");
         }
 
     } else {

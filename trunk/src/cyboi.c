@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.19 $ $Date: 2004-04-21 11:08:42 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2004-04-21 11:10:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,20 +53,29 @@
 // The usage message array.
 static const char USAGE_MESSAGE_ARRAY[] = {'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 's', 'i', 'g', 'n', 'a', 'l'};
 
-// The usage message size.
-static int USAGE_MESSAGE_SIZE = 19;
-
 // The usage message.
-static char* USAGE_MESSAGE = USAGE_MESSAGE_ARRAY;
+static const char* USAGE_MESSAGE = USAGE_MESSAGE_ARRAY;
+
+// The usage message size.
+static const int USAGE_MESSAGE_SIZE = 19;
 
 // The example message array.
 static const char EXAMPLE_MESSAGE_ARRAY[] = {'E', 'x', 'a', 'm', 'p', 'l', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'y', 'b', 'o', 'p', '.', 's', 'a', 'm', 'p', 'l', 'e', '.', 'h', 'e', 'l', 'l', 'o', '_', 'w', 'o', 'r', 'l', 'd', '.', 'd', 'y', 'n', 'a', 'm', 'i', 'c', 's', '.', 's', 't', 'a', 'r', 't', 'u', 'p'};
 
-// The example message size.
-static int EXAMPLE_MESSAGE_SIZE = 56;
-
 // The example message.
-static char* EXAMPLE_MESSAGE = EXAMPLE_MESSAGE_ARRAY;
+static const char* EXAMPLE_MESSAGE = EXAMPLE_MESSAGE_ARRAY;
+
+// The example message size.
+static const int EXAMPLE_MESSAGE_SIZE = 56;
+
+/*??
+log_message((void*) &INFO_LOG_LEVEL, (void*) &"Wait for signals.");
+log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not handle signal. The signal abstraction is unknown.");
+log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not wait for signals. The internals is null.");
+log_message((void*) &INFO_LOG_LEVEL, (void*) &"Exit CYBOI normally.");
+log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not execute CYBOI. The command line argument number is incorrect.");
+log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not execute CYBOI. The command line argument vector is null.");
+*/
 
 /**
  * Shows the usage information.
@@ -156,7 +165,8 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
             log_message((void*) &INFO_LOG_LEVEL, (void*) &"TEST 0");
 
             // Handle compound signal.
-            compare_arrays((void*) &a, (void*) &as, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+            //?? CAUTION! Still compare sizes here!
+            compare_array_elements((void*) &a, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_SIZE, (void*) &r);
 
             if (r == 1) {
 
@@ -166,7 +176,8 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
             } else {
 
             // Handle operation signal.
-            compare_arrays((void*) &a, (void*) &as, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+            //?? CAUTION! Still compare sizes here!
+            compare_array_elements((void*) &a, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_SIZE, (void*) &r);
 
             if (r == 1) {
 
@@ -216,17 +227,11 @@ int main(int p0, char** p1) {
 
     if (p1 != NULL_POINTER) {
 
-        fputs("TEST 0\n", stderr);
-
         if (p0 == 2) {
-
-            fputs("TEST 1\n", stdout);
 
             // Create statics.
             void* s = NULL_POINTER;
             create_compound((void*) &s);
-
-            fputs("TEST 2\n", stdout);
 
             // Create dynamics.
             void* d = NULL_POINTER;
@@ -240,15 +245,21 @@ int main(int p0, char** p1) {
             void* sm = NULL_POINTER;
             create_signal_memory((void*) &sm);
 
+            fputs("TEST 0\n", stderr);
+
             // Create (transient) startup signal from (persistent) cybol source.
             void* ss = NULL_POINTER;
             int sss = 0;
             char* p = p1[1];
             int ps = strlen(p1[1]);
-            create_model((void*) &ss, (void*) &sss, (void*) &p, (void*) &ps, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);
+//??            create_model((void*) &ss, (void*) &sss, (void*) &p, (void*) &ps, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);
+
+            fputs("TEST 1\n", stderr);
 
             // Add startup signal to signal memory.
             set_signal((void*) &sm, (void*) &ss, (void*) &NORMAL_PRIORITY, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE);
+
+            fputs("TEST 2\n", stderr);
 
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)
@@ -278,7 +289,7 @@ int main(int p0, char** p1) {
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not execute CYBOI. The command line argument number is incorrect.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not execute CYBOI. The command line argument number is incorrect.");
 
             show_usage_information();
         }

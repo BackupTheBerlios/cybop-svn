@@ -59,7 +59,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.33 $ $Date: 2004-04-21 11:08:43 $ $Author: christian $
+ * @version $Revision: 1.34 $ $Date: 2004-04-21 11:10:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -590,7 +590,9 @@ void initialize_compound(void* p0, const void* p1, const void* p2) {
             // The size.
             int s = 0;
 
-            compare_arrays(p1, p2, (void*) &FILE_LOCATION, (void*) &FILE_LOCATION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+            //?? CAUTION! Compare sizes here!
+
+            compare_array_elements(p1, (void*) &FILE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FILE_LOCATION_SIZE, (void*) &r);
 
             if (r == 1) {
 
@@ -681,7 +683,10 @@ void get_model_part_index(const void* p0, const void* p1, const void* p2, void* 
             // Get element.
             get_array_element((void*) &n, (void*) &POINTER_ARRAY, (void*) &j, (void*) &name);
             get_array_element((void*) &ns, (void*) &POINTER_ARRAY, (void*) &j, (void*) &count);
-            compare_arrays(p1, p2, (void*) &name, (void*) &count, (void*) &CHARACTER_ARRAY, (void*) &r);
+
+            //?? CAUTION! Compare sizes here!
+            
+            compare_array_elements(p1, (void*) &name, (void*) &CHARACTER_ARRAY, (void*) &count, (void*) &r);
 
             if (r == 1) {
 

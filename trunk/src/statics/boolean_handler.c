@@ -29,7 +29,7 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.16 $ $Date: 2004-04-21 11:08:43 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-04-21 11:10:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -76,7 +76,7 @@ void initialize_boolean(void* p0, const void* p1, const void* p2) {
         log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize boolean.");
 
         int r = 0;
-        compare_arrays(p1, p2, (void*) &TRUE_BOOLEAN, (void*) &TRUE_BOOLEAN_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+        compare_array_elements(p1, (void*) &TRUE_BOOLEAN, (void*) &CHARACTER_ARRAY, (void*) &TRUE_BOOLEAN_SIZE, (void*) &r);
 
         if (r == 1) {
 

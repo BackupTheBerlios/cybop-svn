@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.13 $ $Date: 2004-04-21 11:08:42 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-04-21 11:10:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,7 +68,8 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
         // Compound.
         //
 
-        compare_arrays(p4, p5, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+        //?? CAUTION! Still compare sizes here!
+        compare_array_elements(p4, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_SIZE, (void*) &r);
 
         if (r == 1) {
 
@@ -81,7 +82,8 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
         // Logic and Dynamics.
         //
 
-        compare_arrays(p4, p5, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+        //?? CAUTION! Still compare sizes here!
+        compare_array_elements(p4, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_SIZE, (void*) &r);
 
         if (r == 1) {
 
@@ -94,7 +96,8 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
         // Statics.
         //
 
-        compare_arrays(p4, p5, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+        //?? CAUTION! Still compare sizes here!
+        compare_array_elements(p4, (void*) &STRING_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &STRING_ABSTRACTION_SIZE, (void*) &r);
 
         if (r == 1) {
 
@@ -102,7 +105,8 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
 
         } else {
 
-        compare_arrays(p4, p5, (void*) &BOOLEAN_ABSTRACTION, (void*) &BOOLEAN_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+        //?? CAUTION! Still compare sizes here!
+        compare_array_elements(p4, (void*) &BOOLEAN_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &BOOLEAN_ABSTRACTION_SIZE, (void*) &r);
 
         if (r == 1) {
 
@@ -111,7 +115,8 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
 
         } else {
 
-        compare_arrays(p4, p5, (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+        //?? CAUTION! Still compare sizes here!
+        compare_array_elements(p4, (void*) &INTEGER_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &INTEGER_ABSTRACTION_SIZE, (void*) &r);
 
         if (r == 1) {
 
@@ -120,7 +125,8 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
 
         } else {
 
-        compare_arrays(p4, p5, (void*) &VECTOR_ABSTRACTION, (void*) &VECTOR_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+        //?? CAUTION! Still compare sizes here!
+        compare_array_elements(p4, (void*) &VECTOR_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &VECTOR_ABSTRACTION_SIZE, (void*) &r);
 
         if (r == 1) {
 
@@ -129,7 +135,8 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
 
         } else {
 
-        compare_arrays(p4, p5, (void*) &DOUBLE_ABSTRACTION, (void*) &DOUBLE_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+        //?? CAUTION! Still compare sizes here!
+        compare_array_elements(p4, (void*) &DOUBLE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DOUBLE_ABSTRACTION_SIZE, (void*) &r);
 
         if (r == 1) {
 
@@ -138,7 +145,8 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
 
         } else {
 
-        compare_arrays(p4, p5, (void*) &FRACTION_ABSTRACTION, (void*) &FRACTION_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+        //?? CAUTION! Still compare sizes here!
+        compare_array_elements(p4, (void*) &FRACTION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &FRACTION_ABSTRACTION_SIZE, (void*) &r);
 
         if (r == 1) {
 
@@ -147,7 +155,8 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
 
         } else {
 
-        compare_arrays(p4, p5, (void*) &COMPLEX_ABSTRACTION, (void*) &COMPLEX_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+        //?? CAUTION! Still compare sizes here!
+        compare_array_elements(p4, (void*) &COMPLEX_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPLEX_ABSTRACTION_SIZE, (void*) &r);
 
         if (r == 1) {
 
@@ -156,7 +165,8 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
 
         } else {
 
-        compare_arrays(p4, p5, (void*) &TIME_ABSTRACTION, (void*) &TIME_ABSTRACTION_SIZE, (void*) &CHARACTER_ARRAY, (void*) &r);
+        //?? CAUTION! Still compare sizes here!
+        compare_array_elements(p4, (void*) &TIME_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &TIME_ABSTRACTION_SIZE, (void*) &r);
 
         if (r == 1) {
 

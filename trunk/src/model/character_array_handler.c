@@ -29,13 +29,17 @@
  * It is therefore possible to create and destroy arrays based on primitive types.
  *
  * The syntax of an array mostly looks like: type[size]
- * for example: int[]
- * But it can also be written as: type*
- * for example: int*
+ * Example: char[10]
+ *
+ * When working with an array, it is referenced by a pointer like: type* variable
+ * Example: char* array
+ *
+ * The array can be dereferenced accordingly: *variable
+ * Example: *array
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.13 $ $Date: 2004-04-21 11:08:42 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-04-21 11:10:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,22 +49,18 @@
 #include "../constants.c"
 #include "../logger/log_handler.c"
 
-//
-// Character array.
-//
-
 /**
- * Compares the character arrays.
+ * Compares the character array elements.
  *
  * Returns 1 if the character elements are equal.
- * The given result remains unchanged if the arrays are unequal.
+ * The given result remains unchanged if the array elements are unequal.
  *
- * @param p0 the first character array
- * @param p1 the second character array
- * @param p2 the size
+ * @param p0 the first array
+ * @param p1 the second array
+ * @param p2 the count
  * @param p3 the result
  */
-void compare_character_arrays(const void* p0, const void* p1, const void* p2, void* p3) {
+void compare_character_array_elements(const void* p0, const void* p1, const void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -68,23 +68,23 @@ void compare_character_arrays(const void* p0, const void* p1, const void* p2, vo
 
         if (p2 != NULL_POINTER) {
 
-            int* s = (int*) p2;
+            int* c = (int*) p2;
 
             if (p1 != NULL_POINTER) {
 
-                void** a1 = (void**) p1;
+                char** a1 = (char**) p1;
 
                 if (p0 != NULL_POINTER) {
 
-                    void** a0 = (void**) p0;
+                    char** a0 = (char**) p0;
 
-                    int i = 0;
+                    int j = 0;
                     char* e0 = NULL_CHARACTER_POINTER;
                     char* e1 = NULL_CHARACTER_POINTER;
 
                     while (1) {
 
-                        if (i >= *s) {
+                        if (j >= *c) {
 
                             // All elements have been compared and are equal.
                             *r = 1;
@@ -93,8 +93,8 @@ void compare_character_arrays(const void* p0, const void* p1, const void* p2, vo
                         }
 
                         // Determine the next elements at array plus index.
-                        e0 = (char*) (*a0 + i);
-                        e1 = (char*) (*a1 + i);
+                        e0 = (char*) (*a0 + j);
+                        e1 = (char*) (*a1 + j);
 
                         if (*e0 != *e1) {
 
@@ -102,274 +102,47 @@ void compare_character_arrays(const void* p0, const void* p1, const void* p2, vo
                             break;
                         }
 
-                        i++;
-                    }
-
-                } else {
-
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character arrays. The first character array is null.");
-                }
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character arrays. The second character array is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character arrays. The size is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character arrays. The result is null.");
-    }
-}
-
-//
-// Character array element.
-//
-
-/**
- * Sets the character array element.
- *
- * @param p0 the character array
- * @param p1 the index
- * @param p2 the element
- */
-void set_character_array_element(const void* p0, const void* p1, const void* p2) {
-
-    if (p2 != NULL_POINTER) {
-
-        char* e0 = (char*) p2;
-
-        if (p1 != NULL_POINTER) {
-
-            int* i = (int*) p1;
-
-            if (p0 != NULL_POINTER) {
-
-                char** a = (char**) p0;
-
-                // Set element.
-                char* e1 = (char*) (*a + *i);
-                *e1 = *e0;
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array element. The character array is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array element. The index is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array element. The element is null.");
-    }
-}
-
-/**
- * Removes the character array element.
- *
- * @param p0 the character array
- * @param p1 the size
- * @param p2 the index
- */
-void remove_character_array_element(const void* p0, const void* p1, const void* p2) {
-
-    if (p2 != NULL_POINTER) {
-
-        int* i = (int*) p2;
-
-        if (p1 != NULL_POINTER) {
-
-            int* s = (int*) p1;
-
-            if (p0 != NULL_POINTER) {
-
-                void** a = (void**) p0;
-
-                // Initialize loop variable with index.
-                // Do not use the index itself as it was handed over as constant parameter!
-                int j = *i;
-                char* e0 = NULL_CHARACTER_POINTER;
-                char* e1 = NULL_CHARACTER_POINTER;
-
-                // Starting from the given index, move all remaining elements one
-                // place towards the beginning of the elements.
-                while (1) {
-
-                    if ((j + 1) >= *s) {
-
-                        break;
-                    }
-
-                    e0 = (char*) (*a + j);
-                    e1 = (char*) (*a + j + 1);
-                    *e0 = *e1;
-
-                    j++;
-                }
-
-                // Set former last element to ''. The ASCII of '' is 0.
-                e0 = (char*) (*a + j);
-                *e0 = 0;
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array element. The character array is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array element. The size is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array element. The index is null.");
-    }
-}
-
-/**
- * Gets the character array element.
- *
- * @param p0 the character array
- * @param p1 the index
- * @param p2 the element
- */
-void get_character_array_element(const void* p0, const void* p1, void* p2) {
-
-    if (p2 != NULL_POINTER) {
-
-        char* e0 = (char*) p2;
-
-        if (p1 != NULL_POINTER) {
-
-            int* i = (int*) p1;
-
-            if (p0 != NULL_POINTER) {
-
-                void** a = (void**) p0;
-
-                // Get element.
-                char* e1 = (char*) (*a + *i);
-                *e0 = *e1;
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element. The character array is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element. The index is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element. The element is null.");
-    }
-}
-
-/**
- * Gets the character array element index.
- *
- * The first occurence of the element will be considered.
- * The given index remains unchanged if no element is found.
- *
- * @param p0 the character array
- * @param p1 the size
- * @param p2 the element
- * @param p3 the index
- */
-void get_character_array_element_index(const void* p0, const void* p1, const void* p2, void* p3) {
-
-    if (p3 != NULL_POINTER) {
-
-        int* i = (int*) p3;
-
-        if (p2 != NULL_POINTER) {
-
-            char* e0 = (char*) p2;
-
-            if (p1 != NULL_POINTER) {
-
-                int* s = (int*) p1;
-
-                if (p0 != NULL_POINTER) {
-
-                    void** a = (void**) p0;
-
-                    int j = 0;
-                    char* e1 = NULL_CHARACTER_POINTER;
-
-                    while (1) {
-
-                        if (j >= *s) {
-
-                            // The element has not been found.
-                            break;
-                        }
-
-                        // Compare given element with the next integer element at array plus index.
-                        e1 = (char*) (*a + j);
-
-                        if (*e0 == *e1) {
-
-                            // The element has been found.
-                            *i = j;
-                            break;
-                        }
-
                         j++;
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The character array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character array elements. The first array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The size is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character array elements. The second array is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The element is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character array elements. The count is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character array elements. The result is null.");
     }
 }
 
-//
-// Character array string.
-//
-
 /**
- * Sets the character array string.
+ * Sets the character array elements.
  *
- * @param p0 the character array
+ * @param p0 the destination array
  * @param p1 the index
- * @param p2 the string
- * @param p3 the string size
+ * @param p2 the source array
+ * @param p3 the count
  */
-void set_character_array_string(void* p0, const void* p1, const void* p2, const void* p3) {
+void set_character_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
-        int* ss = (int*) p3;
+        int* c = (int*) p3;
 
         if (p2 != NULL_POINTER) {
 
-            char* s = (char*) p2;
+            char** s = (char**) p2;
 
             if (p1 != NULL_POINTER) {
 
@@ -377,179 +150,72 @@ void set_character_array_string(void* p0, const void* p1, const void* p2, const 
 
                 if (p0 != NULL_POINTER) {
 
-                    char** a = (char**) p0;
+                    char** d = (char**) p0;
 
-                    // Set string elements.
+                    // The loop variable.
                     int j = 0;
-                    // The base pointer to start at.
-                    char* base = (char*) (*a + *i);
-                    // The array element.
-                    char* ae = NULL_CHARACTER_POINTER;
-                    // The string element.
+                    // The destination base to start copying to.
+                    char* db = (char*) (*d + *i);
+                    // The source element.
                     char* se = NULL_CHARACTER_POINTER;
+                    // The destination element.
+                    char* de = NULL_CHARACTER_POINTER;
 
                     while (1) {
 
-                        if (j >= *ss) {
+                        if (j >= *c) {
 
                             break;
                         }
 
-                        ae = (char*) (base + j);
-                        se = (char*) (s + j);
-                        *ae = *se;
+                        // Determine source and destination element.
+                        se = (char*) (*s + j);
+                        de = (char*) (db + j);
+
+                        // Set destination element.
+                        *de = *se;
+
+                        j++;
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array string. The character array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array elements. The destination array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array string. The index is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array elements. The index is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array string. The string is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array elements. The source array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array string. The string size is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array elements. The count is null.");
     }
 }
 
 /**
- * Removes the character array string.
+ * Removes the character array elements.
  *
- * @param p0 the character array
+ * @param p0 the array
  * @param p1 the size
  * @param p2 the index
+ * @param p3 the count
  */
-void remove_character_array_string(const void* p0, const void* p1, const void* p2) {
+void remove_character_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
 
-/*??
-    if (p2 != NULL_POINTER) {
+    if (p3 != NULL_POINTER) {
 
-        int* i = (int*) p2;
+        int* c = (int*) p3;
 
-        if (p1 != NULL_POINTER) {
+        if (p2 != NULL_POINTER) {
 
-            int* s = (int*) p1;
-
-            if (p0 != NULL_POINTER) {
-
-                void** a = (void**) p0;
-
-                // Initialize loop variable with index.
-                // Do not use the index itself as it was handed over as constant parameter!
-                int j = *i;
-                char* e0 = NULL_CHARACTER_POINTER;
-                char* e1 = NULL_CHARACTER_POINTER;
-
-                // Starting from the given index, move all remaining elements one
-                // place towards the beginning of the elements.
-                while (1) {
-
-                    if ((j + 1) >= *s) {
-
-                        break;
-                    }
-
-                    e0 = (char*) (*a + j);
-                    e1 = (char*) (*a + j + 1);
-                    *e0 = *e1;
-
-                    j++;
-                }
-
-                // Set former last element to ''. The ASCII of '' is 0.
-                e0 = (char*) (*a + j);
-                *e0 = 0;
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array element. The character array is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array element. The size is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array element. The index is null.");
-    }
-*/
-}
-
-/**
- * Gets the character array string.
- *
- * @param p0 the character array
- * @param p1 the index
- * @param p2 the string
- */
-void get_character_array_string(const void* p0, const void* p1, void* p2) {
-
-/*??
-    if (p2 != NULL_POINTER) {
-
-        char* e0 = (char*) p2;
-
-        if (p1 != NULL_POINTER) {
-
-            int* i = (int*) p1;
-
-            if (p0 != NULL_POINTER) {
-
-                void** a = (void**) p0;
-
-                // Get element.
-                char* e1 = (char*) (*a + *i);
-                *e0 = *e1;
-
-            } else {
-
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element. The character array is null.");
-            }
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element. The index is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element. The element is null.");
-    }
-*/
-}
-
-/**
- * Gets the character array string index.
- *
- * The first occurence of the string will be considered.
- * The given index remains unchanged if no string is found.
- *
- * @param p0 the character array
- * @param p1 the size
- * @param p2 the string
- * @param p3 the string size
- * @param p4 the index
- */
-void get_character_array_string_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
-
-    if (p4 != NULL_POINTER) {
-
-        int* i = (int*) p4;
-
-        if (p3 != NULL_POINTER) {
-
-            int* strs = (int*) p3;
+            int* i = (int*) p2;
 
             if (p1 != NULL_POINTER) {
 
@@ -557,54 +223,235 @@ void get_character_array_string_index(const void* p0, const void* p1, const void
 
                 if (p0 != NULL_POINTER) {
 
-                    void** a = (void**) p0;
+                    char** a = (char**) p0;
 
+                    // The loop variable.
                     int j = 0;
-                    char* e0 = NULL_CHARACTER_POINTER;
-                    int r = 0;
+                    // The remaining elements size.
+                    int r = *s - (*i + *c);
+                    // The destination base.
+                    char* db = (char*) (*a + *i);
+                    // The source base.
+                    char* sb = (char*) (*a + *i + *c);
+                    // The source element.
+                    char* se = NULL_CHARACTER_POINTER;
+                    // The destination element.
+                    char* de = NULL_CHARACTER_POINTER;
+
+                    // Starting from the given index, move all remaining elements
+                    // one place towards the beginning of the elements.
+                    // Example: "test..array"
+                    // size = 11
+                    // index = 4 (remove "..")
+                    // count = 2
+                    // rest = 11 - (4 + 2) = 11 - 6 = 5
+                    while (1) {
+
+                        if (j >= r) {
+
+                            break;
+                        }
+
+                        // Determine source and destination element.
+                        de = (char*) (db + j);
+                        se = (char*) (sb + j);
+
+                        // Set destination element.
+                        *de = *se;
+
+                        j++;
+                    }
+
+                    // Set former last elements to ''. The ASCII of '' is 0.
+                    // This is disabled for now, since when creating an array,
+                    // its elements are also NOT initialized with ''.
+                    // The calling procedure may just cut off the remaining
+                    // elements by decreasing the array size (resizing).
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array elements. The array is null.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array elements. The size is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array elements. The index is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array elements. The count is null.");
+    }
+}
+
+/**
+ * Gets the character array elements.
+ *
+ * @param p0 the source array
+ * @param p1 the index
+ * @param p2 the destination array
+ * @param p3 the count
+ */
+void get_character_array_elements(const void* p0, const void* p1, void* p2, const void* p3) {
+
+    if (p3 != NULL_POINTER) {
+
+        int* c = (int*) p3;
+
+        if (p2 != NULL_POINTER) {
+
+            char** d = (char**) p2;
+
+            if (p1 != NULL_POINTER) {
+
+                int* i = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    char** s = (char**) p0;
+
+                    // The loop variable.
+                    int j = 0;
+                    // The source base to start copying from.
+                    char* sb = (char*) (*s + *i);
+                    // The source element.
+                    char* se = NULL_CHARACTER_POINTER;
+                    // The destination element.
+                    char* de = NULL_CHARACTER_POINTER;
 
                     while (1) {
 
-                        if (j >= (*s - *strs)) {
-
-                            // The element has not been found.
-                            break;
-                        }
-
-                        // Compare given element with the next elements at array plus index.
-                        e0 = (char*) (*a + j);
-
-//??                            compare_character_arrays((void*) &e0, p2, p3, (void*) &r);
-
-                        if (r == 1) {
-
-                            // The element has been found.
-                            *i = j;
+                        if (j >= *c) {
 
                             break;
                         }
+
+                        // Determine source and destination element.
+                        se = (char*) (sb + j);
+                        de = (char*) (*d + j);
+
+                        // Set destination element.
+                        *de = *se;
 
                         j++;
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array string index. The character array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array elements. The source array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array string index. The size is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array elements. The index is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array string index. The string size is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array elements. The destination array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array string index. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array elements. The count is null.");
+    }
+}
+
+/**
+ * Gets the character array elements index.
+ *
+ * The first occurence of the element will be considered.
+ * The given index remains unchanged if no element is found.
+ *
+ * @param p0 the array
+ * @param p1 the size
+ * @param p2 the comparison array
+ * @param p3 the count
+ * @param p4 the index
+ */
+void get_character_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
+
+    if (p4 != NULL_POINTER) {
+
+        int* i = (int*) p4;
+
+        if (p3 != NULL_POINTER) {
+
+            int* c = (int*) p3;
+
+            if (p2 != NULL_POINTER) {
+
+                char** ca = (char**) p2;
+
+                if (p1 != NULL_POINTER) {
+
+                    int* s = (int*) p1;
+
+                    if (p0 != NULL_POINTER) {
+
+                        char** a = (char**) p0;
+
+                        // The loop variable.
+                        int j = 0;
+                        // The iteration limit.
+                        int l = *s - *c;
+                        // The element.
+                        char* e = NULL_CHARACTER_POINTER;
+                        // The comparison result.
+                        int r = 0;
+
+                        while (1) {
+
+                            if (j >= l) {
+
+                                // The element has not been found.
+                                break;
+                            }
+
+                            // Determine element.
+                            e = (char*) (*a + j);
+
+                            compare_character_array_elements((void*) &e, p2, p3, (void*) &r);
+
+                            if (r == 1) {
+
+                                // The element has been found.
+                                *i = j;
+
+                                break;
+                            }
+
+                            j++;
+                        }
+
+                    } else {
+
+                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The array is null.");
+                    }
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The size is null.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The comparison array is null.");
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The count is null.");
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The index is null.");
     }
 }
 

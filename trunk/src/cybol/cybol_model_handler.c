@@ -37,7 +37,7 @@
  *         map = position_abstraction_attribute
  *         (attributes 0..9 = size 10)
  *
- * @version $Revision: 1.15 $ $Date: 2004-04-21 11:08:42 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-04-21 11:10:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
