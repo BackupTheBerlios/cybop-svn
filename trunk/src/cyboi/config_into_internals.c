@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.1 $ $Date: 2004-10-27 13:28:45 $ $Author: rholzmueller $
+ * @version $Revision: 1.2 $ $Date: 2004-10-27 13:44:39 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,7 +97,7 @@ void initialize_internals_start( xmlNode* root_element, void* pPointerInternals,
     			
                 if ( comp_result==1 ) {
     
-      		        printf(" Modellvalue channel gefunden \n" );
+      		        //printf(" Modellvalue channel gefunden \n" );
         			set_array_element( (void*) &pPointerInternals, 
                                        (void*) &POINTER_ARRAY, 
     								   (void*) &POINTER_INTERNALS_START_CHANNEL_INDEX, 
@@ -117,7 +117,7 @@ void initialize_internals_start( xmlNode* root_element, void* pPointerInternals,
     			
     			if ( comp_result==1 ) {
     
-                    printf(" Modellvalue abstraction gefunden \n" );
+                    //printf(" Modellvalue abstraction gefunden \n" );
                     set_array_element( (void*) &pPointerInternals, 
                                        (void*) &POINTER_ARRAY, 
                                        (void*) &POINTER_INTERNALS_START_ABSTRACTION_INDEX, 
@@ -136,7 +136,7 @@ void initialize_internals_start( xmlNode* root_element, void* pPointerInternals,
     			
     			if ( comp_result==1 ) {
     
-                    printf(" Modellvalue modelgefunden \n" );
+                    //printf(" Modellvalue modelgefunden \n" );
                     set_array_element( (void*) &pPointerInternals, 
                                        (void*) &POINTER_ARRAY, 
                                        (void*) &POINTER_INTERNALS_START_MODEL_INDEX, 
@@ -223,7 +223,7 @@ int initialize_internals( void* pConfigFile, void* pPointerInternals, void* pInt
     					
     			if ( comp_result==1 ) {
     
-                    printf(" Model start gefunden" );
+                    //printf(" Model start gefunden" );
       		        initialize_internals_start( cur_node->children, 
       		                 					pPointerInternals,
       		                   					pIntInternals );
@@ -237,7 +237,7 @@ int initialize_internals( void* pConfigFile, void* pPointerInternals, void* pInt
     	 	
     			if ( comp_result==1 ) {
     
-                    printf(" Model tcp_socket gefunden" );
+                    //printf(" Model tcp_socket gefunden" );
     			}
 
     		}  //if (cur_node->type == XML_ELEMENT_NODE) {
