@@ -30,7 +30,7 @@ package cyboi;
  * It is necessary only as long as the Cybernetics Oriented Interpreter (CYBOI)
  * is implemented in the Java programming language.
  *
- * @version $Revision: 1.4 $ $Date: 2003-07-31 11:09:45 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-08-05 00:00:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaObjectHandler {
@@ -66,7 +66,8 @@ class JavaObjectHandler {
 
             if (cl != null) {
 
-                // Create java object from class.
+                java.lang.System.out.println("INFO: Create java object.");
+            
                 o = cl.newInstance();
 
             } else {
@@ -108,7 +109,7 @@ class JavaObjectHandler {
 
         if (p0 != null) {
 
-            java.lang.System.out.println("INFO: Initialize java object.");
+            java.lang.System.out.println("INFO: Initialize java object attributes.");
             
             if (p0 instanceof javax.swing.JFrame) {
                     

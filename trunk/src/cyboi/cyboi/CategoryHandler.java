@@ -27,7 +27,7 @@ package cyboi;
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.6 $ $Date: 2003-08-01 09:25:04 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-08-05 00:00:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryHandler {
@@ -36,20 +36,23 @@ class CategoryHandler {
     // Constants.
     //
     
-    /** The cybol file suffix. */
-    static java.lang.String CYBOL = ".cybol";
-
     /** The cybol path. */
     static java.lang.String PATH = "/home/cybop/src/";
+
+    /** The cybol file suffix. */
+    static java.lang.String CYBOL = ".cybol";
 
     /** The super category. */
     static java.lang.String SUPER_CATEGORY = "super";
 
+    /** The java object. */
+    static java.lang.String JAVA_OBJECT = "javaobject";
+
     /** The category. */
     static java.lang.String CATEGORY = "category";
 
-    /** The java object. */
-    static java.lang.String JAVA_OBJECT = "javaobject";
+    /** The attribute. */
+    static java.lang.String ATTRIBUTE = "attribute";
 
     /** The item. */
     static java.lang.String ITEM = "item";
@@ -81,155 +84,12 @@ class CategoryHandler {
     /** The interaction abstraction. */
     static java.lang.String INTERACTION_ABSTRACTION = "interaction_abstraction";
 
+    //
+    // Global variables.
+    //
+    
     /** The xml parser. */
     static java.lang.Object xml_parser;
-
-    //
-    // Category.
-    //
-
-    /**
-     * Initializes the category.
-     *
-     * @param p0 the category
-     * @param p1 the category name
-     */
-    static void initialize_category(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
-
-        java.lang.System.out.println("INFO: Initialize category.");
-        
-        CategoryHandler.initialize_category_containers(p0);
-        CategoryHandler.initialize_category_elements(p0, p1);
-    }
-
-    /**
-     * Finalizes the category.
-     *
-     * @param p0 the category
-     * @param p1 the category name
-     */
-    static void finalize_category(java.lang.Object p0, java.lang.Object p1) {
-
-        java.lang.System.out.println("INFO: Finalize category.");
-        
-        CategoryHandler.finalize_category_elements(p0, p1);
-        CategoryHandler.finalize_category_containers(p0);
-    }
-
-    //
-    // Category containers.
-    //
-
-    /**
-     * Initializes the category containers.
-     *
-     * @param p0 the category
-     */
-    static void initialize_category_containers(java.lang.Object p0) {
-
-        Category c = (Category) p0;
-
-        if (c != null) {
-
-            java.lang.System.out.println("INFO: Initialize category containers.");
-
-            c.java_object = new CategoryJavaObject();
-            CategoryJavaObjectHandler.initialize_category_java_object(c.java_object);
-
-            c.items = new Map();
-            MapHandler.initialize_map(c.items);
-
-        } else {
-
-            java.lang.System.out.println("ERROR: Could not initialize category containers. The category is null.");
-        }
-    }
-
-    /**
-     * Finalizes the category containers.
-     *
-     * @param p0 the category
-     */
-    static void finalize_category_containers(java.lang.Object p0) {
-
-        Category c = (Category) p0;
-        
-        if (c != null) {
-
-            java.lang.System.out.println("INFO: Finalize category containers.");
-
-            MapHandler.finalize_map(c.items);
-            c.items = null;
-
-            CategoryJavaObjectHandler.finalize_category_java_object(c.java_object);
-            c.java_object = null;
-
-        } else {
-
-            java.lang.System.out.println("ERROR: Could not finalize category containers. The category is null.");
-        }
-    }
-
-    //
-    // Category elements.
-    //
-    
-    /**
-     * Initializes the category elements.
-     *
-     * Reads the file of the given category.
-     *
-     * @param p0 the category
-     * @param p1 the category name
-     */
-    static void initialize_category_elements(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
-
-        org.apache.xerces.parsers.DOMParser p = new org.apache.xerces.parsers.DOMParser();
-        CategoryHandler.initialize_xml_parser(p);
-    
-        if (p != null) {
-            
-            java.lang.System.out.println("INFO: Initialize category elements.");
-
-            p.parse(CategoryHandler.PATH + p1 + CategoryHandler.CYBOL);
-            CategoryHandler.initialize_document(p0, p.getDocument());
-    
-        } else {
-            
-            java.lang.System.out.println("ERROR: Could not initialize category elements. The xml parser is null.");
-        }
-        
-        CategoryHandler.finalize_xml_parser(p);
-        p = null;
-    }
-
-    /**
-     * Finalizes the category elements.
-     *
-     * Writes the file of the given category.
-     *
-     * @param p0 the category
-     * @param p1 the category name
-     */
-    static void finalize_category_elements(java.lang.Object p0, java.lang.Object p1) {
-
-/*??
-        org.apache.xerces.parsers.DOMWriter p = new org.apache.xerces.parsers.DOMWriter();
-        CategoryHandler.initialize_xml_writer(p);
-    
-        if (p != null) {
-            
-            java.lang.System.out.println("INFO: Finalize category elements.");
-
-            p.write(CategoryHandler.PATH + p1 + CategoryHandler.CYBOL);
-            CategoryHandler.finalize_document(p0, p.getDocument());
-            
-        } else {
-            
-            java.lang.System.out.println("ERROR: Could not finalize category elements. The xml writer is null.");
-        }
-*/
-    }
 
     //
     // Parser.
@@ -247,7 +107,6 @@ class CategoryHandler {
         if (p != null) {
             
             java.lang.System.out.println("INFO: Initialize xml parser.");
-
             p.setFeature("http://xml.org/sax/features/validation", true);
             
         } else {
@@ -267,85 +126,95 @@ class CategoryHandler {
     }
 
     //
+    // Category.
+    //
+    
+    /**
+     * Initializes the category.
+     *
+     * Reads the file of the given category.
+     *
+     * @param p0 the category
+     * @param p1 the category name
+     */
+    static void initialize_category(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
+
+        org.apache.xerces.parsers.DOMParser p = (org.apache.xerces.parsers.DOMParser) CategoryHandler.xml_parser;
+    
+        if (p != null) {
+            
+            java.lang.System.out.println("INFO: Initialize category.");
+            p.parse(CategoryHandler.PATH + p1 + CategoryHandler.CYBOL);
+            CategoryHandler.read_document(p0, p.getDocument());
+    
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not initialize category elements. The xml parser is null.");
+        }
+    }
+
+    /**
+     * Finalizes the category.
+     *
+     * Writes the file of the given category.
+     *
+     * @param p0 the category
+     * @param p1 the category name
+     */
+    static void finalize_category(java.lang.Object p0, java.lang.Object p1) {
+    }
+
+    //
     // Document.
     //
     
     /**
-     * Initializes the document.
+     * Reads the document.
      *
      * @param p0 the category
      * @param p1 the document
      */
-    static void initialize_document(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
+    static void read_document(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
+        java.lang.System.out.println("TEST document: " + p1);
         org.w3c.dom.Document doc = (org.w3c.dom.Document) p1;
 
         if (doc != null) {
             
-            java.lang.System.out.println("INFO: Initialize document.");
-
+            java.lang.System.out.println("INFO: Read document.");
             doc.normalize();
-            org.w3c.dom.NodeList l = null;
 
-            Category c = (Category) p0;
-            
-            l = doc.getElementsByTagName(CategoryHandler.SUPER_CATEGORY);
-            CategoryHandler.initialize_super_category(c, l);
+            org.w3c.dom.NodeList l = doc.getElementsByTagName(CategoryHandler.SUPER_CATEGORY);
+            CategoryHandler.initialize_super_category(p0, l);
 
-            if (p0 != null) {
-                    
-                l = doc.getElementsByTagName(CategoryHandler.JAVA_OBJECT);
-                CategoryHandler.initialize_java_object(c.java_object, l);
+            l = doc.getElementsByTagName(CategoryHandler.JAVA_OBJECT);
+            CategoryHandler.initialize_java_object(p0, l);
+                
+            Item c = (Item) p0;
+
+            if (c != null) {
                     
                 l = doc.getElementsByTagName(CategoryHandler.ITEM);
                 CategoryHandler.initialize_items(c.items, l);
 
             } else {
                 
-                java.lang.System.out.println("ERROR: Could not initialize document. The category is null.");
+                java.lang.System.out.println("ERROR: Could not read document. The category is null.");
             }
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize document. The document is null.");
+            java.lang.System.out.println("ERROR: Could not read document. The document is null.");
         }
     }
 
     /**
-     * Finalizes the document.
+     * Writes the document.
      *
      * @param p0 the category
      * @param p1 the document
      */
-    static void finalize_document(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
-
-/*??
-        org.w3c.dom.Document doc = (org.w3c.dom.Document) p1;
-
-        if (doc != null) {
-            
-            java.lang.System.out.println("INFO: Finalize document.");
-
-            doc.normalize();
-    
-            org.w3c.dom.NodeList l = null;
-
-            Category c = (Category) p0;
-            
-            l = doc.getElementsByTagName(CategoryHandler.SUPER_CATEGORY);
-            CategoryHandler.finalize_super(c, l);
-                
-            l = doc.getElementsByTagName(CategoryHandler.JAVA_OBJECT);
-            CategoryHandler.finalize_java_object(c, l);
-                
-            l = doc.getElementsByTagName(CategoryHandler.ITEM);
-            CategoryHandler.finalize_items(c, l);
-
-        } else {
-            
-            java.lang.System.out.println("ERROR: Could not initialize document. The document is null.");
-        }
-*/
+    static void write_document(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
     }
     
     //
@@ -360,6 +229,7 @@ class CategoryHandler {
      */
     static void initialize_super_category(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
+        java.lang.System.out.println("TEST nodelist 1: " + p1);
         org.w3c.dom.NodeList l = (org.w3c.dom.NodeList) p1;
 
         if (l != null) {
@@ -368,19 +238,9 @@ class CategoryHandler {
             
             if (n != null) {
 
-                Category c = (Category) p0;
-                
-                if (c != null) {
-                    
-                    java.lang.System.out.println("INFO: Initialize super category.");
-                    
-                    java.lang.Object s = CategoryHandler.read_attribute(n.getAttributes(), CategoryHandler.CATEGORY);
-                    CategoryHandler.initialize_category(p0, s);
-                
-                } else {
-                    
-                    java.lang.System.out.println("WARNING: Could not initialize super category. The category is null.");
-                }
+                java.lang.System.out.println("INFO: Initialize super category.");
+                java.lang.Object s = CategoryHandler.read_attribute(n.getAttributes(), CategoryHandler.CATEGORY);
+                CategoryHandler.initialize_category(p0, s);
                 
             } else {
                 
@@ -400,29 +260,62 @@ class CategoryHandler {
      * @param p1 the super category list
      */
     static void finalize_super_category(java.lang.Object p0, java.lang.Object p1) {
+    }
 
-        org.w3c.dom.NodeList l = (org.w3c.dom.NodeList) p1;
+    //
+    // Java objects.
+    //
+    
+    /**
+     * Initializes the java objects.
+     *
+     * @param p0 the category
+     * @param p1 the category java objects list
+     */
+    static void initialize_java_objects(java.lang.Object p0, java.lang.Object p1) {
 
-        if (l != null) {
+        Item i = (Item) p0;
+        
+        if (i != null) {
             
-            org.w3c.dom.Node n = l.item(0);
-            
-            if (n != null) {
-                
-                java.lang.System.out.println("INFO: Finalize super category.");
-                
-                java.lang.Object s = n.getNodeValue();
-                CategoryHandler.finalize_category(p0, s);
+            java.lang.System.out.println("TEST nodelist 2: " + p1);
+            org.w3c.dom.NodeList l = (org.w3c.dom.NodeList) p1;
+    
+            if (l != null) {
+    
+                java.lang.System.out.println("INFO: Initialize java objects.");
+                org.w3c.dom.Node n = l.item(0);
+
+                if (n != null) {
+                        
+                    Item o = new Item();
+                    ItemHandler.initialize_item_containers(o);
+                    CategoryHandler.initialize_java_object(o, n);
+                    i.java_object = o;
+                    
+                } else {
+                    
+                    java.lang.System.out.println("WARNING: Could not initialize java objects. The java object node is null.");
+                }
                 
             } else {
                 
-                java.lang.System.out.println("WARNING: Could not finalize super category. The super category node is null.");
+                java.lang.System.out.println("ERROR: Could not initialize java objects. The java objects list is null.");
             }
             
         } else {
             
-            java.lang.System.out.println("WARNING: Could not finalize super category. The super category list is null.");
+            java.lang.System.out.println("ERROR: Could not initialize java objects. The category is null.");
         }
+    }
+
+    /**
+     * Finalizes the java objects.
+     *
+     * @param p0 the category items
+     * @param p1 the category java objects list
+     */
+    static void finalize_java_objects(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
     }
 
     //
@@ -432,70 +325,42 @@ class CategoryHandler {
     /**
      * Initializes the java object.
      *
-     * @param p0 the category java object
-     * @param p1 the category java object list
+     * @param p0 the java object
+     * @param p1 the java object node
      */
-    static void initialize_java_object(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
-
-        org.w3c.dom.NodeList l = (org.w3c.dom.NodeList) p1;
-
-        if (l != null) {
-            
-            org.w3c.dom.Node n = l.item(0);
+    static void initialize_java_object(java.lang.Object p0, java.lang.Object p1) {
+        
+        Item o = (Item) p0;
+        
+        if (o != null) {
+        
+            org.w3c.dom.Node n = (org.apache.xerces.dom.DeepNodeListImpl) p1;
             
             if (n != null) {
                 
                 java.lang.System.out.println("INFO: Initialize java object.");
-                
-                java.lang.Object a = n.getAttributes();
-                CategoryHandler.initialize_java_object_attributes(p0, a);
-                java.lang.System.out.println("---------- \n\n\nTEST wrapper: " + ((CategoryJavaObject) p0).category);
-                
+                CategoryHandler.initialize_java_object_attributes(o.items, n.getAttributes());
+        
             } else {
                 
                 java.lang.System.out.println("WARNING: Could not initialize java object. The java object node is null.");
             }
-            
+
         } else {
             
-            java.lang.System.out.println("WARNING: Could not initialize java object. The java object list is null.");
+            java.lang.System.out.println("WARNING: Could not initialize java object. The java object is null.");
         }
     }
-
+    
     /**
      * Finalizes the java object.
      *
-     * @param p0 the category java object
-     * @param p1 the category java object list
+     * @param p0 the java object
+     * @param p1 the java object node
      */
-    static void finalize_java_object(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
-
-/*??
-        org.w3c.dom.NodeList l = (org.w3c.dom.NodeList) p1;
-
-        if (l != null) {
-            
-            org.w3c.dom.Node n = l.item(0);
-            
-            if (n != null) {
-                
-                java.lang.System.out.println("INFO: Finalize java object.");
-                
-                java.lang.Object a = n.getAttributes();
-                CategoryHandler.initialize_java_object_attributes(p0, a);
-                
-            } else {
-                
-                java.lang.System.out.println("WARNING: Could not finalize java object. The java object node is null.");
-            }
-            
-        } else {
-            
-            java.lang.System.out.println("WARNING: Could not finalize java object. The java object list is null.");
-        }
-*/
+    static void finalize_java_object(java.lang.Object p0, java.lang.Object p1) {
     }
-
+    
     //
     // Java object attributes.
     //
@@ -503,50 +368,31 @@ class CategoryHandler {
     /**
      * Initializes the java object attributes.
      *
-     * @param p0 the category java object
-     * @param p1 the category java object attributes
+     * @param p0 the attribute items
+     * @param p1 the attributes map
      */
-    static void initialize_java_object_attributes(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
+    static void initialize_java_object_attributes(java.lang.Object p0, java.lang.Object p1) {
 
-        CategoryJavaObject o = (CategoryJavaObject) p0;
-        
-        if (o != null) {
-        
-            java.lang.System.out.println("INFO: Initialize java object attributes.");
-            
-            o.category = read_attribute(p1, CategoryHandler.CATEGORY);
-            java.lang.System.out.println("--\nTEST inner: " + o.category);
-            org.w3c.dom.NamedNodeMap m = (org.w3c.dom.NamedNodeMap) p1;
-    
-            if (m != null) {
-        
-                int i = 0;
-                int size = m.getLength();
-                org.w3c.dom.Node n = null;
-                
-                while (i < size) {
-                        
-                    n = m.item(i);
-                    
-                    if (n != null) {
-                        
-                        MapHandler.add_map_element(o.attributes, n.getNodeValue(), "attribute");
-                
-                    } else {
-                        
-                        java.lang.System.out.println("WARNING: Could not initialize java object attributes. An attribute node is null.");
-                    }
-                }
-            
-            } else {
-                
-                java.lang.System.out.println("WARNING: Could not initialize java object attributes. The node map is null.");
-            }
-    
-        } else {
-            
-            java.lang.System.out.println("ERROR: Could not initialize java object attributes. The java object is null.");
-        }
+        java.lang.System.out.println("INFO: Initialize java object attributes.");
+        java.lang.Object a = null;
+
+        a = CategoryHandler.read_attribute(p1, CategoryHandler.CATEGORY);
+        MapHandler.set_map_element(p0, a, CategoryHandler.CATEGORY);
+
+        a = CategoryHandler.read_attribute(p1, JavaObjectHandler.WIDTH);
+        MapHandler.set_map_element(p0, a, JavaObjectHandler.WIDTH);
+
+        a = CategoryHandler.read_attribute(p1, JavaObjectHandler.HEIGHT);
+        MapHandler.set_map_element(p0, a, JavaObjectHandler.HEIGHT);
+    }
+
+    /**
+     * Finalizes the java object attributes.
+     *
+     * @param p0 the attribute items
+     * @param p1 the attributes map
+     */
+    static void finalize_java_object_attributes(java.lang.Object p0, java.lang.Object p1) {
     }
 
     //
@@ -557,93 +403,144 @@ class CategoryHandler {
      * Initializes the items.
      *
      * @param p0 the category items
-     * @param p1 the item list
+     * @param p1 the category items list
      */
-    static void initialize_items(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
+    static void initialize_items(java.lang.Object p0, java.lang.Object p1) {
 
+        java.lang.System.out.println("TEST nodelist 3: " + p1);
         org.w3c.dom.NodeList l = (org.w3c.dom.NodeList) p1;
 
         if (l != null) {
             
             java.lang.System.out.println("INFO: Initialize items.");
-
             int count = 0;
             int size = l.getLength();
             org.w3c.dom.Node n = null;
-            CategoryItem i = null;
+            Item i = null;
 
             while (count < size) {
             
                 n = l.item(count);
 
-                if (n != null) {
-
-                    // Initialize attributes.
-                    i = new CategoryItem();
-                    CategoryHandler.initialize_category_item(i, n.getAttributes());
-                    
-                    if (i != null) {
-                    
-                        MapHandler.add_map_element(p0, i, i.name);
-
-                    } else {
-                        
-                        java.lang.System.out.println("ERROR: Could not initialize items. The item node is null.");
-                    }
+                i = new Item();
+                ItemHandler.initialize_item_containers(i);
+                CategoryHandler.initialize_item(i, n);
+                MapHandler.add_map_element(p0, i, CategoryHandler.ITEM);
 
 /*??
-                    // Initialize serialized item.
-                    i = n.getNodeValue();
+                // Initialize serialized item.
+                i = n.getNodeValue();
 */
-                
-                } else {
-                    
-                    java.lang.System.out.println("ERROR: Could not initialize items. The item node is null.");
-                }
                 
                 count++;
             }
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize items. The items list is null.");
+            java.lang.System.out.println("ERROR: Could not initialize items. The category items list is null.");
         }
     }
 
+    /**
+     * Finalizes the items.
+     *
+     * @param p0 the category items
+     * @param p1 the category items list
+     */
+    static void finalize_items(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
+    }
+
     //
-    // Category item.
+    // Item.
     //
     
     /**
-     * Initializes the category item.
+     * Initializes the item.
      *
-     * @param p0 the category item
-     * @param p1 the item attributes
+     * @param p0 the item
+     * @param p1 the item node
      */
-    static void initialize_category_item(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
-
-        CategoryItem ci = (CategoryItem) p0;
+    static void initialize_item(java.lang.Object p0, java.lang.Object p1) {
         
-        if (ci != null) {
+        Item o = (Item) p0;
+        
+        if (o != null) {
+        
+            java.lang.System.out.println("TEST node: " + p1);
+            org.w3c.dom.Node n = (org.w3c.dom.Node) p1;
+            
+            if (n != null) {
                 
-            ci.name = CategoryHandler.read_attribute(p1, CategoryHandler.NAME);
-            java.lang.System.out.println("INFO: Initialize category item: " + ci.name);
-
-            ci.item_abstraction = CategoryHandler.read_attribute(p1, CategoryHandler.ITEM_ABSTRACTION);
-            java.lang.System.out.println("TEST item_abstraction: " + ci.item_abstraction);
-            ci.item_category = CategoryHandler.read_attribute(p1, CategoryHandler.ITEM_CATEGORY);
-            java.lang.System.out.println("TEST item_category: " + ci.item_category);
-            ci.position_abstraction = CategoryHandler.read_attribute(p1, CategoryHandler.POSITION_ABSTRACTION);
-            ci.position_category = CategoryHandler.read_attribute(p1, CategoryHandler.POSITION_CATEGORY);
-            ci.instance_abstraction = CategoryHandler.read_attribute(p1, CategoryHandler.INSTANCE_ABSTRACTION);
-            ci.instance_category = CategoryHandler.read_attribute(p1, CategoryHandler.INSTANCE_CATEGORY);
-            ci.interaction_abstraction = CategoryHandler.read_attribute(p1, CategoryHandler.INTERACTION_ABSTRACTION);
-            ci.interaction_category = CategoryHandler.read_attribute(p1, CategoryHandler.INTERACTION_CATEGORY);
+                java.lang.System.out.println("INFO: Initialize item.");
+                CategoryHandler.initialize_attributes(o.items, n.getAttributes());
+        
+            } else {
+                
+                java.lang.System.out.println("WARNING: Could not initialize item. The item node is null.");
+            }
 
         } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize category item. The category item is null.");
+            java.lang.System.out.println("WARNING: Could not initialize item. The item is null.");
         }
+    }
+    
+    /**
+     * Finalizes the item.
+     *
+     * @param p0 the item
+     * @param p1 the item node
+     */
+    static void finalize_item(java.lang.Object p0, java.lang.Object p1) {
+    }
+    
+    //
+    // Attributes.
+    //
+    
+    /**
+     * Initializes the attributes.
+     *
+     * @param p0 the attribute items
+     * @param p1 the attributes map
+     */
+    static void initialize_attributes(java.lang.Object p0, java.lang.Object p1) {
+
+        java.lang.System.out.println("INFO: Initialize attributes.");
+        java.lang.Object a = null;
+
+        a = CategoryHandler.read_attribute(p1, CategoryHandler.ITEM_CATEGORY);
+        MapHandler.set_map_element(p0, a, CategoryHandler.ITEM_CATEGORY);
+
+        a = CategoryHandler.read_attribute(p1, CategoryHandler.ITEM_ABSTRACTION);
+        MapHandler.set_map_element(p0, a, CategoryHandler.ITEM_ABSTRACTION);
+
+        a = CategoryHandler.read_attribute(p1, CategoryHandler.POSITION_CATEGORY);
+        MapHandler.set_map_element(p0, a, CategoryHandler.POSITION_CATEGORY);
+
+        a = CategoryHandler.read_attribute(p1, CategoryHandler.POSITION_ABSTRACTION);
+        MapHandler.set_map_element(p0, a, CategoryHandler.POSITION_ABSTRACTION);
+
+        a = CategoryHandler.read_attribute(p1, CategoryHandler.INSTANCE_CATEGORY);
+        MapHandler.set_map_element(p0, a, CategoryHandler.INSTANCE_CATEGORY);
+
+        a = CategoryHandler.read_attribute(p1, CategoryHandler.INSTANCE_ABSTRACTION);
+        MapHandler.set_map_element(p0, a, CategoryHandler.INSTANCE_ABSTRACTION);
+
+        a = CategoryHandler.read_attribute(p1, CategoryHandler.INTERACTION_CATEGORY);
+        MapHandler.set_map_element(p0, a, CategoryHandler.INTERACTION_CATEGORY);
+
+        a = CategoryHandler.read_attribute(p1, CategoryHandler.INTERACTION_ABSTRACTION);
+        MapHandler.set_map_element(p0, a, CategoryHandler.INTERACTION_ABSTRACTION);
+    }
+
+    /**
+     * Finalizes the attributes.
+     *
+     * @param p0 the attribute items
+     * @param p1 the attributes map
+     */
+    static void finalize_attributes(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
     }
 
     //
@@ -653,13 +550,14 @@ class CategoryHandler {
     /**
      * Reads the attribute.
      *
-     * @param p0 the attributes
-     * @param p1 the name
+     * @param p0 the attributes map
+     * @param p1 the attribute name
      * @return the attribute
      */
     static java.lang.Object read_attribute(java.lang.Object p0, java.lang.Object p1) {
     
         java.lang.Object a = null;
+        java.lang.System.out.println("TEST nodemap: " + p0);
         org.w3c.dom.NamedNodeMap m = (org.w3c.dom.NamedNodeMap) p0;
 
         if (m != null) {
@@ -669,7 +567,6 @@ class CategoryHandler {
             if (n != null) {
                 
                 java.lang.System.out.println("INFO: Read attribute.");
-
                 a = n.getNodeValue();
         
             } else {
@@ -679,10 +576,20 @@ class CategoryHandler {
         
         } else {
             
-            java.lang.System.out.println("WARNING: Could not read attribute. The node map is null.");
+            java.lang.System.out.println("WARNING: Could not read attribute. The attributes map is null.");
         }
         
         return a;
+    }
+
+    /**
+     * Writes the attribute.
+     *
+     * @param p0 the attributes map
+     * @param p1 the attribute name
+     * @param p2 the attribute
+     */
+    static void write_attribute(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2) {
     }
 }
 

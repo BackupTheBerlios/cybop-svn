@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.21 $ $Date: 2003-07-31 11:09:45 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2003-08-05 00:00:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -65,17 +65,19 @@ class Main {
                     java.lang.Object dynamics_category_name = args[1];
                     java.lang.Object signal_category_name = "cybol/core/signal/signal";
 
-                    // Event handler.
-                    java.lang.Object event_handler = new EventHandler();
-                    Main.replaceEventQueue(event_handler);
+                    // XML parser.
+                    CategoryHandler.xml_parser = new org.apache.xerces.parsers.DOMParser();
+                    CategoryHandler.initialize_xml_parser(CategoryHandler.xml_parser);
 
                     // Statics.
                     java.lang.Object statics = new Item();
+                    ItemHandler.initialize_item_containers(statics);
                     ItemHandler.initialize_item(statics, statics_category_name);
 
 /*??
                     // Dynamics.
                     java.lang.Object dynamics = new Item();
+                    ItemHandler.initialize_item_containers(dynamics);
                     ItemHandler.initialize_item(dynamics, dynamics_category_name);
 */
 
@@ -85,7 +87,12 @@ class Main {
 
                     // Signal.
                     java.lang.Object signal = new Item();
+                    ItemHandler.initialize_item_containers(signal);
                     ItemHandler.initialize_item(signal, signal_category_name);
+
+                    // Event handler.
+                    java.lang.Object event_handler = new EventHandler();
+                    Main.replaceEventQueue(event_handler);
 
                     // The system is now started up and complete so that a loop
                     // can be entered, waiting for signals (events/ interrupts).
@@ -93,10 +100,14 @@ class Main {
     
                     // The loop above is left as soon as its shutdown flag is set.
     
+                    // Event handler.
+                    event_handler = null;
+                    
                     // Signal.
                     ItemHandler.finalize_item(signal, signal_category_name);
+                    ItemHandler.finalize_item_containers(signal);
                     signal = null;
-                    
+
                     // Signal memory.
                     MapHandler.finalize_map(signal_memory);
                     signal_memory = null;
@@ -104,15 +115,18 @@ class Main {
 /*??
                     // Dynamics.
                     ItemHandler.finalize_item(dynamics, dynamics_category_name);
+                    ItemHandler.finalize_item_containers(dynamics);
                     dynamics = null;
 */
 
                     // Statics.
                     ItemHandler.finalize_item(statics, statics_category_name);
+                    ItemHandler.finalize_item_containers(statics);
                     statics = null;
 
-                    // Event handler.
-                    event_handler = null;
+                    // XML parser.
+                    CategoryHandler.finalize_xml_parser(CategoryHandler.xml_parser);
+                    CategoryHandler.xml_parser = null;
 
                     //
                     // Runtime.getRuntime().exit(0);

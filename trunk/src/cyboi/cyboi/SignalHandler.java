@@ -34,7 +34,7 @@ package cyboi;
  * send
  * reset
  *
- * @version $Revision: 1.5 $ $Date: 2003-07-31 11:09:45 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-08-05 00:00:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -147,6 +147,7 @@ class SignalHandler {
                 
         if (s != null) {
 
+            java.lang.System.out.println("---- TEST: " + MapHandler.get_map_element(s.items, "predicate_0"));
             java.lang.String p = (java.lang.String) MapHandler.get_map_element(s.items, "predicate_0");
 
             if (p != null) {
