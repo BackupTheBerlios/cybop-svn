@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-01-06 17:21:14 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-01-07 00:06:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,6 +32,7 @@
 #include "../global/abstraction_constants.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
+#include "../translator/configuration_translator.c"
 #include "../translator/cybol_translator.c"
 
 /**
@@ -110,13 +111,15 @@ void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
         }
     }
 
-    //
-    // CONFIGURATION_ABSTRACTION
-    //
-    // CAUTION! Parameters of the internals memory MUST NOT be written
-    // to the configuration file which was given at command line!
-    // The CYBOI configuration file can only be edited MANUALLY.
-    //
+    if (*r == 0) {
+
+        compare_arrays(p5, p6, (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (*r == 1) {
+
+            encode_configuration(p0, p1, p2, p3, p4);
+        }
+    }
 
     //?? Later, additional formats besides cybol might be read,
     //?? for example html, sxi, hdx.sf.net etc.

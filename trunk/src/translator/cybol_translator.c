@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2004-12-20 21:05:15 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-01-07 00:06:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,6 +40,7 @@
 #include "../global/cybol_constants.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
+#include "../logic/create.c"
 #include "../test/test.c"
 
 //

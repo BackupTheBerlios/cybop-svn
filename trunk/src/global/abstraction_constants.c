@@ -28,12 +28,32 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.9 $ $Date: 2004-12-21 17:49:51 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-01-07 00:06:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ABSTRACTION_CONSTANTS_SOURCE
 #define ABSTRACTION_CONSTANTS_SOURCE
+
+//
+// Configuration abstraction.
+//
+
+/** The configuration abstraction. */
+static const char CONFIGURATION_ABSTRACTION_ARRAY[] = {'c', 'o', 'n', 'f', 'i', 'g', 'u', 'r', 'a', 't', 'i', 'o', 'n'};
+static const char* CONFIGURATION_ABSTRACTION = CONFIGURATION_ABSTRACTION_ARRAY;
+static const int CONFIGURATION_ABSTRACTION_COUNT_ARRAY[] = {13};
+static const int* CONFIGURATION_ABSTRACTION_COUNT = CONFIGURATION_ABSTRACTION_COUNT_ARRAY;
+
+//
+// Internals memory abstraction.
+//
+
+/** The internals memory abstraction. */
+static const char INTERNALS_MEMORY_ABSTRACTION_ARRAY[] = {'i', 'n', 't', 'e', 'r', 'n', 'a', 'l', 's', '_', 'm', 'e', 'm', 'o', 'r', 'y'};
+static const char* INTERNALS_MEMORY_ABSTRACTION = INTERNALS_MEMORY_ABSTRACTION_ARRAY;
+static const int INTERNALS_MEMORY_ABSTRACTION_COUNT_ARRAY[] = {16};
+static const int* INTERNALS_MEMORY_ABSTRACTION_COUNT = INTERNALS_MEMORY_ABSTRACTION_COUNT_ARRAY;
 
 //
 // Signal memory abstraction.

@@ -25,7 +25,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.9 $ $Date: 2004-12-20 14:41:02 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-01-07 00:06:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,6 +38,7 @@
 #include "../creator/double_creator.c"
 #include "../creator/fraction_creator.c"
 #include "../creator/integer_creator.c"
+#include "../creator/internals_memory_creator.c"
 #include "../creator/signal_memory_creator.c"
 #include "../creator/string_creator.c"
 #include "../creator/time_creator.c"
@@ -222,6 +223,18 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
         }
     }
 
+    if (d == 0) {
+
+        compare_arrays(p2, p3, (void*) &INTERNALS_MEMORY_ABSTRACTION, (void*) &INTERNALS_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (*r == 1) {
+
+            create_internals_memory(p0, p1);
+
+            d = 1;
+        }
+    }
+
     destroy_integer((void*) &r);
 }
 
@@ -394,6 +407,18 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
         if (*r == 1) {
 
             destroy_signal_memory(p0, p1);
+
+            d = 1;
+        }
+    }
+
+    if (d == 0) {
+
+        compare_arrays(p2, p3, (void*) &INTERNALS_MEMORY_ABSTRACTION, (void*) &INTERNALS_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (*r == 1) {
+
+            destroy_internals_memory(p0, p1);
 
             d = 1;
         }
