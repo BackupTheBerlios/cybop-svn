@@ -25,8 +25,6 @@
 #ifndef X_WINDOWS_SOURCE
 #define X_WINDOWS_SOURCE
 
-//?? #include <stdio.h>
-//?? #include <stdlib.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 
@@ -35,7 +33,7 @@
  *
  * It keeps data which are necessary to control an x windows.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-17 17:16:37 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-18 16:40:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct x_windows {
@@ -86,16 +84,23 @@ struct x_windows {
     char str_menubar[100];
     
     /** The foreground. */
-    unsigned long foreground;
+    /*??unsigned long*/ double foreground;
     
     /** The background. */
-    unsigned long background;
+    /*??unsigned long*/ double background;
     
     /** The menu foreground. */
-    unsigned long menu_foreground;
+    /*??unsigned long*/ double menu_foreground;
     
     /** The temporary variables. */
-//??    int i, k, menu_eintrage_ende = 0, count_menu, count_item, indent_x, indent_y, indent_menu_item_x;
+    int i;
+    int k;
+    int menu_eintrage_ende;
+    int count_menu;
+    int count_item;
+    int indent_x;
+    int indent_y;
+    int indent_menu_item_x;
     
     /** The color map. */
     Colormap cmap;

@@ -42,7 +42,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.10 $ $Date: 2003-12-17 17:16:36 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-12-18 16:40:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -93,7 +93,8 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
         while (TRUE_VALUE) {
     
             if (f == 0) {
-    
+
+                // Check for x windows events and send them as cyboi signals.
                 if (i->x_windows_flag == 1) {
 
                     receive_x_windows_input(i->x_windows);
@@ -116,7 +117,7 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
                 } else {
             
                     log_message((void*) &INFO_LOG_LEVEL, "2");
-                    handle_operation_signal(s, a, p1, p2, (void*) &f);
+                    handle_operation_signal(s, a, p1, p2, p3, (void*) &f);
                 }
     
             } else {

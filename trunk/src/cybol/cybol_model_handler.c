@@ -25,14 +25,14 @@
 #ifndef CYBOL_MODEL_HANDLER_SOURCE
 #define CYBOL_MODEL_HANDLER_SOURCE
 
-//?? #include <libxml.h>
+#include <stdio.h>
 
 /**
  * This is the cybol model handler.
  *
  * It can read and write CYBOL source files.
  *
- * @version $Revision: 1.2 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-12-18 16:40:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -443,6 +443,104 @@ void read_child_attribute(void* p0, void* p1, void* p2) {
 /*??
 void write_child_attribute(void* p0, void* p1, void* p2) {
 }
+
+/*?? Karsten Tellhelm
+
+int child_schluesselwort(char* wort) {
+
+    int modus=0; //normalmodus
+
+  if (strcmp(wort,"name=")==0) modus=1;
+	if (strcmp(wort,"child_ab straction=")==0) modus=2;
+	if (strcmp(wort,"child_model=")==0) modus=3;
+	if (strcmp(wort,"position_abstraction=")==0) modus=4;
+	if (strcmp(wort,"position_model=")==0) modus=5;
+	if (strcmp(wort,"logics_abstraction=")==0) modus=6;
+	if (strcmp(wort,"input_0=")==0) modus=7;
+	if (strcmp(wort,"output_0=")==0) modus=8;
+	if (strcmp(wort,"input_1=")==0) modus=9;
+	if (strcmp(wort,"input_abstraction=")==0) modus=10;
+	if (strcmp(wort,"input_model=")==0) modus=11;
+	if (strcmp(wort,"logics_model=")==0) modus=12;
+	return modus;
+}
+
+int schluesselwort(char* wort) {
+    
+	int modus=0; //normalmodus
+	if (strcmp(wort,"<!--")==0) modus=1; //Kommentaranfang ... innerhalb model berreich modus 4
+	if ((strcmp(wort,"!-->")==0) || (strcmp(wort,"/-->")==0)) modus=2; //Kommentarende ...innerhalb model bereich 5
+	if ((strcmp(wort,"<model>")==0) || (strcmp(wort,"/>")==0)) modus=3;
+	if (strcmp(wort,"<child")==0) modus =6;
+	if (strcmp(wort,"</model>")==0) modus =7;
+	return modus;
+}
+
+void einlesen(FILE *fp) {
+    
+	char zeichen;
+  char* wort= (char*) malloc(2000);
+	int parsemodus = 0, childmodus=0,string_open=0;
+	while (zeichen != EOF)
+	{
+		zeichen = fgetc(fp);
+		//kommentare ausserhalb model bereich abfangen ... eigentlich unsinnig, aber vermeidung von interpretation auskommentierter model bereiche
+		if (parsemodus == 1) {if (schluesselwort(wort) == 2) parsemodus=0; }
+		else if (parsemodus<3) parsemodus = schluesselwort(wort);
+		//kommentare innerhalb model breich abfangen
+		if (parsemodus > 2) {
+			if ((schluesselwort(wort) == 1) && (parsemodus == 3)) parsemodus=4;
+			if ((parsemodus == 4) && (schluesselwort(wort) == 2)) parsemodus=5;
+			if ((parsemodus == 6) && (schluesselwort(wort) == 3)) parsemodus=3;
+			if (schluesselwort(wort) > 5) parsemodus = schluesselwort(wort);
+
+//**************************************der rest genauso**********************************************
+
+                        if (parsemodus == 6) {
+                                if ((zeichen == 34)&& (string_open)) {
+	//++++++++++++++++++CHILD+++++++++++++++++++++++++
+if ((parsemodus == 6) && (string_open)) printf(wort);  
+//	if ((parsemodus == 6) && (string_open)) cout << wort << "Childsektion:  " << childmodus<< "\n";
+	//++++++++++++++++++++++++++++++++++++++++++++++++
+				}
+				if ((string_open==0) && (child_schluesselwort(wort)>0)) childmodus=child_schluesselwort(wort);
+			}
+
+//*******************************************************************************************
+		}
+//cout << wort << "\n";
+//cout << string_open << "   " << childmodus << "   " <<parsemodus;
+		if ((zeichen != EOF))
+		{
+			if ((zeichen == 10) || (zeichen == 13) || (zeichen == 32) || (zeichen == 34)) wort[0]='\0';
+			else wort[strlen(wort)] = zeichen;
+			if ((zeichen==34) && (parsemodus>5)) {
+				if (string_open==1) string_open=0;
+				else string_open=1;
+			}
+		}
+	}
+        
+  free(wort);
+}
+
+int main(char* path) {
+    
+    path ="/home/cybop/lib/res_medicinae/statics/statics.cybol";
+    FILE * fp;
+    
+    fp = fopen(path, "r");
+    if (fp == NULL) {
+    printf("Fehler beim ?ffnen der Datei");
+    exit (1);
+    }
+    
+    einlesen(fp);
+    
+    fclose (fp);
+    //return EXIT_SUCCESS;
+}
+*/
 
 /* CYBOL_MODEL_HANDLER_SOURCE */
 #endif

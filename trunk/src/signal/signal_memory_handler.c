@@ -50,7 +50,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.10 $ $Date: 2003-12-17 17:16:36 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-12-18 16:40:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,8 +71,8 @@ static const char* TUI_LANGUAGE = "tui";
 /** The mouse language. */
 static const char* MOUSE_LANGUAGE = "mouse";
 
-/** The graphical user interface (gui) language. */
-static const char* GUI_LANGUAGE = "gui";
+/** The x windows language. */
+static const char* X_WINDOWS_LANGUAGE = "x_windows";
 
 /** The socket language. */
 static const char* SOCKET_LANGUAGE = "socket";
@@ -422,9 +422,10 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
  * @param p1 the abstraction
  * @param p2 the statics
  * @param p3 the dynamics
- * @param p4 the shutdown flag
+ * @param p4 the internals
+ * @param p5 the shutdown flag
  */
-void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Handle operation signal.");
 
@@ -502,9 +503,9 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 void* l = get_map_element_with_name(io, "language");
 
-                if (strcmp(l, GUI_LANGUAGE) == 0) {
+                if (strcmp(l, X_WINDOWS_LANGUAGE) == 0) {
                     
-                    send_x_windows_output(get_map_element_with_name(io, "addressee"), get_map_element_with_name(io, "message"));
+                    send_x_windows_output(get_map_element_with_name(io, "addressee"), get_map_element_with_name(io, "message"), p4);
         
                 } else if (strcmp(l, TUI_LANGUAGE) == 0) {
 
@@ -515,7 +516,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
             } else if (strcmp(a, EXIT_LIFECYCLE_STEP) == 0) {
         
                 // Set shutdown flag.
-                int* f = (int*) p4;
+                int* f = (int*) p5;
                 *f = 1;
             }
 
