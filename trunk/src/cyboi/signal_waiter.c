@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.35 $ $Date: 2005-03-22 00:24:09 $ $Author: christian $
+ * @version $Revision: 1.36 $ $Date: 2005-03-22 01:13:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -48,7 +48,7 @@ void wait(void* p0) {
     // Activate input output mechanisms for signal reception.
     activate_input_output(p0);
 
-    //dbug for rolf Holzmüller
+    //?? TODO: Debugging stuff from Rolf Holzmueller.
     void** socket_flag = POINTER_NULL_POINTER;
     get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_ARRAY);
 
@@ -165,7 +165,7 @@ void wait(void* p0) {
                                                                     fprintf(stderr, "wait p: %i\n", *((int*) *p));
                                                                     fprintf(stderr, "wait id: %i\n", *((int*) *id));
                                                                     fprintf(stderr, "wait knowledge model: %s\n", "");
-                                                                    test_knowledge_model(*k, *kc, 0);
+//??                                                                    test_knowledge_model(*k, *kc, 0);
 
                                                                     // CAUTION! Do NOT destroy signal here!
                                                                     // Signals are stored in the logic knowledge tree which gets created

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-03-21 01:26:59 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-03-22 01:13:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,7 +34,6 @@
 #include "../global/variables.c"
 #include "../socket/unix_socket.c"
 #include "../web/tcp_socket_server.c"
-#include "../x_windows/x_windows_handler.c"
 
 /**
  * Starts up the input output.

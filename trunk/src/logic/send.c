@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2005-03-22 00:24:09 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2005-03-22 01:13:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -40,10 +40,6 @@
 #include "../socket/unix_socket.c"
 #include "../translator/translator.c"
 #include "../web/socket_number_accessor.c"
-
-//?? TEMPORARY TESTING
-#include "../x_windows/x_windows.c"
-#include "../x_windows/x_windows_handler.c"
 
 /**
  * Sends a message in a special language.

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-03-22 00:24:09 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-03-22 01:13:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -58,16 +58,12 @@ void startup_x_window_system(void* p0, const void* p1, const void* p2, const voi
 
     // The display, which is a subsumption of
     // xserver, screens, hardware (input devices etc.).
-    struct _XDisplay* d = NULL_POINTER;
+    struct _XDisplay** d = NULL_POINTER;
 
     // Get display.
     get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_ARRAY);
 
-    if (d != NULL_POINTER) {
-
-        log_message_debug("WARNING: Could not startup x window system. The x window system is already running.");
-
-    } else {
+    if (*d == NULL_POINTER) {
 
         // CAUTION!
         // The X window system types Window, Colormap, Font are simple integers!
@@ -123,25 +119,26 @@ void startup_x_window_system(void* p0, const void* p1, const void* p2, const voi
 
         // Initialise x window system internals.
         dn = "";
-        d = XOpenDisplay(dn);
+        *d = XOpenDisplay(dn);
         *sn = 0;
-        s = (void*) XScreenOfDisplay(d, *sn);
-        *bg = XWhitePixel(d, *sn);
-        *fg = XBlackPixel(d, *sn);
+        s = XScreenOfDisplay(*d, *sn);
+        *bg = XWhitePixel(*d, *sn);
+        *fg = XBlackPixel(*d, *sn);
         *r = XRootWindowOfScreen(s);
-        *cm = XDefaultColormap(d, *sn);
+        *cm = XDefaultColormap(*d, *sn);
         *vm = 0;
         v = NULL_POINTER;
-        gc = (void*) XCreateGC(d, *r, *vm, v);
-        XSetBackground(d, gc, *bg);
-        XSetForeground(d, gc, *fg);
+        gc = XCreateGC(*d, *r, *vm, v);
+        XSetBackground(*d, gc, *bg);
+        XSetForeground(*d, gc, *fg);
 //??        fn = "Helvetica";
-//??        *f = XLoadFont(d, fn);
-//??        XSetFont(d, gc, f);
+//??        *f = XLoadFont(*d, fn);
+//??        XSetFont(*d, gc, f);
 
         // Set x window system internals.
         set_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL, (void*) &dn, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+        // CAUTION! Do NOT use reference for d, because it is of type (struct _XDisplay**)!
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) d, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
         set_array_elements(p0, (void*) X_WINDOW_SYSTEM_SCREEN_NUMBER_INTERNAL, (void*) &sn, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
         set_array_elements(p0, (void*) X_WINDOW_SYSTEM_SCREEN_INTERNAL, (void*) &s, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
         set_array_elements(p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL, (void*) &bg, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
@@ -223,18 +220,17 @@ void startup_x_window_system(void* p0, const void* p1, const void* p2, const voi
         XWindowAttributes window_attributes;
 
         // The size hint.
-        XSizeHints hint;
-        hint.x = 100;
-        hint.y = 100;
-        hint.width = 400;
-        hint.height = 300;
-        hint.flags = PPosition | PSize;
+        XSizeHints sh;
+        sh.x = 100;
+        sh.y = 100;
+        sh.width = 400;
+        sh.height = 300;
+        sh.flags = PPosition | PSize;
 
         // Create window.
-        int w = XCreateSimpleWindow(d, *r, hint.x, hint.y,
-            hint.width, hint.height, 5, *fg, *bg);
+        int w = XCreateSimpleWindow(*d, *r, sh.x, sh.y, sh.width, sh.height, 5, *fg, *bg);
 
-        XSetStandardProperties(d, w, "Application", "Icon", None, NULL, 0, (void*) &(hint));
+        XSetStandardProperties(*d, w, "Application", "Icon", None, NULL, 0, (void*) &sh);
 
 /*??
         char* test = "test string";
@@ -250,16 +246,20 @@ void startup_x_window_system(void* p0, const void* p1, const void* p2, const voi
         // This procedure changes the order of all sister windows,
         // so that the given window lies on top.
         // Afterwards, all windows are displayed on the screen.
-        XMapRaised(d, w);
+        XMapRaised(*d, w);
 
         //?? TODO: From xlib tutorial.
         //?? Remove as soon as event loop (MappingNotify) functions!
-        XFlushGC(d, gc);
+        XFlushGC(*d, gc);
 
         sleep(5);
 
         // Free memory.
-        XDestroyWindow(d, w);
+        XDestroyWindow(*d, w);
+
+    } else {
+
+        log_message_debug("WARNING: Could not startup x window system. The x window system is already running.");
     }
 }
 

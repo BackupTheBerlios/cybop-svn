@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2005-03-20 01:43:33 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2005-03-22 01:13:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -48,15 +48,19 @@
 #include "../logic/shutdown.c"
 #include "../logic/startup.c"
 #include "../test/test.c"
-#include "../x_windows/x_windows_handler.c"
 
+//
+// Forward declarations.
+//
 
 void loop( const void* param, const int* param_count,
            const void* priority, const void* signal_id, void* shutdownflag,
            void* internal );
+
 void selection( const void* param, const int* param_count,
            const void* priority, const void* signal_id, void* shutdownflag,
            void* internal );
+
 void handle_signal(const void* p0, const void* p1, const void* p2, const void* p3,
     const void* p4, const void* p5,const  void* p6, const void* p7, void* p8, void* p9, void* p10);
 
