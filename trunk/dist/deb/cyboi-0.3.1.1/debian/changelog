@@ -1,6 +1,7 @@
 cyboi (0.3.1.1) unstable; urgency=low
 
   * marked /etc/cyboi/config.cybol as conffile
+  * added manpage cyboi.1.gz
 
  -- Christian Heller <christian.heller@tuxtax.de>  Mon,  6 Dec 2004 15:00:00 +0100
 
