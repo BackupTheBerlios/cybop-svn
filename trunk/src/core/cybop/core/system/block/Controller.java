@@ -51,7 +51,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.11 $ $Date: 2003-04-25 11:23:56 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
@@ -90,35 +90,35 @@ public class Controller extends Block {
     public static final String SOCKET_TRANSLATOR = new String("socket_translator");
 
     //
-    // Default children.
+    // Children category names.
     //
 
-    /** The default processor. */
-    public String defaultProcessor;
+    /** The processor category. */
+    public static final String PROCESSOR_CATEGORY = new String("processor_category");
 
-    /** The default domain model. */
-    public String defaultDomainModel;
+    /** The domain model category. */
+    public static final String DOMAIN_MODEL_CATEGORY = new String("domain_model_category");
 
-    /** The default system user interface. */
-    public String defaultSystemUserInterface;
+    /** The system user interface category. */
+    public static final String SYSTEM_USER_INTERFACE_CATEGORY = new String("system_user_interface_category");
 
-    /** The default mouse model. */
-    public String defaultMouseModel;
+    /** The mouse model category. */
+    public static final String MOUSE_MODEL_CATEGORY = new String("mouse_model_category");
 
-    /** The default system information user interface. */
-    public String defaultSystemInformationUserInterface;
+    /** The system information user interface category. */
+    public static final String SYSTEM_INFORMATION_USER_INTERFACE_CATEGORY = new String("system_information_user_interface_category");
 
-    /** The default system information user interface translator. */
-    public String defaultSystemInformationUserInterfaceTranslator;
+    /** The system information user interface translator category. */
+    public static final String SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR_CATEGORY = new String("system_information_user_interface_translator_category");
 
-    /** The default tui translator. */
-    public String defaultTuiTranslator;
+    /** The tui translator category. */
+    public static final String TUI_TRANSLATOR_CATEGORY = new String("tui_translator_category");
 
-    /** The default gui translator. */
-    public String defaultGuiTranslator;
+    /** The gui translator category. */
+    public static final String GUI_TRANSLATOR_CATEGORY = new String("gui_translator_category");
 
-    /** The default socket translator. */
-    public String defaultSocketTranslator;
+    /** The socket translator category. */
+    public static final String SOCKET_TRANSLATOR_CATEGORY = new String("socket_translator_category");
 
     //
     // Actions.
@@ -287,95 +287,95 @@ public class Controller extends Block {
     public static final String SET_TAB_PAGE_DISPLAY_SIGNAL_ID = new String("set_tab_page_display");
 
     //
-    // Default children.
+    // Default children categories.
     //
 
     /**
-     * Returns the default processor.
+     * Returns the default processor category.
      *
-     * @return the default processor
+     * @return the default processor category
      */
-    public String getDefaultProcessor() {
+    public Item getDefaultProcessorCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default domain model.
+     * Returns the default domain model category.
      *
-     * @return the default domain model
+     * @return the default domain model category
      */
-    public String getDefaultDomainModel() {
+    public Item getDefaultDomainModelCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default system user interface.
+     * Returns the default system user interface category.
      *
-     * @return the default system user interface
+     * @return the default system user interface category
      */
-    public String getDefaultSystemUserInterface() {
+    public Item getDefaultSystemUserInterfaceCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default mouse model.
+     * Returns the default mouse model category.
      *
-     * @return the default mouse model
+     * @return the default mouse model category
      */
-    public String getDefaultMouseModel() {
+    public Item getDefaultMouseModelCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default system information user interface.
+     * Returns the default system information user interface category.
      *
-     * @return the default system information user interface
+     * @return the default system information user interface category
      */
-    public String getDefaultSystemInformationUserInterface() {
+    public Item getDefaultSystemInformationUserInterfaceCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default system information user interface translator.
+     * Returns the default system information user interface translator category.
      *
-     * @return the default system information user interface translator
+     * @return the default system information user interface translator category
      */
-    public String getDefaultSystemInformationUserInterfaceTranslator() {
+    public Item getDefaultSystemInformationUserInterfaceTranslatorCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default tui translator.
+     * Returns the default tui translator category.
      *
-     * @return the default tui translator
+     * @return the default tui translator category
      */
-    public String getDefaultTuiTranslator() {
+    public Item getDefaultTuiTranslatorCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default gui translator.
+     * Returns the default gui translator category.
      *
-     * @return the default gui translator
+     * @return the default gui translator category
      */
-    public String getDefaultGuiTranslator() {
+    public Item getDefaultGuiTranslatorCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default socket translator.
+     * Returns the default socket translator category.
      *
-     * @return the default socket translator
+     * @return the default socket translator category
      */
-    public String getDefaultSocketTranslator() {
+    public Item getDefaultSocketTranslatorCategory() {
 
         return null;
     }
@@ -397,15 +397,15 @@ public class Controller extends Block {
 
         if (c != null) {
 
-            this.defaultProcessor = (String) c.getChildItem(Controller.PROCESSOR, getDefaultProcessor());
-            this.defaultDomainModel = (String) c.getChildItem(Controller.DOMAIN_MODEL, getDefaultDomainModel());
-            this.defaultSystemUserInterface = (String) c.getChildItem(Controller.SYSTEM_USER_INTERFACE, getDefaultSystemUserInterface());
-            this.defaultMouseModel = (String) c.getChildItem(Controller.MOUSE_MODEL, getDefaultMouseModel());
-            this.defaultSystemInformationUserInterface = (String) c.getChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE, getDefaultSystemInformationUserInterface());
-            this.defaultSystemInformationUserInterfaceTranslator = (String) c.getChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR, getDefaultSystemInformationUserInterfaceTranslator());
-            this.defaultTuiTranslator = (String) c.getChildItem(Controller.TUI_TRANSLATOR, getDefaultTuiTranslator());
-            this.defaultGuiTranslator = (String) c.getChildItem(Controller.GUI_TRANSLATOR, getDefaultGuiTranslator());
-            this.defaultSocketTranslator = (String) c.getChildItem(Controller.SOCKET_TRANSLATOR, getDefaultSocketTranslator());
+            setChildCategory(Controller.PROCESSOR_CATEGORY, c.getChildItem(Controller.PROCESSOR_CATEGORY, getDefaultProcessorCategory()));
+            setChildCategory(Controller.DOMAIN_MODEL_CATEGORY, c.getChildItem(Controller.DOMAIN_MODEL_CATEGORY, getDefaultDomainModelCategory()));
+            setChildCategory(Controller.SYSTEM_USER_INTERFACE_CATEGORY, c.getChildItem(Controller.SYSTEM_USER_INTERFACE_CATEGORY, getDefaultSystemUserInterfaceCategory()));
+            setChildCategory(Controller.MOUSE_MODEL_CATEGORY, c.getChildItem(Controller.MOUSE_MODEL_CATEGORY, getDefaultMouseModelCategory()));
+            setChildCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_CATEGORY, c.getChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE_CATEGORY, getDefaultSystemInformationUserInterfaceCategory()));
+            setChildCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR_CATEGORY, c.getChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR_CATEGORY, getDefaultSystemInformationUserInterfaceTranslatorCategory()));
+            setChildCategory(Controller.TUI_TRANSLATOR_CATEGORY, c.getChildItem(Controller.TUI_TRANSLATOR_CATEGORY, getDefaultTuiTranslatorCategory()));
+            setChildCategory(Controller.GUI_TRANSLATOR_CATEGORY, c.getChildItem(Controller.GUI_TRANSLATOR_CATEGORY, getDefaultGuiTranslatorCategory()));
+            setChildCategory(Controller.SOCKET_TRANSLATOR_CATEGORY, c.getChildItem(Controller.SOCKET_TRANSLATOR_CATEGORY, getDefaultSocketTranslatorCategory()));
 
         } else {
 
@@ -424,15 +424,32 @@ public class Controller extends Block {
 
         if (c != null) {
 
-            c.setChildItem(Controller.SOCKET_TRANSLATOR, this.defaultSocketTranslator);
-            c.setChildItem(Controller.GUI_TRANSLATOR, this.defaultGuiTranslator);
-            c.setChildItem(Controller.TUI_TRANSLATOR, this.defaultTuiTranslator);
-            c.setChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR, this.defaultSystemInformationUserInterfaceTranslator);
-            c.setChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE, this.defaultSystemInformationUserInterface);
-            c.setChildItem(Controller.MOUSE_MODEL, this.defaultMouseModel);
-            c.setChildItem(Controller.SYSTEM_USER_INTERFACE, this.defaultSystemUserInterface);
-            c.setChildItem(Controller.DOMAIN_MODEL, this.defaultDomainModel);
-            c.setChildItem(Controller.PROCESSOR, this.defaultProcessor);
+            c.setChildItem(Controller.SOCKET_TRANSLATOR_CATEGORY, getChildCategory(Controller.SOCKET_TRANSLATOR_CATEGORY));
+            removeChildCategory(Controller.SOCKET_TRANSLATOR_CATEGORY);
+
+            c.setChildItem(Controller.GUI_TRANSLATOR_CATEGORY, getChildCategory(Controller.GUI_TRANSLATOR_CATEGORY));
+            removeChildCategory(Controller.GUI_TRANSLATOR_CATEGORY);
+
+            c.setChildItem(Controller.TUI_TRANSLATOR_CATEGORY, getChildCategory(Controller.TUI_TRANSLATOR_CATEGORY));
+            removeChildCategory(Controller.TUI_TRANSLATOR_CATEGORY);
+
+            c.setChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR_CATEGORY, getChildCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR_CATEGORY));
+            removeChildCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR_CATEGORY);
+
+            c.setChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE_CATEGORY, getChildCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_CATEGORY));
+            removeChildCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_CATEGORY);
+
+            c.setChildItem(Controller.MOUSE_MODEL_CATEGORY, getChildCategory(Controller.MOUSE_MODEL_CATEGORY));
+            removeChildCategory(Controller.MOUSE_MODEL_CATEGORY);
+
+            c.setChildItem(Controller.SYSTEM_USER_INTERFACE_CATEGORY, getChildCategory(Controller.SYSTEM_USER_INTERFACE_CATEGORY));
+            removeChildCategory(Controller.SYSTEM_USER_INTERFACE_CATEGORY);
+
+            c.setChildItem(Controller.DOMAIN_MODEL_CATEGORY, getChildCategory(Controller.DOMAIN_MODEL_CATEGORY));
+            removeChildCategory(Controller.DOMAIN_MODEL_CATEGORY);
+
+            c.setChildItem(Controller.PROCESSOR_CATEGORY, getChildCategory(Controller.PROCESSOR_CATEGORY));
+            removeChildCategory(Controller.PROCESSOR_CATEGORY);
 
         } else {
 
@@ -453,15 +470,15 @@ public class Controller extends Block {
 
         super.initialize();
 
-        setChildItem(Controller.PROCESSOR, createComponent(this.defaultProcessor));
-        setChildItem(Controller.DOMAIN_MODEL, createComponent(this.defaultDomainModel));
-        setChildItem(Controller.SYSTEM_USER_INTERFACE, createComponent(this.defaultSystemUserInterface));
-        setChildItem(Controller.MOUSE_MODEL, createComponent(this.defaultMouseModel));
-        setChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE, createComponent(this.defaultSystemInformationUserInterface));
-        setChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR, createComponent(this.defaultSystemInformationUserInterfaceTranslator));
-        setChildItem(Controller.TUI_TRANSLATOR, createComponent(this.defaultTuiTranslator));
-        setChildItem(Controller.GUI_TRANSLATOR, createComponent(this.defaultGuiTranslator));
-        setChildItem(Controller.SOCKET_TRANSLATOR, createComponent(this.defaultSocketTranslator));
+        setChildItem(Controller.PROCESSOR, createComponent((String) getChildCategory(Controller.PROCESSOR_CATEGORY)));
+        setChildItem(Controller.DOMAIN_MODEL, createComponent((String) getChildCategory(Controller.DOMAIN_MODEL_CATEGORY)));
+        setChildItem(Controller.SYSTEM_USER_INTERFACE, createComponent((String) getChildCategory(Controller.SYSTEM_USER_INTERFACE_CATEGORY)));
+        setChildItem(Controller.MOUSE_MODEL, createComponent((String) getChildCategory(Controller.MOUSE_MODEL_CATEGORY)));
+        setChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE, createComponent((String) getChildCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_CATEGORY)));
+        setChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR, createComponent((String) getChildCategory(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR_CATEGORY)));
+        setChildItem(Controller.TUI_TRANSLATOR, createComponent((String) getChildCategory(Controller.TUI_TRANSLATOR_CATEGORY)));
+        setChildItem(Controller.GUI_TRANSLATOR, createComponent((String) getChildCategory(Controller.GUI_TRANSLATOR_CATEGORY)));
+        setChildItem(Controller.SOCKET_TRANSLATOR, createComponent((String) getChildCategory(Controller.SOCKET_TRANSLATOR_CATEGORY)));
     }
 
     /**
@@ -469,41 +486,41 @@ public class Controller extends Block {
      */
     public void finalizz() throws Exception {
 
-        SocketTranslator socketTranslator = (SocketTranslator) getChildItem(Controller.SOCKET_TRANSLATOR);
+        Item socketTranslator = getChildItem(Controller.SOCKET_TRANSLATOR);
         removeChildItem(Controller.SOCKET_TRANSLATOR);
-        destroyComponent(socketTranslator);
+        destroyComponent((SocketTranslator) socketTranslator);
 
         Item guiTranslator = getChildItem(Controller.GUI_TRANSLATOR);
         removeChildItem(Controller.GUI_TRANSLATOR);
         destroyComponent((Component) guiTranslator);
 
-        TuiTranslator tuiTranslator = (TuiTranslator) getChildItem(Controller.TUI_TRANSLATOR);
+        Item tuiTranslator = (TuiTranslator) getChildItem(Controller.TUI_TRANSLATOR);
         removeChildItem(Controller.TUI_TRANSLATOR);
-        destroyComponent(tuiTranslator);
+        destroyComponent((TuiTranslator) tuiTranslator);
 
-        SystemInformationUserInterfaceTranslator systemInformationUserInterfaceTranslator = (SystemInformationUserInterfaceTranslator) getChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);
+        Item systemInformationUserInterfaceTranslator = getChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);
         removeChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);
-        destroyComponent(systemInformationUserInterfaceTranslator);
+        destroyComponent((SystemInformationUserInterfaceTranslator) systemInformationUserInterfaceTranslator);
 
-        SystemInformationUserInterface systemInformationUserInterface = (SystemInformationUserInterface) getChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE);
+        Item systemInformationUserInterface = getChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE);
         removeChildItem(Controller.SYSTEM_INFORMATION_USER_INTERFACE);
-        destroyComponent(systemInformationUserInterface);
+        destroyComponent((SystemInformationUserInterface) systemInformationUserInterface);
 
-        MouseModel mouseModel = (MouseModel) getChildItem(Controller.MOUSE_MODEL);
+        Item mouseModel = getChildItem(Controller.MOUSE_MODEL);
         removeChildItem(Controller.MOUSE_MODEL);
-        destroyChildItem(mouseModel);
+        destroyChildItem((MouseModel) mouseModel);
 
-        SystemUserInterface systemUserInterface = (SystemUserInterface) getChildItem(Controller.SYSTEM_USER_INTERFACE);
+        Item systemUserInterface = getChildItem(Controller.SYSTEM_USER_INTERFACE);
         removeChildItem(Controller.SYSTEM_USER_INTERFACE);
-        destroyChildItem(systemUserInterface);
+        destroyChildItem((SystemUserInterface) systemUserInterface);
 
-        DomainModel domainModel = (DomainModel) getChildItem(Controller.DOMAIN_MODEL);
+        Item domainModel = getChildItem(Controller.DOMAIN_MODEL);
         removeChildItem(Controller.DOMAIN_MODEL);
-        destroyChildItem(domainModel);
+        destroyChildItem((DomainModel) domainModel);
 
-        Processor processor = (Processor) getChildItem(Controller.PROCESSOR);
+        Item processor = getChildItem(Controller.PROCESSOR);
         removeChildItem(Controller.PROCESSOR);
-        destroyComponent(processor);
+        destroyComponent((Processor) processor);
 
         super.finalizz();
     }

@@ -29,9 +29,9 @@ package cybop.core.basic;
  *
  * A quality describes some real world item in an abstract way.
  *
- * @version $Revision: 1.1 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Quality extends Category {
+public class Quality extends Item /*??Category*/ {
 }
 

@@ -49,7 +49,7 @@ import cybop.core.system.chain.*;
  * Child systems can be integrated into the portal system's Frame as Frame,
  * InternalFrame or TabPage.
  *
- * @version $Revision: 1.6 $ $Date: 2003-04-25 11:23:56 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Portal extends Family {
@@ -59,11 +59,11 @@ public class Portal extends Family {
     //
 
     /*
-     * Returns the default configuration category.
+     * Returns the default configuration location category.
      *
-     * @return the default configuration category
+     * @return the default configuration location category
      */
-    public String getDefaultConfigurationCategory() {
+    public Item getDefaultConfigurationLocationCategory() {
 
         return new String("cybop.core.system.chain.Configuration");
     }
@@ -73,7 +73,7 @@ public class Portal extends Family {
      *
      * @return the default name category
      */
-    public String getDefaultNameCategory() {
+    public Item getDefaultNameCategory() {
 
         return new String("Res Medicinae Portal");
     }
@@ -83,7 +83,7 @@ public class Portal extends Family {
      *
      * @return the default version category
      */
-    public String getDefaultVersionCategory() {
+    public Item getDefaultVersionCategory() {
 
         return new String("0.0.6.0");
     }
@@ -93,7 +93,7 @@ public class Portal extends Family {
      *
      * @return the default date category
      */
-    public String getDefaultDateCategory() {
+    public Item getDefaultDateCategory() {
 
         return new String("06.04.2003");
     }
@@ -103,7 +103,7 @@ public class Portal extends Family {
      *
      * @return the default authors category
      */
-    public String getDefaultAuthorsCategory() {
+    public Item getDefaultAuthorsCategory() {
 
         return new String("Christian Heller\n<christian.heller@tuxtax.de>\n- initiated project\n- maintains ResMedLib framework\n- created Portal module\n");
     }
@@ -113,7 +113,7 @@ public class Portal extends Family {
      *
      * @return the default helpers category
      */
-    public String getDefaultHelpersCategory() {
+    public Item getDefaultHelpersCategory() {
 
         return new String("Karsten Hilbert\n<karsten.hilbert@gmx.net>\n- maintains the Analysis Document\n- helps out in many things\n\n"
                 + "Michael Simon\n<michael.simon@gmx.net>\n- created ANT build.xml files\n- created .bat build/start files\n- prepared IzPack installer\n\n"
@@ -129,7 +129,7 @@ public class Portal extends Family {
      *
      * @return the default inspirations category
      */
-    public String getDefaultInspirationsCategory() {
+    public Item getDefaultInspirationsCategory() {
 
         return new String("Scope\nhttp://www.sourceforge.net/projects/scope\n- Hierarchical Model View Controller (HMVC) Design Pattern\n\n"
                 + "Apache-Jakarta-Framework\nhttp://jakarta.apache.org\nComponent Lifecycle\n\n"
@@ -141,7 +141,7 @@ public class Portal extends Family {
      *
      * @return the default controller category
      */
-    public String getDefaultControllerCategory() {
+    public Item getDefaultControllerCategory() {
 
         return new String("cybop.core.system.block.controller.PortalController");
     }
@@ -151,7 +151,7 @@ public class Portal extends Family {
      *
      * @return the default user category
      */
-    public String getDefaultUserCategory() {
+    public Item getDefaultUserCategory() {
 
         return new String("cybop.core.system.system.User");
     }

@@ -60,7 +60,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.9 $ $Date: 2003-04-25 11:23:56 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends Block implements 
@@ -244,7 +244,7 @@ public class System extends Block implements
      *
      * @return the default controller category
      */
-    public String getDefaultControllerCategory() {
+    public Item getDefaultControllerCategory() {
 
         return null;
     }
@@ -254,7 +254,7 @@ public class System extends Block implements
      *
      * @return the default socket address category
      */
-    public String getDefaultSocketAddressCategory() {
+    public Item getDefaultSocketAddressCategory() {
 
         return null;
     }
@@ -264,7 +264,7 @@ public class System extends Block implements
      *
      * @return the default internet protocol 6 address category
      */
-    public String getDefaultIp6AddressCategory() {
+    public Item getDefaultIp6AddressCategory() {
 
         return null;
     }
@@ -274,7 +274,7 @@ public class System extends Block implements
      *
      * @return the default internet protocol 4 address category
      */
-    public String getDefaultIp4AddressCategory() {
+    public Item getDefaultIp4AddressCategory() {
 
         return null;
     }
@@ -284,7 +284,7 @@ public class System extends Block implements
      *
      * @return the default host name category
      */
-    public String getDefaultHostNameCategory() {
+    public Item getDefaultHostNameCategory() {
 
         return null;
     }
@@ -294,7 +294,7 @@ public class System extends Block implements
      *
      * @return the default domain name category
      */
-    public String getDefaultDomainNameCategory() {
+    public Item getDefaultDomainNameCategory() {
 
         return null;
     }
@@ -304,7 +304,7 @@ public class System extends Block implements
      *
      * @return the default communication partners count category
      */
-    public Integer getDefaultCommunicationPartnersCountCategory() {
+    public Item getDefaultCommunicationPartnersCountCategory() {
 
         return new Integer(0);
     }
@@ -314,7 +314,7 @@ public class System extends Block implements
      *
      * @return the default communication partner category
      */
-    public String getDefaultCommunicationPartnerCategory() {
+    public Item getDefaultCommunicationPartnerCategory() {
 
         return null;
     }
@@ -324,7 +324,7 @@ public class System extends Block implements
      *
      * @return the default user category
      */
-    public String getDefaultUserCategory() {
+    public Item getDefaultUserCategory() {
 
         return null;
     }
@@ -496,33 +496,33 @@ public class System extends Block implements
         }
 */
 
-        User user = (User) getChildItem(System.USER);
+        Item user = getChildItem(System.USER);
         removeChildItem(System.USER);
-        destroyComponent(user);
+        destroyComponent((User) user);
 
-        String domainName = (String) getChildItem(System.DOMAIN_NAME);
+        Item domainName = getChildItem(System.DOMAIN_NAME);
         removeChildItem(System.DOMAIN_NAME);
-//??            destroyDomainName(domainName);
+//??            destroyDomainName((String) domainName);
 
-        String hostName = (String) getChildItem(System.HOST_NAME);
+        Item hostName = getChildItem(System.HOST_NAME);
         removeChildItem(System.HOST_NAME);
-//??            destroyHostName(hostName);
+//??            destroyHostName((String) hostName);
 
-        Ip4Address ip4Address = (Ip4Address) getChildItem(System.IP4_ADDRESS);
+        Item ip4Address = getChildItem(System.IP4_ADDRESS);
         removeChildItem(System.IP4_ADDRESS);
-        destroyChildItem(ip4Address);
+        destroyChildItem((Ip4Address) ip4Address);
 
-        Ip6Address ip6Address = (Ip6Address) getChildItem(System.IP6_ADDRESS);
+        Item ip6Address = getChildItem(System.IP6_ADDRESS);
         removeChildItem(System.IP6_ADDRESS);
-        destroyChildItem(ip6Address);
+        destroyChildItem((Ip6Address) ip6Address);
 
-        SocketAddress socketAddress = (SocketAddress) getChildItem(System.SOCKET_ADDRESS);
+        Item socketAddress = getChildItem(System.SOCKET_ADDRESS);
         removeChildItem(System.SOCKET_ADDRESS);
-        destroyChildItem(socketAddress);
+        destroyChildItem((SocketAddress) socketAddress);
 
-        Controller controller = (Controller) getChildItem(System.CONTROLLER);
+        Item controller = getChildItem(System.CONTROLLER);
         removeChildItem(System.CONTROLLER);
-        destroyComponent(controller);
+        destroyComponent((Controller) controller);
 
         super.finalizz();
     }

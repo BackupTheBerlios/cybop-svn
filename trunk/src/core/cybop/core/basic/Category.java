@@ -29,9 +29,9 @@ package cybop.core.basic;
  *
  * A category classifies items with common properties into one group.
  *
- * @version $Revision: 1.1 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Category extends Item /*??java.lang.Object*/ {
+public class Category extends java.lang.Object {
 }
 

@@ -33,11 +33,11 @@ import cybop.core.system.*;
  *
  * A screen is an output device that displays optical (graphical) information. 
  *
- * @version $Revision: 1.4 $ $Date: 2003-04-25 11:23:56 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Screen extends Block {
-    
+
     //
     // Showing models.
     //

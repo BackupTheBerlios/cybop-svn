@@ -34,71 +34,71 @@ import cybop.core.system.region.controller.translator.*;
 /**
  * This class represents a portal controller.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalController extends Controller {
 
     //
-    // Default children.
+    // Default children categories.
     //
 
     /**
-     * Returns the default portal processor.
+     * Returns the default portal processor category.
      *
-     * @return the default portal processor
+     * @return the default portal processor category
      */
-    public String getDefaultProcessor() {
+    public Item getDefaultProcessorCategory() {
 
         return new String("cybop.core.system.region.controller.processor.PortalProcessor");
     }
 
     /**
-     * Returns the default domain model.
+     * Returns the default domain model category.
      *
-     * @return the default domain model
+     * @return the default domain model category
      */
-    public String getDefaultDomainModel() {
+    public Item getDefaultDomainModelCategory() {
 
         return new String("cybop.core.model.model.DomainModel");
     }
 
     /**
-     * Returns the default system user interface.
+     * Returns the default system user interface category.
      *
-     * @return the default system user interface
+     * @return the default system user interface category
      */
-    public String getDefaultSystemUserInterface() {
+    public Item getDefaultSystemUserInterfaceCategory() {
 
         return new String("cybop.core.model.model.user.system.PortalUserInterface");
     }
 
     /**
-     * Returns the default mouse model.
+     * Returns the default mouse model category.
      *
-     * @return the default mouse model
+     * @return the default mouse model category
      */
-    public String getDefaultMouseModel() {
+    public Item getDefaultMouseModelCategory() {
 
         return new String("cybop.core.model.model.MouseModel");
     }
 
     /**
-     * Returns the default system information user interface.
+     * Returns the default system information user interface category.
      *
-     * @return the default system information user interface
+     * @return the default system information user interface category
      */
-    public String getDefaultSystemInformationUserInterface() {
+    public Item getDefaultSystemInformationUserInterfaceCategory() {
 
         return new String("cybop.core.model.model.user.SystemInformationUserInterface");
     }
 
     /**
-     * Returns the default system information user interface translator.
+     * Returns the default system information user interface translator category.
      *
-     * @return the default system information user interface translator
+     * @return the default system information user interface translator category
      */
-    public String getDefaultSystemInformationUserInterfaceTranslator() {
+    public Item getDefaultSystemInformationUserInterfaceTranslatorCategory() {
 
         return new String("cybop.core.system.region.controller.translator.SystemInformationUserInterfaceTranslator");
     }

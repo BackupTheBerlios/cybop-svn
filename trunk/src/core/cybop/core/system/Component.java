@@ -64,7 +64,7 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.14 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends Chain {
@@ -84,9 +84,6 @@ public class Component extends Chain {
 
     /** The signal. */
     public static final String SIGNAL = new String("signal");
-
-    /** The named subsystem. */
-    public static final String NAMED_SUBSYSTEM = new String("named_subsystem");
 
     /** The logger output. */
     public static final String LOGGER_OUTPUT = new String("logger_output");
@@ -109,9 +106,6 @@ public class Component extends Chain {
 
     /** The signal category. */
     public static final String SIGNAL_CATEGORY = new String("signal_category");
-
-    /** The named subsystem category. */
-    public static final String NAMED_SUBSYSTEM_CATEGORY = new String("named_subsystem_category");
 
     /** The logger output category. */
     public static final String LOGGER_OUTPUT_CATEGORY = new String("logger_output_category");
@@ -234,19 +228,9 @@ public class Component extends Chain {
      *
      * @return the default signal category
      */
-    public Category getDefaultSignalCategory() {
+    public Item getDefaultSignalCategory() {
 
         return new String("cybop.core.signal.Signal");
-    }
-
-    /**
-     * Returns the default named subsystem category.
-     *
-     * @return the default named subsystem category
-     */
-    public Category getDefaultNamedSubsystemCategory() {
-
-        return new String(getClass().getName());
     }
 
     /**
@@ -254,9 +238,9 @@ public class Component extends Chain {
      *
      * @return the default logger output category
      */
-    public Category getDefaultLoggerOutputCategory() {
+    public Item getDefaultLoggerOutputCategory() {
 
-        return new String("console");
+        return null;
     }
 
     /**
@@ -264,7 +248,7 @@ public class Component extends Chain {
      *
      * @return the default log level category
      */
-    public Category getDefaultLogLevelCategory() {
+    public Item getDefaultLogLevelCategory() {
 
         return Component.EVENT_LOG_LEVEL;
     }
@@ -285,7 +269,6 @@ public class Component extends Chain {
         if (c != null) {
 
             setChildCategory(Component.SIGNAL_CATEGORY, c.getChildItem(Component.SIGNAL_CATEGORY, getDefaultSignalCategory()));
-            setChildCategory(Component.NAMED_SUBSYSTEM_CATEGORY, c.getChildItem(Component.NAMED_SUBSYSTEM_CATEGORY, getDefaultNamedSubsystemCategory()));
             setChildCategory(Component.LOGGER_OUTPUT_CATEGORY, c.getChildItem(Component.LOGGER_OUTPUT_CATEGORY, getDefaultLoggerOutputCategory()));
             setChildCategory(Component.LOG_LEVEL_CATEGORY, c.getChildItem(Component.LOG_LEVEL_CATEGORY, getDefaultLogLevelCategory()));
 
@@ -312,9 +295,6 @@ public class Component extends Chain {
             c.setChildItem(Component.LOGGER_OUTPUT_CATEGORY, getChildCategory(Component.LOGGER_OUTPUT_CATEGORY));
             removeChildCategory(Component.LOGGER_OUTPUT_CATEGORY);
 
-            c.setChildItem(Component.NAMED_SUBSYSTEM_CATEGORY, getChildCategory(Component.NAMED_SUBSYSTEM_CATEGORY));
-            removeChildCategory(Component.NAMED_SUBSYSTEM_CATEGORY);
-
             c.setChildItem(Component.SIGNAL_CATEGORY, getChildCategory(Component.SIGNAL_CATEGORY));
             removeChildCategory(Component.SIGNAL_CATEGORY);
 
@@ -335,9 +315,8 @@ public class Component extends Chain {
 
         super.initialize();
 
-        setChildItem(Component.NAMED_SUBSYSTEM, createChildItem((String) getChildCategory(Component.NAMED_SUBSYSTEM_CATEGORY)));
-        setChildItem(Component.LOGGER_OUTPUT, createChildItem((String) getChildCategory(Component.LOGGER_OUTPUT_CATEGORY)));
-        setChildItem(Component.LOG_LEVEL, (Integer) getChildCategory(Component.LOG_LEVEL_CATEGORY));
+        setChildItem(Component.LOGGER_OUTPUT, getChildCategory(Component.LOGGER_OUTPUT_CATEGORY));
+        setChildItem(Component.LOG_LEVEL, getChildCategory(Component.LOG_LEVEL_CATEGORY));
     }
 
     /**
@@ -345,17 +324,13 @@ public class Component extends Chain {
      */
     public void finalizz() throws Exception {
 
-        Integer logLevel = (Integer) getChildItem(Component.LOG_LEVEL);
+        Item logLevel = getChildItem(Component.LOG_LEVEL);
         removeChildItem(Component.LOG_LEVEL);
-        destroyChildItem(logLevel);
+        destroyChildItem((Integer) logLevel);
 
-        String loggerOutput = (String) getChildItem(Component.LOGGER_OUTPUT);
+        Item loggerOutput = getChildItem(Component.LOGGER_OUTPUT);
         removeChildItem(Component.LOGGER_OUTPUT);
-        destroyChildItem(loggerOutput);
-
-        String namedSubsystem = (String) getChildItem(Component.NAMED_SUBSYSTEM);
-        removeChildItem(Component.NAMED_SUBSYSTEM);
-        destroyChildItem(namedSubsystem);
+        destroyChildItem((String) loggerOutput);
 
         super.finalizz();
     }

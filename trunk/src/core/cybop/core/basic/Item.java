@@ -76,7 +76,7 @@ import cybop.core.model.principle.*;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.21 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -872,7 +872,7 @@ public class Item extends State {
 
         Item i = null;
 
-        // If a child item class name is set to null, then don't try to create the item.
+        // If a child item category name is set to null, then don't try to create the item.
         if (n != null) {
 
             // Find class by name.
@@ -900,7 +900,7 @@ public class Item extends State {
 
         } else {
 
-            java.lang.System.out.println("DEBUG: Could not create child item. The child item class name is null.");
+            java.lang.System.out.println("DEBUG: Could not create child item. The child item category name is null.");
         }
 
         return i;

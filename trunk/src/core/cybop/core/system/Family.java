@@ -49,7 +49,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.11 $ $Date: 2003-04-25 11:23:56 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -63,9 +63,6 @@ public class Family extends System {
 
     /** The systems count. */
     public static final String SYSTEMS_COUNT = new String("systems_count");
-
-    /** The system class name. */
-    public static final String SYSTEM_CLASS_NAME = new String("system_class_name");
 
     /** The system configuration location. */
     public static final String SYSTEM_CONFIGURATION_LOCATION = new String("system_configuration_location");
@@ -83,93 +80,100 @@ public class Family extends System {
     public static final String EXTERNAL_SYSTEM = new String("external_system");
 
     //
-    // Default children.
+    // Children category names.
     //
 
-    /** The default available systems. */
-    public Item defaultAvailableSystems;
+    /** The available systems category. */
+    public static final String AVAILABLE_SYSTEMS_CATEGORY = new String("available_systems_category");
 
-    /** The default systems count. */
-    public Item defaultSystemsCount;
+    /** The systems count category. */
+    public static final String SYSTEMS_COUNT_CATEGORY = new String("systems_count_category");
 
-    /** The default system class name. */
-    public Item defaultSystemClassName;
+    /** The system configuration location category. */
+    public static final String SYSTEM_CONFIGURATION_LOCATION_CATEGORY = new String("system_configuration_location_category");
 
-    /** The default system configuration location. */
-    public Item defaultSystemConfigurationLocation;
+    /** The system category. */
+    public static final String SYSTEM_CATEGORY = new String("system_category");
 
-    /** The default system. */
-    public Item defaultSystem;
+    /** The external systems count category. */
+    public static final String EXTERNAL_SYSTEMS_COUNT_CATEGORY = new String("external_systems_count_category");
 
-    /** The default external systems count. */
-    public Item defaultExternalSystemsCount;
+    /** The external system command category. */
+    public static final String EXTERNAL_SYSTEM_COMMAND_CATEGORY = new String("external_system_command_category");
 
-    /** The default external system command. */
-    public Item defaultExternalSystemCommand;
-
-    /** The default external system. */
-    public Item defaultExternalSystem;
+    /** The external system category. */
+    public static final String EXTERNAL_SYSTEM_CATEGORY = new String("external_system_category");
 
     //
-    // Default children.
+    // Default children categories.
     //
 
     /**
-     * Returns the default available systems.
+     * Returns the default available systems category.
      *
-     * @return the default available systems
+     * @return the default available systems category
      */
-    public String getDefaultAvailableSystems() {
+    public Item getDefaultAvailableSystemsCategory() {
 
         return new String("cybop.core.basic.Item");
     }
 
     /**
-     * Returns the default systems count.
+     * Returns the default systems count category.
      *
-     * @return the default systems count
+     * @return the default systems count category
      */
-    public Integer getDefaultSystemsCount() {
+    public Item getDefaultSystemsCountCategory() {
 
         return new Integer(0);
     }
 
     /**
-     * Returns the default system class name.
+     * Returns the default system configuration location category.
      *
-     * @return the default system class name
+     * @return the default system configuration location category
      */
-    public String getDefaultSystemClassName() {
+    public Item getDefaultSystemConfigurationLocationCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default system configuration location.
+     * Returns the default system category.
      *
-     * @return the default system configuration location
+     * @return the default system category
      */
-    public String getDefaultSystemConfigurationLocation() {
+    public Item getDefaultSystemCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default external systems count.
+     * Returns the default external systems count category.
      *
-     * @return the default external systems count
+     * @return the default external systems count category
      */
-    public Integer getDefaultExternalSystemsCount() {
+    public Item getDefaultExternalSystemsCountCategory() {
 
         return new Integer(0);
     }
 
     /**
-     * Returns the default external system command.
+     * Returns the default external system command category.
      *
-     * @return the default external system command
+     * @return the default external system command category
      */
-    public String getDefaultExternalSystemCommand() {
+    public Item getDefaultExternalSystemCommandCategory() {
+
+        return null;
+    }
+
+    /**
+     * Returns the default external system category.
+     *
+     * @return the default external system category
+     */
+    public Item getDefaultExternalSystemCategory() {
 
         return null;
     }
@@ -270,14 +274,13 @@ public class Family extends System {
 
         if (c != null) {
 
-            this.defaultAvailableSystems = c.getChildItem(Family.AVAILABLE_SYSTEMS, getDefaultAvailableSystems());
-            this.defaultSystemsCount = c.getChildItem(Family.SYSTEMS_COUNT, getDefaultSystemsCount());
-            this.defaultSystemClassName = c.getChildItem(Family.SYSTEM_CLASS_NAME, getDefaultSystemClassName());
-            this.defaultSystemConfigurationLocation = c.getChildItem(Family.SYSTEM_CONFIGURATION_LOCATION, getDefaultSystemConfigurationLocation());
-//??            this.defaultSystem = c.getChildItem(Family.SYSTEM, getDefaultSystem());
-            this.defaultExternalSystemsCount = c.getChildItem(Family.EXTERNAL_SYSTEMS_COUNT, getDefaultExternalSystemsCount());
-            this.defaultExternalSystemCommand = c.getChildItem(Family.EXTERNAL_SYSTEM_COMMAND, getDefaultExternalSystemCommand());
-//??            this.defaultExternalSystem = c.getChildItem(Family.EXTERNAL_SYSTEM, getDefaultExternalSystem());
+            setChildCategory(Family.AVAILABLE_SYSTEMS_CATEGORY, c.getChildItem(Family.AVAILABLE_SYSTEMS_CATEGORY, getDefaultAvailableSystemsCategory()));
+            setChildCategory(Family.SYSTEMS_COUNT_CATEGORY, c.getChildItem(Family.SYSTEMS_COUNT_CATEGORY, getDefaultSystemsCountCategory()));
+            setChildCategory(Family.SYSTEM_CONFIGURATION_LOCATION_CATEGORY, c.getChildItem(Family.SYSTEM_CONFIGURATION_LOCATION_CATEGORY, getDefaultSystemConfigurationLocationCategory()));
+            setChildCategory(Family.SYSTEM_CATEGORY, c.getChildItem(Family.SYSTEM_CATEGORY, getDefaultSystemCategory()));
+            setChildCategory(Family.EXTERNAL_SYSTEMS_COUNT_CATEGORY, c.getChildItem(Family.EXTERNAL_SYSTEMS_COUNT_CATEGORY, getDefaultExternalSystemsCountCategory()));
+            setChildCategory(Family.EXTERNAL_SYSTEM_COMMAND_CATEGORY, c.getChildItem(Family.EXTERNAL_SYSTEM_COMMAND_CATEGORY, getDefaultExternalSystemCommandCategory()));
+            setChildCategory(Family.EXTERNAL_SYSTEM_CATEGORY, c.getChildItem(Family.EXTERNAL_SYSTEM_CATEGORY, getDefaultExternalSystemCategory()));
 
         } else {
 
@@ -296,14 +299,26 @@ public class Family extends System {
 
         if (c != null) {
 
-//??            c.setChildItem(Family.EXTERNAL_SYSTEM, this.defaultExternalSystem);
-            c.setChildItem(Family.EXTERNAL_SYSTEM_COMMAND, this.defaultExternalSystemCommand);
-            c.setChildItem(Family.EXTERNAL_SYSTEMS_COUNT, this.defaultExternalSystemsCount);
-//??            c.setChildItem(Family.SYSTEM, this.defaultSystem);
-            c.setChildItem(Family.SYSTEM_CONFIGURATION_LOCATION, this.defaultSystemConfigurationLocation);
-            c.setChildItem(Family.SYSTEM_CLASS_NAME, this.defaultSystemClassName);
-            c.setChildItem(Family.SYSTEMS_COUNT, this.defaultSystemsCount);
-            c.setChildItem(Family.AVAILABLE_SYSTEMS, this.defaultAvailableSystems);
+            c.setChildItem(Family.EXTERNAL_SYSTEM_CATEGORY, getChildCategory(Family.EXTERNAL_SYSTEM_CATEGORY));
+            removeChildCategory(Family.EXTERNAL_SYSTEM_CATEGORY);
+
+            c.setChildItem(Family.EXTERNAL_SYSTEM_COMMAND_CATEGORY, getChildCategory(Family.EXTERNAL_SYSTEM_COMMAND_CATEGORY));
+            removeChildCategory(Family.EXTERNAL_SYSTEM_COMMAND_CATEGORY);
+
+            c.setChildItem(Family.EXTERNAL_SYSTEMS_COUNT_CATEGORY, getChildCategory(Family.EXTERNAL_SYSTEMS_COUNT_CATEGORY));
+            removeChildCategory(Family.EXTERNAL_SYSTEMS_COUNT_CATEGORY);
+
+            c.setChildItem(Family.SYSTEM_CATEGORY, getChildCategory(Family.SYSTEM_CATEGORY));
+            removeChildCategory(Family.SYSTEM_CATEGORY);
+
+            c.setChildItem(Family.SYSTEM_CONFIGURATION_LOCATION_CATEGORY, getChildCategory(Family.SYSTEM_CONFIGURATION_LOCATION_CATEGORY));
+            removeChildCategory(Family.SYSTEM_CONFIGURATION_LOCATION_CATEGORY);
+
+            c.setChildItem(Family.SYSTEMS_COUNT_CATEGORY, getChildCategory(Family.SYSTEMS_COUNT_CATEGORY));
+            removeChildCategory(Family.SYSTEMS_COUNT_CATEGORY);
+
+            c.setChildItem(Family.AVAILABLE_SYSTEMS_CATEGORY, getChildCategory(Family.AVAILABLE_SYSTEMS_CATEGORY));
+            removeChildCategory(Family.AVAILABLE_SYSTEMS_CATEGORY);
 
         } else {
 
@@ -328,7 +343,7 @@ public class Family extends System {
         // Available systems.
         //
 
-        setChildItem(Family.AVAILABLE_SYSTEMS, createChildItem((String) this.defaultAvailableSystems));
+        setChildItem(Family.AVAILABLE_SYSTEMS, createChildItem((String) getChildCategory(Family.AVAILABLE_SYSTEMS_CATEGORY)));
 
 /*??
         Integer count = getAvailableSystemsCount();
@@ -349,7 +364,7 @@ public class Family extends System {
         // Systems.
         //
 
-        setChildItem(Family.SYSTEMS_COUNT, this.defaultSystemsCount);
+        setChildItem(Family.SYSTEMS_COUNT, (Integer) getChildCategory(Family.SYSTEMS_COUNT_CATEGORY));
 
 /*??
         if (getChildItem(Family.SYSTEMS_COUNT) != null) {
@@ -477,9 +492,9 @@ public class Family extends System {
         // Available systems.
         //
 
-        Item availableSystems = getChildItem(Family.AVAILABLE_SYSTEMS);
-        removeChildItem(Family.AVAILABLE_SYSTEMS);
-        destroyChildItem(availableSystems);
+        Item availableSystemsCategory = getChildItem(Family.AVAILABLE_SYSTEMS_CATEGORY);
+        removeChildItem(Family.AVAILABLE_SYSTEMS_CATEGORY);
+        destroyChildItem(availableSystemsCategory);
 
 /*??
         if (n != null) {

@@ -34,6 +34,7 @@ import cybop.core.model.principle.*;
 import cybop.core.signal.*;
 import cybop.core.system.*;
 import cybop.core.system.System;
+import cybop.core.system.chain.*;
 import cybop.core.system.block.*;
 import cybop.core.system.system.*;
 
@@ -69,26 +70,10 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.18 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
-
-    //
-    // Command line arguments.
-    //
-
-    /** The system class name argument. */
-    public static final String SYSTEM_CLASS_NAME_ARGUMENT = new String("-system");
-
-    /** The system configuration location argument. */
-    public static final String SYSTEM_CONFIGURATION_LOCATION_ARGUMENT = new String("-configuration");
-
-    /** The lifecycle action argument. */
-    public static final String LIFECYCLE_ACTION_ARGUMENT = new String("-action");
-
-    /** The help argument. */
-    public static final String HELP_ARGUMENT = new String("-help");
 
     //
     // Children names.
@@ -111,6 +96,29 @@ public class Launcher extends Family {
 
     /** The shutdown flag. */
     public static final String SHUTDOWN_FLAG = new String("shutdown_flag");
+
+    //
+    // Children category names.
+    //
+
+    /** The screen category. */
+    public static final String SCREEN_CATEGORY = new String("screen_category");
+
+    //
+    // Command line arguments.
+    //
+
+    /** The system category argument. */
+    public static final String SYSTEM_CATEGORY_ARGUMENT = new String("-system");
+
+    /** The system configuration location argument. */
+    public static final String SYSTEM_CONFIGURATION_LOCATION_ARGUMENT = new String("-configuration");
+
+    /** The lifecycle action argument. */
+    public static final String LIFECYCLE_ACTION_ARGUMENT = new String("-action");
+
+    /** The help argument. */
+    public static final String HELP_ARGUMENT = new String("-help");
 
     //
     // Actions.
@@ -158,15 +166,17 @@ public class Launcher extends Family {
                 l.setArguments(args);
 
                 java.lang.System.out.println("INFO: Set global launcher items.");
-                l.setChildItem(Component.CONFIGURATION, new cybop.core.system.chain.Configuration());
-                l.setChildItem(Component.LOG_RECORD, new cybop.core.system.chain.LogRecord());
-                l.setChildItem(Component.SIGNAL_MEMORY, new cybop.core.system.chain.SignalMemory());
+//??                l.setChildItem(Launcher.CONFIGURATION, l.createChildItem(Launcher.CONFIGURATION_CATEGORY));
+                l.setChildItem(Launcher.CONFIGURATION, new cybop.core.system.chain.Configuration());
+                l.setChildItem(Launcher.LOG_RECORD, new cybop.core.system.chain.LogRecord());
+                l.setChildItem(Launcher.SIGNAL_MEMORY, new cybop.core.system.chain.SignalMemory());
 
                 java.lang.System.out.println("INFO: Configure launcher.");
                 l.configure();
 
                 java.lang.System.out.println("INFO: Initialize launcher.");
                 l.initialize();
+
                 // Set meta attributes for child.
                 // DO NOT use the normal method setChildItem(name, item);
                 // This would lead to an endless loop since for example
@@ -181,6 +191,7 @@ public class Launcher extends Family {
                 // so that the system can be shut down now.
 
                 l.setName(null);
+
                 java.lang.System.out.println("INFO: Finalize launcher.");
                 l.finalizz();
 
@@ -282,45 +293,45 @@ public class Launcher extends Family {
     }
 
     //
-    // Default children.
+    // Default children categories.
     //
 
     /**
-     * Returns the default screen.
+     * Returns the default screen category.
      *
-     * @return the default screen
+     * @return the default screen category
      */
-    public String getDefaultScreen() {
+    public Item getDefaultScreenCategory() {
 
         return new String("cybop.core.system.block.Screen");
     }
 
     /**
-     * Returns the default shutdown socket.
+     * Returns the default shutdown socket category.
      *
-     * @return the default shutdown socket
+     * @return the default shutdown socket category
      */
-    public String getDefaultShutdownSocket() {
+    public Item getDefaultShutdownSocketCategory() {
 
         return new String("cybop.core.system.system.ShutdownSocket");
     }
 
     /**
-     * Returns the default lifecycle action.
+     * Returns the default lifecycle action category.
      *
-     * @return the default lifecycle action
+     * @return the default lifecycle action category
      */
-    public String getDefaultLifecycleAction() {
+    public Item getDefaultLifecycleActionCategory() {
 
         return Launcher.STARTUP_SYSTEM_ACTION;
     }
 
     /**
-     * Returns the default shutdown flag.
+     * Returns the default shutdown flag category.
      *
-     * @return the default shutdown flag
+     * @return the default shutdown flag category
      */
-    public Boolean getDefaultShutdownFlag() {
+    public Item getDefaultShutdownFlagCategory() {
 
         return new Boolean(Boolean.FALSE);
     }
@@ -358,9 +369,9 @@ public class Launcher extends Family {
      * @exception NullPointerException if the arguments container is null
      * @exception NullPointerException if an argument is null
      */
-    public String getArgument(String key, String def) throws NullPointerException {
+    public Item getArgument(String key, Item def) throws NullPointerException {
 
-        String a = def;
+        Item a = def;
         java.lang.String[] args = getArguments();
 
         if (args != null) {
@@ -567,6 +578,56 @@ public class Launcher extends Family {
     }
 
     //
+    // Configuration.
+    //
+
+    /**
+     * Configures this component.
+     *
+     * @exception NullPointerException if the configuration is null
+     */
+    public void configure() throws Exception, NullPointerException {
+        
+        super.configure();
+
+        Configuration c = (Configuration) getChildItem(Component.CONFIGURATION);
+
+        if (c != null) {
+
+            setChildCategory(Launcher.SYSTEM_CATEGORY, getArgument(Launcher.SYSTEM_CATEGORY_ARGUMENT, getDefaultSystemCategory()));
+            setChildCategory(Launcher.SCREEN_CATEGORY, c.getChildItem(Launcher.SCREEN_CATEGORY, getDefaultScreenCategory()));
+
+        } else {
+
+            throw new NullPointerException("Could not configure component. The configuration is null.");
+        }
+    }
+
+    /**
+     * Deconfigures this component.
+     *
+     * @exception NullPointerException if the configuration is null
+     */
+    public void deconfigure() throws Exception, NullPointerException {
+
+        Configuration c = (Configuration) getChildItem(Component.CONFIGURATION);
+
+        if (c != null) {
+
+            c.setChildItem(Launcher.SCREEN_CATEGORY, getChildCategory(Launcher.SCREEN_CATEGORY));
+            removeChildCategory(Launcher.SCREEN_CATEGORY);
+
+            removeChildCategory(Launcher.SYSTEM_CATEGORY);
+
+        } else {
+
+            throw new NullPointerException("Could not deconfigure component. The configuration is null.");
+        }
+
+        super.deconfigure();
+    }
+
+    //
     // Initialization.
     //
 
@@ -583,14 +644,13 @@ public class Launcher extends Family {
 
         } else {
 
-            setChildItem(Launcher.SYSTEM_CLASS_NAME, getArgument(Launcher.SYSTEM_CLASS_NAME_ARGUMENT, getDefaultSystemClassName()));
-            setChildItem(Launcher.SYSTEM_CONFIGURATION_LOCATION, getArgument(Launcher.SYSTEM_CONFIGURATION_LOCATION_ARGUMENT, getDefaultSystemConfigurationLocation()));
-            setChildItem(Launcher.SCREEN, createComponent(getDefaultScreen()));
-            setChildItem(Launcher.LIFECYCLE_ACTION, getArgument(Launcher.LIFECYCLE_ACTION_ARGUMENT, getDefaultLifecycleAction()));
+            setChildItem(Launcher.SYSTEM_CONFIGURATION_LOCATION, getArgument(Launcher.SYSTEM_CONFIGURATION_LOCATION_ARGUMENT, (String) getDefaultSystemConfigurationLocationCategory()));
+            setChildItem(Launcher.SCREEN, createComponent((String) getDefaultScreenCategory()));
+            setChildItem(Launcher.LIFECYCLE_ACTION, getArgument(Launcher.LIFECYCLE_ACTION_ARGUMENT, (String) getDefaultLifecycleActionCategory()));
             //?? Temporary until event handling doesn't need java awt EventQueue anymore.
             setJavaEventCatcher(createJavaEventCatcher());
             setChildItem(Launcher.SHUTDOWN_HOOK, createShutdownHook());
-            setChildItem(Launcher.SHUTDOWN_FLAG, getDefaultShutdownFlag());
+            setChildItem(Launcher.SHUTDOWN_FLAG, (Boolean) getDefaultShutdownFlagCategory());
         }
     }
 
@@ -603,29 +663,25 @@ public class Launcher extends Family {
 
         // Remove shutdown hook first to avoid another shutdown call
         // from the java virtual machine to this system.
-        ShutdownHook shutdownHook = (ShutdownHook) getChildItem(Launcher.SHUTDOWN_HOOK);
+        Item shutdownHook = getChildItem(Launcher.SHUTDOWN_HOOK);
         removeChildItem(Launcher.SHUTDOWN_HOOK);
-        destroyComponent(shutdownHook);
+        destroyComponent((ShutdownHook) shutdownHook);
 
         //?? Temporary until event handling doesn't need java awt EventQueue anymore.
         destroyJavaEventCatcher(getJavaEventCatcher());
         setJavaEventCatcher(null);
 
-        String lifecycleAction = (String) getChildItem(Launcher.LIFECYCLE_ACTION);
+        Item lifecycleAction = getChildItem(Launcher.LIFECYCLE_ACTION);
         removeChildItem(Launcher.LIFECYCLE_ACTION);
-        destroyChildItem(lifecycleAction);
+        destroyChildItem((String) lifecycleAction);
 
-        Screen screen = (Screen) getChildItem(Launcher.SCREEN);
+        Item screen = getChildItem(Launcher.SCREEN);
         removeChildItem(Launcher.SCREEN);
-        destroyChildItem(screen);
+        destroyChildItem((Screen) screen);
 
-        String systemConfigurationLocation = (String) getChildItem(Launcher.SYSTEM_CONFIGURATION_LOCATION);
+        Item systemConfigurationLocation = getChildItem(Launcher.SYSTEM_CONFIGURATION_LOCATION);
         removeChildItem(Launcher.SYSTEM_CONFIGURATION_LOCATION);
-        destroyChildItem(systemConfigurationLocation);
-
-        String systemClassName = (String) getChildItem(Launcher.SYSTEM_CLASS_NAME);
-        removeChildItem(Launcher.SYSTEM_CLASS_NAME);
-        destroyChildItem(systemClassName);
+        destroyChildItem((String) systemConfigurationLocation);
 
         super.finalizz();
     }
@@ -880,7 +936,7 @@ public class Launcher extends Family {
 
                     if (scr != null) {
 
-                        log(Launcher.DEBUG_LOG_LEVEL, "Show on screen." + s.getChildItem(Signal.OBJECT));
+                        log(Launcher.DEBUG_LOG_LEVEL, "Show on screen.");
                         scr.show((UserInterface) s.getChildItem(Signal.OBJECT));
 
                     } else {
@@ -926,7 +982,7 @@ public class Launcher extends Family {
                 if (a.isEqualTo(Launcher.STARTUP_SYSTEM_ACTION)) {
 
                     log(Launcher.INFO_LOG_LEVEL, "Startup system.");
-                    startupSystem((String) getChildItem(Launcher.SYSTEM_CLASS_NAME), (String) getChildItem(Launcher.SYSTEM_CONFIGURATION_LOCATION));
+                    startupSystem((String) getChildCategory(Launcher.SYSTEM_CATEGORY), (String) getChildItem(Launcher.SYSTEM_CONFIGURATION_LOCATION));
 
                 } else if (a.isEqualTo(Launcher.SHUTDOWN_SYSTEM_ACTION)) {
 
@@ -975,7 +1031,7 @@ public class Launcher extends Family {
      * Create user interface by sending the corresponding signal through the system.
      * The user interface will be displayed by the screen, done in the send method.
      *
-     * @param sys the system class name
+     * @param sys the system category
      * @param c the configuration location
      * @exception NullPointerException if the signal is null
      */
@@ -1078,7 +1134,6 @@ public class Launcher extends Family {
     public void shutdownSystemAcrossSocket() throws Exception, NullPointerException {
 
         Signal s = (Signal) createChildItem((String) getDefaultSignalCategory());
-        ShutdownSocket socket = (ShutdownSocket) createComponent(getDefaultShutdownSocket());
 
         if (s != null) {
             
@@ -1091,6 +1146,8 @@ public class Launcher extends Family {
 
             throw new NullPointerException("Could not shutdown system across socket. The signal is null.");
         }
+
+        ShutdownSocket socket = (ShutdownSocket) createComponent((String) getDefaultShutdownSocketCategory());
 
         if (socket != null) {
 
