@@ -1,5 +1,5 @@
 /*
- * $RCSfile: server_unix.c,v $
+ * $RCSfile: unix_socket.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -23,18 +23,15 @@
  *
  * This file handles a server UNIX FILE socket.
  *
- * @version $Revision: 1.6 $ $Date: 2004-06-29 13:57:26 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-06-30 23:32:28 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SERVER_UNIX_SOURCE
-#define SERVER_UNIX_SOURCE
+#ifndef UNIX_SOCKET_SOURCE
+#define UNIX_SOCKET_SOURCE
 
-//??#include <stdio.h>
-//??#include <unistd.h>
 #include <sys/socket.h>
-//??#include <sys/types.h>
 #include <sys/un.h>
 #include "../global/variable.c"
 
@@ -64,6 +61,9 @@ void create_unix_socket(void* p0, const void* p1) {
             // 0 stands for the default protocol (recommended).
             *s = socket(AF_UNIX, SOCK_STREAM, 0);
 
+            // Make socket non-blocking.
+//??            fcntl(*s, F_SETFL, FNDELAY);
+
             // Initialize socket address.
             struct sockaddr_un a;
             // Set address format.
@@ -82,6 +82,11 @@ void create_unix_socket(void* p0, const void* p1) {
 
             // Bind number to address.
             bind(*s, (struct sockaddr*) &a, as);
+
+            // Set the number of possible pending client connection requests.
+            // The maximum number is usually 5.
+            // It is NOT necessary to use this function, but it's good practice.
+            listen(*s, 1);
 
         } else {
 
@@ -130,22 +135,15 @@ void destroy_unix_socket(void* p0, const void* p1) {
 /**
  * Receives a unix socket input.
  *
- * @param p0 the socket
+ * @param p0 the server socket
  */
-void receive_unix_socket_input(void* p0) {
+void receive_unix_socket_input(const void* p0) {
 
     if (p0 != NULL_POINTER) {
 
         int* s = (int*) p0;
 
 //??        log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTERNALS_MESSAGE, (void*) &CREATE_INTERNALS_MESSAGE_COUNT);
-
-        // Listen for client connection requests.
-        // The second parameter specifies the allowed number of pending
-        // connection requests of clients which want to be served.
-        listen(*s, 1);
-        // Once listen is left, it is -- in this example -- not entered again!
-        // Implement this later!
 
         // Initialize client socket address and its size.
         struct sockaddr_un ca;
@@ -159,34 +157,16 @@ void receive_unix_socket_input(void* p0) {
 
         // Accept client socket request and store client socket.
         int cs = accept(*s, (struct sockaddr*) &ca, &cas);
-        // TODO: Set O_NONBLOCK flag for nonblocking mode! How??
 
-        // After accept, the original socket *s remains open and unconnected,
-        // and continues listening until being closed.
-        // One can accept further connections with socket by calling accept again.
-
-/*??
-        char ch;
-        char strg[sizeof *stdin];
-        char hello[300] = "Hallo!";
-        int j = 0;
-
-        while(1) {
-
-            if (j == 10) {
-
-                break;
-            }
-
-            read(cs, &strg, 300);
-            strcat(strg, hello);
-            write(cs, &strg, 300);
-
-            j++;
-        }
+        // Convert buffer to avoid byte-order problems.
+        // Many machines use differing dialects (ASCII versus EBCDIC)
+        // to represent data.
+        // The byte-order problem does not occur if data are
+        // exclusively passed as text!
+//??        read(cs, buf, bufsize);
+//??        buf = ntohl(buf);
 
         close(cs);
-*/
 
     } else {
 
@@ -194,5 +174,56 @@ void receive_unix_socket_input(void* p0) {
     }
 }
 
-/* SERVER_UNIX_SOURCE */
+/**
+ * Sends a unix socket output.
+ *
+ * @param p0 the server socket
+ * @param p1 the server socket address
+ * @param p2 the server socket address size
+ */
+void send_unix_socket_output(const void* p0, const void* p1, const void* p2) {
+
+    if (p2 != NULL_POINTER) {
+
+        int* sas = (int*) p2;
+
+        if (p1 != NULL_POINTER) {
+
+            struct sockaddr* sa = (struct sockaddr*) p1;
+
+            if (p0 != NULL_POINTER) {
+
+                int* s = (int*) p0;
+
+//??                log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTERNALS_MESSAGE, (void*) &CREATE_INTERNALS_MESSAGE_COUNT);
+
+                // Establish connection.
+                // Note that connect implicitly performs a bind call!
+                connect(*s, sa, *sas);
+
+                // Convert buffer to avoid byte-order problems.
+                // Many machines use differing dialects (ASCII versus EBCDIC)
+                // to represent data.
+                // The byte-order problem does not occur if data are
+                // exclusively passed as text!
+//??                buf = htonl(buf);
+//??                write(s, buf, bufsize);
+
+            } else {
+
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
+            }
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
+    }
+}
+
+/* UNIX_SOCKET_SOURCE */
 #endif

@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.23 $ $Date: 2004-06-29 13:57:25 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2004-06-30 23:32:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,7 @@
 #include "../global/variable.c"
 #include "../logger/logger.c"
 #include "../signal/signal_memory.c"
-#include "../socket/server_unix.c"
+#include "../socket/unix_socket.c"
 #include "../test/test.c"
 #include "../x_windows/x_windows_handler.c"
 //?? Temporary for testing.
