@@ -59,7 +59,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.8 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-05-27 22:15:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -2290,7 +2290,7 @@ static const char RESIZE_CHARACTER_ARRAY_MESSAGE_ARRAY[] = {'R', 'e', 's', 'i', 
 static const char* RESIZE_CHARACTER_ARRAY_MESSAGE = RESIZE_CHARACTER_ARRAY_MESSAGE_ARRAY;
 
 /** The "Resize character array." message count. */
-static const int RESIZE_CHARACTER_ARRAY_MESSAGE_COUNT = 21;
+static const int RESIZE_CHARACTER_ARRAY_MESSAGE_COUNT = 23;
 
 /** The "Could not resize character array. The array is null." message array. */
 static const char COULD_NOT_RESIZE_CHARACTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'r', 'e', 's', 'i', 'z', 'e', ' ', 'c', 'h', 'a', 'r', 'a', 'c', 't', 'e', 'r', ' ', 'a', 'r', 'r', 'a', 'y', '.', ' ', 'T', 'h', 'e', ' ', 'a', 'r', 'r', 'a', 'y', ' ', 'i', 's', ' ', 'n', 'u', 'l', 'l', '.'};
@@ -2961,10 +2961,34 @@ static const int COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE_COU
 // Operation log messages.
 //
 
+/** The "Create operation." message array. */
+static const char CREATE_OPERATION_MESSAGE_ARRAY[] = {'C', 'r', 'e', 'a', 't', 'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', '.'};
+
+/** The "Create operation." message. */
+static const char* CREATE_OPERATION_MESSAGE = CREATE_OPERATION_MESSAGE_ARRAY;
+
+/** The "Create operation." message count. */
+static const int CREATE_OPERATION_MESSAGE_COUNT = 17;
+
+/** The "Destroy operation." message array. */
+static const char DESTROY_OPERATION_MESSAGE_ARRAY[] = {'D', 'e', 's', 't', 'r', 'o', 'y', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', '.'};
+
+/** The "Destroy operation." message. */
+static const char* DESTROY_OPERATION_MESSAGE = DESTROY_OPERATION_MESSAGE_ARRAY;
+
+/** The "Destroy operation." message count. */
+static const int DESTROY_OPERATION_MESSAGE_COUNT = 18;
+
+/** The "Initialize operation." message array. */
+static const char INITIALIZE_OPERATION_MESSAGE_ARRAY[] = {'I', 'n', 'i', 't', 'i', 'a', 'l', 'i', 'z', 'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', '.'};
+
+/** The "Initialize operation." message. */
+static const char* INITIALIZE_OPERATION_MESSAGE = INITIALIZE_OPERATION_MESSAGE_ARRAY;
+
+/** The "Initialize operation." message count. */
+static const int INITIALIZE_OPERATION_MESSAGE_COUNT = 21;
+
 /*??
-"Create operation."
-"Destroy operation."
-"Initialize operation."
 "Could not initialize operation. There are no remaining parameters after the separator."
 "Could not initialize operation. The index exceeds the count."
 "Could not initialize operation. There is no parameter before the separator."
@@ -2972,9 +2996,18 @@ static const int COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE_COU
 "Could not initialize operation. The transient model count is null."
 "Could not initialize operation. The persistent model is null."
 "Could not initialize operation. The persistent model count is null."
+*/
 
 //?? copy the same 8 lines for finalize operation!
-*/
+
+/** The "Finalize operation." message array. */
+static const char FINALIZE_OPERATION_MESSAGE_ARRAY[] = {'F', 'i', 'n', 'a', 'l', 'i', 'z', 'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', '.'};
+
+/** The "Finalize operation." message. */
+static const char* FINALIZE_OPERATION_MESSAGE = FINALIZE_OPERATION_MESSAGE_ARRAY;
+
+/** The "Finalize operation." message count. */
+static const int FINALIZE_OPERATION_MESSAGE_COUNT = 19;
 
 //
 // Compound log messages.
@@ -3055,9 +3088,25 @@ static const int COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE_COU
 // Signal memory log messages.
 //
 
+/** The "Create signal memory." message array. */
+static const char CREATE_SIGNAL_MEMORY_MESSAGE_ARRAY[] = {'C', 'r', 'e', 'a', 't', 'e', ' ', 's', 'i', 'g', 'n', 'a', 'l', ' ', 'm', 'e', 'm', 'o', 'r', 'y', '.'};
+
+/** The "Create signal memory." message. */
+static const char* CREATE_SIGNAL_MEMORY_MESSAGE = CREATE_SIGNAL_MEMORY_MESSAGE_ARRAY;
+
+/** The "Create signal memory." message count. */
+static const int CREATE_SIGNAL_MEMORY_MESSAGE_COUNT = 21;
+
+/** The "Destroy signal memory." message array. */
+static const char DESTROY_SIGNAL_MEMORY_MESSAGE_ARRAY[] = {'D', 'e', 's', 't', 'r', 'o', 'y', ' ', 's', 'i', 'g', 'n', 'a', 'l', ' ', 'm', 'e', 'm', 'o', 'r', 'y', '.'};
+
+/** The "Destroy signal memory." message. */
+static const char* DESTROY_SIGNAL_MEMORY_MESSAGE = DESTROY_SIGNAL_MEMORY_MESSAGE_ARRAY;
+
+/** The "Destroy signal memory." message count. */
+static const int DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT = 22;
+
 /*??
-"Create signal memory."
-"Destroy signal memory."
 "Could not set signal. The index exceeds the size."
 "Could not set signal. The index is negativ."
 "Could not remove signal. The index exceeds the count."
@@ -3067,10 +3116,34 @@ static const int COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE_COU
 "Could not get signal. The index is negativ."
 "Could not get signal. The index is null."
 "Could not get highest priority index. The index is null."
-"Handle compound signal."
-"Handle operation signal."
-"Set shutdown flag."
 */
+
+/** The "Handle compound signal." message array. */
+static const char HANDLE_COMPOUND_SIGNAL_MESSAGE_ARRAY[] = {'H', 'a', 'n', 'd', 'l', 'e', ' ', 'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd', ' ', 's', 'i', 'g', 'n', 'a', 'l', '.'};
+
+/** The "Handle compound signal." message. */
+static const char* HANDLE_COMPOUND_SIGNAL_MESSAGE = HANDLE_COMPOUND_SIGNAL_MESSAGE_ARRAY;
+
+/** The "Handle compound signal." message count. */
+static const int HANDLE_COMPOUND_SIGNAL_MESSAGE_COUNT = 23;
+
+/** The "Handle operation signal." message array. */
+static const char HANDLE_OPERATION_SIGNAL_MESSAGE_ARRAY[] = {'H', 'a', 'n', 'd', 'l', 'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 's', 'i', 'g', 'n', 'a', 'l', '.'};
+
+/** The "Handle operation signal." message. */
+static const char* HANDLE_OPERATION_SIGNAL_MESSAGE = HANDLE_OPERATION_SIGNAL_MESSAGE_ARRAY;
+
+/** The "Handle operation signal." message count. */
+static const int HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT = 24;
+
+/** The "Set shutdown flag." message array. */
+static const char SET_SHUTDOWN_FLAG_MESSAGE_ARRAY[] = {'S', 'e', 't', ' ', 's', 'h', 'u', 't', 'd', 'o', 'w', 'n', ' ', 'f', 'l', 'a', 'g', '.'};
+
+/** The "Set shutdown flag." message. */
+static const char* SET_SHUTDOWN_FLAG_MESSAGE = SET_SHUTDOWN_FLAG_MESSAGE_ARRAY;
+
+/** The "Set shutdown flag." message count. */
+static const int SET_SHUTDOWN_FLAG_MESSAGE_COUNT = 18;
 
 //
 // Internals log messages.

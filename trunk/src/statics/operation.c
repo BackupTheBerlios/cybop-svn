@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.9 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-05-27 22:15:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,7 +66,7 @@
  */
 void create_operation(void* p0, const void* p1) {
 
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create operation.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_OPERATION_MESSAGE, (void*) &CREATE_OPERATION_MESSAGE_COUNT);
 
     // Create operation.
     create_array(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT);
@@ -94,7 +94,7 @@ void create_operation(void* p0, const void* p1) {
  */
 void destroy_operation(void* p0, const void* p1) {
 
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy operation.");
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_OPERATION_MESSAGE, (void*) &DESTROY_OPERATION_MESSAGE_COUNT);
 
     // Initialize elements.
     int tc = 0;
@@ -149,7 +149,7 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
 
                     void** t = (void**) p0;
 
-//??                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize operation.");
+                    log_message((void*) &INFO_LOG_LEVEL, (void*) &INITIALIZE_OPERATION_MESSAGE, (void*) &INITIALIZE_OPERATION_MESSAGE_COUNT);
 
                     // The parameter count initially set to the persistent model count.
                     int count = *pc;
@@ -160,7 +160,7 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
 
                     if (i >= 0) {
 
-                        // Reset parameter count if a separator is found
+                        // Change parameter count if a separator is found
                         // and more parameters exist.
                         // Example: "operation,parameter"
                         // i = 9
@@ -187,8 +187,8 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
                         c++;
 
                         // Resize elements.
-                        resize_array(pa, (void*) &POINTER_ARRAY, (void*) &c);
-                        resize_array(pac, (void*) &INTEGER_ARRAY, (void*) &c);
+                        resize_array((void*) &pa, (void*) &POINTER_ARRAY, (void*) &c);
+                        resize_array((void*) &pac, (void*) &INTEGER_ARRAY, (void*) &c);
 
                         // Set count.
                         set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARAMETERS_COUNT_INDEX, (void*) &c);
@@ -285,7 +285,7 @@ void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
 
                     void** t = (void**) p0;
 
-//??                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize operation.");
+                    log_message((void*) &INFO_LOG_LEVEL, (void*) &FINALIZE_OPERATION_MESSAGE, (void*) &FINALIZE_OPERATION_MESSAGE_COUNT);
 
                     // Initialize elements.
                     int c = 0;

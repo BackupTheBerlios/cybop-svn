@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.8 $ $Date: 2004-05-27 14:47:22 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-05-27 22:15:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -262,12 +262,13 @@ int main(int p0, char** p1) {
             int pc = strlen(p1[1]);
             void* a = (void*) OPERATION_ABSTRACTION;
             int ac = OPERATION_ABSTRACTION_COUNT;
-            void* l = (void*) FILE_LOCATION;
-            int lc = FILE_LOCATION_COUNT;
+            void* l = (void*) INLINE_LOCATION;
+            int lc = INLINE_LOCATION_COUNT;
 
             // The transient signal gets initialized from a persistent
             // cybol source whose location was given at command line.
-            //?? CHANGE OPERATION_ABSTRACTION to COMPOUND_ABSTRACTION,
+            //?? CHANGE OPERATION_ABSTRACTION to COMPOUND_ABSTRACTION
+            //?? and INLINE to FILE,
             //?? when testing with only EXIT_SIGNAL is over!
             create_model((void*) &sig, (void*) &sigc, (void*) &p, (void*) &pc, (void*) &a, (void*) &ac, (void*) &l, (void*) &lc);
 

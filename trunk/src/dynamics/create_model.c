@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.24 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2004-05-27 22:15:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -364,13 +364,13 @@ void interpret_model(void* p0, void* p1, const void* p2, const void* p3, const v
  * Creates a model.
  *
  * @param p0 the transient model
- * @param p1 the transient model size
+ * @param p1 the transient model count
  * @param p2 the persistent model
- * @param p3 the persistent model size
+ * @param p3 the persistent model count
  * @param p4 the abstraction
- * @param p5 the abstraction size
+ * @param p5 the abstraction count
  * @param p6 the location
- * @param p7 the location size
+ * @param p7 the location count
  */
 void create_model(void* p0, void* p1, const void* p2, const void* p3, const void* p4, const void* p5, const void* p6, const void* p7) {
 

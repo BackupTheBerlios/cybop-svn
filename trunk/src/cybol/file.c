@@ -23,7 +23,7 @@
  *
  * This file handles a file.
  *
- * @version $Revision: 1.4 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-05-27 22:15:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 #define FILE_SOURCE
 
 #include <stdio.h>
+#include "../array/array.c"
 #include "../constants/constants.c"
 #include "../logger/logger.c"
 
@@ -236,6 +237,35 @@ void write_file(const void* p0, const void* p1, const void* p2, const void* p3, 
  * @param p3 the inline byte stream count
  */
 void read_inline(void* p0, void* p1, const void* p2, const void* p3) {
+
+    if (p3 != NULL_POINTER) {
+
+        int* ic = (int*) p3;
+
+        if (p1 != NULL_POINTER) {
+
+            int* ac = (int*) p1;
+
+            // Set new array size.
+            *ac = *ic;
+
+            // Resize array.
+            resize_array(p0, (void*) &CHARACTER_ARRAY, p1);
+
+            // The array index to start writing at.
+            int i = 0;
+
+            set_array_elements(p0, (void*) &CHARACTER_ARRAY, (void*) &i, p2, p3);
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read inline. The array count is null.");
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read inline. The inline byte stream count is null.");
+    }
 }
 
 /**
