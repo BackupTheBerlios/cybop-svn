@@ -50,15 +50,17 @@ static const int CHARACTER_ARRAY = 3;
  * In the case of computer science, everything gets abstracted to 0 and 1.
  * But that also means that every abstraction has a bytecode representation.
  *
- * @version $Revision: 1.4 $ $Date: 2004-03-04 14:32:08 $ $Author: christian $
+ * Besides the actual data, an array keeps meta information about:
+ * - the type (of data)
+ * - the size (allocated memory)
+ * - the count (number of elements)
+ *
+ * @version $Revision: 1.5 $ $Date: 2004-03-11 09:13:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct array {
 
-    /** The pointer array of pointer elements. */
-    void** pointer_array;
-
-    /** The internal array of integer, double or character elements. */
+    /** The internal array of pointer, integer, double or character elements. */
     void* internal_array;
 
     /** The type. */

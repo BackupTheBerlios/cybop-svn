@@ -43,64 +43,13 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.1 $ $Date: 2004-03-10 18:06:37 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-03-11 09:13:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 //
 // Double array.
 //
-
-/**
- * Extends the internal array.
- *
- * @param p0 the old internal array
- * @param p1 the old size
- * @param p2 the new size
- * @return the new internal array
- */
-/*??
-void** extend_internal_array(const void** p0, const void* p1, const void* p2) {
-
-    void** a = (void*) 0;
-
-    if (p0 != (void*) 0) {
-
-        int* old_size = (int*) p1;
-        int* new_size = (int*) p2;
-        // Create new internal array.
-        a = malloc(*new_size);
-
-        if (a != (void*) 0) {
-
-            // Copy all elements from the old to the new array.
-            // The rest of the new array is just left empty as is;
-            // no zeros are set.
-            int i = 0;
-
-            while (i < *old_size) {
-
-                a + i = p0 + i;
-
-                i++;
-            }
-
-            // Destroy old internal array.
-            free(p0);
-
-        } else {
-
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not extend internal array. The new internal array is null.");
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not extend internal array. The old internal array is null.");
-    }
-
-    return a;
-}
-*/
 
 /**
  * Compares the double arrays.
