@@ -29,13 +29,13 @@ package cyboi;
  *
  * It contains procedures to create items of primitive type.
  *
- * @version $Revision: 1.6 $ $Date: 2003-07-22 20:42:53 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-07-23 20:10:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class PrimitiveHandler {
 
     //
-    // Creation and destruction.
+    // Integer primitive.
     //
 
     /**
@@ -50,6 +50,18 @@ class PrimitiveHandler {
     }
 
     /**
+     * Destroys the integer primitive.
+     *
+     * @param p the integer primitive
+     */
+    static void destroy_integer_primitive(java.lang.Object p) {
+    }
+
+    //
+    // Float primitive.
+    //
+
+    /**
      * Creates a float primitive.
      *
      * @param s the float primitive as string
@@ -59,6 +71,18 @@ class PrimitiveHandler {
 
         return java.lang.Double.valueOf((java.lang.String) s);
     }
+
+    /**
+     * Destroys the float primitive.
+     *
+     * @param p the float primitive
+     */
+    static void destroy_float_primitive(java.lang.Object p) {
+    }
+
+    //
+    // Character primitive.
+    //
 
     /**
      * Creates a character primitive.
@@ -72,6 +96,18 @@ class PrimitiveHandler {
     }
 
     /**
+     * Destroys the character primitive.
+     *
+     * @param p the character primitive
+     */
+    static void destroy_character_primitive(java.lang.Object p) {
+    }
+
+    //
+    // String primitive.
+    //
+
+    /**
      * Creates a string primitive.
      *
      * @param s the string primitive as string
@@ -80,6 +116,14 @@ class PrimitiveHandler {
     static java.lang.Object create_string_primitive(java.lang.Object s) {
 
         return s;
+    }
+
+    /**
+     * Destroys the string primitive.
+     *
+     * @param p the string primitive
+     */
+    static void destroy_string_primitive(java.lang.Object p) {
     }
 
 /*??
@@ -121,7 +165,6 @@ class PrimitiveHandler {
      * Creates an encapsulated java object.
      *
      * @return the encapsulated java object
-     * @exception Exception if the encapsulated java object is null
      */
 /*??
     static java.lang.Object createJavaObject() {
@@ -168,7 +211,6 @@ class PrimitiveHandler {
      * Creates a java tree node.
      *
      * @return the java tree node
-     * @exception Exception if the java tree node is null
      */
 /*??
     static javax.swing.tree.DefaultMutableTreeNode createJavaTreeNode() {
@@ -226,8 +268,6 @@ class PrimitiveHandler {
      * Adds the java tree node of the array.
      *
      * @param a the array
-     * @exception Exception if the java tree node is null
-     * @exception Exception if the array is null
      */
 /*??
     static void addTreeNode(Array a) {
@@ -267,8 +307,6 @@ class PrimitiveHandler {
      * Removes the java tree node of the array.
      *
      * @param a the array
-     * @exception Exception if the java tree node is null
-     * @exception Exception if the array is null
      */
 /*??
     static void removeTreeNode(Array a) {

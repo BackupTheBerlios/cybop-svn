@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.10 $ $Date: 2003-07-22 20:42:53 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-07-23 20:10:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -60,8 +60,8 @@ class Main {
 
                 if (args.length == 2) {
 
-                    java.lang.String dynamics_category = args[0];
-                    java.lang.String statics_category = args[1];
+                    java.lang.String statics_category = args[0];
+                    java.lang.String dynamics_category = args[1];
 
                     ItemHandler.xml_parser = ItemHandler.create_xml_parser();
 
@@ -74,7 +74,7 @@ class Main {
                     ItemHandler.initialize(statics, statics_category);
 
                     java.lang.Object dynamics = ItemHandler.create_item_container();
-                    ItemHandler.initialize(dynamics, dynamics_category);
+//??                    ItemHandler.initialize(dynamics, dynamics_category);
     
                     // Alternative to Java Event Handler
                     // (if it gets replaced one day, once CYBOI is implemented in C):
@@ -140,7 +140,7 @@ class Main {
      *
      * @return the event handler
      */
-    static java.lang.Object create_event_handler() throws Exception {
+    static java.lang.Object create_event_handler() throws java.lang.Exception {
 
         return new EventHandler();
     }

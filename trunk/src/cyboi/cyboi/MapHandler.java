@@ -29,7 +29,7 @@ package cyboi;
  *
  * Map elements are accessed over their index or name.
  *
- * @version $Revision: 1.7 $ $Date: 2003-07-22 20:42:53 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-07-23 20:10:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class MapHandler {
@@ -116,27 +116,19 @@ class MapHandler {
      * Sets the map element.
      *
      * @param c the map container
+     * @param n the name
      * @param e the map element
      */
-    static void set_map_element(java.lang.Object c, java.lang.Object e) {
+    static void set_map_element(java.lang.Object c, java.lang.Object n, java.lang.Object e) {
 
         MapContainer mc = (MapContainer) c;
         
         if (mc != null) {
             
-            MapElement me = (MapElement) e;
-            
-            if (me != null) {
-    
-                int i = MapHandler.get_next_map_element_index(mc, me.name);
-    
-                ArrayHandler.set_array_element(mc.names, i, me.name);
-                ArrayHandler.set_array_element(mc.references, i, me.reference);
+            int i = MapHandler.get_next_map_element_index(mc, n);
 
-            } else {
-    
-                System.out.println("ERROR: Could not set map element. The map element is null.");
-            }
+            ArrayHandler.set_array_element(mc.names, i, n);
+            ArrayHandler.set_array_element(mc.references, i, e);
 
         } else {
 
@@ -148,24 +140,14 @@ class MapHandler {
      * Adds the map element.
      *
      * @param c the map container
+     * @param n the name
      * @param e the map element
-     * @return the map element name
      */
-    static void add_map_element(java.lang.Object c, java.lang.Object e) {
+    static void add_map_element(java.lang.Object c, java.lang.Object n, java.lang.Object e) {
 
-        MapElement me = (MapElement) e;
-        
-        if (me != null) {
+        java.lang.Object en = MapHandler.get_new_map_element_name(c, n);
 
-            //?? Really necessary to return the name?
-            me.name = MapHandler.get_new_map_element_name(c, me);
-    
-            MapHandler.set_map_element(c, me);
-
-        } else {
-
-            System.out.println("ERROR: Could not add map element. The map element is null.");
-        }
+        MapHandler.set_map_element(c, en, e);
     }
 
     /**
@@ -196,11 +178,11 @@ class MapHandler {
      * Removes the map element with the name.
      *
      * @param c the map container
-     * @param e the map element
+     * @param n the name
      */
-    static void remove_map_element(java.lang.Object c, java.lang.Object e) {
+    static void remove_map_element(java.lang.Object c, java.lang.Object n) {
     
-        int i = MapHandler.get_map_element_index(c, e);
+        int i = MapHandler.get_map_element_index(c, n);
 
         MapHandler.remove_map_element(c, i);
     }
@@ -233,12 +215,12 @@ class MapHandler {
      * Returns the map element with the name.
      *
      * @param c the map container
-     * @param e the map element
+     * @param n the name
      * @return the map element
      */
-    static java.lang.Object get_map_element(java.lang.Object c, java.lang.Object e) {
+    static java.lang.Object get_map_element(java.lang.Object c, java.lang.Object n) {
 
-        int i = MapHandler.get_map_element_index(c, e);
+        int i = MapHandler.get_map_element_index(c, n);
 
         return MapHandler.get_map_element(c, i);
     }
@@ -247,51 +229,43 @@ class MapHandler {
      * Returns the map element index of the name.
      *
      * @param c the map container
-     * @param e the map element
+     * @param n the name
      * @return the index
      */
-    static int get_map_element_index(java.lang.Object c, java.lang.Object e) {
+    static int get_map_element_index(java.lang.Object c, java.lang.Object n) {
 
         int index = -1;
         MapContainer mc = (MapContainer) c;
 
         if (mc != null) {
             
-            MapElement me = (MapElement) e;
-            
-            if (me != null) {
-    
-                int i = index + 1;
-                int size = MapHandler.get_map_container_size(c);
-                java.lang.Object name = null;
-    
-                while (i < size) {
-    
-                    name = ArrayHandler.get_array_element(mc.names, i);
-    
-                    // If a null name is reached, then the name was not found.
-                    // In this case, reset index to -1.
-                    if (name == null) {
-    
+            int i = index + 1;
+            int size = MapHandler.get_map_container_size(c);
+            java.lang.Object name = null;
+            java.lang.Object[] a = mc.names;
+
+            while (i < size) {
+
+                name = ArrayHandler.get_array_element(a, i);
+
+                // If a null name is reached, then the name was not found.
+                // In this case, reset index to -1.
+                if (name == null) {
+
+                    break;
+                
+                } else {
+
+                    // If a name equal to the searched one is found,
+                    // then its index is the one to be returned.
+                    if (name.equals((java.lang.String) n)) {
+
+                        index = i;
                         break;
-                    
-                    } else {
-    
-                        // If a name equal to the searched one is found,
-                        // then its index is the one to be returned.
-                        if (name.equals((java.lang.String) me.name)) {
-    
-                            index = i;
-                            break;
-                        }
                     }
-    
-                    i++;
                 }
 
-            } else {
-    
-                System.out.println("ERROR: Could not get map element index. The map element is null.");
+                i++;
             }
 
         } else {
@@ -313,60 +287,52 @@ class MapHandler {
      * map is full and its size will be returned as next available index.
      *
      * @param c the map container
-     * @param e the map element
+     * @param n the name
      * @return the next index
      */
-    static int get_next_map_element_index(java.lang.Object c, java.lang.Object e) {
+    static int get_next_map_element_index(java.lang.Object c, java.lang.Object n) {
 
         int index = -1;
         MapContainer mc = (MapContainer) c;
 
         if (mc != null) {
 
-            MapElement me = (MapElement) e;
-            
-            if (me != null) {
-                    
-                int i = index + 1;
-                int size = MapHandler.get_map_container_size(mc);
-                java.lang.Object name = null;
-    
-                while (i < size) {
-    
-                    name = ArrayHandler.get_array_element(mc.names, i);
-    
-                    // If a null name is reached, then the name was not found.
-                    // In this case, the current value of i is the next free index.
-                    if (name == null) {
-    
+            int i = index + 1;
+            int size = MapHandler.get_map_container_size(mc);
+            java.lang.Object name = null;
+            java.lang.Object[] a = mc.names;
+
+            while (i < size) {
+
+                name = ArrayHandler.get_array_element(a, i);
+
+                // If a null name is reached, then the name was not found.
+                // In this case, the current value of i is the next free index.
+                if (name == null) {
+
+                    index = i;
+                    break;
+
+                } else {
+
+                    // If a name equal to the searched one is found,
+                    // then its index is the one to be returned since
+                    // this element will have to be replaced.
+                    if (name.equals((java.lang.String) n)) {
+
                         index = i;
                         break;
-    
-                    } else {
-    
-                        // If a name equal to the searched one is found,
-                        // then its index is the one to be returned since
-                        // this element will have to be replaced.
-                        if (name.equals((java.lang.String) me.name)) {
-    
-                            index = i;
-                            break;
-                        }
                     }
-    
-                    i++;
-                }
-    
-                // Neither element matched, nor was a null element found.
-                // The map is full and such its size will be the next index to be used.
-                if (index == -1) {
-    
-                    index = MapHandler.get_map_container_size(mc);
                 }
 
-            } else {
-    
-                System.out.println("ERROR: Could not get next map element index. The map element is null.");
+                i++;
+            }
+
+            // Neither element matched, nor was a null element found.
+            // The map is full and such its size will be the next index to be used.
+            if (index == -1) {
+
+                index = MapHandler.get_map_container_size(mc);
             }
 
         } else {
@@ -417,62 +383,54 @@ class MapHandler {
      * Returns the number of names that start with the given name as word base.
      *
      * @param c the map container
-     * @param e the map element
+     * @param n the name
      * @return the number of names that start with the given name as word base
      */
-    static int get_map_element_count(java.lang.Object c, java.lang.Object e) {
+    static int get_map_element_count(java.lang.Object c, java.lang.Object n) {
 
         int count = 0;
         MapContainer mc = (MapContainer) c;
 
         if (mc != null) {
 
-            MapElement me = (MapElement) e;
-            
-            if (me != null) {
-                    
-                int i = 0;
-                int size = MapHandler.get_map_container_size(mc);
-                java.lang.Object name = null;
-    
-                while (i < size) {
-    
-                    name = ArrayHandler.get_array_element(mc.names, i);
-    
-                    if (name != null) {
-    
-                        if (((java.lang.String) name).startsWith((java.lang.String) me.name)) {
-    
+            int i = 0;
+            int size = MapHandler.get_map_container_size(mc);
+            java.lang.Object name = null;
+            java.lang.Object[] a = mc.names;
+
+            while (i < size) {
+
+                name = ArrayHandler.get_array_element(a, i);
+
+                if (name != null) {
+
+                    if (((java.lang.String) name).startsWith((java.lang.String) n)) {
+
 /*??
-                            int begin = 0;
-                            java.lang.String sub = null;
-                            int number = 0;
-                
-                            begin = ((java.lang.String) name).indexOf("_");
-                            sub = ((java.lang.String) name).substring(begin + 1);
-                            number = Integer.parseInt(sub);
-    
-                            if (number > count) {
-    
-                                count = number;
-                            }
-*/
-    
-                            count++;
+                        int begin = 0;
+                        java.lang.String sub = null;
+                        int number = 0;
+            
+                        begin = ((java.lang.String) name).indexOf("_");
+                        sub = ((java.lang.String) name).substring(begin + 1);
+                        number = Integer.parseInt(sub);
+
+                        if (number > count) {
+
+                            count = number;
                         }
-    
-                    } else {
-    
-                        // Reached last valid name. Only null entries left.
-                        break;
+*/
+
+                        count++;
                     }
-    
-                    i++;
+
+                } else {
+
+                    // Reached last valid name. Only null entries left.
+                    break;
                 }
 
-            } else {
-    
-                System.out.println("ERROR: Could not get map element count. The map element is null.");
+                i++;
             }
 
         } else {

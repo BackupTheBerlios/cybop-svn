@@ -65,7 +65,7 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.10 $ $Date: 2003-07-22 20:42:53 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-07-23 20:10:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -82,7 +82,7 @@ class ItemHandler {
      *
      * @return the xml parser
      */
-    static java.lang.Object create_xml_parser() {
+    static java.lang.Object create_xml_parser() throws java.lang.Exception {
 
         org.apache.xerces.parsers.DOMParser p = new org.apache.xerces.parsers.DOMParser();
 
@@ -121,10 +121,14 @@ class ItemHandler {
 
         if (c != null) {
 
-            c.abstractions = MapHandler.create_map_container();
-            c.categories = MapHandler.create_map_container();
-            c.positions = MapHandler.create_map_container();
+            c.item_abstractions = MapHandler.create_map_container();
             c.items = MapHandler.create_map_container();
+            c.space_abstractions = MapHandler.create_map_container();
+            c.spaces = MapHandler.create_map_container();
+            c.time_abstractions = MapHandler.create_map_container();
+            c.times = MapHandler.create_map_container();
+            c.force_abstractions = MapHandler.create_map_container();
+            c.forces = MapHandler.create_map_container();
 
         } else {
 
@@ -145,21 +149,37 @@ class ItemHandler {
         
         if (ic != null) {
 
+            java.lang.Object forces = ic.forces;
+            ic.forces = null;
+            MapHandler.destroy_map_container(forces);
+
+            java.lang.Object force_abstractions = ic.force_abstractions;
+            ic.force_abstractions = null;
+            MapHandler.destroy_map_container(force_abstractions);
+
+            java.lang.Object times = ic.times;
+            ic.times = null;
+            MapHandler.destroy_map_container(times);
+
+            java.lang.Object time_abstractions = ic.time_abstractions;
+            ic.time_abstractions = null;
+            MapHandler.destroy_map_container(time_abstractions);
+
+            java.lang.Object spaces = ic.spaces;
+            ic.spaces = null;
+            MapHandler.destroy_map_container(spaces);
+
+            java.lang.Object space_abstractions = ic.space_abstractions;
+            ic.space_abstractions = null;
+            MapHandler.destroy_map_container(space_abstractions);
+
             java.lang.Object items = ic.items;
             ic.items = null;
             MapHandler.destroy_map_container(items);
 
-            java.lang.Object positions = ic.positions;
-            ic.positions = null;
-            MapHandler.destroy_map_container(positions);
-
-            java.lang.Object categories = ic.categories;
-            ic.categories = null;
-            MapHandler.destroy_map_container(categories);
-
-            java.lang.Object abstractions = ic.abstractions;
-            ic.abstractions = null;
-            MapHandler.destroy_map_container(abstractions);
+            java.lang.Object item_abstractions = ic.item_abstractions;
+            ic.item_abstractions = null;
+            MapHandler.destroy_map_container(item_abstractions);
 
         } else {
 
@@ -178,7 +198,7 @@ class ItemHandler {
      * @param c the category
      * @return the item element
      */
-    static java.lang.Object create_item_element(java.lang.Object a, java.lang.Object c) {
+    static java.lang.Object create_item_element(java.lang.Object a, java.lang.Object c) throws java.lang.Exception {
 
         java.lang.Object i = null;
 
@@ -215,167 +235,43 @@ class ItemHandler {
     }
 
     /**
-     * Sets the item element.
+     * Destroys the item element.
      *
-     * @param c the item container
-     * @param e the item element
+     * @param a the abstraction
+     * @param c the category
+     * @param i the item element
      */
-    static void set_item_element(java.lang.Object c, java.lang.Object e) {
+    static java.lang.Object destroy_item_element(java.lang.Object a, java.lang.Object c, java.lang.Object i) throws java.lang.Exception {
 
-        ItemContainer ic = (ItemContainer) c;
-        
-        if (ic != null) {
-            
-            ItemElement ie = (ItemElement) e;
-            
-            if (ie != null) {
+        if (a != null) {
 
-                MapHandler.set_map_element(ic.abstractions, ie.name, ie.abstraction);
-                MapHandler.set_map_element(ic.categories, ie.name, ie.category);
-                MapHandler.set_map_element(ic.positions, ie.name, ie.position);
-                MapHandler.set_map_element(ic.items, ie.name, ie.item);
+            if (a.equals(Statics.INTEGER_PRIMITIVE)) {
 
-            } else {
-    
-                java.lang.System.out.println("ERROR: Could not set item element. The item element is null.");
+                PrimitiveHandler.destroy_integer_primitive(i);
+
+            } else if (a.equals(Statics.FLOAT_PRIMITIVE)) {
+
+                PrimitiveHandler.destroy_float_primitive(i);
+
+            } else if (a.equals(Statics.CHAR_PRIMITIVE)) {
+
+                PrimitiveHandler.destroy_character_primitive(i);
+
+            } else if (a.equals(Statics.STRING_PRIMITIVE)) {
+
+                PrimitiveHandler.destroy_string_primitive(i);
+
+            } else if (a.equals(Statics.COMPLEX)) {
+
+                ItemHandler.finalizz(i, c);
+                ItemHandler.destroy_item_container(i);
             }
-
+            
         } else {
-
-            java.lang.System.out.println("ERROR: Could not set item element. The item container is null.");
-        }
-    }
-
-    /**
-     * Adds the item element.
-     *
-     * @param c the item container
-     * @param n the base name
-     * @param e the element
-     */
-    static void add_item_element(java.lang.Object c, java.lang.Object n, java.lang.Object e) {
-
-        MapContainer mc = (MapContainer) c;
-
-        if (mc != null) {
-
-            MapHandler.add_map_element(mc, n, e);
-
-        } else {
-
-            java.lang.System.out.println("ERROR: Could not add item element. The item element is null.");
-        }
-    }
-
-    /**
-     * Removes the item element.
-     *
-     * @param c the item container
-     * @param i the index
-     */
-    static void remove_item_element(java.lang.Object c, int i) {
-
-        MapContainer mc = (MapContainer) c;
-
-        if (mc != null) {
-
-            MapHandler.remove_map_element(mc, i);
-
-        } else {
-
-            java.lang.System.out.println("ERROR: Could not remove item element. The item element is null.");
-        }
-    }
-
-    /**
-     * Removes the item element.
-     *
-     * @param c the item container
-     * @param n the name
-     */
-    static void remove_item_element(java.lang.Object c, java.lang.Object n) {
-
-        MapContainer mc = (MapContainer) c;
-
-        if (mc != null) {
-
-            MapHandler.remove_map_element(mc, n);
-
-        } else {
-
-            java.lang.System.out.println("ERROR: Could not remove item element. The item element is null.");
-        }
-    }
-
-    /**
-     * Returns the item element.
-     *
-     * @param c the item container
-     * @param i the index
-     * @return the item element
-     */
-    static java.lang.Object get_item_element(java.lang.Object c, int i) {
-
-        java.lang.Object e = null;
-        MapContainer mc = (MapContainer) c;
-
-        if (mc != null) {
-
-            e = get_map_element(mc, i);
-
-        } else {
-
-            java.lang.System.out.println("ERROR: Could not get item element. The item element is null.");
+            
+            java.lang.System.out.println("ERROR: Could not destroy item element. The abstraction is null.");
         }
 
-        return e;
-    }
-
-    /**
-     * Returns the item element.
-     *
-     * @param c the item container
-     * @param n the name
-     * @return the item element
-     */
-    static ItemContainer get_item_element(java.lang.Object c, java.lang.Object n) {
-
-        java.lang.Object e = null;
-        MapContainer mc = (MapContainer) c;
-
-        if (mc != null) {
-
-            e = get_map_element(mc, n);
-
-        } else {
-
-            java.lang.System.out.println("ERROR: Could not get item element. The item element is null.");
-        }
-
-        return e;
-    }
-
-    /**
-     * Returns the number of items whose name starts with the given name as word base.
-     *
-     * @param c the item container
-     * @param n the name
-     * @return the number of items whose name starts with the given name as word base
-     */
-    static int get_element_count(java.lang.Object c, java.lang.Object n) {
-
-        int i = -1;
-        MapContainer mc = (MapContainer) c;
-
-        if (mc != null) {
-
-            i = mc.getCount(n);
-
-        } else {
-
-            java.lang.System.out.println("ERROR: Could not get item element count. The item element is null.");
-        }
-        
         return i;
     }
 
@@ -391,7 +287,7 @@ class ItemHandler {
      * @param i the item
      * @param c the category
      */
-    static void initialize(java.lang.Object i, java.lang.Object c) throws Exception {
+    static void initialize(java.lang.Object i, java.lang.Object c) throws java.lang.Exception {
 
         org.apache.xerces.parsers.DOMParser p = (org.apache.xerces.parsers.DOMParser) ItemHandler.xml_parser;
 
@@ -413,12 +309,28 @@ class ItemHandler {
     }
 
     /**
+     * Finalizes this item.
+     *
+     * This method's name is <code>finalizz</code> and not <code>finalize</code>
+     * because the java computer language already uses <code>finalize</code> in
+     * its <code>java.lang.Object</code> class.
+     *
+     * This method will be renamed to <code>finalize</code> as soon as the new
+     * and simplified CYBOL computer language is used.
+     *
+     * @param i the item
+     * @param c the category
+     */
+    static void finalizz(java.lang.Object i, java.lang.Object c) {
+    }
+
+    /**
      * Processes the item document.
      *
      * @param i the item
      * @param d the document
      */
-    static void process_document(java.lang.Object item, java.lang.Object d) {
+    static void process_document(java.lang.Object i, java.lang.Object d) throws java.lang.Exception {
 
         org.w3c.dom.Document doc = (org.w3c.dom.Document) d;
 
@@ -450,10 +362,12 @@ class ItemHandler {
      * @param l the node list
      */
     static void process_name(java.lang.Object i, java.lang.Object l) {
+        
+        org.w3c.dom.NodeList nl = (org.w3c.dom.NodeList) l;
 
-        if (l != null) {
+        if (nl != null) {
             
-            org.w3c.dom.Node n = l.item(0);
+            org.w3c.dom.Node n = nl.item(0);
             
             if (n != null) {
                 
@@ -479,9 +393,11 @@ class ItemHandler {
      */
     static void process_super(java.lang.Object i, java.lang.Object l) {
 
-        if (l != null) {
-        
-            org.w3c.dom.Node n = l.item(0);
+        org.w3c.dom.NodeList nl = (org.w3c.dom.NodeList) l;
+
+        if (nl != null) {
+            
+            org.w3c.dom.Node n = nl.item(0);
             
             if (n != null) {
                 
@@ -505,19 +421,21 @@ class ItemHandler {
      * @param i the item
      * @param l the node list
      */
-    static void process_items(java.lang.Object i, java.lang.Object l) {
+    static void process_items(java.lang.Object i, java.lang.Object l) throws java.lang.Exception {
 
-        if (l != null) {
-        
+        org.w3c.dom.NodeList nl = (org.w3c.dom.NodeList) l;
+
+        if (nl != null) {
+            
             int j = 0;
-            int size = l.getLength();
+            int size = nl.getLength();
             org.w3c.dom.Node n = null;
             org.w3c.dom.NamedNodeMap m = null;
             java.lang.Object item = null;
 
             while (j < size) {
             
-                n = l.item(j);
+                n = nl.item(j);
 
                 if (n != null) {
 
@@ -536,7 +454,7 @@ class ItemHandler {
                     java.lang.System.out.println("ERROR: Could not process the items. The node is null.");
                 }
                 
-                i++;
+                j++;
             }
             
         } else {
@@ -551,26 +469,38 @@ class ItemHandler {
      * @param i the item
      * @param m the node map
      */
-    static void process_node_map(java.lang.Object i, java.lang.Object m) {
+    static void process_node_map(java.lang.Object i, java.lang.Object m) throws java.lang.Exception {
 
-        name = ItemHandler.getAttribute(m, ItemElement.NAME);
+        ItemContainer ic = (ItemContainer) i;
         
-        category_abstraction = ItemHandler.getAttribute(m, ItemElement.CATEGORY_ABSTRACTION);
-        category = ItemHandler.getAttribute(m, ItemElement.CATEGORY);
-        java.lang.Object category_child = create_item_element(category_abstraction, category);
-        add_item_element(item, name, category_child);
-        
-        space_abstraction = ItemHandler.getAttribute(m, ItemElement.SPACE_ABSTRACTION);
-        space = ItemHandler.getAttribute(m, ItemElement.SPACE);
-        java.lang.Object space_child = create_item_element(space_abstraction, space);
-        add_item_element(item, name, space_child);
-        
-        time_abstraction = ItemHandler.getAttribute(m, ItemElement.TIME_ABSTRACTION);
-        time = ItemHandler.getAttribute(m, ItemElement.TIME);
-        java.lang.Object time_child = create_item_element(time_abstraction, time);
-        add_item_element(item, name, time_child);
-        
-        java.lang.System.out.println("INFO: Successfully read item: " + name);
+        if (ic != null) {
+                
+            java.lang.Object n = ItemHandler.get_attribute(m, ItemElement.NAME);
+            java.lang.Object a = null;
+            java.lang.Object c = null;
+            java.lang.Object it = null;
+            
+            a = ItemHandler.get_attribute(m, ItemElement.ITEM_ABSTRACTION);
+            c = ItemHandler.get_attribute(m, ItemElement.ITEM_CATEGORY);
+            it = ItemHandler.create_item_element(a, c);
+            MapHandler.add_map_element(ic.items, n, it);
+            
+            a = ItemHandler.get_attribute(m, ItemElement.SPACE_ABSTRACTION);
+            c = ItemHandler.get_attribute(m, ItemElement.SPACE_CATEGORY);
+            it = ItemHandler.create_item_element(a, c);
+            MapHandler.add_map_element(ic.spaces, n, it);
+            
+            a = ItemHandler.get_attribute(m, ItemElement.TIME_ABSTRACTION);
+            c = ItemHandler.get_attribute(m, ItemElement.TIME_CATEGORY);
+            it = ItemHandler.create_item_element(a, c);
+            MapHandler.add_map_element(ic.times, n, it);
+            
+            java.lang.System.out.println("INFO: Successfully read item: " + n);
+            
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not process node map. The item container is null.");
+        }
     }
 
     /**
@@ -587,7 +517,7 @@ class ItemHandler {
 
         if (am != null) {
     
-            org.w3c.dom.Node e = am.getNamedItem(n);
+            org.w3c.dom.Node e = am.getNamedItem((java.lang.String) n);
             
             if (e != null) {
                 
@@ -606,19 +536,6 @@ class ItemHandler {
         return a;
     }
     
-    /**
-     * Finalizes this item.
-     *
-     * This method's name is <code>finalizz</code> and not <code>finalize</code>
-     * because the java computer language already uses <code>finalize</code> in
-     * its <code>java.lang.Object</code> class.
-     *
-     * This method will be renamed to <code>finalize</code> as soon as the new
-     * and simplified CYBOL computer language is used.
-     */
-    static void finalizz() {
-    }
-
     //
     // Functionality.
     //
