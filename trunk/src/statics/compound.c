@@ -64,7 +64,7 @@
  * A compound model can be created by cloning an existing model template so that
  * some space gets allocated in the computer's memory.
  *
- * @version $Revision: 1.11 $ $Date: 2004-06-10 15:17:35 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-06-11 11:26:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -514,8 +514,8 @@ void finalize_compound(const void* p0, const void* p1, void* p2, void* p3) {
  *
  * @param p0 the compound
  * @param p1 the compound count
- * @param p2 the name
- * @param p3 the name count
+ * @param p2 the part name
+ * @param p3 the part name count
  * @param p4 the index
  */
 void get_compound_part_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
@@ -542,7 +542,7 @@ void get_compound_part_index(const void* p0, const void* p1, const void* p2, con
                 get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
                 get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &nc);
 
-                // The comparison loop.
+                // The loop variable.
                 int j = 0;
                 // The name.
                 void* n1 = NULL_POINTER;
@@ -759,7 +759,8 @@ void build_next_map_element_name(const void* p0, const void* p1, void* p2) {
  * @param p23 the position constraint count
  * @param p24 the position constraint size
  */
-void set_compound_part_by_index(void* p0, void* p1, void* p2, const void* p3,
+void set_compound_part_by_index(void* p0, void* p1, void* p2,
+    const void* p3,
     const void* p4, const void* p5, const void* p6,
     const void* p7, const void* p8, const void* p9,
     const void* p10, const void* p11, const void* p12,
@@ -1012,18 +1013,18 @@ void set_compound_part_by_index(void* p0, void* p1, void* p2, const void* p3,
  * @param p0 the compound
  * @param p1 the compound count
  * @param p2 the compound size
- * @param p3 the name
- * @param p4 the name count
- * @param p5 the name size
- * @param p6 the model
- * @param p7 the model count
- * @param p8 the model size
- * @param p9 the abstraction
- * @param p10 the abstraction count
- * @param p11 the abstraction size
- * @param p12 the constraint
- * @param p13 the constraint count
- * @param p14 the constraint size
+ * @param p3 the part name
+ * @param p4 the part name count
+ * @param p5 the part name size
+ * @param p6 the part model
+ * @param p7 the part model count
+ * @param p8 the part model size
+ * @param p9 the part abstraction
+ * @param p10 the part abstraction count
+ * @param p11 the part abstraction size
+ * @param p12 the part constraint
+ * @param p13 the part constraint count
+ * @param p14 the part constraint size
  * @param p15 the position model
  * @param p16 the position model count
  * @param p17 the position model size
@@ -1034,14 +1035,19 @@ void set_compound_part_by_index(void* p0, void* p1, void* p2, const void* p3,
  * @param p22 the position constraint count
  * @param p23 the position constraint size
  */
-void set_compound_part_by_name(void* p0, void* p1, void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6, const void* p7, const void* p8, const void* p9, const void* p10,
-    const void* p11, const void* p12, const void* p13, const void* p14, const void* p15, const void* p16) {
+void set_compound_part_by_name(void* p0, void* p1, void* p2,
+    const void* p3, const void* p4, const void* p5,
+    const void* p6, const void* p7, const void* p8,
+    const void* p9, const void* p10, const void* p11,
+    const void* p12, const void* p13, const void* p14,
+    const void* p15, const void* p16, const void* p17,
+    const void* p18, const void* p19, const void* p20,
+    const void* p21, const void* p22, const void* p23) {
 
     // The separator index.
     int i = -1;
 
-    get_array_element_index(p3, (void*) &CHARACTER_ARRAY, p2, (void*) &COMPOUND_PART_SEPARATOR, (void*) &i);
+    get_array_element_index(p3, (void*) &CHARACTER_ARRAY, p4, (void*) &COMPOUND_PART_SEPARATOR, (void*) &i);
 
     if (i != -1) {
 
@@ -1049,60 +1055,77 @@ void set_compound_part_by_name(void* p0, void* p1, void* p2, const void* p3, con
         // The full name is hierarchical.
         // The given compound contains parts which are compound models.
 
-        if (p2 != NULL_POINTER) {
+        if (p4 != NULL_POINTER) {
 
-            // The name size.
-            int* ns = (int*) p2;
+            int* nc = (int*) p4;
 
-            if (p1 != NULL_POINTER) {
+            if (p3 != NULL_POINTER) {
 
-                // The name.
-                char** n = (char**) p1;
+                void** n = (void**) p3;
 
                 if (i >= 0) {
 
-                    if (i < *ns) {
+                    if (i < *nc) {
 
                         if (i != 0) {
 
-                            if (i != (*ns - 1)) {
+                            if (i != (*nc - 1)) {
 
                                 // The remaining name starts at the index after the separator.
                                 // Example: "hello.test"
                                 // The index of the separator is 5.
                                 // The starting index of the remaining name "test" is 6 = 5 + 1.
-                                char* r = (char*) (*n + i + 1);
+                                void* r = (void*) (*n + i + 1);
 
-                                // The remaining name size is the full name size decreased
+                                // The remaining name count is the full name count decreased
                                 // by the separator index increased by one.
                                 // Example: "hello.test"
-                                // The full name size is 10.
+                                // The full name count is 10.
                                 // The separator index is 5.
-                                // The size of the remaining name "test" is 4 = 10 - (5 + 1).
-                                int rs = *ns - (i + 1);
+                                // The count of the remaining name "test" is 4 = 10 - (5 + 1).
+                                int rc = *nc - (i + 1);
 
-                                // Get part models.
-                                void* pm = NULL_POINTER;
-                                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+                                // Initialize part models and their counts and sizes.
+                                void* m = NULL_POINTER;
+                                int mc = 0;
+                                int ms = 0;
+
+                                // Get part models and their counts and sizes.
+                                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &m);
+                                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &mc);
+                                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_SIZES_INDEX, (void*) &ms);
 
                                 // Get index of part name.
-                                // The index i is used as part name size.
+                                // The separator index i is used as part name count.
                                 // Example: "hello.test"
                                 // The index i of the separator is 5.
-                                // The size of the part name "hello" before the separator is likewise 5.
+                                // The count of the part name "hello" before the separator is likewise 5.
                                 int index = -1;
-                                get_compound_part_index(p0, p1, (void*) &i, (void*) &index);
+                                get_compound_part_index(p0, p1, p3, (void*) &i, (void*) &index);
 
                                 if (index != -1) {
 
-                                    // Get part.
-                                    void* part = NULL_POINTER;
-                                    get_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &index, (void*) &part);
+                                    // Initialize part model and its count and size.
+                                    void* pm = NULL_POINTER;
+                                    int pmc = 0;
+                                    int pms = 0;
+
+                                    // Get part model and its count and size.
+                                    get_array_element((void*) &m, (void*) &POINTER_ARRAY, (void*) &index, (void*) &pm);
+                                    get_array_element((void*) &mc, (void*) &INTEGER_ARRAY, (void*) &index, (void*) &pmc);
+                                    get_array_element((void*) &ms, (void*) &INTEGER_ARRAY, (void*) &index, (void*) &pms);
+
+                                    //?? TODO:
+                                    //?? For now, the remaining name count is also used as
+                                    //?? remaining name size and such handed over twice.
+                                    //?? Later implementations may use UNICODE names so that
+                                    //?? the name count and size differ.
 
                                     // Recursively continue to process along the hierarchical name.
-                                    set_compound_part_by_name((void*) &part, (void*) &r, (void*) &rs,
-                                        p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
-                                        p15, p16, p17, p18, p19, p20);
+                                    set_compound_part_by_name((void*) &pm, (void*) &pmc, (void*) &pms,
+                                        (void*) &r, (void*) &rc, (void*) &rc,
+                                        p6, p7, p8, p9, p10, p11, p12, p13, p14,
+                                        p15, p16, p17, p18, p19, p20, p21, p22, p23);
 
                                 } else {
 
@@ -1121,7 +1144,7 @@ void set_compound_part_by_name(void* p0, void* p1, void* p2, const void* p3, con
 
                     } else {
 
-//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by name. The separator index exceeds the full name size.");
+//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by name. The separator index exceeds the full name count.");
                     }
 
                 } else {
@@ -1136,7 +1159,7 @@ void set_compound_part_by_name(void* p0, void* p1, void* p2, const void* p3, con
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by name. The name size is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by name. The name count is null.");
         }
 
     } else {
@@ -1145,24 +1168,41 @@ void set_compound_part_by_name(void* p0, void* p1, void* p2, const void* p3, con
         // The full name is not hierarchical and represents the part name.
         // The given compound contains parts which are primitive models.
 
-        // The index of the given name.
+        // The index of the part name.
         int index = -1;
         get_compound_part_index(p0, p1, p3, p4, (void*) &index);
 
         if (index != -1) {
 
-//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &SET_COMPOUND_PART_BY_NAME, (void*) &SET_COMPOUND_PART_BY_NAME_COUNT);
+//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &SET_COMPOUND_PART_BY_NAME_MESSAGE, (void*) &SET_COMPOUND_PART_BY_NAME_MESSAGE_COUNT);
 
-            set_compound_part_by_index(p0, (void*) &index, p1, p2,
-                p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16);
+            //?? TODO:
+            //?? - Do NOT just replace existing parts, otherwise the reference to
+            //??   them is lost and they can not be destroyed properly.
+            //?? - Allow replacement for primitive types (integer, double) that
+            //??   do not have to be destroyed!
+            //?? - Check the abstraction of the model to be set:
+            //??   If it is compound, then do NOT replace; otherwise DO replace!
+
+/*??
+            // Use index of the found element.
+            set_compound_part_by_index(p0, p1, p2,
+                (void*) &index,
+                p3, p4, p5,
+                p6, p7, p8, p9, p10, p11, p12, p13, p14,
+                p15, p16, p17, p18, p19, p20, p21, p22, p23);
+*/
 
         } else {
 
-//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &ADD_COMPOUND_PART_BY_NAME, (void*) &ADD_COMPOUND_PART_BY_NAME_COUNT);
+//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &ADD_COMPOUND_PART_BY_NAME_MESSAGE, (void*) &ADD_COMPOUND_PART_BY_NAME_MESSAGE_COUNT);
 
-            set_compound_part_by_index(p0, p1 (compound_count), p2,
-                p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
-                p15, p16, p17, p18, p19, p20);
+            // Use compound count as index.
+            set_compound_part_by_index(p0, p1, p2,
+                p1,
+                p3, p4, p5,
+                p6, p7, p8, p9, p10, p11, p12, p13, p14,
+                p15, p16, p17, p18, p19, p20, p21, p22, p23);
         }
     }
 }
@@ -1332,16 +1372,20 @@ void remove_compound_part_by_index(void* p0, void* p1, void* p2, const void* p3)
 /**
  * Removes the compound part by name.
  *
- * @param p0 the model
- * @param p1 the name
- * @param p2 the name size
+ * @param p0 the compound
+ * @param p1 the compound count
+ * @param p2 the compound size
+ * @param p3 the part name
+ * @param p4 the part name count
+ * @param p5 the part name size
  */
-void remove_compound_part_by_name(void* p0, const void* p1, const void* p2) {
+void remove_compound_part_by_name(void* p0, void* p1, void* p2,
+    const void* p3, const void* p4, const void* p5) {
 
     // The separator index.
     int i = -1;
 
-    get_array_element_index(p1, (void*) &CHARACTER_ARRAY, p2, (void*) &MODEL_PART_SEPARATOR, (void*) &i);
+    get_array_element_index(p3, (void*) &CHARACTER_ARRAY, p4, (void*) &COMPOUND_PART_SEPARATOR, (void*) &i);
 
     if (i != -1) {
 
@@ -1349,23 +1393,21 @@ void remove_compound_part_by_name(void* p0, const void* p1, const void* p2) {
         // The full name is hierarchical.
         // The given compound contains parts which are compound models.
 
-        if (p2 != NULL_POINTER) {
+        if (p4 != NULL_POINTER) {
 
-            // The name size.
-            int* ns = (int*) p2;
+            int* nc = (int*) p4;
 
-            if (p1 != NULL_POINTER) {
+            if (p3 != NULL_POINTER) {
 
-                // The name.
-                void** n = (void**) p1;
+                void** n = (void**) p3;
 
                 if (i >= 0) {
 
-                    if (i < *ns) {
+                    if (i < *nc) {
 
                         if (i != 0) {
 
-                            if (i != (*ns - 1)) {
+                            if (i != (*nc - 1)) {
 
                                 // The remaining name starts at the index after the separator.
                                 // Example: "hello.test"
@@ -1373,34 +1415,53 @@ void remove_compound_part_by_name(void* p0, const void* p1, const void* p2) {
                                 // The starting index of the remaining name "test" is 6 = 5 + 1.
                                 void* r = (void*) (*n + i + 1);
 
-                                // The remaining name size is the full name size decreased
+                                // The remaining name count is the full name count decreased
                                 // by the separator index increased by one.
                                 // Example: "hello.test"
-                                // The full name size is 10.
+                                // The full name count is 10.
                                 // The separator index is 5.
-                                // The size of the remaining name "test" is 4 = 10 - (5 + 1).
-                                int rs = *ns - (i + 1);
+                                // The count of the remaining name "test" is 4 = 10 - (5 + 1).
+                                int rc = *nc - (i + 1);
 
-                                // Get part models.
-                                void* pm = NULL_POINTER;
-                                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+                                // Initialize part models and their counts and sizes.
+                                void* m = NULL_POINTER;
+                                int mc = 0;
+                                int ms = 0;
+
+                                // Get part models and their counts and sizes.
+                                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &m);
+                                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &mc);
+                                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_SIZES_INDEX, (void*) &ms);
 
                                 // Get index of part name.
-                                // The index i is used as part name size.
+                                // The separator index i is used as part name count.
                                 // Example: "hello.test"
                                 // The index i of the separator is 5.
-                                // The size of the part name "hello" before the separator is likewise 5.
+                                // The count of the part name "hello" before the separator is likewise 5.
                                 int index = -1;
-                                get_compound_part_index(p0, p1, (void*) &i, (void*) &index);
+                                get_compound_part_index(p0, p1, p3, (void*) &i, (void*) &index);
 
                                 if (index != -1) {
 
-                                    // Get part.
-                                    void* part = NULL_POINTER;
-                                    get_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &index, (void*) &part);
+                                    // Initialize part model and its count and size.
+                                    void* pm = NULL_POINTER;
+                                    int pmc = 0;
+                                    int pms = 0;
+
+                                    // Get part model and its count and size.
+                                    get_array_element((void*) &m, (void*) &POINTER_ARRAY, (void*) &index, (void*) &pm);
+                                    get_array_element((void*) &mc, (void*) &INTEGER_ARRAY, (void*) &index, (void*) &pmc);
+                                    get_array_element((void*) &ms, (void*) &INTEGER_ARRAY, (void*) &index, (void*) &pms);
+
+                                    //?? TODO:
+                                    //?? For now, the remaining name count is also used as
+                                    //?? remaining name size and such handed over twice.
+                                    //?? Later implementations may use UNICODE names so that
+                                    //?? the name count and size differ.
 
                                     // Recursively continue to process along the hierarchical name.
-                                    remove_compound_part_by_name((void*) &part, (void*) &r, (void*) &rs);
+                                    remove_compound_part_by_name((void*) &pm, (void*) &pmc, (void*) &pms,
+                                        (void*) &r, (void*) &rc, (void*) &rc);
 
                                 } else {
 
@@ -1443,19 +1504,19 @@ void remove_compound_part_by_name(void* p0, const void* p1, const void* p2) {
         // The full name is not hierarchical and represents the part name.
         // The given compound contains parts which are primitive models.
 
-        // The index of the given name.
+        // The index of the part name.
         int index = -1;
-        get_compound_part_index(p0, p1, p2, (void*) &index);
+        get_compound_part_index(p0, p1, p3, p4, (void*) &index);
 
         if (index != -1) {
 
-//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Remove compound part by name.");
+//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &REMOVE_COMPOUND_PART_BY_NAME_MESSAGE, (void*) &REMOVE_COMPOUND_PART_BY_NAME_MESSAGE_COUNT);
 
-            remove_compound_part_by_index(p0, (void*) &index);
+            remove_compound_part_by_index(p0, p1, p2, (void*) &index);
 
         } else {
 
-//??            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not remove compound part by name. A part with that name does not exist.");
+//??            log_message((void*) &WARNING_LOG_LEVEL, (void*) &COULD_NOT_REMOVE_COMPOUND_PART_BY_NAME_A_PART_WITH_THAT_NAME_DOES_NOT_EXIST_MESSAGE, (void*) &COULD_NOT_REMOVE_COMPOUND_PART_BY_NAME_A_PART_WITH_THAT_NAME_DOES_NOT_EXIST_MESSAGE_COUNT);
         }
     }
 }
@@ -1463,31 +1524,41 @@ void remove_compound_part_by_name(void* p0, const void* p1, const void* p2) {
 /**
  * Gets the compound part by index.
  *
- * @param p0 the model
- * @param p1 the index
- * @param p2 the part abstraction
- * @param p3 the part abstraction size
- * @param p4 the part location
- * @param p5 the part location size
- * @param p6 the part model
- * @param p7 the part model size
- * @param p8 the position abstraction
- * @param p9 the position abstraction size
- * @param p10 the position location
- * @param p11 the position location size
- * @param p12 the position model
- * @param p13 the position model size
- * @param p14 the constraint abstraction
- * @param p15 the constraint abstraction size
- * @param p16 the constraint location
- * @param p17 the constraint location size
- * @param p18 the constraint model
- * @param p19 the constraint model size
+ * @param p0 the compound
+ * @param p1 the compound count
+ * @param p2 the compound size
+ * @param p3 the index
+ * @param p4 the part name
+ * @param p5 the part name count
+ * @param p6 the part name size
+ * @param p7 the part model
+ * @param p8 the part model count
+ * @param p9 the part model size
+ * @param p10 the part abstraction
+ * @param p11 the part abstraction count
+ * @param p12 the part abstraction size
+ * @param p13 the part constraint
+ * @param p14 the part constraint count
+ * @param p15 the part constraint size
+ * @param p16 the position model
+ * @param p17 the position model count
+ * @param p18 the position model size
+ * @param p19 the position abstraction
+ * @param p20 the position abstraction count
+ * @param p21 the position abstraction size
+ * @param p22 the position constraint
+ * @param p23 the position constraint count
+ * @param p24 the position constraint size
  */
-void get_compound_part_by_index(const void* p0, const void* p1,
-    void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
-    void* p8, void* p9, void* p10, void* p11, void* p12, void* p13,
-    void* p14, void* p15, void* p16, void* p17, void* p18, void* p19) {
+void get_compound_part_by_index(const void* p0, const void* p1, const void* p2,
+    const void* p3,
+    void* p4, void* p5, void* p6,
+    void* p7, void* p8, void* p9,
+    void* p10, void* p11, void* p12,
+    void* p13, void* p14, void* p15,
+    void* p16, void* p17, void* p18,
+    void* p19, void* p20, void* p21,
+    void* p22, void* p23, void* p24) {
 
     if (p3 != NULL_POINTER) {
 
@@ -1698,41 +1769,42 @@ void get_compound_part_by_index(const void* p0, const void* p1,
  *
  * @param p0 the compound
  * @param p1 the compound count
- * @param p2 the name
- * @param p3 the name count
- * @param p4 the name size
- * @param p5 the model
- * @param p6 the model count
- * @param p7 the model size
- * @param p8 the abstraction
- * @param p9 the abstraction count
- * @param p10 the abstraction size
- * @param p11 the constraint
- * @param p12 the constraint count
- * @param p13 the constraint size
- * @param p14 the position model
- * @param p15 the position model count
- * @param p16 the position model size
- * @param p17 the position abstraction
- * @param p18 the position abstraction count
- * @param p19 the position abstraction size
- * @param p20 the position constraint
- * @param p21 the position constraint count
- * @param p22 the position constraint size
+ * @param p2 the compound size
+ * @param p3 the part name
+ * @param p4 the part name count
+ * @param p5 the part name size
+ * @param p6 the part model
+ * @param p7 the part model count
+ * @param p8 the part model size
+ * @param p9 the part abstraction
+ * @param p10 the part abstraction count
+ * @param p11 the part abstraction size
+ * @param p12 the part constraint
+ * @param p13 the part constraint count
+ * @param p14 the part constraint size
+ * @param p15 the position model
+ * @param p16 the position model count
+ * @param p17 the position model size
+ * @param p18 the position abstraction
+ * @param p19 the position abstraction count
+ * @param p20 the position abstraction size
+ * @param p21 the position constraint
+ * @param p22 the position constraint count
+ * @param p23 the position constraint size
  */
-void get_compound_part_by_name(const void* p0, const void* p1,
-    const void* p2, const void* p3, const void* p4,
-    void* p5, void* p6, void* p7,
-    void* p8, void* p9, void* p10,
-    void* p11, void* p12, void* p13,
-    void* p14, void* p15, void* p16,
-    void* p17, void* p18, void* p19,
-    void* p20, void* p21, void* p22) {
+void get_compound_part_by_name(const void* p0, const void* p1, const void* p2,
+    void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8,
+    void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14,
+    void* p15, void* p16, void* p17,
+    void* p18, void* p19, void* p20,
+    void* p21, void* p22, void* p23) {
 
     // The separator index.
     int i = -1;
 
-    get_array_element_index(p1, (void*) &CHARACTER_ARRAY, p2, (void*) &MODEL_PART_SEPARATOR, (void*) &i);
+    get_array_element_index(p3, (void*) &CHARACTER_ARRAY, p4, (void*) &COMPOUND_PART_SEPARATOR, (void*) &i);
 
     if (i != -1) {
 
@@ -1740,23 +1812,21 @@ void get_compound_part_by_name(const void* p0, const void* p1,
         // The full name is hierarchical.
         // The given compound contains parts which are compound models.
 
-        if (p2 != NULL_POINTER) {
+        if (p4 != NULL_POINTER) {
 
-            // The name size.
-            int* ns = (int*) p2;
+            int* nc = (int*) p4;
 
-            if (p1 != NULL_POINTER) {
+            if (p3 != NULL_POINTER) {
 
-                // The name.
-                void** n = (void**) p1;
+                void** n = (void**) p3;
 
                 if (i >= 0) {
 
-                    if (i < *ns) {
+                    if (i < *nc) {
 
                         if (i != 0) {
 
-                            if (i != (*ns - 1)) {
+                            if (i != (*nc - 1)) {
 
                                 // The remaining name starts at the index after the separator.
                                 // Example: "hello.test"
@@ -1764,36 +1834,55 @@ void get_compound_part_by_name(const void* p0, const void* p1,
                                 // The starting index of the remaining name "test" is 6 = 5 + 1.
                                 void* r = (void*) (*n + i + 1);
 
-                                // The remaining name size is the full name size decreased
+                                // The remaining name count is the full name count decreased
                                 // by the separator index increased by one.
                                 // Example: "hello.test"
-                                // The full name size is 10.
+                                // The full name count is 10.
                                 // The separator index is 5.
-                                // The size of the remaining name "test" is 4 = 10 - (5 + 1).
-                                int rs = *ns - (i + 1);
+                                // The count of the remaining name "test" is 4 = 10 - (5 + 1).
+                                int rc = *nc - (i + 1);
 
-                                // Get part models.
-                                void* pm = NULL_POINTER;
-                                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
+                                // Initialize part models and their counts and sizes.
+                                void* m = NULL_POINTER;
+                                int mc = 0;
+                                int ms = 0;
+
+                                // Get part models and their counts and sizes.
+                                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &m);
+                                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &mc);
+                                get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_SIZES_INDEX, (void*) &ms);
 
                                 // Get index of part name.
-                                // The index i is used as part name size.
+                                // The separator index i is used as part name count.
                                 // Example: "hello.test"
                                 // The index i of the separator is 5.
-                                // The size of the part name "hello" before the separator is likewise 5.
+                                // The count of the part name "hello" before the separator is likewise 5.
                                 int index = -1;
-                                get_compound_part_index(p0, p1, (void*) &i, (void*) &index);
+                                get_compound_part_index(p0, p1, p3, (void*) &i, (void*) &index);
 
                                 if (index != -1) {
 
-                                    // Get part.
-                                    void* part = NULL_POINTER;
-                                    get_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &index, (void*) &part);
+                                    // Initialize part model and its count and size.
+                                    void* pm = NULL_POINTER;
+                                    int pmc = 0;
+                                    int pms = 0;
+
+                                    // Get part model and its count and size.
+                                    get_array_element((void*) &m, (void*) &POINTER_ARRAY, (void*) &index, (void*) &pm);
+                                    get_array_element((void*) &mc, (void*) &INTEGER_ARRAY, (void*) &index, (void*) &pmc);
+                                    get_array_element((void*) &ms, (void*) &INTEGER_ARRAY, (void*) &index, (void*) &pms);
+
+                                    //?? TODO:
+                                    //?? For now, the remaining name count is also used as
+                                    //?? remaining name size and such handed over twice.
+                                    //?? Later implementations may use UNICODE names so that
+                                    //?? the name count and size differ.
 
                                     // Recursively continue to process along the hierarchical name.
-                                    get_compound_part_by_name((void*) &part, (void*) &r, (void*) &rs,
-                                        p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
-                                        p15, p16, p17, p18, p19, p20);
+                                    get_compound_part_by_name((void*) &pm, (void*) &pmc, (void*) &pms,
+                                        (void*) &r, (void*) &rc, (void*) &rc,
+                                        p6, p7, p8, p9, p10, p11, p12, p13, p14,
+                                        p15, p16, p17, p18, p19, p20, p21, p22, p23);
 
                                 } else {
 
@@ -1836,21 +1925,23 @@ void get_compound_part_by_name(const void* p0, const void* p1,
         // The full name is not hierarchical and represents the part name.
         // The given compound contains parts which are primitive models.
 
-        // The index of the given name.
+        // The index of the part name.
         int index = -1;
-        get_compound_part_index(p0, p1, p2, (void*) &index);
+        get_compound_part_index(p0, p1, p3, p4, (void*) &index);
 
         if (index != -1) {
 
-//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Get compound part by name.");
+//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &GET_COMPOUND_PART_BY_NAME_MESSAGE, (void*) &GET_COMPOUND_PART_BY_NAME_MESSAGE_COUNT);
 
-            get_compound_part_by_index(p0, (void*) &index,
-                p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
-                p15, p16, p17, p18, p19, p20);
+            get_compound_part_by_index(p0, p1, p2,
+                (void*) &index,
+                p3, p4, p5,
+                p6, p7, p8, p9, p10, p11, p12, p13, p14,
+                p15, p16, p17, p18, p19, p20, p21, p22, p23);
 
         } else {
 
-//??            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not get compound part by name. A part with that name does not exist.");
+//??            log_message((void*) &WARNING_LOG_LEVEL, (void*) &COULD_NOT_GET_COMPOUND_PART_BY_NAME_A_PART_WITH_THAT_NAME_DOES_NOT_EXIST_MESSAGE, (void*) &COULD_NOT_GET_COMPOUND_PART_BY_NAME_A_PART_WITH_THAT_NAME_DOES_NOT_EXIST_MESSAGE_COUNT);
         }
     }
 }
