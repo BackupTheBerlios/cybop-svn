@@ -1,14 +1,50 @@
+%
+% $RCSfile: record.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
 \section{Record -- An EHR Module}
-The practical background for the application of CYBOP is \emph{Res Medicinae}.
-A modern clinical information system is the aim of all efforts in this project.
-In future, it shall serve medical documentation, archiving, laboratory work etc.
-\emph{Res Medicinae} is separated into single modules depending on different tasks.\\
-One of these modules is \emph{Record} -- an application for
-documenting medical information (see figure \ref{Screenshot of
-Record}). In addition to new documentation models,
-it also contains a tool for topological documentation.\\
-Starting from an over-all view of the human body, it is possible
-to reach every organ or region of the body in detail (see figure
-\ref{Excerpt from Topological Structure of Human Skeleton}).
-\includepicture{6}{eps/screenshot.eps}{Screenshot of Record}{Screenshot of Record \cite{urban}}{Screenshot of Record}{Screenshot of Record}
-\includepicture{6}{eps/topology.eps}{Excerpt from Topological Structure of Human Skeleton}{Excerpt from Topological Structure of Human Skeleton \cite{urban}}{Excerpt from Topological Structure of Human Skeleton}{Excerpt from Topological Structure of Human Skeleton}
+\label{record_an_ehr_module_heading}
+
+The practical background for the application of CYBOP is \emph{Res Medicinae}
+\cite{resmedicinae}. A modern clinical information system is the aim of all efforts
+in this project. In future, it shall serve medical documentation, archiving,
+laboratory work etc. \emph{Res Medicinae} is separated into single modules depending
+on different tasks.\\
+One of these modules is \emph{Record} -- an application for documenting medical
+information (figure \ref{record_figure}). In addition to new documentation models,
+it also contains a tool for topological documentation.
+
+\begin{figure}[ht]
+    \begin{center}
+       \includegraphics[scale=0.3]{eps/screenshot.eps}
+       \caption{Screenshot of Record \cite{urban}}
+       \label{record_figure}
+    \end{center}
+\end{figure}
+
+Starting from an overall view of the human body, it is possible to reach every
+organ or region of the body in detail (figure \ref{topology_figure}).
+
+\begin{figure}[ht]
+    \begin{center}
+       \includegraphics[scale=0.5]{eps/topology.eps}
+       \caption{Excerpt from Topological Structure of Human Skeleton}
+       \label{topology_figure}
+    \end{center}
+\end{figure}
+
