@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.2 $ $Date: 2004-10-18 10:53:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-11-30 15:26:27 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,6 +69,12 @@ static const int SFTP_CHANNEL_COUNT = 4;
 static const char UNIX_SOCKET_CHANNEL_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'o', 'c', 'k', 'e', 't'};
 static const char* UNIX_SOCKET_CHANNEL = UNIX_SOCKET_CHANNEL_ARRAY;
 static const int UNIX_SOCKET_CHANNEL_COUNT = 11;
+
+
+/** The tcp socket channel array, pointer, count. */
+static const char TCP_SOCKET_CHANNEL_ARRAY[] = {'t', 'c', 'p', '_', 's', 'o', 'c', 'k', 'e', 't'};
+static const char* TCP_SOCKET_CHANNEL = TCP_SOCKET_CHANNEL_ARRAY;
+static const int TCP_SOCKET_CHANNEL_COUNT = 10;
 
 /** The java messaging service (jms) channel array, pointer, count. */
 static const char JMS_CHANNEL_ARRAY[] = {'j', 'm', 's'};
