@@ -50,7 +50,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.22 $ $Date: 2004-03-31 14:22:10 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2004-03-31 15:52:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -260,10 +260,6 @@ void destroy_model(void* p0, const void* p1, const void* p2, const void* p3);
  */
 void initialize_part(void* p0, const void* p1) {
 
-    struct model* m = (struct model*) p0;
-
-    if (m != (void*) 0) {
-
 /*??
         void* name = (void*) get_map_element_with_name(p1, (void*) NAME);
         void* abstraction = (void*) 0;
@@ -300,11 +296,6 @@ void initialize_part(void* p0, const void* p1) {
         set_map_element_with_name(m->constraint_locations, name, location);
         set_map_element_with_name(m->constraint_models, name, part);
 */
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize part. The memory model is null.");
-    }
 }
 
 /**
@@ -314,10 +305,6 @@ void initialize_part(void* p0, const void* p1) {
  * @param p1 the cybol part attributes
  */
 void finalize_part(void* p0, const void* p1) {
-
-    struct model* m = (struct model*) p0;
-
-    if (m != (void*) 0) {
 
 /*??
         void* name = (void*) get_map_element_with_name(p1, (void*) NAME);
@@ -342,11 +329,6 @@ void finalize_part(void* p0, const void* p1) {
         part = (void*) get_map_element_with_name(m->part_models, name);
         destroy_model(part, model, location, abstraction);
 */
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize part. The memory model is null.");
-    }
 }
 
 //
@@ -431,10 +413,6 @@ void finalize_parts(void* p0, const void* p1) {
  */
 void initialize_model(void* p0, const void* p1) {
 
-    struct model* m = (struct model*) p0;
-
-    if (m != (void*) 0) {
-
         log_message((void*) &INFO_LOG_LEVEL, "Initialize model.");
 
 /*??
@@ -461,11 +439,6 @@ void initialize_model(void* p0, const void* p1) {
         destroy_statics_model_containers((void*) cybol);
         free((void*) cybol);
 */
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize model. The memory model is null.");
-    }
 }
 
 /**
@@ -475,10 +448,6 @@ void initialize_model(void* p0, const void* p1) {
  * @param p1 the cybol model
  */
 void finalize_model(void* p0, const void* p1) {
-
-    struct model* m = (struct model*) p0;
-
-    if (m != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Finalize model.");
 
@@ -506,11 +475,6 @@ void finalize_model(void* p0, const void* p1) {
         destroy_statics_model_containers((void*) cybol);
         free((void*) cybol);
 */
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize model. The memory model is null.");
-    }
 }
 
 //
@@ -571,7 +535,7 @@ void set_model_part(void* p0, const void* p1, const void* p2, const void* p3, co
                             // Example: "hello.test"
                             // The index of the separator is 5.
                             // The starting index of the remaining name "test" is 6 = 5 + 1.
-                            void* r = p1 + i + 1;
+                            void* r = (void*) (p1 + i + 1);
 
                             // The remaining name size is the full name size decreased
                             // by the separator index increased by one.
@@ -710,7 +674,7 @@ void remove_model_part(void* p0, const void* p1, const void* p2) {
                             // Example: "hello.test"
                             // The index of the separator is 5.
                             // The starting index of the remaining name "test" is 6 = 5 + 1.
-                            void* r = p1 + i + 1;
+                            void* r = (void*) (p1 + i + 1);
 
                             // The remaining name size is the full name size decreased
                             // by the separator index increased by one.
@@ -869,7 +833,7 @@ void get_model_part(const void* p0, const void* p1, const void* p2, void* p3, vo
                             // Example: "hello.test"
                             // The index of the separator is 5.
                             // The starting index of the remaining name "test" is 6 = 5 + 1.
-                            void* r = p1 + i + 1;
+                            void* r = (void*) (p1 + i + 1);
 
                             // The remaining name size is the full name size decreased
                             // by the separator index increased by one.

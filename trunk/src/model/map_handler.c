@@ -44,7 +44,7 @@
  *
  * A map's elements can such be accessed over their name or index.
  *
- * @version $Revision: 1.20 $ $Date: 2004-03-31 14:22:10 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2004-03-31 15:52:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -213,7 +213,7 @@ void get_map_element_index(const void* p0, const void* p1, const void* p2, void*
 
             get_array_element((void*) &n, (void*) &s, (void*) &POINTER_ARRAY, (void*) &j, (void*) &name);
             get_array_element((void*) &ns, (void*) &s, (void*) &POINTER_ARRAY, (void*) &j, (void*) &size);
-            compare_arrays(p1, p2, (void*) &CHARACTER_ARRAY, name, size, (void*) &CHARACTER_ARRAY, (void*) &r);
+            compare_arrays(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &name, (void*) &size, (void*) &CHARACTER_ARRAY, (void*) &r);
 
             if (r == 1) {
 

@@ -37,7 +37,7 @@
  * http://home.arcor.de/cpp_kurs/cpp/le07/k2_09_d1.htm
  * ... or try a Google search.
  *
- * @version $Revision: 1.5 $ $Date: 2004-03-11 22:44:31 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-03-31 15:52:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,85 +46,85 @@
 //
 
 /** The and model. */
-static const char* AND_MODEL = {'a', 'n', 'd'};
+static const char AND_MODEL[] = {'a', 'n', 'd'};
 
 /** The or model. */
-static const char* OR_MODEL = {'o', 'r'};
+static const char OR_MODEL[] = {'o', 'r'};
 
 //
 // Comparison models.
 //
 
 /** The equal model. */
-static const char* EQUAL_MODEL = {'e', 'q', 'u', 'a', 'l'};
+static const char EQUAL_MODEL[] = {'e', 'q', 'u', 'a', 'l'};
 
 /** The smaller model. */
-static const char* SMALLER_MODEL = {'s', 'm', 'a', 'l', 'l', 'e', 'r'};
+static const char SMALLER_MODEL[] = {'s', 'm', 'a', 'l', 'l', 'e', 'r'};
 
 /** The greater model. */
-static const char* GREATER_MODEL = {'g', 'r', 'e', 'a', 't', 'e', 'r'};
+static const char GREATER_MODEL[] = {'g', 'r', 'e', 'a', 't', 'e', 'r'};
 
 /** The smaller or equal model. */
-static const char* SMALLER_OR_EQUAL_MODEL = {'s', 'm', 'a', 'l', 'l', 'e', 'r', '_', 'o', 'r', '_', 'e', 'q', 'u', 'a', 'l'};
+static const char SMALLER_OR_EQUAL_MODEL[] = {'s', 'm', 'a', 'l', 'l', 'e', 'r', '_', 'o', 'r', '_', 'e', 'q', 'u', 'a', 'l'};
 
 /** The greater or equal model. */
-static const char* GREATER_OR_EQUAL_MODEL = {'g', 'r', 'e', 'a', 't', 'e', 'r', '_', 'o', 'r', '_', 'e', 'q', 'u', 'a', 'l'};
+static const char GREATER_OR_EQUAL_MODEL[] = {'g', 'r', 'e', 'a', 't', 'e', 'r', '_', 'o', 'r', '_', 'e', 'q', 'u', 'a', 'l'};
 
 //
 // Arithmetic models.
 //
 
 /** The add model. */
-static const char* ADD_MODEL = {'a', 'd', 'd'};
+static const char ADD_MODEL[] = {'a', 'd', 'd'};
 
 /** The subtract model. */
-static const char* SUBTRACT_MODEL = {'s', 'u', 'b', 't', 'r', 'a', 'c', 't'};
+static const char SUBTRACT_MODEL[] = {'s', 'u', 'b', 't', 'r', 'a', 'c', 't'};
 
 /** The multiply model. */
-static const char* MULTIPLY_MODEL = {'m', 'u', 'l', 't', 'i', 'p', 'l', 'y'};
+static const char MULTIPLY_MODEL[] = {'m', 'u', 'l', 't', 'i', 'p', 'l', 'y'};
 
 /** The divide model. */
-static const char* DIVIDE_MODEL = {'d', 'i', 'v', 'i', 'd', 'e'};
+static const char DIVIDE_MODEL[] = {'d', 'i', 'v', 'i', 'd', 'e'};
 
 //
 // Memory management models.
 //
 
 /** The create statics model. */
-static const char* CREATE_STATICS_MODEL = {'c', 'r', 'e', 'a', 't', 'e', '_', 's', 't', 'a', 't', 'i', 'c', 's'};
+static const char CREATE_STATICS_MODEL[] = {'c', 'r', 'e', 'a', 't', 'e', '_', 's', 't', 'a', 't', 'i', 'c', 's'};
 
 /** The destroy statics model. */
-static const char* DESTROY_STATICS_MODEL = {'d', 'e', 's', 't', 'r', 'o', 'y', '_', 's', 't', 'a', 't', 'i', 'c', 's'};
+static const char DESTROY_STATICS_MODEL[] = {'d', 'e', 's', 't', 'r', 'o', 'y', '_', 's', 't', 'a', 't', 'i', 'c', 's'};
 
 /** The create dynamics model. */
-static const char* CREATE_DYNAMICS_MODEL = {'c', 'r', 'e', 'a', 't', 'e', '_', 'd', 'y', 'n', 'a', 'm', 'i', 'c', 's'};
+static const char CREATE_DYNAMICS_MODEL[] = {'c', 'r', 'e', 'a', 't', 'e', '_', 'd', 'y', 'n', 'a', 'm', 'i', 'c', 's'};
 
 /** The destroy dynamics model. */
-static const char* DESTROY_DYNAMICS_MODEL = {'d', 'e', 's', 't', 'r', 'o', 'y', '_', 'd', 'y', 'n', 'a', 'm', 'i', 'c', 's'};
+static const char DESTROY_DYNAMICS_MODEL[] = {'d', 'e', 's', 't', 'r', 'o', 'y', '_', 'd', 'y', 'n', 'a', 'm', 'i', 'c', 's'};
 
 //
 // Input output models.
 //
 
 /** The send model. */
-static const char* SEND_MODEL = {'s', 'e', 'n', 'd'};
+static const char SEND_MODEL[] = {'s', 'e', 'n', 'd'};
 
 /** The receive model. */
-static const char* RECEIVE_MODEL = {'r', 'e', 'c', 'e', 'i', 'v', 'e'};
+static const char RECEIVE_MODEL[] = {'r', 'e', 'c', 'e', 'i', 'v', 'e'};
 
 //
 // Lifecycle step models.
 //
 
 /** The exit model. */
-static const char* EXIT_MODEL = {'e', 'x', 'i', 't'};
+static const char EXIT_MODEL[] = {'e', 'x', 'i', 't'};
 
 /*??
 //
 // Nop opcode.
 //
 
-static java.lang.String NOP = {'nop'};
+static java.lang.String NOP[] = {'nop'};
 
 //
 // Pushing constants.

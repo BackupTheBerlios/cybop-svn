@@ -26,7 +26,6 @@
 #define OPERATION_HANDLER_SOURCE
 
 #include "../logger/log_handler.c"
-#include "../model/map.c"
 #include "../model/map_handler.c"
 #include "../model/model_handler.c"
 #include "../statics/operation.c"
@@ -34,7 +33,7 @@
 /**
  * This is the operation handler.
  *
- * @version $Revision: 1.11 $ $Date: 2004-03-11 22:44:31 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-03-31 15:52:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,8 +54,10 @@ void create_operation_container(void* p0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Create operation container.");
 
+/*??
         m->value = (void*) malloc(sizeof(struct array));
         initialize_array(m->value, (void*) &CHARACTER_ARRAY);
+*/
 
     } else {
 
@@ -77,8 +78,10 @@ void destroy_operation_container(void* p0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Destroy operation container.");
 
+/*??
         finalize_array(m->value);
         free(m->value);
+*/
 
     } else {
 

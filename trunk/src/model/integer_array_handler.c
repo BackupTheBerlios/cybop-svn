@@ -26,7 +26,6 @@
 #define INTEGER_ARRAY_HANDLER_SOURCE
 
 #include "../logger/log_handler.c"
-#include "../model/constants.c"
 
 /**
  * This is the integer array handler.
@@ -43,7 +42,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.4 $ $Date: 2004-03-19 16:24:01 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-03-31 15:52:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -43,7 +43,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.12 $ $Date: 2004-03-02 07:34:59 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-03-31 15:52:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -185,25 +185,28 @@ int main(int p0, char** p1) {
         if (p0 == 2) {
 
             // Create statics.
-            void* s = malloc(sizeof(struct model));
-            create_model_containers(s);
+            void* s = (void*) 0;
+            create_compound_model((void*) &s);
 
             // Create dynamics.
-            void* d = malloc(sizeof(struct model));
-            create_model_containers(d);
+            void* d = (void*) 0;
+            create_compound_model((void*) &d);
 
             // Create internals.
-            void* i = malloc(sizeof(struct internals));
+            void* i = (void*) 0;
+            create_map((void*) &i);
 
             // Create signal memory.
-            void* sm = malloc(sizeof(struct signal_memory));
-            create_signal_memory(sm);
+            void* sm = (void*) 0;
+            int sms = 0;
+            create_array(sm, (void*) &sms);
 
             // Create startup signal.
-            void* ss = create_model((void*) p1[1], (void*) 0, (void*) OPERATION_MODEL);
+            void* ss = (void*) 0;
+            create_model(ss, (void*) p1[1], (void*) 0, (void*) OPERATION_MODEL);
 
             // Add startup signal to signal memory.
-            add_signal(sm, ss, (void*) OPERATION_MODEL, (void*) &NORMAL_PRIORITY);
+            set_signal_memory_part(sm, sms, (void*) OPERATION_MODEL, ss, (void*) &NORMAL_PRIORITY);
 
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)
