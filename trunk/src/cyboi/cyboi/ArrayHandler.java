@@ -29,7 +29,7 @@ package cyboi;
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.9 $ $Date: 2003-07-29 22:38:28 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-07-31 00:52:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ArrayHandler {
@@ -51,7 +51,7 @@ class ArrayHandler {
 
             int old_length = p0.length;
             int new_length = old_length * 2 + 1;
-            a = new java.lang.Object[new_length];
+            java.lang.Object[] a = new java.lang.Object[new_length];
             int i = 0;
 
             while (i < old_length) {
@@ -71,22 +71,22 @@ class ArrayHandler {
     }
 
     /**
-     * Returns the size of the array.
+     * Returns the array size.
      *
-     * @param c the array
-     * @return the size of the array
+     * @param p0 the array
+     * @return the array size
      */
-    static int get_array_size(java.lang.Object[] c) {
+    static int get_array_size(java.lang.Object[] p0) {
 
         int s = -1;
 
-        if (c != null) {
+        if (p0 != null) {
 
-            s = c.length;
+            s = p0.length;
 
         } else {
 
-            System.out.println("ERROR: Could not get size of array. The array is null.");
+            System.out.println("ERROR: Could not get array size. The array is null.");
         }
 
         return s;
@@ -95,142 +95,126 @@ class ArrayHandler {
     /**
      * Compares both arrays.
      *
-     * @param c1 the first array
-     * @param c2 the second array
-     * @return true - if the size and contents of both arrays are equal;
-     * false - otherwise
+     * @param p0 the first array
+     * @param p1 the second array
+     * @return 1 if the size and contents of both arrays are equal; 0 otherwise
      */
-    static boolean compare(java.lang.Object[] c1, java.lang.Object[] c2) {
+    static int compare(java.lang.Object[] p0, java.lang.Object[] p1) {
 
-        boolean b = true;
-        int i = ArrayHandler.get_array_size(c1);
+        int r = 1;
+/*??
+        int i = ArrayHandler.get_array_size(p0);
 
         // Compares the array sizes.
-        if (i != ArrayHandler.get_array_size(c2)) {
+        if (i != ArrayHandler.get_array_size(p1)) {
 
-            b = false;
+            r = 0;
             
         } else {
 
             // Compares the elements.
             while (i-- != 0) {
 
-                if (ArrayHandler.get_array_element(c1, i) != ArrayHandler.get_array_element(c2, i)) {
+                if (ArrayHandler.get_array_element(p0, i) != ArrayHandler.get_array_element(p1, i)) {
 
-                    b = false;
+                    r = 0;
 
                     break;
                 }
             }
         }
+*/
 
-        return b;
+        return r;
     }
 
     //
-    // Array element management.
+    // Array element.
     //
 
     /**
-     * Sets the element.
+     * Sets the array element.
      *
-     * @param c the array
-     * @param i the index
-     * @param e the element
-     * @return the new array
+     * @param p0 the array
+     * @param p1 the element
+     * @param p2 the index
      */
-    static java.lang.Object[] set_array_element(java.lang.Object[] c, int i, java.lang.Object e) {
+    static void set_array_element(java.lang.Object[] p0, java.lang.Object p1, int p2) {
 
-        java.lang.Object[] ac = null;
+        if (p0 != null) {
 
-        if (c != null) {
+            // If the array length is exceeded, a new array with extended length
+            // is created and delivered back.
+            if (p2 >= p0.length) {
 
-            // If the array length is exceeded, a new adjusted array
-            // with extended length is created and delivered back.
-            if (i >= c.length) {
-
-                ac = ArrayHandler.extend_array(c);
-                ArrayHandler.destroy_array(c);
-
-            } else {
-
-                ac = c;
+                ArrayHandler.extend_array(p0);
             }
 
             //?? Temporary: Remove old and add new java tree node.
 /*??
-            ArrayHandler.remove_tree_node(ac[i]);
-            ArrayHandler.add_tree_node(e);
+            ArrayHandler.remove_tree_node(p0[i]);
+            ArrayHandler.add_tree_node(p1);
 */
 
             // Set element.
-            ac[i] = e;
+            p0[p2] = p1;
 
         } else {
 
-            System.out.println("ERROR: Could not set element. The array is null.");
+            System.out.println("ERROR: Could not set array element. The array is null.");
         }
-        
-        return ac;
     }
 
     /**
-     * Removes the element.
+     * Removes the array element.
      *
-     * @param c the array
-     * @param i the index
+     * @param p0 the array
+     * @param p1 the index
      */
-    static void remove_array_element(java.lang.Object[] c, int i) {
+    static void remove_array_element(java.lang.Object[] p0, int p1) {
 
-        if (c != null) {
+        if (p0 != null) {
 
             //?? Temporary: Remove java tree node.
-//??            ArrayHandler.remove_tree_node(c[i]);
+//??            ArrayHandler.remove_tree_node(p0[p1]);
 
             // Move all remaining elements one place towards the
             // beginning of the elements.
-            int index = i;
-            int size = c.length;
+            int size = p0.length;
 
-            while ((index + 1) < size) {
+            while ((p1 + 1) < size) {
 
-                c[index] = c[index + 1];
+                p0[p1] = p0[p1 + 1];
 
-                index++;
+                p1++;
             }
 
             // Set former last element to null.
-            c[index] = null;
+            p0[p1] = null;
 
         } else {
 
-            System.out.println("ERROR: Could not remove element. The array is null.");
+            System.out.println("ERROR: Could not remove array element. The array is null.");
         }
     }
 
     /**
      * Returns the element.
      *
-     * @param c the array
-     * @return the element
+     * @param p0 the array
+     * @param p1 the element
+     * @param p2 the index
      */
-    static java.lang.Object get_array_element(java.lang.Object[] c, int i) {
+    static void get_array_element(java.lang.Object[] p0, java.lang.Object p1, int p2) {
 
-        java.lang.Object e = null;
+        if (p0 != null) {
 
-        if (c != null) {
-
-//??            if (i > -1) {
-
-                e = c[i];
-//??            }
+            p1 = p0[p2];
 
         } else {
 
-            System.out.println("ERROR: Could not get element. The array is null.");
+            System.out.println("ERROR: Could not get array element. The array is null.");
         }
-
-        return e;
     }
 }
 

@@ -27,7 +27,7 @@ package cyboi;
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.3 $ $Date: 2003-07-29 22:38:28 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-07-31 00:52:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryHandler {
@@ -47,6 +47,12 @@ class CategoryHandler {
 
     /** The java object. */
     static java.lang.String JAVA_OBJECT = "java_object";
+
+    /** The item. */
+    static java.lang.String ITEM = "item";
+
+    /** The name. */
+    static java.lang.String NAME = "name";
 
     /** The item category. */
     static java.lang.String ITEM_CATEGORY = "item_category";
@@ -85,7 +91,7 @@ class CategoryHandler {
      * @param p0 the category
      * @param p1 the category location
      */
-    static void initialize_category(java.lang.Object p0, java.lang.Object p1) {
+    static void initialize_category(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
         java.lang.System.out.println("INFO: Initialize category.");
         
@@ -125,7 +131,7 @@ class CategoryHandler {
             java.lang.System.out.println("INFO: Initialize category containers.");
 
             c.items = new Map();
-            MapHandler.initialize(c.items);
+            MapHandler.initialize_map(c.items);
 
         } else {
 
@@ -146,9 +152,8 @@ class CategoryHandler {
 
             java.lang.System.out.println("INFO: Finalize category containers.");
 
-            java.lang.Object items = c.items;
+            MapHandler.finalize_map(c.items);
             c.items = null;
-            MapHandler.destroy_map(items);
 
         } else {
 
@@ -269,16 +274,18 @@ class CategoryHandler {
             doc.normalize();
             org.w3c.dom.NodeList l = null;
 
-            l = doc.getElementsByTagName(CategoryHandler.SUPER);
-            CategoryHandler.initialize_super_category(p0, l);
+            Category c = (Category) p0;
             
+            l = doc.getElementsByTagName(CategoryHandler.SUPER_CATEGORY);
+            CategoryHandler.initialize_super_category(c, l);
+
             if (p0 != null) {
                     
                 l = doc.getElementsByTagName(CategoryHandler.JAVA_OBJECT);
-                CategoryHandler.initialize_java_object(p0.java_object, l);
+                CategoryHandler.initialize_java_object(c.java_object, l);
                     
                 l = doc.getElementsByTagName(CategoryHandler.ITEM);
-                CategoryHandler.initialize_items(p0.items, l);
+                CategoryHandler.initialize_items(c.items, l);
 
             } else {
                 
@@ -310,14 +317,16 @@ class CategoryHandler {
     
             org.w3c.dom.NodeList l = null;
 
-            l = doc.getElementsByTagName(CategoryHandler.SUPER);
-            CategoryHandler.finalize_super(p0, l);
+            Category c = (Category) p0;
+            
+            l = doc.getElementsByTagName(CategoryHandler.SUPER_CATEGORY);
+            CategoryHandler.finalize_super(c, l);
                 
             l = doc.getElementsByTagName(CategoryHandler.JAVA_OBJECT);
-            CategoryHandler.finalize_java_object(p0, l);
+            CategoryHandler.finalize_java_object(c, l);
                 
             l = doc.getElementsByTagName(CategoryHandler.ITEM);
-            CategoryHandler.finalize_items(p0, l);
+            CategoryHandler.finalize_items(c, l);
 
         } else {
             
@@ -336,7 +345,7 @@ class CategoryHandler {
      * @param p0 the category
      * @param p1 the super category list
      */
-    static void initialize_super_category(java.lang.Object p0, java.lang.Object p1) {
+    static void initialize_super_category(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
         org.w3c.dom.NodeList l = (org.w3c.dom.NodeList) p1;
 
@@ -478,10 +487,12 @@ class CategoryHandler {
 
         java.lang.System.out.println("INFO: Initialize java object attributes.");
         
+/*??
         java.lang.Object c = CategoryHandler.read_attribute(p1, JavaObjectHandler.CATEGORY);
         java.lang.Object p0 = JavaObjectHandler.create_java_object(c);
 
         JavaObjectHandler.initialize_java_object(i.java_object, p1);
+*/
     }
 
     //
@@ -505,7 +516,7 @@ class CategoryHandler {
             int count = 0;
             int size = l.getLength();
             org.w3c.dom.Node n = null;
-            java.lang.Object i = null;
+            CategoryItem i = null;
 
             while (count < size) {
             
@@ -519,7 +530,7 @@ class CategoryHandler {
                     
                     if (i != null) {
                     
-                        MapHandler.add_map_element(p0, i.name, i);
+                        MapHandler.add_map_element(p0, i, i.name);
                 
                     } else {
                         
@@ -570,8 +581,8 @@ class CategoryHandler {
             CategoryHandler.initialize_category_item_attribute(ci.position_category, p1, CategoryHandler.POSITION_CATEGORY);
             CategoryHandler.initialize_category_item_attribute(ci.instance_abstraction, p1, CategoryHandler.INSTANCE_ABSTRACTION);
             CategoryHandler.initialize_category_item_attribute(ci.instance_category, p1, CategoryHandler.INSTANCE_CATEGORY);
-            CategoryHandler.initialize_category_item_attribute(ci.force_abstraction, p1, CategoryHandler.FORCE_ABSTRACTION);
-            CategoryHandler.initialize_category_item_attribute(ci.force_category, p1, CategoryHandler.FORCE_CATEGORY);
+            CategoryHandler.initialize_category_item_attribute(ci.interaction_abstraction, p1, CategoryHandler.INTERACTION_ABSTRACTION);
+            CategoryHandler.initialize_category_item_attribute(ci.interaction_category, p1, CategoryHandler.INTERACTION_CATEGORY);
 
         } else {
             

@@ -29,7 +29,7 @@ package cyboi;
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.20 $ $Date: 2003-07-29 22:38:28 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2003-07-31 00:52:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -72,7 +72,7 @@ class ItemHandler {
             } else if (a.equals(Statics.COMPLEX)) {
 
                 p0 = new Item();
-                ItemHandler.initialize(p0, p1);
+                ItemHandler.initialize_item(p0, p1);
             }
             
         } else {
@@ -114,7 +114,7 @@ class ItemHandler {
 
             } else if (a.equals(Statics.COMPLEX)) {
 
-                ItemHandler.finalizz(p0, p1);
+                ItemHandler.finalize_item(p0, p1);
                 p0 = null;
             }
             
@@ -181,10 +181,14 @@ class ItemHandler {
             
             java.lang.System.out.println("INFO: Initialize item containers.");
 
-            i.items = MapHandler.create_map();
-            i.positions = MapHandler.create_map();
-            i.instances = MapHandler.create_map();
-            i.interactions = MapHandler.create_map();
+            i.items = new Map();
+            MapHandler.initialize_map(i.items);
+            i.positions = new Map();
+            MapHandler.initialize_map(i.positions);
+            i.instances = new Map();
+            MapHandler.initialize_map(i.instances);
+            i.interactions = new Map();
+            MapHandler.initialize_map(i.interactions);
 
         } else {
             
@@ -205,21 +209,17 @@ class ItemHandler {
 
             java.lang.System.out.println("INFO: Finalize item containers.");
 
-            java.lang.Object interactions = i.interactions;
+            MapHandler.finalize_map(i.interactions);
             i.interactions = null;
-            MapHandler.destroy_map(interactions);
 
-            java.lang.Object instances = i.instances;
+            MapHandler.finalize_map(i.instances);
             i.instances = null;
-            MapHandler.destroy_map(instances);
 
-            java.lang.Object positions = i.positions;
+            MapHandler.finalize_map(i.positions);
             i.positions = null;
-            MapHandler.destroy_map(positions);
 
-            java.lang.Object items = i.items;
+            MapHandler.finalize_map(i.items);
             i.items = null;
-            MapHandler.destroy_map(items);
 
         } else {
 
@@ -237,7 +237,7 @@ class ItemHandler {
      * @param p0 the item
      * @param p1 the category
      */
-    static void initialize_item_elements(java.lang.Object p0, java.lang.Object p1) {
+    static void initialize_item_elements(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
         Category c = (Category) p1;
     
@@ -249,19 +249,19 @@ class ItemHandler {
             initialize_java_object(p0, c.java_object);
 
             // Items.
-            Map category_items = c.category_items;
+            Map cm = (Map) c.items;
             
-            if (category_items != null) {
+            if (cm != null) {
                 
                 int count = 0;
-                int size = category_items.length;
-                CategoryItem category_item = null;
+                int size = MapHandler.get_map_size(cm);
+                CategoryItem ci = null;
                 
                 while (count < size) {
                     
-                    category_item = MapHandler.get_map_element(category_items, count);
+                    MapHandler.get_map_element(cm, ci, count);
 
-                    ItemHandler.initialize_item_element(p0, category_item);
+                    ItemHandler.initialize_item_element(p0, ci);
                 }
             
             } else {
@@ -305,16 +305,16 @@ class ItemHandler {
      * Initializes the java object.
      *
      * @param p0 the item
-     * @param p1 the category java object
+     * @param p1 the java object category
      */
-    static void initialize_java_object(java.lang.Object p0, java.lang.Object p1) {
+    static void initialize_java_object(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
     
         Item i = (Item) p0;
         
         if (i != null) {
     
             java.lang.System.out.println("INFO: Initialize java object.");
-            i.java_object = JavaObjectHandler.create_java_object(p1);
+            JavaObjectHandler.create_java_object(i.java_object, p1);
 
         } else {
             
@@ -326,7 +326,7 @@ class ItemHandler {
      * Finalizes the java object.
      *
      * @param p0 the item
-     * @param p1 the category java object
+     * @param p1 the java object category
      */
     static void finalize_java_object(java.lang.Object p0, java.lang.Object p1) {
     
@@ -335,7 +335,7 @@ class ItemHandler {
         if (i != null) {
     
             java.lang.System.out.println("INFO: Finalize java object.");
-            JavaObjectHandler.destroy_java_object(i.java_object);
+            JavaObjectHandler.destroy_java_object(i.java_object, p1);
 
         } else {
             
@@ -353,7 +353,7 @@ class ItemHandler {
      * @param p0 the item
      * @param p1 the category item
      */
-    static void initialize_item_element(java.lang.Object p0, java.lang.Object p1) {
+    static void initialize_item_element(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
         Item i = (Item) p0;
         
@@ -366,20 +366,22 @@ class ItemHandler {
                 java.lang.System.out.println("INFO: Initialize item element.");
 
                 java.lang.Object o = null;
+                
+                o = null;
                 ItemHandler.initialize_object(o, ci.item_category, ci.item_abstraction);
-                MapHandler.add_map_element(i.items, ci.name, o);
+                MapHandler.add_map_element(i.items, o, ci.name);
     
-                java.lang.Object o = null;
+                o = null;
                 ItemHandler.initialize_object(o, ci.position_category, ci.position_abstraction);
-                MapHandler.add_map_element(i.positions, ci.name, o);
+                MapHandler.add_map_element(i.positions, o, ci.name);
     
-                java.lang.Object o = null;
+                o = null;
                 ItemHandler.initialize_object(o, ci.instance_category, ci.instance_abstraction);
-                MapHandler.add_map_element(i.instances, ci.name, o);
+                MapHandler.add_map_element(i.instances, o, ci.name);
     
-                java.lang.Object o = null;
+                o = null;
                 ItemHandler.initialize_object(o, ci.interaction_category, ci.interaction_abstraction);
-                MapHandler.add_map_element(i.interactions, ci.name, o);
+                MapHandler.add_map_element(i.interactions, o, ci.name);
     
             } else {
                 
@@ -398,7 +400,7 @@ class ItemHandler {
      * @param p0 the item
      * @param p1 the category item
      */
-    static void finalize_item_element(java.lang.Object p0, java.lang.Object p1) {
+    static void finalize_item_element(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
         Item i = (Item) p0;
         
@@ -411,22 +413,24 @@ class ItemHandler {
                 java.lang.System.out.println("INFO: Finalize item element.");
 
                 java.lang.Object o = null;
-                MapHandler.get_map_element(i.items, ci.name, o);
+
+                o = null;
+                MapHandler.get_map_element(i.items, o, ci.name);
                 ItemHandler.finalize_object(o, ci.item_category, ci.item_abstraction);
                 MapHandler.remove_map_element(i.items, ci.name);
     
-                java.lang.Object o = null;
-                MapHandler.get_map_element(i.positions, ci.name, o);
+                o = null;
+                MapHandler.get_map_element(i.positions, o, ci.name);
                 ItemHandler.finalize_object(o, ci.position_category, ci.position_abstraction);
                 MapHandler.remove_map_element(i.positions, ci.name);
     
-                java.lang.Object o = null;
-                MapHandler.get_map_element(i.instances, ci.name, o);
+                o = null;
+                MapHandler.get_map_element(i.instances, o, ci.name);
                 ItemHandler.finalize_object(o, ci.instance_category, ci.instance_abstraction);
                 MapHandler.remove_map_element(i.instances, ci.name);
     
-                java.lang.Object o = null;
-                MapHandler.get_map_element(i.interactions, ci.name, o);
+                o = null;
+                MapHandler.get_map_element(i.interactions, o, ci.name);
                 ItemHandler.finalize_object(o, ci.interaction_category, ci.interaction_abstraction);
                 MapHandler.remove_map_element(i.interactions, ci.name);
     

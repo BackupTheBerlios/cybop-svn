@@ -29,7 +29,7 @@ package cyboi;
  *
  * It represents a category file with all its contents.
  *
- * @version $Revision: 1.4 $ $Date: 2003-07-28 22:15:54 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-07-31 00:52:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Category {
@@ -38,6 +38,6 @@ class Category {
     static java.lang.Object java_object;
 
     /** The items. */
-    static java.lang.Object[] items;
+    static java.lang.Object items;
 }
 

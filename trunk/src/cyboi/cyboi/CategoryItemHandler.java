@@ -27,93 +27,91 @@ package cyboi;
 /**
  * This is a category item handler.
  *
- * @version $Revision: 1.1 $ $Date: 2003-07-27 22:50:34 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-07-31 00:52:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryItemHandler {
 
     //
-    // Category item management.
+    // Category item.
     //
 
     /**
-     * Creates a category item.
+     * Initializes the category item.
      *
-     * @return the category item
+     * @param p0 the category item
      */
-    static java.lang.Object create_category_item() {
+    static void initialize_category_item(java.lang.Object p0) {
 
-        CategoryItem c = new CategoryItem();
+        CategoryItem i = (CategoryItem) p0;
 
-        if (c != null) {
+        if (i != null) {
 
-            java.lang.System.out.println("INFO: Create category item.");
+            java.lang.System.out.println("INFO: Initialize category item.");
 
-            c.item_abstraction = MapHandler.create_map();
-            c.item_category = MapHandler.create_map();
-            c.position_abstraction = MapHandler.create_map();
-            c.position_category = MapHandler.create_map();
-            c.instance_abstraction = MapHandler.create_map();
-            c.instance_category = MapHandler.create_map();
-            c.force_abstraction = MapHandler.create_map();
-            c.force_category = MapHandler.create_map();
+            i.item_category = new Map();
+            MapHandler.initialize_map(i.item_category);
+            i.item_abstraction = new Map();
+            MapHandler.initialize_map(i.item_abstraction);
+            i.position_category = new Map();
+            MapHandler.initialize_map(i.position_category);
+            i.position_abstraction = new Map();
+            MapHandler.initialize_map(i.position_abstraction);
+            i.instance_category = new Map();
+            MapHandler.initialize_map(i.instance_category);
+            i.instance_abstraction = new Map();
+            MapHandler.initialize_map(i.instance_abstraction);
+            i.interaction_category = new Map();
+            MapHandler.initialize_map(i.interaction_category);
+            i.interaction_abstraction = new Map();
+            MapHandler.initialize_map(i.interaction_abstraction);
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not create item. The item is null.");
+            java.lang.System.out.println("ERROR: Could not initialize category item. The category item is null.");
         }
-
-        return c;
     }
 
     /**
-     * Destroys the item.
+     * Finalizes the category item.
      *
-     * @param c the item
+     * @param p0 the category item
      */
-    static void destroy_item(java.lang.Object c) {
+    static void finalize_category_item(java.lang.Object p0) {
 
-        Item ic = (Item) c;
+        CategoryItem i = (CategoryItem) p0;
         
-        if (ic != null) {
+        if (i != null) {
 
-            java.lang.System.out.println("INFO: Destroy item.");
+            java.lang.System.out.println("INFO: Finalize category item.");
 
-            java.lang.Object forces = ic.forces;
-            ic.forces = null;
-            MapHandler.destroy_map(forces);
+            MapHandler.finalize_map(i.interaction_abstraction);
+            i.interaction_abstraction = null;
 
-            java.lang.Object force_abstractions = ic.force_abstractions;
-            ic.force_abstractions = null;
-            MapHandler.destroy_map(force_abstractions);
+            MapHandler.finalize_map(i.interaction_category);
+            i.interaction_category = null;
 
-            java.lang.Object times = ic.times;
-            ic.times = null;
-            MapHandler.destroy_map(times);
+            MapHandler.finalize_map(i.instance_abstraction);
+            i.instance_abstraction = null;
 
-            java.lang.Object time_abstractions = ic.time_abstractions;
-            ic.time_abstractions = null;
-            MapHandler.destroy_map(time_abstractions);
+            MapHandler.finalize_map(i.instance_category);
+            i.instance_category = null;
 
-            java.lang.Object spaces = ic.spaces;
-            ic.spaces = null;
-            MapHandler.destroy_map(spaces);
+            MapHandler.finalize_map(i.position_abstraction);
+            i.position_abstraction = null;
 
-            java.lang.Object space_abstractions = ic.space_abstractions;
-            ic.space_abstractions = null;
-            MapHandler.destroy_map(space_abstractions);
+            MapHandler.finalize_map(i.position_category);
+            i.position_category = null;
 
-            java.lang.Object items = ic.items;
-            ic.items = null;
-            MapHandler.destroy_map(items);
+            MapHandler.finalize_map(i.item_abstraction);
+            i.item_abstraction = null;
 
-            java.lang.Object item_abstractions = ic.item_abstractions;
-            ic.item_abstractions = null;
-            MapHandler.destroy_map(item_abstractions);
+            MapHandler.finalize_map(i.item_category);
+            i.item_category = null;
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not destroy item. The item is null.");
+            java.lang.System.out.println("ERROR: Could not finalize category item. The category item is null.");
         }
     }
 }

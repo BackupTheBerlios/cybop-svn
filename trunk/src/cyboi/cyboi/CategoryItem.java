@@ -29,7 +29,7 @@ package cyboi;
  *
  * It represents a category item with all its attributes, in a category file.
  *
- * @version $Revision: 1.3 $ $Date: 2003-07-27 22:50:34 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-07-31 00:52:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryItem {
@@ -37,28 +37,28 @@ class CategoryItem {
     /** The name. */
     static java.lang.Object name;
 
-    /** The item abstraction. */
-    static java.lang.Object item_abstraction;
-
     /** The item category. */
     static java.lang.Object item_category;
 
-    /** The position abstraction. */
-    static java.lang.Object position_abstraction;
+    /** The item abstraction. */
+    static java.lang.Object item_abstraction;
 
     /** The position category. */
     static java.lang.Object position_category;
 
-    /** The instance abstraction. */
-    static java.lang.Object instance_abstraction;
+    /** The position abstraction. */
+    static java.lang.Object position_abstraction;
 
     /** The instance category. */
     static java.lang.Object instance_category;
 
-    /** The force abstraction. */
-    static java.lang.Object force_abstraction;
+    /** The instance abstraction. */
+    static java.lang.Object instance_abstraction;
 
-    /** The force category. */
-    static java.lang.Object force_category;
+    /** The interaction category. */
+    static java.lang.Object interaction_category;
+
+    /** The interaction abstraction. */
+    static java.lang.Object interaction_abstraction;
 }
 

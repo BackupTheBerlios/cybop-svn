@@ -34,7 +34,7 @@ package cyboi;
  * send
  * reset
  *
- * @version $Revision: 1.3 $ $Date: 2003-07-27 17:55:11 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-07-31 00:52:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -121,11 +121,11 @@ class SignalHandler {
     /**
      * Receives the signal.
      *
-     * @param s the signal
+     * @param p0 the signal
      */
-    static void receive(java.lang.Object s) {
+    static void receive(java.lang.Object p0) {
         
-        if (s != null) {
+        if (p0 != null) {
 
         } else {
 
@@ -136,22 +136,23 @@ class SignalHandler {
     /**
      * Handles the signal.
      *
-     * @param o the signal
-     * @param r the remote flag
+     * @param p0 the signal
+     * @param p1 the remote flag
      * @return the shutdown flag
      */
-    static int handle(java.lang.Object o, int r) {
+    static int handle(java.lang.Object p0, int p1) {
         
         int sf = 0;
-        Item s = (Item) o;
+        Item s = (Item) p0;
                 
         if (s != null) {
 
-            java.lang.String p = (java.lang.String) MapHandler.get_map_element(s.items, "predicate_0");
+            java.lang.String p = null;
+            MapHandler.get_map_element(s.items, p, "predicate_0");
 
             if (p != null) {
 
-                if (p.equals("shutdown")) {
+                if (((java.lang.String) p).equals("shutdown")) {
                     
                     sf = 1;
                 }
@@ -172,11 +173,11 @@ class SignalHandler {
     /**
      * Sends the signal.
      *
-     * @param s the signal
+     * @param p0 the signal
      */
-    static void send(java.lang.Object s) {
+    static void send(java.lang.Object p0) {
         
-        if (s != null) {
+        if (p0 != null) {
 
         } else {
 
@@ -187,11 +188,11 @@ class SignalHandler {
     /**
      * Resets the signal.
      *
-     * @param s the signal
+     * @param p0 the signal
      */
-    static void reset(java.lang.Object s) {
+    static void reset(java.lang.Object p0) {
         
-        if (s != null) {
+        if (p0 != null) {
 
         } else {
 
