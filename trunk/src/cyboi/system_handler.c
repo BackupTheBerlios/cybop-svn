@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2005-01-28 23:30:52 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2005-02-10 22:46:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -184,7 +184,11 @@ void handle_system(void* p0) {
                                         fprintf(stderr, "ss: %i\n", *((int*) *ss));
 
                                         // Add startup signal to signal memory.
-                                        set_signal(*s, *sc, *ss, ma, (void*) mac, mm, (void*) mmc, md, (void*) mdc, (void*) NORMAL_PRIORITY, (void*) id);
+                                        set_signal(*s, *sc, *ss,
+                                            ma, (void*) mac,
+                                            mm, (void*) mmc,
+                                            md, (void*) mdc,
+                                            (void*) NORMAL_PRIORITY, (void*) id);
 
                                         // The system is now started up and complete so that a loop
                                         // can be entered, waiting for signals (events/ interrupts)

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2005-02-08 18:29:29 $ $Author: rholzmueller $
+ * @version $Revision: 1.31 $ $Date: 2005-02-10 22:46:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -141,8 +141,6 @@ void wait(void* p0) {
 
                                                                 if (id != POINTER_NULL_POINTER) {
 
-                                                                    test_knowledge_model(*k, *kc, 0 );
-
                                                                     //?? For testing only. TODO: Delete these lines later!
                                                                     fprintf(stderr, "wait i: %i\n", i);
                                                                     fprintf(stderr, "wait a: %s\n", (char*) *a);
@@ -153,6 +151,7 @@ void wait(void* p0) {
                                                                     fprintf(stderr, "wait p: %i\n", *((int*) *p));
                                                                     fprintf(stderr, "wait id: %i\n", *((int*) *id));
                                                                     fprintf(stderr, "wait knowledge model: %s\n", "");
+                                                                    test_knowledge_model(*k, *kc, 0);
 
                                                                     // CAUTION! Do NOT destroy signal here!
                                                                     // Signals are stored in the logic knowledge tree which gets created
@@ -204,7 +203,9 @@ void wait(void* p0) {
                                                                     // CAUTION! Do NOT hand over as reference!
                                                                     // The id was read from signal memory and is of type void**.
                                                                     // The expression (&*id) is the same like (id).
-                                                                    destroy_integer((void*) id);
+                                                                    fprintf(stderr, "\nTEST wait pre integer destroy i: %i\n\n", i);
+//??                                                                    destroy_integer((void*) id);
+                                                                    fprintf(stderr, "\nTEST wait post integer destroy i: %i\n\n", i);
                                                                     // CAUTION! Do NOT destroy the signal priority!
                                                                     // It is a FIXED system constant.
 

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-01-24 22:47:53 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-02-10 22:46:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,9 +90,7 @@ void shutdown_knowledge_memory(void* p0) {
     // The expression (&*variable) is the same like (variable).
     destroy(k, ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
     destroy_integer(kc);
-    //?? TODO: Activate this line later again!
-    //?? ks somehow does not exist which causes a segmentation fault!!
-//??    destroy_integer(ks);
+    destroy_integer(ks);
 }
 
 /* KNOWLEDGE_MEMORY_HANDLER_SOURCE */
