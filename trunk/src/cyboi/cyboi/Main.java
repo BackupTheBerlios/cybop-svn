@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.8 $ $Date: 2003-07-20 22:46:20 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-07-22 12:04:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -82,10 +82,10 @@ class Main {
 
                     Main.signal_memory = Main.create_signal_memory();
 
-                    Main.statics = Statics.create_statics();
+                    Main.statics = ItemHandler.create_item();
                     ItemHandler.initialize(Main.statics, statics_category);
 
-                    Main.dynamics = Dynamics.create_dynamics();
+                    Main.dynamics = ItemHandler.create_item();
                     ItemHandler.initialize(Main.dynamics, dynamics_category);
     
                     // Alternative to Java Event Handler
@@ -158,7 +158,18 @@ class Main {
      */
     static java.lang.Object create_xml_parser() {
 
-        return new org.apache.xerces.parsers.DOMParser();
+        org.apache.xerces.parsers.DOMParser p = new org.apache.xerces.parsers.DOMParser();
+
+        if (p != null) {
+            
+            p.setFeature("http://xml.org/sax/features/validation", true);
+            
+        } else {
+            
+            java.lang.System.out.println("ERROR: The parser is null.");
+        }
+        
+        return p;
     }
 
     /**

@@ -30,21 +30,21 @@ package cyboi;
  * An item element represents an item node in an XML-based
  * <i>Cybernetics Oriented Language</i> (CYBOL) file.
  *
- * @version $Revision: 1.1 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-07-22 12:04:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemElement extends Element {
 
     /** The name element. */
-    static Element name;
+    static java.lang.Object name;
 
     /** The abstraction element. */
-    static Element abstraction;
+    static java.lang.Object abstraction;
 
     /** The category element. */
-    static Element category;
+    static java.lang.Object category;
 
     /** The position element. */
-    static Element position;
+    static java.lang.Object position;
 }
 

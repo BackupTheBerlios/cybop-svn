@@ -29,15 +29,15 @@ package cyboi;
  *
  * A map element is represented by a name and an object reference.
  *
- * @version $Revision: 1.1 $ $Date: 2003-07-20 07:49:52 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-07-22 12:04:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class MapElement extends Element {
 
     /** The name element. */
-    static Element name;
+    static java.lang.Object name;
 
     /** The reference element. */
-    static Element reference;
+    static java.lang.Object reference;
 }
 

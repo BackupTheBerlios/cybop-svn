@@ -33,7 +33,7 @@ package cyboi;
  * Instantiating means allocating some place in the computer's memory.
  * Basically, every item can become a category if copies of this item are created.
  *
- * @version $Revision: 1.1 $ $Date: 2003-07-20 22:46:20 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-07-22 12:04:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemContainer extends Container {
@@ -51,7 +51,7 @@ class ItemContainer extends Container {
     static java.lang.Object java_tree_node;
 
     /** The abstractions container. */
-    static java.lang.Object abstractions;
+//??    static java.lang.Object abstractions;
 
     /** The categories container. */
     static java.lang.Object categories;

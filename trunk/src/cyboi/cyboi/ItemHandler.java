@@ -65,7 +65,7 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.7 $ $Date: 2003-07-20 22:46:20 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-07-22 12:04:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -137,6 +137,49 @@ class ItemHandler {
     //
 
     /**
+     * Creates an item element.
+     *
+     * @param a the abstraction
+     * @param c the category
+     * @return the item element
+     */
+    static java.lang.Object create_item_element(java.lang.Object a, java.lang.Object c) {
+
+        java.lang.Object item = null;
+
+        if (abstraction != null) {
+
+            if (abstraction.equals(Statics.INTEGER_PRIMITIVE)) {
+
+                item = PrimitiveHandler.create_integer_primitive(category);
+
+            } else if (abstraction.equals(Statics.FLOAT_PRIMITIVE)) {
+
+                item = PrimitiveHandler.create_float_primitive(category);
+
+            } else if (abstraction.equals(Statics.CHAR_PRIMITIVE)) {
+
+                item = PrimitiveHandler.create_character_primitive(category);
+
+            } else if (abstraction.equals(Statics.STRING_PRIMITIVE)) {
+
+                item = PrimitiveHandler.create_string_primitive(category);
+
+            } else if (abstraction.equals(Statics.COMPLEX)) {
+
+                item = ItemHandler.create_item_container();
+                ItemHandler.initialize(item, category);
+            }
+            
+        } else {
+            
+            java.lang.System.out.println("ERROR: The abstraction is null.");
+        }
+
+        return item;
+    }
+
+    /**
      * Sets the item element.
      *
      * @param c the item container
@@ -144,42 +187,42 @@ class ItemHandler {
      */
     static void set_item_element(java.lang.Object c, java.lang.Object e) {
 
-        ItemContainer c = (ItemContainer) c;
+        ItemContainer ic = (ItemContainer) c;
         
-        if (c != null) {
+        if (ic != null) {
             
             ItemElement ie = (ItemElement) e;
             
             if (ie != null) {
 
-                MapHandler.set_map_element(c.abstractions, ie.name, e);
-                MapHandler.set_map_element(c.categories, ie.name, e);
-                MapHandler.set_map_element(c.positions, ie.name, e);
-                MapHandler.set_map_element(c.items, ie.name, e);
+                MapHandler.set_map_element(ic.abstractions, ie.name, e.abstraction);
+                MapHandler.set_map_element(ic.categories, ie.name, e.category);
+                MapHandler.set_map_element(ic.positions, ie.name, e.position);
+                MapHandler.set_map_element(ic.items, ie.name, e.item);
 
             } else {
     
-                java.lang.System.out.println("ERROR: Could not set item container. The item element is null.");
+                java.lang.System.out.println("ERROR: Could not set item element. The item element is null.");
             }
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not set item container. The item container is null.");
+            java.lang.System.out.println("ERROR: Could not set item element. The item container is null.");
         }
     }
 
     /**
-     * Adds the item.
+     * Adds the item element.
      *
-     * @param i the item
+     * @param c the item container
      * @param n the base name
      * @param c the item
      * @return the item name
      */
-    static java.lang.Object addItem(java.lang.Object n, java.lang.Object c) {
+    static java.lang.Object add_item_element(java.lang.Object c, java.lang.Object n, java.lang.Object c) {
 
         java.lang.Object cn = null;
-        Map m = getItemren();
+        Map m = getItem();
 
         if (m != null) {
 
@@ -187,21 +230,21 @@ class ItemHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not add item. The item is null.");
+            java.lang.System.out.println("ERROR: Could not add item element. The item element is null.");
         }
         
         return cn;
     }
 
     /**
-     * Removes the item.
+     * Removes the item element.
      *
-     * @param i the item
+     * @param c the item container
      * @param i the index
      */
-    static void removeItem(int i) {
+    static void remove_item_element(java.lang.Object c, int i) {
 
-        Map m = getItemren();
+        Map m = getItem();
 
         if (m != null) {
 
@@ -209,19 +252,19 @@ class ItemHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not remove item. The item is null.");
+            java.lang.System.out.println("ERROR: Could not remove item element. The item element is null.");
         }
     }
 
     /**
-     * Removes the item.
+     * Removes the item element.
      *
-     * @param i the item
+     * @param c the item container
      * @param n the name
      */
-    static void removeItem(java.lang.Object n) {
+    static void remove_item_element(java.lang.Object c, java.lang.Object n) {
 
-        Map m = getItemren();
+        Map m = getItem();
 
         if (m != null) {
 
@@ -229,69 +272,69 @@ class ItemHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not remove item. The item is null.");
+            java.lang.System.out.println("ERROR: Could not remove item element. The item element is null.");
         }
     }
 
     /**
-     * Returns the item with the index.
+     * Returns the item element.
      *
-     * @param i the item
+     * @param c the item container
      * @param i the index
      * @return the item
      */
-    static Item getItem(int i) {
+    static ItemContainer get_item_element(java.lang.Object c, int i) {
 
-        Item c = null;
-        Map m = getItemren();
+        ItemContainer c = null;
+        Map m = getItem();
 
         if (m != null) {
 
-            c = (Item) m.get(i);
+            c = (ItemContainer) m.get(i);
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not get item. The item is null.");
+            java.lang.System.out.println("ERROR: Could not get item element. The item element is null.");
         }
 
         return c;
     }
 
     /**
-     * Returns the item.
+     * Returns the item element.
      *
-     * @param i the item
+     * @param c the item container
      * @param n the name
      * @return the item
      */
-    static Item getItem(java.lang.Object n) {
+    static ItemContainer get_item_element(java.lang.Object c, java.lang.Object n) {
 
-        Item c = null;
-        Map m = getItemren();
+        ItemContainer c = null;
+        Map m = getItem();
 
         if (m != null) {
 
-            c = (Item) m.get(n);
+            c = (ItemContainer) m.get(n);
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not get item. The item is null.");
+            java.lang.System.out.println("ERROR: Could not get item element. The item element is null.");
         }
 
         return c;
     }
 
     /**
-     * Returns the item.
+     * Returns the item element.
      *
-     * @param i the item
+     * @param c the item container
      * @param n the name
      * @param d the default item
      * @return the item
      */
-    static Item getItem(java.lang.Object n, java.lang.Object d) {
+    static ItemContainer get_item_element(java.lang.Object c, java.lang.Object n, java.lang.Object d) {
 
-        Item c = getItem(n);
+        ItemContainer c = getItem(n);
 
         if (c == null) {
 
@@ -302,15 +345,15 @@ class ItemHandler {
     }
 
     /**
-     * Returns the number of itemren whose name starts with the given name as word base.
+     * Returns the number of items whose name starts with the given name as word base.
      *
-     * @param i the item
+     * @param c the item container
      * @param n the name
      */
-    static int getCount(java.lang.Object n) {
+    static int get_element_count(java.lang.Object c, java.lang.Object n) {
 
         int c = -1;
-        Map m = getItemren();
+        Map m = getItem();
 
         if (m != null) {
 
@@ -318,7 +361,7 @@ class ItemHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not get item count. The item is null.");
+            java.lang.System.out.println("ERROR: Could not get item element count. The item element is null.");
         }
         
         return c;
@@ -342,7 +385,6 @@ class ItemHandler {
 
         if (p != null) {
             
-            p.setFeature("http://xml.org/sax/features/validation", true);
             p.parse(f);
             java.lang.System.out.println("INFO: Parsed file: " + f);
             
@@ -425,25 +467,30 @@ class ItemHandler {
 */
                         
                             m = n.getAttributes();
-        
-                            if (m != null) {
-                
-                                a = m.getNamedItem("name");
-                                name = a.getNodeValue();
-                                java.lang.System.out.println(name);
-            
-                                a = m.getNamedItem("abstraction");
-                                abstraction = a.getNodeValue();
-                                java.lang.System.out.println(abstraction);
-            
-                                a = m.getNamedItem("category");
-                                category = a.getNodeValue();
-                                java.lang.System.out.println(category);
+    
+                            name = ItemHandler.getAttribute(m, "name");
+                            java.lang.System.out.println(name);
+    
+                            category_abstraction = ItemHandler.getAttribute(m, "category_abstraction");
+                            java.lang.System.out.println(category_abstraction);
+                            category = ItemHandler.getAttribute(m, "category");
+                            java.lang.System.out.println(category);
+                            java.lang.Object category_child = create_item_element(category_abstraction, category);
+                            add_item_element(item, name, category_child);
+    
+                            space_abstraction = ItemHandler.getAttribute(m, "space_abstraction");
+                            java.lang.System.out.println(space_abstraction);
+                            space = ItemHandler.getAttribute(m, "space");
+                            java.lang.System.out.println(space);
+                            java.lang.Object space_child = create_item_element(space_abstraction, space);
+                            add_item_element(item, name, space_child);
 
-                            } else {
-                                
-                                java.lang.System.out.println("ERROR: The named node map is null.");
-                            }
+                            time_abstraction = ItemHandler.getAttribute(m, "time_abstraction");
+                            java.lang.System.out.println(time_abstraction);
+                            time = ItemHandler.getAttribute(m, "time");
+                            java.lang.System.out.println(time);
+                            java.lang.Object time_child = create_item_element(time_abstraction, time);
+                            add_item_element(item, name, time_child);
 
                         } else {
                             
@@ -451,38 +498,6 @@ class ItemHandler {
                         }
                         
                         i++;
-                    }
-                    
-                    java.lang.Object child = null;
-                    
-                    if (abstraction != null) {
-            
-                        if (abstraction.equals(Statics.INTEGER_PRIMITIVE)) {
-            
-                            child = PrimitiveHandler.create_integer_primitive(category);
-            
-                        } else if (abstraction.equals(Statics.FLOAT_PRIMITIVE)) {
-            
-                            child = PrimitiveHandler.create_float_primitive(category);
-            
-                        } else if (abstraction.equals(Statics.CHAR_PRIMITIVE)) {
-            
-                            child = PrimitiveHandler.create_character_primitive(category);
-            
-                        } else if (abstraction.equals(Statics.STRING_PRIMITIVE)) {
-            
-                            child = PrimitiveHandler.create_string_primitive(category);
-            
-                        } else if (abstraction.equals(Statics.COMPLEX)) {
-            
-                            child = ItemHandler.initialize(category_item);
-                        }
-                        
-                        item.add_item(child);
-                    
-                    } else {
-                        
-                        java.lang.System.out.println("ERROR: The abstraction is null.");
                     }
                     
                 } else {
@@ -535,6 +550,39 @@ class ItemHandler {
 */
     }
 
+    /**
+     * Returns the attribute.
+     *
+     * @param c the attributes container
+     * @param n the name
+     * @return the attribute
+     */
+    static java.lang.Object get_attribute(java.lang.Object c, java.lang.Object n) {
+    
+        java.lang.Object a = null;
+        org.w3c.dom.NamedNodeMap ac = (org.w3c.dom.NamedNodeMap) c;
+
+        if (ac != null) {
+    
+            org.w3c.dom.Node e = ac.getNamedItem(n);
+            
+            if (e != null) {
+                
+                a = e.getNodeValue();
+        
+            } else {
+                
+                java.lang.System.out.println("ERROR: Could not get attribute. The attribute element is null.");
+            }
+        
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not get attribute. The attributes container is null.");
+        }
+
+        return a;
+    }
+    
     /**
      * Reads a sub array as a sequence of bytes.
      *
