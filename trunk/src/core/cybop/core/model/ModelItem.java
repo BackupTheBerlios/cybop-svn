@@ -32,10 +32,17 @@ import cybop.core.category.*;
  * A model item can be any arbitrary abstraction of the real world.
  * System items work on model items.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-11 14:22:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ModelItem extends Item {
+
+    //
+    // Children categories.
+    //
+
+    /** The log level category. */
+    public static final String LOG_LEVEL_CATEGORY = new String("log_level_category");
 
     //
     // Children names.
@@ -43,13 +50,6 @@ public class ModelItem extends Item {
 
     /** The log level. */
     public static final String LOG_LEVEL = new String("log_level");
-
-    //
-    // Children category names.
-    //
-
-    /** The log level category. */
-    public static final String LOG_LEVEL_CATEGORY = new String("log_level_category");
 
     //
     // Log levels.

@@ -80,7 +80,7 @@ package cybop.core.category;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-23 11:57:28 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-11 14:22:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends Behaviour {
@@ -165,7 +165,6 @@ public class Item extends Behaviour {
 
                     java.lang.System.out.println("INFO: Globalize child.");
                     i.globalize(
-                        getChildItem(Item.CONFIGURATION),
                         getChildItem(Item.LOG_RECORD),
                         getChildItem(Item.SIGNAL_MEMORY)
                     );
@@ -311,6 +310,32 @@ public class Item extends Behaviour {
     }
 
     //
+    // Abstraction.
+    //
+
+    /**
+     * Abstracts this item.
+     */
+    public void abstracc() throws Exception {
+
+        super.abstracc();
+
+        setChildren(createChildren());
+    }
+
+    /**
+     * Deabstracts this item.
+     */
+    public void deabstract() throws Exception {
+
+        Map children = getChildren();
+        setChildren(null);
+        destroyChildren(children);
+
+        super.deabstract();
+    }
+
+    //
     // Initialization.
     //
 
@@ -318,8 +343,6 @@ public class Item extends Behaviour {
      * Initializes this item.
      */
     public void initialize() throws Exception {
-
-        setChildren(createChildren());
     }
 
     /**
@@ -333,10 +356,6 @@ public class Item extends Behaviour {
      * and simplified CYBOL computer language is used.
      */
     public void finalizz() throws Exception {
-
-        Abstraction children = getChildren();
-        setChildren(null);
-        destroyChildren((Hierarchy) children);
     }
 
     //

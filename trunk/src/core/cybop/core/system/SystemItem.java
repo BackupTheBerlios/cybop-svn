@@ -33,10 +33,20 @@ import cybop.core.model.*;
  * A system item has special properties like configuration or log record and
  * is able to create and send signals.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:30 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-11 14:22:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemItem extends ModelItem {
+
+    //
+    // Children categories.
+    //
+
+    /** The signal category. */
+    public static final String SIGNAL_CATEGORY = new String("signal_category");
+
+    /** The action category. */
+    public static final String ACTION_CATEGORY = new String("action_category");
 
     //
     // Children names.
@@ -47,16 +57,6 @@ public class SystemItem extends ModelItem {
 
     /** The action. */
     public static final String ACTION = new String("action");
-
-    //
-    // Children category names.
-    //
-
-    /** The signal category. */
-    public static final String SIGNAL_CATEGORY = new String("signal_category");
-
-    /** The action category. */
-    public static final String ACTION_CATEGORY = new String("action_category");
 
     //
     // Default categories.
