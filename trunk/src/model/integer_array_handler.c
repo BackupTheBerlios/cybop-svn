@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.6 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,23 +63,23 @@ void compare_integer_arrays(const void* p0, const void* p1, const void* p2, void
 
     int* r = (int*) p3;
 
-    if (r != (void*) 0) {
+    if (r != NULL) {
 
         int* s = (int*) p2;
 
-        if (s != (void*) 0) {
+        if (s != NULL) {
 
             void** a1 = (void**) p1;
 
-            if (a1 != (void*) 0) {
+            if (a1 != NULL) {
 
                 void** a0 = (void**) p0;
 
-                if (a0 != (void*) 0) {
+                if (a0 != NULL) {
 
                     int i = 0;
-                    int* e0 = (void*) 0;
-                    int* e1 = (void*) 0;
+                    int* e0 = NULL;
+                    int* e1 = NULL;
 
                     while (1) {
 
@@ -140,15 +140,15 @@ void set_integer_array_element(const void* p0, const void* p1, const void* p2) {
 
     int* e0 = (int*) p2;
 
-    if (e0 != (void*) 0) {
+    if (e0 != NULL) {
 
         int* i = (int*) p1;
 
-        if (i != (void*) 0) {
+        if (i != NULL) {
 
             void** a = (void**) p0;
 
-            if (a != (void*) 0) {
+            if (a != NULL) {
 
                 // Set element.
                 int* e1 = (int*) (*a + *i);
@@ -181,21 +181,21 @@ void remove_integer_array_element(const void* p0, const void* p1, const void* p2
 
     int* i = (int*) p2;
 
-    if (i != (void*) 0) {
+    if (i != NULL) {
 
         int* s = (int*) p1;
 
-        if (s != (void*) 0) {
+        if (s != NULL) {
 
             void** a = (void**) p0;
 
-            if (a != (void*) 0) {
+            if (a != NULL) {
 
                 // Initialize loop variable with index.
                 // Do not use the index itself as it was handed over as constant parameter!
                 int j = *i;
-                int* e0 = (void*) 0;
-                int* e1 = (void*) 0;
+                int* e0 = NULL;
+                int* e1 = NULL;
 
                 // Starting from the given index, move all remaining elements one
                 // place towards the beginning of the elements.
@@ -244,15 +244,15 @@ void get_integer_array_element(const void* p0, const void* p1, void* p2) {
 
     int* e0 = (int*) p2;
 
-    if (e0 != (void*) 0) {
+    if (e0 != NULL) {
 
         int* i = (int*) p1;
 
-        if (i != (void*) 0) {
+        if (i != NULL) {
 
             void** a = (void**) p0;
 
-            if (a != (void*) 0) {
+            if (a != NULL) {
 
                 // Get element.
                 int* e1 = (int*) (*a + *i);
@@ -289,22 +289,22 @@ void get_integer_array_element_index(const void* p0, const void* p1, const void*
 
     int* i = (int*) p3;
 
-    if (i != (void*) 0) {
+    if (i != NULL) {
 
         int* e0 = (int*) p2;
 
-        if (e0 != (void*) 0) {
+        if (e0 != NULL) {
 
             int* s = (int*) p1;
 
-            if (s != (void*) 0) {
+            if (s != NULL) {
 
                 void** a = (void**) p0;
 
-                if (a != (void*) 0) {
+                if (a != NULL) {
 
                     int j = 0;
-                    int* e1 = (void*) 0;
+                    int* e1 = NULL;
 
                     while (1) {
 

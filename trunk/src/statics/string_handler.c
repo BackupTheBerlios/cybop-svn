@@ -25,7 +25,7 @@
  *
  * A string is a chain of characters.
  *
- * @version $Revision: 1.10 $ $Date: 2004-04-02 16:13:46 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,19 +50,19 @@ void initialize_string(void* p0, void* p1, const void* p2, const void* p3) {
 
     int* ps = (int*) p3;
 
-    if (ps != (void*) 0) {
+    if (ps != NULL) {
 
         char* p = (char*) p2;
 
-        if (p != (void*) 0) {
+        if (p != NULL) {
 
             int* ts = (int*) p1;
 
-            if (ts != (void*) 0) {
+            if (ts != NULL) {
 
                 char* t = (char*) p0;
 
-                if (t != (void*) 0) {
+                if (t != NULL) {
 
                     log_message((void*) &INFO_LOG_LEVEL, "Initialize string.");
 
@@ -102,19 +102,19 @@ void finalize_string(const void* p0, const void* p1, void* p2, void* p3) {
 
     int* ps = (int*) p3;
 
-    if (ps != (void*) 0) {
+    if (ps != NULL) {
 
         char* p = (char*) p2;
 
-        if (p != (void*) 0) {
+        if (p != NULL) {
 
             int* ts = (int*) p1;
 
-            if (ts != (void*) 0) {
+            if (ts != NULL) {
 
                 char* t = (char*) p0;
 
-                if (t != (void*) 0) {
+                if (t != NULL) {
 
                     log_message((void*) &INFO_LOG_LEVEL, "Finalize string.");
 

@@ -29,7 +29,7 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.10 $ $Date: 2004-04-02 16:13:46 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,7 +69,7 @@ void initialize_boolean(void* p0, const void* p1, const void* p2) {
 
     int* t = (int*) p0;
 
-    if (t != (void*) 0) {
+    if (t != NULL) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Initialize boolean.");
 
@@ -103,15 +103,15 @@ void finalize_boolean(const void* p0, void* p1, void* p2) {
 
     int* t = (int*) p0;
 
-    if (t != (void*) 0) {
+    if (t != NULL) {
 
         char* p = (char*) p1;
 
-        if (p != (void*) 0) {
+        if (p != NULL) {
 
             int* ps = (int*) p2;
 
-            if (ps != (void*) 0) {
+            if (ps != NULL) {
 
                 log_message((void*) &INFO_LOG_LEVEL, "Finalize boolean.");
 

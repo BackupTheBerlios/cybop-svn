@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.14 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,14 +78,14 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
     // such as X-Windows, Macintosh or MS Windows.
     struct internals* i = (struct internals*) p3;
 
-    if (i != (void*) 0) {
+    if (i != NULL) {
 
         // Initialize shutdown flag to false.
         int f = 0;
         int index = -1;
-        void* s = (void*) 0;
-        char* a = (void*) 0;
-        void* p = (void*) 0;
+        void* s = NULL;
+        char* a = NULL;
+        void* p = NULL;
 
         //?? Testing!
         init_x();
@@ -96,7 +96,7 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
             if (f == 0) {
 
                 //?? test x windows
-//??                send_x_windows_output((void*) 0, (void*) 0, p3);
+//??                send_x_windows_output(NULL, NULL, p3);
                 sleep(4);
 
                 // Check for x windows events and send them as cyboi signals.
@@ -121,7 +121,7 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
                 // Destroy signal. Do not destroy the signal's abstraction and
                 // priority here; they are static within CYBOI.
-                destroy_model(s, (void*) 0, (void*) 0, (void*) a);
+                destroy_model(s, NULL, NULL, (void*) a);
 
                 // Handle signal.
                 log_message((void*) &INFO_LOG_LEVEL, "0");
@@ -177,30 +177,30 @@ int main(int p0, char** p1) {
     // Log level as static (global) variable.
     log_level = (void*) &INFO_LOG_LEVEL;
 
-    if (p1 != (void*) 0) {
+    if (p1 != NULL) {
 
         if (p0 == 2) {
 
             // Create statics.
-            void* s = (void*) 0;
+            void* s = NULL;
             create_compound_model((void*) &s);
 
             // Create dynamics.
-            void* d = (void*) 0;
+            void* d = NULL;
             create_compound_model((void*) &d);
 
             // Create internals.
-            void* i = (void*) 0;
+            void* i = NULL;
             create_map((void*) &i);
 
             // Create signal memory.
-            void* sm = (void*) 0;
+            void* sm = NULL;
             int sms = 0;
             create_array(sm, (void*) &sms);
 
             // Create startup signal.
-            void* ss = (void*) 0;
-            create_model(ss, (void*) p1[1], (void*) 0, (void*) OPERATION_MODEL);
+            void* ss = NULL;
+            create_model(ss, (void*) p1[1], NULL, (void*) OPERATION_MODEL);
 
             // Add startup signal to signal memory.
             set_signal_memory_part(sm, sms, (void*) OPERATION_MODEL, ss, (void*) &NORMAL_PRIORITY);

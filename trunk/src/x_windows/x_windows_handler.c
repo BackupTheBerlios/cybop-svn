@@ -25,7 +25,7 @@
  *
  * It controls the input and output of x windows.
  *
- * @version $Revision: 1.12 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -138,7 +138,7 @@ void send_x_windows_output(void* p0, void* p1, void* p2) {
 
     struct x_windows* x = (struct x_windows*) p2;
 
-    if (x != (void*) 0) {
+    if (x != NULL) {
 
         // Get parameters from screen and set them on X.
         x->display = XOpenDisplay("");
@@ -173,7 +173,7 @@ void send_x_windows_output(void* p0, void* p1, void* p2) {
             "Application",
             "Icon",
             None,
-            (void*) 0,
+            NULL,
             0,
             (void*) &(x->hint));
 
@@ -259,15 +259,15 @@ void receive_expose_x_windows_input(void* p0, void* p1, void* p2) {
 
     struct x_windows* x = (struct x_windows*) p1;
 
-    if (x != (void*) 0) {
+    if (x != NULL) {
 
         XEvent* e = (XEvent*) p2;
 
-        if (e != (void*) 0) {
+        if (e != NULL) {
 
             XExposeEvent* exp = (XExposeEvent*) &(e->xexpose);
 
-            if (exp != (void*) 0) {
+            if (exp != NULL) {
 
                 // Consider only last of many expose events; ignore those with nonzero counts.
                 // Do not distinguish between window subareas and perform full redisplay.
@@ -391,16 +391,16 @@ void receive_key_press_x_windows_input(void* p0, void* p1, void* p2) {
 
     struct x_windows* x = (struct x_windows*) p1;
 
-    if (x != (void*) 0) {
+    if (x != NULL) {
 
         XEvent* e = (XEvent*) p2;
 
-        if (e != (void*) 0) {
+        if (e != NULL) {
 
             int i = XLookupString((XKeyEvent*) p2, x->text, 10, &(x->key), 0);
 
             // Create signal.
-        //??    void* s = create_dynamics((void*) action, (void*) 0, (void*) 0, (void*) DYNAMICS_COMPOUND);
+        //??    void* s = create_dynamics((void*) action, NULL, NULL, (void*) DYNAMICS_COMPOUND);
 
             // Add signal to signal memory.
         //??    add_signal(p0, s, (void*) DYNAMICS_COMPOUND, (void*) &NORMAL_PRIORITY);
@@ -465,11 +465,11 @@ void receive_button_press_x_windows_input(void* p0, void* p1, void* p2) {
 
     struct x_windows* x = (struct x_windows*) p1;
 
-    if (x != (void*) 0) {
+    if (x != NULL) {
 
         XEvent* e = (XEvent*) p2;
 
-        if (e != (void*) 0) {
+        if (e != NULL) {
 
             //struct XButtonEvent w;
             //w = x->event.xbutton.window;
@@ -529,7 +529,7 @@ void receive_x_windows_input(void* p0, void* p1) {
 
     struct x_windows* x = (struct x_windows*) p1;
 
-    if (x != (void*) 0) {
+    if (x != NULL) {
 
         // Determine pointer to x event structure.
         XEvent* e = &(x->event);
@@ -537,7 +537,7 @@ void receive_x_windows_input(void* p0, void* p1) {
         // Read x event.
         XNextEvent(x->display, e);
 
-        if (e != (void*) 0) {
+        if (e != NULL) {
 
             int t = e->type;
 
@@ -585,14 +585,14 @@ void receive_x_windows_input(void* p0, void* p1) {
 /*??
 void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p0 != (void*) 0) {
+    if (p0 != NULL) {
 
         // Determine the action of the clicked child screen item.
         int count = 0;
         int size = get_map_size(p0->items);
-        void* child = (void*) 0;
-        struct vector* position = (void*) 0;
-        struct vector* expansion = (void*) 0;
+        void* child = NULL;
+        struct vector* position = NULL;
+        struct vector* expansion = NULL;
         int x = -1;
         int y = -1;
         int z = -1;
@@ -600,7 +600,7 @@ void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
         int height = -1;
         int depth = -1;
         int contains = 0;
-        void* action = (void*) 0;
+        void* action = NULL;
 
         while (count < size) {
 
@@ -612,14 +612,14 @@ void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 expansion = (vector) get_item_element(child, "expansion");
 
-                if (position != (void*) 0) {
+                if (position != NULL) {
 
                     // Translate the given coordinates according to the child's position.
                     x = p1 - position->x;
                     y = p2 - position->y;
                     z = p3 - position->z;
 
-                    if (expansion != (void*) 0) {
+                    if (expansion != NULL) {
 
                         // Determine child's expansion.
                         width = expansion->x;
@@ -668,7 +668,7 @@ void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         // Only use child screen item's action if it exists.
         // Otherwise, use the parent screen item's action.
-        if (action != (void*) 0) {
+        if (action != NULL) {
 
             p4 = action;
 

@@ -33,7 +33,7 @@
  * Operation, input and output are stored in the following form:
  * operation, operand1, operand2, operand3, ...
  *
- * @version $Revision: 1.16 $ $Date: 2004-04-04 22:09:31 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,6 +59,9 @@ static const int PARAMETERS_ARRAY_INDEX = 1;
 /** The parameters sizes array index. */
 static const int PARAMETERS_SIZES_ARRAY_INDEX = 2;
 
+/** The operation parameter separator. */
+static const char OPERATION_PARAMETER_SEPARATOR = ',';
+
 //
 // Operation.
 //
@@ -81,12 +84,12 @@ void create_operation(void* p0, const void* p1) {
     set_array_element(p0, (void*) &OPERATION_SIZE, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
 
     // The parameters array.
-    void* p = (void*) 0;
+    void* p = NULL;
     create_array((void*) &p, (void*) &s);
     set_array_element(p0, (void*) &OPERATION_SIZE, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_ARRAY_INDEX, (void*) &p);
 
     // The parameters sizes array.
-    void* ps = (void*) 0;
+    void* ps = NULL;
     create_array((void*) &ps, (void*) &s);
     set_array_element(p0, (void*) &OPERATION_SIZE, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_ARRAY_INDEX, (void*) &ps);
 }
@@ -106,13 +109,13 @@ void destroy_operation(void* p0, const void* p1) {
     get_array_element(p0, (void*) &OPERATION_SIZE, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
 
     // The parameters sizes array.
-    void* ps = (void*) 0;
+    void* ps = NULL;
     get_array_element(p0, (void*) &OPERATION_SIZE, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_ARRAY_INDEX, (void*) &ps);
     remove_array_element(p0, (void*) &OPERATION_SIZE, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_ARRAY_INDEX);
     destroy_array((void*) &ps, (void*) &s);
 
     // The parameters array.
-    void* p = (void*) 0;
+    void* p = NULL;
     get_array_element(p0, (void*) &OPERATION_SIZE, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_ARRAY_INDEX, (void*) &p);
     remove_array_element(p0, (void*) &OPERATION_SIZE, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_ARRAY_INDEX);
     destroy_array((void*) &p, (void*) &s);
@@ -136,42 +139,89 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
 
     int* ps = (int*) p3;
 
-    if (ps != (void*) 0) {
+    if (ps != NULL) {
 
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize operation.");
+        void** p = (int*) p2;
 
-        // Find pointers to the single string parts which are separated by a comma.
-        // Identify sizes of the single string parts.
-        // Add these pointers and the corresponding sizes as separate string elements
-        // to the operation array. Transform to operation with operands.
+        if (p != NULL) {
 
-        int i = -1;
-        get_array_element_index(p2, p3, (void*) &CHARACTER_ARRAY, (void*) &COMMA_CHARACTER, i);
+            int* ts = (int*) p1;
 
-        if (i != -1) {
+            if (ts != NULL) {
 
-            //?? Store pointer and size in arrays!
+                void** t = (int*) p0;
 
-            // Add element.
-            get_array_element(p0, p1, (void*) &POINTER_ARRAY, index-0, (void*) &pointers);
-            get_array_element(p0, p1, (void*) &POINTER_ARRAY, index-1, (void*) &sizes);
+                if (t != NULL) {
 
-            set_array_element(p0-pointers, p0-size, (void*) &POINTER_ARRAY, p1, (void*) &element-part-name-begin-pointer);
-            set_array_element(p0-sizes, p0-size, (void*) &INTEGER_ARRAY, p1, (void*) &element-part-name-size);
+                    log_message((void*) &INFO_LOG_LEVEL, "Initialize operation.");
 
+                    // Find pointers to the single string parts which are separated by a comma.
+                    // Identify sizes of the single string parts.
+                    // Add these pointers and the corresponding sizes as separate string elements
+                    // to the operation array. Transform to operation with operands.
 
---
-        get_character_index(p1, (void*) &COMMA_CHARACTER, (void*) &length, (void*) &end);
-        add_array_element(p0, s);
+                    // The parameter size initially set to the whole persistent model size.
+                    int size = *ps;
 
-        char* r = (char*) p1 + end;
+                    // The separator index.
+                    int i = -1;
+                    get_array_element_index(p2, p3, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_PARAMETER_SEPARATOR, (void*) &i);
 
-        // Only call procedure recursively if the remaining string is not empty.
-        if (*r != '\0') {
+                    if (i != -1) {
 
-            // Set index of remaining string to one after the comma character.
-            initialize_operation_model(p0, r + 1);
-        }
+                        // Reset parameter size if a separator is found and more parameters exist.
+                        // Example: "operation,parameter"
+                        // i = 9
+                        // size = 9
+                        size = i;
+                    }
+
+                    if (size > 0) {
+
+                        // The array size.
+                        int s = 0;
+                        get_array_element(p0, (void*) &OPERATION_SIZE, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
+
+                        //?? Handle size in new (simplified) way! Consider changes in array_handler!
+
+                        // Add parameter to array.
+                        void* pa = NULL;
+                        get_array_element(p0, (void*) &OPERATION_SIZE, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_ARRAY_INDEX, (void*) &pa);
+                        set_array_element((void*) &pa, (void*) &s, (void*) &POINTER_ARRAY, (void*) &s, p0);
+
+                        // Add parameter size to array.
+                        void* pas = NULL;
+                        get_array_element(p0, (void*) &OPERATION_SIZE, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_ARRAY_INDEX, (void*) &pas);
+                        set_array_element((void*) &pas, (void*) &s, (void*) &POINTER_ARRAY, (void*) &s, (void*) &size);
+
+                        if (i != -1) {
+
+                            // The size of the remaining parameters.
+                            // Example: "operation,parameter"
+                            // *ps = 19
+                            // i = 9
+                            // rs = *ps - (i + 1) = 9
+                            int rs = *ps - (i + 1);
+
+                            if (rs > 0) {
+
+                                // The remaining parameters.
+                                void* r = *p + i + 1;
+
+                                // Call procedure recursively if more parameters are following after the separator.
+                                // Set index of remaining string to one after the comma character.
+                                initialize_operation(p0, p1, (void*) &r, (void*) &rs);
+
+                            } else {
+
+                                log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize operation. There are no remaining parameters after the separator.");
+                            }
+                        }
+
+                    } else {
+
+                        log_message((void*) &WARNING_LOG_LEVEL, "Could not initialize operation. There is no parameter before the separator.");
+                    }
 
                 } else {
 
@@ -207,7 +257,7 @@ void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
     log_message((void*) &INFO_LOG_LEVEL, "Finalize operation.");
 
 /*??
-    if (p1 != (void*) 0) {
+    if (p1 != NULL) {
 
         // Write output stream by transforming from operation with operands.
         int c = 0;

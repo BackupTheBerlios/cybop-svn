@@ -23,7 +23,7 @@
  *
  * This file handles internals.
  *
- * @version $Revision: 1.5 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,7 +47,7 @@ void initialize_internals(void* p0) {
 
     struct internals* i = (struct internals*) p0;
 
-    if (i != (void*) 0) {
+    if (i != NULL) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Initialize internals.");
 
@@ -80,7 +80,7 @@ void finalize_internals(void* p0) {
 
     struct internals* i = (struct internals*) p0;
 
-    if (i != (void*) 0) {
+    if (i != NULL) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Finalize internals.");
 
