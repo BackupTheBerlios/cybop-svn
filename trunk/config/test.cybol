@@ -30,7 +30,7 @@
 <model>
     <part name="startup_channel" channel="inline" abstraction="string" model="file"/>
     <part name="startup_abstraction" channel="inline" abstraction="string" model="cybol"/>
-    <part name="startup_model" channel="inline" abstraction="string" model="lib/example/hello_world/startup.cybol"/>
+    <part name="startup_model" channel="inline" abstraction="string" model="example/helloworld/startup.cybol"/>
     <part name="tcp_server_socket_port" channel="inline" abstraction="integer" model="3456"/>
     <part name="tcp_server_socket_active" channel="inline" abstraction="integer" model="0"/>
 </model>
