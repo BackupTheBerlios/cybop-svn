@@ -23,7 +23,7 @@
  *
  * This file handles a file.
  *
- * @version $Revision: 1.5 $ $Date: 2004-05-27 22:15:50 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-05-29 15:15:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -233,33 +233,46 @@ void write_file(const void* p0, const void* p1, const void* p2, const void* p3, 
  *
  * @param p0 the array
  * @param p1 the array count
- * @param p2 the inline byte stream
- * @param p3 the inline byte stream count
+ * @param p2 the array size
+ * @param p3 the inline byte stream
+ * @param p4 the inline byte stream count
  */
-void read_inline(void* p0, void* p1, const void* p2, const void* p3) {
+void read_inline(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
-    if (p3 != NULL_POINTER) {
+    if (p4 != NULL_POINTER) {
 
-        int* ic = (int*) p3;
+        int* ic = (int*) p4;
 
-        if (p1 != NULL_POINTER) {
+        if (p2 != NULL_POINTER) {
 
-            int* ac = (int*) p1;
+            int* as = (int*) p2;
 
-            // Set new array size.
-            *ac = *ic;
+            if (p1 != NULL_POINTER) {
 
-            // Resize array.
-            resize_array(p0, (void*) &CHARACTER_ARRAY, p1);
+                int* ac = (int*) p1;
 
-            // The array index to start writing at.
-            int i = 0;
+                // Set new array size.
+                *as = *ic;
 
-            set_array_elements(p0, (void*) &CHARACTER_ARRAY, (void*) &i, p2, p3);
+                // Resize array.
+                resize_array(p0, (void*) &CHARACTER_ARRAY, p2);
+
+                // The array index to start writing at.
+                int i = 0;
+
+                set_array_elements(p0, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
+
+                // Set new array count.
+                *ac = *ic;
+
+            } else {
+
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read inline. The array count is null.");
+            }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read inline. The array count is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read inline. The array size is null.");
         }
 
     } else {
@@ -273,10 +286,11 @@ void read_inline(void* p0, void* p1, const void* p2, const void* p3) {
  *
  * @param p0 the array
  * @param p1 the array count
- * @param p2 the inline byte stream
- * @param p3 the inline byte stream count
+ * @param p2 the array size
+ * @param p3 the inline byte stream
+ * @param p4 the inline byte stream count
  */
-void write_inline(const void* p0, const void* p1, void* p2, void* p3) {
+void write_inline(const void* p0, const void* p1, const void* p2, void* p3, void* p4) {
 }
 
 /**
@@ -284,10 +298,11 @@ void write_inline(const void* p0, const void* p1, void* p2, void* p3) {
  *
  * @param p0 the array
  * @param p1 the array count
- * @param p2 the file name
- * @param p3 the file name count
+ * @param p2 the array size
+ * @param p3 the file name
+ * @param p4 the file name count
  */
-void read_file(void* p0, void* p1, const void* p2, const void* p3) {
+void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /**
@@ -295,10 +310,11 @@ void read_file(void* p0, void* p1, const void* p2, const void* p3) {
  *
  * @param p0 the array
  * @param p1 the array count
- * @param p2 the file name
- * @param p3 the file name count
+ * @param p2 the array size
+ * @param p3 the file name
+ * @param p4 the file name count
  */
-void write_file(const void* p0, const void* p1, void* p2, void* p3) {
+void write_file(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
 }
 
 /**

@@ -36,19 +36,21 @@
  * - character
  * - double
  *
- * To work with an array, this handler needs additional information, in concrete:
- * - the array size (allocated memory)
- * - the array type (of data)
- *
- * There is no extra "count" value. Arrays are always as big as the number of
- * elements they contain.
+ * To work with an array, the procedures need additional information, in concrete:
+ * - the array type
+ *   (type of the contained elements)
+ * - the array maximum count
+ *   (maximum possible number of elements that match into the array)
+ * - the size
+ *   (actual allocated memory; calculated from the maximum count by
+ *   multiplying it with the size of the primitive data type)
  *
  * The sizeof operation can only be used for real arrays, expressed with [].
  * Since CYBOI allocates arrays dynamically and stores them as *,
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.4 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-05-29 15:15:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,7 +73,7 @@
  *
  * @param p0 the array
  * @param p1 the type
- * @param p2 the count
+ * @param p2 the maximum count
  */
 void create_array(void* p0, const void* p1, const void* p2) {
 
@@ -107,7 +109,7 @@ void create_array(void* p0, const void* p1, const void* p2) {
  *
  * @param p0 the array
  * @param p1 the type
- * @param p2 the count
+ * @param p2 the maximum count
  */
 void destroy_array(void* p0, const void* p1, const void* p2) {
 
@@ -143,7 +145,7 @@ void destroy_array(void* p0, const void* p1, const void* p2) {
  *
  * @param p0 the array
  * @param p1 the type
- * @param p2 the count
+ * @param p2 the maximum count
  */
 void resize_array(void* p0, const void* p1, const void* p2) {
 
@@ -402,9 +404,9 @@ void get_array_element(const void* p0, const void* p1, const void* p2, void* p3)
  *
  * @param p0 the array
  * @param p1 the type
- * @param p2 the size
+ * @param p2 the array maximum count
  * @param p3 the comparison array
- * @param p4 the count
+ * @param p4 the comparison array count
  * @param p5 the index within array
  */
 void get_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4, void* p5) {

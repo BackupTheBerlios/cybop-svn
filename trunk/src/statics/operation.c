@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.10 $ $Date: 2004-05-27 22:15:50 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-05-29 15:15:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,18 +72,16 @@ void create_operation(void* p0, const void* p1) {
     create_array(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT);
 
     // Initialize elements.
-    int tc = 0;
     void* p = NULL_POINTER;
-    void* ps = NULL_POINTER;
+    void* pc = NULL_POINTER;
 
     // Create elements.
-    create_array((void*) &p, (void*) &POINTER_ARRAY, (void*) &tc);
-    create_array((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &tc);
+    create_array((void*) &p, (void*) &POINTER_ARRAY, p1);
+    create_array((void*) &pc, (void*) &INTEGER_ARRAY, p1);
 
     // Set elements in ascending order.
-    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARAMETERS_COUNT_INDEX, (void*) &tc);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &p);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &ps);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &pc);
 }
 
 /**
@@ -97,23 +95,20 @@ void destroy_operation(void* p0, const void* p1) {
     log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_OPERATION_MESSAGE, (void*) &DESTROY_OPERATION_MESSAGE_COUNT);
 
     // Initialize elements.
-    int tc = 0;
     void* p = NULL_POINTER;
-    void* ps = NULL_POINTER;
+    void* pc = NULL_POINTER;
 
     // Get elements.
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARAMETERS_COUNT_INDEX, (void*) &tc);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &p);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &ps);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &pc);
 
     // Remove elements in descending order.
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT, (void*) &PARAMETERS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT, (void*) &PARAMETERS_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &OPERATION_COUNT, (void*) &PARAMETERS_COUNT_INDEX);
 
     // Destroy elements.
-    destroy_array((void*) &p, (void*) &POINTER_ARRAY, (void*) &tc);
-    destroy_array((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &tc);
+    destroy_array((void*) &p, (void*) &POINTER_ARRAY, p1);
+    destroy_array((void*) &pc, (void*) &INTEGER_ARRAY, p1);
 
     // Destroy operation.
     destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT);
@@ -128,120 +123,140 @@ void destroy_operation(void* p0, const void* p1) {
  *
  * @param p0 the transient model
  * @param p1 the transient model count
- * @param p2 the persistent model
- * @param p3 the persistent model count
+ * @param p2 the transient model size
+ * @param p3 the persistent model
+ * @param p4 the persistent model count
  */
-void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
+void initialize_operation(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
-    if (p3 != NULL_POINTER) {
+    if (p4 != NULL_POINTER) {
 
-        int* pc = (int*) p3;
+        int* pc = (int*) p4;
 
-        if (p2 != NULL_POINTER) {
+        if (p3 != NULL_POINTER) {
 
-            void** p = (void**) p2;
+            void** p = (void**) p3;
 
-            if (p1 != NULL_POINTER) {
+            if (p2 != NULL_POINTER) {
 
-                int* tc = (int*) p1;
+                int* ts = (int*) p2;
 
-                if (p0 != NULL_POINTER) {
+                if (p1 != NULL_POINTER) {
 
-                    void** t = (void**) p0;
+                    int* tc = (int*) p1;
 
-                    log_message((void*) &INFO_LOG_LEVEL, (void*) &INITIALIZE_OPERATION_MESSAGE, (void*) &INITIALIZE_OPERATION_MESSAGE_COUNT);
+                    if (p0 != NULL_POINTER) {
 
-                    // The parameter count initially set to the persistent model count.
-                    int count = *pc;
+                        void** t = (void**) p0;
 
-                    // The separator index.
-                    int i = -1;
-                    get_array_element_index(p2, (void*) &CHARACTER_ARRAY, p3, (void*) &OPERATION_PARAMETER_SEPARATOR, (void*) &i);
+                        log_message((void*) &INFO_LOG_LEVEL, (void*) &INITIALIZE_OPERATION_MESSAGE, (void*) &INITIALIZE_OPERATION_MESSAGE_COUNT);
 
-                    if (i >= 0) {
+                        // The parameter count initially set to the persistent model count.
+                        int count = *pc;
 
-                        // Change parameter count if a separator is found
-                        // and more parameters exist.
-                        // Example: "operation,parameter"
-                        // i = 9
-                        // count = 9
-                        count = i;
-                    }
+                        // The separator index.
+                        int si = -1;
+                        get_array_element_index(p3, (void*) &CHARACTER_ARRAY, p4, (void*) &OPERATION_PARAMETER_SEPARATOR, (void*) &si);
 
-                    if (count > 0) {
+                        if (si >= 0) {
 
-                        // Initialize elements.
-                        int c = 0;
-                        void* pa = NULL_POINTER;
-                        void* pac = NULL_POINTER;
+                            // Change parameter count if a separator is found
+                            // and more parameters exist.
+                            // Example: "operation,parameter"
+                            // i = 9
+                            // count = 9
+                            count = si;
+                        }
 
-                        // Get elements.
-                        get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARAMETERS_COUNT_INDEX, (void*) &c);
-                        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &pa);
-                        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &pac);
+                        if (count > 0) {
 
-                        // The index for adding the parameter and its count.
-                        int index = c;
+                            // Initialize elements.
+                            void* pa = NULL_POINTER;
+                            void* pac = NULL_POINTER;
 
-                        // Increment count.
-                        c++;
+                            // Get elements.
+                            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &pa);
+                            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &pac);
 
-                        // Resize elements.
-                        resize_array((void*) &pa, (void*) &POINTER_ARRAY, (void*) &c);
-                        resize_array((void*) &pac, (void*) &INTEGER_ARRAY, (void*) &c);
+                            // The index for adding the parameter and its count.
+                            int i = *tc;
 
-                        // Set count.
-                        set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARAMETERS_COUNT_INDEX, (void*) &c);
+                            if (i >= 0) {
 
-                        if (index < c) {
+                                if (i == *ts) {
 
-                            // Set parameter.
-                            set_array_element((void*) &pa, (void*) &POINTER_ARRAY, (void*) &index, p2);
-                            set_array_element((void*) &pac, (void*) &INTEGER_ARRAY, (void*) &index, (void*) &count);
+                                    // Increase size.
+                                    *ts = *ts * OPERATION_RESIZE_FACTOR + 1;
 
-                            if (i != -1) {
+                                    // Resize elements.
+                                    resize_array((void*) &pa, (void*) &POINTER_ARRAY, p2);
+                                    resize_array((void*) &pac, (void*) &INTEGER_ARRAY, p2);
+                                }
 
-                                // The size of the remaining parameters.
-                                // Example: "operation,parameter"
-                                // *pc = 19
-                                // i = 9
-                                // rc = *pc - (i + 1) = 9
-                                int rc = *pc - (i + 1);
+                                if (i < *ts) {
 
-                                if (rc > 0) {
+                                    // Set parameter.
+                                    set_array_element((void*) &pa, (void*) &POINTER_ARRAY, (void*) &i, p3);
+                                    set_array_element((void*) &pac, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &count);
 
-                                    // The remaining parameters.
-                                    void* r = *p + i + 1;
+                                    // Increment count.
+                                    (*tc)++;
 
-                                    // Call procedure recursively if more parameters
-                                    // are following after the separator.
-                                    // Set index of remaining string to one after the separator.
-                                    initialize_operation(p0, p1, (void*) &r, (void*) &rc);
+                                    // If separator was found, then process
+                                    // the remaining parameters.
+                                    if (si != -1) {
+
+                                        // The size of the remaining parameters.
+                                        // Example: "operation,parameter"
+                                        // *pc = 19
+                                        // si = 9
+                                        // rc = *pc - (si + 1) = 9
+                                        int rc = *pc - (si + 1);
+
+                                        if (rc > 0) {
+
+                                            // The remaining parameters.
+                                            void* r = *p + si + 1;
+
+                                            // Call procedure recursively if more parameters
+                                            // are following after the separator.
+                                            // Set index of remaining string to one after the separator.
+                                            initialize_operation(p0, p1, (void*) &r, (void*) &rc);
+
+                                        } else {
+
+//??                                            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize operation. There are no remaining parameters after the separator.");
+                                        }
+                                    }
 
                                 } else {
 
-//??                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize operation. There are no remaining parameters after the separator.");
+//??                                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The index exceeds the size.");
                                 }
+
+                            } else {
+
+//??                                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The index is negativ.");
                             }
 
                         } else {
 
-//??                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The index exceeds the count.");
+//??                            log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize operation. There is no parameter before the separator.");
                         }
 
                     } else {
 
-//??                        log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not initialize operation. There is no parameter before the separator.");
+//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The transient model is null.");
                     }
 
                 } else {
 
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The transient model is null.");
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The transient model count is null.");
                 }
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The transient model count is null.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize operation. The transient model size is null.");
             }
 
         } else {
@@ -263,10 +278,11 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
  *
  * @param p0 the transient model
  * @param p1 the transient model count
- * @param p2 the persistent model
- * @param p3 the persistent model count
+ * @param p2 the transient model size
+ * @param p3 the persistent model
+ * @param p4 the persistent model count
  */
-void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
+void finalize_operation(const void* p0, const void* p1, const void* p2, void* p3, void* p4) {
 
 /*??
     if (p3 != NULL_POINTER) {

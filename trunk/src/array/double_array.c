@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.4 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-05-29 15:15:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -520,9 +520,9 @@ void get_double_array_elements(const void* p0, const void* p1, void* p2, const v
  * The given index remains unchanged if no element is found.
  *
  * @param p0 the array
- * @param p1 the maximum count
+ * @param p1 the array maximum count
  * @param p2 the comparison array
- * @param p3 the count
+ * @param p3 the comparison array count
  * @param p4 the index within array
  */
 void get_double_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {

@@ -59,7 +59,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.5 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-05-29 15:15:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -786,7 +786,7 @@ void set_model_part_by_index(void* p0, const void* p1, const void* p2, const voi
             if (*i == s) {
 
                 // Increase size.
-                s = s * 2 + 1;
+                s = s * MODEL_RESIZE_FACTOR + 1;
 
                 // Resize elements.
                 resize_array((void*) &n, (void*) &POINTER_ARRAY, (void*) &s);

@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.25 $ $Date: 2004-05-27 22:15:50 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2004-05-29 15:15:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,16 +54,17 @@
  *
  * @param p0 the buffer array
  * @param p1 the buffer array count
- * @param p2 the persistent model
- * @param p3 the persistent model count
- * @param p4 the location
- * @param p5 the location count
+ * @param p2 the buffer array size
+ * @param p3 the persistent model
+ * @param p4 the persistent model count
+ * @param p5 the location
+ * @param p6 the location count
  */
-void read_model(void* p0, void* p1, const void* p2, const void* p3, const void* p4, const void* p5) {
+void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, const void* p5, const void* p6) {
 
-    if (p5 != NULL_POINTER) {
+    if (p6 != NULL_POINTER) {
 
-        int* lc = (int*) p5;
+        int* lc = (int*) p6;
 
         // The done flag.
         int d = 0;
@@ -74,11 +75,11 @@ void read_model(void* p0, void* p1, const void* p2, const void* p3, const void* 
 
             if (*lc == INLINE_LOCATION_COUNT) {
 
-                compare_array_elements(p4, (void*) &INLINE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &INLINE_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p5, (void*) &INLINE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &INLINE_LOCATION_COUNT, (void*) &r);
 
                 if (r == 1) {
 
-                    read_inline(p0, p1, p2, p3);
+                    read_inline(p0, p1, p2, p3, p4);
 
                     d = 1;
                 }
@@ -89,11 +90,11 @@ void read_model(void* p0, void* p1, const void* p2, const void* p3, const void* 
 
             if (*lc == FILE_LOCATION_COUNT) {
 
-                compare_array_elements(p4, (void*) &FILE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FILE_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p5, (void*) &FILE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FILE_LOCATION_COUNT, (void*) &r);
 
                 if (r == 1) {
 
-                    read_file(p0, p1, p2, p3);
+                    read_file(p0, p1, p2, p3, p4);
 
                     d = 1;
                 }
@@ -104,11 +105,11 @@ void read_model(void* p0, void* p1, const void* p2, const void* p3, const void* 
 
             if (*lc == FTP_LOCATION_COUNT) {
 
-                compare_array_elements(p4, (void*) &FTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FTP_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p5, (void*) &FTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FTP_LOCATION_COUNT, (void*) &r);
 
                 if (r == 1) {
 
-                    read_ftp(p0, p1, p2, p3);
+                    read_ftp(p0, p1, p2, p3, p4);
 
                     d = 1;
                 }
@@ -119,11 +120,11 @@ void read_model(void* p0, void* p1, const void* p2, const void* p3, const void* 
 
             if (*lc == HTTP_LOCATION_COUNT) {
 
-                compare_array_elements(p4, (void*) &HTTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &HTTP_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p5, (void*) &HTTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &HTTP_LOCATION_COUNT, (void*) &r);
 
                 if (r == 1) {
 
-                    read_http(p0, p1, p2, p3);
+                    read_http(p0, p1, p2, p3, p4);
 
                     d = 1;
                 }
@@ -378,18 +379,20 @@ void create_model(void* p0, void* p1, const void* p2, const void* p3, const void
     void* b = NULL_POINTER;
     // The buffer array count.
     int bc = 0;
+    // The buffer array size.
+    int bs = 0;
 
     // Create buffer array.
-    create_array((void*) &b, (void*) &INTEGER_ARRAY, (void*) &bc);
+    create_array((void*) &b, (void*) &INTEGER_ARRAY, (void*) &bs);
 
     // Read persistent model from location into buffer array.
-    read_model((void*) &b, (void*) &bc, p2, p3, p6, p7);
+    read_model((void*) &b, (void*) &bc, (void*) &bs, p2, p3, p6, p7);
 
     // Create and initialize transient model from buffer array.
     interpret_model(p0, p1, (void*) &b, (void*) &bc, p4, p5);
 
     // Destroy buffer array.
-    destroy_array((void*) &b, (void*) &INTEGER_ARRAY, (void*) &bc);
+    destroy_array((void*) &b, (void*) &INTEGER_ARRAY, (void*) &bs);
 }
 
 /**

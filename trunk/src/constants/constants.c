@@ -59,7 +59,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.10 $ $Date: 2004-05-28 11:44:30 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-05-29 15:15:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -218,8 +218,11 @@ static const int IMAGINARY_INDEX = 1;
 // Operation.
 //
 
+/** The operation resize factor. */
+static const int OPERATION_RESIZE_FACTOR = 2;
+
 /** The operation count. */
-static const int OPERATION_COUNT = 2;
+static const int OPERATION_COUNT = 3;
 
 /** The parameters index. */
 static const int PARAMETERS_INDEX = 0;
@@ -227,9 +230,15 @@ static const int PARAMETERS_INDEX = 0;
 /** The parameters counts index. */
 static const int PARAMETERS_COUNTS_INDEX = 1;
 
+/** The parameters sizes index. */
+static const int PARAMETERS_SIZES_INDEX = 2;
+
 //
 // Model.
 //
+
+/** The model resize factor. */
+static const int MODEL_RESIZE_FACTOR = 2;
 
 /** The model count. */
 static const int MODEL_COUNT = 20;
@@ -298,20 +307,26 @@ static const int CONSTRAINT_MODELS_COUNTS_INDEX = 19;
 // Signal memory.
 //
 
+/** The signal memory resize factor. */
+static const int SIGNAL_MEMORY_RESIZE_FACTOR = 2;
+
 /** The signal memory count. */
-static const int SIGNAL_MEMORY_COUNT = 4;
+static const int SIGNAL_MEMORY_COUNT = 5;
 
 /** The signals index. */
 static const int SIGNALS_INDEX = 0;
 
-/** The priorities index. */
-static const int PRIORITIES_INDEX = 1;
+/** The signals counts index. */
+static const int SIGNALS_COUNTS_INDEX = 1;
 
-/** The abstractions index. */
-static const int ABSTRACTIONS_INDEX = 2;
+/** The signals priorities index. */
+static const int SIGNALS_PRIORITIES_INDEX = 2;
 
-/** The abstractions counts index. */
-static const int ABSTRACTIONS_COUNTS_INDEX = 3;
+/** The signals abstractions index. */
+static const int SIGNALS_ABSTRACTIONS_INDEX = 3;
+
+/** The signals abstractions counts index. */
+static const int SIGNALS_ABSTRACTIONS_COUNTS_INDEX = 4;
 
 //
 // Signal priorities.
