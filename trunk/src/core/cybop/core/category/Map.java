@@ -33,7 +33,7 @@ package cybop.core.category;
  * the index of the wanted element -- and then returning the corresponding
  * reference.
  *
- * @version $Revision: 1.11 $ $Date: 2003-06-20 11:32:31 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-06-20 15:06:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Map {
@@ -199,6 +199,31 @@ public class Map {
 
             names.set(i, n);
             refs.set(i, e);
+
+        } else {
+
+            throw new Exception("Could not set element. The references is null.");
+        }
+    }
+
+    /**
+     * Adds the element.
+     *
+     * @param n the name
+     * @param e the element
+     * @exception Exception if the name is null
+     * @exception Exception if the names is null
+     * @exception Exception if the references is null
+     */
+    public void add(Array n, Array e) throws Exception {
+
+        Array refs = getReferences();
+
+        if (refs != null) {
+
+            Array nn = getNewName(n);
+
+            set(nn, e);
 
         } else {
 
@@ -390,6 +415,108 @@ public class Map {
         } else {
 
             throw new Exception("Could not get next free index. The names is null.");
+        }
+
+        return index;
+    }
+
+    /**
+     * Returns an extended version of the given name.
+     *
+     * The given name is used as a word base for the new name.
+     * Additionally, the new name will contain a number suffix.
+     * It is created by increasing the currently highest number suffix by one.
+     *
+     * @param n the name
+     * @return the new name
+     * @exception Exception if the names is null
+     */
+    public Array getNewName(Array n) throws Exception {
+
+        Array nn = null;
+        int i = getHighestIndex(n);
+
+        if (i != null) {
+
+            String no = new String(java.lang.String.valueOf(i.getJavaPrimitive() + 1));
+
+            if (base != null) {
+
+                if (no != null) {
+
+                    nn = new String(base.getJavaObject() + "_" + no.getJavaObject());
+
+                } else {
+        
+                    throw new Exception("Could not build name. The number string is null.");
+                }
+
+            } else {
+    
+                throw new Exception("Could not build name. The word base of the name is null.");
+            }
+
+        } else {
+
+            throw new Exception("Could not build name. The highest name number is null.");
+        }
+        
+        return nn;
+    }
+
+    /**
+     * Returns the highest index with the given name as word base.
+     *
+     * @param n the name
+     * @return the highest index
+     * @exception Exception if the names is null
+     */
+    public int getHighestIndex(Array n) throws Exception {
+
+        int index = -1;
+        Array names = getNames();
+
+        if (names != null) {
+
+            int i = 0;
+            int size = names.getSize();
+            Array name = null;
+            int begin = 0;
+            java.lang.String sub = null;
+            int number = -1;
+            int max = -1;
+
+            while (i < size) {
+
+                name = names.get(i);
+
+                if (name != null) {
+
+                    if (((java.lang.String) name.getJavaObject()).startsWith(((java.lang.String)) n.getJavaObject())) {
+
+                        begin = ((java.lang.String) name.getJavaObject()).indexOf(new String("_"));
+                        sub = ((java.lang.String) name.getJavaObject()).substring(begin + 1);
+                        number = java.lang.Integer.parseInt(sub);
+
+                        if (number > max) {
+
+                            max = number;
+                            index = number;
+                        }
+                    }
+
+                } else {
+
+                    // Reached last valid name before. Only null entries left.
+                    break;
+                }
+
+                i++;
+            }
+
+        } else {
+
+            throw new Exception("Could not get highest index. The names is null.");
         }
 
         return index;

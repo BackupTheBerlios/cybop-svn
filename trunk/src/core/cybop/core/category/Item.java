@@ -83,7 +83,7 @@ import cybop.core.model.String;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.14 $ $Date: 2003-06-20 11:32:31 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-06-20 15:06:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends Behaviour {
@@ -476,129 +476,6 @@ public class Item extends Behaviour {
      * and simplified CYBOL computer language is used.
      */
     public void finalizz() throws Exception {
-    }
-
-    //
-    // Name management.
-    //
-
-    /**
-     * Builds a name.
-     *
-     * @param base the word base of the name
-     * @return the name
-     * @exception Exception if the highest name number is null
-     * @exception Exception if the word base of the name is null
-     * @exception Exception if the number string is null
-     */
-    public Array buildName(Array base) throws Exception {
-
-        Array n = null;
-        Integer i = getHighestNameNumber(base);
-
-        if (i != null) {
-
-            String no = new String(java.lang.String.valueOf(i.getJavaPrimitive() + 1));
-
-            if (base != null) {
-
-                if (no != null) {
-
-                    n = new String(base.getJavaObject() + "_" + no.getJavaObject());
-
-                } else {
-        
-                    throw new Exception("Could not build name. The number string is null.");
-                }
-
-            } else {
-    
-                throw new Exception("Could not build name. The word base of the name is null.");
-            }
-
-        } else {
-
-            throw new Exception("Could not build name. The highest name number is null.");
-        }
-
-        return n;        
-    }
-
-    /**
-     * Returns the highest name number.
-     *
-     * @param base the word base of the name
-     * @return the highest name number
-     * @exception Exception if the children array is null
-     * @exception Exception if a child is null
-     * @exception Exception if the name is null
-     * @exception Exception if the number is null
-     */
-    public Integer getHighestNameNumber(Array base) throws Exception {
-
-        Integer i = new Integer(-1);
-/*??
-        Map c = getChildren();
-
-        if (c != null) {
-
-            int index = 0;
-            int no = 0; //?? getChildrenNumber();
-            Item child = null;
-            String n = null;
-            int begin = 0;
-            String sub = null;
-            Integer number = null;
-
-            while (index < no) {
-
-                child = (Item) c[index];
-
-                if (child != null) {
-
-                    n = child.getName();
-
-                    if (n != null) {
-
-                        if (n.startsWith(base)) {
-
-                            begin = n.indexOf(new String("_"));
-                            sub = n.subString(begin + 1);
-                            number = Integer.toInteger(sub);
-
-                            if (number != null) {
-
-                                if (number.isGreaterThan(i)) {
-
-                                    i = number;
-                                }
-
-                            } else {
-                
-                                throw new Exception("Could not get highest name number. The number is null.");
-                            }
-                        }
-
-                    } else {
-        
-                        throw new Exception("Could not get highest name number. The name is null.");
-                    }
-    
-                } else {
-
-                    throw new Exception("Could not get highest name number. A child is null.");
-                }
-
-                index++;
-            }
-
-        } else {
-
-            throw new Exception("Could not get highest name number. The children array is null.");
-        }
-*/
-
-        return i;
     }
 
     //
