@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2005-03-10 09:56:21 $ $Author: rholzmueller $
+ * @version $Revision: 1.31 $ $Date: 2005-03-18 07:48:36 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -168,7 +168,7 @@ static const int* MODEL_LOCATION_SEPARATOR_COUNT = MODEL_LOCATION_SEPARATOR_COUN
 //
 
 /** The model location separator array, pointer, count. */
-static const char LIST_SEPARATOR_ARRAY[] = {'_', '#'};
+static const char LIST_SEPARATOR_ARRAY[] = {'_', '%'};
 static const char* LIST_SEPARATOR = LIST_SEPARATOR_ARRAY;
 static const int LIST_SEPARATOR_COUNT_ARRAY[] = {2};
 static const int* LIST_SEPARATOR_COUNT = LIST_SEPARATOR_COUNT_ARRAY;
