@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.6 $ $Date: 2004-04-28 14:35:37 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-04-28 20:37:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,22 +96,22 @@ void test_character_array_single_element() {
     int cas = 5;
     create_array((void*) &ca, (void*) &cas);
 
-    int i1 = 0;
-    char c1 = 'a';
-    int i2 = 1;
-    char c2 = 'b';
-    int i3 = 2;
-    char c3 = 'c';
-    int i4 = 3;
-    char c4 = '\n';
-    int i5 = 4;
-    char c5 = '\0';
+    int ca1s = 0;
+    char ca1 = 'a';
+    int ca2s = 1;
+    char ca2 = 'b';
+    int ca3s = 2;
+    char ca3 = 'c';
+    int ca4s = 3;
+    char ca4 = '\n';
+    int ca5s = 4;
+    char ca5 = '\0';
 
-    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &i1, (void*) &c1);
-    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &i2, (void*) &c2);
-    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &i3, (void*) &c3);
-    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &i4, (void*) &c4);
-    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &i5, (void*) &c5);
+    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca1s, (void*) &ca1);
+    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca2s, (void*) &ca2);
+    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca3s, (void*) &ca3);
+    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca4s, (void*) &ca4);
+    set_array_element((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &ca5s, (void*) &ca5);
 
     fputs((char*) ca, stdout);
 
@@ -125,24 +125,25 @@ void test_character_array_single_element() {
     create_array((void*) &ia, (void*) &ias);
 
     int ia1s = 0;
-    int ia1 = 'a';
-    int i2 = 1;
-    char c2 = 'b';
-    int i3 = 2;
-    char c3 = 'c';
-    int i4 = 3;
-    char c4 = '\n';
-    int i5 = 4;
-    char c5 = '\0';
+    int ia1 = 9;
+    int ia2s = 1;
+    int ia2 = 8;
+    int ia3s = 2;
+    int ia3 = 7;
+    int ia4s = 3;
+    int ia4 = 6;
+    int ia5s = 4;
+    int ia5 = 5;
 
-    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &i1, (void*) &c1);
-    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &i2, (void*) &c2);
-    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &i3, (void*) &c3);
-    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &i4, (void*) &c4);
-    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &i5, (void*) &c5);
+    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &ia1s, (void*) &ia1);
+//??    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &ia2s, (void*) &ia2);
+//??    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &ia3s, (void*) &ia3);
+//??    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &ia4s, (void*) &ia4);
+//??    set_array_element((void*) &ia, (void*) &CHARACTER_ARRAY, (void*) &ia5s, (void*) &ia5);
 
     // Print out array contents.
     int j = 0;
+    int* test = INTEGER_NULL_POINTER;
 
     while (1) {
 
@@ -151,7 +152,8 @@ void test_character_array_single_element() {
             break;
         }
 
-        fprintf(stderr, "ia: %d\n", ia[j]);
+        test = (int*) (ia + j);
+        fprintf(stderr, "ia: %d\n", *test);
 
         j++;
     }
