@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    This example can be started with the following command line
+    (needs to be adapted to the local path settings):
+    
+    cyboi file cybol exit.cybol
+/-->
+<model>
+    <part name="exit" channel="inline" abstraction="operation" model="exit"/>
+</model>
