@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.18 $ $Date: 2004-07-03 08:07:42 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2004-07-28 22:46:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,9 +34,12 @@
 
 #include <stdio.h>
 #include "../array/array.c"
-#include "../cybol/file.c"
 #include "../global/constant.c"
 #include "../global/variable.c"
+#include "../transfer/file.c"
+#include "../transfer/ftp.c"
+#include "../transfer/http.c"
+#include "../transfer/inline.c"
 
 /**
  * Tests the standard output and error stream.

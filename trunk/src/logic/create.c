@@ -23,15 +23,15 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.1 $ $Date: 2004-07-04 09:49:29 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-07-28 22:46:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CREATE_SOURCE
 #define CREATE_SOURCE
 
-#include "../cybol/file.c"
 #include "../logger/logger.c"
+#include "../parser/xml_parser.c"
 #include "../state/boolean.c"
 #include "../state/complex.c"
 #include "../state/compound.c"
@@ -42,6 +42,12 @@
 #include "../state/string.c"
 #include "../state/time.c"
 #include "../state/vector.c"
+#include "../state/xml_tag.c"
+#include "../transfer/file.c"
+#include "../transfer/ftp.c"
+#include "../transfer/http.c"
+#include "../transfer/inline.c"
+#include "../translator/xml_translator.c"
 
 /**
  * Reads a persistent model into an array.
@@ -381,7 +387,23 @@ void initialize_model(void* p0, void* p1, void* p2, const void* p3, const void* 
 
                 if (r == 1) {
 
-                    initialize_compound(p0, p1, p2, p3, p4);
+                    // Initialize xml model
+                    // and its count and size.
+                    void* m = NULL_POINTER;
+                    int mc = 0;
+                    int ms = 0;
+
+                    // Create xml model.
+                    create_xml_tag((void*) &m, (void*) &ms);
+
+                    // Parse persistent stream into xml model.
+                    parse_xml((void*) &m, (void*) &mc, (void*) &ms, p3, p4);
+
+                    // Decode xml model into knowledge model compound.
+                    decode_xml(p0, p1, p2, (void*) &m, (void*) &mc);
+
+                    // Destroy xml model.
+                    destroy_xml_tag((void*) &m, (void*) &ms);
 
                     d = 1;
                 }
@@ -530,6 +552,32 @@ void initialize_model(void* p0, void* p1, void* p2, const void* p3, const void* 
                 }
             }
         }
+
+/*??
+        if (d == 0) {
+
+            if (*ac == SXW_ABSTRACTION_COUNT) {
+
+                compare_array_elements(p5, (void*) &SXW_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &SXW_ABSTRACTION_COUNT, (void*) &r);
+
+                if (r == 1) {
+
+                    //?? For other kinds of file (stream) formats,
+                    //?? for example from special applications like Open Office,
+                    //?? use a similar handling like for compound above!
+
+                    //?? Images possibly also have to be handled that way.
+                    //?? At first, the single image parameters have to be parsed
+                    //?? and written into a special parameter model in memory;
+                    //?? then that model has to be decoded into a knowledge model!
+                    //?? May be this idea is rubbish and will not work!
+                    //?? For the beginning better handle images as primitve types.
+
+                    d = 1;
+                }
+            }
+        }
+*/
 
     } else {
 

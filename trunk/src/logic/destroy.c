@@ -23,14 +23,13 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.1 $ $Date: 2004-07-04 09:49:29 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-07-28 22:46:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DESTROY_SOURCE
 #define DESTROY_SOURCE
 
-#include "../cybol/file.c"
 #include "../logger/logger.c"
 #include "../state/boolean.c"
 #include "../state/complex.c"
@@ -42,6 +41,10 @@
 #include "../state/string.c"
 #include "../state/time.c"
 #include "../state/vector.c"
+#include "../transfer/file.c"
+#include "../transfer/ftp.c"
+#include "../transfer/http.c"
+#include "../transfer/inline.c"
 
 /**
  * Writes a persistent model from an array.
