@@ -30,13 +30,14 @@ import cybop.core.model.String;
 import cybop.core.screen.component.*;
 import cybop.core.screen.model.frame.*;
 import cybop.core.screen.region.*;
+import cybop.core.system.*;
+import cybop.core.system.System;
 import cybop.core.system.region.controller.*;
-import cybop.core.systeminformation.*;
 
 /**
  * This class represents a system information display translator.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-18 11:54:34 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-07-15 09:44:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationDisplayTranslator extends Translator {
@@ -66,8 +67,8 @@ public class SystemInformationDisplayTranslator extends Translator {
 
                 if (i != null) {
 
-                    encodeSystemVersionPanel((SystemInformation) i, (SystemVersionPanel) p.getChild(SystemInformationPanel.SYSTEM_VERSION_PANEL));
-                    encodeTabbedPane((SystemInformation) i, (TabbedPane) p.getChild(SystemInformationPanel.TABBED_PANE));
+                    encodeSystemVersionPanel((System) i, (SystemVersionPanel) p.getChild(SystemInformationPanel.SYSTEM_VERSION_PANEL));
+                    encodeTabbedPane((System) i, (TabbedPane) p.getChild(SystemInformationPanel.TABBED_PANE));
 
                 } else {
 
@@ -97,16 +98,16 @@ public class SystemInformationDisplayTranslator extends Translator {
      * @exception Exception if the system information is null
      * @exception Exception if the system version panel is null
      */
-    private void encodeSystemVersionPanel(SystemInformation i, SystemVersionPanel p) throws Exception {
+    private void encodeSystemVersionPanel(System i, SystemVersionPanel p) throws Exception {
 
         if (i != null) {
 
             if (p != null) {
 
-                encodeLabel((Label) p.getChild(SystemVersionPanel.NAME_LABEL), (String) i.getChild(SystemInformation.NAME));
-                encodeLabel((Label) p.getChild(SystemVersionPanel.VERSION_LABEL), (String) i.getChild(SystemInformation.VERSION));
-                encodeLabel((Label) p.getChild(SystemVersionPanel.DATE_LABEL), (String) i.getChild(SystemInformation.DATE));
-                encodeLabel((Label) p.getChild(SystemVersionPanel.SLOGAN_LABEL), (String) i.getChild(SystemInformation.SLOGAN));
+                encodeLabel((Label) p.getChild(SystemVersionPanel.NAME_LABEL), (String) i.getChild(System.NAME));
+                encodeLabel((Label) p.getChild(SystemVersionPanel.VERSION_LABEL), (String) i.getChild(System.VERSION));
+                encodeLabel((Label) p.getChild(SystemVersionPanel.DATE_LABEL), (String) i.getChild(System.DATE));
+                encodeLabel((Label) p.getChild(SystemVersionPanel.SLOGAN_LABEL), (String) i.getChild(System.SLOGAN));
 
             } else {
 
@@ -146,7 +147,7 @@ public class SystemInformationDisplayTranslator extends Translator {
      * @exception Exception if the system information is null
      * @exception Exception if the tabbed pane is null
      */
-    private void encodeTabbedPane(SystemInformation i, TabbedPane p) throws Exception {
+    private void encodeTabbedPane(System i, TabbedPane p) throws Exception {
     }
 }
 

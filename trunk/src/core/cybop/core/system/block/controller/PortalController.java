@@ -35,13 +35,13 @@ import cybop.core.system.region.controller.translator.*;
 /**
  * This class represents a portal controller.
  *
- * @version $Revision: 1.12 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-07-15 09:44:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalController extends Controller {
 
     //
-    // Default children categories.
+    // Default categories.
     //
 
     /**

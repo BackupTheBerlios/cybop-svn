@@ -49,7 +49,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.26 $ $Date: 2003-06-30 11:19:23 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2003-07-15 09:44:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends SystemItem implements java.lang.Runnable {
@@ -99,6 +99,12 @@ public class System extends SystemItem implements java.lang.Runnable {
 
     /** The controller. */
     public static final String CONTROLLER = new String("controller");
+
+    /** The screen. */
+    public static final String SCREEN = new String("screen");
+
+    /** The mouse. */
+    public static final String MOUSE = new String("mouse");
 
     /** The log level. */
     public static final String LOG_LEVEL = new String("log_level");
@@ -175,7 +181,7 @@ public class System extends SystemItem implements java.lang.Runnable {
      *
      * @return the default name category
      */
-    public String getDefaultNameCategory() {
+    public Item getDefaultNameCategory() {
 
         return new String("Res Medicinae");
     }
@@ -185,7 +191,7 @@ public class System extends SystemItem implements java.lang.Runnable {
      *
      * @return the default version category
      */
-    public String getDefaultVersionCategory() {
+    public Item getDefaultVersionCategory() {
 
         return new String("0.0.5.0");
     }
@@ -195,7 +201,7 @@ public class System extends SystemItem implements java.lang.Runnable {
      *
      * @return the default date category
      */
-    public String getDefaultDateCategory() {
+    public Item getDefaultDateCategory() {
 
         return new String("31.01.2003");
     }
@@ -205,7 +211,7 @@ public class System extends SystemItem implements java.lang.Runnable {
      *
      * @return the default slogan category
      */
-    public String getDefaultSloganCategory() {
+    public Item getDefaultSloganCategory() {
 
         return new String("- Cybernetics Oriented Programming -");
     }
@@ -215,7 +221,7 @@ public class System extends SystemItem implements java.lang.Runnable {
      *
      * @return the default logo category
      */
-    public String getDefaultLogoCategory() {
+    public Item getDefaultLogoCategory() {
 
         return null;
     }
@@ -225,7 +231,7 @@ public class System extends SystemItem implements java.lang.Runnable {
      *
      * @return the default copyright category
      */
-    public String getDefaultCopyrightCategory() {
+    public Item getDefaultCopyrightCategory() {
 
         return new String("Copyright (c) 1999-2003. Christian Heller <christian.heller@tuxtax.de>. All rights reserved.");
     }
@@ -235,7 +241,7 @@ public class System extends SystemItem implements java.lang.Runnable {
      *
      * @return the default contact category
      */
-    public String getDefaultContactCategory() {
+    public Item getDefaultContactCategory() {
 
         return new String("http://www.cybop.net");
     }
@@ -245,7 +251,7 @@ public class System extends SystemItem implements java.lang.Runnable {
      *
      * @return the default description category
      */
-    public String getDefaultDescriptionCategory() {
+    public Item getDefaultDescriptionCategory() {
 
         return new String("Free Medical Information System");
     }
@@ -255,7 +261,7 @@ public class System extends SystemItem implements java.lang.Runnable {
      *
      * @return the default authors category
      */
-    public String getDefaultAuthorsCategory() {
+    public Item getDefaultAuthorsCategory() {
 
         return new String("Unspecified Authors.\n"
             + "Try to contact these project administrators:\n\n"
@@ -268,7 +274,7 @@ public class System extends SystemItem implements java.lang.Runnable {
      *
      * @return the default helpers category
      */
-    public String getDefaultHelpersCategory() {
+    public Item getDefaultHelpersCategory() {
 
         return new String("Helpers ...");
     }
@@ -278,7 +284,7 @@ public class System extends SystemItem implements java.lang.Runnable {
      *
      * @return the default inspirations category
      */
-    public String getDefaultInspirationsCategory() {
+    public Item getDefaultInspirationsCategory() {
 
         return new String("Inspirations ...");
     }
@@ -288,7 +294,7 @@ public class System extends SystemItem implements java.lang.Runnable {
      *
      * @return the default license category
      */
-    public String getDefaultLicenseCategory() {
+    public Item getDefaultLicenseCategory() {
 
         return new String("This software is published under the GPL GNU General Public License.\n"
             + "This program is free software; you can redistribute it and/or\n"
@@ -313,6 +319,26 @@ public class System extends SystemItem implements java.lang.Runnable {
     public Item getDefaultControllerCategory() {
 
         return null;
+    }
+
+    /**
+     * Returns the default screen category.
+     *
+     * @return the default screen category
+     */
+    public Item getDefaultScreenCategory() {
+
+        return new String("cybop.core.system.block.Screen");
+    }
+
+    /**
+     * Returns the default mouse category.
+     *
+     * @return the default mouse category
+     */
+    public Item getDefaultMouseCategory() {
+
+        return new String("cybop.core.system.block.Mouse");
     }
 
     /**
@@ -439,6 +465,8 @@ public class System extends SystemItem implements java.lang.Runnable {
         setCategory(System.INSPIRATIONS, getDefaultInspirationsCategory());
         setCategory(System.LICENSE, getDefaultLicenseCategory());
         setCategory(System.CONTROLLER, getDefaultControllerCategory());
+        setCategory(System.SCREEN, getDefaultScreenCategory());
+        setCategory(System.MOUSE, getDefaultMouseCategory());
         setCategory(System.LOG_LEVEL, getDefaultLogLevelCategory());
         setCategory(System.LOG_RECORD, getDefaultLogRecordCategory());
         setCategory(System.SOCKET_ADDRESS, getDefaultSocketAddressCategory());
@@ -466,6 +494,8 @@ public class System extends SystemItem implements java.lang.Runnable {
         removeCategory(System.SOCKET_ADDRESS);
         removeCategory(System.LOG_RECORD);
         removeCategory(System.LOG_LEVEL);
+        removeCategory(System.MOUSE);
+        removeCategory(System.SCREEN);
         removeCategory(System.CONTROLLER);
         removeCategory(System.LICENSE);
         removeCategory(System.INSPIRATIONS);
@@ -507,6 +537,8 @@ public class System extends SystemItem implements java.lang.Runnable {
         setChild(System.INSPIRATIONS, (Item) getCategory(System.INSPIRATIONS));
         setChild(System.LICENSE, (Item) getCategory(System.LICENSE));
         setChild(System.CONTROLLER, createChild(getCategory(System.CONTROLLER)));
+        setChild(System.SCREEN, createChild(getCategory(System.SCREEN)));
+        setChild(System.MOUSE, createChild(getCategory(System.MOUSE)));
         setChild(System.LOG_LEVEL, (Item) getCategory(System.LOG_LEVEL));
         setChild(System.LOG_RECORD, createChild(getCategory(System.LOG_RECORD)));
         setChild(System.SOCKET_ADDRESS, createChild(getCategory(System.SOCKET_ADDRESS)));
@@ -623,6 +655,14 @@ public class System extends SystemItem implements java.lang.Runnable {
         Item logLevel = getChild(System.LOG_LEVEL);
         removeChild(System.LOG_LEVEL);
         destroyChild(logLevel);
+
+        Item mouse = getChild(System.MOUSE);
+        removeChild(System.MOUSE);
+        destroyChild(mouse);
+
+        Item screen = getChild(System.SCREEN);
+        removeChild(System.SCREEN);
+        destroyChild(screen);
 
         Item controller = getChild(System.CONTROLLER);
         removeChild(System.CONTROLLER);

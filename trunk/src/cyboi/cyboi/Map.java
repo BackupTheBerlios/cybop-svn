@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Mouse.java,v $
+ * $RCSfile: Map.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,19 +22,23 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.system.block;
-
-import cybop.core.model.Boolean;
-import cybop.core.system.*;
+package cyboi;
 
 /**
- * This class represents a mouse.<br><br>
+ * This is a map.
  *
- * A mouse is an input device with several buttons that can be clicked. 
+ * A map is like a table. One column (array) contains the element names.
+ * A second column (array) contains the actual element references.
  *
- * @version $Revision: 1.4 $ $Date: 2003-07-15 09:44:19 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-07-15 09:44:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Mouse extends Block {
+public class Map {
+
+    /** The names. */
+    static final Object[] names;
+
+    /** The references. */
+    static final Object[] references;
 }
 

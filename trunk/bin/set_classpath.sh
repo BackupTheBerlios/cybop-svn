@@ -25,7 +25,7 @@
 #
 # This file sets the classpaths for execution from the libraries.
 #
-# @version $Revision: 1.2 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+# @version $Revision: 1.3 $ $Date: 2003-07-15 09:44:19 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Henrik Brandes <henrik-b@gmx.de>
 # @author Christian Heller <christian.heller@tuxtax.de>
@@ -34,7 +34,7 @@
 EXTERNAL_CLASSPATH=${JAVA_HOME}/jre/lib/rt.jar:${JAVAEE_HOME}/lib/j2ee.jar:${JAVA_HOME}/lib/tools.jar:${CYBOP_HOME}/lib/ant.jar:
 export EXTERNAL_CLASSPATH
 
-JAR_CLASSPATH=${CYBOP_HOME}/lib/cybop-core.jar:
+JAR_CLASSPATH=${CYBOP_HOME}/lib/cyboi.jar:${CYBOP_HOME}/lib/cybop-core.jar:
 export JAR_CLASSPATH
 
 CLASSPATH=${CLASSPATH}:${EXTERNAL_CLASSPATH}:${JAR_CLASSPATH}

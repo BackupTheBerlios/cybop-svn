@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Mouse.java,v $
+ * $RCSfile: Item.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,19 +22,33 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.system.block;
-
-import cybop.core.model.Boolean;
-import cybop.core.system.*;
+package cyboi;
 
 /**
- * This class represents a mouse.<br><br>
+ * This is an item.<br><br>
  *
- * A mouse is an input device with several buttons that can be clicked. 
+ * An item can be created by instantiating (cloning) an existing category.
+ * Instantiating means allocating some place in the computer's memory.
+ * Basically, every item can become a category if copies of this item are created.
+ * The meta-level classes that form a category follow this order:<br><br>
  *
- * @version $Revision: 1.4 $ $Date: 2003-07-15 09:44:19 $ $Author: christian $
+ * Item is the super class of all other classes in the framework.
+ *
+ * @version $Revision: 1.1 $ $Date: 2003-07-15 09:44:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Mouse extends Block {
+public class Item {
+
+    /** The children. */
+    static final Map children;
+
+    /** The categories. */
+    static final Map categories;
+
+    /** The abstractions. */
+    static final Map abstractions;
+
+    /** The positions. */
+    static final Map positions;
 }
 

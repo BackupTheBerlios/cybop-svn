@@ -48,10 +48,10 @@ import cybop.core.system.block.controller.*;
  * Child systems can be integrated into the portal system's Frame as Frame,
  * InternalFrame or TabPage.
  *
- * @version $Revision: 1.1 $ $Date: 2003-06-30 09:59:43 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-07-15 09:44:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Portal extends Family {
+public class Portal extends System {
 
     //
     // Default children.
