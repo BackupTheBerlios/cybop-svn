@@ -23,7 +23,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.1 $ $Date: 2005-03-02 07:19:05 $ $Author: rholzmueller $
+ * @version $Revision: 1.2 $ $Date: 2005-03-10 10:00:08 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
  
@@ -90,19 +90,6 @@ void loop( const void* param, const int* param_count,
     void** bfdc = POINTER_NULL_POINTER;
     void** bfds = POINTER_NULL_POINTER;
 
-    // The loop index abstraction.
-    void** lia = POINTER_NULL_POINTER;
-    void** liac = POINTER_NULL_POINTER;
-    void** lias = POINTER_NULL_POINTER;
-    // The loop index model.
-    void** lim = POINTER_NULL_POINTER;
-    void** limc = POINTER_NULL_POINTER;
-    void** lims = POINTER_NULL_POINTER;
-    // The loop index details.
-    void** lid = POINTER_NULL_POINTER;
-    void** lidc = POINTER_NULL_POINTER;
-    void** lids = POINTER_NULL_POINTER;
-
     // The model abstraction.
     void** ma = POINTER_NULL_POINTER;
     void** mac = POINTER_NULL_POINTER;
@@ -125,15 +112,6 @@ void loop( const void* param, const int* param_count,
         (void*) &bfd, (void*) &bfdc, (void*) &bfds,
         *km, *kmc );
 
-    // get the loopindex     
-    get_real_compound_element_by_name( param, param_count,
-        (void*) LOOP_INDEX_NAME_ABSTRACTION, 
-        (void*) LOOP_INDEX_NAME_ABSTRACTION_COUNT,
-        (void*) &lia, (void*) &liac, (void*) &lias,
-        (void*) &lim, (void*) &limc, (void*) &lims,
-        (void*) &lid, (void*) &lidc, (void*) &lids,
-        *km, *kmc );
-
     // get the model     
     get_real_compound_element_by_name( param, param_count,
         (void*) LOOP_MODEL_NAME_ABSTRACTION, 
@@ -153,16 +131,6 @@ void loop( const void* param, const int* param_count,
         && (bfd != POINTER_NULL_POINTER)
         && (bfdc != POINTER_NULL_POINTER)
         && (bfds != POINTER_NULL_POINTER)
-        // Check loop index.
-        && (lia != POINTER_NULL_POINTER)
-        && (liac != POINTER_NULL_POINTER)
-        && (lias != POINTER_NULL_POINTER)
-        && (lim != POINTER_NULL_POINTER)
-        && (limc != POINTER_NULL_POINTER)
-        && (lims != POINTER_NULL_POINTER)
-        && (lid != POINTER_NULL_POINTER)
-        && (lidc != POINTER_NULL_POINTER)
-        && (lids != POINTER_NULL_POINTER)
         // Check model.
         && (ma != POINTER_NULL_POINTER)
         && (mac != POINTER_NULL_POINTER)
