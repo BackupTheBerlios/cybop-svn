@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.29 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2004-12-20 21:05:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -93,13 +93,13 @@ void test_character_array_single_element() {
 
     fputs("Test character array:\n", stdout);
 
-    // The character array.
-    void* ca = NULL_POINTER;
+    // The character array size.
     int* cas = INTEGER_NULL_POINTER;
     create_integer((void*) &cas);
     *cas = 5;
 
-    // Create character array.
+    // The character array.
+    void* ca = NULL_POINTER;
     create_array((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &cas);
 
     int* ca1i = INTEGER_NULL_POINTER;
@@ -163,13 +163,13 @@ void test_character_array_single_element() {
  */
 void test_character_array_multiple_elements() {
 
-    // The destination array.
-    void* d = NULL_POINTER;
+    // The destination array size.
     int* ds = INTEGER_NULL_POINTER;
     create_integer((void*) &ds);
     *ds = 20;
 
-    // Create destination array.
+    // The destination array.
+    void* d = NULL_POINTER;
     create_array((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &ds);
 
     // The constant source array and the pointer to it.
@@ -210,6 +210,7 @@ void test_character_array_multiple_elements() {
     int* ri = INTEGER_NULL_POINTER;
     create_integer((void*) &ri);
     *ri = 12;
+
     // The remove count.
     int* rc = INTEGER_NULL_POINTER;
     create_integer((void*) &rc);
@@ -219,6 +220,7 @@ void test_character_array_multiple_elements() {
 
     destroy_integer((void*) &rc);
     destroy_integer((void*) &ri);
+    destroy_integer((void*) &ds);
 
     fputs((char*) d, stdout);
 
@@ -230,13 +232,11 @@ void test_character_array_multiple_elements() {
 
     resize_array((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &ns);
 
-    destroy_integer((void*) &ns);
-
     fputs((char*) d, stdout);
 
     // Destroy destination array.
     destroy_array((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &ns);
-    destroy_integer((void*) &ds);
+    destroy_integer((void*) &ns);
 }
 
 /**
@@ -361,10 +361,12 @@ void test_console() {
  */
 void test_integer_parser() {
 
-    // The source string array, pointer, count.
+/*??
+    // The source string.
     char ssa[] = {'1', '9', '7', '1'};
     void* ss = ssa;
     int ssc = 4;
+
     // The destination integer.
     int di = -1;
     int dic = -1;
@@ -378,6 +380,7 @@ void test_integer_parser() {
     // The source integer.
     int si = 1980;
     int sic = -1;
+
     // The destination string.
     char* ds = NULL_POINTER;
     int dsc = 0;
@@ -393,6 +396,7 @@ void test_integer_parser() {
 
     // Destroy destination string.
     destroy_array((void*) &ds, (void*) &CHARACTER_ARRAY, (void*) &dss);
+*/
 }
 
 /**
@@ -412,86 +416,86 @@ void test_knowledge_model(const void* p0, const void* p1) {
         int** c = (int**) p1;
 
         // The loop index.
-        int i = 0;
+        int* i = INTEGER_NULL_POINTER;
+        create_integer((void*) &i);
+        *i = 0;
         // The element name.
-        void* n = NULL_POINTER;
-        int nc = 0;
-        int ns = 0;
+        char* n = CHARACTER_NULL_POINTER;
+        int* nc = INTEGER_NULL_POINTER;
+        int* ns = INTEGER_NULL_POINTER;
         // The element abstraction.
-        void* a = NULL_POINTER;
-        int ac = 0;
-        int as = 0;
+        char* a = CHARACTER_NULL_POINTER;
+        int* ac = INTEGER_NULL_POINTER;
+        int* as = INTEGER_NULL_POINTER;
         // The element model.
         void* m = NULL_POINTER;
-        int mc = 0;
-        int ms = 0;
+        int* mc = INTEGER_NULL_POINTER;
+        int* ms = INTEGER_NULL_POINTER;
         // The element details.
         void* d = NULL_POINTER;
-        int dc = 0;
-        int ds = 0;
+        int* dc = INTEGER_NULL_POINTER;
+        int* ds = INTEGER_NULL_POINTER;
         // The comparison result.
-        int r = 0;
+        int* r = INTEGER_NULL_POINTER;
+        create_integer((void*) &r);
+        *r = 0;
 
         while (1) {
 
-            if (i >= **c) {
+            if (*i >= **c) {
 
                 break;
             }
 
             // Get element name.
-            get_compound_element_name_by_index(p0, p1, (void*) &i,
-                (void*) &n, (void*) &nc, (void*) &ns);
+            get_compound_element_name_by_index(p0, p1, (void*) &i, (void*) &n, (void*) &nc, (void*) &ns);
 
             // Get element.
-            get_compound_element_by_index(p0, p1, (void*) &i,
-                (void*) &a, (void*) &ac, (void*) &as,
-                (void*) &m, (void*) &mc, (void*) &ms,
-                (void*) &d, (void*) &dc, (void*) &ds);
+            get_compound_element_by_index(p0, p1, (void*) &i, (void*) &a, (void*) &ac, (void*) &as, (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds);
 
             // Print element name.
             fprintf(stderr, "name:              %s\n", n);
-            fprintf(stderr, "name count:        %d\n", nc);
-            fprintf(stderr, "name size:         %d\n", ns);
+            fprintf(stderr, "name count:        %i\n", *nc);
+            fprintf(stderr, "name size:         %i\n", *ns);
 
             // Print element abstraction.
             fprintf(stderr, "abstraction:       %s\n", a);
-            fprintf(stderr, "abstraction count: %d\n", ac);
-            fprintf(stderr, "abstraction size:  %d\n", as);
+            fprintf(stderr, "abstraction count: %i\n", *ac);
+            fprintf(stderr, "abstraction size:  %i\n", *as);
 
             // Handle element model.
-            if (r == 0) {
+            if (*r == 0) {
 
                 compare_arrays((void*) &a, (void*) &ac, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                if (r == 1) {
+                if (*r == 1) {
 
                     fprintf(stderr, "model: %s\n", "");
                     test_knowledge_model((void*) &m, (void*) &mc);
                 }
             }
 
-            if (r == 0) {
+            if (*r == 0) {
 
                 compare_arrays((void*) &a, (void*) &ac, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                if (r == 1) {
+                if (*r == 1) {
 
-                    fprintf(stderr, "model:         %s\n", m);
-                    fprintf(stderr, "model count:   %d\n", mc);
-                    fprintf(stderr, "model size:    %d\n", ms);
+                    fprintf(stderr, "model:         %i\n", m);
+                    fprintf(stderr, "model count:   %i\n", *mc);
+                    fprintf(stderr, "model size:    %i\n", *ms);
                 }
             }
 
-            if (r == 0) {
+            if (*r == 0) {
 
                 compare_arrays((void*) &a, (void*) &ac, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                if (r == 1) {
+                if (*r == 1) {
 
-                    fprintf(stderr, "model:             %s\n", m);
-                    fprintf(stderr, "model count:       %d\n", mc);
-                    fprintf(stderr, "model size:        %d\n", ms);
+                    fprintf(stderr, "model:             %i\n", m);
+                    fprintf(stderr, "model count:       %i\n", *mc);
+                    fprintf(stderr, "model size:        %i\n", *ms);
                 }
             }
 
@@ -504,33 +508,34 @@ void test_knowledge_model(const void* p0, const void* p1) {
 
             // Reset element name.
             n = NULL_POINTER;
-            nc = 0;
-            ns = 0;
+            *nc = 0;
+            *ns = 0;
             // Reset element abstraction.
             a = NULL_POINTER;
-            ac = 0;
-            as = 0;
+            *ac = 0;
+            *as = 0;
             // Reset element model.
             m = NULL_POINTER;
-            mc = 0;
-            ms = 0;
+            *mc = 0;
+            *ms = 0;
             // Reset element details.
             d = NULL_POINTER;
-            dc = 0;
-            ds = 0;
+            *dc = 0;
+            *ds = 0;
             // Reset comparison result.
-            r = 0;
+            *r = 0;
 
-            i++;
+            (*i)++;
         }
+
+        destroy_integer((void*) &r);
+        destroy_integer((void*) &i);
 
     } else {
 
         fputs("ERROR: Could not test knowledge model. The knowledge model is null.", stdout);
     }
 }
-
-
 
 /**
  * The main test procedure.

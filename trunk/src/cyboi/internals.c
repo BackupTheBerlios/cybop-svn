@@ -32,7 +32,7 @@
  * - Macintosh
  * - MS Windows
  *
- * @version $Revision: 1.6 $ $Date: 2004-12-19 00:53:20 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-12-20 21:05:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -48,100 +48,20 @@
 #include "../logger/logger.c"
 
 /**
- * create the internal
- *
- * @param p_internal pointer of the internal
- */
-void create_internals_structur(void** pp_internal) {
-
-    if ( pp_internal == NULL_POINTER ) {
-      
-        log_message_debug( "pp_internal is a NULL POINTER" );
-    }
-    else {
-
-        log_message_debug( "create_internals_structur is started" );
-
-        // create internal
-        create_array( pp_internal, (void*) &POINTER_ARRAY, 
-                      (void*) &INTERNAL_COLUMN_COUNT );
-                      
-        // create internal value
-        void* p_int_value = NULL_POINTER;
-        create_array( (void*) &p_int_value, (void*) &POINTER_ARRAY, 
-                      (void*) &INTERNAL_ARRAY_COUNT );
-        set_array_element( pp_internal,
-                           (void*) &POINTER_ARRAY,
-                           (void*) &INTERNAL_COLUMN_VALUE_INDEX,
-                           (void*) &p_int_value );        
-
-        // create internal value type
-        void* p_int_valuetype = NULL_POINTER;
-        create_array( (void*) &p_int_valuetype, (void*) &INTEGER_ARRAY, 
-                      (void*) &INTERNAL_ARRAY_COUNT );
-        set_array_element( pp_internal,
-                           (void*) &POINTER_ARRAY,
-                           (void*) &INTERNAL_COLUMN_VALUETYPE_INDEX,
-                           (void*) &p_int_valuetype );        
-    }                      
-}
-
-/**
- * destroys the internals
- *
- * @param p_internal pointer of the internal
- */
-void destroy_internals_structur(void** pp_internal) {
-
-    if ( pp_internal == NULL_POINTER ) {
-      
-        log_message_debug( "pp_internal is a NULL POINTER" );
-    }
-    else {
-
-        log_message_debug( "destroy_internals_structur is started" );
-
-        // destroy internal value 
-        void* p_int_value = NULL_POINTER;
-        get_array_element( pp_internal,
-                           (void*) &POINTER_ARRAY,
-                           (void*) &INTERNAL_COLUMN_VALUE_INDEX,
-                           (void*) &p_int_value );        
-        destroy_array( (void*) &p_int_value, (void*) &POINTER_ARRAY, 
-                       (void*) &INTERNAL_ARRAY_COUNT );
-
-        // destroy internal value type
-        void* p_int_valuetype = NULL_POINTER;
-        get_array_element( pp_internal,
-                           (void*) &POINTER_ARRAY,
-                           (void*) &INTERNAL_COLUMN_VALUETYPE_INDEX,
-                           (void*) &p_int_valuetype );        
-        destroy_array( (void*) &p_int_valuetype, (void*) &INTEGER_ARRAY, 
-                       (void*) &INTERNAL_ARRAY_COUNT );
-
-        // destroy internal
-        destroy_array( pp_internal, (void*) &POINTER_ARRAY, 
-                      (void*) &INTERNAL_COLUMN_COUNT );
-    }                      
-}
-
-
-
-/**
  * create a internal
  *
  * @param pp_internalvalue pointer of the internal value
  * @param p_valuetype
  * @param p_arrayindex
  */
-void create_internal( void** pp_internalvalue, int* p_valuetype ) 
+void create_internal( void** pp_internalvalue, int* p_valuetype )
 {
     if ( pp_internalvalue == NULL_POINTER ) {
-      
+
         log_message_debug( "pp_internal is a NULL POINTER" );
     }
     else if ( p_valuetype == NULL_POINTER ) {
-        
+
         log_message_debug( "p_valuetype is a NULL POINTER" );
     }
     else {

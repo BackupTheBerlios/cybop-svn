@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.51 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
+ * @version $Revision: 1.52 $ $Date: 2004-12-20 21:05:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -109,11 +109,12 @@ int main(int p0, char** p1) {
             // colum 2:  type for the value
             // colum 3:  count for the value
             // colum 4:  size for the value
-            void* p_internal = NULL_POINTER;
-            create_internals_structur((void*) &p_internal);
+            void* i = NULL_POINTER;
+
+            create_internals_memory((void*) &i, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT);
 
             // Copy configuration file parameters into internals.
-            initialize_internals(p1[*CONFIG_STARTUP_PARAMETER_INDEX], (void*) &p_internal);
+            initialize_internals(p1[*CONFIG_STARTUP_PARAMETER_INDEX], (void*) &i);
 
             //
             // Signal memory.
@@ -133,20 +134,18 @@ int main(int p0, char** p1) {
             *p_ms = 0;
 
             // Create signal container.
-            create( pp_m, p_ms,
-                    (void*) &SIGNAL_MEMORY_ABSTRACTION,
-                    (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
+            create(pp_m, p_ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
             // Set signal container into internals.
-            set_internal((void*) &p_internal, (void*) &pp_m,
+            set_internal((void*) &i, (void*) &pp_m,
                          (void*) &INTERNAL_TYPE_POINTER,
                          (void*) &INTERNAL_SIGNAL_MEMORY_INDEX);
 
-            set_internal((void*) &p_internal, (void*) &p_mc,
+            set_internal((void*) &i, (void*) &p_mc,
                          (void*) &INTERNAL_TYPE_INTEGER,
                          (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX);
 
-            set_internal((void*) &p_internal, (void*) &p_ms,
+            set_internal((void*) &i, (void*) &p_ms,
                          (void*) &INTERNAL_TYPE_INTEGER,
                          (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX);
 
@@ -175,15 +174,15 @@ int main(int p0, char** p1) {
                     (void*) &COMPOUND_ABSTRACTION_COUNT );
 
             // set the knowledge container into internals
-            set_internal( (void*) &p_internal, (void*) &pp_k,
+            set_internal( (void*) &i, (void*) &pp_k,
                           (void*) &INTERNAL_TYPE_POINTER,
                           (void*) &INTERNAL_KNOWLEDGE_MODEL_INDEX );
 
-            set_internal( (void*) &p_internal, (void*) &p_kc,
+            set_internal( (void*) &i, (void*) &p_kc,
                           (void*) &INTERNAL_TYPE_INTEGER,
                           (void*) &INTERNAL_KNOWLEDGE_MODEL_COUNT_INDEX );
 
-            set_internal( (void*) &p_internal, (void*) &p_ks,
+            set_internal( (void*) &i, (void*) &p_ks,
                           (void*) &INTERNAL_TYPE_INTEGER,
                           (void*) &INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX );
             log_message_debug( "init knowledge container" );
@@ -193,7 +192,7 @@ int main(int p0, char** p1) {
             // TCP socket.
             //
 
-            create_tcp_socket( (void*) &p_internal );
+            create_tcp_socket((void*) &i);
 
             //
             // UNIX socket.
@@ -228,26 +227,26 @@ int main(int p0, char** p1) {
             int internal_type = 0;
 
             // Get source channel.
-            get_internal( (void*) &p_internal, (void*) &sc,
+            get_internal( (void*) &i, (void*) &sc,
                           (void*) &internal_type,
                           (void*) &INTERNAL_START_CHANNEL_INDEX );
-            get_internal( (void*) &p_internal, (void*) &scc,
+            get_internal( (void*) &i, (void*) &scc,
                           (void*) &internal_type,
                           (void*) &INTERNAL_START_CHANNEL_COUNT_INDEX );
 
             // Get source abstraction.
-            get_internal( (void*) &p_internal, (void*) &sa,
+            get_internal( (void*) &i, (void*) &sa,
                           (void*) &internal_type,
                           (void*) &INTERNAL_START_ABSTRACTION_INDEX );
-            get_internal( (void*) &p_internal, (void*) &sac,
+            get_internal( (void*) &i, (void*) &sac,
                           (void*) &internal_type,
                           (void*) &INTERNAL_START_ABSTRACTION_COUNT_INDEX );
 
             // Get source model.
-            get_internal( (void*) &p_internal, (void*) &sm,
+            get_internal( (void*) &i, (void*) &sm,
                           (void*) &internal_type,
                           (void*) &INTERNAL_START_MODEL_INDEX );
-            get_internal( (void*) &p_internal, (void*) &smc,
+            get_internal( (void*) &i, (void*) &smc,
                           (void*) &internal_type,
                           (void*) &INTERNAL_START_MODEL_COUNT_INDEX );
 
@@ -287,16 +286,17 @@ int main(int p0, char** p1) {
             //
 
             // get the new main signal id
-            int main_sig_id = 0;
-            get_new_signal_id(pp_m, p_mc, &main_sig_id);
+            int id = 0;
+            get_new_signal_id(pp_m, p_mc, &id);
 
             // Add startup signal to signal memory.
-            set_signal( pp_m, p_mc, p_ms,   //memory
-                        (void*) &da, (void*) &dac,              //dest abtsraction
-                        (void*) &dm, (void*) &dmc,              //dest model
-                        (void*) &dd, (void*) &ddc,              //dest details
-                        (void*) &NORMAL_PRIORITY,
-                        (void*) &main_sig_id );
+            set_signal(pp_m, p_mc, p_ms,   //memory
+                (void*) &da, (void*) &dac,              //dest abtsraction
+                (void*) &dm, (void*) &dmc,              //dest model
+                (void*) &dd, (void*) &ddc,              //dest details
+                (void*) &NORMAL_PRIORITY,
+                (void*) &id);
+
             log_message_debug( "set start signals" );
 
             //
@@ -307,7 +307,7 @@ int main(int p0, char** p1) {
             // can be entered, waiting for signals (events/ interrupts)
             // which are stored/ found in the signal memory.
             // The loop is left as soon as its shutdown flag is set.
-            wait( (void*) &p_internal );
+            wait((void*) &i);
 
             //
             // Destruction.
@@ -335,13 +335,13 @@ int main(int p0, char** p1) {
 //            }
 
             // Destroy knowledge.
-            destroy( pp_k, p_ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
+            destroy(pp_k, p_ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
 
             // Destroy signal memory.
-            destroy( pp_m, p_ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
+            destroy(pp_m, p_ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
             // Destroy internals.
-            destroy_internals_structur((void*) &p_internal);
+            destroy_internals_memory((void*) &i, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT);
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 

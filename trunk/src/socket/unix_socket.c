@@ -23,7 +23,7 @@
  *
  * This file handles a server UNIX FILE socket.
  *
- * @version $Revision: 1.6 $ $Date: 2004-12-18 16:42:21 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-12-20 21:05:15 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -51,7 +51,7 @@ void create_unix_socket(void* p0, const void* p1) {
 
         if (p0 != NULL_POINTER) {
 
-            int* s = (int*) p0;
+            int** s = (int**) p0;
 
             // Open socket and get its number.
             // AF stands for address format. AF_LOCAL is a synonym for AF_UNIX.
@@ -61,7 +61,7 @@ void create_unix_socket(void* p0, const void* p1) {
             // specification.
             // AF_FILE is another synonym for AF_LOCAL, for compatibility.
             // 0 stands for the default protocol (recommended).
-            *s = socket(AF_UNIX, SOCK_STREAM, 0);
+            **s = socket(AF_UNIX, SOCK_STREAM, 0);
 
             // Make socket non-blocking.
 //??            fcntl(*s, F_SETFL, FNDELAY);
@@ -83,12 +83,12 @@ void create_unix_socket(void* p0, const void* p1) {
 //??            int as = (offsetof(struct sockaddr_un, sun_path) + strlen(a.sun_path) + 1);
 
             // Bind number to address.
-            bind(*s, (struct sockaddr*) &a, as);
+            bind(**s, (struct sockaddr*) &a, as);
 
             // Set the number of possible pending client connection requests.
             // The maximum number is usually 5.
             // It is NOT necessary to use this function, but it's good practice.
-            listen(*s, 1);
+            listen(**s, 1);
 
         } else {
 
@@ -115,10 +115,10 @@ void destroy_unix_socket(void* p0, const void* p1) {
 
         if (p0 != NULL_POINTER) {
 
-            int* s = (int*) p0;
+            int** s = (int**) p0;
 
             // Close socket.
-            close(*s);
+            close(**s);
 
             // Unlink socket.
             unlink((char*) *n);
@@ -147,7 +147,7 @@ void send_unix_socket(const void* p0, const void* p1, const void* p2, const void
 
     if (p3 != NULL_POINTER) {
 
-        int* mc = (int*) p3;
+        int** mc = (int**) p3;
 
         if (p2 != NULL_POINTER) {
 
@@ -211,7 +211,7 @@ void send_unix_socket(const void* p0, const void* p1, const void* p2, const void
 //??            m = htonl(m);
 
             // Write message to socket.
-            write(s, (char*) *m, *mc);
+            write(s, (char*) *m, **mc);
 
             // Close socket.
             close(s);
@@ -236,7 +236,7 @@ void receive_unix_socket(const void* p0) {
 
     if (p0 != NULL_POINTER) {
 
-        int* s = (int*) p0;
+        int** s = (int**) p0;
 
 //??        log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTERNALS_MESSAGE, (void*) &CREATE_INTERNALS_MESSAGE_COUNT);
 
@@ -251,7 +251,7 @@ void receive_unix_socket(const void* p0) {
         // The return value is the file descriptor for the new client socket.
 
         // Accept client socket request and store client socket.
-        int cs = accept(*s, (struct sockaddr*) &ca, &cas);
+        int cs = accept(**s, (struct sockaddr*) &ca, &cas);
 
         // Receive message from socket.
 //??        read(cs, (char*) *m, *mc);

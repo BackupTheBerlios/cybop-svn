@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.5 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-12-20 21:05:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,8 +39,8 @@
 /**
  * Creates the signal memory.
  *
- * @param p0 the model
- * @param p1 the model size
+ * @param p0 the signal memory
+ * @param p1 the signal memory size
  */
 void create_signal_memory(void* p0, const void* p1) {
 
@@ -85,7 +85,7 @@ void create_signal_memory(void* p0, const void* p1) {
  * Destroys the signal memory.
  *
  * @param p0 the model
- * @param p1 the model size
+ * @param p1 the signal memory size
  */
 void destroy_signal_memory(void* p0, const void* p1) {
 
@@ -139,7 +139,8 @@ void destroy_signal_memory(void* p0, const void* p1) {
     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ids, (void*) &ONE_ELEMENT_COUNT);
 
     // Remove abstractions, models, details, priorities.
-    // CAUTION! Use descending order, as compared to creation!
+    // CAUTION! Use descending order as compared to creation, for faster removal.
+    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ONE_ELEMENT_COUNT);
     remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &ONE_ELEMENT_COUNT);
     remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &ONE_ELEMENT_COUNT);
     remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_DETAILS_INDEX, (void*) &ONE_ELEMENT_COUNT);
@@ -147,7 +148,6 @@ void destroy_signal_memory(void* p0, const void* p1) {
     remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_MODELS_INDEX, (void*) &ONE_ELEMENT_COUNT);
     remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ONE_ELEMENT_COUNT);
     remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &ONE_ELEMENT_COUNT);
-    remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ONE_ELEMENT_COUNT);
 
     // Destroy abstractions, models, details, priorities.
     destroy_array((void*) &sa, (void*) &POINTER_ARRAY, p1);

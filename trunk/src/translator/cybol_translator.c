@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2004-11-30 15:30:31 $ $Author: rholzmueller $
+ * @version $Revision: 1.4 $ $Date: 2004-12-20 21:05:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -84,7 +84,7 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
 
     if (p8 != NULL_POINTER) {
 
-        int* mc = (int*) p8;
+        int** mc = (int**) p8;
 
         if (p7 != NULL_POINTER) {
 
@@ -92,7 +92,7 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
 
             if (p6 != NULL_POINTER) {
 
-                int* ac = (int*) p6;
+                int** ac = (int**) p6;
 
                 if (p5 != NULL_POINTER) {
 
@@ -100,7 +100,7 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
 
                     if (p4 != NULL_POINTER) {
 
-                        int* cc = (int*) p4;
+                        int** cc = (int**) p4;
 
                         if (p3 != NULL_POINTER) {
 
@@ -108,7 +108,7 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
 
                             if (p2 != NULL_POINTER) {
 
-                                int* nc = (int*) p2;
+                                int** nc = (int**) p2;
 
                                 if (p1 != NULL_POINTER) {
 
@@ -124,14 +124,18 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
                                             xmlAttr* p = (*cn)->properties;
                                             // The property name.
                                             char* pn = NULL_POINTER;
-                                            int pnc = 0;
+                                            // The property name count.
+                                            int* pnc = INTEGER_NULL_POINTER;
+                                            create_integer((void*) &pnc);
+                                            *pnc = 0;
                                             // The property value.
                                             xmlNode* pv = NULL_POINTER;
-
                                             // The done flag.
                                             int d = 0;
                                             // The comparison result.
-                                            int r = 0;
+                                            int* r = INTEGER_NULL_POINTER;
+                                            create_integer((void*) &r);
+                                            *r = 0;
 
                                             while (1) {
 
@@ -147,17 +151,17 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
 
                                                     // Get property name.
                                                     pn = (char*) p->name;
-                                                    pnc = strlen(pn);
+                                                    *pnc = strlen(pn);
 
                                                     if (d == 0) {
 
                                                         compare_arrays((void*) &pn, (void*) &pnc, (void*) &NAME_ATTRIBUTE, (void*) &NAME_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                                                        if (r == 1) {
+                                                        if (*r == 1) {
 
                                                             // Get source name.
                                                             *n = pv->content;
-                                                            *nc = strlen((char*) *n);
+                                                            **nc = strlen((char*) *n);
 
                                                             d = 1;
                                                         }
@@ -167,11 +171,11 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
 
                                                         compare_arrays((void*) &pn, (void*) &pnc, (void*) &CHANNEL_ATTRIBUTE, (void*) &CHANNEL_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                                                        if (r == 1) {
+                                                        if (*r == 1) {
 
                                                             // Get source channel.
                                                             *c = pv->content;
-                                                            *cc = strlen((char*) *c);
+                                                            **cc = strlen((char*) *c);
 
                                                             d = 1;
                                                         }
@@ -181,11 +185,11 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
 
                                                         compare_arrays((void*) &pn, (void*) &pnc, (void*) &ABSTRACTION_ATTRIBUTE, (void*) &ABSTRACTION_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                                                        if (r == 1) {
+                                                        if (*r == 1) {
 
                                                             // Get source abstraction.
                                                             *a = pv->content;
-                                                            *ac = strlen((char*) *a);
+                                                            **ac = strlen((char*) *a);
 
                                                             d = 1;
                                                         }
@@ -195,11 +199,11 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
 
                                                         compare_arrays((void*) &pn, (void*) &pnc, (void*) &MODEL_ATTRIBUTE, (void*) &MODEL_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                                                        if (r == 1) {
+                                                        if (*r == 1) {
 
                                                             // Get source model.
                                                             *m = pv->content;
-                                                            *mc = strlen((char*) *m);
+                                                            **mc = strlen((char*) *m);
 
                                                             d = 1;
                                                         }
@@ -207,13 +211,13 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
 
                                                     // Reset property name.
                                                     pn = NULL_POINTER;
-                                                    pnc = 0;
+                                                    *pnc = 0;
                                                     // Reset property value.
                                                     pv = NULL_POINTER;
                                                     // Reset done flag.
                                                     d = 0;
                                                     // Reset comparison result.
-                                                    r = 0;
+                                                    *r = 0;
 
                                                 } else {
 
@@ -222,6 +226,9 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
 
                                                 p = p->next;
                                             }
+
+                                            destroy_integer((void*) &r);
+                                            destroy_integer((void*) &pnc);
 
                                         } else {
 
@@ -293,172 +300,181 @@ void encode_cybol_property(void* p0, void* p1, void* p2, const void* p3, const v
 /**
  * Decodes the cybol node into a compound.
  *
- * @param p0 the destination  (a compound model void**)
+ * @param p0 the destination (a compound model void**)
  * @param p1 the destination count (the count for coumpound model void*)
  * @param p2 the destination size (the size for compound model void*)
- * @param p3 the source   (xmlNode**)
- * @param p4 the source count  (for this function not relevant void*)
+ * @param p3 the source (xmlNode**)
+ * @param p4 the source count (for this function not relevant void*)
  */
 void decode_cybol_node(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    if (p3 != NULL_POINTER) {
 
-        int* sc = (int*) p4;
+        xmlNode** s = (xmlNode**) p3;
 
-        if (p3 != NULL_POINTER) {
+        if ((*s) != NULL_POINTER) {
 
-            xmlNode** s = (xmlNode**) p3;
+            // Determine first child node.
+            xmlNode* c = (*s)->children;
 
-            if ((*s) != NULL_POINTER) {
+            // The child count.
+            int* cc = INTEGER_NULL_POINTER;
+            create_integer((void*) &cc);
+            *cc = 0;
 
-                // Determine first child node.
-                xmlNode* c = (*s)->children;
-                int cc = 0;
+            // The source name.
+            void* sn = NULL_POINTER;
+            int* snc = INTEGER_NULL_POINTER;
+            create_integer((void*) &snc);
+            *snc = 0;
+            // The source channel.
+            void* sc = NULL_POINTER;
+            int* scc = INTEGER_NULL_POINTER;
+            create_integer((void*) &scc);
+            *scc = 0;
+            // The source abstraction.
+            void* sa = NULL_POINTER;
+            int* sac = INTEGER_NULL_POINTER;
+            create_integer((void*) &sac);
+            *sac = 0;
+            // The source model.
+            void* sm = NULL_POINTER;
+            int* smc = INTEGER_NULL_POINTER;
+            create_integer((void*) &smc);
+            *smc = 0;
 
-                // The source name.
-                void* sn = NULL_POINTER;
-                int snc = 0;
-                // The source channel.
-                void* sc = NULL_POINTER;
-                int scc = 0;
-                // The source abstraction.
-                void* sa = NULL_POINTER;
-                int sac = 0;
-                // The source model.
-                void* sm = NULL_POINTER;
-                int smc = 0;
+            // The destination name.
+            void* dn = NULL_POINTER;
+            void* dnc = NULL_POINTER;
+            void* dns = NULL_POINTER;
+            // The destination abstraction.
+            void* da = NULL_POINTER;
+            void* dac = NULL_POINTER;
+            void* das = NULL_POINTER;
+            // The destination model.
+            void* dm = NULL_POINTER;
+            void* dmc = NULL_POINTER;
+            void* dms = NULL_POINTER;
+            // The destination details.
+            void* dd = NULL_POINTER;
+            void* ddc = NULL_POINTER;
+            void* dds = NULL_POINTER;
 
-                // The destination name.
-                void* dn = NULL_POINTER;
-                int dnc = 0;
-                int dns = 0;
-                // The destination abstraction.
-                void* da = NULL_POINTER;
-                int dac = 0;
-                int das = 0;
-                // The destination model.
-                void* dm = NULL_POINTER;
-                int dmc = 0;
-                int dms = 0;
-                // The destination details.
-                void* dd = NULL_POINTER;
-                int ddc = 0;
-                int dds = 0;
+            while (1) {
 
-                while (1) {
+                if (c == NULL_POINTER) {
 
-                    if (c == NULL_POINTER) {
-
-                        break;
-                    }
-
-                    if (c->type == XML_ELEMENT_NODE) {
-
-                        // Decode child node properties.
-                        decode_cybol_property((void*) &c,
-                            (void*) &sn, (void*) &snc, (void*) &sc, (void*) &scc,
-                            (void*) &sa, (void*) &sac, (void*) &sm, (void*) &smc);
-
-                        // Create destination name.
-                        create_model((void*) &dn, (void*) &dnc, (void*) &dns,
-                            (void*) &sn, (void*) &snc,
-                            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
-                            (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
-
-                        // CAUTION! A (transient) destination channel is not created,
-                        // since that is only needed temporarily for model loading.
-
-                        // Create destination abstraction.
-                        create_model((void*) &da, (void*) &dac, (void*) &das,
-                            (void*) &sa, (void*) &sac,
-                            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
-                            (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
-
-                        // Create destination model.
-                        create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-                            (void*) &sm, (void*) &smc,
-                            (void*) &sa, (void*) &sac,
-                            (void*) &sc, (void*) &scc);
-
-                        // If child node has children, then create details model for it.
-                        if (c->children != NULL_POINTER) {
-
-                            // Create details model.
-                            create((void*) &dd, (void*) &dds,
-                                (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
-
-                            // Decode child node children.
-                            decode_cybol_node((void*) &dd, (void*) &ddc, (void*) &dds,
-                                (void*) &c, (void*) &cc);
-                                
-                            //?? Read details??
-                            // Filter out all tags with name attribute value "super" and
-                            // hand over model to create parts of super model.
-                            // Add all details to details model.
-                            // Do NOT add super tags to details model!
-                        }
-
-                        // Add model to compound.
-                        set_compound_element_by_name(p0, p1, p2,
-                            (void*) &dn, (void*) &dnc, (void*) &dns,
-                            (void*) &da, (void*) &dac, (void*) &das,
-                            (void*) &dm, (void*) &dmc, (void*) &dms,
-                            (void*) &dd, (void*) &ddc, (void*) &dds);
-
-                        //?? If "add", then first check if name exists in whole;
-                        //?? if yes, add "_0" or "_1" or "_2" etc.
-                        //?? to name, taking first non-existing suffix!
-                        //?? If "set", then just replace the model
-                        //?? with equal name; but where to destroy it if
-                        //?? no whole keeps a reference to it anymore?
-
-                        // Reset source name.
-                        sn = NULL_POINTER;
-                        snc = 0;
-                        // Reset source channel.
-                        sc = NULL_POINTER;
-                        scc = 0;
-                        // Reset source abstraction.
-                        sa = NULL_POINTER;
-                        sac = 0;
-                        // Reset source model.
-                        sm = NULL_POINTER;
-                        smc = 0;
-
-                        // Reset destination name.
-                        dn = NULL_POINTER;
-                        dnc = 0;
-                        dns = 0;
-                        // Reset destination abstraction.
-                        da = NULL_POINTER;
-                        dac = 0;
-                        das = 0;
-                        // Reset destination model.
-                        dm = NULL_POINTER;
-                        dmc = 0;
-                        dms = 0;
-                        // Reset destination details.
-                        dd = NULL_POINTER;
-                        ddc = 0;
-                        dds = 0;
-                    }
-
-                    c = c->next;
+                    break;
                 }
 
-            } else {
+                if (c->type == XML_ELEMENT_NODE) {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source is null.");
+                    // Decode child node properties.
+                    decode_cybol_property((void*) &c,
+                        (void*) &sn, (void*) &snc, (void*) &sc, (void*) &scc,
+                        (void*) &sa, (void*) &sac, (void*) &sm, (void*) &smc);
+
+                    // Create destination name.
+                    create_model((void*) &dn, (void*) &dnc, (void*) &dns,
+                        (void*) &sn, (void*) &snc,
+                        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
+                        (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+
+                    // CAUTION! A (transient) destination channel is not created,
+                    // since that is only needed temporarily for model loading.
+
+                    // Create destination abstraction.
+                    create_model((void*) &da, (void*) &dac, (void*) &das,
+                        (void*) &sa, (void*) &sac,
+                        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
+                        (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+
+                    // Create destination model.
+                    create_model((void*) &dm, (void*) &dmc, (void*) &dms,
+                        (void*) &sm, (void*) &smc,
+                        (void*) &sa, (void*) &sac,
+                        (void*) &sc, (void*) &scc);
+
+                    // If child node has children, then create details model for it.
+                    if (c->children != NULL_POINTER) {
+
+                        // Create details model.
+                        create((void*) &dd, (void*) &dds,
+                            (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
+
+                        // Decode child node children.
+                        decode_cybol_node((void*) &dd, (void*) &ddc, (void*) &dds,
+                            (void*) &c, (void*) &cc);
+
+                        //?? Read details??
+                        // Filter out all tags with name attribute value "super" and
+                        // hand over model to create parts of super model.
+                        // Add all details to details model.
+                        // Do NOT add super tags to details model!
+                    }
+
+                    // Add model to compound.
+                    set_compound_element_by_name(p0, p1, p2,
+                        (void*) &dn, (void*) &dnc, (void*) &dns,
+                        (void*) &da, (void*) &dac, (void*) &das,
+                        (void*) &dm, (void*) &dmc, (void*) &dms,
+                        (void*) &dd, (void*) &ddc, (void*) &dds);
+
+                    //?? If "add", then first check if name exists in whole;
+                    //?? if yes, add "_0" or "_1" or "_2" etc.
+                    //?? to name, taking first non-existing suffix!
+                    //?? If "set", then just replace the model
+                    //?? with equal name; but where to destroy it if
+                    //?? no whole keeps a reference to it anymore?
+
+                    // Reset source name.
+                    sn = NULL_POINTER;
+                    *snc = 0;
+                    // Reset source channel.
+                    sc = NULL_POINTER;
+                    *scc = 0;
+                    // Reset source abstraction.
+                    sa = NULL_POINTER;
+                    *sac = 0;
+                    // Reset source model.
+                    sm = NULL_POINTER;
+                    *smc = 0;
+
+                    // Reset destination name.
+                    dn = NULL_POINTER;
+                    dnc = NULL_POINTER;
+                    dns = NULL_POINTER;
+                    // Reset destination abstraction.
+                    da = NULL_POINTER;
+                    dac = NULL_POINTER;
+                    das = NULL_POINTER;
+                    // Reset destination model.
+                    dm = NULL_POINTER;
+                    dmc = NULL_POINTER;
+                    dms = NULL_POINTER;
+                    // Reset destination details.
+                    dd = NULL_POINTER;
+                    ddc = NULL_POINTER;
+                    dds = NULL_POINTER;
+                }
+
+                c = c->next;
             }
+
+            destroy_integer((void*) &smc);
+            destroy_integer((void*) &sac);
+            destroy_integer((void*) &scc);
+            destroy_integer((void*) &snc);
+            destroy_integer((void*) &cc);
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter count is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source parameter is null.");
     }
 }
 
@@ -498,7 +514,7 @@ void decode_cybol(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
     if (p4 != NULL_POINTER) {
 
-        int* sc = (int*) p4;
+        int** sc = (int**) p4;
 
         if (p3 != NULL_POINTER) {
 

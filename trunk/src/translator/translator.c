@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2004-09-12 09:37:12 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-12-20 21:05:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,25 +49,25 @@
 void decode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6) {
 
-    // The done flag.
-    int d = 0;
     // The comparison result.
-    int r = 0;
+    int* r = INTEGER_NULL_POINTER;
+    create_integer((void*) &r);
+    *r = 0;
 
-    if (d == 0) {
+    if (*r != 1) {
 
         compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             decode_cybol(p0, p1, p2, p3, p4);
-
-            d = 1;
         }
     }
 
     //?? Later, additional formats besides cybol might be read,
     //?? for example html, sxi, hdx.sf.net etc.
+
+    destroy_integer((void*) &r);
 }
 
 /**
@@ -85,25 +85,25 @@ void decode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6) {
 
-    // The done flag.
-    int d = 0;
     // The comparison result.
-    int r = 0;
+    int* r = INTEGER_NULL_POINTER;
+    create_integer((void*) &r);
+    *r = 0;
 
-    if (d == 0) {
+    if (*r != 1) {
 
         compare_arrays(p5, p6, (void*) &CYBOL_ABSTRACTION, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (*r == 1) {
 
             encode_cybol(p0, p1, p2, p3, p4);
-
-            d = 1;
         }
     }
 
     //?? Later, additional formats besides cybol might be read,
     //?? for example html, sxi, hdx.sf.net etc.
+
+    destroy_integer((void*) &r);
 }
 
 /* TRANSLATOR_SOURCE */
