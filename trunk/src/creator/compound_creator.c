@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a compound model in memory
  *
- * @version $Revision: 1.11 $ $Date: 2005-01-18 10:54:22 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-01-20 12:11:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -167,18 +167,21 @@ void destroy_compound(void* p0, const void* p1) {
         remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) NAMES_INDEX, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
 
         // Destroy names, abstractions, models, details.
-        destroy_array((void*) &n, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) &nc, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) &ns, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) &a, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) &ac, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) &as, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) &m, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) &mc, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) &ms, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) &d, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) &dc, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) &ds, p1, (void*) POINTER_ARRAY);
+        // CAUTION! Do NOT hand over as reference!
+        // The variables are of type void**.
+        // The expression (&*variable) is the same like (variable).
+        destroy_array((void*) n, p1, (void*) POINTER_ARRAY);
+        destroy_array((void*) nc, p1, (void*) POINTER_ARRAY);
+        destroy_array((void*) ns, p1, (void*) POINTER_ARRAY);
+        destroy_array((void*) a, p1, (void*) POINTER_ARRAY);
+        destroy_array((void*) ac, p1, (void*) POINTER_ARRAY);
+        destroy_array((void*) as, p1, (void*) POINTER_ARRAY);
+        destroy_array((void*) m, p1, (void*) POINTER_ARRAY);
+        destroy_array((void*) mc, p1, (void*) POINTER_ARRAY);
+        destroy_array((void*) ms, p1, (void*) POINTER_ARRAY);
+        destroy_array((void*) d, p1, (void*) POINTER_ARRAY);
+        destroy_array((void*) dc, p1, (void*) POINTER_ARRAY);
+        destroy_array((void*) ds, p1, (void*) POINTER_ARRAY);
 
         // Destroy compound.
         destroy_array(p0, (void*) COMPOUND_COUNT, (void*) POINTER_ARRAY);

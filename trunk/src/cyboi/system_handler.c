@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-01-19 22:39:05 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-01-20 12:11:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,12 +79,12 @@ void handle_system(void* p0) {
     // The startup parameters channel, abstraction, model.
     // CAUTION! These were created while reading from the configuration file,
     // and such do not have to be created here!
-    void** pc = NULL_POINTER;
-    void** pcc = NULL_POINTER;
-    void** pa = NULL_POINTER;
-    void** pac = NULL_POINTER;
-    void** pm = NULL_POINTER;
-    void** pmc = NULL_POINTER;
+    void** pc = POINTER_NULL_POINTER;
+    void** pcc = POINTER_NULL_POINTER;
+    void** pa = POINTER_NULL_POINTER;
+    void** pac = POINTER_NULL_POINTER;
+    void** pm = POINTER_NULL_POINTER;
+    void** pmc = POINTER_NULL_POINTER;
 
     // Get startup parameters channel, abstraction, model.
     get_array_elements(p0, (void*) STARTUP_CHANNEL_INTERNAL, (void*) &pc, (void*) POINTER_ARRAY);
@@ -124,23 +124,28 @@ void handle_system(void* p0) {
     // It is not needed for the startup signal.
 
     // Create startup model abstraction, model, details.
-    create_model((void*) &ma, (void*) mac, (void*) mas,
-        (void*) *pa, (void*) *pac,
+    create_model((void*) &ma, (void*) mac, (void*) mas, *pa, *pac,
         (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+
+    fprintf(stderr, "ma: %s\n", (char*) ma);
+    fprintf(stderr, "mac: %i\n", *mac);
+
     create_model((void*) &mm, (void*) mmc, (void*) mms,
-        (void*) *pm, (void*) *pmc,
-        (void*) *pa, (void*) *pac,
-        (void*) *pc, (void*) *pcc);
+        *pm, *pmc, *pa, *pac, *pc, *pcc);
     // CAUTION! Do not create startup model details!
     // It is not needed for the startup signal.
+
+    fprintf(stderr, "mm: %i\n", mm);
+    fprintf(stderr, "mmc: %i\n", *mmc);
+    //?? DO NOT try to print details and its count. They are NULL.
 
     log_message_debug("Add startup model as signal to signal memory.");
 
     // The signal memory.
-    void** s = NULL_POINTER;
-    void** sc = NULL_POINTER;
-    void** ss = NULL_POINTER;
+    void** s = POINTER_NULL_POINTER;
+    void** sc = POINTER_NULL_POINTER;
+    void** ss = POINTER_NULL_POINTER;
 
     // Get signal memory.
     get_array_elements(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_ARRAY);
@@ -151,25 +156,17 @@ void handle_system(void* p0) {
     int* id = INTEGER_NULL_POINTER;
     create_integer((void*) &id);
     *id = 0;
-    get_new_signal_id((void*) *s, (void*) *sc, (void*) id);
+    get_new_signal_id(*s, *sc, (void*) id);
 
-    fprintf(stderr, "sm: %i\n", s);
-    fprintf(stderr, "smc: %i\n", *((int*) *sc));
-    fprintf(stderr, "sms: %i\n", *((int*) *ss));
-
-    fprintf(stderr, "ma: %i\n", ma);
-    fprintf(stderr, "mac: %i\n", mac);
-    fprintf(stderr, "mm: %i\n", mm);
-    fprintf(stderr, "mmc: %i\n", mmc);
-    fprintf(stderr, "md: %i\n", md);
-    fprintf(stderr, "mdc: %i\n", mdc);
     fprintf(stderr, "p: %i\n", *NORMAL_PRIORITY);
     fprintf(stderr, "id: %i\n", *id);
 
+    fprintf(stderr, "s: %i\n", *s);
+    fprintf(stderr, "sc: %i\n", *((int*) *sc));
+    fprintf(stderr, "ss: %i\n", *((int*) *ss));
+
     // Add startup signal to signal memory.
-    set_signal((void*) *s, (void*) *sc, (void*) *ss,
-        ma, (void*) mac, mm, (void*) mmc, md, (void*) mdc,
-        (void*) NORMAL_PRIORITY, (void*) id);
+    set_signal(*s, *sc, *ss, ma, (void*) mac, mm, (void*) mmc, md, (void*) mdc, (void*) NORMAL_PRIORITY, (void*) id);
 
     // The system is now started up and complete so that a loop
     // can be entered, waiting for signals (events/ interrupts)
@@ -189,11 +186,8 @@ void handle_system(void* p0) {
     // CAUTION! Do not destroy startup model details!
     // It was not needed for the startup signal.
     destroy_model((void*) &mm, (void*) mmc, (void*) mms,
-        (void*) *pm, (void*) *pmc,
-        (void*) *pa, (void*) *pac,
-        (void*) *pc, (void*) *pcc);
-    destroy_model((void*) &ma, (void*) mac, (void*) mas,
-        (void*) *pa, (void*) *pac,
+        *pm, *pmc, *pa, *pac, *pc, *pcc);
+    destroy_model((void*) &ma, (void*) mac, (void*) mas, *pa, *pac,
         (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 

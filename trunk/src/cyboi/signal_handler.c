@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-01-19 22:39:05 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2005-01-20 12:11:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -151,75 +151,63 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
     log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_OPERATION_SIGNAL_MESSAGE, (void*) HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT);
 
-    // The done flag.
-    int d = 0;
     // The comparison result.
     int r = 0;
 
     fprintf(stderr, "TEST operation: %s\n", (char*) p0);
     fprintf(stderr, "TEST operation count: %i\n", *((int*) p1));
 
-    if (d == 0) {
+    if (r != 1) {
 
         compare_arrays(p0, p1, (void*) ADD_ABSTRACTION, (void*) ADD_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
             add(p2, p3, p4, p5, p6);
-
-            d = 1;
         }
     }
 
-    if (d == 0) {
+    if (r != 1) {
 
         compare_arrays(p0, p1, (void*) CREATE_PART_ABSTRACTION, (void*) CREATE_PART_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
             create_part(p2, p3, p4, p5, p6);
-
-            d = 1;
         }
     }
 
-    if (d == 0) {
+    if (r != 1) {
 
         compare_arrays(p0, p1, (void*) DESTROY_PART_ABSTRACTION, (void*) DESTROY_PART_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
             destroy_part(p2, p3, p4, p5, p6);
-
-            d = 1;
         }
     }
 
-    if (d == 0) {
+    if (r != 1) {
 
         compare_arrays(p0, p1, (void*) SEND_ABSTRACTION, (void*) SEND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
             send_message(p2, p3, p4, p5, p6, p7, p8);
-
-            d = 1;
         }
     }
 
-    if (d == 0) {
+    if (r != 1) {
 
         compare_arrays(p0, p1, (void*) RECEIVE_ABSTRACTION, (void*) RECEIVE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
             receive_message(p2, p3, p4, p5, p6, p8);
-
-            d = 1;
         }
     }
 
-    if (d == 0) {
+    if (r != 1) {
 
         compare_arrays(p0, p1, (void*) EXIT_ABSTRACTION, (void*) EXIT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
@@ -229,8 +217,6 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
             int* f = (int*) p9;
             *f = 1;
-
-            d = 1;
         }
     }
 

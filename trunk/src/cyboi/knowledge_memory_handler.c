@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-01-18 10:54:22 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-01-20 12:11:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -85,9 +85,12 @@ void shutdown_knowledge_memory(void* p0) {
     get_array_elements(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) POINTER_ARRAY);
 
     // Destroy knowledge memory.
-    destroy((void*) &k, (void*) ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
-    destroy_integer((void*) &ks);
-    destroy_integer((void*) &kc);
+    // CAUTION! Do NOT hand over as reference!
+    // The variables are of type void**.
+    // The expression (&*variable) is the same like (variable).
+    destroy((void*) k, (void*) ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+    destroy_integer((void*) kc);
+    destroy_integer((void*) ks);
 }
 
 /* KNOWLEDGE_MEMORY_HANDLER_SOURCE */
