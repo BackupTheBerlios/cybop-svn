@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2005-02-10 23:45:21 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2005-03-02 07:05:55 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,6 +30,7 @@
 
 #include "../array/array.c"
 #include "../creator/integer_creator.c"
+#include "../global/abstraction_constants.c"
 #include "../global/constant.c"
 #include "../global/integer_constants.c"
 #include "../global/log_constants.c"
@@ -1678,6 +1679,101 @@ void get_compound_element_by_encapsulated_name(const void* p0, const void* p1,
         log_message_debug("Could not get compound element by encapsulated name. The knowledge element name is null.");
     }
 }
+
+/**
+ * Gets the compound element by encapsulated name.
+ *
+ * At first, the element name needs to be determined within the parameters.
+ * Only then, it can be used to determine the actual compound element.
+ *
+ * @param p0 the compound
+ * @param p1 the compound count
+ * @param p2 the name
+ * @param p3 the name count
+ * @param p4 the abstraction (Hand over as reference!)
+ * @param p5 the abstraction count (Hand over as reference!)
+ * @param p6 the abstraction size (Hand over as reference!)
+ * @param p7 the model (Hand over as reference!)
+ * @param p8 the model count (Hand over as reference!)
+ * @param p9 the model size (Hand over as reference!)
+ * @param p10 the details (Hand over as reference!)
+ * @param p11 the details count (Hand over as reference!)
+ * @param p12 the details size (Hand over as reference!)
+ * @param p13 the knowledge
+ * @param p14 the knowledge count
+ */
+void get_real_compound_element_by_name(const void* p0, const void* p1,
+    const void* p2, const void* p3, void* p4, void* p5, void* p6,
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12,
+    const void* p13, const void* p14) {
+
+    log_message_debug("Get compound element by encapsulated name.");
+
+    // The abstraction, model, details.
+    void** a = POINTER_NULL_POINTER;
+    void** ac = POINTER_NULL_POINTER;
+    void** as = POINTER_NULL_POINTER;
+    void** m = POINTER_NULL_POINTER;
+    void** mc = POINTER_NULL_POINTER;
+    void** ms = POINTER_NULL_POINTER;
+    void** d = POINTER_NULL_POINTER;
+    void** dc = POINTER_NULL_POINTER;
+    void** ds = POINTER_NULL_POINTER;
+
+    // Get knowledge element name.
+    get_compound_element_by_name(p0, p1,
+        p2, p3,
+        (void*) &a, (void*) &ac, (void*) &as,
+        (void*) &m, (void*) &mc, (void*) &ms,
+        (void*) &d, (void*) &dc, (void*) &ds);
+
+   //check for abstraction knowledge memeory
+    if ( (p4 != POINTER_NULL_POINTER) &&
+         (p5 != POINTER_NULL_POINTER) &&
+         (p6 != POINTER_NULL_POINTER) &&
+         (p7 != POINTER_NULL_POINTER) &&
+         (p8 != POINTER_NULL_POINTER) &&
+         (p9 != POINTER_NULL_POINTER) &&
+         (p10 != POINTER_NULL_POINTER) &&
+         (p11 != POINTER_NULL_POINTER) &&
+         (p12 != POINTER_NULL_POINTER) &&
+         (a != POINTER_NULL_POINTER) &&    
+         (ac != POINTER_NULL_POINTER) &&
+         (as != POINTER_NULL_POINTER) &&
+         (m != POINTER_NULL_POINTER) &&    
+         (mc != POINTER_NULL_POINTER) &&
+         (ms != POINTER_NULL_POINTER) ) 
+    {
+    
+        int r = 0;
+
+        compare_arrays( *a, *ac,
+                        (void*) KNOWLEDGE_MEMORY_ABSTRACTION,
+                        (void*) KNOWLEDGE_MEMORY_ABSTRACTION_COUNT,
+                        &r, (void*) CHARACTER_ARRAY );
+                        
+        if ( r==1 ) {
+
+            // Get knowledge element.
+            get_compound_element_by_name(p13, p14, *m, *mc,
+                p4, p5, p6, p7, p8, p9, p10, p11, p12);
+        }
+        else {
+
+            *(void**)p4  = a;
+            *(void**)p5  = ac;
+            *(void**)p6  = as;
+            *(void**)p7  = m;
+            *(void**)p8  = mc;
+            *(void**)p9  = ms;
+            *(void**)p10 = d;
+            *(void**)p11 = dc;
+            *(void**)p12 = ds;
+        }
+    }
+
+}
+
 
 /* COMPOUND_ACCESSOR_SOURCE */
 #endif
