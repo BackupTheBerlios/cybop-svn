@@ -29,15 +29,15 @@ package cyboi;
  *
  * It represents a category file with all its contents.
  *
- * @version $Revision: 1.3 $ $Date: 2003-07-27 22:50:34 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-07-28 22:15:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Category {
 
-    /** The java object class. */
-    static java.lang.Object java_object_class;
+    /** The java object. */
+    static java.lang.Object java_object;
 
-    /** The category items. */
-    static java.lang.Object[] category_items;
+    /** The items. */
+    static java.lang.Object[] items;
 }
 

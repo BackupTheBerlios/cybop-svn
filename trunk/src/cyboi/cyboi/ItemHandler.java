@@ -29,7 +29,7 @@ package cyboi;
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.18 $ $Date: 2003-07-27 22:50:34 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2003-07-28 22:15:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -233,8 +233,6 @@ class ItemHandler {
 
     /**
      * Initializes the item elements.
-     *
-     * Reads the file of the given category.
      *
      * @param p0 the item
      * @param p1 the category
