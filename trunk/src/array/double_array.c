@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.13 $ $Date: 2004-12-07 11:11:50 $ $Author: rholzmueller $
+ * @version $Revision: 1.14 $ $Date: 2004-12-15 12:50:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -65,7 +65,7 @@ void create_double_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
-        int* c = (int*) p1;
+        int** c = (int**) p1;
 
         if (p0 != NULL_POINTER) {
 
@@ -74,12 +74,16 @@ void create_double_array(void* p0, const void* p1) {
             log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_DOUBLE_ARRAY_MESSAGE, (void*) &CREATE_DOUBLE_ARRAY_MESSAGE_COUNT);
 
             // Determine size as product of element count and type size.
-            int s = *c * DOUBLE_PRIMITIVE_SIZE;
+            int* s = INTEGER_NULL_POINTER;
+            create_integer((void*) &s);
+            *s = **c * DOUBLE_PRIMITIVE_SIZE;
 
             // A minimal space in memory is always allocated,
             // even if the requested size is zero.
             // In other words, a handle to the new instance is always returned.
-            *a = (void*) malloc(s);
+            *a = (void*) malloc(*s);
+
+            destroy_integer((void*) &s);
 
         } else {
 
@@ -102,7 +106,7 @@ void destroy_double_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
-        int* c = (int*) p1;
+        int** c = (int**) p1;
 
         if (p0 != NULL_POINTER) {
 
@@ -133,7 +137,7 @@ void resize_double_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
-        int* c = (int*) p1;
+        int** c = (int**) p1;
 
         if (p0 != NULL_POINTER) {
 
@@ -142,10 +146,14 @@ void resize_double_array(void* p0, const void* p1) {
             log_message((void*) &INFO_LOG_LEVEL, (void*) &RESIZE_DOUBLE_ARRAY_MESSAGE, (void*) &RESIZE_DOUBLE_ARRAY_MESSAGE_COUNT);
 
             // Determine size as product of element count and type size.
-            int s = *c * DOUBLE_PRIMITIVE_SIZE;
+            int* s = INTEGER_NULL_POINTER;
+            create_integer((void*) &s);
+            *s = **c * DOUBLE_PRIMITIVE_SIZE;
 
             // Create a new array with extended size.
-            *a = (void*) realloc(*a, s);
+            *a = (void*) realloc(*a, *s);
+
+            destroy_integer((void*) &s);
 
         } else {
 
@@ -177,11 +185,11 @@ void compare_double_array_elements(const void* p0, const void* p1, const void* p
 
     if (p3 != NULL_POINTER) {
 
-        int* r = (int*) p3;
+        int** r = (int**) p3;
 
         if (p2 != NULL_POINTER) {
 
-            int* c = (int*) p2;
+            int** c = (int**) p2;
 
             if (p1 != NULL_POINTER) {
 
@@ -192,30 +200,34 @@ void compare_double_array_elements(const void* p0, const void* p1, const void* p
                     void** a0 = (void**) p0;
 
                     // The loop variable.
-                    int j = 0;
+                    int* j = INTEGER_NULL_POINTER;
+                    create_integer((void*) &j);
+                    *j = 0;
                     // The first element.
                     double* e0 = DOUBLE_NULL_POINTER;
                     // The second element.
                     double* e1 = DOUBLE_NULL_POINTER;
                     // The size.
-                    int s = 0;
+                    int* s = INTEGER_NULL_POINTER;
+                    create_integer((void*) &s);
+                    *s = 0;
 
                     while (1) {
 
-                        if (j >= *c) {
+                        if (*j >= **c) {
 
                             // All elements have been compared and are equal.
-                            *r = 1;
+                            **r = 1;
 
                             break;
                         }
 
                         // Determine size.
-                        s = j * DOUBLE_PRIMITIVE_SIZE;
+                        *s = *j * DOUBLE_PRIMITIVE_SIZE;
 
                         // Determine the next elements at array plus index.
-                        e0 = (double*) (*a0 + s);
-                        e1 = (double*) (*a1 + s);
+                        e0 = (double*) (*a0 + *s);
+                        e1 = (double*) (*a1 + *s);
 
                         if (*e0 != *e1) {
 
@@ -223,8 +235,11 @@ void compare_double_array_elements(const void* p0, const void* p1, const void* p
                             break;
                         }
 
-                        j++;
+                        (*j)++;
                     }
+
+                    destroy_integer((void*) &s);
+                    destroy_integer((void*) &j);
 
                 } else {
 
@@ -259,7 +274,7 @@ void set_double_array_elements(void* p0, const void* p1, const void* p2, const v
 
     if (p3 != NULL_POINTER) {
 
-        int* c = (int*) p3;
+        int** c = (int**) p3;
 
         if (p2 != NULL_POINTER) {
 
@@ -267,42 +282,49 @@ void set_double_array_elements(void* p0, const void* p1, const void* p2, const v
 
             if (p1 != NULL_POINTER) {
 
-                int* i = (int*) p1;
+                int** i = (int**) p1;
 
                 if (p0 != NULL_POINTER) {
 
                     void** da = (void**) p0;
 
                     // The loop variable.
-                    int j = 0;
+                    int* j = INTEGER_NULL_POINTER;
+                    create_integer((void*) &j);
+                    *j = 0;
                     // The destination base to start copying to.
-                    void* db = (void*) (*da + *i * DOUBLE_PRIMITIVE_SIZE);
+                    void* db = (void*) (*da + **i * DOUBLE_PRIMITIVE_SIZE);
                     // The source element.
                     double* se = DOUBLE_NULL_POINTER;
                     // The destination element.
                     double* de = DOUBLE_NULL_POINTER;
                     // The size.
-                    int s = 0;
+                    int* s = INTEGER_NULL_POINTER;
+                    create_integer((void*) &s);
+                    *s = 0;
 
                     while (1) {
 
-                        if (j >= *c) {
+                        if (*j >= **c) {
 
                             break;
                         }
 
                         // Determine size.
-                        s = j * DOUBLE_PRIMITIVE_SIZE;
+                        *s = *j * DOUBLE_PRIMITIVE_SIZE;
 
                         // Determine source and destination element.
-                        se = (double*) (*sa + s);
-                        de = (double*) (db + s);
+                        se = (double*) (*sa + *s);
+                        de = (double*) (db + *s);
 
                         // Set destination element.
                         *de = *se;
 
-                        j++;
+                        (*j)++;
                     }
+
+                    destroy_integer((void*) &s);
+                    destroy_integer((void*) &j);
 
                 } else {
 
@@ -337,34 +359,40 @@ void remove_double_array_elements(void* p0, const void* p1, const void* p2, cons
 
     if (p3 != NULL_POINTER) {
 
-        int* c = (int*) p3;
+        int** c = (int**) p3;
 
         if (p2 != NULL_POINTER) {
 
-            int* i = (int*) p2;
+            int** i = (int**) p2;
 
             if (p1 != NULL_POINTER) {
 
-                int* m = (int*) p1;
+                int** m = (int**) p1;
 
                 if (p0 != NULL_POINTER) {
 
                     void** a = (void**) p0;
 
                     // The loop variable.
-                    int j = 0;
+                    int* j = INTEGER_NULL_POINTER;
+                    create_integer((void*) &j);
+                    *j = 0;
                     // The remaining elements size.
-                    int r = *m - (*i + *c);
+                    int* r = INTEGER_NULL_POINTER;
+                    create_integer((void*) &r);
+                    *r = **m - (**i + **c);
                     // The destination base.
-                    void* db = (void*) (*a + *i * DOUBLE_PRIMITIVE_SIZE);
+                    void* db = (void*) (*a + **i * DOUBLE_PRIMITIVE_SIZE);
                     // The source base.
-                    void* sb = (void*) (*a + *i * DOUBLE_PRIMITIVE_SIZE + *c * DOUBLE_PRIMITIVE_SIZE);
+                    void* sb = (void*) (*a + **i * DOUBLE_PRIMITIVE_SIZE + **c * DOUBLE_PRIMITIVE_SIZE);
                     // The source element.
                     double* se = DOUBLE_NULL_POINTER;
                     // The destination element.
                     double* de = DOUBLE_NULL_POINTER;
                     // The size.
-                    int s = 0;
+                    int* s = INTEGER_NULL_POINTER;
+                    create_integer((void*) &s);
+                    *s = 0;
 
                     // Starting from the given index, move all remaining elements
                     // one place towards the beginning of the elements.
@@ -375,22 +403,22 @@ void remove_double_array_elements(void* p0, const void* p1, const void* p2, cons
                     // rest = 11 - (4 + 2) = 11 - 6 = 5
                     while (1) {
 
-                        if (j >= r) {
+                        if (*j >= *r) {
 
                             break;
                         }
 
                         // Determine size.
-                        s = j * DOUBLE_PRIMITIVE_SIZE;
+                        *s = *j * DOUBLE_PRIMITIVE_SIZE;
 
                         // Determine source and destination element.
-                        de = (double*) (db + s);
-                        se = (double*) (sb + s);
+                        de = (double*) (db + *s);
+                        se = (double*) (sb + *s);
 
                         // Set destination element.
                         *de = *se;
 
-                        j++;
+                        (*j)++;
                     }
 
                     // Set former last elements to 0.0.
@@ -398,6 +426,10 @@ void remove_double_array_elements(void* p0, const void* p1, const void* p2, cons
                     // its elements are also NOT initialized with ''.
                     // The calling procedure may just cut off the remaining
                     // elements by decreasing the array size (resizing).
+
+                    destroy_integer((void*) &s);
+                    destroy_integer((void*) &r);
+                    destroy_integer((void*) &j);
 
                 } else {
 
@@ -432,7 +464,7 @@ void get_double_array_elements(const void* p0, const void* p1, void* p2, const v
 
     if (p3 != NULL_POINTER) {
 
-        int* c = (int*) p3;
+        int** c = (int**) p3;
 
         if (p2 != NULL_POINTER) {
 
@@ -440,42 +472,49 @@ void get_double_array_elements(const void* p0, const void* p1, void* p2, const v
 
             if (p1 != NULL_POINTER) {
 
-                int* i = (int*) p1;
+                int** i = (int**) p1;
 
                 if (p0 != NULL_POINTER) {
 
                     void** sa = (void**) p0;
 
                     // The loop variable.
-                    int j = 0;
+                    int* j = INTEGER_NULL_POINTER;
+                    create_integer((void*) &j);
+                    *j = 0;
                     // The source base to start copying from.
-                    void* sb = (void*) (*sa + *i * DOUBLE_PRIMITIVE_SIZE);
+                    void* sb = (void*) (*sa + **i * DOUBLE_PRIMITIVE_SIZE);
                     // The source element.
                     double* se = DOUBLE_NULL_POINTER;
                     // The destination element.
                     double* de = DOUBLE_NULL_POINTER;
                     // The size.
-                    int s = 0;
+                    int* s = INTEGER_NULL_POINTER;
+                    create_integer((void*) &s);
+                    *s = 0;
 
                     while (1) {
 
-                        if (j >= *c) {
+                        if (*j >= **c) {
 
                             break;
                         }
 
                         // Determine size.
-                        s = j * DOUBLE_PRIMITIVE_SIZE;
+                        *s = *j * DOUBLE_PRIMITIVE_SIZE;
 
                         // Determine source and destination element.
-                        se = (double*) (sb + s);
-                        de = (double*) (*da + s);
+                        se = (double*) (sb + *s);
+                        de = (double*) (*da + *s);
 
                         // Set destination element.
                         *de = *se;
 
-                        j++;
+                        (*j)++;
                     }
+
+                    destroy_integer((void*) &s);
+                    destroy_integer((void*) &j);
 
                 } else {
 
@@ -514,11 +553,11 @@ void get_double_array_elements_index(const void* p0, const void* p1, const void*
 
     if (p4 != NULL_POINTER) {
 
-        int* i = (int*) p4;
+        int** i = (int**) p4;
 
         if (p3 != NULL_POINTER) {
 
-            int* c = (int*) p3;
+            int** c = (int**) p3;
 
             if (p2 != NULL_POINTER) {
 
@@ -526,49 +565,62 @@ void get_double_array_elements_index(const void* p0, const void* p1, const void*
 
                 if (p1 != NULL_POINTER) {
 
-                    int* m = (int*) p1;
+                    int** m = (int**) p1;
 
                     if (p0 != NULL_POINTER) {
 
                         void** a = (void**) p0;
 
                         // The loop variable.
-                        int j = 0;
+                        int* j = INTEGER_NULL_POINTER;
+                        create_integer((void*) &j);
+                        *j = 0;
                         // The iteration limit.
-                        int l = *m - *c + 1;
+                        int* l = INTEGER_NULL_POINTER;
+                        create_integer((void*) &l);
+                        *l = **m - **c + 1;
                         // The element.
                         void* e = NULL_POINTER;
                         // The comparison result.
-                        int r = 0;
+                        int* r = INTEGER_NULL_POINTER;
+                        create_integer((void*) &r);
+                        *r = 0;
                         // The size.
-                        int s = 0;
+                        int* s = INTEGER_NULL_POINTER;
+                        create_integer((void*) &s);
+                        *s = 0;
 
                         while (1) {
 
-                            if (j >= l) {
+                            if (*j >= *l) {
 
                                 // The element has not been found.
                                 break;
                             }
 
                             // Determine size.
-                            s = j * DOUBLE_PRIMITIVE_SIZE;
+                            *s = *j * DOUBLE_PRIMITIVE_SIZE;
 
                             // Determine element.
                             e = (void*) (*a + s);
 
                             compare_double_array_elements((void*) &e, p2, p3, (void*) &r);
 
-                            if (r == 1) {
+                            if (*r == 1) {
 
                                 // The element has been found.
-                                *i = j;
+                                **i = *j;
 
                                 break;
                             }
 
-                            j++;
+                            (*j)++;
                         }
+
+                        destroy_integer((void*) &s);
+                        destroy_integer((void*) &r);
+                        destroy_integer((void*) &l);
+                        destroy_integer((void*) &j);
 
                     } else {
 
