@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2005-03-18 00:42:08 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-03-18 07:47:57 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -335,6 +335,12 @@ static const char SET_ABSTRACTION_ARRAY[] = {'s', 'e', 't'};
 static const char* SET_ABSTRACTION = SET_ABSTRACTION_ARRAY;
 static const int SET_ABSTRACTION_COUNT_ARRAY[] = {3};
 static const int* SET_ABSTRACTION_COUNT = SET_ABSTRACTION_COUNT_ARRAY;
+
+/** The set property/ assign/ copy abstraction. */
+static const char SET_PROPERTY_ABSTRACTION_ARRAY[] = {'s', 'e', 't', '_', 'p', 'r', 'o', 'p', 'e', 'r', 't', 'y'};
+static const char* SET_PROPERTY_ABSTRACTION = SET_PROPERTY_ABSTRACTION_ARRAY;
+static const int SET_PROPERTY_ABSTRACTION_COUNT_ARRAY[] = {12};
+static const int* SET_PROPERTY_ABSTRACTION_COUNT = SET_PROPERTY_ABSTRACTION_COUNT_ARRAY;
 
 /** The compare abstraction. */
 static const char COMPARE_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'a', 'r', 'e'};

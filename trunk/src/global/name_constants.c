@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-03-11 10:05:52 $ $Author: rholzmueller $
+ * @version $Revision: 1.12 $ $Date: 2005-03-18 07:51:14 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -146,11 +146,18 @@ static const int* MESSAGE_NAME_ABSTRACTION_COUNT = MESSAGE_NAME_ABSTRACTION_COUN
 //
 // Property names names for html.
 //
+
+/** property html_tag */
 static const char HTML_TAG_NAME_ABSTRACTION_ARRAY[] = {'h', 't', 'm', 'l', '_', 't', 'a', 'g' };
 static const char* HTML_TAG_NAME_ABSTRACTION = HTML_TAG_NAME_ABSTRACTION_ARRAY;
 static const int HTML_TAG_NAME_ABSTRACTION_COUNT_ARRAY[] = {8};
 static const int* HTML_TAG_NAME_ABSTRACTION_COUNT = HTML_TAG_NAME_ABSTRACTION_COUNT_ARRAY;
 
+/** property html_tag_properties */
+static const char HTML_TAG_PROPERTIES_NAME_ABSTRACTION_ARRAY[] = {'h', 't', 'm', 'l', '_', 't', 'a', 'g', '_', 'p', 'r', 'o', 'p', 'e', 'r', 't', 'i', 'e', 's' };
+static const char* HTML_TAG_PROPERTIES_NAME_ABSTRACTION = HTML_TAG_PROPERTIES_NAME_ABSTRACTION_ARRAY;
+static const int HTML_TAG_PROPERTIES_NAME_ABSTRACTION_COUNT_ARRAY[] = {19};
+static const int* HTML_TAG_PROPERTIES_NAME_ABSTRACTION_COUNT = HTML_TAG_PROPERTIES_NAME_ABSTRACTION_COUNT_ARRAY;
 
 //
 // Property names operation compare.
@@ -197,6 +204,12 @@ static const char SET_DESTINATION_NAME_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't'
 static const char* SET_DESTINATION_NAME_ABSTRACTION = SET_DESTINATION_NAME_ABSTRACTION_ARRAY;
 static const int SET_DESTINATION_NAME_ABSTRACTION_COUNT_ARRAY[] = {11};
 static const int* SET_DESTINATION_NAME_ABSTRACTION_COUNT = SET_DESTINATION_NAME_ABSTRACTION_COUNT_ARRAY;
+
+/** The destination property name array, pointer, count. */
+static const char SET_DESTINATION_PROPERTY_NAME_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't', 'i', 'n', 'a', 't', 'i', 'o', 'n', '_', 'p', 'r', 'o', 'p', 'e', 'r', 't', 'y' };
+static const char* SET_DESTINATION_PROPERTY_NAME_ABSTRACTION = SET_DESTINATION_PROPERTY_NAME_ABSTRACTION_ARRAY;
+static const int SET_DESTINATION_PROPERTY_NAME_ABSTRACTION_COUNT_ARRAY[] = {20};
+static const int* SET_DESTINATION_PROPERTY_NAME_ABSTRACTION_COUNT = SET_DESTINATION_PROPERTY_NAME_ABSTRACTION_COUNT_ARRAY;
 
 //
 // Property names operation loop.
