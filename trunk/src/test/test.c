@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.37 $ $Date: 2005-01-19 19:31:21 $ $Author: christian $
+ * @version $Revision: 1.38 $ $Date: 2005-01-25 17:49:32 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -603,6 +603,31 @@ void test_knowledge_model(const void* p0, const void* p1) {
     }
 }
 
+void test_compound( void* comp, int* comp_count, int* index){
+  
+    void** n = POINTER_NULL_POINTER;
+    void** nc = POINTER_NULL_POINTER;
+    void** ns = POINTER_NULL_POINTER;
+    void** a = POINTER_NULL_POINTER;
+    void** ac = POINTER_NULL_POINTER;
+    void** as = POINTER_NULL_POINTER;
+    void** m = POINTER_NULL_POINTER;
+    void** mc = POINTER_NULL_POINTER;
+    void** ms = POINTER_NULL_POINTER;
+    void** d = POINTER_NULL_POINTER;
+    void** dc = POINTER_NULL_POINTER;
+    void** ds = POINTER_NULL_POINTER;
+
+    
+    get_compound_element_name_by_index( comp, comp_count, index,
+        &n, &nc, &ns );
+    get_compound_element_by_index( comp, comp_count, index,
+        &a, &ac, &as, &m, &mc, &ms, &d, &dc, &ds );
+    
+    fprintf(stderr, "compound name:        %s\n", (char*) *n);
+    fprintf(stderr, "compound abstraction: %s\n", (char*) *a);
+    fprintf(stderr, "compound model:       %s\n", (char*) *m);
+}
 /**
  * The main test procedure.
  *
