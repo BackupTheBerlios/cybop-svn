@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-09-12 23:04:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -124,18 +124,15 @@ void add_primitives(void* p0, const void* p1, const void* p2, const void* p3, co
  * <part name="add_two_numbers" part_abstraction="operation" part_location="inline"
  *      part_model="add,application.summand1,application.summand2,application.sum"/>
  *
- * @param p0 the signal parameters count
- * @param p1 the parameters
- * @param p2 the parameters counts
- * @param p3 the parameters sizes
- * @param p4 the knowledge
- * @param p5 the knowledge count
- * @param p6 the knowledge size
+ * @param p0 the parameters
+ * @param p1 the parameters count
+ * @param p2 the knowledge
+ * @param p3 the knowledge count
+ * @param p4 the knowledge size
  */
-void add(const void* p0,
-    const void* p1, const void* p2, const void* p3,
-    void* p4, void* p5, void* p6) {
+void add(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
+/*??
     if (p0 != NULL_POINTER) {
 
         int* sc = (int*) p0;
@@ -245,6 +242,7 @@ void add(const void* p0,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
 */
 
+/*??
             //
             // CAUTION! Only addition of primitives with equal type is allowed!
             //
@@ -292,6 +290,7 @@ void add(const void* p0,
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE_COUNT);
     }
+*/
 }
 
 /* ADD_SOURCE */

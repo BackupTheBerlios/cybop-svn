@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.5 $ $Date: 2004-09-12 09:37:12 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-09-12 23:04:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,7 +39,7 @@
 // Signal memory abstraction.
 //
 
-/** The signal memory abstraction array, pointer, count. */
+/** The signal memory abstraction. */
 static const char SIGNAL_MEMORY_ABSTRACTION_ARRAY[] = {'s', 'i', 'g', 'n', 'a', 'l', ' ', 'm', 'e', 'm', 'o', 'r', 'y'};
 static const char* SIGNAL_MEMORY_ABSTRACTION = SIGNAL_MEMORY_ABSTRACTION_ARRAY;
 static const int SIGNAL_MEMORY_ABSTRACTION_COUNT = 8;
@@ -50,7 +50,7 @@ static const int SIGNAL_MEMORY_ABSTRACTION_COUNT = 8;
 // Compound models consist of other compound or primitive models.
 //
 
-/** The compound abstraction array, pointer, count. */
+/** The compound abstraction. */
 static const char COMPOUND_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd'};
 static const char* COMPOUND_ABSTRACTION = COMPOUND_ABSTRACTION_ARRAY;
 static const int COMPOUND_ABSTRACTION_COUNT = 8;
@@ -67,7 +67,7 @@ static const int COMPOUND_ABSTRACTION_COUNT = 8;
 // Operation abstraction.
 //
 
-/** The operation abstraction array, pointer, count. */
+/** The operation abstraction. */
 static const char OPERATION_ABSTRACTION_ARRAY[] = {'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n'};
 static const char* OPERATION_ABSTRACTION = OPERATION_ABSTRACTION_ARRAY;
 static const int OPERATION_ABSTRACTION_COUNT = 9;
@@ -76,42 +76,42 @@ static const int OPERATION_ABSTRACTION_COUNT = 9;
 // Primitive abstractions.
 //
 
-/** The boolean abstraction array, pointer, count. */
+/** The boolean abstraction. */
 static const char BOOLEAN_ABSTRACTION_ARRAY[] = {'b', 'o', 'o', 'l', 'e', 'a', 'n'};
 static const char* BOOLEAN_ABSTRACTION = BOOLEAN_ABSTRACTION_ARRAY;
 static const int BOOLEAN_ABSTRACTION_COUNT = 7;
 
-/** The integer abstraction array, pointer, count. */
+/** The integer abstraction. */
 static const char INTEGER_ABSTRACTION_ARRAY[] = {'i', 'n', 't', 'e', 'g', 'e', 'r'};
 static const char* INTEGER_ABSTRACTION = INTEGER_ABSTRACTION_ARRAY;
 static const int INTEGER_ABSTRACTION_COUNT = 7;
 
-/** The double abstraction array, pointer, count. */
+/** The double abstraction. */
 static const char DOUBLE_ABSTRACTION_ARRAY[] = {'d', 'o', 'u', 'b', 'l', 'e'};
 static const char* DOUBLE_ABSTRACTION = DOUBLE_ABSTRACTION_ARRAY;
 static const int DOUBLE_ABSTRACTION_COUNT = 6;
 
-/** The fraction abstraction array, pointer, count. */
+/** The fraction abstraction. */
 static const char FRACTION_ABSTRACTION_ARRAY[] = {'f', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
 static const char* FRACTION_ABSTRACTION = FRACTION_ABSTRACTION_ARRAY;
 static const int FRACTION_ABSTRACTION_COUNT = 8;
 
-/** The complex abstraction array, pointer, count. */
+/** The complex abstraction. */
 static const char COMPLEX_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'l', 'e', 'x'};
 static const char* COMPLEX_ABSTRACTION = COMPLEX_ABSTRACTION_ARRAY;
 static const int COMPLEX_ABSTRACTION_COUNT = 7;
 
-/** The vector abstraction array, pointer, count. */
+/** The vector abstraction. */
 static const char VECTOR_ABSTRACTION_ARRAY[] = {'v', 'e', 'c', 't', 'o', 'r'};
 static const char* VECTOR_ABSTRACTION = VECTOR_ABSTRACTION_ARRAY;
 static const int VECTOR_ABSTRACTION_COUNT = 6;
 
-/** The string abstraction array, pointer, count. */
+/** The string abstraction. */
 static const char STRING_ABSTRACTION_ARRAY[] = {'s', 't', 'r', 'i', 'n', 'g'};
 static const char* STRING_ABSTRACTION = STRING_ABSTRACTION_ARRAY;
 static const int STRING_ABSTRACTION_COUNT = 6;
 
-/** The time abstraction array, pointer, count. */
+/** The time abstraction. */
 static const char TIME_ABSTRACTION_ARRAY[] = {'t', 'i', 'm', 'e'};
 static const char* TIME_ABSTRACTION = TIME_ABSTRACTION_ARRAY;
 static const int TIME_ABSTRACTION_COUNT = 4;
@@ -120,7 +120,7 @@ static const int TIME_ABSTRACTION_COUNT = 4;
 // Audio abstractions.
 //
 
-/** The mp3 abstraction array, pointer, count. */
+/** The mp3 abstraction. */
 static const char MP3_MODEL_ARRAY[] = {'m', 'p', '3'};
 static const char* MP3_MODEL = MP3_MODEL_ARRAY;
 static const int MP3_ABSTRACTION_COUNT = 3;
@@ -129,17 +129,17 @@ static const int MP3_ABSTRACTION_COUNT = 3;
 // Image abstractions.
 //
 
-/** The jpeg abstraction array, pointer, count. */
+/** The jpeg abstraction. */
 static const char JPEG_ABSTRACTION_ARRAY[] = {'j', 'p', 'e', 'g'};
 static const char* JPEG_ABSTRACTION = JPEG_ABSTRACTION_ARRAY;
 static const int JPEG_ABSTRACTION_COUNT = 4;
 
-/** The gif abstraction array, pointer, count. */
+/** The gif abstraction. */
 static const char GIF_ABSTRACTION_ARRAY[] = {'g', 'i', 'f'};
 static const char* GIF_ABSTRACTION = GIF_ABSTRACTION_ARRAY;
 static const int GIF_ABSTRACTION_COUNT = 3;
 
-/** The bmp abstraction array, pointer, count. */
+/** The bmp abstraction. */
 static const char BMP_ABSTRACTION_ARRAY[] = {'b', 'm', 'p'};
 static const char* BMP_ABSTRACTION = BMP_ABSTRACTION_ARRAY;
 static const int BMP_ABSTRACTION_COUNT = 3;
@@ -148,37 +148,37 @@ static const int BMP_ABSTRACTION_COUNT = 3;
 // Text abstractions.
 //
 
-/** The cybol abstraction array, pointer, count. */
+/** The cybol abstraction. */
 static const char CYBOL_ABSTRACTION_ARRAY[] = {'c', 'y', 'b', 'o', 'l'};
 static const char* CYBOL_ABSTRACTION = CYBOL_ABSTRACTION_ARRAY;
 static const int CYBOL_ABSTRACTION_COUNT = 5;
 
-/** The sgml abstraction array, pointer, count. */
+/** The sgml abstraction. */
 static const char SGML_ABSTRACTION_ARRAY[] = {'s', 'g', 'm', 'l'};
 static const char* SGML_ABSTRACTION = SGML_ABSTRACTION_ARRAY;
 static const int SGML_ABSTRACTION_COUNT = 4;
 
-/** The xml abstraction array, pointer, count. */
+/** The xml abstraction. */
 static const char XML_ABSTRACTION_ARRAY[] = {'x', 'm', 'l'};
 static const char* XML_ABSTRACTION = XML_ABSTRACTION_ARRAY;
 static const int XML_ABSTRACTION_COUNT = 3;
 
-/** The html abstraction array, pointer, count. */
+/** The html abstraction. */
 static const char HTML_ABSTRACTION_ARRAY[] = {'h', 't', 'm', 'l'};
 static const char* HTML_ABSTRACTION = HTML_ABSTRACTION_ARRAY;
 static const int HTML_ABSTRACTION_COUNT = 4;
 
-/** The rtf abstraction array, pointer, count. */
+/** The rtf abstraction. */
 static const char RTF_ABSTRACTION_ARRAY[] = {'r', 't', 'f'};
 static const char* RTF_ABSTRACTION = RTF_ABSTRACTION_ARRAY;
 static const int RTF_ABSTRACTION_COUNT = 3;
 
-/** The tex abstraction array, pointer, count. */
+/** The tex abstraction. */
 static const char TEX_ABSTRACTION_ARRAY[] = {'t', 'e', 'x'};
 static const char* TEX_ABSTRACTION = TEX_ABSTRACTION_ARRAY;
 static const int TEX_ABSTRACTION_COUNT = 3;
 
-/** The healthcare exchange protocol abstraction array, pointer, count. */
+/** The healthcare exchange protocol abstraction. */
 static const char HXP_ABSTRACTION_ARRAY[] = {'h', 'x', 'p'};
 static const char* HXP_ABSTRACTION = HXP_ABSTRACTION_ARRAY;
 static const int HXP_ABSTRACTION_COUNT = 5;
@@ -187,12 +187,12 @@ static const int HXP_ABSTRACTION_COUNT = 5;
 // Video abstractions.
 //
 
-/** The mpeg abstraction array, pointer, count. */
+/** The mpeg abstraction. */
 static const char MPEG_ABSTRACTION_ARRAY[] = {'m', 'p', 'e', 'g'};
 static const char* MPEG_ABSTRACTION = MPEG_ABSTRACTION_ARRAY;
 static const int MPEG_ABSTRACTION_COUNT = 4;
 
-/** The quicktime abstraction array, pointer, count. */
+/** The quicktime abstraction. */
 static const char QT_ABSTRACTION_ARRAY[] = {'q', 't'};
 static const char* QT_ABSTRACTION = QT_ABSTRACTION_ARRAY;
 static const int QT_ABSTRACTION_COUNT = 2;
@@ -201,12 +201,12 @@ static const int QT_ABSTRACTION_COUNT = 2;
 // Application abstractions.
 //
 
-/** The koffice kword abstraction array, pointer, count. */
+/** The koffice kword abstraction. */
 static const char KWD_ABSTRACTION_ARRAY[] = {'k', 'w', 'd'};
 static const char* KWD_ABSTRACTION = KWD_ABSTRACTION_ARRAY;
 static const int KWD_ABSTRACTION_COUNT = 5;
 
-/** The open office writer abstraction array, pointer, count. */
+/** The open office writer abstraction. */
 static const char SXW_ABSTRACTION_ARRAY[] = {'s', 'x', 'w'};
 static const char* SXW_ABSTRACTION = SXW_ABSTRACTION_ARRAY;
 static const int SXW_ABSTRACTION_COUNT = 3;
@@ -216,32 +216,32 @@ static const int SXW_ABSTRACTION_COUNT = 3;
 //?? Sort them into better categories later! See above!
 //??
 
-/** The character/ textual user interface (tui) language array, pointer, count. */
+/** The character/ textual user interface (tui) language. */
 static const char TUI_LANGUAGE_ARRAY[] = {'t', 'u', 'i'};
 static const char* TUI_LANGUAGE = TUI_LANGUAGE_ARRAY;
 static const int TUI_LANGUAGE_COUNT = 3;
 
-/** The mouse language array, pointer, count. */
+/** The mouse language. */
 static const char MOUSE_LANGUAGE_ARRAY[] = {'m', 'o', 'u', 's', 'e'};
 static const char* MOUSE_LANGUAGE = MOUSE_LANGUAGE_ARRAY;
 static const int MOUSE_LANGUAGE_COUNT = 5;
 
-/** The x windows language array, pointer, count. */
+/** The x windows language. */
 static const char X_WINDOWS_LANGUAGE_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', 's'};
 static const char* X_WINDOWS_LANGUAGE = X_WINDOWS_LANGUAGE_ARRAY;
 static const int X_WINDOWS_LANGUAGE_COUNT = 9;
 
-/** The structured query language (sql) array, pointer, count. */
+/** The structured query language (sql). */
 static const char SQL_LANGUAGE_ARRAY[] = {'s', 'q', 'l'};
 static const char* SQL_LANGUAGE = SQL_LANGUAGE_ARRAY;
 static const int SQL_LANGUAGE_COUNT = 3;
 
-/** The tar language array, pointer, count. */
+/** The tar language. */
 static const char TAR_LANGUAGE_ARRAY[] = {'t', 'a', 'r'};
 static const char* TAR_LANGUAGE = TAR_LANGUAGE_ARRAY;
 static const int TAR_LANGUAGE_COUNT = 3;
 
-/** The zip language array, pointer, count. */
+/** The zip language. */
 static const char ZIP_LANGUAGE_ARRAY[] = {'z', 'i', 'p'};
 static const char* ZIP_LANGUAGE = ZIP_LANGUAGE_ARRAY;
 static const int ZIP_LANGUAGE_COUNT = 3;
@@ -258,12 +258,12 @@ static const int ZIP_LANGUAGE_COUNT = 3;
 // Boolean logic abstractions.
 //
 
-/** The and abstraction array, pointer, count. */
+/** The and abstraction. */
 static const char AND_ABSTRACTION_ARRAY[] = {'a', 'n', 'd'};
 static const char* AND_ABSTRACTION = AND_ABSTRACTION_ARRAY;
 static const int AND_ABSTRACTION_COUNT = 3;
 
-/** The or abstraction array, pointer, count. */
+/** The or abstraction. */
 static const char OR_ABSTRACTION_ARRAY[] = {'o', 'r'};
 static const char* OR_ABSTRACTION = OR_ABSTRACTION_ARRAY;
 static const int OR_ABSTRACTION_COUNT = 2;
@@ -272,27 +272,27 @@ static const int OR_ABSTRACTION_COUNT = 2;
 // Comparison abstractions.
 //
 
-/** The equal abstraction array, pointer, count. */
+/** The equal abstraction. */
 static const char EQUAL_ABSTRACTION_ARRAY[] = {'e', 'q', 'u', 'a', 'l'};
 static const char* EQUAL_ABSTRACTION = EQUAL_ABSTRACTION_ARRAY;
 static const int EQUAL_ABSTRACTION_COUNT = 5;
 
-/** The smaller abstraction array, pointer, count. */
+/** The smaller abstraction. */
 static const char SMALLER_ABSTRACTION_ARRAY[] = {'s', 'm', 'a', 'l', 'l', 'e', 'r'};
 static const char* SMALLER_ABSTRACTION = SMALLER_ABSTRACTION_ARRAY;
 static const int SMALLER_ABSTRACTION_COUNT = 7;
 
-/** The greater abstraction array, pointer, count. */
+/** The greater abstraction. */
 static const char GREATER_ABSTRACTION_ARRAY[] = {'g', 'r', 'e', 'a', 't', 'e', 'r'};
 static const char* GREATER_ABSTRACTION = GREATER_ABSTRACTION_ARRAY;
 static const int GREATER_ABSTRACTION_COUNT = 7;
 
-/** The smaller or equal abstraction array, pointer, count. */
+/** The smaller or equal abstraction. */
 static const char SMALLER_OR_EQUAL_ABSTRACTION_ARRAY[] = {'s', 'm', 'a', 'l', 'l', 'e', 'r', '_', 'o', 'r', '_', 'e', 'q', 'u', 'a', 'l'};
 static const char* SMALLER_OR_EQUAL_ABSTRACTION = SMALLER_OR_EQUAL_ABSTRACTION_ARRAY;
 static const int SMALLER_OR_EQUAL_ABSTRACTION_COUNT = 16;
 
-/** The greater or equal abstraction array, pointer, count. */
+/** The greater or equal abstraction. */
 static const char GREATER_OR_EQUAL_ABSTRACTION_ARRAY[] = {'g', 'r', 'e', 'a', 't', 'e', 'r', '_', 'o', 'r', '_', 'e', 'q', 'u', 'a', 'l'};
 static const char* GREATER_OR_EQUAL_ABSTRACTION = GREATER_OR_EQUAL_ABSTRACTION_ARRAY;
 static const int GREATER_OR_EQUAL_ABSTRACTION_COUNT = 16;
@@ -301,22 +301,37 @@ static const int GREATER_OR_EQUAL_ABSTRACTION_COUNT = 16;
 // Arithmetic abstractions.
 //
 
-/** The add abstraction array, pointer, count. */
+/** The add abstraction. */
 static const char ADD_ABSTRACTION_ARRAY[] = {'a', 'd', 'd'};
 static const char* ADD_ABSTRACTION = ADD_ABSTRACTION_ARRAY;
 static const int ADD_ABSTRACTION_COUNT = 3;
 
-/** The subtract abstraction array, pointer, count. */
+/** The add summand 1 abstraction. */
+static const char ADD_SUMMAND_1_ABSTRACTION_ARRAY[] = {'s', 'u', 'm', 'm', 'a', 'n', 'd', '_', '1'};
+static const char* ADD_SUMMAND_1_ABSTRACTION = ADD_SUMMAND_1_ABSTRACTION_ARRAY;
+static const int ADD_SUMMAND_1_ABSTRACTION_COUNT = 9;
+
+/** The add summand 2 abstraction. */
+static const char ADD_SUMMAND_2_ABSTRACTION_ARRAY[] = {'s', 'u', 'm', 'm', 'a', 'n', 'd', '_', '2'};
+static const char* ADD_SUMMAND_2_ABSTRACTION = ADD_SUMMAND_2_ABSTRACTION_ARRAY;
+static const int ADD_SUMMAND_2_ABSTRACTION_COUNT = 9;
+
+/** The add sum abstraction. */
+static const char ADD_SUM_ABSTRACTION_ARRAY[] = {'s', 'u', 'm'};
+static const char* ADD_SUM_ABSTRACTION = ADD_SUM_ABSTRACTION_ARRAY;
+static const int ADD_SUM_ABSTRACTION_COUNT = 3;
+
+/** The subtract abstraction. */
 static const char SUBTRACT_ABSTRACTION_ARRAY[] = {'s', 'u', 'b', 't', 'r', 'a', 'c', 't'};
 static const char* SUBTRACT_ABSTRACTION = SUBTRACT_ABSTRACTION_ARRAY;
 static const int SUBTRACT_ABSTRACTION_COUNT = 8;
 
-/** The multiply abstraction array, pointer, count. */
+/** The multiply abstraction. */
 static const char MULTIPLY_ABSTRACTION_ARRAY[] = {'m', 'u', 'l', 't', 'i', 'p', 'l', 'y'};
 static const char* MULTIPLY_ABSTRACTION = MULTIPLY_ABSTRACTION_ARRAY;
 static const int MULTIPLY_ABSTRACTION_COUNT = 8;
 
-/** The divide abstraction array, pointer, count. */
+/** The divide abstraction. */
 static const char DIVIDE_ABSTRACTION_ARRAY[] = {'d', 'i', 'v', 'i', 'd', 'e'};
 static const char* DIVIDE_ABSTRACTION = DIVIDE_ABSTRACTION_ARRAY;
 static const int DIVIDE_ABSTRACTION_COUNT = 6;
@@ -325,26 +340,46 @@ static const int DIVIDE_ABSTRACTION_COUNT = 6;
 // Memory management abstractions.
 //
 
-/** The create model abstraction array, pointer, count. */
-static const char CREATE_MODEL_ABSTRACTION_ARRAY[] = {'c', 'r', 'e', 'a', 't', 'e'};
-static const char* CREATE_MODEL_ABSTRACTION = CREATE_MODEL_ABSTRACTION_ARRAY;
-static const int CREATE_MODEL_ABSTRACTION_COUNT = 6;
+/** The create part abstraction. */
+static const char CREATE_PART_ABSTRACTION_ARRAY[] = {'c', 'r', 'e', 'a', 't', 'e', '_', 'p', 'a', 'r', 't'};
+static const char* CREATE_PART_ABSTRACTION = CREATE_PART_ABSTRACTION_ARRAY;
+static const int CREATE_PART_ABSTRACTION_COUNT = 11;
 
-/** The destroy model abstraction array, pointer, count. */
-static const char DESTROY_MODEL_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't', 'r', 'o', 'y'};
-static const char* DESTROY_MODEL_ABSTRACTION = DESTROY_MODEL_ABSTRACTION_ARRAY;
-static const int DESTROY_MODEL_ABSTRACTION_COUNT = 7;
+/** The destroy part abstraction. */
+static const char DESTROY_PART_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't', 'r', 'o', 'y', '_', 'p', 'a', 'r', 't'};
+static const char* DESTROY_PART_ABSTRACTION = DESTROY_PART_ABSTRACTION_ARRAY;
+static const int DESTROY_PART_ABSTRACTION_COUNT = 12;
+
+/** The create/destroy part name abstraction. */
+static const char CREATE_DESTROY_PART_NAME_ABSTRACTION_ARRAY[] = {'n', 'a', 'm', 'e'};
+static const char* CREATE_DESTROY_PART_NAME_ABSTRACTION = CREATE_DESTROY_PART_NAME_ABSTRACTION_ARRAY;
+static const int CREATE_DESTROY_PART_NAME_ABSTRACTION_COUNT = 4;
+
+/** The create/destroy part channel abstraction. */
+static const char CREATE_DESTROY_PART_CHANNEL_ABSTRACTION_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
+static const char* CREATE_DESTROY_PART_CHANNEL_ABSTRACTION = CREATE_DESTROY_PART_CHANNEL_ABSTRACTION_ARRAY;
+static const int CREATE_DESTROY_PART_CHANNEL_ABSTRACTION_COUNT = 7;
+
+/** The create/destroy part abstraction abstraction. */
+static const char CREATE_DESTROY_PART_ABSTRACTION_ABSTRACTION_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
+static const char* CREATE_DESTROY_PART_ABSTRACTION_ABSTRACTION = CREATE_DESTROY_PART_ABSTRACTION_ABSTRACTION_ARRAY;
+static const int CREATE_DESTROY_PART_ABSTRACTION_ABSTRACTION_COUNT = 11;
+
+/** The create/destroy part model abstraction. */
+static const char CREATE_DESTROY_PART_MODEL_ABSTRACTION_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
+static const char* CREATE_DESTROY_PART_MODEL_ABSTRACTION = CREATE_DESTROY_PART_MODEL_ABSTRACTION_ARRAY;
+static const int CREATE_DESTROY_PART_MODEL_ABSTRACTION_COUNT = 5;
 
 //
 // Input output abstractions.
 //
 
-/** The send abstraction array, pointer, count. */
+/** The send abstraction. */
 static const char SEND_ABSTRACTION_ARRAY[] = {'s', 'e', 'n', 'd'};
 static const char* SEND_ABSTRACTION = SEND_ABSTRACTION_ARRAY;
 static const int SEND_ABSTRACTION_COUNT = 4;
 
-/** The receive abstraction array, pointer, count. */
+/** The receive abstraction. */
 static const char RECEIVE_ABSTRACTION_ARRAY[] = {'r', 'e', 'c', 'e', 'i', 'v', 'e'};
 static const char* RECEIVE_ABSTRACTION = RECEIVE_ABSTRACTION_ARRAY;
 static const int RECEIVE_ABSTRACTION_COUNT = 7;
@@ -353,7 +388,7 @@ static const int RECEIVE_ABSTRACTION_COUNT = 7;
 // Lifecycle step abstractions.
 //
 
-/** The exit abstraction array, pointer, count. */
+/** The exit abstraction. */
 static const char EXIT_ABSTRACTION_ARRAY[] = {'e', 'x', 'i', 't'};
 static const char* EXIT_ABSTRACTION = EXIT_ABSTRACTION_ARRAY;
 static const int EXIT_ABSTRACTION_COUNT = 4;

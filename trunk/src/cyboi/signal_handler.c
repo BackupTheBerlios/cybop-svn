@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2004-09-12 09:37:12 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-09-12 23:04:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -155,8 +155,8 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
     // The comparison result.
     int r = 0;
 
-    fprintf(stderr, "TEST logic: %s\n", *((char**) p0));
-    fprintf(stderr, "TEST logic count: %i\n", *((int*) p1));
+    fprintf(stderr, "TEST operation: %s\n", *((char**) p0));
+    fprintf(stderr, "TEST operation count: %i\n", *((int*) p1));
 
     if (d == 0) {
 
@@ -164,7 +164,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-//??            add(p1, p2, p3, (void*) &ps, p4, p5, p6);
+            add(p2, p3, p4, p5, p6);
 
             d = 1;
         }
@@ -172,11 +172,11 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
     if (d == 0) {
 
-        compare_arrays(p0, p1, (void*) &CREATE_MODEL_ABSTRACTION, (void*) &CREATE_MODEL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p0, p1, (void*) &CREATE_PART_ABSTRACTION, (void*) &CREATE_PART_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
         if (r == 1) {
 
-//??            handle_create(p1, p2, p3, (void*) &ps, p4, p5, p6);
+            create_part(p2, p3, p4, p5, p6);
 
             d = 1;
         }
@@ -184,7 +184,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
     if (d == 0) {
 
-        compare_arrays(p0, p1, (void*) &DESTROY_MODEL_ABSTRACTION, (void*) &DESTROY_MODEL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+        compare_arrays(p0, p1, (void*) &DESTROY_PART_ABSTRACTION, (void*) &DESTROY_PART_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
         if (r == 1) {
 

@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.12 $ $Date: 2004-09-12 18:51:00 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-09-12 23:04:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -381,189 +381,144 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 }
 
 /**
- * Creates a transient copy of a persistent source.
+ * Creates a part and adds it to the knowledge model.
  *
- * CYBOL Examples:
+ * Expected parameters:
+ * - name
+ * - channel
+ * - abstraction
+ * - model
  *
- * <!-- Operation parameters (as value of part_model tag):
- *      logic name,whole name,part name,
- *      part abstraction,part location,part model,part constraints,
- *      position abstraction,position location,position model,position constraints /-->
- *
- * <part name="create_domain" part_abstraction="operation" part_location="inline"
- *      part_model="create,,domain,compound,file,/helloworld/domain.cybol,null,null,null,null,null"/>
- *
- * <part name="create_find_dialog" part_abstraction="operation" part_location="inline"
- *      part_model="create,application.gui,find_dialog,compound,file,application/find_dialog.cybol,,
- *          vector,inline,100;100;0,x<1000;y<1000;z=0"/>
- *
- * @param p0 the signal parameters count
- * @param p1 the parameters
- * @param p2 the parameters counts
- * @param p3 the parameters sizes
- * @param p4 the knowledge
- * @param p5 the knowledge count
- * @param p6 the knowledge size
+ * @param p0 the parameters
+ * @param p1 the parameters count
+ * @param p2 the knowledge
+ * @param p3 the knowledge count
+ * @param p4 the knowledge size
  */
-void handle_create(const void* p0, const void* p1, const void* p2, const void* p3,
-    void* p4, void* p5, void* p6) {
-
-    if (p6 != NULL_POINTER) {
-
-        int* ks = (int*) p6;
-
-        if (p5 != NULL_POINTER) {
-
-            int* kc = (int*) p5;
-
-            if (p4 != NULL_POINTER) {
-
-                void** k = (void**) p4;
-
-                if (p0 != NULL_POINTER) {
-
-                    int* sc = (int*) p0;
-
-                    if (*sc == 11) {
-
-                        // The persistent whole name.
-                        void* pwn = NULL_POINTER;
-                        int pwnc = 0;
-                        int pwns = 0;
-
-                        // Initialize persistent part name,
-                        // part abstraction, location, model, constraint.
-                        void* ppn = NULL_POINTER;
-                        int ppnc = 0;
-                        int ppns = 0;
-                        void* ppa = NULL_POINTER;
-                        int ppac = 0;
-                        int ppas = 0;
-                        void* ppl = NULL_POINTER;
-                        int pplc = 0;
-                        int ppls = 0;
-                        void* ppm = NULL_POINTER;
-                        int ppmc = 0;
-                        int ppms = 0;
-                        void* ppc = NULL_POINTER;
-                        int ppcc = 0;
-                        int ppcs = 0;
-
-                        // CAUTION! The parameter at index 0 is the logic/ operation name.
-                        // Input and output parameters start with index 1.
-
-                        // The loop variable.
-                        int j = 1;
-
-                        while (1) {
-
-                            if (j >= *sc) {
-
-                                break;
-                            }
-
-                            // CAUTION! The parameter at index 0 is the logic/ operation name.
-                            // Input and output parameters start with index 1.
-
-                            if (j == 1) {
-
-                                // Get persistent whole name and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &pwn);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pwnc);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pwns);
-
-                            } else if (j == 2) {
-
-                                // Get persistent part name and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ppn);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppnc);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppns);
-
-                            } else if (j == 3) {
-
-                                // Get persistent part abstraction and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ppa);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppac);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppas);
-
-                            } else if (j == 4) {
-
-                                // Get persistent part location and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ppl);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &pplc);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppls);
-
-                            } else if (j == 5) {
-
-                                // Get persistent part model and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ppm);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppmc);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppms);
-
-                            } else if (j == 6) {
-
-                                // Get persistent part constraints and its count and size.
-                                get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ppc);
-                                get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppcc);
-                                get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ppcs);
-                            }
-
-                            j++;
-                        }
-
-                        // The transient whole model.
-                        void* twm = NULL_POINTER;
-                        int twmc = 0;
-                        int twms = 0;
-
-                        // Get transient whole model.
-                        if (pwn == NULL_POINTER) {
-
-                            // If the persistent whole model name is null, the
-                            // knowledge root is taken as transient whole model.
-                            twm = *k;
-                            twmc = *kc;
-                            twms = *ks;
-
-                        } else {
+void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
 /*??
-                            // If a persistent whole model name exists, the transient
-                            // whole model is determined within the knowledge root.
-                            // Abstraction and constraints as well as the model's
-                            // position within the knowledge root are not of interest.
-                            get_compound_element_by_name(p4, p5, p6,
-                                (void*) &pwn, (void*) &pwnc, (void*) &pwns,
-                                (void*) &twm, (void*) &twmc, (void*) &twms,
-                                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
+    // The source name abstraction.
+    void* sna = NULL_POINTER;
+    int snac = 0;
+    int snas = 0;
+    // The source name model.
+    void* snm = NULL_POINTER;
+    int snmc = 0;
+    int snms = 0;
+    // The source name details.
+    void* snd = NULL_POINTER;
+    int sndc = 0;
+    int snds = 0;
+
+    // The source channel abstraction.
+    void* sca = NULL_POINTER;
+    int scac = 0;
+    int scas = 0;
+    // The source channel model.
+    void* scm = NULL_POINTER;
+    int scmc = 0;
+    int scms = 0;
+    // The source channel details.
+    void* scd = NULL_POINTER;
+    int scdc = 0;
+    int scds = 0;
+
+    // The source abstraction abstraction.
+    void* saa = NULL_POINTER;
+    int saac = 0;
+    int saas = 0;
+    // The source abstraction model.
+    void* sam = NULL_POINTER;
+    int samc = 0;
+    int sams = 0;
+    // The source abstraction details.
+    void* sad = NULL_POINTER;
+    int sadc = 0;
+    int sads = 0;
+
+    // The source model abstraction.
+    void* sma = NULL_POINTER;
+    int smac = 0;
+    int smas = 0;
+    // The source model model.
+    void* smm = NULL_POINTER;
+    int smmc = 0;
+    int smms = 0;
+    // The source model details.
+    void* smd = NULL_POINTER;
+    int smdc = 0;
+    int smds = 0;
+
+    // The destination name.
+    void* dn = NULL_POINTER;
+    int dnc = 0;
+    int dns = 0;
+    // The destination abstraction.
+    void* da = NULL_POINTER;
+    int dac = 0;
+    int das = 0;
+    // The destination model.
+    void* dm = NULL_POINTER;
+    int dmc = 0;
+    int dms = 0;
+    // The destination details.
+    void* dd = NULL_POINTER;
+    int ddc = 0;
+    int dds = 0;
+
+    // Get source name.
+    get_compound_element_by_name(p0, p1,
+        (void*) &CREATE_DESTROY_PART_NAME_ABSTRACTION,
+        (void*) &CREATE_DESTROY_PART_NAME_ABSTRACTION_COUNT,
+        sna, snac, snm, snmc, snd, sndc);
+
+    // Get source channel.
+    get_compound_element_by_name(p0, p1,
+        (void*) &CREATE_DESTROY_PART_CHANNEL_ABSTRACTION,
+        (void*) &CREATE_DESTROY_PART_CHANNEL_ABSTRACTION_COUNT,
+        sca, scac, scm, scmc, scd, scdc);
+
+    // Get source abstraction.
+    get_compound_element_by_name(p0, p1,
+        (void*) &CREATE_DESTROY_PART_ABSTRACTION_ABSTRACTION,
+        (void*) &CREATE_DESTROY_PART_ABSTRACTION_ABSTRACTION_COUNT,
+        saa, saac, sam, samc, sad, sadc);
+
+    // Get source model.
+    get_compound_element_by_name(p0, p1,
+        (void*) &CREATE_DESTROY_PART_MODEL_ABSTRACTION,
+        (void*) &CREATE_DESTROY_PART_MODEL_ABSTRACTION_COUNT,
+        sma, smac, smm, smmc, smd, smdc);
+
+    // Create destination name.
+    create_model((void*) &dn, (void*) &dnc, (void*) &dns,
+        (void*) &sn, (void*) &snc,
+        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
+        (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+
+    // CAUTION! A (transient) destination channel is not created,
+    // since that is only needed temporarily for model loading.
+
+    // Create destination abstraction.
+    create_model((void*) &da, (void*) &dac, (void*) &das,
+        (void*) &sa, (void*) &sac,
+        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
+        (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+
+    // Create destination model.
+    create_model((void*) &dm, (void*) &dmc, (void*) &dms,
+        (void*) &sm, (void*) &smc,
+        (void*) &sa, (void*) &sac,
+        (void*) &sc, (void*) &scc);
+
+    // Add part to whole.
+    set_compound_element_by_name(p2, p3, p4,
+        (void*) &dn, (void*) &dnc, (void*) &dns,
+        (void*) &da, (void*) &dac, (void*) &das,
+        (void*) &dm, (void*) &dmc, (void*) &dms,
+        (void*) &dd, (void*) &ddc, (void*) &dds);
 */
-                        }
-
-                    } else {
-
-//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_DOES_NOT_MATCH_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_DOES_NOT_MATCH_MESSAGE_COUNT);
-                    }
-
-                } else {
-
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_SIGNAL_PARAMETERS_COUNT_IS_NULL_MESSAGE_COUNT);
-                }
-
-            } else {
-
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_IS_NULL_MESSAGE_COUNT);
-            }
-
-        } else {
-
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_COUNT_IS_NULL_MESSAGE_COUNT);
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
-    }
 }
 
 /* CREATE_SOURCE */

@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.10 $ $Date: 2004-08-13 07:22:34 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-09-12 23:04:40 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -109,9 +109,6 @@ void destroy_double_array(void* p0, const void* p1) {
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_DOUBLE_ARRAY_MESSAGE, (void*) &DESTROY_DOUBLE_ARRAY_MESSAGE_COUNT);
 
-            //?? TODO: Destroy all array elements in a loop??
-            //?? Which is the same as Garbage Collection!
-            //?? SEE: signal_memory
             free(*a);
 
         } else {
