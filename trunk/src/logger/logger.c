@@ -28,7 +28,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.11 $ $Date: 2004-12-17 12:48:43 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-12-18 00:56:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,7 +55,7 @@ void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
-        int* dc = (int*) p3;
+        int** dc = (int**) p3;
 
         if (p2 != NULL_POINTER) {
 
@@ -78,7 +78,7 @@ void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
 
                     while (1) {
 
-                        if (j >= *dc) {
+                        if (j >= **dc) {
 
                             break;
                         }
@@ -116,31 +116,6 @@ void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
 }
 
 /**
- * Adds the log detail.
- *
- * @param p0 the log entry
- * @param p1 the log entry index
- * @param p2 the log details
- */
-void add_log_detail(void* p0, const void* p1, const void* p2) {
-
-    // The detail count.
-    int dc = 1;
-
-    // The element p2 needs to be handed over as array to add_log_details.
-    // Therefore, it has to be transformed into a pointer.
-    // Example 1:
-    // - array p0: char* handed over as char**
-    // - element p2: single char handed over as char*
-    // - the element of type char* gets transformed to type char** with &p2
-    // Example 2:
-    // - array p0: char** handed over as char***
-    // - element p2: string char* handed over as char**
-    // - the element of type char** gets transformed to type char*** with &p2
-    add_log_details(p0, p1, (void*) &p2, (void*) &dc);
-}
-
-/**
  * Adds the log level name.
  *
  * @param p0 the log level
@@ -160,15 +135,15 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
 
         if (p2 != NULL_POINTER) {
 
-            int* ec = (int*) p2;
+            int** ec = (int**) p2;
 
             if (p0 != NULL_POINTER) {
 
-                int* l = (int*) p0;
+                int** l = (int**) p0;
 
-                if (*l == DEBUG_LOG_LEVEL) {
+                if (**l == DEBUG_LOG_LEVEL) {
 
-                    if ((*ei + DEBUG_LOG_LEVEL_NAME_COUNT) < *ec) {
+                    if ((*ei + DEBUG_LOG_LEVEL_NAME_COUNT) < **ec) {
 
                         add_log_details(p1, p3, (void*) &DEBUG_LOG_LEVEL_NAME, (void*) &DEBUG_LOG_LEVEL_NAME_COUNT);
                         *ei = *ei + DEBUG_LOG_LEVEL_NAME_COUNT;
@@ -177,10 +152,10 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
 
                         fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
                     }
-                }
-                else if (*l == INFO_LOG_LEVEL) {
 
-                    if ((*ei + INFO_LOG_LEVEL_NAME_COUNT) < *ec) {
+                } else if (**l == INFO_LOG_LEVEL) {
+
+                    if ((*ei + INFO_LOG_LEVEL_NAME_COUNT) < **ec) {
 
                         add_log_details(p1, p3, (void*) &INFO_LOG_LEVEL_NAME, (void*) &INFO_LOG_LEVEL_NAME_COUNT);
                         *ei = *ei + INFO_LOG_LEVEL_NAME_COUNT;
@@ -190,9 +165,9 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
                         fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
                     }
 
-                } else if (*l == WARNING_LOG_LEVEL) {
+                } else if (**l == WARNING_LOG_LEVEL) {
 
-                    if ((*ei + WARNING_LOG_LEVEL_NAME_COUNT) < *ec) {
+                    if ((*ei + WARNING_LOG_LEVEL_NAME_COUNT) < **ec) {
 
                         add_log_details(p1, p3, (void*) &WARNING_LOG_LEVEL_NAME, (void*) &WARNING_LOG_LEVEL_NAME_COUNT);
                         *ei = *ei + WARNING_LOG_LEVEL_NAME_COUNT;
@@ -202,9 +177,9 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
                         fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
                     }
 
-                } else if (*l == ERROR_LOG_LEVEL) {
+                } else if (**l == ERROR_LOG_LEVEL) {
 
-                    if ((*ei + ERROR_LOG_LEVEL_NAME_COUNT) < *ec) {
+                    if ((*ei + ERROR_LOG_LEVEL_NAME_COUNT) < **ec) {
 
                         add_log_details(p1, p3, (void*) &ERROR_LOG_LEVEL_NAME, (void*) &ERROR_LOG_LEVEL_NAME_COUNT);
                         *ei = *ei + ERROR_LOG_LEVEL_NAME_COUNT;
@@ -246,30 +221,30 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
     if (p2 != NULL_POINTER) {
 
-        int* mc = (int*) p2;
+        int** mc = (int**) p2;
 
         if (p0 != NULL_POINTER) {
 
-            int* l = (int*) p0;
+            int** l = (int**) p0;
 
             // Only log message if log level matches.
-            if (*l <= LOG_LEVEL) {
+            if (**l <= LOG_LEVEL) {
 
                 // The log entry.
                 void* e = NULL_POINTER;
                 // The log entry count.
-                const int ec = MAXIMUM_LOG_MESSAGE_COUNT;
+                const int* ec = MAXIMUM_LOG_MESSAGE_COUNT;
                 // The log entry index for adding characters.
                 int ei = 0;
 
                 // Create log entry.
-                e = (void*) malloc(ec);
+                e = (void*) malloc(*ec);
 
                 // Add name of the given log level to log entry.
                 add_log_level_name(p0, (void*) &e, (void*) &ec, (void*) &ei);
 
                 // Add colon to log entry.
-                if ((ei + 1) < ec) {
+                if ((ei + 1) < *ec) {
 
                     add_log_detail((void*) &e, (void*) &ei, (void*) &COLON_CHARACTER);
                     ei = ei + 1;
@@ -280,7 +255,7 @@ void log_message(const void* p0, const void* p1, const void* p2) {
                 }
 
                 // Add space to log entry.
-                if ((ei + 1) < ec) {
+                if ((ei + 1) < *ec) {
 
                     add_log_detail((void*) &e, (void*) &ei, (void*) &SPACE_CHARACTER);
                     ei = ei + 1;
@@ -291,10 +266,10 @@ void log_message(const void* p0, const void* p1, const void* p2) {
                 }
 
                 // Add message to log entry.
-                if ((ei + *mc) < ec) {
+                if ((ei + **mc) < *ec) {
 
                     add_log_details((void*) &e, (void*) &ei, p1, p2);
-                    ei = ei + *mc;
+                    ei = ei + **mc;
 
                 } else {
 
@@ -302,7 +277,7 @@ void log_message(const void* p0, const void* p1, const void* p2) {
                 }
 
                 // Add new line to log entry.
-                if ((ei + 1) < ec) {
+                if ((ei + 1) < *ec) {
 
                     add_log_detail((void*) &e, (void*) &ei, (void*) &LINE_FEED_CONTROL_CHARACTER);
                     ei = ei + 1;
@@ -313,7 +288,7 @@ void log_message(const void* p0, const void* p1, const void* p2) {
                 }
 
                 // Add string termination to log entry.
-                if ((ei + 1) < ec) {
+                if ((ei + 1) < *ec) {
 
                     add_log_detail((void*) &e, (void*) &ei, (void*) &NULL_CONTROL_CHARACTER);
                     ei = ei + 1;
@@ -342,20 +317,17 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 }
 
 /**
- * Logs the message for debug
+ * Logs the message for debugging.
  *
- * author: rolf
- *
- * @param pMessage message for logging, this is a null terminated string
- *                 for simple logging debug infos
+ * @author: Rolf Holzmueller
+ * @param m the log message as null terminated string
  */
+void log_message_debug(const char* m) {
 
-void log_message_debug(const char* pMessage) {
+    // The message count.
+    int c = strlen(m);
 
-    int message_count = strlen(pMessage);
-    log_message( (void*) &DEBUG_LOG_LEVEL,
-                 (void*) &pMessage,
-                 (void*) &message_count );
+    log_message((void*) &DEBUG_LOG_LEVEL, (void*) &m, (void*) &c);
 }
 
 /* LOGGER_SOURCE */
