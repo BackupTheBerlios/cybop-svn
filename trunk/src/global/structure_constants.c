@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.2 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -126,25 +126,6 @@ static const int REAL_INDEX = 0;
 static const int IMAGINARY_INDEX = 1;
 
 //
-// Operation.
-//
-
-/** The operation resize factor. */
-static const int OPERATION_RESIZE_FACTOR = 2;
-
-/** The operation count. */
-static const int OPERATION_COUNT = 3;
-
-/** The parameters index. */
-static const int PARAMETERS_INDEX = 0;
-
-/** The parameters counts index. */
-static const int PARAMETERS_COUNTS_INDEX = 1;
-
-/** The parameters sizes index. */
-static const int PARAMETERS_SIZES_INDEX = 2;
-
-//
 // Compound.
 //
 
@@ -198,22 +179,28 @@ static const int DETAILS_SIZES_INDEX = 11;
 static const int SIGNAL_MEMORY_RESIZE_FACTOR = 2;
 
 /** The signal memory count. */
-static const int SIGNAL_MEMORY_COUNT = 5;
-
-/** The signals models index. */
-static const int SIGNALS_MODELS_INDEX = 0;
-
-/** The signals models counts index. */
-static const int SIGNALS_MODELS_COUNTS_INDEX = 1;
-
-/** The signals priorities index. */
-static const int SIGNALS_PRIORITIES_INDEX = 2;
+static const int SIGNAL_MEMORY_COUNT = 7;
 
 /** The signals abstractions index. */
-static const int SIGNALS_ABSTRACTIONS_INDEX = 3;
+static const int SIGNALS_ABSTRACTIONS_INDEX = 0;
 
 /** The signals abstractions counts index. */
-static const int SIGNALS_ABSTRACTIONS_COUNTS_INDEX = 4;
+static const int SIGNALS_ABSTRACTIONS_COUNTS_INDEX = 1;
+
+/** The signals models index. */
+static const int SIGNALS_MODELS_INDEX = 2;
+
+/** The signals models counts index. */
+static const int SIGNALS_MODELS_COUNTS_INDEX = 3;
+
+/** The signals details index. */
+static const int SIGNALS_DETAILS_INDEX = 4;
+
+/** The signals details counts index. */
+static const int SIGNALS_DETAILS_COUNTS_INDEX = 5;
+
+/** The signals priorities index. */
+static const int SIGNALS_PRIORITIES_INDEX = 6;
 
 //
 // Xml tag.

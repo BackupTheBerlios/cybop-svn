@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.34 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,7 +39,6 @@
 #include "../accessor/signal_memory_accessor.c"
 #include "../communicator/communicator.c"
 #include "../creator/creator.c"
-#include "../creator/signal_memory_creator.c"
 #include "../cyboi/character_internals.c"
 #include "../cyboi/double_internals.c"
 #include "../cyboi/integer_internals.c"
@@ -205,16 +204,16 @@ int main(int p0, char** p1) {
             create_double_internals((void*) &di, (void*) &DOUBLE_INTERNALS_COUNT);
 
             //
-            // Signal container.
+            // Signal memory.
             //
 
-            // The signal container and its count and size.
-            void* s = NULL_POINTER;
-            int sc = 0;
-            int ss = 0;
+            // The signal memory and its count and size.
+            void* m = NULL_POINTER;
+            int mc = 0;
+            int ms = 0;
 
             // Create signal container.
-            create((void*) &s, (void*) &ss, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
+            create((void*) &m, (void*) &ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
             //
             //?? Test to set internals values.
@@ -243,70 +242,51 @@ int main(int p0, char** p1) {
             // Startup model.
             //
 
-            // Initialize persistent part abstraction, location, model
-            // and their counts and sizes.
-            void* ppa = (void*) p1[ABSTRACTION_STARTUP_PARAMETER_INDEX];
-            int ppac = strlen(p1[ABSTRACTION_STARTUP_PARAMETER_INDEX]);
-            int ppas = ppac;
-            void* ppl = (void*) p1[LOCATION_STARTUP_PARAMETER_INDEX];
-            int pplc = strlen(p1[LOCATION_STARTUP_PARAMETER_INDEX]);
-            int ppls = pplc;
-            void* ppm = (void*) p1[MODEL_STARTUP_PARAMETER_INDEX];
-            int ppmc = strlen(p1[MODEL_STARTUP_PARAMETER_INDEX]);
-            int ppms = ppmc;
+            // Determine source channel.
+            void* sc = (void*) p1[CHANNEL_STARTUP_PARAMETER_INDEX];
+            int scc = strlen(p1[CHANNEL_STARTUP_PARAMETER_INDEX]);
+            // Determine source abstraction.
+            void* sa = (void*) p1[ABSTRACTION_STARTUP_PARAMETER_INDEX];
+            int sac = strlen(p1[ABSTRACTION_STARTUP_PARAMETER_INDEX]);
+            // Determine source model.
+            void* sm = (void*) p1[MODEL_STARTUP_PARAMETER_INDEX];
+            int smc = strlen(p1[MODEL_STARTUP_PARAMETER_INDEX]);
 
-            // Initialize transient part abstraction, model
-            // and their counts and sizes.
-            // CAUTION! A transient location is not stored,
-            // since that is only needed temporarily
-            // for model loading.
-            void* tpa = NULL_POINTER;
-            int tpac = 0;
-            int tpas = 0;
-            void* tpm = NULL_POINTER;
-            int tpmc = 0;
-            int tpms = 0;
+            // The destination abstraction.
+            void* da = NULL_POINTER;
+            int dac = 0;
+            int das = 0;
+            // The destination model.
+            void* dm = NULL_POINTER;
+            int dmc = 0;
+            int dms = 0;
+            // The destination details.
+            void* dd = NULL_POINTER;
+            int ddc = 0;
+            int dds = 0;
 
-            // Create transient part abstraction, model and their counts and sizes.
-            create((void*) &tpa, (void*) &tpas,
-                (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-            create((void*) &tpm, (void*) &tpms,
-                (void*) &ppa, (void*) &ppac);
+            // Create destination abstraction.
+            create_model((void*) &da, (void*) &dac, (void*) &das,
+                (void*) &sa, (void*) &sac,
+                (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
+                (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
 
-            // Initialize part model buffer and its count and size.
-            void* pmb = NULL_POINTER;
-            int pmbc = 0;
-            int pmbs = 0;
+            // Create destination model.
+            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
+                (void*) &sm, (void*) &smc,
+                (void*) &sa, (void*) &sac,
+                (void*) &sc, (void*) &scc);
 
-            // Create part model buffer of type character to read single bytes.
-            create_array((void*) &pmb, (void*) &CHARACTER_ARRAY, (void*) &pmbs);
-
-            // Read persistent model from location into part model buffer.
-            receive_general((void*) &pmb, (void*) &pmbc, (void*) &pmbs,
-                (void*) &ppm, (void*) &ppmc, (void*) &ppl, (void*) &pplc);
-
-/*??
-            // Initialize transient part abstraction, model, and their counts and sizes.
-            initialize_model((void*) &tpa, (void*) &tpac, (void*) &tpas,
-                (void*) &ppa, (void*) &ppac,
-                (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-            initialize_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
-                (void*) &pmb, (void*) &pmbc,
-                (void*) &ppa, (void*) &ppac);
-*/
-
-            // Destroy part model buffer.
-            destroy_array((void*) &pmb, (void*) &CHARACTER_ARRAY, (void*) &pmbs);
+            // Do not create destination details! It is not needed.
 
             //
             // Startup signal.
             //
 
             // Add startup signal to signal memory.
-            set_signal((void*) &s, (void*) &sc, (void*) &ss,
-                (void*) &tpm, (void*) &tpmc,
-                (void*) &NORMAL_PRIORITY,
-                (void*) &tpa, (void*) &tpac);
+            set_signal((void*) &m, (void*) &mc, (void*) &ms,
+                (void*) &da, (void*) &dac, (void*) &dm, (void*) &dmc,
+                (void*) &dd, (void*) &ddc, (void*) &NORMAL_PRIORITY);
 
             //
             // Waiting loop.
@@ -316,30 +296,37 @@ int main(int p0, char** p1) {
             // can be entered, waiting for signals (events/ interrupts)
             // which are stored/ found in the signal memory.
             // The loop is left as soon as its shutdown flag is set.
-            wait((void*) &s, (void*) &sc, (void*) &ss,
+            wait((void*) &m, (void*) &mc, (void*) &ms,
                 (void*) &k, (void*) &kc, (void*) &ks,
                 (void*) &ci, (void*) &ii, (void*) &pi, (void*) &di);
 
             //
             // Destruction.
+            // CAUTION! Use descending order, as compared to creation!
             //
 
 /*??
-            // Destroy transient part abstraction, model and their counts and sizes.
-            destroy_model((void*) &tpa, (void*) &tpac, (void*) &tpas,
-                (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-            destroy_model((void*) &tpm, (void*) &tpmc, (void*) &tpms,
-                (void*) &ppa, (void*) &ppac);
+            // Destroy destination model.
+            destroy_model((void*) &dm, (void*) &dmc, (void*) &dms,
+                (void*) &sm, (void*) &smc,
+                (void*) &sa, (void*) &sac,
+                (void*) &sc, (void*) &scc);
+
+            // Destroy destination abstraction.
+            destroy_model((void*) &da, (void*) &dac, (void*) &das,
+                (void*) &sa, (void*) &sac,
+                (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
+                (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
 */
 
+            // Destroy unix server socket.
             if (unix_server_socket_flag == 1) {
 
-                // Destroy unix server socket.
                 destroy_unix_socket((void*) &unix_server_socket, (void*) &UNIX_SERVER_SOCKET_FILENAME);
             }
 
-            // Destroy signal container.
-            destroy((void*) &s, (void*) &ss, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
+            // Destroy signal memory.
+            destroy((void*) &m, (void*) &ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
             // Destroy character-, integer-, pointer- and double internals.
             destroy_character_internals((void*) &ci, (void*) &CHARACTER_INTERNALS_COUNT);
@@ -352,7 +339,7 @@ int main(int p0, char** p1) {
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 
-            // Return 0 to indicate proper shutdown.
+            // Set return value to 0, to indicate proper shutdown.
             r = 0;
 
         } else {

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -126,24 +126,28 @@ void wait(void* p0, void* p1, void* p2,
 
     // The shutdown flag.
     int f = 0;
-    // The highest priority index.
-    int i = -1;
-    // The signal.
-    void* s = NULL_POINTER;
-    // The signal count.
-    int sc = 0;
-    // The priority.
-    int p = NORMAL_PRIORITY;
+
     // The abstraction.
     void* a = NULL_POINTER;
-    // The abstraction count.
     int ac = 0;
+    // The signal (operation).
+    void* s = NULL_POINTER;
+    int sc = 0;
+    // The parameters (details).
+    void* p = NULL_POINTER;
+    int pc = 0;
+    // The priority.
+    int pr = NORMAL_PRIORITY;
+
+    // The highest priority index.
+    int i = -1;
     // The signal size.
     int ss = 0;
     // The persistent model.
     void* pers = NULL_POINTER;
     // The persistent model size.
     int perss = 0;
+
     // The done flag.
     int d = 0;
     // The comparison result.
@@ -165,18 +169,19 @@ void wait(void* p0, void* p1, void* p2,
 
         if (i >= 0) {
 
-            get_signal(p0, p1, (void*) &i,
-                (void*) &s, (void*) &sc, (void*) &p, (void*) &a, (void*) &ac);
+            get_signal(p0, p1, (void*) &i, (void*) &a, (void*) &ac,
+                (void*) &s, (void*) &sc, (void*) &p, (void*) &pc, (void*) &pr);
 
     fprintf(stderr, "wait i: %i\n", i);
     fprintf(stderr, "wait s: %i\n", s);
     fprintf(stderr, "wait sc: %i\n", sc);
-    fprintf(stderr, "wait p: %i\n", p);
+    fprintf(stderr, "wait p: %i\n", pr);
     fprintf(stderr, "wait a: %i\n", a);
     fprintf(stderr, "wait ac: %i\n", ac);
 
-            // Abstraction and priority are removed internally,
-            // together with the signal.
+    fprintf(stderr, "wait a: %s\n", (char*) a);
+
+            // Abstraction and priority are removed internally, together with the signal.
             remove_signal(p0, p1, p2, (void*) &i);
 
             // CAUTION! Do NOT destroy signal here!
@@ -189,16 +194,14 @@ void wait(void* p0, void* p1, void* p2,
 
             if (d == 0) {
 
-                if (ac == COMPOUND_ABSTRACTION_COUNT) {
+                compare_arrays((void*) &a, (void*) &ac, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                    compare_array_elements((void*) &a, (void*) &COMPOUND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &COMPOUND_ABSTRACTION_COUNT, (void*) &r);
+                if (r == 1) {
 
-                    if (r == 1) {
+                    handle_compound_signal((void*) &s, (void*) &sc,
+                        (void*) &pr, p0, p1, p2);
 
-                        handle_compound_signal((void*) &s, (void*) &sc, (void*) &p, p0, p1, p2);
-
-                        d = 1;
-                    }
+                    d = 1;
                 }
             }
 
@@ -208,17 +211,15 @@ void wait(void* p0, void* p1, void* p2,
 
             if (d == 0) {
 
-                if (ac == OPERATION_ABSTRACTION_COUNT) {
+                compare_arrays((void*) &a, (void*) &ac, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                    compare_array_elements((void*) &a, (void*) &OPERATION_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &r);
+                if (r == 1) {
 
-                    if (r == 1) {
+                    handle_operation_signal((void*) &s, (void*) &sc,
+                        (void*) &p, (void*) &pc,
+                        p3, p4, p5, p6, p7, p8, p9, (void*) &f);
 
-                        handle_operation_signal((void*) &s, (void*) &sc,
-                            p3, p4, p5, p6, p7, p8, p9, (void*) &f);
-
-                        d = 1;
-                    }
+                    d = 1;
                 }
             }
 
@@ -227,16 +228,17 @@ void wait(void* p0, void* p1, void* p2,
                 log_message((void*) &WARNING_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE, (void*) &COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT);
             }
 
-            // Reset signal.
-            s = NULL_POINTER;
-            // Reset signal count.
-            sc = 0;
-            // Reset priority.
-            p = NORMAL_PRIORITY;
             // Reset abstraction.
             a = NULL_POINTER;
-            // Reset abstraction count.
             ac = 0;
+            // Reset signal (operation).
+            s = NULL_POINTER;
+            sc = 0;
+            // Reset parameters (details).
+            p = NULL_POINTER;
+            pc = 0;
+            // Reset priority.
+            p = NORMAL_PRIORITY;
             // Reset highest priority index.
             i == -1;
             // Reset done flag.

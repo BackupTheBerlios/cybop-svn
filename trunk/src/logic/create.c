@@ -23,15 +23,13 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.9 $ $Date: 2004-09-11 00:12:46 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CREATE_SOURCE
 #define CREATE_SOURCE
 
-//?? #include <libxml/parser.h>
-//?? #include <libxml/tree.h>
 #include "../array/array.c"
 #include "../creator/creator.c"
 #include "../communicator/communicator.c"
@@ -40,6 +38,185 @@
 #include "../logger/logger.c"
 #include "../parser/parser.c"
 #include "../translator/translator.c"
+
+/**
+ * Checks for primitive model.
+ *
+ * @param p0 the primitive flag (1 if primitive; 0 otherwise)
+ * @param p1 the abstraction
+ * @param p2 the abstraction count
+ */
+void check_primitive_model(void* p0, const void* p1, const void* p2) {
+
+    if (p0 != NULL_POINTER) {
+
+        int* p = (int*) p0;
+
+        // The done flag.
+        int d = 0;
+
+        // The following comparisons could also be done one after the other,
+        // without "done" flag. But the done flag avoids unnecessary comparisons.
+
+        if (d == 0) {
+
+            compare_arrays(p1, p2, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+
+            if (*p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p1, p2, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+
+            if (*p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p1, p2, (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+
+            if (*p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p1, p2, (void*) &DOUBLE_ABSTRACTION, (void*) &DOUBLE_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+
+            if (*p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p1, p2, (void*) &BOOLEAN_ABSTRACTION, (void*) &BOOLEAN_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+
+            if (*p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p1, p2, (void*) &VECTOR_ABSTRACTION, (void*) &VECTOR_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+
+            if (*p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p1, p2, (void*) &FRACTION_ABSTRACTION, (void*) &FRACTION_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+
+            if (*p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p1, p2, (void*) &TIME_ABSTRACTION, (void*) &TIME_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+
+            if (*p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p1, p2, (void*) &COMPLEX_ABSTRACTION, (void*) &COMPLEX_ABSTRACTION_COUNT, p0, (void*) &CHARACTER_ARRAY);
+
+            if (*p == 1) {
+
+                d = 1;
+            }
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
+    }
+}
+
+/**
+ * Creates a primitive model.
+ *
+ * The creation happens in 2 steps and 3 models are involved.
+ *
+ * 1 source code: persistent, probably stored in files, for example cybol/xml
+ * 2 receive model: transient byte/character stream, as read from channel/location
+ * 3 parse model: transient model that cyboi works with, that is cyboi internal model
+ *
+ * The "received model" and "parsed model" are temporary helper models;
+ * they get created and destroyed during creation handling.
+ *
+ *                receive                           parse
+ * source code  ----------> received/read model  ----------> parsed model
+ * (persistent)             (transient)                      (transient)
+ *
+ * The counterparts of the creation procedures are:
+ * - receive <--> send (read <--> write)
+ * - parse <--> serialize
+ *
+ * @param p0 the destination
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source model
+ * @param p4 the source model count
+ * @param p5 the source abstraction
+ * @param p6 the source abstraction count
+ * @param p7 the source channel
+ * @param p8 the source channel count
+ */
+void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
+    const void* p5, const void* p6, const void* p7, const void* p8) {
+
+    //
+    // Receive.
+    //
+
+    // The receive model.
+    void* rm = NULL_POINTER;
+    int rmc = 0;
+    int rms = 0;
+
+    // Create receive model of type character, to read single bytes.
+    create((void*) &rm, (void*) &rms,
+        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+
+    // Receive persistent byte stream over channel.
+    receive_general((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
+
+    //
+    // Parse.
+    //
+
+    // Create parse model of type given as abstraction.
+    create(p0, p2, p5, p6);
+
+    // Parse byte stream according to given document type.
+    parse(p0, p1, p2, (void*) &rm, (void*) &rmc, p5, p6);
+
+    // Destroy receive model.
+    destroy((void*) &rm, (void*) &rms,
+        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+}
 
 /**
  * Creates a model.
@@ -63,6 +240,97 @@
  * - receive <--> send (read <--> write)
  * - parse <--> serialize
  * - decode <--> encode
+ *
+ * @param p0 the destination
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source model
+ * @param p4 the source model count
+ * @param p5 the source abstraction
+ * @param p6 the source abstraction count
+ * @param p7 the source channel
+ * @param p8 the source channel count
+ */
+void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
+    const void* p5, const void* p6, const void* p7, const void* p8) {
+
+    // The temporary workaround flag to use the libxml2 parser.
+    //?? Later, when an own xml parser is implemented in cyboi,
+    //?? delete this flag and change the corresponding blocks below!
+    int w = 0;
+
+    compare_arrays(p5, p6, (void*) &XML_ABSTRACTION, (void*) &XML_ABSTRACTION_COUNT,
+        (void*) &w, (void*) &CHARACTER_ARRAY);
+
+    //
+    // Receive.
+    //
+
+    // The receive model.
+    void* rm = NULL_POINTER;
+    int rmc = 0;
+    int rms = 0;
+
+    // Create receive model of type character, to read single bytes.
+    create((void*) &rm, (void*) &rms,
+        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+
+    // Receive persistent byte stream over channel.
+    receive_general((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
+
+    //
+    // Parse.
+    //
+
+    // The parse model.
+    void* pm = NULL_POINTER;
+    int pmc = 0;
+    int pms = 0;
+
+    if (w == 0) {
+
+        // Create parse model of type given as abstraction.
+        create((void*) &pm, (void*) &pms, p5, p6);
+
+        // Parse byte stream according to given document type.
+        parse((void*) &pm, (void*) &pmc, (void*) &pms,
+            (void*) &rm, (void*) &rmc, p5, p6);
+
+    } else {
+
+        parse((void*) &pm, (void*) &pmc, (void*) &pms, p3, p4, p5, p6);
+    }
+
+    // Destroy receive model.
+    destroy((void*) &rm, (void*) &rms,
+        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+
+    //
+    // Decode.
+    //
+
+    // Create compound decode model.
+    create(p0, p2, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
+
+    // Decode document model according to given document type.
+    decode(p0, p1, p2, (void*) &pm, (void*) &pmc, p5, p6);
+
+    if (w == 0) {
+
+        // Destroy parsed model.
+        destroy((void*) &pm, (void*) &pms, p5, p6);
+
+    } else {
+
+        // Free xml dom document.
+        xmlFreeDoc((xmlDoc*) pm);
+    }
+}
+
+/**
+ * Creates a transient destination model from a persistent source model.
+ *
+ * Primitive models need a different creation than compound models.
  *
  * persistent:
  * - stored permanently
@@ -88,200 +356,19 @@
 void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8) {
 
-    //?? This parameter pointer only has to be dereferenced because of
-    //?? the temporary workaround to use libxml2 parser. DELETE this later!
-    if (p6 != NULL_POINTER) {
+    // The primitive flag.
+    int p = 0;
 
-        int* ac = (int*) p6;
+    // Check for primitive model.
+    check_primitive_model((void*) &p, p5, p6);
 
-        //?? BEGIN of temporary workaround to use libxml2 parser.
+    if (p == 1) {
 
-        // The libxml parser workaround flag.
-        int w = 0;
-
-        compare_arrays(p5, p6, (void*) &XML_ABSTRACTION, (void*) &XML_ABSTRACTION_COUNT,
-            (void*) &w, (void*) &CHARACTER_ARRAY);
-
-        //?? END of temporary workaround to use libxml2 parser.
-        //?? Later, when an own xml parser is implemented in cyboi,
-        //?? delete all workaround blocks, also below!
-
-        //
-        // Receive.
-        //
-
-        // The receive model.
-        void* rm = NULL_POINTER;
-        int rmc = 0;
-        int rms = 0;
-
-        // Create receive model of type character, to read single bytes.
-        create((void*) &rm, (void*) &rms,
-            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-
-        // Receive persistent byte stream over channel.
-        receive_general((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
-
-        //
-        // Parse.
-        //
-
-        // The parse model.
-        void* pm = NULL_POINTER;
-        int pmc = 0;
-        int pms = 0;
-
-        if (w == 0) {
-
-            // Create parse model of type given as abstraction.
-            create((void*) &pm, (void*) &pms, p5, p6);
-
-            // Parse byte stream according to given document type.
-            parse((void*) &pm, (void*) &pmc, (void*) &pms,
-                (void*) &rm, (void*) &rmc, p5, p6);
-
-        } else {
-
-            parse((void*) &pm, (void*) &pmc, (void*) &pms, p3, p4, p5, p6);
-        }
-
-        // Destroy receive model.
-        destroy((void*) &rm, (void*) &rms,
-            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-
-        //
-        // Decode.
-        //
-
-        // Normally, a compound model is created.
-        // Primitive types are an exception to this and need a different creation.
-
-        // The primitive flag.
-        int p = 0;
-        // The done flag.
-        int d = 0;
-
-        // The following comparisons could also be done one after the other,
-        // without "done" flag. But the done flag avoids unnecessary comparisons.
-
-        if (d == 0) {
-
-            compare_arrays(p5, p6, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
-
-            if (p == 1) {
-
-                d = 1;
-            }
-        }
-
-        if (d == 0) {
-
-            compare_arrays(p5, p6, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
-
-            if (p == 1) {
-
-                d = 1;
-            }
-        }
-
-        if (d == 0) {
-
-            compare_arrays(p5, p6, (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
-
-            if (p == 1) {
-
-                d = 1;
-            }
-        }
-
-        if (d == 0) {
-
-            compare_arrays(p5, p6, (void*) &DOUBLE_ABSTRACTION, (void*) &DOUBLE_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
-
-            if (p == 1) {
-
-                d = 1;
-            }
-        }
-
-        if (d == 0) {
-
-            compare_arrays(p5, p6, (void*) &BOOLEAN_ABSTRACTION, (void*) &BOOLEAN_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
-
-            if (p == 1) {
-
-                d = 1;
-            }
-        }
-
-        if (d == 0) {
-
-            compare_arrays(p5, p6, (void*) &VECTOR_ABSTRACTION, (void*) &VECTOR_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
-
-            if (p == 1) {
-
-                d = 1;
-            }
-        }
-
-        if (d == 0) {
-
-            compare_arrays(p5, p6, (void*) &FRACTION_ABSTRACTION, (void*) &FRACTION_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
-
-            if (p == 1) {
-
-                d = 1;
-            }
-        }
-
-        if (d == 0) {
-
-            compare_arrays(p5, p6, (void*) &TIME_ABSTRACTION, (void*) &TIME_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
-
-            if (p == 1) {
-
-                d = 1;
-            }
-        }
-
-        if (d == 0) {
-
-            compare_arrays(p5, p6, (void*) &COMPLEX_ABSTRACTION, (void*) &COMPLEX_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
-
-            if (p == 1) {
-
-                d = 1;
-            }
-        }
-
-        if (p == 1) {
-
-            // Create primitive decode model.
-            create(p0, p2, p5, p6);
-
-        } else {
-
-            // Create compound decode model.
-            create(p0, p2, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
-        }
-
-        // Decode document model according to given document type.
-        decode(p0, p1, p2, (void*) &pm, (void*) &pmc, p5, p6);
-
-        if (w == 0) {
-
-            // Destroy parsed model.
-            destroy((void*) &pm, (void*) &pms, p5, p6);
-
-        } else {
-
-            // Free xml dom document.
-            xmlFreeDoc((xmlDoc*) pm);
-        }
+        create_primitive_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
+        create_compound_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
     }
 }
 

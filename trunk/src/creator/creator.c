@@ -25,7 +25,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.4 $ $Date: 2004-09-08 23:34:12 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,7 +39,6 @@
 #include "../creator/double_creator.c"
 #include "../creator/fraction_creator.c"
 #include "../creator/integer_creator.c"
-#include "../creator/operation_creator.c"
 #include "../creator/signal_memory_creator.c"
 #include "../creator/string_creator.c"
 #include "../creator/time_creator.c"
@@ -83,7 +82,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_operation(p0, p1);
+            create_string(p0, p1);
 
             d = 1;
         }
@@ -255,7 +254,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_operation(p0, p1);
+            destroy_string(p0, p1);
 
             d = 1;
         }

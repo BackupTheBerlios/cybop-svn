@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2004-09-08 23:34:12 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,7 +38,6 @@
 #include "../parser/double_parser.c"
 #include "../parser/fraction_parser.c"
 #include "../parser/integer_parser.c"
-#include "../parser/operation_parser.c"
 #include "../parser/string_parser.c"
 #include "../parser/time_parser.c"
 #include "../parser/vector_parser.c"
@@ -94,7 +93,7 @@ void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r == 1) {
 
-            parse_operation(p0, p1, p2, p3, p4);
+            parse_string(p0, p1, p2, p3, p4);
 
             d = 1;
         }
@@ -275,7 +274,7 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r == 1) {
 
-            serialize_operation(p0, p1, p2, p3, p4);
+            serialize_string(p0, p1, p2, p3, p4);
 
             d = 1;
         }

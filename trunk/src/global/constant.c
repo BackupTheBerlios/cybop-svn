@@ -48,7 +48,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.13 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -266,11 +266,11 @@ static const int STARTUP_PARAMETERS_COUNT = 4;
 /** The command startup parameter index. */
 static const int COMMAND_STARTUP_PARAMETER_INDEX = 0;
 
-/** The abstraction startup parameter index. */
-static const int ABSTRACTION_STARTUP_PARAMETER_INDEX = 1;
+/** The channel startup parameter index. */
+static const int CHANNEL_STARTUP_PARAMETER_INDEX = 1;
 
-/** The location startup parameter index. */
-static const int LOCATION_STARTUP_PARAMETER_INDEX = 2;
+/** The abstraction startup parameter index. */
+static const int ABSTRACTION_STARTUP_PARAMETER_INDEX = 2;
 
 /** The model startup parameter index. */
 static const int MODEL_STARTUP_PARAMETER_INDEX = 3;

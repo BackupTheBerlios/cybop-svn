@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a compound model in memory
  *
- * @version $Revision: 1.2 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,11 +77,8 @@ void create_compound(void* p0, const void* p1) {
     create_array((void*) &dc, (void*) &INTEGER_ARRAY, p1);
     create_array((void*) &ds, (void*) &INTEGER_ARRAY, p1);
 
-    //
-    // Use ascending order.
-    //
-
     // Set names, abstractions, models, details.
+    // CAUTION! Use ascending order, as compared to destruction!
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &nc);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
@@ -134,11 +131,8 @@ void destroy_compound(void* p0, const void* p1) {
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_COUNTS_INDEX, (void*) &dc);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_SIZES_INDEX, (void*) &ds);
 
-    //
-    // Use descending order.
-    //
-
     // Remove names, abstractions, models, details.
+    // CAUTION! Use descending order, as compared to creation!
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &DETAILS_SIZES_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &DETAILS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &DETAILS_INDEX);

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,10 +31,6 @@
 #include "../global/log_constants.c"
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
-
-//
-// A string is a chain of characters.
-//
 
 /**
  * Parses the byte stream and creates a string model from it.
@@ -59,49 +55,32 @@ void parse_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
                 int* dc = (int*) p1;
 
-                // The destination array index.
-                int i = 0;
-
-                // The new destination array size.
-                // (Not exactly the size, but the destination array index
-                // increased by the source array count.)
-                int nds = i + *sc;
-
-                if (i >= 0) {
+                if (*dc >= 0) {
 
 //??                log_message((void*) &INFO_LOG_LEVEL, (void*) &INITIALIZE_STRING_MESSAGE, (void*) &INITIALIZE_STRING_MESSAGE_COUNT);
 
-                    if (nds >= *ds) {
+                    // The new destination string size.
+                    // (Not exactly the size, but the destination string index
+                    // increased by the source array count.)
+                    *ds = *dc + *sc;
 
-                        while (nds >= *ds) {
+                    // Resize destination string.
+                    resize_array(p0, (void*) &CHARACTER_ARRAY, p2);
 
-                            // Increase size.
-                            *ds = (*ds * STRING_RESIZE_FACTOR) + 1;
-                        }
+                    if (*dc <= (*ds - *sc)) {
 
-                        // Resize string.
-                        resize_array(p0, (void*) &CHARACTER_ARRAY, p2);
-                    }
-
-                    if (i < (*ds - *sc)) {
-
-                        // Set string.
-                        // CAUTION! Parameter is only set, when not null.
-
-                        if (p3 != NULL_POINTER) {
-
-                            set_array_elements(p0, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
-                        }
+                        // Set source into destination string.
+                        set_array_elements(p0, (void*) &CHARACTER_ARRAY, p1, p3, p4);
 
                         // Increment count.
                         // Example:
                         // d = "helloworld"
-                        // i = 5
+                        // dc (as index) = 5
                         // s = "universe"
                         // sc = 8
                         // d (after set) = "hellouniverse"
-                        // dc = i + sc = 13
-                        *dc = i + *sc;
+                        // dc = dc + sc = 13
+                        *dc = *dc + *sc;
 
                     } else {
 

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2004-09-11 00:12:47 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,6 +40,26 @@
 #include "../global/cybol_constants.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
+
+//
+// Forward declarations.
+//
+
+/**
+ * Creates a model.
+ *
+ * @param p0 the destination
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source model
+ * @param p4 the source model count
+ * @param p5 the source abstraction
+ * @param p6 the source abstraction count
+ * @param p7 the source channel
+ * @param p8 the source channel count
+ */
+void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
+    const void* p5, const void* p6, const void* p7, const void* p8);
 
 //
 // Xml property.
@@ -322,6 +342,10 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
                 void* dm = NULL_POINTER;
                 int dmc = 0;
                 int dms = 0;
+                // The destination details.
+                void* dd = NULL_POINTER;
+                int ddc = 0;
+                int dds = 0;
 
                 while (1) {
 
@@ -358,31 +382,30 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
                             (void*) &sa, (void*) &sac,
                             (void*) &sc, (void*) &scc);
 
-                        // The details model.
-                        void* d = NULL_POINTER;
-                        int dc = 0;
-                        int ds = 0;
+                        // If child node has children, then create details model for it.
+                        if ((*s)->children != NULL_POINTER) {
 
-                        // If child has children, then create details model for it.
-                        // Create details model.
-                        create((void*) &d, (void*) &ds,
-                            (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
+                            // Create details model.
+                            create((void*) &dd, (void*) &dds,
+                                (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
 
-                        // Decode child node children.
-                        decode_xml_node((void*) &d, (void*) &dc, (void*) &ds, (void*) &c, (void*) &cc);
+                            // Decode child node children.
+                            decode_xml_node((void*) &dd, (void*) &ddc, (void*) &dds,
+                                (void*) &c, (void*) &cc);
 
-                        //?? Read details??
-                        // Filter out all tags with name attribute value "super" and
-                        // hand over model to create parts of super model.
-                        // Add all details to details model.
-                        // Do NOT add super tags to details model!
+                            //?? Read details??
+                            // Filter out all tags with name attribute value "super" and
+                            // hand over model to create parts of super model.
+                            // Add all details to details model.
+                            // Do NOT add super tags to details model!
+                        }
 
                         // Add model to compound.
                         set_compound_element_by_name(p0, p1, p2,
                             (void*) &dn, (void*) &dnc, (void*) &dns,
                             (void*) &da, (void*) &dac, (void*) &das,
                             (void*) &dm, (void*) &dmc, (void*) &dms,
-                            (void*) &d, (void*) &dc, (void*) &ds);
+                            (void*) &dd, (void*) &ddc, (void*) &dds);
 
                         //?? If "add", then first check if name exists in whole;
                         //?? if yes, add "_0" or "_1" or "_2" etc.
@@ -390,6 +413,36 @@ void decode_xml_node(void* p0, void* p1, void* p2, const void* p3, const void* p
                         //?? If "set", then just replace the model
                         //?? with equal name; but where to destroy it if
                         //?? no whole keeps a reference to it anymore?
+
+                        // Reset source name.
+                        sn = NULL_POINTER;
+                        snc = 0;
+                        // Reset source channel.
+                        sc = NULL_POINTER;
+                        scc = 0;
+                        // Reset source abstraction.
+                        sa = NULL_POINTER;
+                        sac = 0;
+                        // Reset source model.
+                        sm = NULL_POINTER;
+                        smc = 0;
+
+                        // Reset destination name.
+                        dn = NULL_POINTER;
+                        dnc = 0;
+                        dns = 0;
+                        // Reset destination abstraction.
+                        da = NULL_POINTER;
+                        dac = 0;
+                        das = 0;
+                        // Reset destination model.
+                        dm = NULL_POINTER;
+                        dmc = 0;
+                        dms = 0;
+                        // Reset destination details.
+                        dd = NULL_POINTER;
+                        ddc = 0;
+                        dds = 0;
                     }
 
                     c = c->next;

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2004-08-26 23:44:06 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../global/structure_constants.c"
 #include "../global/log_constants.c"
+#include "../global/structure_constants.c"
 #include "../logger/logger.c"
 
 /**
@@ -85,9 +85,6 @@ void parse_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4)
             // 10 - decimal
             // 16 - hexadecimal
             *d = strtol(tmp, &tail, 10);
-
-//??            double example:
-//??            test = strtod(tmp, &tail);
 
             // Destroy temporary null-terminated string.
             destroy_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);

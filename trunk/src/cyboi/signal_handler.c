@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,29 +51,39 @@
 void handle_compound_signal(const void* p0, const void* p1, const void* p2,
     void* p3, void* p4, void* p5) {
 
-    if (p2 != NULL_POINTER) {
+    if (p1 != NULL_POINTER) {
 
-        int* sc = (int*) p2;
+        int* sc = (int*) p1;
 
         log_message((void*) &INFO_LOG_LEVEL, (void*) &HANDLE_COMPOUND_SIGNAL_MESSAGE, (void*) &HANDLE_COMPOUND_SIGNAL_MESSAGE_COUNT);
 
-        // Initialize part models, abstractions and their counts.
+        // The abstractions.
         void* pa = NULL_POINTER;
         void* pac = NULL_POINTER;
+        // The models.
         void* pm = NULL_POINTER;
         void* pmc = NULL_POINTER;
+        // The details.
+        void* pd = NULL_POINTER;
+        void* pdc = NULL_POINTER;
 
-        // Get part models, abstractions and their counts.
+        // Get abstractions, models, details.
         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &pa);
         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &pac);
         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_INDEX, (void*) &pm);
         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_COUNTS_INDEX, (void*) &pmc);
+        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_INDEX, (void*) &pd);
+        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_COUNTS_INDEX, (void*) &pdc);
 
-        // Initialize part model, abstraction and their count.
+        // The abstraction.
         void* a = NULL_POINTER;
         int ac = 0;
+        // The model.
         void* m = NULL_POINTER;
         int mc = 0;
+        // The details.
+        void* d = NULL_POINTER;
+        int dc = 0;
 
         // The loop variable.
         int j = 0;
@@ -85,18 +95,20 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
                 break;
             }
 
-            // Get part model, abstraction
-            // and their count.
+            // Get abstraction, model, details.
             get_array_element((void*) &pa, (void*) &POINTER_ARRAY, (void*) &j, (void*) &a);
             get_array_element((void*) &pac, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ac);
             get_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &j, (void*) &m);
             get_array_element((void*) &pmc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &mc);
+            get_array_element((void*) &pd, (void*) &POINTER_ARRAY, (void*) &j, (void*) &d);
+            get_array_element((void*) &pdc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &dc);
 
             // Add part model (signal) to memory, using the whole signal's priority.
             // (Each signal has a priority. A signal may consist of part
-            // signals. The part signals cannot have higher/lower priority
+            // signals. The part signals cannot have higher / lower priority
             // than their original whole signal.)
-            set_signal(p3, p4, p5, (void*) &m, (void*) &mc, p2, (void*) &a, (void*) &ac);
+            set_signal(p3, p4, p5, (void*) &a, (void*) &ac,
+                (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, p2);
 
             j++;
         }
@@ -110,179 +122,135 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
 /**
  * Handles the operation signal.
  *
- * @param p0 the signal
- * @param p1 the signal parameters count
- * @param p2 the knowledge
- * @param p3 the knowledge count
- * @param p4 the knowledge size
- * @param p5 the character internals
- * @param p6 the integer internals
- * @param p7 the pointer internals
- * @param p8 the double internals
- * @param p9 the shutdown flag
+ * @param p0 the signal (operation)
+ * @param p1 the signal count
+ * @param p2 the parameters (details)
+ * @param p3 the parameters count
+ * @param p4 the knowledge
+ * @param p5 the knowledge count
+ * @param p6 the knowledge size
+ * @param p7 the character internals
+ * @param p8 the integer internals
+ * @param p9 the pointer internals
+ * @param p10 the double internals
+ * @param p11 the shutdown flag
  */
-void handle_operation_signal(const void* p0, const void* p1,
-    void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void handle_operation_signal(const void* p0, const void* p1, const void* p2, const void* p3,
+    void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
-    if (p1 != NULL_POINTER) {
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT);
 
-        int* sc = (int*) p1;
+    // The done flag.
+    int d = 0;
+    // The comparison result.
+    int r = 0;
 
-        // The signal parameters count must be greater than zero.
-        if (*sc >= 1) {
+    fprintf(stderr, "TEST logic: %s\n", *((char**) p0));
+    fprintf(stderr, "TEST logic count: %i\n", *((int*) p1));
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT);
+    if (d == 0) {
 
-            // The parameters.
-            void* p = NULL_POINTER;
-            int pc = 0;
-            int ps = 0;
+        compare_arrays(p0, p1, (void*) &ADD_ABSTRACTION, (void*) &ADD_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-            // Get parameters.
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &p);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &pc);
-            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_INDEX, (void*) &ps);
+        if (r == 1) {
 
-            // The logic (operation) name.
-            // The first parameter param0 is the operation name.
-            // Following parameters param1 .. are input and output names.
-            void* l = NULL_POINTER;
-            int lc = 0;
+//??            add(p1, p2, p3, (void*) &ps, p4, p5, p6);
 
-            // The logic (operation) name parameter index.
-            int i = 0;
-
-            // Get logic (operation) name.
-            get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &i, (void*) &l);
-            get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &lc);
-
-            // The done flag.
-            int d = 0;
-            // The comparison result.
-            int r = 0;
-
-            fprintf(stderr, "TEST logic: %s\n", (char*) l);
-            fprintf(stderr, "TEST logic count: %i\n", lc);
-
-            if (d == 0) {
-
-                compare_arrays((void*) &l, (void*) &lc, (void*) &ADD_ABSTRACTION, (void*) &ADD_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-                if (r == 1) {
-
-                    add(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
-
-            if (d == 0) {
-
-                compare_arrays((void*) &l, (void*) &lc, (void*) &CREATE_MODEL_ABSTRACTION, (void*) &CREATE_MODEL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-                if (r == 1) {
-
-                    handle_create(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
-
-            if (d == 0) {
-
-                compare_arrays((void*) &l, (void*) &lc, (void*) &DESTROY_MODEL_ABSTRACTION, (void*) &DESTROY_MODEL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-                if (r == 1) {
-
-/*??
-                    handle_destroy(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p4);
-*/
-
-                    d = 1;
-                }
-            }
-
-            if (d == 0) {
-
-                compare_arrays((void*) &l, (void*) &lc, (void*) &SEND_ABSTRACTION, (void*) &SEND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-                if (r == 1) {
-
-                    send_message(p1, (void*) &p, (void*) &pc, (void*) &ps,
-                        p2, p3, p4, p5, p6, p7, p8);
-
-                    d = 1;
-                }
-            }
-
-            if (d == 0) {
-
-                compare_arrays((void*) &l, (void*) &lc, (void*) &RECEIVE_ABSTRACTION, (void*) &RECEIVE_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-                if (r == 1) {
-
-/*??
-                    receive_message(p1, (void*) &p, (void*) &pc, (void*) &ps,
-                        p2, p3, p4, p5, p6, p7, p8);
-*/
-
-                    d = 1;
-                }
-            }
-
-            if (d == 0) {
-
-                compare_arrays((void*) &l, (void*) &lc, (void*) &EXIT_ABSTRACTION, (void*) &EXIT_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-                if (r == 1) {
-
-                    log_message((void*) &INFO_LOG_LEVEL, (void*) &SET_SHUTDOWN_FLAG_MESSAGE, (void*) &SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
-
-                    int* f = (int*) p9;
-                    *f = 1;
-
-                    d = 1;
-                }
-            }
-
-/*??
-                //?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
-                if (strcmp(l, "mouse_moved") == 0) {
-
-                    Model statics = statics;
-
-                    set_model_element(statics, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
-                    set_model_element(statics, "mouse.pointer_position.x_distance.unit", "pixel");
-                    set_model_element(statics, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
-                    set_model_element(statics, "mouse.pointer_position.y_distance.unit", "pixel");
-
-                } else if (strcmp(l, "mouse_clicked") == 0) {
-
-                    void* main_frame = get_statics_model_part(statics, (void*) "main_frame");
-                    struct vector* pointer_position = get_statics_model_part(statics, (void*) "mouse.pointer_position");
-
-                    reset_signal(s);
-
-                    if (pointer_position != NULL_POINTER) {
-
-//??                    mouse_clicked_action(main_frame, (void*) pointer_position->x, (void*) pointer_position->y, (void*) pointer_position->z, s->predicate);
-
-                    } else {
-
-//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle mouse clicked action. The pointer position is null.");
-                    }
-                }
-*/
-
-        } else {
-
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle operation signal. The signal parameters count is zero.");
+            d = 1;
         }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle operation signal. The signal parameters count is null.");
     }
+
+    if (d == 0) {
+
+        compare_arrays(p0, p1, (void*) &CREATE_MODEL_ABSTRACTION, (void*) &CREATE_MODEL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+//??            handle_create(p1, p2, p3, (void*) &ps, p4, p5, p6);
+
+            d = 1;
+        }
+    }
+
+    if (d == 0) {
+
+        compare_arrays(p0, p1, (void*) &DESTROY_MODEL_ABSTRACTION, (void*) &DESTROY_MODEL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+//??            handle_destroy(p1, p2, p3, (void*) &ps, p4, p5, p6);
+
+            d = 1;
+        }
+    }
+
+    if (d == 0) {
+
+        compare_arrays(p0, p1, (void*) &SEND_ABSTRACTION, (void*) &SEND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+//??            send_message(p1, p2, p3, (void*) &ps, p4, p5, p6, p7, p8, p9, p10);
+
+            d = 1;
+        }
+    }
+
+    if (d == 0) {
+
+        compare_arrays(p0, p1, (void*) &RECEIVE_ABSTRACTION, (void*) &RECEIVE_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+//??            receive_message(p1, p2, p3, (void*) &ps, p4, p5, p6, p7, p8, p9, p10);
+
+            d = 1;
+        }
+    }
+
+    if (d == 0) {
+
+        compare_arrays(p0, p1, (void*) &EXIT_ABSTRACTION, (void*) &EXIT_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &SET_SHUTDOWN_FLAG_MESSAGE, (void*) &SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
+
+            int* f = (int*) p11;
+            *f = 1;
+
+            d = 1;
+        }
+    }
+
+/*??
+        //?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
+        if (strcmp(l, "mouse_moved") == 0) {
+
+            Model statics = statics;
+
+            set_model_element(statics, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
+            set_model_element(statics, "mouse.pointer_position.x_distance.unit", "pixel");
+            set_model_element(statics, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
+            set_model_element(statics, "mouse.pointer_position.y_distance.unit", "pixel");
+
+        } else if (strcmp(l, "mouse_clicked") == 0) {
+
+            void* main_frame = get_statics_model_part(statics, (void*) "main_frame");
+            struct vector* pointer_position = get_statics_model_part(statics, (void*) "mouse.pointer_position");
+
+            reset_signal(s);
+
+            if (pointer_position != NULL_POINTER) {
+
+//??            mouse_clicked_action(main_frame, (void*) pointer_position->x, (void*) pointer_position->y, (void*) pointer_position->z, s->predicate);
+
+            } else {
+
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not handle mouse clicked action. The pointer position is null.");
+            }
+        }
+*/
 }
 
 /* SIGNAL_HANDLER_SOURCE */
