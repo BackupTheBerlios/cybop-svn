@@ -1,0 +1,42 @@
+\chapter{Einleitung und Motivation}
+Für medizinische Sachverhalte gibt es bereits eine Vielzahl an kommerziellen Programmen, die beim
+Lösen von Problemen oder Verwalten von Daten helfen sollen. Diese Diplomarbeit leistet einen Teil
+zur Entwicklung einer Open Source Applikation für die Arbeit mit Patientendaten beliebiger Art.\\
+Die Problematik bei den meisten Programmen besteht in der eingeschränkte Flexibilität in Sachen
+Erweiterbarkeit und in der schlechten Robustheit gegenüber Änderungen. Daher sollen Untersuchungen
+angestellt werden, ob die Verwendung von Software-Mustern diese Probleme minimiert.\\
+Die Patientendaten werden in sogenannten Electronic Health Records (EHR) abgespeichert und zur
+Verarbeitung im Programm gehalten. Es handelt sich bei einem EHR also um einen eigens kreierten
+Datentyp der aus mehreren unterschiedlichen, zusammengesetzten Datentypen besteht und
+patientenspezifische, medizinische Informationen enthält.\\
+Werden die Daten nur auf eine Art gespeichert so schränkt das die Flexibilität der Software sehr
+ein. Bei einer lokalen Speicherung bedarf es bei Anforderung von elektronischen Informationen einer
+direkten Kopie auf ein Wechselmedium und dessen physischen Transport zum anderen Rechner. Dieser
+Vorgang ist oft sehr zeitaufwendig und häufig treten durch unsachgemäße Behandlung des
+Wechselmediums, z.B. heruntergefallene Diskette oder zerkratzte CD, Fehler auf, die bis zur
+völligen Unbrauchbarkeit der Daten führen können. Das etwaige Verlieren des Datenträgers kommt als
+Sicherheitsrisiko hinzu. Eine zentrale Datenbank innerhalb eines Netzwerkes schliesst derartige
+Nachteile zwar aus, verhindert allerdings die Möglichkeit weiterzuarbeiten, falls das Netzwerk
+ausfällt. Daher wurde untersucht inwieweit sich mehrere unterschiedliche Persistenzmechanismen in
+einer Anwendung vereinen lassen, ohne die Benutzerfreundlichkeit und Bedienbarkeit einzuschränken
+oder spezielles Fachwissen vom Anwender voraussetzen zu müssen.\\
+Zu den theoretischen Betrachtungen dieser Diplomarbeit zählt noch ein weitere Abschnitt, der sich
+damit befasst, wie Daten zwischen Prozessen ausgetauscht werden können. Da, wie bereits erwähnt,
+bei der Entwicklung der Anwendung Flexibilität und Erweiterbarkeit im Vordergrund stehen, darf die
+Einschränkung und Spezialisierung auf einige wenige Kommunikationsparadigmen nicht erfolgen.
+Vielmehr soll eine Möglichkeit gefunden werden, den Anwender zur Laufzeit entscheiden zu lassen,
+welches Kommunikationsprotokoll er verwenden möchte, wiederum ohne das er über fachliche
+Kompetenz verfügen muss.\\
+Eine Interprozesskommunikation ist für diese Anwendung notwendig, da sie aus einzelnen Modulen
+bestehen soll, von denen jedes als separater Prozess agiert, aber über die Möglichkeit verfügen
+muss, auf den selben Daten zu arbeiten, wie ein anderes Modul. Die Patientendaten zwischen zwei
+lokalen Prozessen auszutauschen ist der eine Aspekt. Ein weiterer ist der Datentransfer zwischen
+mehreren Rechnern.\\
+Der medizinische Formulardruck dient als Beispielanwendung, um persistent abgelegte Daten wieder zu
+laden und sinnvoll zu verarbeiten. Mit möglichst geringem Aufwand sollen die Patientendaten in
+medizinische Formularvordrucke ausgegeben werden können.
+
+\par
+
+In den beiden nachfolgenden Kapiteln werden die Grundlagen für Lösung der zu Untersuchenden
+Problematik erläutert.

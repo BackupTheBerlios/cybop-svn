@@ -1,0 +1,16 @@
+\glossaryentry{Open Source}{1}
+\glossaryentry{Open Source!Im Gegensatz zu kommerziellen Anwendungen werden Open Source Projekte nicht mit dem Ziel einer entgeltlichen Profitierung entwickelt. Der Quellcode ist frei zug\"anglich und erweiterbar. Man erhofft sich dadurch eine schnellere Verbreitung und eine gro\IeC {\ss }e Zahl zus\"atzlicher, freiwilliger Entwickler, die ihren Ideen entsprechend, die Projekte weiterentwickeln. Zur Vermeidung des Missbrauches des frei zug\"anglichen Quellcodes unterliegen Open Source Applikationen meist gewissen Lizenzvereinbarungen (siehe Abschnitt \ref  {Res Medicinae}).}{1}
+\glossaryentry{State of the Art}{3}
+\glossaryentry{State of the Art!Der aktuelle Zustand bestehender Technologien, wird in der Diplomarbeit in den Kapiteln 2 und 3 beschrieben, um eine Abgrenzung zur und die Notwendigkeit f\"ur die Neuerung der Entwicklung zu begr\"unden.}{3}
+\glossaryentry{Serialisierung}{16}
+\glossaryentry{Serialisierung!Durch Serialisierung existiert eine M\"oglichkeit, ein Objekt, das sich im Hauptspeicher der Anwendung befindet, als Byte-Strom in eine Datei zu schreiben oder \"uber eine Netzwerkverbindung zu transportieren. Das schlie\IeC {\ss }t nat\"urlich auch den umgekehrten Weg mit ein, also das Rekonstruieren eines Objekts in das interne Format der laufenden Java-Maschine. Diesen umgekehrten Vorgang nennt man Deserialisierung.}{16}
+\glossaryentry{referenzielle Integrit\"at}{30}
+\glossaryentry{referenzielle Integrit\"at!Durch die Vergabe von Fremdschl\"usseln werden Datens\"atze verschiedener Tabellen einer Datenbank als zusammengeh\"orig markiert. Mittels dieser Referenzierung wirken sich Aktualisierungen einer Tabelle automatisch auch auf die anderen aus, wodurch sich ''Datenleichen'' vermeiden lassen. Ebenfalls wird das unkontrollierte L\"oschen eines Datensatzes oder einer Tabelle verhindert.}{30}
+\glossaryentry{Transaktionssteuerung}{30}
+\glossaryentry{Transaktionssteuerung!Unter Transaktionssteuerung versteht man den Einsatz von Transaktionen, um die Tabellen einer Datenbank von einem konsistenten Zustand vor Ausf\"uhrung der Datenbank-Anweisungen in einen konsistenten Zustand nach Abarbeitung all dieser Anweisungen zu \"uberf\"uhren. Transaktionen werden im Abschnitt \ref  {Transaktionen} ausf\"uhrlich besprochen.}{30}
+\glossaryentry{Cursorverarbeitung}{30}
+\glossaryentry{Cursorverarbeitung!Ein Cursor ist eine logische Verbindung zur Datenbank. Er stellt verschiedene Mechanismen bereit, die dem Anwender einen kontrollierten Abruf von Abfrageergebnissen erm\"oglichen. So kann zuerst ein Teil und anschlie\IeC {\ss }end ein weiterer Teil der Ergebnismenge verarbeitet werden, ohne eine erneute Anfrage an die Datenbank senden zu m\"ussen.}{30}
+\glossaryentry{Callback-Methoden}{32}
+\glossaryentry{Callback-Methoden!Das sind Methoden, die an das Auftreten eines bestimmten Ereignisses (Events) gekoppelt sind, d.h. sie werden genau dann ausgef\"uhrt, wenn dieses ihnen zugewiesene Ereignis eintritt.}{32}
+\glossaryentry{Ontologie}{36}
+\glossaryentry{Ontologie!Der Begriff stammt aus dem Griechischen. Zusammengesetzt aus ''ontos'', das Sein, und ''logos'', das Wort, beschreibt es die Lehre vom Sein, von den Ordnungs-, Begriffs- und Wesensbestimmungen des Seienden.}{36}

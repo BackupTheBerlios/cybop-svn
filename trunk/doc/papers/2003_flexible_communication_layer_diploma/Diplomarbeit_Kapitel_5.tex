@@ -1,0 +1,66 @@
+\chapter{Der Protoyp: Das Formularmodul - ReForm}
+    \label{Das Formularmodul - ReForm}
+Zusammengesetzt aus \emph{Re} für Res Medicinae und \emph{Form}, englisch für Formular, lässt die
+Bezeichnung dieser Komponente bereits ihren Aufgabenbereich erahnen. Sie ermöglicht es dem Anwender
+zu vorhandenen Patienten-Karteien Formulare über vorgefertigte Eingabemasken auszufüllen und in
+medizinische Formularvordrucke auf Papier auszugeben. Abbildung \ref{fig:Ein Formular - Rezept}
+zeigt ein eigens für Res Medicinae mit Java-Swing realisiertes Rezept-Formular. Es existieren von
+anderen Softwareproduzenten veröffentlichte Vorschläge \cite{GNU_MED_Eingabemasken} für
+Eingabemasken von medizinischen Formularen, denen praktizierende Ärzte bereits ihre positive
+Zustimmung für den Gebrauch gegeben haben, so dass sich im weiteren Softwareentwicklungsprozess
+daran orientiert werden sollte.\\
+Der Nutzer möchte möglichst wenige Eingaben wiederholt tätigen. Deshalb werden alle vorhandenen
+Daten bei Anwahl eines bestimmten Formulars unmittelbar aus dem Domain-Modell in die entsprechenden
+Felder übertragen. Um dies zu gewährleisten, wird wenigstens eine Umsetzung der im vorangegangen
+Kapitel beschriebenen Interprozesskommunikationsparadigmen benötigt. Mit ihrer Hilfe fordert das
+\emph{ReForm} eine anderes Modul, beispielsweise \emph{Record} auf, seine Domain-Daten zu
+transferieren. Da alle Komponenten die gleichen elementaren, von
+\emph{\mbox{AdvancedBasicApplication}} geerbten Fähigkeiten besitzen, besteht ebenfalls die
+Möglichkeit, benötigte Daten unmittelbar aus der Persistenzschicht zu laden. Damit wird
+ersichtlich, dass durchaus differierende Patientenkarteien von den verschiedenen Modulen bearbeitet
+werden können. Allerdings muss deshalb bei der Interprozesskommunikation sichergestellt werden,
+dass die übermittelten Daten in den richtigen Datensatz geschrieben werden. Die exakte
+Identifikation ist durch den zusätzlichen Transfer der OID der jeweiligen Patientenkartei und einem
+simplen Vergleich mit dem Identifikator des aktuellen Domain-Modells problemlos möglich.\\
+Für die Formulare verwendet man ebenfalls das Design-Pattern \emph{\mbox{Modell View Controller}}
+(Abschnitt \ref{Der Model View Controller}). Dazu wurde jeweils eine Elternklasse mit grundlegenden
+Eigenschaften implementiert. Jede abgeleitete Klasse muss bestimmte Methoden überladen, wie
+beispielsweise ein neuer View, der unter anderem eine Methode zum Erzeugen einer Druckmaske zu
+überschreiben hat. Zur Notwendigkeit dieser Maßnahme wird auf den anschließenden Abschnitt
+verwiesen.\\
+Ausgehend davon, dass allgemeine Patienteninformationen wie Name, Adresse, Versicherung auf allen
+medizinischen Formularen einzutragen sind, wurde ein Teil-View entworfen, der für die Präsentation
+dieser Informationen verantwortlich ist. Man kann sie später mit anderen Teil-Views für spezielle
+Formulareigenschaften kombinieren und erspart sich damit den Aufwand einer jeweiligen
+Neuimplementation.
+
+%\begin{figure}[h]
+ %   \begin{center}
+  %     \includegraphics[scale=0.8]{Bilder/Formular_Rezept.eps}
+  %     \caption{Das Rezept - Formular}
+  %     \label{fig:Ein Formular - Rezept}
+ %   \end{center}
+%\end{figure}
+
+\incljpg{0 0 403 296}{Bilder/Formular_Rezept.jpg}{Das Rezept - Formular}{Das Rezept -
+Formular}{fig:Ein Formular - Rezept}
+
+\section{Drucken der Formulare}
+Um das Drucken nicht nur auf die Formulare zu beschränken, sondern für beliebige Anwendungsbereiche
+zugänglich zu halten, wurde die Funktionalität von den Formularelternklassen separiert und eine
+spezialisierte Klasse erstellt, die diese Aufgabe bewerkstelligt.\\
+Es bieten sich zwei Möglichkeiten des Druckens.\\
+Zum einen kann eine Java-Swing-Komponente unmittelbar an diese Klasse übergeben werden. Bei
+Einhaltung des Design-Pattern Model View Controller handelt es sich hierbei um den aktuellen
+Zustand des jeweiligen View-Objektes. Dieses wird bei Bedarf, sofern es den bedruckbaren Bereich
+des Papierformates überschreitet, herunterskaliert. Dabei offenbart sich der Nachteil des
+Verfahrens, denn mit dem Skalieren werden Schrift und View-Komponenten meist stark verzerrt, da
+Java keine optimierten Bildbearbeitungsoperationen zur Verfügung stellt. Nach Möglichkeit sollten
+deshalb nur Views gedruckt werden, die vollständig auf das gewählte Papierformat passen.\\
+Diese Variante erfüllt nicht die Anforderungen des \emph{ReForm}-Moduls, daher wurde noch eine
+Weitere evaluiert. Sie setzt die Existenz einer eigens hierfür zuständigen Methode im View voraus,
+welche eine Maske zum Drucken von Text und anderen Swing-Komponenten erstellt. Damit wird nicht
+mehr der vollständige View ausgegeben, vielmehr kann man in vorgefertigte Standardformulare drucken
+und diese Maske entsprechend des Papierformates gestalten. Der Nachteil ist ein erweiterter
+Implementierungsaufwand für die Masken-Methode. Diese zweite Variante kommt bei \emph{ReForm} zum
+Einsatz.

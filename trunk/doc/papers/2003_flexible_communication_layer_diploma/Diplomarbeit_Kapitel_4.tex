@@ -1,0 +1,555 @@
+\chapter{Die Gesamtarchitektur}
+    \label{Die Gesamtarchitektur}
+Während in den beiden einführenden Kapiteln die verwendeten Technologien separat beschrieben
+wurden, soll nun die Anwendung und Verbindung zu einer Gesamtlösung für die transparente
+Mappingschicht und deren Anbindung und Interoperation mit den benachbarten Schichten diskutiert
+werden. Das Hauptaugenmerk liegt hierbei auf der Umsetzung verschiedener Muster, um eine möglichst
+flexible und zugleich robuste Struktur zu erhalten. Abbildung \ref{fig:Vollstaendiges
+Klassendiagramm} im Anhang A zeigt das gesamte Klassenmodell auf einen Blick. Die einzelnen Teile
+werden im Anschluss genauer betrachtet.\\
+Da jedes Anwendungsmodul von \emph{Res Medicinae} als autonomer Prozess läuft, ist eine
+Interprozesskommunikation notwendig, um Daten zwischen mehreren Modulen auszutauschen.
+Beispielsweise muss \emph{Record} seine Patientendaten an das \emph{ReForm} senden, wenn ein Rezept
+ausgestellt und gedruckt werden soll.\\
+Während die Hauptaufgabe des prototypisch umgesetzten Moduls \emph{ReForm} die funktionale
+Steuerung von medizinischen Formularen ist, realisiert \emph{Record} \cite{Diplomarbeit_Jens_Bohl}
+die Verwaltung und Darstellung der Patientendaten.\\
+Für diese und ähnliche Aktivitäten wurde untersucht, auf welche Art sich ein
+Kommunikationsparadigma in die Applikationen einarbeiten lässt. Aufgrund der gewünschten
+Flexibilität und noch nicht vollständig abschätzbaren Komplexität der finalen Version des
+Programms, das als wesentliches Merkmal eine sehr gute Erweiterbarkeit aufweisen muss, wurde die
+Betrachtung auf eine verteilte Kommunikation, d.h. einen Datenaustausch zwischen mehreren Rechnern
+erweitert.
+
+\section{Das Framework}
+Im Rahmen des Projektes \emph{Res Medicinae} entstand ein Framework, auf dem sämtliche
+Applikationen und Komponenten, die im Rahmen dieser Diplomarbeit entwickelt wurden, aufbauen. Es
+kapselt das objektorientierte Klassenmodell von Java und erweitert es zu einer hierarchischen
+Struktur. Ähnlich der Klasse \emph{Object} des Java Development Kits von SUN \mbox{Microsystems},
+existiert eine Basisklasse \emph{Item}, von der alle anderen Klassen erben. Sie bildet die
+Grundlage für die Hierarchie. Jedes Attribut einer Klasse wird als Kindobjekt betrachtet, das
+ebenfalls über den Supertyp \emph{Item} verfügt und deshalb wiederum eigene Kindobjekte enthalten
+kann. Diese Technik ist typisch für das hier angewendete Kompositum-Muster, wie es in Abschnitt
+\ref{Composite Pattern} erläutert wurde.\\
+Warum der Umstand einer Hierarchie und Kapselung aller bestehenden Klassen? Bei genauer Betrachtung
+wird ersichtlich, dass es sich hierbei ganz und gar nicht um einen Umstand handelt. Vielmehr ist
+die Unterteilung des Frameworks an das Vorbild ''Natur'' angelehnt. Abstrakt betrachtet bildet sie
+ein riesiges System, das bis zum Atom und kleiner verfeinert werden kann. Die Klassenstruktur des
+Frameworks gliedert sich ähnlich. Ausgehend von einem System, der Software-Applikation, unterteilt
+sich die Struktur in Block, Region, Komponente, Teil und Kette, wobei man Systeme noch zu Familien
+gruppieren kann. Die Klassen einer Ebene dürfen die Klassen einer niederen Schicht benutzen, nicht
+jedoch umgekehrt. Damit sind unidirektionale Abhängigkeiten und eine kreisfreie Vererbung sichergestellt.\\
+Eine derartige Struktur und Darstellung komplexer Zusammenhänge in Hierarchieebenen wird auch als
+\myglossary{Ontologie}{Der Begriff stammt aus dem Griechischen. Zusammengesetzt aus ''ontos'', das
+Sein, und ''logos'', das Wort, beschreibt es die Lehre vom Sein, von den Ordnungs-, Begriffs- und
+Wesensbestimmungen des Seienden.} bezeichnet \cite{Diplomarbeit_Jens_Bohl}.
+
+\section{Die Applikation}
+Die zentrale Einheit eines jeden \emph{Res Medicinae}-Moduls ist sein \emph{Controller}, abgeleitet
+aus dem Model View Controller -Muster (Abschnitt \ref{Der Model View Controller}), welches hier zum
+Einsatz kommt. Im Controller laufen alle Ereignisse zusammen, werden ausgewertet und entsprechende
+Operationen ausgeführt. Im Gegensatz zum klassischen Model View Controller wird bei \emph{Res
+Medicinae} auf eine Anwendung des Beobachter-Musters verzichtet. Die Aktualisierungsoperationen für
+die Views werden vom Controller gesteuert, wodurch der Implementierungsaufwand für eine zusätzliche
+Beobachter-Komponente eingespart werden konnte.\\
+Das Framework sieht eine Klasse \emph{Controller} vor, deren Funktionalität nach der Vererbung
+beliebig erweitert werden kann. \emph{AdvancedBasicApplication} ist eine ihrer Subklassen. Von
+dieser werden sämtliche Basisoperationen, die in Verbindung mit der Mapping-Schicht stehen,
+initiiert und gesteuert. Im speziellen betrifft das Methoden für das Laden, Speichern, Anlegen,
+Löschen, Modifizieren und Importieren von Patienten-Karteien. Zusätzlich wird hier der gewünschte
+Persistenzmechanismus bestimmt, d.h. der Anwender kann zur Laufzeit entscheiden, ob er die Daten in
+einem XML-Format auf seiner lokalen Festplatte oder zentral in der Datenbank ablegen möchte.\\
+Die Identifikation des Kommunikationsparadigma erfolgt ebenfalls durch den Anwender zur Laufzeit.
+Es kann zwischen RMI, CORBA und anderen gewählt werden, deren vollständige Implementierung jedoch
+nicht Teil der Diplomarbeit war und daher auch nur vorbereitet, das heißt beim Entwurf der
+Architektur berücksichtigt wurde.\\
+Während der Initialisierung der \emph{AdvancedBasicApplication} erfolgt unter anderem die
+Instanziierung einer Server- und einer Client-Klasse, standardmäßig RMI. Das Server-Objekt meldet
+seine verfügbaren Dienste am zugehörigen Name Service an, so dass Clients nun über diese Dienste
+Daten anfordern können. Eine ausführliche Beschreibung erfolgt im Abschnitt
+\ref{Der Data Mapper als Kommunikationssteuerung}.\\
+Jedes Modul hält jeweils eine Referenz auf ein Client- und auf ein Serverobjekt. Das Auslagern von
+Server und Client in separate Klassen macht durchaus Sinn. Zum einen wird die Methodik der Klassen
+aufgrund einer klaren Trennung weniger unübersichtlich und zum anderen sind die zusammengehörigen
+Algorithmen für einen Kommunikationsdienst in jeweils einer Klasse gruppiert. Daher ist es recht
+einfach, Module um weitere Dienste zu erweitern oder andere zu entfernen. Man findet diese Technik
+auch beim Model View Controller wieder. Sie trägt hier die Bezeichnung Strategie-Muster.\\
+Mit der Realisierung der Klasse \emph{AdvancedBasicApplication} verfügt jedes von ihr erbende
+Modul, wie beispielsweise \emph{ReForm} oder \emph{Record} über eine grundlegende Funktionalität,
+die bei Bedarf genutzt werden kann.
+
+\section{Die Domain}
+Die Domain-Architektur von \emph{Res Medicinae} beinhaltet den wesentlichen Eigenanteil des
+entworfenen und umgesetzten Modells für die Diplomarbeit. Sie gliedert sich in drei Ebenen. An
+oberster Position befindet sich das Domain-Modell. Es verwaltet sämtliche Daten der Geschäftslogik.
+Die unterste Ebene, die Persistenzschicht, dient dem langzeitigen Speichern dieser Daten und sorgt
+im Falle einer Datenbank für die zentrale Zugänglichkeit. Um eine direkte Abhängigkeit zwischen
+Domain-Modell und Persistenzmechanismen zu vermeiden, wurde eine für den Anwender transparente
+Zwischenschicht eingefügt. Sie ist angelehnt an das in Abschnitt \ref{Data Mapper} beschriebene
+Muster Data Mapper. Durch eine Abbildung der Domain-Daten auf die entsprechende Speicherstruktur,
+muss im Falle einer Modifikation von Domain-Modell oder Persistenzschicht, die jeweils andere Ebene
+nicht angepasst werden. Eine Änderung ist lediglich in der Mappingschicht nötig.
+\begin{figure}[h]
+    \begin{center}
+       \includegraphics[scale=0.8]{Bilder/LogischeArchitektur_Resmedicinae.eps}
+       \caption{Die logische Architektur von Res Medicinae}
+       \label{fig:LogischeArchitektur_Resmedicinae}
+    \end{center}
+\end{figure}
+
+Besonders in verteilten Anwendungen ist das sinnvoll, da Modifikationen der Datenbank die
+Notwendigkeit einer Anpassung sämtlicher Clients nach sich ziehen würde. Wohingegen die Änderung
+der Mappingschicht, die in diesem Fall von den Clients extrahiert wurde und sich auf einem anderen
+Rechner befindet, einen wesentlich kleineren Aufwand bedeutet. Eine derart verteilte Realisierung
+ist bis zum gegenwärtigen Zeitpunkt in \emph{Res Medicinae} praktisch noch nicht umgesetzt, aber
+durch die Verwendung des Data Mapper -Musters in der aktuellen Architektur berücksichtigt worden.
+Da also die Mappingschicht als wesentliche Neuerung gegenüber anderen Ansätzen die Möglichkeit
+bietet, nicht nur einen, sondern mehrere Pesistenzmechanismen zu verwenden und zusätzlich ein
+Modell für die Anbindung unterschiedlicher Kommunikationsparadigmen vorschlägt, wurde projektintern
+für diese Schicht eine neue eigenständige Bezeichnung geprägt: \emph{Layer PerCom}.\\
+Abbildung \ref{fig:LogischeArchitektur_Resmedicinae} verdeutlicht, wie sich die Domain-Architektur
+in die Applikation eingliedert. Für die Umsetzung des Model View Controller -Musters werden die
+Daten des Domain-Modells in ein an die View angepasstes Model transferiert. Bei Änderung der Daten
+im Modell wird die View vom Controller aufgefordert, sich zu aktualisieren. Das ist immer dann der
+Fall, wenn von der Mappingschicht Daten aus der darunter liegenden Datenquelle gelesen und in das
+Domain-Modell geschrieben werden.\\
+Zusätzlich muss die View Kenntnis von dem Controller besitzen, denn dieser fungiert auch als
+Listener, d.h. er ''hört'', ob in der View Ereignisse ausgelöst wurden und antwortet mit einem
+entsprechenden Methodenaufruf.\\
+Die in der obigen Abbildung grau hinterlegte Domain-Architektur entspricht dem im Rahmen dieser
+Diplomarbeit entwickelten Modell zur persistenten Sicherung von Daten. Die beiden hellgrau
+gekennzeichneten Schichten \emph{Layer PerCom} und Persistenzschicht wurden eigenständig entworfen
+und entwickelt. Das Domain-Modell unterlag mit wachsender Komplexität der Anforderungen auch für
+parallel entwickelte Module zum jeweiligen Zeitpunkt entsprechenden Erweiterungen.
+
+Das Kernstück der Mappingschicht bilden die Assembler. Es wird zwischen zwei Haupttypen
+unterschieden. Zum einen existieren Assembler, die eine Konvertierung der Informationen des
+Domain-Modells für den jeweiligen Persistenz-Mechanismus vornehmen. Im Speziellen erstellt der
+\emph{XMLAssembler} ein XML-Dokument, das als solches in einer Datei gespeichert wird. Der
+\emph{ERAssembler} hingegen verwaltet die Daten unter Verwendung des SQL-Packages in einer
+Datenbank. Der Prefix \emph{ER} steht für \emph{Entity Relationship}. Das eigens für \emph{Res
+Medicinae} entwickelte SQL-Package umfasst sämtliche Statements, die für Operationen auf der
+Datenbank notwendig sind. Jedes Statement wird dabei jeweils in einer eigenen Klasse gekapselt, so
+dass die Applikation sehr simpel um neue SQL-Anweisungen erweitert werden kann.\\
+Der andere Assembler-Typ ist für die entsprechende Abbildung der Domain-Daten auf das vom Anwender
+aktuell selektierte Kommunikationsparadigma verantwortlich. Es liegen noch keine implementierten
+Algorithmen für diese Aktionen vor. Berücksichtigt wurden die Architektur und
+Kommunikationseigenschaften. Weiterhin wurde versucht, die Realisierung so allgemein wie möglich zu
+halten, damit eine Erweiterung um andere Paradigmen ohne großen Aufwand vollzogen werden kann.
+Vorgesehen sind bisher Java-RMI und CORBA. JMS ist ebenfalls möglich.
+
+\section{Das Domain-Modell}
+\begin{figure}
+    \begin{center}
+       \includegraphics[scale=0.9]{Bilder/Resmedicinae_DomainModel.eps}
+       \caption{Das Domain-Modell von Res Medicinae}
+       \label{fig:Resmedicinae DomainModel}
+    \end{center}
+\end{figure}
+Das Domain-Modell von \emph{Res Medicinae} ist zum bisherigen Zeitpunkt noch recht übersichtlich.
+Die zentrale Klasse \emph{HealthRecord} erbt die Eigenschaften der Frameworkklasse
+\emph{DomainObject}. Ein \emph{HealthRecord} enthält sämtliche allgemeinen Patientendaten,
+beispielsweise Name, Adresse, Telefonnummer und Versicherung. Zusammengesetzte Datentypen, wie
+Adresse, sind als eigene Klassen modelliert worden. Weiterhin kann ein \emph{HealthRecord} beliebig
+viele Probleme enthalten. Ein Problem stellt eine Krankheit dar. Es setzt sich aus Episoden
+zusammen, welche wiederum aus einer Anzahl partieller Kontakte bestehen. Während ein partieller
+Kontakt genau einen Arzttermin zu einer bestimmten Krankheit darstellt, verkörpert eine Episode
+einen Teilabschnitt zusammengehörender partieller Kontakte. Dazu werden \emph{Subjective},
+\emph{Objective}, \emph{Assessment} und \emph{Plan}, also Anamnese, Befund, Bewertung und Vorgehen
+festgehalten. Da eine Krankheit über einen längeren Zeitraum wiederholt auftreten kann, besteht die
+Möglichkeit, dass ein Problem eine Vielzahl an Episoden enthält, allerdings gibt es zu jedem
+partiellen Kontakt jeweils nur genau eine
+Anamnese, eine Bewertung und ein Vorgehen. Befunde können mehrere existieren.\\
+Wie in Abbildung \ref{fig:Resmedicinae DomainModel} ersichtlich ist, fügt sich das Domain-Modell in
+die \emph{Ontologie} des Frameworks als \emph{Region} ein, die wie alle anderen Klassen an oberster
+Stufe von \emph{Item} erbt. Eine zusätzliche Untergliederung in \emph{Record}, \emph{Unit},
+\emph{Heading} und \emph{Description} bildet für das Domain-Modell eine eigene \emph{Ontologie}.
+\emph{Description} kennzeichnet die Primitive der Domain-Struktur, beispielsweise Blutdruck-,
+Pulsmesswerte oder Name. Sie können in jede Klasse der übergeordneten Ebenen eingebunden werden.
+\emph{Heading}s bilden die zweit niedrigste Stufe der Einteilung. Wenig komplexe Verknüpfungen von
+\emph{Description}s und \emph{Heading}s zu einer Einheit verschiedener Sachgebiete werden von
+\emph{Unit}s gebildet. Letztendlich fasst ein \emph{Record} alle Daten zu einem Ganzen zusammen.
+Aus Übersichtlichkeitsgründen wurde auf die Darstellung von Beispielklassen zu \emph{Description}
+in der Abbildung verzichtet. Die Komplexität der Schichten nimmt von unten nach oben zu. Damit
+zeichnet sich diese \emph{Ontologie} ebenfalls durch einen hierarchischen Aufbau aus.
+%\begin{figure}[h]
+%    \begin{center}
+%       \includegraphics[bb= 0 50 800 680, scale=0.9]{Bilder/Resmedicinae_DomainModel.eps}
+%       \caption{Das Domain-Modell von Res Medicinae}
+%       \label{fig:Resmedicinae DomainModel}
+%    \end{center}
+%\end{figure}
+%\clearpage
+
+\section{Der Data Mapper als Persistenzsteuerung}
+    \label{Der Data Mapper als Persistenzsteuerung}
+Die Implementierung der grundlegenden Methodik zum Verwalten der Domain-Modell-Daten stellte einen
+der Schwerpunkte des praktischen Teils der Diplomarbeit dar.\\
+Hierfür wurde vorerst eine XML-Realisierung verwendet, dessen Funktionalität die Klasse
+\emph{XMLAssembler} beinhaltet. Alle Daten werden in einem XML-Dokument lokal auf der Festplatte
+gespeichert, wie es in Abschnitt \ref{Das XML-Datenmodell} beschrieben wurde.\\
+Der \emph{ERAssembler} hingegen realisiert die Verwaltung sämtlicher Daten in einer
+Datenbank. Über die Anweisungen\\[0.3cm]
+\tt{
+Class.forName(''org.postgresql.Driver'');\\
+Connection connection =\\
+DriverManager.getConnection(''jdbc:postgresql://zone3/resmedicinae'',
+''zonie'', ''''); }
+\\[0.3cm]
+\rm verbindet sich der Assembler mit dem zugrunde liegenden DBMS PostgreSQL. Der Datenbanktreiber
+wird zur Laufzeit mit dem ersten der beiden Befehl geladen. Auffällig ist hier, dass keine
+Instanziierung der Klasse \emph{Driver} erfolgt. Es genügt eine Referenz im Arbeitsspeicher. Damit
+steht eine PostgreSQL-spezifische Implementierung der angebotenen Operationen zur Verfügung.\\
+Der erste Parameter von \emph{getConnection()} beinhaltet unter anderem einen Verweis auf den
+Datenbanknamen ''resmedicinae''. Die Addresse des Rechners ''zone3'', das verwendete Protokoll
+''jdbc'' sowie Subprotokoll bzw. Identifikator des DBMS ''postgresql'' sind ebenfalls enthalten, so
+dass die Verbindung zur Datenbank eindeutig spezifiziert ist. Mit den anderen beiden Parametern
+werden Nutzername und Passwort übergeben. In diesem Fall ist kein Passwort erforderlich.
+
+\subsection{Das XML-Datenmodell}
+    \label{Das XML-Datenmodell}
+Wie eingangs erwähnt, handelt es sich bei \emph{Res Medicinae} um ein relativ junges Projekt. So
+stand zu Beginn dieser Diplomarbeit noch keine lauffähige Datenbankanbindung zur Verfügung. Die
+Datensätze wurden aus diesem Grund vorerst ausschließlich in einem XML-Format hinterlegt. Es zeigte
+sich, dass das entwickelte Verfahren für diese lokale Speicherung der Daten auch im späteren Umgang
+als sinnvoll erachtet und somit ebenfalls Bestandteil der Mappingschicht wurde.\\
+In einer Indexdatei \emph{EHRIndex} (siehe Abbildung \ref{fig:Ueberfuehrung Datei- in DB-Struktur})
+werden zunächst nur die wichtigsten Informationen aller Patienten gehalten. Das sind
+\begin{figure}
+    \begin{center}
+       \includegraphics[scale=0.9]{Bilder/XML_Klassendiagramm.eps}
+       \caption{Die Klassenstruktur der XML-Komponente von Layer PerCom}
+       \label{fig:XML_Klassendiagramm}
+    \end{center}
+\end{figure}
+Patientenidentifikationsnummer, Patientenname und -vorname. Erstere wird im Folgenden unter der
+Abküzung Patienten-ID häufige Verwendung finden. Diese Patienten-ID dient vor allem zur eindeutigen
+Kennzeichnung und somit Identifikation der einzelnen Patientendatensätze und bietet sich somit auch
+zur Verwendung als Dateiname für die einzelnen Datensätze an. Jeder Patient mit seinen sämtlichen
+verfügbaren Informationen wird in einer eigenen durch seine ID festgelegten Datei
+hinterlegt und kann aufgrund der Kennzeichnung in der Indexdatei jederzeit lokalisiert werden.\\
+Die oben beschriebene Architektur bietet den Vorteil, dass nicht sämtliche vorhandene Datensätze
+beim Starten der Applikation eingeladen werden müssen, was mit wachsender Anzahl einen immensen
+Speicherbedarf mit sich brächte, sondern dass zu jedem Patienten die Daten erst bei Bedarf geladen
+und dann allerdings im Arbeitsspeicher bzw. in einer Instanz der Klasse \emph{LoadedHealthRecords}
+gehalten werden, um einen schnelleren Zugriff zu ermöglichen und wiederholtes Lesen von der
+Festplatte zu vermeiden. Dies bedeutet allerdings auch, dass die Daten vor Beendigung des
+Programmes durch ein vom Benutzer ausgelöstes Speichern gesichert werden müssen. Damit dieser
+Vorgang nicht versehentlich übergangen wird, öffnet sich im Falle einer ungespeicherten
+Modifikation der Daten ein separater Hinweisdialog.\\
+Wie dem Klassendiagramm zu entnehmen ist, bildet die Klassse \emph{AdvancedBasicApplication} die
+zentrale Instanz.  Sie empfängt alle Ereignisse aus den Dialogen \emph{HealthRecordManager},
+\emph{AddHealthRecord}, \emph{ChangeHealthRecordData} und reagiert mit dem Aufruf entsprechender
+Methoden des \emph{XMLAssemblers}. Dieser erzeugt aus den ihm übergebenen Daten ein XML-Dokument,
+dass er anschließend in einer Datei abspeichert, oder er lädt die Daten aus einer Datei. Dafür
+erzeugt er unter Zuhilfenahme des XML-Parsers XERCES \cite{studienjahresarbeit} ein XML-Dokument,
+von dem er die Informationen extrahiert und an die \emph{AdvancedBasicApplication} als neuen
+\emph{HealthRecord} zurückgibt. Die Klasse \emph{HealthRecordIndex} dient zum Auffinden der
+gesuchten Datei. Sie enthält sämtliche Daten der oben angesprochenen Indexdatei und damit auch
+die als Dateinamen dienenden Patienten-IDs.\\
+Unter dem Eintrag \emph{Cave} (lateinisch für Achtung) verbergen sich besondere Merkmale der
+Patienten, die bei Behandlungen zu berücksichtigen sind, wie beispielsweise Allergien.\\
+Ein wesentlicher Vorteil der gewählten Architektur ist die ähnliche Strukturierung zu den Tabellen
+der Datenbankanbindung. So sind unter anderem die IDs der Datensätze bzw. die Dateinamen der
+XML-Files direkt als Primärschlüssel (zu Englisch: Primary Key) der Tabelle \emph{HealthRecords}
+verwendbar. Mit der konkreten Generierung der Primary Keys beschäftigt sich ein Teil des nächsten
+Abschnittes.
+%\clearpage
+
+\subsection{Das Datenbankmodell}
+    \label{Das Datenbankmodell}
+Die Anwendung basiert auf einem relationalen Datenbankentwurf. So wie die noch recht simple Gestalt
+des Domain-Modells eine recht einfache Speicherstruktur für XML-Dateien ermöglicht, spiegelt sie
+sich ebenfalls in Anzahl und Aufbau der Tabellen der zu generierenden Datenbankanbindung wider.
+\begin{figure}
+    \begin{center}
+       \includegraphics[scale=0.9]{Bilder/XML2DB_untereinander.eps}
+       \caption{Überführung der XML-Datei-Struktur in eine DB-Struktur}
+       \label{fig:Ueberfuehrung Datei- in DB-Struktur}
+    \end{center}
+\end{figure}
+Man kann sagen, dass die Klassenstruktur des Domain-Modells direkt in die Architektur der Datenbank
+übertragen wurde. Tatsächlich gibt es für die Abbildung von Klassen auf Tabellen drei empfohlene
+Ansätze:
+\begin{enumerate}
+\item{Eine Tabelle für jede Hierarchie}
+\item{Eine Tabelle für jede konkrete Klasse}
+\item{Eine Tabelle für jede Klasse (auch abstrakte Klassen)}
+\end{enumerate}
+Für die umgesetzte Datenbankanbindung wurde die zweite Variante gewählt, d.h. für jede Klasse des
+Domain-Modells, die zur Datenhaltung verwendet wird, existiert eine Tabelle, abgesehen von
+Subjective, Objective, Assessment und Plan sowie den Descriptions, die lediglich als Spalten in der
+Tabelle \emph{PartialContacts} benötigt werden. Sie bestehen jeweils nur aus einer Zeichenkette.\\
+Während in Abbildung \ref{fig:Ueberfuehrung Datei- in DB-Struktur} die Primärschlüssel fett,
+unterstrichen und die Fremdschlüssel fett, ohne Unterstreichung dargestellt sind, werden im
+anschließenden Entity Relationship Diagram die Primärschlüssel den ERD-Konventionen entsprechend
+unterstrichen und die Fremdschlüssel mit unterbrochener Unterstreichung hervorgehoben. Das ERD
+visualisiert noch einmal die Abhängigkeiten der Tabellen untereinander. Allerdings wurde zu Gunsten
+der Übersichtlichkeit nur ein Teil der Attribute eingezeichnet.
+
+\begin{figure}[hb]
+    \begin{center}
+       \includegraphics[scale=0.9]{Bilder/ERD.eps}
+       \caption{Das Entity Relationship Diagram der Datenbank}
+       \label{fig:ERD}
+    \end{center}
+\end{figure}
+
+Sollen Daten in ein oder mehrere Tabellen geschrieben werden, findet zunächst eine Überprüfung der
+existierenden Einträge in der Datenbank statt. Sie testet auf das Vorhandensein des
+Primärschlüssels unter dem der Datensatz abgelegt werden soll. Ist dies nicht der Fall wird eine
+Insert-Anweisung des SQL-Befehlssatzes ausgeführt, anderenfalls erfolgt ein Update.\\
+Jeder Schreibvorgang in eine Tabelle erhält zusätzlich zu den Nutzdaten einen \emph{Timestamp}, der
+beim Laden mitgesendet wird. Er ermöglicht es, zu überprüfen, ob die augenblicklich im
+Domain-Modell gehaltenen Daten die Aktuellsten sind, oder ob ein anderer Anwender bereits
+darauf geschrieben hat und deshalb ein Abgleich der Informationen notwendig ist.\\
+Erfolgt bei Abarbeitung einer mehrstufigen Transaktionen (siehe Abschnitt \ref{Transaktionen}) ein
+Fehler, wird ein Rollback initiiert und somit sämtliche bis zu diesem Zeitpunkt vollzogenen
+Modifikationen in der Datenbank rückgängig gemacht.\\
+Die referenzielle Integrität wird durch die Vergabe von Fremdschlüsseln sichergestellt. Zugunsten
+der Performance wurde auf eine Normalisierung verzichtet und diese Fremdschlüssel als redundante
+Informationen in die entsprechenden Tabellen übertragen. Dabei wurde der hierarchische Aufbau des
+Domain-Modells berücksichtigt, d.h. die Tabellen, welche Klassen einer unteren Ebene umsetzen,
+enthalten alle Primärschlüssel ihrer übergeordneten Tabellen als Fremdschlüssel. Damit ist eine
+performantere Zuordnung von Teilinformationen zum Domain-Modell möglich und die Implementierung
+vereinfacht sich ebenfalls. So führt beispielsweise das Löschen eines Eintrages in der Tabelle
+\emph{HealthRecords} dazu, das alle mit ihm verbundenen Einträge in den anderen Tabellen
+automatisch entfernt werden.
+
+\subsubsection{Die Primary Keys}
+Die Primärschlüssel einer Tabelle dienen der eindeutigen Identifikation eines Datensatzes. Dazu
+wurde in Abschnitt \ref{PostgreSQL} eine Variante beschrieben - die Nutzung der vom DBMS PostgreSQL
+erzeugten OIDs.  Bei \emph{Res Medicinae} kommt aber nicht ausschließlich die Speicherung in eine
+Datenbank, sondern auch in lokale Dateien zum Einsatz. Die OIDs werden beim Schreiben eines neuen
+Datensatzes in eine Tabelle erzeugt. Würde der Datensatz beim Anlegen nicht zentral in die
+Datenbank geschrieben, sondern lokal abgelegt, so stünde hierfür noch keine eindeutige
+Identifikationsnummer zur Verfügung. Weiterhin ist es möglich, dass später hinzugefügte Datenbanken
+keine eigenen Routinen zum erzeugen von OIDs besitzen, so dass es vorteilhafter ist, von Anfang an
+eine eigene Methodik für die Primärschlüsselgenerierung zu entwickeln. Eine eigene Klasse
+\emph{ObjectID} übernimmt diese Funktion. Sie bildet durch Konkatenation von Netzwerkadresse des
+Clients und der aktuellen Zeit eine eindeutige Identifikationsnummer. Der ermittelte Zeitwert wird
+auf die Nanosekunde genau verarbeitet.
+
+\pagebreak
+
+Der folgende Java-Programmausschnitt erzeugt die OIDs. \tt{
+\begin{tabbing} \hspace{0.9cm}\= \hspace{0.5cm} \= \hspace{1.0cm} \=\kill
+1:\>public String getNewOId() \{\\
+2:\>\>String idString = InetAddress.getLocalHost().toString();\\
+3:\>\>idString = idString.substring(idString.indexOf(''/'') + 1);\\
+4:\>\>idString = idString.replace('.', '\_');\\
+5:\>\>long time = System.currentTimeMillis();\\
+6:\>\>idString = idString + ''\_'' + time + Math.round(getNanos(time)/100000);\\
+7:\>\>return idString;\\
+8:\>\}\\
+9:\>public long getNanos(long time) \{\\
+10:\>\>return new Timestamp(time).getNanos();\\
+11:\>\}
+\end{tabbing}
+} \rm Daraus resultiert die OID-Struktur: \(<\)IP-Adresse\(>\)\_\(<\)aktuelle Zeit\(>\). Die
+aktuelle Zeit wird mit zwei Aufrufen zusammengesetzt. Zeile 5 liefert die Anzahl der Millisekunden
+seit Mitternacht des ersten Januars 1970. Zu dieser Zahl werden in Zeile 6 die Nanosekunden
+ermittelt und angehangen. Die Methode \emph{InetAdress.getLocalHost()} liefert einen String,
+bestehend aus Hostname und Internetadresse (in dieser Reihenfolge), die durch einen Slash
+voneinander getrennt sind. Da nur die IP-Adresse notwendig ist, wird der Rest in Zeile 3
+abgeschnitten. Die Punkte in der IP-Adresse werden in Zeile 4 durch Unterstriche ersetzt, um ein
+einheitliches Trennzeichen zwischen den einzelnen Zahlen zu definieren. Eine spätere Identifikation
+des Erstellers wird somit möglich.\\
+Für jeden neuen Datensatz wird direkt nach dem Anlegen im Programm, d.h. noch vor dem ersten
+Abspeichern, mit \emph{getNewOID()} eine OID angefordert. Die Mechanismen für die Speicherung von
+XML-Dateien nutzen diese eindeutige Identifikationsnummer als Dateinamen. In den Tabellen der
+Datenbank kommt sie als Primärschlüssel zum Einsatz. Damit lassen sich bei Ausfall des Netzwerkes
+neue Datensätze erzeugen und später in die Datenbank integrieren. Konflikte mit anderen
+Primärschlüsseln können nicht auftreten.
+
+\subsubsection{Das SQL-Package}
+Martin Fowler empfiehlt in seinen Ausführungen zu den Mustern \emph{Domain Model} und \emph{Data
+Mapper} \cite{enterprisepattern}, die SQL-Statements in einem separaten Paket zu verwalten. Das
+verhindert zum einen die direkte Abhängigkeit des Domain-Modells von der Datenbank und zum anderen
+gestaltet es die Software-Architektur übersichtlicher. Die Umsetzung in \emph{Res Medicinae} wurde
+so vorgenommen, dass zunächst eine oberste Klasse \emph{SQLStatement} die wesentlichen Operationen
+definiert, analog dem Muster \emph{Layer Supertype}. Von ihr erben die spezialisierteren
+Statement-Typen für Suchen, Einfügen, Modifizieren, Löschen der Daten und Tabellen. Sie
+implementieren jeweils eine eigene \emph{execute()}-Methode, die entsprechende Operationen für das
+Arbeiten auf der Datenbank ausführt. Auf unterster Ebene ist jedes Statement in einer
+entsprechenden Klasse gekapselt. Für die Instanzen dieser Klassen liefert \emph{execute()} eine
+Ergebnismenge als Array, bestehend aus Vektoren, an das aufrufende Objekt zurück. Der erste Vektor
+enthält dabei die Spaltennamen der ausgelesenen Tabellen, so dass eine eindeutige Einordnung der
+Daten in das Domain-Modell erfolgen kann. Allerdings liefern nicht alle Datenbankoperationen eine
+Ergebnismenge zurück. Vielmehr betrifft das ausschließlich die Suchmethoden. Fehlgeschlagene
+Operationen werden mittels Exception an das aufrufende Objekt gemeldet, so dass bei Ausführung
+einer mehrstufigen Transaktion, siehe Abschnitt \ref{Transaktionen}, ein Rollback durchgeführt
+werden kann.
+
+\subsection{Resümee}
+Die Domäne bestehend aus Domain-Modell, Data Mapper und Persistenzmechanismen
+bietet eine flexible und zugleich robuste Struktur gegenüber Erweiterungen und
+Anpassungen. Die an eine moderne Persistenzschicht gestellten Anforderungen
+werden dabei erfüllt:
+\begin{itemize}
+\item{Unterstützung verschiedener Persistenzmechanismen}: Dateien in einem XML-Format
+und eine relationale Datenbank
+\item{Vollständige Kapselung aller Persistenzmechanismen durch die Anwendung der Möglichkeiten
+des objektorientierten Porgrammierparadigmas}
+\item{Multi-Objekt Aktionen}: Simultane Bearbeitung mehrerer Objekte. Mit einer
+Anfrage werden Daten für verschieden Objekte des Domain-Modells angefordert.
+\item{Unterstützung von Transaktionen}
+\item{Erweiterbarkeit}
+\item{Benutzung von Objektidentifizierungsnummern (OIDs)}
+\item{Verwendung der Structured Query Language bzw. Embedded SQL}
+\item{Multiple Verbindungen}, d.h. gleichzeitige Verbindungen zu weiteren Datenbanken,
+sind momentan noch nicht umgesetzt, können aber bei Bedarf durch die Flexibilität der
+Mappingschicht problemlos hinzugefügt werden.
+\item{\emph{Cursor}} werden vom zugrunde liegenden Datenbankmanagementsystem unterstützt,
+sind aber ebenfalls noch nicht in der Klassenstruktur enthalten, da ihre Verwendung bisher noch
+nicht als sinnvoll und notwendig erachtet wurde.
+\end{itemize}
+Für die Abfrage des aktuellen Zustandes der Datenbank und Tabellen wurde ein Werkzeug namens
+SQuirreL verwendet, dass bei Bedarf in jedes Modul eingebunden und vom Anwender gestartet werden
+kann. Es handelt sich hierbei um ein weiteres, in Java implementiertes \emph{Open Source} Projekt,
+das ebenfalls bei Sourceforge Unterstützung findet und im Internet erhältlich ist \cite{SQuirreL}.
+
+\section{Der Data Mapper als Kommunikationssteuerung}
+    \label{Der Data Mapper als Kommunikationssteuerung}
+Sämtliche, im Anschluss beschriebenen Kommunikationsparadigmen nutzen die Operationen der
+Mapping-Schicht. Für jede dieser Realisierungen ist im Klassenmodell ein spezialisierter, bereits
+angesprochener Assembler vorgesehen und weiterhin zusätzliche Klassen für die Optimierung und
+Separierung der Kommunikation. Dafür kommen einige der in Abschnitt \ref{Einige ausgewaehlte Muster
+im Detail} erläuterten Muster zum Einsatz. Ihre Umsetzung wird im Folgenden am Beispiel Java-RMI
+erläutert.\\
+Die Klasse \emph{RMIDTO} entspricht dem Kernstück des \emph{Data Transfer Object} -Musters für eine
+RMI-Middleware. Der \emph{RMIAssembler} wird von \emph{RMIServicesImpl} als Remote Facade benutzt
+und bekommt die ferne Anfragen eines Clients delegiert. Unter Benutzung verschiedener Methoden des
+\emph{RMIAssembler}s werden die gewünschten Daten aus dem Domain-Modell zusammengetragen und in
+einem \emph{RMIDTO} gekapselt. Letztendlich wird eine Kopie dieses DTOs an den Client als Ergebnis
+zurück gesendet. Dort erfolgt im \emph{RMIAssembler} unter Verwendung spezialisierter
+Umkehroperationen eine Auswertung des Resultates, wonach die Daten in das eigene Domain-Modell
+übertragen werden. Das Sequenzdiagramm in Abbildung \ref{fig:RMIClientServer_Sequenzdiagramm}
+soll diesen Vorgang veranschaulichen.\\
+Für CORBA mit einer Versionsnummer kleiner als 3 sind Data Transfer Objects nicht anwendbar, da
+keine Objekte als Ganzes versendet werden können, sondern nur Datentypen, die der \emph{Interface
+Definition Language} (IDL) zur Verfügung stehen. IDL ist eine programmiersprachenunabhängige
+Schnittstellenbeschreibungssprache. Sie realisiert, dass CORBA ebenfalls sprachen\mbox{unabhängig}
+ist. Daher besteht die Möglichkeit, die Clients beispielsweise in Java und den Server in C++ zu
+implementieren. Daraus ergibt sich allerdings der Nachteil, dass Objekte, die vom Client zum Server
+gesendet werden, von Letzterem nicht verarbeitbar sind. Deshalb werden Datentypen verwendet, die in
+möglichst vielen Programmiersprachen vorhanden oder zumindest leicht in sprachenspezifische Typen
+überführbar sind. Aus diesem Grund muss anstelle des bei RMI nutzbaren DTOs ein anderer Datentyp
+zur Übertragung der Domain-Daten verwendet werden, beispielsweise ein Struct oder ein Array aus
+Strings. Ab CORBA 3 ist das Versenden von Objekten möglich, denn IDL spezifiziert einen neuen Typ,
+genannt \emph{valueType}, der diesen Vorgang möglich macht \cite{CORBA_3_0}.
+
+\subsection{Java-RMI}
+Die Remote Method Invocation oder kurz RMI \cite{RMI_SUN} zu verwenden bietet sich an, da hierfür
+im Java Development Kit von SUN Microsystems eigens ein Package implementiert wurde, d.h. der
+Applikation keine weitere Software zur Verfügung gestellt werden muss.\\
+Eine jede verteilte Anwendung benötigt immer mindestens drei Teile für eine \mbox{Client-/}
+Server-Kommunikation. Zum einen das Remote-Interface des Servers, welches die
+RMI-Standardschnittstelle \emph{\mbox{java.rmi.Remote}} erweitert. Es definiert Methoden, die
+später vom Client, dem zweiten Bestandteil, als Dienste genutzt werden können. Eine Klasse
+\emph{\mbox{RMIServicesImpl}} implementiert diese Schnittstelle und erbt zusätzlich die
+Funktionalität von \emph{\mbox{javax.rmi.PortableRemoteObject}}. Der Server und damit der dritte
+Teil einer verteilten Kommunikation meldet die Dienste an einem \emph{Name Service} an, welcher die
+Aufgabe einer Registrierung übernimmt. Nun wartet der Server in einer sich ständig wiederholenden
+Schleife auf eingehende Anfragen. Die Registrierung der Anwendungsdienste erfolgt mit diesen
+Anweisungen:\\*[0.3cm] \tt
+RMIServicesImpl rmiServices = new RMIServicesImpl();\\
+Context initialNamingContext = new InitialContext();\\
+initialNamingContext.rebind(''RMIServicesResMedicinae'', rmiServices );
+\\*[0.3cm]
+\rm Über den Name Service lässt sich die Lokation sämtlicher angemeldeter Dienste eindeutig
+identifizieren. Adressiert wird dieser Dienst über einen RMI-URL, analog zum Uniform Resource
+Locator von TCP/IP. Der Name Service kann sich daher an beliebiger Stelle in einem Netzwerk
+befinden. Nachteilig ist allerdings, dass bei Änderung der Position dieses Name Services, alle
+Clients und Server an den damit verbundenen neuen URL angepasst werden müssen.\\
+Der Client selber holt sich mittels Lookup des Name Services eine Referenz auf die
+Remote-Schnittstelle. Gleichzeitig wird die erlangte Objektreferenz auf den gewünschten Typ
+mittels Typecast abgebildet bzw. beschränkt:%\\[0.3cm]
+\tt
+\begin{tabbing}
+\hspace{1cm}\= \hspace{1cm} \= \kill
+RMIServices rmiS = (RMIServices)Naming.lookup(\\
+\> ''rmi://resmedicinaeserver/RMIServicesResMedicinae''\\
+);
+\end{tabbing}
+\rm
+Dabei haben die einzelnen Teile des RMI-URL, der als String an lookup() übergeben wird,
+nachfolgende Bedeutung und Gestalt. Beim Weglassen des Name-Service-Ports wird der Standardport
+1099 angenommen.\\*[0.3cm] \tt{
+rmi://\(<\)host-name\(>\)[:\(<\)name-service-port\(>\)]/\(<\)service-name\(>\) } \rm
+\\*[0.3cm]
+\begin{figure}
+    \begin{center}
+       \includegraphics[scale=0.8]{Bilder/RMIClientServer_Sequenzdiagramm.eps}
+       \caption{Sequenzdiagramm für eine Client-Server-Kommunikation}
+       \label{fig:RMIClientServer_Sequenzdiagramm}
+    \end{center}
+\end{figure}
+Die eigentliche Kommunikation zwischen Client und Server erfolgt über Surrogate-Objekte,
+Client-Stub und Server-Skeleton. Sie sind für das Marshalling und Unmarshalling, also das Ver- und
+Entpacken, sowie für die Weiterleitung der Daten an das Client- bzw. Server-Objekt verantwortlich,
+wobei RMI für das Verpacken eine Objekt-\emph{Serialisierung} verwendet \cite{RMI_jGuru}.\\
+Das sich anschließende Sequenzdiagramm in Abbildung \ref{fig:RMIClientServer_Sequenzdiagramm}
+beschreibt einen einfachen RMI-Kommunikationsprozess zum Übermitteln der Adresse eines Patienten.
+Für eine bessere Visualisierung sind die Objekte der unterschiedlichen Kommunikationspartner
+farblich differenziert. Clientobjekte sind grün, Serverobjekte rot und Name Service -Objekte blau
+dargestellt. Die Klasse Naming befindet sich ebenfalls auf dem Client-Rechner. Sie wurde hier
+lediglich farblich abgegrenzt, damit ersichtlich wird, dass die Methode \emph{lookup()} auf einen
+separaten Prozess zugreift, der unter Umständen auf einem entfernten Computer arbeitet. Geneigte
+Pfeile dienen als Darstellungsform von Nachrichtenaufrufen in unterschiedlichen Prozessen bzw. auf
+verschiedenen Rechnern und implizieren eine längere Laufzeit als Aufrufe innerhalb ein und
+desselben Prozesses. Für gewöhnlich erfolgt der Aufruf von {lookup()} nur einmal bei der
+Initialisieung des Clients. Die Referenz auf den Name Service wird in einer Variablen gehalten.\\
+Der Server muss zu Beginn einen Security Manager installieren. Er wird benötigt, damit geladene
+Klassen keine Operationen ausführen, die nicht erlaubt sind. Wenn kein Security Manager
+eingerichtet wurde, können weder Client noch Server eine RMI-Klasse laden.\\
+Das Data Transfer Object \emph{RMIDTO} ist als Hashtable modelliert. Über einen festgelegten
+Schlüssel werden die Daten mittels \emph{addValue()} serverseitig hinzugefügt. Der Client greift
+auf die ihm zugesandte Kopie mit dem selben Schlüssel über die Methode \emph{getValue()} zu und
+überträgt die so erhaltenen Daten anschließend unmittelbar in das Domain-Modell.
+
+\subsection{JMS}
+Eine aufwendige Middleware zu verwenden ist nur sinnvoll, wenn auch eine Anzahl von
+bereitgestellten Diensten und Features genutzt wird. Hinzu kommt dass die verteilte Kommunikation
+über ein Netzwerk mit nicht vernachlässigbaren Laufzeiten verbunden ist. Bei einer lokalen
+Interprozesskommunikation, d.h. für den Austausch von Daten zwischen zwei \emph{Res Mediciane}
+-Modulen auf dem selben Rechner, genügen simplere Dienste. Der \mbox{\emph{Java Message Service}}
+(JMS) bietet sich hierfür an.\\
+Eigentlich handelt es sich dabei, im Gegensatz zu den anderen beschriebenen
+Kommunikationsparadigmen um ein asynchrones Nachrichten-orientiertes Verfahren. Das heißt, auf die
+Antwort eines fernen Methodenaufrufes wird nicht unmittelbar gewartet bevor ein weiteres Arbeiten
+möglich ist. Teilweise sind Antworten auf eine Nachricht gar nicht erforderlich, deshalb verringert
+dieses Verfahren den notwendigen Datenverkehr innerhalb eines Netzwerkes. Neben dieser Primäridee
+für JMS existiert ebenfalls noch die Möglichkeit für einen synchronen Datenaustausch. Der Anwender
+kann dementsprechend wählen, welche der beiden Techniken für seine Anwendung günstiger ist.
+
+\subsection{Resümee}
+In Abbildung \ref{fig:Resmedicinae_2Tier} wird einmal die gesamte Kommunikationsstruktur innerhalb
+der Domäne eines \emph{Res Medicinae} -Moduls veranschaulicht. Man erkennt die Strukturierung als
+Zweischichtenmodell. Die beiden Applikationen, die sich nicht zwingend auf dem selben Rechner
+befinden müssen, tauschen ihre Daten über die in den vorangehenden Abschnitten beschriebenen
+Kommunikationsparadigmen aus, wobei auf die Berücksichtigung von einzelnen Details, wie
+beispielsweise den \emph{Name Service} von RMI und CORBA, verzichtet wurde.\\
+Der Zugriff über \emph{DataTransferAssembler} auf \emph{PersistanceAssembler} oder eine seiner
+Subklassen darf nicht realisiert werden, da dies ein Sicherheitsrisiko darstellt. Angenommen ein
+Client verfügt nur über einen eingeschränkten Zugang zur Datenbank. Dann bestünde die Möglichkeit,
+dass sich dieser Client über eine Remote-Operation Zugang zu den nicht autorisierten Daten
+verschafft, da der andere Anwender über diese Rechte verfügt. Ebenso verhält es sich mit den
+lokalen XML-Dateien des Remote-Rechners. Aus diesem Grund wird dem Client lediglich der Zugriff auf
+das aktuell im Speicher befindliche Domain-Modell über den \emph{DataTransferAssembler} des
+entfernten Rechners gestattet.\\
+Noch ein Wort zur Architektur visualisiert in Abbildung \ref{fig:Vollstaendiges Klassendiagramm}
+Anhang A. Die Instanz der Klasse \emph{AdvancedBasicApplication} enthält jeweils ein
+\begin{figure}[h]
+    \begin{center}
+       \includegraphics[scale=0.8]{Bilder/Resmedicinae_2Tier.eps}
+       \caption{Res Medicinae als Zweischichtenmodell}
+       \label{fig:Resmedicinae_2Tier}
+    \end{center}
+\end{figure}
+\emph{DataTransferAssembler}-, ein \emph{\mbox{PersistanceAssembler}}-, ein \emph{Server}- und ein
+\emph{Client}-Objekt. Die spezialisierten Server- und Client-Objekte enthalten eine Referenz auf
+ihre zugehörigen, spezialisierten Assembler. Damit ist der Applikation immer die aktuell
+ausgewählte Middleware für die verteilte Kommunikation bekannt. Es kann sogar in der selben
+Applikation, zur selben Zeit, für Client und Server jeweils unterschiedliche Middleware verwendet
+werden. Lediglich zusammengehörige Kommunikationspartner müssen sich auf ein Verfahren einigen.

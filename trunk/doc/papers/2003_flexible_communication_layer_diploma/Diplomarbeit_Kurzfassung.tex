@@ -1,0 +1,58 @@
+\chapter*{Kurzfassung}
+Die vorliegende Diplomarbeit entstand im Zusammenhang mit einem informationstechnischen Projekt für
+den Einsatz in der Medizin. Es trägt den Namen \emph{Res Medicinae}. Hierbei soll eine
+komponentenbasierte Anwendung realisiert werden, die es ermöglicht, Patientendaten zu verwalten und
+unter anderem auch graphisch auszuwerten.\\
+Die einzelnen Komponenten sollen autonom als eigenständige Applikationen arbeiten, aber auch
+miteinander interagieren können.
+
+\emph{Res Medicinae} existierte zu Beginn der Diplomarbeit nur in Grundzügen. Unter anderem fehlte
+die Möglichkeit, Daten persistent zu sichern. Daher war ein Schwerpunkt der Diplomarbeit die
+Modellierung einer Persistenzschicht zu einem anzupassenden Domain-Modell, welches sämtliche
+Geschäftsdaten enthält. Eine zusätzliche, dem Anwender transparente Schicht zwischen Domain-Modell
+und Persistenzschicht verhindert die direkte Abhängigkeit der Persistenzlogik von den Domain-Daten
+und bildet je nach Funktion (Speichern oder Laden) jeweils den einen auf den anderen Teil ab. Diese
+Schicht wurde durch Umsetzung und Anpassung des Musters \emph{Data Mapper} modelliert. In
+Voraussicht einer Verlagerung dieser Mapping-Schicht in einen separaten Prozess auf einen
+möglicherweise entfernten Rechner wurden die Untersuchungen für die Integration verschiedener
+Kommunikationsparadigmen wie Java RMI, JMS, CORBA in die Mapping-Schicht erweitert. Als Schwerpunkt
+und wesentliche Neuerung gegenüber früheren Ansätzen erhielt sie eine eigene Bezeichnung:
+\emph{Layer PerCom} und kennzeichnet damit die Verwaltung bzw. Abbildung von Persistenz und
+Kommunikation in einer einzigen Schicht. Für die Persistenzmechanismen besteht bereits eine
+Implementation als Umsetzung in \emph{Res Medicinae}. Die Interprozesskommunikation ist lediglich
+durch die abstrakte Definition der Klassen des zugehörigen Modells im Programmcode enthalten. Damit
+ist die Basis für eine spätere praktische Realisierung geschaffen.\\
+Zum Testen der Persistenzmechanismen und der Funktionsfähigkeit von \emph{Layer PerCom} wurde der
+Prototyp eines Moduls für \emph{Res Medicinae} entwickelt, der gespeicherte Informationen lädt bzw.
+neue Daten ablegen und modifizieren lässt und diese für den Druck von medizinischen Formularen
+aufbereitet.
+
+Die Komplexität und der Umfang der Architektur des gesamten Softwaresystems \emph{Res Medicinae}
+haben sich durch Hinzufügen der neuen Elemente um etwa ein Drittel vergrößert.\\
+Mit Hilfe der entworfenen Modelle und der darauf basierenden, teilweise praktischen Umsetzung ist
+es nun möglich, Daten lokal in XML-Dateien oder in einer entfernten relationalen Datenbank
+abzuspeichern und somit verteilt auf den selben Daten zu arbeiten. Die erneut vom jeweiligen
+Persistenzmedium geladen Informationen können in vorgefertigte medizinische Formulare ausgedruckt
+werden. Andere Module nutzen ebenfalls bereits \emph{Layer PerCom} und die Persistenzschicht. In
+anknüpfenden Arbeiten, nach Implementation der modellierten Klassen zu den
+Kommunikationsparadigmen, kann die Funktionalität für eine gegenseitige Interaktion der einzelnen
+Module erweitert werden. Weiterhin ist abzusehen, dass eine Vielzahl zusätzlicher Informationen in
+die Datenbank und in das XML-Dateisystem aufgenommen werden muss, so dass die Erweiterung um
+Tabellen bzw. Tags ein Bestandteil weiterführender Untersuchungen sein könnte.
+
+%Die Verwaltung von Patienten- und Metadaten stellte einen weiteren Schwerpunkt dar. Hierzu war es
+%insbesondere notwendig, sich mit der Entwicklung von Java-Applikationen vertraut zu machen. Es
+%müssen eine XML-Dateiverwaltung und eine JDBC-Datenbankanbindung entworfen werden. Im letzten
+%Abschnitt der Diplomarbeit wurde untersucht, ob eine Anbindung verschiedener Middleware zur
+%Interprozesskommunikation in das Res Medicinae -Projekt möglich ist. So wie dem Anwender bei der
+%Datenverwaltung der momentan verwendete Persitenzmechanismus transparent erscheint, so soll auch
+%verborgen bleiben, welches
+%Kommunikationsparadigma im Augenblick zum Einsatz kommt.\\
+%Besonderes Augenmerk wurde auf die Umsetzung verschiedener Software-Muster gelegt, mit denen eine
+%Strukturierung der Anwendung erfolgt, wodurch diese eine flexiblere Gestalt erhält.
+
+\par
+\vspace{2cm}
+
+Ilmenau, den \Abgabetermin
+\hfill Torsten Kunze\\
