@@ -21,14 +21,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-07-25 15:48:25 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef XML_ATTRIBUTE
 #define XML_ATTRIBUTE
 
-#include "../global/constant.c"
+#include "../global/structure_constants.c"
 #include "../logger/logger.c"
 
 /**

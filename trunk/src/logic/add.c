@@ -21,13 +21,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2004-07-04 09:49:29 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ADD_SOURCE
 #define ADD_SOURCE
 
+#include "../global/abstraction_constants.c"
 #include "../logger/logger.c"
 #include "../state/compound.c"
 

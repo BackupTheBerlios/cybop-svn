@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.6 $ $Date: 2004-07-02 20:51:15 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,6 +51,7 @@
 #define OPERATION_SOURCE
 
 #include "../array/array.c"
+#include "../global/abstraction_constants.c"
 #include "../global/constant.c"
 #include "../logger/logger.c"
 

@@ -25,14 +25,14 @@
  *
  * A string is a chain of characters.
  *
- * @version $Revision: 1.5 $ $Date: 2004-06-20 22:10:23 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef STRING_SOURCE
 #define STRING_SOURCE
 
-#include "../global/constant.c"
+#include "../global/structure_constants.c"
 #include "../logger/logger.c"
 
 /**

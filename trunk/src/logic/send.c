@@ -21,13 +21,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-07-04 09:49:29 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SEND_SOURCE
 #define SEND_SOURCE
 
+#include "../global/channel_constants.c"
+#include "../global/structure_constants.c"
 #include "../logger/logger.c"
 
 /**
@@ -61,9 +63,9 @@ void send_in_language(const void* p0, const void* p1, const void* p2, const void
 
         if (d == 0) {
 
-            if (*lc == UNIX_SOCKET_LANGUAGE_COUNT) {
+            if (*lc == UNIX_SOCKET_CHANNEL_COUNT) {
 
-                compare_array_elements(p0, (void*) &UNIX_SOCKET_LANGUAGE, (void*) &CHARACTER_ARRAY, (void*) &UNIX_SOCKET_LANGUAGE_COUNT, (void*) &r);
+                compare_array_elements(p0, (void*) &UNIX_SOCKET_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &UNIX_SOCKET_CHANNEL_COUNT, (void*) &r);
 
                 if (r == 1) {
 
@@ -76,9 +78,9 @@ void send_in_language(const void* p0, const void* p1, const void* p2, const void
 
         if (d == 0) {
 
-            if (*lc == INTERNAL_LANGUAGE_COUNT) {
+            if (*lc == INTERNAL_CHANNEL_COUNT) {
 
-                compare_array_elements(p0, (void*) &INTERNAL_LANGUAGE, (void*) &CHARACTER_ARRAY, (void*) &INTERNAL_LANGUAGE_COUNT, (void*) &r);
+                compare_array_elements(p0, (void*) &INTERNAL_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &INTERNAL_CHANNEL_COUNT, (void*) &r);
 
                 if (r == 1) {
 

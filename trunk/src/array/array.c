@@ -50,7 +50,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.9 $ $Date: 2004-07-03 08:07:42 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-08-13 07:22:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,7 +61,8 @@
 #include "../array/double_array.c"
 #include "../array/integer_array.c"
 #include "../array/pointer_array.c"
-#include "../global/constant.c"
+#include "../global/log_constants.c"
+#include "../global/structure_constants.c"
 #include "../logger/logger.c"
 
 //

@@ -23,13 +23,15 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.2 $ $Date: 2004-07-28 22:46:28 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CREATE_SOURCE
 #define CREATE_SOURCE
 
+#include "../global/abstraction_constants.c"
+#include "../global/channel_constants.c"
 #include "../logger/logger.c"
 #include "../parser/xml_parser.c"
 #include "../state/boolean.c"
@@ -79,9 +81,9 @@ void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, co
 
         if (d == 0) {
 
-            if (*lc == INLINE_LOCATION_COUNT) {
+            if (*lc == INLINE_CHANNEL_COUNT) {
 
-                compare_array_elements(p5, (void*) &INLINE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &INLINE_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p5, (void*) &INLINE_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &INLINE_CHANNEL_COUNT, (void*) &r);
 
                 if (r == 1) {
 
@@ -94,9 +96,9 @@ void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, co
 
         if (d == 0) {
 
-            if (*lc == FILE_LOCATION_COUNT) {
+            if (*lc == FILE_CHANNEL_COUNT) {
 
-                compare_array_elements(p5, (void*) &FILE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FILE_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p5, (void*) &FILE_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &FILE_CHANNEL_COUNT, (void*) &r);
 
                 if (r == 1) {
 
@@ -109,9 +111,9 @@ void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, co
 
         if (d == 0) {
 
-            if (*lc == FTP_LOCATION_COUNT) {
+            if (*lc == FTP_CHANNEL_COUNT) {
 
-                compare_array_elements(p5, (void*) &FTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FTP_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p5, (void*) &FTP_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &FTP_CHANNEL_COUNT, (void*) &r);
 
                 if (r == 1) {
 
@@ -124,9 +126,9 @@ void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, co
 
         if (d == 0) {
 
-            if (*lc == HTTP_LOCATION_COUNT) {
+            if (*lc == HTTP_CHANNEL_COUNT) {
 
-                compare_array_elements(p5, (void*) &HTTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &HTTP_LOCATION_COUNT, (void*) &r);
+                compare_array_elements(p5, (void*) &HTTP_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &HTTP_CHANNEL_COUNT, (void*) &r);
 
                 if (r == 1) {
 
@@ -571,7 +573,7 @@ void initialize_model(void* p0, void* p1, void* p2, const void* p3, const void* 
                     //?? and written into a special parameter model in memory;
                     //?? then that model has to be decoded into a knowledge model!
                     //?? May be this idea is rubbish and will not work!
-                    //?? For the beginning better handle images as primitve types.
+                    //?? For the beginning, better handle images as primitve types.
 
                     d = 1;
                 }
@@ -788,6 +790,7 @@ void create(const void* p0, const void* p1, const void* p2, const void* p3,
                                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
                         }
 
+/*??
                         // Initialize transient part name,
                         // part abstraction, model, constraint,
                         // position abstraction, model, constraint,
@@ -835,28 +838,124 @@ void create(const void* p0, const void* p1, const void* p2, const void* p3,
                             (void*) &ppoa, (void*) &ppoac);
                         create_model((void*) &tpoc, (void*) &tpocc, (void*) &tpocs,
                             (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+*/
 
-                        // Initialize part model- and position model buffer
-                        // and their counts and sizes.
-                        void* pmb = NULL_POINTER;
-                        int pmbc = 0;
-                        int pmbs = 0;
-                        void* pomb = NULL_POINTER;
-                        int pombc = 0;
-                        int pombs = 0;
+                        //
+                        // The creation happens in 3 steps and 4 models are involved.
+                        //
+                        // 1 source code: persistent, probably stored in files
+                        // 2 read model: transient byte stream, as read from location
+                        // 3 parsed model: transient model representing the structure
+                        //   of the parsed document
+                        // 4 decoded model: transient model that cyboi works with
+                        //
+                        // The "read model" and "parsed model" are temporary helper models;
+                        // they get created and destroyed during creation handling.
+                        //
+                        //                 read                    parse                    decode
+                        // source code  ----------> read model  ----------> parsed model ----------> decoded model
+                        // (persistent)             (transient)             (transient)              (transient)
+                        //
+                        // The counterparts of the creation procedures are:
+                        // - read <--> write
+                        // - parse <--> serialize
+                        // - decode <--> encode
+                        //
+                        // Definitions
+                        //
+                        // persistent:
+                        // - stored permanently
+                        // - outside CYBOI
+                        // - longer than CYBOI lives
+                        //
+                        // transient:
+                        // - stored in computer memory (RAM)
+                        // - only accessible from within CYBOI
+                        // - created and destroyed by CYBOI
+                        // - not available when CYBOI is destroyed
+                        //
 
-                        // Create part model- and position model buffer
-                        // of type character to read single bytes.
-                        create_array((void*) &pmb, (void*) &CHARACTER_ARRAY, (void*) &pmbs);
-                        create_array((void*) &pomb, (void*) &CHARACTER_ARRAY, (void*) &pombs);
+/*??
+                        //
+                        // Read.
+                        //
 
-                        // Read persistent model from location into
-                        // part model- and position model buffer.
-                        read_model((void*) &pmb, (void*) &pmbc, (void*) &pmbs,
+                        // Declare and initialize read model
+                        // and its count and size.
+                        void* rm = NULL_POINTER;
+                        int rmc = 0;
+                        int rms = 0;
+
+                        // Create read model of type character,
+                        // to read single bytes.
+                        create_model((void*) &rm, (void*) &rmc, (void*) &rms,
+                            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+
+                        // Read persistent byte stream from location.
+                        read_model((void*) &rm, (void*) &rmc, (void*) &rms,
                             (void*) &ppm, (void*) &ppmc, (void*) &ppl, (void*) &pplc);
-                        read_model((void*) &pomb, (void*) &pombc, (void*) &pombs,
-                            (void*) &ppom, (void*) &ppomc, (void*) &ppol, (void*) &ppolc);
 
+                        // The persistent model (local or remote file)
+                        // cannot and must not get destroyed here.
+
+                        //
+                        // Parse.
+                        //
+
+                        //?? Later, distinguish file types according to suffix,
+                        //?? for example xml, html, sxi, txt, rtf,
+                        //?? adl (from OpenEHR), KIF, ODL etc.!
+                        //?? For now, only the cybol file format is considered.
+
+                        // Declare and initialize parsed model
+                        // and its count and size.
+                        void* pm = NULL_POINTER;
+                        int pmc = 0;
+                        int pms = 0;
+
+                        // Create parsed model.
+                        create_model((void*) &pm, (void*) &pmc, (void*) &pms,
+                            (void*) &type, (void*) &typec);
+
+                        // Parse byte stream according to given document type.
+                        //?? DELETE this line! parse type can be for example: xml dom tree
+                        parse((void*) &pm, (void*) &pmc, (void*) &pms,
+                            (void*) &rm, (void*) &rmc, (void*) &type, (void*) &typec);
+
+                        // Destroy read model.
+                        destroy_model((void*) &rm, (void*) &rmc, (void*) &rms,
+                            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+
+                        //
+                        // Decode.
+                        //
+
+                        //?? Later, additional formats besides cybol might be read,
+                        //?? for example html, sxi, hdx.sf.net etc.
+
+                        // Declare and initialize decoded model
+                        // and its count and size.
+                        void* dm = NULL_POINTER;
+                        int dmc = 0;
+                        int dms = 0;
+
+                        // Create decoded model.
+                        create_model((void*) &dm, (void*) &dmc, (void*) &dms,
+                            (void*) &type, (void*) &typec);
+
+                        // Decode document model according to given document type.
+                        decode((void*) &dm, (void*) &dmc, (void*) &dms,
+                            (void*) &pm, (void*) &pmc, (void*) &type, (void*) &typec);
+
+                        // Destroy parsed model.
+                        destroy_model((void*) &pm, (void*) &pmc, (void*) &pms,
+                            (void*) &type, (void*) &typec);
+*/
+
+                        //?? DELETE all following initialize_model calls!
+                        //?? They get REPLACED by decode calls!
+
+/*??
                         // Initialize transient part name,
                         // part abstraction, model, constraint,
                         // position abstraction, model, constraint,
@@ -882,10 +981,7 @@ void create(const void* p0, const void* p1, const void* p2, const void* p3,
                         initialize_model((void*) &tpoc, (void*) &tpocc, (void*) &tpocs,
                             (void*) &ppoc, (void*) &ppocc,
                             (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-
-                        // Destroy part model- and position model buffer.
-                        destroy_array((void*) &pmb, (void*) &CHARACTER_ARRAY, (void*) &pmbs);
-                        destroy_array((void*) &pomb, (void*) &CHARACTER_ARRAY, (void*) &pombs);
+*/
 
                         //?? If "add", then first check if name exists in whole;
                         //?? if yes, add "_0" or "_1" or "_2" etc.
@@ -898,6 +994,7 @@ void create(const void* p0, const void* p1, const void* p2, const void* p3,
                         // part abstraction, model, constraint,
                         // position abstraction, model, constraint,
                         // and their counts and sizes.
+/*??
                         set_compound_part_by_name((void*) &twm, (void*) &twmc, (void*) &twms,
                             (void*) &tpn, (void*) &tpnc, (void*) &tpns,
                             (void*) &tpm, (void*) &tpmc, (void*) &tpms,
@@ -906,6 +1003,7 @@ void create(const void* p0, const void* p1, const void* p2, const void* p3,
                             (void*) &tpom, (void*) &tpomc, (void*) &tpoms,
                             (void*) &tpoa, (void*) &tpoac, (void*) &tpoas,
                             (void*) &tpoc, (void*) &tpocc, (void*) &tpocs);
+*/
 
                     } else {
 

@@ -39,14 +39,14 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.9 $ $Date: 2004-07-03 08:07:42 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef POINTER_ARRAY_SOURCE
 #define POINTER_ARRAY_SOURCE
 
-#include "../global/constant.c"
+#include "../global/log_constants.c"
 #include "../global/variable.c"
 #include "../logger/logger.c"
 

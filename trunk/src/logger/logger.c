@@ -28,14 +28,15 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.8 $ $Date: 2004-06-13 23:13:31 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LOGGER_SOURCE
 #define LOGGER_SOURCE
 
-#include "../global/constant.c"
+#include "../global/character_constants.c"
+#include "../global/log_constants.c"
 #include "../global/variable.c"
 
 //
