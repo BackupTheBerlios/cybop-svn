@@ -59,7 +59,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.3 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-05-26 14:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -502,6 +502,8 @@ void get_model_part_index(const void* p0, const void* p1, const void* p2, void* 
         if (p2 != NULL_POINTER) {
 
             int* s = (int*) p2;
+
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Get model part index.");
 
             // Initialize elements.
             int c = 0;

@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.14 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-05-26 14:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -101,6 +101,8 @@ void create_signal_memory(void* p0, void* p1, void* p2) {
  */
 void destroy_signal_memory(void* p0, void* p1, void* p2) {
 
+    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy signal memory.");
+
     // Initialize elements.
     int s = 0;
     int c = 0;
@@ -135,8 +137,6 @@ void destroy_signal_memory(void* p0, void* p1, void* p2) {
         i--;
     }
 */
-
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy signal memory.");
 
     // Get elements.
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_SIZE_INDEX, (void*) &s);

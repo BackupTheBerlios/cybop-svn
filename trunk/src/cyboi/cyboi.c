@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.5 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-05-26 14:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,15 +43,6 @@
 #include "../x_windows/x_windows_handler.c"
 //?? Temporary for character screen testing.
 #include "../cyboi/character_screen.c"
-
-/**
- * Shows the usage information.
- */
-void show_usage_information() {
-
-    show_message((void*) &USAGE_MESSAGE, (void*) &USAGE_MESSAGE_COUNT);
-    show_message((void*) &EXAMPLE_MESSAGE, (void*) &EXAMPLE_MESSAGE_COUNT);
-}
 
 /**
  * Waits for signals.
@@ -100,7 +91,7 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
         //?? Testing!
 //??        init_x();
 
-        log_message((void*) &INFO_LOG_LEVEL, (void*) &"Wait for signals.");
+        log_message((void*) &INFO_LOG_LEVEL, (void*) &WAIT_FOR_SIGNALS_MESSAGE, (void*) &WAIT_FOR_SIGNALS_MESSAGE_COUNT);
 
         // Run endless loop handling signals.
         while (1) {
@@ -178,7 +169,7 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
                 if (d == 0) {
 
-                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not handle signal. The signal abstraction is unknown.");
+                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE, (void*) &COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT);
                 }
 
                 // Reset signal.
@@ -200,7 +191,7 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not wait for signals. The internals is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNALS_IS_NULL_MESSAGE, (void*) &COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNALS_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -295,21 +286,21 @@ int main(int p0, char** p1) {
             // Destroy statics.
             destroy_compound((void*) &s, (void*) &sc);
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Exit CYBOI normally.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 
             // Return 0 to indicate proper shutdown.
             r = 0;
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not execute CYBOI. The command line argument number is incorrect.");
-
-            show_usage_information();
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_NUMBER_IS_INCORRECT_MESSAGE_COUNT);
+            show_message((void*) &USAGE_MESSAGE, (void*) &USAGE_MESSAGE_COUNT);
+            show_message((void*) &EXAMPLE_MESSAGE, (void*) &EXAMPLE_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not execute CYBOI. The command line argument vector is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) &COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
     }
 
     return r;

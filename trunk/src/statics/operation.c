@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.7 $ $Date: 2004-05-25 22:58:48 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-05-26 14:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -268,6 +268,7 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
  */
 void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
 
+/*??
     if (p3 != NULL_POINTER) {
 
         int* pc = (int*) p3;
@@ -296,7 +297,6 @@ void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
                     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &p);
                     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &pc);
 
-/*??
                     Finalization of operation is possibly not necessary!
                     Operations get defined in CYBOL models (files).
                     To manipulate them may become the task of a special modelling/ design tool,
@@ -361,7 +361,6 @@ void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
 
                         log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The index exceeds the count.");
                     }
-*/
 
                 } else {
 
@@ -382,6 +381,7 @@ void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
 
         log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not finalize operation. The persistent model count is null.");
     }
+*/
 }
 
 /* OPERATION_SOURCE */

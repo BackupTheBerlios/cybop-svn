@@ -24,7 +24,7 @@
  * This file handles log messages.
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.2 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-05-26 14:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -189,11 +189,9 @@ void show_message(void* p0, void* p1) {
  *
  * @param p0 the level
  * @param p1 the message
+ * @param p2 the message count
  */
-void log_message(const void* p0, const void* p1) {
-
-/*??
-    fputs("TEST 6\n", stdout);
+void log_message(const void* p0, const void* p1, const void* p2) {
 
     if (p1 != NULL_POINTER) {
 
@@ -206,14 +204,18 @@ void log_message(const void* p0, const void* p1) {
             // Only log message if log level matches.
             if (*l <= log_level) {
 
-                fputs("TEST 7\n", stdout);
-
 //??                char n[] = {'\0'};
-                char* n = NULL_POINTER;
-                int s = 0;
-                create_array((void*) &n, (void*) &s);
+                void* n = NULL_POINTER;
+                int ns = 0;
+                create_array((void*) &n, (void*) &ns);
 
-                fputs("TEST 8\n", stdout);
+                * @param p0 the destination array
+                * @param p1 the type
+                * @param p2 the index
+                * @param p3 the source array
+                * @param p4 the count
+                */
+                set_array_elements((void*) &n, (void*) &CHARACTER_ARRAY, (void*) &ns, (void*) &log_level_name, (void*) &count);
 
                 int test_index = 0;
                 int test_size = 4;
@@ -224,24 +226,13 @@ void log_message(const void* p0, const void* p1) {
                 set_character_array_element((void*) &n, (void*) &termination_index, (void*) &termination);
 
 //??                get_log_level_name(p0, (void*) &n);
-
-                fputs("TEST 9\n", stdout);
-
 //??                strcat(n, ": ");
-
-                fputs("TEST 10\n", stdout);
-
 //??                strcat(n, *m);
-
-                fputs("TEST 11\n", stdout);
-
 //??                strcat(n, "\n");
-
-                fputs("TEST 12\n", stdout);
 
                 show_message((void*) &n);
 
-//??                destroy_array((void*) &n, (void*) &s);
+                destroy_array((void*) &n, (void*) &ns);
             }
 
         } else {
@@ -253,7 +244,6 @@ void log_message(const void* p0, const void* p1) {
 
         show_message((void*) &"Error: Could not log message. The level is null.\n");
     }
-*/
 }
 
 /* LOGGER_SOURCE */
