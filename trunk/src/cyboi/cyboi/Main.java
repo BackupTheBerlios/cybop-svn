@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.16 $ $Date: 2003-07-26 16:01:35 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2003-07-27 17:55:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -89,18 +89,11 @@ class Main {
                     java.lang.Object signal = ItemHandler.create_item();
                     ItemHandler.initialize(signal, signal_category);
 
-                    // Shutdown flag.
-                    SignalHandler.shutdown_flag = 0;
-
-                    // Alternative to Java Event Handler
-                    // (if it gets replaced one day, once CYBOI is implemented in C):
-                    // Enter waiting loop and read events (IRQs) from devices (IVT?).
-    
                     // The system is now started up and complete so that a loop
                     // can be entered, waiting for signals (events/ interrupts).
                     Main.await(signal);
     
-                    // The loop above is left as soon as the shutdown flag is set.
+                    // The loop above is left as soon as its shutdown flag is set.
     
                     // Signal.
                     ItemHandler.finalizz(signal, signal_category);
@@ -225,16 +218,17 @@ class Main {
      */
     static void await(java.lang.Object s) {
 
+        int sf = 0;
+    
         while (true) {
 
-            // Check shutdown flag.
-            if (SignalHandler.shutdown_flag == 0) {
+            if (sf == 0) {
 
                 // Receive signal.
                 SignalHandler.receive(s);
     
                 // Handle signal.
-                SignalHandler.handle(s, 0);
+                sf = SignalHandler.handle(s, 0);
     
                 // Send signal.
                 SignalHandler.send(s);
@@ -244,6 +238,7 @@ class Main {
                 
             } else {
                 
+                // Leave loop if the shutdown flag was set.
                 break;
             }
         }

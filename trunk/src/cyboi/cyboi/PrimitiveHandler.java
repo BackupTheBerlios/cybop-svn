@@ -29,7 +29,7 @@ package cyboi;
  *
  * It contains procedures to create items of primitive type.
  *
- * @version $Revision: 1.9 $ $Date: 2003-07-24 20:36:57 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-07-27 17:55:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class PrimitiveHandler {
@@ -46,8 +46,26 @@ class PrimitiveHandler {
      */
     static java.lang.Object create_integer_primitive(java.lang.Object s) {
 
-        java.lang.System.out.println("INFO: Create integer primitive.");
-        return java.lang.Integer.valueOf((java.lang.String) s);
+        java.lang.Object p = null;
+
+        if (s != null) {
+            
+            if (!s.equals("")) {
+                
+                java.lang.System.out.println("INFO: Create integer primitive.");
+                p = java.lang.Integer.valueOf((java.lang.String) s);
+                
+            } else {
+                
+                java.lang.System.out.println("INFO: Could not create integer primitive. The string is empty.");
+            }
+        
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not create integer primitive. The string is null.");
+        }
+        
+        return p;
     }
 
     /**
@@ -72,8 +90,26 @@ class PrimitiveHandler {
      */
     static java.lang.Object create_float_primitive(java.lang.Object s) {
 
-        java.lang.System.out.println("INFO: Create float primitive.");
-        return java.lang.Double.valueOf((java.lang.String) s);
+        java.lang.Object p = null;
+
+        if (s != null) {
+            
+            if (!s.equals("")) {
+                
+                java.lang.System.out.println("INFO: Create float primitive.");
+                p = java.lang.Double.valueOf((java.lang.String) s);
+                
+            } else {
+                
+                java.lang.System.out.println("INFO: Could not create float primitive. The string is empty.");
+            }
+        
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not create float primitive. The string is null.");
+        }
+        
+        return p;
     }
 
     /**
@@ -98,8 +134,42 @@ class PrimitiveHandler {
      */
     static java.lang.Object create_character_primitive(java.lang.Object s) {
 
-        java.lang.System.out.println("INFO: Create character primitive.");
-        return s; //?? java.lang.Double.valueOf((java.lang.String) s);
+        java.lang.Object p = null;
+
+        if (s != null) {
+            
+            if (!s.equals("")) {
+                
+                java.lang.System.out.println("INFO: Create character primitive.");
+                char[] a = ((java.lang.String) s).toCharArray();
+                
+                if (a != null) {
+
+                    if (a.length > 0) {
+                        
+                        p = new Character(a[0]);
+                
+                    } else {
+                        
+                        java.lang.System.out.println("INFO: Could not create character primitive. The character array is empty.");
+                    }
+                
+                } else {
+                    
+                    java.lang.System.out.println("INFO: Could not create character primitive. The character array is null.");
+                }
+    
+            } else {
+                
+                java.lang.System.out.println("INFO: Could not create character primitive. The string is empty.");
+            }
+        
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not create character primitive. The string is null.");
+        }
+        
+        return p;
     }
 
     /**
@@ -124,8 +194,26 @@ class PrimitiveHandler {
      */
     static java.lang.Object create_string_primitive(java.lang.Object s) {
 
-        java.lang.System.out.println("INFO: Create string primitive.");
-        return s;
+        java.lang.Object p = null;
+
+        if (s != null) {
+            
+            if (!s.equals("")) {
+                
+                java.lang.System.out.println("INFO: Create string primitive.");
+                p = s;
+                
+            } else {
+                
+                java.lang.System.out.println("INFO: Could not create string primitive. The string is empty.");
+            }
+        
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not create string primitive. The string is null.");
+        }
+        
+        return p;
     }
 
     /**

@@ -34,14 +34,11 @@ package cyboi;
  * send
  * reset
  *
- * @version $Revision: 1.2 $ $Date: 2003-07-26 16:01:35 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-07-27 17:55:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
 
-    /** The shutdown flag. */
-    static int shutdown_flag;
-    
     //
     // Constants.
     //
@@ -132,7 +129,7 @@ class SignalHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not receive the signal. The signal is null.");
+            java.lang.System.out.println("ERROR: Could not receive signal. The signal is null.");
         }
     }
 
@@ -141,11 +138,13 @@ class SignalHandler {
      *
      * @param o the signal
      * @param r the remote flag
+     * @return the shutdown flag
      */
-    static void handle(java.lang.Object o, int r) {
+    static int handle(java.lang.Object o, int r) {
         
+        int sf = 0;
         Item s = (Item) o;
-        
+                
         if (s != null) {
 
             java.lang.String p = (java.lang.String) MapHandler.get_map_element(s.items, "predicate_0");
@@ -154,18 +153,20 @@ class SignalHandler {
 
                 if (p.equals("shutdown")) {
                     
-                    SignalHandler.shutdown_flag = 1;
+                    sf = 1;
                 }
                 
             } else {
     
-                java.lang.System.out.println("ERROR: Could not handle the signal. The predicate is null.");
+//??                java.lang.System.out.println("ERROR: Could not handle signal. The predicate is null.");
             }
     
         } else {
 
-            java.lang.System.out.println("ERROR: Could not handle the signal. The signal is null.");
+            java.lang.System.out.println("ERROR: Could not handle signal. The signal is null.");
         }
+        
+        return sf;
     }
 
     /**
@@ -179,7 +180,7 @@ class SignalHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not send the signal. The signal is null.");
+            java.lang.System.out.println("ERROR: Could not send signal. The signal is null.");
         }
     }
 
@@ -194,7 +195,7 @@ class SignalHandler {
 
         } else {
 
-            java.lang.System.out.println("ERROR: Could not reset the signal. The signal is null.");
+            java.lang.System.out.println("ERROR: Could not reset signal. The signal is null.");
         }
     }
 }
