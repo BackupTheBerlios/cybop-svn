@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.29 $ $Date: 2005-02-11 21:44:05 $ $Author: christian $
+ * @version $Revision: 1.30 $ $Date: 2005-03-02 07:20:01 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -103,6 +103,10 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
         if (*p != 1) {
 
             compare_arrays(p1, p2, (void*) COMPLEX_ABSTRACTION, (void*) COMPLEX_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
+        }
+        if (*p != 1) {
+
+            compare_arrays(p1, p2, (void*) KNOWLEDGE_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_MEMORY_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
     } else {
@@ -290,11 +294,11 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     decode(p0, p1, p2, pm, (void*) &pmc, p5, p6);
 
 //?? Start of TEMPORARY test from Rolf Holzmueller. Delete again later!
-    if (c == 0) {
-
-        int index = 0;
-        test_compound(*((void**) p0), p2, &index);
-    }
+//    if (c == 0) {
+//
+//        int index = 0;
+//        test_compound(*((void**) p0), p2, &index);
+//    }
 //?? End of TEMPORARY test from Rolf Holzmueller.
 
     if (w == 0) {
