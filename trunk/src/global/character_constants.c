@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.2 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-12-16 09:52:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,16 +46,28 @@
 //?? - Decimal entity reference
 
 /** The colon character. ASCII: ?? */
-static const char COLON_CHARACTER = ':';
+static const char COLON_CHARACTER_ARRAY[] = {':'};
+static const char* COLON_CHARACTER = COLON_CHARACTER_ARRAY;
+static const int COLON_CHARACTER_COUNT_ARRAY[] = {1};
+static const int* COLON_CHARACTER_COUNT = COLON_CHARACTER_COUNT_ARRAY;
 
 /** The space character. ASCII: ?? */
-static const char SPACE_CHARACTER = ' ';
+static const char SPACE_CHARACTER_ARRAY[] = {' '};
+static const char* SPACE_CHARACTER = SPACE_CHARACTER_ARRAY;
+static const int SPACE_CHARACTER_COUNT_ARRAY[] = {1};
+static const int* SPACE_CHARACTER_COUNT = SPACE_CHARACTER_COUNT_ARRAY;
 
 /** The new line character. ASCII: ?? */
-static const char NEW_LINE_CHARACTER = '\n';
+static const char NEW_LINE_CHARACTER_ARRAY[] = {'\n'};
+static const char* NEW_LINE_CHARACTER = NEW_LINE_CHARACTER_ARRAY;
+static const int NEW_LINE_CHARACTER_COUNT_ARRAY[] = {1};
+static const int* NEW_LINE_CHARACTER_COUNT = NEW_LINE_CHARACTER_COUNT_ARRAY;
 
 /** The low line character. ASCII: 95 */
-static const char LOW_LINE_CHARACTER = '_';
+static const char LOW_LINE_CHARACTER_ARRAY[] = {'_'};
+static const char* LOW_LINE_CHARACTER = LOW_LINE_CHARACTER_ARRAY;
+static const int LOW_LINE_CHARACTER_COUNT_ARRAY[] = {1};
+static const int* LOW_LINE_CHARACTER_COUNT = LOW_LINE_CHARACTER_COUNT_ARRAY;
 
 //
 // ANSI characters (128 - 255).
@@ -70,7 +82,10 @@ static const char LOW_LINE_CHARACTER = '_';
 //
 
 /** The null character, used as string termination in the c programming language. */
-static const char NULL_CHARACTER = '\0';
+static const char NULL_CHARACTER_ARRAY[] = {'\0'};
+static const char* NULL_CHARACTER = NULL_CHARACTER_ARRAY;
+static const int NULL_CHARACTER_COUNT_ARRAY[] = {1};
+static const int* NULL_CHARACTER_COUNT = NULL_CHARACTER_COUNT_ARRAY;
 
 /* CHARACTER_CONSTANTS_SOURCE */
 #endif

@@ -21,34 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file defines global constants for:
- * - null pointers
- * - arrays
- * - internals
- * - unix socket
- * - x windows
- * - xml tag
- * - xml attribute
- * - signal priorities
- * - xml markups
- * - xml parse modes
- * - cybol file
- * - cybol tags
- * - cybol attributes
- * - location separators
- * - cybol model values:
- *   - model separators
- *   - boolean
- * - cyboi
- *
- * It was decided to keep them bundled in this place to ease their maintenance.
- * One day, they can be burnt together with the cyboi implementation into a
- * hardware chip, just like operation codes of a central processing unit (cpu).
- * This would tremendously increase performance.
- *
- * Systems would then be written solely in cybol. Dreaming ...
- *
- * @version $Revision: 1.20 $ $Date: 2004-12-08 14:09:30 $ $Author: rholzmueller $
+ * @version $Revision: 1.21 $ $Date: 2004-12-16 09:52:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,7 +52,7 @@ static const int INTERNAL_ARRAY_COUNT = 24;
 static const int INTERNAL_TCPSOCKET_PORT_INDEX = 0;
 static const int INTERNAL_TCPSOCKET_ACTIVE_INDEX = 1;
 static const int INTERNAL_TCPSOCKET_SERVERSOCKETNUMBER_INDEX = 2;
- 
+
 /** The start parameter index. */
 static const int INTERNAL_START_ABSTRACTION_INDEX = 3;
 static const int INTERNAL_START_ABSTRACTION_COUNT_INDEX = 4;
@@ -111,7 +84,6 @@ static const int INTERNAL_TCPSOCKET_MAINSIGNALID_INDEX = 21;
 static const int INTERNAL_TCPSOCKET_MAINSIGNALID_COUNT_INDEX = 22;
 static const int INTERNAL_TCPSOCKET_MAINSIGNALID_SIZE_INDEX = 23;
 
-
 //
 // Unix socket.
 //
@@ -125,7 +97,6 @@ static const int UNIX_SERVER_SOCKET_FILENAME_COUNT = 27;
 static const char UNIX_SOCKET_FILENAME_NAME_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'o', 'c', 'k', 'e', 't', '_', 'f', 'i', 'l', 'e', 'n', 'a', 'm', 'e', '_', 'n', 'a', 'm', 'e'};
 static const char* UNIX_SOCKET_FILENAME_NAME = UNIX_SOCKET_FILENAME_NAME_ARRAY;
 static const int UNIX_SOCKET_FILENAME_NAME_COUNT = 25;
-
 
 //
 // X windows.

@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.14 $ $Date: 2004-12-15 12:50:28 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-12-16 09:52:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -602,7 +602,7 @@ void get_double_array_elements_index(const void* p0, const void* p1, const void*
                             *s = *j * DOUBLE_PRIMITIVE_SIZE;
 
                             // Determine element.
-                            e = (void*) (*a + s);
+                            e = (void*) (*a + *s);
 
                             compare_double_array_elements((void*) &e, p2, p3, (void*) &r);
 

@@ -50,7 +50,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.15 $ $Date: 2004-12-15 07:49:39 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-12-16 09:52:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -149,36 +149,6 @@ void set_array_elements(void* p0, const void* p1, const void* p2, const void* p3
 }
 
 /**
- * Sets the array element.
- *
- * @param p0 the array
- * @param p1 the type
- * @param p2 the array index
- * @param p3 the element
- */
-void set_array_element(void* p0, const void* p1, const void* p2, const void* p3) {
-
-    // The elements count.
-    int* c = INTEGER_NULL_POINTER;
-    create_integer((void*) &c);
-    *c = 1;
-
-    // The element p3 needs to be handed over as array to set_array_elements.
-    // Therefore, it has to be transformed into a pointer.
-    // Example 1:
-    // - array p0: char* handed over as char**
-    // - element p3: single char handed over as char*
-    // - the element of type char* gets transformed to type char** with &p3
-    // Example 2:
-    // - array p0: char** handed over as char***
-    // - element p3: string char* handed over as char**
-    // - the element of type char** gets transformed to type char*** with &p3
-    set_array_elements(p0, p1, p2, (void*) &p3, (void*) &c);
-
-    destroy_integer((void*) &c);
-}
-
-/**
  * Removes the array elements.
  *
  * @param p0 the array
@@ -214,26 +184,6 @@ void remove_array_elements(void* p0, const void* p1, const void* p2, const void*
 
         log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
-}
-
-/**
- * Removes the array element.
- *
- * @param p0 the array
- * @param p1 the type
- * @param p2 the size
- * @param p3 the array index
- */
-void remove_array_element(void* p0, const void* p1, const void* p2, const void* p3) {
-
-    // The elements count.
-    int* c = INTEGER_NULL_POINTER;
-    create_integer((void*) &c);
-    *c = 1;
-
-    remove_array_elements(p0, p1, p2, p3, (void*) &c);
-
-    destroy_integer((void*) &c);
 }
 
 /**
@@ -275,32 +225,6 @@ void get_array_elements(const void* p0, const void* p1, const void* p2, void* p3
 }
 
 /**
- * Gets the array element.
- *
- * @param p0 the array
- * @param p1 the type
- * @param p2 the array index
- * @param p3 the element
- */
-void get_array_element(const void* p0, const void* p1, const void* p2, void* p3) {
-
-    // The elements count.
-    int* c = INTEGER_NULL_POINTER;
-    create_integer((void*) &c);
-    *c = 1;
-
-    // The element needs to be handed over as array.
-    // Therefore, it has to be transformed into a pointer.
-    // Example:
-    // - array: char* handed over as char**
-    // - element: char handed over as char*
-    // - the element of type char* gets transformed to type char** with &element
-    get_array_elements(p0, p1, p2, (void*) &p3, (void*) &c);
-
-    destroy_integer((void*) &c);
-}
-
-/**
  * Gets the array elements index.
  *
  * @param p0 the array
@@ -337,33 +261,6 @@ void get_array_elements_index(const void* p0, const void* p1, const void* p2, co
 
         log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
-}
-
-/**
- * Gets the array element index.
- *
- * @param p0 the array
- * @param p1 the type
- * @param p2 the size
- * @param p3 the element
- * @param p4 the index within array
- */
-void get_array_element_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
-
-    // The elements count.
-    int* c = INTEGER_NULL_POINTER;
-    create_integer((void*) &c);
-    *c = 1;
-
-    // The element needs to be handed over as array.
-    // Therefore, it has to be transformed into a pointer.
-    // Example:
-    // - array: char* handed over as char**
-    // - element: char handed over as char*
-    // - the element of type char* gets transformed to type char** with &element
-    get_array_elements_index(p0, p1, p2, (void*) &p3, (void*) &c, p4);
-
-    destroy_integer((void*) &c);
 }
 
 //

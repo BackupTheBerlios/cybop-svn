@@ -23,7 +23,7 @@
  *
  * This file handles a client UDP socket.
  *
- * @version $Revision: 1.2 $ $Date: 2004-06-24 11:45:37 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-12-16 09:52:34 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -78,10 +78,10 @@ int main()
 while (i<10) {
 
     sleep(2);
-    sendto(socketnummer, eingabe, 300, 0, &serveradresse, serverlaenge);
+    sendto(socketnummer, eingabe, 300, 0, (struct sockaddr*) &serveradresse, serverlaenge);
     printf("sende: %s\n",eingabe);
     sleep(2);
-    recvfrom(socketnummer, eingabe, 300, 0, &serveradresse, &serverlaenge);
+    recvfrom(socketnummer, eingabe, 300, 0, (struct sockaddr*) &serveradresse, &serverlaenge);
     printf("empfange: %s\n",eingabe);
     i++;
     }

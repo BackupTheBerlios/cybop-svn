@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2004-12-13 22:47:19 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-12-16 09:52:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1103,7 +1103,7 @@ void get_compound_element_by_name(const void* p0, const void* p1,
 
                 if (*i >= 0) {
 
-                    if (*i < *nc) {
+                    if (*i < **nc) {
 
                         if (*i != 0) {
 
@@ -1123,7 +1123,7 @@ void get_compound_element_by_name(const void* p0, const void* p1,
                                 // The count of the remaining name "test" is 4 = 10 - (5 + 1).
                                 int* rc = INTEGER_NULL_POINTER;
                                 create_integer((void*) &rc);
-                                *rc = *nc - (*i + 1);
+                                *rc = **nc - (*i + 1);
 
                                 // The models.
                                 void* m = NULL_POINTER;

@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.15 $ $Date: 2004-12-15 12:50:28 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-12-16 09:52:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -74,16 +74,12 @@ void create_integer_array(void* p0, const void* p1) {
             log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTEGER_ARRAY_MESSAGE, (void*) &CREATE_INTEGER_ARRAY_MESSAGE_COUNT);
 
             // Determine size as product of element count and type size.
-            int* s = INTEGER_NULL_POINTER;
-            create_integer((void*) &s);
-            *s = **c * INTEGER_PRIMITIVE_SIZE;
+            int s = **c * INTEGER_PRIMITIVE_SIZE;
 
             // A minimal space in memory is always allocated,
             // even if the requested size is zero.
             // In other words, a handle to the new instance is always returned.
-            *a = (void*) malloc(*s);
-
-            destroy_integer((void*) &s);
+            *a = (void*) malloc(s);
 
         } else {
 
