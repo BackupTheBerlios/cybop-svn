@@ -34,7 +34,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.2 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-12-12 16:39:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

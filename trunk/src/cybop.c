@@ -41,7 +41,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.5 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-12-12 16:39:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,30 +69,42 @@ void show_usage_information() {
  */
 void wait(void* p0, void* p1, void* p2) {
 
-    // Create shutdown flag and initialize to false.
-    int* f = (int*) malloc(sizeof(int));
-    *f = 0;
+    log_message((void*) &INFO_LOG_LEVEL, "Wait for signals.");
+
+    // Initialize shutdown flag to false.
+    int f = 0;
+    int i = -1;
+    void* s = NULL_POINTER;
+    char* a = NULL_POINTER;
+    void* p = NULL_POINTER;
     
     // Run endless loop handling signals.
     while (TRUE_VALUE) {
 
-        if (*f != 1) {
+        if (f == 0) {
 
             // Get top priority signal from signal memory and remove it from there.
-            int i = get_highest_priority_index(p0);
-            void* s = get_signal(p0, (void*) &i);
-            char* a = (char*) get_abstraction(p0, (void*) &i);
-            void* p = get_priority(p0, (void*) &i);
+            log_message((void*) &INFO_LOG_LEVEL, "0");
+            get_highest_priority_index(p0, (void*) &i);
+            log_message((void*) &INFO_LOG_LEVEL, "1");
+            s = get_signal(p0, (void*) &i);
+            log_message((void*) &INFO_LOG_LEVEL, "2");
+            a = (char*) get_abstraction(p0, (void*) &i);
+            log_message((void*) &INFO_LOG_LEVEL, "3");
+            p = get_priority(p0, (void*) &i);
+            log_message((void*) &INFO_LOG_LEVEL, "4");
             remove_signal(p0, (void*) &i);
 
             // Handle signal.
             if (strcmp(a, DYNAMICS_COMPOUND) == 0) {
                 
+                log_message((void*) &INFO_LOG_LEVEL, "5");
                 handle_compound_signal(p0, s, p);
         
             } else {
         
-                handle_operation_signal(s, a, p1, p2, f);
+                log_message((void*) &INFO_LOG_LEVEL, "6");
+                handle_operation_signal(s, a, p1, p2, (void*) &f);
             }
 
         } else {
@@ -101,8 +113,6 @@ void wait(void* p0, void* p1, void* p2) {
             break;
         }
     }
-
-    free(f);
 }
 
 /**
@@ -141,8 +151,8 @@ int main(int p0, char** p1) {
             create_dynamics_model_containers(d);
             
             // Create signal memory.
-            void* sm = malloc(sizeof(struct map));
-            initialize_map(sm);
+            void* sm = malloc(sizeof(struct signal_memory));
+            create_signal_memory(sm);
 
             // Create startup signal.
             void* ss = create_dynamics((void*) p1[1], NULL_POINTER, NULL_POINTER, (void*) DYNAMICS_COMPOUND);
@@ -173,7 +183,7 @@ int main(int p0, char** p1) {
             destroy_dynamics(ss, (void*) p1[1], NULL_POINTER, NULL_POINTER, (void*) DYNAMICS_COMPOUND);
 
             // Destroy signal memory.
-            finalize_map(sm);
+            destroy_signal_memory(sm);
             free(sm);
 
             // Destroy dynamics.

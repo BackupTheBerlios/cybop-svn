@@ -49,7 +49,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.5 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-12-12 16:39:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -117,6 +117,9 @@ void create_signal_memory(void* p0) {
         m->signals = malloc(sizeof(struct array));
         initialize_array(m->signals);
 
+        m->abstractions = malloc(sizeof(struct array));
+        initialize_array(m->abstractions);
+
         m->priorities = malloc(sizeof(struct array));
         initialize_array(m->priorities);
         
@@ -141,6 +144,9 @@ void destroy_signal_memory(void* p0) {
 
         finalize_array(m->priorities);
         free(m->priorities);
+
+        finalize_array(m->abstractions);
+        free(m->abstractions);
 
         finalize_array(m->signals);
         free(m->signals);
@@ -301,11 +307,12 @@ void* get_priority(void* p0, void* p1) {
  * Gets the index of the signal with highest priority.
  *
  * @param p0 the signal memory
+ * @param p1 the signal index
  */
-int get_highest_priority_index(void* p0) {
+void get_highest_priority_index(void* p0, void* p1) {
     
-    int index = -1;
     struct signal_memory* m = (struct signal_memory*) p0;
+    int* index = (int*) p1;
 
     if (m != 0) {
 
@@ -318,12 +325,11 @@ int get_highest_priority_index(void* p0) {
     
             p = (int*) get_array_element(m->priorities, (void*) &i);
     
-            // If a name equal to the searched one is found,
-            // then its index is the one to be returned
-            // since this element will have to be replaced.
+            // If a signal with higher priority is found,
+            // then its index is the one to be returned.
             if (*p > h) {
     
-                index = i;
+                *index = i;
                 h = *p;
             }
     
@@ -334,8 +340,6 @@ int get_highest_priority_index(void* p0) {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get index of the signal with highest priority. The signal memory is null.");
     }
-    
-    return index;
 }
 
 //
