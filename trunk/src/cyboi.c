@@ -43,7 +43,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.2 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-02-07 00:04:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,6 +90,9 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
         char* a = (void*) 0;
         void* p = (void*) 0;
 
+        //?? Testing!
+        init_x();
+        
         // Run endless loop handling signals.
         while (TRUE_VALUE) {
 

@@ -33,7 +33,7 @@
  *
  * It keeps data which are necessary to control an x windows.
  *
- * @version $Revision: 1.2 $ $Date: 2003-12-18 16:40:03 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-02-07 00:04:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct x_windows {
@@ -64,34 +64,34 @@ struct x_windows {
     
     /** The event. */
     XEvent event;
-    
+
     /** The key. */
     KeySym key;
-    
+
     /** The size hint. */
     XSizeHints hint;
-    
+
     /** The text. */
     char text[10];
-    
+
     /** The test. */
     char str_test[1000];
-    
+
     /** The zugriff. */
     char str_zugriff[1000];
-    
+
     /** The menu bar. */
     char str_menubar[100];
-    
+
     /** The foreground. */
     /*??unsigned long*/ double foreground;
-    
+
     /** The background. */
     /*??unsigned long*/ double background;
-    
+
     /** The menu foreground. */
     /*??unsigned long*/ double menu_foreground;
-    
+
     /** The temporary variables. */
     int i;
     int k;
@@ -101,17 +101,16 @@ struct x_windows {
     int indent_x;
     int indent_y;
     int indent_menu_item_x;
-    
+
     /** The color map. */
     Colormap cmap;
-    
+
     /** The colors. */
     XColor gray, light_gray, vlight_gray, dark_gray;
-    
+
     /** The window attributes. */
     XWindowAttributes window_attributes;
 };
 
 /* X_WINDOWS_SOURCE */
 #endif
-
