@@ -34,7 +34,7 @@ import cybop.core.system.chain.*;
  *
  * A socket is an endpoint for communication between two machines.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-04-23 14:08:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Socket extends System {
@@ -102,15 +102,6 @@ public class Socket extends System {
     public void initialize() throws Exception, NullPointerException {
 
         super.initialize();
-
-        Configuration c = (Configuration) get(System.CONFIGURATION);
-
-        if (c != null) {
-
-        } else {
-
-            throw new NullPointerException("Could not initialize system. The configuration is null.");
-        }
     }
 
     /**
@@ -119,15 +110,6 @@ public class Socket extends System {
      * @exception NullPointerException if the configuration is null
      */
     public void finalizz() throws Exception, NullPointerException {
-
-        Configuration c = (Configuration) get(System.CONFIGURATION);
-
-        if (c != null) {
-
-        } else {
-
-            throw new NullPointerException("Could not finalize system. The configuration is null.");
-        }
 
         super.finalizz();
     }

@@ -51,7 +51,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.8 $ $Date: 2003-04-14 20:37:01 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-04-23 14:08:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
@@ -88,6 +88,37 @@ public class Controller extends Block {
 
     /** The socket translator. */
     public static final String SOCKET_TRANSLATOR = new String("socket_translator");
+
+    //
+    // Default children.
+    //
+
+    /** The default processor. */
+    public String defaultProcessor;
+
+    /** The default domain model. */
+    public String defaultDomainModel;
+
+    /** The default system user interface. */
+    public String defaultSystemUserInterface;
+
+    /** The default mouse model. */
+    public String defaultMouseModel;
+
+    /** The default system information user interface. */
+    public String defaultSystemInformationUserInterface;
+
+    /** The default system information user interface translator. */
+    public String defaultSystemInformationUserInterfaceTranslator;
+
+    /** The default tui translator. */
+    public String defaultTuiTranslator;
+
+    /** The default gui translator. */
+    public String defaultGuiTranslator;
+
+    /** The default socket translator. */
+    public String defaultSocketTranslator;
 
     //
     // Actions.
@@ -319,6 +350,98 @@ public class Controller extends Block {
         return null;
     }
 
+    /**
+     * Returns the default tui translator.
+     *
+     * @return the default tui translator
+     */
+    public String getDefaultTuiTranslator() {
+
+        return null;
+    }
+
+    /**
+     * Returns the default gui translator.
+     *
+     * @return the default gui translator
+     */
+    public String getDefaultGuiTranslator() {
+
+        return null;
+    }
+
+    /**
+     * Returns the default socket translator.
+     *
+     * @return the default socket translator
+     */
+    public String getDefaultSocketTranslator() {
+
+        return null;
+    }
+
+    //
+    // Configuration.
+    //
+
+    /**
+     * Configures this controller.
+     *
+     * @exception NullPointerException if the configuration is null
+     */
+    public void configure() throws Exception, NullPointerException {
+
+        super.configure();
+
+        Configuration c = (Configuration) get(Controller.CONFIGURATION);
+
+        if (c != null) {
+
+            this.defaultProcessor = c.get(Controller.PROCESSOR, getDefaultProcessor());
+            this.defaultDomainModel = c.get(Controller.DOMAIN_MODEL, getDefaultDomainModel());
+            this.defaultSystemUserInterface = c.get(Controller.SYSTEM_USER_INTERFACE, getDefaultSystemUserInterface());
+            this.defaultMouseModel = c.get(Controller.MOUSE_MODEL, getDefaultMouseModel());
+            this.defaultSystemInformationUserInterface = c.get(Controller.SYSTEM_INFORMATION_USER_INTERFACE, getDefaultSystemInformationUserInterface());
+            this.defaultSystemInformationUserInterfaceTranslator = c.get(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR, getDefaultSystemInformationUserInterfaceTranslator());
+            this.defaultTuiTranslator = c.get(Controller.TUI_TRANSLATOR, getDefaultTuiTranslator());
+            this.defaultGuiTranslator = c.get(Controller.GUI_TRANSLATOR, getDefaultGuiTranslator());
+            this.defaultSocketTranslator = c.get(Controller.SOCKET_TRANSLATOR, getDefaultSocketTranslator());
+
+        } else {
+
+            java.lang.System.out.println("WARNING: Could not configure controller. The configuration is null.");
+        }
+    }
+
+    /**
+     * Deconfigures this controller.
+     *
+     * @exception NullPointerException if the configuration is null
+     */
+    public void deconfigure() throws Exception, NullPointerException {
+
+        Configuration c = (Configuration) get(Controller.CONFIGURATION);
+
+        if (c != null) {
+
+            c.set(Controller.SOCKET_TRANSLATOR, this.defaultSocketTranslator);
+            c.set(Controller.GUI_TRANSLATOR, this.defaultGuiTranslator);
+            c.set(Controller.TUI_TRANSLATOR, this.defaultTuiTranslator);
+            c.set(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR, this.defaultSystemInformationUserInterfaceTranslator);
+            c.set(Controller.SYSTEM_INFORMATION_USER_INTERFACE, this.defaultSystemInformationUserInterface);
+            c.set(Controller.MOUSE_MODEL, this.defaultMouseModel);
+            c.set(Controller.SYSTEM_USER_INTERFACE, this.defaultSystemUserInterface);
+            c.set(Controller.DOMAIN_MODEL, this.defaultDomainModel);
+            c.set(Controller.PROCESSOR, this.defaultProcessor);
+
+        } else {
+
+            java.lang.System.out.println("WARNING: Could not deconfigure controller. The configuration is null.");
+        }
+
+        super.deconfigure();
+    }
+
     //
     // Initializable.
     //
@@ -330,18 +453,33 @@ public class Controller extends Block {
 
         super.initialize();
 
-        set(Controller.PROCESSOR, createComponent(getDefaultProcessor()));
-        set(Controller.DOMAIN_MODEL, createComponent(getDefaultDomainModel()));
-        set(Controller.SYSTEM_USER_INTERFACE, createComponent(getDefaultSystemUserInterface()));
-        set(Controller.MOUSE_MODEL, createComponent(getDefaultMouseModel()));
-        set(Controller.SYSTEM_INFORMATION_USER_INTERFACE, createComponent(getDefaultSystemInformationUserInterface()));
-        set(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR, createComponent(getDefaultSystemInformationUserInterfaceTranslator()));
+        set(Controller.PROCESSOR, createComponent(this.defaultProcessor));
+        set(Controller.DOMAIN_MODEL, createComponent(this.defaultDomainModel));
+        set(Controller.SYSTEM_USER_INTERFACE, createComponent(this.defaultSystemUserInterface));
+        set(Controller.MOUSE_MODEL, createComponent(this.defaultMouseModel));
+        set(Controller.SYSTEM_INFORMATION_USER_INTERFACE, createComponent(this.defaultSystemInformationUserInterface));
+        set(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR, createComponent(this.defaultSystemInformationUserInterfaceTranslator));
+        set(Controller.TUI_TRANSLATOR, createComponent(this.defaultTuiTranslator));
+        set(Controller.GUI_TRANSLATOR, createComponent(this.defaultGuiTranslator));
+        set(Controller.SOCKET_TRANSLATOR, createComponent(this.defaultSocketTranslator));
     }
 
     /**
      * Finalizes this controller.
      */
     public void finalizz() throws Exception {
+
+        SocketTranslator socketTranslator = (SocketTranslator) get(Controller.SOCKET_TRANSLATOR);
+        remove(Controller.SOCKET_TRANSLATOR);
+        destroyComponent(socketTranslator);
+
+        Item guiTranslator = get(Controller.GUI_TRANSLATOR);
+        remove(Controller.GUI_TRANSLATOR);
+        destroyComponent((Component) guiTranslator);
+
+        TuiTranslator tuiTranslator = (TuiTranslator) get(Controller.TUI_TRANSLATOR);
+        remove(Controller.TUI_TRANSLATOR);
+        destroyComponent(tuiTranslator);
 
         SystemInformationUserInterfaceTranslator systemInformationUserInterfaceTranslator = (SystemInformationUserInterfaceTranslator) get(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);
         remove(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);

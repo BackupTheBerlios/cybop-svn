@@ -44,15 +44,11 @@ import cybop.core.system.System;
  * <code>resume()</code>: reactivates the server<br>
  * <code>stop()</code>: stops the server's waiting loop<br>
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-04-23 14:08:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Server extends System {
 
-    //
-    // Static attribute ids.
-    //
-    
     //
     // Initialization.
     //
