@@ -33,7 +33,7 @@ package cyboi;
  * - send
  * - reset
  *
- * @version $Revision: 1.20 $ $Date: 2003-09-08 06:48:49 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2003-09-08 13:31:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -84,7 +84,7 @@ class SignalHandler {
     static java.lang.String CORBA_LANGUAGE = "corba";
 
     /** The extensible markup language (xml). */
-    static java.lang.String XM_LANGUAGE = "xm";
+    static java.lang.String XML_LANGUAGE = "xml";
 
     /** The simple object access protocol (soap) language. */
     static java.lang.String SOAP_LANGUAGE = "soap";
@@ -111,8 +111,12 @@ class SignalHandler {
     //
     // Attributes.
     //
-    
-    static java.lang.Object root;
+
+    /** The statics. */
+    static java.lang.Object statics;
+
+    /** The dynamics. */
+    static java.lang.Object dynamics;
 
     //
     // Signal.
@@ -197,32 +201,33 @@ class SignalHandler {
             if (a != null) {
 
                 LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Handle signal: " + a);
-                Item i = SignalHandler.root;
 
                 if (a.equals(JavaEventHandler.MOUSE_MOVED_EVENT)) {
 
 /*?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
-                    ItemHandler.set_item_element(i, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
-                    ItemHandler.set_item_element(i, "mouse.pointer_position.x_distance.unit", "pixel");
-                    ItemHandler.set_item_element(i, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
-                    ItemHandler.set_item_element(i, "mouse.pointer_position.y_distance.unit", "pixel");
+                    Item statics = SignalHandler.statics;
+                    
+                    ItemHandler.set_item_element(statics, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
+                    ItemHandler.set_item_element(statics, "mouse.pointer_position.x_distance.unit", "pixel");
+                    ItemHandler.set_item_element(statics, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
+                    ItemHandler.set_item_element(statics, "mouse.pointer_position.y_distance.unit", "pixel");
 */
 
                     SignalHandler.reset(s);
 
                 } else if (a.equals(JavaEventHandler.MOUSE_CLICKED_EVENT)) {
 
-                    java.lang.Object x = ItemHandler.get_item_element(i, "mouse.pointer_position.x_distance.quantity");
-                    java.lang.Object y = ItemHandler.get_item_element(i, "mouse.pointer_position.y_distance.quantity");
+                    Item statics = SignalHandler.statics;
+                    java.lang.Object main_frame = ItemHandler.get_item_element(statics, "main_frame");
+                    java.lang.Object x = ItemHandler.get_item_element(statics, "mouse.pointer_position.x_distance.quantity");
+                    java.lang.Object y = ItemHandler.get_item_element(statics, "mouse.pointer_position.y_distance.quantity");
+                    java.lang.Object z = ItemHandler.get_item_element(statics, "mouse.pointer_position.z_distance.quantity");
 
                     SignalHandler.reset(s);
-
-                    (x >= 0) && (x < width) && (y >= 0) && (y < height)
-
-                    s.predicate = SignalHandler.DETERMINE_SCREEN_MODEL_AT_POSITION;
+                    s.predicate = SignalHandler.mouse_clicked_action(main_frame, x, y, z);
 
                 } else if (a.equals(SignalHandler.SHOW_SYSTEM_INFORMATION_ACTION)) {
-                    
+
 /*??
                     encode("system.controller.system_information_screen_model");
                     
@@ -279,14 +284,14 @@ class SignalHandler {
                     // Root (statics).
                     SignalHandler.root = ItemHandler.create_object(s.object, Statics.CATEGORY);
                     s.predicate = SignalHandler.SEND_ACTION;
-                    s.object = MapHandler.get_map_element(((Item) root).items, "main_frame");
+                    s.object = MapHandler.get_map_element(((Item) statics).items, "main_frame");
 
                 } else if (a.equals(SignalHandler.SHUTDOWN_ACTION)) {
                     
                     SignalHandler.reset(s);
 
                     // Root (statics).
-                    ItemHandler.destroy_object(SignalHandler.root, s.object, Statics.CATEGORY);
+                    ItemHandler.destroy_object(SignalHandler.statics, s.object, Statics.CATEGORY);
                     sf = true;
                 }
                 
@@ -396,6 +401,73 @@ class SignalHandler {
 
             LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not reset signal. The signal is null.");
         }
+    }
+    
+    //??
+    //?? Temporary operations. To be replaced by CYBOL action files.
+    //??
+    
+    /**
+     * Handles the mouse clicked action.
+     *
+     * @param p0 the screen item
+     * @param p1 the x coordinate
+     * @param p2 the y coordinate
+     * @param p3 the z coordinate
+     * @return the action
+     */
+    static java.lang.Object mouse_clicked_action(java.lang.Object p0, int p1, int p2, int p3) {
+
+        java.lang.Object a = null;
+        Item i = (Item) p0;
+        
+        if (i != null) {
+
+            java.lang.Object action = MapHandler.get_map_element(i.items, "mouse_clicked_action");
+            
+            if (action != null) {
+                
+                a = action;
+            }
+            
+            int count = 0;
+            int size = MapHandler.get_map_size(i.items);
+            Item child = null;
+            Item position = null;
+            int x = -1;
+            int y = -1;
+            int z = -1;
+            boolean contains = false;
+            
+            while (count < size) {
+
+                //
+                // ?? TODO: action handling for mathematics: subtraction
+                // using java.lang.Object and encapsulating primitives!
+                //
+                
+                child = MapHandler.get_map_element(i.items, count);
+                position = MapHandler.get_map_element(i.positions, count);
+                x = p1 - ItemHandler.get_item_element(position, "x_distance.quantity");
+                y = p2 - ItemHandler.get_item_element(position, "y_distance.quantity");
+                z = p3 - ItemHandler.get_item_element(position, "z_distance.quantity");
+                width = ItemHandler.get_item_element(child, "expansion.x_distance.quantity");
+                height = ItemHandler.get_item_element(child, "expansion.y_distance.quantity");
+                depth = ItemHandler.get_item_element(child, "expansion.z_distance.quantity");
+                contains = (x >= 0) && (x < width) && (y >= 0) && (y < height) && (z >= 0) && (z < depth);
+
+                if (contains == true) {
+                
+                    a = SignalHandler.mouse_clicked_action(child, x, y, z);
+                }
+            }
+    
+        } else {
+            
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The item is null.");
+        }
+        
+        return a;
     }
 }
 
