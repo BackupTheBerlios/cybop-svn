@@ -34,7 +34,7 @@ import cybop.core.system.chain.*;
  *
  * A socket is an endpoint for communication between two machines.
  *
- * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-18 11:54:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Socket extends System {
@@ -48,7 +48,7 @@ public class Socket extends System {
      *
      * @return the encapsulated java socket
      */
-    public java.lang.Object createJavaObject() {
+    public java.lang.Object createJavaObject() throws Exception {
 
         java.net.Socket s = new java.net.Socket();
         
@@ -69,7 +69,7 @@ public class Socket extends System {
      *
      * @param o the encapsulated java socket
      */
-    public void destroyJavaObject(java.lang.Object o) {
+    public void destroyJavaObject(java.lang.Object o) throws Exception {
 
         java.net.Socket s = (java.net.Socket) o;
 
@@ -88,30 +88,6 @@ public class Socket extends System {
 
             throw new Exception("Could not destroy java socket. The java socket is null.");
         }
-    }
-
-    //
-    // Initialization.
-    //
-
-    /**
-     * Initializes this socket.
-     *
-     * @exception Exception if the configuration is null
-     */
-    public void initialize() throws Exception {
-
-        super.initialize();
-    }
-
-    /**
-     * Finalizes this socket.
-     *
-     * @exception Exception if the configuration is null
-     */
-    public void finalizz() throws Exception {
-
-        super.finalizz();
     }
 }
 

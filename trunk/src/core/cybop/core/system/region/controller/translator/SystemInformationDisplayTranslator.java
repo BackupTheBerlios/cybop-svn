@@ -36,7 +36,7 @@ import cybop.core.systeminformation.*;
 /**
  * This class represents a system information display translator.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-18 11:54:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationDisplayTranslator extends Translator {
@@ -97,7 +97,7 @@ public class SystemInformationDisplayTranslator extends Translator {
      * @exception Exception if the system information is null
      * @exception Exception if the system version panel is null
      */
-    private void encodeSystemVersionPanel(SystemInformation i, SystemVersionPanel p) {
+    private void encodeSystemVersionPanel(SystemInformation i, SystemVersionPanel p) throws Exception {
 
         if (i != null) {
 
@@ -126,7 +126,7 @@ public class SystemInformationDisplayTranslator extends Translator {
      * @param t the text
      * @exception Exception if the label is null
      */
-    private void encodeLabel(Label l, String text) {
+    private void encodeLabel(Label l, String text) throws Exception {
 
         if (l != null) {
 
@@ -146,7 +146,7 @@ public class SystemInformationDisplayTranslator extends Translator {
      * @exception Exception if the system information is null
      * @exception Exception if the tabbed pane is null
      */
-    private void encodeTabbedPane(SystemInformation i, TabbedPane p) {
+    private void encodeTabbedPane(SystemInformation i, TabbedPane p) throws Exception {
     }
 }
 

@@ -31,7 +31,7 @@ package cybop.core.model;
  * In informatics, special tables were created which map every known sign
  * to a certain encoding number. The most popular tables are ASCII, ANSI and UNICODE.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-18 11:54:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Character extends Quality {
@@ -66,7 +66,7 @@ public class Character extends Quality {
      * @return the encapsulated java object
      */
 /*??
-    public char createJavaObject() {
+    public char createJavaObject() throws Exception {
 
         return null;
     }
@@ -77,7 +77,7 @@ public class Character extends Quality {
      * @param o the encapsulated java object
      */
 /*??
-    public void destroyJavaObject(char o) {
+    public void destroyJavaObject(char o) throws Exception {
     }
 
     /**

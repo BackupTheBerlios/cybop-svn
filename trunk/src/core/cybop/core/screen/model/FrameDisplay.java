@@ -35,7 +35,7 @@ import cybop.core.screen.region.*;
 /**
  * This class represents a frame model.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-18 11:54:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class FrameDisplay extends Display {
@@ -111,7 +111,7 @@ public class FrameDisplay extends Display {
      *
      * @return the encapsulated java swing window/dialog/frame/internal frame/tab page
      */
-    public java.lang.Object createJavaObject() {
+    public java.lang.Object createJavaObject() throws Exception {
 
         java.awt.Container c = null;
 /*??

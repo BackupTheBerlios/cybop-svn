@@ -33,7 +33,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a label.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-17 08:21:03 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-18 11:54:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Label extends DisplayComponent {
@@ -85,7 +85,7 @@ public class Label extends DisplayComponent {
      *
      * @param o the encapsulated java swing label
      */
-    public void destroyJavaObject(java.lang.Object o) {
+    public void destroyJavaObject(java.lang.Object o) throws Exception {
 
         javax.swing.JLabel l = (javax.swing.JLabel) o;
 
@@ -175,45 +175,45 @@ public class Label extends DisplayComponent {
     }
 
     //
-    // Default children.
+    // Default categories.
     //
 
     /**
-     * Returns the default font.
+     * Returns the default font category.
      *
-     * @return the default font
+     * @return the default font category
      */
-    public String getDefaultFont() {
+    public String getDefaultFontCategory() {
 
         return new String("cybop.core.model.organizer.Font");
     }
 
     /**
-     * Returns the default text.
+     * Returns the default text category.
      *
-     * @return the default text
+     * @return the default text category
      */
-    public String getDefaultText() {
+    public String getDefaultTextCategory() {
 
         return new String("Label");
     }
 
     /**
-     * Returns the default horizontal text position.
+     * Returns the default horizontal text position category.
      *
-     * @return the default horizontal text position
+     * @return the default horizontal text position category
      */
-    public Integer getDefaultHorizontalTextPosition() {
+    public Integer getDefaultHorizontalTextPositionCategory() {
 
         return new Integer(javax.swing.SwingConstants.CENTER);
     }
 
     /**
-     * Returns the default vertical text position.
+     * Returns the default vertical text position category.
      *
-     * @return the default vertical text position
+     * @return the default vertical text position category
      */
-    public Integer getDefaultVerticalTextPosition() {
+    public Integer getDefaultVerticalTextPositionCategory() {
 
         return new Integer(javax.swing.SwingConstants.CENTER);
     }
@@ -459,40 +459,70 @@ public class Label extends DisplayComponent {
     }
 
     //
-    // Initializable.
+    // Categorization.
     //
 
     /**
-     * Initializes this label.
+     * Categorizes this hierarchy.
+     */
+    public void categorize() throws Exception {
+
+        super.categorize();
+
+        setCategory(Label.FONT, getDefaultFontCategory());
+        setCategory(Label.TEXT, getDefaultTextCategory());
+        setCategory(Label.HORIZONTAL_TEXT_POSITION, getDefaultHorizontalTextPositionCategory());
+        setCategory(Label.VERTICAL_TEXT_POSITION, getDefaultVerticalTextPositionCategory());
+    }
+
+    /**
+     * Decategorizes this hierarchy.
+     */
+    public void decategorize() throws Exception {
+
+        removeCategory(Label.VERTICAL_TEXT_POSITION);
+        removeCategory(Label.HORIZONTAL_TEXT_POSITION);
+        removeCategory(Label.TEXT);
+        removeCategory(Label.FONT);
+
+        super.decategorize();
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this item.
      */
     public void initialize() throws Exception {
 
         super.initialize();
 
-        setChild(Label.FONT, createChild(getDefaultFont()));
-        setChild(Label.TEXT, getDefaultText());
-        setChild(Label.HORIZONTAL_TEXT_POSITION, getDefaultHorizontalTextPosition());
-        setChild(Label.VERTICAL_TEXT_POSITION, getDefaultVerticalTextPosition());
+        setChild(Label.FONT, createChild(getCategory(Label.FONT)));
+        setChild(Label.TEXT, createChild(getCategory(Label.TEXT)));
+        setChild(Label.HORIZONTAL_TEXT_POSITION, createChild(getCategory(Label.HORIZONTAL_TEXT_POSITION)));
+        setChild(Label.VERTICAL_TEXT_POSITION, createChild(getCategory(Label.VERTICAL_TEXT_POSITION)));
     }
 
     /**
-     * Finalizes this label.
+     * Finalizes this item.
      */
     public void finalizz() throws Exception {
 
-        Integer verticalTextPosition = (Integer) getChild(Label.VERTICAL_TEXT_POSITION);
+        Item verticalTextPosition = getChild(Label.VERTICAL_TEXT_POSITION);
         removeChild(Label.VERTICAL_TEXT_POSITION);
         destroyChild(verticalTextPosition);
 
-        Integer horizontalTextPosition = (Integer) getChild(Label.HORIZONTAL_TEXT_POSITION);
+        Item horizontalTextPosition = getChild(Label.HORIZONTAL_TEXT_POSITION);
         removeChild(Label.HORIZONTAL_TEXT_POSITION);
         destroyChild(horizontalTextPosition);
 
-        String text = (String) getChild(Label.TEXT);
+        Item text = getChild(Label.TEXT);
         removeChild(Label.TEXT);
         destroyChild(text);
 
-        Font font = (Font) getChild(Label.FONT);
+        Item font = getChild(Label.FONT);
         removeChild(Label.FONT);
         destroyChild(font);
 

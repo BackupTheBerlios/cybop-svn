@@ -32,7 +32,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a system information contents panel.
  *
- * @version $Revision: 1.7 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-06-18 11:54:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationPanel extends DisplayRegion {
@@ -81,7 +81,7 @@ public class SystemInformationPanel extends DisplayRegion {
      *
      * @param o the encapsulated java swing panel
      */
-    public void destroyJavaObject(java.lang.Object o) {
+    public void destroyJavaObject(java.lang.Object o) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) o;
 
