@@ -60,7 +60,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.10 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-04-29 07:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends Block implements 
@@ -440,7 +440,9 @@ public class System extends Block implements
         if (getChildItem(System.SYSTEMS_COUNT) != null) {
 
             // Retrieve the number of systems and create them one by one.
-            for (i = 0; i < ((Integer) getChildItem(System.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+            i = 0;
+
+            while (i < ((Integer) getChildItem(System.SYSTEMS_COUNT)).getJavaPrimitive()) {
 
                 s = new String(System.SYSTEM + "_" + java.lang.String.valueOf(i));
 
@@ -448,6 +450,8 @@ public class System extends Block implements
 
                 //?? Testing.
                 setChildItem(new String("system_test_user"), createSystem(c.getChildItem(loc, new String("cybop.core.system.system.User")), c.getChildItem(args, new String("")), c.getChildItem(wp, new String(""))));
+                
+                i++;
             }
 
         } else {
@@ -473,8 +477,9 @@ public class System extends Block implements
             String args; 
             String wp;
             System system = null;
+            i = 0;
 
-            for (i = 0; i < ((Integer) getChildItem(System.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+            while (i < ((Integer) getChildItem(System.SYSTEMS_COUNT)).getJavaPrimitive()) {
 
                 s = new String(System.SYSTEM + "_" + java.lang.String.valueOf(i));
                 loc = new String(System.SYSTEM_LOCATION + "_" + java.lang.String.valueOf(i));
@@ -484,6 +489,8 @@ public class System extends Block implements
                 system = (System) getChildItem(s);
                 removeChildItem(s);
                 destroySystem(system);
+                
+                i++;
             }
 
             Integer systemsCount = (Integer) getChildItem(System.SYSTEMS_COUNT);

@@ -70,7 +70,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.19 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2003-04-29 07:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -377,8 +377,9 @@ public class Launcher extends Family {
         if (args != null) {
 
             String s = null;
+            int i = 0;
 
-            for (int i = 0; i < args.length; i++) {
+            while (i < args.length) {
 
                 s = new String(args[i]);
                 
@@ -393,6 +394,8 @@ public class Launcher extends Family {
 
                     throw new NullPointerException("Could not get argument. An argument is null.");
                 }
+                
+                i++;
             }
 
         } else {

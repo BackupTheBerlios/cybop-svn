@@ -31,7 +31,7 @@ package cybop.core.basic;
  * In computing, it is also known as floating point- or double number,
  * having a part "before and after the point/comma".
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-04-29 07:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Fraction extends Quantity {
@@ -698,11 +698,13 @@ public class Fraction extends Quantity {
                     Integer rednum;
                     
                     if (max != null) {
-                        
+
                         // Find the first divider with integer result (without rest).
-                        // Begin with the biggest divider that both, numerator and denominator contain.                
-                        for (int i = max.getJavaPrimitive(); i > 1; i--) {
-                            
+                        // Begin with the biggest divider that both, numerator and denominator contain.
+                        int i = max.getJavaPrimitive();
+
+                        while (i > 1) {
+
                             if (absnum.isDividableWithoutRest(i) && den.isDividableWithoutRest(i)) {
                                 
 /*??
@@ -721,6 +723,8 @@ public class Fraction extends Quantity {
                                 break;
 */
                             }
+
+                            i--;
                         }
                 
                     } else {

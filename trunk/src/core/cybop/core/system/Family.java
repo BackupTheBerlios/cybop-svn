@@ -49,7 +49,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.12 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-04-29 07:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -348,10 +348,13 @@ public class Family extends System {
 /*??
         Integer count = getAvailableSystemsCount();
         String[] s = new String[count];
+        Integer i = 0;
 
-        for (Integer i = 0; i < count; i++) {
+        while (i < count) {
 
             s[i] = getPreferences().getChildItem(FamilyConfiguration.AVAILABLE_SYSTEMS + "_" + Integer.toString(i), def);
+
+            i++;
         }
 
         return s;
@@ -373,13 +376,17 @@ public class Family extends System {
             String conf = null;
 
             // Retrieve the number of systems and create them one by one.
-            for (i = 0; i < ((Integer) getChildItem(Family.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+            i = 0;
+
+            while (i < ((Integer) getChildItem(Family.SYSTEMS_COUNT)).getJavaPrimitive()) {
 
                 s = new String(Family.SYSTEM + "_" + java.lang.String.valueOf(i));
                 cl = new String(Family.SYSTEM_CLASS_NAME + "_" + java.lang.String.valueOf(i));
                 conf = new String(Family.SYSTEM_CONFIGURATION_LOCATION + "_" + java.lang.String.valueOf(i));
 
 //??                setChildItem(s, createComponent(c.getChildItem(cl, getDefaultSystemClassName())));
+
+                i++;
             }
 
         } else {
@@ -398,12 +405,16 @@ public class Family extends System {
             String cmd = null;
 
             // Retrieve the number of external systems and create them one by one.
-            for (i = 0; i < ((Integer) getChildItem(Family.EXTERNAL_SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+            i = 0;
+            
+            while (i < ((Integer) getChildItem(Family.EXTERNAL_SYSTEMS_COUNT)).getJavaPrimitive()) {
 
                 s = new String(Family.EXTERNAL_SYSTEM + "_" + java.lang.String.valueOf(i));
                 cmd = new String(Family.EXTERNAL_SYSTEM_COMMAND + "_" + java.lang.String.valueOf(i));
 
 //??                setChildItem(s, createComponent(c.getChildItem(cmd, getDefaultExternalSystemCommand())));
+
+                i++;
             }
 
         } else {
@@ -430,8 +441,9 @@ public class Family extends System {
 
             String cmd = null;
             ExternalSystem externalSystem = null;
+            i = 0;
 
-            for (i = 0; i < ((Integer) getChildItem(Family.EXTERNAL_SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+            while (i < ((Integer) getChildItem(Family.EXTERNAL_SYSTEMS_COUNT)).getJavaPrimitive()) {
 
                 s = new String(Family.EXTERNAL_SYSTEM + "_" + java.lang.String.valueOf(i));
                 cmd = new String(Family.EXTERNAL_SYSTEM_COMMAND + "_" + java.lang.String.valueOf(i));
@@ -441,6 +453,8 @@ public class Family extends System {
                 externalSystem = (ExternalSystem) getChildItem(s);
                 removeChildItem(s);
                 destroyComponent(externalSystem);
+                
+                i++;
             }
 
             Integer externalSystemsCount = (Integer) getChildItem(Family.EXTERNAL_SYSTEMS_COUNT);
@@ -462,8 +476,9 @@ public class Family extends System {
             String cl = null;
             String conf = null; 
             System system = null;
+            i = 0;
 
-            for (i = 0; i < ((Integer) getChildItem(Family.SYSTEMS_COUNT)).getJavaPrimitive(); i++) {
+            while (i < ((Integer) getChildItem(Family.SYSTEMS_COUNT)).getJavaPrimitive()) {
 
                 s = new String(Family.SYSTEM + "_" + java.lang.String.valueOf(i));
                 cl = new String(Family.SYSTEM_CLASS_NAME + "_" + java.lang.String.valueOf(i));
@@ -475,6 +490,8 @@ public class Family extends System {
                 system = (System) getChildItem(s);
                 removeChildItem(s);
                 destroyComponent(system);
+
+                i++;
             }
 
             Integer systemsCount = (Integer) getChildItem(Family.SYSTEMS_COUNT);

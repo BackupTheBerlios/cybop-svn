@@ -49,7 +49,7 @@ import cybop.core.system.chain.*;
  * Child systems can be integrated into the portal system's Frame as Frame,
  * InternalFrame or TabPage.
  *
- * @version $Revision: 1.7 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-04-29 07:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Portal extends Family {
@@ -390,8 +390,9 @@ public class Portal extends Family {
         if (l != null) {
 
             Object o = null;
+            Integer i = 0;
 
-            for (Integer i = 0; i < l.size(); i++) {
+            while (i < l.size()) {
 
                 // Determine child controller.
                 o = l.getChildItem(i);
@@ -400,6 +401,8 @@ public class Portal extends Family {
 
 //??                    ((org.resmedicinae.resmedlib.System) o).show((View) ((org.resmedicinae.resmedlib.System) o).getView());
                 }
+                
+                i++;
             }
 
         } else {
@@ -423,8 +426,9 @@ public class Portal extends Family {
         if (l != null) {
 
             Object o = null;
+            Integer i = 0;
 
-            for (Integer i = 0; i < l.size(); i++) {
+            while (i < l.size()) {
 
                 // Determine child controller.
                 o = l.getChildItem(i);
@@ -433,6 +437,8 @@ public class Portal extends Family {
 
 //??                    ((org.resmedicinae.resmedlib.System) o).hide((View) ((org.resmedicinae.resmedlib.System) o).getView());
                 }
+                
+                i++;
             }
 
         } else {
