@@ -40,17 +40,7 @@ import cybop.core.system.system.*;
 /**
  * This class represents a system.<br><br>
  *
- * It is a super class and forms an own level in the framework's ontology:
- *  <ul>
- *      <li>Family</li>
- *      <li>System</li>
- *      <li>Block</li>
- *      <li>Region</li>
- *      <li>Component</li>
- *      <li>Part</li>
- *      <li>Chain</li>
- *  </ul>
- *
+ * It contains meta information about a system.
  * A system corresponds to an animal or human organism.<br><br>
  *
  * It is important to note that users of systems are treated as system
@@ -59,7 +49,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.25 $ $Date: 2003-06-30 09:49:47 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2003-06-30 11:19:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends SystemItem implements java.lang.Runnable {
@@ -70,6 +60,42 @@ public class System extends SystemItem implements java.lang.Runnable {
 
     /** The self. It names this system itself. */
     public static final String SELF = new String("self");
+
+    /** The name. */
+    public static final String NAME = new String("name");
+
+    /** The version. */
+    public static final String VERSION = new String("version");
+
+    /** The date. */
+    public static final String DATE = new String("date");
+
+    /** The slogan id. */
+    public static final String SLOGAN = new String("slogan");
+
+    /** The logo. */
+    public static final String LOGO = new String("logo");
+
+    /** The copyright. */
+    public static final String COPYRIGHT = new String("copyright");
+
+    /** The contact. */
+    public static final String CONTACT = new String("contact");
+
+    /** The description id. */
+    public static final String DESCRIPTION = new String("description");
+
+    /** The authors. */
+    public static final String AUTHORS = new String("authors");
+
+    /** The helpers. */
+    public static final String HELPERS = new String("helpers");
+
+    /** The inspirations. */
+    public static final String INSPIRATIONS = new String("inspirations");
+
+    /** The license. */
+    public static final String LICENSE = new String("license");
 
     /** The controller. */
     public static final String CONTROLLER = new String("controller");
@@ -143,6 +169,141 @@ public class System extends SystemItem implements java.lang.Runnable {
     //
     // Default categories.
     //
+
+    /**
+     * Returns the default name category.
+     *
+     * @return the default name category
+     */
+    public String getDefaultNameCategory() {
+
+        return new String("Res Medicinae");
+    }
+
+    /**
+     * Returns the default version category.
+     *
+     * @return the default version category
+     */
+    public String getDefaultVersionCategory() {
+
+        return new String("0.0.5.0");
+    }
+
+    /**
+     * Returns the default date category.
+     *
+     * @return the default date category
+     */
+    public String getDefaultDateCategory() {
+
+        return new String("31.01.2003");
+    }
+
+    /**
+     * Returns the default slogan category.
+     *
+     * @return the default slogan category
+     */
+    public String getDefaultSloganCategory() {
+
+        return new String("- Cybernetics Oriented Programming -");
+    }
+
+    /**
+     * Returns the default logo category.
+     *
+     * @return the default logo category
+     */
+    public String getDefaultLogoCategory() {
+
+        return null;
+    }
+
+    /**
+     * Returns the default copyright category.
+     *
+     * @return the default copyright category
+     */
+    public String getDefaultCopyrightCategory() {
+
+        return new String("Copyright (c) 1999-2003. Christian Heller <christian.heller@tuxtax.de>. All rights reserved.");
+    }
+
+    /**
+     * Returns the default contact category.
+     *
+     * @return the default contact category
+     */
+    public String getDefaultContactCategory() {
+
+        return new String("http://www.cybop.net");
+    }
+
+    /**
+     * Returns the default description category.
+     *
+     * @return the default description category
+     */
+    public String getDefaultDescriptionCategory() {
+
+        return new String("Free Medical Information System");
+    }
+
+    /**
+     * Returns the default authors category.
+     *
+     * @return the default authors category
+     */
+    public String getDefaultAuthorsCategory() {
+
+        return new String("Unspecified Authors.\n"
+            + "Try to contact these project administrators:\n\n"
+            + "Christian Heller\n<christian.heller@tuxtax.de>\n\n"
+            + "Karsten Hilbert\n<karsten.hilbert@gmx.net>");
+    }
+
+    /**
+     * Returns the default helpers category.
+     *
+     * @return the default helpers category
+     */
+    public String getDefaultHelpersCategory() {
+
+        return new String("Helpers ...");
+    }
+
+    /**
+     * Returns the default inspirations category.
+     *
+     * @return the default inspirations category
+     */
+    public String getDefaultInspirationsCategory() {
+
+        return new String("Inspirations ...");
+    }
+
+    /**
+     * Returns the default license category.
+     *
+     * @return the default license category
+     */
+    public String getDefaultLicenseCategory() {
+
+        return new String("This software is published under the GPL GNU General Public License.\n"
+            + "This program is free software; you can redistribute it and/or\n"
+            + "modify it under the terms of the GNU General Public License\n"
+            + "as published by the Free Software Foundation; either version 2\n"
+            + "of the License, or (at your option) any later version.\n\n"
+            + "This program is distributed in the hope that it will be useful,\n"
+            + "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+            + "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the\n"
+            + "GNU General Public License for more details.\n\n"
+            + "You should have received a copy of the GNU General Public License\n"
+            + "along with this program; if not, write to the Free Software\n"
+            + "Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.\n\n"
+            + "Find the GPL license and more information at: http://www.gnu.org");
+    }
 
     /**
      * Returns the default controller category.
@@ -265,6 +426,18 @@ public class System extends SystemItem implements java.lang.Runnable {
 
         super.categorize();
 
+        setCategory(System.NAME, getDefaultNameCategory());
+        setCategory(System.VERSION, getDefaultVersionCategory());
+        setCategory(System.DATE, getDefaultDateCategory());
+        setCategory(System.SLOGAN, getDefaultSloganCategory());
+        setCategory(System.LOGO, getDefaultLogoCategory());
+        setCategory(System.COPYRIGHT, getDefaultCopyrightCategory());
+        setCategory(System.CONTACT, getDefaultContactCategory());
+        setCategory(System.DESCRIPTION, getDefaultDescriptionCategory());
+        setCategory(System.AUTHORS, getDefaultAuthorsCategory());
+        setCategory(System.HELPERS, getDefaultHelpersCategory());
+        setCategory(System.INSPIRATIONS, getDefaultInspirationsCategory());
+        setCategory(System.LICENSE, getDefaultLicenseCategory());
         setCategory(System.CONTROLLER, getDefaultControllerCategory());
         setCategory(System.LOG_LEVEL, getDefaultLogLevelCategory());
         setCategory(System.LOG_RECORD, getDefaultLogRecordCategory());
@@ -294,6 +467,18 @@ public class System extends SystemItem implements java.lang.Runnable {
         removeCategory(System.LOG_RECORD);
         removeCategory(System.LOG_LEVEL);
         removeCategory(System.CONTROLLER);
+        removeCategory(System.LICENSE);
+        removeCategory(System.INSPIRATIONS);
+        removeCategory(System.HELPERS);
+        removeCategory(System.AUTHORS);
+        removeCategory(System.DESCRIPTION);
+        removeCategory(System.CONTACT);
+        removeCategory(System.COPYRIGHT);
+        removeCategory(System.LOGO);
+        removeCategory(System.SLOGAN);
+        removeCategory(System.DATE);
+        removeCategory(System.VERSION);
+        removeCategory(System.NAME);
 
         super.decategorize();
     }
@@ -309,6 +494,18 @@ public class System extends SystemItem implements java.lang.Runnable {
 
         super.initialize();
 
+        setChild(System.NAME, (Item) getCategory(System.NAME));
+        setChild(System.VERSION, (Item) getCategory(System.VERSION));
+        setChild(System.DATE, (Item) getCategory(System.DATE));
+        setChild(System.SLOGAN, (Item) getCategory(System.SLOGAN));
+        setChild(System.LOGO, (Item) getCategory(System.LOGO));
+        setChild(System.COPYRIGHT, (Item) getCategory(System.COPYRIGHT));
+        setChild(System.CONTACT, (Item) getCategory(System.CONTACT));
+        setChild(System.DESCRIPTION, (Item) getCategory(System.DESCRIPTION));
+        setChild(System.AUTHORS, (Item) getCategory(System.AUTHORS));
+        setChild(System.HELPERS, (Item) getCategory(System.HELPERS));
+        setChild(System.INSPIRATIONS, (Item) getCategory(System.INSPIRATIONS));
+        setChild(System.LICENSE, (Item) getCategory(System.LICENSE));
         setChild(System.CONTROLLER, createChild(getCategory(System.CONTROLLER)));
         setChild(System.LOG_LEVEL, (Item) getCategory(System.LOG_LEVEL));
         setChild(System.LOG_RECORD, createChild(getCategory(System.LOG_RECORD)));
@@ -430,6 +627,54 @@ public class System extends SystemItem implements java.lang.Runnable {
         Item controller = getChild(System.CONTROLLER);
         removeChild(System.CONTROLLER);
         destroyChild(controller);
+
+        Item license = getChild(System.LICENSE);
+        removeChild(System.LICENSE);
+        destroyChild(license);
+
+        Item inspirations = getChild(System.INSPIRATIONS);
+        removeChild(System.INSPIRATIONS);
+        destroyChild(inspirations);
+
+        Item helpers = getChild(System.HELPERS);
+        removeChild(System.HELPERS);
+        destroyChild(helpers);
+
+        Item authors = getChild(System.AUTHORS);
+        removeChild(System.AUTHORS);
+        destroyChild(authors);
+
+        Item description = getChild(System.DESCRIPTION);
+        removeChild(System.DESCRIPTION);
+        destroyChild(description);
+
+        Item contact = getChild(System.CONTACT);
+        removeChild(System.CONTACT);
+        destroyChild(contact);
+
+        Item copyright = getChild(System.COPYRIGHT);
+        removeChild(System.COPYRIGHT);
+        destroyChild(copyright);
+
+        Item logo = getChild(System.LOGO);
+        removeChild(System.LOGO);
+        destroyChild(logo);
+
+        Item slogan = getChild(System.SLOGAN);
+        removeChild(System.SLOGAN);
+        destroyChild(slogan);
+
+        Item date = getChild(System.DATE);
+        removeChild(System.DATE);
+        destroyChild(date);
+
+        Item version = getChild(System.VERSION);
+        removeChild(System.VERSION);
+        destroyChild(version);
+
+        Item name = getChild(System.NAME);
+        removeChild(System.NAME);
+        destroyChild(name);
 
         super.finalizz();
     }

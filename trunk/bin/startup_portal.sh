@@ -23,7 +23,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.4 $ $Date: 2003-06-24 08:43:58 $ $Author: christian $
+# @version $Revision: 1.5 $ $Date: 2003-06-30 11:19:23 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Henrik Brandes <henrik-b@gmx.de>
 # @author Christian Heller <christian.heller@tuxtax.de>
@@ -38,5 +38,5 @@
 #
 # Startup portal using the .jar files in the /lib directory.
 #
-java -Djava.compiler=javacomp -classpath $CLASSPATH cybop.core.system.family.Launcher -system cybop.core.system.family.Portal -action startup_system_action
+java -Djava.compiler=javacomp -classpath $CLASSPATH cybop.core.system.system.Launcher -system cybop.core.system.system.Portal -action startup_system_action
 

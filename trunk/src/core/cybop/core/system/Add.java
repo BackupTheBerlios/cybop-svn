@@ -31,7 +31,7 @@ import cybop.core.category.*;
  *
  * It represents a controller component and corresponds to a human nerve cell.
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-30 09:59:43 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-30 11:19:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Add extends Item {
@@ -52,5 +52,24 @@ public class Add extends Item {
         }
     }
 */
+
+/*??
+public class ShowSystemInformation extends Item {
+
+    /**
+     * Processes the data.
+     */
+/*??
+    public void process(Data d) {
+
+        translate
+            get system information model
+            get system information display
+            write model data into display
+        send display to output
+    }
+}
+*/
+
 }
 

@@ -29,9 +29,9 @@ import cybop.core.model.*;
 import cybop.core.model.String;
 
 /**
- * This class represents a screen item.<br><br>
+ * This class represents a display item.<br><br>
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-29 21:31:58 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-30 11:19:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class DisplayItem extends Item {
