@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2004-12-20 00:19:43 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-12-21 10:24:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -419,7 +419,7 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
  * @param p1 the signal memory count
  * @param p2 the signal id
  */
-void* get_new_signal_id(const void* p0, const void* p1, void* p2) {
+void get_new_signal_id(const void* p0, const void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
 
