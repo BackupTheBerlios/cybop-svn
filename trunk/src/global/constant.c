@@ -48,7 +48,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.14 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-10-27 11:52:47 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -74,6 +74,15 @@ static const int INTEGER_INTERNALS_COUNT = 1;
 
 /** The unix server socket index. */
 static const int UNIX_SERVER_SOCKET_INDEX = 0;
+
+/** The tcp socket index. */
+static const int INTEGER_INTERNALS_TCPSOCKET_PORT_INDEX = 0;
+static const int INTEGER_INTERNALS_TCPSOCKET_ACTIVE_INDEX = 1;
+
+/** The start parameter index. */
+static const int INTEGER_INTERNALS_START_ABSTRACTION_COUNT_INDEX = 2;
+static const int INTEGER_INTERNALS_START_CHANNEL_COUNT_INDEX = 3;
+static const int INTEGER_INTERNALS_START_MODEL_COUNT_INDEX = 4;
 
 //
 // Pointer internals.
