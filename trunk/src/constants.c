@@ -23,7 +23,7 @@
  *
  * This file contains global constants.
  *
- * @version $Revision: 1.1 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,7 +35,19 @@
 //
 
 /** The null pointer. */
-static const void* NULL = (void*) 0;
+static const void* NULL_POINTER = (void*) 0;
+
+/** The null pointer pointer. */
+static const void** NULL_POINTER_POINTER = (void**) 0;
+
+/** The null integer pointer. */
+static const int* NULL_INTEGER_POINTER = (int*) 0;
+
+/** The null character pointer. */
+static const char* NULL_CHARACTER_POINTER = (char*) 0;
+
+/** The null double pointer. */
+static const double* NULL_DOUBLE_POINTER = (double*) 0;
 
 /* CONSTANTS_SOURCE */
 #endif

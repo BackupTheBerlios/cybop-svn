@@ -29,7 +29,7 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.12 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,7 +68,7 @@ static const int FALSE_BOOLEAN_SIZE = 5;
  */
 void initialize_boolean(void* p0, const void* p1, const void* p2) {
 
-    if (p0 != NULL) {
+    if (p0 != NULL_POINTER) {
 
         int* t = (int*) p0;
 
@@ -102,15 +102,15 @@ void initialize_boolean(void* p0, const void* p1, const void* p2) {
  */
 void finalize_boolean(const void* p0, void* p1, void* p2) {
 
-    if (p0 != NULL) {
+    if (p0 != NULL_POINTER) {
 
         int* t = (int*) p0;
 
-        if (p1 != NULL) {
+        if (p1 != NULL_POINTER) {
 
             char* p = (char*) p1;
 
-            if (p2 != NULL) {
+            if (p2 != NULL_POINTER) {
 
                 int* ps = (int*) p2;
 

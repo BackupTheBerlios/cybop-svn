@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,11 +44,11 @@ void add(void* p0, void* p1, void* p2) {
     struct integer* summand_1 = (struct integer*) p1;
     struct integer* sum = (struct integer*) p2;
 
-    if (summand_0 != NULL) {
+    if (summand_0 != NULL_POINTER) {
 
-        if (summand_1 != NULL) {
+        if (summand_1 != NULL_POINTER) {
 
-            if (sum != NULL) {
+            if (sum != NULL_POINTER) {
 
                 sum->value = summand_0->value + summand_1->value;
 

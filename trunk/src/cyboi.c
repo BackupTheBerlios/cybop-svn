@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.15 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,14 +78,14 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
     // such as X-Windows, Macintosh or MS Windows.
     struct internals* i = (struct internals*) p3;
 
-    if (i != NULL) {
+    if (i != NULL_POINTER) {
 
         // Initialize shutdown flag to false.
         int f = 0;
         int index = -1;
-        void* s = NULL;
-        char* a = NULL;
-        void* p = NULL;
+        void* s = NULL_POINTER;
+        char* a = NULL_POINTER;
+        void* p = NULL_POINTER;
 
         //?? Testing!
         init_x();
@@ -177,29 +177,29 @@ int main(int p0, char** p1) {
     // Log level as static (global) variable.
     log_level = (void*) &INFO_LOG_LEVEL;
 
-    if (p1 != NULL) {
+    if (p1 != NULL_POINTER) {
 
         if (p0 == 2) {
 
             // Create statics.
-            void* s = NULL;
+            void* s = NULL_POINTER;
             create_compound_model((void*) &s);
 
             // Create dynamics.
-            void* d = NULL;
+            void* d = NULL_POINTER;
             create_compound_model((void*) &d);
 
             // Create internals.
-            void* i = NULL;
+            void* i = NULL_POINTER;
             create_map((void*) &i);
 
             // Create signal memory.
-            void* sm = NULL;
+            void* sm = NULL_POINTER;
             int sms = 0;
             create_array(sm, (void*) &sms);
 
             // Create startup signal.
-            void* ss = NULL;
+            void* ss = NULL_POINTER;
             create_model(ss, (void*) p1[1], NULL, (void*) OPERATION_MODEL);
 
             // Add startup signal to signal memory.

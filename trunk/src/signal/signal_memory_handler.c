@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.26 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -119,7 +119,7 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
 
-    if (m != NULL) {
+    if (m != NULL_POINTER) {
 
         set_array_element(m->signals, p1, p2);
         set_array_element(m->abstractions, p1, p3);
@@ -143,7 +143,7 @@ void add_signal(void* p0, void* p1, void* p2, void* p3) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
 
-    if (m != NULL) {
+    if (m != NULL_POINTER) {
 
         int i = 0;
         get_array_count(m->signals, (void*) &i);
@@ -165,7 +165,7 @@ void remove_signal(void* p0, void* p1) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
 
-    if (m != NULL) {
+    if (m != NULL_POINTER) {
 
         remove_array_element(m->signals, p1);
         remove_array_element(m->abstractions, p1);
@@ -186,10 +186,10 @@ void remove_signal(void* p0, void* p1) {
  */
 void* get_signal(void* p0, void* p1) {
 
-    void* s = NULL;
+    void* s = NULL_POINTER;
     struct signal_memory* m = (struct signal_memory*) p0;
 
-    if (m != NULL) {
+    if (m != NULL_POINTER) {
 
         s = get_array_element(m->signals, p1);
 
@@ -212,12 +212,12 @@ void get_highest_priority_index(void* p0, void* p1) {
     struct signal_memory* m = (struct signal_memory*) p0;
     int* index = (int*) p1;
 
-    if (m != NULL) {
+    if (m != NULL_POINTER) {
 
         int i = 0;
         int count = 0;
         get_array_count(m->priorities, (void*) &count);
-        int* p = NULL;
+        int* p = NULL_POINTER;
         int h = *index;
 
         while (i < count) {
@@ -254,7 +254,7 @@ void create_signal_memory(void* p0) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
 
-    if (m != NULL) {
+    if (m != NULL_POINTER) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Create signal memory.");
 
@@ -282,15 +282,15 @@ void destroy_signal_memory(void* p0) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
 
-    if (m != NULL) {
+    if (m != NULL_POINTER) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Destroy all signals left in signal memory.");
 
         int i = 0;
         get_array_count(m->signals, (void*) &i);
         i--;
-        void* s = NULL;
-        void* a = NULL;
+        void* s = NULL_POINTER;
+        void* a = NULL_POINTER;
 
         while (i >= 0) {
 
@@ -343,16 +343,16 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
 
     struct model* m = (struct model*) p1;
 
-    if (m != NULL) {
+    if (m != NULL_POINTER) {
 
         int count = 0;
         get_array_count(m->part_models, (void*) &count);
         int p = 0;
         int i = 0;
-        int* position = NULL;
-        void* abstraction = NULL;
-        void* location = NULL;
-        void* part = NULL;
+        int* position = NULL_POINTER;
+        void* abstraction = NULL_POINTER;
+        void* location = NULL_POINTER;
+        void* part = NULL_POINTER;
 
         // All positions.
         while (p < count) {
@@ -412,11 +412,11 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     struct operation* o = (struct operation*) p0;
 
-    if (o != NULL) {
+    if (o != NULL_POINTER) {
 
         void* v = o->value;
 
-        if (v != NULL) {
+        if (v != NULL_POINTER) {
 
             log_message((void*) &INFO_LOG_LEVEL, "TEST 0");
 
@@ -432,7 +432,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 struct model* s = (struct model*) p1;
 
-                if (s != NULL) {
+                if (s != NULL_POINTER) {
 
                     //?? Work this out! Hand over 9 or just 3 parameters,
                     //?? for only part or also position and constraint?
@@ -448,7 +448,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 struct model* s = (struct model*) p1;
 
-                if (s != NULL) {
+                if (s != NULL_POINTER) {
 
                     //?? Work this out! Hand over 9 or just 3 parameters,
                     //?? for only part or also position and constraint?
@@ -464,7 +464,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 struct model* d = (struct model*) p2;
 
-                if (d != NULL) {
+                if (d != NULL_POINTER) {
 
                     //?? Work this out! Hand over 9 or just 3 parameters,
                     //?? for only part or also position and constraint?
@@ -480,7 +480,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 struct model* d = (struct model*) p2;
 
-                if (d != NULL) {
+                if (d != NULL_POINTER) {
 
                     //?? Work this out! Hand over 9 or just 3 parameters,
                     //?? for only part or also position and constraint?
@@ -532,7 +532,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 reset_signal(s);
 
-                if (pointer_position != NULL) {
+                if (pointer_position != NULL_POINTER) {
 
     //??            mouse_clicked_action(main_frame, (void*) pointer_position->x, (void*) pointer_position->y, (void*) pointer_position->z, s->predicate);
 

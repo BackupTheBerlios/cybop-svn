@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.18 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -95,12 +95,12 @@ void create_operation(void* p0, const void* p1) {
     set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
 
     // The parameters array.
-    void* p = NULL;
+    void* p = NULL_POINTER;
     create_array((void*) &p, (void*) &s);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_ARRAY_INDEX, (void*) &p);
 
     // The parameters sizes array.
-    void* ps = NULL;
+    void* ps = NULL_POINTER;
     create_array((void*) &ps, (void*) &s);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_ARRAY_INDEX, (void*) &ps);
 }
@@ -120,13 +120,13 @@ void destroy_operation(void* p0, const void* p1) {
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
 
     // The parameters sizes array.
-    void* ps = NULL;
+    void* ps = NULL_POINTER;
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_ARRAY_INDEX, (void*) &ps);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_SIZE, (void*) &PARAMETERS_SIZES_ARRAY_INDEX);
     destroy_array((void*) &ps, (void*) &s);
 
     // The parameters array.
-    void* p = NULL;
+    void* p = NULL_POINTER;
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_ARRAY_INDEX, (void*) &p);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_SIZE, (void*) &PARAMETERS_ARRAY_INDEX);
     destroy_array((void*) &p, (void*) &s);
@@ -152,19 +152,19 @@ void destroy_operation(void* p0, const void* p1) {
  */
 void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
 
-    if (p3 != NULL) {
+    if (p3 != NULL_POINTER) {
 
         int* ps = (int*) p3;
 
-        if (p2 != NULL) {
+        if (p2 != NULL_POINTER) {
 
             void** p = (int*) p2;
 
-            if (p1 != NULL) {
+            if (p1 != NULL_POINTER) {
 
                 int* ts = (int*) p1;
 
-                if (p0 != NULL) {
+                if (p0 != NULL_POINTER) {
 
                     void** t = (int*) p0;
 
@@ -193,11 +193,11 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
                         get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
 
                         // Get parameter array.
-                        void* pa = NULL;
+                        void* pa = NULL_POINTER;
                         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_ARRAY_INDEX, (void*) &pa);
 
                         // Get parameter size array.
-                        void* pas = NULL;
+                        void* pas = NULL_POINTER;
                         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_ARRAY_INDEX, (void*) &pas);
 
                         // The index for adding the parameter and its size.
@@ -287,19 +287,19 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
  */
 void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
 
-    if (p3 != NULL) {
+    if (p3 != NULL_POINTER) {
 
         int* ps = (int*) p3;
 
-        if (p2 != NULL) {
+        if (p2 != NULL_POINTER) {
 
             void** p = (int*) p2;
 
-            if (p1 != NULL) {
+            if (p1 != NULL_POINTER) {
 
                 int* ts = (int*) p1;
 
-                if (p0 != NULL) {
+                if (p0 != NULL_POINTER) {
 
                     void** t = (int*) p0;
 
@@ -310,12 +310,19 @@ void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
                     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
 
                     // Get parameter array.
-                    void* pa = NULL;
+                    void* pa = NULL_POINTER;
                     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_ARRAY_INDEX, (void*) &pa);
 
                     // Get parameter size array.
-                    void* pas = NULL;
+                    void* pas = NULL_POINTER;
                     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_ARRAY_INDEX, (void*) &pas);
+
+/*??
+                    Finalization of operation is possibly not necessary!
+                    Operations get defined in CYBOL models (files).
+                    To manipulate them may become the task of a special modelling/ design tool,
+                    but not every application needs to allow modification of operations.
+                    Therefore, this block is commented/ disabled, for now.
 
                     // The index for removing the parameter and its size.
                     int index = 0;
@@ -374,6 +381,7 @@ void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
 
                         log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize operation. The index exceeds the size.");
                     }
+*/
 
                 } else {
 

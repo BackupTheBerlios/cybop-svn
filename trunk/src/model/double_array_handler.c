@@ -35,13 +35,14 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.7 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DOUBLE_ARRAY_HANDLER_SOURCE
 #define DOUBLE_ARRAY_HANDLER_SOURCE
 
+#include "../constants.c"
 #include "../logger/log_handler.c"
 
 //
@@ -61,25 +62,25 @@
  */
 void compare_double_arrays(const void* p0, const void* p1, const void* p2, void* p3) {
 
-    int* r = (int*) p3;
+    if (p3 != NULL_POINTER) {
 
-    if (r != NULL) {
+        int* r = (int*) p3;
 
-        int* s = (int*) p2;
+        if (p2 != NULL_POINTER) {
 
-        if (s != NULL) {
+            int* s = (int*) p2;
 
-            void** a1 = (void**) p1;
+            if (p1 != NULL_POINTER) {
 
-            if (a1 != NULL) {
+                void** a1 = (void**) p1;
 
-                void** a0 = (void**) p0;
+                if (p0 != NULL_POINTER) {
 
-                if (a0 != NULL) {
+                    void** a0 = (void**) p0;
 
                     int i = 0;
-                    double* e0 = NULL;
-                    double* e1 = NULL;
+                    double* e0 = NULL_DOUBLE_POINTER;
+                    double* e1 = NULL_DOUBLE_POINTER;
 
                     while (1) {
 
@@ -138,17 +139,17 @@ void compare_double_arrays(const void* p0, const void* p1, const void* p2, void*
  */
 void set_double_array_element(const void* p0, const void* p1, const void* p2) {
 
-    double* e0 = (double*) p2;
+    if (p2 != NULL_POINTER) {
 
-    if (e0 != NULL) {
+        double* e0 = (double*) p2;
 
-        int* i = (int*) p1;
+        if (p1 != NULL_POINTER) {
 
-        if (i != NULL) {
+            int* i = (int*) p1;
 
-            void** a = (void**) p0;
+            if (p0 != NULL_POINTER) {
 
-            if (a != NULL) {
+                void** a = (void**) p0;
 
                 // Set element.
                 double* e1 = (double*) (*a + *i);
@@ -179,23 +180,23 @@ void set_double_array_element(const void* p0, const void* p1, const void* p2) {
  */
 void remove_double_array_element(const void* p0, const void* p1, const void* p2) {
 
-    int* i = (int*) p2;
+    if (p2 != NULL_POINTER) {
 
-    if (i != NULL) {
+        int* i = (int*) p2;
 
-        int* s = (int*) p1;
+        if (p1 != NULL_POINTER) {
 
-        if (s != NULL) {
+            int* s = (int*) p1;
 
-            void** a = (void**) p0;
+            if (p0 != NULL_POINTER) {
 
-            if (a != NULL) {
+                void** a = (void**) p0;
 
                 // Initialize loop variable with index.
                 // Do not use the index itself as it was handed over as constant parameter!
                 int j = *i;
-                double* e0 = NULL;
-                double* e1 = NULL;
+                double* e0 = NULL_DOUBLE_POINTER;
+                double* e1 = NULL_DOUBLE_POINTER;
 
                 // Starting from the given index, move all remaining elements one
                 // place towards the beginning of the elements.
@@ -242,17 +243,17 @@ void remove_double_array_element(const void* p0, const void* p1, const void* p2)
  */
 void get_double_array_element(const void* p0, const void* p1, void* p2) {
 
-    double* e0 = (double*) p2;
+    if (p2 != NULL_POINTER) {
 
-    if (e0 != NULL) {
+        double* e0 = (double*) p2;
 
-        int* i = (int*) p1;
+        if (p1 != NULL_POINTER) {
 
-        if (i != NULL) {
+            int* i = (int*) p1;
 
-            void** a = (void**) p0;
+            if (p0 != NULL_POINTER) {
 
-            if (a != NULL) {
+                void** a = (void**) p0;
 
                 // Get element.
                 double* e1 = (double*) (*a + *i);
@@ -287,24 +288,24 @@ void get_double_array_element(const void* p0, const void* p1, void* p2) {
  */
 void get_double_array_element_index(const void* p0, const void* p1, const void* p2, void* p3) {
 
-    int* i = (int*) p3;
+    if (p3 != NULL_POINTER) {
 
-    if (i != NULL) {
+        int* i = (int*) p3;
 
-        double* e0 = (double*) p2;
+        if (p2 != NULL_POINTER) {
 
-        if (e0 != NULL) {
+            double* e0 = (double*) p2;
 
-            int* s = (int*) p1;
+            if (p1 != NULL_POINTER) {
 
-            if (s != NULL) {
+                int* s = (int*) p1;
 
-                void** a = (void**) p0;
+                if (p0 != NULL_POINTER) {
 
-                if (a != NULL) {
+                    void** a = (void**) p0;
 
                     int j = 0;
-                    double* e1 = NULL;
+                    double* e1 = NULL_DOUBLE_POINTER;
 
                     while (1) {
 

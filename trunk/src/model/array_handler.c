@@ -48,14 +48,13 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.23 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ARRAY_HANDLER_SOURCE
 #define ARRAY_HANDLER_SOURCE
 
-#include <stdlib.h>
 #include "../constants.c"
 #include "../logger/log_handler.c"
 #include "../model/character_array_handler.c"
@@ -101,11 +100,11 @@ static const int DOUBLE_ARRAY = 2;
  */
 void create_array(void* p0, const void* p1) {
 
-    if (s != NULL) {
+    if (s != NULL_POINTER) {
 
         int* s = (int*) p1;
 
-        if (p0 != NULL) {
+        if (p0 != NULL_POINTER) {
 
             void** a = (void**) p0;
 
@@ -136,11 +135,11 @@ void create_array(void* p0, const void* p1) {
  */
 void destroy_array(void* p0, const void* p1) {
 
-    if (p1 != NULL) {
+    if (p1 != NULL_POINTER) {
 
         int* s = (int*) p1;
 
-        if (p0 != NULL) {
+        if (p0 != NULL_POINTER) {
 
             void** a = (void**) p0;
 
@@ -178,15 +177,15 @@ void destroy_array(void* p0, const void* p1) {
  */
 void compare_arrays(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4, void* p5) {
 
-    if (p4 != NULL) {
+    if (p4 != NULL_POINTER) {
 
         int* t = (int*) p4;
 
-        if (p3 != NULL) {
+        if (p3 != NULL_POINTER) {
 
             int* s2 = (int*) p3;
 
-            if (p1 != NULL) {
+            if (p1 != NULL_POINTER) {
 
                 int* s1 = (int*) p1;
 
@@ -236,11 +235,11 @@ void compare_arrays(const void* p0, const void* p1, const void* p2, const void* 
  */
 void resize_array(void* p0, const void* p1) {
 
-    if (p1 != NULL) {
+    if (p1 != NULL_POINTER) {
 
         int* s = (int*) p1;
 
-        if (p0 != NULL) {
+        if (p0 != NULL_POINTER) {
 
             void** a = (void**) p0;
 
@@ -272,7 +271,7 @@ void resize_array(void* p0, const void* p1) {
  */
 void set_array_element(void* p0, const void* p1, const void* p2, const void* p3) {
 
-    if (p1 != NULL) {
+    if (p1 != NULL_POINTER) {
 
         int* t = (int*) p1;
 
@@ -309,7 +308,7 @@ void set_array_element(void* p0, const void* p1, const void* p2, const void* p3)
  */
 void remove_array_element(void* p0, const void* p1, const void* p2, const void* p3) {
 
-    if (p1 != NULL) {
+    if (p1 != NULL_POINTER) {
 
         int* t = (int*) p1;
 
@@ -346,7 +345,7 @@ void remove_array_element(void* p0, const void* p1, const void* p2, const void* 
  */
 void get_array_element(const void* p0, const void* p1, const void* p2, void* p3) {
 
-    if (p1 != NULL) {
+    if (p1 != NULL_POINTER) {
 
         int* t = (int*) p1;
 
@@ -384,7 +383,7 @@ void get_array_element(const void* p0, const void* p1, const void* p2, void* p3)
  */
 void get_array_element_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
 
-    if (p1 != NULL) {
+    if (p1 != NULL_POINTER) {
 
         int* t = (int*) p1;
 

@@ -24,7 +24,7 @@
  * This file handles log messages.
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.9 $ $Date: 2004-04-05 16:10:30 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,7 +77,7 @@ static int* log_level;
  */
 void* get_log_level_name(void* p0) {
 
-    void* n = NULL;
+    void* n = NULL_POINTER;
     int* l = (int*) p0;
 
     if (*l == INFO_LOG_LEVEL) {
@@ -103,7 +103,7 @@ void* get_log_level_name(void* p0) {
  */
 void show_message(void* p0) {
 
-    if (p0 != NULL) {
+    if (p0 != NULL_POINTER) {
 
 //??        fputs((char*) p0, stdout);
         fputs((char*) p0, stderr);

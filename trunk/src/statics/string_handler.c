@@ -25,7 +25,7 @@
  *
  * A string is a chain of characters.
  *
- * @version $Revision: 1.12 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-04-07 10:36:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,19 +49,19 @@
  */
 void initialize_string(void* p0, void* p1, const void* p2, const void* p3) {
 
-    if (p3 != NULL) {
+    if (p3 != NULL_POINTER) {
 
         int* ps = (int*) p3;
 
-        if (p2 != NULL) {
+        if (p2 != NULL_POINTER) {
 
             char* p = (char*) p2;
 
-            if (p1 != NULL) {
+            if (p1 != NULL_POINTER) {
 
                 int* ts = (int*) p1;
 
-                if (p0 != NULL) {
+                if (p0 != NULL_POINTER) {
 
                     char* t = (char*) p0;
 
@@ -101,19 +101,19 @@ void initialize_string(void* p0, void* p1, const void* p2, const void* p3) {
  */
 void finalize_string(const void* p0, const void* p1, void* p2, void* p3) {
 
-    if (p3 != NULL) {
+    if (p3 != NULL_POINTER) {
 
         int* ps = (int*) p3;
 
-        if (p2 != NULL) {
+        if (p2 != NULL_POINTER) {
 
             char* p = (char*) p2;
 
-            if (p1 != NULL) {
+            if (p1 != NULL_POINTER) {
 
                 int* ts = (int*) p1;
 
-                if (p0 != NULL) {
+                if (p0 != NULL_POINTER) {
 
                     char* t = (char*) p0;
 

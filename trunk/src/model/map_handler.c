@@ -35,7 +35,7 @@
  *
  * A map's elements can such be accessed over their name or index.
  *
- * @version $Revision: 1.24 $ $Date: 2004-04-06 13:50:36 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2004-04-07 10:36:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,22 +96,22 @@ void create_map(void* p0) {
     set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
 
     // The names array.
-    void* n = NULL;
+    void* n = NULL_POINTER;
     create_array((void*) &n, (void*) &s);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_ARRAY_INDEX, (void*) &n);
 
     // The names sizes array.
-    void* ns = NULL;
+    void* ns = NULL_POINTER;
     create_array((void*) &ns, (void*) &s);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_ARRAY_INDEX, (void*) &ns);
 
     // The references array.
-    void* r = NULL;
+    void* r = NULL_POINTER;
     create_array((void*) &r, (void*) &s);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &REFERENCES_ARRAY_INDEX, (void*) &r);
 
     // The references sizes array.
-    void* rs = NULL;
+    void* rs = NULL_POINTER;
     create_array((void*) &rs, (void*) &s);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &REFERENCES_SIZES_ARRAY_INDEX, (void*) &rs);
 }
@@ -130,25 +130,25 @@ void destroy_map(void* p0) {
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
 
     // The references sizes array.
-    void* rs = NULL;
+    void* rs = NULL_POINTER;
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &REFERENCES_SIZES_ARRAY_INDEX, (void*) &rs);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MAP_SIZE, (void*) &REFERENCES_SIZES_ARRAY_INDEX);
     destroy_array((void*) &rs, (void*) &s);
 
     // The references array.
-    void* r = NULL;
+    void* r = NULL_POINTER;
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &REFERENCES_ARRAY_INDEX, (void*) &r);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MAP_SIZE, (void*) &REFERENCES_ARRAY_INDEX);
     destroy_array((void*) &r, (void*) &s);
 
     // The names sizes array.
-    void* ns = NULL;
+    void* ns = NULL_POINTER;
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_ARRAY_INDEX, (void*) &ns);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MAP_SIZE, (void*) &NAMES_SIZES_ARRAY_INDEX);
     destroy_array((void*) &ns, (void*) &s);
 
     // The names array.
-    void* n = NULL;
+    void* n = NULL_POINTER;
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_ARRAY_INDEX, (void*) &n);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MAP_SIZE, (void*) &NAMES_ARRAY_INDEX);
     destroy_array((void*) &n, (void*) &s);
@@ -180,7 +180,7 @@ void destroy_map(void* p0) {
  */
 void get_map_element_index(const void* p0, const void* p1, const void* p2, void* p3) {
 
-    if (p3 != NULL) {
+    if (p3 != NULL_POINTER) {
 
         int* i = (int*) p3;
 
@@ -189,16 +189,16 @@ void get_map_element_index(const void* p0, const void* p1, const void* p2, void*
         get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
 
         // The names array.
-        void* n = NULL;
+        void* n = NULL_POINTER;
         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_ARRAY_INDEX, (void*) &n);
 
         // The names sizes array.
-        void* ns = NULL;
+        void* ns = NULL_POINTER;
         get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_ARRAY_INDEX, (void*) &ns);
 
         // The comparison loop.
         int j = 0;
-        void* name = NULL;
+        void* name = NULL_POINTER;
         int size = 0;
         int r = 0;
 
@@ -247,7 +247,7 @@ int get_next_map_element_index(const void* p0, const void* p1) {
     int i = 0;
     int count = 0;
     get_array_count(p0, (void*) &count);
-    void* name = NULL;
+    void* name = NULL_POINTER;
 
     while (i < count) {
 
@@ -289,13 +289,13 @@ int get_map_element_count(const void* p0, const void* p1) {
     int i = 0;
     int count = 0;
     get_array_count(p0, (void*) &count);
-    void* name = NULL;
+    void* name = NULL_POINTER;
 
     while (i < count) {
 
         name = get_array_element(p0, (void*) &NAMES_SIZES_ARRAY_INDEX);
 
-        if (name != NULL) {
+        if (name != NULL_POINTER) {
 
             // Compares the current element's name with the searched base name.
             if (strncmp((char*) name, (char*) p1, strlen((char*) p1)) == 0) {
@@ -304,7 +304,7 @@ int get_map_element_count(const void* p0, const void* p1) {
                 char* check = strchr(suffix + 1, SEPARATION);
 
                 // If no second separation is found, the name really matches.
-                if (check == NULL) {
+                if (check == NULL_POINTER) {
 
                     int number = atoi(suffix + 1);
 
@@ -372,7 +372,7 @@ void build_next_map_element_name(const void* p0, const void* p1, void* p2) {
  */
 void set_map_element_at_index(void* p0, const void* p1, const void* p2, const void* p3, const void* p4, const void* p5) {
 
-    if (p1 != NULL) {
+    if (p1 != NULL_POINTER) {
 
         int* i = (int*) p1;
 
@@ -383,19 +383,19 @@ void set_map_element_at_index(void* p0, const void* p1, const void* p2, const vo
             get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
 
             // Get names array.
-            void* n = NULL;
+            void* n = NULL_POINTER;
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_ARRAY_INDEX, (void*) &n);
 
             // Get names sizes array.
-            void* ns = NULL;
+            void* ns = NULL_POINTER;
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_ARRAY_INDEX, (void*) &ns);
 
             // Get references array.
-            void* r = NULL;
+            void* r = NULL_POINTER;
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &REFERENCES_ARRAY_INDEX, (void*) &r);
 
             // Get references sizes array.
-            void* rs = NULL;
+            void* rs = NULL_POINTER;
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &REFERENCES_SIZES_ARRAY_INDEX, (void*) &rs);
 
             if (*i == s) {
@@ -483,7 +483,7 @@ void set_map_element_with_name(void* p0, const void* p1, const void* p2, const v
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
 
     // The names array.
-    void* n = NULL;
+    void* n = NULL_POINTER;
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_ARRAY_INDEX, (void*) &n);
 
     // The index of the given name.
@@ -508,7 +508,7 @@ void set_map_element_with_name(void* p0, const void* p1, const void* p2, const v
  */
 void remove_map_element_at_index(void* p0, const void* p1) {
 
-    if (p1 != NULL) {
+    if (p1 != NULL_POINTER) {
 
         int* i = (int*) p1;
 
@@ -519,19 +519,19 @@ void remove_map_element_at_index(void* p0, const void* p1) {
             get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
 
             // Get names array.
-            void* n = NULL;
+            void* n = NULL_POINTER;
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_ARRAY_INDEX, (void*) &n);
 
             // Get names sizes array.
-            void* ns = NULL;
+            void* ns = NULL_POINTER;
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_ARRAY_INDEX, (void*) &ns);
 
             // Get references array.
-            void* r = NULL;
+            void* r = NULL_POINTER;
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &REFERENCES_ARRAY_INDEX, (void*) &r);
 
             // Get references sizes array.
-            void* rs = NULL;
+            void* rs = NULL_POINTER;
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &REFERENCES_SIZES_ARRAY_INDEX, (void*) &rs);
 
             if (*i < s) {
@@ -584,7 +584,7 @@ void remove_map_element_with_name(void* p0, const void* p1, const void* p2) {
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
 
     // Get names array.
-    void* n = NULL;
+    void* n = NULL_POINTER;
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_ARRAY_INDEX, (void*) &n);
 
     // The index of the given name.
@@ -610,7 +610,7 @@ void remove_map_element_with_name(void* p0, const void* p1, const void* p2) {
  */
 void get_map_element_at_index(const void* p0, const void* p1, void* p2, void* p3) {
 
-    if (p1 != NULL) {
+    if (p1 != NULL_POINTER) {
 
         int* i = (int*) p1;
 
@@ -621,11 +621,11 @@ void get_map_element_at_index(const void* p0, const void* p1, void* p2, void* p3
             get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
 
             // Get references array.
-            void* r = NULL;
+            void* r = NULL_POINTER;
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &REFERENCES_ARRAY_INDEX, (void*) &r);
 
             // Get references sizes array.
-            void* rs = NULL;
+            void* rs = NULL_POINTER;
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &REFERENCES_SIZES_ARRAY_INDEX, (void*) &rs);
 
             if (*i < s) {
@@ -666,7 +666,7 @@ void get_map_element_with_name(const void* p0, const void* p1, const void* p2, v
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);
 
     // The names array.
-    void* n = NULL;
+    void* n = NULL_POINTER;
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_ARRAY_INDEX, (void*) &n);
 
     // The index of the given name.
