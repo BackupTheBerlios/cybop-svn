@@ -33,7 +33,7 @@ package cyboi;
  * - send
  * - reset
  *
- * @version $Revision: 1.21 $ $Date: 2003-09-08 13:31:45 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2003-09-08 14:58:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -416,45 +416,50 @@ class SignalHandler {
      * @param p3 the z coordinate
      * @return the action
      */
-    static java.lang.Object mouse_clicked_action(java.lang.Object p0, int p1, int p2, int p3) {
+    static java.lang.Object mouse_clicked_action(java.lang.Object p0, java.lang.Object p1, java.lang.Object p2, java.lang.Object p3) {
 
         java.lang.Object a = null;
         Item i = (Item) p0;
         
         if (i != null) {
 
+            // Determine the action of the given screen item.
             java.lang.Object action = MapHandler.get_map_element(i.items, "mouse_clicked_action");
             
             if (action != null) {
                 
                 a = action;
             }
-            
+
+            // Determine the action of any child screen items and overwrite
+            // the action of the parent screen item (set above) with it.
             int count = 0;
             int size = MapHandler.get_map_size(i.items);
-            Item child = null;
-            Item position = null;
-            int x = -1;
-            int y = -1;
-            int z = -1;
+            java.lang.Object child = null;
+            java.lang.Object position = null;
+            java.lang.Object x = null;
+            java.lang.Object y = null;
+            java.lang.Object z = null;
             boolean contains = false;
             
             while (count < size) {
 
-                //
-                // ?? TODO: action handling for mathematics: subtraction
-                // using java.lang.Object and encapsulating primitives!
-                //
-                
                 child = MapHandler.get_map_element(i.items, count);
                 position = MapHandler.get_map_element(i.positions, count);
-                x = p1 - ItemHandler.get_item_element(position, "x_distance.quantity");
-                y = p2 - ItemHandler.get_item_element(position, "y_distance.quantity");
-                z = p3 - ItemHandler.get_item_element(position, "z_distance.quantity");
+                x = SignalHandler.subtract(p1, ItemHandler.get_item_element(position, "x_distance.quantity"));
+                y = SignalHandler.subtract(p2, ItemHandler.get_item_element(position, "y_distance.quantity"));
+                z = SignalHandler.subtract(p3, ItemHandler.get_item_element(position, "z_distance.quantity"));
                 width = ItemHandler.get_item_element(child, "expansion.x_distance.quantity");
                 height = ItemHandler.get_item_element(child, "expansion.y_distance.quantity");
                 depth = ItemHandler.get_item_element(child, "expansion.z_distance.quantity");
-                contains = (x >= 0) && (x < width) && (y >= 0) && (y < height) && (z >= 0) && (z < depth);
+
+                //?? This list is a recursion of AND operations!
+                contains = SignalHandler.is_greater_than_or_equal(x, new java.lang.Integer(0))
+                    && SignalHandler.is_smaller_than(x, width)
+                    && SignalHandler.is_greater_than_or_equal(y, new java.lang.Integer(0))
+                    && SignalHandler.is_smaller_than(y, height)
+                    && SignalHandler.is_greater_than_or_equal(z, new java.lang.Integer(0))
+                    && SignalHandler.is_smaller_than(z, depth);
 
                 if (contains == true) {
                 
@@ -469,5 +474,7 @@ class SignalHandler {
         
         return a;
     }
+    
+    //?? Add primitive operations here! See old java code!
 }
 
