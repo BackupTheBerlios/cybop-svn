@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.12 $ $Date: 2004-09-23 00:12:48 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-12-07 11:11:50 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -535,7 +535,7 @@ void get_integer_array_elements_index(const void* p0, const void* p1, const void
                         // The loop variable.
                         int j = 0;
                         // The iteration limit.
-                        int l = *m - *c;
+                        int l = *m - *c + 1;
                         // The element.
                         void* e = NULL_POINTER;
                         // The comparison result.
