@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.11 $ $Date: 2004-05-06 18:40:16 $ $Author: christian $
+# @version $Revision: 1.12 $ $Date: 2004-06-11 21:58:09 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 # @author Michael Simon <michael.simon@gmx.net>
 #
@@ -70,20 +70,20 @@ MAIN_SOURCE = $(SRC)/cyboi/cyboi.c
 #ROOT_OBJECTS = $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(ROOT_SOURCES))
 ARRAY_SOURCES = $(wildcard $(SRC)/array/*.c)
 ARRAY_OBJECTS = $(patsubst $(SRC)/array/%.c,$(OBJ)/array/%.o,$(ARRAY_SOURCES))
-CONSTANTS_SOURCES = $(wildcard $(SRC)/constants/*.c)
-CONSTANTS_OBJECTS = $(patsubst $(SRC)/constants/%.c,$(OBJ)/constants/%.o,$(CONSTANTS_SOURCES))
+CONSTANT_SOURCES = $(wildcard $(SRC)/constant/*.c)
+CONSTANT_OBJECTS = $(patsubst $(SRC)/constant/%.c,$(OBJ)/constant/%.o,$(CONSTANT_SOURCES))
 CYBOI_SOURCES = $(wildcard $(SRC)/cyboi/*.c)
 CYBOI_OBJECTS = $(patsubst $(SRC)/cyboi/%.c,$(OBJ)/cyboi/%.o,$(CYBOI_SOURCES))
 CYBOL_SOURCES = $(wildcard $(SRC)/cybol/*.c)
 CYBOL_OBJECTS = $(patsubst $(SRC)/cybol/%.c,$(OBJ)/cybol/%.o,$(CYBOL_SOURCES))
-DYNAMICS_SOURCES = $(wildcard $(SRC)/dynamics/*.c)
-DYNAMICS_OBJECTS = $(patsubst $(SRC)/dynamics/%.c,$(OBJ)/dynamics/%.o,$(DYNAMICS_SOURCES))
+LOGIC_SOURCES = $(wildcard $(SRC)/logic/*.c)
+LOGIC_OBJECTS = $(patsubst $(SRC)/logic/%.c,$(OBJ)/logic/%.o,$(LOGIC_SOURCES))
 LOGGER_SOURCES = $(wildcard $(SRC)/logger/*.c)
 LOGGER_OBJECTS = $(patsubst $(SRC)/logger/%.c,$(OBJ)/logger/%.o,$(LOGGER_SOURCES))
 SIGNAL_SOURCES = $(wildcard $(SRC)/signal/*.c)
 SIGNAL_OBJECTS = $(patsubst $(SRC)/signal/%.c,$(OBJ)/signal/%.o,$(SIGNAL_SOURCES))
-STATICS_SOURCES = $(wildcard $(SRC)/statics/*.c)
-STATICS_OBJECTS = $(patsubst $(SRC)/statics/%.c,$(OBJ)/statics/%.o,$(STATICS_SOURCES))
+STATE_SOURCES = $(wildcard $(SRC)/state/*.c)
+STATE_OBJECTS = $(patsubst $(SRC)/state/%.c,$(OBJ)/state/%.o,$(STATE_SOURCES))
 TEST_SOURCES = $(wildcard $(SRC)/test/*.c)
 TEST_OBJECTS = $(patsubst $(SRC)/test/%.c,$(OBJ)/test/%.o,$(TEST_SOURCES))
 X_WINDOWS_SOURCES = $(wildcard $(SRC)/x_windows/*.c)
@@ -101,7 +101,7 @@ X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WIN
 #
 #	$(COMPILER) -I /usr/X11R6/include -L /usr/X11R6/lib $(OBJ)/cyboi.o -o $(BIN)/$(BINARY)
 #
-all: create $(ARRAY_OBJECTS) $(CONSTANTS_OBJECTS) $(CYBOI_OBJECTS) $(CYBOL_OBJECTS) $(DYNAMICS_OBJECTS) $(LOGGER_OBJECTS) $(SIGNAL_OBJECTS) $(STATICS_OBJECTS) $(TEST_OBJECTS) $(X_WINDOWS_OBJECTS)
+all: create $(ARRAY_OBJECTS) $(CONSTANT_OBJECTS) $(CYBOI_OBJECTS) $(CYBOL_OBJECTS) $(LOGIC_OBJECTS) $(LOGGER_OBJECTS) $(SIGNAL_OBJECTS) $(STATE_OBJECTS) $(TEST_OBJECTS) $(X_WINDOWS_OBJECTS)
 	$(COMPILER) -L/usr/X11R6/lib \
 		-o $(BIN)/$(BINARY) $(OBJ)/cyboi/cyboi.o -lX11
 	@echo Compiled cyboi files.
@@ -115,13 +115,13 @@ all: create $(ARRAY_OBJECTS) $(CONSTANTS_OBJECTS) $(CYBOI_OBJECTS) $(CYBOL_OBJEC
 create:
 	-cd ..; mkdir obj
 	-cd $(OBJ); mkdir array
-	-cd $(OBJ); mkdir constants
+	-cd $(OBJ); mkdir constant
 	-cd $(OBJ); mkdir cyboi
 	-cd $(OBJ); mkdir cybol
-	-cd $(OBJ); mkdir dynamics
+	-cd $(OBJ); mkdir logic
 	-cd $(OBJ); mkdir logger
 	-cd $(OBJ); mkdir signal
-	-cd $(OBJ); mkdir statics
+	-cd $(OBJ); mkdir state
 	-cd $(OBJ); mkdir test
 	-cd $(OBJ); mkdir x_windows
 
@@ -131,7 +131,7 @@ create:
 $(OBJ)/array/%.o: $(SRC)/array/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/constants/%.o: $(SRC)/constants/%.c
+$(OBJ)/constant/%.o: $(SRC)/constant/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/cyboi/%.o: $(SRC)/cyboi/%.c
@@ -140,7 +140,7 @@ $(OBJ)/cyboi/%.o: $(SRC)/cyboi/%.c
 $(OBJ)/cybol/%.o: $(SRC)/cybol/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/dynamics/%.o: $(SRC)/dynamics/%.c
+$(OBJ)/logic/%.o: $(SRC)/logic/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/logger/%.o: $(SRC)/logger/%.c
@@ -149,7 +149,7 @@ $(OBJ)/logger/%.o: $(SRC)/logger/%.c
 $(OBJ)/signal/%.o: $(SRC)/signal/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/statics/%.o: $(SRC)/statics/%.c
+$(OBJ)/state/%.o: $(SRC)/state/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/test/%.o: $(SRC)/test/%.c
@@ -187,11 +187,11 @@ clean:
 	-rm -f $(DIST)/cybol.tar.gz
 	-rm -r $(OBJ)
 #	-rm -r $(OBJ)/cybol
-#	-rm -r $(OBJ)/dynamics
+#	-rm -r $(OBJ)/logic
 #	-rm -r $(OBJ)/logger
 #	-rm -r $(OBJ)/model
 #	-rm -r $(OBJ)/signal
-#	-rm -r $(OBJ)/statics
+#	-rm -r $(OBJ)/state
 #	-rm -r $(OBJ)/test
 #	-rm -r $(OBJ)/x_windows
 #	-rm -f $(OBJ)/*.o
