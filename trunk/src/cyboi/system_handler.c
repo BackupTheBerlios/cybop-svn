@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-01-12 13:41:48 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-01-12 19:18:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -124,14 +124,11 @@ void handle_system(void* p0) {
     // It is not needed for the startup signal.
 
     // Create startup model abstraction, model, details.
-    create_model((void*) &ma, (void*) &mac, (void*) &mas,
-        (void*) &pa, (void*) &pac,
+    create_model((void*) &ma, (void*) &mac, (void*) &mas, pa, pac,
         (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
         (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
     create_model((void*) &mm, (void*) &mmc, (void*) &mms,
-        (void*) &pm, (void*) &pmc,
-        (void*) &pa, (void*) &pac,
-        (void*) &pc, (void*) &pcc);
+        pm, pmc, pa, pac, pc, pcc);
     // CAUTION! Do not create startup model details!
     // It is not needed for the startup signal.
 
@@ -151,7 +148,7 @@ void handle_system(void* p0) {
     int* id = INTEGER_NULL_POINTER;
     create_integer((void*) &id);
     *id = 0;
-    get_new_signal_id((void*) &s, (void*) &sc, (void*) &id);
+    get_new_signal_id(s, (void*) &sc, (void*) &id);
 
     fprintf(stderr, "sm: %i\n", s);
     fprintf(stderr, "smc: %i\n", *((int*) sc));
@@ -167,7 +164,7 @@ void handle_system(void* p0) {
     fprintf(stderr, "id: %i\n", *id);
 
     // Add startup signal to signal memory.
-    set_signal((void*) &s, (void*) &sc, (void*) &ss,
+    set_signal(s, (void*) &sc, (void*) &ss,
         (void*) &ma, (void*) &mac, (void*) &mm, (void*) &mmc,
         (void*) &md, (void*) &mdc, (void*) &NORMAL_PRIORITY, (void*) &id);
 
@@ -189,11 +186,8 @@ void handle_system(void* p0) {
     // CAUTION! Do not destroy startup model details!
     // It was not needed for the startup signal.
     destroy_model((void*) &mm, (void*) &mmc, (void*) &mms,
-        (void*) &pm, (void*) &pmc,
-        (void*) &pa, (void*) &pac,
-        (void*) &pc, (void*) &pcc);
-    destroy_model((void*) &ma, (void*) &mac, (void*) &mas,
-        (void*) &pa, (void*) &pac,
+        pm, pmc, pa, pac, pc, pcc);
+    destroy_model((void*) &ma, (void*) &mac, (void*) &mas, pa, pac,
         (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
         (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
 

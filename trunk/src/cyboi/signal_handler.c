@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-01-12 19:18:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -101,12 +101,12 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
             }
 
             // Get abstraction, model, details.
-            get_array_elements((void*) &pa, (void*) &POINTER_ARRAY, (void*) &j, (void*) &a);
-            get_array_elements((void*) &pac, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ac);
-            get_array_elements((void*) &pm, (void*) &POINTER_ARRAY, (void*) &j, (void*) &m);
-            get_array_elements((void*) &pmc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &mc);
-            get_array_elements((void*) &pd, (void*) &POINTER_ARRAY, (void*) &j, (void*) &d);
-            get_array_elements((void*) &pdc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &dc);
+            get_array_elements(pa, (void*) &POINTER_ARRAY, (void*) &j, (void*) &a);
+            get_array_elements(pac, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ac);
+            get_array_elements(pm, (void*) &POINTER_ARRAY, (void*) &j, (void*) &m);
+            get_array_elements(pmc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &mc);
+            get_array_elements(pd, (void*) &POINTER_ARRAY, (void*) &j, (void*) &d);
+            get_array_elements(pdc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &dc);
 
             // Add part model (signal) to memory, using the whole signal's priority.
             // (Each signal has a priority. A signal may consist of part

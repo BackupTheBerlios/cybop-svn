@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.20 $ $Date: 2005-01-10 23:54:00 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2005-01-12 19:18:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

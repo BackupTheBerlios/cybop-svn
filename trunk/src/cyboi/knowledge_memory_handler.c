@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-01-12 13:41:48 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-01-12 19:18:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -85,7 +85,7 @@ void shutdown_knowledge_memory(void* p0) {
     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks);
 
     // Destroy knowledge memory.
-    destroy((void*) &k, (void*) &ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
+    destroy(k, (void*) &ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
     destroy_integer((void*) &ks);
     destroy_integer((void*) &kc);
 }

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-01-12 13:41:48 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-01-12 19:18:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -85,7 +85,7 @@ void shutdown_signal_memory(void* p0) {
     get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss);
 
     // Destroy signal memory.
-    destroy((void*) &s, (void*) &ss, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
+    destroy(s, (void*) &ss, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
     destroy_integer((void*) &ss);
     destroy_integer((void*) &sc);
 }

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-01-12 13:41:48 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-01-12 19:18:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -101,17 +101,15 @@ void set_signal(void* p0, void* p1, void* p2,
                     // Increase size.
                     **s = **s * *SIGNAL_MEMORY_RESIZE_FACTOR + 1;
 
-    fprintf(stderr, "a void*: %i\n", a);
-
                     // Resize abstractions, models, details, priorities, identifications.
-                    resize_array((void*) &a, (void*) &POINTER_ARRAY, p2);
-                    resize_array((void*) &ac, (void*) &POINTER_ARRAY, p2);
-                    resize_array((void*) &m, (void*) &POINTER_ARRAY, p2);
-                    resize_array((void*) &mc, (void*) &POINTER_ARRAY, p2);
-                    resize_array((void*) &d, (void*) &POINTER_ARRAY, p2);
-                    resize_array((void*) &dc, (void*) &POINTER_ARRAY, p2);
-                    resize_array((void*) &p, (void*) &POINTER_ARRAY, p2);
-                    resize_array((void*) &id, (void*) &POINTER_ARRAY, p2);
+                    resize_array(a, (void*) &POINTER_ARRAY, p2);
+                    resize_array(ac, (void*) &POINTER_ARRAY, p2);
+                    resize_array(m, (void*) &POINTER_ARRAY, p2);
+                    resize_array(mc, (void*) &POINTER_ARRAY, p2);
+                    resize_array(d, (void*) &POINTER_ARRAY, p2);
+                    resize_array(dc, (void*) &POINTER_ARRAY, p2);
+                    resize_array(p, (void*) &POINTER_ARRAY, p2);
+                    resize_array(id, (void*) &POINTER_ARRAY, p2);
 
                     // Set new array reference.
                     // CAUTION! If an array gets resized, a new array is
@@ -131,14 +129,14 @@ void set_signal(void* p0, void* p1, void* p2,
                 if (*i < **s) {
 
                     // Set abstraction, model, details, priority, identification.
-                    set_array_elements((void*) &a, (void*) &POINTER_ARRAY, (void*) &i, p3, (void*) &ONE_NUMBER);
-                    set_array_elements((void*) &ac, (void*) &POINTER_ARRAY, (void*) &i, p4, (void*) &ONE_NUMBER);
-                    set_array_elements((void*) &m, (void*) &POINTER_ARRAY, (void*) &i, p5, (void*) &ONE_NUMBER);
-                    set_array_elements((void*) &mc, (void*) &POINTER_ARRAY, (void*) &i, p6, (void*) &ONE_NUMBER);
-                    set_array_elements((void*) &d, (void*) &POINTER_ARRAY, (void*) &i, p7, (void*) &ONE_NUMBER);
-                    set_array_elements((void*) &dc, (void*) &POINTER_ARRAY, (void*) &i, p8, (void*) &ONE_NUMBER);
-                    set_array_elements((void*) &p, (void*) &POINTER_ARRAY, (void*) &i, p9, (void*) &ONE_NUMBER);
-                    set_array_elements((void*) &id, (void*) &POINTER_ARRAY, (void*) &i, p10, (void*) &ONE_NUMBER);
+                    set_array_elements(a, (void*) &POINTER_ARRAY, (void*) &i, p3, (void*) &ONE_NUMBER);
+                    set_array_elements(ac, (void*) &POINTER_ARRAY, (void*) &i, p4, (void*) &ONE_NUMBER);
+                    set_array_elements(m, (void*) &POINTER_ARRAY, (void*) &i, p5, (void*) &ONE_NUMBER);
+                    set_array_elements(mc, (void*) &POINTER_ARRAY, (void*) &i, p6, (void*) &ONE_NUMBER);
+                    set_array_elements(d, (void*) &POINTER_ARRAY, (void*) &i, p7, (void*) &ONE_NUMBER);
+                    set_array_elements(dc, (void*) &POINTER_ARRAY, (void*) &i, p8, (void*) &ONE_NUMBER);
+                    set_array_elements(p, (void*) &POINTER_ARRAY, (void*) &i, p9, (void*) &ONE_NUMBER);
+                    set_array_elements(id, (void*) &POINTER_ARRAY, (void*) &i, p10, (void*) &ONE_NUMBER);
 
                     // Increment count.
                     (**c)++;
@@ -219,14 +217,14 @@ void remove_signal(void* p0, void* p1, void* p2, const void* p3) {
                     if (**i < **c) {
 
                         // Remove abstraction, model, details, priority, identification.
-                        remove_array_elements((void*) &a, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &ac, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &m, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &mc, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &d, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &dc, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &p, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &id, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(a, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(ac, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(m, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(mc, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(d, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(dc, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(p, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(id, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
 
                         // Decrement count.
                         (**c)--;
@@ -314,14 +312,14 @@ void get_signal(const void* p0, const void* p1, const void* p2, void* p3, void* 
                 if (**i < **c) {
 
                     // Get abstraction, model, details, priority, identification.
-                    get_array_elements((void*) &a, (void*) &POINTER_ARRAY, p2, p3);
-                    get_array_elements((void*) &ac, (void*) &POINTER_ARRAY, p2, p4);
-                    get_array_elements((void*) &m, (void*) &POINTER_ARRAY, p2, p5);
-                    get_array_elements((void*) &mc, (void*) &POINTER_ARRAY, p2, p6);
-                    get_array_elements((void*) &d, (void*) &POINTER_ARRAY, p2, p7);
-                    get_array_elements((void*) &dc, (void*) &POINTER_ARRAY, p2, p8);
-                    get_array_elements((void*) &p, (void*) &POINTER_ARRAY, p2, p9);
-                    get_array_elements((void*) &id, (void*) &POINTER_ARRAY, p2, p10);
+                    get_array_elements(a, (void*) &POINTER_ARRAY, p2, p3);
+                    get_array_elements(ac, (void*) &POINTER_ARRAY, p2, p4);
+                    get_array_elements(m, (void*) &POINTER_ARRAY, p2, p5);
+                    get_array_elements(mc, (void*) &POINTER_ARRAY, p2, p6);
+                    get_array_elements(d, (void*) &POINTER_ARRAY, p2, p7);
+                    get_array_elements(dc, (void*) &POINTER_ARRAY, p2, p8);
+                    get_array_elements(p, (void*) &POINTER_ARRAY, p2, p9);
+                    get_array_elements(id, (void*) &POINTER_ARRAY, p2, p10);
 
                 } else {
 
@@ -389,7 +387,7 @@ void get_highest_priority_index(const void* p0, const void* p1, void* p2) {
                 }
 
                 // Get signal priority.
-                get_array_elements((void*) &sp, (void*) &POINTER_ARRAY, (void*) &j, (void*) &prio);
+                get_array_elements(sp, (void*) &POINTER_ARRAY, (void*) &j, (void*) &prio);
 
                 if (*prio > h) {
 
@@ -460,7 +458,7 @@ void get_new_signal_id(const void* p0, const void* p1, void* p2) {
                 }
 
                 // Get signal identification.
-                get_array_elements((void*) &ids, (void*) &POINTER_ARRAY, (void*) &j, (void*) &id);
+                get_array_elements(ids, (void*) &POINTER_ARRAY, (void*) &j, (void*) &id);
 
                 if (*id > max) {
 

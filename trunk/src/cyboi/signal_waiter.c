@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2005-01-12 13:41:48 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2005-01-12 19:18:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -114,7 +114,7 @@ void wait(void* p0) {
 //??        test_knowledge_model((void*) &k, (void*) &kc);
 
         // Get index of the top priority signal.
-        get_highest_priority_index((void*) &s, (void*) &sc, (void*) &i);
+        get_highest_priority_index(s, (void*) &sc, (void*) &i);
 
 /*??
         //?? Wait for web input, if no signal is in memory. TODO: Use a thread for this!
@@ -127,7 +127,7 @@ void wait(void* p0) {
         if (*i >= 0) {
 
             // Get signal.
-            get_signal((void*) &s, (void*) &sc, (void*) &i,
+            get_signal(s, (void*) &sc, (void*) &i,
                 (void*) &a, (void*) &ac, (void*) &m, (void*) &mc,
                 (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 

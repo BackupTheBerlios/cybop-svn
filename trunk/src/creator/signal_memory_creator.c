@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.9 $ $Date: 2005-01-12 13:41:48 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-01-12 19:18:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -151,14 +151,14 @@ void destroy_signal_memory(void* p0, const void* p1) {
     remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_ABSTRACTIONS_INDEX, (void*) &ONE_NUMBER);
 
     // Destroy abstractions, models, details, priorities, identifications.
-    destroy_array((void*) &a, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &ac, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &m, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &mc, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &d, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &dc, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &p, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &id, (void*) &POINTER_ARRAY, p1);
+    destroy_array(a, (void*) &POINTER_ARRAY, p1);
+    destroy_array(ac, (void*) &POINTER_ARRAY, p1);
+    destroy_array(m, (void*) &POINTER_ARRAY, p1);
+    destroy_array(mc, (void*) &POINTER_ARRAY, p1);
+    destroy_array(d, (void*) &POINTER_ARRAY, p1);
+    destroy_array(dc, (void*) &POINTER_ARRAY, p1);
+    destroy_array(p, (void*) &POINTER_ARRAY, p1);
+    destroy_array(id, (void*) &POINTER_ARRAY, p1);
 
     // Destroy signal memory.
     destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);

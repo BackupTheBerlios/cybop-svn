@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a compound model in memory
  *
- * @version $Revision: 1.8 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-01-12 19:18:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -148,18 +148,18 @@ void destroy_compound(void* p0, const void* p1) {
     remove_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT, (void*) &NAMES_INDEX, (void*) &ONE_NUMBER);
 
     // Destroy names, abstractions, models, details.
-    destroy_array((void*) &n, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &nc, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &ns, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &a, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &ac, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &as, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &m, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &mc, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &ms, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &d, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &dc, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &ds, (void*) &POINTER_ARRAY, p1);
+    destroy_array(n, (void*) &POINTER_ARRAY, p1);
+    destroy_array(nc, (void*) &POINTER_ARRAY, p1);
+    destroy_array(ns, (void*) &POINTER_ARRAY, p1);
+    destroy_array(a, (void*) &POINTER_ARRAY, p1);
+    destroy_array(ac, (void*) &POINTER_ARRAY, p1);
+    destroy_array(as, (void*) &POINTER_ARRAY, p1);
+    destroy_array(m, (void*) &POINTER_ARRAY, p1);
+    destroy_array(mc, (void*) &POINTER_ARRAY, p1);
+    destroy_array(ms, (void*) &POINTER_ARRAY, p1);
+    destroy_array(d, (void*) &POINTER_ARRAY, p1);
+    destroy_array(dc, (void*) &POINTER_ARRAY, p1);
+    destroy_array(ds, (void*) &POINTER_ARRAY, p1);
 
     // Destroy compound.
     destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT);

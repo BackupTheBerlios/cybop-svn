@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.69 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
+ * @version $Revision: 1.70 $ $Date: 2005-01-12 19:18:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -81,18 +81,14 @@ int main(int p0, char** p1) {
 
             log_message_debug("Execute CYBOI.");
 
-            // The configuration file parameter.
-            void** p = POINTER_NULL_POINTER;
             // The configuration file name.
-            void* c = NULL_POINTER;
+            void** c = POINTER_NULL_POINTER;
             int* cc = INTEGER_NULL_POINTER;
             // The internals memory.
             void* i = NULL_POINTER;
 
-            // Get configuration file parameter.
-            get_array_elements((void*) &p1, (void*) &POINTER_ARRAY, (void*) &CONFIGURATION_FILE_PARAMETER_INDEX, (void*) &p);
-            // Set configuration file name.
-            c = *p;
+            // Get configuration file name.
+            get_array_elements((void*) &p1, (void*) &POINTER_ARRAY, (void*) &CONFIGURATION_FILE_PARAMETER_INDEX, (void*) &c);
             // Create configuration file name count.
             create_integer((void*) &cc);
             // CAUTION! This is a DIRTY workaround!
@@ -103,12 +99,11 @@ int main(int p0, char** p1) {
             // 2 Rely on the null termination character to determine it
             // (in this case, the strlen function can be used)
             // Possibility 2 is applied here.
-            *cc = strlen((char*) c);
-
+            *cc = strlen((char*) *c);
             // Create internals memory.
             // Fill it with the parameters read from the configuration file.
             create_model((void*) &i, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT,
-                (void*) &c, (void*) &cc,
+                c, (void*) &cc,
                 (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT,
                 (void*) &FILE_CHANNEL, (void*) &FILE_CHANNEL_COUNT);
 
@@ -118,10 +113,9 @@ int main(int p0, char** p1) {
             // Destroy internals memory.
             // All its configuration parameters are destroyed, too.
             destroy_model((void*) &i, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT,
-                (void*) &c, (void*) &cc,
+                c, (void*) &cc,
                 (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT,
                 (void*) &FILE_CHANNEL, (void*) &FILE_CHANNEL_COUNT);
-
             // Destroy configuration file name count.
             destroy_integer((void*) &cc);
 

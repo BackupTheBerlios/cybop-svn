@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-01-10 23:54:00 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-01-12 19:18:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,11 +72,8 @@ void get_compound_element_index(const void* p0, const void* p1, const void* p2, 
 
             // The name.
             void* n1 = NULL_POINTER;
-
             // The name count.
-            int* nc1 = INTEGER_NULL_POINTER;
-            create_integer((void*) &nc1);
-            *nc1 = 0;
+            void* nc1 = NULL_POINTER;
 
             // The comparison result.
             int* r = INTEGER_NULL_POINTER;
@@ -91,8 +88,8 @@ void get_compound_element_index(const void* p0, const void* p1, const void* p2, 
                 }
 
                 // Get element name.
-                get_array_elements((void*) &n, (void*) &POINTER_ARRAY, (void*) &j, (void*) &n1);
-                get_array_elements((void*) &nc, (void*) &POINTER_ARRAY, (void*) &j, (void*) &nc1);
+                get_array_elements(n, (void*) &POINTER_ARRAY, (void*) &j, (void*) &n1);
+                get_array_elements(nc, (void*) &POINTER_ARRAY, (void*) &j, (void*) &nc1);
 
                 compare_arrays(p2, p3, (void*) &n1, (void*) &nc1, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -105,13 +102,12 @@ void get_compound_element_index(const void* p0, const void* p1, const void* p2, 
 
                 // Reset name and name count.
                 n1 = NULL_POINTER;
-                *nc1 = 0;
+                nc1 = NULL_POINTER;
 
                 (*j)++;
             }
 
             destroy_integer((void*) &r);
-            destroy_integer((void*) &nc1);
             destroy_integer((void*) &j);
 
         } else {
@@ -333,18 +329,18 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2,
                         **cs = (**cs * *COMPOUND_RESIZE_FACTOR) + 1;
 
                         // Resize names, models, abstractions, details.
-                        resize_array((void*) &n, (void*) &POINTER_ARRAY, p2);
-                        resize_array((void*) &nc, (void*) &POINTER_ARRAY, p2);
-                        resize_array((void*) &ns, (void*) &POINTER_ARRAY, p2);
-                        resize_array((void*) &a, (void*) &POINTER_ARRAY, p2);
-                        resize_array((void*) &ac, (void*) &POINTER_ARRAY, p2);
-                        resize_array((void*) &as, (void*) &POINTER_ARRAY, p2);
-                        resize_array((void*) &m, (void*) &POINTER_ARRAY, p2);
-                        resize_array((void*) &mc, (void*) &POINTER_ARRAY, p2);
-                        resize_array((void*) &ms, (void*) &POINTER_ARRAY, p2);
-                        resize_array((void*) &d, (void*) &POINTER_ARRAY, p2);
-                        resize_array((void*) &dc, (void*) &POINTER_ARRAY, p2);
-                        resize_array((void*) &ds, (void*) &POINTER_ARRAY, p2);
+                        resize_array(n, (void*) &POINTER_ARRAY, p2);
+                        resize_array(nc, (void*) &POINTER_ARRAY, p2);
+                        resize_array(ns, (void*) &POINTER_ARRAY, p2);
+                        resize_array(a, (void*) &POINTER_ARRAY, p2);
+                        resize_array(ac, (void*) &POINTER_ARRAY, p2);
+                        resize_array(as, (void*) &POINTER_ARRAY, p2);
+                        resize_array(m, (void*) &POINTER_ARRAY, p2);
+                        resize_array(mc, (void*) &POINTER_ARRAY, p2);
+                        resize_array(ms, (void*) &POINTER_ARRAY, p2);
+                        resize_array(d, (void*) &POINTER_ARRAY, p2);
+                        resize_array(dc, (void*) &POINTER_ARRAY, p2);
+                        resize_array(ds, (void*) &POINTER_ARRAY, p2);
 
                         // Set new array reference.
                         // CAUTION! If an array gets resized, a new array is
@@ -368,18 +364,18 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2,
                     if (**i < **cs) {
 
                         // Set name, model, abstraction, details.
-                        set_array_elements((void*) &n, (void*) &POINTER_ARRAY, p3, p4, (void*) &ONE_NUMBER);
-                        set_array_elements((void*) &nc, (void*) &POINTER_ARRAY, p3, p5, (void*) &ONE_NUMBER);
-                        set_array_elements((void*) &ns, (void*) &POINTER_ARRAY, p3, p6, (void*) &ONE_NUMBER);
-                        set_array_elements((void*) &a, (void*) &POINTER_ARRAY, p3, p7, (void*) &ONE_NUMBER);
-                        set_array_elements((void*) &ac, (void*) &POINTER_ARRAY, p3, p8, (void*) &ONE_NUMBER);
-                        set_array_elements((void*) &as, (void*) &POINTER_ARRAY, p3, p9, (void*) &ONE_NUMBER);
-                        set_array_elements((void*) &m, (void*) &POINTER_ARRAY, p3, p10, (void*) &ONE_NUMBER);
-                        set_array_elements((void*) &mc, (void*) &POINTER_ARRAY, p3, p11, (void*) &ONE_NUMBER);
-                        set_array_elements((void*) &ms, (void*) &POINTER_ARRAY, p3, p12, (void*) &ONE_NUMBER);
-                        set_array_elements((void*) &d, (void*) &POINTER_ARRAY, p3, p13, (void*) &ONE_NUMBER);
-                        set_array_elements((void*) &dc, (void*) &POINTER_ARRAY, p3, p14, (void*) &ONE_NUMBER);
-                        set_array_elements((void*) &ds, (void*) &POINTER_ARRAY, p3, p15, (void*) &ONE_NUMBER);
+                        set_array_elements(n, (void*) &POINTER_ARRAY, p3, p4, (void*) &ONE_NUMBER);
+                        set_array_elements(nc, (void*) &POINTER_ARRAY, p3, p5, (void*) &ONE_NUMBER);
+                        set_array_elements(ns, (void*) &POINTER_ARRAY, p3, p6, (void*) &ONE_NUMBER);
+                        set_array_elements(a, (void*) &POINTER_ARRAY, p3, p7, (void*) &ONE_NUMBER);
+                        set_array_elements(ac, (void*) &POINTER_ARRAY, p3, p8, (void*) &ONE_NUMBER);
+                        set_array_elements(as, (void*) &POINTER_ARRAY, p3, p9, (void*) &ONE_NUMBER);
+                        set_array_elements(m, (void*) &POINTER_ARRAY, p3, p10, (void*) &ONE_NUMBER);
+                        set_array_elements(mc, (void*) &POINTER_ARRAY, p3, p11, (void*) &ONE_NUMBER);
+                        set_array_elements(ms, (void*) &POINTER_ARRAY, p3, p12, (void*) &ONE_NUMBER);
+                        set_array_elements(d, (void*) &POINTER_ARRAY, p3, p13, (void*) &ONE_NUMBER);
+                        set_array_elements(dc, (void*) &POINTER_ARRAY, p3, p14, (void*) &ONE_NUMBER);
+                        set_array_elements(ds, (void*) &POINTER_ARRAY, p3, p15, (void*) &ONE_NUMBER);
 
                         // Increment count.
                         (**cc)++;
@@ -509,9 +505,9 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
                                     void* ems = NULL_POINTER;
 
                                     // Get element model.
-                                    get_array_elements((void*) &m, (void*) &POINTER_ARRAY, (void*) &index, (void*) &em);
-                                    get_array_elements((void*) &mc, (void*) &POINTER_ARRAY, (void*) &index, (void*) &emc);
-                                    get_array_elements((void*) &ms, (void*) &POINTER_ARRAY, (void*) &index, (void*) &ems);
+                                    get_array_elements(m, (void*) &POINTER_ARRAY, (void*) &index, (void*) &em);
+                                    get_array_elements(mc, (void*) &POINTER_ARRAY, (void*) &index, (void*) &emc);
+                                    get_array_elements(ms, (void*) &POINTER_ARRAY, (void*) &index, (void*) &ems);
 
                                     //?? TODO:
                                     //?? For now, the remaining name count is also used as
@@ -701,18 +697,18 @@ void remove_compound_element_by_index(void* p0, void* p1, void* p2, const void* 
                     if (**i < **cc) {
 
                         // Remove element name, model, abstraction, details.
-                        remove_array_elements((void*) &n, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &nc, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &ns, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &a, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &ac, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &as, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &m, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &mc, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &ms, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &d, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &dc, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
-                        remove_array_elements((void*) &ds, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(n, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(nc, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(ns, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(a, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(ac, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(as, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(m, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(mc, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(ms, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(d, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(dc, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
+                        remove_array_elements(ds, (void*) &POINTER_ARRAY, p1, p3, (void*) &ONE_NUMBER);
 
                         // Decrement count.
                         (**cc)--;
@@ -832,9 +828,9 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
                                     void* ems = NULL_POINTER;
 
                                     // Get element model.
-                                    get_array_elements((void*) &m, (void*) &POINTER_ARRAY, (void*) &index, (void*) &em);
-                                    get_array_elements((void*) &mc, (void*) &POINTER_ARRAY, (void*) &index, (void*) &emc);
-                                    get_array_elements((void*) &ms, (void*) &POINTER_ARRAY, (void*) &index, (void*) &ems);
+                                    get_array_elements(m, (void*) &POINTER_ARRAY, (void*) &index, (void*) &em);
+                                    get_array_elements(mc, (void*) &POINTER_ARRAY, (void*) &index, (void*) &emc);
+                                    get_array_elements(ms, (void*) &POINTER_ARRAY, (void*) &index, (void*) &ems);
 
                                     //?? TODO:
                                     //?? For now, the remaining name count is also used as
@@ -914,69 +910,6 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
 }
 
 /**
- * Gets the compound element name by index.
- *
- * @param p0 the compound
- * @param p1 the compound count
- * @param p2 the index
- * @param p3 the name
- * @param p4 the name count
- * @param p5 the name size
- */
-void get_compound_element_name_by_index(const void* p0, const void* p1, const void* p2,
-    void* p3, void* p4, void* p5) {
-
-    if (p2 != NULL_POINTER) {
-
-        int** i = (int**) p2;
-
-        if (p1 != NULL_POINTER) {
-
-            int** cc = (int**) p1;
-
-            if (**i >= 0) {
-
-//??                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Get compound element by index.");
-
-                // The names.
-                void* n = NULL_POINTER;
-                void* nc = NULL_POINTER;
-                void* ns = NULL_POINTER;
-
-                // Get names.
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &nc);
-                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
-
-                if (**i < **cc) {
-
-                    // Get element name.
-                    get_array_elements((void*) &n, (void*) &POINTER_ARRAY, p2, p3);
-                    get_array_elements((void*) &nc, (void*) &POINTER_ARRAY, p2, p4);
-                    get_array_elements((void*) &ns, (void*) &POINTER_ARRAY, p2, p5);
-
-                } else {
-
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound element by index. The index exceeds the count.");
-                }
-
-            } else {
-
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound element by index. The index is negativ.");
-            }
-
-        } else {
-
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound element by index. The count is null.");
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound element by index. The index is null.");
-    }
-}
-
-/**
  * Gets the compound element by index.
  *
  * @param p0 the compound
@@ -1033,15 +966,15 @@ void get_compound_element_by_index(const void* p0, const void* p1, const void* p
                 if (**i < **cc) {
 
                     // Get element abstraction, model, details.
-                    get_array_elements((void*) &a, (void*) &POINTER_ARRAY, p2, p3);
-                    get_array_elements((void*) &ac, (void*) &POINTER_ARRAY, p2, p4);
-                    get_array_elements((void*) &as, (void*) &POINTER_ARRAY, p2, p5);
-                    get_array_elements((void*) &m, (void*) &POINTER_ARRAY, p2, p6);
-                    get_array_elements((void*) &mc, (void*) &POINTER_ARRAY, p2, p7);
-                    get_array_elements((void*) &ms, (void*) &POINTER_ARRAY, p2, p8);
-                    get_array_elements((void*) &d, (void*) &POINTER_ARRAY, p2, p9);
-                    get_array_elements((void*) &dc, (void*) &POINTER_ARRAY, p2, p10);
-                    get_array_elements((void*) &ds, (void*) &POINTER_ARRAY, p2, p11);
+                    get_array_elements(a, (void*) &POINTER_ARRAY, p2, p3);
+                    get_array_elements(ac, (void*) &POINTER_ARRAY, p2, p4);
+                    get_array_elements(as, (void*) &POINTER_ARRAY, p2, p5);
+                    get_array_elements(m, (void*) &POINTER_ARRAY, p2, p6);
+                    get_array_elements(mc, (void*) &POINTER_ARRAY, p2, p7);
+                    get_array_elements(ms, (void*) &POINTER_ARRAY, p2, p8);
+                    get_array_elements(d, (void*) &POINTER_ARRAY, p2, p9);
+                    get_array_elements(dc, (void*) &POINTER_ARRAY, p2, p10);
+                    get_array_elements(ds, (void*) &POINTER_ARRAY, p2, p11);
 
                 } else {
 
@@ -1159,9 +1092,9 @@ void get_compound_element_by_name(const void* p0, const void* p1,
                                     void* ems = NULL_POINTER;
 
                                     // Get element model.
-                                    get_array_elements((void*) &m, (void*) &POINTER_ARRAY, (void*) &index, (void*) &em);
-                                    get_array_elements((void*) &mc, (void*) &POINTER_ARRAY, (void*) &index, (void*) &emc);
-                                    get_array_elements((void*) &ms, (void*) &POINTER_ARRAY, (void*) &index, (void*) &ems);
+                                    get_array_elements(m, (void*) &POINTER_ARRAY, (void*) &index, (void*) &em);
+                                    get_array_elements(mc, (void*) &POINTER_ARRAY, (void*) &index, (void*) &emc);
+                                    get_array_elements(ms, (void*) &POINTER_ARRAY, (void*) &index, (void*) &ems);
 
                                     //?? TODO:
                                     //?? For now, the remaining name count is also used as
@@ -1241,6 +1174,69 @@ void get_compound_element_by_name(const void* p0, const void* p1,
     }
 
     destroy_integer((void*) &i);
+}
+
+/**
+ * Gets the compound element name by index.
+ *
+ * @param p0 the compound
+ * @param p1 the compound count
+ * @param p2 the index
+ * @param p3 the name
+ * @param p4 the name count
+ * @param p5 the name size
+ */
+void get_compound_element_name_by_index(const void* p0, const void* p1, const void* p2,
+    void* p3, void* p4, void* p5) {
+
+    if (p2 != NULL_POINTER) {
+
+        int** i = (int**) p2;
+
+        if (p1 != NULL_POINTER) {
+
+            int** cc = (int**) p1;
+
+            if (**i >= 0) {
+
+//??                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Get compound element by index.");
+
+                // The names.
+                void* n = NULL_POINTER;
+                void* nc = NULL_POINTER;
+                void* ns = NULL_POINTER;
+
+                // Get names.
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &nc);
+                get_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
+
+                if (**i < **cc) {
+
+                    // Get element name.
+                    get_array_elements(n, (void*) &POINTER_ARRAY, p2, p3);
+                    get_array_elements(nc, (void*) &POINTER_ARRAY, p2, p4);
+                    get_array_elements(ns, (void*) &POINTER_ARRAY, p2, p5);
+
+                } else {
+
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound element by index. The index exceeds the count.");
+                }
+
+            } else {
+
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound element by index. The index is negativ.");
+            }
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound element by index. The count is null.");
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get compound element by index. The index is null.");
+    }
 }
 
 /**

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-01-12 19:18:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -101,99 +101,99 @@ void destroy_internals_memory(void* p0, const void* p1) {
 
                 if (*j == *STARTUP_CHANNEL_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &POINTER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &POINTER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *STARTUP_CHANNEL_COUNT_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *STARTUP_CHANNEL_SIZE_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *STARTUP_ABSTRACTION_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &POINTER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &POINTER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *STARTUP_ABSTRACTION_COUNT_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *STARTUP_ABSTRACTION_SIZE_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *STARTUP_MODEL_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &POINTER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &POINTER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *STARTUP_MODEL_COUNT_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *STARTUP_MODEL_SIZE_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *KNOWLEDGE_MEMORY_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &POINTER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &POINTER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *KNOWLEDGE_MEMORY_COUNT_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *KNOWLEDGE_MEMORY_SIZE_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *SIGNAL_MEMORY_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &POINTER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &POINTER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *SIGNAL_MEMORY_COUNT_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *SIGNAL_MEMORY_SIZE_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *TCP_SERVER_SOCKET_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *TCP_SERVER_SOCKET_PORT_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *TCP_SERVER_SOCKET_ACTIVE_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *TCP_CLIENT_SOCKETS_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &POINTER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &POINTER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *TCP_CLIENT_SOCKETS_COUNT_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *TCP_CLIENT_SOCKETS_SIZE_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &POINTER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &POINTER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
 
                 } else if (*j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL) {
 
-                    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
+                    destroy_array(p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
                 }
 
                 //?? TODO: some variables are missing here which causes memory leaks!!

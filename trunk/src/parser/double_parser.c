@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-01-10 23:54:01 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-01-12 19:18:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -149,6 +149,10 @@ void serialize_double(void* p0, void* p1, void* p2, const void* p3, const void* 
 
                 // Get double value.
                 get_array_elements(p3, (void*) &DOUBLE_ARRAY, (void*) &DOUBLE_VALUE_INDEX, (void*) &v);
+
+                //?? TODO: set_array_elements is missing!
+                //?? The get_array_elements procedure does NOT copy values;
+                //?? it returns just a reference to the corresponding value!
 
                 // Transform source double to destination string.
                 **dc = snprintf(*d, **ds, "%d", *v);
