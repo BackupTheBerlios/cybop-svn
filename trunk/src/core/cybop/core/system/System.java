@@ -1,7 +1,7 @@
 /*
  * $RCSfile: System.java,v $
  *
- * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,21 +22,21 @@
  * - Information in Medicine -
  */
 
-package cybop.system;
+package cybop.core.system;
 
-import cybop.basic.*;
-import cybop.basic.Boolean;
-import cybop.basic.Integer;
-import cybop.basic.String;
-import cybop.model.*;
-import cybop.model.model.*;
-import cybop.model.model.user.*;
-import cybop.signal.*;
-import cybop.system.block.*;
-import cybop.system.chain.*;
-import cybop.system.region.controller.*;
-import cybop.system.region.controller.translator.*;
-import cybop.system.system.*;
+import cybop.core.basic.*;
+import cybop.core.basic.Boolean;
+import cybop.core.basic.Integer;
+import cybop.core.basic.String;
+import cybop.core.model.*;
+import cybop.core.model.model.*;
+import cybop.core.model.model.user.*;
+import cybop.core.signal.*;
+import cybop.core.system.block.*;
+import cybop.core.system.chain.*;
+import cybop.core.system.region.controller.*;
+import cybop.core.system.region.controller.translator.*;
+import cybop.core.system.system.*;
 
 /**
  * This class represents a system.<br><br>
@@ -60,7 +60,7 @@ import cybop.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:46:09 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends Block implements 
@@ -250,7 +250,7 @@ public class System extends Block implements
                     set(s, createSystem(c.get(loc, new String("")), c.get(args, new String("")), c.get(wp, new String(""))));
 
                     //?? Testing.
-                    set(new String("system_test_user"), createSystem(c.get(loc, new String("cybop.system.system.User")), c.get(args, new String("")), c.get(wp, new String(""))));
+                    set(new String("system_test_user"), createSystem(c.get(loc, new String("cybop.core.system.system.User")), c.get(args, new String("")), c.get(wp, new String(""))));
                 }
     
             } else {

@@ -22,22 +22,62 @@
  * - Information in Medicine -
  */
 
-package org.resmedicinae.domain.healthcare.description;
+package cybop.healthcare.model.description;
 
-import org.resmedicinae.domain.healthcare.Description;
+import cybop.core.basic.String;
+import cybop.healthcare.model.*;
 
+/**
+ * This class represents a dose.<br><br>
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
+ */
 public class Dose extends Description {
-    private org.resmedicinae.resmedlib.term.String dose;
+    
+    //
+    // Children.
+    //
 
-    public org.resmedicinae.resmedlib.term.String getDose() {
-        return dose;
+    /** The value. */
+    public static final String VALUE = new String("value");
+
+    //
+    // Default children.
+    //
+
+    /**
+     * Returns the default value.
+     *
+     * @return the default value
+     */
+    public String getDefaultValue() {
+
+        return null;
     }
 
-    public void setDose(org.resmedicinae.resmedlib.term.String dose) {
-        this.dose = dose;
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this dose.
+     */
+    public void initialize() throws Exception {
+
+        super.initialize();
+
+        set(Dose.VALUE, getDefaultValue());
     }
 
-    public String toString() {
-        return "Dose";
+    /**
+     * Finalizes this dose.
+     */
+    public void finalizz() throws Exception {
+
+        remove(Dose.VALUE);
+
+        super.finalizz();
     }
 }
+

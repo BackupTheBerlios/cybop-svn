@@ -3,7 +3,7 @@
 #
 # $RCSfile: shutdown_portal.sh,v $
 #
-# Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+# Copyright (c) 1999-2003. Christian Heller. All rights reserved.
 #
 # This software is published under the GPL GNU General Public License.
 # This program is free software; you can redistribute it and/or
@@ -26,7 +26,7 @@
 # This file can be used to easily run the specified project.
 #
 # @see http://www.apache.org
-# @version $Revision: 1.1 $ $Date: 2003-02-18 14:47:46 $ $Author: christian $
+# @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Henrik Brandes <henrik-b@gmx.de>
 # @author Christian Heller <christian.heller@tuxtax.de>
@@ -41,5 +41,5 @@
 #
 # Shutdown resmedportal using the .jar files in the /lib directory.
 #
-java -Djava.compiler=javacomp -classpath $CLASSPATH cybop.system.family.Launcher -system cybop.system.family.Portal -action shutdown_system_action
+java -Djava.compiler=javacomp -classpath $CLASSPATH cybop.core.system.family.Launcher -system cybop.core.system.family.Portal -action shutdown_system_action
 

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: ShutdownSocket.java,v $
  *
- * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,12 +22,12 @@
  * - Information in Medicine -
  */
 
-package cybop.system.system;
+package cybop.core.system.system;
 
-import cybop.basic.Boolean;
-import cybop.basic.String;
-import cybop.signal.*;
-import cybop.system.chain.*;
+import cybop.core.basic.Boolean;
+import cybop.core.basic.String;
+import cybop.core.signal.*;
+import cybop.core.system.chain.*;
 
 /**
  * This class represents a shutdown socket.<br><br>
@@ -35,7 +35,7 @@ import cybop.system.chain.*;
  * It is the communication partner that can be asked by another system
  * to shutdown a system.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:52:25 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ShutdownSocket extends Socket {
@@ -58,7 +58,7 @@ public class ShutdownSocket extends Socket {
      */
     public String getDefaultSocketAddress() {
 
-        return new String("cybop.system.chain.SocketAddress");
+        return new String("cybop.core.system.chain.SocketAddress");
     }
 
     //

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Item.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,10 +22,10 @@
  * - Information in Medicine -
  */
 
-package cybop.basic;
+package cybop.core.basic;
 
-import cybop.basic.Integer;
-import cybop.basic.String;
+import cybop.core.basic.Integer;
+import cybop.core.basic.String;
 
 /**
  * This class represents a general abstract item.<br><br>
@@ -75,7 +75,7 @@ import cybop.basic.String;
  *      <li>destructor(): called without any parameters; not available for Java where a garbage collector destroys objects incidentally!</li>
  *  </ul>
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:46:09 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -593,6 +593,8 @@ public class Item extends State {
      * Initializes this item.
      */
     public void initialize() throws Exception {
+        
+        super.initialize();
     }
 
     /**
@@ -622,6 +624,8 @@ public class Item extends State {
         // java.util.Map children = getChildren();
         // setChildren(null);
         // destroyChildren(children);
+
+        super.finalizz();
     }
 }
 

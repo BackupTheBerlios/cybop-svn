@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Episode.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,38 +22,30 @@
  * - Information in Medicine -
  */
 
-package org.resmedicinae.domain.healthcare.unit;
+package cybop.healthcare.model.unit;
 
-import org.resmedicinae.domain.healthcare.*;
-import java.util.Vector;
+import cybop.core.basic.String;
+import cybop.healthcare.model.*;
 
 /**
- * This class represents an episode.<br><br> An episode is a time extract of a certain problem/illness.
+ * This class represents an episode.<br><br>
+ *
+ * An episode is a time extract of a certain problem/illness.
  * It consists of at least one or many partial contacts.
- * @version $Revision: 1.1 $ $Date: 2003-02-18 14:47:46 $ $Author: christian $
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Jens Bohl <jens.bohl@stud.tu-ilmenau.de>
  * @author Torsten Kunze <zone3@gmx.de>
  */
 public class Episode extends Unit {
+    
+    //
+    // Children.
+    //
 
-    private org.resmedicinae.resmedlib.term.String timestamp;
-
-    /**
-     *Converts the object to String. This is needed because of the tree table. The tree table nodes are named as
-     * the object their represents. So the node will be called like the object.
-     */
-    public String toString() {
-        return "Episode";
-    }
-
-    public org.resmedicinae.resmedlib.term.String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(org.resmedicinae.resmedlib.term.String timestamp) {
-        this.timestamp = timestamp;
-    }
+    /** The value. */
+    public static final String VALUE = new String("value");
 
     public int getPartialContactCount() {
         Object[] childrenArray = getChildren().values().toArray();
@@ -77,13 +69,18 @@ public class Episode extends Unit {
     }
 
     public Object[] getPartialContacts() {
+
         Object[] childrenArray = getChildren().values().toArray();
-        Vector tempVector = new Vector();
+        java.util.Vector tempVector = new java.util.Vector();
+
         for (int i = 0; i < childrenArray.length; i++) {
+
             if (childrenArray[i].getClass().equals(PartialContact.class)) {
+
                 tempVector.add(childrenArray[i]);
             }
         }
+
         return tempVector.toArray();
     }
 
@@ -100,5 +97,5 @@ public class Episode extends Unit {
         }
         return null;
     }
-
 }
+

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Socket.java,v $
  *
- * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,19 +22,19 @@
  * - Information in Medicine -
  */
 
-package cybop.system.system;
+package cybop.core.system.system;
 
-import cybop.basic.Integer;
-import cybop.basic.String;
-import cybop.system.System;
-import cybop.system.chain.*;
+import cybop.core.basic.Integer;
+import cybop.core.basic.String;
+import cybop.core.system.System;
+import cybop.core.system.chain.*;
 
 /**
  * This class represents a socket.<br><br>
  *
  * A socket is an endpoint for communication between two machines.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:52:25 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Socket extends System {

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: PortalUserInterface.java,v $
  *
- * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,10 +22,10 @@
  * - Information in Medicine -
  */
 
-package cybop.model.model.user.system;
+package cybop.core.model.model.user.system;
 
-import cybop.basic.String;
-import cybop.model.model.user.*;
+import cybop.core.basic.String;
+import cybop.core.model.model.user.*;
 
 /**
  * This class represents a portal user interface.
@@ -34,7 +34,7 @@ import cybop.model.model.user.*;
  * The tree offers a hierarchy of categories with available system modules.
  * On the right side of the splitter, there is a container for child system views.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:52:25 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalUserInterface extends SystemUserInterface {
@@ -50,7 +50,7 @@ public class PortalUserInterface extends SystemUserInterface {
      */
     public String getDefaultMenuBar() {
 
-        return new String("cybop.model.organizer.PortalMenuBar");
+        return new String("cybop.core.model.organizer.PortalMenuBar");
     }
 
     /**
@@ -60,7 +60,7 @@ public class PortalUserInterface extends SystemUserInterface {
      */
     public String getDefaultToolBar() {
 
-        return new String("cybop.model.organizer.PortalToolBar");
+        return new String("cybop.core.model.organizer.PortalToolBar");
     }
 
     /**
@@ -70,7 +70,7 @@ public class PortalUserInterface extends SystemUserInterface {
      */
     public String getDefaultContentsPanel() {
 
-        return new String("cybop.model.organizer.PortalContentsPanel");
+        return new String("cybop.core.model.organizer.PortalContentsPanel");
     }
 }
 

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: BloodPressure.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,21 +22,79 @@
  * - Information in Medicine -
  */
 
-package org.resmedicinae.domain.healthcare.description;
+package cybop.healthcare.model.description;
 
-import org.resmedicinae.domain.healthcare.*;
+import cybop.core.basic.String;
+import cybop.healthcare.model.*;
 
 /**
  * This class represents a blood pressure.<br><br>
  *
  * A blood pressure is the combination of a systolic and a diastolic value.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-18 14:47:46 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class BloodPressure extends Description {
+
+    //
+    // Children.
+    //
     
-    //?? Insert two attributes "systolic" and "diastolic" here!
-    //?? Don't forget "create", "destroy", "set" and "get" methods!
+    /** The systole. */
+    public static final String SYSTOLE = new String("systole");
+
+    /** The diastole. */
+    public static final String DIASTOLE = new String("diastole");
+
+    //
+    // Default children.
+    //
+
+    /**
+     * Returns the default systole.
+     *
+     * @return the default systole
+     */
+    public String getDefaultSystole() {
+
+        return null;
+    }
+
+    /**
+     * Returns the default diastole.
+     *
+     * @return the default diastole
+     */
+    public String getDefaultDiastole() {
+
+        return null;
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this blood pressure.
+     */
+    public void initialize() throws Exception {
+
+        super.initialize();
+
+        set(BloodPressure.SYSTOLE, getDefaultSystole());
+        set(BloodPressure.DIASTOLE, getDefaultDiastole());
+    }
+
+    /**
+     * Finalizes this blood pressure.
+     */
+    public void finalizz() throws Exception {
+
+        remove(BloodPressure.DIASTOLE);
+        remove(BloodPressure.SYSTOLE);
+
+        super.finalizz();
+    }
 }
 

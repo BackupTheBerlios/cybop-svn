@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Organizer.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,9 +22,9 @@
  * - Information in Medicine -
  */
 
-package cybop.model;
+package cybop.core.model;
 
-import cybop.basic.*;
+import cybop.core.basic.*;
 
 /**
  * This class represents an organizer/heading.<br><br>
@@ -45,11 +45,11 @@ import cybop.basic.*;
  * "Structural information concepts whose purpose is to organise information
  * according to norms of practice, in the same way as headings in a paper document."
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:46:09 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @see http://www.openehr.org http://www.gehr.org
  */
-public class Organizer extends cybop.system.Component {
+public class Organizer extends cybop.core.system.Component {
     
     //?? Only temporary inheritance from Component!
     //?? The gui components need a signal handler which is set in the

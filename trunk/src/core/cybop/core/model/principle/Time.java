@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Time.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,9 +22,9 @@
  * - Information in Medicine -
  */
 
-package cybop.model.principle;
+package cybop.core.model.principle;
 
-import cybop.model.*;
+import cybop.core.model.*;
 
 /**
  * This class represents a time.
@@ -39,7 +39,7 @@ import cybop.model.*;
  *
  * It is measured in seconds [s].
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:49:23 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Time extends Principle {

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: PortalController.java,v $
  *
- * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,19 +22,19 @@
  * - Information in Medicine -
  */
 
-package cybop.system.block.controller;
+package cybop.core.system.block.controller;
 
-import cybop.basic.*;
-import cybop.basic.String;
-import cybop.system.block.*;
-import cybop.system.region.controller.*;
-import cybop.system.region.controller.processor.*;
-import cybop.system.region.controller.translator.*;
+import cybop.core.basic.*;
+import cybop.core.basic.String;
+import cybop.core.system.block.*;
+import cybop.core.system.region.controller.*;
+import cybop.core.system.region.controller.processor.*;
+import cybop.core.system.region.controller.translator.*;
 
 /**
  * This class represents a portal controller.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:52:25 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalController extends Controller {
@@ -50,7 +50,7 @@ public class PortalController extends Controller {
      */
     public String getDefaultProcessor() {
 
-        return new String("cybop.system.region.controller.processor.PortalProcessor");
+        return new String("cybop.core.system.region.controller.processor.PortalProcessor");
     }
 
     /**
@@ -60,7 +60,7 @@ public class PortalController extends Controller {
      */
     public String getDefaultDomainModel() {
 
-        return new String("cybop.model.model.DomainModel");
+        return new String("cybop.core.model.model.DomainModel");
     }
 
     /**
@@ -70,7 +70,7 @@ public class PortalController extends Controller {
      */
     public String getDefaultSystemUserInterface() {
 
-        return new String("cybop.model.model.user.system.PortalUserInterface");
+        return new String("cybop.core.model.model.user.system.PortalUserInterface");
     }
 
     /**
@@ -80,7 +80,7 @@ public class PortalController extends Controller {
      */
     public String getDefaultSystemInformationUserInterface() {
 
-        return new String("cybop.model.model.user.SystemInformationUserInterface");
+        return new String("cybop.core.model.model.user.SystemInformationUserInterface");
     }
 
     /**
@@ -90,7 +90,7 @@ public class PortalController extends Controller {
      */
     public String getDefaultSystemInformationUserInterfaceTranslator() {
 
-        return new String("cybop.system.region.controller.translator.SystemInformationUserInterfaceTranslator");
+        return new String("cybop.core.system.region.controller.translator.SystemInformationUserInterfaceTranslator");
     }
 }
 

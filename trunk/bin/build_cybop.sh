@@ -3,7 +3,7 @@
 #
 # $RCSfile: build_cybop.sh,v $
 #
-# Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+# Copyright (c) 1999-2003. Christian Heller. All rights reserved.
 #
 # This software is published under the GPL GNU General Public License.
 # This program is free software; you can redistribute it and/or
@@ -28,25 +28,18 @@
 # The building is done by the "Ant" tool of the "Jakarta" tool suite.
 #
 # @see http://www.apache.org
-# @version $Revision: 1.1 $ $Date: 2003-02-18 14:47:46 $ $Author: christian $
-# @author Michael Simon <michael.simon@gmx.net>
-# @author Henrik Brandes <henrik-b@gmx.de>
+# @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
 #
-# Calls the set home script to set Java, ANT and Res Medicinae paths.
+# Calls the set home script to set Java, ANT and CYBOP paths.
 #
 . ./bin/set_home.sh
-
-#
-# Sets and exports the class path.
-#
-CLASSPATH=${CLASSPATH}
-export CLASSPATH
+. ./bin/set_build_classpath.sh
 
 #
 # Starts build process.
 #
-java -mx64m -classpath ${CLASSPATH} -Dant.home=${RESMEDICINAE_HOME}/lib org.apache.tools.ant.Main "${*}" -buildfile ${RESMEDICINAE_HOME}/src/build_cybop.xml
+java -mx64m -classpath ${CLASSPATH} -Dant.home=${CYBOP_HOME}/lib org.apache.tools.ant.Main "${*}" -buildfile ${CYBOP_HOME}/src/build_cybop.xml
 

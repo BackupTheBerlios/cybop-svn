@@ -1,7 +1,7 @@
 /*
  * $RCSfile: PortalProcessor.java,v $
  *
- * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,17 +22,17 @@
  * - Information in Medicine -
  */
 
-package cybop.system.region.controller.processor;
+package cybop.core.system.region.controller.processor;
 
-import cybop.basic.Boolean;
-import cybop.basic.String;
-import cybop.model.model.*;
-import cybop.system.region.controller.*;
+import cybop.core.basic.Boolean;
+import cybop.core.basic.String;
+import cybop.core.model.model.*;
+import cybop.core.system.region.controller.*;
 
 /**
  * This class represents a portal processor.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:52:25 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalProcessor extends Processor {

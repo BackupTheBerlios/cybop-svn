@@ -3,7 +3,7 @@
 <!--
     $RCSfile: build_cybop.xml,v $
 
-    Copyright (c) 1999-2002. The Res Medicinae Developers. All rights reserved.
+    Copyright (c) 1999-2003. Christian Heller. All rights reserved.
 
     This software is published under the GPL GNU General Public License.
     This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
     the specified project using the "Ant" tool of the "Jakarta" tool suite.
 
     @see http://www.apache.org
-    @version $Revision: 1.1 $ $Date: 2003-02-18 14:47:46 $ $Author: christian $
+    @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
     @author Michael Simon <michael.simon@gmx.net>
     @author Henrik Brandes <henrik-b@gmx.de>
@@ -36,76 +36,24 @@
 <project name="cybop" default="compile" basedir="../">
 
     <!-- Global properties for this build. -->
-    <property name="builddir" value="${basedir}/build"/>
-    <property name="libdir" value="${basedir}/lib"/>
-    <property name="sub_srcdir" value="${basedir}/src/cybop"/>
-    <property name="sub_builddir" value="${basedir}/build/cybop"/>
-    <property name="name" value="cybop"/>
-    <property name="package" value="cybop"/>
-    <property name="packagedir" value="cybop"/>
-<!--
-    <property name="allbuilddir" value="
-        ${builddir}/resmedlib/
-        :${builddir}/domain/healthcare/
-        :${builddir}/application/controller/basic/
-        :${builddir}/application/controller/splash/
-        :${builddir}/application/controller/login/
-        :${builddir}/application/controller/about/
-        :${builddir}/application/common/basic/
-        :${builddir}/application/common/main/
-        :${builddir}/application/sample/helloworld/
-        :${builddir}/application/healthcare/record/
-        :${builddir}/application/healthcare/restore/
-        :${builddir}/application/healthcare/resadmin/
-    "/>
--->
+    <property name="srcdir" value="${basedir}/src"/>
 
-    <!-- The classpath. -->
-    <path id="classpath">
-       <pathelement path="${classpath}"/>
-<!--       <pathelement path="${allbuilddir}"/> -->
-       <fileset dir="${libdir}">
-           <include name="**/*.jar"/>
-        </fileset>
-    </path>
-
-    <!-- Cleans up old files and directories. -->
+    <!-- Cleans up the projects. -->
     <target name="clean">
-        <delete dir="${sub_builddir}"/>
-        <delete>
-            <fileset dir="${libdir}">
-                <include name="${name}.jar"/>
-            </fileset>
-        </delete>
+        <ant antfile="${srcdir}/build_core.xml" target="clean"/>
+        <ant antfile="${srcdir}/build_healthcare.xml" target="clean"/>
     </target>
 
-    <!-- Compiles sources. -->
+    <!-- Compiles the projects. -->
     <target name="compile">
-        <!-- Create the time stamp. -->
-        <tstamp/>
-        <!-- Create the build directory used by compile. -->
-        <mkdir dir="${sub_builddir}/"/>
-        <!-- Compile sources. -->
-        <javac srcdir="${sub_srcdir}" destdir="${sub_builddir}" classpath="${classpath}" debug="on" deprecation="on" optimize="on">
-            <classpath refid="classpath"/>
-        </javac>
-	<!-- Copy images. -->
-	<copy todir="${sub_builddir}/${packagedir}">
-	  <fileset dir="${sub_srcdir}/${packagedir}">
-	    <include name="**/*.jpeg"/>
-            <include name="**/*.gif"/>
-            <include name="**/*.png"/>
-	  </fileset>
-	</copy>        
+        <ant antfile="${srcdir}/build_core.xml" target="compile"/>
+        <ant antfile="${srcdir}/build_healthcare.xml" target="compile"/>
     </target>
 
-    <!-- Creates a distribution directory containing packed file archives. -->
+    <!-- Archives the projects. -->
     <target name="archive">
-        <!-- Create the directory containing libraries. -->
-        <mkdir dir="${libdir}"/>
-        <!-- Put everything into a .jar file. -->
-        <jar jarfile="${libdir}/${name}.jar" basedir="${sub_builddir}" includes="**/*.class,**/*.gif,**/*.jpeg,**/*.png"/>
+        <ant antfile="${srcdir}/build_core.xml" target="archive"/>
+        <ant antfile="${srcdir}/build_healthcare.xml" target="archive"/>
     </target>
-
 </project>
 

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: FamilyHistoryHeading.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,21 +22,18 @@
  * - Information in Medicine -
  */
 
-package org.resmedicinae.domain.healthcare.heading;
+package cybop.healthcare.model.heading;
 
-import org.resmedicinae.domain.healthcare.*;
+import cybop.healthcare.model.*;
 
 /**
  * This class represents a family history heading.<br><br>
  *
  * A family history heading is ...
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-18 14:47:46 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class FamilyHistoryHeading extends Heading {
-    
-    //?? Insert attributes here!
-    //?? Don't forget "create", "destroy", "set" and "get" methods!
 }
 

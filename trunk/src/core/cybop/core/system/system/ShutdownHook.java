@@ -1,7 +1,7 @@
 /*
  * $RCSfile: ShutdownHook.java,v $
  *
- * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,9 +22,9 @@
  * - Information in Medicine -
  */
 
-package cybop.system.system;
+package cybop.core.system.system;
 
-import cybop.system.System;
+import cybop.core.system.System;
 
 /**
  * This class represents a shutdown hook.<br><br>
@@ -42,13 +42,13 @@ import cybop.system.System;
  * That means, that the virtual machine starts the encapsulated thread of this
  * shutdown hook system and that thread again calls the run method of this system.
  *
- * Actually, this shutdown hook system belongs into the <code>cybop.system.system</code>
+ * Actually, this shutdown hook system belongs into the <code>cybop.core.system.system</code>
  * package as it does not contain any child systems. But because this system
  * needs to access a launcher which belongs to the next higher ontological level
  * in the frameworks hierarchy, it must also belong to that package
- * <code>cybop.system.family</code>
+ * <code>cybop.core.system.family</code>
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:52:25 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ShutdownHook extends System {

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: ProblemHeading.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,21 +22,64 @@
  * - Information in Medicine -
  */
 
-package org.resmedicinae.domain.healthcare.heading;
+package cybop.healthcare.model.heading;
 
-import org.resmedicinae.domain.healthcare.*;
+import cybop.core.basic.String;
+import cybop.healthcare.model.*;
 
 /**
  * This class represents a problem heading.<br><br>
  *
  * A problem heading is ...
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-18 14:47:46 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ProblemHeading extends Heading {
+
+    //
+    // Children.
+    //
     
-    //?? Insert attributes here!
-    //?? Don't forget "create", "destroy", "set" and "get" methods!
+    /** The text. */
+    public static final String TEXT = new String("text");
+
+    //
+    // Default children.
+    //
+
+    /**
+     * Returns the default text.
+     *
+     * @return the default text
+     */
+    public String getDefaultText() {
+
+        return new String("Empty");
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this problem heading.
+     */
+    public void initialize() throws Exception {
+
+        super.initialize();
+
+        set(ProblemHeading.TEXT, getDefaultText());
+    }
+
+    /**
+     * Finalizes this problem heading.
+     */
+    public void finalizz() throws Exception {
+
+        remove(ProblemHeading.TEXT);
+
+        super.finalizz();
+    }
 }
 

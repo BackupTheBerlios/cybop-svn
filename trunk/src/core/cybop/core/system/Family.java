@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Family.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,15 +22,15 @@
  * - Information in Medicine -
  */
 
-package cybop.system;
+package cybop.core.system;
 
-import cybop.basic.*;
-import cybop.basic.Boolean;
-import cybop.basic.Integer;
-import cybop.basic.String;
-import cybop.signal.*;
-import cybop.system.chain.*;
-import cybop.system.system.*;
+import cybop.core.basic.*;
+import cybop.core.basic.Boolean;
+import cybop.core.basic.Integer;
+import cybop.core.basic.String;
+import cybop.core.signal.*;
+import cybop.core.system.chain.*;
+import cybop.core.system.system.*;
 
 /**
  * This class represents a family.<br><br>
@@ -49,7 +49,7 @@ import cybop.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:46:09 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -93,7 +93,7 @@ public class Family extends System {
      */
     public String getDefaultAvailableSystems() {
 
-        return new String("cybop.basic.Item");
+        return new String("cybop.core.basic.Item");
     }
 
     /**

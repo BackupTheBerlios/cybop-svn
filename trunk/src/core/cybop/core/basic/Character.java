@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Character.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,7 +22,7 @@
  * - Information in Medicine -
  */
 
-package cybop.basic;
+package cybop.core.basic;
 
 /**
  * This class represents a character.
@@ -31,7 +31,7 @@ package cybop.basic;
  * In informatics, special tables were created which map every known sign
  * to a certain encoding number. The most popular tables are ASCII, ANSI and UNICODE.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:46:09 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Character extends Item {

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Description.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,9 +22,9 @@
  * - Information in Medicine -
  */
 
-package org.resmedicinae.domain.healthcare;
+package cybop.healthcare.model;
 
-import org.resmedicinae.resmedlib.*;
+import cybop.core.basic.*;
 
 /**
  * This class represents a description.<br><br>
@@ -45,7 +45,7 @@ import org.resmedicinae.resmedlib.*;
  * concepts which describe observation, analysis or prescription of
  * something in the real world."
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-18 14:47:46 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @see http://www.openehr.org http://www.gehr.org
  */

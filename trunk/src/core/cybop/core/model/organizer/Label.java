@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Label.java,v $
  *
- * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,17 +22,17 @@
  * - Information in Medicine -
  */
 
-package cybop.model.organizer;
+package cybop.core.model.organizer;
 
-import cybop.basic.*;
-import cybop.basic.Integer;
-import cybop.basic.String;
-import cybop.model.*;
+import cybop.core.basic.*;
+import cybop.core.basic.Integer;
+import cybop.core.basic.String;
+import cybop.core.model.*;
 
 /**
  * This class represents a label.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:49:23 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Label extends Organizer {
@@ -184,7 +184,7 @@ public class Label extends Organizer {
      */
     public String getDefaultFont() {
 
-        return new String("cybop.model.organizer.Font");
+        return new String("cybop.core.model.organizer.Font");
     }
 
     /**

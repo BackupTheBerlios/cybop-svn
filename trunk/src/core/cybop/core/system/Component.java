@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Component.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,13 +22,13 @@
  * - Information in Medicine -
  */
 
-package cybop.system;
+package cybop.core.system;
 
-import cybop.basic.*;
-import cybop.basic.Boolean;
-import cybop.basic.Integer;
-import cybop.basic.String;
-import cybop.system.chain.*;
+import cybop.core.basic.*;
+import cybop.core.basic.Boolean;
+import cybop.core.basic.Integer;
+import cybop.core.basic.String;
+import cybop.core.system.chain.*;
 
 /**
  * This class represents a component.
@@ -69,7 +69,7 @@ import cybop.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:46:09 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends Chain {
@@ -218,7 +218,7 @@ public class Component extends Chain {
      */
     public String getDefaultGlobals() {
 
-        return new String("cybop.basic.Item");
+        return new String("cybop.core.basic.Item");
     }
 
     /**
@@ -228,7 +228,7 @@ public class Component extends Chain {
      */
     public String getDefaultConfiguration() {
 
-        return new String("cybop.system.chain.Configuration");
+        return new String("cybop.core.system.chain.Configuration");
     }
 
     /**
@@ -238,7 +238,7 @@ public class Component extends Chain {
      */
     public String getDefaultLogRecord() {
 
-        return new String("cybop.system.chain.LogRecord");
+        return new String("cybop.core.system.chain.LogRecord");
     }
 
     /**
@@ -643,7 +643,7 @@ public class Component extends Chain {
     public void log(LogRecord r) throws Exception, NullPointerException {
 
 /*??
-        cybop.system.region.controller.Encoder e = (cybop.system.region.controller.Encoder) get(Component.ENCODER);
+        cybop.core.system.region.controller.Encoder e = (cybop.core.system.region.controller.Encoder) get(Component.ENCODER);
 
         if (e != null) {
 

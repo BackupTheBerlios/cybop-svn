@@ -1,7 +1,7 @@
 /*
  * $RCSfile: HelpMenu.java,v $
  *
- * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,17 +22,17 @@
  * - Information in Medicine -
  */
 
-package cybop.model.organizer.menu;
+package cybop.core.model.organizer.menu;
 
-import cybop.basic.*;
-import cybop.basic.String;
-import cybop.model.organizer.*;
-import cybop.model.organizer.menuitem.*;
+import cybop.core.basic.*;
+import cybop.core.basic.String;
+import cybop.core.model.organizer.*;
+import cybop.core.model.organizer.menuitem.*;
 
 /**
  * This class represents a help menu.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:52:25 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class HelpMenu extends Menu {
@@ -116,7 +116,7 @@ public class HelpMenu extends Menu {
      */
     public String getDefaultAboutMenuItem() {
 
-        return new String("cybop.model.organizer.menuitem.AboutMenuItem");
+        return new String("cybop.core.model.organizer.menuitem.AboutMenuItem");
     }
 
     //

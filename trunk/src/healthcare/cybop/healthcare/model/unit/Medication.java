@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Medication.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,42 +22,81 @@
  * - Information in Medicine -
  */
 
-package org.resmedicinae.domain.healthcare.unit;
+package cybop.healthcare.model.unit;
 
-import org.resmedicinae.domain.healthcare.*;
-import org.resmedicinae.domain.healthcare.description.Dose;
-import java.util.Vector;
+import cybop.core.basic.String;
+import cybop.healthcare.model.*;
+import cybop.healthcare.model.description.*;
 
 /**
- * This class represents a medication.<br><br> A medication is ...
- * @version $Revision: 1.1 $ $Date: 2003-02-18 14:47:46 $ $Author: christian $
+ * This class represents a medication.<br><br>
+ *
+ * A medication is ...
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Medication extends Unit {
-    private org.resmedicinae.resmedlib.term.String name;
 
-    public String toString() {
-        return "Medication";
+    //
+    // Children.
+    //
+    
+    /** The name. */
+    public static final String NAME = new String("name");
+
+    //
+    // Default children.
+    //
+
+    /**
+     * Returns the default name.
+     *
+     * @return the default name
+     */
+    public String getDefaultName() {
+
+        return null;
     }
 
-    //?? Insert attributes here!
-    //?? Don't forget "create", "destroy", "set" and "get" methods!
-    public org.resmedicinae.resmedlib.term.String getName() {
-        return name;
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this medication.
+     */
+    public void initialize() throws Exception {
+
+        super.initialize();
+
+        set(Medication.NAME, getDefaultName());
     }
 
-    public void setName(org.resmedicinae.resmedlib.term.String name) {
-        this.name = name;
+    /**
+     * Finalizes this medication.
+     */
+    public void finalizz() throws Exception {
+
+        remove(Medication.NAME);
+
+        super.finalizz();
     }
 
     public Object[] getDose() {
+
         Object[] childrenArray = getChildren().values().toArray();
-        Vector tempVector = new Vector();
+        java.util.Vector tempVector = new java.util.Vector();
+
         for (int i = 0; i < childrenArray.length; i++) {
+
             if (childrenArray[i].getClass().equals(Dose.class)) {
+
                 tempVector.add(childrenArray[i]);
             }
         }
+
         return tempVector.toArray();
     }
 }
+

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Button.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,17 +22,17 @@
  * - Information in Medicine -
  */
 
-package cybop.model.organizer;
+package cybop.core.model.organizer;
 
-import cybop.basic.*;
-import cybop.basic.Integer;
-import cybop.basic.String;
-import cybop.model.*;
+import cybop.core.basic.*;
+import cybop.core.basic.Integer;
+import cybop.core.basic.String;
+import cybop.core.model.*;
 
 /**
  * This class represents a button.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:49:23 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Button extends Organizer {
@@ -366,7 +366,7 @@ public class Button extends Organizer {
 
         if (b != null) {
 
-            b.addActionListener((cybop.system.family.Launcher) getSignalHandler());
+            b.addActionListener((cybop.core.system.family.Launcher) getSignalHandler());
 
         } else {
 
@@ -387,7 +387,7 @@ public class Button extends Organizer {
 
         if (b != null) {
 
-            b.removeActionListener((cybop.system.family.Launcher) getSignalHandler());
+            b.removeActionListener((cybop.core.system.family.Launcher) getSignalHandler());
 
         } else {
 

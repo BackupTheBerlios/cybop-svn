@@ -22,7 +22,7 @@
  * - Information in Medicine -
  */
 
-package org.resmedicinae.domain.healthcare;
+package cybop.healthcare.model;
 
 import java.lang.*;
 import java.sql.*;
@@ -31,7 +31,7 @@ import java.util.*;
 /**
  * Temporary!! Only an EXAMPLE class. "Domain Object Mapper"
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-18 14:47:46 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PersonMapper {

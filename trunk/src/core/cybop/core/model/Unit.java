@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Unit.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,9 +22,9 @@
  * - Information in Medicine -
  */
 
-package cybop.model;
+package cybop.core.model;
 
-import cybop.basic.*;
+import cybop.core.basic.*;
 
 /**
  * This class represents a unit.<br><br>
@@ -45,11 +45,11 @@ import cybop.basic.*;
  * "Unit of information capture, committal, review, modification and
  * communication (Unit of Work)."
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:46:09 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @see http://www.openehr.org http://www.gehr.org
  */
-public class Unit extends cybop.system.Component {
+public class Unit extends cybop.core.system.Component {
 
     //?? Only temporary inheritance from Component!
     //?? The gui components need a signal handler which is set in the

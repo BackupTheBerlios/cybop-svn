@@ -1,7 +1,7 @@
 /*
  * $RCSfile: SystemInformation.java,v $
  *
- * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,18 +22,18 @@
  * - Information in Medicine -
  */
 
-package cybop.model.unit;
+package cybop.core.model.unit;
 
-import cybop.basic.String;
-import cybop.model.*;
-import cybop.system.chain.*;
+import cybop.core.basic.String;
+import cybop.core.model.*;
+import cybop.core.system.chain.*;
 
 /**
  * This class represents a system information model.
  *
  * It contains information about a system.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:49:23 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformation extends Unit {

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: HeadPanel.java,v $
  *
- * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,15 +22,15 @@
  * - Information in Medicine -
  */
 
-package cybop.model.organizer;
+package cybop.core.model.organizer;
 
-import cybop.basic.*;
-import cybop.basic.String;
+import cybop.core.basic.*;
+import cybop.core.basic.String;
 
 /**
  * This class represents a head panel.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:49:23 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class HeadPanel extends Panel {
@@ -182,7 +182,7 @@ public class HeadPanel extends Panel {
      */
     public String getDefaultNameLabel() {
 
-        return new String("cybop.model.organizer.Label");
+        return new String("cybop.core.model.organizer.Label");
     }
 
     /**
@@ -192,7 +192,7 @@ public class HeadPanel extends Panel {
      */
     public String getDefaultVersionLabel() {
 
-        return new String("cybop.model.organizer.Label");
+        return new String("cybop.core.model.organizer.Label");
     }
 
     /**
@@ -202,7 +202,7 @@ public class HeadPanel extends Panel {
      */
     public String getDefaultDateLabel() {
 
-        return new String("cybop.model.organizer.Label");
+        return new String("cybop.core.model.organizer.Label");
     }
 
     /**
@@ -212,7 +212,7 @@ public class HeadPanel extends Panel {
      */
     public String getDefaultSloganLabel() {
 
-        return new String("cybop.model.organizer.Label");
+        return new String("cybop.core.model.organizer.Label");
     }
 
     //

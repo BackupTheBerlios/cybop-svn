@@ -1,7 +1,7 @@
 /*
  * $RCSfile: State.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,15 +22,15 @@
  * - Information in Medicine -
  */
 
-package cybop.basic;
+package cybop.core.basic;
 
 /**
  * This class represents a state.
  *
- * A state is a snapshot in time.
+ * A state is a snapshot in time, marked by a timestamp.
  * It knows about its previous state and such builds up a timeline.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:46:09 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class State extends java.lang.Object {
@@ -38,14 +38,59 @@ public class State extends java.lang.Object {
     //
     // Children.
     //
-    
+
+    /** The time stamp. */
+    private String timeStamp;
+
     /** The previous state. */
     private State previousState;
 
     //
-    // The previous state.
+    // The time stamp.
     //
     
+    /**
+     * Creates the time stamp.
+     *
+     * @return the time stamp
+     */
+    public String createTimeStamp() {
+
+        return null;
+    }
+
+    /**
+     * Destroys the time stamp.
+     *
+     * @param s the time stamp
+     */
+    public void destroyTimeStamp(String s) {
+    }
+
+    /**
+     * Sets the time stamp.
+     *
+     * @param s the time stamp
+     */
+    public void setTimeStamp(String s) {
+
+        this.timeStamp = s;
+    }
+    
+    /**
+     * Returns the time stamp.
+     *
+     * @return the time stamp
+     */
+    public String getTimeStamp() {
+
+        return this.timeStamp;
+    }
+
+    //
+    // The previous state.
+    //
+
     /**
      * Creates the previous state.
      *
@@ -92,7 +137,8 @@ public class State extends java.lang.Object {
      * Initializes this state.
      */
     public void initialize() throws Exception {
-        
+
+        setTimeStamp(createTimeStamp());
         setPreviousState(createPreviousState());
     }
 
@@ -108,6 +154,10 @@ public class State extends java.lang.Object {
         State previousState = getPreviousState();
         setPreviousState(null);
         destroyPreviousState(previousState);
+
+        String timeStamp = getTimeStamp();
+        setTimeStamp(null);
+        destroyTimeStamp(timeStamp);
     }
 }
 

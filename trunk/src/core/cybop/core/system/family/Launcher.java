@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Launcher.java,v $
  *
- * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,18 +22,18 @@
  * - Information in Medicine -
  */
 
-package cybop.system.family;
+package cybop.core.system.family;
 
-import cybop.basic.*;
-import cybop.basic.Boolean;
-import cybop.basic.Integer;
-import cybop.basic.String;
-import cybop.model.model.*;
-import cybop.signal.*;
-import cybop.system.*;
-import cybop.system.System;
-import cybop.system.block.*;
-import cybop.system.system.*;
+import cybop.core.basic.*;
+import cybop.core.basic.Boolean;
+import cybop.core.basic.Integer;
+import cybop.core.basic.String;
+import cybop.core.model.model.*;
+import cybop.core.signal.*;
+import cybop.core.system.*;
+import cybop.core.system.System;
+import cybop.core.system.block.*;
+import cybop.core.system.system.*;
 
 /**
  * This class represents a launcher.<br><br>
@@ -67,7 +67,7 @@ import cybop.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:52:25 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family implements
@@ -262,7 +262,7 @@ public class Launcher extends Family implements
      */
     public String getDefaultScreen() {
 
-        return new String("cybop.system.block.Screen");
+        return new String("cybop.core.system.block.Screen");
     }
 
     /**
@@ -272,7 +272,7 @@ public class Launcher extends Family implements
      */
     public String getDefaultShutdownSocket() {
 
-        return new String("cybop.system.system.ShutdownSocket");
+        return new String("cybop.core.system.system.ShutdownSocket");
     }
 
     /**
@@ -302,7 +302,7 @@ public class Launcher extends Family implements
      */
     public String getDefaultSignal() {
 
-        return new String("cybop.signal.Signal");
+        return new String("cybop.core.signal.Signal");
     }
 
     //
@@ -973,7 +973,7 @@ public class Launcher extends Family implements
     private void showHelp() {
 
         java.lang.System.out.println("Usage:\n"
-            + "java -classpath $CLASSPATH cybop.system.family.Launcher"
+            + "java -classpath $CLASSPATH cybop.core.system.family.Launcher"
             + " -system {location}"
             + " [-configuration {location}]"
             + " [-action {startup | shutdown | start | stop | restart}]"

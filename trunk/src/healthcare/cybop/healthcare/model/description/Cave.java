@@ -21,38 +21,81 @@
  * http://www.resmedicinae.org
  * - Information in Medicine -
  */
-package org.resmedicinae.domain.healthcare.description;
 
-import org.resmedicinae.domain.healthcare.Description;
+package cybop.healthcare.model.description;
 
-public class Cave extends Description{
-    protected org.resmedicinae.resmedlib.term.String name;
+import cybop.core.basic.String;
+import cybop.healthcare.model.*;
 
-    protected org.resmedicinae.resmedlib.term.String timestamp;
+/**
+ * This class represents a cave.<br><br>
+ *
+ * A CAVE entry is an important reminder for doctors, indicating
+ * allergies, medication, special problems a patient may have.
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
+ */
+public class Cave extends Description {
 
-    protected org.resmedicinae.resmedlib.term.String description;
+    //
+    // Children.
+    //
 
-    public org.resmedicinae.resmedlib.term.String getName() {
-        return name;
+    /** The name. */
+    public static final String NAME = new String("name");
+
+    /** The description. */
+    public static final String DESCRIPTION = new String("description");
+
+    //
+    // Default children.
+    //
+
+    /**
+     * Returns the default name.
+     *
+     * @return the default name
+     */
+    public String getDefaultName() {
+
+        return new String("Empty");
     }
 
-    public void setName(org.resmedicinae.resmedlib.term.String name) {
-        this.name = name;
+    /**
+     * Returns the default description.
+     *
+     * @return the default description
+     */
+    public String getDefaultDescription() {
+
+        return null;
     }
 
-    public org.resmedicinae.resmedlib.term.String getDescription() {
-        return description;
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this cave.
+     */
+    public void initialize() throws Exception {
+
+        super.initialize();
+
+        set(Cave.NAME, getDefaultName());
+        set(Cave.DESCRIPTION, getDefaultDescription());
     }
 
-    public void setDescription(org.resmedicinae.resmedlib.term.String description) {
-        this.description = description;
-    }
+    /**
+     * Finalizes this cave.
+     */
+    public void finalizz() throws Exception {
 
-    public org.resmedicinae.resmedlib.term.String getTimestamp() {
-        return timestamp;
-    }
+        remove(Cave.DESCRIPTION);
+        remove(Cave.NAME);
 
-    public void setTimestamp(org.resmedicinae.resmedlib.term.String timestamp) {
-        this.timestamp = timestamp;
+        super.finalizz();
     }
 }
+

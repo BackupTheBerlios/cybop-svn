@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Subjective.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,51 +22,19 @@
  * - Information in Medicine -
  */
 
-package org.resmedicinae.domain.healthcare.heading.problem;
+package cybop.healthcare.model.heading.problem;
 
-import org.resmedicinae.domain.healthcare.heading.*;
+import cybop.core.basic.String;
+import cybop.healthcare.model.heading.*;
 
 /**
- * This class represents a subjective problem heading.<br><br> A subjective problem heading is ...
- * @version $Revision: 1.1 $ $Date: 2003-02-18 14:47:46 $ $Author: christian $
+ * This class represents a subjective problem heading.<br><br>
+ *
+ * A subjective problem heading is ...
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Subjective extends ProblemHeading {
-    /** The text of the subjective. */
-    private org.resmedicinae.resmedlib.term.String text;
-    //?? Insert attributes here!
-    //?? Don't forget "create", "destroy", "set" and "get" methods!
-
-    /**
-     *The constructor.
-     * @param text the text the subject contains
-     */
-    public Subjective(String text) {
-        setText(new org.resmedicinae.resmedlib.term.String(text));
-    }
-
-    /**
-     *Converts the object to String. This is needed because of the tree table. The tree table nodes are named as
-     * the object their represents. So the node will be called like the object.
-     * @return object converted to String
-     */
-    public String toString() {
-        return "Subjective";
-    }
-
-    /**
-     *Gets the text of the subjective
-     * @return the text of the subjective
-     */
-    public org.resmedicinae.resmedlib.term.String getText() {
-        return this.text;
-    }
-
-    /**
-     *Sets the text of the object
-     *@param text the text of the object
-     */
-    public void setText(org.resmedicinae.resmedlib.term.String text) {
-        this.text = text;
-    }
 }
+

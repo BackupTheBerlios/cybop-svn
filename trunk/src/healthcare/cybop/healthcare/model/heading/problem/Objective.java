@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Objective.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,38 +22,34 @@
  * - Information in Medicine -
  */
 
-package org.resmedicinae.domain.healthcare.heading.problem;
+package cybop.healthcare.model.heading.problem;
 
-import org.resmedicinae.domain.healthcare.heading.*;
-import java.util.Vector;
+import cybop.core.basic.String;
+import cybop.healthcare.model.heading.*;
 
 /**
- * This class represents an objective problem heading.<br><br> An objective problem heading is ...
- * @version $Revision: 1.1 $ $Date: 2003-02-18 14:47:46 $ $Author: christian $
+ * This class represents an objective problem heading.<br><br>
+ *
+ * An objective problem heading is ...
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Objective extends ProblemHeading {
-    //?? Insert attributes here!
-    //?? Don't forget "create", "destroy", "set" and "get" methods!
-
-    private org.resmedicinae.resmedlib.term.String timestamp;
 
     /** The name of the overlay related to the SOAP object. */
     private String overlayName;
 
     /** The x coordinates of point which are markers in the image of the episode. */
-    private Vector markerXCoordinates;
+    private java.util.Vector markerXCoordinates;
 
     /** The y coordinates of point which are markers in the image of the episode. */
-    private Vector markerYCoordinates;
-
-    /** The text of the object. */
-    private org.resmedicinae.resmedlib.term.String text;
+    private java.util.Vector markerYCoordinates;
 
     /** The default constructor. */
     public Objective() {
-        this.markerXCoordinates = new Vector();
-        this.markerYCoordinates = new Vector();
+        this.markerXCoordinates = new java.util.Vector();
+        this.markerYCoordinates = new java.util.Vector();
     }
 
     /**
@@ -61,34 +57,9 @@ public class Objective extends ProblemHeading {
      * @param text the text the object contains
      */
     public Objective(String text) {
-        setText(new org.resmedicinae.resmedlib.term.String(text));
-        this.markerXCoordinates = new Vector();
-        this.markerYCoordinates = new Vector();
-    }
 
-    /**
-     *Converts the object to String. This is needed because of the tree table. The tree table nodes are named as
-     * the object their represents. So the node will be called like the object.
-     * @return object converted to String
-     */
-    public String toString() {
-        return "Objective";
-    }
-
-    /**
-     *Gets the name of the overlay related to the SOAP object
-     * @return the name of the overlay
-     */
-    public String getOverlayName() {
-        return overlayName;
-    }
-
-    /**
-     *Sets the name of the overlay related to the SOAP object
-     * @param overlayName the name of the overlay
-     */
-    public void setOverlayName(String overlayName) {
-        this.overlayName = overlayName;
+        this.markerXCoordinates = new java.util.Vector();
+        this.markerYCoordinates = new java.util.Vector();
     }
 
     /**
@@ -131,7 +102,7 @@ public class Objective extends ProblemHeading {
      *Gets the x coordinates vector of the marker for the episode
      * @param markerXCoordinates
      */
-    public Vector getMarkerXCoordinates() {
+    public java.util.Vector getMarkerXCoordinates() {
         return this.markerXCoordinates;
     }
 
@@ -139,7 +110,7 @@ public class Objective extends ProblemHeading {
      *Sets the x coordinates vector of the marker for the episode
      * @param markerXCoordinates
      */
-    public void setMarkerXCoordinates(Vector markerXCoordinates) {
+    public void setMarkerXCoordinates(java.util.Vector markerXCoordinates) {
         this.markerXCoordinates = markerXCoordinates;
     }
 
@@ -147,7 +118,7 @@ public class Objective extends ProblemHeading {
      *Gets the y coordinates vector of the marker for the episode
      * @return markerYCoordinates
      */
-    public Vector getMarkerYCoordinates() {
+    public java.util.Vector getMarkerYCoordinates() {
         return this.markerYCoordinates;
     }
 
@@ -155,7 +126,7 @@ public class Objective extends ProblemHeading {
      *Sets the y coordinates vector of the marker for the episode
      * @param markerYCoordinates
      */
-    public void setMarkerYCoordinates(Vector markerYCoordinates) {
+    public void setMarkerYCoordinates(java.util.Vector markerYCoordinates) {
         this.markerYCoordinates = markerYCoordinates;
     }
 
@@ -166,28 +137,5 @@ public class Objective extends ProblemHeading {
     public boolean hasMarkers() {
         return !markerYCoordinates.isEmpty();
     }
-
-    /**
-     *Gets the text of the object
-     * @return the text of the object
-     */
-    public org.resmedicinae.resmedlib.term.String getText() {
-        return this.text;
-    }
-
-    /**
-     *Sets the text of the object
-     *@param text the text of the object
-     */
-    public void setText(org.resmedicinae.resmedlib.term.String text) {
-        this.text = text;
-    }
-
-   public org.resmedicinae.resmedlib.term.String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(org.resmedicinae.resmedlib.term.String timestamp) {
-        this.timestamp = timestamp;
-    }
 }
+

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: DomainModel.java,v $
  *
- * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,17 +22,17 @@
  * - Information in Medicine -
  */
 
-package cybop.model.model;
+package cybop.core.model.model;
 
-import cybop.basic.String;
-import cybop.model.*;
-import cybop.model.unit.*;
-import cybop.system.chain.*;
+import cybop.core.basic.String;
+import cybop.core.model.*;
+import cybop.core.model.unit.*;
+import cybop.core.system.chain.*;
 
 /**
  * This class represents a domain model.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:49:23 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Torsten Kunze <zone3@gmx.de>
  */
@@ -56,7 +56,7 @@ public class DomainModel extends Model {
      */
     public String getDefaultSystemInformation() {
 
-        return new String("cybop.model.unit.SystemInformation");
+        return new String("cybop.core.model.unit.SystemInformation");
     }
 
     //

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: UserInterface.java,v $
  *
- * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,14 +22,14 @@
  * - Information in Medicine -
  */
 
-package cybop.model.model;
+package cybop.core.model.model;
 
-import cybop.basic.*;
-import cybop.basic.Boolean;
-import cybop.basic.Integer;
-import cybop.basic.String;
-import cybop.model.*;
-import cybop.model.organizer.*;
+import cybop.core.basic.*;
+import cybop.core.basic.Boolean;
+import cybop.core.basic.Integer;
+import cybop.core.basic.String;
+import cybop.core.model.*;
+import cybop.core.model.organizer.*;
 
 /**
  * This class represents a user interface.
@@ -38,7 +38,7 @@ import cybop.model.organizer.*;
  * i.e. to map the domain model's tree structure to simpler structures
  * such as a list supporting a combo box or a table structure.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:49:23 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class UserInterface extends Model {
@@ -321,7 +321,7 @@ public class UserInterface extends Model {
      */
     public String getDefaultMenuBar() {
 
-        return new String("cybop.model.organizer.MenuBar");
+        return new String("cybop.core.model.organizer.MenuBar");
     }
 
     /**
@@ -331,7 +331,7 @@ public class UserInterface extends Model {
      */
     public String getDefaultToolBar() {
 
-        return new String("cybop.model.organizer.ToolBar");
+        return new String("cybop.core.model.organizer.ToolBar");
     }
 
     /**
@@ -341,7 +341,7 @@ public class UserInterface extends Model {
      */
     public String getDefaultContentsPanel() {
 
-        return new String("cybop.model.organizer.ContentsPanel");
+        return new String("cybop.core.model.organizer.ContentsPanel");
     }
 
     /**
@@ -351,7 +351,7 @@ public class UserInterface extends Model {
      */
     public String getDefaultStatusBar() {
 
-        return new String("cybop.model.organizer.StatusBar");
+        return new String("cybop.core.model.organizer.StatusBar");
     }
 
     /**

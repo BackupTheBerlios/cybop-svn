@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Problem.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,76 +22,52 @@
  * - Information in Medicine -
  */
 
-package org.resmedicinae.domain.healthcare.unit;
+package cybop.healthcare.model.unit;
 
-import org.resmedicinae.domain.healthcare.*;
-import java.util.Vector;
+import cybop.core.basic.String;
+import cybop.healthcare.model.*;
 
 /**
- * This class represents a problem.<br><br> A problem is some artifact in the health of a patient.
- * @version $Revision: 1.1 $ $Date: 2003-02-18 14:47:46 $ $Author: christian $
+ * This class represents a problem.<br><br>
+ *
+ * A problem is some artifact in the health of a patient.
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Problem extends Unit {
 
-    /** Name of the problem. */
-    private org.resmedicinae.resmedlib.term.String name;
+    //
+    // Children.
+    //
 
-    /** Anamnese of the problem. */
-    private org.resmedicinae.resmedlib.term.String anamnese;
+    /** The identifier. */
+    public static final String IDENTIFIER = new String("identifier");
 
-    private org.resmedicinae.resmedlib.term.String timestamp;
+    /** The name. */
+    public static final String NAME = new String("name");
 
-    /** Constructor. */
-    public Problem() {
-    }
-
-    /**
-     *Sets the problem name.
-     * @param name the name of the problem
-     */
-    public void setName(org.resmedicinae.resmedlib.term.String name) {
-        this.name = name;
-    }
+    /** The anamnese. */
+    public static final String ANAMNESE = new String("anamnese");
 
     /**
-     *Gets the problem name.
-     * @return the name of the problem
-     */
-    public org.resmedicinae.resmedlib.term.String getName() {
-        return this.name;
-    }
-
-    /**
-     *Sets the problem anamnese.
-     * @param anamnese the anamnese of the problem
-     */
-    public void setAnamnese(org.resmedicinae.resmedlib.term.String anamnese) {
-        System.out.println("++++++++++++++++++++++++++++++Anamnese set!!!!");
-        this.anamnese = anamnese;
-    }
-
-    /**
-     *Gets the problem anamnese.
-     * @return the anamnese of the problem
-     */
-    public org.resmedicinae.resmedlib.term.String getAnamnese() {
-        return this.anamnese;
-    }
-
-
-    /**
-     *Gets the problem episodes.
+     * Gets the problem episodes.
+     *
      * @return vector containing episodes of the problem
      */
     public Object[] getEpisodes() {
+
         Object[] childrenArray = getChildren().values().toArray();
-        Vector tempVector = new Vector();
+        java.util.Vector tempVector = new java.util.Vector();
+
         for (int i = 0; i < childrenArray.length; i++) {
+
             if (childrenArray[i].getClass().equals(Episode.class)) {
+
                 tempVector.add(childrenArray[i]);
             }
         }
+
         return tempVector.toArray();
     }
 
@@ -126,14 +102,6 @@ public class Problem extends Unit {
     }
 
     /**
-     *Converts the object to String. This is needed because of the tree table. The tree table nodes are named as
-     * the object their represents. So the node will be called like the object.
-     */
-    public String toString() {
-        return "Problem";
-    }
-
-    /**
      *Gets number of episodes.
      * @return number of episodes
      */
@@ -147,13 +115,5 @@ public class Problem extends Unit {
         }
         return count;
     }
-
-    public org.resmedicinae.resmedlib.term.String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(org.resmedicinae.resmedlib.term.String timestamp) {
-        this.timestamp = timestamp;
-    }
-
 }
+

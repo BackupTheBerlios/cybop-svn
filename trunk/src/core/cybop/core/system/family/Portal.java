@@ -1,7 +1,7 @@
 /*
  * $RCSfile: Portal.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,17 +22,17 @@
  * - Information in Medicine -
  */
 
-package cybop.system.family;
+package cybop.core.system.family;
 
-import cybop.basic.*;
-import cybop.basic.Integer;
-import cybop.basic.String;
-import cybop.model.model.user.*;
-import cybop.system.*;
-import cybop.system.System;
-import cybop.system.block.*;
-import cybop.system.block.controller.*;
-import cybop.system.chain.*;
+import cybop.core.basic.*;
+import cybop.core.basic.Integer;
+import cybop.core.basic.String;
+import cybop.core.model.model.user.*;
+import cybop.core.system.*;
+import cybop.core.system.System;
+import cybop.core.system.block.*;
+import cybop.core.system.block.controller.*;
+import cybop.core.system.chain.*;
 
 /**
  * This class represents a portal.<br><br>
@@ -49,7 +49,7 @@ import cybop.system.chain.*;
  * Child systems can be integrated into the portal system's Frame as Frame,
  * InternalFrame or TabPage.
  *
- * @version $Revision: 1.1 $ $Date: 2003-02-19 07:52:25 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Portal extends Family {
@@ -66,7 +66,7 @@ public class Portal extends Family {
     public String getDefaultConfiguration() {
 
 //??        c.setJavaObject(java.util.prefs.Preferences.systemNodeForPackage(getClass().getPackage().getClass()));
-        return new String("cybop.system.chain.Configuration");
+        return new String("cybop.core.system.chain.Configuration");
     }
 
     /**
@@ -144,7 +144,7 @@ public class Portal extends Family {
      */
     public String getDefaultController() {
 
-        return new String("cybop.system.block.controller.PortalController");
+        return new String("cybop.core.system.block.controller.PortalController");
     }
 
     /**
@@ -154,7 +154,7 @@ public class Portal extends Family {
      */
     public String getDefaultUser() {
 
-        return new String("cybop.system.system.User");
+        return new String("cybop.core.system.system.User");
     }
 
     //

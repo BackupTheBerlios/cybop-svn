@@ -1,7 +1,7 @@
 /*
  * $RCSfile: PartialContact.java,v $
  *
- * Copyright (c) 1999-2002. The Res Medicinae developers. All rights reserved.
+ * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -22,84 +22,48 @@
  * - Information in Medicine -
  */
 
-package org.resmedicinae.domain.healthcare.unit;
+package cybop.healthcare.model.unit;
 
-import org.resmedicinae.domain.healthcare.*;
-import org.resmedicinae.domain.healthcare.heading.problem.Subjective;
-import org.resmedicinae.domain.healthcare.heading.problem.Assessment;
-import org.resmedicinae.domain.healthcare.heading.problem.Plan;
-import org.resmedicinae.domain.healthcare.heading.problem.Objective;
-import java.util.Vector;
+import cybop.core.basic.String;
+import cybop.healthcare.model.*;
+import cybop.healthcare.model.heading.problem.Subjective;
+import cybop.healthcare.model.heading.problem.Assessment;
+import cybop.healthcare.model.heading.problem.Plan;
+import cybop.healthcare.model.heading.problem.Objective;
 
 /**
- * This class represents a partial contact.<br><br> A partial contact is a time extract of an episode.
+ * This class represents a partial contact.<br><br>
+ *
+ * A partial contact is a time extract of an episode.
  * It consists of problem headings.
- * @version $Revision: 1.1 $ $Date: 2003-02-18 14:47:46 $ $Author: christian $
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-02-19 17:15:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Jens Bohl <jens.bohl@stud.tu-ilmenau.de>
  * @author Torsten Kunze <zone3@gmx.de>
  */
 public class PartialContact extends Unit {
-    //?? Insert attributes here!
-    //?? Don't forget "create", "destroy" methods!
 
-    /** The number of the episode within the problem the episode belongs to. */
-    private int partialContactNumber;
+    //
+    // Children.
+    //
 
-    /** The date of the partial contact. */
-    private org.resmedicinae.resmedlib.term.String date;
+    /** The partial contact number. */
+    public static final String PARTIAL_CONTACT_NUMBER = new String("partial_contact_number");
 
-    private org.resmedicinae.resmedlib.term.String timestamp;
-
-    /** Constructor. */
-    public PartialContact() {
-    }
+    /** The partial contact date. */
+    public static final String PARTIAL_CONTACT_DATE = new String("partial_contact_date");
 
     /**
-     *Sets the date of the partial contact
-     * @param date the date of the partial contact
+     * Adds a object to an partial contact.
+     *
+     * @param o the object to be added to the partial contact
      */
-    public void setPartialContactDate(org.resmedicinae.resmedlib.term.String  date) {
-        this.date = date;
-    }
+    public void addObjective(Objective o) {
 
-    /**
-     *Gets the date of the partial contact
-     * @return the date of the partial contact
-     */
-    public org.resmedicinae.resmedlib.term.String  getPartialContactDate() {
-        return this.date;
-    }
+        String id = new String(java.lang.String.valueOf(getObjectiveCount()));
 
-
-    /**
-     *Adds a object to an partial contact.
-     * @param object the object to be added to the partial contact
-     */
-    public void addObjective(Objective objective) {
-        String tempObjectiveId = (new Integer(getObjectiveCount())).toString();
-        set(new org.resmedicinae.resmedlib.term.String(tempObjectiveId), objective);
-    }
-
-    /**
-     *Sets the indes of the partial contact
-     * @param partial contactNumber index of the partial contact
-     */
-    public void setPartialContactNumber(int number) {
-        this.partialContactNumber = number;
-    }
-
-    /** Gets the index of the partial contact qreturn the index of the partial contact */
-    public int getPartialContactNumber() {
-        return this.partialContactNumber;
-    }
-
-    /**
-     *Converts the object to String. This is needed because of the tree table. The tree table nodes are named as
-     * the object their represents. So the node will be called like the object.
-     */
-    public String toString() {
-        return "Partial Contact";
+        set(id, o);
     }
 
     public int getObjectiveCount() {
@@ -143,65 +107,81 @@ public class PartialContact extends Unit {
      * @return the objects of the partial contact
      */
     public Object[] getObjectives() {
+
         Object[] childrenArray = getChildren().values().toArray();
-        Vector tempVector = new Vector();
+        java.util.Vector tempVector = new java.util.Vector();
+
         for (int i = 0; i < childrenArray.length; i++) {
+
             if (childrenArray[i].getClass().equals(Objective.class)) {
+
                 tempVector.add(childrenArray[i]);
             }
         }
+
         return tempVector.toArray();
     }
 
     public Object[] getSubjectives() {
+
         Object[] childrenArray = getChildren().values().toArray();
-        Vector tempVector = new Vector();
+        java.util.Vector tempVector = new java.util.Vector();
+
         for (int i = 0; i < childrenArray.length; i++) {
+
             if (childrenArray[i].getClass().equals(Subjective.class)) {
+
                 tempVector.add(childrenArray[i]);
             }
         }
+
         return tempVector.toArray();
     }
 
     public Object[] getAssessments() {
+
         Object[] childrenArray = getChildren().values().toArray();
-        Vector tempVector = new Vector();
+        java.util.Vector tempVector = new java.util.Vector();
+
         for (int i = 0; i < childrenArray.length; i++) {
+
             if (childrenArray[i].getClass().equals(Assessment.class)) {
+
                 tempVector.add(childrenArray[i]);
             }
         }
+
         return tempVector.toArray();
     }
 
     public Object[] getPlans() {
+
         Object[] childrenArray = getChildren().values().toArray();
         int count = 0;
-        Vector tempVector = new Vector();
+        java.util.Vector tempVector = new java.util.Vector();
+
         for (int i = 0; i < childrenArray.length; i++) {
+
             if (childrenArray[i].getClass().equals(Plan.class)) {
+
                 tempVector.add(childrenArray[i]);
             }
         }
+
         return tempVector.toArray();
     }
 
     public void removeObjective(Objective objective) {
+
         Object[] objectives = getObjectives();
+
         for (int i = 0; i < objectives.length; i++) {
+
             if (objectives[i].equals(objective)) {
-                remove(objective.getIdentifier());
+
+//??                remove(objective.get(Objective.IDENTIFIER));
             }
         }
     }
-
-    public org.resmedicinae.resmedlib.term.String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(org.resmedicinae.resmedlib.term.String timestamp) {
-        this.timestamp = timestamp;
-    }
-
 }
+
