@@ -35,8 +35,4 @@
         <property name="html_tag" channel="inline" abstraction="string" model="tr"/>
     </part>
 
-    <part name="table_body" channel="inline" abstraction="compound" model="">
-        <property name="html_tag" channel="inline" abstraction="string" model="tr"/>
-    </part>
-
 </model>

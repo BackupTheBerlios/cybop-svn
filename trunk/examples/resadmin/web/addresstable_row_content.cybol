@@ -31,13 +31,11 @@
 
 <model>
 
-    <part name="firstname_loopindex" channel="inline" abstraction="knowledge_memeory" model="domain.addressbook.addresses.address_loopindex.firstname">
+    <part name="firstname" channel="inline" abstraction="string" model="">
         <property name="html_tag" channel="inline" abstraction="string" model="td"/>
-        <property name="loopindex" channel="inline" abstraction="knowledge_memeory" model="domain.address_loopindex"/>
     </part>
-    <part name="lastname_loopindex" channel="inline" abstraction="knowledge_memeory" model="domain.addressbook.addresses.address_loopindex.lastname">
+    <part name="lastname" channel="inline" abstraction="string" model="">
         <property name="html_tag" channel="inline" abstraction="string" model="td"/>
-        <property name="loop_index" channel="inline" abstraction="knowledge_memeory" model="domain.addressaddress_loop_index"/>
     </part>
 
 </model>

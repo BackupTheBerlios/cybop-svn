@@ -30,7 +30,7 @@
 /-->
 
 <model>
-    <part name="addressbook_name" channel="inline" abstraction="knowledge_memory" model="domain.addressbook.name">
+    <part name="addressbook_name" channel="inline" abstraction="knowledge" model="domain.addressbook.name">
         <property name="html_tag" channel="inline" abstraction="string" model="h1"/>
     </part>
     <part name="addresstable" channel="file" abstraction="cybol" model="examples/resadmin/web/addresstable.cybol">

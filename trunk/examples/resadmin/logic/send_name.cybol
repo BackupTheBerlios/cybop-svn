@@ -28,8 +28,10 @@
 /-->
 
 <model>
+
+    <!-- create loop variables -->
     <part name="create_loop_break_flag" channel="inline" abstraction="operation" model="create_part">
-        <property name="whole" channel="inline" abstraction="string" model="domain"/>
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
         <property name="name" channel="inline" abstraction="string" model="loop_breakflag"/>
         <property name="channel" channel="inline" abstraction="string" model="inline"/>
         <property name="abstraction" channel="inline" abstraction="string" model="boolean"/>
@@ -37,30 +39,103 @@
     </part>
 
     <part name="create_loop_index" channel="inline" abstraction="operation" model="create_part">
-        <property name="whole" channel="inline" abstraction="string" model="domain"/>
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
         <property name="name" channel="inline" abstraction="string" model="loop_index"/>
         <property name="channel" channel="inline" abstraction="string" model="inline"/>
         <property name="abstraction" channel="inline" abstraction="string" model="integer"/>
         <property name="model" channel="inline" abstraction="string" model="0"/>
     </part>
+    
+    <part name="create_listname" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
+        <property name="name" channel="inline" abstraction="string" model="loop_listname"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+
+    <!-- create dynamic name for domain -->
+    <part name="create_listname_domain" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
+        <property name="name" channel="inline" abstraction="string" model="loop_listname_domain"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+    
+    <part name="create_listname_domain_firstname" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
+        <property name="name" channel="inline" abstraction="string" model="loop_listname_domain_firstname"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+    
+    <part name="create_listname_domain_lastname" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
+        <property name="name" channel="inline" abstraction="string" model="loop_listname_domain_lastname"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+
+    <!-- create dynamic name for web -->
+    <part name="create_listname_web" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
+        <property name="name" channel="inline" abstraction="string" model="loop_listname_web"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+    
+    <part name="create_listname_web_firstname" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
+        <property name="name" channel="inline" abstraction="string" model="loop_listname_web_firstname"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+    
+    <part name="create_listname_web_lastname" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
+        <property name="name" channel="inline" abstraction="string" model="loop_listname_web_lastname"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+
+
+    <!-- init loop variables -->    
     <part name="set_index" channel="inline" abstraction="operation" model="set">
         <property name="source" channel="inline" abstraction="integer" model="0"/>
-        <property name="destination" channel="inline" abstraction="knowledge_memory" model="domain.loop_index"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model="domain.loop_index"/>
     </part>
+    
+    <part name="set_address_count" channel="inline" abstraction="operation" model="count_part">
+        <property name="basisname" channel="inline" abstraction="string" model="address"/>
+        <property name="model" channel="inline" abstraction="knowledge" model="domain.addressbook.addresses"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.addressbook.addresses.address_count"/>
+    </part>
+    
     <part name="compare" channel="inline" abstraction="operation" model="compare">
-        <property name="operand_1" channel="inline" abstraction="knowledge_memory" model="domain.loop_index"/>
-        <property name="operand_2" channel="inline" abstraction="knowledge_memory" model="domain.addressbook.addresses.address_count"/>
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.loop_index"/>
+        <property name="operand_2" channel="inline" abstraction="knowledge" model="domain.addressbook.addresses.address_count"/>
         <property name="operator" channel="inline" abstraction="string" model="greater_or_equal"/>
-        <property name="result" channel="inline" abstraction="knowledge_memory" model="domain.loop_breakflag"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.loop_breakflag"/>
     </part>
+
+    <!--lopp operation -->
     <part name="creat_table_body" channel="inline" abstraction="operation" model="loop">
-        <property name="break" channel="inline" abstraction="knowledge_memory" model="domain.loop_breakflag"/>
-        <property name="index" channel="inline" abstraction="knowledge_memory" model="domain.loop_index"/>
+        <property name="break" channel="inline" abstraction="knowledge" model="domain.loop_breakflag"/>
+        <property name="index" channel="inline" abstraction="knowledge" model="domain.loop_index"/>
         <property name="model" channel="inline" abstraction="cybol" model="examples/resadmin/logic/create_table_rows.cybol"/>
     </part>
+    
+    <!-- send the result -->
     <part name="send_name_to_web" channel="inline" abstraction="operation" model="send">
         <property name="language" channel="inline" abstraction="string" model="tcp_socket"/>
         <property name="receiver" channel="inline" abstraction="string" model="user"/>
-        <property name="message" channel="inline" abstraction="string" model="web.body"/>
+        <property name="message" channel="inline" abstraction="knowledge" model="web.body"/>
     </part>
+    
 </model>

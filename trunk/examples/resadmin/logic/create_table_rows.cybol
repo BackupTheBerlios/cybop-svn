@@ -28,24 +28,86 @@
 /-->
 
 <model>
-<!--
+
+    <!-- build dynamic names for loop-->
+    <part name="create_listname" channel="inline" abstraction="operation" model="build_listname">
+        <property name="basisname" channel="inline" abstraction="string" model="address"/>
+        <property name="index" channel="inline" abstraction="knowledge" model="domain.loop_index"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.loop_listname"/>
+    </part>
+
+
+    <!-- build dynamic names for source-->
+    <part name="create_listname_domain" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="string" model="domain.addressbook.addresses."/>
+        <property name="operand_2" channel="inline" abstraction="knowledge" model="domain.loop_listname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.loop_listname_domain"/>
+    </part>
+
+    <part name="create_listname_domain_firstname" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.loop_listname_domain"/>
+        <property name="operand_2" channel="inline" abstraction="string" model=".firstname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.loop_listname_domain_firstname"/>
+    </part>
+
+    <part name="create_listname_domain_lastname" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.loop_listname_domain"/>
+        <property name="operand_2" channel="inline" abstraction="string" model=".lastname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.loop_listname_domain_lastname"/>
+    </part>
+
+
+    <!-- create row -->
     <part name="create_address_row" channel="inline" abstraction="operation" model="create_part">
-        <property name="whole" channel="inline" abstraction="string" model="web.body.addresstable.table_body"/>
-        <property name="name" channel="inline" abstraction="string" model="????"/>
+        <property name="whole" channel="inline" abstraction="knowledge" model="web.body.addresstable"/>
+        <property name="name" channel="inline" abstraction="knowledge" model="domain.loop_listname"/>
         <property name="channel" channel="inline" abstraction="string" model="file"/>
         <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
-        <property name="model" channel="inline" abstraction="string" model="..."/>
+        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/web/addresstable_row.cybol"/>
     </part>
--->    
+
+
+    <!-- build dynamic names for destination  -->
+    <part name="create_listname_web" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="string" model="web.body.addresstable."/>
+        <property name="operand_2" channel="inline" abstraction="knowledge" model="domain.loop_listname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.loop_listname_web"/>
+    </part>
+
+    <part name="create_listname_web_firstname" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.loop_listname_web"/>
+        <property name="operand_2" channel="inline" abstraction="string" model=".row.firstname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.loop_listname_web_firstname"/>
+    </part>
+
+    <part name="create_listname_web_lastname" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.loop_listname_web"/>
+        <property name="operand_2" channel="inline" abstraction="string" model=".row.lastname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.loop_listname_web_lastname"/>
+    </part>
+
+
+    <!-- set row content-->
+    <part name="set_firstname" channel="inline" abstraction="operation" model="set">
+        <property name="source" channel="inline" abstraction="encapsulated_knowledge" model="domain.loop_listname_domain_firstname"/>
+        <property name="destination" channel="inline" abstraction="encapsulated_knowledge" model="domain.loop_listname_web_firstname"/>
+    </part>
+    
+    <part name="set_lastname" channel="inline" abstraction="operation" model="set">
+        <property name="source" channel="inline" abstraction="encapsulated_knowledge" model="domain.loop_listname_domain_lastname"/>
+        <property name="destination" channel="inline" abstraction="encapsulated_knowledge" model="domain.loop_listname_web_lastname"/>
+    </part>
+
+    <!-- operation for the loop handling -->
     <part name="add_loop_index" channel="inline" abstraction="operation" model="add">
-        <property name="operand_1" channel="inline" abstraction="knowledge_memory" model="domain.loop_index"/>
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.loop_index"/>
         <property name="operand_2" channel="inline" abstraction="integer" model="1"/>
-        <property name="result" channel="inline" abstraction="knowledge_memory" model="domain.loop_index"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.loop_index"/>
     </part>
     <part name="compare" channel="inline" abstraction="operation" model="compare">
-        <property name="operand_1" channel="inline" abstraction="knowledge_memory" model="domain.loop_index"/>
-        <property name="operand_2" channel="inline" abstraction="knowledge_memory" model="domain.addressbook.addresses.address_count"/>
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.loop_index"/>
+        <property name="operand_2" channel="inline" abstraction="knowledge" model="domain.addressbook.addresses.address_count"/>
         <property name="operator" channel="inline" abstraction="string" model="greater_or_equal"/>
-        <property name="result" channel="inline" abstraction="knowledge_memory" model="domain.loop_breakflag"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.loop_breakflag"/>
     </part>
 </model>

@@ -31,9 +31,8 @@
 
 <model>
 
-    <part name="row_loopindex" channel="file" abstraction="cybol" model="examples/resadmin/web/address_table_row_content.cybol">
+    <part name="row" channel="file" abstraction="cybol" model="examples/resadmin/web/addresstable_row_content.cybol">
         <property name="html_tag" channel="inline" abstraction="string" model="tr"/>
-        <property name="loopindex" channel="inline" abstraction="knowledge_memeory" model="domain.address_loopindex"/>
     </part>
 
 </model>

@@ -30,7 +30,7 @@
 /-->
 
 <model>
-    <part name="first_name" channel="inline" abstraction="string" model="christian"/>
-    <part name="last_name" channel="inline" abstraction="string" model="heller"/>
+    <part name="firstname" channel="inline" abstraction="string" model="christian"/>
+    <part name="lastname" channel="inline" abstraction="string" model="heller"/>
     <part name="street" channel="inline" abstraction="string"  model="uni"/>
 </model>

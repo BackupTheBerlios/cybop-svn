@@ -25,7 +25,7 @@
 
     Description ...
 
-    @version $Revision: 1.2 $ $Date: 2005-03-01 14:37:38 $ $Author: rholzmueller $
+    @version $Revision: 1.3 $ $Date: 2005-03-10 10:06:15 $ $Author: rholzmueller $
     @author Rolf Holzmüller <rolf.holzmueller@gmx.de>
 /-->
 
@@ -50,7 +50,7 @@
     </part>
 -->
     <part name="create_adressbook" channel="inline" abstraction="operation" model="create_part">
-        <property name="whole" channel="inline" abstraction="string" model="domain"/>
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
         <property name="name" channel="inline" abstraction="string" model="addressbook"/>
         <property name="channel" channel="inline" abstraction="string" model="file"/>
         <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
