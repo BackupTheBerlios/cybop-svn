@@ -24,21 +24,15 @@
 
 package cyboi;
 
-//?? import java.io.*;
-//?? import org.apache.xerces.dom.*;
-//?? import org.apache.xerces.parsers.*;
-//?? import org.apache.xml.serialize.*;
-//?? import org.w3c.dom.*;
-
 /**
- * This is the main class of the <i>Cybernetics Oriented Interpreter</i> (CYBOI).<br><br>
+ * This is the main class of the Cybernetics Oriented Interpreter (CYBOI).
  *
- * It contains a static <i>main</i> method to execute the interpreter.
+ * It contains a static main method to execute the interpreter.
  *
- * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
- * which adhere to the <i>Extended Markup Language</i> (XML) format.
+ * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
+ * which adhere to the Extended Markup Language (XML) format.
  *
- * @version $Revision: 1.24 $ $Date: 2003-08-09 15:34:58 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2003-08-10 22:34:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -66,7 +60,7 @@ class Main {
                     java.lang.Object signal_category_name = "cybol/core/signal/signal";
 
                     // Statics.
-                    java.lang.Object statics = ItemHandler.create_object(statics_category_name, Statics.COMPLEX);
+                    java.lang.Object statics = ItemHandler.create_object(statics_category_name, Statics.CATEGORY);
 
 /*??
                     // Dynamics.
@@ -80,7 +74,7 @@ class Main {
                     MapHandler.initialize_map(signal_memory);
 
                     // Signal.
-                    java.lang.Object signal = ItemHandler.create_object(signal_category_name, Statics.COMPLEX);
+                    java.lang.Object signal = ItemHandler.create_object(signal_category_name, Statics.CATEGORY);
 
                     // Event handler.
                     java.lang.Object event_handler = new EventHandler();
@@ -96,7 +90,7 @@ class Main {
                     event_handler = null;
                     
                     // Signal.
-                    ItemHandler.destroy_object(signal, signal_category_name, Statics.COMPLEX);
+                    ItemHandler.destroy_object(signal, signal_category_name, Statics.CATEGORY);
 
                     // Signal memory.
                     MapHandler.finalize_map(signal_memory);
@@ -110,7 +104,7 @@ class Main {
 */
 
                     // Statics.
-                    ItemHandler.destroy_object(statics, statics_category_name, Statics.COMPLEX);
+                    ItemHandler.destroy_object(statics, statics_category_name, Statics.CATEGORY);
 
                     //
                     // Runtime.getRuntime().exit(0);
@@ -218,5 +212,39 @@ class Main {
             java.lang.System.out.println("ERROR: Could not replace event queue. The java awt toolkit is null.");
         }
     }
+
+//?? ===================================================
+
+    //
+    // Orientations.
+    //
+
+    /** The 0 degree orientation. */
+    static java.lang.String DEGREE_0_ORIENTATION = "0_degree_orientation";
+
+    /** The 90 degree orientation. */
+    static java.lang.String DEGREE_90_ORIENTATION = "90_degree_orientation";
+
+    /** The 180 degree orientation. */
+    static java.lang.String DEGREE_180_ORIENTATION = "180_degree_orientation";
+
+    /** The 270 degree orientation. */
+    static java.lang.String DEGREE_270_ORIENTATION = "270_degree_orientation";
+
+    //
+    // Child positionings.
+    //
+
+    /** The compass positioning. */
+    static java.lang.String COMPASS_POSITIONING = "compass_positioning";
+
+    /** The box positioning. */
+    static java.lang.String BOX_POSITIONING = "box_positioning";
+
+    /** The card positioning. */
+    static java.lang.String CARD_POSITIONING = "card_positioning";
+
+    /** The grid bag positioning. */
+    static java.lang.String GRID_BAG_POSITIONING = "grid_bag_positioning";
 }
 

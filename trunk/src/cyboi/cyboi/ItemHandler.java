@@ -29,7 +29,7 @@ package cyboi;
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.27 $ $Date: 2003-08-09 15:34:58 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2003-08-10 22:34:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -54,7 +54,11 @@ class ItemHandler {
 
             java.lang.System.out.println("INFO: Create object: " + p0);
 
-            if (a.equals(Statics.INTEGER_PRIMITIVE)) {
+            if (a.equals(Statics.BOOLEAN_PRIMITIVE)) {
+
+                o = PrimitiveHandler.create_boolean_primitive(p0);
+
+            } else if (a.equals(Statics.INTEGER_PRIMITIVE)) {
 
                 o = PrimitiveHandler.create_integer_primitive(p0);
 
@@ -70,7 +74,7 @@ class ItemHandler {
 
                 o = PrimitiveHandler.create_string_primitive(p0);
 
-            } else if (a.equals(Statics.COMPLEX)) {
+            } else if (a.equals(Statics.CATEGORY)) {
 
                 o = new Item();
                 ItemHandler.initialize_item_containers(o);
@@ -100,7 +104,11 @@ class ItemHandler {
 
             java.lang.System.out.println("INFO: Destroy object: " + p1);
 
-            if (a.equals(Statics.INTEGER_PRIMITIVE)) {
+            if (a.equals(Statics.BOOLEAN_PRIMITIVE)) {
+
+                PrimitiveHandler.destroy_boolean_primitive(p0);
+
+            } else if (a.equals(Statics.INTEGER_PRIMITIVE)) {
 
                 PrimitiveHandler.destroy_integer_primitive(p0);
 
@@ -116,7 +124,7 @@ class ItemHandler {
 
                 PrimitiveHandler.destroy_string_primitive(p0);
 
-            } else if (a.equals(Statics.COMPLEX)) {
+            } else if (a.equals(Statics.CATEGORY)) {
 
                 ItemHandler.finalize_item(p0, p1);
                 ItemHandler.finalize_item_containers(p0);

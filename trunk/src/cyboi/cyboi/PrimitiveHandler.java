@@ -29,10 +29,54 @@ package cyboi;
  *
  * It contains procedures to create items of primitive type.
  *
- * @version $Revision: 1.11 $ $Date: 2003-07-27 22:50:34 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-08-10 22:34:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class PrimitiveHandler {
+
+    //
+    // Boolean primitive.
+    //
+
+    /**
+     * Creates a boolean primitive.
+     *
+     * @param s the boolean primitive as string
+     * @return the boolean primitive
+     */
+    static java.lang.Object create_boolean_primitive(java.lang.Object s) {
+
+        java.lang.Object p = null;
+
+        if (s != null) {
+            
+            if (!s.equals("")) {
+                
+                java.lang.System.out.println("INFO: Create boolean primitive.");
+                p = java.lang.Boolean.valueOf((java.lang.String) s);
+                
+            } else {
+                
+                java.lang.System.out.println("INFO: Could not create boolean primitive. The string is empty.");
+            }
+        
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not create boolean primitive. The string is null.");
+        }
+        
+        return p;
+    }
+
+    /**
+     * Destroys the boolean primitive.
+     *
+     * @param p the boolean primitive
+     */
+    static void destroy_boolean_primitive(java.lang.Object p) {
+
+        java.lang.System.out.println("INFO: Destroy boolean primitive.");
+    }
 
     //
     // Integer primitive.

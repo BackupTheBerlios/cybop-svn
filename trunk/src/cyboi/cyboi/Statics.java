@@ -25,95 +25,98 @@
 package cyboi;
 
 /**
- * This is the statics.<br><br>
+ * This is the statics.
  *
  * It contains all static data structures.
  *
- * @version $Revision: 1.5 $ $Date: 2003-07-25 23:47:57 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-08-10 22:34:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Statics {
 
     //
-    // Complex.
+    // Category.
     //
     
-    /** The complex. */
-    static final String COMPLEX = new String("complex");
+    /** The category. */
+    static java.lang.String CATEGORY = "category";
 
     //
     // Primitives.
     //
     
+    /** The boolean primitive. */
+    static java.lang.String BOOLEAN_PRIMITIVE = "boolean_primitive";
+
     /** The integer primitive. */
-    static final String INTEGER_PRIMITIVE = new String("integer_primitive");
+    static java.lang.String INTEGER_PRIMITIVE = "integer_primitive";
 
     /** The float primitive. */
-    static final String FLOAT_PRIMITIVE = new String("float_primitive");
+    static java.lang.String FLOAT_PRIMITIVE = "float_primitive";
 
     /** The char primitive. */
-    static final String CHAR_PRIMITIVE = new String("char_primitive");
+    static java.lang.String CHAR_PRIMITIVE = "char_primitive";
 
     /** The string primitive. */
-    static final String STRING_PRIMITIVE = new String("string_primitive");
+    static java.lang.String STRING_PRIMITIVE = "string_primitive";
 
     //
     // Applications.
     //
     
     /** The koffice kword application. */
-    static final String KWORD_APPLICATION = new String("kword_application");
+    static java.lang.String KWORD_APPLICATION = "kword_application";
 
     /** The open office writer application. */
-    static final String SXW_APPLICATION = new String("sxw_application");
+    static java.lang.String SXW_APPLICATION = "sxw_application";
 
     //
     // Audios.
     //
     
     /** The mp3 audio. */
-    static final String MP3_AUDIO = new String("mp3_audio");
+    static java.lang.String MP3_AUDIO = "mp3_audio";
 
     //
     // Images.
     //
     
     /** The jpeg image. */
-    static final String JPEG_IMAGE = new String("jpeg_image");
+    static java.lang.String JPEG_IMAGE = "jpeg_image";
 
     /** The gif image. */
-    static final String GIF_IMAGE = new String("gif_image");
+    static java.lang.String GIF_IMAGE = "gif_image";
 
     /** The bmp image. */
-    static final String BMP_IMAGE = new String("bmp_image");
+    static java.lang.String BMP_IMAGE = "bmp_image";
 
     //
     // Texts.
     //
     
     /** The sgml text. */
-    static final String SGML_TEXT = new String("sgml_text");
+    static java.lang.String SGML_TEXT = "sgml_text";
 
     /** The xml text. */
-    static final String XML_TEXT = new String("xml_text");
+    static java.lang.String XML_TEXT = "xml_text";
 
     /** The html text. */
-    static final String HTML_TEXT = new String("html_text");
+    static java.lang.String HTML_TEXT = "html_text";
 
     /** The rtf text. */
-    static final String RTF_TEXT = new String("rtf_text");
+    static java.lang.String RTF_TEXT = "rtf_text";
 
     /** The tex text. */
-    static final String TEX_TEXT = new String("tex_text");
+    static java.lang.String TEX_TEXT = "tex_text";
 
     //
     // Videos.
     //
     
     /** The mpeg video. */
-    static final String MPEG_VIDEO = new String("mpeg_video");
+    static java.lang.String MPEG_VIDEO = "mpeg_video";
 
     /** The quicktime video. */
-    static final String QUICKTIME_VIDEO = new String("quicktime_video");
+    static java.lang.String QUICKTIME_VIDEO = "quicktime_video";
 }
 
