@@ -29,7 +29,7 @@ package cyboi;
  *
  * It contains procedures to create items of primitive type.
  *
- * @version $Revision: 1.13 $ $Date: 2003-08-18 17:30:07 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-09-03 06:54:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class PrimitiveHandler {
@@ -118,6 +118,56 @@ class PrimitiveHandler {
      * @param p the integer primitive
      */
     static void destroy_integer_primitive(java.lang.Object p) {
+
+        LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Destroy integer primitive.");
+    }
+
+    //
+    // Triple integer primitive.
+    //
+
+    /**
+     * Creates a triple integer primitive.
+     *
+     * @param s the triple integer primitive as string
+     * @return the space
+     */
+/*??
+    static java.lang.Object create_triple_integer_primitive(java.lang.Object s) {
+
+        java.lang.Object p = null;
+
+        if (s != null) {
+            
+            if (!s.equals("")) {
+                
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Create triple integer primitive.");
+                int end = indexOf(",");
+                java.lang.String sub = substring(0, end - 1);
+                int val = java.lang.Integer.valueOf(sub);
+                java.lang.Object dim = new 
+                p = ;
+                
+            } else {
+                
+                LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Could not create triple integer primitive. The string is empty.");
+            }
+        
+        } else {
+            
+            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not create triple integer primitive. The string is null.");
+        }
+        
+        return p;
+    }
+
+    /**
+     * Destroys the triple integer primitive.
+     *
+     * @param p the triple integer primitive
+     */
+/*??
+    static void destroy_triple_integer_primitive(java.lang.Object p) {
 
         LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Destroy integer primitive.");
     }

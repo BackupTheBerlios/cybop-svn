@@ -33,7 +33,7 @@ package cyboi;
  * - send
  * - reset
  *
- * @version $Revision: 1.15 $ $Date: 2003-08-18 17:30:07 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-09-03 06:54:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -206,7 +206,12 @@ class SignalHandler {
 
                 } else if (a.equals(JavaEventHandler.MOUSE_CLICKED_EVENT)) {
 
+//??                    java.lang.Object a = SignalHandler.root;
+                    
                     SignalHandler.reset(s);
+
+//??                    s.predicate = SignalHandler.SEND_ACTION;
+//??                    s.object = ItemHandler.get_item_element("root.");
 
                 } else if (a.equals(SignalHandler.SHOW_SYSTEM_INFORMATION_ACTION)) {
                     
