@@ -1,0 +1,29 @@
+\documentclass[a4paper,12pt]{diplom}
+
+\setlength{\hoffset}{-1,3in} \setlength{\voffset}{-1in}
+\setlength{\oddsidemargin}{3,5cm} \setlength{\topmargin}{1,3cm}
+\setlength{\headwidth}{16,5cm} \setlength{\textwidth}{16,5cm}
+\setlength{\textheight}{23,2cm} \setlength{\headheight}{0cm}
+
+\def\heute{\number\day.\space\ifcase\month\or Januar\or Februar\or
+März\or April\or Mai\or Juni\or Juli\or August\or September\or Oktober\or
+November\or Dezember\fi\space\number\year}
+
+\def\Abgabetermin{02. Januar 2003}
+
+\renewcommand{\footnoterule}{\rule{5cm}{0.1mm}\vspace{0.3cm}}
+
+\input{Trennungsliste}
+
+\makeglossary
+
+\begin{document}
+
+\setFooter
+\input{Diplomarbeit_Titelblatt}
+\maketitle
+\input{copyright}
+\input{Diplomarbeit_TOC}
+\input{Diplomarbeit_Hauptteil}
+\input{Diplomarbeit_Anhang}
+\end{document}

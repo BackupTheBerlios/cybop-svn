@@ -1,0 +1,348 @@
+%Kapitel 1: Präsentationsschichten
+
+\chapter{Präsentationsschichten in modernen Anwendungen}
+    Die Notwendigkeit, Präsentationsschichten informationsverarbeitender Systeme der jeweiligen Aufgabenstellung
+    angemessen zu realisieren, stellte sich schon früh in der Geschichte der Softwaretechnik.
+    Letztlich kann diese Eigenschaft die Akzeptanz von Software in gehörigem Maße beeinflussen. Genügte es
+    in der Anfangszeit
+    des digitalen Zeitalters, mit lediglich kommandozeilenbasierten Programmen zu arbeiten, stellt gerade der
+    Softwarenutzer des 21. Jahrhunderts enorm hohe Ansprüche an Bedienbarkeit und Aussehen der
+    Oberfläche einer Anwendung. Dabei gehen eine harmonische und ansprechende Gestaltung sowie eine nutzerfreundliche
+    Steuerung Hand in Hand.\\
+    \section{Einordnung der Präsentationsschicht}
+        Innerhalb von Softwarearchitekturen sollte man zwischen mehreren logisch voneinander
+        getrennten Schichten unterscheiden. Im Allgemeinen wird eine Separation zwischen Datenhaltung und der
+        Repräsentation dieser Daten vorgenommen. So gibt es die sogenannte 3-Tier\footnote{Tier ({\it engl.}): Schicht}
+        Architektur,
+        welche in der untersten Schicht die Datenverwaltung über eine Datenbank realisiert und mit der zweiten, die auch als
+        Business-Tier bezeichnet wird, die
+        eigentliche Logik der Anwendung kapselt. Die oberste Schicht nimmt die visuelle Darstellung der Daten
+        vor. Diese letzte wird daher als Präsentations- oder Darstellungsschicht bezeichnet.\\
+        Die folgende Abbildung stellt eine solche typische Trennung grafisch dar.
+
+        %\includepicture{5}{eps/3-Tier.eps}{3-Tier}{3-Tier-Architektur}{3-Tier-Architektur}
+
+    \includepicture{8}{eps/3-tier.eps}{3-Tier-Architektur}{3-Tier-Architektur}{3-Tier-Architektur}
+
+        Die Datenverwaltung als sogenanntes {\it Back-End} des Systems
+        übernimmt das Speichern und Laden, also die Bereitstellung von Informationen. Sie trennt das
+        Datenbankmanagementsystem (DBMS) vom Rest der Anwendung. Über Programmierschnittstellen wie Open Database
+        Connectivity (ODBC) oder Java Database Connectivity (JDBC) erfolgt der Zugriff auf eine Datenbank und dadurch
+        auch die Transformation der unterschiedlichen Datenformate zwischen Persistenzmedium und Anwendung. Die physische
+        Datenstruktur kann von der des Anwendungskernes stark abweichen. Auch diesen Punkt des Daten-Mappings übernimmt
+        die Datenverwaltungsschicht.\\
+        Der Anwendungskern (Middle-Tier) als zweite Schicht realisiert die Fachlichkeit des Systems, d.h. die
+        Funktionalität entsprechend der jeweiligen Spezifikation. Dieser Teil sollte streng von den anderen beiden getrennt
+        sein, um nicht durch vermeidbare Abhängigkeiten die Konzepte der Wiederverwendbarkeit und Wartbarkeit zu untergraben.\\
+        Aufgabe der Präsentationsschicht ist die Visualisierung der durch die anderen Schichten aufbereiteten
+        Informationen und die Bereitstellung von Möglichkeiten zur Manipulation der dargestellten Daten.
+        Im Kontext dieser Diplomarbeit ist diese letzte Schicht als Benutzerschnittstelle oder {\it Front-End} einer Anwendung
+        besonders interessant.
+    \section{Arten von Benutzerschnittstellen}
+        Benutzerschnittstellen dienen der Steuerung von Softwaresystemen und der Anzeige von Ergebnissen bzw.
+        des aktuellen Systemzustands \cite{ch:swergonomie}. Zum einen sollte über diese Schnittstelle eine
+        umfassende unidirektionale Kontrolle des Programmes durch den Nutzer erfolgen. Zum anderen stellt
+        dieser Bereich einer Anwendung aber auch immer eine Form der Interaktion bereit. Es wird
+        nicht nur erwartet, daß das System die geforderte Funktionalität abarbeitet, sondern auch Meldungen über den
+        Status liefert und so den Nutzer über den aktuellen Stand der Arbeit informiert.
+        Bei der Betrachtung von Nutzerschnittstellen unterscheidet man im Wesentlichen zwischen folgenden drei Basistechnologien:
+        \begin{itemize}
+            \item zeichenbasierte Schnittstellen
+            \item sprachbasierte Schnittstellen
+            \item grafische Nutzerschnittstellen.
+        \end{itemize}
+
+        Auf diese drei Arten wird in den nächsten Abschnitten kurz eingegangen.
+        \subsection{Zeichenbasierte Schnittstellen}
+            Zeichenbasierte Schnittstellen sind sogenannte Kommandozeilenschnittstellen bzw. Textmasken, welche die Eingabe von
+            Befehlen mit Parametern erlauben. Sie sind nach der Verwendung von Lochkarten die ältesten Schnittstellen
+            zwischen Mensch und Computer.
+            Diese Interaktionsform stellt in gewisser Weise das Pendant zur
+            Eingabe über eine hierarchische Menüführung dar. Während der Nutzer über Menüs eine Auswahl der zum gegenwärtigen
+            Zeitpunkt möglichen Funktionen präsentiert bekommt, wird bei kommandozeilenbasierten Werkzeugen vorrausgesetzt,
+            dass die nötigen Befehle bekannt sind. Dieses Prinzip birgt Vor- und
+            Nachteile. Zunächst muss der Nutzer ein bestimmtes Maß an Syntax und Semantik der Befehle
+            beherrschen. Dementsprechend kann der Lernaufwand relativ hoch werden. \\
+            Auf der anderen Seite haben
+            sich solche Systeme gerade im Kontext zeitkritischer Eingaben bewährt. Ein Funktionsaufruf über die Maus in
+            möglicherweise verschachtelten Untermenüs wird nie so schnell ausgeführt werden können, wie die Eingabe weniger
+            Zeichen über die Tastatur. Zudem können häufig verwendete Funktionsabläufe in Skripten kaskadiert
+            und individuell zusammengestellt werden.
+            Kommandos sind parametrisierbar und erlauben auch auf diese Art und Weise ein hohes Maß an Flexibilität.
+            \\Zusammenfassend kann man sagen, daß diese Form einer Benutzeroberfläche trotz des Siegeszuges grafischer
+            Oberflächen nie verschwinden wird, da der enorme Geschwindigkeitsvorteil bei der Bedienung besonders
+            für geübte Anwender von Interesse ist.
+        \subsection{Sprachbasierte Schnittstellen}
+            Unter sprachbasierten Schnittstellen versteht man die automatische Erkennung von Sprache zur
+            Bedienung eines technischen Systems.
+            Diese recht junge Technologie wird zum Beispiel im Bereich automatischer
+            Telefonauskünfte genutzt und findet in PC-basierten Softwarelösungen bisher kaum Einsatz.\\
+            IBM's ViaVoice als eines der wenigen PC-Programme zur Erkennung gesprochener Worte hinterlegt diese
+            als Text in Editoren. Dies ist jedoch weniger eine Interaktionsform zwischen Mensch und Maschine,
+            als eine alternative Art, dem Computer Informationen zu übermitteln.\\
+            Sprachbasierte Schnittstellen stehen am Beginn ihrer Entwicklung, welche eng an den Fortschritt der
+            Neuronalen Netze gebunden ist. Durch kontinuierliches Training ist es möglich, speziellen
+            Neuronalen Netzen einen Wortschatz zuzuführen (Lernen des Netzes), auf den dann in der Abrufphase
+            zurückgegriffen werden kann. So soll neben Erkennung von gesprochenen Worten (Spracherkennung)
+            auch die Identifizierung des Sprechers (Sprechererkennung) möglich sein \cite{chrissy}.
+
+        \subsection{Grafische Nutzerschnittstellen}
+            Die wohl mittlerweile am weitesten verbreitete Art von Benutzerschnittstellen sind grafische
+            Oberflächen, die sich besonders im Rahmen von PC-Anwendungen etabliert haben. Die Interaktion
+            zwischen Mensch und Computer wird über vektorbasierte, grafische Komponenten vollzogen. Zu ihnen
+            gehören zum Beispiel Schalter (Buttons), Formulare oder Menüs.\\
+            Damit diese Form der Interaktion eine für den Benutzer optimale Schnittstelle eines Informationssystems
+            darstellt, müssen einige Kriterien beachtet werden, auf die im Folgenden eingegangen werden
+            soll.
+    \section{Ergonomische Gesichtspunkte}
+            Die rasante Entwicklung auf dem Gebiet der elektronischen Datenverarbeitung führte lange Zeit dazu,
+            viele Menschen nur als Teilnehmer der Innovationen zu betrachten, ohne wirklich auf die Bedürfnisse des
+            Anwenders einzugehen. Es genügte in dieser Zeit, sich lediglich die Funktionalität einer Anwendung zur reinen
+            Abarbeitung einer Aufgabe zu Nutze zumachen und diese weiter zu entwickeln. Im Laufe der Jahre wurde
+            Entwicklern und Anwendern bewußt, daß diese recht einseitige Sicht der Dinge nicht allein schnelles und
+            erfolgreiches Arbeiten mit dem Computer gewährleistet. Die Beachtung ''menschlicher Bedürfnisse'' gewann
+            zunehmend an Bedeutung.
+            Diese ergeben sich aus physiologischen sowie psychologischen
+            Gesetzmäßigkeiten, denen jeder Mensch unterworfen ist. Dazu zählen Besonderheiten in der visuellen menschlichen Wahrnehmung ebenso
+            wie die Lenkung der Aufmerksamkeit des Betrachters.
+            Außerdem ist der heutige Nutzer eines Informationssystems längst nicht mehr solch ein Experte auf dem Gebiet der
+            Informationstechnik wie es noch vor einigen Jahren der Fall war. Dennoch besitzt er unterschiedlichste
+            Fähig- und Fertigkeiten im Umgang mit rechnergestützter Datenverarbeitung, die ebenfalls beim
+            Software-Entwurf der Präsentationsschicht
+            beachtet werden müssen.\\
+            Beginnend mit einer Erläuterung, was ''Ergonomie'' im eigentlichen Sinne beinhaltet, wird in diesem Abschnitt auf
+            elementare Kriterien der Oberflächengestaltung eingegangen. Überlegungen, wie sie vor dem Entwurf einer
+            jeden Benutzerschnittstelle angestellt werden sollten. Am Ende dieses Abschnittes werden gerade
+            aktuelle Anforderungen an moderne Benutzerschnittstellen besprochen. Diese Betrachtung erweitert
+            die vorher dargelegten theoretischen Aspekte einer nutzerfreundlichen Gestaltung um erwünschte
+            praktische Eigenschaften grafischer Benutzerschnittstellen im medizinischen Umfeld von {\it Res Medicinae}.
+
+            \subsection{Ergonomie}
+                Der Begriff {\it Ergonomie} leitet sich aus den beiden griechischen Wörtern {\it Ergos} für Arbeit und
+                {\it Nomos}
+                für Recht oder Gesetz ab. Laut Duden steht das Wort {\it Ergonomie} für die Anpassung der Arbeit an den
+                Menschen.
+                Die Ergonomie einer Benutzerschnittstelle wird danach bewertet, wie gut sie den Benutzer bei seiner
+                Arbeit unterstützt. Softwarequalität misst man daher nicht mehr nur allein an Kriterien wie Korrektheit, Robustheit,
+                Wartbarkeit oder Erweiterbarkeit, sondern auch an Bedienbarkeit.
+            \subsection{Kriterien der Oberflächengestaltung \cite{ch:swergonomie}}
+                Das Aufgabe-Benutzer-Computer-Model (ABC-Model) stellt die Problematik des Entwurfs von
+                Benutzeroberflächen anschaulich dar.
+                \paragraph{Das ABC-Model}
+                    Das Dreiecksverhältnis zwischen Computer, Benutzer und der gestellten Aufgabe bestimmt eine Reihe
+                    von Regeln die aus diesen Beziehungen resultieren (vgl. Abb. \ref{ABC-Modell}).
+
+                    \includepicture{14}{eps/abc.eps}{ABC-Modell}{ABC-Modell}{ABC-Modell}
+
+                    Der Benutzer sollte sich mit der Aufgabe identifizieren können, wobei der Begriff der
+                    {\it Persönlichkeitsförderlichkeit} eine Rolle spielt. Um die Aufgabe entsprechend abarbeiten
+                    zu können, ist sicherzustellen, daß der Anwender auch der richtige Bearbeiter hierfür ist. Dies
+                    ist jedoch ein arbeitswissenschaftlicher Aspekt, auf den nicht weiter eingegangen werden soll.
+                    Im hier behandelten Kontext sind die Punkte {\it Handhabbarkeit} und {\it Angemessenheit} von größerer Bedeutung. \\
+                    Angemessenheit bedeutet, inwiefern die Benutzerschnittstelle überhaupt in der Lage ist, die an
+                    sie gestellte Aufgabe erledigen zu können. Dies setzt vorraus, daß die Aufgabe in
+                    ihrer Komplexität, Strukturierung und dem dafür notwendigen Ablauf bekannt sein muss. Die Frage:
+                    ''Was soll das System eigentlich leisten?'' muss beantwortet sein.\\
+                    Dem gegenüber steht die Handhabbarkeit des Systems. Es existieren unter Umständen die
+                    unterschiedlichsten Nutzergruppen bei -- und Kontexte in denen die Anwendung eingesetzt werden soll.
+                    Auch spielt eine Rolle, wie oft das System für diese Aufgabe herangezogen wird und welche
+                    Vorkenntnisse deren Benutzer mit derartigen Schnittstellen besitzen.
+                \paragraph{Grundsätze der Dialoggestaltung (nach DIN EN 29 241/Teil 10)}
+                Laut EG-Richtlinie 90/270/EWG ist für neu eingerichtete Bildschirmarbeitsplätze nur Software zulässig,
+                die nach den Grundsätzen der Ergonomie entwickelt wurde.
+                Dabei legt die DIN EN 29 241/Teil 10 (Grundsätze der Dialoggestaltung) die Eigenschaften eines ergonomisch
+                gestalteten Software-Systems dar und verfeinert dabei die Begriffe {\it Aufgabenangemessenheit} und
+                {\it Handhabbarkeit}.
+                \begin{itemize}
+                    \item{\bf Aufgabenangemessenheit}
+                    Der Anwender sollte durch das System effektive Unterstützung bei der Erledigung seiner Aufgaben
+                    erfahren und vor rein systembedingtem Zusatzaufwand bewahrt werden.
+                    \item{\bf Selbstbeschreibungsfähigkeit}
+                    Jeder Schritt des Nutzers sollte durch das System unmittelbar verständlich gemacht sein, oder
+                    auf Anfrage gemacht werden.
+                    \item{\bf Steuerbarkeit}
+                    Jeder einzelne Schritt des Nutzers im Arbeitsablauf sollte stets durch ihn beeinflußbar sein.
+                    Dem Anwender darf nie das Gefühl gegeben werden, die Kontrolle aus der Hand gegeben zu haben.
+                    \item{\bf Erwartungskonformität}
+                    Ein System ist erwartungskonform, wenn seine Handhabung den Kenntnissen und Erfahrungen des Nutzers, die er
+                    bezüglich der verwendeten Begriffe aus früheren Arbeitsabläufen gewonnen hat, sowie allgemein anerkannten
+                    Festlegungen entspricht.
+                    \item{\bf Fehlerrobustheit}
+                    Fehlerhafte Eingaben sollten nicht unnötig großen Korrekturaufwand nach sich ziehen, also den
+                    Arbeitsablauf nicht zusätzlich behindern.
+                    \item{\bf Individualisierbarkeit}
+                    Die Laufzeit-Anpassung des Systems an sich verändernde Nutzergewohnheiten oder -bedürfnisse
+                    macht das System individualisierbar -- und dadurch auch besser handhabbar.
+                    \item{\bf Lernförderlichkeit}
+                    Unterstützung und Anleitung durch das System während der Abarbeitung einer Aufgabe implizieren
+                    eine schnelle Einarbeitung.
+                \end{itemize}
+                Dies waren nun einige theoretische Betrachtungen, die beim Entwurf einer Mensch-Computer-Schnittstelle
+                zu beachten sind. In der Literatur werden noch weiterführende Gestaltungsgesetze, wie das Gesetz der
+                Nähe oder das Gesetz der Gleichartigkeit, sowie Regeln bezüglich Form- und Farbgebung \cite{sw-ergonomie}
+                angeführt.
+                Die korrekte Befolgung dieser Gesetzmäßigkeiten schafft ein harmonisches Aussehen der
+                Benutzeroberfläche und sorgt für eine schnelle Orientierung auf ihr. Auf
+                eine Ausführung dieser zumeist physiologischen und psychologischen Gestaltungsaspekte soll an dieser Stelle
+                jedoch verzichtet werden.\\
+
+
+
+                Der nächste Abschnitt des Kapitels zeigt einige Beispiele für die Anpassung der grafischen
+                Benutzerschnittstelle an konkrete Anforderung des Anwenders. Auf Basis der zugrundeliegenden Anforderungen
+                aus dem Analyse-Dokument (Pflichtenheft) des Projektes {\it Res Medicinae} werden erwünschte Eigenschaften der zukünftigen
+                Oberfläche dargelegt.
+            \subsection{Anforderungen an moderne Benutzerschnittstellen}
+                Zu Beginn der Entwicklung von {\it Res Medicinae} wurde von den damaligen Projektmitgliedern ein Analyse-Dokument
+                \cite{ch:analysedoc}
+                verfaßt, welches Konzepte und Prinzipien der zu realisierenden Software beinhaltet. Das Projektteam setzt
+                sich aus einer Reihe von praktizierenden Ärzten zusammen, die ihre Vorstellung von einem modernen klinischen
+                Informationssystem darlegten. Vor allem der Gestaltung der grafischen Benutzeroberfläche sowie der
+                zugehörigen Bedienung wurde große Bedeutung zugemessen.\\
+                Folgende Punkte wurden als besonders wichtig erachtet:
+                \paragraph{Programmsteuerung und ''Intelligenz'' des Systems}
+                    Der Aspekt der zeitlichen Effizienz ist bei klinischen Anwendungen besonders zu berücksichtigen.
+                    Eine Oberfläche mit möglichst wenigen Aktionen schnell bedienen zu können, ist neben der Ausfallsicherheit
+                    eine der Hauptanforderung an diese Systeme. In diesem Zusammenhang sollte die Steuerung komplett über die
+                    Tastatur möglich sein. Die in einem der vorangegangenen Abschnitte besprochenen Vorteile einer
+                    kommandozeilenbasierten Oberfläche verschmelzen hier mit den Eigenschaften einer grafischen
+                    Schnittstelle.\\
+                    Platzhalter in Form von Kurzbezeichnern sollen die Eingabe von immer wieder auftretenden
+                    Textpassagen umgehen. Ein Beispiel hierzu wäre die Eingabe der Zeichenfolge ''SHT'', die dann
+                    durch das System in ''Schädel-Hirn-Trauma'' umgewandelt werden würde.\\
+                    In ähnlicher Art und Weise existieren Ideen für das Laden von Medikamentendaten oder anderen
+                    praxisrelevanten Informationen: ein sogenanntes {\it Word-Wheel} auf Textfeldern prüft nach
+                    jedem eingegebenen Zeichen, ob der bisher eingegebene Wortbestandteil zu einer in der Datenbank
+                    existierenden Bezeichnung paßt und schlägt diese dann vor. Durch Drücken von Enter kann ein Begriff
+                    dadurch schon vor seiner vollständigen Eingabe per Tastatur ausgewählt werden.
+                     So kann ebenfalls ein gewisser Anteil
+                    von Eingabearbeit vermieden werden.
+
+                \paragraph{Konfiguration}
+                    Die Arbeit mit Textkürzeln bzw. Kurzbezeichnern impliziert auch ein hohes Maß an individueller
+                    Konfiguration. Abhängig von einem bestimmten Nutzer, von der Art der Arztpraxis sowie den gegebenen
+                    rechentechnischen Darstellungsmöglichkeiten sollte die Oberfläche in hohem Maße konfigurierbar
+                    gestaltet werden. Dies betrifft neben der Festlegung eigener {\it Shortkeys} besonders auch die
+                    Einstellung von Art und Umfang der permanent auf dem Bildschirm sichtbaren Informationen.
+                \paragraph{Strukturierung der Informationen}
+                    Patientendaten sollen in unterschiedlichen Sichten darstellbar sein. Baumartige Strukturen sowie
+                    Diagramme bergen Vorteile gegenüber der konventionellen Darstellung von Patientendaten
+                    in Form einer Liste. In einer hierarchisch aufgebauten Struktur kann entschieden werden, bis zu
+                    welchem Detailgrad Daten präsentiert werden sollen. Baumknoten ohne Relevanz bleiben
+                    geschlossen.\\
+                    In Balkendiagrammen können zeitliche Vorgänge, wie die Dauer einer Behandlung, optimal dargestellt werden.
+                    Auch dieser Fakt soll maßgeblich die Übersichtlichkeit der Daten erhöhen und so wiederum einer
+                    schnelleren Abarbeitung von Aufgaben entgegenkommen.
+                \paragraph{Optische Orientierungshilfen und permanent sichtbare Daten}
+                    Wichtige Informationen schnell zu finden, ist ein weiterer Punkt, dem moderne
+                    Benutzerschnittstellen im medizinischen Umfeld Rechnung tragen müssen. Einem
+                    Penicillin-Allergiker gegenüber zu sitzen, sollte dem behandelnden Mediziner durch angemessene und
+                    deutliche Anzeige dieser Information stets bewußt gemacht werden. Die permanente Darstellung von
+                    sensiblen, diagnose- und therapieentscheidenden Daten hat also eine hohe Priorität.
+
+
+
+    \section{Realisierung grafischer Nutzerschnittstellen}
+        Um die Betrachtungen zu Präsentationsschichten abzurunden, soll zuletzt noch auf einige Technologien zur
+        Realisierung dieser Schnittstellen eingegangen werden.\\
+        Genauso vielgestaltig wie das Aussehen, sind auch die Möglichkeiten der technischen Umsetzung grafischer
+        Oberflächen, je nach Umfeld, Zweck und technologischer Infrastruktur. Betrachtet man allein
+        PC-basierte Anwendungen, stößt man auf eine Reihe von Technologien, die bei der Entwicklung von modernen
+        Softwaresystemen nicht mehr weg zu denken sind. An dieser Stelle werden nur kurz einige der populärsten
+        Realisierungsmöglichkeiten besprochen. Eine Separation wird dabei in Standalone Client-Server und
+        verteilte bzw. web-basierte Systeme vorgenommen. Dennoch ist diese Trennung in sich heterogen, da neben
+        speziellen betriebssystemspezifischen Oberflächen, die einem de-facto-Standard genügen,
+        auch auf Programmierschnittstellen zur Realisierung derselben eingegangen wird.
+        Diese Betrachtung erhebt keinen Anspruch auf Vollständigkeit.
+        \subsection{Standalone Client-Server Systeme}
+            {\bf Motif:}
+                Dies ist eine grafische Benutzeroberfläche, die auf X-Windows\footnote{X-Windows ist ein vom
+                Massachusetts Institute of Technology (MIT) entwickeltes netzwerkfähiges Fenstersystem
+                auf Client-Server-Basis.} aufbaut und durch die Open Software
+                Foundation festgelegt wurde. Kern ist der Motif Window Manager, zu dessen Aufgaben die Zuordnung des
+                Eingabefokus, der Aufbau von Farbtabellen, Kontrolle der Position und Größe von Fenstern sowie die
+                Bereitstellung eines Systemmenüs zählen. Motif findet unter Unix breite Anwendung.
+            \par
+            {\bf Macintosh Finder:}
+                Die Computer der Macintosh-Familie werden ausschließlich von der Firma Apple Computer hergestellt.
+                Das Desktop-System {\it Finder} war eines der ersten grafischen Oberflächen und führte die Fenstertechnik
+                noch vor Windows ein.
+            \par
+            {\bf Microsoft Foundation Classes (MFC):}
+                MFC bezeichnet eine Klassenbibliothek in C++, die heute von nahezu allen größeren Windows-Programmen
+                genutzt wird. Sie stellt eine Programmierschnittstelle bereit, die neben der Implementation von Microsoft-Standard-Konzepten
+                wie COM/DCOM auch die Umsetzung von grafischen Nutzeroberfächen im Windows
+                Look-and-Feel\footnote{Look-and-Feel bezeichnet die Gesamtheit aller Gestaltungsmittel (Look) entsprechend vorgegebener Richtlinien (Style Guides)
+                sowie die zugehörigen Steuermechanismen (Feel) zur Realisierung einer grafischen Benutzeroberfläche.}
+                ermöglicht
+            \par
+            {\bf K-Desktop (KDE):}
+                KDE ist eine der am häufigsten verwendeten grafischen Desktop-Umgebung für Linux. Es ist frei
+                erhältlich (Software und Quelltext), basiert auf X-Windows und arbeitet mit einem Window Manager.
+            \par
+            {\bf Java-AWT:}
+                Das mit Java 1.0 entstandene {\it Abstract Window Toolkit} für die Programmierung grafischer Bedienelemente besitzt
+                nur bedingte Möglichkeiten zur Umsetzung moderner Nutzeroberfächen. Zudem ist AWT nicht unabhängig
+                von dem zugrundeliegenden Betriebssystem.
+                Dieser Vorläufer von Swing findet heute hauptsächlich bei der Implementation von Applets Anwendung.
+            \par
+            {\bf Java-Swing:}
+                Mit Version 1.2 wurde Swing in den Standardumfang  des Java Development Kit (JDK) aufgenommen. Unabhängigkeit vom
+                jeweiligen Betriebssystem sowie die Anpassung an beliebige Look-and-Feel-Varianten heben sich als
+                klare Vorteile dieser Bibliothek hervor.
+                Neue grafische Komponenten wie Tabellen, Statusanzeigen sowie Trees zur Darstellung
+                baumartiger Datenstrukturen ermöglichen die Erstellung moderner Oberflächen. Java Swing wird zur
+                Programmierung von {\it Res Medicinae} verwendet.
+
+        \subsection{Web-basierte Systeme}
+
+            {\bf Statisches HTML:}
+                Die Hyper Text Markup Language bezeichnet ein Datenformat zur Darstellung von Informationen
+                über das Internet. Statische HTML-Seiten verändern ihr Aussehen nicht. Sie
+                werden durch einen Webserver mithilfe des HTTP-Protokolls an den Klienten gesandt und in dessen Bowser
+                dargestellt. Mit reinem HTML, das lediglich zur Darstellung von Text entwickelt wurde, besitzt man
+                lediglich bedingte
+                Möglichkeiten, grafisch anspruchsvolle Internetseiten zu erstellen.
+
+            {\bf Applets:}
+                Diese kleinen Java-Programme können in Webseiten integriert werden. Java-Applets werden von jedem Web-Browser
+                ausgeführt, der in der Lage ist, den Java-Bytecode\footnote{Java-Bytecode ist ein plattformunabhängiger Code,
+                der vom Java Compiler erstellt und vom Java Interpreter (Laufzeitumgebung) ausgeführt wird. } zu interpretieren und in Maschinensprache
+                umzusetzen.
+                Durch Applets erweitert man die Multimediafähigkeit von Internetseiten und die Möglichkeit der
+                Interaktion mit ihnen.
+
+            {\bf Servlets:}
+                Während Applets clientseitig zum Einsatz kommen, befinden sich Servlets auf dem Web-Server. Sie
+                bearbeiten Anfragen des Klienten und generieren als Antwort darauf dynamischen HTML-Code. Meist
+                greifen Servlets auf eine Datenbank zu und können zudem die gesamte Breite der Java-Funktionalität nutzen.
+
+            {\bf Active Server Pages (ASP):}
+                Durch Einbinden von Scripten (VB-Script, J-Script) werden HTML-Seiten dynamisch erzeugt. Da die Skripte in ASP- Seiten (*.asp) durch den Server abgearbeitet werden,
+                kann jeder Browser mit ASP arbeiten - unabhängig davon, welche Skriptsprache er unterstützt.
+
+            {\bf Java Server Pages (JSP):}
+                Java Server Pages erzeugen auf Template-Basis ähnlich den Servlets dynamisches HTML und  trennen dabei
+                die Code-Abschnitte von HTML und Java. Sie ähneln in ihrer Struktur stark den ASP, benutzen statt
+                einer Script-Sprache jedoch Java.
+
+            {\bf XML/XSL:}
+                Die Extensible Markup Language
+                bietet im Gegensatz zu reinem HTML die Möglichkeit, Informationen unabhängig von ihrer konkreten
+                Präsentation zu betrachten. XML-Dateien enthalten lediglich die darzustellenden Daten; die
+                entsprechende Formatierung dieser wird durch XSL (Extensible Style Language) vorgenommen. Durch
+                simples Austauschen von XSL-Stildateien sind unterschiedlichste Präsentationen ein und desselben
+                XML-Datensatzes in verschiedenen Ausgabeformaten, wie zum Beispiel HTML oder PDF, möglich.
+
+            {\bf PHP Hypertext Preprozessor (PHP):}
+                Diese Scriptsprache für Webserver ermöglicht es relativ schnell und mit wenig Aufwand, dynamische
+                Internetseiten für Multimedia oder E-Commerce-Anwendungen zu realisieren. PHP wird serverseitig in
+                HTML eingebettet und erlaubt standardmäßig den Zugriff auf eine Reihe von SQL-Datenbanken.
+                Die Syntax von PHP ist der von C sehr ähnlich.
+
+            {\bf Flash:}
+                Dieses von Macromedia eingeführte Format gilt in Fachkreisen längst als Standardformat für
+                vektorbasierende Grafiken. Animationen, Sound und eine Vielzahl unterschiedlicher
+                Interaktionsformen bieten dem Webdesigner ein breites Spektrum an Möglichkeiten der Gestaltung
+                web-basierter Oberflächen. Für die Verwendung von Flash in einem Browser wird ein Plugin
+                benötigt.

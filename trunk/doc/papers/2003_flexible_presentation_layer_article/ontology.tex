@@ -1,0 +1,25 @@
+\section{Ontologies}
+
+An ontology is a catalogue of types that are depending on each other in
+hierarchical order. It is a formal specification concerning a particular
+objective. CYBOP consists of three such ontologies:
+\begin{itemize}
+    \item{Basic Ontology}
+    \item{Model Ontology}
+    \item{System Ontology}
+\end{itemize}
+
+Figure \ref{Model Ontology} shows the model ontology. The layer super types
+are {\tt Record}, {\tt Unit}, {\tt Heading} and {\tt Description}.
+These classes are super types of all classes in a particular ontological level.\\
+The right side shows a concrete implementation of the model ontology --
+the \emph{Electronic Health Record} \cite{openehr}. This data structure
+contains all information concerning a particular patient. The figure shows
+{\tt Problem} types in level {\tt Unit}. These consist of episodes containing
+instances of {\tt PartialContact}. In level {\tt Heading}, the structural
+elements of a partial contact can be found -- {\tt Subjective}, {\tt Objective},
+{\tt Assessment} and {\tt Plan}. Therapeutical issues are placed in level
+{\tt Description} -- such as {\tt Medication} with particular dose.\\
+\includepicture{8}{eps/ModelOntologyUML.eps}{Model Ontology}{Model Ontology}{Model Ontology}{Model Ontology}
+As shown, the concept of ontology can be used to organize data structures in
+a hierarchical order by defining logical layers with super types.
