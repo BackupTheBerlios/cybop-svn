@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.45 $ $Date: 2004-11-23 13:34:43 $ $Author: rholzmueller $
+ * @version $Revision: 1.46 $ $Date: 2004-11-30 15:34:16 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -354,6 +354,7 @@ int main(int p0, char** p1) {
                 sc, scc);
             log_message_debug( "create destination model" );
 
+            // test_knowledge_model( (void*) &dm, (void*) &dmc );
             // CAUTION! Do not create destination details!
             // It is not needed for the startup signal.
 
@@ -361,12 +362,17 @@ int main(int p0, char** p1) {
             // Startup signal.
             //
 
+            // get the new main signal id
+            int main_sig_id = 0;
+            get_new_main_signal_id( pp_m, p_mc, &main_sig_id );
+            
             // Add startup signal to signal memory.
             set_signal( pp_m, p_mc, p_ms,   //memory
                         (void*) &da, (void*) &dac,              //dest abtsraction
                         (void*) &dm, (void*) &dmc,              //dest model
                         (void*) &dd, (void*) &ddc,              //dest details
-                        (void*) &NORMAL_PRIORITY);
+                        (void*) &NORMAL_PRIORITY,
+                        (void*) &main_sig_id );
             log_message_debug( "set start signals" );
 
             //

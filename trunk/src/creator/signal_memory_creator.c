@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.2 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-11-30 15:18:22 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,7 +49,7 @@ void create_signal_memory(void* p0, const void* p1) {
     // Create signal memory.
     create_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);
 
-    // The abstractions, models, details, priorities.
+    // The abstractions, models, details, priorities, main siganl id.
     void* sa = NULL_POINTER;
     void* sac = NULL_POINTER;
     void* sm = NULL_POINTER;
@@ -57,6 +57,7 @@ void create_signal_memory(void* p0, const void* p1) {
     void* sd = NULL_POINTER;
     void* sdc = NULL_POINTER;
     void* sp = NULL_POINTER;
+    void* msid = NULL_POINTER;
 
     // Create abstractions, models, details, priorities.
     create_array((void*) &sa, (void*) &POINTER_ARRAY, p1);
@@ -66,6 +67,7 @@ void create_signal_memory(void* p0, const void* p1) {
     create_array((void*) &sd, (void*) &POINTER_ARRAY, p1);
     create_array((void*) &sdc, (void*) &INTEGER_ARRAY, p1);
     create_array((void*) &sp, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &msid, (void*) &INTEGER_ARRAY, p1);
 
     // Set abstractions, models, details, priorities.
     // CAUTION! Use ascending order, as compared to destruction!
@@ -76,6 +78,7 @@ void create_signal_memory(void* p0, const void* p1) {
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &sd);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &sdc);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &sp);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &msid);
 }
 
 /**
@@ -88,7 +91,7 @@ void destroy_signal_memory(void* p0, const void* p1) {
 
     log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_SIGNAL_MEMORY_MESSAGE, (void*) &DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT);
 
-    // The abstractions, models, details, priorities.
+    // The abstractions, models, details, priorities, main signal ids.
     void* sa = NULL_POINTER;
     void* sac = NULL_POINTER;
     void* sm = NULL_POINTER;
@@ -96,6 +99,7 @@ void destroy_signal_memory(void* p0, const void* p1) {
     void* sd = NULL_POINTER;
     void* sdc = NULL_POINTER;
     void* sp = NULL_POINTER;
+    void* ids = NULL_POINTER;
 
 /*??
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy all signals left in signal memory.");
@@ -132,6 +136,7 @@ void destroy_signal_memory(void* p0, const void* p1) {
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_INDEX, (void*) &sd);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_DETAILS_COUNTS_INDEX, (void*) &sdc);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_PRIORITIES_INDEX, (void*) &sp);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX, (void*) &ids);
 
     // Remove abstractions, models, details, priorities.
     // CAUTION! Use descending order, as compared to creation!
@@ -142,6 +147,7 @@ void destroy_signal_memory(void* p0, const void* p1) {
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_MODELS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_ABSTRACTIONS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_ABSTRACTIONS_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_MAIN_SIGNAL_ID_INDEX);
 
     // Destroy abstractions, models, details, priorities.
     destroy_array((void*) &sa, (void*) &POINTER_ARRAY, p1);
@@ -151,6 +157,7 @@ void destroy_signal_memory(void* p0, const void* p1) {
     destroy_array((void*) &sd, (void*) &POINTER_ARRAY, p1);
     destroy_array((void*) &sdc, (void*) &INTEGER_ARRAY, p1);
     destroy_array((void*) &sp, (void*) &INTEGER_ARRAY, p1);
+    destroy_array((void*) &ids, (void*) &INTEGER_ARRAY, p1);
 
     // Destroy signal memory.
     destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);

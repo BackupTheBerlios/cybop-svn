@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2004-11-23 13:35:12 $ $Author: rholzmueller $
+ * @version $Revision: 1.11 $ $Date: 2004-11-30 15:23:13 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -95,14 +95,14 @@ void activate_internals( void** pp_internals ) {
 
     // get the active flag for tcp socket
     get_internal( pp_internals, (void*) &p_tcp_socket_active,
-                  (void*) &internal_type, 
+                  (void*) &internal_type,
                   (void*) &INTERNAL_TCPSOCKET_ACTIVE_INDEX );
 
     if ( *p_tcp_socket_active == 1) {
 
-        activate_tcp_socket( pp_internals );
+        //activate_tcp_socket( pp_internals );
     }
-
+}
 
 /*??
     //
@@ -123,7 +123,7 @@ void activate_internals( void** pp_internals ) {
 
     init_x();
 */
-}
+
 
 /**
  * Waits for signals.
@@ -139,13 +139,13 @@ void activate_internals( void** pp_internals ) {
  * @param p8 the pointer internals
  * @param p9 the double internals
  */
-void wait( void** pp_internal ) {
+void  wait( void** pp_internal ) {
 
     // activate internal mechanisms for signal reception
     activate_internals( pp_internal );
-    
+
     int internal_type = 0;
-    
+
     //separated paramter from the internals
     void** pp_sig_memory = NULL_POINTER;
     void* p_sig_memory_count = NULL_POINTER;
@@ -154,27 +154,27 @@ void wait( void** pp_internal ) {
     void** pp_knowledge = NULL_POINTER;
     void* p_knowledge_count = NULL_POINTER;
     void* p_knowledge_size = NULL_POINTER;
-    
-    get_internal( pp_internal, (void*) &pp_sig_memory,  
+
+    get_internal( pp_internal, (void*) &pp_sig_memory,
                   (void*) &internal_type,
                   (void*) &INTERNAL_SIGNAL_MEMORY_INDEX );
-    get_internal( pp_internal, (void*) &p_sig_memory_count,  
+    get_internal( pp_internal, (void*) &p_sig_memory_count,
                   (void*) &internal_type,
                   (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX );
-    get_internal( pp_internal, (void*) &p_sig_memory_size,  
+    get_internal( pp_internal, (void*) &p_sig_memory_size,
                   (void*) &internal_type,
                   (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX );
 
-    get_internal( pp_internal, (void*) &pp_knowledge,  
+    get_internal( pp_internal, (void*) &pp_knowledge,
               (void*) &internal_type,
               (void*) &INTERNAL_KNOWLEDGE_MODEL_INDEX );
-    get_internal( pp_internal, (void*) &p_knowledge_count,  
+    get_internal( pp_internal, (void*) &p_knowledge_count,
               (void*) &internal_type,
               (void*) &INTERNAL_KNOWLEDGE_MODEL_COUNT_INDEX );
-    get_internal( pp_internal, (void*) &p_knowledge_size,  
+    get_internal( pp_internal, (void*) &p_knowledge_size,
               (void*) &internal_type,
               (void*) &INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX );
-                      
+
     // The shutdown flag.
     int f = 0;
 
@@ -189,6 +189,8 @@ void wait( void** pp_internal ) {
     int pc = 0;
     // The priority.
     int pr = NORMAL_PRIORITY;
+    // The main signal id
+    int main_sig_id = 0;
 
     // The highest priority index.
     int i = -1;
@@ -208,22 +210,31 @@ void wait( void** pp_internal ) {
             // Leave loop if the shutdown flag was set.
             break;
         }
-        
-        sleep(2);
+
+        sleep(1);
+
+        //test_knowledge_model( pp_knowledge, p_knowledge_count );
 
         // Get index of the top priority signal.
-        get_highest_priority_index( pp_sig_memory, 
-                                    p_sig_memory_count, 
+        get_highest_priority_index( pp_sig_memory,
+                                    p_sig_memory_count,
                                     (void*) &i );
+
+        //fals kein Signal anliegt, so auf eingabe von Web warten
+        if (i<0) {
+
+            run_tcp_socket( pp_internal );
+        }
 
         if (i >= 0) {
 
             // Get signal.
-            get_signal( pp_sig_memory, p_sig_memory_count, 
-                        (void*) &i, 
+            get_signal( pp_sig_memory, p_sig_memory_count,
+                        (void*) &i,
                         (void*) &a, (void*) &ac,
-                        (void*) &s, (void*) &sc, 
-                        (void*) &p, (void*) &pc, (void*) &pr );
+                        (void*) &s, (void*) &sc,
+                        (void*) &p, (void*) &pc,
+                        (void*) &pr, (void*) &main_sig_id );
 
     fprintf(stderr, "wait i: %i\n", i);
     fprintf(stderr, "wait a: %s\n", a);
@@ -233,13 +244,14 @@ void wait( void** pp_internal ) {
     fprintf(stderr, "wait p: %i\n", p);
     fprintf(stderr, "wait pc: %i\n", pc);
     fprintf(stderr, "wait pr: %i\n", pr);
+    fprintf(stderr, "wait id: %i\n", main_sig_id);
 
     fprintf(stderr, "wait knowledge model: %s\n", "");
 //??    test_knowledge_model(p3, p4);
 
             // Remove signal.
-            remove_signal( pp_sig_memory, p_sig_memory_count, 
-                           p_sig_memory_size, 
+            remove_signal( pp_sig_memory, p_sig_memory_count,
+                           p_sig_memory_size,
                            (void*) &i);
 
             // CAUTION! Do NOT destroy signal here!
@@ -257,8 +269,9 @@ void wait( void** pp_internal ) {
                 if (r == 1) {
 
                     handle_compound_signal(
-                        (void*) &s, (void*) &sc, (void*) &pr, 
-                        (void*) pp_sig_memory, 
+                        (void*) &s, (void*) &sc, (void*) &pr,
+                        (void*) &main_sig_id,
+                        (void*) pp_sig_memory,
                         (void*) p_sig_memory_count, (void*) p_sig_memory_size );
 
                     d = 1;

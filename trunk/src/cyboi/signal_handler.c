@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2004-11-16 16:50:31 $ $Author: rholzmueller $
+ * @version $Revision: 1.9 $ $Date: 2004-11-30 15:23:23 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,11 +44,13 @@
  * @param p0 the signal
  * @param p1 the signal count
  * @param p2 the priority
+ * @param main_sig_id the main signal id
  * @param p3 the signal memory
  * @param p4 the signal memory count
  * @param p5 the signal memory size
  */
 void handle_compound_signal(const void* p0, const void* p1, const void* p2,
+    int* main_sig_id,
     void* p3, void* p4, void* p5) {
 
     if (p1 != NULL_POINTER) {
@@ -108,7 +110,7 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
             // signals. The part signals cannot have higher / lower priority
             // than their original whole signal.)
             set_signal(p3, p4, p5, (void*) &a, (void*) &ac,
-                (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, p2);
+                (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, p2, main_sig_id);
 
             // Reset abstraction.
             a = NULL_POINTER;

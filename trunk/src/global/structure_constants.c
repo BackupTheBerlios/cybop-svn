@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.4 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-11-30 15:27:37 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -199,7 +199,7 @@ static const int DETAILS_SIZES_INDEX = 11;
 static const int SIGNAL_MEMORY_RESIZE_FACTOR = 2;
 
 /** The signal memory count. */
-static const int SIGNAL_MEMORY_COUNT = 7;
+static const int SIGNAL_MEMORY_COUNT = 8;
 
 /** The signals abstractions index. */
 static const int SIGNALS_ABSTRACTIONS_INDEX = 0;
@@ -221,6 +221,10 @@ static const int SIGNALS_DETAILS_COUNTS_INDEX = 5;
 
 /** The signals priorities index. */
 static const int SIGNALS_PRIORITIES_INDEX = 6;
+
+/** The main signal ids index. */
+static const int SIGNALS_MAIN_SIGNAL_ID_INDEX = 7;
+
 
 //
 // Xml tag.
