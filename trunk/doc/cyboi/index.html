@@ -18,7 +18,7 @@
         http://www.cybop.net
         - Cybernetics Oriented Programming -
     /-->
-    <meta name="date" content="$Revision: 1.1 $ $Date: 2003-09-11 14:14:04 $ $Author: christian $">
+    <meta name="date" content="$Revision: 1.2 $ $Date: 2003-09-12 14:52:09 $ $Author: christian $">
     <meta name="author" content="Christian Heller <christian.heller@tuxtax.de>">
     <!-- Forces web server to reload pages every 30 days and not to take it from a proxy. -->
     <meta http-equiv="expires" content="2592000"/>
@@ -44,19 +44,20 @@
                 the CYBOL language.
                 It can be seen as connection between the computer hardware and the
                 abstract data of CYBOL.
-                A compilation of CYBOI is not necessary to change and run CYBOL systems.
+                A compilation is not necessary to change and run CYBOL systems.
             </p>
             <p>
-                One of the biggest disadvantages and mistakes in current programming languages
-                is the inheritance and use of multiple kinds of containers and event loops.
-                In CYBOI, there is only one static structure, the <i>array</i>, and
-                only one global signal/ event <i>waiting loop</i>.
+                One mistake in current programming languages is the inheritance and use
+                of multiple kinds of containers and the wrong forwarding of signals/ events
+                causing unnecessary dependencies.
+                In CYBOI, there is only one static and only one dynamic structure.
             </p>
             <p>
                 CYBOI was originally written in Java using the Swing graphics toolkit.
                 The next step will be to rewrite it in pure C so that CYBOI and CYBOL can
                 be added as truely free software to the Debian GNU/ Linux Distribution.
-                The only difficulty here is the choice of an appropriate graphics toolkit.
+                The object oriented concepts are not lost hereby; CYBOL contains them.
+                The only difficulty is the choice of an appropriate graphics toolkit.
                 Temporarily, Gtk, Qt or wxWindows may be used. In the long run,
                 however, CYBOI will have to provide its own graphics drawing routines
                 to make full use of the hierarchical structures encoded in CYBOL.
