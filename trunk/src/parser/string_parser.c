@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-02-25 01:35:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,7 +61,7 @@ void parse_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
                     if (*dc >= 0) {
 
-    //??                log_message((void*) &INFO_LOG_LEVEL, (void*) &INITIALIZE_STRING_MESSAGE, (void*) &INITIALIZE_STRING_MESSAGE_COUNT);
+                        log_message_debug("Parse string.");
 
                         // The new destination string size.
                         // (Not exactly the size, but the destination string index
@@ -88,32 +88,32 @@ void parse_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
                         } else {
 
-//??                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The index exceeds the size.");
+                            log_message_debug("Could not parse string. The destination count exceeds the size.");
                         }
 
                     } else {
 
-//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The index is negativ.");
+                        log_message_debug("Could not parse string. The destination count is negative.");
                     }
 
                 } else {
 
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE_COUNT);
+                    log_message_debug("Could not parse string. The destination is null.");
                 }
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE_COUNT);
+                log_message_debug("Could not parse string. The destination count is null.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_SIZE_IS_NULL_MESSAGE_COUNT);
+            log_message_debug("Could not parse string. The destination size is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message_debug("Could not parse string. The source count is null.");
     }
 }
 

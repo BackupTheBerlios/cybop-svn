@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-02-25 01:35:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 #include "../array/array.c"
 #include "../creator/integer_creator.c"
 #include "../global/constant.c"
+#include "../global/integer_constants.c"
 #include "../global/log_constants.c"
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
@@ -62,7 +63,7 @@ void parse_boolean(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 
             int** d = (int**) p0;
 
-//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Parse boolean.");
+            log_message_debug("Parse boolean.");
 
             // The comparison result.
             int r = 0;
@@ -73,8 +74,8 @@ void parse_boolean(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 
                 if (r == 1) {
 
-                    // Set boolean to 'true'.
-                    **d = 1;
+                    // Set boolean value to 'true'.
+                    set_array_elements(*d, (void*) INTEGER_VALUE_INDEX, (void*) &ONE_NUMBER, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
                 }
             }
 
@@ -108,7 +109,7 @@ void serialize_boolean(void* p0, void* p1, void* p2, const void* p3, const void*
 
             int* dc = (int*) p1;
 
-//??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Serialize boolean.");
+            log_message_debug("Serialize boolean.");
 
             if (*s == 1) {
 

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-02-24 17:01:04 $ $Author: rholzmueller $
+ * @version $Revision: 1.10 $ $Date: 2005-02-25 01:35:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -66,44 +66,55 @@ void activate_input_output(void* p0) {
 
     // The activation flag.
     void** f = POINTER_NULL_POINTER;
+    // The comparison result.
+    int r = 0;
 
-    // UNIX socket.
-    f = POINTER_NULL_POINTER;
+    // UNIX socket server.
     get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
-    if (f!= NULL_POINTER) {
-       if (*f!=NULL_POINTER) {
-            if (*((int*)*f) == 1) {
-        
-                receive_unix_socket(p0);
-            }
-       }
+    if (f != NULL_POINTER) {
+
+        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
+
+        if (r == 1) {
+
+            receive_unix_socket(p0);
+            r = 0;
+        }
+
+        f = POINTER_NULL_POINTER;
     }
 
-    // TCP socket.
-    f = POINTER_NULL_POINTER;
+    // TCP socket server.
     get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
-    if (f!= NULL_POINTER) {
-       if (*f!=NULL_POINTER) {
-            if (*((int*)*f) == 1) {
-        
-                //receive_tcp_socket(p0);
-            }
-       }
+    if (f != NULL_POINTER) {
+
+        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
+
+        if (r == 1) {
+
+//??            receive_tcp_socket(p0);
+            r = 0;
+        }
+
+        f = POINTER_NULL_POINTER;
     }
 
-    // X windows.
-    f = POINTER_NULL_POINTER;
+    // X windows server.
     get_array_elements(p0, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
-    if (f!= NULL_POINTER) {
-       if (*f!=NULL_POINTER) {
-            if (*((int*)*f) == 1) {
-        
-                receive_x_windows(p0);
-            }
-       }
+    if (f != NULL_POINTER) {
+
+        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
+
+        if (r == 1) {
+
+            receive_x_windows(p0);
+            r = 0;
+        }
+
+        f = POINTER_NULL_POINTER;
     }
 
 //?? TEST only!

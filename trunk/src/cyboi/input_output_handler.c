@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-02-24 17:01:14 $ $Author: rholzmueller $
+ * @version $Revision: 1.11 $ $Date: 2005-02-25 01:35:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,44 +52,55 @@ void startup_input_output(void* p0) {
 
     // The activation flag.
     void** f = POINTER_NULL_POINTER;
+    // The comparison result.
+    int r = 0;
 
-    // Unix server socket.
-    f = POINTER_NULL_POINTER;
+    // UNIX socket server.
     get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
-    if (f!= NULL_POINTER) {
-       if (*f!=NULL_POINTER) {
-            if (*((int*)*f) == 1) {
-        
-                create_unix_server_socket(p0);
-            }
-       }
+    if (f != NULL_POINTER) {
+
+        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
+
+        if (r == 1) {
+
+            create_unix_server_socket(p0);
+            r = 0;
+        }
+
+        f = POINTER_NULL_POINTER;
     }
 
-    // Tcp server socket.
-    f = POINTER_NULL_POINTER;
+    // TCP socket server.
     get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
-    if (f!= NULL_POINTER) {
-       if (*f!=NULL_POINTER) {
-            if (*((int*)*f) == 1) {
-        
-                create_tcp_server_socket(p0);
-            }
-       }
+    if (f != NULL_POINTER) {
+
+        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
+
+        if (r == 1) {
+
+            create_tcp_server_socket(p0);
+            r = 0;
+        }
+
+        f = POINTER_NULL_POINTER;
     }
 
     // X windows server.
-    f = POINTER_NULL_POINTER;
     get_array_elements(p0, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
-    if (f!= NULL_POINTER) {
-       if (*f!=NULL_POINTER) {
-            if (*((int*)*f) == 1) {
-        
-        //??        create_x_windows_server(p0);
-            }
-       }
+    if (f != NULL_POINTER) {
+
+        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
+
+        if (r == 1) {
+
+//??            create_x_windows_server(p0);
+            r = 0;
+        }
+
+        f = POINTER_NULL_POINTER;
     }
 }
 
@@ -108,34 +119,56 @@ void shutdown_input_output(void* p0) {
     log_message_debug("Shutdown input output.");
 
     // The activation flag.
-    int* f = INTEGER_NULL_POINTER;
+    void** f = POINTER_NULL_POINTER;
+    // The comparison result.
+    int r = 0;
 
-    // X windows server.
-    f = INTEGER_NULL_POINTER;
-    get_array_elements(p0, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
-
-    if (*f == 1) {
-
-//??        destroy_x_windows_server(p0);
-
-    }
-
-    // Tcp server socket.
-    f = INTEGER_NULL_POINTER;
-    get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
-
-    if (*f == 1) {
-
-        destroy_tcp_server_socket(p0);
-    }
-
-    // Unix server socket.
-    f = INTEGER_NULL_POINTER;
+    // UNIX socket server.
     get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
-    if (*f == 1) {
+    if (f != NULL_POINTER) {
 
-        destroy_unix_server_socket(p0);
+        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
+
+        if (r == 1) {
+
+            destroy_unix_server_socket(p0);
+            r = 0;
+        }
+
+        f = POINTER_NULL_POINTER;
+    }
+
+    // TCP socket server.
+    get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
+
+    if (f != NULL_POINTER) {
+
+        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
+
+        if (r == 1) {
+
+            destroy_tcp_server_socket(p0);
+            r = 0;
+        }
+
+        f = POINTER_NULL_POINTER;
+    }
+
+    // X windows server.
+    get_array_elements(p0, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
+
+    if (f != NULL_POINTER) {
+
+        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
+
+        if (r == 1) {
+
+//??            destroy_x_windows_server(p0);
+            r = 0;
+        }
+
+        f = POINTER_NULL_POINTER;
     }
 }
 

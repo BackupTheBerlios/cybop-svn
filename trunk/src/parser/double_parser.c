@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-02-25 01:35:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,60 +56,69 @@ void parse_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
         int* sc = (int*) p4;
 
-//??        log_message((void*) &INFO_LOG_LEVEL, (void*) &PARSE_INTEGER_MESSAGE, (void*) &PARSE_INTEGER_MESSAGE_COUNT);
+        if (p0 != NULL_POINTER ) {
 
-        // The temporary null-terminated string.
-        char* tmp = NULL_POINTER;
-        int tmps = *sc + 1;
+            void** d = (void**) p0;
 
-        // Create temporary null-terminated string.
-        create_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+            log_message_debug("Parse double.");
 
-        // The index.
-        int i = 0;
+            // The temporary null-terminated string.
+            char* tmp = NULL_POINTER;
+            int tmps = *sc + 1;
 
-        // Copy original string to temporary null-terminated string.
-        set_array_elements((void*) tmp, (void*) &i, p3, p4, (void*) CHARACTER_ARRAY);
+            // Create temporary null-terminated string.
+            create_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
 
-        // This is used as index to set the termination character.
-        i = *sc;
+            // The index.
+            int i = 0;
 
-        // Add string termination to temporary null-terminated string.
-        set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_CHARACTER, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
+            // Copy original string to temporary null-terminated string.
+            set_array_elements((void*) tmp, (void*) &i, p3, p4, (void*) CHARACTER_ARRAY);
 
-        // The tail variable is useless here and only needed for the string
-        // transformation function. If the whole string array consists of
-        // many sub strings, separated by space characters, then each sub
-        // string gets interpreted as integer number.
-        // The tail variable in this case points to the remaining sub string.
-        char* tail = NULL_POINTER;
+            // This is used as index to set the termination character.
+            i = *sc;
 
-        // Transform string to double value.
-        // The strtod function recognizes four special input strings.
-        // The strings "inf" and "infinity" are converted to @math{@infinity{}},
-        // or to the largest representable value if the floating-point format
-        // doesn't support infinities.
-        // One can prepend a "+" or "-" to specify the sign.
-        // Case is ignored when scanning these strings.
-        // The strings "nan" and "nan(chars...)" are converted to NaN.
-        // Again, case is ignored.
-        // If chars... are provided, they are used in some unspecified fashion
-        // to select a particular representation of NaN (there can be several).
-        double v = strtod(tmp, &tail);
+            // Add string termination to temporary null-terminated string.
+            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_CHARACTER, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
 
-        //?? p0 (Hand over as reference!)
-        //?? Doesn't p0 need to be resized from size 0 to size 1,
-        //?? to be able to take the double value?
+            // The tail variable is useless here and only needed for the string
+            // transformation function. If the whole string array consists of
+            // many sub strings, separated by space characters, then each sub
+            // string gets interpreted as integer number.
+            // The tail variable in this case points to the remaining sub string.
+            char* tail = NULL_POINTER;
 
-        // Set double value.
-        set_array_elements(p0, (void*) DOUBLE_VALUE_INDEX, (void*) &v, (void*) ONE_NUMBER, (void*) DOUBLE_ARRAY);
+            // Transform string to double value.
+            // The strtod function recognizes four special input strings.
+            // The strings "inf" and "infinity" are converted to @math{@infinity{}},
+            // or to the largest representable value if the floating-point format
+            // doesn't support infinities.
+            // One can prepend a "+" or "-" to specify the sign.
+            // Case is ignored when scanning these strings.
+            // The strings "nan" and "nan(chars...)" are converted to NaN.
+            // Again, case is ignored.
+            // If chars... are provided, they are used in some unspecified fashion
+            // to select a particular representation of NaN (there can be several).
+            double v = strtod(tmp, &tail);
 
-        // Destroy temporary null-terminated string.
-        destroy_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+            //?? p0 (Hand over as reference!)
+            //?? Doesn't p0 need to be resized from size 0 to size 1,
+            //?? to be able to take the double value?
+
+            // Set double value.
+            set_array_elements(*d, (void*) DOUBLE_VALUE_INDEX, (void*) &v, (void*) ONE_NUMBER, (void*) DOUBLE_ARRAY);
+
+            // Destroy temporary null-terminated string.
+            destroy_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+
+        } else {
+
+            log_message_debug("Could not parse double. The destination is null.");
+        }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message_debug("Could not parse double. The source count is null.");
     }
 }
 
@@ -136,7 +145,7 @@ void serialize_double(void* p0, void* p1, void* p2, const void* p3, const void* 
 
                 char** d = (char**) p0;
 
-//??                log_message((void*) &INFO_LOG_LEVEL, (void*) &SERIALIZE_DOUBLE_MESSAGE, (void*) &SERIALIZE_DOUBLE_MESSAGE_COUNT);
+                log_message_debug("Serialize double.");
 
                 // The double value.
                 double* v = DOUBLE_NULL_POINTER;
