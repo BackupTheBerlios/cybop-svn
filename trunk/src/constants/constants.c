@@ -59,7 +59,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.14 $ $Date: 2004-06-06 21:34:21 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-06-09 22:29:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -117,22 +117,15 @@ static char NULL_CHARACTER = '\0';
 // Arrays.
 //
 
-//?? Possibly remove pointer array, if a pointer is really identical to an integer.
 /** The pointer array constant. */
 static const int POINTER_ARRAY = 0;
 
 /** The integer array constant. */
 static const int INTEGER_ARRAY = 1;
 
-//?? Possibly remove character array, if a character primitive is really
-//?? identical to an integer primitive. Are they?
 /** The character array constant. */
 static const int CHARACTER_ARRAY = 2;
 
-//?? Possibly remove double array, if a double primitive can be replaced by
-//?? a compound structure like "fraction". How would this effect performance
-//?? when ALU will not work with doubles but they rather get transformed into
-//?? integers first?
 /** The double array constant. */
 static const int DOUBLE_ARRAY = 3;
 
@@ -241,7 +234,7 @@ static const int PARAMETERS_SIZES_INDEX = 2;
 static const int COMPOUND_RESIZE_FACTOR = 2;
 
 /** The compound count. */
-static const int COMPOUND_COUNT = 14;
+static const int COMPOUND_COUNT = 21;
 
 /** The part names index. */
 static const int PART_NAMES_INDEX = 0;
@@ -249,41 +242,62 @@ static const int PART_NAMES_INDEX = 0;
 /** The part names counts index. */
 static const int PART_NAMES_COUNTS_INDEX = 1;
 
+/** The part names sizes index. */
+static const int PART_NAMES_SIZES_INDEX = 2;
+
 /** The part models index. */
-static const int PART_MODELS_INDEX = 2;
+static const int PART_MODELS_INDEX = 3;
 
 /** The part models counts index. */
-static const int PART_MODELS_COUNTS_INDEX = 3;
+static const int PART_MODELS_COUNTS_INDEX = 4;
+
+/** The part models sizes index. */
+static const int PART_MODELS_SIZES_INDEX = 5;
 
 /** The part abstractions index. */
-static const int PART_ABSTRACTIONS_INDEX = 4;
+static const int PART_ABSTRACTIONS_INDEX = 6;
 
 /** The part abstractions counts index. */
-static const int PART_ABSTRACTIONS_COUNTS_INDEX = 5;
+static const int PART_ABSTRACTIONS_COUNTS_INDEX = 7;
+
+/** The part abstractions sizes index. */
+static const int PART_ABSTRACTIONS_SIZES_INDEX = 8;
 
 /** The part constraints index. */
-static const int PART_CONSTRAINTS_INDEX = 6;
+static const int PART_CONSTRAINTS_INDEX = 9;
 
 /** The part constraints counts index. */
-static const int PART_CONSTRAINTS_COUNTS_INDEX = 7;
+static const int PART_CONSTRAINTS_COUNTS_INDEX = 10;
+
+/** The part constraints sizes index. */
+static const int PART_CONSTRAINTS_SIZES_INDEX = 11;
 
 /** The position models index. */
-static const int POSITION_MODELS_INDEX = 8;
+static const int POSITION_MODELS_INDEX = 12;
 
 /** The position models counts index. */
-static const int POSITION_MODELS_COUNTS_INDEX = 9;
+static const int POSITION_MODELS_COUNTS_INDEX = 13;
+
+/** The position models sizes index. */
+static const int POSITION_MODELS_SIZES_INDEX = 14;
 
 /** The position abstractions index. */
-static const int POSITION_ABSTRACTIONS_INDEX = 10;
+static const int POSITION_ABSTRACTIONS_INDEX = 15;
 
 /** The position abstractions counts index. */
-static const int POSITION_ABSTRACTIONS_COUNTS_INDEX = 11;
+static const int POSITION_ABSTRACTIONS_COUNTS_INDEX = 16;
+
+/** The position abstractions sizes index. */
+static const int POSITION_ABSTRACTIONS_SIZES_INDEX = 17;
 
 /** The position constraints index. */
-static const int POSITION_CONSTRAINTS_INDEX = 12;
+static const int POSITION_CONSTRAINTS_INDEX = 18;
 
 /** The position constraints counts index. */
-static const int POSITION_CONSTRAINTS_COUNTS_INDEX = 13;
+static const int POSITION_CONSTRAINTS_COUNTS_INDEX = 19;
+
+/** The position constraints sizes index. */
+static const int POSITION_CONSTRAINTS_SIZES_INDEX = 20;
 
 //
 // Signal memory.

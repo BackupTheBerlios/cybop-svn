@@ -64,7 +64,7 @@
  * A compound model can be created by cloning an existing model template so that
  * some space gets allocated in the computer's memory.
  *
- * @version $Revision: 1.9 $ $Date: 2004-06-06 21:34:21 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-06-09 22:29:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -93,53 +93,96 @@ void create_compound(void* p0, const void* p1) {
     // Create compound.
     create_array(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT);
 
-    // Initialize elements.
+    // The part names, counts, sizes.
     void* pn = NULL_POINTER;
     void* pnc = NULL_POINTER;
+    void* pns = NULL_POINTER;
+    // The part models, counts, sizes.
     void* pm = NULL_POINTER;
     void* pmc = NULL_POINTER;
+    void* pms = NULL_POINTER;
+    // The part abstractions, counts, sizes.
     void* pa = NULL_POINTER;
     void* pac = NULL_POINTER;
+    void* pas = NULL_POINTER;
+    // The part constraints, counts, sizes.
     void* pc = NULL_POINTER;
     void* pcc = NULL_POINTER;
+    void* pcs = NULL_POINTER;
+    // The position models, counts, sizes.
     void* pom = NULL_POINTER;
     void* pomc = NULL_POINTER;
+    void* poms = NULL_POINTER;
+    // The position abstractions, counts, sizes.
     void* poa = NULL_POINTER;
     void* poac = NULL_POINTER;
+    void* poas = NULL_POINTER;
+    // The position constraints, counts, sizes.
     void* poc = NULL_POINTER;
     void* pocc = NULL_POINTER;
+    void* pocs = NULL_POINTER;
 
-    // Create elements.
+    // Create part names, counts, sizes.
     create_array((void*) &pn, (void*) &POINTER_ARRAY, p1);
     create_array((void*) &pnc, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &pns, (void*) &INTEGER_ARRAY, p1);
+    // Create part models, counts, sizes.
     create_array((void*) &pm, (void*) &POINTER_ARRAY, p1);
     create_array((void*) &pmc, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &pms, (void*) &INTEGER_ARRAY, p1);
+    // Create part abstractions, counts, sizes.
     create_array((void*) &pa, (void*) &POINTER_ARRAY, p1);
     create_array((void*) &pac, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &pas, (void*) &INTEGER_ARRAY, p1);
+    // Create part constraints, counts, sizes.
     create_array((void*) &pc, (void*) &POINTER_ARRAY, p1);
     create_array((void*) &pcc, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &pcs, (void*) &INTEGER_ARRAY, p1);
+    // Create position models, counts, sizes.
     create_array((void*) &pom, (void*) &POINTER_ARRAY, p1);
     create_array((void*) &pomc, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &poms, (void*) &INTEGER_ARRAY, p1);
+    // Create position abstractions, counts, sizes.
     create_array((void*) &poa, (void*) &POINTER_ARRAY, p1);
     create_array((void*) &poac, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &poas, (void*) &INTEGER_ARRAY, p1);
+    // Create position constraints, counts, sizes.
     create_array((void*) &poc, (void*) &POINTER_ARRAY, p1);
     create_array((void*) &pocc, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &pocs, (void*) &INTEGER_ARRAY, p1);
 
-    // Set elements in ascending order.
+    //
+    // Use ascending order.
+    //
+
+    // Set part names, counts, sizes.
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &pn);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &pnc);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &pns);
+    // Set part models, counts, sizes.
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &pmc);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_SIZES_INDEX, (void*) &pms);
+    // Set part abstractions, counts, sizes.
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX, (void*) &pac);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
+    // Set part constraints, counts, sizes.
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_CONSTRAINTS_INDEX, (void*) &pc);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_CONSTRAINTS_COUNTS_INDEX, (void*) &pcc);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_CONSTRAINTS_SIZES_INDEX, (void*) &pcs);
+    // Set position models, counts, sizes.
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_COUNTS_INDEX, (void*) &pomc);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_SIZES_INDEX, (void*) &poms);
+    // Set position abstractions, counts, sizes.
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_COUNTS_INDEX, (void*) &poac);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_SIZES_INDEX, (void*) &poas);
+    // Set position constraints, counts, sizes.
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_CONSTRAINTS_INDEX, (void*) &poc);
     set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_CONSTRAINTS_COUNTS_INDEX, (void*) &pocc);
+    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_CONSTRAINTS_SIZES_INDEX, (void*) &pocs);
 }
 
 /**
@@ -152,68 +195,124 @@ void destroy_compound(void* p0, const void* p1) {
 
 //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_COMPOUND_MESSAGE, (void*) &DESTROY_COMPOUND_MESSAGE_COUNT);
 
-    // Initialize elements.
+    // The part names, counts, sizes.
     void* pn = NULL_POINTER;
     void* pnc = NULL_POINTER;
+    void* pns = NULL_POINTER;
+    // The part models, counts, sizes.
     void* pm = NULL_POINTER;
     void* pmc = NULL_POINTER;
+    void* pms = NULL_POINTER;
+    // The part abstractions, counts, sizes.
     void* pa = NULL_POINTER;
     void* pac = NULL_POINTER;
+    void* pas = NULL_POINTER;
+    // The part constraints, counts, sizes.
     void* pc = NULL_POINTER;
     void* pcc = NULL_POINTER;
+    void* pcs = NULL_POINTER;
+    // The position models, counts, sizes.
     void* pom = NULL_POINTER;
     void* pomc = NULL_POINTER;
+    void* poms = NULL_POINTER;
+    // The position abstractions, counts, sizes.
     void* poa = NULL_POINTER;
     void* poac = NULL_POINTER;
+    void* poas = NULL_POINTER;
+    // The position constraints, counts, sizes.
     void* poc = NULL_POINTER;
     void* pocc = NULL_POINTER;
+    void* pocs = NULL_POINTER;
 
-    // Get elements.
+    // Get part names, counts, sizes.
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &pn);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &pnc);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &pns);
+    // Get part models, counts, sizes.
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &pmc);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_SIZES_INDEX, (void*) &pms);
+    // Get part abstractions, counts, sizes.
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX, (void*) &pac);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_INDEX, (void*) &pc);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_LOCATIONS_COUNTS_INDEX, (void*) &pcc);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_SIZES_INDEX, (void*) &pas);
+    // Get part constraints, counts, sizes.
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_CONSTRAINTS_INDEX, (void*) &pc);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_CONSTRAINTS_COUNTS_INDEX, (void*) &pcc);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_CONSTRAINTS_SIZES_INDEX, (void*) &pcs);
+    // Get position models, counts, sizes.
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_INDEX, (void*) &pom);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_COUNTS_INDEX, (void*) &pomc);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_MODELS_SIZES_INDEX, (void*) &poms);
+    // Get position abstractions, counts, sizes.
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_INDEX, (void*) &poa);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_COUNTS_INDEX, (void*) &poac);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_INDEX, (void*) &poc);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_LOCATIONS_COUNTS_INDEX, (void*) &pocc);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_ABSTRACTIONS_SIZES_INDEX, (void*) &poas);
+    // Get position constraints, counts, sizes.
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_CONSTRAINTS_INDEX, (void*) &poc);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_CONSTRAINTS_COUNTS_INDEX, (void*) &pocc);
+    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &POSITION_CONSTRAINTS_SIZES_INDEX, (void*) &pocs);
 
-    // Remove elements in descending order.
+    //
+    // Use descending order.
+    //
+
+    // Remove position constraints, counts, sizes.
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_CONSTRAINTS_SIZES_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_CONSTRAINTS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_CONSTRAINTS_INDEX);
+    // Remove position abstractions, counts, sizes.
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_ABSTRACTIONS_SIZES_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_ABSTRACTIONS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_ABSTRACTIONS_INDEX);
+    // Remove position models, counts, sizes.
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_MODELS_SIZES_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_MODELS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_MODELS_INDEX);
+    // Remove part constraints, counts, sizes.
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_CONSTRAINTS_SIZES_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_CONSTRAINTS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_CONSTRAINTS_INDEX);
+    // Remove part abstractions, counts, sizes.
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_ABSTRACTIONS_SIZES_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_ABSTRACTIONS_INDEX);
+    // Remove part models, counts, sizes.
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_MODELS_SIZES_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_MODELS_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_MODELS_INDEX);
+    // Remove part names, counts, sizes.
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &NAMES_SIZES_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &NAMES_COUNTS_INDEX);
     remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &NAMES_INDEX);
 
-    // Destroy elements.
+    // Destroy part names, counts, sizes.
     destroy_array((void*) &pn, (void*) &POINTER_ARRAY, p1);
     destroy_array((void*) &pnc, (void*) &INTEGER_ARRAY, p1);
+    destroy_array((void*) &pnc, (void*) &INTEGER_ARRAY, p1);
+    // Destroy part models, counts, sizes.
     destroy_array((void*) &pm, (void*) &POINTER_ARRAY, p1);
     destroy_array((void*) &pmc, (void*) &INTEGER_ARRAY, p1);
+    destroy_array((void*) &pmc, (void*) &INTEGER_ARRAY, p1);
+    // Destroy part abstractions, counts, sizes.
     destroy_array((void*) &pa, (void*) &POINTER_ARRAY, p1);
     destroy_array((void*) &pac, (void*) &INTEGER_ARRAY, p1);
+    destroy_array((void*) &pac, (void*) &INTEGER_ARRAY, p1);
+    // Destroy part constraints, counts, sizes.
     destroy_array((void*) &pc, (void*) &POINTER_ARRAY, p1);
     destroy_array((void*) &pcc, (void*) &INTEGER_ARRAY, p1);
+    destroy_array((void*) &pcc, (void*) &INTEGER_ARRAY, p1);
+    // Destroy position models, counts, sizes.
     destroy_array((void*) &pom, (void*) &POINTER_ARRAY, p1);
     destroy_array((void*) &pomc, (void*) &INTEGER_ARRAY, p1);
+    destroy_array((void*) &pomc, (void*) &INTEGER_ARRAY, p1);
+    // Destroy position abstractions, counts, sizes.
     destroy_array((void*) &poa, (void*) &POINTER_ARRAY, p1);
     destroy_array((void*) &poac, (void*) &INTEGER_ARRAY, p1);
+    destroy_array((void*) &poac, (void*) &INTEGER_ARRAY, p1);
+    // Destroy position constraints, counts, sizes.
     destroy_array((void*) &poc, (void*) &POINTER_ARRAY, p1);
+    destroy_array((void*) &pocc, (void*) &INTEGER_ARRAY, p1);
     destroy_array((void*) &pocc, (void*) &INTEGER_ARRAY, p1);
 
     // Destroy compound.
