@@ -25,14 +25,16 @@
  * - parse an xml stream into an xml model
  * - serialize an xml model into an xml stream
  *
- * @version $Revision: 1.3 $ $Date: 2004-08-02 11:12:16 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-08-13 22:37:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef XML_PARSER_SOURCE
 #define XML_PARSER_SOURCE
 
+#include <libxml/parser.h>
 #include "../array/array.c"
+#include "../global/character_constants.c"
 #include "../global/constant.c"
 #include "../logger/logger.c"
 #include "../state/xml_attribute.c"
@@ -253,13 +255,13 @@ void parse_xml_tag(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 //
 
 /**
- * Parses the xml stream into an xml model.
+ * Parses the byte stream and creates an xml model from it.
  *
- * @param p0 the xml model
- * @param p1 the xml model count
- * @param p2 the xml model size
- * @param p3 the xml stream
- * @param p4 the xml stream count
+ * @param p0 the destination
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source
+ * @param p4 the source count
  */
 void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
@@ -271,6 +273,51 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
             void** s = (void**) p3;
 
+            if (p0 != NULL_POINTER) {
+
+                void** d = (void**) p0;
+
+                //??
+                //?? BEGIN of temporary workaround for using the libxml2 parser.
+                //?? Parameter p3 represents the xml file name!
+                //??
+
+                // The temporary null-terminated file name.
+                char* tmp = NULL_POINTER;
+                int tmps = *sc + 1;
+                // The index.
+                int i = 0;
+
+                // Create temporary null-terminated file name.
+                create_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
+
+                // Copy original file name to temporary null-terminated file name.
+                set_array_elements((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
+                // This is used as index to set the termination character.
+                i = *sc;
+                // Add string termination to temporary null-terminated file name.
+                set_array_element((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CHARACTER);
+
+                // Initialize the library.
+                // Check potential ABI mismatches between the version
+                // it was compiled for and the actual shared library used.
+                LIBXML_TEST_VERSION
+
+                // Parse file and get xml document.
+                // This function returns a pointer to type: xmlDoc*
+                *d = (void*) xmlParseFile(tmp);
+
+                // Free global variables that may have been allocated by the parser.
+                xmlCleanupParser();
+
+                // Destroy temporary null-terminated file name.
+                destroy_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
+
+                //??
+                //?? END of temporary workaround for using the libxml2 parser.
+                //??
+
+/*??
             // The done flag.
             int d = 0;
             // The comparison result.
@@ -372,28 +419,34 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                 // Reset comparison result.
                 r = 0;
             }
+*/
+
+            } else {
+
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not parse xml. The destination is null.");
+            }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize compound. The persistent model is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not parse xml. The file name is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize compound. The persistent model count is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not parse xml. The file name count is null.");
     }
 }
 
 /**
- * Serializes the xml tree into an xml stream.
+ * Serializes the xml model and creates a byte stream from it.
  *
- * @param p0 the xml model
- * @param p1 the xml model count
- * @param p2 the xml model size
- * @param p3 the xml stream
- * @param p4 the xml stream count
+ * @param p0 the destination
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source
+ * @param p4 the source count
  */
-void serialize_xml(const void* p0, const void* p1, const void* p2, void* p3, void* p4) {
+void serialize_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /* XML_PARSER_SOURCE */

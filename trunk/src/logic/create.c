@@ -23,13 +23,15 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.3 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-08-13 22:37:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CREATE_SOURCE
 #define CREATE_SOURCE
 
+//?? #include <libxml/parser.h>
+//?? #include <libxml/tree.h>
 #include "../global/abstraction_constants.c"
 #include "../global/channel_constants.c"
 #include "../logger/logger.c"
@@ -876,6 +878,27 @@ void create(const void* p0, const void* p1, const void* p2, const void* p3,
                         //
 
 /*??
+                        //?? BEGIN of temporary workaround to use libxml2 parser.
+
+                        // The libxml parser workaround flag.
+                        int libxml_parser_workaround = 0;
+                        // The comparison result.
+                        int r = 0;
+
+                        if (*typec == XML_ABSTRACTION_COUNT) {
+
+                            compare_array_elements(type, (void*) &XML_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &XML_ABSTRACTION_COUNT, (void*) &r);
+
+                            if (r == 1) {
+
+                                libxml_parser_workaround = 1;
+                            }
+                        }
+
+                        //?? END of temporary workaround to use libxml2 parser.
+                        //?? Later, when an own xml parser is implemented in cyboi,
+                        //?? delete all workaround blocks.
+
                         //
                         // Read.
                         //
@@ -902,25 +925,28 @@ void create(const void* p0, const void* p1, const void* p2, const void* p3,
                         // Parse.
                         //
 
-                        //?? Later, distinguish file types according to suffix,
-                        //?? for example xml, html, sxi, txt, rtf,
-                        //?? adl (from OpenEHR), KIF, ODL etc.!
-                        //?? For now, only the cybol file format is considered.
-
                         // Declare and initialize parsed model
                         // and its count and size.
                         void* pm = NULL_POINTER;
                         int pmc = 0;
                         int pms = 0;
 
-                        // Create parsed model.
-                        create_model((void*) &pm, (void*) &pmc, (void*) &pms,
-                            (void*) &type, (void*) &typec);
+                        if (libxml_parser_workaround == 0) {
 
-                        // Parse byte stream according to given document type.
-                        //?? DELETE this line! parse type can be for example: xml dom tree
-                        parse((void*) &pm, (void*) &pmc, (void*) &pms,
-                            (void*) &rm, (void*) &rmc, (void*) &type, (void*) &typec);
+                            // Create parsed model.
+                            create_model((void*) &pm, (void*) &pmc, (void*) &pms,
+                                (void*) &type, (void*) &typec);
+
+                            // Parse byte stream according to given document type.
+                            //?? DELETE this line! parse type can be for example: xml dom tree
+                            parse((void*) &pm, (void*) &pmc, (void*) &pms,
+                                (void*) &rm, (void*) &rmc, (void*) &type, (void*) &typec);
+
+                        } else {
+
+                            parse_xml((void*) &pm, (void*) &pmc, (void*) &pms,
+                                (void*) &ppm, (void*) &ppmc);
+                        }
 
                         // Destroy read model.
                         destroy_model((void*) &rm, (void*) &rmc, (void*) &rms,
@@ -929,9 +955,6 @@ void create(const void* p0, const void* p1, const void* p2, const void* p3,
                         //
                         // Decode.
                         //
-
-                        //?? Later, additional formats besides cybol might be read,
-                        //?? for example html, sxi, hdx.sf.net etc.
 
                         // Declare and initialize decoded model
                         // and its count and size.
@@ -943,13 +966,25 @@ void create(const void* p0, const void* p1, const void* p2, const void* p3,
                         create_model((void*) &dm, (void*) &dmc, (void*) &dms,
                             (void*) &type, (void*) &typec);
 
-                        // Decode document model according to given document type.
-                        decode((void*) &dm, (void*) &dmc, (void*) &dms,
-                            (void*) &pm, (void*) &pmc, (void*) &type, (void*) &typec);
+                        if (libxml_parser_workaround == 0) {
 
-                        // Destroy parsed model.
-                        destroy_model((void*) &pm, (void*) &pmc, (void*) &pms,
-                            (void*) &type, (void*) &typec);
+                            // Decode document model according to given document type.
+                            decode((void*) &dm, (void*) &dmc, (void*) &dms,
+                                (void*) &pm, (void*) &pmc, (void*) &type, (void*) &typec);
+
+                            // Destroy parsed model.
+                            destroy_model((void*) &pm, (void*) &pmc, (void*) &pms,
+                                (void*) &type, (void*) &typec);
+
+                        } else {
+
+                            // Decode document model according to given document type.
+                            decode_xml((void*) &dm, (void*) &dmc, (void*) &dms,
+                                (void*) &pm, (void*) &pmc, (void*) &type, (void*) &typec);
+
+                            // Free xml dom document.
+                            xmlFreeDoc((xmlDoc*) pm);
+                        }
 */
 
                         //?? DELETE all following initialize_model calls!

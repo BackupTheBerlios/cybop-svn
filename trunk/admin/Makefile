@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.15 $ $Date: 2004-07-28 22:46:28 $ $Author: christian $
+# @version $Revision: 1.16 $ $Date: 2004-08-13 22:37:50 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 # @author Michael Simon <michael.simon@gmx.net>
 #
@@ -53,7 +53,7 @@ SRC = $(ROOT)/src
 BINARY = cyboi
 COMPILER = gcc
 #-Wall -pedantic
-COMPILER_FLAGS = -g -I/usr/X11R6/include #-fsjlj-exceptions
+COMPILER_FLAGS = -g -I/usr/X11R6/include -I/usr/include/libxml2 # -fsjlj-exceptions
 # Compile with profiling support.
 #COMPILER_FLAGS = -pg -I/usr/X11R6/include
 #-pedantic
@@ -108,8 +108,8 @@ X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WIN
 #	$(COMPILER) -I /usr/X11R6/include -L /usr/X11R6/lib $(OBJ)/cyboi.o -o $(BIN)/$(BINARY)
 #
 all: create $(ARRAY_OBJECTS) $(CYBOI_OBJECTS) $(GLOBAL_OBJECTS) $(LOGGER_OBJECTS) $(LOGIC_OBJECTS) $(PARSER_OBJECTS) $(SIGNAL_OBJECTS) $(SOCKET_OBJECTS) $(STATE_OBJECTS) $(TEST_OBJECTS) $(TRANSFER_OBJECTS) $(TRANSLATOR_OBJECTS) $(X_WINDOWS_OBJECTS)
-	$(COMPILER) -L/usr/X11R6/lib \
-		-o $(BIN)/$(BINARY) $(OBJ)/cyboi/cyboi.o -lX11
+	$(COMPILER) -L/usr/X11R6/lib -L/usr/lib \
+		-o $(BIN)/$(BINARY) $(OBJ)/cyboi/cyboi.o -lX11 -lxml2
 	@echo Compiled cyboi files.
 
 #
