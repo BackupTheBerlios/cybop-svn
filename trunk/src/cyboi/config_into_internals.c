@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.2 $ $Date: 2004-10-27 13:44:39 $ $Author: rholzmueller $
+ * @version $Revision: 1.3 $ $Date: 2004-10-28 18:37:29 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -157,6 +157,109 @@ void initialize_internals_start( xmlNode* root_element, void* pPointerInternals,
 }
 
 
+void initialize_internals_tcp_socket( xmlNode* root_element, void* pPointerInternals, void* pIntInternals) {
+   
+	if ( root_element == NULL_POINTER ) {
+      
+   	}
+	else if ( pPointerInternals == NULL_POINTER ) {
+    
+	}
+    else if ( pIntInternals == NULL_POINTER ) {
+       
+    }
+	else {
+		
+        xmlNode* cur_node = NULL;
+        
+        for (cur_node = root_element; cur_node; cur_node = cur_node->next) {
+        
+            /* jeden Part durchgehen */
+            if (cur_node->type == XML_ELEMENT_NODE) {
+            	
+                // The source name.
+                void* sn = NULL_POINTER;
+                int snc = 0;
+                // The source channel.
+                void* sc = NULL_POINTER;
+                int scc = 0;
+                // The source abstraction.
+                void* sa = NULL_POINTER;
+                int sac = 0;
+                // The source model.
+                void* sm = NULL_POINTER;
+                int smc = 0;
+                decode_cybol_property( (void*) &cur_node, 
+                                       (void*) &sn, (void*) &snc, 
+                                       (void*) &sc, (void*) &scc, 
+                                       (void*) &sa, (void*) &sac, 
+                                       (void*) &sm, (void*) &smc );
+    
+                int comp_result;
+                
+                //port
+    			compare_arrays( (void*) &sn, (void*) &snc, 
+    							(void*) &CONFIG_TCP_SOCKET_PORT_ABSTRACTION, 
+    							(void*) &CONFIG_TCP_SOCKET_PORT_ABSTRACTION_COUNT, 
+    							(void*) &comp_result, (void*) &CHARACTER_ARRAY);
+    			
+                if ( comp_result==1 ) {
+    
+      		        //printf(" Modellvalue channel gefunden \n" );
+
+				    // The destination integer.
+				    int di = -1;
+				    int dic = -1;
+				    int dis = -1;
+				
+				    parse( (void*) &di, (void*) &dic, (void*) &dis, 
+				           (void*) &sm, (void*) &smc,
+				           (void*) &INTEGER_ABSTRACTION, 
+				           (void*) &INTEGER_ABSTRACTION_COUNT );
+      		        
+                    int port=di;
+        			set_array_element( (void*) &pIntInternals, 
+                                       (void*) &INTEGER_ARRAY, 
+    								   (void*) &INTEGER_INTERNALS_TCPSOCKET_PORT_INDEX, 
+    								   (void*) &port );
+    			}
+    	             
+                //active    
+    			compare_arrays( (void*) &sn, (void*) &snc, 
+    							(void*) &CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION, 
+    							(void*) &CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_COUNT, 
+    							(void*) &comp_result, (void*) &CHARACTER_ARRAY);
+    			
+    			if ( comp_result==1 ) {
+    
+                    //printf(" Modellvalue abstraction gefunden \n" );
+				    // The destination integer.
+				    int di = -1;
+				    int dic = -1;
+				    int dis = -1;
+				
+				    parse( (void*) &di, (void*) &dic, (void*) &dis, 
+				           (void*) &sm, (void*) &smc,
+				           (void*) &INTEGER_ABSTRACTION, 
+				           (void*) &INTEGER_ABSTRACTION_COUNT );
+				           
+				    int active = di;
+
+                    set_array_element( (void*) &pIntInternals, 
+                                       (void*) &INTEGER_ARRAY, 
+                                       (void*) &INTEGER_INTERNALS_TCPSOCKET_ACTIVE_INDEX, 
+                                       (void*) &active );
+    			}
+    
+            }  // if (cur_node->type == XML_ELEMENT_NODE)
+            
+        }  //for (cur_node = root_element; cur_node; cur_node = cur_node->next)
+
+    } //else Parameter == NULL_POINTER            
+	
+}
+
+
 /**
  * @param pConfigFile Pointer of the config file (char[])
  * @param pPointerInternals Pointer of die pointer internals
@@ -188,7 +291,7 @@ int initialize_internals( void* pConfigFile, void* pPointerInternals, void* pInt
            log_message((void*) &ERROR_LOG_LEVEL, (void*) error , (void*) strlen(error));
            return -1;
     	}
-	
+	       
     	root_element = xmlDocGetRootElement( doc )->children;
 	
         for (cur_node = root_element; cur_node; cur_node = cur_node->next) {
@@ -238,6 +341,9 @@ int initialize_internals( void* pConfigFile, void* pPointerInternals, void* pInt
     			if ( comp_result==1 ) {
     
                     //printf(" Model tcp_socket gefunden" );
+      		        initialize_internals_tcp_socket( cur_node->children, 
+      		                 						 pPointerInternals,
+      		                   					     pIntInternals );
     			}
 
     		}  //if (cur_node->type == XML_ELEMENT_NODE) {

@@ -7,7 +7,7 @@
     </part>
 
     <part name="tcp_socket" channel="inline" abstraction="config" model="tcp_socket">
-        <property name="activ" channel="inline" abstraction="integer" model="0"/>
+        <property name="active" channel="inline" abstraction="integer" model="1"/>
         <property name="port" channel="inline" abstraction="integer" model="3456"/>
     </part>
     
