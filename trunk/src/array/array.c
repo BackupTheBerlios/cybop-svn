@@ -50,7 +50,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.13 $ $Date: 2004-10-29 08:31:22 $ $Author: rholzmueller $
+ * @version $Revision: 1.14 $ $Date: 2004-12-13 22:47:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -475,7 +475,6 @@ void resize_array(void* p0, const void* p1, const void* p2) {
 void compare_arrays(const void* p0, const void* p1, const void* p2, const void* p3,
     void* p4, const void* p5) {
 
-
     if (p3 != NULL_POINTER) {
 
         int* sc = (int*) p3;
@@ -498,8 +497,6 @@ void compare_arrays(const void* p0, const void* p1, const void* p2, const void* 
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
     }
-
-    	
 }
 
 /* ARRAY_SOURCE */

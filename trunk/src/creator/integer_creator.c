@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-10-29 15:08:47 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-12-13 22:47:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,9 +37,8 @@
  * Creates the integer.
  *
  * @param p0 the model
- * @param p1 the model size
  */
-void create_integer(void* p0, const void* p1) {
+void create_integer(void* p0) {
 
 //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTEGER_MESSAGE, (void*) &CREATE_INTEGER_MESSAGE_COUNT);
 
@@ -51,9 +50,8 @@ void create_integer(void* p0, const void* p1) {
  * Destroys the integer.
  *
  * @param p0 the model
- * @param p1 the model size
  */
-void destroy_integer(void* p0, const void* p1) {
+void destroy_integer(void* p0) {
 
 //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_INTEGER_MESSAGE, (void*) &DESTROY_INTEGER_MESSAGE_COUNT);
 

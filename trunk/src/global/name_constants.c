@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.3 $ $Date: 2004-10-28 18:44:21 $ $Author: rholzmueller $
+ * @version $Revision: 1.4 $ $Date: 2004-12-13 22:47:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -87,6 +87,7 @@ static const int CONFIG_TCP_SOCKET_ACTIVE_ABSTRACTION_COUNT = 6;
 static const char CONFIG_TCP_SOCKET_PORT_ABSTRACTION_ARRAY[] = {'p', 'o', 'r', 't'};
 static const char* CONFIG_TCP_SOCKET_PORT_ABSTRACTION =CONFIG_TCP_SOCKET_PORT_ABSTRACTION_ARRAY;
 static const int CONFIG_TCP_SOCKET_PORT_ABSTRACTION_COUNT = 4;
+
 //
 // Communication names.
 //

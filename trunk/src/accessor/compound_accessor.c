@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2004-11-25 09:46:37 $ $Author: rholzmueller $
+ * @version $Revision: 1.7 $ $Date: 2004-12-13 22:47:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,11 +47,11 @@ void get_compound_element_index(const void* p0, const void* p1, const void* p2, 
 
     if (p4 != NULL_POINTER) {
 
-        int* i = (int*) p4;
+        int** i = (int**) p4;
 
         if (p1 != NULL_POINTER) {
 
-            int* cc = (int*) p1;
+            int** cc = (int**) p1;
 
 //??            log_message((void*) &INFO_LOG_LEVEL, (void*) &GET_COMPOUND_INDEX_MESSAGE, (void*) &GET_COMPOUND_INDEX_MESSAGE_COUNT);
 
@@ -64,17 +64,23 @@ void get_compound_element_index(const void* p0, const void* p1, const void* p2, 
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &nc);
 
             // The loop variable.
-            int j = 0;
+            int* j = INTEGER_NULL_POINTER;
+            create_integer((void*) &j);
+            *j = 0;
             // The name.
             void* n1 = NULL_POINTER;
             // The name count.
-            int nc1 = 0;
+            int* nc1 = INTEGER_NULL_POINTER;
+            create_integer((void*) &nc1);
+            *nc1 = 0;
             // The comparison result.
-            int r = 0;
+            int* r = INTEGER_NULL_POINTER;
+            create_integer((void*) &r);
+            *r = 0;
 
             while (1) {
 
-                if (j >= *cc) {
+                if (*j >= **cc) {
 
                     break;
                 }
@@ -85,19 +91,23 @@ void get_compound_element_index(const void* p0, const void* p1, const void* p2, 
 
                 compare_arrays(p2, p3, (void*) &n1, (void*) &nc1, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                if (r == 1) {
+                if (*r == 1) {
 
-                    *i = j;
+                    **i = *j;
 
                     break;
                 }
 
                 // Reset name and name count.
                 n1 = NULL_POINTER;
-                nc1 = 0;
+                *nc1 = 0;
 
-                j++;
+                (*j)++;
             }
+
+            destroy_integer((void*) &r);
+            destroy_integer((void*) &nc1);
+            destroy_integer((void*) &j);
 
         } else {
 
@@ -270,17 +280,17 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2,
 
     if (p3 != NULL_POINTER) {
 
-        int* i = (int*) p3;
+        int** i = (int**) p3;
 
         if (p2 != NULL_POINTER) {
 
-            int* cs = (int*) p2;
+            int** cs = (int**) p2;
 
             if (p1 != NULL_POINTER) {
 
-                int* cc = (int*) p1;
+                int** cc = (int**) p1;
 
-                if (*i >= 0) {
+                if (**i >= 0) {
 
 //??                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Set compound element by index.");
 
@@ -312,27 +322,30 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2,
                     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_COUNTS_INDEX, (void*) &dc);
                     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_SIZES_INDEX, (void*) &ds);
 
-                    if (*i == *cs) {
+                    if (**i == **cs) {
 
                         // Increase size.
-                        *cs = (*cs * COMPOUND_RESIZE_FACTOR) + 1;
+                        **cs = (**cs * COMPOUND_RESIZE_FACTOR) + 1;
 
                         // Resize names, models, abstractions, details.
                         resize_array((void*) &n, (void*) &POINTER_ARRAY, p2);
-                        resize_array((void*) &nc, (void*) &INTEGER_ARRAY, p2);
-                        resize_array((void*) &ns, (void*) &INTEGER_ARRAY, p2);
+                        resize_array((void*) &nc, (void*) &POINTER_ARRAY, p2);
+                        resize_array((void*) &ns, (void*) &POINTER_ARRAY, p2);
                         resize_array((void*) &a, (void*) &POINTER_ARRAY, p2);
-                        resize_array((void*) &ac, (void*) &INTEGER_ARRAY, p2);
-                        resize_array((void*) &as, (void*) &INTEGER_ARRAY, p2);
+                        resize_array((void*) &ac, (void*) &POINTER_ARRAY, p2);
+                        resize_array((void*) &as, (void*) &POINTER_ARRAY, p2);
                         resize_array((void*) &m, (void*) &POINTER_ARRAY, p2);
-                        resize_array((void*) &mc, (void*) &INTEGER_ARRAY, p2);
-                        resize_array((void*) &ms, (void*) &INTEGER_ARRAY, p2);
+                        resize_array((void*) &mc, (void*) &POINTER_ARRAY, p2);
+                        resize_array((void*) &ms, (void*) &POINTER_ARRAY, p2);
                         resize_array((void*) &d, (void*) &POINTER_ARRAY, p2);
-                        resize_array((void*) &dc, (void*) &INTEGER_ARRAY, p2);
-                        resize_array((void*) &ds, (void*) &INTEGER_ARRAY, p2);
+                        resize_array((void*) &dc, (void*) &POINTER_ARRAY, p2);
+                        resize_array((void*) &ds, (void*) &POINTER_ARRAY, p2);
 
-                        //after resize can the reference changed
-                        //in consequence muss the new set the array element
+                        // Set new array reference.
+                        // CAUTION! If an array gets resized, a new array is
+                        // created and the contents of the old array gets copied.
+                        // Therefore, the new array reference needs to be set.
+                        // The old array gets destroyed automatically by resize.
                         set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
                         set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &nc);
                         set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
@@ -347,24 +360,24 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2,
                         set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_SIZES_INDEX, (void*) &ds);
                     }
 
-                    if (*i < *cs) {
+                    if (**i < **cs) {
 
                         // Set name, model, abstraction, details.
                         set_array_element((void*) &n, (void*) &POINTER_ARRAY, p3, p4);
-                        set_array_element((void*) &nc, (void*) &INTEGER_ARRAY, p3, p5);
-                        set_array_element((void*) &ns, (void*) &INTEGER_ARRAY, p3, p6);
+                        set_array_element((void*) &nc, (void*) &POINTER_ARRAY, p3, p5);
+                        set_array_element((void*) &ns, (void*) &POINTER_ARRAY, p3, p6);
                         set_array_element((void*) &a, (void*) &POINTER_ARRAY, p3, p7);
-                        set_array_element((void*) &ac, (void*) &INTEGER_ARRAY, p3, p8);
-                        set_array_element((void*) &as, (void*) &INTEGER_ARRAY, p3, p9);
+                        set_array_element((void*) &ac, (void*) &POINTER_ARRAY, p3, p8);
+                        set_array_element((void*) &as, (void*) &POINTER_ARRAY, p3, p9);
                         set_array_element((void*) &m, (void*) &POINTER_ARRAY, p3, p10);
-                        set_array_element((void*) &mc, (void*) &INTEGER_ARRAY, p3, p11);
-                        set_array_element((void*) &ms, (void*) &INTEGER_ARRAY, p3, p12);
+                        set_array_element((void*) &mc, (void*) &POINTER_ARRAY, p3, p11);
+                        set_array_element((void*) &ms, (void*) &POINTER_ARRAY, p3, p12);
                         set_array_element((void*) &d, (void*) &POINTER_ARRAY, p3, p13);
-                        set_array_element((void*) &dc, (void*) &INTEGER_ARRAY, p3, p14);
-                        set_array_element((void*) &ds, (void*) &INTEGER_ARRAY, p3, p15);
+                        set_array_element((void*) &dc, (void*) &POINTER_ARRAY, p3, p14);
+                        set_array_element((void*) &ds, (void*) &POINTER_ARRAY, p3, p15);
 
                         // Increment count.
-                        (*cc)++;
+                        (**cc)++;
 
                     } else {
 
@@ -418,11 +431,13 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
     const void* p12, const void* p13, const void* p14) {
 
     // The separator index.
-    int i = -1;
+    int* i = INTEGER_NULL_POINTER;
+    create_integer((void*) &i);
+    *i = -1;
 
     get_array_element_index(p3, (void*) &CHARACTER_ARRAY, p4, (void*) &COMPOUND_ELEMENT_SEPARATOR, (void*) &i);
 
-    if (i != -1) {
+    if (*i != -1) {
 
         // The separator has been found.
         // The full name is hierarchical.
@@ -430,25 +445,25 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
 
         if (p4 != NULL_POINTER) {
 
-            int* nc = (int*) p4;
+            int** nc = (int**) p4;
 
             if (p3 != NULL_POINTER) {
 
                 void** n = (void**) p3;
 
-                if (i >= 0) {
+                if (*i >= 0) {
 
-                    if (i < *nc) {
+                    if (*i < **nc) {
 
-                        if (i != 0) {
+                        if (*i != 0) {
 
-                            if (i != (*nc - 1)) {
+                            if (*i != (**nc - 1)) {
 
                                 // The remaining name starts at the index after the separator.
                                 // Example: "hello.test"
                                 // The index of the separator is 5.
                                 // The starting index of the remaining name "test" is 6 = 5 + 1.
-                                void* r = (void*) (*n + i + 1);
+                                void* r = (void*) (*n + *i + 1);
 
                                 // The remaining name count is the full name count decreased
                                 // by the separator index increased by one.
@@ -456,12 +471,14 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
                                 // The full name count is 10.
                                 // The separator index is 5.
                                 // The count of the remaining name "test" is 4 = 10 - (5 + 1).
-                                int rc = *nc - (i + 1);
+                                int* rc = INTEGER_NULL_POINTER;
+                                create_integer((void*) &rc);
+                                *rc = **nc - (*i + 1);
 
                                 // The models.
                                 void* m = NULL_POINTER;
-                                int mc = 0;
-                                int ms = 0;
+                                void* mc = NULL_POINTER;
+                                void* ms = NULL_POINTER;
 
                                 // Get models.
                                 get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_INDEX, (void*) &m);
@@ -473,20 +490,23 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
                                 // Example: "hello.test"
                                 // The index i of the separator is 5.
                                 // The count of the element name "hello" before the separator is likewise 5.
-                                int index = -1;
+                                int* index = INTEGER_NULL_POINTER;
+                                create_integer((void*) &index);
+                                *index = -1;
+
                                 get_compound_element_index(p0, p1, p3, (void*) &i, (void*) &index);
 
-                                if (index != -1) {
+                                if (*index != -1) {
 
                                     // The element model.
                                     void* em = NULL_POINTER;
-                                    int emc = 0;
-                                    int ems = 0;
+                                    void* emc = NULL_POINTER;
+                                    void* ems = NULL_POINTER;
 
                                     // Get element model.
                                     get_array_element((void*) &m, (void*) &POINTER_ARRAY, (void*) &index, (void*) &em);
-                                    get_array_element((void*) &mc, (void*) &INTEGER_ARRAY, (void*) &index, (void*) &emc);
-                                    get_array_element((void*) &ms, (void*) &INTEGER_ARRAY, (void*) &index, (void*) &ems);
+                                    get_array_element((void*) &mc, (void*) &POINTER_ARRAY, (void*) &index, (void*) &emc);
+                                    get_array_element((void*) &ms, (void*) &POINTER_ARRAY, (void*) &index, (void*) &ems);
 
                                     //?? TODO:
                                     //?? For now, the remaining name count is also used as
@@ -503,6 +523,9 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
 
 //??                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not set compound element by name. A element with that name does not exist.");
                                 }
+
+                                destroy_integer((void*) &index);
+                                destroy_integer((void*) &rc);
 
                             } else {
 
@@ -541,10 +564,13 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
         // The given compound contains elements which are primitive models.
 
         // The index of the name.
-        int index = -1;
+        int* index = INTEGER_NULL_POINTER;
+        create_integer((void*) &index);
+        *index = -1;
+
         get_compound_element_index(p0, p1, p3, p4, (void*) &index);
 
-        if (index != -1) {
+        if (*index != -1) {
 
 //??            log_message((void*) &INFO_LOG_LEVEL, (void*) &SET_COMPOUND_BY_NAME_MESSAGE, (void*) &SET_COMPOUND_BY_NAME_MESSAGE_COUNT);
 
@@ -554,9 +580,11 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
             //?? - Allow replacement for primitive types (integer, double) that
             //??   do not have to be destroyed!
             //?? - Check the abstraction of the model to be set:
-            //??   If it is compound, then do NOT replace; otherwise DO replace!
+            //??   If it is compound, then do NOT replace --> error message; otherwise DO replace!
 
 /*??
+            // Check if element exists.
+
             // Use index of the found element.
             set_compound_element_by_index(p0, p1, p2,
                 (void*) &index,
@@ -574,7 +602,11 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
                 p3, p4, p5,
                 p6, p7, p8, p9, p10, p11, p12, p13, p14);
         }
+
+        destroy_integer((void*) &index);
     }
+
+    destroy_integer((void*) &i);
 }
 
 /**
@@ -619,17 +651,17 @@ void remove_compound_element_by_index(void* p0, void* p1, void* p2, const void* 
 
     if (p3 != NULL_POINTER) {
 
-        int* i = (int*) p3;
+        int** i = (int**) p3;
 
         if (p2 != NULL_POINTER) {
 
-            int* cs = (int*) p2;
+            int** cs = (int**) p2;
 
             if (p1 != NULL_POINTER) {
 
-                int* cc = (int*) p1;
+                int** cc = (int**) p1;
 
-                if (*i >= 0) {
+                if (**i >= 0) {
 
 //??                    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Remove compound element by index.");
 
@@ -661,24 +693,27 @@ void remove_compound_element_by_index(void* p0, void* p1, void* p2, const void* 
                     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_COUNTS_INDEX, (void*) &dc);
                     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_SIZES_INDEX, (void*) &ds);
 
-                    if (*i < *cc) {
+                    if (**i < **cc) {
 
                         // Remove element name, model, abstraction, details.
                         remove_array_element((void*) &n, (void*) &POINTER_ARRAY, p1, p3);
-                        remove_array_element((void*) &nc, (void*) &INTEGER_ARRAY, p1, p3);
-                        remove_array_element((void*) &ns, (void*) &INTEGER_ARRAY, p1, p3);
+                        remove_array_element((void*) &nc, (void*) &POINTER_ARRAY, p1, p3);
+                        remove_array_element((void*) &ns, (void*) &POINTER_ARRAY, p1, p3);
                         remove_array_element((void*) &a, (void*) &POINTER_ARRAY, p1, p3);
-                        remove_array_element((void*) &ac, (void*) &INTEGER_ARRAY, p1, p3);
-                        remove_array_element((void*) &as, (void*) &INTEGER_ARRAY, p1, p3);
+                        remove_array_element((void*) &ac, (void*) &POINTER_ARRAY, p1, p3);
+                        remove_array_element((void*) &as, (void*) &POINTER_ARRAY, p1, p3);
                         remove_array_element((void*) &m, (void*) &POINTER_ARRAY, p1, p3);
-                        remove_array_element((void*) &mc, (void*) &INTEGER_ARRAY, p1, p3);
-                        remove_array_element((void*) &ms, (void*) &INTEGER_ARRAY, p1, p3);
+                        remove_array_element((void*) &mc, (void*) &POINTER_ARRAY, p1, p3);
+                        remove_array_element((void*) &ms, (void*) &POINTER_ARRAY, p1, p3);
                         remove_array_element((void*) &d, (void*) &POINTER_ARRAY, p1, p3);
-                        remove_array_element((void*) &dc, (void*) &INTEGER_ARRAY, p1, p3);
-                        remove_array_element((void*) &ds, (void*) &INTEGER_ARRAY, p1, p3);
+                        remove_array_element((void*) &dc, (void*) &POINTER_ARRAY, p1, p3);
+                        remove_array_element((void*) &ds, (void*) &POINTER_ARRAY, p1, p3);
 
                         // Decrement count.
-                        (*cc)--;
+                        (**cc)--;
+
+                        //?? TODO: Decrease array size, if count is smaller than
+                        //?? half the current size.
 
                     } else {
 
@@ -719,11 +754,13 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
     const void* p3, const void* p4) {
 
     // The separator index.
-    int i = -1;
+    int* i = INTEGER_NULL_POINTER;
+    create_integer((void*) &i);
+    *i = -1;
 
     get_array_element_index(p3, (void*) &CHARACTER_ARRAY, p4, (void*) &COMPOUND_ELEMENT_SEPARATOR, (void*) &i);
 
-    if (i != -1) {
+    if (*i != -1) {
 
         // The separator has been found.
         // The full name is hierarchical.
@@ -731,25 +768,25 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
 
         if (p4 != NULL_POINTER) {
 
-            int* nc = (int*) p4;
+            int** nc = (int**) p4;
 
             if (p3 != NULL_POINTER) {
 
                 void** n = (void**) p3;
 
-                if (i >= 0) {
+                if (*i >= 0) {
 
-                    if (i < *nc) {
+                    if (*i < **nc) {
 
-                        if (i != 0) {
+                        if (*i != 0) {
 
-                            if (i != (*nc - 1)) {
+                            if (*i != (**nc - 1)) {
 
                                 // The remaining name starts at the index after the separator.
                                 // Example: "hello.test"
                                 // The index of the separator is 5.
                                 // The starting index of the remaining name "test" is 6 = 5 + 1.
-                                void* r = (void*) (*n + i + 1);
+                                void* r = (void*) (*n + *i + 1);
 
                                 // The remaining name count is the full name count decreased
                                 // by the separator index increased by one.
@@ -757,12 +794,14 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
                                 // The full name count is 10.
                                 // The separator index is 5.
                                 // The count of the remaining name "test" is 4 = 10 - (5 + 1).
-                                int rc = *nc - (i + 1);
+                                int* rc = INTEGER_NULL_POINTER;
+                                create_integer((void*) &rc);
+                                *rc = **nc - (*i + 1);
 
                                 // The models.
                                 void* m = NULL_POINTER;
-                                int mc = 0;
-                                int ms = 0;
+                                void* mc = NULL_POINTER;
+                                void* ms = NULL_POINTER;
 
                                 // Get models.
                                 get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_INDEX, (void*) &m);
@@ -774,20 +813,23 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
                                 // Example: "hello.test"
                                 // The index i of the separator is 5.
                                 // The count of the element name "hello" before the separator is likewise 5.
-                                int index = -1;
+                                int* index = INTEGER_NULL_POINTER;
+                                create_integer((void*) &index);
+                                *index = -1;
+
                                 get_compound_element_index(p0, p1, p3, (void*) &i, (void*) &index);
 
-                                if (index != -1) {
+                                if (*index != -1) {
 
                                     // The element model.
                                     void* em = NULL_POINTER;
-                                    int emc = 0;
-                                    int ems = 0;
+                                    void* emc = NULL_POINTER;
+                                    void* ems = NULL_POINTER;
 
                                     // Get element model.
                                     get_array_element((void*) &m, (void*) &POINTER_ARRAY, (void*) &index, (void*) &em);
-                                    get_array_element((void*) &mc, (void*) &INTEGER_ARRAY, (void*) &index, (void*) &emc);
-                                    get_array_element((void*) &ms, (void*) &INTEGER_ARRAY, (void*) &index, (void*) &ems);
+                                    get_array_element((void*) &mc, (void*) &POINTER_ARRAY, (void*) &index, (void*) &emc);
+                                    get_array_element((void*) &ms, (void*) &POINTER_ARRAY, (void*) &index, (void*) &ems);
 
                                     //?? TODO:
                                     //?? For now, the remaining name count is also used as
@@ -796,13 +838,15 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
                                     //?? the name count and size differ.
 
                                     // Recursively continue to process along the hierarchical name.
-                                    remove_compound_element_by_name((void*) &em, (void*) &emc, (void*) &ems,
-                                        (void*) &r, (void*) &rc);
+                                    remove_compound_element_by_name((void*) &em, (void*) &emc, (void*) &ems, (void*) &r, (void*) &rc);
 
                                 } else {
 
 //??                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not remove compound element by name. A element with that name does not exist.");
                                 }
+
+                                destroy_integer((void*) &index);
+                                destroy_integer((void*) &rc);
 
                             } else {
 
@@ -841,10 +885,13 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
         // The given compound contains elements which are primitive models.
 
         // The index of the element name.
-        int index = -1;
+        int* index = INTEGER_NULL_POINTER;
+        create_integer((void*) &index);
+        *index = -1;
+
         get_compound_element_index(p0, p1, p3, p4, (void*) &index);
 
-        if (index != -1) {
+        if (*index != -1) {
 
 //??            log_message((void*) &INFO_LOG_LEVEL, (void*) &REMOVE_COMPOUND_BY_NAME_MESSAGE, (void*) &REMOVE_COMPOUND_BY_NAME_MESSAGE_COUNT);
 
@@ -854,7 +901,11 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
 
 //??            log_message((void*) &WARNING_LOG_LEVEL, (void*) &COULD_NOT_REMOVE_COMPOUND_BY_NAME_A_WITH_THAT_NAME_DOES_NOT_EXIST_MESSAGE, (void*) &COULD_NOT_REMOVE_COMPOUND_BY_NAME_A_WITH_THAT_NAME_DOES_NOT_EXIST_MESSAGE_COUNT);
         }
+
+        destroy_integer((void*) &index);
     }
+
+    destroy_integer((void*) &i);
 }
 
 /**
@@ -872,13 +923,13 @@ void get_compound_element_name_by_index(const void* p0, const void* p1, const vo
 
     if (p2 != NULL_POINTER) {
 
-        int* i = (int*) p2;
+        int** i = (int**) p2;
 
         if (p1 != NULL_POINTER) {
 
-            int* cc = (int*) p1;
+            int** cc = (int**) p1;
 
-            if (*i >= 0) {
+            if (**i >= 0) {
 
 //??                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Get compound element by index.");
 
@@ -892,12 +943,12 @@ void get_compound_element_name_by_index(const void* p0, const void* p1, const vo
                 get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_COUNTS_INDEX, (void*) &nc);
                 get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
 
-                if (*i < *cc) {
+                if (**i < **cc) {
 
                     // Get element name.
                     get_array_element((void*) &n, (void*) &POINTER_ARRAY, p2, p3);
-                    get_array_element((void*) &nc, (void*) &INTEGER_ARRAY, p2, p4);
-                    get_array_element((void*) &ns, (void*) &INTEGER_ARRAY, p2, p5);
+                    get_array_element((void*) &nc, (void*) &POINTER_ARRAY, p2, p4);
+                    get_array_element((void*) &ns, (void*) &POINTER_ARRAY, p2, p5);
 
                 } else {
 
@@ -942,13 +993,13 @@ void get_compound_element_by_index(const void* p0, const void* p1, const void* p
 
     if (p2 != NULL_POINTER) {
 
-        int* i = (int*) p2;
+        int** i = (int**) p2;
 
         if (p1 != NULL_POINTER) {
 
-            int* cc = (int*) p1;
+            int** cc = (int**) p1;
 
-            if (*i >= 0) {
+            if (**i >= 0) {
 
 //??                log_message((void*) &INFO_LOG_LEVEL, (void*) &"Get compound element by index.");
 
@@ -974,18 +1025,18 @@ void get_compound_element_by_index(const void* p0, const void* p1, const void* p
                 get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_COUNTS_INDEX, (void*) &dc);
                 get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &DETAILS_SIZES_INDEX, (void*) &ds);
 
-                if (*i < *cc) {
+                if (**i < **cc) {
 
                     // Get element abstraction, model, details.
                     get_array_element((void*) &a, (void*) &POINTER_ARRAY, p2, p3);
-                    get_array_element((void*) &ac, (void*) &INTEGER_ARRAY, p2, p4);
-                    get_array_element((void*) &as, (void*) &INTEGER_ARRAY, p2, p5);
+                    get_array_element((void*) &ac, (void*) &POINTER_ARRAY, p2, p4);
+                    get_array_element((void*) &as, (void*) &POINTER_ARRAY, p2, p5);
                     get_array_element((void*) &m, (void*) &POINTER_ARRAY, p2, p6);
-                    get_array_element((void*) &mc, (void*) &INTEGER_ARRAY, p2, p7);
-                    get_array_element((void*) &ms, (void*) &INTEGER_ARRAY, p2, p8);
+                    get_array_element((void*) &mc, (void*) &POINTER_ARRAY, p2, p7);
+                    get_array_element((void*) &ms, (void*) &POINTER_ARRAY, p2, p8);
                     get_array_element((void*) &d, (void*) &POINTER_ARRAY, p2, p9);
-                    get_array_element((void*) &dc, (void*) &INTEGER_ARRAY, p2, p10);
-                    get_array_element((void*) &ds, (void*) &INTEGER_ARRAY, p2, p11);
+                    get_array_element((void*) &dc, (void*) &POINTER_ARRAY, p2, p10);
+                    get_array_element((void*) &ds, (void*) &POINTER_ARRAY, p2, p11);
 
                 } else {
 
@@ -1030,11 +1081,13 @@ void get_compound_element_by_name(const void* p0, const void* p1,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
     // The separator index.
-    int i = -1;
+    int* i = INTEGER_NULL_POINTER;
+    create_integer((void*) &i);
+    *i = -1;
 
     get_array_element_index(p2, (void*) &CHARACTER_ARRAY, p3, (void*) &COMPOUND_ELEMENT_SEPARATOR, (void*) &i);
 
-    if (i != -1) {
+    if (*i != -1) {
 
         // The separator has been found.
         // The full name is hierarchical.
@@ -1042,25 +1095,25 @@ void get_compound_element_by_name(const void* p0, const void* p1,
 
         if (p3 != NULL_POINTER) {
 
-            int* nc = (int*) p3;
+            int** nc = (int**) p3;
 
             if (p2 != NULL_POINTER) {
 
                 void** n = (void**) p2;
 
-                if (i >= 0) {
+                if (*i >= 0) {
 
-                    if (i < *nc) {
+                    if (*i < *nc) {
 
-                        if (i != 0) {
+                        if (*i != 0) {
 
-                            if (i != (*nc - 1)) {
+                            if (*i != (**nc - 1)) {
 
                                 // The remaining name starts at the index after the separator.
                                 // Example: "hello.test"
                                 // The index of the separator is 5.
                                 // The starting index of the remaining name "test" is 6 = 5 + 1.
-                                void* r = (void*) (*n + i + 1);
+                                void* r = (void*) (*n + *i + 1);
 
                                 // The remaining name count is the full name count decreased
                                 // by the separator index increased by one.
@@ -1068,12 +1121,14 @@ void get_compound_element_by_name(const void* p0, const void* p1,
                                 // The full name count is 10.
                                 // The separator index is 5.
                                 // The count of the remaining name "test" is 4 = 10 - (5 + 1).
-                                int rc = *nc - (i + 1);
+                                int* rc = INTEGER_NULL_POINTER;
+                                create_integer((void*) &rc);
+                                *rc = *nc - (*i + 1);
 
                                 // The models.
                                 void* m = NULL_POINTER;
-                                int mc = 0;
-                                int ms = 0;
+                                void* mc = NULL_POINTER;
+                                void* ms = NULL_POINTER;
 
                                 // Get models.
                                 get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_INDEX, (void*) &m);
@@ -1085,20 +1140,23 @@ void get_compound_element_by_name(const void* p0, const void* p1,
                                 // Example: "hello.test"
                                 // The index i of the separator is 5.
                                 // The count of the element name "hello" before the separator is likewise 5.
-                                int index = -1;
+                                int* index = INTEGER_NULL_POINTER;
+                                create_integer((void*) &index);
+                                *index = -1;
+
                                 get_compound_element_index(p0, p1, p2, (void*) &i, (void*) &index);
 
-                                if (index != -1) {
+                                if (*index != -1) {
 
                                     // The element model.
                                     void* em = NULL_POINTER;
-                                    int emc = 0;
-                                    int ems = 0;
+                                    void* emc = NULL_POINTER;
+                                    void* ems = NULL_POINTER;
 
                                     // Get element model.
                                     get_array_element((void*) &m, (void*) &POINTER_ARRAY, (void*) &index, (void*) &em);
-                                    get_array_element((void*) &mc, (void*) &INTEGER_ARRAY, (void*) &index, (void*) &emc);
-                                    get_array_element((void*) &ms, (void*) &INTEGER_ARRAY, (void*) &index, (void*) &ems);
+                                    get_array_element((void*) &mc, (void*) &POINTER_ARRAY, (void*) &index, (void*) &emc);
+                                    get_array_element((void*) &ms, (void*) &POINTER_ARRAY, (void*) &index, (void*) &ems);
 
                                     //?? TODO:
                                     //?? For now, the remaining name count is also used as
@@ -1115,6 +1173,9 @@ void get_compound_element_by_name(const void* p0, const void* p1,
 
 //??                                    log_message((void*) &WARNING_LOG_LEVEL, (void*) &"Could not get compound element by name. A element with that name does not exist.");
                                 }
+
+                                destroy_integer((void*) &index);
+                                destroy_integer((void*) &rc);
 
                             } else {
 
@@ -1153,10 +1214,13 @@ void get_compound_element_by_name(const void* p0, const void* p1,
         // The given compound contains elements which are primitive models.
 
         // The index of the element name.
-        int index = -1;
+        int* index = INTEGER_NULL_POINTER;
+        create_integer((void*) &index);
+        *index = -1;
+
         get_compound_element_index(p0, p1, p2, p3, (void*) &index);
 
-        if (index != -1) {
+        if (*index != -1) {
 
 //??            log_message((void*) &INFO_LOG_LEVEL, (void*) &GET_COMPOUND_BY_NAME_MESSAGE, (void*) &GET_COMPOUND_BY_NAME_MESSAGE_COUNT);
 
@@ -1167,7 +1231,11 @@ void get_compound_element_by_name(const void* p0, const void* p1,
 
 //??            log_message((void*) &WARNING_LOG_LEVEL, (void*) &COULD_NOT_GET_COMPOUND_BY_NAME_A_WITH_THAT_NAME_DOES_NOT_EXIST_MESSAGE, (void*) &COULD_NOT_GET_COMPOUND_BY_NAME_A_WITH_THAT_NAME_DOES_NOT_EXIST_MESSAGE_COUNT);
         }
+
+        destroy_integer((void*) &index);
     }
+
+    destroy_integer((void*) &i);
 }
 
 /**
@@ -1198,16 +1266,16 @@ void get_compound_element_by_encapsulated_name(const void* p0, const void* p1,
 
     // The abstraction.
     void* a = NULL_POINTER;
-    int ac = 0;
-    int as = 0;
+    void* ac = NULL_POINTER;
+    void* as = NULL_POINTER;
     // The model.
     void* m = NULL_POINTER;
-    int mc = 0;
-    int ms = 0;
+    void* mc = NULL_POINTER;
+    void* ms = NULL_POINTER;
     // The details.
     void* d = NULL_POINTER;
-    int dc = 0;
-    int ds = 0;
+    void* dc = NULL_POINTER;
+    void* ds = NULL_POINTER;
 
     // Get knowledge element name.
     get_compound_element_by_name(p0, p1,

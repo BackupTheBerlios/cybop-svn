@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a compound model in memory
  *
- * @version $Revision: 1.3 $ $Date: 2004-09-11 22:19:43 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-12-13 22:47:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -65,17 +65,17 @@ void create_compound(void* p0, const void* p1) {
 
     // Create names, abstractions, models, details.
     create_array((void*) &n, (void*) &POINTER_ARRAY, p1);
-    create_array((void*) &nc, (void*) &INTEGER_ARRAY, p1);
-    create_array((void*) &ns, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &nc, (void*) &POINTER_ARRAY, p1);
+    create_array((void*) &ns, (void*) &POINTER_ARRAY, p1);
     create_array((void*) &a, (void*) &POINTER_ARRAY, p1);
-    create_array((void*) &ac, (void*) &INTEGER_ARRAY, p1);
-    create_array((void*) &as, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &ac, (void*) &POINTER_ARRAY, p1);
+    create_array((void*) &as, (void*) &POINTER_ARRAY, p1);
     create_array((void*) &m, (void*) &POINTER_ARRAY, p1);
-    create_array((void*) &mc, (void*) &INTEGER_ARRAY, p1);
-    create_array((void*) &ms, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &mc, (void*) &POINTER_ARRAY, p1);
+    create_array((void*) &ms, (void*) &POINTER_ARRAY, p1);
     create_array((void*) &d, (void*) &POINTER_ARRAY, p1);
-    create_array((void*) &dc, (void*) &INTEGER_ARRAY, p1);
-    create_array((void*) &ds, (void*) &INTEGER_ARRAY, p1);
+    create_array((void*) &dc, (void*) &POINTER_ARRAY, p1);
+    create_array((void*) &ds, (void*) &POINTER_ARRAY, p1);
 
     // Set names, abstractions, models, details.
     // CAUTION! Use ascending order, as compared to destruction!
@@ -148,17 +148,17 @@ void destroy_compound(void* p0, const void* p1) {
 
     // Destroy names, abstractions, models, details.
     destroy_array((void*) &n, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &nc, (void*) &INTEGER_ARRAY, p1);
-    destroy_array((void*) &ns, (void*) &INTEGER_ARRAY, p1);
+    destroy_array((void*) &nc, (void*) &POINTER_ARRAY, p1);
+    destroy_array((void*) &ns, (void*) &POINTER_ARRAY, p1);
     destroy_array((void*) &a, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &ac, (void*) &INTEGER_ARRAY, p1);
-    destroy_array((void*) &as, (void*) &INTEGER_ARRAY, p1);
+    destroy_array((void*) &ac, (void*) &POINTER_ARRAY, p1);
+    destroy_array((void*) &as, (void*) &POINTER_ARRAY, p1);
     destroy_array((void*) &m, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &mc, (void*) &INTEGER_ARRAY, p1);
-    destroy_array((void*) &ms, (void*) &INTEGER_ARRAY, p1);
+    destroy_array((void*) &mc, (void*) &POINTER_ARRAY, p1);
+    destroy_array((void*) &ms, (void*) &POINTER_ARRAY, p1);
     destroy_array((void*) &d, (void*) &POINTER_ARRAY, p1);
-    destroy_array((void*) &dc, (void*) &INTEGER_ARRAY, p1);
-    destroy_array((void*) &ds, (void*) &INTEGER_ARRAY, p1);
+    destroy_array((void*) &dc, (void*) &POINTER_ARRAY, p1);
+    destroy_array((void*) &ds, (void*) &POINTER_ARRAY, p1);
 
     // Destroy compound.
     destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT);

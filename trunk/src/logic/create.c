@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.16 $ $Date: 2004-11-30 15:33:13 $ $Author: rholzmueller $
+ * @version $Revision: 1.17 $ $Date: 2004-12-13 22:47:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -467,8 +467,8 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
     int was = 0;
     // The whole model.
     void* wm = NULL_POINTER;
-    int wmc = 0;
-    int wms = 0;
+    void* wmc = NULL_POINTER;
+    void* wms = NULL_POINTER;
     // The whole details.
     void* wd = NULL_POINTER;
     int wdc = 0;
@@ -566,7 +566,6 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
             (void*) &pa, (void*) &pac, (void*) &pas,
             (void*) &pm, (void*) &pmc, (void*) &pms,
             (void*) &pd, (void*) &pdc, (void*) &pds);
-            
     }
 }
 

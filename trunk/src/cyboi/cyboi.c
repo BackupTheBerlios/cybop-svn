@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.46 $ $Date: 2004-11-30 15:34:16 $ $Author: rholzmueller $
+ * @version $Revision: 1.47 $ $Date: 2004-12-13 22:47:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -108,8 +108,6 @@ void initialize_global_variables() {
     /** The double null pointer. */
     DOUBLE_NULL_POINTER = (double*) 0;
 }
-
-
 
 /**
  * The main entry function.
