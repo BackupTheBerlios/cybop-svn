@@ -18,18 +18,18 @@ The simplest way to compile and install this package is:
 
   1. `cd' to the directory containing the package's source code.
 
-  2. Type `make' to compile the package.
-  
-  3. Type `make install' to install the programs and any data files and
-     documentation.
+  2. `cd' to the directory /admin.
 
+  3. Type `make' to compile the package.
+  
   4. You can remove the program binaries and object files from the
      source code directory by typing `make clean'.
 
 Requirements:
-  depends: - to start cyboi You need libc6, xlibs, libxml2
-           - to compile the source code You also need libxml2-dev
-  suggests: - cyboi-doc, cybol-core
+  depends:     - to start cyboi You need libc6, xlibs, libxml2
+               - to compile the source code You also need libxml2-dev
+  recommends:  - cybol-core
+  suggests:    - cyboi-doc
 
 
 Find more information on our website:

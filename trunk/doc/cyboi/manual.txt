@@ -14,7 +14,7 @@ Texts. A copy of the license is included in the section entitled
 http://www.cybop.net
 - Cybernetics Oriented Programming -
 
-@version $Revision: 1.1 $ $Date: 2005-02-12 22:44:23 $ $Author: christian $
+@version $Revision: 1.2 $ $Date: 2005-03-01 12:59:20 $ $Author: reichenbach $
 @author Christian Heller <christian.heller@tuxtax.de>
 ______________________________________________________________________
 
@@ -55,14 +55,17 @@ To run an application using CYBOI, just type in a shell/ console window:
 
 cyboi configuration.cybol
 
-A number of example applications can be found in package "cybol-examples".
-The are copied to /usr/share/cybol-examples. Run them with the following
-commands:
+A number of example applications can be found in /usr/share/doc/cyboi/examples.
+To start one of them with CYBOI, change into the following directory:
 
-cyboi /usr/share/cybol-examples/exit/configuration.cybol
-cyboi /usr/share/cybol-examples/exit_text_file/configuration.cybol
-cyboi /usr/share/cybol-examples/exit_cybol_file/configuration.cybol
-cyboi /usr/share/cybol-examples/helloworld/configuration.cybol
+cd /usr/share/doc/cyboi
+
+Afterwards, type in a shell/console window:
+
+cyboi examples/exit/configuration.cybol
+cyboi examples/exit_text_file/configuration.cybol
+cyboi examples/exit_cybol_file/configuration.cybol
+cyboi examples/helloworld/configuration.cybol
 
 Read the example CYBOL files to get more information!
 

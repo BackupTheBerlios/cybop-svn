@@ -19,7 +19,11 @@ cyboi.deb
                 /usr/share/doc/cyboi/README.Debian
                 /usr/share/doc/cyboi/changelog.gz
                 /usr/share/doc/cyboi/copyright
-                /usr/share/man/man1/cyboi1.gz
+  	        /usr/share/man/man1/cyboi1.gz
+		/usr/share/doc/cyboi/examples/exit/*
+                /usr/share/doc/cyboi/examples/exit_cybol_file/*
+                /usr/share/doc/cyboi/examples/exit_text_file/*
+                /usr/share/doc/cyboi/examples/helloworld/*
 
 [cyboi-doc.deb]
 - recommends:   cybop-doc-papers, cybop-doc-presentations
@@ -32,15 +36,6 @@ cyboi.deb
 - suggests:     cybol-healthcare
 - category:     misc (evtl. auch "lib")
 - files:        /usr/share/cybol/core/*
-
-cybol-examples.deb
-- depends:      cyboi
-- suggests:     cybop-doc-papers, cybop-doc-presentations
-- category:     misc
-- files:        /usr/share/cybol-examples/exit/*
-                /usr/share/cybol-examples/exit_cybol_file/*
-                /usr/share/cybol-examples/exit_text_file/*
-                /usr/share/cybol-examples/helloworld/*
 
 [cybol-healthcare.deb]
 - depends:      cyboi, cybol-core
