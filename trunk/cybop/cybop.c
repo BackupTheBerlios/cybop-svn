@@ -39,7 +39,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.23 $ $Date: 2003-11-12 11:11:25 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2003-11-25 13:30:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,7 +90,7 @@ static void wait(void* p0) {
             handle_signal(s, (void*) &FALSE_VALUE, sf);
 
             // Send signal.
-            send_signal(p0, s);
+            send_signal(p0, s, (void*) &NORMAL_PRIORITY, (void*) &INTERNAL_LANGUAGE);
 
             // Reset signal.
             reset_signal(s);
@@ -160,8 +160,6 @@ int main(int p0, char** p1) {
                 log((void*) &INFO_LOG_LEVEL, p1[1]);
 
                 // Set signal elements.
-                tmp->priority = (void*) &NORMAL_PRIORITY;
-                tmp->language = (void*) &NEURO_LANGUAGE;
                 tmp->predicate = (void*) p1[1];
                 tmp->object = (void*) p1[2];
 
@@ -173,7 +171,7 @@ int main(int p0, char** p1) {
 //??                synchronized (signal_memory) {
 
                     // Add signal to signal memory (interrupt vector table).
-                    add_map_element(signal_memory, (void*) tmp, (void*) &NORMAL_PRIORITY, (void*) NEURO_LANGUAGE);
+                    add_signal(signal_memory, (void*) tmp, (void*) &NORMAL_PRIORITY, (void*) INTERNAL_LANGUAGE);
 //??                }
 
             } else {

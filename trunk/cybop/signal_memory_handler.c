@@ -43,7 +43,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.1 $ $Date: 2003-11-12 11:11:26 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-11-25 13:30:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,8 +58,8 @@ static const int NORMAL_PRIORITY = 0;
 // Languages.
 //
 
-/** The system internal (neuro) language. */
-static const char* NEURO_LANGUAGE = "neuro";
+/** The system internal language. */
+static const char* INTERNAL_LANGUAGE = "internal";
 
 /** The textual user interface (tui) language. */
 static const char* TUI_LANGUAGE = "tui";
@@ -204,8 +204,8 @@ static void add_signal(void* p0, void* p1, void* p2, void* p3) {
 
     if (m != 0) {
 
-        int i = get_array_count(m->signals);
-        set_signal(p0, (void*) &i, p1, p2, p3);
+        void* c = get_array_count(m->signals);
+        set_signal(p0, c, p1, p2, p3);
         
     } else {
 
@@ -510,27 +510,26 @@ static void handle_signal(void* p0, void* p1, void* p2) {
 
             } else if (strcmp(a, "mouse_clicked") == 0) {
 
-                void* main_frame = get_model_element(statics, (void*) "main_frame");
-                struct vector* pointer_position = get_model_element(statics, (void*) "mouse.pointer_position");
+                void* main_frame = get_statics_model_part(statics, (void*) "main_frame");
+                struct vector* pointer_position = get_statics_model_part(statics, (void*) "mouse.pointer_position");
                 
                 reset_signal(s);
 
                 if (pointer_position != 0) {
                  
-                    mouse_clicked_action(main_frame, (void*) pointer_position->x, (void*) pointer_position->y, (void*) pointer_position->z, s->predicate);
+//??                    mouse_clicked_action(main_frame, (void*) pointer_position->x, (void*) pointer_position->y, (void*) pointer_position->z, s->predicate);
                     
                 } else {
                     
                     log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is null.");
                 }
                 
+/*??
             } else if (strcmp(a, SHOW_SYSTEM_INFORMATION_ACTION) == 0) {
 
-/*??
                 encode("system.controller.system_information_screen_model");
                 
                 show();
-*/
                 
                 reset_signal(s);
 
@@ -542,11 +541,11 @@ static void handle_signal(void* p0, void* p1, void* p2) {
             } else if (strcmp(a, REMEMBER_PATIENT_ACTION) == 0) {
                 
                 reset_signal(s);
-
 */
+
+/*??
             } else if (strcmp(a, SEND_ACTION) == 0) {
                 
-/*??
                 struct item* o = (struct item*) s->object;
 
                 if (o != 0) {
@@ -573,10 +572,10 @@ static void handle_signal(void* p0, void* p1, void* p2) {
                     
                     log((void*) &ERROR_LOG_LEVEL, "Could not handle send action. The signal object is null.");
                 }
-*/
 
                 reset_signal(s);
                 
+/*??
             } else if (strcmp(a, STARTUP_ACTION) == 0) {
                 
                 // Root (statics).
@@ -594,6 +593,7 @@ static void handle_signal(void* p0, void* p1, void* p2) {
                 //?? Temporary replacement.
 //??                show_character_screen(statics);
 
+/*??
             } else if (strcmp(a, SHUTDOWN_ACTION) == 0) {
                 
                 // Root (statics).
@@ -601,6 +601,7 @@ static void handle_signal(void* p0, void* p1, void* p2) {
                 *sf = 1;
 
                 reset_signal(s);
+*/
             }
             
         } else {

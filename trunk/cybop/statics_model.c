@@ -22,11 +22,11 @@
  * - Cybernetics Oriented Programming -
  */
 
-#ifndef MODEL_SOURCE
-#define MODEL_SOURCE
+#ifndef STATICS_MODEL_SOURCE
+#define STATICS_MODEL_SOURCE
 
 /**
- * This is a model.
+ * This is the statics model.
  *
  * It represents an abstract description of some real world thing.
  *
@@ -35,18 +35,18 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.1 $ $Date: 2003-11-12 11:11:26 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-11-25 13:30:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-struct model {
+struct statics_model {
 
-    /** The children. */
-    void* children;
+    /** The parts. */
+    void* parts;
 
     /** The positions. */
     void* positions;
 };
 
-/* MODEL_SOURCE */
+/* STATICS_MODEL_SOURCE */
 #endif
 

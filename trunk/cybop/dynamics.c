@@ -36,16 +36,16 @@
  * http://home.arcor.de/cpp_kurs/cpp/le07/k2_09_d1.htm
  * ... or try a Google search.
  *
- * @version $Revision: 1.12 $ $Date: 2003-11-12 11:11:25 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-11-25 13:30:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 //
-// Complex dynamics model.
+// Compound model.
 //
 
-/** The complex dynamics model. */
-static const char* COMPLEX_DYNAMICS_MODEL = "complex";
+/** The dynamics compound. */
+static const char* DYNAMICS_COMPOUND = "compound";
 
 //
 // Primitive operations.
@@ -455,25 +455,6 @@ static java.lang.String CATEGORY = "invokeinterface_noguess"; // +- 226
 
 static java.lang.String CATEGORY = "invokevirtual_quick_optimised";
 */
-
-//
-// Actions.
-//
-
-/** The show system information action. */
-static const char* SHOW_SYSTEM_INFORMATION_ACTION = "show_system_information";
-
-/** The startup action. */
-static const char* STARTUP_ACTION = "startup";
-
-/** The shutdown action. */
-static const char* SHUTDOWN_ACTION = "shutdown";
-
-/** The receive action. */
-static const char* RECEIVE_ACTION = "receive";
-
-/** The send action. */
-static const char* SEND_ACTION = "send";
 
 /* DYNAMICS_SOURCE */
 #endif

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: dynamics_cybol_handler.c,v $
+ * $RCSfile: dynamics_cybol_model_handler.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -29,7 +29,7 @@
  *
  * It can read and write CYBOL source files.
  *
- * @version $Revision: 1.1 $ $Date: 2003-11-12 11:11:25 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-11-25 13:30:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

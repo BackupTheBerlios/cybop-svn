@@ -34,16 +34,16 @@
  * Complex models consist of other complex models and primitive models.
  * Primitive models are the final abstraction in software.
  *
- * @version $Revision: 1.12 $ $Date: 2003-11-12 11:11:26 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-11-25 13:30:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 //
-// Complex statics model.
+// Compound model.
 //
 
-/** The complex statics model. */
-static const char* COMPLEX_STATICS_MODEL = "complex";
+/** The statics compound. */
+static const char* STATICS_COMPOUND = "compound";
 
 //
 // Primitive models.
