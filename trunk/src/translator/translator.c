@@ -25,7 +25,7 @@
  * - encode a cyboi knowledge tree (compound) into an xml (dom) tree
  * - decode an xml (dom) tree into a cyboi knowledge tree (compound)
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-13 22:37:50 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-08-14 22:47:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,7 @@
 #include "../global/abstraction_constants.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
+#include "../translator/xml_translator.c"
 
 /**
  * Encodes the cyboi model according to the given document type

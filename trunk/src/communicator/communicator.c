@@ -25,7 +25,7 @@
  * - receive data into a byte array
  * - send data from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-14 22:20:33 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-08-14 22:47:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,10 @@
 
 #include <stdio.h>
 #include "../array/array.c"
+#include "../communicator/file_communicator.c"
+#include "../communicator/ftp_communicator.c"
+#include "../communicator/http_communicator.c"
+#include "../communicator/inline_communicator.c"
 #include "../global/channel_constants.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
@@ -41,6 +45,9 @@
 /**
  * Receives a stream according to the given communication channel type
  * and creates a byte array from it.
+ *
+ * CAUTION! This procedure cannot be called "receive"
+ * as that name is already used by the socket mechanism.
  *
  * @param p0 the destination (byte array)
  * @param p1 the destination count
@@ -50,7 +57,7 @@
  * @param p5 the type
  * @param p6 the type count
  */
-void receive(void* p0, void* p1, void* p2, const void* p3, const void* p4,
+void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6) {
 
     if (p6 != NULL_POINTER) {
@@ -132,6 +139,9 @@ void receive(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  * Sends a stream according to the given communication channel type
  * and reads its data from a byte array.
  *
+ * CAUTION! This procedure cannot be called "send"
+ * as that name is already used by the socket mechanism.
+ *
  * @param p0 the destination
  * @param p1 the destination count
  * @param p2 the destination size
@@ -140,7 +150,7 @@ void receive(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  * @param p5 the type
  * @param p6 the type count
  */
-void send(void* p0, void* p1, void* p2, const void* p3, const void* p4,
+void send_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6) {
 }
 

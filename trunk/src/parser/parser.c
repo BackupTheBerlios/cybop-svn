@@ -25,7 +25,7 @@
  * - parse an xml stream into an xml model
  * - serialize an xml model into an xml stream
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-13 22:37:50 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-08-14 22:47:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,7 @@
 #include "../global/abstraction_constants.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
+#include "../parser/xml_parser.c"
 
 /**
  * Parses the byte stream according to the given document type
