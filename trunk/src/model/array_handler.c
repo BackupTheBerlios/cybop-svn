@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.14 $ $Date: 2004-03-03 08:22:50 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2004-03-04 14:32:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,22 +47,41 @@
  * Initializes the array.
  *
  * @param p0 the array
+ * @param p1 the type
  */
-void initialize_array(void* p0) {
+void initialize_array(void* p0, void* p1) {
 
     struct array* a = (struct array*) p0;
 
     if (a != (void*) 0) {
 
-        log_message((void*) &INFO_LOG_LEVEL, "Initialize array.");
+        int* t = (int*) p1;
 
-        // An array CANNOT have ZERO length, so that dereferencing a pointer to
-        // the first element of an array always returns a valid result.
-        // There is no NULL array.
-        // See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
-        a->size = 0;
-        a->count = 0;
-        a->internal_array = malloc(a->size);
+        if (t != (void*) 0) {
+
+            log_message((void*) &INFO_LOG_LEVEL, "Initialize array.");
+
+            // An array CANNOT have ZERO length, so that dereferencing a pointer to
+            // the first element of an array always returns a valid result.
+            // There is no NULL array.
+            // See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
+            a->type = *t;
+            a->size = 0;
+            a->count = 0;
+
+            if (*t == 0) {
+
+                a->pointer_array = malloc(a->size);
+
+            } else if ((*t == 1) || (*t == 2) || (*t ==3)) {
+
+                a->internal_array = malloc(a->size);
+            }
+
+        } else {
+
+            log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize array. The type is null.");
+        }
 
     } else {
 

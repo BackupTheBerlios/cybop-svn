@@ -50,13 +50,16 @@ static const int CHARACTER_ARRAY = 3;
  * In the case of computer science, everything gets abstracted to 0 and 1.
  * But that also means that every abstraction has a bytecode representation.
  *
- * @version $Revision: 1.3 $ $Date: 2004-03-02 18:24:39 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-03-04 14:32:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct array {
 
-    /** The internal array of pointers (memory addresses). */
-    void** internal_array;
+    /** The pointer array of pointer elements. */
+    void** pointer_array;
+
+    /** The internal array of integer, double or character elements. */
+    void* internal_array;
 
     /** The type. */
     int type;
