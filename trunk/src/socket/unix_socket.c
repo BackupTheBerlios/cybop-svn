@@ -23,7 +23,7 @@
  *
  * This file handles a server UNIX FILE socket.
  *
- * @version $Revision: 1.1 $ $Date: 2004-06-30 23:32:28 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-07-01 11:00:41 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -198,7 +198,10 @@ void send_unix_socket_output(const void* p0, const void* p1, const void* p2) {
 //??                log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTERNALS_MESSAGE, (void*) &CREATE_INTERNALS_MESSAGE_COUNT);
 
                 // Establish connection.
-                // Note that connect implicitly performs a bind call!
+                // Note that connect implicitly performs a bind call,
+                // which is unnecessary here, since cyboi stores the
+                // server socket that was created and bound at system startup,
+                // and that server socket was handed over to this procedure.
                 connect(*s, sa, *sas);
 
                 // Convert buffer to avoid byte-order problems.

@@ -32,7 +32,7 @@
  * A signal is a transient logic model.
  * It is stored in the computer's random access memory (ram).
  *
- * @version $Revision: 1.30 $ $Date: 2004-06-20 22:10:23 $ $Author: christian $
+ * @version $Revision: 1.31 $ $Date: 2004-07-01 11:00:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -563,6 +563,7 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2, void
  * Handles the create model signal.
  *
  * CYBOL Examples:
+ *
  * <!-- Operation parameters (as value of part_model tag):
  *      logic name,whole name,part name,
  *      part abstraction,part location,part model,part constraints,
@@ -868,11 +869,18 @@ void handle_create_model_signal(const void* p0,
 /**
  * Handles the send signal.
  *
- * CYBOL Example:
+ * CYBOL Examples:
+ *
  * <!-- Operation parameters (as value of part_model tag):
- *      logic name,signal name /-->
- * <part name="send_signal" part_abstraction="operation" part_location="inline"
- *      part_model="send,path.name.signal"/>
+ *      logic name,language,receiver system address data ... /-->
+ *
+ * <part name="send_to_socket" part_abstraction="operation" part_location="inline"
+ *      part_model="send,socket,5555"/>
+ *
+ * <!-- Receiver has not to be given, since that is always
+ *      the human user of the computer. /-->
+ * <part name="send_to_gui" part_abstraction="operation" part_location="inline"
+ *      part_model="send,gui"/>
  *
  * @param p0 the signal parameters count
  * @param p1 the parameters
