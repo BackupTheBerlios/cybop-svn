@@ -3,8 +3,8 @@ debian_package_list.txt
 
 
 cyboi.deb
-- depends: libc6, xlibs, libxml2
-- suggests: cybop-doc, cybop-core
+- depends: libc6, xlibs, libxml2, libxml2-dev (to compile the source code)
+- suggests: cyboi-doc, cybol-core
 - category: interpreters
 - files:    /usr/bin/cyboi
             /etc/cyboi/config.cybol
@@ -12,19 +12,6 @@ cyboi.deb
             /usr/share/doc/cyboi/changelog.gz
             /usr/share/doc/cyboi/copyright
             /usr/share/man/man1/cyboi1.gz
-
-cyboi-dev.deb
-- depends: cyboi, (xlibs-dev,) libxml2-dev
-- recommends: cybop-doc
-- category: devel
-- files:    ?? /admin/Makefile ??
-            ?? /admin/exclude ??
-            ?? /src/*
-
-===
-TODO: Put sources in an own package OR upload them to Debian??
-apt-get-source install (packagename)
-===
 
 cyboi-doc.deb
 - suggests: cyboi
