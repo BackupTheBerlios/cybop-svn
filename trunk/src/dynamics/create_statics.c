@@ -44,7 +44,7 @@
  *
  * It creates a statics memory model from a given statics cybol model.
  *
- * @version $Revision: 1.8 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,19 +77,19 @@ void* create_statics(void* p0, void* p1);
 void create_statics_model_containers(void* p0) {
 
     struct statics_model* m = (struct statics_model*) p0;
-    
-    if (m != 0) {
-        
+
+    if (m != (void*) 0) {
+
         log_message((void*) &INFO_LOG_LEVEL, "Create statics model containers.");
 
-        m->parts = malloc(sizeof(struct map));
+        m->parts = (void*) malloc(sizeof(struct map));
         initialize_map(m->parts);
 
-        m->positions = malloc(sizeof(struct map));
+        m->positions = (void*) malloc(sizeof(struct map));
         initialize_map(m->positions);
-        
+
     } else {
-        
+
         log_message((void*) &ERROR_LOG_LEVEL, "Could not create statics model containers. The statics model is null.");
     }
 }
@@ -105,30 +105,30 @@ void create_statics_model_containers(void* p0) {
  * @param p1 the statics cybol model part attributes
  */
 void initialize_statics_part(void* p0, void* p1) {
-        
+
     struct statics_model* m = (struct statics_model*) p0;
-    
-    if (m != 0) {
-            
-        void* name = get_map_element_with_name(p1, (void*) NAME);                
-        void* model = 0;
-        void* abstraction = 0;
-        void* memory_model = 0;
+
+    if (m != (void*) 0) {
+
+        void* name = (void*) get_map_element_with_name(p1, (void*) NAME);
+        void* model = (void*) 0;
+        void* abstraction = (void*) 0;
+        void* memory_model = (void*) 0;
 
         // Part.
-        model = get_map_element_with_name(p1, (void*) PART_MODEL);
-        abstraction = get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
-        memory_model = create_statics(model, abstraction);
+        model = (void*) get_map_element_with_name(p1, (void*) PART_MODEL);
+        abstraction = (void*) get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
+        memory_model = (void*) create_statics(model, abstraction);
         set_map_element_with_name(m->parts, name, memory_model);
 
         // Position.
-        model = get_map_element_with_name(p1, (void*) POSITION_MODEL);
-        abstraction = get_map_element_with_name(p1, (void*) POSITION_ABSTRACTION);
-        memory_model = create_statics(model, abstraction);
+        model = (void*) get_map_element_with_name(p1, (void*) POSITION_MODEL);
+        abstraction = (void*) get_map_element_with_name(p1, (void*) POSITION_ABSTRACTION);
+        memory_model = (void*) create_statics(model, abstraction);
         set_map_element_with_name(m->positions, name, memory_model);
 
     } else {
-        
+
         log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize statics part. The statics model is null.");
     }
 }
@@ -149,21 +149,21 @@ void initialize_statics_parts(void* p0, void* p1) {
     int count = 0;
     int size = 0;
     get_map_size(m, (void*) &size);
-    struct statics_model* e = 0;
+    struct statics_model* e = (void*) 0;
 
     while (count < size) {
-    
+
         e = (struct statics_model*) get_map_element_at_index(m, (void*) &count);
 
-        if (e != 0) {
-            
+        if (e != (void*) 0) {
+
             initialize_statics_part(p0, e->parts);
 
         } else {
-            
+
             log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize statics parts. A statics cybol model part is null.");
         }
-        
+
         count++;
     }
 }
@@ -182,8 +182,8 @@ void initialize_statics_model(void* p0, void* p1) {
 
     struct statics_model* m = (struct statics_model*) p0;
     
-    if (m != 0) {
-        
+    if (m != (void*) 0) {
+
         log_message((void*) &INFO_LOG_LEVEL, "Initialize statics model.");
 
 /*??
@@ -193,17 +193,17 @@ void initialize_statics_model(void* p0, void* p1) {
 
         // Read statics cybol model from file path.
         read_statics_cybol_model((void*) cybol, p1);
-    
+
         // Initialize statics model parts with statics cybol model.
-        if (cybol != 0) {
-    
+        if (cybol != (void*) 0) {
+
             initialize_statics_parts(p0, cybol->parts);
-            
+
         } else {
-            
+
             log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize statics model. The statics cybol model is null.");
         }
-    
+
         // Destroy temporary statics cybol model.
         destroy_statics_model_containers((void*) cybol);
         free((void*) cybol);
@@ -226,64 +226,63 @@ void initialize_statics_model(void* p0, void* p1) {
  */
 void* create_statics(void* p0, void* p1) {
 
-    void* m = 0;
+    void* m = (void*) 0;
     char* p = (char*) p0;
     char* a = (char*) p1;
-    
-    if (p != 0) {
-        
+
+    if (p != (void*) 0) {
+
         if (strcmp(p, "") != 0) {
-            
+
             log_message((void*) &INFO_LOG_LEVEL, "Create statics: ");
             log_message((void*) &INFO_LOG_LEVEL, p0);
 
             if (strcmp(a, STATICS_COMPOUND) == 0) {
-        
-                m = malloc(sizeof(struct statics_model));
+
+                m = (void*) malloc(sizeof(struct statics_model));
                 create_statics_model_containers(m);
                 initialize_statics_model(m, p0);
-        
+
             } else if (strcmp(a, TIME_PRIMITIVE) == 0) {
-        
-                m = malloc(sizeof(struct time));
+
+                m = (void*) malloc(sizeof(struct time));
                 initialize_time_model(m, p0);
-                
+
             } else if (strcmp(a, STRING_PRIMITIVE) == 0) {
-        
-                m = malloc(sizeof(struct string));
+
+                m = (void*) malloc(sizeof(struct string));
                 initialize_string_model(m, p0);
-        
+
             } else if (strcmp(a, VECTOR_PRIMITIVE) == 0) {
-        
-                m = malloc(sizeof(struct vector));
+
+                m = (void*) malloc(sizeof(struct vector));
                 initialize_vector_model(m, p0);
-        
+
             } else if (strcmp(a, COMPLEX_PRIMITIVE) == 0) {
-        
-                m = malloc(sizeof(struct complex));
+
+                m = (void*) malloc(sizeof(struct complex));
                 initialize_complex_model(m, p0);
-        
+
             } else if (strcmp(a, FRACTION_PRIMITIVE) == 0) {
-        
-                m = malloc(sizeof(struct fraction));
+
+                m = (void*) malloc(sizeof(struct fraction));
                 initialize_fraction_model(m, p0);
-        
+
             } else if (strcmp(a, INTEGER_PRIMITIVE) == 0) {
-        
-                m = malloc(sizeof(struct integer));
+
+                m = (void*) malloc(sizeof(struct integer));
                 initialize_integer_model(m, p0);
-        
+
             } else if (strcmp(a, BOOLEAN_PRIMITIVE) == 0) {
-        
-                m = malloc(sizeof(struct boolean));
+
+                m = (void*) malloc(sizeof(struct boolean));
                 initialize_boolean_model(m, p0);
             }
         }
     }
-        
+
     return m;
 }
 
 /* CREATE_STATICS_SOURCE */
 #endif
-

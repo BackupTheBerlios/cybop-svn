@@ -44,7 +44,7 @@
  *
  * It controls the input and output of x windows.
  *
- * @version $Revision: 1.6 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -246,14 +246,14 @@ void receive_x_windows_input(void* p0) {
         if (x->event.type == Expose) {
             
             // Repaint window after an expose.
-    
+
             // Bei mehreren Expose-Events nur der letzte beachtet
             if (x->event.xexpose.count == 0) {
-                
+
                 XGetWindowAttributes(x->display, x->window, &(x->window_attributes));
                 //XDrawImageString (myevent.xexpose.display, myevent.xexpose.window, mygc, 50, 50, "hello", strlen("hello"));
                 //XRectangle (myevent.xexpose.display, myevent.xexpose.window, gc_menu, 2, 2, (window_attributes.width-4), 30);
-                
+
                 // Menuleiste zeichnen
                 XDrawLine(x->display, x->window, x->gc_menu_border_bottom, 0, 21, x->window_attributes.width, 21);
                 XDrawLine(x->display, x->window, x->gc_menu_border_bottom, (x->window_attributes.width - 1), 1, (x->window_attributes.width - 1), 21);
@@ -449,14 +449,14 @@ void receive_x_windows_input(void* p0) {
 /*??
 void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p0 != 0) {
+    if (p0 != (void*) 0) {
 
         // Determine the action of the clicked child screen item.
         int count = 0;
         int size = get_map_size(p0->items);
-        void* child = 0;
-        struct vector* position = 0;
-        struct vector* expansion = 0;
+        void* child = (void*) 0;
+        struct vector* position = (void*) 0;
+        struct vector* expansion = (void*) 0;
         int x = -1;
         int y = -1;
         int z = -1;
@@ -464,7 +464,7 @@ void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
         int height = -1;
         int depth = -1;
         int contains = 0;
-        void* action = 0;
+        void* action = (void*) 0;
         
         while (count < size) {
 
@@ -476,14 +476,14 @@ void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     
                 expansion = (vector) get_item_element(child, "expansion");
                 
-                if (position != 0) {
+                if (position != (void*) 0) {
                         
                     // Translate the given coordinates according to the child's position.
                     x = p1 - position->x;
                     y = p2 - position->y;
                     z = p3 - position->z;
 
-                    if (expansion != 0) {
+                    if (expansion != (void*) 0) {
 
                         // Determine child's expansion.
                         width = expansion->x;
@@ -532,7 +532,7 @@ void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
         
         // Only use child screen item's action if it exists.
         // Otherwise, use the parent screen item's action.
-        if (action != 0) {
+        if (action != (void*) 0) {
             
             p4 = action;
 
@@ -550,4 +550,3 @@ void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /* X_WINDOWS_HANDLER_SOURCE */
 #endif
-

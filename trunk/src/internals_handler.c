@@ -32,7 +32,7 @@
 /**
  * This is the internals handler.
  *
- * @version $Revision: 1.2 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,7 +54,7 @@ void initialize_internals(void* p0) {
         log_message((void*) &INFO_LOG_LEVEL, "Initialize internals.");
 
         i->x_windows_flag = 0;
-        i->x_windows = malloc(sizeof(struct x_windows));
+        i->x_windows = (void*) malloc(sizeof(struct x_windows));
         initialize_x_windows(i->x_windows);
 
 /*??

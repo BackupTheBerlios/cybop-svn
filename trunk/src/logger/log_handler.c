@@ -32,7 +32,7 @@
  *
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.4 $ $Date: 2003-12-12 16:39:43 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,19 +53,19 @@ static const int WARNING_LOG_LEVEL = 2;
 static const int INFO_LOG_LEVEL = 3;
 
 /** The error log level name. */
-static const char* ERROR_LOG_LEVEL_NAME = "ERROR";
+static const char* ERROR_LOG_LEVEL_NAME = "Error";
 
 /** The warning log level name. */
-static const char* WARNING_LOG_LEVEL_NAME = "WARNING";
+static const char* WARNING_LOG_LEVEL_NAME = "Warning";
 
 /** The info log level name. */
-static const char* INFO_LOG_LEVEL_NAME = "INFO";
+static const char* INFO_LOG_LEVEL_NAME = "Info";
 
 //
 // Attributes.
 //
 
-/** The log level. */    
+/** The log level. */
 static int* log_level;
 
 //
@@ -82,20 +82,20 @@ void* get_log_level_name(void* p0) {
 
     void* n = (void*) 0;
     int* l = (int*) p0;
-    
+
     if (*l == INFO_LOG_LEVEL) {
 
         n = (void*) INFO_LOG_LEVEL_NAME;
-        
+
     } else if (*l == WARNING_LOG_LEVEL) {
 
         n = (void*) WARNING_LOG_LEVEL_NAME;
-    
+
     } else if (*l == ERROR_LOG_LEVEL) {
 
         n = (void*) ERROR_LOG_LEVEL_NAME;
     }
-    
+
     return n;
 }
 
@@ -117,7 +117,7 @@ void show_message(void* p0) {
  * @param p1 the message
  */
 void log_message(void* p0, void* p1) {
-    
+
     int* l = (int*) p0;
 
     if (*l <= *log_level) {
@@ -133,4 +133,3 @@ void log_message(void* p0, void* p1) {
 
 /* LOG_HANDLER_SOURCE */
 #endif
-

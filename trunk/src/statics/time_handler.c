@@ -32,7 +32,7 @@
 /**
  * This is the time handler.
  *
- * @version $Revision: 1.6 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,7 +57,7 @@ void initialize_time_model(void* p0, void* p1) {
 
     struct time* m = (struct time*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
         
         log_message((void*) &INFO_LOG_LEVEL, "Initialize time model.");
 
@@ -80,7 +80,7 @@ void finalize_time_model(void* p0, void* p1) {
 
     struct time* m = (struct time*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
         
         log_message((void*) &INFO_LOG_LEVEL, "Finalize time model.");
         

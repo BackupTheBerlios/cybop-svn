@@ -36,7 +36,7 @@
  * It contains functions which are used by both, the statics and the
  * dynamics model handler.
  *
- * @version $Revision: 1.5 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,10 +72,10 @@ static const char* COMMA_SEPARATOR = ",";
  */
 void* get_part_name(void* p0, void* p1) {
     
-    void* p = 0;
+    void* p = (void*) 0;
     char* n = (char*) p0;
     
-    if (n != 0) {
+    if (n != (void*) 0) {
         
 /*??
         int i = n->indexOf(p1);
@@ -109,10 +109,10 @@ void* get_part_name(void* p0, void* p1) {
  */
 void* get_remaining_name(void* p0, void* p1) {
 
-    void* r = 0;    
+    void* r = (void*) 0;
     char* n = (char*) p0;
     
-    if (n != 0) {
+    if (n != (void*) 0) {
         
 /*??
         int i = n->indexOf(p1);

@@ -35,7 +35,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.6 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -233,13 +233,13 @@ int get_map_element_count(void* p0, void* p1) {
                 char* suffix = strchr((char*) name, SEPARATION);
                 char* check = strchr(suffix + 1, SEPARATION);
 
-                // If no second separation is found, the name really matches.                    
-                if (check == 0) {
+                // If no second separation is found, the name really matches.
+                if (check == (void*) 0) {
 
                     int number = atoi(suffix + 1);
 
                     if (number > name_count) {
-                        
+
                         name_count = number;
                     }
                 }
@@ -354,7 +354,7 @@ void add_map_element(void* p0, void* p1, void* p2) {
         // Extend name with next free index.
         build_next_map_element_name(m->names, p1, n);
         set_map_element_with_name(p0, n, p2);
-        
+
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not add map element. The map is null.");
@@ -457,4 +457,3 @@ void* get_map_element_with_name(void* p0, void* p1) {
 
 /* MAP_HANDLER_SOURCE */
 #endif
-

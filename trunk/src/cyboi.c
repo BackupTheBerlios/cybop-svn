@@ -43,7 +43,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.1 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -80,19 +80,19 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
     // handling of various platforms and graphical user interfaces
     // such as X-Windows, Macintosh or MS Windows.
     struct internals* i = (struct internals*) p3;
-    
+
     if (i != (void*) 0) {
-        
+
         // Initialize shutdown flag to false.
         int f = 0;
         int index = -1;
         void* s = (void*) 0;
         char* a = (void*) 0;
         void* p = (void*) 0;
-        
+
         // Run endless loop handling signals.
         while (TRUE_VALUE) {
-    
+
             if (f == 0) {
 
                 // Check for x windows events and send them as cyboi signals.
@@ -100,11 +100,11 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
 
                     receive_x_windows_input(i->x_windows);
                 }
-                
+
                 //?? test x windows
                 send_x_windows_output((void*) 0, (void*) 0, p3);
                 break;
-                
+
 /*??
                 // Get top priority signal from signal memory and remove it from there.
                 get_highest_priority_index(p0, (void*) &index);
@@ -112,23 +112,23 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
                 a = (char*) get_abstraction(p0, (void*) &index);
                 p = get_priority(p0, (void*) &index);
                 remove_signal(p0, (void*) &index);
-    
+
                 // Handle signal.
                 log_message((void*) &INFO_LOG_LEVEL, "0");
                 if (strcmp(a, DYNAMICS_COMPOUND) == 0) {
-                    
+
                     log_message((void*) &INFO_LOG_LEVEL, "1");
                     handle_compound_signal(p0, s, p);
-            
+
                 } else {
-            
+
                     log_message((void*) &INFO_LOG_LEVEL, "2");
                     handle_operation_signal(s, a, p1, p2, p3, (void*) &f);
                 }
 */
-    
+
             } else {
-    
+
                 // Leave loop if the shutdown flag was set.
                 break;
             }
@@ -170,14 +170,14 @@ int main(int p0, char** p1) {
             // Create statics.
             void* s = malloc(sizeof(struct statics_model));
             create_statics_model_containers(s);
-            
+
             // Create dynamics.
             void* d = malloc(sizeof(struct dynamics_model));
             create_dynamics_model_containers(d);
-            
+
             // Create internals.
             void* i = malloc(sizeof(struct internals));
-            
+
             // Create signal memory.
             void* sm = malloc(sizeof(struct signal_memory));
             create_signal_memory(sm);
@@ -216,15 +216,15 @@ int main(int p0, char** p1) {
 
             // Destroy internals.
             free(i);
-            
+
             // Destroy dynamics.
             destroy_dynamics_model_containers(d);
             free(d);
-            
+
             // Destroy statics.
             destroy_statics_model_containers(s);
             free(s);
-            
+
             log_message((void*) &INFO_LOG_LEVEL, "Exit CYBOI normally.");
 
             // Return 0 to indicate proper shutdown.
@@ -246,4 +246,3 @@ int main(int p0, char** p1) {
 
 /* CYBOI_SOURCE */
 #endif
-

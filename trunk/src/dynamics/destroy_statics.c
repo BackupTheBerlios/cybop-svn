@@ -42,7 +42,7 @@
  *
  * It destroys a statics memory model to a given statics cybol model.
  *
- * @version $Revision: 1.8 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -76,7 +76,7 @@ void destroy_statics_model_containers(void* p0) {
 
     struct statics_model* m = (struct statics_model*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
         
         log_message((void*) &INFO_LOG_LEVEL, "Destroy statics model containers.");
 
@@ -105,28 +105,28 @@ void destroy_statics_model_containers(void* p0) {
 void finalize_statics_part(void* p0, void* p1) {
 
     struct statics_model* m = (struct statics_model*) p0;
-    
-    if (m != 0) {
 
-        void* name = get_map_element_with_name(p1, (void*) NAME);
-        void* model = 0;
-        void* abstraction = 0;
-        void* memory_model = 0;
+    if (m != (void*) 0) {
+
+        void* name = (void*) get_map_element_with_name(p1, (void*) NAME);
+        void* model = (void*) 0;
+        void* abstraction = (void*) 0;
+        void* memory_model = (void*) 0;
 
         // Position.
-        memory_model = get_map_element_with_name(m->positions, name);
-        model = get_map_element_with_name(p1, (void*) POSITION_MODEL);
-        abstraction = get_map_element_with_name(p1, (void*) POSITION_ABSTRACTION);
+        memory_model = (void*) get_map_element_with_name(m->positions, name);
+        model = (void*) get_map_element_with_name(p1, (void*) POSITION_MODEL);
+        abstraction = (void*) get_map_element_with_name(p1, (void*) POSITION_ABSTRACTION);
         destroy_statics(memory_model, model, abstraction);
 
         // Part.
-        memory_model = get_map_element_with_name(m->parts, name);
-        model = get_map_element_with_name(p1, (void*) PART_MODEL);
-        abstraction = get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
+        memory_model = (void*) get_map_element_with_name(m->parts, name);
+        model = (void*) get_map_element_with_name(p1, (void*) PART_MODEL);
+        abstraction = (void*) get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
         destroy_statics(memory_model, model, abstraction);
 
     } else {
-        
+
         log_message((void*) &ERROR_LOG_LEVEL, "Could not finalize statics part. The statics model is null.");
     }
 }
@@ -147,13 +147,13 @@ void finalize_statics_parts(void* p0, void* p1) {
     int count = 0;
     int size = 0;
     get_map_size(m, (void*) &size);
-    struct statics_model* e = 0;
+    struct statics_model* e = (void*) 0;
 
     while (count < size) {
     
         e = (struct statics_model*) get_map_element_at_index(m, (void*) &count);
 
-        if (e != 0) {
+        if (e != (void*) 0) {
             
             finalize_statics_part(p0, e->parts);
 
@@ -180,7 +180,7 @@ void finalize_statics_model(void* p0, void* p1) {
 
     struct statics_model* m = (struct statics_model*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
         
         log_message((void*) &INFO_LOG_LEVEL, "Finalize statics model.");
 
@@ -190,7 +190,7 @@ void finalize_statics_model(void* p0, void* p1) {
         create_statics_model_containers((void*) cybol);
 
         // Finalize statics model parts with statics cybol model.
-        if (cybol != 0) {
+        if (cybol != (void*) 0) {
             
             finalize_statics_parts(p0, cybol->parts);
             
@@ -227,9 +227,9 @@ void destroy_statics(void* p0, void* p1, void* p2) {
     char* p = (char*) p1;
     char* a = (char*) p2;
 
-    if (p0 != 0) {
+    if (p0 != (void*) 0) {
         
-        if (p != 0) {
+        if (p != (void*) 0) {
             
             log_message((void*) &INFO_LOG_LEVEL, "Destroy statics: ");
             log_message((void*) &INFO_LOG_LEVEL, p1);

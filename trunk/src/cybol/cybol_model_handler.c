@@ -32,7 +32,7 @@
  *
  * It can read and write CYBOL source files.
  *
- * @version $Revision: 1.6 $ $Date: 2004-01-05 15:44:45 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -93,11 +93,11 @@ void read_child_attribute(void* p0, void* p1, void* p2) {
 /*??
     org.apache.xerces.dom.NamedNodeMapImpl m = (org.apache.xerces.dom.NamedNodeMapImpl) p0;
 
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         org.apache.xerces.dom.NodeImpl n = (org.apache.xerces.dom.NodeImpl) m.getNamedItem((char[]) p1);
         
-        if (n != 0) {
+        if (n != (void*) 0) {
             
             log_message((void*) &INFO_LOG_LEVEL, "Read child attribute.");
             p2 = n.getNodeValue();
@@ -195,15 +195,15 @@ void finalize_child_attributes(void* p0, void* p1) {
  */
 /*??
 void initialize_child_model(void* p0, void* p1) {
-    
+
 /*??
     Item i = (Item) p0;
-    
-    if (i != 0) {
-    
+
+    if (i != (void*) 0) {
+
         org.apache.xerces.dom.NodeImpl n = (org.apache.xerces.dom.NodeImpl) p1;
-        
-        if (n != 0) {
+
+        if (n != (void*) 0) {
             
             log_message((void*) &INFO_LOG_LEVEL, "Initialize child model.");
             initialize_attributes(i.items, (org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes());
@@ -247,26 +247,26 @@ void initialize_children_models(void* p0, void* p1) {
 /*??
     org.apache.xerces.dom.DeepNodeListImpl l = (org.apache.xerces.dom.DeepNodeListImpl) p1;
 
-    if (l != 0) {
+    if (l != (void*) 0) {
         
         log_message((void*) &INFO_LOG_LEVEL, "Initialize children models.");
         int count = 0;
         int size = l.getLength();
-        org.apache.xerces.dom.NodeImpl n = 0;
-        item i = 0;
+        org.apache.xerces.dom.NodeImpl n = (void*) 0;
+        item i = (void*) 0;
         int name = 0;
 
         while (count < size) {
         
             n = (org.apache.xerces.dom.NodeImpl) l.item(count);
 
-            if (n != 0) {
+            if (n != (void*) 0) {
                     
                 i = new Item();
                 initialize_item_containers(i);
                 initialize_item(i, n);
 
-                if (i != 0) {
+                if (i != (void*) 0) {
                         
                     name = get_map_element(i.items, NAME);
                     set_map_element(p0, name, i);
@@ -324,11 +324,11 @@ void initialize_super_model(void* p0, void* p1) {
 /*??
     org.apache.xerces.dom.DeepNodeListImpl l = (org.apache.xerces.dom.DeepNodeListImpl) p1;
 
-    if (l != 0) {
+    if (l != (void*) 0) {
         
         org.apache.xerces.dom.NodeImpl n = (org.apache.xerces.dom.NodeImpl) l.item(0);
         
-        if (n != 0) {
+        if (n != (void*) 0) {
 
             log_message((void*) &INFO_LOG_LEVEL, "Initialize super model.");
             int s = read_attribute((org.apache.xerces.dom.NamedNodeMapImpl) n.getAttributes(), CATEGORY);
@@ -372,13 +372,13 @@ void read_into_model(void* p0, void* p1) {
 /*??
     org.apache.xerces.dom.DocumentImpl doc = (org.apache.xerces.dom.DocumentImpl) p1;
 
-    if (doc != 0) {
+    if (doc != (void*) 0) {
         
         log_message((void*) &INFO_LOG_LEVEL, "Read document.");
         doc.normalize();
-        org.apache.xerces.dom.DeepNodeListImpl l = 0;
+        org.apache.xerces.dom.DeepNodeListImpl l = (void*) 0;
 
-        if (p0 != 0) {
+        if (p0 != (void*) 0) {
             
             l = (org.apache.xerces.dom.DeepNodeListImpl) doc.getElementsByTagName(SUPER_CATEGORY);
             initialize_super_category(p0, l);
@@ -414,7 +414,7 @@ void write_from_model(void* p0, void* p1) {
  * @param p1 the cybol hierarchy structure
  */
 int read_cybol_attribute(void* p0, void* p1) {
-    
+
     int mode = 0;
     char* s = (char*) p0;
     

@@ -31,7 +31,7 @@
 /**
  * This is the integer handler.
  *
- * @version $Revision: 1.6 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,7 +56,7 @@ void initialize_integer_model(void* p0, void* p1) {
 
     struct integer* m = (struct integer*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
         
         log_message((void*) &INFO_LOG_LEVEL, "Initialize integer model.");
 
@@ -79,7 +79,7 @@ void finalize_integer_model(void* p0, void* p1) {
 
     struct integer* m = (struct integer*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
         
         log_message((void*) &INFO_LOG_LEVEL, "Finalize integer model.");
         

@@ -38,7 +38,7 @@
  * - Textual User Interface (TUI)
  * - Curses (termcap, ncurses)
  *
- * @version $Revision: 1.6 $ $Date: 2004-01-26 00:13:46 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,7 +47,7 @@
 //
 
 struct textual_screen {
-    
+
     void* button;
 };
 
@@ -60,10 +60,10 @@ struct button {
 void create_test(void* p0) {
 
     struct textual_screen* s = (struct textual_screen*) p0;
-    s->button = malloc(sizeof(struct button));
+    s->button = (void*) malloc(sizeof(struct button));
 
     struct button* b = (struct button*) s->button;
-    b->size = malloc(sizeof(struct vector));
+    b->size = (void*) malloc(sizeof(struct vector));
 
     struct vector* v = (struct vector*) b->size;
     v->x = 10;
@@ -74,7 +74,7 @@ void create_test(void* p0) {
 }
 
 void destroy_test(void* p0) {
-    
+
     struct textual_screen* s = (struct textual_screen*) p0;
     struct button* b = (struct button*) s->button;
     struct vector* v = (struct vector*) b->size;
@@ -107,24 +107,24 @@ void paint_button(void* p0, void* p1) {
     int x = x_pos;
     int y = y_pos;
     int z = z_pos;
-    
+
     while (z < (z_pos + d)) {
-        
+
         while (y < (y_pos + h)) {
-            
+
             while (x < (x_pos + w)) {
-                
+
                 fputc(95, f);
-                
+
                 x++;
             }
-            
+
             y++;
         }
-        
+
         z++;
     }
-    
+
     fputc(10, stdout);
     fputc(10, stdout);
     fflush(stdout);
@@ -155,9 +155,9 @@ void send_textual_screen(void* p0) {
  */
 void test_textual_screen() {
 
-    void* s = malloc(sizeof(struct textual_screen));
+    void* s = (void*) malloc(sizeof(struct textual_screen));
     create_test(s);
-    
+
     send_textual_screen(s);
 
     destroy_test(s);
@@ -166,4 +166,3 @@ void test_textual_screen() {
 
 /* CHARACTER_SCREEN_HANDLER_SOURCE */
 #endif
-

@@ -38,7 +38,7 @@
  *
  * It destroys a dynamics memory model to a given dynamics cybol model.
  *
- * @version $Revision: 1.6 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -85,7 +85,7 @@ void destroy_dynamics_model_containers(void* p0) {
 
     struct dynamics_model* m = (struct dynamics_model*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
         
         log_message((void*) &INFO_LOG_LEVEL, "Destroy dynamics model containers.");
 
@@ -118,14 +118,14 @@ void finalize_dynamics_part(void* p0, void* p1) {
 
     struct dynamics_model* m = (struct dynamics_model*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         void* name = get_map_element_with_name(p1, (void*) NAME);                
-        void* model = 0;
-        void* io_names = 0;
-        void* io_values = 0;
-        void* abstraction = 0;
-        void* memory_model = 0;
+        void* model = (void*) 0;
+        void* io_names = (void*) 0;
+        void* io_values = (void*) 0;
+        void* abstraction = (void*) 0;
+        void* memory_model = (void*) 0;
 
         // Position.
         memory_model = get_map_element_with_name(m->positions, name);
@@ -163,13 +163,13 @@ void finalize_dynamics_parts(void* p0, void* p1) {
     int count = 0;
     int size = 0;
     get_map_size(m, (void*) &size);
-    struct dynamics_model* e = 0;
+    struct dynamics_model* e = (void*) 0;
 
     while (count < size) {
     
         e = (struct dynamics_model*) get_map_element_at_index(m, (void*) &count);
 
-        if (e != 0) {
+        if (e != (void*) 0) {
             
             finalize_dynamics_part(p0, e->parts);
 
@@ -196,7 +196,7 @@ void finalize_dynamics_model(void* p0, void* p1) {
 
     struct dynamics_model* m = (struct dynamics_model*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
         
         log_message((void*) &INFO_LOG_LEVEL, "Finalize dynamics model.");
 
@@ -206,7 +206,7 @@ void finalize_dynamics_model(void* p0, void* p1) {
         create_dynamics_model_containers((void*) cybol);
 
         // Finalize dynamics model parts with dynamics cybol model.
-        if (cybol != 0) {
+        if (cybol != (void*) 0) {
             
             finalize_dynamics_parts(p0, cybol->parts);
             
@@ -244,16 +244,16 @@ void destroy_dynamics(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     char* a = (char*) p4;
 
-    if (p0 != 0) {
+    if (p0 != (void*) 0) {
             
         log_message((void*) &INFO_LOG_LEVEL, "Destroy dynamics model: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
-    
+
         if (strcmp(a, DYNAMICS_COMPOUND) == 0) {
     
             char* p = (char*) p1;
         
-            if (p != 0) {
+            if (p != (void*) 0) {
                 
                 finalize_dynamics_model(p0, p1);
                 destroy_dynamics_model_containers(p0);
@@ -264,7 +264,7 @@ void destroy_dynamics(void* p0, void* p1, void* p2, void* p3, void* p4) {
     
             char* io = (char*) p2;
             
-            if (io != 0) {
+            if (io != (void*) 0) {
                 
                 finalize_operation_input_and_output(p0, p2, p3);
                 free(p0);

@@ -51,7 +51,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.13 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -539,7 +539,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 
                 reset_signal(s);
         
-                if (pointer_position != 0) {
+                if (pointer_position != (void*) 0) {
                  
     //??            mouse_clicked_action(main_frame, (void*) pointer_position->x, (void*) pointer_position->y, (void*) pointer_position->z, s->predicate);
                     

@@ -38,7 +38,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.7 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,7 +62,7 @@ void set_dynamics_model_part(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Set dynamics model part: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
@@ -70,7 +70,7 @@ void set_dynamics_model_part(void* p0, void* p1, void* p2, void* p3, void* p4, v
         void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
         void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
-        if (r != 0) {
+        if (r != (void*) 0) {
 
             // The given model is a compound of other compounds.
             void* part = get_map_element_with_name(m->parts, n);
@@ -107,7 +107,7 @@ void remove_dynamics_model_part(void* p0, void* p1) {
 
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Remove dynamics model part: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
@@ -115,7 +115,7 @@ void remove_dynamics_model_part(void* p0, void* p1) {
         void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
         void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
-        if (r != 0) {
+        if (r != (void*) 0) {
             
             // The given model is a compound of other compounds.
             void* part = get_map_element_with_name(m->parts, n);
@@ -151,10 +151,10 @@ void remove_dynamics_model_part(void* p0, void* p1) {
  */
 void* get_dynamics_model_part(void* p0, void* p1) {
 
-    void* p = 0;
+    void* p = (void*) 0;
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Get dynamics model part: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
@@ -162,7 +162,7 @@ void* get_dynamics_model_part(void* p0, void* p1) {
         void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
         void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
-        if (r != 0) {
+        if (r != (void*) 0) {
             
             // The given model is a compound of other compounds.
             void* part = get_map_element_with_name(m->parts, n);
@@ -193,10 +193,10 @@ void* get_dynamics_model_part(void* p0, void* p1) {
  */
 void* get_dynamics_model_part_input_0(void* p0, void* p1) {
 
-    void* i = 0;
+    void* i = (void*) 0;
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Get dynamics model part input 0: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
@@ -204,7 +204,7 @@ void* get_dynamics_model_part_input_0(void* p0, void* p1) {
         void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
         void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
-        if (r != 0) {
+        if (r != (void*) 0) {
             
             // The given model is a compound of other compounds.
             void* part = get_map_element_with_name(m->parts, n);
@@ -235,10 +235,10 @@ void* get_dynamics_model_part_input_0(void* p0, void* p1) {
  */
 void* get_dynamics_model_part_input_1(void* p0, void* p1) {
 
-    void* i = 0;
+    void* i = (void*) 0;
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Get dynamics model part input 1: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
@@ -246,7 +246,7 @@ void* get_dynamics_model_part_input_1(void* p0, void* p1) {
         void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
         void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
-        if (r != 0) {
+        if (r != (void*) 0) {
             
             // The given model is a compound of other compounds.
             void* part = get_map_element_with_name(m->parts, n);
@@ -277,10 +277,10 @@ void* get_dynamics_model_part_input_1(void* p0, void* p1) {
  */
 void* get_dynamics_model_part_output_0(void* p0, void* p1) {
 
-    void* o = 0;
+    void* o = (void*) 0;
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Get dynamics model part output 0: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
@@ -288,7 +288,7 @@ void* get_dynamics_model_part_output_0(void* p0, void* p1) {
         void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
         void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
-        if (r != 0) {
+        if (r != (void*) 0) {
             
             // The given model is a compound of other compounds.
             void* part = get_map_element_with_name(m->parts, n);
@@ -319,10 +319,10 @@ void* get_dynamics_model_part_output_0(void* p0, void* p1) {
  */
 void* get_dynamics_model_part_output_1(void* p0, void* p1) {
 
-    void* o = 0;
+    void* o = (void*) 0;
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Get dynamics model part output 1: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
@@ -330,7 +330,7 @@ void* get_dynamics_model_part_output_1(void* p0, void* p1) {
         void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
         void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
-        if (r != 0) {
+        if (r != (void*) 0) {
             
             // The given model is a compound of other compounds.
             void* part = get_map_element_with_name(m->parts, n);
@@ -361,10 +361,10 @@ void* get_dynamics_model_part_output_1(void* p0, void* p1) {
  */
 void* get_dynamics_model_part_position(void* p0, void* p1) {
 
-    void* p = 0;
+    void* p = (void*) 0;
     struct dynamics_model* m = (struct dynamics_model*) p0;
 
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Get dynamics model part position: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
@@ -372,7 +372,7 @@ void* get_dynamics_model_part_position(void* p0, void* p1) {
         void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
         void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
         
-        if (r != 0) {
+        if (r != (void*) 0) {
             
             // The given model is a compound of other compounds.
             void* part = get_map_element_with_name(m->parts, n);

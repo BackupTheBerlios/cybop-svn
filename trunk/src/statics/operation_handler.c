@@ -34,7 +34,7 @@
 /**
  * This is the operation handler.
  *
- * @version $Revision: 1.3 $ $Date: 2004-01-05 20:24:12 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,7 +53,7 @@ void initialize_operation_input_and_output(void* p0, void* p1, void* p2) {
 
     struct operation* m = (struct operation*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
         
         log_message((void*) &INFO_LOG_LEVEL, "Initialize operation input and output.");
         log_message((void*) &INFO_LOG_LEVEL, p1);
@@ -65,7 +65,7 @@ void initialize_operation_input_and_output(void* p0, void* p1, void* p2) {
 
         set_map_element_with_name(m->inputs_outputs, io_name, io_value);
 
-        if (rem_name != 0) {
+        if (rem_name != (void*) 0) {
 
             initialize_operation_input_and_output(p0, rem_name, rem_value);
         }
@@ -87,7 +87,7 @@ void finalize_operation_input_and_output(void* p0, void* p1, void* p2) {
 
     struct operation* m = (struct operation*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Finalize operation input and output.");
         log_message((void*) &INFO_LOG_LEVEL, p1);

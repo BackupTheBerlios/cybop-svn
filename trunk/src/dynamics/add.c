@@ -36,7 +36,7 @@
  * @param p0 the summand 0
  * @param p1 the summand 1
  * @param p2 the sum
- * @version $Revision: 1.7 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 void add(void* p0, void* p1, void* p2) {
@@ -44,15 +44,15 @@ void add(void* p0, void* p1, void* p2) {
     struct integer* summand_0 = (struct integer*) p0;
     struct integer* summand_1 = (struct integer*) p1;
     struct integer* sum = (struct integer*) p2;
-    
-    if (summand_0 != 0) {
-        
-        if (summand_1 != 0) {
-            
-            if (sum != 0) {
-        
+
+    if (summand_0 != (void*) 0) {
+
+        if (summand_1 != (void*) 0) {
+
+            if (sum != (void*) 0) {
+
                 sum->value = summand_0->value + summand_1->value;
-        
+
             } else {
                 
                 log_message((void*) &ERROR_LOG_LEVEL, "Could not execute add. The sum is null.");

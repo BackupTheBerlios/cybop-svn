@@ -38,7 +38,7 @@
  *
  * It creates a dynamics memory model from a given dynamics cybol model.
  *
- * @version $Revision: 1.6 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -85,7 +85,7 @@ void create_dynamics_model_containers(void* p0) {
 
     struct dynamics_model* m = (struct dynamics_model*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
         
         log_message((void*) &INFO_LOG_LEVEL, "Create dynamics model containers.");
 
@@ -115,30 +115,30 @@ void create_dynamics_model_containers(void* p0) {
  * @param p1 the dynamics cybol model part attributes
  */
 void initialize_dynamics_part(void* p0, void* p1) {
-        
+
     struct dynamics_model* m = (struct dynamics_model*) p0;
-    
-    if (m != 0) {
-            
-        void* name = get_map_element_with_name(p1, (void*) NAME);                
-        void* model = 0;
-        void* io_names = 0;
-        void* io_values = 0;
-        void* abstraction = 0;
-        void* memory_model = 0;
+
+    if (m != (void*) 0) {
+
+        void* name = (void*) get_map_element_with_name(p1, (void*) NAME);
+        void* model = (void*) 0;
+        void* io_names = (void*) 0;
+        void* io_values = (void*) 0;
+        void* abstraction = (void*) 0;
+        void* memory_model = (void*) 0;
 
         // Part.
-        model = get_map_element_with_name(p1, (void*) PART_MODEL);
-        io_names = get_map_element_with_name(p1, (void*) PART_INPUT_OUTPUT_NAMES);
-        io_values = get_map_element_with_name(p1, (void*) PART_INPUT_OUTPUT_VALUES);
-        abstraction = get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
-        memory_model = create_dynamics(model, io_names, io_values, abstraction);
+        model = (void*) get_map_element_with_name(p1, (void*) PART_MODEL);
+        io_names = (void*) get_map_element_with_name(p1, (void*) PART_INPUT_OUTPUT_NAMES);
+        io_values = (void*) get_map_element_with_name(p1, (void*) PART_INPUT_OUTPUT_VALUES);
+        abstraction = (void*) get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
+        memory_model = (void*) create_dynamics(model, io_names, io_values, abstraction);
         set_map_element_with_name(m->parts, name, memory_model);
 
         // Position.
-        model = get_map_element_with_name(p1, (void*) POSITION_MODEL);
-        abstraction = get_map_element_with_name(p1, (void*) POSITION_ABSTRACTION);
-        memory_model = create_statics(model, abstraction);
+        model = (void*) get_map_element_with_name(p1, (void*) POSITION_MODEL);
+        abstraction = (void*) get_map_element_with_name(p1, (void*) POSITION_ABSTRACTION);
+        memory_model = (void*) create_statics(model, abstraction);
         set_map_element_with_name(m->positions, name, memory_model);
 
     } else {
@@ -163,21 +163,21 @@ void initialize_dynamics_parts(void* p0, void* p1) {
     int count = 0;
     int size = 0;
     get_map_size(m, (void*) &size);
-    struct dynamics_model* e = 0;
+    struct dynamics_model* e = (void*) 0;
 
     while (count < size) {
-    
+
         e = (struct dynamics_model*) get_map_element_at_index(m, (void*) &count);
 
-        if (e != 0) {
-            
+        if (e != (void*) 0) {
+
             initialize_dynamics_part(p0, e->parts);
 
         } else {
-            
+
             log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize dynamics parts. A dynamics cybol model part is null.");
         }
-        
+
         count++;
     }
 }
@@ -196,7 +196,7 @@ void initialize_dynamics_model(void* p0, void* p1) {
 
     struct dynamics_model* m = (struct dynamics_model*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
         
         log_message((void*) &INFO_LOG_LEVEL, "Initialize dynamics model.");
 
@@ -209,7 +209,7 @@ void initialize_dynamics_model(void* p0, void* p1) {
         initialize_dynamics_cybol_model((void*) cybol, p1);
     
         // Initialize dynamics model parts with dynamics cybol model.
-        if (cybol != 0) {
+        if (cybol != (void*) 0) {
     
             initialize_dynamics_parts(p0, cybol->parts);
             
@@ -242,7 +242,7 @@ void initialize_dynamics_model(void* p0, void* p1) {
  */
 void* create_dynamics(void* p0, void* p1, void* p2, void* p3) {
 
-    void* m = 0;
+    void* m = (void*) 0;
     char* a = (char*) p3;
     
     log_message((void*) &INFO_LOG_LEVEL, "Create dynamics model: ");
@@ -252,7 +252,7 @@ void* create_dynamics(void* p0, void* p1, void* p2, void* p3) {
 
         char* p = (char*) p0;
         
-        if (p != 0) {
+        if (p != (void*) 0) {
             
             if (strcmp(p, "") != 0) {
                 
@@ -265,11 +265,11 @@ void* create_dynamics(void* p0, void* p1, void* p2, void* p3) {
     } else {
 
         char* io = (char*) p1;
-        
-        if (io != 0) {
-            
+
+        if (io != (void*) 0) {
+
             if (strcmp(io, EMPTY_STRING) != 0) {
-                
+
                 m = malloc(sizeof(struct operation));
                 initialize_operation_input_and_output(m, p1, p2);
             }
