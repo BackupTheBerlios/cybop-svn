@@ -29,10 +29,17 @@ package cybop.core.basic;
  *
  * A string is an addition of characters.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-11 14:55:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class String extends Item {
+
+    //
+    // Static values.
+    //
+    
+    /** The default value. */
+    public static final java.lang.String DEFAULT = "";
 
     //
     // Construction.
@@ -85,6 +92,30 @@ public class String extends Item {
     public java.lang.Object createJavaObject() {
 
         return new java.lang.String();
+    }
+
+    //
+    // Java primitive.
+    //
+    
+    /**
+     * Sets the java primitive.
+     *
+     * @param p the java primitive
+     * @exception NullPointerException if the java object is null
+     */
+    public void setJavaPrimitive(java.lang.String p) throws NullPointerException {
+    }
+
+    /**
+     * Returns the java primitive.
+     *
+     * @return the java primitive
+     * @exception NullPointerException if the java object is null
+     */
+    public java.lang.String getJavaPrimitive() throws NullPointerException {
+
+        return (java.lang.String) getJavaObject();
     }
 
     //

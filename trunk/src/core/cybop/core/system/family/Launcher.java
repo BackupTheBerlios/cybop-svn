@@ -67,7 +67,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-11 14:55:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family implements
@@ -84,6 +84,44 @@ public class Launcher extends Family implements
     javax.swing.event.InternalFrameListener,
     javax.swing.event.ListSelectionListener,
     javax.swing.event.TreeSelectionListener {
+
+/*?? Java Events:
+Try subclassing EventQueue and adding a little logging functionality at the level
+of dispatchEvent(AWTEvent), while still letting the superclass do all the work.
+Then replace the SystemEventQueue with the "Logging Queue":
+
+import javax.swing.*; 
+import java.awt.*;
+import java.awt.event.*; 
+import java.util.*; 
+
+public class LoggingQueue extends EventQueue { 
+
+    protected Vector eventLog = new Vector(); 
+
+    protected void dispatchEvent(AWTEvent event) {
+
+        eventLog.addElement(event.toString()); 
+        System.out.println(event.toString()); 
+        super.dispatchEvent(event); 
+    } 
+
+    public static void main(String[] args) { 
+
+        JFrame frame = new JFrame(); 
+
+        frame.getToolkit().getSystemEventQueue().push(new LoggingQueue()); 
+        frame.setSize(300,300); 
+        frame.setVisible(true); 
+    } 
+} 
+
+--
+
+I've found that the awt-thread can be started by this code:
+EventQueue eq = Toolkit.getDefaultToolkit().getSystemEventQueue();
+
+*/
 
     //
     // Command line arguments.
