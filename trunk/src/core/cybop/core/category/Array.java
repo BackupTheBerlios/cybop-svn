@@ -34,7 +34,7 @@ package cybop.core.category;
  * In the case of computer science, everything gets abstracted to 0 and 1.
  * But that also means that every abstraction has a bytecode representation.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-15 04:55:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Array {
@@ -144,7 +144,7 @@ public class Array {
      *
      * @return the size
      */
-    public int getSize() {
+    public int getSize() throws Exception {
 
         int size = 0;
         Array[] a = getElements();
