@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2004-11-16 16:52:04 $ $Author: rholzmueller $
+ * @version $Revision: 1.9 $ $Date: 2004-11-23 08:20:02 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,6 +37,7 @@
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
 #include "../socket/unix_socket.c"
+#include "../web/tcp_socket_server.c"
 #include "../test/test.c"
 
 /**
@@ -67,39 +68,41 @@
  * @param pp_thread_parameter the only one thread parameter (typ void**)
  */
 void activate_internals( void** pp_internals ) {
-/*
+
     //
     // Unix socket.
     //
 
-    char unix_server_socket_flag = 0;
-
-    get_array_element(p3, (void*) &CHARACTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FLAG_INDEX, (void*) &unix_server_socket_flag);
-
-    if (unix_server_socket_flag == 1) {
-
-        int unix_server_socket = -1;
-
-        get_array_element(p4, (void*) &INTEGER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INDEX, (void*) &unix_server_socket);
-
-        receive_unix_socket((void*) &unix_server_socket);
-    }
+//    char unix_server_socket_flag = 0;
+//
+//    get_array_element(p3, (void*) &CHARACTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FLAG_INDEX, (void*) &unix_server_socket_flag);
+//
+//    if (unix_server_socket_flag == 1) {
+//
+//        int unix_server_socket = -1;
+//
+//        get_array_element(p4, (void*) &INTEGER_ARRAY, (void*) &UNIX_SERVER_SOCKET_INDEX, (void*) &unix_server_socket);
+//
+//        receive_unix_socket((void*) &unix_server_socket);
+//    }
 
     //
     // tcp socket
     //
 
     int tcp_socket_active = 0;
+    int internal_type = 0;
 
-    get_array_element( p4, (void*) &INTEGER_ARRAY, 
-                      (void*) &INTEGER_INTERNALS_TCPSOCKET_ACTIVE_INDEX, 
-                      (void*) &tcp_socket_active);
+    // get the active flag for tcp socket
+    get_internal( pp_internals, (void*) &tcp_socket_active,
+                  (void*) &internal_type, 
+                  (void*) &INTERNAL_TCPSOCKET_ACTIVE_INDEX );
 
     if ( tcp_socket_active == 1) {
 
-       // activate_tcp_socket( pp_thread_parameter );
+//        activate_tcp_socket( pp_internals );
     }
-*/
+
 
 /*??
     //
@@ -142,8 +145,6 @@ void wait( void** pp_internal ) {
     activate_internals( pp_internal );
     
     int internal_type = 0;
-    int internal_count = 0;
-    int internal_size = 0;
     
     //separated paramter from the internals
     void** pp_sig_memory = NULL_POINTER;
@@ -156,34 +157,22 @@ void wait( void** pp_internal ) {
     
     get_internal( pp_internal, (void*) &pp_sig_memory,  
                   (void*) &internal_type,
-                  (void*) &internal_count, 
-                  (void*) &internal_size,
                   (void*) &INTERNAL_SIGNAL_MEMORY_INDEX );
     get_internal( pp_internal, (void*) &p_sig_memory_count,  
                   (void*) &internal_type,
-                  (void*) &internal_count, 
-                  (void*) &internal_size,
                   (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX );
     get_internal( pp_internal, (void*) &p_sig_memory_size,  
                   (void*) &internal_type,
-                  (void*) &internal_count, 
-                  (void*) &internal_size,
                   (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX );
 
     get_internal( pp_internal, (void*) &pp_knowledge,  
               (void*) &internal_type,
-              (void*) &internal_count, 
-              (void*) &internal_size,
               (void*) &INTERNAL_KNOWLEDGE_MODEL_INDEX );
     get_internal( pp_internal, (void*) &p_knowledge_count,  
               (void*) &internal_type,
-              (void*) &internal_count, 
-              (void*) &internal_size,
               (void*) &INTERNAL_KNOWLEDGE_MODEL_COUNT_INDEX );
     get_internal( pp_internal, (void*) &p_knowledge_size,  
               (void*) &internal_type,
-              (void*) &internal_count, 
-              (void*) &internal_size,
               (void*) &INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX );
                       
     // The shutdown flag.

@@ -32,7 +32,7 @@
  * - Macintosh
  * - MS Windows
  *
- * @version $Revision: 1.4 $ $Date: 2004-11-16 16:47:36 $ $Author: rholzmueller $
+ * @version $Revision: 1.5 $ $Date: 2004-11-23 08:17:37 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,7 +52,7 @@
  *
  * @param p_internal pointer of the internal
  */
-void create_internal(void** pp_internal) {
+void create_internals_structur(void** pp_internal) {
 
     if ( pp_internal == NULL_POINTER ) {
       
@@ -60,7 +60,7 @@ void create_internal(void** pp_internal) {
     }
     else {
 
-        log_message_debug( "create_internal is started" );
+        log_message_debug( "create_internals_structur is started" );
 
         // create internal
         create_array( pp_internal, (void*) &POINTER_ARRAY, 
@@ -83,24 +83,6 @@ void create_internal(void** pp_internal) {
                            (void*) &POINTER_ARRAY,
                            (void*) &INTERNAL_COLUMN_VALUETYPE_INDEX,
                            (void*) &p_int_valuetype );        
-
-        // create internal value count
-        void* p_int_valuecount = NULL_POINTER;
-        create_array( (void*) &p_int_valuecount, (void*) &INTEGER_ARRAY, 
-                      (void*) &INTERNAL_ARRAY_COUNT );
-        set_array_element( pp_internal,
-                           (void*) &POINTER_ARRAY,
-                           (void*) &INTERNAL_COLUMN_VALUECOUNT_INDEX,
-                           (void*) &p_int_valuecount );        
-
-        // create internal value size
-        void* p_int_valuesize = NULL_POINTER;
-        create_array( (void*) &p_int_valuesize, (void*) &INTEGER_ARRAY, 
-                      (void*) &INTERNAL_ARRAY_COUNT );
-        set_array_element( pp_internal,
-                           (void*) &POINTER_ARRAY,
-                           (void*) &INTERNAL_COLUMN_VALUESIZE_INDEX,
-                           (void*) &p_int_valuesize );        
     }                      
 }
 
@@ -109,7 +91,7 @@ void create_internal(void** pp_internal) {
  *
  * @param p_internal pointer of the internal
  */
-void destroy_internal(void** pp_internal) {
+void destroy_internals_structur(void** pp_internal) {
 
     if ( pp_internal == NULL_POINTER ) {
       
@@ -117,7 +99,7 @@ void destroy_internal(void** pp_internal) {
     }
     else {
 
-        log_message_debug( "destroy_internal is started" );
+        log_message_debug( "destroy_internals_structur is started" );
 
         // destroy internal value 
         void* p_int_value = NULL_POINTER;
@@ -137,152 +119,100 @@ void destroy_internal(void** pp_internal) {
         destroy_array( (void*) &p_int_valuetype, (void*) &INTEGER_ARRAY, 
                        (void*) &INTERNAL_ARRAY_COUNT );
 
-        // destroy internal value count
-        void* p_int_valuecount = NULL_POINTER;
-        get_array_element( pp_internal,
-                           (void*) &POINTER_ARRAY,
-                           (void*) &INTERNAL_COLUMN_VALUECOUNT_INDEX,
-                           (void*) &p_int_valuecount );        
-        destroy_array( (void*) &p_int_valuecount, (void*) &INTEGER_ARRAY, 
-                       (void*) &INTERNAL_ARRAY_COUNT );
-
-        // destroy internal value size
-        void* p_int_valuesize = NULL_POINTER;
-        get_array_element( pp_internal,
-                           (void*) &POINTER_ARRAY,
-                           (void*) &INTERNAL_COLUMN_VALUESIZE_INDEX,
-                           (void*) &p_int_valuesize );        
-        destroy_array( (void*) &p_int_valuesize, (void*) &INTEGER_ARRAY, 
-                       (void*) &INTERNAL_ARRAY_COUNT );
-                           
         // destroy internal
         destroy_array( pp_internal, (void*) &POINTER_ARRAY, 
                       (void*) &INTERNAL_COLUMN_COUNT );
-                           
     }                      
 }
 
+
+
 /**
- * set the internals
+ * create a internal
  *
- * @param pp_internal pointer of the internal
- * @param pp_value
+ * @param pp_internalvalue pointer of the internal value
  * @param p_valuetype
- * @param p_valuecount
- * @param p_valuesize
  * @param p_arrayindex
  */
-void set_internal( void** pp_internal, 
-                   void** pp_value, int* p_valuetype, 
-                   int* p_valuecount, int* p_valuesize,
-                   int* p_arrayindex ) 
+void create_internal( void** pp_internalvalue, int* p_valuetype ) 
 {
-
-    if ( pp_internal == NULL_POINTER ) {
+    if ( pp_internalvalue == NULL_POINTER ) {
       
         log_message_debug( "pp_internal is a NULL POINTER" );
-    }
-    if ( pp_value == NULL_POINTER ) {
-      
-        log_message_debug( "pp_value is a NULL POINTER" );
     }
     else if ( p_valuetype == NULL_POINTER ) {
         
         log_message_debug( "p_valuetype is a NULL POINTER" );
     }
-    else if ( p_valuecount == NULL_POINTER ) {
-        
-        log_message_debug( "p_valuecount is a NULL POINTER" );
-    }
-    else if ( p_valuesize == NULL_POINTER ) {
-        
-        log_message_debug( "p_valuesize is a NULL POINTER" );
-    }
     else {
 
-        log_message_debug( "set_internal is started" );
-
-        // set the value into internal
-        void* p_internalvalue = NULL_POINTER;
-        
-        // get the value internal column
-        void* p_int_value = NULL_POINTER;
-        get_array_element( pp_internal,
-                           (void*) &POINTER_ARRAY,
-                           (void*) &INTERNAL_COLUMN_VALUE_INDEX,
-                           (void*) &p_int_value );        
-
+        log_message_debug( "create_internal is started" );
 
         //create the value in context of the type
         if ( *p_valuetype == INTERNAL_TYPE_INTEGER ) {
         
-            create_integer_internal( (void*) &p_internalvalue,
-                                     pp_value,   
-                                     p_valuecount );
+            create_integer_internal( pp_internalvalue );
         }
         else if ( *p_valuetype == INTERNAL_TYPE_CHARACTER ) {
             
-            create_character_internal( (void*) &p_internalvalue,
-                                     pp_value,   
-                                     p_valuecount );
+            create_character_internal( pp_internalvalue );
         }
         else if ( *p_valuetype == INTERNAL_TYPE_POINTER ) {
             
-            create_pointer_internal( (void*) &p_internalvalue,
-                                     pp_value,   
-                                     p_valuecount );
+            create_pointer_internal( pp_internalvalue );
         }
         else if ( *p_valuetype == INTERNAL_TYPE_DOUBLE ) {
             
-            create_double_internal( (void*) &p_internalvalue,
-                                     pp_value,   
-                                     p_valuecount );
+            create_double_internal( pp_internalvalue );
         }
         else {
          
             log_message_debug( "no correct valuetype" );
         }
+    }
+}
+
+
+/**
+ * destroy  a internal
+ *
+ * @param pp_internalvalue pointer of the internal value
+ */
+void destroy_internal( void** pp_internalvalue, int* p_valuetype ) 
+{
+    if ( pp_internalvalue == NULL_POINTER ) {
+      
+        log_message_debug( "pp_internal is a NULL POINTER" );
+    }
+    else if ( p_valuetype == NULL_POINTER ) {
         
-        // set the value into internals
-        set_array_element( (void*) &p_int_value,
-                           (void*) &POINTER_ARRAY,
-                           p_arrayindex,
-                           (void*) &p_internalvalue );        
+        log_message_debug( "p_valuetype is a NULL POINTER" );
+    }
+    else {
 
+        log_message_debug( "destroy_internal is started" );
 
-        // set the value type into internal
-        void* p_int_valuetype = NULL_POINTER;
-        get_array_element( pp_internal,
-                           (void*) &POINTER_ARRAY,
-                           (void*) &INTERNAL_COLUMN_VALUETYPE_INDEX,
-                           (void*) &p_int_valuetype );        
-        set_array_element( (void*) &p_int_valuetype,
-                           (void*) &INTEGER_ARRAY,
-                           p_arrayindex,
-                           p_valuetype );        
-
-        // set the value count into internal
-        void* p_int_valuecount = NULL_POINTER;
-        get_array_element( pp_internal,
-                           (void*) &POINTER_ARRAY,
-                           (void*) &INTERNAL_COLUMN_VALUECOUNT_INDEX,
-                           (void*) &p_int_valuecount );        
-        set_array_element( (void*) &p_int_valuecount,
-                           (void*) &INTEGER_ARRAY,
-                           p_arrayindex,
-                           p_valuecount );        
-
-        // set the value size into internal
-        void* p_int_valuesize = NULL_POINTER;
-        get_array_element( pp_internal,
-                           (void*) &POINTER_ARRAY,
-                           (void*) &INTERNAL_COLUMN_VALUESIZE_INDEX,
-                           (void*) &p_int_valuesize );        
-        set_array_element( (void*) &p_int_valuesize,
-                           (void*) &INTEGER_ARRAY,
-                           p_arrayindex,
-                           p_valuesize );        
-                           
+        //destroy the value in context of the type
+        if ( *p_valuetype == INTERNAL_TYPE_INTEGER ) {
+        
+            destroy_integer_internal( pp_internalvalue );
+        }
+        else if ( *p_valuetype == INTERNAL_TYPE_CHARACTER ) {
+            
+            destroy_character_internal( pp_internalvalue );
+        }
+        else if ( *p_valuetype == INTERNAL_TYPE_POINTER ) {
+            
+            destroy_pointer_internal( pp_internalvalue );
+        }
+        else if ( *p_valuetype == INTERNAL_TYPE_DOUBLE ) {
+            
+            destroy_double_internal( pp_internalvalue );
+        }
+        else {
+         
+            log_message_debug( "no correct valuetype" );
+        }
     }
 }
 
@@ -290,17 +220,13 @@ void set_internal( void** pp_internal,
  * get the internals
  *
  * @param pp_internal pointer of the internal
- * @param p_value
- * @param p_valuetype
- * @param p_valuecount
- * @param p_valuesize
- * @param p_arrayindex
+ * @param p_value return the value for the internal
+ * @param p_valuetype return the value type for the internal
+ * @param p_arrayindex index in the internal array
  */
 void get_internal( void** pp_internal, 
                    void** pp_value, int* p_valuetype, 
-                   int* p_valuecount, int* p_valuesize,
-                   int* p_arrayindex ) 
-{
+                   int* p_arrayindex ) {
 
     if ( pp_internal == NULL_POINTER ) {
       
@@ -314,19 +240,11 @@ void get_internal( void** pp_internal,
         
         log_message_debug( "p_valuetype is a NULL POINTER" );
     }
-    else if ( p_valuecount == NULL_POINTER ) {
-        
-        log_message_debug( "p_valuecount is a NULL POINTER" );
-    }
-    else if ( p_valuesize == NULL_POINTER ) {
-        
-        log_message_debug( "p_valuesize is a NULL POINTER" );
-    }
     else {
 
         log_message_debug( "get_internal is started" );
 
-        // get the value into internal
+        // get the value from internals
         void* p_int_value = NULL_POINTER;
         get_array_element( pp_internal,
                            (void*) &POINTER_ARRAY,
@@ -336,7 +254,7 @@ void get_internal( void** pp_internal,
                            (void*) &POINTER_ARRAY,
                            p_arrayindex,
                            pp_value );        
-
+                           
         // get the value type into internal
         void* p_int_valuetype = NULL_POINTER;
         get_array_element( pp_internal,
@@ -347,29 +265,90 @@ void get_internal( void** pp_internal,
                            (void*) &INTEGER_ARRAY,
                            p_arrayindex,
                            p_valuetype);        
+    }
+}
 
-        // get the value count into internal
-        void* p_int_valuecount = NULL_POINTER;
+
+/**
+ * get the internals
+ *
+ * @param pp_internal pointer of the internal
+ * @param p_value the value for the internal
+ * @param p_valuetype the value type for the internal
+ * @param p_arrayindex index in the internal array
+ */
+void set_internal( void** pp_internal, 
+                   void** pp_internalvalue, int* p_valuetype, 
+                   int* p_arrayindex ) {
+
+    if ( pp_internal == NULL_POINTER ) {
+      
+        log_message_debug( "pp_internal is a NULL POINTER" );
+    }
+    else if ( pp_internalvalue == NULL_POINTER ) {
+        
+        log_message_debug( "pp_intenralvalue is a NULL POINTER" );
+    }
+    else if ( p_valuetype == NULL_POINTER ) {
+        
+        log_message_debug( "p_valuetype is a NULL POINTER" );
+    }
+//    else if ( p_newvalue == NULL_POINTER ) {
+//        
+//        log_message_debug( "p_newvalue is a NULL POINTER" );
+//    }
+    else if ( p_arrayindex == NULL_POINTER ) {
+        
+        log_message_debug( "p_arrayindex is a NULL POINTER" );
+    }
+    else {
+
+        log_message_debug( "set_internal is started" );
+
+//        //set the new value into the inernal value
+//        if ( *p_valuetype == INTERNAL_TYPE_INTEGER ) {
+//        
+//            set_integer_internal( pp_internalvalue, p_newvalue );
+//        }
+//        else if ( *p_valuetype == INTERNAL_TYPE_CHARACTER ) {
+//            
+//            set_character_internal( pp_internalvalue, p_newvalue );
+//        }
+//        else if ( *p_valuetype == INTERNAL_TYPE_POINTER ) {
+//            
+//            set_pointer_internal( pp_internalvalue, p_newvalue );
+//        }
+//        else if ( *p_valuetype == INTERNAL_TYPE_DOUBLE ) {
+//            
+//            set_double_internal( pp_internalvalue, p_newvalue );
+//        }
+//        else {
+//         
+//            log_message_debug( "no correct valuetype" );
+//        }
+
+
+        // set the value into internals
+        void* p_int_value = NULL_POINTER;
         get_array_element( pp_internal,
                            (void*) &POINTER_ARRAY,
-                           (void*) &INTERNAL_COLUMN_VALUECOUNT_INDEX,
-                           (void*) &p_int_valuecount );        
-        get_array_element( (void*) &p_int_valuecount,
-                           (void*) &INTEGER_ARRAY,
-                           p_arrayindex,
-                           p_valuecount);        
-
-        // get the value size into internal
-        void* p_int_valuesize = NULL_POINTER;
-        get_array_element( pp_internal,
+                           (void*) &INTERNAL_COLUMN_VALUE_INDEX,
+                           (void*) &p_int_value );        
+        set_array_element( (void*) &p_int_value,
                            (void*) &POINTER_ARRAY,
-                           (void*) &INTERNAL_COLUMN_VALUESIZE_INDEX,
-                           (void*) &p_int_valuesize );        
-        get_array_element( (void*) &p_int_valuesize,
-                           (void*) &INTEGER_ARRAY,
                            p_arrayindex,
-                           p_valuesize);        
+                           pp_internalvalue );        
                            
+        // set the value type into internal
+        void* p_int_valuetype = NULL_POINTER;
+        get_array_element( pp_internal,
+                           (void*) &POINTER_ARRAY,
+                           (void*) &INTERNAL_COLUMN_VALUETYPE_INDEX,
+                           (void*) &p_int_valuetype );        
+        set_array_element( (void*) &p_int_valuetype,
+                           (void*) &INTEGER_ARRAY,
+                           p_arrayindex,
+                           p_valuetype);        
     }
 }
 

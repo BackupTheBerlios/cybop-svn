@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.6 $ $Date: 2004-11-16 16:49:22 $ $Author: rholzmueller $
+ * @version $Revision: 1.7 $ $Date: 2004-11-23 08:17:54 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -102,11 +102,36 @@ int initialize_internals_start( xmlNode* root_element, void** pp_internal ) {
                 if ( comp_result==1 ) {
 
                     log_message_debug( "Modellvalue channel gefunden" );
-                    set_internal( pp_internal, (void*) &sm,
-                                  (void*) &INTERNAL_TYPE_CHARACTER, 
-                                  (void*) &smc, 
-                                  (void*) &CHARACTER_PRIMITIVE_SIZE,
+                    
+                    //create the internals 
+                    char** pp_channel = NULL_POINTER;
+                    create_internal( (void*) &pp_channel, 
+                                     (void*) &INTERNAL_TYPE_POINTER );
+                    int* p_channel_count = NULL_POINTER;
+                    create_internal( (void*) &p_channel_count, 
+                                     (void*) &INTERNAL_TYPE_INTEGER );
+                    int* p_channel_size = NULL_POINTER;
+                    create_internal( (void*) &p_channel_size, 
+                                     (void*) &INTERNAL_TYPE_INTEGER );
+
+                    //parse the internals
+                    *p_channel_count = 0;                                     
+                    *p_channel_size = 0;                                     
+                    parse( pp_channel, p_channel_count, p_channel_size,
+                           (void*) &sm, (void*) &smc,
+                           (void*) &STRING_ABSTRACTION,
+                           (void*) &STRING_ABSTRACTION_COUNT );
+                           
+                    //set the internals 
+                    set_internal( pp_internal, (void*) &pp_channel,
+                                  (void*) &INTERNAL_TYPE_CHARACTER,
                                   (void*) &INTERNAL_START_CHANNEL_INDEX );
+                    set_internal( pp_internal, (void*) &p_channel_count,
+                                  (void*) &INTERNAL_TYPE_INTEGER,
+                                  (void*) &INTERNAL_START_CHANNEL_COUNT_INDEX );
+                    set_internal( pp_internal, (void*) &p_channel_size,
+                                  (void*) &INTERNAL_TYPE_INTEGER,
+                                  (void*) &INTERNAL_START_CHANNEL_SIZE_INDEX );
                 }
 
                 //abstraction
@@ -119,11 +144,36 @@ int initialize_internals_start( xmlNode* root_element, void** pp_internal ) {
                 if ( comp_result==1 ) {
 
                     log_message_debug( "Modellvalue abstraction gefunden" );
-                    set_internal( pp_internal, (void*) &sm,
-                                  (void*) &INTERNAL_TYPE_CHARACTER, 
-                                  (void*) &smc, 
-                                  (void*) &CHARACTER_PRIMITIVE_SIZE,
+
+                    // create the internals
+                    char** pp_abst = NULL_POINTER;
+                    create_internal( (void*) &pp_abst, 
+                                     (void*) &INTERNAL_TYPE_POINTER );
+                    int* p_abst_count = NULL_POINTER;
+                    create_internal( (void*) &p_abst_count, 
+                                     (void*) &INTERNAL_TYPE_INTEGER );
+                    int* p_abst_size = NULL_POINTER;
+                    create_internal( (void*) &p_abst_size, 
+                                     (void*) &INTERNAL_TYPE_INTEGER );
+
+                    //parse the internals
+                    *p_abst_count = 0;                                     
+                    *p_abst_size = 0;                                     
+                    parse( pp_abst, p_abst_count, p_abst_size,
+                           (void*) &sm, (void*) &smc,
+                           (void*) &STRING_ABSTRACTION,
+                           (void*) &STRING_ABSTRACTION_COUNT );
+                           
+                    // set the internals
+                    set_internal( pp_internal, (void*) &pp_abst,
+                                  (void*) &INTERNAL_TYPE_POINTER,
                                   (void*) &INTERNAL_START_ABSTRACTION_INDEX );
+                    set_internal( pp_internal, (void*) &p_abst_count,
+                                  (void*) &INTERNAL_TYPE_INTEGER,
+                                  (void*) &INTERNAL_START_ABSTRACTION_COUNT_INDEX );
+                    set_internal( pp_internal, (void*) &p_abst_size,
+                                  (void*) &INTERNAL_TYPE_INTEGER,
+                                  (void*) &INTERNAL_START_ABSTRACTION_SIZE_INDEX );
                 }
 
                 //model
@@ -136,11 +186,37 @@ int initialize_internals_start( xmlNode* root_element, void** pp_internal ) {
                 if ( comp_result==1 ) {
 
                     log_message_debug( "Modellvalue model gefunden" );
-                    set_internal( pp_internal, (void*) &sm,
-                                  (void*) &INTERNAL_TYPE_CHARACTER, 
-                                  (void*) &smc, 
-                                  (void*) &CHARACTER_PRIMITIVE_SIZE,
+
+                    // create the internals
+                    char** pp_model = NULL_POINTER;
+                    create_internal( (void*) &pp_model, 
+                                     (void*) &INTERNAL_TYPE_POINTER );
+                    int* p_model_count = NULL_POINTER;
+                    create_internal( (void*) &p_model_count, 
+                                     (void*) &INTERNAL_TYPE_INTEGER );
+                    int* p_model_size = NULL_POINTER;
+                    create_internal( (void*) &p_model_size, 
+                                     (void*) &INTERNAL_TYPE_INTEGER );
+
+                    //parse the internal
+                    *p_model_count = 0;                                     
+                    *p_model_size = 0;                                     
+                    parse( pp_model, p_model_count, p_model_size,
+                           (void*) &sm, (void*) &smc,
+                           (void*) &STRING_ABSTRACTION,
+                           (void*) &STRING_ABSTRACTION_COUNT );
+                    
+                    // set the inernals
+                    set_internal( pp_internal, (void*) &pp_model,
+                                  (void*) &INTERNAL_TYPE_POINTER,
                                   (void*) &INTERNAL_START_MODEL_INDEX );
+                    set_internal( pp_internal, (void*) &p_model_count,
+                                  (void*) &INTERNAL_TYPE_INTEGER,
+                                  (void*) &INTERNAL_START_MODEL_COUNT_INDEX );
+                    set_internal( pp_internal, (void*) &p_model_size,
+                                  (void*) &INTERNAL_TYPE_INTEGER,
+                                  (void*) &INTERNAL_START_MODEL_SIZE_INDEX );
+                                               
                 }
 
             }  // if (cur_node->type == XML_ELEMENT_NODE)
@@ -214,29 +290,14 @@ int initialize_internals_tcp_socket( xmlNode* root_element, void** pp_internal )
                     // The destination integer.
                     int dis = -1;
                     
-                    void* pIntArray = NULL_POINTER;
-                    create_array( (void*) &pIntArray, 
-                                  (void*) &INTEGER_ARRAY, 
-                                  (void*) &INTEGER_COUNT );
+                    void* p_port = NULL_POINTER;
+                    create_internal( (void*) &p_port, 
+                                     (void*) &INTERNAL_TYPE_INTEGER );
 
-                    parse( (void*) &pIntArray, (void*) &INTEGER_COUNT, (void*) &dis,
+                    parse( (void*) &p_port, (void*) &INTEGER_COUNT, (void*) &dis,
                            (void*) &sm, (void*) &smc,
                            (void*) &INTEGER_ABSTRACTION,
                            (void*) &INTEGER_ABSTRACTION_COUNT );
-
-                    int port = 0;
-                    int* p_port = &port;
-                    get_array_element( (void*) &pIntArray,
-                                       (void*) &INTEGER_ARRAY,
-                                       (void*) &INTEGER_VALUE_INDEX, 
-                                       (void*) &port );
-                                       
-                    int port_count = 1;    
-                    set_internal( pp_internal, (void*) &p_port,
-                                  (void*) &INTERNAL_TYPE_INTEGER, 
-                                  (void*) &port_count,
-                                  (void*) &INTEGER_PRIMITIVE_SIZE,
-                                  (void*) &INTERNAL_TCPSOCKET_PORT_INDEX );
                 }
 
                 //active
@@ -253,28 +314,14 @@ int initialize_internals_tcp_socket( xmlNode* root_element, void** pp_internal )
                     // The destination integer.
                     int dis = -1;
                     
-                    void* pIntArray = NULL_POINTER;
-                    create_array( (void*) &pIntArray, 
-                                  (void*) &INTEGER_ARRAY, 
-                                  (void*) &INTEGER_COUNT );
+                    void* p_active = NULL_POINTER;
+                    create_internal( (void*) &p_active, 
+                                     (void*) &INTERNAL_TYPE_INTEGER );
 
-                    parse( (void*) &pIntArray, (void*) &INTEGER_COUNT, (void*) &dis,
+                    parse( (void*) &p_active, (void*) &INTEGER_COUNT, (void*) &dis,
                            (void*) &sm, (void*) &smc,
                            (void*) &INTEGER_ABSTRACTION,
                            (void*) &INTEGER_ABSTRACTION_COUNT );
-
-                    int active = 0;
-                    int* p_active = &active;    
-                    get_array_element( (void*) &pIntArray,
-                                       (void*) &INTEGER_ARRAY,
-                                       (void*) &INTEGER_VALUE_INDEX, 
-                                       (void*) &active );
-                    int active_count=1;
-                    set_internal( pp_internal, ((void*) &p_active),
-                                  (void*) &INTERNAL_TYPE_INTEGER, 
-                                  (void*) &active_count,
-                                  (void*) &INTEGER_PRIMITIVE_SIZE,
-                                  (void*) &INTERNAL_TCPSOCKET_ACTIVE_INDEX );
                 }
 
             }  // if (cur_node->type == XML_ELEMENT_NODE)
@@ -365,6 +412,7 @@ int initialize_internals( char* p_configfile, void** pp_internal ) {
 
                 }
 
+                comp_result = 0;
                 compare_arrays( (void*) &sm, (void*) &smc,
                                 (void*) &CONFIG_TCP_SOCKET_NAME_ABSTRACTION,
                                 (void*) &CONFIG_TCP_SOCKET_NAME_ABSTRACTION_COUNT,

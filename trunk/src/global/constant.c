@@ -48,7 +48,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.18 $ $Date: 2004-11-16 16:56:25 $ $Author: rholzmueller $
+ * @version $Revision: 1.19 $ $Date: 2004-11-23 08:16:38 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,11 +58,9 @@
 //
 // internal
 //
-static const int INTERNAL_COLUMN_COUNT = 4;
+static const int INTERNAL_COLUMN_COUNT = 2;
 static const int INTERNAL_COLUMN_VALUE_INDEX = 0;
 static const int INTERNAL_COLUMN_VALUETYPE_INDEX = 1;
-static const int INTERNAL_COLUMN_VALUECOUNT_INDEX = 2;
-static const int INTERNAL_COLUMN_VALUESIZE_INDEX = 3;
 
 //
 // internal value type
@@ -75,27 +73,33 @@ static const int INTERNAL_TYPE_POINTER = 4;
 //
 // internal array index
 //
-static const int INTERNAL_ARRAY_COUNT = 12;
+static const int INTERNAL_ARRAY_COUNT = 18;
 
 /** The tcp socket index. */
 static const int INTERNAL_TCPSOCKET_PORT_INDEX = 0;
 static const int INTERNAL_TCPSOCKET_ACTIVE_INDEX = 1;
 static const int INTERNAL_TCPSOCKET_SERVERSOCKETNUMBER_INDEX = 2;
-
+ 
 /** The start parameter index. */
 static const int INTERNAL_START_ABSTRACTION_INDEX = 3;
-static const int INTERNAL_START_CHANNEL_INDEX = 4;
-static const int INTERNAL_START_MODEL_INDEX = 5;
+static const int INTERNAL_START_ABSTRACTION_COUNT_INDEX = 4;
+static const int INTERNAL_START_ABSTRACTION_SIZE_INDEX = 5;
+static const int INTERNAL_START_CHANNEL_INDEX = 6;
+static const int INTERNAL_START_CHANNEL_COUNT_INDEX = 7;
+static const int INTERNAL_START_CHANNEL_SIZE_INDEX = 8;
+static const int INTERNAL_START_MODEL_INDEX = 9;
+static const int INTERNAL_START_MODEL_COUNT_INDEX = 10;
+static const int INTERNAL_START_MODEL_SIZE_INDEX = 11;
 
 /** The signal memory index. */
-static const int INTERNAL_SIGNAL_MEMORY_INDEX = 6;
-static const int INTERNAL_SIGNAL_MEMORY_COUNT_INDEX = 7;
-static const int INTERNAL_SIGNAL_MEMORY_SIZE_INDEX = 8;
+static const int INTERNAL_SIGNAL_MEMORY_INDEX = 12;
+static const int INTERNAL_SIGNAL_MEMORY_COUNT_INDEX = 13;
+static const int INTERNAL_SIGNAL_MEMORY_SIZE_INDEX = 14;
 
 /** The knowledge model index. */
-static const int INTERNAL_KNOWLEDGE_MODEL_INDEX = 9;
-static const int INTERNAL_KNOWLEDGE_MODEL_COUNT_INDEX = 10;
-static const int INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX = 11;
+static const int INTERNAL_KNOWLEDGE_MODEL_INDEX = 15;
+static const int INTERNAL_KNOWLEDGE_MODEL_COUNT_INDEX = 16;
+static const int INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX = 17;
 
 
 //

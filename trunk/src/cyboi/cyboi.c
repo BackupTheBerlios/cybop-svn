@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.43 $ $Date: 2004-11-16 16:54:14 $ $Author: rholzmueller $
+ * @version $Revision: 1.44 $ $Date: 2004-11-23 08:21:42 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -156,7 +156,7 @@ int main(int p0, char** p1) {
     // They have to be initialized before the command line parameter check below!
     // Otherwise, the logger may not be able to log possible error messages.
     initialize_global_variables();
-    log_message_debug( "jkdsjdjksd test init global varibales" );
+    log_message_debug( "init global variables" );
 
     //
     // Testing.
@@ -181,8 +181,24 @@ int main(int p0, char** p1) {
             // colum 4:  size for the value
             //
             void* p_internal = NULL_POINTER;
-            create_internal( (void*) &p_internal );
+            create_internals_structur( (void*) &p_internal );
             
+//            int valuetype = 0;
+//            void* p_internalvalue = NULL_POINTER;
+//            create_internal( (void*) &p_internalvalue, (void*) &INTERNAL_TYPE_INTEGER );
+//                          
+//            int port = 5678;
+//            set_internal( (void*) &p_internal, (void*) &p_internalvalue,
+//                          (void*) &INTERNAL_TYPE_INTEGER, 
+//                          (void*) &port,
+//                          (void*) &INTERNAL_TCPSOCKET_PORT_INDEX );
+//
+//            valuetype = 0;
+//            p_internalvalue = NULL_POINTER;
+//            get_internal( (void*) &p_internal, (void*) &p_internalvalue,
+//                          (void*) &valuetype, 
+//                          (void*) &INTERNAL_TCPSOCKET_PORT_INDEX );
+
             //
             // copy configuration file parameters into internals
             //
@@ -197,37 +213,34 @@ int main(int p0, char** p1) {
             //
 
             // The signal memory and its count and size.
-            void* p_m = NULL_POINTER;
-            void* pp_m = &p_m;
-            int mc = 0;
-            int* p_mc = (void*) &mc;
-            int ms = 0;
-            int* p_ms = (void*) &ms;
-
+            void** pp_m = NULL_POINTER;
+            int* p_mc = NULL_POINTER;
+            int* p_ms = NULL_POINTER;
+            
+            // create the internal
+            create_internal( (void*) &pp_m, (void*) &INTERNAL_TYPE_POINTER );
+            create_internal( (void*) &p_mc, (void*) &INTERNAL_TYPE_INTEGER );
+            create_internal( (void*) &p_ms, (void*) &INTERNAL_TYPE_INTEGER );
+            
+            *p_mc = 0;
+            *p_ms = 0;
+            
             // Create signal container.
-            create( (void*) &p_m, (void*) &ms, 
+            create( pp_m, p_ms, 
                     (void*) &SIGNAL_MEMORY_ABSTRACTION,
                     (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT );
                     
             // set the signal container into internals
-            int internal_count = 1;
-            
             set_internal( (void*) &p_internal, (void*) &pp_m,  
                           (void*) &INTERNAL_TYPE_POINTER,
-                          (void*) &internal_count, 
-                          (void*) &POINTER_PRIMITIVE_SIZE,
                           (void*) &INTERNAL_SIGNAL_MEMORY_INDEX );
 
             set_internal( (void*) &p_internal, (void*) &p_mc,  
                           (void*) &INTERNAL_TYPE_INTEGER,
-                          (void*) &internal_count, 
-                          (void*) &INTEGER_PRIMITIVE_SIZE,
                           (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX );
 
             set_internal( (void*) &p_internal, (void*) &p_ms,  
                           (void*) &INTERNAL_TYPE_INTEGER,
-                          (void*) &internal_count, 
-                          (void*) &INTEGER_PRIMITIVE_SIZE,
                           (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX );
 
             log_message_debug( "init signal container" );
@@ -237,37 +250,34 @@ int main(int p0, char** p1) {
             //
 
             // Initialize knowledge and its count and size.
-            void* p_k = NULL_POINTER;
-            void* pp_k = &p_k;
-            int kc = 0;
-            int* p_kc = (void*) &kc;
-            int ks = 0;
-            int* p_ks = (void*) &ks;
+            void* pp_k = NULL_POINTER;
+            int* p_kc = NULL_POINTER;
+            int* p_ks = NULL_POINTER;
+
+            // create the internal
+            create_internal( (void*) &pp_k, (void*) &INTERNAL_TYPE_POINTER );
+            create_internal( (void*) &p_kc, (void*) &INTERNAL_TYPE_INTEGER );
+            create_internal( (void*) &p_ks, (void*) &INTERNAL_TYPE_INTEGER );
+
+            *p_kc = 0;
+            *p_ks = 0;
 
             // Create knowledge container.
-            create( (void*) &p_k, (void*) &ks, 
+            create( pp_k, p_ks, 
                     (void*) &COMPOUND_ABSTRACTION, 
                     (void*) &COMPOUND_ABSTRACTION_COUNT );
 
             // set the knowledge container into internals
-            internal_count = 1;
-            
             set_internal( (void*) &p_internal, (void*) &pp_k,  
                           (void*) &INTERNAL_TYPE_POINTER,
-                          (void*) &internal_count, 
-                          (void*) &POINTER_PRIMITIVE_SIZE,
                           (void*) &INTERNAL_KNOWLEDGE_MODEL_INDEX );
 
             set_internal( (void*) &p_internal, (void*) &p_kc,  
                           (void*) &INTERNAL_TYPE_INTEGER,
-                          (void*) &internal_count, 
-                          (void*) &INTEGER_PRIMITIVE_SIZE,
                           (void*) &INTERNAL_KNOWLEDGE_MODEL_COUNT_INDEX );
 
             set_internal( (void*) &p_internal, (void*) &p_ks,  
                           (void*) &INTERNAL_TYPE_INTEGER,
-                          (void*) &internal_count, 
-                          (void*) &INTEGER_PRIMITIVE_SIZE,
                           (void*) &INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX );
             log_message_debug( "init knowledge container" );
 
@@ -364,38 +374,40 @@ int main(int p0, char** p1) {
             //
 
             // The source channel.
-            char* sc = NULL_POINTER;
-            int scc;
+            char** sc = NULL_POINTER;
+            int* scc = NULL_POINTER;
             // The source abstraction.
-            char* sa = NULL_POINTER;
-            int sac = 0;
+            char** sa = NULL_POINTER;
+            int* sac = NULL_POINTER;
             // The source model.
-            char* sm = NULL_POINTER;
-            int smc;
+            char** sm = NULL_POINTER;
+            int* smc = NULL_POINTER;
 
             int internal_type = 0;
-            int internal_size = 0;
             
             // Get source channel.
             get_internal( (void*) &p_internal, (void*) &sc,
                           (void*) &internal_type, 
-                          (void*) &scc, 
-                          (void*) &internal_size,
                           (void*) &INTERNAL_START_CHANNEL_INDEX );
+            get_internal( (void*) &p_internal, (void*) &scc,
+                          (void*) &internal_type, 
+                          (void*) &INTERNAL_START_CHANNEL_COUNT_INDEX );
 
             // Get source abstraction.
             get_internal( (void*) &p_internal, (void*) &sa,
                           (void*) &internal_type, 
-                          (void*) &sac, 
-                          (void*) &internal_size,
                           (void*) &INTERNAL_START_ABSTRACTION_INDEX );
+            get_internal( (void*) &p_internal, (void*) &sac,
+                          (void*) &internal_type, 
+                          (void*) &INTERNAL_START_ABSTRACTION_COUNT_INDEX );
 
             // Get source model.
             get_internal( (void*) &p_internal, (void*) &sm,
                           (void*) &internal_type, 
-                          (void*) &smc, 
-                          (void*) &internal_size,
                           (void*) &INTERNAL_START_MODEL_INDEX );
+            get_internal( (void*) &p_internal, (void*) &smc,
+                          (void*) &internal_type, 
+                          (void*) &INTERNAL_START_MODEL_COUNT_INDEX );
 
             // The destination abstraction.
             void* da = NULL_POINTER;
@@ -412,16 +424,16 @@ int main(int p0, char** p1) {
 
             // Create destination abstraction.
             create_model((void*) &da, (void*) &dac, (void*) &das,
-                (void*) &sa, (void*) &sac,
+                sa, sac,
                 (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
                 (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
             log_message_debug( "create destination abstraction" );
 
             // Create destination model.
             create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-                (void*) &sm, (void*) &smc,
-                (void*) &sa, (void*) &sac,
-                (void*) &sc, (void*) &scc);
+                sm, smc,
+                sa, sac,
+                sc, scc);
             log_message_debug( "create destination model" );
 
             // CAUTION! Do not create destination details!
@@ -431,25 +443,10 @@ int main(int p0, char** p1) {
             // Startup signal.
             //
 
-            get_internal( (void*) &p_internal, (void*) &pp_m,  
-                          (void*) &internal_type,
-                          (void*) &internal_count, 
-                          (void*) &internal_size,
-                          (void*) &INTERNAL_SIGNAL_MEMORY_INDEX );
-            get_internal( (void*) &p_internal, (void*) &p_mc,  
-                          (void*) &internal_type,
-                          (void*) &internal_count, 
-                          (void*) &internal_size,
-                          (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX );
-            get_internal( (void*) &p_internal, (void*) &p_ms,  
-                          (void*) &internal_type,
-                          (void*) &internal_count, 
-                          (void*) &internal_size,
-                          (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX );
 
 
             // Add startup signal to signal memory.
-            set_signal( (void*) pp_m, (void*) p_mc, (void*) p_ms,   //memory
+            set_signal( pp_m, p_mc, p_ms,   //memory
                         (void*) &da, (void*) &dac,              //dest abtsraction
                         (void*) &dm, (void*) &dmc,              //dest model
                         (void*) &dd, (void*) &ddc,              //dest details
@@ -492,14 +489,14 @@ int main(int p0, char** p1) {
 //            }
 
             // Destroy knowledge.
-            destroy((void*) &p_k, (void*) &ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
+            destroy( pp_k, p_ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
 
 
             // Destroy signal memory.
-            destroy((void*) &p_m, (void*) &ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
+            destroy( pp_m, p_ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
             // destroy the internals
-            destroy_internal( (void*) &p_internal );
+            destroy_internals_structur( (void*) &p_internal );
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 

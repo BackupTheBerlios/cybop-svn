@@ -23,7 +23,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.2 $ $Date: 2004-11-16 16:57:26 $ $Author: rholzmueller $
+ * @version $Revision: 1.3 $ $Date: 2004-11-23 08:23:34 $ $Author: rholzmueller $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -61,9 +61,22 @@ void handle_request() {
  * @return errorcode for this function
  * 
  */
-int create_tcp_socket( const void* p_port, void* p_socketnumber ) {
+int create_tcp_socket( void** pp_internals ) {
 
     log_message_debug( "create_tcp_socket is started" );
+
+    int* p_port = NULL_POINTER;
+    int* p_socketnumber = NULL_POINTER;
+    int internal_type = 0;
+
+    get_internal( pp_internals, (void*) &p_port,  
+                  (void*) &internal_type,
+                  (void*) &INTERNAL_TCPSOCKET_PORT_INDEX );
+    get_internal( pp_internals, (void*) &p_socketnumber,  
+                  (void*) &internal_type,
+                  (void*) &INTERNAL_TCPSOCKET_SERVERSOCKETNUMBER_INDEX );
+
+
     if ( p_port == NULL_POINTER ) {
 
         log_message_debug( "p_port is a NULL POINTER" );
@@ -76,42 +89,39 @@ int create_tcp_socket( const void* p_port, void* p_socketnumber ) {
     }
     else {
         
-        int* pint_port = (int*) p_port;
-        int* pint_socketnumber = (int*) p_socketnumber;
-
         struct sockaddr_in server_address;
         int server_address_size;
     
         /* create the socket */
-        *pint_socketnumber = socket( PF_INET, SOCK_STREAM, 0);
-        if ( *pint_socketnumber < 0 ) {
+        *p_socketnumber = socket( PF_INET, SOCK_STREAM, 0);
+        if ( *p_socketnumber < 0 ) {
             
             //errormessage and close the thread
             log_message_debug( "failed to create socket" );
             return -3;
         }
-        fprintf( stderr, "create the socket - socketnumber: %d \n", *pint_socketnumber );
+        fprintf( stderr, "create the socket - socketnumber: %d \n", *p_socketnumber );
     
         /* create the socket address of the server */
         server_address.sin_family       = AF_INET;
         server_address.sin_addr.s_addr  = INADDR_ANY;
-        server_address.sin_port         = htons( *pint_port );
-        server_address_size              = sizeof(server_address);
+        server_address.sin_port         = htons( *p_port );
+        server_address_size             = sizeof(server_address);
     
         /* bind the socket to the server address */
-        if ( bind( *pint_socketnumber, (struct sockaddr *) &server_address,
+        if ( bind( *p_socketnumber, (struct sockaddr *) &server_address,
                    server_address_size ) < 0 ) 
         {
     
             //errormessage and close the thread
             log_message_debug( "failed to bind socket" );
             return -4;
-        };
+        }
            
-        fprintf( stderr, "bind the socket on the port %d \n", *pint_port );
+        fprintf( stderr, "bind the socket on the port %d \n", *p_port );
         
         /* listen for request of the clients */
-        listen( *pint_socketnumber, 1);
+        listen( *p_socketnumber, 1);
         
     }
     return 0;
@@ -122,9 +132,9 @@ int create_tcp_socket( const void* p_port, void* p_socketnumber ) {
  * the function is running in a thread, because the loop in the
  * function wait for request of the client
  * 
- * @param p_thread_parameter the only one thread parameter (type void**)
+ * @param pp_internals the internals)
  */
-void run_tcp_socket( void* p_thread_parameter ) {
+void run_tcp_socket( void** pp_internals ) {
 /*    
     if ( p_thread_parameter == NULL_POINTER ) {
      
@@ -206,31 +216,31 @@ void run_tcp_socket( void* p_thread_parameter ) {
 /**
  * Start the tcp socket server
  * 
- * @param p_thread_parameter tthe only one thread parameter (type void**)
+ * @param pp_internals the internals
  */
-void activate_tcp_socket( void* p_thread_parameter ) 
+void activate_tcp_socket( void** pp_internals ) 
 {
-    log_message_debug( "activate_tcp_spcket is started");
-    if ( p_thread_parameter == NULL_POINTER ) {
-    
-        log_message_debug( "pp_thread_parameter is a NULL POINTER" );
-    }
-    else {
-
-        void** pp_thread_parameter = (void**) p_thread_parameter;
-        
-        //create the thread 
-        pthread_t tcp_socket_thread;
-            
-        int err = 0;
-        err = pthread_create( &tcp_socket_thread, NULL, 
-                              (void*) &run_tcp_socket, 
-                              *pp_thread_parameter );
-        if( err != 0) {
-        
-            log_message_debug( "error by the create the thread tcp socket");
-        }
-    }
+//    log_message_debug( "activate_tcp_spcket is started");
+//    if ( p_thread_parameter == NULL_POINTER ) {
+//    
+//        log_message_debug( "pp_thread_parameter is a NULL POINTER" );
+//    }
+//    else {
+//
+//        void** pp_thread_parameter = (void**) p_thread_parameter;
+//        
+//        //create the thread 
+//        pthread_t tcp_socket_thread;
+//            
+//        int err = 0;
+//        err = pthread_create( &tcp_socket_thread, NULL, 
+//                              (void*) &run_tcp_socket, 
+//                              *pp_thread_parameter );
+//        if( err != 0) {
+//        
+//            log_message_debug( "error by the create the thread tcp socket");
+//        }
+//    }
 }
 
 /* TCP_SOCKET_SERVER_SOURCE */

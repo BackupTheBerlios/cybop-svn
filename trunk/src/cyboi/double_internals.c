@@ -32,7 +32,7 @@
  * - Macintosh
  * - MS Windows
  *
- * @version $Revision: 1.2 $ $Date: 2004-11-16 16:49:00 $ $Author: rholzmueller $
+ * @version $Revision: 1.3 $ $Date: 2004-11-23 08:17:37 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,15 +50,10 @@
  * @param pp_value
  * @param p_valuecount
  */
-void create_double_internal( void** pp_internalvalue, void** pp_value,
-                              int* p_valuecount ) {
+void create_double_internal( void** pp_internalvalue ) {
 
-    create_array( pp_internalvalue, (void*) &DOUBLE_ARRAY, p_valuecount );
-    
-    int array_index = 0;
-    set_array_elements( pp_internalvalue, (void*) &DOUBLE_ARRAY, 
-                        (void*) &array_index, 
-                        pp_value, p_valuecount );
+    int count = 1;
+    create_array( pp_internalvalue, (void*) &DOUBLE_ARRAY, (void*) &count );
 }                                 
 
 /**
@@ -67,11 +62,36 @@ void create_double_internal( void** pp_internalvalue, void** pp_value,
  * @param pp_internalvalue
  * @param p_valuecount
  */
-void destroy_double_internal( void** pp_internalvalue, 
-                              int* p_valuecount ) {
+void destroy_double_internal( void** pp_internalvalue ) {
 
-    destroy_array( pp_internalvalue, (void*) &DOUBLE_ARRAY, p_valuecount );
-    
+    int count = 1;
+    destroy_array( pp_internalvalue, (void*) &DOUBLE_ARRAY, (void*) &count );
+}                                 
+
+/**
+ * set a double internal
+ *
+ * @param pp_internalvalue
+ * @param p_valuecount
+ */
+void set_double_internal( void** pp_internalvalue, void* p_newvalue ) {
+
+    if ( pp_internalvalue == NULL_POINTER ) {
+        
+        log_message_debug( "pp_internalvalue is a NULL POINTER" );
+    }
+    else if ( p_newvalue == NULL_POINTER ) {
+     
+        log_message_debug( "p_newvalue is a NULL POINTER" );
+    }
+    else {
+        
+        int arrayindex = 0;
+        set_array_element( pp_internalvalue,
+                           (void*) &DOUBLE_ARRAY,
+                           (void*) &arrayindex,
+                           p_newvalue );        
+    }
 }                                 
 
 
