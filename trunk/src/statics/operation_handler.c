@@ -34,7 +34,7 @@
 /**
  * This is the operation handler.
  *
- * @version $Revision: 1.5 $ $Date: 2004-02-29 15:24:26 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-02-29 16:26:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,8 +57,8 @@ void initialize_operation_model(void* p0, void* p1) {
         log_message((void*) &INFO_LOG_LEVEL, "Initialize operation model.");
 
         // Read input stream and transform to inputs and outputs.
-        void* io = get_string_element(p1, (void*) COMMA_SEPARATOR);
-        void* r = get_remaining_elements(p1, (void*) COMMA_SEPARATOR);
+        void* io = get_sub_string(p1, (void*) COMMA_SEPARATOR);
+        void* r = get_remaining_string(p1, (void*) COMMA_SEPARATOR);
 
         add_array_element(m->inputs_outputs, io);
 
@@ -85,10 +85,22 @@ void finalize_operation_model(void* p0, void* p1) {
 
     if (m != (void*) 0) {
 
-        log_message((void*) &INFO_LOG_LEVEL, "Finalize operation input and output.");
+        log_message((void*) &INFO_LOG_LEVEL, "Finalize operation model.");
 
         // Write output stream and transform from inputs and outputs.
-//??        sprintf(p1, %l, (void*) &(m->value));
+        int c = 0;
+        get_array_count(m->inputs_outputs, (void*) &c);
+
+        if (c > 0) {
+
+            void* io = get_array_element(m->inputs_outputs, c - 1);
+            remove_array_element(m->inputs_outputs, c - 1);
+
+            strcat((char*) p1, COMMA_SEPARATOR);
+            strcat((char*) p1, (char*) io);
+
+            finalize_operation_model(p0, p1);
+        }
 
     } else {
 

@@ -29,6 +29,7 @@
 #include "../logger/log_handler.c"
 #include "../model/map.c"
 #include "../model/map_handler.c"
+#include "../string_helper.c"
 
 /**
  * This is the model handler.
@@ -39,100 +40,9 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.9 $ $Date: 2004-02-29 15:24:26 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-02-29 16:26:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-
-//
-// Constants.
-//
-
-/** The empty string. */
-static const char* EMPTY_STRING = "";
-
-/** The slash separator. */
-static const char* SLASH_SEPARATOR = "/";
-
-/** The dot separator. */
-static const char* DOT_SEPARATOR = ".";
-
-/** The comma separator. */
-static const char* COMMA_SEPARATOR = ",";
-
-//
-// Helper functions.
-//
-
-/**
- * Returns the first element in the given string.
- *
- * It is the most left element before the first separation.
- * If there is no separation, then it is the given name itself.
- *
- * @param p0 the string
- * @param p1 the separation
- * @return the element
- */
-void* get_string_element(void* p0, void* p1) {
-
-    void* e = (void*) 0;
-    char* s = (char*) p0;
-
-    if (s != (void*) 0) {
-
-/*??
-        int i = s->indexOf(p1);
-
-        if (i != -1) {
-
-            e = s->substring(0, i);
-
-        } else {
-
-            e = s;
-        }
-*/
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get string element. The string is null.");
-    }
-
-    return e;
-}
-
-/**
- * Returns the remaining elements in the given string.
- *
- * It is the whole string after the first separation.
- *
- * @param p0 the string
- * @param p1 the separation
- * @return the remaining elements
- */
-void* get_remaining_elements(void* p0, void* p1) {
-
-    void* e = (void*) 0;
-    char* s = (char*) p0;
-
-    if (s != (void*) 0) {
-
-/*??
-        int i = s->indexOf(p1);
-
-        if (i != -1) {
-
-            e = s->substring(i + 1);
-        }
-*/
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not get remaining string elements. The string is null.");
-    }
-
-    return e;
-}
 
 //
 // Model part.
@@ -162,8 +72,8 @@ void set_model_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
         log_message((void*) &INFO_LOG_LEVEL, "Set model part: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
 
-        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
-        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
+        void* n = get_sub_string(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_string(p1, (void*) DOT_SEPARATOR);
 
         if (r != (void*) 0) {
 
@@ -208,8 +118,8 @@ void remove_model_part(void* p0, void* p1) {
         log_message((void*) &INFO_LOG_LEVEL, "Remove model part: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
 
-        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
-        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
+        void* n = get_sub_string(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_string(p1, (void*) DOT_SEPARATOR);
 
         if (r != (void*) 0) {
 
@@ -256,8 +166,8 @@ void* get_model_part(void* p0, void* p1) {
         log_message((void*) &INFO_LOG_LEVEL, "Get model part: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
 
-        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
-        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
+        void* n = get_sub_string(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_string(p1, (void*) DOT_SEPARATOR);
 
         if (r != (void*) 0) {
 
@@ -298,8 +208,8 @@ void* get_model_part_position(void* p0, void* p1) {
         log_message((void*) &INFO_LOG_LEVEL, "Get model part position: ");
         log_message((void*) &INFO_LOG_LEVEL, p1);
 
-        void* n = get_part_name(p1, (void*) DOT_SEPARATOR);
-        void* r = get_remaining_name(p1, (void*) DOT_SEPARATOR);
+        void* n = get_sub_string(p1, (void*) DOT_SEPARATOR);
+        void* r = get_remaining_string(p1, (void*) DOT_SEPARATOR);
 
         if (r != (void*) 0) {
 

@@ -1,7 +1,7 @@
 /*
  * $RCSfile: array_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.8 $ $Date: 2004-02-28 19:43:30 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-02-29 16:26:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -153,21 +153,21 @@ void set_array_element(void* p0, void* p1, void* p2) {
     if (a != (void*) 0) {
 
         int* i = (int*) p1;
-        int size = a->size;
-        
+        int s = a->size;
+
         // If the array length is exceeded, create a new array with extended
         // (doubled) length so that the index matches.
         // If the initial size is zero and multiplied by two, the result is
         // still zero. Therefore, an integer summand of 1 is added here.
-        while (*i >= size) {
+        while (*i >= s) {
 
-            size = 2 * size + 1;
+            s = 2 * s + 1;
         }
 
-        if (size != a->size) {
-                
-            a->size = size;
-            a->internal_array = realloc(a->internal_array, size);
+        if (s != a->size) {
+
+            a->size = s;
+            a->internal_array = realloc(a->internal_array, s);
             //?? Our function "extend_internal_array" does not work somehow :-(
             //?? Anybody can help? Using "realloc", for now; see above.
             //?? a->internal_array = extend_internal_array(a->internal_array, (void*) &(a->size), (void*) &size);
@@ -179,6 +179,28 @@ void set_array_element(void* p0, void* p1, void* p2) {
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not set array element. The array is null.");
+    }
+}
+
+/**
+ * Adds the array element.
+ *
+ * @param p0 the array
+ * @param p1 the element
+ */
+void add_array_element(void* p0, void* p1) {
+
+    struct array* a = (struct array*) p0;
+
+    if (a != (void*) 0) {
+
+        int c = a->count;
+
+        set_array_element(a, c, p1);
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not add array element. The array is null.");
     }
 }
 
@@ -223,7 +245,7 @@ void* get_array_element(void* p0, void* p1) {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get array element. The array is null.");
     }
-    
+
     return e;
 }
 
