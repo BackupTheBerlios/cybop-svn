@@ -1,0 +1,208 @@
+\documentclass[12pt,a4paper]{scrartcl}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ae}
+\usepackage[german]{babel}
+\usepackage[dvips]{graphicx}
+\pagestyle{headings}
+
+\DeclareGraphicsRule{.jpg}{eps}{.bb}{}
+
+\begin{document}
+
+
+%
+% Abstand zwischen den Absätzen auf 1.5 Zeilen setzen
+%
+\setlength{\parskip}{1.5ex}
+%
+% Einzug am Absatzanfang auf 0 setzen.
+%
+\setlength{\parindent}{0em}
+%\typearea[0.5cm]{12}
+%
+% Titelseite
+%
+%\tntdasatitle{Diplom/Studienarbeit}
+%             {Titel}
+%             {Name des Studenten}
+%             {Betreuer}
+%             {Erstprüfer}
+%             {Zweitprüfer}
+%             {Ort,Datum}
+\begin{titlepage}
+\enlargethispage{3cm}
+
+  \begin{center}
+    {\large \textsc{Technische Universität Ilmenau}}
+    
+    {\large \textsc{Fakultät für Informatik und Automatisierung} }
+
+\vfill    
+
+    {\Large Studienarbeit}
+
+\vspace{1cm}
+
+    {\Large 
+      \textbf{Erstellung intuitiver Web Frontends zur Terminplanung und Verwaltung
+			administrativer Daten, basierend auf einem Webserver mit JSP Technologie,
+			sowie Anbindung an ein medizinisches Informationssystem 
+		}}
+\vfill    
+
+    {\large Rolf Holzmüller} \\
+
+\vfill    
+
+
+{   
+		\begin{tabular}{ll}
+      Betreuer: & Dipl.-Ing. Christian Heller \\
+ 			verantwortlicher Hochschullehrer: & Prof. Dr.-Ing. habil. Ilka Philippow \\
+    \end{tabular}
+}
+
+\vspace{1cm}
+
+    { Ilmenau, den 10.April 2003}
+
+\end{center}
+\setcounter{page}{0}
+\if@twoside 
+  \begin{titlepage} \ 
+  \setcounter{page}{0}
+  \end{titlepage} 
+\fi
+\end{titlepage}
+
+
+
+%  \begin{titlepage}
+%  
+%    \begin{center}
+%      .
+%      \newline
+%      \newline
+%      \newline
+%      \newline
+%      \large \bfseries
+%			Erstellung intuitiver Web Frontends zur Terminplanung und Verwaltung
+%			administrativer Daten, basierend auf einem Webserver mit JSP Technologie,
+%			sowie Anbindung an ein medizinisches Informationssystem 
+%			\linebreak[4]	\linebreak[4]
+%			\linebreak[4]	\linebreak[4]
+%			\linebreak[4]	\linebreak[4]
+%
+%			\mdseries
+%			Studienarbeit \\
+%			Fakultät für Informatik und Automatisierung \\
+%			Technischen Universität Ilmenau
+%			\linebreak[4]	\linebreak[4]
+%			\linebreak[4]	\linebreak[4]
+ %   
+  %    \normalsize 
+	%		von 
+	%		\linebreak[4]	\linebreak[4]
+	%		Rolf Holzmüller 
+	%		\linebreak[4]	\linebreak[4]
+ 	%		Betreuer: Dipl.-Ing. Christian Heller 
+	%		\linebreak[4]	\linebreak[4]
+ 	%		verantwortlicher Hochschullehrer: Prof. Dr.-Ing. habil. Ilka Philippow 
+	%		\linebreak[4]	\linebreak[4]
+   %   Inventarisierungsnummer: ????2003-01-02 / 005 / IN97 / 2232 
+		%	\linebreak[4]	\linebreak[4]
+     % eingereicht am: 02. März 2003    
+%    \end{center}
+  
+%  \end{titlepage}
+
+
+  \newpage
+  \vspace*{\fill}
+  \noindent
+  Copyright\copyright2002-2003. Rolf Holzmüller. \\
+	Res Medicinae -- Information in Medicine -- <www.resmedicinae.org> \\
+	Permission is granted to copy, distribute and/or modify this document under the terms of
+	the GNU Free Documentation License, Version 1.2 or any later version published by the Free
+	Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+	Texts. A copy of the license is included in the section entitled "`GNU Free Documentation
+	License"'.
+
+	\newpage
+
+  \tableofcontents
+  
+  \newpage
+
+  \input{Einfuehrung}
+  
+  \newpage
+  
+  \input{WebArchitektur}    
+      
+  \newpage
+
+	\input{JDBC}
+	
+	\newpage
+	
+  \input{Servlets}
+
+  \newpage
+  
+  \input{JavaBeans}
+
+  \newpage
+  
+  \input{JavaServerPages}
+
+  \newpage
+
+  \input{ModelViewController}
+
+  \newpage
+
+  \input{ResdataPrototyp}
+    
+  \newpage
+
+  \input{Konfiguration}    
+
+  
+\begin{verbatim}
+
+\end{verbatim}
+  
+  \newpage
+
+  \input{Zusammenfassung}
+
+  \newpage
+
+	\begin{thebibliography}{breitestes Label}
+		\bibitem{hwinf} H.R.Hansen: Wirtschaftsinformatik I 7. Auflage		
+		\bibitem{hajdbc} Hobbs, Ashton: JDBC in 21 Tage
+		\bibitem{mmjavabeans} Michael Morris: JavaBeans
+		\bibitem{dfjava} David Flanagan: Java in a Nutshell
+		\bibitem{afbeans} Axel Faltin: http://www.java-beans.com/
+		\bibitem{bmrmvc} Buschmann, Meunier, Rohnert,...: Pattern-orientierte 
+																											Software-Architektur
+		\bibitem{swjsp} Stefan Wille: Go To Java Server Pages
+		\bibitem{gkhjp} Guido Krüger: Handbuch der Java-Programmierung
+		
+	\end{thebibliography}
+	
+	
+	\newpage
+	
+  \begin{appendix}
+
+    \input{fdl}    
+	
+
+
+  \end{appendix}
+       
+\end{document}
+

@@ -1,0 +1,119 @@
+\section{Model-View-Controller (MVC)}
+
+  \subsection{Überblick}
+    Als erstes wird das allgemeine Modell beschrieben. Dabei wird nicht auf die 
+    Umsetzung des Modells für die Webapplication eingegangen. Es werden Vor- und 
+    Nachteile genannt. Für die Webapplication sind nicht alle Teile des MVC-Musters 
+    umgesetzt. Dies liegt an den Besonderheiten der Kommunikation 
+    innerhalb der Webanwendung. Darauf wird im Abschnitt \ref{PrototypResData} 
+    eingegangen.
+
+  \subsection{Beschreibung}
+    Das Model-View-Controller Muster, im folgenden kurz MVC-Muster, wurde ursprünglich für die
+    Erstellung von Benutzeroberflächen mit Smalltalk-80 verwendet. Ziel des MVC-Musters ist die
+    Zerlegung von interaktiven Applikationen in Teilsysteme mit abgegrenzter
+    Funktionalität und hohem Grad der Wiederverwendung. Das MVC-Muster überträgt
+    die Trennung von Inhalt, Darstellung und Interaktion 
+    auf GUI-basierte Systeme. Dabei entspricht der Controller der 
+    Eingabe und der Ablaufsteuerung, das Model der Verarbeitung und die View der 
+    Ausgabe. Die drei Komponenten werden dabei separat behandelt und implementiert. 
+    Dies macht nicht nur die Erstellung von       
+    Anwendungen mit mehreren synchronen Ansichten auf die gleichen Daten
+    leichter, sondern auch die Behandlung von Fehlern, da solche leichter zu lokalisieren
+    sind. Das MVC-Modell garantiert, dass Änderungen im Modell zu den entsprechenden
+    Änderungen in den Views führen. Hier nun eine kurze Beschreibung der drei Komponenten 
+    Model, View und Controller. 
+    
+    \subsubsection{Model}
+      Das Model repräsentiert die Daten einer Anwendung. Neben der Verwaltung der 
+      Daten führt es auch alle Änderungen auf diese Daten aus. Das Model liefert auf 
+      Anfrage den Zustand der Daten und reagiert auf Befehle, diese zu ändern. 
+
+      Zwischen Model und View gibt es eine Registrations- und 
+      Benachrichtigungs-Interaktion. Wenn Daten im Modell sich ändern, 
+      werden die Views benachrichtigt. Daraufhin ändert jede View ihre 
+      Ansicht und stellt die neuen Daten dar.
+      Die Views kommunizieren nicht miteinander und das Modell weiß nicht, in welcher 
+      Form die Views die Daten darstellen. 
+			Dies ist auch als Beobachter-Muster bekannt.
+
+      
+    \subsubsection{View}
+      Das View-Objekt übernimmt die grafische Darstellung der Daten. Es stellt 
+      eine mögliche visuelle Abbildung des Models dar. Ein View-Objekt ist 
+      dabei immer mit genau einem Model verbunden. Für den Fall, dass sich 
+      das Model ändert, erstellt das View-Objekt automatisch eine neue passende 
+      Darstellung des Models und stellt diese grafisch dar. Das View-Objekt enthält
+      einen Zeiger auf sein Model. Es besitzt also immer eine Referenz 
+      auf ein konkretes Model. Über diese Referenz kann es die Methoden des Models direkt
+      aufrufen. 
+      Jedes View-Objekt muss die Möglichkeit zum Selbstupdate besitzen, 
+      damit es das Model immer korrekt darstellen kann. Normalerweise besitzt 
+      ein View-Objekt auch eine Referenz auf den Controller. Über diese sollte 
+      das Objekt aber immer nur die Basisschnittstelle des Controllers benutzen, 
+      da sonst der Austausch des Controllers nicht mehr so einfach durchzuführen ist.
+      
+    \subsubsection{Controller}
+      Der Controller definiert, wie ein Benutzer mit der Applikation interagieren kann. 
+      Er nimmt Eingaben vom Benutzer entgegen und bildet diese auf Funktionen 
+      des Models oder der Views ab. Damit dies funktionieren kann, muss 
+      der Controller natürlich Zugriff sowohl auf das Model als auch auf 
+      die Views haben.
+      
+  \subsection{visuelle Darstellung des MVC-Muster}
+    Hier sehen Sie die Verwendung der benutzten Komponenten.
+    \begin{center}
+      \includegraphics[width=15cm]{mvc_gray}
+    \end{center}
+    
+  \subsection{Bewertung des MVC-Musters}
+  
+    Hier werden die wichtigsten Vor- und Nachteile des MVC-Musters 
+    kurz erläutert. Die Bewertung wurde dem Buch \cite{bmrmvc} 
+    entnommen.
+\newline
+    
+    Vorteile:
+    \begin{itemize}
+      \item Mehrere Ansichten desselben Modells: 
+            Das MVC-Muster trennt das Modell strikt 
+            von der Benutzungsschnittstelle. Das ermöglicht 
+            es, mehrere Ansichten derselben Daten in 
+            verschiedenen Formen zu erzeugen.
+      \item Synchronisierte Ansichten: Das Änderungs-Konzept 
+            (mittels z. B. des Beobachter-Musters) stellt sicher, 
+            dass alle Ansichten von Änderungen an den Daten 
+            Kenntnis bekommen.
+      \item Austauschbarkeit der Ansichten: Eine 
+            Portierung des Systems betrifft nur die Ansichten 
+            (Views) und Bediener (Controller), nicht jedoch die 
+            Kernfunktionalität.
+      \item Framework-fähig: Es ist möglich, 
+            komplette Anwendungs-Frameworks auf dieses Muster zu stützen. \newline
+
+    \end{itemize} 
+    
+    Nachteile
+    \begin{itemize}
+      \item Erhöhte Komplexität: Die Komplexität wird durch eine 
+            Vielzahl von Klassen erhöht.
+      \item Gefahr von exzessiv vielen Änderungen: 
+            Wenn ein Benutzereingriff in zahlreichen 
+            Aktualisierungen mündet, ist zu überlegen, 
+            wie unnötige Aktualisierungen vermieden werden 
+            können. Eventuell sind nicht alle Ansichten an jeder 
+            Art von Änderungen interessiert, da sie nur einen 
+            Ausschnitt der Daten repräsentieren.
+      \item Private Beziehungen zwischen Ansicht (View) und Bediener (Controller): 
+            Eine Ansicht und ein Bediener können in einer Beziehung stehen, 
+            die verhindert, dass die Komponenten individuell wiederverwendet 
+            werden können.
+      \item Enge Kopplung der Ansichten (Views) und Bediener (Controller) 
+            an das Modell (Model): Beobachter unternehmen direkte 
+            Methodenaufrufe beim Modell. Falls die Schnittstelle des 
+            Modells verändert werden sollte, so sind von dieser Änderung 
+            ebenso alle Ansicht- und Bedienerklassen betroffen.
+      \item Ineffizienter Datenzugriff in Ansichten (Views): 
+            Je nach Schnittstelle des Modells sind gegebenenfalls 
+            mehrere Funktionsaufrufe beim Modell erforderlich.
+    \end{itemize}

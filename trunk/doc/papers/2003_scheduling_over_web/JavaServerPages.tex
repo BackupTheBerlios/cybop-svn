@@ -1,0 +1,103 @@
+\section{Java Server Pages (JSP)}
+
+  \subsection{Überblick}
+  
+  	Java Server Pages basieren auf der Servlettechnologie
+  	von Sun. In diesem Kapitel wird die JSP-Technologie 
+  	kurz vorgestellt. 
+    Es werden aber keine Vergleiche zu anderen Techniken
+    behandelt. Es wird hier auch keine Sprachbeschreibung für JSP 
+    geben. An dieser Stelle wird nur das prinzipielle Vorgehen der 
+    JSP-Technologie in Hinblick auf die Trennung der
+    Ansicht und der Applikation erklärt. Dazu gehören die Techniken 
+    JavaBeans und Tags.
+    
+  \subsection{Beschreibung}      
+    JSP sind eine verbreitete Möglichkeit, Webseiten dynamisch zu
+    gestalten. Fokussiert wurde dabei ein möglichst einfaches 
+    Zusammenspiel zwischen HTML-Code 
+    und des leistungsstarken Java API. Zusammen mit der erleichterten 
+    Einbindung von JavaBeans lassen sich mit erheblich verringertem 
+    Aufwand selbst komplexe Webapplikationen erstellen.
+    Syntaktisch gesehen handelt es sich bei einer JSP-Seite um 
+    ein HTML-Dokument mit eingebetteten Anweisungen einer 
+    Programmiersprache und zusätzlichen Tags. 
+    
+  \subsection{Typischer Ablauf einer JSP-Anfrage}
+    JSP-Seiten sind eine Mischung aus HTML und eingebettetem Java-Code, die durch 
+    JSP-Tags eingefügt werden. Ruft ein Benutzer eine JSP-Seite auf, sendet
+    der Webserver nicht wie bei einer HTML-Seite einfach den Quelltext
+    an den Browser. Stattdessen reicht er den Aufruf an eine JSP-Engine weiter.
+    Sie übersetzt das JSP mit einem JSP-Compiler in ein Java-Servlet. 
+    Die Übersetzung des JSP in ein Servlet findet nur statt, wenn das Servlet 
+    noch nicht existiert oder der JSP-Quelltext geändert wurde. Dieses Servlet
+    wird bearbeitet, und das Ergebnis wird in den Tags der JSP-Seite 
+    hinzugefügt. Erst diese generierte Seite wird dem Benutzer auf seine 
+    Anfrage zurück geschickt. 
+    
+    \begin{center}
+      \includegraphics[  width=15cm]{AblaufJSP}
+    \end{center}
+    Dies ist dem Buch \cite{swjsp} entnommen.
+
+
+  \subsection{Java Beans}
+     
+    Um ein Bean in JSP nutzen zu können, muß es in der JSP-Seite
+    definiert sein.
+\begin{verbatim}
+<jsp:useBean 
+  id="myModelDoctor" 
+  scope="session"
+  class="org.resmedicinae.application.healthcare.resdata.model.ResDataDoctor"
+/>
+\end{verbatim}
+    Nach der Definition können über das Bean die Methoden der Klasse
+    genutzt werden. Auf die Beans kann auf folgende Weise zugegriffen werden:
+    \begin{itemize}
+      \item Normaler Zugriff auf die Beans z.B. mit 
+\begin{verbatim}
+<\% bean.getDoc_name(); \%>
+\end{verbatim}
+      \item Zugriff auf die Beans mittels Tags, z.B. 
+\begin{verbatim}
+<jsp:getProperty name="myModelDoctor"  property="doc_name" />
+\end{verbatim}
+    \end{itemize}
+    
+    Leider haben Beans auch Nachteile. Sie können nicht auf implizite Objekte
+    wie 'response' oder 'session' zugreifen, und sie können keine direkten Ausgabe
+    mittels 'out.println()' machen. 
+    
+  \subsection{Tags}
+  
+		Eine wirkliche gelungene Sache zur Trennung von Ansicht und Verarbeitungslogik ist die
+		Integration von TagLibs in JSP ab der Version 1.1. JSP's sind nun durch eigene Tags und 	
+		Funktionen erweiterbar. Der in den ersten Versionen mögliche Zugriff auf JavaBeans bezog
+		sich auf Properties. Mit den TagLibs lassen sich Elemente für Funktionen ebenfalls
+		integrieren. Die Tags sind XML-konforme Erweiterungen der bisherigen Standard-Tags. 
+		Diese Syntax erleichtert die Zusammenarbeit zwischen HTML-Designer und Entwicklern. 
+		Es können leicht spezielle Vereinfachungen für die dynamischen Inhalte der Site zur
+		Verfügung gestellt werden, ohne dass Hunderte von Zeilen Codes oder mehrere
+		include-Anweisungen in die Seite einzubauen wären. 
+		Der Entwickler kann eine neue Eigenschaft oder einen Fehler 
+		korrigieren, und das Ergebnis wird sofort in allen Seiten aktiviert, ohne sie 
+		zu modifizieren. 
+  
+    Tags dienen also dazu, Anwendungslogik und Darstellung zu trennen. 
+    Sie unterliegen nicht der Beschränkung wie die JavaBeans. Tags können 
+    auf implizite Objekte zugreifen und können HTML-Text über
+    out.println() ausgeben. 
+    
+    Ein Tag ist ein Stück Text in der Form
+\begin{verbatim}
+  <Präfix:Tagname attr1="wert1" attr2="wert2" ... > </Präfix:Tagname>  
+  bzw. die Kurzform
+  <Präfix:Tagname attr1="wert1" attr2="wert2" ... />
+\end{verbatim}
+    
+    Dabei steht der Präfix für den Namensraum, in dem der Tagname Gültigkeit hat. 
+    Dies dient dazu, Namenskonflikte zu vermeiden, weil der Tagname für 
+    einen speziellen Namensraum definiert wird. 
+    
+    
