@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2005-03-20 17:53:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,7 +31,7 @@
 #include "../translator/cybol_translator.c"
 #include "../translator/configuration_translator.c"
 #include "../translator/html_translator.c"
-#include "../translator/x_windows_translator.c"
+#include "../translator/x_window_system_translator.c"
 
 /**
  * Decodes the document model according to the given document type
@@ -63,11 +63,11 @@ void decode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
     if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) X_WINDOWS_ABSTRACTION, (void*) X_WINDOWS_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            decode_x_windows(p0, p1, p2, p3, p4);
+            decode_x_window_system(p0, p1, p2, p3, p4);
         }
     }
 
@@ -142,11 +142,11 @@ void encode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
     if (r != 1) {
 
-        compare_arrays(p5, p6, (void*) X_WINDOWS_ABSTRACTION, (void*) X_WINDOWS_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p5, p6, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            encode_x_windows(p0, p1, p2, p3, p4);
+            encode_x_window_system(p0, p1, p2, p3, p4);
         }
     }
 

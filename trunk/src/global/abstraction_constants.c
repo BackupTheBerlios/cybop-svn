@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2005-03-20 01:43:33 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-03-20 17:53:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -300,11 +300,11 @@ static const char* GUI_ABSTRACTION = GUI_ABSTRACTION_ARRAY;
 static const int GUI_ABSTRACTION_COUNT_ARRAY[] = {3};
 static const int* GUI_ABSTRACTION_COUNT = GUI_ABSTRACTION_COUNT_ARRAY;
 
-/** The x windows abstraction. */
-static const char X_WINDOWS_ABSTRACTION_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', 's'};
-static const char* X_WINDOWS_ABSTRACTION = X_WINDOWS_ABSTRACTION_ARRAY;
-static const int X_WINDOWS_ABSTRACTION_COUNT_ARRAY[] = {9};
-static const int* X_WINDOWS_ABSTRACTION_COUNT = X_WINDOWS_ABSTRACTION_COUNT_ARRAY;
+/** The x window system abstraction. */
+static const char X_WINDOW_SYSTEM_ABSTRACTION_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', '_', 's', 'y', 's', 't', 'e', 'm'};
+static const char* X_WINDOW_SYSTEM_ABSTRACTION = X_WINDOW_SYSTEM_ABSTRACTION_ARRAY;
+static const int X_WINDOW_SYSTEM_ABSTRACTION_COUNT_ARRAY[] = {15};
+static const int* X_WINDOW_SYSTEM_ABSTRACTION_COUNT = X_WINDOW_SYSTEM_ABSTRACTION_COUNT_ARRAY;
 
 /** The mouse abstraction. */
 static const char MOUSE_ABSTRACTION_ARRAY[] = {'m', 'o', 'u', 's', 'e'};

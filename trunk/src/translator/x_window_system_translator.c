@@ -1,5 +1,5 @@
 /*
- * $RCSfile: x_windows_translator.c,v $
+ * $RCSfile: x_window_system_translator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
@@ -21,37 +21,37 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-03-20 17:53:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOWS_TRANSLATOR_SOURCE
-#define X_WINDOWS_TRANSLATOR_SOURCE
+#ifndef X_WINDOW_SYSTEM_TRANSLATOR_SOURCE
+#define X_WINDOW_SYSTEM_TRANSLATOR_SOURCE
 
 #include "../global/variables.c"
 
 /**
- * Decodes the x windows model into a compound.
+ * Decodes the x window system model into a compound.
  *
  * @param p0 the destination (compound model) (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source (x windows model)
+ * @param p3 the source (x window system model)
  * @param p4 the source count
  */
-void decode_x_windows(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void decode_x_window_system(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /**
- * Encodes the compound into an x windows model.
+ * Encodes the compound into an x window system model.
  *
- * @param p0 the destination (x windows model) (Hand over as reference!)
+ * @param p0 the destination (x window system model) (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source (compound model)
  * @param p4 the source count
  */
-void encode_x_windows(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void encode_x_window_system(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -59,9 +59,9 @@ void encode_x_windows(void* p0, void* p1, void* p2, const void* p3, const void* 
 
     } else {
 
-        log_message_debug("Could not encode x windows. The source count is null.");
+        log_message_debug("Could not encode x window system. The source count is null.");
     }
 }
 
-/* X_WINDOWS_TRANSLATOR_SOURCE */
+/* X_WINDOW_SYSTEM_TRANSLATOR_SOURCE */
 #endif

@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.23 $ $Date: 2005-03-20 01:43:33 $ $Author: christian $
+# @version $Revision: 1.24 $ $Date: 2005-03-20 17:53:33 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 # @author Michael Simon <michael.simon@gmx.net>
 #
@@ -86,6 +86,8 @@ LOGIC_SOURCES = $(wildcard $(SRC)/logic/*.c)
 LOGIC_OBJECTS = $(patsubst $(SRC)/logic/%.c,$(OBJ)/logic/%.o,$(LOGIC_SOURCES))
 LOGIC_STARTUP_SOURCES = $(wildcard $(SRC)/logic/startup/*.c)
 LOGIC_STARTUP_OBJECTS = $(patsubst $(SRC)/logic/startup/%.c,$(OBJ)/logic/startup/%.o,$(LOGIC_STARTUP_SOURCES))
+LOGIC_SHUTDOWN_SOURCES = $(wildcard $(SRC)/logic/shutdown/*.c)
+LOGIC_SHUTDOWN_OBJECTS = $(patsubst $(SRC)/logic/shutdown/%.c,$(OBJ)/logic/shutdown/%.o,$(LOGIC_SHUTDOWN_SOURCES))
 PARSER_SOURCES = $(wildcard $(SRC)/parser/*.c)
 PARSER_OBJECTS = $(patsubst $(SRC)/parser/%.c,$(OBJ)/parser/%.o,$(PARSER_SOURCES))
 SIGNAL_SOURCES = $(wildcard $(SRC)/signal/*.c)
@@ -117,7 +119,7 @@ X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WIN
 #	$(COMPILER) -L/usr/X11R6/lib -L/usr/lib \
 #		-o $(BIN)/$(BINARY) $(OBJ)/cyboi/cyboi.o -lX11 -lxml2
 #
-all: create $(ACCESSOR_OBJECTS) $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CREATOR_OBJECTS) $(CYBOI_OBJECTS) $(GLOBAL_OBJECTS) $(LOGGER_OBJECTS) $(LOGIC_OBJECTS) $(LOGIC_STARTUP_OBJECTS) $(PARSER_OBJECTS) $(SIGNAL_OBJECTS) $(SOCKET_OBJECTS) $(STATE_OBJECTS) $(TEST_OBJECTS) $(TRANSLATOR_OBJECTS) $(X_WINDOWS_OBJECTS)
+all: create $(ACCESSOR_OBJECTS) $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CREATOR_OBJECTS) $(CYBOI_OBJECTS) $(GLOBAL_OBJECTS) $(LOGGER_OBJECTS) $(LOGIC_OBJECTS) $(LOGIC_STARTUP_OBJECTS) $(LOGIC_SHUTDOWN_OBJECTS) $(PARSER_OBJECTS) $(SIGNAL_OBJECTS) $(SOCKET_OBJECTS) $(STATE_OBJECTS) $(TEST_OBJECTS) $(TRANSLATOR_OBJECTS) $(X_WINDOWS_OBJECTS)
 # Compile source files.
 	$(COMPILER) -c $(COMPILER_FLAGS) $(SRC)/cyboi/cyboi.c \
 		-o $(OBJ)/cyboi/cyboi.o
@@ -144,6 +146,7 @@ create:
 	-cd $(OBJ); mkdir logger
 	-cd $(OBJ); mkdir logic
 	-cd $(OBJ)/logic; mkdir startup
+	-cd $(OBJ)/logic; mkdir shutdown
 	-cd $(OBJ); mkdir parser
 	-cd $(OBJ); mkdir signal
 	-cd $(OBJ); mkdir socket
@@ -180,6 +183,9 @@ $(OBJ)/logic/%.o: $(SRC)/logic/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/logic/startup/%.o: $(SRC)/logic/startup/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/logic/shutdown/%.o: $(SRC)/logic/shutdown/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/parser/%.o: $(SRC)/parser/%.c
@@ -227,17 +233,8 @@ dist:
 #
 .PHONY: clean
 clean:
-#	-rm -r $(BIN)
 	-rm -f $(BIN)/cyboi
 	-rm -f $(DIST)/cybol.tar.gz
 	-rm -r $(OBJ)
-#	-rm -r $(OBJ)/logic
-#	-rm -r $(OBJ)/logger
-#	-rm -r $(OBJ)/model
-#	-rm -r $(OBJ)/signal
-#	-rm -r $(OBJ)/state
-#	-rm -r $(OBJ)/test
-#	-rm -r $(OBJ)/x_windows
-#	-rm -f $(OBJ)/*.o
 	@echo Cleaned cyboi files.
 

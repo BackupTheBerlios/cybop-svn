@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-03-20 01:43:33 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-03-20 17:53:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -75,11 +75,11 @@ static const char* TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME = TCP_SERVER_SOCKET
 static const int TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT_ARRAY[] = {22};
 static const int* TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT = TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT_ARRAY;
 
-/** The x windows active configuration name. */
-static const char X_WINDOWS_ACTIVE_CONFIGURATION_NAME_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', 's', '_', 'a', 'c', 't', 'i', 'v', 'e'};
-static const char* X_WINDOWS_ACTIVE_CONFIGURATION_NAME = X_WINDOWS_ACTIVE_CONFIGURATION_NAME_ARRAY;
-static const int X_WINDOWS_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY[] = {16};
-static const int* X_WINDOWS_ACTIVE_CONFIGURATION_NAME_COUNT = X_WINDOWS_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY;
+/** The x window system active configuration name. */
+static const char X_WINDOW_SYSTEM_ACTIVE_CONFIGURATION_NAME_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', '_', 's', 'y', 's', 't', 'e', 'm', '_', 'a', 'c', 't', 'i', 'v', 'e'};
+static const char* X_WINDOW_SYSTEM_ACTIVE_CONFIGURATION_NAME = X_WINDOW_SYSTEM_ACTIVE_CONFIGURATION_NAME_ARRAY;
+static const int X_WINDOW_SYSTEM_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY[] = {22};
+static const int* X_WINDOW_SYSTEM_ACTIVE_CONFIGURATION_NAME_COUNT = X_WINDOW_SYSTEM_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY;
 
 //
 // Creation names.

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: startup_x_windows.c,v $
+ * $RCSfile: startup_x_window_system.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-03-20 01:43:34 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-03-20 17:53:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -35,53 +35,51 @@
  * a session- (display-) as well as a window manager.
  */
 
-#ifndef STARTUP_X_WINDOWS_SOURCE
-#define STARTUP_X_WINDOWS_SOURCE
+#ifndef STARTUP_X_WINDOW_SYSTEM_SOURCE
+#define STARTUP_X_WINDOW_SYSTEM_SOURCE
+
+#include "../../global/integer_constants.c"
+#include "../../global/structure_constants.c"
+#include "../../global/variables.c"
 
 /**
- * Starts up the x windows.
+ * Starts up the x window system.
  *
  * @param p0 the internals memory
  * @param p1 the knowledge
  * @param p2 the knowledge count
  * @param p3 the knowledge size
  */
-void startup_x_windows(void* p0, const void* p1, const void* p2, const void* p3) {
+void startup_x_window_system(void* p0, const void* p1, const void* p2, const void* p3) {
 
-/*??
-    // The unix server socket filename.
-    void* f = POINTER_NULL_POINTER;
+    // The x window system display.
+    void* d = POINTER_NULL_POINTER;
 
-    // Get unix server socket filename.
-    get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
+    // Get x window system display.
+    get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_ARRAY);
 
-    if (f != POINTER_NULL_POINTER) {
-*/
+    if (d != NULL_POINTER) {
 
-    // The display name.
-    // An example identifying the second screen of the first
-    // display of host computer piggy.rz.tu-ilmenau.de would be:
-    // char* dn = "earth.cybop.net:0.1"
-    //?? TODO: This has to be built dynamically, later on!
-    //?? For now, it is just an empty string.
-    char* dn = "";
-    // The display, which is a subsumption of
-    // xserver, screens, hardware (input devices etc.).
-//??    x->display = XOpenDisplay(dn);
+        log_message_debug("WARNING: Could not startup x window system. The x window system is already running.");
+
+    } else {
+
+        // The display name.
+        // An example identifying the second screen of the first
+        // display of host computer earth.cybop.net would be:
+        // char* dn = "earth.cybop.net:0.1"
+        //?? TODO: This has to be built dynamically, later on!
+        //?? For now, it is just an empty string.
+        char* n = "";
+
+        // The display, which is a subsumption of
+        // xserver, screens, hardware (input devices etc.).
+        d = (void*) XOpenDisplay(n);
+
+        // Set x window system display.
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+    }
 }
 
-/**
- * Shuts down the x windows.
- *
- * @param p0 the internals memory
- * @param p1 the knowledge
- * @param p2 the knowledge count
- * @param p3 the knowledge size
- */
-void shutdown_x_windows(void* p0, const void* p1, const void* p2, const void* p3) {
-
-//??    XCloseDisplay(x->display);
-}
-
-/* STARTUP_X_WINDOWS_SOURCE */
+/* STARTUP_X_WINDOW_SYSTEM_SOURCE */
 #endif

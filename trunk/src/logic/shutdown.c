@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-03-20 01:43:34 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-03-20 17:53:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -34,13 +34,13 @@
 #include "../global/log_constants.c"
 #include "../global/name_constants.c"
 #include "../logger/logger.c"
-//?? #include "../logic/shutdown/shutdown_x_windows.c"
+#include "../logic/shutdown/shutdown_x_window_system.c"
 
 /**
  * Shuts down a service.
  *
  * Expected parameters:
- * - service: unix_socket, tcp_socket, x_windows, ms_windows
+ * - service: unix_socket, tcp_socket, x_window_system, ms_windows
  *
  * @param p0 the parameters
  * @param p1 the parameters count
@@ -112,11 +112,11 @@ void shutdown_service(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOWS_ABSTRACTION, (void*) X_WINDOWS_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-//??            shutdown_x_windows(p5, p2, p3, p4);
+            shutdown_x_window_system(p5, p2, p3, p4);
         }
     }
 }

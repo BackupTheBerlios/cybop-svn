@@ -1,5 +1,5 @@
 /*
- * $RCSfile: x_windows_creator.c,v $
+ * $RCSfile: shutdown_x_window_system.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-03-20 17:53:33 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-03-20 17:53:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -35,24 +35,37 @@
  * a session- (display-) as well as a window manager.
  */
 
-#ifndef X_WINDOW_SYSTEM_CREATOR_SOURCE
-#define X_WINDOW_SYSTEM_CREATOR_SOURCE
+#ifndef SHUTDOWN_X_WINDOW_SYSTEM_SOURCE
+#define SHUTDOWN_X_WINDOW_SYSTEM_SOURCE
+
+#include "../../global/structure_constants.c"
+#include "../../global/variables.c"
 
 /**
- * Creates an x window system window.
+ * Shuts down the x window system.
  *
  * @param p0 the internals memory
+ * @param p1 the knowledge
+ * @param p2 the knowledge count
+ * @param p3 the knowledge size
  */
-void create_x_window_system_window(void* p0) {
+void shutdown_x_window_system(void* p0, const void* p1, const void* p2, const void* p3) {
+
+    // The x window system display.
+    void** d = POINTER_NULL_POINTER;
+
+    // Get x window system display.
+    get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_ARRAY);
+
+    if (d != POINTER_NULL_POINTER) {
+
+        XCloseDisplay(*d);
+
+    } else {
+
+        log_message_debug("WARNING: Could not shutdown x window system. There is no x window system running.");
+    }
 }
 
-/**
- * Destroys the x window system window.
- *
- * @param p0 the internals memory
- */
-void destroy_x_window_system_window(void* p0) {
-}
-
-/* X_WINDOW_SYSTEM_CREATOR_SOURCE */
+/* SHUTDOWN_X_WINDOW_SYSTEM_SOURCE */
 #endif

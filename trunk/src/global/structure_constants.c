@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2005-03-20 01:43:33 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2005-03-20 17:53:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -254,7 +254,7 @@ static const int* DETAILS_SIZES_INDEX = DETAILS_SIZES_INDEX_ARRAY;
 //
 
 /** The internals memory elements count. */
-static const int INTERNALS_MEMORY_ELEMENTS_COUNT_ARRAY[] = {28};
+static const int INTERNALS_MEMORY_ELEMENTS_COUNT_ARRAY[] = {29};
 static const int* INTERNALS_MEMORY_ELEMENTS_COUNT = INTERNALS_MEMORY_ELEMENTS_COUNT_ARRAY;
 
 /** The startup parameters. */
@@ -345,9 +345,13 @@ static const int* TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL = TCP_CLIENT_SOCKE
 static const int TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL_ARRAY[] = {26};
 static const int* TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL = TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL_ARRAY;
 
-/** The x windows. */
-static const int X_WINDOWS_ACTIVE_INTERNAL_ARRAY[] = {27};
-static const int* X_WINDOWS_ACTIVE_INTERNAL = X_WINDOWS_ACTIVE_INTERNAL_ARRAY;
+/** The x window system. */
+static const int X_WINDOW_SYSTEM_ACTIVE_INTERNAL_ARRAY[] = {27};
+static const int* X_WINDOW_SYSTEM_ACTIVE_INTERNAL = X_WINDOW_SYSTEM_ACTIVE_INTERNAL_ARRAY;
+
+/** The x window system display. */
+static const int X_WINDOW_SYSTEM_DISPLAY_INTERNAL_ARRAY[] = {28};
+static const int* X_WINDOW_SYSTEM_DISPLAY_INTERNAL = X_WINDOW_SYSTEM_DISPLAY_INTERNAL_ARRAY;
 
 //
 // Signal memory.

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2005-03-20 01:43:34 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-03-20 17:53:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -244,7 +244,7 @@ void send_message(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays((void*) *lm, (void*) *lmc, (void*) X_WINDOWS_ABSTRACTION, (void*) X_WINDOWS_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *lm, (void*) *lmc, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
@@ -259,7 +259,6 @@ void send_message(const void* p0, const void* p1,
 /*??
             // The output screen.
             x->screen = DefaultScreen(x->display);
-
             // Voreinstellung fuer Pixelwerte
             x->background = WhitePixel(x->display, x->screen);
             x->foreground = BlackPixel(x->display, x->screen);
