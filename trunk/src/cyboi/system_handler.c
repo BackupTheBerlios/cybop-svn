@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-01-20 12:11:16 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-01-20 16:29:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -178,8 +178,8 @@ void handle_system(void* p0) {
     // CAUTION! All signals are destroyed in the signal waiting loop,
     // after having been read from the signal memory.
     // Since this also counts for the startup signal,
-    // it MUST NOT be destroyed here!
-    // However, the startup signal's MODEL needs to be destroyed.
+    // it (in other words: the signal id) MUST NOT be destroyed here!
+    // However, the startup signal's model NEEDS to be destroyed -- see below!
 
     log_message_debug("Destroy startup model.");
 

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-01-20 12:11:16 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-01-20 16:29:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -75,9 +75,9 @@ void shutdown_knowledge_memory(void* p0) {
     log_message_debug("Shutdown knowledge memory.");
 
     // The knowledge memory.
-    void* k = NULL_POINTER;
-    void* kc = NULL_POINTER;
-    void* ks = NULL_POINTER;
+    void** k = NULL_POINTER;
+    void** kc = NULL_POINTER;
+    void** ks = NULL_POINTER;
 
     // Get knowledge memory.
     get_array_elements(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_ARRAY);
@@ -88,9 +88,16 @@ void shutdown_knowledge_memory(void* p0) {
     // CAUTION! Do NOT hand over as reference!
     // The variables are of type void**.
     // The expression (&*variable) is the same like (variable).
+    fprintf(stderr, "k: %i\n", *((void**) *k));
     destroy((void*) k, (void*) ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+    fprintf(stderr, "kc: %i\n", *((int**) *kc));
     destroy_integer((void*) kc);
-    destroy_integer((void*) ks);
+//?? TODO: For some unclear reason, the system crashes when trying
+//?? to destroy ks! Probably, ks was destroyed by accident somewhere else
+//?? in the system before, but I couldn't identify that.
+//?? For now, the line is commented out. Christian
+    fprintf(stderr, "ks: %i\n", *((int**) *ks));
+//??    destroy_integer((void*) ks);
 }
 
 /* KNOWLEDGE_MEMORY_HANDLER_SOURCE */

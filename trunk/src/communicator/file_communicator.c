@@ -25,7 +25,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.9 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-01-20 16:29:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,7 +69,6 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
                     // The terminated file name.
                     void* tn = CHARACTER_NULL_POINTER;
-                    // The terminated file name size.
                     int tns = *sc + 1;
 
                     // Create terminated file name.
@@ -78,7 +77,7 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
                     // Set terminated file name by first copying the actual name
                     // and then adding the null termination character.
                     set_array_elements(tn, (void*) ZERO_NUMBER, p3, p4, (void*) CHARACTER_ARRAY);
-                    set_array_elements(tn, p4, (void*) NULL_CONTROL_CHARACTER, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
+                    set_array_elements(tn, p4, (void*) NULL_CONTROL_CHARACTER, (void*) NULL_CONTROL_CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
 
                     // Open file.
                     // CAUTION! The file name cannot be handed over as is.
