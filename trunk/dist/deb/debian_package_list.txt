@@ -11,6 +11,7 @@ cyboi.deb
             /usr/share/doc/cyboi/README.Debian
             /usr/share/doc/cyboi/changelog.gz
             /usr/share/doc/cyboi/copyright
+            /usr/share/man/man1/cyboi1.gz
 
 cyboi-dev.deb
 - depends: cyboi, (xlibs-dev,) libxml2-dev
