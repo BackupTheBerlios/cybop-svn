@@ -32,7 +32,6 @@ import cybop.core.basic.String;
  *
  * It is the super-super class of all level classes in the framework's ontology:<br>
  *  <ul>
- *      <li>Network</li>
  *      <li>Family</li>
  *      <li>System</li>
  *      <li>Block</li>
@@ -40,10 +39,6 @@ import cybop.core.basic.String;
  *      <li>Component</li>
  *      <li>Part</li>
  *      <li>Chain</li>
- *      <li>Term</li>
- *      <li>Sign</li>
- *      <li>Number</li>
- *      <li>Digit</li>
  *  </ul>
  *
  * An item consists of a number of child items. It can also be a child itself,
@@ -75,10 +70,11 @@ import cybop.core.basic.String;
  *      <li>destructor(): called without any parameters; not available for Java where a garbage collector destroys objects incidentally!</li>
  *  </ul>
  *
- * Children of an item can have a special position, relative to each other.
- * This constellation can be enforced by constraints - a constellation.
+ * Children of an item can have a position, relative to each other. That means
+ * that this item also is a special constellation of children which can be
+ * enforced by constraints.
  *
- * @version $Revision: 1.4 $ $Date: 2003-02-23 00:19:57 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-02-24 22:34:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -94,6 +90,9 @@ public class Item extends State {
      * contains the array handling - necessary to provide map behaviour - itself.
      */
     private java.util.Map children;
+
+    /** The positioning */
+    private String positioning;
 
     /**
      * The java tree node.
@@ -120,13 +119,32 @@ public class Item extends State {
     private Item signalHandler;
 
     //
+    // Children positioning.
+    //
+
+    /** The index positioning. */
+    public static final String INDEX_POSITIONING = new String("index_positioning");
+
+    /** The compass positioning. */
+    public static final String COMPASS_POSITIONING = new String("compass_positioning");
+
+    /** The box positioning. */
+    public static final String BOX_POSITIONING = new String("box_positioning");
+
+    /** The card positioning. */
+    public static final String CARD_POSITIONING = new String("card_positioning");
+
+    /** The grid bag positioning. */
+    public static final String GRID_BAG_POSITIONING = new String("grid_bag_positioning");
+
+    //
     // Constructor.
     //
 
     /**
      * Constructs this item.
      *
-     * Actually, constructors should NOT be used in the ResMedLib framework
+     * Actually, constructors should NOT be used in the CYBOP framework
      * or any derived systems. The offered lifecycle methods are sufficient.
      * However, since the children container is not really a child item itself
      * but rather a helper attribute to store children, it is created in this constructor.
@@ -139,15 +157,16 @@ public class Item extends State {
     public Item() {
 
         setChildren(createChildren());
+        setPositioning(createPositioning());
 
         // This java tree node is equivalent to the above children container
         // in that it can contain children.
-        // It is only used as long as Java objects are used in the ResMedLib framework,
+        // It is only used as long as Java objects are used in the CYBOP framework,
         // to build up a system (dependency) tree using java tree nodes
         // so that such trees can easily be displayed in javax.swing.JTree objects.
         setJavaTreeNode(createJavaTreeNode());
 
-        // As long as the ResMedLib framework is built on Java, every
+        // As long as the CYBOP framework is built on Java, every
         // item needs to be capable of encapsulating a pure Java object.
         //
         // This method is not called in the initialize lifecycle method
@@ -210,6 +229,48 @@ public class Item extends State {
     public java.util.Map getChildren() {
 
         return this.children;
+    }
+
+    //
+    // Positioning.
+    //
+
+    /**
+     * Creates a positioning.
+     *
+     * @return the positioning
+     */
+    public String createPositioning() {
+
+        return null;
+    }
+
+    /**
+     * Destroys the positioning.
+     *
+     * @param p the positioning
+     */
+    public void destroyPositioning(String p) {
+    }
+
+    /**
+     * Sets the positioning.
+     *
+     * @param p the positioning
+     */
+    public void setPositioning(String p) {
+
+        this.positioning = p;
+    }
+
+    /**
+     * Returns the positioning.
+     *
+     * @return the positioning
+     */
+    public String getPositioning() {
+
+        return this.positioning;
     }
 
     //
@@ -407,10 +468,25 @@ public class Item extends State {
      *
      * @param n the name
      * @param i the item
+     */
+    public void set(String n, Item i) {
+
+        set(n, i, null);
+    }
+
+    /**
+     * Adds the item to become a child of this item.
+     *
+     * The positioning/ constellation/ constraints for children of this item
+     * are taken into consideration.
+     *
+     * @param n the name
+     * @param i the item
+     * @param p the position
      * @exception NullPointerException if the children structure is null
      * @exception NullPointerException if the name is null
      */
-    public void set(String n, Item i) throws NullPointerException {
+    public void set(String n, Item i, Position p) throws NullPointerException {
 
         java.util.Map s = getChildren();
 
@@ -426,6 +502,7 @@ public class Item extends State {
                     java.lang.System.out.println("DEBUG: Set child: " + i + " with name: " + n.getJavaObject() + " in item: " + this);
                     addTreeNode(i);
                     s.put(n.getJavaObject(), i);
+                    position(p, i);
 
                 } else {
 
@@ -441,22 +518,6 @@ public class Item extends State {
 
             throw new NullPointerException("Could not set item. The children structure is null.");
         }
-    }
-
-    /**
-     * Adds the item to become a child of this item.
-     *
-     * The constellation (constraints) for children of this item are taken
-     * into consideration.
-     *
-     * @param n the name
-     * @param i the item
-     * @param p the position
-     * @exception NullPointerException if the children structure is null
-     * @exception NullPointerException if the name is null
-     */
-    public void set(String n, Item i, Position p) throws NullPointerException {
-
     }
 
     /**
@@ -543,6 +604,70 @@ public class Item extends State {
         }
 
         return c;
+    }
+
+    //
+    // Positioning.
+    //
+
+    /**
+     * Positions the item.
+     *
+     * The item will be positioned according to the given position which
+     * is considered in relation to other items and the whole constellation
+     * of items of this item.
+     *
+     * @param i the item
+     * @param p the position
+     * @exception NullPointerException if the constellation is null
+     */
+    public void position(Item i, Position p) throws NullPointerException {
+
+        if (p != null) {
+
+            Constellation c = getConstellation();
+            
+            if (c != null) {
+
+                c.position(i, p);
+
+            } else {
+
+                throw new NullPointerException("Could not position item. The constellation is null.");
+            }
+
+        } else {
+
+            java.lang.System.out.println("DEBUG: Could not position item. The position is null.");
+        }
+    }
+
+    /**
+     * Unpositions the item.
+     *
+     * @param i the item
+     * @param p the position
+     * @exception NullPointerException if the constellation is null
+     */
+    public void unposition(Item i, Position p) throws NullPointerException {
+
+        if (p != null) {
+
+            Constellation c = getConstellation();
+            
+            if (c != null) {
+
+                c.unposition(i, p);
+                
+            } else {
+    
+                throw new NullPointerException("Could not unposition item. The constellation is null.");
+            }
+
+        } else {
+
+            java.lang.System.out.println("DEBUG: Could not unposition item. The position is null.");
+        }
     }
 
     //
