@@ -48,7 +48,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.19 $ $Date: 2004-11-23 08:16:38 $ $Author: rholzmueller $
+ * @version $Revision: 1.20 $ $Date: 2004-12-08 14:09:30 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -73,7 +73,7 @@ static const int INTERNAL_TYPE_POINTER = 4;
 //
 // internal array index
 //
-static const int INTERNAL_ARRAY_COUNT = 18;
+static const int INTERNAL_ARRAY_COUNT = 24;
 
 /** The tcp socket index. */
 static const int INTERNAL_TCPSOCKET_PORT_INDEX = 0;
@@ -101,58 +101,16 @@ static const int INTERNAL_KNOWLEDGE_MODEL_INDEX = 15;
 static const int INTERNAL_KNOWLEDGE_MODEL_COUNT_INDEX = 16;
 static const int INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX = 17;
 
+/** The client socket number  */
+static const int INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_INDEX = 18;
+static const int INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_COUNT_INDEX = 19;
+static const int INTERNAL_TCPSOCKET_CLIENTSOCKETNUMBER_SIZE_INDEX = 20;
 
-//
-// Character internals.
-//
+/** The main signal id  */
+static const int INTERNAL_TCPSOCKET_MAINSIGNALID_INDEX = 21;
+static const int INTERNAL_TCPSOCKET_MAINSIGNALID_COUNT_INDEX = 22;
+static const int INTERNAL_TCPSOCKET_MAINSIGNALID_SIZE_INDEX = 23;
 
-/** The character internals count. */
-static const int CHARACTER_INTERNALS_COUNT = 1;
-
-/** The unix server socket flag index. */
-static const int UNIX_SERVER_SOCKET_FLAG_INDEX = 0;
-
-//
-// Integer internals.
-//
-
-/** The integer internals count. */
-static const int INTEGER_INTERNALS_COUNT = 7;
-
-/** The unix server socket index. */
-static const int UNIX_SERVER_SOCKET_INDEX = 0;
-
-/** The tcp socket index. */
-static const int INTEGER_INTERNALS_TCPSOCKET_PORT_INDEX = 1;
-static const int INTEGER_INTERNALS_TCPSOCKET_ACTIVE_INDEX = 2;
-static const int INTEGER_INTERNALS_TCPSOCKET_SERVERSOCKETNUMBER_INDEX = 3;
-
-/** The start parameter index. */
-static const int INTEGER_INTERNALS_START_ABSTRACTION_COUNT_INDEX = 4;
-static const int INTEGER_INTERNALS_START_CHANNEL_COUNT_INDEX = 5;
-static const int INTEGER_INTERNALS_START_MODEL_COUNT_INDEX = 6;
-
-//
-// Pointer internals.
-//
-
-/** The pointer internals count. */
-static const int POINTER_INTERNALS_COUNT = 4;
-
-/** The unix server socket filename index. */
-static const int UNIX_SERVER_SOCKET_FILENAME_INDEX = 0;
-
-/** The start parameter index. */
-static const int POINTER_INTERNALS_START_ABSTRACTION_INDEX = 1;
-static const int POINTER_INTERNALS_START_CHANNEL_INDEX = 2;
-static const int POINTER_INTERNALS_START_MODEL_INDEX = 3;
-
-//
-// Double internals.
-//
-
-/** The double internals count. */
-static const int DOUBLE_INTERNALS_COUNT = 0;
 
 //
 // Unix socket.
