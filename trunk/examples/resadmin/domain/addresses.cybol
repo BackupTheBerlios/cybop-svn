@@ -28,6 +28,6 @@
 
 <model>
     <part name="address_count" channel="inline" abstraction="integer" model="2"/>
-    <part name="address_%0" channel="file" abstraction="cybol" model="examples/resadmin/domain/address_1.cybol"/>
-    <part name="address_%1" channel="file" abstraction="cybol" model="examples/resadmin/domain/address_2.cybol"/>
+    <part name="address_$0" channel="file" abstraction="cybol" model="examples/resadmin/domain/address_1.cybol"/>
+    <part name="address_$1" channel="file" abstraction="cybol" model="examples/resadmin/domain/address_2.cybol"/>
 </model>
