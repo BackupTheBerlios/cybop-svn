@@ -29,7 +29,7 @@ package cyboi;
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.5 $ $Date: 2003-07-20 22:46:20 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-07-24 08:16:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ArrayHandler {
@@ -159,12 +159,13 @@ class ArrayHandler {
      * @param c the array container
      * @param i the index
      * @param e the array element
+     * @return the new array container
      */
-    static void set_array_element(java.lang.Object[] c, int i, java.lang.Object e) {
+    static java.lang.Object[] set_array_element(java.lang.Object[] c, int i, java.lang.Object e) {
+
+        java.lang.Object[] ac = null;
 
         if (c != null) {
-
-            java.lang.Object[] ac = null;
 
             // If the array container length is exceeded, a new adjusted array
             // container with extended length is created and delivered back.
@@ -172,10 +173,6 @@ class ArrayHandler {
 
                 ac = ArrayHandler.create_array_container(c);
                 ArrayHandler.destroy_array_container(c);
-/*??
-                //?? WHAT TO DO HERE??
-                ArrayHandler.set_array_container(ac);
-*/
 
             } else {
 
@@ -195,6 +192,8 @@ class ArrayHandler {
 
             System.out.println("ERROR: Could not set array element. The array container is null.");
         }
+        
+        return ac;
     }
 
     /**

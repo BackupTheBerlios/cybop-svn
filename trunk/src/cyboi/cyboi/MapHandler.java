@@ -29,7 +29,7 @@ package cyboi;
  *
  * Map elements are accessed over their index or name.
  *
- * @version $Revision: 1.8 $ $Date: 2003-07-23 20:10:54 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-07-24 08:16:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class MapHandler {
@@ -54,7 +54,7 @@ class MapHandler {
 
         } else {
 
-            System.out.println("ERROR: Could not create map container. The map container is null.");
+            java.lang.System.out.println("ERROR: Could not create map container. The map container is null.");
         }
         
         return mc;
@@ -81,7 +81,7 @@ class MapHandler {
 
         } else {
 
-            System.out.println("ERROR: Could not destroy map container. The map container is null.");
+            java.lang.System.out.println("ERROR: Could not destroy map container. The map container is null.");
         }
     }
 
@@ -98,11 +98,11 @@ class MapHandler {
 
         if (mc != null) {
 
-            ArrayHandler.get_array_container_size(mc.names);
+            s = ArrayHandler.get_array_container_size(mc.names);
 
         } else {
 
-            System.out.println("ERROR: Could not get map container size. The map container is null.");
+            java.lang.System.out.println("ERROR: Could not get map container size. The map container is null.");
         }
 
         return s;
@@ -111,6 +111,20 @@ class MapHandler {
     //
     // Map element management.
     //
+
+    /**
+     * Adds the map element.
+     *
+     * @param c the map container
+     * @param n the name
+     * @param e the map element
+     */
+    static void add_map_element(java.lang.Object c, java.lang.Object n, java.lang.Object e) {
+
+        java.lang.Object en = MapHandler.get_new_map_element_name(c, n);
+
+        MapHandler.set_map_element(c, en, e);
+    }
 
     /**
      * Sets the map element.
@@ -127,27 +141,13 @@ class MapHandler {
             
             int i = MapHandler.get_next_map_element_index(mc, n);
 
-            ArrayHandler.set_array_element(mc.names, i, n);
-            ArrayHandler.set_array_element(mc.references, i, e);
+            mc.names = ArrayHandler.set_array_element(mc.names, i, n);
+            mc.references = ArrayHandler.set_array_element(mc.references, i, e);
 
         } else {
 
-            System.out.println("ERROR: Could not set map element. The map container is null.");
+            java.lang.System.out.println("ERROR: Could not set map element. The map container is null.");
         }
-    }
-
-    /**
-     * Adds the map element.
-     *
-     * @param c the map container
-     * @param n the name
-     * @param e the map element
-     */
-    static void add_map_element(java.lang.Object c, java.lang.Object n, java.lang.Object e) {
-
-        java.lang.Object en = MapHandler.get_new_map_element_name(c, n);
-
-        MapHandler.set_map_element(c, en, e);
     }
 
     /**
@@ -170,7 +170,7 @@ class MapHandler {
 
         } else {
 
-            System.out.println("ERROR: Could not remove map element. The map container is null.");
+            java.lang.System.out.println("ERROR: Could not remove map element. The map container is null.");
         }
     }
 
@@ -205,7 +205,7 @@ class MapHandler {
 
         } else {
 
-            System.out.println("ERROR: Could not get map element. The map container is null.");
+            java.lang.System.out.println("ERROR: Could not get map element. The map container is null.");
         }
 
         return e;
@@ -240,7 +240,7 @@ class MapHandler {
         if (mc != null) {
             
             int i = index + 1;
-            int size = MapHandler.get_map_container_size(c);
+            int size = MapHandler.get_map_container_size(mc);
             java.lang.Object name = null;
             java.lang.Object[] a = mc.names;
 
@@ -270,7 +270,7 @@ class MapHandler {
 
         } else {
 
-            System.out.println("ERROR: Could not get map element index. The map container is null.");
+            java.lang.System.out.println("ERROR: Could not get map element index. The map container is null.");
         }
 
         return index;
@@ -337,7 +337,7 @@ class MapHandler {
 
         } else {
 
-            System.out.println("ERROR: Could not get next map element index. The map container is null.");
+            java.lang.System.out.println("ERROR: Could not get next map element index. The map container is null.");
         }
 
         return index;
@@ -368,12 +368,12 @@ class MapHandler {
 
             } else {
 
-                System.out.println("ERROR: Could not get new map element name. The index string is null.");
+                java.lang.System.out.println("ERROR: Could not get new map element name. The index string is null.");
             }
 
         } else {
 
-            System.out.println("ERROR: Could not get new map element name. The word base of the name is null.");
+            java.lang.System.out.println("ERROR: Could not get new map element name. The word base of the name is null.");
         }
 
         return nn;
@@ -435,7 +435,7 @@ class MapHandler {
 
         } else {
 
-            System.out.println("ERROR: Could not get map element count. The map is null.");
+            java.lang.System.out.println("ERROR: Could not get map element count. The map is null.");
         }
 
         return count;
