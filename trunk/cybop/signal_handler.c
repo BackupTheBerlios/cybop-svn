@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.6 $ $Date: 2003-09-27 00:22:23 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-09-27 19:50:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -289,12 +289,12 @@ int handle_signal(void* p0, int p1) {
             } else if (strcmp(a, STARTUP_ACTION) == 0) {
                 
                 // Root (statics).
-                statics = create_object(s->object, CATEGORY);
+                statics = create_object(s->object, COMPLEX);
 
                 reset_signal(s);
                 
                 s->predicate = SEND_ACTION;
-                s->object = get_map_element(((struct item*) statics)->children, "main_frame");
+                s->object = get_map_element(statics->children, "main_frame");
 
             } else if (strcmp(a, SHUTDOWN_ACTION) == 0) {
                 
@@ -363,11 +363,13 @@ void send_signal(void* p0, void* p1) {
                 // - JavaEventHandler.dispatchEvent for adding transformed java event signals
                 // These are the only procedures accessing the signal
                 // memory for adding signals.
+/*??
                 synchronized (p0) {
 
                     // Add signal to signal memory (interrupt vector table).
                     add_map_element(p0, SIGNAL, tmp);
                 }
+*/
 
             } else {
     
@@ -433,13 +435,12 @@ void reset_signal(void* p0) {
 void* mouse_clicked_action(void* p0, int p1, int p2, int p3) {
 
     void* a = 0;
-    struct item* i = (struct item*) p0;
     
-    if (i != 0) {
+    if (p0 != 0) {
 
         // Determine the action of the clicked child screen item.
         int count = 0;
-        int size = get_map_size(i->items);
+        int size = get_map_size(p0->items);
         void* child = 0;
         struct vector* position = 0;
         struct vector* expansion = 0;
@@ -455,8 +456,8 @@ void* mouse_clicked_action(void* p0, int p1, int p2, int p3) {
         while (count < size) {
 
             // Determine child, its position and expansion within the given screen item.
-            child = get_map_element(i->items, count);
-            position = (vector*) get_map_element(i->positions, count);
+            child = get_map_element(p0->items, count);
+            position = (vector*) get_map_element(p0->positions, count);
             
 /*??
             if (child instanceof item) {

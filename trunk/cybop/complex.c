@@ -1,5 +1,5 @@
 /*
- * $RCSfile: item.c,v $
+ * $RCSfile: complex.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -23,29 +23,24 @@
  */
 
 /**
- * This is an item.
+ * This is a complex.
  *
  * It represents an abstract description of some real world thing.
  *
- * An item can be created by instantiating (cloning) an existing category.
+ * A complex can be created by instantiating (cloning) an existing model.
  * Instantiating means allocating some place in the computer's memory.
- * Basically, every item can become a category if copies of this item are created.
+ * Basically, every complex can become a model (template) itself,
+ * if copies (other instances) of this complex are created.
  *
- * @version $Revision: 1.5 $ $Date: 2003-09-27 00:22:23 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-09-27 19:50:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-struct item {
+struct complex {
 
     /** The children. */
     void* children;
 
     /** The positions. */
     void* positions;
-
-    /** The instances. */
-    void* instances;
-
-    /** The interactions. */
-    void* interactions;
 };
 

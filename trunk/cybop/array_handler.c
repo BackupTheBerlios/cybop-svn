@@ -23,11 +23,17 @@
  */
 
 /**
- * This is an array handler.
+ * This is the array handler.
+ *
+ * An array represents an allocated area in the computer's memory
+ * that can contain a number of abstract elements.
+ * An abstraction simplifies and represents a real world item.
+ * In the case of computer science, everything gets abstracted to 0 and 1.
+ * But that also means that every abstraction has a bytecode representation.
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.6 $ $Date: 2003-09-27 00:22:23 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-09-27 19:50:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,25 +47,23 @@
  * All elements are copied from the old to the new array.
  *
  * @param p0 the array
- * @return the extended array
+ * @param p1 the extended array
  */
-void* extend_array(void* p0) {
+void extend_array(void* p0, void* p1) {
 
-    void* a = 0;
-    
     if (p0 != 0) {
 
         int old_length = sizeof(p0);
         int new_length = old_length * 2 + 1;
-        a = (void*) malloc(sizeof(new_length));
+        p1 = malloc(sizeof(new_length));
 
-        if (a != 0) {
+        if (p1 != 0) {
                 
             int i = 0;
 
             while (i < old_length) {
 
-                a[i] = p0[i];
+//??                a[i] = p0[i];
 
                 i++;
             }
@@ -75,8 +79,6 @@ void* extend_array(void* p0) {
 
         log(ERROR_LOG_LEVEL, "Could not extend array. The array is null.");
     }
-    
-    return a;
 }
 
 //
@@ -89,34 +91,30 @@ void* extend_array(void* p0) {
  * @param p0 the array
  * @param p1 the index
  * @param p2 the element
- * @return the extended array
+ * @param p3 the same or an extended array
  */
-void* set_array_element(void* p0, int p1, void* p2) {
+void set_array_element(void* p0, void* p1, void* p2, void* p3) {
 
-    void* a = 0;
-    
     if (p0 != 0) {
 
         // If the array length is exceeded, a new array with extended length
         // is created and delivered back.
         if (p1 >= sizeof(p0)) {
 
-            a = extend_array(p0);
+            extend_array(p0, p3);
         
         } else {
         
-            a = p0;
+            p3 = p0;
         }
 
         // Set element.
-        *a[p1] = p2;
+        p3[p1] = p2;
 
     } else {
 
         log(ERROR_LOG_LEVEL, "Could not set array element. The array is null.");
     }
-    
-    return a;
 }
 
 /**
@@ -125,25 +123,25 @@ void* set_array_element(void* p0, int p1, void* p2) {
  * @param p0 the array
  * @param p1 the index
  */
-void remove_array_element(void* p0, int p1) {
+void remove_array_element(void* p0, void* p1) {
 
     if (p0 != 0) {
 
-        if (p1 != -1) {
+        if (*p1 != -1) {
             
             // Move all remaining elements one place towards the
             // beginning of the elements.
             int size = sizeof(p0);
 
-            while ((p1 + 1) < size) {
+            while ((*p1 + 1) < size) {
 
-                p0[p1] = p0[p1 + 1];
+//??                p0[p1] = p0[p1 + 1];
 
-                p1++;
+                (*p1)++;
             }
 
             // Set former last element to 0.
-            p0[p1] = 0;
+            p0[*p1] = 0;
         }
 
     } else {
@@ -157,24 +155,20 @@ void remove_array_element(void* p0, int p1) {
  *
  * @param p0 the array
  * @param p1 the index
- * @return the element
+ * @param p2 the element
  */
-void* get_array_element(void* p0, int p1) {
+void get_array_element(void* p0, void* p1, void* p2) {
 
-    void* e = 0;
-    
     if (p0 != 0) {
 
-        if (p1 != -1) {
+        if (*p1 != -1) {
             
-            e = p0[p1];
+//??            p2 = p0[*p1];
         }
 
     } else {
 
         log(ERROR_LOG_LEVEL, "Could not get array element. The array is null.");
     }
-    
-    return e;
 }
 

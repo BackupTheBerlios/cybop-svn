@@ -22,12 +22,6 @@
  * - Cybernetics Oriented Programming -
  */
 
-/*??
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-*/
-
 #include <stdlib.h>
 #include <string.h>
 #include "log_handler.c"
@@ -37,12 +31,12 @@
 #include "signal_handler.c"
 
 /**
- * This is the main function to execute the Cybernetics Oriented Interpreter (CYBOI).
+ * This is the Cybernetics Oriented Interpreter (CYBOI).
  *
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.4 $ $Date: 2003-09-27 00:22:23 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-09-27 19:50:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
