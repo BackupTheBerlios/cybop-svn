@@ -49,7 +49,7 @@ import cybop.core.system.chain.*;
  * Child systems can be integrated into the portal system's Frame as Frame,
  * InternalFrame or TabPage.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Portal extends Family {
@@ -65,7 +65,6 @@ public class Portal extends Family {
      */
     public String getDefaultConfiguration() {
 
-//??        c.setJavaObject(java.util.prefs.Preferences.systemNodeForPackage(getClass().getPackage().getClass()));
         return new String("cybop.core.system.chain.Configuration");
     }
 
@@ -86,7 +85,7 @@ public class Portal extends Family {
      */
     public String getDefaultVersion() {
 
-        return new String("0.0.5.0");
+        return new String("0.0.6.0");
     }
 
     /**
@@ -96,7 +95,7 @@ public class Portal extends Family {
      */
     public String getDefaultDate() {
 
-        return new String("30.09.2002");
+        return new String("06.04.2003");
     }
 
     /**
@@ -163,107 +162,81 @@ public class Portal extends Family {
 
     /**
      * Initializes this portal.
-     *
-     * @exception NullPointerException if the configuration is null
-     * @exception NullPointerException if the user is null
-     * @exception NullPointerException if the portal user controller is null
-     * @exception NullPointerException if the portal view model is null
-     * @exception NullPointerException if the portal contents panel is null
-     * @exception NullPointerException if the portal split pane is null
-     * @exception NullPointerException if the tree is null
      */
-    public void initialize() throws Exception, NullPointerException {
+    public void initialize() throws Exception {
 
         super.initialize();
 
-        Configuration c = (Configuration) get(Portal.CONFIGURATION);
-
-        if (c != null) {
-
-            //
-            // User.
-            //
+        //
+        // User.
+        //
 
 /*??
-            User u = (User) get(Portal.USER);
+        User u = (User) get(Portal.USER);
 
-            if (u != null) {
+        if (u != null) {
+
+            PortalUserController uc = (PortalUserController) u.get(PortalUser.CONTROLLER);
     
-                PortalUserController uc = (PortalUserController) u.get(PortalUser.CONTROLLER);
+            if (uc != null) {
+
+                PortalUserInterface m = (PortalUserInterface) uc.get(PortalUserController.MODEL);
+
+                if (m != null) {
+                    
+                    cybop.model.organizer.PortalContentsPanel cp = (cybop.model.organizer.PortalContentsPanel) m.get(PortalUserInterface.CONTENTS_PANEL);
+                    
+                    if (cp != null) {
         
-                if (uc != null) {
-
-                    PortalUserInterface m = (PortalUserInterface) uc.get(PortalUserController.MODEL);
-
-                    if (m != null) {
+                        cybop.model.organizer.PortalSplitPane sp = (cybop.model.organizer.PortalSplitPane) cp.get(cybop.model.organizer.PortalContentsPanel.PORTAL_SPLIT_PANE);
                         
-                        cybop.model.organizer.PortalContentsPanel cp = (cybop.model.organizer.PortalContentsPanel) m.get(PortalUserInterface.CONTENTS_PANEL);
-                        
-                        if (cp != null) {
-            
-                            cybop.model.organizer.PortalSplitPane sp = (cybop.model.organizer.PortalSplitPane) cp.get(cybop.model.organizer.PortalContentsPanel.PORTAL_SPLIT_PANE);
+                        if (sp != null) {
                             
-                            if (sp != null) {
-                                
-                                cybop.model.organizer.Tree t = (cybop.model.organizer.Tree) sp.get(cybop.model.organizer.PortalSplitPane.LEFT_ORGANIZER);
-                                
-                                if (t != null) {
-            
-                                    t.set(cybop.model.organizer.Tree.MODEL, get(Portal.AVAILABLE_SYSTEMS));
-                                    //?? t.addTreeSelectionListener(this);
-    
-                                } else {
-                
-                                    throw new NullPointerException("Could not initialize portal. The tree is null.");
-                                }
-            
+                            cybop.model.organizer.Tree t = (cybop.model.organizer.Tree) sp.get(cybop.model.organizer.PortalSplitPane.LEFT_ORGANIZER);
+                            
+                            if (t != null) {
+        
+                                t.set(cybop.model.organizer.Tree.MODEL, get(Portal.AVAILABLE_SYSTEMS));
+                                //?? t.addTreeSelectionListener(this);
+
                             } else {
             
-                                throw new NullPointerException("Could not initialize portal. The portal split pane is null.");
+                                throw new NullPointerException("Could not initialize portal. The tree is null.");
                             }
-            
+        
                         } else {
-            
-                            throw new NullPointerException("Could not initialize portal. The portal contents panel is null.");
+        
+                            throw new NullPointerException("Could not initialize portal. The portal split pane is null.");
                         }
-            
+        
                     } else {
-            
-                        throw new NullPointerException("Could not initialize portal. The portal view model is null.");
+        
+                        throw new NullPointerException("Could not initialize portal. The portal contents panel is null.");
                     }
         
                 } else {
         
-                    throw new NullPointerException("Could not initialize portal. The portal user controller is null.");
+                    throw new NullPointerException("Could not initialize portal. The portal view model is null.");
                 }
-            
+    
             } else {
     
-                throw new NullPointerException("Could not initialize portal. The user is null.");
+                throw new NullPointerException("Could not initialize portal. The portal user controller is null.");
             }
-*/
-
+        
         } else {
 
-            throw new NullPointerException("Could not initialize portal. The configuration is null.");
+            throw new NullPointerException("Could not initialize portal. The user is null.");
         }
+*/
     }
 
     /**
      * Finalizes this portal.
-     *
-     * @exception NullPointerException if the configuration is null
      */
-    public void finalizz() throws Exception, NullPointerException {
+    public void finalizz() throws Exception {
 
-        Configuration c = (Configuration) get(Portal.CONFIGURATION);
-
-        if (c != null) {
-
-        } else {
-
-            throw new NullPointerException("Could not finalize portal. The configuration is null.");
-        }
+        super.finalizz();
     }
 
     //

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Model.java,v $
+ * $RCSfile: Mouse.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,19 +22,38 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.model;
+package cybop.core.system.block;
 
-import cybop.core.basic.String;
+import cybop.core.basic.Boolean;
+import cybop.core.model.model.*;
+import cybop.core.system.*;
 
 /**
- * This class represents a model.
+ * This class represents a mouse.<br><br>
  *
- * Synonyms for <i>model</i> are <i>protocol</i> or <i>language</i>,
- * i.e. everything that defines a structure for how systems exchange data.
+ * A mouse is an input device with several buttons that can be clicked. 
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Model extends GraphicItem {
+public class Mouse extends Block {
+
+    //
+    // Sensing mouse actions.
+    //
+
+    /**
+     * Senses mouse actions.
+     */
+    public void sense() {
+        
+        //?? Another waiting loop? Or catch interrupt requests somehow?
+
+        //?? Currently not needed. Mouse actions are caught by the operating
+        //?? system and then forwarded by the Java Virtual Machine (JVM).
+        //?? For now, mouse events are caught directly from the JVM event queue
+        //?? which is done by overloading the dispatchEvent method in class
+        //?? cybop.system.family.Launcher.
+    }
 }
 

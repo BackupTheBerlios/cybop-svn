@@ -32,7 +32,7 @@ import cybop.core.model.*;
 /**
  * This class represents a button.
  *
- * @version $Revision: 1.5 $ $Date: 2003-03-15 01:01:17 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Button extends Organizer {
@@ -46,9 +46,6 @@ public class Button extends Organizer {
 
     /** The mnemonic. */
     public static final String MNEMONIC = new String("mnemonic");
-
-    /** The action. */
-    public static final String ACTION = new String("action");
 
     //
     // Child management.
@@ -74,10 +71,6 @@ public class Button extends Organizer {
             } else if (n.isEqualTo(Button.MNEMONIC)) {
 
                 setMnemonic((Integer) i);
-
-            } else if (n.isEqualTo(Button.ACTION)) {
-
-                setAction((String) i);
             }
 
         } else {
@@ -103,10 +96,6 @@ public class Button extends Organizer {
             } else if (n.isEqualTo(Button.MNEMONIC)) {
 
                 removeMnemonic((Integer) get(n));
-
-            } else if (n.isEqualTo(Button.ACTION)) {
-
-                removeAction((String) get(n));
             }
 
         } else {
@@ -137,16 +126,6 @@ public class Button extends Organizer {
      * @return the default mnemonic
      */
     public Integer getDefaultMnemonic() {
-
-        return null;
-    }
-
-    /**
-     * Returns the default action.
-     *
-     * @return the default action
-     */
-    public String getDefaultAction() {
 
         return null;
     }
@@ -292,58 +271,6 @@ public class Button extends Organizer {
     }
 
     //
-    // Action.
-    //
-    
-    /**
-     * Sets the action.
-     *
-     * @param a the action
-     * @exception NullPointerException if the java menu item is null
-     * @exception NullPointerException if the action is null
-     */
-    public void setAction(String a) throws NullPointerException {
-
-        javax.swing.AbstractButton b = (javax.swing.AbstractButton) getJavaObject();
-
-        if (b != null) {
-
-            if (a != null) {
-
-                b.setActionCommand((java.lang.String) a.getJavaObject());
-
-            } else {
-    
-                throw new NullPointerException("Could not set action. The action is null.");
-            }
-
-        } else {
-
-            throw new NullPointerException("Could not set action. The java menu item is null.");
-        }
-    }
-
-    /**
-     * Removes the action.
-     *
-     * @param a the action
-     * @exception NullPointerException if the java menu item is null
-     */
-    public void removeAction(String a) throws NullPointerException {
-
-        javax.swing.AbstractButton b = (javax.swing.AbstractButton) getJavaObject();
-
-        if (b != null) {
-
-            b.setActionCommand(null);
-
-        } else {
-
-            throw new NullPointerException("Could not remove action. The java menu item is null.");
-        }
-    }
-
-    //
     // Initialization.
     //
 
@@ -356,17 +283,12 @@ public class Button extends Organizer {
 
         set(Button.LABEL, getDefaultLabel());
         set(Button.MNEMONIC, getDefaultMnemonic());
-        set(Button.ACTION, getDefaultAction());
     }
 
     /**
      * Finalizes this button.
      */
     public void finalizz() throws Exception {
-
-        String action = (String) get(Button.ACTION);
-        remove(Button.ACTION);
-        destroyItem(action);
 
         Integer mnemonic = (Integer) get(Button.MNEMONIC);
         remove(Button.MNEMONIC);

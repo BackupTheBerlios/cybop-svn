@@ -32,7 +32,7 @@ import cybop.core.basic.String;
  *
  * It serves as container transporting information of communication.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Signal extends Item {
@@ -59,6 +59,9 @@ public class Signal extends Item {
     //
     // Languages.
     //
+
+    /** The neuro (system internal) language. */
+    public static final String NEURO_LANGUAGE = new String("neuro_language");
 
     /** The textual user interface (tui) language. */
     public static final String TUI_LANGUAGE = new String("tui_language");

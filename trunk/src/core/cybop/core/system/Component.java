@@ -69,7 +69,7 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.5 $ $Date: 2003-03-15 01:01:17 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends Chain {
@@ -130,8 +130,8 @@ public class Component extends Chain {
     /** The log level providing tracing information. */
     public static final Integer DEBUG_LOG_LEVEL = new Integer(4);
 
-    /** The log level indicating that all messages should be logged. */
-    public static final Integer ALL_LOG_LEVEL = new Integer(5);
+    /** The log level printing all messages, including every signal (event) occuring in the system. */
+    public static final Integer EVENT_LOG_LEVEL = new Integer(5);
 
     //
     // Child management.
@@ -317,7 +317,7 @@ public class Component extends Chain {
      */
     public Integer getDefaultLogLevel() {
 
-        return Component.ALL_LOG_LEVEL;
+        return Component.EVENT_LOG_LEVEL;
     }
 
     //

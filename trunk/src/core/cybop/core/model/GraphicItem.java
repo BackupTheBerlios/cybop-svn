@@ -30,11 +30,18 @@ import cybop.core.basic.String;
 /**
  * This class represents a graphic item.<br><br>
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-15 01:01:17 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class GraphicItem extends Item {
-    
+public class GraphicItem extends cybop.core.system.Component {
+
+    //?? Only temporary inheritance from Component!
+    //?? The gui components need a signal handler which is set in the
+    //?? globalize method of Component.
+    //?? Remove this inheritance (replace with Item parent class),
+    //?? as soon as no signal handler has to be forwarded anymore
+    //?? (when CYBOP provides mouse/keyboard input handling itselfs.
+
     //
     // Children names.
     //
@@ -69,6 +76,9 @@ public class GraphicItem extends Item {
     /** The orientation. */
     public static final String ORIENTATION = new String("orientation");
 
+    /** The action. */
+    public static final String ACTION = new String("action");
+
     //
     // Orientations.
     //
@@ -84,5 +94,45 @@ public class GraphicItem extends Item {
 
     /** The 270 degree orientation. */
     public static final String DEGREE_270_ORIENTATION = new String("270_degree_orientation");
+
+    //
+    // Default children.
+    //
+
+    /**
+     * Returns the default action.
+     *
+     * @return the default action
+     */
+    public String getDefaultAction() {
+
+        return null;
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this button.
+     */
+    public void initialize() throws Exception {
+
+        super.initialize();
+
+        set(GraphicItem.ACTION, getDefaultAction());
+    }
+
+    /**
+     * Finalizes this button.
+     */
+    public void finalizz() throws Exception {
+
+        String action = (String) get(GraphicItem.ACTION);
+        remove(GraphicItem.ACTION);
+        destroyItem(action);
+
+        super.finalizz();
+    }
 }
 

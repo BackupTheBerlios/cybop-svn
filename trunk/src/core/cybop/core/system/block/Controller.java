@@ -29,6 +29,7 @@ import cybop.core.basic.String;
 import cybop.core.model.*;
 import cybop.core.model.model.*;
 import cybop.core.model.model.user.*;
+import cybop.core.model.principle.*;
 import cybop.core.signal.*;
 import cybop.core.system.*;
 import cybop.core.system.chain.*;
@@ -49,7 +50,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
@@ -66,6 +67,9 @@ public class Controller extends Block {
 
     /** The system user interface. */
     public static final String SYSTEM_USER_INTERFACE = new String("system_user_interface");
+
+    /** The mouse model. */
+    public static final String MOUSE_MODEL = new String("mouse_model");
 
     /** The system information user interface. */
     public static final String SYSTEM_INFORMATION_USER_INTERFACE = new String("system_information_user_interface");
@@ -99,6 +103,72 @@ public class Controller extends Block {
 
     /** The hide system information user interface action. */
     public static final String HIDE_SYSTEM_INFORMATION_USER_INTERFACE_ACTION = new String("hide_system_information_user_interface_action");
+
+    /** The focus gained action. */
+    public static final String FOCUS_GAINED_ACTION = new String("focus_gained_action");
+
+    /** The focus lost action. */
+    public static final String FOCUS_LOST_ACTION = new String("focus_lost_action");
+
+    /** The mouse pressed action. */
+    public static final String MOUSE_PRESSED_ACTION = new String("mouse_pressed_action");
+
+    /** The mouse released action. */
+    public static final String MOUSE_RELEASED_ACTION = new String("mouse_released_action");
+
+    /** The mouse clicked action. */
+    public static final String MOUSE_CLICKED_ACTION = new String("mouse_clicked_action");
+
+    /** The mouse entered action. */
+    public static final String MOUSE_ENTERED_ACTION = new String("mouse_entered_action");
+
+    /** The mouse exited action. */
+    public static final String MOUSE_EXITED_ACTION = new String("mouse_exited_action");
+
+    /** The mouse dragged action. */
+    public static final String MOUSE_DRAGGED_ACTION = new String("mouse_dragged_action");
+
+    /** The mouse moved action. */
+    public static final String MOUSE_MOVED_ACTION = new String("mouse_moved_action");
+
+    /** The mouse wheel action. */
+    public static final String MOUSE_WHEEL_ACTION = new String("mouse_wheel_action");
+
+    /** The key typed action. */
+    public static final String KEY_TYPED_ACTION = new String("key_typed_action");
+
+    /** The key released action. */
+    public static final String KEY_RELEASED_ACTION = new String("key_released_action");
+
+    /** The key pressed action. */
+    public static final String KEY_PRESSED_ACTION = new String("key_pressed_action");
+
+    /** The component resized action. */
+    public static final String COMPONENT_RESIZED_ACTION = new String("component_resized_action");
+
+    /** The component moved action. */
+    public static final String COMPONENT_MOVED_ACTION = new String("component_moved_action");
+
+    /** The component shown action. */
+    public static final String COMPONENT_SHOWN_ACTION = new String("component_shown_action");
+
+    /** The component hidden action. */
+    public static final String COMPONENT_HIDDEN_ACTION = new String("component_hidden_action");
+
+    /** The input method text changed action. */
+    public static final String INPUT_METHOD_TEXT_CHANGED_ACTION = new String("input_method_text_changed_action");
+
+    /** The caret position changed action. */
+    public static final String CARET_POSITION_CHANGED_ACTION = new String("caret_position_changed_action");
+
+    /** The hierarchy changed action. */
+    public static final String HIERARCHY_CHANGED_ACTION = new String("hierarchy_changed_action");
+
+    /** The ancestor resized action. */
+    public static final String ANCESTOR_RESIZED_ACTION = new String("ancestor_resized_action");
+
+    /** The ancestor moved action. */
+    public static final String ANCESTOR_MOVED_ACTION = new String("ancestor_moved_action");
 
 //?? ------------------------------
 
@@ -219,6 +289,16 @@ public class Controller extends Block {
     }
 
     /**
+     * Returns the default mouse model.
+     *
+     * @return the default mouse model
+     */
+    public String getDefaultMouseModel() {
+
+        return null;
+    }
+
+    /**
      * Returns the default system information user interface.
      *
      * @return the default system information user interface
@@ -244,56 +324,47 @@ public class Controller extends Block {
 
     /**
      * Initializes this controller.
-     *
-     * @exception NullPointerException if the configuration is null
      */
-    public void initialize() throws Exception, NullPointerException {
+    public void initialize() throws Exception {
 
         super.initialize();
 
-        Configuration c = (Configuration) get(Controller.CONFIGURATION);
-
-        if (c != null) {
-
-            set(Controller.PROCESSOR, createComponent(c.get(Controller.PROCESSOR, getDefaultProcessor())));
-            set(Controller.DOMAIN_MODEL, createComponent(c.get(Controller.DOMAIN_MODEL, getDefaultDomainModel())));
-            set(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR, createComponent(c.get(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR, getDefaultSystemInformationUserInterfaceTranslator())));
-
-        } else {
-
-            throw new NullPointerException("Could not initialize controller. The configuration is null.");
-        }
+        set(Controller.PROCESSOR, createComponent(getDefaultProcessor()));
+        set(Controller.DOMAIN_MODEL, createComponent(getDefaultDomainModel()));
+        set(Controller.SYSTEM_USER_INTERFACE, createComponent(getDefaultSystemUserInterface()));
+        set(Controller.MOUSE_MODEL, createComponent(getDefaultMouseModel()));
+        set(Controller.SYSTEM_INFORMATION_USER_INTERFACE, createComponent(getDefaultSystemInformationUserInterface()));
+        set(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR, createComponent(getDefaultSystemInformationUserInterfaceTranslator()));
     }
 
     /**
      * Finalizes this controller.
-     *
-     * @exception NullPointerException if the configuration is null
      */
-    public void finalizz() throws Exception, NullPointerException {
+    public void finalizz() throws Exception {
 
-        Configuration c = (Configuration) get(Controller.CONFIGURATION);
+        SystemInformationUserInterfaceTranslator systemInformationUserInterfaceTranslator = (SystemInformationUserInterfaceTranslator) get(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);
+        remove(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);
+        destroyComponent(systemInformationUserInterfaceTranslator);
 
-        if (c != null) {
+        SystemInformationUserInterface systemInformationUserInterface = (SystemInformationUserInterface) get(Controller.SYSTEM_INFORMATION_USER_INTERFACE);
+        remove(Controller.SYSTEM_INFORMATION_USER_INTERFACE);
+        destroyComponent(systemInformationUserInterface);
 
-            SystemInformationUserInterfaceTranslator systemInformationUserInterfaceTranslator = (SystemInformationUserInterfaceTranslator) get(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);
-            remove(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);
-            destroyComponent(systemInformationUserInterfaceTranslator);
+        MouseModel mouseModel = (MouseModel) get(Controller.MOUSE_MODEL);
+        remove(Controller.MOUSE_MODEL);
+        destroyItem(mouseModel);
 
-            DomainModel domainModel = (DomainModel) get(Controller.DOMAIN_MODEL);
-//??            c.set(Controller.DOMAIN_MODEL, domainModel.getClassName());
-            remove(Controller.DOMAIN_MODEL);
-            destroyItem(domainModel);
+        SystemUserInterface systemUserInterface = (SystemUserInterface) get(Controller.SYSTEM_USER_INTERFACE);
+        remove(Controller.SYSTEM_USER_INTERFACE);
+        destroyItem(systemUserInterface);
 
-            Processor processor = (Processor) get(Controller.PROCESSOR);
-//??            c.set(Controller.PROCESSOR, processor.getClassName());
-            remove(Controller.PROCESSOR);
-            destroyComponent(processor);
+        DomainModel domainModel = (DomainModel) get(Controller.DOMAIN_MODEL);
+        remove(Controller.DOMAIN_MODEL);
+        destroyItem(domainModel);
 
-        } else {
-
-            throw new NullPointerException("Could not finalize controller. The configuration is null.");
-        }
+        Processor processor = (Processor) get(Controller.PROCESSOR);
+        remove(Controller.PROCESSOR);
+        destroyComponent(processor);
 
         super.finalizz();
     }
@@ -335,10 +406,15 @@ public class Controller extends Block {
 
                     log(Controller.INFO_LOG_LEVEL, "Hide system information user interface.");
                     hideSystemInformationUserInterface(s);
+    
+                } else if (a.isEqualTo(Controller.MOUSE_CLICKED_ACTION)) {
+
+                    log(Controller.INFO_LOG_LEVEL, "Mouse clicked.");
+                    mouseClicked(s);
                 }
 
             } else {
-    
+
                 throw new NullPointerException("Could not process action. The action is null.");
             }
 
@@ -354,26 +430,9 @@ public class Controller extends Block {
      * @param s the signal
      * @exception NullPointerException if the signal is null
      */
-    public void showSystemUserInterface(Signal s) throws Exception, NullPointerException {
+    protected void showSystemUserInterface(Signal s) throws Exception, NullPointerException {
 
         if (s != null) {
-
-            // Create and set system user interface.
-            set(Controller.SYSTEM_USER_INTERFACE, createComponent(getDefaultSystemUserInterface()));
-
-/*??
-            SystemInformationUserInterfaceTranslator t = (SystemInformationUserInterfaceTranslator) get(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);
-
-            if (t != null) {
-
-                // Write system information into dialog.
-                t.encode((DomainModel) get(Controller.DOMAIN_MODEL), (Model) get(Controller.SYSTEM_INFORMATION_USER_INTERFACE));
-
-            } else {
-
-                throw new NullPointerException("Could not show system user interface. The translator is null.");
-            }
-*/
 
             s.set(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
             s.set(Signal.OBJECT, get(Controller.SYSTEM_USER_INTERFACE));
@@ -390,17 +449,12 @@ public class Controller extends Block {
      * @param s the signal
      * @exception NullPointerException if the signal is null
      */
-    public void hideSystemUserInterface(Signal s) throws Exception, NullPointerException {
+    protected void hideSystemUserInterface(Signal s) throws Exception, NullPointerException {
 
         if (s != null) {
 
             s.set(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
             s.set(Signal.OBJECT, get(Controller.SYSTEM_USER_INTERFACE));
-
-            // Destroy and set system user interface.
-            SystemUserInterface systemUserInterface = (SystemUserInterface) get(Controller.SYSTEM_USER_INTERFACE);
-            remove(Controller.SYSTEM_USER_INTERFACE);
-            destroyComponent(systemUserInterface);
 
         } else {
 
@@ -414,12 +468,14 @@ public class Controller extends Block {
      * @param s the signal
      * @exception NullPointerException if the signal is null
      */
-    public void showSystemInformationUserInterface(Signal s) throws Exception, NullPointerException {
+    protected void showSystemInformationUserInterface(Signal s) throws Exception, NullPointerException {
 
         if (s != null) {
 
-            // Create and set system information user interface.
-            set(Controller.SYSTEM_INFORMATION_USER_INTERFACE, createComponent(getDefaultSystemInformationUserInterface()));
+            //??
+            //?? SystemInformation does not belong into the domain model!!
+            //?? Create an own model for meta information about systems!
+            //??
 
             SystemInformationUserInterfaceTranslator t = (SystemInformationUserInterfaceTranslator) get(Controller.SYSTEM_INFORMATION_USER_INTERFACE_TRANSLATOR);
 
@@ -448,22 +504,84 @@ public class Controller extends Block {
      * @param s the signal
      * @exception NullPointerException if the signal is null
      */
-    public void hideSystemInformationUserInterface(Signal s) throws Exception, NullPointerException {
+    protected void hideSystemInformationUserInterface(Signal s) throws Exception, NullPointerException {
 
         if (s != null) {
 
             s.set(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
             s.set(Signal.OBJECT, get(Controller.SYSTEM_INFORMATION_USER_INTERFACE));
 
-            // Destroy and set system information user interface.
-            SystemInformationUserInterface systemInformationUserInterface = (SystemInformationUserInterface) get(Controller.SYSTEM_INFORMATION_USER_INTERFACE);
-            remove(Controller.SYSTEM_INFORMATION_USER_INTERFACE);
-            destroyComponent(systemInformationUserInterface);
-
         } else {
 
             throw new NullPointerException("Could not hide system information user interface. The signal is null.");
         }
+    }
+
+    /**
+     * Reacts on mouse clicked action.
+     *
+     * @param s the signal
+     * @exception NullPointerException if the signal is null
+     */
+    protected void mouseClicked(Signal s) throws Exception, NullPointerException {
+
+        java.lang.System.out.println("\n\n\n\n\n CLICKED 2 \n\n\n\n\n");
+
+        if (s != null) {
+
+            MouseModel m = (MouseModel) s.get(Signal.OBJECT);
+
+            if (m != null) {
+
+                GraphicItem i = getGraphicItem((Space) m.get(MouseModel.POINTER_POSITION));
+
+                if (i != null) {
+
+                    String a = Controller.SHOW_SYSTEM_INFORMATION_USER_INTERFACE_ACTION; //?? (String) i.get(GraphicItem.ACTION);
+
+                    s.set(Signal.LANGUAGE, Signal.NEURO_LANGUAGE);
+                    s.set(Signal.PREDICATE, a);
+
+                    control(s);
+
+                } else {
+        
+                    throw new NullPointerException("Could not react on mouse clicked action. The graphic item is null.");
+                }
+
+            } else {
+    
+                throw new NullPointerException("Could not react on mouse clicked action. The mouse model is null.");
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not react on mouse clicked action. The signal is null.");
+        }
+    }
+
+    /**
+     * Returns the graphic item at the given mouse position.
+     *
+     * @param p the mouse pointer position
+     * @exception NullPointerException if the signal is null
+     */
+    protected GraphicItem getGraphicItem(Space p) throws Exception, NullPointerException {
+
+/*??
+        Desktop d = ...;
+
+        if (d != null) {
+
+            d.get(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
+
+        } else {
+
+            throw new NullPointerException("Could not show system information user interface. The signal is null.");
+        }
+*/
+
+        return null;
     }
 
     /**

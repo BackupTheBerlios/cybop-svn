@@ -28,7 +28,9 @@ import cybop.core.basic.*;
 import cybop.core.basic.Boolean;
 import cybop.core.basic.Integer;
 import cybop.core.basic.String;
+import cybop.core.model.*;
 import cybop.core.model.model.*;
+import cybop.core.model.principle.*;
 import cybop.core.signal.*;
 import cybop.core.system.*;
 import cybop.core.system.System;
@@ -67,7 +69,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.6 $ $Date: 2003-03-15 01:01:17 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-03-15 23:40:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family /*??implements
@@ -171,13 +173,11 @@ public class Launcher extends Family /*??implements
                 l.setArguments(args);
                 l.initialize();
                 l.launch();
-//??                The wait method is only needed if this is an operating system
-//??                catching all events. For now, we use the java awt events and
-//??                catch them here, in an internal class, with the dispatchEvent
-//??                method of the java awt EventQueue.
-//??                The internal class was already created in the initialize method,
-//??                so that the system is now complete and waits for events.
-//??                l.await();
+                // The system is now started up and complete so that a loop
+                // can be entered, waiting for signals (events).
+                l.await();
+                // The loop above is left as soon as the shutdown flag is set
+                // so that the system can be shut down now.
                 l.finalizz();
                 l.setArguments(null);
 
@@ -665,7 +665,7 @@ public class Launcher extends Family /*??implements
 
         Signal s = (Signal) createItem(getDefaultSignal());
 
-        receive(s, Signal.TUI_LANGUAGE, get(Launcher.USER), (String) get(Launcher.LIFECYCLE_ACTION));
+        receive(s, Signal.TUI_LANGUAGE, get(Launcher.USER), (String) get(Launcher.LIFECYCLE_ACTION), null);
         handle(s, new Boolean(Boolean.FALSE));
         send(s);
         destroyItem(s);
@@ -687,8 +687,7 @@ public class Launcher extends Family /*??implements
      */
     public void await() throws Exception {
 
-/*??
-        Signal s = (Signal) createItem(getDefaultSignal());
+//??        Signal s = (Signal) createItem(getDefaultSignal());
         Boolean b = null;
 
         while (true) {
@@ -708,15 +707,18 @@ public class Launcher extends Family /*??implements
                 throw new NullPointerException("Could not wait for signals. The shutdown flag is null.");
             }
 
+/*??
             // Check for changed flags on computer (currently done by operating system),
             // e.g. to receive a keyboard or mouse event and then create a CYBOP signal of it.
+            receive(s);
+            // Handle the signal by sending it through the whole system.
+            handle(s, new Boolean(Boolean.FALSE));
             // After having handled the signal in this system, its answer will be sent -
             // again by changing flags on the computer (done by operating system),
             // e.g. a gui drawn onto the screen, a printout or a network message.
-            receive(s);
-            handle(s, new Boolean(Boolean.FALSE));
             send(s);
             reset(s);
+*/
 
             // Run garbage collector. Since java has no destructor methods,
             // all unreferenced objects are hanging in memory until the gc is run.
@@ -728,8 +730,7 @@ public class Launcher extends Family /*??implements
 //??            java.lang.System.gc();
         }
 
-        destroyItem(s);
-*/
+//??        destroyItem(s);
 
 /*??
         String port = (String) get(System.SHUTDOWN_PORT);
@@ -849,15 +850,17 @@ public class Launcher extends Family /*??implements
      * @param l the language
      * @param subj the subject
      * @param p the predicate
+     * @param o the object
      * @exception NullPointerException if the signal is null
      */
-    public void receive(Signal s, String l, Item subj, Item p) throws NullPointerException {
+    public void receive(Signal s, String l, Item subj, Item p, Model o) throws NullPointerException {
 
         if (s != null) {
 
             s.set(Signal.LANGUAGE, l);
             s.set(Signal.SUBJECT, subj);
             s.set(Signal.PREDICATE, p);
+            s.set(Signal.PREDICATE, o);
 
         } else {
 
@@ -1016,11 +1019,13 @@ public class Launcher extends Family /*??implements
      */
     public void startupSystem(String s, String c) throws Exception {
 
+        java.lang.System.out.println("\n\n\n\n\n pre: " + getSystem(Launcher.SYSTEM) + "\n\n\n\n\n");
         setSystem(Launcher.SYSTEM, createComponent(s/*??, c*/));
+        java.lang.System.out.println("\n\n\n\n\n post: " + getSystem(Launcher.SYSTEM) + "\n\n\n\n\n");
 
         Signal sig = (Signal) createItem(getDefaultSignal());
 
-        receive(sig, Signal.TUI_LANGUAGE, get(Launcher.USER), Controller.SHOW_SYSTEM_USER_INTERFACE_ACTION);
+        receive(sig, Signal.TUI_LANGUAGE, get(Launcher.USER), Controller.SHOW_SYSTEM_USER_INTERFACE_ACTION, null);
         handle(sig, new Boolean(Boolean.FALSE));
         send(sig);
         destroyItem(sig);
@@ -1105,7 +1110,7 @@ public class Launcher extends Family /*??implements
         Signal s = (Signal) createItem(getDefaultSignal());
         ShutdownSocket socket = (ShutdownSocket) createComponent(getDefaultShutdownSocket());
 
-        receive(s, Signal.GUI_LANGUAGE, get(Launcher.USER), (String) get(Launcher.SHUTDOWN_SYSTEM_ACTION));
+        receive(s, Signal.GUI_LANGUAGE, get(Launcher.USER), (String) get(Launcher.SHUTDOWN_SYSTEM_ACTION), null);
 
         if (socket != null) {
 
@@ -1221,209 +1226,212 @@ public class Launcher extends Family /*??implements
      * which finally broadcasts the signal through the whole system
      * and all sub systems.
      *
+     * The following java awt methods might be of interest in understanding
+     * how events are handled in the JDK and how clicked components are
+     * identified:
+     * java.awt.EventDispatchThread::pumpOneEventForHierarchy(...);
+     * java.awt.Toolkit::getSystemEventQueueImpl();
+     * java.awt.Container::dispatchEvent(AWTEvent e);
+     * java.awt.Container::getMouseEventTargetImpl();
+     *
      * @param evt the java event
      * @exception NullPointerException if the java event is null
+     * @exception NullPointerException if the system is null
+     * @exception NullPointerException if the controller is null
+     * @exception NullPointerException if the mouse model is null
+     * @exception NullPointerException if the mouse pointer position is null
      */
     public void handle(java.awt.AWTEvent evt) throws Exception, NullPointerException {
 
-        // Print out ALL events arriving here.
-        java.lang.System.out.println("EVENT: " + evt.toString());
+        log(Launcher.EVENT_LOG_LEVEL, evt.toString());
 
-        String a = new String("");
+        String l = null;
+        String a = null;
+        Model m = null;
 
         if (evt != null) {
+            
+            int id = evt.getID();
 
-/*??
-            if (evt instanceof java.awt.FocusEvent) {
+            if (id == java.awt.event.FocusEvent.FOCUS_GAINED) {
 
-                protected void processFocusEvent(FocusEvent e) {
-                    FocusListener listener = focusListener;
-                    if (listener != null) {
-                        int id = e.getID();
-                        switch(id) {
-                          case FocusEvent.FOCUS_GAINED:
-                            listener.focusGained(e);
-                            break;
-                          case FocusEvent.FOCUS_LOST:
-                            listener.focusLost(e);
-                            break;
-                        }
-                    }
-                }
-    
-            } else if (e instanceof java.awt.MouseEvent) {
+                a = Controller.FOCUS_GAINED_ACTION;
+                l = null;
 
-                switch(e.getID()) {
-                  case java.awt.MouseEvent.MOUSE_PRESSED:
-                  case java.awt.MouseEvent.MOUSE_RELEASED:
-                  case java.awt.MouseEvent.MOUSE_CLICKED:
-                  case java.awt.MouseEvent.MOUSE_ENTERED:
-                  case java.awt.MouseEvent.MOUSE_EXITED:
-                    protected void processMouseEvent(MouseEvent e) {
-                        MouseListener listener = mouseListener;
-                        if (listener != null) {
-                            int id = e.getID();
-                            switch(id) {
-                              case MouseEvent.MOUSE_PRESSED:
-                                listener.mousePressed(e);
-                                break;
-                              case MouseEvent.MOUSE_RELEASED:
-                                listener.mouseReleased(e);
-                                break;
-                              case MouseEvent.MOUSE_CLICKED:
-                                listener.mouseClicked(e);
-                                break;
-                              case MouseEvent.MOUSE_EXITED:
-                                listener.mouseExited(e);
-                                break;
-                              case MouseEvent.MOUSE_ENTERED:
-                                listener.mouseEntered(e);
-                                break;
-                            }
-                        }
-                    }
-                    break;
-                  case java.awt.MouseEvent.MOUSE_MOVED:
-                  case java.awt.MouseEvent.MOUSE_DRAGGED:
-                    protected void processMouseMotionEvent(MouseEvent e) {
-                        MouseMotionListener listener = mouseMotionListener;
-                        if (listener != null) {
-                            int id = e.getID();
-                            switch(id) {
-                              case MouseEvent.MOUSE_MOVED:
-                                listener.mouseMoved(e);
-                                break;
-                              case MouseEvent.MOUSE_DRAGGED:
-                                listener.mouseDragged(e);
-                                break;
-                            }
-                        }
-                    }
-                    break;
-                  case java.awt.MouseEvent.MOUSE_WHEEL:
-                    protected void processMouseWheelEvent(MouseWheelEvent e) {
-                        MouseWheelListener listener = mouseWheelListener;
-                        if (listener != null) {
-                            int id = e.getID();
-                            switch(id) {
-                                case MouseEvent.MOUSE_WHEEL:
-                                    listener.mouseWheelMoved(e);
-                                    break;
-                            }
-                        }
-                    }
-                    break;
-                }
+            } else if (id == java.awt.event.FocusEvent.FOCUS_LOST) {
+
+                a = Controller.FOCUS_LOST_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.MouseEvent.MOUSE_PRESSED) {
+
+                a = Controller.MOUSE_PRESSED_ACTION;
+                l = Signal.GUI_LANGUAGE;
+
+            } else if (id == java.awt.event.MouseEvent.MOUSE_RELEASED) {
+
+                a = Controller.MOUSE_RELEASED_ACTION;
+                l = Signal.GUI_LANGUAGE;
+
+            } else if (id == java.awt.event.MouseEvent.MOUSE_CLICKED) {
+
+                java.lang.System.out.println("\n\n\n\n\n CLICKED 0 \n\n\n\n\n");
+                a = Controller.MOUSE_CLICKED_ACTION;
+                l = Signal.GUI_LANGUAGE;
+
+                //?? Find out which child system is active (top window)
+                //?? to use its controller here.
+                System sys = getSystem(new String("system_0"));
+
+                if (sys != null) {
+
+                    Controller c = (Controller) sys.get(Launcher.CONTROLLER);
     
-            } else if (e instanceof java.awt.KeyEvent) {
-                protected void processKeyEvent(KeyEvent e) {
-                    KeyListener listener = keyListener;
-                    if (listener != null) {
-                        int id = e.getID();
-                        switch(id) {
-                          case KeyEvent.KEY_TYPED:
-                            listener.keyTyped(e);
-                            break;
-                          case KeyEvent.KEY_PRESSED:
-                            listener.keyPressed(e);
-                            break;
-                          case KeyEvent.KEY_RELEASED:
-                            listener.keyReleased(e);
-                            break;
-                        }
-                    }
-                }
+                    if (c != null) {
     
-            } else if (e instanceof java.awt.ComponentEvent) {
-                protected void processComponentEvent(ComponentEvent e) {
-                    ComponentListener listener = componentListener;
-                    if (listener != null) {
-                        int id = e.getID();
-                        switch(id) {
-                          case ComponentEvent.COMPONENT_RESIZED:
-                            listener.componentResized(e);
-                            break;
-                          case ComponentEvent.COMPONENT_MOVED:
-                            listener.componentMoved(e);
-                            break;
-                          case ComponentEvent.COMPONENT_SHOWN:
-                            listener.componentShown(e);
-                            break;
-                          case ComponentEvent.COMPONENT_HIDDEN:
-                            listener.componentHidden(e);
-                            break;
-                        }
-                    }
-                }
-            } else if (e instanceof java.awt.InputMethodEvent) {
-                protected void processInputMethodEvent(InputMethodEvent e) {
-                    InputMethodListener listener = inputMethodListener;
-                    if (listener != null) {
-                        int id = e.getID();
-                        switch (id) {
-                          case InputMethodEvent.INPUT_METHOD_TEXT_CHANGED:
-                            listener.inputMethodTextChanged(e);
-                            break;
-                          case InputMethodEvent.CARET_POSITION_CHANGED:
-                            listener.caretPositionChanged(e);
-                            break;
-                        }
-                    }
-                }
-            } else if (e instanceof java.awt.HierarchyEvent) {
-                switch (e.getID()) {
-                  case java.awt.HierarchyEvent.HIERARCHY_CHANGED:
-                    protected void processHierarchyEvent(HierarchyEvent e) {
-                        HierarchyListener listener = hierarchyListener;
-                        if (listener != null) {
-                            int id = e.getID();
-                            switch (id) {
-                              case HierarchyEvent.HIERARCHY_CHANGED:
-                                listener.hierarchyChanged(e);
-                                break;
+                        m = (MouseModel) c.get(Controller.MOUSE_MODEL);
+    
+                        if (m != null) {
+    
+                            Space sp = (Space) m.get(MouseModel.POINTER_POSITION);
+    
+                            if (sp != null) {
+                                
+                                sp.set(Space.EXPANSE_X_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getX()));
+                                sp.set(Space.EXPANSE_Y_COORDINATE, new Integer(((java.awt.event.MouseEvent) evt).getY()));
+                                java.lang.System.out.println("\n\n\n\n\n CLICKED 1 \n\n\n\n\n");
+    
+                            } else {
+                    
+                                throw new NullPointerException("Could not handle java event. The pointer position is null.");
                             }
+    
+                        } else {
+                
+                            throw new NullPointerException("Could not handle java event. The mouse model is null.");
                         }
+    
+                    } else {
+            
+                        throw new NullPointerException("Could not handle java event. The controller is null.");
                     }
-                    break;
-                  case java.awt.HierarchyEvent.ANCESTOR_MOVED:
-                  case java.awt.HierarchyEvent.ANCESTOR_RESIZED:
-                    protected void processHierarchyBoundsEvent(HierarchyEvent e) {
-                        HierarchyBoundsListener listener = hierarchyBoundsListener;
-                        if (listener != null) {
-                            int id = e.getID();
-                            switch (id) {
-                              case HierarchyEvent.ANCESTOR_MOVED:
-                                listener.ancestorMoved(e);
-                                break;
-                              case HierarchyEvent.ANCESTOR_RESIZED:
-                                listener.ancestorResized(e);
-                                break;
-                            }
-                        }
-                    }
-                    break;
+    
+                } else {
+        
+                    throw new NullPointerException("Could not handle java event. The system is null.");
                 }
+
+            } else if (id == java.awt.event.MouseEvent.MOUSE_ENTERED) {
+
+                a = Controller.MOUSE_ENTERED_ACTION;
+                l = Signal.GUI_LANGUAGE;
+
+            } else if (id == java.awt.event.MouseEvent.MOUSE_EXITED) {
+
+                a = Controller.MOUSE_EXITED_ACTION;
+                l = Signal.GUI_LANGUAGE;
+
+            } else if (id == java.awt.event.MouseEvent.MOUSE_DRAGGED) {
+
+                a = Controller.MOUSE_DRAGGED_ACTION;
+                l = Signal.GUI_LANGUAGE;
+
+            } else if (id == java.awt.event.MouseEvent.MOUSE_MOVED) {
+
+                a = Controller.MOUSE_MOVED_ACTION;
+                l = Signal.GUI_LANGUAGE;
+
+            } else if (id == java.awt.event.MouseWheelEvent.MOUSE_WHEEL) {
+
+                a = Controller.MOUSE_WHEEL_ACTION;
+                l = Signal.GUI_LANGUAGE;
+
+            } else if (id == java.awt.event.KeyEvent.KEY_TYPED) {
+
+                a = Controller.KEY_TYPED_ACTION;
+                l = Signal.TUI_LANGUAGE;
+
+            } else if (id == java.awt.event.KeyEvent.KEY_RELEASED) {
+
+                a = Controller.KEY_RELEASED_ACTION;
+                l = Signal.TUI_LANGUAGE;
+
+            } else if (id == java.awt.event.KeyEvent.KEY_PRESSED) {
+
+                a = Controller.KEY_PRESSED_ACTION;
+                l = Signal.TUI_LANGUAGE;
+
+            } else if (id == java.awt.event.ComponentEvent.COMPONENT_RESIZED) {
+
+                a = Controller.COMPONENT_RESIZED_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.ComponentEvent.COMPONENT_MOVED) {
+
+                a = Controller.COMPONENT_MOVED_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.ComponentEvent.COMPONENT_SHOWN) {
+
+                a = Controller.COMPONENT_SHOWN_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.ComponentEvent.COMPONENT_HIDDEN) {
+
+                a = Controller.COMPONENT_HIDDEN_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.InputMethodEvent.INPUT_METHOD_TEXT_CHANGED) {
+
+                a = Controller.INPUT_METHOD_TEXT_CHANGED_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.InputMethodEvent.CARET_POSITION_CHANGED) {
+
+                a = Controller.CARET_POSITION_CHANGED_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.HierarchyEvent.HIERARCHY_CHANGED) {
+
+                a = Controller.HIERARCHY_CHANGED_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.HierarchyEvent.ANCESTOR_RESIZED) {
+
+                a = Controller.ANCESTOR_RESIZED_ACTION;
+                l = null;
+
+            } else if (id == java.awt.event.HierarchyEvent.ANCESTOR_MOVED) {
+
+                a = Controller.ANCESTOR_MOVED_ACTION;
+                l = null;
             }
-*/
 
-            Signal s = getSignal();
+            // This condition is solely for speeding up the signal (event) handling.
+            // If an action is still null here, then the java event was unknown
+            // so that in the comparisons above no action string could be assigned.
+            // In this case it does NOT make sense to continue the signal handling.
+            if (a != null) {
 
-            // Check for changed flags on computer (currently done by operating system),
-            // e.g. to receive a keyboard or mouse event and then create a CYBOP signal of it.
-            // In our case here we have checked the coming java events and will now
-            // transform them into a CYBOP signal.
-            receive(s, Signal.GUI_LANGUAGE, get(Launcher.USER), a);
-            // Actually handle the signal by broadcasting it through the whole system.
-            handle(s, new Boolean(Boolean.FALSE));
-            // After having handled the signal in this system, its answer will be sent -
-            // again by changing flags on the computer (done by operating system),
-            // e.g. a gui drawn onto the screen, a printout or a network message.
-            send(s);
-            // Reset the signal instead of destroying it and creating a new one all the time.
-            // This launcher contains only one single signal which is created on startup
-            // and destroyed on shutdown. That's why the signal needs to be resetted
-            // between occurences of the single events.
-            reset(s);
+                Signal s = getSignal();
+
+                // Check for changed flags on computer (currently done by operating system),
+                // e.g. to receive a keyboard or mouse event and then create a CYBOP signal of it.
+                // In our case here we have checked the coming java events and will now
+                // transform them into a CYBOP signal.
+                receive(s, l, get(Launcher.USER), a, m);
+                // Actually handle the signal by broadcasting it through the whole system.
+                handle(s, new Boolean(Boolean.FALSE));
+                // After having handled the signal in this system, its answer will be sent -
+                // again by changing flags on the computer (done by operating system),
+                // e.g. a gui drawn onto the screen, a printout or a network message.
+                send(s);
+                // Reset the signal instead of destroying it and creating a new one all the time.
+                // This launcher contains only one single signal which is created on startup
+                // and destroyed on shutdown. That's why the signal needs to be resetted
+                // between occurences of the single events.
+                reset(s);
+            }
 
         } else {
 
@@ -1435,9 +1443,6 @@ public class Launcher extends Family /*??implements
      * This sub class of java awt component is only meant to catch awt events.<br><br>
      *
      * Unfortunately, handling of most events is done via graphical components in java.
-     *
-     * By the way, Java events can be posted using:
-     * Toolkit.getEventQueue().postEvent(evt);
      */
     private class JavaEventCatcher extends java.awt.EventQueue {
 
@@ -1449,8 +1454,8 @@ public class Launcher extends Family /*??implements
          * The launcher.
          *
          * Exceptionally, the private internal class JavaEventCatcher has
-         * permittance to know about its container (this launcher).
-         * This is necessary to forward java awt events to this launcher.
+         * permittance to know about its container (the surrounding launcher).
+         * This is necessary to forward java awt events to the launcher.
          */             
         private Launcher launcher;
 
@@ -1493,26 +1498,21 @@ public class Launcher extends Family /*??implements
          * Abstract Windowing Toolkit (AWT).
          *
          * As we don't want to use event listeners and the like in CYBOP
-         * (they are improper and unnecessarily complicated in our opinion),
+         * (they are improper and unnecessarily complicated in our opinion -
+         * as interfaces/ concerns/ aspects are, anyway),
          * we catch all events directly in the event queue, their first point
          * of occurence in the Java Development Kit (JDK) Class Hierarchy.
          *
          * The AWT distinguishes between different types of events and filters
          * them out by comparing with "instanceof" - again improper.
          * As a rule of thumb, one should never use "instanceof" in
-         * Object Oriented Programming (OOP).
+         * Object Oriented Programming (OOP) but rather rely on inheritance.
          * However, we have to use these events here but will transform them
          * into CYBOP signals which have a predicate which is a string that
-         * identifies the action.
+         * identifies the signal's (event's) action.
          *
-         * The following java awt methods might be of interest in understanding
-         * how events are handled in the JDK and how clicked components are
-         * identified:
-         *
-         * java.awt.EventDispatchThread::pumpOneEventForHierarchy(...);
-         * java.awt.Toolkit::getSystemEventQueueImpl();
-         * java.awt.Container::dispatchEvent(AWTEvent e);
-         * java.awt.Container::getMouseEventTargetImpl();
+         * By the way, Java events can be posted using:
+         * Toolkit.getEventQueue().postEvent(evt);
          *
          * @param evt the java awt event sent directly from the JVM to here
          */
@@ -1520,14 +1520,18 @@ public class Launcher extends Family /*??implements
 
             //?? For now, we also call the AWT event handling.
             //?? Later, we will cut it off by removing this line.
+            //?? I tried removing this line:
+            //?? - the frame/window still gets created
+            //?? - but no contents (menue and other components) is shown
+            //?? Checking this out later.
             super.dispatchEvent(evt);
 
             try {
 
                 Launcher l = getLauncher();
-    
+
                 if (l != null) {
-                    
+
                     l.handle(evt);
 
                 } else {
