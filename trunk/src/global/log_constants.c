@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.3 $ $Date: 2004-10-21 11:45:33 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-10-27 13:45:03 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1548,6 +1548,14 @@ static const char USAGE_MESSAGE_ARRAY[] = {
     'E', 'x', 'a', 'm', 'p', 'l', 'e', ' ', '3', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'f', 'i', 'l', 'e', ' ', 'c', 'y', 'b', 'o', 'l', ' ', 'e', 'x', 'i', 't', '.', 'c', 'y', 'b', 'o', 'l'};
 static const char* USAGE_MESSAGE = USAGE_MESSAGE_ARRAY;
 static const int USAGE_MESSAGE_COUNT = 219;
+
+/** The New "Usage: " message array, pointer, count. */
+static const char USAGE_MESSAGE_NEW_ARRAY[] = {
+    'P', 'a', 'r', 'a', 'm', 'e', 't', 'e', 'r', 's', ' ', 'h', 'a', 'v', 'e', ' ', 't', 'o', ' ', 'b', 'e', ' ', 'g', 'i', 'v', 'e', 'n', '!', '\n',
+    'U', 's', 'a', 'g', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'o', 'n', 'f', 'i', 'g', 'f', 'i', 'l', 'e', '\n',
+    'E', 'x', 'a', 'm', 'p', 'l', 'e', ':', ' ', 'c', 'y', 'b', 'o', 'i', ' ', 'c', 'o', 'n', 'f', 'i', 'g', '/', 'c', 'o', 'n', 'f', 'i', 'g', '.', 'c', 'y', 'b', 'o', 'l'};
+static const char* USAGE_MESSAGE_NEW = USAGE_MESSAGE_NEW_ARRAY;
+static const int USAGE_MESSAGE_NEW_COUNT = 87;
 
 /** The "Could not execute CYBOI. The command line argument vector is null." message array, pointer, count. */
 static const char COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'e', 'x', 'e', 'c', 'u', 't', 'e', ' ', 'C', 'Y', 'B', 'O', 'I', '.', ' ', 'T', 'h', 'e', ' ', 'c', 'o', 'm', 'm', 'a', 'n', 'd', ' ', 'l', 'i', 'n', 'e', ' ', 'a', 'r', 'g', 'u', 'm', 'e', 'n', 't', ' ', 'v', 'e', 'c', 't', 'o', 'r', ' ', 'i', 's', ' ', 'n', 'u', 'l', 'l', '.'};
