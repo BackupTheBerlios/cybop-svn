@@ -1,5 +1,5 @@
 /*
- * $RCSfile: Descent.java,v $
+ * $RCSfile: Category.java,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,32 +22,25 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.basic;
+package cybop.core.category;
 
 /**
- * This class represents a <i>Descent</i>.
+ * This class represents a category.
  *
- * A <i>descent</i> contains all mechanisms that are necessary to let children
- * <i>inherit</i> properties of parents. This class follows the biological example
- * of <i>cell separation</i> where a <i>DNA</i> which contains genetical information
- * is passed from the parent cell to the new born cell.
- * In our case, the DNA is called <i>Configuration</i>
+ * A category classifies items with common properties into one group.
+ * The category can be named using the corresponding name attribute.
  *
- * This descent has nothing to do with the inheritance in object oriented programming.
- * It is rather some kind of forwarding (not extending) the same properties from
- * parents to children.
- *
- * @version $Revision: 1.1 $ $Date: 2003-04-30 14:37:17 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Descent extends Hierarchy {
+public class Category extends Map {
 
     //
     // Meta attributes.
     //
 
     /** The name. */
-    private String name;
+    private Array name;
 
     //
     // Name.
@@ -58,7 +51,7 @@ public class Descent extends Hierarchy {
      *
      * @return the name
      */
-    public String createName() {
+    public Array createName() {
 
         return null;
     }
@@ -68,7 +61,7 @@ public class Descent extends Hierarchy {
      *
      * @param n the name
      */
-    public void destroyName(String n) {
+    public void destroyName(Array n) {
     }
 
     /**
@@ -76,7 +69,7 @@ public class Descent extends Hierarchy {
      *
      * @param n the name
      */
-    public void setName(String n) {
+    public void setName(Array n) {
 
         this.name = n;
     }
@@ -86,31 +79,51 @@ public class Descent extends Hierarchy {
      *
      * @return the name
      */
-    public String getName() {
+    public Array getName() {
 
         return this.name;
     }
 
     //
-    // Initialization.
+    // Abstraction.
     //
 
     /**
-     * Initializes this category.
+     * Abstracts this category.
      */
-    public void initialize() throws Exception {
+    public void abstracc() throws Exception {
+
+        super.abstracc();
 
         setName(createName());
     }
 
     /**
-     * Finalizes this category.
+     * Deabstracts this category.
      */
-    public void finalizz() throws Exception {
+    public void deabstract() throws Exception {
 
-        char[] name = getName();
+        Array name = getName();
         setName(null);
         destroyName(name);
+        
+        super.deabstract();
+    }
+
+    //
+    // Naming.
+    //
+
+    /**
+     * Names this category.
+     */
+    public void name() throws Exception {
+    }
+
+    /**
+     * Unnames this category.
+     */
+    public void unname() throws Exception {
     }
 }
 

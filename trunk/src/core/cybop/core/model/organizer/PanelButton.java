@@ -29,7 +29,7 @@ import cybop.core.basic.Boolean;
 /**
  * This class represents a panel button.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PanelButton extends Button {
@@ -42,9 +42,9 @@ public class PanelButton extends Button {
      * Creates an encapsulated java swing button.
      *
      * @return the encapsulated java swing button
-     * @exception NullPointerException if the encapsulated java swing button is null
+     * @exception Exception if the encapsulated java swing button is null
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         javax.swing.JButton b = new javax.swing.JButton();
 
@@ -54,7 +54,7 @@ public class PanelButton extends Button {
 
         } else {
 
-            throw new NullPointerException("Could not create encapsulated java swing button. The encapsulated java swing button is null.");
+            throw new Exception("Could not create encapsulated java swing button. The encapsulated java swing button is null.");
         }
 
         return b;
@@ -64,9 +64,9 @@ public class PanelButton extends Button {
      * Destroys the encapsulated java swing button.
      *
      * @param o the encapsulated java swing button
-     * @exception NullPointerException if the encapsulated java swing button is null
+     * @exception Exception if the encapsulated java swing button is null
      */
-    public void destroyJavaObject(java.lang.Object o) throws NullPointerException {
+    public void destroyJavaObject(java.lang.Object o) throws Exception {
 
         javax.swing.JButton b = (javax.swing.JButton) o;
 
@@ -76,7 +76,7 @@ public class PanelButton extends Button {
 
         } else {
 
-            throw new NullPointerException("Could not destroy encapsulated java swing button. The encapsulated java swing button is null.");
+            throw new Exception("Could not destroy encapsulated java swing button. The encapsulated java swing button is null.");
         }
     }
 }

@@ -35,7 +35,7 @@ import cybop.core.system.chain.*;
  * It is the communication partner that can be asked by another system
  * to shutdown a system.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-29 07:15:17 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ShutdownSocket extends Socket {
@@ -75,10 +75,10 @@ public class ShutdownSocket extends Socket {
      *     <li>true: local server dummy which represents a remote system and
      *     needs to forward messages to the actual server</li>
      * </ul>
-     * @exception NullPointerException if the signal is null
-     * @exception NullPointerException if the action is null
+     * @exception Exception if the signal is null
+     * @exception Exception if the action is null
      */
-    public void handle(Signal s, Boolean b) throws Exception, NullPointerException {
+    public void handle(Signal s, Boolean b) throws Exception {
 
         super.handle(s, b);
 
@@ -95,22 +95,22 @@ public class ShutdownSocket extends Socket {
 
             } else {
 
-                throw new NullPointerException("Could not handle signal. The action is null.");
+                throw new Exception("Could not handle signal. The action is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not handle signal. The signal is null.");
+            throw new Exception("Could not handle signal. The signal is null.");
         }
     }
 
     /**
      * Shuts down the system.
      *
-     * @exception NullPointerException if the output stream is null
-     * @exception NullPointerException if the shutdown system action is null
+     * @exception Exception if the output stream is null
+     * @exception Exception if the shutdown system action is null
      */
-    public void shutdownSystem() throws Exception, NullPointerException {
+    public void shutdownSystem() throws Exception {
 
 /*??
         String s = ShutdownSocket.SHUTDOWN_SYSTEM_ACTION;
@@ -135,12 +135,12 @@ public class ShutdownSocket extends Socket {
 
             } else {
 
-                throw new NullPointerException("Could not shutdown system. The output stream is null.");
+                throw new Exception("Could not shutdown system. The output stream is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not shutdown system. The shutdown system action is null.");
+            throw new Exception("Could not shutdown system. The shutdown system action is null.");
         }
 */
     }

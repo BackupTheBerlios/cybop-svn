@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a head panel.
  *
- * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class HeadPanel extends Panel {
@@ -59,9 +59,9 @@ public class HeadPanel extends Panel {
      * Creates the encapsulated java swing panel.
      *
      * @return the encapsulated java swing panel
-     * @exception NullPointerException if the java swing panel is null
+     * @exception Exception if the java swing panel is null
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         javax.swing.JPanel p = new javax.swing.JPanel();
 
@@ -71,7 +71,7 @@ public class HeadPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not create java swing panel. The java swing panel is null.");
+            throw new Exception("Could not create java swing panel. The java swing panel is null.");
         }
 
         return p; 
@@ -92,7 +92,7 @@ public class HeadPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not destroy java swing panel. The java swing panel is null.");
+            throw new Exception("Could not destroy java swing panel. The java swing panel is null.");
         }
     }
 
@@ -105,9 +105,9 @@ public class HeadPanel extends Panel {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -132,7 +132,7 @@ public class HeadPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -140,9 +140,9 @@ public class HeadPanel extends Panel {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -165,7 +165,7 @@ public class HeadPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove item. The name is null.");
+            throw new Exception("Could not remove item. The name is null.");
         }
         
         super.removeChildItem(n);
@@ -223,10 +223,10 @@ public class HeadPanel extends Panel {
      * Sets the name label.
      *
      * @param l the name label
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the name label is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the name label is null
      */
-    public void setNameLabel(Label l) throws NullPointerException {
+    public void setNameLabel(Label l) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -243,7 +243,7 @@ public class HeadPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set name label. The java panel is null.");
+            throw new Exception("Could not set name label. The java panel is null.");
         }
     }
 
@@ -251,10 +251,10 @@ public class HeadPanel extends Panel {
      * Removes the name label.
      *
      * @param l the name label
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the name label is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the name label is null
      */
-    public void removeNameLabel(Label l) throws NullPointerException {
+    public void removeNameLabel(Label l) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -271,7 +271,7 @@ public class HeadPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove name label. The java panel is null.");
+            throw new Exception("Could not remove name label. The java panel is null.");
         }
     }
 
@@ -283,10 +283,10 @@ public class HeadPanel extends Panel {
      * Sets the version label.
      *
      * @param l the version label
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the version label is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the version label is null
      */
-    public void setVersionLabel(Label l) throws NullPointerException {
+    public void setVersionLabel(Label l) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -303,7 +303,7 @@ public class HeadPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set version label. The java panel is null.");
+            throw new Exception("Could not set version label. The java panel is null.");
         }
     }
 
@@ -311,10 +311,10 @@ public class HeadPanel extends Panel {
      * Removes the version label.
      *
      * @param l the version label
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the version label is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the version label is null
      */
-    public void removeVersionLabel(Label l) throws NullPointerException {
+    public void removeVersionLabel(Label l) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -331,7 +331,7 @@ public class HeadPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove version label. The java panel is null.");
+            throw new Exception("Could not remove version label. The java panel is null.");
         }
     }
 
@@ -343,10 +343,10 @@ public class HeadPanel extends Panel {
      * Sets the date label.
      *
      * @param l the date label
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the date label is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the date label is null
      */
-    public void setDateLabel(Label l) throws NullPointerException {
+    public void setDateLabel(Label l) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -363,7 +363,7 @@ public class HeadPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set date label. The java panel is null.");
+            throw new Exception("Could not set date label. The java panel is null.");
         }
     }
 
@@ -371,10 +371,10 @@ public class HeadPanel extends Panel {
      * Removes the date label.
      *
      * @param l the date label
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the date label is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the date label is null
      */
-    public void removeDateLabel(Label l) throws NullPointerException {
+    public void removeDateLabel(Label l) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -391,7 +391,7 @@ public class HeadPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove date label. The java panel is null.");
+            throw new Exception("Could not remove date label. The java panel is null.");
         }
     }
 
@@ -403,10 +403,10 @@ public class HeadPanel extends Panel {
      * Sets the slogan label.
      *
      * @param l the slogan label
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the slogan label is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the slogan label is null
      */
-    public void setSloganLabel(Label l) throws NullPointerException {
+    public void setSloganLabel(Label l) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -423,7 +423,7 @@ public class HeadPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set slogan label. The java panel is null.");
+            throw new Exception("Could not set slogan label. The java panel is null.");
         }
     }
 
@@ -431,10 +431,10 @@ public class HeadPanel extends Panel {
      * Removes the slogan label.
      *
      * @param l the slogan label
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the slogan label is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the slogan label is null
      */
-    public void removeSloganLabel(Label l) throws NullPointerException {
+    public void removeSloganLabel(Label l) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -451,7 +451,7 @@ public class HeadPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove slogan label. The java panel is null.");
+            throw new Exception("Could not remove slogan label. The java panel is null.");
         }
     }
 

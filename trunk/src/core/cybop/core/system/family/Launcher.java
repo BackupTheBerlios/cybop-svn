@@ -70,7 +70,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.21 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -218,7 +218,7 @@ public class Launcher extends Family {
 
             } else {
 
-                throw new NullPointerException("Could not launch system. The launcher is null.");
+                throw new Exception("Could not launch system. The launcher is null.");
             }
 
         } catch (Exception e) {
@@ -246,9 +246,9 @@ public class Launcher extends Family {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -261,7 +261,7 @@ public class Launcher extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -269,9 +269,9 @@ public class Launcher extends Family {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -282,7 +282,7 @@ public class Launcher extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
 
         super.removeChildItem(n);
@@ -362,10 +362,10 @@ public class Launcher extends Family {
      * @param key the argument key
      * @param def the default argument
      * @return the argument
-     * @exception NullPointerException if the arguments container is null
-     * @exception NullPointerException if an argument is null
+     * @exception Exception if the arguments container is null
+     * @exception Exception if an argument is null
      */
-    public Item getArgument(String key, Item def) throws NullPointerException {
+    public Item getArgument(String key, Item def) throws Exception {
 
         Item a = def;
         java.lang.String[] args = getArguments();
@@ -388,7 +388,7 @@ public class Launcher extends Family {
 
                 } else {
 
-                    throw new NullPointerException("Could not get argument. An argument is null.");
+                    throw new Exception("Could not get argument. An argument is null.");
                 }
                 
                 i++;
@@ -396,7 +396,7 @@ public class Launcher extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not get argument. The arguments container is null.");
+            throw new Exception("Could not get argument. The arguments container is null.");
         }
         
         return a;
@@ -410,9 +410,9 @@ public class Launcher extends Family {
      * Creates a java event catcher.
      *
      * @return the java event catcher
-     * @exception NullPointerException if the java event catcher is null
+     * @exception Exception if the java event catcher is null
      */
-    public JavaEventCatcher createJavaEventCatcher() throws Exception, NullPointerException {
+    public JavaEventCatcher createJavaEventCatcher() throws Exception {
 
         JavaEventCatcher jec = new JavaEventCatcher();
         
@@ -425,7 +425,7 @@ public class Launcher extends Family {
 
         } else {
     
-            throw new NullPointerException("Could not create java event catcher. The java event catcher is null.");
+            throw new Exception("Could not create java event catcher. The java event catcher is null.");
         }
         
         return jec;
@@ -435,9 +435,9 @@ public class Launcher extends Family {
      * Destroys the java event catcher.
      *
      * @param jec the java event catcher
-     * @exception NullPointerException if the java event catcher is null
+     * @exception Exception if the java event catcher is null
      */
-    public void destroyJavaEventCatcher(JavaEventCatcher jec) throws Exception, NullPointerException {
+    public void destroyJavaEventCatcher(JavaEventCatcher jec) throws Exception {
 
         if (jec != null) {
 
@@ -445,7 +445,7 @@ public class Launcher extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not destroy java event catcher. The java event catcher is null.");
+            throw new Exception("Could not destroy java event catcher. The java event catcher is null.");
         }
     }
 
@@ -477,9 +477,9 @@ public class Launcher extends Family {
      * Creates the shutdown hook.
      *
      * @return the shutdown hook
-     * @exception NullPointerException if the shutdown hook is null
+     * @exception Exception if the shutdown hook is null
      */
-    public ShutdownHook createShutdownHook() throws Exception, NullPointerException {
+    public ShutdownHook createShutdownHook() throws Exception {
 
         ShutdownHook sh = new ShutdownHook();
 
@@ -495,7 +495,7 @@ public class Launcher extends Family {
 
         } else {
     
-            throw new NullPointerException("Could not create shutdown hook. The shutdown hook is null.");
+            throw new Exception("Could not create shutdown hook. The shutdown hook is null.");
         }
 
         return sh;
@@ -505,9 +505,9 @@ public class Launcher extends Family {
      * Destroys the shutdown hook.
      *
      * @param sh the shutdown hook
-     * @exception NullPointerException if the shutdown hook is null
+     * @exception Exception if the shutdown hook is null
      */
-    public void destroyShutdownHook(ShutdownHook sh) throws Exception, NullPointerException {
+    public void destroyShutdownHook(ShutdownHook sh) throws Exception {
 
         if (sh != null) {
 
@@ -516,7 +516,7 @@ public class Launcher extends Family {
 
         } else {
     
-            throw new NullPointerException("Could not destroy shutdown hook. The shutdown hook is null.");
+            throw new Exception("Could not destroy shutdown hook. The shutdown hook is null.");
         }
     }
 
@@ -524,10 +524,10 @@ public class Launcher extends Family {
      * Sets the shutdown hook.
      *
      * @param sh the shutdown hook
-     * @exception NullPointerException if the java runtime is null
-     * @exception NullPointerException if the shutdown hook is null
+     * @exception Exception if the java runtime is null
+     * @exception Exception if the shutdown hook is null
      */
-    private void setShutdownHook(ShutdownHook sh) throws NullPointerException {
+    private void setShutdownHook(ShutdownHook sh) throws Exception {
 
         java.lang.Runtime r = java.lang.Runtime.getRuntime();
 
@@ -539,12 +539,12 @@ public class Launcher extends Family {
 
             } else {
     
-                throw new NullPointerException("Could not set shutdown hook. The shutdown hook is null.");
+                throw new Exception("Could not set shutdown hook. The shutdown hook is null.");
             }
     
         } else {
     
-            throw new NullPointerException("Could not set shutdown hook. The java runtime is null.");
+            throw new Exception("Could not set shutdown hook. The java runtime is null.");
         }
     }
 
@@ -552,10 +552,10 @@ public class Launcher extends Family {
      * Removes the shutdown hook.
      *
      * @param sh the shutdown hook
-     * @exception NullPointerException if the java runtime is null
-     * @exception NullPointerException if the shutdown hook is null
+     * @exception Exception if the java runtime is null
+     * @exception Exception if the shutdown hook is null
      */
-    private void removeShutdownHook(ShutdownHook sh) throws NullPointerException {
+    private void removeShutdownHook(ShutdownHook sh) throws Exception {
 
         java.lang.Runtime r = java.lang.Runtime.getRuntime();
         
@@ -567,12 +567,12 @@ public class Launcher extends Family {
 
             } else {
     
-                throw new NullPointerException("Could not remove shutdown hook. The shutdown hook is null.");
+                throw new Exception("Could not remove shutdown hook. The shutdown hook is null.");
             }
 
         } else {
     
-            throw new NullPointerException("Could not remove shutdown hook. The java runtime is null.");
+            throw new Exception("Could not remove shutdown hook. The java runtime is null.");
         }
     }
 
@@ -583,9 +583,9 @@ public class Launcher extends Family {
     /**
      * Configures this component.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void configure() throws Exception, NullPointerException {
+    public void configure() throws Exception {
         
         super.configure();
 
@@ -598,16 +598,16 @@ public class Launcher extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not configure component. The configuration is null.");
+            throw new Exception("Could not configure component. The configuration is null.");
         }
     }
 
     /**
      * Deconfigures this component.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void deconfigure() throws Exception, NullPointerException {
+    public void deconfigure() throws Exception {
 
         Configuration c = (Configuration) getChildItem(Component.CONFIGURATION);
 
@@ -620,7 +620,7 @@ public class Launcher extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not deconfigure component. The configuration is null.");
+            throw new Exception("Could not deconfigure component. The configuration is null.");
         }
 
         super.deconfigure();
@@ -692,9 +692,9 @@ public class Launcher extends Family {
     /**
      * Launches the system.
      *
-     * @exception NullPointerException if the signal is null
+     * @exception Exception if the signal is null
      */
-    public void launch() throws Exception, NullPointerException {
+    public void launch() throws Exception {
 
         Signal s = (Signal) createChildItem((String) getDefaultSignalCategory());
 
@@ -707,7 +707,7 @@ public class Launcher extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not launch. The signal is null.");
+            throw new Exception("Could not launch. The signal is null.");
         }
 
         storeSignal(s);
@@ -748,7 +748,7 @@ public class Launcher extends Family {
 
             } else {
 
-                throw new NullPointerException("Could not wait for signals. The shutdown flag is null.");
+                throw new Exception("Could not wait for signals. The shutdown flag is null.");
             }
 
             queued = fetchSignal();
@@ -784,7 +784,7 @@ public class Launcher extends Family {
         
                 } else {
         
-                    throw new NullPointerException("Could not reset signal. The signal is null.");
+                    throw new Exception("Could not reset signal. The signal is null.");
                 }
 */
             }
@@ -801,7 +801,7 @@ public class Launcher extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not wait for shutdown signal. The shutdown port is null.");
+            throw new Exception("Could not wait for shutdown signal. The shutdown port is null.");
         }
 
         java.net.Socket socket = null;
@@ -864,17 +864,17 @@ public class Launcher extends Family {
 
                     } else {
         
-                        throw new NullPointerException("Could not shutdown system using socket. The shutdown signal is null.");
+                        throw new Exception("Could not shutdown system using socket. The shutdown signal is null.");
                     }
 
                 } else {
 
-                    throw new NullPointerException("Could not wait for shutdown signal. The output stream is null.");
+                    throw new Exception("Could not wait for shutdown signal. The output stream is null.");
                 }
 
             } else {
 
-                throw new NullPointerException("Could not handle client socket connection made to the server socket. The client socket is null.");
+                throw new Exception("Could not handle client socket connection made to the server socket. The client socket is null.");
             }
         }
 
@@ -915,11 +915,11 @@ public class Launcher extends Family {
      * on any output devices.
      *
      * @param s the signal
-     * @exception NullPointerException if the signal is null
-     * @exception NullPointerException if the language is null
-     * @exception NullPointerException if the screen is null
+     * @exception Exception if the signal is null
+     * @exception Exception if the language is null
+     * @exception Exception if the screen is null
      */
-    public void send(Signal s) throws Exception, NullPointerException {
+    public void send(Signal s) throws Exception {
 
         String l = null;
 
@@ -940,18 +940,18 @@ public class Launcher extends Family {
 
                     } else {
 
-                        throw new NullPointerException("Could not send signal. The screen is null.");
+                        throw new Exception("Could not send signal. The screen is null.");
                     }
                 }
 
             } else {
 
-                throw new NullPointerException("Could not send signal. The language is null.");
+                throw new Exception("Could not send signal. The language is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not send signal. The signal is null.");
+            throw new Exception("Could not send signal. The signal is null.");
         }
     }
 
@@ -965,10 +965,10 @@ public class Launcher extends Family {
      *     <li>true: local server dummy which represents a remote system and
      *     needs to forward messages to the actual server</li>
      * </ul>
-     * @exception NullPointerException if the signal is null
-     * @exception NullPointerException if the action is null
+     * @exception Exception if the signal is null
+     * @exception Exception if the action is null
      */
-    public void handle(Signal s, Boolean b) throws Exception, NullPointerException {
+    public void handle(Signal s, Boolean b) throws Exception {
 
         super.handle(s, b);
 
@@ -1015,12 +1015,12 @@ public class Launcher extends Family {
 
             } else {
 
-                throw new NullPointerException("Could not handle signal. The action is null.");
+                throw new Exception("Could not handle signal. The action is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not handle signal. The signal is null.");
+            throw new Exception("Could not handle signal. The signal is null.");
         }
     }
 
@@ -1032,9 +1032,9 @@ public class Launcher extends Family {
      *
      * @param sys the system category
      * @param c the configuration location
-     * @exception NullPointerException if the signal is null
+     * @exception Exception if the signal is null
      */
-    public void startupSystem(String sys, String c) throws Exception, NullPointerException {
+    public void startupSystem(String sys, String c) throws Exception {
 
         setupJavaEventHandling();
         setSystem(Launcher.SYSTEM, createChildItem(sys/*??, c*/));
@@ -1051,7 +1051,7 @@ public class Launcher extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not startup system. The signal is null.");
+            throw new Exception("Could not startup system. The signal is null.");
         }
 
         storeSignal(s);
@@ -1060,10 +1060,10 @@ public class Launcher extends Family {
     /**
      * Sets up the java event handling.
      *
-     * @exception NullPointerException if the java awt toolkit is null
-     * @exception NullPointerException if the java event queue is null
+     * @exception Exception if the java awt toolkit is null
+     * @exception Exception if the java event queue is null
      */
-    private void setupJavaEventHandling() throws NullPointerException {
+    private void setupJavaEventHandling() throws Exception {
 
         // Start the awt event thread by calling getDefaultToolkit().
         // Otherwise, the event thread is started by calling the show method
@@ -1081,12 +1081,12 @@ public class Launcher extends Family {
 
             } else {
 
-                throw new NullPointerException("Could not startup system. The java event queue is null.");
+                throw new Exception("Could not startup system. The java event queue is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not startup system. The java awt toolkit is null.");
+            throw new Exception("Could not startup system. The java awt toolkit is null.");
         }
     }
 
@@ -1127,10 +1127,10 @@ public class Launcher extends Family {
     /**
      * Shuts down the system across a socket connection.
      *
-     * @exception NullPointerException if the signal is null
-     * @exception NullPointerException if the shutdown socket is null
+     * @exception Exception if the signal is null
+     * @exception Exception if the shutdown socket is null
      */
-    public void shutdownSystemAcrossSocket() throws Exception, NullPointerException {
+    public void shutdownSystemAcrossSocket() throws Exception {
 
         Signal s = (Signal) createChildItem((String) getDefaultSignalCategory());
 
@@ -1143,7 +1143,7 @@ public class Launcher extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not shutdown system across socket. The signal is null.");
+            throw new Exception("Could not shutdown system across socket. The signal is null.");
         }
 
         ShutdownSocket socket = (ShutdownSocket) createChildItem((String) getDefaultShutdownSocketCategory());
@@ -1155,7 +1155,7 @@ public class Launcher extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not shutdown system using socket. The shutdown socket is null.");
+            throw new Exception("Could not shutdown system using socket. The shutdown socket is null.");
         }
 
         destroyChildItem(socket);
@@ -1200,10 +1200,10 @@ public class Launcher extends Family {
      * Shows the component splash window.
      *
      * @param c the component splash window
-     * @exception NullPointerException if the component is null
+     * @exception Exception if the component is null
      */
 /*??
-    private void showComponentSplashWindow(BasicApplication c) throws Exception, NullPointerException {
+    private void showComponentSplashWindow(BasicApplication c) throws Exception {
 
         if (c != null) {
 
@@ -1216,7 +1216,7 @@ public class Launcher extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not show component splash window. The component is null.");
+            throw new Exception("Could not show component splash window. The component is null.");
         }
     }
 
@@ -1224,10 +1224,10 @@ public class Launcher extends Family {
      * Disposes the component splash window.
      *
      * @param c the component splash window
-     * @exception NullPointerException if the component is null
+     * @exception Exception if the component is null
      */
 /*??
-    private void hideComponentSplashWindow(BasicApplication c) throws Exception, NullPointerException {
+    private void hideComponentSplashWindow(BasicApplication c) throws Exception {
 
         if (c != null) {
 
@@ -1241,7 +1241,7 @@ public class Launcher extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not hide component splash window. The component is null.");
+            throw new Exception("Could not hide component splash window. The component is null.");
         }
     }
 */
@@ -1267,14 +1267,14 @@ public class Launcher extends Family {
      * java.awt.Container::getMouseEventTargetImpl();
      *
      * @param evt the java event
-     * @exception NullPointerException if the java event is null
-     * @exception NullPointerException if the signal is null
-     * @exception NullPointerException if the system is null
-     * @exception NullPointerException if the controller is null
-     * @exception NullPointerException if the mouse model is null
-     * @exception NullPointerException if the mouse pointer position is null
+     * @exception Exception if the java event is null
+     * @exception Exception if the signal is null
+     * @exception Exception if the system is null
+     * @exception Exception if the controller is null
+     * @exception Exception if the mouse model is null
+     * @exception Exception if the mouse pointer position is null
      */
-    public void handle(java.awt.AWTEvent evt) throws Exception, NullPointerException {
+    public void handle(java.awt.AWTEvent evt) throws Exception {
 
         log(Launcher.SIGNAL_LOG_LEVEL, evt.toString());
 
@@ -1384,22 +1384,22 @@ public class Launcher extends Family {
 
                             } else {
 
-                                throw new NullPointerException("Could not handle java event. The pointer position is null.");
+                                throw new Exception("Could not handle java event. The pointer position is null.");
                             }
     
                         } else {
                 
-                            throw new NullPointerException("Could not handle java event. The mouse model is null.");
+                            throw new Exception("Could not handle java event. The mouse model is null.");
                         }
     
                     } else {
             
-                        throw new NullPointerException("Could not handle java event. The controller is null.");
+                        throw new Exception("Could not handle java event. The controller is null.");
                     }
     
                 } else {
         
-                    throw new NullPointerException("Could not handle java event. The system is null.");
+                    throw new Exception("Could not handle java event. The system is null.");
                 }
 
             } else if (id == java.awt.event.MouseEvent.MOUSE_DRAGGED) {
@@ -1430,22 +1430,22 @@ public class Launcher extends Family {
 
                             } else {
 
-                                throw new NullPointerException("Could not handle java event. The pointer position is null.");
+                                throw new Exception("Could not handle java event. The pointer position is null.");
                             }
     
                         } else {
                 
-                            throw new NullPointerException("Could not handle java event. The mouse model is null.");
+                            throw new Exception("Could not handle java event. The mouse model is null.");
                         }
     
                     } else {
             
-                        throw new NullPointerException("Could not handle java event. The controller is null.");
+                        throw new Exception("Could not handle java event. The controller is null.");
                     }
     
                 } else {
         
-                    throw new NullPointerException("Could not handle java event. The system is null.");
+                    throw new Exception("Could not handle java event. The system is null.");
                 }
 
             } else if (id == java.awt.event.MouseEvent.MOUSE_ENTERED) {
@@ -1476,22 +1476,22 @@ public class Launcher extends Family {
 
                             } else {
 
-                                throw new NullPointerException("Could not handle java event. The pointer position is null.");
+                                throw new Exception("Could not handle java event. The pointer position is null.");
                             }
     
                         } else {
                 
-                            throw new NullPointerException("Could not handle java event. The mouse model is null.");
+                            throw new Exception("Could not handle java event. The mouse model is null.");
                         }
     
                     } else {
             
-                        throw new NullPointerException("Could not handle java event. The controller is null.");
+                        throw new Exception("Could not handle java event. The controller is null.");
                     }
     
                 } else {
         
-                    throw new NullPointerException("Could not handle java event. The system is null.");
+                    throw new Exception("Could not handle java event. The system is null.");
                 }
 
             } else if (id == java.awt.event.MouseEvent.MOUSE_EXITED) {
@@ -1522,22 +1522,22 @@ public class Launcher extends Family {
 
                             } else {
 
-                                throw new NullPointerException("Could not handle java event. The pointer position is null.");
+                                throw new Exception("Could not handle java event. The pointer position is null.");
                             }
     
                         } else {
                 
-                            throw new NullPointerException("Could not handle java event. The mouse model is null.");
+                            throw new Exception("Could not handle java event. The mouse model is null.");
                         }
     
                     } else {
             
-                        throw new NullPointerException("Could not handle java event. The controller is null.");
+                        throw new Exception("Could not handle java event. The controller is null.");
                     }
     
                 } else {
         
-                    throw new NullPointerException("Could not handle java event. The system is null.");
+                    throw new Exception("Could not handle java event. The system is null.");
                 }
 
             } else if (id == java.awt.event.MouseEvent.MOUSE_MOVED) {
@@ -1568,22 +1568,22 @@ public class Launcher extends Family {
 
                             } else {
 
-                                throw new NullPointerException("Could not handle java event. The pointer position is null.");
+                                throw new Exception("Could not handle java event. The pointer position is null.");
                             }
     
                         } else {
                 
-                            throw new NullPointerException("Could not handle java event. The mouse model is null.");
+                            throw new Exception("Could not handle java event. The mouse model is null.");
                         }
     
                     } else {
             
-                        throw new NullPointerException("Could not handle java event. The controller is null.");
+                        throw new Exception("Could not handle java event. The controller is null.");
                     }
     
                 } else {
         
-                    throw new NullPointerException("Could not handle java event. The system is null.");
+                    throw new Exception("Could not handle java event. The system is null.");
                 }
 
             } else if (id == java.awt.event.MouseEvent.MOUSE_PRESSED) {
@@ -1614,22 +1614,22 @@ public class Launcher extends Family {
 
                             } else {
 
-                                throw new NullPointerException("Could not handle java event. The pointer position is null.");
+                                throw new Exception("Could not handle java event. The pointer position is null.");
                             }
     
                         } else {
                 
-                            throw new NullPointerException("Could not handle java event. The mouse model is null.");
+                            throw new Exception("Could not handle java event. The mouse model is null.");
                         }
     
                     } else {
             
-                        throw new NullPointerException("Could not handle java event. The controller is null.");
+                        throw new Exception("Could not handle java event. The controller is null.");
                     }
     
                 } else {
         
-                    throw new NullPointerException("Could not handle java event. The system is null.");
+                    throw new Exception("Could not handle java event. The system is null.");
                 }
 
             } else if (id == java.awt.event.MouseEvent.MOUSE_RELEASED) {
@@ -1660,22 +1660,22 @@ public class Launcher extends Family {
 
                             } else {
 
-                                throw new NullPointerException("Could not handle java event. The pointer position is null.");
+                                throw new Exception("Could not handle java event. The pointer position is null.");
                             }
     
                         } else {
                 
-                            throw new NullPointerException("Could not handle java event. The mouse model is null.");
+                            throw new Exception("Could not handle java event. The mouse model is null.");
                         }
     
                     } else {
             
-                        throw new NullPointerException("Could not handle java event. The controller is null.");
+                        throw new Exception("Could not handle java event. The controller is null.");
                     }
     
                 } else {
         
-                    throw new NullPointerException("Could not handle java event. The system is null.");
+                    throw new Exception("Could not handle java event. The system is null.");
                 }
 
             } else if (id == java.awt.event.MouseWheelEvent.MOUSE_WHEEL) {
@@ -1706,7 +1706,7 @@ public class Launcher extends Family {
 
                 } else {
         
-                    throw new NullPointerException("Could not handle java event. The signal is null.");
+                    throw new Exception("Could not handle java event. The signal is null.");
                 }
 
                 storeSignal(s);
@@ -1714,7 +1714,7 @@ public class Launcher extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not handle java event. The java event is null.");
+            throw new Exception("Could not handle java event. The java event is null.");
         }
     }
 
@@ -1817,7 +1817,7 @@ public class Launcher extends Family {
 
                 } else {
 
-                    throw new NullPointerException("Could not dispatch java awt event. The launcher is null.");
+                    throw new Exception("Could not dispatch java awt event. The launcher is null.");
                 }
     
             } catch (Exception e) {

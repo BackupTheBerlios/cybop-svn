@@ -29,7 +29,7 @@ import cybop.core.model.*;
 /**
  * This class represents a portal tool bar.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalToolBar extends ToolBar {
@@ -73,10 +73,10 @@ public class PortalToolBar extends ToolBar {
      * Creates the show application tree button.
      *
      * @return the show application tree button
-     * @exception NullPointerException if the button is null
-     * @exception NullPointerException if the image icon is null
+     * @exception Exception if the button is null
+     * @exception Exception if the image icon is null
      */
-    public Button createShowApplicationTreeButton() throws NullPointerException
+    public Button createShowApplicationTreeButton() throws Exception
     {
 
         Button b = new Button();
@@ -96,7 +96,7 @@ public class PortalToolBar extends ToolBar {
         else
         {
 
-            throw new NullPointerException("Could not create show application tree button. The button is null.");
+            throw new Exception("Could not create show application tree button. The button is null.");
         }
 
         return b;
@@ -106,10 +106,10 @@ public class PortalToolBar extends ToolBar {
      * Creates the configure application tree button.
      *
      * @return the configure application tree button
-     * @exception NullPointerException if the button is null
-     * @exception NullPointerException if the image icon is null
+     * @exception Exception if the button is null
+     * @exception Exception if the image icon is null
      */
-    public Button createConfigureApplicationTreeButton() throws NullPointerException
+    public Button createConfigureApplicationTreeButton() throws Exception
     {
 
         Button b = new Button();
@@ -129,7 +129,7 @@ public class PortalToolBar extends ToolBar {
         else
         {
 
-            throw new NullPointerException("Could not create configure application tree button. The button is null.");
+            throw new Exception("Could not create configure application tree button. The button is null.");
         }
 
         return b;
@@ -139,10 +139,10 @@ public class PortalToolBar extends ToolBar {
      * Creates the configure Res Medicinae button.
      *
      * @return the configure Res Medicinae button
-     * @exception NullPointerException if the button is null
-     * @exception NullPointerException if the image icon is null
+     * @exception Exception if the button is null
+     * @exception Exception if the image icon is null
      */
-    public Button createConfigureResMedicinaeButton() throws NullPointerException
+    public Button createConfigureResMedicinaeButton() throws Exception
     {
 
         Button b = new Button();
@@ -162,7 +162,7 @@ public class PortalToolBar extends ToolBar {
         else
         {
 
-            throw new NullPointerException("Could not create configure Res Medicinae button. The button is null.");
+            throw new Exception("Could not create configure Res Medicinae button. The button is null.");
         }
 
         return b;
@@ -172,10 +172,10 @@ public class PortalToolBar extends ToolBar {
      * Creates the show help contents button.
      *
      * @return the show help contents button
-     * @exception NullPointerException if the button is null
-     * @exception NullPointerException if the image icon is null
+     * @exception Exception if the button is null
+     * @exception Exception if the image icon is null
      */
-    public Button createShowHelpContentsButton() throws NullPointerException
+    public Button createShowHelpContentsButton() throws Exception
     {
 
         Button b = new Button();
@@ -195,7 +195,7 @@ public class PortalToolBar extends ToolBar {
         else
         {
 
-            throw new NullPointerException("Could not create show help contents button. The button is null.");
+            throw new Exception("Could not create show help contents button. The button is null.");
         }
 
         return b;
@@ -205,10 +205,10 @@ public class PortalToolBar extends ToolBar {
      * Creates the link to website button.
      *
      * @return the link to website button
-     * @exception NullPointerException if the button is null
-     * @exception NullPointerException if the image icon is null
+     * @exception Exception if the button is null
+     * @exception Exception if the image icon is null
      */
-    public Button createLinkToWebsiteButton() throws NullPointerException
+    public Button createLinkToWebsiteButton() throws Exception
     {
 
         Button b = new Button();
@@ -228,7 +228,7 @@ public class PortalToolBar extends ToolBar {
         else
         {
 
-            throw new NullPointerException("Could not create link to website button. The button is null.");
+            throw new Exception("Could not create link to website button. The button is null.");
         }
 
         return b;
@@ -238,10 +238,10 @@ public class PortalToolBar extends ToolBar {
      * Creates the about dialog controller button.
      *
      * @return the about dialog controller button
-     * @exception NullPointerException if the button is null
-     * @exception NullPointerException if the image icon is null
+     * @exception Exception if the button is null
+     * @exception Exception if the image icon is null
      */
-    public Button createAboutDialogControllerButton() throws NullPointerException
+    public Button createAboutDialogControllerButton() throws Exception
     {
 
         Button b = new Button();
@@ -262,7 +262,7 @@ public class PortalToolBar extends ToolBar {
         else
         {
 
-            throw new NullPointerException("Could not create about dialog controller button. The button is null.");
+            throw new Exception("Could not create about dialog controller button. The button is null.");
         }
 
         return b;

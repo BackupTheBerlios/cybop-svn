@@ -31,7 +31,7 @@ import cybop.core.model.*;
 /**
  * This class represents a scroll pane.
  *
- * @version $Revision: 1.4 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ScrollPane extends Organizer {
@@ -76,9 +76,9 @@ public class ScrollPane extends Organizer {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -123,7 +123,7 @@ public class ScrollPane extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -131,9 +131,9 @@ public class ScrollPane extends Organizer {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -176,7 +176,7 @@ public class ScrollPane extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not remove item. The name is null.");
+            throw new Exception("Could not remove item. The name is null.");
         }
 
         super.removeChildItem(n);
@@ -190,9 +190,9 @@ public class ScrollPane extends Organizer {
      * Creates an encapsulated java swing scroll pane.
      *
      * @return the encapsulated java swing scroll pane
-     * @exception NullPointerException if the encapsulated java swing scroll pane is null
+     * @exception Exception if the encapsulated java swing scroll pane is null
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         javax.swing.JScrollPane sp = new javax.swing.JScrollPane();
 
@@ -200,7 +200,7 @@ public class ScrollPane extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not create encapsulated java swing scroll pane. The encapsulated java swing scroll pane is null.");
+            throw new Exception("Could not create encapsulated java swing scroll pane. The encapsulated java swing scroll pane is null.");
         }
 
         return sp;
@@ -308,10 +308,10 @@ public class ScrollPane extends Organizer {
      * Sets the viewport.
      *
      * @param vp the viewport
-     * @exception NullPointerException if the java scroll pane is null
-     * @exception NullPointerException if the viewport is null
+     * @exception Exception if the java scroll pane is null
+     * @exception Exception if the viewport is null
      */
-    public void setViewport(Viewport vp) throws NullPointerException {
+    public void setViewport(Viewport vp) throws Exception {
 
         javax.swing.JScrollPane sp = (javax.swing.JScrollPane) getJavaObject();
 
@@ -323,12 +323,12 @@ public class ScrollPane extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not set viewport. The viewport is null.");
+                throw new Exception("Could not set viewport. The viewport is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set viewport. The java scroll pane is null.");
+            throw new Exception("Could not set viewport. The java scroll pane is null.");
         }
     }
 
@@ -340,10 +340,10 @@ public class ScrollPane extends Organizer {
      * Sets the horizontal scroll bar.
      *
      * @param sb the horizontal scroll bar
-     * @exception NullPointerException if the java scroll pane is null
-     * @exception NullPointerException if the horizontal scroll bar is null
+     * @exception Exception if the java scroll pane is null
+     * @exception Exception if the horizontal scroll bar is null
      */
-    public void setHorizontalScrollBar(ScrollBar sb) throws NullPointerException {
+    public void setHorizontalScrollBar(ScrollBar sb) throws Exception {
 
         javax.swing.JScrollPane sp = (javax.swing.JScrollPane) getJavaObject();
 
@@ -355,12 +355,12 @@ public class ScrollPane extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not set horizontal scroll bar. The horizontal scroll bar is null.");
+                throw new Exception("Could not set horizontal scroll bar. The horizontal scroll bar is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set horizontal scroll bar. The java scroll pane is null.");
+            throw new Exception("Could not set horizontal scroll bar. The java scroll pane is null.");
         }
     }
 
@@ -372,10 +372,10 @@ public class ScrollPane extends Organizer {
      * Sets the vertical scroll bar.
      *
      * @param sb the vertical scroll bar
-     * @exception NullPointerException if the java scroll pane is null
-     * @exception NullPointerException if the vertical scroll bar is null
+     * @exception Exception if the java scroll pane is null
+     * @exception Exception if the vertical scroll bar is null
      */
-    public void setVerticalScrollBar(ScrollBar sb) throws NullPointerException {
+    public void setVerticalScrollBar(ScrollBar sb) throws Exception {
 
         javax.swing.JScrollPane sp = (javax.swing.JScrollPane) getJavaObject();
 
@@ -387,12 +387,12 @@ public class ScrollPane extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not set vertical scroll bar. The vertical scroll bar is null.");
+                throw new Exception("Could not set vertical scroll bar. The vertical scroll bar is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set vertical scroll bar. The java scroll pane is null.");
+            throw new Exception("Could not set vertical scroll bar. The java scroll pane is null.");
         }
     }
 
@@ -404,10 +404,10 @@ public class ScrollPane extends Organizer {
      * Sets the row header.
      *
      * @param rh the row header
-     * @exception NullPointerException if the java scroll pane is null
-     * @exception NullPointerException if the row header is null
+     * @exception Exception if the java scroll pane is null
+     * @exception Exception if the row header is null
      */
-    public void setRowHeader(Viewport rh) throws NullPointerException {
+    public void setRowHeader(Viewport rh) throws Exception {
 
         javax.swing.JScrollPane sp = (javax.swing.JScrollPane) getJavaObject();
 
@@ -419,12 +419,12 @@ public class ScrollPane extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not set row header. The row header is null.");
+                throw new Exception("Could not set row header. The row header is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set row header. The java scroll pane is null.");
+            throw new Exception("Could not set row header. The java scroll pane is null.");
         }
     }
 
@@ -436,10 +436,10 @@ public class ScrollPane extends Organizer {
      * Sets the column header.
      *
      * @param ch the column header
-     * @exception NullPointerException if the java scroll pane is null
-     * @exception NullPointerException if the column header is null
+     * @exception Exception if the java scroll pane is null
+     * @exception Exception if the column header is null
      */
-    public void setColumnHeader(Viewport ch) throws NullPointerException {
+    public void setColumnHeader(Viewport ch) throws Exception {
 
         javax.swing.JScrollPane sp = (javax.swing.JScrollPane) getJavaObject();
 
@@ -451,12 +451,12 @@ public class ScrollPane extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not set column header. The column header is null.");
+                throw new Exception("Could not set column header. The column header is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set column header. The java scroll pane is null.");
+            throw new Exception("Could not set column header. The java scroll pane is null.");
         }
     }
 
@@ -468,10 +468,10 @@ public class ScrollPane extends Organizer {
      * Sets the left top corner.
      *
      * @param c the left top corner
-     * @exception NullPointerException if the java scroll pane is null
-     * @exception NullPointerException if the left top corner is null
+     * @exception Exception if the java scroll pane is null
+     * @exception Exception if the left top corner is null
      */
-    public void setLeftTopCorner(Organizer c) throws NullPointerException {
+    public void setLeftTopCorner(Organizer c) throws Exception {
 
         javax.swing.JScrollPane sp = (javax.swing.JScrollPane) getJavaObject();
 
@@ -483,12 +483,12 @@ public class ScrollPane extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not set left top corner. The left top corner is null.");
+                throw new Exception("Could not set left top corner. The left top corner is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set left top corner. The java scroll pane is null.");
+            throw new Exception("Could not set left top corner. The java scroll pane is null.");
         }
     }
 
@@ -500,10 +500,10 @@ public class ScrollPane extends Organizer {
      * Sets the left bottom corner.
      *
      * @param c the left bottom corner
-     * @exception NullPointerException if the java scroll pane is null
-     * @exception NullPointerException if the left bottom corner is null
+     * @exception Exception if the java scroll pane is null
+     * @exception Exception if the left bottom corner is null
      */
-    public void setLeftBottomCorner(Organizer c) throws NullPointerException {
+    public void setLeftBottomCorner(Organizer c) throws Exception {
 
         javax.swing.JScrollPane sp = (javax.swing.JScrollPane) getJavaObject();
 
@@ -515,12 +515,12 @@ public class ScrollPane extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not set left bottom corner. The left bottom corner is null.");
+                throw new Exception("Could not set left bottom corner. The left bottom corner is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set left bottom corner. The java scroll pane is null.");
+            throw new Exception("Could not set left bottom corner. The java scroll pane is null.");
         }
     }
 
@@ -532,10 +532,10 @@ public class ScrollPane extends Organizer {
      * Sets the right top corner.
      *
      * @param c the right top corner
-     * @exception NullPointerException if the java scroll pane is null
-     * @exception NullPointerException if the right top corner is null
+     * @exception Exception if the java scroll pane is null
+     * @exception Exception if the right top corner is null
      */
-    public void setRightTopCorner(Organizer c) throws NullPointerException {
+    public void setRightTopCorner(Organizer c) throws Exception {
 
         javax.swing.JScrollPane sp = (javax.swing.JScrollPane) getJavaObject();
 
@@ -547,12 +547,12 @@ public class ScrollPane extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not set right top corner. The right top corner is null.");
+                throw new Exception("Could not set right top corner. The right top corner is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set right top corner. The java scroll pane is null.");
+            throw new Exception("Could not set right top corner. The java scroll pane is null.");
         }
     }
 
@@ -564,10 +564,10 @@ public class ScrollPane extends Organizer {
      * Sets the right bottom corner.
      *
      * @param c the right bottom corner
-     * @exception NullPointerException if the java scroll pane is null
-     * @exception NullPointerException if the right bottom corner is null
+     * @exception Exception if the java scroll pane is null
+     * @exception Exception if the right bottom corner is null
      */
-    public void setRightBottomCorner(Organizer c) throws NullPointerException {
+    public void setRightBottomCorner(Organizer c) throws Exception {
 
         javax.swing.JScrollPane sp = (javax.swing.JScrollPane) getJavaObject();
 
@@ -579,12 +579,12 @@ public class ScrollPane extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not set right bottom corner. The right bottom corner is null.");
+                throw new Exception("Could not set right bottom corner. The right bottom corner is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set right bottom corner. The java scroll pane is null.");
+            throw new Exception("Could not set right bottom corner. The java scroll pane is null.");
         }
     }
 }

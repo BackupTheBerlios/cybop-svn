@@ -49,7 +49,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.14 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -186,9 +186,9 @@ public class Family extends System {
      * Removes the child system from this family.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeSystem(String n) throws NullPointerException {
+    public void removeSystem(String n) throws Exception {
 
         if (n != null) {
 
@@ -196,7 +196,7 @@ public class Family extends System {
 
         } else {
 
-            throw new NullPointerException("Could not remove system. The name is null.");
+            throw new Exception("Could not remove system. The name is null.");
         }
     }
 
@@ -205,9 +205,9 @@ public class Family extends System {
      *
      * @param n the name
      * @param s the system
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setSystem(String n, Item s) throws NullPointerException {
+    public void setSystem(String n, Item s) throws Exception {
 
         Integer c = (Integer) getChildItem(Family.SYSTEMS_COUNT);
 
@@ -226,12 +226,12 @@ public class Family extends System {
 
             } else {
 
-                throw new NullPointerException("Could not set system. The name is null.");
+                throw new Exception("Could not set system. The name is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set system. The systems count is null.");
+            throw new Exception("Could not set system. The systems count is null.");
         }
     }
 
@@ -239,9 +239,9 @@ public class Family extends System {
      * Returns the child system.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public System getSystem(String n) throws NullPointerException {
+    public System getSystem(String n) throws Exception {
 
         System s = null;
 
@@ -251,7 +251,7 @@ public class Family extends System {
 
         } else {
 
-            throw new NullPointerException("Could not remove system. The name is null.");
+            throw new Exception("Could not remove system. The name is null.");
         }
         
         return s;
@@ -264,9 +264,9 @@ public class Family extends System {
     /**
      * Configures this family.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void configure() throws Exception, NullPointerException {
+    public void configure() throws Exception {
 
         super.configure();
 
@@ -291,9 +291,9 @@ public class Family extends System {
     /**
      * Deconfigures this family.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void deconfigure() throws Exception, NullPointerException {
+    public void deconfigure() throws Exception {
 
         Configuration c = (Configuration) getChildItem(Family.CONFIGURATION);
 
@@ -391,7 +391,7 @@ public class Family extends System {
 
         } else {
 
-            throw new NullPointerException("Could not initialize system. The systems count is null.");
+            throw new Exception("Could not initialize system. The systems count is null.");
         }
 
         //
@@ -419,7 +419,7 @@ public class Family extends System {
 
         } else {
 
-            throw new NullPointerException("Could not initialize system. The external systems count is null.");
+            throw new Exception("Could not initialize system. The external systems count is null.");
         }
 */
     }
@@ -464,7 +464,7 @@ public class Family extends System {
 
         } else {
 
-            throw new NullPointerException("Could not finalize system. The external systems count is null.");
+            throw new Exception("Could not finalize system. The external systems count is null.");
         }
 
         //
@@ -501,7 +501,7 @@ public class Family extends System {
 
         } else {
 
-            throw new NullPointerException("Could not finalize system. The systems count is null.");
+            throw new Exception("Could not finalize system. The systems count is null.");
         }
 */
 
@@ -557,12 +557,12 @@ public class Family extends System {
      *     <li>true: local server dummy which represents a remote system and
      *     needs to forward messages to the actual server</li>
      * </ul>
-     * @exception NullPointerException if the signal is null
-     * @exception NullPointerException if the subject is null
-     * @exception NullPointerException if the systems count is null
-     * @exception NullPointerException if a system is null
+     * @exception Exception if the signal is null
+     * @exception Exception if the subject is null
+     * @exception Exception if the systems count is null
+     * @exception Exception if a system is null
      */
-    public void handle(Signal s, Boolean b) throws Exception, NullPointerException {
+    public void handle(Signal s, Boolean b) throws Exception {
 
         if (s != null) {
             
@@ -603,7 +603,7 @@ public class Family extends System {
                 
                                 } else {
 
-                                    throw new NullPointerException("Could not handle signal. A system is null.");
+                                    throw new Exception("Could not handle signal. A system is null.");
                                 }
                                 
 //??                                break;
@@ -614,18 +614,18 @@ public class Family extends System {
 
                     } else {
 
-                        throw new NullPointerException("Could not handle signal. The systems count is null.");
+                        throw new Exception("Could not handle signal. The systems count is null.");
                     }
                 }
 
             } else {
 
-                throw new NullPointerException("Could not handle signal. The subject is null.");
+                throw new Exception("Could not handle signal. The subject is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not handle signal. The signal is null.");
+            throw new Exception("Could not handle signal. The signal is null.");
         }
     }
 }

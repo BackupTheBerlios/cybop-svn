@@ -50,7 +50,7 @@ import cybop.core.system.*;
  * (absolute paths) added together is larger than that, the tree will have
  * to be split to store its branches in more than just one property.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Configuration extends Chain {
@@ -78,9 +78,9 @@ public class Configuration extends Chain {
      * Creates the encapsulated java preferences.
      *
      * @return the encapsulated java preferences
-     * @exception NullPointerException if the encapsulated java preferences is null
+     * @exception Exception if the encapsulated java preferences is null
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         java.util.prefs.Preferences p = java.util.prefs.Preferences.systemNodeForPackage(getClass());
 
@@ -88,7 +88,7 @@ public class Configuration extends Chain {
 
         } else {
 
-            throw new NullPointerException("Could not create encapsulated java preferences. The encapsulated java preferences is null.");
+            throw new Exception("Could not create encapsulated java preferences. The encapsulated java preferences is null.");
         }
 
         return p;
@@ -216,10 +216,10 @@ public class Configuration extends Chain {
     /*
      * Loads configuration data.
      *
-     * @exception NullPointerException if the encapsulated java preferences object is null
+     * @exception Exception if the encapsulated java preferences object is null
      */
 /*??
-    public void load() throws NullPointerException, java.io.FileNotFoundException, java.io.IOException, java.util.prefs.InvalidPreferencesFormatException {
+    public void load() throws Exception, java.io.FileNotFoundException, java.io.IOException, java.util.prefs.InvalidPreferencesFormatException {
 
         java.io.InputStream is = new java.io.FileInputStream(getFile());
 
@@ -231,17 +231,17 @@ public class Configuration extends Chain {
             
         } else {
             
-            throw new NullPointerException("Could not load configuration data. The encapsulated java preferences object is null.");
+            throw new Exception("Could not load configuration data. The encapsulated java preferences object is null.");
         }
     }
 
     /*
      * Saves configuration data.
      *
-     * @exception NullPointerException if the encapsulated java preferences object is null
+     * @exception Exception if the encapsulated java preferences object is null
      */
 /*??
-    public void save() throws NullPointerException, java.io.FileNotFoundException, java.io.IOException, java.util.prefs.InvalidPreferencesFormatException, java.util.prefs.BackingStoreException {
+    public void save() throws Exception, java.io.FileNotFoundException, java.io.IOException, java.util.prefs.InvalidPreferencesFormatException, java.util.prefs.BackingStoreException {
 
         java.io.OutputStream os = new java.io.FileOutputStream(getFile());
 
@@ -253,7 +253,7 @@ public class Configuration extends Chain {
             
         } else {
             
-            throw new NullPointerException("Could not save configuration data. The encapsulated java preferences object is null.");
+            throw new Exception("Could not save configuration data. The encapsulated java preferences object is null.");
         }
     }
 */

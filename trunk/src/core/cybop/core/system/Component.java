@@ -63,7 +63,7 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.16 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends Chain {
@@ -103,9 +103,9 @@ public class Component extends Chain {
     /**
      * Configures this component.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void configure() throws Exception, NullPointerException {
+    public void configure() throws Exception {
         
         super.configure();
 
@@ -117,16 +117,16 @@ public class Component extends Chain {
 
         } else {
 
-            throw new NullPointerException("Could not configure component. The configuration is null.");
+            throw new Exception("Could not configure component. The configuration is null.");
         }
     }
 
     /**
      * Deconfigures this component.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void deconfigure() throws Exception, NullPointerException {
+    public void deconfigure() throws Exception {
 
         Configuration c = (Configuration) getChildItem(Component.CONFIGURATION);
 
@@ -137,7 +137,7 @@ public class Component extends Chain {
 
         } else {
 
-            throw new NullPointerException("Could not deconfigure component. The configuration is null.");
+            throw new Exception("Could not deconfigure component. The configuration is null.");
         }
 
         super.deconfigure();

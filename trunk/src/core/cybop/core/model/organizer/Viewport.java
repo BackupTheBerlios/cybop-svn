@@ -30,7 +30,7 @@ import cybop.core.model.*;
 /**
  * This class represents a viewport.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Viewport extends Organizer {
@@ -53,9 +53,9 @@ public class Viewport extends Organizer {
      * Creates an encapsulated java swing viewport.
      *
      * @return the encapsulated java swing viewport
-     * @exception NullPointerException if the encapsulated java swing viewport is null
+     * @exception Exception if the encapsulated java swing viewport is null
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         javax.swing.JViewport v = new javax.swing.JViewport();
 
@@ -63,7 +63,7 @@ public class Viewport extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not create encapsulated java swing viewport. The encapsulated java swing viewport is null.");
+            throw new Exception("Could not create encapsulated java swing viewport. The encapsulated java swing viewport is null.");
         }
 
         return v;

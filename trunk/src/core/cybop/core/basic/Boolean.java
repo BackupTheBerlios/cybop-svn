@@ -40,7 +40,7 @@ package cybop.core.basic;
  * Of course, other coding schemes such as the four states of quark particles
  * may be used as well.
  *
- * @version $Revision: 1.4 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Boolean extends Quantity {
@@ -136,18 +136,18 @@ public class Boolean extends Quantity {
      * Sets the java primitive.
      *
      * @param p the java primitive
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the java object is null
      */
-    public void setJavaPrimitive(boolean p) throws NullPointerException {
+    public void setJavaPrimitive(boolean p) throws Exception {
     }
 
     /**
      * Returns the java primitive.
      *
      * @return the java primitive
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the java object is null
      */
-    public boolean getJavaPrimitive() throws NullPointerException {
+    public boolean getJavaPrimitive() throws Exception {
 
         boolean p = Boolean.DEFAULT;
         java.lang.Boolean j = (java.lang.Boolean) getJavaObject();
@@ -158,7 +158,7 @@ public class Boolean extends Quantity {
 
         } else {
         
-            throw new NullPointerException("Could not get java primitive. The java object is null.");
+            throw new Exception("Could not get java primitive. The java object is null.");
         }            
 
         return p;
@@ -174,11 +174,11 @@ public class Boolean extends Quantity {
      * @param b1 the boolean
      * @return true - if this boolean is equal to the given boolean;
      * false - otherwise
-     * @exception NullPointerException if the boolean is null
-     * @exception NullPointerException if the java boolean is null
-     * @exception NullPointerException if this java boolean is null
+     * @exception Exception if the boolean is null
+     * @exception Exception if the java boolean is null
+     * @exception Exception if this java boolean is null
      */
-    public boolean isEqualTo(Boolean b1) throws NullPointerException {
+    public boolean isEqualTo(Boolean b1) throws Exception {
 
         boolean result = Boolean.FALSE;
 
@@ -199,17 +199,17 @@ public class Boolean extends Quantity {
             
                 } else {
                     
-                    throw new NullPointerException("Could not test boolean. This java boolean is null.");
+                    throw new Exception("Could not test boolean. This java boolean is null.");
                 }
                 
             } else {
                 
-                throw new NullPointerException("Could not test boolean. The java boolean is null.");
+                throw new Exception("Could not test boolean. The java boolean is null.");
             }
             
         } else {
             
-            throw new NullPointerException("Could not test boolean. The boolean is null.");
+            throw new Exception("Could not test boolean. The boolean is null.");
         }
 
         return result;        
@@ -221,9 +221,9 @@ public class Boolean extends Quantity {
      * @param p1 the primitive boolean
      * @return true - if this boolean is equal to the given boolean;
      * false - otherwise
-     * @exception NullPointerException if this java boolean is null
+     * @exception Exception if this java boolean is null
      */
-    public boolean isEqualTo(boolean p1) throws NullPointerException {
+    public boolean isEqualTo(boolean p1) throws Exception {
 
         boolean result = Boolean.FALSE;
         java.lang.Boolean j2 = (java.lang.Boolean) getJavaObject();
@@ -237,7 +237,7 @@ public class Boolean extends Quantity {
 
         } else {
             
-            throw new NullPointerException("Could not test boolean. This java boolean is null.");
+            throw new Exception("Could not test boolean. This java boolean is null.");
         }
 
         return result;        
@@ -249,11 +249,11 @@ public class Boolean extends Quantity {
      * @param b the boolean
      * @return true - if this boolean is unequal to the given boolean;
      * false - otherwise
-     * @exception NullPointerException if the boolean is null
-     * @exception NullPointerException if the java boolean is null
-     * @exception NullPointerException if this java boolean is null
+     * @exception Exception if the boolean is null
+     * @exception Exception if the java boolean is null
+     * @exception Exception if this java boolean is null
      */
-    public boolean isUnequalTo(Boolean b) throws NullPointerException {
+    public boolean isUnequalTo(Boolean b) throws Exception {
 
         return !isEqualTo(b);        
     }
@@ -264,9 +264,9 @@ public class Boolean extends Quantity {
      * @param p the primitive boolean
      * @return true - if this boolean is unequal to the given boolean;
      * false - otherwise
-     * @exception NullPointerException if this java boolean is null
+     * @exception Exception if this java boolean is null
      */
-    public boolean isUnequalTo(boolean p) throws NullPointerException {
+    public boolean isUnequalTo(boolean p) throws Exception {
 
         return !isEqualTo(p);        
     }

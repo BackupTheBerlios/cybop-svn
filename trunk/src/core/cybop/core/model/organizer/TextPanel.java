@@ -31,7 +31,7 @@ import cybop.core.model.*;
 /**
  * This class represents a text panel.
  *
- * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class TextPanel extends Panel {
@@ -51,9 +51,9 @@ public class TextPanel extends Panel {
      * Creates the encapsulated java swing panel.
      *
      * @return the encapsulated java swing panel
-     * @exception NullPointerException if the java swing panel is null
+     * @exception Exception if the java swing panel is null
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         javax.swing.JLabel p = new javax.swing.JLabel();
 
@@ -63,7 +63,7 @@ public class TextPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not create java swing panel. The java swing panel is null.");
+            throw new Exception("Could not create java swing panel. The java swing panel is null.");
         }
 
         return p; 
@@ -84,7 +84,7 @@ public class TextPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not destroy java swing panel. The java swing panel is null.");
+            throw new Exception("Could not destroy java swing panel. The java swing panel is null.");
         }
     }
 
@@ -97,9 +97,9 @@ public class TextPanel extends Panel {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -112,7 +112,7 @@ public class TextPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -120,9 +120,9 @@ public class TextPanel extends Panel {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -133,7 +133,7 @@ public class TextPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove item. The name is null.");
+            throw new Exception("Could not remove item. The name is null.");
         }
         
         super.removeChildItem(n);
@@ -161,10 +161,10 @@ public class TextPanel extends Panel {
      * Sets the text.
      *
      * @param t the text
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the text is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the text is null
      */
-    public void setText(String t) throws NullPointerException {
+    public void setText(String t) throws Exception {
 
         javax.swing.JLabel p = (javax.swing.JLabel) getJavaObject();
 
@@ -181,7 +181,7 @@ public class TextPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set text. The java panel is null.");
+            throw new Exception("Could not set text. The java panel is null.");
         }
     }
 
@@ -189,10 +189,10 @@ public class TextPanel extends Panel {
      * Removes the text.
      *
      * @param t the text
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the text is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the text is null
      */
-    public void removeText(String t) throws NullPointerException {
+    public void removeText(String t) throws Exception {
 
         javax.swing.JLabel p = (javax.swing.JLabel) getJavaObject();
 
@@ -209,7 +209,7 @@ public class TextPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove text. The java panel is null.");
+            throw new Exception("Could not remove text. The java panel is null.");
         }
     }
 

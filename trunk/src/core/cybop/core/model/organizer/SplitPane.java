@@ -31,7 +31,7 @@ import cybop.core.model.*;
 /**
  * This class represents a split pane.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SplitPane extends Organizer {
@@ -55,9 +55,9 @@ public class SplitPane extends Organizer {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -74,7 +74,7 @@ public class SplitPane extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -82,9 +82,9 @@ public class SplitPane extends Organizer {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -99,7 +99,7 @@ public class SplitPane extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not remove item. The name is null.");
+            throw new Exception("Could not remove item. The name is null.");
         }
 
         super.removeChildItem(n);
@@ -113,9 +113,9 @@ public class SplitPane extends Organizer {
      * Creates an encapsulated java swing split pane.
      *
      * @return the encapsulated java swing split pane
-     * @exception NullPointerException if the encapsulated java swing split pane is null
+     * @exception Exception if the encapsulated java swing split pane is null
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         javax.swing.JSplitPane sp = new javax.swing.JSplitPane();
 
@@ -129,7 +129,7 @@ public class SplitPane extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not create encapsulated java swing split pane. The encapsulated java swing split pane is null.");
+            throw new Exception("Could not create encapsulated java swing split pane. The encapsulated java swing split pane is null.");
         }
 
         return sp;
@@ -167,10 +167,10 @@ public class SplitPane extends Organizer {
      * Sets the left organizer.
      *
      * @param c the left organizer
-     * @exception NullPointerException if the java split pane is null
-     * @exception NullPointerException if the left organizer is null
+     * @exception Exception if the java split pane is null
+     * @exception Exception if the left organizer is null
      */
-    public void setLeftOrganizer(Organizer c) throws NullPointerException {
+    public void setLeftOrganizer(Organizer c) throws Exception {
 
         javax.swing.JSplitPane sp = (javax.swing.JSplitPane) getJavaObject();
 
@@ -182,12 +182,12 @@ public class SplitPane extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not set left organizer. The left organizer is null.");
+                throw new Exception("Could not set left organizer. The left organizer is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set left organizer. The java split pane is null.");
+            throw new Exception("Could not set left organizer. The java split pane is null.");
         }
     }
 
@@ -195,10 +195,10 @@ public class SplitPane extends Organizer {
      * Removes the left organizer.
      *
      * @param c the left organizer
-     * @exception NullPointerException if the java split pane is null
-     * @exception NullPointerException if the left organizer is null
+     * @exception Exception if the java split pane is null
+     * @exception Exception if the left organizer is null
      */
-    public void removeLeftOrganizer(Organizer c) throws NullPointerException {
+    public void removeLeftOrganizer(Organizer c) throws Exception {
 
         javax.swing.JSplitPane sp = (javax.swing.JSplitPane) getJavaObject();
 
@@ -210,12 +210,12 @@ public class SplitPane extends Organizer {
 
             } else {
 
-                throw new NullPointerException("Could not remove left organizer. The left organizer is null.");
+                throw new Exception("Could not remove left organizer. The left organizer is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not remove left organizer. The java split pane is null.");
+            throw new Exception("Could not remove left organizer. The java split pane is null.");
         }
     }
 
@@ -227,10 +227,10 @@ public class SplitPane extends Organizer {
      * Sets the right organizer.
      *
      * @param c the right organizer
-     * @exception NullPointerException if the java split pane is null
-     * @exception NullPointerException if the right organizer is null
+     * @exception Exception if the java split pane is null
+     * @exception Exception if the right organizer is null
      */
-    public void setRightOrganizer(Organizer c) throws NullPointerException {
+    public void setRightOrganizer(Organizer c) throws Exception {
 
         javax.swing.JSplitPane sp = (javax.swing.JSplitPane) getJavaObject();
 
@@ -242,12 +242,12 @@ public class SplitPane extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not set right organizer. The right organizer is null.");
+                throw new Exception("Could not set right organizer. The right organizer is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set right organizer. The java split pane is null.");
+            throw new Exception("Could not set right organizer. The java split pane is null.");
         }
     }
 
@@ -255,10 +255,10 @@ public class SplitPane extends Organizer {
      * Removes the right organizer.
      *
      * @param c the right organizer
-     * @exception NullPointerException if the java split pane is null
-     * @exception NullPointerException if the right organizer is null
+     * @exception Exception if the java split pane is null
+     * @exception Exception if the right organizer is null
      */
-    public void removeRightOrganizer(Organizer c) throws NullPointerException {
+    public void removeRightOrganizer(Organizer c) throws Exception {
 
         javax.swing.JSplitPane sp = (javax.swing.JSplitPane) getJavaObject();
 
@@ -270,12 +270,12 @@ public class SplitPane extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not remove right organizer. The right organizer is null.");
+                throw new Exception("Could not remove right organizer. The right organizer is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not remove right organizer. The java split pane is null.");
+            throw new Exception("Could not remove right organizer. The java split pane is null.");
         }
     }
 

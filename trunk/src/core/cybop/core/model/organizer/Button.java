@@ -32,7 +32,7 @@ import cybop.core.model.*;
 /**
  * This class represents a button.
  *
- * @version $Revision: 1.7 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Button extends Organizer {
@@ -56,9 +56,9 @@ public class Button extends Organizer {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -75,7 +75,7 @@ public class Button extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -83,9 +83,9 @@ public class Button extends Organizer {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -100,7 +100,7 @@ public class Button extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not remove item. The name is null.");
+            throw new Exception("Could not remove item. The name is null.");
         }
 
         super.removeChildItem(n);
@@ -138,10 +138,10 @@ public class Button extends Organizer {
      * Sets the label.
      *
      * @param l the label
-     * @exception NullPointerException if the java menu item is null
-     * @exception NullPointerException if the label is null
+     * @exception Exception if the java menu item is null
+     * @exception Exception if the label is null
      */
-    public void setLabel(String l) throws NullPointerException {
+    public void setLabel(String l) throws Exception {
 
         javax.swing.AbstractButton b = (javax.swing.AbstractButton) getJavaObject();
 
@@ -153,12 +153,12 @@ public class Button extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not set label. The label is null.");
+                throw new Exception("Could not set label. The label is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set label. The java menu item is null.");
+            throw new Exception("Could not set label. The java menu item is null.");
         }
     }
 
@@ -166,10 +166,10 @@ public class Button extends Organizer {
      * Removes the label.
      *
      * @param l the label
-     * @exception NullPointerException if the java menu item is null
-     * @exception NullPointerException if the label is null
+     * @exception Exception if the java menu item is null
+     * @exception Exception if the label is null
      */
-    public void removeLabel(String l) throws NullPointerException {
+    public void removeLabel(String l) throws Exception {
 
         javax.swing.AbstractButton b = (javax.swing.AbstractButton) getJavaObject();
 
@@ -181,12 +181,12 @@ public class Button extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not remove label. The label is null.");
+                throw new Exception("Could not remove label. The label is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not remove label. The java menu item is null.");
+            throw new Exception("Could not remove label. The java menu item is null.");
         }
     }
 
@@ -198,11 +198,11 @@ public class Button extends Organizer {
      * Sets the mnemonic.
      *
      * @param m the mnemonic
-     * @exception NullPointerException if the java menu item is null
-     * @exception NullPointerException if the mnemonic is null
-     * @exception NullPointerException if the mnemonic java object is null
+     * @exception Exception if the java menu item is null
+     * @exception Exception if the mnemonic is null
+     * @exception Exception if the mnemonic java object is null
      */
-    public void setMnemonic(Integer m) throws NullPointerException {
+    public void setMnemonic(Integer m) throws Exception {
 
         javax.swing.AbstractButton b = (javax.swing.AbstractButton) getJavaObject();
 
@@ -218,17 +218,17 @@ public class Button extends Organizer {
 
                 } else {
         
-                    throw new NullPointerException("Could not set mnemonic. The mnemonic java object is null.");
+                    throw new Exception("Could not set mnemonic. The mnemonic java object is null.");
                 }
 
             } else {
     
-                throw new NullPointerException("Could not set mnemonic. The mnemonic is null.");
+                throw new Exception("Could not set mnemonic. The mnemonic is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set mnemonic. The java menu item is null.");
+            throw new Exception("Could not set mnemonic. The java menu item is null.");
         }
     }
 
@@ -236,11 +236,11 @@ public class Button extends Organizer {
      * Removes the mnemonic.
      *
      * @param m the mnemonic
-     * @exception NullPointerException if the java menu item is null
-     * @exception NullPointerException if the mnemonic is null
-     * @exception NullPointerException if the mnemonic java object is null
+     * @exception Exception if the java menu item is null
+     * @exception Exception if the mnemonic is null
+     * @exception Exception if the mnemonic java object is null
      */
-    public void removeMnemonic(Integer m) throws NullPointerException {
+    public void removeMnemonic(Integer m) throws Exception {
 
         javax.swing.AbstractButton b = (javax.swing.AbstractButton) getJavaObject();
 
@@ -256,17 +256,17 @@ public class Button extends Organizer {
 
                 } else {
         
-                    throw new NullPointerException("Could not set mnemonic. The mnemonic java object is null.");
+                    throw new Exception("Could not set mnemonic. The mnemonic java object is null.");
                 }
 
             } else {
     
-                throw new NullPointerException("Could not remove mnemonic. The mnemonic is null.");
+                throw new Exception("Could not remove mnemonic. The mnemonic is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not remove mnemonic. The java menu item is null.");
+            throw new Exception("Could not remove mnemonic. The java menu item is null.");
         }
     }
 

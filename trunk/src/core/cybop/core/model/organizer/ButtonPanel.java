@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a button panel.
  *
- * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ButtonPanel extends Panel {
@@ -71,9 +71,9 @@ public class ButtonPanel extends Panel {
      * Creates the encapsulated java swing panel.
      *
      * @return the encapsulated java swing panel
-     * @exception NullPointerException if the java swing panel is null
+     * @exception Exception if the java swing panel is null
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         javax.swing.JPanel p = new javax.swing.JPanel();
 
@@ -83,7 +83,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not create java swing panel. The java swing panel is null.");
+            throw new Exception("Could not create java swing panel. The java swing panel is null.");
         }
 
         return p; 
@@ -104,7 +104,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not destroy java swing panel. The java swing panel is null.");
+            throw new Exception("Could not destroy java swing panel. The java swing panel is null.");
         }
     }
 
@@ -117,9 +117,9 @@ public class ButtonPanel extends Panel {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -160,7 +160,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -168,9 +168,9 @@ public class ButtonPanel extends Panel {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -209,7 +209,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove item. The name is null.");
+            throw new Exception("Could not remove item. The name is null.");
         }
         
         super.removeChildItem(n);
@@ -307,10 +307,10 @@ public class ButtonPanel extends Panel {
      * Sets the ok button.
      *
      * @param b the ok button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the ok button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the ok button is null
      */
-    public void setOkButton(OkButton b) throws NullPointerException {
+    public void setOkButton(OkButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -327,7 +327,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set ok button. The java panel is null.");
+            throw new Exception("Could not set ok button. The java panel is null.");
         }
     }
 
@@ -335,10 +335,10 @@ public class ButtonPanel extends Panel {
      * Removes the ok button.
      *
      * @param b the ok button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the ok button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the ok button is null
      */
-    public void removeOkButton(OkButton b) throws NullPointerException {
+    public void removeOkButton(OkButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -355,7 +355,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove ok button. The java panel is null.");
+            throw new Exception("Could not remove ok button. The java panel is null.");
         }
     }
 
@@ -367,10 +367,10 @@ public class ButtonPanel extends Panel {
      * Sets the cancel button.
      *
      * @param b the cancel button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the cancel button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the cancel button is null
      */
-    public void setCancelButton(CancelButton b) throws NullPointerException {
+    public void setCancelButton(CancelButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -387,7 +387,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set cancel button. The java panel is null.");
+            throw new Exception("Could not set cancel button. The java panel is null.");
         }
     }
 
@@ -395,10 +395,10 @@ public class ButtonPanel extends Panel {
      * Removes the cancel button.
      *
      * @param b the cancel button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the cancel button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the cancel button is null
      */
-    public void removeCancelButton(CancelButton b) throws NullPointerException {
+    public void removeCancelButton(CancelButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -415,7 +415,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove cancel button. The java panel is null.");
+            throw new Exception("Could not remove cancel button. The java panel is null.");
         }
     }
 
@@ -427,10 +427,10 @@ public class ButtonPanel extends Panel {
      * Sets the yes button.
      *
      * @param b the yes button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the yes button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the yes button is null
      */
-    public void setYesButton(YesButton b) throws NullPointerException {
+    public void setYesButton(YesButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -447,7 +447,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set yes button. The java panel is null.");
+            throw new Exception("Could not set yes button. The java panel is null.");
         }
     }
 
@@ -455,10 +455,10 @@ public class ButtonPanel extends Panel {
      * Removes the yes button.
      *
      * @param b the yes button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the yes button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the yes button is null
      */
-    public void removeYesButton(YesButton b) throws NullPointerException {
+    public void removeYesButton(YesButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -475,7 +475,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove yes button. The java panel is null.");
+            throw new Exception("Could not remove yes button. The java panel is null.");
         }
     }
 
@@ -487,10 +487,10 @@ public class ButtonPanel extends Panel {
      * Sets the no button.
      *
      * @param b the no button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the no button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the no button is null
      */
-    public void setNoButton(NoButton b) throws NullPointerException {
+    public void setNoButton(NoButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -507,7 +507,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set no button. The java panel is null.");
+            throw new Exception("Could not set no button. The java panel is null.");
         }
     }
 
@@ -515,10 +515,10 @@ public class ButtonPanel extends Panel {
      * Removes the no button.
      *
      * @param b the no button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the no button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the no button is null
      */
-    public void removeNoButton(NoButton b) throws NullPointerException {
+    public void removeNoButton(NoButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -535,7 +535,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove no button. The java panel is null.");
+            throw new Exception("Could not remove no button. The java panel is null.");
         }
     }
 
@@ -547,10 +547,10 @@ public class ButtonPanel extends Panel {
      * Sets the apply button.
      *
      * @param b the apply button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the apply button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the apply button is null
      */
-    public void setApplyButton(ApplyButton b) throws NullPointerException {
+    public void setApplyButton(ApplyButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -567,7 +567,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set apply button. The java panel is null.");
+            throw new Exception("Could not set apply button. The java panel is null.");
         }
     }
 
@@ -575,10 +575,10 @@ public class ButtonPanel extends Panel {
      * Removes the apply button.
      *
      * @param b the apply button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the apply button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the apply button is null
      */
-    public void removeApplyButton(ApplyButton b) throws NullPointerException {
+    public void removeApplyButton(ApplyButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -595,7 +595,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove apply button. The java panel is null.");
+            throw new Exception("Could not remove apply button. The java panel is null.");
         }
     }
 
@@ -607,10 +607,10 @@ public class ButtonPanel extends Panel {
      * Sets the reset button.
      *
      * @param b the reset button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the reset button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the reset button is null
      */
-    public void setResetButton(ResetButton b) throws NullPointerException {
+    public void setResetButton(ResetButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -627,7 +627,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set reset button. The java panel is null.");
+            throw new Exception("Could not set reset button. The java panel is null.");
         }
     }
 
@@ -635,10 +635,10 @@ public class ButtonPanel extends Panel {
      * Removes the reset button.
      *
      * @param b the reset button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the reset button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the reset button is null
      */
-    public void removeResetButton(ResetButton b) throws NullPointerException {
+    public void removeResetButton(ResetButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -655,7 +655,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove reset button. The java panel is null.");
+            throw new Exception("Could not remove reset button. The java panel is null.");
         }
     }
 
@@ -667,10 +667,10 @@ public class ButtonPanel extends Panel {
      * Sets the help button.
      *
      * @param b the help button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the help button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the help button is null
      */
-    public void setHelpButton(HelpButton b) throws NullPointerException {
+    public void setHelpButton(HelpButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -687,7 +687,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set help button. The java panel is null.");
+            throw new Exception("Could not set help button. The java panel is null.");
         }
     }
 
@@ -695,10 +695,10 @@ public class ButtonPanel extends Panel {
      * Removes the help button.
      *
      * @param b the help button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the help button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the help button is null
      */
-    public void removeHelpButton(HelpButton b) throws NullPointerException {
+    public void removeHelpButton(HelpButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -715,7 +715,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove help button. The java panel is null.");
+            throw new Exception("Could not remove help button. The java panel is null.");
         }
     }
 
@@ -727,10 +727,10 @@ public class ButtonPanel extends Panel {
      * Sets the close button.
      *
      * @param b the close button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the close button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the close button is null
      */
-    public void setCloseButton(CloseButton b) throws NullPointerException {
+    public void setCloseButton(CloseButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -747,7 +747,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set close button. The java panel is null.");
+            throw new Exception("Could not set close button. The java panel is null.");
         }
     }
 
@@ -755,10 +755,10 @@ public class ButtonPanel extends Panel {
      * Removes the close button.
      *
      * @param b the close button
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the close button is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the close button is null
      */
-    public void removeCloseButton(CloseButton b) throws NullPointerException {
+    public void removeCloseButton(CloseButton b) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -775,7 +775,7 @@ public class ButtonPanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove close button. The java panel is null.");
+            throw new Exception("Could not remove close button. The java panel is null.");
         }
     }
 

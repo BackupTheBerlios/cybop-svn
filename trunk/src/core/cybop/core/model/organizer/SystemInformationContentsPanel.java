@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a system information contents panel.
  *
- * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationContentsPanel extends ContentsPanel {
@@ -56,9 +56,9 @@ public class SystemInformationContentsPanel extends ContentsPanel {
      * Creates the encapsulated java swing panel.
      *
      * @return the encapsulated java swing panel
-     * @exception NullPointerException if the java swing panel is null
+     * @exception Exception if the java swing panel is null
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         javax.swing.JPanel p = new javax.swing.JPanel();
 
@@ -68,7 +68,7 @@ public class SystemInformationContentsPanel extends ContentsPanel {
 
         } else {
 
-            throw new NullPointerException("Could not create java swing panel. The java swing panel is null.");
+            throw new Exception("Could not create java swing panel. The java swing panel is null.");
         }
 
         return p; 
@@ -89,7 +89,7 @@ public class SystemInformationContentsPanel extends ContentsPanel {
 
         } else {
 
-            throw new NullPointerException("Could not destroy java swing panel. The java swing panel is null.");
+            throw new Exception("Could not destroy java swing panel. The java swing panel is null.");
         }
     }
 
@@ -102,9 +102,9 @@ public class SystemInformationContentsPanel extends ContentsPanel {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -125,7 +125,7 @@ public class SystemInformationContentsPanel extends ContentsPanel {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -133,9 +133,9 @@ public class SystemInformationContentsPanel extends ContentsPanel {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -154,7 +154,7 @@ public class SystemInformationContentsPanel extends ContentsPanel {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
         
         super.removeChildItem(n);
@@ -202,10 +202,10 @@ public class SystemInformationContentsPanel extends ContentsPanel {
      * Sets the head panel.
      *
      * @param hp the head panel
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the head panel is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the head panel is null
      */
-    public void setHeadPanel(HeadPanel hp) throws NullPointerException {
+    public void setHeadPanel(HeadPanel hp) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -217,12 +217,12 @@ public class SystemInformationContentsPanel extends ContentsPanel {
 
             } else {
     
-                throw new NullPointerException("Could not set head panel. The head panel is null.");
+                throw new Exception("Could not set head panel. The head panel is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set head panel. The java panel is null.");
+            throw new Exception("Could not set head panel. The java panel is null.");
         }
     }
 
@@ -230,10 +230,10 @@ public class SystemInformationContentsPanel extends ContentsPanel {
      * Removes the head panel.
      *
      * @param hp the head panel
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the head panel is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the head panel is null
      */
-    public void removeHeadPanel(HeadPanel hp) throws NullPointerException {
+    public void removeHeadPanel(HeadPanel hp) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -245,12 +245,12 @@ public class SystemInformationContentsPanel extends ContentsPanel {
 
             } else {
     
-                throw new NullPointerException("Could not remove head panel. The head panel is null.");
+                throw new Exception("Could not remove head panel. The head panel is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not remove head panel. The java panel is null.");
+            throw new Exception("Could not remove head panel. The java panel is null.");
         }
     }
 
@@ -262,10 +262,10 @@ public class SystemInformationContentsPanel extends ContentsPanel {
      * Sets the tabbed pane.
      *
      * @param tp the tabbed pane
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the tabbed pane is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the tabbed pane is null
      */
-    public void setTabbedPane(TabbedPane tp) throws NullPointerException {
+    public void setTabbedPane(TabbedPane tp) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -277,12 +277,12 @@ public class SystemInformationContentsPanel extends ContentsPanel {
 
             } else {
     
-                throw new NullPointerException("Could not set tabbed pane. The tabbed pane is null.");
+                throw new Exception("Could not set tabbed pane. The tabbed pane is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set tabbed pane. The java panel is null.");
+            throw new Exception("Could not set tabbed pane. The java panel is null.");
         }
     }
 
@@ -290,10 +290,10 @@ public class SystemInformationContentsPanel extends ContentsPanel {
      * Removes the tabbed pane.
      *
      * @param tp the tabbed pane
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the tabbed pane is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the tabbed pane is null
      */
-    public void removeTabbedPane(TabbedPane tp) throws NullPointerException {
+    public void removeTabbedPane(TabbedPane tp) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -305,12 +305,12 @@ public class SystemInformationContentsPanel extends ContentsPanel {
 
             } else {
     
-                throw new NullPointerException("Could not remove tabbed pane. The tabbed pane is null.");
+                throw new Exception("Could not remove tabbed pane. The tabbed pane is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not remove tabbed pane. The java panel is null.");
+            throw new Exception("Could not remove tabbed pane. The java panel is null.");
         }
     }
 
@@ -322,10 +322,10 @@ public class SystemInformationContentsPanel extends ContentsPanel {
      * Sets the button panel.
      *
      * @param bp the button panel
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the button panel is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the button panel is null
      */
-    public void setButtonPanel(ButtonPanel bp) throws NullPointerException {
+    public void setButtonPanel(ButtonPanel bp) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -337,12 +337,12 @@ public class SystemInformationContentsPanel extends ContentsPanel {
 
             } else {
     
-                throw new NullPointerException("Could not set button panel. The button panel is null.");
+                throw new Exception("Could not set button panel. The button panel is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set button panel. The java panel is null.");
+            throw new Exception("Could not set button panel. The java panel is null.");
         }
     }
 
@@ -350,10 +350,10 @@ public class SystemInformationContentsPanel extends ContentsPanel {
      * Removes the button panel.
      *
      * @param bp the button panel
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the button panel is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the button panel is null
      */
-    public void removeButtonPanel(ButtonPanel bp) throws NullPointerException {
+    public void removeButtonPanel(ButtonPanel bp) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -365,12 +365,12 @@ public class SystemInformationContentsPanel extends ContentsPanel {
 
             } else {
     
-                throw new NullPointerException("Could not remove button panel. The button panel is null.");
+                throw new Exception("Could not remove button panel. The button panel is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not remove button panel. The java panel is null.");
+            throw new Exception("Could not remove button panel. The java panel is null.");
         }
     }
 

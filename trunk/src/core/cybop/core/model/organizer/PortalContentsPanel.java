@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a portal contents panel.
  *
- * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalContentsPanel extends ContentsPanel {
@@ -51,9 +51,9 @@ public class PortalContentsPanel extends ContentsPanel {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -66,7 +66,7 @@ public class PortalContentsPanel extends ContentsPanel {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -74,9 +74,9 @@ public class PortalContentsPanel extends ContentsPanel {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -87,7 +87,7 @@ public class PortalContentsPanel extends ContentsPanel {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
         
         super.removeChildItem(n);
@@ -115,10 +115,10 @@ public class PortalContentsPanel extends ContentsPanel {
      * Sets the portal split pane.
      *
      * @param sp the portal split pane
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the portal split pane is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the portal split pane is null
      */
-    public void setPortalSplitPane(PortalSplitPane sp) throws NullPointerException {
+    public void setPortalSplitPane(PortalSplitPane sp) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -130,12 +130,12 @@ public class PortalContentsPanel extends ContentsPanel {
 
             } else {
     
-                throw new NullPointerException("Could not set portal split pane. The portal split pane is null.");
+                throw new Exception("Could not set portal split pane. The portal split pane is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set portal split pane. The java panel is null.");
+            throw new Exception("Could not set portal split pane. The java panel is null.");
         }
     }
 
@@ -143,10 +143,10 @@ public class PortalContentsPanel extends ContentsPanel {
      * Removes the portal split pane.
      *
      * @param sp the portal split pane
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the portal split pane is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the portal split pane is null
      */
-    public void removePortalSplitPane(PortalSplitPane sp) throws NullPointerException {
+    public void removePortalSplitPane(PortalSplitPane sp) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -158,12 +158,12 @@ public class PortalContentsPanel extends ContentsPanel {
 
             } else {
     
-                throw new NullPointerException("Could not remove portal split pane. The portal split pane is null.");
+                throw new Exception("Could not remove portal split pane. The portal split pane is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not remove portal split pane. The java panel is null.");
+            throw new Exception("Could not remove portal split pane. The java panel is null.");
         }
     }
 

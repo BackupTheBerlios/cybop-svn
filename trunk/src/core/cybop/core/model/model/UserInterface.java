@@ -34,7 +34,7 @@ import cybop.core.model.organizer.*;
 /**
  * This class represents a user interface.
  *
- * @version $Revision: 1.9 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class UserInterface extends Model {
@@ -145,7 +145,7 @@ public class UserInterface extends Model {
 
                 } else {
         
-                    throw new NullPointerException("Could not create encapsulated java swing frame. The encapsulated java swing frame is null.");
+                    throw new Exception("Could not create encapsulated java swing frame. The encapsulated java swing frame is null.");
                 }
 
 /*??
@@ -160,7 +160,7 @@ public class UserInterface extends Model {
 
         } else {
 
-            throw new NullPointerException("Could not create frame. The user interface mode is null.");
+            throw new Exception("Could not create frame. The user interface mode is null.");
         }
 */
 
@@ -176,9 +176,9 @@ public class UserInterface extends Model {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -220,7 +220,7 @@ public class UserInterface extends Model {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -228,9 +228,9 @@ public class UserInterface extends Model {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -270,7 +270,7 @@ public class UserInterface extends Model {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
 
         super.removeChildItem(n);
@@ -402,10 +402,10 @@ public class UserInterface extends Model {
      * Sets the title.
      *
      * @param t the title
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the title is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the title is null
      */
-    public void setTitle(String t) throws NullPointerException {
+    public void setTitle(String t) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
 
@@ -417,12 +417,12 @@ public class UserInterface extends Model {
 
             } else {
     
-                throw new NullPointerException("Could not set title. The title is null.");
+                throw new Exception("Could not set title. The title is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set title. The java frame is null.");
+            throw new Exception("Could not set title. The java frame is null.");
         }
     }
 
@@ -430,10 +430,10 @@ public class UserInterface extends Model {
      * Removes the title.
      *
      * @param t the title
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the title is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the title is null
      */
-    public void removeTitle(String t) throws NullPointerException {
+    public void removeTitle(String t) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
 
@@ -445,12 +445,12 @@ public class UserInterface extends Model {
 
             } else {
     
-                throw new NullPointerException("Could not set title. The title is null.");
+                throw new Exception("Could not set title. The title is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set title. The java frame is null.");
+            throw new Exception("Could not set title. The java frame is null.");
         }
     }
 
@@ -462,10 +462,10 @@ public class UserInterface extends Model {
      * Sets the icon.
      *
      * @param i the icon
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the icon is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the icon is null
      */
-    public void setIcon(String i) throws NullPointerException {
+    public void setIcon(String i) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
     
@@ -477,12 +477,12 @@ public class UserInterface extends Model {
 
             } else {
     
-                throw new NullPointerException("Could not set icon. The icon is null.");
+                throw new Exception("Could not set icon. The icon is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set icon. The java frame is null.");
+            throw new Exception("Could not set icon. The java frame is null.");
         }
     }
 
@@ -490,10 +490,10 @@ public class UserInterface extends Model {
      * Removes the icon.
      *
      * @param i the icon
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the icon is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the icon is null
      */
-    public void removeIcon(String i) throws NullPointerException {
+    public void removeIcon(String i) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
     
@@ -505,12 +505,12 @@ public class UserInterface extends Model {
 
             } else {
     
-                throw new NullPointerException("Could not set icon. The icon is null.");
+                throw new Exception("Could not set icon. The icon is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set icon. The java frame is null.");
+            throw new Exception("Could not set icon. The java frame is null.");
         }
     }
 
@@ -522,10 +522,10 @@ public class UserInterface extends Model {
      * Sets the menu bar.
      *
      * @param m the menu bar
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the menu bar is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the menu bar is null
      */
-    public void setMenuBar(MenuBar m) throws NullPointerException {
+    public void setMenuBar(MenuBar m) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
     
@@ -537,12 +537,12 @@ public class UserInterface extends Model {
 
             } else {
     
-                throw new NullPointerException("Could not set menu bar. The menu bar is null.");
+                throw new Exception("Could not set menu bar. The menu bar is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set menu bar. The java frame is null.");
+            throw new Exception("Could not set menu bar. The java frame is null.");
         }
     }
 
@@ -550,10 +550,10 @@ public class UserInterface extends Model {
      * Removes the menu bar.
      *
      * @param m the menu bar
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the menu bar is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the menu bar is null
      */
-    public void removeMenuBar(MenuBar m) throws NullPointerException {
+    public void removeMenuBar(MenuBar m) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
     
@@ -565,12 +565,12 @@ public class UserInterface extends Model {
 
             } else {
     
-                throw new NullPointerException("Could not set menu bar. The menu bar is null.");
+                throw new Exception("Could not set menu bar. The menu bar is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set menu bar. The java frame is null.");
+            throw new Exception("Could not set menu bar. The java frame is null.");
         }
     }
 
@@ -582,11 +582,11 @@ public class UserInterface extends Model {
      * Sets the tool bar.
      *
      * @param t the tool bar
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the tool bar is null
-     * @exception NullPointerException if the content pane is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the tool bar is null
+     * @exception Exception if the content pane is null
      */
-    public void setToolBar(ToolBar t) throws NullPointerException {
+    public void setToolBar(ToolBar t) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
     
@@ -602,17 +602,17 @@ public class UserInterface extends Model {
 
                 } else {
         
-                    throw new NullPointerException("Could not set tool bar. The content pane is null.");
+                    throw new Exception("Could not set tool bar. The content pane is null.");
                 }
 
             } else {
     
-                throw new NullPointerException("Could not set tool bar. The tool bar is null.");
+                throw new Exception("Could not set tool bar. The tool bar is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set tool bar. The java frame is null.");
+            throw new Exception("Could not set tool bar. The java frame is null.");
         }
     }
 
@@ -620,11 +620,11 @@ public class UserInterface extends Model {
      * Removes the tool bar.
      *
      * @param t the tool bar
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the tool bar is null
-     * @exception NullPointerException if the content pane is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the tool bar is null
+     * @exception Exception if the content pane is null
      */
-    public void removeToolBar(ToolBar t) throws NullPointerException {
+    public void removeToolBar(ToolBar t) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
     
@@ -640,17 +640,17 @@ public class UserInterface extends Model {
 
                 } else {
         
-                    throw new NullPointerException("Could not set tool bar. The content pane is null.");
+                    throw new Exception("Could not set tool bar. The content pane is null.");
                 }
 
             } else {
     
-                throw new NullPointerException("Could not set tool bar. The tool bar is null.");
+                throw new Exception("Could not set tool bar. The tool bar is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set tool bar. The java frame is null.");
+            throw new Exception("Could not set tool bar. The java frame is null.");
         }
     }
 
@@ -662,11 +662,11 @@ public class UserInterface extends Model {
      * Sets the contents panel.
      *
      * @param c the contents panel
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the contents panel is null
-     * @exception NullPointerException if the content pane is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the contents panel is null
+     * @exception Exception if the content pane is null
      */
-    public void setContentsPanel(ContentsPanel c) throws NullPointerException {
+    public void setContentsPanel(ContentsPanel c) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
 
@@ -682,17 +682,17 @@ public class UserInterface extends Model {
 
                 } else {
         
-                    throw new NullPointerException("Could not set contents panel. The content pane is null.");
+                    throw new Exception("Could not set contents panel. The content pane is null.");
                 }
 
             } else {
     
-                throw new NullPointerException("Could not set contents panel. The contents panel is null.");
+                throw new Exception("Could not set contents panel. The contents panel is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set contents panel. The java frame is null.");
+            throw new Exception("Could not set contents panel. The java frame is null.");
         }
     }
 
@@ -700,11 +700,11 @@ public class UserInterface extends Model {
      * Removes the contents panel.
      *
      * @param c the contents panel
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the contents panel is null
-     * @exception NullPointerException if the content pane is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the contents panel is null
+     * @exception Exception if the content pane is null
      */
-    public void removeContentsPanel(ContentsPanel c) throws NullPointerException {
+    public void removeContentsPanel(ContentsPanel c) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
 
@@ -720,17 +720,17 @@ public class UserInterface extends Model {
 
                 } else {
         
-                    throw new NullPointerException("Could not set contents panel. The content pane is null.");
+                    throw new Exception("Could not set contents panel. The content pane is null.");
                 }
 
             } else {
     
-                throw new NullPointerException("Could not set contents panel. The contents panel is null.");
+                throw new Exception("Could not set contents panel. The contents panel is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set contents panel. The java frame is null.");
+            throw new Exception("Could not set contents panel. The java frame is null.");
         }
     }
 
@@ -742,11 +742,11 @@ public class UserInterface extends Model {
      * Sets the status bar.
      *
      * @param s the status bar
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the status bar is null
-     * @exception NullPointerException if the content pane is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the status bar is null
+     * @exception Exception if the content pane is null
      */
-    public void setStatusBar(StatusBar s) throws NullPointerException {
+    public void setStatusBar(StatusBar s) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
     
@@ -762,17 +762,17 @@ public class UserInterface extends Model {
 
                 } else {
         
-                    throw new NullPointerException("Could not set status bar. The content pane is null.");
+                    throw new Exception("Could not set status bar. The content pane is null.");
                 }
 
             } else {
     
-                throw new NullPointerException("Could not set status bar. The status bar is null.");
+                throw new Exception("Could not set status bar. The status bar is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set status bar. The java frame is null.");
+            throw new Exception("Could not set status bar. The java frame is null.");
         }
     }
 
@@ -780,11 +780,11 @@ public class UserInterface extends Model {
      * Removes the status bar.
      *
      * @param s the status bar
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the status bar is null
-     * @exception NullPointerException if the content pane is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the status bar is null
+     * @exception Exception if the content pane is null
      */
-    public void removeStatusBar(StatusBar s) throws NullPointerException {
+    public void removeStatusBar(StatusBar s) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
     
@@ -800,17 +800,17 @@ public class UserInterface extends Model {
 
                 } else {
         
-                    throw new NullPointerException("Could not set status bar. The content pane is null.");
+                    throw new Exception("Could not set status bar. The content pane is null.");
                 }
 
             } else {
     
-                throw new NullPointerException("Could not set status bar. The status bar is null.");
+                throw new Exception("Could not set status bar. The status bar is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set status bar. The java frame is null.");
+            throw new Exception("Could not set status bar. The java frame is null.");
         }
     }
 
@@ -822,10 +822,10 @@ public class UserInterface extends Model {
      * Sets the bounds.
      *
      * @param b the bounds
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the bounds is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the bounds is null
      */
-    public void setBounds(java.awt.Rectangle b) throws NullPointerException {
+    public void setBounds(java.awt.Rectangle b) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
     
@@ -837,12 +837,12 @@ public class UserInterface extends Model {
 
             } else {
     
-                throw new NullPointerException("Could not set bounds. The bounds is null.");
+                throw new Exception("Could not set bounds. The bounds is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set bounds. The java frame is null.");
+            throw new Exception("Could not set bounds. The java frame is null.");
         }
     }
 
@@ -850,10 +850,10 @@ public class UserInterface extends Model {
      * Removes the bounds.
      *
      * @param b the bounds
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the bounds is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the bounds is null
      */
-    public void removeBounds(java.awt.Rectangle b) throws NullPointerException {
+    public void removeBounds(java.awt.Rectangle b) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
     
@@ -865,12 +865,12 @@ public class UserInterface extends Model {
 
             } else {
     
-                throw new NullPointerException("Could not set bounds. The bounds is null.");
+                throw new Exception("Could not set bounds. The bounds is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set bounds. The java frame is null.");
+            throw new Exception("Could not set bounds. The java frame is null.");
         }
     }
 
@@ -879,10 +879,10 @@ public class UserInterface extends Model {
      *
      * @param def the default bounds
      * @return the bounds
-     * @exception NullPointerException if the configuration is null
-     * @exception NullPointerException if the default bounds is null
+     * @exception Exception if the configuration is null
+     * @exception Exception if the default bounds is null
      */
-    public java.awt.Rectangle configureBounds(java.awt.Rectangle def) throws NullPointerException {
+    public java.awt.Rectangle configureBounds(java.awt.Rectangle def) throws Exception {
 
 /*??
         java.awt.Rectangle r = def;
@@ -904,12 +904,12 @@ public class UserInterface extends Model {
 
             } else {
     
-                throw new NullPointerException("Could not configure bounds. The default bounds is null.");
+                throw new Exception("Could not configure bounds. The default bounds is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not configure bounds. The configuration is null.");
+            throw new Exception("Could not configure bounds. The configuration is null.");
         }
     
         return r;
@@ -922,10 +922,10 @@ public class UserInterface extends Model {
      * Deconfigures the bounds.
      *
      * @param r the bounds
-     * @exception NullPointerException if the configuration is null
-     * @exception NullPointerException if the bounds is null
+     * @exception Exception if the configuration is null
+     * @exception Exception if the bounds is null
      */
-    public void deconfigureBounds(java.awt.Rectangle r) throws NullPointerException {
+    public void deconfigureBounds(java.awt.Rectangle r) throws Exception {
 
 /*??
         Configuration c = (Configuration) getChildItem(UserInterface.CONFIGURATION);
@@ -941,12 +941,12 @@ public class UserInterface extends Model {
 
             } else {
     
-                throw new NullPointerException("Could not deconfigure window bounds. The window bounds is null.");
+                throw new Exception("Could not deconfigure window bounds. The window bounds is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not deconfigure window bounds. The configuration is null.");
+            throw new Exception("Could not deconfigure window bounds. The configuration is null.");
         }
 */
     }
@@ -959,10 +959,10 @@ public class UserInterface extends Model {
      * Sets the resizable flag.
      *
      * @param r the resizable flag
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the resizable flag is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the resizable flag is null
      */
-    public void setResizable(Boolean r) throws NullPointerException {
+    public void setResizable(Boolean r) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
     
@@ -974,12 +974,12 @@ public class UserInterface extends Model {
 
             } else {
     
-                throw new NullPointerException("Could not set resizable flag. The resizable flag is null.");
+                throw new Exception("Could not set resizable flag. The resizable flag is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set resizable flag. The java frame is null.");
+            throw new Exception("Could not set resizable flag. The java frame is null.");
         }
     }
 
@@ -987,10 +987,10 @@ public class UserInterface extends Model {
      * Removes the resizable flag.
      *
      * @param r the resizable flag
-     * @exception NullPointerException if the java frame is null
-     * @exception NullPointerException if the resizable flag is null
+     * @exception Exception if the java frame is null
+     * @exception Exception if the resizable flag is null
      */
-    public void removeResizable(Boolean r) throws NullPointerException {
+    public void removeResizable(Boolean r) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
     
@@ -1002,12 +1002,12 @@ public class UserInterface extends Model {
 
             } else {
     
-                throw new NullPointerException("Could not set resizable flag. The resizable flag is null.");
+                throw new Exception("Could not set resizable flag. The resizable flag is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set resizable flag. The java frame is null.");
+            throw new Exception("Could not set resizable flag. The java frame is null.");
         }
     }
 
@@ -1019,13 +1019,13 @@ public class UserInterface extends Model {
      * Configures the look and feel.
      *
      * @param def the default look and feel
-     * @exception NullPointerException if the configuration is null
-     * @exception NullPointerException if the default look and feel is null
-     * @exception NullPointerException if the look and feel id string is null
+     * @exception Exception if the configuration is null
+     * @exception Exception if the default look and feel is null
+     * @exception Exception if the look and feel id string is null
      * @exception Exception if the look and feel is invalid
      */
 /*??
-    public javax.swing.LookAndFeel configureLookAndFeel(javax.swing.LookAndFeel def) throws Exception, NullPointerException {
+    public javax.swing.LookAndFeel configureLookAndFeel(javax.swing.LookAndFeel def) throws Exception {
 
         javax.swing.LookAndFeel laf = def;
         Configuration c = (Configuration) getChildItem(UserInterface.CONFIGURATION);
@@ -1067,17 +1067,17 @@ public class UserInterface extends Model {
         
                 } else {
     
-                    throw new NullPointerException("Could not configure look and feel. The look and feel id string is null.");
+                    throw new Exception("Could not configure look and feel. The look and feel id string is null.");
                 }
     
             } else {
 
-                throw new NullPointerException("Could not configure look and feel. The default look and feel is null.");
+                throw new Exception("Could not configure look and feel. The default look and feel is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not configure look and feel. The configuration is null.");
+            throw new Exception("Could not configure look and feel. The configuration is null.");
         }
         
         return laf;
@@ -1086,11 +1086,11 @@ public class UserInterface extends Model {
     /**
      * Deconfigures the look and feel.
      *
-     * @exception NullPointerException if the configuration is null
-     * @exception NullPointerException if the look and feel is null
+     * @exception Exception if the configuration is null
+     * @exception Exception if the look and feel is null
      */
 /*??
-    public void deconfigureLookAndFeel(javax.swing.LookAndFeel laf) throws NullPointerException {
+    public void deconfigureLookAndFeel(javax.swing.LookAndFeel laf) throws Exception {
 
         Configuration c = (Configuration) getChildItem(UserInterface.CONFIGURATION);
         
@@ -1102,12 +1102,12 @@ public class UserInterface extends Model {
 
             } else {
     
-                throw new NullPointerException("Could not deconfigure look and feel. The look and feel is null.");
+                throw new Exception("Could not deconfigure look and feel. The look and feel is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not deconfigure look and feel. The configuration is null.");
+            throw new Exception("Could not deconfigure look and feel. The configuration is null.");
         }
     }
 
@@ -1118,9 +1118,9 @@ public class UserInterface extends Model {
     /**
      * Initializes this swing view.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void initialize() throws Exception, NullPointerException {
+    public void initialize() throws Exception {
 
         super.initialize();
 
@@ -1144,9 +1144,9 @@ public class UserInterface extends Model {
     /**
      * Finalizes this swing view.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void finalizz() throws Exception, NullPointerException {
+    public void finalizz() throws Exception {
 
         Boolean resizable = (Boolean) getChildItem(UserInterface.RESIZABLE_FLAG);
         removeChildItem(UserInterface.RESIZABLE_FLAG);

@@ -32,7 +32,7 @@ package cybop.core.basic;
  * A number stands for some countable thing of the real world.
  * Possible compositions of Integer are Fraction (Float/Double) and Complex.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Integer extends Quantity {
@@ -154,18 +154,18 @@ public class Integer extends Quantity {
      * Sets the java primitive.
      *
      * @param p the java primitive
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the java object is null
      */
-    public void setJavaPrimitive(int p) throws NullPointerException {
+    public void setJavaPrimitive(int p) throws Exception {
     }
 
     /**
      * Returns the java primitive.
      *
      * @return the java primitive
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the java object is null
      */
-    public int getJavaPrimitive() throws NullPointerException {
+    public int getJavaPrimitive() throws Exception {
 
         int p = Integer.DEFAULT;
         java.lang.Integer j = (java.lang.Integer) getJavaObject();
@@ -176,7 +176,7 @@ public class Integer extends Quantity {
 
         } else {
         
-            throw new NullPointerException("Could not get java primitive. The java object is null.");
+            throw new Exception("Could not get java primitive. The java object is null.");
         }            
 
         return p;
@@ -190,11 +190,11 @@ public class Integer extends Quantity {
      * Adds the integer.
      *
      * @param i the integer
-     * @exception NullPointerException if the integer is null
-     * @exception NullPointerException if the java integer 2 is null
-     * @exception NullPointerException if the java integer 1 is null
+     * @exception Exception if the integer is null
+     * @exception Exception if the java integer 2 is null
+     * @exception Exception if the java integer 1 is null
      */
-    public void add(Integer i) throws NullPointerException {
+    public void add(Integer i) throws Exception {
 
         if (i != null) {
 
@@ -210,17 +210,17 @@ public class Integer extends Quantity {
                 
                 } else {
                     
-                    throw new NullPointerException("Could not add integer. This java integer 1 is null.");
+                    throw new Exception("Could not add integer. This java integer 1 is null.");
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not add integer. The java integer 2 is null.");
+                throw new Exception("Could not add integer. The java integer 2 is null.");
             }
                 
         } else {
             
-            throw new NullPointerException("Could not add integer. The integer is null.");
+            throw new Exception("Could not add integer. The integer is null.");
         }
     }
 
@@ -228,11 +228,11 @@ public class Integer extends Quantity {
      * Subtracts the integer.
      *
      * @param i the integer
-     * @exception NullPointerException if the integer is null
-     * @exception NullPointerException if the java integer 2 is null
-     * @exception NullPointerException if the java integer 1 is null
+     * @exception Exception if the integer is null
+     * @exception Exception if the java integer 2 is null
+     * @exception Exception if the java integer 1 is null
      */
-    public void subtract(Integer i) throws NullPointerException {
+    public void subtract(Integer i) throws Exception {
 
         if (i != null) {
 
@@ -248,17 +248,17 @@ public class Integer extends Quantity {
                 
                 } else {
                     
-                    throw new NullPointerException("Could not subtract integer. This java integer 1 is null.");
+                    throw new Exception("Could not subtract integer. This java integer 1 is null.");
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not subtract integer. The java integer 2 is null.");
+                throw new Exception("Could not subtract integer. The java integer 2 is null.");
             }
                 
         } else {
             
-            throw new NullPointerException("Could not subtract integer. The integer is null.");
+            throw new Exception("Could not subtract integer. The integer is null.");
         }
     }
 
@@ -266,11 +266,11 @@ public class Integer extends Quantity {
      * Multiplies this integer with the integer.
      *
      * @param i the integer
-     * @exception NullPointerException if the integer is null
-     * @exception NullPointerException if the java integer 2 is null
-     * @exception NullPointerException if the java integer 1 is null
+     * @exception Exception if the integer is null
+     * @exception Exception if the java integer 2 is null
+     * @exception Exception if the java integer 1 is null
      */
-    public void multiplyWith(Integer i) throws NullPointerException {
+    public void multiplyWith(Integer i) throws Exception {
 
         if (i != null) {
 
@@ -286,17 +286,17 @@ public class Integer extends Quantity {
                 
                 } else {
                     
-                    throw new NullPointerException("Could not multiply integer. This java integer 1 is null.");
+                    throw new Exception("Could not multiply integer. This java integer 1 is null.");
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not multiply integer. The java integer 2 is null.");
+                throw new Exception("Could not multiply integer. The java integer 2 is null.");
             }
                 
         } else {
             
-            throw new NullPointerException("Could not multiply integer. The integer is null.");
+            throw new Exception("Could not multiply integer. The integer is null.");
         }
     }
 
@@ -305,11 +305,11 @@ public class Integer extends Quantity {
      *
      * @param i the integer
      * @return the rest
-     * @exception NullPointerException if the integer is null
-     * @exception NullPointerException if the java integer 2 is null
-     * @exception NullPointerException if the java integer 1 is null
+     * @exception Exception if the integer is null
+     * @exception Exception if the java integer 2 is null
+     * @exception Exception if the java integer 1 is null
      */
-    public Integer divideBy(Integer i) throws NullPointerException {
+    public Integer divideBy(Integer i) throws Exception {
 
         Integer rest = null;
         
@@ -328,17 +328,17 @@ public class Integer extends Quantity {
 
                 } else {
                     
-                    throw new NullPointerException("Could not divide integer. This java integer 1 is null.");
+                    throw new Exception("Could not divide integer. This java integer 1 is null.");
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not divide integer. The java integer 2 is null.");
+                throw new Exception("Could not divide integer. The java integer 2 is null.");
             }
                 
         } else {
             
-            throw new NullPointerException("Could not divide integer. The integer is null.");
+            throw new Exception("Could not divide integer. The integer is null.");
         }
         
         return rest;
@@ -350,11 +350,11 @@ public class Integer extends Quantity {
      * @param i the integer
      * @return true - if this integer is dividable by the integer without rest;
      * false - otherwise
-     * @exception NullPointerException if the integer is null
-     * @exception NullPointerException if the java integer 2 is null
-     * @exception NullPointerException if the java integer 1 is null
+     * @exception Exception if the integer is null
+     * @exception Exception if the java integer 2 is null
+     * @exception Exception if the java integer 1 is null
      */
-    public boolean isDividableWithoutRest(Integer i) throws NullPointerException {
+    public boolean isDividableWithoutRest(Integer i) throws Exception {
 
         boolean result = Boolean.FALSE;
         
@@ -377,17 +377,17 @@ public class Integer extends Quantity {
 
                 } else {
                     
-                    throw new NullPointerException("Could not divide integer. This java integer 1 is null.");
+                    throw new Exception("Could not divide integer. This java integer 1 is null.");
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not divide integer. The java integer 2 is null.");
+                throw new Exception("Could not divide integer. The java integer 2 is null.");
             }
                 
         } else {
             
-            throw new NullPointerException("Could not divide integer. The integer is null.");
+            throw new Exception("Could not divide integer. The integer is null.");
         }
         
         return result;
@@ -399,11 +399,11 @@ public class Integer extends Quantity {
      * @param i the integer
      * @return true - if this integer is dividable by the integer without rest;
      * false - otherwise
-     * @exception NullPointerException if the integer is null
-     * @exception NullPointerException if the java integer 2 is null
-     * @exception NullPointerException if the java integer 1 is null
+     * @exception Exception if the integer is null
+     * @exception Exception if the java integer 2 is null
+     * @exception Exception if the java integer 1 is null
      */
-    public boolean isDividableWithoutRest(int i) throws NullPointerException {
+    public boolean isDividableWithoutRest(int i) throws Exception {
 
         boolean result = Boolean.FALSE;
         java.lang.Integer j1 = (java.lang.Integer) getJavaObject();
@@ -419,7 +419,7 @@ public class Integer extends Quantity {
 
         } else {
             
-            throw new NullPointerException("Could not divide integer. This java integer 1 is null.");
+            throw new Exception("Could not divide integer. This java integer 1 is null.");
         }
         
         return result;
@@ -429,11 +429,11 @@ public class Integer extends Quantity {
      * Returns the absolute value (without sign) of this integer.
      *
      * @return the absolute value (without sign) of this integer
-     * @exception NullPointerException if the integer is null
-     * @exception NullPointerException if the java integer 2 is null
-     * @exception NullPointerException if the java integer 1 is null
+     * @exception Exception if the integer is null
+     * @exception Exception if the java integer 2 is null
+     * @exception Exception if the java integer 1 is null
      */
-    public Integer absolute() throws NullPointerException {
+    public Integer absolute() throws Exception {
 
         Integer abs = null;
         
@@ -447,7 +447,7 @@ public class Integer extends Quantity {
 
         } else {
             
-            throw new NullPointerException("Could not determine absolute value. The java integer is null.");
+            throw new Exception("Could not determine absolute value. The java integer is null.");
         }
 */
 
@@ -464,11 +464,11 @@ public class Integer extends Quantity {
      * @param i the integer
      * @return true - if this integer is equal to the given integer;
      * false - otherwise
-     * @exception NullPointerException if the integer is null
-     * @exception NullPointerException if the java integer 2 is null
-     * @exception NullPointerException if this java integer 1 is null
+     * @exception Exception if the integer is null
+     * @exception Exception if the java integer 2 is null
+     * @exception Exception if this java integer 1 is null
      */
-    public boolean isEqualTo(Integer i) throws NullPointerException {
+    public boolean isEqualTo(Integer i) throws Exception {
 
         boolean result = Boolean.FALSE;
 
@@ -489,17 +489,17 @@ public class Integer extends Quantity {
                 
                 } else {
                     
-                    throw new NullPointerException("Could not compare integer. This java integer 1 is null.");
+                    throw new Exception("Could not compare integer. This java integer 1 is null.");
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not compare integer. The java integer 2 is null.");
+                throw new Exception("Could not compare integer. The java integer 2 is null.");
             }
                 
         } else {
             
-            throw new NullPointerException("Could not compare integer. The integer is null.");
+            throw new Exception("Could not compare integer. The integer is null.");
         }
 
         return result;        
@@ -511,9 +511,9 @@ public class Integer extends Quantity {
      * @param p the primitive integer
      * @return true - if this integer is equal to the given integer;
      * false - otherwise
-     * @exception NullPointerException if the java integer is null
+     * @exception Exception if the java integer is null
      */
-    public boolean isEqualTo(int p) throws NullPointerException {
+    public boolean isEqualTo(int p) throws Exception {
 
         boolean result = Boolean.FALSE;
         java.lang.Integer j = (java.lang.Integer) getJavaObject();
@@ -527,7 +527,7 @@ public class Integer extends Quantity {
         
         } else {
             
-            throw new NullPointerException("Could not compare integer. This java integer is null.");
+            throw new Exception("Could not compare integer. This java integer is null.");
         }
             
         return result;        
@@ -539,11 +539,11 @@ public class Integer extends Quantity {
      * @param i the integer
      * @return true - if this integer is smaller than the given integer;
      * false - otherwise
-     * @exception NullPointerException if the integer is null
-     * @exception NullPointerException if the java integer 2 is null
-     * @exception NullPointerException if this java integer 1 is null
+     * @exception Exception if the integer is null
+     * @exception Exception if the java integer 2 is null
+     * @exception Exception if this java integer 1 is null
      */
-    public boolean isSmallerThan(Integer i) throws NullPointerException {
+    public boolean isSmallerThan(Integer i) throws Exception {
 
         boolean result = Boolean.FALSE;
 
@@ -564,17 +564,17 @@ public class Integer extends Quantity {
                 
                 } else {
                     
-                    throw new NullPointerException("Could not compare integer. This java integer 1 is null.");
+                    throw new Exception("Could not compare integer. This java integer 1 is null.");
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not compare integer. The java integer 2 is null.");
+                throw new Exception("Could not compare integer. The java integer 2 is null.");
             }
                 
         } else {
             
-            throw new NullPointerException("Could not compare integer. The integer is null.");
+            throw new Exception("Could not compare integer. The integer is null.");
         }
 
         return result;        
@@ -586,9 +586,9 @@ public class Integer extends Quantity {
      * @param p the primitive integer
      * @return true - if this integer is smaller than the given integer;
      * false - otherwise
-     * @exception NullPointerException if the java integer is null
+     * @exception Exception if the java integer is null
      */
-    public boolean isSmallerThan(int p) throws NullPointerException {
+    public boolean isSmallerThan(int p) throws Exception {
 
         boolean result = Boolean.FALSE;
         java.lang.Integer j = (java.lang.Integer) getJavaObject();
@@ -602,7 +602,7 @@ public class Integer extends Quantity {
         
         } else {
             
-            throw new NullPointerException("Could not compare integer. This java integer is null.");
+            throw new Exception("Could not compare integer. This java integer is null.");
         }
             
         return result;        
@@ -614,11 +614,11 @@ public class Integer extends Quantity {
      * @param i the integer
      * @return true - if this integer is greater than the given integer;
      * false - otherwise
-     * @exception NullPointerException if the integer is null
-     * @exception NullPointerException if the java integer 2 is null
-     * @exception NullPointerException if this java integer 1 is null
+     * @exception Exception if the integer is null
+     * @exception Exception if the java integer 2 is null
+     * @exception Exception if this java integer 1 is null
      */
-    public boolean isGreaterThan(Integer i) throws NullPointerException {
+    public boolean isGreaterThan(Integer i) throws Exception {
 
         boolean result = Boolean.FALSE;
 
@@ -639,17 +639,17 @@ public class Integer extends Quantity {
                 
                 } else {
                     
-                    throw new NullPointerException("Could not compare integer. This java integer 1 is null.");
+                    throw new Exception("Could not compare integer. This java integer 1 is null.");
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not compare integer. The java integer 2 is null.");
+                throw new Exception("Could not compare integer. The java integer 2 is null.");
             }
                 
         } else {
             
-            throw new NullPointerException("Could not compare integer. The integer is null.");
+            throw new Exception("Could not compare integer. The integer is null.");
         }
 
         return result;        
@@ -661,9 +661,9 @@ public class Integer extends Quantity {
      * @param p the primitive integer
      * @return true - if this integer is greater than the given integer;
      * false - otherwise
-     * @exception NullPointerException if the java integer is null
+     * @exception Exception if the java integer is null
      */
-    public boolean isGreaterThan(int p) throws NullPointerException {
+    public boolean isGreaterThan(int p) throws Exception {
 
         boolean result = Boolean.FALSE;
         java.lang.Integer j = (java.lang.Integer) getJavaObject();
@@ -677,7 +677,7 @@ public class Integer extends Quantity {
         
         } else {
             
-            throw new NullPointerException("Could not compare integer. This java integer is null.");
+            throw new Exception("Could not compare integer. This java integer is null.");
         }
             
         return result;        
@@ -689,11 +689,11 @@ public class Integer extends Quantity {
      * @param i the integer
      * @return true - if this integer is smaller than or equal to the given integer;
      * false - otherwise
-     * @exception NullPointerException if the integer is null
-     * @exception NullPointerException if the java integer 2 is null
-     * @exception NullPointerException if this java integer 1 is null
+     * @exception Exception if the integer is null
+     * @exception Exception if the java integer 2 is null
+     * @exception Exception if this java integer 1 is null
      */
-    public boolean isSmallerThanOrEqualTo(Integer i) throws NullPointerException {
+    public boolean isSmallerThanOrEqualTo(Integer i) throws Exception {
 
         boolean result = Boolean.FALSE;
 
@@ -714,17 +714,17 @@ public class Integer extends Quantity {
                 
                 } else {
                     
-                    throw new NullPointerException("Could not compare integer. This java integer 1 is null.");
+                    throw new Exception("Could not compare integer. This java integer 1 is null.");
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not compare integer. The java integer 2 is null.");
+                throw new Exception("Could not compare integer. The java integer 2 is null.");
             }
                 
         } else {
             
-            throw new NullPointerException("Could not compare integer. The integer is null.");
+            throw new Exception("Could not compare integer. The integer is null.");
         }
 
         return result;        
@@ -736,9 +736,9 @@ public class Integer extends Quantity {
      * @param p the primitive integer
      * @return true - if this integer is smaller than or equal to the given integer;
      * false - otherwise
-     * @exception NullPointerException if the java integer is null
+     * @exception Exception if the java integer is null
      */
-    public boolean isSmallerThanOrEqualTo(int p) throws NullPointerException {
+    public boolean isSmallerThanOrEqualTo(int p) throws Exception {
 
         boolean result = Boolean.FALSE;
         java.lang.Integer j = (java.lang.Integer) getJavaObject();
@@ -752,7 +752,7 @@ public class Integer extends Quantity {
 
         } else {
 
-            throw new NullPointerException("Could not compare integer. This java integer is null.");
+            throw new Exception("Could not compare integer. This java integer is null.");
         }
 
         return result;        
@@ -764,11 +764,11 @@ public class Integer extends Quantity {
      * @param i the integer
      * @return true - if this integer is greater than or equal to the given integer;
      * false - otherwise
-     * @exception NullPointerException if the integer is null
-     * @exception NullPointerException if the java integer 2 is null
-     * @exception NullPointerException if this java integer 1 is null
+     * @exception Exception if the integer is null
+     * @exception Exception if the java integer 2 is null
+     * @exception Exception if this java integer 1 is null
      */
-    public boolean isGreaterThanOrEqualTo(Integer i) throws NullPointerException {
+    public boolean isGreaterThanOrEqualTo(Integer i) throws Exception {
 
         boolean result = Boolean.FALSE;
 
@@ -789,17 +789,17 @@ public class Integer extends Quantity {
                 
                 } else {
                     
-                    throw new NullPointerException("Could not compare integer. This java integer 1 is null.");
+                    throw new Exception("Could not compare integer. This java integer 1 is null.");
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not compare integer. The java integer 2 is null.");
+                throw new Exception("Could not compare integer. The java integer 2 is null.");
             }
                 
         } else {
             
-            throw new NullPointerException("Could not compare integer. The integer is null.");
+            throw new Exception("Could not compare integer. The integer is null.");
         }
 
         return result;        
@@ -811,9 +811,9 @@ public class Integer extends Quantity {
      * @param p the primitive integer
      * @return true - if this integer is greater than or equal to the given integer;
      * false - otherwise
-     * @exception NullPointerException if the java integer is null
+     * @exception Exception if the java integer is null
      */
-    public boolean isGreaterThanOrEqualTo(int p) throws NullPointerException {
+    public boolean isGreaterThanOrEqualTo(int p) throws Exception {
 
         boolean result = Boolean.FALSE;
         java.lang.Integer j = (java.lang.Integer) getJavaObject();
@@ -827,7 +827,7 @@ public class Integer extends Quantity {
         
         } else {
             
-            throw new NullPointerException("Could not compare integer. This java integer is null.");
+            throw new Exception("Could not compare integer. This java integer is null.");
         }
             
         return result;        
@@ -842,9 +842,9 @@ public class Integer extends Quantity {
      *
      * @param i the integer
      * @return the string representation of the given integer
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the java object is null
      */
-    public static Integer toInteger(String s) throws NullPointerException {
+    public static Integer toInteger(String s) throws Exception {
 
         Integer i = null;
 
@@ -854,7 +854,7 @@ public class Integer extends Quantity {
         
         } else {
             
-            throw new NullPointerException("Could not transform string to integer. The string is null.");
+            throw new Exception("Could not transform string to integer. The string is null.");
         }
 
         return i;

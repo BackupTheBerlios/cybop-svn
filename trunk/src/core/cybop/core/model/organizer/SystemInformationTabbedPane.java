@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a system information tabbed pane.
  *
- * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationTabbedPane extends TabbedPane {
@@ -66,9 +66,9 @@ public class SystemInformationTabbedPane extends TabbedPane {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -101,7 +101,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -109,9 +109,9 @@ public class SystemInformationTabbedPane extends TabbedPane {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -142,7 +142,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         } else {
 
-            throw new NullPointerException("Could not remove item. The name is null.");
+            throw new Exception("Could not remove item. The name is null.");
         }
 
         super.removeChildItem(n);
@@ -220,11 +220,11 @@ public class SystemInformationTabbedPane extends TabbedPane {
      * Sets the image panel.
      *
      * @param p the image panel
-     * @exception NullPointerException if the java swing tabbed pane is null
-     * @exception NullPointerException if the image panel is null
-     * @exception NullPointerException if the image panel child name is null
+     * @exception Exception if the java swing tabbed pane is null
+     * @exception Exception if the image panel is null
+     * @exception Exception if the image panel child name is null
      */
-    public void setImagePanel(ImagePanel p) throws NullPointerException {
+    public void setImagePanel(ImagePanel p) throws Exception {
 
         javax.swing.JTabbedPane tp = (javax.swing.JTabbedPane) getJavaObject();
 
@@ -240,7 +240,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
                 } else {
 
-                    throw new NullPointerException("Could not set image panel. The image panel child name is null.");
+                    throw new Exception("Could not set image panel. The image panel child name is null.");
                 }
 
             } else {
@@ -250,7 +250,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         } else {
 
-            throw new NullPointerException("Could not set image panel. The java swing tabbed pane is null.");
+            throw new Exception("Could not set image panel. The java swing tabbed pane is null.");
         }
     }
 
@@ -258,10 +258,10 @@ public class SystemInformationTabbedPane extends TabbedPane {
      * Removes the image panel.
      *
      * @param p the image panel
-     * @exception NullPointerException if the java swing tabbed pane is null
-     * @exception NullPointerException if the image panel is null
+     * @exception Exception if the java swing tabbed pane is null
+     * @exception Exception if the image panel is null
      */
-    public void removeImagePanel(ImagePanel p) throws NullPointerException {
+    public void removeImagePanel(ImagePanel p) throws Exception {
 
         javax.swing.JTabbedPane tp = (javax.swing.JTabbedPane) getJavaObject();
 
@@ -278,7 +278,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         } else {
 
-            throw new NullPointerException("Could not remove image panel. The java swing tabbed pane is null.");
+            throw new Exception("Could not remove image panel. The java swing tabbed pane is null.");
         }
     }
 
@@ -290,11 +290,11 @@ public class SystemInformationTabbedPane extends TabbedPane {
      * Sets the copyright panel.
      *
      * @param p the copyright panel
-     * @exception NullPointerException if the java swing tabbed pane is null
-     * @exception NullPointerException if the copyright panel is null
-     * @exception NullPointerException if the copyright panel child name is null
+     * @exception Exception if the java swing tabbed pane is null
+     * @exception Exception if the copyright panel is null
+     * @exception Exception if the copyright panel child name is null
      */
-    public void setCopyrightPanel(TextPanel p) throws NullPointerException {
+    public void setCopyrightPanel(TextPanel p) throws Exception {
 
         javax.swing.JTabbedPane tp = (javax.swing.JTabbedPane) getJavaObject();
 
@@ -310,7 +310,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
                 } else {
 
-                    throw new NullPointerException("Could not set copyright panel. The panel child name is null.");
+                    throw new Exception("Could not set copyright panel. The panel child name is null.");
                 }
 
             } else {
@@ -320,7 +320,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         } else {
 
-            throw new NullPointerException("Could not set copyright panel. The java swing tabbed pane is null.");
+            throw new Exception("Could not set copyright panel. The java swing tabbed pane is null.");
         }
     }
 
@@ -328,10 +328,10 @@ public class SystemInformationTabbedPane extends TabbedPane {
      * Removes the copyright panel.
      *
      * @param p the copyright panel
-     * @exception NullPointerException if the java swing tabbed pane is null
-     * @exception NullPointerException if the copyright panel is null
+     * @exception Exception if the java swing tabbed pane is null
+     * @exception Exception if the copyright panel is null
      */
-    public void removeCopyrightPanel(TextPanel p) throws NullPointerException {
+    public void removeCopyrightPanel(TextPanel p) throws Exception {
 
         javax.swing.JTabbedPane tp = (javax.swing.JTabbedPane) getJavaObject();
 
@@ -348,7 +348,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         } else {
 
-            throw new NullPointerException("Could not remove copyright panel. The java swing tabbed pane is null.");
+            throw new Exception("Could not remove copyright panel. The java swing tabbed pane is null.");
         }
     }
 
@@ -360,11 +360,11 @@ public class SystemInformationTabbedPane extends TabbedPane {
      * Sets the authors panel.
      *
      * @param p the authors panel
-     * @exception NullPointerException if the java swing tabbed pane is null
-     * @exception NullPointerException if the authors panel is null
-     * @exception NullPointerException if the authors panel child name is null
+     * @exception Exception if the java swing tabbed pane is null
+     * @exception Exception if the authors panel is null
+     * @exception Exception if the authors panel child name is null
      */
-    public void setAuthorsPanel(TextPanel p) throws NullPointerException {
+    public void setAuthorsPanel(TextPanel p) throws Exception {
 
         javax.swing.JTabbedPane tp = (javax.swing.JTabbedPane) getJavaObject();
 
@@ -380,7 +380,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
                 } else {
 
-                    throw new NullPointerException("Could not set authors panel. The authors panel child name is null.");
+                    throw new Exception("Could not set authors panel. The authors panel child name is null.");
                 }
 
             } else {
@@ -390,7 +390,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         } else {
 
-            throw new NullPointerException("Could not set authors panel. The java swing tabbed pane is null.");
+            throw new Exception("Could not set authors panel. The java swing tabbed pane is null.");
         }
     }
 
@@ -398,10 +398,10 @@ public class SystemInformationTabbedPane extends TabbedPane {
      * Removes the authors panel.
      *
      * @param p the authors panel
-     * @exception NullPointerException if the java swing tabbed pane is null
-     * @exception NullPointerException if the authors panel is null
+     * @exception Exception if the java swing tabbed pane is null
+     * @exception Exception if the authors panel is null
      */
-    public void removeAuthorsPanel(TextPanel p) throws NullPointerException {
+    public void removeAuthorsPanel(TextPanel p) throws Exception {
 
         javax.swing.JTabbedPane tp = (javax.swing.JTabbedPane) getJavaObject();
 
@@ -418,7 +418,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         } else {
 
-            throw new NullPointerException("Could not remove authors panel. The java swing tabbed pane is null.");
+            throw new Exception("Could not remove authors panel. The java swing tabbed pane is null.");
         }
     }
 
@@ -430,11 +430,11 @@ public class SystemInformationTabbedPane extends TabbedPane {
      * Sets the helpers panel.
      *
      * @param p the helpers panel
-     * @exception NullPointerException if the java swing tabbed pane is null
-     * @exception NullPointerException if the helpers panel is null
-     * @exception NullPointerException if the helpers panel child name is null
+     * @exception Exception if the java swing tabbed pane is null
+     * @exception Exception if the helpers panel is null
+     * @exception Exception if the helpers panel child name is null
      */
-    public void setHelpersPanel(TextPanel p) throws NullPointerException {
+    public void setHelpersPanel(TextPanel p) throws Exception {
 
         javax.swing.JTabbedPane tp = (javax.swing.JTabbedPane) getJavaObject();
 
@@ -450,7 +450,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
                 } else {
 
-                    throw new NullPointerException("Could not set helpers panel. The helpers panel child name is null.");
+                    throw new Exception("Could not set helpers panel. The helpers panel child name is null.");
                 }
 
             } else {
@@ -460,7 +460,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         } else {
 
-            throw new NullPointerException("Could not set helpers panel. The java swing tabbed pane is null.");
+            throw new Exception("Could not set helpers panel. The java swing tabbed pane is null.");
         }
     }
 
@@ -468,10 +468,10 @@ public class SystemInformationTabbedPane extends TabbedPane {
      * Removes the helpers panel.
      *
      * @param p the helpers panel
-     * @exception NullPointerException if the java swing tabbed pane is null
-     * @exception NullPointerException if the helpers panel is null
+     * @exception Exception if the java swing tabbed pane is null
+     * @exception Exception if the helpers panel is null
      */
-    public void removeHelpersPanel(TextPanel p) throws NullPointerException {
+    public void removeHelpersPanel(TextPanel p) throws Exception {
 
         javax.swing.JTabbedPane tp = (javax.swing.JTabbedPane) getJavaObject();
 
@@ -488,7 +488,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         } else {
 
-            throw new NullPointerException("Could not remove helpers panel. The java swing tabbed pane is null.");
+            throw new Exception("Could not remove helpers panel. The java swing tabbed pane is null.");
         }
     }
 
@@ -500,11 +500,11 @@ public class SystemInformationTabbedPane extends TabbedPane {
      * Sets the inspirations panel.
      *
      * @param p the inspirations panel
-     * @exception NullPointerException if the java swing tabbed pane is null
-     * @exception NullPointerException if the inspirations panel is null
-     * @exception NullPointerException if the inspirations panel child name is null
+     * @exception Exception if the java swing tabbed pane is null
+     * @exception Exception if the inspirations panel is null
+     * @exception Exception if the inspirations panel child name is null
      */
-    public void setInspirationsPanel(TextPanel p) throws NullPointerException {
+    public void setInspirationsPanel(TextPanel p) throws Exception {
 
         javax.swing.JTabbedPane tp = (javax.swing.JTabbedPane) getJavaObject();
 
@@ -520,7 +520,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
                 } else {
 
-                    throw new NullPointerException("Could not set inspirations panel. The inspirations panel child name is null.");
+                    throw new Exception("Could not set inspirations panel. The inspirations panel child name is null.");
                 }
 
             } else {
@@ -530,7 +530,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         } else {
 
-            throw new NullPointerException("Could not set inspirations panel. The java swing tabbed pane is null.");
+            throw new Exception("Could not set inspirations panel. The java swing tabbed pane is null.");
         }
     }
 
@@ -538,10 +538,10 @@ public class SystemInformationTabbedPane extends TabbedPane {
      * Removes the inspirations panel.
      *
      * @param p the inspirations panel
-     * @exception NullPointerException if the java swing tabbed pane is null
-     * @exception NullPointerException if the inspirations panel is null
+     * @exception Exception if the java swing tabbed pane is null
+     * @exception Exception if the inspirations panel is null
      */
-    public void removeInspirationsPanel(TextPanel p) throws NullPointerException {
+    public void removeInspirationsPanel(TextPanel p) throws Exception {
 
         javax.swing.JTabbedPane tp = (javax.swing.JTabbedPane) getJavaObject();
 
@@ -558,7 +558,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         } else {
 
-            throw new NullPointerException("Could not remove inspirations panel. The java swing tabbed pane is null.");
+            throw new Exception("Could not remove inspirations panel. The java swing tabbed pane is null.");
         }
     }
 
@@ -570,11 +570,11 @@ public class SystemInformationTabbedPane extends TabbedPane {
      * Sets the license panel.
      *
      * @param p the license panel
-     * @exception NullPointerException if the java swing tabbed pane is null
-     * @exception NullPointerException if the license panel is null
-     * @exception NullPointerException if the license panel child name is null
+     * @exception Exception if the java swing tabbed pane is null
+     * @exception Exception if the license panel is null
+     * @exception Exception if the license panel child name is null
      */
-    public void setLicensePanel(TextPanel p) throws NullPointerException {
+    public void setLicensePanel(TextPanel p) throws Exception {
 
         javax.swing.JTabbedPane tp = (javax.swing.JTabbedPane) getJavaObject();
 
@@ -590,7 +590,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
                 } else {
 
-                    throw new NullPointerException("Could not set license panel. The license panel child name is null.");
+                    throw new Exception("Could not set license panel. The license panel child name is null.");
                 }
 
             } else {
@@ -600,7 +600,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         } else {
 
-            throw new NullPointerException("Could not set license panel. The java swing tabbed pane is null.");
+            throw new Exception("Could not set license panel. The java swing tabbed pane is null.");
         }
     }
 
@@ -608,10 +608,10 @@ public class SystemInformationTabbedPane extends TabbedPane {
      * Removes the license panel.
      *
      * @param p the license panel
-     * @exception NullPointerException if the java swing tabbed pane is null
-     * @exception NullPointerException if the license panel is null
+     * @exception Exception if the java swing tabbed pane is null
+     * @exception Exception if the license panel is null
      */
-    public void removeLicensePanel(TextPanel p) throws NullPointerException {
+    public void removeLicensePanel(TextPanel p) throws Exception {
 
         javax.swing.JTabbedPane tp = (javax.swing.JTabbedPane) getJavaObject();
 
@@ -628,7 +628,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         } else {
 
-            throw new NullPointerException("Could not remove license panel. The java swing tabbed pane is null.");
+            throw new Exception("Could not remove license panel. The java swing tabbed pane is null.");
         }
     }
 

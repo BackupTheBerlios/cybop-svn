@@ -46,7 +46,7 @@ import cybop.core.system.region.*;
  *
  * Synonyms: Assembler, Mapper, Sensor, Motor, Encoder, Decoder 
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Translator extends ControllerRegion {
@@ -72,9 +72,9 @@ public class Translator extends ControllerRegion {
      * Creates a formatter.
      *
      * @return the formatter
-     * @exception NullPointerException if the formatter is null
+     * @exception Exception if the formatter is null
      */
-    public java.util.logging.Formatter createFormatter() throws NullPointerException {
+    public java.util.logging.Formatter createFormatter() throws Exception {
 
         java.util.logging.Formatter f = new java.util.logging.SimpleFormatter();
 
@@ -87,7 +87,7 @@ public class Translator extends ControllerRegion {
         else
         {
 
-            throw new NullPointerException("Could not create formatter. The formatter is null.");
+            throw new Exception("Could not create formatter. The formatter is null.");
         }
 
         return f;
@@ -97,9 +97,9 @@ public class Translator extends ControllerRegion {
      * Destroys the formatter.
      *
      * @param f the formatter
-     * @exception NullPointerException if the formatter is null
+     * @exception Exception if the formatter is null
      */
-    public void destroyFormatter(java.util.logging.Formatter f) throws NullPointerException
+    public void destroyFormatter(java.util.logging.Formatter f) throws Exception
     {
 
         if (f != null)
@@ -111,7 +111,7 @@ public class Translator extends ControllerRegion {
         else
         {
 
-            throw new NullPointerException("Could not destroy formatter. The formatter is null.");
+            throw new Exception("Could not destroy formatter. The formatter is null.");
         }
     }
 
@@ -145,9 +145,9 @@ public class Translator extends ControllerRegion {
      * Creates an output stream.
      *
      * @return the output stream
-     * @exception NullPointerException if the output stream is null
+     * @exception Exception if the output stream is null
      */
-    public java.io.OutputStream createOutputStream() throws NullPointerException
+    public java.io.OutputStream createOutputStream() throws Exception
     {
 
         java.io.OutputStream s = java.lang.System.err; //?? new java.io.OutputStream();
@@ -161,7 +161,7 @@ public class Translator extends ControllerRegion {
         else
         {
 
-            throw new NullPointerException("Could not create output stream. The output stream is null.");
+            throw new Exception("Could not create output stream. The output stream is null.");
         }
 
         return s;
@@ -171,9 +171,9 @@ public class Translator extends ControllerRegion {
      * Destroys the output stream.
      *
      * @param s the output stream
-     * @exception NullPointerException if the output stream is null
+     * @exception Exception if the output stream is null
      */
-    public void destroyOutputStream(java.io.OutputStream s) throws NullPointerException
+    public void destroyOutputStream(java.io.OutputStream s) throws Exception
     {
 
         if (s != null)
@@ -185,7 +185,7 @@ public class Translator extends ControllerRegion {
         else
         {
 
-            throw new NullPointerException("Could not destroy output stream. The output stream is null.");
+            throw new Exception("Could not destroy output stream. The output stream is null.");
         }
     }
 
@@ -219,9 +219,9 @@ public class Translator extends ControllerRegion {
      * Creates a writer.
      *
      * @return the writer
-     * @exception NullPointerException if the writer is null
+     * @exception Exception if the writer is null
      */
-    public java.io.Writer createWriter() throws NullPointerException
+    public java.io.Writer createWriter() throws Exception
     {
 
         java.io.Writer w = new java.io.OutputStreamWriter(getOutputStream());
@@ -235,7 +235,7 @@ public class Translator extends ControllerRegion {
         else
         {
 
-            throw new NullPointerException("Could not create writer. The writer is null.");
+            throw new Exception("Could not create writer. The writer is null.");
         }
 
         return w;
@@ -245,9 +245,9 @@ public class Translator extends ControllerRegion {
      * Destroys the writer.
      *
      * @param w the writer
-     * @exception NullPointerException if the writer is null
+     * @exception Exception if the writer is null
      */
-    public void destroyWriter(java.io.Writer w) throws NullPointerException
+    public void destroyWriter(java.io.Writer w) throws Exception
     {
 
         if (w != null)
@@ -259,7 +259,7 @@ public class Translator extends ControllerRegion {
         else
         {
 
-            throw new NullPointerException("Could not destroy writer. The writer is null.");
+            throw new Exception("Could not destroy writer. The writer is null.");
         }
     }
 
@@ -355,11 +355,11 @@ public class Translator extends ControllerRegion {
      * Drives the log record output.
      *
      * @param r the log record
-     * @exception NullPointerException if the formatter is null
-     * @exception NullPointerException if the writer is null
+     * @exception Exception if the formatter is null
+     * @exception Exception if the writer is null
      */
 /*??
-    public void drive(LogRecord r) throws Exception, NullPointerException {
+    public void drive(LogRecord r) throws Exception {
 
         java.util.logging.Formatter f = getFormatter();
 
@@ -377,12 +377,12 @@ public class Translator extends ControllerRegion {
 
             } else {
 
-                throw new NullPointerException("Could not drive log record output. The writer is null.");
+                throw new Exception("Could not drive log record output. The writer is null.");
             }
         
         } else {
 
-            throw new NullPointerException("Could not drive log record output. The formatter is null.");
+            throw new Exception("Could not drive log record output. The formatter is null.");
         }
     }
 */

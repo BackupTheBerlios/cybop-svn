@@ -31,7 +31,7 @@ import cybop.core.model.*;
  *
  * A rectangle corresponds to a cell border in biology.
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Rectangle extends Description {
@@ -45,7 +45,7 @@ public class Rectangle extends Description {
      *
      * @return the encapsulated java awt rectangle
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         return new java.awt.Rectangle();
     }
@@ -129,10 +129,10 @@ public class Rectangle extends Description {
      * Fires an action.
      *
      * @param evt the action event
-     * @exception NullPointerException if the owner view is null
+     * @exception Exception if the owner view is null
      */
 /*??
-    protected void fireActionPerformed(ActionEvent evt) throws NullPointerException {
+    protected void fireActionPerformed(ActionEvent evt) throws Exception {
 
         SwingView v = getOwner();
 
@@ -142,7 +142,7 @@ public class Rectangle extends Description {
 
         } else {
 
-            throw new NullPointerException("Could not fire action performed. The owner view is null.");
+            throw new Exception("Could not fire action performed. The owner view is null.");
         }
     }
 
@@ -154,10 +154,10 @@ public class Rectangle extends Description {
      * Creates a control.
      *
      * @return the control issued when the button is pressed
-     * @exception NullPointerException if the control is null
+     * @exception Exception if the control is null
      */
 /*??
-    protected Control createControl() throws NullPointerException {
+    protected Control createControl() throws Exception {
 
         Control c = new Control();
 
@@ -168,7 +168,7 @@ public class Rectangle extends Description {
 
         } else {
 
-            throw new NullPointerException("Could not create control. The control is null.");
+            throw new Exception("Could not create control. The control is null.");
         }
 
         return c;

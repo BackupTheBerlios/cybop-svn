@@ -31,7 +31,7 @@ import cybop.core.model.*;
 /**
  * This class represents a tree.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Tree extends Organizer {
@@ -69,9 +69,9 @@ public class Tree extends Organizer {
      * Creates an encapsulated java swing tree.
      *
      * @return the encapsulated java swing tree
-     * @exception NullPointerException if the encapsulated java swing tree is null
+     * @exception Exception if the encapsulated java swing tree is null
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         javax.swing.JTree t = new javax.swing.JTree();
 //??        javax.swing.JTree t = new javax.swing.JTree(new javax.swing.tree.DefaultTreeModel(new javax.swing.tree.DefaultMutableTreeNode("test")));
@@ -85,7 +85,7 @@ public class Tree extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not create encapsulated java swing tree. The encapsulated java swing tree is null.");
+            throw new Exception("Could not create encapsulated java swing tree. The encapsulated java swing tree is null.");
         }
 
         return t;
@@ -100,9 +100,9 @@ public class Tree extends Organizer {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -115,7 +115,7 @@ public class Tree extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -123,9 +123,9 @@ public class Tree extends Organizer {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -136,7 +136,7 @@ public class Tree extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not remove item. The name is null.");
+            throw new Exception("Could not remove item. The name is null.");
         }
 
         super.removeChildItem(n);
@@ -150,10 +150,10 @@ public class Tree extends Organizer {
      * Sets the model.
      *
      * @param m the model
-     * @exception NullPointerException if the java tree node is null
-     * @exception NullPointerException if the model is null
+     * @exception Exception if the java tree node is null
+     * @exception Exception if the model is null
      */
-    public void setModel(Model m) throws NullPointerException {
+    public void setModel(Model m) throws Exception {
 
         javax.swing.JTree t = (javax.swing.JTree) getJavaObject();
 
@@ -165,12 +165,12 @@ public class Tree extends Organizer {
 
             } else {
 
-                throw new NullPointerException("Could not set model. The model is null.");
+                throw new Exception("Could not set model. The model is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set model. The java tree node is null.");
+            throw new Exception("Could not set model. The java tree node is null.");
         }
     }
 
@@ -178,9 +178,9 @@ public class Tree extends Organizer {
      * Removes the model.
      *
      * @param m the model
-     * @exception NullPointerException if the java tree node is null
+     * @exception Exception if the java tree node is null
      */
-    public void removeModel(Model m) throws NullPointerException {
+    public void removeModel(Model m) throws Exception {
 
         javax.swing.JTree t = (javax.swing.JTree) getJavaObject();
 
@@ -190,7 +190,7 @@ public class Tree extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not remove model. The java tree node is null.");
+            throw new Exception("Could not remove model. The java tree node is null.");
         }
     }
 

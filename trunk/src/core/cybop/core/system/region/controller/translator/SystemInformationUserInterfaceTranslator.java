@@ -35,7 +35,7 @@ import cybop.core.system.region.controller.*;
 /**
  * This class represents a system information user interface translator.
  *
- * @version $Revision: 1.4 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationUserInterfaceTranslator extends Translator {
@@ -49,11 +49,11 @@ public class SystemInformationUserInterfaceTranslator extends Translator {
      *
      * @param dm the domain model
      * @param m the encoded model
-     * @exception NullPointerException if the system information user interface is null
-     * @exception NullPointerException if the system information contents panel is null
-     * @exception NullPointerException if the domain model is null
+     * @exception Exception if the system information user interface is null
+     * @exception Exception if the system information contents panel is null
+     * @exception Exception if the domain model is null
      */
-    public void encode(DomainModel dm, Model m) throws NullPointerException {
+    public void encode(DomainModel dm, Model m) throws Exception {
 
         SystemInformationUserInterface ui = (SystemInformationUserInterface) m;
 
@@ -70,17 +70,17 @@ public class SystemInformationUserInterfaceTranslator extends Translator {
 
                 } else {
 
-                    throw new NullPointerException("Could not encode domain model. The domain model is null.");
+                    throw new Exception("Could not encode domain model. The domain model is null.");
                 }
     
             } else {
 
-                throw new NullPointerException("Could not encode domain model. The system information contents panel is null.");
+                throw new Exception("Could not encode domain model. The system information contents panel is null.");
             }
     
         } else {
 
-            throw new NullPointerException("Could not encode domain model. The system information user interface is null.");
+            throw new Exception("Could not encode domain model. The system information user interface is null.");
         }
     }
 
@@ -102,8 +102,8 @@ public class SystemInformationUserInterfaceTranslator extends Translator {
      *
      * @param i the system information
      * @param p the head panel
-     * @exception NullPointerException if the system information is null
-     * @exception NullPointerException if the head panel is null
+     * @exception Exception if the system information is null
+     * @exception Exception if the head panel is null
      */
     private void encodeHeadPanel(SystemInformation i, HeadPanel p) {
 
@@ -118,12 +118,12 @@ public class SystemInformationUserInterfaceTranslator extends Translator {
 
             } else {
 
-                throw new NullPointerException("Could not encode into head panel. The head panel is null.");
+                throw new Exception("Could not encode into head panel. The head panel is null.");
             }
     
         } else {
 
-            throw new NullPointerException("Could not encode into head panel. The system information is null.");
+            throw new Exception("Could not encode into head panel. The system information is null.");
         }
     }
 
@@ -132,7 +132,7 @@ public class SystemInformationUserInterfaceTranslator extends Translator {
      *
      * @param l the label
      * @param t the text
-     * @exception NullPointerException if the label is null
+     * @exception Exception if the label is null
      */
     private void encodeLabel(Label l, String text) {
 
@@ -142,7 +142,7 @@ public class SystemInformationUserInterfaceTranslator extends Translator {
 
         } else {
 
-            throw new NullPointerException("Could not encode into label. The label is null.");
+            throw new Exception("Could not encode into label. The label is null.");
         }
     }
 
@@ -151,8 +151,8 @@ public class SystemInformationUserInterfaceTranslator extends Translator {
      *
      * @param i the system information
      * @param p the tabbed pane
-     * @exception NullPointerException if the system information is null
-     * @exception NullPointerException if the tabbed pane is null
+     * @exception Exception if the system information is null
+     * @exception Exception if the tabbed pane is null
      */
     private void encodeTabbedPane(SystemInformation i, TabbedPane p) {
     }

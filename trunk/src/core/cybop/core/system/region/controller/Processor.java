@@ -42,7 +42,7 @@ import cybop.core.system.region.*;
  * The processor is then responsible for forwarding the signal and results
  * to a motor.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Processor extends ControllerRegion {
@@ -54,7 +54,7 @@ public class Processor extends ControllerRegion {
     /**
      * Initializes this processor.
      */
-    public void initialize() throws Exception, NullPointerException {
+    public void initialize() throws Exception {
 
         super.initialize();
     }
@@ -62,7 +62,7 @@ public class Processor extends ControllerRegion {
     /**
      * Finalizes this processor.
      */
-    public void finalizz() throws Exception, NullPointerException {
+    public void finalizz() throws Exception {
 
         super.finalizz();
     }
@@ -76,15 +76,15 @@ public class Processor extends ControllerRegion {
      *
      * @param a the action
      * @param m the domain model
-     * @exception NullPointerException if the action is null
+     * @exception Exception if the action is null
      */
-    public void process(String a, DomainModel m) throws Exception, NullPointerException {
+    public void process(String a, DomainModel m) throws Exception {
 
         if (a != null) {
 
         } else {
 
-            throw new NullPointerException("Could not process action. The action is null.");
+            throw new Exception("Could not process action. The action is null.");
         }
     }
 }

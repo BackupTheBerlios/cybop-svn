@@ -31,7 +31,7 @@ package cybop.core.basic;
  * In computing, it is also known as floating point- or double number,
  * having a part "before and after the point/comma".
  *
- * @version $Revision: 1.6 $ $Date: 2003-04-29 07:15:17 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Fraction extends Quantity {
@@ -135,18 +135,18 @@ public class Fraction extends Quantity {
      * Sets the java primitive.
      *
      * @param p the java primitive
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the java object is null
      */
-    public void setJavaPrimitive(double p) throws NullPointerException {
+    public void setJavaPrimitive(double p) throws Exception {
     }
 
     /**
      * Returns the java primitive.
      *
      * @return the java primitive
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the java object is null
      */
-    public double getJavaPrimitive() throws NullPointerException {
+    public double getJavaPrimitive() throws Exception {
 
         double p = Fraction.DEFAULT;
         java.lang.Double j = (java.lang.Double) getJavaObject();
@@ -157,7 +157,7 @@ public class Fraction extends Quantity {
 
         } else {
         
-            throw new NullPointerException("Could not get java primitive. The java object is null.");
+            throw new Exception("Could not get java primitive. The java object is null.");
         }            
 
         return p;
@@ -171,13 +171,13 @@ public class Fraction extends Quantity {
      * Adds the fraction.
      *
      * @param f the fraction
-     * @exception NullPointerException if the fraction is null
-     * @exception NullPointerException if the numerator 2 is null
-     * @exception NullPointerException if the numerator 1 is null
-     * @exception NullPointerException if the extended numerator 1 is null
-     * @exception NullPointerException if the denominator 1 is null
+     * @exception Exception if the fraction is null
+     * @exception Exception if the numerator 2 is null
+     * @exception Exception if the numerator 1 is null
+     * @exception Exception if the extended numerator 1 is null
+     * @exception Exception if the denominator 1 is null
      */
-    public void add(Fraction f) throws NullPointerException {
+    public void add(Fraction f) throws Exception {
 
 /*??
         if (f != null) {
@@ -205,27 +205,27 @@ public class Fraction extends Quantity {
     
                         } else {
             
-                            throw new NullPointerException("Could not add fraction. The denominator 1 is null.");
+                            throw new Exception("Could not add fraction. The denominator 1 is null.");
                         }
 
                     } else {
         
-                        throw new NullPointerException("Could not add fraction. The extended numerator 1 is null.");
+                        throw new Exception("Could not add fraction. The extended numerator 1 is null.");
                     }            
                     
                 } else {
     
-                    throw new NullPointerException("Could not add fraction. The numerator 1 is null.");
+                    throw new Exception("Could not add fraction. The numerator 1 is null.");
                 }
     
             } else {
 
-                throw new NullPointerException("Could not add fraction. The numerator 2 is null.");
+                throw new Exception("Could not add fraction. The numerator 2 is null.");
             }
 
         } else {
         
-            throw new NullPointerException("Could not add fraction. The fraction is null.");
+            throw new Exception("Could not add fraction. The fraction is null.");
         }
 */
     }
@@ -234,13 +234,13 @@ public class Fraction extends Quantity {
      * Subtracts the fraction.
      *
      * @param f the fraction
-     * @exception NullPointerException if the fraction is null
-     * @exception NullPointerException if the numerator 2 is null
-     * @exception NullPointerException if the numerator 1 is null
-     * @exception NullPointerException if the extended numerator 1 is null
-     * @exception NullPointerException if the denominator 1 is null
+     * @exception Exception if the fraction is null
+     * @exception Exception if the numerator 2 is null
+     * @exception Exception if the numerator 1 is null
+     * @exception Exception if the extended numerator 1 is null
+     * @exception Exception if the denominator 1 is null
      */
-    public void subtract(Fraction f) throws NullPointerException {
+    public void subtract(Fraction f) throws Exception {
 
 /*??
         if (f != null) {
@@ -268,27 +268,27 @@ public class Fraction extends Quantity {
                 
                         } else {
             
-                            throw new NullPointerException("Could not subtract fraction. The denominator 1 is null.");
+                            throw new Exception("Could not subtract fraction. The denominator 1 is null.");
                         }
 
                     } else {
         
-                        throw new NullPointerException("Could not subtract fraction. The extended numerator 1 is null.");
+                        throw new Exception("Could not subtract fraction. The extended numerator 1 is null.");
                     }            
                     
                 } else {
     
-                    throw new NullPointerException("Could not subtract fraction. The numerator 1 is null.");
+                    throw new Exception("Could not subtract fraction. The numerator 1 is null.");
                 }
     
             } else {
 
-                throw new NullPointerException("Could not subtract fraction. The numerator 2 is null.");
+                throw new Exception("Could not subtract fraction. The numerator 2 is null.");
             }
 
         } else {
         
-            throw new NullPointerException("Could not subtract fraction. The fraction is null.");
+            throw new Exception("Could not subtract fraction. The fraction is null.");
         }
 */
     }
@@ -297,11 +297,11 @@ public class Fraction extends Quantity {
      * Multiplies this fraction with the fraction.
      *
      * @param f the fraction
-     * @exception NullPointerException if the fraction is null
-     * @exception NullPointerException if the numerator 1 is null
-     * @exception NullPointerException if the denominator 1 is null
+     * @exception Exception if the fraction is null
+     * @exception Exception if the numerator 1 is null
+     * @exception Exception if the denominator 1 is null
      */
-    public void multiplyWith(Fraction f) throws NullPointerException {
+    public void multiplyWith(Fraction f) throws Exception {
 
 /*??
         if (f != null) {
@@ -320,17 +320,17 @@ public class Fraction extends Quantity {
 
                 } else {
     
-                    throw new NullPointerException("Could not multiply fraction. The denominator 1 is null.");
+                    throw new Exception("Could not multiply fraction. The denominator 1 is null.");
                 }
 
             } else {
 
-                throw new NullPointerException("Could not multiply fraction. The numerator 1 is null.");
+                throw new Exception("Could not multiply fraction. The numerator 1 is null.");
             }
 
         } else {
         
-            throw new NullPointerException("Could not multiply fraction. The fraction is null.");
+            throw new Exception("Could not multiply fraction. The fraction is null.");
         }
 */
     }
@@ -339,11 +339,11 @@ public class Fraction extends Quantity {
      * Divides this fraction by the fraction.
      *
      * @param f the fraction
-     * @exception NullPointerException if the fraction is null
-     * @exception NullPointerException if the numerator 1 is null
-     * @exception NullPointerException if the denominator 1 is null
+     * @exception Exception if the fraction is null
+     * @exception Exception if the numerator 1 is null
+     * @exception Exception if the denominator 1 is null
      */
-    public void divideBy(Fraction f) throws NullPointerException {
+    public void divideBy(Fraction f) throws Exception {
 
 /*??
         if (f != null) {
@@ -362,17 +362,17 @@ public class Fraction extends Quantity {
 
                 } else {
     
-                    throw new NullPointerException("Could not divide fraction. The denominator 1 is null.");
+                    throw new Exception("Could not divide fraction. The denominator 1 is null.");
                 }
 
             } else {
 
-                throw new NullPointerException("Could not divide fraction. The numerator 1 is null.");
+                throw new Exception("Could not divide fraction. The numerator 1 is null.");
             }
 
         } else {
         
-            throw new NullPointerException("Could not divide fraction. The fraction is null.");
+            throw new Exception("Could not divide fraction. The fraction is null.");
         }
 */
     }
@@ -387,12 +387,12 @@ public class Fraction extends Quantity {
      * @param f the fraction
      * @return true - if this fraction is equal to the given fraction;
      * false - otherwise
-     * @exception NullPointerException if the fraction is null
-     * @exception NullPointerException if the numerator 2 is null
-     * @exception NullPointerException if the numerator 1 is null
-     * @exception NullPointerException if the extended numerator 1 is null
+     * @exception Exception if the fraction is null
+     * @exception Exception if the numerator 2 is null
+     * @exception Exception if the numerator 1 is null
+     * @exception Exception if the extended numerator 1 is null
      */
-    public boolean isEqualTo(Fraction f) throws NullPointerException {
+    public boolean isEqualTo(Fraction f) throws Exception {
 
         boolean result = Boolean.FALSE;
 
@@ -416,23 +416,23 @@ public class Fraction extends Quantity {
 
                     } else {
                         
-                        throw new NullPointerException("Could not compare fraction. The extended numerator 1 is null.");
+                        throw new Exception("Could not compare fraction. The extended numerator 1 is null.");
                     }
 
                 } else {
                     
-                    throw new NullPointerException("Could not compare fraction. The numerator 1 is null.");
+                    throw new Exception("Could not compare fraction. The numerator 1 is null.");
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not compare fraction. The numerator 2 is null.");
+                throw new Exception("Could not compare fraction. The numerator 2 is null.");
             }
 */
                 
         } else {
             
-            throw new NullPointerException("Could not compare fraction. The fraction is null.");
+            throw new Exception("Could not compare fraction. The fraction is null.");
         }
 
         return result;        
@@ -444,12 +444,12 @@ public class Fraction extends Quantity {
      * @param f the fraction
      * @return true - if this fraction is smaller than the given fraction;
      * false - otherwise
-     * @exception NullPointerException if the fraction is null
-     * @exception NullPointerException if the numerator 2 is null
-     * @exception NullPointerException if the numerator 1 is null
-     * @exception NullPointerException if the extended numerator 1 is null
+     * @exception Exception if the fraction is null
+     * @exception Exception if the numerator 2 is null
+     * @exception Exception if the numerator 1 is null
+     * @exception Exception if the extended numerator 1 is null
      */
-    public boolean isSmallerThan(Fraction f) throws NullPointerException {
+    public boolean isSmallerThan(Fraction f) throws Exception {
 
         boolean result = Boolean.FALSE;
 
@@ -473,23 +473,23 @@ public class Fraction extends Quantity {
 
                     } else {
                         
-                        throw new NullPointerException("Could not compare fraction. The extended numerator 1 is null.");
+                        throw new Exception("Could not compare fraction. The extended numerator 1 is null.");
                     }
 
                 } else {
                     
-                    throw new NullPointerException("Could not compare fraction. The numerator 1 is null.");
+                    throw new Exception("Could not compare fraction. The numerator 1 is null.");
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not compare fraction. The numerator 2 is null.");
+                throw new Exception("Could not compare fraction. The numerator 2 is null.");
             }
 */
                 
         } else {
             
-            throw new NullPointerException("Could not compare fraction. The fraction is null.");
+            throw new Exception("Could not compare fraction. The fraction is null.");
         }
 
         return result;        
@@ -501,12 +501,12 @@ public class Fraction extends Quantity {
      * @param f the fraction
      * @return true - if this fraction is greater than the given fraction;
      * false - otherwise
-     * @exception NullPointerException if the fraction is null
-     * @exception NullPointerException if the numerator 2 is null
-     * @exception NullPointerException if the numerator 1 is null
-     * @exception NullPointerException if the extended numerator 1 is null
+     * @exception Exception if the fraction is null
+     * @exception Exception if the numerator 2 is null
+     * @exception Exception if the numerator 1 is null
+     * @exception Exception if the extended numerator 1 is null
      */
-    public boolean isGreaterThan(Fraction f) throws NullPointerException {
+    public boolean isGreaterThan(Fraction f) throws Exception {
 
         boolean result = Boolean.FALSE;
 
@@ -530,23 +530,23 @@ public class Fraction extends Quantity {
 
                     } else {
                         
-                        throw new NullPointerException("Could not compare fraction. The extended numerator 1 is null.");
+                        throw new Exception("Could not compare fraction. The extended numerator 1 is null.");
                     }
 
                 } else {
                     
-                    throw new NullPointerException("Could not compare fraction. The numerator 1 is null.");
+                    throw new Exception("Could not compare fraction. The numerator 1 is null.");
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not compare fraction. The numerator 2 is null.");
+                throw new Exception("Could not compare fraction. The numerator 2 is null.");
             }
 */
                 
         } else {
             
-            throw new NullPointerException("Could not compare fraction. The fraction is null.");
+            throw new Exception("Could not compare fraction. The fraction is null.");
         }
 
         return result;        
@@ -558,12 +558,12 @@ public class Fraction extends Quantity {
      * @param f the fraction
      * @return true - if this fraction is smaller than or equal to the given fraction;
      * false - otherwise
-     * @exception NullPointerException if the fraction is null
-     * @exception NullPointerException if the numerator 2 is null
-     * @exception NullPointerException if the numerator 1 is null
-     * @exception NullPointerException if the extended numerator 1 is null
+     * @exception Exception if the fraction is null
+     * @exception Exception if the numerator 2 is null
+     * @exception Exception if the numerator 1 is null
+     * @exception Exception if the extended numerator 1 is null
      */
-    public boolean isSmallerThanOrEqualTo(Fraction f) throws NullPointerException {
+    public boolean isSmallerThanOrEqualTo(Fraction f) throws Exception {
 
         boolean result = Boolean.FALSE;
 
@@ -587,23 +587,23 @@ public class Fraction extends Quantity {
 
                     } else {
                         
-                        throw new NullPointerException("Could not compare fraction. The extended numerator 1 is null.");
+                        throw new Exception("Could not compare fraction. The extended numerator 1 is null.");
                     }
 
                 } else {
                     
-                    throw new NullPointerException("Could not compare fraction. The numerator 1 is null.");
+                    throw new Exception("Could not compare fraction. The numerator 1 is null.");
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not compare fraction. The numerator 2 is null.");
+                throw new Exception("Could not compare fraction. The numerator 2 is null.");
             }
 */
                 
         } else {
             
-            throw new NullPointerException("Could not compare fraction. The fraction is null.");
+            throw new Exception("Could not compare fraction. The fraction is null.");
         }
 
         return result;        
@@ -615,12 +615,12 @@ public class Fraction extends Quantity {
      * @param f the fraction
      * @return true - if this fraction is greater than or equal to the given fraction;
      * false - otherwise
-     * @exception NullPointerException if the fraction is null
-     * @exception NullPointerException if the numerator 2 is null
-     * @exception NullPointerException if the numerator 1 is null
-     * @exception NullPointerException if the extended numerator 1 is null
+     * @exception Exception if the fraction is null
+     * @exception Exception if the numerator 2 is null
+     * @exception Exception if the numerator 1 is null
+     * @exception Exception if the extended numerator 1 is null
      */
-    public boolean isGreaterThanOrEqualTo(Fraction f) throws NullPointerException {
+    public boolean isGreaterThanOrEqualTo(Fraction f) throws Exception {
 
         boolean result = Boolean.FALSE;
 
@@ -644,23 +644,23 @@ public class Fraction extends Quantity {
 
                     } else {
                         
-                        throw new NullPointerException("Could not compare fraction. The extended numerator 1 is null.");
+                        throw new Exception("Could not compare fraction. The extended numerator 1 is null.");
                     }
 
                 } else {
                     
-                    throw new NullPointerException("Could not compare fraction. The numerator 1 is null.");
+                    throw new Exception("Could not compare fraction. The numerator 1 is null.");
                 }
 
             } else {
                 
-                throw new NullPointerException("Could not compare fraction. The numerator 2 is null.");
+                throw new Exception("Could not compare fraction. The numerator 2 is null.");
             }
 */
                 
         } else {
             
-            throw new NullPointerException("Could not compare fraction. The fraction is null.");
+            throw new Exception("Could not compare fraction. The fraction is null.");
         }
 
         return result;        
@@ -669,7 +669,7 @@ public class Fraction extends Quantity {
     /**
      * Reducts this fraction.
      */
-    public void reduct() throws NullPointerException {
+    public void reduct() throws Exception {
 
         Integer den = (Integer) getChildItem(Fraction.DENOMINATOR);
         
@@ -729,7 +729,7 @@ public class Fraction extends Quantity {
                 
                     } else {
                         
-                        throw new NullPointerException("Could not reduct fraction. The maximum divider is null.");
+                        throw new Exception("Could not reduct fraction. The maximum divider is null.");
                     }
                 }
             }

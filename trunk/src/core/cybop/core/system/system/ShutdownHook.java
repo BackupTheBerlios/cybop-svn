@@ -48,7 +48,7 @@ import cybop.core.system.System;
  * in the frameworks hierarchy, it must also belong to that package
  * <code>cybop.core.system.family</code>
  *
- * @version $Revision: 1.4 $ $Date: 2003-03-12 18:12:20 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ShutdownHook extends System {
@@ -101,9 +101,9 @@ public class ShutdownHook extends System {
      * This method is called only by the encapsulated java thread.
      * Do not use it elsewise!
      *
-     * @exception NullPointerException if the launcher is null
+     * @exception Exception if the launcher is null
      */
-    public void run() throws NullPointerException {
+    public void run() throws Exception {
 
         super.run();
 
@@ -126,7 +126,7 @@ public class ShutdownHook extends System {
 
         } else {
 
-            throw new NullPointerException("Could not run this system. The system is null.");
+            throw new Exception("Could not run this system. The system is null.");
         }
     }
 }

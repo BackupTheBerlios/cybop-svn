@@ -51,7 +51,7 @@ import cybop.core.system.region.controller.translator.*;
  *      <li><code>Translator (sending signals)</code></li>
  *  </ul>
  *
- * @version $Revision: 1.14 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Controller extends Block {
@@ -387,9 +387,9 @@ public class Controller extends Block {
     /**
      * Configures this controller.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void configure() throws Exception, NullPointerException {
+    public void configure() throws Exception {
 
         super.configure();
 
@@ -416,9 +416,9 @@ public class Controller extends Block {
     /**
      * Deconfigures this controller.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void deconfigure() throws Exception, NullPointerException {
+    public void deconfigure() throws Exception {
 
         Configuration c = (Configuration) getChildItem(Controller.CONFIGURATION);
 
@@ -533,9 +533,9 @@ public class Controller extends Block {
      * Controls the signal.
      *
      * @param s the signal
-     * @exception NullPointerException if the signal is null
+     * @exception Exception if the signal is null
      */
-    public void control(Signal s) throws Exception, NullPointerException {
+    public void control(Signal s) throws Exception {
 
         if (s != null) {
 
@@ -571,12 +571,12 @@ public class Controller extends Block {
 
             } else {
 
-                throw new NullPointerException("Could not process action. The action is null.");
+                throw new Exception("Could not process action. The action is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not control signal. The signal is null.");
+            throw new Exception("Could not control signal. The signal is null.");
         }
     }
 
@@ -584,9 +584,9 @@ public class Controller extends Block {
      * Shows the system user interface.
      *
      * @param s the signal
-     * @exception NullPointerException if the signal is null
+     * @exception Exception if the signal is null
      */
-    protected void showSystemUserInterface(Signal s) throws Exception, NullPointerException {
+    protected void showSystemUserInterface(Signal s) throws Exception {
 
         if (s != null) {
 
@@ -596,7 +596,7 @@ public class Controller extends Block {
 
         } else {
 
-            throw new NullPointerException("Could not show system user interface. The signal is null.");
+            throw new Exception("Could not show system user interface. The signal is null.");
         }
     }
 
@@ -604,9 +604,9 @@ public class Controller extends Block {
      * Hides the system user interface.
      *
      * @param s the signal
-     * @exception NullPointerException if the signal is null
+     * @exception Exception if the signal is null
      */
-    protected void hideSystemUserInterface(Signal s) throws Exception, NullPointerException {
+    protected void hideSystemUserInterface(Signal s) throws Exception {
 
         if (s != null) {
 
@@ -615,7 +615,7 @@ public class Controller extends Block {
 
         } else {
 
-            throw new NullPointerException("Could not hide system user interface. The signal is null.");
+            throw new Exception("Could not hide system user interface. The signal is null.");
         }
     }
 
@@ -623,9 +623,9 @@ public class Controller extends Block {
      * Shows the system information user interface.
      *
      * @param s the signal
-     * @exception NullPointerException if the signal is null
+     * @exception Exception if the signal is null
      */
-    protected void showSystemInformationUserInterface(Signal s) throws Exception, NullPointerException {
+    protected void showSystemInformationUserInterface(Signal s) throws Exception {
 
         if (s != null) {
 
@@ -643,7 +643,7 @@ public class Controller extends Block {
 
             } else {
 
-                throw new NullPointerException("Could not show system information user interface. The translator is null.");
+                throw new Exception("Could not show system information user interface. The translator is null.");
             }
 
             s.setChildItem(Signal.LANGUAGE, Signal.GUI_LANGUAGE);
@@ -651,7 +651,7 @@ public class Controller extends Block {
 
         } else {
 
-            throw new NullPointerException("Could not show system information user interface. The signal is null.");
+            throw new Exception("Could not show system information user interface. The signal is null.");
         }
     }
 
@@ -659,9 +659,9 @@ public class Controller extends Block {
      * Hides the system information user interface.
      *
      * @param s the signal
-     * @exception NullPointerException if the signal is null
+     * @exception Exception if the signal is null
      */
-    protected void hideSystemInformationUserInterface(Signal s) throws Exception, NullPointerException {
+    protected void hideSystemInformationUserInterface(Signal s) throws Exception {
 
         if (s != null) {
 
@@ -670,7 +670,7 @@ public class Controller extends Block {
 
         } else {
 
-            throw new NullPointerException("Could not hide system information user interface. The signal is null.");
+            throw new Exception("Could not hide system information user interface. The signal is null.");
         }
     }
 
@@ -678,9 +678,9 @@ public class Controller extends Block {
      * Reacts on mouse clicked action.
      *
      * @param s the signal
-     * @exception NullPointerException if the signal is null
+     * @exception Exception if the signal is null
      */
-    protected void mouseClicked(Signal s) throws Exception, NullPointerException {
+    protected void mouseClicked(Signal s) throws Exception {
 
         java.lang.System.out.println("\n\n\n\n\n mouseClicked \n\n\n\n\n");
 
@@ -712,17 +712,17 @@ public class Controller extends Block {
 
                 } else {
 
-                    throw new NullPointerException("Could not react on mouse clicked action. The graphic item is null.");
+                    throw new Exception("Could not react on mouse clicked action. The graphic item is null.");
                 }
 
             } else {
     
-                throw new NullPointerException("Could not react on mouse clicked action. The mouse model is null.");
+                throw new Exception("Could not react on mouse clicked action. The mouse model is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not react on mouse clicked action. The signal is null.");
+            throw new Exception("Could not react on mouse clicked action. The signal is null.");
         }
     }
 
@@ -731,9 +731,9 @@ public class Controller extends Block {
      *
      * @param p the position
      * @return the item
-     * @exception NullPointerException if the system user interface is null
+     * @exception Exception if the system user interface is null
      */
-    protected Item getItem(Space p) throws Exception, NullPointerException {
+    protected Item getItem(Space p) throws Exception {
 
         Item i = null;
         SystemUserInterface c = (SystemUserInterface) getChildItem(Controller.SYSTEM_USER_INTERFACE);
@@ -744,7 +744,7 @@ public class Controller extends Block {
 
         } else {
 
-            throw new NullPointerException("Could not get item. The system user interface is null.");
+            throw new Exception("Could not get item. The system user interface is null.");
         }
 
         return i;
@@ -754,9 +754,9 @@ public class Controller extends Block {
      * Controls the signal as server dummy.
      *
      * @param s the signal
-     * @exception NullPointerException if the signal is null
+     * @exception Exception if the signal is null
      */
-    public void controlAsServerDummy(Signal s) throws Exception, NullPointerException {
+    public void controlAsServerDummy(Signal s) throws Exception {
 
         if (s != null) {
 
@@ -771,7 +771,7 @@ public class Controller extends Block {
 
         } else {
 
-            throw new NullPointerException("Could not control signal. The signal is null.");
+            throw new Exception("Could not control signal. The signal is null.");
         }
     }
 
@@ -780,9 +780,9 @@ public class Controller extends Block {
      *
      * @param a the action
      * @param dm the domain model
-     * @exception NullPointerException if the processor is null
+     * @exception Exception if the processor is null
      */
-    private void process(String a, DomainModel dm) throws Exception, NullPointerException {
+    private void process(String a, DomainModel dm) throws Exception {
 
         Processor p = (Processor) getChildItem(Controller.PROCESSOR);
 
@@ -792,7 +792,7 @@ public class Controller extends Block {
 
         } else {
 
-            throw new NullPointerException("Could not process model. The processor is null.");
+            throw new Exception("Could not process model. The processor is null.");
         }
     }
 }

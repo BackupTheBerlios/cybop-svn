@@ -33,7 +33,7 @@ import cybop.core.system.System;
  * An external system is one that isn't built on the ResMedLib framework.
  * Such a system runs as process of the surrounding operating system.
  *
- * @version $Revision: 1.4 $ $Date: 2003-04-24 15:58:47 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ExternalSystem extends System {
@@ -53,9 +53,9 @@ public class ExternalSystem extends System {
      * Creates an encapsulated java process.
      *
      * @return the encapsulated java process
-     * @exception NullPointerException if the java runtime is null
+     * @exception Exception if the java runtime is null
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         java.lang.Process p = null;
         java.lang.Runtime r = java.lang.Runtime.getRuntime();
@@ -68,7 +68,7 @@ public class ExternalSystem extends System {
 
         } else {
 
-            throw new NullPointerException("Could not create encapsulated java process. The java runtime is null.");
+            throw new Exception("Could not create encapsulated java process. The java runtime is null.");
         }
 
         return p;
@@ -78,9 +78,9 @@ public class ExternalSystem extends System {
      * Destroys the encapsulated java process.
      *
      * @param o the encapsulated java process
-     * @exception NullPointerException if the encapsulated java process is null
+     * @exception Exception if the encapsulated java process is null
      */
-    public void destroyJavaObject(java.lang.Object o) throws NullPointerException {
+    public void destroyJavaObject(java.lang.Object o) throws Exception {
         
         java.lang.Process p = (java.lang.Process) o;
 
@@ -91,7 +91,7 @@ public class ExternalSystem extends System {
 
         } else {
 
-            throw new NullPointerException("Could not destroy encapsulated java process. The encapsulated java process is null.");
+            throw new Exception("Could not destroy encapsulated java process. The encapsulated java process is null.");
         }
     }
 }

@@ -32,7 +32,7 @@ import cybop.core.model.organizer.menuitem.*;
 /**
  * This class represents a systems menu.
  *
- * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemsMenu extends Menu {
@@ -53,9 +53,9 @@ public class SystemsMenu extends Menu {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -68,7 +68,7 @@ public class SystemsMenu extends Menu {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -76,9 +76,9 @@ public class SystemsMenu extends Menu {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -89,7 +89,7 @@ public class SystemsMenu extends Menu {
 
         } else {
 
-            throw new NullPointerException("Could not remove item. The name is null.");
+            throw new Exception("Could not remove item. The name is null.");
         }
 
         super.removeChildItem(n);
@@ -127,10 +127,10 @@ public class SystemsMenu extends Menu {
      * Sets the exit menu item.
      *
      * @param mi the exit menu item
-     * @exception NullPointerException if the java menu is null
-     * @exception NullPointerException if the exit menu item is null
+     * @exception Exception if the java menu is null
+     * @exception Exception if the exit menu item is null
      */
-    public void setExitMenuItem(ExitMenuItem mi) throws NullPointerException {
+    public void setExitMenuItem(ExitMenuItem mi) throws Exception {
 
         javax.swing.JMenu m = (javax.swing.JMenu) getJavaObject();
 
@@ -142,12 +142,12 @@ public class SystemsMenu extends Menu {
 
             } else {
     
-                throw new NullPointerException("Could not set exit menu item. The exit menu item is null.");
+                throw new Exception("Could not set exit menu item. The exit menu item is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set exit menu item. The java menu is null.");
+            throw new Exception("Could not set exit menu item. The java menu is null.");
         }
     }
 
@@ -155,10 +155,10 @@ public class SystemsMenu extends Menu {
      * Removes the exit menu item.
      *
      * @param mi the exit menu item
-     * @exception NullPointerException if the java menu is null
-     * @exception NullPointerException if the exit menu item is null
+     * @exception Exception if the java menu is null
+     * @exception Exception if the exit menu item is null
      */
-    public void removeExitMenuItem(ExitMenuItem mi) throws NullPointerException {
+    public void removeExitMenuItem(ExitMenuItem mi) throws Exception {
 
         javax.swing.JMenu m = (javax.swing.JMenu) getJavaObject();
 
@@ -170,12 +170,12 @@ public class SystemsMenu extends Menu {
 
             } else {
     
-                throw new NullPointerException("Could not remove exit menu item. The exit menu item is null.");
+                throw new Exception("Could not remove exit menu item. The exit menu item is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not remove exit menu item. The java menu is null.");
+            throw new Exception("Could not remove exit menu item. The java menu is null.");
         }
     }
 

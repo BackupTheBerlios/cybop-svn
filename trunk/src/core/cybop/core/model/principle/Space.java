@@ -35,7 +35,7 @@ import cybop.core.model.*;
  * A point is just a minimal space and always relative to the referenced object.
  * The absolute point does not exist as any point can consist of yet smaller points.
  *
- * @version $Revision: 1.7 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Space extends Principle {
@@ -187,9 +187,9 @@ public class Space extends Principle {
      * @param p the position relative to this item
      * @return true if this item contains the given position;
      * false otherwise
-     * @exception NullPointerException if the position is null
+     * @exception Exception if the position is null
      */
-    public boolean contains(Space p) throws Exception, NullPointerException {
+    public boolean contains(Space p) throws Exception {
 
         boolean b = false;
 
@@ -209,7 +209,7 @@ public class Space extends Principle {
 
         } else {
 
-            throw new NullPointerException("Could not check position. The position is null.");
+            throw new Exception("Could not check position. The position is null.");
         }
 
         return b;
@@ -221,9 +221,9 @@ public class Space extends Principle {
      * @param x the x position relative to this item
      * @return true if this item's x expanse contains the given x position;
      * false otherwise
-     * @exception NullPointerException if the x position is null
+     * @exception Exception if the x position is null
      */
-    public boolean xContains(Integer x) throws Exception, NullPointerException {
+    public boolean xContains(Integer x) throws Exception {
 
         boolean b = false;
 
@@ -237,7 +237,7 @@ public class Space extends Principle {
 
         } else {
 
-            throw new NullPointerException("Could not check x position. The x position is null.");
+            throw new Exception("Could not check x position. The x position is null.");
         }
 
         return b;
@@ -249,9 +249,9 @@ public class Space extends Principle {
      * @param y the y position relative to this item
      * @return true if this item's y expanse contains the given y position;
      * false otherwise
-     * @exception NullPointerException if the y position is null
+     * @exception Exception if the y position is null
      */
-    public boolean yContains(Integer y) throws Exception, NullPointerException {
+    public boolean yContains(Integer y) throws Exception {
 
         boolean b = false;
 
@@ -265,7 +265,7 @@ public class Space extends Principle {
 
         } else {
 
-            throw new NullPointerException("Could not check y position. The y position is null.");
+            throw new Exception("Could not check y position. The y position is null.");
         }
 
         return b;
@@ -277,9 +277,9 @@ public class Space extends Principle {
      * @param z the z position relative to this item
      * @return true if this item's z expanse contains the given z position;
      * false otherwise
-     * @exception NullPointerException if the z position is null
+     * @exception Exception if the z position is null
      */
-    public boolean zContains(Integer z) throws Exception, NullPointerException {
+    public boolean zContains(Integer z) throws Exception {
 
         boolean b = false;
 
@@ -293,7 +293,7 @@ public class Space extends Principle {
 
         } else {
 
-            throw new NullPointerException("Could not check z position. The z position is null.");
+            throw new Exception("Could not check z position. The z position is null.");
         }
 
         return b;

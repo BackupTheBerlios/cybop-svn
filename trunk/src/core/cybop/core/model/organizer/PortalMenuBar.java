@@ -32,7 +32,7 @@ import cybop.core.model.organizer.menu.*;
 /**
  * This class represents a portal menu bar.
  *
- * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalMenuBar extends MenuBar {
@@ -71,9 +71,9 @@ public class PortalMenuBar extends MenuBar {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -112,7 +112,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -120,9 +120,9 @@ public class PortalMenuBar extends MenuBar {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -159,7 +159,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not remove item. The name is null.");
+            throw new Exception("Could not remove item. The name is null.");
         }
 
         super.removeChildItem(n);
@@ -230,7 +230,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create editor menu. The cut menu item is null.");
+            throw new Exception("Could not create editor menu. The cut menu item is null.");
         }
 
         if (copyMenuItem != null) {
@@ -243,7 +243,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create editor menu. The copy menu item is null.");
+            throw new Exception("Could not create editor menu. The copy menu item is null.");
         }
 
         if (pasteMenuItem != null) {
@@ -256,7 +256,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create editor menu. The paste menu item is null.");
+            throw new Exception("Could not create editor menu. The paste menu item is null.");
         }
 
         if (m != null) {
@@ -270,7 +270,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create editor menu. The editor menu is null.");
+            throw new Exception("Could not create editor menu. The editor menu is null.");
         }
 */
     }
@@ -303,7 +303,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create view menu. The show tool bar menu item is null.");
+            throw new Exception("Could not create view menu. The show tool bar menu item is null.");
         }
 
         if (showStatusBarMenuItem != null) {
@@ -316,7 +316,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create view menu. The show status bar menu item is null.");
+            throw new Exception("Could not create view menu. The show status bar menu item is null.");
         }
 
         if (showSystemTreeMenuItem != null) {
@@ -329,7 +329,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create view menu. The show system tree menu item is null.");
+            throw new Exception("Could not create view menu. The show system tree menu item is null.");
         }
 
         if (m != null) {
@@ -343,7 +343,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create view menu. The view menu is null.");
+            throw new Exception("Could not create view menu. The view menu is null.");
         }
 */
     }
@@ -403,7 +403,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create settings menu. The configure menu bar menu item is null.");
+            throw new Exception("Could not create settings menu. The configure menu bar menu item is null.");
         }
 
         if (configureToolBarMenuItem != null) {
@@ -416,7 +416,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create settings menu. The configure tool bar menu item is null.");
+            throw new Exception("Could not create settings menu. The configure tool bar menu item is null.");
         }
 
         if (configureStatusBarMenuItem != null) {
@@ -429,7 +429,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create settings menu. The configure status bar menu item is null.");
+            throw new Exception("Could not create settings menu. The configure status bar menu item is null.");
         }
 
         if (configureKeyBindingsMenuItem != null) {
@@ -442,7 +442,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create settings menu. The configure key bindings menu item is null.");
+            throw new Exception("Could not create settings menu. The configure key bindings menu item is null.");
         }
 
         if (configureSystemTreeMenuItem != null) {
@@ -455,7 +455,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create settings menu. The configure system tree menu item is null.");
+            throw new Exception("Could not create settings menu. The configure system tree menu item is null.");
         }
 
         if (configureResMedicinaeMenuItem != null) {
@@ -468,7 +468,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create settings menu. The configure res medicinae menu item is null.");
+            throw new Exception("Could not create settings menu. The configure res medicinae menu item is null.");
         }
 
         if (m != null) {
@@ -486,7 +486,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create settings menu. The settings menu is null.");
+            throw new Exception("Could not create settings menu. The settings menu is null.");
         }
 */
     }
@@ -519,7 +519,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create window menu. The iconify all menu item is null.");
+            throw new Exception("Could not create window menu. The iconify all menu item is null.");
         }
 
         if (closeMenuItem != null) {
@@ -532,7 +532,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create window menu. The close menu item is null.");
+            throw new Exception("Could not create window menu. The close menu item is null.");
         }
 
         if (closeAllMenuItem != null) {
@@ -545,7 +545,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create window menu. The close all menu item is null.");
+            throw new Exception("Could not create window menu. The close all menu item is null.");
         }
 
         if (m != null) {
@@ -563,7 +563,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create window menu. The window menu is null.");
+            throw new Exception("Could not create window menu. The window menu is null.");
         }
 */
     }
@@ -596,7 +596,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create help menu. The show contents menu item is null.");
+            throw new Exception("Could not create help menu. The show contents menu item is null.");
         }
 
         if (reportBugMenuItem != null) {
@@ -609,7 +609,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create help menu. The report bug menu item is null.");
+            throw new Exception("Could not create help menu. The report bug menu item is null.");
         }
 
         if (informAboutResMedicinaeMenuItem != null) {
@@ -625,7 +625,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create help menu. The inform about res medicinae menu item is null.");
+            throw new Exception("Could not create help menu. The inform about res medicinae menu item is null.");
         }
 
         if (m != null) {
@@ -641,7 +641,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create help menu. The help menu is null.");
+            throw new Exception("Could not create help menu. The help menu is null.");
         }
 */
     }
@@ -654,10 +654,10 @@ public class PortalMenuBar extends MenuBar {
      * Sets the systems menu.
      *
      * @param m the systems menu
-     * @exception NullPointerException if the java menu bar is null
-     * @exception NullPointerException if the systems menu is null
+     * @exception Exception if the java menu bar is null
+     * @exception Exception if the systems menu is null
      */
-    public void setSystemsMenu(SystemsMenu m) throws NullPointerException {
+    public void setSystemsMenu(SystemsMenu m) throws Exception {
 
         javax.swing.JMenuBar mb = (javax.swing.JMenuBar) getJavaObject();
 
@@ -669,12 +669,12 @@ public class PortalMenuBar extends MenuBar {
 
             } else {
     
-                throw new NullPointerException("Could not set systems menu. The systems menu is null.");
+                throw new Exception("Could not set systems menu. The systems menu is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set systems menu. The java menu bar is null.");
+            throw new Exception("Could not set systems menu. The java menu bar is null.");
         }
     }
 
@@ -682,10 +682,10 @@ public class PortalMenuBar extends MenuBar {
      * Removes the systems menu.
      *
      * @param m the systems menu
-     * @exception NullPointerException if the java menu bar is null
-     * @exception NullPointerException if the systems menu is null
+     * @exception Exception if the java menu bar is null
+     * @exception Exception if the systems menu is null
      */
-    public void removeSystemsMenu(SystemsMenu m) throws NullPointerException {
+    public void removeSystemsMenu(SystemsMenu m) throws Exception {
 
         javax.swing.JMenuBar mb = (javax.swing.JMenuBar) getJavaObject();
 
@@ -697,12 +697,12 @@ public class PortalMenuBar extends MenuBar {
 
             } else {
     
-                throw new NullPointerException("Could not remove systems menu. The systems menu is null.");
+                throw new Exception("Could not remove systems menu. The systems menu is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not remove systems menu. The java menu bar is null.");
+            throw new Exception("Could not remove systems menu. The java menu bar is null.");
         }
     }
 
@@ -714,10 +714,10 @@ public class PortalMenuBar extends MenuBar {
      * Sets the help menu.
      *
      * @param m the help menu
-     * @exception NullPointerException if the java menu bar is null
-     * @exception NullPointerException if the help menu is null
+     * @exception Exception if the java menu bar is null
+     * @exception Exception if the help menu is null
      */
-    public void setHelpMenu(HelpMenu m) throws NullPointerException {
+    public void setHelpMenu(HelpMenu m) throws Exception {
 
         javax.swing.JMenuBar mb = (javax.swing.JMenuBar) getJavaObject();
 
@@ -729,12 +729,12 @@ public class PortalMenuBar extends MenuBar {
 
             } else {
     
-                throw new NullPointerException("Could not set help menu. The help menu is null.");
+                throw new Exception("Could not set help menu. The help menu is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set help menu. The java menu bar is null.");
+            throw new Exception("Could not set help menu. The java menu bar is null.");
         }
     }
 
@@ -742,10 +742,10 @@ public class PortalMenuBar extends MenuBar {
      * Removes the help menu.
      *
      * @param m the help menu
-     * @exception NullPointerException if the java menu bar is null
-     * @exception NullPointerException if the help menu is null
+     * @exception Exception if the java menu bar is null
+     * @exception Exception if the help menu is null
      */
-    public void removeHelpMenu(HelpMenu m) throws NullPointerException {
+    public void removeHelpMenu(HelpMenu m) throws Exception {
 
         javax.swing.JMenuBar mb = (javax.swing.JMenuBar) getJavaObject();
 
@@ -757,12 +757,12 @@ public class PortalMenuBar extends MenuBar {
 
             } else {
     
-                throw new NullPointerException("Could not remove help menu. The help menu is null.");
+                throw new Exception("Could not remove help menu. The help menu is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not remove help menu. The java menu bar is null.");
+            throw new Exception("Could not remove help menu. The java menu bar is null.");
         }
     }
 
@@ -796,7 +796,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create placing menu. The cascade menu item is null.");
+            throw new Exception("Could not create placing menu. The cascade menu item is null.");
         }
 
         if (tileVerticallyMenuItem != null) {
@@ -809,7 +809,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create placing menu. The tile vertically menu item is null.");
+            throw new Exception("Could not create placing menu. The tile vertically menu item is null.");
         }
 
         if (tileHorizontallyMenuItem != null) {
@@ -822,7 +822,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create placing menu. The tile horizontally menu item is null.");
+            throw new Exception("Could not create placing menu. The tile horizontally menu item is null.");
         }
 
         if (m != null) {
@@ -836,7 +836,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create placing menu. The placing menu is null.");
+            throw new Exception("Could not create placing menu. The placing menu is null.");
         }
 */
     }
@@ -877,7 +877,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create mode menu. The set frame display menu item is null.");
+            throw new Exception("Could not create mode menu. The set frame display menu item is null.");
         }
 
         if (setInternalFrameDisplayMenuItem != null) {
@@ -893,7 +893,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create mode menu. The set internal frame display menu item is null.");
+            throw new Exception("Could not create mode menu. The set internal frame display menu item is null.");
         }
 
         if (setTabPageDisplayMenuItem != null) {
@@ -909,7 +909,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create mode menu. The set tab page display menu item is null.");
+            throw new Exception("Could not create mode menu. The set tab page display menu item is null.");
         }
 
         if (m != null) {
@@ -923,7 +923,7 @@ public class PortalMenuBar extends MenuBar {
 
         } else {
 
-            throw new NullPointerException("Could not create mode menu. The mode menu is null.");
+            throw new Exception("Could not create mode menu. The mode menu is null.");
         }
 */
     }

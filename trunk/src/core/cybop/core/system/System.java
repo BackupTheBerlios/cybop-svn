@@ -60,7 +60,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.12 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends Block implements 
@@ -291,9 +291,9 @@ public class System extends Block implements
     /**
      * Configures this system.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void configure() throws Exception, NullPointerException {
+    public void configure() throws Exception {
 
         super.configure();
 
@@ -320,9 +320,9 @@ public class System extends Block implements
     /**
      * Deconfigures this system.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void deconfigure() throws Exception, NullPointerException {
+    public void deconfigure() throws Exception {
 
         Configuration c = (Configuration) getChildItem(System.CONFIGURATION);
 
@@ -411,7 +411,7 @@ public class System extends Block implements
 
         } else {
 
-            throw new NullPointerException("Could not initialize system. The systems count is null.");
+            throw new Exception("Could not initialize system. The systems count is null.");
         }
 */
     }
@@ -454,7 +454,7 @@ public class System extends Block implements
 
         } else {
 
-            throw new NullPointerException("Could not finalize system. The systems count is null.");
+            throw new Exception("Could not finalize system. The systems count is null.");
         }
 */
 
@@ -516,10 +516,10 @@ public class System extends Block implements
      *     <li>true: local server dummy which represents a remote system and
      *     needs to forward messages to the actual server</li>
      * </ul>
-     * @exception NullPointerException if the controller is null
-     * @exception NullPointerException if the dummy flag is null
+     * @exception Exception if the controller is null
+     * @exception Exception if the dummy flag is null
      */
-    public void handle(Signal s, Boolean b) throws Exception, NullPointerException {
+    public void handle(Signal s, Boolean b) throws Exception {
 
         Controller c = (Controller) getChildItem(System.CONTROLLER);
 
@@ -540,7 +540,7 @@ public class System extends Block implements
 
             } else {
 
-                throw new NullPointerException("Could not handle signal. The dummy flag is null.");
+                throw new Exception("Could not handle signal. The dummy flag is null.");
             }
 
         } else {

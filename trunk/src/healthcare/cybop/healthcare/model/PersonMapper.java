@@ -31,7 +31,7 @@ import java.util.*;
 /**
  * Temporary!! Only an EXAMPLE class. "Domain Object Mapper"
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PersonMapper {
@@ -41,11 +41,11 @@ public class PersonMapper {
      *
      * @param o the domain object
      * @param rs the result set
-     * @exception NullPointerException if the domain object is null
-     * @exception NullPointerException if the result set is null
+     * @exception Exception if the domain object is null
+     * @exception Exception if the result set is null
      */
 /*??
-    public void load(DomainObject o, ResultSet rs) throws NullPointerException {
+    public void load(DomainObject o, ResultSet rs) throws Exception {
 
         super.load();
 
@@ -62,12 +62,12 @@ public class PersonMapper {
 
             } else {
 
-                throw new NullPointerException("Could not load domain object. The result set is null.");
+                throw new Exception("Could not load domain object. The result set is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not load domain object. The domain object is null.");
+            throw new Exception("Could not load domain object. The domain object is null.");
         }
     }
 */
@@ -77,11 +77,11 @@ public class PersonMapper {
      *
      * @param o the domain object
      * @param s the prepared statement
-     * @exception NullPointerException if the update statement is null
-     * @exception NullPointerException if the domain object is null
+     * @exception Exception if the update statement is null
+     * @exception Exception if the domain object is null
      */
 /*??
-    public void update(DomainObject o, PreparedStatement s) throws NullPointerException {
+    public void update(DomainObject o, PreparedStatement s) throws Exception {
 
         super.update();
 
@@ -96,12 +96,12 @@ public class PersonMapper {
 
             } else {
 
-                throw new NullPointerException("Could not update database. The domain object is null.");
+                throw new Exception("Could not update database. The domain object is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not update database. The update statement is null.");
+            throw new Exception("Could not update database. The update statement is null.");
         }
     }
 */
@@ -111,11 +111,11 @@ public class PersonMapper {
      *
      * @param o the domain object
      * @param s the update statement
-     * @exception NullPointerException if the insert statement is null
-     * @exception NullPointerException if the domain object is null
+     * @exception Exception if the insert statement is null
+     * @exception Exception if the domain object is null
      */
 /*??
-    public void insert(DomainObject o, PreparedStatement s) throws NullPointerException {
+    public void insert(DomainObject o, PreparedStatement s) throws Exception {
 
         super.insert();
 
@@ -131,12 +131,12 @@ public class PersonMapper {
 
             } else {
 
-                throw new NullPointerException("Could not update database. The domain object is null.");
+                throw new Exception("Could not update database. The domain object is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not update database. The insert statement is null.");
+            throw new Exception("Could not update database. The insert statement is null.");
         }
     }
 */

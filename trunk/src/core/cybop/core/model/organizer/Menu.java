@@ -32,7 +32,7 @@ import cybop.core.model.*;
 /**
  * This class represents a menu.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Menu extends Organizer {
@@ -52,9 +52,9 @@ public class Menu extends Organizer {
      * Creates an encapsulated java swing menu.
      *
      * @return the encapsulated java swing menu
-     * @exception NullPointerException if the encapsulated java swing menu is null
+     * @exception Exception if the encapsulated java swing menu is null
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         javax.swing.JMenu m = new javax.swing.JMenu();
 
@@ -64,7 +64,7 @@ public class Menu extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not create encapsulated java swing menu. The encapsulated java swing menu is null.");
+            throw new Exception("Could not create encapsulated java swing menu. The encapsulated java swing menu is null.");
         }
 
         return m;
@@ -79,9 +79,9 @@ public class Menu extends Organizer {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -94,7 +94,7 @@ public class Menu extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -102,9 +102,9 @@ public class Menu extends Organizer {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -115,7 +115,7 @@ public class Menu extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not remove item. The name is null.");
+            throw new Exception("Could not remove item. The name is null.");
         }
         
         super.removeChildItem(n);
@@ -143,10 +143,10 @@ public class Menu extends Organizer {
      * Sets the label.
      *
      * @param l the label
-     * @exception NullPointerException if the java abstract button is null
-     * @exception NullPointerException if the label is null
+     * @exception Exception if the java abstract button is null
+     * @exception Exception if the label is null
      */
-    public void setLabel(String l) throws NullPointerException {
+    public void setLabel(String l) throws Exception {
 
         javax.swing.AbstractButton b = (javax.swing.AbstractButton) getJavaObject();
 
@@ -158,12 +158,12 @@ public class Menu extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not set label. The label is null.");
+                throw new Exception("Could not set label. The label is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set label. The java abstract button is null.");
+            throw new Exception("Could not set label. The java abstract button is null.");
         }
     }
 
@@ -171,10 +171,10 @@ public class Menu extends Organizer {
      * Removes the label.
      *
      * @param l the label
-     * @exception NullPointerException if the java abstract button is null
-     * @exception NullPointerException if the label is null
+     * @exception Exception if the java abstract button is null
+     * @exception Exception if the label is null
      */
-    public void removeLabel(String l) throws NullPointerException {
+    public void removeLabel(String l) throws Exception {
 
         javax.swing.AbstractButton b = (javax.swing.AbstractButton) getJavaObject();
 
@@ -186,12 +186,12 @@ public class Menu extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not remove label. The label is null.");
+                throw new Exception("Could not remove label. The label is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not remove label. The java abstract button is null.");
+            throw new Exception("Could not remove label. The java abstract button is null.");
         }
     }
 

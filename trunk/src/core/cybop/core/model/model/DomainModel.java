@@ -32,7 +32,7 @@ import cybop.core.system.chain.*;
 /**
  * This class represents a domain model.
  *
- * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Torsten Kunze <zone3@gmx.de>
  */
@@ -66,9 +66,9 @@ public class DomainModel extends Model {
     /**
      * Initializes this domain model.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void initialize() throws Exception, NullPointerException {
+    public void initialize() throws Exception {
 
         super.initialize();
 
@@ -80,16 +80,16 @@ public class DomainModel extends Model {
 
         } else {
 
-            throw new NullPointerException("Could not initialize domain model. The configuration is null.");
+            throw new Exception("Could not initialize domain model. The configuration is null.");
         }
     }
 
     /**
      * Finalizes this domain model.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void finalizz() throws Exception, NullPointerException {
+    public void finalizz() throws Exception {
 
         Configuration c = (Configuration) getChildItem(DomainModel.CONFIGURATION);
 
@@ -101,7 +101,7 @@ public class DomainModel extends Model {
 
         } else {
 
-            throw new NullPointerException("Could not finalize domain model. The configuration is null.");
+            throw new Exception("Could not finalize domain model. The configuration is null.");
         }
 
         super.finalizz();

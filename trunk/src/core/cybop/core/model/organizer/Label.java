@@ -32,7 +32,7 @@ import cybop.core.model.*;
 /**
  * This class represents a label.
  *
- * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Label extends Organizer {
@@ -61,9 +61,9 @@ public class Label extends Organizer {
      * Creates the encapsulated java swing label.
      *
      * @return the encapsulated java swing label
-     * @exception NullPointerException if the java swing label is null
+     * @exception Exception if the java swing label is null
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         javax.swing.JLabel l = new javax.swing.JLabel();
 
@@ -73,7 +73,7 @@ public class Label extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not create java swing label. The java swing label is null.");
+            throw new Exception("Could not create java swing label. The java swing label is null.");
         }
 
         return l;
@@ -94,7 +94,7 @@ public class Label extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not destroy java swing label. The java swing label is null.");
+            throw new Exception("Could not destroy java swing label. The java swing label is null.");
         }
     }
 
@@ -107,9 +107,9 @@ public class Label extends Organizer {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -134,7 +134,7 @@ public class Label extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -142,9 +142,9 @@ public class Label extends Organizer {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -167,7 +167,7 @@ public class Label extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not remove item. The name is null.");
+            throw new Exception("Could not remove item. The name is null.");
         }
         
         super.removeChildItem(n);
@@ -225,10 +225,10 @@ public class Label extends Organizer {
      * Sets the font.
      *
      * @param f the font
-     * @exception NullPointerException if the java label is null
-     * @exception NullPointerException if the font is null
+     * @exception Exception if the java label is null
+     * @exception Exception if the font is null
      */
-    public void setFont(Font f) throws NullPointerException {
+    public void setFont(Font f) throws Exception {
 
         javax.swing.JLabel l = (javax.swing.JLabel) getJavaObject();
 
@@ -245,7 +245,7 @@ public class Label extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not set font. The java label is null.");
+            throw new Exception("Could not set font. The java label is null.");
         }
     }
 
@@ -253,10 +253,10 @@ public class Label extends Organizer {
      * Removes the font.
      *
      * @param f the font
-     * @exception NullPointerException if the java label is null
-     * @exception NullPointerException if the font is null
+     * @exception Exception if the java label is null
+     * @exception Exception if the font is null
      */
-    public void removeFont(Font f) throws NullPointerException {
+    public void removeFont(Font f) throws Exception {
 
         javax.swing.JLabel l = (javax.swing.JLabel) getJavaObject();
 
@@ -273,7 +273,7 @@ public class Label extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not remove font. The java label is null.");
+            throw new Exception("Could not remove font. The java label is null.");
         }
     }
 
@@ -285,10 +285,10 @@ public class Label extends Organizer {
      * Sets the text.
      *
      * @param t the text
-     * @exception NullPointerException if the java label is null
-     * @exception NullPointerException if the text is null
+     * @exception Exception if the java label is null
+     * @exception Exception if the text is null
      */
-    public void setText(String t) throws NullPointerException {
+    public void setText(String t) throws Exception {
 
         javax.swing.JLabel l = (javax.swing.JLabel) getJavaObject();
 
@@ -305,7 +305,7 @@ public class Label extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not set text. The java label is null.");
+            throw new Exception("Could not set text. The java label is null.");
         }
     }
 
@@ -313,10 +313,10 @@ public class Label extends Organizer {
      * Removes the text.
      *
      * @param t the text
-     * @exception NullPointerException if the java label is null
-     * @exception NullPointerException if the text is null
+     * @exception Exception if the java label is null
+     * @exception Exception if the text is null
      */
-    public void removeText(String t) throws NullPointerException {
+    public void removeText(String t) throws Exception {
 
         javax.swing.JLabel l = (javax.swing.JLabel) getJavaObject();
 
@@ -333,7 +333,7 @@ public class Label extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not remove text. The java label is null.");
+            throw new Exception("Could not remove text. The java label is null.");
         }
     }
 
@@ -345,10 +345,10 @@ public class Label extends Organizer {
      * Sets the horizontal text position.
      *
      * @param a the horizontal text position
-     * @exception NullPointerException if the java label is null
-     * @exception NullPointerException if the horizontal text position is null
+     * @exception Exception if the java label is null
+     * @exception Exception if the horizontal text position is null
      */
-    public void setHorizontalTextPosition(Integer a) throws NullPointerException {
+    public void setHorizontalTextPosition(Integer a) throws Exception {
 
         javax.swing.JLabel l = (javax.swing.JLabel) getJavaObject();
 
@@ -365,7 +365,7 @@ public class Label extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not set horizontal text position. The java label is null.");
+            throw new Exception("Could not set horizontal text position. The java label is null.");
         }
     }
 
@@ -373,10 +373,10 @@ public class Label extends Organizer {
      * Removes the horizontal text position.
      *
      * @param a the horizontal text position
-     * @exception NullPointerException if the java label is null
-     * @exception NullPointerException if the horizontal text position is null
+     * @exception Exception if the java label is null
+     * @exception Exception if the horizontal text position is null
      */
-    public void removeHorizontalTextPosition(Integer a) throws NullPointerException {
+    public void removeHorizontalTextPosition(Integer a) throws Exception {
 
         javax.swing.JLabel l = (javax.swing.JLabel) getJavaObject();
 
@@ -393,7 +393,7 @@ public class Label extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not remove horizontal text position. The java label is null.");
+            throw new Exception("Could not remove horizontal text position. The java label is null.");
         }
     }
 
@@ -405,10 +405,10 @@ public class Label extends Organizer {
      * Sets the vertical text position.
      *
      * @param a the vertical text position
-     * @exception NullPointerException if the java label is null
-     * @exception NullPointerException if the vertical text position is null
+     * @exception Exception if the java label is null
+     * @exception Exception if the vertical text position is null
      */
-    public void setVerticalTextPosition(Integer a) throws NullPointerException {
+    public void setVerticalTextPosition(Integer a) throws Exception {
 
         javax.swing.JLabel l = (javax.swing.JLabel) getJavaObject();
 
@@ -425,7 +425,7 @@ public class Label extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not set vertical text position. The java label is null.");
+            throw new Exception("Could not set vertical text position. The java label is null.");
         }
     }
 
@@ -433,10 +433,10 @@ public class Label extends Organizer {
      * Removes the vertical text position.
      *
      * @param a the vertical text position
-     * @exception NullPointerException if the java label is null
-     * @exception NullPointerException if the vertical text position is null
+     * @exception Exception if the java label is null
+     * @exception Exception if the vertical text position is null
      */
-    public void removeVerticalTextPosition(Integer a) throws NullPointerException {
+    public void removeVerticalTextPosition(Integer a) throws Exception {
 
         javax.swing.JLabel l = (javax.swing.JLabel) getJavaObject();
 
@@ -453,7 +453,7 @@ public class Label extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not remove vertical text position. The java label is null.");
+            throw new Exception("Could not remove vertical text position. The java label is null.");
         }
     }
 

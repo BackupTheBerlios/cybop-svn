@@ -31,7 +31,7 @@ import java.util.*;
 /**
  * Temporary!! Only an EXAMPLE class. "Domain Object Finder"
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PersonFinder {
@@ -83,12 +83,12 @@ public class PersonFinder {
      *
      * @param name the last name
      * @return the list of found objects
-     * @exception NullPointerException if the result object list is null
-     * @exception NullPointerException if the find statement is null
-     * @exception NullPointerException if the result set is null
+     * @exception Exception if the result object list is null
+     * @exception Exception if the find statement is null
+     * @exception Exception if the result set is null
      */
 /*??
-    public List findByLastName(String name) throws NullPointerException {
+    public List findByLastName(String name) throws Exception {
 
         List l = new ArrayList();
         PreparedStatement s;
@@ -115,7 +115,7 @@ public class PersonFinder {
 
                     } else {
 
-                        throw new NullPointerException("Could not assemble result object list. The result set is null.");
+                        throw new Exception("Could not assemble result object list. The result set is null.");
                     }
 
                 } catch (SQLException e) {
@@ -129,12 +129,12 @@ public class PersonFinder {
 
             } else {
 
-                throw new NullPointerException("Could not execute query. The find statement is null.");
+                throw new Exception("Could not execute query. The find statement is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not find object by last name. The result object list is null.");
+            throw new Exception("Could not find object by last name. The result object list is null.");
         }
 
         return l;
@@ -147,12 +147,12 @@ public class PersonFinder {
      * @param id the domain object id
      * @param rs the result set
      * @return the domain object
-     * @exception NullPointerException if the map of loaded domain objects is null
-     * @exception NullPointerException if the result set is null
-     * @exception NullPointerException if the mapper is null
+     * @exception Exception if the map of loaded domain objects is null
+     * @exception Exception if the result set is null
+     * @exception Exception if the mapper is null
      */
 /*??
-    protected DomainObject load(Long id, ResultSet rs) throws NullPointerException {
+    protected DomainObject load(Long id, ResultSet rs) throws Exception {
 
         super.load(id, rs);
 
@@ -185,17 +185,17 @@ public class PersonFinder {
 
                     } else {
 
-                        throw new NullPointerException("Could not load domain object. The mapper is null.");
+                        throw new Exception("Could not load domain object. The mapper is null.");
                     }
 
                 } else {
 
-                    throw new NullPointerException("Could not load domain object. The result set is null.");
+                    throw new Exception("Could not load domain object. The result set is null.");
                 }
 
             } else {
 
-                throw new NullPointerException("Could not load domain object. The map of loaded domain objects is null.");
+                throw new Exception("Could not load domain object. The map of loaded domain objects is null.");
             }
         }
 
@@ -208,11 +208,11 @@ public class PersonFinder {
      *
      * @param o the domain object
      * @param s the prepared statement
-     * @exception NullPointerException if the update statement is null
-     * @exception NullPointerException if the domain object is null
+     * @exception Exception if the update statement is null
+     * @exception Exception if the domain object is null
      */
 /*??
-    public void update(DomainObject o, PreparedStatement s) throws NullPointerException {
+    public void update(DomainObject o, PreparedStatement s) throws Exception {
 
         super.update(o, s);
 
@@ -227,7 +227,7 @@ public class PersonFinder {
 
             } else {
 
-                throw new NullPointerException("Could not load domain object. The mapper is null.");
+                throw new Exception("Could not load domain object. The mapper is null.");
             }
 
             if (s != null) {
@@ -236,7 +236,7 @@ public class PersonFinder {
 
             } else {
 
-                throw new NullPointerException("Could not load domain object. The result set is null.");
+                throw new Exception("Could not load domain object. The result set is null.");
             }
 
         } finally {

@@ -30,7 +30,7 @@ import cybop.core.basic.String;
 /**
  * This class represents a logo panel.
  *
- * @version $Revision: 1.6 $ $Date: 2003-04-29 15:12:13 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ImagePanel extends Panel {
@@ -50,9 +50,9 @@ public class ImagePanel extends Panel {
      * Creates the encapsulated java swing panel.
      *
      * @return the encapsulated java swing panel
-     * @exception NullPointerException if the java swing panel is null
+     * @exception Exception if the java swing panel is null
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         javax.swing.JPanel p = new javax.swing.JPanel();
 
@@ -62,7 +62,7 @@ public class ImagePanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not create java swing panel. The java swing panel is null.");
+            throw new Exception("Could not create java swing panel. The java swing panel is null.");
         }
 
         return p; 
@@ -83,7 +83,7 @@ public class ImagePanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not destroy java swing panel. The java swing panel is null.");
+            throw new Exception("Could not destroy java swing panel. The java swing panel is null.");
         }
     }
 
@@ -96,9 +96,9 @@ public class ImagePanel extends Panel {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -111,7 +111,7 @@ public class ImagePanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -119,9 +119,9 @@ public class ImagePanel extends Panel {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -132,7 +132,7 @@ public class ImagePanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove item. The name is null.");
+            throw new Exception("Could not remove item. The name is null.");
         }
         
         super.removeChildItem(n);
@@ -160,10 +160,10 @@ public class ImagePanel extends Panel {
      * Sets the image.
      *
      * @param i the image
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the image is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the image is null
      */
-    public void setImage(Image i) throws NullPointerException {
+    public void setImage(Image i) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -180,7 +180,7 @@ public class ImagePanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not set image. The java panel is null.");
+            throw new Exception("Could not set image. The java panel is null.");
         }
     }
 
@@ -188,10 +188,10 @@ public class ImagePanel extends Panel {
      * Removes the image.
      *
      * @param i the image
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the image is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the image is null
      */
-    public void removeImage(Image i) throws NullPointerException {
+    public void removeImage(Image i) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -208,7 +208,7 @@ public class ImagePanel extends Panel {
 
         } else {
 
-            throw new NullPointerException("Could not remove image. The java panel is null.");
+            throw new Exception("Could not remove image. The java panel is null.");
         }
     }
 

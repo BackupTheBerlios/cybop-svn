@@ -30,7 +30,7 @@ import org.resmedicinae.resmedlib.component.view.swing.*;
 /**
  * This class represents the HelloWorld view.
  *
- * @version $Revision: 1.1 $ $Date: 2003-04-16 10:59:44 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class HelloWorldView extends SwingView {
@@ -38,10 +38,10 @@ public class HelloWorldView extends SwingView {
     /**
      * Creates a HelloWorld panel.
      *
-     * @exception NullPointerException if the HelloWorld label is null
+     * @exception Exception if the HelloWorld label is null
      */
 /*??
-    public HelloWorldView() throws NullPointerException {
+    public HelloWorldView() throws Exception {
 
         setDisplayMode(3);
 
@@ -54,7 +54,7 @@ public class HelloWorldView extends SwingView {
 
         } else {
 
-            throw new NullPointerException("Could not create Hello World view. The Hello World label is null.");
+            throw new Exception("Could not create Hello World view. The Hello World label is null.");
         }
 
         // Set panel properties and add child components.

@@ -31,7 +31,7 @@ import cybop.core.model.*;
 /**
  * This class represents a panel.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Panel extends Organizer {
@@ -66,9 +66,9 @@ public class Panel extends Organizer {
      *
      * @param n the name
      * @param i the item
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws NullPointerException {
+    public void setChildItem(String n, Item i) throws Exception {
 
         super.setChildItem(n, i);
 
@@ -81,7 +81,7 @@ public class Panel extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
     }
 
@@ -89,9 +89,9 @@ public class Panel extends Organizer {
      * Removes the child item from this item.
      *
      * @param n the name
-     * @exception NullPointerException if the name is null
+     * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws NullPointerException {
+    public void removeChildItem(String n) throws Exception {
 
         if (n != null) {
 
@@ -102,7 +102,7 @@ public class Panel extends Organizer {
 
         } else {
 
-            throw new NullPointerException("Could not set item. The name is null.");
+            throw new Exception("Could not set item. The name is null.");
         }
 
         super.removeChildItem(n);
@@ -130,10 +130,10 @@ public class Panel extends Organizer {
      * Sets the layout.
      *
      * @param l the layout
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the layout is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the layout is null
      */
-    public void setLayout(Layout l) throws NullPointerException {
+    public void setLayout(Layout l) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -145,12 +145,12 @@ public class Panel extends Organizer {
 
             } else {
     
-                throw new NullPointerException("Could not set layout. The layout is null.");
+                throw new Exception("Could not set layout. The layout is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not set layout. The java panel is null.");
+            throw new Exception("Could not set layout. The java panel is null.");
         }
     }
 
@@ -158,10 +158,10 @@ public class Panel extends Organizer {
      * Removes the layout.
      *
      * @param l the layout
-     * @exception NullPointerException if the java panel is null
-     * @exception NullPointerException if the layout is null
+     * @exception Exception if the java panel is null
+     * @exception Exception if the layout is null
      */
-    public void removeLayout(Layout l) throws NullPointerException {
+    public void removeLayout(Layout l) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -173,12 +173,12 @@ public class Panel extends Organizer {
 
             } else {
 
-                throw new NullPointerException("Could not remove layout. The layout is null.");
+                throw new Exception("Could not remove layout. The layout is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not remove layout. The java panel is null.");
+            throw new Exception("Could not remove layout. The java panel is null.");
         }
     }
 

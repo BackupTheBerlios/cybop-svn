@@ -29,7 +29,7 @@ import cybop.core.model.*;
 /**
  * This class represents a status bar.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class StatusBar extends Organizer {
@@ -43,7 +43,7 @@ public class StatusBar extends Organizer {
      *
      * @return the encapsulated java swing label
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
         
         return new javax.swing.JLabel();
     }

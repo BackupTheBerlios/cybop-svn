@@ -33,7 +33,7 @@ import cybop.core.model.*;
 /**
  * This class represents a menu item.
  *
- * @version $Revision: 1.3 $ $Date: 2003-02-20 15:35:14 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class MenuItem extends Button {
@@ -46,9 +46,9 @@ public class MenuItem extends Button {
      * Creates an encapsulated java swing menu item.
      *
      * @return the encapsulated java swing menu item
-     * @exception NullPointerException if the encapsulated java swing menu item is null
+     * @exception Exception if the encapsulated java swing menu item is null
      */
-    public java.lang.Object createJavaObject() throws NullPointerException {
+    public java.lang.Object createJavaObject() throws Exception {
 
         javax.swing.JMenuItem mi = new javax.swing.JMenuItem();
 
@@ -58,7 +58,7 @@ public class MenuItem extends Button {
 
         } else {
 
-            throw new NullPointerException("Could not create encapsulated java swing menu item. The encapsulated java swing menu item is null.");
+            throw new Exception("Could not create encapsulated java swing menu item. The encapsulated java swing menu item is null.");
         }
 
         return mi;
@@ -68,9 +68,9 @@ public class MenuItem extends Button {
      * Destroys the encapsulated java swing menu item.
      *
      * @param o the encapsulated java swing menu item
-     * @exception NullPointerException if the encapsulated java swing menu item is null
+     * @exception Exception if the encapsulated java swing menu item is null
      */
-    public void destroyJavaObject(java.lang.Object o) throws NullPointerException {
+    public void destroyJavaObject(java.lang.Object o) throws Exception {
 
         javax.swing.JMenuItem mi = (javax.swing.JMenuItem) o;
 
@@ -80,7 +80,7 @@ public class MenuItem extends Button {
 
         } else {
 
-            throw new NullPointerException("Could not destroy encapsulated java swing menu item. The encapsulated java swing menu item is null.");
+            throw new Exception("Could not destroy encapsulated java swing menu item. The encapsulated java swing menu item is null.");
         }
     }
 

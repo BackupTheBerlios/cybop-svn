@@ -29,9 +29,9 @@ package cybop.core.basic;
  *
  * A quantity can be used to count items.
  *
- * @version $Revision: 1.2 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Quantity extends Item /*??Category*/ {
+public class Quantity extends Item {
 }
 

@@ -33,7 +33,7 @@ import cybop.core.system.*;
  *
  * A screen is an output device that displays optical (graphical) information. 
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-28 12:14:32 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Screen extends Block {
@@ -46,9 +46,9 @@ public class Screen extends Block {
      * Shows the gui model.
      *
      * @param m the gui model
-     * @exception NullPointerException if the model is null
+     * @exception Exception if the model is null
      */
-    public void show(UserInterface m) throws Exception, NullPointerException {
+    public void show(UserInterface m) throws Exception {
 
         if (m != null) {
 
@@ -60,7 +60,7 @@ public class Screen extends Block {
 
         } else {
 
-            throw new NullPointerException("Could not show model. The model is null.");
+            throw new Exception("Could not show model. The model is null.");
         }
     }
     
@@ -68,9 +68,9 @@ public class Screen extends Block {
      * Hides the gui model.
      *
      * @param m the gui model
-     * @exception NullPointerException if the model is null
+     * @exception Exception if the model is null
      */
-    public void hide(UserInterface m) throws Exception, NullPointerException {
+    public void hide(UserInterface m) throws Exception {
 
         if (m != null) {
 
@@ -82,7 +82,7 @@ public class Screen extends Block {
 
         } else {
 
-            throw new NullPointerException("Could not hide model. The model is null.");
+            throw new Exception("Could not hide model. The model is null.");
         }
     }
 }

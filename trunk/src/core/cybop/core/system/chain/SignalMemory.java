@@ -37,7 +37,7 @@ import cybop.core.system.*;
  * responsible for short-time storage of signals.<br><br>
  * [German: "Kurzzeitgedaechtnis"]
  *
- * @version $Revision: 1.3 $ $Date: 2003-04-19 09:12:25 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SignalMemory extends Chain {
@@ -49,7 +49,7 @@ public class SignalMemory extends Chain {
     /**
      * Initializes this processor.
      */
-    public void initialize() throws Exception, NullPointerException {
+    public void initialize() throws Exception {
 
         super.initialize();
     }
@@ -57,7 +57,7 @@ public class SignalMemory extends Chain {
     /**
      * Finalizes this processor.
      */
-    public void finalizz() throws Exception, NullPointerException {
+    public void finalizz() throws Exception {
 
         super.finalizz();
     }

@@ -33,7 +33,7 @@ import cybop.core.system.chain.*;
  *
  * It contains information about a system.
  *
- * @version $Revision: 1.5 $ $Date: 2003-04-24 15:58:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformation extends Unit {
@@ -224,9 +224,9 @@ public class SystemInformation extends Unit {
     /**
      * Initializes this system information.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void initialize() throws Exception, NullPointerException {
+    public void initialize() throws Exception {
 
         super.initialize();
 
@@ -263,16 +263,16 @@ public class SystemInformation extends Unit {
 
         } else {
 
-            throw new NullPointerException("Could not initialize system information. The configuration is null.");
+            throw new Exception("Could not initialize system information. The configuration is null.");
         }
     }
 
     /**
      * Finalizes this system.
      *
-     * @exception NullPointerException if the configuration is null
+     * @exception Exception if the configuration is null
      */
-    public void finalizz() throws Exception, NullPointerException {
+    public void finalizz() throws Exception {
 
         Configuration c = (Configuration) getChildItem(SystemInformation.CONFIGURATION);
 
@@ -330,7 +330,7 @@ public class SystemInformation extends Unit {
 
         } else {
 
-            throw new NullPointerException("Could not finalize system information. The configuration is null.");
+            throw new Exception("Could not finalize system information. The configuration is null.");
         }
 
         super.finalizz();

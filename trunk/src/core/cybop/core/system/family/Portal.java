@@ -49,7 +49,7 @@ import cybop.core.system.chain.*;
  * Child systems can be integrated into the portal system's Frame as Frame,
  * InternalFrame or TabPage.
  *
- * @version $Revision: 1.8 $ $Date: 2003-04-29 07:15:17 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Portal extends Family {
@@ -201,32 +201,32 @@ public class Portal extends Family {
 
                             } else {
             
-                                throw new NullPointerException("Could not initialize portal. The tree is null.");
+                                throw new Exception("Could not initialize portal. The tree is null.");
                             }
         
                         } else {
         
-                            throw new NullPointerException("Could not initialize portal. The portal split pane is null.");
+                            throw new Exception("Could not initialize portal. The portal split pane is null.");
                         }
         
                     } else {
         
-                        throw new NullPointerException("Could not initialize portal. The portal contents panel is null.");
+                        throw new Exception("Could not initialize portal. The portal contents panel is null.");
                     }
         
                 } else {
         
-                    throw new NullPointerException("Could not initialize portal. The portal view model is null.");
+                    throw new Exception("Could not initialize portal. The portal view model is null.");
                 }
     
             } else {
     
-                throw new NullPointerException("Could not initialize portal. The portal user controller is null.");
+                throw new Exception("Could not initialize portal. The portal user controller is null.");
             }
         
         } else {
 
-            throw new NullPointerException("Could not initialize portal. The user is null.");
+            throw new Exception("Could not initialize portal. The user is null.");
         }
 */
     }
@@ -246,9 +246,9 @@ public class Portal extends Family {
     /**
      * Configures application tree in a dialog.
      *
-     * @exception NullPointerException if the application tree configuration dialog is null
+     * @exception Exception if the application tree configuration dialog is null
      */
-    private void configureApplicationTree() throws NullPointerException {
+    private void configureApplicationTree() throws Exception {
 
 /*??
         log(Level.CONFIG, "Create configuration dialog.");
@@ -276,7 +276,7 @@ public class Portal extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not create about dialog. About dialog is null.");
+            throw new Exception("Could not create about dialog. About dialog is null.");
         }
 */
     }
@@ -288,9 +288,9 @@ public class Portal extends Family {
     /**
      * Configures Res Medicinae in a dialog.
      *
-     * @exception NullPointerException if the configure Res Medicinae dialog is null
+     * @exception Exception if the configure Res Medicinae dialog is null
      */
-    private void configureResMedicinae() throws NullPointerException {
+    private void configureResMedicinae() throws Exception {
 
 /*??
         ResMedicinaeConfigurationDialog d = new ResMedicinaeConfigurationDialog(GuiController.getGuiController().getActiveFrame(), "Configure Settings", true, this.mainApplication);
@@ -317,7 +317,7 @@ public class Portal extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not create about dialog. About dialog is null.");
+            throw new Exception("Could not create about dialog. About dialog is null.");
         }
 */
     }
@@ -337,10 +337,10 @@ public class Portal extends Family {
      * - new views for all child controllers of this controller are created
      *
      * @param mode the display mode
-     * @exception NullPointerException if the view is null
+     * @exception Exception if the view is null
      * @exception Exception if the given display mode does not exist
      */
-    public void changeDisplayMode(Integer mode) throws Exception, NullPointerException {
+    public void changeDisplayMode(Integer mode) throws Exception {
 
 /*??
         SwingView v = (SwingView) getView();
@@ -371,7 +371,7 @@ public class Portal extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not change display mode. The view is null.");
+            throw new Exception("Could not change display mode. The view is null.");
         }
 */
     }
@@ -379,9 +379,9 @@ public class Portal extends Family {
     /**
      * Show view displays for all application views.
      *
-     * @exception NullPointerException if the child controller container is null
+     * @exception Exception if the child controller container is null
      */
-    protected void showViews() throws Exception, NullPointerException {
+    protected void showViews() throws Exception {
 
 /*??
         // Determine child controllers.
@@ -407,7 +407,7 @@ public class Portal extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not show view. The child controller container is null.");
+            throw new Exception("Could not show view. The child controller container is null.");
         }
 */
     }
@@ -415,9 +415,9 @@ public class Portal extends Family {
     /**
      * Hide view displays of all application views.
      *
-     * @exception NullPointerException if the child controller container is null
+     * @exception Exception if the child controller container is null
      */
-    protected void hideViews() throws Exception, NullPointerException {
+    protected void hideViews() throws Exception {
 
 /*??
         // Determine child controllers.
@@ -443,7 +443,7 @@ public class Portal extends Family {
 
         } else {
 
-            throw new NullPointerException("Could not hide view. The child controller container is null.");
+            throw new Exception("Could not hide view. The child controller container is null.");
         }
 */
     }

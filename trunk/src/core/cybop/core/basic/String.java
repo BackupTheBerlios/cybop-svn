@@ -29,7 +29,7 @@ package cybop.core.basic;
  *
  * A string is an addition of characters.
  *
- * @version $Revision: 1.6 $ $Date: 2003-04-25 14:02:22 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class String extends Quality {
@@ -102,18 +102,18 @@ public class String extends Quality {
      * Sets the java primitive.
      *
      * @param p the java primitive
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the java object is null
      */
-    public void setJavaPrimitive(java.lang.String p) throws NullPointerException {
+    public void setJavaPrimitive(java.lang.String p) throws Exception {
     }
 
     /**
      * Returns the java primitive.
      *
      * @return the java primitive
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the java object is null
      */
-    public java.lang.String getJavaPrimitive() throws NullPointerException {
+    public java.lang.String getJavaPrimitive() throws Exception {
 
         return (java.lang.String) getJavaObject();
     }
@@ -128,10 +128,10 @@ public class String extends Quality {
      * @param s the string
      * @return true - if this string is equal to the given string;
      * false - otherwise
-     * @exception NullPointerException if the string is null
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the string is null
+     * @exception Exception if the java object is null
      */
-    public boolean isEqualTo(String s) throws NullPointerException {
+    public boolean isEqualTo(String s) throws Exception {
 
         boolean result = Boolean.FALSE;
 
@@ -148,12 +148,12 @@ public class String extends Quality {
 
             } else {
 
-                throw new NullPointerException("Could not compare string. The java object is null.");
+                throw new Exception("Could not compare string. The java object is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not compare string. The string is null.");
+            throw new Exception("Could not compare string. The string is null.");
         }
 
         return result;
@@ -165,10 +165,10 @@ public class String extends Quality {
      * @param s the string
      * @return true - if this string is equal to the given string;
      * false - otherwise
-     * @exception NullPointerException if the string is null
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the string is null
+     * @exception Exception if the java object is null
      */
-    public boolean isUnequalTo(String s) throws NullPointerException {
+    public boolean isUnequalTo(String s) throws Exception {
 
         boolean result = Boolean.FALSE;
 
@@ -185,12 +185,12 @@ public class String extends Quality {
 
             } else {
 
-                throw new NullPointerException("Could not compare string. The java object is null.");
+                throw new Exception("Could not compare string. The java object is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not compare string. The string is null.");
+            throw new Exception("Could not compare string. The string is null.");
         }
 
         return result;
@@ -200,9 +200,9 @@ public class String extends Quality {
      * Returns the length.
      *
      * @return the length
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the java object is null
      */
-    public int getLength() throws NullPointerException {
+    public int getLength() throws Exception {
 
         int l = 0;
         java.lang.String o = (java.lang.String) getJavaObject();
@@ -213,7 +213,7 @@ public class String extends Quality {
 
         } else {
 
-            throw new NullPointerException("Could not return length. The java object is null.");
+            throw new Exception("Could not return length. The java object is null.");
         }
 
         return l;
@@ -224,10 +224,10 @@ public class String extends Quality {
      *
      * @param s the sub string
      * @return the index of where the given sub string starts
-     * @exception NullPointerException if the java object is null
-     * @exception NullPointerException if the sub string is null
+     * @exception Exception if the java object is null
+     * @exception Exception if the sub string is null
      */
-    public int indexOf(String s) throws NullPointerException {
+    public int indexOf(String s) throws Exception {
 
         int i = 0;
         java.lang.String o = (java.lang.String) getJavaObject();
@@ -240,12 +240,12 @@ public class String extends Quality {
 
             } else {
 
-                throw new NullPointerException("Could not return index. The sub string is null.");
+                throw new Exception("Could not return index. The sub string is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not return index. The java object is null.");
+            throw new Exception("Could not return index. The java object is null.");
         }
         
         return i;
@@ -256,9 +256,9 @@ public class String extends Quality {
      *
      * @param i the character position
      * @return the character
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the java object is null
      */
-    public char getChar(int i) throws NullPointerException {
+    public char getChar(int i) throws Exception {
 
         char c;
         java.lang.String o = (java.lang.String) getJavaObject();
@@ -269,7 +269,7 @@ public class String extends Quality {
 
         } else {
 
-            throw new NullPointerException("Could not return character. The java object is null.");
+            throw new Exception("Could not return character. The java object is null.");
         }
 
         return c;
@@ -281,9 +281,9 @@ public class String extends Quality {
      * @param begin the begin of the substring
      * @param end the end of the substring
      * @return the sub string of this string
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the java object is null
      */
-    public String subString(int begin, int end) throws NullPointerException {
+    public String subString(int begin, int end) throws Exception {
         
         String s = null;
         java.lang.String o = (java.lang.String) getJavaObject();
@@ -294,7 +294,7 @@ public class String extends Quality {
 
         } else {
 
-            throw new NullPointerException("Could not return sub string. The java object is null.");
+            throw new Exception("Could not return sub string. The java object is null.");
         }
 
         return s;
@@ -306,9 +306,9 @@ public class String extends Quality {
      *
      * @param begin the begin of the substring
      * @return the sub string of this string
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the java object is null
      */
-    public String subString(int begin) throws NullPointerException {
+    public String subString(int begin) throws Exception {
         
         String s = null;
         java.lang.String o = (java.lang.String) getJavaObject();
@@ -319,7 +319,7 @@ public class String extends Quality {
 
         } else {
 
-            throw new NullPointerException("Could not return sub string. The java object is null.");
+            throw new Exception("Could not return sub string. The java object is null.");
         }
 
         return s;
@@ -331,10 +331,10 @@ public class String extends Quality {
      * @param p the prefix
      * @return true - if this string starts with the given prefix;
      * false - otherwise
-     * @exception NullPointerException if the java object is null
-     * @exception NullPointerException if the prefix is null
+     * @exception Exception if the java object is null
+     * @exception Exception if the prefix is null
      */
-    public boolean startsWith(String p) throws NullPointerException {
+    public boolean startsWith(String p) throws Exception {
 
         boolean b = false;
         java.lang.String o = (java.lang.String) getJavaObject();
@@ -347,12 +347,12 @@ public class String extends Quality {
 
             } else {
 
-                throw new NullPointerException("Could not check for prefix. The prefix is null.");
+                throw new Exception("Could not check for prefix. The prefix is null.");
             }
 
         } else {
 
-            throw new NullPointerException("Could not check for prefix. The java object is null.");
+            throw new Exception("Could not check for prefix. The java object is null.");
         }
 
         return b;        
@@ -367,9 +367,9 @@ public class String extends Quality {
      *
      * @param i the integer
      * @return the string representation of the given integer
-     * @exception NullPointerException if the java object is null
+     * @exception Exception if the java object is null
      */
-    public String toString(int i) throws NullPointerException {
+    public String toString(int i) throws Exception {
 
         String s = null;
         java.lang.String o = (java.lang.String) getJavaObject();
@@ -380,7 +380,7 @@ public class String extends Quality {
 
         } else {
 
-            throw new NullPointerException("Could not return string representation. The java object is null.");
+            throw new Exception("Could not return string representation. The java object is null.");
         }
 
         return s;
