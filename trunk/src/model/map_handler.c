@@ -35,7 +35,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.11 $ $Date: 2004-03-11 09:13:37 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-03-11 10:25:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -104,7 +104,7 @@ void finalize_map(void* p0) {
  * Returns the map size.
  *
  * @param p0 the map
- * @param p1 the map size
+ * @param p1 the size
  */
 void get_map_size(const void* p0, void* p1) {
 
@@ -120,6 +120,26 @@ void get_map_size(const void* p0, void* p1) {
     }
 }
 
+/**
+ * Returns the map count.
+ *
+ * @param p0 the map
+ * @param p1 the count
+ */
+void get_map_count(const void* p0, void* p1) {
+
+    struct map* m = (struct map*) p0;
+
+    if (m != (void*) 0) {
+
+        get_array_count(m->names, p1);
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get map count. The map is null.");
+    }
+}
+
 //
 // Map element.
 //
@@ -127,7 +147,7 @@ void get_map_size(const void* p0, void* p1) {
 /**
  * Gets the map element index.
  *
- * @param p0 the names array
+ * @param p0 the names
  * @param p1 the name
  * @param p2 the index
  */
@@ -138,24 +158,30 @@ void get_map_element_index(const void* p0, const void* p1, void* p2) {
     if (i != (void*) 0) {
 
         int j = 0;
-        int count = 0;
-        get_array_count(p0, (void*) &count);
-        void* name = (void*) 0;
+        int c = 0;
+        get_array_count(p0, (void*) &c);
+        void* n = (void*) 0;
+        int r = 0;
 
-        while (j < count) {
+        while (1) {
 
-            name = get_array_element(p0, (void*) &j);
-
-            // If a name equal to the searched one is found,
-            // then its index is the one to be returned.
-            if (strcmp((char*) name, (char*) p1) == 0) {
-
-                index = j;
+            if (j >= c) {
 
                 break;
             }
 
-            i++;
+            get_array_element(p0, (void*) &j, (void*) &n);
+
+            // If a name equal to the searched one is found,
+            // then its index is the one to be returned.
+            if (compare_arrays((void*) &n, p1, (void*) &r) == 1) {
+
+                *i = j;
+
+                break;
+            }
+
+            j++;
         }
 
     } else {
@@ -178,6 +204,7 @@ void get_map_element_index(const void* p0, const void* p1, void* p2) {
  * @param p1 the name
  * @return the next index
  */
+/*??
 int get_next_map_element_index(const void* p0, const void* p1) {
 
     int index = -1;
@@ -219,6 +246,7 @@ int get_next_map_element_index(const void* p0, const void* p1) {
  * @param p1 the base name
  * @return the number of map elements whose name starts with the given base name
  */
+/*??
 int get_map_element_count(const void* p0, const void* p1) {
 
     int name_count = 0;
@@ -275,6 +303,7 @@ int get_map_element_count(const void* p0, const void* p1) {
  * @param p1 the base name
  * @param p2 the extended name
  */
+/*??
 void build_next_map_element_name(const void* p0, const void* p1, void* p2) {
 
     int count = get_map_element_count(p0, p1);
@@ -316,28 +345,6 @@ void set_map_element_at_index(void* p0, const void* p1, const void* p2, const vo
 }
 
 /**
- * Sets the map element with the name.
- *
- * @param p0 the map
- * @param p1 the name
- * @param p2 the element
- */
-void set_map_element_with_name(void* p0, const void* p1, const void* p2) {
-
-    struct map* m = (struct map*) p0;
-
-    if (m != (void*) 0) {
-
-        int i = get_next_map_element_index(m->names, p1);
-        set_map_element_at_index(p0, (void*) &i, p1, p2);
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not set map element with name. The map is null.");
-    }
-}
-
-/**
  * Adds the map element.
  *
  * @param p0 the map
@@ -350,16 +357,60 @@ void add_map_element(void* p0, const void* p1, const void* p2) {
 
     if (m != (void*) 0) {
 
+/*??
         // This element name will get destroyed (free) in remove_map_element.
         void* n = malloc(0);
 
         // Extend name with next free index.
         build_next_map_element_name(m->names, p1, n);
         set_map_element_with_name(p0, n, p2);
+*/
+
+        int i = -1;
+
+        get_map_count(p0, (void*) &i);
+
+        if (i != -1) {
+
+            set_map_element_at_index(p0, (void*) &i, p1, p2);
+        }
 
     } else {
 
         log_message((void*) &ERROR_LOG_LEVEL, "Could not add map element. The map is null.");
+    }
+}
+
+/**
+ * Sets the map element with the name.
+ *
+ * @param p0 the map
+ * @param p1 the name
+ * @param p2 the element
+ */
+void set_map_element_with_name(void* p0, const void* p1, const void* p2) {
+
+    struct map* m = (struct map*) p0;
+
+    if (m != (void*) 0) {
+
+        int i = -1;
+
+        get_map_element_index(m->names, p1, (void*) &i);
+//??        get_next_map_element_index(m->names, p1, (void*) &i);
+
+        if (i != -1) {
+
+            set_map_element_at_index(p0, (void*) &i, p1, p2);
+
+        } else {
+
+            add_map_element(p0, p1, p2);
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not set map element with name. The map is null.");
     }
 }
 
@@ -396,8 +447,14 @@ void remove_map_element_with_name(void* p0, const void* p1) {
 
     if (m != (void*) 0) {
 
-        int i = get_map_element_index(m->names, p1);
-        remove_map_element_at_index(p0, (void*) &i);
+        int i = -1;
+
+        get_map_element_index(m->names, p1, (void*) &i);
+
+        if (i != -1) {
+
+            remove_map_element_at_index(p0, (void*) &i);
+        }
 
     } else {
 
@@ -405,7 +462,7 @@ void remove_map_element_with_name(void* p0, const void* p1) {
     }
 
     // This element name was created (malloc) in add_map_element.
-    free(p1);
+//??    free(p1);
 }
 
 /**
@@ -446,7 +503,7 @@ void get_map_element_with_name(const void* p0, const void* p1, void* p2) {
 
         get_map_element_index(m->names, p1, (void*) &i);
 
-        if (i > -1) {
+        if (i != -1) {
 
             get_map_element_at_index(p0, (void*) &i, p2);
         }
