@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2005-01-18 15:07:01 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-01-19 22:39:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,7 +58,7 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
 
         int* sc = (int*) p1;
 
-        log_message((void*) &INFO_LOG_LEVEL, (void*) &HANDLE_COMPOUND_SIGNAL_MESSAGE, (void*) &HANDLE_COMPOUND_SIGNAL_MESSAGE_COUNT);
+        log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_COMPOUND_SIGNAL_MESSAGE, (void*) HANDLE_COMPOUND_SIGNAL_MESSAGE_COUNT);
 
         // The abstractions.
         void* pa = NULL_POINTER;
@@ -149,7 +149,7 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
 void handle_operation_signal(const void* p0, const void* p1, const void* p2, const void* p3,
     void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT);
+    log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_OPERATION_SIGNAL_MESSAGE, (void*) HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT);
 
     // The done flag.
     int d = 0;
@@ -225,7 +225,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &SET_SHUTDOWN_FLAG_MESSAGE, (void*) &SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
+            log_message((void*) INFO_LOG_LEVEL, (void*) SET_SHUTDOWN_FLAG_MESSAGE, (void*) SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
 
             int* f = (int*) p9;
             *f = 1;

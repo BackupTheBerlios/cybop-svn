@@ -50,7 +50,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.21 $ $Date: 2005-01-17 23:46:28 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2005-01-19 22:39:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,7 +97,7 @@ void create_array(void* p0, const void* p1, const void* p2) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -133,7 +133,7 @@ void destroy_array(void* p0, const void* p1, const void* p2) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -169,7 +169,7 @@ void resize_array(void* p0, const void* p1, const void* p2) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -210,7 +210,7 @@ void compare_array_elements(const void* p0, const void* p1, const void* p2, void
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_COMPARE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_COMPARE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -244,12 +244,12 @@ void compare_arrays(const void* p0, const void* p1, const void* p2, const void* 
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
+//??            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
+//??        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -287,7 +287,7 @@ void set_array_elements(void* p0, const void* p1, const void* p2, const void* p3
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_SET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_SET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -325,7 +325,7 @@ void remove_array_elements(void* p0, const void* p1, const void* p2, const void*
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -362,7 +362,7 @@ void get_array_elements(const void* p0, const void* p1, void* p2, const void* p3
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 
@@ -405,7 +405,7 @@ void get_array_elements_index(const void* p0, const void* p1, const void* p2, co
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE_COUNT);
     }
 }
 

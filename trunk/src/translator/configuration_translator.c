@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-01-19 22:39:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -130,13 +130,13 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                             (void*) c);
 
         fprintf(stderr, "sn: %s\n", (char*) sn);
-        fprintf(stderr, "snc: %i\n", *((int*) snc));
+        fprintf(stderr, "snc: %i\n", snc);
         fprintf(stderr, "sc: %s\n", (char*) sc);
-        fprintf(stderr, "scc: %i\n", *((int*) scc));
+        fprintf(stderr, "scc: %i\n", scc);
         fprintf(stderr, "sa: %s\n", (char*) sa);
-        fprintf(stderr, "sac: %i\n", *((int*) sac));
+        fprintf(stderr, "sac: %i\n", sac);
         fprintf(stderr, "sm: %s\n", (char*) sm);
-        fprintf(stderr, "smc: %i\n", *((int*) smc));
+        fprintf(stderr, "smc: %i\n", smc);
 
                         if (r != 1) {
 

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.26 $ $Date: 2005-01-18 15:07:01 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2005-01-19 22:39:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -86,7 +86,7 @@ void wait(void* p0) {
     // The comparison result.
     int r = 0;
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &WAIT_FOR_SIGNALS_MESSAGE, (void*) &WAIT_FOR_SIGNALS_MESSAGE_COUNT);
+    log_message((void*) INFO_LOG_LEVEL, (void*) WAIT_FOR_SIGNALS_MESSAGE, (void*) WAIT_FOR_SIGNALS_MESSAGE_COUNT);
 
     // Run endless loop checking signal memory for signals.
     while (1) {
@@ -176,7 +176,7 @@ void wait(void* p0) {
 
             if (r == 0) {
 
-                log_message((void*) &WARNING_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE, (void*) &COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT);
+                log_message((void*) WARNING_LOG_LEVEL, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT);
             }
 
             // Destroy signal (id and priority).

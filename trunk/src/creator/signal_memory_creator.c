@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.12 $ $Date: 2005-01-18 10:54:22 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-01-19 22:39:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,7 +49,7 @@ void create_signal_memory(void* p0, const void* p1) {
 
         void** s = (void**) p0;
 
-        log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_SIGNAL_MEMORY_MESSAGE, (void*) &CREATE_SIGNAL_MEMORY_MESSAGE_COUNT);
+        log_message((void*) INFO_LOG_LEVEL, (void*) CREATE_SIGNAL_MEMORY_MESSAGE, (void*) CREATE_SIGNAL_MEMORY_MESSAGE_COUNT);
 
         // Create signal memory.
         create_array(p0, (void*) SIGNAL_MEMORY_COUNT, (void*) POINTER_ARRAY);
@@ -105,7 +105,7 @@ void destroy_signal_memory(void* p0, const void* p1) {
 
         void** s = (void**) p0;
 
-        log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_SIGNAL_MEMORY_MESSAGE, (void*) &DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT);
+        log_message((void*) INFO_LOG_LEVEL, (void*) DESTROY_SIGNAL_MEMORY_MESSAGE, (void*) DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT);
 
         // The abstractions, models, details, priorities, identifications.
         void* a = NULL_POINTER;
