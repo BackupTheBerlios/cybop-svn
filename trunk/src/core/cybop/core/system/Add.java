@@ -29,7 +29,9 @@ import cybop.core.category.*;
 /**
  * This is the add action.<br><br>
  *
- * @version $Revision: 1.1 $ $Date: 2003-06-30 09:49:47 $ $Author: christian $
+ * It represents a controller component and corresponds to a human nerve cell.
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-06-30 09:59:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Add extends Item {

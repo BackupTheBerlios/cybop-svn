@@ -22,7 +22,7 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.system.family;
+package cybop.core.system.system;
 
 import cybop.core.category.*;
 import cybop.core.model.*;
@@ -35,7 +35,6 @@ import cybop.core.screen.*;
 import cybop.core.system.*;
 import cybop.core.system.System;
 import cybop.core.system.block.*;
-import cybop.core.system.system.*;
 
 /**
  * This class represents a launcher.<br><br>
@@ -69,7 +68,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.37 $ $Date: 2003-06-30 09:49:47 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-30 09:59:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {

@@ -22,7 +22,7 @@
  * - Cybernetics Oriented Programming -
  */
 
-package cybop.core.system.family;
+package cybop.core.system.system;
 
 import cybop.core.category.*;
 import cybop.core.model.*;
@@ -48,7 +48,7 @@ import cybop.core.system.block.controller.*;
  * Child systems can be integrated into the portal system's Frame as Frame,
  * InternalFrame or TabPage.
  *
- * @version $Revision: 1.15 $ $Date: 2003-06-30 09:49:47 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-06-30 09:59:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Portal extends Family {
