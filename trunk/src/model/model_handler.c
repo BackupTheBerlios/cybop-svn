@@ -50,7 +50,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.20 $ $Date: 2004-03-31 08:24:54 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2004-03-31 12:24:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -537,136 +537,149 @@ void set_model_part(void* p0, const void* p1, const void* p2, const void* p3, co
     const void* p10, const void* p11, const void* p12, const void* p13, const void* p14,
     const void* p15, const void* p16, const void* p17, const void* p18, const void* p19, const void* p20) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Set model part.");
+    // The name size.
+    int* ns = (int*) p2;
 
-    // The model size.
-    int s = 9;
-    // The index.
-    int i;
-    // The separation.
-    char sep = '.';
-    // The separation index.
-    int index = -1;
+    if (ns != (void*) 0) {
 
-    get_array_element_index(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &sep, (void*) &index);
+        // The model size.
+        int s = 9;
+        // The index.
+        int i;
+        // The separator.
+        char sep = '.';
+        // The separator index.
+        int index = -1;
 
-    // The remaining name starts at the index after the separation.
-    // Example: "hello.test"
-    // The index of the separation '.' is 5.
-    // The starting index of the remaining name "test" is 6 = 5 + 1.
-    void* r = p1 + index + 1;
+        get_array_element_index(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &sep, (void*) &index);
 
-    if (r != p1) {
+        if (index != -1) {
 
-        if (r != 0) {
+            if (index >= 0) {
+
+                if (index < *ns) {
+
+                    if (index != 0) {
+
+                        if (index != (*ns - 1)) {
+
+                            // The remaining name starts at the index after the separator.
+                            // Example: "hello.test"
+                            // The index of the separator '.' is 5.
+                            // The starting index of the remaining name "test" is 6 = 5 + 1.
+                            void* r = p1 + index + 1;
+
+                            // The remaining name size is the full name size decreased
+                            // by the separator index increased by one.
+                            // Example: "hello.test"
+                            // The full name size is 10.
+                            // The separator index is 5.
+                            // The size of the remaining name "test" is 4 = 10 - (5 + 1).
+                            int rs = *ns - (index + 1);
+
+                            // The part models.
+                            i = 2;
+                            void* pm = (void*) 0;
+                            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pm);
+
+                            // The index is used as part name size.
+                            // Example: "hello.test"
+                            // The index of the separator '.' is 5.
+                            // The size of the part name "hello" before the separator '.' is likewise 5.
+                            void* part = (void*) 0;
+                            int size = -1;
+                            get_map_element_with_name((void*) &pm, p1, (void*) &index, (void*) &part, (void*) &size);
+
+                            // Continue to process along the hierarchical name.
+                            set_model_part((void*) &part, (void*) &r, (void*) &rs, p3, p4, p5, p6,
+                                p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20);
+
+                        } else {
+
+                            log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part. The full name ends with a separator.");
+                        }
+
+                    } else {
+
+                        log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part. The full name starts with a separator.");
+                    }
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part. The separator index exceeds the full name size.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part. The separator index is negative.");
+            }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part.
-            // The full name starts with the separation which is nonsense
-            // since
+            // The separator could not be found.
+            // The full name is not hierarchical and represents the part name.
+            // The given model contains parts which are primitive models.
+
+            log_message((void*) &INFO_LOG_LEVEL, "Set model part.");
+
+            // The part abstractions.
+            i = 0;
+            void* pa = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pa);
+            set_map_element_with_name((void*) &pa, p1, p2, p3, p4);
+
+            // The part locations.
+            i = 1;
+            void* pl = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pl);
+            set_map_element_with_name((void*) &pl, p1, p2, p5, p6);
+
+            // The part models.
+            i = 2;
+            void* pm = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pm);
+            set_map_element_with_name((void*) &pm, p1, p2, p7, p8);
+
+            // The position abstractions.
+            i = 3;
+            void* poa = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &poa);
+            set_map_element_with_name((void*) &poa, p1, p2, p9, p10);
+
+            // The position locations.
+            i = 4;
+            void* pol = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pol);
+            set_map_element_with_name((void*) &pol, p1, p2, p11, p12);
+
+            // The position models.
+            i = 5;
+            void* pom = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pom);
+            set_map_element_with_name((void*) &pom, p1, p2, p13, p14);
+
+            // The constraint abstractions.
+            i = 6;
+            void* ca = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ca);
+            set_map_element_with_name((void*) &ca, p1, p2, p15, p16);
+
+            // The constraint locations.
+            i = 7;
+            void* cl = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cl);
+            set_map_element_with_name((void*) &cl, p1, p2, p17, p18);
+
+            // The constraint models.
+            i = 8;
+            void* cm = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cm);
+            set_map_element_with_name((void*) &cm, p1, p2, p19, p20);
         }
 
     } else {
 
-        // The separation could not be found.
-        // The full name is not hierarchical and represents the part name.");
-    }
-
---
-    // The remaining name size is the full name size reduced by the
-    // starting index of the remaining name.
-    // Example: "hello.test"
-    // The full name size is 10.
-    // The starting index of the remaining name "test" is 6.
-    // The size of the remaining name "test" is 4 = 10 - 6.
-    int* ns = (int*) p2;
-    int rs = *ns - r;
-
-    // Only call procedure recursively if a remaining name whose starting index
-    // is greater than the current full name's increased by one exists.
-    // If the index of the separation equals zero, the full name starts with '.'.
-    // This means that there is no part name before the separation and is nonsense.
-    // Therefore, the index has to be greater or equal one and the starting index
-    // of the remaining name accordingly greater than the full name's increased by one.
-    if (r > (p1 + 1)) {
-
-        // The given model contains parts which are compound models.
-
-        // The part models.
-        i = 2;
-        void* pm = (void*) 0;
-        get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pm);
-
-        // The index is used as part name size.
-        // Example: "hello.test"
-        // The index of the separation '.' is 5.
-        // The size of the part name "hello" before the separation '.' is likewise 5.
-        void* part = (void*) 0;
-        int size = -1;
-        get_map_element_with_name((void*) &pm, p1, (void*) &index, (void*) &part, (void*) &size);
-
-        // Continue to process along the hierarchical name.
-        set_model_part((void*) &part, (void*) &r, (void*) &rs, p3, p4, p5, p6,
-            p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20);
-
-    } else {
-
-        // The given model contains parts which are primitive models.
-
-        // The part abstractions.
-        i = 0;
-        void* pa = (void*) 0;
-        get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pa);
-        set_map_element_with_name((void*) &pa, p1, p2, p3, p4);
-
-        // The part locations.
-        i = 1;
-        void* pl = (void*) 0;
-        get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pl);
-        set_map_element_with_name((void*) &pl, p1, p2, p5, p6);
-
-        // The part models.
-        i = 2;
-        void* pm = (void*) 0;
-        get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pm);
-        set_map_element_with_name((void*) &pm, p1, p2, p7, p8);
-
-        // The position abstractions.
-        i = 3;
-        void* poa = (void*) 0;
-        get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &poa);
-        set_map_element_with_name((void*) &poa, p1, p2, p9, p10);
-
-        // The position locations.
-        i = 4;
-        void* pol = (void*) 0;
-        get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pol);
-        set_map_element_with_name((void*) &pol, p1, p2, p11, p12);
-
-        // The position models.
-        i = 5;
-        void* pom = (void*) 0;
-        get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pom);
-        set_map_element_with_name((void*) &pom, p1, p2, p13, p14);
-
-        // The constraint abstractions.
-        i = 6;
-        void* ca = (void*) 0;
-        get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ca);
-        set_map_element_with_name((void*) &ca, p1, p2, p15, p16);
-
-        // The constraint locations.
-        i = 7;
-        void* cl = (void*) 0;
-        get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cl);
-        set_map_element_with_name((void*) &cl, p1, p2, p17, p18);
-
-        // The constraint models.
-        i = 8;
-        void* cm = (void*) 0;
-        get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cm);
-        set_map_element_with_name((void*) &cm, p1, p2, p19, p20);
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not set model part. The name size is null.");
     }
 }
 
@@ -679,108 +692,149 @@ void set_model_part(void* p0, const void* p1, const void* p2, const void* p3, co
  */
 void remove_model_part(void* p0, const void* p1, const void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Remove model part.");
+    // The name size.
+    int* ns = (int*) p2;
 
-    // The model size.
-    int s = 5;
-    // The index.
-    int i;
+    if (ns != (void*) 0) {
 
-    // The part abstractions.
-    i = 0;
-    void* pa = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pa);
-    remove_map_element_with_name((void*) &pa, p1, p2);
+        // The model size.
+        int s = 9;
+        // The index.
+        int i;
+        // The separator.
+        char sep = '.';
+        // The separator index.
+        int index = -1;
 
-    // The part locations.
-    i = 1;
-    void* pl = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pl);
-    remove_map_element_with_name((void*) &pl, p1, p2);
+        get_array_element_index(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &sep, (void*) &index);
 
-    // The part models.
-    i = 2;
-    void* pm = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pm);
-    remove_map_element_with_name((void*) &pm, p1, p2);
+        if (index != -1) {
 
-    // The position abstractions.
-    i = 3;
-    void* poa = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &poa);
-    remove_map_element_with_name((void*) &poa, p1, p2);
+            if (index >= 0) {
 
-    // The position locations.
-    i = 4;
-    void* pol = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pol);
-    remove_map_element_with_name((void*) &pol, p1, p2);
+                if (index < *ns) {
 
-    // The position models.
-    i = 5;
-    void* pom = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pom);
-    remove_map_element_with_name((void*) &pom, p1, p2);
+                    if (index != 0) {
 
-    // The constraint abstractions.
-    i = 6;
-    void* ca = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ca);
-    remove_map_element_with_name((void*) &ca, p1, p2);
+                        if (index != (*ns - 1)) {
 
-    // The constraint locations.
-    i = 7;
-    void* cl = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cl);
-    remove_map_element_with_name((void*) &cl, p1, p2);
+                            // The remaining name starts at the index after the separator.
+                            // Example: "hello.test"
+                            // The index of the separator '.' is 5.
+                            // The starting index of the remaining name "test" is 6 = 5 + 1.
+                            void* r = p1 + index + 1;
 
-    // The constraint models.
-    i = 8;
-    void* cm = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cm);
-    remove_map_element_with_name((void*) &cm, p1, p2);
+                            // The remaining name size is the full name size decreased
+                            // by the separator index increased by one.
+                            // Example: "hello.test"
+                            // The full name size is 10.
+                            // The separator index is 5.
+                            // The size of the remaining name "test" is 4 = 10 - (5 + 1).
+                            int rs = *ns - (index + 1);
 
-/*??
-    int length = 0;
-    get_string_length(p1, (void*) &length);
-    int start = 0;
-    int end = 0;
-    get_character_index(p1, (void*) &DOT_CHARACTER, (void*) &length, (void*) &end);
-    void* n = malloc(0);
+                            // The part models.
+                            i = 2;
+                            void* pm = (void*) 0;
+                            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pm);
 
-    copy_sub_string(p1, (void*) &start, (void*) &end, n);
+                            // The index is used as part name size.
+                            // Example: "hello.test"
+                            // The index of the separator '.' is 5.
+                            // The size of the part name "hello" before the separator '.' is likewise 5.
+                            void* part = (void*) 0;
+                            int size = -1;
+                            get_map_element_with_name((void*) &pm, p1, (void*) &index, (void*) &part, (void*) &size);
 
-    char* r = (char*) p1 + end;
+                            // Continue to process along the hierarchical name.
+                            remove_model_part((void*) &part, (void*) &r, (void*) &rs);
 
-    // Only call procedure recursively if the remaining string is not empty.
-    if (*r != '\0') {
+                        } else {
 
-        // The given model contains compound models.
-        void* part = get_map_element_with_name(m->part_models, n);
+                            log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part. The full name ends with a separator.");
+                        }
 
-        // Continue to process along the hierarchical name.
-        remove_model_part(part, r + 1);
+                    } else {
 
-        // The name served only as a temporary model identificator.
-        free(n);
+                        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part. The full name starts with a separator.");
+                    }
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part. The separator index exceeds the full name size.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part. The separator index is negative.");
+            }
+
+        } else {
+
+            // The separator could not be found.
+            // The full name is not hierarchical and represents the part name.
+            // The given model contains parts which are primitive models.
+
+            log_message((void*) &INFO_LOG_LEVEL, "Remove model part.");
+
+            // The part abstractions.
+            i = 0;
+            void* pa = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pa);
+            remove_map_element_with_name((void*) &pa, p1, p2);
+
+            // The part locations.
+            i = 1;
+            void* pl = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pl);
+            remove_map_element_with_name((void*) &pl, p1, p2);
+
+            // The part models.
+            i = 2;
+            void* pm = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pm);
+            remove_map_element_with_name((void*) &pm, p1, p2);
+
+            // The position abstractions.
+            i = 3;
+            void* poa = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &poa);
+            remove_map_element_with_name((void*) &poa, p1, p2);
+
+            // The position locations.
+            i = 4;
+            void* pol = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pol);
+            remove_map_element_with_name((void*) &pol, p1, p2);
+
+            // The position models.
+            i = 5;
+            void* pom = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pom);
+            remove_map_element_with_name((void*) &pom, p1, p2);
+
+            // The constraint abstractions.
+            i = 6;
+            void* ca = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ca);
+            remove_map_element_with_name((void*) &ca, p1, p2);
+
+            // The constraint locations.
+            i = 7;
+            void* cl = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cl);
+            remove_map_element_with_name((void*) &cl, p1, p2);
+
+            // The constraint models.
+            i = 8;
+            void* cm = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cm);
+            remove_map_element_with_name((void*) &cm, p1, p2);
+        }
 
     } else {
 
-        // The given model contains primitive models.
-        remove_map_element_with_name(m->part_abstractions, n);
-        remove_map_element_with_name(m->part_locations, n);
-        remove_map_element_with_name(m->part_models, n);
-        remove_map_element_with_name(m->position_abstractions, n);
-        remove_map_element_with_name(m->position_locations, n);
-        remove_map_element_with_name(m->position_models, n);
-        remove_map_element_with_name(m->constraint_abstractions, n);
-        remove_map_element_with_name(m->constraint_locations, n);
-        remove_map_element_with_name(m->constraint_models, n);
-
-        // Do not free(n) here! The name is referenced by the model maps.
-        // It will get freed when removing a model part.
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not remove model part. The name size is null.");
     }
-*/
 }
 
 /**
@@ -813,91 +867,150 @@ void get_model_part(const void* p0, const void* p1, const void* p2, void* p3, vo
     void* p10, void* p11, void* p12, void* p13, void* p14,
     void* p15, void* p16, void* p17, void* p18, void* p19, void* p20) {
 
-    log_message((void*) &INFO_LOG_LEVEL, "Get model part: ");
+    // The name size.
+    int* ns = (int*) p2;
 
-    // The model size.
-    int s = 9;
-    // The index.
-    int i;
+    if (ns != (void*) 0) {
 
-    // The part abstractions.
-    i = 0;
-    void* pa = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pa);
-    get_map_element_with_name((void*) &pa, p1, p2, p3, p4);
+        // The model size.
+        int s = 9;
+        // The index.
+        int i;
+        // The separator.
+        char sep = '.';
+        // The separator index.
+        int index = -1;
 
-    // The part locations.
-    i = 1;
-    void* pl = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pl);
-    get_map_element_with_name((void*) &pl, p1, p2, p5, p6);
+        get_array_element_index(p1, p2, (void*) &CHARACTER_ARRAY, (void*) &sep, (void*) &index);
 
-    // The part models.
-    i = 2;
-    void* pm = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pm);
-    get_map_element_with_name((void*) &pm, p1, p2, p7, p8);
+        if (index != -1) {
 
-    // The position abstractions.
-    i = 3;
-    void* poa = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &poa);
-    get_map_element_with_name((void*) &poa, p1, p2, p9, p10);
+            if (index >= 0) {
 
-    // The position locations.
-    i = 4;
-    void* pol = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pol);
-    get_map_element_with_name((void*) &pol, p1, p2, p11, p12);
+                if (index < *ns) {
 
-    // The position models.
-    i = 5;
-    void* pom = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pom);
-    get_map_element_with_name((void*) &pom, p1, p2, p13, p14);
+                    if (index != 0) {
 
-    // The constraint abstractions.
-    i = 6;
-    void* ca = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ca);
-    get_map_element_with_name((void*) &ca, p1, p2, p15, p16);
+                        if (index != (*ns - 1)) {
 
-    // The constraint locations.
-    i = 7;
-    void* cl = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cl);
-    get_map_element_with_name((void*) &cl, p1, p2, p17, p18);
+                            // The remaining name starts at the index after the separator.
+                            // Example: "hello.test"
+                            // The index of the separator '.' is 5.
+                            // The starting index of the remaining name "test" is 6 = 5 + 1.
+                            void* r = p1 + index + 1;
 
-    // The constraint models.
-    i = 8;
-    void* cm = (void*) 0;
-    get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cm);
-    get_map_element_with_name((void*) &cm, p1, p2, p19, p20);
+                            // The remaining name size is the full name size decreased
+                            // by the separator index increased by one.
+                            // Example: "hello.test"
+                            // The full name size is 10.
+                            // The separator index is 5.
+                            // The size of the remaining name "test" is 4 = 10 - (5 + 1).
+                            int rs = *ns - (index + 1);
 
-/*??
-    int s = p1->size;
-    int i = INVALID_INDEX;
-    get_array_element_index(p1, (void*) &DOT_CHARACTER, (void*) &i);
+                            // The part models.
+                            i = 2;
+                            void* pm = (void*) 0;
+                            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pm);
 
-    void* n = (p1 + i - 1);
+                            // The index is used as part name size.
+                            // Example: "hello.test"
+                            // The index of the separator '.' is 5.
+                            // The size of the part name "hello" before the separator '.' is likewise 5.
+                            void* part = (void*) 0;
+                            int size = -1;
+                            get_map_element_with_name((void*) &pm, p1, (void*) &index, (void*) &part, (void*) &size);
 
-    // Only call procedure recursively if the remaining string is not empty.
-    if (i != INVALID_INDEX) {
+                            // Continue to process along the hierarchical name.
+                            set_model_part((void*) &part, (void*) &r, (void*) &rs, p3, p4, p5, p6,
+                                p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20);
 
-        char* r = (char*) (p1 + i + 1);
+                        } else {
 
-        // The given model contains compound models.
-        void* part = get_map_element_with_name(m->part_models, n);
+                            log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part. The full name ends with a separator.");
+                        }
 
-        // Continue to process along the hierarchical name.
-        p = get_model_part(part, r + 1);
+                    } else {
+
+                        log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part. The full name starts with a separator.");
+                    }
+
+                } else {
+
+                    log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part. The separator index exceeds the full name size.");
+                }
+
+            } else {
+
+                log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part. The separator index is negative.");
+            }
+
+        } else {
+
+            // The separator could not be found.
+            // The full name is not hierarchical and represents the part name.
+            // The given model contains parts which are primitive models.
+
+            log_message((void*) &INFO_LOG_LEVEL, "Get model part.");
+
+            // The part abstractions.
+            i = 0;
+            void* pa = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pa);
+            get_map_element_with_name((void*) &pa, p1, p2, p3, p4);
+
+            // The part locations.
+            i = 1;
+            void* pl = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pl);
+            get_map_element_with_name((void*) &pl, p1, p2, p5, p6);
+
+            // The part models.
+            i = 2;
+            void* pm = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pm);
+            get_map_element_with_name((void*) &pm, p1, p2, p7, p8);
+
+            // The position abstractions.
+            i = 3;
+            void* poa = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &poa);
+            get_map_element_with_name((void*) &poa, p1, p2, p9, p10);
+
+            // The position locations.
+            i = 4;
+            void* pol = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pol);
+            get_map_element_with_name((void*) &pol, p1, p2, p11, p12);
+
+            // The position models.
+            i = 5;
+            void* pom = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &pom);
+            get_map_element_with_name((void*) &pom, p1, p2, p13, p14);
+
+            // The constraint abstractions.
+            i = 6;
+            void* ca = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &ca);
+            get_map_element_with_name((void*) &ca, p1, p2, p15, p16);
+
+            // The constraint locations.
+            i = 7;
+            void* cl = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cl);
+            get_map_element_with_name((void*) &cl, p1, p2, p17, p18);
+
+            // The constraint models.
+            i = 8;
+            void* cm = (void*) 0;
+            get_array_element(p0, (void*) &s, (void*) &POINTER_ARRAY, (void*) &i, (void*) &cm);
+            get_map_element_with_name((void*) &cm, p1, p2, p19, p20);
+        }
 
     } else {
 
-        // The given model contains primitive models.
-        p = get_map_element_with_name(m->part_models, n);
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not get model part. The name size is null.");
     }
-*/
 }
 
 /* MODEL_HANDLER_SOURCE */
