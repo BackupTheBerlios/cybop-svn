@@ -25,12 +25,13 @@
 #ifndef STRING_HELPER_SOURCE
 #define STRING_HELPER_SOURCE
 
+#include <string.h>
 #include "logger/log_handler.c"
 
 /**
  * This is the string helper.
  *
- * @version $Revision: 1.1 $ $Date: 2004-02-29 16:26:28 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-02-29 18:33:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

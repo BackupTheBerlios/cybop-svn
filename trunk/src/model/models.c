@@ -1,5 +1,5 @@
 /*
- * $RCSfile: cybop_models.c,v $
+ * $RCSfile: models.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -22,15 +22,13 @@
  * - Cybernetics Oriented Programming -
  */
 
-#ifndef CYBOP_MODELS_SOURCE
-#define CYBOP_MODELS_SOURCE
+#ifndef MODELS_SOURCE
+#define MODELS_SOURCE
 
 /**
- * This is the cybop models.
+ * This is the model definition constants.
  *
- * It defines constants for cybop models.
- *
- * @version $Revision: 1.2 $ $Date: 2004-02-29 12:51:05 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-02-29 18:33:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,8 +36,8 @@
 // Compound models.
 //
 
-/** The cybop compound. */
-static const char* CYBOP_COMPOUND = "cybop";
+/** The compound model. */
+static const char* COMPOUND_MODEL = "compound";
 
-/* CYBOP_MODELS_SOURCE */
+/* MODELS_SOURCE */
 #endif

@@ -34,7 +34,7 @@
 /**
  * This is the operation handler.
  *
- * @version $Revision: 1.6 $ $Date: 2004-02-29 16:26:28 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-02-29 18:33:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -93,8 +93,9 @@ void finalize_operation_model(void* p0, void* p1) {
 
         if (c > 0) {
 
-            void* io = get_array_element(m->inputs_outputs, c - 1);
-            remove_array_element(m->inputs_outputs, c - 1);
+            int i = c - 1;
+            void* io = get_array_element(m->inputs_outputs, (void*) &i);
+            remove_array_element(m->inputs_outputs, (void*) &i);
 
             strcat((char*) p1, COMMA_SEPARATOR);
             strcat((char*) p1, (char*) io);

@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.9 $ $Date: 2004-02-29 16:26:28 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-02-29 18:33:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -196,7 +196,7 @@ void add_array_element(void* p0, void* p1) {
 
         int c = a->count;
 
-        set_array_element(a, c, p1);
+        set_array_element(p0, (void*) &c, p1);
 
     } else {
 

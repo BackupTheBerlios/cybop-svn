@@ -29,6 +29,7 @@
 #include "../logger/log_handler.c"
 #include "../model/map.c"
 #include "../model/map_handler.c"
+#include "../model/model.c"
 #include "../string_helper.c"
 
 /**
@@ -40,7 +41,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.10 $ $Date: 2004-02-29 16:26:28 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-02-29 18:33:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -124,10 +125,10 @@ void remove_model_part(void* p0, void* p1) {
         if (r != (void*) 0) {
 
             // The given model contains compound models.
-            void* part = get_map_element_with_name(m->parts, n);
+            void* part = get_map_element_with_name(m->part_models, n);
 
             // Continue to process along the hierarchical name.
-            remove_statics_model_part(part, r);
+            remove_model_part(part, r);
 
         } else {
 
@@ -172,10 +173,10 @@ void* get_model_part(void* p0, void* p1) {
         if (r != (void*) 0) {
 
             // The given model contains compound models.
-            void* part = get_map_element_with_name(m->parts, n);
+            void* part = get_map_element_with_name(m->part_models, n);
 
             // Continue to process along the hierarchical name.
-            p = get_statics_model_part(part, r);
+            p = get_model_part(part, r);
 
         } else {
 
@@ -214,10 +215,10 @@ void* get_model_part_position(void* p0, void* p1) {
         if (r != (void*) 0) {
 
             // The given model contains compound models.
-            void* part = get_map_element_with_name(m->parts, n);
+            void* part = get_map_element_with_name(m->part_models, n);
 
             // Continue to process along the hierarchical name.
-            p = get_statics_model_part(part, r);
+            p = get_model_part(part, r);
 
         } else {
 

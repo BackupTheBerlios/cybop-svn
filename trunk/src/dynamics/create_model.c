@@ -42,9 +42,9 @@
 /**
  * This is the create model operation.
  *
- * It creates a statics or dynamics memory model from a given cybol model.
+ * It creates a statics or dynamics memory model from a cybol model.
  *
- * @version $Revision: 1.1 $ $Date: 2004-02-29 15:24:56 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-02-29 18:33:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,13 +57,14 @@
 //
 
 /**
- * Creates a model.
+ * Creates a memory model from a cybol model.
  *
- * @param p0 the model source
- * @param p1 the abstraction
- * @return the model
+ * @param p0 the cybol model
+ * @param p1 the location
+ * @param p2 the abstraction
+ * @return the memory model
  */
-void* create_model(void* p0, void* p1);
+void* create_model(void* p0, void* p1, void* p2);
 
 //
 // Model containers.
@@ -72,7 +73,7 @@ void* create_model(void* p0, void* p1);
 /**
  * Creates the model containers.
  *
- * @param p0 the model
+ * @param p0 the memory model
  */
 void create_model_containers(void* p0) {
 
@@ -111,7 +112,7 @@ void create_model_containers(void* p0) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not create model containers. The model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not create model containers. The memory model is null.");
     }
 }
 
@@ -122,7 +123,7 @@ void create_model_containers(void* p0) {
 /**
  * Initializes the part.
  *
- * @param p0 the model
+ * @param p0 the memory model
  * @param p1 the cybol part attributes
  */
 void initialize_part(void* p0, void* p1) {
@@ -168,7 +169,7 @@ void initialize_part(void* p0, void* p1) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize part. The model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize part. The memory model is null.");
     }
 }
 
@@ -179,7 +180,7 @@ void initialize_part(void* p0, void* p1) {
 /**
  * Initializes the parts.
  *
- * @param p0 the model
+ * @param p0 the memory model
  * @param p1 the cybol parts
  */
 void initialize_parts(void* p0, void* p1) {
@@ -196,7 +197,7 @@ void initialize_parts(void* p0, void* p1) {
 
         if (e != (void*) 0) {
 
-            initialize_part(p0, e->parts);
+            initialize_part(p0, e->part_models);
 
         } else {
 
@@ -214,8 +215,8 @@ void initialize_parts(void* p0, void* p1) {
 /**
  * Initializes the model from a cybol model.
  *
- * @param p0 the model
- * @param p1 the cybol path
+ * @param p0 the memory model
+ * @param p1 the cybol model
  */
 void initialize_model(void* p0, void* p1) {
 
@@ -252,22 +253,23 @@ void initialize_model(void* p0, void* p1) {
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize model. The model is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize model. The memory model is null.");
     }
 }
 
 /**
- * Creates a model from a given cybol model.
+ * Creates a memory model from a cybol model.
  *
- * @param p0 the cybol model path
- * @param p1 the abstraction
- * @return the model
+ * @param p0 the cybol model
+ * @param p1 the location
+ * @param p2 the abstraction
+ * @return the memory model
  */
-void* create_model(void* p0, void* p1) {
+void* create_model(void* p0, void* p1, void* p2) {
 
     void* m = (void*) 0;
     char* p = (char*) p0;
-    char* a = (char*) p1;
+    char* a = (char*) p2;
 
     if (p != (void*) 0) {
 
@@ -284,7 +286,7 @@ void* create_model(void* p0, void* p1) {
                 initialize_model(m, p0);
 
             // Dynamics model.
-            } else if (strcmp(a, TIME_PRIMITIVE) == 0) {
+            } else if (strcmp(a, OPERATION) == 0) {
 
                 m = (void*) malloc(sizeof(struct operation));
                 initialize_operation_model(m, p0);

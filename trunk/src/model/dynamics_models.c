@@ -37,7 +37,7 @@
  * http://home.arcor.de/cpp_kurs/cpp/le07/k2_09_d1.htm
  * ... or try a Google search.
  *
- * @version $Revision: 1.2 $ $Date: 2004-02-29 12:51:05 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-02-29 18:33:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,79 +45,73 @@
 // Logics models.
 //
 
-/** The and logics. */
-static const char* AND_LOGICS = "and";
+/** The and model. */
+static const char* AND_MODEL = "and";
 
-/** The or logics. */
-static const char* OR_LOGICS = "or";
+/** The or model. */
+static const char* OR_MODEL = "or";
 
 //
 // Comparison models.
 //
 
-/** The equal comparison. */
-static const char* EQUAL_COMPARISON = "equal";
+/** The equal model. */
+static const char* EQUAL_MODEL = "equal";
 
-/** The smaller comparison. */
-static const char* SMALLER_COMPARISON = "smaller";
+/** The smaller model. */
+static const char* SMALLER_MODEL = "smaller";
 
-/** The greater comparison. */
-static const char* GREATER_COMPARISON = "greater";
+/** The greater model. */
+static const char* GREATER_MODEL = "greater";
 
-/** The smaller or equal comparison. */
-static const char* SMALLER_OR_EQUAL_COMPARISON = "smaller_or_equal";
+/** The smaller or equal model. */
+static const char* SMALLER_OR_EQUAL_MODEL = "smaller_or_equal";
 
-/** The greater or equal comparison. */
-static const char* GREATER_OR_EQUAL_COMPARISON = "greater_or_equal";
+/** The greater or equal model. */
+static const char* GREATER_OR_EQUAL_MODEL = "greater_or_equal";
 
 //
 // Arithmetic models.
 //
 
-/** The add arithmetic. */
-static const char* ADD_ARITHMETIC = "add";
+/** The add model. */
+static const char* ADD_MODEL = "add";
 
-/** The subtract arithmetic. */
-static const char* SUBTRACT_ARITHMETIC = "subtract";
+/** The subtract model. */
+static const char* SUBTRACT_MODEL = "subtract";
 
-/** The multiply arithmetic. */
-static const char* MULTIPLY_ARITHMETIC = "multiply";
+/** The multiply model. */
+static const char* MULTIPLY_MODEL = "multiply";
 
-/** The divide arithmetic. */
-static const char* DIVIDE_ARITHMETIC = "divide";
+/** The divide model. */
+static const char* DIVIDE_MODEL = "divide";
 
 //
 // Memory management models.
 //
 
-/** The create statics memory management. */
-static const char* CREATE_STATICS_MEMORY_MANAGEMENT = "create_statics";
+/** The create model model. */
+static const char* CREATE_MODEL_MODEL = "create_model";
 
-/** The destroy statics memory management. */
-static const char* DESTROY_STATICS_MEMORY_MANAGEMENT = "destroy_statics";
-
-/** The create dynamics memory management. */
-static const char* CREATE_DYNAMICS_MEMORY_MANAGEMENT = "create_dynamics";
-
-/** The destroy dynamics memory management. */
-static const char* DESTROY_DYNAMICS_MEMORY_MANAGEMENT = "destroy_dynamics";
+/** The destroy model model. */
+static const char* DESTROY_MODEL_MODEL = "destroy_model";
 
 //
 // Input output models.
 //
 
-/** The send input output. */
-static const char* SEND_INPUT_OUTPUT = "send";
+/** The send model. */
+static const char* SEND_MODEL = "send";
 
-/** The receive input output. */
-static const char* RECEIVE_INPUT_OUTPUT = "receive";
+/** The receive model. */
+static const char* RECEIVE_MODEL = "receive";
 
 //
 // Lifecycle step models.
 //
 
-/** The exit lifecycle step. */
-static const char* EXIT_LIFECYCLE_STEP = "exit";
+/** The exit model. */
+static const char* EXIT_MODEL = "exit";
 
 /*??
 //

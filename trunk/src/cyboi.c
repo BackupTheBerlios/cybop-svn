@@ -29,7 +29,7 @@
 #include <string.h>
 #include "internals.c"
 #include "logger/log_handler.c"
-#include "model/statics.c"
+#include "model/statics_models.c"
 #include "signal/signal_memory.c"
 #include "signal/signal_memory_handler.c"
 #include "x_windows/x_windows_handler.c"
@@ -43,7 +43,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.7 $ $Date: 2004-02-28 19:43:30 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-02-29 18:33:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

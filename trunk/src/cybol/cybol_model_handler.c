@@ -1,7 +1,7 @@
 /*
  * $RCSfile: cybol_model_handler.c,v $
  *
- * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
+ * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
  * This software is published under the GPL GNU General Public License.
  * This program is free software; you can redistribute it and/or
@@ -32,7 +32,7 @@
  *
  * It can read and write CYBOL source files.
  *
- * @version $Revision: 1.7 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-02-29 18:33:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,29 +52,35 @@
 /** The null model. */
 //?? static const char* NULL_MODEL = "null";
 
-/** The child. */
-//?? static const char* CHILD = "child";
-
 /** The name. */
 static const char* NAME = "name";
-
-/** The part model. */
-static const char* PART_MODEL = "part_model";
-
-/** The part input output names. */
-static const char* PART_INPUT_OUTPUT_NAMES = "part_input_output_names";
-
-/** The part input output values. */
-static const char* PART_INPUT_OUTPUT_VALUES = "part_input_output_values";
 
 /** The part abstraction. */
 static const char* PART_ABSTRACTION = "part_abstraction";
 
-/** The position model. */
-static const char* POSITION_MODEL = "position_model";
+/** The part location. */
+static const char* PART_LOCATION = "part_location";
+
+/** The part model. */
+static const char* PART_MODEL = "part_model";
 
 /** The position abstraction. */
 static const char* POSITION_ABSTRACTION = "position_abstraction";
+
+/** The position location. */
+static const char* POSITION_LOCATION = "position_location";
+
+/** The position model. */
+static const char* POSITION_MODEL = "position_model";
+
+/** The constraint abstraction. */
+static const char* CONSTRAINT_ABSTRACTION = "constraint_abstraction";
+
+/** The constraint location. */
+static const char* CONSTRAINT_LOCATION = "constraint_location";
+
+/** The constraint model. */
+static const char* CONSTRAINT_MODEL = "constraint_model";
 
 //
 // Attribute.
@@ -665,4 +671,3 @@ void finalize_source_model(void* p0, void* p1) {
 
 /* CYBOL_MODEL_HANDLER_SOURCE */
 #endif
-

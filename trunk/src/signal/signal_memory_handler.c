@@ -27,17 +27,14 @@
 
 #include <string.h>
 #include "../dynamics/add.c"
-#include "../dynamics/create_dynamics.c"
-#include "../dynamics/create_statics.c"
-#include "../dynamics/destroy_dynamics.c"
-#include "../dynamics/destroy_statics.c"
+#include "../dynamics/create_model.c"
+#include "../dynamics/destroy_model.c"
 #include "../logger/log_handler.c"
 #include "../model/array_handler.c"
-#include "../model/dynamics.c"
-#include "../model/dynamics_model.c"
+#include "../model/dynamics_models.c"
 #include "../model/map.c"
 #include "../model/map_handler.c"
-#include "../model/statics_model_handler.c"
+#include "../model/model_handler.c"
 #include "../signal/languages.c"
 #include "../signal/priorities.c"
 #include "../signal/signal_memory.c"
@@ -54,7 +51,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.18 $ $Date: 2004-02-29 15:24:26 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2004-02-29 18:33:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -359,12 +356,12 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
 
     log_message((void*) &INFO_LOG_LEVEL, "Handle compound signal.");
 
-    struct dynamics_model* m = (struct dynamics_model*) p1;
+    struct model* m = (struct model*) p1;
 
     if (m != (void*) 0) {
 
         int count = 0;
-        get_array_count(m->parts, (void*) &count);
+        get_array_count(m->part_models, (void*) &count);
         int pos = 0;
         int i = 0;
         int* position = (void*) 0;
@@ -373,28 +370,27 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
 
         // All positions.
         while (pos < count) {
-            
+
             // All parts.
             while (i < count) {
-                
+
                 // Determine position.
-                position = (int*) get_map_element_at_index(m->positions, (void*) &i);
+                position = (int*) get_map_element_at_index(m->position_models, (void*) &i);
 
                 // All parts at the current position.
                 if (*position == pos) {
 
                     // Determine part signal as dynamics model.
-                    part = get_map_element_at_index(m->parts, (void*) &i);
+                    part = get_map_element_at_index(m->part_models, (void*) &i);
 
                     // Determine abstraction.
-                    abstr = get_map_element_at_index(m->abstractions, (void*) &i);
+                    abstr = get_map_element_at_index(m->part_abstractions, (void*) &i);
 
                     // Add "part" signal to signal memory,
                     // using the "whole" signal's priority.
-                    // (Each signal/action has a priority.
-                    // An action may consist of "part" actions.
-                    // The "part" actions cannot have higher/lower priority
-                    // than their original "whole" action.)
+                    // (Each signal has a priority. A signal may consist of "part"
+                    // signals. The "part" signals cannot have higher/lower priority
+                    // than their original "whole" signal.)
                     add_signal(p0, part, abstr, p2);
                 }
 

@@ -34,7 +34,7 @@
  * Complex models consist of other complex models and primitive models.
  * Primitive models are the final abstraction in software.
  *
- * @version $Revision: 1.2 $ $Date: 2004-02-29 12:51:05 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-02-29 18:33:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,85 +42,85 @@
 // Primitive models.
 //
 
-/** The boolean primitive. */
-static const char* BOOLEAN_PRIMITIVE = "boolean";
+/** The boolean model. */
+static const char* BOOLEAN_MODEL = "boolean";
 
-/** The integer primitive. */
-static const char* INTEGER_PRIMITIVE = "integer";
+/** The integer model. */
+static const char* INTEGER_MODEL = "integer";
 
-/** The fraction primitive. */
-static const char* FRACTION_PRIMITIVE = "fraction";
+/** The fraction model. */
+static const char* FRACTION_MODEL = "fraction";
 
-/** The complex primitive. */
-static const char* COMPLEX_PRIMITIVE = "complex";
+/** The complex model. */
+static const char* COMPLEX_MODEL = "complex";
 
-/** The vector primitive. */
-static const char* VECTOR_PRIMITIVE = "vector";
+/** The vector model. */
+static const char* VECTOR_MODEL = "vector";
 
-/** The string primitive. */
-static const char* STRING_PRIMITIVE = "string";
+/** The string model. */
+static const char* STRING_MODEL = "string";
 
-/** The time primitive. */
-static const char* TIME_PRIMITIVE = "time";
-
-//
-// Application models.
-//
-
-/** The koffice kword application. */
-static const char* KWORD_APPLICATION = "kword";
-
-/** The open office writer application. */
-static const char* SXW_APPLICATION = "sxw";
+/** The time model. */
+static const char* TIME_MODEL = "time";
 
 //
 // Audio models.
 //
 
-/** The mp3 audio. */
-static const char* MP3_AUDIO = "mp3";
+/** The mp3 model. */
+static const char* MP3_MODEL = "mp3";
 
 //
 // Image models.
 //
 
-/** The jpeg image. */
-static const char* JPEG_IMAGE = "jpeg";
+/** The jpeg model. */
+static const char* JPEG_MODEL = "jpeg";
 
-/** The gif image. */
-static const char* GIF_IMAGE = "gif";
+/** The gif model. */
+static const char* GIF_MODEL = "gif";
 
-/** The bmp image. */
-static const char* BMP_IMAGE = "bmp";
+/** The bmp model. */
+static const char* BMP_MODEL = "bmp";
 
 //
 // Text models.
 //
 
-/** The sgml text. */
-static const char* SGML_TEXT = "sgml";
+/** The sgml model. */
+static const char* SGML_MODEL = "sgml";
 
-/** The xml text. */
-static const char* XML_TEXT = "xml";
+/** The xml model. */
+static const char* XML_MODEL = "xml";
 
-/** The html text. */
-static const char* HTML_TEXT = "html";
+/** The html model. */
+static const char* HTML_MODEL = "html";
 
-/** The rtf text. */
-static const char* RTF_TEXT = "rtf";
+/** The rtf model. */
+static const char* RTF_MODEL = "rtf";
 
-/** The tex text. */
-static const char* TEX_TEXT = "tex";
+/** The tex model. */
+static const char* TEX_MODEL = "tex";
 
 //
 // Video models.
 //
 
-/** The mpeg video. */
-static const char* MPEG_VIDEO = "mpeg";
+/** The mpeg model. */
+static const char* MPEG_MODEL = "mpeg";
 
-/** The quicktime video. */
-static const char* QUICKTIME_VIDEO = "qt";
+/** The quicktime model. */
+static const char* QUICKTIME_MODEL = "qt";
+
+//
+// Application models.
+//
+
+/** The koffice kword model. */
+static const char* KWORD_MODEL = "kword";
+
+/** The open office writer model. */
+static const char* SXW_MODEL = "sxw";
 
 /* STATICS_MODELS_SOURCE */
 #endif
