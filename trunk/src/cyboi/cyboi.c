@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.70 $ $Date: 2005-01-12 19:18:55 $ $Author: christian $
+ * @version $Revision: 1.71 $ $Date: 2005-01-14 17:16:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,8 +72,7 @@ int main(int p0, char** p1) {
     // Call testing procedures. Comment/ uncomment this as needed.
     // CAUTION! This has to stand AFTER the initialization of the
     // global variables because these are used by the testing code.
-//??    test();
-//??    return 0;
+    test(); destroy_globals(); r = 0; return r;
 
     if (p1 != NULL_POINTER) {
 
