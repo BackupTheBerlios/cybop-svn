@@ -25,10 +25,10 @@
 #ifndef STATICS_MODEL_HANDLER_SOURCE
 #define STATICS_MODEL_HANDLER_SOURCE
 
-#include "log_handler.c"
-#include "map.c"
-#include "map_handler.c"
-#include "model_handler.c"
+#include "../logger/log_handler.c"
+#include "../model/map.c"
+#include "../model/map_handler.c"
+#include "../model/model_handler.c"
 
 /**
  * This is the statics model handler.
@@ -37,7 +37,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.5 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -25,20 +25,20 @@
 #ifndef CREATE_DYNAMICS_SOURCE
 #define CREATE_DYNAMICS_SOURCE
 
-#include "cybol_model_handler.c"
-#include "dynamics.c"
-#include "dynamics_cybol_model_handler.c"
-#include "dynamics_model.c"
-#include "map.c"
-#include "map_handler.c"
-#include "operation_handler.c"
+#include "../cybol/cybol_model_handler.c"
+#include "../cybol/dynamics_cybol_model_handler.c"
+#include "../model/dynamics.c"
+#include "../model/dynamics_model.c"
+#include "../model/map.c"
+#include "../model/map_handler.c"
+#include "../statics/operation_handler.c"
 
 /**
  * This is the create dynamics operation.
  *
  * It creates a dynamics memory model from a given dynamics cybol model.
  *
- * @version $Revision: 1.5 $ $Date: 2003-12-15 14:48:59 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

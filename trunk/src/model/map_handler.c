@@ -26,16 +26,16 @@
 #define MAP_HANDLER_SOURCE
 
 #include <string.h>
-#include "array_handler.c"
-#include "log_handler.c"
-#include "map.c"
+#include "../logger/log_handler.c"
+#include "../model/array_handler.c"
+#include "../model/map.c"
 
 /**
  * This is the map handler.
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.5 $ $Date: 2003-12-15 14:48:59 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

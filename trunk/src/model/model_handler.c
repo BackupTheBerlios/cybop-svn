@@ -26,9 +26,9 @@
 #define MODEL_HANDLER_SOURCE
 
 #include <string.h>
-#include "log_handler.c"
-#include "map.c"
-#include "map_handler.c"
+#include "../logger/log_handler.c"
+#include "../model/map.c"
+#include "../model/map_handler.c"
 
 /**
  * This is the model handler.
@@ -36,7 +36,7 @@
  * It contains functions which are used by both, the statics and the
  * dynamics model handler.
  *
- * @version $Revision: 1.4 $ $Date: 2003-12-15 07:16:07 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -25,7 +25,8 @@
 #ifndef ADD_SOURCE
 #define ADD_SOURCE
 
-#include "integer.c"
+#include "../logger/log_handler.c"
+#include "../statics/integer.c"
 
 /**
  * This is the add operation.
@@ -35,7 +36,7 @@
  * @param p0 the summand 0
  * @param p1 the summand 1
  * @param p2 the sum
- * @version $Revision: 1.6 $ $Date: 2003-12-12 16:39:43 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 void add(void* p0, void* p1, void* p2) {

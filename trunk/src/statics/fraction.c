@@ -25,14 +25,14 @@
 #ifndef FRACTION_SOURCE
 #define FRACTION_SOURCE
 
-#include "integer.c"
+#include "../statics/integer.c"
 
 /**
  * This is a fraction.
  *
  * It consists of two integer numbers, a numerator and a denominator.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct fraction {

@@ -25,12 +25,12 @@
 #ifndef INTEGER_HANDLER_SOURCE
 #define INTEGER_HANDLER_SOURCE
 
-#include "integer.c"
+#include "../statics/integer.c"
 
 /**
  * This is the integer handler.
  *
- * @version $Revision: 1.4 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

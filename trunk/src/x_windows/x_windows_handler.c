@@ -36,14 +36,14 @@
 //?? #include <X11/Xproto.h>
 //?? #include <X11/Xresource.h>
 #include <X11/Xutil.h>
-#include "x_windows.c"
+#include "../x_windows/x_windows.c"
 
 /**
  * This is the x windows handler.
  *
  * It controls the input and output of x windows.
  *
- * @version $Revision: 1.4 $ $Date: 2004-01-05 15:44:45 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

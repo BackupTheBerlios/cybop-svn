@@ -25,24 +25,24 @@
 #ifndef DESTROY_STATICS_SOURCE
 #define DESTROY_STATICS_SOURCE
 
-#include "boolean_handler.c"
-#include "complex_handler.c"
-#include "cybol_model_handler.c"
-#include "fraction_handler.c"
-#include "integer_handler.c"
-#include "statics.c"
-#include "statics_cybol_model_handler.c"
-#include "statics_model.c"
-#include "string_handler.c"
-#include "time_handler.c"
-#include "vector_handler.c"
+#include "../cybol/cybol_model_handler.c"
+#include "../cybol/statics_cybol_model_handler.c"
+#include "../model/statics.c"
+#include "../model/statics_model.c"
+#include "../statics/boolean_handler.c"
+#include "../statics/complex_handler.c"
+#include "../statics/fraction_handler.c"
+#include "../statics/integer_handler.c"
+#include "../statics/string_handler.c"
+#include "../statics/time_handler.c"
+#include "../statics/vector_handler.c"
 
 /**
  * This is the destroy statics operation.
  *
  * It destroys a statics memory model to a given statics cybol model.
  *
- * @version $Revision: 1.6 $ $Date: 2003-12-15 14:48:59 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -26,16 +26,16 @@
 #define ARRAY_HANDLER_SOURCE
 
 #include <stdlib.h>
-#include "array.c"
-#include "internal_array_handler.c"
-#include "log_handler.c"
+#include "../logger/log_handler.c"
+#include "../model/array.c"
+#include "../model/internal_array_handler.c"
 
 /**
  * This is the array handler.
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.6 $ $Date: 2003-12-15 14:48:59 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

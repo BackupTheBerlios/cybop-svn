@@ -26,19 +26,19 @@
 #define SIGNAL_MEMORY_HANDLER_SOURCE
 
 #include <string.h>
-#include "add.c"
-#include "array_handler.c"
-#include "create_dynamics.c"
-#include "create_statics.c"
-#include "destroy_dynamics.c"
-#include "destroy_statics.c"
-#include "dynamics.c"
-#include "dynamics_model.c"
-#include "map.c"
-#include "map_handler.c"
-#include "statics_model_handler.c"
-#include "vector.c"
-#include "x_windows_handler.c"
+#include "../dynamics/add.c"
+#include "../dynamics/create_dynamics.c"
+#include "../dynamics/create_statics.c"
+#include "../dynamics/destroy_dynamics.c"
+#include "../dynamics/destroy_statics.c"
+#include "../model/array_handler.c"
+#include "../model/dynamics.c"
+#include "../model/dynamics_model.c"
+#include "../model/map.c"
+#include "../model/map_handler.c"
+#include "../model/statics_model_handler.c"
+#include "../statics/vector.c"
+#include "../x_windows/x_windows_handler.c"
 
 /**
  * This is the signal memory handler.
@@ -50,7 +50,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.11 $ $Date: 2003-12-18 16:40:03 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

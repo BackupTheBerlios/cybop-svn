@@ -25,15 +25,15 @@
 #ifndef OPERATION_HANDLER_SOURCE
 #define OPERATION_HANDLER_SOURCE
 
-#include "map.c"
-#include "map_handler.c"
-#include "model_handler.c"
-#include "operation.c"
+#include "../model/map.c"
+#include "../model/map_handler.c"
+#include "../model/model_handler.c"
+#include "../statics/operation.c"
 
 /**
  * This is the operation handler.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-16 11:07:24 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

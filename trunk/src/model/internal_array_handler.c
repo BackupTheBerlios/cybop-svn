@@ -25,7 +25,7 @@
 #ifndef INTERNAL_ARRAY_HANDLER_SOURCE
 #define INTERNAL_ARRAY_HANDLER_SOURCE
 
-#include "log_handler.c"
+#include "../logger/log_handler.c"
 
 /**
  * This is the internal array handler.
@@ -34,7 +34,7 @@
  * Its syntax mostly looks like: type[size].
  * Internal array elements are accessed over an index.
  *
- * @version $Revision: 1.5 $ $Date: 2003-12-15 14:48:59 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

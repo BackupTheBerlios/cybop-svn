@@ -26,12 +26,13 @@
 #define INTERNALS_HANDLER_SOURCE
 
 #include "internals.c"
-#include "log_handler.c"
+#include "logger/log_handler.c"
+#include "x_windows/x_windows.c"
 
 /**
  * This is the internals handler.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-17 17:16:36 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-01-05 16:38:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
