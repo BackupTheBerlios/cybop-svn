@@ -1,0 +1,107 @@
+From edoc-pc-chairs@dstc.edu.au Thu Feb 27 19:46:31 2003
+Return-Path: <www@obsolete.dstc.edu.au>
+Received: from virusgate.rz.tu-ilmenau.de (virusgate.rz.tu-ilmenau.de [141.24.4.19])
+	by ernie.rz.tu-ilmenau.de (8.9.3/8.9.3) with ESMTP id TAA10417
+	Thu, 27 Feb 2003 19:47:30 +0100 (MET)
+Received: from piggy.rz.tu-ilmenau.de (localhost [127.0.0.1])
+	by virusgate.rz.tu-ilmenau.de (8.11.2/8.11.2) with ESMTP id h1RIlL528637
+	Thu, 27 Feb 2003 19:47:21 +0100 (MET)
+Received: from piglet.dstc.edu.au (piglet.dstc.edu.au [130.102.176.1])
+	by piggy.rz.tu-ilmenau.de (8.9.3/8.9.3) with ESMTP id TAA01965
+	; Thu, 27 Feb 2003 19:47:17 +0100 (MET)
+Received: from obsolete.dstc.edu.au (www.dstc.edu.au [130.102.181.60])
+	by piglet.dstc.edu.au (8.12.3/8.12.3) with ESMTP id h1RIka8b025709;
+	Fri, 28 Feb 2003 04:46:36 +1000 (EST)
+Received: (from www@localhost)
+	by obsolete.dstc.edu.au (8.9.3+Sun/8.8.8) id EAA12079;
+	Fri, 28 Feb 2003 04:46:31 +1000 (EST)
+Date: Fri, 28 Feb 2003 04:46:31 +1000 (EST)
+Message-Id: <200302271846.EAA12079@obsolete.dstc.edu.au>
+To: christian.heller@tu-ilmenau.de
+From: EDOC PC Chairs <edoc-pc-chairs@dstc.edu.au>
+Reply-To: EDOC PC Chairs <edoc-pc-chairs@dstc.edu.au>
+Cc: edoc-pc-chairs@dstc.edu.au
+Subject: EDOC 2003: paper registration
+X-Spam-Checked: SPAMASSASSIN: This message probably not SPAM
+X-Spam-Score: -100.9, Required: 5
+X-Virus-Scanned: Message: ok
+X-Scanned-By: MIMEDefang 2.9 (www dot roaringpenguin dot com slash mimedefang)
+Status: R 
+X-Status: N
+
+
+*****************************************************************************
+ NOTE: This is an automatically generated email from a paper registration
+ system used for the EDOC 2003 conference. If you get this email without prior
+ registration of a paper for EDOC 2003, it is likely that someone misused our
+ registration system. In this case, we apologize! Please reply to the above
+ address and let us know.
+*****************************************************************************
+
+
+Dear Christian Heller,
+
+You registered the following paper information for submission to EDOC 2003:
+
+
+=============================================================================
+Paper ID: 6
+=============================================================================
+Contact Author: Christian Heller
+CA Title      : Dipl.-Ing.
+Organization  : Technical University of Ilmenau
+Street Address: Helmholtzplatz 1
+City          : Ilmenau
+State         : Thuringia
+Zip           : 98693
+Country       : Germany
+Phone         :  49-(0)3677-69-1230
+Fax           :  49-(0)3677-69-1220
+Email         : christian.heller@tu-ilmenau.de
+Paper Title   : A flexible Software Architecture for Communication
+Author Name1  : Christian Heller
+Author Name2  : Torsten Kunze
+Author Name3  : Jens Bohl
+Author Name4  : Ilka Philippow
+Author Name5  : 
+Author Name6  : 
+Papertype     : Full Paper
+Keyword1      : Enterprise frameworks
+Keyword2      : Enterprise architecture
+Keyword3      : Middleware platforms (e.g. J2EE, .NET)
+Keyword4      : NONE
+Keyword5      : NONE
+Add_Keyword   : Design Pattern, Persistence, Communication, User Interface, Frontend, Backend, CYBOP, Res Medicinae
+
+ABSTRACT:
+This document describes how existing design patterns can be extended and combined to merge their advantages into one, domain-independent software framework. This framework, called Cybernetics Oriented Programming (CYBOP), is characterized by flexibility and extensibility. Further, the concept of Ontology is used to structure the software architecture as well as to keep it maintainable. A Component Lifecycle ensures the proper startup and shutdown of any systems built on top of CYBOP.
+
+One core component of the framework is Layer PerCom - an advanced architecture for seemless integration of communication paradigms and persistence mechanisms. Overcoming the classical scheme of thinking in terms of Domain, Frontend, Backend and Communication, PerCom treats them all similar, as passive data models which can be translated into each other - as opposed to the classical approach that unnecessarily complicates their design.
+
+The practical proof of this combined architectural approach was accomplished within the diploma work of Torsten Kunze which consisted of an (ongoing) effort to design and develop a module called ReForm, for the Open Source Software (OSS) project Res Medicinae. The major task for this module is to provide a user interface for printing medical forms. It was used to examine the communication between modules and to find a structure for effective implementation and easy expansion.
+
+
+
+=============================================================================
+
+
+To upload your paper at our submission site, please use link
+below or use the following url for later use:
+
+  http://edoc.dstc.edu.au/cgi-bin/OPEN03/upload_front.cgi?id=6&pw=menuililmdechenau
+
+
+
+If your are submitting a Full Paper, please use the IEEE Author Guidelines 
+at http://computer.org/author/, specifically the Proceedings Instructions 
+at http://computer.org/cspress/instruct.htm, as prescribed in the Call 
+for Contributions (see http://edocconference.org/contributions.html). 
+The format of Experience Reports is free.
+
+Best regards,
+
+Maarten Steen & Barrett Bryant
+EDOC 2003 PC Chairs
+edoc-pc-chairs@dstc.edu.au
+
+

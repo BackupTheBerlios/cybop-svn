@@ -1,0 +1,39 @@
+%
+% $RCSfile: object_id.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Object ID (OID)}
+\label{object_id_heading}
+
+Most database systems provide an own algorithm to generate primary keys for the
+tables. But the applications that use our communication architecture shall also
+be able to work if a database server is not reachable, e.g. due to a network
+failure. Thats why the keys are generated locally, by each application.
+Based on the assumption that every host in a network has a network card, it thereby
+has a unique internet address. This number is concatinated with an exact time stamp
+(nanoseconds). That is why the OID is unique in the global network and unique in
+time.\\
+The proposed approach uses the OID as file name for local storage and the same
+OID as primary key in the main table of the database. Therewith, both models can
+be mapped to each other. Of course, it is necessary to avoid overwriting of new
+data in the database. If, for example, a network connection is cut and a little
+later, one wants to get data from the local files and write them up in the restored
+central database, it has to be made sure that nobody else has modified the data
+during the offline-time. That is why there is another technique to ensure this
+-- the time stamp.
+

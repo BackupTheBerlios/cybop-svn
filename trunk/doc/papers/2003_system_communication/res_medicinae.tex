@@ -1,0 +1,54 @@
+%
+% $RCSfile: res_medicinae.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Res Medicinae}
+\label{res_medicinae_heading}
+
+The practical background for the application of CYBOP is \emph{Res Medicinae}
+\cite{resmedicinae}. A modern clinical information system is the aim of all
+efforts in this project. In the future, it shall serve medical documentation,
+laboratory data, billing etc.\\
+\emph{Res Medicinae} is separated into single modules solving different tasks.
+One module in which the CYBOP communication concepts were applied is \emph{ReForm}
+(figure \ref{reform_module_figure}). It offers a medical form that can be filled
+in and printed out. Since one of the main reasons to implement this module was
+the testing and proof of the new persistence and communication concepts, it
+includes a dialog for choosing the communication protocol or persistence mechanism,
+respectively. This is the only remaining part where users have to care about the
+underlaying techniques. They also have to decide whether to use the local file
+system via \emph{Extensible Markup Language} (XML) format or to store the data
+in a central database. In the future, an XML file format may as well be used for
+remote communication, e.g. via \emph{Simple Object Access Protocol} (SOAP).\\
+Because of the component-based design of \emph{Res Medicinae}, it is possible
+to start more than one instance of \emph{ReForm} at the same time. In this way,
+the data exchange between modules can be tested.
+A module \emph{X} looks for another registered module \emph{Y} at the naming service
+of \emph{Remote Method Invocation} (RMI), \emph{Common Object Request Broker
+Architecture} (CORBA) or some other. \emph{X} gets the address of the remote service
+\emph{Y} (depending on the communication mechanism). The stub and skeleton of
+\emph{X} and \emph{Y} marshal, send and unmarshal the data for further working.
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.24]{vector/reform_module.eps}
+        \caption{ReForm Module}
+        \label{reform_module_figure}
+    \end{center}
+\end{figure}
+

@@ -1,0 +1,34 @@
+%
+% $RCSfile: consistency.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Consistency}
+\label{consistency_heading}
+
+The described models are highly flexible and extensible and absolutely transparent
+to the user (developer). S/he will not know whether the current communication is
+with the local file system, a database or a remote process on another machine.\\
+However, this transparency causes a number of problems. Surely, the most common
+question is how to ensure consistency, security and minimum redundance?
+The following two paragraphs give an answer to the first part of this question
+-- consistency and uniqueness of data sets. Maximizing security and minimizing
+redundancy have to be analysed in future works.
+
+\input{object_id}
+\input{time_stamp}
+

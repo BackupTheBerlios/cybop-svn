@@ -1,0 +1,93 @@
+From becker@informatik.uni-hamburg.de Tue Sep 30 22:53:17 2003
+Return-Path: <becker@informatik.uni-hamburg.de>
+Received: from virusgate.rz.tu-ilmenau.de (virusgate.rz.tu-ilmenau.de [141.24.4.19])
+	by ernie.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id h8UKkZve022389
+	for hidden; Tue, 30 Sep 2003 22:46:35 +0200 (MET DST)
+Received: from piggy.rz.tu-ilmenau.de (localhost [127.0.0.1])
+	by virusgate.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id h8UKk3js008398
+	for <christian.heller@tu-ilmenau.de>; Tue, 30 Sep 2003 22:46:03 +0200 (MEST)
+Received: from natsmtp01.webmailer.de (natsmtp01.webmailer.de [192.67.198.81])
+	by piggy.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id h8UKk2BL000020
+	for <christian.heller@tu-ilmenau.de>; Tue, 30 Sep 2003 22:46:03 +0200 (MET DST)
+Received: from informatik.uni-hamburg.de (p3EE2D6C9.dip.t-dialin.net [62.226.214.201])
+	by post.webmailer.de (8.12.10/8.12.10) with ESMTP id h8UKjqoR004478;
+	Tue, 30 Sep 2003 22:46:02 +0200 (MEST)
+Message-ID: <3F79ED3D.8050805@informatik.uni-hamburg.de>
+Date: Tue, 30 Sep 2003 22:53:17 +0200
+From: Petra Becker-Pechau <becker@informatik.uni-hamburg.de>
+User-Agent: Mozilla/5.0 (Windows; U; Win98; en-US; rv:1.2.1) Gecko/20021130
+X-Accept-Language: en-us, en
+MIME-Version: 1.0
+To: Christian Heller <christian.heller@tu-ilmenau.de>
+Subject: Re: OOPSLA-Workshop on Ontologies to Complement Software
+References: <3F686458.8010501@informatik.uni-hamburg.de> <200309301141.19001.christian.heller@tu-ilmenau.de>
+In-Reply-To: <200309301141.19001.christian.heller@tu-ilmenau.de>
+Content-Type: text/plain;
+  charset=ISO-8859-1;
+  format=flowed
+Content-Transfer-Encoding: quoted-printable
+Status: RO
+X-Status: A
+
+Hallo Herr Heller,
+
+Ihre Anfrage kam genau zum richtigen Zeitpunkt, wir waren gerade dabei,=20
+die neue Fassung des Artikels zu lesen. Wir freuen uns, Ihnen definitiv=20
+zusagen zu k=F6nnen! Wir werden demn=E4chst die genauere Planung des=20
+Workshops bekannt geben, die Artikel werden auf der Workshop-Webseite=20
+ver=F6ffentlicht.
+
+Viele Gr=FC=DFe
+Petra Becker-Pechau
+
+PS: Wir k=F6nnen uns als Wissenschaftlich Mitarbeiter auch gerne duzen...=
+
+
+Christian Heller wrote:
+> Hallo Frau Becker-Pechau,
+>=20
+> hatten Sie die korrigierte Version meines Papers mit email vom 17.09.20=
+03
+> erhalten? Ich habe noch keine Mitteilung ueber eine endgueltige Annahme=
+
+> des Papers von Ihnen bekommen.
+>=20
+> 1 Koennen Sie mir bitte baldmoeglichst definitiv Bescheid geben, da die=
+
+> Konferenz schon in 3 1/2 Wochen stattfindet und ich noch keinen Flug et=
+c.
+> gebucht habe?
+>=20
+> 2 Muss man sich im Vorhinein bei der Konferenz registrieren oder reicht=
+
+> eine Registrierung vor Ort, am ersten Tag der Konferenz?
+>=20
+> Vielen Dank,
+> Christian
+>=20
+>=20
+> On Wednesday 17 September 2003 15:40, you wrote:
+>=20
+>>Dear authors,
+>>
+>>We are glad to inform you that the OOPSLA workshop "How to Use
+>>Ontologies and Modularization to Explicitly Describe the Concept Model
+>>of a Software Systems Architecture" will take place! We plan to shorten=
+
+>>it a little to 4 or 6 hours. There will be at least 6 participants
+>>including the organizers. We are looking forward to seeing you!
+>>
+>>Petra
+>>----
+>>
+>>Petra Becker-Pechau
+>>Research Assistant
+>>Software-Engineering Group
+>>Department for Informatics
+>>University of Hamburg, Germany
+>>becker@informatik.uni-hamburg.de
+>=20
+>=20
+
+
+
