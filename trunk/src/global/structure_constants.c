@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2005-03-21 01:26:59 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2005-03-22 00:24:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -33,6 +33,10 @@
 // Arrays.
 //
 
+/** The character array constant. */
+static const int CHARACTER_ARRAY_ARRAY[] = {2};
+static const int* CHARACTER_ARRAY = CHARACTER_ARRAY_ARRAY;
+
 /** The pointer array constant. */
 static const int POINTER_ARRAY_ARRAY[] = {0};
 static const int* POINTER_ARRAY = POINTER_ARRAY_ARRAY;
@@ -41,13 +45,25 @@ static const int* POINTER_ARRAY = POINTER_ARRAY_ARRAY;
 static const int INTEGER_ARRAY_ARRAY[] = {1};
 static const int* INTEGER_ARRAY = INTEGER_ARRAY_ARRAY;
 
-/** The character array constant. */
-static const int CHARACTER_ARRAY_ARRAY[] = {2};
-static const int* CHARACTER_ARRAY = CHARACTER_ARRAY_ARRAY;
+/** The unsigned long array constant. */
+static const int UNSIGNED_LONG_ARRAY_ARRAY[] = {1};
+static const int* UNSIGNED_LONG_ARRAY = UNSIGNED_LONG_ARRAY_ARRAY;
 
 /** The double array constant. */
 static const int DOUBLE_ARRAY_ARRAY[] = {3};
 static const int* DOUBLE_ARRAY = DOUBLE_ARRAY_ARRAY;
+
+//
+// Character.
+//
+
+/** The character count. */
+static const int CHARACTER_COUNT_ARRAY[] = {1};
+static const int* CHARACTER_COUNT = CHARACTER_COUNT_ARRAY;
+
+/** The character value index. */
+static const int CHARACTER_VALUE_INDEX_ARRAY[] = {0};
+static const int* CHARACTER_VALUE_INDEX = CHARACTER_VALUE_INDEX_ARRAY;
 
 //
 // String.
@@ -56,18 +72,6 @@ static const int* DOUBLE_ARRAY = DOUBLE_ARRAY_ARRAY;
 /** The string resize factor. */
 static const int STRING_RESIZE_FACTOR_ARRAY[] = {2};
 static const int* STRING_RESIZE_FACTOR = STRING_RESIZE_FACTOR_ARRAY;
-
-//
-// Integer.
-//
-
-/** The integer count. */
-static const int INTEGER_COUNT_ARRAY[] = {1};
-static const int* INTEGER_COUNT = INTEGER_COUNT_ARRAY;
-
-/** The integer value index. */
-static const int INTEGER_VALUE_INDEX_ARRAY[] = {0};
-static const int* INTEGER_VALUE_INDEX = INTEGER_VALUE_INDEX_ARRAY;
 
 //
 // Pointer.
@@ -82,16 +86,28 @@ static const int POINTER_VALUE_INDEX_ARRAY[] = {0};
 static const int* POINTER_VALUE_INDEX = POINTER_VALUE_INDEX_ARRAY;
 
 //
-// Character.
+// Integer.
 //
 
-/** The character count. */
-static const int CHARACTER_COUNT_ARRAY[] = {1};
-static const int* CHARACTER_COUNT = CHARACTER_COUNT_ARRAY;
+/** The integer count. */
+static const int INTEGER_COUNT_ARRAY[] = {1};
+static const int* INTEGER_COUNT = INTEGER_COUNT_ARRAY;
 
-/** The character value index. */
-static const int CHARACTER_VALUE_INDEX_ARRAY[] = {0};
-static const int* CHARACTER_VALUE_INDEX = CHARACTER_VALUE_INDEX_ARRAY;
+/** The integer value index. */
+static const int INTEGER_VALUE_INDEX_ARRAY[] = {0};
+static const int* INTEGER_VALUE_INDEX = INTEGER_VALUE_INDEX_ARRAY;
+
+//
+// Unsigned long.
+//
+
+/** The unsigned long count. */
+static const int UNSIGNED_LONG_COUNT_ARRAY[] = {1};
+static const int* UNSIGNED_LONG_COUNT = UNSIGNED_LONG_COUNT_ARRAY;
+
+/** The unsigned long value index. */
+static const int UNSIGNED_LONG_VALUE_INDEX_ARRAY[] = {0};
+static const int* UNSIGNED_LONG_VALUE_INDEX = UNSIGNED_LONG_VALUE_INDEX_ARRAY;
 
 //
 // Double.
@@ -254,7 +270,7 @@ static const int* DETAILS_SIZES_INDEX = DETAILS_SIZES_INDEX_ARRAY;
 //
 
 /** The internals memory elements count. */
-static const int INTERNALS_MEMORY_ELEMENTS_COUNT_ARRAY[] = {29};
+static const int INTERNALS_MEMORY_ELEMENTS_COUNT_ARRAY[] = {40};
 static const int* INTERNALS_MEMORY_ELEMENTS_COUNT = INTERNALS_MEMORY_ELEMENTS_COUNT_ARRAY;
 
 /** The startup parameters. */
@@ -345,21 +361,45 @@ static const int* TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL = TCP_CLIENT_SOCKE
 static const int TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL_ARRAY[] = {26};
 static const int* TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL = TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL_ARRAY;
 
-/** The x window system display. */
-static const int X_WINDOW_SYSTEM_DISPLAY_INTERNAL_ARRAY[] = {27};
+/** The x window system. */
+static const int X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL_ARRAY[] = {27};
+static const int* X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL = X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL_ARRAY;
+
+static const int X_WINDOW_SYSTEM_DISPLAY_INTERNAL_ARRAY[] = {28};
 static const int* X_WINDOW_SYSTEM_DISPLAY_INTERNAL = X_WINDOW_SYSTEM_DISPLAY_INTERNAL_ARRAY;
 
-/** The x window system screen. */
-static const int X_WINDOW_SYSTEM_SCREEN_INTERNAL_ARRAY[] = {28};
+static const int X_WINDOW_SYSTEM_SCREEN_INTERNAL_ARRAY[] = {29};
 static const int* X_WINDOW_SYSTEM_SCREEN_INTERNAL = X_WINDOW_SYSTEM_SCREEN_INTERNAL_ARRAY;
 
-/** The x window system background. */
-static const int X_WINDOW_SYSTEM_BACKGROUND_INTERNAL_ARRAY[] = {29};
+static const int X_WINDOW_SYSTEM_SCREEN_NUMBER_INTERNAL_ARRAY[] = {30};
+static const int* X_WINDOW_SYSTEM_SCREEN_NUMBER_INTERNAL = X_WINDOW_SYSTEM_SCREEN_NUMBER_INTERNAL_ARRAY;
+
+static const int X_WINDOW_SYSTEM_BACKGROUND_INTERNAL_ARRAY[] = {31};
 static const int* X_WINDOW_SYSTEM_BACKGROUND_INTERNAL = X_WINDOW_SYSTEM_BACKGROUND_INTERNAL_ARRAY;
 
-/** The x window system foreground. */
-static const int X_WINDOW_SYSTEM_FOREGROUND_INTERNAL_ARRAY[] = {30};
+static const int X_WINDOW_SYSTEM_FOREGROUND_INTERNAL_ARRAY[] = {32};
 static const int* X_WINDOW_SYSTEM_FOREGROUND_INTERNAL = X_WINDOW_SYSTEM_FOREGROUND_INTERNAL_ARRAY;
+
+static const int X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL_ARRAY[] = {33};
+static const int* X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL = X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL_ARRAY;
+
+static const int X_WINDOW_SYSTEM_COLOUR_MAP_INTERNAL_ARRAY[] = {34};
+static const int* X_WINDOW_SYSTEM_COLOUR_MAP_INTERNAL = X_WINDOW_SYSTEM_COLOUR_MAP_INTERNAL_ARRAY;
+
+static const int X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL_ARRAY[] = {35};
+static const int* X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL = X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL_ARRAY;
+
+static const int X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUES_INTERNAL_ARRAY[] = {36};
+static const int* X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUES_INTERNAL = X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUES_INTERNAL_ARRAY;
+
+static const int X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL_ARRAY[] = {37};
+static const int* X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL = X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL_ARRAY;
+
+static const int X_WINDOW_SYSTEM_FONT_NAME_INTERNAL_ARRAY[] = {38};
+static const int* X_WINDOW_SYSTEM_FONT_NAME_INTERNAL = X_WINDOW_SYSTEM_FONT_NAME_INTERNAL_ARRAY;
+
+static const int X_WINDOW_SYSTEM_FONT_INTERNAL_ARRAY[] = {39};
+static const int* X_WINDOW_SYSTEM_FONT_INTERNAL = X_WINDOW_SYSTEM_FONT_INTERNAL_ARRAY;
 
 //
 // Signal memory.

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-01-09 20:30:21 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-03-22 00:24:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,6 +60,9 @@ void create_globals() {
     // The integer null pointer.
     INTEGER_NULL_POINTER = (int*) 0;
 
+    // The unsigned long null pointer.
+    UNSIGNED_LONG_NULL_POINTER = (unsigned long*) 0;
+
     // The character null pointer.
     CHARACTER_NULL_POINTER = (char*) 0;
 
@@ -80,16 +83,21 @@ void create_globals() {
     // The integer primitive size.
     // CAUTION! The sizeof operator must be used twice here,
     // because INTEGER_PRIMITIVE_SIZE cannot be used before being initialized.
+    // CAUTION! The integer size need to be initialised FIRST!
     INTEGER_PRIMITIVE_SIZE = (int*) malloc(sizeof(int));
     *INTEGER_PRIMITIVE_SIZE = sizeof(int);
-
-    // The pointer primitive size.
-    POINTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *POINTER_PRIMITIVE_SIZE = sizeof(void*);
 
     // The character primitive size.
     CHARACTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *CHARACTER_PRIMITIVE_SIZE = sizeof(char);
+
+    // The unsigned long primitive size.
+    UNSIGNED_LONG_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *UNSIGNED_LONG_PRIMITIVE_SIZE = sizeof(unsigned long);
+
+    // The pointer primitive size.
+    POINTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *POINTER_PRIMITIVE_SIZE = sizeof(void*);
 
     // The double primitive size.
     DOUBLE_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
@@ -150,11 +158,14 @@ void destroy_globals() {
     // The double primitive size.
     free(DOUBLE_PRIMITIVE_SIZE);
 
-    // The character primitive size.
-    free(CHARACTER_PRIMITIVE_SIZE);
+    // The unsigned long primitive size.
+    free(UNSIGNED_LONG_PRIMITIVE_SIZE);
 
     // The pointer primitive size.
     free(POINTER_PRIMITIVE_SIZE);
+
+    // The character primitive size.
+    free(CHARACTER_PRIMITIVE_SIZE);
 
     // The integer primitive size.
     free(INTEGER_PRIMITIVE_SIZE);

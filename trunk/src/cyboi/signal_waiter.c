@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.34 $ $Date: 2005-03-02 08:03:09 $ $Author: rholzmueller $
+ * @version $Revision: 1.35 $ $Date: 2005-03-22 00:24:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -47,11 +47,10 @@ void wait(void* p0) {
 
     // Activate input output mechanisms for signal reception.
     activate_input_output(p0);
-    
+
     //dbug for rolf Holzmüller
     void** socket_flag = POINTER_NULL_POINTER;
     get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_ARRAY);
-    
 
     // The knowledge memory.
     void** k = POINTER_NULL_POINTER;
@@ -122,9 +121,9 @@ void wait(void* p0) {
                                 //?? Wait for web input, if no signal is in memory. TODO: Use a thread for this!
                                 //debug for rolf Holzmüller
                                 if ( socket_flag != POINTER_NULL_POINTER ) {
-                                    
+
                                     if (*socket_flag != NULL_POINTER) {
-                                    
+
                                         if ( ( **((int**)socket_flag)==1 ) && (i < 0) ) {
 
                                             run_tcp_socket( p0);
@@ -177,9 +176,9 @@ void wait(void* p0) {
                                                                     //
                                                                     // Handle signal.
                                                                     //
-                                                                    
+
                                                                     handle_signal(*a, *ac, *m, *mc, *d, *dc, *p, *id, (void*) &f, p0,
-                                                                                  &direct_execution_flag  ); 
+                                                                                  &direct_execution_flag  );
 
 //                                                                    if (r != 1) {
 //

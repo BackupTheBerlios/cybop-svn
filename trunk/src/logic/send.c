@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2005-03-21 01:26:59 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2005-03-22 00:24:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -252,130 +252,6 @@ void send_message(const void* p0, const void* p1,
             translate
             serialise
             send_vga
-*/
-
-//??            init_x();
-
-/*??
-            // Window-position
-            x->hint.x = 100;
-            x->hint.y = 100;
-
-            x->hint.width = Anwendung.size_x;
-            x->hint.height = Anwendung.size_y;
-            x->hint.flags = PPosition | PSize;
-
-            // The parent window.
-            // This is mostly the root window of the window manager.
-            // For popup menues, it should be the main application window.
-            Window parent = DefaultRootWindow(x->display);
-
-            // Create window.
-            x->window = XCreateSimpleWindow(
-                x->display,
-                parent,
-                x->hint.x,
-                x->hint.y,
-                x->hint.width,
-                x->hint.height,
-                5,
-                x->foreground,
-                x->background);
-
-            XSetStandardProperties(
-                x->display,
-                x->window,
-                "Application",
-                "Icon",
-                None,
-                NULL,
-                0,
-                (void*) &(x->hint));
-
-            // Load default colour map.
-            x->cmap = DefaultColormap(x->display, x->screen);
-
-            x->gray.red = 49125;
-            x->gray.green = 49125;
-            x->gray.blue = 49125;
-            XAllocColor(x->display, x->cmap, &(x->gray));
-
-            x->light_gray.red = 56000;
-            x->light_gray.green = 58000;
-            x->light_gray.blue = 60000;
-            XAllocColor(x->display, x->cmap, &(x->light_gray));
-
-            x->vlight_gray.red = 60000;
-            x->vlight_gray.green = 61000;
-            x->vlight_gray.blue = 62000;
-            XAllocColor(x->display, x->cmap, &(x->vlight_gray));
-
-            x->dark_gray.red = 32768;
-            x->dark_gray.green = 32768;
-            x->dark_gray.blue = 32768;
-            XAllocColor(x->display, x->cmap, &(x->dark_gray));
-
-            // Create menu graphic context.
-            // Each graphic element needs its own graphic context.
-            x->gc_menu = XCreateGC(x->display, x->window, 0, 0);
-            XSetBackground(x->display, x->gc_menu, x->background);
-            XSetForeground(x->display, x->gc_menu, x->light_gray.pixel);
-
-            // Create menu border graphic context.
-            // Each graphic element needs its own graphic context.
-            x->gc_menu_border_top = XCreateGC(x->display, x->window, 0, 0);
-            XSetBackground(x->display, x->gc_menu_border_top, x->background);
-            XSetForeground(x->display, x->gc_menu_border_top, x->vlight_gray.pixel);
-
-            // Create menu border bottom graphic context.
-            // Each graphic element needs its own graphic context.
-            x->gc_menu_border_bottom = XCreateGC(x->display, x->window, 0, 0);
-            XSetBackground(x->display, x->gc_menu_border_bottom, x->background);
-            XSetForeground(x->display, x->gc_menu_border_bottom, x->dark_gray.pixel);
-
-            // Create menu font graphic context.
-            // Each graphic element needs its own graphic context.
-            x->gc_menu_font = XCreateGC(x->display, x->window, 0, 0);
-            XSetBackground(x->display, x->gc_menu_font, x->light_gray.pixel);
-            XSetForeground(x->display, x->gc_menu_font, x->foreground);
-
-            // Create special font.
-//??            char* font_name = "Helvetica";
-//??            cybol_font = XLoadFont(x->display, font_name);
-
-            // Create graphic context.
-            // Each graphic element needs its own graphic context.
-            GC gc = XCreateGC(x->display, x->window, 0, 0);
-            XSetBackground(x->display, gc, x->background);
-            XSetForeground(x->display, gc, x->foreground);
-//??            XSetFont(x->display, cybol_gc, cybol_font);
-
-/*??
-            char* test = "test string";
-            int test_length = strlen(test);
-            XDrawString(x->display, x->window, cybol_gc,
-                position_x, position_y, test, test_length);
-*/
-
-/*??
-            // Request input events (signals) to be put into event queue.
-            XSelectInput(x->display, x->window, ButtonPressMask | KeyPressMask | ExposureMask);
-
-            // Map the window.
-            // This procedure changes the order of all sister windows,
-            // so that the given window lies on top.
-            // Afterwards, all windows are displayed on the screen.
-            XMapRaised(x->display, x->window);
-
-            //?? TODO: From xlib tutorial.
-            //?? Remove as soon as event loop (MappingNotify) functions!
-            XFlush(x->display);
-
-            sleep(5);
-
-            // Free memory.
-            XFreeGC(x->display, gc);
-            XDestroyWindow(x->display, x->window);
 */
         }
     }

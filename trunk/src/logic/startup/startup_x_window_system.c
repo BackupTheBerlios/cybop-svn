@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-03-21 01:26:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-03-22 00:24:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -38,6 +38,10 @@
 #ifndef STARTUP_X_WINDOW_SYSTEM_SOURCE
 #define STARTUP_X_WINDOW_SYSTEM_SOURCE
 
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include "../../creator/integer_creator.c"
+#include "../../creator/unsigned_long_creator.c"
 #include "../../global/integer_constants.c"
 #include "../../global/structure_constants.c"
 #include "../../global/variables.c"
@@ -52,8 +56,9 @@
  */
 void startup_x_window_system(void* p0, const void* p1, const void* p2, const void* p3) {
 
-    // The display.
-    void* d = POINTER_NULL_POINTER;
+    // The display, which is a subsumption of
+    // xserver, screens, hardware (input devices etc.).
+    struct _XDisplay* d = NULL_POINTER;
 
     // Get display.
     get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_ARRAY);
@@ -64,42 +69,197 @@ void startup_x_window_system(void* p0, const void* p1, const void* p2, const voi
 
     } else {
 
+        // CAUTION!
+        // The X window system types Window, Colormap, Font are simple integers!
+
         // The display name.
         // An example identifying the second screen of the first
         // display of host computer earth.cybop.net would be:
         // char* dn = "earth.cybop.net:0.1"
         //?? TODO: This has to be built dynamically, later on!
         //?? For now, it is just an empty string.
-        char* n = "";
+        char* dn = NULL_POINTER;
+        // The screen number.
+        int* sn = INTEGER_NULL_POINTER;
+        // The screen.
+        Screen* s = NULL_POINTER;
+        // The background pixel values.
+        unsigned long* bg = NULL_POINTER;
+        // The foreground pixel values.
+        unsigned long* fg = NULL_POINTER;
+        // The top-level root window for the given display and screen.
+        // This is sometimes called the root window of the window manager.
+        // Remember, CYBOI itself IS the window manager.
+        int* r = NULL_POINTER;
+        // The default colormap id for allocation on the specified screen.
+        // Most routine allocations of color should be made out of this colormap.
+        int* cm = NULL_POINTER;
+        // The value mask for the graphic context.
+        // It specifies which components in the graphic context are to be set
+        // using the information in the specified values structure.
+        // This argument is the bitwise inclusive OR of zero or more of the
+        // valid graphic context component mask bits.
+        unsigned long* vm = NULL_POINTER;
+        // The values as specified by the value mask.
+        XGCValues* v = NULL_POINTER;
+        // The graphic context. Each graphic element needs one.
+        // It can be used with any destination drawable (window or pixmap)
+        // having the same root and depth as the specified drawable.
+        // Use with other drawables results in a BadMatch error.
+        struct _XGC* gc = NULL_POINTER;
+        // The font name.
+        char* fn = NULL_POINTER;
+        // The font id.
+        int* f = NULL_POINTER;
 
-        // The display, which is a subsumption of
-        // xserver, screens, hardware (input devices etc.).
-        d = (void*) XOpenDisplay(n);
+        // Create x window system internals.
+        create_integer((void*) &sn);
+        create_unsigned_long((void*) &bg);
+        create_unsigned_long((void*) &fg);
+        create_integer((void*) &r);
+        create_integer((void*) &cm);
+        create_unsigned_long((void*) &vm);
+        create_integer((void*) &f);
 
-        // Create screen.
-        int* s = INTEGER_NULL_POINTER;
-        create_integer((void*) &s);
-        *s = DefaultScreen(d);
+        // Initialise x window system internals.
+        dn = "";
+        d = XOpenDisplay(dn);
+        *sn = 0;
+        s = (void*) XScreenOfDisplay(d, *sn);
+        *bg = XWhitePixel(d, *sn);
+        *fg = XBlackPixel(d, *sn);
+        *r = XRootWindowOfScreen(s);
+        *cm = XDefaultColormap(d, *sn);
+        *vm = 0;
+        v = NULL_POINTER;
+        gc = (void*) XCreateGC(d, *r, *vm, v);
+        XSetBackground(d, gc, *bg);
+        XSetForeground(d, gc, *fg);
+//??        fn = "Helvetica";
+//??        *f = XLoadFont(d, fn);
+//??        XSetFont(d, gc, f);
 
-/*??
-        // Preset background pixel values.
-        unsigned long* bg = UNSIGNED_LONG_NULL_POINTER;
-        create_integer((void*) &bg);
-        *bg = WhitePixel(d, s);
-
-        // Preset foreground pixel values.
-        unsigned long * fg = UNSIGNED_LONG_NULL_POINTER;
-        create_integer((void*) &fg);
-        *fg = (int) BlackPixel(d, s);
-*/
-
-        // Set x window system parameters as internals.
+        // Set x window system internals.
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL, (void*) &dn, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
         set_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_SCREEN_NUMBER_INTERNAL, (void*) &sn, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
         set_array_elements(p0, (void*) X_WINDOW_SYSTEM_SCREEN_INTERNAL, (void*) &s, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-/*??
         set_array_elements(p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL, (void*) &bg, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
         set_array_elements(p0, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL, (void*) &fg, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL, (void*) &r, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_COLOUR_MAP_INTERNAL, (void*) &cm, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL, (void*) &vm, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUES_INTERNAL, (void*) &v, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_FONT_NAME_INTERNAL, (void*) &fn, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_FONT_INTERNAL, (void*) &f, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+
+/*??
+        XColor gray;
+        gray.red = 49125;
+        gray.green = 49125;
+        gray.blue = 49125;
+        XAllocColor(d, *cm, &gray);
+
+        XColor light_gray;
+        light_gray.red = 56000;
+        light_gray.green = 58000;
+        light_gray.blue = 60000;
+        XAllocColor(d, *cm, &light_gray);
+
+        XColor vlight_gray;
+        vlight_gray.red = 60000;
+        vlight_gray.green = 61000;
+        vlight_gray.blue = 62000;
+        XAllocColor(d, *cm, &vlight_gray);
+
+        XColor dark_gray;
+        dark_gray.red = 32768;
+        dark_gray.green = 32768;
+        dark_gray.blue = 32768;
+        XAllocColor(d, *cm, &dark_gray);
 */
+
+/*??
+        // Create menu graphic context.
+        gc_menu = XCreateGC(display, window, 0, 0);
+        XSetBackground(display, gc_menu, background);
+        XSetForeground(display, gc_menu, light_gray.pixel);
+
+        // Create menu border graphic context.
+        gc_menu_border_top = XCreateGC(display, window, 0, 0);
+        XSetBackground(display, gc_menu_border_top, background);
+        XSetForeground(display, gc_menu_border_top, vlight_gray.pixel);
+
+        // Create menu border bottom graphic context.
+        gc_menu_border_bottom = XCreateGC(display, window, 0, 0);
+        XSetBackground(display, gc_menu_border_bottom, background);
+        XSetForeground(display, gc_menu_border_bottom, dark_gray.pixel);
+
+        // Create menu font graphic context.
+        gc_menu_font = XCreateGC(display, window, 0, 0);
+        XSetBackground(display, gc_menu_font, light_gray.pixel);
+        XSetForeground(display, gc_menu_font, foreground);
+*/
+
+        /** The event. */
+        XEvent event;
+        /** The key. */
+        KeySym key;
+        /** The text. */
+        char text[10];
+        /** The test. */
+        char str_test[1000];
+        /** The zugriff. */
+        char str_zugriff[1000];
+        /** The menu bar. */
+        char str_menubar[100];
+        /** The menu foreground. */
+        /*??unsigned long*/ //??double menu_foreground;
+        /** The temporary variables. */
+        int k;
+        int menu_eintrage_ende;
+        /** The window attributes. */
+        XWindowAttributes window_attributes;
+
+        // The size hint.
+        XSizeHints hint;
+        hint.x = 100;
+        hint.y = 100;
+        hint.width = 400;
+        hint.height = 300;
+        hint.flags = PPosition | PSize;
+
+        // Create window.
+        int w = XCreateSimpleWindow(d, *r, hint.x, hint.y,
+            hint.width, hint.height, 5, *fg, *bg);
+
+        XSetStandardProperties(d, w, "Application", "Icon", None, NULL, 0, (void*) &(hint));
+
+/*??
+        char* test = "test string";
+        int test_length = strlen(test);
+        XDrawString(display, window, cybol_gc,
+            position_x, position_y, test, test_length);
+*/
+
+        // Request input events (signals) to be put into event queue.
+//??        XSelectInput(display, window, ButtonPressMask | KeyPressMask | ExposureMask);
+
+        // Map the window.
+        // This procedure changes the order of all sister windows,
+        // so that the given window lies on top.
+        // Afterwards, all windows are displayed on the screen.
+        XMapRaised(d, w);
+
+        //?? TODO: From xlib tutorial.
+        //?? Remove as soon as event loop (MappingNotify) functions!
+        XFlushGC(d, gc);
+
+        sleep(5);
+
+        // Free memory.
+        XDestroyWindow(d, w);
     }
 }
 

@@ -50,7 +50,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.22 $ $Date: 2005-01-19 22:39:05 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2005-03-22 00:24:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,6 +61,7 @@
 #include "../array/double_array.c"
 #include "../array/integer_array.c"
 #include "../array/pointer_array.c"
+#include "../array/unsigned_long_array.c"
 #include "../global/log_constants.c"
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
@@ -85,6 +86,10 @@ void create_array(void* p0, const void* p1, const void* p2) {
         } else if (*t == *INTEGER_ARRAY) {
 
             create_integer_array(p0, p1);
+
+        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+
+            create_unsigned_long_array(p0, p1);
 
         } else if (*t == *DOUBLE_ARRAY) {
 
@@ -122,6 +127,10 @@ void destroy_array(void* p0, const void* p1, const void* p2) {
 
             destroy_integer_array(p0, p1);
 
+        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+
+            destroy_unsigned_long_array(p0, p1);
+
         } else if (*t == *DOUBLE_ARRAY) {
 
             destroy_double_array(p0, p1);
@@ -157,6 +166,10 @@ void resize_array(void* p0, const void* p1, const void* p2) {
         } else if (*t == *INTEGER_ARRAY) {
 
             resize_integer_array(p0, p1);
+
+        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+
+            resize_unsigned_long_array(p0, p1);
 
         } else if (*t == *DOUBLE_ARRAY) {
 
@@ -198,6 +211,10 @@ void compare_array_elements(const void* p0, const void* p1, const void* p2, void
         } else if (*t == *INTEGER_ARRAY) {
 
             compare_integer_array_elements(p0, p1, p2, p3);
+
+        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+
+            compare_unsigned_long_array_elements(p0, p1, p2, p3);
 
         } else if (*t == *DOUBLE_ARRAY) {
 
@@ -276,6 +293,10 @@ void set_array_elements(void* p0, const void* p1, const void* p2, const void* p3
 
             set_integer_array_elements(p0, p1, p2, p3);
 
+        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+
+            set_unsigned_long_array_elements(p0, p1, p2, p3);
+
         } else if (*t == *DOUBLE_ARRAY) {
 
             set_double_array_elements(p0, p1, p2, p3);
@@ -314,6 +335,10 @@ void remove_array_elements(void* p0, const void* p1, const void* p2, const void*
 
             remove_integer_array_elements(p0, p1, p2, p3);
 
+        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+
+            remove_unsigned_long_array_elements(p0, p1, p2, p3);
+
         } else if (*t == *DOUBLE_ARRAY) {
 
             remove_double_array_elements(p0, p1, p2, p3);
@@ -350,6 +375,10 @@ void get_array_elements(const void* p0, const void* p1, void* p2, const void* p3
         } else if (*t == *INTEGER_ARRAY) {
 
             get_integer_array_elements(p0, p1, p2);
+
+        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+
+            get_unsigned_long_array_elements(p0, p1, p2);
 
         } else if (*t == *DOUBLE_ARRAY) {
 
@@ -393,6 +422,10 @@ void get_array_elements_index(const void* p0, const void* p1, const void* p2, co
         } else if (*t == *INTEGER_ARRAY) {
 
             get_integer_array_elements_index(p0, p1, p2, p3, p4);
+
+        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+
+            get_unsigned_long_array_elements_index(p0, p1, p2, p3, p4);
 
         } else if (*t == *DOUBLE_ARRAY) {
 

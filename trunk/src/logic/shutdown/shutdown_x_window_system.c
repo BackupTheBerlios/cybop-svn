@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-03-21 01:26:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-03-22 00:24:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -38,6 +38,9 @@
 #ifndef SHUTDOWN_X_WINDOW_SYSTEM_SOURCE
 #define SHUTDOWN_X_WINDOW_SYSTEM_SOURCE
 
+#include <X11/Xlib.h>
+#include "../../creator/integer_creator.c"
+#include "../../creator/unsigned_long_creator.c"
 #include "../../global/structure_constants.c"
 #include "../../global/variables.c"
 
@@ -51,30 +54,89 @@
  */
 void shutdown_x_window_system(void* p0, const void* p1, const void* p2, const void* p3) {
 
-    // The x window system display.
+    // The display.
     void** d = POINTER_NULL_POINTER;
 
-    // Get x window system display.
+    // Get display.
     get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_ARRAY);
 
     if (d != POINTER_NULL_POINTER) {
 
-        // Destroy foreground pixel values.
-        void** fg = POINTER_NULL_POINTER;
-        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL, (void*) &fg, (void*) POINTER_ARRAY);
-        destroy_integer((void*) fg);
+        // CAUTION!
+        // The X window system types Window, Colormap, Font are simple integers!
 
-        // Destroy background pixel values.
-        void** bg = POINTER_NULL_POINTER;
-        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL, (void*) &bg, (void*) POINTER_ARRAY);
-        destroy_integer((void*) bg);
+        // The display name.
+        // An example identifying the second screen of the first
+        // display of host computer earth.cybop.net would be:
+        // char* dn = "earth.cybop.net:0.1"
+        //?? TODO: This has to be built dynamically, later on!
+        //?? For now, it is just an empty string.
+        char** dn = (char**) POINTER_NULL_POINTER;
+        // The screen number.
+        int** sn = (int**) POINTER_NULL_POINTER;
+        // The screen.
+        Screen** s = (Screen**) POINTER_NULL_POINTER;
+        // The background pixel values.
+        unsigned long** bg = (unsigned long**) POINTER_NULL_POINTER;
+        // The foreground pixel values.
+        unsigned long** fg = (unsigned long**) POINTER_NULL_POINTER;
+        // The top-level root window for the given display and screen.
+        // This is sometimes called the root window of the window manager.
+        // Remember, CYBOI itself IS the window manager.
+        int** r = (int**) POINTER_NULL_POINTER;
+        // The default colormap id for allocation on the specified screen.
+        // Most routine allocations of color should be made out of this colormap.
+        int** cm = (int**) POINTER_NULL_POINTER;
+        // The value mask for the graphic context.
+        // It specifies which components in the graphic context are to be set
+        // using the information in the specified values structure.
+        // This argument is the bitwise inclusive OR of zero or more of the
+        // valid graphic context component mask bits.
+        unsigned long** vm = (unsigned long**) POINTER_NULL_POINTER;
+        // The values as specified by the value mask.
+        XGCValues** v = (XGCValues**) POINTER_NULL_POINTER;
+        // The graphic context. Each graphic element needs one.
+        // It can be used with any destination drawable (window or pixmap)
+        // having the same root and depth as the specified drawable.
+        // Use with other drawables results in a BadMatch error.
+        struct _XGC** gc = (struct _XGC**) POINTER_NULL_POINTER;
+        // The font name.
+        char** fn = (char**) POINTER_NULL_POINTER;
+        // The font id.
+        int** f = (int**) POINTER_NULL_POINTER;
 
-        // Destroy screen.
-        void** s = POINTER_NULL_POINTER;
+        // Get x window system internals.
+        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL, (void*) &dn, (void*) POINTER_ARRAY);
         get_array_elements(p0, (void*) X_WINDOW_SYSTEM_SCREEN_INTERNAL, (void*) &s, (void*) POINTER_ARRAY);
-        destroy_integer((void*) s);
+        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_SCREEN_NUMBER_INTERNAL, (void*) &sn, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL, (void*) &bg, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL, (void*) &fg, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL, (void*) &r, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_COLOUR_MAP_INTERNAL, (void*) &cm, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL, (void*) &vm, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUES_INTERNAL, (void*) &v, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_FONT_NAME_INTERNAL, (void*) &fn, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) X_WINDOW_SYSTEM_FONT_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
+        // Destroy x window system internals.
+        // CAUTION! Use descending order, as opposed to the creation!
+        // CAUTION! The graphic context has to be destroyed twice
+        // (xlibs-internal- and CYBOI structure).
+        XUnloadFont(*d, **f);
+//??        destroy_integer((void*) *f);
+//??        free(*fn);
+        XFreeGC(*d, *gc);
+        free(*gc);
+        free(*v);
+        destroy_unsigned_long((void*) *vm);
+        destroy_integer((void*) *cm);
+        destroy_integer((void*) *r);
+        destroy_unsigned_long((void*) *fg);
+        destroy_unsigned_long((void*) *bg);
+        destroy_integer((void*) *sn);
         XCloseDisplay(*d);
+//??        free(*dn);
 
     } else {
 
