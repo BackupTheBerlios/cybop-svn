@@ -33,7 +33,6 @@
 
 //?? Temporary for character screen testing.
 #include "character_screen_handler.c"
-#include "array_handler.c"
 
 /**
  * This is the Cybernetics Oriented Interpreter (CYBOI).
@@ -41,7 +40,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.16 $ $Date: 2003-10-14 14:54:05 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2003-10-15 10:04:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -129,28 +128,6 @@ int main(int p0, char** p1) {
     //?? Temporary character based screen output test.
     show_character_screen();
 
-//?? --
-    void* a = malloc(sizeof(struct array));
-    initialize_array(a);
-
-    void* c = (void*) "test_signal";
-    void* c2 = (void*) "test_signal_2";
-    int i = 0;
-    int j = 1;
-    set_array_element(a, (void*) &i, c);
-    set_array_element(a, (void*) &j, c2);
-    void* result = get_array_element(a, (void*) &i);
-    void* result2 = get_array_element(a, (void*) &j);
-    puts("result: ");
-    puts((char*) result);
-    puts((char*) result2);
-
-    finalize_array(a);
-    free(a);
-
-    return 0;
-//?? --
-    
     if (p1 != 0) {
 
         if ((p0 == 3) && (p1[1] != 0) && (p1[2] != 0)) {
@@ -196,20 +173,26 @@ int main(int p0, char** p1) {
 
                     // Add signal to signal memory (interrupt vector table).
                     add_map_element(signal_memory, (void*) SIGNAL, (void*) tmp);
-
-/*??
-                    struct signal* tmp = 0;
-                    int i = 0;
-                    get_map_element_at_index(signal_memory, (void*) &i, (void*) tmp);
-                    if (tmp != 0) {
-                        puts("o.k.");
-                    } else {
-                        puts("null");
-                    }
-*/
-
 //??                }
 
+                int i = 0;
+                puts("TEST name");
+                struct map* m = (struct map*) signal_memory;
+                void* name = get_array_element(m->names, (void*) &i);
+                if (name != 0) {
+                    puts("name is o.k.:");
+                    puts((char*) name);
+                } else {
+                    puts("name is null");
+                }
+                puts("TEST reference");
+                void* ref = get_array_element(m->references, (void*) &i);
+                if (ref != 0) {
+                    puts("ref is o.k.");
+                } else {
+                    puts("ref is null");
+                }
+        
             } else {
 
                 log((void*) &ERROR_LOG_LEVEL, "Could not send initial signal. The signal is null.");

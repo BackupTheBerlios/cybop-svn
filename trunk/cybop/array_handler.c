@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.18 $ $Date: 2003-10-14 14:54:05 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2003-10-15 10:04:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -146,9 +146,12 @@ static void set_array_element(void* p0, void* p1, void* p2) {
         if (size != a->size) {
                 
             a->size = size;
-            extend_internal_array(a->internal_array, (void*) &(a->size), (void*) &size);
+            a->internal_array = realloc(a->internal_array, size);
+            //?? Our function "extend_internal_array" does not work somehow :-(
+            //?? Anybody can help? Using "realloc", for now; see above.
+            //?? a->internal_array = extend_internal_array(a->internal_array, (void*) &(a->size), (void*) &size);
         }
-        
+
         set_internal_array_element(a->internal_array, p1, p2);
 
     } else {

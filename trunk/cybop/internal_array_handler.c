@@ -33,7 +33,7 @@
  *
  * Internal array elements are accessed over their index.
  *
- * @version $Revision: 1.4 $ $Date: 2003-10-14 14:54:05 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-10-15 10:04:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
  
@@ -180,6 +180,7 @@ static void* get_internal_array_element(void** p0, void* p1) {
 
         if (*i != INVALID_VALUE) {
             
+            // Get element.
             e = p0[*i];
         
         } else {

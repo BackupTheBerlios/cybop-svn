@@ -34,7 +34,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.11 $ $Date: 2003-10-14 14:54:05 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-10-15 10:04:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
