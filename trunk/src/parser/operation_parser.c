@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2004-08-25 07:17:00 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-08-26 23:44:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -161,9 +161,11 @@ void parse_operation(void* p0, void* p1, void* p2, const void* p3, const void* p
 
                                     // Initialize transient parameter
                                     // and its count and size.
+/*??
                                     initialize_model((void*) &tp, (void*) &tpc, (void*) &tps,
                                         p3, (void*) &count,
                                         (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+*/
 
     fprintf(stderr, "initop tp after: %s\n", tp);
     fprintf(stderr, "initop tpc after: %i\n", tpc);
@@ -197,7 +199,7 @@ void parse_operation(void* p0, void* p1, void* p2, const void* p3, const void* p
                                             // Call procedure recursively if more parameters
                                             // are following after the separator.
                                             // Set index of remaining string to one after the separator.
-                                            initialize_operation(p0, p1, p2, (void*) &r, (void*) &rc);
+                                            parse_operation(p0, p1, p2, (void*) &r, (void*) &rc);
 
                                         } else {
 

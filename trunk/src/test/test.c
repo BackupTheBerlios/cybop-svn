@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.22 $ $Date: 2004-08-14 22:47:54 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2004-08-26 23:44:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,7 @@
 #include "../array/array.c"
 #include "../global/structure_constants.c"
 #include "../global/variable.c"
+#include "../parser/parser.c"
 
 /**
  * Tests the standard output and error stream.
@@ -351,6 +352,45 @@ void test_console() {
 }
 
 /**
+ * Tests the integer parser.
+ */
+void test_integer_parser() {
+
+    // The source string array, pointer, count.
+    char ssa[] = {'1', '9', '7', '1'};
+    void* ss = ssa;
+    int ssc = 4;
+    // The destination integer.
+    int di = -1;
+    int dic = -1;
+    int dis = -1;
+
+    parse((void*) &di, (void*) &dic, (void*) &dis, (void*) &ss, (void*) &ssc,
+        (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT);
+
+    fprintf(stderr, "Parsed source string results in destination integer: %i\n", di);
+
+    // The source integer.
+    int si = 1980;
+    int sic = -1;
+    // The destination string.
+    char* ds = NULL_POINTER;
+    int dsc = 0;
+    int dss = 0;
+
+    // Create destination string.
+    create_array((void*) &ds, (void*) &CHARACTER_ARRAY, (void*) &dss);
+
+    serialize((void*) &ds, (void*) &dsc, (void*) &dss, (void*) &si, (void*) &sic,
+        (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT);
+
+    fprintf(stderr, "Serialized source integer results in destination string: %s\n", ds);
+
+    // Destroy destination string.
+    destroy_array((void*) &ds, (void*) &CHARACTER_ARRAY, (void*) &dss);
+}
+
+/**
  * The main test procedure.
  *
  * Sub test procedure call can be activated/ deactivated here
@@ -372,7 +412,8 @@ void test() {
 //    test_character_array_multiple_elements();
 //    test_file_read();
 //    test_file_write();
-    test_console();
+//    test_console();
+    test_integer_parser();
 }
 
 /* TEST_SOURCE */

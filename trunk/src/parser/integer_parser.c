@@ -21,13 +21,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2004-08-25 07:17:00 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-08-26 23:44:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTEGER_PARSER_SOURCE
 #define INTEGER_PARSER_SOURCE
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "../global/structure_constants.c"
 #include "../global/log_constants.c"
@@ -127,23 +128,32 @@ void serialize_integer(void* p0, void* p1, void* p2, const void* p3, const void*
 
                 if (p0 != NULL_POINTER) {
 
-                    void** d = (void**) p0;
+                    char** d = (char**) p0;
 
 //??                    log_message((void*) &INFO_LOG_LEVEL, (void*) &SERIALIZE_INTEGER_MESSAGE, (void*) &SERIALIZE_INTEGER_MESSAGE_COUNT);
 
-                    // Transform integer to string.
-                    // A temporary null-terminated string gets created inside.
-//??                    *d = (void*) itoa(*s);
-//?? USE sprintf here!
-//??    fprintf(p1, %i, &(m->value));
+                    // Transform source integer to destination string.
+                    *dc = snprintf(*d, *ds, "%i", *s);
 
-                    // Determine temporary null-terminated string size and count.
-                    *ds = sizeof((char*) *d);
-                    *dc = strlen((char*) *d);
+                    // Set destination string size one greater than the count
+                    // to have space for the terminating null character.
+                    *ds = *dc + 1;
 
-                    // Reduce temporary null-terminated string count by one so that
-                    // the string termination is not considered.
-                    (*dc)--;
+                    // Resize destination string.
+                    resize_array(p0, (void*) &CHARACTER_ARRAY, p2);
+
+                    // Transform source integer to destination string.
+                    *dc = snprintf(*d, *ds, "%i", *s);
+
+                    // CAUTION! Recalculate string count because only in versions
+                    // of the GNU C library prior to 2.1, the snprintf function
+                    // returns the number of characters stored, not including the
+                    // terminating null; unless there was not enough space in the
+                    // string to store the result in which case -1 is returned.
+                    // This was CHANGED in order to comply with the ISO C99 standard.
+                    // As usual, the string count does NOT contain the terminating
+                    // null character.
+                    *dc = strlen(*d);
 
                 } else {
 

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2004-08-23 07:52:25 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-08-26 23:44:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -282,7 +282,7 @@ void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  * @param p5 the type
  * @param p6 the type count
  */
-void serializes(void* p0, void* p1, void* p2, const void* p3, const void* p4,
+void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6) {
 
     if (p6 != NULL_POINTER) {
