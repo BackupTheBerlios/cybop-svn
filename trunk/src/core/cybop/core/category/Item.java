@@ -83,7 +83,7 @@ import cybop.core.model.String;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.15 $ $Date: 2003-06-20 15:06:25 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-06-23 10:23:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends Behaviour {
@@ -294,20 +294,37 @@ public class Item extends Behaviour {
 
         if (m != null) {
 
-            // The child must sometimes know its own name, just like people in real life.
-            // Signals for example can only be deleted from the signal memory
-            // if they carry their own name.
-            if (c != null) {
-
-                c.setName(n);
-            }
-
             m.set(n, c);
 
         } else {
 
             throw new Exception("Could not set child. The children is null.");
         }
+    }
+
+    /**
+     * Adds the child.
+     *
+     * @param n the base name
+     * @param c the child
+     * @return the child name
+     * @exception Exception if the children is null
+     */
+    public Array addChild(Array n, Item c) throws Exception {
+
+        Array cn = null;
+        Map m = getChildren();
+
+        if (m != null) {
+
+            cn = m.add(n, c);
+
+        } else {
+
+            throw new Exception("Could not add child. The children is null.");
+        }
+        
+        return cn;
     }
 
     /**
@@ -323,17 +340,6 @@ public class Item extends Behaviour {
         if (m != null) {
 
             m.remove(i);
-
-/*??
-            // The child must sometimes know its own name, just like people in real life.
-            // Signals for example can only be deleted from the signal memory
-            // if they carry their own name.
-            //?? WHERE to best remove the name from child? In Array?
-            if (c != null) {
-
-                c.removeName(n);
-            }
-*/
 
         } else {
 
@@ -426,6 +432,29 @@ public class Item extends Behaviour {
             c = d;
         }
 
+        return c;
+    }
+
+    /**
+     * Returns the number of children whose name starts with the given name as word base.
+     *
+     * @param n the name
+     * @exception Exception if the children is null
+     */
+    public int getCount(Array n) throws Exception {
+
+        int c = -1;
+        Map m = getChildren();
+
+        if (m != null) {
+
+            c = m.getCount(n);
+
+        } else {
+
+            throw new Exception("Could not get children count. The children is null.");
+        }
+        
         return c;
     }
 

@@ -50,7 +50,7 @@ import cybop.core.system.system.*;
  * A family corresponds to a family in biology or human society and can such
  * consist of many systems.<br><br>
  *
- * @version $Revision: 1.23 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2003-06-23 10:23:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Family extends System {
@@ -62,14 +62,8 @@ public class Family extends System {
     /** The available systems. */
     public static final String AVAILABLE_SYSTEMS = new String("available_systems");
 
-    /** The systems count. */
-    public static final String SYSTEMS_COUNT = new String("systems_count");
-
     /** The system. */
     public static final String SYSTEM = new String("system");
-
-    /** The external systems count. */
-    public static final String EXTERNAL_SYSTEMS_COUNT = new String("external_systems_count");
 
     /** The external system command. */
     public static final String EXTERNAL_SYSTEM_COMMAND = new String("external_system_command");
@@ -92,16 +86,6 @@ public class Family extends System {
     }
 
     /**
-     * Returns the default systems count category.
-     *
-     * @return the default systems count category
-     */
-    public Item getDefaultSystemsCountCategory() {
-
-        return new Integer(0);
-    }
-
-    /**
      * Returns the default system category.
      *
      * @return the default system category
@@ -109,16 +93,6 @@ public class Family extends System {
     public Item getDefaultSystemCategory() {
 
         return null;
-    }
-
-    /**
-     * Returns the default external systems count category.
-     *
-     * @return the default external systems count category
-     */
-    public Item getDefaultExternalSystemsCountCategory() {
-
-        return new Integer(0);
     }
 
     /**
@@ -142,85 +116,6 @@ public class Family extends System {
     }
 
     //
-    // System.
-    //
-
-    /**
-     * Adds the system to become a child of this family.
-     *
-     * @param n the name
-     * @param s the system
-     * @exception Exception if the name is null
-     */
-    public void setSystem(String n, Item s) throws Exception {
-
-        Integer c = (Integer) getChild(Family.SYSTEMS_COUNT);
-
-        if (c != null) {
-
-            if (n != null) {
-
-                //?? Delete this line later and use the one below!
-                String ext = Family.SYSTEM;
-                //?? When more modules are used, use the following line!
-                //?? To be implemented yet.
-//??                String ext = new String(n.getJavaObject() + "_" + java.lang.String.valueOf(c.getJavaPrimitive()));
-
-                super.setChild(ext, s);
-                setChild(Family.SYSTEMS_COUNT, new Integer(c.getJavaPrimitive() + 1));
-
-            } else {
-
-                throw new Exception("Could not set system. The name is null.");
-            }
-
-        } else {
-
-            throw new Exception("Could not set system. The systems count is null.");
-        }
-    }
-
-    /**
-     * Removes the child system from this family.
-     *
-     * @param n the name
-     * @exception Exception if the name is null
-     */
-    public void removeSystem(String n) throws Exception {
-
-        if (n != null) {
-
-            super.removeChild(n);
-
-        } else {
-
-            throw new Exception("Could not remove system. The name is null.");
-        }
-    }
-
-    /**
-     * Returns the child system.
-     *
-     * @param n the name
-     * @exception Exception if the name is null
-     */
-    public System getSystem(String n) throws Exception {
-
-        System s = null;
-
-        if (n != null) {
-
-            s = (System) super.getChild(n);
-
-        } else {
-
-            throw new Exception("Could not remove system. The name is null.");
-        }
-        
-        return s;
-    }
-
-    //
     // Categorization.
     //
 
@@ -232,9 +127,7 @@ public class Family extends System {
         super.categorize();
 
         setCategory(Family.AVAILABLE_SYSTEMS, getDefaultAvailableSystemsCategory());
-        setCategory(Family.SYSTEMS_COUNT, getDefaultSystemsCountCategory());
         setCategory(Family.SYSTEM, getDefaultSystemCategory());
-        setCategory(Family.EXTERNAL_SYSTEMS_COUNT, getDefaultExternalSystemsCountCategory());
         setCategory(Family.EXTERNAL_SYSTEM_COMMAND, getDefaultExternalSystemCommandCategory());
         setCategory(Family.EXTERNAL_SYSTEM, getDefaultExternalSystemCategory());
     }
@@ -246,9 +139,7 @@ public class Family extends System {
 
         removeCategory(Family.EXTERNAL_SYSTEM);
         removeCategory(Family.EXTERNAL_SYSTEM_COMMAND);
-        removeCategory(Family.EXTERNAL_SYSTEMS_COUNT);
         removeCategory(Family.SYSTEM);
-        removeCategory(Family.SYSTEMS_COUNT);
         removeCategory(Family.AVAILABLE_SYSTEMS);
 
         super.decategorize();
@@ -271,31 +162,14 @@ public class Family extends System {
 
         setChild(Family.AVAILABLE_SYSTEMS, createChild(getCategory(Family.AVAILABLE_SYSTEMS)));
 
-/*??
-        Integer count = getAvailableSystemsCount();
-        String[] s = new String[count];
-        Integer i = 0;
-
-        while (i < count) {
-
-            s[i] = getPreferences().getChild(FamilyConfiguration.AVAILABLE_SYSTEMS + "_" + Integer.toString(i), def);
-
-            i++;
-        }
-
-        return s;
-*/
-
-        int i;
-        String s = null;
-
         //
         // Systems.
         //
 
-        setChild(Family.SYSTEMS_COUNT, (Item) getCategory(Family.SYSTEMS_COUNT));
-
 /*??
+        int i;
+        String s = null;
+
         if (getChild(Family.SYSTEMS_COUNT) != null) {
 
             String cl = null;
@@ -496,51 +370,41 @@ public class Family extends System {
 
             if (sub != null) {
 
-                if (sub.isEqualTo(getName())) {
+                if (sub.isEqualTo(Family.SELF)) {
 
                     java.lang.System.out.println("DEBUG: Handle signal in super class.");
                     super.handle(s, b);
 
                 } else {
 
-                    Integer count = (Integer) getChild(Family.SYSTEMS_COUNT);
+                    int i = 0;
+                    int count = getCount(Family.SYSTEM);
+                    String str = null;
+                    System sys = null;
 
-                    if (count != null) {
+                    while (i < count) {
 
-                        String str = null;
-                        System sys = null;
-                        int i = 0;
+                        str = new String(Family.SYSTEM.getJavaObject() + "_" + java.lang.String.valueOf(i));
 
-//??                        while (i < count.getJavaPrimitive()) {
+                        if (sub.isEqualTo(str)) {
 
-                            //?? Delete this line later and use the one below!
-                            str = Family.SYSTEM;
-                            //?? When more modules are used, use the following line!
-                            //?? To be implemented yet.
-//??                            str = new String(Family.SYSTEM.getJavaObject() + "_" + java.lang.String.valueOf(i));
-                            if (sub.isEqualTo(str)) {
+                            sys = (System) getChild(str);
 
-                                sys = (System) getSystem(str);
-    
-                                if (sys != null) {
+                            if (sys != null) {
 
-                                    java.lang.System.out.println("DEBUG: Handle signal in system " + sys);
-                                    sys.handle(s, b);
-                
-                                } else {
+                                java.lang.System.out.println("DEBUG: Handle signal in system " + sys);
+                                s.setChild(Signal.SUBJECT, System.SELF);
+                                sys.handle(s, b);
 
-                                    throw new Exception("Could not handle signal. A system is null.");
-                                }
-                                
-//??                                break;
+                            } else {
+
+                                throw new Exception("Could not handle signal. A system is null.");
                             }
 
-                            i++;
-//??                        }
+                            break;
+                        }
 
-                    } else {
-
-                        throw new Exception("Could not handle signal. The systems count is null.");
+                        i++;
                     }
                 }
 

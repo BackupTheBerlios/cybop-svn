@@ -59,7 +59,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.23 $ $Date: 2003-06-19 19:41:21 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2003-06-23 10:23:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends SystemItem implements java.lang.Runnable {
@@ -67,6 +67,9 @@ public class System extends SystemItem implements java.lang.Runnable {
     //
     // Children names.
     //
+
+    /** The self. It names this system itself. */
+    public static final String SELF = new String("self");
 
     /** The controller. */
     public static final String CONTROLLER = new String("controller");

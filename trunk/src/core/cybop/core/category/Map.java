@@ -33,7 +33,7 @@ package cybop.core.category;
  * the index of the wanted element -- and then returning the corresponding
  * reference.
  *
- * @version $Revision: 1.12 $ $Date: 2003-06-20 15:06:25 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-06-23 10:23:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Map {
@@ -185,20 +185,27 @@ public class Map {
      *
      * @param n the name
      * @param e the element
-     * @exception Exception if the name is null
-     * @exception Exception if the names is null
      * @exception Exception if the references is null
+     * @exception Exception if the names is null
      */
     public void set(Array n, Array e) throws Exception {
 
         Array refs = getReferences();
+        Array names = getNames();
 
         if (refs != null) {
 
-            int i = getNextIndex(n);
+            if (names != null) {
 
-            names.set(i, n);
-            refs.set(i, e);
+                int i = getNextIndex(n);
+    
+                names.set(i, n);
+                refs.set(i, e);
+
+            } else {
+
+                throw new Exception("Could not set element. The names is null.");
+            }
 
         } else {
 
@@ -209,26 +216,18 @@ public class Map {
     /**
      * Adds the element.
      *
-     * @param n the name
+     * @param n the base name
      * @param e the element
-     * @exception Exception if the name is null
-     * @exception Exception if the names is null
+     * @return the element name
      * @exception Exception if the references is null
      */
-    public void add(Array n, Array e) throws Exception {
+    public Array add(Array n, Array e) throws Exception {
 
-        Array refs = getReferences();
+        Array en = getNewName(n);
 
-        if (refs != null) {
+        set(en, e);
 
-            Array nn = getNewName(n);
-
-            set(nn, e);
-
-        } else {
-
-            throw new Exception("Could not set element. The references is null.");
-        }
+        return en;
     }
 
     /**
@@ -236,17 +235,26 @@ public class Map {
      *
      * @param i the index
      * @exception Exception if the references is null
+     * @exception Exception if the names is null
      */
     public void remove(int i) throws Exception {
 
         Array refs = getReferences();
+        Array names = getNames();
 
         if (refs != null) {
 
-            if (i > -1) {
+            if (names != null) {
 
-                names.remove(i);
-                refs.remove(i);
+                if (i > -1) {
+    
+                    names.remove(i);
+                    refs.remove(i);
+                }
+
+            } else {
+    
+                throw new Exception("Could not remove element. The names is null.");
             }
 
         } else {
@@ -424,8 +432,9 @@ public class Map {
      * Returns an extended version of the given name.
      *
      * The given name is used as a word base for the new name.
-     * Additionally, the new name will contain a number suffix.
-     * It is created by increasing the currently highest number suffix by one.
+     * Additionally, the new name will receive a number suffix.
+     * It is determined by the current number of names containing the given word base
+     * (which is the same as increasing the currently highest index by one).
      *
      * @param n the name
      * @return the new name
@@ -434,46 +443,37 @@ public class Map {
     public Array getNewName(Array n) throws Exception {
 
         Array nn = null;
-        int i = getHighestIndex(n);
+        java.lang.String index = java.lang.String.valueOf(getCount(n));
 
-        if (i != null) {
+        if (n != null) {
 
-            String no = new String(java.lang.String.valueOf(i.getJavaPrimitive() + 1));
+            if (index != null) {
 
-            if (base != null) {
-
-                if (no != null) {
-
-                    nn = new String(base.getJavaObject() + "_" + no.getJavaObject());
-
-                } else {
-        
-                    throw new Exception("Could not build name. The number string is null.");
-                }
+                nn = new cybop.core.model.String(n.getJavaObject() + "_" + index);
 
             } else {
     
-                throw new Exception("Could not build name. The word base of the name is null.");
+                throw new Exception("Could not build name. The index string is null.");
             }
 
         } else {
 
-            throw new Exception("Could not build name. The highest name number is null.");
+            throw new Exception("Could not build name. The word base of the name is null.");
         }
-        
+
         return nn;
     }
 
     /**
-     * Returns the highest index with the given name as word base.
+     * Returns the number of names that start with the given name as word base.
      *
      * @param n the name
-     * @return the highest index
+     * @return the number of names that start with the given name as word base
      * @exception Exception if the names is null
      */
-    public int getHighestIndex(Array n) throws Exception {
+    public int getCount(Array n) throws Exception {
 
-        int index = -1;
+        int count = 0;
         Array names = getNames();
 
         if (names != null) {
@@ -481,10 +481,6 @@ public class Map {
             int i = 0;
             int size = names.getSize();
             Array name = null;
-            int begin = 0;
-            java.lang.String sub = null;
-            int number = -1;
-            int max = -1;
 
             while (i < size) {
 
@@ -492,22 +488,29 @@ public class Map {
 
                 if (name != null) {
 
-                    if (((java.lang.String) name.getJavaObject()).startsWith(((java.lang.String)) n.getJavaObject())) {
+                    if (((java.lang.String) name.getJavaObject()).startsWith((java.lang.String) n.getJavaObject())) {
 
-                        begin = ((java.lang.String) name.getJavaObject()).indexOf(new String("_"));
+/*??
+                        int begin = 0;
+                        java.lang.String sub = null;
+                        int number = 0;
+            
+                        begin = ((java.lang.String) name.getJavaObject()).indexOf("_");
                         sub = ((java.lang.String) name.getJavaObject()).substring(begin + 1);
                         number = java.lang.Integer.parseInt(sub);
 
-                        if (number > max) {
+                        if (number > count) {
 
-                            max = number;
-                            index = number;
+                            count = number;
                         }
+*/
+
+                        count++;
                     }
 
                 } else {
 
-                    // Reached last valid name before. Only null entries left.
+                    // Reached last valid name. Only null entries left.
                     break;
                 }
 
@@ -519,7 +522,7 @@ public class Map {
             throw new Exception("Could not get highest index. The names is null.");
         }
 
-        return index;
+        return count;
     }
 
     //

@@ -70,7 +70,7 @@ import cybop.core.system.system.*;
  *     is mostly limited so the shutdown method shouldn't take too much of it.</li>
  * </ol>
  *
- * @version $Revision: 1.34 $ $Date: 2003-06-20 11:32:32 $ $Author: christian $
+ * @version $Revision: 1.35 $ $Date: 2003-06-23 10:23:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Launcher extends Family {
@@ -712,7 +712,7 @@ public class Launcher extends Family {
 
             s.setChild(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
             s.setChild(Signal.LANGUAGE, Signal.NEURO_LANGUAGE);
-            s.setChild(Signal.SUBJECT, (Item) getName());
+            s.setChild(Signal.SUBJECT, Launcher.SELF);
             s.setChild(Signal.PREDICATE, getChild(Launcher.LIFECYCLE_ACTION));
 
         } else {
@@ -770,10 +770,10 @@ public class Launcher extends Family {
                 //?? These signals were created outside this method but must be
                 //?? destroyed here!
 
-                java.lang.System.out.println("DEBUG: Handle signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChild(Signal.PREDICATE)).getJavaObject());
+                java.lang.System.out.println("DEBUG: Handle signal " + /*??queued.getName().getJavaObject() +*/ " with action: " + ((String) queued.getChild(Signal.PREDICATE)).getJavaObject());
                 handle(queued, new Boolean(Boolean.FALSE));
 
-                java.lang.System.out.println("DEBUG: Send signal " + queued.getName().getJavaObject() + " with action: " + ((String) queued.getChild(Signal.PREDICATE)).getJavaObject());
+                java.lang.System.out.println("DEBUG: Send signal " + /*??queued.getName().getJavaObject() +*/ " with action: " + ((String) queued.getChild(Signal.PREDICATE)).getJavaObject());
                 send(queued);
 
                 destroyChild(queued);
@@ -1049,15 +1049,15 @@ public class Launcher extends Family {
     public void startupSystem(Array sys) throws Exception {
 
         setupJavaEventHandling();
-        setSystem(Launcher.SYSTEM, createChild((String) sys));
 
+        String n = (String) addChild(Launcher.SYSTEM, createChild((String) sys));
         Signal s = (Signal) createChild(getCategory(Launcher.SIGNAL));
 
         if (s != null) {
 
             s.setChild(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
             s.setChild(Signal.LANGUAGE, Signal.NEURO_LANGUAGE);
-            s.setChild(Signal.SUBJECT, Launcher.SYSTEM);
+            s.setChild(Signal.SUBJECT, n);
             s.setChild(Signal.PREDICATE, Controller.SHOW_SYSTEM_DISPLAY_ACTION);
             s.setChild(Signal.SENDER_OBJECT, Launcher.USER);
 
@@ -1117,7 +1117,7 @@ public class Launcher extends Family {
         if (system != null) {
 
             // Remove and destroy the system the signal is coming from.
-            removeSystem(ext);
+            removeChild(ext);
             destroyChild(system);
 
             // If this launcher system has sent the exit signal, then set the
@@ -1375,7 +1375,7 @@ public class Launcher extends Family {
 
                 //?? Find out which child system is active (top window)
                 //?? to use its controller here.
-                System sys = getSystem(Launcher.SYSTEM);
+                System sys = (System) getChild(Launcher.SYSTEM);
 
                 if (sys != null) {
 
@@ -1421,7 +1421,7 @@ public class Launcher extends Family {
 
                 //?? Find out which child system is active (top window)
                 //?? to use its controller here.
-                System sys = getSystem(Launcher.SYSTEM);
+                System sys = (System) getChild(Launcher.SYSTEM);
 
                 if (sys != null) {
 
@@ -1467,7 +1467,7 @@ public class Launcher extends Family {
 
                 //?? Find out which child system is active (top window)
                 //?? to use its controller here.
-                System sys = getSystem(Launcher.SYSTEM);
+                System sys = (System) getChild(Launcher.SYSTEM);
 
                 if (sys != null) {
 
@@ -1513,7 +1513,7 @@ public class Launcher extends Family {
 
                 //?? Find out which child system is active (top window)
                 //?? to use its controller here.
-                System sys = getSystem(Launcher.SYSTEM);
+                System sys = (System) getChild(Launcher.SYSTEM);
 
                 if (sys != null) {
 
@@ -1559,7 +1559,7 @@ public class Launcher extends Family {
 
                 //?? Find out which child system is active (top window)
                 //?? to use its controller here.
-                System sys = getSystem(Launcher.SYSTEM);
+                System sys = (System) getChild(Launcher.SYSTEM);
 
                 if (sys != null) {
 
@@ -1605,7 +1605,7 @@ public class Launcher extends Family {
 
                 //?? Find out which child system is active (top window)
                 //?? to use its controller here.
-                System sys = getSystem(Launcher.SYSTEM);
+                System sys = (System) getChild(Launcher.SYSTEM);
 
                 if (sys != null) {
 
@@ -1651,7 +1651,7 @@ public class Launcher extends Family {
 
                 //?? Find out which child system is active (top window)
                 //?? to use its controller here.
-                System sys = getSystem(Launcher.SYSTEM);
+                System sys = (System) getChild(Launcher.SYSTEM);
 
                 if (sys != null) {
 
@@ -1712,7 +1712,7 @@ public class Launcher extends Family {
 
                     s.setChild(Signal.PRIORITY, Signal.NORMAL_PRIORITY);
                     s.setChild(Signal.LANGUAGE, l);
-                    s.setChild(Signal.SUBJECT, (Item) getName());
+                    s.setChild(Signal.SUBJECT, Launcher.SELF);
                     s.setChild(Signal.PREDICATE, a);
                     s.setChild(Signal.OBJECT, m);
 
