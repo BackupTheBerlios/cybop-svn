@@ -24,7 +24,7 @@
 # This file documents layout parameters to ensure something like a
 # "corporate identity" throughout the project.
 #
-# @version $Revision: 1.1.1.1 $ $Date: 2003-02-11 21:29:13 $ $Author: christian $
+# @version $Revision: 1.1 $ $Date: 2003-07-07 14:18:32 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
