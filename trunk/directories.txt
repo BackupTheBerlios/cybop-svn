@@ -1,0 +1,37 @@
+
+directories.txt
+
+
+/default
+/system
+/group
+/user
+
+/knowledge
+
+- models are situated in every directory
+- directories are read in a certain order, using priorities assigned to them
+- knowledge (data like addresses or an electronic health record etc.)
+have to be stored in external system (database) or in special directory
+
+
+Comparison with classical unix
+______________________________
+
+/bin --> CYBOI is the only remaining binary (included in hardware?)
+/boot --> boot operating system model lies in /default and /system
+/dev --> ??
+/etc --> model files already represent configurations
+/home --> /user and /group
+/lib --> model files already represent libraries
+/mnt --> ?? (can possibly stay)
+/opt --> /default
+/proc --> ??
+/pub --> ?? (can possibly stay)
+/root --> /user
+/sbin --> CYBOI is the only remaining binary (included in hardware?)
+/tmp ?? (can possibly stay)
+/usr --> /default
+/usr/share --> /knowledge
+/var --> /system
+
