@@ -22,13 +22,16 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef VECTOR_HANDLER_SOURCE
+#define VECTOR_HANDLER_SOURCE
+
 #include <string.h>
 #include "vector.c"
 
 /**
  * This is the vector handler.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -121,4 +124,7 @@ static void finalize_vector_model(void* p0, void* p1) {
         log((void*) &ERROR_LOG_LEVEL, "Could not finalize vector model. The vector model is null.");
     }
 }
+
+/* VECTOR_HANDLER_SOURCE */
+#endif
 

@@ -27,6 +27,11 @@
 
 #include <string.h>
 #include "array_handler.c"
+#include "create_dynamics.c"
+#include "create_statics.c"
+#include "destroy_dynamics.c"
+#include "destroy_statics.c"
+#include "dynamics.c"
 #include "dynamics_model.c"
 #include "map.c"
 #include "map_handler.c"
@@ -43,7 +48,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.2 $ $Date: 2003-12-03 15:10:14 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -349,28 +354,32 @@ static void handle_compound_signal(void* p0, void* p1, void* p2) {
 
     struct dynamics_model* m = (struct dynamics_model*) p1;
     
-    if (m != null) {
+    if (m != 0) {
 
-        int count = get_array_count(m->parts);
+        int* count = (int*) get_array_count(m->parts);
         int pos = 0;
         int i = 0;
+        int* position = 0;
         void* abstr = 0;
         void* part = 0;
 
         // All positions.
-        while (pos < count) {
+        while (pos < *count) {
             
             // All parts.
-            while (i < count) {
+            while (i < *count) {
                 
+                // Determine position.
+                position = (int*) get_map_element_at_index(m->positions, (void*) &i);
+            
                 // All parts at the current position.
-                if (get_map_element_at_index(m->positions, i) == pos) {
+                if (*position == pos) {
 
                     // Determine part signal as dynamics model.
-                    part = get_map_element_at_index(m->parts, i);
+                    part = get_map_element_at_index(m->parts, (void*) &i);
                 
                     // Determine abstraction.
-                    abstr = get_map_element_at_index(m->abstractions, i);
+                    abstr = get_map_element_at_index(m->abstractions, (void*) &i);
 
                     // Caution! Adding of signals must be synchronized between:
                     // - internal CYBOI signals added here
@@ -412,29 +421,28 @@ static void handle_compound_signal(void* p0, void* p1, void* p2) {
 static void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log((void*) &INFO_LOG_LEVEL, "Handle operation signal:");
-    log((void*) &INFO_LOG_LEVEL, l);
 
     struct operation* o = (struct operation*) p0;
     
-    if (o != null) {
+    if (o != 0) {
 
         char* a = (char*) p1;
         void* io = o->inputs_outputs;
     
         if (io != 0) {
     
-            if (strcmp(a, ADD_OPERATION) == 0) {
+            if (strcmp(a, ADD_ARITHMETIC) == 0) {
                 
                 // Dereference function pointer and hand over inputs and outputs.
                 add(get_map_element_with_name(io, "summand_0"), get_map_element_with_name(io, "summand_1"), get_map_element_with_name(io, "sum"));
 
-            } else if (strcmp(a, CREATE_STATICS_OPERATION) == 0) {
+            } else if (strcmp(a, CREATE_STATICS_MEMORY_MANAGEMENT) == 0) {
         
                 struct statics_model* s = (struct statics_model*) p2;
                 
-                if (s != null) {
+                if (s != 0) {
                         
-                    m = create_statics_model(get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
+                    void* m = create_statics(get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
                     set_map_element_with_name(s->parts, get_map_element_with_name(io, "name"), m);
         
                 } else {
@@ -442,27 +450,27 @@ static void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void
                     log((void*) &ERROR_LOG_LEVEL, "Could not handle create statics operation signal. The statics is null.");
                 }
 
-            } else if (strcmp(a, DESTROY_STATICS_OPERATION) == 0) {
+            } else if (strcmp(a, DESTROY_STATICS_MEMORY_MANAGEMENT) == 0) {
         
                 struct statics_model* s = (struct statics_model*) p2;
                 
-                if (s != null) {
+                if (s != 0) {
                         
-                    m = get_map_element_with_name(s->parts, get_map_element_with_name(io, "name"));
-                    destroy_statics_model(m, get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
+                    void* m = get_map_element_with_name(s->parts, get_map_element_with_name(io, "name"));
+                    destroy_statics(m, get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
         
                 } else {
             
                     log((void*) &ERROR_LOG_LEVEL, "Could not handle destroy statics operation signal. The statics is null.");
                 }
 
-            } else if (strcmp(a, CREATE_DYNAMICS_OPERATION) == 0) {
+            } else if (strcmp(a, CREATE_DYNAMICS_MEMORY_MANAGEMENT) == 0) {
         
                 struct dynamics_model* d = (struct dynamics_model*) p3;
                 
-                if (d != null) {
+                if (d != 0) {
                         
-                    void* m = create_dynamics_model(get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
+                    void* m = create_dynamics(get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
                     set_map_element_with_name(d->parts, get_map_element_with_name(io, "name"), m);
         
                 } else {
@@ -470,21 +478,21 @@ static void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void
                     log((void*) &ERROR_LOG_LEVEL, "Could not handle create dynamics operation signal. The dynamics is null.");
                 }
 
-            } else if (strcmp(a, DESTROY_DYNAMICS_OPERATION) == 0) {
+            } else if (strcmp(a, DESTROY_DYNAMICS_MEMORY_MANAGEMENT) == 0) {
         
                 struct dynamics_model* d = (struct dynamics_model*) p3;
                 
-                if (d != null) {
+                if (d != 0) {
                         
                     void* m = get_map_element_with_name(d->parts, get_map_element_with_name(io, "name"));
-                    destroy_dynamics_model(m, get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
+                    destroy_dynamics(m, get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
         
                 } else {
             
                     log((void*) &ERROR_LOG_LEVEL, "Could not handle destroy dynamics operation signal. The dynamics is null.");
                 }
 
-            } else if (strcmp(a, EXIT_OPERATION) == 0) {
+            } else if (strcmp(a, EXIT_LIFECYCLE_STEP) == 0) {
         
                 // Set shutdown flag.
                 int* f = (int*) p4;
@@ -527,6 +535,121 @@ static void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void
     } else {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not handle operation signal. The signal dynamics model is null.");
+    }
+}
+
+//??
+//?? Old signal handling. Delete this block later!
+//??
+
+/**
+ * Handles the mouse clicked action.
+ *
+ * @param p0 the screen item
+ * @param p1 the x coordinate
+ * @param p2 the y coordinate
+ * @param p3 the z coordinate
+ * @param p4 the action
+ */
+/*??
+static void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p0 != 0) {
+
+        // Determine the action of the clicked child screen item.
+        int count = 0;
+        int size = get_map_size(p0->items);
+        void* child = 0;
+        struct vector* position = 0;
+        struct vector* expansion = 0;
+        int x = -1;
+        int y = -1;
+        int z = -1;
+        int width = -1;
+        int height = -1;
+        int depth = -1;
+        int contains = 0;
+        void* action = 0;
+        
+        while (count < size) {
+
+            // Determine child, its position and expansion within the given screen item.
+            child = get_map_element(p0->items, count);
+            position = (vector*) get_map_element(p0->positions, count);
+            
+            if (child instanceof item) {
+                    
+                expansion = (vector) get_item_element(child, "expansion");
+                
+                if (position != 0) {
+                        
+                    // Translate the given coordinates according to the child's position.
+                    x = p1 - position->x;
+                    y = p2 - position->y;
+                    z = p3 - position->z;
+
+                    if (expansion != 0) {
+
+                        // Determine child's expansion.
+                        width = expansion->x;
+                        height = expansion->y;
+                        depth = expansion->z;
+        
+                        // Check if the given coordinates are in the child's screen area.
+                        // The "if" conditions had to be inserted because in classical
+                        // graphical user interfaces, the depth is normally 0 and
+                        // such the boolean comparison would deliver "false".
+                        // Using the conditions, the coordinates that are set to "0"
+                        // are not considered for comparison.
+                        contains = (x >= 0);
+                        contains = contains && (x < width);
+                        contains = contains && (y >= 0);
+                        contains = contains && (y < height);
+                        contains = contains && (z >= 0);
+                        contains = contains && (z < depth);
+        
+                        if (contains == 1) {
+        
+                            // The given coordinates are in the child's screen area.
+                            // Therefore, use the child's action.
+                            action = mouse_clicked_action(child, x, y, z, p4);
+                
+                            break;
+                        }
+
+                    } else {
+                        
+                        log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. An expansion is null.");
+                    }
+
+                } else {
+                    
+                    log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. A position is null.");
+                }
+
+            } else {
+                
+                log((void*) &INFO_LOG_LEVEL, "Could not handle mouse clicked action. A child is not of type Item.");
+            }
+            
+            count++;
+        }
+        
+        // Only use child screen item's action if it exists.
+        // Otherwise, use the parent screen item's action.
+        if (action != 0) {
+            
+            p4 = action;
+
+        } else {
+            
+            // Determine the action of the given screen item.
+            get_map_element(i->items, "mouse_clicked_action", p4);
+        }
+
+    } else {
+        
+        puts("ERROR: Could not handle mouse clicked action. The item is null.");
     }
 }
 

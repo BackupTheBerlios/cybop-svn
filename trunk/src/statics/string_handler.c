@@ -22,15 +22,15 @@
  * - Cybernetics Oriented Programming -
  */
 
-#ifndef STRING_HANDLER
-#define STRING_HANDLER
+#ifndef STRING_HANDLER_SOURCE
+#define STRING_HANDLER_SOURCE
 
 #include "string.c"
 
 /**
  * This is the string handler.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -148,6 +148,6 @@ static void get_value_string(void* p0, void* p1) {
     
 }
 
-/* STRING_HANDLER */
+/* STRING_HANDLER_SOURCE */
 #endif
 

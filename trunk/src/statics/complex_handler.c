@@ -22,13 +22,16 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef COMPLEX_HANDLER_SOURCE
+#define COMPLEX_HANDLER_SOURCE
+
 #include <string.h>
 #include "complex.c"
 
 /**
  * This is the complex handler.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,4 +93,7 @@ static void finalize_complex_model(void* p0, void* p1) {
         log((void*) &ERROR_LOG_LEVEL, "Could not finalize complex model. The complex model is null.");
     }
 }
+
+/* COMPLEX_HANDLER_SOURCE */
+#endif
 

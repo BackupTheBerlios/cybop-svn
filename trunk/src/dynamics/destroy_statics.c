@@ -25,6 +25,190 @@
 #ifndef DESTROY_STATICS_SOURCE
 #define DESTROY_STATICS_SOURCE
 
+#include "boolean_handler.c"
+#include "complex_handler.c"
+#include "fraction_handler.c"
+#include "integer_handler.c"
+#include "statics.c"
+#include "statics_cybol_model_handler.c"
+#include "statics_model.c"
+#include "string_handler.c"
+#include "time_handler.c"
+#include "vector_handler.c"
+
+/**
+ * This is the destroy statics operation.
+ *
+ * It destroys a statics memory model to a given statics cybol model.
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
+ */
+
+//
+// Forward declaration.
+//
+// These functions are the only forward declarations. They are needed
+// because models can recursively create/ destroy compound models using
+// functions which are defined in statics_model_handler.
+//
+
+/**
+ * Destroys the statics model.
+ *
+ * @param p0 the statics model
+ * @param p1 the model source
+ * @param p2 the abstraction
+ */
+void destroy_statics(void* p0, void* p1, void* p2);
+
+//
+// Statics model containers.
+//
+
+/**
+ * Destroys the statics model containers.
+ *
+ * @param p0 the statics model
+ */
+static void destroy_statics_model_containers(void* p0) {
+
+    struct statics_model* m = (struct statics_model*) p0;
+    
+    if (m != 0) {
+        
+        log((void*) &INFO_LOG_LEVEL, "Destroy statics model containers.");
+
+        finalize_map(m->positions);
+        free(m->positions);
+
+        finalize_map(m->parts);
+        free(m->parts);
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not destroy statics model containers. The statics model is null.");
+    }
+}
+
+//
+// Statics part.
+//
+
+/**
+ * Finalizes the statics part.
+ *
+ * @param p0 the statics model
+ * @param p1 the statics cybol model part attributes
+ */
+static void finalize_statics_part(void* p0, void* p1) {
+
+    struct statics_model* m = (struct statics_model*) p0;
+    
+    if (m != 0) {
+
+        void* name = get_map_element_with_name(p1, (void*) NAME);                
+        void* model = 0;
+        void* abstraction = 0;
+        void* memory_model = 0;
+
+        // Position.
+        memory_model = get_map_element_with_name(m->positions, name);
+        model = get_map_element_with_name(p1, (void*) POSITION_MODEL);
+        abstraction = get_map_element_with_name(p1, (void*) POSITION_ABSTRACTION);
+        destroy_statics(memory_model, model, abstraction);
+
+        // Part.
+        memory_model = get_map_element_with_name(m->parts, name);
+        model = get_map_element_with_name(p1, (void*) PART_MODEL);
+        abstraction = get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
+        destroy_statics(memory_model, model, abstraction);
+
+    } else {
+        
+        log((void*) &ERROR_LOG_LEVEL, "Could not finalize statics part. The statics model is null.");
+    }
+}
+
+//
+// Statics parts.
+//
+
+/**
+ * Finalizes the statics parts.
+ *
+ * @param p0 the statics model
+ * @param p1 the statics cybol model parts
+ */
+static void finalize_statics_parts(void* p0, void* p1) {
+
+    struct map* m = (struct map*) p1;
+    int count = 0;
+    int* size = (int*) get_map_size(m);
+    struct statics_model* e = 0;
+
+    while (count < *size) {
+    
+        e = (struct statics_model*) get_map_element_at_index(m, (void*) &count);
+
+        if (e != 0) {
+            
+            finalize_statics_part(p0, e->parts);
+
+        } else {
+            
+            log((void*) &ERROR_LOG_LEVEL, "Could not finalize statics parts. A statics cybol model part is null.");
+        }
+        
+        count++;
+    }
+}
+
+//
+// Statics model.
+//
+
+/**
+ * Finalizes the statics model to a statics cybol model.
+ *
+ * @param p0 the statics model
+ * @param p1 the statics cybol model path
+ */
+static void finalize_statics_model(void* p0, void* p1) {
+
+    struct statics_model* m = (struct statics_model*) p0;
+    
+    if (m != 0) {
+        
+        log((void*) &INFO_LOG_LEVEL, "Finalize statics model.");
+
+        // Create temporary statics cybol model.
+        struct statics_model* cybol = (struct statics_model*) malloc(sizeof(struct statics_model));
+        create_statics_model_containers((void*) cybol);
+
+        // Finalize statics model parts with statics cybol model.
+        if (cybol != 0) {
+            
+            finalize_statics_parts(p0, cybol->parts);
+            
+        } else {
+            
+            log((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The statics cybol model is null.");
+        }
+    
+        // Write statics cybol model to file path.
+        write_statics_cybol_model((void*) cybol, p1);
+    
+        // Destroy temporary statics cybol model.
+        destroy_statics_model_containers((void*) cybol);
+        free((void*) cybol);
+    
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not finalize statics model. The statics model is null.");
+    }
+}
+
 /**
  * This is the destroy statics operation.
  *
@@ -33,11 +217,8 @@
  * @param p0 the statics memory model
  * @param p1 the statics cybol model path
  * @param p2 the abstraction
- * @param p3 unused
- * @version $Revision: 1.1 $ $Date: 2003-12-03 15:10:14 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
  */
-void destroy_statics(void* p0, void* p1, void* p2, void* p3) {
+void destroy_statics(void* p0, void* p1, void* p2) {
 
     char* p = (char*) p1;
     char* a = (char*) p2;

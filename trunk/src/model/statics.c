@@ -34,7 +34,7 @@
  * Complex models consist of other complex models and primitive models.
  * Primitive models are the final abstraction in software.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -75,59 +75,59 @@ static const char* TIME_PRIMITIVE = "time";
 //
 
 /** The koffice kword application. */
-static const char* KWORD_APPLICATION = "kword_application";
+static const char* KWORD_APPLICATION = "kword";
 
 /** The open office writer application. */
-static const char* SXW_APPLICATION = "sxw_application";
+static const char* SXW_APPLICATION = "sxw";
 
 //
 // Audio models.
 //
 
 /** The mp3 audio. */
-static const char* MP3_AUDIO = "mp3_audio";
+static const char* MP3_AUDIO = "mp3";
 
 //
 // Image models.
 //
 
 /** The jpeg image. */
-static const char* JPEG_IMAGE = "jpeg_image";
+static const char* JPEG_IMAGE = "jpeg";
 
 /** The gif image. */
-static const char* GIF_IMAGE = "gif_image";
+static const char* GIF_IMAGE = "gif";
 
 /** The bmp image. */
-static const char* BMP_IMAGE = "bmp_image";
+static const char* BMP_IMAGE = "bmp";
 
 //
 // Text models.
 //
 
 /** The sgml text. */
-static const char* SGML_TEXT = "sgml_text";
+static const char* SGML_TEXT = "sgml";
 
 /** The xml text. */
-static const char* XML_TEXT = "xml_text";
+static const char* XML_TEXT = "xml";
 
 /** The html text. */
-static const char* HTML_TEXT = "html_text";
+static const char* HTML_TEXT = "html";
 
 /** The rtf text. */
-static const char* RTF_TEXT = "rtf_text";
+static const char* RTF_TEXT = "rtf";
 
 /** The tex text. */
-static const char* TEX_TEXT = "tex_text";
+static const char* TEX_TEXT = "tex";
 
 //
 // Video models.
 //
 
 /** The mpeg video. */
-static const char* MPEG_VIDEO = "mpeg_video";
+static const char* MPEG_VIDEO = "mpeg";
 
 /** The quicktime video. */
-static const char* QUICKTIME_VIDEO = "quicktime_video";
+static const char* QUICKTIME_VIDEO = "qt";
 
 /* STATICS_SOURCE */
 #endif

@@ -25,6 +25,190 @@
 #ifndef CREATE_STATICS_SOURCE
 #define CREATE_STATICS_SOURCE
 
+#include "boolean_handler.c"
+#include "complex_handler.c"
+#include "fraction_handler.c"
+#include "integer_handler.c"
+#include "statics.c"
+#include "statics_cybol_model_handler.c"
+#include "statics_model.c"
+#include "string_handler.c"
+#include "time_handler.c"
+#include "vector_handler.c"
+
+/**
+ * This is the create statics operation.
+ *
+ * It creates a statics memory model from a given statics cybol model.
+ *
+ * @version $Revision: 1.2 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
+ */
+
+//
+// Forward declaration.
+//
+// These functions are the only forward declarations. They are needed
+// because models can recursively create/ destroy compound models using
+// functions which are defined in statics_model_handler.
+//
+
+/**
+ * Creates a statics model.
+ *
+ * @param p0 the model source
+ * @param p1 the abstraction
+ * @return the statics model
+ */
+void* create_statics(void* p0, void* p1);
+
+//
+// Statics model containers.
+//
+
+/**
+ * Creates the statics model containers.
+ *
+ * @param p0 the statics model
+ */
+static void create_statics_model_containers(void* p0) {
+
+    struct statics_model* m = (struct statics_model*) p0;
+    
+    if (m != 0) {
+        
+        log((void*) &INFO_LOG_LEVEL, "Create statics model containers.");
+
+        m->parts = malloc(sizeof(struct map));
+        initialize_map(m->parts);
+
+        m->positions = malloc(sizeof(struct map));
+        initialize_map(m->positions);
+        
+    } else {
+        
+        log((void*) &ERROR_LOG_LEVEL, "Could not create statics model containers. The statics model is null.");
+    }
+}
+
+//
+// Statics part.
+//
+
+/**
+ * Initializes the statics part.
+ *
+ * @param p0 the statics model
+ * @param p1 the statics cybol model part attributes
+ */
+static void initialize_statics_part(void* p0, void* p1) {
+        
+    struct statics_model* m = (struct statics_model*) p0;
+    
+    if (m != 0) {
+            
+        void* name = get_map_element_with_name(p1, (void*) NAME);                
+        void* model = 0;
+        void* abstraction = 0;
+        void* memory_model = 0;
+
+        // Part.
+        model = get_map_element_with_name(p1, (void*) PART_MODEL);
+        abstraction = get_map_element_with_name(p1, (void*) PART_ABSTRACTION);
+        memory_model = create_statics(model, abstraction);
+        set_map_element_with_name(m->parts, name, memory_model);
+
+        // Position.
+        model = get_map_element_with_name(p1, (void*) POSITION_MODEL);
+        abstraction = get_map_element_with_name(p1, (void*) POSITION_ABSTRACTION);
+        memory_model = create_statics(model, abstraction);
+        set_map_element_with_name(m->positions, name, memory_model);
+
+    } else {
+        
+        log((void*) &ERROR_LOG_LEVEL, "Could not initialize statics part. The statics model is null.");
+    }
+}
+
+//
+// Statics parts.
+//
+
+/**
+ * Initializes the statics parts.
+ *
+ * @param p0 the statics model
+ * @param p1 the statics cybol model parts
+ */
+static void initialize_statics_parts(void* p0, void* p1) {
+
+    struct map* m = (struct map*) p1;
+    int count = 0;
+    int* size = (int*) get_map_size(m);
+    struct statics_model* e = 0;
+
+    while (count < *size) {
+    
+        e = (struct statics_model*) get_map_element_at_index(m, (void*) &count);
+
+        if (e != 0) {
+            
+            initialize_statics_part(p0, e->parts);
+
+        } else {
+            
+            log((void*) &ERROR_LOG_LEVEL, "Could not initialize statics parts. A statics cybol model part is null.");
+        }
+        
+        count++;
+    }
+}
+
+//
+// Statics model.
+//
+
+/**
+ * Initializes the statics model from a statics cybol model.
+ *
+ * @param p0 the statics model
+ * @param p1 the statics cybol model path
+ */
+static void initialize_statics_model(void* p0, void* p1) {
+
+    struct statics_model* m = (struct statics_model*) p0;
+    
+    if (m != 0) {
+        
+        log((void*) &INFO_LOG_LEVEL, "Initialize statics model.");
+
+        // Create temporary statics cybol model.
+        struct statics_model* cybol = (struct statics_model*) malloc(sizeof(struct statics_model));
+        create_statics_model_containers((void*) cybol);
+
+        // Read statics cybol model from file path.
+        read_statics_cybol_model((void*) cybol, p1);
+    
+        // Initialize statics model parts with statics cybol model.
+        if (cybol != 0) {
+    
+            initialize_statics_parts(p0, cybol->parts);
+            
+        } else {
+            
+            log((void*) &ERROR_LOG_LEVEL, "Could not initialize statics model. The statics cybol model is null.");
+        }
+    
+        // Destroy temporary statics cybol model.
+        destroy_statics_model_containers((void*) cybol);
+        free((void*) cybol);
+    
+    } else {
+        
+        log((void*) &ERROR_LOG_LEVEL, "Could not initialize statics model. The statics model is null.");
+    }
+}
+
 /**
  * This is the create statics operation.
  *
@@ -33,8 +217,6 @@
  * @param p0 the statics cybol model path
  * @param p1 the abstraction
  * @return the statics model
- * @version $Revision: 1.1 $ $Date: 2003-12-03 15:10:14 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
  */
 void* create_statics(void* p0, void* p1) {
 

@@ -37,7 +37,7 @@
  * http://home.arcor.de/cpp_kurs/cpp/le07/k2_09_d1.htm
  * ... or try a Google search.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,41 +49,72 @@
 static const char* DYNAMICS_COMPOUND = "compound";
 
 //
-// Primitive operations.
+// Logics models.
 //
 
-/** The and operation. */
-static const char* AND_OPERATION = "and";
+/** The and logics. */
+static const char* AND_LOGICS = "and";
 
-/** The or operation. */
-static const char* OR_OPERATION = "or";
+/** The or logics. */
+static const char* OR_LOGICS = "or";
 
-/** The equal operation. */
-static const char* EQUAL_OPERATION = "equal";
+//
+// Comparison models.
+//
 
-/** The smaller operation. */
-static const char* SMALLER_OPERATION = "smaller";
+/** The equal comparison. */
+static const char* EQUAL_COMPARISON = "equal";
 
-/** The greater operation. */
-static const char* GREATER_OPERATION = "greater";
+/** The smaller comparison. */
+static const char* SMALLER_COMPARISON = "smaller";
 
-/** The smaller or equal operation. */
-static const char* SMALLER_OR_EQUAL_OPERATION = "smaller_or_equal";
+/** The greater comparison. */
+static const char* GREATER_COMPARISON = "greater";
 
-/** The greater or equal operation. */
-static const char* GREATER_OR_EQUAL_OPERATION = "greater_or_equal";
+/** The smaller or equal comparison. */
+static const char* SMALLER_OR_EQUAL_COMPARISON = "smaller_or_equal";
 
-/** The add operation. */
-static const char* ADD_OPERATION = "add";
+/** The greater or equal comparison. */
+static const char* GREATER_OR_EQUAL_COMPARISON = "greater_or_equal";
 
-/** The subtract operation. */
-static const char* SUBTRACT_OPERATION = "subtract";
+//
+// Arithmetic models.
+//
 
-/** The multiply operation. */
-static const char* MULTIPLY_OPERATION = "multiply";
+/** The add arithmetic. */
+static const char* ADD_ARITHMETIC = "add";
 
-/** The divide operation. */
-static const char* DIVIDE_OPERATION = "divide";
+/** The subtract arithmetic. */
+static const char* SUBTRACT_ARITHMETIC = "subtract";
+
+/** The multiply arithmetic. */
+static const char* MULTIPLY_ARITHMETIC = "multiply";
+
+/** The divide arithmetic. */
+static const char* DIVIDE_ARITHMETIC = "divide";
+
+//
+// Memory management models.
+//
+
+/** The create statics memory management. */
+static const char* CREATE_STATICS_MEMORY_MANAGEMENT = "create_statics";
+
+/** The destroy statics memory management. */
+static const char* DESTROY_STATICS_MEMORY_MANAGEMENT = "destroy_statics";
+
+/** The create dynamics memory management. */
+static const char* CREATE_DYNAMICS_MEMORY_MANAGEMENT = "create_dynamics";
+
+/** The destroy dynamics memory management. */
+static const char* DESTROY_DYNAMICS_MEMORY_MANAGEMENT = "destroy_dynamics";
+
+//
+// Lifecycle step models.
+//
+
+/** The exit lifecycle step. */
+static const char* EXIT_LIFECYCLE_STEP = "exit";
 
 /*??
 //

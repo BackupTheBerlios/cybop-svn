@@ -25,6 +25,8 @@
 #ifndef ADD_SOURCE
 #define ADD_SOURCE
 
+#include "integer.c"
+
 /**
  * This is the add operation.
  *
@@ -33,14 +35,14 @@
  * @param p0 the summand 0
  * @param p1 the summand 1
  * @param p2 the sum
- * @version $Revision: 1.2 $ $Date: 2003-12-03 15:10:14 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 void add(void* p0, void* p1, void* p2) {
     
-    int* summand_0 = (int*) p0;
-    int* summand_1 = (int*) p1;
-    int* sum = (int*) p2;
+    struct integer* summand_0 = (struct integer*) p0;
+    struct integer* summand_1 = (struct integer*) p1;
+    struct integer* sum = (struct integer*) p2;
     
     if (summand_0 != 0) {
         

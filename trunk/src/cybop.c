@@ -22,10 +22,12 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef CYBOI_SOURCE
+#define CYBOI_SOURCE
+
 #include <stdlib.h>
 #include <string.h>
 #include "log_handler.c"
-#include "signal.c"
 #include "signal_memory.c"
 #include "signal_memory_handler.c"
 #include "statics.c"
@@ -39,7 +41,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.2 $ $Date: 2003-12-03 15:10:14 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -200,4 +202,7 @@ int main(int p0, char** p1) {
 
     return r;
 }
+
+/* CYBOI_SOURCE */
+#endif
 

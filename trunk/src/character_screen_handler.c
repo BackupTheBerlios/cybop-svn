@@ -22,6 +22,9 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef CHARACTER_SCREEN_HANDLER_SOURCE
+#define CHARACTER_SCREEN_HANDLER_SOURCE
+
 #include <stdio.h>
 
 /**
@@ -34,7 +37,7 @@
  * - Textual User Interface (TUI)
  * - Curses (termcap, ncurses)
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,4 +82,7 @@ static void show_character_screen() {
 
     send_character_screen();
 }
+
+/* CHARACTER_SCREEN_HANDLER_SOURCE */
+#endif
 

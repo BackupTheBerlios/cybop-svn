@@ -22,13 +22,16 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef TIME_HANDLER_SOURCE
+#define TIME_HANDLER_SOURCE
+
 #include <string.h>
 #include "time.c"
 
 /**
  * This is the time handler.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -88,4 +91,7 @@ static void finalize_time_model(void* p0, void* p1) {
         log((void*) &ERROR_LOG_LEVEL, "Could not finalize time model. The time model is null.");
     }
 }
+
+/* TIME_HANDLER_SOURCE */
+#endif
 

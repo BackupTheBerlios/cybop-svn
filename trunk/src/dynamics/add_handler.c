@@ -22,12 +22,15 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef ADD_HANDLER_SOURCE
+#define ADD_HANDLER_SOURCE
+
 #include "add.c"
 
 /**
  * This is the add handler.
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,4 +99,7 @@ static void finalize_boolean_model(void* p0, void* p1) {
     }
 }
 */
+
+/* ADD_HANDLER_SOURCE */
+#endif
 

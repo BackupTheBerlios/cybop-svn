@@ -22,6 +22,9 @@
  * - Cybernetics Oriented Programming -
  */
 
+#ifndef STATICS_CYBOL_MODEL_HANDLER_SOURCE
+#define STATICS_CYBOL_MODEL_HANDLER_SOURCE
+
 //?? #include <libxml.h>
 
 /**
@@ -30,7 +33,7 @@
  * It can read and write CYBOL source files.
  * CYBOL's syntax is based on the Extensible Markup Language (XML).
  *
- * @version $Revision: 1.1 $ $Date: 2003-12-01 12:33:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-12-05 12:10:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -400,4 +403,7 @@ static void initialize_statics_cybol_model(void* p0, void* p1) {
  */
 static void finalize_statics_cybol_model(void* p0, void* p1) {
 }
+
+/* STATICS_CYBOL_MODEL_HANDLER_SOURCE */
+#endif
 
