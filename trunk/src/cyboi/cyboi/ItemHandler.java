@@ -29,7 +29,7 @@ package cyboi;
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.25 $ $Date: 2003-08-05 13:15:03 $ $Author: christian $
+ * @version $Revision: 1.26 $ $Date: 2003-08-05 21:52:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -252,8 +252,10 @@ class ItemHandler {
         if (c != null) {
             
             java.lang.System.out.println("INFO: Initialize item elements.");
+            java.lang.System.out.println("TEST 1: " + c.java_object);
             ItemHandler.initialize_java_object(p0, c.java_object);
-            ItemHandler.initialize_items(p0, c.items);
+            java.lang.System.out.println("TEST 2: " + c.java_object);
+//??            ItemHandler.initialize_items(p0, c.items);
             
         } else {
             
@@ -292,16 +294,6 @@ class ItemHandler {
         
                 java.lang.System.out.println("INFO: Initialize java object.");
 
-//?? --
-                java.lang.Object test = null;
-                
-                for (int x = 0; x < MapHandler.get_map_size(o.items); x++) {
-    
-                    test = ArrayHandler.get_array_element(((Map) o.items).names, x);
-                    java.lang.System.out.println("TEST: " + test);
-                }
-                java.lang.System.exit(0);
-//?? --
                 java.lang.Object c = MapHandler.get_map_element(o.items, CategoryHandler.CATEGORY);
                 i.java_object = JavaObjectHandler.create_java_object(c);
                 JavaObjectHandler.initialize_java_object_attributes(i.java_object, o.items);

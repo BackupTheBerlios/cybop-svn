@@ -27,7 +27,7 @@ package cyboi;
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.8 $ $Date: 2003-08-05 13:15:03 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-08-05 21:52:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryHandler {
@@ -187,33 +187,18 @@ class CategoryHandler {
             doc.normalize();
             org.apache.xerces.dom.DeepNodeListImpl l = null;
             
+/*??
             l = (org.apache.xerces.dom.DeepNodeListImpl) doc.getElementsByTagName(CategoryHandler.SUPER_CATEGORY);
             CategoryHandler.initialize_super_category(p0, l);
+*/
 
             l = (org.apache.xerces.dom.DeepNodeListImpl) doc.getElementsByTagName(CategoryHandler.JAVA_OBJECT);
             CategoryHandler.initialize_java_objects(p0, l);
-                
-            Item c = (Item) p0;
 
-            if (c != null) {
-                    
-                l = (org.apache.xerces.dom.DeepNodeListImpl) doc.getElementsByTagName(CategoryHandler.ITEM);
-                CategoryHandler.initialize_items(c.items, l);
-//?? --
-                java.lang.Object test = null;
-                
-                for (int x = 0; x < MapHandler.get_map_size(c.items); x++) {
-    
-                    test = ArrayHandler.get_array_element(((Map) c.items).names, x);
-                    java.lang.System.out.println("TEST: " + test);
-                }
-                java.lang.System.exit(0);
-//?? --
-
-            } else {
-                
-                java.lang.System.out.println("ERROR: Could not read document. The category is null.");
-            }
+/*??
+            l = (org.apache.xerces.dom.DeepNodeListImpl) doc.getElementsByTagName(CategoryHandler.ITEM);
+            CategoryHandler.initialize_items(p0, l);
+*/
 
         } else {
             
@@ -456,7 +441,7 @@ class CategoryHandler {
     /**
      * Initializes the items.
      *
-     * @param p0 the category items
+     * @param p0 the category
      * @param p1 the category items list
      */
     static void initialize_items(java.lang.Object p0, java.lang.Object p1) {
@@ -482,22 +467,10 @@ class CategoryHandler {
                     ItemHandler.initialize_item_containers(i);
                     CategoryHandler.initialize_item(i, n);
                     
-//?? --
-                    java.lang.Object test = null;
-                    
-                    for (int x = 0; x < MapHandler.get_map_size(p0); x++) {
-            
-                        test = ArrayHandler.get_array_element(((Map) p0).references, x);
-                        java.lang.System.out.println("TEST: " + test);
-                    }
-//?? --
-
                     if (i != null) {
                             
                         name = MapHandler.get_map_element(i.items, CategoryHandler.NAME);
-                        java.lang.System.out.println("TEST name: " + name);
-                        java.lang.System.exit(0);
-                        MapHandler.set_map_element(p0, i, name);
+                        MapHandler.set_map_element(((Item) p0).items, i, name);
 /*??
                         // Initialize serialized item.
                         i = n.getNodeValue();
@@ -508,6 +481,18 @@ class CategoryHandler {
                         java.lang.System.out.println("ERROR: Could not initialize items. The item is null.");
                     }
             
+//?? --
+                    java.lang.Object test = null;
+                    
+                    for (int x = 0; x < MapHandler.get_map_size(((Item) p0).items); x++) {
+            
+                        test = MapHandler.get_map_element(((Item) p0).items, x);
+                        java.lang.System.out.println("TEST: " + test);
+                    }
+//?? --
+
+                    java.lang.System.exit(0);
+
                 } else {
                     
                     java.lang.System.out.println("INFO: Could not initialize items. The category item node is null.");
