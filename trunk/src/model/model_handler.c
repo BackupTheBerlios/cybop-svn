@@ -36,7 +36,7 @@
  * It contains functions which are used by both, the statics and the
  * dynamics model handler.
  *
- * @version $Revision: 1.6 $ $Date: 2004-02-04 11:00:54 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-02-28 20:04:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -94,7 +94,7 @@ void* get_part_name(void* p0, void* p1) {
         
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get part name. The hierarchical model name is null.");
     }
-    
+
     return p;
 }
 
@@ -127,10 +127,9 @@ void* get_remaining_name(void* p0, void* p1) {
         
         log_message((void*) &ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical model name is null.");
     }
-    
+
     return r;
 }
 
 /* MODEL_HANDLER_SOURCE */
 #endif
-

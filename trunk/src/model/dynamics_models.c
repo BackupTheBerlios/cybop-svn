@@ -1,5 +1,5 @@
 /*
- * $RCSfile: dynamics.c,v $
+ * $RCSfile: dynamics_models.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -37,7 +37,7 @@
  * http://home.arcor.de/cpp_kurs/cpp/le07/k2_09_d1.htm
  * ... or try a Google search.
  *
- * @version $Revision: 1.5 $ $Date: 2003-12-15 14:48:59 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-02-28 20:04:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

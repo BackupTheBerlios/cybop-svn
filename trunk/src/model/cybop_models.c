@@ -1,5 +1,5 @@
 /*
- * $RCSfile: statics.c,v $
+ * $RCSfile: cybop_models.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -34,16 +34,16 @@
  * Complex models consist of other complex models and primitive models.
  * Primitive models are the final abstraction in software.
  *
- * @version $Revision: 1.4 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-02-28 20:04:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 //
-// Compound model.
+// Compound models.
 //
 
-/** The statics compound. */
-static const char* STATICS_COMPOUND = "compound";
+/** The cybop compound. */
+static const char* CYBOP_COMPOUND = "cybop";
 
 //
 // Primitive models.
@@ -128,6 +128,12 @@ static const char* MPEG_VIDEO = "mpeg";
 
 /** The quicktime video. */
 static const char* QUICKTIME_VIDEO = "qt";
+
+--
+
+
+/** The inline language. */
+static const char* INLINE_LANGUAGE = "inline";
 
 /* STATICS_SOURCE */
 #endif
