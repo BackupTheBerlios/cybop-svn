@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.11 $ $Date: 2004-05-07 17:03:49 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2004-05-09 22:43:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -621,11 +621,27 @@ void handle_operation_signal(const void* p0, void* p1, void* p2, void* p3, void*
                 void* m = NULL_POINTER;
                 int ms = 0;
 
+                //
+                // Structure of part_model for create_model or destroy_model operation:
+                // - operation
+                // - whole model of created/destroyed part model
+                // - name
+                // - abstraction
+                // - location
+                // - model
+                //
                 // Example:
                 // <part name="create_find_dialog"
                 //     part_abstraction="operation"
                 //     part_location="inline"
-                //     part_model="create_model, find_dialog, compound, file, application/find_dialog.cybol"/>
+                //     part_model="
+                //         create_model,
+                //         application.gui,
+                //         find_dialog,
+                //         compound,
+                //         file,
+                //         application/find_dialog.cybol"/>
+                //
 //??                create_model((void*) &m, (void*) &ms, (void*) &param2, (void*) &param2s, (void*) &param3, (void*) &param3s, (void*) &param4, (void*) &param4s);
 
                 // TODO: Move reading from: inline, file, ftp etc.

@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.20 $ $Date: 2004-05-06 18:38:40 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2004-05-09 22:43:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,6 +53,17 @@
  * @param p5 the abstraction size
  */
 void create_model(void* p0, void* p1, const void* p2, const void* p3, const void* p4, const void* p5) {
+
+    // 1 read location --> call according procedure, e.g. read_from_file
+    // 2 read byte data from location://model or inline:/model into array
+    // 3 create transient model
+    //   (use and rename current "create_model" procedure for this)
+    // 4 interpret data in array according to abstraction ("initialize"),
+    //   that is parse array and copy/set data in transient model
+    // 5 check if name exists in whole; if yes, add "_0" or "_1" or "_2" etc.
+    //   to name, taking first non-existing suffix
+    // 6 add transient model to whole with procedure:
+    //   set_model_part_by_name(whole_model, name, name_size, ...)
 
     // The done flag.
     int d = 0;
