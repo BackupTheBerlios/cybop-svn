@@ -76,7 +76,7 @@ import cybop.core.model.principle.*;
  * that this item also is a special constellation of children which can be
  * enforced by constraints.
  *
- * @version $Revision: 1.18 $ $Date: 2003-04-20 22:21:01 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2003-04-23 16:03:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends State {
@@ -99,6 +99,18 @@ public class Item extends State {
 
     /** The children number. */
     private int childrenNumber;
+
+    /** The children categories container. */
+    private Item[] childrenCategories;
+
+    /** The children categories number. */
+    private int childrenCategoriesNumber;
+
+    /** The children positions container. */
+    private Item[] childrenPositions;
+
+    /** The children Positions number. */
+    private int childrenPositionsNumber;
 
     /**
      * The limit factor.
@@ -1161,6 +1173,29 @@ public class Item extends State {
         return i;
     }
 
+    //
+    // Children categories management.
+    //
+
+    /**
+     * Sets the children category.
+     *
+     * @param n the category name
+     * @param c the category
+     */
+    public void setCategory(String n, String c) {
+
+        Item[] c = getChildrenCategories();
+        
+        set(c);
+    }
+
+    set
+    add
+    replace
+    remove
+    get
+    
     //
     // Position management.
     //

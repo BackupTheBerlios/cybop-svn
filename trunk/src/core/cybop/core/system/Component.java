@@ -64,7 +64,7 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.11 $ $Date: 2003-04-23 13:08:57 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-04-23 16:03:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends Chain {
@@ -95,20 +95,29 @@ public class Component extends Chain {
     public static final String LOG_LEVEL = new String("log_level");
 
     //
-    // Default children.
+    // Children category names.
     //
 
-    /** The default signal. */
-    public Item defaultSignal;
+    /** The configuration category. */
+    public static final String CONFIGURATION_CATEGORY = new String("configuration_category");
 
-    /** The default named subsystem. */
-    public Item defaultNamedSubsystem;
+    /** The log record category. */
+    public static final String LOG_RECORD_CATEGORY = new String("log_record_category");
 
-    /** The default logger output. */
-    public Item defaultLoggerOutput;
+    /** The signal memory category. */
+    public static final String SIGNAL_MEMORY_CATEGORY = new String("signal_memory_category");
 
-    /** The default log level. */
-    public Item defaultLogLevel;
+    /** The signal category. */
+    public static final String SIGNAL_CATEGORY = new String("signal_category");
+
+    /** The named subsystem category. */
+    public static final String NAMED_SUBSYSTEM_CATEGORY = new String("named_subsystem_category");
+
+    /** The logger output category. */
+    public static final String LOGGER_OUTPUT_CATEGORY = new String("logger_output_category");
+
+    /** The log level category. */
+    public static final String LOG_LEVEL_CATEGORY = new String("log_level_category");
 
     //
     // Log levels.
@@ -217,45 +226,45 @@ public class Component extends Chain {
     }
 
     //
-    // Default children.
+    // Default children categories.
     //
 
     /**
-     * Returns the default signal.
+     * Returns the default signal category.
      *
-     * @return the default signal
+     * @return the default signal category
      */
-    public String getDefaultSignal() {
+    public String getDefaultSignalCategory() {
 
         return new String("cybop.core.signal.Signal");
     }
 
     /**
-     * Returns the default named subsystem.
+     * Returns the default named subsystem category.
      *
-     * @return the default named subsystem
+     * @return the default named subsystem category
      */
-    public String getDefaultNamedSubsystem() {
+    public String getDefaultNamedSubsystemCategory() {
 
         return new String(getClass().getName());
     }
 
     /**
-     * Returns the default logger output.
+     * Returns the default logger output category.
      *
-     * @return the default logger output
+     * @return the default logger output category
      */
-    public String getDefaultLoggerOutput() {
+    public String getDefaultLoggerOutputCategory() {
 
         return new String("console");
     }
 
     /**
-     * Returns the default log level.
+     * Returns the default log level category.
      *
-     * @return the default log level
+     * @return the default log level category
      */
-    public Integer getDefaultLogLevel() {
+    public Integer getDefaultLogLevelCategory() {
 
         return Component.EVENT_LOG_LEVEL;
     }
@@ -275,10 +284,10 @@ public class Component extends Chain {
 
         if (c != null) {
 
-            this.defaultSignal = c.get(Component.SIGNAL, getDefaultSignal());
-            this.defaultNamedSubsystem = c.get(Component.NAMED_SUBSYSTEM, getDefaultNamedSubsystem());
-            this.defaultLoggerOutput = c.get(Component.LOGGER_OUTPUT, getDefaultLoggerOutput());
-            this.defaultLogLevel = c.get(Component.LOG_LEVEL, getDefaultLogLevel());
+            setCategory(Component.SIGNAL_CATEGORY, c.get(Component.SIGNAL_CATEGORY, getDefaultSignalCategory()));
+            setCategory(Component.NAMED_SUBSYSTEM_CATEGORY, c.get(Component.NAMED_SUBSYSTEM_CATEGORY, getDefaultNamedSubsystemCategory()));
+            setCategory(Component.LOGGER_OUTPUT_CATEGORY, c.get(Component.LOGGER_OUTPUT_CATEGORY, getDefaultLoggerOutputCategory()));
+            setCategory(Component.LOG_LEVEL_CATEGORY, c.get(Component.LOG_LEVEL_CATEGORY, getDefaultLogLevelCategory()));
 
         } else {
 
@@ -297,10 +306,17 @@ public class Component extends Chain {
 
         if (c != null) {
 
-            c.set(Component.LOG_LEVEL, this.defaultLogLevel);
-            c.set(Component.LOGGER_OUTPUT, this.defaultLoggerOutput);
-            c.set(Component.NAMED_SUBSYSTEM, this.defaultNamedSubsystem);
-            c.set(Component.SIGNAL, this.defaultSignal);
+            c.set(Component.LOG_LEVEL_CATEGORY, getCategory(Component.LOG_LEVEL_CATEGORY));
+            removeCategory(Component.LOG_LEVEL_CATEGORY);
+
+            c.set(Component.LOGGER_OUTPUT_CATEGORY, getCategory(Component.LOGGER_OUTPUT_CATEGORY));
+            removeCategory(Component.LOGGER_OUTPUT_CATEGORY);
+
+            c.set(Component.NAMED_SUBSYSTEM_CATEGORY, getCategory(Component.NAMED_SUBSYSTEM_CATEGORY));
+            removeCategory(Component.NAMED_SUBSYSTEM_CATEGORY);
+
+            c.set(Component.SIGNAL_CATEGORY, getCategory(Component.SIGNAL_CATEGORY));
+            removeCategory(Component.SIGNAL_CATEGORY);
 
         } else {
 
@@ -319,9 +335,9 @@ public class Component extends Chain {
 
         super.initialize();
 
-        set(Component.NAMED_SUBSYSTEM, this.defaultNamedSubsystem);
-        set(Component.LOGGER_OUTPUT, this.defaultLoggerOutput);
-        set(Component.LOG_LEVEL, this.defaultLogLevel);
+        set(Component.NAMED_SUBSYSTEM, getCategory(Component.NAMED_SUBSYSTEM_CATEGORY));
+        set(Component.LOGGER_OUTPUT, getCategory(Component.LOGGER_OUTPUT_CATEGORY));
+        set(Component.LOG_LEVEL, getCategory(Component.LOG_LEVEL_CATEGORY));
     }
 
     /**

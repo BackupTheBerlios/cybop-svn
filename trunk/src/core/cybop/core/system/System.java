@@ -60,7 +60,7 @@ import cybop.core.system.system.*;
  * (view/user interface) or programs running on the same (local communication)
  * or other machines (remote communication, persistence mechanism).
  *
- * @version $Revision: 1.6 $ $Date: 2003-04-23 13:08:57 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-04-23 16:03:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class System extends Block implements 
@@ -98,35 +98,35 @@ public class System extends Block implements
     public static final String USER = new String("user");
 
     //
-    // Default children.
+    // Children category names.
     //
 
-    /** The default controller. */
-    public String defaultController;
+    /** The controller category. */
+    public static final String CONTROLLER_CATEGORY = new String("controller_category");
 
-    /** The default socket address. */
-    public String defaultSocketAddress;
+    /** The socket address category. */
+    public static final String SOCKET_ADDRESS_CATEGORY = new String("socket_address_category");
 
-    /** The default internet protocol 6 address. */
-    public String defaultIp6Address;
+    /** The internet protocol 6 address category. */
+    public static final String IP6_ADDRESS_CATEGORY = new String("ip6_address_category");
 
-    /** The default internet protocol 4 address. */
-    public String defaultIp4Address;
+    /** The internet protocol 4 address category. */
+    public static final String IP4_ADDRESS_CATEGORY = new String("ip4_address_category");
 
-    /** The default host name. */
-    public String defaultHostName;
+    /** The host name category. */
+    public static final String HOST_NAME_CATEGORY = new String("host_name_category");
 
-    /** The default domain name. */
-    public String defaultDomainName;
+    /** The domain name category. */
+    public static final String DOMAIN_NAME_CATEGORY = new String("domain_name_category");
 
-    /** The default communication partners count. */
-    public Integer defaultCommunicationPartnersCount;
+    /** The communication partners count category. */
+    public static final String COMMUNICATION_PARTNERS_COUNT_CATEGORY = new String("communication_partners_count_category");
 
-    /** The default communication partner. */
-    public String defaultCommunicationPartner;
+    /** The communication partner category. */
+    public static final String COMMUNICATION_PARTNER_CATEGORY = new String("communication_partner_category");
 
-    /** The default user. */
-    public String defaultUser;
+    /** The user category. */
+    public static final String USER_CATEGORY = new String("user_category");
 
     //
     // Encapsulated java thread.
@@ -173,9 +173,9 @@ public class System extends Block implements
                 if (s != null) {
 
                     java.lang.System.out.println("INFO: Set global system items.");
-                    s.set(Component.CONFIGURATION, createItem(new String("cybop.core.system.chain.Configuration")));
-                    s.set(Component.LOG_RECORD, createItem(new String("cybop.core.system.chain.LogRecord")));
-                    s.set(Component.SIGNAL_MEMORY, createItem(new String("cybop.core.system.chain.SignalMemory")));
+                    s.set(System.CONFIGURATION, createItem(new String("cybop.core.system.chain.Configuration")));
+                    s.set(System.LOG_RECORD, createItem(new String("cybop.core.system.chain.LogRecord")));
+                    s.set(System.SIGNAL_MEMORY, createItem(new String("cybop.core.system.chain.SignalMemory")));
 
                     java.lang.System.out.println("INFO: Configure system.");
                     s.configure();
@@ -217,16 +217,16 @@ public class System extends Block implements
             s.deconfigure();
 
             java.lang.System.out.println("INFO: Remove global system items.");
-            SignalMemory m = (SignalMemory) s.get(Component.SIGNAL_MEMORY);
-            s.remove(Component.SIGNAL_MEMORY);
+            SignalMemory m = (SignalMemory) s.get(System.SIGNAL_MEMORY);
+            s.remove(System.SIGNAL_MEMORY);
             destroyItem(m);
 
-            LogRecord h = (LogRecord) s.get(Component.LOG_RECORD);
-            s.remove(Component.LOG_RECORD);
+            LogRecord h = (LogRecord) s.get(System.LOG_RECORD);
+            s.remove(System.LOG_RECORD);
             destroyItem(h);
 
-            Configuration c = (Configuration) s.get(Component.CONFIGURATION);
-            s.remove(Component.CONFIGURATION);
+            Configuration c = (Configuration) s.get(System.CONFIGURATION);
+            s.remove(System.CONFIGURATION);
             destroyItem(c);
 
         } else {
@@ -236,95 +236,95 @@ public class System extends Block implements
     }
 
     //
-    // Default children.
+    // Default children categories.
     //
 
     /**
-     * Returns the default controller.
+     * Returns the default controller category.
      *
-     * @return the default controller
+     * @return the default controller category
      */
-    public String getDefaultController() {
+    public String getDefaultControllerCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default socket address.
+     * Returns the default socket address category.
      *
-     * @return the default socket address
+     * @return the default socket address category
      */
-    public String getDefaultSocketAddress() {
+    public String getDefaultSocketAddressCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default internet protocol 6 address.
+     * Returns the default internet protocol 6 address category.
      *
-     * @return the default internet protocol 6 address
+     * @return the default internet protocol 6 address category
      */
-    public String getDefaultIp6Address() {
+    public String getDefaultIp6AddressCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default internet protocol 4 address.
+     * Returns the default internet protocol 4 address category.
      *
-     * @return the default internet protocol 4 address
+     * @return the default internet protocol 4 address category
      */
-    public String getDefaultIp4Address() {
+    public String getDefaultIp4AddressCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default host name.
+     * Returns the default host name category.
      *
-     * @return the default host name
+     * @return the default host name category
      */
-    public String getDefaultHostName() {
+    public String getDefaultHostNameCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default domain name.
+     * Returns the default domain name category.
      *
-     * @return the default domain name
+     * @return the default domain name category
      */
-    public String getDefaultDomainName() {
+    public String getDefaultDomainNameCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default communication partners count.
+     * Returns the default communication partners count category.
      *
-     * @return the default communication partners count
+     * @return the default communication partners count category
      */
-    public Integer getDefaultCommunicationPartnersCount() {
+    public Integer getDefaultCommunicationPartnersCountCategory() {
 
         return new Integer(0);
     }
 
     /**
-     * Returns the default communication partner.
+     * Returns the default communication partner category.
      *
-     * @return the default communication partner
+     * @return the default communication partner category
      */
-    public String getDefaultCommunicationPartner() {
+    public String getDefaultCommunicationPartnerCategory() {
 
         return null;
     }
 
     /**
-     * Returns the default user.
+     * Returns the default user category.
      *
-     * @return the default user
+     * @return the default user category
      */
-    public String getDefaultUser() {
+    public String getDefaultUserCategory() {
 
         return null;
     }
@@ -346,15 +346,15 @@ public class System extends Block implements
 
         if (c != null) {
 
-            this.defaultController = c.get(System.CONTROLLER, getDefaultController());
-            this.defaultSocketAddress = c.get(System.SOCKET_ADDRESS, getDefaultSocketAddress());
-            this.defaultIp6Address = c.get(System.IP6_ADDRESS, getDefaultIp6Address());
-            this.defaultIp4Address = c.get(System.IP4_ADDRESS, getDefaultIp4Address());
-            this.defaultHostName = c.get(System.HOST_NAME, getDefaultHostName());
-            this.defaultDomainName = c.get(System.DOMAIN_NAME, getDefaultDomainName());
-            this.defaultCommunicationPartnersCount = c.get(System.COMMUNICATION_PARTNERS_COUNT, getDefaultCommunicationPartnersCount());
-            this.defaultCommunicationPartner = c.get(System.COMMUNICATION_PARTNER, getDefaultCommunicationPartner());
-            this.defaultUser = c.get(System.USER, getDefaultUser());
+            setCategory(System.CONTROLLER_CATEGORY, c.get(System.CONTROLLER_CATEGORY, getDefaultControllerCategory()));
+            setCategory(System.SOCKET_ADDRESS_CATEGORY, c.get(System.SOCKET_ADDRESS_CATEGORY, getDefaultSocketAddressCategory()));
+            setCategory(System.IP6_ADDRESS_CATEGORY, c.get(System.IP6_ADDRESS_CATEGORY, getDefaultIp6AddressCategory()));
+            setCategory(System.IP4_ADDRESS_CATEGORY, c.get(System.IP4_ADDRESS_CATEGORY, getDefaultIp4AddressCategory()));
+            setCategory(System.HOST_NAME_CATEGORY, c.get(System.HOST_NAME_CATEGORY, getDefaultHostNameCategory()));
+            setCategory(System.DOMAIN_NAME_CATEGORY, c.get(System.DOMAIN_NAME_CATEGORY, getDefaultDomainNameCategory()));
+            setCategory(System.COMMUNICATION_PARTNERS_COUNT_CATEGORY, c.get(System.COMMUNICATION_PARTNERS_COUNT_CATEGORY, getDefaultCommunicationPartnersCountCategory()));
+            setCategory(System.COMMUNICATION_PARTNER_CATEGORY, c.get(System.COMMUNICATION_PARTNER_CATEGORY, getDefaultCommunicationPartnerCategory()));
+            setCategory(System.USER_CATEGORY, c.get(System.USER_CATEGORY, getDefaultUserCategory()));
 
         } else {
 
@@ -373,15 +373,32 @@ public class System extends Block implements
 
         if (c != null) {
 
-            c.set(System.CONTROLLER, this.defaultController);
-            c.set(System.SOCKET_ADDRESS, this.defaultSocketAddress);
-            c.set(System.IP6_ADDRESS, this.defaultIp6Address);
-            c.set(System.IP4_ADDRESS, this.defaultIp4Address);
-            c.set(System.HOST_NAME, this.defaultHostName);
-            c.set(System.DOMAIN_NAME, this.defaultDomainName);
-            c.set(System.COMMUNICATION_PARTNERS_COUNT, this.defaultCommunicationPartnersCount);
-            c.set(System.COMMUNICATION_PARTNER, this.defaultCommunicationPartner);
-            c.set(System.USER, this.defaultUser);
+            c.set(System.USER_CATEGORY, getCategory(System.USER_CATEGORY));
+            removeCategory(System.USER_CATEGORY);
+
+            c.set(System.COMMUNICATION_PARTNER_CATEGORY, getCategory(System.COMMUNICATION_PARTNER_CATEGORY));
+            removeCategory(System.COMMUNICATION_PARTNER_CATEGORY);
+
+            c.set(System.COMMUNICATION_PARTNERS_COUNT_CATEGORY, getCategory(System.COMMUNICATION_PARTNERS_COUNT_CATEGORY));
+            removeCategory(System.COMMUNICATION_PARTNERS_COUNT_CATEGORY);
+
+            c.set(System.DOMAIN_NAME_CATEGORY, getCategory(System.DOMAIN_NAME_CATEGORY));
+            removeCategory(System.DOMAIN_NAME_CATEGORY);
+
+            c.set(System.HOST_NAME_CATEGORY, getCategory(System.HOST_NAME_CATEGORY));
+            removeCategory(System.HOST_NAME_CATEGORY);
+
+            c.set(System.IP4_ADDRESS_CATEGORY, getCategory(System.IP4_ADDRESS_CATEGORY));
+            removeCategory(System.IP4_ADDRESS_CATEGORY);
+
+            c.set(System.IP6_ADDRESS_CATEGORY, getCategory(System.IP6_ADDRESS_CATEGORY));
+            removeCategory(System.IP6_ADDRESS_CATEGORY);
+
+            c.set(System.SOCKET_ADDRESS_CATEGORY, getCategory(System.SOCKET_ADDRESS_CATEGORY));
+            removeCategory(System.SOCKET_ADDRESS_CATEGORY);
+
+            c.set(System.CONTROLLER_CATEGORY, getCategory(System.CONTROLLER_CATEGORY));
+            removeCategory(System.CONTROLLER_CATEGORY);
 
         } else {
 
@@ -402,13 +419,13 @@ public class System extends Block implements
 
         super.initialize();
 
-        set(System.CONTROLLER, createComponent(this.defaultController));
-        set(System.SOCKET_ADDRESS, createComponent(this.defaultSocketAddress));
-        set(System.IP6_ADDRESS, createComponent(this.defaultIp6Address));
-        set(System.IP4_ADDRESS, createComponent(this.defaultIp4Address));
-        set(System.HOST_NAME, createItem(this.defaultHostName));
-        set(System.DOMAIN_NAME, createItem(this.defaultDomainName));
-        set(System.USER, createComponent(this.defaultUser));
+        set(System.CONTROLLER, createComponent(getCategory(System.CONTROLLER_CATEGORY)));
+        set(System.SOCKET_ADDRESS, createComponent(getCategory(System.SOCKET_ADDRESS_CATEGORY)));
+        set(System.IP6_ADDRESS, createComponent(getCategory(System.IP6_ADDRESS_CATEGORY)));
+        set(System.IP4_ADDRESS, createComponent(getCategory(System.IP4_ADDRESS_CATEGORY)));
+        set(System.HOST_NAME, createItem(getCategory(System.HOST_NAME_CATEGORY)));
+        set(System.DOMAIN_NAME, createItem(getCategory(System.DOMAIN_NAME_CATEGORY)));
+        set(System.USER, createComponent(getCategory(System.USER_CATEGORY)));
 
         //
         // Communication partners.
