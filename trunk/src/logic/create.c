@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.13 $ $Date: 2004-09-12 23:04:40 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2004-09-14 23:37:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -397,7 +397,6 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  */
 void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
-/*??
     // The source name abstraction.
     void* sna = NULL_POINTER;
     int snac = 0;
@@ -467,50 +466,74 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
     int ddc = 0;
     int dds = 0;
 
+    fprintf(stderr, "TEST 0: %i\n", p0);
+
     // Get source name.
     get_compound_element_by_name(p0, p1,
         (void*) &CREATE_DESTROY_PART_NAME_ABSTRACTION,
         (void*) &CREATE_DESTROY_PART_NAME_ABSTRACTION_COUNT,
-        sna, snac, snm, snmc, snd, sndc);
+        (void*) &sna, (void*) &snac, (void*) &snas,
+        (void*) &snm, (void*) &snac, (void*) &snas,
+        (void*) &snd, (void*) &sndc, (void*) &snds);
+
+    fprintf(stderr, "TEST 1: %i\n", snm);
 
     // Get source channel.
     get_compound_element_by_name(p0, p1,
         (void*) &CREATE_DESTROY_PART_CHANNEL_ABSTRACTION,
         (void*) &CREATE_DESTROY_PART_CHANNEL_ABSTRACTION_COUNT,
-        sca, scac, scm, scmc, scd, scdc);
+        (void*) &sca, (void*) &scac, (void*) &scas,
+        (void*) &scm, (void*) &scmc, (void*) &scms,
+        (void*) &scd, (void*) &scdc, (void*) &scds);
+
+    fprintf(stderr, "TEST 2: %i\n", scm);
 
     // Get source abstraction.
     get_compound_element_by_name(p0, p1,
         (void*) &CREATE_DESTROY_PART_ABSTRACTION_ABSTRACTION,
         (void*) &CREATE_DESTROY_PART_ABSTRACTION_ABSTRACTION_COUNT,
-        saa, saac, sam, samc, sad, sadc);
+        (void*) &saa, (void*) &saac, (void*) &saas,
+        (void*) &sam, (void*) &samc, (void*) &sams,
+        (void*) &sad, (void*) &sadc, (void*) &sads);
+
+    fprintf(stderr, "TEST 3: %i\n", sam);
 
     // Get source model.
     get_compound_element_by_name(p0, p1,
         (void*) &CREATE_DESTROY_PART_MODEL_ABSTRACTION,
         (void*) &CREATE_DESTROY_PART_MODEL_ABSTRACTION_COUNT,
-        sma, smac, smm, smmc, smd, smdc);
+        (void*) &sma, (void*) &smac, (void*) &smas,
+        (void*) &smm, (void*) &smmc, (void*) &smms,
+        (void*) &smd, (void*) &smdc, (void*) &smds);
+
+    fprintf(stderr, "TEST 4: %i\n", smm);
 
     // Create destination name.
     create_model((void*) &dn, (void*) &dnc, (void*) &dns,
-        (void*) &sn, (void*) &snc,
-        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
+        (void*) &snm, (void*) &snmc,
+        (void*) &sna, (void*) &snac,
         (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+
+    fprintf(stderr, "TEST 5: %i\n", dn);
 
     // CAUTION! A (transient) destination channel is not created,
     // since that is only needed temporarily for model loading.
 
     // Create destination abstraction.
     create_model((void*) &da, (void*) &dac, (void*) &das,
-        (void*) &sa, (void*) &sac,
-        (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT,
+        (void*) &sam, (void*) &samc,
+        (void*) &saa, (void*) &saac,
         (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
+
+    fprintf(stderr, "TEST 6: %i\n", da);
 
     // Create destination model.
     create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-        (void*) &sm, (void*) &smc,
-        (void*) &sa, (void*) &sac,
-        (void*) &sc, (void*) &scc);
+        (void*) &smm, (void*) &smmc,
+        (void*) &sam, (void*) &samc,
+        (void*) &scm, (void*) &scmc);
+
+    fprintf(stderr, "TEST 7: %i\n", dm);
 
     // Add part to whole.
     set_compound_element_by_name(p2, p3, p4,
@@ -518,7 +541,8 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
         (void*) &da, (void*) &dac, (void*) &das,
         (void*) &dm, (void*) &dmc, (void*) &dms,
         (void*) &dd, (void*) &ddc, (void*) &dds);
-*/
+
+    fprintf(stderr, "TEST 8: %i\n", p2);
 }
 
 /* CREATE_SOURCE */
