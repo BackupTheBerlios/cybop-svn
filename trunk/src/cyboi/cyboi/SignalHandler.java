@@ -33,7 +33,7 @@ package cyboi;
  * - send
  * - reset
  *
- * @version $Revision: 1.24 $ $Date: 2003-09-10 14:44:49 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2003-09-10 19:31:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -434,19 +434,7 @@ class SignalHandler {
         
         if (i != null) {
 
-            // Determine the action of the given screen item.
-            java.lang.Object action = MapHandler.get_map_element(i.items, "mouse_clicked_action");
-
-            // Only set this screen item's action if it exists.
-            // Otherwise, the previously set action of the parent screen item
-            // remains untouched and will be returned.
-            if (action != null) {
-                
-                a = action;
-            }
-
-            // Determine the action of any child screen items and overwrite
-            // the action of the parent screen item (set above) with it.
+            // Determine the action of the clicked child screen item.
             int count = 0;
             int size = MapHandler.get_map_size(i.items);
             java.lang.Object child = null;
@@ -459,59 +447,82 @@ class SignalHandler {
             int height = -1;
             int depth = -1;
             boolean contains = false;
+            java.lang.Object action = null;
             
             while (count < size) {
 
                 // Determine child, its position and expansion within the given screen item.
                 child = MapHandler.get_map_element(i.items, count);
                 position = (Vector) MapHandler.get_map_element(i.positions, count);
-                expansion = (Vector) ItemHandler.get_item_element(child, "expansion");
                 
-                if (position != null) {
+                if (child instanceof Item) {
                         
-                    // Translate the given coordinates according to the child's position.
-                    x = p1 - position.x;
-                    y = p2 - position.y;
-                    z = p3 - position.z;
-
-                    if (expansion != null) {
-
-                        // Determine child's expansion.
-                        width = expansion.x;
-                        height = expansion.y;
-                        depth = expansion.z;
-        
-                        // Check if the given coordinates are in the child's screen area.
-                        // The "if" conditions had to be inserted because in classical
-                        // graphical user interfaces, the depth is normally 0 and
-                        // such the boolean comparison would deliver "false".
-                        // Using the conditions, the coordinates that are set to "0"
-                        // are not considered for comparison.
-                        contains = (x >= 0);
-                        contains = contains && (x < width);
-                        contains = contains && (y >= 0);
-                        contains = contains && (y < height);
-                        contains = contains && (z >= 0);
-                        contains = contains && (z < depth);
-        
-                        if (contains == true) {
-        
-                            // The given coordinates are in the child's screen area.
-                            // Therefore, use the child's action.
-                            a = SignalHandler.mouse_clicked_action(child, x, y, z);
+                    expansion = (Vector) ItemHandler.get_item_element(child, "expansion");
+                    
+                    if (position != null) {
+                            
+                        // Translate the given coordinates according to the child's position.
+                        x = p1 - position.x;
+                        y = p2 - position.y;
+                        z = p3 - position.z;
+    
+                        if (expansion != null) {
+    
+                            // Determine child's expansion.
+                            width = expansion.x;
+                            height = expansion.y;
+                            depth = expansion.z;
+            
+                            // Check if the given coordinates are in the child's screen area.
+                            // The "if" conditions had to be inserted because in classical
+                            // graphical user interfaces, the depth is normally 0 and
+                            // such the boolean comparison would deliver "false".
+                            // Using the conditions, the coordinates that are set to "0"
+                            // are not considered for comparison.
+                            contains = (x >= 0);
+                            contains = contains && (x < width);
+                            contains = contains && (y >= 0);
+                            contains = contains && (y < height);
+                            contains = contains && (z >= 0);
+                            contains = contains && (z < depth);
+            
+                            if (contains == true) {
+            
+                                // The given coordinates are in the child's screen area.
+                                // Therefore, use the child's action.
+                                action = SignalHandler.mouse_clicked_action(child, x, y, z);
+                    
+                                break;
+                            }
+    
+                        } else {
+                            
+                            LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not handle mouse clicked action. An expansion is null.");
                         }
-
+    
                     } else {
                         
-                        LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not handle mouse clicked action. An expansion is null.");
+                        LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not handle mouse clicked action. A position is null.");
                     }
 
                 } else {
                     
-                    LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not handle mouse clicked action. A position is null.");
+                    LogHandler.log(LogHandler.INFO_LOG_LEVEL, "Could not handle mouse clicked action. A child is not of type Item.");
                 }
                 
                 count++;
+            }
+            
+            // Only use child screen item's action if it exists.
+            // Otherwise, use the parent screen item's action.
+            if (action != null) {
+                
+                a = action;
+
+            } else {
+                
+                // Determine the action of the given screen item.
+                a = MapHandler.get_map_element(i.items, "mouse_clicked_action");
             }
     
         } else {
