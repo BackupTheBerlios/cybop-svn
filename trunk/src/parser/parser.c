@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.14 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2005-03-02 07:23:14 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -91,6 +91,15 @@ void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
         }
     }
 
+    if (r != 1) {
+
+        compare_arrays(p5, p6, (void*) KNOWLEDGE_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            parse_string(p0, p1, p2, p3, p4);
+        }
+    }
     if (r != 1) {
 
         compare_arrays(p5, p6, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
