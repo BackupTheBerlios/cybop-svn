@@ -59,7 +59,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.9 $ $Date: 2004-05-27 22:15:49 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-05-28 11:44:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -219,114 +219,99 @@ static const int IMAGINARY_INDEX = 1;
 //
 
 /** The operation count. */
-static const int OPERATION_COUNT = 3;
-
-/** The parameters count index. */
-static const int PARAMETERS_COUNT_INDEX = 0;
+static const int OPERATION_COUNT = 2;
 
 /** The parameters index. */
-static const int PARAMETERS_INDEX = 1;
+static const int PARAMETERS_INDEX = 0;
 
 /** The parameters counts index. */
-static const int PARAMETERS_COUNTS_INDEX = 2;
+static const int PARAMETERS_COUNTS_INDEX = 1;
 
 //
 // Model.
 //
 
 /** The model count. */
-static const int MODEL_COUNT = 22;
-
-/** The parts size index. */
-static const int PARTS_SIZE_INDEX = 0;
-
-/** The parts count index. */
-static const int PARTS_COUNT_INDEX = 1;
+static const int MODEL_COUNT = 20;
 
 /** The names index. */
-static const int NAMES_INDEX = 2;
+static const int NAMES_INDEX = 0;
 
 /** The names counts index. */
-static const int NAMES_COUNTS_INDEX = 3;
+static const int NAMES_COUNTS_INDEX = 1;
 
 /** The part abstractions index. */
-static const int PART_ABSTRACTIONS_INDEX = 4;
+static const int PART_ABSTRACTIONS_INDEX = 2;
 
 /** The part abstractions counts index. */
-static const int PART_ABSTRACTIONS_COUNTS_INDEX = 5;
+static const int PART_ABSTRACTIONS_COUNTS_INDEX = 3;
 
 /** The part locations index. */
-static const int PART_LOCATIONS_INDEX = 6;
+static const int PART_LOCATIONS_INDEX = 4;
 
 /** The part locations counts index. */
-static const int PART_LOCATIONS_COUNTS_INDEX = 7;
+static const int PART_LOCATIONS_COUNTS_INDEX = 5;
 
 /** The part models index. */
-static const int PART_MODELS_INDEX = 8;
+static const int PART_MODELS_INDEX = 6;
 
 /** The part models counts index. */
-static const int PART_MODELS_COUNTS_INDEX = 9;
+static const int PART_MODELS_COUNTS_INDEX = 7;
 
 /** The position abstractions index. */
-static const int POSITION_ABSTRACTIONS_INDEX = 10;
+static const int POSITION_ABSTRACTIONS_INDEX = 8;
 
 /** The position abstractions counts index. */
-static const int POSITION_ABSTRACTIONS_COUNTS_INDEX = 11;
+static const int POSITION_ABSTRACTIONS_COUNTS_INDEX = 9;
 
 /** The position locations index. */
-static const int POSITION_LOCATIONS_INDEX = 12;
+static const int POSITION_LOCATIONS_INDEX = 10;
 
 /** The position locations counts index. */
-static const int POSITION_LOCATIONS_COUNTS_INDEX = 13;
+static const int POSITION_LOCATIONS_COUNTS_INDEX = 11;
 
 /** The position models index. */
-static const int POSITION_MODELS_INDEX = 14;
+static const int POSITION_MODELS_INDEX = 12;
 
 /** The position models counts index. */
-static const int POSITION_MODELS_COUNTS_INDEX = 15;
+static const int POSITION_MODELS_COUNTS_INDEX = 13;
 
 /** The constraint abstractions index. */
-static const int CONSTRAINT_ABSTRACTIONS_INDEX = 16;
+static const int CONSTRAINT_ABSTRACTIONS_INDEX = 14;
 
 /** The constraint abstractions counts index. */
-static const int CONSTRAINT_ABSTRACTIONS_COUNTS_INDEX = 17;
+static const int CONSTRAINT_ABSTRACTIONS_COUNTS_INDEX = 15;
 
 /** The constraint locations index. */
-static const int CONSTRAINT_LOCATIONS_INDEX = 18;
+static const int CONSTRAINT_LOCATIONS_INDEX = 16;
 
 /** The constraint locations counts index. */
-static const int CONSTRAINT_LOCATIONS_COUNTS_INDEX = 19;
+static const int CONSTRAINT_LOCATIONS_COUNTS_INDEX = 17;
 
 /** The constraint models index. */
-static const int CONSTRAINT_MODELS_INDEX = 20;
+static const int CONSTRAINT_MODELS_INDEX = 18;
 
 /** The constraint models counts index. */
-static const int CONSTRAINT_MODELS_COUNTS_INDEX = 21;
+static const int CONSTRAINT_MODELS_COUNTS_INDEX = 19;
 
 //
 // Signal memory.
 //
 
 /** The signal memory count. */
-static const int SIGNAL_MEMORY_COUNT = 6;
-
-/** The signals size index. */
-static const int SIGNALS_SIZE_INDEX = 0;
-
-/** The signals count index. */
-static const int SIGNALS_COUNT_INDEX = 1;
+static const int SIGNAL_MEMORY_COUNT = 4;
 
 /** The signals index. */
-static const int SIGNALS_INDEX = 2;
+static const int SIGNALS_INDEX = 0;
 
 /** The priorities index. */
-static const int PRIORITIES_INDEX = 3;
+static const int PRIORITIES_INDEX = 1;
 
 /** The abstractions index. */
-static const int ABSTRACTIONS_INDEX = 4;
+static const int ABSTRACTIONS_INDEX = 2;
 
 /** The abstractions counts index. */
-static const int ABSTRACTIONS_COUNTS_INDEX = 5;
+static const int ABSTRACTIONS_COUNTS_INDEX = 3;
 
 //
 // Signal priorities.

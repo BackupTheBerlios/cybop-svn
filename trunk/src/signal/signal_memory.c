@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.18 $ $Date: 2004-05-27 22:15:50 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2004-05-28 11:44:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,109 +59,137 @@
  * Creates the signal memory.
  *
  * @param p0 the signal memory
- * @param p1 the signal memory size
- * @param p2 the signal memory count
+ * @param p1 the signals count
+ * @param p2 the signals size
  */
 void create_signal_memory(void* p0, void* p1, void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_SIGNAL_MEMORY_MESSAGE, (void*) &CREATE_SIGNAL_MEMORY_MESSAGE_COUNT);
+    //?? USE p1 and p2 instead of casting to s and c!!
 
-    // Create signal memory.
-    create_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);
+    if (p2 != NULL_POINTER) {
 
-    // Initialize elements.
-    int s = 0;
-    int c = 0;
-    void* sig = NULL_POINTER;
-    void* p = NULL_POINTER;
-    void* a = NULL_POINTER;
-    void* as = NULL_POINTER;
+        int* s = (int*) p2;
 
-    // Create elements.
-    create_array((void*) &sig, (void*) &POINTER_ARRAY, (void*) &s);
-    create_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &s);
-    create_array((void*) &a, (void*) &POINTER_ARRAY, (void*) &s);
-    create_array((void*) &as, (void*) &INTEGER_ARRAY, (void*) &s);
+        if (p1 != NULL_POINTER) {
 
-    // Set elements in ascending order.
-    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_SIZE_INDEX, (void*) &s);
-    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_COUNT_INDEX, (void*) &c);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &sig);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
-    set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &as);
+            int* c = (int*) p1;
+
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_SIGNAL_MEMORY_MESSAGE, (void*) &CREATE_SIGNAL_MEMORY_MESSAGE_COUNT);
+
+            // Create signal memory.
+            create_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);
+
+            // Initialize elements.
+            void* sig = NULL_POINTER;
+            void* p = NULL_POINTER;
+            void* a = NULL_POINTER;
+            void* as = NULL_POINTER;
+
+            // Create elements.
+            create_array((void*) &sig, (void*) &POINTER_ARRAY, (void*) &s);
+            create_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &s);
+            create_array((void*) &a, (void*) &POINTER_ARRAY, (void*) &s);
+            create_array((void*) &as, (void*) &INTEGER_ARRAY, (void*) &s);
+
+            // Set elements in ascending order.
+            set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &sig);
+            set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
+            set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
+            set_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &as);
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_SIGNAL_MEMORY_THE_SIGNALS_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_SIGNAL_MEMORY_THE_SIGNALS_COUNT_IS_NULL_MESSAGE_COUNT);
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_SIGNAL_MEMORY_THE_SIGNALS_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_SIGNAL_MEMORY_THE_SIGNALS_SIZE_IS_NULL_MESSAGE_COUNT);
+    }
 }
 
 /**
  * Destroys the signal memory.
  *
  * @param p0 the signal memory
- * @param p1 the signal memory size
- * @param p2 the signal memory count
+ * @param p1 the signals count
+ * @param p2 the signals size
  */
 void destroy_signal_memory(void* p0, void* p1, void* p2) {
 
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_SIGNAL_MEMORY_MESSAGE, (void*) &DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT);
+    if (p2 != NULL_POINTER) {
 
-    // Initialize elements.
-    int s = 0;
-    int c = 0;
-    void* sig = NULL_POINTER;
-    void* p = NULL_POINTER;
-    void* a = NULL_POINTER;
-    void* as = NULL_POINTER;
+        int* s = (int*) p2;
+
+        if (p1 != NULL_POINTER) {
+
+            int* c = (int*) p1;
+
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_SIGNAL_MEMORY_MESSAGE, (void*) &DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT);
+
+            // Initialize elements.
+            void* sig = NULL_POINTER;
+            void* p = NULL_POINTER;
+            void* a = NULL_POINTER;
+            void* as = NULL_POINTER;
 
 /*??
-    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy all signals left in signal memory.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy all signals left in signal memory.");
 
-    int i = 0;
-    get_array_count(m->signals, (void*) &i);
-    i--;
-    void* s = NULL_POINTER;
-    void* a = NULL_POINTER;
+            int i = 0;
+            get_array_count(m->signals, (void*) &i);
+            i--;
+            void* s = NULL_POINTER;
+            void* a = NULL_POINTER;
 
-    while (i >= 0) {
+            while (i >= 0) {
 
-        s = (void*) get_signal(p0, (void*) &i);
-        a = (void*) get_abstraction(p0, (void*) &i);
-        // Priority is not needed to destroy the signal.
+                s = (void*) get_signal(p0, (void*) &i);
+                a = (void*) get_abstraction(p0, (void*) &i);
+                // Priority is not needed to destroy the signal.
 
-        // Abstraction and priority are removed internally,
-        // together with the signal.
-        remove_signal(p0, (void*) &i);
+                // Abstraction and priority are removed internally,
+                // together with the signal.
+                remove_signal(p0, (void*) &i);
 
-        // Destroy signal. Do not destroy the signal's abstraction and
-        // priority here; they are static within CYBOI.
-        destroy_model(s, NULL, NULL, (void*) a);
+                // Destroy signal. Do not destroy the signal's abstraction and
+                // priority here; they are static within CYBOI.
+                destroy_model(s, NULL, NULL, (void*) a);
 
-        i--;
-    }
+                i--;
+            }
 */
 
-    // Get elements.
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_SIZE_INDEX, (void*) &s);
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_COUNT_INDEX, (void*) &c);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &sig);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &as);
+            // Get elements.
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNALS_INDEX, (void*) &sig);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PRIORITIES_INDEX, (void*) &p);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &a);
+            get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &as);
 
-    // Remove elements in descending order.
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &ABSTRACTIONS_COUNTS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &ABSTRACTIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &PRIORITIES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_COUNT_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_SIZE_INDEX);
+            // Remove elements in descending order.
+            remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &ABSTRACTIONS_COUNTS_INDEX);
+            remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &ABSTRACTIONS_INDEX);
+            remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &PRIORITIES_INDEX);
+            remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_INDEX);
 
-    // Destroy elements.
-    destroy_array((void*) &sig, (void*) &POINTER_ARRAY, (void*) &s);
-    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &s);
-    destroy_array((void*) &a, (void*) &POINTER_ARRAY, (void*) &s);
-    destroy_array((void*) &as, (void*) &INTEGER_ARRAY, (void*) &s);
+            // Destroy elements.
+            destroy_array((void*) &sig, (void*) &POINTER_ARRAY, (void*) &s);
+            destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &s);
+            destroy_array((void*) &a, (void*) &POINTER_ARRAY, (void*) &s);
+            destroy_array((void*) &as, (void*) &INTEGER_ARRAY, (void*) &s);
 
-    // Destroy signal memory.
-    destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);
+            // Destroy signal memory.
+            destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_SIGNAL_MEMORY_THE_SIGNALS_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_SIGNAL_MEMORY_THE_SIGNALS_COUNT_IS_NULL_MESSAGE_COUNT);
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_SIGNAL_MEMORY_THE_SIGNALS_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_SIGNAL_MEMORY_THE_SIGNALS_SIZE_IS_NULL_MESSAGE_COUNT);
+    }
 }
 
 //
