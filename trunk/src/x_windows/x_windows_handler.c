@@ -43,7 +43,7 @@
  *
  * It controls the input and output of x windows.
  *
- * @version $Revision: 1.3 $ $Date: 2003-12-19 12:44:54 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-01-05 15:44:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,6 +56,7 @@
  */
 void send_x_windows_output(void* p0, void* p1, void* p2) {
 
+/*??
     struct x_windows* x = (struct x_windows*) p2;
     
     if (x != (void*) 0) {
@@ -221,6 +222,7 @@ void send_x_windows_output(void* p0, void* p1, void* p2) {
         
         puts("ERROR: Could not handle send x windows output. The x windows is null.");
     }
+*/
 }
 
 /**

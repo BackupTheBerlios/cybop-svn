@@ -32,7 +32,7 @@
  *
  * It can read and write CYBOL source files.
  *
- * @version $Revision: 1.5 $ $Date: 2004-01-05 01:07:52 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2004-01-05 15:44:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -515,6 +515,7 @@ int read_cybol_tag(void* p0, void* p1) {
  */
 void read_cybol_file(void* p0, void* p1) {
     
+/*??
     FILE* f = (FILE*) p0;
     //?? struct map* s = (struct map*) p1;
     char* s = (char*) malloc(2000);
@@ -574,6 +575,7 @@ void read_cybol_file(void* p0, void* p1) {
                         cout << s << "Childsektion:  " << childmode<< "\n";
                     }
 */
+/*??
                 }
             
             } else if ((string_open == 0) && (read_cybol_attribute(s) > 0)) {
@@ -611,6 +613,7 @@ void read_cybol_file(void* p0, void* p1) {
     }
     
     free(s);
+*/
 }
 
 //
@@ -627,9 +630,14 @@ void read_cybol_file(void* p0, void* p1) {
  */
 void initialize_source_model(void* p0, void* p1) {
 
+/*??
     log_message((void*) &INFO_LOG_LEVEL, "Initialize model.");
 
-    FILE* f = fopen(PATH + p1 + CYBOL, "r");
+    char* n = "";
+    n = strcat(n, CYBOL_PATH);
+    n = strcat(n, p1);
+    n = strcat(n, CYBOL_SUFFIX);
+    FILE* f = fopen(n, "r");
 
     if (f != (void*) 0) {
     
@@ -641,6 +649,7 @@ void initialize_source_model(void* p0, void* p1) {
         
         log_message((void*) &ERROR_LOG_LEVEL, "Could not initialize source model. The file is null.");
     }
+*/
 }
 
 /**
