@@ -31,7 +31,7 @@
  * It can have just one of the two values:
  * TRUE or FALSE which correspond to one and zero, that is 1 or 0.
  *
- * @version $Revision: 1.1 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-10-20 14:42:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct boolean {

@@ -26,9 +26,14 @@
 #define STATICS_HANDLER_SOURCE
 
 #include <string.h>
+#include "boolean.c"
 #include "complex.c"
+#include "fraction.c"
+#include "integer.c"
 #include "log_handler.c"
+#include "model.c"
 #include "statics.c"
+#include "string.c"
 #include "time.c"
 #include "vector.c"
 #include "xml_handler.c"
@@ -37,21 +42,21 @@
  * This is the statics handler.
  *
  * It implements static operators.
- * An instance is retrieved by instantiating a model.
+ * A model is retrieved by instantiating a model source.
  *
- * @version $Revision: 1.11 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-10-20 14:42:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 //
-// Complex statics instance.
+// Complex statics model.
 //
 
 /**
  * Initializes the child.
  *
- * @param p0 the complex statics instance
- * @param p1 the child model attributes
+ * @param p0 the complex statics model
+ * @param p1 the child model source attributes
  */
 static void initialize_child(void* p0, void* p1) {
 
@@ -88,8 +93,8 @@ static void initialize_child(void* p0, void* p1) {
 /**
  * Finalizes the child.
  *
- * @param p0 the complex statics instance
- * @param p1 the child model attributes
+ * @param p0 the complex statics model
+ * @param p1 the child model source attributes
  */
 static void finalize_child(void* p0, void* p1) {
 }
@@ -97,8 +102,8 @@ static void finalize_child(void* p0, void* p1) {
 /**
  * Initializes the children.
  *
- * @param p0 the complex statics instance
- * @param p1 the children models
+ * @param p0 the complex statics model
+ * @param p1 the children models sources
  */
 static void initialize_children(void* p0, void* p1) {
 
@@ -130,8 +135,8 @@ static void initialize_children(void* p0, void* p1) {
 /**
  * Finalizes the children.
  *
- * @param p0 the complex statics instance
- * @param p1 the children models
+ * @param p0 the complex statics model
+ * @param p1 the children models sources
  */
 static void finalize_children(void* p0, void* p1) {
 }
@@ -139,8 +144,8 @@ static void finalize_children(void* p0, void* p1) {
 /**
  * Initializes the complex statics.
  *
- * @param p0 the complex statics instance
- * @param p1 the model
+ * @param p0 the complex statics model
+ * @param p1 the model source
  */
 static void initialize_complex_statics(void* p0, void* p1) {
 
@@ -173,8 +178,8 @@ static void initialize_complex_statics(void* p0, void* p1) {
 /**
  * Finalizes the complex statics.
  *
- * @param p0 the complex statics instance
- * @param p1 the model
+ * @param p0 the complex statics model
+ * @param p1 the model source
  */
 static void finalize_complex_statics(void* p0, void* p1) {
 
@@ -205,25 +210,25 @@ static void finalize_complex_statics(void* p0, void* p1) {
 }
 
 /**
- * Creates a complex statics instance.
+ * Creates a complex statics model.
  *
- * @param p0 the model
- * @return the complex statics instance
+ * @param p0 the model source
+ * @return the complex statics model
  */
-static void* create_complex_statics_instance(void* p0) {
+static void* create_complex_statics_model(void* p0) {
 
     void* i = 0;
     
     if (p0 != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Create complex statics instance.");
-
-        i = malloc(sizeof(struct complex));
+        log((void*) &INFO_LOG_LEVEL, "Create complex statics model.");
 
         if (strcmp(p0, "") != 0) {
             
+            i = malloc(sizeof(struct model));
+
             initialize_complex_statics(i, p0);
-            initialize_instance(i, p0);
+            initialize_model(i, p0);
         }
     }
     
@@ -231,20 +236,20 @@ static void* create_complex_statics_instance(void* p0) {
 }
 
 /**
- * Destroys the complex statics instance.
+ * Destroys the complex statics model.
  *
- * @param p0 the complex statics instance
- * @param p1 the model
+ * @param p0 the complex statics model
+ * @param p1 the model source
  */
-static void destroy_complex_statics_instance(void* p0, void* p1) {
+static void destroy_complex_statics_model(void* p0, void* p1) {
 
     if (p0 != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Destroy complex statics instance.");
+        log((void*) &INFO_LOG_LEVEL, "Destroy complex statics model.");
 
         if (strcmp(p1, "") != 0) {
             
-            finalize_instance(p0, p1);
+            finalize_model(p0, p1);
             finalize_complex_statics(p0, p1);
         }
 
@@ -253,30 +258,38 @@ static void destroy_complex_statics_instance(void* p0, void* p1) {
 }
 
 //
-// Boolean instance.
+// Boolean model.
 //
 
 /**
- * Creates a boolean instance.
+ * Creates a boolean model.
  *
- * @param p0 the model
- * @return the boolean instance
+ * @param p0 the model source
+ * @return the boolean model
  */
-static int create_boolean_instance(void* p0) {
+static void* create_boolean_model(void* p0) {
 
-    int i = 0;
+    void* i = 0;
     
     if (p0 != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Create boolean instance.");
+        log((void*) &INFO_LOG_LEVEL, "Create boolean model.");
 
-        if (strcmp(p0, "true")) {
+        if (strcmp(p0, "") != 0) {
             
-            i = 1;
-            
-        } else if (strcmp(p0, "false")) {
-            
-            i = 0;
+            i = malloc(sizeof(struct boolean));
+
+            initialize_boolean(i, p0);
+            initialize_boolean_model(i, p0);
+    
+            if (strcmp(p0, "true")) {
+                
+                i = 1;
+                
+            } else if (strcmp(p0, "false")) {
+                
+                i = 0;
+            }
         }
     }
     
@@ -284,17 +297,25 @@ static int create_boolean_instance(void* p0) {
 }
 
 /**
- * Destroys the boolean instance.
+ * Destroys the boolean model.
  *
- * @param p0 the boolean instance
- * @param p1 the model
+ * @param p0 the boolean model
+ * @param p1 the model source
  */
-static void destroy_boolean_instance(void* p0, void* p1) {
+static void destroy_boolean_model(void* p0, void* p1) {
 
     if (p0 != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Destroy boolean instance.");
+        log((void*) &INFO_LOG_LEVEL, "Destroy boolean model.");
 
+        if (strcmp(p1, "") != 0) {
+            
+            finalize_boolean_model(p0, p1);
+            finalize_boolean(p0, p1);
+        }
+
+        free(p0);
+        
 /*??
         if (*p0 != 0) {
             
@@ -309,113 +330,148 @@ static void destroy_boolean_instance(void* p0, void* p1) {
 }
 
 //
-// Integer instance.
+// Integer model.
 //
 
 /**
- * Creates an integer instance.
+ * Creates an integer model.
  *
- * @param p0 the model
- * @return the integer instance
+ * @param p0 the model source
+ * @return the integer model
  */
-static int create_integer_instance(void* p0) {
-
-    int i = 0;
-    
-    if (p0 != 0) {
-        
-        log((void*) &INFO_LOG_LEVEL, "Create integer instance.");
-        
-        if (strcmp(p0, "") != 0) {
-            
-//??            i = valueOf(p0);
-        }
-    }
-    
-    return i;
-}
-
-/**
- * Destroys the integer instance.
- *
- * @param p0 the integer instance
- * @param p1 the model
- */
-static void destroy_integer_instance(void* p0, void* p1) {
-
-    if (p0 != 0) {
-        
-        log((void*) &INFO_LOG_LEVEL, "Destroy integer instance.");
-
-//??        make_string(p0, p1);
-    }
-}
-
-//
-// Float instance.
-//
-
-/**
- * Creates a float instance.
- *
- * @param p0 the model
- * @return the float instance
- */
-static double create_float_instance(void* p0) {
-
-    double i = 0.0;
-    
-    if (p0 != 0) {
-        
-        log((void*) &INFO_LOG_LEVEL, "Create float instance.");
-
-        if (strcmp(p0, "") != 0) {
-            
-//??            i = valueOf(p1);
-        }
-    }
-    
-    return i;
-}
-
-/**
- * Destroys the float instance.
- *
- * @param p0 the float instance
- * @param p1 the model
- */
-static void destroy_float_instance(void* p0, void* p1) {
-
-    if (p0 != 0) {
-        
-        log((void*) &INFO_LOG_LEVEL, "Destroy float instance.");
-
-//??        make_string(p0, p1);
-    }
-}
-
-//
-// Vector instance.
-//
-
-/**
- * Creates a vector instance.
- *
- * @param p0 the model
- * @return the vector instance
- */
-static void* create_vector_instance(void* p0) {
+static void* create_integer_model(void* p0) {
 
     void* i = 0;
     
     if (p0 != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Create vector instance.");
+        log((void*) &INFO_LOG_LEVEL, "Create integer model.");
+        
+        if (strcmp(p0, "") != 0) {
+            
+            i = malloc(sizeof(struct integer));
+
+            initialize_integer(i, p0);
+            initialize_integer_model(i, p0);
+    
+            if (strcmp(p0, "") != 0) {
+                
+    //??            i = valueOf(p0);
+            }
+        }
+    }
+    
+    return i;
+}
+
+/**
+ * Destroys the integer model.
+ *
+ * @param p0 the integer model
+ * @param p1 the model source
+ */
+static void destroy_integer_model(void* p0, void* p1) {
+
+    if (p0 != 0) {
+        
+        log((void*) &INFO_LOG_LEVEL, "Destroy integer model.");
+
+        if (strcmp(p1, "") != 0) {
+            
+            finalize_integer_model(p0, p1);
+            finalize_integer(p0, p1);
+        }
+
+        free(p0);
+        
+//??        make_string(p0, p1);
+    }
+}
+
+//
+// Fraction model.
+//
+
+/**
+ * Creates a fraction model.
+ *
+ * @param p0 the model source
+ * @return the fraction model
+ */
+static void* create_fraction_model(void* p0) {
+
+    void* i = 0;
+    
+    if (p0 != 0) {
+        
+        log((void*) &INFO_LOG_LEVEL, "Create fraction model.");
+
+        if (strcmp(p0, "") != 0) {
+            
+            i = malloc(sizeof(struct fraction));
+
+            initialize_fraction(i, p0);
+            initialize_fraction_model(i, p0);
+    
+            if (strcmp(p0, "") != 0) {
+                
+    //??            i = valueOf(p1);
+            }
+        }
+    }
+    
+    return i;
+}
+
+/**
+ * Destroys the fraction model.
+ *
+ * @param p0 the fraction model
+ * @param p1 the model source
+ */
+static void destroy_fraction_model(void* p0, void* p1) {
+
+    if (p0 != 0) {
+        
+        log((void*) &INFO_LOG_LEVEL, "Destroy fraction model.");
+
+        if (strcmp(p1, "") != 0) {
+            
+            finalize_fraction_model(p0, p1);
+            finalize_fraction(p0, p1);
+        }
+
+        free(p0);
+        
+//??        make_string(p0, p1);
+    }
+}
+
+//
+// Vector model.
+//
+
+/**
+ * Creates a vector model.
+ *
+ * @param p0 the model source
+ * @return the vector model
+ */
+static void* create_vector_model(void* p0) {
+
+    void* i = 0;
+    
+    if (p0 != 0) {
+        
+        log((void*) &INFO_LOG_LEVEL, "Create vector model.");
 
         if (strcmp(p0, "") != 0) {
             
             i = malloc(sizeof(struct vector));
 
+            initialize_vector(i, p0);
+            initialize_vector_model(i, p0);
+    
 /*??
             int i1 = s.indexOf(",");
             
@@ -436,12 +492,12 @@ static void* create_vector_instance(void* p0) {
 
                 } else {
                 
-                    log((void*) &ERROR_LOG_LEVEL, "Could not create vector instance. The vector does not contain a z coordinate.");
+                    log((void*) &ERROR_LOG_LEVEL, "Could not create vector model. The vector does not contain a z coordinate.");
                 }
                 
             } else {
             
-                log((void*) &ERROR_LOG_LEVEL, "Could not create vector instance. The vector does not contain an y coordinate.");
+                log((void*) &ERROR_LOG_LEVEL, "Could not create vector model. The vector does not contain an y coordinate.");
             }
 */
         }
@@ -451,45 +507,54 @@ static void* create_vector_instance(void* p0) {
 }
 
 /**
- * Destroys the vector instance.
+ * Destroys the vector model.
  *
- * @param p0 the vector instance
- * @param p1 the model
+ * @param p0 the vector model
+ * @param p1 the model source
  */
-static void destroy_vector_instance(void* p0, void* p1) {
+static void destroy_vector_model(void* p0, void* p1) {
 
     if (p0 != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Destroy vector instance.");
+        log((void*) &INFO_LOG_LEVEL, "Destroy vector model.");
 
-//??        make_string(p0, p1);
-        
+        if (strcmp(p1, "") != 0) {
+            
+            finalize_vector_model(p0, p1);
+            finalize_vector(p0, p1);
+        }
+
         free(p0);
+        
+//??        make_string(p0, p1);
     }
 }
 
 //
-// String instance.
+// String model.
 //
 
 /**
- * Creates a string instance.
+ * Creates a string model.
  *
- * @param p0 the model
- * @return the string instance
+ * @param p0 the model source
+ * @return the string model
  */
-static void* create_string_instance(void* p0) {
+static void* create_string_model(void* p0) {
 
     void* i = 0;
     
     if (p0 != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Create string instance.");
+        log((void*) &INFO_LOG_LEVEL, "Create string model.");
         
         if (strcmp(p0, "") != 0) {
             
-            i = malloc(0);
-            
+            i = malloc(sizeof(struct string));
+
+            initialize_string(i, p0);
+            initialize_string_model(i, p0);
+    
             strcpy(i, p0);
         }
     }
@@ -498,46 +563,53 @@ static void* create_string_instance(void* p0) {
 }
 
 /**
- * Destroys the string instance.
+ * Destroys the string model.
  *
- * @param p0 the string instance
- * @param p1 the model
+ * @param p0 the string model
+ * @param p1 the model source
  */
-static void destroy_string_instance(void* p0, void* p1) {
+static void destroy_string_model(void* p0, void* p1) {
 
     if (p0 != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Destroy string instance.");
+        log((void*) &INFO_LOG_LEVEL, "Destroy string model.");
 
-//??        strcpy(p1, p0);
-        
+        if (strcmp(p1, "") != 0) {
+            
+            finalize_string_model(p0, p1);
+            finalize_string(p0, p1);
+        }
+
         free(p0);
+        
+//??        strcpy(p1, p0);
     }
 }
 
 //
-// Time instance.
+// Time model.
 //
 
 /**
- * Creates a time instance.
+ * Creates a time model.
  *
- * @param p0 the model
- * @return the time instance
+ * @param p0 the model source
+ * @return the time model
  */
-static void* create_time_instance(void* p0) {
+static void* create_time_model(void* p0) {
 
     void* i = 0;
     
     if (p0 != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Create time instance.");
+        log((void*) &INFO_LOG_LEVEL, "Create time model.");
 
         if (strcmp(p0, "") != 0) {
 
             i = malloc(sizeof(struct time));
 
-//??            Copy contents of time struct here!
+            initialize_time(i, p0);
+            initialize_time_model(i, p0);
         }
     }
     
@@ -545,112 +617,118 @@ static void* create_time_instance(void* p0) {
 }
 
 /**
- * Destroys the time instance.
+ * Destroys the time model.
  *
- * @param p0 the time instance
- * @param p1 the model
+ * @param p0 the time model
+ * @param p1 the model source
  */
-static void destroy_time_instance(void* p0, void* p1) {
+static void destroy_time_model(void* p0, void* p1) {
 
     if (p0 != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Destroy time instance.");
+        log((void*) &INFO_LOG_LEVEL, "Destroy time model.");
 
-//??        make_string(p0, p1);
-        
+        if (strcmp(p1, "") != 0) {
+            
+            finalize_time_model(p0, p1);
+            finalize_time(p0, p1);
+        }
+
         free(p0);
+        
+//??        make_string(p0, p1);
     }
 }
 
 //
-// Statics instance.
+// Statics model.
 //
 
 /**
- * Creates a statics instance.
+ * Creates a statics model.
  *
- * @param p0 the model
+ * @param p0 the model source
  * @param p1 the abstraction
- * @return the instance
+ * @return the statics model
  */
-static void* create_statics_instance(void* p0, void* p1) {
+static void* create_statics_model(void* p0, void* p1) {
 
     void* i = 0;
     
-    log((void*) &INFO_LOG_LEVEL, "Create statics instance: ");
+    log((void*) &INFO_LOG_LEVEL, "Create statics model: ");
     log((void*) &INFO_LOG_LEVEL, p0);
 
     if (strcmp(p1, COMPLEX_STATICS_MODEL) == 0) {
 
-        i = create_complex_statics_instance(p0);
+        i = create_complex_statics_model(p0);
 
     } else if (strcmp(p1, BOOLEAN_PRIMITIVE) == 0) {
 
-        i = create_boolean_instance(p0);
+        i = create_boolean_model(p0);
 
     } else if (strcmp(p1, INTEGER_PRIMITIVE) == 0) {
 
-        i = create_integer_instance(p0);
+        i = create_integer_model(p0);
 
-    } else if (strcmp(p1, FLOAT_PRIMITIVE) == 0) {
+    } else if (strcmp(p1, FRACTION_PRIMITIVE) == 0) {
 
-        i = create_float_instance(p0);
+        i = create_fraction_model(p0);
 
     } else if (strcmp(p1, VECTOR_PRIMITIVE) == 0) {
 
-        i = create_vector_instance(p0);
+        i = create_vector_model(p0);
 
     } else if (strcmp(p1, STRING_PRIMITIVE) == 0) {
 
-        i = create_string_instance(p0);
+        i = create_string_model(p0);
 
     } else if (strcmp(p1, TIME_PRIMITIVE) == 0) {
 
-        i = create_time_instance(p0);
+        i = create_time_model(p0);
     }
     
     return i;
 }
 
 /**
- * Destroys the statics instance.
+ * Destroys the statics model.
  *
- * @param p0 the instance
- * @param p1 the model
+ * @param p0 the model
+ * @param p1 the model source
  * @param p2 the abstraction
  */
-static void destroy_statics_instance(void* p0, void* p1, void* p2) {
+static void destroy_statics_model(void* p0, void* p1, void* p2) {
 
-    log((void*) &INFO_LOG_LEVEL, "Destroy statics instance: ");
+    log((void*) &INFO_LOG_LEVEL, "Destroy statics model: ");
     log((void*) &INFO_LOG_LEVEL, p1);
 
     if (strcmp(p2, COMPLEX_STATICS_MODEL) == 0) {
 
-        destroy_complex_statics_instance(p0, p1);
+        destroy_complex_statics_model(p0, p1);
         
     } else if (strcmp(p2, BOOLEAN_PRIMITIVE) == 0) {
 
-        destroy_boolean_instance(p0, p1);
+        destroy_boolean_model(p0, p1);
 
     } else if (strcmp(p2, INTEGER_PRIMITIVE) == 0) {
 
-        destroy_integer_instance(p0, p1);
+        destroy_integer_model(p0, p1);
 
-    } else if (strcmp(p2, FLOAT_PRIMITIVE) == 0) {
+    } else if (strcmp(p2, FRACTION_PRIMITIVE) == 0) {
 
-        destroy_float_instance(p0, p1);
+        destroy_fraction_model(p0, p1);
 
     } else if (strcmp(p2, VECTOR_PRIMITIVE) == 0) {
 
-        destroy_vector_instance(p0, p1);
+        destroy_vector_model(p0, p1);
 
     } else if (strcmp(p2, STRING_PRIMITIVE) == 0) {
 
-        destroy_string_instance(p0, p1);
+        destroy_string_model(p0, p1);
 
     } else if (strcmp(p2, TIME_PRIMITIVE) == 0) {
 
-        destroy_time_instance(p0, p1);
+        destroy_time_model(p0, p1);
     }
 }
 

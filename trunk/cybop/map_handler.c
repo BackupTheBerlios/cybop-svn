@@ -34,7 +34,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.21 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2003-10-20 14:42:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -32,7 +32,7 @@
  *
  * It consists of two fraction numbers, a real and an imaginary value.
  *
- * @version $Revision: 1.11 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-10-20 14:42:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct complex {

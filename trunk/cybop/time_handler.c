@@ -1,5 +1,5 @@
 /*
- * $RCSfile: model_handler.c,v $
+ * $RCSfile: time_handler.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -34,7 +34,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.2 $ $Date: 2003-10-20 14:42:44 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-10-20 14:42:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

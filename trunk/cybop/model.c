@@ -22,23 +22,23 @@
  * - Cybernetics Oriented Programming -
  */
 
-#ifndef COMPLEX_SOURCE
-#define COMPLEX_SOURCE
+#ifndef MODEL_SOURCE
+#define MODEL_SOURCE
 
 /**
- * This is a complex.
+ * This is a model.
  *
  * It represents an abstract description of some real world thing.
  *
- * A complex can be created by instantiating (cloning) an existing model.
+ * A model can be created by instantiating (cloning) an existing model.
  * Instantiating means allocating some place in the computer's memory.
- * Basically, every complex can become a model (template) itself,
- * if copies (other instances) of this complex are created.
+ * Basically, every model can become a template itself,
+ * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.1 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-10-20 14:42:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-struct complex {
+struct model {
 
     /** The children. */
     void* children;
@@ -47,6 +47,6 @@ struct complex {
     void* positions;
 };
 
-/* COMPLEX_SOURCE */
+/* MODEL_SOURCE */
 #endif
 

@@ -28,7 +28,7 @@
 /**
  * This is an integer.
  *
- * @version $Revision: 1.1 $ $Date: 2003-10-20 10:52:21 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-10-20 14:42:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct integer {
