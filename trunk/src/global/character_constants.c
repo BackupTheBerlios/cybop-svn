@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,14 +39,23 @@
 // ASCII characters (0 - 127).
 //
 
-/** The colon character. */
+//?? See KDE menu: | Applications | Debian | Text | Unicode character map
+//?? Add below also the following constants:
+//?? - UTF-8
+//?? - Octal escaped UTF-8
+//?? - Decimal entity reference
+
+/** The colon character. ASCII: ?? */
 static const char COLON_CHARACTER = ':';
 
-/** The space character. */
+/** The space character. ASCII: ?? */
 static const char SPACE_CHARACTER = ' ';
 
-/** The new line character. */
+/** The new line character. ASCII: ?? */
 static const char NEW_LINE_CHARACTER = '\n';
+
+/** The low line character. ASCII: 95 */
+static const char LOW_LINE_CHARACTER = '_';
 
 //
 // ANSI characters (128 - 255).

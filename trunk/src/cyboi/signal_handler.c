@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-08-24 06:33:31 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,22 +58,22 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
         log_message((void*) &INFO_LOG_LEVEL, (void*) &HANDLE_COMPOUND_SIGNAL_MESSAGE, (void*) &HANDLE_COMPOUND_SIGNAL_MESSAGE_COUNT);
 
         // Initialize part models, abstractions and their counts.
-        void* pm = NULL_POINTER;
-        void* pmc = NULL_POINTER;
         void* pa = NULL_POINTER;
         void* pac = NULL_POINTER;
+        void* pm = NULL_POINTER;
+        void* pmc = NULL_POINTER;
 
         // Get part models, abstractions and their counts.
-        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_INDEX, (void*) &pm);
-        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_MODELS_COUNTS_INDEX, (void*) &pmc);
-        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
-        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_COUNTS_INDEX, (void*) &pac);
+        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_INDEX, (void*) &pa);
+        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_COUNTS_INDEX, (void*) &pac);
+        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_INDEX, (void*) &pm);
+        get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODELS_COUNTS_INDEX, (void*) &pmc);
 
         // Initialize part model, abstraction and their count.
-        void* m = NULL_POINTER;
-        int mc = 0;
         void* a = NULL_POINTER;
         int ac = 0;
+        void* m = NULL_POINTER;
+        int mc = 0;
 
         // The loop variable.
         int j = 0;
@@ -87,10 +87,10 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
 
             // Get part model, abstraction
             // and their count.
-            get_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &j, (void*) &m);
-            get_array_element((void*) &pmc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &mc);
             get_array_element((void*) &pa, (void*) &POINTER_ARRAY, (void*) &j, (void*) &a);
             get_array_element((void*) &pac, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ac);
+            get_array_element((void*) &pm, (void*) &POINTER_ARRAY, (void*) &j, (void*) &m);
+            get_array_element((void*) &pmc, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &mc);
 
             // Add part model (signal) to memory, using the whole signal's priority.
             // (Each signal has a priority. A signal may consist of part
@@ -133,20 +133,17 @@ void handle_operation_signal(const void* p0, const void* p1,
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE, (void*) &HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT);
 
-            // Initialize parameters
-            // and their counts and sizes.
+            // The parameters.
             void* p = NULL_POINTER;
             int pc = 0;
             int ps = 0;
 
-            // Get parameters
-            // and their counts and sizes.
+            // Get parameters.
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_INDEX, (void*) &p);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_COUNTS_INDEX, (void*) &pc);
             get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_INDEX, (void*) &ps);
 
-            // Initialize logic (operation) name
-            // and its count.
+            // The logic (operation) name.
             // The first parameter param0 is the operation name.
             // Following parameters param1 .. are input and output names.
             void* l = NULL_POINTER;
@@ -155,8 +152,7 @@ void handle_operation_signal(const void* p0, const void* p1,
             // The logic (operation) name parameter index.
             int i = 0;
 
-            // Get logic (operation) name
-            // and its count.
+            // Get logic (operation) name.
             get_array_element((void*) &p, (void*) &POINTER_ARRAY, (void*) &i, (void*) &l);
             get_array_element((void*) &pc, (void*) &INTEGER_ARRAY, (void*) &i, (void*) &lc);
 
@@ -166,104 +162,86 @@ void handle_operation_signal(const void* p0, const void* p1,
             int r = 0;
 
             fprintf(stderr, "TEST logic: %s\n", (char*) l);
-            fprintf(stderr, "TEST logic_count: %i\n", lc);
+            fprintf(stderr, "TEST logic count: %i\n", lc);
 
             if (d == 0) {
 
-                if (lc == ADD_ABSTRACTION_COUNT) {
+                compare_arrays((void*) &l, (void*) &lc, (void*) &ADD_ABSTRACTION, (void*) &ADD_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                    compare_array_elements((void*) &l, (void*) &ADD_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &ADD_ABSTRACTION_COUNT, (void*) &r);
+                if (r == 1) {
 
-                    if (r == 1) {
+                    add(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p4);
 
-                        add(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p4);
-
-                        d = 1;
-                    }
+                    d = 1;
                 }
             }
 
             if (d == 0) {
 
-                if (lc == CREATE_MODEL_ABSTRACTION_COUNT) {
+                compare_arrays((void*) &l, (void*) &lc, (void*) &CREATE_MODEL_ABSTRACTION, (void*) &CREATE_MODEL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                    compare_array_elements((void*) &l, (void*) &CREATE_MODEL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CREATE_MODEL_ABSTRACTION_COUNT, (void*) &r);
+                if (r == 1) {
 
-                    if (r == 1) {
+                    handle_create(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p4);
 
-                        handle_create(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p4);
-
-                        d = 1;
-                    }
+                    d = 1;
                 }
             }
 
             if (d == 0) {
 
-                if (lc == DESTROY_MODEL_ABSTRACTION_COUNT) {
+                compare_arrays((void*) &l, (void*) &lc, (void*) &DESTROY_MODEL_ABSTRACTION, (void*) &DESTROY_MODEL_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                    compare_array_elements((void*) &l, (void*) &DESTROY_MODEL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &DESTROY_MODEL_ABSTRACTION_COUNT, (void*) &r);
-
-                    if (r == 1) {
+                if (r == 1) {
 
 /*??
-                        handle_destroy(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p4);
+                    handle_destroy(p1, (void*) &p, (void*) &pc, (void*) &ps, p2, p3, p4);
 */
 
-                        d = 1;
-                    }
+                    d = 1;
                 }
             }
 
             if (d == 0) {
 
-                if (lc == SEND_ABSTRACTION_COUNT) {
+                compare_arrays((void*) &l, (void*) &lc, (void*) &SEND_ABSTRACTION, (void*) &SEND_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                    compare_array_elements((void*) &l, (void*) &SEND_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &SEND_ABSTRACTION_COUNT, (void*) &r);
+                if (r == 1) {
 
-                    if (r == 1) {
+                    send_message(p1, (void*) &p, (void*) &pc, (void*) &ps,
+                        p2, p3, p4, p5, p6, p7, p8);
 
-                        send_message(p1, (void*) &p, (void*) &pc, (void*) &ps,
-                            p2, p3, p4, p5, p6, p7, p8);
-
-                        d = 1;
-                    }
+                    d = 1;
                 }
             }
 
             if (d == 0) {
 
-                if (lc == RECEIVE_ABSTRACTION_COUNT) {
+                compare_arrays((void*) &l, (void*) &lc, (void*) &RECEIVE_ABSTRACTION, (void*) &RECEIVE_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                    compare_array_elements((void*) &l, (void*) &RECEIVE_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &RECEIVE_ABSTRACTION_COUNT, (void*) &r);
-
-                    if (r == 1) {
+                if (r == 1) {
 
 /*??
-                        receive_message(p1, (void*) &p, (void*) &pc, (void*) &ps,
-                            p2, p3, p4, p5, p6, p7, p8);
+                    receive_message(p1, (void*) &p, (void*) &pc, (void*) &ps,
+                        p2, p3, p4, p5, p6, p7, p8);
 */
 
-                        d = 1;
-                    }
+                    d = 1;
                 }
             }
 
             if (d == 0) {
 
-                if (lc == EXIT_ABSTRACTION_COUNT) {
+                compare_arrays((void*) &l, (void*) &lc, (void*) &EXIT_ABSTRACTION, (void*) &EXIT_ABSTRACTION_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
-                    compare_array_elements((void*) &l, (void*) &EXIT_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &EXIT_ABSTRACTION_COUNT, (void*) &r);
+                if (r == 1) {
 
-                    if (r == 1) {
+                    log_message((void*) &INFO_LOG_LEVEL, (void*) &SET_SHUTDOWN_FLAG_MESSAGE, (void*) &SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
 
-                        log_message((void*) &INFO_LOG_LEVEL, (void*) &SET_SHUTDOWN_FLAG_MESSAGE, (void*) &SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
+                    int* f = (int*) p9;
+                    *f = 1;
 
-                        int* f = (int*) p9;
-                        *f = 1;
-
-                        d = 1;
-                    }
+                    d = 1;
                 }
             }
 

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,6 +34,7 @@
 #include "../global/abstraction_constants.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
+#include "../socket/unix_socket.c"
 
 /**
  * Activates the internals.

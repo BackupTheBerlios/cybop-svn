@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 #include "../global/channel_constants.c"
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
+#include "../socket/unix_socket.c"
 
 /**
  * Sends a message in a special language.
@@ -69,7 +70,7 @@ void send_in_language(const void* p0, const void* p1, const void* p2, const void
 
                 if (r == 1) {
 
-                    send_unix_socket(p4, p5, p6, p7);
+//??                    send_unix_socket(p4, p5, p6, p7);
 
                     d = 1;
                 }
@@ -219,6 +220,7 @@ void send_message(const void* p0, const void* p1, const void* p2, const void* p3
             int tmc = 0;
             int tms = 0;
 
+/*??
             // Get transient language, sender, receiver, message
             // and their counts and sizes.
             get_compound_part_by_name(p4, p5, p6,
@@ -253,6 +255,7 @@ void send_message(const void* p0, const void* p1, const void* p2, const void* p3
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
+*/
 
             // Send message in a special language.
             send_in_language((void*) &tl, (void*) &tlc, (void*) &ts, (void*) &tsc,

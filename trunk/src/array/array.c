@@ -50,7 +50,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.10 $ $Date: 2004-08-13 07:22:34 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,118 +66,6 @@
 #include "../logger/logger.c"
 
 //
-// Array.
-//
-
-/**
- * Creates the array.
- *
- * @param p0 the array
- * @param p1 the type
- * @param p2 the maximum count
- */
-void create_array(void* p0, const void* p1, const void* p2) {
-
-    if (p1 != NULL_POINTER) {
-
-        int* t = (int*) p1;
-
-        if (*t == POINTER_ARRAY) {
-
-            create_pointer_array(p0, p2);
-
-        } else if (*t == INTEGER_ARRAY) {
-
-            create_integer_array(p0, p2);
-
-        } else if (*t == DOUBLE_ARRAY) {
-
-            create_double_array(p0, p2);
-
-        } else if (*t == CHARACTER_ARRAY) {
-
-            create_character_array(p0, p2);
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
-    }
-}
-
-/**
- * Destroys the array.
- *
- * @param p0 the array
- * @param p1 the type
- * @param p2 the maximum count
- */
-void destroy_array(void* p0, const void* p1, const void* p2) {
-
-    if (p1 != NULL_POINTER) {
-
-        int* t = (int*) p1;
-
-        if (*t == POINTER_ARRAY) {
-
-            destroy_pointer_array(p0, p2);
-
-        } else if (*t == INTEGER_ARRAY) {
-
-            destroy_integer_array(p0, p2);
-
-        } else if (*t == DOUBLE_ARRAY) {
-
-            destroy_double_array(p0, p2);
-
-        } else if (*t == CHARACTER_ARRAY) {
-
-            destroy_character_array(p0, p2);
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
-    }
-}
-
-/**
- * Resizes the array.
- *
- * @param p0 the array
- * @param p1 the type
- * @param p2 the maximum count
- */
-void resize_array(void* p0, const void* p1, const void* p2) {
-
-    if (p1 != NULL_POINTER) {
-
-        int* t = (int*) p1;
-
-        if (*t == POINTER_ARRAY) {
-
-            resize_pointer_array(p0, p2);
-
-        } else if (*t == INTEGER_ARRAY) {
-
-            resize_integer_array(p0, p2);
-
-        } else if (*t == DOUBLE_ARRAY) {
-
-            resize_double_array(p0, p2);
-
-        } else if (*t == CHARACTER_ARRAY) {
-
-            resize_character_array(p0, p2);
-        }
-
-    } else {
-
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
-    }
-}
-
-//
 // Array element.
 //
 
@@ -191,7 +79,7 @@ void resize_array(void* p0, const void* p1, const void* p2) {
  * @param p1 the second array
  * @param p2 the type
  * @param p3 the count
- * @param p4 the result
+ * @param p4 the result (1 if equal; 0 otherwise)
  */
 void compare_array_elements(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
 
@@ -460,6 +348,155 @@ void get_array_element_index(const void* p0, const void* p1, const void* p2, con
     // - element: char handed over as char*
     // - the element of type char* gets transformed to type char** with &element
     get_array_elements_index(p0, p1, p2, (void*) &p3, (void*) &c, p4);
+}
+
+//
+// Array.
+//
+
+/**
+ * Creates the array.
+ *
+ * @param p0 the array
+ * @param p1 the type
+ * @param p2 the maximum count
+ */
+void create_array(void* p0, const void* p1, const void* p2) {
+
+    if (p1 != NULL_POINTER) {
+
+        int* t = (int*) p1;
+
+        if (*t == POINTER_ARRAY) {
+
+            create_pointer_array(p0, p2);
+
+        } else if (*t == INTEGER_ARRAY) {
+
+            create_integer_array(p0, p2);
+
+        } else if (*t == DOUBLE_ARRAY) {
+
+            create_double_array(p0, p2);
+
+        } else if (*t == CHARACTER_ARRAY) {
+
+            create_character_array(p0, p2);
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+    }
+}
+
+/**
+ * Destroys the array.
+ *
+ * @param p0 the array
+ * @param p1 the type
+ * @param p2 the maximum count
+ */
+void destroy_array(void* p0, const void* p1, const void* p2) {
+
+    if (p1 != NULL_POINTER) {
+
+        int* t = (int*) p1;
+
+        if (*t == POINTER_ARRAY) {
+
+            destroy_pointer_array(p0, p2);
+
+        } else if (*t == INTEGER_ARRAY) {
+
+            destroy_integer_array(p0, p2);
+
+        } else if (*t == DOUBLE_ARRAY) {
+
+            destroy_double_array(p0, p2);
+
+        } else if (*t == CHARACTER_ARRAY) {
+
+            destroy_character_array(p0, p2);
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+    }
+}
+
+/**
+ * Resizes the array.
+ *
+ * @param p0 the array
+ * @param p1 the type
+ * @param p2 the maximum count
+ */
+void resize_array(void* p0, const void* p1, const void* p2) {
+
+    if (p1 != NULL_POINTER) {
+
+        int* t = (int*) p1;
+
+        if (*t == POINTER_ARRAY) {
+
+            resize_pointer_array(p0, p2);
+
+        } else if (*t == INTEGER_ARRAY) {
+
+            resize_integer_array(p0, p2);
+
+        } else if (*t == DOUBLE_ARRAY) {
+
+            resize_double_array(p0, p2);
+
+        } else if (*t == CHARACTER_ARRAY) {
+
+            resize_character_array(p0, p2);
+        }
+
+    } else {
+
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) &COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+    }
+}
+
+/**
+ * Compares the arrays.
+ *
+ * @param p0 the first array
+ * @param p1 the first array count
+ * @param p2 the second array
+ * @param p3 the second array count
+ * @param p4 the result (1 if equal; 0 otherwise)
+ * @param p5 the type
+ */
+void compare_arrays(const void* p0, const void* p1, const void* p2, const void* p3,
+    void* p4, const void* p5) {
+
+    if (p3 != NULL_POINTER) {
+
+        int* sc = (int*) p3;
+
+        if (p1 != NULL_POINTER) {
+
+            int* fc = (int*) p1;
+
+            if (*fc == *sc) {
+
+                compare_array_elements(p0, p2, p5, p3, p4);
+            }
+
+        } else {
+
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
+    }
 }
 
 /* ARRAY_SOURCE */

@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.2 $ $Date: 2004-08-15 22:11:29 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -148,6 +148,11 @@ static const int BMP_ABSTRACTION_COUNT = 3;
 // Text abstractions.
 //
 
+/** The cybol abstraction array, pointer, count. */
+static const char CYBOL_ABSTRACTION_ARRAY[] = {'c', 'y', 'b', 'o', 'l'};
+static const char* CYBOL_ABSTRACTION = CYBOL_ABSTRACTION_ARRAY;
+static const int CYBOL_ABSTRACTION_COUNT = 5;
+
 /** The sgml abstraction array, pointer, count. */
 static const char SGML_ABSTRACTION_ARRAY[] = {'s', 'g', 'm', 'l'};
 static const char* SGML_ABSTRACTION = SGML_ABSTRACTION_ARRAY;
@@ -191,20 +196,25 @@ static const int QT_ABSTRACTION_COUNT = 2;
 // Application abstractions.
 //
 
+/** The healthcare exchange protocol abstraction array, pointer, count. */
+static const char HXP_ABSTRACTION_ARRAY[] = {'k', 'w', 'd'};
+static const char* HXP_ABSTRACTION = HXP_ABSTRACTION_ARRAY;
+static const int HXP_ABSTRACTION_COUNT = 5;
+
 /** The koffice kword abstraction array, pointer, count. */
 static const char KWD_ABSTRACTION_ARRAY[] = {'k', 'w', 'd'};
 static const char* KWD_ABSTRACTION = KWD_ABSTRACTION_ARRAY;
-static const int KWORD_ABSTRACTION_COUNT = 5;
+static const int KWD_ABSTRACTION_COUNT = 5;
 
 /** The open office writer abstraction array, pointer, count. */
 static const char SXW_ABSTRACTION_ARRAY[] = {'s', 'x', 'w'};
 static const char* SXW_ABSTRACTION = SXW_ABSTRACTION_ARRAY;
 static const int SXW_ABSTRACTION_COUNT = 3;
 
-//
-// Special, additional abstractions (former signal languages).
-// Sort them into better categories later! See above!
-//
+//??
+//?? Special, additional abstractions (former signal languages).
+//?? Sort them into better categories later! See above!
+//??
 
 /** The character/ textual user interface (tui) language array, pointer, count. */
 static const char TUI_LANGUAGE_ARRAY[] = {'t', 'u', 'i'};

@@ -48,7 +48,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.12 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -232,8 +232,8 @@ static const int MODEL_LOCATION_SEPARATOR_COUNT = 1;
 // Compound.
 //
 
-/** The compound part separator. */
-static const char COMPOUND_PART_SEPARATOR = '.';
+/** The compound element separator. */
+static const char COMPOUND_ELEMENT_SEPARATOR = '.';
 
 //
 // Operation.

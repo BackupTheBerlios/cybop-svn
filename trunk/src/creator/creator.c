@@ -25,7 +25,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.2 $ $Date: 2004-08-21 10:09:38 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,6 +44,8 @@
 #include "../creator/string_creator.c"
 #include "../creator/time_creator.c"
 #include "../creator/vector_creator.c"
+#include "../creator/xml_node_creator.c"
+#include "../creator/xml_property_creator.c"
 #include "../global/abstraction_constants.c"
 #include "../global/log_constants.c"
 #include "../logger/logger.c"
@@ -76,6 +78,21 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
                 if (r == 1) {
 
                     create_compound(p0, p1);
+
+                    d = 1;
+                }
+            }
+        }
+
+        if (d == 0) {
+
+            if (*ac == CYBOL_ABSTRACTION_COUNT) {
+
+                compare_array_elements(p2, (void*) &CYBOL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r);
+
+                if (r == 1) {
+
+                    create_xml_node(p0, p1);
 
                     d = 1;
                 }
@@ -219,6 +236,21 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (d == 0) {
 
+            if (*ac == HXP_ABSTRACTION_COUNT) {
+
+                compare_array_elements(p2, (void*) &HXP_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &HXP_ABSTRACTION_COUNT, (void*) &r);
+
+                if (r == 1) {
+
+                    create_xml_node(p0, p1);
+
+                    d = 1;
+                }
+            }
+        }
+
+        if (d == 0) {
+
             if (*ac == SIGNAL_MEMORY_ABSTRACTION_COUNT) {
 
                 compare_array_elements(p2, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r);
@@ -266,6 +298,21 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
                 if (r == 1) {
 
                     destroy_compound(p0, p1);
+
+                    d = 1;
+                }
+            }
+        }
+
+        if (d == 0) {
+
+            if (*ac == CYBOL_ABSTRACTION_COUNT) {
+
+                compare_array_elements(p2, (void*) &CYBOL_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &CYBOL_ABSTRACTION_COUNT, (void*) &r);
+
+                if (r == 1) {
+
+                    destroy_xml_node(p0, p1);
 
                     d = 1;
                 }
@@ -401,6 +448,21 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
                 if (r == 1) {
 
                     destroy_time(p0, p1);
+
+                    d = 1;
+                }
+            }
+        }
+
+        if (d == 0) {
+
+            if (*ac == HXP_ABSTRACTION_COUNT) {
+
+                compare_array_elements(p2, (void*) &HXP_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &HXP_ABSTRACTION_COUNT, (void*) &r);
+
+                if (r == 1) {
+
+                    destroy_xml_node(p0, p1);
 
                     d = 1;
                 }

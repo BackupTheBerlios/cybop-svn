@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -216,6 +216,7 @@ void add(const void* p0,
             int tsumac = 0;
             int tsumas = 0;
 
+/*??
             // Get transient summand 1-, summand 2- and sum model
             // and their counts and sizes.
             get_compound_part_by_name(p4, p5, p6,
@@ -242,6 +243,7 @@ void add(const void* p0,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
+*/
 
             //
             // CAUTION! Only addition of primitives with equal type is allowed!

@@ -23,7 +23,7 @@
  *
  * This file handles a server UNIX FILE socket.
  *
- * @version $Revision: 1.4 $ $Date: 2004-08-23 07:18:33 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -169,6 +169,7 @@ void send_unix_socket(const void* p0, const void* p1, const void* p2, const void
             void* n = NULL_POINTER;
             int nc = 0;
 
+/*??
             // Get unix socket filename and its count.
             get_compound_part_by_name(p0, p1, (void*) &NULL_POINTER,
                 (void*) &UNIX_SOCKET_FILENAME_NAME, (void*) &UNIX_SOCKET_FILENAME_NAME_COUNT, (void*) &NULL_POINTER,
@@ -178,6 +179,7 @@ void send_unix_socket(const void* p0, const void* p1, const void* p2, const void
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
+*/
 
             // Initialize socket address.
             struct sockaddr_un a;

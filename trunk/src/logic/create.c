@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.7 $ $Date: 2004-08-23 07:52:25 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-09-08 19:44:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,21 +32,258 @@
 
 //?? #include <libxml/parser.h>
 //?? #include <libxml/tree.h>
-#include "../creator/boolean_creator.c"
-#include "../creator/complex_creator.c"
-#include "../creator/compound_creator.c"
-#include "../creator/double_creator.c"
-#include "../creator/fraction_creator.c"
-#include "../creator/integer_creator.c"
-#include "../creator/operation_creator.c"
-#include "../creator/string_creator.c"
-#include "../creator/time_creator.c"
-#include "../creator/vector_creator.c"
-#include "../creator/xml_node_creator.c"
+#include "../array/array.c"
+#include "../creator/creator.c"
+#include "../communicator/communicator.c"
 #include "../global/abstraction_constants.c"
+#include "../global/log_constants.c"
 #include "../logger/logger.c"
-#include "../parser/xml_parser.c"
-#include "../translator/xml_translator.c"
+#include "../parser/parser.c"
+#include "../translator/translator.c"
+
+/**
+ * Creates a model.
+ *
+ * The creation happens in 3 steps and 4 models are involved.
+ *
+ * 1 source code: persistent, probably stored in files, for example cybol/xml
+ * 2 receive model: transient byte/character stream, as read from channel/location
+ * 3 parse model: transient model representing the structure of the parsed document,
+ *   for example xml dom tree
+ * 4 decode model: transient model that cyboi works with, that is cyboi internal model
+ *
+ * The "received model" and "parsed model" are temporary helper models;
+ * they get created and destroyed during creation handling.
+ *
+ *                receive                           parse                   decode
+ * source code  ----------> received/read model  ----------> parsed model ----------> decoded model
+ * (persistent)             (transient)                      (transient)              (transient)
+ *
+ * The counterparts of the creation procedures are:
+ * - receive <--> send (read <--> write)
+ * - parse <--> serialize
+ * - decode <--> encode
+ *
+ * persistent:
+ * - stored permanently
+ * - outside CYBOI
+ * - longer than CYBOI lives
+ *
+ * transient:
+ * - stored in computer memory (RAM)
+ * - only accessible from within CYBOI
+ * - created and destroyed by CYBOI
+ * - not available anymore after CYBOI has been destroyed
+ *
+ * @param p0 the destination
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source model
+ * @param p4 the source model count
+ * @param p5 the source abstraction
+ * @param p6 the source abstraction count
+ * @param p7 the source channel
+ * @param p8 the source channel count
+ */
+void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
+    const void* p5, const void* p6, const void* p7, const void* p8) {
+
+    //?? This parameter pointer only has to be dereferenced because of
+    //?? the temporary workaround to use libxml2 parser. DELETE this later!
+    if (p6 != NULL_POINTER) {
+
+        int* ac = (int*) p6;
+
+        //?? BEGIN of temporary workaround to use libxml2 parser.
+
+        // The libxml parser workaround flag.
+        int w = 0;
+
+        compare_arrays(p5, p6, (void*) &XML_ABSTRACTION, (void*) &XML_ABSTRACTION_COUNT,
+            (void*) &w, (void*) &CHARACTER_ARRAY);
+
+        //?? END of temporary workaround to use libxml2 parser.
+        //?? Later, when an own xml parser is implemented in cyboi,
+        //?? delete all workaround blocks, also below!
+
+        //
+        // Receive.
+        //
+
+        // The receive model.
+        void* rm = NULL_POINTER;
+        int rmc = 0;
+        int rms = 0;
+
+        // Create receive model of type character, to read single bytes.
+        create((void*) &rm, (void*) &rms,
+            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+
+        // Receive persistent byte stream over channel.
+        receive_general((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
+
+        //
+        // Parse.
+        //
+
+        // The parse model.
+        void* pm = NULL_POINTER;
+        int pmc = 0;
+        int pms = 0;
+
+        if (w == 0) {
+
+            // Create parse model of type given as abstraction.
+            create((void*) &pm, (void*) &pms, p5, p6);
+
+            // Parse byte stream according to given document type.
+            parse((void*) &pm, (void*) &pmc, (void*) &pms,
+                (void*) &rm, (void*) &rmc, p5, p6);
+
+        } else {
+
+            parse((void*) &pm, (void*) &pmc, (void*) &pms, p3, p4, p5, p6);
+        }
+
+        // Destroy receive model.
+        destroy((void*) &rm, (void*) &rms,
+            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
+
+        //
+        // Decode.
+        //
+
+        // Normally, a compound model is created.
+        // Primitive types are an exception to this and need a different creation.
+
+        // The primitive flag.
+        int p = 0;
+        // The done flag.
+        int d = 0;
+
+        // The following comparisons could also be done one after the other,
+        // without "done" flag. But the done flag avoids unnecessary comparisons.
+
+        if (d == 0) {
+
+            compare_arrays(p5, p6, (void*) &OPERATION_ABSTRACTION, (void*) &OPERATION_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
+
+            if (p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p5, p6, (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
+
+            if (p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p5, p6, (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
+
+            if (p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p5, p6, (void*) &DOUBLE_ABSTRACTION, (void*) &DOUBLE_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
+
+            if (p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p5, p6, (void*) &BOOLEAN_ABSTRACTION, (void*) &BOOLEAN_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
+
+            if (p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p5, p6, (void*) &VECTOR_ABSTRACTION, (void*) &VECTOR_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
+
+            if (p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p5, p6, (void*) &FRACTION_ABSTRACTION, (void*) &FRACTION_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
+
+            if (p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p5, p6, (void*) &TIME_ABSTRACTION, (void*) &TIME_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
+
+            if (p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (d == 0) {
+
+            compare_arrays(p5, p6, (void*) &COMPLEX_ABSTRACTION, (void*) &COMPLEX_ABSTRACTION_COUNT, (void*) &p, (void*) &CHARACTER_ARRAY);
+
+            if (p == 1) {
+
+                d = 1;
+            }
+        }
+
+        if (p == 1) {
+
+            // Create primitive decode model.
+            create(p0, p2, p5, p6);
+
+        } else {
+
+            // Create compound decode model.
+            create(p0, p2, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
+        }
+
+        // Decode document model according to given document type.
+        decode(p0, p1, p2, (void*) &pm, (void*) &pmc, p5, p6);
+
+        if (w == 0) {
+
+            // Destroy parsed model.
+            destroy((void*) &pm, (void*) &pms, p5, p6);
+
+        } else {
+
+            // Free xml dom document.
+            xmlFreeDoc((xmlDoc*) pm);
+        }
+
+    } else {
+
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) &COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
+    }
+}
 
 /**
  * Creates a transient copy of a persistent source.
@@ -237,6 +474,7 @@ void handle_create(const void* p0, const void* p1, const void* p2, const void* p
 
                         } else {
 
+/*??
                             // If a persistent whole model name exists, the transient
                             // whole model is determined within the knowledge root.
                             // Abstraction and constraints as well as the model's
@@ -249,6 +487,7 @@ void handle_create(const void* p0, const void* p1, const void* p2, const void* p
                                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
                                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
                                 (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
+*/
                         }
 
 /*??
@@ -301,155 +540,10 @@ void handle_create(const void* p0, const void* p1, const void* p2, const void* p
                             (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
 */
 
-                        //
-                        // The creation happens in 3 steps and 4 models are involved.
-                        //
-                        // 1 source code: persistent, probably stored in files
-                        // 2 read model: transient byte stream, as read from location
-                        // 3 parsed model: transient model representing the structure
-                        //   of the parsed document
-                        // 4 decoded model: transient model that cyboi works with
-                        //
-                        // The "read model" and "parsed model" are temporary helper models;
-                        // they get created and destroyed during creation handling.
-                        //
-                        //                receive                           parse                   decode
-                        // source code  ----------> received/read model  ----------> parsed model ----------> decoded model
-                        // (persistent)             (transient)                      (transient)              (transient)
-                        //
-                        // The counterparts of the creation procedures are:
-                        // - receive (read) <--> send (write)
-                        // - parse <--> serialize
-                        // - decode <--> encode
-                        //
-                        // Definitions
-                        //
-                        // persistent:
-                        // - stored permanently
-                        // - outside CYBOI
-                        // - longer than CYBOI lives
-                        //
-                        // transient:
-                        // - stored in computer memory (RAM)
-                        // - only accessible from within CYBOI
-                        // - created and destroyed by CYBOI
-                        // - not available when CYBOI is destroyed
-                        //
-
 /*??
-                        //?? BEGIN of temporary workaround to use libxml2 parser.
-
-                        // The libxml parser workaround flag.
-                        int libxml_parser_workaround = 0;
-                        // The comparison result.
-                        int r = 0;
-
-                        if (*typec == XML_ABSTRACTION_COUNT) {
-
-                            compare_array_elements(type, (void*) &XML_ABSTRACTION, (void*) &CHARACTER_ARRAY, (void*) &XML_ABSTRACTION_COUNT, (void*) &r);
-
-                            if (r == 1) {
-
-                                libxml_parser_workaround = 1;
-                            }
-                        }
-
-                        //?? END of temporary workaround to use libxml2 parser.
-                        //?? Later, when an own xml parser is implemented in cyboi,
-                        //?? delete all workaround blocks.
-
-                        //
-                        // Receive.
-                        //
-
-                        // Declare and initialize receive model
-                        // and its count and size.
-                        void* rm = NULL_POINTER;
-                        int rmc = 0;
-                        int rms = 0;
-
-                        // Create receive model of type character,
-                        // to read single bytes.
-                        create_model((void*) &rm, (void*) &rmc, (void*) &rms,
-                            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-
-                        // Receive persistent byte stream from location.
-                        read_model((void*) &rm, (void*) &rmc, (void*) &rms,
-                            (void*) &ppm, (void*) &ppmc, (void*) &ppl, (void*) &pplc);
-
-                        // The persistent model (local or remote file or other source)
-                        // cannot and must not get destroyed here.
-
-                        //
-                        // Parse.
-                        //
-
-                        // Declare and initialize parsed model
-                        // and its count and size.
-                        void* pm = NULL_POINTER;
-                        int pmc = 0;
-                        int pms = 0;
-
-                        if (libxml_parser_workaround == 0) {
-
-                            // Create parsed model.
-                            create_model((void*) &pm, (void*) &pmc, (void*) &pms,
-                                (void*) &type, (void*) &typec);
-
-                            // Parse byte stream according to given document type.
-                            //?? DELETE this line! parse type can be for example: xml dom tree
-                            parse((void*) &pm, (void*) &pmc, (void*) &pms,
-                                (void*) &rm, (void*) &rmc, (void*) &type, (void*) &typec);
-
-                        } else {
-
-                            parse_xml((void*) &pm, (void*) &pmc, (void*) &pms,
-                                (void*) &ppm, (void*) &ppmc);
-                        }
-
-                        // Destroy read model.
-                        destroy_model((void*) &rm, (void*) &rmc, (void*) &rms,
-                            (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
-
-                        //
-                        // Decode.
-                        //
-
-                        // Declare and initialize decoded model
-                        // and its count and size.
-                        void* dm = NULL_POINTER;
-                        int dmc = 0;
-                        int dms = 0;
-
-                        // Create decoded model.
-                        create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-                            (void*) &type, (void*) &typec);
-
-                        if (libxml_parser_workaround == 0) {
-
-                            // Decode document model according to given document type.
-                            decode((void*) &dm, (void*) &dmc, (void*) &dms,
-                                (void*) &pm, (void*) &pmc, (void*) &type, (void*) &typec);
-
-                            // Destroy parsed model.
-                            destroy_model((void*) &pm, (void*) &pmc, (void*) &pms,
-                                (void*) &type, (void*) &typec);
-
-                        } else {
-
-                            // Decode document model according to given document type.
-                            decode_xml((void*) &dm, (void*) &dmc, (void*) &dms,
-                                (void*) &pm, (void*) &pmc, (void*) &type, (void*) &typec);
-
-                            // Free xml dom document.
-                            xmlFreeDoc((xmlDoc*) pm);
-                        }
-*/
-
                         //?? DELETE all following initialize_model calls!
                         //?? They get REPLACED by decode calls!
 
-/*??
                         // Initialize transient part name,
                         // part abstraction, model, constraint,
                         // position abstraction, model, constraint,
@@ -497,32 +591,6 @@ void handle_create(const void* p0, const void* p1, const void* p2, const void* p
                             (void*) &tpom, (void*) &tpomc, (void*) &tpoms,
                             (void*) &tpoa, (void*) &tpoac, (void*) &tpoas,
                             (void*) &tpoc, (void*) &tpocc, (void*) &tpocs);
-*/
-
-/*??
-                        //
-                        // This is an older example taken from the old compound.c
-                        // Integrate this block into the procedures above and
-                        // then delete these code lines!
-                        //
-
-                        // Initialize xml model
-                        // and its count and size.
-                        void* m = NULL_POINTER;
-                        int mc = 0;
-                        int ms = 0;
-
-                        // Create xml model.
-                        create_xml_node((void*) &m, (void*) &ms);
-
-                        // Parse persistent stream into xml model.
-                        parse_xml((void*) &m, (void*) &mc, (void*) &ms, p3, p4);
-
-                        // Decode xml model into knowledge model compound.
-                        decode_xml(p0, p1, p2, (void*) &m, (void*) &mc);
-
-                        // Destroy xml model.
-                        destroy_xml_node((void*) &m, (void*) &ms);
 */
 
                     } else {
