@@ -29,7 +29,7 @@ package cybop.core.category;
  *
  * A definition specifies several constraints for its children.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-18 13:20:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Definition extends Structure {
@@ -50,9 +50,20 @@ public class Definition extends Structure {
      *
      * @return the constraints
      */
-    public Map createConstraints() {
+    public Map createConstraints() throws Exception {
 
-        return null;
+        Map m = new Map();
+        
+        if (m != null) {
+
+            m.abstracc();
+
+        } else {
+
+            throw new Exception("Could not create constraints. The constraints is null.");
+        }
+
+        return m;
     }
 
     /**
@@ -60,7 +71,7 @@ public class Definition extends Structure {
      *
      * @param c the constraints
      */
-    public void destroyConstraints(Map c) {
+    public void destroyConstraints(Map c) throws Exception {
     }
 
     /**

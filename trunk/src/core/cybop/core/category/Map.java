@@ -33,7 +33,7 @@ package cybop.core.category;
  * the index of the wanted element -- and then returning the corresponding
  * reference.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-16 18:28:02 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-18 13:20:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Map {
@@ -57,9 +57,20 @@ public class Map {
      *
      * @return the names
      */
-    public Array createNames() {
+    public Array createNames() throws Exception {
 
-        return new Array();
+        Array a = new Array();
+        
+        if (a != null) {
+
+            a.abstracc();
+
+        } else {
+
+            throw new Exception("Could not create names. The names is null.");
+        }
+
+        return a;
     }
 
     /**
@@ -67,7 +78,7 @@ public class Map {
      *
      * @param n the names
      */
-    public void destroyNames(Array n) {
+    public void destroyNames(Array n) throws Exception {
     }
 
     /**
@@ -99,9 +110,20 @@ public class Map {
      *
      * @return the references
      */
-    public Array createReferences() {
+    public Array createReferences() throws Exception {
 
-        return new Array();
+        Array a = new Array();
+        
+        if (a != null) {
+
+            a.abstracc();
+
+        } else {
+
+            throw new Exception("Could not create references. The references is null.");
+        }
+
+        return a;
     }
 
     /**
@@ -109,7 +131,7 @@ public class Map {
      *
      * @param r the references
      */
-    public void destroyReferences(Array r) {
+    public void destroyReferences(Array r) throws Exception {
     }
 
     /**
@@ -265,11 +287,12 @@ public class Map {
      */
     public int getIndex(Array n) throws Exception {
 
-        int i = -1;
+        int index = -1;
         Array names = getNames();
 
         if (names != null) {
 
+            int i = index + 1;
             Array name = null;
 
             while (i < names.getSize()) {
@@ -277,6 +300,7 @@ public class Map {
                 name = names.get(i);
 
                 // If a null name is reached, then the name was not found.
+                // In this case, reset index to -1.
                 if (name == null) {
 
                     break;
@@ -287,6 +311,7 @@ public class Map {
                     // then its index is the one to be returned.
                     if (name.isEqualTo(n)) {
 
+                        index = i;
                         break;
                     }
                 }
@@ -299,7 +324,7 @@ public class Map {
             throw new Exception("Could not get index. The names is null.");
         }
 
-        return i;
+        return index;
     }
 
     //

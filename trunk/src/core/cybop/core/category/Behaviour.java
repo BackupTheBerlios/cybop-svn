@@ -29,7 +29,7 @@ package cybop.core.category;
  *
  * A behaviour is determined by its procedures.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-18 13:20:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Behaviour extends Definition {
@@ -50,9 +50,20 @@ public class Behaviour extends Definition {
      *
      * @return the procedures
      */
-    public Map createProcedures() {
+    public Map createProcedures() throws Exception {
 
-        return null;
+        Map m = new Map();
+        
+        if (m != null) {
+
+            m.abstracc();
+
+        } else {
+
+            throw new Exception("Could not create procedures. The procedures is null.");
+        }
+
+        return m;
     }
 
     /**
@@ -60,7 +71,7 @@ public class Behaviour extends Definition {
      *
      * @param p the procedures
      */
-    public void destroyProcedures(Map p) {
+    public void destroyProcedures(Map p) throws Exception {
     }
 
     /**

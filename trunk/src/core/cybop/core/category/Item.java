@@ -80,7 +80,7 @@ package cybop.core.category;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.8 $ $Date: 2003-06-18 09:57:50 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-06-18 13:20:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends Behaviour {
@@ -101,9 +101,20 @@ public class Item extends Behaviour {
      *
      * @return the children
      */
-    public Map createChildren() {
+    public Map createChildren() throws Exception {
 
-        return new Map();
+        Map m = new Map();
+        
+        if (m != null) {
+
+            m.abstracc();
+
+        } else {
+
+            throw new Exception("Could not create children. The children is null.");
+        }
+
+        return m;
     }
 
     /**
@@ -111,7 +122,7 @@ public class Item extends Behaviour {
      *
      * @param c the children
      */
-    public void destroyChildren(Map c) {
+    public void destroyChildren(Map c) throws Exception {
     }
 
     /**

@@ -37,7 +37,7 @@ package cybop.core.category;
  * They are coded in binaries within the machine and that is the final abstraction.
  * Towards macrocosm, it depends on the modeller how far he/she wants to go.<br><br>
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-18 13:20:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Hierarchy extends Inheritance {
@@ -58,9 +58,20 @@ public class Hierarchy extends Inheritance {
      *
      * @return the categories
      */
-    public Map createCategories() {
+    public Map createCategories() throws Exception {
 
-        return null;
+        Map m = new Map();
+        
+        if (m != null) {
+
+            m.abstracc();
+
+        } else {
+
+            throw new Exception("Could not create categories. The categories is null.");
+        }
+
+        return m;
     }
 
     /**
@@ -68,7 +79,7 @@ public class Hierarchy extends Inheritance {
      *
      * @param c the categories
      */
-    public void destroyCategories(Map c) {
+    public void destroyCategories(Map c) throws Exception {
     }
 
     /**

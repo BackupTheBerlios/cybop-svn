@@ -30,7 +30,7 @@ package cybop.core.category;
  * A structure knows about the positions of its children, relative to each other.
  * That means that this structure also is a special constellation of children.
  *
- * @version $Revision: 1.3 $ $Date: 2003-06-13 16:56:43 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-18 13:20:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Structure extends Hierarchy {
@@ -73,9 +73,20 @@ public class Structure extends Hierarchy {
      *
      * @return the positions
      */
-    public Map createPositions() {
+    public Map createPositions() throws Exception {
 
-        return null;
+        Map m = new Map();
+        
+        if (m != null) {
+
+            m.abstracc();
+
+        } else {
+
+            throw new Exception("Could not create positions. The positions is null.");
+        }
+
+        return m;
     }
 
     /**
@@ -83,7 +94,7 @@ public class Structure extends Hierarchy {
      *
      * @param p the positions
      */
-    public void destroyPositions(Map p) {
+    public void destroyPositions(Map p) throws Exception {
     }
 
     /**

@@ -34,7 +34,7 @@ package cybop.core.category;
  * In the case of computer science, everything gets abstracted to 0 and 1.
  * But that also means that every abstraction has a bytecode representation.
  *
- * @version $Revision: 1.6 $ $Date: 2003-06-17 15:39:22 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-18 13:20:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Array {
@@ -424,18 +424,22 @@ public class Array {
     
             if (a != null) {
 
+                //
                 // It is bad coding style to use instanceof.
                 // However, since this method is a temporary solution anyway,
                 // it seems the simplest way to work with instanceof here.
                 // This check had to be inserted because signal items have
                 // children that are not child tree nodes of that signal.
-//??                if ((a instanceof Signal) == false) {
+                // Also, array should not know about Signal because this
+                // breaks the dependency between the framework's layers.
+                //
+                if ((a.getJavaTreeNode() != null) && ((a instanceof cybop.core.signal.Signal) == false)) {
 
                     tn.add(a.getJavaTreeNode());
-//??                }
+                }
 
             } else {
-    
+
                 java.lang.System.out.println("DEBUG: Could not add java tree node. The array is null.");
             }
 
@@ -460,17 +464,21 @@ public class Array {
     
             if (a != null) {
 
+                //
                 // It is bad coding style to use instanceof.
                 // However, since this method is a temporary solution anyway,
                 // it seems the simplest way to work with instanceof here.
                 // This check had to be inserted because signal items have
                 // children that are not child tree nodes of that signal.
+                // Also, array should not know about Signal because this
+                // breaks the dependency between the framework's layers.
                 // Alternative:
-                // if (tn.isNodeChild(i.getJavaTreeNode())) {
-//??                if ((a instanceof Signal) == false) {
+                // if (tn.isNodeChild(a.getJavaTreeNode())) {
+                //
+                if ((a.getJavaTreeNode() != null) && ((a instanceof cybop.core.signal.Signal) == false)) {
 
                     tn.remove(a.getJavaTreeNode());
-//??                }
+                }
 
             } else {
     
