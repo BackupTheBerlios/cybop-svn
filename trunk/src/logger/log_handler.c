@@ -24,7 +24,7 @@
  * This file handles log messages.
  * It writes log entries to an output, such as the screen.
  *
- * @version $Revision: 1.17 $ $Date: 2004-04-22 13:25:31 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-04-29 11:37:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,7 +52,7 @@ static int log_level;
  * @param p0 the array
  * @param p1 the size
  */
-void create_array(void* p0, const void* p1);
+void create_array(void* p0, const void* p1, const void* p2);
 
 /**
  * Destroys the array.
@@ -60,7 +60,7 @@ void create_array(void* p0, const void* p1);
  * @param p0 the array
  * @param p1 the size
  */
-void destroy_array(void* p0, const void* p1);
+void destroy_array(void* p0, const void* p1, const void* p2);
 
 /**
  * Resizes the array with the given size.
@@ -68,7 +68,7 @@ void destroy_array(void* p0, const void* p1);
  * @param p0 the array
  * @param p1 the size
  */
-void resize_array(void* p0, const void* p1);
+void resize_array(void* p0, const void* p1, const void* p2);
 
 /**
  * Sets the array elements.
@@ -161,7 +161,7 @@ void show_message(void* p0, void* p1) {
         // string termination.
         int ls = *s + 2;
 
-        create_array((void*) &m, (void*) &ls);
+        create_array((void*) &m, (void*) &CHARACTER_ARRAY, (void*) &ls);
 
         // The destination index to which to copy the source array.
         int i = 0;
@@ -176,7 +176,7 @@ void show_message(void* p0, void* p1) {
 
         fputs(m, stdout);
 
-        destroy_array((void*) &m, (void*) &ls);
+        destroy_array((void*) &m, (void*) &CHARACTER_ARRAY, (void*) &ls);
 
     } else {
 

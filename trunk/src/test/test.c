@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.8 $ $Date: 2004-04-28 22:45:40 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2004-04-29 11:37:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -94,7 +94,7 @@ void test_character_array_single_element() {
 
     void* ca = NULL_POINTER;
     int cas = 5;
-    create_array((void*) &ca, (void*) &cas);
+    create_array((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &cas);
 
     int ca1i = 0;
     char ca1 = 'a';
@@ -132,14 +132,14 @@ void test_character_array_single_element() {
         i++;
     }
 
-    destroy_array((void*) &ca, (void*) &cas);
+    destroy_array((void*) &ca, (void*) &CHARACTER_ARRAY, (void*) &cas);
 
     // Integer array.
     fputs("Integer array:\n", stdout);
 
     void* ia = NULL_POINTER;
     int ias = 5 * sizeof(int);
-    create_array((void*) &ia, (void*) &ias);
+    create_array((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ias);
 
     int ia1i = 0 * sizeof(int);
     int ia1 = 9;
@@ -175,7 +175,7 @@ void test_character_array_single_element() {
         j++;
     }
 
-    destroy_array((void*) &ia, (void*) &ias);
+    destroy_array((void*) &ia, (void*) &INTEGER_ARRAY, (void*) &ias);
 
     //
     // Caution! In any case consider the size of the type, for all array!
@@ -191,7 +191,7 @@ void test_character_array_multiple_elements() {
     // The destination array.
     void* d = NULL_POINTER;
     int ds = 20;
-    create_array((void*) &d, (void*) &ds);
+    create_array((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &ds);
 
     // The constant source array and the pointer to it.
     char a[] = {'T', 'h', 'i', 's', ' ', 'i', 's', ' ', 'a', ' ', 't', 'e', 's', 't', '.', '\n', '\0'};
@@ -228,11 +228,11 @@ void test_character_array_multiple_elements() {
     // The new array size to cut off remaining elements,
     // including two places for new line '\n' and c string termination '\0'.
     int ns = 15;
-    resize_array((void*) &d, (void*) &ns);
+    resize_array((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &ns);
 
     fputs(d, stdout);
 
-    destroy_array((void*) &d, (void*) &ns);
+    destroy_array((void*) &d, (void*) &CHARACTER_ARRAY, (void*) &ns);
 }
 
 /**

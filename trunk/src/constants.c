@@ -59,7 +59,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.9 $ $Date: 2004-04-22 13:25:31 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-04-29 11:37:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -124,7 +124,7 @@ static const int DOUBLE_ARRAY = 3;
 //
 
 /** The fraction size. */
-static const int FRACTION_SIZE = 2;
+static const int FRACTION_COUNT = 2;
 
 /** The numerator index. */
 static const int NUMERATOR_INDEX = 0;
@@ -137,7 +137,7 @@ static const int DENOMINATOR_INDEX = 1;
 //
 
 /** The vector size. */
-static const int VECTOR_SIZE = 3;
+static const int VECTOR_COUNT = 3;
 
 /** The x index. */
 static const int X_INDEX = 0;
@@ -153,7 +153,7 @@ static const int Z_INDEX = 2;
 //
 
 /** The time size. */
-static const int TIME_SIZE = 6;
+static const int TIME_COUNT = 6;
 
 /** The year index. */
 static const int YEAR_INDEX = 0;
@@ -178,7 +178,7 @@ static const int SECOND_INDEX = 5;
 //
 
 /** The complex size. */
-static const int COMPLEX_SIZE = 2;
+static const int COMPLEX_COUNT = 2;
 
 /** The real index. */
 static const int REAL_INDEX = 0;
@@ -191,7 +191,7 @@ static const int IMAGINARY_INDEX = 1;
 //
 
 /** The operation size. */
-static const int OPERATION_SIZE = 3;
+static const int OPERATION_COUNT = 3;
 
 /** The parameters size index. */
 static const int PARAMETERS_SIZE_INDEX = 0;
@@ -207,7 +207,7 @@ static const int PARAMETERS_SIZES_INDEX = 2;
 //
 
 /** The model size. */
-static const int MODEL_SIZE = 22;
+static const int MODEL_COUNT = 22;
 
 /** The parts size index. */
 static const int PARTS_SIZE_INDEX = 0;
@@ -280,7 +280,7 @@ static const int CONSTRAINT_MODELS_SIZES_INDEX = 21;
 //
 
 /** The signal memory size. */
-static const int SIGNAL_MEMORY_SIZE = 6;
+static const int SIGNAL_MEMORY_COUNT = 6;
 
 /** The signals size index. */
 static const int SIGNALS_SIZE_INDEX = 0;

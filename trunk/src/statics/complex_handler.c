@@ -25,7 +25,7 @@
  *
  * A complex consists of two floats, a real and an imaginary.
  *
- * @version $Revision: 1.17 $ $Date: 2004-04-22 08:54:56 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-04-29 11:37:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,7 +50,7 @@ void create_complex(void* p0) {
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create complex.");
 
     // The complex.
-    create_array(p0, (void*) &COMPLEX_SIZE);
+    create_array(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT);
 }
 
 /**
@@ -63,7 +63,7 @@ void destroy_complex(void* p0) {
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy complex.");
 
     // The complex.
-    destroy_array(p0, (void*) &COMPLEX_SIZE);
+    destroy_array(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT);
 }
 
 /**
@@ -85,8 +85,8 @@ void initialize_complex(void* p0, const void* p1, const void* p2) {
     int r = 0;
 
     // Set elements.
-    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &REAL_INDEX, (void*) &r);
-    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
+    set_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &REAL_INDEX, (void*) &r);
+    set_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
 }
 
 /**
@@ -105,12 +105,12 @@ void finalize_complex(void* p0, void* p1, void* p2) {
     int r = 0;
 
     // Get elements.
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &REAL_INDEX, (void*) &r);
+    get_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
+    get_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &REAL_INDEX, (void*) &r);
 
     // Remove elements.
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &COMPLEX_SIZE, (void*) &IMAGINARY_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &COMPLEX_SIZE, (void*) &REAL_INDEX);
+    remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT, (void*) &IMAGINARY_INDEX);
+    remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT, (void*) &REAL_INDEX);
 
 //??    fprintf(p1, %d, (void*) &(t->real));
 //??    fprintf(p1, %d, (void*) &(t->imaginary));

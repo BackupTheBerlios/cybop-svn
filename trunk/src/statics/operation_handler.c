@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.26 $ $Date: 2004-04-28 14:35:37 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2004-04-29 11:37:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,7 +69,7 @@ void create_operation(void* p0, const void* p1) {
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create operation.");
 
     // Create operation.
-    create_array(p0, (void*) &OPERATION_SIZE);
+    create_array(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT);
 
     // Initialize elements.
     int s = 0;
@@ -77,8 +77,8 @@ void create_operation(void* p0, const void* p1) {
     void* ps = NULL_POINTER;
 
     // Create elements.
-    create_array((void*) &p, (void*) &s);
-    create_array((void*) &ps, (void*) &s);
+    create_array((void*) &p, (void*) &POINTER_ARRAY, (void*) &s);
+    create_array((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &s);
 
     // Set elements in ascending order.
     set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARAMETERS_SIZE_INDEX, (void*) &s);
@@ -107,16 +107,16 @@ void destroy_operation(void* p0, const void* p1) {
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARAMETERS_SIZES_INDEX, (void*) &ps);
 
     // Remove elements in descending order.
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_SIZE, (void*) &PARAMETERS_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_SIZE, (void*) &PARAMETERS_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &OPERATION_SIZE, (void*) &PARAMETERS_SIZE_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT, (void*) &PARAMETERS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT, (void*) &PARAMETERS_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &OPERATION_COUNT, (void*) &PARAMETERS_SIZE_INDEX);
 
     // Destroy elements.
-    destroy_array((void*) &p, (void*) &s);
-    destroy_array((void*) &ps, (void*) &s);
+    destroy_array((void*) &p, (void*) &POINTER_ARRAY, (void*) &s);
+    destroy_array((void*) &ps, (void*) &INTEGER_ARRAY, (void*) &s);
 
     // Destroy operation.
-    destroy_array(p0, (void*) &OPERATION_SIZE);
+    destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &OPERATION_COUNT);
 }
 
 /**
@@ -189,9 +189,9 @@ void initialize_operation(void* p0, void* p1, const void* p2, const void* p3) {
                         s++;
 
                         // Resize elements.
-                        resize_array(pa, (void*) &s);
+                        resize_array(pa, (void*) &POINTER_ARRAY, (void*) &s);
     fputs("TEST B\n", stderr);
-                        resize_array(pas, (void*) &s);
+                        resize_array(pas, (void*) &INTEGER_ARRAY, (void*) &s);
 
                         // Set size.
     fputs("TEST C\n", stderr);
@@ -321,8 +321,8 @@ void finalize_operation(const void* p0, const void* p1, void* p2, void* p3) {
                         s--;
 
                         // Resize arrays.
-                        resize_array(pa, (void*) &s);
-                        resize_array(pas, (void*) &s);
+                        resize_array(pa, (void*) &POINTER_ARRAY, (void*) &s);
+                        resize_array(pas, (void*) &INTEGER_ARRAY, (void*) &s);
 
                         // Set array size which is equal for all arrays.
                         set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &ARRAY_SIZE_INDEX, (void*) &s);

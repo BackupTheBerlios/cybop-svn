@@ -25,7 +25,7 @@
  *
  * A vector contains the three coordinates: x, y, z.
  *
- * @version $Revision: 1.17 $ $Date: 2004-04-22 08:54:56 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-04-29 11:37:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,7 +50,7 @@ void create_vector(void* p0) {
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create vector.");
 
     // The vector.
-    create_array(p0, (void*) &VECTOR_SIZE);
+    create_array(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_COUNT);
 }
 
 /**
@@ -63,7 +63,7 @@ void destroy_vector(void* p0) {
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy vector.");
 
     // The vector.
-    destroy_array(p0, (void*) &VECTOR_SIZE);
+    destroy_array(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_COUNT);
 }
 
 /**
@@ -146,9 +146,9 @@ void finalize_vector(void* p0, void* p1, void* p2) {
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
 
     // Remove elements.
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_SIZE, (void*) &Z_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_SIZE, (void*) &Y_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_SIZE, (void*) &X_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &Z_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &Y_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &X_INDEX);
 
 //??    fprintf(p1, %d, &(m->x));
 //??    fprintf(p1, %d, &(m->y));

@@ -59,7 +59,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.37 $ $Date: 2004-04-27 16:57:23 $ $Author: christian $
+ * @version $Revision: 1.38 $ $Date: 2004-04-29 11:37:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -85,7 +85,7 @@ void create_compound(void* p0) {
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create compound.");
 
     // Create model.
-    create_array(p0, (void*) &MODEL_SIZE);
+    create_array(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT);
 
     // Initialize elements.
     int s = 0;
@@ -112,26 +112,26 @@ void create_compound(void* p0) {
     void* cms = NULL_POINTER;
 
     // Create elements.
-    create_array((void*) &n, (void*) &c);
-    create_array((void*) &ns, (void*) &c);
-    create_array((void*) &pa, (void*) &c);
-    create_array((void*) &pas, (void*) &c);
-    create_array((void*) &pl, (void*) &c);
-    create_array((void*) &pls, (void*) &c);
-    create_array((void*) &pm, (void*) &c);
-    create_array((void*) &pms, (void*) &c);
-    create_array((void*) &poa, (void*) &c);
-    create_array((void*) &poas, (void*) &c);
-    create_array((void*) &pol, (void*) &c);
-    create_array((void*) &pols, (void*) &c);
-    create_array((void*) &pom, (void*) &c);
-    create_array((void*) &poms, (void*) &c);
-    create_array((void*) &ca, (void*) &c);
-    create_array((void*) &cas, (void*) &c);
-    create_array((void*) &cl, (void*) &c);
-    create_array((void*) &cls, (void*) &c);
-    create_array((void*) &cm, (void*) &c);
-    create_array((void*) &cms, (void*) &c);
+    create_array((void*) &n, (void*) &POINTER_ARRAY, (void*) &c);
+    create_array((void*) &ns, (void*) &INTEGER_ARRAY, (void*) &c);
+    create_array((void*) &pa, (void*) &POINTER_ARRAY, (void*) &c);
+    create_array((void*) &pas, (void*) &INTEGER_ARRAY, (void*) &c);
+    create_array((void*) &pl, (void*) &POINTER_ARRAY, (void*) &c);
+    create_array((void*) &pls, (void*) &INTEGER_ARRAY, (void*) &c);
+    create_array((void*) &pm, (void*) &POINTER_ARRAY, (void*) &c);
+    create_array((void*) &pms, (void*) &INTEGER_ARRAY, (void*) &c);
+    create_array((void*) &poa, (void*) &POINTER_ARRAY, (void*) &c);
+    create_array((void*) &poas, (void*) &INTEGER_ARRAY, (void*) &c);
+    create_array((void*) &pol, (void*) &POINTER_ARRAY, (void*) &c);
+    create_array((void*) &pols, (void*) &INTEGER_ARRAY, (void*) &c);
+    create_array((void*) &pom, (void*) &POINTER_ARRAY, (void*) &c);
+    create_array((void*) &poms, (void*) &INTEGER_ARRAY, (void*) &c);
+    create_array((void*) &ca, (void*) &POINTER_ARRAY, (void*) &c);
+    create_array((void*) &cas, (void*) &INTEGER_ARRAY, (void*) &c);
+    create_array((void*) &cl, (void*) &POINTER_ARRAY, (void*) &c);
+    create_array((void*) &cls, (void*) &INTEGER_ARRAY, (void*) &c);
+    create_array((void*) &cm, (void*) &POINTER_ARRAY, (void*) &c);
+    create_array((void*) &cms, (void*) &INTEGER_ARRAY, (void*) &c);
 
     // Set elements in ascending order.
     set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
@@ -192,8 +192,8 @@ void destroy_compound(void* p0) {
     void* cms = NULL_POINTER;
 
     // Get elements.
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
-    get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_COUNT_INDEX, (void*) &c);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_INDEX, (void*) &n);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &NAMES_SIZES_INDEX, (void*) &ns);
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &PART_ABSTRACTIONS_INDEX, (void*) &pa);
@@ -216,53 +216,53 @@ void destroy_compound(void* p0) {
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &CONSTRAINT_MODELS_SIZES_INDEX, (void*) &cms);
 
     // Remove elements in descending order.
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &CONSTRAINT_MODELS_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &CONSTRAINT_MODELS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &CONSTRAINT_LOCATIONS_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &CONSTRAINT_LOCATIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &CONSTRAINT_ABSTRACTIONS_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &POSITION_MODELS_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &POSITION_MODELS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &POSITION_LOCATIONS_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &POSITION_LOCATIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &POSITION_ABSTRACTIONS_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &POSITION_ABSTRACTIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &PART_MODELS_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &PART_MODELS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &PART_LOCATIONS_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &PART_LOCATIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &PART_ABSTRACTIONS_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &PART_ABSTRACTIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &NAMES_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &NAMES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &PARTS_COUNT_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_SIZE, (void*) &PARTS_SIZE_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &CONSTRAINT_MODELS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &CONSTRAINT_MODELS_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &CONSTRAINT_LOCATIONS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &CONSTRAINT_LOCATIONS_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &CONSTRAINT_ABSTRACTIONS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &CONSTRAINT_ABSTRACTIONS_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_MODELS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_MODELS_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_LOCATIONS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_LOCATIONS_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_ABSTRACTIONS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &POSITION_ABSTRACTIONS_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_MODELS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_MODELS_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_LOCATIONS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_LOCATIONS_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_ABSTRACTIONS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &PART_ABSTRACTIONS_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &NAMES_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT, (void*) &NAMES_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MODEL_COUNT, (void*) &PARTS_COUNT_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &MODEL_COUNT, (void*) &PARTS_SIZE_INDEX);
 
     // Destroy elements.
-    destroy_array((void*) &n, (void*) &c);
-    destroy_array((void*) &ns, (void*) &c);
-    destroy_array((void*) &pa, (void*) &c);
-    destroy_array((void*) &pas, (void*) &c);
-    destroy_array((void*) &pl, (void*) &c);
-    destroy_array((void*) &pls, (void*) &c);
-    destroy_array((void*) &pm, (void*) &c);
-    destroy_array((void*) &pms, (void*) &c);
-    destroy_array((void*) &poa, (void*) &c);
-    destroy_array((void*) &poas, (void*) &c);
-    destroy_array((void*) &pol, (void*) &c);
-    destroy_array((void*) &pols, (void*) &c);
-    destroy_array((void*) &pom, (void*) &c);
-    destroy_array((void*) &poms, (void*) &c);
-    destroy_array((void*) &ca, (void*) &c);
-    destroy_array((void*) &cas, (void*) &c);
-    destroy_array((void*) &cl, (void*) &c);
-    destroy_array((void*) &cls, (void*) &c);
-    destroy_array((void*) &cm, (void*) &c);
-    destroy_array((void*) &cms, (void*) &c);
+    destroy_array((void*) &n, (void*) &POINTER_ARRAY, (void*) &c);
+    destroy_array((void*) &ns, (void*) &INTEGER_ARRAY, (void*) &c);
+    destroy_array((void*) &pa, (void*) &POINTER_ARRAY, (void*) &c);
+    destroy_array((void*) &pas, (void*) &INTEGER_ARRAY, (void*) &c);
+    destroy_array((void*) &pl, (void*) &POINTER_ARRAY, (void*) &c);
+    destroy_array((void*) &pls, (void*) &INTEGER_ARRAY, (void*) &c);
+    destroy_array((void*) &pm, (void*) &POINTER_ARRAY, (void*) &c);
+    destroy_array((void*) &pms, (void*) &INTEGER_ARRAY, (void*) &c);
+    destroy_array((void*) &poa, (void*) &POINTER_ARRAY, (void*) &c);
+    destroy_array((void*) &poas, (void*) &INTEGER_ARRAY, (void*) &c);
+    destroy_array((void*) &pol, (void*) &POINTER_ARRAY, (void*) &c);
+    destroy_array((void*) &pols, (void*) &INTEGER_ARRAY, (void*) &c);
+    destroy_array((void*) &pom, (void*) &POINTER_ARRAY, (void*) &c);
+    destroy_array((void*) &poms, (void*) &INTEGER_ARRAY, (void*) &c);
+    destroy_array((void*) &ca, (void*) &POINTER_ARRAY, (void*) &c);
+    destroy_array((void*) &cas, (void*) &INTEGER_ARRAY, (void*) &c);
+    destroy_array((void*) &cl, (void*) &POINTER_ARRAY, (void*) &c);
+    destroy_array((void*) &cls, (void*) &INTEGER_ARRAY, (void*) &c);
+    destroy_array((void*) &cm, (void*) &POINTER_ARRAY, (void*) &c);
+    destroy_array((void*) &cms, (void*) &INTEGER_ARRAY, (void*) &c);
 
     // Destroy model.
-    destroy_array(p0, (void*) &MODEL_SIZE);
+    destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &MODEL_COUNT);
 }
 
 //
@@ -844,26 +844,26 @@ void set_model_part_by_index(void* p0, const void* p1, const void* p2, const voi
                 s = s * 2 + 1;
 
                 // Resize elements.
-                resize_array((void*) &n, (void*) &s);
-                resize_array((void*) &ns, (void*) &s);
-                resize_array((void*) &pa, (void*) &s);
-                resize_array((void*) &pas, (void*) &s);
-                resize_array((void*) &pl, (void*) &s);
-                resize_array((void*) &pls, (void*) &s);
-                resize_array((void*) &pm, (void*) &s);
-                resize_array((void*) &pms, (void*) &s);
-                resize_array((void*) &poa, (void*) &s);
-                resize_array((void*) &poas, (void*) &s);
-                resize_array((void*) &pol, (void*) &s);
-                resize_array((void*) &pols, (void*) &s);
-                resize_array((void*) &pom, (void*) &s);
-                resize_array((void*) &poms, (void*) &s);
-                resize_array((void*) &ca, (void*) &s);
-                resize_array((void*) &cas, (void*) &s);
-                resize_array((void*) &cl, (void*) &s);
-                resize_array((void*) &cls, (void*) &s);
-                resize_array((void*) &cm, (void*) &s);
-                resize_array((void*) &cms, (void*) &s);
+                resize_array((void*) &n, (void*) &POINTER_ARRAY, (void*) &s);
+                resize_array((void*) &ns, (void*) &INTEGER_ARRAY, (void*) &s);
+                resize_array((void*) &pa, (void*) &POINTER_ARRAY, (void*) &s);
+                resize_array((void*) &pas, (void*) &INTEGER_ARRAY, (void*) &s);
+                resize_array((void*) &pl, (void*) &POINTER_ARRAY, (void*) &s);
+                resize_array((void*) &pls, (void*) &INTEGER_ARRAY, (void*) &s);
+                resize_array((void*) &pm, (void*) &POINTER_ARRAY, (void*) &s);
+                resize_array((void*) &pms, (void*) &INTEGER_ARRAY, (void*) &s);
+                resize_array((void*) &poa, (void*) &POINTER_ARRAY, (void*) &s);
+                resize_array((void*) &poas, (void*) &INTEGER_ARRAY, (void*) &s);
+                resize_array((void*) &pol, (void*) &POINTER_ARRAY, (void*) &s);
+                resize_array((void*) &pols, (void*) &INTEGER_ARRAY, (void*) &s);
+                resize_array((void*) &pom, (void*) &POINTER_ARRAY, (void*) &s);
+                resize_array((void*) &poms, (void*) &INTEGER_ARRAY, (void*) &s);
+                resize_array((void*) &ca, (void*) &POINTER_ARRAY, (void*) &s);
+                resize_array((void*) &cas, (void*) &INTEGER_ARRAY, (void*) &s);
+                resize_array((void*) &cl, (void*) &POINTER_ARRAY, (void*) &s);
+                resize_array((void*) &cls, (void*) &INTEGER_ARRAY, (void*) &s);
+                resize_array((void*) &cm, (void*) &POINTER_ARRAY, (void*) &s);
+                resize_array((void*) &cms, (void*) &INTEGER_ARRAY, (void*) &s);
 
                 // Set array size.
                 set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &PARTS_SIZE_INDEX, (void*) &s);

@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.38 $ $Date: 2004-04-27 16:57:23 $ $Author: christian $
+ * @version $Revision: 1.39 $ $Date: 2004-04-29 11:37:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -65,7 +65,7 @@ void create_signal_memory(void* p0) {
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create signal memory.");
 
     // Create signal memory.
-    create_array(p0, (void*) &SIGNAL_MEMORY_SIZE);
+    create_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);
 
     // Initialize elements.
     int s = 10; //?? CHANGE to int s = 0;
@@ -76,10 +76,10 @@ void create_signal_memory(void* p0) {
     void* as = NULL_POINTER;
 
     // Create elements.
-    create_array((void*) &sig, (void*) &s);
-    create_array((void*) &p, (void*) &s);
-    create_array((void*) &a, (void*) &s);
-    create_array((void*) &as, (void*) &s);
+    create_array((void*) &sig, (void*) &POINTER_ARRAY, (void*) &s);
+    create_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &s);
+    create_array((void*) &a, (void*) &POINTER_ARRAY, (void*) &s);
+    create_array((void*) &as, (void*) &INTEGER_ARRAY, (void*) &s);
 
     // Set elements in ascending order.
     set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNALS_SIZE_INDEX, (void*) &s);
@@ -143,21 +143,21 @@ void destroy_signal_memory(void* p0) {
     get_array_element(p0, (void*) &POINTER_ARRAY, (void*) &ABSTRACTIONS_SIZES_INDEX, (void*) &as);
 
     // Remove elements in descending order.
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &ABSTRACTIONS_SIZES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &ABSTRACTIONS_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &PRIORITIES_INDEX);
-    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &SIGNALS_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &SIGNALS_COUNT_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNAL_MEMORY_SIZE, (void*) &SIGNALS_SIZE_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &ABSTRACTIONS_SIZES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &ABSTRACTIONS_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &PRIORITIES_INDEX);
+    remove_array_element(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_COUNT_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT, (void*) &SIGNALS_SIZE_INDEX);
 
     // Destroy elements.
-    destroy_array((void*) &sig, (void*) &s);
-    destroy_array((void*) &p, (void*) &s);
-    destroy_array((void*) &a, (void*) &s);
-    destroy_array((void*) &as, (void*) &s);
+    destroy_array((void*) &sig, (void*) &POINTER_ARRAY, (void*) &s);
+    destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &s);
+    destroy_array((void*) &a, (void*) &POINTER_ARRAY, (void*) &s);
+    destroy_array((void*) &as, (void*) &INTEGER_ARRAY, (void*) &s);
 
     // Destroy signal memory.
-    destroy_array(p0, (void*) &SIGNAL_MEMORY_SIZE);
+    destroy_array(p0, (void*) &POINTER_ARRAY, (void*) &SIGNAL_MEMORY_COUNT);
 }
 
 //
@@ -202,13 +202,13 @@ void set_signal(void* p0, const void* p1, const void* p2, const void* p3, const 
             s = s * 2 + 1;
 
             // Resize elements.
-            resize_array((void*) &sig, (void*) &s);
+            resize_array((void*) &sig, (void*) &POINTER_ARRAY, (void*) &s);
             fputs("set signal TEST 0\n", stderr);
-            resize_array((void*) &p, (void*) &s);
+            resize_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &s);
             fputs("set signal TEST 1\n", stderr);
-            resize_array((void*) &a, (void*) &s);
+            resize_array((void*) &a, (void*) &POINTER_ARRAY, (void*) &s);
             fputs("set signal TEST 2\n", stderr);
-            resize_array((void*) &as, (void*) &s);
+            resize_array((void*) &as, (void*) &INTEGER_ARRAY, (void*) &s);
             fputs("set signal TEST 3\n", stderr);
 
             // Set array size which is equal for all arrays.

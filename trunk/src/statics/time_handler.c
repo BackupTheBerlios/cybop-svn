@@ -32,7 +32,7 @@
  * 01.01.2000 00:00:00";
  * 31.12.1999 23:59:59";
  *
- * @version $Revision: 1.17 $ $Date: 2004-04-22 08:54:56 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-04-29 11:37:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,7 +57,7 @@ void create_time(void* p0) {
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create time.");
 
     // The time.
-    create_array(p0, (void*) &TIME_SIZE);
+    create_array(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT);
 }
 
 /**
@@ -70,7 +70,7 @@ void destroy_time(void* p0) {
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy time.");
 
     // The time.
-    destroy_array(p0, (void*) &TIME_SIZE);
+    destroy_array(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT);
 }
 
 /**
@@ -131,12 +131,12 @@ void finalize_time(void* p0, void* p1, void* p2) {
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &YEAR_INDEX, (void*) &y);
 
     // Remove elements in descending order.
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_SIZE, (void*) &SECOND_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_SIZE, (void*) &MINUTE_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_SIZE, (void*) &HOUR_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_SIZE, (void*) &DAY_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_SIZE, (void*) &MONTH_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_SIZE, (void*) &YEAR_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &SECOND_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &MINUTE_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &HOUR_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &DAY_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &MONTH_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT, (void*) &YEAR_INDEX);
 
 //??    fprintf(p1, %d, &(m->value));
 }

@@ -28,7 +28,7 @@
  * For higher performance, it is mostly better to use floating point numbers
  * (float) which can be calculated by the Arithmetic Logic Unit (ALU).
  *
- * @version $Revision: 1.17 $ $Date: 2004-04-22 08:54:56 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2004-04-29 11:37:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,7 +53,7 @@ void create_fraction(void* p0) {
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create fraction.");
 
     // The fraction.
-    create_array(p0, (void*) &FRACTION_SIZE);
+    create_array(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT);
 }
 
 /**
@@ -66,7 +66,7 @@ void destroy_fraction(void* p0) {
     log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy fraction.");
 
     // The fraction.
-    destroy_array(p0, (void*) &FRACTION_SIZE);
+    destroy_array(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT);
 }
 
 /**
@@ -111,8 +111,8 @@ void finalize_fraction(void* p0, void* p1, void* p2) {
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX, (void*) &n);
 
     // Remove elements.
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_SIZE, (void*) &DENOMINATOR_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_SIZE, (void*) &NUMERATOR_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT, (void*) &DENOMINATOR_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT, (void*) &NUMERATOR_INDEX);
 
 //??    sprintf(p1, %l, (void*) &(m->value));
 }
