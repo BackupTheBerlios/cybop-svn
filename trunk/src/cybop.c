@@ -32,6 +32,7 @@
 #include "signal_memory.c"
 #include "signal_memory_handler.c"
 #include "statics.c"
+#include "x_windows_handler.c"
 
 //?? Temporary for character screen testing.
 #include "character_screen_handler.c"
@@ -42,7 +43,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.11 $ $Date: 2003-12-18 16:40:03 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-12-19 12:44:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -100,6 +101,11 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
                     receive_x_windows_input(i->x_windows);
                 }
                 
+                //?? test x windows
+                send_x_windows_output((void*) 0, (void*) 0, p3);
+                break;
+                
+/*??
                 // Get top priority signal from signal memory and remove it from there.
                 get_highest_priority_index(p0, (void*) &index);
                 s = get_signal(p0, (void*) &index);
@@ -119,6 +125,7 @@ void wait(void* p0, void* p1, void* p2, void* p3) {
                     log_message((void*) &INFO_LOG_LEVEL, "2");
                     handle_operation_signal(s, a, p1, p2, p3, (void*) &f);
                 }
+*/
     
             } else {
     

@@ -43,7 +43,7 @@
  *
  * It controls the input and output of x windows.
  *
- * @version $Revision: 1.2 $ $Date: 2003-12-18 16:40:03 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-12-19 12:44:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
