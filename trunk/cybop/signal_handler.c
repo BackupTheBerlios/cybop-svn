@@ -38,7 +38,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.16 $ $Date: 2003-10-13 13:55:21 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2003-10-14 14:54:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -228,10 +228,9 @@ static void receive_signal(void* p0, void* p1) {
     if (s != 0) {
 
         // Read and remove signal from signal memory (interrupt vector table).
-        struct signal* tmp = 0;
         int i = 0;
-        
-        get_map_element_at_index(p0, (void*) &i, (void*) tmp);
+        struct signal* tmp = get_map_element_at_index(p0, (void*) &i);
+
         remove_map_element_at_index(p0, (void*) &i);
 
         if (tmp != 0) {
@@ -250,8 +249,7 @@ static void receive_signal(void* p0, void* p1) {
             s->adverbial = tmp->adverbial;
             s->condition = tmp->condition;
 
-            // Reset and destroy signal memory signal.
-            reset_signal(tmp);
+            // Destroy signal memory signal.
             free(tmp);
     
         } else {
@@ -304,11 +302,8 @@ static void handle_signal(void* p0, void* p1, void* p2) {
 
             } else if (strcmp(a, "mouse_clicked") == 0) {
 
-                void* main_frame = malloc(0);
-                struct vector* pointer_position = malloc(0);
-                
-                get_complex_element(statics, "main_frame", main_frame);
-                get_complex_element(statics, "mouse.pointer_position", pointer_position);
+                void* main_frame = get_complex_element(statics, "main_frame");
+                struct vector* pointer_position = get_complex_element(statics, "mouse.pointer_position");
                 
                 reset_signal(s);
 
@@ -321,9 +316,6 @@ static void handle_signal(void* p0, void* p1, void* p2) {
                     log((void*) &ERROR_LOG_LEVEL, "Could not handle mouse clicked action. The pointer position is null.");
                 }
                 
-                free(pointer_position);
-                free(main_frame);
-
             } else if (strcmp(a, SHOW_SYSTEM_INFORMATION_ACTION) == 0) {
 
 /*??

@@ -33,7 +33,7 @@
  *
  * Internal array elements are accessed over their index.
  *
- * @version $Revision: 1.3 $ $Date: 2003-10-14 07:34:59 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-10-14 14:54:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
  
@@ -44,19 +44,23 @@
 /**
  * Extends the internal array.
  *
- * @param p0 the internal array
+ * @param p0 the old internal array
  * @param p1 the old size
  * @param p2 the new size
+ * @return the new internal array
  */
-static void extend_internal_array(void** p0, void* p1, void* p2) {
+static void** extend_internal_array(void** p0, void* p1, void* p2) {
 
+    void** a = 0;
+    
     if (p0 != 0) {
 
         int* old_size = (int*) p1;
         int* new_size = (int*) p2;
-        void** new_array = malloc(*new_size);
+        // Create new internal array.
+        a = malloc(*new_size);
 
-        if (new_array != 0) {
+        if (a != 0) {
                 
             // Copy all elements from the old to the new array.
             // The rest of the new array is just left empty as is;
@@ -65,13 +69,13 @@ static void extend_internal_array(void** p0, void* p1, void* p2) {
 
             while (i < *old_size) {
 
-                new_array[i] = p0[i];
+                a[i] = p0[i];
 
                 i++;
             }
 
+            // Destroy old internal array.
             free(p0);
-            p0 = new_array;
 
         } else {
 
@@ -80,8 +84,10 @@ static void extend_internal_array(void** p0, void* p1, void* p2) {
 
     } else {
 
-        log((void*) &ERROR_LOG_LEVEL, "Could not extend internal array. The internal array is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not extend internal array. The old internal array is null.");
     }
+    
+    return a;
 }
 
 //
@@ -162,17 +168,19 @@ static void remove_internal_array_element(void** p0, void* p1, void* p2) {
  *
  * @param p0 the internal array
  * @param p1 the index
- * @param p2 the element
+ * @return the element
  */
-static void get_internal_array_element(void** p0, void* p1, void* p2) {
+static void* get_internal_array_element(void** p0, void* p1) {
 
+    void* e = 0;
+    
     if (p0 != 0) {
 
         int* i = (int*) p1;
 
         if (*i != INVALID_VALUE) {
             
-            p2 = p0[*i];
+            e = p0[*i];
         
         } else {
     
@@ -183,6 +191,8 @@ static void get_internal_array_element(void** p0, void* p1, void* p2) {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not get internal array element. The internal array is null.");
     }
+    
+    return e;
 }
 
 /* INTERNAL_ARRAY_HANDLER_SOURCE */

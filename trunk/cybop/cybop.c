@@ -41,7 +41,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.15 $ $Date: 2003-10-14 07:34:59 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-10-14 14:54:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -134,25 +134,17 @@ int main(int p0, char** p1) {
     initialize_array(a);
 
     void* c = (void*) "test_signal";
+    void* c2 = (void*) "test_signal_2";
     int i = 0;
+    int j = 1;
     set_array_element(a, (void*) &i, c);
+    set_array_element(a, (void*) &j, c2);
+    void* result = get_array_element(a, (void*) &i);
+    void* result2 = get_array_element(a, (void*) &j);
+    puts("result: ");
+    puts((char*) result);
+    puts((char*) result2);
 
-    char* result = (char*) malloc(50);
-//??    *result = '0';
-    get_array_element(a, (void*) &i, (void*) result);
-    puts("TEST A");
-    puts(result);
-    puts("TEST B");
-    free(result);
-
-    int* size = (int*) malloc(0);
-    get_array_size(a, (void*) size);
-    if (*size == 1) {
-        puts("size: = 1");
-    } else if (*size >= 2) {
-        puts("size: >= 2");
-    }
-    
     finalize_array(a);
     free(a);
 

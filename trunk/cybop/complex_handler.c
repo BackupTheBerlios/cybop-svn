@@ -34,7 +34,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.10 $ $Date: 2003-10-13 13:55:20 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-10-14 14:54:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -102,10 +102,11 @@ static void finalize_complex(void* p0) {
  * or, if there is no dot, then it is the given name itself.
  *
  * @param p0 the hierarchical complex name
- * @param p1 the child name
+ * @return the child name
  */
-static void get_child_name(void* p0, void* p1) {
+static void* get_child_name(void* p0) {
     
+    void* name = 0;
     char* n = (char*) p0;
     
     if (n != 0) {
@@ -127,6 +128,8 @@ static void get_child_name(void* p0, void* p1) {
         
         log((void*) &ERROR_LOG_LEVEL, "Could not get child name. The hierarchical name is null.");
     }
+    
+    return name;
 }
 
 /**
@@ -135,10 +138,11 @@ static void get_child_name(void* p0, void* p1) {
  * It is the whole string after the first dot/point ".".
  *
  * @param p0 the hierarchical complex name
- * @param p1 the remaining name
+ * @return the remaining name
  */
-static void get_remaining_name(void* p0, void* p1) {
-    
+static void* get_remaining_name(void* p0) {
+
+    void* name = 0;    
     char* n = (char*) p0;
     
     if (n != 0) {
@@ -156,6 +160,8 @@ static void get_remaining_name(void* p0, void* p1) {
         
         log((void*) &ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical name is null.");
     }
+    
+    return name;
 }
 
 //
@@ -178,32 +184,22 @@ static void set_complex_element(void* p0, void* p1, void* p2) {
         log((void*) &INFO_LOG_LEVEL, "Set complex element: ");
         log((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = malloc(0);
-        void* r = malloc(0);
-        
-        get_child_name(p1, n);
-        get_remaining_name(p1, r);
+        void* n = get_child_name(p1);
+        void* r = get_remaining_name(p1);
         
         if (r != 0) {
 
             // The given complex is the parent of another parent.
-            void* child = malloc(0);
-            
-            get_map_element_with_name(c->children, n, child);
+            void* child = get_map_element_with_name(c->children, n);
             
             // Continue to process along the hierarchical name.
             set_complex_element(child, r, p2);
-            
-            free(child);
             
         } else {
 
             // The given complex is the parent of the child.
             set_map_element(c->children, n, p2);
         }
-        
-        free(r);
-        free(n);
         
     } else {
         
@@ -226,23 +222,16 @@ static void remove_complex_element(void* p0, void* p1) {
         log((void*) &INFO_LOG_LEVEL, "Remove complex element: ");
         log((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = malloc(0);
-        void* r = malloc(0);
-        
-        get_child_name(p1, n);
-        get_remaining_name(p1, r);
+        void* n = get_child_name(p1);
+        void* r = get_remaining_name(p1);
         
         if (r != 0) {
             
             // The given complex is the parent of another parent.
-            void* child = malloc(0);
-            
-            get_map_element_with_name(c->children, n, child);
+            void* child = get_map_element_with_name(c->children, n);
             
             // Continue to process along the hierarchical name.
             remove_complex_element(child, r);
-            
-            free(child);
             
         } else {
 
@@ -250,9 +239,6 @@ static void remove_complex_element(void* p0, void* p1) {
             remove_map_element_with_name(c->children, n);
         }
         
-        free(r);
-        free(n);
-
     } else {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not remove complex element. The complex is null.");
@@ -264,10 +250,11 @@ static void remove_complex_element(void* p0, void* p1) {
  *
  * @param p0 the complex
  * @param p1 the hierarchical complex name
- * @param p2 the element
+ * @return the element
  */
-static void get_complex_element(void* p0, void* p1, void* p2) {
+static void* get_complex_element(void* p0, void* p1) {
 
+    void* e = 0;
     struct complex* c = (struct complex*) p0;
 
     if (c != 0) {
@@ -275,31 +262,28 @@ static void get_complex_element(void* p0, void* p1, void* p2) {
         log((void*) &INFO_LOG_LEVEL, "Get complex element: ");
         log((void*) &INFO_LOG_LEVEL, p1);
         
-        void* n = 0;
-        void* r = 0;
-        
-        get_child_name(p1, n);
-        get_remaining_name(p1, r);
+        void* n = get_child_name(p1);
+        void* r = get_remaining_name(p1);
         
         if (r != 0) {
             
             // The given complex is the parent of another parent.
-            void* child = 0;
-            
-            get_map_element_with_name(c->children, n, child);
+            void* child = get_map_element_with_name(c->children, n);
             
             // Continue to process along the hierarchical name.
-            get_complex_element(child, r, p2);
+            e = get_complex_element(child, r);
             
         } else {
 
             // The given complex is the parent of the child.
-            get_map_element_with_name(c->children, n, p2);
+            e = get_map_element_with_name(c->children, n);
         }
 
     } else {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not get complex element. The complex is null.");
     }
+    
+    return e;
 }
 

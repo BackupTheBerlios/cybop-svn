@@ -35,7 +35,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.17 $ $Date: 2003-10-14 07:34:59 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2003-10-14 14:54:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -95,21 +95,23 @@ static void finalize_array(void* p0) {
  * Returns the array size.
  *
  * @param p0 the array
- * @param p1 the array size
+ * @return the array size
  */
-static void get_array_size(void* p0, void* p1) {
+static void* get_array_size(void* p0) {
 
+    int* s = 0;
     struct array* a = (struct array*) p0;
 
     if (a != 0) {
 
-        int* s = (int*) p1;
-        *s = a->size;
+        s = &(a->size);
 
     } else {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not get array size. The array is null.");
     }
+    
+    return (void*) s;
 }
 
 //
@@ -180,20 +182,23 @@ static void remove_array_element(void* p0, void* p1) {
  *
  * @param p0 the array
  * @param p1 the index
- * @param p2 the element
+ * @return the element
  */
-static void get_array_element(void* p0, void* p1, void* p2) {
+static void* get_array_element(void* p0, void* p1) {
 
+    void* e = 0;
     struct array* a = (struct array*) p0;
 
     if (a != 0) {
 
-        get_internal_array_element(a->internal_array, p1, p2);
+        e = get_internal_array_element(a->internal_array, p1);
 
     } else {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not get array element. The array is null.");
     }
+    
+    return e;
 }
 
 /* ARRAY_HANDLER_SOURCE */

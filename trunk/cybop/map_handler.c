@@ -34,7 +34,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.17 $ $Date: 2003-10-14 07:34:59 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2003-10-14 14:54:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -94,20 +94,23 @@ static void finalize_map(void* p0) {
  * Returns the map size.
  *
  * @param p0 the map
- * @param p1 the map size
+ * @return the map size
  */
-static void get_map_size(void* p0, void* p1) {
+static void* get_map_size(void* p0) {
 
+    void* s = 0;
     struct map* m = (struct map*) p0;
 
     if (m != 0) {
 
-        get_array_size(m->names, p1);
+        s = get_array_size(m->names);
 
     } else {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not get map size. The map is null.");
     }
+    
+    return s;
 }
 
 //
@@ -119,32 +122,29 @@ static void get_map_size(void* p0, void* p1) {
  *
  * @param p0 the map
  * @param p1 the name
- * @param p2 the index
+ * @return the index
  */
-static void get_map_element_index(void* p0, void* p1, void* p2) {
+static int get_map_element_index(void* p0, void* p1) {
 
+    int index = -1;
     struct map* m = (struct map*) p0;
 
     if (m != 0) {
         
         void* a = m->names;
-        int* index = (int*) p2;
-        *index = -1;
         int i = 0;
-        int* size = (int*) malloc(0);
-        *size = 0;
-        get_array_size(a, (void*) size);
-        void* name = malloc(0);
+        int* size = (int*) get_array_size(a);
+        void* name = 0;
 
         while (i < *size) {
 
-            get_array_element(a, (void*) &i, name);
+            name = get_array_element(a, (void*) &i);
 
             // If a 0 name is reached, then the name was not found.
-            // In this case, reset index to -1.
+            // In this case, reset index to 0 pointer.
             if (name == 0) {
 
-                *index = -1;
+                index = -1;
 
                 break;
             
@@ -154,7 +154,7 @@ static void get_map_element_index(void* p0, void* p1, void* p2) {
                 // then its index is the one to be returned.
                 if (strcmp((char*) name, (char*) p1) == 0) {
 
-                    *index = i;
+                    index = i;
 
                     break;
                 }
@@ -163,13 +163,12 @@ static void get_map_element_index(void* p0, void* p1, void* p2) {
             i++;
         }
         
-        free(name);
-        free(size);
-        
     } else {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not get map element index. The map is null.");
     }
+    
+    return index;
 }
 
 /**
@@ -184,30 +183,29 @@ static void get_map_element_index(void* p0, void* p1, void* p2) {
  *
  * @param p0 the map
  * @param p1 the name
- * @param p2 the next index
+ * @return the next index
  */
-static void get_next_map_element_index(void* p0, void* p1, void* p2) {
+static int get_next_map_element_index(void* p0, void* p1) {
 
+    int index = -1;
     struct map* m = (struct map*) p0;
 
     if (m != 0) {
 
         void* a = m->names;
-        int* index = (int*) p2;
-        *index = -1;
         int i = 0;
-        int size = sizeof(a);
+        int* size = (int*) get_array_size(a);
         void* name = 0;
 
-        while (i < size) {
+        while (i < *size) {
 
-            get_array_element(a, (void*) &i, name);
+            name = get_array_element(a, (void*) &i);
 
             // If a 0 name is reached, then the name was not found.
             // In this case, the current value of i is the next free index.
             if (name == 0) {
 
-                *index = i;
+                index = i;
 
                 break;
 
@@ -218,7 +216,7 @@ static void get_next_map_element_index(void* p0, void* p1, void* p2) {
                 // this element will have to be replaced.
                 if (strcmp((char*) name, (char*) p1) == 0) {
 
-                    *index = i;
+                    index = i;
 
                     break;
                 }
@@ -229,44 +227,45 @@ static void get_next_map_element_index(void* p0, void* p1, void* p2) {
         
         // Neither element matched, nor was a 0 element found.
         // The map is full and such its size will be the next index to be used.
-        if (*index == -1) {
+        if (index == -1) {
 
-            *index = size;
+            index = *size;
         }
 
     } else {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not get next map element index. The map is null.");
     }
+
+    return index;
 }
 
 /**
- * Returns the number of map elements whose name starts with the given name.
+ * Returns the number of map elements whose name starts with the given base name.
  *
  * @param p0 the map
- * @param p1 the name
- * @param p2 the number of map elements whose name starts with the given name
+ * @param p1 the base name
+ * @return the number of map elements whose name starts with the given base name
  */
-static void get_map_element_count(void* p0, void* p1, void* p2) {
+static int get_map_element_count(void* p0, void* p1) {
 
+    int count = 0;
     struct map* m = (struct map*) p0;
 
     if (m != 0) {
 
         void* a = m->names;
-        int* count = (int*) p2;
-        *count = 0;
         int i = 0;
-        int size = sizeof(a);
+        int* size = (int*) get_array_size(a);
         void* name = 0;
 
-        while (i < size) {
+        while (i < *size) {
 
-            get_array_element(a, (void*) &i, name);
+            name = get_array_element(a, (void*) &i);
 
             if (name != 0) {
 
-                // Compares the current element's name with the searched name.
+                // Compares the current element's name with the searched base name.
                 if (strncmp((char*) name, (char*) p1, strlen((char*) p1)) == 0) {
 
                     // The ASCII code for "_" is 95.
@@ -279,9 +278,9 @@ static void get_map_element_count(void* p0, void* p1, void* p2) {
                         
                         int number = atoi(suffix + 1);
     
-                        if (number > *count) {
+                        if (number > count) {
                             
-                            *count = number;
+                            count = number;
                         }
                     }
                 }
@@ -299,10 +298,12 @@ static void get_map_element_count(void* p0, void* p1, void* p2) {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not get element count. The map is null.");
     }
+    
+    return count;
 }
 
 /**
- * Returns the map element name.
+ * Builds the next map element name.
  *
  * The given name is used as a word base for the new extended name.
  * Additionally, the new name will receive a number suffix.
@@ -313,24 +314,19 @@ static void get_map_element_count(void* p0, void* p1, void* p2) {
  * @param p1 the base name
  * @param p2 the name
  */
-static void get_map_element_name(void* p0, void* p1, void* p2) {
+static void build_next_map_element_name(void* p0, void* p1, void* p2) {
 
-    int* count = (int*) malloc(0);
-    *count = 0;
-    get_map_element_count(p0, p1, (void*) count);
+    int count = get_map_element_count(p0, p1);
 
-    //?? The count value arrives here correctly.
-    //?? But it is unclear how to convert the integer into a string!
+    //?? It is unclear how to convert the integer into a string!
     //?? A simple cast does not work as it is only for ASCII code
     //?? but here a normal integer number is to be converted into a string.
-    char suffix = (char) *count;
+    char suffix = (char) count;
     p2 = (void*) strcat((char*) p2, (char*) p1);
     p2 = (void*) strcat((char*) p2, "_");
 //??    p2 = (void*) strcat((char*) p2, &suffix);
     //?? Temporary solution adds "0" instead of real suffix.
     p2 = (void*) strcat((char*) p2, "0");
-
-    free(count);
 }
 
 //
@@ -350,45 +346,36 @@ static void set_map_element(void* p0, void* p1, void* p2) {
     
     if (m != 0) {
         
-        int* i = (int*) malloc(0);
-        *i = -1;
-        get_next_map_element_index(p0, p1, (void*) i);
+        int i = get_next_map_element_index(p0, p1);
         
         puts("TEST i");
-        int* test = (int*) i;
-        if (*test == 0) {
+        if (i == 0) {
             puts("0");
-        } else if (*test >= 1) {
+        } else if (i >= 1) {
             puts(">= 1");
         }
         
         puts("TEST p1");
         puts((char*) p1);
 
-        set_array_element(m->names, i, p1);
-        set_array_element(m->references, i, p2);
+        set_array_element(m->names, (void*) &i, p1);
+        set_array_element(m->references, (void*) &i, p2);
 
         puts("TEST name");
-        void* name = malloc(0);
-        get_array_element(m->names, i, name);
+        void* name = get_array_element(m->names, (void*) &i);
         if (name != 0) {
-            puts("name is o.k.");   
+            puts("name is o.k.:");   
+            puts((char*) name);   
         } else {
             puts("name is null");   
         }
-        puts((char*) name);   
-        free(name);
         puts("TEST reference");
-        void* ref = malloc(0);
-        get_array_element(m->references, i, ref);
+        void* ref = get_array_element(m->references, (void*) &i);
         if (ref != 0) {
             puts("ref is o.k.");   
         } else {
             puts("ref is null");   
         }
-        free(ref);
-
-        free(i);
 
     } else {
 
@@ -405,12 +392,11 @@ static void set_map_element(void* p0, void* p1, void* p2) {
  */
 static void add_map_element(void* p0, void* p1, void* p2) {
 
-    char* n = (char*) malloc(0);
-    *n = '0';
-
-    // Get name extended by next index.
-    get_map_element_name(p0, p1, (void*) n);
-    set_map_element(p0, (void*) n, p2);
+    // This element name will get destroyed (freed) in ...??
+    void* n = malloc(0);
+    // Extend name with next free index.
+    build_next_map_element_name(p0, p1, n);
+    set_map_element(p0, n, p2);
 
 /*??
     puts("TEST e");
@@ -423,8 +409,6 @@ static void add_map_element(void* p0, void* p1, void* p2) {
         puts("null");
     }
 */
-    
-    free(n);
 }
 
 /**
@@ -456,13 +440,8 @@ static void remove_map_element_at_index(void* p0, void* p1) {
  */
 static void remove_map_element_with_name(void* p0, void* p1) {
 
-    int* i = (int*) malloc(0);
-    *i = -1;
-    
-    get_map_element_index(p0, p1, (void*) i);
-    remove_map_element_at_index(p0, (void*) i);
-    
-    free(i);
+    int i = get_map_element_index(p0, p1);
+    remove_map_element_at_index(p0, (void*) &i);
 }
 
 /**
@@ -470,20 +449,23 @@ static void remove_map_element_with_name(void* p0, void* p1) {
  *
  * @param p0 the map
  * @param p1 the index
- * @param p2 the element
+ * @return the element
  */
-static void get_map_element_at_index(void* p0, void* p1, void* p2) {
+static void* get_map_element_at_index(void* p0, void* p1) {
 
+    void* e = 0;
     struct map* m = (struct map*) p0;
 
     if (m != 0) {
 
-        get_array_element(m->references, p1, p2);
+        e = get_array_element(m->references, p1);
 
     } else {
 
         log((void*) &ERROR_LOG_LEVEL, "Could not get map element. The map is null.");
     }
+    
+    return e;
 }
 
 /**
@@ -491,17 +473,15 @@ static void get_map_element_at_index(void* p0, void* p1, void* p2) {
  *
  * @param p0 the map
  * @param p1 the name
- * @param p2 the element
+ * @return the element
  */
-static void get_map_element_with_name(void* p0, void* p1, void* p2) {
+static void* get_map_element_with_name(void* p0, void* p1) {
 
-    int* i = (int*) malloc(0);
-    *i = -1;
+    void* e = 0;
+    int i = get_map_element_index(p0, p1);
+    e = get_map_element_at_index(p0, (void*) &i);
     
-    get_map_element_index(p0, p1, (void*) i);
-    get_map_element_at_index(p0, (void*) i, p2);
-    
-    free(i);
+    return e;
 }
 
 /* MAP_HANDLER_SOURCE */
