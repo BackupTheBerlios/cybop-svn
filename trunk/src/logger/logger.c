@@ -28,7 +28,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.9 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2004-11-09 07:28:30 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -166,7 +166,19 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
 
                 int* l = (int*) p0;
 
-                if (*l == INFO_LOG_LEVEL) {
+                if (*l == DEBUG_LOG_LEVEL) {
+
+                    if ((*ei + DEBUG_LOG_LEVEL_NAME_COUNT) < *ec) {
+
+                        add_log_details(p1, p3, (void*) &DEBUG_LOG_LEVEL_NAME, (void*) &DEBUG_LOG_LEVEL_NAME_COUNT);
+                        *ei = *ei + DEBUG_LOG_LEVEL_NAME_COUNT;
+
+                    } else {
+
+                        fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
+                    }
+                }
+                else if (*l == INFO_LOG_LEVEL) {
 
                     if ((*ei + INFO_LOG_LEVEL_NAME_COUNT) < *ec) {
 
@@ -327,6 +339,23 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
         fputs("Error: Could not log message. The log level is null.\n", LOG_OUTPUT);
     }
+}
+
+/**
+ * Logs the message for debug
+ * 
+ * author: rolf
+ * 
+ * @param pMessage message for logging, this is a null terminated string 
+ *                 for simple logging debug infos
+ */
+
+void log_message_debug(const char* pMessage) {
+
+    int message_count = strlen(pMessage);
+    log_message( (void*) &DEBUG_LOG_LEVEL, 
+                 (void*) &pMessage, 
+                 (void*) &message_count );
 }
 
 /* LOGGER_SOURCE */
