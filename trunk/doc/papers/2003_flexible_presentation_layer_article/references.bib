@@ -3,12 +3,10 @@
 %
 % Copyright (c) 2001-2004. Christian Heller. All rights reserved.
 %
-% Permission is granted to copy, distribute and/or modify this document
-% under the terms of the GNU Free Documentation License, Version 1.1
-% or any later version published by the Free Software Foundation;
-% with no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
-% Texts. A copy of the license is included in the section entitled
-% "GNU Free Documentation License".
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
 %
 % http://www.cybop.net
 % - Cybernetics Oriented Programming -
@@ -17,7 +15,6 @@
 % - Information in Medicine -
 %
 % %author Christian Heller <christian.heller@tuxtax.de>
-% %author Jens Bohl <info@jens-bohl.de>
 %
 
 @book{alexander,
@@ -27,6 +24,12 @@
     address = "New York",
     publisher = "Oxford University Press",
     year = "1977"
+}
+
+@misc{americanheritagedictionary,
+    key = "americanheritagedictionary",
+    title = "The American Heritage Dictionary of the English Language",
+    edition = "4"
 }
 
 @misc{aspectj,
@@ -86,7 +89,9 @@
         medizinischer Dokumentation unter Einbeziehung topologischer Befundung",
     type = "Master's Thesis",
     school = "Technical University of Ilmenau",
-    year = "2003"
+    year = "2003",
+    month = "January",
+    note = http://www.cybop.net
 }
 
 @article{bohlheller,
@@ -147,14 +152,30 @@
     note = "ISBN 3-8273-1282-5"
 }
 
-@article{cai,
+@booklet{c,
+    OPTkey = "cmanual",
+    OPTauthor = "Regionales Rechenzentrum fuer Niedersachsen/ Universitaet Hannover,
+    Zentralinstitut fuer Angewandte Mathematik, Forschungszentrum Juelich GmbH",
+    title = "Die Programmiersprache C",
+    OPTmonth = "March",
+    OPTyear = "1991"
+}
+
+@incollection{cai,
     key = "cai",
     author = "Jason Cai, Ranjit Kapila, Gaurav Pal",
     title = "HMVC: The layered pattern for developing strong client tiers.",
-    howpublished = "http://www.javaworld.com/javaworld/jw-07-2000/jw-0721-hmvc_p.html",
     publisher = "Java World",
     year = "2000",
     month = "July",
+    note = "http://www.javaworld.com/javaworld/jw-07-2000/jw-0721-hmvc_p.html"
+}
+
+@misc{commonlisp,
+    key = "commonlisp",
+    author = "The Association of Lisp Users",
+    title = "Object Oriented and Procedural Lisp",
+    howpublished = "http://www.lisp.org/table/objects.htm"
 }
 
 @book{connolly,
@@ -183,6 +204,14 @@
     year = "1992"
 }
 
+@booklet{cplusplus,
+    OPTkey = "cplusplusmanual",
+    OPTauthor = "Regionales Rechenzentrum fuer Niedersachsen/ Universitaet Hannover",
+    title = "Die Programmiersprache C++",
+    OPTmonth = "April",
+    OPTyear = "1994"
+}
+
 @misc{cybop,
     key = "cybop",
     title = "CYBOP -- Cybernetics Oriented Programming",
@@ -206,6 +235,13 @@
     howpublished = "http://www.info.uni-karlsruhe.de/~pulvermu/workshops/aop2001/beitraege/depke.pdf",
     school = "Universitaet Paderborn",
     year = "2001"
+}
+
+@manual{designmatrix,
+    key = "designmatrix",
+    title = "Design Matrix",
+    organization = "Design Matrix -- Systems and Product Design",
+    address = "http://www.designmatrix.com/bionics/"
 }
 
 @misc{dom,
@@ -366,7 +402,7 @@
     howpublished = "http://cybop.berlios.de/doc/papers/index.html",
     publisher = "Springer Verlag",
     year = "2003",
-    month = "September"
+    month = "September",
 }
 
 @book{hennessy,
@@ -398,6 +434,30 @@
     year = "2002"
 }
 
+@misc{java,
+    key = "java",
+    author = "James Gosling, Bill Joy, Guy Steele, Gilad Bracha",
+    title = "The Java Programming Language",
+    howpublished = "http://java.sun.com"
+}
+
+@misc{javaiaq,
+    key = "javaiaq",
+    author = "Peter Norvig",
+    title = "The Java IAQ: Infrequently Answered Questions",
+    howpublished = "http://www.norvig.com/java-iaq.html"
+}
+
+@manual{javalanguage,
+    key = "javalanguage",
+    title = "The Java Language Specification",
+    author = "James Gosling, Bill Joy, Guy Steele, Gilad Bracha",
+    organization = "Sun Microsystems, Inc.",
+    address = "http://java.sun.com",
+    edition = "2.0",
+    year = "1996-2000"
+}
+
 @misc{jdistro,
     key = "jdistro",
     title = "JDistro Java Distribution",
@@ -421,10 +481,17 @@
 
 @misc{jos,
     key = "jos",
+    author = "The JOS Project",
     title = "Java Operating System",
     howpublished = "http://cjos.sourceforge.net/",
-    organization = "The JOS Project",
     year = "2000-2004"
+}
+
+@misc{josgeneral,
+    key = "josgeneral",
+    author = "Gilbert Carl Herschberger II, Jonathon Tidswell, Stephen Crawley, Christian Heller et al.",
+    title = "The jos-general Mailing List",
+    howpublished = "jos-general@lists.sourceforge.net"
 }
 
 @book{klute,
@@ -456,7 +523,9 @@
         Electronic Health Record (EHR)",
     type = "Master's Thesis",
     school = "Technical University of Ilmenau",
-    year = "2003"
+    year = "2003",
+    month = "January",
+    note = http://www.cybop.net
 }
 
 @book{maruyama,
@@ -476,6 +545,15 @@
     title = "About SAX",
     howpublished = "http://www.saxproject.org/",
     year = "2002"
+}
+
+@book{norvig,
+    key = "norvig",
+    author = "Peter Norvig",
+    title = "Paradigms of Artificial Intelligence Programming: Case Studies in Common Lisp",
+    publisher = "Morgan Kaufmann",
+    year = "1992",
+    note = "ISBN 1-55860-191-0"
 }
 
 @misc{oio,
@@ -535,6 +613,15 @@
     journal = "IEEE Computer magazine",
     year = "1998",
     month = "March"
+}
+
+@booklet{philippow,
+    key = "philippow",
+    author = "Ilka Philippow",
+    title = "Grundlagen der Informatik",
+    howpublished = "http://www.theoinf.tu-ilmenau.de/proinf/english/teaching/Lectures.html",
+    year = "2003",
+    month = "April"
 }
 
 @misc{postgresql,
@@ -610,6 +697,14 @@
     note = "http://www.fourbit.com"
 }
 
+@booklet{schiedermeier,
+    key = "schiedermeier",
+    author = "R. Schiedermeier",
+    title = "Programmieren I",
+    howpublished = "http://www.informatik.fh-muenchen.de/~schieder/programmieren-1-ws96-97/struktpgm.html",
+    year = "1996"
+}
+
 @misc{scope,
     key = "scope",
     title = "Scope HMVC Java Framework",
@@ -628,7 +723,7 @@
 
 @misc{sourceforge,
     key = "sourceforge",
-    title = "The SOURCEFORGE.net Open Source software development website",
+    title = "The SOURCEFORGE.net Open?Source?software?development?website",
     howpublished = "http://www.sourceforge.net",
     organization = "Open Source Development Network, Inc. (OSDN)",
     year = "1999-2004"
@@ -650,6 +745,17 @@
     howpublished = "http://squirrel-sql.sourceforge.net/",
     organization = "The SQuirreL Project",
     year = "2002"
+}
+
+@book{steppan,
+    key = "steppan",
+    author = "Bernhard Steppan",
+    title = "Java-Programmierung mit Borland JBuilder 4",
+    address = "Muenchen, Boston",
+    publisher = "Addison-Wesley",
+    note = "http://www.aw.com",
+    year = "2001",
+    note = "ISBN 3-8273-1638-3"
 }
 
 @misc{strauss,
@@ -778,13 +884,16 @@
 
 %
 %http://wings.buffalo.edu/philosophy/faculty/smith/articles/gol\_fois2001.pdf
+
 %
 %c't 23, S. 96
 %Kreativitaet "Erfinden nach Plan"
 %Methodik, Philosophie, 40 Entwicklungsprinzipien (auch fuer SW) etc.
+
 %
 %Produktlinien
 %http://www.sei.cmu.edu/plp/product\_line\_overview.html
+
 %
 %Raum + Zeit
 %Statics + Dynamics
@@ -796,8 +905,25 @@
 %ihn immer in noch kleinere Zeiteinheiten unterteilen kann!
 %Materie + Energie = 0 + 1? Raum-Zeit-Kontinuum?
 %Beamen? Zeitmaschine?
+
 %
 %Biologie
 %http://www.biologie.uni-hamburg.de/b-online/d00/inhalt.htm
+
 %
+%Bionics References
+%http://www.designmatrix.com/bionics/referenc.html
+%
+%A sample bibliography includes:
+%Aspects of Form - Lancelot law Whyte (editor) 
+%Biomechanics - David Bootzin and Harry C. Muffley (eds.) 
+%Bionics - Lucien Gerardin 
+%Bionics - Vincent Marteka
+%Definition of the Subject and Method of Bionics - V.I. Bel'kevich and E. Y.U. Vende
+%Evolution and Design in the Plant Kingdom - C.L. Duddington 
+%On Growth and Form - D'Arcy Thompson 
+%Structure, Form and Movement - Heinrich Hertel 
+%The Magic of the Senses - Vitus B. Droscher 
+%... and many very technical publications about biological prototypes for synthetic systems.
+
 
