@@ -21,13 +21,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INPUT_OUTPUT_HANDLER_SOURCE
 #define INPUT_OUTPUT_HANDLER_SOURCE
 
+#include "../creator/integer_creator.c"
 #include "../global/integer_constants.c"
 #include "../global/structure_constants.c"
 #include "../global/variables.c"

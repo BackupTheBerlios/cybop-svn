@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -87,14 +87,12 @@ void add_primitives(void* p0, const void* p1, const void* p2, const void* p3, co
 
         int** ac = (int**) p4;
 
-        //?The done flag.
-        int d = 0;
         // The comparison result.
         int* r = INTEGER_NULL_POINTER;
         create_integer((void*) &r);
         *r = 0;
 
-        if (d == 0) {
+        if (*r != 1) {
 
             if (**ac == *INTEGER_ABSTRACTION_COUNT) {
 
@@ -103,8 +101,6 @@ void add_primitives(void* p0, const void* p1, const void* p2, const void* p3, co
                 if (*r == 1) {
 
                     add_integers(p0, p1, p2);
-
-                    d = 1;
                 }
             }
         }

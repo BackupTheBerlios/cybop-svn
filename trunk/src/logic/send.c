@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-01-08 19:55:18 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -160,15 +160,12 @@ void send_message(const void* p0, const void* p1,
         (void*) &md, (void*) &mdc, (void*) &mds,
         p2, p3);
 
-    // The done flag.
-    int d = 0;
-
     // The comparison result.
     int* r = INTEGER_NULL_POINTER;
     create_integer((void*) &r);
     *r = 0;
 
-    if (d == 0) {
+    if (*r != 1) {
 
         compare_arrays((void*) &lm, (void*) &lmc, (void*) &TUI_LANGUAGE, (void*) &TUI_LANGUAGE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -181,12 +178,10 @@ void send_message(const void* p0, const void* p1,
             void* tmpds = NULL_POINTER;
 
             send_tui((void*) &tmpd, (void*) &tmpdc, (void*) &tmpds, (void*) &mm, (void*) &mmc);
-
-            d = 1;
         }
     }
 
-    if (d == 0) {
+    if (*r != 1) {
 
         compare_arrays((void*) &lm, (void*) &lmc, (void*) &UNIX_SOCKET_CHANNEL, (void*) &UNIX_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -198,12 +193,10 @@ void send_message(const void* p0, const void* p1,
                 (void*) &sna, (void*) &snac,
                 (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
 */
-
-            d = 1;
         }
     }
 
-    if (d == 0) {
+    if (*r != 1) {
 
         compare_arrays((void*) &lm, (void*) &lmc, (void*) &TCP_SOCKET_CHANNEL, (void*) &TCP_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -249,8 +242,6 @@ void send_message(const void* p0, const void* p1,
 
                     // Close socket.
                     close(*cs);
-
-                    d = 1;
 
                 } else {
 

@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a compound model in memory
  *
- * @version $Revision: 1.6 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,7 +45,7 @@
  */
 void create_compound(void* p0, const void* p1) {
 
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_COMPOUND_MESSAGE, (void*) &CREATE_COMPOUND_MESSAGE_COUNT);
+    log_message_debug("Create compound.");
 
     // Create compound.
     create_array(p0, (void*) &POINTER_ARRAY, (void*) &COMPOUND_COUNT);
@@ -102,7 +102,7 @@ void create_compound(void* p0, const void* p1) {
  */
 void destroy_compound(void* p0, const void* p1) {
 
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_COMPOUND_MESSAGE, (void*) &DESTROY_COMPOUND_MESSAGE_COUNT);
+    log_message_debug("Destroy compound.");
 
     // The names, abstractions, models, details.
     void* n = NULL_POINTER;

@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a time model in memory
  *
- * @version $Revision: 1.2 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,7 +44,7 @@
  */
 void create_time(void* p0, const void* p1) {
 
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create time.");
+    log_message_debug("Create time.");
 
     create_array(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT);
 }
@@ -57,7 +57,7 @@ void create_time(void* p0, const void* p1) {
  */
 void destroy_time(void* p0, const void* p1) {
 
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy time.");
+    log_message_debug("Destroy time.");
 
     destroy_array(p0, (void*) &INTEGER_ARRAY, (void*) &TIME_COUNT);
 }

@@ -24,7 +24,7 @@
  * This file contains the functionality to:
  * - create a vector model in memory
  *
- * @version $Revision: 1.4 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,7 +44,7 @@
  */
 void create_vector(void* p0, const void* p1) {
 
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create vector.");
+    log_message_debug("Create vector.");
 
     //?? OPEN QUESTION:
     //?? Should vector always be 3-dimensional,
@@ -63,7 +63,7 @@ void create_vector(void* p0, const void* p1) {
  */
 void destroy_vector(void* p0, const void* p1) {
 
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy vector.");
+    log_message_debug("Destroy vector.");
 
     // Destroy vector.
     destroy_array(p0, (void*) &INTEGER_ARRAY, (void*) &VECTOR_COUNT);

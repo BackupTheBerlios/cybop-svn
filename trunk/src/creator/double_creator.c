@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,7 @@
  */
 void create_double(void* p0) {
 
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTEGER_MESSAGE, (void*) &CREATE_INTEGER_MESSAGE_COUNT);
+    log_message_debug("Create double.");
 
     // Create double array containing the actual double value.
     create_array(p0, (void*) &DOUBLE_ARRAY, (void*) &DOUBLE_COUNT);
@@ -53,7 +53,7 @@ void create_double(void* p0) {
  */
 void destroy_double(void* p0) {
 
-//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_INTEGER_MESSAGE, (void*) &DESTROY_INTEGER_MESSAGE_COUNT);
+    log_message_debug("Destroy double.");
 
     // Destroy double array containing the actual double value.
     destroy_array(p0, (void*) &DOUBLE_ARRAY, (void*) &DOUBLE_COUNT);

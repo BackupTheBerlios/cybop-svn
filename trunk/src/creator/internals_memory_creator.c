@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -195,6 +195,8 @@ void destroy_internals_memory(void* p0, const void* p1) {
 
                     destroy_array((void*) &p, (void*) &INTEGER_ARRAY, (void*) &ONE_NUMBER);
                 }
+
+                //?? TODO: some variables are missing here which causes memory leaks!!
             }
 
             (*j)++;

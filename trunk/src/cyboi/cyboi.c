@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.67 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.68 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -103,14 +103,12 @@ int main(int p0, char** p1) {
             // Possibility 2 is applied here.
             *cc = strlen((char*) *c);
 
-    fputs("TEST BEGIN\n", stdout);
             // Create internals memory.
             // Fill it with the parameters read from the configuration file.
             create_model((void*) &i, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT,
                 c, (void*) &cc,
                 (void*) &CONFIGURATION_ABSTRACTION, (void*) &CONFIGURATION_ABSTRACTION_COUNT,
                 (void*) &FILE_CHANNEL, (void*) &FILE_CHANNEL_COUNT);
-    fputs("TEST END\n", stdout);
 
             // Handle system.
             handle_system((void*) &i);

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -117,6 +117,8 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
 
                                         xmlNode** cn = (xmlNode**) p0;
 
+                                        log_message_debug("Decode cybol property.");
+
                                         if ((*cn) != NULL_POINTER) {
 
                                             // Determine first child node property.
@@ -129,8 +131,6 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
                                             *pnc = 0;
                                             // The property value.
                                             xmlNode* pv = NULL_POINTER;
-                                            // The done flag.
-                                            int d = 0;
                                             // The comparison result.
                                             int* r = INTEGER_NULL_POINTER;
                                             create_integer((void*) &r);
@@ -152,7 +152,7 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
                                                     pn = (char*) p->name;
                                                     *pnc = strlen(pn);
 
-                                                    if (d == 0) {
+                                                    if (*r != 1) {
 
                                                         compare_arrays((void*) &pn, (void*) &pnc, (void*) &NAME_ATTRIBUTE, (void*) &NAME_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -161,12 +161,10 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
                                                             // Get source name.
                                                             *n = pv->content;
                                                             **nc = strlen((char*) *n);
-
-                                                            d = 1;
                                                         }
                                                     }
 
-                                                    if (d == 0) {
+                                                    if (*r != 1) {
 
                                                         compare_arrays((void*) &pn, (void*) &pnc, (void*) &CHANNEL_ATTRIBUTE, (void*) &CHANNEL_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -175,12 +173,10 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
                                                             // Get source channel.
                                                             *c = pv->content;
                                                             **cc = strlen((char*) *c);
-
-                                                            d = 1;
                                                         }
                                                     }
 
-                                                    if (d == 0) {
+                                                    if (*r != 1) {
 
                                                         compare_arrays((void*) &pn, (void*) &pnc, (void*) &ABSTRACTION_ATTRIBUTE, (void*) &ABSTRACTION_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -189,12 +185,10 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
                                                             // Get source abstraction.
                                                             *a = pv->content;
                                                             **ac = strlen((char*) *a);
-
-                                                            d = 1;
                                                         }
                                                     }
 
-                                                    if (d == 0) {
+                                                    if (*r != 1) {
 
                                                         compare_arrays((void*) &pn, (void*) &pnc, (void*) &MODEL_ATTRIBUTE, (void*) &MODEL_ATTRIBUTE_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -203,8 +197,6 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
                                                             // Get source model.
                                                             *m = pv->content;
                                                             **mc = strlen((char*) *m);
-
-                                                            d = 1;
                                                         }
                                                     }
 
@@ -213,8 +205,6 @@ void decode_cybol_property(const void* p0, void* p1, void* p2,
                                                     *pnc = 0;
                                                     // Reset property value.
                                                     pv = NULL_POINTER;
-                                                    // Reset done flag.
-                                                    d = 0;
                                                     // Reset comparison result.
                                                     *r = 0;
 
@@ -310,6 +300,8 @@ void decode_cybol_node(void* p0, void* p1, void* p2, const void* p3, const void*
     if (p3 != NULL_POINTER) {
 
         xmlNode** s = (xmlNode**) p3;
+
+        log_message_debug("Decode cybol node.");
 
         if ((*s) != NULL_POINTER) {
 
@@ -522,6 +514,8 @@ void decode_cybol(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
             if (p0 != NULL_POINTER) {
 
                 void** d = (void**) p0;
+
+                log_message_debug("Decode cybol.");
 
                 // Get root element node.
                 xmlNode* r = xmlDocGetRootElement((xmlDoc*) *s);

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -120,8 +120,12 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
 
             // The destination model.
             void* dm = NULL_POINTER;
-            void* dmc = NULL_POINTER;
-            void* dms = NULL_POINTER;
+            int* dmc = INTEGER_NULL_POINTER;
+            create_integer((void*) &dmc);
+            *dmc = 0;
+            int* dms = INTEGER_NULL_POINTER;
+            create_integer((void*) &dms);
+            *dms = 0;
 
             // The comparison result.
             int* r = INTEGER_NULL_POINTER;
@@ -142,7 +146,16 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                         (void*) &sn, (void*) &snc, (void*) &sc, (void*) &scc,
                         (void*) &sa, (void*) &sac, (void*) &sm, (void*) &smc);
 
-                    if (*r == 0) {
+    fprintf(stderr, "sn: %s\n", (char*) sn);
+    fprintf(stderr, "snc: %i\n", *snc);
+    fprintf(stderr, "sc: %s\n", (char*) sc);
+    fprintf(stderr, "scc: %i\n", *scc);
+    fprintf(stderr, "sa: %s\n", (char*) sa);
+    fprintf(stderr, "sac: %i\n", *sac);
+    fprintf(stderr, "sm: %s\n", (char*) sm);
+    fprintf(stderr, "smc: %i\n", *smc);
+
+                    if (*r != 1) {
 
                         compare_arrays((void*) &sn, (void*) &snc, (void*) &STARTUP_CHANNEL_CONFIGURATION_NAME, (void*) &STARTUP_CHANNEL_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -163,7 +176,7 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                         }
                     }
 
-                    if (*r == 0) {
+                    if (*r != 1) {
 
                         compare_arrays((void*) &sn, (void*) &snc, (void*) &STARTUP_ABSTRACTION_CONFIGURATION_NAME, (void*) &STARTUP_ABSTRACTION_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -184,7 +197,7 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                         }
                     }
 
-                    if (*r == 0) {
+                    if (*r != 1) {
 
                         compare_arrays((void*) &sn, (void*) &snc, (void*) &STARTUP_MODEL_CONFIGURATION_NAME, (void*) &STARTUP_MODEL_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -205,7 +218,7 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                         }
                     }
 
-                    if (*r == 0) {
+                    if (*r != 1) {
 
                         compare_arrays((void*) &sn, (void*) &snc, (void*) &UNIX_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME, (void*) &UNIX_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -224,7 +237,7 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                         }
                     }
 
-                    if (*r == 0) {
+                    if (*r != 1) {
 
                         compare_arrays((void*) &sn, (void*) &snc, (void*) &UNIX_SERVER_SOCKET_FILENAME_CONFIGURATION_NAME, (void*) &UNIX_SERVER_SOCKET_FILENAME_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -243,7 +256,7 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                         }
                     }
 
-                    if (*r == 0) {
+                    if (*r != 1) {
 
                         compare_arrays((void*) &sn, (void*) &snc, (void*) &TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME, (void*) &TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -262,7 +275,7 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                         }
                     }
 
-                    if (*r == 0) {
+                    if (*r != 1) {
 
                         compare_arrays((void*) &sn, (void*) &snc, (void*) &TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME, (void*) &TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -281,7 +294,7 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                         }
                     }
 
-                    if (*r == 0) {
+                    if (*r != 1) {
 
                         compare_arrays((void*) &sn, (void*) &snc, (void*) &X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME, (void*) &X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
 
@@ -315,8 +328,8 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
 
                     // Reset destination model.
                     dm = NULL_POINTER;
-                    dmc = NULL_POINTER;
-                    dms = NULL_POINTER;
+                    *dmc = 0;
+                    *dms = 0;
 
                     // Reset comparison result.
                     *r = 0;
@@ -325,11 +338,17 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                 c = c->next;
             }
 
+            // Destroy comparison result.
             destroy_integer((void*) &r);
+            // Destroy destination model.
+            destroy_integer((void*) &dms);
+            destroy_integer((void*) &dmc);
+            // Destroy source name, channel, abstraction, model.
             destroy_integer((void*) &smc);
             destroy_integer((void*) &sac);
             destroy_integer((void*) &scc);
             destroy_integer((void*) &snc);
+            // Destroy child count.
             destroy_integer((void*) &cc);
 
         } else {
