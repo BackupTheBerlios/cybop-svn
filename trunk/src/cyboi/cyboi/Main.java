@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.23 $ $Date: 2003-08-06 12:43:28 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2003-08-09 15:34:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -66,9 +66,7 @@ class Main {
                     java.lang.Object signal_category_name = "cybol/core/signal/signal";
 
                     // Statics.
-                    java.lang.Object statics = new Item();
-                    ItemHandler.initialize_item_containers(statics);
-                    ItemHandler.initialize_item(statics, statics_category_name);
+                    java.lang.Object statics = ItemHandler.create_object(statics_category_name, Statics.COMPLEX);
 
 /*??
                     // Dynamics.
@@ -82,9 +80,7 @@ class Main {
                     MapHandler.initialize_map(signal_memory);
 
                     // Signal.
-                    java.lang.Object signal = new Item();
-                    ItemHandler.initialize_item_containers(signal);
-                    ItemHandler.initialize_item(signal, signal_category_name);
+                    java.lang.Object signal = ItemHandler.create_object(signal_category_name, Statics.COMPLEX);
 
                     // Event handler.
                     java.lang.Object event_handler = new EventHandler();
@@ -100,9 +96,7 @@ class Main {
                     event_handler = null;
                     
                     // Signal.
-                    ItemHandler.finalize_item(signal, signal_category_name);
-                    ItemHandler.finalize_item_containers(signal);
-                    signal = null;
+                    ItemHandler.destroy_object(signal, signal_category_name, Statics.COMPLEX);
 
                     // Signal memory.
                     MapHandler.finalize_map(signal_memory);
@@ -116,9 +110,7 @@ class Main {
 */
 
                     // Statics.
-                    ItemHandler.finalize_item(statics, statics_category_name);
-                    ItemHandler.finalize_item_containers(statics);
-                    statics = null;
+                    ItemHandler.destroy_object(statics, statics_category_name, Statics.COMPLEX);
 
                     //
                     // Runtime.getRuntime().exit(0);

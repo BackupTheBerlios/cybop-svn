@@ -27,7 +27,7 @@ package cyboi;
 /**
  * This is a category handler.
  *
- * @version $Revision: 1.11 $ $Date: 2003-08-08 19:30:12 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-08-09 15:34:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class CategoryHandler {
@@ -146,7 +146,7 @@ class CategoryHandler {
         if (p != null) {
             
             java.lang.System.out.println("INFO: Initialize xml parser.");
-//??            p.setFeature("http://xml.org/sax/features/validation", true);
+            p.setFeature("http://xml.org/sax/features/validation", true);
             
         } else {
             
@@ -183,19 +183,22 @@ class CategoryHandler {
             java.lang.System.out.println("INFO: Read document.");
             doc.normalize();
             org.apache.xerces.dom.DeepNodeListImpl l = null;
-            
-/*??
-            l = (org.apache.xerces.dom.DeepNodeListImpl) doc.getElementsByTagName(CategoryHandler.SUPER_CATEGORY);
-            CategoryHandler.initialize_super_category(p0, l);
-*/
 
-            l = (org.apache.xerces.dom.DeepNodeListImpl) doc.getElementsByTagName(CategoryHandler.JAVA_OBJECT);
-            CategoryHandler.initialize_java_objects(p0, l);
+            if (p0 != null) {
+                
+                l = (org.apache.xerces.dom.DeepNodeListImpl) doc.getElementsByTagName(CategoryHandler.SUPER_CATEGORY);
+                CategoryHandler.initialize_super_category(p0, l);
+    
+                l = (org.apache.xerces.dom.DeepNodeListImpl) doc.getElementsByTagName(CategoryHandler.JAVA_OBJECT);
+                CategoryHandler.initialize_java_objects(p0, l);
 
-/*??
-            l = (org.apache.xerces.dom.DeepNodeListImpl) doc.getElementsByTagName(CategoryHandler.ITEM);
-            CategoryHandler.initialize_items(p0, l);
-*/
+                l = (org.apache.xerces.dom.DeepNodeListImpl) doc.getElementsByTagName(CategoryHandler.ITEM);
+                CategoryHandler.initialize_items(((Item) p0).items, l);
+
+            } else {
+                
+                java.lang.System.out.println("ERROR: Could not read document. The category is null.");
+            }
 
         } else {
             
@@ -438,7 +441,7 @@ class CategoryHandler {
     /**
      * Initializes the items.
      *
-     * @param p0 the category
+     * @param p0 the category items
      * @param p1 the category items list
      */
     static void initialize_items(java.lang.Object p0, java.lang.Object p1) {
@@ -463,11 +466,12 @@ class CategoryHandler {
                     i = new Item();
                     ItemHandler.initialize_item_containers(i);
                     CategoryHandler.initialize_item(i, n);
-                    
+
                     if (i != null) {
                             
                         name = MapHandler.get_map_element(i.items, CategoryHandler.NAME);
-                        MapHandler.set_map_element(((Item) p0).items, i, name);
+                        MapHandler.set_map_element(p0, i, name);
+                        
 /*??
                         // Initialize serialized item.
                         i = n.getNodeValue();
@@ -475,21 +479,9 @@ class CategoryHandler {
                 
                     } else {
                         
-                        java.lang.System.out.println("ERROR: Could not initialize items. The item is null.");
+                        java.lang.System.out.println("ERROR: Could not initialize items. An item is null.");
                     }
             
-//?? --
-                    java.lang.Object test = null;
-                    
-                    for (int x = 0; x < MapHandler.get_map_size(((Item) p0).items); x++) {
-            
-                        test = MapHandler.get_map_element(((Item) p0).items, x);
-                        java.lang.System.out.println("TEST: " + test);
-                    }
-//?? --
-
-                    java.lang.System.exit(0);
-
                 } else {
                     
                     java.lang.System.out.println("INFO: Could not initialize items. The category item node is null.");

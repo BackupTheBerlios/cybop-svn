@@ -33,27 +33,31 @@ package cyboi;
  * Instantiating means allocating some place in the computer's memory.
  * Basically, every item can become a category if copies of this item are created.
  *
- * @version $Revision: 1.7 $ $Date: 2003-07-27 22:50:34 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-08-09 15:34:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Item {
 
+    // Do not use static keyword!
+    // If you do, the elements will always be overwritten
+    // whenever some instance sets them.
+    
     /** The java object. */
-    static java.lang.Object java_object;
+    java.lang.Object java_object;
 
     /** The java tree node. */
-    static java.lang.Object java_tree_node;
+    java.lang.Object java_tree_node;
 
     /** The items. */
-    static java.lang.Object items;
+    java.lang.Object items;
 
     /** The positions. */
-    static java.lang.Object positions;
+    java.lang.Object positions;
 
     /** The instances. */
-    static java.lang.Object instances;
+    java.lang.Object instances;
 
     /** The interactions. */
-    static java.lang.Object interactions;
+    java.lang.Object interactions;
 }
 

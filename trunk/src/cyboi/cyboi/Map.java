@@ -30,15 +30,19 @@ package cyboi;
  * A map is like a table. One column (array) contains the element names.
  * A second column (array) contains the actual element references.
  *
- * @version $Revision: 1.5 $ $Date: 2003-07-24 09:46:18 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-08-09 15:34:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Map {
 
+    // Do not use static keyword!
+    // If you do, the elements will always be overwritten
+    // whenever some instance sets them.
+    
     /** The names. */
-    static java.lang.Object[] names;
+    java.lang.Object[] names;
 
     /** The references. */
-    static java.lang.Object[] references;
+    java.lang.Object[] references;
 }
 

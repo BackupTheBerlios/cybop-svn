@@ -29,7 +29,7 @@ package cyboi;
  *
  * Item elements are accessed over their index or name.
  *
- * @version $Revision: 1.26 $ $Date: 2003-08-05 21:52:21 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2003-08-09 15:34:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -120,6 +120,7 @@ class ItemHandler {
 
                 ItemHandler.finalize_item(p0, p1);
                 ItemHandler.finalize_item_containers(p0);
+                p0 = null;
             }
             
         } else {
@@ -204,13 +205,26 @@ class ItemHandler {
     static void initialize_item(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
         java.lang.System.out.println("INFO: Initialize item: " + p1);
-        
-        java.lang.Object c = new Item();
+
+        // Create temporary category item.        
+        Item c = new Item();
         ItemHandler.initialize_item_containers(c);
+
         // Read category from file.
         CategoryHandler.initialize_category(c, p1);
+
         // Initialize elements with category.
-        ItemHandler.initialize_item_elements(p0, c);
+        if (c != null) {
+            
+            ItemHandler.initialize_java_object(p0, c.java_object);
+            ItemHandler.initialize_child_items(p0, c.items);
+            
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not initialize item elements. The category is null.");
+        }
+
+        // Destroy temporary category item.        
         ItemHandler.finalize_item_containers(c);
         c = null;
     }
@@ -225,51 +239,27 @@ class ItemHandler {
 
         java.lang.System.out.println("INFO: Finalize item: " + p1);
         
-        java.lang.Object c = new Item();
+        // Create temporary category item.        
+        Item c = new Item();
         ItemHandler.initialize_item_containers(c);
+
         // Finalize elements with category.
-        ItemHandler.finalize_item_elements(p0, c);
-        // Write category to file.
-        CategoryHandler.finalize_category(c, p1);
-        ItemHandler.finalize_item_containers(c);
-        c = null;
-    }
-
-    //
-    // Item elements.
-    //
-
-    /**
-     * Initializes the item elements.
-     *
-     * @param p0 the item
-     * @param p1 the category
-     */
-    static void initialize_item_elements(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
-
-        Item c = (Item) p1;
-    
         if (c != null) {
             
-            java.lang.System.out.println("INFO: Initialize item elements.");
-            java.lang.System.out.println("TEST 1: " + c.java_object);
-            ItemHandler.initialize_java_object(p0, c.java_object);
-            java.lang.System.out.println("TEST 2: " + c.java_object);
-//??            ItemHandler.initialize_items(p0, c.items);
+            ItemHandler.finalize_child_items(p0, c.items);
+            ItemHandler.finalize_java_object(p0, c.java_object);
             
         } else {
             
             java.lang.System.out.println("ERROR: Could not initialize item elements. The category is null.");
         }
-    }
 
-    /**
-     * Finalizes the item elements.
-     *
-     * @param p0 the item
-     * @param p1 the category
-     */
-    static void finalize_item_elements(java.lang.Object p0, java.lang.Object p1) {
+        // Write category to file.
+        CategoryHandler.finalize_category(c, p1);
+
+        // Destroy temporary category item.        
+        ItemHandler.finalize_item_containers(c);
+        c = null;
     }
 
     //
@@ -280,7 +270,7 @@ class ItemHandler {
      * Initializes the java object.
      *
      * @param p0 the item
-     * @param p1 the category java object
+     * @param p1 the category java object attributes
      */
     static void initialize_java_object(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
@@ -313,118 +303,119 @@ class ItemHandler {
      * Finalizes the java object.
      *
      * @param p0 the item
-     * @param p1 the java object category
+     * @param p1 the category java object attributes
      */
     static void finalize_java_object(java.lang.Object p0, java.lang.Object p1) {
     }
 
     //
-    // Items.
+    // Child items.
     //
     
     /**
-     * Initializes the items.
+     * Initializes the child items.
      *
      * @param p0 the item
      * @param p1 the category items
      */
-    static void initialize_items(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
+    static void initialize_child_items(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
-        Item i = (Item) p0;
+        Map m = (Map) p1;
+        int count = 0;
+        int size = MapHandler.get_map_size(m);
+        Item ci = null;
+        Item o = null;
 
-        if (i != null) {
+        while (count < size) {
+        
+            ci = (Item) MapHandler.get_map_element(m, count);
+
+            if (ci != null) {
                 
-            Map m = (Map) p1;
-            int count = 0;
-            int size = MapHandler.get_map_size(m);
-            java.lang.Object ci = null;
-            Item o = new Item();
+                ItemHandler.initialize_child_item(p0, ci.items);
 
-//?? --
-            java.lang.Object test = null;
-            
-            for (int x = 0; x < size; x++) {
-
-                test = MapHandler.get_map_element(m, x);
-                java.lang.System.out.println("TEST: " + test);
-            }
-            java.lang.System.exit(0);
-//?? --
+            } else {
                 
-            while (count < size) {
-            
-                ci = MapHandler.get_map_element(m, count);
-    
-                o = new Item();
-                ItemHandler.initialize_item_containers(o);
-                ItemHandler.initialize_item_element(o, ci);
-                MapHandler.add_map_element(i.items, o, CategoryHandler.ITEM);
+                java.lang.System.out.println("ERROR: Could not initialize items. A category item is null.");
             }
-
-        } else {
             
-            java.lang.System.out.println("ERROR: Could not initialize items. The item is null.");
+            count++;
         }
     }
     
     /**
-     * Finalizes the items
+     * Finalizes the child items
      *
      * @param p0 the item
      * @param p1 the category items
      */
-    static void finalize_items(java.lang.Object p0, java.lang.Object p1) {
+    static void finalize_child_items(java.lang.Object p0, java.lang.Object p1) {
     }
     
     //
-    // Item element.
+    // Child item.
     //
 
     /**
-     * Initializes the item element.
+     * Initializes the child item.
      *
      * @param p0 the item
-     * @param p1 the category item
+     * @param p1 the category item attributes
      */
-    static void initialize_item_element(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
+    static void initialize_child_item(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
         Item i = (Item) p0;
         
         if (i != null) {
                 
-            Item ci = (Item) p1;
-            
-            if (ci != null) {
-    
-                java.lang.System.out.println("INFO: Initialize item element.");
-                java.lang.Object name = MapHandler.get_map_element(ci.items, CategoryHandler.NAME);                
-                java.lang.Object category = null;                
-                java.lang.Object abstraction = null;                
-                java.lang.Object o = null;
+            java.lang.System.out.println("INFO: Initialize item element.");
+            java.lang.Object name = MapHandler.get_map_element(p1, CategoryHandler.NAME);                
+            java.lang.Object category = null;                
+            java.lang.Object abstraction = null;                
+            java.lang.Object o = null;
 
-                category = MapHandler.get_map_element(ci.items, CategoryHandler.ITEM_CATEGORY);
-                abstraction = MapHandler.get_map_element(ci.items, CategoryHandler.ITEM_ABSTRACTION);
-                o = ItemHandler.create_object(category, abstraction);
-                MapHandler.add_map_element(i.items, o, name);
+            // Item.
+            category = MapHandler.get_map_element(p1, CategoryHandler.ITEM_CATEGORY);
+            abstraction = MapHandler.get_map_element(p1, CategoryHandler.ITEM_ABSTRACTION);
+            o = ItemHandler.create_object(category, abstraction);
+            MapHandler.set_map_element(i.items, o, name);
+
+            // Position.
+            category = MapHandler.get_map_element(p1, CategoryHandler.POSITION_CATEGORY);
+            abstraction = MapHandler.get_map_element(p1, CategoryHandler.POSITION_ABSTRACTION);
+            o = ItemHandler.create_object(category, abstraction);
+            MapHandler.set_map_element(i.positions, o, name);
+
+            // Instance.
+            category = MapHandler.get_map_element(p1, CategoryHandler.INSTANCE_CATEGORY);
+            abstraction = MapHandler.get_map_element(p1, CategoryHandler.INSTANCE_ABSTRACTION);
+            o = ItemHandler.create_object(category, abstraction);
+            MapHandler.set_map_element(i.instances, o, name);
+
+            // Interaction.
+            category = MapHandler.get_map_element(p1, CategoryHandler.INTERACTION_CATEGORY);
+            abstraction = MapHandler.get_map_element(p1, CategoryHandler.INTERACTION_ABSTRACTION);
+            o = ItemHandler.create_object(category, abstraction);
+            MapHandler.set_map_element(i.interactions, o, name);
+
+            // Java object.
+            java.lang.Object java_object_item = MapHandler.get_map_element(i.items, name);
+            java.lang.Object java_object_position = MapHandler.get_map_element(i.positions, name);
+            
+            if (java_object_item != null) {
+                
+                if (java_object_item instanceof Item) {
+                    
+                    JavaObjectHandler.add_to_java_object(i.java_object, ((Item) java_object_item).java_object, java_object_position);
     
-                category = MapHandler.get_map_element(ci.items, CategoryHandler.POSITION_CATEGORY);
-                abstraction = MapHandler.get_map_element(ci.items, CategoryHandler.POSITION_ABSTRACTION);
-                o = ItemHandler.create_object(category, abstraction);
-                MapHandler.add_map_element(i.positions, o, name);
-    
-                category = MapHandler.get_map_element(ci.items, CategoryHandler.INSTANCE_CATEGORY);
-                abstraction = MapHandler.get_map_element(ci.items, CategoryHandler.INSTANCE_ABSTRACTION);
-                o = ItemHandler.create_object(category, abstraction);
-                MapHandler.add_map_element(i.instances, o, name);
-    
-                category = MapHandler.get_map_element(ci.items, CategoryHandler.INTERACTION_CATEGORY);
-                abstraction = MapHandler.get_map_element(ci.items, CategoryHandler.INTERACTION_ABSTRACTION);
-                o = ItemHandler.create_object(category, abstraction);
-                MapHandler.add_map_element(i.interactions, o, name);
-    
+                } else {
+                    
+                    java.lang.System.out.println("WARNING: Could not initialize item element. The java object item is not an instance of item.");
+                }
+
             } else {
                 
-                java.lang.System.out.println("ERROR: Could not initialize item element. The category item is null.");
+                java.lang.System.out.println("ERROR: Could not initialize item element. The java object item is null.");
             }
 
         } else {
@@ -434,12 +425,12 @@ class ItemHandler {
     }
     
     /**
-     * Finalizes the item element.
+     * Finalizes the child item.
      *
      * @param p0 the item
-     * @param p1 the category item
+     * @param p1 the category item attributes
      */
-    static void finalize_item_element(java.lang.Object p0, java.lang.Object p1) {
+    static void finalize_child_item(java.lang.Object p0, java.lang.Object p1) {
     }
 }
 
