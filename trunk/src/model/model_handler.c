@@ -36,7 +36,7 @@
  * It contains functions which are used by both, the statics and the
  * dynamics model handler.
  *
- * @version $Revision: 1.3 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-12-15 07:16:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,13 +55,6 @@ static const char* DOT_SEPARATOR = ".";
 
 /** The comma separator. */
 static const char* COMMA_SEPARATOR = ",";
-
-//
-// Macros.
-//
-
-/** The null pointer. */
-void* NULL_POINTER = (void*) 0;
 
 //
 // Helper functions.

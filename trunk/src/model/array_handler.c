@@ -25,6 +25,7 @@
 #ifndef ARRAY_HANDLER_SOURCE
 #define ARRAY_HANDLER_SOURCE
 
+#include <stdlib.h>
 #include "array.c"
 #include "internal_array_handler.c"
 #include "log_handler.c"
@@ -34,7 +35,7 @@
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.3 $ $Date: 2003-12-12 16:39:43 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-12-15 07:16:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,7 +52,7 @@ void initialize_array(void* p0) {
 
     struct array* a = (struct array*) p0;
 
-    if (a != 0) {
+    if (a != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Initialize array.");
 
@@ -78,7 +79,7 @@ void finalize_array(void* p0) {
 
     struct array* a = (struct array*) p0;
     
-    if (a != 0) {
+    if (a != (void*) 0) {
 
         log_message((void*) &INFO_LOG_LEVEL, "Finalize array.");
 
@@ -100,10 +101,10 @@ void finalize_array(void* p0) {
  */
 void* get_array_size(void* p0) {
 
-    void* s = 0;
+    void* s = (void*) 0;
     struct array* a = (struct array*) p0;
 
-    if (a != 0) {
+    if (a != (void*) 0) {
 
         s = (void*) &(a->size);
 
@@ -123,10 +124,10 @@ void* get_array_size(void* p0) {
  */
 void* get_array_count(void* p0) {
 
-    void* c = 0;
+    void* c = (void*) 0;
     struct array* a = (struct array*) p0;
 
-    if (a != 0) {
+    if (a != (void*) 0) {
 
         c = (void*) &(a->count);
 
@@ -149,15 +150,23 @@ void* get_array_count(void* p0) {
  * @param p1 the index
  * @param p2 the element
  */
-void set_array_element(void* p0, void* p1, void* p2) {
+void set_array_element(void* p0, const void* p1, void* p2) {
 
     struct array* a = (struct array*) p0;
 
-    if (a != 0) {
+    if (a != (void*) 0) {
 
         int* i = (int*) p1;
         int size = a->size;
         
+        log_message((void*) &INFO_LOG_LEVEL, "index");
+        fprintf(stderr, "%d", *i);
+        fputs("\n", stderr);
+
+        log_message((void*) &INFO_LOG_LEVEL, "size");
+        fprintf(stderr, "%d", size);
+        fputs("\n", stderr);
+
         // If the array length is exceeded, create a new array with extended
         // (doubled) length so that the index matches.
         // If the initial size is zero and multiplied by two, the result is
@@ -176,8 +185,18 @@ void set_array_element(void* p0, void* p1, void* p2) {
             //?? a->internal_array = extend_internal_array(a->internal_array, (void*) &(a->size), (void*) &size);
         }
 
+        log_message((void*) &INFO_LOG_LEVEL, "abstraction A");
+        fprintf(stderr, "%d", p2);
+        fputs("\n", stderr);
+
         set_internal_array_element(a->internal_array, p1, p2);
-        a->count = a->count + 1;
+
+        void* test = get_internal_array_element(a->internal_array, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "abstraction B");
+        fprintf(stderr, "%d", test);
+        fputs("\n", stderr);
+
+        (a->count)++;
 
     } else {
 
@@ -191,14 +210,14 @@ void set_array_element(void* p0, void* p1, void* p2) {
  * @param p0 the array
  * @param p1 the index
  */
-void remove_array_element(void* p0, void* p1) {
+void remove_array_element(void* p0, const void* p1) {
 
     struct array* a = (struct array*) p0;
 
-    if (a != 0) {
+    if (a != (void*) 0) {
 
-        remove_internal_array_element(a->internal_array, p1, (void*) &(a->size));
-        a->count = a->count - 1;
+        remove_internal_array_element(a->internal_array, p1, (void*) &(a->count));
+        (a->count)--;
 
     } else {
 
@@ -213,12 +232,12 @@ void remove_array_element(void* p0, void* p1) {
  * @param p1 the index
  * @return the element
  */
-void* get_array_element(void* p0, void* p1) {
+void* get_array_element(void* p0, const void* p1) {
 
-    void* e = 0;
+    void* e = (void*) 0;
     struct array* a = (struct array*) p0;
 
-    if (a != 0) {
+    if (a != (void*) 0) {
 
         e = get_internal_array_element(a->internal_array, p1);
 

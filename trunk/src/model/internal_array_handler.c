@@ -32,7 +32,7 @@
  *
  * Internal array elements are accessed over their index.
  *
- * @version $Revision: 1.2 $ $Date: 2003-12-11 13:42:35 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-12-15 07:16:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,18 +55,19 @@ static const int INVALID_INDEX_VALUE = -1;
  * @param p2 the new size
  * @return the new internal array
  */
+/*??
 void** extend_internal_array(void** p0, void* p1, void* p2) {
 
-    void** a = 0;
+    void** a = (void*) 0;
     
-    if (p0 != 0) {
+    if (p0 != (void*) 0) {
 
         int* old_size = (int*) p1;
         int* new_size = (int*) p2;
         // Create new internal array.
         a = malloc(*new_size);
 
-        if (a != 0) {
+        if (a != (void*) 0) {
                 
             // Copy all elements from the old to the new array.
             // The rest of the new array is just left empty as is;
@@ -95,6 +96,7 @@ void** extend_internal_array(void** p0, void* p1, void* p2) {
     
     return a;
 }
+*/
 
 //
 // Internal array element.
@@ -107,9 +109,9 @@ void** extend_internal_array(void** p0, void* p1, void* p2) {
  * @param p1 the index
  * @param p2 the element
  */
-void set_internal_array_element(void** p0, void* p1, void* p2) {
+void set_internal_array_element(void** p0, const void* p1, void* p2) {
 
-    if (p0 != 0) {
+    if (p0 != (void*) 0) {
 
         int* i = (int*) p1;
 
@@ -136,27 +138,30 @@ void set_internal_array_element(void** p0, void* p1, void* p2) {
  * @param p1 the index
  * @param p2 the count
  */
-void remove_internal_array_element(void** p0, void* p1, void* p2) {
+void remove_internal_array_element(void** p0, const void* p1, void* p2) {
 
-    if (p0 != 0) {
+    if (p0 != (void*) 0) {
 
-        int* i = (int*) p1;
+        int* index = (int*) p1;
 
-        if (*i != INVALID_INDEX_VALUE) {
+        if (*index != INVALID_INDEX_VALUE) {
 
+            // Initialize loop variable with index.
+            // Do not use the index itself as it was handed over as constant parameter!
+            int i = *index;
             int* count = (int*) p2;
             
             // Starting from the given index, move all remaining elements one
             // place towards the beginning of the elements.
-            while ((*i + 1) < *count) {
+            while ((i + 1) < *count) {
 
-                p0[*i] = p0[*i + 1];
+                p0[i] = p0[i + 1];
 
-                (*i)++;
+                i++;
             }
 
             // Set former last element to 0.
-            p0[*i] = 0;
+            p0[i] = (void*) 0;
         
         } else {
     
@@ -176,11 +181,11 @@ void remove_internal_array_element(void** p0, void* p1, void* p2) {
  * @param p1 the index
  * @return the element
  */
-void* get_internal_array_element(void** p0, void* p1) {
+void* get_internal_array_element(void** p0, const void* p1) {
 
-    void* e = 0;
+    void* e = (void*) 0;
     
-    if (p0 != 0) {
+    if (p0 != (void*) 0) {
 
         int* i = (int*) p1;
 

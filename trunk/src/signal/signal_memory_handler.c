@@ -49,7 +49,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.6 $ $Date: 2003-12-12 16:39:43 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-12-15 07:16:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -110,7 +110,7 @@ void create_signal_memory(void* p0) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
         
         log_message((void*) &INFO_LOG_LEVEL, "Create signal memory.");
 
@@ -138,7 +138,7 @@ void destroy_signal_memory(void* p0) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
         
         log_message((void*) &INFO_LOG_LEVEL, "Destroy signal memory.");
 
@@ -170,15 +170,48 @@ void destroy_signal_memory(void* p0) {
  * @param p3 the abstraction
  * @param p4 the priority
  */
-void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void set_signal(void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
         
+        log_message((void*) &INFO_LOG_LEVEL, "index");
+        fprintf(stderr, "%d", *((int*) p1));
+        fputs("\n", stderr);
+
+        log_message((void*) &INFO_LOG_LEVEL, "signal");
+        fprintf(stderr, "%d", p2);
+        fputs("\n", stderr);
+
+        log_message((void*) &INFO_LOG_LEVEL, "abstraction");
+        fprintf(stderr, "%s", (char*) p3);
+        fputs("\n", stderr);
+
+        log_message((void*) &INFO_LOG_LEVEL, "priority");
+        fprintf(stderr, "%d", *((int*) p4));
+        fputs("\n", stderr);
+
+        log_message((void*) &INFO_LOG_LEVEL, "p1 a");
+        fprintf(stderr, "%d", *((int*) p1));
+        fputs("\n", stderr);
         set_array_element(m->signals, p1, p2);
+        log_message((void*) &INFO_LOG_LEVEL, "p1 b");
+        fprintf(stderr, "%d", *((int*) p1));
+        fputs("\n", stderr);
         set_array_element(m->abstractions, p1, p3);
+        log_message((void*) &INFO_LOG_LEVEL, "p1 c");
+        fprintf(stderr, "%d", *((int*) p1));
+        fputs("\n", stderr);
         set_array_element(m->priorities, p1, p4);
+        log_message((void*) &INFO_LOG_LEVEL, "p1 d");
+        fprintf(stderr, "%d", *((int*) p1));
+        fputs("\n", stderr);
+
+        void* test = get_array_element(m->abstractions, p1);
+        log_message((void*) &INFO_LOG_LEVEL, "stored abstraction");
+        fprintf(stderr, "%d", test);
+        fputs("\n", stderr);
 
     } else {
 
@@ -198,7 +231,7 @@ void add_signal(void* p0, void* p1, void* p2, void* p3) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
 
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         void* c = get_array_count(m->signals);
         set_signal(p0, c, p1, p2, p3);
@@ -219,7 +252,7 @@ void remove_signal(void* p0, void* p1) {
 
     struct signal_memory* m = (struct signal_memory*) p0;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         remove_array_element(m->signals, p1);
         remove_array_element(m->abstractions, p1);
@@ -240,10 +273,10 @@ void remove_signal(void* p0, void* p1) {
  */
 void* get_signal(void* p0, void* p1) {
 
-    void* s = 0;
+    void* s = (void*) 0;
     struct signal_memory* m = (struct signal_memory*) p0;
 
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         s = get_array_element(m->signals, p1);
 
@@ -264,10 +297,10 @@ void* get_signal(void* p0, void* p1) {
  */
 void* get_abstraction(void* p0, void* p1) {
 
-    void* a = 0;
+    void* a = (void*) 0;
     struct signal_memory* m = (struct signal_memory*) p0;
 
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         a = get_array_element(m->abstractions, p1);
 
@@ -288,10 +321,10 @@ void* get_abstraction(void* p0, void* p1) {
  */
 void* get_priority(void* p0, void* p1) {
 
-    void* p = 0;
+    void* p = (void*) 0;
     struct signal_memory* m = (struct signal_memory*) p0;
 
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         p = get_array_element(m->priorities, p1);
 
@@ -314,21 +347,30 @@ void get_highest_priority_index(void* p0, void* p1) {
     struct signal_memory* m = (struct signal_memory*) p0;
     int* index = (int*) p1;
 
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         int i = 0;
         int* count = (int*) get_array_count(m->priorities);
-        int* p = 0;
+        int* p = (void*) 0;
         int h = 0;
     
         while (i < *count) {
     
+            log_message((void*) &INFO_LOG_LEVEL, "signal index");
+            fprintf(stderr, "%d", i);
+            fputs("\n", stderr);
+
             p = (int*) get_array_element(m->priorities, (void*) &i);
     
+            log_message((void*) &INFO_LOG_LEVEL, "signal priority");
+            fprintf(stderr, "%d", *p);
+            fputs("\n", stderr);
+
             // If a signal with higher priority is found,
             // then its index is the one to be returned.
             if (*p > h) {
-    
+            
+                log_message((void*) &INFO_LOG_LEVEL, "signal 1");
                 *index = i;
                 h = *p;
             }
@@ -359,14 +401,14 @@ void handle_compound_signal(void* p0, void* p1, void* p2) {
 
     struct dynamics_model* m = (struct dynamics_model*) p1;
     
-    if (m != 0) {
+    if (m != (void*) 0) {
 
         int* count = (int*) get_array_count(m->parts);
         int pos = 0;
         int i = 0;
-        int* position = 0;
-        void* abstr = 0;
-        void* part = 0;
+        int* position = (void*) 0;
+        void* abstr = (void*) 0;
+        void* part = (void*) 0;
 
         // All positions.
         while (pos < *count) {
@@ -429,12 +471,12 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     struct operation* o = (struct operation*) p0;
     
-    if (o != 0) {
+    if (o != (void*) 0) {
 
         char* a = (char*) p1;
         void* io = o->inputs_outputs;
     
-        if (io != 0) {
+        if (io != (void*) 0) {
     
             if (strcmp(a, ADD_ARITHMETIC) == 0) {
                 
@@ -445,7 +487,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
         
                 struct statics_model* s = (struct statics_model*) p2;
                 
-                if (s != 0) {
+                if (s != (void*) 0) {
                         
                     void* m = create_statics(get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
                     set_map_element_with_name(s->parts, get_map_element_with_name(io, "name"), m);
@@ -459,7 +501,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
         
                 struct statics_model* s = (struct statics_model*) p2;
                 
-                if (s != 0) {
+                if (s != (void*) 0) {
                         
                     void* m = get_map_element_with_name(s->parts, get_map_element_with_name(io, "name"));
                     destroy_statics(m, get_map_element_with_name(io, "model"), get_map_element_with_name(io, "abstraction"));
@@ -473,7 +515,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
         
                 struct dynamics_model* d = (struct dynamics_model*) p3;
                 
-                if (d != 0) {
+                if (d != (void*) 0) {
                         
                     void* m = create_dynamics(get_map_element_with_name(io, "model"), get_map_element_with_name(io, "io_names"), get_map_element_with_name(io, "io_values"), get_map_element_with_name(io, "abstraction"));
                     set_map_element_with_name(d->parts, get_map_element_with_name(io, "name"), m);
@@ -487,7 +529,7 @@ void handle_operation_signal(void* p0, void* p1, void* p2, void* p3, void* p4) {
         
                 struct dynamics_model* d = (struct dynamics_model*) p3;
                 
-                if (d != 0) {
+                if (d != (void*) 0) {
                         
                     void* m = get_map_element_with_name(d->parts, get_map_element_with_name(io, "name"));
                     destroy_dynamics(m, get_map_element_with_name(io, "model"), get_map_element_with_name(io, "io_names"), get_map_element_with_name(io, "io_values"), get_map_element_with_name(io, "abstraction"));

@@ -41,7 +41,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.6 $ $Date: 2003-12-12 16:39:43 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-12-15 07:16:07 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -74,9 +74,9 @@ void wait(void* p0, void* p1, void* p2) {
     // Initialize shutdown flag to false.
     int f = 0;
     int i = -1;
-    void* s = NULL_POINTER;
-    char* a = NULL_POINTER;
-    void* p = NULL_POINTER;
+    void* s = (void*) 0;
+    char* a = (void*) 0;
+    void* p = (void*) 0;
     
     // Run endless loop handling signals.
     while (TRUE_VALUE) {
@@ -138,7 +138,7 @@ int main(int p0, char** p1) {
     // Log level as static (global) variable.
     log_level = (void*) &INFO_LOG_LEVEL;
 
-    if (p1 != 0) {
+    if (p1 != (void*) 0) {
 
         if (p0 == 2) {
 
@@ -155,7 +155,7 @@ int main(int p0, char** p1) {
             create_signal_memory(sm);
 
             // Create startup signal.
-            void* ss = create_dynamics((void*) p1[1], NULL_POINTER, NULL_POINTER, (void*) DYNAMICS_COMPOUND);
+            void* ss = create_dynamics((void*) p1[1], (void*) 0, (void*) 0, (void*) DYNAMICS_COMPOUND);
 
             // Add startup signal to signal memory.
             // Caution! Adding of signals must be synchronized between:
@@ -170,7 +170,7 @@ int main(int p0, char** p1) {
                 // An action may consist of "part" actions.
                 // The "part" actions cannot have higher/lower priority
                 // than their original "whole" action.)
-                add_signal(sm, ss, (void*) DYNAMICS_COMPOUND, (void*) NORMAL_PRIORITY);
+                add_signal(sm, ss, (void*) DYNAMICS_COMPOUND, (void*) &NORMAL_PRIORITY);
 //??            }
 
             // The system is now started up and complete so that a loop
@@ -180,7 +180,7 @@ int main(int p0, char** p1) {
             // The loop above is left as soon as its shutdown flag is set.
 
             // Destroy startup signal.
-            destroy_dynamics(ss, (void*) p1[1], NULL_POINTER, NULL_POINTER, (void*) DYNAMICS_COMPOUND);
+            destroy_dynamics(ss, (void*) p1[1], (void*) 0, (void*) 0, (void*) DYNAMICS_COMPOUND);
 
             // Destroy signal memory.
             destroy_signal_memory(sm);
