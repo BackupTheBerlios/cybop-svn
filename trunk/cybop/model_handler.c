@@ -29,7 +29,6 @@
 #include "model.c"
 #include "map.c"
 #include "map_handler.c"
-//?? #include "statics_handler.c"
 #include "xml_handler.c"
 
 /**
@@ -39,7 +38,7 @@
  * They can also be accessed hierarchically, using a dot-separated name like:
  * "system.frame.menu_bar.exit_menu_item.action"
  *
- * @version $Revision: 1.5 $ $Date: 2003-10-23 14:27:06 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-10-23 15:23:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,7 +46,8 @@
 // Forward declaration.
 //
 // These two functions are the only forward declarations. They are needed
-// because models can recursively create/ destroy child models.
+// because models can recursively create/ destroy child models using
+// functions which are defined in statics_handler.
 //
 
 /**

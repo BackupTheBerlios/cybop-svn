@@ -29,7 +29,7 @@
  *
  * It can read and write CYBOL source files.
  *
- * @version $Revision: 1.11 $ $Date: 2003-10-23 14:27:06 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2003-10-23 15:23:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,14 +72,14 @@ static const char* POSITION_ABSTRACTION = "position_abstraction";
 //
 
 /**
- * Initializes the model.
+ * Initializes the source model.
  *
  * Reads the file of the given model.
  *
  * @param p0 the model
  * @param p1 the model name
  */
-static void initialize_model(void* p0, void* p1) {
+static void initialize_source_model(void* p0, void* p1) {
 
 /*??
     log((void*) &INFO_LOG_LEVEL, "Initialize model: " + p1);
@@ -90,14 +90,14 @@ static void initialize_model(void* p0, void* p1) {
 }
 
 /**
- * Finalizes the model.
+ * Finalizes the source model.
  *
  * Writes the file of the given model.
  *
  * @param p0 the model
  * @param p1 the model name
  */
-static void finalize_model(void* p0, void* p1) {
+static void finalize_source_model(void* p0, void* p1) {
 }
 
 //

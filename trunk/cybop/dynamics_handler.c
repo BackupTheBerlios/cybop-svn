@@ -33,7 +33,7 @@
  *
  * It implements dynamic operations.
  *
- * @version $Revision: 1.13 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-10-23 15:23:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -372,6 +372,7 @@ static void* create_dynamics_instance(void* p0, void* p1) {
     log((void*) &INFO_LOG_LEVEL, "Create dynamics instance: ");
     log((void*) &INFO_LOG_LEVEL, p0);
 
+/*??
     if (strcmp(p1, COMPLEX_DYNAMICS_MODEL) == 0) {
 
         i = create_complex_dynamics_instance(p0);
@@ -420,6 +421,9 @@ static void* create_dynamics_instance(void* p0, void* p1) {
 
         i = create_divide_instance(p0);
     }
+    
+    return i;
+*/
 }
 
 /**
@@ -434,6 +438,7 @@ static void destroy_dynamics_instance(void* p0, void* p1, void* p2) {
     log((void*) &INFO_LOG_LEVEL, "Destroy dynamics instance: ");
     log((void*) &INFO_LOG_LEVEL, p1);
 
+/*??
     if (strcmp(p2, COMPLEX_DYNAMICS_MODEL) == 0) {
 
         destroy_complex_dynamics_instance(p0, p1);
@@ -482,6 +487,7 @@ static void destroy_dynamics_instance(void* p0, void* p1, void* p2) {
 
         destroy_divide_instance(p0, p1);
     }
+*/
 }
 
 /* DYNAMICS_HANDLER_SOURCE */

@@ -30,7 +30,13 @@
  *
  * It defines constants for dynamic operations.
  *
- * @version $Revision: 1.10 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
+ * Some knowledge about function pointers in the C programming language
+ * is needed. See for instance the (German) tutorials:
+ * http://www.fh-wedel.de/~si/vorlesungen/c/funktionen/
+ * http://home.arcor.de/cpp_kurs/cpp/le07/k2_09_d1.htm
+ * ... or try a Google search.
+ *
+ * @version $Revision: 1.11 $ $Date: 2003-10-23 15:23:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
