@@ -34,22 +34,9 @@
  * Complex models consist of other complex models and primitive models.
  * Primitive models are the final abstraction in software.
  *
- * @version $Revision: 1.9 $ $Date: 2003-10-20 14:42:44 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-
-//
-// Basic values.
-//
-
-/** The true boolean value. */
-static const int TRUE_VALUE = 1;
-
-/** The false boolean value. */
-static const int FALSE_VALUE = 0;
-
-/** The invalid index value. */
-static const int INVALID_VALUE = -1;
 
 //
 // Complex statics model.

@@ -32,7 +32,7 @@
  *
  * It consists of two integer numbers, a numerator and a denominator.
  *
- * @version $Revision: 1.2 $ $Date: 2003-10-20 14:42:44 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct fraction {

@@ -22,268 +22,131 @@
  * - Cybernetics Oriented Programming -
  */
 
-#include <string.h>
-#include "model.c"
-#include "map.c"
-#include "map_handler.c"
+#include "boolean.c"
 
 /**
- * This is the model handler.
+ * This is the boolean handler.
  *
- * Model elements are accessed over their index or name.
- * They can also be accessed hierarchically, using a dot-separated name like:
- * "system.frame.menu_bar.exit_menu_item.action"
- *
- * @version $Revision: 1.1 $ $Date: 2003-10-20 14:42:44 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 //
-// Model.
+// Constants.
+//
+
+/** The true boolean value. */
+static const int TRUE_VALUE = 1;
+
+/** The false boolean value. */
+static const int FALSE_VALUE = 0;
+
+//
+// Boolean model.
 //
 
 /**
- * Initializes the model.
+ * Creates a boolean model.
  *
- * @param p0 the model
+ * @param p0 the model source
+ * @return the boolean model
  */
-static void initialize_model(void* p0) {
+static void* create_boolean_model(void* p0) {
 
-    struct model* m = (struct model*) p0;
+    void* i = 0;
     
-    if (m != 0) {
+    if (p0 != 0) {
         
-        log((void*) &INFO_LOG_LEVEL, "Initialize model.");
+        log((void*) &INFO_LOG_LEVEL, "Create boolean model.");
 
-        m->children = malloc(sizeof(struct map));
-        initialize_map(m->children);
-        m->positions = malloc(sizeof(struct map));
-        initialize_map(m->positions);
-
-    } else {
-        
-        log((void*) &ERROR_LOG_LEVEL, "Could not initialize model. The model is null.");
-    }
-}
-
-/**
- * Finalizes the model.
- *
- * @param p0 the model
- */
-static void finalize_model(void* p0) {
-
-    struct model* m = (struct model*) p0;
-    
-    if (m != 0) {
-
-        log((void*) &INFO_LOG_LEVEL, "Finalize model.");
-
-        finalize_map(m->positions);
-        free(m->positions);
-
-        finalize_map(m->children);
-        free(m->children);
-
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not finalize model. The model is null.");
-    }
-}
-
-//
-// Helper functions.
-//
-
-/**
- * Returns the child name.
- *
- * It is the most left name before the first dot/point "." in the given string
- * or, if there is no dot, then it is the given name itself.
- *
- * @param p0 the hierarchical model name
- * @return the child name
- */
-static void* get_child_name(void* p0) {
-    
-    void* name = 0;
-    char* n = (char*) p0;
-    
-    if (n != 0) {
-        
-/*??
-        int i = n->indexOf(".");
-        
-        if (i != -1) {
+        if (strcmp(p0, "") != 0) {
             
-            p1 = n->substring(0, i);
-        
-        } else {
-        
-            p1 = n;
+            i = malloc(sizeof(struct boolean));
+
+            initialize_boolean_model(i, p0);
         }
-*/
-        
-    } else {
-        
-        log((void*) &ERROR_LOG_LEVEL, "Could not get child name. The hierarchical name is null.");
     }
     
-    return name;
+    return i;
 }
 
 /**
- * Returns the remaining name.
+ * Destroys the boolean model.
  *
- * It is the whole string after the first dot/point ".".
- *
- * @param p0 the hierarchical model name
- * @return the remaining name
+ * @param p0 the boolean model
+ * @param p1 the model source
  */
-static void* get_remaining_name(void* p0) {
+static void destroy_boolean_model(void* p0, void* p1) {
 
-    void* name = 0;    
-    char* n = (char*) p0;
-    
-    if (n != 0) {
+    if (p0 != 0) {
         
-/*??
-        int i = n->indexOf(".");
-        
-        if (i != -1) {
+        log((void*) &INFO_LOG_LEVEL, "Destroy boolean model.");
 
-            p1 = n->substring(i + 1);
-        }
-*/
-        
-    } else {
-        
-        log((void*) &ERROR_LOG_LEVEL, "Could not get remaining name. The hierarchical name is null.");
-    }
-    
-    return name;
-}
-
-//
-// Model element.
-//
-
-/**
- * Sets the model element.
- *
- * @param p0 the model
- * @param p1 the hierarchical model name
- * @param p2 the element
- */
-static void set_model_element(void* p0, void* p1, void* p2) {
-
-    struct model* m = (struct model*) p0;
-
-    if (m != 0) {
-
-        log((void*) &INFO_LOG_LEVEL, "Set model element: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
-        
-        void* n = get_child_name(p1);
-        void* r = get_remaining_name(p1);
-        
-        if (r != 0) {
-
-            // The given model is the parent of another parent.
-            void* child = get_map_element_with_name(m->children, n);
+        if (strcmp(p1, "") != 0) {
             
-            // Continue to process along the hierarchical name.
-            set_model_element(child, r, p2);
+            finalize_boolean_model(p0, p1);
+        }
+
+        free(p0);
+    }
+}
+
+/**
+ * Initializes the boolean model.
+ *
+ * @param p0 the boolean model
+ * @param p1 the model source
+ */
+static void initialize_boolean_model(void* p0, void* p1) {
+
+    struct boolean* b = (struct boolean*) p0;
+    
+    if (b != 0) {
+        
+        log((void*) &INFO_LOG_LEVEL, "Initialize boolean model.");
+
+        if (strcmp((char*) p1, TRUE_VALUE)) {
+            
+            b->value = 1;
             
         } else {
 
-            // The given model is the parent of the child.
-            set_map_element_with_name(m->children, n, p2);
+            // The default value is "false".
+            b->value = 0;
         }
-        
+
     } else {
         
-        log((void*) &ERROR_LOG_LEVEL, "Could not set model element. The model is null.");
+        log((void*) &ERROR_LOG_LEVEL, "Could not initialize boolean model. The boolean model is null.");
     }
 }
 
 /**
- * Removes the model element.
+ * Finalizes the boolean model.
  *
- * @param p0 the model
- * @param p1 the hierarchical model name
+ * @param p0 the boolean model
+ * @param p1 the model source
  */
-static void remove_model_element(void* p0, void* p1) {
+static void finalize_boolean_model(void* p0, void* p1) {
 
-    struct model* m = (struct model*) p0;
-
-    if (m != 0) {
-
-        log((void*) &INFO_LOG_LEVEL, "Remove model element: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
-        
-        void* n = get_child_name(p1);
-        void* r = get_remaining_name(p1);
-        
-        if (r != 0) {
-            
-            // The given model is the parent of another parent.
-            void* child = get_map_element_with_name(m->children, n);
-            
-            // Continue to process along the hierarchical name.
-            remove_model_element(child, r);
-            
-        } else {
-
-            // The given model is the parent of the child.
-            remove_map_element_with_name(m->children, n);
-        }
-        
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not remove model element. The model is null.");
-    }
-}
-
-/**
- * Returns the model element.
- *
- * @param p0 the model
- * @param p1 the hierarchical model name
- * @return the element
- */
-static void* get_model_element(void* p0, void* p1) {
-
-    void* e = 0;
-    struct model* m = (struct model*) p0;
-
-    if (m != 0) {
-
-        log((void*) &INFO_LOG_LEVEL, "Get model element: ");
-        log((void*) &INFO_LOG_LEVEL, p1);
-        
-        void* n = get_child_name(p1);
-        void* r = get_remaining_name(p1);
-        
-        if (r != 0) {
-            
-            // The given model is the parent of another parent.
-            void* child = get_map_element_with_name(m->children, n);
-            
-            // Continue to process along the hierarchical name.
-            e = get_model_element(child, r);
-            
-        } else {
-
-            // The given model is the parent of the child.
-            e = get_map_element_with_name(m->children, n);
-        }
-
-    } else {
-
-        log((void*) &ERROR_LOG_LEVEL, "Could not get model element. The model is null.");
-    }
+    struct boolean* b = (struct boolean*) p0;
     
-    return e;
+    if (b != 0) {
+        
+        log((void*) &INFO_LOG_LEVEL, "Finalize boolean model.");
+
+        if (b->value == 1) {
+            
+            strcat(p1, TRUE_VALUE);
+            
+        } else {
+    
+            strcat(p1, FALSE_VALUE);
+        }
+
+    } else {
+
+        log((void*) &ERROR_LOG_LEVEL, "Could not finalize boolean model. The boolean model is null.");
+    }
 }
 

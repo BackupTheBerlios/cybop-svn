@@ -33,7 +33,7 @@
  *
  * It implements dynamic operations.
  *
- * @version $Revision: 1.12 $ $Date: 2003-10-20 14:42:44 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-10-22 00:45:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
