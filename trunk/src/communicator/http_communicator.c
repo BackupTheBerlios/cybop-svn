@@ -1,5 +1,5 @@
 /*
- * $RCSfile: http.c,v $
+ * $RCSfile: http_communicator.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -21,14 +21,16 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles a file.
+ * This file contains the functionality to:
+ * - receive an http stream into a byte array
+ * - send an http stream from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2004-07-28 22:46:28 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-08-14 22:20:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef HTTP_SOURCE
-#define HTTP_SOURCE
+#ifndef HTTP_COMMUNICATOR_SOURCE
+#define HTTP_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
 #include "../array/array.c"
@@ -36,28 +38,28 @@
 #include "../logger/logger.c"
 
 /**
- * Reads http stream into array.
+ * Receives an http stream and writes it into a byte array.
  *
- * @param p0 the array
- * @param p1 the array count
- * @param p2 the array size
- * @param p3 the http url
- * @param p4 the http url count
+ * @param p0 the destination (byte array)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source (http url)
+ * @param p4 the source count
  */
-void read_http(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void receive_http(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /**
- * Writes http stream from array.
+ * Sends an http stream that was read from a byte array.
  *
- * @param p0 the array
- * @param p1 the array count
- * @param p2 the array size
- * @param p3 the http url
- * @param p4 the http url count
+ * @param p0 the destination (http url)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source (byte array)
+ * @param p4 the source count
  */
-void write_http(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
+void send_http(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
-/* HTTP_SOURCE */
+/* HTTP_COMMUNICATOR_SOURCE */
 #endif

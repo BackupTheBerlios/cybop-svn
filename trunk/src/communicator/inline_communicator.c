@@ -1,5 +1,5 @@
 /*
- * $RCSfile: inline.c,v $
+ * $RCSfile: inline_communicator.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -21,14 +21,16 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles a file.
+ * This file contains the functionality to:
+ * - receive an inline stream into a byte array
+ * - send an inline stream from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2004-07-28 22:46:28 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-08-14 22:20:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INLINE_SOURCE
-#define INLINE_SOURCE
+#ifndef INLINE_COMMUNICATOR_SOURCE
+#define INLINE_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
 #include "../array/array.c"
@@ -36,15 +38,15 @@
 #include "../logger/logger.c"
 
 /**
- * Reads inline stream into array.
+ * Receives an inline stream and writes it into a byte array.
  *
- * @param p0 the array
- * @param p1 the array count
- * @param p2 the array size
- * @param p3 the inline byte stream
- * @param p4 the inline byte stream count
+ * @param p0 the destination (byte array)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source (inline data)
+ * @param p4 the source count
  */
-void read_inline(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void receive_inline(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -89,16 +91,16 @@ void read_inline(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /**
- * Writes inline stream from array.
+ * Sends an inline stream that was read from a byte array.
  *
- * @param p0 the array
- * @param p1 the array count
- * @param p2 the array size
- * @param p3 the inline byte stream
- * @param p4 the inline byte stream count
+ * @param p0 the destination (inline data)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source (byte array)
+ * @param p4 the source count
  */
-void write_inline(const void* p0, const void* p1, const void* p2, void* p3, void* p4) {
+void send_inline(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
-/* INLINE_SOURCE */
+/* INLINE_COMMUNICATOR_SOURCE */
 #endif

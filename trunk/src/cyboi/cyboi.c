@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.27 $ $Date: 2004-08-13 07:22:35 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2004-08-14 22:20:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -488,7 +488,7 @@ int main(int p0, char** p1) {
             create_array((void*) &pmb, (void*) &CHARACTER_ARRAY, (void*) &pmbs);
 
             // Read persistent model from location into part model buffer.
-            read_model((void*) &pmb, (void*) &pmbc, (void*) &pmbs,
+            receive((void*) &pmb, (void*) &pmbc, (void*) &pmbs,
                 (void*) &ppm, (void*) &ppmc, (void*) &ppl, (void*) &pplc);
 
             // Initialize transient part abstraction, model, and their counts and sizes.

@@ -23,7 +23,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.2 $ $Date: 2004-07-28 22:46:28 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-08-14 22:20:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,105 +41,6 @@
 #include "../state/string.c"
 #include "../state/time.c"
 #include "../state/vector.c"
-#include "../transfer/file.c"
-#include "../transfer/ftp.c"
-#include "../transfer/http.c"
-#include "../transfer/inline.c"
-
-/**
- * Writes a persistent model from an array.
- *
- * Possible model locations are:
- * - inline
- * - file
- * - ftp
- * - http
- *
- * @param p0 the buffer array
- * @param p1 the buffer array count
- * @param p2 the persistent model
- * @param p3 the persistent model count
- * @param p4 the location
- * @param p5 the location count
- */
-void write_model(const void* p0, const void* p1, void* p2, void* p3, const void* p4, const void* p5) {
-
-/*??
-    if (p5 != NULL_POINTER) {
-
-        int* lc = (int*) p5;
-
-        // The done flag.
-        int d = 0;
-        // The comparison result.
-        int r = 0;
-
-        if (d == 0) {
-
-            if (*lc == INLINE_LOCATION_COUNT) {
-
-                compare_array_elements(p4, (void*) &INLINE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &INLINE_LOCATION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    write_inline(p0, p1, p2, p3);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*lc == FILE_LOCATION_COUNT) {
-
-                compare_array_elements(p4, (void*) &FILE_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FILE_LOCATION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    write_file(p0, p1, p2, p3);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*lc == FTP_LOCATION_COUNT) {
-
-                compare_array_elements(p4, (void*) &FTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &FTP_LOCATION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    write_ftp(p0, p1, p2, p3);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*lc == HTTP_LOCATION_COUNT) {
-
-                compare_array_elements(p4, (void*) &HTTP_LOCATION, (void*) &CHARACTER_ARRAY, (void*) &HTTP_LOCATION_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    write_http(p0, p1, p2, p3);
-
-                    d = 1;
-                }
-            }
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write model. The location count is null.");
-    }
-*/
-}
 
 /**
  * Serializes a transient model to a persistent model.

@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.4 $ $Date: 2004-08-13 22:37:50 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-08-14 22:20:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,7 +33,6 @@
 //?? #include <libxml/parser.h>
 //?? #include <libxml/tree.h>
 #include "../global/abstraction_constants.c"
-#include "../global/channel_constants.c"
 #include "../logger/logger.c"
 #include "../parser/xml_parser.c"
 #include "../state/boolean.c"
@@ -47,105 +46,7 @@
 #include "../state/time.c"
 #include "../state/vector.c"
 #include "../state/xml_tag.c"
-#include "../transfer/file.c"
-#include "../transfer/ftp.c"
-#include "../transfer/http.c"
-#include "../transfer/inline.c"
 #include "../translator/xml_translator.c"
-
-/**
- * Reads a persistent model into an array.
- *
- * Possible model locations are:
- * - inline
- * - file
- * - ftp
- * - http
- *
- * @param p0 the buffer array
- * @param p1 the buffer array count
- * @param p2 the buffer array size
- * @param p3 the persistent model
- * @param p4 the persistent model count
- * @param p5 the persistent location
- * @param p6 the persistent location count
- */
-void read_model(void* p0, void* p1, void* p2, const void* p3, const void* p4, const void* p5, const void* p6) {
-
-    if (p6 != NULL_POINTER) {
-
-        int* lc = (int*) p6;
-
-        // The done flag.
-        int d = 0;
-        // The comparison result.
-        int r = 0;
-
-        if (d == 0) {
-
-            if (*lc == INLINE_CHANNEL_COUNT) {
-
-                compare_array_elements(p5, (void*) &INLINE_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &INLINE_CHANNEL_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    read_inline(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*lc == FILE_CHANNEL_COUNT) {
-
-                compare_array_elements(p5, (void*) &FILE_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &FILE_CHANNEL_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    read_file(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*lc == FTP_CHANNEL_COUNT) {
-
-                compare_array_elements(p5, (void*) &FTP_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &FTP_CHANNEL_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    read_ftp(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
-        }
-
-        if (d == 0) {
-
-            if (*lc == HTTP_CHANNEL_COUNT) {
-
-                compare_array_elements(p5, (void*) &HTTP_CHANNEL, (void*) &CHARACTER_ARRAY, (void*) &HTTP_CHANNEL_COUNT, (void*) &r);
-
-                if (r == 1) {
-
-                    read_http(p0, p1, p2, p3, p4);
-
-                    d = 1;
-                }
-            }
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read model. The location count is null.");
-    }
-}
 
 /**
  * Creates a transient model.
@@ -900,25 +801,25 @@ void create(const void* p0, const void* p1, const void* p2, const void* p3,
                         //?? delete all workaround blocks.
 
                         //
-                        // Read.
+                        // Receive.
                         //
 
-                        // Declare and initialize read model
+                        // Declare and initialize receive model
                         // and its count and size.
                         void* rm = NULL_POINTER;
                         int rmc = 0;
                         int rms = 0;
 
-                        // Create read model of type character,
+                        // Create receive model of type character,
                         // to read single bytes.
                         create_model((void*) &rm, (void*) &rmc, (void*) &rms,
                             (void*) &STRING_ABSTRACTION, (void*) &STRING_ABSTRACTION_COUNT);
 
-                        // Read persistent byte stream from location.
+                        // Receive persistent byte stream from location.
                         read_model((void*) &rm, (void*) &rmc, (void*) &rms,
                             (void*) &ppm, (void*) &ppmc, (void*) &ppl, (void*) &pplc);
 
-                        // The persistent model (local or remote file)
+                        // The persistent model (local or remote file or other source)
                         // cannot and must not get destroyed here.
 
                         //

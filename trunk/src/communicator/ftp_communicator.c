@@ -1,5 +1,5 @@
 /*
- * $RCSfile: ftp.c,v $
+ * $RCSfile: ftp_communicator.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -21,14 +21,16 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles a file.
+ * This file contains the functionality to:
+ * - receive an ftp stream into a byte array
+ * - send an ftp stream from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2004-07-28 22:46:28 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-08-14 22:20:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef FTP_SOURCE
-#define FTP_SOURCE
+#ifndef FTP_COMMUNICATOR_SOURCE
+#define FTP_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
 #include "../array/array.c"
@@ -36,32 +38,32 @@
 #include "../logger/logger.c"
 
 /**
- * Reads ftp stream into array.
+ * Receives an ftp stream and writes it into a byte array.
  *
- * @param p0 the array
- * @param p1 the array count
- * @param p2 the array size
- * @param p3 the ftp url
- * @param p4 the ftp url count
+ * @param p0 the destination (byte array)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source (ftp url)
+ * @param p4 the source count
  * ?? login
  * ?? password
  */
-void read_ftp(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void receive_ftp(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /**
- * Writes ftp stream from array.
+ * Sends an ftp stream that was read from a byte array.
  *
- * @param p0 the array
- * @param p1 the array count
- * @param p2 the array size
- * @param p3 the ftp url
- * @param p4 the ftp url count
+ * @param p0 the destination (ftp url)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source (byte array)
+ * @param p4 the source count
  * ?? login
  * ?? password
  */
-void write_ftp(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
+void send_ftp(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
-/* FTP_SOURCE */
+/* FTP_COMMUNICATOR_SOURCE */
 #endif

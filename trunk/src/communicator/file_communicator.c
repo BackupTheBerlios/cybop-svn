@@ -1,5 +1,5 @@
 /*
- * $RCSfile: file.c,v $
+ * $RCSfile: file_communicator.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -21,14 +21,16 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles a file.
+ * This file contains the functionality to:
+ * - receive a file stream into a byte array
+ * - send a file stream from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2004-07-28 22:46:28 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-08-14 22:20:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef FILE_SOURCE
-#define FILE_SOURCE
+#ifndef FILE_COMMUNICATOR_SOURCE
+#define FILE_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
 #include "../array/array.c"
@@ -36,15 +38,15 @@
 #include "../logger/logger.c"
 
 /**
- * Reads file stream into array.
+ * Receives a file stream and writes it into a byte array.
  *
- * @param p0 the array
- * @param p1 the array count
- * @param p2 the array size
- * @param p3 the file name
- * @param p4 the file name count
+ * @param p0 the destination (byte array)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source (file name)
+ * @param p4 the source count
  */
-void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -159,15 +161,15 @@ void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /**
- * Writes file stream from array.
+ * Sends a file stream that was read from a byte array.
  *
- * @param p0 the array
- * @param p1 the array count
- * @param p2 the array size
- * @param p3 the file name
- * @param p4 the file name count
+ * @param p0 the destination (file name)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source (byte array)
+ * @param p4 the source count
  */
-void write_file(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
+void send_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
 /*??
     char r = NULL_CHARACTER;
@@ -196,5 +198,5 @@ void write_file(const void* p0, const void* p1, const void* p2, const void* p3, 
 */
 }
 
-/* FILE_SOURCE */
+/* FILE_COMMUNICATOR_SOURCE */
 #endif
