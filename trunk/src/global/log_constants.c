@@ -28,7 +28,7 @@
  * hardware chip, just like operation codes of a central processing unit (cpu).
  * This would tremendously increase performance.
  *
- * @version $Revision: 1.4 $ $Date: 2004-10-27 13:45:03 $ $Author: rholzmueller $
+ * @version $Revision: 1.5 $ $Date: 2004-11-09 07:26:20 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,6 +51,9 @@ static const int WARNING_LOG_LEVEL = 2;
 /** The info log level. */
 static const int INFO_LOG_LEVEL = 3;
 
+/** The info log level. */
+static const int DEBUG_LOG_LEVEL = 4;
+
 //
 // Log level names.
 //
@@ -69,6 +72,11 @@ static const int WARNING_LOG_LEVEL_NAME_COUNT = 7;
 static const char INFO_LOG_LEVEL_NAME_ARRAY[] = {'I', 'n', 'f', 'o'};
 static const char* INFO_LOG_LEVEL_NAME = INFO_LOG_LEVEL_NAME_ARRAY;
 static const int INFO_LOG_LEVEL_NAME_COUNT = 4;
+
+/** The debug log level name array, pointer, count. */
+static const char DEBUG_LOG_LEVEL_NAME_ARRAY[] = {'D', 'e', 'b', 'u', 'g'};
+static const char* DEBUG_LOG_LEVEL_NAME = DEBUG_LOG_LEVEL_NAME_ARRAY;
+static const int DEBUG_LOG_LEVEL_NAME_COUNT = 5;
 
 //
 // Logger log messages.
