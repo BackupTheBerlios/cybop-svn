@@ -29,7 +29,7 @@ package cyboi;
  *
  * Map elements are accessed over their index or name.
  *
- * @version $Revision: 1.10 $ $Date: 2003-07-24 09:59:11 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-07-25 23:47:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class MapHandler {
@@ -83,29 +83,6 @@ class MapHandler {
 
             java.lang.System.out.println("ERROR: Could not destroy map. The map is null.");
         }
-    }
-
-    /**
-     * Returns the map size.
-     *
-     * @param c the map
-     * @return the map size
-     */
-    static int get_map_size(java.lang.Object c) {
-
-        int s = -1;
-        Map mc = (Map) c;
-
-        if (mc != null) {
-
-            s = ArrayHandler.get_array_size(mc.names);
-
-        } else {
-
-            java.lang.System.out.println("ERROR: Could not get map size. The map is null.");
-        }
-
-        return s;
     }
 
     //
@@ -239,10 +216,10 @@ class MapHandler {
 
         if (mc != null) {
             
-            int i = index + 1;
-            int size = MapHandler.get_map_size(mc);
-            java.lang.Object name = null;
             java.lang.Object[] a = mc.names;
+            int i = index + 1;
+            int size = ArrayHandler.get_array_size(a);
+            java.lang.Object name = null;
 
             while (i < size) {
 
@@ -252,6 +229,7 @@ class MapHandler {
                 // In this case, reset index to -1.
                 if (name == null) {
 
+                    index = -1;
                     break;
                 
                 } else {
@@ -297,10 +275,10 @@ class MapHandler {
 
         if (mc != null) {
 
-            int i = index + 1;
-            int size = MapHandler.get_map_size(mc);
-            java.lang.Object name = null;
             java.lang.Object[] a = mc.names;
+            int i = index + 1;
+            int size = ArrayHandler.get_array_size(a);
+            java.lang.Object name = null;
 
             while (i < size) {
 
@@ -332,7 +310,7 @@ class MapHandler {
             // The map is full and such its size will be the next index to be used.
             if (index == -1) {
 
-                index = MapHandler.get_map_size(mc);
+                index = size;
             }
 
         } else {
@@ -393,10 +371,10 @@ class MapHandler {
 
         if (mc != null) {
 
-            int i = 0;
-            int size = MapHandler.get_map_size(mc);
-            java.lang.Object name = null;
             java.lang.Object[] a = mc.names;
+            int i = 0;
+            int size = ArrayHandler.get_array_size(a);
+            java.lang.Object name = null;
 
             while (i < size) {
 

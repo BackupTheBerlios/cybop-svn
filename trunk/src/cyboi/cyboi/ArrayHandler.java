@@ -29,7 +29,7 @@ package cyboi;
  *
  * Array elements are accessed over their index.
  *
- * @version $Revision: 1.7 $ $Date: 2003-07-24 09:59:11 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2003-07-25 23:47:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ArrayHandler {
@@ -49,6 +49,17 @@ class ArrayHandler {
     }
 
     /**
+     * Creates an array with the size.
+     *
+     * @param s the size
+     * @return the array
+     */
+    static java.lang.Object[] create_array(int s) {
+
+        return new java.lang.Object[s];
+    }
+
+    /**
      * Creates an extended array with double length of the old array.
      *
      * All elements are copied from the old to the new array.
@@ -64,7 +75,7 @@ class ArrayHandler {
 
             int old_length = c.length;
             int new_length = old_length * 2 + 1;
-            ac = new java.lang.Object[new_length];
+            ac = ArrayHandler.create_array(new_length);
             int i = 0;
 
             while (i < old_length) {

@@ -38,7 +38,7 @@ package cyboi;
  * CYBOI can interpret <i>Cybernetics Oriented Language</i> (CYBOL) files,
  * which adhere to the <i>Extended Markup Language</i> (XML) format.
  *
- * @version $Revision: 1.14 $ $Date: 2003-07-24 20:36:56 $ $Author: christian $
+ * @version $Revision: 1.15 $ $Date: 2003-07-25 23:47:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -60,46 +60,69 @@ class Main {
 
                 if (args.length == 2) {
 
-                    java.lang.String statics_category = args[0];
-                    java.lang.String dynamics_category = args[1];
+                    // Arguments.
+                    java.lang.Object statics_category = args[0];
+                    java.lang.Object dynamics_category = args[1];
+                    java.lang.Object signal_category = "cybol/core/signal/signal";
 
+                    // XML parser.
                     ItemHandler.xml_parser = ItemHandler.create_xml_parser();
 
+                    // Event handler.
                     java.lang.Object event_handler = Main.create_event_handler();
                     Main.replaceEventQueue(event_handler);
 
+                    // Signal memory.
                     java.lang.Object signal_memory = MapHandler.create_map();
 
+                    // Statics.
                     java.lang.Object statics = ItemHandler.create_item();
                     ItemHandler.initialize(statics, statics_category);
 
 /*??
+                    // Dynamics.
                     java.lang.Object dynamics = ItemHandler.create_item();
                     ItemHandler.initialize(dynamics, dynamics_category);
 */
+
+                    // Signal.
+                    java.lang.Object signal = ItemHandler.create_item();
+                    ItemHandler.initialize(signal, signal_category);
+
+                    // Shutdown flag.
+                    SignalHandler.shutdown_flag = 0;
 
                     // Alternative to Java Event Handler
                     // (if it gets replaced one day, once CYBOI is implemented in C):
                     // Enter waiting loop and read events (IRQs) from devices (IVT?).
     
                     // The system is now started up and complete so that a loop
-                    // can be entered, waiting for signals (events).
-                    Main.await();
+                    // can be entered, waiting for signals (events/ interrupts).
+                    Main.await(signal);
     
                     // The loop above is left as soon as the shutdown flag is set.
     
+                    // Signal.
+                    ItemHandler.finalizz(signal, signal_category);
+                    ItemHandler.destroy_item(signal);
+                    
 /*??
+                    // Dynamics.
                     ItemHandler.finalizz(dynamics, dynamics_category);
                     ItemHandler.destroy_item(dynamics);
 */
 
+                    // Statics.
                     ItemHandler.finalizz(statics, statics_category);
                     ItemHandler.destroy_item(statics);
 
+                    // Signal memory.
                     MapHandler.destroy_map(signal_memory);
 
+                    // Event handler.
                     Main.destroy_event_handler(event_handler);
 
+                    // XML parser.
                     ItemHandler.destroy_xml_parser(ItemHandler.xml_parser);
                     ItemHandler.xml_parser = null;
     
@@ -115,8 +138,9 @@ class Main {
 
                 } else {
     
+                    // Help information.
                     java.lang.System.out.println("Usage:\n"
-                        + "startup_cyboi cybol/OperatingSystem dynamic");
+                        + "startup_cyboi cybol/core/system/system workflow");
                 }
 
             } else {
@@ -196,77 +220,31 @@ class Main {
     
     /**
      * Waits for signals.
+     *
+     * @param s the signal
      */
-    static void await() {
-
-/*??
-        Signal s = (Signal) createChild(getCategory(Launcher.SIGNAL));
-        //?? Temporary for handling signals which stem from java event queue.
-        Signal queued = null;
-        Boolean b = null;
+    static void await(java.lang.Object s) {
 
         while (true) {
 
             // Check shutdown flag.
-            b = (Boolean) getChild(Launcher.SHUTDOWN_FLAG);
+            if (SignalHandler.shutdown_flag == 1) {
 
-            if (b != null) {
-
-                if (b.isEqualTo(Boolean.TRUE)) {
-
-                    break;
-                }
-
-            } else {
-
-                java.lang.System.out.println("Could not wait for signals. The shutdown flag is null.");
+                break;
             }
 
-            queued = fetchSignal();
+            // Receive signal.
+            SignalHandler.receive(s);
 
-            if (queued != null) {
+            // Handle signal.
+            SignalHandler.handle(s, 0);
 
-                //?? Temporary code block for handling of signals that came from the
-                //?? java event queue and were stored in the signal memory.
-                //?? These signals were created outside this method but must be
-                //?? destroyed here!
+            // Send signal.
+            SignalHandler.send(s);
 
-                java.lang.java.lang.System.out.println("DEBUG: Handle signal " + queued.getName().getJavaObject() + " with action: " + ((java.lang.String) queued.getChild(Signal.PREDICATE)).getJavaObject());
-                handle(queued, new Boolean(Boolean.FALSE));
-
-                java.lang.java.lang.System.out.println("DEBUG: Send signal " + queued.getName().getJavaObject() + " with action: " + ((java.lang.String) queued.getChild(Signal.PREDICATE)).getJavaObject());
-                send(queued);
-
-                destroyChild(queued);
-
-            } else {
-
-/*??
-                // Check for changed flags on computer (currently done by operating system),
-                // e.g. to receive a keyboard or mouse event and then create a CYBOP signal of it.
-                receive(s);
-                // Handle the signal by sending it through the whole system.
-                handle(s, new Boolean(Boolean.FALSE));
-                // After having handled the signal in this system, its answer will be sent -
-                // again by changing flags on the computer (done by operating system),
-                // e.g. a gui drawn onto the screen, a printout or a network message.
-                send(s);
-
-                if (s != null) {
-                    
-                    s.resetChild();
-        
-                } else {
-        
-                    java.lang.System.out.println("Could not reset signal. The signal is null.");
-                }
-*/
-/*??
-            }
+            // Reset signal.
+            SignalHandler.reset(s);
         }
-
-        destroyChild(s);
-*/
     }
 }
 

@@ -65,7 +65,7 @@ package cyboi;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.15 $ $Date: 2003-07-24 22:20:13 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2003-07-25 23:47:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class ItemHandler {
@@ -74,40 +74,40 @@ class ItemHandler {
     // Constants.
     //
     
-    /** The cybol file suffix constant. */
+    /** The cybol file suffix. */
     static java.lang.String CYBOL = ".cybol";
 
-    /** The cybol path constant. */
+    /** The cybol path. */
     static java.lang.String PATH = "/home/cybop/src/";
 
-    /** The name constant. */
+    /** The name. */
     static java.lang.String NAME = "name";
 
-    /** The super constant. */
+    /** The super. */
     static java.lang.String SUPER = "super";
 
-    /** The java object constant. */
+    /** The java object. */
     static java.lang.String JAVA_OBJECT = "java_object";
 
-    /** The item constant. */
+    /** The item. */
     static java.lang.String ITEM = "item";
 
-    /** The item abstraction constant. */
+    /** The item abstraction. */
     static java.lang.String ITEM_ABSTRACTION = "item_abstraction";
 
-    /** The item category constant. */
+    /** The item category. */
     static java.lang.String ITEM_CATEGORY = "item_category";
 
-    /** The space abstraction constant. */
+    /** The space abstraction. */
     static java.lang.String SPACE_ABSTRACTION = "space_abstraction";
 
-    /** The space category constant. */
+    /** The space category. */
     static java.lang.String SPACE_CATEGORY = "space_category";
 
-    /** The time abstraction constant. */
+    /** The time abstraction. */
     static java.lang.String TIME_ABSTRACTION = "time_abstraction";
 
-    /** The time category constant. */
+    /** The time category. */
     static java.lang.String TIME_CATEGORY = "time_category";
 
     /** The xml parser. */
@@ -342,7 +342,7 @@ class ItemHandler {
             
             org.w3c.dom.Document d = p.getDocument();
 
-            ItemHandler.process_document(i, d);
+            ItemHandler.read_document(i, d);
             
         } else {
             
@@ -366,13 +366,17 @@ class ItemHandler {
     static void finalizz(java.lang.Object i, java.lang.Object c) {
     }
 
+    //
+    // XML document.
+    //
+    
     /**
-     * Processes the item document.
+     * Reads the document.
      *
      * @param i the item
      * @param d the document
      */
-    static void process_document(java.lang.Object i, java.lang.Object d) throws java.lang.Exception {
+    static void read_document(java.lang.Object i, java.lang.Object d) throws java.lang.Exception {
 
         org.w3c.dom.Document doc = (org.w3c.dom.Document) d;
 
@@ -383,16 +387,16 @@ class ItemHandler {
             org.w3c.dom.NodeList l = null;
 
             l = doc.getElementsByTagName(ItemHandler.NAME);
-            ItemHandler.process_name(i, l);
+            ItemHandler.read_name(i, l);
             
             l = doc.getElementsByTagName(ItemHandler.SUPER);
-            ItemHandler.process_super(i, l);
+            ItemHandler.read_super(i, l);
                 
             l = doc.getElementsByTagName(ItemHandler.JAVA_OBJECT);
-            ItemHandler.process_java_object(i, l);
+            ItemHandler.read_java_object(i, l);
                 
             l = doc.getElementsByTagName(ItemHandler.ITEM);
-            ItemHandler.process_items(i, l);
+            ItemHandler.read_items(i, l);
 
         } else {
             
@@ -400,13 +404,17 @@ class ItemHandler {
         }
     }
     
+    //
+    // Name.
+    //
+    
     /**
-     * Processes the name node element.
+     * Reads the name.
      *
      * @param i the item
-     * @param l the node list
+     * @param l the name node list
      */
-    static void process_name(java.lang.Object i, java.lang.Object l) {
+    static void read_name(java.lang.Object i, java.lang.Object l) {
         
         org.w3c.dom.NodeList nl = (org.w3c.dom.NodeList) l;
 
@@ -430,13 +438,17 @@ class ItemHandler {
         }
     }
 
+    //
+    // Super.
+    //
+    
     /**
-     * Processes the super node element.
+     * Reads the super.
      *
      * @param i the item
-     * @param l the node list
+     * @param l the super node list
      */
-    static void process_super(java.lang.Object i, java.lang.Object l) {
+    static void read_super(java.lang.Object i, java.lang.Object l) {
 
         org.w3c.dom.NodeList nl = (org.w3c.dom.NodeList) l;
 
@@ -460,28 +472,30 @@ class ItemHandler {
         }
     }
 
+    //
+    // Java object.
+    //
+    
     /**
-     * Processes the java object node element.
+     * Reads the java object.
      *
      * @param i the item
-     * @param l the node list
+     * @param l the java object node list
      */
-    static void process_java_object(java.lang.Object i, java.lang.Object l) {
+    static void read_java_object(java.lang.Object i, java.lang.Object l) throws java.lang.Exception {
 
         org.w3c.dom.NodeList nl = (org.w3c.dom.NodeList) l;
 
         if (nl != null) {
             
             org.w3c.dom.Node n = nl.item(0);
+            java.lang.System.out.println("INFO: Read java object: " + n);
             
             if (n != null) {
                 
-                java.lang.Object java_object = n.getNodeValue();
-                java.lang.System.out.println("INFO: Read java object: " + java_object);
---
                 // Read and process attributes.
-                m = n.getAttributes();
-                process_node_map(i, m);
+                org.w3c.dom.NamedNodeMap m = n.getAttributes();
+                read_java_object_attributes(i, m);
                 
             } else {
                 
@@ -495,12 +509,67 @@ class ItemHandler {
     }
 
     /**
-     * Processes the item node elements.
+     * Reads the java object attributes.
+     *
+     * @param o the item
+     * @param m the attributes node map
+     */
+    static void read_java_object_attributes(java.lang.Object o, java.lang.Object m) throws java.lang.Exception {
+
+        Item i = (Item) o;
+        
+        if (i != null) {
+                
+            java.lang.Object c = ItemHandler.read_attribute(m, JavaObjectHandler.CATEGORY);
+            java.lang.System.out.println("INFO: Read java object category: " + c);
+            java.lang.Object jo = JavaObjectHandler.create_java_object(c);
+            i.java_object = jo;
+
+            ItemHandler.initialize_java_object(i.java_object, m);
+
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not read java object attributes. The item is null.");
+        }
+    }
+
+    /**
+     * Initializes the java object.
+     *
+     * @param o the java object
+     * @param m the attributes node map
+     */
+    static void initialize_java_object(java.lang.Object o, java.lang.Object m) throws java.lang.Exception {
+
+        if (o != null) {
+
+            java.lang.System.out.println("INFO: Initialize java object.");
+            
+            if (o instanceof javax.swing.JFrame) {
+                    
+                java.lang.String width = (java.lang.String) ItemHandler.read_attribute(m, JavaObjectHandler.WIDTH);
+                java.lang.String height = (java.lang.String) ItemHandler.read_attribute(m, JavaObjectHandler.HEIGHT);
+                ((javax.swing.JFrame) o).setSize(java.lang.Integer.parseInt(width), java.lang.Integer.parseInt(height));
+                ((javax.swing.JFrame) o).setVisible(true);
+            }
+
+        } else {
+            
+            java.lang.System.out.println("ERROR: Could not initialize java object. The java object is null.");
+        }
+    }
+
+    //
+    // Items.
+    //
+    
+    /**
+     * Reads the items.
      *
      * @param i the item
-     * @param l the node list
+     * @param l the items node list
      */
-    static void process_items(java.lang.Object i, java.lang.Object l) throws java.lang.Exception {
+    static void read_items(java.lang.Object i, java.lang.Object l) throws java.lang.Exception {
 
         org.w3c.dom.NodeList nl = (org.w3c.dom.NodeList) l;
 
@@ -520,7 +589,7 @@ class ItemHandler {
 
                     // Read and process attributes.
                     m = n.getAttributes();
-                    process_node_map(i, m);
+                    read_item_attributes(i, m);
 
 /*??
                     // Read serialized child items.
@@ -543,60 +612,78 @@ class ItemHandler {
     }
 
     /**
-     * Processes the attribute node map.
+     * Reads the item attributes.
      *
-     * @param i the item
-     * @param m the node map
+     * @param o the item
+     * @param m the attributes node map
      */
-    static void process_node_map(java.lang.Object i, java.lang.Object m) throws java.lang.Exception {
+    static void read_item_attributes(java.lang.Object o, java.lang.Object m) throws java.lang.Exception {
 
-        Item ic = (Item) i;
+        Item i = (Item) o;
         
-        if (ic != null) {
+        if (i != null) {
                 
-            java.lang.Object n = ItemHandler.get_attribute(m, ItemHandler.NAME);
+            java.lang.Object n = ItemHandler.read_attribute(m, ItemHandler.NAME);
             java.lang.Object a = null;
             java.lang.Object c = null;
             java.lang.Object it = null;
             
-            a = ItemHandler.get_attribute(m, ItemHandler.ITEM_ABSTRACTION);
-            c = ItemHandler.get_attribute(m, ItemHandler.ITEM_CATEGORY);
+            a = ItemHandler.read_attribute(m, ItemHandler.ITEM_ABSTRACTION);
+            c = ItemHandler.read_attribute(m, ItemHandler.ITEM_CATEGORY);
             it = ItemHandler.create_item_element(a, c);
-            MapHandler.add_map_element(ic.items, n, it);
+            MapHandler.add_map_element(i.items, n, it);
             
-            a = ItemHandler.get_attribute(m, ItemHandler.SPACE_ABSTRACTION);
-            c = ItemHandler.get_attribute(m, ItemHandler.SPACE_CATEGORY);
+            a = ItemHandler.read_attribute(m, ItemHandler.SPACE_ABSTRACTION);
+            c = ItemHandler.read_attribute(m, ItemHandler.SPACE_CATEGORY);
             it = ItemHandler.create_item_element(a, c);
-            MapHandler.add_map_element(ic.spaces, n, it);
+            MapHandler.add_map_element(i.spaces, n, it);
             
-            a = ItemHandler.get_attribute(m, ItemHandler.TIME_ABSTRACTION);
-            c = ItemHandler.get_attribute(m, ItemHandler.TIME_CATEGORY);
+            if ("date".equals(n)) {
+            
+                java.lang.System.out.println("\n\n\n");
+                
+                for (int x = 0; x < ArrayHandler.get_array_size(((Map) i.items).names); x++) {
+                    
+//??                    java.lang.Object test = MapHandler.get_map_element(i.items, n);
+                    java.lang.Object test1 = MapHandler.get_map_element(i.items, x);
+                    java.lang.System.out.println(test1);
+
+                    java.lang.Object test2 = ArrayHandler.get_array_element(((Map) i.items).names, x);
+                    java.lang.System.out.println(test2);
+                }
+                
+                java.lang.System.out.println("\n\n\n");
+                java.lang.System.exit(0);
+            }
+
+            a = ItemHandler.read_attribute(m, ItemHandler.TIME_ABSTRACTION);
+            c = ItemHandler.read_attribute(m, ItemHandler.TIME_CATEGORY);
             it = ItemHandler.create_item_element(a, c);
-            MapHandler.add_map_element(ic.times, n, it);
+            MapHandler.add_map_element(i.times, n, it);
             
             java.lang.System.out.println("INFO: Read item: " + n);
             
         } else {
             
-            java.lang.System.out.println("ERROR: Could not process node map. The item is null.");
+            java.lang.System.out.println("ERROR: Could not read item attributes. The item is null.");
         }
     }
 
     /**
-     * Returns the attribute.
+     * Reads the attribute.
      *
-     * @param m the node map
+     * @param o the attributes node map
      * @param n the name
      * @return the attribute
      */
-    static java.lang.Object get_attribute(java.lang.Object m, java.lang.Object n) {
+    static java.lang.Object read_attribute(java.lang.Object o, java.lang.Object n) {
     
         java.lang.Object a = null;
-        org.w3c.dom.NamedNodeMap am = (org.w3c.dom.NamedNodeMap) m;
+        org.w3c.dom.NamedNodeMap m = (org.w3c.dom.NamedNodeMap) o;
 
-        if (am != null) {
+        if (m != null) {
     
-            org.w3c.dom.Node e = am.getNamedItem((java.lang.String) n);
+            org.w3c.dom.Node e = m.getNamedItem((java.lang.String) n);
             
             if (e != null) {
                 

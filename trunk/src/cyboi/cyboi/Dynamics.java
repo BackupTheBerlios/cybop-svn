@@ -29,91 +29,91 @@ package cyboi;
  *
  * It contains all dynamic operation sequences.
  *
- * @version $Revision: 1.4 $ $Date: 2003-07-22 20:42:53 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-07-25 23:47:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Dynamics {
 
     //
-    // Complex constant.
+    // Complex.
     //
     
-    /** The complex constant. */
+    /** The complex. */
     static final String COMPLEX = new String("complex");
 
     //
-    // Primitive constants.
+    // Primitives.
     //
     
-    /** The integer primitive constant. */
+    /** The integer primitive. */
     static final String INTEGER_PRIMITIVE = new String("integer_primitive");
 
-    /** The float primitive constant. */
+    /** The float primitive. */
     static final String FLOAT_PRIMITIVE = new String("float_primitive");
 
-    /** The char primitive constant. */
+    /** The char primitive. */
     static final String CHAR_PRIMITIVE = new String("char_primitive");
 
-    /** The string primitive constant. */
+    /** The string primitive. */
     static final String STRING_PRIMITIVE = new String("string_primitive");
 
     //
-    // Application constants.
+    // Applications.
     //
     
-    /** The koffice kword application constant. */
+    /** The koffice kword application. */
     static final String KWORD_APPLICATION = new String("kword_application");
 
-    /** The open office writer application constant. */
+    /** The open office writer application. */
     static final String SXW_APPLICATION = new String("sxw_application");
 
     //
-    // Audio constants.
+    // Audios.
     //
     
-    /** The mp3 audio constant. */
+    /** The mp3 audio. */
     static final String MP3_AUDIO = new String("mp3_audio");
 
     //
-    // Image constants.
+    // Images.
     //
     
-    /** The jpeg image constant. */
+    /** The jpeg image. */
     static final String JPEG_IMAGE = new String("jpeg_image");
 
-    /** The gif image constant. */
+    /** The gif image. */
     static final String GIF_IMAGE = new String("gif_image");
 
-    /** The bmp image constant. */
+    /** The bmp image. */
     static final String BMP_IMAGE = new String("bmp_image");
 
     //
-    // Text constants.
+    // Texts.
     //
     
-    /** The sgml text constant. */
+    /** The sgml text. */
     static final String SGML_TEXT = new String("sgml_text");
 
-    /** The xml text constant. */
+    /** The xml text. */
     static final String XML_TEXT = new String("xml_text");
 
-    /** The html text constant. */
+    /** The html text. */
     static final String HTML_TEXT = new String("html_text");
 
-    /** The rtf text constant. */
+    /** The rtf text. */
     static final String RTF_TEXT = new String("rtf_text");
 
-    /** The tex text constant. */
+    /** The tex text. */
     static final String TEX_TEXT = new String("tex_text");
 
     //
-    // Video constants.
+    // Videos.
     //
     
-    /** The mpeg video constant. */
+    /** The mpeg video. */
     static final String MPEG_VIDEO = new String("mpeg_video");
 
-    /** The quicktime video constant. */
+    /** The quicktime video. */
     static final String QUICKTIME_VIDEO = new String("quicktime_video");
 }
 
