@@ -24,6 +24,8 @@
 
 package cybop.core.logrecord;
 
+import cybop.core.model.String;
+
 /**
  * This class represents a log record.
  *
@@ -34,7 +36,7 @@ package cybop.core.logrecord;
  * This may be writing out the record to console or a file or to another medium
  * or location, using mechanisms offered by the framework.
  *
- * @version $Revision: 1.1 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class LogRecord extends LogItem {

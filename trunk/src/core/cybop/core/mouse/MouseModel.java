@@ -24,7 +24,7 @@
 
 package cybop.core.mouse;
 
-import cybop.core.model.*;
+import cybop.core.category.*;
 import cybop.core.model.String;
 
 /**
@@ -33,10 +33,10 @@ import cybop.core.model.String;
  * It contains information about how to talk to a mouse, that is its pointer and
  * position etc.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class MouseModel extends ModelItem {
+public class MouseModel extends Item {
 
     //
     // Children names.
@@ -56,7 +56,7 @@ public class MouseModel extends ModelItem {
      */
     public String getDefaultPointerPosition() {
 
-        return new String("cybop.core.model.principle.Space");
+        return new String("cybop.core.category.Space");
     }
 
     //
@@ -70,17 +70,19 @@ public class MouseModel extends ModelItem {
 
         super.initialize();
 
-        setChildItem(MouseModel.POINTER_POSITION, createChildItem(getDefaultPointerPosition()));
+        setChild(MouseModel.POINTER_POSITION, createChild(getDefaultPointerPosition()));
     }
 
     /**
      * Finalizes this mouse model.
      */
     public void finalizz() throws Exception {
-
-        Space pointerPosition = (Space) getChildItem(MouseModel.POINTER_POSITION);
-        removeChildItem(MouseModel.POINTER_POSITION);
-        destroyChildItem(pointerPosition);
+        
+/*??
+        Space pointerPosition = (Space) getChild(MouseModel.POINTER_POSITION);
+        removeChild(MouseModel.POINTER_POSITION);
+        destroyChild(pointerPosition);
+*/
 
         super.finalizz();
     }

@@ -24,6 +24,7 @@
 
 package cybop.core.screen.region.tabbedpane;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
 import cybop.core.screen.region.*;
@@ -31,7 +32,7 @@ import cybop.core.screen.region.*;
 /**
  * This class represents a system information tabbed pane.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationTabbedPane extends TabbedPane {
@@ -69,9 +70,9 @@ public class SystemInformationTabbedPane extends TabbedPane {
      * @param i the item
      * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws Exception {
+    public void setChild(String n, Item i) throws Exception {
 
-        super.setChildItem(n, i);
+        super.setChild(n, i);
 
         if (n != null) {
 
@@ -112,33 +113,33 @@ public class SystemInformationTabbedPane extends TabbedPane {
      * @param n the name
      * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws Exception {
+    public void removeChild(String n) throws Exception {
 
         if (n != null) {
 
             if (n.isEqualTo(SystemInformationTabbedPane.IMAGE_PANEL)) {
 
-                removeImagePanel((ImagePanel) getChildItem(n));
+                removeImagePanel((ImagePanel) getChild(n));
 
             } else if (n.isEqualTo(SystemInformationTabbedPane.COPYRIGHT_PANEL)) {
 
-                removeCopyrightPanel((TextPanel) getChildItem(n));
+                removeCopyrightPanel((TextPanel) getChild(n));
             
             } else if (n.isEqualTo(SystemInformationTabbedPane.AUTHORS_PANEL)) {
 
-                removeAuthorsPanel((TextPanel) getChildItem(n));
+                removeAuthorsPanel((TextPanel) getChild(n));
             
             } else if (n.isEqualTo(SystemInformationTabbedPane.HELPERS_PANEL)) {
 
-                removeHelpersPanel((TextPanel) getChildItem(n));
+                removeHelpersPanel((TextPanel) getChild(n));
             
             } else if (n.isEqualTo(SystemInformationTabbedPane.INSPIRATIONS_PANEL)) {
 
-                removeInspirationsPanel((TextPanel) getChildItem(n));
+                removeInspirationsPanel((TextPanel) getChild(n));
             
             } else if (n.isEqualTo(SystemInformationTabbedPane.LICENSE_PANEL)) {
 
-                removeLicensePanel((TextPanel) getChildItem(n));
+                removeLicensePanel((TextPanel) getChild(n));
             }
 
         } else {
@@ -146,7 +147,7 @@ public class SystemInformationTabbedPane extends TabbedPane {
             throw new Exception("Could not remove item. The name is null.");
         }
 
-        super.removeChildItem(n);
+        super.removeChild(n);
     }
 
     //
@@ -644,12 +645,12 @@ public class SystemInformationTabbedPane extends TabbedPane {
 
         super.initialize();
 
-        setChildItem(SystemInformationTabbedPane.IMAGE_PANEL, createChildItem(getDefaultImagePanel()));
-        setChildItem(SystemInformationTabbedPane.COPYRIGHT_PANEL, createChildItem(getDefaultCopyrightPanel()));
-        setChildItem(SystemInformationTabbedPane.AUTHORS_PANEL, createChildItem(getDefaultAuthorsPanel()));
-        setChildItem(SystemInformationTabbedPane.HELPERS_PANEL, createChildItem(getDefaultHelpersPanel()));
-        setChildItem(SystemInformationTabbedPane.INSPIRATIONS_PANEL, createChildItem(getDefaultInspirationsPanel()));
-        setChildItem(SystemInformationTabbedPane.LICENSE_PANEL, createChildItem(getDefaultLicensePanel()));
+        setChild(SystemInformationTabbedPane.IMAGE_PANEL, createChild(getDefaultImagePanel()));
+        setChild(SystemInformationTabbedPane.COPYRIGHT_PANEL, createChild(getDefaultCopyrightPanel()));
+        setChild(SystemInformationTabbedPane.AUTHORS_PANEL, createChild(getDefaultAuthorsPanel()));
+        setChild(SystemInformationTabbedPane.HELPERS_PANEL, createChild(getDefaultHelpersPanel()));
+        setChild(SystemInformationTabbedPane.INSPIRATIONS_PANEL, createChild(getDefaultInspirationsPanel()));
+        setChild(SystemInformationTabbedPane.LICENSE_PANEL, createChild(getDefaultLicensePanel()));
     }
 
     /**
@@ -657,29 +658,29 @@ public class SystemInformationTabbedPane extends TabbedPane {
      */
     public void finalizz() throws Exception {
 
-        TextPanel licensePanel = (TextPanel) getChildItem(SystemInformationTabbedPane.LICENSE_PANEL);
-        removeChildItem(SystemInformationTabbedPane.LICENSE_PANEL);
-        destroyChildItem(licensePanel);
+        TextPanel licensePanel = (TextPanel) getChild(SystemInformationTabbedPane.LICENSE_PANEL);
+        removeChild(SystemInformationTabbedPane.LICENSE_PANEL);
+        destroyChild(licensePanel);
 
-        TextPanel inspirationsPanel = (TextPanel) getChildItem(SystemInformationTabbedPane.INSPIRATIONS_PANEL);
-        removeChildItem(SystemInformationTabbedPane.INSPIRATIONS_PANEL);
-        destroyChildItem(inspirationsPanel);
+        TextPanel inspirationsPanel = (TextPanel) getChild(SystemInformationTabbedPane.INSPIRATIONS_PANEL);
+        removeChild(SystemInformationTabbedPane.INSPIRATIONS_PANEL);
+        destroyChild(inspirationsPanel);
 
-        TextPanel helpersPanel = (TextPanel) getChildItem(SystemInformationTabbedPane.HELPERS_PANEL);
-        removeChildItem(SystemInformationTabbedPane.HELPERS_PANEL);
-        destroyChildItem(helpersPanel);
+        TextPanel helpersPanel = (TextPanel) getChild(SystemInformationTabbedPane.HELPERS_PANEL);
+        removeChild(SystemInformationTabbedPane.HELPERS_PANEL);
+        destroyChild(helpersPanel);
 
-        TextPanel authorsPanel = (TextPanel) getChildItem(SystemInformationTabbedPane.AUTHORS_PANEL);
-        removeChildItem(SystemInformationTabbedPane.AUTHORS_PANEL);
-        destroyChildItem(authorsPanel);
+        TextPanel authorsPanel = (TextPanel) getChild(SystemInformationTabbedPane.AUTHORS_PANEL);
+        removeChild(SystemInformationTabbedPane.AUTHORS_PANEL);
+        destroyChild(authorsPanel);
 
-        TextPanel copyrightPanel = (TextPanel) getChildItem(SystemInformationTabbedPane.COPYRIGHT_PANEL);
-        removeChildItem(SystemInformationTabbedPane.COPYRIGHT_PANEL);
-        destroyChildItem(copyrightPanel);
+        TextPanel copyrightPanel = (TextPanel) getChild(SystemInformationTabbedPane.COPYRIGHT_PANEL);
+        removeChild(SystemInformationTabbedPane.COPYRIGHT_PANEL);
+        destroyChild(copyrightPanel);
 
-        ImagePanel imagePanel = (ImagePanel) getChildItem(SystemInformationTabbedPane.IMAGE_PANEL);
-        removeChildItem(SystemInformationTabbedPane.IMAGE_PANEL);
-        destroyChildItem(imagePanel);
+        ImagePanel imagePanel = (ImagePanel) getChild(SystemInformationTabbedPane.IMAGE_PANEL);
+        removeChild(SystemInformationTabbedPane.IMAGE_PANEL);
+        destroyChild(imagePanel);
 
         super.finalizz();
     }

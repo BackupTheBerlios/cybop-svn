@@ -24,14 +24,16 @@
 
 package cybop.core.screen.region.menubar;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
 import cybop.core.screen.region.*;
+import cybop.core.screen.region.menu.*;
 
 /**
  * This class represents a portal menu bar.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalMenuBar extends MenuBar {
@@ -72,9 +74,9 @@ public class PortalMenuBar extends MenuBar {
      * @param i the item
      * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws Exception {
+    public void setChild(String n, Item i) throws Exception {
 
-        super.setChildItem(n, i);
+        super.setChild(n, i);
 
         if (n != null) {
 
@@ -121,39 +123,39 @@ public class PortalMenuBar extends MenuBar {
      * @param n the name
      * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws Exception {
+    public void removeChild(String n) throws Exception {
 
         if (n != null) {
 
             if (n.isEqualTo(PortalMenuBar.SYSTEMS_MENU)) {
 
-                removeSystemsMenu((SystemsMenu) getChildItem(n));
+                removeSystemsMenu((SystemsMenu) getChild(n));
 
 /*??
             } else if (n.isEqualTo(PortalMenuBar.EDITOR_MENU)) {
 
-                removeEditorMenu((EditorMenu) getChildItem(n));
+                removeEditorMenu((EditorMenu) getChild(n));
 
             } else if (n.isEqualTo(PortalMenuBar.VIEW_MENU)) {
 
-                removeViewMenu((ViewMenu) getChildItem(n));
+                removeViewMenu((ViewMenu) getChild(n));
 
             } else if (n.isEqualTo(PortalMenuBar.CONTEXT_MENU)) {
 
-                removeContextMenu((ContextMenu) getChildItem(n));
+                removeContextMenu((ContextMenu) getChild(n));
 
             } else if (n.isEqualTo(PortalMenuBar.SETTINGS_MENU)) {
 
-                removeSettingsMenu((SettingsMenu) getChildItem(n));
+                removeSettingsMenu((SettingsMenu) getChild(n));
 
             } else if (n.isEqualTo(PortalMenuBar.WINDOW_MENU)) {
 
-                removeWindowMenu((WindowMenu) getChildItem(n));
+                removeWindowMenu((WindowMenu) getChild(n));
 */
 
             } else if (n.isEqualTo(PortalMenuBar.HELP_MENU)) {
 
-                removeHelpMenu((HelpMenu) getChildItem(n));
+                removeHelpMenu((HelpMenu) getChild(n));
             }
 
         } else {
@@ -161,7 +163,7 @@ public class PortalMenuBar extends MenuBar {
             throw new Exception("Could not remove item. The name is null.");
         }
 
-        super.removeChildItem(n);
+        super.removeChild(n);
     }
 
     //
@@ -956,15 +958,15 @@ public class PortalMenuBar extends MenuBar {
         m.add(createExitMenuItem());
 */
 
-        setChildItem(PortalMenuBar.SYSTEMS_MENU, createChildItem(getDefaultSystemsMenu()));
+        setChild(PortalMenuBar.SYSTEMS_MENU, createChild(getDefaultSystemsMenu()));
 /*??
-        setChildItem(PortalMenuBar.EDITOR_MENU, createChildItem(getDefaultEditorMenu()));
-        setChildItem(PortalMenuBar.VIEW_MENU, createChildItem(getDefaultViewMenu()));
-        setChildItem(PortalMenuBar.CONTEXT_MENU, createChildItem(getDefaultContextMenu()));
-        setChildItem(PortalMenuBar.SETTINGS_MENU, createChildItem(getDefaultSettingsMenu()));
-        setChildItem(PortalMenuBar.WINDOW_MENU, createChildItem(getDefaultWindowMenu()));
+        setChild(PortalMenuBar.EDITOR_MENU, createChild(getDefaultEditorMenu()));
+        setChild(PortalMenuBar.VIEW_MENU, createChild(getDefaultViewMenu()));
+        setChild(PortalMenuBar.CONTEXT_MENU, createChild(getDefaultContextMenu()));
+        setChild(PortalMenuBar.SETTINGS_MENU, createChild(getDefaultSettingsMenu()));
+        setChild(PortalMenuBar.WINDOW_MENU, createChild(getDefaultWindowMenu()));
 */
-        setChildItem(PortalMenuBar.HELP_MENU, createChildItem(getDefaultHelpMenu()));
+        setChild(PortalMenuBar.HELP_MENU, createChild(getDefaultHelpMenu()));
     }
 
     /**
@@ -972,30 +974,30 @@ public class PortalMenuBar extends MenuBar {
      */
     public void finalizz() throws Exception {
 
-        HelpMenu helpMenu = (HelpMenu) getChildItem(PortalMenuBar.HELP_MENU);
-        removeChildItem(PortalMenuBar.HELP_MENU);
-        destroyChildItem(helpMenu);
+        HelpMenu helpMenu = (HelpMenu) getChild(PortalMenuBar.HELP_MENU);
+        removeChild(PortalMenuBar.HELP_MENU);
+        destroyChild(helpMenu);
 
 /*??
-        removeChildItem(PortalMenuBar.WINDOW_MENU);
-        destroyChildItem((WindowMenu) getChildItem(PortalMenuBar.WINDOW_MENU));
+        removeChild(PortalMenuBar.WINDOW_MENU);
+        destroyChild((WindowMenu) getChild(PortalMenuBar.WINDOW_MENU));
 
-        removeChildItem(PortalMenuBar.SETTINGS_MENU);
-        destroyChildItem((SettingsMenu) getChildItem(PortalMenuBar.SETTINGS_MENU));
+        removeChild(PortalMenuBar.SETTINGS_MENU);
+        destroyChild((SettingsMenu) getChild(PortalMenuBar.SETTINGS_MENU));
 
-        removeChildItem(PortalMenuBar.CONTEXT_MENU);
-        destroyChildItem((ContextMenu) getChildItem(PortalMenuBar.CONTEXT_MENU));
+        removeChild(PortalMenuBar.CONTEXT_MENU);
+        destroyChild((ContextMenu) getChild(PortalMenuBar.CONTEXT_MENU));
 
-        removeChildItem(PortalMenuBar.VIEW_MENU);
-        destroyChildItem((ViewMenu) getChildItem(PortalMenuBar.VIEW_MENU));
+        removeChild(PortalMenuBar.VIEW_MENU);
+        destroyChild((ViewMenu) getChild(PortalMenuBar.VIEW_MENU));
 
-        removeChildItem(PortalMenuBar.EDITOR_MENU);
-        destroyChildItem((EditorMenu) getChildItem(PortalMenuBar.EDITOR_MENU));
+        removeChild(PortalMenuBar.EDITOR_MENU);
+        destroyChild((EditorMenu) getChild(PortalMenuBar.EDITOR_MENU));
 */
 
-        SystemsMenu systemsMenu = (SystemsMenu) getChildItem(PortalMenuBar.SYSTEMS_MENU);
-        removeChildItem(PortalMenuBar.SYSTEMS_MENU);
-        destroyChildItem(systemsMenu);
+        SystemsMenu systemsMenu = (SystemsMenu) getChild(PortalMenuBar.SYSTEMS_MENU);
+        removeChild(PortalMenuBar.SYSTEMS_MENU);
+        destroyChild(systemsMenu);
     }
 }
 

@@ -24,13 +24,16 @@
 
 package cybop.core.category;
 
+import cybop.core.model.*;
+import cybop.core.model.String;
+
 /**
  * This class represents a structure.
  *
  * A structure knows about the positions of its children, relative to each other.
  * That means that this structure also is a special constellation of children.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Structure extends Hierarchy {
@@ -165,7 +168,7 @@ public class Structure extends Hierarchy {
 
         if (m != null) {
 
-            p = m.get(n);
+            p = (Structure) m.get(n);
 
         } else {
 
@@ -180,7 +183,7 @@ public class Structure extends Hierarchy {
     //
 
     /**
-     * Abstracts this structure.
+     * Abstracts this abstraction.
      */
     public void abstracc() throws Exception {
 
@@ -190,7 +193,7 @@ public class Structure extends Hierarchy {
     }
 
     /**
-     * Deabstracts this structure.
+     * Deabstracts this abstraction.
      */
     public void deabstract() throws Exception {
 

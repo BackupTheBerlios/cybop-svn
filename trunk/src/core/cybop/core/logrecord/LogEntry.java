@@ -24,12 +24,14 @@
 
 package cybop.core.logrecord;
 
+import cybop.core.model.String;
+
 /**
  * This class represents a log entry.
  *
  * A log entry consists of the time this entry was made, a log level and a message.
  *
- * @version $Revision: 1.1 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class LogEntry extends LogItem {

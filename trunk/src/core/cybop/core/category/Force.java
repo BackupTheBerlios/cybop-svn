@@ -24,6 +24,8 @@
 
 package cybop.core.category;
 
+import cybop.core.model.*;
+
 /**
  * This class represents a force.
  *
@@ -39,9 +41,9 @@ package cybop.core.category;
  *
  * It is measured in Newton [N].
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-23 11:57:28 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Force extends Map {
+public class Force extends Array {
 }
 

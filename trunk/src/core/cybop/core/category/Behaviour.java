@@ -24,12 +24,15 @@
 
 package cybop.core.category;
 
+import cybop.core.model.*;
+import cybop.core.model.String;
+
 /**
  * This class represents a behaviour.
  *
  * A behaviour is determined by its procedures.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Behaviour extends Definition {
@@ -142,7 +145,7 @@ public class Behaviour extends Definition {
 
         if (m != null) {
 
-            p = m.get(n);
+            p = (Behaviour) m.get(n);
 
         } else {
 
@@ -157,7 +160,7 @@ public class Behaviour extends Definition {
     //
 
     /**
-     * Abstracts this behaviour.
+     * Abstracts this abstraction.
      */
     public void abstracc() throws Exception {
 
@@ -167,7 +170,7 @@ public class Behaviour extends Definition {
     }
 
     /**
-     * Deabstracts this behaviour.
+     * Deabstracts this abstraction.
      */
     public void deabstract() throws Exception {
 

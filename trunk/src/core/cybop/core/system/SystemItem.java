@@ -26,6 +26,9 @@ package cybop.core.system;
 
 import cybop.core.category.*;
 import cybop.core.model.*;
+import cybop.core.model.Integer;
+import cybop.core.model.String;
+import cybop.core.signal.*;
 
 /**
  * This class represents a system item.<br><br>
@@ -33,10 +36,10 @@ import cybop.core.model.*;
  * A system item has special properties like configuration or log record and
  * is able to create and send signals.
  *
- * @version $Revision: 1.5 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class SystemItem extends ModelItem {
+public class SystemItem extends Item {
 
     //
     // Children names.
@@ -86,7 +89,7 @@ public class SystemItem extends ModelItem {
      */
     public Item createChild(String n) throws Exception {
 
-        Item i = super.createChildItem(n);
+        Item i = super.createChild(n);
 
         if (i != null) {
 
@@ -154,7 +157,7 @@ public class SystemItem extends ModelItem {
 
         super.globalize();
 
-        setChildItem(Item.SIGNAL_MEMORY, m);
+        setChild(Item.SIGNAL_MEMORY, m);
     }
 
     /**
@@ -162,7 +165,7 @@ public class SystemItem extends ModelItem {
      */
     public void deglobalize() throws Exception {
 
-        removeChildItem(Item.SIGNAL_MEMORY);
+        removeChild(Item.SIGNAL_MEMORY);
 
         super.deglobalize();
     }
@@ -178,7 +181,7 @@ public class SystemItem extends ModelItem {
 
         super.initialize();
 
-        setChildItem(Item.ACTION, (String) getDefaultActionCategory());
+        setChild(Item.ACTION, (String) getDefaultActionCategory());
     }
 
     /**
@@ -186,9 +189,9 @@ public class SystemItem extends ModelItem {
      */
     public void finalizz() throws Exception {
 
-        String action = (String) getChildItem(Item.ACTION);
-        removeChildItem(Item.ACTION);
-        destroyChildItem(action);
+        String action = (String) getChild(Item.ACTION);
+        removeChild(Item.ACTION);
+        destroyChild(action);
 
         super.finalizz();
     }
@@ -205,13 +208,13 @@ public class SystemItem extends ModelItem {
      */
     public void storeSignal(Signal s) throws Exception {
 
-        SignalMemory mem = (SignalMemory) getChildItem(Item.SIGNAL_MEMORY);
+        SignalMemory mem = (SignalMemory) getChild(Item.SIGNAL_MEMORY);
 
         if (mem != null) {
 
             String n = mem.buildName(Item.SIGNAL);
 
-            mem.setChildItem(n, s);
+            mem.setChild(n, s);
 
         } else {
 
@@ -234,7 +237,7 @@ public class SystemItem extends ModelItem {
     public Signal fetchSignal() throws Exception {
 
         Signal s = null;
-        SignalMemory mem = (SignalMemory) getChildItem(Item.SIGNAL_MEMORY);
+        SignalMemory mem = (SignalMemory) getChild(Item.SIGNAL_MEMORY);
 
         if (mem != null) {
 
@@ -261,7 +264,7 @@ public class SystemItem extends ModelItem {
     
                             if (n.startsWith(Item.SIGNAL)) {
 
-                                priority = (Integer) child.getChildItem(Signal.PRIORITY);
+                                priority = (Integer) child.getChild(Signal.PRIORITY);
 
                                 if (priority != null) {
     
@@ -292,7 +295,7 @@ public class SystemItem extends ModelItem {
 
                 if (s != null) {
 
-                    mem.removeChildItem(s.getName());
+                    mem.removeChild(s.getName());
                 }
 
             } else {
@@ -336,13 +339,13 @@ public class SystemItem extends ModelItem {
 
         if (l != null) {
 
-            if (l.isSmallerThanOrEqualTo((Integer) getChildItem(Item.LOG_LEVEL))) {
+            if (l.isSmallerThanOrEqualTo((Integer) getChild(Item.LOG_LEVEL))) {
 
-                LogRecord r = (LogRecord) getChildItem(Item.LOG_RECORD);
+                LogRecord r = (LogRecord) getChild(Item.LOG_RECORD);
 
                 if (r != null) {
 
-                    r.setChildItem(LogRecord.MESSAGE, new String(m));
+                    r.setChild(LogRecord.MESSAGE, new String(m));
                     r.setThrowable(t);
 
                 } else {
@@ -365,10 +368,10 @@ public class SystemItem extends ModelItem {
      * @param r the log record
      * @exception Exception if the log record is null
      */
+/*??
     public void log(LogRecord r) throws Exception {
 
-/*??
-        cybop.core.system.region.controller.Encoder e = (cybop.core.system.region.controller.Encoder) getChildItem(Item.ENCODER);
+        cybop.core.system.region.controller.Encoder e = (cybop.core.system.region.controller.Encoder) getChild(Item.ENCODER);
 
         if (e != null) {
 
@@ -381,20 +384,20 @@ public class SystemItem extends ModelItem {
              * The motor (output mechanism) has to be assigned here later.
              * For now, the system console is used for message output.
              */
+/*??
             if (r.getThrowable() != null) {
 
-                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChildItem(LogRecord.MESSAGE)).getJavaObject() + "\n" + r.getThrowable());
+                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChild(LogRecord.MESSAGE)).getJavaObject() + "\n" + r.getThrowable());
                 r.getThrowable().printStackTrace();
 
             } else {
 
-                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChildItem(LogRecord.MESSAGE)).getJavaObject());
+                java.lang.System.out.println(this + " log\n" + "INFO" + ": " + ((String) r.getChild(LogRecord.MESSAGE)).getJavaObject());
             }
 
 /*??
             throw new Exception("Could not log record. The motor is null.");
         }
-*/
     }
 
     /**

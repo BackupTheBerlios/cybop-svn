@@ -33,7 +33,7 @@ import cybop.healthcare.model.*;
  * A CAVE entry is an important reminder for doctors, indicating
  * allergies, medication, special problems a patient may have.
  *
- * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Cave extends Description {
@@ -83,8 +83,8 @@ public class Cave extends Description {
 
         super.initialize();
 
-        setChildItem(Cave.NAME, getDefaultName());
-        setChildItem(Cave.DESCRIPTION, getDefaultDescription());
+        setChild(Cave.NAME, getDefaultName());
+        setChild(Cave.DESCRIPTION, getDefaultDescription());
     }
 
     /**
@@ -92,8 +92,8 @@ public class Cave extends Description {
      */
     public void finalizz() throws Exception {
 
-        removeChildItem(Cave.DESCRIPTION);
-        removeChildItem(Cave.NAME);
+        removeChild(Cave.DESCRIPTION);
+        removeChild(Cave.NAME);
 
         super.finalizz();
     }

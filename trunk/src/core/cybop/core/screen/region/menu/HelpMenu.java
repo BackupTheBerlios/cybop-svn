@@ -24,14 +24,17 @@
 
 package cybop.core.screen.region.menu;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
+import cybop.core.screen.component.*;
+import cybop.core.screen.component.menuitem.*;
 import cybop.core.screen.region.*;
 
 /**
  * This class represents a help menu.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class HelpMenu extends Menu {
@@ -54,9 +57,9 @@ public class HelpMenu extends Menu {
      * @param i the item
      * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws Exception {
+    public void setChild(String n, Item i) throws Exception {
 
-        super.setChildItem(n, i);
+        super.setChild(n, i);
 
         if (n != null) {
 
@@ -77,13 +80,13 @@ public class HelpMenu extends Menu {
      * @param n the name
      * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws Exception {
+    public void removeChild(String n) throws Exception {
 
         if (n != null) {
 
             if (n.isEqualTo(HelpMenu.ABOUT_MENU_ITEM)) {
 
-                removeAboutMenuItem((AboutMenuItem) getChildItem(n));
+                removeAboutMenuItem((AboutMenuItem) getChild(n));
             }
 
         } else {
@@ -91,7 +94,7 @@ public class HelpMenu extends Menu {
             throw new Exception("Could not remove item. The name is null.");
         }
 
-        super.removeChildItem(n);
+        super.removeChild(n);
     }
 
     //
@@ -189,7 +192,7 @@ public class HelpMenu extends Menu {
 
         super.initialize();
 
-        setChildItem(HelpMenu.ABOUT_MENU_ITEM, createChildItem(getDefaultAboutMenuItem()));
+        setChild(HelpMenu.ABOUT_MENU_ITEM, createChild(getDefaultAboutMenuItem()));
     }
 
     /**
@@ -197,9 +200,9 @@ public class HelpMenu extends Menu {
      */
     public void finalizz() throws Exception {
 
-        AboutMenuItem aboutMenuItem = (AboutMenuItem) getChildItem(HelpMenu.ABOUT_MENU_ITEM);
-        removeChildItem(HelpMenu.ABOUT_MENU_ITEM);
-        destroyChildItem(aboutMenuItem);
+        AboutMenuItem aboutMenuItem = (AboutMenuItem) getChild(HelpMenu.ABOUT_MENU_ITEM);
+        removeChild(HelpMenu.ABOUT_MENU_ITEM);
+        destroyChild(aboutMenuItem);
 
         super.finalizz();
     }

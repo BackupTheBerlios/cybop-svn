@@ -24,6 +24,7 @@
 
 package cybop.core.screen.component;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
@@ -32,7 +33,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a button.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Button extends ScreenComponent {
@@ -58,9 +59,9 @@ public class Button extends ScreenComponent {
      * @param i the item
      * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws Exception {
+    public void setChild(String n, Item i) throws Exception {
 
-        super.setChildItem(n, i);
+        super.setChild(n, i);
 
         if (n != null) {
 
@@ -85,17 +86,17 @@ public class Button extends ScreenComponent {
      * @param n the name
      * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws Exception {
+    public void removeChild(String n) throws Exception {
 
         if (n != null) {
 
             if (n.isEqualTo(Button.LABEL)) {
 
-                removeLabel((String) getChildItem(n));
+                removeLabel((String) getChild(n));
 
             } else if (n.isEqualTo(Button.MNEMONIC)) {
 
-                removeMnemonic((Integer) getChildItem(n));
+                removeMnemonic((Integer) getChild(n));
             }
 
         } else {
@@ -103,7 +104,7 @@ public class Button extends ScreenComponent {
             throw new Exception("Could not remove item. The name is null.");
         }
 
-        super.removeChildItem(n);
+        super.removeChild(n);
     }
 
     //
@@ -281,8 +282,8 @@ public class Button extends ScreenComponent {
 
         super.initialize();
 
-        setChildItem(Button.LABEL, getDefaultLabel());
-        setChildItem(Button.MNEMONIC, getDefaultMnemonic());
+        setChild(Button.LABEL, getDefaultLabel());
+        setChild(Button.MNEMONIC, getDefaultMnemonic());
     }
 
     /**
@@ -290,13 +291,13 @@ public class Button extends ScreenComponent {
      */
     public void finalizz() throws Exception {
 
-        Integer mnemonic = (Integer) getChildItem(Button.MNEMONIC);
-        removeChildItem(Button.MNEMONIC);
-        destroyChildItem(mnemonic);
+        Integer mnemonic = (Integer) getChild(Button.MNEMONIC);
+        removeChild(Button.MNEMONIC);
+        destroyChild(mnemonic);
 
-        String label = (String) getChildItem(Button.LABEL);
-        removeChildItem(Button.LABEL);
-        destroyChildItem(label);
+        String label = (String) getChild(Button.LABEL);
+        removeChild(Button.LABEL);
+        destroyChild(label);
 
         super.finalizz();
     }

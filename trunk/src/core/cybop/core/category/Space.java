@@ -24,6 +24,7 @@
 
 package cybop.core.category;
 
+import cybop.core.model.*;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
 
@@ -36,10 +37,10 @@ import cybop.core.model.String;
  *
  * It is measured in Meter * Meter * Meter [m * m * m].
  *
- * @version $Revision: 1.2 $ $Date: 2003-06-07 07:18:54 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Space extends Map {
+public class Space extends Array {
 
     //
     // Children names.
@@ -136,14 +137,16 @@ public class Space extends Map {
      */
     public void initialize() throws Exception {
 
+/*??
         super.initialize();
 
-        setChildItem(Space.ORIGIN_X_COORDINATE, createChildItem(getDefaultOriginXCoordinate()));
-        setChildItem(Space.ORIGIN_Y_COORDINATE, createChildItem(getDefaultOriginYCoordinate()));
-        setChildItem(Space.ORIGIN_Z_COORDINATE, createChildItem(getDefaultOriginZCoordinate()));
-        setChildItem(Space.EXPANSE_X_COORDINATE, createChildItem(getDefaultExpanseXCoordinate()));
-        setChildItem(Space.EXPANSE_Y_COORDINATE, createChildItem(getDefaultExpanseYCoordinate()));
-        setChildItem(Space.EXPANSE_Z_COORDINATE, createChildItem(getDefaultExpanseZCoordinate()));
+        setChild(Space.ORIGIN_X_COORDINATE, createChild(getDefaultOriginXCoordinate()));
+        setChild(Space.ORIGIN_Y_COORDINATE, createChild(getDefaultOriginYCoordinate()));
+        setChild(Space.ORIGIN_Z_COORDINATE, createChild(getDefaultOriginZCoordinate()));
+        setChild(Space.EXPANSE_X_COORDINATE, createChild(getDefaultExpanseXCoordinate()));
+        setChild(Space.EXPANSE_Y_COORDINATE, createChild(getDefaultExpanseYCoordinate()));
+        setChild(Space.EXPANSE_Z_COORDINATE, createChild(getDefaultExpanseZCoordinate()));
+*/
     }
 
     /**
@@ -151,31 +154,33 @@ public class Space extends Map {
      */
     public void finalizz() throws Exception {
 
-        Integer expanseZCoordinate = (Integer) getChildItem(Space.EXPANSE_Z_COORDINATE);
-        removeChildItem(Space.EXPANSE_Z_COORDINATE);
-        destroyChildItem(expanseZCoordinate);
+/*??
+        Integer expanseZCoordinate = (Integer) getChild(Space.EXPANSE_Z_COORDINATE);
+        removeChild(Space.EXPANSE_Z_COORDINATE);
+        destroyChild(expanseZCoordinate);
 
-        Integer expanseYCoordinate = (Integer) getChildItem(Space.EXPANSE_Y_COORDINATE);
-        removeChildItem(Space.EXPANSE_Y_COORDINATE);
-        destroyChildItem(expanseYCoordinate);
+        Integer expanseYCoordinate = (Integer) getChild(Space.EXPANSE_Y_COORDINATE);
+        removeChild(Space.EXPANSE_Y_COORDINATE);
+        destroyChild(expanseYCoordinate);
 
-        Integer expanseXCoordinate = (Integer) getChildItem(Space.EXPANSE_X_COORDINATE);
-        removeChildItem(Space.EXPANSE_X_COORDINATE);
-        destroyChildItem(expanseXCoordinate);
+        Integer expanseXCoordinate = (Integer) getChild(Space.EXPANSE_X_COORDINATE);
+        removeChild(Space.EXPANSE_X_COORDINATE);
+        destroyChild(expanseXCoordinate);
 
-        Integer originZCoordinate = (Integer) getChildItem(Space.ORIGIN_Z_COORDINATE);
-        removeChildItem(Space.ORIGIN_Z_COORDINATE);
-        destroyChildItem(originZCoordinate);
+        Integer originZCoordinate = (Integer) getChild(Space.ORIGIN_Z_COORDINATE);
+        removeChild(Space.ORIGIN_Z_COORDINATE);
+        destroyChild(originZCoordinate);
 
-        Integer originYCoordinate = (Integer) getChildItem(Space.ORIGIN_Y_COORDINATE);
-        removeChildItem(Space.ORIGIN_Y_COORDINATE);
-        destroyChildItem(originYCoordinate);
+        Integer originYCoordinate = (Integer) getChild(Space.ORIGIN_Y_COORDINATE);
+        removeChild(Space.ORIGIN_Y_COORDINATE);
+        destroyChild(originYCoordinate);
 
-        Integer originXCoordinate = (Integer) getChildItem(Space.ORIGIN_X_COORDINATE);
-        removeChildItem(Space.ORIGIN_X_COORDINATE);
-        destroyChildItem(originXCoordinate);
+        Integer originXCoordinate = (Integer) getChild(Space.ORIGIN_X_COORDINATE);
+        removeChild(Space.ORIGIN_X_COORDINATE);
+        destroyChild(originXCoordinate);
 
         super.finalizz();
+*/
     }
 
     //
@@ -194,14 +199,15 @@ public class Space extends Map {
 
         boolean b = false;
 
+/*??
         if (p != null) {
 
-            boolean xob = xContains((Integer) p.getChildItem(Space.ORIGIN_X_COORDINATE));
-            boolean xeb = xContains((Integer) p.getChildItem(Space.EXPANSE_X_COORDINATE));
-            boolean yob = yContains((Integer) p.getChildItem(Space.ORIGIN_Y_COORDINATE));
-            boolean yeb = yContains((Integer) p.getChildItem(Space.EXPANSE_Y_COORDINATE));
-            boolean zob = zContains((Integer) p.getChildItem(Space.ORIGIN_Z_COORDINATE));
-            boolean zeb = zContains((Integer) p.getChildItem(Space.EXPANSE_Z_COORDINATE));
+            boolean xob = xContains((Integer) p.getChild(Space.ORIGIN_X_COORDINATE));
+            boolean xeb = xContains((Integer) p.getChild(Space.EXPANSE_X_COORDINATE));
+            boolean yob = yContains((Integer) p.getChild(Space.ORIGIN_Y_COORDINATE));
+            boolean yeb = yContains((Integer) p.getChild(Space.EXPANSE_Y_COORDINATE));
+            boolean zob = zContains((Integer) p.getChild(Space.ORIGIN_Z_COORDINATE));
+            boolean zeb = zContains((Integer) p.getChild(Space.EXPANSE_Z_COORDINATE));
 
             if (xob && xeb && yob && yeb && zob && zeb) {
 
@@ -212,6 +218,7 @@ public class Space extends Map {
 
             throw new Exception("Could not check position. The position is null.");
         }
+*/
 
         return b;
     }
@@ -228,10 +235,11 @@ public class Space extends Map {
 
         boolean b = false;
 
+/*??
         if (x != null) {
 
-            if (x.isGreaterThanOrEqualTo((Integer) getChildItem(Space.ORIGIN_X_COORDINATE))
-                && x.isSmallerThan((Integer) getChildItem(Space.EXPANSE_X_COORDINATE))) {
+            if (x.isGreaterThanOrEqualTo((Integer) getChild(Space.ORIGIN_X_COORDINATE))
+                && x.isSmallerThan((Integer) getChild(Space.EXPANSE_X_COORDINATE))) {
 
                 b = true;
             }
@@ -240,6 +248,7 @@ public class Space extends Map {
 
             throw new Exception("Could not check x position. The x position is null.");
         }
+*/
 
         return b;
     }
@@ -256,10 +265,11 @@ public class Space extends Map {
 
         boolean b = false;
 
+/*??
         if (y != null) {
 
-            if (y.isGreaterThanOrEqualTo((Integer) getChildItem(Space.ORIGIN_Y_COORDINATE))
-                && y.isSmallerThan((Integer) getChildItem(Space.EXPANSE_Y_COORDINATE))) {
+            if (y.isGreaterThanOrEqualTo((Integer) getChild(Space.ORIGIN_Y_COORDINATE))
+                && y.isSmallerThan((Integer) getChild(Space.EXPANSE_Y_COORDINATE))) {
 
                 b = true;
             }
@@ -268,6 +278,7 @@ public class Space extends Map {
 
             throw new Exception("Could not check y position. The y position is null.");
         }
+*/
 
         return b;
     }
@@ -284,10 +295,11 @@ public class Space extends Map {
 
         boolean b = false;
 
+/*??
         if (z != null) {
 
-            if (z.isGreaterThanOrEqualTo((Integer) getChildItem(Space.ORIGIN_Z_COORDINATE))
-                && z.isSmallerThan((Integer) getChildItem(Space.EXPANSE_Z_COORDINATE))) {
+            if (z.isGreaterThanOrEqualTo((Integer) getChild(Space.ORIGIN_Z_COORDINATE))
+                && z.isSmallerThan((Integer) getChild(Space.EXPANSE_Z_COORDINATE))) {
 
                 b = true;
             }
@@ -296,6 +308,7 @@ public class Space extends Map {
 
             throw new Exception("Could not check z position. The z position is null.");
         }
+*/
 
         return b;
     }

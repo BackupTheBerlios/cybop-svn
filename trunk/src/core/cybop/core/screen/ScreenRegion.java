@@ -24,13 +24,15 @@
 
 package cybop.core.screen;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
+import cybop.core.screen.component.*;
 
 /**
  * This class represents a screen region.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ScreenRegion extends ScreenItem {
@@ -67,9 +69,9 @@ public class ScreenRegion extends ScreenItem {
      * @param i the item
      * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws Exception {
+    public void setChild(String n, Item i) throws Exception {
 
-        super.setChildItem(n, i);
+        super.setChild(n, i);
 
         if (n != null) {
 
@@ -90,13 +92,13 @@ public class ScreenRegion extends ScreenItem {
      * @param n the name
      * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws Exception {
+    public void removeChild(String n) throws Exception {
 
         if (n != null) {
 
             if (n.isEqualTo(Panel.LAYOUT)) {
                 
-                removeLayout((Layout) getChildItem(n));
+                removeLayout((Layout) getChild(n));
             }
 
         } else {
@@ -104,7 +106,7 @@ public class ScreenRegion extends ScreenItem {
             throw new Exception("Could not set item. The name is null.");
         }
 
-        super.removeChildItem(n);
+        super.removeChild(n);
     }
 
     //
@@ -192,7 +194,7 @@ public class ScreenRegion extends ScreenItem {
 
         super.initialize();
 
-        setChildItem(Panel.LAYOUT, createChildItem(getDefaultLayout()));
+        setChild(Panel.LAYOUT, createChild(getDefaultLayout()));
     }
 
     /**
@@ -200,9 +202,9 @@ public class ScreenRegion extends ScreenItem {
      */
     public void finalizz() throws Exception {
 
-        Layout layout = (Layout) getChildItem(Panel.LAYOUT);
-        removeChildItem(Panel.LAYOUT);
-        destroyChildItem(layout);
+        Layout layout = (Layout) getChild(Panel.LAYOUT);
+        removeChild(Panel.LAYOUT);
+        destroyChild(layout);
 
         super.finalizz();
     }

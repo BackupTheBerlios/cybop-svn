@@ -24,7 +24,7 @@
 
 package cybop.core.network;
 
-import cybop.core.model.*;
+import cybop.core.category.*;
 
 /**
  * This class represents a network model.
@@ -33,10 +33,10 @@ import cybop.core.model.*;
  * data transfer between remote machines. It has a reduced number of
  * attributes/methods to ease and speed up communication.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Torsten Kunze <zone3@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class NetworkModel extends ModelItem {
+public class NetworkModel extends Item {
 }
 

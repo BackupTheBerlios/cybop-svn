@@ -34,7 +34,7 @@ import cybop.core.screen.model.*;
  * The tree offers a hierarchy of categories with available system modules.
  * On the right side of the splitter, there is a container for child system views.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalModel extends FrameModel {
@@ -70,7 +70,7 @@ public class PortalModel extends FrameModel {
      */
     public String getDefaultContentsPanel() {
 
-        return new String("cybop.core.model.organizer.PortalContentsPanel");
+        return new String("cybop.core.screen.PortalPanel");
     }
 }
 

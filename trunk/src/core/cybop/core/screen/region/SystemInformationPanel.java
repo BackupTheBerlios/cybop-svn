@@ -24,16 +24,18 @@
 
 package cybop.core.screen.region;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
+import cybop.core.screen.*;
 
 /**
  * This class represents a system information contents panel.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class SystemInformationPanel extends ContentsPanel {
+public class SystemInformationPanel extends ScreenRegion {
 
     //
     // Children names.
@@ -104,9 +106,9 @@ public class SystemInformationPanel extends ContentsPanel {
      * @param i the item
      * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws Exception {
+    public void setChild(String n, Item i) throws Exception {
 
-        super.setChildItem(n, i);
+        super.setChild(n, i);
 
         if (n != null) {
 
@@ -135,21 +137,21 @@ public class SystemInformationPanel extends ContentsPanel {
      * @param n the name
      * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws Exception {
+    public void removeChild(String n) throws Exception {
 
         if (n != null) {
 
             if (n.isEqualTo(SystemInformationContentsPanel.HEAD_PANEL)) {
 
-                removeHeadPanel((HeadPanel) getChildItem(n));
+                removeHeadPanel((HeadPanel) getChild(n));
 
             } else if (n.isEqualTo(SystemInformationContentsPanel.TABBED_PANE)) {
 
-                removeTabbedPane((TabbedPane) getChildItem(n));
+                removeTabbedPane((TabbedPane) getChild(n));
             
             } else if (n.isEqualTo(SystemInformationContentsPanel.BUTTON_PANEL)) {
 
-                removeButtonPanel((ButtonPanel) getChildItem(n));
+                removeButtonPanel((ButtonPanel) getChild(n));
             }
 
         } else {
@@ -157,7 +159,7 @@ public class SystemInformationPanel extends ContentsPanel {
             throw new Exception("Could not set item. The name is null.");
         }
         
-        super.removeChildItem(n);
+        super.removeChild(n);
     }
 
     //
@@ -205,7 +207,7 @@ public class SystemInformationPanel extends ContentsPanel {
      * @exception Exception if the java panel is null
      * @exception Exception if the head panel is null
      */
-    public void setHeadPanel(HeadPanel hp) throws Exception {
+    public void setHeadPanel(SystemVersionPanel hp) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -233,7 +235,7 @@ public class SystemInformationPanel extends ContentsPanel {
      * @exception Exception if the java panel is null
      * @exception Exception if the head panel is null
      */
-    public void removeHeadPanel(HeadPanel hp) throws Exception {
+    public void removeHeadPanel(SystemVersionPanel hp) throws Exception {
 
         javax.swing.JPanel p = (javax.swing.JPanel) getJavaObject();
 
@@ -385,9 +387,9 @@ public class SystemInformationPanel extends ContentsPanel {
 
         super.initialize();
 
-        setChildItem(SystemInformationContentsPanel.HEAD_PANEL, createChildItem(getDefaultHeadPanel()));
-        setChildItem(SystemInformationContentsPanel.TABBED_PANE, createChildItem(getDefaultTabbedPane()));
-        setChildItem(SystemInformationContentsPanel.BUTTON_PANEL, createChildItem(getDefaultButtonPanel()));
+        setChild(SystemInformationContentsPanel.HEAD_PANEL, createChild(getDefaultHeadPanel()));
+        setChild(SystemInformationContentsPanel.TABBED_PANE, createChild(getDefaultTabbedPane()));
+        setChild(SystemInformationContentsPanel.BUTTON_PANEL, createChild(getDefaultButtonPanel()));
     }
 
     /**
@@ -395,17 +397,17 @@ public class SystemInformationPanel extends ContentsPanel {
      */
     public void finalizz() throws Exception {
 
-        ButtonPanel buttonPanel = (ButtonPanel) getChildItem(SystemInformationContentsPanel.BUTTON_PANEL);
-        removeChildItem(SystemInformationContentsPanel.BUTTON_PANEL);
-        destroyChildItem(buttonPanel);
+        ButtonPanel buttonPanel = (ButtonPanel) getChild(SystemInformationContentsPanel.BUTTON_PANEL);
+        removeChild(SystemInformationContentsPanel.BUTTON_PANEL);
+        destroyChild(buttonPanel);
 
-        TabbedPane tabbedPane = (TabbedPane) getChildItem(SystemInformationContentsPanel.TABBED_PANE);
-        removeChildItem(SystemInformationContentsPanel.TABBED_PANE);
-        destroyChildItem(tabbedPane);
+        TabbedPane tabbedPane = (TabbedPane) getChild(SystemInformationContentsPanel.TABBED_PANE);
+        removeChild(SystemInformationContentsPanel.TABBED_PANE);
+        destroyChild(tabbedPane);
 
-        HeadPanel headPanel = (HeadPanel) getChildItem(SystemInformationContentsPanel.HEAD_PANEL);
-        removeChildItem(SystemInformationContentsPanel.HEAD_PANEL);
-        destroyChildItem(headPanel);
+        HeadPanel headPanel = (HeadPanel) getChild(SystemInformationContentsPanel.HEAD_PANEL);
+        removeChild(SystemInformationContentsPanel.HEAD_PANEL);
+        destroyChild(headPanel);
 
         super.finalizz();
     }

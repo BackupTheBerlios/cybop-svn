@@ -34,7 +34,7 @@ import cybop.core.model.String;
  *
  * It serves as container transporting information of communication.
  *
- * @version $Revision: 1.13 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Signal extends Item {
@@ -193,13 +193,13 @@ public class Signal extends Item {
 
         super.initialize();
 
-        setChildItem(Signal.PRIORITY, getDefaultPriority());
-        setChildItem(Signal.LANGUAGE, getDefaultLanguage());
-        setChildItem(Signal.SUBJECT, getDefaultSubject());
-        setChildItem(Signal.PREDICATE, getDefaultPredicate());
-        setChildItem(Signal.SENDER_OBJECT, getDefaultSenderObject());
-        setChildItem(Signal.OBJECT, getDefaultObject());
-        setChildItem(Signal.ADVERBIAL, getDefaultAdverbial());
+        setChild(Signal.PRIORITY, getDefaultPriority());
+        setChild(Signal.LANGUAGE, getDefaultLanguage());
+        setChild(Signal.SUBJECT, getDefaultSubject());
+        setChild(Signal.PREDICATE, getDefaultPredicate());
+        setChild(Signal.SENDER_OBJECT, getDefaultSenderObject());
+        setChild(Signal.OBJECT, getDefaultObject());
+        setChild(Signal.ADVERBIAL, getDefaultAdverbial());
     }
 
     /**
@@ -211,13 +211,13 @@ public class Signal extends Item {
         // There were created by external items and also have to be
         // destroyed by them.
 
-        removeChildItem(Signal.ADVERBIAL);
-        removeChildItem(Signal.OBJECT);
-        removeChildItem(Signal.SENDER_OBJECT);
-        removeChildItem(Signal.PREDICATE);
-        removeChildItem(Signal.SUBJECT);
-        removeChildItem(Signal.LANGUAGE);
-        removeChildItem(Signal.PRIORITY);
+        removeChild(Signal.ADVERBIAL);
+        removeChild(Signal.OBJECT);
+        removeChild(Signal.SENDER_OBJECT);
+        removeChild(Signal.PREDICATE);
+        removeChild(Signal.SUBJECT);
+        removeChild(Signal.LANGUAGE);
+        removeChild(Signal.PRIORITY);
 
         super.finalizz();
     }

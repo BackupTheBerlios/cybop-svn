@@ -33,7 +33,7 @@ import cybop.core.system.System;
  * An external system is one that isn't built on the ResMedLib framework.
  * Such a system runs as process of the surrounding operating system.
  *
- * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ExternalSystem extends System {
@@ -64,7 +64,7 @@ public class ExternalSystem extends System {
 
             // Executes the specified command and its arguments in a separate
             // process with the specified environment and working directory.
-//??            p = r.exec((String) getChildItem(ExternalSystem.LOCATION)/*?? + " " + getArguments()*/);
+//??            p = r.exec((String) getChild(ExternalSystem.LOCATION)/*?? + " " + getArguments()*/);
 
         } else {
 

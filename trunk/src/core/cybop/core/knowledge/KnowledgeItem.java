@@ -24,7 +24,7 @@
 
 package cybop.core.knowledge;
 
-import cybop.core.model.*;
+import cybop.core.category.*;
 
 /**
  * This class represents a knowledge item.
@@ -43,11 +43,11 @@ import cybop.core.model.*;
  * Because a model item can also represent a state, that is a snapshot in time,
  * it knows about its previous state and is such able to build up a timeline.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Torsten Kunze <zone3@gmx.de>
  */
-public class KnowledgeItem extends ModelItem {
+public class KnowledgeItem extends Item {
 
     //
     // Children names.
@@ -57,7 +57,7 @@ public class KnowledgeItem extends ModelItem {
     private String identifier;
 
     /** The predecessor. */
-    private ModelItem predecessor;
+    private Item predecessor;
 
     //
     // The identifier.
@@ -110,7 +110,7 @@ public class KnowledgeItem extends ModelItem {
      *
      * @return the predecessor
      */
-    public ModelItem createPredecessor() {
+    public Item createPredecessor() {
 
         return null;
     }
@@ -120,7 +120,7 @@ public class KnowledgeItem extends ModelItem {
      *
      * @param p the predecessor
      */
-    public void destroyPredecessor(ModelItem p) {
+    public void destroyPredecessor(Item p) {
     }
 
     /**
@@ -128,7 +128,7 @@ public class KnowledgeItem extends ModelItem {
      *
      * @param p the predecessor
      */
-    public void setPredecessor(ModelItem p) {
+    public void setPredecessor(Item p) {
 
         this.predecessor = p;
     }
@@ -138,7 +138,7 @@ public class KnowledgeItem extends ModelItem {
      *
      * @return the predecessor
      */
-    public ModelItem getPredecessor() {
+    public Item getPredecessor() {
 
         return this.predecessor;
     }
@@ -163,7 +163,7 @@ public class KnowledgeItem extends ModelItem {
      */
     public void finalizz() throws Exception {
 
-        ModelItem predecessor = getPredecessor();
+        Item predecessor = getPredecessor();
         setPredecessor(null);
         destroyPredecessor(predecessor);
 

@@ -24,17 +24,17 @@
 
 package cybop.core.sql;
 
-import cybop.core.model.*;
+import cybop.core.category.*;
 
 /**
  * This class represents a structured query language (sql) model.
  *
  * An sql model is necessary to talk to database systems.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Torsten Kunze <zone3@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class SqlModel extends ModelItem {
+public class SqlModel extends Item {
 }
 

@@ -24,6 +24,7 @@
 
 package cybop.core.screen.region;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
 import cybop.core.screen.*;
@@ -31,7 +32,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a split pane.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SplitPane extends ScreenRegion {
@@ -57,9 +58,9 @@ public class SplitPane extends ScreenRegion {
      * @param i the item
      * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws Exception {
+    public void setChild(String n, Item i) throws Exception {
 
-        super.setChildItem(n, i);
+        super.setChild(n, i);
 
         if (n != null) {
 
@@ -84,17 +85,17 @@ public class SplitPane extends ScreenRegion {
      * @param n the name
      * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws Exception {
+    public void removeChild(String n) throws Exception {
 
         if (n != null) {
 
             if (n.isEqualTo(SplitPane.LEFT_ORGANIZER)) {
 
-                removeLeftOrganizer((Organizer) getChildItem(n));
+                removeLeftOrganizer((Organizer) getChild(n));
             
             } else if (n.isEqualTo(SplitPane.RIGHT_ORGANIZER)) {
 
-                removeRightOrganizer((Organizer) getChildItem(n));
+                removeRightOrganizer((Organizer) getChild(n));
             }
 
         } else {
@@ -102,7 +103,7 @@ public class SplitPane extends ScreenRegion {
             throw new Exception("Could not remove item. The name is null.");
         }
 
-        super.removeChildItem(n);
+        super.removeChild(n);
     }
 
     //
@@ -290,8 +291,8 @@ public class SplitPane extends ScreenRegion {
 
         super.initialize();
 
-        setChildItem(SplitPane.LEFT_ORGANIZER, createChildItem(getDefaultLeftOrganizer()));
-        setChildItem(SplitPane.RIGHT_ORGANIZER, createChildItem(getDefaultRightOrganizer()));
+        setChild(SplitPane.LEFT_ORGANIZER, createChild(getDefaultLeftOrganizer()));
+        setChild(SplitPane.RIGHT_ORGANIZER, createChild(getDefaultRightOrganizer()));
     }
 
     /**
@@ -299,13 +300,13 @@ public class SplitPane extends ScreenRegion {
      */
     public void finalizz() throws Exception {
 
-        Organizer rightOrganizer = (Organizer) getChildItem(SplitPane.RIGHT_ORGANIZER);
-        removeChildItem(SplitPane.RIGHT_ORGANIZER);
-        destroyChildItem(rightOrganizer);
+        Organizer rightOrganizer = (Organizer) getChild(SplitPane.RIGHT_ORGANIZER);
+        removeChild(SplitPane.RIGHT_ORGANIZER);
+        destroyChild(rightOrganizer);
 
-        Organizer leftOrganizer = (Organizer) getChildItem(SplitPane.LEFT_ORGANIZER);
-        removeChildItem(SplitPane.LEFT_ORGANIZER);
-        destroyChildItem(leftOrganizer);
+        Organizer leftOrganizer = (Organizer) getChild(SplitPane.LEFT_ORGANIZER);
+        removeChild(SplitPane.LEFT_ORGANIZER);
+        destroyChild(leftOrganizer);
 
         super.finalizz();
     }

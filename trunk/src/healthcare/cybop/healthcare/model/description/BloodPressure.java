@@ -32,7 +32,7 @@ import cybop.healthcare.model.*;
  *
  * A blood pressure is the combination of a systolic and a diastolic value.
  *
- * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class BloodPressure extends Description {
@@ -82,8 +82,8 @@ public class BloodPressure extends Description {
 
         super.initialize();
 
-        setChildItem(BloodPressure.SYSTOLE, getDefaultSystole());
-        setChildItem(BloodPressure.DIASTOLE, getDefaultDiastole());
+        setChild(BloodPressure.SYSTOLE, getDefaultSystole());
+        setChild(BloodPressure.DIASTOLE, getDefaultDiastole());
     }
 
     /**
@@ -91,8 +91,8 @@ public class BloodPressure extends Description {
      */
     public void finalizz() throws Exception {
 
-        removeChildItem(BloodPressure.DIASTOLE);
-        removeChildItem(BloodPressure.SYSTOLE);
+        removeChild(BloodPressure.DIASTOLE);
+        removeChild(BloodPressure.SYSTOLE);
 
         super.finalizz();
     }

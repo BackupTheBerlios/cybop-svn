@@ -24,16 +24,18 @@
 
 package cybop.core.screen.region;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
+import cybop.core.screen.*;
 
 /**
  * This class represents a text panel.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class TextPanel extends Panel {
+public class TextPanel extends ScreenRegion {
 
     //
     // Children names.
@@ -98,9 +100,9 @@ public class TextPanel extends Panel {
      * @param i the item
      * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws Exception {
+    public void setChild(String n, Item i) throws Exception {
 
-        super.setChildItem(n, i);
+        super.setChild(n, i);
 
         if (n != null) {
 
@@ -121,13 +123,13 @@ public class TextPanel extends Panel {
      * @param n the name
      * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws Exception {
+    public void removeChild(String n) throws Exception {
 
         if (n != null) {
 
             if (n.isEqualTo(TextPanel.TEXT)) {
 
-                removeText((String) getChildItem(n));
+                removeText((String) getChild(n));
             }
 
         } else {
@@ -135,7 +137,7 @@ public class TextPanel extends Panel {
             throw new Exception("Could not remove item. The name is null.");
         }
         
-        super.removeChildItem(n);
+        super.removeChild(n);
     }
 
     //
@@ -223,7 +225,7 @@ public class TextPanel extends Panel {
 
         super.initialize();
 
-        setChildItem(TextPanel.TEXT, getDefaultText());
+        setChild(TextPanel.TEXT, getDefaultText());
     }
 
     /**
@@ -231,9 +233,9 @@ public class TextPanel extends Panel {
      */
     public void finalizz() throws Exception {
 
-//??        TextPanel textPanel = (TextPanel) getChildItem(ImagePanel.TEXT);
-        removeChildItem(TextPanel.TEXT);
-//??        destroyChildItem(textPanel);
+//??        TextPanel textPanel = (TextPanel) getChild(ImagePanel.TEXT);
+        removeChild(TextPanel.TEXT);
+//??        destroyChild(textPanel);
 
         super.finalizz();
     }

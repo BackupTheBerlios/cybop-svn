@@ -31,7 +31,7 @@ package cybop.core.model;
  * In computing, it is also known as floating point- or double number,
  * having a part "before and after the point/comma".
  *
- * @version $Revision: 1.1 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Fraction extends Quantity {
@@ -182,25 +182,25 @@ public class Fraction extends Quantity {
 /*??
         if (f != null) {
 
-            Integer num2 = (Integer) f.getChildItem(Fraction.NUMERATOR);
+            Integer num2 = (Integer) f.getChild(Fraction.NUMERATOR);
 
             if (num2 != null) {
                 
-                Integer extnum2 = num2.multiplyWith((Integer) getChildItem(Fraction.DENOMINATOR));
-                Integer num1 = (Integer) getChildItem(Fraction.NUMERATOR);
+                Integer extnum2 = num2.multiplyWith((Integer) getChild(Fraction.DENOMINATOR));
+                Integer num1 = (Integer) getChild(Fraction.NUMERATOR);
 
                 if (num1 != null) {
                     
-                    Integer extnum1 = num1.multiplyWith((Integer) f.getChildItem(Fraction.DENOMINATOR));
+                    Integer extnum1 = num1.multiplyWith((Integer) f.getChild(Fraction.DENOMINATOR));
 
                     if (extnum1 != null) {
 
-                        Integer den1 = (Integer) getChildItem(Fraction.DENOMINATOR);
+                        Integer den1 = (Integer) getChild(Fraction.DENOMINATOR);
             
                         if (den1 != null) {
                             
-                            setChildItem(Fraction.NUMERATOR, extnum1.add(extnum2));
-                            setChildItem(Fraction.DENOMINATOR, den1.multiplyWith((Integer) f.getChildItem(Fraction.DENOMINATOR)));
+                            setChild(Fraction.NUMERATOR, extnum1.add(extnum2));
+                            setChild(Fraction.DENOMINATOR, den1.multiplyWith((Integer) f.getChild(Fraction.DENOMINATOR)));
                             reduct();
     
                         } else {
@@ -245,25 +245,25 @@ public class Fraction extends Quantity {
 /*??
         if (f != null) {
 
-            Integer num2 = (Integer) f.getChildItem(Fraction.NUMERATOR);
+            Integer num2 = (Integer) f.getChild(Fraction.NUMERATOR);
 
             if (num2 != null) {
                 
-                Integer extnum2 = num2.multiplyWith((Integer) getChildItem(Fraction.DENOMINATOR));
-                Integer num1 = (Integer) getChildItem(Fraction.NUMERATOR);
+                Integer extnum2 = num2.multiplyWith((Integer) getChild(Fraction.DENOMINATOR));
+                Integer num1 = (Integer) getChild(Fraction.NUMERATOR);
                 
                 if (num1 != null) {
                     
-                    Integer extnum1 = num1.multiplyWith((Integer) f.getChildItem(Fraction.DENOMINATOR));
+                    Integer extnum1 = num1.multiplyWith((Integer) f.getChild(Fraction.DENOMINATOR));
 
                     if (extnum1 != null) {
 
-                        Integer den1 = (Integer) getChildItem(Fraction.DENOMINATOR);
+                        Integer den1 = (Integer) getChild(Fraction.DENOMINATOR);
             
                         if (den1 != null) {
                             
-                            setChildItem(Fraction.NUMERATOR, extnum1.subtract(extnum2));
-                            setChildItem(Fraction.DENOMINATOR, den1.multiplyWith((Integer) f.getChildItem(Fraction.DENOMINATOR)));
+                            setChild(Fraction.NUMERATOR, extnum1.subtract(extnum2));
+                            setChild(Fraction.DENOMINATOR, den1.multiplyWith((Integer) f.getChild(Fraction.DENOMINATOR)));
                             reduct();
                 
                         } else {
@@ -306,16 +306,16 @@ public class Fraction extends Quantity {
 /*??
         if (f != null) {
 
-            Integer num1 = (Integer) getChildItem(Fraction.NUMERATOR);
+            Integer num1 = (Integer) getChild(Fraction.NUMERATOR);
             
             if (num1 != null) {
 
-                Integer den1 = (Integer) getChildItem(Fraction.DENOMINATOR);
+                Integer den1 = (Integer) getChild(Fraction.DENOMINATOR);
 
                 if (den1 != null) {
 
-                    setChildItem(Fraction.NUMERATOR, num1.multiplyWith((Integer) f.getChildItem(Fraction.NUMERATOR)));
-                    setChildItem(Fraction.DENOMINATOR, den1.multiplyWith((Integer) f.getChildItem(Fraction.DENOMINATOR)));
+                    setChild(Fraction.NUMERATOR, num1.multiplyWith((Integer) f.getChild(Fraction.NUMERATOR)));
+                    setChild(Fraction.DENOMINATOR, den1.multiplyWith((Integer) f.getChild(Fraction.DENOMINATOR)));
                     reduct();
 
                 } else {
@@ -348,16 +348,16 @@ public class Fraction extends Quantity {
 /*??
         if (f != null) {
 
-            Integer num1 = (Integer) getChildItem(Fraction.NUMERATOR);
+            Integer num1 = (Integer) getChild(Fraction.NUMERATOR);
             
             if (num1 != null) {
 
-                Integer den1 = (Integer) getChildItem(Fraction.DENOMINATOR);
+                Integer den1 = (Integer) getChild(Fraction.DENOMINATOR);
 
                 if (den1 != null) {
 
-                    setChildItem(Fraction.NUMERATOR, num1.multiplyWith((Integer) f.getChildItem(Fraction.DENOMINATOR)));
-                    setChildItem(Fraction.DENOMINATOR, den1.multiplyWith((Integer) f.getChildItem(Fraction.NUMERATOR)));
+                    setChild(Fraction.NUMERATOR, num1.multiplyWith((Integer) f.getChild(Fraction.DENOMINATOR)));
+                    setChild(Fraction.DENOMINATOR, den1.multiplyWith((Integer) f.getChild(Fraction.NUMERATOR)));
                     reduct();
 
                 } else {
@@ -399,16 +399,16 @@ public class Fraction extends Quantity {
         if (f != null) {
 
 /*??
-            Integer num2 = (Integer) f.getChildItem(Fraction.NUMERATOR);
+            Integer num2 = (Integer) f.getChild(Fraction.NUMERATOR);
             
             if (num2 != null) {
                 
-                Integer extnum2 = num2.multiplyWith((Integer) getChildItem(Fraction.DENOMINATOR));            
-                Integer num1 = (Integer) getChildItem(Fraction.NUMERATOR);
+                Integer extnum2 = num2.multiplyWith((Integer) getChild(Fraction.DENOMINATOR));            
+                Integer num1 = (Integer) getChild(Fraction.NUMERATOR);
                 
                 if (num1 != null) {
                     
-                    Integer extnum1 = num1.multiplyWith((Integer) f.getChildItem(Fraction.DENOMINATOR));
+                    Integer extnum1 = num1.multiplyWith((Integer) f.getChild(Fraction.DENOMINATOR));
                     
                     if (extnum1 != null) {
                         
@@ -456,16 +456,16 @@ public class Fraction extends Quantity {
         if (f != null) {
 
 /*??
-            Integer num2 = (Integer) f.getChildItem(Fraction.NUMERATOR);
+            Integer num2 = (Integer) f.getChild(Fraction.NUMERATOR);
             
             if (num2 != null) {
                 
-                Integer extnum2 = num2.multiplyWith((Integer) getChildItem(Fraction.DENOMINATOR));            
-                Integer num1 = (Integer) getChildItem(Fraction.NUMERATOR);
+                Integer extnum2 = num2.multiplyWith((Integer) getChild(Fraction.DENOMINATOR));            
+                Integer num1 = (Integer) getChild(Fraction.NUMERATOR);
                 
                 if (num1 != null) {
                     
-                    Integer extnum1 = num1.multiplyWith((Integer) f.getChildItem(Fraction.DENOMINATOR));
+                    Integer extnum1 = num1.multiplyWith((Integer) f.getChild(Fraction.DENOMINATOR));
                     
                     if (extnum1 != null) {
                         
@@ -513,16 +513,16 @@ public class Fraction extends Quantity {
         if (f != null) {
 
 /*??
-            Integer num2 = (Integer) f.getChildItem(Fraction.NUMERATOR);
+            Integer num2 = (Integer) f.getChild(Fraction.NUMERATOR);
             
             if (num2 != null) {
                 
-                Integer extnum2 = num2.multiplyWith((Integer) getChildItem(Fraction.DENOMINATOR));            
-                Integer num1 = (Integer) getChildItem(Fraction.NUMERATOR);
+                Integer extnum2 = num2.multiplyWith((Integer) getChild(Fraction.DENOMINATOR));            
+                Integer num1 = (Integer) getChild(Fraction.NUMERATOR);
                 
                 if (num1 != null) {
                     
-                    Integer extnum1 = num1.multiplyWith((Integer) f.getChildItem(Fraction.DENOMINATOR));
+                    Integer extnum1 = num1.multiplyWith((Integer) f.getChild(Fraction.DENOMINATOR));
                     
                     if (extnum1 != null) {
                         
@@ -570,16 +570,16 @@ public class Fraction extends Quantity {
         if (f != null) {
 
 /*??
-            Integer num2 = (Integer) f.getChildItem(Fraction.NUMERATOR);
+            Integer num2 = (Integer) f.getChild(Fraction.NUMERATOR);
             
             if (num2 != null) {
                 
-                Integer extnum2 = num2.multiplyWith((Integer) getChildItem(Fraction.DENOMINATOR));            
-                Integer num1 = (Integer) getChildItem(Fraction.NUMERATOR);
+                Integer extnum2 = num2.multiplyWith((Integer) getChild(Fraction.DENOMINATOR));            
+                Integer num1 = (Integer) getChild(Fraction.NUMERATOR);
                 
                 if (num1 != null) {
                     
-                    Integer extnum1 = num1.multiplyWith((Integer) f.getChildItem(Fraction.DENOMINATOR));
+                    Integer extnum1 = num1.multiplyWith((Integer) f.getChild(Fraction.DENOMINATOR));
                     
                     if (extnum1 != null) {
                         
@@ -627,16 +627,16 @@ public class Fraction extends Quantity {
         if (f != null) {
 
 /*??
-            Integer num2 = (Integer) f.getChildItem(Fraction.NUMERATOR);
+            Integer num2 = (Integer) f.getChild(Fraction.NUMERATOR);
             
             if (num2 != null) {
                 
-                Integer extnum2 = num2.multiplyWith((Integer) getChildItem(Fraction.DENOMINATOR));            
-                Integer num1 = (Integer) getChildItem(Fraction.NUMERATOR);
+                Integer extnum2 = num2.multiplyWith((Integer) getChild(Fraction.DENOMINATOR));            
+                Integer num1 = (Integer) getChild(Fraction.NUMERATOR);
                 
                 if (num1 != null) {
                     
-                    Integer extnum1 = num1.multiplyWith((Integer) f.getChildItem(Fraction.DENOMINATOR));
+                    Integer extnum1 = num1.multiplyWith((Integer) f.getChild(Fraction.DENOMINATOR));
                     
                     if (extnum1 != null) {
                         
@@ -671,11 +671,11 @@ public class Fraction extends Quantity {
      */
     public void reduct() throws Exception {
 
-        Integer den = (Integer) getChildItem(Fraction.DENOMINATOR);
+        Integer den = (Integer) getChild(Fraction.DENOMINATOR);
         
         if (den != null) {
             
-            Integer num = (Integer) getChildItem(Fraction.NUMERATOR);
+            Integer num = (Integer) getChild(Fraction.NUMERATOR);
             
             if (num != null) {
     
@@ -686,13 +686,13 @@ public class Fraction extends Quantity {
                     // Find the biggest divider that both, numerator and denominator contain.                
                     Integer max;
     
-                    if (absnum.isSmallerThanOrEqualTo((Integer) getChildItem(Fraction.DENOMINATOR))) {
+                    if (absnum.isSmallerThanOrEqualTo((Integer) getChild(Fraction.DENOMINATOR))) {
     
                         max = absnum;
                         
                     } else {
                         
-                        max = (Integer) getChildItem(Fraction.DENOMINATOR);
+                        max = (Integer) getChild(Fraction.DENOMINATOR);
                     }
     
                     Integer rednum;
@@ -712,14 +712,14 @@ public class Fraction extends Quantity {
     
                                 if (num.isSmallerThan(0)) {
                                     
-                                    setChildItem(Fraction.NUMERATOR, rednum.multiplyWith(-1));
+                                    setChild(Fraction.NUMERATOR, rednum.multiplyWith(-1));
                                     
                                 } else {
                                     
-                                    setChildItem(Fraction.NUMERATOR, rednum);
+                                    setChild(Fraction.NUMERATOR, rednum);
                                 }
     
-                                setChildItem(Fraction.DENOMINATOR, den.divideBy(i));
+                                setChild(Fraction.DENOMINATOR, den.divideBy(i));
                                 break;
 */
                             }

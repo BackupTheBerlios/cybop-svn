@@ -24,6 +24,7 @@
 
 package cybop.core.system.block.controller;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
 import cybop.core.system.block.*;
@@ -34,7 +35,7 @@ import cybop.core.system.region.controller.translator.*;
 /**
  * This class represents a portal controller.
  *
- * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalController extends Controller {
@@ -58,9 +59,9 @@ public class PortalController extends Controller {
      *
      * @return the default domain model category
      */
-    public Item getDefaultDomainModelCategory() {
+    public Item getDefaultKnowledgeModelCategory() {
 
-        return new String("cybop.core.model.model.DomainModel");
+        return new String("cybop.core.model.model.KnowledgeModel");
     }
 
     /**

@@ -24,6 +24,7 @@
 
 package cybop.core.system;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.Boolean;
 import cybop.core.model.Integer;
@@ -64,7 +65,7 @@ import cybop.core.system.chain.*;
  * because some global parameters (such as the configuration) need to be forwarded
  * to children. 
  *
- * @version $Revision: 1.19 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Component extends SystemItem {
@@ -110,11 +111,11 @@ public class Component extends SystemItem {
         
         super.configure();
 
-        Configuration c = (Configuration) getChildItem(Component.CONFIGURATION);
+        Configuration c = (Configuration) getChild(Component.CONFIGURATION);
 
         if (c != null) {
 
-            setChildCategory(Component.LOGGER_OUTPUT_CATEGORY, c.getChildItem(Component.LOGGER_OUTPUT_CATEGORY, getDefaultLoggerOutputCategory()));
+            setCategory(Component.LOGGER_OUTPUT_CATEGORY, c.getChild(Component.LOGGER_OUTPUT_CATEGORY, getDefaultLoggerOutputCategory()));
 
         } else {
 
@@ -129,12 +130,12 @@ public class Component extends SystemItem {
      */
     public void deconfigure() throws Exception {
 
-        Configuration c = (Configuration) getChildItem(Component.CONFIGURATION);
+        Configuration c = (Configuration) getChild(Component.CONFIGURATION);
 
         if (c != null) {
 
-            c.setChildItem(Component.LOGGER_OUTPUT_CATEGORY, getChildCategory(Component.LOGGER_OUTPUT_CATEGORY));
-            removeChildCategory(Component.LOGGER_OUTPUT_CATEGORY);
+            c.setChild(Component.LOGGER_OUTPUT_CATEGORY, getCategory(Component.LOGGER_OUTPUT_CATEGORY));
+            removeCategory(Component.LOGGER_OUTPUT_CATEGORY);
 
         } else {
 
@@ -155,7 +156,7 @@ public class Component extends SystemItem {
 
         super.initialize();
 
-        setChildItem(Component.LOGGER_OUTPUT, getChildCategory(Component.LOGGER_OUTPUT_CATEGORY));
+        setChild(Component.LOGGER_OUTPUT, getCategory(Component.LOGGER_OUTPUT_CATEGORY));
     }
 
     /**
@@ -163,9 +164,9 @@ public class Component extends SystemItem {
      */
     public void finalizz() throws Exception {
 
-        Item loggerOutput = getChildItem(Component.LOGGER_OUTPUT);
-        removeChildItem(Component.LOGGER_OUTPUT);
-        destroyChildItem((String) loggerOutput);
+        Item loggerOutput = getChild(Component.LOGGER_OUTPUT);
+        removeChild(Component.LOGGER_OUTPUT);
+        destroyChild((String) loggerOutput);
 
         super.finalizz();
     }

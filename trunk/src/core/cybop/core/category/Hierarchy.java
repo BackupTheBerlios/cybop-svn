@@ -24,6 +24,9 @@
 
 package cybop.core.category;
 
+import cybop.core.model.*;
+import cybop.core.model.String;
+
 /**
  * This class represents a hierarchy.
  *
@@ -37,7 +40,7 @@ package cybop.core.category;
  * They are coded in binaries within the machine and that is the final abstraction.
  * Towards macrocosm, it depends on the modeller how far he/she wants to go.<br><br>
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Hierarchy extends Inheritance {
@@ -150,7 +153,7 @@ public class Hierarchy extends Inheritance {
 
         if (m != null) {
 
-            c = m.get(n);
+            c = (Hierarchy) m.get(n);
 
         } else {
 
@@ -165,7 +168,7 @@ public class Hierarchy extends Inheritance {
     //
 
     /**
-     * Abstracts this hierarchy.
+     * Abstracts this abstraction.
      */
     public void abstracc() throws Exception {
 
@@ -175,7 +178,7 @@ public class Hierarchy extends Inheritance {
     }
 
     /**
-     * Deabstracts this hierarchy.
+     * Deabstracts this abstraction.
      */
     public void deabstract() throws Exception {
 

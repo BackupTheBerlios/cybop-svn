@@ -24,6 +24,10 @@
 
 package cybop.core.category;
 
+import cybop.core.model.*;
+import cybop.core.model.Integer;
+import cybop.core.model.String;
+
 /**
  * This class represents an item.<br><br>
  *
@@ -80,7 +84,7 @@ package cybop.core.category;
  * Only globalize and initialize relate to the dynamic instance creation.
  * All other methods are for specifying the static category.
  *
- * @version $Revision: 1.4 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Item extends Behaviour {
@@ -187,9 +191,6 @@ public class Item extends Behaviour {
                     java.lang.System.out.println("INFO: Initialize child to get an item.");
                     i.initialize();
 
-                    java.lang.System.out.println("INFO: Connect child to signal memory.");
-                    i.set(SystemItem.SIGNAL_MEMORY);
-
                 } else {
 
                     throw new Exception("Could not create child. The child is null.");
@@ -240,7 +241,7 @@ public class Item extends Behaviour {
             i.unname();
 
             java.lang.System.out.println("INFO: Deabstract child.");
-            i.deabstracc();
+            i.deabstract();
 
         } else {
 
@@ -303,7 +304,7 @@ public class Item extends Behaviour {
 
         if (m != null) {
 
-            c = m.get(n);
+            c = (Item) m.get(n);
 
         } else {
 
@@ -338,7 +339,7 @@ public class Item extends Behaviour {
     //
 
     /**
-     * Abstracts this item.
+     * Abstracts this abstraction.
      */
     public void abstracc() throws Exception {
 
@@ -348,7 +349,7 @@ public class Item extends Behaviour {
     }
 
     /**
-     * Deabstracts this item.
+     * Deabstracts this abstraction.
      */
     public void deabstract() throws Exception {
 
@@ -398,6 +399,7 @@ public class Item extends Behaviour {
     public String buildName(String base) throws Exception {
 
         String n = null;
+/*??
         Integer i = getHighestNameNumber(base);
         
         if (i != null) {
@@ -424,6 +426,7 @@ public class Item extends Behaviour {
 
             throw new Exception("Could not build name. The highest name number is null.");
         }
+*/
 
         return n;        
     }
@@ -441,12 +444,13 @@ public class Item extends Behaviour {
     public Integer getHighestNameNumber(String base) throws Exception {
 
         Integer i = new Integer(-1);
-        Item[] c = getChildren();
+/*??
+        Map c = getChildren();
 
         if (c != null) {
 
             int index = 0;
-            int no = getChildrenNumber();
+            int no = 0; //?? getChildrenNumber();
             Item child = null;
             String n = null;
             int begin = 0;
@@ -499,6 +503,7 @@ public class Item extends Behaviour {
 
             throw new Exception("Could not get highest name number. The children array is null.");
         }
+*/
 
         return i;
     }
@@ -515,7 +520,7 @@ public class Item extends Behaviour {
      * @exception Exception if the children array is null
      * @exception Exception if the child item is null
      */
-    public Item getChildItem(Space p) throws Exception {
+    public Item getChild(Space p) throws Exception {
 
         Item child = null;
 /*??
@@ -557,7 +562,7 @@ public class Item extends Behaviour {
                                 // The child item has children, so call this method
                                 // recursively on child item, to get the child item's
                                 // child item which is located at the given position.
-                                child = item.getChildItem(rp);
+                                child = item.getChild(rp);
                             }
                         }
                     }
@@ -590,7 +595,7 @@ public class Item extends Behaviour {
     public boolean contains(Space p) throws Exception {
 
         boolean b = false;
-        Space s = null; //?? getChildItem(Item.SPACE);
+        Space s = null; //?? getChild(Item.SPACE);
 
         if (s != null) {
 

@@ -24,16 +24,18 @@
 
 package cybop.core.screen.model;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.Boolean;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
 import cybop.core.screen.*;
+import cybop.core.screen.region.*;
 
 /**
  * This class represents a frame model.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class FrameModel extends ScreenModel {
@@ -113,7 +115,7 @@ public class FrameModel extends ScreenModel {
 
         java.awt.Container c = null;
 /*??
-        Integer i = (Integer) getChildItem(UserInterface.USER_INTERFACE_MODE);
+        Integer i = (Integer) getChild(UserInterface.USER_INTERFACE_MODE);
 
         if (i != null) {
 
@@ -177,9 +179,9 @@ public class FrameModel extends ScreenModel {
      * @param i the item
      * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws Exception {
+    public void setChild(String n, Item i) throws Exception {
 
-        super.setChildItem(n, i);
+        super.setChild(n, i);
 
         if (n != null) {
 
@@ -201,7 +203,7 @@ public class FrameModel extends ScreenModel {
 
             } else if (n.isEqualTo(UserInterface.CONTENTS_PANEL)) {
 
-                setContentsPanel((ContentsPanel) i);
+                setContentsPanel((ScreenRegion) i);
 
             } else if (n.isEqualTo(UserInterface.STATUS_BAR)) {     
 
@@ -229,42 +231,42 @@ public class FrameModel extends ScreenModel {
      * @param n the name
      * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws Exception {
+    public void removeChild(String n) throws Exception {
 
         if (n != null) {
 
             if (n.isEqualTo(UserInterface.TITLE)) {
 
-                removeTitle((String) getChildItem(n));
+                removeTitle((String) getChild(n));
 
             } else if (n.isEqualTo(UserInterface.ICON)) {
 
-                removeIcon((String) getChildItem(n));
+                removeIcon((String) getChild(n));
 
             } else if (n.isEqualTo(UserInterface.MENU_BAR)) {
 
-                removeMenuBar((MenuBar) getChildItem(n));
+                removeMenuBar((MenuBar) getChild(n));
 
             } else if (n.isEqualTo(UserInterface.TOOL_BAR)) {
 
-                removeToolBar((ToolBar) getChildItem(n));
+                removeToolBar((ToolBar) getChild(n));
 
             } else if (n.isEqualTo(UserInterface.CONTENTS_PANEL)) {
 
-                removeContentsPanel((ContentsPanel) getChildItem(n));
+                removeContentsPanel((ScreenRegion) getChild(n));
 
             } else if (n.isEqualTo(UserInterface.STATUS_BAR)) {
 
-                removeStatusBar((StatusBar) getChildItem(n));
+                removeStatusBar((StatusBar) getChild(n));
 
             } else if (n.isEqualTo(UserInterface.BOUNDS)) {
 
-//??                    removeBounds((java.awt.Rectangle) getChildItem(n));
+//??                    removeBounds((java.awt.Rectangle) getChild(n));
                 java.lang.System.out.println("WARNING: Bounds not set. Replace java.awt.Rectangle");
 
             } else if (n.isEqualTo(UserInterface.RESIZABLE_FLAG)) {
                 
-                removeResizable((Boolean) getChildItem(n));
+                removeResizable((Boolean) getChild(n));
             }
 
         } else {
@@ -272,7 +274,7 @@ public class FrameModel extends ScreenModel {
             throw new Exception("Could not set item. The name is null.");
         }
 
-        super.removeChildItem(n);
+        super.removeChild(n);
     }
 
     //
@@ -338,7 +340,7 @@ public class FrameModel extends ScreenModel {
      */
     public String getDefaultContentsPanel() {
 
-        return new String("cybop.core.model.organizer.ContentsPanel");
+        return new String("cybop.core.model.organizer.ScreenRegion");
     }
 
     /**
@@ -665,7 +667,7 @@ public class FrameModel extends ScreenModel {
      * @exception Exception if the contents panel is null
      * @exception Exception if the content pane is null
      */
-    public void setContentsPanel(ContentsPanel c) throws Exception {
+    public void setContentsPanel(ScreenRegion c) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
 
@@ -703,7 +705,7 @@ public class FrameModel extends ScreenModel {
      * @exception Exception if the contents panel is null
      * @exception Exception if the content pane is null
      */
-    public void removeContentsPanel(ContentsPanel c) throws Exception {
+    public void removeContentsPanel(ScreenRegion c) throws Exception {
 
         javax.swing.JFrame f = (javax.swing.JFrame) getJavaObject();
 
@@ -885,7 +887,7 @@ public class FrameModel extends ScreenModel {
 
 /*??
         java.awt.Rectangle r = def;
-        Configuration c = (Configuration) getChildItem(UserInterface.CONFIGURATION);
+        Configuration c = (Configuration) getChild(UserInterface.CONFIGURATION);
 
         if (c != null) {
 
@@ -927,7 +929,7 @@ public class FrameModel extends ScreenModel {
     public void deconfigureBounds(java.awt.Rectangle r) throws Exception {
 
 /*??
-        Configuration c = (Configuration) getChildItem(UserInterface.CONFIGURATION);
+        Configuration c = (Configuration) getChild(UserInterface.CONFIGURATION);
 
         if (c != null) {
 
@@ -1027,7 +1029,7 @@ public class FrameModel extends ScreenModel {
     public javax.swing.LookAndFeel configureLookAndFeel(javax.swing.LookAndFeel def) throws Exception {
 
         javax.swing.LookAndFeel laf = def;
-        Configuration c = (Configuration) getChildItem(UserInterface.CONFIGURATION);
+        Configuration c = (Configuration) getChild(UserInterface.CONFIGURATION);
         
         if (c != null) {
             
@@ -1091,7 +1093,7 @@ public class FrameModel extends ScreenModel {
 /*??
     public void deconfigureLookAndFeel(javax.swing.LookAndFeel laf) throws Exception {
 
-        Configuration c = (Configuration) getChildItem(UserInterface.CONFIGURATION);
+        Configuration c = (Configuration) getChild(UserInterface.CONFIGURATION);
         
         if (c != null) {
 
@@ -1124,20 +1126,20 @@ public class FrameModel extends ScreenModel {
         super.initialize();
 
         javax.swing.UIManager.setLookAndFeel(getDefaultLookAndFeel());
-        setChildItem(UserInterface.USER_INTERFACE_MODE, getDefaultUserInterfaceMode());
+        setChild(UserInterface.USER_INTERFACE_MODE, getDefaultUserInterfaceMode());
 /*??
-        setChildItem(UserInterface.WINDOW_BOUNDS, configureWindowBounds(getDefaultWindowBounds()));
-        setChildItem(UserInterface.DIALOG_BOUNDS, configureDialogBounds(getDefaultDialogBounds()));
-        setChildItem(UserInterface.FRAME_BOUNDS, configureFrameBounds(getDefaultFrameBounds()));
-        setChildItem(UserInterface.INTERNAL_FRAME_BOUNDS, configureInternalFrameBounds(getDefaultInternalFrameBounds()));
+        setChild(UserInterface.WINDOW_BOUNDS, configureWindowBounds(getDefaultWindowBounds()));
+        setChild(UserInterface.DIALOG_BOUNDS, configureDialogBounds(getDefaultDialogBounds()));
+        setChild(UserInterface.FRAME_BOUNDS, configureFrameBounds(getDefaultFrameBounds()));
+        setChild(UserInterface.INTERNAL_FRAME_BOUNDS, configureInternalFrameBounds(getDefaultInternalFrameBounds()));
 */
-        setChildItem(UserInterface.TITLE, getDefaultTitle());
-        setChildItem(UserInterface.ICON, getDefaultIcon());
-        setChildItem(UserInterface.MENU_BAR, createChildItem(getDefaultMenuBar()));
-        setChildItem(UserInterface.TOOL_BAR, createChildItem(getDefaultToolBar()));
-        setChildItem(UserInterface.CONTENTS_PANEL, createChildItem(getDefaultContentsPanel()));
-        setChildItem(UserInterface.STATUS_BAR, createChildItem(getDefaultStatusBar()));
-        setChildItem(UserInterface.RESIZABLE_FLAG, getDefaultResizableFlag());
+        setChild(UserInterface.TITLE, getDefaultTitle());
+        setChild(UserInterface.ICON, getDefaultIcon());
+        setChild(UserInterface.MENU_BAR, createChild(getDefaultMenuBar()));
+        setChild(UserInterface.TOOL_BAR, createChild(getDefaultToolBar()));
+        setChild(UserInterface.CONTENTS_PANEL, createChild(getDefaultContentsPanel()));
+        setChild(UserInterface.STATUS_BAR, createChild(getDefaultStatusBar()));
+        setChild(UserInterface.RESIZABLE_FLAG, getDefaultResizableFlag());
     }
 
     /**
@@ -1147,51 +1149,51 @@ public class FrameModel extends ScreenModel {
      */
     public void finalizz() throws Exception {
 
-        Boolean resizable = (Boolean) getChildItem(UserInterface.RESIZABLE_FLAG);
-        removeChildItem(UserInterface.RESIZABLE_FLAG);
+        Boolean resizable = (Boolean) getChild(UserInterface.RESIZABLE_FLAG);
+        removeChild(UserInterface.RESIZABLE_FLAG);
 
-        StatusBar statusBar = (StatusBar) getChildItem(UserInterface.STATUS_BAR);
-        removeChildItem(UserInterface.STATUS_BAR);
-        destroyChildItem(statusBar);
+        StatusBar statusBar = (StatusBar) getChild(UserInterface.STATUS_BAR);
+        removeChild(UserInterface.STATUS_BAR);
+        destroyChild(statusBar);
 
-        ContentsPanel contentsPanel = (ContentsPanel) getChildItem(UserInterface.CONTENTS_PANEL);
-        removeChildItem(UserInterface.CONTENTS_PANEL);
-        destroyChildItem(contentsPanel);
+        ContentsPanel contentsPanel = (ContentsPanel) getChild(UserInterface.CONTENTS_PANEL);
+        removeChild(UserInterface.CONTENTS_PANEL);
+        destroyChild(contentsPanel);
 
-        ToolBar toolBar = (ToolBar) getChildItem(UserInterface.TOOL_BAR);
-        removeChildItem(UserInterface.TOOL_BAR);
-        destroyChildItem(toolBar);
+        ToolBar toolBar = (ToolBar) getChild(UserInterface.TOOL_BAR);
+        removeChild(UserInterface.TOOL_BAR);
+        destroyChild(toolBar);
 
-        MenuBar menuBar = (MenuBar) getChildItem(UserInterface.MENU_BAR);
-        removeChildItem(UserInterface.MENU_BAR);
-        destroyChildItem(menuBar);
+        MenuBar menuBar = (MenuBar) getChild(UserInterface.MENU_BAR);
+        removeChild(UserInterface.MENU_BAR);
+        destroyChild(menuBar);
 
-        String icon = (String) getChildItem(UserInterface.ICON);
-        removeChildItem(UserInterface.ICON);
+        String icon = (String) getChild(UserInterface.ICON);
+        removeChild(UserInterface.ICON);
 
-        String title = (String) getChildItem(UserInterface.TITLE);
-        removeChildItem(UserInterface.TITLE);
+        String title = (String) getChild(UserInterface.TITLE);
+        removeChild(UserInterface.TITLE);
 
 /*??
-        deconfigureInternalFrameBounds((java.awt.Rectangle) getChildItem(UserInterface.INTERNAL_FRAME_BOUNDS));
-        removeChildItem(UserInterface.INTERNAL_FRAME_BOUNDS);
-        destroyChildItem((java.awt.Rectangle) getChildItem(UserInterface.INTERNAL_FRAME_BOUNDS));
+        deconfigureInternalFrameBounds((java.awt.Rectangle) getChild(UserInterface.INTERNAL_FRAME_BOUNDS));
+        removeChild(UserInterface.INTERNAL_FRAME_BOUNDS);
+        destroyChild((java.awt.Rectangle) getChild(UserInterface.INTERNAL_FRAME_BOUNDS));
 
-        deconfigureFrameBounds((java.awt.Rectangle) getChildItem(UserInterface.FRAME_BOUNDS));
-        removeChildItem(UserInterface.FRAME_BOUNDS);
-        destroyChildItem((java.awt.Rectangle) getChildItem(UserInterface.FRAME_BOUNDS));
+        deconfigureFrameBounds((java.awt.Rectangle) getChild(UserInterface.FRAME_BOUNDS));
+        removeChild(UserInterface.FRAME_BOUNDS);
+        destroyChild((java.awt.Rectangle) getChild(UserInterface.FRAME_BOUNDS));
 
-        deconfigureDialogBounds((java.awt.Rectangle) getChildItem(UserInterface.DIALOG_BOUNDS));
-        removeChildItem(UserInterface.DIALOG_BOUNDS);
-        destroyChildItem((java.awt.Rectangle) getChildItem(UserInterface.DIALOG_BOUNDS));
+        deconfigureDialogBounds((java.awt.Rectangle) getChild(UserInterface.DIALOG_BOUNDS));
+        removeChild(UserInterface.DIALOG_BOUNDS);
+        destroyChild((java.awt.Rectangle) getChild(UserInterface.DIALOG_BOUNDS));
 
-        deconfigureWindowBounds((java.awt.Rectangle) getChildItem(UserInterface.WINDOW_BOUNDS));
-        removeChildItem(UserInterface.WINDOW_BOUNDS);
-        destroyChildItem((java.awt.Rectangle) getChildItem(UserInterface.WINDOW_BOUNDS));
+        deconfigureWindowBounds((java.awt.Rectangle) getChild(UserInterface.WINDOW_BOUNDS));
+        removeChild(UserInterface.WINDOW_BOUNDS);
+        destroyChild((java.awt.Rectangle) getChild(UserInterface.WINDOW_BOUNDS));
 */
 
-        Integer viewModelMode = (Integer) getChildItem(UserInterface.USER_INTERFACE_MODE);
-        removeChildItem(UserInterface.USER_INTERFACE_MODE);
+        Integer viewModelMode = (Integer) getChild(UserInterface.USER_INTERFACE_MODE);
+        removeChild(UserInterface.USER_INTERFACE_MODE);
 
         super.finalizz();
     }

@@ -24,9 +24,9 @@
 
 package cybop.core.system.region.controller;
 
+import cybop.core.knowledge.*;
 import cybop.core.model.Boolean;
 import cybop.core.model.String;
-import cybop.core.model.model.*;
 import cybop.core.system.region.*;
 
 /**
@@ -42,7 +42,7 @@ import cybop.core.system.region.*;
  * The processor is then responsible for forwarding the signal and results
  * to a motor.
  *
- * @version $Revision: 1.5 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Processor extends ControllerRegion {
@@ -78,7 +78,7 @@ public class Processor extends ControllerRegion {
      * @param m the domain model
      * @exception Exception if the action is null
      */
-    public void process(String a, DomainModel m) throws Exception {
+    public void process(String a, KnowledgeModel m) throws Exception {
 
         if (a != null) {
 

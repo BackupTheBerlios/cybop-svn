@@ -24,16 +24,19 @@
 
 package cybop.core.screen.region;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
+import cybop.core.screen.*;
+import cybop.core.screen.component.*;
 
 /**
  * This class represents a system version panel.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class SystemVersionPanel extends Panel {
+public class SystemVersionPanel extends ScreenRegion {
 
     //
     // Children names.
@@ -107,9 +110,9 @@ public class SystemVersionPanel extends Panel {
      * @param i the item
      * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws Exception {
+    public void setChild(String n, Item i) throws Exception {
 
-        super.setChildItem(n, i);
+        super.setChild(n, i);
 
         if (n != null) {
 
@@ -142,25 +145,25 @@ public class SystemVersionPanel extends Panel {
      * @param n the name
      * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws Exception {
+    public void removeChild(String n) throws Exception {
 
         if (n != null) {
 
             if (n.isEqualTo(HeadPanel.NAME_LABEL)) {
 
-                removeNameLabel((Label) getChildItem(n));
+                removeNameLabel((Label) getChild(n));
 
             } else if (n.isEqualTo(HeadPanel.VERSION_LABEL)) {
 
-                removeVersionLabel((Label) getChildItem(n));
+                removeVersionLabel((Label) getChild(n));
             
             } else if (n.isEqualTo(HeadPanel.DATE_LABEL)) {
 
-                removeDateLabel((Label) getChildItem(n));
+                removeDateLabel((Label) getChild(n));
             
             } else if (n.isEqualTo(HeadPanel.SLOGAN_LABEL)) {
 
-                removeSloganLabel((Label) getChildItem(n));
+                removeSloganLabel((Label) getChild(n));
             }
 
         } else {
@@ -168,7 +171,7 @@ public class SystemVersionPanel extends Panel {
             throw new Exception("Could not remove item. The name is null.");
         }
         
-        super.removeChildItem(n);
+        super.removeChild(n);
     }
 
     //
@@ -479,10 +482,10 @@ public class SystemVersionPanel extends Panel {
 
         super.initialize();
 
-        setChildItem(HeadPanel.NAME_LABEL, createChildItem(getDefaultNameLabel()));
-        setChildItem(HeadPanel.VERSION_LABEL, createChildItem(getDefaultVersionLabel()));
-        setChildItem(HeadPanel.DATE_LABEL, createChildItem(getDefaultDateLabel()));
-        setChildItem(HeadPanel.SLOGAN_LABEL, createChildItem(getDefaultSloganLabel()));
+        setChild(HeadPanel.NAME_LABEL, createChild(getDefaultNameLabel()));
+        setChild(HeadPanel.VERSION_LABEL, createChild(getDefaultVersionLabel()));
+        setChild(HeadPanel.DATE_LABEL, createChild(getDefaultDateLabel()));
+        setChild(HeadPanel.SLOGAN_LABEL, createChild(getDefaultSloganLabel()));
     }
 
     /**
@@ -490,21 +493,21 @@ public class SystemVersionPanel extends Panel {
      */
     public void finalizz() throws Exception {
 
-        Label sloganLabel = (Label) getChildItem(HeadPanel.SLOGAN_LABEL);
-        removeChildItem(HeadPanel.SLOGAN_LABEL);
-        destroyChildItem(sloganLabel);
+        Label sloganLabel = (Label) getChild(HeadPanel.SLOGAN_LABEL);
+        removeChild(HeadPanel.SLOGAN_LABEL);
+        destroyChild(sloganLabel);
 
-        Label dateLabel = (Label) getChildItem(HeadPanel.DATE_LABEL);
-        removeChildItem(HeadPanel.DATE_LABEL);
-        destroyChildItem(dateLabel);
+        Label dateLabel = (Label) getChild(HeadPanel.DATE_LABEL);
+        removeChild(HeadPanel.DATE_LABEL);
+        destroyChild(dateLabel);
 
-        Label versionLabel = (Label) getChildItem(HeadPanel.VERSION_LABEL);
-        removeChildItem(HeadPanel.VERSION_LABEL);
-        destroyChildItem(versionLabel);
+        Label versionLabel = (Label) getChild(HeadPanel.VERSION_LABEL);
+        removeChild(HeadPanel.VERSION_LABEL);
+        destroyChild(versionLabel);
 
-        Label nameLabel = (Label) getChildItem(HeadPanel.NAME_LABEL);
-        removeChildItem(HeadPanel.NAME_LABEL);
-        destroyChildItem(nameLabel);
+        Label nameLabel = (Label) getChild(HeadPanel.NAME_LABEL);
+        removeChild(HeadPanel.NAME_LABEL);
+        destroyChild(nameLabel);
 
         super.finalizz();
     }

@@ -50,7 +50,7 @@ import cybop.healthcare.model.unit.*;
  * specification describes record (history) as:<br>
  * "Concepts relating to collections of information over the long term."
  *
- * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @see http://www.openehr.org http://www.gehr.org
  */
@@ -163,7 +163,7 @@ public class HealthRecord extends Item {
 
             Problem problem = (Problem)problems[i];
 
-            if (((String) problem.getChildItem(Problem.NAME)).isEqualTo(problemName)) {
+            if (((String) problem.getChild(Problem.NAME)).isEqualTo(problemName)) {
 
                 return problem;
             }
@@ -209,7 +209,7 @@ public class HealthRecord extends Item {
 
             if (problems[i].equals(problem)) {
 
-//??                removeChildItem(problem.getChildItem(Problem.IDENTIFIER));
+//??                removeChild(problem.getChild(Problem.IDENTIFIER));
             }
         }
     }

@@ -32,7 +32,7 @@ import cybop.healthcare.model.*;
  *
  * A problem heading is ...
  *
- * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class ProblemHeading extends Heading {
@@ -69,7 +69,7 @@ public class ProblemHeading extends Heading {
 
         super.initialize();
 
-        setChildItem(ProblemHeading.TEXT, getDefaultText());
+        setChild(ProblemHeading.TEXT, getDefaultText());
     }
 
     /**
@@ -77,7 +77,7 @@ public class ProblemHeading extends Heading {
      */
     public void finalizz() throws Exception {
 
-        removeChildItem(ProblemHeading.TEXT);
+        removeChild(ProblemHeading.TEXT);
 
         super.finalizz();
     }

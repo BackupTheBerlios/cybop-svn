@@ -24,6 +24,7 @@
 
 package cybop.core.knowledge.model;
 
+import cybop.core.knowledge.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
 
@@ -32,7 +33,7 @@ import cybop.core.model.String;
  *
  * It contains information about a system.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationModel extends KnowledgeModel {
@@ -229,36 +230,36 @@ public class SystemInformationModel extends KnowledgeModel {
 
         super.initialize();
 
-        Configuration c = (Configuration) getChildItem(SystemInformation.CONFIGURATION);
+        Configuration c = (Configuration) getChild(SystemInformation.CONFIGURATION);
 
         if (c != null) {
 
-            setChildItem(SystemInformation.NAME, getDefaultName());
-            setChildItem(SystemInformation.VERSION, getDefaultVersion());
-            setChildItem(SystemInformation.DATE, getDefaultDate());
+            setChild(SystemInformation.NAME, getDefaultName());
+            setChild(SystemInformation.VERSION, getDefaultVersion());
+            setChild(SystemInformation.DATE, getDefaultDate());
 
-            String slogan = (String) c.getChildItem(SystemInformation.SLOGAN, getDefaultSlogan());
+            String slogan = (String) c.getChild(SystemInformation.SLOGAN, getDefaultSlogan());
 
             if ((slogan != null) && !slogan.equals("null")) {
 
-                setChildItem(SystemInformation.SLOGAN, slogan);
+                setChild(SystemInformation.SLOGAN, slogan);
             }
 
-            setChildItem(SystemInformation.LOGO, getDefaultLogo());
-            setChildItem(SystemInformation.COPYRIGHT, getDefaultCopyright());
-            setChildItem(SystemInformation.CONTACT, getDefaultContact());
+            setChild(SystemInformation.LOGO, getDefaultLogo());
+            setChild(SystemInformation.COPYRIGHT, getDefaultCopyright());
+            setChild(SystemInformation.CONTACT, getDefaultContact());
 
-            String description = (String) c.getChildItem(SystemInformation.DESCRIPTION, getDefaultDescription());
+            String description = (String) c.getChild(SystemInformation.DESCRIPTION, getDefaultDescription());
 
             if ((description != null) && !description.equals("null")) {
 
-                setChildItem(SystemInformation.DESCRIPTION, description);
+                setChild(SystemInformation.DESCRIPTION, description);
             }
 
-            setChildItem(SystemInformation.AUTHORS, getDefaultAuthors());
-            setChildItem(SystemInformation.HELPERS, getDefaultHelpers());
-            setChildItem(SystemInformation.INSPIRATIONS, getDefaultInspirations());
-            setChildItem(SystemInformation.LICENSE, getDefaultLicense());
+            setChild(SystemInformation.AUTHORS, getDefaultAuthors());
+            setChild(SystemInformation.HELPERS, getDefaultHelpers());
+            setChild(SystemInformation.INSPIRATIONS, getDefaultInspirations());
+            setChild(SystemInformation.LICENSE, getDefaultLicense());
 
         } else {
 
@@ -273,58 +274,58 @@ public class SystemInformationModel extends KnowledgeModel {
      */
     public void finalizz() throws Exception {
 
-        Configuration c = (Configuration) getChildItem(SystemInformation.CONFIGURATION);
+        Configuration c = (Configuration) getChild(SystemInformation.CONFIGURATION);
 
         if (c != null) {
 
-            String license = (String) getChildItem(SystemInformation.LICENSE);
-            removeChildItem(SystemInformation.LICENSE);
+            String license = (String) getChild(SystemInformation.LICENSE);
+            removeChild(SystemInformation.LICENSE);
 //??            destroyLicense(license);
 
-            String inspirations = (String) getChildItem(SystemInformation.INSPIRATIONS);
-            removeChildItem(SystemInformation.INSPIRATIONS);
+            String inspirations = (String) getChild(SystemInformation.INSPIRATIONS);
+            removeChild(SystemInformation.INSPIRATIONS);
 //??            destroyInspirations(inspirations);
 
-            String helpers = (String) getChildItem(SystemInformation.HELPERS);
-            removeChildItem(SystemInformation.HELPERS);
+            String helpers = (String) getChild(SystemInformation.HELPERS);
+            removeChild(SystemInformation.HELPERS);
 //??            destroyHelpers(helpers);
 
-            String authors = (String) getChildItem(SystemInformation.AUTHORS);
-            removeChildItem(SystemInformation.AUTHORS);
+            String authors = (String) getChild(SystemInformation.AUTHORS);
+            removeChild(SystemInformation.AUTHORS);
 //??            destroyAuthors(authors);
 
-            String description = (String) getChildItem(SystemInformation.DESCRIPTION);
-            c.setChildItem(SystemInformation.DESCRIPTION, description);
-            removeChildItem(SystemInformation.DESCRIPTION);
+            String description = (String) getChild(SystemInformation.DESCRIPTION);
+            c.setChild(SystemInformation.DESCRIPTION, description);
+            removeChild(SystemInformation.DESCRIPTION);
 //??            destroyDescription(description);
 
-            String contact = (String) getChildItem(SystemInformation.CONTACT);
-            removeChildItem(SystemInformation.CONTACT);
+            String contact = (String) getChild(SystemInformation.CONTACT);
+            removeChild(SystemInformation.CONTACT);
 //??            destroyContact(contact);
 
-            String copyright = (String) getChildItem(SystemInformation.COPYRIGHT);
-            removeChildItem(SystemInformation.COPYRIGHT);
+            String copyright = (String) getChild(SystemInformation.COPYRIGHT);
+            removeChild(SystemInformation.COPYRIGHT);
 //??            destroyCopyright(copyright);
 
-            String logo = (String) getChildItem(SystemInformation.LOGO);
-            removeChildItem(SystemInformation.LOGO);
+            String logo = (String) getChild(SystemInformation.LOGO);
+            removeChild(SystemInformation.LOGO);
 //??            destroyLogo(logo);
 
-            String slogan = (String) getChildItem(SystemInformation.SLOGAN);
-            c.setChildItem(SystemInformation.SLOGAN, slogan);
-            removeChildItem(SystemInformation.SLOGAN);
+            String slogan = (String) getChild(SystemInformation.SLOGAN);
+            c.setChild(SystemInformation.SLOGAN, slogan);
+            removeChild(SystemInformation.SLOGAN);
 //??            destroySlogan(slogan);
 
-            String date = (String) getChildItem(SystemInformation.DATE);
-            removeChildItem(SystemInformation.DATE);
+            String date = (String) getChild(SystemInformation.DATE);
+            removeChild(SystemInformation.DATE);
 //??            destroyDate(date);
 
-            String version = (String) getChildItem(SystemInformation.VERSION);
-            removeChildItem(SystemInformation.VERSION);
+            String version = (String) getChild(SystemInformation.VERSION);
+            removeChild(SystemInformation.VERSION);
 //??            destroyVersion(version);
 
-            String name = (String) getChildItem(SystemInformation.NAME);
-            removeChildItem(SystemInformation.NAME);
+            String name = (String) getChild(SystemInformation.NAME);
+            removeChild(SystemInformation.NAME);
 //??            destroyName(name);
 
         } else {

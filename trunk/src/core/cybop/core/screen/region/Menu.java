@@ -24,6 +24,7 @@
 
 package cybop.core.screen.region;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.Boolean;
 import cybop.core.model.String;
@@ -32,7 +33,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a menu.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Menu extends ScreenRegion {
@@ -81,9 +82,9 @@ public class Menu extends ScreenRegion {
      * @param i the item
      * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws Exception {
+    public void setChild(String n, Item i) throws Exception {
 
-        super.setChildItem(n, i);
+        super.setChild(n, i);
 
         if (n != null) {
 
@@ -104,13 +105,13 @@ public class Menu extends ScreenRegion {
      * @param n the name
      * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws Exception {
+    public void removeChild(String n) throws Exception {
 
         if (n != null) {
 
             if (n.isEqualTo(Menu.LABEL)) {
 
-                removeLabel((String) getChildItem(n));
+                removeLabel((String) getChild(n));
             }
 
         } else {
@@ -118,7 +119,7 @@ public class Menu extends ScreenRegion {
             throw new Exception("Could not remove item. The name is null.");
         }
         
-        super.removeChildItem(n);
+        super.removeChild(n);
     }
 
     //
@@ -206,7 +207,7 @@ public class Menu extends ScreenRegion {
 
         super.initialize();
 
-        setChildItem(Menu.LABEL, getDefaultLabel());
+        setChild(Menu.LABEL, getDefaultLabel());
     }
 
     /**
@@ -214,8 +215,8 @@ public class Menu extends ScreenRegion {
      */
     public void finalizz() throws Exception {
 
-        String label = (String) getChildItem(Menu.LABEL);
-        removeChildItem(Menu.LABEL);
+        String label = (String) getChild(Menu.LABEL);
+        removeChild(Menu.LABEL);
 //??            destroyLabel(label);
 
         super.finalizz();

@@ -24,16 +24,18 @@
 
 package cybop.core.category;
 
+import cybop.core.model.*;
+
 /**
  * This class represents a category.
  *
  * A category classifies items with common properties into one group.
  * The category can be named using the corresponding name attribute.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Category extends Map {
+public class Category extends Array {
 
     //
     // Meta attributes.
@@ -89,7 +91,7 @@ public class Category extends Map {
     //
 
     /**
-     * Abstracts this category.
+     * Abstracts this abstraction.
      */
     public void abstracc() throws Exception {
 
@@ -99,7 +101,7 @@ public class Category extends Map {
     }
 
     /**
-     * Deabstracts this category.
+     * Deabstracts this abstraction.
      */
     public void deabstract() throws Exception {
 

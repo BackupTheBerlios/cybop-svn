@@ -24,16 +24,17 @@
 
 package cybop.core.screen;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
 
 /**
  * This class represents a screen item.<br><br>
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class ScreenItem extends ModelItem {
+public class ScreenItem extends Item {
 
     //
     // Children names.

@@ -30,7 +30,7 @@ import cybop.core.model.String;
 /**
  * This class represents a socket address.<br><br>
  *
- * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SocketAddress extends Address {
@@ -80,8 +80,8 @@ public class SocketAddress extends Address {
 
         super.initialize();
 
-        setChildItem(SocketAddress.NUMBER, getDefaultNumber());
-        setChildItem(SocketAddress.PORT, getDefaultPort());
+        setChild(SocketAddress.NUMBER, getDefaultNumber());
+        setChild(SocketAddress.PORT, getDefaultPort());
     }
 
     /**
@@ -89,12 +89,12 @@ public class SocketAddress extends Address {
      */
     public void finalizz() throws Exception {
 
-        Integer port = (Integer) getChildItem(SocketAddress.PORT);
-        removeChildItem(SocketAddress.PORT);
+        Integer port = (Integer) getChild(SocketAddress.PORT);
+        removeChild(SocketAddress.PORT);
 //??        destroyPort(port);
 
-        String number = (String) getChildItem(SocketAddress.NUMBER);
-        removeChildItem(SocketAddress.NUMBER);
+        String number = (String) getChild(SocketAddress.NUMBER);
+        removeChild(SocketAddress.NUMBER);
 //??        destroyNumber(number);
 
         super.finalizz();

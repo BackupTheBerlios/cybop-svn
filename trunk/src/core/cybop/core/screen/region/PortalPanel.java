@@ -24,16 +24,19 @@
 
 package cybop.core.screen.region;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.String;
+import cybop.core.screen.*;
+import cybop.core.screen.region.splitpane.*;
 
 /**
  * This class represents a portal contents panel.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class PortalPanel extends ContentsPanel {
+public class PortalPanel extends ScreenRegion {
 
     //
     // Children names.
@@ -53,9 +56,9 @@ public class PortalPanel extends ContentsPanel {
      * @param i the item
      * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws Exception {
+    public void setChild(String n, Item i) throws Exception {
 
-        super.setChildItem(n, i);
+        super.setChild(n, i);
 
         if (n != null) {
 
@@ -76,13 +79,13 @@ public class PortalPanel extends ContentsPanel {
      * @param n the name
      * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws Exception {
+    public void removeChild(String n) throws Exception {
 
         if (n != null) {
 
             if (n.isEqualTo(PortalContentsPanel.PORTAL_SPLIT_PANE)) {
 
-                removePortalSplitPane((PortalSplitPane) getChildItem(n));
+                removePortalSplitPane((PortalSplitPane) getChild(n));
             }
 
         } else {
@@ -90,7 +93,7 @@ public class PortalPanel extends ContentsPanel {
             throw new Exception("Could not set item. The name is null.");
         }
         
-        super.removeChildItem(n);
+        super.removeChild(n);
     }
 
     //
@@ -178,7 +181,7 @@ public class PortalPanel extends ContentsPanel {
 
         super.initialize();
 
-        setChildItem(PortalContentsPanel.PORTAL_SPLIT_PANE, createChildItem(getDefaultPortalSplitPane()));
+        setChild(PortalContentsPanel.PORTAL_SPLIT_PANE, createChild(getDefaultPortalSplitPane()));
     }
 
     /**
@@ -186,9 +189,9 @@ public class PortalPanel extends ContentsPanel {
      */
     public void finalizz() throws Exception {
 
-        PortalSplitPane portalSplitPane = (PortalSplitPane) getChildItem(PortalContentsPanel.PORTAL_SPLIT_PANE);
-        removeChildItem(PortalContentsPanel.PORTAL_SPLIT_PANE);
-        destroyChildItem(portalSplitPane);
+        PortalSplitPane portalSplitPane = (PortalSplitPane) getChild(PortalContentsPanel.PORTAL_SPLIT_PANE);
+        removeChild(PortalContentsPanel.PORTAL_SPLIT_PANE);
+        destroyChild(portalSplitPane);
 
         super.finalizz();
     }

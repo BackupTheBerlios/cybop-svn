@@ -33,7 +33,7 @@ package cybop.core.model;
  * the index of the wanted element -- and then returning the corresponding
  * reference.
  *
- * @version $Revision: 1.1 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Map extends Array {
@@ -273,7 +273,7 @@ public class Map extends Array {
     //
 
     /**
-     * Abstracts this array.
+     * Abstracts this abstraction.
      */
     public void abstracc() throws Exception {
 
@@ -282,7 +282,7 @@ public class Map extends Array {
     }
 
     /**
-     * Deabstracts this array.
+     * Deabstracts this abstraction.
      */
     public void deabstract() throws Exception {
 

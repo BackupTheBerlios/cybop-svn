@@ -24,6 +24,7 @@
 
 package cybop.core.screen.component;
 
+import cybop.core.category.*;
 import cybop.core.model.*;
 import cybop.core.model.Integer;
 import cybop.core.model.String;
@@ -32,7 +33,7 @@ import cybop.core.screen.*;
 /**
  * This class represents a label.
  *
- * @version $Revision: 1.3 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Label extends ScreenComponent {
@@ -109,9 +110,9 @@ public class Label extends ScreenComponent {
      * @param i the item
      * @exception Exception if the name is null
      */
-    public void setChildItem(String n, Item i) throws Exception {
+    public void setChild(String n, Item i) throws Exception {
 
-        super.setChildItem(n, i);
+        super.setChild(n, i);
 
         if (n != null) {
 
@@ -144,25 +145,25 @@ public class Label extends ScreenComponent {
      * @param n the name
      * @exception Exception if the name is null
      */
-    public void removeChildItem(String n) throws Exception {
+    public void removeChild(String n) throws Exception {
 
         if (n != null) {
 
             if (n.isEqualTo(Label.FONT)) {
 
-                removeFont((Font) getChildItem(n));
+                removeFont((Font) getChild(n));
 
             } else if (n.isEqualTo(Label.TEXT)) {
 
-                removeText((String) getChildItem(n));
+                removeText((String) getChild(n));
 
             } else if (n.isEqualTo(Label.HORIZONTAL_TEXT_POSITION)) {
 
-                removeHorizontalTextPosition((Integer) getChildItem(n));
+                removeHorizontalTextPosition((Integer) getChild(n));
             
             } else if (n.isEqualTo(Label.VERTICAL_TEXT_POSITION)) {
 
-                removeVerticalTextPosition((Integer) getChildItem(n));
+                removeVerticalTextPosition((Integer) getChild(n));
             }
 
         } else {
@@ -170,7 +171,7 @@ public class Label extends ScreenComponent {
             throw new Exception("Could not remove item. The name is null.");
         }
         
-        super.removeChildItem(n);
+        super.removeChild(n);
     }
 
     //
@@ -468,10 +469,10 @@ public class Label extends ScreenComponent {
 
         super.initialize();
 
-        setChildItem(Label.FONT, createChildItem(getDefaultFont()));
-        setChildItem(Label.TEXT, getDefaultText());
-        setChildItem(Label.HORIZONTAL_TEXT_POSITION, getDefaultHorizontalTextPosition());
-        setChildItem(Label.VERTICAL_TEXT_POSITION, getDefaultVerticalTextPosition());
+        setChild(Label.FONT, createChild(getDefaultFont()));
+        setChild(Label.TEXT, getDefaultText());
+        setChild(Label.HORIZONTAL_TEXT_POSITION, getDefaultHorizontalTextPosition());
+        setChild(Label.VERTICAL_TEXT_POSITION, getDefaultVerticalTextPosition());
     }
 
     /**
@@ -479,21 +480,21 @@ public class Label extends ScreenComponent {
      */
     public void finalizz() throws Exception {
 
-        Integer verticalTextPosition = (Integer) getChildItem(Label.VERTICAL_TEXT_POSITION);
-        removeChildItem(Label.VERTICAL_TEXT_POSITION);
-        destroyChildItem(verticalTextPosition);
+        Integer verticalTextPosition = (Integer) getChild(Label.VERTICAL_TEXT_POSITION);
+        removeChild(Label.VERTICAL_TEXT_POSITION);
+        destroyChild(verticalTextPosition);
 
-        Integer horizontalTextPosition = (Integer) getChildItem(Label.HORIZONTAL_TEXT_POSITION);
-        removeChildItem(Label.HORIZONTAL_TEXT_POSITION);
-        destroyChildItem(horizontalTextPosition);
+        Integer horizontalTextPosition = (Integer) getChild(Label.HORIZONTAL_TEXT_POSITION);
+        removeChild(Label.HORIZONTAL_TEXT_POSITION);
+        destroyChild(horizontalTextPosition);
 
-        String text = (String) getChildItem(Label.TEXT);
-        removeChildItem(Label.TEXT);
-        destroyChildItem(text);
+        String text = (String) getChild(Label.TEXT);
+        removeChild(Label.TEXT);
+        destroyChild(text);
 
-        Font font = (Font) getChildItem(Label.FONT);
-        removeChildItem(Label.FONT);
-        destroyChildItem(font);
+        Font font = (Font) getChild(Label.FONT);
+        removeChild(Label.FONT);
+        destroyChild(font);
 
         super.finalizz();
     }

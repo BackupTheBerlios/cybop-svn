@@ -24,18 +24,17 @@
 
 package cybop.core.system.region.controller.translator;
 
-import cybop.core.model.String;
+import cybop.core.knowledge.*;
+import cybop.core.knowledge.model.*;
 import cybop.core.model.*;
-import cybop.core.model.model.*;
-import cybop.core.model.model.user.*;
-import cybop.core.model.organizer.*;
-import cybop.core.model.unit.*;
+import cybop.core.model.String;
+import cybop.core.screen.region.*;
 import cybop.core.system.region.controller.*;
 
 /**
  * This class represents a system information user interface translator.
  *
- * @version $Revision: 1.6 $ $Date: 2003-05-20 06:21:59 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class SystemInformationUserInterfaceTranslator extends Translator {
@@ -53,20 +52,20 @@ public class SystemInformationUserInterfaceTranslator extends Translator {
      * @exception Exception if the system information contents panel is null
      * @exception Exception if the domain model is null
      */
-    public void encode(DomainModel dm, Model m) throws Exception {
+    public void encode(KnowledgeModel dm, Model m) throws Exception {
 
         SystemInformationUserInterface ui = (SystemInformationUserInterface) m;
 
         if (ui != null) {
             
-            SystemInformationContentsPanel p = (SystemInformationContentsPanel) ui.getChildItem(SystemInformationUserInterface.CONTENTS_PANEL);
+            SystemInformationContentsPanel p = (SystemInformationContentsPanel) ui.getChild(SystemInformationUserInterface.CONTENTS_PANEL);
 
             if (p != null) {
 
                 if (dm != null) {
 
-                    encodeHeadPanel((SystemInformation) dm.getChildItem(DomainModel.SYSTEM_INFORMATION), (HeadPanel) p.getChildItem(SystemInformationContentsPanel.HEAD_PANEL));
-                    encodeTabbedPane((SystemInformation) dm.getChildItem(DomainModel.SYSTEM_INFORMATION), (TabbedPane) p.getChildItem(SystemInformationContentsPanel.TABBED_PANE));
+                    encodeHeadPanel((SystemInformationModel) dm.getChild(KnowledgeModel.SYSTEM_INFORMATION), (HeadPanel) p.getChild(SystemInformationContentsPanel.HEAD_PANEL));
+                    encodeTabbedPane((SystemInformationModel) dm.getChild(KnowledgeModel.SYSTEM_INFORMATION), (TabbedPane) p.getChild(SystemInformationContentsPanel.TABBED_PANE));
 
                 } else {
 
@@ -90,7 +89,7 @@ public class SystemInformationUserInterfaceTranslator extends Translator {
      * @param m the encoded model
      * @param dm the domain model
      */
-    public void decode(Model m, DomainModel dm) {
+    public void decode(Model m, KnowledgeModel dm) {
     }
 
     //
@@ -105,16 +104,16 @@ public class SystemInformationUserInterfaceTranslator extends Translator {
      * @exception Exception if the system information is null
      * @exception Exception if the head panel is null
      */
-    private void encodeHeadPanel(SystemInformation i, HeadPanel p) {
+    private void encodeHeadPanel(SystemInformationModel i, HeadPanel p) {
 
         if (i != null) {
 
             if (p != null) {
 
-                encodeLabel((Label) p.getChildItem(HeadPanel.NAME_LABEL), (String) i.getChildItem(SystemInformation.NAME));
-                encodeLabel((Label) p.getChildItem(HeadPanel.VERSION_LABEL), (String) i.getChildItem(SystemInformation.VERSION));
-                encodeLabel((Label) p.getChildItem(HeadPanel.DATE_LABEL), (String) i.getChildItem(SystemInformation.DATE));
-                encodeLabel((Label) p.getChildItem(HeadPanel.SLOGAN_LABEL), (String) i.getChildItem(SystemInformation.SLOGAN));
+                encodeLabel((Label) p.getChild(HeadPanel.NAME_LABEL), (String) i.getChild(SystemInformationModel.NAME));
+                encodeLabel((Label) p.getChild(HeadPanel.VERSION_LABEL), (String) i.getChild(SystemInformationModel.VERSION));
+                encodeLabel((Label) p.getChild(HeadPanel.DATE_LABEL), (String) i.getChild(SystemInformationModel.DATE));
+                encodeLabel((Label) p.getChild(HeadPanel.SLOGAN_LABEL), (String) i.getChild(SystemInformationModel.SLOGAN));
 
             } else {
 
@@ -154,7 +153,7 @@ public class SystemInformationUserInterfaceTranslator extends Translator {
      * @exception Exception if the system information is null
      * @exception Exception if the tabbed pane is null
      */
-    private void encodeTabbedPane(SystemInformation i, TabbedPane p) {
+    private void encodeTabbedPane(SystemInformationModel i, TabbedPane p) {
     }
 }
 

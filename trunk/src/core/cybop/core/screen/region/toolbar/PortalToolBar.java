@@ -25,12 +25,13 @@
 package cybop.core.screen.region.toolbar;
 
 import cybop.core.model.*;
+import cybop.core.screen.component.*;
 import cybop.core.screen.region.*;
 
 /**
  * This class represents a portal tool bar.
  *
- * @version $Revision: 1.2 $ $Date: 2003-05-23 11:57:29 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class PortalToolBar extends ToolBar {

@@ -24,12 +24,15 @@
 
 package cybop.core.category;
 
+import cybop.core.model.*;
+import cybop.core.model.String;
+
 /**
  * This class represents a definition.
  *
  * A definition specifies several constraints for its children.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Definition extends Structure {
@@ -142,7 +145,7 @@ public class Definition extends Structure {
 
         if (m != null) {
 
-            c = m.get(n);
+            c = (Definition) m.get(n);
 
         } else {
 
@@ -157,7 +160,7 @@ public class Definition extends Structure {
     //
 
     /**
-     * Abstracts this definition.
+     * Abstracts this abstraction.
      */
     public void abstracc() throws Exception {
 
@@ -167,7 +170,7 @@ public class Definition extends Structure {
     }
 
     /**
-     * Deabstracts this definition.
+     * Deabstracts this abstraction.
      */
     public void deabstract() throws Exception {
 

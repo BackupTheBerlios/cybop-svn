@@ -24,6 +24,8 @@
 
 package cybop.core.category;
 
+import cybop.core.model.*;
+
 /**
  * This class represents a time.
  *
@@ -37,9 +39,9 @@ package cybop.core.category;
  *
  * It is measured in seconds [s].
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-23 11:57:28 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Time extends Map {
+public class Time extends Array {
 }
 

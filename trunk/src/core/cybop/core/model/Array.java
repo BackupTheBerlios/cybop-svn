@@ -30,10 +30,10 @@ package cybop.core.model;
  * An array is an area in the computer memory that can contain a number of
  * abstract elements.
  *
- * @version $Revision: 1.1 $ $Date: 2003-06-12 13:14:42 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-public class Array extends Quality {
+public class Array extends java.lang.Object {
 
     //?? See for example:
     //?? java.io.ObjectOutputStream::writeArray
@@ -167,7 +167,7 @@ public class Array extends Quality {
      */
     public void set(int i, Array e) throws Exception {
 
-        Array a = getElements();
+        Array[] a = getElements();
 
         if (a != null) {
 
@@ -176,7 +176,7 @@ public class Array extends Quality {
             while (i >= a.length) {
 
                 java.lang.System.out.println("DEBUG: Create new array in: " + this);
-                Array old = getElements();
+                Array[] old = getElements();
                 a = createElements(old);
 //??                destroyElements(old);
 
@@ -206,11 +206,11 @@ public class Array extends Quality {
      */
     public void remove(int i) throws Exception {
 
-        Array a = getElements();
+        Array[] a = getElements();
 
         if (a != null) {
 
-            java.lang.System.out.println("DEBUG: Remove element: " + e + " in: " + this);
+            java.lang.System.out.println("DEBUG: Remove element: " + i + " in: " + this);
 
             //?? Temporary: Remove java tree node.
             removeTreeNode(a[i]);
@@ -219,7 +219,7 @@ public class Array extends Quality {
             // beginning of the elements.
             int index = i;
 
-            while ((index + 1) < getNumber()) {
+            while ((index + 1) < a.length) {
 
                 a[index] = a[index + 1];
 
@@ -244,7 +244,7 @@ public class Array extends Quality {
     public Array get(int i) throws Exception {
 
         Array e = null;
-        Array a = getElements();
+        Array[] a = getElements();
 
         if (a != null) {
 
@@ -379,10 +379,10 @@ public class Array extends Quality {
                 // it seems the simplest way to work with instanceof here.
                 // This check had to be inserted because signal items have
                 // children that are not child tree nodes of that signal.
-                if ((a instanceof Signal) == false) {
+//??                if ((a instanceof Signal) == false) {
 
                     tn.add(a.getJavaTreeNode());
-                }
+//??                }
 
             } else {
     
@@ -417,10 +417,10 @@ public class Array extends Quality {
                 // children that are not child tree nodes of that signal.
                 // Alternative:
                 // if (tn.isNodeChild(i.getJavaTreeNode())) {
-                if ((a instanceof Signal) == false) {
+//??                if ((a instanceof Signal) == false) {
 
                     tn.remove(a.getJavaTreeNode());
-                }
+//??                }
 
             } else {
     
@@ -434,7 +434,7 @@ public class Array extends Quality {
     }
 
     //
-    // Abstraction.
+    // Array.
     //
 
     /**

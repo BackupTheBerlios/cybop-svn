@@ -31,7 +31,7 @@ package cybop.core.category;
  * (super) category. The super category can be specified using the ancestor
  * attribute.
  *
- * @version $Revision: 1.1 $ $Date: 2003-05-17 22:30:11 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2003-06-12 21:16:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 public class Inheritance extends Category {
@@ -90,7 +90,7 @@ public class Inheritance extends Category {
     //
 
     /**
-     * Abstracts this inheritance.
+     * Abstracts this abstraction.
      */
     public void abstracc() throws Exception {
 
@@ -100,7 +100,7 @@ public class Inheritance extends Category {
     }
 
     /**
-     * Deabstracts this inheritance.
+     * Deabstracts this abstraction.
      */
     public void deabstract() throws Exception {
 
