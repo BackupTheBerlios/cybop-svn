@@ -25,7 +25,7 @@
  * - receive an inline stream into a byte array
  * - send an inline stream from a byte array
  *
- * @version $Revision: 1.4 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,7 @@
 /**
  * Receives an inline stream and writes it into a byte array.
  *
- * @param p0 the destination (byte array)
+ * @param p0 the destination (byte array) (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source (inline data)
@@ -60,19 +60,28 @@ void receive_inline(void* p0, void* p1, void* p2, const void* p3, const void* p4
 
                 int* dc = (int*) p1;
 
-                // Set new array size.
-                *ds = *sc;
+                if (p0 != NULL_POINTER) {
 
-                // Resize array.
-                resize_array((void*) &p0, p2, (void*) CHARACTER_ARRAY);
+                    void** d = (void**) p0;
 
-                // The destination array index to start writing at.
-                int i = 0;
+                    // Set new array size.
+                    *ds = *sc;
 
-                set_array_elements(p0, (void*) &i, p3, p4, (void*) CHARACTER_ARRAY);
+                    // Resize array.
+                    resize_array(p0, p2, (void*) CHARACTER_ARRAY);
 
-                // Set new array count.
-                *dc = *sc;
+                    // The destination array index to start writing at.
+                    int i = 0;
+
+                    set_array_elements(*d, (void*) &i, p3, p4, (void*) CHARACTER_ARRAY);
+
+                    // Set new array count.
+                    *dc = *sc;
+
+                } else {
+
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read inline. The array count is null.");
+                }
 
             } else {
 
@@ -93,7 +102,7 @@ void receive_inline(void* p0, void* p1, void* p2, const void* p3, const void* p4
 /**
  * Sends an inline stream that was read from a byte array.
  *
- * @param p0 the destination (inline data)
+ * @param p0 the destination (inline data) (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source (byte array)

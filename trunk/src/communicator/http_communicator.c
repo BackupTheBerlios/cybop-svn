@@ -25,7 +25,7 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.2 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,7 @@
 /**
  * Receives an http stream and writes it into a byte array.
  *
- * @param p0 the destination (byte array)
+ * @param p0 the destination (byte array) (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source (http url)
@@ -52,7 +52,7 @@ void receive_http(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 /**
  * Sends an http stream that was read from a byte array.
  *
- * @param p0 the destination (http url)
+ * @param p0 the destination (http url) (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source (byte array)

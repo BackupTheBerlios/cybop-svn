@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-01-10 17:50:57 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -73,7 +73,7 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 /**
  * Decodes the configuration node into a compound.
  *
- * @param p0 the destination (internals memory)
+ * @param p0 the destination (internals memory) (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source (libxml2 xml node)
@@ -83,273 +83,258 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
 
     if (p3 != NULL_POINTER) {
 
-        xmlNode** s = (xmlNode**) p3;
+        xmlNode* s = (xmlNode*) p3;
 
-        log_message_debug("Decode configuration node.");
+        if (p0 != NULL_POINTER) {
 
-        if ((*s) != NULL_POINTER) {
+            void** d = (void**) p0;
 
-            // Determine first child node.
-            xmlNode* c = (*s)->children;
+            if (s != NULL_POINTER) {
 
-            // The child count.
-            int* cc = INTEGER_NULL_POINTER;
-            create_integer((void*) &cc);
-            *cc = 0;
+                log_message_debug("Decode configuration node.");
 
-            // The source name.
-            void* sn = NULL_POINTER;
-            int* snc = INTEGER_NULL_POINTER;
-            create_integer((void*) &snc);
-            *snc = 0;
-            // The source channel.
-            void* sc = NULL_POINTER;
-            int* scc = INTEGER_NULL_POINTER;
-            create_integer((void*) &scc);
-            *scc = 0;
-            // The source abstraction.
-            void* sa = NULL_POINTER;
-            int* sac = INTEGER_NULL_POINTER;
-            create_integer((void*) &sac);
-            *sac = 0;
-            // The source model.
-            void* sm = NULL_POINTER;
-            int* smc = INTEGER_NULL_POINTER;
-            create_integer((void*) &smc);
-            *smc = 0;
+                // Determine first child node.
+                xmlNode* c = s->children;
+                // The source name.
+                void* sn = NULL_POINTER;
+                int snc = 0;
+                // The source channel.
+                void* sc = NULL_POINTER;
+                int scc = 0;
+                // The source abstraction.
+                void* sa = NULL_POINTER;
+                int sac = 0;
+                // The source model.
+                void* sm = NULL_POINTER;
+                int smc = 0;
+                // The destination model.
+                void* dm = NULL_POINTER;
+                int* dmc = INTEGER_NULL_POINTER;
+                int* dms = INTEGER_NULL_POINTER;
+                // The comparison result.
+                int r = 0;
 
-            // The destination model.
-            void* dm = NULL_POINTER;
-            int* dmc = INTEGER_NULL_POINTER;
-            create_integer((void*) &dmc);
-            *dmc = 0;
-            int* dms = INTEGER_NULL_POINTER;
-            create_integer((void*) &dms);
-            *dms = 0;
+                while (1) {
 
-            // The comparison result.
-            int* r = INTEGER_NULL_POINTER;
-            create_integer((void*) &r);
-            *r = 0;
+                    if (c == NULL_POINTER) {
 
-            while (1) {
+                        break;
+                    }
 
-                if (c == NULL_POINTER) {
+                    if (c->type == XML_ELEMENT_NODE) {
 
-                    break;
+                        // Decode child node properties.
+                        decode_cybol_property(
+                            (void*) &sn, (void*) &snc, (void*) &sc, (void*) &scc,
+                            (void*) &sa, (void*) &sac, (void*) &sm, (void*) &smc,
+                            (void*) c);
+
+        fprintf(stderr, "sn: %s\n", (char*) sn);
+        fprintf(stderr, "snc: %i\n", *((int*) snc));
+        fprintf(stderr, "sc: %s\n", (char*) sc);
+        fprintf(stderr, "scc: %i\n", *((int*) scc));
+        fprintf(stderr, "sa: %s\n", (char*) sa);
+        fprintf(stderr, "sac: %i\n", *((int*) sac));
+        fprintf(stderr, "sm: %s\n", (char*) sm);
+        fprintf(stderr, "smc: %i\n", *((int*) smc));
+
+                        if (r != 1) {
+
+                            compare_arrays(sn, (void*) &snc, (void*) STARTUP_CHANNEL_CONFIGURATION_NAME, (void*) STARTUP_CHANNEL_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                            if (r == 1) {
+
+                                log_message_debug("Found startup channel configuration name.");
+
+                                // Create destination model.
+                                create_integer((void*) &dmc);
+                                *dmc = 0;
+                                create_integer((void*) &dms);
+                                *dms = 0;
+                                create_model((void*) &dm, (void*) dmc, (void*) dms,
+                                    sm, (void*) &smc,
+                                    sa, (void*) &sac,
+                                    sc, (void*) &scc);
+
+                                // Set configuration parameter in internals memory.
+                                set_array_elements(*d, (void*) STARTUP_CHANNEL_INTERNAL, (void*) &dm, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                set_array_elements(*d, (void*) STARTUP_CHANNEL_COUNT_INTERNAL, (void*) &dmc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                set_array_elements(*d, (void*) STARTUP_CHANNEL_SIZE_INTERNAL, (void*) &dms, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                            }
+                        }
+
+                        if (r != 1) {
+
+                            compare_arrays(sn, (void*) &snc, (void*) STARTUP_ABSTRACTION_CONFIGURATION_NAME, (void*) STARTUP_ABSTRACTION_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                            if (r == 1) {
+
+                                log_message_debug("Found startup abstraction configuration name.");
+
+                                // Create destination model.
+                                create_integer((void*) &dmc);
+                                *dmc = 0;
+                                create_integer((void*) &dms);
+                                *dms = 0;
+                                create_model((void*) &dm, (void*) dmc, (void*) dms,
+                                    sm, (void*) &smc,
+                                    sa, (void*) &sac,
+                                    sc, (void*) &scc);
+
+                                // Set configuration parameter in internals memory.
+                                set_array_elements(*d, (void*) STARTUP_ABSTRACTION_INTERNAL, (void*) &dm, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                set_array_elements(*d, (void*) STARTUP_ABSTRACTION_COUNT_INTERNAL, (void*) &dmc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                set_array_elements(*d, (void*) STARTUP_ABSTRACTION_SIZE_INTERNAL, (void*) &dms, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                            }
+                        }
+
+                        if (r != 1) {
+
+                            compare_arrays(sn, (void*) &snc, (void*) STARTUP_MODEL_CONFIGURATION_NAME, (void*) STARTUP_MODEL_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                            if (r == 1) {
+
+                                log_message_debug("Found startup model configuration name.");
+
+                                // Create destination model.
+                                create_integer((void*) &dmc);
+                                *dmc = 0;
+                                create_integer((void*) &dms);
+                                *dms = 0;
+                                create_model((void*) &dm, (void*) dmc, (void*) dms,
+                                    sm, (void*) &smc,
+                                    sa, (void*) &sac,
+                                    sc, (void*) &scc);
+
+                                // Set configuration parameter in internals memory.
+                                set_array_elements(*d, (void*) STARTUP_MODEL_INTERNAL, (void*) &dm, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                set_array_elements(*d, (void*) STARTUP_MODEL_COUNT_INTERNAL, (void*) &dmc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                set_array_elements(*d, (void*) STARTUP_MODEL_SIZE_INTERNAL, (void*) &dms, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                            }
+                        }
+
+                        if (r != 1) {
+
+                            compare_arrays(sn, (void*) &snc, (void*) UNIX_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME, (void*) UNIX_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                            if (r == 1) {
+
+                                log_message_debug("Found unix server socket active configuration name.");
+
+                                // Create destination model.
+                                create_model((void*) &dm, (void*) ONE_NUMBER, (void*) ONE_NUMBER,
+                                    sm, (void*) &smc,
+                                    sa, (void*) &sac,
+                                    sc, (void*) &scc);
+
+                                // Set configuration parameter in internals memory.
+                                set_array_elements(*d, (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &dm, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                            }
+                        }
+
+                        if (r != 1) {
+
+                            compare_arrays(sn, (void*) &snc, (void*) UNIX_SERVER_SOCKET_FILENAME_CONFIGURATION_NAME, (void*) UNIX_SERVER_SOCKET_FILENAME_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                            if (r == 1) {
+
+                                log_message_debug("Found unix server socket filename configuration name.");
+
+                                // Create destination model.
+                                create_model((void*) &dm, (void*) ONE_NUMBER, (void*) ONE_NUMBER,
+                                    sm, (void*) &smc,
+                                    sa, (void*) &sac,
+                                    sc, (void*) &scc);
+
+                                // Set configuration parameter in internals memory.
+                                set_array_elements(*d, (void*) UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &dm, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                            }
+                        }
+
+                        if (r != 1) {
+
+                            compare_arrays(sn, (void*) &snc, (void*) TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME, (void*) TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                            if (r == 1) {
+
+                                log_message_debug("Found tcp server socket active configuration name.");
+
+                                // Create destination model.
+                                create_model((void*) &dm, (void*) ONE_NUMBER, (void*) ONE_NUMBER,
+                                    sm, (void*) &smc,
+                                    sa, (void*) &sac,
+                                    sc, (void*) &scc);
+
+                                // Set configuration parameter in internals memory.
+                                set_array_elements(*d, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &dm, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                            }
+                        }
+
+                        if (r != 1) {
+
+                            compare_arrays(sn, (void*) &snc, (void*) TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME, (void*) TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                            if (r == 1) {
+
+                                log_message_debug("Found tcp server socket port configuration name.");
+
+                                // Create destination model.
+                                create_model((void*) &dm, (void*) ONE_NUMBER, (void*) ONE_NUMBER,
+                                    sm, (void*) &smc,
+                                    sa, (void*) &sac,
+                                    sc, (void*) &scc);
+
+                                // Set configuration parameter in internals memory.
+                                set_array_elements(*d, (void*) TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &dm, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                            }
+                        }
+
+                        if (r != 1) {
+
+                            compare_arrays(sn, (void*) &snc, (void*) X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME, (void*) X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                            if (r == 1) {
+
+                                log_message_debug("Found x windows server active configuration name.");
+
+                                // Create destination model.
+                                create_model((void*) &dm, (void*) ONE_NUMBER, (void*) ONE_NUMBER,
+                                    sm, (void*) &smc,
+                                    sa, (void*) &sac,
+                                    sc, (void*) &scc);
+
+                                // Set configuration parameter in internals memory.
+                                set_array_elements(*d, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &dm, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                            }
+                        }
+
+                        // Reset source name.
+                        sn = NULL_POINTER;
+                        snc = 0;
+                        // Reset source channel.
+                        sc = NULL_POINTER;
+                        scc = 0;
+                        // Reset source abstraction.
+                        sa = NULL_POINTER;
+                        sac = 0;
+                        // Reset source model.
+                        sm = NULL_POINTER;
+                        smc = 0;
+                        // Reset destination model.
+                        dm = NULL_POINTER;
+                        dmc = INTEGER_NULL_POINTER;
+                        dms = INTEGER_NULL_POINTER;
+                        // Reset comparison result.
+                        r = 0;
+                    }
+
+                    c = c->next;
                 }
 
-                if (c->type == XML_ELEMENT_NODE) {
+            } else {
 
-                    // Decode child node properties.
-                    decode_cybol_property((void*) &c,
-                        (void*) &sn, (void*) &snc, (void*) &sc, (void*) &scc,
-                        (void*) &sa, (void*) &sac, (void*) &sm, (void*) &smc);
-
-    fprintf(stderr, "sn: %s\n", (char*) sn);
-    fprintf(stderr, "snc: %i\n", *snc);
-    fprintf(stderr, "sc: %s\n", (char*) sc);
-    fprintf(stderr, "scc: %i\n", *scc);
-    fprintf(stderr, "sa: %s\n", (char*) sa);
-    fprintf(stderr, "sac: %i\n", *sac);
-    fprintf(stderr, "sm: %s\n", (char*) sm);
-    fprintf(stderr, "smc: %i\n", *smc);
-
-                    if (*r != 1) {
-
-                        compare_arrays((void*) &sn, (void*) &snc, (void*) &STARTUP_CHANNEL_CONFIGURATION_NAME, (void*) &STARTUP_CHANNEL_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-                        if (*r == 1) {
-
-                            log_message_debug("Found startup channel configuration name.");
-
-                            // Create destination model.
-                            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-                                (void*) &sm, (void*) &smc,
-                                (void*) &sa, (void*) &sac,
-                                (void*) &sc, (void*) &scc);
-
-                            // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_COUNT_INTERNAL, (void*) &dmc, (void*) &ONE_NUMBER);
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_CHANNEL_SIZE_INTERNAL, (void*) &dms, (void*) &ONE_NUMBER);
-                        }
-                    }
-
-                    if (*r != 1) {
-
-                        compare_arrays((void*) &sn, (void*) &snc, (void*) &STARTUP_ABSTRACTION_CONFIGURATION_NAME, (void*) &STARTUP_ABSTRACTION_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-                        if (*r == 1) {
-
-                            log_message_debug("Found startup abstraction configuration name.");
-
-                            // Create destination model.
-                            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-                                (void*) &sm, (void*) &smc,
-                                (void*) &sa, (void*) &sac,
-                                (void*) &sc, (void*) &scc);
-
-                            // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_COUNT_INTERNAL, (void*) &dmc, (void*) &ONE_NUMBER);
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_ABSTRACTION_SIZE_INTERNAL, (void*) &dms, (void*) &ONE_NUMBER);
-                        }
-                    }
-
-                    if (*r != 1) {
-
-                        compare_arrays((void*) &sn, (void*) &snc, (void*) &STARTUP_MODEL_CONFIGURATION_NAME, (void*) &STARTUP_MODEL_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-                        if (*r == 1) {
-
-                            log_message_debug("Found startup model configuration name.");
-
-                            // Create destination model.
-                            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-                                (void*) &sm, (void*) &smc,
-                                (void*) &sa, (void*) &sac,
-                                (void*) &sc, (void*) &scc);
-
-                            // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_COUNT_INTERNAL, (void*) &dmc, (void*) &ONE_NUMBER);
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &STARTUP_MODEL_SIZE_INTERNAL, (void*) &dms, (void*) &ONE_NUMBER);
-                        }
-                    }
-
-                    if (*r != 1) {
-
-                        compare_arrays((void*) &sn, (void*) &snc, (void*) &UNIX_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME, (void*) &UNIX_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-                        if (*r == 1) {
-
-                            log_message_debug("Found unix server socket active configuration name.");
-
-                            // Create destination model.
-                            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-                                (void*) &sm, (void*) &smc,
-                                (void*) &sa, (void*) &sac,
-                                (void*) &sc, (void*) &scc);
-
-                            // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
-                        }
-                    }
-
-                    if (*r != 1) {
-
-                        compare_arrays((void*) &sn, (void*) &snc, (void*) &UNIX_SERVER_SOCKET_FILENAME_CONFIGURATION_NAME, (void*) &UNIX_SERVER_SOCKET_FILENAME_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-                        if (*r == 1) {
-
-                            log_message_debug("Found unix server socket filename configuration name.");
-
-                            // Create destination model.
-                            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-                                (void*) &sm, (void*) &smc,
-                                (void*) &sa, (void*) &sac,
-                                (void*) &sc, (void*) &scc);
-
-                            // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
-                        }
-                    }
-
-                    if (*r != 1) {
-
-                        compare_arrays((void*) &sn, (void*) &snc, (void*) &TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME, (void*) &TCP_SERVER_SOCKET_ACTIVE_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-                        if (*r == 1) {
-
-                            log_message_debug("Found tcp server socket active configuration name.");
-
-                            // Create destination model.
-                            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-                                (void*) &sm, (void*) &smc,
-                                (void*) &sa, (void*) &sac,
-                                (void*) &sc, (void*) &scc);
-
-                            // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
-                        }
-                    }
-
-                    if (*r != 1) {
-
-                        compare_arrays((void*) &sn, (void*) &snc, (void*) &TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME, (void*) &TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-                        if (*r == 1) {
-
-                            log_message_debug("Found tcp server socket port configuration name.");
-
-                            // Create destination model.
-                            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-                                (void*) &sm, (void*) &smc,
-                                (void*) &sa, (void*) &sac,
-                                (void*) &sc, (void*) &scc);
-
-                            // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
-                        }
-                    }
-
-                    if (*r != 1) {
-
-                        compare_arrays((void*) &sn, (void*) &snc, (void*) &X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME, (void*) &X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) &CHARACTER_ARRAY);
-
-                        if (*r == 1) {
-
-                            log_message_debug("Found x windows server active configuration name.");
-
-                            // Create destination model.
-                            create_model((void*) &dm, (void*) &dmc, (void*) &dms,
-                                (void*) &sm, (void*) &smc,
-                                (void*) &sa, (void*) &sac,
-                                (void*) &sc, (void*) &scc);
-
-                            // Set configuration parameter in internals memory.
-                            set_array_elements(p0, (void*) &POINTER_ARRAY, (void*) &X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &dm, (void*) &ONE_NUMBER);
-                        }
-                    }
-
-                    // Reset source name.
-                    sn = NULL_POINTER;
-                    *snc = 0;
-                    // Reset source channel.
-                    sc = NULL_POINTER;
-                    *scc = 0;
-                    // Reset source abstraction.
-                    sa = NULL_POINTER;
-                    *sac = 0;
-                    // Reset source model.
-                    sm = NULL_POINTER;
-                    *smc = 0;
-
-                    // Reset destination model.
-                    dm = NULL_POINTER;
-                    *dmc = 0;
-                    *dms = 0;
-
-                    // Reset comparison result.
-                    *r = 0;
-                }
-
-                c = c->next;
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml node. The source is null.");
             }
-
-            // Destroy comparison result.
-            destroy_integer((void*) &r);
-            // Destroy destination model.
-            destroy_integer((void*) &dms);
-            destroy_integer((void*) &dmc);
-            // Destroy source name, channel, abstraction, model.
-            destroy_integer((void*) &smc);
-            destroy_integer((void*) &sac);
-            destroy_integer((void*) &scc);
-            destroy_integer((void*) &snc);
-            // Destroy child count.
-            destroy_integer((void*) &cc);
 
         } else {
 
@@ -365,13 +350,21 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
 /**
  * Encodes the internals memory into a configuration node.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source
  * @param p4 the source count
  */
 void encode_configuration_node(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+
+    //
+    // CONFIGURATION_ABSTRACTION
+    //
+    // CAUTION! Parameters of the internals memory MUST NOT be written
+    // to the configuration file which was given at command line!
+    // The CYBOI configuration file can only be edited MANUALLY.
+    //
 }
 
 //
@@ -381,7 +374,7 @@ void encode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
 /**
  * Decodes the configuration model into an internals memory.
  *
- * @param p0 the destination (internals memory)
+ * @param p0 the destination (internals memory) (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source (parsed cybol/xml model)
@@ -398,31 +391,22 @@ void decode_configuration(void* p0, void* p1, void* p2, const void* p3, const vo
 
     if (p4 != NULL_POINTER) {
 
-        int** sc = (int**) p4;
+        int* sc = (int*) p4;
 
-        if (p3 != NULL_POINTER) {
+        if (p0 != NULL_POINTER) {
 
-            void** s = (void**) p3;
+            void** d = (void**) p0;
 
-            if (p0 != NULL_POINTER) {
+            log_message_debug("Decode configuration.");
 
-                void** d = (void**) p0;
+            // Get root element node.
+            xmlNode* r = xmlDocGetRootElement((xmlDoc*) p3);
 
-                log_message_debug("Decode configuration.");
-
-                // Get root element node.
-                xmlNode* r = xmlDocGetRootElement((xmlDoc*) *s);
-
-                decode_configuration_node(p0, p1, p2, (void*) &r, p4);
-
-            } else {
-
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml. The destination is null.");
-            }
+            decode_configuration_node(p0, p1, p2, (void*) r, p4);
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml. The source is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not translate xml. The destination is null.");
         }
 
     } else {
@@ -438,7 +422,7 @@ void decode_configuration(void* p0, void* p1, void* p2, const void* p3, const vo
 /**
  * Encodes the internals memory into a configuration model.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,7 +46,7 @@
 /**
  * Parses the byte stream and creates a boolean model from it.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source
@@ -56,7 +56,7 @@ void parse_boolean(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 
     if (p4 != NULL_POINTER) {
 
-        int** sc = (int**) p4;
+        int* sc = (int*) p4;
 
         if (p0 != NULL_POINTER) {
 
@@ -65,22 +65,18 @@ void parse_boolean(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 //??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Parse boolean.");
 
             // The comparison result.
-            int* r = INTEGER_NULL_POINTER;
-            create_integer((void*) &r);
-            *r = 0;
+            int r = 0;
 
-            if (**sc == *TRUE_BOOLEAN_COUNT) {
+            if (*sc == *TRUE_BOOLEAN_COUNT) {
 
-                compare_array_elements(p3, (void*) &TRUE_BOOLEAN, (void*) &CHARACTER_ARRAY, (void*) &TRUE_BOOLEAN_COUNT, (void*) &r);
+                compare_array_elements(p3, (void*) TRUE_BOOLEAN, (void*) TRUE_BOOLEAN_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-                if (*r == 1) {
+                if (r == 1) {
 
                     // Set boolean to 'true'.
                     **d = 1;
                 }
             }
-
-            destroy_integer((void*) &r);
 
         } else {
 
@@ -96,7 +92,7 @@ void parse_boolean(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 /**
  * Serializes the boolean model and creates a byte stream from it.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source
@@ -106,15 +102,15 @@ void serialize_boolean(void* p0, void* p1, void* p2, const void* p3, const void*
 
     if (p3 != NULL_POINTER) {
 
-        int** s = (int**) p3;
+        int* s = (int*) p3;
 
         if (p1 != NULL_POINTER) {
 
-            int** dc = (int**) p1;
+            int* dc = (int*) p1;
 
 //??            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Serialize boolean.");
 
-            if (**s == 1) {
+            if (*s == 1) {
 
 /*??
                 set_array_elements(TRUE_BOOLEAN ...);

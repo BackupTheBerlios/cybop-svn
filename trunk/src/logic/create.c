@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.23 $ $Date: 2005-01-18 15:07:01 $ $Author: christian $
+ * @version $Revision: 1.24 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -158,7 +158,7 @@ void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const 
     create((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
     // Receive persistent byte stream over channel.
-    receive_general((void*) rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
+    receive_general((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
 
     //
     // Parse.
@@ -168,7 +168,7 @@ void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const 
     create(p0, p2, p5, p6);
 
     // Parse byte stream according to given document type.
-    parse(p0, p1, p2, (void*) rm, (void*) &rmc, p5, p6);
+    parse(p0, p1, p2, rm, (void*) &rmc, p5, p6);
 
     // Destroy receive model.
     destroy((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
@@ -243,7 +243,7 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     create((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
     // Receive persistent byte stream over channel.
-    receive_general(rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
+    receive_general((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
 
     //
     // Parse.
@@ -260,11 +260,11 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
         create((void*) &pm, (void*) &pms, p5, p6);
 
         // Parse byte stream according to given document type.
-        parse(pm, (void*) &pmc, (void*) &pms, rm, (void*) &rmc, p5, p6);
+        parse((void*) &pm, (void*) &pmc, (void*) &pms, rm, (void*) &rmc, p5, p6);
 
     } else {
 
-        parse(pm, (void*) &pmc, (void*) &pms, p3, p4, p5, p6);
+        parse((void*) &pm, (void*) &pmc, (void*) &pms, p3, p4, p5, p6);
     }
 
     // Destroy receive model.
@@ -296,7 +296,7 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     } else {
 
         // Free xml dom document.
-        xmlFreeDoc((xmlDoc*) pm);
+        xmlFreeDoc((xmlDoc*) *((void**) pm));
     }
 }
 
@@ -488,8 +488,8 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
     create_model((void*) &pn, pnc, pns, nm, nmc, na, nac,
         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
-    // A part channel is not created, since that is only needed temporarily for
-    // model loading.
+    // A part channel is not created, since that is only needed temporarily
+    // for model loading.
 
     // Create part abstraction.
     create_model((void*) &pa, pac, pas, am, amc, aa, aac,
@@ -512,10 +512,10 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
         // Use the determined whole model normally, if it exists.
         set_compound_element_by_name(wm, wmc, wms,
-            &pn, &pnc, &pns,
-            &pa, &pac, &pas,
-            &pm, &pmc, &pms,
-            &pd, &pdc, &pds);
+            pn, pnc, pns,
+            pa, pac, pas,
+            pm, pmc, pms,
+            pd, pdc, pds);
     }
 }
 

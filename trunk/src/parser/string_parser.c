@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,7 +35,7 @@
 /**
  * Parses the byte stream and creates a string model from it.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source
@@ -45,51 +45,60 @@ void parse_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
     if (p4 != NULL_POINTER) {
 
-        int** sc = (int**) p4;
+        int* sc = (int*) p4;
 
         if (p2 != NULL_POINTER) {
 
-            int** ds = (int**) p2;
+            int* ds = (int*) p2;
 
             if (p1 != NULL_POINTER) {
 
-                int** dc = (int**) p1;
+                int* dc = (int*) p1;
 
-                if (**dc >= 0) {
+                if (p0 != NULL_POINTER) {
 
-//??                log_message((void*) &INFO_LOG_LEVEL, (void*) &INITIALIZE_STRING_MESSAGE, (void*) &INITIALIZE_STRING_MESSAGE_COUNT);
+                    void** d = (void**) p0;
 
-                    // The new destination string size.
-                    // (Not exactly the size, but the destination string index
-                    // increased by the source array count.)
-                    **ds = **dc + **sc;
+                    if (*dc >= 0) {
 
-                    // Resize destination string.
-                    resize_array(p0, (void*) &CHARACTER_ARRAY, p2);
+    //??                log_message((void*) &INFO_LOG_LEVEL, (void*) &INITIALIZE_STRING_MESSAGE, (void*) &INITIALIZE_STRING_MESSAGE_COUNT);
 
-                    if (**dc <= (**ds - **sc)) {
+                        // The new destination string size.
+                        // (Not exactly the size, but the destination string index
+                        // increased by the source array count.)
+                        *ds = *dc + *sc;
 
-                        // Set source into destination string.
-                        set_array_elements(p0, (void*) &CHARACTER_ARRAY, p1, p3, p4);
+                        // Resize destination string.
+                        resize_array(p0, p2, (void*) CHARACTER_ARRAY);
 
-                        // Increment count.
-                        // Example:
-                        // d = "helloworld"
-                        // dc (as index) = 5
-                        // s = "universe"
-                        // sc = 8
-                        // d (after set) = "hellouniverse"
-                        // dc = dc + sc = 13
-                        **dc = **dc + **sc;
+                        if (*dc <= (*ds - *sc)) {
+
+                            // Set source into destination string.
+                            set_array_elements(*d, p1, p3, p4, (void*) CHARACTER_ARRAY);
+
+                            // Increment count.
+                            // Example:
+                            // d = "helloworld"
+                            // dc (as index) = 5
+                            // s = "universe"
+                            // sc = 8
+                            // d (after set) = "hellouniverse"
+                            // dc = dc + sc = 13
+                            *dc = *dc + *sc;
+
+                        } else {
+
+//??                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The index exceeds the size.");
+                        }
 
                     } else {
 
-//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The index exceeds the size.");
+//??                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The index is negativ.");
                     }
 
                 } else {
 
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set compound part by index. The index is negativ.");
+//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_COUNT_IS_NULL_MESSAGE_COUNT);
                 }
 
             } else {
@@ -111,7 +120,7 @@ void parse_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 /**
  * Serializes the string model and creates a byte stream from it.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source

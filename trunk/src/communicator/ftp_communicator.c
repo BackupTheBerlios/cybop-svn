@@ -25,7 +25,7 @@
  * - receive an ftp stream into a byte array
  * - send an ftp stream from a byte array
  *
- * @version $Revision: 1.2 $ $Date: 2005-01-10 14:46:32 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,7 @@
 /**
  * Receives an ftp stream and writes it into a byte array.
  *
- * @param p0 the destination (byte array)
+ * @param p0 the destination (byte array) (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source (ftp url)
@@ -54,7 +54,7 @@ void receive_ftp(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 /**
  * Sends an ftp stream that was read from a byte array.
  *
- * @param p0 the destination (ftp url)
+ * @param p0 the destination (ftp url) (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source (byte array)

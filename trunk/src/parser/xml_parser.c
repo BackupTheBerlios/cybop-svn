@@ -25,7 +25,7 @@
  * - parse an xml stream into an xml model
  * - serialize an xml model into an xml stream
  *
- * @version $Revision: 1.8 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,88 +57,75 @@ void parse_xml_comment_tag(void* p0, void* p1) {
 
     if (p1 != NULL_POINTER) {
 
-        int** sc = (int**) p1;
+        int* sc = (int*) p1;
 
-        if (p0 != NULL_POINTER) {
+        // The leave flag.
+        int l = 0;
+        // The comparison result.
+        int r = 0;
+        // The current byte within the stream.
+        void* b = p0;
+        // The remaining bytes count.
+        int bc = *sc;
 
-            void** s = (void**) p0;
+        while (1) {
 
-            // The leave flag.
-            int l = 0;
-            // The comparison result.
-            int* r = INTEGER_NULL_POINTER;
-            create_integer((void*) &r);
-            *r = 0;
-            // The current byte within the stream.
-            void* b = *s;
-            // The remaining bytes count.
-            int bc = **sc;
+            if ((l == 1) || (bc <= 0)) {
 
-            while (1) {
-
-                if ((l == 1) || (bc <= 0)) {
-
-                    break;
-                }
-
-                if (*r != 1) {
-
-                    if (bc >= *END_COMMENT_TAG_COUNT) {
-
-                        compare_array_elements((void*) &b, (void*) &END_COMMENT_TAG, (void*) &CHARACTER_ARRAY, (void*) &END_COMMENT_TAG_COUNT, (void*) &r);
-
-                        if (*r == 1) {
-
-                            // Move current byte pointer
-                            // and remaining bytes count.
-                            b = b + *END_COMMENT_TAG_COUNT;
-                            bc = bc - *END_COMMENT_TAG_COUNT;
-
-                            // Set leave flag.
-                            l = 1;
-                        }
-                    }
-                }
-
-                if (*r != 1) {
-
-                    if (bc >= *SHORT_END_COMMENT_TAG_COUNT) {
-
-                        compare_array_elements((void*) &b, (void*) &SHORT_END_COMMENT_TAG, (void*) &CHARACTER_ARRAY, (void*) &SHORT_END_COMMENT_TAG_COUNT, (void*) &r);
-
-                        if (*r == 1) {
-
-                            // Move current byte pointer
-                            // and remaining bytes count.
-                            b = b + *SHORT_END_COMMENT_TAG_COUNT;
-                            bc = bc - *SHORT_END_COMMENT_TAG_COUNT;
-
-                            // Set leave flag.
-                            l = 1;
-                        }
-                    }
-                }
-
-                // If this block is reached, then no known term was found before.
-                // The current byte pointer will just be incremented by one so
-                // that new characters are read and compared in the next loop cycle.
-                if (*r != 1) {
-
-                    // Increment current byte within persistent model.
-                    b++;
-                    // Decrement remaining bytes count.
-                    bc--;
-                }
-
-                // Reset comparison result.
-                *r = 0;
+                break;
             }
 
-            destroy_integer((void*) &r);
+            if (r != 1) {
 
-        } else {
+                if (bc >= *END_COMMENT_TAG_COUNT) {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize compound. The persistent model is null.");
+                    compare_array_elements((void*) b, (void*) END_COMMENT_TAG, (void*) END_COMMENT_TAG_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                    if (r == 1) {
+
+                        // Move current byte pointer
+                        // and remaining bytes count.
+                        b = b + *END_COMMENT_TAG_COUNT;
+                        bc = bc - *END_COMMENT_TAG_COUNT;
+
+                        // Set leave flag.
+                        l = 1;
+                    }
+                }
+            }
+
+            if (r != 1) {
+
+                if (bc >= *SHORT_END_COMMENT_TAG_COUNT) {
+
+                    compare_array_elements((void*) b, (void*) SHORT_END_COMMENT_TAG, (void*) SHORT_END_COMMENT_TAG_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                    if (r == 1) {
+
+                        // Move current byte pointer
+                        // and remaining bytes count.
+                        b = b + *SHORT_END_COMMENT_TAG_COUNT;
+                        bc = bc - *SHORT_END_COMMENT_TAG_COUNT;
+
+                        // Set leave flag.
+                        l = 1;
+                    }
+                }
+            }
+
+            // If this block is reached, then no known term was found before.
+            // The current byte pointer will just be incremented by one so
+            // that new characters are read and compared in the next loop cycle.
+            if (r != 1) {
+
+                // Increment current byte within persistent model.
+                b++;
+                // Decrement remaining bytes count.
+                bc--;
+            }
+
+            // Reset comparison result.
+            r = 0;
         }
 
     } else {
@@ -164,77 +151,64 @@ void parse_xml_tag(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 
     if (p4 != NULL_POINTER) {
 
-        int** sc = (int**) p4;
+        int* sc = (int*) p4;
 
-        if (p3 != NULL_POINTER) {
+        // The leave flag.
+        int l = 0;
+        // The comparison result.
+        int r = 0;
+        // The current byte within the stream.
+        void* b = (void*) p3;
+        // The remaining bytes count.
+        int bc = *sc;
 
-            void** s = (void**) p3;
+        while (1) {
 
-            // The leave flag.
-            int l = 0;
-            // The comparison result.
-            int* r = INTEGER_NULL_POINTER;
-            create_integer((void*) &r);
-            *r = 0;
-            // The current byte within the stream.
-            void* b = *s;
-            // The remaining bytes count.
-            int bc = **sc;
+            if ((l == 1) || (bc <= 0)) {
 
-            while (1) {
-
-                if ((l == 1) || (bc <= 0)) {
-
-                    break;
-                }
-
-                if (*r != 1) {
-
-                    if (bc >= *EMPTY_TAG_END_COUNT) {
-
-                        compare_array_elements((void*) &b, (void*) &EMPTY_TAG_END, (void*) &CHARACTER_ARRAY, (void*) &EMPTY_TAG_END_COUNT, (void*) &r);
-
-                        if (*r == 1) {
-
-                            // Move current byte pointer
-                            // and remaining bytes count.
-                            b = b + *EMPTY_TAG_END_COUNT;
-                            bc = bc - *EMPTY_TAG_END_COUNT;
-
-                            // Set leave flag.
-                            l = 1;
-                        }
-                    }
-                }
-
-                if (*r != 1) {
-
-                    if (bc >= *TAG_END_COUNT) {
-
-                        compare_array_elements((void*) &b, (void*) &TAG_END, (void*) &CHARACTER_ARRAY, (void*) &TAG_END_COUNT, (void*) &r);
-
-                        if (*r == 1) {
-
-                            // Move current byte pointer
-                            // and remaining bytes count.
-                            b = b + *TAG_END_COUNT;
-                            bc = bc - *TAG_END_COUNT;
-
-                            // Parse xml value.
-//??                            parse_xml_value((void*) &b, (void*) &bc);
-                        }
-                    }
-                }
-
-                // Reset comparison result.
-                *r = 0;
+                break;
             }
 
-            destroy_integer((void*) &r);
+            if (r != 1) {
 
-        } else {
+                if (bc >= *EMPTY_TAG_END_COUNT) {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize compound. The persistent model is null.");
+                    compare_array_elements((void*) b, (void*) EMPTY_TAG_END, (void*) EMPTY_TAG_END_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                    if (r == 1) {
+
+                        // Move current byte pointer
+                        // and remaining bytes count.
+                        b = b + *EMPTY_TAG_END_COUNT;
+                        bc = bc - *EMPTY_TAG_END_COUNT;
+
+                        // Set leave flag.
+                        l = 1;
+                    }
+                }
+            }
+
+            if (r != 1) {
+
+                if (bc >= *TAG_END_COUNT) {
+
+                    compare_array_elements((void*) b, (void*) TAG_END, (void*) TAG_END_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                    if (r == 1) {
+
+                        // Move current byte pointer
+                        // and remaining bytes count.
+                        b = b + *TAG_END_COUNT;
+                        bc = bc - *TAG_END_COUNT;
+
+                        // Parse xml value.
+//??                        parse_xml_value((void*) &b, (void*) &bc);
+                    }
+                }
+            }
+
+            // Reset comparison result.
+            r = 0;
         }
 
     } else {
@@ -250,7 +224,7 @@ void parse_xml_tag(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 /**
  * Parses the byte stream and creates an xml model from it.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source
@@ -260,11 +234,11 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     if (p4 != NULL_POINTER) {
 
-        int** sc = (int**) p4;
+        int* sc = (int*) p4;
 
         if (p3 != NULL_POINTER) {
 
-            void** s = (void**) p3;
+            void* s = (void*) p3;
 
             if (p0 != NULL_POINTER) {
 
@@ -277,26 +251,21 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
                 // The temporary null-terminated file name.
                 char* tmp = NULL_POINTER;
-                // The temporary null-terminated file name count.
-                int* tmps = INTEGER_NULL_POINTER;
-                create_integer((void*) &tmps);
-                *tmps = **sc + 1;
+                int tmps = *sc + 1;
                 // The index.
-                int* i = INTEGER_NULL_POINTER;
-                create_integer((void*) &i);
-                *i = 0;
+                int i = 0;
 
                 // Create temporary null-terminated file name.
-                create_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
+                create_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
 
                 // Copy original file name to temporary null-terminated file name.
-                set_array_elements((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
+                set_array_elements((void*) tmp, (void*) &i, p3, p4, (void*) CHARACTER_ARRAY);
 
                 // This is used as index to set the termination character.
-                *i = **sc;
+                i = *sc;
 
                 // Add string termination to temporary null-terminated file name.
-                set_array_elements((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CONTROL_CHARACTER, (void*) &NULL_CONTROL_CHARACTER_COUNT);
+                set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_CHARACTER, (void*) NULL_CONTROL_CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
 
                 // Initialize the library.
                 // Check potential ABI mismatches between the version
@@ -310,14 +279,8 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                 // Free global variables that may have been allocated by the parser.
                 xmlCleanupParser();
 
-                // Destroy index.
-                destroy_integer((void*) &i);
-
-                // Destroy temporary null-terminated file name count.
-                destroy_integer((void*) &tmps);
-
                 // Destroy temporary null-terminated file name.
-                destroy_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
+                destroy_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
 
                 //??
                 //?? END of temporary workaround for using the libxml2 parser.
@@ -444,7 +407,7 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 /**
  * Serializes the xml model and creates a byte stream from it.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source

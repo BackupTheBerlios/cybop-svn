@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-01-10 14:46:33 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,7 +45,7 @@
 /**
  * Parses the byte stream and creates a time model from it.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source
@@ -55,11 +55,11 @@ void parse_time(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     if (p4 != NULL_POINTER) {
 
-        int** sc = (int**) p4;
+        int* sc = (int*) p4;
 
         if (p3 != NULL_POINTER) {
 
-            void** s = (void**) p3;
+            void* s = (void*) p3;
 
             if (p0 != NULL_POINTER) {
 
@@ -106,7 +106,7 @@ void parse_time(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 /**
  * Serializes the time model and creates a byte stream from it.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source

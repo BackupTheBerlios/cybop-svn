@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-01-12 19:18:55 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,7 +44,7 @@
 /**
  * Parses the byte stream and creates a double model from it.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source
@@ -54,32 +54,28 @@ void parse_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
     if (p4 != NULL_POINTER) {
 
-        int** sc = (int**) p4;
+        int* sc = (int*) p4;
 
 //??        log_message((void*) &INFO_LOG_LEVEL, (void*) &PARSE_INTEGER_MESSAGE, (void*) &PARSE_INTEGER_MESSAGE_COUNT);
 
         // The temporary null-terminated string.
         char* tmp = NULL_POINTER;
-
-        // The temporary null-terminated string size.
-        int* tmps = INTEGER_NULL_POINTER;
-        create_integer((void*) &tmps);
-        *tmps = **sc + 1;
-
-        // The index.
-        int* i = INTEGER_NULL_POINTER;
-        create_integer((void*) &i);
-        *i = 0;
+        int tmps = *sc + 1;
 
         // Create temporary null-terminated string.
-        create_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
+        create_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+
+        // The index.
+        int i = 0;
 
         // Copy original string to temporary null-terminated string.
-        set_array_elements((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, p3, p4);
+        set_array_elements((void*) tmp, (void*) &i, p3, p4, (void*) CHARACTER_ARRAY);
+
         // This is used as index to set the termination character.
-        *i = **sc;
+        i = *sc;
+
         // Add string termination to temporary null-terminated string.
-        set_array_elements((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CONTROL_CHARACTER, (void*) &ONE_NUMBER);
+        set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_CHARACTER, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
 
         // The tail variable is useless here and only needed for the string
         // transformation function. If the whole string array consists of
@@ -99,19 +95,17 @@ void parse_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
         // Again, case is ignored.
         // If chars... are provided, they are used in some unspecified fashion
         // to select a particular representation of NaN (there can be several).
-        double* v = DOUBLE_NULL_POINTER;
-        create_double((void*) &v);
-        *v = strtod(tmp, &tail);
+        double v = strtod(tmp, &tail);
+
+        //?? p0 (Hand over as reference!)
+        //?? Doesn't p0 need to be resized from size 0 to size 1,
+        //?? to be able to take the double value?
 
         // Set double value.
-        set_array_elements(p0, (void*) &DOUBLE_ARRAY, (void*) &DOUBLE_VALUE_INDEX, (void*) &v, (void*) &ONE_NUMBER);
+        set_array_elements(p0, (void*) DOUBLE_VALUE_INDEX, (void*) &v, (void*) ONE_NUMBER, (void*) DOUBLE_ARRAY);
 
         // Destroy temporary null-terminated string.
-        destroy_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
-
-        destroy_double((void*) &v);
-        destroy_double((void*) &i);
-        destroy_double((void*) &tmps);
+        destroy_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
 
     } else {
 
@@ -122,7 +116,7 @@ void parse_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 /**
  * Serializes the double model and creates a byte stream from it.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source
@@ -132,11 +126,11 @@ void serialize_double(void* p0, void* p1, void* p2, const void* p3, const void* 
 
     if (p2 != NULL_POINTER) {
 
-        int** ds = (int**) p2;
+        int* ds = (int*) p2;
 
         if (p1 != NULL_POINTER) {
 
-            int** dc = (int**) p1;
+            int* dc = (int*) p1;
 
             if (p0 != NULL_POINTER) {
 
@@ -148,24 +142,24 @@ void serialize_double(void* p0, void* p1, void* p2, const void* p3, const void* 
                 double* v = DOUBLE_NULL_POINTER;
 
                 // Get double value.
-                get_array_elements(p3, (void*) &DOUBLE_ARRAY, (void*) &DOUBLE_VALUE_INDEX, (void*) &v);
+                get_array_elements(p3, (void*) DOUBLE_VALUE_INDEX, (void*) &v, (void*) DOUBLE_ARRAY);
 
                 //?? TODO: set_array_elements is missing!
                 //?? The get_array_elements procedure does NOT copy values;
                 //?? it returns just a reference to the corresponding value!
 
                 // Transform source double to destination string.
-                **dc = snprintf(*d, **ds, "%d", *v);
+                *dc = snprintf(*d, *ds, "%d", *v);
 
                 // Set destination string size one greater than the count
                 // to have space for the terminating null character.
-                **ds = **dc + 1;
+                *ds = *dc + 1;
 
                 // Resize destination string.
-                resize_array(p0, (void*) &CHARACTER_ARRAY, p2);
+                resize_array(p0, p2, (void*) CHARACTER_ARRAY);
 
                 // Transform source double to destination string.
-                **dc = snprintf(*d, **ds, "%d", *v);
+                *dc = snprintf(*d, *ds, "%d", *v);
 
                 // CAUTION! Recalculate string count because only in versions
                 // of the GNU C library prior to 2.1, the snprintf function
@@ -175,7 +169,7 @@ void serialize_double(void* p0, void* p1, void* p2, const void* p3, const void* 
                 // This was CHANGED in order to comply with the ISO C99 standard.
                 // As usual, the string count does NOT contain the terminating
                 // null character.
-                **dc = strlen(*d);
+                *dc = strlen(*d);
 
             } else {
 

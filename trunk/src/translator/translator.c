@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-01-17 23:46:30 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,7 @@
  * Decodes the document model according to the given document type
  * and creates a cyboi compound model from it.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source
@@ -82,7 +82,7 @@ void decode(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  * Encodes the cyboi compound model according to the given document type
  * and creates a document model from it.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source

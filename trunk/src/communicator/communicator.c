@@ -25,7 +25,7 @@
  * - receive data into a byte array
  * - send data from a byte array
  *
- * @version $Revision: 1.6 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,7 +49,7 @@
  * CAUTION! This procedure cannot be called "receive"
  * as that name is already used by the socket mechanism.
  *
- * @param p0 the destination (byte array)
+ * @param p0 the destination (byte array) (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source
@@ -111,7 +111,7 @@ void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p
  * CAUTION! This procedure cannot be called "send"
  * as that name is already used by the socket mechanism.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source (byte array)

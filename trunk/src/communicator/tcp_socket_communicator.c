@@ -25,7 +25,7 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.6 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -41,7 +41,7 @@
 /**
  * Receives an http stream and writes it into a byte array.
  *
- * @param p0 the destination (byte array)
+ * @param p0 the destination (byte array) (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source (http url)
@@ -55,7 +55,7 @@ void receive_tcp_socket(void* p0, void* p1, void* p2, const void* p3, const void
 /**
  * Sends an http stream that was read from a byte array.
  *
- * @param p0 the destination (client socket number)
+ * @param p0 the destination (client socket number) (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source (byte array)
@@ -67,34 +67,25 @@ void send_tcp_socket(void* p0, void* p1, void* p2, const void* p3, const void* p
 
         int* sc = (int*) p4;
 
-        if (p3 != NULL_POINTER) {
+        if (p0 != NULL_POINTER) {
 
-            void* s = (void*) p3;
+            int** d = (int**) p0;
 
-            if (p0 != NULL_POINTER) {
+            // The output.
+            void* o = (void*) p3;
+            // The output count.
+            int oc = *sc;
+            // The send byte gets returned.
+            int b = send(**d, o, oc, 0);
 
-                int* d = (int*) p0;
+            if (b < 0) {
 
-                // The output.
-                void* o = s;
-                // The output count.
-                int oc = *sc;
-                // The send byte gets returned.
-                int b = send(*d, o, oc, 0);
-
-                if (b < 0) {
-
-                    log_message_debug("ERROR: Could not send via tcp socket.");
-                }
-
-            } else {
-
-                log_message_debug("ERROR: The destination (client socket number) is null.");
+                log_message_debug("ERROR: Could not send via tcp socket.");
             }
 
         } else {
 
-            log_message_debug("ERROR: The source is null.");
+            log_message_debug("ERROR: The destination (client socket number) is null.");
         }
 
     } else {

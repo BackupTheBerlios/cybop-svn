@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-01-17 23:46:29 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,7 +38,7 @@
 /**
  * Receives a tui source and writes it into a destination byte array.
  *
- * @param p0 the destination (byte array)
+ * @param p0 the destination (byte array) (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source
@@ -160,7 +160,7 @@ void receive_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 /**
  * Sends a destination tui that was read from a source byte array.
  *
- * @param p0 the destination
+ * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source
@@ -178,7 +178,7 @@ void send_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
             if (p0 != NULL_POINTER) {
 
-                void* d = (void*) p0;
+                void** d = (void**) p0;
 
 //??                if (strcmp("linux", getenv("TERM")) == 0) {
 
