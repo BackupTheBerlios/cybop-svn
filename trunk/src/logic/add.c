@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-01-18 15:07:01 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-03-02 07:20:28 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,9 +29,17 @@
 #define ADD_SOURCE
 
 #include "../accessor/compound_accessor.c"
+#include "../array/array.c"
+#include "../creator/creator.c"
+#include "../communicator/communicator.c"
 #include "../global/abstraction_constants.c"
 #include "../global/log_constants.c"
+#include "../global/name_constants.c"
 #include "../logger/logger.c"
+#include "../parser/parser.c"
+#include "../translator/translator.c"
+#include "../test/test.c"
+
 
 /**
  * Adds two integer summands resulting in the integer sum.
@@ -128,6 +136,129 @@ void add_primitives(void* p0, const void* p1, const void* p2, const void* p3, co
  */
 void add(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
+
+    // The opernad 1 abstraction.
+    void** op1a = POINTER_NULL_POINTER;
+    void** op1ac = POINTER_NULL_POINTER;
+    void** op1as = POINTER_NULL_POINTER;
+    // The opmmand 1 model.
+    void** op1m = POINTER_NULL_POINTER;
+    void** op1mc = POINTER_NULL_POINTER;
+    void** op1ms = POINTER_NULL_POINTER;
+    // The opmmand 1 details.
+    void** op1d = POINTER_NULL_POINTER;
+    void** op1dc = POINTER_NULL_POINTER;
+    void** op1ds = POINTER_NULL_POINTER;
+
+    // The summand 2 abstraction.
+    void** op2a = POINTER_NULL_POINTER;
+    void** op2ac = POINTER_NULL_POINTER;
+    void** op2as = POINTER_NULL_POINTER;
+    // The opmmand 2 model.
+    void** op2m = POINTER_NULL_POINTER;
+    void** op2mc = POINTER_NULL_POINTER;
+    void** op2ms = POINTER_NULL_POINTER;
+    // The opmmand 2 details.
+    void** op2d = POINTER_NULL_POINTER;
+    void** op2dc = POINTER_NULL_POINTER;
+    void** op2ds = POINTER_NULL_POINTER;
+
+    // The result abstraction.
+    void** ra = POINTER_NULL_POINTER;
+    void** rac = POINTER_NULL_POINTER;
+    void** ras = POINTER_NULL_POINTER;
+    // The result index model.
+    void** rm = POINTER_NULL_POINTER;
+    void** rmc = POINTER_NULL_POINTER;
+    void** rms = POINTER_NULL_POINTER;
+    // The result index details.
+    void** rd = POINTER_NULL_POINTER;
+    void** rdc = POINTER_NULL_POINTER;
+    void** rds = POINTER_NULL_POINTER;
+
+    // get the operand 1
+    get_real_compound_element_by_name( p0, p1,
+        (void*) ADD_OPERAND_1_NAME_ABSTRACTION, 
+        (void*) ADD_OPERAND_1_NAME_ABSTRACTION_COUNT,
+        (void*) &op1a, (void*) &op1ac, (void*) &op1as,
+        (void*) &op1m, (void*) &op1mc, (void*) &op1ms,
+        (void*) &op1d, (void*) &op1dc, (void*) &op1ds,
+        p2, p3 );
+
+    // get the operand 2
+    get_real_compound_element_by_name( p0, p1,
+        (void*) ADD_OPERAND_2_NAME_ABSTRACTION, 
+        (void*) ADD_OPERAND_2_NAME_ABSTRACTION_COUNT,
+        (void*) &op2a, (void*) &op2ac, (void*) &op2as,
+        (void*) &op2m, (void*) &op2mc, (void*) &op2ms,
+        (void*) &op2d, (void*) &op2dc, (void*) &op2ds,
+        p2, p3 );
+
+    // get the result
+    get_real_compound_element_by_name( p0, p1,
+        (void*) ADD_RESULT_NAME_ABSTRACTION, 
+        (void*) ADD_RESULT_NAME_ABSTRACTION_COUNT,
+        (void*) &ra, (void*) &rac, (void*) &ras,
+        (void*) &rm, (void*) &rmc, (void*) &rms,
+        (void*) &rd, (void*) &rdc, (void*) &rds,
+        p2, p3 );
+
+    // Check operand 1.
+    if (   (op1a != POINTER_NULL_POINTER)
+        && (op1ac != POINTER_NULL_POINTER)
+        && (op1as != POINTER_NULL_POINTER)
+        && (op1m != POINTER_NULL_POINTER)
+        && (op1mc != POINTER_NULL_POINTER)
+        && (op1ms != POINTER_NULL_POINTER)
+        && (op1d != POINTER_NULL_POINTER)
+        && (op1dc != POINTER_NULL_POINTER)
+        && (op1ds != POINTER_NULL_POINTER)
+        // Check operand 2.
+        && (op2a != POINTER_NULL_POINTER)
+        && (op2ac != POINTER_NULL_POINTER)
+        && (op2as != POINTER_NULL_POINTER)
+        && (op2m != POINTER_NULL_POINTER)
+        && (op2mc != POINTER_NULL_POINTER)
+        && (op2ms != POINTER_NULL_POINTER)
+        && (op2d != POINTER_NULL_POINTER)
+        && (op2dc != POINTER_NULL_POINTER)
+        && (op2ds != POINTER_NULL_POINTER)
+        // result.
+        && (ra != POINTER_NULL_POINTER)
+        && (rac != POINTER_NULL_POINTER)
+        && (ras != POINTER_NULL_POINTER)
+        && (rm != POINTER_NULL_POINTER)
+        && (rmc != POINTER_NULL_POINTER)
+        && (rms != POINTER_NULL_POINTER)
+        && (rd != POINTER_NULL_POINTER)
+        && (rdc != POINTER_NULL_POINTER)
+        && (rds != POINTER_NULL_POINTER)
+        )
+    {
+
+        int r1 = 0;
+        int r2 = 0;
+        int r3 = 0;
+        //check the abstracton from operand_1 and operand_2
+        //the abstarction msut be the same
+        compare_arrays( *op1a, *op1ac, 
+                        (void*) INTEGER_ABSTRACTION, 
+                        (void*) INTEGER_ABSTRACTION_COUNT, 
+                        (void*) &r1, (void*) CHARACTER_ARRAY);
+        compare_arrays( *op2a, *op2ac, 
+                        (void*) INTEGER_ABSTRACTION, 
+                        (void*) INTEGER_ABSTRACTION_COUNT, 
+                        (void*) &r2, (void*) CHARACTER_ARRAY);
+        compare_arrays( *ra, *rac, 
+                        (void*) INTEGER_ABSTRACTION, 
+                        (void*) INTEGER_ABSTRACTION_COUNT, 
+                        (void*) &r3, (void*) CHARACTER_ARRAY);
+
+        if ( (r1==1) && (r2==1) && (r3==1) ) {
+         
+            add_integers( *rm, *op1m, *op2m );  
+        }        
+    }
 /*??
     if (p0 != NULL_POINTER) {
 
