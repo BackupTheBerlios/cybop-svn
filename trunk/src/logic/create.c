@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.31 $ $Date: 2005-03-10 09:59:10 $ $Author: rholzmueller $
+ * @version $Revision: 1.32 $ $Date: 2005-03-20 01:43:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -104,13 +104,15 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
 
             compare_arrays(p1, p2, (void*) COMPLEX_ABSTRACTION, (void*) COMPLEX_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
+
         if (*p != 1) {
 
-            compare_arrays(p1, p2, (void*) KNOWLEDGE_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_MEMORY_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
+
         if (*p != 1) {
 
-            compare_arrays(p1, p2, (void*) ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
+            compare_arrays(p1, p2, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, p0, (void*) CHARACTER_ARRAY);
         }
 
     } else {

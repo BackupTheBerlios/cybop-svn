@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-02-25 01:35:09 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-03-20 01:43:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -87,8 +87,8 @@ void startup_input_output(void* p0) {
         f = POINTER_NULL_POINTER;
     }
 
-    // X windows server.
-    get_array_elements(p0, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
+    // X windows.
+    get_array_elements(p0, (void*) X_WINDOWS_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (f != NULL_POINTER) {
 
@@ -96,7 +96,7 @@ void startup_input_output(void* p0) {
 
         if (r == 1) {
 
-//??            create_x_windows_server(p0);
+//??            create_x_windows_display(p0);
             r = 0;
         }
 
@@ -155,8 +155,8 @@ void shutdown_input_output(void* p0) {
         f = POINTER_NULL_POINTER;
     }
 
-    // X windows server.
-    get_array_elements(p0, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
+    // X windows.
+    get_array_elements(p0, (void*) X_WINDOWS_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (f != NULL_POINTER) {
 
@@ -164,7 +164,7 @@ void shutdown_input_output(void* p0) {
 
         if (r == 1) {
 
-//??            destroy_x_windows_server(p0);
+//??            destroy_x_windows_display(p0);
             r = 0;
         }
 

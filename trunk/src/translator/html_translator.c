@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-03-20 01:43:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -334,41 +334,35 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
                 encode_html_compound( dest, dest_count, dest_size,
                                       source_model, source_model_count,
                                       source_detail, source_detail_count,
-                                      know, know_count );
+                                      know, know_count);
             }
         }
 
         if (r != 1) {
 
-            compare_arrays( source_abstr, source_abstr_count,
-                            (void*) KNOWLEDGE_MEMORY_ABSTRACTION,
-                            (void*) KNOWLEDGE_MEMORY_ABSTRACTION_COUNT,
-                            (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(source_abstr, source_abstr_count, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
             if (r == 1) {
 
-                encode_html_knowledgememory(
-                    dest, dest_count, dest_size,
+                encode_html_knowledgememory(dest, dest_count, dest_size,
                     source_model, source_model_count,
                     source_detail, source_detail_count,
-                    know, know_count );
+                    know, know_count);
             }
         }
 
         if (r != 1) {
 
-            compare_arrays( source_abstr, source_abstr_count,
-                            (void*) CYBOL_ABSTRACTION,
-                            (void*) CYBOL_ABSTRACTION_COUNT,
-                            (void*) &r, (void*) CHARACTER_ARRAY);
+            compare_arrays(source_abstr, source_abstr_count, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
             if (r == 1) {
 
-                encode_html_compound( dest, dest_count, dest_size,
-                                      source_model, source_model_count,
-                                      source_detail, source_detail_count,
-                                      know, know_count );
+                encode_html_compound(dest, dest_count, dest_size,
+                                     source_model, source_model_count,
+                                     source_detail, source_detail_count,
+                                     know, know_count);
             }
         }
-
 
         if (r != 1) {
 

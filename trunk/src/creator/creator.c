@@ -25,7 +25,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.15 $ $Date: 2005-03-10 09:53:39 $ $Author: rholzmueller $
+ * @version $Revision: 1.16 $ $Date: 2005-03-20 01:43:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,6 +61,26 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
     // The comparison result.
     int r = 0;
+
+    if (r != 1) {
+
+        compare_arrays(p2, p3, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            create_string(p0, p1);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p2, p3, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            create_string(p0, p1);
+        }
+    }
 
     if (r != 1) {
 
@@ -201,7 +221,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
             create_internals_memory(p0, p1);
         }
     }
-    
+
     if (r != 1) {
 
         compare_arrays(p2, p3, (void*) KNOWLEDGE_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
@@ -211,17 +231,6 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
             create_string(p0, p1);
         }
     }
-
-    if (r != 1) {
-
-        compare_arrays(p2, p3, (void*) ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            create_string(p0, p1);
-        }
-    }
-    
 }
 
 /**

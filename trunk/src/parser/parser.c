@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-03-10 10:00:59 $ $Author: rholzmueller $
+ * @version $Revision: 1.17 $ $Date: 2005-03-20 01:43:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,6 +63,26 @@ void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
     if (r != 1) {
 
+        compare_arrays(p5, p6, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            parse_string(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p5, p6, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            parse_string(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r != 1) {
+
         compare_arrays(p5, p6, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
@@ -84,26 +104,6 @@ void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     if (r != 1) {
 
         compare_arrays(p5, p6, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            parse_string(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r != 1) {
-
-        compare_arrays(p5, p6, (void*) KNOWLEDGE_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            parse_string(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r != 1) {
-
-        compare_arrays(p5, p6, (void*) ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 

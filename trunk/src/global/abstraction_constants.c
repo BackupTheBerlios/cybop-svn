@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
+ * @version $Revision: 1.18 $ $Date: 2005-03-20 01:43:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,22 +58,33 @@ static const char* SIGNAL_MEMORY_ABSTRACTION = SIGNAL_MEMORY_ABSTRACTION_ARRAY;
 static const int SIGNAL_MEMORY_ABSTRACTION_COUNT_ARRAY[] = {13};
 static const int* SIGNAL_MEMORY_ABSTRACTION_COUNT = SIGNAL_MEMORY_ABSTRACTION_COUNT_ARRAY;
 
-
 //
 // Knowledge memory abstraction.
 //
 
 /** The knowledge memory abstraction. */
-static const char KNOWLEDGE_MEMORY_ABSTRACTION_ARRAY[] = {'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e'};
+static const char KNOWLEDGE_MEMORY_ABSTRACTION_ARRAY[] = {'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e', '_', 'm', 'e', 'm', 'o', 'r', 'y'};
 static const char* KNOWLEDGE_MEMORY_ABSTRACTION = KNOWLEDGE_MEMORY_ABSTRACTION_ARRAY;
-static const int KNOWLEDGE_MEMORY_ABSTRACTION_COUNT_ARRAY[] = {9};
+static const int KNOWLEDGE_MEMORY_ABSTRACTION_COUNT_ARRAY[] = {16};
 static const int* KNOWLEDGE_MEMORY_ABSTRACTION_COUNT = KNOWLEDGE_MEMORY_ABSTRACTION_COUNT_ARRAY;
 
-/** The encapsulated knowledge memory abstraction. */
-static const char ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_ARRAY[] = {'e', 'n', 'c', 'a', 'p', 's', 'u', 'l', 'a', 't', 'e', 'd', '_', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e'};
-static const char* ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION = ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_ARRAY;
-static const int ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_COUNT_ARRAY[] = {22};
-static const int* ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_COUNT = ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_COUNT_ARRAY;
+//
+// Knowledge abstraction.
+//
+// Parts in a compound knowledge tree are accessed at runtime.
+//
+
+/** The knowledge abstraction. */
+static const char KNOWLEDGE_ABSTRACTION_ARRAY[] = {'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e'};
+static const char* KNOWLEDGE_ABSTRACTION = KNOWLEDGE_ABSTRACTION_ARRAY;
+static const int KNOWLEDGE_ABSTRACTION_COUNT_ARRAY[] = {9};
+static const int* KNOWLEDGE_ABSTRACTION_COUNT = KNOWLEDGE_ABSTRACTION_COUNT_ARRAY;
+
+/** The encapsulated knowledge abstraction. */
+static const char ENCAPSULATED_KNOWLEDGE_ABSTRACTION_ARRAY[] = {'e', 'n', 'c', 'a', 'p', 's', 'u', 'l', 'a', 't', 'e', 'd', '_', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e'};
+static const char* ENCAPSULATED_KNOWLEDGE_ABSTRACTION = ENCAPSULATED_KNOWLEDGE_ABSTRACTION_ARRAY;
+static const int ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT_ARRAY[] = {22};
+static const int* ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT = ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT_ARRAY;
 
 //
 // Compound abstraction.
@@ -491,7 +502,7 @@ static const int DESTROY_PART_ABSTRACTION_COUNT_ARRAY[] = {12};
 static const int* DESTROY_PART_ABSTRACTION_COUNT = DESTROY_PART_ABSTRACTION_COUNT_ARRAY;
 
 //
-// Input output abstractions.
+// Communication abstractions.
 //
 
 /** The send abstraction. */
@@ -507,8 +518,20 @@ static const int RECEIVE_ABSTRACTION_COUNT_ARRAY[] = {7};
 static const int* RECEIVE_ABSTRACTION_COUNT = RECEIVE_ABSTRACTION_COUNT_ARRAY;
 
 //
-// Lifecycle step abstractions.
+// Lifecycle abstractions.
 //
+
+/** The startup abstraction. */
+static const char STARTUP_ABSTRACTION_ARRAY[] = {'s', 't', 'a', 'r', 't', 'u', 'p'};
+static const char* STARTUP_ABSTRACTION = STARTUP_ABSTRACTION_ARRAY;
+static const int STARTUP_ABSTRACTION_COUNT_ARRAY[] = {7};
+static const int* STARTUP_ABSTRACTION_COUNT = STARTUP_ABSTRACTION_COUNT_ARRAY;
+
+/** The shutdown abstraction. */
+static const char SHUTDOWN_ABSTRACTION_ARRAY[] = {'s', 'h', 'u', 't', 'd', 'o', 'w', 'n'};
+static const char* SHUTDOWN_ABSTRACTION = SHUTDOWN_ABSTRACTION_ARRAY;
+static const int SHUTDOWN_ABSTRACTION_COUNT_ARRAY[] = {8};
+static const int* SHUTDOWN_ABSTRACTION_COUNT = SHUTDOWN_ABSTRACTION_COUNT_ARRAY;
 
 /** The exit abstraction. */
 static const char EXIT_ABSTRACTION_ARRAY[] = {'e', 'x', 'i', 't'};

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2005-03-10 09:52:22 $ $Author: rholzmueller $
+ * @version $Revision: 1.24 $ $Date: 2005-03-20 01:43:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1737,27 +1737,20 @@ void get_real_compound_element_by_name(const void* p0, const void* p1,
          (p10 != POINTER_NULL_POINTER) &&
          (p11 != POINTER_NULL_POINTER) &&
          (p12 != POINTER_NULL_POINTER) &&
-         (a != POINTER_NULL_POINTER) &&    
+         (a != POINTER_NULL_POINTER) &&
          (ac != POINTER_NULL_POINTER) &&
          (as != POINTER_NULL_POINTER) &&
-         (m != POINTER_NULL_POINTER) &&    
+         (m != POINTER_NULL_POINTER) &&
          (mc != POINTER_NULL_POINTER) &&
-         (ms != POINTER_NULL_POINTER) ) 
-    {
-    
+         (ms != POINTER_NULL_POINTER)) {
+
         int r1 = 0;
-        compare_arrays( *a, *ac,
-                        (void*) KNOWLEDGE_MEMORY_ABSTRACTION,
-                        (void*) KNOWLEDGE_MEMORY_ABSTRACTION_COUNT,
-                        &r1, (void*) CHARACTER_ARRAY );
+        compare_arrays(*a, *ac, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, &r1, (void*) CHARACTER_ARRAY);
 
         int r2 = 0;
-        compare_arrays( *a, *ac,
-                        (void*) ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION,
-                        (void*) ENCAPSULATED_KNOWLEDGE_MEMORY_ABSTRACTION_COUNT,
-                        &r2, (void*) CHARACTER_ARRAY );
-                        
-        if ( (r1==1) || (r2==1) ) {
+        compare_arrays(*a, *ac, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, &r2, (void*) CHARACTER_ARRAY);
+
+        if ((r1 == 1) || (r2 == 1)) {
 
             // The abstraction, model, details for the encapsulated.
             void** ea = POINTER_NULL_POINTER;
@@ -1776,14 +1769,14 @@ void get_real_compound_element_by_name(const void* p0, const void* p1,
                 (void*) &ea, (void*) &eac, (void*) &eas,
                 (void*) &em, (void*) &emc, (void*) &ems,
                 (void*) &ed, (void*) &edc, (void*) &eds);
-            
+
             if (r2==1) {
-              
+
                 get_compound_element_by_name(p13, p14, *em, *emc,
                     p4, p5, p6, p7, p8, p9, p10, p11, p12);
             }
             else {
-                
+
                 *(void**)p4  = ea;
                 *(void**)p5  = eac;
                 *(void**)p6  = eas;

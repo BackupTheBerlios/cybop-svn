@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2005-03-20 01:43:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -95,8 +95,8 @@ void activate_input_output(void* p0) {
         f = POINTER_NULL_POINTER;
     }
 
-    // X windows server.
-    get_array_elements(p0, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
+    // X windows.
+    get_array_elements(p0, (void*) X_WINDOWS_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (f != NULL_POINTER) {
 

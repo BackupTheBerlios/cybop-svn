@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2005-03-18 07:40:51 $ $Author: rholzmueller $
+ * @version $Revision: 1.25 $ $Date: 2005-03-20 01:43:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -45,14 +45,16 @@
 #include "../logic/selection.c"
 #include "../logic/send.c"
 #include "../logic/set.c"
+#include "../logic/shutdown.c"
+#include "../logic/startup.c"
 #include "../test/test.c"
 #include "../x_windows/x_windows_handler.c"
 
 
-void loop( const void* param, const int* param_count, 
+void loop( const void* param, const int* param_count,
            const void* priority, const void* signal_id, void* shutdownflag,
            void* internal );
-void selection( const void* param, const int* param_count, 
+void selection( const void* param, const int* param_count,
            const void* priority, const void* signal_id, void* shutdownflag,
            void* internal );
 void handle_signal(const void* p0, const void* p1, const void* p2, const void* p3,
@@ -75,14 +77,14 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
     if (p1 != NULL_POINTER) {
 
         int* sc = (int*) p1;
-        
+
         int direct_execution_flag = 0;
         //direct execution flag
         if (p6 != NULL_POINTER) {
-         
+
             direct_execution_flag = *((int*)p6);
         };
-        
+
         // The signal memory.
         void** sm = POINTER_NULL_POINTER;
         void** smc = POINTER_NULL_POINTER;
@@ -287,7 +289,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            add(p2, p3, *km, *kmc, *kms );
+            add(p2, p3, *km, *kmc, *kms);
         }
     }
 
@@ -297,7 +299,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            create_part(p2, p3, *km, *kmc, *kms );
+            create_part(p2, p3, *km, *kmc, *kms);
         }
     }
 
@@ -307,7 +309,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            destroy_part(p2, p3, *km, *kmc, *kms );
+            destroy_part(p2, p3, *km, *kmc, *kms);
         }
     }
 
@@ -317,7 +319,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            compare(p2, p3, p4, p5, p7 );
+            compare(p2, p3, p4, p5, p7);
         }
     }
 
@@ -327,7 +329,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            count_part(p2, p3, p7 );
+            count_part(p2, p3, p7);
         }
     }
 
@@ -337,7 +339,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            build_listname(p2, p3, p7 );
+            build_listname(p2, p3, p7);
         }
     }
 
@@ -347,7 +349,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            loop(p2, p3, p4, p5, p6, p7 );
+            loop(p2, p3, p4, p5, p6, p7);
         }
     }
 
@@ -357,7 +359,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            selection(p2, p3, p4, p5, p6, p7 );
+            selection(p2, p3, p4, p5, p6, p7);
         }
     }
 
@@ -367,7 +369,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            set(p2, p3, p4, p5, p7 );
+            set(p2, p3, p4, p5, p7);
         }
     }
 
@@ -377,7 +379,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            set_property(p2, p3, p4, p5, p7 );
+            set_property(p2, p3, p4, p5, p7);
         }
     }
 
@@ -403,6 +405,26 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
     if (r != 1) {
 
+        compare_arrays(p0, p1, (void*) STARTUP_ABSTRACTION, (void*) STARTUP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            startup_service(p2, p3, *km, *kmc, *kms, p7);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p0, p1, (void*) SHUTDOWN_ABSTRACTION, (void*) SHUTDOWN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            shutdown_service(p2, p3, *km, *kmc, *kms, p7);
+        }
+    }
+
+    if (r != 1) {
+
         compare_arrays(p0, p1, (void*) EXIT_ABSTRACTION, (void*) EXIT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
@@ -413,7 +435,6 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
             *f = 1;
         }
     }
-
 
 /*??
     //?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
@@ -448,7 +469,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 /**
  * Handles the signal.
  *
- * @param p0 the abctraction 
+ * @param p0 the abctraction
  * @param p1 the abstraction count
  * @param p2 the signal
  * @param p3 the signal count
@@ -461,7 +482,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
  * @param p10 the direct execution flag
  */
 void handle_signal(const void* p0, const void* p1, const void* p2, const void* p3,
-    const void* p4, const void* p5,const  void* p6, const void* p7, void* p8, void* p9, void* p10) {
+    const void* p4, const void* p5, const  void* p6, const void* p7, void* p8, void* p9, void* p10) {
 
 //    // The knowledge memory.
 //    void** k = POINTER_NULL_POINTER;
@@ -481,7 +502,6 @@ void handle_signal(const void* p0, const void* p1, const void* p2, const void* p
 //    get_array_elements(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_ARRAY);
 //    get_array_elements(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_ARRAY);
 
-
     int r = 0;
 
     if (r != 1) {
@@ -494,10 +514,6 @@ void handle_signal(const void* p0, const void* p1, const void* p2, const void* p
         }
     }
 
-    //
-    // Handle operation signal.
-    //
-
     if (r != 1) {
 
         compare_arrays(p0, p1, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
@@ -508,17 +524,11 @@ void handle_signal(const void* p0, const void* p1, const void* p2, const void* p
         }
     }
 
-    //
-    // Unknown signal abstraction.
-    //
-
     if (r != 1) {
 
         log_message((void*) WARNING_LOG_LEVEL, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT);
     }
-
 }
-
 
 /* SIGNAL_HANDLER_SOURCE */
 #endif

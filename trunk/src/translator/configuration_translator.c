@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-03-19 17:13:04 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-03-20 01:43:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -280,7 +280,7 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
 
                         if (r != 1) {
 
-                            compare_arrays(sn, (void*) &snc, (void*) X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME, (void*) X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                            compare_arrays(sn, (void*) &snc, (void*) X_WINDOWS_ACTIVE_CONFIGURATION_NAME, (void*) X_WINDOWS_ACTIVE_CONFIGURATION_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                             if (r == 1) {
 
@@ -293,7 +293,7 @@ void decode_configuration_node(void* p0, void* p1, void* p2, const void* p3, con
                                     sc, (void*) &scc);
 
                                 // Set configuration parameter in internals memory.
-                                set_array_elements(*d, (void*) X_WINDOWS_SERVER_ACTIVE_INTERNAL, (void*) &dm, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                set_array_elements(*d, (void*) X_WINDOWS_ACTIVE_INTERNAL, (void*) &dm, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
                             }
                         }
 

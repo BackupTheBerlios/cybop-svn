@@ -1,5 +1,5 @@
 /*
- * $RCSfile: x_windows_creator.c,v $
+ * $RCSfile: startup_x_windows.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller. All rights reserved.
  *
@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-03-20 01:43:33 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-03-20 01:43:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -35,24 +35,53 @@
  * a session- (display-) as well as a window manager.
  */
 
-#ifndef X_WINDOWS_CREATOR_SOURCE
-#define X_WINDOWS_CREATOR_SOURCE
+#ifndef STARTUP_X_WINDOWS_SOURCE
+#define STARTUP_X_WINDOWS_SOURCE
 
 /**
- * Creates the x windows display.
+ * Starts up the x windows.
  *
  * @param p0 the internals memory
+ * @param p1 the knowledge
+ * @param p2 the knowledge count
+ * @param p3 the knowledge size
  */
-void create_x_windows_display(void* p0) {
+void startup_x_windows(void* p0, const void* p1, const void* p2, const void* p3) {
+
+/*??
+    // The unix server socket filename.
+    void* f = POINTER_NULL_POINTER;
+
+    // Get unix server socket filename.
+    get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_FILENAME_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
+
+    if (f != POINTER_NULL_POINTER) {
+*/
+
+    // The display name.
+    // An example identifying the second screen of the first
+    // display of host computer piggy.rz.tu-ilmenau.de would be:
+    // char* dn = "earth.cybop.net:0.1"
+    //?? TODO: This has to be built dynamically, later on!
+    //?? For now, it is just an empty string.
+    char* dn = "";
+    // The display, which is a subsumption of
+    // xserver, screens, hardware (input devices etc.).
+//??    x->display = XOpenDisplay(dn);
 }
 
 /**
- * Destroys the x windows display.
+ * Shuts down the x windows.
  *
  * @param p0 the internals memory
+ * @param p1 the knowledge
+ * @param p2 the knowledge count
+ * @param p3 the knowledge size
  */
-void destroy_x_windows_display(void* p0) {
+void shutdown_x_windows(void* p0, const void* p1, const void* p2, const void* p3) {
+
+//??    XCloseDisplay(x->display);
 }
 
-/* X_WINDOWS_CREATOR_SOURCE */
+/* STARTUP_X_WINDOWS_SOURCE */
 #endif

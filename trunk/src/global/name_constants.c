@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.12 $ $Date: 2005-03-18 07:51:14 $ $Author: rholzmueller $
+ * @version $Revision: 1.13 $ $Date: 2005-03-20 01:43:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -75,73 +75,83 @@ static const char* TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME = TCP_SERVER_SOCKET
 static const int TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT_ARRAY[] = {22};
 static const int* TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT = TCP_SERVER_SOCKET_PORT_CONFIGURATION_NAME_COUNT_ARRAY;
 
-/** The x windows server active configuration name. */
-static const char X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', 's', '_', 's', 'e', 'r', 'v', 'e', 'r', '_', 'a', 'c', 't', 'i', 'v', 'e'};
-static const char* X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME = X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME_ARRAY;
-static const int X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY[] = {23};
-static const int* X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME_COUNT = X_WINDOWS_SERVER_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY;
+/** The x windows active configuration name. */
+static const char X_WINDOWS_ACTIVE_CONFIGURATION_NAME_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', 's', '_', 'a', 'c', 't', 'i', 'v', 'e'};
+static const char* X_WINDOWS_ACTIVE_CONFIGURATION_NAME = X_WINDOWS_ACTIVE_CONFIGURATION_NAME_ARRAY;
+static const int X_WINDOWS_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY[] = {16};
+static const int* X_WINDOWS_ACTIVE_CONFIGURATION_NAME_COUNT = X_WINDOWS_ACTIVE_CONFIGURATION_NAME_COUNT_ARRAY;
 
 //
 // Creation names.
 //
 
-/** The name name abstraction. */
+/** The name name. */
 static const char NAME_NAME_ABSTRACTION_ARRAY[] = {'n', 'a', 'm', 'e'};
 static const char* NAME_NAME_ABSTRACTION = NAME_NAME_ABSTRACTION_ARRAY;
 static const int NAME_NAME_ABSTRACTION_COUNT_ARRAY[] = {4};
 static const int* NAME_NAME_ABSTRACTION_COUNT = NAME_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The channel name abstraction. */
+/** The channel name. */
 static const char CHANNEL_NAME_ABSTRACTION_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
 static const char* CHANNEL_NAME_ABSTRACTION = CHANNEL_NAME_ABSTRACTION_ARRAY;
 static const int CHANNEL_NAME_ABSTRACTION_COUNT_ARRAY[] = {7};
 static const int* CHANNEL_NAME_ABSTRACTION_COUNT = CHANNEL_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The abstraction name abstraction. */
+/** The abstraction name. */
 static const char ABSTRACTION_NAME_ABSTRACTION_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
 static const char* ABSTRACTION_NAME_ABSTRACTION = ABSTRACTION_NAME_ABSTRACTION_ARRAY;
 static const int ABSTRACTION_NAME_ABSTRACTION_COUNT_ARRAY[] = {11};
 static const int* ABSTRACTION_NAME_ABSTRACTION_COUNT = ABSTRACTION_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The model name abstraction. */
+/** The model name. */
 static const char MODEL_NAME_ABSTRACTION_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
 static const char* MODEL_NAME_ABSTRACTION = MODEL_NAME_ABSTRACTION_ARRAY;
 static const int MODEL_NAME_ABSTRACTION_COUNT_ARRAY[] = {5};
 static const int* MODEL_NAME_ABSTRACTION_COUNT = MODEL_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The whole name abstraction. */
+/** The whole name. */
 static const char WHOLE_NAME_ABSTRACTION_ARRAY[] = {'w', 'h', 'o', 'l', 'e'};
 static const char* WHOLE_NAME_ABSTRACTION = WHOLE_NAME_ABSTRACTION_ARRAY;
 static const int WHOLE_NAME_ABSTRACTION_COUNT_ARRAY[] = {5};
 static const int* WHOLE_NAME_ABSTRACTION_COUNT = WHOLE_NAME_ABSTRACTION_COUNT_ARRAY;
 
 //
-// Communication names.
+// Sending names.
 //
 
-/** The language name array, pointer, count. */
+/** The language name. */
 static const char LANGUAGE_NAME_ABSTRACTION_ARRAY[] = {'l', 'a', 'n', 'g', 'u', 'a', 'g', 'e'};
 static const char* LANGUAGE_NAME_ABSTRACTION = LANGUAGE_NAME_ABSTRACTION_ARRAY;
 static const int LANGUAGE_NAME_ABSTRACTION_COUNT_ARRAY[] = {8};
 static const int* LANGUAGE_NAME_ABSTRACTION_COUNT = LANGUAGE_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The sender name array, pointer, count. */
+/** The sender name. */
 static const char SENDER_NAME_ABSTRACTION_ARRAY[] = {'s', 'e', 'n', 'd', 'e', 'r'};
 static const char* SENDER_NAME_ABSTRACTION = SENDER_NAME_ABSTRACTION_ARRAY;
 static const int SENDER_NAME_ABSTRACTION_COUNT_ARRAY[] = {6};
 static const int* SENDER_NAME_ABSTRACTION_COUNT = SENDER_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The receiver name array, pointer, count. */
+/** The receiver name. */
 static const char RECEIVER_NAME_ABSTRACTION_ARRAY[] = {'r', 'e', 'c', 'e', 'i', 'v', 'e', 'r'};
 static const char* RECEIVER_NAME_ABSTRACTION = RECEIVER_NAME_ABSTRACTION_ARRAY;
 static const int RECEIVER_NAME_ABSTRACTION_COUNT_ARRAY[] = {8};
 static const int* RECEIVER_NAME_ABSTRACTION_COUNT = RECEIVER_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The message name array, pointer, count. */
+/** The message name. */
 static const char MESSAGE_NAME_ABSTRACTION_ARRAY[] = {'m', 'e', 's', 's', 'a', 'g', 'e'};
 static const char* MESSAGE_NAME_ABSTRACTION = MESSAGE_NAME_ABSTRACTION_ARRAY;
 static const int MESSAGE_NAME_ABSTRACTION_COUNT_ARRAY[] = {7};
 static const int* MESSAGE_NAME_ABSTRACTION_COUNT = MESSAGE_NAME_ABSTRACTION_COUNT_ARRAY;
+
+//
+// Startup and shutdown names.
+//
+
+/** The service name. */
+static const char SERVICE_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e'};
+static const char* SERVICE_NAME = SERVICE_NAME_ARRAY;
+static const int SERVICE_NAME_COUNT_ARRAY[] = {7};
+static const int* SERVICE_NAME_COUNT = SERVICE_NAME_COUNT_ARRAY;
 
 //
 // Property names names for html.
@@ -162,27 +172,27 @@ static const int* HTML_TAG_PROPERTIES_NAME_ABSTRACTION_COUNT = HTML_TAG_PROPERTI
 //
 // Property names operation compare.
 //
-/** The operand_1 name array, pointer, count. */
+/** The operand_1 name. */
 static const char COMPARE_OPERAND_1_NAME_ABSTRACTION_ARRAY[] = {'o', 'p', 'e', 'r', 'a', 'n', 'd', '_', '1' };
 static const char* COMPARE_OPERAND_1_NAME_ABSTRACTION = COMPARE_OPERAND_1_NAME_ABSTRACTION_ARRAY;
 static const int COMPARE_OPERAND_1_NAME_ABSTRACTION_COUNT_ARRAY[] = {9};
 static const int* COMPARE_OPERAND_1_NAME_ABSTRACTION_COUNT = COMPARE_OPERAND_1_NAME_ABSTRACTION_COUNT_ARRAY;
 
 
-/** The operand_2 name array, pointer, count. */
+/** The operand_2 name. */
 static const char COMPARE_OPERAND_2_NAME_ABSTRACTION_ARRAY[] = {'o', 'p', 'e', 'r', 'a', 'n', 'd', '_', '2' };
 static const char* COMPARE_OPERAND_2_NAME_ABSTRACTION = COMPARE_OPERAND_2_NAME_ABSTRACTION_ARRAY;
 static const int COMPARE_OPERAND_2_NAME_ABSTRACTION_COUNT_ARRAY[] = {9};
 static const int* COMPARE_OPERAND_2_NAME_ABSTRACTION_COUNT = COMPARE_OPERAND_2_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The operator name array, pointer, count. */
+/** The operator name. */
 static const char COMPARE_OPERATOR_NAME_ABSTRACTION_ARRAY[] = {'o', 'p', 'e', 'r', 'a', 't', 'o', 'r' };
 static const char* COMPARE_OPERATOR_NAME_ABSTRACTION = COMPARE_OPERATOR_NAME_ABSTRACTION_ARRAY;
 static const int COMPARE_OPERATOR_NAME_ABSTRACTION_COUNT_ARRAY[] = {8};
 static const int* COMPARE_OPERATOR_NAME_ABSTRACTION_COUNT = COMPARE_OPERATOR_NAME_ABSTRACTION_COUNT_ARRAY;
 
 
-/** The operator name array, pointer, count. */
+/** The operator name. */
 static const char COMPARE_RESULT_NAME_ABSTRACTION_ARRAY[] = {'r', 'e', 's', 'u', 'l', 't' };
 static const char* COMPARE_RESULT_NAME_ABSTRACTION = COMPARE_RESULT_NAME_ABSTRACTION_ARRAY;
 static const int COMPARE_RESULT_NAME_ABSTRACTION_COUNT_ARRAY[] = {6};
@@ -193,19 +203,19 @@ static const int* COMPARE_RESULT_NAME_ABSTRACTION_COUNT = COMPARE_RESULT_NAME_AB
 // Property names operation set.
 //
 
-/** The source name array, pointer, count. */
+/** The source name. */
 static const char SET_SOURCE_NAME_ABSTRACTION_ARRAY[] = {'s', 'o', 'u', 'r', 'c', 'e' };
 static const char* SET_SOURCE_NAME_ABSTRACTION = SET_SOURCE_NAME_ABSTRACTION_ARRAY;
 static const int SET_SOURCE_NAME_ABSTRACTION_COUNT_ARRAY[] = {6};
 static const int* SET_SOURCE_NAME_ABSTRACTION_COUNT = SET_SOURCE_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The destination name array, pointer, count. */
+/** The destination name. */
 static const char SET_DESTINATION_NAME_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't', 'i', 'n', 'a', 't', 'i', 'o', 'n' };
 static const char* SET_DESTINATION_NAME_ABSTRACTION = SET_DESTINATION_NAME_ABSTRACTION_ARRAY;
 static const int SET_DESTINATION_NAME_ABSTRACTION_COUNT_ARRAY[] = {11};
 static const int* SET_DESTINATION_NAME_ABSTRACTION_COUNT = SET_DESTINATION_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The destination property name array, pointer, count. */
+/** The destination property name. */
 static const char SET_DESTINATION_PROPERTY_NAME_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't', 'i', 'n', 'a', 't', 'i', 'o', 'n', '_', 'p', 'r', 'o', 'p', 'e', 'r', 't', 'y' };
 static const char* SET_DESTINATION_PROPERTY_NAME_ABSTRACTION = SET_DESTINATION_PROPERTY_NAME_ABSTRACTION_ARRAY;
 static const int SET_DESTINATION_PROPERTY_NAME_ABSTRACTION_COUNT_ARRAY[] = {20};
@@ -215,13 +225,13 @@ static const int* SET_DESTINATION_PROPERTY_NAME_ABSTRACTION_COUNT = SET_DESTINAT
 // Property names operation loop.
 //
 
-/** The breakflag name array, pointer, count. */
+/** The breakflag name. */
 static const char LOOP_BREAKFLAG_NAME_ABSTRACTION_ARRAY[] = {'b', 'r', 'e', 'a', 'k' };
 static const char* LOOP_BREAKFLAG_NAME_ABSTRACTION = LOOP_BREAKFLAG_NAME_ABSTRACTION_ARRAY;
 static const int LOOP_BREAKFLAG_NAME_ABSTRACTION_COUNT_ARRAY[] = {5};
 static const int* LOOP_BREAKFLAG_NAME_ABSTRACTION_COUNT = LOOP_BREAKFLAG_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The loop model name array, pointer, count. */
+/** The loop model name. */
 static const char LOOP_MODEL_NAME_ABSTRACTION_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
 static const char* LOOP_MODEL_NAME_ABSTRACTION = LOOP_MODEL_NAME_ABSTRACTION_ARRAY;
 static const int LOOP_MODEL_NAME_ABSTRACTION_COUNT_ARRAY[] = {5};
@@ -231,20 +241,20 @@ static const int* LOOP_MODEL_NAME_ABSTRACTION_COUNT = LOOP_MODEL_NAME_ABSTRACTIO
 // Property names operation add.
 //
 
-/** The operand_1 name array, pointer, count. */
+/** The operand_1 name. */
 static const char ADD_OPERAND_1_NAME_ABSTRACTION_ARRAY[] = {'o', 'p', 'e', 'r', 'a', 'n', 'd', '_', '1' };
 static const char* ADD_OPERAND_1_NAME_ABSTRACTION = ADD_OPERAND_1_NAME_ABSTRACTION_ARRAY;
 static const int ADD_OPERAND_1_NAME_ABSTRACTION_COUNT_ARRAY[] = {9};
 static const int* ADD_OPERAND_1_NAME_ABSTRACTION_COUNT = ADD_OPERAND_1_NAME_ABSTRACTION_COUNT_ARRAY;
 
 
-/** The operand_2 name array, pointer, count. */
+/** The operand_2 name. */
 static const char ADD_OPERAND_2_NAME_ABSTRACTION_ARRAY[] = {'o', 'p', 'e', 'r', 'a', 'n', 'd', '_', '2' };
 static const char* ADD_OPERAND_2_NAME_ABSTRACTION = ADD_OPERAND_2_NAME_ABSTRACTION_ARRAY;
 static const int ADD_OPERAND_2_NAME_ABSTRACTION_COUNT_ARRAY[] = {9};
 static const int* ADD_OPERAND_2_NAME_ABSTRACTION_COUNT = ADD_OPERAND_2_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The operator name array, pointer, count. */
+/** The operator name. */
 static const char ADD_RESULT_NAME_ABSTRACTION_ARRAY[] = {'r', 'e', 's', 'u', 'l', 't' };
 static const char* ADD_RESULT_NAME_ABSTRACTION = ADD_RESULT_NAME_ABSTRACTION_ARRAY;
 static const int ADD_RESULT_NAME_ABSTRACTION_COUNT_ARRAY[] = {6};
@@ -254,19 +264,19 @@ static const int* ADD_RESULT_NAME_ABSTRACTION_COUNT = ADD_RESULT_NAME_ABSTRACTIO
 // Property names operation build_listname.
 //
 
-/** The basisname name array, pointer, count. */
+/** The basisname name. */
 static const char BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION_ARRAY[] = {'b', 'a', 's', 'i', 's', 'n', 'a', 'm', 'e' };
 static const char* BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION = BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION_ARRAY;
 static const int BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION_COUNT_ARRAY[] = {9};
 static const int* BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION_COUNT = BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The index name array, pointer, count. */
+/** The index name. */
 static const char BUILD_LISTNAME_INDEX_NAME_ABSTRACTION_ARRAY[] = {'i', 'n', 'd', 'e', 'x' };
 static const char* BUILD_LISTNAME_INDEX_NAME_ABSTRACTION = BUILD_LISTNAME_INDEX_NAME_ABSTRACTION_ARRAY;
 static const int BUILD_LISTNAME_INDEX_NAME_ABSTRACTION_COUNT_ARRAY[] = {5};
 static const int* BUILD_LISTNAME_INDEX_NAME_ABSTRACTION_COUNT = BUILD_LISTNAME_INDEX_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The result name array, pointer, count. */
+/** The result name. */
 static const char BUILD_LISTNAME_RESULT_NAME_ABSTRACTION_ARRAY[] = {'r', 'e', 's', 'u', 'l', 't'};
 static const char* BUILD_LISTNAME_RESULT_NAME_ABSTRACTION = BUILD_LISTNAME_RESULT_NAME_ABSTRACTION_ARRAY;
 static const int BUILD_LISTNAME_RESULT_NAME_ABSTRACTION_COUNT_ARRAY[] = {6};
@@ -276,19 +286,19 @@ static const int* BUILD_LISTNAME_RESULT_NAME_ABSTRACTION_COUNT = BUILD_LISTNAME_
 // Property names operation count_part.
 //
 
-/** The basisname name array, pointer, count. */
+/** The basisname name. */
 static const char COUNT_PART_BASISNAME_NAME_ABSTRACTION_ARRAY[] = {'b', 'a', 's', 'i', 's', 'n', 'a', 'm', 'e' };
 static const char* COUNT_PART_BASISNAME_NAME_ABSTRACTION = COUNT_PART_BASISNAME_NAME_ABSTRACTION_ARRAY;
 static const int COUNT_PART_BASISNAME_NAME_ABSTRACTION_COUNT_ARRAY[] = {9};
 static const int* COUNT_PART_BASISNAME_NAME_ABSTRACTION_COUNT = COUNT_PART_BASISNAME_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The model name array, pointer, count. */
+/** The model name. */
 static const char COUNT_PART_MODEL_NAME_ABSTRACTION_ARRAY[] = {'m', 'o', 'd', 'e', 'l' };
 static const char* COUNT_PART_MODEL_NAME_ABSTRACTION = COUNT_PART_MODEL_NAME_ABSTRACTION_ARRAY;
 static const int COUNT_PART_MODEL_NAME_ABSTRACTION_COUNT_ARRAY[] = {5};
 static const int* COUNT_PART_MODEL_NAME_ABSTRACTION_COUNT = COUNT_PART_MODEL_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The result name array, pointer, count. */
+/** The result name. */
 static const char COUNT_PART_RESULT_NAME_ABSTRACTION_ARRAY[] = {'r', 'e', 's', 'u', 'l', 't'};
 static const char* COUNT_PART_RESULT_NAME_ABSTRACTION = COUNT_PART_RESULT_NAME_ABSTRACTION_ARRAY;
 static const int COUNT_PART_RESULT_NAME_ABSTRACTION_COUNT_ARRAY[] = {6};
@@ -299,24 +309,23 @@ static const int* COUNT_PART_RESULT_NAME_ABSTRACTION_COUNT = COUNT_PART_RESULT_N
 // Property names operation selection.
 //
 
-/** The comparison name array, pointer, count. */
+/** The comparison name. */
 static const char SELECTION_COMPARISON_NAME_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'a', 'r', 'i', 's', 'o', 'n' };
 static const char* SELECTION_COMPARISON_NAME_ABSTRACTION = SELECTION_COMPARISON_NAME_ABSTRACTION_ARRAY;
 static const int SELECTION_COMPARISON_NAME_ABSTRACTION_COUNT_ARRAY[] = {10};
 static const int* SELECTION_COMPARISON_NAME_ABSTRACTION_COUNT = SELECTION_COMPARISON_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The true model name array, pointer, count. */
+/** The true model name. */
 static const char SELECTION_TRUE_MODEL_NAME_ABSTRACTION_ARRAY[] = {'t', 'r', 'u', 'e', '_', 'm', 'o', 'd', 'e', 'l' };
 static const char* SELECTION_TRUE_MODEL_NAME_ABSTRACTION = SELECTION_TRUE_MODEL_NAME_ABSTRACTION_ARRAY;
 static const int SELECTION_TRUE_MODEL_NAME_ABSTRACTION_COUNT_ARRAY[] = {10};
 static const int* SELECTION_TRUE_MODEL_NAME_ABSTRACTION_COUNT = SELECTION_TRUE_MODEL_NAME_ABSTRACTION_COUNT_ARRAY;
 
-/** The false model name array, pointer, count. */
+/** The false model name. */
 static const char SELECTION_FALSE_MODEL_NAME_ABSTRACTION_ARRAY[] = {'f', 'a', 'l', 's', 'e', '_', 'm', 'o', 'd', 'e', 'l' };
 static const char* SELECTION_FALSE_MODEL_NAME_ABSTRACTION = SELECTION_FALSE_MODEL_NAME_ABSTRACTION_ARRAY;
 static const int SELECTION_FALSE_MODEL_NAME_ABSTRACTION_COUNT_ARRAY[] = {11};
 static const int* SELECTION_FALSE_MODEL_NAME_ABSTRACTION_COUNT = SELECTION_FALSE_MODEL_NAME_ABSTRACTION_COUNT_ARRAY;
-
 
 /* NAME_CONSTANTS_SOURCE */
 #endif
