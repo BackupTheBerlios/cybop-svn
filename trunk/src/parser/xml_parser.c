@@ -25,7 +25,7 @@
  * - parse an xml stream into an xml model
  * - serialize an xml model into an xml stream
  *
- * @version $Revision: 1.10 $ $Date: 2005-01-20 16:29:52 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-02-11 21:44:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -259,28 +259,21 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
                 // Set terminated file name by first copying the actual name
                 // and then adding the null termination character.
-    log_message_debug("TEST 0");
                 set_array_elements(tmp, (void*) ZERO_NUMBER, p3, p4, (void*) CHARACTER_ARRAY);
-    log_message_debug("TEST 1");
                 set_array_elements(tmp, p4, (void*) NULL_CONTROL_CHARACTER, (void*) NULL_CONTROL_CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
 
-    log_message_debug("TEST 2");
                 // Initialize the library.
                 // Check potential ABI mismatches between the version
                 // it was compiled for and the actual shared library used.
                 LIBXML_TEST_VERSION
 
-    log_message_debug("TEST 3");
-    fprintf(stderr, "tmp: %s\n", (char*) tmp);
                 // Parse file and get xml document.
                 // This function returns a pointer to type: xmlDoc*
                 *d = (void*) xmlParseFile((char*) tmp);
 
-    log_message_debug("TEST 4");
                 // Free global variables that may have been allocated by the parser.
                 xmlCleanupParser();
 
-    log_message_debug("TEST 5");
                 // Destroy temporary null-terminated file name.
                 destroy_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
 

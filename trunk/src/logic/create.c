@@ -23,7 +23,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.28 $ $Date: 2005-02-08 18:28:00 $ $Author: rholzmueller $
+ * @version $Revision: 1.29 $ $Date: 2005-02-11 21:44:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -279,6 +279,7 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
 
         // Create compound decode model.
         create(p0, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+
     } else {
 
         // Create internals memory decode model.

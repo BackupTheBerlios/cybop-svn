@@ -25,7 +25,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.10 $ $Date: 2005-01-20 16:29:51 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-02-11 21:44:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -118,7 +118,7 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
                             } else {
 
-    //??                            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The index exceeds the array size.");
+                                log_message_debug("Could not receive file. The index exceeds the array size.");
                             }
 
                             // Read next character.
@@ -130,7 +130,7 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
                     } else {
 
-    //??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The file is null.");
+                        log_message_debug("Could not receive file. The file is null.");
                     }
 
                     // Destroy terminated file name and its size.
@@ -138,22 +138,22 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
                 } else {
 
-//??                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The array count is null.");
+                    log_message_debug("Could not receive file. The destination is null.");
                 }
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The array count is null.");
+                log_message_debug("Could not receive file. The destination count is null.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The array size is null.");
+            log_message_debug("Could not receive file. The destination size is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The file name count is null.");
+        log_message_debug("Could not receive file. The source count is null.");
     }
 }
 
