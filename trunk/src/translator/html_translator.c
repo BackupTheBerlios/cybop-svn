@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-03-18 00:42:10 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-03-18 07:56:48 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -228,6 +228,19 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
         void** tag_detail_count = POINTER_NULL_POINTER;
         void** tag_detail_size = POINTER_NULL_POINTER;
 
+        // The html tag abstraction.
+        void** tag_prop_abstr = POINTER_NULL_POINTER;
+        void** tag_prop_abstr_count = POINTER_NULL_POINTER;
+        void** tag_prop_abstr_size = POINTER_NULL_POINTER;
+        // The html tag_prop model.
+        void** tag_prop_model = POINTER_NULL_POINTER;
+        void** tag_prop_model_count = POINTER_NULL_POINTER;
+        void** tag_prop_model_size = POINTER_NULL_POINTER;
+        // The html tag_prop details.
+        void** tag_prop_detail = POINTER_NULL_POINTER;
+        void** tag_prop_detail_count = POINTER_NULL_POINTER;
+        void** tag_prop_detail_size = POINTER_NULL_POINTER;
+        
         //in the source detail look for html_tag
         if ( (source_detail != NULL_POINTER) &&
              (source_detail_count != NULL_POINTER) ) {
@@ -239,6 +252,16 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
                 &tag_model, &tag_model_count, &tag_model_size,
                 &tag_detail, &tag_detail_count, &tag_detail_size
             );
+            
+            get_compound_element_by_name(
+                source_detail, source_detail_count,
+                HTML_TAG_PROPERTIES_NAME_ABSTRACTION, 
+                HTML_TAG_PROPERTIES_NAME_ABSTRACTION_COUNT, 
+                &tag_prop_abstr, &tag_prop_abstr_count, &tag_prop_abstr_size,
+                &tag_prop_model, &tag_prop_model_count, &tag_prop_model_size,
+                &tag_prop_detail, &tag_prop_detail_count, &tag_prop_detail_size             
+            );
+            
         }
 
         //parse the begin tag
@@ -263,11 +286,34 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
                        *tag_model, *tag_model_count,
                        STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
+                //parse the tag properties
+                if ( (tag_prop_model != POINTER_NULL_POINTER) &&
+                     (tag_prop_model_count != POINTER_NULL_POINTER) &&
+                     (tag_prop_model_size != POINTER_NULL_POINTER)
+                   )
+                {
+
+                    //parse the space
+                    parse( dest, dest_count, dest_size,
+                           SPACE_CHARACTER, SPACE_CHARACTER_COUNT,
+                           STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT); 
+                 
+                    //parse the html tag properties
+                    parse( dest, dest_count, dest_size,
+                           *tag_prop_model, *tag_prop_model_count,
+                           STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT); 
+                }
+
+
                 //parse the >
                 parse( dest, dest_count, dest_size,
                        GREATER_THAN_SIGN_CHARACTER, GREATER_THAN_SIGN_CHARACTER_COUNT,
                        STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
+                //parse the line feed for better reading the html-source
+                parse( dest, dest_count, dest_size,
+                       LINE_FEED_CONTROL_CHARACTER, LINE_FEED_CONTROL_CHARACTER_COUNT,
+                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT); 
             }
         }
 
@@ -335,6 +381,11 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
             }
         }
 
+        //parse the line feed for better reading the html-source
+        parse( dest, dest_count, dest_size,
+               LINE_FEED_CONTROL_CHARACTER, LINE_FEED_CONTROL_CHARACTER_COUNT,
+               STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT); 
+
         //parse the end tag
         if ( (tag_model != POINTER_NULL_POINTER) &&
              (tag_model_count != POINTER_NULL_POINTER) &&
@@ -365,7 +416,13 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
                 //parse the >
                 parse( dest, dest_count, dest_size,
                        GREATER_THAN_SIGN_CHARACTER, GREATER_THAN_SIGN_CHARACTER_COUNT,
-                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT); 
+
+                //parse the line feed for better reading the html-source
+                parse( dest, dest_count, dest_size,
+                       LINE_FEED_CONTROL_CHARACTER, LINE_FEED_CONTROL_CHARACTER_COUNT,
+                       STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT); 
+
             }
         }
     }  //check for destination
