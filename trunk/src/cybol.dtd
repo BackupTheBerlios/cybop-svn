@@ -1,0 +1,31 @@
+<!--
+    $RCSfile: cybol.dtd,v $
+
+    Copyright (c) 2003-2004. Christian Heller. All rights reserved.
+
+    Permission is granted to copy, distribute and/or modify this document
+    under the terms of the GNU Free Documentation License, Version 1.1
+    or any later version published by the Free Software Foundation;
+    with no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+    Texts. A copy of the license is included in the section entitled
+    "GNU Free Documentation License".
+
+    http://www.cybop.net
+    - Cybernetics Oriented Programming -
+/-->
+
+<!ELEMENT model (super?,part*)>
+<!ELEMENT super EMPTY>
+<!ELEMENT part (model*)>
+
+<!ATTLIST super
+    name CDATA #REQUIRED
+    model CDATA #REQUIRED
+    model_abstraction CDATA #REQUIRED>
+
+<!ATTLIST part
+    name CDATA #REQUIRED
+    model CDATA #REQUIRED
+    model_abstraction CDATA #REQUIRED
+    position CDATA #IMPLIED
+    position_abstraction CDATA #IMPLIED>
