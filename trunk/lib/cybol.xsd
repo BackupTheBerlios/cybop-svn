@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--
     $RCSfile: cybol.xsd,v $
 
@@ -8,39 +9,53 @@
     or any later version published by the Free Software Foundation;
     with no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
     Texts. A copy of the license is included in the section entitled
-    "GNU Free Documentation License".
+    'GNU Free Documentation License'.
 
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 /-->
 
-<?xml version="1.0"?>
 
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-targetNamespace="http://www.cybop.net"
-xmlns="http://www.cybop.net"
-elementFormDefault="qualified">
-
-<xs:element name="model" type="model"/>
-
-<xs:complexType name="model">
-    <xs:element name="super" type="super" minOccurs="0"/>
-    <xs:element name="part" type="part" minOccurs="0" maxOccurs="unbounded"/>
-</xs:complexType>
-
-<xs:complexType name="super">
-    <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="model" type="xs:string" use="required"/>
-    <xs:attribute name="model_abstraction" type="xs:string" use="required"/>
-</xs:complexType>
-
-<xs:complexType name="part">
-    <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="model" type="xs:string" use="required"/>
-    <xs:attribute name="model_abstraction" type="xs:string" use="required"/>
-    <xs:attribute name="position" type="xs:string" use="optional"/>
-    <xs:attribute name="position_abstraction" type="xs:string" use="optional"/>
-    <xs:element name="part" type="model" maxOccurs="unbounded"/>
-</xs:complexType>
-
+<xs:schema 
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='http://www.cybop.net'
+    xmlns='http://www.cybop.net'
+    elementFormDefault='qualified'>
+    <xs:element name='model'>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref='part' minOccurs='0' maxOccurs='unbounded'/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='part'>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref='property' minOccurs='0' maxOccurs='unbounded'/>
+            </xs:sequence>
+            <xs:attribute name='name' type='xs:string' use='required'/>
+            <xs:attribute name='channel' type='xs:string' use='required'/>
+            <xs:attribute name='abstraction' type='xs:string' use='required'/>
+            <xs:attribute name='model' type='xs:string' use='required'/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='property'>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref='constraint' minOccurs='0' maxOccurs='unbounded'/>
+            </xs:sequence>
+            <xs:attribute name='name' type='xs:string' use='required'/>
+            <xs:attribute name='channel' type='xs:string' use='required'/>
+            <xs:attribute name='abstraction' type='xs:string' use='required'/>
+            <xs:attribute name='model' type='xs:string' use='required'/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='constraint'>
+        <xs:complexType>
+            <xs:attribute name='name' type='xs:string' use='required'/>
+            <xs:attribute name='channel' type='xs:string' use='required'/>
+            <xs:attribute name='abstraction' type='xs:string' use='required'/>
+            <xs:attribute name='model' type='xs:string' use='required'/>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>
