@@ -1,0 +1,103 @@
+/*
+ * $RCSfile: SocketAddress.java,v $
+ *
+ * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ *
+ * This software is published under the GPL GNU General Public License.
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ * http://www.resmedicinae.org
+ * - Information in Medicine -
+ */
+
+package cybop.system.chain;
+
+import cybop.basic.Integer;
+import cybop.basic.String;
+
+/**
+ * This class represents a socket address.<br><br>
+ *
+ * @version $Revision: 1.1 $ $Date: 2003-02-19 07:52:25 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
+ */
+public class SocketAddress extends Address {
+
+    //
+    // Children.
+    //
+
+    /** The number. */
+    public static final String NUMBER = new String("number");
+
+    /** The port. */
+    public static final String PORT = new String("port");
+
+    //
+    // Default children.
+    //
+
+    /**
+     * Returns the default number.
+     *
+     * @return the default number
+     */
+    public String getDefaultNumber() {
+
+        return new String("127.0.0.1");
+    }
+
+    /**
+     * Returns the default port.
+     *
+     * @return the default port
+     */
+    public Integer getDefaultPort() {
+
+        return new Integer(8005);
+    }
+
+    //
+    // Initialization.
+    //
+
+    /**
+     * Initializes this system.
+     */
+    public void initialize() throws Exception {
+
+        super.initialize();
+
+        set(SocketAddress.NUMBER, getDefaultNumber());
+        set(SocketAddress.PORT, getDefaultPort());
+    }
+
+    /**
+     * Finalizes this system.
+     */
+    public void finalizz() throws Exception {
+
+        Integer port = (Integer) get(SocketAddress.PORT);
+        remove(SocketAddress.PORT);
+//??        destroyPort(port);
+
+        String number = (String) get(SocketAddress.NUMBER);
+        remove(SocketAddress.NUMBER);
+//??        destroyNumber(number);
+
+        super.finalizz();
+    }
+}
+

@@ -1,0 +1,208 @@
+/*
+ * $RCSfile: HelpMenu.java,v $
+ *
+ * Copyright (c) 1999-2003. The Res Medicinae developers. All rights reserved.
+ *
+ * This software is published under the GPL GNU General Public License.
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ * http://www.resmedicinae.org
+ * - Information in Medicine -
+ */
+
+package cybop.model.organizer.menu;
+
+import cybop.basic.*;
+import cybop.basic.String;
+import cybop.model.organizer.*;
+import cybop.model.organizer.menuitem.*;
+
+/**
+ * This class represents a help menu.
+ *
+ * @version $Revision: 1.1 $ $Date: 2003-02-19 07:52:25 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
+ */
+public class HelpMenu extends Menu {
+
+    //
+    // Children.
+    //
+
+    /** The about menu item. */
+    public static final String ABOUT_MENU_ITEM = new String("about_menu_item");
+
+    //
+    // Child management.
+    //
+
+    /**
+     * Adds the item to become a child of this item.
+     *
+     * @param n the name
+     * @param i the item
+     * @exception NullPointerException if the name is null
+     */
+    public void set(String n, Item i) throws NullPointerException {
+
+        super.set(n, i);
+
+        if (n != null) {
+
+            if (n.isEqualTo(HelpMenu.ABOUT_MENU_ITEM)) {
+
+                setAboutMenuItem((AboutMenuItem) i);
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not set item. The name is null.");
+        }
+    }
+
+    /**
+     * Removes the child item from this item.
+     *
+     * @param n the name
+     * @exception NullPointerException if the name is null
+     */
+    public void remove(String n) throws NullPointerException {
+
+        if (n != null) {
+
+            if (n.isEqualTo(HelpMenu.ABOUT_MENU_ITEM)) {
+
+                removeAboutMenuItem((AboutMenuItem) get(n));
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not remove item. The name is null.");
+        }
+
+        super.remove(n);
+    }
+
+    //
+    // Default children.
+    //
+
+    /**
+     * Returns the default label.
+     *
+     * @return the default label
+     */
+    public String getDefaultLabel() {
+
+        return new String("Help");
+    }
+
+    /**
+     * Returns the default about menu item.
+     *
+     * @return the default about menu item
+     */
+    public String getDefaultAboutMenuItem() {
+
+        return new String("cybop.model.organizer.menuitem.AboutMenuItem");
+    }
+
+    //
+    // About menu item.
+    //
+
+    /**
+     * Sets the about menu item.
+     *
+     * @param mi the about menu item
+     * @exception NullPointerException if the java menu is null
+     * @exception NullPointerException if the about menu item is null
+     */
+    public void setAboutMenuItem(AboutMenuItem mi) throws NullPointerException {
+
+        javax.swing.JMenu m = (javax.swing.JMenu) getJavaObject();
+
+        if (m != null) {
+
+            if (mi != null) {
+
+                m.add((javax.swing.JMenuItem) mi.getJavaObject());
+
+            } else {
+    
+                throw new NullPointerException("Could not set about menu item. The about menu item is null.");
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not set about menu item. The java menu is null.");
+        }
+    }
+
+    /**
+     * Removes the about menu item.
+     *
+     * @param mi the about menu item
+     * @exception NullPointerException if the java menu is null
+     * @exception NullPointerException if the about menu item is null
+     */
+    public void removeAboutMenuItem(AboutMenuItem mi) throws NullPointerException {
+
+        javax.swing.JMenu m = (javax.swing.JMenu) getJavaObject();
+
+        if (m != null) {
+
+            if (mi != null) {
+
+                m.remove((javax.swing.JMenuItem) mi.getJavaObject());
+
+            } else {
+    
+                throw new NullPointerException("Could not remove about menu item. The about menu item is null.");
+            }
+
+        } else {
+
+            throw new NullPointerException("Could not remove about menu item. The java menu is null.");
+        }
+    }
+
+    //
+    // Initializable.
+    //
+
+    /**
+     * Initializes this help menu.
+     */
+    public void initialize() throws Exception {
+
+        super.initialize();
+
+        set(HelpMenu.ABOUT_MENU_ITEM, createComponent(getDefaultAboutMenuItem()));
+    }
+
+    /**
+     * Finalizes this help menu.
+     */
+    public void finalizz() throws Exception {
+
+        AboutMenuItem aboutMenuItem = (AboutMenuItem) get(HelpMenu.ABOUT_MENU_ITEM);
+        remove(HelpMenu.ABOUT_MENU_ITEM);
+        destroyComponent(aboutMenuItem);
+
+        super.finalizz();
+    }
+}
+
