@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-02-08 18:21:59 $ $Author: rholzmueller $
+ * @version $Revision: 1.14 $ $Date: 2005-02-11 11:02:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -52,14 +52,6 @@
  * - receiver (whom): ip address, socket port
  * - message (what): knowledge model to be sent in serialized form
  *
- * (OLD!!) CYBOL Examples:
- *
- * <!-- Operation parameters (as value of part_model tag):
- *      logic name,language,sender,receiver,message /-->
- *
- * <part name="send_to_socket" part_abstraction="operation" part_location="inline"
- *      part_model="send,application.language,application.sender,application.receiver,application.message"/>
- *
  * @param p0 the parameters
  * @param p1 the parameters count
  * @param p2 the knowledge
@@ -86,7 +78,7 @@ void send_message(const void* p0, const void* p1,
 
     // The sender abstraction.
     void** sa = NULL_POINTER;
-    void**  sac = NULL_POINTER;
+    void** sac = NULL_POINTER;
     void** sas = NULL_POINTER;
     // The sender model.
     void** sm = NULL_POINTER;
@@ -122,6 +114,7 @@ void send_message(const void* p0, const void* p1,
     void** md = NULL_POINTER;
     void** mdc = NULL_POINTER;
     void** mds = NULL_POINTER;
+
     //
     // The language name is taken directly.
     // All other parameters are hierarchical names and used to
@@ -135,43 +128,32 @@ void send_message(const void* p0, const void* p1,
         (void*) &lm, (void*) &lmc, (void*) &lms,
         (void*) &ld, (void*) &ldc, (void*) &lds);
 
-//    // Get sender.
-//    get_compound_element_by_encapsulated_name(p0, p1,
-//        (void*) SENDER_NAME_ABSTRACTION, (void*) SENDER_NAME_ABSTRACTION_COUNT,
-//        (void*) &sa, (void*) &sac, (void*) &sas,
-//        (void*) &sm, (void*) &smc, (void*) &sms,
-//        (void*) &sd, (void*) &sdc, (void*) &sds,
-//        p2, p3);
-//
-//    // Get receiver.
-//    get_compound_element_by_encapsulated_name(p0, p1,
-//        (void*) RECEIVER_NAME_ABSTRACTION, (void*) RECEIVER_NAME_ABSTRACTION_COUNT,
-//        (void*) &ra, (void*) &rac, (void*) &ras,
-//        (void*) &rm, (void*) &rmc, (void*) &rms,
-//        (void*) &rd, (void*) &rdc, (void*) &rds,
-//        p2, p3);
-//
-//    // Get message.
-//    get_compound_element_by_encapsulated_name(p0, p1,
-//        (void*) MESSAGE_NAME_ABSTRACTION, (void*) MESSAGE_NAME_ABSTRACTION_COUNT,
-//        (void*) &ma, (void*) &mac, (void*) &mas,
-//        (void*) &mm, (void*) &mmc, (void*) &mms,
-//        (void*) &md, (void*) &mdc, (void*) &mds,
-//        p2, p3);
+    fprintf(stdout, "TEST la: %s\n", *la);
+    fprintf(stdout, "TEST lac: %i\n", **((int**) lac));
+    fprintf(stdout, "TEST las: %i\n", **((int**) las));
+    fprintf(stdout, "TEST lm: %s\n", *lm);
+    fprintf(stdout, "TEST lmc: %i\n", **((int**) lmc));
+    fprintf(stdout, "TEST lms: %i\n", **((int**) lms));
+    fprintf(stdout, "TEST ld: %i\n", *ld);
+//??    fprintf(stdout, "TEST ldc: %i\n", **((int**) ldc));
+//??    fprintf(stdout, "TEST lds: %i\n", **((int**) lds));
 
+/*??
     // Get sender.
-    get_compound_element_by_name(p0, p1,
+    get_compound_element_by_encapsulated_name(p0, p1,
         (void*) SENDER_NAME_ABSTRACTION, (void*) SENDER_NAME_ABSTRACTION_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
-        (void*) &sd, (void*) &sdc, (void*) &sds );
+        (void*) &sd, (void*) &sdc, (void*) &sds,
+        p2, p3);
 
     // Get receiver.
-    get_compound_element_by_name(p0, p1,
+    get_compound_element_by_encapsulated_name(p0, p1,
         (void*) RECEIVER_NAME_ABSTRACTION, (void*) RECEIVER_NAME_ABSTRACTION_COUNT,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
-        (void*) &rd, (void*) &rdc, (void*) &rds );
+        (void*) &rd, (void*) &rdc, (void*) &rds,
+        p2, p3);
 
     // Get message.
     get_compound_element_by_encapsulated_name(p0, p1,
@@ -180,6 +162,61 @@ void send_message(const void* p0, const void* p1,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
         p2, p3);
+*/
+
+    // Get sender.
+    get_compound_element_by_name(p0, p1,
+        (void*) SENDER_NAME_ABSTRACTION, (void*) SENDER_NAME_ABSTRACTION_COUNT,
+        (void*) &sa, (void*) &sac, (void*) &sas,
+        (void*) &sm, (void*) &smc, (void*) &sms,
+        (void*) &sd, (void*) &sdc, (void*) &sds);
+
+/*??
+    fprintf(stdout, "TEST sa: %s\n", *sa);
+    fprintf(stdout, "TEST sac: %i\n", **((int**) sac));
+    fprintf(stdout, "TEST sas: %i\n", **((int**) sas));
+    fprintf(stdout, "TEST sm: %s\n", *sm);
+    fprintf(stdout, "TEST smc: %i\n", **((int**) smc));
+    fprintf(stdout, "TEST sms: %i\n", **((int**) sms));
+    fprintf(stdout, "TEST sd: %i\n", *sd);
+//??    fprintf(stdout, "TEST sdc: %i\n", **((int**) sdc));
+//??    fprintf(stdout, "TEST sds: %i\n", **((int**) sds));
+*/
+
+    // Get receiver.
+    get_compound_element_by_name(p0, p1,
+        (void*) RECEIVER_NAME_ABSTRACTION, (void*) RECEIVER_NAME_ABSTRACTION_COUNT,
+        (void*) &ra, (void*) &rac, (void*) &ras,
+        (void*) &rm, (void*) &rmc, (void*) &rms,
+        (void*) &rd, (void*) &rdc, (void*) &rds);
+
+    fprintf(stdout, "TEST ra: %s\n", *ra);
+    fprintf(stdout, "TEST rac: %i\n", **((int**) rac));
+    fprintf(stdout, "TEST ras: %i\n", **((int**) ras));
+    fprintf(stdout, "TEST rm: %s\n", *rm);
+    fprintf(stdout, "TEST rmc: %i\n", **((int**) rmc));
+    fprintf(stdout, "TEST rms: %i\n", **((int**) rms));
+    fprintf(stdout, "TEST rd: %i\n", *rd);
+//??    fprintf(stdout, "TEST rdc: %i\n", **((int**) rdc));
+//??    fprintf(stdout, "TEST rds: %i\n", **((int**) rds));
+
+    // Get message.
+    get_compound_element_by_encapsulated_name(p0, p1,
+        (void*) MESSAGE_NAME_ABSTRACTION, (void*) MESSAGE_NAME_ABSTRACTION_COUNT,
+        (void*) &ma, (void*) &mac, (void*) &mas,
+        (void*) &mm, (void*) &mmc, (void*) &mms,
+        (void*) &md, (void*) &mdc, (void*) &mds,
+        p2, p3);
+
+    fprintf(stdout, "TEST ma: %s\n", *ma);
+    fprintf(stdout, "TEST mac: %i\n", **((int**) mac));
+    fprintf(stdout, "TEST mas: %i\n", **((int**) mas));
+    fprintf(stdout, "TEST mm: %s\n", *mm);
+    fprintf(stdout, "TEST mmc: %i\n", **((int**) mmc));
+    fprintf(stdout, "TEST mms: %i\n", **((int**) mms));
+    fprintf(stdout, "TEST md: %i\n", *md);
+//??    fprintf(stdout, "TEST mdc: %i\n", **((int**) mdc));
+//??    fprintf(stdout, "TEST mds: %i\n", **((int**) mds));
 
     // The comparison result.
     int r = 0;
@@ -196,7 +233,7 @@ void send_message(const void* p0, const void* p1,
             void* tmpdc = NULL_POINTER;
             void* tmpds = NULL_POINTER;
 
-            send_tui((void*) tmpd, (void*) tmpdc, (void*) tmpds, (void*) *mm, (void*) *mmc);
+            send_tui(tmpd, tmpdc, tmpds, *mm, *mmc);
         }
     }
 

@@ -45,7 +45,7 @@
         <property name="name" channel="inline" abstraction="string" model="greeting"/>
         <property name="channel" channel="inline" abstraction="string" model="inline"/>
         <property name="abstraction" channel="inline" abstraction="string" model="string"/>
-        <property name="model" channel="inline" abstraction="string" model="hello_world"/>
+        <property name="model" channel="inline" abstraction="string" model="Hello, World!"/>
     </part>
 <!--
     <part name="create_tui" part_abstraction="operation" part_location="inline" part_model="create,root,tui,compound,file,/helloworld/tui.cybol"/>

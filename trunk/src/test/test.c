@@ -25,7 +25,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.41 $ $Date: 2005-02-08 18:24:43 $ $Author: rholzmueller $
+ * @version $Revision: 1.42 $ $Date: 2005-02-11 11:02:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -470,25 +470,27 @@ void test_integer_parser() {
  * But also a part of the knowledge model can be handed over,
  * in which case that part and its parts will be printed on screen.
  *
- * @param p0 the knowledge model item
- * @param p1 the knowledge model itemcount
+ * @param p0 the knowledge model
+ * @param p1 the knowledge model count
  * @param level the level for the tree
  */
-void test_knowledge_model( const void* p0, const void* p1, 
-                           int level ) {
+void test_knowledge_model(const void* p0, const void* p1, int level) {
 
     fputs("Test knowledge model:\n", stdout);
-    
-    char prefix[level*3+1];
+
+    char prefix[level * 3 + 1];
     int level_count;
     int char_count;
-    for ( level_count=0; level_count<level; level_count++) {
-     
-        for ( char_count=0; char_count<=2; char_count++) {
-            prefix[level_count*3+char_count] = '_';
+
+    for (level_count = 0; level_count < level; level_count++) {
+
+        for (char_count = 0; char_count <= 2; char_count++) {
+
+            prefix[level_count * 3 + char_count] = '_';
         }
     }
-    prefix[level*3]='\0';
+
+    prefix[level * 3] = '\0';
     level++;
 
     if (p1 != NULL_POINTER) {
@@ -524,20 +526,24 @@ void test_knowledge_model( const void* p0, const void* p1,
             }
 
             // Get element name.
-            get_compound_element_name_by_index(p0, p1, (void*) &i, (void*) &n, (void*) &nc, (void*) &ns);
+            get_compound_element_name_by_index(p0, p1, (void*) &i,
+                (void*) &n, (void*) &nc, (void*) &ns);
 
             // Get element.
-            get_compound_element_by_index(p0, p1, (void*) &i, (void*) &a, (void*) &ac, (void*) &as, (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds);
+            get_compound_element_by_index(p0, p1, (void*) &i,
+                (void*) &a, (void*) &ac, (void*) &as,
+                (void*) &m, (void*) &mc, (void*) &ms,
+                (void*) &d, (void*) &dc, (void*) &ds);
 
             // Print element name.
-            fprintf(stderr, "name:              %s%s\n", prefix,*n);
-            fprintf(stderr, "name count:        %s%i\n", prefix,**((int**)nc) );
-            fprintf(stderr, "name size:         %s%i\n", prefix,**((int**)ns) );
+            fprintf(stderr, "name:              %s%s\n", prefix, *n);
+            fprintf(stderr, "name count:        %s%i\n", prefix, **((int**) nc));
+            fprintf(stderr, "name size:         %s%i\n", prefix, **((int**) ns));
 
             // Print element abstraction.
-            fprintf(stderr, "abstraction:       %s%s\n", prefix,*a);
-            fprintf(stderr, "abstraction count: %s%i\n", prefix,**((int**)ac));
-            fprintf(stderr, "abstraction size:  %s%i\n", prefix,**((int**)as));
+            fprintf(stderr, "abstraction:       %s%s\n", prefix, *a);
+            fprintf(stderr, "abstraction count: %s%i\n", prefix, **((int**) ac));
+            fprintf(stderr, "abstraction size:  %s%i\n", prefix, **((int**) as));
 
             // Handle element model.
             if (r != 1) {
@@ -546,7 +552,7 @@ void test_knowledge_model( const void* p0, const void* p1,
 
                 if (r == 1) {
 
-                    fprintf(stderr, "model: %s\n", "");
+                    fprintf(stderr, "model (compound): %s\n", "hierarchical, see below");
                     test_knowledge_model((void*) *m, (void*) *mc, level);
                 }
             }
@@ -557,9 +563,9 @@ void test_knowledge_model( const void* p0, const void* p1,
 
                 if (r == 1) {
 
-                    fprintf(stderr, "model:         %i\n", *m);
-                    fprintf(stderr, "model count:   %i\n", **((int**)mc) );
-                    fprintf(stderr, "model size:    %i\n", **((int**)ms) );
+                    fprintf(stderr, "model (operation):         %s\n", (char*) *m);
+                    fprintf(stderr, "model (operation) count:   %i\n", **((int**) mc));
+                    fprintf(stderr, "model (operation) size:    %i\n", **((int**) ms));
                 }
             }
 
@@ -569,16 +575,26 @@ void test_knowledge_model( const void* p0, const void* p1,
 
                 if (r == 1) {
 
-                    fprintf(stderr, "model:             %i\n", *m);
-                    fprintf(stderr, "model count:       %i\n", **((int**)mc) );
-                    fprintf(stderr, "model size:        %i\n", **((int**)ms) );
+                    fprintf(stderr, "model (string):             %s\n", (char*) *m);
+                    fprintf(stderr, "model (string) count:       %i\n", **((int**) mc));
+                    fprintf(stderr, "model (string) size:        %i\n", **((int**) ms));
+                }
+            }
+
+            if (r != 1) {
+
+                compare_arrays((void*) *a, (void*) *ac, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+                if (r == 1) {
+
+                    fprintf(stderr, "model (integer):            %i\n", **((int**) m));
                 }
             }
 
             // Handle element details.
             if (d != NULL_POINTER) {
 
-                fprintf(stderr, "details: %s\n", "");
+                fprintf(stderr, "details: %s\n", "hierarchical, see below");
                 test_knowledge_model((void*) *d, (void*) *dc, level);
             }
 
@@ -637,9 +653,12 @@ void test_compound(void* comp, int* comp_count, int* index) {
     get_compound_element_by_index(comp, comp_count, index,
         &a, &ac, &as, &m, &mc, &ms, &d, &dc, &ds);
 
-    fprintf(stderr, "compound name:        %s\n", (char*) *n);
-    fprintf(stderr, "compound abstraction: %s\n", (char*) *a);
-    fprintf(stderr, "compound model:       %s\n", (char*) *m);
+    fprintf(stderr, "compound name:              %s\n", (char*) *n);
+    fprintf(stderr, "compound name count:        %i\n", *((int*) *nc));
+    fprintf(stderr, "compound abstraction:       %s\n", (char*) *a);
+    fprintf(stderr, "compound abstraction count: %i\n", *((int*) *ac));
+    fprintf(stderr, "compound model:             %s\n", (char*) *m);
+    fprintf(stderr, "compound model count:       %i\n", *((int*) *mc));
 }
 
 /**

@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-01-19 12:54:38 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-02-11 11:02:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -183,6 +183,9 @@ void send_tui(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 //??                if (strcmp("linux", getenv("TERM")) == 0) {
 
                     fputs("TEST: This is a linux console.\n", (FILE*) d);
+
+                    //?? TEST: for "Hello, World!"
+                    fprintf(stdout, "\n\n%s\n\n\n", (char*) p3);
 
 /*??
                     // Determine device name of controlling terminal.
