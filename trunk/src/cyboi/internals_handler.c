@@ -23,7 +23,7 @@
  *
  * This file handles internals.
  *
- * @version $Revision: 1.3 $ $Date: 2004-05-27 13:52:46 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-06-27 00:59:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,6 +43,7 @@
  *
  * @param p0 the internals
  */
+/*??
 void initialize_internals(void* p0) {
 
     struct internals* i = (struct internals*) p0;
@@ -65,6 +66,7 @@ void initialize_internals(void* p0) {
         initialize_ms_windows(i->ms_windows);
 */
 
+/*??
     } else {
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize internals. The internals is null.");
@@ -76,6 +78,7 @@ void initialize_internals(void* p0) {
  *
  * @param p0 the internals
  */
+/*??
 void finalize_internals(void* p0) {
 
     struct internals* i = (struct internals*) p0;
@@ -94,6 +97,7 @@ void finalize_internals(void* p0) {
         i->macintosh_flag = -1;
 */
 
+/*??
         finalize_x_windows(i->x_windows);
         free(i->x_windows);
         i->x_windows_flag = -1;

@@ -33,6 +33,7 @@
  *   - operation
  *   - compound
  *   - signal memory
+ *   - internals
  * - signal priorities
  * - signal languages
  * - cybol file
@@ -61,7 +62,7 @@
  *
  * Systems would then be written solely in cybol. Dreaming ...
  *
- * @version $Revision: 1.3 $ $Date: 2004-06-22 23:42:15 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-06-27 00:59:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -314,6 +315,16 @@ static const int SIGNALS_ABSTRACTIONS_INDEX = 3;
 
 /** The signals abstractions counts index. */
 static const int SIGNALS_ABSTRACTIONS_COUNTS_INDEX = 4;
+
+//
+// Internals.
+//
+
+/** The internals count. */
+static const int INTERNALS_COUNT = 1;
+
+/** The unix socket flag index. */
+static const int UNIX_SOCKET_FLAG_INDEX = 0;
 
 //
 // Signal priorities.

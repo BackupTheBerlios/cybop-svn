@@ -20,41 +20,83 @@
  *
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
+ *
+ * This file handles cyboi internal variables which are needed to communicate
+ * with underlying sub systems or hardware directly. Various platforms and
+ * user interfaces are considered.
+ *
+ * Variables belong to for example:
+ * - Socket
+ * - TCP/IP
+ * - X-Windows
+ * - Macintosh
+ * - MS Windows
+ *
+ * @version $Revision: 1.2 $ $Date: 2004-06-27 00:59:43 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTERNALS_SOURCE
 #define INTERNALS_SOURCE
 
+#include "../array/array.c"
+#include "../global/constant.c"
+#include "../logger/logger.c"
+
 /**
- * This is the internals.
+ * Creates the internals.
  *
- * These are internal data and flags for legacy stuff and
- * handling of various platforms and graphical user interfaces
- * such as X-Windows, Macintosh or MS Windows.
- *
- * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
- * @author Christian Heller <christian.heller@tuxtax.de>
+ * @param p0 the transient model
+ * @param p1 the transient model size
  */
-struct internals {
+void create_internals(void* p0, const void* p1) {
 
-    /** The x windows flag. */
-    int x_windows_flag;
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &CREATE_INTERNALS_MESSAGE, (void*) &CREATE_INTERNALS_MESSAGE_COUNT);
 
-    /** The x windows. */
-    void* x_windows;
+    // Create internals.
+    create_array(p0, (void*) &INTEGER_ARRAY, (void*) &INTERNALS_COUNT);
 
-    /** The macintosh flag. */
-    int macintosh_flag;
+    // Initialize elements.
+    int unix_socket_flag = 0;
+//??    int x_windows_flag = 0;
+//??    void* x_windows = NULL_POINTER;
+//??    int macintosh_flag = 0;
+//??    void* macintosh = NULL_POINTER;
+//??    int ms_windows_flag = 0;
+//??    void* ms_windows = NULL_POINTER;
 
-    /** The macintosh. */
-    void* macintosh;
+    // Create elements.
+//??    create_array((void*) &p, (void*) &POINTER_ARRAY, p1);
 
-    /** The ms windows flag. */
-    int ms_windows_flag;
+    // Set elements in ascending order.
+    set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &UNIX_SOCKET_FLAG_INDEX, (void*) &unix_socket_flag);
+}
 
-    /** The ms windows. */
-    void* ms_windows;
-};
+/**
+ * Destroys the internals.
+ *
+ * @param p0 the transient model
+ * @param p1 the transient model size
+ */
+void destroy_internals(void* p0, const void* p1) {
+
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &DESTROY_INTERNALS_MESSAGE, (void*) &DESTROY_INTERNALS_MESSAGE_COUNT);
+
+    // Initialize elements.
+    int unix_socket_flag = 0;
+
+    // Get elements.
+    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &UNIX_SOCKET_FLAG_INDEX, (void*) &unix_socket_flag);
+
+    // Remove elements in descending order.
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &INTERNALS_COUNT, (void*) &UNIX_SOCKET_FLAG_INDEX);
+
+    // Destroy elements.
+//??    destroy_array((void*) &p, (void*) &POINTER_ARRAY, p1);
+
+    // Destroy internals.
+    destroy_array(p0, (void*) &INTEGER_ARRAY, (void*) &INTERNALS_COUNT);
+}
 
 /* INTERNALS_SOURCE */
 #endif

@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.20 $ $Date: 2004-06-23 21:48:10 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2004-06-27 00:59:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,8 @@
 #include "../signal/signal_memory.c"
 #include "../test/test.c"
 #include "../x_windows/x_windows_handler.c"
-//?? Temporary for character screen testing.
+//?? Temporary for testing.
+#include "../socket/server_unix.c"
 #include "../cyboi/character_screen.c"
 
 /**
@@ -354,7 +355,7 @@ int main(int p0, char** p1) {
             int is = 0;
 
             // Create internals container.
-//??            create_internals((void*) &i, (void*) &ic, (void*) &is);
+            create_internals((void*) &i, (void*) &is);
 
             //
             // Signal container.
@@ -367,6 +368,24 @@ int main(int p0, char** p1) {
 
             // Create signal container.
             create_signal_memory((void*) &s, (void*) &ss);
+
+            //
+            //?? Test to set internals values.
+            //?? Either take them from command line arguments or
+            //?? from an extra cyboi configuration file?
+            //?? Much later, all internals shall be created by default;
+            //?? a cybol application can then choose if it wants to use a
+            //?? certain communication mechanism that cyboi offers or not.
+            //
+
+            //?? Set unix socket flag so that unix server socket gets created.
+            int unix_socket_flag = 1;
+            set_array_element((void*) &i, (void*) &INTEGER_ARRAY, (void*) &UNIX_SOCKET_FLAG_INDEX, (void*) &unix_socket_flag);
+
+            if (unix_socket_flag == 1) {
+
+//??                create_unix_socket();
+            }
 
             //
             // Startup model.
@@ -448,7 +467,7 @@ int main(int p0, char** p1) {
             destroy_signal_memory((void*) &s, (void*) &ss);
 
             // Destroy internals container.
-//??            destroy_internals((void*) &i, (void*) &ic, (void*) &is);
+            destroy_internals((void*) &i, (void*) &is);
 
             // Destroy knowledge container.
             destroy_compound((void*) &k, (void*) &ks);

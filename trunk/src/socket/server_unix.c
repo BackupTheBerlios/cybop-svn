@@ -23,7 +23,7 @@
  *
  * This file handles a server UNIX FILE socket.
  *
- * @version $Revision: 1.3 $ $Date: 2004-06-24 11:45:37 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-06-27 00:59:43 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -37,37 +37,50 @@
 #include <sys/un.h>
 #include <unistd.h>
 
-int main() {
+/**
+ * Creates a unix socket.
+ */
+void create_unix_socket() {
 
-    int server_socketnummer, client_socketnummer;
-    int server_laenge, client_laenge;
-    struct sockaddr_un server_address;
-    struct sockaddr_un client_address;
+    static const char SOCKET_NAME_ARRAY[] = {'s', 'o', 'c', 'k', 'e', 't', '\0'};
+    static const char* SOCKET_NAME = SOCKET_NAME_ARRAY;
+    static const int SOCKET_NAME_COUNT = 7;
 
-    // Unlink previous server socket with similar name.
-    unlink("server_socket");
-    server_socketnummer = socket(AF_UNIX,SOCK_STREAM,0);
+    // Unlink previous socket with identical name.
+//??    unlink(SOCKET_NAME);
 
-    server_address.sun_family=AF_UNIX;
-    strcpy(server_address.sun_path, "server_socket");
+    // Open socket and get its number.
+    int n = socket(AF_UNIX, SOCK_STREAM, 0);
 
-    server_laenge = sizeof(server_address);
-    bind(server_socketnummer, (struct sockaddr*) &server_address, server_laenge);
+    // The socket address.
+    struct sockaddr_un a;
+    // Set unix family.
+    a.sun_family = AF_UNIX;
+    // Set path.
+    strcpy(a.sun_path, SOCKET_NAME);
 
-    char ch;
-    char strg[sizeof *stdin];
+    // The socket address size.
+    int s = sizeof(a);
 
-    // This might BLOCK further processing!!!
-    // 5 might?? mean the number of possible clients which can be served!
-    listen(server_socketnummer, 5);
+    // Bind number to address.
+    bind(n, (struct sockaddr*) &a, s);
+
+    // Listen at socket.
+    // CAUTION! This might block further processing!
+    // The number (5) might mean the number of possible clients which can be served.
+    listen(n, 5);
     // Once listen is left, it is -- in this example -- not entered again!
     // Implement this later!
 
-    client_laenge = sizeof(client_address);
-    client_socketnummer = accept(server_socketnummer, (struct sockaddr*) &client_address, &client_laenge);
+/*??
+    // The following is client stuff.
+    struct sockaddr_un client_address;
+    int client_laenge = sizeof(client_address);
+    int client_socketnummer = accept(server_socket_number, (struct sockaddr*) &client_address, &client_laenge);
 
+    char ch;
+    char strg[sizeof *stdin];
     char hello[300] = "Hallo!";
-
     int j = 0;
 
     while(1) {
@@ -77,15 +90,18 @@ int main() {
             break;
         }
 
-        read(client_socketnummer,&strg,300);
-        strcat(strg,hello);
-        write(client_socketnummer,&strg,300);
+        read(client_socketnummer, &strg, 300);
+        strcat(strg, hello);
+        write(client_socketnummer, &strg, 300);
 
         j++;
     }
 
     close(client_socketnummer);
-    close(server_socketnummer);
+*/
+
+    // Close socket.
+    close(n);
 }
 
 /* SERVER_UNIX_SOURCE */
