@@ -32,7 +32,7 @@ package cyboi;
  *
  * Unfortunately, handling of most events is done via graphical components in java.
  *
- * @version $Revision: 1.10 $ $Date: 2003-09-09 14:37:26 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-09-10 15:04:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class JavaEventHandler extends java.awt.EventQueue {
@@ -389,15 +389,21 @@ class JavaEventHandler extends java.awt.EventQueue {
                 }*/ else if (id == java.awt.event.MouseEvent.MOUSE_MOVED) {
 
                     Item it = SignalHandler.statics;
+                    Vector p = new Vector();
+                    
+                    if (p != null) {
 
-                    ItemHandler.set_item_element(it, "mouse.pointer_position.x_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getX()));
-                    ItemHandler.set_item_element(it, "mouse.pointer_position.x_distance.unit", "pixel");
-                    ItemHandler.set_item_element(it, "mouse.pointer_position.y_distance.quantity", new java.lang.Integer(((java.awt.event.MouseEvent) evt).getY()));
-                    ItemHandler.set_item_element(it, "mouse.pointer_position.y_distance.unit", "pixel");
-                    ItemHandler.set_item_element(it, "mouse.pointer_position.z_distance.quantity", new java.lang.Integer(0));
-                    ItemHandler.set_item_element(it, "mouse.pointer_position.z_distance.unit", "pixel");
-
-                    s.predicate = "mouse_moved";
+                        p.x = ((java.awt.event.MouseEvent) evt).getX();
+                        p.y = ((java.awt.event.MouseEvent) evt).getY();
+                        p.z = 0;
+    
+                        ItemHandler.set_item_element(it, "mouse.pointer_position", p);
+                        s.predicate = "mouse_moved";
+                        
+                    } else {
+                        
+                        LogHandler.log(LogHandler.ERROR_LOG_LEVEL, "Could not handle java event. The pointer position is null.");
+                    }
     
                 }/*?? else if (id == java.awt.event.MouseEvent.MOUSE_PRESSED) {
     
