@@ -23,7 +23,7 @@
  *
  * This file handles a file.
  *
- * @version $Revision: 1.6 $ $Date: 2004-05-29 15:15:15 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2004-06-08 22:35:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -322,12 +322,13 @@ void write_file(const void* p0, const void* p1, const void* p2, const void* p3, 
  *
  * @param p0 the array
  * @param p1 the array count
- * @param p2 the ftp url
- * @param p3 the ftp url count
+ * @param p2 the array size
+ * @param p3 the ftp url
+ * @param p4 the ftp url count
  * ?? login
  * ?? password
  */
-void read_ftp(void* p0, void* p1, const void* p2, const void* p3) {
+void read_ftp(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /**
@@ -335,12 +336,13 @@ void read_ftp(void* p0, void* p1, const void* p2, const void* p3) {
  *
  * @param p0 the array
  * @param p1 the array count
- * @param p2 the ftp url
- * @param p3 the ftp url count
+ * @param p2 the array size
+ * @param p3 the ftp url
+ * @param p4 the ftp url count
  * ?? login
  * ?? password
  */
-void write_ftp(const void* p0, const void* p1, void* p2, void* p3) {
+void write_ftp(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
 }
 
 /**
@@ -348,10 +350,11 @@ void write_ftp(const void* p0, const void* p1, void* p2, void* p3) {
  *
  * @param p0 the array
  * @param p1 the array count
- * @param p2 the http url
- * @param p3 the http url count
+ * @param p2 the array size
+ * @param p3 the http url
+ * @param p4 the http url count
  */
-void read_http(void* p0, void* p1, const void* p2, const void* p3) {
+void read_http(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /**
@@ -359,10 +362,11 @@ void read_http(void* p0, void* p1, const void* p2, const void* p3) {
  *
  * @param p0 the array
  * @param p1 the array count
- * @param p2 the http url
- * @param p3 the http url count
+ * @param p2 the array size
+ * @param p3 the http url
+ * @param p4 the http url count
  */
-void write_http(const void* p0, const void* p1, void* p2, void* p3) {
+void write_http(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
 }
 
 /* FILE_SOURCE */

@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.12 $ $Date: 2004-05-31 17:49:23 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2004-06-08 22:35:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -221,7 +221,7 @@ void initialize_operation(void* p0, void* p1, void* p2, const void* p3, const vo
                                             // Call procedure recursively if more parameters
                                             // are following after the separator.
                                             // Set index of remaining string to one after the separator.
-                                            initialize_operation(p0, p1, (void*) &r, (void*) &rc);
+                                            initialize_operation(p0, p1, p2, (void*) &r, (void*) &rc);
 
                                         } else {
 
