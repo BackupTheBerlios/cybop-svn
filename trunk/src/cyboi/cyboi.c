@@ -26,7 +26,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.52 $ $Date: 2004-12-20 21:05:15 $ $Author: christian $
+ * @version $Revision: 1.53 $ $Date: 2004-12-21 10:53:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,11 +59,11 @@
  * - create global variables
  * - create internals
  * - create signal memory
- * - create statics (state/ logic knowledge container etc.)
+ * - create statics (state/ logic knowledge memory etc.)
  * - create startup signal and add to signal memory
  * - run dynamics (signal waiting loop)
  * - destroy startup signal
- * - destroy statics (state/ logic knowledge container etc.)
+ * - destroy statics (state/ logic knowledge memory etc.)
  * - destroy signal memory
  * - destroy internals
  * - destroy global variables
@@ -80,6 +80,8 @@ int main(int p0, char** p1) {
     //
     // Global variables.
     //
+
+    log_message_debug("Create globals.");
 
     // Create global variables.
     // CAUTION! They have to be created BEFORE the command line parameter check below!
@@ -101,16 +103,13 @@ int main(int p0, char** p1) {
         if (p0 == *STARTUP_PARAMETERS_COUNT) {
 
             //
-            // Internals.
+            // Internals memory.
             //
 
-            // The internal is a pointer to array with 4 colums
-            // colum 1:  pointer for the value
-            // colum 2:  type for the value
-            // colum 3:  count for the value
-            // colum 4:  size for the value
-            void* i = NULL_POINTER;
+            log_message_debug("Create internals memory.");
 
+            // The internals memory.
+            void* i = NULL_POINTER;
             create_internals_memory((void*) &i, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT);
 
             // Copy configuration file parameters into internals.
@@ -120,40 +119,39 @@ int main(int p0, char** p1) {
             // Signal memory.
             //
 
+            log_message_debug("Create signal memory.");
+
+            // The signal memory count.
+            int* mc = INTEGER_NULL_POINTER;
+            create_integer((void*) &mc);
+            *mc = 0;
+
+            // The signal memory size.
+            int* ms = INTEGER_NULL_POINTER;
+            create_integer((void*) &ms);
+            *ms = 0;
+
             // The signal memory.
-            void** pp_m = NULL_POINTER;
-            int* p_mc = NULL_POINTER;
-            int* p_ms = NULL_POINTER;
+            void* m = NULL_POINTER;
+            create((void*) &m, (void*) &ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
+            //?? TODO: Delete the following lines!?
+            //?? Replace with standard data values.
             // Create internals.
-            create_internal((void*) &pp_m, (void*) &INTERNAL_TYPE_POINTER);
-            create_internal((void*) &p_mc, (void*) &INTERNAL_TYPE_INTEGER);
-            create_internal((void*) &p_ms, (void*) &INTERNAL_TYPE_INTEGER);
+            create_internal((void*) &m, (void*) &INTERNAL_TYPE_POINTER);
+            create_internal((void*) &mc, (void*) &INTERNAL_TYPE_INTEGER);
+            create_internal((void*) &ms, (void*) &INTERNAL_TYPE_INTEGER);
 
-            *p_mc = 0;
-            *p_ms = 0;
-
-            // Create signal container.
-            create(pp_m, p_ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
-
-            // Set signal container into internals.
-            set_internal((void*) &i, (void*) &pp_m,
-                         (void*) &INTERNAL_TYPE_POINTER,
-                         (void*) &INTERNAL_SIGNAL_MEMORY_INDEX);
-
-            set_internal((void*) &i, (void*) &p_mc,
-                         (void*) &INTERNAL_TYPE_INTEGER,
-                         (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX);
-
-            set_internal((void*) &i, (void*) &p_ms,
-                         (void*) &INTERNAL_TYPE_INTEGER,
-                         (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX);
-
-            log_message_debug("Initialized signal container.");
+            // Set signal memory into internals.
+            set_internal((void*) &i, (void*) &m, (void*) &INTERNAL_TYPE_POINTER, (void*) &INTERNAL_SIGNAL_MEMORY_INDEX);
+            set_internal((void*) &i, (void*) &mc, (void*) &INTERNAL_TYPE_INTEGER, (void*) &INTERNAL_SIGNAL_MEMORY_COUNT_INDEX);
+            set_internal((void*) &i, (void*) &ms, (void*) &INTERNAL_TYPE_INTEGER, (void*) &INTERNAL_SIGNAL_MEMORY_SIZE_INDEX);
 
             //
-            // Knowledge container.
+            // Knowledge memory.
             //
+
+            log_message_debug("Create knowledge memory.");
 
             // Initialize knowledge and its count and size.
             void* pp_k = NULL_POINTER;
@@ -168,12 +166,12 @@ int main(int p0, char** p1) {
             *p_kc = 0;
             *p_ks = 0;
 
-            // Create knowledge container.
+            // Create knowledge memory.
             create( pp_k, p_ks,
                     (void*) &COMPOUND_ABSTRACTION,
                     (void*) &COMPOUND_ABSTRACTION_COUNT );
 
-            // set the knowledge container into internals
+            // set the knowledge memory into internals
             set_internal( (void*) &i, (void*) &pp_k,
                           (void*) &INTERNAL_TYPE_POINTER,
                           (void*) &INTERNAL_KNOWLEDGE_MODEL_INDEX );
@@ -185,18 +183,22 @@ int main(int p0, char** p1) {
             set_internal( (void*) &i, (void*) &p_ks,
                           (void*) &INTERNAL_TYPE_INTEGER,
                           (void*) &INTERNAL_KNOWLEDGE_MODEL_SIZE_INDEX );
-            log_message_debug( "init knowledge container" );
+            log_message_debug( "init knowledge memory" );
 
 
             //
             // TCP socket.
             //
 
+            log_message_debug("Create tcp socket.");
+
             create_tcp_socket((void*) &i);
 
             //
             // UNIX socket.
             //
+
+//??            log_message_debug("Create unix socket.");
 
 //            // Initialize unix server socket.
 //            int unix_server_socket = -1;
@@ -213,6 +215,8 @@ int main(int p0, char** p1) {
             //
             // Startup model.
             //
+
+            log_message_debug("Create startup model.");
 
             // The source channel.
             char** sc = NULL_POINTER;
@@ -285,12 +289,14 @@ int main(int p0, char** p1) {
             // Startup signal.
             //
 
+            log_message_debug("Create startup signal.");
+
             // get the new main signal id
             int id = 0;
-            get_new_signal_id(pp_m, p_mc, &id);
+            get_new_signal_id(m, mc, &id);
 
             // Add startup signal to signal memory.
-            set_signal(pp_m, p_mc, p_ms,   //memory
+            set_signal(m, mc, ms,   //memory
                 (void*) &da, (void*) &dac,              //dest abtsraction
                 (void*) &dm, (void*) &dmc,              //dest model
                 (void*) &dd, (void*) &ddc,              //dest details
@@ -302,6 +308,8 @@ int main(int p0, char** p1) {
             //
             // Waiting loop.
             //
+
+            log_message_debug("Enter signal waiting loop.");
 
             // The system is now started up and complete so that a loop
             // can be entered, waiting for signals (events/ interrupts)
@@ -328,6 +336,8 @@ int main(int p0, char** p1) {
                 (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
 */
 
+//??            log_message_debug("Destroy unix socket.");
+
 //            // Destroy unix server socket.
 //            if (unix_server_socket_flag == 1) {
 //
@@ -335,12 +345,15 @@ int main(int p0, char** p1) {
 //            }
 
             // Destroy knowledge.
+            log_message_debug("Destroy knowledge memory.");
             destroy(pp_k, p_ks, (void*) &COMPOUND_ABSTRACTION, (void*) &COMPOUND_ABSTRACTION_COUNT);
 
             // Destroy signal memory.
-            destroy(pp_m, p_ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
+            log_message_debug("Destroy signal memory.");
+            destroy(m, ms, (void*) &SIGNAL_MEMORY_ABSTRACTION, (void*) &SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
             // Destroy internals.
+            log_message_debug("Destroy internals memory.");
             destroy_internals_memory((void*) &i, (void*) &INTERNALS_MEMORY_ELEMENTS_COUNT);
 
             log_message((void*) &INFO_LOG_LEVEL, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE, (void*) &EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
@@ -348,6 +361,7 @@ int main(int p0, char** p1) {
             // Destroy global variables.
             // CAUTION! They have to be destroyed AFTER the last log message above!
             // Otherwise, the logger may not be able to log possible error messages.
+            log_message_debug("Destroy globals.");
             destroy_globals();
 
             // Set return value to 0, to indicate proper shutdown.
