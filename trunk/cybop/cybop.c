@@ -33,6 +33,7 @@
 
 //?? Temporary for character screen testing.
 #include "character_screen_handler.c"
+#include "array_handler.c"
 
 /**
  * This is the Cybernetics Oriented Interpreter (CYBOI).
@@ -40,7 +41,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.10 $ $Date: 2003-10-09 10:54:18 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2003-10-12 12:33:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -127,6 +128,35 @@ int main(int p0, char** p1) {
 
     //?? Temporary character based screen output test.
     show_character_screen();
+
+//?? --
+    void** a = malloc(sizeof(void*));
+
+    void* c = (void*) "test_signal";
+    int i = 0;
+    a[i] = c;
+    void* result = a[i];
+    puts((char*) result);
+    
+/*??
+//??    set_array_element(a, (void*) &i, c);
+
+    void* result = malloc(sizeof(void*));
+//??    get_array_element(a, 0, result);
+    puts((char*) result);
+    free(result);
+
+    free(a);
+    int size = sizeof(a);
+    if (size == 4) {
+        puts("size: 4");
+    } else if (size > 4) {
+        puts("size: > 4");
+    }
+*/
+
+    return 0;
+//?? --
     
     if (p1 != 0) {
 

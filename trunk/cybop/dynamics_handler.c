@@ -33,7 +33,7 @@
  *
  * It implements dynamic operations.
  *
- * @version $Revision: 1.6 $ $Date: 2003-10-09 10:54:18 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2003-10-12 12:33:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -329,6 +329,96 @@ static void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p
     } else {
         
         puts("ERROR: Could not handle mouse clicked action. The item is null.");
+    }
+}
+
+//
+// Instance.
+//
+
+/**
+ * Creates an instance.
+ *
+ * @param p0 the instance
+ * @param p1 the model
+ * @param p2 the abstraction
+ */
+/*??
+static void create_instance(void* p0, void* p1, void* p2) {
+
+    log((void*) &INFO_LOG_LEVEL, "Create instance: ");
+    log((void*) &INFO_LOG_LEVEL, p1);
+
+    if (strcmp(p2, COMPLEX_MODEL) == 0) {
+
+        create_complex_instance(p0, p1);
+
+    } else if (strcmp(p2, BOOLEAN_PRIMITIVE) == 0) {
+
+        create_boolean_instance(p0, p1);
+
+    } else if (strcmp(p2, INTEGER_PRIMITIVE) == 0) {
+
+        create_integer_instance(p0, p1);
+
+    } else if (strcmp(p2, FLOAT_PRIMITIVE) == 0) {
+
+        create_float_instance(p0, p1);
+
+    } else if (strcmp(p2, VECTOR_PRIMITIVE) == 0) {
+
+        create_vector_instance(p0, p1);
+
+    } else if (strcmp(p2, STRING_PRIMITIVE) == 0) {
+
+        create_string_instance(p0, p1);
+
+    } else if (strcmp(p2, TIME_PRIMITIVE) == 0) {
+
+        create_time_instance(p0, p1);
+    }
+}
+
+/**
+ * Destroys the instance.
+ *
+ * @param p0 the instance
+ * @param p1 the model
+ * @param p2 the abstraction
+ */
+/*??
+static void destroy_instance(void* p0, void* p1, void* p2) {
+
+    log((void*) &INFO_LOG_LEVEL, "Destroy instance: ");
+    log((void*) &INFO_LOG_LEVEL, p1);
+
+    if (strcmp(p2, COMPLEX_MODEL) == 0) {
+
+        destroy_complex_instance(p0, p1);
+        
+    } else if (strcmp(p2, BOOLEAN_PRIMITIVE) == 0) {
+
+        destroy_boolean_instance(p0, p1);
+
+    } else if (strcmp(p2, INTEGER_PRIMITIVE) == 0) {
+
+        destroy_integer_instance(p0, p1);
+
+    } else if (strcmp(p2, FLOAT_PRIMITIVE) == 0) {
+
+        destroy_float_instance(p0, p1);
+
+    } else if (strcmp(p2, VECTOR_PRIMITIVE) == 0) {
+
+        destroy_vector_instance(p0, p1);
+
+    } else if (strcmp(p2, STRING_PRIMITIVE) == 0) {
+
+        destroy_string_instance(p0, p1);
+
+    } else if (strcmp(p2, TIME_PRIMITIVE) == 0) {
+
+        destroy_time_instance(p0, p1);
     }
 }
 

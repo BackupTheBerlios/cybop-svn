@@ -34,7 +34,7 @@
  *
  * Map elements are accessed over their name or index.
  *
- * @version $Revision: 1.12 $ $Date: 2003-10-09 10:54:18 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-10-12 12:33:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,8 +55,10 @@ static void initialize_map(void* p0) {
 
         log((void*) &INFO_LOG_LEVEL, "Initialize map.");
 
-        m->names = (void**) malloc(0);
-        m->references = (void**) malloc(0);
+        m->names = malloc(sizeof(struct array));
+        initialize_array(m->names);
+        m->references = malloc(sizeof(struct array));
+        initialize_array(m->references);
 
     } else {
 
@@ -98,8 +100,7 @@ static void get_map_size(void* p0, void* p1) {
 
     if (m != 0) {
 
-        int* s = (int*) p1;
-        *s = sizeof(m->names);
+        get_array_size(m->names, p1);
 
     } else {
 
@@ -397,11 +398,11 @@ static void set_map_element(void* p0, void* p1, void* p2) {
  */
 static void add_map_element(void* p0, void* p1, void* p2) {
 
-    void* n = malloc(0);
+    char* n = (char*) malloc(0);
 
     // Get name extended by next index.
-    get_map_element_name(p0, p1, n);
-    set_map_element(p0, n, p2);
+    get_map_element_name(p0, p1, (void*) n);
+    set_map_element(p0, (void*) n, p2);
 
 /*??
     puts("TEST e");
@@ -415,7 +416,7 @@ static void add_map_element(void* p0, void* p1, void* p2) {
     }
 */
     
-    free(n);
+//??    free(n);
 }
 
 /**

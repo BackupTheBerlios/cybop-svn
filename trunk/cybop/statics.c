@@ -34,7 +34,7 @@
  * Complex models consist of other complex models and primitive models.
  * Primitive models are the final abstraction in software.
  *
- * @version $Revision: 1.3 $ $Date: 2003-10-09 10:54:18 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2003-10-12 12:33:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: complex.c,v $
+ * $RCSfile: array.c,v $
  *
  * Copyright (c) 1999-2003. Christian Heller. All rights reserved.
  *
@@ -22,31 +22,36 @@
  * - Cybernetics Oriented Programming -
  */
 
-#ifndef COMPLEX_SOURCE
-#define COMPLEX_SOURCE
+#ifndef ARRAY_SOURCE
+#define ARRAY_SOURCE
 
 /**
- * This is a complex.
+ * This is an array.
  *
- * It represents an abstract description of some real world thing.
+ * An array represents an allocated area in the computer's memory,
+ * that can contain a number of abstract elements.
+ * An abstraction simplifies and represents a real world item.
+ * In the case of computer science, everything gets abstracted to 0 and 1.
+ * But that also means that every abstraction has a bytecode representation.
  *
- * A complex can be created by instantiating (cloning) an existing model.
- * Instantiating means allocating some place in the computer's memory.
- * Basically, every complex can become a model (template) itself,
- * if copies (other instances) of this complex are created.
- *
- * @version $Revision: 1.7 $ $Date: 2003-10-12 12:33:42 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2003-10-12 12:33:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
-struct complex {
+struct array {
 
-    /** The children. */
-    void* children;
+    /** The internal array of pointers (memory addresses). */
+    void** internal_array;
 
-    /** The positions. */
-    void* positions;
+    /**
+     * The array size.
+     * The sizeof operation can only be used for real arrays, expressed with [].
+     * Since CYBOI allocates arrays dynamically and stores them as *,
+     * the array size needs to be stored extra here because sizeof will not work.
+     * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
+     */
+    int size;
 };
 
-/* COMPLEX_SOURCE */
+/* ARRAY_SOURCE */
 #endif
 

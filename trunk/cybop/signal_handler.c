@@ -38,7 +38,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.12 $ $Date: 2003-10-09 10:54:18 $ $Author: christian $
+ * @version $Revision: 1.13 $ $Date: 2003-10-12 12:33:42 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -279,6 +279,8 @@ static void handle_signal(void* p0, void* p1, void* p2) {
     int* sf = (int*) p2;
 
     if (s != 0) {
+
+//??        create_instance(statics, s->object, &COMPLEX_MODEL);
 
         char* a = (char*) s->predicate;
 
