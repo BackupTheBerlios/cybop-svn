@@ -32,7 +32,7 @@ package cyboi;
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) format.
  *
- * @version $Revision: 1.26 $ $Date: 2003-08-11 19:30:40 $ $Author: christian $
+ * @version $Revision: 1.27 $ $Date: 2003-08-12 17:14:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class Main {
@@ -62,16 +62,39 @@ class Main {
                     CategoryHandler.xml_parser = new org.apache.xerces.parsers.DOMParser();
                     CategoryHandler.initialize_xml_parser(CategoryHandler.xml_parser);
                     
-                    // Statics (system).
-                    java.lang.Object statics = ItemHandler.create_object(statics_category_name, Statics.CATEGORY);
-
-                    // Dynamics (signal).
-                    java.lang.Object dynamics = ItemHandler.create_object(SignalHandler.SIGNAL_CATEGORY_NAME, Dynamics.CATEGORY);
-
                     // Memory (signal queue).
                     java.lang.Object signal_memory = new Map();
                     MapHandler.initialize_map(signal_memory);
 
+                    // Statics (system).
+                    java.lang.Object statics = ItemHandler.create_object(statics_category_name, Statics.CATEGORY);
+
+                    // Dynamics (signal).
+                    if (dynamics_category_name != null) {
+                        
+                        // Only send a new signal (store in signal memory) if an action exists.
+                        Signal tmp = new Signal();
+                
+                        if (tmp != null) {
+                        
+                            // Set signal elements.
+                            tmp.priority = SignalHandler.NORMAL_PRIORITY;
+                            tmp.language = SignalHandler.NEURO_LANGUAGE;
+                            tmp.predicate = dynamics_category_name;
+        
+                            // Add signal to signal memory (interrupt vector table).
+                            MapHandler.add_map_element(signal_memory, tmp, SignalHandler.SIGNAL);
+            
+                        } else {
+                
+                            java.lang.System.out.println("ERROR: Could not create initial signal. The signal is null.");
+                        }
+            
+                    } else {
+                        
+                        java.lang.System.out.println("ERROR: Could not create initial signal. The dynamics (signal/ action) is null.");
+                    }
+    
                     // Event handler.
                     EventHandler.signal_memory = signal_memory;
                     java.lang.Object event_handler = new EventHandler();
@@ -80,7 +103,7 @@ class Main {
                     // The system is now started up and complete so that a loop
                     // can be entered, waiting for signals (events/ interrupts)
                     // which are stored/ found in the signal memory.
-                    Main.await(signal_memory, dynamics);
+                    Main.await(signal_memory);
     
                     // The loop above is left as soon as its shutdown flag is set.
     
@@ -88,17 +111,14 @@ class Main {
                     event_handler = null;
                     EventHandler.signal_memory = null;
                     
-                    // Memory (signal queue).
-                    MapHandler.finalize_map(signal_memory);
-                    signal_memory = null;
-
                     // Dynamics (signal).
-                    // Abstraction is set to null because it is not wanted to write
-                    // and change the signal category CYBOL file.
-                    ItemHandler.destroy_object(dynamics, SignalHandler.SIGNAL_CATEGORY_NAME, null);
 
                     // Statics (system).
                     ItemHandler.destroy_object(statics, statics_category_name, Statics.CATEGORY);
+
+                    // Memory (signal queue).
+                    MapHandler.finalize_map(signal_memory);
+                    signal_memory = null;
 
                     // XML parser.
                     CategoryHandler.finalize_xml_parser(CategoryHandler.xml_parser);
@@ -152,28 +172,29 @@ class Main {
      * - reset
      * 
      * @param p0 the signal memory
-     * @param p1 the signal
      */
-    static void await(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
+    static void await(java.lang.Object p0) throws java.lang.Exception {
 
         // The shutdown flag.
         boolean sf = false;
+        // Transporting signal.
+        java.lang.Object s = new Signal();
     
         while (true) {
 
             if (sf != true) {
 
                 // Receive signal.
-                SignalHandler.receive(p0, p1);
+                SignalHandler.receive(p0, s);
     
                 // Handle signal.
-                sf = SignalHandler.handle(p1, 0);
+                sf = SignalHandler.handle(s, 0);
     
                 // Send signal.
-                SignalHandler.send(p0, p1);
+                SignalHandler.send(p0, s);
     
                 // Reset signal.
-                SignalHandler.reset(p1);
+                SignalHandler.reset(s);
                 
             } else {
                 

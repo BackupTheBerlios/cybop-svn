@@ -28,13 +28,12 @@ package cyboi;
  * This is a signal handler.
  *
  * It offers signal processing procedures which should be called in the following order:
+ * - receive
+ * - handle
+ * - send
+ * - reset
  *
- * receive
- * handle
- * send
- * reset
- *
- * @version $Revision: 1.8 $ $Date: 2003-08-11 19:30:40 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2003-08-12 17:14:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 class SignalHandler {
@@ -45,36 +44,6 @@ class SignalHandler {
 
     /** The signal. */
     static java.lang.String SIGNAL = "signal";
-
-    /** The signal category name. */
-    static java.lang.String SIGNAL_CATEGORY_NAME = "cybol/core/signal/signal";
-
-    /** The priority. */
-    static java.lang.String PRIORITY = "priority";
-
-    /** The language. */
-    static java.lang.String LANGUAGE = "language";
-
-    /** The subject (signal receiver). */
-    static java.lang.String SUBJECT = "subject";
-
-    /** The predicate (action). */
-    static java.lang.String PREDICATE = "predicate";
-
-    /** The (genitiv) object (object owner). */
-    static java.lang.String OWNER = "owner";
-
-    /** The (dativ) object (signal sender). */
-    static java.lang.String SENDER = "sender";
-
-    /** The (akussativ) object (passive data model). */
-    static java.lang.String MODEL = "model";
-
-    /** The adverbial (temporal, local, causal). */
-    static java.lang.String ADVERBIAL = "adverbial";
-
-    /** The pre/post condition (conditional clause). */
-    static java.lang.String CONDITION = "condition";
 
     //
     // Priorities.
@@ -145,54 +114,39 @@ class SignalHandler {
      */
     static void receive(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
-        Item s = (Item) p1;
+        Signal s = (Signal) p1;
         
         if (s != null) {
 
             // Read and remove signal from signal memory (interrupt vector table).
-            Item tmp = null;
-//??            Item tmp = (Item) MapHandler.get_map_element(p0, 0);
-//??            MapHandler.remove_map_element(p0, 0);
+            Signal tmp = (Signal) MapHandler.get_map_element(p0, 0);
+            MapHandler.remove_map_element(p0, 0);
             
             if (tmp != null) {
             
+/*??
+
+                Signal is resent again and again, in "send" procedure! --> Debug this!
+
+*/
+                java.lang.System.out.println("TEST pre: " + tmp.predicate);
+
                 // Copy signal memory signal to the transporting signal given as parameter.
-                java.lang.Object o = null;
-                
-                o = MapHandler.get_map_element(tmp.items, SignalHandler.PRIORITY);
-                MapHandler.set_map_element(s.items, o, SignalHandler.PRIORITY);
-        
-                o = MapHandler.get_map_element(tmp.items, SignalHandler.LANGUAGE);
-                MapHandler.set_map_element(s.items, o, SignalHandler.LANGUAGE);
-        
-                o = MapHandler.get_map_element(tmp.items, SignalHandler.SUBJECT);
-                MapHandler.set_map_element(s.items, o, SignalHandler.SUBJECT);
-        
-                o = MapHandler.get_map_element(tmp.items, SignalHandler.PREDICATE);
-                MapHandler.set_map_element(s.items, o, SignalHandler.PREDICATE);
-        
-                o = MapHandler.get_map_element(tmp.items, SignalHandler.OWNER);
-                MapHandler.set_map_element(s.items, o, SignalHandler.OWNER);
-        
-                o = MapHandler.get_map_element(tmp.items, SignalHandler.SENDER);
-                MapHandler.set_map_element(s.items, o, SignalHandler.SENDER);
-        
-                o = MapHandler.get_map_element(tmp.items, SignalHandler.MODEL);
-                MapHandler.set_map_element(s.items, o, SignalHandler.MODEL);
-        
-                o = MapHandler.get_map_element(tmp.items, SignalHandler.ADVERBIAL);
-                MapHandler.set_map_element(s.items, o, SignalHandler.ADVERBIAL);
-        
-                o = MapHandler.get_map_element(tmp.items, SignalHandler.CONDITION);
-                MapHandler.set_map_element(s.items, o, SignalHandler.CONDITION);
+                s.priority = tmp.priority;
+                s.language = tmp.language;
+                s.subject = tmp.subject;
+                s.predicate = tmp.predicate;
+                s.owner = tmp.owner;
+                s.sender = tmp.sender;
+                s.model = tmp.model;
+                s.adverbial = tmp.adverbial;
+                s.condition = tmp.condition;
 
                 // Reset and destroy signal memory signal.
                 // CAUTION! Reset is essential to avoid the accidential destruction of
                 // items transported by the signal.
                 SignalHandler.reset(tmp);
-                // Category and abstraction are not handed over because it is NOT wanted
-                // that the signal category CYBOL file is written and changed.
-                ItemHandler.destroy_object(tmp, SignalHandler.SIGNAL_CATEGORY_NAME, null);
+                tmp = null;
         
             } else {
     
@@ -217,11 +171,11 @@ class SignalHandler {
 
         // The shutdown flag.
         boolean sf = false;
-        Item s = (Item) p0;
+        Signal s = (Signal) p0;
                 
         if (s != null) {
 
-            java.lang.String a = (java.lang.String) MapHandler.get_map_element(s.items, SignalHandler.PREDICATE);
+            java.lang.Object a = s.predicate;
 
             if (a != null) {
 
@@ -256,54 +210,36 @@ class SignalHandler {
      */
     static void send(java.lang.Object p0, java.lang.Object p1) throws java.lang.Exception {
 
-        Item s = (Item) p1;
+        Signal s = (Signal) p1;
         
         if (s != null) {
-
-            java.lang.Object a = MapHandler.get_map_element(s.items, SignalHandler.PREDICATE);
 
             // Only send a new signal (store in signal memory) if an action exists.
             // Otherwise, the chain of signals/ actions finishes here, until a new
             // hardware event (interrupt) occurs.
-            if (a != null) {
+            if (s.predicate != null) {
                 
                 // Create signal for storage in signal memory.
-                Item tmp = (Item) ItemHandler.create_object(SignalHandler.SIGNAL_CATEGORY_NAME, Dynamics.CATEGORY);
+                Signal tmp = new Signal();
         
                 if (tmp != null) {
                 
                     // Copy transporting signal given as parameter to the signal memory signal.
-                    java.lang.Object o = null;
-                    
-                    o = MapHandler.get_map_element(s.items, SignalHandler.PRIORITY);
-                    MapHandler.set_map_element(tmp.items, o, SignalHandler.PRIORITY);
-            
-                    o = MapHandler.get_map_element(s.items, SignalHandler.LANGUAGE);
-                    MapHandler.set_map_element(tmp.items, o, SignalHandler.LANGUAGE);
-            
-                    o = MapHandler.get_map_element(s.items, SignalHandler.SUBJECT);
-                    MapHandler.set_map_element(tmp.items, o, SignalHandler.SUBJECT);
-            
-                    o = MapHandler.get_map_element(s.items, SignalHandler.PREDICATE);
-                    MapHandler.set_map_element(tmp.items, o, SignalHandler.PREDICATE);
-            
-                    o = MapHandler.get_map_element(s.items, SignalHandler.OWNER);
-                    MapHandler.set_map_element(tmp.items, o, SignalHandler.OWNER);
-            
-                    o = MapHandler.get_map_element(s.items, SignalHandler.SENDER);
-                    MapHandler.set_map_element(tmp.items, o, SignalHandler.SENDER);
-            
-                    o = MapHandler.get_map_element(s.items, SignalHandler.MODEL);
-                    MapHandler.set_map_element(tmp.items, o, SignalHandler.MODEL);
+                    tmp.priority = s.priority;
+                    tmp.language = s.language;
+                    tmp.subject = s.subject;
+                    tmp.predicate = s.predicate;
+                    tmp.owner = s.owner;
+                    tmp.sender = s.sender;
+                    tmp.model = s.model;
+                    tmp.adverbial = s.adverbial;
+                    tmp.condition = s.condition;
 
-                    o = MapHandler.get_map_element(s.items, SignalHandler.ADVERBIAL);
-                    MapHandler.set_map_element(tmp.items, o, SignalHandler.ADVERBIAL);
-            
-                    o = MapHandler.get_map_element(s.items, SignalHandler.CONDITION);
-                    MapHandler.set_map_element(tmp.items, o, SignalHandler.CONDITION);
+                    //?? Caution! Todo: Synchronize adding of signals between
+                    //?? SignalHandler.send and EventHandler.dispatchEvent!!
 
                     // Add signal to signal memory (interrupt vector table).
-                    MapHandler.add_map_element(p0, p1, SignalHandler.SIGNAL);
+                    MapHandler.add_map_element(p0, tmp, SignalHandler.SIGNAL);
 
                 } else {
         
@@ -329,19 +265,19 @@ class SignalHandler {
      */
     static void reset(java.lang.Object p0) {
         
-        Item s = (Item) p0;
+        Signal s = (Signal) p0;
         
         if (s != null) {
 
-            MapHandler.remove_map_element(s.items, SignalHandler.PRIORITY);
-            MapHandler.remove_map_element(s.items, SignalHandler.LANGUAGE);
-            MapHandler.remove_map_element(s.items, SignalHandler.SUBJECT);
-            MapHandler.remove_map_element(s.items, SignalHandler.PREDICATE);
-            MapHandler.remove_map_element(s.items, SignalHandler.OWNER);
-            MapHandler.remove_map_element(s.items, SignalHandler.SENDER);
-            MapHandler.remove_map_element(s.items, SignalHandler.MODEL);
-            MapHandler.remove_map_element(s.items, SignalHandler.ADVERBIAL);
-            MapHandler.remove_map_element(s.items, SignalHandler.CONDITION);
+            s.priority = null;
+            s.language = null;
+            s.subject = null;
+            s.predicate = null;
+            s.owner = null;
+            s.sender = null;
+            s.model = null;
+            s.adverbial = null;
+            s.condition = null;
 
         } else {
 
