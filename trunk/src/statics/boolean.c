@@ -1,5 +1,5 @@
 /*
- * $RCSfile: boolean_handler.c,v $
+ * $RCSfile: boolean.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -29,7 +29,7 @@
  * - 1 and 0
  * - on and off
  *
- * @version $Revision: 1.20 $ $Date: 2004-04-27 16:57:23 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

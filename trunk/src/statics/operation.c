@@ -1,5 +1,5 @@
 /*
- * $RCSfile: operation_handler.c,v $
+ * $RCSfile: operation.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -43,7 +43,7 @@
  *
  * Operations can be stored as signals in a signal memory.
  *
- * @version $Revision: 1.28 $ $Date: 2004-04-29 15:18:07 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

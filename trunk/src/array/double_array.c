@@ -1,5 +1,5 @@
 /*
- * $RCSfile: character_array_handler.c,v $
+ * $RCSfile: double_array.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles a character array.
+ * This file handles a double array.
  *
  * An array is a reserved (allocated) area in the computer memory.
  * A programming language like C provides primitive data types whose size
@@ -29,22 +29,22 @@
  * It is therefore possible to create and destroy arrays based on primitive types.
  *
  * The syntax of an array mostly looks like: type[size]
- * Example: char[10]
+ * Example: double[10]
  *
  * When working with an array, it is referenced by a pointer like: type* variable
- * Example: char* array
+ * Example: double* array
  *
  * The array can be dereferenced accordingly: *variable
  * Example: *array
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.19 $ $Date: 2004-04-29 09:17:57 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CHARACTER_ARRAY_HANDLER_SOURCE
-#define CHARACTER_ARRAY_HANDLER_SOURCE
+#ifndef DOUBLE_ARRAY_HANDLER_SOURCE
+#define DOUBLE_ARRAY_HANDLER_SOURCE
 
 #include "../constants.c"
 #include "../logger/log_handler.c"
@@ -54,12 +54,12 @@
 //
 
 /**
- * Creates the character array.
+ * Creates the double array.
  *
  * @param p0 the array
  * @param p1 the maximum count
  */
-void create_character_array(void* p0, const void* p1) {
+void create_double_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -69,10 +69,10 @@ void create_character_array(void* p0, const void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create character array.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create double array.");
 
             // The type size.
-            int t = sizeof(char);
+            int t = sizeof(double);
 
             // Determine size as product of element count and type size.
             int s = *c * t;
@@ -84,22 +84,22 @@ void create_character_array(void* p0, const void* p1) {
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create character array. The array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create double array. The array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create character array. The count is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create double array. The count is null.");
     }
 }
 
 /**
- * Destroys the character array.
+ * Destroys the double array.
  *
  * @param p0 the array
  * @param p1 the maximum count
  */
-void destroy_character_array(void* p0, const void* p1) {
+void destroy_double_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -109,7 +109,7 @@ void destroy_character_array(void* p0, const void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy character array.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy double array.");
 
             //?? TODO: Destroy all array elements in a loop??
             //?? Which is the same as Garbage Collection!
@@ -118,22 +118,22 @@ void destroy_character_array(void* p0, const void* p1) {
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy character array. The array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy double array. The array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy character array. The count is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy double array. The count is null.");
     }
 }
 
 /**
- * Resizes the character array.
+ * Resizes the double array.
  *
  * @param p0 the array
  * @param p1 the maximum count
  */
-void resize_character_array(void* p0, const void* p1) {
+void resize_double_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -143,10 +143,10 @@ void resize_character_array(void* p0, const void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Resize character array.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Resize double array.");
 
             // The type size.
-            int t = sizeof(char);
+            int t = sizeof(double);
 
             // Determine size as product of element count and type size.
             int s = *c * t;
@@ -156,12 +156,12 @@ void resize_character_array(void* p0, const void* p1) {
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize character array. The array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize double array. The array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize character array. The count is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize double array. The count is null.");
     }
 }
 
@@ -170,9 +170,9 @@ void resize_character_array(void* p0, const void* p1) {
 //
 
 /**
- * Compares the character array elements.
+ * Compares the double array elements.
  *
- * Returns 1 if the character elements are equal.
+ * Returns 1 if the double elements are equal.
  * The given result remains unchanged if the array elements are unequal.
  *
  * @param p0 the first array
@@ -180,7 +180,7 @@ void resize_character_array(void* p0, const void* p1) {
  * @param p2 the count
  * @param p3 the result
  */
-void compare_character_array_elements(const void* p0, const void* p1, const void* p2, void* p3) {
+void compare_double_array_elements(const void* p0, const void* p1, const void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -199,13 +199,13 @@ void compare_character_array_elements(const void* p0, const void* p1, const void
                     void** a0 = (void**) p0;
 
                     // The type size.
-                    int t = sizeof(char);
+                    int t = sizeof(double);
                     // The loop variable.
                     int j = 0;
                     // The first element.
-                    char* e0 = CHARACTER_NULL_POINTER;
+                    double* e0 = DOUBLE_NULL_POINTER;
                     // The second element.
-                    char* e1 = CHARACTER_NULL_POINTER;
+                    double* e1 = DOUBLE_NULL_POINTER;
                     // The size.
                     int s = 0;
 
@@ -223,8 +223,8 @@ void compare_character_array_elements(const void* p0, const void* p1, const void
                         s = j * t;
 
                         // Determine the next elements at array plus index.
-                        e0 = (char*) (*a0 + s);
-                        e1 = (char*) (*a1 + s);
+                        e0 = (double*) (*a0 + s);
+                        e1 = (double*) (*a1 + s);
 
                         if (*e0 != *e1) {
 
@@ -237,34 +237,34 @@ void compare_character_array_elements(const void* p0, const void* p1, const void
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character array elements. The first array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double array elements. The first array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character array elements. The second array is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double array elements. The second array is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character array elements. The count is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double array elements. The count is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare character array elements. The result is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double array elements. The result is null.");
     }
 }
 
 /**
- * Sets the character array elements.
+ * Sets the double array elements.
  *
  * @param p0 the destination array
  * @param p1 the index
  * @param p2 the source array
  * @param p3 the count
  */
-void set_character_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
+void set_double_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -283,15 +283,15 @@ void set_character_array_elements(void* p0, const void* p1, const void* p2, cons
                     void** da = (void**) p0;
 
                     // The type size.
-                    int t = sizeof(char);
+                    int t = sizeof(double);
                     // The loop variable.
                     int j = 0;
                     // The destination base to start copying to.
                     void* db = (void*) (*da + *i * t);
                     // The source element.
-                    char* se = CHARACTER_NULL_POINTER;
+                    double* se = DOUBLE_NULL_POINTER;
                     // The destination element.
-                    char* de = CHARACTER_NULL_POINTER;
+                    double* de = DOUBLE_NULL_POINTER;
                     // The size.
                     int s = 0;
 
@@ -306,8 +306,8 @@ void set_character_array_elements(void* p0, const void* p1, const void* p2, cons
                         s = j * t;
 
                         // Determine source and destination element.
-                        se = (char*) (*sa + s);
-                        de = (char*) (db + s);
+                        se = (double*) (*sa + s);
+                        de = (double*) (db + s);
 
                         // Set destination element.
                         *de = *se;
@@ -317,34 +317,34 @@ void set_character_array_elements(void* p0, const void* p1, const void* p2, cons
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array elements. The destination array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set double array elements. The destination array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array elements. The index is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set double array elements. The index is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array elements. The source array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set double array elements. The source array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set character array elements. The count is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set double array elements. The count is null.");
     }
 }
 
 /**
- * Removes the character array elements.
+ * Removes the double array elements.
  *
  * @param p0 the array
  * @param p1 the maximum count
  * @param p2 the index
  * @param p3 the count
  */
-void remove_character_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
+void remove_double_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -363,7 +363,7 @@ void remove_character_array_elements(void* p0, const void* p1, const void* p2, c
                     void** a = (void**) p0;
 
                     // The type size.
-                    int t = sizeof(char);
+                    int t = sizeof(double);
                     // The loop variable.
                     int j = 0;
                     // The remaining elements size.
@@ -373,9 +373,9 @@ void remove_character_array_elements(void* p0, const void* p1, const void* p2, c
                     // The source base.
                     void* sb = (void*) (*a + *i * t + *c * t);
                     // The source element.
-                    char* se = CHARACTER_NULL_POINTER;
+                    double* se = DOUBLE_NULL_POINTER;
                     // The destination element.
-                    char* de = CHARACTER_NULL_POINTER;
+                    double* de = DOUBLE_NULL_POINTER;
                     // The size.
                     int s = 0;
 
@@ -397,8 +397,8 @@ void remove_character_array_elements(void* p0, const void* p1, const void* p2, c
                         s = j * t;
 
                         // Determine source and destination element.
-                        de = (char*) (db + s);
-                        se = (char*) (sb + s);
+                        de = (double*) (db + s);
+                        se = (double*) (sb + s);
 
                         // Set destination element.
                         *de = *se;
@@ -406,7 +406,7 @@ void remove_character_array_elements(void* p0, const void* p1, const void* p2, c
                         j++;
                     }
 
-                    // Set former last elements to ''. The ASCII of '' is 0.
+                    // Set former last elements to 0.0.
                     // This is disabled for now, since when creating an array,
                     // its elements are also NOT initialized with ''.
                     // The calling procedure may just cut off the remaining
@@ -414,34 +414,34 @@ void remove_character_array_elements(void* p0, const void* p1, const void* p2, c
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array elements. The array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove double array elements. The array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array elements. The size is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove double array elements. The size is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array elements. The index is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove double array elements. The index is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove character array elements. The count is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove double array elements. The count is null.");
     }
 }
 
 /**
- * Gets the character array elements.
+ * Gets the double array elements.
  *
  * @param p0 the source array
  * @param p1 the index
  * @param p2 the destination array
  * @param p3 the count
  */
-void get_character_array_elements(const void* p0, const void* p1, void* p2, const void* p3) {
+void get_double_array_elements(const void* p0, const void* p1, void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -460,15 +460,15 @@ void get_character_array_elements(const void* p0, const void* p1, void* p2, cons
                     void** sa = (void**) p0;
 
                     // The type size.
-                    int t = sizeof(char);
+                    int t = sizeof(double);
                     // The loop variable.
                     int j = 0;
                     // The source base to start copying from.
                     void* sb = (void*) (*sa + *i * t);
                     // The source element.
-                    char* se = CHARACTER_NULL_POINTER;
+                    double* se = DOUBLE_NULL_POINTER;
                     // The destination element.
-                    char* de = CHARACTER_NULL_POINTER;
+                    double* de = DOUBLE_NULL_POINTER;
                     // The size.
                     int s = 0;
 
@@ -483,8 +483,8 @@ void get_character_array_elements(const void* p0, const void* p1, void* p2, cons
                         s = j * t;
 
                         // Determine source and destination element.
-                        se = (char*) (sb + s);
-                        de = (char*) (*da + s);
+                        se = (double*) (sb + s);
+                        de = (double*) (*da + s);
 
                         // Set destination element.
                         *de = *se;
@@ -494,27 +494,27 @@ void get_character_array_elements(const void* p0, const void* p1, void* p2, cons
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array elements. The source array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array elements. The source array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array elements. The index is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array elements. The index is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array elements. The destination array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array elements. The destination array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array elements. The count is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array elements. The count is null.");
     }
 }
 
 /**
- * Gets the character array elements index.
+ * Gets the double array elements index.
  *
  * The first occurence of the element will be considered.
  * The given index remains unchanged if no element is found.
@@ -525,7 +525,7 @@ void get_character_array_elements(const void* p0, const void* p1, void* p2, cons
  * @param p3 the count
  * @param p4 the index
  */
-void get_character_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
+void get_double_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -548,7 +548,7 @@ void get_character_array_elements_index(const void* p0, const void* p1, const vo
                         void** a = (void**) p0;
 
                         // The type size.
-                        int t = sizeof(char);
+                        int t = sizeof(double);
                         // The loop variable.
                         int j = 0;
                         // The iteration limit.
@@ -574,7 +574,7 @@ void get_character_array_elements_index(const void* p0, const void* p1, const vo
                             // Determine element.
                             e = (void*) (*a + s);
 
-                            compare_character_array_elements((void*) &e, p2, p3, (void*) &r);
+                            compare_double_array_elements((void*) &e, p2, p3, (void*) &r);
 
                             if (r == 1) {
 
@@ -589,29 +589,29 @@ void get_character_array_elements_index(const void* p0, const void* p1, const vo
 
                     } else {
 
-                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The array is null.");
+                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The array is null.");
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The size is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The size is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The comparison array is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The comparison array is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The count is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The count is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get character array element index. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The index is null.");
     }
 }
 
-/* CHARACTER_ARRAY_HANDLER_SOURCE */
+/* DOUBLE_ARRAY_HANDLER_SOURCE */
 #endif

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: signal_memory_handler.c,v $
+ * $RCSfile: signal_memory.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -35,7 +35,7 @@
  * - send
  * - reset
  *
- * @version $Revision: 1.41 $ $Date: 2004-05-01 11:53:31 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

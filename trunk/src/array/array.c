@@ -1,5 +1,5 @@
 /*
- * $RCSfile: array_handler.c,v $
+ * $RCSfile: array.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -48,7 +48,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.34 $ $Date: 2004-04-29 15:18:06 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

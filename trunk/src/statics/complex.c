@@ -1,5 +1,5 @@
 /*
- * $RCSfile: complex_handler.c,v $
+ * $RCSfile: complex.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -25,7 +25,7 @@
  *
  * A complex consists of two floats, a real and an imaginary.
  *
- * @version $Revision: 1.18 $ $Date: 2004-04-29 11:37:08 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

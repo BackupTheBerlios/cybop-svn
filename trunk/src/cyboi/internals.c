@@ -32,7 +32,7 @@
  * handling of various platforms and graphical user interfaces
  * such as X-Windows, Macintosh or MS Windows.
  *
- * @version $Revision: 1.3 $ $Date: 2004-04-01 17:35:16 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 struct internals {

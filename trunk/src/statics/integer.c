@@ -1,5 +1,5 @@
 /*
- * $RCSfile: integer_handler.c,v $
+ * $RCSfile: integer.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -23,7 +23,7 @@
  *
  * This file handles an integer.
  *
- * @version $Revision: 1.16 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

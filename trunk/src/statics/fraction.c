@@ -1,5 +1,5 @@
 /*
- * $RCSfile: fraction_handler.c,v $
+ * $RCSfile: fraction.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -28,7 +28,7 @@
  * For higher performance, it is mostly better to use floating point numbers
  * (float) which can be calculated by the Arithmetic Logic Unit (ALU).
  *
- * @version $Revision: 1.18 $ $Date: 2004-04-29 11:37:08 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

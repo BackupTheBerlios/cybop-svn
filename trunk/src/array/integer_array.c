@@ -1,5 +1,5 @@
 /*
- * $RCSfile: double_array_handler.c,v $
+ * $RCSfile: integer_array.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles a double array.
+ * This file handles an integer array.
  *
  * An array is a reserved (allocated) area in the computer memory.
  * A programming language like C provides primitive data types whose size
@@ -29,22 +29,22 @@
  * It is therefore possible to create and destroy arrays based on primitive types.
  *
  * The syntax of an array mostly looks like: type[size]
- * Example: double[10]
+ * Example: int[10]
  *
  * When working with an array, it is referenced by a pointer like: type* variable
- * Example: double* array
+ * Example: int* array
  *
  * The array can be dereferenced accordingly: *variable
  * Example: *array
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.17 $ $Date: 2004-04-29 09:17:57 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DOUBLE_ARRAY_HANDLER_SOURCE
-#define DOUBLE_ARRAY_HANDLER_SOURCE
+#ifndef INTEGER_ARRAY_HANDLER_SOURCE
+#define INTEGER_ARRAY_HANDLER_SOURCE
 
 #include "../constants.c"
 #include "../logger/log_handler.c"
@@ -54,12 +54,12 @@
 //
 
 /**
- * Creates the double array.
+ * Creates the integer array.
  *
  * @param p0 the array
  * @param p1 the maximum count
  */
-void create_double_array(void* p0, const void* p1) {
+void create_integer_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -69,10 +69,10 @@ void create_double_array(void* p0, const void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create double array.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Create integer array.");
 
             // The type size.
-            int t = sizeof(double);
+            int t = sizeof(int);
 
             // Determine size as product of element count and type size.
             int s = *c * t;
@@ -84,22 +84,22 @@ void create_double_array(void* p0, const void* p1) {
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create double array. The array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create integer array. The array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create double array. The count is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not create integer array. The count is null.");
     }
 }
 
 /**
- * Destroys the double array.
+ * Destroys the integer array.
  *
  * @param p0 the array
  * @param p1 the maximum count
  */
-void destroy_double_array(void* p0, const void* p1) {
+void destroy_integer_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -109,7 +109,7 @@ void destroy_double_array(void* p0, const void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy double array.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Destroy integer array.");
 
             //?? TODO: Destroy all array elements in a loop??
             //?? Which is the same as Garbage Collection!
@@ -118,22 +118,22 @@ void destroy_double_array(void* p0, const void* p1) {
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy double array. The array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy integer array. The array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy double array. The count is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not destroy integer array. The count is null.");
     }
 }
 
 /**
- * Resizes the double array.
+ * Resizes the integer array.
  *
  * @param p0 the array
  * @param p1 the maximum count
  */
-void resize_double_array(void* p0, const void* p1) {
+void resize_integer_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -143,10 +143,10 @@ void resize_double_array(void* p0, const void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Resize double array.");
+            log_message((void*) &INFO_LOG_LEVEL, (void*) &"Resize integer array.");
 
             // The type size.
-            int t = sizeof(double);
+            int t = sizeof(int);
 
             // Determine size as product of element count and type size.
             int s = *c * t;
@@ -156,12 +156,12 @@ void resize_double_array(void* p0, const void* p1) {
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize double array. The array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize integer array. The array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize double array. The count is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not resize integer array. The count is null.");
     }
 }
 
@@ -170,9 +170,9 @@ void resize_double_array(void* p0, const void* p1) {
 //
 
 /**
- * Compares the double array elements.
+ * Compares the integer array elements.
  *
- * Returns 1 if the double elements are equal.
+ * Returns 1 if the integer elements are equal.
  * The given result remains unchanged if the array elements are unequal.
  *
  * @param p0 the first array
@@ -180,7 +180,7 @@ void resize_double_array(void* p0, const void* p1) {
  * @param p2 the count
  * @param p3 the result
  */
-void compare_double_array_elements(const void* p0, const void* p1, const void* p2, void* p3) {
+void compare_integer_array_elements(const void* p0, const void* p1, const void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -199,13 +199,13 @@ void compare_double_array_elements(const void* p0, const void* p1, const void* p
                     void** a0 = (void**) p0;
 
                     // The type size.
-                    int t = sizeof(double);
+                    int t = sizeof(int);
                     // The loop variable.
                     int j = 0;
                     // The first element.
-                    double* e0 = DOUBLE_NULL_POINTER;
+                    int* e0 = INTEGER_NULL_POINTER;
                     // The second element.
-                    double* e1 = DOUBLE_NULL_POINTER;
+                    int* e1 = INTEGER_NULL_POINTER;
                     // The size.
                     int s = 0;
 
@@ -223,8 +223,8 @@ void compare_double_array_elements(const void* p0, const void* p1, const void* p
                         s = j * t;
 
                         // Determine the next elements at array plus index.
-                        e0 = (double*) (*a0 + s);
-                        e1 = (double*) (*a1 + s);
+                        e0 = (int*) (*a0 + s);
+                        e1 = (int*) (*a1 + s);
 
                         if (*e0 != *e1) {
 
@@ -237,34 +237,34 @@ void compare_double_array_elements(const void* p0, const void* p1, const void* p
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double array elements. The first array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare integer array elements. The first array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double array elements. The second array is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare integer array elements. The second array is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double array elements. The count is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare integer array elements. The count is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare double array elements. The result is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not compare integer array elements. The result is null.");
     }
 }
 
 /**
- * Sets the double array elements.
+ * Sets the integer array elements.
  *
  * @param p0 the destination array
  * @param p1 the index
  * @param p2 the source array
  * @param p3 the count
  */
-void set_double_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
+void set_integer_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -283,15 +283,15 @@ void set_double_array_elements(void* p0, const void* p1, const void* p2, const v
                     void** da = (void**) p0;
 
                     // The type size.
-                    int t = sizeof(double);
+                    int t = sizeof(int);
                     // The loop variable.
                     int j = 0;
                     // The destination base to start copying to.
                     void* db = (void*) (*da + *i * t);
                     // The source element.
-                    double* se = DOUBLE_NULL_POINTER;
+                    int* se = INTEGER_NULL_POINTER;
                     // The destination element.
-                    double* de = DOUBLE_NULL_POINTER;
+                    int* de = INTEGER_NULL_POINTER;
                     // The size.
                     int s = 0;
 
@@ -306,8 +306,8 @@ void set_double_array_elements(void* p0, const void* p1, const void* p2, const v
                         s = j * t;
 
                         // Determine source and destination element.
-                        se = (double*) (*sa + s);
-                        de = (double*) (db + s);
+                        se = (int*) (*sa + s);
+                        de = (int*) (db + s);
 
                         // Set destination element.
                         *de = *se;
@@ -317,34 +317,34 @@ void set_double_array_elements(void* p0, const void* p1, const void* p2, const v
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set double array elements. The destination array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set integer array elements. The destination array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set double array elements. The index is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set integer array elements. The index is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set double array elements. The source array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set integer array elements. The source array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set double array elements. The count is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not set integer array elements. The count is null.");
     }
 }
 
 /**
- * Removes the double array elements.
+ * Removes the integer array elements.
  *
  * @param p0 the array
  * @param p1 the maximum count
  * @param p2 the index
  * @param p3 the count
  */
-void remove_double_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
+void remove_integer_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -363,19 +363,19 @@ void remove_double_array_elements(void* p0, const void* p1, const void* p2, cons
                     void** a = (void**) p0;
 
                     // The type size.
-                    int t = sizeof(double);
+                    int t = sizeof(int);
                     // The loop variable.
                     int j = 0;
-                    // The remaining elements size.
+                    // The remaining elements count.
                     int r = *m - (*i + *c);
                     // The destination base.
                     void* db = (void*) (*a + *i * t);
                     // The source base.
                     void* sb = (void*) (*a + *i * t + *c * t);
                     // The source element.
-                    double* se = DOUBLE_NULL_POINTER;
+                    int* se = INTEGER_NULL_POINTER;
                     // The destination element.
-                    double* de = DOUBLE_NULL_POINTER;
+                    int* de = INTEGER_NULL_POINTER;
                     // The size.
                     int s = 0;
 
@@ -397,8 +397,8 @@ void remove_double_array_elements(void* p0, const void* p1, const void* p2, cons
                         s = j * t;
 
                         // Determine source and destination element.
-                        de = (double*) (db + s);
-                        se = (double*) (sb + s);
+                        de = (int*) (db + s);
+                        se = (int*) (sb + s);
 
                         // Set destination element.
                         *de = *se;
@@ -414,34 +414,34 @@ void remove_double_array_elements(void* p0, const void* p1, const void* p2, cons
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove double array elements. The array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove integer array elements. The array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove double array elements. The size is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove integer array elements. The size is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove double array elements. The index is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove integer array elements. The index is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove double array elements. The count is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not remove integer array elements. The count is null.");
     }
 }
 
 /**
- * Gets the double array elements.
+ * Gets the integer array elements.
  *
  * @param p0 the source array
  * @param p1 the index
  * @param p2 the destination array
  * @param p3 the count
  */
-void get_double_array_elements(const void* p0, const void* p1, void* p2, const void* p3) {
+void get_integer_array_elements(const void* p0, const void* p1, void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -460,15 +460,15 @@ void get_double_array_elements(const void* p0, const void* p1, void* p2, const v
                     void** sa = (void**) p0;
 
                     // The type size.
-                    int t = sizeof(double);
+                    int t = sizeof(int);
                     // The loop variable.
                     int j = 0;
                     // The source base to start copying from.
                     void* sb = (void*) (*sa + *i * t);
                     // The source element.
-                    double* se = DOUBLE_NULL_POINTER;
+                    int* se = INTEGER_NULL_POINTER;
                     // The destination element.
-                    double* de = DOUBLE_NULL_POINTER;
+                    int* de = INTEGER_NULL_POINTER;
                     // The size.
                     int s = 0;
 
@@ -483,8 +483,8 @@ void get_double_array_elements(const void* p0, const void* p1, void* p2, const v
                         s = j * t;
 
                         // Determine source and destination element.
-                        se = (double*) (sb + s);
-                        de = (double*) (*da + s);
+                        se = (int*) (sb + s);
+                        de = (int*) (*da + s);
 
                         // Set destination element.
                         *de = *se;
@@ -494,27 +494,27 @@ void get_double_array_elements(const void* p0, const void* p1, void* p2, const v
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array elements. The source array is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array elements. The source array is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array elements. The index is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array elements. The index is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array elements. The destination array is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array elements. The destination array is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array elements. The count is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array elements. The count is null.");
     }
 }
 
 /**
- * Gets the double array elements index.
+ * Gets the integer array elements index.
  *
  * The first occurence of the element will be considered.
  * The given index remains unchanged if no element is found.
@@ -525,7 +525,7 @@ void get_double_array_elements(const void* p0, const void* p1, void* p2, const v
  * @param p3 the count
  * @param p4 the index
  */
-void get_double_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
+void get_integer_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -548,7 +548,7 @@ void get_double_array_elements_index(const void* p0, const void* p1, const void*
                         void** a = (void**) p0;
 
                         // The type size.
-                        int t = sizeof(double);
+                        int t = sizeof(int);
                         // The loop variable.
                         int j = 0;
                         // The iteration limit.
@@ -574,7 +574,7 @@ void get_double_array_elements_index(const void* p0, const void* p1, const void*
                             // Determine element.
                             e = (void*) (*a + s);
 
-                            compare_double_array_elements((void*) &e, p2, p3, (void*) &r);
+                            compare_integer_array_elements((void*) &e, p2, p3, (void*) &r);
 
                             if (r == 1) {
 
@@ -589,29 +589,29 @@ void get_double_array_elements_index(const void* p0, const void* p1, const void*
 
                     } else {
 
-                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The array is null.");
+                        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array element index. The array is null.");
                     }
 
                 } else {
 
-                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The size is null.");
+                    log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array element index. The size is null.");
                 }
 
             } else {
 
-                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The comparison array is null.");
+                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array element index. The comparison array is null.");
             }
 
         } else {
 
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The count is null.");
+            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array element index. The count is null.");
         }
 
     } else {
 
-        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get double array element index. The index is null.");
+        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get integer array element index. The index is null.");
     }
 }
 
-/* DOUBLE_ARRAY_HANDLER_SOURCE */
+/* INTEGER_ARRAY_HANDLER_SOURCE */
 #endif

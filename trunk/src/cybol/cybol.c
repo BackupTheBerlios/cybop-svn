@@ -1,5 +1,5 @@
 /*
- * $RCSfile: cybol_model_handler.c,v $
+ * $RCSfile: cybol.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -37,7 +37,7 @@
  *         map = position_abstraction_attribute
  *         (attributes 0..9 = size 10)
  *
- * @version $Revision: 1.19 $ $Date: 2004-05-02 23:24:20 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

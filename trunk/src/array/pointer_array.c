@@ -1,5 +1,5 @@
 /*
- * $RCSfile: pointer_array_handler.c,v $
+ * $RCSfile: pointer_array.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -39,7 +39,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.19 $ $Date: 2004-04-29 15:18:06 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

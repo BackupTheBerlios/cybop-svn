@@ -1,5 +1,5 @@
 /*
- * $RCSfile: model_handler.c,v $
+ * $RCSfile: compound.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -59,7 +59,7 @@
  * Basically, every model can become a template itself,
  * if copies (other instances) of this model are created.
  *
- * @version $Revision: 1.40 $ $Date: 2004-05-03 10:01:57 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

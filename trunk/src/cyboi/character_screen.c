@@ -1,5 +1,5 @@
 /*
- * $RCSfile: character_screen_handler.c,v $
+ * $RCSfile: character_screen.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -30,7 +30,7 @@
  * - Textual User Interface (TUI)
  * - Curses (termcap, ncurses)
  *
- * @version $Revision: 1.13 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: double_handler.c,v $
+ * $RCSfile: double.c,v $
  *
  * Copyright (c) 1999-2004. Christian Heller. All rights reserved.
  *
@@ -25,7 +25,7 @@
  *
  * A double is a floating point number.
  *
- * @version $Revision: 1.5 $ $Date: 2004-04-21 11:14:06 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2004-05-06 18:00:49 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
