@@ -21,7 +21,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2005-03-02 07:30:21 $ $Author: rholzmueller $
+ * @version $Revision: 1.22 $ $Date: 2005-03-10 09:55:01 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -35,7 +35,9 @@
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
 #include "../logic/add.c"
+#include "../logic/build.c"
 #include "../logic/compare.c"
+#include "../logic/count.c"
 #include "../logic/create.c"
 #include "../logic/destroy.c"
 #include "../logic/loop.c"
@@ -317,6 +319,26 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
     if (r != 1) {
 
+        compare_arrays(p0, p1, (void*) COUNT_PART_ABSTRACTION, (void*) COUNT_PART_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            count_part(p2, p3, p7 );
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays(p0, p1, (void*) BUILD_LISTNAME_ABSTRACTION, (void*) BUILD_LISTNAME_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            build_listname(p2, p3, p7 );
+        }
+    }
+
+    if (r != 1) {
+
         compare_arrays(p0, p1, (void*) LOOP_ABSTRACTION, (void*) LOOP_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
@@ -367,6 +389,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
             *f = 1;
         }
     }
+
 
 /*??
     //?? Only for later, when mouse interrupt is handled directly here, and not in JavaEventHandler.
