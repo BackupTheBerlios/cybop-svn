@@ -29,7 +29,7 @@
 <model>
 
     <!-- destroy the  address list element-->
-    <part name="destroy-address" channel="inline" abstraction="operation" model="destroy_part">
+    <part name="destroy-addresses" channel="inline" abstraction="operation" model="destroy_part">
         <property name="name" channel="inline" abstraction="string" model="domain"/>
     </part>
 

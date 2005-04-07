@@ -91,6 +91,14 @@
         <property name="result" channel="inline" abstraction="knowledge" model="domain.loop_listname_web_delete"/>
     </part>
 
+    <part name="create_listname_web_edit" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.loop_listname_web"/>
+        <property name="operand_2" channel="inline" abstraction="string" model=".row.edit.edit_button"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.loop_listname_web_edit"/>
+    </part>
+
+
+    <!-- edit and delete proprties -->
     <part name="create_listname_web_delete_property1" channel="inline" abstraction="operation" model="add">
         <property name="operand_1" channel="inline" abstraction="string" model="href='/examples/resadmin/logic/delete_address.cybol?domain.delete_address="/>
         <property name="operand_2" channel="inline" abstraction="knowledge" model="domain.loop_listname_domain"/>
@@ -103,13 +111,17 @@
         <property name="result" channel="inline" abstraction="knowledge" model="domain.delete_button_property"/>
     </part>
 
-
-    <!-- test 
-    <part name="set_test" channel="inline" abstraction="operation" model="set">
-        <property name="source" channel="inline" abstraction="string" model="hallo Rolf  dfjksfjkd hjfksh jfsghjfhjgfsh jsf ghjsf hjfdhjh gjk hfjkhfjk h fdhjkfhkj fghjkfh jkh fghjhghhfdjkhjkfd"/>
-        <property name="destination" channel="inline" abstraction="knowledge" model="domain.delete_address"/>
+    <part name="create_listname_web_edit_property1" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="string" model="href='/examples/resadmin/logic/edit_address.cybol?domain.edit_address="/>
+        <property name="operand_2" channel="inline" abstraction="knowledge" model="domain.loop_listname_domain"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.edit_button_property"/>
     </part>
-    -->
+
+    <part name="create_listname_web_edit_property2" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.edit_button_property"/>
+        <property name="operand_2" channel="inline" abstraction="string" model="'"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.edit_button_property"/>
+    </part>
 
     <!-- set row content-->
     <part name="set_firstname" channel="inline" abstraction="operation" model="set">
@@ -120,6 +132,12 @@
     <part name="set_lastname" channel="inline" abstraction="operation" model="set">
         <property name="source" channel="inline" abstraction="encapsulated_knowledge" model="domain.loop_listname_domain_lastname"/>
         <property name="destination" channel="inline" abstraction="encapsulated_knowledge" model="domain.loop_listname_web_lastname"/>
+    </part>
+
+    <part name="set_edit_property" channel="inline" abstraction="operation" model="set_property">
+        <property name="source" channel="inline" abstraction="knowledge" model="domain.edit_button_property"/>
+        <property name="destination" channel="inline" abstraction="encapsulated_knowledge" model="domain.loop_listname_web_edit"/>
+        <property name="destination_property" channel="inline" abstraction="string" model="html_tag_properties"/>
     </part>
 
     <part name="set_delete_property" channel="inline" abstraction="operation" model="set_property">

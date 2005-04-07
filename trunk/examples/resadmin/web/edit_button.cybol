@@ -31,7 +31,7 @@
 
 <model>
 
-    <part name="delete_button" channel="inline" abstraction="string" model="delete">
+    <part name="edit_button" channel="inline" abstraction="string" model="edit">
         <property name="html_tag" channel="inline" abstraction="string" model="a"/>
         <property name="html_tag_properties" channel="inline" abstraction="string" model="href='http://www.google.de'"/>
     </part>

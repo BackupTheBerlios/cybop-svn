@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+    $RCSfile$
+
+    Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+
+    This knowledge model is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This knowledge model is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this knowledge model; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+    http://www.cybop.net
+    - Cybernetics Oriented Programming -
+
+    @version $Revision$ $Date$ $Author$
+    @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
+/-->
+
+<model>
+
+    <!-- destroy the  web list -->
+    <part name="destroy_web_address" channel="inline" abstraction="operation" model="destroy_part">
+        <property name="name" channel="inline" abstraction="string" model="web"/>
+    </part>
+
+    <part name="destroy_web_address" channel="inline" abstraction="operation" model="destroy_part">
+        <property name="name" channel="inline" abstraction="string" model="web_edit"/>
+    </part>
+
+
+    <!-- create part for variables -->
+    
+    <part name="destroy_web_address" channel="inline" abstraction="operation" model="destroy_part">
+        <property name="name" channel="inline" abstraction="string" model="domain.edit"/>
+    </part>
+
+    <part name="create_domain_edit" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
+        <property name="name" channel="inline" abstraction="string" model="edit"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="compound"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+
+    <part name="create_domain_firtsname" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain.edit"/>
+        <property name="name" channel="inline" abstraction="string" model="firstname"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model="firsttest"/>
+    </part>
+
+
+    <part name="create_domain_firtsname_prop" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain.edit"/>
+        <property name="name" channel="inline" abstraction="string" model="firstname_prop"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+
+    <part name="create_domain_lastname" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain.edit"/>
+        <property name="name" channel="inline" abstraction="string" model="lastname"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model="lasttest"/>
+    </part>
+
+    <part name="create_domain_lastname_prop" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain.edit"/>
+        <property name="name" channel="inline" abstraction="string" model="lastname_prop"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+
+
+    <!-- set vatiable with values -->
+
+    <part name="set_domain_firstname" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.edit_address"/>
+        <property name="operand_2" channel="inline" abstraction="string" model=".firstname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.edit.firstname"/>
+    </part>
+
+    <part name="set_domain_lastname" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.edit_address"/>
+        <property name="operand_2" channel="inline" abstraction="string" model=".lastname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.edit.lastname"/>
+    </part>
+
+
+    <!-- set proprties values for buttons -->
+    
+    <part name="set_1" channel="inline" abstraction="operation" model="set">
+        <property name="source" channel="inline" abstraction="string" model="name='firstname' type='text' value='"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model="domain.edit.firstname_prop"/>
+    </part>
+    <part name="set_domain_firstname_prop_1" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.edit.firstname_prop"/>
+        <property name="operand_2" channel="inline" abstraction="encapsulated_knowledge" model="domain.edit.firstname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.edit.firstname_prop"/>
+    </part>
+    <part name="set_domain_firstname_prop_2" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.edit.firstname_prop"/>
+        <property name="operand_2" channel="inline" abstraction="string" model="'"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.edit.firstname_prop"/>
+    </part>
+
+
+
+    <part name="set_2" channel="inline" abstraction="operation" model="set">
+        <property name="source" channel="inline" abstraction="string" model="name='lastname' type='text' value='"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model="domain.edit.lastname_prop"/>
+    </part>
+    <part name="set_domain_lastname_prop_1" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.edit.lastname_prop"/>
+        <property name="operand_2" channel="inline" abstraction="encapsulated_knowledge" model="domain.edit.lastname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.edit.lastname_prop"/>
+    </part>
+
+    <part name="set_domain_lastname_prop_2" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.edit.lastname_prop"/>
+        <property name="operand_2" channel="inline" abstraction="string" model="'"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.edit.lastname_prop"/>
+    </part>
+    
+    
+
+    <!-- create web view -->
+    <part name="create_body" channel="inline" abstraction="operation" model="create_part">
+        <property name="name" channel="inline" abstraction="string" model="web_edit"/>
+        <property name="channel" channel="inline" abstraction="string" model="file"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/web/edit/body.cybol"/>
+    </part>
+
+    <!-- set property in the buttons -->
+
+    <part name="set_firstname_property" channel="inline" abstraction="operation" model="set_property">
+        <property name="source" channel="inline" abstraction="knowledge" model="domain.edit.firstname_prop"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model="web_edit.body.form.edit_firstname"/>
+        <property name="destination_property" channel="inline" abstraction="string" model="html_tag_properties"/>
+    </part>
+
+    <part name="set_lastneme_property" channel="inline" abstraction="operation" model="set_property">
+        <property name="source" channel="inline" abstraction="knowledge" model="domain.edit.lastname_prop"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model="web_edit.body.form.edit_lastname"/>
+        <property name="destination_property" channel="inline" abstraction="string" model="html_tag_properties"/>
+    </part>
+
+    <!-- send to web -->    
+    <part name="send_edit_web" channel="inline" abstraction="operation" model="send">
+        <property name="language" channel="inline" abstraction="string" model="tcp_socket"/>
+        <property name="receiver" channel="inline" abstraction="string" model="user"/>
+        <property name="message" channel="inline" abstraction="knowledge" model="web_edit"/>
+    </part>
+    
+    
+</model>

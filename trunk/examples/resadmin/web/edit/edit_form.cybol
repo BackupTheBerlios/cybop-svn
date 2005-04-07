@@ -28,18 +28,8 @@
 
 <model>
 
-    <part name="firstname" channel="inline" abstraction="string" model="">
-        <property name="html_tag" channel="inline" abstraction="string" model="td"/>
+    <part name="form" channel="file" abstraction="cybol" model="examples/resadmin/web/edit/edit.cybol">
+        <property name="html_tag" channel="inline" abstraction="string" model="form"/>
     </part>
-    <part name="lastname" channel="inline" abstraction="string" model="">
-        <property name="html_tag" channel="inline" abstraction="string" model="td"/>
-    </part>
-    <part name="edit" channel="file" abstraction="cybol" model="examples/resadmin/web/edit_button.cybol">
-        <property name="html_tag" channel="inline" abstraction="string" model="td"/>
-    </part>
-    <part name="delete" channel="file" abstraction="cybol" model="examples/resadmin/web/delete_button.cybol">
-        <property name="html_tag" channel="inline" abstraction="string" model="td"/>
-    </part>
-
 
 </model>

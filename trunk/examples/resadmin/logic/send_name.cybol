@@ -116,6 +116,14 @@
         <property name="model" channel="inline" abstraction="string" model=""/>
     </part>
 
+    <part name="create_listname_web_edit" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
+        <property name="name" channel="inline" abstraction="string" model="loop_listname_web_edit"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+
     <part name="create_listname_web_delete" channel="inline" abstraction="operation" model="create_part">
         <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
         <property name="name" channel="inline" abstraction="string" model="loop_listname_web_delete"/>
@@ -132,10 +140,25 @@
         <property name="model" channel="inline" abstraction="string" model=""/>
     </part>
 
+    <part name="create_edit_button_property" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
+        <property name="name" channel="inline" abstraction="string" model="edit_button_property"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
 
     <part name="create_delete_address" channel="inline" abstraction="operation" model="create_part">
         <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
         <property name="name" channel="inline" abstraction="string" model="delete_address"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model="standard"/>
+    </part>
+
+    <part name="create_edit_address" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
+        <property name="name" channel="inline" abstraction="string" model="edit_address"/>
         <property name="channel" channel="inline" abstraction="string" model="inline"/>
         <property name="abstraction" channel="inline" abstraction="string" model="string"/>
         <property name="model" channel="inline" abstraction="string" model="standard"/>

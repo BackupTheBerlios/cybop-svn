@@ -36,7 +36,11 @@
         <property name="html_tag" channel="inline" abstraction="string" model="th"/>
     </part>
 
-    <part name="delete_link" channel="inline" abstraction="string" model="X">
+    <part name="edit_link" channel="inline" abstraction="string" model="Edit">
+        <property name="html_tag" channel="inline" abstraction="string" model="th"/>
+    </part>
+
+    <part name="delete_link" channel="inline" abstraction="string" model="Delete">
         <property name="html_tag" channel="inline" abstraction="string" model="th"/>
     </part>
 
