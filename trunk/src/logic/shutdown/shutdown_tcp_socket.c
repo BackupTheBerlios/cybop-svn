@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-04-07 16:22:43 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-04-07 16:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -44,12 +44,12 @@ void shutdown_tcp_socket(void* p0, const void* p1, const void* p2, const void* p
     log_message_debug("Shutdown tcp socket.");
 
     // The tcp socket internal.
-    int** s = -1;
+    int** s = NULL_POINTER;
 
     // Get tcp socket internal.
-    get_array_elements(p0, (void*) TCP_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_ARRAY);
 
-    if (**s != -1) {
+    if (*s != NULL_POINTER) {
 
         //?? TODO Rolf! Put all code for tcp socket shutdown here!
         
