@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-04-07 16:00:30 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-04-07 22:53:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -45,9 +45,18 @@ void send_x_window_system(void* p0, const void* p1, const void* p2, const void* 
 
     log_message_debug("Send x window system message.");
 
-//??            encode-translate
-//??            serialise
-//??            send_vga
+//??            knowledge model is given as param
+//??            create encode model em
+//??            encode-translate(em, km)
+
+//??            create serialise model sm
+//??            serialise(sm, em)
+//??            destroy em
+
+//??            create vga model vm
+//??            send_vga(vm, sm)
+//??            destroy sm
+//??            ?? destroy or not vm??
 
     // The display, which is a subsumption of
     // xserver, screens, hardware (input devices etc.).

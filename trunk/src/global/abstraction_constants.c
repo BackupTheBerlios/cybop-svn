@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2005-04-05 16:33:20 $ $Author: rholzmueller $
+ * @version $Revision: 1.22 $ $Date: 2005-04-07 22:53:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -304,6 +304,12 @@ static const char X_WINDOW_SYSTEM_ABSTRACTION_ARRAY[] = {'x', '_', 'w', 'i', 'n'
 static const char* X_WINDOW_SYSTEM_ABSTRACTION = X_WINDOW_SYSTEM_ABSTRACTION_ARRAY;
 static const int X_WINDOW_SYSTEM_ABSTRACTION_COUNT_ARRAY[] = {15};
 static const int* X_WINDOW_SYSTEM_ABSTRACTION_COUNT = X_WINDOW_SYSTEM_ABSTRACTION_COUNT_ARRAY;
+
+/** The tcp socket abstraction. */
+static const char TCP_SOCKET_ABSTRACTION_ARRAY[] = {'t', 'c', 'p', '_', 's', 'o', 'c', 'k', 'e', 't'};
+static const char* TCP_SOCKET_ABSTRACTION = TCP_SOCKET_ABSTRACTION_ARRAY;
+static const int TCP_SOCKET_ABSTRACTION_COUNT_ARRAY[] = {10};
+static const int* TCP_SOCKET_ABSTRACTION_COUNT = TCP_SOCKET_ABSTRACTION_COUNT_ARRAY;
 
 /** The mouse abstraction. */
 static const char MOUSE_ABSTRACTION_ARRAY[] = {'m', 'o', 'u', 's', 'e'};

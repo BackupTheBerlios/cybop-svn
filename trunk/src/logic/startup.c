@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-04-05 16:40:44 $ $Author: rholzmueller $
+ * @version $Revision: 1.5 $ $Date: 2005-04-07 22:53:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -35,6 +35,7 @@
 #include "../global/log_constants.c"
 #include "../global/name_constants.c"
 #include "../logger/logger.c"
+#include "../logic/startup/startup_tcp_socket.c"
 #include "../logic/startup/startup_x_window_system.c"
 
 /**
@@ -120,14 +121,22 @@ void startup_service(const void* p0, const void* p1,
             startup_x_window_system(p5, p2, p3, p4);
         }
     }
-}
 
+    if (r != 1) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_ABSTRACTION, (void*) TCP_SOCKET_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            startup_tcp_socket(p5, p2, p3, p4);
+        }
+    }
+}
 
 /**
  * Starts up a model.
  * The modell is defined with abstraction channel and model
  * this must be into the signal memeory
- *
  *
  * @param p0 the parameters
  * @param p1 the parameters count
@@ -302,7 +311,6 @@ void startup_model(const void* p0, const void* p1,
             (void*) NORMAL_PRIORITY, p6);
 
     }
-
 }
 
 /* STARTUP_SOURCE */
