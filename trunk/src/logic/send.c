@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2005-04-05 16:38:11 $ $Author: rholzmueller $
+ * @version $Revision: 1.26 $ $Date: 2005-04-07 16:00:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -36,6 +36,7 @@
 #include "../global/name_constants.c"
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
+#include "../logic/send/send_x_window_system.c"
 #include "../socket/unix_socket.c"
 #include "../translator/translator.c"
 #include "../web/socket_number_accessor.c"
@@ -244,11 +245,7 @@ void send_message(const void* p0, const void* p1,
 
         if (r == 1) {
 
-/*??
-            encode-translate
-            serialise
-            send_vga
-*/
+            send_x_window_system(p6, p2, p3, p4);
         }
     }
 
