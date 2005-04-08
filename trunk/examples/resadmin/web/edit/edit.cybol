@@ -62,7 +62,7 @@
     <!-- ok- button -->
     <part name="ok_button" channel="inline" abstraction="string" model="Save">
         <property name="html_tag" channel="inline" abstraction="string" model="button"/>
-        <property name="html_tag_properties" channel="inline" abstraction="string" model="name='ok_button' type='button'"/>
+        <property name="html_tag_properties" channel="inline" abstraction="string" model="name='ok_button' type='submit'"/>
     </part>
 
     <!-- cancel- button -->

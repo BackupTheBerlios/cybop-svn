@@ -104,9 +104,20 @@
     <!-- set proprties values for buttons -->
     
     <part name="set_1" channel="inline" abstraction="operation" model="set">
-        <property name="source" channel="inline" abstraction="string" model="name='firstname' type='text' value='"/>
+        <property name="source" channel="inline" abstraction="string" model="name='"/>
         <property name="destination" channel="inline" abstraction="knowledge" model="domain.edit.firstname_prop"/>
     </part>
+    <part name="set_domain_firstname_prop_01" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.edit.firstname_prop"/>
+        <property name="operand_2" channel="inline" abstraction="knowledge" model="domain.edit.firstname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.edit.firstname_prop"/>
+    </part>
+    <part name="set_domain_firstname_prop_02" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.edit.firstname_prop"/>
+        <property name="operand_2" channel="inline" abstraction="string" model="' type='text' value='"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.edit.firstname_prop"/>
+    </part>
+
     <part name="set_domain_firstname_prop_1" channel="inline" abstraction="operation" model="add">
         <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.edit.firstname_prop"/>
         <property name="operand_2" channel="inline" abstraction="encapsulated_knowledge" model="domain.edit.firstname"/>
@@ -121,9 +132,20 @@
 
 
     <part name="set_2" channel="inline" abstraction="operation" model="set">
-        <property name="source" channel="inline" abstraction="string" model="name='lastname' type='text' value='"/>
+        <property name="source" channel="inline" abstraction="string" model="name='"/>
         <property name="destination" channel="inline" abstraction="knowledge" model="domain.edit.lastname_prop"/>
     </part>
+    <part name="set_domain_lastname_prop_01" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.edit.lastname_prop"/>
+        <property name="operand_2" channel="inline" abstraction="knowledge" model="domain.edit.lastname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.edit.lastname_prop"/>
+    </part>
+    <part name="set_domain_lastname_prop_02" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.edit.lastname_prop"/>
+        <property name="operand_2" channel="inline" abstraction="string" model="' type='text' value='"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.edit.lastname_prop"/>
+    </part>
+    
     <part name="set_domain_lastname_prop_1" channel="inline" abstraction="operation" model="add">
         <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.edit.lastname_prop"/>
         <property name="operand_2" channel="inline" abstraction="encapsulated_knowledge" model="domain.edit.lastname"/>
