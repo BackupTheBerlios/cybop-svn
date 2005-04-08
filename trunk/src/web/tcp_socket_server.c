@@ -22,7 +22,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.22 $ $Date: 2005-04-02 10:00:07 $ $Author: rholzmueller $
+ * @version $Revision: 1.23 $ $Date: 2005-04-08 15:34:41 $ $Author: rholzmueller $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
@@ -46,6 +46,7 @@
 #include "../global/channel_constants.c"
 #include "../global/character_constants.c"
 #include "../global/constant.c"
+#include "../global/escape_code_constants.c"
 #include "../global/integer_constants.c"
 #include "../global/log_constants.c"
 #include "../global/name_constants.c"
@@ -226,43 +227,45 @@ void destroy_tcp_server_socket(void* p0) {
 }
 
 /**
- * Get the request row from the complet request
+ * Get the request method from the complet request msg
  * example for a request row: GET /paramater HTTP/1.1
- * the request row end with the character \r\n
+ * the request method is the first name in the request
+ * is it endning with a space
  *
- * @param req the complet request
- * @param req_count the count from the complet request
+ * @param req the request method
+ * @param req_count the count from the request method
  * @param req_row return the request row
  * @param reg_row_count return the count of the request row
  */
-void get_request_row(char* req, int* req_count, char** req_row, int* req_row_count) {
+void get_request_method( char* req, int* req_count, 
+                         char** req_method, int* req_method_count) {
 
-    *req_row_count = 0;
+    *req_method_count = 0;
     // The element.
     char* e = CHARACTER_NULL_POINTER;
 
     while (1) {
 
-        if (*req_row_count >= *req_count) {
+        if (*req_method_count >= *req_count) {
 
             break;
         }
 
-        get_array_elements(req, req_row_count, (void*) &e, (void*) CHARACTER_ARRAY);
+        get_array_elements(req, req_method_count, (void*) &e, (void*) CHARACTER_ARRAY);
 
-        if (*e == *CARRIAGE_RETURN_CONTROL_CHARACTER) {
+        if (*e == *SPACE_CHARACTER) {
 
-            // Reached end of request line.
+            // Reached end of request method.
             break;
         }
 
-        int max_count = *req_row_count + 1;
+        int max_count = *req_method_count + 1;
 
-        resize_array((void*) req_row, (void*) &max_count, (void*) CHARACTER_ARRAY);
+        resize_array((void*) req_method, (void*) &max_count, (void*) CHARACTER_ARRAY);
 
-        set_array_elements(*req_row, req_row_count, (void*) e, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
+        set_array_elements(*req_method, req_method_count, (void*) e, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
 
-        *req_row_count = *req_row_count + 1;
+        *req_method_count = *req_method_count + 1;
     }
 }
 
@@ -280,11 +283,11 @@ void get_request_row(char* req, int* req_count, char** req_row, int* req_row_cou
  * @param param the parameter from the request
  * @param param_count the count from the parameter
  */
-void get_url_basename_from_request_row( char* req_row, int* req_row_count, 
+void get_url_basename_from_request( char* req, int* req_count, 
                                         char** urlbase, int* urlbase_count) {
 
     *urlbase_count = 0;
-    int req_row_index = 0;
+    int req_index = 0;
     int start_urlbase_flag = 0;
     int max_count = 0;
     // The element.
@@ -292,12 +295,12 @@ void get_url_basename_from_request_row( char* req_row, int* req_row_count,
 
     while (1) {
 
-        if (req_row_index >= *req_row_count) {
+        if (req_index >= *req_count) {
 
             break;
         }
 
-        get_array_elements(req_row, (void*) &req_row_index, (void*) &e, (void*) CHARACTER_ARRAY);
+        get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
 
         // Check of ending the paramaters.
         if ( (start_urlbase_flag == 1) && 
@@ -328,30 +331,415 @@ void get_url_basename_from_request_row( char* req_row, int* req_row_count,
             start_urlbase_flag = 1;
         }
 
-        req_row_index++;
+        req_index++;
     }
 }
 
+void* get_character_from_escape_code( void* source, int* source_count, 
+                                      char** dest ) {
+ 
+    if (    (source != NULL_POINTER) 
+         && (source_count != NULL_POINTER)
+         && (dest != NULL_POINTER) )
+    {
+
+        int r = 0;
+        
+        //esquape code must be 3 signs
+        if ( *source_count>= *ESCAPE_CODE_CHARACTER_COUNT ) {
+         
+            // space character            
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_SPACE_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) SPACE_CHARACTER;
+                }                                
+            }
+            
+            // less than sign character            
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_LESS_THAN_SIGN_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) LESS_THAN_SIGN_CHARACTER;
+                }                                
+            }
+            
+            // greater than sign character            
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_GREATER_THAN_SIGN_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) GREATER_THAN_SIGN_CHARACTER;
+                }                                
+            }
+            
+            // nummer sign character            
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_NUMBER_SIGN_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) NUMBER_SIGN_CHARACTER;
+                }                                
+            }
+            
+            // percent sign character            
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_PERCENT_SIGN_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) PERCENT_SIGN_CHARACTER;
+                }                                
+            }
+            
+            // left curly bracket  character            
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_LEFT_CURLY_BRACKET_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) LEFT_CURLY_BRACKET_CHARACTER;
+                }                                
+            }
+            
+            // right curly bracket  character            
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_RIGHT_CURLY_BRACKET_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) RIGHT_CURLY_BRACKET_CHARACTER;
+                }                                
+            }
+            
+            // vertical line character            
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_VERTICAL_LINE_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) VERTICAL_LINE_CHARACTER;
+                }                                
+            }
+            
+            // reverse solidus character            
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_REVERSE_SOLIDUS_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) REVERSE_SOLIDUS_CHARACTER;
+                }                                
+            }
+            
+            //CIRCUMFLEX_ACCENT_CHARACTER
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_CIRCUMFLEX_ACCENT_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) CIRCUMFLEX_ACCENT_CHARACTER;
+                }                                
+            }
+
+            //tilde character
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_TILDE_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) TILDE_CHARACTER;
+                }                                
+            }
+
+            //left square character
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_LEFT_SQUARE_BRACKET_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) LEFT_SQUARE_BRACKET_CHARACTER;
+                }                                
+            }
+
+            //right square character
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_RIGHT_SQUARE_BRACKET_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) RIGHT_SQUARE_BRACKET_CHARACTER;
+                }                                
+            }
+
+            //grave accent character
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_GRAVE_ACCENT_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) GRAVE_ACCENT_CHARACTER;
+                }                                
+            }
+
+            //semikolon character
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_SEMICOLON_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) SEMICOLON_CHARACTER;
+                }                                
+            }
+
+            //soldius character
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_SOLIDUS_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) SOLIDUS_CHARACTER;
+                }                                
+            }
+
+            //question mark character
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_QUESTION_MARK_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) QUESTION_MARK_CHARACTER;
+                }                                
+            }
+
+            //colon character
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_COLON_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) COLON_CHARACTER;
+                }                                
+            }
+
+            //commercial at character
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_COMMERCIAL_AT_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) COMMERCIAL_AT_CHARACTER;
+                }                                
+            }
+
+            //equal sign character
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_EQUALS_SIGN_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) EQUALS_SIGN_CHARACTER;
+                }                                
+            }
+
+            //ampersand character
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_AMPERSAND_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) AMPERSAND_CHARACTER;
+                }                                
+            }
+
+            //dollar  character
+            if ( r == 0) {
+    
+                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
+                                ESCAPE_CODE_DOLLAR_SIGN_CHARACTER,
+                                ESCAPE_CODE_CHARACTER_COUNT,
+                                &r, CHARACTER_ARRAY );
+                                
+                if ( r == 1 ) {
+                    *dest  = (char*) DOLLAR_SIGN_CHARACTER;
+                }                                
+            }
+
+        }
+
+        // no escape code
+        if ( r == 0 ) {
+         
+            *dest = source;  
+        }
+    }
+}
 
 /**
- * Gets the request query from the param row.
+ * Get the parameters from the request for the request method post.
+ * the parameters are in the last row from the request
  *
- * Example request row:
- * GET /lib/ausgabe.cybol?param1=value1&param2=value2 HTTP/1.1
+ * @param req the request
+ * @param req_count the request count
+ * @param param the parameter
+ * @param param_count the paramater count
+ */
+void get_parameter_from_request_for_post( char* req, int* req_count, 
+                                          char** param, int* param_count) {
+
+    *param_count = 0;
+    int req_index = *req_count-1;
+    int req_last_count = 0;
+    int start_param_index = -1;
+    int max_count = 0;
+    // The element.
+    char* e = CHARACTER_NULL_POINTER;
+  //  char* c = CHARACTER_NULL_POINTER;
+
+    //get the index for beginning the paramaters
+    while (1) {
+
+        if (req_index < 0 ) {
+
+            break;
+        }
+
+        get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
+
+        // Check of beginning  the paramaters.
+        if ( (*e == *LINE_FEED_CONTROL_CHARACTER) ) {
+
+            start_param_index = req_index + 1;
+            break;
+        }
+        
+        req_index = req_index - 1;
+    }
+    
+    if ( start_param_index > 0 ) {
+        
+        req_index = start_param_index;
+
+        while (1) {
+           
+            if (req_index >= *req_count ) {
+    
+                break;
+            }
+
+            max_count = *param_count + 1;
+
+            resize_array((void*) param, (void*) &max_count, (void*) CHARACTER_ARRAY);
+
+            get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
+            
+            //req_last_count = *req_count - req_index;
+            //get_character_from_escape_code( e, &req_last_count, &c );
+
+            set_array_elements(*param, param_count, (void*) e, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
+
+            *param_count = *param_count + 1;
+//            if ( c != e ) {
+//
+//                req_index = req_index + *ESCAPE_CODE_CHARACTER_COUNT;
+//            }
+//            else {
+
+            req_index = req_index + 1;
+  
+        }
+
+    }
+}
+
+/**
+ * Get the parameters from the request for the request method get.
+ *
+ * Example request :
+ * GET /lib/ausgabe.cybol?param1=value1&param2=value2 HTTP/1.1 ...
  *
  * The result of the function is:
  * param1=value1&param2=value2
  *
- * @param param_row the parameter row
- * @param param_row_count the count of the parameter row
- * @param query the query from the parameter
- * @param query_count the count from the query
+ * @param req the request
+ * @param req_count the request count
+ * @param param the parameter
+ * @param param_count the paramater count
  */
-void get_parameter_from_request_row( char* req_row, int* req_row_count, 
-                                 char** param, int* param_count) {
+void get_parameter_from_request_for_get( char* req, int* req_count, 
+                                         char** param, int* param_count) {
 
     *param_count = 0;
-    int req_row_index = 0;
+    int req_index = 0;
     int start_param_flag = 0;
     int max_count = 0;
     // The element.
@@ -359,12 +747,12 @@ void get_parameter_from_request_row( char* req_row, int* req_row_count,
 
     while (1) {
 
-        if (req_row_index >= *req_row_count) {
+        if (req_index >= *req_count) {
 
             break;
         }
 
-        get_array_elements(req_row, (void*) &req_row_index, (void*) &e, (void*) CHARACTER_ARRAY);
+        get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
 
         // Check of ending the paramaters.
         if ( (start_param_flag == 1) && (*e == *SPACE_CHARACTER) ) {
@@ -391,8 +779,39 @@ void get_parameter_from_request_row( char* req_row, int* req_row_count,
             start_param_flag = 1;
         }
 
-        req_row_index++;
+        req_index++;
     }
+}
+
+/**
+ * Get the paramaters from the request
+ *
+ * @param req the request
+ * @param req_count the request count
+ * @param param the parameter
+ * @param param_count the paramater count
+ */
+void get_parameter_from_request( char* req, int* req_count, 
+                                 char** param, int* param_count) {
+
+    //Check the request method ( post or get );
+    int req_meth_post_res = 0;
+    
+    compare_arrays( req, REQEUST_METHOD_POST_COUNT,
+                    REQEUST_METHOD_POST, REQEUST_METHOD_POST_COUNT, 
+                    &req_meth_post_res, CHARACTER_ARRAY );
+
+    if ( req_meth_post_res == 0 ) {
+     
+        get_parameter_from_request_for_get( req, req_count,
+                                            param, param_count );  
+    }
+    else {
+        
+        get_parameter_from_request_for_post( req, req_count,
+                                             param, param_count );  
+    }
+
 }
 
 /**
@@ -698,6 +1117,9 @@ void set_signals_for_all_parameters( void* query, int* query_count,
         
         //elements from the array
         void* element = NULL_POINTER;
+        //elements from the array
+        void* decode_element = NULL_POINTER;
+        int last_query_count = 0;
         
         //temp count  for comparision
         int temp_count= 1;
@@ -732,12 +1154,19 @@ void set_signals_for_all_parameters( void* query, int* query_count,
                 }
                 
                 //the element must insert into the param
+                last_query_count = *query_count - query_counter;
+                get_character_from_escape_code( element, &last_query_count, 
+                                                (char**) &decode_element );
                 set_array_elements( param, param_count,
-                                    element, &temp_count,
+                                    decode_element, &temp_count,
                                     CHARACTER_ARRAY );
                 
-                
-                query_counter = query_counter + 1;
+                if ( element == decode_element ) {
+                    query_counter = query_counter + 1;
+                }
+                else {
+                    query_counter = query_counter + *ESCAPE_CODE_CHARACTER_COUNT;
+                }
                 *param_count = *param_count + 1;
             }
 
@@ -764,12 +1193,20 @@ void set_signals_for_all_parameters( void* query, int* query_count,
                 }
                 
                 //the element must insert into the value
+                last_query_count = *query_count - query_counter;
+                get_character_from_escape_code( element, &last_query_count, 
+                                                (char**) &decode_element );
                 set_array_elements( value, value_count,
-                                    element, &temp_count,
+                                    decode_element, &temp_count,
                                     CHARACTER_ARRAY );
                 
                 
-                query_counter = query_counter + 1;
+                if ( element == decode_element ) {
+                    query_counter = query_counter + 1;
+                }
+                else {
+                    query_counter = query_counter + *ESCAPE_CODE_CHARACTER_COUNT;
+                }
                 *value_count = *value_count + 1;
             }
             
@@ -805,9 +1242,6 @@ void handle_tcp_socket_request(void* p0, void* p1) {
 
         log_message_debug("Handle tcp socket request.");
 
-        //?? TODO: Rolf Holzmueller: This variable is NOT used in the code below! DELETE!?
-//??        char* request = getenv("PATH");
-
         // The message.
         char* msg = CHARACTER_NULL_POINTER;
         // The maximum message count.
@@ -821,43 +1255,30 @@ void handle_tcp_socket_request(void* p0, void* p1) {
 
         if (msg_count != -1) {
 
-            // TODO: auf get pruefen
-            // TODO: parameter aus empfangenen Daten ermitteln
-
-            // Create message row.
-            char* req_row = CHARACTER_NULL_POINTER;
-            int req_row_count = 0;
-
-            // Create message row.
-            create_array((void*) &req_row, (void*) &req_row_count, (void*) CHARACTER_ARRAY);
-
-            // Get message row.
-            get_request_row(msg, &msg_count, &req_row, &req_row_count);
-
-            // The parameters.
+            // The url basename.
             char* url_basename = NULL_POINTER;
             int url_basename_count = 0;
 
-            // Create parameters.
+            // Create url basename.
             create_array( (void*) &url_basename, (void*) &url_basename_count, 
                           (void*) CHARACTER_ARRAY);
 
             // Get url base name .
-            get_url_basename_from_request_row( req_row, &req_row_count, 
-                                               &url_basename, 
-                                               &url_basename_count );
+            get_url_basename_from_request( msg, &msg_count, 
+                                           &url_basename, 
+                                           &url_basename_count );
 
 
-            // The query.
+            // The parameter.
             char* param = NULL_POINTER;
             int param_count = 0;
 
-            // Create query.
+            // Create paramater.
             create_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
 
             // Get parameters.
-            get_parameter_from_request_row( req_row, &req_row_count, 
-                                            &param, &param_count);
+            get_parameter_from_request( msg, &msg_count, 
+                                        &param, &param_count);
 
             // The firefox web browser makes a second request
             // to determine the favicon.
