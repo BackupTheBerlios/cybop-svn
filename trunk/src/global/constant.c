@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.33 $ $Date: 2005-04-03 16:26:33 $ $Author: rholzmueller $
+ * @version $Revision: 1.34 $ $Date: 2005-04-08 15:32:08 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -172,6 +172,21 @@ static const char* LIST_SEPARATOR = LIST_SEPARATOR_ARRAY;
 static const int LIST_SEPARATOR_COUNT_ARRAY[] = {2};
 static const int* LIST_SEPARATOR_COUNT = LIST_SEPARATOR_COUNT_ARRAY;
 
+//
+// Request method 
+//
+
+/** The model request method get array, pointer, count. */
+static const char REQEUST_METHOD_GET_ARRAY[] = {'G', 'E', 'T'};
+static const char* REQEUST_METHOD_GET = REQEUST_METHOD_GET_ARRAY;
+static const int REQEUST_METHOD_GET_COUNT_ARRAY[] = {3};
+static const int* REQEUST_METHOD_GET_COUNT = REQEUST_METHOD_GET_COUNT_ARRAY;
+
+/** The model request method post array, pointer, count. */
+static const char REQEUST_METHOD_POST_ARRAY[] = {'P', 'O', 'S', 'T'};
+static const char* REQEUST_METHOD_POST = REQEUST_METHOD_POST_ARRAY;
+static const int REQEUST_METHOD_POST_COUNT_ARRAY[] = {4};
+static const int* REQEUST_METHOD_POST_COUNT = REQEUST_METHOD_POST_COUNT_ARRAY;
 
 //
 // Cybol model values:
