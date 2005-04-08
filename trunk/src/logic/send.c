@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.27 $ $Date: 2005-04-07 22:53:47 $ $Author: christian $
+ * @version $Revision: 1.28 $ $Date: 2005-04-08 15:33:24 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -411,7 +411,7 @@ void send_url_refresh( const void* p0, const void* p1,
 
             if (*cs >= 0) {
         
-                    char msg_refresh_part_1[] = "<head><meta http-equiv='refresh' content='0; URL=";
+                    char msg_refresh_part_1[] = "<head> <meta http-equiv='expires' content='0'>  <meta http-equiv='refresh' content='0; URL=";
                     char msg_refresh_part_3[] = "'></head><body></body>";
                     int msg_part_1_count = strlen( msg_refresh_part_1 );
                     int msg_part_3_count = strlen( msg_refresh_part_3 );
