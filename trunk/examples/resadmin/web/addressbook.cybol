@@ -36,6 +36,10 @@
         <property name="html_tag_properties" channel="inline" abstraction="string" model="border='1'"/>
     </part>
 
+    <part name="row_break1" channel="inline" abstraction="string" model=" ">
+        <property name="html_tag" channel="inline" abstraction="string" model="br"/>
+    </part>
+
     <part name="add_address" channel="inline" abstraction="cybol" model="examples/resadmin/web/add_button.cybol">
         <property name="html_tag" channel="inline" abstraction="string" model="a"/>
         <property name="html_tag_properties" channel="inline" abstraction="string" model="border='1'"/>
