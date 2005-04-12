@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+    $RCSfile$
+
+    Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+
+    This knowledge model is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This knowledge model is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this knowledge model; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+    http://www.cybop.net
+    - Cybernetics Oriented Programming -
+
+    @version $Revision$ $Date$ $Author$
+    @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
+/-->
+
+<model>
+
+    <!-- create part for variables -->
+    <part name="destroy_domain_new_address" channel="inline" abstraction="operation" model="destroy_part">
+        <property name="name" channel="inline" abstraction="string" model="domain.new_address"/>
+    </part>
+
+    <part name="create_domain_new_address" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
+        <property name="name" channel="inline" abstraction="string" model="new_address"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="compound"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+
+    <part name="create_new_address_firtsname" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain.new_address"/>
+        <property name="name" channel="inline" abstraction="string" model="firstname"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model="firsttest"/>
+    </part>
+
+
+    <part name="create_new_address_lastname" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain.new_address"/>
+        <property name="name" channel="inline" abstraction="string" model="lastname"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model="lasttest"/>
+    </part>
+    
+    <part name="create_new_address_listname" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain.new_address"/>
+        <property name="name" channel="inline" abstraction="string" model="listname"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+    
+    <part name="create_new_address_firstname_domain" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain.new_address"/>
+        <property name="name" channel="inline" abstraction="string" model="firstname_domain"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+    
+
+    <part name="create_new_address_lastname_domain" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain.new_address"/>
+        <property name="name" channel="inline" abstraction="string" model="lastname_domain"/>
+        <property name="channel" channel="inline" abstraction="string" model="inline"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="string"/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+
+    
+    <!-- create web view -->
+
+    <part name="destroy_web_new" channel="inline" abstraction="operation" model="destroy_part">
+        <property name="name" channel="inline" abstraction="string" model="web_new"/>
+    </part>
+    <part name="create_body" channel="inline" abstraction="operation" model="create_part">
+        <property name="name" channel="inline" abstraction="string" model="web_new"/>
+        <property name="channel" channel="inline" abstraction="string" model="file"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/web/new/body.cybol"/>
+    </part>
+
+    <!-- send to web -->    
+    <part name="send_edit_web" channel="inline" abstraction="operation" model="send">
+        <property name="language" channel="inline" abstraction="string" model="tcp_socket"/>
+        <property name="receiver" channel="inline" abstraction="string" model="user"/>
+        <property name="message" channel="inline" abstraction="knowledge" model="web_new"/>
+    </part>
+    
+    
+</model>

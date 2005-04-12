@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+    $RCSfile$
+
+    Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+
+    This knowledge model is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This knowledge model is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this knowledge model; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+    http://www.cybop.net
+    - Cybernetics Oriented Programming -
+
+    @version $Revision$ $Date$ $Author$
+    @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
+/-->
+
+<model>
+
+    <!-- refresh address_count -->
+    <part name="set_address_count" channel="inline" abstraction="operation" model="count_part">
+        <property name="basisname" channel="inline" abstraction="string" model="address"/>
+        <property name="model" channel="inline" abstraction="knowledge" model="domain.addressbook.addresses"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.addressbook.addresses.address_count"/>
+    </part>
+
+    <!-- build new list name-->
+    <part name="create_listname" channel="inline" abstraction="operation" model="build_listname">
+        <property name="basisname" channel="inline" abstraction="string" model="address"/>
+        <property name="index" channel="inline" abstraction="knowledge" model="domain.addressbook.addresses.address_count"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.new_address.listname"/>
+    </part>
+
+
+    <!-- create new address in list  -->
+    <part name="create_domain_new_address" channel="inline" abstraction="operation" model="create_part">
+        <property name="whole" channel="inline" abstraction="knowledge" model="domain.addressbook.addresses"/>
+        <property name="name" channel="inline" abstraction="knowledge" model="domain.new_address.listname"/>
+        <property name="channel" channel="inline" abstraction="string" model="file"/>
+        <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/domain/address_new.cybol"/>
+    </part>
+
+
+    <!-- set the domain spezifikation -->
+    <part name="set_domain_firstname_1" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="string" model="domain.addressbook.addresses."/>
+        <property name="operand_2" channel="inline" abstraction="knowledge" model="domain.new_address.listname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.new_address.firstname_domain"/>
+    </part>
+    <part name="set_domain_firstname_2" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.new_address.firstname_domain"/>
+        <property name="operand_2" channel="inline" abstraction="string" model=".firstname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.new_address.firstname_domain"/>
+    </part>
+
+    <part name="set_domain_lastname_1" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="string" model="domain.addressbook.addresses."/>
+        <property name="operand_2" channel="inline" abstraction="knowledge" model="domain.new_address.listname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.new_address.lastname_domain"/>
+    </part>
+    <part name="set_domain_lastname_2" channel="inline" abstraction="operation" model="add">
+        <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.new_address.lastname_domain"/>
+        <property name="operand_2" channel="inline" abstraction="string" model=".lastname"/>
+        <property name="result" channel="inline" abstraction="knowledge" model="domain.new_address.lastname_domain"/>
+    </part>
+    
+
+    <!-- set the value for the new address -->
+    <part name="set_new_address_firstname" channel="inline" abstraction="operation" model="set">
+        <property name="source" channel="inline" abstraction="knowledge" model="domain.new_address.firstname"/>
+        <property name="destination" channel="inline" abstraction="encapsulated_knowledge" model="domain.new_address.firstname_domain"/>
+    </part>
+    <part name="set_new_address_lastname" channel="inline" abstraction="operation" model="set">
+        <property name="source" channel="inline" abstraction="knowledge" model="domain.new_address.lastname"/>
+        <property name="destination" channel="inline" abstraction="encapsulated_knowledge" model="domain.new_address.lastname_domain"/>
+    </part>
+    
+
+
+    <!-- send to web -->    
+    <!-- refresh the adress list -->
+    <part name="create_address_row" channel="inline" abstraction="operation" model="url_refresh">
+        <property name="url" channel="inline" abstraction="string" model="send_name.cybol"/>
+    </part>
+    
+    
+</model>

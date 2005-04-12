@@ -27,18 +27,10 @@
 /-->
 
 <model>
-    <part name="addressbook_name" channel="inline" abstraction="knowledge" model="domain.addressbook.name">
-        <property name="html_tag" channel="inline" abstraction="string" model="h1"/>
+
+    <part name="form" channel="file" abstraction="cybol" model="examples/resadmin/web/new/new.cybol">
+        <property name="html_tag" channel="inline" abstraction="string" model="form"/>
+        <property name="html_tag_properties" channel="inline" abstraction="string" model="action='add_new_address.cybol' method='post'"/>
     </part>
 
-    <part name="addresstable" channel="file" abstraction="cybol" model="examples/resadmin/web/addresstable.cybol">
-        <property name="html_tag" channel="inline" abstraction="string" model="table"/>
-        <property name="html_tag_properties" channel="inline" abstraction="string" model="border='1'"/>
-    </part>
-
-    <part name="add_address" channel="inline" abstraction="cybol" model="examples/resadmin/web/add_button.cybol">
-        <property name="html_tag" channel="inline" abstraction="string" model="a"/>
-        <property name="html_tag_properties" channel="inline" abstraction="string" model="border='1'"/>
-    </part>
 </model>
-
