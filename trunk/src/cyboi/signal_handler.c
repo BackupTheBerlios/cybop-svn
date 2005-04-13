@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2005-04-05 16:32:38 $ $Author: rholzmueller $
+ * @version $Revision: 1.29 $ $Date: 2005-04-13 11:26:43 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -439,11 +439,11 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) START_MODEL_ABSTRACTION, (void*) START_MODEL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p0, p1, (void*) CREATE_SIGNAL_ABSTRACTION, (void*) CREATE_SIGNAL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            startup_model(p2, p3, *km, *kmc, *kms, p7, p5);
+            create_signal(p2, p3, *km, *kmc, *kms, p7, p5);
         }
     }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2005-04-07 22:53:47 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2005-04-13 11:26:43 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -506,6 +506,13 @@ static const char* DESTROY_PART_ABSTRACTION = DESTROY_PART_ABSTRACTION_ARRAY;
 static const int DESTROY_PART_ABSTRACTION_COUNT_ARRAY[] = {12};
 static const int* DESTROY_PART_ABSTRACTION_COUNT = DESTROY_PART_ABSTRACTION_COUNT_ARRAY;
 
+/** The create signal abstraction. */
+static const char CREATE_SIGNAL_ABSTRACTION_ARRAY[] = {'c', 'r', 'e', 'a', 't', 'e', '_', 's', 'i', 'g', 'n', 'a', 'l' };
+static const char* CREATE_SIGNAL_ABSTRACTION = CREATE_SIGNAL_ABSTRACTION_ARRAY;
+static const int CREATE_SIGNAL_ABSTRACTION_COUNT_ARRAY[] = {13};
+static const int* CREATE_SIGNAL_ABSTRACTION_COUNT = CREATE_SIGNAL_ABSTRACTION_COUNT_ARRAY;
+
+
 //
 // Communication abstractions.
 //
@@ -551,11 +558,6 @@ static const int EXIT_ABSTRACTION_COUNT_ARRAY[] = {4};
 static const int* EXIT_ABSTRACTION_COUNT = EXIT_ABSTRACTION_COUNT_ARRAY;
 
 
-/** The start model abstraction. */
-static const char START_MODEL_ABSTRACTION_ARRAY[] = {'s', 't', 'a', 'r', 't', '_', 'm', 'o', 'd', 'e', 'l' };
-static const char* START_MODEL_ABSTRACTION = START_MODEL_ABSTRACTION_ARRAY;
-static const int START_MODEL_ABSTRACTION_COUNT_ARRAY[] = {11};
-static const int* START_MODEL_ABSTRACTION_COUNT = START_MODEL_ABSTRACTION_COUNT_ARRAY;
 
 //
 //
