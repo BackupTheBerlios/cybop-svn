@@ -188,7 +188,7 @@
     <part name="creat_table_body" channel="inline" abstraction="operation" model="loop">
         <property name="break" channel="inline" abstraction="knowledge" model="domain.loop_breakflag"/>
         <property name="index" channel="inline" abstraction="knowledge" model="domain.loop_index"/>
-        <property name="model" channel="file" abstraction="cybol" model="examples/resadmin/logic/create_table_rows.cybol"/>
+        <property name="model" channel="inline" abstraction="knowledge" model="logic.create_table_rows"/>
     </part>
     
     <!-- send the result -->
