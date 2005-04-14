@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.23 $ $Date: 2005-04-13 11:26:43 $ $Author: rholzmueller $
+ * @version $Revision: 1.24 $ $Date: 2005-04-14 16:01:58 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -284,7 +284,7 @@ static const int SXW_ABSTRACTION_COUNT_ARRAY[] = {3};
 static const int* SXW_ABSTRACTION_COUNT = SXW_ABSTRACTION_COUNT_ARRAY;
 
 //
-// User interface abstractions.
+// language abstractions.
 //
 
 /** The character/ textual user interface (tui) abstraction. */
@@ -310,6 +310,12 @@ static const char TCP_SOCKET_ABSTRACTION_ARRAY[] = {'t', 'c', 'p', '_', 's', 'o'
 static const char* TCP_SOCKET_ABSTRACTION = TCP_SOCKET_ABSTRACTION_ARRAY;
 static const int TCP_SOCKET_ABSTRACTION_COUNT_ARRAY[] = {10};
 static const int* TCP_SOCKET_ABSTRACTION_COUNT = TCP_SOCKET_ABSTRACTION_COUNT_ARRAY;
+
+/** The signal abstraction. */
+static const char SIGNAL_ABSTRACTION_ARRAY[] = {'s', 'i', 'g', 'n', 'a', 'l'};
+static const char* SIGNAL_ABSTRACTION = SIGNAL_ABSTRACTION_ARRAY;
+static const int SIGNAL_ABSTRACTION_COUNT_ARRAY[] = {6};
+static const int* SIGNAL_ABSTRACTION_COUNT = SIGNAL_ABSTRACTION_COUNT_ARRAY;
 
 /** The mouse abstraction. */
 static const char MOUSE_ABSTRACTION_ARRAY[] = {'m', 'o', 'u', 's', 'e'};
@@ -505,13 +511,6 @@ static const char DESTROY_PART_ABSTRACTION_ARRAY[] = {'d', 'e', 's', 't', 'r', '
 static const char* DESTROY_PART_ABSTRACTION = DESTROY_PART_ABSTRACTION_ARRAY;
 static const int DESTROY_PART_ABSTRACTION_COUNT_ARRAY[] = {12};
 static const int* DESTROY_PART_ABSTRACTION_COUNT = DESTROY_PART_ABSTRACTION_COUNT_ARRAY;
-
-/** The create signal abstraction. */
-static const char CREATE_SIGNAL_ABSTRACTION_ARRAY[] = {'c', 'r', 'e', 'a', 't', 'e', '_', 's', 'i', 'g', 'n', 'a', 'l' };
-static const char* CREATE_SIGNAL_ABSTRACTION = CREATE_SIGNAL_ABSTRACTION_ARRAY;
-static const int CREATE_SIGNAL_ABSTRACTION_COUNT_ARRAY[] = {13};
-static const int* CREATE_SIGNAL_ABSTRACTION_COUNT = CREATE_SIGNAL_ABSTRACTION_COUNT_ARRAY;
-
 
 //
 // Communication abstractions.
