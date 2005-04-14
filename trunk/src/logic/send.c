@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.28 $ $Date: 2005-04-08 15:33:24 $ $Author: rholzmueller $
+ * @version $Revision: 1.29 $ $Date: 2005-04-14 16:04:36 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -131,42 +131,6 @@ void send_message(const void* p0, const void* p1,
         (void*) &lm, (void*) &lmc, (void*) &lms,
         (void*) &ld, (void*) &ldc, (void*) &lds);
 
-    fprintf(stdout, "TEST la: %s\n", *la);
-    fprintf(stdout, "TEST lac: %i\n", **((int**) lac));
-    fprintf(stdout, "TEST las: %i\n", **((int**) las));
-    fprintf(stdout, "TEST lm: %s\n", *lm);
-    fprintf(stdout, "TEST lmc: %i\n", **((int**) lmc));
-    fprintf(stdout, "TEST lms: %i\n", **((int**) lms));
-    fprintf(stdout, "TEST ld: %i\n", *ld);
-//??    fprintf(stdout, "TEST ldc: %i\n", **((int**) ldc));
-//??    fprintf(stdout, "TEST lds: %i\n", **((int**) lds));
-
-/*??
-    // Get sender.
-    get_compound_element_by_encapsulated_name(p0, p1,
-        (void*) SENDER_NAME_ABSTRACTION, (void*) SENDER_NAME_ABSTRACTION_COUNT,
-        (void*) &sa, (void*) &sac, (void*) &sas,
-        (void*) &sm, (void*) &smc, (void*) &sms,
-        (void*) &sd, (void*) &sdc, (void*) &sds,
-        p2, p3);
-
-    // Get receiver.
-    get_compound_element_by_encapsulated_name(p0, p1,
-        (void*) RECEIVER_NAME_ABSTRACTION, (void*) RECEIVER_NAME_ABSTRACTION_COUNT,
-        (void*) &ra, (void*) &rac, (void*) &ras,
-        (void*) &rm, (void*) &rmc, (void*) &rms,
-        (void*) &rd, (void*) &rdc, (void*) &rds,
-        p2, p3);
-
-    // Get message.
-    get_compound_element_by_encapsulated_name(p0, p1,
-        (void*) MESSAGE_NAME_ABSTRACTION, (void*) MESSAGE_NAME_ABSTRACTION_COUNT,
-        (void*) &ma, (void*) &mac, (void*) &mas,
-        (void*) &mm, (void*) &mmc, (void*) &mms,
-        (void*) &md, (void*) &mdc, (void*) &mds,
-        p2, p3);
-*/
-
     // Get sender.
     get_compound_element_by_name(p0, p1,
         (void*) SENDER_NAME_ABSTRACTION, (void*) SENDER_NAME_ABSTRACTION_COUNT,
@@ -174,17 +138,6 @@ void send_message(const void* p0, const void* p1,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds);
 
-/*??
-    fprintf(stdout, "TEST sa: %s\n", *sa);
-    fprintf(stdout, "TEST sac: %i\n", **((int**) sac));
-    fprintf(stdout, "TEST sas: %i\n", **((int**) sas));
-    fprintf(stdout, "TEST sm: %s\n", *sm);
-    fprintf(stdout, "TEST smc: %i\n", **((int**) smc));
-    fprintf(stdout, "TEST sms: %i\n", **((int**) sms));
-    fprintf(stdout, "TEST sd: %i\n", *sd);
-//??    fprintf(stdout, "TEST sdc: %i\n", **((int**) sdc));
-//??    fprintf(stdout, "TEST sds: %i\n", **((int**) sds));
-*/
 
     // Get receiver.
     get_compound_element_by_name(p0, p1,
@@ -193,33 +146,13 @@ void send_message(const void* p0, const void* p1,
         (void*) &rm, (void*) &rmc, (void*) &rms,
         (void*) &rd, (void*) &rdc, (void*) &rds);
 
-    fprintf(stdout, "TEST ra: %s\n", *ra);
-    fprintf(stdout, "TEST rac: %i\n", **((int**) rac));
-    fprintf(stdout, "TEST ras: %i\n", **((int**) ras));
-    fprintf(stdout, "TEST rm: %s\n", *rm);
-    fprintf(stdout, "TEST rmc: %i\n", **((int**) rmc));
-    fprintf(stdout, "TEST rms: %i\n", **((int**) rms));
-    fprintf(stdout, "TEST rd: %i\n", *rd);
-//??    fprintf(stdout, "TEST rdc: %i\n", **((int**) rdc));
-//??    fprintf(stdout, "TEST rds: %i\n", **((int**) rds));
-
     // Get message.
-    get_compound_element_by_encapsulated_name(p0, p1,
+    get_real_compound_element_by_name(p0, p1,
         (void*) MESSAGE_NAME_ABSTRACTION, (void*) MESSAGE_NAME_ABSTRACTION_COUNT,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
         p2, p3);
-
-    fprintf(stdout, "TEST ma: %s\n", *ma);
-    fprintf(stdout, "TEST mac: %i\n", **((int**) mac));
-    fprintf(stdout, "TEST mas: %i\n", **((int**) mas));
-    fprintf(stdout, "TEST mm: %s\n", *mm);
-    fprintf(stdout, "TEST mmc: %i\n", **((int**) mmc));
-    fprintf(stdout, "TEST mms: %i\n", **((int**) mms));
-    fprintf(stdout, "TEST md: %i\n", *md);
-//??    fprintf(stdout, "TEST mdc: %i\n", **((int**) mdc));
-//??    fprintf(stdout, "TEST mds: %i\n", **((int**) mds));
 
     // The comparison result.
     int r = 0;
@@ -252,16 +185,33 @@ void send_message(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays((void*) *lm, (void*) *lmc, (void*) UNIX_SOCKET_CHANNEL, (void*) UNIX_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays( (void*) *lm, (void*) *lmc, 
+                        (void*) SIGNAL_ABSTRACTION, 
+                        (void*) SIGNAL_ABSTRACTION_COUNT, 
+                        (void*) &r, (void*) CHARACTER_ARRAY );
 
         if (r == 1) {
 
-/*??
-            send_unix_socket((void*) &dn, (void*) &dnc, (void*) &dns,
-                (void*) &snm, (void*) &snmc,
-                (void*) &sna, (void*) &snac,
-                (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
-*/
+            //set_signal
+            log_message_debug("Set start signal.");
+    
+            // The signal memory.
+            void** sm = NULL_POINTER;
+            void** smc = NULL_POINTER;
+            void** sms = NULL_POINTER;
+    
+            // Get signal memory.
+            get_array_elements(p6, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &sm, (void*) POINTER_ARRAY);
+            get_array_elements(p6, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &smc, (void*) POINTER_ARRAY);
+            get_array_elements(p6, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &sms, (void*) POINTER_ARRAY);
+    
+            // Set signal.
+            set_signal(*sm, *smc, *sms,
+                (void*) *ma, (void*) *mac,
+                (void*) *mm, (void*) *mmc,
+                (void*) *md, (void*) *mdc,
+                (void*) NORMAL_PRIORITY, p5);
+            
         }
     }
 
