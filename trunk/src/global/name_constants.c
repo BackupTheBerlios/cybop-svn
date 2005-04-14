@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-04-05 16:33:53 $ $Author: rholzmueller $
+ * @version $Revision: 1.17 $ $Date: 2005-04-14 06:41:28 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -158,6 +158,13 @@ static const char SERVICE_NAME_ARRAY[] = {'s', 'e', 'r', 'v', 'i', 'c', 'e'};
 static const char* SERVICE_NAME = SERVICE_NAME_ARRAY;
 static const int SERVICE_NAME_COUNT_ARRAY[] = {7};
 static const int* SERVICE_NAME_COUNT = SERVICE_NAME_COUNT_ARRAY;
+
+
+/** The tcp socket port . */
+static const char TCP_SOCKET_PORT_NAME_ARRAY[] = {'t', 'c', 'p', '_', 's', 'o', 'c', 'k', 'e', 't', '_', 'p', 'o', 'r', 't' };
+static const char* TCP_SOCKET_PORT_NAME = TCP_SOCKET_PORT_NAME_ARRAY;
+static const int TCP_SOCKET_PORT_NAME_COUNT_ARRAY[] = {15};
+static const int* TCP_SOCKET_PORT_NAME_COUNT = TCP_SOCKET_PORT_NAME_COUNT_ARRAY;
 
 //
 // Property names names for html.

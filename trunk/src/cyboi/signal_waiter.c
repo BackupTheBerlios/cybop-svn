@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.37 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
+ * @version $Revision: 1.38 $ $Date: 2005-04-14 06:41:29 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -49,7 +49,6 @@ void wait(void* p0) {
 
     //?? TODO: Debugging stuff from Rolf Holzmueller.
     void** socket_flag = POINTER_NULL_POINTER;
-    get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_ARRAY);
 
     // The knowledge memory.
     void** k = POINTER_NULL_POINTER;
@@ -119,6 +118,8 @@ void wait(void* p0) {
 
                                 //?? Wait for web input, if no signal is in memory. TODO: Use a thread for this!
                                 //debug for rolf Holzm?ller
+                                get_array_elements( p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, 
+                                                   (void*) &socket_flag, (void*) POINTER_ARRAY);
                                 if ( socket_flag != POINTER_NULL_POINTER ) {
 
                                     if (*socket_flag != NULL_POINTER) {

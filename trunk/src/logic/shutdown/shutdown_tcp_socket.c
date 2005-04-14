@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-04-07 16:29:46 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-04-14 06:41:29 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -52,6 +52,16 @@ void shutdown_tcp_socket(void* p0, const void* p1, const void* p2, const void* p
     if (*s != NULL_POINTER) {
 
         //?? TODO Rolf! Put all code for tcp socket shutdown here!
+        close ( *((int*)*s) );
+
+        //set the activation flag in the internal
+        void** socket_flag = POINTER_NULL_POINTER;
+        get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_ARRAY);
+        if ( (socket_flag!=NULL_POINTER) && (*socket_flag!=NULL_POINTER) ) {
+         
+            *((int*)*socket_flag) = 0; 
+        }
+        
         
     } else {
 

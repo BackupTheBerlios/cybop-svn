@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-04-13 11:26:44 $ $Author: rholzmueller $
+ * @version $Revision: 1.7 $ $Date: 2005-04-14 06:41:28 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -32,6 +32,7 @@
 #include "../global/abstraction_constants.c"
 #include "../global/channel_constants.c"
 #include "../global/constant.c"
+#include "../creator/creator.c"
 #include "../global/log_constants.c"
 #include "../global/name_constants.c"
 #include "../logger/logger.c"
@@ -69,45 +70,37 @@ void startup_service(const void* p0, const void* p1,
     void** sdc = NULL_POINTER;
     void** sds = NULL_POINTER;
 
+    // The socket port abstraction.
+    void** spa = NULL_POINTER;
+    void** spac = NULL_POINTER;
+    void** spas = NULL_POINTER;
+    // The socket port model.
+    void** spm = NULL_POINTER;
+    void** spmc = NULL_POINTER;
+    void** spms = NULL_POINTER;
+    // The socket port details.
+    void** spd = NULL_POINTER;
+    void** spdc = NULL_POINTER;
+    void** spds = NULL_POINTER;
+
     // Get parameters.
-    get_compound_element_by_name(p0, p1,
+    get_real_compound_element_by_name(p0, p1,
         (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
-        (void*) &sd, (void*) &sdc, (void*) &sds);
+        (void*) &sd, (void*) &sdc, (void*) &sds,
+        p2, p3);
+
+    // Get parameters.
+    get_real_compound_element_by_name(p0, p1,
+        (void*) TCP_SOCKET_PORT_NAME, (void*) TCP_SOCKET_PORT_NAME_COUNT,
+        (void*) &spa, (void*) &spac, (void*) &spas,
+        (void*) &spm, (void*) &spmc, (void*) &spms,
+        (void*) &spd, (void*) &spdc, (void*) &spds,
+        p2, p3);
 
     // The comparison result.
     int r = 0;
-
-    // Get service.
-    if (r != 1) {
-
-        compare_arrays((void*) *sa, (void*) *sac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            get_compound_element_by_name(p0, p1,
-                (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
-                (void*) &sa, (void*) &sac, (void*) &sas,
-                (void*) &sm, (void*) &smc, (void*) &sms,
-                (void*) &sd, (void*) &sdc, (void*) &sds);
-        }
-    }
-
-    if (r != 1) {
-
-        compare_arrays((void*) *sa, (void*) *sac, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            get_compound_element_by_encapsulated_name(p0, p1,
-                (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
-                (void*) &sa, (void*) &sac, (void*) &sas,
-                (void*) &sm, (void*) &smc, (void*) &sms,
-                (void*) &sd, (void*) &sdc, (void*) &sds,
-                p2, p3);
-        }
-    }
 
     // Reset comparison result.
     r = 0;
@@ -128,7 +121,19 @@ void startup_service(const void* p0, const void* p1,
 
         if (r == 1) {
 
-            startup_tcp_socket(p5, p2, p3, p4);
+            if (    (spa != NULL_POINTER)
+                 && (spac != NULL_POINTER)
+                 && (spm != NULL_POINTER)
+                 && (spmc != NULL_POINTER) )
+            {                 
+
+                startup_tcp_socket( p5, p2, p3, p4, 
+                                    *spa, *spac, *spm, *spmc );
+            }
+            else {
+             
+                log_message_debug( "the socket port ist a null pointer" );
+            }
         }
     }
 }

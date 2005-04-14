@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-04-07 22:53:47 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-04-14 06:41:28 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -66,6 +66,41 @@ void shutdown_service(const void* p0, const void* p1,
     void** sd = NULL_POINTER;
     void** sdc = NULL_POINTER;
     void** sds = NULL_POINTER;
+
+    // Get parameters.
+    get_real_compound_element_by_name(p0, p1,
+        (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
+        (void*) &sa, (void*) &sac, (void*) &sas,
+        (void*) &sm, (void*) &smc, (void*) &sms,
+        (void*) &sd, (void*) &sdc, (void*) &sds,
+        p2, p3);
+
+    // The comparison result.
+    int r = 0;
+
+    // Reset comparison result.
+    r = 0;
+
+    if (r != 1) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            shutdown_x_window_system(p5, p2, p3, p4);
+        }
+    }
+
+    if (r != 1) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_ABSTRACTION, (void*) TCP_SOCKET_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            shutdown_tcp_socket( p5, p2, p3, p4 );
+        }
+    }
+
 
 /*??
     // Get parameters.
