@@ -28,45 +28,17 @@
 
 <model>
 
-
-    <!--
-        root of the domain models   
-    -->
-    <part name="create_domain" channel="inline" abstraction="operation" model="create_part">
-        <property name="name" channel="inline" abstraction="string" model="domain"/>
-        <property name="channel" channel="inline" abstraction="string" model="inline"/>
-        <property name="abstraction" channel="inline" abstraction="string" model="compound"/>
-        <property name="model" channel="inline" abstraction="string" model=""/>
-    </part>
-    <part name="create_adressbook" channel="inline" abstraction="operation" model="create_part">
-        <property name="whole" channel="inline" abstraction="knowledge" model="domain"/>
-        <property name="name" channel="inline" abstraction="string" model="addressbook"/>
+<!--
+    <part name="create_domain" channel="inline" abstraction="operation" model="create_signal">
         <property name="channel" channel="inline" abstraction="string" model="file"/>
         <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
-        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/domain/addressbook.cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/logic/startup.cybol"/>
     </part>
-    
-    <!-- logic model -->
-    <part name="create_logic" channel="inline" abstraction="operation" model="create_part">
-        <property name="name" channel="inline" abstraction="string" model="logic"/>
-        <property name="channel" channel="inline" abstraction="string" model="inline"/>
-        <property name="abstraction" channel="inline" abstraction="string" model="compound"/>
-        <property name="model" channel="inline" abstraction="string" model=""/>
+-->    
+
+    <part name="create_domain" channel="inline" abstraction="operation" model="send">
+        <property name="language" channel="inline" abstraction="string" model="signal"/>
+        <property name="message" channel="file" abstraction="cybol" model="examples/resadmin/logic/startup.cybol"/>
     </part>
 
-    <part name="create_logig_create_table_rows" channel="inline" abstraction="operation" model="create_part">
-        <property name="whole" channel="inline" abstraction="knowledge" model="logic"/>
-        <property name="name" channel="inline" abstraction="string" model="create_table_rows"/>
-        <property name="channel" channel="inline" abstraction="string" model="file"/>
-        <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
-        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/logic/create_table_rows.cybol"/>
-    </part>
-
-    <!-- start service tcp socket -->
-    <part name="start_service" channel="inline" abstraction="operation" model="startup">
-        <property name="service" channel="inline" abstraction="string" model="tcp_socket"/>    
-        <property name="tcp_socket_port" channel="inline" abstraction="integer" model="3456"/>
-    </part>
-    
-    
 </model>

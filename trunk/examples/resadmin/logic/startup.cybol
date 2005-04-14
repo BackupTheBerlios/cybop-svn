@@ -22,7 +22,7 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.7 $ $Date: 2005-04-13 08:53:46 $ $Author: rholzmueller $
+    @version $Revision: 1.8 $ $Date: 2005-04-14 16:05:00 $ $Author: rholzmueller $
     @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
 /-->
 
@@ -60,6 +60,12 @@
         <property name="channel" channel="inline" abstraction="string" model="file"/>
         <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
         <property name="model" channel="inline" abstraction="string" model="examples/resadmin/logic/create_table_rows.cybol"/>
+    </part>
+
+    <!-- start service tcp socket -->
+    <part name="start_service" channel="inline" abstraction="operation" model="startup">
+        <property name="service" channel="inline" abstraction="string" model="tcp_socket"/>    
+        <property name="tcp_socket_port" channel="inline" abstraction="integer" model="3456"/>
     </part>
 
 </model>
