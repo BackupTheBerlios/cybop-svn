@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-04-15 09:01:01 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -177,16 +177,6 @@ void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
         if (r == 1) {
 
             parse_time(p0, p1, p2, p3, p4);
-        }
-    }
-
-    if (r != 1) {
-
-        compare_arrays(p5, p6, (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            parse_xml(p0, p1, p2, p3, p4);
         }
     }
 

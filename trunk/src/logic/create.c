@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.35 $ $Date: 2005-04-14 16:03:08 $ $Author: rholzmueller $
+ * @version $Revision: 1.36 $ $Date: 2005-04-15 09:01:01 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -222,11 +222,6 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
 
     log_message_debug("Create compound model.");
 
-    //?The configuration flag.
-    int c = 0;
-
-    compare_arrays(p5, p6, (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT, (void*) &c, (void*) CHARACTER_ARRAY);
-
     //?The temporary workaround flag to use the libxml2 parser.
     //?? Later, when an own xml parser is implemented in cyboi,
     //?? delete this flag and change the corresponding blocks below!
@@ -235,7 +230,6 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     // Comparison can be done one-after-the-other, because results are only set
     // to 1, if true, but they are NOT set to 0, if false.
     // So, later comparisons won't affect the result of earlier ones.
-    compare_arrays(p5, p6, (void*) CONFIGURATION_ABSTRACTION, (void*) CONFIGURATION_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
     compare_arrays(p5, p6, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
     compare_arrays(p5, p6, (void*) XML_ABSTRACTION, (void*) XML_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
     compare_arrays(p5, p6, (void*) HXP_ABSTRACTION, (void*) HXP_ABSTRACTION_COUNT, (void*) &w, (void*) CHARACTER_ARRAY);
@@ -284,16 +278,8 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     // Decode.
     //
 
-    if (c == 0) {
-
-        // Create compound decode model.
-        create(p0, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
-
-    } else {
-
-        // Create internals memory decode model.
-        create(p0, p2, (void*) INTERNALS_MEMORY_ABSTRACTION, (void*) INTERNALS_MEMORY_ABSTRACTION_COUNT);
-    }
+    // Create compound decode model.
+    create(p0, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     // Decode document model according to given document type.
     decode(p0, p1, p2, pm, (void*) &pmc, p5, p6);

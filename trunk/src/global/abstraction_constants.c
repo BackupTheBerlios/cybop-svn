@@ -20,22 +20,13 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2005-04-14 16:01:58 $ $Author: rholzmueller $
+ * @version $Revision: 1.25 $ $Date: 2005-04-15 09:01:01 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ABSTRACTION_CONSTANTS_SOURCE
 #define ABSTRACTION_CONSTANTS_SOURCE
 
-//
-// Configuration abstraction.
-//
-
-/** The configuration abstraction. */
-static const char CONFIGURATION_ABSTRACTION_ARRAY[] = {'c', 'o', 'n', 'f', 'i', 'g', 'u', 'r', 'a', 't', 'i', 'o', 'n'};
-static const char* CONFIGURATION_ABSTRACTION = CONFIGURATION_ABSTRACTION_ARRAY;
-static const int CONFIGURATION_ABSTRACTION_COUNT_ARRAY[] = {13};
-static const int* CONFIGURATION_ABSTRACTION_COUNT = CONFIGURATION_ABSTRACTION_COUNT_ARRAY;
 
 //
 // Internals memory abstraction.

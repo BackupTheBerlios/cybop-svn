@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-04-15 09:01:01 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,6 +37,9 @@
 /**
  * Starts up the input output.
  *
+ * in the internals must be create the atctivation flag
+ * for the different input / output mechanismen
+ *
  * To the mechanisms belong:
  * - unix socket
  * - tcp socket
@@ -46,49 +49,46 @@
  */
 void startup_input_output(void* p0) {
 
-    log_message_debug("Startup input output.");
+    if ( p0 != NULL_POINTER ) {
 
-    // The activation flag.
-    void** f = POINTER_NULL_POINTER;
-    // The comparison result.
-    int r = 0;
+        log_message_debug("Startup input output.");
 
-    // UNIX socket server.
-    get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
+        int* activation_flag = INTEGER_NULL_POINTER;
 
-    if (f != NULL_POINTER) {
-
-        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
-
-        if (r == 1) {
-
-            create_unix_server_socket(p0);
-            r = 0;
-        }
-
-        f = POINTER_NULL_POINTER;
+        // The activation flag for unix socket.
+        activation_flag = INTEGER_NULL_POINTER;
+        create_integer( &activation_flag );
+        *activation_flag = 0;
+        
+        set_array_elements( p0, 
+                            (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL,
+                            (void*) &activation_flag, 
+                            (void*) ONE_NUMBER, 
+                            (void*) POINTER_ARRAY );
+    
+        // The activation flag for tcp server socket.
+        activation_flag = INTEGER_NULL_POINTER;
+        create_integer( &activation_flag );
+        *activation_flag = 0;
+        
+        set_array_elements( p0, 
+                            (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL,
+                            (void*) &activation_flag, 
+                            (void*) ONE_NUMBER, 
+                            (void*) POINTER_ARRAY );
     }
-
-    // TCP socket server.
-    get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
-
-    if (f != NULL_POINTER) {
-
-        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
-
-        if (r == 1) {
-
-            create_tcp_server_socket(p0);
-            r = 0;
-        }
-
-        f = POINTER_NULL_POINTER;
-    }
+    else {
+     
+        log_message_debug( "Can not startup_input_output. The internal is null.");
+    }        
 }
 
 /**
  * Shuts down the input output mechanisms.
- *
+ * 
+ * in the internals must be destroy the atctivation flag
+ * for the different input / output mechanismen
+ * 
  * To the mechanisms belong:
  * - x window system
  * - tcp socket
@@ -102,21 +102,13 @@ void shutdown_input_output(void* p0) {
 
     // The activation flag.
     void** f = POINTER_NULL_POINTER;
-    // The comparison result.
-    int r = 0;
 
     // UNIX socket server.
     get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
     if (f != NULL_POINTER) {
 
-        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
-
-        if (r == 1) {
-
-            destroy_unix_server_socket(p0);
-            r = 0;
-        }
+        destroy_integer( f );
 
         f = POINTER_NULL_POINTER;
     }
@@ -126,13 +118,7 @@ void shutdown_input_output(void* p0) {
 
     if (f != NULL_POINTER) {
 
-        compare_arrays(*f, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) &r, (void*) INTEGER_ARRAY);
-
-        if (r == 1) {
-
-            destroy_tcp_server_socket(p0);
-            r = 0;
-        }
+        destroy_integer( f );
 
         f = POINTER_NULL_POINTER;
     }
