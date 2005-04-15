@@ -22,7 +22,7 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.1 $ $Date: 2005-04-15 12:07:35 $ $Author: christian $
+    @version $Revision: 1.2 $ $Date: 2005-04-15 13:16:13 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
 
@@ -41,7 +41,7 @@
 /-->
 
 <model>
-    <part name="run" channel="inline" abstraction="operation" model="send">
+    <part name="startup" channel="inline" abstraction="operation" model="send">
         <property name="language" channel="inline" abstraction="string" model="signal"/>
         <property name="message" channel="file" abstraction="cybol" model="exit_cybol_file/exit.cybol"/>
     </part>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <!--
-    $RCSfile: run.cybol,v $
+    $RCSfile: shutdown.cybol,v $
 
     Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
 
@@ -22,22 +22,16 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.2 $ $Date: 2005-04-15 13:16:13 $ $Author: christian $
+    @version $Revision: 1.1 $ $Date: 2005-04-15 13:16:13 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
 
-<!--
-    This example creates a small, hierarchical domain model consisting
-    of a compound called "domain" and its part called "greeting".
-    The greeting model contains the famous "Hello, World!" string.
-
-    As next step, the greeting model is sent to (printed on) the console.
-    Finally, an "exit" operation shuts down the application.
-/-->
-
 <model>
-    <part name="startup" channel="inline" abstraction="operation" model="send">
-        <property name="language" channel="inline" abstraction="string" model="signal"/>
-        <property name="message" channel="file" abstraction="cybol" model="helloworld/startup.cybol"/>
+    <part name="destroy_domain" channel="inline" abstraction="operation" model="destroy_part">
+        <property name="model" channel="inline" abstraction="knowledge" model="domain"/>
     </part>
+    <part name="destroy_logic" channel="inline" abstraction="operation" model="destroy_part">
+        <property name="model" channel="inline" abstraction="knowledge" model="logic"/>
+    </part>
+    <part name="exit_application" channel="inline" abstraction="operation" model="exit"/>
 </model>

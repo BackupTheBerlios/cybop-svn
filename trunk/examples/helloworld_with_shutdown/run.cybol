@@ -22,7 +22,7 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.2 $ $Date: 2005-04-15 13:16:13 $ $Author: christian $
+    @version $Revision: 1.1 $ $Date: 2005-04-15 13:16:13 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
 
@@ -38,6 +38,14 @@
 <model>
     <part name="startup" channel="inline" abstraction="operation" model="send">
         <property name="language" channel="inline" abstraction="string" model="signal"/>
-        <property name="message" channel="file" abstraction="cybol" model="helloworld/startup.cybol"/>
+        <property name="message" channel="file" abstraction="cybol" model="helloworld_with_shutdown/startup.cybol"/>
+    </part>
+    <part name="send_greeting" channel="inline" abstraction="operation" model="send">
+        <property name="language" channel="inline" abstraction="string" model="signal"/>
+        <property name="message" channel="inline" abstraction="knowledge" model="logic.send_greeting"/>
+    </part>
+    <part name="shutdown" channel="inline" abstraction="operation" model="send">
+        <property name="language" channel="inline" abstraction="string" model="signal"/>
+        <property name="message" channel="inline" abstraction="knowledge" model="logic.shutdown"/>
     </part>
 </model>
