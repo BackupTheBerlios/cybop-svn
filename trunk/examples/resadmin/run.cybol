@@ -27,18 +27,8 @@
 /-->
 
 <model>
-
-<!--
-    <part name="create_domain" channel="inline" abstraction="operation" model="create_signal">
-        <property name="channel" channel="inline" abstraction="string" model="file"/>
-        <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
-        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/logic/startup.cybol"/>
-    </part>
--->    
-
     <part name="create_domain" channel="inline" abstraction="operation" model="send">
         <property name="language" channel="inline" abstraction="string" model="signal"/>
         <property name="message" channel="file" abstraction="cybol" model="examples/resadmin/logic/startup.cybol"/>
     </part>
-
 </model>
