@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.11 $ $Date: 2005-04-05 16:35:50 $ $Author: rholzmueller $
+ * @version $Revision: 1.12 $ $Date: 2005-04-15 15:48:20 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,131 @@
 #include "../global/name_constants.c"
 #include "../logger/logger.c"
 
+void destroy_model( void** model, void* model_count, void* model_size,
+                    void* model_abstr, void* model_abstr_count );
+
+
+/**
+ * Checks for a compound model.
+ *
+ * @param p0 the primitive flag (1 if primitive; unchanged otherwise)
+ * @param p1 the abstraction
+ * @param p2 the abstraction count
+ */
+void check_compound_model(void* p0, const void* p1, const void* p2) {
+
+    if (p0 != NULL_POINTER) {
+
+        int* p = (int*) p0;
+
+        if (*p != 1) {
+
+            compare_arrays( p1, p2, 
+                            (void*) COMPOUND_ABSTRACTION, 
+                            (void*) COMPOUND_ABSTRACTION_COUNT, 
+                            p0, (void*) CHARACTER_ARRAY);
+        }
+
+        if (*p != 1) {
+
+            compare_arrays( p1, p2, 
+                            (void*) CYBOL_ABSTRACTION, 
+                            (void*) CYBOL_ABSTRACTION_COUNT, 
+                            p0, (void*) CHARACTER_ARRAY);
+        }
+    }
+}
+
+/**
+ * destroy a primitive model
+ * 
+ * @param p0 the model
+ * @param p1 the model count
+ * @param p2 the model size
+ * @param p3 the model abstraction
+ * @param p4 the model abstraction count
+ */
+void destroy_primitive_model( void** model, void* model_count, void* model_size,
+                              void* model_abstr, void* model_abstr_count) 
+{
+
+    log_message_debug("Destroy primitive model.");
+
+    // Destroy model of type given as abstraction.
+    destroy( model, model_size, model_abstr, model_abstr_count );
+}
+
+
+/**
+ * destroy a primitive model
+ * 
+ * @param p0 the model
+ * @param p1 the model count
+ * @param p2 the model size
+ * @param p3 the model abstraction
+ * @param p4 the model abstraction count
+ */
+void destroy_compound_model( void** model, void* model_count, void* model_size, 
+                             void* model_abstr, void* model_abstr_count) 
+{
+    //das gesamte Compound durchgehen und für jedes Element im Compound wieder
+    //destroy model aufrufen
+    
+    if (    (model != NULL_POINTER)
+         && (model_count != NULL_POINTER)
+         && (model_size != NULL_POINTER) 
+         && (model_abstr != NULL_POINTER)
+         && (model_abstr_count != NULL_POINTER) )
+    {
+     
+        int compound_counter = 0;
+
+        // The element name.
+        void** en = POINTER_NULL_POINTER;
+        void** enc = POINTER_NULL_POINTER;
+        void** ens = POINTER_NULL_POINTER;
+        // The element abstraction.
+        void** ea = POINTER_NULL_POINTER;
+        void** eac = POINTER_NULL_POINTER;
+        void** eas = POINTER_NULL_POINTER;
+        // The element model.
+        void** em = POINTER_NULL_POINTER;
+        void** emc = POINTER_NULL_POINTER;
+        void** ems = POINTER_NULL_POINTER;
+        // The element details.
+        void** ed = POINTER_NULL_POINTER;
+        void** edc = POINTER_NULL_POINTER;
+        void** eds = POINTER_NULL_POINTER;
+        
+        
+        while (1) {
+         
+            if ( compound_counter  >= *((int*)model_count) ) {
+             
+                break; 
+            }
+
+            // Get element name.
+            get_compound_element_name_by_index(*model, model_count, 
+                (void*) &compound_counter,
+                (void*) &en, (void*) &enc, (void*) &ens);
+            
+            // Get element.
+            get_compound_element_by_index(*model, model_count, 
+                (void*) &compound_counter,
+                (void*) &ea, (void*) &eac, (void*) &eas,
+                (void*) &em, (void*) &emc, (void*) &ems,
+                (void*) &ed, (void*) &edc, (void*) &eds);
+
+            destroy_model( em, *emc, *ems, *ea, *eac); 
+            
+            compound_counter = compound_counter + 1;
+            
+        }
+    }         
+}
+
+ 
 /**
  * Destroys a transient destination model.
  *
@@ -51,39 +176,33 @@
  * - created and destroyed by CYBOI
  * - not available anymore after CYBOI has been destroyed
  *
- * @param p0 the destination
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source model
- * @param p4 the source model count
- * @param p5 the source abstraction
- * @param p6 the source abstraction count
- * @param p7 the source channel
- * @param p8 the source channel count
+ * @param p0 the model
+ * @param p1 the model count
+ * @param p2 the model size
+ * @param p3 the model abstraction
+ * @param p4 the model abstraction count
  */
-void destroy_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6, const void* p7, const void* p8) {
+void destroy_model( void** model, void* model_count, void* model_size,
+                    void* model_abstr, void* model_abstr_count) 
+{
 
-/*??
     //?The comparison result.
-    int* r = INTEGER_NULL_POINTER;
-    create_integer((void*) &r);
-    *r = 0;
+    int r = 0;
 
     // Check for primitive model.
-    check_primitive_model((void*) &r, p5, p6);
+    check_compound_model((void*) &r, model_abstr, model_abstr_count);
 
-    if (*r == 1) {
+    if (r == 0) {
 
-        create_primitive_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
+        destroy_primitive_model( model, model_count, model_size,
+                                 model_abstr, model_abstr_count );
 
     } else {
 
-        create_compound_model(p0, p1, p2, p3, p4, p5, p6, p7, p8);
+        destroy_compound_model( model, model_count, model_size,
+                                 model_abstr, model_abstr_count);
     }
 
-    destroy_integer((void*) &r);
-*/
 }
 
 /**
@@ -149,7 +268,41 @@ void destroy_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) 
 
         if ( r==1 ) {
          
+            // The element abstraction.
+            void** ea = POINTER_NULL_POINTER;
+            void** eac = POINTER_NULL_POINTER;
+            void** eas = POINTER_NULL_POINTER;
+            // The element model.
+            void** em = POINTER_NULL_POINTER;
+            void** emc = POINTER_NULL_POINTER;
+            void** ems = POINTER_NULL_POINTER;
+            // The element details.
+            void** ed = POINTER_NULL_POINTER;
+            void** edc = POINTER_NULL_POINTER;
+            void** eds = POINTER_NULL_POINTER;
+
+            get_real_compound_element_by_name(p2, p3,
+                (void*) *nm, (void*) *nmc,
+                (void*) &ea, (void*) &eac, (void*) &eas,
+                (void*) &em, (void*) &emc, (void*) &ems,
+                (void*) &ed, (void*) &edc, (void*) &eds,
+                p2, p3);
+
+            if (    (em != NULL_POINTER)
+                 && (emc != NULL_POINTER)
+                 && (ems != NULL_POINTER)
+                 && (ea != NULL_POINTER)
+                 && (eac != NULL_POINTER)
+                 && (eas != NULL_POINTER) )
+            {                 
+
+                //destroy model
+                destroy_model( em, *emc, *ems , *ea, *eac );
+            }
+
             //remove the part
+            //this must after the destroy the model, because 
+            //some wrong pointer
             remove_compound_element_by_name(p2, p3, p4,
                 (void*) *nm, (void*) *nmc );
 
