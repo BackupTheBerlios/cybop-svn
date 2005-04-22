@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-04-14 06:41:28 $ $Author: rholzmueller $
+ * @version $Revision: 1.4 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -42,10 +42,14 @@
 /**
  * Starts up the tcp socket service.
  *
- * @param p0 the internals memory
- * @param p1 the knowledge
- * @param p2 the knowledge count
- * @param p3 the knowledge size
+ * @param internals the internals memory
+ * @param know the knowledge
+ * @param know_count the knowledge count
+ * @param know_size the knowledge size
+ * @param socket_port_abstr the socke port abstraction
+ * @param socket_port_abstr_count the socke port abstraction count
+ * @param socket_port_model the socke port model
+ * @param socket_port_model_count the socke port model count
  */
 void startup_tcp_socket( void* internals, const void* know, 
                          const void* know_count, const void* know_size,
@@ -140,14 +144,6 @@ void startup_tcp_socket( void* internals, const void* know,
                     // Set the number of possible pending client connection requests.
                     listen(*s, 1);
                     
-                    //set the activation flahg in the internal
-                    void** socket_flag = POINTER_NULL_POINTER;
-                    get_array_elements(internals, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_ARRAY);
-                    if ( (socket_flag!=NULL_POINTER) && (*socket_flag!=NULL_POINTER) ) {
-                     
-                        **((int**)socket_flag) = 1; 
-                    }
-    
                 } else {
     
                     log_message_debug("Could not create tcp server socket. The socket could not be bound to the address.");

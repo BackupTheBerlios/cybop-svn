@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.25 $ $Date: 2005-04-15 09:01:01 $ $Author: rholzmueller $
+ * @version $Revision: 1.26 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -519,6 +519,12 @@ static const char* RECEIVE_ABSTRACTION = RECEIVE_ABSTRACTION_ARRAY;
 static const int RECEIVE_ABSTRACTION_COUNT_ARRAY[] = {7};
 static const int* RECEIVE_ABSTRACTION_COUNT = RECEIVE_ABSTRACTION_COUNT_ARRAY;
 
+/** The interupt abstraction. */
+static const char INTERUPT_ABSTRACTION_ARRAY[] = {'i', 'n', 't', 'e', 'r', 'u', 'p', 't'};
+static const char* INTERUPT_ABSTRACTION = INTERUPT_ABSTRACTION_ARRAY;
+static const int INTERUPT_ABSTRACTION_COUNT_ARRAY[] = {8};
+static const int* INTERUPT_ABSTRACTION_COUNT = INTERUPT_ABSTRACTION_COUNT_ARRAY;
+
 /** The url refresh abstraction. */
 static const char URL_REFRESH_ABSTRACTION_ARRAY[] = {'u', 'r', 'l', '_', 'r', 'e', 'f', 'r', 'e', 's', 'h' };
 static const char* URL_REFRESH_ABSTRACTION = URL_REFRESH_ABSTRACTION_ARRAY;
@@ -540,6 +546,7 @@ static const char SHUTDOWN_ABSTRACTION_ARRAY[] = {'s', 'h', 'u', 't', 'd', 'o', 
 static const char* SHUTDOWN_ABSTRACTION = SHUTDOWN_ABSTRACTION_ARRAY;
 static const int SHUTDOWN_ABSTRACTION_COUNT_ARRAY[] = {8};
 static const int* SHUTDOWN_ABSTRACTION_COUNT = SHUTDOWN_ABSTRACTION_COUNT_ARRAY;
+
 
 /** The exit abstraction. */
 static const char EXIT_ABSTRACTION_ARRAY[] = {'e', 'x', 'i', 't'};

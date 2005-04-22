@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.15 $ $Date: 2005-03-30 14:15:42 $ $Author: christian $
+ * @version $Revision: 1.16 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -36,7 +36,7 @@
 #include "../logger/logger.c"
 
 /**
- * Adds the client socket.
+ * Add the client socket into the internal.
  *
  * @param p0 the internals memory
  * @param p1 the client socket
@@ -70,7 +70,7 @@ void add_client_socket_number(void* p0, void* p1) {
 }
 
 /**
- * Adds the signal id.
+ * Add the signal id into the internal.
  *
  * @param p0 the internals memory
  * @param p1 the signal identification
@@ -103,9 +103,7 @@ void add_signal_id(void* p0, void* p1) {
 }
 
 /**
- * Removes the client socket.
- *
- * Its signal id is removed as well.
+ * Removes the client socket and the signal id from the internal.
  *
  * @param p0 the internals memory
  * @param p1 the index
@@ -143,11 +141,11 @@ void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
 }
 
 /**
- * Gets the index for the signal id.
+ * Get the index from the signal id array in the internal for a signal id.
  *
  * @param p0 the internals memory
  * @param p1 the signal identification
- * @param p2 the index
+ * @param p2 the index (hand over as reference)
  */
 void get_index_for_signal_id(void* p0, const void* p1, void* p2) {
 
@@ -166,7 +164,7 @@ void get_index_for_signal_id(void* p0, const void* p1, void* p2) {
 }
 
 /**
- * Gets the client socket.
+ * Get the client socket.
  *
  * @param p0 the internals memory
  * @param p1 the index

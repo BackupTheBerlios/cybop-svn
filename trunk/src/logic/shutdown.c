@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-04-14 06:41:28 $ $Author: rholzmueller $
+ * @version $Revision: 1.7 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -100,76 +100,6 @@ void shutdown_service(const void* p0, const void* p1,
             shutdown_tcp_socket( p5, p2, p3, p4 );
         }
     }
-
-
-/*??
-    // Get parameters.
-    get_compound_element_by_name(p0, p1,
-        (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
-        (void*) &sa, (void*) &sac, (void*) &sas,
-        (void*) &sm, (void*) &smc, (void*) &sms,
-        (void*) &sd, (void*) &sdc, (void*) &sds);
-
-    // The comparison result.
-    int r = 0;
-
-    // Get service.
-    if (r != 1) {
-
-        compare_arrays((void*) *sa, (void*) *sac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            get_compound_element_by_name(p0, p1,
-                (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
-                (void*) &sa, (void*) &sac, (void*) &sas,
-                (void*) &sm, (void*) &smc, (void*) &sms,
-                (void*) &sd, (void*) &sdc, (void*) &sds);
-        }
-    }
-
-    if (r != 1) {
-
-        compare_arrays((void*) *sa, (void*) *sac, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            get_compound_element_by_encapsulated_name(p0, p1,
-                (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
-                (void*) &sa, (void*) &sac, (void*) &sas,
-                (void*) &sm, (void*) &smc, (void*) &sms,
-                (void*) &sd, (void*) &sdc, (void*) &sds,
-                p2, p3);
-        }
-    }
-
-    // Only shutdown x window system, if a correct abstraction was found above.
-    if (r == 1) {
-
-        // Reset comparison result.
-        r = 0;
-
-        if (r != 1) {
-
-            compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r == 1) {
-
-                shutdown_x_window_system(p5, p2, p3, p4);
-            }
-        }
-
-        if (r != 1) {
-
-            compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SERVER_SOCKET_ABSTRACTION, (void*) TCP_SERVER_SOCKET_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-            if (r == 1) {
-
-                shutdown_x_window_system(p5, p2, p3, p4);
-            }
-        }
-    }
-*/
 }
 
 /* SHUTDOWN_SOURCE */

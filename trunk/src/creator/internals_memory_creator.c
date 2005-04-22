@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-03-30 14:15:41 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -164,10 +164,10 @@ void destroy_internals_memory(void* p0, const void* p1) {
 
                         destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
 
-                    } else if (j == *TCP_SERVER_SOCKET_PORT_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
+//                    } else if (j == *TCP_SERVER_SOCKET_PORT_INTERNAL) {
+//
+//                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+//
                     } else if (j == *TCP_SERVER_SOCKET_ACTIVE_INTERNAL) {
 
                         destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);

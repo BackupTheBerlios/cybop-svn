@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-04-15 09:01:01 $ $Author: rholzmueller $
+ * @version $Revision: 1.17 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,29 +53,41 @@ void startup_input_output(void* p0) {
 
         log_message_debug("Startup input output.");
 
-        int* activation_flag = INTEGER_NULL_POINTER;
+        int* flag = INTEGER_NULL_POINTER;
 
         // The activation flag for unix socket.
-        activation_flag = INTEGER_NULL_POINTER;
-        create_integer( &activation_flag );
-        *activation_flag = 0;
+        flag = INTEGER_NULL_POINTER;
+        create_integer( &flag );
+        *flag = 0;
         
         set_array_elements( p0, 
                             (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL,
-                            (void*) &activation_flag, 
+                            (void*) &flag, 
                             (void*) ONE_NUMBER, 
                             (void*) POINTER_ARRAY );
     
         // The activation flag for tcp server socket.
-        activation_flag = INTEGER_NULL_POINTER;
-        create_integer( &activation_flag );
-        *activation_flag = 0;
+        flag = INTEGER_NULL_POINTER;
+        create_integer( &flag );
+        *flag = 0;
         
         set_array_elements( p0, 
                             (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL,
-                            (void*) &activation_flag, 
+                            (void*) &flag, 
                             (void*) ONE_NUMBER, 
                             (void*) POINTER_ARRAY );
+                            
+        // The blocking flag for tcp server socket.
+        flag = INTEGER_NULL_POINTER;
+        create_integer( &flag );
+        *flag = 0;
+        
+        set_array_elements( p0, 
+                            (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL,
+                            (void*) &flag, 
+                            (void*) ONE_NUMBER, 
+                            (void*) POINTER_ARRAY );
+                            
     }
     else {
      
@@ -122,6 +134,17 @@ void shutdown_input_output(void* p0) {
 
         f = POINTER_NULL_POINTER;
     }
+    
+    // TCP socket blocking flag.
+    get_array_elements(p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
+
+    if (f != NULL_POINTER) {
+
+        destroy_integer( f );
+
+        f = POINTER_NULL_POINTER;
+    }
+    
 }
 
 /* INPUT_OUTPUT_HANDLER_SOURCE */

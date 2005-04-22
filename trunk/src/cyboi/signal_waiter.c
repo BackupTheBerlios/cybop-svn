@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.38 $ $Date: 2005-04-14 06:41:29 $ $Author: rholzmueller $
+ * @version $Revision: 1.39 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -49,6 +49,7 @@ void wait(void* p0) {
 
     //?? TODO: Debugging stuff from Rolf Holzmueller.
     void** socket_flag = POINTER_NULL_POINTER;
+    void** blocking_flag = POINTER_NULL_POINTER;
 
     // The knowledge memory.
     void** k = POINTER_NULL_POINTER;
@@ -120,11 +121,13 @@ void wait(void* p0) {
                                 //debug for rolf Holzm?ller
                                 get_array_elements( p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, 
                                                    (void*) &socket_flag, (void*) POINTER_ARRAY);
-                                if ( socket_flag != POINTER_NULL_POINTER ) {
+                                get_array_elements( p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, 
+                                                   (void*) &blocking_flag, (void*) POINTER_ARRAY);
+                                if ( (socket_flag != POINTER_NULL_POINTER) && (blocking_flag != NULL_POINTER) ) {
 
-                                    if (*socket_flag != NULL_POINTER) {
+                                    if ( (*socket_flag != NULL_POINTER) && (*blocking_flag != NULL_POINTER) ) {
 
-                                        if ( ( **((int**)socket_flag)==1 ) && (i < 0) ) {
+                                        if ( ( **((int**)socket_flag)==1 ) && (i < 0) && (**((int**)blocking_flag)==1) ) {
 
                                             run_tcp_socket( p0);
                                         }

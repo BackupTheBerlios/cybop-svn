@@ -22,7 +22,7 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.8 $ $Date: 2005-04-14 16:05:00 $ $Author: rholzmueller $
+    @version $Revision: 1.9 $ $Date: 2005-04-22 08:07:33 $ $Author: rholzmueller $
     @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
 /-->
 
@@ -67,5 +67,8 @@
         <property name="service" channel="inline" abstraction="string" model="tcp_socket"/>    
         <property name="tcp_socket_port" channel="inline" abstraction="integer" model="3456"/>
     </part>
-
+    <part name="receive_tcp" channel="inline" abstraction="operation" model="receive">
+        <property name="service" channel="inline" abstraction="string" model="tcp_socket"/>    
+        <property name="blocking" channel="inline" abstraction="integer" model="1"/>
+    </part>
 </model>

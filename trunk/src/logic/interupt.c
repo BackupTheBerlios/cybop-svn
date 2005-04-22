@@ -1,5 +1,5 @@
 /*
- * $RCSfile: receive.c,v $
+ * $RCSfile: interupt.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,26 +20,23 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
+ * @version $Revision: 1.1 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef RECEIVE_SOURCE
-#define RECEIVE_SOURCE
+#ifndef INTERUPT_SOURCE
+#define INTERUPT_SOURCE
 
 #include "../global/abstraction_constants.c"
 #include "../global/channel_constants.c"
 #include "../global/name_constants.c"
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
-#include "../logic/receive/receive_tcp_socket.c"
+#include "../logic/interupt/interupt_tcp_socket.c"
 #include "../socket/unix_socket.c"
 
 /**
- * Receives a message in a special language.
- *
- * CAUTION! Do NOT rename this procedure to "receive",
- * as that name is already used by socket functionality.
+ * Interupt a service.
  *
  * @param p0 the parameters
  * @param p1 the parameters count
@@ -48,7 +45,7 @@
  * @param p4 the knowledge size
  * @param p5 the internals
  */
-void receive_message(const void* p0, const void* p1,
+void interupt_service(const void* p0, const void* p1,
     const void* p2, const void* p3, const void* p4, void* p5) {
 
     // The service abstraction.
@@ -63,19 +60,6 @@ void receive_message(const void* p0, const void* p1,
     void** sd = NULL_POINTER;
     void** sdc = NULL_POINTER;
     void** sds = NULL_POINTER;
-
-    // The blocking abstraction.
-    void** ba = NULL_POINTER;
-    void** bac = NULL_POINTER;
-    void** bas = NULL_POINTER;
-    // The blocking model.
-    void** bm = NULL_POINTER;
-    void** bmc = NULL_POINTER;
-    void** bms = NULL_POINTER;
-    // The blocking details.
-    void** bd = NULL_POINTER;
-    void** bdc = NULL_POINTER;
-    void** bds = NULL_POINTER;
  
     // Get service.
     get_real_compound_element_by_name(p0, p1,
@@ -84,14 +68,6 @@ void receive_message(const void* p0, const void* p1,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
         p2, p3 );
-
-    // Get parameters.
-    get_real_compound_element_by_name(p0, p1,
-        (void*) TCP_SOCKET_BLOCKING_NAME, (void*) TCP_SOCKET_BLOCKING_NAME_COUNT,
-        (void*) &ba, (void*) &bac, (void*) &bas,
-        (void*) &bm, (void*) &bmc, (void*) &bms,
-        (void*) &bd, (void*) &bdc, (void*) &bds,
-        p2, p3);
 
     // The comparison result.
     int r = 0;
@@ -102,13 +78,6 @@ void receive_message(const void* p0, const void* p1,
 
         if (r == 1) {
 
-            //?? The temporary standard console output as destination.
-            //?? Possibly use "sender" information instead, later.
-            void* tmpd = (void*) stdout;
-            void* tmpdc = NULL_POINTER;
-            void* tmpds = NULL_POINTER;
-
-//??            send_tui(tmpd, tmpdc, tmpds, *mm, *mmc);
         }
     }
 
@@ -117,15 +86,6 @@ void receive_message(const void* p0, const void* p1,
         compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
-
-/*??
-            blocking or non-blocking??
-            receive_x_window_system();
-            
-            receive_vga
-            parse            
-            decode-translate
-*/
         }
     }
 
@@ -135,12 +95,6 @@ void receive_message(const void* p0, const void* p1,
 
         if (r == 1) {
 
-/*??
-            send_unix_socket((void*) &dn, (void*) &dnc, (void*) &dns,
-                (void*) &snm, (void*) &snmc,
-                (void*) &sna, (void*) &snac,
-                (void*) &INLINE_CHANNEL, (void*) &INLINE_CHANNEL_COUNT);
-*/
         }
     }
 
@@ -150,20 +104,10 @@ void receive_message(const void* p0, const void* p1,
 
         if (r == 1) {
          
-                
-            if (    (ba != NULL_POINTER)
-                 && (bac != NULL_POINTER)
-                 && (bm != NULL_POINTER)
-                 && (bmc != NULL_POINTER) )
-            {                 
-
-                receive_tcp_socket( p5, p2, p3, p4, 
-                                    *ba, *bac, *bm, *bmc );
-            }
-                
+            interupt_tcp_socket( p5, p2, p3, p4 );
         }
     }
 }
 
-/* RECEIVE_SOURCE */
+/* INTERUPT_SOURCE */
 #endif

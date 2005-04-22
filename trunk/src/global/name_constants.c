@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2005-04-14 06:41:28 $ $Author: rholzmueller $
+ * @version $Revision: 1.18 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -160,11 +160,22 @@ static const int SERVICE_NAME_COUNT_ARRAY[] = {7};
 static const int* SERVICE_NAME_COUNT = SERVICE_NAME_COUNT_ARRAY;
 
 
+//
+// Property names for tcp socket.
+//
+
+
 /** The tcp socket port . */
 static const char TCP_SOCKET_PORT_NAME_ARRAY[] = {'t', 'c', 'p', '_', 's', 'o', 'c', 'k', 'e', 't', '_', 'p', 'o', 'r', 't' };
 static const char* TCP_SOCKET_PORT_NAME = TCP_SOCKET_PORT_NAME_ARRAY;
 static const int TCP_SOCKET_PORT_NAME_COUNT_ARRAY[] = {15};
 static const int* TCP_SOCKET_PORT_NAME_COUNT = TCP_SOCKET_PORT_NAME_COUNT_ARRAY;
+
+/** The tcp socket blocking flag . */
+static const char TCP_SOCKET_BLOCKING_NAME_ARRAY[] = {'b', 'l', 'o', 'c', 'k', 'i', 'n', 'g' };
+static const char* TCP_SOCKET_BLOCKING_NAME = TCP_SOCKET_BLOCKING_NAME_ARRAY;
+static const int TCP_SOCKET_BLOCKING_NAME_COUNT_ARRAY[] = {8};
+static const int* TCP_SOCKET_BLOCKING_NAME_COUNT = TCP_SOCKET_BLOCKING_NAME_COUNT_ARRAY;
 
 //
 // Property names names for html.

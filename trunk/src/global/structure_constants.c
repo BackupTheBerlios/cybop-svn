@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.24 $ $Date: 2005-04-07 16:00:30 $ $Author: christian $
+ * @version $Revision: 1.25 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -337,8 +337,8 @@ static const int* TCP_SERVER_SOCKET_ACTIVE_INTERNAL = TCP_SERVER_SOCKET_ACTIVE_I
 static const int TCP_SERVER_SOCKET_INTERNAL_ARRAY[] = {19};
 static const int* TCP_SERVER_SOCKET_INTERNAL = TCP_SERVER_SOCKET_INTERNAL_ARRAY;
 
-static const int TCP_SERVER_SOCKET_PORT_INTERNAL_ARRAY[] = {20};
-static const int* TCP_SERVER_SOCKET_PORT_INTERNAL = TCP_SERVER_SOCKET_PORT_INTERNAL_ARRAY;
+static const int TCP_SERVER_SOCKET_BLOCKING_INTERNAL_ARRAY[] = {20};
+static const int* TCP_SERVER_SOCKET_BLOCKING_INTERNAL = TCP_SERVER_SOCKET_BLOCKING_INTERNAL_ARRAY;
 
 /** The tcp client sockets. */
 static const int TCP_CLIENT_SOCKETS_INTERNAL_ARRAY[] = {21};
@@ -356,7 +356,7 @@ static const int* TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL = TCP_CLIENT_SOCKET_SIGN
 
 static const int TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL_ARRAY[] = {25};
 static const int* TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL = TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL_ARRAY;
-
+ 
 static const int TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL_ARRAY[] = {26};
 static const int* TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL = TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL_ARRAY;
 

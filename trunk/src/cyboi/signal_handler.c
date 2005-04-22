@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.30 $ $Date: 2005-04-14 16:00:48 $ $Author: rholzmueller $
+ * @version $Revision: 1.31 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -39,6 +39,7 @@
 #include "../logic/count.c"
 #include "../logic/create.c"
 #include "../logic/destroy.c"
+#include "../logic/interupt.c"
 #include "../logic/loop.c"
 #include "../logic/receive.c"
 #include "../logic/selection.c"
@@ -416,6 +417,17 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
             receive_message(p2, p3, *km, *kmc, *kms, p7);
         }
     }
+
+    if (r != 1) {
+
+        compare_arrays(p0, p1, (void*) INTERUPT_ABSTRACTION, (void*) INTERUPT_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            interupt_service(p2, p3, *km, *kmc, *kms, p7);
+        }
+    }
+
 
     if (r != 1) {
 

@@ -22,7 +22,7 @@
  *
  * This file handles a server TCP socket.
  *
- * @version $Revision: 1.23 $ $Date: 2005-04-08 15:34:41 $ $Author: rholzmueller $
+ * @version $Revision: 1.24 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
@@ -76,155 +76,7 @@
 void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8);
 
-/**
- * Creates the tcp server socket.
- *
- * @param p0 the internals memory
- */
-void create_tcp_server_socket(void* p0) {
 
-    // The tcp server socket port.
-    void** p = POINTER_NULL_POINTER;
-
-    // Get tcp server socket port.
-    get_array_elements(p0, (void*) TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &p, (void*) POINTER_ARRAY);
-
-    if (p != POINTER_NULL_POINTER) {
-      
-        if ( *p!=NULL_POINTER ) {
-
-            log_message_debug("Create tcp server socket.");
-    
-            fprintf(stderr, "DEBUG: The port is: %d \n", *p);
-    
-            // The tcp server socket.
-            int* s = INTEGER_NULL_POINTER;
-            // The tcp client sockets.
-            void* cs = NULL_POINTER;
-            int* csc = INTEGER_NULL_POINTER;
-            int* css = INTEGER_NULL_POINTER;
-            // The tcp signal ids.
-            void* id = NULL_POINTER;
-            int* idc = INTEGER_NULL_POINTER;
-            int* ids = INTEGER_NULL_POINTER;
-    
-            // Create tcp server socket.
-            create_integer((void*) &s);
-            *s = socket(PF_INET, SOCK_STREAM, 0);
-            // Create tcp client sockets.
-            create_integer((void*) &csc);
-            *csc = 0;
-            create_integer((void*) &css);
-            *css = 0;
-            create_array((void*) &cs, (void*) css, (void*) INTEGER_ARRAY);
-            // Create tcp signal ids.
-            create_integer((void*) &idc);
-            *idc = 0;
-            create_integer((void*) &ids);
-            *ids = 0;
-            create_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY);
-    
-            // Set tcp server socket.
-            set_array_elements(p0, (void*) TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-            // Set tcp client sockets.
-            set_array_elements(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-            set_array_elements(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-            set_array_elements(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-            // Set tcp signal ids.
-            set_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-            set_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-            set_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-    
-            if (*s >= 0) {
-    
-                fprintf(stderr, "DEBUG: The tcp server socket is: %d \n", *s);
-    
-                // The socket address.
-                struct sockaddr_in a;
-    
-                // Set address format.
-                a.sin_family = AF_INET;
-                a.sin_addr.s_addr = INADDR_ANY;
-                a.sin_port = htons(*((int*)*p) );
-    
-                // Determine socket address size.
-                int as = sizeof(struct sockaddr_in);
-    
-                // Bind number to address.
-                if (bind(*s, (struct sockaddr*) &a, as) >= 0) {
-    
-                    // Set the number of possible pending client connection requests.
-                    // The maximum number is usually 5.
-                    // It is NOT necessary to use this function, but it's good practice.
-                    listen(*s, 1);
-    
-                } else {
-    
-                    log_message_debug("Could not create tcp server socket. The socket could not be bound to the address.");
-                }
-    
-            } else {
-    
-                log_message_debug("Could not create tcp server socket. The socket is smaller than zero.");
-            }
-
-        } else {
-    
-            log_message_debug("Could not create tcp server socket. The port is null.");
-        }
-    } else {
-
-        log_message_debug("Could not create tcp server socket. The port is null.");
-    }
-}
-
-/**
- * Destroys the tcp server socket.
- *
- * @param p0 the internals memory
- */
-void destroy_tcp_server_socket(void* p0) {
-
-    // The tcp server socket port.
-    int* p = INTEGER_NULL_POINTER;
-
-    // Get tcp server socket port.
-    get_array_elements(p0, (void*) TCP_SERVER_SOCKET_PORT_INTERNAL, (void*) &p, (void*) POINTER_ARRAY);
-
-    if (p != INTEGER_NULL_POINTER) {
-
-        // The tcp server socket.
-        int* s = INTEGER_NULL_POINTER;
-
-        // Get tcp server socket.
-        get_array_elements(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_ARRAY);
-
-        if (s != INTEGER_NULL_POINTER) {
-
-            log_message_debug("Destroy tcp server socket.");
-
-/*?? TODO: Rolf Holzmueller
-
-            // Close socket.
-            close(*s);
-
-            // Unlink socket.
-            unlink((char*) *f);
-*/
-
-            // Destroy unix server socket.
-            destroy_integer((void*) &s);
-
-        } else {
-
-            log_message_debug("Could not destroy tcp server socket. The socket is null.");
-        }
-
-    } else {
-
-        log_message_debug("Could not destroy tcp server socket. The port is null.");
-    }
-}
 
 /**
  * Get the request method from the complet request msg
@@ -270,7 +122,7 @@ void get_request_method( char* req, int* req_count,
 }
 
 /**
- * Gets the request paramater from the request row.
+ * Gets the request parameter from the request row.
  *
  * Example request row:
  * GET /lib/ausgabe.cybol HTTP/1.1
@@ -284,7 +136,7 @@ void get_request_method( char* req, int* req_count,
  * @param param_count the count from the parameter
  */
 void get_url_basename_from_request( char* req, int* req_count, 
-                                        char** urlbase, int* urlbase_count) {
+                                    char** urlbase, int* urlbase_count) {
 
     *urlbase_count = 0;
     int req_index = 0;
@@ -312,9 +164,6 @@ void get_url_basename_from_request( char* req, int* req_count,
         // Complete the parameters.
         if (start_urlbase_flag == 1) {
 
-            //?? ROLF: Nehme diese Initialisierung bitte VOR die Schleife,
-            //?? da sonst bei jedem Schleifendurchlauf Speicherplatz fuer
-            //?? eine neue lokale Variable belegt wird!
             max_count = *urlbase_count + 1;
 
             resize_array((void*) urlbase, (void*) &max_count, (void*) CHARACTER_ARRAY);
@@ -335,6 +184,18 @@ void get_url_basename_from_request( char* req, int* req_count,
     }
 }
 
+/**
+ * Get the chracter from a escape code 
+ * in the first position of the source array.
+ * if it is no escape code, then ist the destination
+ * equal the source
+ *
+ * Example: %25 --> %
+ *
+ * @param source the source (
+ * @param source_count the count of the request row
+ * @param dest param the parameter from the request
+ */
 void* get_character_from_escape_code( void* source, int* source_count, 
                                       char** dest ) {
  
@@ -646,7 +507,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
 
 /**
  * Get the parameters from the request for the request method post.
- * the parameters are in the last row from the request
+ * The parameters are in the last row from the request
  *
  * @param req the request
  * @param req_count the request count
@@ -663,7 +524,6 @@ void get_parameter_from_request_for_post( char* req, int* req_count,
     int max_count = 0;
     // The element.
     char* e = CHARACTER_NULL_POINTER;
-  //  char* c = CHARACTER_NULL_POINTER;
 
     //get the index for beginning the paramaters
     while (1) {
@@ -684,7 +544,8 @@ void get_parameter_from_request_for_post( char* req, int* req_count,
         
         req_index = req_index - 1;
     }
-    
+
+    //set the parameters from the request    
     if ( start_param_index > 0 ) {
         
         req_index = start_param_index;
@@ -702,17 +563,9 @@ void get_parameter_from_request_for_post( char* req, int* req_count,
 
             get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
             
-            //req_last_count = *req_count - req_index;
-            //get_character_from_escape_code( e, &req_last_count, &c );
-
             set_array_elements(*param, param_count, (void*) e, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
 
             *param_count = *param_count + 1;
-//            if ( c != e ) {
-//
-//                req_index = req_index + *ESCAPE_CODE_CHARACTER_COUNT;
-//            }
-//            else {
 
             req_index = req_index + 1;
   
@@ -820,12 +673,11 @@ void get_parameter_from_request( char* req, int* req_count,
  * source must be a string, depenc from the abstraction
  * of the source 
  * 
- * Bsp.
- * dest zeigt auf eine Model from typ Integer, so ist 
- * source als Integer zu interprtieren, d.b. der übergebene String ist 
- * in eine Integer umzuwandeln. 
- * 
- * 
+ * @param source the source
+ * @param source_count the source count
+ * @param dest the destination
+ * @param dest_count the detsination count
+ * @param internal the internal
  */
 void set_signal_for_parameter( void* source, int* source_count, 
                                void* dest, int* dest_count,
@@ -839,235 +691,228 @@ void set_signal_for_parameter( void* source, int* source_count,
          (internal != NULL_POINTER) )
     {
 
-            // The knowledge memory.
-            void** km = POINTER_NULL_POINTER;
-            void** kmc = POINTER_NULL_POINTER;
-            void** kms = POINTER_NULL_POINTER;
-        
-            // Get knowledge memory.
-            get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
-            get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
-            get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
+        // The knowledge memory.
+        void** km = POINTER_NULL_POINTER;
+        void** kmc = POINTER_NULL_POINTER;
+        void** kms = POINTER_NULL_POINTER;
+    
+        // Get knowledge memory.
+        get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
+        get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
+        get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
 
 
-            //
-            //  the signal 
-            //
+        //
+        //  the signal 
+        //
 
-            // The signal abstraction.
-            void* sa = NULL_POINTER;
-            int* sac = INTEGER_NULL_POINTER;
-            int* sas = INTEGER_NULL_POINTER;
+        // The signal abstraction.
+        void* sa = NULL_POINTER;
+        int* sac = INTEGER_NULL_POINTER;
+        int* sas = INTEGER_NULL_POINTER;
 
-            // The signal model.
-            void* sm = NULL_POINTER;
-            int* smc = INTEGER_NULL_POINTER;
-            int* sms = INTEGER_NULL_POINTER;
+        // The signal model.
+        void* sm = NULL_POINTER;
+        int* smc = INTEGER_NULL_POINTER;
+        int* sms = INTEGER_NULL_POINTER;
 
-            // The signal details.
-            void* sd = NULL_POINTER;
-            int* sdc = INTEGER_NULL_POINTER;
-            int* sds = INTEGER_NULL_POINTER;
+        // The signal details.
+        void* sd = NULL_POINTER;
+        int* sdc = INTEGER_NULL_POINTER;
+        int* sds = INTEGER_NULL_POINTER;
 
-            // Create signal abstraction.
-            create_integer( &sac );
-            *sac = 0;
-            create_integer( &sas );
-            *sas = 0;
-            create_model((void*) &sa, (void*) sac, (void*) sas,
-                (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT,
-                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
-                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+        // Create signal abstraction.
+        create_integer( &sac );
+        *sac = 0;
+        create_integer( &sas );
+        *sas = 0;
+        create_model((void*) &sa, (void*) sac, (void*) sas,
+            (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT,
+            (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
-            // Create signal model.
-            create_integer( &smc );
-            *smc = 0;
-            create_integer( &sms );
-            *sms = 0;
-            create_model((void*) &sm, (void*) smc, (void*) sms,
-                (void*) SET_ABSTRACTION, (void*) SET_ABSTRACTION_COUNT,
-                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
-                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+        // Create signal model.
+        create_integer( &smc );
+        *smc = 0;
+        create_integer( &sms );
+        *sms = 0;
+        create_model((void*) &sm, (void*) smc, (void*) sms,
+            (void*) SET_ABSTRACTION, (void*) SET_ABSTRACTION_COUNT,
+            (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
-            // Create signal detail.
-            create_integer( &sdc );
-            *sdc = 0;
-            create_integer( &sds );
-            *sds = 0;
-            create_model((void*) &sd, (void*) sdc, (void*) sds,
-                (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
-                (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
-                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-
-
-            //
-            //  the property destination
-            //
-
-            // The property destination name.
-            void* pdn = NULL_POINTER;
-            int* pdnc = INTEGER_NULL_POINTER;
-            int* pdns = INTEGER_NULL_POINTER;
-
-            // The property destination abstraction.
-            void* pda = POINTER_NULL_POINTER;
-            int* pdac = INTEGER_NULL_POINTER;
-            int* pdas = INTEGER_NULL_POINTER;
-
-            // The property destination model.
-            void* pdm = POINTER_NULL_POINTER;
-            int* pdmc = INTEGER_NULL_POINTER;
-            int* pdms = INTEGER_NULL_POINTER;
-
-            // The property destination details.
-            void* pdd = POINTER_NULL_POINTER;
-            int* pddc = INTEGER_NULL_POINTER;
-            int* pdds = INTEGER_NULL_POINTER;
-
-            // Create property destination name.
-            create_integer( &pdnc );
-            *pdnc = 0;
-            create_integer( &pdns );
-            *pdns = 0;
-            create_model((void*) &pdn, (void*) pdnc, (void*) pdns,
-                (void*) SET_DESTINATION_NAME_ABSTRACTION, 
-                (void*) SET_DESTINATION_NAME_ABSTRACTION_COUNT, 
-                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
-                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-
-            // Create property destination abstraction.
-            create_integer( &pdac );
-            *pdac = 0;
-            create_integer( &pdas );
-            *pdas = 0;
-            create_model((void*) &pda, (void*) pdac, (void*) pdas,
-                (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, 
-                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
-                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-
-            // Create property destination model.
-            create_integer( &pdmc );
-            *pdmc = 0;
-            create_integer( &pdms );
-            *pdms = 0;
-            create_model((void*) &pdm, (void*) pdmc, (void*) pdms,
-                (void*) dest, (void*) dest_count,
-                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
-                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-
-            // Create property source detail.
-            // is empty
-
-//            get_compound_element_by_name( *km, *kmc,
-//                (void*) dest, 
-//                (void*) dest_count,
-//                (void*) &pda, (void*) &pdac, (void*) &pdas,
-//                (void*) &pdm, (void*) &pdmc, (void*) &pdms,
-//                (void*) &pdd, (void*) &pddc, (void*) &pdds );
-
-            //
-            //  the property source
-            //
-
-            // The property source name.
-            void* psn = NULL_POINTER;
-            int* psnc = INTEGER_NULL_POINTER;
-            int* psns = INTEGER_NULL_POINTER;
-
-            // The property  source abstraction.
-            void* psa = NULL_POINTER;
-            int* psac = INTEGER_NULL_POINTER;
-            int* psas = INTEGER_NULL_POINTER;
-
-            // The property  source model.
-            void* psm = NULL_POINTER;
-            int* psmc = INTEGER_NULL_POINTER;
-            int* psms = INTEGER_NULL_POINTER;
-
-            // The property  source details.
-            void* psd = NULL_POINTER;
-            int* psdc = INTEGER_NULL_POINTER;
-            int* psds = INTEGER_NULL_POINTER;
-
-            // Create property source name.
-            create_integer( &psnc );
-            *psnc = 0;
-            create_integer( &psns );
-            *psns = 0;
-            create_model((void*) &psn, (void*) psnc, (void*) psns,
-                (void*) SET_SOURCE_NAME_ABSTRACTION, 
-                (void*) SET_SOURCE_NAME_ABSTRACTION_COUNT, 
-                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
-                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+        // Create signal detail.
+        create_integer( &sdc );
+        *sdc = 0;
+        create_integer( &sds );
+        *sds = 0;
+        create_model((void*) &sd, (void*) sdc, (void*) sds,
+            (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
+            (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
+            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
 
-            // Create property source abstraction.
-            create_integer( &psac );
-            *psac = 0;
-            create_integer( &psas );
-            *psas = 0;
-            create_model((void*) &psa, (void*) psac, (void*) psas,
-                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, 
-                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
-                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+        //
+        //  the property destination
+        //
 
-            // Create property source model.
-            // todo: expansion for other types
-            create_integer( &psmc );
-            *psmc = 0;
-            create_integer( &psms );
-            *psms = 0;
-            create_model((void*) &psm, (void*) psmc, (void*) psms,
-                (void*) source, (void*) source_count,
-                (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
-                (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+        // The property destination name.
+        void* pdn = NULL_POINTER;
+        int* pdnc = INTEGER_NULL_POINTER;
+        int* pdns = INTEGER_NULL_POINTER;
 
-            // Create property source detail.
-            // is empty
+        // The property destination abstraction.
+        void* pda = POINTER_NULL_POINTER;
+        int* pdac = INTEGER_NULL_POINTER;
+        int* pdas = INTEGER_NULL_POINTER;
 
-            // Add property source to the signal detail compound.
-            set_compound_element_by_name( sd, sdc, sds,
-                psn, (void*) psnc, (void*) psns,
-                psa, (void*) psac, (void*) psas,
-                psm, (void*) psmc, (void*) psms,
-                psd, (void*) psdc, (void*) psds);
+        // The property destination model.
+        void* pdm = POINTER_NULL_POINTER;
+        int* pdmc = INTEGER_NULL_POINTER;
+        int* pdms = INTEGER_NULL_POINTER;
 
-            // Add property destination to the detail compound.
-            set_compound_element_by_name( sd, sdc, sds,
-                pdn, (void*) pdnc, (void*) pdns,
-                pda, (void*) pdac, (void*) pdas,
-                pdm, (void*) pdmc, (void*) pdms,
-                pdd, (void*) pddc, (void*) pdds);
+        // The property destination details.
+        void* pdd = POINTER_NULL_POINTER;
+        int* pddc = INTEGER_NULL_POINTER;
+        int* pdds = INTEGER_NULL_POINTER;
+
+        // Create property destination name.
+        create_integer( &pdnc );
+        *pdnc = 0;
+        create_integer( &pdns );
+        *pdns = 0;
+        create_model((void*) &pdn, (void*) pdnc, (void*) pdns,
+            (void*) SET_DESTINATION_NAME_ABSTRACTION, 
+            (void*) SET_DESTINATION_NAME_ABSTRACTION_COUNT, 
+            (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+
+        // Create property destination abstraction.
+        create_integer( &pdac );
+        *pdac = 0;
+        create_integer( &pdas );
+        *pdas = 0;
+        create_model((void*) &pda, (void*) pdac, (void*) pdas,
+            (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, 
+            (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+
+        // Create property destination model.
+        create_integer( &pdmc );
+        *pdmc = 0;
+        create_integer( &pdms );
+        *pdms = 0;
+        create_model((void*) &pdm, (void*) pdmc, (void*) pdms,
+            (void*) dest, (void*) dest_count,
+            (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
+
+        // Create property source detail.
+        // is empty
+
+        //
+        //  the property source
+        //
+
+        // The property source name.
+        void* psn = NULL_POINTER;
+        int* psnc = INTEGER_NULL_POINTER;
+        int* psns = INTEGER_NULL_POINTER;
+
+        // The property  source abstraction.
+        void* psa = NULL_POINTER;
+        int* psac = INTEGER_NULL_POINTER;
+        int* psas = INTEGER_NULL_POINTER;
+
+        // The property  source model.
+        void* psm = NULL_POINTER;
+        int* psmc = INTEGER_NULL_POINTER;
+        int* psms = INTEGER_NULL_POINTER;
+
+        // The property  source details.
+        void* psd = NULL_POINTER;
+        int* psdc = INTEGER_NULL_POINTER;
+        int* psds = INTEGER_NULL_POINTER;
+
+        // Create property source name.
+        create_integer( &psnc );
+        *psnc = 0;
+        create_integer( &psns );
+        *psns = 0;
+        create_model((void*) &psn, (void*) psnc, (void*) psns,
+            (void*) SET_SOURCE_NAME_ABSTRACTION, 
+            (void*) SET_SOURCE_NAME_ABSTRACTION_COUNT, 
+            (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
 
-            //
-            // Signal.
-            //
+        // Create property source abstraction.
+        create_integer( &psac );
+        *psac = 0;
+        create_integer( &psas );
+        *psas = 0;
+        create_model((void*) &psa, (void*) psac, (void*) psas,
+            (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, 
+            (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
-            log_message_debug("Set start signal.");
+        // Create property source model.
+        // todo: expansion for other types
+        create_integer( &psmc );
+        *psmc = 0;
+        create_integer( &psms );
+        *psms = 0;
+        create_model((void*) &psm, (void*) psmc, (void*) psms,
+            (void*) source, (void*) source_count,
+            (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
+            (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
-            // The signal memory.
-            void** m = NULL_POINTER;
-            void** mc = NULL_POINTER;
-            void** ms = NULL_POINTER;
+        // Create property source detail.
+        // is empty
 
-            // Get signal memory.
-            get_array_elements(internal, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) POINTER_ARRAY);
-            get_array_elements(internal, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) POINTER_ARRAY);
-            get_array_elements(internal, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) POINTER_ARRAY);
+        // Add property source to the signal detail compound.
+        set_compound_element_by_name( sd, sdc, sds,
+            psn, (void*) psnc, (void*) psns,
+            psa, (void*) psac, (void*) psas,
+            psm, (void*) psmc, (void*) psms,
+            psd, (void*) psdc, (void*) psds);
 
-            // The signal id.
-            int* id = INTEGER_NULL_POINTER;
-            create_integer( &id);
-            *id = 0;
-            get_new_signal_id(*m, *mc, (void*) id);
+        // Add property destination to the detail compound.
+        set_compound_element_by_name( sd, sdc, sds,
+            pdn, (void*) pdnc, (void*) pdns,
+            pda, (void*) pdac, (void*) pdas,
+            pdm, (void*) pdmc, (void*) pdms,
+            pdd, (void*) pddc, (void*) pdds);
 
-            // Set signal.
-            set_signal(*m, *mc, *ms,
-                (void*) sa, (void*) sac,
-                (void*) sm, (void*) smc,
-                (void*) sd, (void*) sdc,
-                (void*) NORMAL_PRIORITY, (void*) id);
+
+        //
+        // Signal.
+        //
+
+        log_message_debug("Set start signal.");
+
+        // The signal memory.
+        void** m = NULL_POINTER;
+        void** mc = NULL_POINTER;
+        void** ms = NULL_POINTER;
+
+        // Get signal memory.
+        get_array_elements(internal, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) POINTER_ARRAY);
+        get_array_elements(internal, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) POINTER_ARRAY);
+        get_array_elements(internal, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) POINTER_ARRAY);
+
+        // The signal id.
+        int* id = INTEGER_NULL_POINTER;
+        create_integer( &id);
+        *id = 0;
+        get_new_signal_id(*m, *mc, (void*) id);
+
+        // Set signal.
+        set_signal(*m, *mc, *ms,
+            (void*) sa, (void*) sac,
+            (void*) sm, (void*) smc,
+            (void*) sd, (void*) sdc,
+            (void*) NORMAL_PRIORITY, (void*) id);
                 
     }         
     
@@ -1075,11 +920,19 @@ void set_signal_for_parameter( void* source, int* source_count,
 
 
 /**
- *  Zerlegt den Querystring in die einzelnen Elemenet 
- *  und erzeugt frür alle Parameter ein Signal
  * 
- * ein Qruery ist z.B. domain.teststring1=Hallo&domain.teststring2=Rolf
+ * Separate the query string in the singe parameter
+ * For each singel paramater must be create a signal
+ * in the signal memory
  * 
+ * Example: 
+ *   the query string is domain.teststring1=Hallo&domain.teststring2=Rolf
+ *   the parameter one is domain.teststring1=Hallo and 
+ *   the parameter two is domain.teststring2=Rolf
+ * 
+ * @param query
+ * @param query_count
+ * @param internal
  */
 void set_signals_for_all_parameters( void* query, int* query_count, 
                                      void* internal ){
@@ -1092,10 +945,12 @@ void set_signals_for_all_parameters( void* query, int* query_count,
      
         int query_counter=0;
         
+        //paramater
         char* param = CHARACTER_NULL_POINTER;
         int* param_count = INTEGER_NULL_POINTER;
         int* param_size = INTEGER_NULL_POINTER;
      
+        //value for the parameter
         char* value = CHARACTER_NULL_POINTER;
         int* value_count = INTEGER_NULL_POINTER;
         int* value_size = INTEGER_NULL_POINTER;
@@ -1211,7 +1066,7 @@ void set_signals_for_all_parameters( void* query, int* query_count,
             }
             
             
-            //
+            //set the signal for the paramater and the value
             if ( *param_count > 0 ) {
              
                 set_signal_for_parameter( value, value_count,
@@ -1406,11 +1261,10 @@ void handle_tcp_socket_request(void* p0, void* p1) {
     }
 }
 
+
 /**
- * Runs the tcp socket server.
+ * Runs the tcp socket server for one accept.
  *
- * The procedure is running in a thread,
- * to avoid blocking of the main signal waiting loop.
  *
  * @param p0 the internals memory
  */
@@ -1426,25 +1280,13 @@ void run_tcp_socket(void* p0) {
       
         if (*s != NULL_POINTER ) {
 
-            log_message_debug("Run tcp server socket.");
-    
-            // The signal memory.
-            void** m = NULL_POINTER;
-            void** mc = NULL_POINTER;
-            void** ms = NULL_POINTER;
-    
-            // Get signal memory.
-            get_array_elements(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) POINTER_ARRAY);
-            get_array_elements(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) POINTER_ARRAY);
-            get_array_elements(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) POINTER_ARRAY);
+            log_message_debug("Run tcp socket.");
     
             // The client socket address.
             struct sockaddr_in ca;
     
             // Determine client socket address size.
             int cas = sizeof(ca);
-    
-    //??        while (1) {
     
             // Accept client socket request and store client socket.
             int cs = accept(**((int**)s), (struct sockaddr*) &ca, &cas);
@@ -1458,107 +1300,50 @@ void run_tcp_socket(void* p0) {
     
             } else {
     
-                fprintf(stderr, "Could not run tcp server socket. The accept failed.");
+                fprintf(stderr, "Could not run tcp socket. The accept failed.");
                 pthread_exit(NULL_POINTER);
             }
 
         }else {
 
-            log_message_debug("Could not run tcp server socket. The socket is null.");
+            log_message_debug("Could not run tcp socket. The socket is null.");
         
         }   
     } else {
 
-        log_message_debug("Could not run tcp server socket. The socket is null.");
+        log_message_debug("Could not run tcp socket. The socket is null.");
     }
 }
 
-/**
- * Receives tcp socket input.
- *
- * @param p0 the internals memory
- */
-void receive_tcp_socket(void* p0) {
-
-    log_message_debug("Receive tcp server socket.");
-
-    // The thread.
-    pthread_t t;
-
-    // Create thread returning an error value.
-    int e = pthread_create(&t, NULL_POINTER, (void*) &run_tcp_socket, p0);
-
-    if (e != 0) {
-
-        log_message_debug("Could not receive tcp socket. An error occured while creating the thread.");
-    }
-}
 
 /**
- * Funktion liest Daten in der POST- oder GET-Methode ein.
- * R?ckgabewert: String puffer mit den Daten
- * bei Fehler  : NULL
+ * The procedure is running in a thread,
+ * to avoid blocking of the main signal waiting loop.
+ * 
+ * If the active flag false, so must be exit the thread
+ * 
+ * @param p0 the internal
  */
-/*??
-char* getdata() {
+void run_tcp_socket_server(void* p0) {
+ 
+    void** active_flag = POINTER_NULL_POINTER;
+    get_array_elements( p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, 
+                        (void*) &active_flag, (void*) POINTER_ARRAY );
+    
 
-   unsigned long size;
-   char *puffer = NULL;
-   char *request = getenv("REQUEST_METHOD");
-   char *cont_len;
-   char *cgi_string;
-
-   // Zuerst die Request-Methode ?berpr?fen
-   if(  NULL == request )
-      return NULL;
-   else if( strcmp(request, "GET") == 0 )
-      {
-         // Die Methode GET -> Query String abholen
-         cgi_string = getenv("QUERY_STRING");
-         if( NULL == cgi_string )
-            return NULL;
-         else
-            {
-               puffer =(char *) Strdup(cgi_string);
-               return puffer; // R?ckgabewert an den Aufrufer
-            }
-      }
-   else if( strcmp(request, "POST") == 0 )
-      {
-         // Die Methode POST -> L?nge des Strings
-         //   ermitteln (CONTENT_LENGTH)
-         cont_len = getenv("CONTENT_LENGTH");
-         if( NULL == cont_len)
-            return NULL;
-         else
-            {
-               // String CONTENT_LENGTH in
-                  unsigned long umwandeln
-               size = (unsigned long) atoi(cont_len);
-               if(size <= 0)
-                  return NULL; // Keine Eingabe!?!?
-            }
-         // Jetzt lesen wir die Daten von stdin ein
-         puffer =(char *) malloc(size+1);
-         if( NULL == puffer )
-            return NULL;
-         else
-            {
-               if( NULL == fgets(puffer, size+1, stdin) )
-                  {
-                     free(puffer);
-                     return NULL;
-                  }
-               else  // R?ckgabewerte an den Ausrufer
-                  return puffer;
-            }
-      }
-   else // Weder GET-Methode noch die POST-Methode
-        //   wurden verwendet
-      return NULL;
-
+    while (1) {
+       
+        if ( **((int**)active_flag) == *ZERO_NUMBER ) {
+         
+            break;   
+        }
+        
+        run_tcp_socket( p0 );
+    }  
+    
+    pthread_exit(NULL_POINTER);
+    
 }
-*/
 
 /* TCP_SOCKET_SERVER_SOURCE */
 #endif
