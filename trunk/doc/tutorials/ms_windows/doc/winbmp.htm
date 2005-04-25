@@ -1,0 +1,120 @@
+<HTML><HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Bitmaps">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, Bitmap">
+<TITLE>Windows Programmierung: Bitmaps</TITLE>
+</HEAD>
+<BODY>
+<a name="top" index="Windows Bitmaps">
+<table width=100%><tr><td bgcolor=yellow  align=center>
+<H1>Windows Programmierung: Bitmaps </H1>
+</td></tr></table>
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center>
+<p>
+
+<H2>Quelle der Bitmap</H2>
+
+Mit der Funktion <tt>LoadBitmap</tt> kann eine 
+<a href="winrsc.htm#bmprsc">Bitmap aus der Ressource</a> geladen werden.
+Das ist praktikabel, wenn eine begrenzte Zahl festgelegter Bitmaps im 
+Programm verwendet werden.
+<p>
+Als Ergebnis erh&auml;lt man ein Handle auf eine Bitmap vom Typ HBITMAP.
+
+
+<H2>Die BITMAP-Struktur</H2>
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+typedef struct tagBITMAP {
+   LONG   bmType; 
+   LONG   bmWidth; 
+   LONG   bmHeight; 
+   LONG   bmWidthBytes; 
+   WORD   bmPlanes; 
+   WORD   bmBitsPixel; 
+   LPVOID bmBits; 
+} BITMAP; 
+</pre></td></tr></table><p>
+
+<p><table border>
+<tr><td> bmType  </td><td> wird auf 0 gesetzt </td></tr>
+<tr><td> bmWidth </td><td> die Breite der Bitmap in Pixeln </td></tr>
+<tr><td> bmHeight </td><td> die H&ouml;he der Bitmap in Pixeln </td></tr>
+<tr><td> bmWidthBytes </td><td> die ben&ouml;tigten Byte pro Zeile (muss durch 2 teilbar sein) </td></tr>
+<tr><td> bmPlanes </td><td> Anzahl der Farbebenen </td></tr>
+<tr><td> bmBitsPixel </td><td> Anzahl der Bits pro Pixel </td></tr>
+<tr><td> bmBits </td><td> Zeiger auf das Bit-Array </td></tr>
+</table>
+
+<p>
+Ermitteln der BITMAP aus einem HBITMAP:
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+	HBITMAP hBitmap;
+	BITMAP bmp;
+	hBitmap = LoadBitmap(hInst,MAKEINTRESOURCE(IDB_BITMAP1));
+	GetObject(hBitmap, sizeof(BITMAP), (LPSTR)&bmp);
+</pre></td></tr></table><p>
+
+<H2>Darstellen einer Bitmap</H2>
+
+<H3>Kompatibler Devicekontext</H3>
+
+Man kann zu einem aktuellen Devicekontext (DC) einen kompatiblen erzeugen,
+diesen mit der Bitmap verbinden und anschliessend eine Kopie an eine
+beliebige Stelle des aktuellen DC erzeugen.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+	BITMAP bmp; GetObject(hBitmap, sizeof(BITMAP), (LPSTR)&bmp);
+	HDC hdcBmp; hdcBmp = CreateCompatibleDC(hdc); 
+	SelectObject(hdcBmp, hBitmap);
+	BitBlt(hdc,150,120, bmp.bmWidth,bmp.bmHeight, hdcBmp, 0,0, SRCCOPY);
+</pre></td></tr></table><p>
+
+Im ersten Schritt wird per <tt>GetObject</tt> eine BITMAP-Struktur gef&uuml;llt,
+um daraus sp&auml;ter die Gr&ouml;sse der Bitmap f&uuml;r das Kopieren zu ermitteln.
+Dann wird der kompatible DC erzeugt (CreateCompatibleDC) und mit der Bitmap 
+verbunden (SelectObject).
+Jetzt wird per BitBlt in den Ausgangs-DC an die Position 150,120 die Bitmap aus
+dem kompatiblen DC kopiert.
+
+<H3>Bitmap als Pattern</H3>
+
+Aus einer Bitmap kann man einen BRUSH erzeugen. Dieser Brush wird f&uuml;r
+den Device-Kontext angelegt (selektiert) und anschliessend ein Rechteck
+mit dem Muster gef&uuml;llt. Nach dem Zeichnen muss das BRUSH-Objekt wieder 
+freigegeben werden.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+HBRUSH hbr, hbrPrevious;
+RECT rc;
+
+	hbr = CreatePatternBrush(hBitmap);
+	hbrPrevious = (HBRUSH)SelectObject(hdc, hbr);
+	GetClientRect(hWnd, &rc);
+	PatBlt(hdc, rc.left, rc.top, rc.right-rc.left, rc.bottom-rc.top, PATCOPY);
+	SelectObject(hdc, hbrPrevious);
+	DeleteObject(hbr);
+</pre></td></tr></table><p>
+
+Das Beispiel f&uuml;llt den gesamten Fensterbereich kachelweise mit der Bitmap.
+
+<p>
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 2000 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</body>
+</html>
+

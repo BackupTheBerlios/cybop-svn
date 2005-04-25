@@ -1,0 +1,61 @@
+<!-- res_data.cybol /-->
+<model>
+
+    <property part="table"
+        name="super"
+        location="file"
+        abstraction="compound"
+        model="default_table.cybol"
+    />
+
+    <property part="table"
+        name="model"
+        location="file"
+        abstraction="compound"
+        model="table.cybol"
+    >
+        <!-- Here are the cascaded internal models in serialized files.
+/-->
+    </property>
+
+    <property part="table"
+        name="position"
+        location="inline"
+        abstraction="vector"
+        model="0,0,0"
+        unit="pixel"
+        constraint="maximum=100,100,0;limes=100,100,0"
+    />
+
+    <property part="table"
+        name="extension"
+        location="inline"
+        abstraction="vector"
+        model="400,400,0"
+        unit="%"
+    />
+
+    <property part="table"
+        name="colour"
+        location="inline"
+        abstraction="vector"
+        model="255,255,255"
+        unit="rgb"
+        constraint="red,green,blue"
+    />
+
+    <property part="table"
+        name="font"
+        location="inline"
+        abstraction="string"
+        model="helvetica"
+    />
+
+    <property part="table"
+        name="html_tag"
+        location="inline"
+        abstraction="string"
+        model="table"
+    />
+
+</model>

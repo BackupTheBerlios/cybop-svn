@@ -1,0 +1,105 @@
+<HTML>
+<HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Statusbar">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, Statusbar, Informatik">
+<TITLE>Windows-Programmierung: Statusbar
+</TITLE>
+</HEAD>
+<BODY>
+<a name="top"><table width=100%><tr><td bgcolor=yellow  align=center>
+<H1>Windows Programmierung: Statusbar</H1>
+</td></tr></table>
+
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center>
+<p>
+
+<p><font face="Helvetica" size=3">
+<a href="wincontr.htm#top">Einf&uuml;hrende Informationen</a>
+ &uuml;ber die Programmierung von Kontrollelementen werden hier vorausgesetzt.
+</font><p>
+
+Die Statusbar geh&ouml;rt zu den Common Controls. In C-Programmen ist das Einbinden
+der Datei COMMCTRL.H notwendig und die comctl32.lib muss zum Programm gelinkt werden.
+
+<H2>Erzeugen der Statusbar</H2>
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+#include &lt;commctrl.h&gt;
+
+HWND CreateStatusBar(HWND hWnd, UINT ResID)
+{
+HWND hWndStatus;
+
+	hWndStatus = CreateWindowEx (0L, // extended style
+		STATUSCLASSNAME, "",
+		WS_CHILD | WS_BORDER | WS_VISIBLE | SBS_SIZEGRIP, // window styles
+		0, 0, 0, 0, // x, y, width, height
+		hWnd, (HMENU)ResID, hInst, NULL);
+	return hWndStatus;
+}
+</pre></td></tr></table><p>
+
+<H2>Gr&ouml;ssen&auml;nderungen (WM_SIZE)</H2>
+
+Die Anwendung muss sich darum k&uuml;mmern,
+dass sie bei der n&auml;chsten Gr&ouml;ssenver&auml;nderung des Hauptfensters
+nicht verlorengeht. Die WM_SIZE-Behandlung sieht etwa so aus:
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+case WM_SIZE:
+	RECT rSB;
+	GetWindowRect(hwndStatus, &rSB);
+	MoveWindow (hwndStatus, 0, HIWORD(lParam) - 10, LOWORD(lParam), HIWORD(lParam), TRUE);
+	MoveWindow(hwndList, 0, rcl.bottom - rcl.top, LOWORD(lParam), 
+			HIWORD(lParam) - (rSB.bottom - rSB.top) + 1, TRUE );
+	break;
+</pre></td></tr></table><p>
+
+Im Beispiel wird davon ausgegangen, dass das Hauptfenster von einer Listbox mit dem Handle
+hwndList vollst&auml;ndig gef&uuml;llt ist. Diese muss sich etwas einschr&auml;nken,
+um der Statusbar Platz zu machen.
+
+<H2>Statusbar mit Text best&uuml;cken</H2>
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+void SetStatusText(HWND hWndStatus, char *Text)
+{
+	SendMessage (hWndStatus, SB_SETTEXT, 0, (LPARAM)Text);
+}
+</pre></td></tr></table><p>
+
+<H2>Statusbar mit mehreren Feldern</H2>
+
+Das Zerteilen in mehrere Teile:
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+static int aWidths [2] = {200,300};
+   SendMessage (hWndStatus, SB_SETPARTS, 2, (LPARAM)aWidths); 
+   SendMessage (hWndStatus, SB_SETTEXT, 0, (LPARAM)"Linkes Feld");
+   SendMessage (hWndStatus, SB_SETTEXT, 1, (LPARAM)"noch n Feld");
+</pre></td></tr></table><p>
+
+Und wieder zur&uuml;ck:
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+   SendMessage (hWndStatus, SB_SIMPLE, 0, 0);
+</pre></td></tr></table><p>
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</BODY>
+</HTML>

@@ -1,0 +1,250 @@
+<HTML><HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Dateiauswahlbox">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Dateiauswahlbox, Common Dialog, Informatik">
+<TITLE>Willemers Informatik-Ecke: Windows Dateiauswahlbox</TITLE>
+</HEAD><BODY>
+<a name="top">
+<table width=100%><tr><td bgcolor=yellow  align=center>
+<H1><font color=black>Windows Programmierung: Dateiauswahlbox</font></H1>
+</td></tr></table><p>
+
+
+Die Dialogbox zur Auswahl von Dateien ist eine Errungenschaft von Windows 3.1. 
+Bei vorigen  Versionen war sie noch nicht verf&uuml;gbar.
+Damit aber auch Windows 3.0-Anwender die Auswahlbox benutzen können,
+hat Microsoft es gestattet, die f&uuml;r die Standarddialoge zuständige Datei
+COMMDLG.DLL frei zu kopieren.
+<p>
+Die Prototypen und Datentypen f&uuml;r diese Dialoge finden sich in der
+Datei COMMDLG.H und m&uuml;ssen im Programm eingebunden werden.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+#include &lt;COMMDLG.H>
+</pre></td></tr></table><p>
+
+<H2>Ein Beipiel</H2>
+
+Typischerweise wird die Dateiauswahlbox aufgerufen, wenn Datei-&Ouml;ffnen
+vom Anwender aufgerufen wurde. Damit mu&szlig; der Aufruf in die Fensterfunktion
+an die Stelle, wo die Men&uuml;auswertung geschieht.
+Vorher wird der <a href="#importfilter">Importfilter</a> gesetzt und eine Variable
+der Datenstruktur <tt>OPENFILENAME</tt> definiert.
+Diese Variable wird nullgesetzt und sollte nicht jedesmal neu erzeugt werden,
+da dann das Programm wei&szlig;, wo das letzte Mal geladen wurde und
+dort wieder aufsetzen wird. Wie bei vielen Windows-Strukturen mu&szlig; auch hier
+das Feld <tt>lStructSize</tt> mit der Gr&ouml;&szlig;e der Struktur vorbesetzt sein.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+#define IMPORTFILTER "Diary (*.dry)\0*.dry\0Address (*.adr)\0*.adr\0All Files(*.*)\0*.*\0\0"
+  ...
+static OPENFILENAME DateiSel = {0}; // hier wird die Struktur geloescht!
+  ...
+	case WM_COMMAND:           // message: command from application menu
+		switch( LOWORD( wParam )) {
+        	case M_OPEN:
+			char FileName[_MAX_PATH+1] = "";
+			// Die Fileselector-Struktur vorbesetzen 
+			DateiSel.lStructSize       = sizeof (OPENFILENAME) ;
+			DateiSel.hwndOwner         = hWnd;
+			DateiSel.nMaxFile          = _MAX_PATH;
+			DateiSel.lpstrFile         = FileName;
+			DateiSel.lpstrFilter       = IMPORTFILTER;
+			if (GetOpenFileName(&DateiSel)) {
+				switch (DateiSel.nFilterIndex) {
+				case 1: //
+					MessageBox(hWnd, "Diary", "hallo", MB_OK);
+					break;
+				case 2: //
+					MessageBox(hWnd, "Address", "hallo", MB_OK);
+					break;
+				}
+			}
+			break;
+</pre></td></tr></table><p>
+
+Im String <tt>FileName</a></tt> wird nach dem Aufruf der Dialogbox der ausgew&auml;hlte Dateiname
+stehen, da diese Adresse in <a href="#filename">lpstrFile</a> festgelegt wurde.
+
+
+
+
+<H2>Die Funktionen</H2>
+
+Die Funktion  GetOpenFileName eröffnet eine Dialogbox zur Auswahl einer Datei, 
+die gelesen werden soll. Der Parameter enthält eine Struktur, in der die 
+Dialogbox weitgehend konfiguriert wird. Das wichtigste Element dieser 
+Strukur ist der Zeiger lpstrFile, der den Speicherbereich angibt, in dem
+anschließend die ausgewählte Datei benannt wird.
+<p>
+
+Die Funktion GetSaveFileName dient der Selektion einer Datei zum Sichern.
+<p>
+
+Die Funktion GetFileTitle isoliert aus der bezeichneten Datei den 
+reinen Dateinamen ohne Laufwerkskennung und Pfadnamen.
+<p>
+Die Prototypen der Funktionen GetOpenFileName, GetSaveFileName
+und GetFileTitle:
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+BOOL    WINAPI GetOpenFileName(OPENFILENAME FAR*);
+BOOL    WINAPI GetSaveFileName(OPENFILENAME FAR*);
+int     WINAPI GetFileTitle(LPCSTR, LPSTR, UINT);
+</pre></td></tr></table><p>
+
+<H2>Die Struktur OPENFILENAME</H2>
+
+Wie man an den Parametern der Funktionen sieht, spielt die Struktur OPENFILENAME eine beson- 
+dere Rolle. Sie dient als Struktur, um die Parameter der Funktion aufzunehmen.
+<p>
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+typedef struct tagOFN
+{
+    DWORD   lStructSize;
+    HWND    hwndOwner;
+    HINSTANCE hInstance;
+    LPCSTR  lpstrFilter;
+    LPSTR   lpstrCustomFilter;
+    DWORD   nMaxCustFilter;
+    DWORD   nFilterIndex;
+    LPSTR   lpstrFile;
+    DWORD   nMaxFile;
+    LPSTR   lpstrFileTitle;
+    DWORD   nMaxFileTitle;
+    LPCSTR  lpstrInitialDir;
+    LPCSTR  lpstrTitle;
+    DWORD   Flags;
+    UINT    nFileOffset;
+    UINT    nFileExtension;
+    LPCSTR  lpstrDefExt;
+    LPARAM  lCustData;
+    UINT    (CALLBACK *lpfnHook)(HWND, UINT, WPARAM, LPARAM);
+    LPCSTR  lpTemplateName;
+}   OPENFILENAME;
+typedef OPENFILENAME FAR* LPOPENFILENAME;
+</pre></td></tr></table><p>
+
+Zunächst wird in lStructSize die Größe der OPENFILENAME-Struktur erwartet. Diese wird mit 
+sizeof(OPENFILENAME) festgelegt.
+
+<H3><a name="filename">Der Dateiname</a></H3>
+
+Die wichtigste Aufgabe der Dialogbox ist die Lieferung des Dateinamens.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+static OPENFILENAME DateiSel = {0};
+
+  DateiSel.nMaxFile    = _MAX_PATH;
+  DateiSel.lpstrFile   = FileName;
+  DateiSel.lpstrDefExt = "txt";
+</pre></td></tr></table><p>
+
+<tt>lpstrFile</tt> zeigt auf eine Stringvariable. Die Variable
+mit ihrem Speicherraum mu&szlig; vom Programmierer definiert werden. 
+Wichtig: Der String mu&szlig; bei Start der Dialogbox vorbesetzt sein, typischerweise
+mit einem Leerstring. Ansonsten kann es sein, da&szlig; die Dialogbox nicht startet.
+Die L&auml;ge dieses Strings wird im Element <tt>nMaxFile</tt> abgelegt.
+<p>
+Nach Ende der Dialogbox befindet sich hier der ausgewählte Dateiname inklusive 
+Laufwerksbuchstabe und Pfad.
+<p>
+Beim Sichern ohne eine Angabe der Extension wird in den meisten F&auml;llen erwartet,
+dass das Programm seine eigene Extension anh&auml;ngt. Dies wird durch Vorbesetzen
+des Elements  <tt>lpstrDefExt</tt> erreicht.
+
+
+<H3><a name="importfilter">Nicht ohne Filter</a></H3>
+
+<pre>
+LPCSTR lpstrFilter
+</pre>
+Hier wird eine Liste der Dateimasken &uuml;bergeben, die bei Benutzung der 
+Dialogbox durch eine Klapplistbox ausgewählt werden kann.
+Dabei werden die Strings direkt hintereinander geschrieben. 
+Anders ausgedr&uuml;ckt, werden die Teilstrings durch eine bin&auml;re Null
+getrennt. Das Ende des gesammten Filters wird durch das Auftreten zweier
+Nullen hintereinander kenntlich.
+<p>
+
+Es bilden immer zwei Strings ein Paar. Das erste ist die Bezeichnung im 
+Klartext, das zweite ist die Maske. Werden mehrere Masken f&uuml;r eine Auswahl
+benötigt, kann man sie einfach hintereinander schreiben. Wie &uuml;blich wird
+jeder String durch ein Nullbyte beendet. Das Ende des Filters wird durch zwei
+Nullen kenntlich gemacht. Hier zwei Beispielstrings:
+
+<pre>
+"Stammbaum (*.dbf)\0*.dbf\0GEDCOM (*.ged)\0*.ged\0\0"
+"Diary (*.dry)\0*.dry\0Address (*.adr)\0*.adr\0All Files(*.*)\0*.*\0\0"
+</pre>
+
+Die Maske in Klammern dient nur der Anzeige und hat keine inhaltliche
+Bedeutung.
+<p>
+
+<pre>
+DWORD nFilterIndex
+</pre>
+
+
+Nach Bearbeiten der Dialogbox liefert <tt>nFilterIndex</tt>
+welcher Filter vom Anwender ausgew&auml;hlt wurde. Damit kann
+beispielsweise bei Importen festgestellt werden, welcher Funktion
+aufgerufen werden mu&szlig;, um die Datei richtig zu lesen.
+Beim Schreiben der Datei ist es noch wichtiger, da so bestimmt
+werden kann, in welchem Format oder welche Inhalte geschrieben werden
+sollen. Der Index beginnt &uuml;brigens bei 1!
+
+
+<H3>Flags</H3>
+<pre>
+DWORD Flags
+</pre>
+Hier werden spezielle Optionen gesetzt, die die Dialogbox konfigurieren. Die folgenden Wer- 
+te können dabei durch Addition kombiniert werden:
+
+<dl>
+<dt>OFN_READONLY</dt><dd>
+bewirkt, daß der Schreibschutzknopf bei Start der Dialogbox angewählt ist.
+<dt>OFN_OVERWRITEPROMPT</dt><dd>
+bewirkt in einer "Sichern als..."-Box, daß bei Existenz der Datei nachgefragt wird, ob 
+sie öberschrieben werden darf.
+<dt>OFN_HIDEREADONLY</dt><dd>
+macht den Schreibschutzknopf unsichtbar
+	#define OFN_NOCHANGEDIR	0x00000008
+zwingt die Dialogbox dazu, das aktuelle Verzeichnis dahin zuröckzusetzen, wo es war, 
+als die Dialogbox erzeugt wurde.
+<dt>OFN_SHOWHELP</dt><dd>
+erzeugt einen Hilfsknopf. Dabei darf hwndOwner nicht NULL sein.
+<dt>OFN_NOVALIDATE</dt><dd>
+erlaubt auch ung&uuml;ltige Zeichen im Dateinamen.
+<dt>OFN_ALLOWMULTISELECT</dt><dd>
+erlaubt die Auswahl mehrerer Dateien. Im String för den Dateinamen steht dann zu- 
+nächst Laufwerksbezeichnung und Pfadname, dann jeweils durch Leerzeichen abge- 
+trennt die Liste der angewählten Dateinamen.
+<dt>OFN_PATHMUSTEXIST</dt><dd>
+erzwingt, daß der Anwender nur existierende Pfadnamen angeben kann.
+<dt>OFN_FILEMUSTEXIST</dt><dd>
+erzwingt, daß der Anwender nur existierende Dateinamen angeben kann.
+<dt>OFN_CREATEPROMPT</dt><dd>
+meldet, wenn die angegebene Datei nicht existiert und ermöglicht es dem Benutzer, ihre 
+Erzeugung in einer Dialogbox zu veranlassen.
+<dt>OFN_NOREADONLYRETURN</dt><dd>
+erzwingt, daß die Datei weder schreibgesch&uuml;tzt noch ein schreibgesch&uuml;tztes 
+Verzeichnis ist.
+</dl>
+
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</body>
+</html>
+

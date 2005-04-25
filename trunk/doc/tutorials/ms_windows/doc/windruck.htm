@@ -1,0 +1,116 @@
+<HTML><HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Drucken">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, Drucker, Drucken">
+<TITLE>Windows Programmierung: Drucken</TITLE>
+</HEAD>
+<BODY bgcolor=WHITE>
+<a name="top"><table width=100%><tr><td bgcolor=yellow  align=center>
+<H1><font color=black>Windows Programmierung: Drucken</font></H1>
+</td></tr></table>
+
+
+<H2>Auswahl des Druckers</H2>
+
+F&uuml;r die Druckerauswahl liefert Windows seit 3.1 die Funktion PrintDlg. 
+Hier kann der Benutzer sich seinen Lieblingsdrucker ausw&auml;hlen. 
+Den Programmierer interessiert in erster Linie der Device-Kontext, in den er 
+gerne sp&auml;ter hineinzeichnen m&ouml;chte. Um diesen 
+zu erhalten, wird vor dem Aufruf von PrintDlg das Element Flags in der 
+Struktur PRINTDLG mit der Konstanten PD_RETURNDC angegeben. 
+Hat der Anwender best&auml;tigt, findet sich der gesuchte Kontext in der 
+Strukturvariablen hDC. Der hwndOwner wird nur f&uuml;r den korrekten Aufbau 
+der Dialogbox ben&ouml;tigt.
+
+
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+PRINTDLG pd;
+
+   memset(&pd, 0, sizeof(PRINTDLG));
+   pd.lStructSize = sizeof(PRINTDLG);
+   pd.hwndOwner = hWnd;
+   pd.Flags     = PD_RETURNDC;
+
+   if (PrintDlg(&pd)) {
+</pre></td></tr></table><p>
+
+<H2>Ausdruck durchf&uuml;hren</H2>
+
+Der Druck auf Papier unterscheidet sich etwas von dem auf dem Bildschirm. 
+So haben die wenigsten Bildschirme einen Seitenumbruch und sie m&uuml;ssen 
+auch nicht den Druckmanager bem&uuml;hen. 
+Damit dieser was zu zeigen hat, erh&auml;lt er einen Namen des Druckes 
+im Feld lpszDocName der DOCINFO-Struktur. 
+Diese wird per StartDoc &uuml;bergeben. 
+Bei Ende des Druckes braucht der Druckmanager noch ein EndDoc. 
+Die einzelnen Seiten werden mit StartPage und EndPage eingeklammert.
+<P>
+Wie bereits in [1] aufgezeigt, hat StartPage die hinterlistige Eigenart, 
+Einstellungen des Kontextes zur&uuml;ckzusetzen. 
+Dies gilt auch f&uuml;r Aufrufe des SelectFont, so da&szlig; man diesen 
+g&uuml;nstigerweise hinter StartPage positioniert.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+DOCINFO di;
+
+   memset(&di, 0, sizeof(DOCINFO));
+   di.cbSize	= sizeof(DOCINFO);
+   di.lpszDocName	= "drucktest";
+
+   // drucken
+   StartDoc(pd.hDC, &di);
+
+   StartPage(pd.hDC);
+   // Inhalt ausgeben
+   SelectObject(pd.hDC, MyFont);
+   TextOut(pd.hDC, 70, 70, String, strlen(String));
+   TextOut(pd.hDC, 10, 17, String, strlen(String));
+   EndPage(pd.hDC);
+
+   EndDoc(pd.hDC);  // Dokument wird geschlossen
+</pre></td></tr></table><p>
+
+<P>
+Mit etwas Geschick ist es nicht schwer, die Paint-Routine des Bildschirms so 
+zu stricken, da&szlig; man sie f&uuml;r die Ausgabe auf dem Drucker mitverwenden kann. 
+Einen Offset braucht man f&uuml;r die Rollbalken des Fensters meist sowieso, 
+so da&szlig; nur noch der Rand rechts und unten rechtzeitig gekappt werden 
+mu&szlig;. F&uuml;r die Ermittlung der Seitengr&ouml;&szlig;e wird wiederum 
+GetDeviceCaps herangezogen.
+
+
+<H2>Aufr&auml;umarbeiten</H2>
+
+Nach dem Drucken sollte der Drucker-Kontext wieder freigegeben werden. 
+Auch die von PrintDlg gelieferten Handles f&uuml;r Device-Mode und -Name 
+sollten Windows wieder zur&uuml;ckgegeben werden.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+      DeleteDC(pd.hDC);
+   }
+   if (pd.hDevMode != NULL) GlobalFree(pd.hDevMode);
+   if (pd.hDevNames != NULL) GlobalFree(pd.hDevNames);
+</pre></td></tr></table><p>
+
+<H4>Literatur:</H4>
+<OL>
+<LI> Thomas Hornschuh: Druckmittel nutzen - Druckerprogrammierung unter Windows. c't 8/95, S. 222ff.
+<LI> Marcellus Buchheit: Windows Programmierbuch. Sybex 1992.
+<LI> Charles Petzold: Programmierung unter Windows 3.1, Microsoft Press, 1992.
+<LI> Peter Norton, Paul Yao: Windows 3, Programmiertechniken f&uuml;r Profis, Markt &amp; Technik, 1991.
+<LI> Thomas Hornschuh: Tuschkasten-B&uuml;rokratie - Grafikprogrammierung unter Windows. c't 7/94, S. 206ff.
+</OL>
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</body>
+</html>
+

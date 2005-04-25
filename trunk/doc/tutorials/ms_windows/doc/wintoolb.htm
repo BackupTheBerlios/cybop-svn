@@ -1,0 +1,238 @@
+<HTML>
+<HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Toolbar">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, Toolbar, Informatik">
+<TITLE>Windows Programmierung: Toolbar</TITLE>
+</HEAD>
+<BODY>
+<a name="top">
+<table width=100%><tr><td bgcolor=yellow  align=center>
+<H1>Windows Programmierung: Toolbar</H1>
+</td></tr></table>
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center><p>
+
+
+<H2>Vorarbeiten</H2>
+
+Die Toolbar geh&ouml;rt zu den Common Controls. Es muss also die Headerdatei
+commctrl.h eingebunden werden.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+#include &lt;commctrl.h>
+</pre></td></tr></table><p>
+
+Kommt es zu nicht aufgel&ouml;sten Externals, sollte man pr&uuml;fen, ob die Library für die 
+Common Controls (comctl32.lib) eingebunden wird. 
+
+<H2>Erzeugen: die Funktion CreateToolbarEx</H2>
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+HWND CreateToolbarEx(
+    HWND hwnd,	
+    DWORD styles,	
+    UINT wID, 	
+    int nBitmaps, 	
+    HINSTANCE hBMInst, 	
+    UINT wBMID, 	
+    LPCTBBUTTON lpButtons, 	
+    int iNumButtons, 	
+    int dxButton, 	
+    int dyButton, 	
+    int dxBitmap, 	
+    int dyBitmap, 	
+    UINT uStructSize	
+);
+</pre></td></tr></table><p>
+
+<H4>Parameters</H4>
+<dl>
+<dt>hwnd </dt><dd> Handle des Elternfenster. </dd>
+<dt>styles </dt><dd> Window Styles des Toolbar. Der Parameter muss mindestens WS_CHILD enthalten, 
+  WS_VISIBLE macht die Toolbar gleich nach Start sichtbar. </dd>
+<dt>wID </dt><dd> Kontroll-ID des Toolbar </dd>
+<dt>nBitmaps </dt><dd> Anzahl der Images, die in der Bitmap enthalten sind, die durch hBMInst und wBMID bezeichnet wird. </dd>
+<dt>hBMInst </dt><dd>
+  Normalerweise die Modul-Instanz des eigenen Programms.
+</dd>
+<dt>wBMID </dt><dd> Ressource ID der Bitmap </dd>
+<dt>lpButtons </dt><dd> Adresse des Arrays der TBBUTTON-Struktur, das die Information &uuml;ber die Buttons des Toolbars enth&auml;lt </dd>
+<dt>iNumButtons </dt><dd> Anzahl der Buttons inklusive Separatoren in der Toolbar </dd>
+<dt>dxButton </dt><dd> Breite der Buttons in Pixel (meist 16) </dd>
+<dt>dyButton </dt><dd> H&ouml;he der Buttons in Pixel (meist 16) </dd>
+<dt>dxBitmap </dt><dd> Breite der Images in Pixel (meist 16) </dd>
+<dt>dyBitmap </dt><dd> H&ouml;he der Images in Pixel (meist 16) </dd>
+<dt>uStructSize </dt><dd> Gr&ouml;sse einer TBBUTTON-Struktur </dd>
+</dl>
+
+Der R&uuml;ckgabewert ist bei Erfolg das Handle des Toolbars, ansonsten 0.
+GetLastError liefert erweiterte Fehlermeldungen.
+<p>
+
+  Wird als Instanz als Konstante HINST_COMMCTRL verwendet, kann man auf die vordefinierten Buttons
+  des Systems zugreifen wie STD_FILEOPEN oder VIEW_DETAILS.
+IDB_STD_SMALL_COLOR als Bitmap-ID und 
+<H2>Die Struktur TBBUTTON</H2>
+
+
+<pre>
+// Definition
+typedef struct _TBBUTTON {
+    int iBitmap;
+    int idCommand;
+    BYTE fsState; 
+    BYTE fsStyle;
+    DWORD dwData;
+    int iString;
+} TBBUTTON;
+</pre>
+
+<dl>
+<dt>iBitmap</dt><dd>
+  Index im Image, nullbasierend
+  </dd>
+<dt>idCommand </dt><dd>
+  Die ID, die der Button liefern soll, wenn er ein WM_COMMAND ausl&ouml;st.
+  Im Allgemeinen verwendet man hier die gleiche ID wie der entsprechende Men&uuml;punkt.
+  </dd>
+<dt>fsState </dt><dd>
+  Der Status des Buttons. Meist steht hier TBSTATE_ENABLED.
+  </dd>
+<dt>fsStyle </dt><dd>
+  Der Stil des Button. Meist steht hier nur TBSTYLE_BUTTON.
+  </dd>
+<dt>dwData </dt><dd>
+  Applikationswert</dd>
+<dt>iString </dt><dd>
+  Nullbasierender Index des Button-Strings (meist 0)
+  </dd>
+</dl>
+
+Ein Array der Struktur wird verwendet, um mit CreateToolbarEx ein Toolbar zu erzeugen. Meist
+wird dies als Konstante festgelegt, wie in folgendem Beispiel:
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+// Die Konstante...
+TBBUTTON tbButtons [] = {
+	{0, IDM_NEW, TBSTATE_ENABLED, TBSTYLE_BUTTON, 0L, 0},
+	{1, IDM_OPEN, TBSTATE_ENABLED, TBSTYLE_BUTTON, 0L, 0},
+	{2, IDM_SAVE, TBSTATE_ENABLED, TBSTYLE_BUTTON, 0L, 0},
+	{0, 0, TBSTATE_ENABLED, TBSTYLE_SEP, 0L, 0},
+	{3, IDM_CUT, TBSTATE_ENABLED, TBSTYLE_BUTTON, 0L, 0},
+	{4, IDM_PASTE, TBSTATE_ENABLED, TBSTYLE_BUTTON, 0L, 0},
+}; 
+</pre></td></tr></table><p>
+
+<H2>Ein einfaches Beispiel</H2>
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+#define BITMAPCOUNT	4
+// Die Konstante...
+TBBUTTON Buttons [] = {
+	{0, IDM_NEW, TBSTATE_ENABLED, TBSTYLE_BUTTON, 0L, 0},
+	{1, IDM_OPEN, TBSTATE_ENABLED, TBSTYLE_BUTTON, 0L, 0},
+	{2, IDM_SAVEAS, TBSTATE_ENABLED, TBSTYLE_BUTTON, 0L, 0},
+	{0, 0, TBSTATE_ENABLED, TBSTYLE_SEP, 0L, 0},
+	{3, IDM_EXIT, TBSTATE_ENABLED, TBSTYLE_BUTTON, 0L, 0},
+}; 
+
+
+HWND CreateToolBar(HWND hWnd, UINT ResID)
+{
+	return CreateToolbarEx(hWnd, WS_CHILD | WS_VISIBLE,
+		ResID,	// des Toolbars
+		BITMAPCOUNT, hInst, IDR_TOOLBAR, Buttons, 	
+		sizeof(Buttons)/sizeof(TBBUTTON),
+		16,16,16,16,
+		sizeof(TBBUTTON)
+		);
+}
+</pre></td></tr></table><p>
+
+Auf die WM_CREATE-Nachricht des Hauptfensters wird CreateToolBar aufgerufen.
+Eine Toolbar-Ressource mit Namen IDR_TOOLBAR wird mit dem Ressource-Editor
+angelegt. Die Men&uuml;eintr&auml;ge IDM_NEW, IDM_OPEN, IDM_SAVEAS und IDM_EXIT
+sind damit per Toolbar erreichbar.
+<p>
+Damit die Toolbar nicht von anderen Elementen des Fensters &uuml;bermalt wird,
+ist noch die folgende WM_SIZE-Bearbeitung notwendig.
+
+<H2>WM_SIZE</H2>
+
+Das Einbinden des Toolbars geht nicht soweit, dass Windows die Gr&ouml;sse
+des Client-Bereichs selbstst&auml;nig verkleinert. Dies muss von
+Hand in der Fensterfunktion erledigt werden.
+Im folgenden Beispiel soll ein Edit-Element den gesamten Bereich des
+Hauptfensters einnehmen, aber nat&uuml;rlich nicht den Bereich
+des Toolbars.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+	case WM_SIZE:
+            RECT rcl;
+            SendMessage(hToolbar, TB_AUTOSIZE, 0L, 0L);
+            GetWindowRect(hToolbar, &rcl);
+            MoveWindow(hEdit, 0, rcl.bottom - rcl.top, LOWORD(lParam), HIWORD(lParam), TRUE );
+	    break;
+</pre></td></tr></table><p>
+
+Mit TB_AUTOSIZE wird die Toolbar aufgefordert, ihre optimale Gr&ouml;sse
+festzulegen. Anschliessend wird eben diese erfragt und vom Clientbereich des
+Fensters abgezogen.
+
+<H2>Tooltips</H2>
+
+Hat die Toolbar den Style TBSTYLE_TOOLTIPS, wird es WM_NOTIFY-Nachrichten
+vom Typ TTN_NEEDTEXT
+an das Elternfenster senden, wenn der Mauscursor &uuml;ber einem Button
+l&auml;nger stehen bleibt.
+Die Anwendung erf&auml;hrt, welche Command-ID der Button hat und kann
+daraus ermitteln, welcher Text im Tooltip erscheinen sollte.
+Hier ist dies durch Laden eines Stringtable der Ressource realisiert.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+	case WM_NOTIFY:
+		switch (((LPNMHDR)lParam)->code) {
+		LPTOOLTIPTEXT lpToolTipText;
+		static char szBuf[80];
+
+		case TTN_NEEDTEXT: // tooltip meldet sich und will einen Text
+			lpToolTipText = (LPTOOLTIPTEXT)lParam;
+			LoadString (hInst, lpToolTipText->hdr.idFrom,
+				szBuf, sizeof (szBuf));
+			lpToolTipText->lpszText = szBuf;
+			break;
+		}
+		break;
+</pre></td></tr></table><p>
+
+Nun muss lediglich f&uuml;r jede Command-ID unter dieser Nummer auch ein
+Stringtable in der Ressource angelegt werden.
+
+<H2>Einsetzen anderer Kontrollelemente</H2>
+
+Man kann andere Elemente, wie etwa Comboboxen oder Editfelder in die Toolbar einsetzen.
+Dazu wird die HWND des Toolbar als Eltern-HWND mitgegeben. Um Freiraum f&uuml;r solche
+Elemente zu schaffen, wird im TBBUTTON-Array eine Reihe von TBSTYLE_SEP-Elementen 
+hintereinander gesetzt.
+<p>
+Man kann ausprobieren, wieviele freie Pl&auml;tze man braucht. Man kann aber auch
+eine Nachricht TB_GETITEMRECT an einen Seperator senden und aus dem zur&uuml;ckgegebenen
+RECT durch (right-left) die Breite ermitteln.
+
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</BODY>
+</HTML>

@@ -1,0 +1,99 @@
+<HTML><HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Ordner selektieren">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, Ordner, Verzeichnisse, Selektieren, Auswahl, folder, browse">
+<TITLE>Windows Programmierung: Ordnerauswahl</TITLE>
+</HEAD>
+<BODY>
+<a name="top" index="Windows-Ordnerauswahldialog">
+<table width=100%><tr><td bgcolor=yellow  align=center>
+<H1><font color=black>Windows Programmierung: Ordnerauswahl</font></H1>
+</td></tr></table>
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center>
+<p>
+
+Im Gegensatz zum Selektieren von Dateien hat das Selektieren von 
+Ordnern einen anderen typischen Dialog. Auch die Programmierung
+erfolgt anders. Der Zugang erfolgt per COM auf die Shell-Schnittstelle
+von Windows.
+Daraus leiten sich zwei Notwendigkeiten ab. Zun&auml;chst muss
+<tt>shlobj.h</tt> eingebunden werden. Zum anderen muss COM einmal
+initialisiert werden. Das kann beispielsweise bei WM_CREATE
+der Fensterfunktion passieren.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+#include &lt;shlobj.h&gt;
+
+	WM_CREATE:
+		...
+		CoInitialize(0);
+</pre></td></tr></table><p>
+
+Die zentrale Funktion heisst <tt>SHBrowseForFolder</tt> und arbeitet
+mit einer Struktur BROWSEINFO.
+
+<pre>
+WINSHELLAPI LPITEMIDLIST WINAPI 
+     SHBrowseForFolder(LPBROWSEINFO lpbi);
+</pre>
+
+Die folgende Routine startet einen Selektionsdialog
+f&uuml;r Verzeichnisse.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+char strOrdner[_MAX_PATH] = "";
+BROWSEINFO browseInfo = {0};
+browseInfo.pszDisplayName = strOrdner; // wir verwenden diesen nicht
+browseInfo.hwndOwner = hWnd;
+LPITEMIDLIST ret;
+ret = SHBrowseForFolder(&browseInfo);
+if (ret) {
+	// OK selektiert
+	if (SHGetPathFromIDList(ret, strOrdner)) {
+		MessageBox(hWnd, strOrdner, "selektiert", MB_OK);
+	}
+}
+</pre></td></tr></table><p>
+
+Das Feld <tt>pszDisplayName</tt> muss auf einen Speicherplatz zeigen, in den
+die Dialogbox den "Anzeigenamen" ablegt. Dieser besteht aber aus dem nackten
+Verzeichnisnamen ohne Pfad. Das nutzt dem Programmierer meist wenig.
+Um den kompletten Pfadnamen zu erlangen, wird der R&uuml;ckgabezeiger
+von <tt>SHBrowseForFolder</tt> an die Funktion <tt>SHGetPathFromIDList</tt>
+weitergegeben, der im Speicherbereich des zweiten Arguments den kompletten
+Pfad ablegt. Da der Displayname nicht gebraucht wird, wird hier der Einfachheit
+halber einfach der gleiche Speicher wiederverwendet.
+
+<H3>Variationen</H3>
+
+Das Flag <tt>ulFlags</tt> der <tt>BROWSEINFO</tt> kann mit Konstanten
+besetzt werden, die die Auswahl einschr&auml;nken. Das wird durch Grauschalten
+des OK-Buttons erreicht. Eine Kombination durch Odern ist m&ouml;glich.
+
+<p>
+<table border>
+<tr><td> BIF_BROWSEFORCOMPUTER </td><td> nur Computer  </td></tr>
+<tr><td> BIF_BROWSEFORPRINTER </td><td> nur Drucker  </td></tr>
+<tr><td> BIF_RETURNONLYFSDIRS </td><td> nur Verzeichnisse </td></tr>
+</table><p>
+
+
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</body>
+</html>
+

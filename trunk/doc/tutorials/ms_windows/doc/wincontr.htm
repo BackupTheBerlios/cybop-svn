@@ -1,0 +1,178 @@
+<HTML>
+<HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Grundlegendes zur Programmierung von Kontrollelementen unter Windows">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Kontrollelement, Control, Windows, Programmierung, API">
+<TITLE>Willemers Informatik-Ecke: Grundlegendes zur Programmierung von Kontrollelementen unter Windows</TITLE>
+</HEAD>
+<BODY BGCOLOR=white>
+<a name="top"><table width=100%><tr><td bgcolor=yellow  align=center>
+<H1><font color=black>Programmierung von Kontrollelementen</font></H1>
+</td></tr></table>
+
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center>
+<p>
+
+Die Kontrollelemente besitzen einige Gemeinsamkeiten. Es aus Sicht von
+Windows lediglich spezialisierte Fenster und gehorchen gleichen Gesetzen.
+
+<p>
+<H2>&Uuml;bersicht</H2>
+
+<table border width=80%>
+<tr><th>Element</th><th>Fensterklasse</th><th>Stil-Pr&auml;fix</th></tr>
+<tr><td>Staticfeld	</td><td> "STATIC" </td><td> SS_ </td></tr>
+<tr><td><a href="winbutt.htm">Schaltfl&auml;che</a> (Button)	</td><td> "BUTTON" </td><td> BS_ </td></tr>
+<tr><td><a href="winedit.htm">Eingabefeld</a>	</td><td> "EDIT" </td><td> ES_ </td></tr>
+<tr><td><a href="winlistb.htm">Listbox</a>	</td><td> "LISTBOX" </td><td> LBS_ </td></tr>
+<tr><td><a href="wincombo.htm">Combobox</a>	</td><td> "COMBOBOX" </td><td> CBS_ </td></tr>
+<tr><td>Scrollbar	</td><td> "SCROLLBAR" </td><td> SBS_ </td></tr>
+<tr><td><a href="wintree.htm">Baumdiagramm</a>	</td><td> WC_TREEVIEW </td><td> TVS_ </td></tr>
+<tr><td><a href="winlistv.htm">ListView</a>	</td><td> WC_LISTVIEW </td><td> LVS_ </td></tr>
+</table>
+
+<H2><a name="create" index="Windows Kontrollelemente erzeugen">Erzeugung eines Kontrollelements</H2>
+
+Kontrollelemente werden oft in Dialogboxen erstellt und werden durch den
+Dialogstart miterzeugt. Werden diese Elemente aber in Fenstern ben&ouml;tigt
+werden sie mit <tt>CreateWindow</tt> erzeugt. Die Parameter von <tt>CreateWindow</tt>
+sind:
+<dl>
+<dt>LPCTSTR: Fensterklasse</dt><dd>
+    Hier wird die vordefinierte Fensterklasse angegeben, die wie bei eigenen Fenstern
+    durch einen String festgelegt ist. Beispiel: "LISTBOX"
+    </dd>
+<dt>LPCTSTR: Fenstertext</dt><dd>
+    Bei STATIC, EDIT und BUTTON ist dies der Text, der im Element zu sehen ist.
+    Bei Standardfenstern steht er im Balken.
+    </dd>
+<dt>DWORD: Fensterstil</dt><dd>
+    Eine Veroderung von WS_-Konstanten. Typischerweise werden die Konstanten
+    WS_VISIBLE|WS_CHILD|WS_BORDER als Ausgangspunkt ben&ouml;tigt.
+    Dazu kommen noch elementspezifische Stile, wie etwa bei Listboxen
+    LBS_SORT.
+    </dd>
+<dt>int, int, int, int: x, y, Breite, Hoehe </dt><dd>
+    Position im Elternfenster
+    </dd>
+<dt>HWND: das Elternfenster</dt><dd>
+    die Fensterfunktion des Elternfensters erh&auml;t die Nachrichten des
+    Kontrollelements
+    </dd>
+<dt>HMENU: Ressource-ID</dt><dd>
+    Jedes Element hat eine solche ID, die in ihrem Umfeld eindeutig sein mu&szlig;
+    Bei Standardfenstern wird an dieser Stelle die Men&uuml;-ID angegeben.
+    Normale IDs m&uuml;ssen hier gecastet werden: (HMENU)ID_MYCONTROL.
+    </dd>
+<dt>HANDLE: Instanz</dt><dd>
+    Die Instanz der Anwendung, wie bei WinMain &uuml;bergeben.
+<dt>LPVOID: Parameter</dt><dd>
+    Dieser Wert ist bei Kontrollelementen 0. Er wird bei der Erzeugung von
+    Fenstern und Dialogen gebraucht.
+    </dd>
+</dl>
+<p>
+
+Ein Beispiel zur Erzeugung eines Eingabefeldes:
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+    CreateWindow("EDIT", "", 
+                 WS_VISIBLE|WS_CHILD|WS_BORDER,
+                 10, 50, 300, 30, // Positionen auf dem Elternfenster
+                 hWnd, (HMENU)ID_MYCONTROL, hInst, 0);
+</pre></td></tr></table><p>
+
+Bei den Common Controls sollte noch der Aufruf von <tt>InitCommonControls()</tt> erfolgen.
+In der neueren Variante und lautet z. B. f&uuml;r Tree Views:
+
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+INITCOMMONCONTROLSEX icc;
+  icc.dwSize = sizeof(icc);
+  icc.dwICC = ICC_TREEVIEW_CLASSES;
+  InitCommonControlsEx(&icc);
+</pre></td></tr></table><p>
+
+Ein Include von "commctrl.h" ist obligatisch.
+
+<H2><a name="event" index="Ereignisse f&uuml;r Kontrollelemente">Ereignisse bearbeiten</a></H2>
+
+Die Ereignisse gelangen in die Fensterfunktion des Elternfensters. Dies kann ein Dialog
+oder ein gew&ouml;hnliches Fenster sein.
+Die Kontrollelemente l&ouml;sen ein <tt>WM_COMMAND</tt> aus.
+<p>
+LOWORD(wParam) enth&auml;lt die Ressource-ID<br>
+HIWORD(wParam) beschreibt das Ereignis<br>
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+  case WM_COMMAND:
+    switch(LOWORD(wParam)) { // welches Kontrollelement loest die Nachricht aus?
+    case ID_MYCONTROL:
+      switch (HIWORD(wParam)) {  // welches Ereignis ist genau eingetreten?
+      case LBN_DBLCLK:  // ein Doppelklick auf eine Listbox
+        break;
+      case LBN_SELCHANGE:
+</pre></td></tr></table><p>
+
+Einige der neueren Kontrollelemente verwenden nicht die Nachricht WM_COMMAND,
+sondern WM_NOTIFY. Bei diesem Ereignis wird im lParam ein Pointer auf eine
+Struktur <tt>NMHDR</tt> &uuml;bergeben, die in den ersten Elementen bei allen Kontrolls
+gleich sind. Sie enthalten:
+
+<p><table border width=100%>
+<tr><td><tt>HWND hwndFrom</tt> </td><td> Das HWND des Kontrollelements </td></tr>
+<tr><td><tt>UINT idFrom</tt> </td><td> Die Ressource-ID des Kontrollelements </td></tr>
+<tr><td><tt>UINT code</tt> </td><td> Der Code des Ereignisses </td></tr>
+</table><p>
+
+Eine typische Bearbeitung der Ereignisse sieht also so aus:
+
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+LPNMHDR hdr;
+
+    case WM_NOTIFY:
+        hdr = (LPNMHDR)lParam;
+        switch(hdr->code) {
+           // unterscheide den Notify-Code
+</pre></td></tr></table><p>
+
+<H2>Manipulation</H2>
+
+Ein Kontroll kann Befehle erhalten oder man kann Informationen erfragen.
+Der Kontakt des Programmes mit seinen Kontrollelementen geschieht durch das
+Senden von Nachrichten.
+<p>
+Im Beispiel werden die Daten, die hinter dem ausgew&auml;hlten Listboxelement
+abgelegt sind, angefragt. Dies ben&ouml;tigt zwei Schritte. Erst mu&szlig;
+ermittelt werden, welches Element selektiert ist und anschlie&szlig;end erfragt
+man die Daten.
+Beide Vorg&auml;nge werden durch die Funktion <tt>SendMessage</tt> ausgel&ouml;st.
+Im ersten Parameter wird das HWND des Kontrollelements benoetigt, im Beispiel
+<tt>hListe</tt>. Der zweite Parameter enth&auml;lt das Kommando. Das ist
+<tt>LB_CURSEL</tt> zum Ermitteln des aktuell selektierten Element und
+<tt>LB_GETITEMDATA</tt> zur Frage nach den Daten. Die folgenden beiden Parameter
+entsprechen dem wParam und lParam aus der Fensterfunktion.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+	ListIndex = SendMessage(hListe, LB_GETCURSEL, 0, 0);
+	Person = (tPerson *)SendMessage(hListe, LB_GETITEMDATA, ListIndex, 0);
+</pre></td></tr></table><p>
+
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</BODY></HTML>

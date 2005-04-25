@@ -1,0 +1,320 @@
+<HTML>
+<HEAD>
+<TITLE>Windows-Programmierung: Rahmen
+</TITLE>
+</HEAD>
+<BODY>
+<a name="top">
+<table width=100%><tr><td bgcolor=yellow align=center>
+<H1><font color=black>Windows-Programmierung: das Grundger&uuml;st</font></H1>
+</td></tr></table>
+<p>
+Und wieder einmal ein Rahmenprogramm f&uuml;r ein einfaches Windowsprogramm.
+Diesmal ist es mit Hyperlinks ausgestattet, so da&szlig; man zwischen Erkl&auml;rung
+und Source hin- und herspringen kann. Vielleicht veranschaulicht das etwas, zumindest
+macht es Spa&szlig;.
+</p>
+
+<a name="mainfun" index="MainWin"><H2>MainWin</a></H2>
+
+MainWin hei&szlig;t das <a href="#mainsrc">Hauptprogramm</a> unter Windows.
+Per Parameter erh&auml;lt es seine Instanz, auf der es seine Initialisierung aufsetzt.
+Es registriert die Fensterklasse, erzeugt das Hauptfenster und l&auml;uft in eine
+Schleife, in der es alle Messages verteilt, bis die "Null-Message" die Schleife
+beendet. Dies f&uuml;hrt das zum Ende des Programms.
+<p>
+<a name="instanz" index="Instanz-Handle unter Windows"><H3>Die Instanz</H3>
+
+Per Parameter erh&auml;lt <a href="#mainsrc">MainWin</a> die Instanz von Windows.
+ Diese Variable wird
+bei Aufrufen von diversen Funktionen ben&ouml;tigt, die an Windows gehen. An
+dieser Variablen erkennt Windows die Applikation wieder, auch dann, wenn sie 
+kein Fenster ge&ouml;ffnet hat. Aus diesem Grund wird sie von den meisten
+Windowsprogrammen in einer globalen Variable gespeichert und direkt
+zugegriffen.
+<p>
+
+<a name="regclass" index=""><H2>MyRegisterClass</H2>
+
+Das Hauptfenster wird registriert und bei Windows angemeldet.
+Die <a href="#regsrc">Registrierung</a> ist die Anmeldung einer Fensterklasse. 
+Es k&ouml;nnen also
+auch mehrere Fenster der gleichen Klasse angemeldet werden.
+
+<p>
+<a name="regstring"><H3>Der RegisterClass-String</H3>
+
+Welches Fenster zu welcher Klasse geh&ouml;rt, wird nicht durch ein Handle,
+sondern durch eine Zeichenkette beschrieben. Da diese Zeichenkette exakt
+identisch sein mu&szlig;, wird dieser String zu Anfang in einem 
+<a href="#regstringdef">define-Statement</a> festgelegt oder sogar in den
+Ressourcen abgelegt. Wichtig ist, da&szlig; er das Fenster im laufenden 
+System eindeutig bezeichnet. Er wird einmal bei der Registrierung der
+Klasse und dann noch einmal beim Erzeugen des Fensters verwendet.
+<p>
+
+<H3>Festlegen der Eigenschaften</H3>
+
+Das Registrieren der Klasse gibt Windows bekannt, welche Eigenschaften
+die Fenster dieser Klasse haben werden. Die wichtigste Information
+ist dabei die Adresse der 
+<a href="#fenfun">Fensterfunktion</a> <a href="#winprocsrc">WndProc</a>.
+Da die Fensterklasse auf alle Ereignisse reagiert, bestimmt sie ma&szlig;geblich
+das Verhalten des Fensters.
+
+<a name="createwin" index=""><H2>InitMainWindow</H2>
+
+In <a href="#createwinsrc">InitMainWindow</a> wird das Fenster erzeugt (create) und 
+angezeigt. In vielen Beispielen wird diese Funktion als
+InitInstance benannt.
+<p>
+Das Fenster wird durch den <a href="#regstring">RegisterClass-String</a> als zu der registrierten
+Klasse geh&ouml;riges Fenster erzeugt.
+<p>
+<a name="fentitel" index="">
+Als zweiten String hat das Fenster <tt><a href="#strtitel">szTitle</a></tt>.
+ Das ist der Text, der im blauen Balken
+zu sehen ist. Er hat nur informellen Charakter und k&ouml;nnte auch leer sein.
+Da dieser String oft sprachenabh&auml;ngig ist, w&uuml;rde es Sinn machen, ihn in der
+Ressource abzulegen.
+<p> 
+
+
+<a name="fenfun" index="Windows Fensterfunktion"><H2>Die Fensterfunktion</H2>
+
+Die <a href="#winprocsrc">Fensterfunktion</a> behandelt diejenigen Ereignisse,
+die auf das Fenster einst&uuml;rmen.
+Die Funktion wird von Windows gerufen, wenn immer ein Ereignis f&uuml;r dieses
+Fenster vorliegt.
+<p>
+Windows liefert vier Parameter mit. Der erste ist das Handle (HWND) des Fensters
+Dies ist besonders wichtig, wenn es mehrere Fenster gleichen Typs gibt.
+Der zweite Parameter ist der Typ der Message. Typischerweise besteht eine
+Fensterfunktion in erster Linie aus einer gro&szlig;end Fallunterscheidung
+&uuml;ber diese Variable.
+Die beiden restlichen Variablen sind Parameter des Typs. So liefert
+die WM_SIZE in diesen Parametern die neue Ausdehnung des Fensters.
+<p>
+
+<H3>Die Default-Fensterfunktion <tt>DefWindowProc</tt></H3>
+
+Werden Nachrichten nicht behandelt oder werden nur Teilaspekte des Ereignisses
+verarbeitet, so ruft die Fensterfunktion die Funktion <tt>DefWindowProc</tt>
+und &uuml;bergibt ihr die Parameter, die sie von Windows erhalten hat.
+<tt>DefWindowProc</tt> ist die Default-Fensterfunktion und behandelt alle
+Ereignisse mit der Standardreaktion. So wird beispielsweise das Fenster
+vergr&ouml;&szlig;ert oder mit der Hintergrundfarbe wei&szlig; versehen.
+
+<a name="menu"><H2>Das Men&uuml;</a></H2>
+
+<H3>Definition</H3>
+
+In der <a href="#menuressource">Ressource</a> wird das Men&uuml; beschrieben
+
+<a name="menureg" index=""><H3>Anmeldung</H3>
+
+Das Men&uuml; wird beim <a href="#regclass">Registrieren der Fensterklasse</a>
+dem Fenster zugeordnet.
+Dazu wird dem Element <tt>lpszMenuName</tt> der Fensterklassenstruktur der
+in der <a href="#menuressource">Ressource</a> definierte Namen des Men&uuml;s zugewiesen.
+
+
+<a name="menuevent"><H3>Ereignis der Men&uuml;auswahl</H3>
+
+Das Anklicken eines Men&uuml;punktes l&ouml;st eine Nachricht
+<a href="#wm_command">WM_COMMAND</a> aus, die in der <a href="#fenfun">Fensterfunktion</a>
+verarbeitet wird.
+Welcher Men&uuml;punkt ausgew&auml;hlt wurde, ist im niedrigeren Teil des ersten Parameters wParam
+kodiert. F&uuml;r das Extrahieren stellt Windows das Makro LOWORD zur Verf&uuml;gung.
+
+<a name="windowcontents"><H2>Der Fensterinhalt</a></H2>
+
+Alles, was im Fenster gezeichnet oder angezeigt werden soll, wird nicht direkt auf das
+Fenster gezeichnet. Das h&auml;tte den Nachteil, da&szlig; alles verschwunden ist, wenn
+das Fenster kurzzeitig &uuml;berdeckt wurde.
+Ein Fenster erh&auml;lt in dem Falle, da&szlig; der Inhalt neu zu zeichnen ist, die
+Nachricht <a href="#wm_paint">WM_PAINT</a>. Hier mu&szlig; es seinen Inhalt neu darstellen.
+Den gleichen Mechanismus benutzt man, wenn man im Fenster zeichnen will. Man manipuliert
+die Daten, aus denen die <a href="#fenfun">Fensterfunktion</a> das Fenster rekonstruiert
+und ruft die Funktion <tt>Invalidate</tt> auf, und t&auml;uscht so dem Fenster vor, da&szlig;
+eine Neuzeichnung notwendig sei.
+
+<a name="beenden"><h2>Beenden einer Windows-Anwendung</h2>
+
+Der Men&uuml;punkt f&uuml;r das Ende der Applikation ruft
+WindowDestroy auf. Dies erzeugt wiederum die Nachricht WM_DESTROY an das eigene Fenster.
+Hier erst setzt die Anwendung den Befehl <tt>PostQuitMessage(0);</tt> ab, das wiederum
+eine Nachricht absetzt. Das "Post" f&uuml;hrt aber im Gegensatz zu "Send" dazu, da&szlig;
+an dieser Stelle nicht auf die Abarbeitung gewartet wird.
+<p>
+Die Quit-Nachricht wird nicht in der Fensterfunktion bearbeitet, sondern bewirkt ein 
+Unterbrechen der Main-Loop und f&uuml;hrt so zum Ende der Applikation.
+<P>
+Der scheinbare Umweg &uuml;ber das Nachrichtensystem f&uuml;hrt dazu, da&szlig; alle beteiligten
+Komponenten informiert sind, da&szlig; dieses Programm sich abbaut.
+
+
+<H2>Der Source</H2>
+
+<p>
+<table border width=100%><tr><td bgcolor=lightblue link=yellow>
+<pre>
+#include &lt;windows.h>
+#include "resource.h"
+
+<a href="#instanz">HINSTANCE hInst</a>;
+<a name="strtitel" index="">#define <a href="#createwin">szTitle</a> "Fenstertitel"
+<a name="regstringdef" index="">#define <a href="#regstring">szWindowClass "MyWindowClass"</a>
+
+<a name="winprocsrc" index="">LRESULT CALLBACK <a href="#fenfun">WndProc</a>(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+PAINTSTRUCT ps;
+HDC hdc;
+
+	switch (message) {
+	<a name="wm_command" index="">case <a href="#menuevent">WM_COMMAND</a>:
+		switch (LOWORD(wParam)) {
+		case IDM_EXIT:
+			DestroyWindow(hWnd);
+			break;
+		}
+		break;
+	<a name="wm_paint" index="">case <a href="#windowcontents">WM_PAINT</a>:
+		hdc = BeginPaint(hWnd, &ps);
+		// do the painting of the window
+		EndPaint(hWnd, &ps);
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+	}
+	return DefWindowProc(hWnd, message, wParam, lParam);
+}
+
+<a name="regsrc" index="">ATOM <a href="#regclass">MyRegisterClass</a>(<a href="#instanz">HINSTANCE hInstance</a>)
+{
+WNDCLASSEX wcex = {0};
+
+	wcex.cbSize        = sizeof(WNDCLASSEX); 
+	wcex.style         = CS_HREDRAW | CS_VREDRAW;
+	wcex.lpfnWndProc   = (WNDPROC)WndProc;
+	<a href="#instanz">wcex.hInstance     = hInstance;</a>
+	wcex.hIcon         = LoadIcon(hInstance, (LPCTSTR)IDI_RAHMEN);
+	wcex.hCursor       = LoadCursor(NULL, IDC_ARROW);
+	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW+1);
+	<a href="#menureg">wcex.lpszMenuName</a>  = (LPCSTR)<a href="#menuressource">IDC_RAHMEN</a>;
+	<a href="#regstring">wcex.lpszClassName</a> = szWindowClass;
+	wcex.hIconSm       = LoadIcon(wcex.hInstance, (LPCTSTR)IDI_SMALL);
+	return RegisterClassEx(&wcex);
+}
+
+<a name="createwinsrc" index="">BOOL <a href="#createwin">InitMainWindow</a>(<a href="#instanz">HINSTANCE hInstance</a>, int nCmdShow)
+{
+HWND hWnd;
+
+	hWnd = CreateWindow(<a href="#regstring">szWindowClass</a>, <a href="#fentitel">szTitle</a>, WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, <a href="#instanz">hInstance</a>, NULL);
+	if (!hWnd) return FALSE;
+
+	ShowWindow(hWnd, nCmdShow);
+	UpdateWindow(hWnd);
+	return TRUE;
+}
+
+int APIENTRY <a name="mainsrc" index=""><a href="#mainfun">WinMain</a>(HINSTANCE hInstance, HINSTANCE hPrevInstance,
+                     LPSTR     lpCmdLine, int       nCmdShow)
+{
+MSG msg;
+HACCEL hAccelTable;
+
+	MyRegisterClass(hInstance);
+	<a href="#instanz">hInst = hInstance;</a>
+
+	if (!InitMainWindow (hInstance, nCmdShow)) return FALSE;
+
+	hAccelTable = LoadAccelerators(hInstance, (LPCTSTR)IDC_RAHMEN);
+
+	while (GetMessage(&msg, NULL, 0, 0)) {
+		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) {
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+	}
+	return msg.wParam;
+}
+</pre>
+</td></tr></table><p>
+
+
+<H2>Die Resourcen</H2>
+
+<p>
+<table border width=100%><tr><td bgcolor=lightblue>
+<pre>
+#include "resource.h"
+
+#include "windows.h"
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+
+IDI_RAHMEN       ICON    DISCARDABLE     "Rahmen.ICO"
+IDI_SMALL        ICON    DISCARDABLE     "SMALL.ICO"
+
+
+<a name="menuressource" index="">IDC_RAHMEN MENU DISCARDABLE
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                IDM_EXIT
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ...",           IDM_ABOUT
+    END
+END
+
+IDC_RAHMEN ACCELERATORS MOVEABLE PURE
+BEGIN
+    "?",            IDM_ABOUT,              ASCII,  ALT
+    "/",            IDM_ABOUT,              ASCII,  ALT
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+   IDC_RAHMEN    "RAHMEN"
+   IDS_APP_TITLE "Rahmen"
+   IDS_HELLO     "Hello World!"
+END
+</td></tr></table><p>
+
+<H2>Die Headerdatei der Ressourcen</H2>
+
+<p>
+<table border width=100%><tr><td bgcolor=lightblue>
+<pre>
+#define IDR_MAINFRAME		128
+#define IDD_RAHMEN_DIALOG	102
+#define IDS_APP_TITLE		103
+#define IDM_ABOUT		104
+#define IDM_EXIT		105
+#define IDS_HELLO		106
+#define IDI_RAHMEN	        107
+#define IDI_SMALL		108
+#define IDC_RAHMEN	        109
+#define IDC_MYICON		2
+#define IDC_STATIC	        -1
+</td></tr></table><p>
+
+<p>
+<HR>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</BODY>
+</HTML>

@@ -1,0 +1,159 @@
+<html>
+<head>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Hilfe">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows,Hilfe,Informatik,EDV">
+<TITLE>Willemers Informatik-Ecke: Windows Hilfe</TITLE>
+</head>
+<body>
+<table width=100%><tr><td bgcolor=yellow align=center>
+<H1 align=center>Hilfesystem unter Windows</H1>
+</td></tr></table>
+
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center>
+<p>
+
+<a name="help"><h2>Das Hilfesystem erzeugen</h2>
+
+Zwei Dateien werden gebraucht: NAME.HPJ und NAME.RTF.
+Das HPJ ist das Hilfeprojekt, ein ASCII-Text, der Informationen
+&uuml;ber die gesamte Datei hat.
+<p>
+Die NAME.RTF ist eine im Rich-Text-Format geschriebene Datei, die
+den Inhalt und die inneren Verkn&uuml;pfungen h&auml;lt.
+Zun&auml;chst erstellt man einen Hilfetext mit einem RTF-f&auml;higen
+Editor. Damit Programmierer auch einen Anreiz zum Kauf eines
+Office-Paket haben, hat man den Wordpad etwas eingeschr&auml;nkt.
+Der ben&ouml;tigte Editor mu&szlig; versteckte Texte und doppelt
+unterstreichen k&ouml;nnen. 
+Microsoft WORD kann das, dagegen Wordpad nicht.
+Unter uns: <a href="#starwriter">Starwriter 3.1</a> auch.
+<p>
+
+<H3>Definition eines Ansprungpunktes</H3>
+Um eine bestimmte Stelle in der Hilfedatei zu anspringen zu k&ouml;nnen,
+setzt man Fu&szlig;noten.
+<p>
+
+<dl>
+<dt>#</dt><dd> Topic (Kontextstring): Sprungziel f&uuml;r Spr&uuml;nge
+      innerhalb des Hilfesystems oder Kontextspr&uuml;nge von au&szlig;erhalb.
+      Topic ist die interne Ordnung der Hilfethemen. 
+      Das Topic ist ansprechbar &uuml;ber einen eindeutigen String.
+      Von der Applikation kommt eine Kontextnummer (short integer). Im [MAP]-Bereich des HPJ-Files
+      werden beide aufeinander abgebildet.
+
+<dt>K</dt><dd> Keyword: Dieser Label wird aus dem Index heraus oder von au&szlig;en
+      per Keywordsuche angesprungen.
+
+<dt>$</dt><dd> Titel / Thema: Dieser muﬂ immer am Anfang einer
+      Seite stehen. Insbesondere, wenn K verwendet wird.
+</dl>
+
+<H3>Sprung innerhalb des Hilfesystems</H3>
+
+Ein Verweis innerhalb des Hilfetextes kann immer nur einen
+Kontext zum Ziel haben. Dieser mu&szlig; nicht zwingend
+am Seitenanfang stehen. Das Ziel wird per Fu&szlig;note
+mit dem Zeichen # definiert. Angesprungen wird, in dem der
+Text, der das sichtbare Spungfeld enth‰lt doppelt unterstrichen
+wird. Im direkten Anschluﬂ daran muﬂ ein verborgener Text stehen,
+der den Inhalt der Fu&szlig;note mit dem #-Zeichen hat.
+<p>
+
+<H3>Die HPJ-Datei</H3>
+
+Die HPJ-Datei ist &auml;hnlich einer INI-Datei aufgebaut.
+<pre>
+[OPTIONS]
+TITLE=Hilfe zum Superprogramm
+COPYRIGHT=Arnold Willemer
+
+[FILES]
+meintext.rtf
+
+[MAP]
+MeinDialog=3200
+Eingabe=3300
+</pre>
+
+Unter FILES m&uuml;ssen die Quelltexte in RTF eingetragen werden.
+Mit MAP wernden Zahlen auf die Kontextstrings umgesetzt. Die Strings
+sind die, die mit #-Fu&szlig;noten definiert wurden. Die Zahlen sind
+diejenigen, die im Programm als Parameter beim HELP_CONTEXT-Aufruf
+verwendet werden.
+
+<H3>Der Hilfe-Compiler</H3>
+
+Die Hilfe-Compiler werden im Allgemeinen mit den Entwicklerwerkzeugen
+geliefert, stammen aber von Microsoft. Da ist
+<tt>hcw</tt> unter Windows 95/NT,
+<tt>hc</tt> oder <tt>hc31</tt> unter Windows 3.x.
+
+<!---------------------- Programm ------------------------------>
+<Hr><H2>Starten der Hilfe aus dem Programm</H2>
+
+Die Funktion zum Starten der Hilfe lautet <tt>WinHelp</tt> und wird
+so gerufen:
+<pre>
+WinHelp(hWnd, &lt;Name der Hilfedatei&gt;, &lt;<a href="#helpcode">HELP_CODE</a>&gt;, &lt;Parameter&gt;);
+</pre>
+
+Beispielsweise kann dieser Aufruf beim Ausl&ouml;sen eines
+Hilfe-Men&uuml;punktes ausgel&ouml;st werden. Auch Hilfe-Tasten in
+Dialogen sind so am einfachsten zu bedienen.
+
+<a name="helpcode"><H4>HELP_CODE</H4>
+<dl>
+<dt>HELP_CONTEXT</dt><dd> Der Parameter ist eine Nummer.
+     Man kann hier eine ID eines Dialogelementes verwenden. Mit diesem
+     Aufruf erreicht man Kontextadressen (#-Fu&szlig;noten), wenn man
+     die Nummer in der MAP-Division der HPJ-Datei auf den Label umlegt.
+<dt>HELP_KEY</dt><dd> Der Parameter ist hier ein String. Man springt hier
+     eine K-Fu&szlig;note an. Vorteil: man braucht keine Eintr&auml;ge
+     in der HPJ-Datei. Nachteil: Der String steht auch so im Index.
+<dt>HELP_QUIT</dt><dd> Zum Ende des Programms sollte mit diesem Befehl
+     die Hilfsbed&uuml;rftigkeit aufgegeben werden.
+
+</dl>
+
+
+<a name="f1"><h3>Die F1-Taste</h3>
+
+Die F1-Taste l&ouml;st im Fenster die WM_HELP-Message aus.
+Am einfachsten ist es, von hier aus direkt per WinHelp per HELP_KEY
+das Schl&uuml;sselwort anzuspringen.
+
+<p><hr>
+<a name="starwriter"><H3>Erzeugen der Formate mit Star-Writer V.3.1</H3>
+
+<H4>Verborgenen Text:</H4>
+<p>
+Einf&uuml;gen / Feldbefehl<p>
+Unter Bereich "Funktionen" aus der Combobox w&auml;hlen.
+Feldtyp "Verborgener Text". Dann kann im Eingabefeld
+rechts unten der Text eingegeben werden.
+<p>
+<H4>Doppelt unterstrichen</H4>
+<p>
+Text markieren. Per rechte Maustaste Kontextmen&uuml; aufrufen, dort
+Zeichenformat. Nachdem der Text erst unterstrichen wird, kann er
+im n&auml;chsten Dialog auch doppelt unterstrichen werden.
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</body>
+</html>
+

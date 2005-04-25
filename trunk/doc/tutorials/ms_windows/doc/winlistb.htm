@@ -1,0 +1,130 @@
+<HTML><HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Listbox">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, Listbox, Informatik">
+<TITLE>Windows Programmierung: Listbox</TITLE>
+</HEAD>
+<BODY>
+<a name="top">
+<table width=100%><tr><td bgcolor=yellow  align=center>
+<H1><font color=black>Windows Programmierung: Listbox</font></H1>
+</td></tr></table>
+<p><font face="Helvetica" size=3">
+<a href="wincontr.htm#top">Einf&uuml;hrende Informationen</a>
+ &uuml;ber die Programmierung von Kontrollelementen werden hier vorausgesetzt.
+</font><p>
+
+<H2>Stile: Eigenschaften einer Listbox</H2>
+
+Die Eigenschaftsflags sind im Ressourcen-Editor oder als Parameter
+bei CreateWindow anzugeben und bestimmen das Erscheinungsbild
+der Listbox bis zu ihrer Zerst&ouml;rung.
+<p>
+<H3>Mehrfachselektion</H3>
+
+Die normale Listbox l&auml;&szlig;t nur eine einfache Selektion
+zu. Das erleichtert die Programmierung und auch die Logik des
+Programmes erheblich. An vielen Stellen kann es aber die Benutzbarkeit
+des Programmes um ein Vielfaches erh&ouml;hen, wenn man eine Mehrfachselektion
+anbietet.
+<p>
+LBS_MULTIPLESEL erm&ouml;glicht die Mehrfachselektion. Das Verhalten
+wird aber die meisten Windows-Anwender irritieren. Sie werden eher
+mit der zus&auml;tzlichen Eigenschaft LBS_EXTENDEDSEL zufrieden sein.
+<p>
+
+<H3>Sortierung</H3>
+
+Durch den Stil LBS_SORT wird die Listbox Neuzug&auml;nge alphabetisch
+einsortieren. Viele Ressource-Editoren geben diesen Stil vor.
+Die tats&auml;chliche Position des neuen Eintrags erf&auml;hrt man aus
+dem R&uuml;ckgabewert der entsprechenden Funktionen.
+
+<p>
+<H3>Gr&ouml;&szlig;enanpassung</H3>
+
+Eine normale Listbox wird in ihrer Gr&ouml;&szlig;e so ausgerichtet,
+da&szlig; es keine halben Zeilen gibt. In manchen F&auml;llen ist
+das aber erw&uuml;nscht. Beispielsweise wenn eine Listbox ein Fenster
+vollst&auml;ndig ausf&uuml;llen soll.
+Hier hilft die Eigenschaft LBS_NOINTEGRALHEIGHT.
+<p>
+
+<H3>Ereignisempfang vorbereiten</H3>
+
+Sehr wichtig ist die Eigenschaft LBS_NOTIFY. Nur Listboxen mit dieser
+Eigenschaft erhalten bestimmte Nachrichten wie
+LBN_DBLCLK,
+LBN_SELCANCEL und
+LBN_SELCHANGE.
+
+<H2>Ereignisbehandlung</H2>
+
+Auf die meisten Ereignisse im Zusammenhang mit einer Listbox 
+erh&auml;lt man eine Nachricht WM_COMMAND. Die Listbox-ID steht im Low-Word
+von wParam, die eigentliche Nachricht im High-Word. Hier ein Ausschnitt aus
+der Fensterfunktion, die einen Doppelklick und einen Selektionswechsel
+auswertet:
+
+<pre>
+   case WM_COMMAND:
+      switch(LOWORD(wParam)) {
+         case ID_LISTBOX:
+            switch (HIWORD(wParam)) {
+               case LBN_DBLCLK:
+                  ListIndex = SendMessage(hListe, LB_GETCURSEL, 0, 0);
+                  Person = (tPerson *)SendMessage(hListe, LB_GETITEMDATA, ListIndex, 0);
+                  EndDialog(hWnd, IDOK); // simuliere Ende der Dialogbox
+                  return TRUE;
+               case LBN_SELCHANGE:
+                  // lParam enthaelt die hwnd der listbox
+                  ListIndex = SendMessage((HWND)lParam, LB_GETCURSEL, 0, 0);
+</pre>
+
+<table border>
+<tr><td>LBN_DBLCLK</td><td>Item wurde doppelt angeklickt (oder Returntaste)</td></tr>
+<tr><td>LBN_SELCANCEL</td><td>Anwender hat Selektion abgebrochen</td></tr>
+<tr><td>LBN_SELCHANGE</td><td>Das selektierte Item wurde gewechselt</td></tr>
+</table>
+
+<H2>Aktionen</H2>
+
+<H3>Hinzuf&uuml;gen und Entfernen von Eintr&auml;gen</h3>
+
+<p><table border>
+<tr><th>Nachricht</th><th>wParam</th><th>lParam</th><th>R&uuml;ckgabe</th></tr>
+<tr><td>LB_ADDSTRING </td><td>  0 </td><td>Zeiger auf den String</td><td>Index des neuen Items, bei Fehler LB_ERR</td></tr>
+<tr><td>LB_INSERTSTRING </td><td> Zielindex des Items, -1 f&uuml;r hinten</td><td> Zeiger auf den String </td><td> bei Fehler LB_ERR </td></tr>
+<tr><td>LB_DELETESTRING </td><td> Index des Items</td><td> 0 </td><td> bei Fehler LB_ERR </td></tr>
+<tr><td>LB_RESETCONTENT </td><td> 0 </td><td> 0 </td><td> bei Fehler LB_ERR </td></tr>
+
+</table><p>
+
+AddString h&auml;ngt Eintr&auml;ge hinten an, sofern die Listbox nicht den Style LBS_SORT besitzt.
+ResetContent l&ouml;scht alle Eintr&auml;ge der Liste.
+
+<H3>Daten hinterlegen</H3>
+
+Damit man den Listbox-Eintr&auml;gen Programmdaten eindeutig zuordnen kann,
+ist es m&ouml;glich, jedem Eintrag einen 4-Byte-Wert hinzuzuf&uuml;gen: genug
+f&uuml;r einen Zeiger auch auf gr&ouml;&szlig;ere Datenobjekte.
+
+<p><table border>
+<tr><th>Nachricht</th><th>wParam</th><th>lParam</th><th>R&uuml;ckgabe</th></tr>
+<tr><td>LB_SETITEMDATA </td><td> Index des Items</td><td>4-Byte-Data</td><td>Bei Fehler LB_ERR</td></tr>
+<tr><td>LB_GETITEMDATA </td><td> Index des Items</td><td> NULL </td><td>4-Byte-Data</td></tr>
+</table><p>
+
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+<font size=2>(C) Copyright 1999 Arnold Willemer</font>
+</td></tr></table>
+
+</body>
+</html>
+

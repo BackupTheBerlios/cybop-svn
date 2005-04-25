@@ -1,0 +1,13 @@
+#define IDR_MAINFRAME		128
+#define IDD_RAHMEN_DIALOG	102
+#define IDS_APP_TITLE		103
+#define IDM_ABOUT		104
+#define IDM_EXIT		105
+#define IDM_GRAY		106
+#define IDM_AKTIV		107
+#define IDS_HELLO		108
+#define IDI_RAHMEN	        109
+#define IDI_SMALL		110
+#define IDC_RAHMEN	        111
+#define IDC_MYICON		2
+#define IDC_STATIC	        -1

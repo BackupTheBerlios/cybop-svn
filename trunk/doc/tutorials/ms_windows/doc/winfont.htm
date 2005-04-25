@@ -1,0 +1,284 @@
+<HTML>
+<HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Schriften">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, Schriften, Font, Schriftarten">
+<TITLE>Programmierung der Schriften unter Windows</TITLE>
+</HEAD>
+<BODY>
+<table width=100%><tr><td bgcolor=yellow align=center>
+<H1 align=center><font color=black>Schriften unter Windows</font></H1>
+</td></tr></table>
+
+<H2>Schrift unter Windows</H2>
+
+Es gibt drei Datentypen, die mit Schrift zu tun haben, denen man in diesem Text
+begegnen wird.
+
+<dl>
+<dt> LOGFONT </dt>
+<dd>
+  Beschreibt die Schrift mit ihren Eigenschaften, wie Schrifttyp, -gr&ouml;&szlig;e und -farbe.
+  Die Gr&ouml;&szlig;e ist allerdings leider die in Pixeln und mu&szlig; entsprechend je nach
+  Ausgabemedium umgerechnet werden.
+</dd>
+<dt> CHOOSEFONT </dt>
+<dd>
+  Ist die Struktur f&uuml;r den Schriftauswahldialog.
+  Sie enth&auml;lt auch einen Zeiger auf einen LOGFONT, der die Schrift beschreibt,
+  die der Anwender ausw&auml;hlt.
+  Diese Struktur enth&auml;lt die Gr&ouml;&szlig;e in Punkt, allerdings mit 10 multipliziert.
+</dd>
+<dt> HFONT </dt>
+<dd>
+  Dies ist ein Handle auf eine Schrift, das von Windows ben&ouml;tigt wird, um eine Schrift mit
+  einem Ausgabemedium zu verheiraten. Mit Hilfe der Funktion <tt>GetFontIndirect</tt> kann sie
+  aus einem LOGFONT erzeugt werden.
+</dd>
+</dl>
+
+<H2>ChooseFont: Der Schriftendialog</H2>
+
+Wir beginnen mit der Auswahl der Schrift durch den Benutzer.
+Seit Windows 3.1 gibt es den Font-Dialog, ein Common Dialog, der den Anwender
+eine Schrift ausw&auml;len l&auml;&szlig;t. Er wird mit der Funktion <tt>ChooseFont</tt>
+aufgerufen und will als Parameter einen Zeiger auf eine Variable vom Typ
+<tt>CHOOSEFONT</tt>.
+
+<H3>Erster Aufruf</H3>
+
+Die Struktur CHOOSEFONT enth&auml;lt einen Zeiger auf eine Variable vom Typ 
+LOGFONT im Feld lpLogFont.
+Um die Dialogbox zu steuern, wird die CHOOSEFONT-Variable best&uuml;ckt und die
+Ergebnisse befinden sich ebenfalls dort, respektive in der LOGFONT-Struktur.
+<p>
+F&uuml;r den Anfang sollte man alle Strukturen auf bin&auml;r 0 setzen.
+<p>
+Wie einige der Windows-Strukturen braucht auch CHOOSEFONT Informationen
+&uuml;ber die eigene Gr&ouml;&szlig;e im Feld <tt>lStructSize</tt>.
+Die Besetzung der Flags ist wichtig. Es gibt unter anderem an, welche
+Schriftarten ausw&auml;hlbar sind. Steht dort weder CF_SCREEN noch CF_PRINTER
+noch CF_BOTH, behauptet Windows, es seien keine Schriften installiert.
+So pr&auml;pariert, startet schon einmal der Font-Dialog.
+
+<p>
+<table border width=100%><tr><td bgcolor=lightblue>
+<pre>
+CHOOSEFONT myChooseFont = {0};
+LOGFONT    myLogFont    = {0};
+
+   myChooseFont.lStructSize = sizeof( CHOOSEFONT );
+   myChooseFont.lpLogFont = &myLogFont;
+   myChooseFont.Flags = CF_EFFECTS | CF_BOTH;
+   if( ChooseFont( &myChooseFont ) != TRUE ) {
+</pre></td></tr></table><p>
+
+<p>
+
+<H3>Auslesen des Font-Dialogs</H3>
+
+Nach Aufruf von ChooseFont finden sich die Aktionen des Anwenders teils in
+myLogFont teils in myChooseFont.
+
+Die Schriftgr&ouml;&szlig;e in Punkt findet sich in <tt>iPointSize</tt> der CHOOSEFONT-Struktur.
+Allerdings hat Windows sie noch mit 10 multipliziert. 
+F&uuml;r die Berechnung m&uuml;ssen wir also sp&auml;ter durch 10 teilen.
+
+
+<H3>Vorbesetzen der Werte im Fontdialog</H3>
+
+Der Anwender wird erwarten, da&szlig; er die zuletzt ausgew&auml;hlte Schrift in seinem
+Font-Dialog wieder vorfindet. Dazu m&uuml;ssen wir die Werte vorbelegen.
+Naheliegenderweise geschieht dies, indem man die Werte der LOGFONT f&uuml;llt.
+Leider funktioniert das nur, wenn Flags auch <tt>CF_INITTOLOGFONTSTRUCT</tt> enth&auml;lt.
+
+
+<H3>Verfeinerungen</H3>
+
+Das Feld hwndOwner
+sollte mit dem HWND des startenden Fensters versehen werden, sonst steht die
+Dialogbox so beziehungslos auf dem Desktop herum.
+
+<p>
+Wird Flag mit CF_BOTH besetzt, liefert der Font-Dialog die Schriften, die sowohl
+auf dem Bildschirm als auch auf dem Drucker verf&uuml;gbar sind.
+Allerdings mu&szlig; man den Device-Kontext des Druckers dazu im hDC eingetragen haben. 
+
+
+<H2>Skalierung und Erzeugung der Schrift</H2>
+
+Nun kann die Schriftart erzeugt werden. Allerdings wird bei einem simplen 
+Aufruf von CreateFont (oder CreateFontIndirect, die beiden unterscheiden sich 
+nur in der Art der Parameter&uuml;bergabe) f&uuml;r den Drucker eine viel zu 
+kleine Schrift verwendet. Um dies 
+anzupassen, mu&szlig; das Feld lfHeight in der LOGFONT-Struktur 
+angepa&szlig;t werden. Ist das Feld lfWidth 0, berechnet Windows die Breite 
+aus den Charakteristika der Schrift selbst. 
+Dies wird normalerweise auch so von ChooseFont &uuml;bernommen.
+<P>
+Wie erh&auml;lt man die korrekte H&ouml;he? Die gew&auml;hlte 
+Punktgr&ouml;&szlig;e wurde in der CHOOSEFONT-Struktur beim Aufruf von ChooseFont 
+abgelegt. Ein Punkt ist ein 72stel Zoll. Wieviele Pixel pro Zoll gedruckt werden, 
+kann man den Druckerkontext mit Hilfe der Funktion 
+<tt>GetDeviceCaps</tt> fragen.
+<p>
+Also multipliziert man senkrechte Aufl&ouml;sung mit Punktgr&ouml;&szlig;e und 
+teilt dies durch 72. Die Funktion MulDiv erledigt dies f&uuml;r uns. 
+Das Ergebnis kommt nach lfHeight im LOGFONT und nun k&ouml;nnen wir <tt>CreateFont</tt> 
+darauf loslassen. 
+Windows sucht sich eine passende Schrift aus und liefert ein Handle 
+vom Typ HFONT zur&uuml;ck. Genau diesen erwartet sp&auml;ter SelectObject von uns.
+
+<p><table border width=100%><tr><td bgcolor=lightblue>
+<pre>
+LONG yLogPixelsPerInch;
+HFONT MyFont;
+
+   yLogPixelsPerInch = GetDeviceCaps(pd.hDC, LOGPIXELSY);
+   lfTemp.lfHeight = -MulDiv(cfTemp.iPointSize/10, yLogPixelsPerInch, 72);
+
+   MyFont = CreateFontIndirect( &lfTemp );
+</PRE></td></tr></table><P>
+
+
+
+<H2>Darstellen der Schrift</H3>
+
+Gezeichnet wird unter Windows immer in einen DC, einen Device-Context.
+Man spricht diesen über ein Handle an, eine Variable vom Typ HDC.
+Hinter diesem HDC wird die Hardware der Grafikausgabe verborgen.
+<p>
+Der einfachste Fall des DC taucht in jedem "Hello World"-Programm auf:
+es ist der DC des Fensters, der von der Funktion BeginPaint
+geliefert wird, wenn die Fensterfunktion WM_PAINT empfangen hat.
+<p>
+Die Skalierung benoetigt hier eine Variable namens <tt>PunktGroesse</tt>,
+die an anderer Stelle ermittelt oder vorgegeben wird.
+<p>
+Mit der Funktion CreateFontIndirect wird
+aus der LOGFONT-Struktur ein Font gebildet. Das Handle
+HFONT wird als R&uuml;ckgabewert geliefert und wird mit SelectObject 
+an den DeviceContext (DC) gebunden.
+
+<p><table border width=100%><tr><td bgcolor=lightblue>
+<pre>
+	case WM_PAINT:
+		hdc = BeginPaint(hWnd, &ps);
+		RECT rt;
+		GetClientRect(hWnd, &rt);
+		// Skalierung
+		LogFont.lfHeight = -MulDiv(PunktGroesse, 
+			GetDeviceCaps(pd.hDC, LOGPIXELSY), 72);
+		// Font-Initialisierung
+		HFONT Font, oldFont;
+		Font = CreateFontIndirect(&LogFont);
+		oldFont = (HFONT)SelectObject(hdc, Font);
+		DrawText(hdc, szHello, strlen(szHello), &rt, DT_CENTER);
+
+		SelectObject(hdc, oldFont); // Font aufraeumen
+		EndPaint(hWnd, &ps);
+		break;
+</PRE></td></tr></table><P>
+
+F&uuml;r den Drucker erh&auml;lt man den DC beispielsweise nach dem &Ouml;ffnen
+der <a href="windruck.htm">Druckdialogbox</a>.
+<p>
+
+<H2>Ein Beispiel</H2>
+
+Im folgenden Listing ist eine kurze Testfunktion aufgef&uuml;hrt, die nichts macht, 
+als zun&auml;chst eine Schrift auszuw&auml;hlen, anschlie&szlig;end den 
+Drucker und zwei Zeilen auf den Drucker zu geben. 
+Einziger ben&ouml;tigter Parameter von au&szlig;en ist ein HWND, das aber nur zur 
+Positionierund der Dialogboxen gebraucht wird. 
+Man kann also die Routine fast in jedes <a href="winframe.htm">Windows-Programm</a>
+einh&auml;ngen, um es zu testen.
+
+
+<p>
+<table border width=100%><tr><td bgcolor=lightblue>
+<pre>
+TryPrinting(HWND hWnd)
+{
+PRINTDLG pd;
+DOCINFO di;
+CHOOSEFONT cfTemp;
+LOGFONT lfTemp;
+HFONT MyFont;
+char String[80];
+
+   memset(&lfTemp, '\0', sizeof(LOGFONT));
+   memset(&cfTemp, '\0', sizeof(CHOOSEFONT));
+   cfTemp.lStructSize = sizeof( CHOOSEFONT );
+   cfTemp.hwndOwner = hWnd;
+   cfTemp.hDC = 0;
+   cfTemp.lpLogFont = &lfTemp;
+   cfTemp.Flags = CF_EFFECTS | CF_BOTH;
+   if( ChooseFont( &cfTemp ) != TRUE ) {
+      return 0;
+   }
+
+   memset(&pd, 0, sizeof(PRINTDLG));
+   pd.lStructSize = sizeof(PRINTDLG);
+   pd.hwndOwner = hWnd;
+   pd.hDevMode  = NULL;
+   pd.hDevNames = NULL;
+   pd.Flags     = PD_RETURNDC;
+   pd.nCopies   = 1;
+
+   // die DOCINFO dient der Beschreibung des Jobs fuer den Druckmanager
+   memset(&di, 0, sizeof(DOCINFO));
+   di.cbSize	= sizeof(DOCINFO);
+   di.lpszDocName	= "drucktest";
+   di.lpszOutput	= NULL;	// Ziel wird in Dialog ausgewählt
+   if (PrintDlg(&pd)) {
+      // Skalierung
+      LONG yLogPixelsPerInch;
+
+      yLogPixelsPerInch = GetDeviceCaps(pd.hDC, LOGPIXELSY);
+      lfTemp.lfHeight = -MulDiv(cfTemp.iPointSize/10, yLogPixelsPerInch, 72);
+
+      MyFont = CreateFontIndirect( &lfTemp );
+
+      SelectObject(pd.hDC, MyFont);
+
+      // drucken
+      StartDoc(pd.hDC, &di); { // Dokument wird eröffnet
+
+      StartPage(pd.hDC);
+      // Inhalt ausgeben
+      sprintf(String, "Dies ist ein Drucktest, lfHeight: %ld", lfTemp.lfHeight);
+
+      SelectObject(pd.hDC, MyFont);
+
+      TextOut(pd.hDC, 70, 70, String, strlen(String));
+      TextOut(pd.hDC, 10, 17, String, strlen(String));
+      EndPage(pd.hDC);
+
+      EndDoc(pd.hDC);  // Dokument wird geschlossen
+      DeleteDC(pd.hDC);
+   }
+   if (pd.hDevMode != NULL) GlobalFree(pd.hDevMode);
+   if (pd.hDevNames != NULL) GlobalFree(pd.hDevNames);
+}
+</pre></td></tr></table>
+
+<H4>Literatur:</H4>
+<OL>
+<LI> Thomas Hornschuh: Druckmittel nutzen - Druckerprogrammierung unter Windows. c't 8/95, S. 222ff.
+<LI> Marcellus Buchheit: Windows Programmierbuch. Sybex 1992.
+<LI> Charles Petzold: Programmierung unter Windows 3.1, Microsoft Press, 1992.
+<LI> Peter Norton, Paul Yao: Windows 3, Programmiertechniken f&uuml;r Profis, Markt &amp; Technik, 1991.
+<LI> Thomas Hornschuh: Tuschkasten-B&uuml;rokratie - Grafikprogrammierung unter Windows. c't 7/94, S. 206ff.
+</OL>
+
+<HR>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</BODY></HTML>

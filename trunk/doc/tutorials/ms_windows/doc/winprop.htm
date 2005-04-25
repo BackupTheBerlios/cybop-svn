@@ -1,0 +1,289 @@
+<HTML>
+<HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Property Sheet">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, Property Sheet, Informatik">
+<TITLE>Windows-Programmierung: Property Sheet
+</TITLE>
+</HEAD>
+<BODY>
+<a name="top"><table width=100%><tr><td bgcolor=yellow  align=center>
+<H1>Windows Programmierung: Property Sheet</H1>
+</td></tr></table>
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center><p>
+
+Das Property Sheet ist kein Kontrollelement, sondern ein kompletter Dialog.
+Man kann ihn also nicht einfach in einem normalen Fenster unterbringen.
+Ein Property Sheet besteht aus mehreren Seiten, die jeweils wie eine Dialogbox
+in den Ressourcen definiert wird.
+Es werden lediglich der Ok- und der Abbruch-Buttonweggelassen, 
+da diese vom Property-Sheet geliefert werden.
+
+
+<H2>Erzeugung eines Property Sheets</H2>
+
+Zun&auml;chst wird im Ressource Editor f&uuml;r jede Seite ein Dialog erzeugt.
+Auch eine Dialogfensterfunktion wird f&uuml;r jede der Seiten geschrieben.
+F&uuml;r jede Seite wird eine Struktur PROPSHEETPAGE zur Beschreibung angelegt,
+die in einem Array organisiert sind. Die Adresse dieses Arrays wird in der
+Struktur PROPSHEETHEADER eingetragen und mit der Adresse dieser Variable als 
+Parameter wird die Funktion <tt>PropertySheet</tt> aufgerufen.
+<p>
+Zur Vereinfachung des Beispiels wird nur ein Dialog und eine Dialogfensterfunktion
+f&uuml;r mehrere Seiten verwendet. Die Ressource-ID ist IDD_PERSON und die 
+Fensterfunktion des Dialoges ist DataInput.
+
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+#include &lt;COMMCTRL.H>
+
+extern HINSTANCE hInst;
+
+HWND CreatePropertySheet (HWND hwndOwner)
+{
+PROPSHEETPAGE psp [2];
+PROPSHEETHEADER psh = {0};
+
+	psp[0].dwSize = sizeof (PROPSHEETPAGE);
+	psp[0].dwFlags = PSP_USETITLE;
+	psp[0].hInstance = hInst;
+	psp[0].pszTemplate = MAKEINTRESOURCE (IDD_PERSON);
+	psp[0].pszIcon = NULL;
+	psp[0].pfnDlgProc = DataInput;
+	psp[0].pszTitle = "Person";
+	psp[0].lParam = 0;
+
+	psp[1].dwSize = sizeof (PROPSHEETPAGE);
+	psp[1].dwFlags = PSP_USETITLE;
+	psp[1].hInstance = hInst;
+	psp[1].pszTemplate = MAKEINTRESOURCE (IDD_PERSON);
+	psp[1].pszIcon = NULL;
+	psp[1].pfnDlgProc = DataInput;
+	psp[1].pszTitle = "Vater";
+	psp[1].lParam = 0;
+
+	psh.dwSize = PROPSHEETHEADER_V1_SIZE;
+	psh.dwFlags = PSH_PROPSHEETPAGE;
+	psh.hwndParent = hwndOwner;
+	psh.hInstance = hInst;
+	psh.pszIcon = NULL;
+	psh.pszCaption = (LPSTR)"Family";
+	psh.nPages = sizeof (psp) / sizeof (PROPSHEETPAGE);
+	psh.ppsp = (LPCPROPSHEETPAGE) &psp;
+
+	return (HWND)PropertySheet (&psh);
+);
+</pre></td></tr></table><p>
+
+<H4>Seitendefinition</H4>
+
+Jede Seite erh&auml;lt die Information &uuml;ber den zugeh&ouml;rigen Dialog.
+Das ist die Ressource-ID in pszTemplate und die Dialogfensterfunktion in pfnDlgProc.
+Das Element dwFlags besagt, welche Elemente vom Anwender vom Standard abweichend behandelt werden.
+In diesem Fall ist das pszTitle mit dem Text, der in der zugeh&ouml;rigen Lasche erscheinen soll.
+
+<H4>Headerdefinition</H4>
+
+Hier werden die Dialogseiten zusammengefasst.
+Die Adresse des Seiten-Arrays wird in ppsp angegeben und die Anzahl der Seiten in nPages
+hinterlegt.
+Der Textzeiger in pszCaption legt fest, welcher Text in der Titelleiste des Dialogs erscheint.
+
+<p>
+Wird im dwFlags-Element PSH_NOAPPLYNOW hinzugenommen (durch Odern mit | ), erscheint der
+Apply-Button nicht.
+<p>
+Bei der Bestimmung der Gr&ouml;sse der PROPSHEETHEADER-Struktur ist die Angabe
+ungew&ouml;hnlich. Hier verwendet man &uuml;blicherweise eine Konstruktion wie
+<pre>
+  psh.dwSize = sizeof(PROPSHEETHEADER);
+</pre>
+  Allerdings besteht das Problem, da&szlig; mit der Version 4.71 der COMCTL32.DLL die Struktur
+  etwas gr&ouml;&szlig;er geworden ist. Da sizeof eine Konstante zur Laufzeit liefert, w&uuml;rde
+  ein Entwicklungssystem, das einen Update hat, ein Programm erzeugen, das unter alten Versionen
+  nicht l&auml;uft. Man kann dies verhindern, indem man 
+<pre>
+  psh.dwSize = PROPSHEETHEADER_V1_SIZE;
+</pre>
+  verwendet. Will man dynamisch arbeiten, mu&szlig; die Funktion <tt>DllGetVersion</tt> verwendet
+  werden, um zu ermitteln, welche Version auf dem aktuellen System l&auml;uft.
+
+
+<H4>R&uuml;ckgabewert</H4>
+
+Bei modalen Dialogen wird ein positiver Wert zur&uuml;ckgegeben, wenn der Dialog
+mit OK verlassen wurde, ansonsten -1.
+
+<H2>Fensterfunktion</H2>
+
+Die Fensterfunktion unterscheidet sich auf den ersten Blick nicht von der
+eines normalen Dialogs.
+Sie verwaltet eine Seite, nicht den gesamten PropertySheet.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+BOOL APIENTRY DataInput(HWND hDlg, UINT message, UINT wParam, LONG lParam)
+{
+PROPSHEETPAGE *ps;
+
+	switch (message) {
+	case WM_INITDIALOG: 
+		// Save the PROPSHEETPAGE information.
+		ps = (PROPSHEETPAGE *)lParam;
+		// sichere das in den Fensterdaten...
+		return TRUE;
+
+	case WM_NOTIFY:
+		switch (((NMHDR FAR *)lParam)->code) {
+			case PSN_SETACTIVE:
+				break;
+
+			case PSN_APPLY:
+				if (AllOk()) {
+					SetWindowLong(hDlg, DWL_MSGRESULT,
+						PSNRET_NOERROR);
+				} else {
+					SetWindowLong(hDlg, DWL_MSGRESULT,
+						PSNRET_INVALID_NOCHANGEPAGE);
+				}
+				return TRUE;
+
+			case PSN_KILLACTIVE:
+				SetWindowLong(hDlg, DWL_MSGRESULT, FALSE);
+				return 1;
+
+			case PSN_RESET:
+				SetWindowLong(hDlg, DWL_MSGRESULT, FALSE);
+				break;
+		}
+	}
+	return FALSE;
+} 
+</pre></td></tr></table><p>
+
+Bei der Initialisierung wird der Zeiger auf die PropertyPage, also die Seite
+&uuml;bergeben. Da dieser Dialog mehrfach verwendet wird, muss man die Daten f&uuml;r
+jedes Objekt in den Fensterdaten sichern. Dies wird an 
+<a href="windial.htm#localdata">anderer Stelle</a> beschrieben.
+Wird f&uuml;r jede Seite eine andere Dialogfensterfunktion verwendet, ist das nicht notwendig.
+<p>
+Die Fensterfunktion darf nicht EndDialog aufrufen.
+Statt der Behandlung von OK und Abbruch werden die WM_NOTIFY-Ereignisse
+PSN_SETACTIVE, PSN_APPLY, PSN_KILLACTIVE und PSN_RESET bearbeitet 
+
+<H4>PSN_APPLY</H4>
+
+Das Ereignis zeigt an, dass die &Auml;nderungen angewandt werden sollen.
+Es kann also OK, Apply oder der Schliess-Button angew&auml;hlt worden sein.
+lParam enth&auml;lt den Zeiger auf eine PSHNOTIFY-Struktur.
+In dessen lParam-Feld steht TRUE, wenn der Anwender OK gedr&uuml;ckt hat.
+<p>
+Wird PSNRET_INVALID_NOCHANGEPAGE zur&uuml;ckgegeben, wird verhindert,
+dass die Daten &uuml;bernommen werden und der Fokus wird auf diese
+Seite gebracht. Die R&uuml;ckgabe von PSNRET_NOERROR akzeptiert die &Auml;nderungen.
+<p>
+Die R&uuml;ckgabe erfolgt in diesem Fall dadurch, dass SetWindowLong mit dem Parameter DWL_MSGRESULT 
+gerufen wird. Der dritte Parameter sind die oben genannten PSNRET-Konstanten.
+Damit dies gelesen wird, muss TRUE returniert werden. 
+
+
+<H4>PSN_KILLACTIVE</H4>
+
+Diese Seite verliert den aktiven Zustand. Sei es, weil eine andere Seite angew&auml;hlt
+wird oder weil OK gew&auml;hlt wurde.
+
+<p>
+Auf die gleiche Weise wie bei PSN_APPLY kann ein Wechseln der Seite verhindert werden.
+Es sollte eine Messagebox erscheinen, die dieses Verhalten dem Anwender erl&auml;utert.
+
+<H4>PSN_RESET</H4>
+
+Der PropertySheet wird zerst&ouml;rt. Alle &Auml;nderungen seit dem letzten
+PSN_APPLY sind zu verwerfen.
+<p>
+
+<H4>PSN_SETACTIVE</H4>
+
+Diese Seite wird aktiviert. Hier erfolgen die Initialisierungen.
+
+<H2>Apply-Button</H2>
+
+Der Apply-Button ist zu Anfang disabled.
+Um ihn zu aktivieren, muss die Anwendung die Nachricht PSM_CHANGED an den Property Sheet
+senden. Durch Senden von PSM_UNCHANGED wird er wieder deaktiviert.
+Sollte der durch den Apply-Button gesetzte Zustand unumkehrbar sein,
+sollte die Seite PSM_CANCELTOCLOSE senden.
+Dadurch wird der Text des Ok-Buttons in Schliessen ge&auml;ndert.
+
+
+<H2>Wechseln der Seiten</H2>
+
+Durch Senden der Nachrichten PSM_ADDPAGE und PSM_REMOVEPAGE kann man dynamisch Seiten
+hinzuf&uuml;gen und l&ouml;schen.
+<p>
+<H3>Hinzuf&uuml;gen</H3>
+
+<pre>
+PSM_ADDPAGE 
+    wParam = 0; 
+    lParam = (LPARAM) (HPROPSHEETPAGE) hpage;
+
+oder
+
+BOOL PropSheet_AddPage(HWND hPropSheetDlg, HPROPSHEETPAGE hpage);		
+</pre>
+
+<dl>
+<dt>hpage </dt><dd>
+  Handle der Seite, die hinzugef&uuml;gt werden soll.
+  Die Seite mu&szlig; zuvor mit der Funktion <tt>CreatePropertySheetPage</tt>
+  erzeugt worden sein.
+<pre>
+  HPROPSHEETPAGE CreatePropertySheetPage(LPCPROPSHEETPAGE lppsp);		
+</pre>
+  Als Parameter erwartet <tt>CreatePropertySheetPage</tt> die Adresse der PROPSHEETPAGE-Struktur,
+  die die Seite definiert. Der R&uuml;ckgabewert ist das gesuchte Handle.
+
+</dd>
+</dl>
+
+<H3>L&ouml;schen</H3>
+
+<pre>
+PSM_REMOVEPAGE 
+    wParam = (WPARAM) (int) index; 
+    lParam = (LPARAM) (HPROPSHEETPAGE) hpage); 
+oder
+
+VOID PropSheet_RemovePage(HWND hPropSheetDlg, int index, HPROPSHEETPAGE hpage);
+</pre>
+
+
+<dl>
+<dt>index </dt><dd>
+  0-basierter Index der zu entfernenden Seite
+<dt>hpage </dt><dd>
+  Handle der zu entfernenden Seite.
+</dd>
+</dl>
+
+Beim L&ouml;schen kann eines von beiden angegeben werden. Wird beides spezifiziert,
+geht hpage vor.
+
+
+<hr>
+<table width=100%>
+<tr><td>
+<a target="_top" href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</BODY>
+</HTML>

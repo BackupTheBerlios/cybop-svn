@@ -1,0 +1,215 @@
+<HTML><HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Dialoge">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Dialog, Programmierung, Dialoge, Informatik">
+<TITLE>Windows Programmierung: Dialogboxen</TITLE>
+</HEAD>
+<BODY>
+<a name="top"><table width=100%><tr><td bgcolor=yellow  align=center>
+<H1>Windows Programmierung: Dialogboxen</H1>
+</td></tr></table>
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center><p>
+
+<ul>
+<li><a href="#simple">Eine einfache Dialogbox</a>
+<li><a href="#diapara">Dialogbox mit Parametern</a>
+<li><a href="#localdata">Dialogbox mit lokalen Fensterdaten</a>
+<li><a href="#modeless">Nicht-modale Dialogboxen</a>
+</ul>
+
+
+<a name="simple"><H2>Eine einfache Dialogbox</H2>
+
+Die Dialogbox wird im Ressource-Editor gestaltet. Das Ergebnis ist eine Datei
+mit der Endung rc, die zum Projekt hinzugebunden wird. Der Ressource-Compiler
+erstellt eine Datei mit der Endung res.
+<p>
+Im Ressource-Editor erh&auml;lt sowohl die Dialogbox als auch jedes Kontrollelement
+des Dialogs eine Kennung (SHORT), &uuml;ber die sie identifizierbar ist.
+Wie bei einem Fenster gibt es eine Fensterfunktion, die das Verhalten des Fensters festlegt.
+Eine Dialogfensterfunktion unterscheidet sich in einigen Details von der normalen
+Fensterfunktion.
+So lautet die Initialisierungsnachricht WM_INITDIALOG statt WM_CREATE.
+Das Ende der Dialogbox erfolgt durch den Aufruf von EndDialog. Dabei wird der
+zweite Parameter der von EndDialog der aufrufenden Funktion zur&uuml;ckgegeben.
+<p>
+
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+// Modul fuer die Erzeugung einer Dialogbox ABOUT
+// (C) Arnold Willemer
+
+#include <windows.h>
+
+#include "main.h"    // hier steht die Deklaration von GlobalInstance
+#include "fam_rc.h"  // Ressourcen-Header
+
+BOOL CALLBACK InfoDlgFkt(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+
+   switch (message) {
+   case WM_INITDIALOG:	// Initialisierung der Elemente
+      break;
+   case WM_COMMAND:
+   	switch(wParam) {
+      	case IDOK:
+            EndDialog(hWnd, IDOK);
+            return TRUE;
+         case IDCANCEL:
+            EndDialog(hWnd, IDCANCEL);
+            return TRUE;
+      } // switch COMMAND
+   }
+   return FALSE;
+}
+
+About(HWND hWnd)
+{
+   if (DialogBox(GlobalInstance, MAKEINTRESOURCE(DIA_INFO),
+                      (HWND)hWnd, InfoDlgFkt)==IDOK) {
+      return 1;
+   } else {
+      return 0;
+   }
+}
+</pre></td></tr></table><p>
+
+Der Start der Dialogbox erfolgt durch den Aufruf der Funktion <tt>DialogBox</tt> oder einer 
+ihrer Verwandten. Durch die Parameter wird festgelegt, welche Ressource-ID und welche
+Dialogfensterfunktion herangezogen wird. Das Programm erh&auml;lt erst dann wieder die Kontrolle,
+wenn die Dialogfensterfunktion <tt>EndDialog</tt> aufruft und mit dieser Funktion auch den
+R&uuml;ckgabewert von <tt>DialogBox</tt> bestimmt.
+
+<hr>
+<a name="diapara"><h2>Dialogbox mit Parametern</h2>
+
+In vielen F&auml;llen m&ouml;chte man der Dialogbox Daten &uuml;bergeben. Dies funktioniert
+nat&uuml;rlich auch mit globalen Variablen. Abgesehen von der mangelnden Eleganz scheitert diese
+Methode sp&auml;testens bei rekursiven Aufrufen der Dialogbox.
+<p>
+Die Funktion <tt>DialogBoxParam</tt> verh&auml;lt sich wie <tt>DialogBox</tt>. Sie erlaubt
+aber einen LONG als Parameter, der an die Dialogbox weitergereicht wird. Da man dar&uuml;ber auch
+einen Zeiger &uuml;bergeben kann, sind beliebige Daten zu &uuml;bermitteln.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+   if (DialogBoxParam(GlobalInstance,
+                      MAKEINTRESOURCE(DIA_FELD), (HWND)hWnd,
+                      FeldDlgFkt,
+                      (LPARAM)ZeilenIndex)==IDOK) {
+</pre></td></tr></table><p>
+
+In der Fensterfunktion wird er beim Eintreten der Message WM_INITDIALOG
+einfach aus dem lParam gelesen. Hierin befindet sich der &uuml;bergebene Wert.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+BOOL CALLBACK FeldDlgFkt(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+static long ZeilenIndex;
+
+   switch (message) {
+   case WM_INITDIALOG:
+      ZeilenIndex = (long) lParam;
+</pre></td></tr></table><p>
+
+Da bei jedem Ereignis die Funktion erneut gestartet wird, muss sich die Dialogbox
+die &uuml;bermittelten Daten merken. Da man globale Variablen vermeiden will, muss
+man mit lokalen Fensterdaten arbeiten.
+
+<hr><a name="localdata"><H2>Dialogbox mit lokalen Fensterdaten</H2>
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+{
+tData *myData;
+
+   myData = (tData *) GetWindowLong(hWnd, GWL_USERDATA);
+   switch (message) {
+   case WM_INITDIALOG:
+      myData = (tData *)lParam;
+      SetWindowLong(hWnd, GWL_USERDATA, (LONG)myData);
+      ...
+</pre></td></tr></table><p>
+
+Hier werden Daten im WM_INITDIALOG als Parameter &uuml;bernommen (siehe oben) und 
+gleich in die lokalen Fensterdaten geschoben (SetWindowLong).
+
+Bei jedem Ereignis werden diese
+lokalen Daten wieder neu geladen (GetWindowLong). Dadurch k&ouml;nnen mehrere
+Fenster gleichzeitig existieren, die mit eigenen, unabh&auml;ngigen Daten
+arbeiten.
+
+<a name="modeless"><H2>Nicht-modale Dialogboxen</H2>
+
+Eine normale Dialogbox wird durch den Aufruf von <tt>DialogBox</tt> gestartet.
+Das Programm bleibt an dieser Stelle stehen und wartet auf das Schlie&szlig;en
+der Dialogbox. Der Anwender kann nicht weiterarbeiten, bis der Dialog beendet
+ist. Dieses Verhalten nennt man modal.
+<p>
+In bestimmten Situationen ist dieses Verhalten unerw&uuml;nscht.
+Ein Beispiel ist ein Fortschrittsanzeiger, der nur Sinn macht, wenn im Hintergrund
+das Programm weiterl&auml;uft. Das gleiche gilt f&uuml;r alle Abbruch-Dialoge.
+<p>
+Eine nicht-modale Dialogbox wird nicht mit <tt>DialogBox</tt>, sondern durch den
+Aufruf <tt>CreateDialog</tt> und ein anschlie&szlig;endes <tt>ShowWindow</tt>
+erzeugt. Die Parameter f&uuml;r <tt>CreateDialog</tt> entsprechen denen von
+<tt>DialogBox</tt>. Auch die Fensterfunktion ist weitgehend identisch.
+Lediglich das Ende der Dialogbox wird durch <tt>DestroyWindow</tt> statt mit 
+<tt>EndDialog</tt> eingeleitet. 
+Das Programm l&auml;uft nach der Erzeugung ungehindert weiter.
+<p>
+Im Beispiel wird eine Dialogbox erzeugt, die Fehlermeldungen in einer Liste
+darstellen soll.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+HWND hWndDlg = 0;
+
+BOOL CALLBACK DlgFkt_ErrorList(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+  switch (message) {
+  case WM_INITDIALOG:
+    return TRUE;
+  case WM_COMMAND:
+    switch (LOWORD(wParam)) {
+    case IDOK:
+      DestroyWindow(hDlg);
+      hWndDlg = 0;
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+HWND DiaErrorList(HWND hWnd)
+{
+  hWndDlg = CreateDialog(hInst, MAKEINTRESOURCE(IDD_ERRORLIST), hWnd, DlgFkt_ErrorList);
+  ShowWindow(hWndDlg, SW_SHOW);
+  return hWndDlg;
+}
+
+void Print2List(char *str)
+{
+  if (hWndDlg) {
+    SendMessage(GetDlgItem(hWndDlg, IDC_LIST), LB_ADDSTRING, 0, (LPARAM)str);
+  } else {
+    Print2File(str);
+  }
+}
+</pre></td></tr></table><p>
+
+<hr>
+<table width=100%>
+<tr><td>
+<a target="_top" href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999, 2000, 2005 <a href="mailto:informatik-ecke@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</body>
+</html>
+

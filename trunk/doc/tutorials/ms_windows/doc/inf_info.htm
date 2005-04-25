@@ -1,0 +1,396 @@
+<html>
+<head>
+<link rel=stylesheet type="text/css" href="../inf.css">
+<META NAME="description" CONTENT="Installation per INF-Dateien">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Installation, inf, install, INF-Dateien">
+<title>Installation per INF-Dateien
+</title>
+</head>
+<body bgcolor=white>
+<a name="top">
+<table width=100%><tr><td bgcolor=yellow align=center>
+<H1 align=center>Installieren mit INF-Dateien</H1>
+</td></tr></table>
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center>
+<p>
+
+<ul>
+<li><a href="#copy">Kopieren von Dateien</a>
+<li><a href="#uninstall" index="">Jetzt mit Deinstallation</a>
+  <ul>
+  <LI><a href="#uninstprep" >Uninstall vorbereiten</a>
+  <li><a href="#bspinf" >Die Datei mein.inf</a>
+  <li><a href="#ntspec" >Extra-Wurst f&uuml;r NT</a>
+  </ul>
+<LI><a href="#registry">Die Registry</a>
+  <ul>
+  <li><a href="#regHKEY">Die Registry-HKEYs</a>
+  <li><a href="#reguninst">Uninstall</a>
+  <li><a href="#diatarget">Dialogabfrage des Zielverzeichnisses</a>
+  <li><a href="#runonce">RunOnce</a>
+  </ul>
+<LI><a href="#grenzen">Grenzen und Hinweise</a>
+  <ul>
+  <li><a href="#dialog">Dialogbereitschaft</a>
+  <li><a href="#rmdir">L&ouml;schen von Verzeichnissen</a>
+  <li><a href="#delfile">L&ouml;schen von Dateien</a>
+  </ul>
+<LI><a href="#LDID">LDID-Codes f&uuml;r Pfade in Windows</a>
+<LI><a href="#prgcall">Aufruf aus dem Programm</a>
+<LI><a href="#autorun">Automatischer Start beim Einlegen von CDs</a>
+<LI><a href="#literatur">Literatur</a>
+<LI><a href="#links">Links</a>
+</ul>
+
+Windows 95 und NT 4.0 verf&uuml;gen mit den INF-Dateien &uuml;ber einen
+eigenen Installationsmechanismus. Eine INF-Datei kann mit einem einfachen
+Editor erstellt werden und &uuml;ber das Klicken mit der rechten Maustaste
+zum Installieren verwendet werden.
+<p>
+Soll es unbedingt eine SETUP.EXE sein, braucht man lediglich ein Programm
+mit <a href="#prgcall">einem einzigen Systemaufruf</a> zu schreiben. 
+Dadurch kann man sich die
+<b>fetten</b> Installationsriesen schenken, die meist gr&ouml;&szlig;er
+sind als die zu installierenden Programme.
+
+<a name="copy" index=""><H2>Kopieren von Dateien</H2>
+
+Die erste Aufgabe einer Installationsroutine ist das Kopieren von Dateien
+an einen vorbestimmten Ort.
+
+<pre class="aw">
+[Version]
+Signature=$Chicago$
+
+[DefaultInstall]
+Copyfiles=User.Files
+
+[User.Files]
+mein1.exe
+mein2.exe
+
+[DestinationDirs]
+User.Files=10
+</pre>
+Mit diesem einfachen Skript werden die Dateien mein1.exe und mein2.exe in das
+Verzeichnis C:\WINDOWS unter NT in das Verzeichnis C:\WINNT geschrieben. Das
+<a href="#LDID">Zielverzeichnis</a> wird durch einen Nummerncode festgelegt.
+<p>
+Auch verschiedene Ziele sind leicht ansteuerbar, wie der n&auml;chste
+Skript zeigt.
+<pre class="aw">
+[Version]
+Signature=$Chicago$
+
+[DefaultInstall]
+Copyfiles=User.File.1,User.File.2
+
+[User.File.1]
+mein1.exe
+
+[User.File.2]
+mein2.exe
+
+[DestinationDirs]
+User.File.1=10
+User.File.2=17
+</pre>
+
+mein1.exe landet im WINDOWS und mein2.exe in WINDOWS\INF.
+
+<a name="uninstall" index=""> <H2>Jetzt mit Deinstallation</H2>
+
+W&auml;hrend man sonst denkt, kaputtmachen ist leichter als Aufbauen,
+wird man nun anderes lernen. Um eine Deinstallation zu gew&auml;hrleisten,
+mu&szlig; man sich zun&auml;chst in der Registry anmelden.
+
+<H3><a name="uninstprep" index="">Uninstall vorbereiten</H3>
+
+Der Ablauf der Deinstallation erfolgt &uuml;ber die Registry.
+<pre class="aw">
+HKEY_LOCAL_MACHINE
+	Software\Microsoft\Windows\CurrentVersion\Uninstall\
+</pre>
+
+Unter diesem Key gibt es <tt>DisplayName</tt> und <tt>UninstallString</tt>.
+Erster dient dazu, den
+Programmnamen f&uuml;r die Eintragung
+Einstellungen-Systemsteuerung-Software-Installieren/Deinstallieren
+zu definieren. Der Eintrag unter <tt>UninstallString</tt> wird aufgerufen, 
+wenn das Programm deinstalliert werden soll.
+<p>
+Woher wei&szlig; die Registry, was wir bei der Installation auf die Platte
+geschoben haben? Ganz einfach: gar nicht! In der INF-Datei wird eine
+Uninstall-Sektion eingetragen. Damit zum Zeitpunkt der Deinstallation
+diese ausgef&uuml;hrt werden kann, wird sie in das Verzeichnis \WINDOWS\INF
+kopiert.
+
+<H3><a name="bspinf" index="">Die Datei mein.inf</H3>
+
+
+<pre class="aw">
+[Version]
+Signature=$Chicago$
+
+[DefaultInstall]
+AddReg=User.Registry95
+Copyfiles=User.Files,Inf.File
+Uninstall=DefaultUninstall
+
+[DefaultUninstall]
+DelReg=User.Registry95
+DelFiles=User.Files,Inf.File
+
+[User.Registry95]
+HKLM,%Uninstall%%Product%
+HKLM,%Uninstall%%Product%,DisplayName,,"%Product%"
+HKLM,%Uninstall%%Product%,UninstallString,,"RunDll32 setupx.dll,InstallHinfSection DefaultUninstall 132 %17%\MEIN.INF"
+
+[User.Files]
+mein1.exe
+mein2.exe
+
+[Inf.File]
+mein.inf
+
+[DestinationDirs]
+User.Files=10
+Inf.File=17
+
+[Strings]
+Product="Mein Programm"
+Uninstall="Software\Microsoft\Windows\CurrentVersion\Uninstall\"
+</pre>
+
+In DestinationDirs steht nun f&uuml;r Inf.File eine 17. Dies ist die Kennung
+des Installationsskriptes f&uuml;r das INF-Verzeichnis.
+<p>
+Eine weitere Neuerung findet sich in der Sektion <tt>Strings</tt>. 
+Hier k&ouml;nnen wiederkehrende Strings einmal definiert werden und 
+mehrfach verwendet werden.
+
+
+<H3><a name="ntspec" index="">Extra-Wurst f&uuml;r NT</H3>
+
+Erg&auml;nzt werden mu&szlig; das alles um die Besonderheit des NT. LEIDER wird
+unter NT ein kleines bi&szlig;chen anders deinstalliert.
+Unter Windows 95 sorgt der Eintrag
+<pre class="aw">
+RunDll32 setupx.dll,InstallHinfSection DefaultUninstall 132 %17%\MEIN.INF
+</pre>
+daf&uuml;r, die DefaultUninstall-Sektion von MEIN.INF anzusprechen, die von der
+Installation in das INF-Verzeichnis von Windows kopiert wurde. Unter Windows NT
+sieht der gleiche Eintrag so aus:
+<pre class="aw">
+RunDll32 setupapi.dll,InstallHinfSection DefaultUninstall.ntx86 132 %17%\MEIN.INF
+</pre>
+Darum m&uuml;ssen leider zwei Install- und Deinstall-Sektionen geschrieben werden.
+Wenn eine <tt>DefaultInstall.ntx86</tt> vorhanden ist, verwendet NT diese. Damit
+k&ouml;nnen wir den NT-Eintrag setzen.
+
+<pre class="aw">
+[DefaultInstall.ntx86]
+AddReg=User.RegistryNT
+Copyfiles=User.Files,Inf.File
+Uninstall=DefaultUninstall.ntx86
+
+[DefaultUninstall.ntx86]
+DelReg=User.RegistryNT
+DelFiles=User.Files,Inf.File
+
+[User.RegistryNT]
+HKLM,%Uninstall%%Product%
+HKLM,%Uninstall%%Product%,DisplayName,,"%Product%"
+HKLM,%Uninstall%%Product%,UninstallString,,"RunDll32 setupapi.dll,InstallHinfSection DefaultUninstall.ntx86 132 %17%\MEIN.INF"
+</pre>
+
+<a name="registry" index=""><H2> Die Registry</H2>
+
+<H3><a name="regHKEY" index="">Die Registry-HKEYs</H3>
+
+<table border>
+<tr><td>HKCR</td><td>HKEY_CLASSES_ROOT</td><td>
+Hier stehen die Extension-Zuordnungen zu den Programmen
+</td></tr>
+<tr><td>HKCU</td><td>HKEY_CURRENT_USER</td></tr>
+<tr><td>HKLM</td><td>HKEY_LOCAL_MACHINE</td><td>
+Hier stehen die Uninstall-Skripte
+</td></tr>
+<tr><td>HKU</td><td>HKEY_USERS</td></tr>
+<tr><td>HKCC</td><td>HKEY_CURRENT_CONFIG</td></tr>
+<tr><td>HKDD</td><td>HKEY_DYN_DATA</td></tr>
+</table>
+
+<H3><a name="reguninst" index="">Uninstall</H3>
+
+Unter HKLM steht ein Schl&uuml;ssel f&uuml;r jedes Produkt.
+<pre>
+Software\Microsoft\Windows\CurrentVersion\Uninstall\%Product%
+</pre>
+
+Als Unterschl&uuml;ssel gibt es <tt>DisplayName</tt>. Der Wert dieses 
+Schl&uuml;ssels taucht in der Software-Einstellung auf. Er kann zur 
+Deinstallation angew&auml;hlt werden.
+<p>
+Der Unterschl&uuml;ssel <tt>UninstallString</tt> enth&auml;lt den Aufruf 
+zur Deinstallation.
+
+Beispiel:
+<pre class="aw">
+HKLM,%Uninstall%%Product%
+HKLM,%Uninstall%%Product%,DisplayName,,"%Product%"
+HKLM,%Uninstall%%Product%,UninstallString,,"RunDll32 setupapi.dll,InstallHinfSection DefaultUninstall.ntx86 132 %17%\MEIN.INF"
+</pre>
+
+<H3><a name="diatarget" index="">Dialogabfrage des Zielverzeichnisses</H3>
+
+<pre class="aw">
+HKCU,""SOFTWARE\Reg-Schl’ssel???""
+HKCU,""SOFTWARE\Reg-Schl’ssel???"",InstallDir1,,""%49001%""
+</pre>
+
+<H3><a name="runonce" index="">RunOnce</H3>
+
+<pre class="aw">
+[Strings]
+Runonce="SOFTWARE\Microsoft\Windows\CurrentVersion\Runonce\"
+
+[AdvSetup]
+HKLM,%RunOnce%Setup,"Kleiner...",,"RunDll32.exe %11%\AdvPack.Dll,LaunchINFSection KLEIN.INF,DefaultInstall2"
+[AdvSetup.ntx86]
+HKLM,%RunOnce%Setup,"Kleiner...",,"RunDll32.exe %11%\AdvPack.Dll,LaunchINFSection KLEIN.INF,DefaultInstall2.ntx86"
+
+[DefaultInstall]
+Ini2Reg=INFTool.AddINI
+AddReg=AdvSetup
+</pre>
+
+Daraufhin wird per RunDll32 aus dem AdvPack.DLL die DefaultInstall2 aus KLEIN.INF
+gestartet.
+
+<pre class="aw">
+[DefaultInstall2]
+AddReg=INFTool.Add.Reg.95
+CustomDestination=CustomDirs
+Copyfiles=DestGrp,DestGrp1,Add.Inf
+BeginPrompt=InstallBegin
+Uninstall=DefaultUninstall
+SmartReboot=N
+</pre>
+
+<a name="grenzen" index=""><H2>Grenzen und Hinweise</H2>
+
+
+<H3><a name="dialog" index="">Dialogbereitschaft</H3>
+
+Die Dialogbereitschaft wird durch die Datei ADVPACK.DLL mit immerhin 79KB 
+erreicht. Die Gr&ouml;&szlig;e w&uuml;rde uns nicht weiter jucken, wenn 
+sichergestellt w&auml;re da&szlig; die Datei auf jedem Rechner vorliegt.
+Dies gilt bei Rechnern mit Microsoft Office oder Internet-Explorer. 
+Bei anderen kann die Installation scheitern.
+<p>
+Will ich sie also in meiner Installation benutzen, mu&szlig; ich sie erst
+installieren und selbst ausliefern. Inwieweit Microsoft das erlaubt, wei&szlig;
+ich nicht.
+
+<H3><a name="rmdir" index="">L&ouml;schen von Verzeichnissen</H3>
+
+Leider l&ouml;schen die INF-Dateien nicht die leeren Verzeichnisse.
+
+<h3><a name="delfile" index="">L&ouml;schen von Dateien</h3>
+
+Beim Deinstallieren sollte man bedenken, da&szlig; auch Dateien existieren
+k&ouml;nnten, die z. Zt. der Installation noch nicht da waren. Ein typisches
+Beispiel sind FTS- und GID-Dateien, die bei der Verwendung von HLP-Dateien
+entstehen.
+
+
+<HR><!------------------------------------------------------------------->
+
+<a name="LDID"><H2>LDID-Codes f&uuml;r Pfade in Windows</H2>
+
+Die Zahlen, die in den DestinationDirs genannt werden, haben folgende Bedeutung:
+<p><table border>
+<tr><th>Angabe</th><th>Bedeutung</th><th>typischer Pfad</th></tr>
+<tr><td>0,&lt;Zielpfad&gt; </td><td> feste Zielangabe</td></tr>
+<tr><td>01  </td><td> Source </td><td> D:\PATH</td></tr>
+<tr><td>10  </td><td> Windows-Verz.	 </td><td> C:\WINDOWS</td></tr>
+<tr><td>11  </td><td> System-Verz.		 </td><td> C:\WINDOWS\SYSTEM</td></tr>
+<tr><td>12  </td><td> IOSubSys-Verz.	 </td><td> C:\WINDOWS\SYSTEM\IOSUBSYS</td></tr>
+<tr><td>13  </td><td> Command		 </td><td> C:\WINDOWS\COMMAND</td></tr>
+<tr><td>17  </td><td> INF-Directory	 </td><td> C:\WINDOWS\INF</td></tr>
+<tr><td>18  </td><td> Help-Verz.		 </td><td> C:\WINDOWS\HELP</td></tr>
+<tr><td>19  </td><td> Administration	 </td><td> C:\WINDOWS</td></tr>
+<tr><td>20  </td><td> Fonts		 </td><td> C:\WINDOWS\FONTS</td></tr>
+<tr><td>21  </td><td> Viewers		 </td><td> C:\WINDOWS\SYSTEM\VIEWERS</td></tr>
+<tr><td>22  </td><td> VMM32		 </td><td> C:\WINDWOS\SYSTEM\VMM32</td></tr>
+<tr><td>23  </td><td> Color		 </td><td> C:\WINDWOS\SYSTEM\COLOR</td></tr>
+<tr><td>24  </td><td> scheint Root des Bootlaufwerkes zu sein.</td></tr>
+<tr><td>25  </td><td> Shared		 </td><td> C:\WINDOWS</td></tr>
+<tr><td>26  </td><td> WindowsBoot		 </td><td> C:\WINDOWS</td></tr>
+<tr><td>28  </td><td> Host WindowsBoot	 </td><td> C:\WINDOWS</td></tr>
+<tr><td>30  </td><td> Root des Bootlaufwerkes	 </td><td> C:\</td></tr>
+<tr><td>49001  </td><td> wird vom <a href="http://Inner-Smile.com/dl_inf.htm">INF-Tool</a> f&uuml;r Dialoge verwendet</td></tr>
+</table><p>
+
+0,&lt;Zielpfad&gt; funktioniert nur unter Windows NT. Sollte es dort noch kein
+Verzeichnis geben, wird es automatisch erzeugt.
+<p>
+
+<a name="prgcall" index=""><H2> Aufruf aus dem Programm</H2>
+
+Um eine INF-Datei aus dem Programm heraus starten zu k&ouml;nnen,
+verwendet man den Aufruf
+<p><pre class="aw">
+ShellExecute(NULL, "install", inf_name, NULL, NULL, SW_SHOWNORMAL);
+</pre><p>
+Der inf_name muss mit dem kompletten Pfadnamen angegeben werden.
+
+<a name="autorun"><H2> Automatischer Start beim Einlegen von CDs</H2>
+
+Wird Wurzelverzeichnis einer CD die Datei <tt>autorun.inf</tt> gefunden,
+wird ein Programm gestartet, das darin angegeben ist. Die Datei muss
+dazu eine Sektion <tt>autorun</tt> besitzen. Hinter open= wird das
+zu startende Programm genannt.
+
+<pre class="aw">
+[autorun] 
+  open=startup.exe
+  icon=cdimage.ico 
+</pre>
+
+Mit icon= kann festgelegt werden, welches Icon statt dem Standard-CD-Icon im Explorer
+erscheinen soll. Die Datei muss im gleichen Verzeichnis stehen wie die Datei unter
+open=.
+
+<a name="literatur" index=""><h4>Literatur</h4>
+<ul>
+<li> Thomas Lauer: Windows zum Durchblicken, Win32 Programmierung 
+Teil 6: Oberfl&auml;chenintegration. c't 5/96, S.306 ff insbes. 310-314
+<li> Michael Tr&ouml;ger: Auto-Installation, Inf-Dateien zur Softwareinstallation nutzen.
+c't 13/97, S. 294-297.
+</ul>
+
+<a name="links" index=""><h4>Link</h4>
+
+Das Sharewareprogramm 
+<a href="http://Inner-Smile.com/dl_inf.htm">INF-Tool</a>
+erm&ouml;glicht das bequeme Erzeugen von INF-Dateien.
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999, 2000 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+</body>
+</html>

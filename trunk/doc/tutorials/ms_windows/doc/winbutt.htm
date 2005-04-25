@@ -1,0 +1,129 @@
+<HTML><HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Buttons">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, Schaltfläche, Button, Checkbox, Radio Button, Informatik">
+<TITLE>Windows Programmierung: Buttons</TITLE>
+</HEAD>
+<BODY>
+<a name="top">
+<table width=100%><tr><td bgcolor=yellow  align=center>
+<H1><font color=black>Windows Programmierung: Buttons</font></H1>
+</td></tr></table>
+
+<p><font face="Helvetica" size=3">
+<a href="wincontr.htm#top">Einf&uuml;hrende Informationen</a>
+ &uuml;ber die Programmierung von Kontrollelementen werden hier vorausgesetzt.
+</font><p>
+
+<H2>Stile</H2>
+
+Der Stil gibt an, welcher Art der Button ist. Es gibt drei grunds&auml;tzliche
+Auspr&auml;gungen: Pushbutton, Checkbox und Radiobutton.
+
+<H3>Pushbutton</H3>
+
+Dies ist der gew&ouml;hnliche Button, der gedr&uuml;ckt wird und eine Aktion
+ausl&ouml;st, indem er eine WM_COMMAND-Nachricht an das Elternfenster sendet.
+In der Variante Default-Pushbutton, ist er etwas st&auml;rker umrandet und reagiert,
+wenn der Anwender die Return-Taste drückt.
+<dl>
+<dt>BS_PUSHBUTTON</dt>
+<dt>BS_DEFPUSHBUTTON</dt>
+</dl>
+
+<H3>Checkbox</H3>
+
+Ein kleines Rechteck, in dem man ein Kreuz erscheinen und verschwinden lassen kann. Ein Text
+befindet sich rechts davon (oder links, wenn man BS_LEFTTEXT angibt).
+Das 3-State Element kennt noch einen dritten Zustand: gedimmt zeigt an, da&szlig; der Button nicht
+anw&auml;hlbar ist.
+Die AUTO-Variante schaltet selbstst&auml;ndig das Kreuz ein und aus.
+
+<dl>
+<dt>BS_CHECKBOX</dt>
+<dt>BS_3STATE</dt>
+<dt>BS_AUTOCHECKBOX</dt>
+<dt>BS_AUTO3STATE</dt>
+</dl>
+
+<H3>Radiobutton</H3>
+
+Ein Radiobutton verh&auml;lt sich einzeln gleich einer Checkbox.
+Lediglich im Aussehen ist ein Unterschied sichtbar, der Radiobutton
+ist rund und hat einen Punkt in der Mitte, wenn er ausgew&auml;hlt ist.
+<p>
+In Gruppen zusammengefa&szlig;t, kann aber nur maximal einer von Ihnen angew&auml;hlt
+werden. In der AUTO-Variante braucht dies nicht einmal der Programmierer selbst
+zu realisieren. Zu einer Gruppe geh&ouml;ren diejenigen, die das gleiche Elternfenster
+besitzen. Dies wird &uuml;blicherweise durch den Einsatz eines Rahmens erreicht.
+
+<p>
+BS_RADIOBUTTON<br>
+BS_AUTORADIOBUTTON<br>
+<p>
+
+<H3>Groupbox</H3>
+
+Dies ist ein solcher Rahmen, um Radiobuttons zu gruppieren. In der linken oberen
+Ecke kann ein Text stehen, um eine gemeinsame &Uuml;berschrift zu haben.
+<p>
+BS_GROUPBOX
+
+<H3>Weitere Attribute</H3>
+
+<dl>
+<dt>BS_OWNERDRAW</dt><dd>
+  Der Programmierer &uuml;bernimmt die Darstellung des Buttons
+</dd>
+<dt>BS_LEFTTEXT</dt><dd>
+  Bei Radiobuttons und Checkboxes erscheint der Text links vom Feld.
+</dd>
+</dl>
+
+<H2>Ereignis Button angeklickt</H2>
+
+W&auml;hrend andere Kontrollelemente noch pr&uuml;fen m&uuml;ssen, welches Ereignis eingetroffen
+sein k&ouml;nnte, ist dies bei Buttons im Allgemeinen ein Klick. Dadurch ergibt sich eine
+vereinfachte Ereignisabfrage:
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+   case WM_COMMAND:
+      switch(LOWORD(wParam)) {
+         case ID_BUTTON:
+            break;
+      }
+      break;
+</pre></td></tr></table><p>
+
+<H2>Buttons mit Haken</H2>
+Pr&uuml;fen, ob ein Button mit einem Haken versehen ist. Funktioniert bei
+Radiobuttons und Checkboxes
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+HWND hButton;
+   hButton = GetDlgItem(hWnd, ID_BUTTON);
+   if (SendMessage(hButton , BM_GETCHECK, 0, 0)==BST_CHECKED) {
+</pre></td></tr></table><p>
+
+Setzen eines Hakens
+
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+  SendMessage(hButton, BM_SETCHECK, BST_CHECKED, 0);
+</pre></td></tr></table><p>
+
+Da BST_CHECKED als 1 definiert ist und BST_UNCHECKED als 0, kann man auch den
+booleschen Ausdruck als Parameter verwenden.
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</body>
+</html>
+

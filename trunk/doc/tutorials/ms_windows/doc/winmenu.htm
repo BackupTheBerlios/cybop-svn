@@ -1,0 +1,106 @@
+<HTML>
+<HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Menü">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Menü, Windows, Programmierung, Informatik">
+<TITLE>Windows-Programmierung: Menü
+</TITLE>
+</HEAD>
+<BODY>
+<a name="top"><a name="kontext">
+<table width=100%><tr><td bgcolor=yellow align=center>
+<H1 align=center>Windows Programmierung: Menü</H1>
+</td></tr></table>
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center>
+<p>
+
+<h2>Die Ressourcendefinition</h2>
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+IDC_UTIL MENU DISCARDABLE 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "Ö&ffnen...",                  IDM_OPEN
+        MENUITEM "&Speichern als...",           IDM_SAVEAS
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    IDM_EXIT
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ...",                  IDM_ABOUT
+    END
+END
+</pre></td></tr></table><p>
+
+Dass ein Fenster ein Men&uuml; hat, wird bei der 
+<a href="winframe.htm#regclass">Registrierung der Fensterklasse</a>
+angegeben.
+
+
+<H2>Empfangen eines Men&uuml;ereignisses</H2>
+
+In der Fensterfunktion wird die Nachricht WM_COMMAND empfangen.
+Am einfachsten unterscheidet man die Men&uuml;punkt,
+indem man das niedrigere Halbwort des wParamters verwendet.
+Hier steht dieselbe ID, die bei der Ressourcendefinition 
+verwendet worden ist.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+    case WM_COMMAND:
+        Id = LOWORD(wParam); 
+        switch (Id) {
+        case IDM_ABOUT:
+            break;
+        case IDM_OPEN:
+            break;
+</pre></td></tr></table><p>
+
+<H2>Haken an das Men&uuml; setzen</H2>
+
+Im Fenster des Men&uuml;s ruft man die Funktion CheckMenuItem.
+Im letzten Parameter muss MF_CHECKED oder MF_UNCHECKED &uuml;bergeben
+werden, je nachdem, ob man einen Haken will oder nicht. Es reicht nicht,
+dort 0 oder 1 zu &uuml;bergeben. H&auml;ngt der Haken von einem
+booleschen Wert ab, geht man wie folgt vor, um das Men&uuml;-Item
+IDM_KONTEXTINDEX umzuschalten:
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+CheckMenuItem(GetMenu(hWnd), IDM_KONTEXTINDEX, BooleWert?MF_CHECKED:MF_UNCHECKED);
+BooleWert = !BooleWert;
+</pre></td></tr></table><p>
+
+Um das Men&uuml;-Handle zu bekommen, ruft man GetMenu mit dem HWND des Fensters
+auf, das das Men&uuml; enth&auml;lt.
+
+<H2>Men&uuml;punkt deaktivieren</H2>
+
+Im Fenster des Men&uuml;s ruft man die Funktion EnableMenuItem.
+Im letzten Parameter muss MF_ENABLED oder MF_GRAYED &uuml;bergeben
+werden. Es gibt auch ein MF_DISABLED, das auch den Men&uuml;punkt
+deaktiviert. Allerdings liefert dies keine optische R&uuml;ckmeldung.
+In den allermeisten F&auml;llen macht dies aber keinen Sinn.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+EnableMenuItem(GetMenu(hWnd), IDM_SAVE, MF_GRAYED);
+...
+EnableMenuItem(GetMenu(hWnd), IDM_SAVE, MF_ENABLED);
+</pre></td></tr></table><p>
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</BODY>
+</HTML>

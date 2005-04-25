@@ -1,0 +1,104 @@
+#include <stdio.h>
+int main()
+{
+printf("Ein akkustisches Signal mit : (\\a)\a");
+printf("\nEin Backspace mit : (\\b) | \bx\n");
+printf("Ein Zeilenvorschub mit : (\\t) |\tx");
+printf("\n\tC\n\ti\n\ts\n\tt\n\ttoll\n");
+printf("\t u\n\t n\n\t d\n");
+printf("\t macht Spass\n");
+return 0;
+}
+
+
+
+Steuerzeichen: 		Bedeutung
+\a	 		BEL (bell) - akkustisches
+Warnsignal
+\b
+BS (backspace) - setzt
+Cursor um eine Position
+nach links
+\f
+FF(formfeed) - ein
+Seitenvorschub wird
+ausgelöst. Wird
+hauptsächlich bei
+Programmen verwendet, mit
+denen Sie etwas
+ausdrucken können.
+\n
+NL (newline) - Cursor geht
+zum Anfang der nächsten
+Zeile
+\r
+CR (carriage return) - Cursor
+springt zum Anfang der
+aktuellen Zeile
+\t
+HT (horizontal tab) -
+Zeilenvorschub zur nächsten
+horizontalen
+Tabulatorposition (meistens
+acht Leerzeichen weiter)
+
+\v
+VT (vertical tab) - Cursor
+springt zur nächsten
+vertikalen Tabulatorposition
+
+\"			" wird ausgegeben
+
+\' 			' wird ausgegeben
+
+\? 			? wird ausgegeben
+
+\\			\ wird ausgegeben
+
+\0
+NULL (ist die
+Endmarkierung eines
+Strings)
+
+\nnn 			Ausgabe eines Oktalwerts (z.
+B. \033 = ESCAPE-Zeichen)
+
+\xhh 			Ausgabe eines
+Hexdezimalwerts
+
+Farbe&:
+
+#include
+int main()
+{
+printf("\033[31mHallo Welt!");
+}
+
+Und schon erscheint der Text in rot. Die Escape-Sequenz befindet sich ganz
+am Anfang des Strings. Sie beginnt wie fast alle Escape-Sequenzen mit \033.
+Der darauf folgende Teil [31m bestimmt den Typ der Sequenz, er steht für
+"setze Textfarbe auf rot".
+
+\033[m Text wieder auf normal setzten
+\033[0m Text wieder auf normal setzten
+\033[1m Fetter Text
+\033[4m Unterstrichener Text
+\033[30m Schrift: Schwarz
+\033[31m Schrift: Rot
+\033[32m Schrift: Grün
+\033[33m Schrift: Gelb
+\033[34m Schrift: Blau
+\033[35m Schrift: Violett
+\033[36m Schrift: Türkis
+\033[40m Schrifthintergrund: Schwarz
+\033[41m Schrifthintergrund: Rot
+\033[42m Schrifthintergrund: Grün
+\033[43m Schrifthintergrund: Gelb
+\033[44m Schrifthintergrund: Blau
+\033[45m Schrifthintergrund: Violett
+\033[46m Schrifthintergrund: Türkis
+\033[G Positioniert den Cursor inSpalte
+\033[H Positioniert den Cursor in Zeile
+\007 Gibt einen Signalton aus
+
+
