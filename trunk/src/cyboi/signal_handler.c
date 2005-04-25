@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.31 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
+ * @version $Revision: 1.32 $ $Date: 2005-04-25 08:34:20 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -39,7 +39,7 @@
 #include "../logic/count.c"
 #include "../logic/create.c"
 #include "../logic/destroy.c"
-#include "../logic/interupt.c"
+#include "../logic/interrupt.c"
 #include "../logic/loop.c"
 #include "../logic/receive.c"
 #include "../logic/selection.c"

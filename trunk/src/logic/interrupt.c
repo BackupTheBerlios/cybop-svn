@@ -1,5 +1,5 @@
 /*
- * $RCSfile: interupt.c,v $
+ * $RCSfile: interrupt.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
+ * @version $Revision: 1.1 $ $Date: 2005-04-25 08:34:20 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,7 +32,7 @@
 #include "../global/name_constants.c"
 #include "../global/structure_constants.c"
 #include "../logger/logger.c"
-#include "../logic/interupt/interupt_tcp_socket.c"
+#include "../logic/interrupt/interrupt_tcp_socket.c"
 #include "../socket/unix_socket.c"
 
 /**
@@ -104,7 +104,7 @@ void interupt_service(const void* p0, const void* p1,
 
         if (r == 1) {
          
-            interupt_tcp_socket( p5, p2, p3, p4 );
+            interrupt_tcp_socket( p5, p2, p3, p4 );
         }
     }
 }

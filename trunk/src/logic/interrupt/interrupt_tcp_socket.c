@@ -1,5 +1,5 @@
 /*
- * $RCSfile: interupt_tcp_socket.c,v $
+ * $RCSfile: interrupt_tcp_socket.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
+ * @version $Revision: 1.1 $ $Date: 2005-04-25 08:34:24 $ $Author: rholzmueller $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -50,7 +50,7 @@
  * @param know_count the knowledge count
  * @param know_size the knowledge size
  */
-void interupt_tcp_socket( void* internals, const void* know, 
+void interrupt_tcp_socket( void* internals, const void* know, 
                           const void* know_count, const void* know_size ) 
 {
 
