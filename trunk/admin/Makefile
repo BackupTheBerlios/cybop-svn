@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.26 $ $Date: 2005-04-25 09:08:53 $ $Author: rholzmueller $
+# @version $Revision: 1.27 $ $Date: 2005-04-26 08:54:10 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 # @author Michael Simon <michael.simon@gmx.net>
 #
@@ -144,7 +144,7 @@ all: create $(ACCESSOR_OBJECTS) $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CREAT
 # the "cd" command of the first line has no effect for the following lines.
 #
 create:
-	-cd ..; -mkdir obj; mkdir bin
+	-cd ..; mkdir obj; mkdir bin
 	-cd $(OBJ); mkdir accessor
 	-cd $(OBJ); mkdir array
 	-cd $(OBJ); mkdir communicator
