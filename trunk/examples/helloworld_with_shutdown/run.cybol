@@ -22,7 +22,7 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.1 $ $Date: 2005-04-15 13:16:13 $ $Author: christian $
+    @version $Revision: 1.2 $ $Date: 2005-05-10 07:22:23 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
 
@@ -46,6 +46,6 @@
     </part>
     <part name="shutdown" channel="inline" abstraction="operation" model="send">
         <property name="language" channel="inline" abstraction="string" model="signal"/>
-        <property name="message" channel="inline" abstraction="knowledge" model="logic.shutdown"/>
+        <property name="message" channel="file" abstraction="cybol" model="helloworld_with_shutdown/shutdown.cybol"/>
     </part>
 </model>
