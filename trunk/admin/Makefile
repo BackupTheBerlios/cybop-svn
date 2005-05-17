@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.27 $ $Date: 2005-04-26 08:54:10 $ $Author: christian $
+# @version $Revision: 1.28 $ $Date: 2005-05-17 11:06:31 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 # @author Michael Simon <michael.simon@gmx.net>
 #
@@ -158,7 +158,6 @@ create:
 	-cd $(OBJ); mkdir logic/send
 	-cd $(OBJ); mkdir logic/shutdown
 	-cd $(OBJ); mkdir logic/startup
-	-cd $(OBJ); mkdir logic/shutdown
 	-cd $(OBJ); mkdir logic/suspend
 	-cd $(OBJ); mkdir parser
 	-cd $(OBJ); mkdir signal
