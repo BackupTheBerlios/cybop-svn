@@ -1,0 +1,39 @@
+
+source_structure.txt
+
+
+
+
+
+
+-- cybop pres
+
+communicator: receive + send
+converter: parse + serialise
+translator: decode + encode
+
+--
+
+io/exchange:
+socket
+curses
+web
+x_window_system
+ms_windows
+
+memoris(z)ing/statics:
+signal
+model
+logic
+state
+array
+
+processing/dynamics:
+compound
+operation
+loop
+
+internals:
+cybol
+logger
+
