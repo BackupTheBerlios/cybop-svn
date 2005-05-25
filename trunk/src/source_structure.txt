@@ -2,38 +2,131 @@
 source_structure.txt
 
 
+Overview
+________
+
+controller
+    communicator: receive + send (auch socket, x window system etc.?)
+    converter: parse + serialise (formerly: parser)
+    cyboi (replace "handler" with "manager", in the meaning of "lifecycle manager")
+    translator: decode + encode
+globals
+    constants
+    logger
+    variables
+memory
+    accessor (move array stuff here)
+    creator (move array stuff here) !!?? CAUTION! A better word than "creator" might be "Schöpfer" (in English!)
+processor (formerly: logic)
+tester
 
 
+Details
+_______
 
-
--- cybop pres
-
-communicator: receive + send
-converter: parse + serialise
-translator: decode + encode
-
---
-
-io/exchange:
-socket
-curses
-web
-x_window_system
-ms_windows
-
-memoris(z)ing/statics:
-signal
-model
-logic
-state
-array
-
-processing/dynamics:
-compound
-operation
-loop
-
-internals:
-cybol
-logger
-
+controller
+    communicator: receive + send (auch socket, x window system etc.?)
+        file_communicator
+        ftp_communicator
+        http_communicator
+        inline_communicator
+        ms_windows_communicator
+        tcp_socket_communicator
+        unix_console_communicator
+        x_window_system_communicator
+    converter: parse + serialise (formerly: parser)
+        boolean_converter
+        complex_converter
+        double_converter
+        fraction_converter
+        integer_converter
+        string_converter
+        time_converter
+        vector_converter
+        xml_converter
+    cyboi (replace "handler" with "manager", in the meaning of "lifecycle manager")
+        compound_signal_handler
+        cyboi
+        globals_manager (formerly called "handler")
+        input_output_activator (can probably be deleted, because /processor contains service startup/shutdown now)
+        input_output_handler (can probably be deleted, because /processor contains service startup/shutdown now)
+        knowledge_memory_manager (formerly called "handler")
+        operation_signal_handler
+        signal_memory_manager (formerly called "handler")
+        signal_waiter
+        system_manager (formerly called "handler")
+    translator: decode + encode
+        cybol_translator
+        html_translator
+        x_window_system_translator
+globals
+    constants
+        abstraction_constants
+        channel_constants
+        character_constants
+        cybol_constants
+        escape_code_constants
+        integer_constants
+        log_constants
+        name_constants
+        structure_constants
+    logger
+    variables
+memory
+    accessor (move array stuff here)
+        character_array_accessor
+        compound_accessor
+        double_array_accessor
+        integer_array_accessor
+        pointer_array_accessor
+        signal_memory_accessor
+        unsigned_long_array_accessor
+    creator (move array stuff here) !!?? CAUTION! A better word than "creator" might be "Schöpfer" (in English!)
+        character_creator
+        complex_creator
+        compound_creator
+        double_creator
+        fraction_creator
+        integer_creator
+        internals_memory_creator
+        pointer_creator
+        signal_memory_creator
+        string_creator
+        time_creator
+        unsigned_long_creator
+        vector_creator
+        xml_node_creator
+        xml_property_creator
+processor (formerly: logic)
+    interrupt
+        interrupt_tcp_socket
+    receive
+        receive_tcp_socket
+        receive_x_window_system
+    send
+        send_tcp_socket
+        send_x_window_system
+    shutdown
+        shutdown_tcp_socket
+        shutdown_x_window_system
+    startup
+        startup_tcp_socket
+        startup_x_window_system
+    suspend
+        activate_tcp_socket (is this operation REALLY STILL needed??)
+    add
+    build
+    compare
+    copy (formerly "set")
+    count
+    create
+    destroy
+    interrupt
+    loop
+    move (formerly "set")
+    receive
+    selection
+    send
+    shutdown
+    startup
+tester
