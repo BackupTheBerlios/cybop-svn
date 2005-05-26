@@ -2,9 +2,29 @@
 source_structure.txt
 
 
+Introduction
+____________
+
+The "Cybernetics Oriented Interpreter" (CYBOI) works on a rather low
+system level. It manages the storage of knowledge in memory, contains
+input/ output (i/o) mechanisms, handles signals and more. Because of
+CYBOI's closeness to hardware, the "von Neumann" model was chosen to
+structure its source code. Von Neumann's original model suggests three
+main parts, which are listed together with their names in CYBOI, below:
+
+------------------------------------------------------------------------
+von Neumann                         | CYBOI
+------------------------------------------------------------------------
+Memory                              | memory
+Control Unit                        | controller
+Algorithmic Logic Unit (ALU)        | computer
+------------------------------------------------------------------------
+
+
 Overview
 ________
 
+computer (formerly: logic)
 controller
     communicator: receive + send (auch socket, x window system etc.?)
     converter: parse + serialise (formerly: parser)
@@ -17,13 +37,44 @@ globals
 memory
     accessor (move array stuff here)
     creator (move array stuff here) !!?? CAUTION! A better word than "creator" might be "Schöpfer" (in English!)
-processor (formerly: logic)
 tester
 
 
 Details
 _______
 
+computer (formerly: logic)
+    interrupt
+        interrupt_tcp_socket
+    receive
+        receive_tcp_socket
+        receive_x_window_system
+    send
+        send_tcp_socket
+        send_x_window_system
+    shutdown
+        shutdown_tcp_socket
+        shutdown_x_window_system
+    startup
+        startup_tcp_socket
+        startup_x_window_system
+    suspend
+        activate_tcp_socket (is this operation REALLY STILL needed??)
+    add
+    build
+    compare
+    copy (formerly "set")
+    count
+    create
+    destroy
+    interrupt
+    loop
+    move (formerly "set")
+    receive
+    selection
+    send
+    shutdown
+    startup
 controller
     communicator: receive + send (auch socket, x window system etc.?)
         file_communicator
@@ -97,36 +148,4 @@ memory
         vector_creator
         xml_node_creator
         xml_property_creator
-processor (formerly: logic)
-    interrupt
-        interrupt_tcp_socket
-    receive
-        receive_tcp_socket
-        receive_x_window_system
-    send
-        send_tcp_socket
-        send_x_window_system
-    shutdown
-        shutdown_tcp_socket
-        shutdown_x_window_system
-    startup
-        startup_tcp_socket
-        startup_x_window_system
-    suspend
-        activate_tcp_socket (is this operation REALLY STILL needed??)
-    add
-    build
-    compare
-    copy (formerly "set")
-    count
-    create
-    destroy
-    interrupt
-    loop
-    move (formerly "set")
-    receive
-    selection
-    send
-    shutdown
-    startup
 tester
