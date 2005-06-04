@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <!--
-    $RCSfile: send_greeting.cybol,v $
+    $RCSfile: shutdown.cybol,v $
 
     Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
 
@@ -22,14 +22,16 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.1 $ $Date: 2005-05-17 19:22:36 $ $Author: christian $
+    @version $Revision: 1.1 $ $Date: 2005-06-04 21:17:17 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
 
 <model>
-    <part name="send" channel="inline" abstraction="operation" model="send">
-        <property name="language" channel="inline" abstraction="string" model="tui"/>
-        <property name="receiver" channel="inline" abstraction="string" model="user"/>
-        <property name="message" channel="inline" abstraction="knowledge" model="domain.greeting"/>
+    <part name="destroy_domain" channel="inline" abstraction="operation" model="destroy_part">
+        <property name="model" channel="inline" abstraction="knowledge" model="domain"/>
     </part>
+    <part name="destroy_logic" channel="inline" abstraction="operation" model="destroy_part">
+        <property name="model" channel="inline" abstraction="knowledge" model="logic"/>
+    </part>
+    <part name="exit_application" channel="inline" abstraction="operation" model="exit"/>
 </model>
