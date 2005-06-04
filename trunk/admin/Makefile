@@ -22,9 +22,9 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.28 $ $Date: 2005-05-17 11:06:31 $ $Author: christian $
-# @author Christian Heller <christian.heller@tuxtax.de>
+# @version $Revision: 1.29 $ $Date: 2005-06-04 23:49:08 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
+# @author Christian Heller <christian.heller@tuxtax.de>
 #
 
 #
@@ -65,51 +65,59 @@ COMPILER_FLAGS = -g -I/usr/X11R6/include -I/usr/include/libxml2 # -fsjlj-excepti
 #vpath %.c $(SRC)
 #vpath %.o $(OBJ)
 
-MAIN_SOURCE = $(SRC)/cyboi/cyboi.c
+MAIN_SOURCE = $(SRC)/controller/cyboi/cyboi.c
 #ROOT_SOURCES = $(wildcard $(SRC)/*.c)
 #ROOT_OBJECTS = $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(ROOT_SOURCES))
-ACCESSOR_SOURCES = $(wildcard $(SRC)/accessor/*.c)
-ACCESSOR_OBJECTS = $(patsubst $(SRC)/accessor/%.c,$(OBJ)/accessor/%.o,$(ACCESSOR_SOURCES))
-ARRAY_SOURCES = $(wildcard $(SRC)/array/*.c)
-ARRAY_OBJECTS = $(patsubst $(SRC)/array/%.c,$(OBJ)/array/%.o,$(ARRAY_SOURCES))
-COMMUNICATOR_SOURCES = $(wildcard $(SRC)/communicator/*.c)
-COMMUNICATOR_OBJECTS = $(patsubst $(SRC)/communicator/%.c,$(OBJ)/communicator/%.o,$(COMMUNICATOR_SOURCES))
-CREATOR_SOURCES = $(wildcard $(SRC)/creator/*.c)
-CREATOR_OBJECTS = $(patsubst $(SRC)/creator/%.c,$(OBJ)/creator/%.o,$(CREATOR_SOURCES))
-CYBOI_SOURCES = $(wildcard $(SRC)/cyboi/*.c)
-CYBOI_OBJECTS = $(patsubst $(SRC)/cyboi/%.c,$(OBJ)/cyboi/%.o,$(CYBOI_SOURCES))
-GLOBAL_SOURCES = $(wildcard $(SRC)/global/*.c)
-GLOBAL_OBJECTS = $(patsubst $(SRC)/global/%.c,$(OBJ)/global/%.o,$(GLOBAL_SOURCES))
-LOGGER_SOURCES = $(wildcard $(SRC)/logger/*.c)
-LOGGER_OBJECTS = $(patsubst $(SRC)/logger/%.c,$(OBJ)/logger/%.o,$(LOGGER_SOURCES))
-LOGIC_SOURCES = $(wildcard $(SRC)/logic/*.c)
-LOGIC_OBJECTS = $(patsubst $(SRC)/logic/%.c,$(OBJ)/logic/%.o,$(LOGIC_SOURCES))
-LOGIC_INTERRUPT_SOURCES = $(wildcard $(SRC)/logic/interrupt/*.c)
-LOGIC_INTERRUPT_OBJECTS = $(patsubst $(SRC)/logic/interrupt/%.c,$(OBJ)/logic/interrupt/%.o,$(LOGIC_INTERRUPT_SOURCES))
-LOGIC_RECEIVE_SOURCES = $(wildcard $(SRC)/logic/receive/*.c)
-LOGIC_RECEIVE_OBJECTS = $(patsubst $(SRC)/logic/receive/%.c,$(OBJ)/logic/receive/%.o,$(LOGIC_RECEIVE_SOURCES))
-LOGIC_SEND_SOURCES = $(wildcard $(SRC)/logic/send/*.c)
-LOGIC_SEND_OBJECTS = $(patsubst $(SRC)/logic/send/%.c,$(OBJ)/logic/send/%.o,$(LOGIC_SEND_SOURCES))
-LOGIC_SHUTDOWN_SOURCES = $(wildcard $(SRC)/logic/shutdown/*.c)
-LOGIC_SHUTDOWN_OBJECTS = $(patsubst $(SRC)/logic/shutdown/%.c,$(OBJ)/logic/shutdown/%.o,$(LOGIC_SHUTDOWN_SOURCES))
-LOGIC_STARTUP_SOURCES = $(wildcard $(SRC)/logic/startup/*.c)
-LOGIC_STARTUP_OBJECTS = $(patsubst $(SRC)/logic/startup/%.c,$(OBJ)/logic/startup/%.o,$(LOGIC_STARTUP_SOURCES))
-LOGIC_SUSPEND_SOURCES = $(wildcard $(SRC)/logic/suspend/*.c)
-LOGIC_SUSPEND_OBJECTS = $(patsubst $(SRC)/logic/suspend/%.c,$(OBJ)/logic/suspend/%.o,$(LOGIC_SUSPEND_SOURCES))
-PARSER_SOURCES = $(wildcard $(SRC)/parser/*.c)
-PARSER_OBJECTS = $(patsubst $(SRC)/parser/%.c,$(OBJ)/parser/%.o,$(PARSER_SOURCES))
-SIGNAL_SOURCES = $(wildcard $(SRC)/signal/*.c)
-SIGNAL_OBJECTS = $(patsubst $(SRC)/signal/%.c,$(OBJ)/signal/%.o,$(SIGNAL_SOURCES))
+
+# Computer.
+COMPUTER_SOURCES = $(wildcard $(SRC)/computer/*.c)
+COMPUTER_OBJECTS = $(patsubst $(SRC)/computer/%.c,$(OBJ)/computer/%.o,$(COMPUTER_SOURCES))
+COMPUTER_INTERRUPT_SOURCES = $(wildcard $(SRC)/computer/interrupt/*.c)
+COMPUTER_INTERRUPT_OBJECTS = $(patsubst $(SRC)/computer/interrupt/%.c,$(OBJ)/computer/interrupt/%.o,$(COMPUTER_INTERRUPT_SOURCES))
+COMPUTER_RECEIVE_SOURCES = $(wildcard $(SRC)/computer/receive/*.c)
+COMPUTER_RECEIVE_OBJECTS = $(patsubst $(SRC)/computer/receive/%.c,$(OBJ)/computer/receive/%.o,$(COMPUTER_RECEIVE_SOURCES))
+COMPUTER_SEND_SOURCES = $(wildcard $(SRC)/computer/send/*.c)
+COMPUTER_SEND_OBJECTS = $(patsubst $(SRC)/computer/send/%.c,$(OBJ)/computer/send/%.o,$(COMPUTER_SEND_SOURCES))
+COMPUTER_SHUTDOWN_SOURCES = $(wildcard $(SRC)/computer/shutdown/*.c)
+COMPUTER_SHUTDOWN_OBJECTS = $(patsubst $(SRC)/computer/shutdown/%.c,$(OBJ)/computer/shutdown/%.o,$(COMPUTER_SHUTDOWN_SOURCES))
+COMPUTER_STARTUP_SOURCES = $(wildcard $(SRC)/computer/startup/*.c)
+COMPUTER_STARTUP_OBJECTS = $(patsubst $(SRC)/computer/startup/%.c,$(OBJ)/computer/startup/%.o,$(COMPUTER_STARTUP_SOURCES))
+COMPUTER_SUSPEND_SOURCES = $(wildcard $(SRC)/computer/suspend/*.c)
+COMPUTER_SUSPEND_OBJECTS = $(patsubst $(SRC)/computer/suspend/%.c,$(OBJ)/computer/suspend/%.o,$(COMPUTER_SUSPEND_SOURCES))
+
+# Controller.
+CONTROLLER_COMMUNICATOR_SOURCES = $(wildcard $(SRC)/controller/communicator/*.c)
+CONTROLLER_COMMUNICATOR_OBJECTS = $(patsubst $(SRC)/controller/communicator/%.c,$(OBJ)/controller/communicator/%.o,$(CONTROLLER_COMMUNICATOR_SOURCES))
+CONTROLLER_CONVERTER_SOURCES = $(wildcard $(SRC)/controller/converter/*.c)
+CONTROLLER_CONVERTER_OBJECTS = $(patsubst $(SRC)/controller/converter/%.c,$(OBJ)/controller/converter/%.o,$(CONTROLLER_CONVERTER_SOURCES))
+CONTROLLER_CYBOI_SOURCES = $(wildcard $(SRC)/controller/cyboi/*.c)
+CONTROLLER_CYBOI_OBJECTS = $(patsubst $(SRC)/controller/cyboi/%.c,$(OBJ)/controller/cyboi/%.o,$(CONTROLLER_CYBOI_SOURCES))
+CONTROLLER_TRANSLATOR_SOURCES = $(wildcard $(SRC)/controller/translator/*.c)
+CONTROLLER_TRANSLATOR_OBJECTS = $(patsubst $(SRC)/controller/translator/%.c,$(OBJ)/controller/translator/%.o,$(CONTROLLER_TRANSLATOR_SOURCES))
+
+# Globals.
+GLOBALS_CONSTANTS_SOURCES = $(wildcard $(SRC)/globals/constants/*.c)
+GLOBALS_CONSTANTS_OBJECTS = $(patsubst $(SRC)/globals/constants/%.c,$(OBJ)/globals/constants/%.o,$(GLOBALS_CONSTANTS_SOURCES))
+GLOBALS_LOGGER_SOURCES = $(wildcard $(SRC)/globals/logger/*.c)
+GLOBALS_LOGGER_OBJECTS = $(patsubst $(SRC)/globals/logger/%.c,$(OBJ)/globals/logger/%.o,$(GLOBALS_LOGGER_SOURCES))
+GLOBALS_VARIABLES_SOURCES = $(wildcard $(SRC)/globals/variables/*.c)
+GLOBALS_VARIABLES_OBJECTS = $(patsubst $(SRC)/globals/variables/%.c,$(OBJ)/globals/variables/%.o,$(GLOBALS_VARIABLES_SOURCES))
+
+# Memory.
+MEMORY_ACCESSOR_SOURCES = $(wildcard $(SRC)/memory/accessor/*.c)
+MEMORY_ACCESSOR_OBJECTS = $(patsubst $(SRC)/memory/accessor/%.c,$(OBJ)/memory/accessor/%.o,$(MEMORY_ACCESSOR_SOURCES))
+MEMORY_ARRAY_SOURCES = $(wildcard $(SRC)/memory/array/*.c)
+MEMORY_ARRAY_OBJECTS = $(patsubst $(SRC)/memory/array/%.c,$(OBJ)/memory/array/%.o,$(MEMORY_ARRAY_SOURCES))
+MEMORY_CREATOR_SOURCES = $(wildcard $(SRC)/memory/creator/*.c)
+MEMORY_CREATOR_OBJECTS = $(patsubst $(SRC)/memory/creator/%.c,$(OBJ)/memory/creator/%.o,$(MEMORY_CREATOR_SOURCES))
+
+# Tester.
+TESTER_SOURCES = $(wildcard $(SRC)/tester/*.c)
+TESTER_OBJECTS = $(patsubst $(SRC)/tester/%.c,$(OBJ)/tester/%.o,$(TESTER_SOURCES))
+
+# OLD stuff to be deleted!
 SOCKET_SOURCES = $(wildcard $(SRC)/socket/*.c)
 SOCKET_OBJECTS = $(patsubst $(SRC)/socket/%.c,$(OBJ)/socket/%.o,$(SOCKET_SOURCES))
-STATE_SOURCES = $(wildcard $(SRC)/state/*.c)
-STATE_OBJECTS = $(patsubst $(SRC)/state/%.c,$(OBJ)/state/%.o,$(STATE_SOURCES))
-TEST_SOURCES = $(wildcard $(SRC)/test/*.c)
-TEST_OBJECTS = $(patsubst $(SRC)/test/%.c,$(OBJ)/test/%.o,$(TEST_SOURCES))
-TRANSLATOR_SOURCES = $(wildcard $(SRC)/translator/*.c)
-TRANSLATOR_OBJECTS = $(patsubst $(SRC)/translator/%.c,$(OBJ)/translator/%.o,$(TRANSLATOR_SOURCES))
-X_WINDOWS_SOURCES = $(wildcard $(SRC)/x_windows/*.c)
-X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WINDOWS_SOURCES))
 
 #
 # Compiles all cyboi source files.
@@ -123,11 +131,30 @@ X_WINDOWS_OBJECTS = $(patsubst $(SRC)/x_windows/%.c,$(OBJ)/x_windows/%.o,$(X_WIN
 #
 #	$(COMPILER) -I /usr/X11R6/include -L /usr/X11R6/lib $(OBJ)/cyboi.o -o $(BIN)/$(BINARY)
 #
-#all: create $(ACCESSOR_OBJECTS) $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CREATOR_OBJECTS) $(CYBOI_OBJECTS) $(GLOBAL_OBJECTS) $(LOGGER_OBJECTS) $(LOGIC_OBJECTS) $(PARSER_OBJECTS) $(SIGNAL_OBJECTS) $(SOCKET_OBJECTS) $(STATE_OBJECTS) $(TEST_OBJECTS) $(TRANSLATOR_OBJECTS) $(X_WINDOWS_OBJECTS)
+#all: create $(ACCESSOR_OBJECTS) $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CREATOR_OBJECTS) $(CYBOI_OBJECTS) $(CONSTANTS_OBJECTS) $(LOGGER_OBJECTS) $(COMPUTER_OBJECTS) $(CONVERTER_OBJECTS) $(SIGNAL_OBJECTS) $(SOCKET_OBJECTS) $(STATE_OBJECTS) $(TESTER_OBJECTS) $(TRANSLATOR_OBJECTS) $(X_WINDOWS_OBJECTS)
 #	$(COMPILER) -L/usr/X11R6/lib -L/usr/lib \
 #		-o $(BIN)/$(BINARY) $(OBJ)/cyboi/cyboi.o -lX11 -lxml2
 #
-all: create $(ACCESSOR_OBJECTS) $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CREATOR_OBJECTS) $(CYBOI_OBJECTS) $(GLOBAL_OBJECTS) $(LOGGER_OBJECTS) $(LOGIC_OBJECTS) $(LOGIC_INTERRUPT_OBJECTS) $(LOGIC_RECEIVE_OBJECTS) $(LOGIC_SEND_OBJECTS) $(LOGIC_SHUTDOWN_OBJECTS) $(LOGIC_STARTUP_OBJECTS) $(LOGIC_SUSPEND_OBJECTS) $(PARSER_OBJECTS) $(SIGNAL_OBJECTS) $(SOCKET_OBJECTS) $(STATE_OBJECTS) $(TEST_OBJECTS) $(TRANSLATOR_OBJECTS) $(X_WINDOWS_OBJECTS)
+all: create \
+	$(COMPUTER_OBJECTS) \
+	$(COMPUTER_INTERRUPT_OBJECTS) \
+	$(COMPUTER_RECEIVE_OBJECTS) \
+	$(COMPUTER_SEND_OBJECTS) \
+	$(COMPUTER_SHUTDOWN_OBJECTS) \
+	$(COMPUTER_STARTUP_OBJECTS) \
+	$(COMPUTER_SUSPEND_OBJECTS) \
+	$(CONTROLLER_COMMUNICATOR_OBJECTS) \
+	$(CONTROLLER_CONVERTER_OBJECTS) \
+	$(CONTROLLER_CYBOI_OBJECTS) \
+	$(CONTROLLER_TRANSLATOR_OBJECTS) \
+	$(GLOBALS_CONSTANTS_OBJECTS) \
+	$(GLOBALS_LOGGER_OBJECTS) \
+	$(GLOBALS_VARIABLES_OBJECTS) \
+	$(MEMORY_ACCESSOR_OBJECTS) \
+	$(MEMORY_ARRAY_OBJECTS) \
+	$(MEMORY_CREATOR_OBJECTS) \
+	$(TESTER_OBJECTS) \
+	$(SOCKET_OBJECTS) \
 # Compile source files.
 	$(COMPILER) -c $(COMPILER_FLAGS) $(SRC)/cyboi/cyboi.c \
 		-o $(OBJ)/cyboi/cyboi.o
@@ -145,92 +172,87 @@ all: create $(ACCESSOR_OBJECTS) $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CREAT
 #
 create:
 	-cd ..; mkdir obj; mkdir bin
-	-cd $(OBJ); mkdir accessor
-	-cd $(OBJ); mkdir array
-	-cd $(OBJ); mkdir communicator
-	-cd $(OBJ); mkdir creator
-	-cd $(OBJ); mkdir cyboi
-	-cd $(OBJ); mkdir global
-	-cd $(OBJ); mkdir logger
-	-cd $(OBJ); mkdir logic
-	-cd $(OBJ); mkdir logic/interrupt
-	-cd $(OBJ); mkdir logic/receive
-	-cd $(OBJ); mkdir logic/send
-	-cd $(OBJ); mkdir logic/shutdown
-	-cd $(OBJ); mkdir logic/startup
-	-cd $(OBJ); mkdir logic/suspend
-	-cd $(OBJ); mkdir parser
-	-cd $(OBJ); mkdir signal
+	-cd $(OBJ); mkdir computer
+	-cd $(OBJ); mkdir computer/interrupt
+	-cd $(OBJ); mkdir computer/receive
+	-cd $(OBJ); mkdir computer/send
+	-cd $(OBJ); mkdir computer/shutdown
+	-cd $(OBJ); mkdir computer/startup
+	-cd $(OBJ); mkdir computer/suspend
+	-cd $(OBJ); mkdir controller
+	-cd $(OBJ); mkdir controller/communicator
+	-cd $(OBJ); mkdir controller/converter
+	-cd $(OBJ); mkdir controller/cyboi
+	-cd $(OBJ); mkdir controller/translator
+	-cd $(OBJ); mkdir globals
+	-cd $(OBJ); mkdir globals/constants
+	-cd $(OBJ); mkdir globals/logger
+	-cd $(OBJ); mkdir globals/variables
+	-cd $(OBJ); mkdir memory
+	-cd $(OBJ); mkdir memory/accessor
+	-cd $(OBJ); mkdir memory/array
+	-cd $(OBJ); mkdir memory/creator
+	-cd $(OBJ); mkdir tester
 	-cd $(OBJ); mkdir socket
-	-cd $(OBJ); mkdir state
-	-cd $(OBJ); mkdir test
-	-cd $(OBJ); mkdir translator
-	-cd $(OBJ); mkdir x_windows
 
 #$(OBJ)/%.o: $(SRC)/%.c
 #	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/accessor/%.o: $(SRC)/accessor/%.c
+$(OBJ)/computer/%.o: $(SRC)/computer/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/array/%.o: $(SRC)/array/%.c
+$(OBJ)/computer/interrupt/%.o: $(SRC)/computer/interrupt/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/creator/%.o: $(SRC)/creator/%.c
+$(OBJ)/computer/receive/%.o: $(SRC)/computer/receive/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/communicator/%.o: $(SRC)/communicator/%.c
+$(OBJ)/computer/send/%.o: $(SRC)/computer/send/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/cyboi/%.o: $(SRC)/cyboi/%.c
+$(OBJ)/computer/shutdown/%.o: $(SRC)/computer/shutdown/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/global/%.o: $(SRC)/global/%.c
+$(OBJ)/computer/startup/%.o: $(SRC)/computer/startup/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/logger/%.o: $(SRC)/logger/%.c
+$(OBJ)/computer/suspend/%.o: $(SRC)/computer/suspend/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/logic/%.o: $(SRC)/logic/%.c
+$(OBJ)/controller/communicator/%.o: $(SRC)/controller/communicator/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/logic/interrupt/%.o: $(SRC)/logic/interrupt/%.c
+$(OBJ)/controller/converter/%.o: $(SRC)/controller/converter/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/logic/receive/%.o: $(SRC)/logic/receive/%.c
+$(OBJ)/controller/cyboi/%.o: $(SRC)/controller/cyboi/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/logic/send/%.o: $(SRC)/logic/send/%.c
+$(OBJ)/controller/translator/%.o: $(SRC)/controller/translator/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/logic/shutdown/%.o: $(SRC)/logic/shutdown/%.c
+$(OBJ)/globals/constants/%.o: $(SRC)/globals/constants/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/logic/startup/%.o: $(SRC)/logic/startup/%.c
+$(OBJ)/globals/logger/%.o: $(SRC)/globals/logger/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/logic/suspend/%.o: $(SRC)/logic/suspend/%.c
+$(OBJ)/globals/variables/%.o: $(SRC)/globals/variables/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/parser/%.o: $(SRC)/parser/%.c
+$(OBJ)/memory/accessor/%.o: $(SRC)/memory/accessor/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/signal/%.o: $(SRC)/signal/%.c
+$(OBJ)/memory/array/%.o: $(SRC)/memory/array/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/memory/creator/%.o: $(SRC)/memory/creator/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/tester/%.o: $(SRC)/tester/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/socket/%.o: $(SRC)/socket/%.c
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
-
-$(OBJ)/state/%.o: $(SRC)/state/%.c
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
-
-$(OBJ)/test/%.o: $(SRC)/test/%.c
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
-
-$(OBJ)/translator/%.o: $(SRC)/translator/%.c
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
-
-$(OBJ)/x_windows/%.o: $(SRC)/x_windows/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 #
