@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.29 $ $Date: 2005-04-14 16:04:36 $ $Author: rholzmueller $
+ * @version $Revision: 1.30 $ $Date: 2005-06-04 21:16:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -185,33 +185,33 @@ void send_message(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays( (void*) *lm, (void*) *lmc, 
-                        (void*) SIGNAL_ABSTRACTION, 
-                        (void*) SIGNAL_ABSTRACTION_COUNT, 
+        compare_arrays( (void*) *lm, (void*) *lmc,
+                        (void*) SIGNAL_ABSTRACTION,
+                        (void*) SIGNAL_ABSTRACTION_COUNT,
                         (void*) &r, (void*) CHARACTER_ARRAY );
 
         if (r == 1) {
 
             //set_signal
-            log_message_debug("Set start signal.");
-    
+            log_message_debug("Set signal.");
+
             // The signal memory.
             void** sm = NULL_POINTER;
             void** smc = NULL_POINTER;
             void** sms = NULL_POINTER;
-    
+
             // Get signal memory.
             get_array_elements(p6, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &sm, (void*) POINTER_ARRAY);
             get_array_elements(p6, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &smc, (void*) POINTER_ARRAY);
             get_array_elements(p6, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &sms, (void*) POINTER_ARRAY);
-    
+
             // Set signal.
             set_signal(*sm, *smc, *sms,
                 (void*) *ma, (void*) *mac,
                 (void*) *mm, (void*) *mmc,
                 (void*) *md, (void*) *mdc,
                 (void*) NORMAL_PRIORITY, p5);
-            
+
         }
     }
 
@@ -333,18 +333,18 @@ void send_url_refresh( const void* p0, const void* p1,
         (void*) &urld, (void*) &urldc, (void*) &urlds,
         p2, p3 );
 
-    if (    (urla != NULL_POINTER) 
-         && (urlac != NULL_POINTER) 
-         && (urlas != NULL_POINTER) 
-         && (urlm != NULL_POINTER) 
-         && (urlmc != NULL_POINTER) 
-         && (urlms != NULL_POINTER) 
-         && (urld != NULL_POINTER) 
-         && (urldc != NULL_POINTER) 
-         && (urlds != NULL_POINTER) 
+    if (    (urla != NULL_POINTER)
+         && (urlac != NULL_POINTER)
+         && (urlas != NULL_POINTER)
+         && (urlm != NULL_POINTER)
+         && (urlmc != NULL_POINTER)
+         && (urlms != NULL_POINTER)
+         && (urld != NULL_POINTER)
+         && (urldc != NULL_POINTER)
+         && (urlds != NULL_POINTER)
        )
     {
-        
+
         // The socket number for the signal id.
         // The index for the signal id in the array is the same index
         // in the client socket number array.
@@ -360,17 +360,17 @@ void send_url_refresh( const void* p0, const void* p1,
             get_client_socket_number_for_index(p6, (void*) &i, (void*) &cs);
 
             if (*cs >= 0) {
-        
+
                     char msg_refresh_part_1[] = "<head> <meta http-equiv='expires' content='0'>  <meta http-equiv='refresh' content='0; URL=";
                     char msg_refresh_part_3[] = "'></head><body></body>";
                     int msg_part_1_count = strlen( msg_refresh_part_1 );
                     int msg_part_3_count = strlen( msg_refresh_part_3 );
-            
+
                     //create the destination for the send model
                     void* dest = NULL_POINTER;
                     int* dest_count = INTEGER_NULL_POINTER;
                     int* dest_size = INTEGER_NULL_POINTER;
-            
+
                     create( &dest_count, INTEGER_COUNT,
                             INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
                     create( &dest_size, INTEGER_COUNT,
@@ -379,15 +379,15 @@ void send_url_refresh( const void* p0, const void* p1,
                     *dest_size  = 0;
                     create( &dest, dest_size,
                             STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT );
-                            
+
                     parse( &dest, dest_count, dest_size,
                            &msg_refresh_part_1[0], &msg_part_1_count,
                            STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
-            
+
                     parse( &dest, dest_count, dest_size,
                            *urlm, *urlmc,
                            STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
-                 
+
                     parse( &dest, dest_count, dest_size,
                            &msg_refresh_part_3[0], &msg_part_3_count,
                            STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);

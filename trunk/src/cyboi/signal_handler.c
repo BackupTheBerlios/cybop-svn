@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.32 $ $Date: 2005-04-25 08:34:20 $ $Author: rholzmueller $
+ * @version $Revision: 1.33 $ $Date: 2005-06-04 21:16:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -171,12 +171,18 @@ void handle_compound_signal(const void* p0, const void* p1, const void* p2,
                                                             // (Each signal has a priority. A signal may consist of part
                                                             // signals. The part signals cannot have higher / lower priority
                                                             // than their original whole signal.)
-                                                            if ( direct_execution_flag == 0 ) {
+/*??
+                                                            if (direct_execution_flag == 0) {
+
                                                                 set_signal(*sm, *smc, *sms, *a, *ac, *m, *mc, *d, *dc, p2, p3);
+
+                                                            } else {
+*/
+                                                                handle_signal(*a, *ac, *m, *mc, *d, *dc, p2, p3, p4, p5, p6);
+/*??
                                                             }
-                                                            else {
-                                                                handle_signal( *a, *ac, *m, *mc, *d, *dc, p2, p3, p4, p5, p6 );
-                                                            }
+*/
+
                                                         } else {
 
                                                             log_message_debug("Could not handle compound signal. The details count is null.");
