@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -28,16 +28,16 @@
 #ifndef STARTUP_SOURCE
 #define STARTUP_SOURCE
 
-#include "../array/array.c"
-#include "../global/abstraction_constants.c"
-#include "../global/channel_constants.c"
-#include "../global/constant.c"
-#include "../creator/creator.c"
-#include "../global/log_constants.c"
-#include "../global/name_constants.c"
-#include "../logger/logger.c"
-#include "../logic/startup/startup_tcp_socket.c"
-#include "../logic/startup/startup_x_window_system.c"
+#include "../computer/startup/startup_tcp_socket.c"
+#include "../computer/startup/startup_x_window_system.c"
+#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/channel_constants.c"
+#include "../globals/constants/constant.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/constants/name_constants.c"
+#include "../globals/logger/logger.c"
+#include "../memory/array/array.c"
+#include "../memory/creator/creator.c"
 
 /**
  * Starts up a service.
@@ -125,13 +125,13 @@ void startup_service(const void* p0, const void* p1,
                  && (spac != NULL_POINTER)
                  && (spm != NULL_POINTER)
                  && (spmc != NULL_POINTER) )
-            {                 
+            {
 
-                startup_tcp_socket( p5, p2, p3, p4, 
+                startup_tcp_socket( p5, p2, p3, p4,
                                     *spa, *spac, *spm, *spmc );
             }
             else {
-             
+
                 log_message_debug( "the socket port ist a null pointer" );
             }
         }

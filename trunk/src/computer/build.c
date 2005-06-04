@@ -22,33 +22,33 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
- 
+
 #ifndef BUILD_SOURCE
 #define BUILD_SOURCE
 
-#include "../array/array.c"
-#include "../creator/creator.c"
-#include "../communicator/communicator.c"
-#include "../global/abstraction_constants.c"
-#include "../global/log_constants.c"
-#include "../global/name_constants.c"
-#include "../logger/logger.c"
-#include "../parser/parser.c"
-#include "../translator/translator.c"
-#include "../test/test.c"
+#include "../controller/converter/converter.c"
+#include "../controller/translator/translator.c"
+#include "../controller/communicator/communicator.c"
+#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/constants/name_constants.c"
+#include "../globals/constants/logger/logger.c"
+#include "../memory/array/array.c"
+#include "../memory/creator/creator.c"
+#include "../tester/tester.c"
 
-/* 
+/*
  * @param param the parameters
  * @param param_count the parameters count
  * @param internal
-*/ 
-void build_listname( const void* param, const int* param_count, 
+ */
+void build_listname( const void* param, const int* param_count,
                      void* internal )
 {
-    
+
     // The knowledge memory.
     void** km = POINTER_NULL_POINTER;
     void** kmc = POINTER_NULL_POINTER;
@@ -58,8 +58,8 @@ void build_listname( const void* param, const int* param_count,
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
-    
-    
+
+
     log_message_debug("operation build_listname");
 
     // The basisname abstraction.
@@ -103,16 +103,16 @@ void build_listname( const void* param, const int* param_count,
 
     // get the basisname
     get_real_compound_element_by_name( param, param_count,
-        (void*) BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION, 
+        (void*) BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION,
         (void*) BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION_COUNT,
         (void*) &bna, (void*) &bnac, (void*) &bnas,
         (void*) &bnm, (void*) &bnmc, (void*) &bnms,
         (void*) &bnd, (void*) &bndc, (void*) &bnds,
         *km, *kmc );
 
-    // get the index     
+    // get the index
     get_real_compound_element_by_name( param, param_count,
-        (void*) BUILD_LISTNAME_INDEX_NAME_ABSTRACTION, 
+        (void*) BUILD_LISTNAME_INDEX_NAME_ABSTRACTION,
         (void*) BUILD_LISTNAME_INDEX_NAME_ABSTRACTION_COUNT,
         (void*) &idxa, (void*) &idxac, (void*) &idxas,
         (void*) &idxm, (void*) &idxmc, (void*) &idxms,
@@ -121,7 +121,7 @@ void build_listname( const void* param, const int* param_count,
 
     // get the result
     get_real_compound_element_by_name( param, param_count,
-        (void*) BUILD_LISTNAME_RESULT_NAME_ABSTRACTION, 
+        (void*) BUILD_LISTNAME_RESULT_NAME_ABSTRACTION,
         (void*) BUILD_LISTNAME_RESULT_NAME_ABSTRACTION_COUNT,
         (void*) &resa, (void*) &resac, (void*) &resas,
         (void*) &resm, (void*) &resmc, (void*) &resms,
@@ -147,7 +147,7 @@ void build_listname( const void* param, const int* param_count,
         && (idxms != POINTER_NULL_POINTER)
         && (idxd != POINTER_NULL_POINTER)
         && (idxdc != POINTER_NULL_POINTER)
-        && (idxds != POINTER_NULL_POINTER) 
+        && (idxds != POINTER_NULL_POINTER)
         // Check result.
         && (resa != POINTER_NULL_POINTER)
         && (resac != POINTER_NULL_POINTER)
@@ -164,69 +164,69 @@ void build_listname( const void* param, const int* param_count,
         int comp_res1 = 0;
         int comp_res2 = 0;
         int comp_res3 = 0;
-        
-        compare_arrays( *bna, *bnac, 
-                        (void*) STRING_ABSTRACTION, 
+
+        compare_arrays( *bna, *bnac,
+                        (void*) STRING_ABSTRACTION,
                         (void*) STRING_ABSTRACTION_COUNT,
                         (void*) &comp_res1, (void*) CHARACTER_ARRAY);
-        compare_arrays( *idxa, *idxac, 
-                        (void*) INTEGER_ABSTRACTION, 
+        compare_arrays( *idxa, *idxac,
+                        (void*) INTEGER_ABSTRACTION,
                         (void*) INTEGER_ABSTRACTION_COUNT,
                         (void*) &comp_res2, (void*) CHARACTER_ARRAY);
-        compare_arrays( *resa, *resac, 
-                        (void*) STRING_ABSTRACTION, 
+        compare_arrays( *resa, *resac,
+                        (void*) STRING_ABSTRACTION,
                         (void*) STRING_ABSTRACTION_COUNT,
                         (void*) &comp_res3, (void*) CHARACTER_ARRAY);
-                        
+
         if ( (comp_res1 == 1) && (comp_res2 == 1) && (comp_res3 == 1) ) {
 
             //  changing the for the index
-            
+
             // Create compare string.
             char* int_string = CHARACTER_NULL_POINTER;
             // todo Konstante noch definieren
             int int_string_count = 0;
             int int_string_size = 10;
-            
-            create_array( (void*) &int_string, (void*) &int_string_size, 
+
+            create_array( (void*) &int_string, (void*) &int_string_size,
                           (void*) CHARACTER_ARRAY);
-            
-            int_string_count = snprintf( int_string, int_string_size, 
+
+            int_string_count = snprintf( int_string, int_string_size,
                                          "%i", *((int*)*idxm) );
-            
-            //destination size 
+
+            //destination size
             *(int*)*resms = *((int*)*bnmc) + *LIST_SEPARATOR_COUNT + int_string_count;
             *(int*)*resmc = *((int*)*bnmc) + *LIST_SEPARATOR_COUNT + int_string_count;
-            
+
             //reszize the reseult array
             resize_array(resm, *resms, CHARACTER_ARRAY );
-            
+
             //set the result array
-            set_array_elements( *resm, (void*) ZERO_NUMBER, 
+            set_array_elements( *resm, (void*) ZERO_NUMBER,
                                 *bnm, *bnmc,  (void*) CHARACTER_ARRAY);
-            set_array_elements( *resm, *bnmc, 
-                                LIST_SEPARATOR, LIST_SEPARATOR_COUNT,  
+            set_array_elements( *resm, *bnmc,
+                                LIST_SEPARATOR, LIST_SEPARATOR_COUNT,
                                 (void*) CHARACTER_ARRAY);
             int temp_index = *((int*)*bnmc) + *LIST_SEPARATOR_COUNT;
-            set_array_elements( *resm, &temp_index, 
-                                int_string, &int_string_count,  
+            set_array_elements( *resm, &temp_index,
+                                int_string, &int_string_count,
                                 (void*) CHARACTER_ARRAY);
-            
+
 
             //destroy the int_string array
-            destroy_array( (void*) &int_string, (void*) &int_string_size, 
+            destroy_array( (void*) &int_string, (void*) &int_string_size,
                           (void*) CHARACTER_ARRAY);
-            
+
         }
         else {
-         
-            log_message_debug("operation build_listname: the abstraction for the operands are not correct");   
+
+            log_message_debug("operation build_listname: the abstraction for the operands are not correct");
         }
-        
+
     }
-    
-}           
- 
+
+}
+
 /* BUILD_SOURCE */
 #endif
 

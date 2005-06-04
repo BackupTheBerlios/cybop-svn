@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -28,8 +28,8 @@
 #ifndef SHUTDOWN_TCP_SOCKET_SOURCE
 #define SHUTDOWN_TCP_SOCKET_SOURCE
 
-#include "../../global/structure_constants.c"
-#include "../../global/variables.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../variables/variables/variables.c"
 
 /**
  * Shuts down the tcp socket service.
@@ -58,11 +58,11 @@ void shutdown_tcp_socket(void* p0, const void* p1, const void* p2, const void* p
         void** socket_flag = POINTER_NULL_POINTER;
         get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_ARRAY);
         if ( (socket_flag!=NULL_POINTER) && (*socket_flag!=NULL_POINTER) ) {
-         
-            *((int*)*socket_flag) = 0; 
+
+            *((int*)*socket_flag) = 0;
         }
-        
-        
+
+
     } else {
 
         log_message_debug("WARNING: Could not shutdown tcp socket. There is no tcp socket service running.");

@@ -22,33 +22,32 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
- 
+
 #ifndef SET_SOURCE
 #define SET_SOURCE
 
-#include "../array/array.c"
-#include "../creator/creator.c"
-#include "../communicator/communicator.c"
-#include "../global/abstraction_constants.c"
-#include "../global/log_constants.c"
-#include "../global/name_constants.c"
-#include "../logger/logger.c"
-#include "../parser/parser.c"
-#include "../translator/translator.c"
-#include "../test/test.c"
-
+#include "../controller/communicator/communicator.c"
+#include "../controller/converter/converter.c"
+#include "../controller/translator/translator.c"
+#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/constants/name_constants.c"
+#include "../globals/logger/logger.c"
+#include "../memory/array/array.c"
+#include "../memory/creator/creator.c"
+#include "../tester/tester.c"
 
 void set_integer( void* source, int* source_count,
                   void* dest, int* dest_count ) {
- 
+
     //the source and the destinatione are integers
 
     if ( (source != NULL_POINTER) &&
          (dest   != NULL_POINTER) ) {
-  
+
         *((int*)dest) = *((int*)source);
     }
 }
@@ -56,7 +55,7 @@ void set_integer( void* source, int* source_count,
 
 void set_string( void* source, int* source_count, int* source_size,
                  void** dest, int* dest_count, int* dest_size ) {
- 
+
     //the source and the destinatione are arrays of string
 
     if ( (source != NULL_POINTER) &&
@@ -66,30 +65,30 @@ void set_string( void* source, int* source_count, int* source_size,
          (dest_count   != NULL_POINTER)  &&
          (dest_size   != NULL_POINTER)  )
     {
-     
+
         *dest_count=*source_count;
         *dest_size=*dest_count;
-        
+
         resize_array( dest, dest_size, CHARACTER_ARRAY );
-        
-        set_array_elements( *dest, (void*) ZERO_NUMBER,  
-                            source, source_count, 
+
+        set_array_elements( *dest, (void*) ZERO_NUMBER,
+                            source, source_count,
                             (void*) CHARACTER_ARRAY);
-    }         
+    }
 }
 
-/* 
+/*
  * @param param the parameters
  * @param param_count the parameters count
- * @param proiority 
- * @param signal_id 
+ * @param proiority
+ * @param signal_id
  * @param internal
-*/ 
-void set( const void* param, const int* param_count, 
-          const void* priority, const void* signal_id, 
+*/
+void set( const void* param, const int* param_count,
+          const void* priority, const void* signal_id,
           void* internal )
 {
-    
+
     // The knowledge memory.
     void** km = POINTER_NULL_POINTER;
     void** kmc = POINTER_NULL_POINTER;
@@ -99,8 +98,8 @@ void set( const void* param, const int* param_count,
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
-    
-    
+
+
     log_message_debug("operation set");
 
     // The source name abstraction.
@@ -132,7 +131,7 @@ void set( const void* param, const int* param_count,
 
     // Get source.
     get_real_compound_element_by_name( param, param_count,
-        (void*) SET_SOURCE_NAME_ABSTRACTION, 
+        (void*) SET_SOURCE_NAME_ABSTRACTION,
         (void*) SET_SOURCE_NAME_ABSTRACTION_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
@@ -141,13 +140,13 @@ void set( const void* param, const int* param_count,
 
     // Get destination.
     get_real_compound_element_by_name( param, param_count,
-        (void*) SET_DESTINATION_NAME_ABSTRACTION, 
+        (void*) SET_DESTINATION_NAME_ABSTRACTION,
         (void*) SET_DESTINATION_NAME_ABSTRACTION_COUNT,
         (void*) &da, (void*) &dac, (void*) &das,
         (void*) &dm, (void*) &dmc, (void*) &dms,
         (void*) &dd, (void*) &ddc, (void*) &dds,
         *km, *kmc );
-        
+
     // Check source.
     if (   (sa != POINTER_NULL_POINTER)
         && (sac != POINTER_NULL_POINTER)
@@ -170,62 +169,62 @@ void set( const void* param, const int* param_count,
         && (dds != POINTER_NULL_POINTER)
       )
     {
-     
+
         int r1 = 0;
         int r2 = 0;
-     
+
         //set for integer
         r1 = 0;
         r2 = 0;
-        
+
         compare_arrays( *sa, *sac,
-                        (void*) INTEGER_ABSTRACTION, 
+                        (void*) INTEGER_ABSTRACTION,
                         (void*) INTEGER_ABSTRACTION_COUNT,
                         (void*) &r1, (void*) CHARACTER_ARRAY);
         compare_arrays( *da, *dac,
-                        (void*) INTEGER_ABSTRACTION, 
+                        (void*) INTEGER_ABSTRACTION,
                         (void*) INTEGER_ABSTRACTION_COUNT,
                         (void*) &r2, (void*) CHARACTER_ARRAY);
-        
+
         if ( (r1 == 1) && (r2 == 1) ) {
-           
+
             set_integer( *sm, *smc, *dm, *dmc);
         }
-        
-        
+
+
         //set for string
         r1 = 0;
         r2 = 0;
-        
+
         compare_arrays( *sa, *sac,
-                        (void*) STRING_ABSTRACTION, 
+                        (void*) STRING_ABSTRACTION,
                         (void*) STRING_ABSTRACTION_COUNT,
                         (void*) &r1, (void*) CHARACTER_ARRAY);
         compare_arrays( *da, *dac,
-                        (void*) STRING_ABSTRACTION, 
+                        (void*) STRING_ABSTRACTION,
                         (void*) STRING_ABSTRACTION_COUNT,
                         (void*) &r2, (void*) CHARACTER_ARRAY);
-        
+
         if ( (r1 == 1) && (r2 == 1) ) {
-           
+
             set_string( *sm, *smc, *sms, dm, *dmc, *dms );
         }
-        
-    }
-}           
 
-/* 
+    }
+}
+
+/*
  * @param param the parameters
  * @param param_count the parameters count
- * @param proiority 
- * @param signal_id 
+ * @param proiority
+ * @param signal_id
  * @param internal
-*/ 
-void set_property( const void* param, const int* param_count, 
-                   const void* priority, const void* signal_id, 
+*/
+void set_property( const void* param, const int* param_count,
+                   const void* priority, const void* signal_id,
                    void* internal )
 {
-    
+
     // The knowledge memory.
     void** km = POINTER_NULL_POINTER;
     void** kmc = POINTER_NULL_POINTER;
@@ -235,8 +234,8 @@ void set_property( const void* param, const int* param_count,
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
-    
-    
+
+
     log_message_debug("operation set_proerty.");
 
     // The source name abstraction.
@@ -293,7 +292,7 @@ void set_property( const void* param, const int* param_count,
 
     // Get source.
     get_real_compound_element_by_name( param, param_count,
-        (void*) SET_SOURCE_NAME_ABSTRACTION, 
+        (void*) SET_SOURCE_NAME_ABSTRACTION,
         (void*) SET_SOURCE_NAME_ABSTRACTION_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
@@ -302,7 +301,7 @@ void set_property( const void* param, const int* param_count,
 
     // Get destination.
     get_real_compound_element_by_name( param, param_count,
-        (void*) SET_DESTINATION_NAME_ABSTRACTION, 
+        (void*) SET_DESTINATION_NAME_ABSTRACTION,
         (void*) SET_DESTINATION_NAME_ABSTRACTION_COUNT,
         (void*) &da, (void*) &dac, (void*) &das,
         (void*) &dm, (void*) &dmc, (void*) &dms,
@@ -311,13 +310,13 @@ void set_property( const void* param, const int* param_count,
 
     // Get destination property.
     get_real_compound_element_by_name( param, param_count,
-        (void*) SET_DESTINATION_PROPERTY_NAME_ABSTRACTION, 
-        (void*) SET_DESTINATION_PROPERTY_NAME_ABSTRACTION_COUNT, 
+        (void*) SET_DESTINATION_PROPERTY_NAME_ABSTRACTION,
+        (void*) SET_DESTINATION_PROPERTY_NAME_ABSTRACTION_COUNT,
         (void*) &dpa, (void*) &dpac, (void*) &dpas,
         (void*) &dpm, (void*) &dpmc, (void*) &dpms,
         (void*) &dpd, (void*) &dpdc, (void*) &dpds,
         *km, *kmc );
-        
+
     // Check source.
     if (   (sa != POINTER_NULL_POINTER)
         && (sac != POINTER_NULL_POINTER)
@@ -356,15 +355,15 @@ void set_property( const void* param, const int* param_count,
         int r = 0;
 
         compare_arrays( *dpa, *dpac,
-                        (void*) STRING_ABSTRACTION, 
+                        (void*) STRING_ABSTRACTION,
                         (void*) STRING_ABSTRACTION_COUNT,
                         (void*) &r, (void*) CHARACTER_ARRAY);
-                        
+
         if ( r == 1 ) {
 
             //get the property from the destination
             get_compound_element_by_name( *dd, *ddc,
-                (void*) *dpm, (void*) *dpmc, 
+                (void*) *dpm, (void*) *dpmc,
                 (void*) &pa, (void*) &pac, (void*) &pas,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
                 (void*) &pd, (void*) &pdc, (void*) &pds );
@@ -382,52 +381,52 @@ void set_property( const void* param, const int* param_count,
 
                 int r1 = 0;
                 int r2 = 0;
-             
+
                 //set for integer
                 r1 = 0;
                 r2 = 0;
-                
+
                 compare_arrays( *sa, *sac,
-                                (void*) INTEGER_ABSTRACTION, 
+                                (void*) INTEGER_ABSTRACTION,
                                 (void*) INTEGER_ABSTRACTION_COUNT,
                                 (void*) &r1, (void*) CHARACTER_ARRAY);
                 compare_arrays( *pa, *pac,
-                                (void*) INTEGER_ABSTRACTION, 
+                                (void*) INTEGER_ABSTRACTION,
                                 (void*) INTEGER_ABSTRACTION_COUNT,
                                 (void*) &r2, (void*) CHARACTER_ARRAY);
-                
+
                 if ( (r1 == 1) && (r2 == 1) ) {
-                   
+
                     set_integer( *sm, *smc, *pm, *pmc);
                 }
-                
-                
+
+
                 //set for string
                 r1 = 0;
                 r2 = 0;
-                
+
                 compare_arrays( *sa, *sac,
-                                (void*) STRING_ABSTRACTION, 
+                                (void*) STRING_ABSTRACTION,
                                 (void*) STRING_ABSTRACTION_COUNT,
                                 (void*) &r1, (void*) CHARACTER_ARRAY);
                 compare_arrays( *pa, *pac,
-                                (void*) STRING_ABSTRACTION, 
+                                (void*) STRING_ABSTRACTION,
                                 (void*) STRING_ABSTRACTION_COUNT,
                                 (void*) &r2, (void*) CHARACTER_ARRAY);
-                
+
                 if ( (r1 == 1) && (r2 == 1) ) {
-                   
+
                     set_string( *sm, *smc, *sms, pm, *pmc, *pms );
                 }
-                
-            } //check null pointer property
-           
-        } //string abstraction for destination property
-     
-    }
-}           
 
- 
+            } //check null pointer property
+
+        } //string abstraction for destination property
+
+    }
+}
+
+
 /* SET_SOURCE */
 #endif
 

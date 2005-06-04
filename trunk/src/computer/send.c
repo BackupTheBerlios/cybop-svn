@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -28,18 +28,18 @@
 #ifndef SEND_SOURCE
 #define SEND_SOURCE
 
-#include "../communicator/tui_communicator.c"
-#include "../communicator/tcp_socket_communicator.c"
-#include "../creator/integer_creator.c"
-#include "../global/abstraction_constants.c"
-#include "../global/channel_constants.c"
-#include "../global/name_constants.c"
-#include "../global/structure_constants.c"
-#include "../logger/logger.c"
-//?? #include "../logic/send/send_tcp_socket.c"
-#include "../logic/send/send_x_window_system.c"
+//?? #include "../computer/send/send_tcp_socket.c"
+#include "../computer/send/send_x_window_system.c"
+#include "../controller/communicator/tui_communicator.c"
+#include "../controller/communicator/tcp_socket_communicator.c"
+#include "../controller/translator/translator.c"
+#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/channel_constants.c"
+#include "../globals/constants/name_constants.c"
+#include "../globals/constants/structure_constants.c"
+#include "../globals/logger/logger.c"
+#include "../memory/creator/integer_creator.c"
 #include "../socket/unix_socket.c"
-#include "../translator/translator.c"
 #include "../web/socket_number_accessor.c"
 
 /**

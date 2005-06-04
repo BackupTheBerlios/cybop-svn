@@ -20,25 +20,24 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SELECTION_SOURCE
 #define SELECTION_SOURCE
 
-#include "../accessor/compound_accessor.c"
-#include "../array/array.c"
-#include "../creator/creator.c"
-#include "../communicator/communicator.c"
-#include "../global/abstraction_constants.c"
-#include "../global/log_constants.c"
-#include "../global/name_constants.c"
-#include "../logger/logger.c"
-#include "../parser/parser.c"
-#include "../translator/translator.c"
-#include "../test/test.c"
-
+#include "../controller/communicator/communicator.c"
+#include "../controller/converter/converter.c"
+#include "../controller/translator/translator.c"
+#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/constants/name_constants.c"
+#include "../globals/logger/logger.c"
+#include "../memory/accessor/compound_accessor.c"
+#include "../memory/array/array.c"
+#include "../memory/creator/creator.c"
+#include "../tester/tester.c"
 
 void handle_signal(const void* p0, const void* p1, const void* p2, const void* p3,
     const void* p4, const void* p5, const void* p6, const void* p7, void* p8, void* p9, void* p10);
@@ -48,13 +47,13 @@ void handle_signal(const void* p0, const void* p1, const void* p2, const void* p
  *
  * @param param the parameters
  * @param param_count the parameters count
- * @param proiority 
- * @param signal_id 
+ * @param proiority
+ * @param signal_id
  * @param internal
  */
-void selection( const void* param, const int* param_count, 
+void selection( const void* param, const int* param_count,
            const void* priority, const void* signal_id, void* shutdownflag,
-           void* internal ) 
+           void* internal )
 {
 
     // The knowledge memory.
@@ -66,7 +65,7 @@ void selection( const void* param, const int* param_count,
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
-    
+
     log_message_debug("operation selection");
 
     // The comparison abstraction.
@@ -110,8 +109,8 @@ void selection( const void* param, const int* param_count,
 
     // get the comarison
     get_real_compound_element_by_name( param, param_count,
-        (void*) SELECTION_COMPARISON_NAME_ABSTRACTION, 
-        (void*) SELECTION_COMPARISON_NAME_ABSTRACTION_COUNT, 
+        (void*) SELECTION_COMPARISON_NAME_ABSTRACTION,
+        (void*) SELECTION_COMPARISON_NAME_ABSTRACTION_COUNT,
         (void*) &compa, (void*) &compac, (void*) &compas,
         (void*) &compm, (void*) &compmc, (void*) &compms,
         (void*) &compd, (void*) &compdc, (void*) &compds,
@@ -119,8 +118,8 @@ void selection( const void* param, const int* param_count,
 
     // get the operand 2
     get_real_compound_element_by_name( param, param_count,
-        (void*) SELECTION_FALSE_MODEL_NAME_ABSTRACTION, 
-        (void*) SELECTION_FALSE_MODEL_NAME_ABSTRACTION_COUNT, 
+        (void*) SELECTION_FALSE_MODEL_NAME_ABSTRACTION,
+        (void*) SELECTION_FALSE_MODEL_NAME_ABSTRACTION_COUNT,
         (void*) &truea, (void*) &trueac, (void*) &trueas,
         (void*) &truem, (void*) &truemc, (void*) &truems,
         (void*) &trued, (void*) &truedc, (void*) &trueds,
@@ -128,8 +127,8 @@ void selection( const void* param, const int* param_count,
 
     // get the result
     get_real_compound_element_by_name( param, param_count,
-        (void*) SELECTION_TRUE_MODEL_NAME_ABSTRACTION, 
-        (void*) SELECTION_TRUE_MODEL_NAME_ABSTRACTION_COUNT, 
+        (void*) SELECTION_TRUE_MODEL_NAME_ABSTRACTION,
+        (void*) SELECTION_TRUE_MODEL_NAME_ABSTRACTION_COUNT,
         (void*) &falsea, (void*) &falseac, (void*) &falseas,
         (void*) &falsem, (void*) &falsemc, (void*) &falsems,
         (void*) &falsed, (void*) &falsedc, (void*) &falseds,
@@ -169,49 +168,49 @@ void selection( const void* param, const int* param_count,
     {
 
         int r = 0;
-        
+
         int direct_execution_flag = 0;
-        
-        compare_arrays( *compa, *compac, 
-                        (void*) BOOLEAN_ABSTRACTION, 
+
+        compare_arrays( *compa, *compac,
+                        (void*) BOOLEAN_ABSTRACTION,
                         (void*) BOOLEAN_ABSTRACTION_COUNT,
                         (void*) &r, (void*) CHARACTER_ARRAY);
-        
+
         if (r==1) {
 
 
             //chek, is then value of the brakflag false
             void* comp_dest = NULL_POINTER;
-            get_array_elements( *compm, (void*) INTEGER_VALUE_INDEX, 
+            get_array_elements( *compm, (void*) INTEGER_VALUE_INDEX,
                                 (void*) &comp_dest,
                                 (void*) INTEGER_ARRAY);
             r = 0;
             compare_arrays( comp_dest, INTEGER_COUNT,
-                            (void*) ZERO_NUMBER, (void*) ONE_NUMBER, 
+                            (void*) ZERO_NUMBER, (void*) ONE_NUMBER,
                             &r, (void*) INTEGER_ARRAY );
-                            
+
             if (r ==1) {
-             
+
                 //the comparison is false
-                handle_signal( *falsea, *falseac, 
-                               *falsem, *falsemc, 
-                               *falsed, *falsedc, 
-                               priority, signal_id, 
+                handle_signal( *falsea, *falseac,
+                               *falsem, *falsemc,
+                               *falsed, *falsedc,
+                               priority, signal_id,
                                shutdownflag, internal,
                                (void*) &direct_execution_flag );
             }
             else {
 
                 //the comparison is true
-                handle_signal( *truea, *trueac, 
-                               *truem, *truemc, 
-                               *trued, *truedc, 
-                               priority, signal_id, 
+                handle_signal( *truea, *trueac,
+                               *truem, *truemc,
+                               *trued, *truedc,
+                               priority, signal_id,
                                shutdownflag, internal,
                                (void*) &direct_execution_flag );
             }
         }
-        
+
     }
 }
 

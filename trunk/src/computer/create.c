@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,16 +30,16 @@
 #define CREATE_SOURCE
 
 #include <libxml/tree.h>
-#include "../array/array.c"
-#include "../creator/creator.c"
-#include "../communicator/communicator.c"
-#include "../global/abstraction_constants.c"
-#include "../global/log_constants.c"
-#include "../global/name_constants.c"
-#include "../logger/logger.c"
-#include "../parser/parser.c"
-#include "../translator/translator.c"
-#include "../test/test.c"
+#include "../controller/converter/converter.c"
+#include "../controller/translator/translator.c"
+#include "../controller/communicator/communicator.c"
+#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/constants/name_constants.c"
+#include "../globals/logger/logger.c"
+#include "../memory/array/array.c"
+#include "../memory/creator/creator.c"
+#include "../tester/tester.c"
 
 /**
  * Checks for primitive model.

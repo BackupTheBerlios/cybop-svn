@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -30,8 +30,8 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include "../../global/structure_constants.c"
-#include "../../global/variables.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/variables/variables.c"
 
 /**
  * Sends an x window system message.
@@ -105,7 +105,7 @@ void send_x_window_system(void* p0, const void* p1, const void* p2, const void* 
     struct _XGC* gc_menu_border_bottom = NULL_POINTER;
     // The menu font graphic context.
     struct _XGC* gc_menu_font = NULL_POINTER;
-    
+
     // Initialise x window system internals.
     gray.red = 49125;
     gray.green = 49125;

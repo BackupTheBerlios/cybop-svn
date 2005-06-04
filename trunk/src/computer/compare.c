@@ -22,25 +22,25 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
- 
+
 #ifndef COMPARE_SOURCE
 #define COMPARE_SOURCE
 
-#include "../array/array.c"
-#include "../creator/creator.c"
-#include "../communicator/communicator.c"
-#include "../global/abstraction_constants.c"
-#include "../global/log_constants.c"
-#include "../global/name_constants.c"
-#include "../logger/logger.c"
-#include "../parser/parser.c"
-#include "../translator/translator.c"
-#include "../test/test.c"
+#include "../controller/communicator/communicator.c"
+#include "../controller/converter/converter.c"
+#include "../controller/translator/translator.c"
+#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/constants/name_constants.c"
+#include "../globals/logger/logger.c"
+#include "../memory/array/array.c"
+#include "../memory/creator/creator.c"
+#include "../tester/tester.c"
 
-/* 
+/*
  * @param op1_abstr
  * @param op1_abstr_count
  * @param op1_model
@@ -49,23 +49,23 @@
  * @param op2_abstr_count
  * @param op2_model (hand over as redference)
  * @param op2_model_count
- * @param res 
-*/ 
+ * @param res
+*/
 void compare_smaller( const void* op1_abstr, const void* op1_abstr_count,
                       const void* op1_model, const void* op1_model_count,
-                      const void* op2_abstr, const void* op2_abstr_count, 
+                      const void* op2_abstr, const void* op2_abstr_count,
                       const void* op2_model, const void* op2_model_count,
-                      void* res_model, void* res_model_count, void* res_model_size ) 
+                      void* res_model, void* res_model_count, void* res_model_size )
 {
- 
+
     int r1 = 0;
     int r2 = 0;
     compare_arrays( op1_abstr, op1_abstr_count,
-                    (void*) INTEGER_ABSTRACTION, 
+                    (void*) INTEGER_ABSTRACTION,
                     (void*) INTEGER_ABSTRACTION_COUNT,
                     (void*) &r1, (void*) CHARACTER_ARRAY);
     compare_arrays( op2_abstr, op2_abstr_count,
-                    (void*) INTEGER_ABSTRACTION, 
+                    (void*) INTEGER_ABSTRACTION,
                     (void*) INTEGER_ABSTRACTION_COUNT,
                     (void*) &r2, (void*) CHARACTER_ARRAY);
 
@@ -73,18 +73,18 @@ void compare_smaller( const void* op1_abstr, const void* op1_abstr_count,
 
         if  ( *((int*)op1_model) < *((int*)op2_model) ) {
 
-            parse_boolean( res_model, res_model_count, res_model_size, 
+            parse_boolean( res_model, res_model_count, res_model_size,
                            TRUE_BOOLEAN, TRUE_BOOLEAN_COUNT );
         }
         else {
 
-            parse_boolean( res_model, res_model_count, res_model_size, 
+            parse_boolean( res_model, res_model_count, res_model_size,
                            FALSE_BOOLEAN, FALSE_BOOLEAN_COUNT );
         }
-    }                    
-}                      
+    }
+}
 
-/* 
+/*
  * @param op1_abstr
  * @param op1_abstr_count
  * @param op1_model
@@ -93,23 +93,23 @@ void compare_smaller( const void* op1_abstr, const void* op1_abstr_count,
  * @param op2_abstr_count
  * @param op2_model (hand over as redference)
  * @param op2_model_count
- * @param res 
-*/ 
+ * @param res
+*/
 void compare_greater_or_equal( const void* op1_abstr, const void* op1_abstr_count,
                       const void* op1_model, const void* op1_model_count,
-                      const void* op2_abstr, const void* op2_abstr_count, 
+                      const void* op2_abstr, const void* op2_abstr_count,
                       const void* op2_model, const void* op2_model_count,
-                      void* res_model, void* res_model_count, void* res_model_size ) 
+                      void* res_model, void* res_model_count, void* res_model_size )
 {
- 
+
     int r1 = 0;
     int r2 = 0;
     compare_arrays( op1_abstr, op1_abstr_count,
-                    (void*) INTEGER_ABSTRACTION, 
+                    (void*) INTEGER_ABSTRACTION,
                     (void*) INTEGER_ABSTRACTION_COUNT,
                     (void*) &r1, (void*) CHARACTER_ARRAY);
     compare_arrays( op2_abstr, op2_abstr_count,
-                    (void*) INTEGER_ABSTRACTION, 
+                    (void*) INTEGER_ABSTRACTION,
                     (void*) INTEGER_ABSTRACTION_COUNT,
                     (void*) &r2, (void*) CHARACTER_ARRAY);
 
@@ -117,36 +117,36 @@ void compare_greater_or_equal( const void* op1_abstr, const void* op1_abstr_coun
 
         if  ( *((int*)op1_model) >= *((int*)op2_model) ) {
 
-            parse_boolean( res_model, res_model_count, res_model_size, 
+            parse_boolean( res_model, res_model_count, res_model_size,
                            TRUE_BOOLEAN, TRUE_BOOLEAN_COUNT );
         }
         else {
 
-            parse_boolean( res_model, res_model_count, res_model_size, 
+            parse_boolean( res_model, res_model_count, res_model_size,
                            FALSE_BOOLEAN, FALSE_BOOLEAN_COUNT );
         }
-    }                    
-}                      
+    }
+}
 
 
-/* 
+/*
  * @param param the parameters
  * @param param_count the parameters count
- * @param proiority 
- * @param signal_id 
+ * @param proiority
+ * @param signal_id
  * @param internal
-*/ 
-void compare( const void* param, const int* param_count, 
-              const void* priority, const void* signal_id, 
+*/
+void compare( const void* param, const int* param_count,
+              const void* priority, const void* signal_id,
               void* internal )
 {
     //als oparameter sollten ?bergeben werden
-    //- operand_1    
-    //- operand_2    
-    //- operator   
-    //- result 
+    //- operand_1
+    //- operand_2
+    //- operator
+    //- result
     //nat?rlich in Konstanten gekapselt :-) also jederzeit ?nderbar
-    
+
     // The knowledge memory.
     void** km = POINTER_NULL_POINTER;
     void** kmc = POINTER_NULL_POINTER;
@@ -156,8 +156,8 @@ void compare( const void* param, const int* param_count,
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
-    
-    
+
+
     log_message_debug("Operation compare");
 
     // The operand_1 name abstraction.
@@ -214,7 +214,7 @@ void compare( const void* param, const int* param_count,
 
     // Get operand_1.
     get_real_compound_element_by_name( param, param_count,
-        (void*) COMPARE_OPERAND_1_NAME_ABSTRACTION, 
+        (void*) COMPARE_OPERAND_1_NAME_ABSTRACTION,
         (void*) COMPARE_OPERAND_1_NAME_ABSTRACTION_COUNT,
         (void*) &op1a, (void*) &op1ac, (void*) &op1as,
         (void*) &op1m, (void*) &op1mc, (void*) &op1ms,
@@ -223,16 +223,16 @@ void compare( const void* param, const int* param_count,
 
     // Get opernad_2.
     get_real_compound_element_by_name(param, param_count,
-        (void*) COMPARE_OPERAND_2_NAME_ABSTRACTION, 
+        (void*) COMPARE_OPERAND_2_NAME_ABSTRACTION,
         (void*) COMPARE_OPERAND_2_NAME_ABSTRACTION_COUNT,
         (void*) &op2a, (void*) &op2ac, (void*) &op2as,
         (void*) &op2m, (void*) &op2mc, (void*) &op2ms,
         (void*) &op2d, (void*) &op2dc, (void*) &op2ds,
         *km, *kmc );
-        
+
     // Get operator.
     get_compound_element_by_name(param, param_count,
-        (void*) COMPARE_OPERATOR_NAME_ABSTRACTION, 
+        (void*) COMPARE_OPERATOR_NAME_ABSTRACTION,
         (void*) COMPARE_OPERATOR_NAME_ABSTRACTION_COUNT,
         (void*) &opa, (void*) &opac, (void*) &opas,
         (void*) &opm, (void*) &opmc, (void*) &opms,
@@ -240,7 +240,7 @@ void compare( const void* param, const int* param_count,
 
     // Get result.
     get_real_compound_element_by_name(param, param_count,
-        (void*) COMPARE_RESULT_NAME_ABSTRACTION, 
+        (void*) COMPARE_RESULT_NAME_ABSTRACTION,
         (void*) COMPARE_RESULT_NAME_ABSTRACTION_COUNT,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
@@ -291,87 +291,87 @@ void compare( const void* param, const int* param_count,
       )
     {
         int r = 0;
-     
+
         //check the abstracton from operand_1 and operand_2
         //the abstarction msut be the same
         r = 0;
-        compare_arrays( *op1a, *op1ac, *op2a, *op2ac, 
+        compare_arrays( *op1a, *op1ac, *op2a, *op2ac,
                         (void*) &r, (void*) CHARACTER_ARRAY);
 
         //check the abstraction for the result
         //the abstraction must be boolean;
         r = 0;
-        compare_arrays( *op1a, *op1ac, 
-                        (void*) BOOLEAN_ABSTRACTION, 
-                        (void*) BOOLEAN_ABSTRACTION_COUNT, 
+        compare_arrays( *op1a, *op1ac,
+                        (void*) BOOLEAN_ABSTRACTION,
+                        (void*) BOOLEAN_ABSTRACTION_COUNT,
                         (void*) &r, (void*) CHARACTER_ARRAY);
-     
-       
+
+
         r = 0;
         int comp_res = 0;
         if (r != 1) {
 
-            compare_arrays( *opm, *opmc, 
-                            (void*) SMALLER_ABSTRACTION, 
-                            (void*) SMALLER_ABSTRACTION_COUNT, 
+            compare_arrays( *opm, *opmc,
+                            (void*) SMALLER_ABSTRACTION,
+                            (void*) SMALLER_ABSTRACTION_COUNT,
                             (void*) &r, (void*) CHARACTER_ARRAY);
             if ( r == 1 ) {
-       
+
                 compare_smaller( *op1a, *op1ac, *op1m, op1mc,
                                  *op2a, *op2ac, *op2m, op2mc,
                                  rm, *rmc, *rms );
-            }                            
+            }
         }
 
         if (r != 1) {
 
-            compare_arrays( *opm, *opmc, 
-                            (void*) SMALLER_OR_EQUAL_ABSTRACTION, 
-                            (void*) SMALLER_OR_EQUAL_ABSTRACTION_COUNT, 
+            compare_arrays( *opm, *opmc,
+                            (void*) SMALLER_OR_EQUAL_ABSTRACTION,
+                            (void*) SMALLER_OR_EQUAL_ABSTRACTION_COUNT,
                             (void*) &r, (void*) CHARACTER_ARRAY);
             if ( r == 1 ) {
-               
-            }                            
+
+            }
         }
 
         if (r != 1) {
 
-            compare_arrays( *opm, *opmc, 
-                            (void*) EQUAL_ABSTRACTION, 
-                            (void*) EQUAL_ABSTRACTION_COUNT, 
+            compare_arrays( *opm, *opmc,
+                            (void*) EQUAL_ABSTRACTION,
+                            (void*) EQUAL_ABSTRACTION_COUNT,
                             (void*) &r, (void*) CHARACTER_ARRAY);
             if ( r == 1 ) {
-               
-            }                            
+
+            }
         }
 
         if (r != 1) {
 
-            compare_arrays( *opm, *opmc, 
-                            (void*) GREATER_OR_EQUAL_ABSTRACTION, 
-                            (void*) GREATER_OR_EQUAL_ABSTRACTION_COUNT, 
+            compare_arrays( *opm, *opmc,
+                            (void*) GREATER_OR_EQUAL_ABSTRACTION,
+                            (void*) GREATER_OR_EQUAL_ABSTRACTION_COUNT,
                             (void*) &r, (void*) CHARACTER_ARRAY);
             if ( r == 1 ) {
-               
+
                 compare_greater_or_equal( *op1a, *op1ac, *op1m, op1mc,
                                  *op2a, *op2ac, *op2m, op2mc,
                                  rm, *rmc, *rms );
-            }                            
+            }
         }
-     
+
         if (r != 1) {
 
-            compare_arrays( *opm, *opmc, 
-                            (void*) GREATER_ABSTRACTION, 
-                            (void*) GREATER_ABSTRACTION_COUNT, 
+            compare_arrays( *opm, *opmc,
+                            (void*) GREATER_ABSTRACTION,
+                            (void*) GREATER_ABSTRACTION_COUNT,
                             (void*) &r, (void*) CHARACTER_ARRAY);
             if ( r == 1 ) {
-               
-            }                            
+
+            }
         }
     }
-}           
- 
+}
+
 /* COMPARE_SOURCE */
 #endif
 

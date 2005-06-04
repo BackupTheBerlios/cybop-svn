@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -28,13 +28,13 @@
 #ifndef SHUTDOWN_SOURCE
 #define SHUTDOWN_SOURCE
 
-#include "../array/array.c"
-#include "../global/abstraction_constants.c"
-#include "../global/log_constants.c"
-#include "../global/name_constants.c"
-#include "../logger/logger.c"
-#include "../logic/shutdown/shutdown_tcp_socket.c"
-#include "../logic/shutdown/shutdown_x_window_system.c"
+#include "../computer/shutdown/shutdown_tcp_socket.c"
+#include "../computer/shutdown/shutdown_x_window_system.c"
+#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/constants/name_constants.c"
+#include "../globals/logger/logger.c"
+#include "../memory/array/array.c"
 
 /**
  * Shuts down a service.

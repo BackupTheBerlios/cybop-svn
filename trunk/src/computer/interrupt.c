@@ -20,19 +20,19 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTERUPT_SOURCE
 #define INTERUPT_SOURCE
 
-#include "../global/abstraction_constants.c"
-#include "../global/channel_constants.c"
-#include "../global/name_constants.c"
-#include "../global/structure_constants.c"
-#include "../logger/logger.c"
-#include "../logic/interrupt/interrupt_tcp_socket.c"
+#include "../computer/interrupt/interrupt_tcp_socket.c"
+#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/channel_constants.c"
+#include "../globals/constants/name_constants.c"
+#include "../globals/constants/structure_constants.c"
+#include "../globals/logger/logger.c"
 #include "../socket/unix_socket.c"
 
 /**
@@ -60,7 +60,7 @@ void interupt_service(const void* p0, const void* p1,
     void** sd = NULL_POINTER;
     void** sdc = NULL_POINTER;
     void** sds = NULL_POINTER;
- 
+
     // Get service.
     get_real_compound_element_by_name(p0, p1,
         (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
@@ -103,7 +103,7 @@ void interupt_service(const void* p0, const void* p1,
         compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_CHANNEL, (void*) TCP_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
-         
+
             interrupt_tcp_socket( p5, p2, p3, p4 );
         }
     }

@@ -22,36 +22,36 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
- 
+
 #ifndef LOOP_SOURCE
 #define LOOP_SOURCE
 
-#include "../array/array.c"
-#include "../creator/creator.c"
-#include "../cyboi/signal_handler.c"
-#include "../communicator/communicator.c"
-#include "../global/abstraction_constants.c"
-#include "../global/log_constants.c"
-#include "../global/name_constants.c"
-#include "../logger/logger.c"
-#include "../parser/parser.c"
-#include "../translator/translator.c"
-#include "../test/test.c"
+#include "../controller/converter/converter.c"
+#include "../controller/translator/translator.c"
+#include "../controller/cyboi/signal_handler.c"
+#include "../controller/communicator/communicator.c"
+#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/constants/name_constants.c"
+#include "../globals/logger/logger.c"
+#include "../memory/array/array.c"
+#include "../memory/creator/creator.c"
+#include "../tester/tester.c"
 
 void handle_signal(const void* p0, const void* p1, const void* p2, const void* p3,
     const void* p4, const void* p5, const void* p6, const void* p7, void* p8, void* p9, void* p10);
 
-/* 
+/*
  * @param param the parameters
  * @param param_count the parameters count
- * @param proiority 
- * @param signal_id 
+ * @param proiority
+ * @param signal_id
  * @param internal
-*/ 
-void loop( const void* param, const int* param_count, 
+*/
+void loop( const void* param, const int* param_count,
            const void* priority, const void* signal_id, void* shutdownflag,
            void* internal )
 {
@@ -62,7 +62,7 @@ void loop( const void* param, const int* param_count,
     //und in der Schleifen abarbeiten
     //nicht signal in signal memeory einf?gen, da eventuell
     //diese Operation vor den anderen ausgef?hrt werden m?ssen
-    
+
     // The knowledge memory.
     void** km = POINTER_NULL_POINTER;
     void** kmc = POINTER_NULL_POINTER;
@@ -72,8 +72,8 @@ void loop( const void* param, const int* param_count,
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
     get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
-    
-    
+
+
     log_message_debug("operation loop");
 
     // The breakflag abstraction.
@@ -102,18 +102,18 @@ void loop( const void* param, const int* param_count,
     void** mdc = POINTER_NULL_POINTER;
     void** mds = POINTER_NULL_POINTER;
 
-    // get the breakflag     
+    // get the breakflag
     get_real_compound_element_by_name( param, param_count,
-        (void*) LOOP_BREAKFLAG_NAME_ABSTRACTION, 
+        (void*) LOOP_BREAKFLAG_NAME_ABSTRACTION,
         (void*) LOOP_BREAKFLAG_NAME_ABSTRACTION_COUNT,
         (void*) &bfa, (void*) &bfac, (void*) &bfas,
         (void*) &bfm, (void*) &bfmc, (void*) &bfms,
         (void*) &bfd, (void*) &bfdc, (void*) &bfds,
         *km, *kmc );
 
-    // get the model     
+    // get the model
     get_real_compound_element_by_name( param, param_count,
-        (void*) LOOP_MODEL_NAME_ABSTRACTION, 
+        (void*) LOOP_MODEL_NAME_ABSTRACTION,
         (void*) LOOP_MODEL_NAME_ABSTRACTION_COUNT,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
@@ -142,47 +142,47 @@ void loop( const void* param, const int* param_count,
         && (mds != POINTER_NULL_POINTER) )
     {
         int r = 0;
-        
+
         int direct_execution_flag = 1;
-        
-        compare_arrays( *bfa, *bfac, 
-                        (void*) BOOLEAN_ABSTRACTION, 
+
+        compare_arrays( *bfa, *bfac,
+                        (void*) BOOLEAN_ABSTRACTION,
                         (void*) BOOLEAN_ABSTRACTION_COUNT,
                         (void*) &r, (void*) CHARACTER_ARRAY);
-        
+
         if (r==1) {
 
             while (1) {
 
                 //chek, is then value of the brakflag false
                 void* bf_dest = NULL_POINTER;
-                get_array_elements( *bfm, (void*) INTEGER_VALUE_INDEX, 
+                get_array_elements( *bfm, (void*) INTEGER_VALUE_INDEX,
                                     (void*) &bf_dest,
                                     (void*) INTEGER_ARRAY);
                 r = 0;
                 compare_arrays( bf_dest, INTEGER_COUNT,
-                                (void*) ZERO_NUMBER, (void*) ONE_NUMBER, 
+                                (void*) ZERO_NUMBER, (void*) ONE_NUMBER,
                                 &r, (void*) INTEGER_ARRAY );
-                                
+
                 if (r ==1) {
-                 
+
                     //the brakflag is false
                     //so can work the model
-                    handle_signal( *ma, *mac, *mm, *mmc, *md, *mdc, 
-                                   priority, signal_id, 
+                    handle_signal( *ma, *mac, *mm, *mmc, *md, *mdc,
+                                   priority, signal_id,
                                    shutdownflag, internal,
                                    (void*) &direct_execution_flag );
                 }
                 else {
                     //the loop ending
-                    break;   
+                    break;
                 }
             }
-        }                        
+        }
     }
-    
-}           
- 
+
+}
+
 /* LOOP_SOURCE */
 #endif
 

@@ -20,25 +20,24 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ADD_SOURCE
 #define ADD_SOURCE
 
-#include "../accessor/compound_accessor.c"
-#include "../array/array.c"
-#include "../creator/creator.c"
-#include "../communicator/communicator.c"
-#include "../global/abstraction_constants.c"
-#include "../global/log_constants.c"
-#include "../global/name_constants.c"
-#include "../logger/logger.c"
-#include "../parser/parser.c"
-#include "../translator/translator.c"
-#include "../test/test.c"
-
+#include "../controller/communicator/communicator.c"
+#include "../controller/converter/converter.c"
+#include "../controller/translator/translator.c"
+#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/constants/name_constants.c"
+#include "../globals/logger/logger.c"
+#include "../memory/accessor/compound_accessor.c"
+#include "../memory/array/array.c"
+#include "../memory/creator/creator.c"
+#include "../tester/tester.c"
 
 /**
  * Adds two integer summands resulting in the integer sum.
@@ -94,8 +93,8 @@ void add_integers(void* p0, const void* p1, const void* p2) {
  * @param op2_size the operand 2 size
  */
 void add_strings( void** res, int* res_count, int* res_size,
-                  void* op1, int* op1_count, int* op1_size, 
-                  void* op2, int* op2_count, int* op2_size ) 
+                  void* op1, int* op1_count, int* op1_size,
+                  void* op2, int* op2_count, int* op2_size )
 {
 
     //check operanden
@@ -104,31 +103,31 @@ void add_strings( void** res, int* res_count, int* res_size,
          (op1_size != NULL_POINTER) &&
          (op2 != NULL_POINTER) &&
          (op2_count != NULL_POINTER) &&
-         (op2_size != NULL_POINTER) )  
+         (op2_size != NULL_POINTER) )
     {
-     
+
         //check result
         if ( (res != NULL_POINTER) &&
              (res_count != NULL_POINTER) &&
              (res_size != NULL_POINTER) )
         {
-         
+
             //resize the result array
-            //if source and the destination the same, then 
+            //if source and the destination the same, then
             //must the coutn in a temp variable
             int start_count = *op1_count;
             *res_size = *op1_count + *op2_count;
             *res_count = *op1_count + *op2_count;
             resize_array( res, res_size, CHARACTER_ARRAY );
-            
+
             //set the result array
-            set_array_elements( *res, (void*) ZERO_NUMBER, 
+            set_array_elements( *res, (void*) ZERO_NUMBER,
                                 op1, op1_count,  (void*) CHARACTER_ARRAY);
-            
-            set_array_elements( *res, &start_count, 
+
+            set_array_elements( *res, &start_count,
                                 op2, op2_count,  (void*) CHARACTER_ARRAY);
         }  //check result
-             
+
     } //check operanden
 }
 
@@ -230,7 +229,7 @@ void add(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
     // get the operand 1
     get_real_compound_element_by_name( p0, p1,
-        (void*) ADD_OPERAND_1_NAME_ABSTRACTION, 
+        (void*) ADD_OPERAND_1_NAME_ABSTRACTION,
         (void*) ADD_OPERAND_1_NAME_ABSTRACTION_COUNT,
         (void*) &op1a, (void*) &op1ac, (void*) &op1as,
         (void*) &op1m, (void*) &op1mc, (void*) &op1ms,
@@ -239,7 +238,7 @@ void add(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
     // get the operand 2
     get_real_compound_element_by_name( p0, p1,
-        (void*) ADD_OPERAND_2_NAME_ABSTRACTION, 
+        (void*) ADD_OPERAND_2_NAME_ABSTRACTION,
         (void*) ADD_OPERAND_2_NAME_ABSTRACTION_COUNT,
         (void*) &op2a, (void*) &op2ac, (void*) &op2as,
         (void*) &op2m, (void*) &op2mc, (void*) &op2ms,
@@ -248,7 +247,7 @@ void add(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
     // get the result
     get_real_compound_element_by_name( p0, p1,
-        (void*) ADD_RESULT_NAME_ABSTRACTION, 
+        (void*) ADD_RESULT_NAME_ABSTRACTION,
         (void*) ADD_RESULT_NAME_ABSTRACTION_COUNT,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
@@ -293,49 +292,49 @@ void add(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
         int r3 = 0;
         //check the abstracton from operand_1 and operand_2
         //the abstrcation msut be the same
-        compare_arrays( *op1a, *op1ac, 
-                        (void*) INTEGER_ABSTRACTION, 
-                        (void*) INTEGER_ABSTRACTION_COUNT, 
+        compare_arrays( *op1a, *op1ac,
+                        (void*) INTEGER_ABSTRACTION,
+                        (void*) INTEGER_ABSTRACTION_COUNT,
                         (void*) &r1, (void*) CHARACTER_ARRAY);
-        compare_arrays( *op2a, *op2ac, 
-                        (void*) INTEGER_ABSTRACTION, 
-                        (void*) INTEGER_ABSTRACTION_COUNT, 
+        compare_arrays( *op2a, *op2ac,
+                        (void*) INTEGER_ABSTRACTION,
+                        (void*) INTEGER_ABSTRACTION_COUNT,
                         (void*) &r2, (void*) CHARACTER_ARRAY);
-        compare_arrays( *ra, *rac, 
-                        (void*) INTEGER_ABSTRACTION, 
-                        (void*) INTEGER_ABSTRACTION_COUNT, 
+        compare_arrays( *ra, *rac,
+                        (void*) INTEGER_ABSTRACTION,
+                        (void*) INTEGER_ABSTRACTION_COUNT,
                         (void*) &r3, (void*) CHARACTER_ARRAY);
 
         if ( (r1==1) && (r2==1) && (r3==1) ) {
-         
-            add_integers( *rm, *op1m, *op2m );  
-        }        
-        
+
+            add_integers( *rm, *op1m, *op2m );
+        }
+
         r1 = 0;
         r2 = 0;
         r3 = 0;
         //check the abstracton from operand_1 and operand_2
         //the abstrcation msut be the same
-        compare_arrays( *op1a, *op1ac, 
-                        (void*) STRING_ABSTRACTION, 
-                        (void*) STRING_ABSTRACTION_COUNT, 
+        compare_arrays( *op1a, *op1ac,
+                        (void*) STRING_ABSTRACTION,
+                        (void*) STRING_ABSTRACTION_COUNT,
                         (void*) &r1, (void*) CHARACTER_ARRAY);
-        compare_arrays( *op2a, *op2ac, 
-                        (void*) STRING_ABSTRACTION, 
-                        (void*) STRING_ABSTRACTION_COUNT, 
+        compare_arrays( *op2a, *op2ac,
+                        (void*) STRING_ABSTRACTION,
+                        (void*) STRING_ABSTRACTION_COUNT,
                         (void*) &r2, (void*) CHARACTER_ARRAY);
-        compare_arrays( *ra, *rac, 
-                        (void*) STRING_ABSTRACTION, 
-                        (void*) STRING_ABSTRACTION_COUNT, 
+        compare_arrays( *ra, *rac,
+                        (void*) STRING_ABSTRACTION,
+                        (void*) STRING_ABSTRACTION_COUNT,
                         (void*) &r3, (void*) CHARACTER_ARRAY);
 
         if ( (r1==1) && (r2==1) && (r3==1) ) {
-         
-            add_strings( rm, *rmc, *rms, 
-                         *op1m, *op1mc, *op1ms, 
-                         *op2m, *op2mc, *op2ms );  
-        } 
-        
+
+            add_strings( rm, *rmc, *rms,
+                         *op1m, *op1mc, *op1ms,
+                         *op2m, *op2mc, *op2ms );
+        }
+
     }
 /*??
     if (p0 != NULL_POINTER) {

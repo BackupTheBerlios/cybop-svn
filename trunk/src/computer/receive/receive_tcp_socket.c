@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -34,12 +34,12 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
-#include "../../array/array.c"
-#include "../../global/abstraction_constants.c"
-#include "../../global/character_constants.c"
-#include "../../global/integer_constants.c"
-#include "../../global/structure_constants.c"
-#include "../../global/variables.c"
+#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/character_constants.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/variables/variables.c"
+#include "../../memory/array/array.c"
 #include "../../web/tcp_socket_server.c"
 
 /**
@@ -54,76 +54,76 @@
  * @param blocking_model the blocking model
  * @param blocking_model_count the blocking model count
  */
-void receive_tcp_socket( void* internals, const void* know, 
+void receive_tcp_socket( void* internals, const void* know,
                           const void* know_count, const void* know_size,
                           void* blocking_abstr, void* blocking_abstr_count,
-                          void* blocking_model, void* blocking_model_count ) 
+                          void* blocking_model, void* blocking_model_count )
 {
 
     log_message_debug("receive tcp socket.");
-    
+
     //check of null pointer
     if ( internals != NULL_POINTER ) {
-                    
-        
+
+
         //
-        if (    (blocking_abstr != NULL_POINTER) 
+        if (    (blocking_abstr != NULL_POINTER)
              && (blocking_abstr_count != NULL_POINTER)
              && (blocking_model != NULL_POINTER)
              && (blocking_model_count != NULL_POINTER) )
         {
-         
+
             int r = 0;
-            compare_arrays( (void*) blocking_abstr, 
-                            (void*) blocking_abstr_count, 
-                            (void*) INTEGER_ABSTRACTION, 
-                            (void*) INTEGER_ABSTRACTION_COUNT, 
+            compare_arrays( (void*) blocking_abstr,
+                            (void*) blocking_abstr_count,
+                            (void*) INTEGER_ABSTRACTION,
+                            (void*) INTEGER_ABSTRACTION_COUNT,
                             (void*) &r, (void*) CHARACTER_ARRAY);
-                            
+
             if ( r==1) {
-             
+
                 if ( *((int*)blocking_model) == *ZERO_NUMBER ) {
-                 
+
                     // The thread.
                     pthread_t t;
-                
+
                     // Create thread returning an error value.
-                    int e = pthread_create( &t, NULL_POINTER, 
-                                            (void*) &run_tcp_socket_server, 
+                    int e = pthread_create( &t, NULL_POINTER,
+                                            (void*) &run_tcp_socket_server,
                                             internals );
-                
+
                     if (e != 0) {
-                
+
                         log_message_debug("Could not receive tcp socket. An error occured while creating the thread.");
                     }
-                 
+
                 }
-                 
+
                 //set the activation flag in the internal
                 void** socket_flag = POINTER_NULL_POINTER;
-        
-                get_array_elements( internals, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, 
+
+                get_array_elements( internals, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL,
                                     (void*) &socket_flag, (void*) POINTER_ARRAY );
-        
+
                 if ( (socket_flag!=NULL_POINTER) && (*socket_flag!=NULL_POINTER) ) {
-                 
-                    **((int**)socket_flag) = 1; 
+
+                    **((int**)socket_flag) = 1;
                 }
-                
+
                 //set the blocking flag in the internal
                 void** blocking_flag = POINTER_NULL_POINTER;
-        
-                get_array_elements( internals, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, 
+
+                get_array_elements( internals, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL,
                                     (void*) &blocking_flag, (void*) POINTER_ARRAY );
-        
+
                 if ( (blocking_flag!=NULL_POINTER) && (*blocking_flag!=NULL_POINTER) ) {
-                 
-                    **((int**)blocking_flag) = *((int*)blocking_model); 
+
+                    **((int**)blocking_flag) = *((int*)blocking_model);
                 }
-                
-            }                            
-        }             
-    } 
+
+            }
+        }
+    }
     else {
 
         log_message_debug("Could not receive the tcp server socket. The internal is null.");

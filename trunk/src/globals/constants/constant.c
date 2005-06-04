@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.34 $ $Date: 2005-04-08 15:32:08 $ $Author: rholzmueller $
+ * @version $Revision: 1.1 $ $Date: 2005-06-04 23:57:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CONSTANT_SOURCE
 #define CONSTANT_SOURCE
 
-#include "../global/character_constants.c"
+#include "../globals/constants/character_constants.c"
 
 //
 // Signal priorities.
@@ -173,7 +173,7 @@ static const int LIST_SEPARATOR_COUNT_ARRAY[] = {2};
 static const int* LIST_SEPARATOR_COUNT = LIST_SEPARATOR_COUNT_ARRAY;
 
 //
-// Request method 
+// Request method
 //
 
 /** The model request method get array, pointer, count. */

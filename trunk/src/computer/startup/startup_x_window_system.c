@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -46,11 +46,11 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include "../../creator/integer_creator.c"
-#include "../../creator/unsigned_long_creator.c"
-#include "../../global/integer_constants.c"
-#include "../../global/structure_constants.c"
-#include "../../global/variables.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/variables/variables.c"
+#include "../../memory/creator/integer_creator.c"
+#include "../../memory/creator/unsigned_long_creator.c"
 
 /**
  * Starts up the x window system.
@@ -139,7 +139,7 @@ void startup_x_window_system(void* p0, const void* p1, const void* p2, const voi
         *vm = 0;
         v = NULL_POINTER;
         gc = XCreateGC(d, *r, *vm, v);
-        
+
         // Assign x window system internals.
         XSetBackground(d, gc, *bg);
         XSetForeground(d, gc, *fg);

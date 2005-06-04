@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -34,10 +34,10 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
-#include "../../global/abstraction_constants.c"
-#include "../../global/integer_constants.c"
-#include "../../global/structure_constants.c"
-#include "../../global/variables.c"
+#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/variables/variables.c"
 
 /**
  * Starts up the tcp socket service.
@@ -47,28 +47,28 @@
  * @param p2 the knowledge count
  * @param p3 the knowledge size
  */
-void activate_tcp_socket( void* internals, const void* know, 
+void activate_tcp_socket( void* internals, const void* know,
                          const void* know_count, const void* know_size,
                          void* socket_port_abstr, void* socket_port_abstr_count,
-                         void* socket_port_model, void* socket_port_model_count ) 
+                         void* socket_port_model, void* socket_port_model_count )
 {
 
     log_message_debug("Startup tcp socket.");
-    
+
     //check of null pointer
     if ( internals != NULL_POINTER ) {
-                    
+
         //set the activation flahg in the internal
         void** socket_flag = POINTER_NULL_POINTER;
 
-        get_array_elements( internals, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, 
+        get_array_elements( internals, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL,
                             (void*) &socket_flag, (void*) POINTER_ARRAY );
 
         if ( (socket_flag!=NULL_POINTER) && (*socket_flag!=NULL_POINTER) ) {
-         
-            **((int**)socket_flag) = 1; 
+
+            **((int**)socket_flag) = 1;
         }
-    } 
+    }
     else {
 
         log_message_debug("Could not activate tcp server socket. The internal is null.");

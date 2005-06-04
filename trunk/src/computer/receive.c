@@ -20,19 +20,19 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 22:35:10 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef RECEIVE_SOURCE
 #define RECEIVE_SOURCE
 
-#include "../global/abstraction_constants.c"
-#include "../global/channel_constants.c"
-#include "../global/name_constants.c"
-#include "../global/structure_constants.c"
-#include "../logger/logger.c"
-#include "../logic/receive/receive_tcp_socket.c"
+#include "../controller/converter/receive/receive_tcp_socket.c"
+#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/channel_constants.c"
+#include "../globals/constants/name_constants.c"
+#include "../globals/constants/structure_constants.c"
+#include "../globals/logger/logger.c"
 #include "../socket/unix_socket.c"
 
 /**
@@ -76,7 +76,7 @@ void receive_message(const void* p0, const void* p1,
     void** bd = NULL_POINTER;
     void** bdc = NULL_POINTER;
     void** bds = NULL_POINTER;
- 
+
     // Get service.
     get_real_compound_element_by_name(p0, p1,
         (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
@@ -121,9 +121,9 @@ void receive_message(const void* p0, const void* p1,
 /*??
             blocking or non-blocking??
             receive_x_window_system();
-            
+
             receive_vga
-            parse            
+            parse
             decode-translate
 */
         }
@@ -149,18 +149,18 @@ void receive_message(const void* p0, const void* p1,
         compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_CHANNEL, (void*) TCP_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
-         
-                
+
+
             if (    (ba != NULL_POINTER)
                  && (bac != NULL_POINTER)
                  && (bm != NULL_POINTER)
                  && (bmc != NULL_POINTER) )
-            {                 
+            {
 
-                receive_tcp_socket( p5, p2, p3, p4, 
+                receive_tcp_socket( p5, p2, p3, p4,
                                     *ba, *bac, *bm, *bmc );
             }
-                
+
         }
     }
 }
