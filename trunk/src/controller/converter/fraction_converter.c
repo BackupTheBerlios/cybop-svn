@@ -20,15 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef FRACTION_PARSER_SOURCE
-#define FRACTION_PARSER_SOURCE
+#ifndef FRACTION_CONVERTER_SOURCE
+#define FRACTION_CONVERTER_SOURCE
 
-#include "../global/log_constants.c"
-#include "../logger/logger.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/logger/logger.c"
 
 //
 // A fraction consists of two integers, a numerator and a denominator.
@@ -120,5 +120,5 @@ void serialize_fraction(void* p0, void* p1, void* p2, const void* p3, const void
 */
 }
 
-/* FRACTION_PARSER_SOURCE */
+/* FRACTION_CONVERTER_SOURCE */
 #endif

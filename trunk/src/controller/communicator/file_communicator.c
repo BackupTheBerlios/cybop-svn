@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,12 +32,13 @@
 #define FILE_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
-#include "../array/array.c"
-#include "../creator/character_creator.c"
-#include "../global/constant.c"
-#include "../global/integer_constants.c"
-#include "../global/structure_constants.c"
-#include "../logger/logger.c"
+#include "../../globals/constants/character_constants.c"
+#include "../../globals/constants/constant.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../globals/variables/variables.c"
+#include "../../memory/array/array.c"
 
 /**
  * Receives a file stream and writes it into a byte array.

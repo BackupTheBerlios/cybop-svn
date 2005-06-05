@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef X_WINDOW_SYSTEM_TRANSLATOR_SOURCE
 #define X_WINDOW_SYSTEM_TRANSLATOR_SOURCE
 
-#include "../global/variables.c"
+#include "../../globals/variables/variables.c"
 
 /**
  * Decodes the x window system model into a compound.

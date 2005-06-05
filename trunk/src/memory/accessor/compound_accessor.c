@@ -20,21 +20,21 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:07:05 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPOUND_ACCESSOR_SOURCE
 #define COMPOUND_ACCESSOR_SOURCE
 
-#include "../globals/constants/abstraction_constants.c"
-#include "../globals/constants/constant.c"
-#include "../globals/constants/integer_constants.c"
-#include "../globals/constants/log_constants.c"
-#include "../globals/constants/structure_constants.c"
-#include "../globals/logger/logger.c"
-#include "../memory/array/array.c"
-#include "../memory/creator/integer_creator.c"
+#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/constant.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/array/array.c"
+#include "../../memory/creator/integer_creator.c"
 
 void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6);

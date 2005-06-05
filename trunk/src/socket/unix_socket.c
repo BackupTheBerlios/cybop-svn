@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-06-05 00:09:54 $ $Author: christian $
+ * @version $Revision: 1.17 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -30,7 +30,7 @@
 
 #include <sys/socket.h>
 #include <sys/un.h>
-#include "../globals/constant.c"
+#include "../globals/constants/constant.c"
 #include "../globals/constants/integer_constants.c"
 #include "../globals/variables/variables.c"
 #include "../memory/accessor/compound_accessor.c"

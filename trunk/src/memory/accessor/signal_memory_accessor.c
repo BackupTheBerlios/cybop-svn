@@ -20,19 +20,19 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:07:05 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SIGNAL_MEMORY_ACCESSOR_SOURCE
 #define SIGNAL_MEMORY_ACCESSOR_SOURCE
 
-#include "../globals/constants/integer_constants.c"
-#include "../globals/constants/log_constants.c"
-#include "../globals/constants/structure_constants.c"
-#include "../globals/logger/logger.c"
-#include "../memory/array/array.c"
-#include "../memory/creator/integer_creator.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/array/array.c"
+#include "../../memory/creator/integer_creator.c"
 
 /**
  * Sets the signal.

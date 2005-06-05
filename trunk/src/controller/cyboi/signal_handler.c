@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -28,26 +28,26 @@
 #ifndef SIGNAL_HANDLER_SOURCE
 #define SIGNAL_HANDLER_SOURCE
 
-#include "../array/array.c"
-#include "../global/abstraction_constants.c"
-#include "../global/integer_constants.c"
-#include "../global/structure_constants.c"
-#include "../logger/logger.c"
-#include "../logic/add.c"
-#include "../logic/build.c"
-#include "../logic/compare.c"
-#include "../logic/count.c"
-#include "../logic/create.c"
-#include "../logic/destroy.c"
-#include "../logic/interrupt.c"
-#include "../logic/loop.c"
-#include "../logic/receive.c"
-#include "../logic/selection.c"
-#include "../logic/send.c"
-#include "../logic/set.c"
-#include "../logic/shutdown.c"
-#include "../logic/startup.c"
-#include "../test/test.c"
+#include "../../computer/add.c"
+#include "../../computer/build.c"
+#include "../../computer/compare.c"
+#include "../../computer/count.c"
+#include "../../computer/create.c"
+#include "../../computer/destroy.c"
+#include "../../computer/interrupt.c"
+#include "../../computer/loop.c"
+#include "../../computer/receive.c"
+#include "../../computer/selection.c"
+#include "../../computer/send.c"
+#include "../../computer/set.c"
+#include "../../computer/shutdown.c"
+#include "../../computer/startup.c"
+#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/array/array.c"
+#include "../../tester/tester.c"
 
 //
 // Forward declarations.

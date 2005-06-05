@@ -20,21 +20,21 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef HTML_TRANSLATOR_SOURCE
 #define HTML_TRANSLATOR_SOURCE
 
-#include "../accessor/compound_accessor.c"
-#include "../array/array.c"
-#include "../global/abstraction_constants.c"
-#include "../global/channel_constants.c"
-#include "../global/constant.c"
-#include "../global/log_constants.c"
-#include "../global/name_constants.c"
-#include "../logger/logger.c"
+#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/channel_constants.c"
+#include "../../globals/constants/constant.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/name_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/accessor/compound_accessor.c"
+#include "../../memory/array/array.c"
 
 //
 // Forward declarations.
@@ -205,7 +205,7 @@ void encode_html_integer( void** dest, int* dest_count, int* dest_size,
         void* dest_int = POINTER_NULL_POINTER;
         int* dest_int_count = INTEGER_NULL_POINTER;
         int* dest_int_size = INTEGER_NULL_POINTER;
-        
+
         create_integer( &dest_int_count );
         *dest_int_count = 0;
         create_integer( &dest_int_size );
@@ -417,7 +417,7 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
                                     source_detail, source_detail_count );
             }
         }
-        
+
         if (r != 1) {
 
             compare_arrays( source_abstr, source_abstr_count,
@@ -431,7 +431,7 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
                                     source_detail, source_detail_count );
             }
         }
-        
+
 
         //parse the line feed for better reading the html-source
         parse( dest, dest_count, dest_size,

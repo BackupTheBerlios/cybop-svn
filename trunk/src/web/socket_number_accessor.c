@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.16 $ $Date: 2005-04-22 08:02:39 $ $Author: rholzmueller $
+ * @version $Revision: 1.17 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -28,12 +28,12 @@
 #ifndef SOCKET_NUMBER_ACCESSOR_SOURCE
 #define SOCKET_NUMBER_ACCESSOR_SOURCE
 
-#include "../array/array.c"
-#include "../global/constant.c"
-#include "../global/integer_constants.c"
-#include "../global/log_constants.c"
-#include "../global/structure_constants.c"
-#include "../logger/logger.c"
+#include "../globals/constants/constant.c"
+#include "../globals/constants/integer_constants.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/constants/structure_constants.c"
+#include "../globals/logger/logger.c"
+#include "../memory/array/array.c"
 
 /**
  * Add the client socket into the internal.

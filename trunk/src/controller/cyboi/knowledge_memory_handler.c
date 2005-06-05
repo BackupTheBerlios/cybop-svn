@@ -20,18 +20,18 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef KNOWLEDGE_MEMORY_HANDLER_SOURCE
 #define KNOWLEDGE_MEMORY_HANDLER_SOURCE
 
-#include "../creator/creator.c"
-#include "../global/abstraction_constants.c"
-#include "../global/integer_constants.c"
-#include "../global/structure_constants.c"
-#include "../global/variables.c"
+#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/variables/variables.c"
+#include "../../memory/creator/creator.c"
 
 /**
  * Starts up the knowledge memory.

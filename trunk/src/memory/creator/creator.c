@@ -24,29 +24,29 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:07:05 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CREATOR_SOURCE
 #define CREATOR_SOURCE
 
-#include "../array/array.c"
-#include "../creator/complex_creator.c"
-#include "../creator/compound_creator.c"
-#include "../creator/double_creator.c"
-#include "../creator/fraction_creator.c"
-#include "../creator/integer_creator.c"
-#include "../creator/internals_memory_creator.c"
-#include "../creator/signal_memory_creator.c"
-#include "../creator/string_creator.c"
-#include "../creator/time_creator.c"
-#include "../creator/vector_creator.c"
-#include "../creator/xml_node_creator.c"
-#include "../creator/xml_property_creator.c"
-#include "../global/abstraction_constants.c"
-#include "../global/log_constants.c"
-#include "../logger/logger.c"
+#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/array/array.c"
+#include "../../memory/creator/complex_creator.c"
+#include "../../memory/creator/compound_creator.c"
+#include "../../memory/creator/double_creator.c"
+#include "../../memory/creator/fraction_creator.c"
+#include "../../memory/creator/integer_creator.c"
+#include "../../memory/creator/internals_memory_creator.c"
+#include "../../memory/creator/signal_memory_creator.c"
+#include "../../memory/creator/string_creator.c"
+#include "../../memory/creator/time_creator.c"
+#include "../../memory/creator/vector_creator.c"
+#include "../../memory/creator/xml_node_creator.c"
+#include "../../memory/creator/xml_property_creator.c"
 
 /**
  * Creates the model.

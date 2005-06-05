@@ -22,20 +22,20 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-05 11:12:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BUILD_SOURCE
 #define BUILD_SOURCE
 
+#include "../controller/communicator/communicator.c"
 #include "../controller/converter/converter.c"
 #include "../controller/translator/translator.c"
-#include "../controller/communicator/communicator.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/log_constants.c"
 #include "../globals/constants/name_constants.c"
-#include "../globals/constants/logger/logger.c"
+#include "../globals/logger/logger.c"
 #include "../memory/array/array.c"
 #include "../memory/creator/creator.c"
 #include "../tester/tester.c"

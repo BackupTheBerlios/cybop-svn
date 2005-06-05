@@ -20,21 +20,21 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DOUBLE_PARSER_SOURCE
-#define DOUBLE_PARSER_SOURCE
+#ifndef DOUBLE_CONVERTER_SOURCE
+#define DOUBLE_CONVERTER_SOURCE
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../creator/integer_creator.c"
-#include "../creator/double_creator.c"
-#include "../global/integer_constants.c"
-#include "../global/log_constants.c"
-#include "../global/structure_constants.c"
-#include "../logger/logger.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/creator/integer_creator.c"
+#include "../../memory/creator/double_creator.c"
 
 //
 // A double is a floating point number.
@@ -195,5 +195,5 @@ void serialize_double(void* p0, void* p1, void* p2, const void* p3, const void* 
     }
 }
 
-/* DOUBLE_PARSER_SOURCE */
+/* DOUBLE_CONVERTER_SOURCE */
 #endif

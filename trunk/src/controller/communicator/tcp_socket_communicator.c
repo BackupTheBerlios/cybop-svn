@@ -24,7 +24,7 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -33,9 +33,12 @@
 #define TCP_SOCKET_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
-#include "../array/array.c"
-#include "../global/constant.c"
-#include "../logger/logger.c"
+#include "../../globals/constants/character_constants.c"
+#include "../../globals/constants/constant.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../globals/variables/variables.c"
+#include "../../memory/array/array.c"
 
 /**
  * Receives an http stream and writes it into a byte array.

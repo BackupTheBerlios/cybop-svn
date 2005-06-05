@@ -25,21 +25,21 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOI_SOURCE
 #define CYBOI_SOURCE
 
-#include "../creator/integer_creator.c"
-#include "../creator/pointer_creator.c"
-#include "../cyboi/globals_handler.c"
-#include "../cyboi/system_handler.c"
-#include "../global/channel_constants.c"
-#include "../global/integer_constants.c"
-#include "../logic/create.c"
-#include "../test/test.c"
+#include "../../computer/create.c"
+#include "../../controller/cyboi/globals_handler.c"
+#include "../../controller/cyboi/system_handler.c"
+#include "../../globals/constants/channel_constants.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../memory/creator/integer_creator.c"
+#include "../../memory/creator/pointer_creator.c"
+#include "../../tester/tester.c"
 
 /**
  * The main entry function.
@@ -100,19 +100,19 @@ int main(int p0, char** p1) {
                 void* i = NULL_POINTER;
 
                 // Create internals memory.
-                // Create internals memory 
-                create( &i, 
-                        (void*) INTERNALS_MEMORY_ELEMENTS_COUNT, 
-                        (void*) INTERNALS_MEMORY_ABSTRACTION, 
+                // Create internals memory
+                create( &i,
+                        (void*) INTERNALS_MEMORY_ELEMENTS_COUNT,
+                        (void*) INTERNALS_MEMORY_ABSTRACTION,
                         (void*) INTERNALS_MEMORY_ABSTRACTION_COUNT);
 
                 // Handle system.
                 handle_system(i, *c, &cc);
 
                 // Destroy internals memory.
-                destroy( &i, 
-                        (void*) INTERNALS_MEMORY_ELEMENTS_COUNT, 
-                        (void*) INTERNALS_MEMORY_ABSTRACTION, 
+                destroy( &i,
+                        (void*) INTERNALS_MEMORY_ELEMENTS_COUNT,
+                        (void*) INTERNALS_MEMORY_ABSTRACTION,
                         (void*) INTERNALS_MEMORY_ABSTRACTION_COUNT);
 
                 log_message((void*) INFO_LOG_LEVEL, (void*) EXIT_CYBOI_NORMALLY_MESSAGE, (void*) EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);

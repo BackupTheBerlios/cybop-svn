@@ -20,20 +20,20 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef BOOLEAN_PARSER_SOURCE
-#define BOOLEAN_PARSER_SOURCE
+#ifndef BOOLEAN_CONVERTER_SOURCE
+#define BOOLEAN_CONVERTER_SOURCE
 
-#include "../array/array.c"
-#include "../creator/integer_creator.c"
-#include "../global/constant.c"
-#include "../global/integer_constants.c"
-#include "../global/log_constants.c"
-#include "../global/structure_constants.c"
-#include "../logger/logger.c"
+#include "../../globals/constants/constant.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/array/array.c"
+#include "../../memory/creator/integer_creator.c"
 
 //
 // A boolean can have just one of the two values: TRUE or FALSE
@@ -150,5 +150,5 @@ void serialize_boolean(void* p0, void* p1, void* p2, const void* p3, const void*
     }
 }
 
-/* BOOLEAN_PARSER_SOURCE */
+/* BOOLEAN_CONVERTER_SOURCE */
 #endif

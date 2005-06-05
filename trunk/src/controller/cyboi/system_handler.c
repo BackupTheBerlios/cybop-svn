@@ -20,29 +20,29 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SYSTEM_HANDLER_SOURCE
 #define SYSTEM_HANDLER_SOURCE
 
-#include "../array/array.c"
-#include "../creator/integer_creator.c"
-#include "../cyboi/knowledge_memory_handler.c"
-#include "../cyboi/signal_memory_handler.c"
-#include "../cyboi/input_output_handler.c"
-#include "../cyboi/signal_waiter.c"
-#include "../global/abstraction_constants.c"
-#include "../global/channel_constants.c"
-#include "../global/constant.c"
-#include "../global/integer_constants.c"
-#include "../global/log_constants.c"
-#include "../global/structure_constants.c"
-#include "../global/variables.c"
-#include "../logger/logger.c"
-#include "../logic/create.c"
-#include "../logic/destroy.c"
+#include "../../computer/create.c"
+#include "../../computer/destroy.c"
+#include "../../controller/cyboi/input_output_handler.c"
+#include "../../controller/cyboi/knowledge_memory_handler.c"
+#include "../../controller/cyboi/signal_memory_handler.c"
+#include "../../controller/cyboi/signal_waiter.c"
+#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/channel_constants.c"
+#include "../../globals/constants/constant.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../globals/variables/variables.c"
+#include "../../memory/array/array.c"
+#include "../../memory/creator/integer_creator.c"
 
 /**
  * Handles the system.
@@ -107,14 +107,14 @@ void handle_system(void* p0, void* start_file, void* start_file_count) {
             // It is not needed for the startup signal.
 
             // Create startup model abstraction, model, details.
-            create_model((void*) &ma, (void*) mac, (void*) mas, 
+            create_model((void*) &ma, (void*) mac, (void*) mas,
                 (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT,
                 (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
                 (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
             create_model((void*) &mm, (void*) mmc, (void*) mms,
-                start_file, start_file_count, 
-                CYBOL_ABSTRACTION, CYBOL_ABSTRACTION_COUNT, 
+                start_file, start_file_count,
+                CYBOL_ABSTRACTION, CYBOL_ABSTRACTION_COUNT,
                 FILE_CHANNEL, FILE_CHANNEL_COUNT );
             // CAUTION! Do not create startup model details!
             // It is not needed for the startup signal.
@@ -156,7 +156,7 @@ void handle_system(void* p0, void* start_file, void* start_file_count) {
                             mm, (void*) mmc,
                             md, (void*) mdc,
                             (void*) NORMAL_PRIORITY, (void*) id);
-    
+
                         // The system is now started up and complete so that a loop
                         // can be entered, waiting for signals (events/ interrupts)
                         // which are stored/ found in the signal memory.
@@ -179,17 +179,17 @@ void handle_system(void* p0, void* start_file, void* start_file_count) {
             }
         }
         else {
-            
+
             log_message_debug("Could not handle system. The start file or start file count is null.");
         }
-        
+
         shutdown_input_output(p0);
         shutdown_signal_memory(p0);
         shutdown_knowledge_memory(p0);
-        
+
     }
     else {
-        
+
         log_message_debug("Could not handle system. The internal memory is null.");
     }
 

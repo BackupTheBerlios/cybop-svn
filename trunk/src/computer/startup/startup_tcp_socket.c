@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-05 11:12:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -38,6 +38,8 @@
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
+#include "../../memory/array/array.c"
+#include "../../memory/creator/integer_creator.c"
 
 /**
  * Starts up the tcp socket service.

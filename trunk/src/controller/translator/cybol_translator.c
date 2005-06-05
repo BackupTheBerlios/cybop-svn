@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,14 +29,15 @@
 
 #include <string.h>
 #include <libxml/tree.h>
-#include "../array/array.c"
-#include "../creator/integer_creator.c"
-#include "../global/abstraction_constants.c"
-#include "../global/channel_constants.c"
-#include "../global/cybol_constants.c"
-#include "../global/integer_constants.c"
-#include "../global/name_constants.c"
-#include "../logger/logger.c"
+#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/channel_constants.c"
+#include "../../globals/constants/cybol_constants.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/name_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/array/array.c"
+#include "../../memory/creator/creator.c"
+#include "../../memory/creator/integer_creator.c"
 
 //
 // Forward declarations.

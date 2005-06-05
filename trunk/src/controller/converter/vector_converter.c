@@ -20,15 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef VECTOR_PARSER_SOURCE
-#define VECTOR_PARSER_SOURCE
+#ifndef VECTOR_CONVERTER_SOURCE
+#define VECTOR_CONVERTER_SOURCE
 
-#include "../global/log_constants.c"
-#include "../logger/logger.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/logger/logger.c"
 
 /**
  * Parses the byte stream and creates a vector model from it.
@@ -153,5 +153,5 @@ void serialize_vector(void* p0, void* p1, void* p2, const void* p3, const void* 
 */
 }
 
-/* VECTOR_PARSER_SOURCE */
+/* VECTOR_CONVERTER_SOURCE */
 #endif

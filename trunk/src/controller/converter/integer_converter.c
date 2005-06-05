@@ -20,20 +20,20 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTEGER_PARSER_SOURCE
-#define INTEGER_PARSER_SOURCE
+#ifndef INTEGER_CONVERTER_SOURCE
+#define INTEGER_CONVERTER_SOURCE
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../creator/integer_creator.c"
-#include "../global/integer_constants.c"
-#include "../global/log_constants.c"
-#include "../global/structure_constants.c"
-#include "../logger/logger.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/creator/integer_creator.c"
 
 /**
  * Parses the byte stream and creates an integer model from it.
@@ -185,5 +185,5 @@ void serialize_integer(void* p0, void* p1, void* p2, const void* p3, const void*
     }
 }
 
-/* INTEGER_PARSER_SOURCE */
+/* INTEGER_CONVERTER_SOURCE */
 #endif

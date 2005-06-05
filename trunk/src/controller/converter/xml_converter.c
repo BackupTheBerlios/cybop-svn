@@ -24,21 +24,22 @@
  * - parse an xml stream into an xml model
  * - serialize an xml model into an xml stream
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef XML_PARSER_SOURCE
-#define XML_PARSER_SOURCE
+#ifndef XML_CONVERTER_SOURCE
+#define XML_CONVERTER_SOURCE
 
 #include <libxml/parser.h>
-#include "../array/array.c"
-#include "../creator/xml_node_creator.c"
-#include "../creator/xml_property_creator.c"
-#include "../global/character_constants.c"
-#include "../global/constant.c"
-#include "../global/integer_constants.c"
-#include "../logger/logger.c"
+#include "../../globals/constants/character_constants.c"
+#include "../../globals/constants/constant.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/creator/integer_creator.c"
+#include "../../memory/creator/xml_node_creator.c"
+#include "../../memory/creator/xml_property_creator.c"
 
 //
 // Xml comment tag.
@@ -410,5 +411,5 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 void serialize_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
-/* XML_PARSER_SOURCE */
+/* XML_CONVERTER_SOURCE */
 #endif

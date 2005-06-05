@@ -20,27 +20,27 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef PARSER_SOURCE
-#define PARSER_SOURCE
+#ifndef CONVERTER_SOURCE
+#define CONVERTER_SOURCE
 
-#include "../array/array.c"
-#include "../creator/integer_creator.c"
-#include "../global/abstraction_constants.c"
-#include "../global/log_constants.c"
-#include "../logger/logger.c"
-#include "../parser/boolean_parser.c"
-#include "../parser/complex_parser.c"
-#include "../parser/double_parser.c"
-#include "../parser/fraction_parser.c"
-#include "../parser/integer_parser.c"
-#include "../parser/string_parser.c"
-#include "../parser/time_parser.c"
-#include "../parser/vector_parser.c"
-#include "../parser/xml_parser.c"
+#include "../../controller/converter/boolean_converter.c"
+#include "../../controller/converter/complex_converter.c"
+#include "../../controller/converter/double_converter.c"
+#include "../../controller/converter/fraction_converter.c"
+#include "../../controller/converter/integer_converter.c"
+#include "../../controller/converter/string_converter.c"
+#include "../../controller/converter/time_converter.c"
+#include "../../controller/converter/vector_converter.c"
+#include "../../controller/converter/xml_converter.c"
+#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/array/array.c"
+#include "../../memory/creator/integer_creator.c"
 
 /**
  * Parses the byte stream according to the given document type
@@ -339,5 +339,5 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     //?? For now, only the cybol file format is considered.
 }
 
-/* PARSER_SOURCE */
+/* CONVERTER_SOURCE */
 #endif

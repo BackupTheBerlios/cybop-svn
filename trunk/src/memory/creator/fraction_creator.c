@@ -23,17 +23,17 @@
  * This file contains the functionality to:
  * - create a fraction model in memory
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:07:05 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef FRACTION_CREATOR_SOURCE
 #define FRACTION_CREATOR_SOURCE
 
-#include "../array/array.c"
-#include "../global/structure_constants.c"
-#include "../global/log_constants.c"
-#include "../logger/logger.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/array/array.c"
 
 /**
  * Creates the fraction.

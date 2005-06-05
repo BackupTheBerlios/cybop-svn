@@ -20,15 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef TIME_PARSER_SOURCE
-#define TIME_PARSER_SOURCE
+#ifndef TIME_CONVERTER_SOURCE
+#define TIME_CONVERTER_SOURCE
 
-#include "../global/log_constants.c"
-#include "../logger/logger.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/logger/logger.c"
 
 //
 // A time is used to measure the duration of dynamics or in other words,
@@ -144,5 +144,5 @@ void serialize_time(void* p0, void* p1, void* p2, const void* p3, const void* p4
 */
 }
 
-/* TIME_PARSER_SOURCE */
+/* TIME_CONVERTER_SOURCE */
 #endif

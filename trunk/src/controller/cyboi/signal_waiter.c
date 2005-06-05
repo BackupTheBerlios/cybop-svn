@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -28,12 +28,12 @@
 #ifndef SIGNAL_WAITER_SOURCE
 #define SIGNAL_WAITER_SOURCE
 
-#include "../accessor/signal_memory_accessor.c"
-#include "../cyboi/input_output_activator.c"
-#include "../cyboi/signal_handler.c"
-#include "../global/integer_constants.c"
-#include "../global/log_constants.c"
-#include "../logger/logger.c"
+#include "../../controller/cyboi/input_output_activator.c"
+#include "../../controller/cyboi/signal_handler.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/accessor/signal_memory_accessor.c"
 
 /**
  * Waits for signals.
@@ -119,9 +119,9 @@ void wait(void* p0) {
 
                                 //?? Wait for web input, if no signal is in memory. TODO: Use a thread for this!
                                 //debug for rolf Holzm?ller
-                                get_array_elements( p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, 
+                                get_array_elements( p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL,
                                                    (void*) &socket_flag, (void*) POINTER_ARRAY);
-                                get_array_elements( p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, 
+                                get_array_elements( p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL,
                                                    (void*) &blocking_flag, (void*) POINTER_ARRAY);
                                 if ( (socket_flag != POINTER_NULL_POINTER) && (blocking_flag != NULL_POINTER) ) {
 

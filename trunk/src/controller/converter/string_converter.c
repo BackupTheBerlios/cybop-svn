@@ -20,16 +20,16 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef STRING_PARSER_SOURCE
-#define STRING_PARSER_SOURCE
+#ifndef STRING_CONVERTER_SOURCE
+#define STRING_CONVERTER_SOURCE
 
-#include "../global/log_constants.c"
-#include "../global/structure_constants.c"
-#include "../logger/logger.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/logger/logger.c"
 
 /**
  * Parses the byte stream and creates a string model from it.
@@ -128,5 +128,5 @@ void parse_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 void serialize_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
-/* STRING_PARSER_SOURCE */
+/* STRING_CONVERTER_SOURCE */
 #endif

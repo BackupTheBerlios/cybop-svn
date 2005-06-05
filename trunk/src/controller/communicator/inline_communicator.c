@@ -24,7 +24,7 @@
  * - receive an inline stream into a byte array
  * - send an inline stream from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,9 +32,9 @@
 #define INLINE_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
-#include "../array/array.c"
-#include "../global/constant.c"
-#include "../logger/logger.c"
+#include "../../globals/constants/constant.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/array/array.c"
 
 /**
  * Receives an inline stream and writes it into a byte array.

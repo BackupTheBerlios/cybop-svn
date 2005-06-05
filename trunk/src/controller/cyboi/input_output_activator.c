@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -28,8 +28,8 @@
 #ifndef INPUT_OUTPUT_ACTIVATOR_SOURCE
 #define INPUT_OUTPUT_ACTIVATOR_SOURCE
 
-#include "../communicator/tcp_socket_communicator.c"
-#include "../socket/unix_socket.c"
+#include "../../controller/communicator/tcp_socket_communicator.c"
+#include "../../socket/unix_socket.c"
 
 /**
  * Activates the input output mechanisms.

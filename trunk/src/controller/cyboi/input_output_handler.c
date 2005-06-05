@@ -20,19 +20,19 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:08:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INPUT_OUTPUT_HANDLER_SOURCE
 #define INPUT_OUTPUT_HANDLER_SOURCE
 
-#include "../creator/integer_creator.c"
-#include "../global/integer_constants.c"
-#include "../global/structure_constants.c"
-#include "../global/variables.c"
-#include "../socket/unix_socket.c"
-#include "../web/tcp_socket_server.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/variables/variables.c"
+#include "../../memory/creator/integer_creator.c"
+#include "../../socket/unix_socket.c"
+#include "../../web/tcp_socket_server.c"
 
 /**
  * Starts up the input output.
@@ -59,48 +59,48 @@ void startup_input_output(void* p0) {
         flag = INTEGER_NULL_POINTER;
         create_integer( &flag );
         *flag = 0;
-        
-        set_array_elements( p0, 
+
+        set_array_elements( p0,
                             (void*) UNIX_SERVER_SOCKET_ACTIVE_INTERNAL,
-                            (void*) &flag, 
-                            (void*) ONE_NUMBER, 
+                            (void*) &flag,
+                            (void*) ONE_NUMBER,
                             (void*) POINTER_ARRAY );
-    
+
         // The activation flag for tcp server socket.
         flag = INTEGER_NULL_POINTER;
         create_integer( &flag );
         *flag = 0;
-        
-        set_array_elements( p0, 
+
+        set_array_elements( p0,
                             (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL,
-                            (void*) &flag, 
-                            (void*) ONE_NUMBER, 
+                            (void*) &flag,
+                            (void*) ONE_NUMBER,
                             (void*) POINTER_ARRAY );
-                            
+
         // The blocking flag for tcp server socket.
         flag = INTEGER_NULL_POINTER;
         create_integer( &flag );
         *flag = 0;
-        
-        set_array_elements( p0, 
+
+        set_array_elements( p0,
                             (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL,
-                            (void*) &flag, 
-                            (void*) ONE_NUMBER, 
+                            (void*) &flag,
+                            (void*) ONE_NUMBER,
                             (void*) POINTER_ARRAY );
-                            
+
     }
     else {
-     
+
         log_message_debug( "Can not startup_input_output. The internal is null.");
-    }        
+    }
 }
 
 /**
  * Shuts down the input output mechanisms.
- * 
+ *
  * in the internals must be destroy the atctivation flag
  * for the different input / output mechanismen
- * 
+ *
  * To the mechanisms belong:
  * - x window system
  * - tcp socket
@@ -134,7 +134,7 @@ void shutdown_input_output(void* p0) {
 
         f = POINTER_NULL_POINTER;
     }
-    
+
     // TCP socket blocking flag.
     get_array_elements(p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
@@ -144,7 +144,7 @@ void shutdown_input_output(void* p0) {
 
         f = POINTER_NULL_POINTER;
     }
-    
+
 }
 
 /* INPUT_OUTPUT_HANDLER_SOURCE */

@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 23:57:03 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -35,9 +35,9 @@
 #ifndef LOGGER_SOURCE
 #define LOGGER_SOURCE
 
-#include "../globals/constants/character_constants.c"
-#include "../globals/constants/log_constants.c"
-#include "../globals/variables/variables.c"
+#include "../../globals/constants/character_constants.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/variables/variables.c"
 
 /**
  * Adds the log details.

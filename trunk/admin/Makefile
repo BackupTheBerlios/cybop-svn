@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.29 $ $Date: 2005-06-04 23:49:08 $ $Author: christian $
+# @version $Revision: 1.30 $ $Date: 2005-06-05 11:12:17 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -118,6 +118,8 @@ TESTER_OBJECTS = $(patsubst $(SRC)/tester/%.c,$(OBJ)/tester/%.o,$(TESTER_SOURCES
 # OLD stuff to be deleted!
 SOCKET_SOURCES = $(wildcard $(SRC)/socket/*.c)
 SOCKET_OBJECTS = $(patsubst $(SRC)/socket/%.c,$(OBJ)/socket/%.o,$(SOCKET_SOURCES))
+WEB_SOURCES = $(wildcard $(SRC)/web/*.c)
+WEB_OBJECTS = $(patsubst $(SRC)/web/%.c,$(OBJ)/web/%.o,$(WEB_SOURCES))
 
 #
 # Compiles all cyboi source files.
@@ -155,12 +157,13 @@ all: create \
 	$(MEMORY_CREATOR_OBJECTS) \
 	$(TESTER_OBJECTS) \
 	$(SOCKET_OBJECTS) \
+	$(WEB_OBJECTS) \
 # Compile source files.
-	$(COMPILER) -c $(COMPILER_FLAGS) $(SRC)/cyboi/cyboi.c \
-		-o $(OBJ)/cyboi/cyboi.o
+	$(COMPILER) -c $(COMPILER_FLAGS) $(SRC)/controller/cyboi/cyboi.c \
+		-o $(OBJ)/controller/cyboi/cyboi.o
 # Link object files.
 	$(COMPILER) -L/usr/X11R6/lib -L/usr/lib \
-		-o $(BIN)/$(BINARY) $(OBJ)/cyboi/cyboi.o -lX11 -lxml2
+		-o $(BIN)/$(BINARY) $(OBJ)/controller/cyboi/cyboi.o -lX11 -lxml2
 # Print ready message.
 	@echo Compiled cyboi files.
 
@@ -194,6 +197,7 @@ create:
 	-cd $(OBJ); mkdir memory/creator
 	-cd $(OBJ); mkdir tester
 	-cd $(OBJ); mkdir socket
+	-cd $(OBJ); mkdir web
 
 #$(OBJ)/%.o: $(SRC)/%.c
 #	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
@@ -253,6 +257,9 @@ $(OBJ)/tester/%.o: $(SRC)/tester/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/socket/%.o: $(SRC)/socket/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/web/%.o: $(SRC)/web/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 #
