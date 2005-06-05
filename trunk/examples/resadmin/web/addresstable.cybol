@@ -28,7 +28,7 @@
 
 <model>
 
-    <part name="table_header" channel="file" abstraction="cybol" model="examples/resadmin/web/addresstable_header.cybol">
+    <part name="table_header" channel="file" abstraction="cybol" model="resadmin/web/addresstable_header.cybol">
         <property name="html_tag" channel="inline" abstraction="string" model="tr"/>
     </part>
 

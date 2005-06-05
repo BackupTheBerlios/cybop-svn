@@ -28,7 +28,7 @@
 
 <model>
 
-    <part name="form" channel="file" abstraction="cybol" model="examples/resadmin/web/new/new.cybol">
+    <part name="form" channel="file" abstraction="cybol" model="resadmin/web/new/new.cybol">
         <property name="html_tag" channel="inline" abstraction="string" model="form"/>
         <property name="html_tag_properties" channel="inline" abstraction="string" model="action='add_new_address.cybol' method='post'"/>
     </part>

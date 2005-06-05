@@ -49,7 +49,7 @@
         <property name="name" channel="inline" abstraction="knowledge" model="domain.new_address.listname"/>
         <property name="channel" channel="inline" abstraction="string" model="file"/>
         <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
-        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/domain/address_new.cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="resadmin/domain/address_new.cybol"/>
     </part>
 
 
@@ -75,7 +75,7 @@
         <property name="operand_2" channel="inline" abstraction="string" model=".lastname"/>
         <property name="result" channel="inline" abstraction="knowledge" model="domain.new_address.lastname_domain"/>
     </part>
-    
+
 
     <!-- set the value for the new address -->
     <part name="set_new_address_firstname" channel="inline" abstraction="operation" model="set">
@@ -86,14 +86,14 @@
         <property name="source" channel="inline" abstraction="knowledge" model="domain.new_address.lastname"/>
         <property name="destination" channel="inline" abstraction="encapsulated_knowledge" model="domain.new_address.lastname_domain"/>
     </part>
-    
 
 
-    <!-- send to web -->    
+
+    <!-- send to web -->
     <!-- refresh the adress list -->
     <part name="create_address_row" channel="inline" abstraction="operation" model="url_refresh">
         <property name="url" channel="inline" abstraction="string" model="send_name.cybol"/>
     </part>
-    
-    
+
+
 </model>

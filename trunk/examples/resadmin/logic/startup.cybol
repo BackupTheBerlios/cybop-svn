@@ -22,7 +22,7 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.9 $ $Date: 2005-04-22 08:07:33 $ $Author: rholzmueller $
+    @version $Revision: 1.10 $ $Date: 2005-06-05 12:33:16 $ $Author: christian $
     @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
 /-->
 
@@ -30,7 +30,7 @@
 
 
     <!--
-        root of the domain models   
+        root of the domain models
     -->
     <part name="create_domain" channel="inline" abstraction="operation" model="create_part">
         <property name="name" channel="inline" abstraction="string" model="domain"/>
@@ -43,9 +43,9 @@
         <property name="name" channel="inline" abstraction="string" model="addressbook"/>
         <property name="channel" channel="inline" abstraction="string" model="file"/>
         <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
-        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/domain/addressbook.cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="resadmin/domain/addressbook.cybol"/>
     </part>
-    
+
     <!-- logic model -->
     <part name="create_logic" channel="inline" abstraction="operation" model="create_part">
         <property name="name" channel="inline" abstraction="string" model="logic"/>
@@ -59,16 +59,16 @@
         <property name="name" channel="inline" abstraction="string" model="create_table_rows"/>
         <property name="channel" channel="inline" abstraction="string" model="file"/>
         <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
-        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/logic/create_table_rows.cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="resadmin/logic/create_table_rows.cybol"/>
     </part>
 
     <!-- start service tcp socket -->
     <part name="start_service" channel="inline" abstraction="operation" model="startup">
-        <property name="service" channel="inline" abstraction="string" model="tcp_socket"/>    
+        <property name="service" channel="inline" abstraction="string" model="tcp_socket"/>
         <property name="tcp_socket_port" channel="inline" abstraction="integer" model="3456"/>
     </part>
     <part name="receive_tcp" channel="inline" abstraction="operation" model="receive">
-        <property name="service" channel="inline" abstraction="string" model="tcp_socket"/>    
+        <property name="service" channel="inline" abstraction="string" model="tcp_socket"/>
         <property name="blocking" channel="inline" abstraction="integer" model="1"/>
     </part>
 </model>

@@ -57,7 +57,7 @@
         <property name="abstraction" channel="inline" abstraction="string" model="string"/>
         <property name="model" channel="inline" abstraction="string" model="lasttest"/>
     </part>
-    
+
     <part name="create_new_address_listname" channel="inline" abstraction="operation" model="create_part">
         <property name="whole" channel="inline" abstraction="knowledge" model="domain.new_address"/>
         <property name="name" channel="inline" abstraction="string" model="listname"/>
@@ -65,7 +65,7 @@
         <property name="abstraction" channel="inline" abstraction="string" model="string"/>
         <property name="model" channel="inline" abstraction="string" model=""/>
     </part>
-    
+
     <part name="create_new_address_firstname_domain" channel="inline" abstraction="operation" model="create_part">
         <property name="whole" channel="inline" abstraction="knowledge" model="domain.new_address"/>
         <property name="name" channel="inline" abstraction="string" model="firstname_domain"/>
@@ -73,7 +73,7 @@
         <property name="abstraction" channel="inline" abstraction="string" model="string"/>
         <property name="model" channel="inline" abstraction="string" model=""/>
     </part>
-    
+
 
     <part name="create_new_address_lastname_domain" channel="inline" abstraction="operation" model="create_part">
         <property name="whole" channel="inline" abstraction="knowledge" model="domain.new_address"/>
@@ -83,7 +83,7 @@
         <property name="model" channel="inline" abstraction="string" model=""/>
     </part>
 
-    
+
     <!-- create web view -->
 
     <part name="destroy_web_new" channel="inline" abstraction="operation" model="destroy_part">
@@ -93,15 +93,15 @@
         <property name="name" channel="inline" abstraction="string" model="web_new"/>
         <property name="channel" channel="inline" abstraction="string" model="file"/>
         <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
-        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/web/new/body.cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="resadmin/web/new/body.cybol"/>
     </part>
 
-    <!-- send to web -->    
+    <!-- send to web -->
     <part name="send_edit_web" channel="inline" abstraction="operation" model="send">
         <property name="language" channel="inline" abstraction="string" model="tcp_socket"/>
         <property name="receiver" channel="inline" abstraction="string" model="user"/>
         <property name="message" channel="inline" abstraction="knowledge" model="web_new"/>
     </part>
-    
-    
+
+
 </model>

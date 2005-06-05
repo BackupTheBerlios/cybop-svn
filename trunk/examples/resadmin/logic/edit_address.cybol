@@ -39,7 +39,7 @@
 
 
     <!-- create part for variables -->
-    
+
     <part name="destroy_web_address" channel="inline" abstraction="operation" model="destroy_part">
         <property name="name" channel="inline" abstraction="string" model="domain.edit"/>
     </part>
@@ -102,7 +102,7 @@
 
 
     <!-- set proprties values for buttons -->
-    
+
     <part name="set_1" channel="inline" abstraction="operation" model="set">
         <property name="source" channel="inline" abstraction="string" model="name='"/>
         <property name="destination" channel="inline" abstraction="knowledge" model="domain.edit.firstname_prop"/>
@@ -145,7 +145,7 @@
         <property name="operand_2" channel="inline" abstraction="string" model="' type='text' value='"/>
         <property name="result" channel="inline" abstraction="knowledge" model="domain.edit.lastname_prop"/>
     </part>
-    
+
     <part name="set_domain_lastname_prop_1" channel="inline" abstraction="operation" model="add">
         <property name="operand_1" channel="inline" abstraction="knowledge" model="domain.edit.lastname_prop"/>
         <property name="operand_2" channel="inline" abstraction="encapsulated_knowledge" model="domain.edit.lastname"/>
@@ -157,15 +157,15 @@
         <property name="operand_2" channel="inline" abstraction="string" model="'"/>
         <property name="result" channel="inline" abstraction="knowledge" model="domain.edit.lastname_prop"/>
     </part>
-    
-    
+
+
 
     <!-- create web view -->
     <part name="create_body" channel="inline" abstraction="operation" model="create_part">
         <property name="name" channel="inline" abstraction="string" model="web_edit"/>
         <property name="channel" channel="inline" abstraction="string" model="file"/>
         <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
-        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/web/edit/body.cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="resadmin/web/edit/body.cybol"/>
     </part>
 
     <!-- set property in the buttons -->
@@ -182,12 +182,12 @@
         <property name="destination_property" channel="inline" abstraction="string" model="html_tag_properties"/>
     </part>
 
-    <!-- send to web -->    
+    <!-- send to web -->
     <part name="send_edit_web" channel="inline" abstraction="operation" model="send">
         <property name="language" channel="inline" abstraction="string" model="tcp_socket"/>
         <property name="receiver" channel="inline" abstraction="string" model="user"/>
         <property name="message" channel="inline" abstraction="knowledge" model="web_edit"/>
     </part>
-    
-    
+
+
 </model>

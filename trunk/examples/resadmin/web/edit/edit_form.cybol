@@ -27,10 +27,8 @@
 /-->
 
 <model>
-
-    <part name="form" channel="file" abstraction="cybol" model="examples/resadmin/web/edit/edit.cybol">
+    <part name="form" channel="file" abstraction="cybol" model="resadmin/web/edit/edit.cybol">
         <property name="html_tag" channel="inline" abstraction="string" model="form"/>
         <property name="html_tag_properties" channel="inline" abstraction="string" model="action='send_name.cybol' method='post'"/>
     </part>
-
 </model>

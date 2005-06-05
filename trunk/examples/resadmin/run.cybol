@@ -29,6 +29,6 @@
 <model>
     <part name="startup" channel="inline" abstraction="operation" model="send">
         <property name="language" channel="inline" abstraction="string" model="signal"/>
-        <property name="message" channel="file" abstraction="cybol" model="examples/resadmin/logic/startup.cybol"/>
+        <property name="message" channel="file" abstraction="cybol" model="resadmin/logic/startup.cybol"/>
     </part>
 </model>

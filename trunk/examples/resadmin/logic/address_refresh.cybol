@@ -35,7 +35,7 @@
 
 
     <!--
-        root of the domain models   
+        root of the domain models
     -->
     <part name="create_domain" channel="inline" abstraction="operation" model="create_part">
         <property name="name" channel="inline" abstraction="string" model="domain"/>
@@ -48,7 +48,7 @@
         <property name="name" channel="inline" abstraction="string" model="addressbook"/>
         <property name="channel" channel="inline" abstraction="string" model="file"/>
         <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
-        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/domain/addressbook.cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="resadmin/domain/addressbook.cybol"/>
     </part>
 
     <!-- refresh the adress list -->

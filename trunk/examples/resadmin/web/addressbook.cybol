@@ -31,7 +31,7 @@
         <property name="html_tag" channel="inline" abstraction="string" model="h1"/>
     </part>
 
-    <part name="addresstable" channel="file" abstraction="cybol" model="examples/resadmin/web/addresstable.cybol">
+    <part name="addresstable" channel="file" abstraction="cybol" model="resadmin/web/addresstable.cybol">
         <property name="html_tag" channel="inline" abstraction="string" model="table"/>
         <property name="html_tag_properties" channel="inline" abstraction="string" model="border='1'"/>
     </part>
@@ -40,7 +40,7 @@
         <property name="html_tag" channel="inline" abstraction="string" model="br"/>
     </part>
 
-    <part name="add_address" channel="inline" abstraction="cybol" model="examples/resadmin/web/add_button.cybol">
+    <part name="add_address" channel="inline" abstraction="cybol" model="resadmin/web/add_button.cybol">
         <property name="html_tag" channel="inline" abstraction="string" model="a"/>
         <property name="html_tag_properties" channel="inline" abstraction="string" model="border='1'"/>
     </part>

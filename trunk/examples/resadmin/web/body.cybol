@@ -27,10 +27,10 @@
 /-->
 
 <model>
-    <part name="head" channel="file" abstraction="cybol" model="examples/resadmin/web/web_meta.cybol">
+    <part name="head" channel="file" abstraction="cybol" model="resadmin/web/web_meta.cybol">
         <property name="html_tag" channel="inline" abstraction="string" model="head"/>
     </part>
-    <part name="body" channel="file" abstraction="cybol" model="examples/resadmin/web/addressbook.cybol">
+    <part name="body" channel="file" abstraction="cybol" model="resadmin/web/addressbook.cybol">
         <property name="html_tag" channel="inline" abstraction="string" model="body"/>
     </part>
 </model>

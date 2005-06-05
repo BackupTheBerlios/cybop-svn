@@ -28,6 +28,5 @@
 
 <model>
     <part name="name" channel="inline" abstraction="string"  model="my Adressbook"/>
-    <part name="addresses" channel="file" abstraction="cybol"  model="examples/resadmin/domain/addresses.cybol"/>
+    <part name="addresses" channel="file" abstraction="cybol"  model="resadmin/domain/addresses.cybol"/>
 </model>
-

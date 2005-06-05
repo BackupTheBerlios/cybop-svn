@@ -62,7 +62,7 @@
         <property name="name" channel="inline" abstraction="knowledge" model="domain.loop_listname"/>
         <property name="channel" channel="inline" abstraction="string" model="file"/>
         <property name="abstraction" channel="inline" abstraction="string" model="cybol"/>
-        <property name="model" channel="inline" abstraction="string" model="examples/resadmin/web/addresstable_row.cybol"/>
+        <property name="model" channel="inline" abstraction="string" model="resadmin/web/addresstable_row.cybol"/>
     </part>
 
 
@@ -100,7 +100,7 @@
 
     <!-- edit and delete proprties -->
     <part name="create_listname_web_delete_property1" channel="inline" abstraction="operation" model="add">
-        <property name="operand_1" channel="inline" abstraction="string" model="href='/examples/resadmin/logic/delete_address.cybol?domain.delete_address="/>
+        <property name="operand_1" channel="inline" abstraction="string" model="href='/resadmin/logic/delete_address.cybol?domain.delete_address="/>
         <property name="operand_2" channel="inline" abstraction="knowledge" model="domain.loop_listname_domain"/>
         <property name="result" channel="inline" abstraction="knowledge" model="domain.delete_button_property"/>
     </part>
@@ -112,7 +112,7 @@
     </part>
 
     <part name="create_listname_web_edit_property1" channel="inline" abstraction="operation" model="add">
-        <property name="operand_1" channel="inline" abstraction="string" model="href='/examples/resadmin/logic/edit_address.cybol?domain.edit_address="/>
+        <property name="operand_1" channel="inline" abstraction="string" model="href='/resadmin/logic/edit_address.cybol?domain.edit_address="/>
         <property name="operand_2" channel="inline" abstraction="knowledge" model="domain.loop_listname_domain"/>
         <property name="result" channel="inline" abstraction="knowledge" model="domain.edit_button_property"/>
     </part>
@@ -128,7 +128,7 @@
         <property name="source" channel="inline" abstraction="encapsulated_knowledge" model="domain.loop_listname_domain_firstname"/>
         <property name="destination" channel="inline" abstraction="encapsulated_knowledge" model="domain.loop_listname_web_firstname"/>
     </part>
-    
+
     <part name="set_lastname" channel="inline" abstraction="operation" model="set">
         <property name="source" channel="inline" abstraction="encapsulated_knowledge" model="domain.loop_listname_domain_lastname"/>
         <property name="destination" channel="inline" abstraction="encapsulated_knowledge" model="domain.loop_listname_web_lastname"/>

@@ -34,10 +34,10 @@
     <part name="lastname" channel="inline" abstraction="string" model="">
         <property name="html_tag" channel="inline" abstraction="string" model="td"/>
     </part>
-    <part name="edit" channel="file" abstraction="cybol" model="examples/resadmin/web/edit_button.cybol">
+    <part name="edit" channel="file" abstraction="cybol" model="resadmin/web/edit_button.cybol">
         <property name="html_tag" channel="inline" abstraction="string" model="td"/>
     </part>
-    <part name="delete" channel="file" abstraction="cybol" model="examples/resadmin/web/delete_button.cybol">
+    <part name="delete" channel="file" abstraction="cybol" model="resadmin/web/delete_button.cybol">
         <property name="html_tag" channel="inline" abstraction="string" model="td"/>
     </part>
 
