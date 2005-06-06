@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-05 11:12:17 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-06-06 08:12:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,6 +40,23 @@
  *
  * CAUTION! Do NOT rename this procedure to "receive",
  * as that name is already used by socket functionality.
+ *
+ * The signal waiting loop only catches cyboi internal signals.
+ * In order to also catch signals of various devices,
+ * special mechanisms for signal reception have to be started.
+ * To the mechanisms belong:
+ * - unix socket
+ * - tcp socket
+ * - x window system
+ *
+ * These have their own internal signal/ action/ event/ interrupt
+ * waiting loops which get activated here.
+ * Whenever such a signal/ action/ event/ interrupt occurs, it gets transformed
+ * into a cyboi signal and is finally placed in cyboi's signal memory.
+ *
+ * TODO: Since many internal waiting loops run in parallel,
+ * the adding of signals to the signal memory must be synchronized!
+ * How to do this properly in C?
  *
  * @param p0 the parameters
  * @param p1 the parameters count
@@ -150,17 +167,13 @@ void receive_message(const void* p0, const void* p1,
 
         if (r == 1) {
 
+            if ((ba != NULL_POINTER)
+                && (bac != NULL_POINTER)
+                && (bm != NULL_POINTER)
+                && (bmc != NULL_POINTER)) {
 
-            if (    (ba != NULL_POINTER)
-                 && (bac != NULL_POINTER)
-                 && (bm != NULL_POINTER)
-                 && (bmc != NULL_POINTER) )
-            {
-
-                receive_tcp_socket( p5, p2, p3, p4,
-                                    *ba, *bac, *bm, *bmc );
+                receive_tcp_socket(p5, p2, p3, p4, *ba, *bac, *bm, *bmc);
             }
-
         }
     }
 }

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-06 08:12:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -40,40 +40,34 @@
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memory/array/array.c"
-#include "../../web/tcp_socket_server.c"
 
 /**
  * Interupts the tcp socket service.
  *
- * @param internals the internals memory
- * @param know the knowledge
- * @param know_count the knowledge count
- * @param know_size the knowledge size
+ * @param p0 the internals memory
+ * @param p1 the knowledge
+ * @param p2 the knowledge count
+ * @param p3 the knowledge size
  */
-void interrupt_tcp_socket( void* internals, const void* know,
-                          const void* know_count, const void* know_size )
-{
+void interrupt_tcp_socket(void* p0, const void* p1, const void* p2, const void* p3) {
 
-    log_message_debug("interupt tcp socket.");
+    log_message_debug("Interrupt tcp socket.");
 
-    //check of null pointer
-    if ( internals != NULL_POINTER ) {
+    if (p0 != NULL_POINTER) {
 
+        // Reset activation flag.
+        int** f = NULL_POINTER;
 
-        //set the activation flag in the internal
-        void** socket_flag = POINTER_NULL_POINTER;
+        get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &f, (void*) POINTER_ARRAY);
 
-        get_array_elements( internals, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL,
-                            (void*) &socket_flag, (void*) POINTER_ARRAY );
+        if ((f != NULL_POINTER) && (*f != NULL_POINTER)) {
 
-        if ( (socket_flag!=NULL_POINTER) && (*socket_flag!=NULL_POINTER) ) {
-
-            **((int**)socket_flag) = 0;
+            **f = 0;
         }
-    }
-    else {
 
-        log_message_debug("Could not interupt the tcp server socket. The internal is null.");
+    } else {
+
+        log_message_debug("Could not interupt the tcp socket service. The internals memory is null.");
     }
 }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-06 08:12:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -38,9 +38,9 @@
 #include "../globals/constants/name_constants.c"
 #include "../globals/constants/structure_constants.c"
 #include "../globals/logger/logger.c"
+#include "../memory/accessor/internals_memory_accessor.c"
 #include "../memory/creator/integer_creator.c"
 #include "../socket/unix_socket.c"
-#include "../web/socket_number_accessor.c"
 
 /**
  * Sends a message in a special language.

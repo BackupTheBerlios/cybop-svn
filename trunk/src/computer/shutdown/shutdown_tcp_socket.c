@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-05 11:12:17 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-06-06 08:12:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -45,25 +45,58 @@ void shutdown_tcp_socket(void* p0, const void* p1, const void* p2, const void* p
 
     log_message_debug("Shutdown tcp socket.");
 
-    // The tcp socket internal.
-    int** s = NULL_POINTER;
+    // Deactivate tcp socket service.
+    interrupt_tcp_socket(p0, p1, p2, p3);
 
-    // Get tcp socket internal.
+    // The tcp server socket.
+    int** s = NULL_POINTER;
+    // The tcp client sockets.
+    void* cs = NULL_POINTER;
+    void* csc = NULL_POINTER;
+    void* css = NULL_POINTER;
+    // The activation flag.
+    void* af = NULL_POINTER;
+    // The blocking flag.
+    void* bf = NULL_POINTER;
+    // The tcp signal ids.
+    void* id = NULL_POINTER;
+    void* idc = NULL_POINTER;
+    void* ids = NULL_POINTER;
+
+    // Get tcp server socket.
     get_array_elements(p0, (void*) TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) POINTER_ARRAY);
+    // Get tcp client sockets.
+    get_array_elements(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_ARRAY);
+    // Get activation flag.
+    get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &af, (void*) POINTER_ARRAY);
+    // Get blocking flag.
+    get_array_elements(p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) POINTER_ARRAY);
+    // Get tcp signal ids.
+    get_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_ARRAY);
 
     if (*s != NULL_POINTER) {
 
-        //?? TODO Rolf! Put all code for tcp socket shutdown here!
-        close ( *((int*)*s) );
+        // Close tcp server socket.
+        close(**s);
 
-        //set the activation flag in the internal
-        void** socket_flag = POINTER_NULL_POINTER;
-        get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_ARRAY);
-        if ( (socket_flag!=NULL_POINTER) && (*socket_flag!=NULL_POINTER) ) {
-
-            *((int*)*socket_flag) = 0;
-        }
-
+        // Destroy tcp server socket.
+        destroy_integer(s);
+        // Destroy tcp client sockets.
+        destroy_array((void*) cs, (void*) css, (void*) INTEGER_ARRAY);
+        destroy_integer(csc);
+        destroy_integer(css);
+        // Destroy activation flag.
+        destroy_integer(af);
+        // Destroy blocking flag.
+        destroy_integer(bf);
+        // Destroy tcp signal ids.
+        destroy_array((void*) id, (void*) ids, (void*) INTEGER_ARRAY);
+        destroy_integer(idc);
+        destroy_integer(ids);
 
     } else {
 

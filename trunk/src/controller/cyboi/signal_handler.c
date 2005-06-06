@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-06 08:12:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -516,24 +516,6 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 void handle_signal(const void* p0, const void* p1, const void* p2, const void* p3,
     const void* p4, const void* p5, const  void* p6, const void* p7, void* p8, void* p9, void* p10) {
 
-//    // The knowledge memory.
-//    void** k = POINTER_NULL_POINTER;
-//    void** kc = POINTER_NULL_POINTER;
-//    void** ks = POINTER_NULL_POINTER;
-//    // The signal memory.
-//    void** s = POINTER_NULL_POINTER;
-//    void** sc = POINTER_NULL_POINTER;
-//    void** ss = POINTER_NULL_POINTER;
-//
-//    // Get knowledge memory.
-//    get_array_elements(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_ARRAY);
-//    get_array_elements(p0, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) POINTER_ARRAY);
-//    get_array_elements(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) POINTER_ARRAY);
-//    // Get signal memory.
-//    get_array_elements(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_ARRAY);
-//    get_array_elements(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_ARRAY);
-//    get_array_elements(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_ARRAY);
-
     int r = 0;
 
     if (r != 1) {
@@ -542,7 +524,7 @@ void handle_signal(const void* p0, const void* p1, const void* p2, const void* p
 
         if (r == 1) {
 
-            handle_compound_signal(p2, p3, p6, p7, p8, p9, p10 );
+            handle_compound_signal(p2, p3, p6, p7, p8, p9, p10);
         }
     }
 
@@ -552,7 +534,7 @@ void handle_signal(const void* p0, const void* p1, const void* p2, const void* p
 
         if (r == 1) {
 
-            handle_operation_signal( p2, p3, p4, p5, p6, p7, p8, p9 );
+            handle_operation_signal(p2, p3, p4, p5, p6, p7, p8, p9);
         }
     }
 

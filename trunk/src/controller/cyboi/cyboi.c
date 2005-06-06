@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-06 08:12:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,7 +68,7 @@ int main(int p0, char** p1) {
     // Otherwise, the logger may not be able to log possible error messages.
     create_globals();
 
-    // Call testing procedures. Comment/ uncomment this as needed.
+    // Call testing procedures. Comment/ uncomment this as needed!
     // CAUTION! This has to stand AFTER the initialization of the
     // global variables because these are used by the testing code.
 //??    test(); destroy_globals(); r = 0; return r;
@@ -99,21 +99,14 @@ int main(int p0, char** p1) {
                 // The internals memory.
                 void* i = NULL_POINTER;
 
-                // Create internals memory.
                 // Create internals memory
-                create( &i,
-                        (void*) INTERNALS_MEMORY_ELEMENTS_COUNT,
-                        (void*) INTERNALS_MEMORY_ABSTRACTION,
-                        (void*) INTERNALS_MEMORY_ABSTRACTION_COUNT);
+                create(&i, (void*) INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) INTERNALS_MEMORY_ABSTRACTION, (void*) INTERNALS_MEMORY_ABSTRACTION_COUNT);
 
                 // Handle system.
                 handle_system(i, *c, &cc);
 
                 // Destroy internals memory.
-                destroy( &i,
-                        (void*) INTERNALS_MEMORY_ELEMENTS_COUNT,
-                        (void*) INTERNALS_MEMORY_ABSTRACTION,
-                        (void*) INTERNALS_MEMORY_ABSTRACTION_COUNT);
+                destroy(&i, (void*) INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) INTERNALS_MEMORY_ABSTRACTION, (void*) INTERNALS_MEMORY_ABSTRACTION_COUNT);
 
                 log_message((void*) INFO_LOG_LEVEL, (void*) EXIT_CYBOI_NORMALLY_MESSAGE, (void*) EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 

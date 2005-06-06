@@ -1,5 +1,5 @@
 /*
- * $RCSfile: socket_number_accessor.c,v $
+ * $RCSfile: internals_memory_accessor.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,20 +20,20 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.17 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-06-06 08:12:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
-#ifndef SOCKET_NUMBER_ACCESSOR_SOURCE
-#define SOCKET_NUMBER_ACCESSOR_SOURCE
+#ifndef INTERNALS_MEMORY_ACCESSOR_SOURCE
+#define INTERNALS_MEMORY_ACCESSOR_SOURCE
 
-#include "../globals/constants/constant.c"
-#include "../globals/constants/integer_constants.c"
-#include "../globals/constants/log_constants.c"
-#include "../globals/constants/structure_constants.c"
-#include "../globals/logger/logger.c"
-#include "../memory/array/array.c"
+#include "../../globals/constants/constant.c"
+#include "../../globals/constants/integer_constants.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/array/array.c"
 
 /**
  * Add the client socket into the internal.
@@ -186,5 +186,5 @@ void get_client_socket_number_for_index(void* p0, void* p1, void* p2) {
     get_array_elements(*cs, p1, p2, (void*) INTEGER_ARRAY);
 }
 
-/* SOCKET_NUMBER_ACCESSOR_SOURCE */
+/* INTERNALS_MEMORY_ACCESSOR_SOURCE */
 #endif

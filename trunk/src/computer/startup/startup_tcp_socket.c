@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-05 11:12:17 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-06-06 08:12:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -93,6 +93,10 @@ void startup_tcp_socket( void* internals, const void* know,
             void* cs = NULL_POINTER;
             int* csc = INTEGER_NULL_POINTER;
             int* css = INTEGER_NULL_POINTER;
+            // The activation flag.
+            int* af = INTEGER_NULL_POINTER;
+            // The blocking flag.
+            int* bf = INTEGER_NULL_POINTER;
             // The tcp signal ids.
             void* id = NULL_POINTER;
             int* idc = INTEGER_NULL_POINTER;
@@ -107,6 +111,12 @@ void startup_tcp_socket( void* internals, const void* know,
             create_integer((void*) &css);
             *css = 0;
             create_array((void*) &cs, (void*) css, (void*) INTEGER_ARRAY);
+            // Create activation flag.
+            create_integer(&af);
+            *af = 0;
+            // Create blocking flag.
+            create_integer(&bf);
+            *bf = 0;
             // Create tcp signal ids.
             create_integer((void*) &idc);
             *idc = 0;
@@ -120,6 +130,10 @@ void startup_tcp_socket( void* internals, const void* know,
             set_array_elements(internals, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) &cs, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
             set_array_elements(internals, (void*) TCP_CLIENT_SOCKETS_COUNT_INTERNAL, (void*) &csc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
             set_array_elements(internals, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+            // Set activation flag.
+            set_array_elements(internals, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &af, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+            // Set blocking flag.
+            set_array_elements(internals, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &bf, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
             // Set tcp signal ids.
             set_array_elements(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
             set_array_elements(internals, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
@@ -148,12 +162,12 @@ void startup_tcp_socket( void* internals, const void* know,
 
                 } else {
 
-                    log_message_debug("Could not create tcp server socket. The socket could not be bound to the address.");
+                    log_message_debug("ERROR: Could not create tcp server socket. The socket could not be bound to the address.");
                 }
 
             } else {
 
-                log_message_debug("Could not create tcp server socket. The socket is smaller than zero.");
+                log_message_debug("ERROR: Could not create tcp server socket. The socket is smaller than zero.");
             }
         }
     }

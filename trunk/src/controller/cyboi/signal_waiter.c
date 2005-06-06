@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-06 08:12:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -28,7 +28,6 @@
 #ifndef SIGNAL_WAITER_SOURCE
 #define SIGNAL_WAITER_SOURCE
 
-#include "../../controller/cyboi/input_output_activator.c"
 #include "../../controller/cyboi/signal_handler.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
@@ -43,9 +42,6 @@
 void wait(void* p0) {
 
     log_message((void*) INFO_LOG_LEVEL, (void*) WAIT_FOR_SIGNALS_MESSAGE, (void*) WAIT_FOR_SIGNALS_MESSAGE_COUNT);
-
-    // Activate input output mechanisms for signal reception.
-    activate_input_output(p0);
 
     //?? TODO: Debugging stuff from Rolf Holzmueller.
     void** socket_flag = POINTER_NULL_POINTER;
@@ -116,24 +112,21 @@ void wait(void* p0) {
                                 // Get index of the top priority signal.
                                 get_highest_priority_index(*s, *sc, (void*) &i);
 
-
                                 //?? Wait for web input, if no signal is in memory. TODO: Use a thread for this!
                                 //debug for rolf Holzm?ller
-                                get_array_elements( p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL,
-                                                   (void*) &socket_flag, (void*) POINTER_ARRAY);
-                                get_array_elements( p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL,
-                                                   (void*) &blocking_flag, (void*) POINTER_ARRAY);
-                                if ( (socket_flag != POINTER_NULL_POINTER) && (blocking_flag != NULL_POINTER) ) {
+                                get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_ARRAY);
+                                get_array_elements(p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &blocking_flag, (void*) POINTER_ARRAY);
 
-                                    if ( (*socket_flag != NULL_POINTER) && (*blocking_flag != NULL_POINTER) ) {
+                                if ((socket_flag != POINTER_NULL_POINTER) && (blocking_flag != NULL_POINTER)) {
 
-                                        if ( ( **((int**)socket_flag)==1 ) && (i < 0) && (**((int**)blocking_flag)==1) ) {
+                                    if ((*socket_flag != NULL_POINTER) && (*blocking_flag != NULL_POINTER)) {
 
-                                            run_tcp_socket( p0);
+                                        if ((**((int**) socket_flag) == 1) && (i < 0) && (**((int**) blocking_flag) == 1)) {
+
+                                            run_tcp_socket(p0);
                                         }
                                     }
                                 }
-
 
                                 if (i >= 0) {
 
@@ -180,41 +173,7 @@ void wait(void* p0) {
                                                                     // Handle signal.
                                                                     //
 
-                                                                    handle_signal(*a, *ac, *m, *mc, *d, *dc, *p, *id, (void*) &f, p0,
-                                                                                  &direct_execution_flag  );
-
-//                                                                    if (r != 1) {
-//
-//                                                                        compare_arrays(*a, *ac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-//
-//                                                                        if (r == 1) {
-//
-//                                                                            handle_compound_signal(*m, *mc, *p, *id, *s, *sc, *ss);
-//                                                                        }
-//                                                                    }
-//
-//                                                                    //
-//                                                                    // Handle operation signal.
-//                                                                    //
-//
-//                                                                    if (r != 1) {
-//
-//                                                                        compare_arrays(*a, *ac, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-//
-//                                                                        if (r == 1) {
-//
-//                                                                            handle_operation_signal(*m, *mc, *d, *dc, *k, *kc, *ks, *id, p0, (void*) &f);
-//                                                                        }
-//                                                                    }
-//
-//                                                                    //
-//                                                                    // Unknown signal abstraction.
-//                                                                    //
-//
-//                                                                    if (r != 1) {
-//
-//                                                                        log_message((void*) WARNING_LOG_LEVEL, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE, (void*) COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT);
-//                                                                    }
+                                                                    handle_signal(*a, *ac, *m, *mc, *d, *dc, *p, *id, (void*) &f, p0, &direct_execution_flag);
 
                                                                     // Remove signal from signal memory.
                                                                     remove_signal(*s, *sc, *ss, (void*) &i);
