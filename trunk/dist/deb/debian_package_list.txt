@@ -1,79 +1,171 @@
+#
+# $RCSfile: debian_package_list.txt,v $
+#
+# Copyright (c) 2004-2005. Christian Heller and the CYBOP developers.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#
+# http://www.cybop.net
+# - Cybernetics Oriented Programming -
+#
+# @version $Revision: 1.8 $ $Date: 2005-06-07 12:15:19 $ $Author: christian $
+# @author Dennis Reichenbach <dennis.reichenbach@gmx.net>
+# @author Christian Heller <christian.heller@tuxtax.de>
+#
 
-debian_package_list.txt
-
-Copyright (c) 2004-2005. Christian Heller and the CYBOP developers.
-
-@author Dennis Reichenbach <dennis.reichenbach@gmx.net>
-@author Christian Heller <christian.heller@tuxtax.de>
-
-The following packages are sorted alphabetically.
+This is a list of packages to be built within the CYBOP project.
 Packages which are NOT implemented yet are put in brackets [].
 
 
+CYBOP
+_____
+
+cybop.deb [meta package]
+- depends:      cybop-books, cybop-papers, cybop-presentations
+- category:     doc
+
+[cybop-books.deb]
+- recommends:   cybop-papers, cybop-presentations
+- suggests:     cyboi, cybol-examples
+- category:     doc
+- files:        /usr/share/doc/cybop/books/* (source: /doc/books/*)
+
+cybop-papers.deb
+- recommends:   cybop-books, cybop-presentations
+- suggests:     cyboi, cybol-examples
+- category:     doc
+- files:        /usr/share/doc/cybop/papers/* (source: /doc/papers/*)
+
+cybop-presentations.deb
+- recommends:   cybop-books, cybop-papers
+- suggests:     cyboi, cybol-examples
+- category:     doc
+- files:        /usr/share/doc/cybop/presentations/* (source: /doc/presentations/*)
+
+
+CYBOI
+_____
+
 cyboi.deb
-- depends:      libc6, xlibs, libxml2, libxml2-dev (to compile the source code)
-- recommends:   cybol-core
-- suggests:     cyboi-doc
+- depends:      libc6, xlibs, libxml2
+- recommends:   cybol-core, cybol-examples, cybol-healthcare
+- suggests:     cyboi-doc, cyboi-dev
 - category:     interpreters
-- files:        /usr/bin/cyboi
+- files:        /usr/bin/cyboi (source: /bin/cyboi)
                 /usr/share/doc/cyboi/README.Debian
                 /usr/share/doc/cyboi/changelog.gz
                 /usr/share/doc/cyboi/copyright
-  	        /usr/share/man/man1/cyboi1.gz
-		/usr/share/doc/cyboi/examples/exit/*
-                /usr/share/doc/cyboi/examples/exit_cybol_file/*
-                /usr/share/doc/cyboi/examples/exit_text_file/*
-                /usr/share/doc/cyboi/examples/helloworld/*
+                /usr/share/man/man1/cyboi1.gz (source: /doc/cyboi/cyboi.1.gz)
 
-[cyboi-doc.deb]
+cyboi-dev.deb
+- depends:      libc6, xlibs, libxml2, libxml2-dev
+- suggests:     cyboi
+- category:     devel
+- files:        /usr/share/doc/cyboi-dev/Makefile (source: /admin/Makefile)
+                /usr/share/doc/cyboi-dev/exclude (source: /admin/exclude)
+                /usr/share/doc/cyboi-dev/README.Debian
+                /usr/share/doc/cyboi-dev/changelog.gz
+                /usr/share/doc/cyboi-dev/copyright
+
+cyboi-doc.deb
 - recommends:   cybop-doc-papers, cybop-doc-presentations
-- suggests:     cyboi, cybol, cybop
+- suggests:     cyboi
 - category:     doc
-- files:        /usr/share/doc/cyboi-doc/manual.txt
-		/usr/share/doc/cyboi-doc/README.Debian
-		/usr/share/doc/cyboi-doc/changelog.gz
-		/usr/share/doc/cyboi-doc/copyright
+- files:        /usr/share/doc/cyboi-doc/manual.txt (source: /doc/cyboi/manual.txt)
+                /usr/share/doc/cyboi-doc/README.Debian
+                /usr/share/doc/cyboi-doc/changelog.gz
+                /usr/share/doc/cyboi-doc/copyright
+
+
+CYBOL
+_____
+
+cybol-examples.deb
+- depends:      cyboi
+- suggests:     cybol-core, cybol-healthcare
+- category:     misc
+- files:        /usr/share/doc/cybol/examples/addition/run.cybol (source: /examples/addition/run.cybol)
+                /usr/share/doc/cybol/examples/addition/startup.cybol (source: /examples/addition/startup.cybol)
+                /usr/share/doc/cybol/examples/exit/run.cybol (source: /examples/exit/run.cybol)
+                /usr/share/doc/cybol/examples/exit_cybol_file/exit.cybol (source: /examples/exit_cybol_file/exit.cybol)
+                /usr/share/doc/cybol/examples/exit_cybol_file/run.cybol (source: /examples/exit_cybol_file/run.cybol)
+                /usr/share/doc/cybol/examples/exit_text_file/exit.txt (source: /examples/exit_text_file/exit.txt)
+                /usr/share/doc/cybol/examples/exit_text_file/run.cybol (source: /examples/exit_text_file/run.cybol)
+                /usr/share/doc/cybol/examples/helloworld/run.cybol (source: /examples/helloworld/run.cybol)
+                /usr/share/doc/cybol/examples/helloworld/startup.cybol (source: /examples/helloworld/startup.cybol)
+                /usr/share/doc/cybol/examples/helloworld_dynamic_logic/run.cybol (source: /examples/helloworld_dynamic_logic/run.cybol)
+                /usr/share/doc/cybol/examples/helloworld_dynamic_logic/send_greeting.cybol (source: /examples/helloworld_dynamic_logic/send_greeting.cybol)
+                /usr/share/doc/cybol/examples/helloworld_dynamic_logic/shutdown.cybol (source: /examples/helloworld_dynamic_logic/shutdown.cybol)
+                /usr/share/doc/cybol/examples/helloworld_dynamic_logic/startup.cybol (source: /examples/helloworld_dynamic_logic/startup.cybol)
 
 [cybol-core.deb]
 - depends:      cyboi
 - suggests:     cybol-healthcare
-- category:     misc (evtl. auch "lib")
-- files:        /usr/share/cybol/core/*
+- category:     misc (better "base")
+- files:        /usr/share/cybol/core/* (source: /cybol/core/*)
 
 [cybol-healthcare.deb]
 - depends:      cyboi, cybol-core
 - suggests:     resmedicinae
-- category:     misc (evtl. auch "science"; "health" gibt's leider nicht)
-- files:        /usr/share/cybol/healthcare/*
+- category:     misc (better "science", "health", "med")
+- files:        /usr/share/cybol/healthcare/* (source: /cybol/healthcare/*)
 
-[resadmin.deb]
-- depends:      cyboi, cybol-core
-- category:     misc
-- files:        /usr/share/resadmin/*
 
-[resmedicinae.deb]
+Res Medicinae
+_____________
+
+resmedicinae.deb
 - depends:      cyboi, cybol-healthcare
 - recommends:   resadmin
-- suggests:     resmedicinae-doc
-- category:     misc (evtl. auch "science"; "health" gibt's leider nicht)
+- suggests:     resmedicinae-doc, resmedicinae-analysis
+- category:     misc (better "science"; "health" or "med" do unfortunately not exist)
 - files:        /usr/share/resmedicinae/*
 
 resmedicinae-doc.deb
-(ACHTUNG! Dieses Paket gibt es schon in "Sarge", wo es aber "resmed-doc" heiszt.
-Andreas Tille ist der Maintainer. Das Paket gehoert zum Meta-Package "med-doc".
-Es sollte umbenannt werden in "resmedicinae-doc". Dazu bitte Kontakt aufnehmen!)
-- recommends:   cyboi-doc
+- recommends:   resmedicinae
 - suggests:     linuxdoc-tools
 - category:     doc
-- files:        /usr/share/doc/resmedicinae/analysis.txt
-                /usr/share/doc/resmedicinae/manual.txt
+- files:        /usr/share/doc/resmedicinae/manual.* (source: /doc/manuals/*)
 
-cybop-doc-papers.deb
-- suggests:     cyboi-doc
+resmedicinae-analysis.deb
+(CAUTION! This package already exists in "Sarge", where it is called "resmed-doc".
+Andreas Tille is the maintainer. The package belongs to the meta package "med-doc".
+It should be renamed to "resmedicinae-analysis". Please contact Andreas Tille!)
+- recommends:   resmedicinae
+- suggests:     linuxdoc-tools
 - category:     doc
-- files:        /usr/share/doc/cybop/papers/*
+- files:        /usr/share/doc/resmedicinae/analysis.* (source: /doc/analysis/*)
 
-cybop-doc-presentations.deb
-- suggests:     cyboi-doc
-- category:     doc
-- files:        /usr/share/doc/cybop/presentations/*
+resadmin.deb
+- depends:      cyboi, cybol-core, cybol-healthcare
+- recommends:   resmedicinae
+- suggests:     resmedicinae-doc, resmedicinae-analysis
+- category:     misc
+- files:        /usr/share/resadmin/* (source: /share/resadmin/*)
+
+
+Necessary Package Information to be Provided to Maintainer
+__________________________________________________________
+
+- name
+- version
+- dependencies
+- category
+- list of files with source and destination directory
+- README.Debian
+- changelog
+- copyright
+- man page
+
