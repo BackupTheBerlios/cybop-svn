@@ -1,0 +1,34 @@
+Source: cyboi
+Section: interpreters
+Priority: optional
+Maintainer: Dennis Reichenbach <dennis.reichenbach@gmx.net>
+Standards-Version: 3.6.1
+Build-Depends: debhelper (>= 4.0.0)
+
+Package: cyboi
+Architecture: i386
+Depends: ${shlibs:Depends}
+Recommends: cybol-core
+Suggests: cyboi-doc
+Description: Cybernetics Oriented Interpreter (CYBOI) for CYBOP
+ CYBOI is the corresponding interpreter that is needed to execute systems
+ defined in CYBOL.
+ CYBOI was originally written in Java using the Swing graphics toolkit.
+ The next step will be to rewrite it in pure C so that CYBOI and CYBOL
+ can be added as truely free software to the Debian GNU/ Linux Distribution.
+ The object oriented concepts are not lost hereby; CYBOL contains them.
+ The only difficulty is the choice of an appropriate graphics toolkit.
+ Temporarily, Gtk, Qt or wxWindows may be used. In the long run, however,
+ CYBOI will have to provide its own graphics drawing routines to make full
+ use of the hierarchical structures encoded in CYBOL.
+ In the future, CYBOI might get minimized so far (by moving data structures
+ to CYBOL) that it could be implemented in Assembler/ Machine Language.
+ Further on, CYBOL/ XML will be the only remaining programming language
+ and even whole operating systems will be written in CYBOL only.
+ .
+ CYBOP stands for Cybernetics Oriented Programming and is a collection
+ of new concepts for software development, which are taken from nature.
+ .
+ CYBOL is an XML-based programming language and such completely
+ platform-independent. It incorporates the best ideas of
+ Procedural-/ Object-/ Component-/ Ontology-oriented programming.

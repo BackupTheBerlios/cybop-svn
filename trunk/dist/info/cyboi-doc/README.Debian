@@ -1,0 +1,23 @@
+cyboi-doc for Debian
+--------------------
+
+This is the documentation manual for the Cybernetics Oriented Interpreter (CYBOI).
+
+CYBOI interprets knowledge models defined in CYBOL/XML format,
+which are representing an application.
+
+A number of example applications can be found in /usr/share/doc/cyboi/examples.
+To start one of them with CYBOI, change into the following directory:
+
+cd /usr/share/doc/cyboi
+
+Afterwards, type in a shell/console window:
+
+cyboi examples/exit/configuration.cybol
+cyboi examples/exit_text_file/configuration.cybol
+cyboi examples/exit_cybol_file/configuration.cybol
+cyboi examples/helloworld/configuration.cybol
+
+Read the example CYBOL files to get more information!
+
+-- Dennis Reichenbach <dennis.reichenbach@gmx.net>, Sun, 20 Mar 2005 17:04:01 +0100
