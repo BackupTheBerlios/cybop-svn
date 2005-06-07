@@ -20,7 +20,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.8 $ $Date: 2005-06-07 12:15:19 $ $Author: christian $
+# @version $Revision: 1.9 $ $Date: 2005-06-07 21:36:21 $ $Author: christian $
 # @author Dennis Reichenbach <dennis.reichenbach@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -92,6 +92,12 @@ cyboi-doc.deb
 CYBOL
 _____
 
+[cybol-core.deb]
+- depends:      cyboi
+- suggests:     cybol-healthcare
+- category:     misc (better "base")
+- files:        /usr/share/cybol/core/* (source: /cybol/core/*)
+
 cybol-examples.deb
 - depends:      cyboi
 - suggests:     cybol-core, cybol-healthcare
@@ -110,50 +116,11 @@ cybol-examples.deb
                 /usr/share/doc/cybol/examples/helloworld_dynamic_logic/shutdown.cybol (source: /examples/helloworld_dynamic_logic/shutdown.cybol)
                 /usr/share/doc/cybol/examples/helloworld_dynamic_logic/startup.cybol (source: /examples/helloworld_dynamic_logic/startup.cybol)
 
-[cybol-core.deb]
-- depends:      cyboi
-- suggests:     cybol-healthcare
-- category:     misc (better "base")
-- files:        /usr/share/cybol/core/* (source: /cybol/core/*)
-
 [cybol-healthcare.deb]
 - depends:      cyboi, cybol-core
 - suggests:     resmedicinae
 - category:     misc (better "science", "health", "med")
 - files:        /usr/share/cybol/healthcare/* (source: /cybol/healthcare/*)
-
-
-Res Medicinae
-_____________
-
-resmedicinae.deb
-- depends:      cyboi, cybol-healthcare
-- recommends:   resadmin
-- suggests:     resmedicinae-doc, resmedicinae-analysis
-- category:     misc (better "science"; "health" or "med" do unfortunately not exist)
-- files:        /usr/share/resmedicinae/*
-
-resmedicinae-doc.deb
-- recommends:   resmedicinae
-- suggests:     linuxdoc-tools
-- category:     doc
-- files:        /usr/share/doc/resmedicinae/manual.* (source: /doc/manuals/*)
-
-resmedicinae-analysis.deb
-(CAUTION! This package already exists in "Sarge", where it is called "resmed-doc".
-Andreas Tille is the maintainer. The package belongs to the meta package "med-doc".
-It should be renamed to "resmedicinae-analysis". Please contact Andreas Tille!)
-- recommends:   resmedicinae
-- suggests:     linuxdoc-tools
-- category:     doc
-- files:        /usr/share/doc/resmedicinae/analysis.* (source: /doc/analysis/*)
-
-resadmin.deb
-- depends:      cyboi, cybol-core, cybol-healthcare
-- recommends:   resmedicinae
-- suggests:     resmedicinae-doc, resmedicinae-analysis
-- category:     misc
-- files:        /usr/share/resadmin/* (source: /share/resadmin/*)
 
 
 Necessary Package Information to be Provided to Maintainer
@@ -168,4 +135,3 @@ __________________________________________________________
 - changelog
 - copyright
 - man page
-
