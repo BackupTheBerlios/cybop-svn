@@ -22,7 +22,7 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.4 $ $Date: 2005-04-15 12:24:30 $ $Author: christian $
+    @version $Revision: 1.5 $ $Date: 2005-06-07 12:13:04 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
 
@@ -65,10 +65,7 @@
         <property name="message" channel="inline" abstraction="knowledge" model="domain.sum"/>
     </part>
     <part name="destroy_domain" channel="inline" abstraction="operation" model="destroy_part">
-        <property name="name" channel="inline" abstraction="knowledge" model="domain"/>
-        <property name="channel" channel="inline" abstraction="string" model="inline"/>
-        <property name="abstraction" channel="inline" abstraction="string" model="compound"/>
-        <property name="model" channel="inline" abstraction="string" model=""/>
+        <property name="model" channel="inline" abstraction="knowledge" model="domain"/>
     </part>
     <part name="exit" channel="inline" abstraction="operation" model="exit"/>
 </model>
