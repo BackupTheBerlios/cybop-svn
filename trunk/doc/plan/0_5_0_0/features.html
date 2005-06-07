@@ -18,7 +18,7 @@
         http://www.cybop.net
         - Cybernetics Oriented Programming -
     /-->
-    <meta name="date" content="$Revision: 1.2 $ $Date: 2005-06-07 12:15:37 $">
+    <meta name="date" content="$Revision: 1.3 $ $Date: 2005-06-07 14:13:24 $">
     <meta name="author" content="$Author: christian $">
     <!-- Includes Cascading Style Sheet. -->
     <link rel="stylesheet" type="text/css" href="../../cybop.css"/>
@@ -57,10 +57,10 @@
                         <td align="left" valign="top">
                             <h6>Project</h6>
                             <ul>
-                                <li>Debian Packages <i>cybop</i>, <i>cybop-papers</i>,
+                                <li>Create Debian Packages <i>cybop</i>, <i>cybop-papers</i>,
                                     <i>cybop-presentations</i>, <i>cyboi-dev</i></li>
-                                <li>Additional application packages like <i>resadmin</i> are from now on
-                                    hosted in the <a href="http://www.resmedicinae.org">Res Medicinae</a> project</li>
+                                <li>Move additional application packages like <i>resadmin</i> etc. to
+                                    <a href="http://www.resmedicinae.org">Res Medicinae</a> project</li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
@@ -69,53 +69,60 @@
                         </td>
                     </tr>
                     <tr bgcolor="#000000">
-                        <td bgcolor="#FFFFC0"/>
+                        <td bgcolor="#C0FFC0"/>
                         <td align="left" valign="top">
                             <h6>CYBOI</h6>
                             <ul>
-                                <li>Web interface by generating HTML from CYBOL (see XUL/ UIML)</li>
-                                <li>Textual (Curses-based) user interface
-                                    (see <a href="http://zemljanka.sourceforge.net/cursed/">Zemljanka</a>
-                                    and <a href="http://tvision.sourceforge.net/">TurboVision</a>)</li>
-                                <li>Improve X-Windows graphics drawing routines (xlibs)</li>
-                                <li>RPC Communication</li>
-                                <li>CORBA (Healthcare/ HDTF/ CORBAmed) Communication</li>
-                                <li>SOAP Communication</li>
-                                <li>HL7 Message Communication</li>
-                                <li>HL7 Clinical Document Architecture (CDA) Communication</li>
-                                <li>DICOM Communication</li>
-                                <li>Use colors for log messages on console (see SuSE Linux logs:
-                                    <i>Doing action ... ok (green)/failed (red)</i>,
-                                    <i>ok</i> on the right side of the screen)</li>
+                                <li>Complete implementation of the <i>loop</i> operation</li>
+                                <li>Correct bug in <i>get_new_signal_id</i> of signal_memory_accessor.c</li>
+                                <li>Implement <i>Web User Interface</i> (WUI) handling by generating (translating)
+                                    HTML from CYBOL (comparable to XUL/ UIML)</li>
+                                <li>Extend sources for handing over string parameters in URL, using escape code sequences</li>
+                                <li>Add <i>url_refresh</i> operation</li>
+                                <li>Implement <i>post</i> operation for web communication</li>
+                                <li>Add new abstraction <i>knowledge</i> for runtime access to knowledge model</li>
+                                <li>Enable dynamically created logic models</li>
+                                <li>Generalise handling of services using startup/ shutdown operations</li>
+                                <li>Run tcp service in an own thread</li>
+                                <li>Synchronise signal memory using <i>Mutex</i></li>
+                                <li>Use <i>send</i> operation for placing runtime signals read from a CYBOL
+                                    source into the signal memory</li>
+                                <li>Restructure source directories, following <i>von Neumann</i> architecture
+                                    (<i>controller</i>, <i>memory</i>, <i>computer</i>, <i>globals</i>)</li>
+                                <li>Remove /web directory
+                                    (tcp procedures are now in receive_tcp_socket.c;
+                                    client socket and signal numbers are in internals_memory_accessor.c)</li>
+                                <li>Remove input_output_activator.c
+                                    (now done by startup/ shutdown and receive/ interrupt/ send
+                                    service calls in CYBOL)</li>
+                                <li>Remove input_output_handler.c
+                                    (activation/ blocking flags etc. are now created/ destroyed
+                                    in corresponding startup/ shutdown procedure)</li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
                             Rolf Holzmueller<br>
                             <<a href="mailto:rolf.holzmueller@gmx.de">rolf.holzmueller@gmx.de</a>><br>
-                            Stefan Zeisler<br>
-                            <<a href="mailto:fonziex@freenet.de">fonziex@freenet.de</a>><br>
                             Christian Heller<br>
                             <<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>><br>
                         </td>
                     </tr>
                     <tr bgcolor="#000000">
-                        <td bgcolor="#FF8080"/>
+                        <td bgcolor="#C0FFC0"/>
                         <td align="left" valign="top">
-                            <h6>CYBOL Core</h6>
+                            <h6>CYBOL</h6>
                             <ul>
-                                <li>Get <i>resadmin</i> application with web frontend running</li>
-                                <li>Think through ontology (package structure) once more</li>
-                                <li>Action: <i>start_progress</i> and <i>stop_progress</i>
-                                    to set Wait Cursor at beginning and end of <i>handle</i></li>
-                                <li>Action: <i>login</i> called at system startup</li>
-                                <li>For UnDo functionality see design patterns <i>Command</i> and <i>Memento</i></li>
+                                <li>Get <i>Res Admin</i> application with web frontend running</li>
+                                <li>Remove all <i>examples</i> prefixes from model directory names in <i>Res Admin</i> application</li>
+                                <li>Replace <i>helloworld_with_shutdown</i> through <i>helloworld_dynamic_logic</i></li>
+                                <li>Rename <i>configuration.cybol</i> to <i>run.cybol</i> in all CYBOL applications</li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
-                            Christian Heller<br>
-                            <<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>><br>
                             Rolf Holzmueller<br>
                             <<a href="mailto:rolf.holzmueller@gmx.de">rolf.holzmueller@gmx.de</a>><br>
+                            Christian Heller<br>
+                            <<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>><br>
                         </td>
                     </tr>
                     </table>
