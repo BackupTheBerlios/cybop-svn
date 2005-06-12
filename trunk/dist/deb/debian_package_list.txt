@@ -20,7 +20,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.9 $ $Date: 2005-06-07 21:36:21 $ $Author: christian $
+# @version $Revision: 1.10 $ $Date: 2005-06-12 20:56:51 $ $Author: christian $
 # @author Dennis Reichenbach <dennis.reichenbach@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -29,8 +29,8 @@ This is a list of packages to be built within the CYBOP project.
 Packages which are NOT implemented yet are put in brackets [].
 
 
-CYBOP
-_____
+CYBOP -- Programming Theory
+___________________________
 
 cybop.deb [meta package]
 - depends:      cybop-books, cybop-papers, cybop-presentations
@@ -55,8 +55,8 @@ cybop-presentations.deb
 - files:        /usr/share/doc/cybop/presentations/* (source: /doc/presentations/*)
 
 
-CYBOI
-_____
+CYBOI -- Interpreter Program
+____________________________
 
 cyboi.deb
 - depends:      libc6, xlibs, libxml2
@@ -89,11 +89,31 @@ cyboi-doc.deb
                 /usr/share/doc/cyboi-doc/copyright
 
 
-CYBOL
-_____
+CYBOL -- XML-based Language
+___________________________
+
+cybol.deb
+- recommends:   cybol-examples
+- suggests:     cybol-core, cybol-healthcare
+- category:     misc
+- files:        /usr/share/xml/cybol/custom (source: empty)
+                /usr/share/xml/cybol/misc (source: empty)
+                /usr/share/xml/cybol/schema/dtd/cybol.dtd (source: /doc/cybol/cybol.dtd)
+                /usr/share/xml/cybol/stylesheet (source: empty)
+-- BEGIN TODO DENNIS --
+DENNIS! Bitte lies den folgenden Link:
+http://debian-xml-sgml.alioth.debian.org/xml-policy/index.html (besonders Chapter 3)
+Du solltest verstehen, wie "dh_installxmlcatalogs" etc. funktionieren,
+damit wir eine CYBOL DTD in Debian installieren koennen.
+Brauchen wir ueberhaupt so einen Katalog-Eintrag?
+Als CYBOL Header schlage ich vor:
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//CYBOP//DTD CYBOL XML V1.0//EN" "http://cybop.berlios.de/cybol/cybol.dtd">
+-- END TODO DENNIS --
 
 [cybol-core.deb]
 - depends:      cyboi
+- recommends:   cybol-examples
 - suggests:     cybol-healthcare
 - category:     misc (better "base")
 - files:        /usr/share/cybol/core/* (source: /cybol/core/*)
@@ -118,6 +138,7 @@ cybol-examples.deb
 
 [cybol-healthcare.deb]
 - depends:      cyboi, cybol-core
+- recommends:   cybol-examples
 - suggests:     resmedicinae
 - category:     misc (better "science", "health", "med")
 - files:        /usr/share/cybol/healthcare/* (source: /cybol/healthcare/*)
