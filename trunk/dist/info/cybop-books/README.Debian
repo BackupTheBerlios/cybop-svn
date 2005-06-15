@@ -1,24 +1,6 @@
-CYBOI for Debian
-----------------
+CYBOP Books for Debian
+----------------------
 
-The Cybernetics Oriented Interpreter (CYBOI) cannot be started alone,
-without additional configuration information.
-
-CYBOI interprets knowledge models defined in CYBOL/XML format,
-which are representing an application.
-
-A number of example applications can be found in /usr/share/doc/cyboi/examples.
-To start one of them with CYBOI, change into the following directory:
-
-cd /usr/share/doc/cyboi
-
-Afterwards, type in a shell/console window:
-
-cyboi examples/exit/configuration.cybol
-cyboi examples/exit_text_file/configuration.cybol
-cyboi examples/exit_cybol_file/configuration.cybol
-cyboi examples/helloworld/configuration.cybol
-
-Read the example CYBOL files to get more information!
+These are a number of books describing Cybernetics Oriented Programming (CYBOP).
 
  -- Christian Heller <christian.heller@tuxtax.de>, Mon, 28 Feb 2005 10:00:00 +0100

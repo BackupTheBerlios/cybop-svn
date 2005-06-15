@@ -1,1 +1,13 @@
-bin/cyboi usr/bin
+examples/addition/run.cybol usr/share/doc/cybol/examples/addition
+examples/addition/startup.cybol usr/share/doc/cybol/examples/addition
+examples/exit/run.cybol usr/share/doc/cybol/examples/exit
+examples/exit_cybol_file/exit.cybol usr/share/doc/cybol/examples/exit_cybol_file
+examples/exit_cybol_file/run.cybol usr/share/doc/cybol/examples/exit_cybol_file
+examples/exit_text_file/exit.txt usr/share/doc/cybol/examples/exit_text_file
+examples/exit_text_file/run.cybol usr/share/doc/cybol/examples/exit_text_file
+examples/helloworld/run.cybol usr/share/doc/cybol/examples/helloworld
+examples/helloworld/startup.cybol usr/share/doc/cybol/examples/helloworld
+examples/helloworld_dynamic_logic/run.cybol usr/share/doc/cybol/examples/helloworld_dynamic_logic
+examples/helloworld_dynamic_logic/send_greeting.cybol usr/share/doc/cybol/examples/helloworld_dynamic_logic
+examples/helloworld_dynamic_logic/shutdown.cybol usr/share/doc/cybol/examples/helloworld_dynamic_logic
+examples/helloworld_dynamic_logic/startup.cybol usr/share/doc/cybol/examples/helloworld_dynamic_logic

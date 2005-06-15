@@ -1,24 +1,23 @@
 CYBOI for Debian
 ----------------
 
-The Cybernetics Oriented Interpreter (CYBOI) cannot be started alone,
-without additional configuration information.
-
-CYBOI interprets knowledge models defined in CYBOL/XML format,
-which are representing an application.
-
-A number of example applications can be found in /usr/share/doc/cyboi/examples.
+In order to be started, the Cybernetics Oriented Interpreter (CYBOI) needs one
+command line parameter pointing to a CYBOL resource. CYBOI interprets knowledge
+models defined in CYBOL (XML) format, which are representing an application. A
+number of example applications can be found in /usr/share/doc/cybol-examples.
 To start one of them with CYBOI, change into the following directory:
 
-cd /usr/share/doc/cyboi
+cd /usr/share/doc/cybol-examples
 
-Afterwards, type in a shell/console window:
+Afterwards, type in a shell/console window one of the following lines:
 
-cyboi examples/exit/configuration.cybol
-cyboi examples/exit_text_file/configuration.cybol
-cyboi examples/exit_cybol_file/configuration.cybol
-cyboi examples/helloworld/configuration.cybol
+cyboi exit/run.cybol
+cyboi exit_text_file/run.cybol
+cyboi exit_cybol_file/run.cybol
+cyboi helloworld/run.cybol
+cyboi helloworld_dynamic_logic/run.cybol
+cyboi addition/run.cybol
 
-Read the example CYBOL files to get more information!
+Read the example CYBOL files to get more information and to understand how they work!
 
- -- Christian Heller <christian.heller@tuxtax.de>, Mon, 28 Feb 2005 10:00:00 +0100
+ -- Christian Heller <christian.heller@tuxtax.de>, Mon, 15 Jun 2005 01:00:00 +0100

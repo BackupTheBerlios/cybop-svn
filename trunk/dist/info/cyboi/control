@@ -7,28 +7,41 @@ Build-Depends: debhelper (>= 4.0.0)
 
 Package: cyboi
 Architecture: i386
-Depends: ${shlibs:Depends}
-Recommends: cybol-core
-Suggests: cyboi-doc
-Description: Cybernetics Oriented Interpreter (CYBOI) for CYBOP
- CYBOI is the corresponding interpreter that is needed to execute systems
- defined in CYBOL.
- CYBOI was originally written in Java using the Swing graphics toolkit.
- The next step will be to rewrite it in pure C so that CYBOI and CYBOL
- can be added as truely free software to the Debian GNU/ Linux Distribution.
- The object oriented concepts are not lost hereby; CYBOL contains them.
- The only difficulty is the choice of an appropriate graphics toolkit.
- Temporarily, Gtk, Qt or wxWindows may be used. In the long run, however,
- CYBOI will have to provide its own graphics drawing routines to make full
- use of the hierarchical structures encoded in CYBOL.
- In the future, CYBOI might get minimized so far (by moving data structures
- to CYBOL) that it could be implemented in Assembler/ Machine Language.
- Further on, CYBOL/ XML will be the only remaining programming language
- and even whole operating systems will be written in CYBOL only.
+Depends: libc6, xlibs, libxml2
+Recommends: cybol-core, cybol-examples, cybol-healthcare
+Suggests: cyboi-doc, cyboi-dev
+Description: Cybernetics Oriented Interpreter (CYBOI)
+ The Cybernetics Oriented Programming (CYBOP) theory is a collection of new
+ concepts for software design, which are taken from sciences like philosophy,
+ psychology, physics or biology, and nature directly.
+ It also incorporates the best ideas of Procedural-/ Object-/ Component-/
+ Ontology-oriented programming.
+ The concepts found their practical realisation in the Cybernetics Oriented
+ Language (CYBOL) and the Cybernetics Oriented Interpreter (CYBOI).
  .
- CYBOP stands for Cybernetics Oriented Programming and is a collection
- of new concepts for software development, which are taken from nature.
+ CYBOL has not much in common with traditional programming languages.
+ It is based on just one concept: Hierarchy. State- as well as logic models,
+ also called knowledge, can be easily described by it.
+ This includes Graphical-/ Textual-/ Web User Interfaces (GUI, TUI, WUI),
+ domain models, communication models, algorithms and more.
+ CYBOL can therefore also be called a universal knowledge modelling language.
+ It hopes to attract not only classical programmers, but to enable domain
+ experts to, themselves, actively participate in the development process.
+ Its syntax is pure XML. It is truly platform-independent, absolutely flexible,
+ extensible and changeable at runtime.
  .
- CYBOL is an XML-based programming language and such completely
- platform-independent. It incorporates the best ideas of
- Procedural-/ Object-/ Component-/ Ontology-oriented programming.
+ CYBOI is needed to execute application systems defined in CYBOL.
+ It can be called a Virtual Machine (VM).
+ Originally written in Java, it was later reimplemented in pure C.
+ In the future, CYBOI may take over more and more Operating System (OS)
+ functionality, to eventually become OS-independent.
+ Further, many parts of it might get minimized so far, that they can be
+ implemented in an assembler language.
+ Finally, one might imagine to burn CYBOI into a hardware chip directly.
+ .
+ TODO: Although GUIs and other models can already be defined completely in
+ CYBOL, they cannot be used by CYBOI yet. CYBOI currently contains socket- and
+ web communication mechanisms, but still lacks support for GUI, TUI and other
+ things more.
+ .
+ This package contains the Cybernetics Oriented Interpreter (CYBOI).

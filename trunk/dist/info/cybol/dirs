@@ -1,1 +1,4 @@
-usr/bin
+usr/share/xml/cybol/custom
+usr/share/xml/cybol/misc
+usr/share/xml/cybol/schema/dtd
+usr/share/xml/cybol/stylesheet

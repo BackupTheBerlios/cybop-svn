@@ -3,15 +3,45 @@ Section: doc
 Priority: optional
 Maintainer: Dennis Reichenbach <dennis.reichenbach@gmx.net>
 Standards-Version: 3.6.1
+Build-Depends: debhelper (>= 4.0.0)
 
 Package: cyboi-doc
-Architecture: all
-Suggests: cyboi, cybol, cybop
-Description: This is the manual describing how to work with the
- Cybernetics Oriented Interpreter (CYBOI).
+Architecture: i386
+Recommends: cybop-doc-papers, cybop-doc-presentations
+Suggests: cyboi
+Description: Cybernetics Oriented Interpreter (CYBOI) documentation
+ The Cybernetics Oriented Programming (CYBOP) theory is a collection of new
+ concepts for software design, which are taken from sciences like philosophy,
+ psychology, physics or biology, and nature directly.
+ It also incorporates the best ideas of Procedural-/ Object-/ Component-/
+ Ontology-oriented programming.
+ The concepts found their practical realisation in the Cybernetics Oriented
+ Language (CYBOL) and the Cybernetics Oriented Interpreter (CYBOI).
  .
- CYBOI is the corresponding interpreter that is needed to execute systems
- defined in the Cybernetics Oriented Language (CYBOL).
+ CYBOL has not much in common with traditional programming languages.
+ It is based on just one concept: Hierarchy. State- as well as logic models,
+ also called knowledge, can be easily described by it.
+ This includes Graphical-/ Textual-/ Web User Interfaces (GUI, TUI, WUI),
+ domain models, communication models, algorithms and more.
+ CYBOL can therefore also be called a universal knowledge modelling language.
+ It hopes to attract not only classical programmers, but to enable domain
+ experts to, themselves, actively participate in the development process.
+ Its syntax is pure XML. It is truly platform-independent, absolutely flexible,
+ extensible and changeable at runtime.
  .
- Cybernetics Oriented Programming (CYBOP) is a collection of new concepts
- for software development, which are taken from nature.
+ CYBOI is needed to execute application systems defined in CYBOL.
+ It can be called a Virtual Machine (VM).
+ Originally written in Java, it was later reimplemented in pure C.
+ In the future, CYBOI may take over more and more Operating System (OS)
+ functionality, to eventually become OS-independent.
+ Further, many parts of it might get minimized so far, that they can be
+ implemented in an assembler language.
+ Finally, one might imagine to burn CYBOI into a hardware chip directly.
+ .
+ TODO: Although GUIs and other models can already be defined completely in
+ CYBOL, they cannot be used by CYBOI yet. CYBOI currently contains socket- and
+ web communication mechanisms, but still lacks support for GUI, TUI and other
+ things more.
+ .
+ This package contains documentation describing the Cybernetics Oriented
+ Interpreter (CYBOI).

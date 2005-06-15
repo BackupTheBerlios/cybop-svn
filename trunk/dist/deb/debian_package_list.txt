@@ -20,7 +20,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.10 $ $Date: 2005-06-12 20:56:51 $ $Author: christian $
+# @version $Revision: 1.11 $ $Date: 2005-06-15 00:07:01 $ $Author: christian $
 # @author Dennis Reichenbach <dennis.reichenbach@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -40,19 +40,19 @@ cybop.deb [meta package]
 - recommends:   cybop-papers, cybop-presentations
 - suggests:     cyboi, cybol-examples
 - category:     doc
-- files:        /usr/share/doc/cybop/books/* (source: /doc/books/*)
+- install:      doc/books/* usr/share/doc/cybop/books
 
 cybop-papers.deb
 - recommends:   cybop-books, cybop-presentations
 - suggests:     cyboi, cybol-examples
 - category:     doc
-- files:        /usr/share/doc/cybop/papers/* (source: /doc/papers/*)
+- install:      doc/papers/* usr/share/doc/cybop/papers
 
 cybop-presentations.deb
 - recommends:   cybop-books, cybop-papers
 - suggests:     cyboi, cybol-examples
 - category:     doc
-- files:        /usr/share/doc/cybop/presentations/* (source: /doc/presentations/*)
+- install:      doc/presentations/* usr/share/doc/cybop/presentations
 
 
 CYBOI -- Interpreter Program
@@ -63,30 +63,21 @@ cyboi.deb
 - recommends:   cybol-core, cybol-examples, cybol-healthcare
 - suggests:     cyboi-doc, cyboi-dev
 - category:     interpreters
-- files:        /usr/bin/cyboi (source: /bin/cyboi)
-                /usr/share/doc/cyboi/README.Debian
-                /usr/share/doc/cyboi/changelog.gz
-                /usr/share/doc/cyboi/copyright
-                /usr/share/man/man1/cyboi1.gz (source: /doc/cyboi/cyboi.1.gz)
+- install:      bin/cyboi usr/bin
+                doc/cyboi/cyboi.1.gz usr/share/man/man1
 
 cyboi-dev.deb
 - depends:      libc6, xlibs, libxml2, libxml2-dev
 - suggests:     cyboi
 - category:     devel
-- files:        /usr/share/doc/cyboi-dev/Makefile (source: /admin/Makefile)
-                /usr/share/doc/cyboi-dev/exclude (source: /admin/exclude)
-                /usr/share/doc/cyboi-dev/README.Debian
-                /usr/share/doc/cyboi-dev/changelog.gz
-                /usr/share/doc/cyboi-dev/copyright
+- install:      admin/Makefile usr/share/doc/cyboi-dev
+                admin/exclude usr/share/doc/cyboi-dev
 
 cyboi-doc.deb
 - recommends:   cybop-doc-papers, cybop-doc-presentations
 - suggests:     cyboi
 - category:     doc
-- files:        /usr/share/doc/cyboi-doc/manual.txt (source: /doc/cyboi/manual.txt)
-                /usr/share/doc/cyboi-doc/README.Debian
-                /usr/share/doc/cyboi-doc/changelog.gz
-                /usr/share/doc/cyboi-doc/copyright
+- install:      doc/cyboi/manual.txt usr/share/doc/cyboi-doc
 
 
 CYBOL -- XML-based Language
@@ -96,10 +87,10 @@ cybol.deb
 - recommends:   cybol-examples
 - suggests:     cybol-core, cybol-healthcare
 - category:     misc
-- files:        /usr/share/xml/cybol/custom (source: empty)
-                /usr/share/xml/cybol/misc (source: empty)
-                /usr/share/xml/cybol/schema/dtd/cybol.dtd (source: /doc/cybol/cybol.dtd)
-                /usr/share/xml/cybol/stylesheet (source: empty)
+- install:      ?? usr/share/xml/cybol/custom
+                ?? usr/share/xml/cybol/misc
+                doc/cybol/cybol.dtd usr/share/xml/cybol/schema/dtd
+                ?? usr/share/xml/cybol/stylesheet
 -- BEGIN TODO DENNIS --
 DENNIS! Bitte lies den folgenden Link:
 http://debian-xml-sgml.alioth.debian.org/xml-policy/index.html (besonders Chapter 3)
@@ -115,33 +106,33 @@ Als CYBOL Header schlage ich vor:
 - depends:      cyboi
 - recommends:   cybol-examples
 - suggests:     cybol-healthcare
-- category:     misc (better "base")
-- files:        /usr/share/cybol/core/* (source: /cybol/core/*)
+- category:     misc
+- install:      cybol/core/* usr/share/cybol/core
 
 cybol-examples.deb
 - depends:      cyboi
 - suggests:     cybol-core, cybol-healthcare
 - category:     misc
-- files:        /usr/share/doc/cybol/examples/addition/run.cybol (source: /examples/addition/run.cybol)
-                /usr/share/doc/cybol/examples/addition/startup.cybol (source: /examples/addition/startup.cybol)
-                /usr/share/doc/cybol/examples/exit/run.cybol (source: /examples/exit/run.cybol)
-                /usr/share/doc/cybol/examples/exit_cybol_file/exit.cybol (source: /examples/exit_cybol_file/exit.cybol)
-                /usr/share/doc/cybol/examples/exit_cybol_file/run.cybol (source: /examples/exit_cybol_file/run.cybol)
-                /usr/share/doc/cybol/examples/exit_text_file/exit.txt (source: /examples/exit_text_file/exit.txt)
-                /usr/share/doc/cybol/examples/exit_text_file/run.cybol (source: /examples/exit_text_file/run.cybol)
-                /usr/share/doc/cybol/examples/helloworld/run.cybol (source: /examples/helloworld/run.cybol)
-                /usr/share/doc/cybol/examples/helloworld/startup.cybol (source: /examples/helloworld/startup.cybol)
-                /usr/share/doc/cybol/examples/helloworld_dynamic_logic/run.cybol (source: /examples/helloworld_dynamic_logic/run.cybol)
-                /usr/share/doc/cybol/examples/helloworld_dynamic_logic/send_greeting.cybol (source: /examples/helloworld_dynamic_logic/send_greeting.cybol)
-                /usr/share/doc/cybol/examples/helloworld_dynamic_logic/shutdown.cybol (source: /examples/helloworld_dynamic_logic/shutdown.cybol)
-                /usr/share/doc/cybol/examples/helloworld_dynamic_logic/startup.cybol (source: /examples/helloworld_dynamic_logic/startup.cybol)
+- install:      examples/addition/run.cybol usr/share/doc/cybol/examples/addition
+                examples/addition/startup.cybol usr/share/doc/cybol/examples/addition
+                examples/exit/run.cybol usr/share/doc/cybol/examples/exit
+                examples/exit_cybol_file/exit.cybol usr/share/doc/cybol/examples/exit_cybol_file
+                examples/exit_cybol_file/run.cybol usr/share/doc/cybol/examples/exit_cybol_file
+                examples/exit_text_file/exit.txt usr/share/doc/cybol/examples/exit_text_file
+                examples/exit_text_file/run.cybol usr/share/doc/cybol/examples/exit_text_file
+                examples/helloworld/run.cybol usr/share/doc/cybol/examples/helloworld
+                examples/helloworld/startup.cybol usr/share/doc/cybol/examples/helloworld
+                examples/helloworld_dynamic_logic/run.cybol usr/share/doc/cybol/examples/helloworld_dynamic_logic
+                examples/helloworld_dynamic_logic/send_greeting.cybol usr/share/doc/cybol/examples/helloworld_dynamic_logic
+                examples/helloworld_dynamic_logic/shutdown.cybol usr/share/doc/cybol/examples/helloworld_dynamic_logic
+                examples/helloworld_dynamic_logic/startup.cybol usr/share/doc/cybol/examples/helloworld_dynamic_logic
 
 [cybol-healthcare.deb]
 - depends:      cyboi, cybol-core
 - recommends:   cybol-examples
 - suggests:     resmedicinae
-- category:     misc (better "science", "health", "med")
-- files:        /usr/share/cybol/healthcare/* (source: /cybol/healthcare/*)
+- category:     misc
+- install:      cybol/healthcare/* usr/share/cybol/healthcare
 
 
 Necessary Package Information to be Provided to Maintainer
