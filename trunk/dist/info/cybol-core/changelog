@@ -1,35 +1,5 @@
-cyboi (0.4.0.0) unstable; urgency=low
+cybol-core (0.1.0.0) unstable; urgency=low
 
-  * Move global variables and constants into special files
-  * Use encapsulated primitives so that pointers
-    can be handed through the system, instead of
-    copies of char, int, double etc.;
-    encapsulation is also necessary to preserve a
-    primitive's value in memory -- otherwise, their value
-    gets lost as soon as a parser procedure is left
-  * Complete system lifecycle and waiting loop
-  * Simplify configuration file which now consists
-    of solely key-value pairs, on just one level,
-    NOT hierarchically
-  * Store configuration values internally in a simple
-    pointer array instead of an extra data structure;
-    it is not necessary to store additional type information
-    in a second column of the internals memory, because
-    internals are ALWAYS simple pointers to some date
-    structure that was created outside the internals memory
-  * Adapt whole system to new configuration handling
-  * Factor out code from cyboi main function into separate
-    files and procedures, for better overview
-  * Change all get procedures in arrays, so that only references,
-    but NOT copies are delivered back; change system accordingly
-  * Change complete CYBOI system from unnecessary triple-referenced
-    pointers to simple ones
-  * Only hand over those variables as double reference which:
-    * will carry a result to be delivered back
-    * have to be treated as array
-  * Remove signal from signal_memory only AFTER
-    the signal has been handled
-  * Correct A LOT OF bugs causing segmentation faults at runtime
-  * Get Hello, World! application running
+  * Prepare empty Debian package
 
- -- Christian Heller <christian.heller@tuxtax.de>  Mon, 28 Feb 2005 10:00:00 +0100
+ -- Christian Heller <christian.heller@tuxtax.de>  Wed, 15 Jun 2005 13:00:00 +0100

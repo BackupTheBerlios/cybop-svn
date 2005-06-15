@@ -1,3 +1,25 @@
+cyboi (0.5.0.0) unstable; urgency=low
+
+  * Complete implementation of the loop operation
+  * Correct bug in get_new_signal_id of signal_memory_accessor.c
+  * Implement Web User Interface (WUI) handling by generating (translating) HTML from CYBOL (comparable to XUL/ UIML)
+  * Extend sources for handing over string parameters in URL, using escape code sequences
+  * Add url_refresh operation
+  * Implement post operation for web communication
+  * Add new abstraction knowledge for runtime access to knowledge model
+  * Enable dynamically created logic models
+  * Generalise handling of services using startup/ shutdown operations
+  * Run tcp service in an own thread
+  * Synchronise signal memory using Mutex
+  * Use send operation for placing runtime signals read from a CYBOL source into the signal memory
+  * Restructure source directories, following von Neumann architecture (controller, memory, computer, globals)
+  * Remove /web directory (tcp procedures are now in receive_tcp_socket.c; client socket and signal numbers are in internals_memory_accessor.c)
+  * Remove input_output_activator.c (now done by startup/ shutdown and receive/ interrupt/ send service calls in CYBOL)
+  * Remove input_output_handler.c (activation/ blocking flags etc. are now created/ destroyed in corresponding startup/ shutdown procedure)
+
+ -- Christian Heller <christian.heller@tuxtax.de>  Mon, 28 Feb 2005 10:00:00 +0100
+
+
 cyboi (0.4.0.0) unstable; urgency=low
 
   * Move global variables and constants into special files

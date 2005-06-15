@@ -20,7 +20,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.11 $ $Date: 2005-06-15 00:07:01 $ $Author: christian $
+# @version $Revision: 1.12 $ $Date: 2005-06-15 12:53:53 $ $Author: christian $
 # @author Dennis Reichenbach <dennis.reichenbach@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -91,7 +91,6 @@ cybol.deb
                 ?? usr/share/xml/cybol/misc
                 doc/cybol/cybol.dtd usr/share/xml/cybol/schema/dtd
                 ?? usr/share/xml/cybol/stylesheet
--- BEGIN TODO DENNIS --
 DENNIS! Bitte lies den folgenden Link:
 http://debian-xml-sgml.alioth.debian.org/xml-policy/index.html (besonders Chapter 3)
 Du solltest verstehen, wie "dh_installxmlcatalogs" etc. funktionieren,
@@ -100,7 +99,6 @@ Brauchen wir ueberhaupt so einen Katalog-Eintrag?
 Als CYBOL Header schlage ich vor:
 <?xml version="1.0"?>
 <!DOCTYPE book PUBLIC "-//CYBOP//DTD CYBOL XML V1.0//EN" "http://cybop.berlios.de/cybol/cybol.dtd">
--- END TODO DENNIS --
 
 [cybol-core.deb]
 - depends:      cyboi
