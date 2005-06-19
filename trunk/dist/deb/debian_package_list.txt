@@ -20,7 +20,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.12 $ $Date: 2005-06-15 12:53:53 $ $Author: christian $
+# @version $Revision: 1.13 $ $Date: 2005-06-19 19:52:31 $ $Author: reichenbach $
 # @author Dennis Reichenbach <dennis.reichenbach@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -70,8 +70,8 @@ cyboi-dev.deb
 - depends:      libc6, xlibs, libxml2, libxml2-dev
 - suggests:     cyboi
 - category:     devel
-- install:      admin/Makefile usr/share/doc/cyboi-dev
-                admin/exclude usr/share/doc/cyboi-dev
+- install:      admin/Makefile usr/share/cyboi-dev
+                admin/exclude usr/share/cyboi-dev
 
 cyboi-doc.deb
 - recommends:   cybop-doc-papers, cybop-doc-presentations
