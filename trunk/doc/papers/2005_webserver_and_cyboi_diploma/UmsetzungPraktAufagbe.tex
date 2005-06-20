@@ -1,0 +1,363 @@
+\chapter{Umsetzung der praktischen Aufgabe}
+
+  \section{Überblick}
+    
+    Als praktisches Ergebnis dieser Diplomarbeit soll ein Prototyp 
+    erstellt werden, der die Möglichkeit der Umsetzung von 
+    einer Webanwendung mit CYBOP aufzeigt. Dazu wurde das Beispiel
+    einer kleinen Adressverwaltung gewählt, wo die Adressen
+    editierbar, löschbar und neu anlegbar sind. 
+    
+  
+  \section{Anpassung von CYBOL}
+  
+    Als erstes musste im Rahmen der Diplomarbeit in Zusammenarbeit mit Christian Heller die 
+    Spezifikation der Beschreibungssprache auch hinsichtlich der Webanwendungsfähigkeit 
+    fertig gestellt werden. Dabei mussten sowohl allgemeine als 
+    auch webspezifizische Sprachkonstrukte berücksichtigt werden. Es wurde 
+    festgestellt, dass der prinzipielle Aufbau von CYBOL die Belange 
+    von webspezifischen Anforderungen ohne Probleme erfüllt. 
+    Erweiterungen mussten nur in den Ausprägungen der Werte, wie z.B. die  neue 
+    Operation \emph{url\_refresh}, die zur Zeit nur im Web Sinn macht, oder verschiedene
+    Properties, die für die Generierung von XHTML-Seiten von Bedeutung sind, vorgenommen werden.
+    
+    Im Folgenden möchte ich kurz auf die Elemente von CYBOL eingehen, die
+    für den Prototyp der Diplomarbeit relevant sind. Dazu gehören welche Arten von 
+    \emph{channel} und \emph{abstraction} verwendet werden und welche Operationen definiert und
+    programmiert werden mussten, damit diese Anwendung technisch umgesetzt werden konnte.
+    
+    Für \emph{channel} werden hier nur zwei Arten verwendet. Vorgesehen sind weitere 
+    Kommunikationskanäle. Diese sind aber noch nicht umgesetzt.
+    \begin{table}[H]
+      \centering
+        \begin{tabular}{|l|p{10cm}|}
+          \hline
+          \textbf{channel} & \textbf{Beschreibung}
+          \\ \hline
+
+          inline  
+           & 
+          Es muss kein Kommunikationskanal extra aufgemacht werden, sondern
+          der Wert im \emph{model} repräsentiert das Modell.
+          \\ \hline
+
+          file & 
+          Das Modell muss aus einer Datei gelesen werden. Der Dateiname
+          steht in \emph{model}.
+          \\ \hline
+        \end{tabular}
+      \caption{Überblick: channel in CYBOL}
+      \label{tab:ChannelInCYBOL}
+    \end{table}
+    
+    Die \emph{abstraction} in CYBOL beinflußt, wie das \emph{model} behandelt wird. 
+    Neben den Grunddatentypen, wie z.B. \emph{integer}, \emph{string} oder \emph{double},
+    gibt es noch folgende Arten:
+    
+        \begin{longtable}{|l|p{10cm}|}
+          \hline
+          \textbf{abstraction} & \textbf{Beschreibung}
+          \\ \hline
+          \endhead
+
+          knowledge & 
+          In dem \emph{model} steht ein Verweis auf das \emph{knowlege memory}.
+          Der Wert wird als String gelesen und als Zugriffspfad
+          interpretiert. Das erzeugte Modell enthält den Wert, worauf \emph{model} verweist.
+          \\ \hline
+
+          encapsulated\_knowledge & 
+          Hier wird noch ein Schritt weiter als bei der \emph{abstraction knowledge}
+          gegangen. Im \emph{model} steht ein Zugriffspfad auf das Knowledge Memory,
+          der den vom Programmierer gewollten Zugriffspfad vom Knowlegde Memory enthält.
+          Mit diesen Konstrukt lassen sich dynamische Zugriffspfade erstellen.
+          \\ \hline
+
+          cybol & 
+          Hier wird im \emph{model} auf eine externe CYBOL-Datei verwiesen, die 
+          an dieser Stelle im erzeugten Modell geparst wird. Somit lassen sich 
+          z.B. hierarchische Strukturen im Knowledge Memory aufbauen.
+          \\ \hline
+
+          operation & 
+          Der Wert im \emph{model} wird als Operation verstanden. Eine Operation kann z.B. 
+          \emph{create\_part} zum Erstellen eines Knoten im Knowlege Memory 
+          oder \emph{exit} zum Verlassen des Interpreters sein. Auf Grund der Operation 
+          wird in CYBOI diese Funktion aufgerufen.
+          \\ \hline
+
+          \caption{Überblick: abstraction in CYBOL}
+          \label{tab:AbstractionInCYBOL}
+        \end{longtable}
+    
+    
+    Für die Realisierung des Prototypen in der Diplomarbeit mussten einige 
+    Operationen (siehe Tabelle \ref{tab:OperationenInCYBOL}) in CYBOI implementiert werden.
+    Die Operation \emph{url\_refresh} ist die einzigste Operation, die speziell
+    für die Webanwendung umgesetzt wurde. Die Operation \emph{send} musste 
+    für die TCP-Socket-Kommunikation, die die Grundlage für die Webanwendung ist,
+    modifiziert werden. Alle anderen Operationen sind allgemein gültig und
+    können nicht nur in Webanwendungen sondern in jeder Beschreibung relevant sein. 
+    
+    %\begin{table}[H]
+      %\centering
+        \begin{longtable}[H]{|l|l|p{8cm}|}
+          \hline
+          \textbf{operation} & \textbf{properties} & \textbf{Beschreibung} \\ \hline
+          \endhead
+          
+          create\_part & 
+          \begin{tabular}[t]{l}
+            whole \\
+            name \\
+            channel \\
+            abstraction \\
+            model 
+          \end{tabular} &
+          Erzeugt ein Model, das durch die Eigenschaften \emph{name}, \emph{channel},
+          \emph{abstraction} und \emph{model} definiert ist. Die Eigenschaft \emph{whole}
+          gibt dabei an, an welcher Stelle das Modell im Knowledge Memory hinzugefügt wird.
+          Ist die Eigenschaft nicht angegeben, so wird das Modell in der Wurzel vom Knowledge Memory 
+          hinzugefügt. 
+          \\ \hline
+          
+          destroy\_part & 
+          \begin{tabular}[t]{l}
+            name \\
+          \end{tabular} &
+          Zerstört ein Modell im Knowledge Memory, wobei der \emph{name} die Stelle definiert.
+          \\ \hline
+          
+          send & 
+          \begin{tabular}[t]{l}
+            language \\
+            receiver \\
+            message \\
+          \end{tabular} &
+          Es wird eine Nachricht an den Empfänger geschickt. Über welchen Kommunikationsweg 
+          die Daten geschickt werden, entscheidet die \emph{language}.
+          \\ \hline
+
+          count\_part & 
+          \begin{tabular}[t]{l}
+            basisname \\
+            model \\
+            result \\
+          \end{tabular} &
+          Listen werden in Knowledge Memory über einen Basisnamen und einen Index 
+          abgespeichert. Diese Operation zählt alle Listeneinträge die unter dem 
+          \emph{model} des Knowledge Memory mit dem \emph{basisname} vorhanden sind.
+          Das Ergebniss wird in \emph{result} geschrieben. 
+          \\ \hline
+          
+          build\_listname & 
+          \begin{tabular}[t]{l}
+            basisname \\
+            index \\
+            result \\
+          \end{tabular} &
+          Mit dieser Operation kann ein Listbezeichner dynamisch zur Laufzeit
+          generiert werden. Dabei wird der \emph{basisname} und der \emph{index}
+          zum Listbezeichner in \emph{result} geschrieben.
+          \\ \hline
+
+          add & 
+          \begin{tabular}[t]{l}
+            operand\_1 \\
+            operand\_2 \\
+            result 
+          \end{tabular} &
+          In Abhängigkeiten von den Datentypen der Operanden werden 
+          z.B. zwei Zahlen addiert bzw. bei String-Datentypen diese
+          aneinander gehangen und in \emph{result} gespeichert.
+          \\ \hline
+
+          set & 
+          \begin{tabular}[t]{l}
+            source \\
+            destination 
+          \end{tabular} &
+          Der Inhalt von \emph{source} wird nach \emph{destination} kopiert.
+          \\ \hline
+          
+          url\_refresh & 
+          \begin{tabular}[t]{l}
+              url 
+          \end{tabular} &
+          Die \emph{url} wird als Ergebnis an den Client geschickt. 
+          Dies hat die gleiche Auswirkung, als wenn ich im Webbrowser die URL
+          eingebe, nur das hier vorher noch verschiedene andere Operationen, wie 
+          z.B. das Modifizieren des Domain-Wissens aus dem Knowledge Memory 
+          ausgeführt werden können. 
+          \\ \hline
+
+          set\_property& 
+          \begin{tabular}[t]{l}
+            source \\
+            destination \\
+            destination\_property
+          \end{tabular} &
+          Mit dieser Operation kann eine Eigenschaft zu einen Modell dynamisch zur Laufzeit 
+          geändert werden. In \emph{source} ist der Eigenschaftswert enthalten. Diese wird in
+          die Eigenschaft \emph{destination\_property} des Modells \emph{destination}
+          aus dem Knowledge Memory geschrieben. 
+          \\ \hline
+
+          compare & 
+          \begin{tabular}[t]{l}
+            operand\_1 \\
+            operand\_2 \\
+            operator \\
+            result
+          \end{tabular} &
+          Vergleicht die zwei Operanden und schreibt das Ergebnis in \emph{result}. Welcher
+          Vergleich durchgeführt wird, steht in \emph{operator}. Dies könnte z.B. 
+          \emph{equal} oder \emph{equal\_or\_smaller} sein.
+          \\ \hline
+
+          loop & 
+          \begin{tabular}[t]{l}
+            break \\
+            index \\
+            model
+          \end{tabular} &
+          Die Schleife wird solange ausgeführt, bis \emph{break} auf \emph{true} gesetzt wurde.
+          In \emph{model} wird definiert, was innerhalb der Schleife ausgeführt werden soll und 
+          der \emph{index} wird bei jeden Schleifendurchlauf um eins erhöht. Der \emph{index} muss 
+          darum vom Typ Integer sein.
+          \\ \hline
+
+          startup & 
+          \begin{tabular}[t]{l}
+            service \\
+            tcp\_socket\_port
+          \end{tabular} &
+          Startet einen Service. Für den integrierten Webserver in CYBOI muss
+          für \emph{service} "`tcp\_socket"' eingetragen sein. Nur für diesen Service
+          ist die zweiten Eigenschaft \emph{tcp\_socket\_port} von Bedeutung, da dies ein
+          serviceabhängiger Startparameter ist. Dort wird der Port des Webservers übergeben, auf  
+          welchen er auf Anfragen wartet.
+          \\ \hline
+
+          shutdown & 
+          \begin{tabular}[t]{l}
+            service 
+          \end{tabular} &
+          Beendet einen Service in CYBOI.
+          \\ \hline
+
+          receive& 
+          \begin{tabular}[t]{l}
+            service \\
+            blocking
+          \end{tabular} &
+          Hier wird ein Service in Empfangsmodus gesetzt. Die Eigenschaft \emph{blocking} gibt dabei an, 
+          ob der Service als separater Thread oder direkt in CYBOI gestartet wird.
+          \\ \hline
+
+          interupt& 
+          \begin{tabular}[t]{l}
+            service 
+          \end{tabular} &
+          Beendet die Empfangsbereitschaft eines Services.
+          \\ \hline
+          
+          \caption{Überblick: operation in CYBOL}
+          \label{tab:OperationenInCYBOL}
+          
+        \end{longtable}
+    %  \caption{Überblick: Operationen in CYBOI}
+    %  \label{tab:OperationenInCYBOL}
+    %\end{table}
+
+    
+
+  \section{CYBOI und Webserver}
+  
+    Das Hauptproblem neben der Beschreibung war die Integration des Webservers in CYBOI.
+    Dazu ist es notwendig sich die Architektur von Webanwendungen vor Augen zu halten. 
+    Der Webserver wartet auf eine Anfrage von einem beliebigen Client. Diese Anfrage muss er 
+    bearbeiten und das Ergebnis an den Client, der diese Anfrage gestellt hat, schicken. 
+    
+    Folgende Aufgabenstellungen waren dafür zu lösen.
+    
+    \begin{itemize}
+      \item Welche Anfragen kann der Webserver verarbeiten? \\
+            Der jetzige Stand ist eine Verarbeitung von Aufrufen einer CYBOL-Datei, d.h. in der
+            URL des Webbrowser werden der Server, der Port und  der Zugriffspfad der CYBOL-Datei
+            eingegeben. In dem Beispiel könnte dies so aussehen:
+\begin{verbatim}
+  http://server:3456/examples/resadmin/logic/send_name.cybol
+\end{verbatim}
+            Dabei ist zu beachten, das die letzte Anweisung in der CYBOL-Datei eine Send-Operation
+            für TCP Socket ist. Wird keine Send-Operation für diese Anfrage gemacht, wartet der Client
+            auf eine Antwort, die er halt nicht bekommen kann.
+
+      \item Wie übertrage ich Werte vom Client zum Server? \\
+            Oft ist es notwendig, Benutzereingaben an den Server zu schicken, damit der Server
+            diese verarbeiten kann. Die normale Parameterübergabe an einen Webserver erfolgt bei der
+            Get-Operation
+            über die URL, getrennt durch ein \verb|'?'|, und bei der Post-Operation 
+            werden die Daten am Ende 
+            der Anfrage angehangen. Die Parameter müssen dann vom Webserver bearbeitet werden.
+            Dafür ist es erforderlich gewisse Notationen für diese Parameter festzulegen. Als erstes 
+            braucht man eine Variable, wo der Wert gespeichert werden soll. Dafür bietet sich der 
+            Knowledge Memory von CYBOI an. Als zweites ist ein Trennungszeichen zwischen 
+            Speicherort und Wert nötig. Dafür wurde das Zeichen \verb|'='| gewählt. Somit ist ein 
+            Übergabeparamter in der URL folgendermaßen definiert.
+\begin{verbatim}
+  <Zugriffspfad vom Knowledge Memory>=<Wert der zugewiesen werden soll>
+\end{verbatim}
+            Natürlich können auch mehrere Übergabeparamater übergeben werden. Diese werden durch das 
+            Zeichen \verb|'&'| voneinander getrennt. Bei der Post-Operation werden die Übergabeparameter 
+            nicht durch die URL kodiert, sondern die Eingabefelder mit ihren Inhalt werden 
+            vom Webbrowser automatisch an die Anfrage hinzugefügt. Dabei ist aber wichtig,
+            dass der Name von den Eingabefeldern dem Zugriffspfad vom Knowledge Memory entspricht,
+            damit die Werte auch zugeordnet werden können. 
+
+      \item Wie ist der Webserver in CYBOI integriert? \\
+            CYBOI arbeitet alle Signale in einer Endlosschleife nacheinander ab. 
+            Eine entgegengenomme Anfrage des Webservers wird zu dieser
+            Signalwarteschlange hinzugefügt. Danach hat der Webserver erstmal nichts weiter zu tun,
+            da CYBOI intern alle Signale abarbeitet. Erst wenn CYBOI die Send-Operation für
+            TCP Socket ausführt wird dem Webserver mitgeteilt, das dieser die angeforderte Antwort
+            an den Client schicken soll. Jetzt muss aber der Webserver wissen, an welchen Client er 
+            die Antwort zu schicken hat, da er mehrere Clients bearbeiten kann. Dazu muss
+            er sich die Signal-Id, die von CYBOI für jede Anfrage vergeben wird und die 
+            dazugehörige Clientsocketnummer, die bei jeder Anfrage an den Webserver vergeben wird, merken.
+            Wird die Send-Operation für eine Signal-Id ausgeführt, so wird die dazugehörige 
+            Clientsocketnummer ermittelt und an diese wird dann das Ergebnis geschickt.
+            
+      \item Wie wird eine XHTML-Antwort in CYBOI erzeugt? \\            
+            Die Grundstruktur der XHTML-Antwort wird im Knowledge Memory erzeugt.
+            Erst wenn ich die Send-Operation auslöse wird die reale XHTML-Antwort generiert.
+            Bei der Send-Operation wird ein Part aus dem Knowledge Memory als oberstes 
+            Hierarchie-Ebene angegeben. Alles was unter dem Part hängt wird ausgegeben. 
+            Dazu werden die Properties \emph{html\_tag} und \emph{html\_tag\_properties}
+            der Parts ausgewertet. Das Property \emph{html\_tag} gibt den Tag an in dem das Modell des 
+            Parts eingeschlossen wird. Zusätzliche Informationen zu dem Tag können mit 
+            dem Property \emph{html\_tag\_properties} angegeben werden. Das folgende 
+            Beispiel verdeutlicht die Generierung.
+            Die Beschreibung aus der folgenden CYBOL-Datei wird im Knowledge Memory erzeugt und
+            mit der Send-Operation über TCP-Socket geschickt.
+\begin{verbatim}            
+  <part name="delete_button" channel="inline" 
+        abstraction="string" model="delete">
+    <property name="html_tag" channel="inline" 
+              abstraction="string" model="a"/>
+    <property name="html_tag_properties" channel="inline" 
+              abstraction="string" model="href='delete_address.cybol'"/>
+  </part>
+\end{verbatim}            
+            Es würde folgende XHTML-Antwort daraus generiert werden:
+\begin{verbatim}            
+  <a href='delete_address.cybol'>
+    delete
+  </a>
+\end{verbatim}            
+
+    \end{itemize}
+    
+    
+    
+  

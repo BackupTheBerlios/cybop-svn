@@ -1,0 +1,200 @@
+\chapter{Cybernetics Oriented Interpreter (CYBOI)} 
+
+  Für die Beschreibungssprache CYBOL   ist zur Ausführung ein
+  Interpreter, genannt CYBOI, notwendig. Dieser Interpreter hat die Aufgabe, die CYBOL-Dateien zu 
+  lesen, zu parsen und zu verarbeiten. Der Interpreter ist in C geschrieben.   
+  In diesen Abschnitt wird der Interpreter vorgestellt, seine Arbeitsweise 
+  beschrieben und die verwendeten Software- und Architektur-Pattern erläutert.
+
+  \section{Pattern in CYBOI}
+
+    Sehr oft wiederholen sich die Probleme. Auch
+    die Lösungsansätze für diese sind identisch.
+    Alles spricht dafür, solche Lösungswege abstrakt zu beschreiben und
+    zu benennen.   
+    Ein Pattern umfasst die beteiligten Komponenten, 
+    ihre Verantwortlichkeiten und Verbindungen. Die Pattern helfen somit auf 
+    vorhandenes Expertenwissen zurückzugreifen. 
+
+    Christoper Alexander definierte Pattern folgendermaßen \cite{defpattern}:
+    \begin{quotation}
+      Jedes Muster beschreibt ein in unserer Umwelt beständig wiederkehrendes Problem 
+      und erläutert den Kern der Lösung für dieses Problem, so dass man diese Lösung 
+      beliebig oft anwenden kann, ohne sie jemals ein zweites Mal gleich auszuführen.
+    \end{quotation}
+    In den nächsten Abschnitten werden einige Pattern, die in CYBOI verwendet werden,
+    beschrieben. 
+
+    \section{Pipes and Filters}
+    
+      Ein wichtiges Pattern in CYBOI ist \emph{Pipes and Filters} \cite{patternbuschmann}.
+      \begin{quotation}
+        Das Pipes-and-Filters-Muster bietet eine Struktur für Systeme, die Datenströme verarbeiten. 
+        Jeder Verarbeitungsschritt ist dabei in einen Filter gekapselt. Daten werden durch 
+        Kanäle (engl. pipe) von Filter zu Filter weitergegeben. Die Filter können immer wieder
+        neu angeordnet werden, was es ermöglicht, eine Familie von verwandten Systemen zu erstellen. 
+      \end{quotation}
+      
+      Das \emph{Pipes and Filters} Muster wird also verwendet, wenn die Ausgabe von einem Filter
+      gleich für die Eingabe des nächsten Filters verwendet wird. In dem Filter werden 
+      die Transformationen des Datenstromes durchgeführt.
+      
+      Im CYBOI wird dieses Pattern bei der Behandlung (Erzeugen und Zerstören) von 
+      CYBOI-Modellen verwendet. Dabei ist in CYBOI 
+      die Unterscheidung von \emph{primitive model} und \emph{compound model} zu machen. 
+      \emph{Primitive model} sind alle Modelle, die auf elementare Strukturen aufbauen.
+      Dies beinhaltet alle primitiven Datentypen (Integer, Vector, ...), die in CYBOI implementiert sind
+      und alle elementaren Operationen. \emph{Compound model} sind dagegen alle Modelle, die sich aus 
+      weiteren Modellen zusammensetzen. 
+      
+      In den Abbildungen \ref{fig:pipesandfilters_1} und \ref{fig:pipesandfilters_2} sind die 
+      in CYBOI verwendeten \emph{Pipes and Filters} zu sehen. Diese werden genutzt, um Modelle, die persistent
+      vorliegen, in das System von CYBOI zu integrieren bzw. wieder persistent abzuspeichern. 
+
+      \begin{figure}[H]
+        \centering
+          \includegraphics[width=9.5cm]{images/pipesandfilters_1.eps}
+        \caption{decode model}
+        \label{fig:pipesandfilters_1}
+      \end{figure}
+      \begin{figure}[H]
+        \centering
+          \includegraphics[width=9.5cm]{images/pipesandfilters_2.eps}
+        \caption{encode model}
+        \label{fig:pipesandfilters_2}
+      \end{figure}
+
+      Der \emph{source code}, der in einen persistenten Zustand vorliegt, wird geladen. Das 
+      Ergebnis wird einen Parser
+      übergeben. Ist es ein \emph{primitive model}, so ist das geparste Ergebnis unser Modell.
+      Bei einen \emph{compound model} wird das Ergebnis des Filters \emph{parse} noch decodiert,
+      damit das Modell  hierarchisch aufgebaut wird. Diese Modelle liegen in einen 
+      transienten Zustand vor. Für die Abspeicherung von Modellen ist der umgekehrte Weg 
+      nötig. 
+      
+    \section{Compositum}
+      
+      Das Compositum Muster dient zur Darstellung von Teil-Ganzes-Hierarchien. 
+      In CYBOI wird das gesamte Wissen in einer Baumstruktur gespeichert.
+      Diese Baumstruktur setzt sich aus primitiven Typen und aus einer Container-Struktur,
+      in CYBOI \emph{compound} genannt, zusammen. Diese Container-Struktur kann
+      entweder primitive Typen oder weitere Container-Strukturen enthalten. Die untersten Blätter
+      in der Baumstruktur sind immer primitive Typen. 
+      
+      \begin{figure}[H]
+        \centering
+          \includegraphics[width=15cm]{images/compositum.eps}
+        \caption{Adressbuch als Compositum}
+        \label{fig:compositum}
+      \end{figure}
+
+      Nach \cite{gamma04} wird dieses Muster verwendet, wenn keine Unterscheidung zwischen den Operationen
+      von primitiven und zusammengesetzten Objekten gemacht werden soll. Da
+      dieses Muster aus der objektorientierten Programmierung kommt, ist dies in CYBOI nur 
+      partiell nutzbar. Das Prinzip des Patterns ist, bei der Ausführung einer Operation 
+      auf einer Komponente, diese Operation hierarchisch nach unten durchzureichen. 
+      Da in CYBOI keine direkte Verknüpfung von Operation und Daten vorliegt, ist
+      dieser Teil des Patterns auch nicht nutzbar. Das Compositum Muster wird in CYBOI
+      nur für die Abbildung der Beziehungen der einzelnen Komponenten verwendet,
+      das aber konsequent für alle Daten, für alle Operation usw. 
+      
+  \section{Architektur von CYBOI}
+  
+    CYBOI beschränkt sich in seiner Architektur im Wesentlichen auf folgende zwei Container.
+    \begin{itemize}
+      \item Signal Memory
+      \item Knowledge Memory
+    \end{itemize}
+    
+    \subsection{Signal Memory} 
+      Der \emph{Signal Memory} beschreibt die dynamische Komponente. Unter einen Signal versteht man die 
+      Anweisung für die Ausführung eines Befehles in CYBOI. 
+      \emph{Signal Memory} ist eine Liste von allen noch abzuarbeitenden Signalen.
+      In einer Endlosschleife werden diese Signale ausgeführt.  
+      Nach der Abarbeitung werden die einzelnen Signale aus dem \emph{Signal Memory}
+      entfernt. Die Reihenfolge der Abarbeitung von Signalen kann über Prioritäten gesteuert werden.
+      Ein Signal setzt sich aus den Bestandteilen, wie in Tabelle 
+      \ref{tab:BestandteileEinesSignals} aufgelistet, zusammen.
+      
+      \begin{table}[H]
+        \centering
+          \begin{tabular}{|l|p{10cm}|}
+            \hline
+            \textbf{Bestandteil} & \textbf{Beschreibung }
+            \\ \hline
+            abstraction & 
+            Dies beschreibt, in welcher Abstraktion das Modell vorliegt. Die 
+            Abstraktion bestimmt somit, wie das Modell in CYBOI verarbeitet wird.
+            \\ \hline
+            model & 
+            Dies ist das eigentliche Signal.
+            \\ \hline
+            detail & 
+            Manche Signale brauchen für eine erfolgreiche Abarbeitung noch weitere 
+            Parameter.
+            \\ \hline
+            priority & 
+            Über die Priorität kann die Reihenfolge der Signalabarbeitung beeinflusst werden.
+            \\ \hline
+            main signal id &
+            Das Erzeugersignal bekommt eine eindeutige ID innerhalb von CYBOI. Erzeugt dieser
+            Prozess weitere Signale, so wird auf den Erzeugerprozess verwiesen.
+            \\ \hline
+          \end{tabular}
+        \caption{Bestandteile eines Signals}
+        \label{tab:BestandteileEinesSignals}
+      \end{table}
+
+  
+    \subsection{Knowledge Memory} 
+      Der zweite Container \emph{Knowledge Memory} dient zur Speicherung unseres Wissens. Diesen Container 
+      kann man sich als Baumstruktur vorstellen, in dem unser ganzes Wissen enthalten ist. 
+      \emph{Knowledge Memory} enthält das aktuelle Wissen, das CYBOI zur Verfügung steht.
+      Eine Auswahl des Wissens ist in 
+      Abbildung \ref{fig:knowledgememory} zu betrachten. Jedes Wissen wird in dieser
+      Struktur gespeichert.
+      \begin{figure}[H]
+        \centering
+          \includegraphics[width=8cm]{images/knowledgememory.eps}
+        \caption{Knowledge Memory}
+        \label{fig:knowledgememory}
+      \end{figure}
+    
+    
+
+    
+  \section{Lifecycle von CYBOI}
+  
+    Das Grundgerüst von CYBOI ist eine einfache Endlosschleife. In dieser Schleife wird immer wieder geprüft, 
+    ob ein Signal für die Bearbeitung ansteht. Ist dies der Fall, so wird das Signal bearbeitet. Zuvor 
+    werden verschiedene Strukturen erstellt und nach Beenden der Endlosschleife werden die Strukturen 
+    zerstört. Die Endlosschleife wird beendet, wenn das Shutdown-Signal abgearbeitet wird.
+    
+    Folgende Arbeitsschritte müssen dafür durchlaufen werden: 
+    \begin{itemize}
+      \item Erstellung der globalen Variablen
+      \item Erstellung der internen Variablen
+      \item Erstellung des Signalspeichers
+      \item Erstellung der statischen Struktur (Knowledge Memory)
+      \item Erstellung des Startup-Signals
+      \item Abarbeitung aller Signal in der Endlosschleife, bis das Shutdown-Signal
+            erreicht wird
+      \item Zerstörung des Startup-Signals
+      \item Zerstörung der statischen Struktur (Knowledge Memory)
+      \item Zerstörung des Signalspeichers
+      \item Zerstörung der internen Variablen
+      \item Zerstörung der globalen Variablen
+    \end{itemize}
+     
+    Die eigentliche Kernkomponente ist die Endlosschleife. Dort werden nacheinander alle 
+    Signale abgearbeitet. 
+
+    \begin{itemize}
+      \item Holen des abzuarbeitenden Signals
+      \item Signal abarbeiten
+      \item Löschen des Signals aus der Signalwarteschlange
+    \end{itemize}
+
+    Dies wird solange ausgeführt, bis das Signal mit der Operation \emph{exit}
+    ausgeführt wird. Liegt kein Signal vor, so wird solange die Schleife ausgeführt, 
+    bis wieder ein Signal anliegt. 

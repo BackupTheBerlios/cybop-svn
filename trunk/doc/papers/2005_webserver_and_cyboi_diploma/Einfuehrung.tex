@@ -1,0 +1,66 @@
+\chapter{Einleitung}
+
+  \section{Ziel} 
+    
+    In der vorliegenden Diplomarbeit wird CYBOP (Cybernetics Oriented Programming)  
+    und dessen Realisierungsmöglichkeiten 
+    einer Webanwendung untersucht. Dies basiert auf den Konzepten von CYBOP.
+    CYBOP setzt sich aus der Beschreibungssprache CYBOL und dem Interpreter
+    CYBOI zusammen. Der Hauptgedanke in CYBOL ist,
+    dass die Programmiersprache nicht dem technischem Umfeld (Computer)
+    bzw. programmtechnischen Umfeld (Programm)
+    genügt, sondern sich an dem menschlichen Denken orientiert.
+    Dazu ist es immer noch nötig die Mensch-Maschine-Schnittstelle
+    zu definieren, nur dass diese Schnittstelle dem Menschen auf 
+    fundamentaler Ebene verständlich ist.     
+    Auf der Basis dieser Sprache wird ein kleines Anwendungsprogramm entwickelt, 
+    welches im Webbrowser ablaufen soll. Für die Realisierung dieser Aufgabe 
+    nähert man sich dem Problem auf zwei Wegen, der erste Weg 
+    aus der Sicht von CYBOP und der zweite aus der Sicht von Webanwendungen.
+    Aus der Sicht von CYBOP ist zu klären, auf
+    welche Prinzipien CYBOP basiert und wie sich die Prinzipien in CYBOL
+    auswirken. Danach wird die aktuelle technische Umsetzung des Interpreters
+    CYBOI, sowie dessen Designaufbau und Entwicklungsprinzipien erklärt.
+    Für den zweiten Weg sind die Darstellungsmöglichkeiten in Webanwendungen zu untersuchen, 
+    eine Auswahl aus diesen Möglichkeiten zu treffen  
+    und die erforderlichen technischen Voraussetzungen zu klären.
+    Am Schluss sind beide Wege zu integrieren. 
+    Dafür ist zu prüfen, welche Erweiterungen CYBOL braucht, 
+    um die Definition für die Webanwendung vollständig abzudecken, 
+    wie die Umsetzung in CYBOI eingebunden wird und welche Probleme dabei 
+    zu beachten und zu lösen sind.
+    
+    
+  \section{Umfeld}
+    Die Diplomarbeit wird im Rahmen des Projektes CYBOP 
+    realisiert. Dieses Open Source Projekt verfolgt das Ziel,
+    Softwareentwicklung auf Basis von natürlichen Konzepten zu entwickeln
+    und dies als Debian-Paket zur Verfügung zu stellen. 
+    Dazu ist es notwendig, dass die erstellten Programme und 
+    Dokumentationen unter die GNU-Lizenz gestellt sind. 
+    Weitere Informationen für das Debian-Projekt sind unter 
+    \cite{debian} und für das GNU-Projekt unter \cite{gnu}
+    zu finden.
+  
+  \section{Praktische Aufgabe}
+  
+    % grobe Aufgabe %
+    Für die praktische Aufgabe der Diplomarbeit ist eine Anwendung auf Basis von CYBOL 
+    zu entwickeln, die die folgenden Aufgaben abdeckt:    
+    % Aufgabe für die Darstellung des Webinhaltes %
+    \begin{itemize} 
+      \item Darstellung von Adressdaten in einer Tabelle
+      \item die dargestellten Adressdaten sollen löschbar und editierbar sein 
+      \item es sollen neue Adressen eingebbar sein
+    \end{itemize}
+    
+    Als Voraussetzung für diese Webanwendung sind zu erstellen:
+    \begin{itemize}
+      \item Domain-Modell in CYBOL
+      \item Anwendungsmodell in CYBOL
+      \item Weboberflächenbeschreibung in CYBOL
+      \item Prototyp eines Webservers mit Integration in CYBOI
+      \item Erweiterung von CYBOI für die Bearbeitung von Web-spezifischen Anfragen
+    \end{itemize}
+     
+ 
