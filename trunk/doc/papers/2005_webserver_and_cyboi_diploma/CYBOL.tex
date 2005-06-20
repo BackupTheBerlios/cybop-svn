@@ -65,9 +65,9 @@
         über die verwendete XML-Spezifikation, die Zeichenkodierung, sowie die verwendeten 
         Entities enthalten. Hier ist ein Beispiel für einen Prolog, so wie er auch in 
         CYBOP verwendet wird, zu sehen:
-        \begin{verbatim}
+\begin{verbatim}
           <?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
-        \end{verbatim}
+\end{verbatim}
 
         Der Rumpf ist der wichtigste Teil des XML-Dokumentes, da hier die eigentlichen
         Informationen abgelegt werden. Er besteht aus einem Element oder mehreren ineinander
@@ -84,14 +84,14 @@
         für beliebige Inhalte, wie zum Beispiel verschiedene Zeichen, weitere Elemente sowie andere
         Informationen. Begin-Tag und End-Tag begrenzen ein Element. Sie bestehen aus dem Namen
         des Elementyps, der in spitzen Klammern eingeschlossen wird. 
-        \begin{verbatim}
+\begin{verbatim}
           <Elementname> Elementinhalt </Elementname>
-        \end{verbatim}
+\end{verbatim}
         Elemente ohne Inhalt werden als leere Elemente bezeichnet und können durch eine
         spezielle Schreibweise angegeben werden.
-        \begin{verbatim}
+\begin{verbatim}
           <Leerelement />
-        \end{verbatim}
+\end{verbatim}
         Soll ein Dokument wohlgeformt sein, muss es eine baumartige Struktur aufweisen. In
         jedem Dokument darf es nur genau einen Baum geben, dessen Wurzel als \emph{document root}
         bezeichnet wird. Dieses Element ist das Elternelement aller anderen
@@ -105,9 +105,9 @@
         Attribute sind Teile von Elementen, die Informationen über deren Inhalt enthalten und
         nicht selbst zum Inhalt gehören. Attribute können in Begin-Tags von Elementen und
         Leerelementen angegeben werden und haben immer die Form:
-        \begin{verbatim}
+\begin{verbatim}
           Attributname="Attributwert"
-        \end{verbatim}
+\end{verbatim}
         Die Attributwerte müssen immer Text-Literale sein. 
         Text-Literale sind ganz normale Zeichenketten, die von Begrenzungszeichen 
         (\verb|" oder '|) eingeschlossen
@@ -118,9 +118,9 @@
       \textbf{Kommentare} \\
         Sämtliche Anmerkungen in Dokumenten, die nicht zum Inhalt gehören, werden als
         Kommentare gekennzeichnet. Die Syntax von XML für Kommentare ist
-        \begin{verbatim}
+\begin{verbatim}
           <!-- Hier steht ein Kommentar -->
-        \end{verbatim}
+\end{verbatim}
         Diese ermöglichen es, Anmerkungen aufzunehmen,
         Entwicklungsschritte zu dokumentieren oder verschiedene andere Informationen
         einzufügen, die nur für den Leser des Quelltextes bestimmt sind.
@@ -143,16 +143,16 @@
       Eine CYBOL-Datei ist immer ein XML-Dokument. Es besteht aus dem Prolog und dem Rumpf. 
       Der Epilog wird in CYBOL nicht verwendet. Der Prolog
       setzt sich aus der XML-Deklaration und einer Beschreibung zusammen. 
-      \begin{verbatim}
+\begin{verbatim}
         <?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
         <!--
           Copyright and Description for the CYBOL file
         /-->
-      \end{verbatim}
+\end{verbatim}
       Der Rumpf von CYBOL ist hierarchisch mit Elementen und den dazugehörigen Attributen 
       aufgebaut.
       Ein Rumpf sieht beispielhaft folgendermaßen aus:
-      \begin{verbatim}
+\begin{verbatim}
         <model>
           <part name="addresses" ...">
             <property name="whole" ..." >
@@ -163,20 +163,19 @@
           </part>
           ...
         </model>
-      \end{verbatim}
-      
+\end{verbatim}
 
     \subsection{Elemente von CYBOL}
 
       In dem Rumpf können bis zu vier Elementtypen verwendet werden. Diese Elementtypen
       sind hierarchisch aufgebaut.
-      \begin{verbatim}
+\begin{verbatim}
         model --> part --> property --> constraint
-      \end{verbatim}
+\end{verbatim}
       Die Elementtypen haben folgende Bedeutung:
-      \begin{table}[H]
-        \centering
-          \begin{tabular}{|l|p{10cm}|}
+      %\begin{table}[H]
+          \begin{longtable}{|l|p{10cm}|}
+%            \centering
             \hline
             \textbf{Elementtyp} & \textbf{Beschreibung}
             \\ \hline
@@ -198,10 +197,10 @@
             die z.B. einen eingeschränkten Wertebereich 
             darstellen könnten, so werden diese hier definiert.
             \\ \hline
-          \end{tabular}
-        \caption{Elemente von CYBOL}
-        \label{tab:ElementeVonCYBOL}
-      \end{table}
+            \caption{Elemente von CYBOL}
+            \label{tab:ElementeVonCYBOL}
+          \end{longtable}
+      %\end{table}
       Andere Elementtypen sind in CYBOL nicht erlaubt. 
       Die Elementtypen \emph{property} und \emph{constraint} müssen
       nicht immer angegeben werden, sondern nur, wenn es im Kontext zu den Elementtyp \emph{part} sinnvoll ist. 
@@ -211,9 +210,9 @@
       Auch hier gibt es immer die gleichen Attribute, egal um welche Beschreibung es sich handelt.
       Die Attribute in den Elementen haben folgende Bedeutung:
       
-      \begin{table}[H]
-        \centering
-          \begin{tabular}{|l|p{10cm}|}
+%      \begin{table}[H]
+%        \centering
+          \begin{longtable}{|l|p{10cm}|}
             \hline
             \textbf{Attribut} & \textbf{Beschreibung}
             \\ \hline
@@ -244,10 +243,10 @@
             Bei Operationen wird hier die auszuführende Operation definiert. Ist die \emph{abstraction}
             gleich \emph{cybol}, so wird im \emph{model} auf eine weitere CYBOL-Datei verwiesen.
             \\ \hline
-          \end{tabular}
-        \caption{Attribute der Elemente von CYBOL}
-        \label{tab:AttributeDerElementeVonCYBOL}
-      \end{table}
+            \caption{Attribute der Elemente von CYBOL}
+            \label{tab:AttributeDerElementeVonCYBOL}
+          \end{longtable}
+%      \end{table}
       Dies ist die allgemeine Beschreibung von CYBOL. Was jetzt noch fehlt, ist die Definition,
       welche Werte die einzelnen Attribute der Elemente annehmen können und in welcher Kombination
       sie sinnvoll sind. CYBOL ist noch in der Anfangsphase der Entwicklung und wird
@@ -265,15 +264,15 @@
       \verb|model="?model?"|, wobei \verb|?model?| für das entsprechende hierarchisch 
       untergeordnete CYBOL-Modell steht.
       Ein kleines Beispiel könnte so aussehen:
-      \begin{verbatim}
+\begin{verbatim}
         <model>
           <part name="table" channel="file" 
                 abstraction="cybol" model="part_of_table.cybol" />
         </model>
-      \end{verbatim}
+\end{verbatim}
       Hier wird der \emph{part} Tisch definiert. In der Datei part\_of\_table.cybol sind die parts Tischplatte
       und die 4 Tischbeine definiert.
-      \begin{verbatim}
+\begin{verbatim}
         <model>
           <part name="tabletop" channel="inline" 
                 abstraction="vector" model="50,50,5" />
@@ -281,8 +280,8 @@
                 abstraction="vector" model="5,5,30" />
           ...
         </model>
-      \end{verbatim}
-      
+\end{verbatim}
+
   \section{Formelle Beschreibungen von CYBOL}
       
     Für die formelle Beschreibung von CYBOL gibt es verschiedene Möglichkeiten. Da
@@ -332,7 +331,7 @@
       \textbf{DTD für CYBOL}\\
       Hier folgt nur die komplette DTD für CYBOL. Da sie nicht in den CYBOL-Dateien referenziert wird,
       ist dies nur eine formale Beschreibung von CYBOL.
-      \begin{verbatim}
+\begin{verbatim}
         <!ELEMENT model (part*)>
         <!ELEMENT part (property*)>
         <!ELEMENT property (constraint*)>
@@ -355,11 +354,10 @@
             channel CDATA #REQUIRED
             abstraction CDATA #REQUIRED
             model CDATA #REQUIRED>
-      \end{verbatim}
-      
+\end{verbatim}
 
     \subsection{XML - Schema}
-      
+
       XML-Schema ist ein neuer Ansatz zur Definition von Dokumententypen. Mit der
       Entwicklung von XML hatte sich zunächst die von der SGML übernommene DTD als
       Format zur Beschreibung konkreter Dokumententypen etabliert. Mit der zunehmenden
@@ -371,20 +369,20 @@
       erfordert es, Daten in einem einheitlichen, aber flexiblen und leicht modifizierbaren
       Format, das sich einfach parsen lässt, zu transportieren. Für die Lösung des Problems sollte
       eine XML-basierte Sprache genutzt werden. Daraus entstand das XML-Schema.
-      
+
       Die komplette Beschreibung von XML - Schema würde den Rahmen dieser Arbeit sprengen. 
       Darum wird nur auf die Elemente eingegangen, die in der Beschreibung für CYBOL notwendig sind. 
-      Weitere Informationen zu XML-Schemata sind unter \cite{xsd} zu finden. 
+      Weitere Informationen zu XML-Schemata sind unter \cite{xsd} zu finden.  \\
+
       \textbf{Namensraum} \\
         Im Wurzelelement des Schemas wird der aktuelle Namensraum für Schemata nach W3C
         Version 1.0, bezogen auf die dort definierten Strukturen, angegeben:
-        \begin{verbatim}
+\begin{verbatim}
           xmlns:xs="http://www.w3.org/2001/XMLSchema"
-        \end{verbatim}
+\end{verbatim}
         Der Namensraum wird nun durch den Alias \verb|xs| repräsentiert.
         Der definierte Alias wird im Dokument dann vor allen Elementen, Attributen und
         Datentypen mit angegeben, so das die Beschreibung innerhalb des Namensraums eindeutig ist.
-      
       \textbf{Komplexe Elementtypen} \\
         Das Element complexType dient zur Definition eines Elementtyps, welcher weitere
         Unterelemente beinhalten kann. Das Attribut name definiert den Bezeichner dieses
@@ -402,31 +400,27 @@
           \caption{Kompositoren komplexer Elemente}
           \label{tab:KompositorenKomplexerElemente}
         \end{table}
-        
       \textbf{Elemente} \\
         Zur Deklaration eines Elementes in einem XML-Schema reichen die Angabe eines Namens und
         eines Typs als Attribute des Elementes <element>. Durch die Attribute minOccurs 
         und maxOccurs kann zusätzlich angegeben werden,
         wie oft das Element mindestens bzw. maximal hintereinander auftreten darf.
-        \begin{verbatim}
+\begin{verbatim}
           <xs:element name="MyElement" type="xs:string"/>
-        \end{verbatim}
-        
+\end{verbatim}
       \textbf{Attribute} \\
         Attributdeklarationen erscheinen am Schluss einer Elementbeschreibung. Ihre Angabe
         erfolgt durch das Element <attribute>, das die Attribute name und type hat. 
         Mit dem Attribut use kann angeben werden, ob das entsprechende Attribut definiert werden muss.
         Folgende Deklaration beschreibt ein Attribut:
-        \begin{verbatim}
+\begin{verbatim}
           <xs:attribute name="MyAttribute" type="xs:string"/>
-        \end{verbatim}
-      
-      
+\end{verbatim}
+\newpage
       \textbf{XML-Schema für CYBOL} \\
       Hier folgt nun das komplette XML-Schema für CYBOL. Da dieses Schema, wie auch die DTD nicht
       in den CYBOL-Dateien referenziert wird, ist dies auch nur eine formelle Beschreibung von CYBOL.
-      
-      \begin{verbatim}
+\begin{verbatim}
 <xs:schema 
   xmlns:xs='http://www.w3.org/2001/XMLSchema'
   targetNamespace='http://www.cybop.net'
@@ -469,9 +463,9 @@
       <xs:attribute name='model' type='xs:string' use='required'/>
     </xs:complexType>
   </xs:element>
-</xs:schema>      
-      \end{verbatim}
-      
+</xs:schema
+\end{verbatim}
+
     \subsection{Erweiterte Backus-Naur-Form (EBNF)}
     
       Die Grammatik einer formalen Sprache regelt die Rechtschreibung. Sie legt die korrekte 
@@ -507,22 +501,21 @@
       \end{displaymath} 
       
       Schon die erste Regel in der EBNF von CYBOL widerspricht der zusätzlichen Regel.
-      \begin{verbatim}
+\begin{verbatim}
         CYBOL   = '<model>' 
                     {part}
                   '</model>';
-      \end{verbatim}
+\end{verbatim}
       Auf der rechten Seite der Regel dürfen nur Terminalsymbole oder Terminalsymbole gefolgt von einem
       Nichtterminalsymbol stehen. Somit entspricht CYBOL keine Grammatik vom Typ 3 der 
       Chomsky-Hierarchie.
       
       \textbf{Syntax von EBNF} \\
-
         Die folgende Übersicht gibt die verwendeten Beschreibungskonstrukte von EBNF \cite{ebnf}
         wieder:
-        \begin{table}[H]
-          \centering
-            \begin{tabular}{|l|l|} 
+%        \begin{table}[H]
+%          \centering
+            \begin{longtable}{|l|l|} 
               \hline
               \textbf{Zeichen} & \textbf{Bedeutung} \\ \hline
               = & Definition \\ \hline
@@ -534,10 +527,10 @@
               "..."  & Anführungszeichen, 1. Variante \\ \hline
               '...'  & Anführungszeichen, 2. Variante \\ \hline
               (*...*)  & Kommentar \\ \hline
-            \end{tabular}
-          \caption{Syntax von EBNF}
-          \label{tab:SyntaxVonEBNF}
-        \end{table}
+              \caption{Syntax von EBNF}
+              \label{tab:SyntaxVonEBNF}
+            \end{longtable}
+%        \end{table}
       
       \textbf{EBNF für CYBOL} \\
       Hier folgt die vollständige Notation von CYBOL in der EBNF. 
@@ -586,10 +579,7 @@ big_letter      = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' |
 other_sign      = ',' | '.' | '/', '+', '-', '*';                  
 number          = '0' | '1' | '2' | '3' | '4' | 
                   '5' | '6' | '7' | '8' | '9';   
-
 \end{verbatim}
-      
-      
 
   \section{Logik von CYBOL}
   
@@ -658,7 +648,6 @@ number          = '0' | '1' | '2' | '3' | '4' |
               abstraction="cybol" model="create_table_rows.cybol"/>
 </part>
 \end{verbatim}      
-      \newpage
       Es gibt eine Operation \emph{loop}, die die Eigenschaften \emph{break}, \emph{index}
       und \emph{model} hat. 
       Das \emph{model} wird solange ausgeführt,

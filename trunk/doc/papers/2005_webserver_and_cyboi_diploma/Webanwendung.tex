@@ -1,0 +1,200 @@
+\chapter{Webanwendungen}
+
+  \section{Überblick}
+  
+    In dieser Arbeit sollen die Realisierungsmöglichkeiten von 
+    CYBOL-Webfrontends untersucht werden. Damit CYBOL 
+    über ein Webfrontend angesprochen werden kann, muss CYBOL als 
+    Webanwendung laufen. Nach \cite{defwebappl} ist eine Webanwendung 
+    folgendermaßen definiert:   
+    \begin{quotation}
+      Eine Web-Anwendung ist ein Softwaresystem, das auf
+      Spezifikationen des World Wide Web Consortium (W3C)
+      beruht und Web-spezifische Ressourcen wie Inhalte und
+      Dienste bereitstellt, die über eine Benutzerschnittstelle,
+      den Web-Browser, verwendet werden.
+    \end{quotation}
+    
+    
+    Welche Möglichkeiten gibt es, Inhalte und Anwendungslogik als Webanwendung darzustellen. Dazu
+    muss geklärt werden, was Webanwendungen sind, welche Arten von Webanwendungen es gibt, welche
+    Architektur diesen zugrunde liegt und welchem Bereich die für 
+    die Diplomarbeit zu erstellende Webanwendung zugeordnet 
+    werden kann.
+    
+    
+  \section{Architektur von Webanwendungen}
+  
+    Webanwendungen sind immer eine Client-Server-Architektur. 
+    Hier ist eine Definition für eine Client-Server-Architektur aus dem Buch \cite{hwinf}
+    \begin{quotation}
+      Unter der Client-Server-Architektur (engl.: client-server architecture) 
+      versteht man eine kooperative Informationsverarbeitung, bei der die 
+      Aufgaben zwischen Programmen auf verbundenen Rechnern aufgeteilt werden. 
+      In einem solchen Verbundsystem können Rechner aller Art zusammenarbeiten. 
+      Server (= Dienstleister; Backend) bieten über das Netz Dienstleistungen 
+      an, Clients (= Kunden; Frontend) fordern diese bei Bedarf an. Die 
+      Kommunikation zwischen einem Client-Programm und dem Server-Programm 
+      basiert auf Transaktionen, die vom Client generiert und dem Server 
+      zur Verarbeitung überstellt werden. Eine Transaktion (engl.: transaction) 
+      ist eine Folge logisch zusammengehöriger Aktionen, beispielsweise 
+      zur Verarbeitung eines Geschäftsvorfalls. Client und Server können über 
+      ein lokales Netz verbunden sein oder sie können über große Entfernungen 
+      hinweg, zum Beispiel über eine Satellitenverbindung, miteinander kommunizieren. 
+      Dabei kann es sich um Systeme jeglicher Größenordnung handeln; das 
+      Leistungsvermögen des Clients kann das des Servers also durchaus übersteigen. 
+      Grundidee der Client-Server-Architektur ist eine optimale Ausnutzung der 
+      Ressourcen der beteiligten Systeme.
+    \end{quotation}
+    
+    Die Kommunikation von Webanwendungen erfolgt über das Http-Protokoll. Ein 
+    Client (Webbrowser) stellt eine Anfrage (request) an den Server. Der Server 
+    nimmt diese Anfrage entgegen und verarbeitet diese Anfrage. Das Ergebnis schickt 
+    der Server als Antwort (response) an den Client. Bei Webanwendungen ist dies 
+    typischerweise eine HTML-Seite bzw. eine Antwort, die der Client, in unserem
+    Fall der Webbrowser, versteht.
+    In der Abbildung \ref{fig:request_cycle} wird dies verdeutlicht.
+    
+    \begin{figure}[H]
+      \centering
+        \includegraphics[width=10cm]{images/request_cycle.eps}
+      \caption{Request-Anfrage vom Client an Server}
+      \label{fig:request_cycle}
+    \end{figure}
+    
+    
+  \section{Kategorien von Webanwendungen}
+  
+    Webanwendungen besitzen unterschiedliche Komplexitäten. Sie reichen von 
+    einfachen Informationsseiten bis zu komplexen Programmabläufen. 
+    Nach \cite{defwebappl} werden folgende Kategorien von Webanwendungen unterteilt:
+    
+    \label{webkategorien}
+    \begin{itemize}
+      \item Dokumentenzentriert \\
+            Hier werden fertige Dokumente auf dem Server gelegt und bei Anfrage 
+            als Antwort ausgegeben. Beispiele sind einfache Firmenpräsentationen oder das Webradio.
+      \item Interaktiv \\
+            Hier hat der Anwender die Möglichkeit über einfache Interaktionen die 
+            Webanwendungen zu steuern. Dies kann z.B. durch eine einfache 
+            HTML-Formular-Technik und durch die Link-Technik 
+            umgesetzt sein.
+      \item Transaktional \\
+            Durch ein Datenbanksystem kann eine konsistente Datenhaltung 
+            erreicht werden. Ein Beispiel dafür ist ein Resevierungssystem.
+            Daten sind nicht nur über eine Session bekannt, sonder werden
+            dauerhaft gespeichert.
+      \item Workflow-basiert \\
+            Diese erlauben Abwicklungen von Geschäftsprozessen intern oder zwischen verschiedenen
+            Teilnehmern. Dafür sind Web-Services mit definierten Schnittstellen notwendig.
+            Beispiele sind Business-to-Business-Lösungen (B2B) im 
+            E-Commerce-Bereich oder E-Government-Anwendungen im
+            Bereich der öffentlichen Verwaltung.
+      \item Kollaborativ \\
+            Hier werden die Webanwendung zur Kooperation bei unstrukturierten Vorgängen und 
+            hohem Kommunikationsbedarf verwendet. Beispiel dafür sind  Chatrooms und 
+            gemeinschaftliche Arbeitsräume um gemeinsame Informationen generiereren, bearbeiten
+            und verwalten zu können (z.B. Wikipedia).\\
+            \\
+      \item Portalorientiert \\
+            Diese vereinen den Zugriff auf verteilte und verschiedenen Informationsquellen und 
+            Informationsdienste unter einer einheitlichen Oberfläche
+            (Single Point of Access).
+      \item Ubiquitär \\
+            Stellen personalisierte Dienste zu jeder Zeit, an jedem Ort und 
+            für eine Vielzahl von Endgeräten zur Verfügung.  
+      \item Semantisches Web \\
+            Informationen im Web sollen nicht nur für den Menschen verständlich 
+            aufbereitet, sondern auch für Maschinen automatisch verarbeitbar 
+            gemacht werden. Dadurch kann neues relevantes Wissen automatisch 
+            ermittelt werden. Dies wird bei Recommender-Systeme eingesetzt
+             um z.B. Kunden Produkte zu empfehlen oder ihnen für ihre Kaufentscheidung 
+             hilfreiche Informationen zur Verfügung zu stellen. 
+    \end{itemize}
+    
+    In der Praxis gibt es keine so strikte Trennung für die Webanwendungen, sondern 
+    es werden verschiedene Mischformen vorhanden sein.  
+    
+  \section{Darstellungsmöglichkeiten von Webanwendungen}
+
+    Nachdem wir geklärt haben, was Webanwendungen sind, sollen im Folgenden 
+    die gebräuchlichsten Darstellungsmöglichkeiten von Webanwendungen 
+    beschrieben werden. 
+    \begin{itemize}
+      \item HTML und HTML mit CSS\\
+            HTML ist eine Seitenbeschreibungssprache, die vom W3C standardisiert wurde. Die
+            aktuelle Version ist 4.0. Alle Browser unterstützen HTML 4.0. Leichte 
+            Darstellungsunterschiede gibt es dennoch zwischen den Browsern. Mit CSS können die 
+            Formatierungsinformationen von den Daten und die Grundstruktur der Webseite getrennt werden.
+            Dies ist ein Schritt zur Trennung von Inhalt und Darstellung. 
+      \item XHTML \\
+            XHTML entspricht im Wesentlichen HTML, die 
+            Dateien müssen allerdings XML-konform sein. Dies wurde in HTML noch nicht konsequent 
+            durchgesetzt.
+            Der Vorteil von XHTML gegenüber HTML ist, das XML-Werkzeuge zur Syntaxüberprüfung gut 
+            geeignet sind.
+      \item HTML mit Javascript \\
+            Javascript wird clientseitig ausgeführt, d.h. der Client muss den Befehlsatz von Javascript 
+            interpretieren können. Javascript wurde von Netscape entwickelt und als offener Standard für eine
+            Objekt-Skriptsprache bezeichnet. Leider wurde Javascript nicht vom W3C standardisiert. Als
+            Gegenprodukt von Microsoft wurde JScript eingeführt. Javascript und JScript sind sehr ähnlich, 
+            aber doch nicht
+            gleich. Darum gibt es sehr viele Inkompatibilitäten zwischen den Browsern, weshalb 
+            Javascript nur bedingt
+            in Webanwendungen verwendet werden sollte. Der Vorteil von Javascript ist, 
+            dass schon clientseitig auf 
+            Benutzereingabe reagiert werden kann, ohne den Server zu befragen und dadurch Interaktionen ohne 
+            kompletten Neuaufbau des Frames realisierbar sind.
+      \item XML mit XSLT \\
+            Hier wird die Trennung von Inhalt und Darstellung umgesetzt. In der XML-Datei stehen die ganzen
+            Daten 
+            für die Darstellung und in der XSLT-Datei die ganzen Formatierungen und Strukturierungen für 
+            die Darstellung der Daten. Auf den Server werden diese zwei Dateien zusammengebracht und
+            das Ergebnis wird zum Client (Browser) geschickt. 
+      \item Serverseitige Skriptsprache (PHP, CGI, ...) \\
+            Diese Skriptsprachen werden auf dem Server ausgeführt und das Ergebnis wird zum Browser geschickt. In
+            ihnen können komplexe Anwendungslogiken hinterlegt werden. Dies ist auch der Vorteil
+            der Skriptsprachen, weil damit komplexe Webanwendungen realisierbar sind. 
+            Man greift auf die 
+            vielen vorgefertigten Bibliotheken, die in den Skriptsprachen schon enthalten sind, zurück, so dass
+            Standardwebanwendungen relativ zügig entwickelbar sind. Für die Trennung von Darstellung und
+            Anwendungslogik können hier Template-Systeme verwendet werden.\\
+            \\
+      \item Serverseitige Anwendungssprachen (Servlet, ASP, JSP, ...) \\
+            Diese werden auf dem Server ausgeführt. Im Unterschied zu den serverseitigen
+            Skriptsprachen sind sie in einer Programmiersprache wie Java, Visual Basic usw.
+            geschrieben und liegen auf dem Server in einer kompilierten Form vor
+            (Servlets) oder werden zur Laufzeit kompiliert (JSP) und danach ausgeführt.
+    \end{itemize}
+    Auch hier sind wieder Mischformen vorhanden und denkbar. Ein Beispiel dafür ist die 
+    Fehlerüberprüfung von Eingaben 
+    durch Javascript und die Ausführung der restlichen Anwendungslogik durch
+    serverseitige Skriptsprachen oder serverseitige Anwendungssprachen.
+    
+  \section{Einordung von CYBOP}
+  
+    Zurzeit 
+    können dokumentenbasierte und interaktive Webanwendungen mit CYBOP erstellt werden.
+    Ein Beispiel für eine interaktive Webanwendung ist der Prototyp, der im Rahmen der
+    Diplomarbeit entstanden ist. Der nächste Schritt für CYBOP ist die Umsetzung von 
+    transaktionalen Webanwendungen. Dazu ist die Abspeicherung von Daten in 
+    persistenten Medien notwendig. 
+  
+    Als Darstellung kommen aus Architekturgründen  nicht alle 
+    möglichen Formen in Frage. Alle serverseitigen 
+    fallen heraus, da CYBOP mit seinen Komponenten 
+    bereits eine serverseitige Architektur darstellt. Also 
+    sind nur clientseitige Darstellungsmöglichkeiten wie HTML, XHTML
+    und Javascript in Betracht zu ziehen. HTML ist zwar standardisiert, hat aber noch viele
+    Freiräume bezüglich von Schreibweisen. In dieser Beziehung ist XHTML die bessere
+    Wahl, da hier die Wohlgeformtheit von XML-Dokumenten eingehalten werden muss.
+    Dadurch sind die Strukturen für die Generierung besser definiert und es
+    müssen nicht so viele Ausnahmebedingungen in CYBOI integriert werden.
+    Javascript ist keine unabhängige Technologie, sonder von einer Firma abhängig. 
+    Es wird zwar  von vielen gängigen Webbrowsern unterstützt, ist aber nicht 
+    standardisiert. Damit ist diese Technologie für CYBOP nicht zu empfehlen.
+    Für die Umsetzung in CYBOP bleibt nur die eine sinnvolle Darstellungsmöglichkeit, XHTML,
+    übrig. 
+  
+    
+    
