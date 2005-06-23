@@ -20,7 +20,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.14 $ $Date: 2005-06-22 11:17:36 $ $Author: christian $
+# @version $Revision: 1.15 $ $Date: 2005-06-23 13:46:58 $ $Author: reichenbach $
 # @author Dennis Reichenbach <dennis.reichenbach@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -55,10 +55,8 @@ cybop-papers.deb
                 doc/papers/2003_corba_soap_image_transfer/diplomarbeit.pdf usr/share/doc/cybop/papers/2003_corba_soap_image_transfer
                 doc/papers/2003_design_patterns_for_backup/studienarbeit.pdf usr/share/doc/cybop/papers/2003_design_patterns_for_backup
                 doc/papers/2003_flexible_communication_layer_diploma/Diplomarbeit.pdf usr/share/doc/cybop/papers/2003_flexible_communication_layer_diploma
-                doc/papers/2003_flexible_communication_layer_diploma/Diplomarbeit.ps usr/share/doc/cybop/papers/2003_flexible_communication_layer_diploma
                 doc/papers/2003_flexible_communication_layer_diploma/verteidigung.ppt usr/share/doc/cybop/papers/2003_flexible_communication_layer_diploma
                 doc/papers/2003_flexible_presentation_layer_article/paper.pdf usr/share/doc/cybop/papers/2003_flexible_presentation_layer_article
-                doc/papers/2003_flexible_presentation_layer_article/paper.ps usr/share/doc/cybop/papers/2003_flexible_presentation_layer_article
                 doc/papers/2003_flexible_presentation_layer_diploma/Diplomarbeit.pdf usr/share/doc/cybop/papers/2003_flexible_presentation_layer_diploma
                 doc/papers/2003_internationalization_in_java/studienarbeit.doc usr/share/doc/cybop/papers/2003_internationalization_in_java
                 doc/papers/2003_internationalization_in_java/studienarbeit.pdf usr/share/doc/cybop/papers/2003_internationalization_in_java
