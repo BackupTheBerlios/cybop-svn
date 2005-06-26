@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-06-06 08:12:24 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-06-26 22:33:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -32,6 +32,7 @@
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memory/array/array.c"
+#include "../../memory/creator/integer_creator.c"
 
 /**
  * Shuts down the tcp socket service.

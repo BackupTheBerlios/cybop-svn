@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 23:57:03 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-26 22:33:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,25 +31,25 @@
 // Cybol tag (node) attributes (properties).
 //
 
-/** The name attribute array, pointer, count. */
+/** The name attribute. */
 static const char NAME_ATTRIBUTE_ARRAY[] = {'n', 'a', 'm', 'e'};
 static const char* NAME_ATTRIBUTE = NAME_ATTRIBUTE_ARRAY;
 static const int NAME_ATTRIBUTE_COUNT_ARRAY[] = {4};
 static const int* NAME_ATTRIBUTE_COUNT = NAME_ATTRIBUTE_COUNT_ARRAY;
 
-/** The channel attribute array, pointer, count. */
+/** The channel attribute. */
 static const char CHANNEL_ATTRIBUTE_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
 static const char* CHANNEL_ATTRIBUTE = CHANNEL_ATTRIBUTE_ARRAY;
 static const int CHANNEL_ATTRIBUTE_COUNT_ARRAY[] = {7};
 static const int* CHANNEL_ATTRIBUTE_COUNT = CHANNEL_ATTRIBUTE_COUNT_ARRAY;
 
-/** The abstraction attribute array, pointer, count. */
+/** The abstraction attribute. */
 static const char ABSTRACTION_ATTRIBUTE_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
 static const char* ABSTRACTION_ATTRIBUTE = ABSTRACTION_ATTRIBUTE_ARRAY;
 static const int ABSTRACTION_ATTRIBUTE_COUNT_ARRAY[] = {11};
 static const int* ABSTRACTION_ATTRIBUTE_COUNT = ABSTRACTION_ATTRIBUTE_COUNT_ARRAY;
 
-/** The model attribute array, pointer, count. */
+/** The model attribute. */
 static const char MODEL_ATTRIBUTE_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
 static const char* MODEL_ATTRIBUTE = MODEL_ATTRIBUTE_ARRAY;
 static const int MODEL_ATTRIBUTE_COUNT_ARRAY[] = {5};

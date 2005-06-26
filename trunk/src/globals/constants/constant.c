@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-26 22:33:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -239,9 +239,9 @@ static const int* STARTUP_PARAMETERS_COUNT = STARTUP_PARAMETERS_COUNT_ARRAY;
 static const int COMMAND_PARAMETER_INDEX_ARRAY[] = {0};
 static const int* COMMAND_PARAMETER_INDEX = COMMAND_PARAMETER_INDEX_ARRAY;
 
-/** The configuration file parameter index. */
-static const int CONFIGURATION_FILE_PARAMETER_INDEX_ARRAY[] = {1};
-static const int* CONFIGURATION_FILE_PARAMETER_INDEX = CONFIGURATION_FILE_PARAMETER_INDEX_ARRAY;
+/** The run file parameter index. */
+static const int RUN_FILE_PARAMETER_INDEX_ARRAY[] = {1};
+static const int* RUN_FILE_PARAMETER_INDEX = RUN_FILE_PARAMETER_INDEX_ARRAY;
 
 /* CONSTANT_SOURCE */
 #endif

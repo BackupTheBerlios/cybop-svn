@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 23:57:03 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-26 22:33:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -265,6 +265,50 @@ static const int DETAILS_SIZES_INDEX_ARRAY[] = {11};
 static const int* DETAILS_SIZES_INDEX = DETAILS_SIZES_INDEX_ARRAY;
 
 //
+// Signal memory.
+//
+
+/** The signal memory resize factor. */
+static const int SIGNAL_MEMORY_RESIZE_FACTOR_ARRAY[] = {2};
+static const int* SIGNAL_MEMORY_RESIZE_FACTOR = SIGNAL_MEMORY_RESIZE_FACTOR_ARRAY;
+
+/** The signal memory count. */
+static const int SIGNAL_MEMORY_COUNT_ARRAY[] = {8};
+static const int* SIGNAL_MEMORY_COUNT = SIGNAL_MEMORY_COUNT_ARRAY;
+
+/** The signals abstractions index. */
+static const int SIGNALS_ABSTRACTIONS_INDEX_ARRAY[] = {0};
+static const int* SIGNALS_ABSTRACTIONS_INDEX = SIGNALS_ABSTRACTIONS_INDEX_ARRAY;
+
+/** The signals abstractions counts index. */
+static const int SIGNALS_ABSTRACTIONS_COUNTS_INDEX_ARRAY[] = {1};
+static const int* SIGNALS_ABSTRACTIONS_COUNTS_INDEX = SIGNALS_ABSTRACTIONS_COUNTS_INDEX_ARRAY;
+
+/** The signals models index. */
+static const int SIGNALS_MODELS_INDEX_ARRAY[] = {2};
+static const int* SIGNALS_MODELS_INDEX = SIGNALS_MODELS_INDEX_ARRAY;
+
+/** The signals models counts index. */
+static const int SIGNALS_MODELS_COUNTS_INDEX_ARRAY[] = {3};
+static const int* SIGNALS_MODELS_COUNTS_INDEX = SIGNALS_MODELS_COUNTS_INDEX_ARRAY;
+
+/** The signals details index. */
+static const int SIGNALS_DETAILS_INDEX_ARRAY[] = {4};
+static const int* SIGNALS_DETAILS_INDEX = SIGNALS_DETAILS_INDEX_ARRAY;
+
+/** The signals details counts index. */
+static const int SIGNALS_DETAILS_COUNTS_INDEX_ARRAY[] = {5};
+static const int* SIGNALS_DETAILS_COUNTS_INDEX = SIGNALS_DETAILS_COUNTS_INDEX_ARRAY;
+
+/** The signals priorities index. */
+static const int SIGNALS_PRIORITIES_INDEX_ARRAY[] = {6};
+static const int* SIGNALS_PRIORITIES_INDEX = SIGNALS_PRIORITIES_INDEX_ARRAY;
+
+/** The signals identifications index. */
+static const int SIGNALS_IDENTIFICATIONS_INDEX_ARRAY[] = {7};
+static const int* SIGNALS_IDENTIFICATIONS_INDEX = SIGNALS_IDENTIFICATIONS_INDEX_ARRAY;
+
+//
 // Internals memory elements.
 //
 
@@ -272,52 +316,24 @@ static const int* DETAILS_SIZES_INDEX = DETAILS_SIZES_INDEX_ARRAY;
 static const int INTERNALS_MEMORY_ELEMENTS_COUNT_ARRAY[] = {44};
 static const int* INTERNALS_MEMORY_ELEMENTS_COUNT = INTERNALS_MEMORY_ELEMENTS_COUNT_ARRAY;
 
-/** The startup parameters. */
-static const int STARTUP_CHANNEL_INTERNAL_ARRAY[] = {0};
-static const int* STARTUP_CHANNEL_INTERNAL = STARTUP_CHANNEL_INTERNAL_ARRAY;
-
-static const int STARTUP_CHANNEL_COUNT_INTERNAL_ARRAY[] = {1};
-static const int* STARTUP_CHANNEL_COUNT_INTERNAL = STARTUP_CHANNEL_COUNT_INTERNAL_ARRAY;
-
-static const int STARTUP_CHANNEL_SIZE_INTERNAL_ARRAY[] = {2};
-static const int* STARTUP_CHANNEL_SIZE_INTERNAL = STARTUP_CHANNEL_SIZE_INTERNAL_ARRAY;
-
-static const int STARTUP_ABSTRACTION_INTERNAL_ARRAY[] = {3};
-static const int* STARTUP_ABSTRACTION_INTERNAL = STARTUP_ABSTRACTION_INTERNAL_ARRAY;
-
-static const int STARTUP_ABSTRACTION_COUNT_INTERNAL_ARRAY[] = {4};
-static const int* STARTUP_ABSTRACTION_COUNT_INTERNAL = STARTUP_ABSTRACTION_COUNT_INTERNAL_ARRAY;
-
-static const int STARTUP_ABSTRACTION_SIZE_INTERNAL_ARRAY[] = {5};
-static const int* STARTUP_ABSTRACTION_SIZE_INTERNAL = STARTUP_ABSTRACTION_SIZE_INTERNAL_ARRAY;
-
-static const int STARTUP_MODEL_INTERNAL_ARRAY[] = {6};
-static const int* STARTUP_MODEL_INTERNAL = STARTUP_MODEL_INTERNAL_ARRAY;
-
-static const int STARTUP_MODEL_COUNT_INTERNAL_ARRAY[] = {7};
-static const int* STARTUP_MODEL_COUNT_INTERNAL = STARTUP_MODEL_COUNT_INTERNAL_ARRAY;
-
-static const int STARTUP_MODEL_SIZE_INTERNAL_ARRAY[] = {8};
-static const int* STARTUP_MODEL_SIZE_INTERNAL = STARTUP_MODEL_SIZE_INTERNAL_ARRAY;
-
 /** The knowledge memory. */
-static const int KNOWLEDGE_MEMORY_INTERNAL_ARRAY[] = {9};
+static const int KNOWLEDGE_MEMORY_INTERNAL_ARRAY[] = {0};
 static const int* KNOWLEDGE_MEMORY_INTERNAL = KNOWLEDGE_MEMORY_INTERNAL_ARRAY;
 
-static const int KNOWLEDGE_MEMORY_COUNT_INTERNAL_ARRAY[] = {10};
+static const int KNOWLEDGE_MEMORY_COUNT_INTERNAL_ARRAY[] = {1};
 static const int* KNOWLEDGE_MEMORY_COUNT_INTERNAL = KNOWLEDGE_MEMORY_COUNT_INTERNAL_ARRAY;
 
-static const int KNOWLEDGE_MEMORY_SIZE_INTERNAL_ARRAY[] = {11};
+static const int KNOWLEDGE_MEMORY_SIZE_INTERNAL_ARRAY[] = {2};
 static const int* KNOWLEDGE_MEMORY_SIZE_INTERNAL = KNOWLEDGE_MEMORY_SIZE_INTERNAL_ARRAY;
 
 /** The signal memory. */
-static const int SIGNAL_MEMORY_INTERNAL_ARRAY[] = {12};
+static const int SIGNAL_MEMORY_INTERNAL_ARRAY[] = {3};
 static const int* SIGNAL_MEMORY_INTERNAL = SIGNAL_MEMORY_INTERNAL_ARRAY;
 
-static const int SIGNAL_MEMORY_COUNT_INTERNAL_ARRAY[] = {13};
+static const int SIGNAL_MEMORY_COUNT_INTERNAL_ARRAY[] = {4};
 static const int* SIGNAL_MEMORY_COUNT_INTERNAL = SIGNAL_MEMORY_COUNT_INTERNAL_ARRAY;
 
-static const int SIGNAL_MEMORY_SIZE_INTERNAL_ARRAY[] = {14};
+static const int SIGNAL_MEMORY_SIZE_INTERNAL_ARRAY[] = {5};
 static const int* SIGNAL_MEMORY_SIZE_INTERNAL = SIGNAL_MEMORY_SIZE_INTERNAL_ARRAY;
 
 /** The unix server socket. */
@@ -356,7 +372,7 @@ static const int* TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL = TCP_CLIENT_SOCKET_SIGN
 
 static const int TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL_ARRAY[] = {25};
 static const int* TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL = TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL_ARRAY;
- 
+
 static const int TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL_ARRAY[] = {26};
 static const int* TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL = TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL_ARRAY;
 
@@ -411,50 +427,6 @@ static const int* X_WINDOW_SYSTEM_FONT_NAME_INTERNAL = X_WINDOW_SYSTEM_FONT_NAME
 
 static const int X_WINDOW_SYSTEM_FONT_INTERNAL_ARRAY[] = {43};
 static const int* X_WINDOW_SYSTEM_FONT_INTERNAL = X_WINDOW_SYSTEM_FONT_INTERNAL_ARRAY;
-
-//
-// Signal memory.
-//
-
-/** The signal memory resize factor. */
-static const int SIGNAL_MEMORY_RESIZE_FACTOR_ARRAY[] = {2};
-static const int* SIGNAL_MEMORY_RESIZE_FACTOR = SIGNAL_MEMORY_RESIZE_FACTOR_ARRAY;
-
-/** The signal memory count. */
-static const int SIGNAL_MEMORY_COUNT_ARRAY[] = {8};
-static const int* SIGNAL_MEMORY_COUNT = SIGNAL_MEMORY_COUNT_ARRAY;
-
-/** The signals abstractions index. */
-static const int SIGNALS_ABSTRACTIONS_INDEX_ARRAY[] = {0};
-static const int* SIGNALS_ABSTRACTIONS_INDEX = SIGNALS_ABSTRACTIONS_INDEX_ARRAY;
-
-/** The signals abstractions counts index. */
-static const int SIGNALS_ABSTRACTIONS_COUNTS_INDEX_ARRAY[] = {1};
-static const int* SIGNALS_ABSTRACTIONS_COUNTS_INDEX = SIGNALS_ABSTRACTIONS_COUNTS_INDEX_ARRAY;
-
-/** The signals models index. */
-static const int SIGNALS_MODELS_INDEX_ARRAY[] = {2};
-static const int* SIGNALS_MODELS_INDEX = SIGNALS_MODELS_INDEX_ARRAY;
-
-/** The signals models counts index. */
-static const int SIGNALS_MODELS_COUNTS_INDEX_ARRAY[] = {3};
-static const int* SIGNALS_MODELS_COUNTS_INDEX = SIGNALS_MODELS_COUNTS_INDEX_ARRAY;
-
-/** The signals details index. */
-static const int SIGNALS_DETAILS_INDEX_ARRAY[] = {4};
-static const int* SIGNALS_DETAILS_INDEX = SIGNALS_DETAILS_INDEX_ARRAY;
-
-/** The signals details counts index. */
-static const int SIGNALS_DETAILS_COUNTS_INDEX_ARRAY[] = {5};
-static const int* SIGNALS_DETAILS_COUNTS_INDEX = SIGNALS_DETAILS_COUNTS_INDEX_ARRAY;
-
-/** The signals priorities index. */
-static const int SIGNALS_PRIORITIES_INDEX_ARRAY[] = {6};
-static const int* SIGNALS_PRIORITIES_INDEX = SIGNALS_PRIORITIES_INDEX_ARRAY;
-
-/** The signals identifications index. */
-static const int SIGNALS_IDENTIFICATIONS_INDEX_ARRAY[] = {7};
-static const int* SIGNALS_IDENTIFICATIONS_INDEX = SIGNALS_IDENTIFICATIONS_INDEX_ARRAY;
 
 //
 // Xml tag.

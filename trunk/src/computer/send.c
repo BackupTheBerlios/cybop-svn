@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-06 08:12:24 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-06-26 22:33:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -28,9 +28,9 @@
 #ifndef SEND_SOURCE
 #define SEND_SOURCE
 
+#include "../computer/send/send_linux_console.c"
 //?? #include "../computer/send/send_tcp_socket.c"
 #include "../computer/send/send_x_window_system.c"
-#include "../controller/communicator/tui_communicator.c"
 #include "../controller/communicator/tcp_socket_communicator.c"
 #include "../controller/translator/translator.c"
 #include "../globals/constants/abstraction_constants.c"
@@ -169,7 +169,7 @@ void send_message(const void* p0, const void* p1,
             void* tmpdc = NULL_POINTER;
             void* tmpds = NULL_POINTER;
 
-            send_tui(tmpd, tmpdc, tmpds, *mm, *mmc);
+            send_linux_console(tmpd, tmpdc, tmpds, *mm, *mmc);
         }
     }
 
