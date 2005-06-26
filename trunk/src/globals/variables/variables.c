@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 23:57:03 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-26 22:33:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,14 +37,14 @@
 // one could not alter the values they point to.
 //
 
-// The character null pointer.
-static char* CHARACTER_NULL_POINTER;
-
 // The null pointer.
 static void* NULL_POINTER;
 
 // The pointer null pointer.
 static void** POINTER_NULL_POINTER;
+
+// The character null pointer.
+static char* CHARACTER_NULL_POINTER;
 
 // The integer null pointer.
 static int* INTEGER_NULL_POINTER;

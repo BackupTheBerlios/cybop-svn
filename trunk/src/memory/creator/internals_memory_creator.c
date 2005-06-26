@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-26 22:33:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -101,43 +101,7 @@ void destroy_internals_memory(void* p0, const void* p1) {
                     // all configuration parameters need to be distinguished here,
                     // via conditional if-else statements.
 
-                    if (j == *STARTUP_CHANNEL_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-
-                    } else if (j == *STARTUP_CHANNEL_COUNT_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                    } else if (j == *STARTUP_CHANNEL_SIZE_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                    } else if (j == *STARTUP_ABSTRACTION_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-
-                    } else if (j == *STARTUP_ABSTRACTION_COUNT_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                    } else if (j == *STARTUP_ABSTRACTION_SIZE_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                    } else if (j == *STARTUP_MODEL_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-
-                    } else if (j == *STARTUP_MODEL_COUNT_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                    } else if (j == *STARTUP_MODEL_SIZE_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
-
-                    } else if (j == *KNOWLEDGE_MEMORY_INTERNAL) {
+                    if (j == *KNOWLEDGE_MEMORY_INTERNAL) {
 
                         destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
 
