@@ -20,7 +20,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.15 $ $Date: 2005-06-23 13:46:58 $ $Author: reichenbach $
+# @version $Revision: 1.16 $ $Date: 2005-06-27 10:54:56 $ $Author: christian $
 # @author Dennis Reichenbach <dennis.reichenbach@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -116,7 +116,7 @@ damit wir eine CYBOL DTD in Debian installieren koennen.
 Brauchen wir ueberhaupt so einen Katalog-Eintrag?
 Als CYBOL Header schlage ich vor:
 <?xml version="1.0"?>
-<!DOCTYPE book PUBLIC "-//CYBOP//DTD CYBOL XML V1.0//EN" "http://cybop.berlios.de/cybol/cybol.dtd">
+<!DOCTYPE book PUBLIC "-//CYBOP//DTD CYBOL XML V1.0//EN" "http://www.cybop.net/cybol.dtd">
 
 [cybol-core.deb]
 - depends:      cyboi
