@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 4.0.0)
 
 Package: cyboi-doc
 Architecture: i386
-Recommends: cybop-doc-papers, cybop-doc-presentations
+Recommends: cybop-papers, cybop-presentations
 Suggests: cyboi
 Description: Cybernetics Oriented Interpreter (CYBOI) documentation
  The Cybernetics Oriented Programming (CYBOP) theory is a collection of new

@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 4.0.0)
 
 Package: cybop
 Architecture: i386
-Depends: cybop-books, cybop-papers, cybop-presentations
+Depends: cybop-papers, cybop-presentations
 Description: Cybernetics Oriented Programming (CYBOP) documentation meta package
  The Cybernetics Oriented Programming (CYBOP) theory is a collection of new
  concepts for software design, which are taken from sciences like philosophy,

@@ -6,14 +6,14 @@ cybop-papers (1.0.0.0) unstable; urgency=low
     Authors: Christian Heller <christian.heller@tuxtax.de>
   * Add "An Extended Component Lifecycle" paper
     Authors: Christian Heller <christian.heller@tuxtax.de>
-  * Add "Möglichkeiten der Gestaltung flexibler Softwarearchitekturen für Präsentationsschichten, dargestellt anhand episodenbasierter medizinischer Dokumentation unter Einbeziehung topologischer Befundung" paper
+  * Add "Moeglichkeiten der Gestaltung flexibler Softwarearchitekturen fuer Praesentationsschichten, dargestellt anhand episodenbasierter medizinischer Dokumentation unter Einbeziehung topologischer Befundung" paper
     Authors: Jens Bohl <info@jens-bohl.de>
-  * Add "Untersuchung zur Realisierbarkeit einer technologieneutralen Mapping-Schicht für den Datenaustausch am Beispiel einer Anwendung zum medizinischen Formulardruck als integrativer Bestandteil eines Electronic Health Record (EHR)" paper
+  * Add "Untersuchung zur Realisierbarkeit einer technologieneutralen Mapping-Schicht fÃ¼r den Datenaustausch am Beispiel einer Anwendung zum medizinischen Formulardruck als integrativer Bestandteil eines Electronic Health Record (EHR)" paper
     Authors: Torsten Kunze <info@torstenkunze.de>
   * Add "Erstellen eines Backup Moduls unter Verwendung gaengiger Design Patterns aus dem ResMedLib Framework" paper
     Authors: Dirk Behrendt <behrendt.dirk@web.de>
   * Add "Erstellung intuitiver Web Frontends zur Terminplanung und Verwaltung administrativer Daten, basierend auf einem Webserver mit JSP Technologie sowie Anbindung an ein Medizinisches Informationssystem" paper
-    Authors: Rolf Holzmüller <rolf.holzmueller@gmx.de>
+    Authors: Rolf HolzmÃ¼ller <rolf.holzmueller@gmx.de>
   * Add "Erstellung und Anbindung intuitiver Frontends an eine Anwendung zur Verwaltung administrativer Personendaten unter Beachtung von Aspekten der Internationalisierung" paper
     Authors: Kumanan Kanagasabapathy <kumanan@uni.de>
   * Add "A flexible Software Architecture for Presentation Layers demonstrated on Medical Documentation with Episodes and Inclusion of Topological Report" paper
@@ -35,4 +35,5 @@ cybop-papers (1.0.0.0) unstable; urgency=low
     Detlef Streitferdt <detlef.streitferdt@tu-ilmenau.de>,
     Ilka Philippow <ilka.philippow@tu-ilmenau.de>
 
- -- Christian Heller <christian.heller@tuxtax.de>  Wed, 15 Jun 2005 13:00:00 +0100
+ -- Christian Heller <christian.heller@tuxtax.de>  Mon, 27 Jun 2005 10:00:00 +0200
+

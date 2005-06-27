@@ -8,7 +8,6 @@ Build-Depends: debhelper (>= 4.0.0)
 Package: cybol-examples
 Architecture: i386
 Depends: cyboi
-Suggests: cybol-core, cybol-healthcare
 Description: Cybernetics Oriented Language (CYBOL) example applications
  The Cybernetics Oriented Programming (CYBOP) theory is a collection of new
  concepts for software design, which are taken from sciences like philosophy,

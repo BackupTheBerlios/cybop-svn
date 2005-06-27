@@ -1,2 +1,2 @@
-admin/Makefile usr/share/doc/cyboi-dev
-admin/exclude usr/share/doc/cyboi-dev
+admin/Makefile usr/share/cyboi-dev
+admin/exclude usr/share/cyboi-dev

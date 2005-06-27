@@ -3,4 +3,5 @@ cybol (1.0.0.0) unstable; urgency=low
   * Add Document Type Definition (DTD)
   * Add XML Schema Definition (XSD)
 
- -- Christian Heller <christian.heller@tuxtax.de>  Wed, 15 Jun 2005 13:00:00 +0100
+ -- Christian Heller <christian.heller@tuxtax.de>  Mon, 27 Jun 2005 08:30:00 +0200
+

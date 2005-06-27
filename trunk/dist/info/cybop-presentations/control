@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 4.0.0)
 
 Package: cybop-presentations
 Architecture: i386
-Recommends: cybop-books, cybop-papers
+Recommends: cybop-papers
 Suggests: cyboi, cybol-examples
 Description: Cybernetics Oriented Programming (CYBOP) presentations
  The Cybernetics Oriented Programming (CYBOP) theory is a collection of new

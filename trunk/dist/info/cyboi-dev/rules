@@ -12,7 +12,6 @@ build-stamp:
 	dh_testdir
 
 	# Add here commands to compile the package.
-	/usr/bin/make -Cadmin
 
 	touch build-stamp
 
@@ -22,7 +21,6 @@ clean:
 	rm -f build-stamp
 
 	# Add here commands to clean up after the build process.
-	/usr/bin/make -Cadmin clean
 
 	dh_clean
 
@@ -32,12 +30,9 @@ install: build-stamp
 	dh_clean -k
 	dh_installdirs
 
-	# Add here commands to install the package into debian/cyboi.
+	# Add here commands to install the package into debian.
 	dh_install
 	rm -f build-stamp
-	rm -r bin
-	/usr/bin/make -Cadmin clean
-
 
 # Build architecture-independent files here.
 binary-indep: build install
@@ -50,7 +45,7 @@ binary-arch: build install
 	dh_installchangelogs
 	dh_installdocs
 #       dh_undocumented
-	dh_installexamples examples/*
+#	dh_installexamples examples/*
 #       dh_install
 #       dh_installmenu
 #       dh_installdebconf
@@ -61,7 +56,7 @@ binary-arch: build install
 #       dh_installinit
 #       dh_installcron
 #       dh_installinfo
-	dh_installman doc/cyboi/cyboi.1.gz
+#	dh_installman doc/cyboi/cyboi.1.gz
 	dh_link
 	dh_strip
 	dh_compress
@@ -70,7 +65,7 @@ binary-arch: build install
 #       dh_python
 #       dh_makeshlibs
 	dh_installdeb
-	dh_shlibdeps
+#	dh_shlibdeps
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb

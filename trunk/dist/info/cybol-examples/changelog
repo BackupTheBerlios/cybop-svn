@@ -3,7 +3,7 @@ cybol-examples (2.0.0.0) unstable; urgency=low
   * Add "helloworld_dynamic_logic" application
   * Add "addition" application
 
- -- Christian Heller <christian.heller@tuxtax.de>  Wed, 15 Jun 2005 13:00:00 +0100
+ -- Christian Heller <christian.heller@tuxtax.de>  Mon, 27 Jun 2005 09:00:00 +0200
 
 
 cybol-examples (1.0.0.0) unstable; urgency=low
