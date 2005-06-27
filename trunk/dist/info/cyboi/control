@@ -7,8 +7,8 @@ Build-Depends: debhelper (>= 4.0.0)
 
 Package: cyboi
 Architecture: i386
-Depends: libc6, xlibs, libxml2
-Recommends: cybol-core, cybol-examples, cybol-healthcare
+Depends: ${shlibs:Depends}
+Recommends: cybol-examples
 Suggests: cyboi-doc, cyboi-dev
 Description: Cybernetics Oriented Interpreter (CYBOI)
  The Cybernetics Oriented Programming (CYBOP) theory is a collection of new

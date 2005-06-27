@@ -3,11 +3,11 @@ CYBOI for Debian
 
 In order to be started, the Cybernetics Oriented Interpreter (CYBOI) needs one
 command line parameter pointing to a CYBOL resource. CYBOI interprets knowledge
-models defined in CYBOL (XML) format, which are representing an application. A
-number of example applications can be found in /usr/share/doc/cybol-examples.
+models defined in CYBOL (XML) format, which are representing an application.
+A number of example applications can be found in /usr/share/doc/cybol-examples.
 To start one of them with CYBOI, change into the following directory:
 
-cd /usr/share/doc/cybol-examples
+cd /usr/share/doc/cybol/examples
 
 Afterwards, type in a shell/console window one of the following lines:
 
@@ -20,4 +20,4 @@ cyboi addition/run.cybol
 
 Read the example CYBOL files to get more information and to understand how they work!
 
- -- Christian Heller <christian.heller@tuxtax.de>, Mon, 15 Jun 2005 01:00:00 +0100
+ -- Dennis Reichenbach <dennis.reichenbach@gmx.net>, Mon, 27 Jun 2005 07:00:00 +0200
