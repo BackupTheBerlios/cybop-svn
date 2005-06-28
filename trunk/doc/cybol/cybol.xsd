@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
+
 <!--
     $RCSfile: cybol.xsd,v $
 
-    Copyright (c) 2003-2004. Christian Heller. All rights reserved.
+    Copyright (c) 2003-2004. Christian Heller and the CYBOP developers.
 
     Permission is granted to copy, distribute and/or modify this document
     under the terms of the GNU Free Documentation License, Version 1.1
@@ -15,8 +16,7 @@
     - Cybernetics Oriented Programming -
 /-->
 
-
-<xs:schema 
+<xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
     targetNamespace='http://www.cybop.net'
     xmlns='http://www.cybop.net'
