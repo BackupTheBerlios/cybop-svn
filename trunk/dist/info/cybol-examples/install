@@ -1,5 +1,5 @@
-examples/addition/run.cybol usr/share/doc/cybol/examples/addition
 examples/addition/startup.cybol usr/share/doc/cybol/examples/addition
+examples/addition/run.cybol usr/share/doc/cybol/examples/addition
 examples/exit/run.cybol usr/share/doc/cybol/examples/exit
 examples/exit_cybol_file/exit.cybol usr/share/doc/cybol/examples/exit_cybol_file
 examples/exit_cybol_file/run.cybol usr/share/doc/cybol/examples/exit_cybol_file

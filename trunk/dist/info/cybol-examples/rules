@@ -63,7 +63,7 @@ binary-arch: build install
 #	dh_installman doc/cyboi/cyboi.1.gz
 	dh_link
 	dh_strip
-	dh_compress
+	dh_compress -X.cybol
 	dh_fixperms
 #       dh_perl
 #       dh_python
