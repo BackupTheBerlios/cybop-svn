@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-29 22:57:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -31,20 +31,16 @@
 #include "../../computer/add.c"
 #include "../../computer/branch.c"
 #include "../../computer/build.c"
+#include "../../computer/compare.c"
 #include "../../computer/count.c"
 #include "../../computer/create.c"
 #include "../../computer/destroy.c"
-#include "../../computer/equal.c"
-#include "../../computer/greater.c"
-#include "../../computer/greater_or_equal.c"
 #include "../../computer/interrupt.c"
 #include "../../computer/loop.c"
 #include "../../computer/receive.c"
 #include "../../computer/send.c"
 #include "../../computer/set.c"
 #include "../../computer/shutdown.c"
-#include "../../computer/smaller.c"
-#include "../../computer/smaller_or_equal.c"
 #include "../../computer/startup.c"
 #include "../../globals/constants/model_constants.c"
 #include "../../globals/logger/logger.c"
@@ -166,7 +162,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            equal(p2, p3, p4, p5, p7);
+            compare_equal(p2, p3, *km, *kmc, *kms);
         }
     }
 
@@ -176,7 +172,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            smaller(p2, p3, p4, p5, p7);
+            compare_smaller(p2, p3, *km, *kmc, *kms);
         }
     }
 
@@ -186,7 +182,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            greater(p2, p3, p4, p5, p7);
+            compare_greater(p2, p3, *km, *kmc, *kms);
         }
     }
 
@@ -196,7 +192,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            smaller_or_equal(p2, p3, p4, p5, p7);
+            compare_smaller_or_equal(p2, p3, *km, *kmc, *kms);
         }
     }
 
@@ -206,7 +202,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            greater_or_equal(p2, p3, p4, p5, p7);
+            compare_greater_or_equal(p2, p3, *km, *kmc, *kms);
         }
     }
 

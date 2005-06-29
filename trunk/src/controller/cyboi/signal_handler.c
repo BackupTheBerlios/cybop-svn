@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-06-29 22:57:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -42,14 +42,14 @@
  *
  * @param p0 the abctraction
  * @param p1 the abstraction count
- * @param p2 the signal
+ * @param p2 the signal (model)
  * @param p3 the signal count
  * @param p4 the parameters (details)
  * @param p5 the parameters count
  * @param p6 the priority
  * @param p7 the signal id
  * @param p8 the shutdown flag
- * @param p9 the internals
+ * @param p9 the internals memory
  * @param p10 the direct execution flag
  */
 void handle_signal(const void* p0, const void* p1, const void* p2, const void* p3,

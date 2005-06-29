@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 22:57:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,7 +78,7 @@ void parse_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
             i = *sc;
 
             // Add string termination to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_CHARACTER, (void*) ONE_NUMBER, (void*) CHARACTER_ARRAY);
+            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_CHARACTER, (void*) ONE_INTEGER, (void*) CHARACTER_ARRAY);
 
             // The tail variable is useless here and only needed for the string
             // transformation function. If the whole string array consists of
@@ -105,7 +105,7 @@ void parse_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
             //?? to be able to take the double value?
 
             // Set double value.
-            set_array_elements(*d, (void*) DOUBLE_VALUE_INDEX, (void*) &v, (void*) ONE_NUMBER, (void*) DOUBLE_ARRAY);
+            set_array_elements(*d, (void*) DOUBLE_VALUE_INDEX, (void*) &v, (void*) ONE_INTEGER, (void*) DOUBLE_ARRAY);
 
             // Destroy temporary null-terminated string.
             destroy_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);

@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:09:54 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-29 22:57:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -108,11 +108,11 @@ void test_character_array_single_element() {
     // Create character array.
     create_array((void*) &c, (void*) &cs, (void*) CHARACTER_ARRAY);
 
-    set_character_array_elements(c, (void*) ZERO_NUMBER, (void*) LATIN_CAPITAL_LETTER_A_CHARACTER, (void*) LATIN_CAPITAL_LETTER_A_CHARACTER_COUNT);
-    set_character_array_elements(c, (void*) ONE_NUMBER, (void*) LATIN_CAPITAL_LETTER_B_CHARACTER, (void*) LATIN_CAPITAL_LETTER_B_CHARACTER_COUNT);
-    set_character_array_elements(c, (void*) TWO_NUMBER, (void*) LATIN_CAPITAL_LETTER_C_CHARACTER, (void*) LATIN_CAPITAL_LETTER_C_CHARACTER_COUNT);
-    set_character_array_elements(c, (void*) THREE_NUMBER, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) LINE_FEED_CONTROL_CHARACTER_COUNT);
-    set_character_array_elements(c, (void*) FOUR_NUMBER, (void*) NULL_CONTROL_CHARACTER, (void*) NULL_CONTROL_CHARACTER_COUNT);
+    set_character_array_elements(c, (void*) ZERO_INTEGER, (void*) LATIN_CAPITAL_LETTER_A_CHARACTER, (void*) LATIN_CAPITAL_LETTER_A_CHARACTER_COUNT);
+    set_character_array_elements(c, (void*) ONE_INTEGER, (void*) LATIN_CAPITAL_LETTER_B_CHARACTER, (void*) LATIN_CAPITAL_LETTER_B_CHARACTER_COUNT);
+    set_character_array_elements(c, (void*) TWO_INTEGER, (void*) LATIN_CAPITAL_LETTER_C_CHARACTER, (void*) LATIN_CAPITAL_LETTER_C_CHARACTER_COUNT);
+    set_character_array_elements(c, (void*) THREE_INTEGER, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) LINE_FEED_CONTROL_CHARACTER_COUNT);
+    set_character_array_elements(c, (void*) FOUR_INTEGER, (void*) NULL_CONTROL_CHARACTER, (void*) NULL_CONTROL_CHARACTER_COUNT);
 
     // Print out array contents.
     fputs((char*) c, stdout);
@@ -158,7 +158,7 @@ void test_character_array_multiple_elements() {
     int* ss = ssa;
 
     // The destination index to which to copy the source array.
-    set_character_array_elements(d, (void*) ZERO_NUMBER, (void*) s, (void*) ss);
+    set_character_array_elements(d, (void*) ZERO_INTEGER, (void*) s, (void*) ss);
 
     fputs((char*) d, stdout);
 
@@ -168,14 +168,14 @@ void test_character_array_multiple_elements() {
     int ossa[] = {14};
     int* oss = ossa;
 
-    set_character_array_elements(d, (void*) EIGHT_NUMBER, (void*) os, (void*) oss);
+    set_character_array_elements(d, (void*) EIGHT_INTEGER, (void*) os, (void*) oss);
 
     fputs((char*) d, stdout);
 
     // The remove index.
     int ri = 12;
 
-    remove_character_array_elements(d, (void*) &ds, (void*) &ri, (void*) SEVEN_NUMBER);
+    remove_character_array_elements(d, (void*) &ds, (void*) &ri, (void*) SEVEN_INTEGER);
 
     fputs((char*) d, stdout);
 
@@ -191,7 +191,7 @@ void test_character_array_multiple_elements() {
     void* r = NULL_POINTER;
 
     // Test getting a reference.
-    get_character_array_elements(d, (void*) EIGHT_NUMBER, (void*) &r);
+    get_character_array_elements(d, (void*) EIGHT_INTEGER, (void*) &r);
 
     fputs((char*) r, stdout);
 
@@ -228,7 +228,7 @@ void test_pointer_return() {
     void* r = NULL_POINTER;
 
     // Get character from character array.
-    get_array_elements(c, (void*) SIX_NUMBER, (void*) &r, (void*) CHARACTER_ARRAY);
+    get_array_elements(c, (void*) SIX_INTEGER, (void*) &r, (void*) CHARACTER_ARRAY);
 
     // Print result (character array).
     fprintf(stderr, "r: %s\n", (char*) r);
@@ -275,13 +275,13 @@ void test_pointer_array() {
 
     // Set character array in pointer array.
     // Hand over character array as reference, because pointer array is expected!
-    set_array_elements(p, (void*) ZERO_NUMBER, (void*) &c, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+    set_array_elements(p, (void*) ZERO_INTEGER, (void*) &c, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
 
     fprintf(stderr, "p[0] after set: %i\n", p[0]);
     fprintf(stderr, "p[1] after set: %i\n", p[1]);
 
     // Get character array from pointer array.
-    get_array_elements(p, (void*) ZERO_NUMBER, (void*) &r, (void*) POINTER_ARRAY);
+    get_array_elements(p, (void*) ZERO_INTEGER, (void*) &r, (void*) POINTER_ARRAY);
 
     // Print result (character array).
     fprintf(stderr, "r pointer: %i\n", *r);

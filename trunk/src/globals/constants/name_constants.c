@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-06-29 18:48:46 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-06-29 22:57:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -69,6 +69,12 @@ static const int* OUTPUT_NAME_COUNT = OUTPUT_NAME_COUNT_ARRAY;
 //
 // Compare names.
 //
+
+/** The comparison name. */
+static const char COMPARISON_NAME_ARRAY[] = {'c', 'o', 'm', 'p', 'a', 'r', 'i', 's', 'o', 'n'};
+static const char* COMPARISON_NAME = COMPARISON_NAME_ARRAY;
+static const int COMPARISON_NAME_COUNT_ARRAY[] = {10};
+static const int* COMPARISON_NAME_COUNT = COMPARISON_NAME_COUNT_ARRAY;
 
 /** The left side name. */
 static const char LEFT_SIDE_NAME_ARRAY[] = {'l', 'e', 'f', 't'};

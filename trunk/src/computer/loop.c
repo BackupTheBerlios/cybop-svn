@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-06-29 22:57:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -161,7 +161,7 @@ void loop( const void* param, const int* param_count,
                                     (void*) INTEGER_ARRAY);
                 r = 0;
                 compare_arrays( bf_dest, INTEGER_COUNT,
-                                (void*) ZERO_NUMBER, (void*) ONE_NUMBER,
+                                (void*) ZERO_INTEGER, (void*) ONE_INTEGER,
                                 &r, (void*) INTEGER_ARRAY );
 
                 if (r ==1) {

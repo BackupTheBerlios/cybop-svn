@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a compound model in memory
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 22:57:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -85,18 +85,18 @@ void create_compound(void* p0, const void* p1) {
         // CAUTION! Use ascending order, as compared to destruction!
         // The p0 parameter needs to be dereferenced since it is handed over
         // as reference, but this procedure expects a normal array.
-        set_array_elements(*c, (void*) NAMES_INDEX, (void*) &n, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(*c, (void*) NAMES_COUNTS_INDEX, (void*) &nc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(*c, (void*) NAMES_SIZES_INDEX, (void*) &ns, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(*c, (void*) ABSTRACTIONS_INDEX, (void*) &a, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(*c, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(*c, (void*) ABSTRACTIONS_SIZES_INDEX, (void*) &as, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(*c, (void*) MODELS_INDEX, (void*) &m, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(*c, (void*) MODELS_COUNTS_INDEX, (void*) &mc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(*c, (void*) MODELS_SIZES_INDEX, (void*) &ms, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(*c, (void*) DETAILS_INDEX, (void*) &d, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(*c, (void*) DETAILS_COUNTS_INDEX, (void*) &dc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        set_array_elements(*c, (void*) DETAILS_SIZES_INDEX, (void*) &ds, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+        set_array_elements(*c, (void*) NAMES_INDEX, (void*) &n, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*c, (void*) NAMES_COUNTS_INDEX, (void*) &nc, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*c, (void*) NAMES_SIZES_INDEX, (void*) &ns, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*c, (void*) ABSTRACTIONS_INDEX, (void*) &a, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*c, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*c, (void*) ABSTRACTIONS_SIZES_INDEX, (void*) &as, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*c, (void*) MODELS_INDEX, (void*) &m, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*c, (void*) MODELS_COUNTS_INDEX, (void*) &mc, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*c, (void*) MODELS_SIZES_INDEX, (void*) &ms, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*c, (void*) DETAILS_INDEX, (void*) &d, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*c, (void*) DETAILS_COUNTS_INDEX, (void*) &dc, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*c, (void*) DETAILS_SIZES_INDEX, (void*) &ds, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
 
     } else {
 
@@ -152,18 +152,18 @@ void destroy_compound(void* p0, const void* p1) {
         // CAUTION! Use descending order, as compared to creation!
         // The p0 parameter needs to be dereferenced since it is handed over
         // as reference, but this procedure expects a normal array.
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) DETAILS_SIZES_INDEX, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) DETAILS_COUNTS_INDEX, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) DETAILS_INDEX, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) MODELS_SIZES_INDEX, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) MODELS_COUNTS_INDEX, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) MODELS_INDEX, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) ABSTRACTIONS_SIZES_INDEX, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) ABSTRACTIONS_INDEX, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) NAMES_SIZES_INDEX, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) NAMES_COUNTS_INDEX, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) NAMES_INDEX, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) DETAILS_SIZES_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) DETAILS_COUNTS_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) DETAILS_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) MODELS_SIZES_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) MODELS_COUNTS_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) MODELS_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) ABSTRACTIONS_SIZES_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) ABSTRACTIONS_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) NAMES_SIZES_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) NAMES_COUNTS_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*c, (void*) COMPOUND_COUNT, (void*) NAMES_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
 
         // Destroy names, abstractions, models, details.
         // CAUTION! Do NOT hand over as reference!

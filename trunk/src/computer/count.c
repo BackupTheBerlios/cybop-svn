@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-06-29 22:57:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -209,7 +209,7 @@ void count_part( const void* param, const int* param_count,
 
             // Set the compare string
             //this is the basisname and the list separat
-            set_array_elements( compstring, (void*) ZERO_NUMBER,
+            set_array_elements( compstring, (void*) ZERO_INTEGER,
                                 *bnm, *bnmc,  (void*) CHARACTER_ARRAY);
             set_array_elements( compstring, *bnmc,
                                 LIST_SEPARATOR, LIST_SEPARATOR_COUNT,

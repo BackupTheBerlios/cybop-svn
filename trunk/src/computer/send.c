@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-06-29 22:57:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -58,11 +58,11 @@
  *
  * @param p0 the parameters
  * @param p1 the parameters count
- * @param p2 the knowledge
- * @param p3 the knowledge count
- * @param p4 the knowledge size
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
+ * @param p4 the knowledge memory size
  * @param p5 the signal id
- * @param p6 the internals
+ * @param p6 the internals memory
  */
 void send_message(const void* p0, const void* p1,
     const void* p2, const void* p3, const void* p4, const void* p5, void* p6) {

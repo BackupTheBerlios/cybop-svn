@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-26 22:33:04 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 22:57:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -33,24 +33,24 @@
 //
 
 /** The character array constant. */
-static const int CHARACTER_ARRAY_ARRAY[] = {2};
+static const int CHARACTER_ARRAY_ARRAY[] = {0};
 static const int* CHARACTER_ARRAY = CHARACTER_ARRAY_ARRAY;
-
-/** The pointer array constant. */
-static const int POINTER_ARRAY_ARRAY[] = {0};
-static const int* POINTER_ARRAY = POINTER_ARRAY_ARRAY;
 
 /** The integer array constant. */
 static const int INTEGER_ARRAY_ARRAY[] = {1};
 static const int* INTEGER_ARRAY = INTEGER_ARRAY_ARRAY;
 
-/** The unsigned long array constant. */
-static const int UNSIGNED_LONG_ARRAY_ARRAY[] = {1};
-static const int* UNSIGNED_LONG_ARRAY = UNSIGNED_LONG_ARRAY_ARRAY;
+/** The pointer array constant. */
+static const int POINTER_ARRAY_ARRAY[] = {2};
+static const int* POINTER_ARRAY = POINTER_ARRAY_ARRAY;
 
 /** The double array constant. */
 static const int DOUBLE_ARRAY_ARRAY[] = {3};
 static const int* DOUBLE_ARRAY = DOUBLE_ARRAY_ARRAY;
+
+/** The unsigned long array constant. */
+static const int UNSIGNED_LONG_ARRAY_ARRAY[] = {4};
+static const int* UNSIGNED_LONG_ARRAY = UNSIGNED_LONG_ARRAY_ARRAY;
 
 //
 // Character.

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-26 22:33:04 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-06-29 22:57:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -103,63 +103,63 @@ void destroy_internals_memory(void* p0, const void* p1) {
 
                     if (j == *KNOWLEDGE_MEMORY_INTERNAL) {
 
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                        destroy_array(p, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
 
                     } else if (j == *KNOWLEDGE_MEMORY_COUNT_INTERNAL) {
 
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                        destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
 
                     } else if (j == *KNOWLEDGE_MEMORY_SIZE_INTERNAL) {
 
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                        destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
 
                     } else if (j == *SIGNAL_MEMORY_INTERNAL) {
 
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                        destroy_array(p, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
 
                     } else if (j == *SIGNAL_MEMORY_COUNT_INTERNAL) {
 
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                        destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
 
                     } else if (j == *SIGNAL_MEMORY_SIZE_INTERNAL) {
 
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                        destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
 
                     } else if (j == *TCP_SERVER_SOCKET_INTERNAL) {
 
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                        destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
 
 //                    } else if (j == *TCP_SERVER_SOCKET_PORT_INTERNAL) {
 //
-//                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+//                        destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
 //
                     } else if (j == *TCP_SERVER_SOCKET_ACTIVE_INTERNAL) {
 
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                        destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
 
                     } else if (j == *TCP_CLIENT_SOCKETS_INTERNAL) {
 
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                        destroy_array(p, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
 
                     } else if (j == *TCP_CLIENT_SOCKETS_COUNT_INTERNAL) {
 
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                        destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
 
                     } else if (j == *TCP_CLIENT_SOCKETS_SIZE_INTERNAL) {
 
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                        destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
 
                     } else if (j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL) {
 
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                        destroy_array(p, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
 
                     } else if (j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL) {
 
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                        destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
 
                     } else if (j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL) {
 
-                        destroy_array(p, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                        destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
                     }
 
                     //?? TODO: some variables are missing here which causes memory leaks!!

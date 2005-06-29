@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-06-29 22:57:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,7 +71,7 @@ void set_string( void* source, int* source_count, int* source_size,
 
         resize_array( dest, dest_size, CHARACTER_ARRAY );
 
-        set_array_elements( *dest, (void*) ZERO_NUMBER,
+        set_array_elements( *dest, (void*) ZERO_INTEGER,
                             source, source_count,
                             (void*) CHARACTER_ARRAY);
     }

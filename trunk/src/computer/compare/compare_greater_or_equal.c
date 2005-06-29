@@ -20,19 +20,19 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-29 22:57:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPARE_GREATER_OR_EQUAL_SOURCE
 #define COMPARE_GREATER_OR_EQUAL_SOURCE
 
-#include "../globals/constants/abstraction_constants.c"
-#include "../globals/constants/boolean_constants.c"
-#include "../globals/constants/log_constants.c"
-#include "../globals/constants/structure_constants.c"
-#include "../globals/logger/logger.c"
-#include "../memory/array/array.c"
+#include "../../globals/constants/abstraction_constants.c"
+#include "../../globals/constants/boolean_constants.c"
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memory/array/array.c"
 
 /**
  * Compares if the left parameter is greater than or equal to the right parameter.
@@ -114,8 +114,8 @@ void compare_greater_or_equal(const void* p0, const void* p1, const void* p2,
                     rr = 0;
 
                     // Compare parameter abstractions.
-                    compare_arrays(p0, p1, (void*) CHARACTER_ABSTRACTION, (void*) CHARACTER_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
-                    compare_arrays(p9, p10, (void*) CHARACTER_ABSTRACTION, (void*) CHARACTER_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p0, p1, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p9, p10, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
 
                     if ((lr == 1) && (rr == 1)) {
 
@@ -123,11 +123,11 @@ void compare_greater_or_equal(const void* p0, const void* p1, const void* p2,
 
                         if (*((char*) p3) >= *((char*) p12)) {
 
-                            *rm = *TRUE_MODEL;
+                            *rm = *TRUE_BOOLEAN;
 
                         } else {
 
-                            *rm = *FALSE_MODEL;
+                            *rm = *FALSE_BOOLEAN;
                         }
                     }
 
@@ -140,8 +140,8 @@ void compare_greater_or_equal(const void* p0, const void* p1, const void* p2,
                     rr = 0;
 
                     // Compare parameter abstractions.
-                    compare_arrays(*lsa, *lsac, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
-                    compare_arrays(*rsa, *rsac, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p0, p1, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p9, p10, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
 
                     if ((lr == 1) && (rr == 1)) {
 
@@ -149,11 +149,11 @@ void compare_greater_or_equal(const void* p0, const void* p1, const void* p2,
 
                         if (*((int*) p3) >= *((int*) p12)) {
 
-                            *rm = *TRUE_MODEL;
+                            *rm = *TRUE_BOOLEAN;
 
                         } else {
 
-                            *rm = *FALSE_MODEL;
+                            *rm = *FALSE_BOOLEAN;
                         }
                     }
 
@@ -166,8 +166,8 @@ void compare_greater_or_equal(const void* p0, const void* p1, const void* p2,
                     rr = 0;
 
                     // Compare parameter abstractions.
-                    compare_arrays(*lsa, *lsac, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
-                    compare_arrays(*rsa, *rsac, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p0, p1, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &lr, (void*) CHARACTER_ARRAY);
+                    compare_arrays(p9, p10, (void*) DOUBLE_ABSTRACTION, (void*) DOUBLE_ABSTRACTION_COUNT, (void*) &rr, (void*) CHARACTER_ARRAY);
 
                     if ((lr == 1) && (rr == 1)) {
 
@@ -175,11 +175,11 @@ void compare_greater_or_equal(const void* p0, const void* p1, const void* p2,
 
                         if (*((double*) p3) >= *((double*) p12)) {
 
-                            *rm = *TRUE_MODEL;
+                            *rm = *TRUE_BOOLEAN;
 
                         } else {
 
-                            *rm = *FALSE_MODEL;
+                            *rm = *FALSE_BOOLEAN;
                         }
                     }
 

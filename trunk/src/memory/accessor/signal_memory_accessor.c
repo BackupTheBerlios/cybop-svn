@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 22:57:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -125,27 +125,27 @@ void set_signal(void* p0, void* p1, void* p2,
                                                     // created and the contents of the old array gets copied.
                                                     // Therefore, the new array reference needs to be set.
                                                     // The old array gets destroyed automatically by resize.
-                                                    set_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) a, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) ac, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(p0, (void*) SIGNALS_MODELS_INDEX, (void*) m, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(p0, (void*) SIGNALS_MODELS_COUNTS_INDEX, (void*) mc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(p0, (void*) SIGNALS_DETAILS_INDEX, (void*) d, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(p0, (void*) SIGNALS_DETAILS_COUNTS_INDEX, (void*) dc, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) p, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) id, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) a, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(p0, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) ac, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(p0, (void*) SIGNALS_MODELS_INDEX, (void*) m, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(p0, (void*) SIGNALS_MODELS_COUNTS_INDEX, (void*) mc, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(p0, (void*) SIGNALS_DETAILS_INDEX, (void*) d, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(p0, (void*) SIGNALS_DETAILS_COUNTS_INDEX, (void*) dc, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(p0, (void*) SIGNALS_PRIORITIES_INDEX, (void*) p, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(p0, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) id, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
                                                 }
 
                                                 if (i < *s) {
 
                                                     // Set abstraction, model, details, priority, identification.
-                                                    set_array_elements(*a, (void*) &i, (void*) &p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(*ac, (void*) &i, (void*) &p4, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(*m, (void*) &i, (void*) &p5, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(*mc, (void*) &i, (void*) &p6, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(*d, (void*) &i, (void*) &p7, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(*dc, (void*) &i, (void*) &p8, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(*p, (void*) &i, (void*) &p9, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                    set_array_elements(*id, (void*) &i, (void*) &p10, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*a, (void*) &i, (void*) &p3, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*ac, (void*) &i, (void*) &p4, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*m, (void*) &i, (void*) &p5, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*mc, (void*) &i, (void*) &p6, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*d, (void*) &i, (void*) &p7, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*dc, (void*) &i, (void*) &p8, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*p, (void*) &i, (void*) &p9, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                    set_array_elements(*id, (void*) &i, (void*) &p10, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
 
                                                     // Increment count.
                                                     (*c)++;
@@ -276,14 +276,14 @@ void remove_signal(void* p0, void* p1, void* p2, const void* p3) {
                                                     if (*i < *c) {
 
                                                         // Remove abstraction, model, details, priority, identification.
-                                                        remove_array_elements(*a, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                        remove_array_elements(*ac, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                        remove_array_elements(*m, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                        remove_array_elements(*mc, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                        remove_array_elements(*d, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                        remove_array_elements(*dc, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                        remove_array_elements(*p, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
-                                                        remove_array_elements(*id, p1, p3, (void*) ONE_NUMBER, (void*) POINTER_ARRAY);
+                                                        remove_array_elements(*a, p1, p3, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                        remove_array_elements(*ac, p1, p3, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                        remove_array_elements(*m, p1, p3, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                        remove_array_elements(*mc, p1, p3, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                        remove_array_elements(*d, p1, p3, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                        remove_array_elements(*dc, p1, p3, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                        remove_array_elements(*p, p1, p3, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                                                        remove_array_elements(*id, p1, p3, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
 
                                                         // Decrement count.
                                                         (*c)--;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-06-29 22:57:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -51,94 +51,97 @@
  *
  * @param p0 the parameters
  * @param p1 the parameters count
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
+ * @param p4 the knowledge memory size
  */
-void compare(const void* p0, const void* p1) {
+void compare(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4) {
 
     log_message_debug("Compare two parameters.");
 
-    // The comparison parameter abstraction.
+    // The comparison abstraction.
     void** ca = POINTER_NULL_POINTER;
     void** cac = POINTER_NULL_POINTER;
     void** cas = POINTER_NULL_POINTER;
-    // The comparison parameter model.
+    // The comparison model.
     void** cm = POINTER_NULL_POINTER;
     void** cmc = POINTER_NULL_POINTER;
     void** cms = POINTER_NULL_POINTER;
-    // The comparison parameter details.
+    // The comparison details.
     void** cd = POINTER_NULL_POINTER;
     void** cdc = POINTER_NULL_POINTER;
     void** cds = POINTER_NULL_POINTER;
 
-    // The left side parameter abstraction.
+    // The left side abstraction.
     void** lsa = POINTER_NULL_POINTER;
     void** lsac = POINTER_NULL_POINTER;
     void** lsas = POINTER_NULL_POINTER;
-    // The left side parameter model.
+    // The left side model.
     void** lsm = POINTER_NULL_POINTER;
     void** lsmc = POINTER_NULL_POINTER;
     void** lsms = POINTER_NULL_POINTER;
-    // The left side parameter details.
+    // The left side details.
     void** lsd = POINTER_NULL_POINTER;
     void** lsdc = POINTER_NULL_POINTER;
     void** lsds = POINTER_NULL_POINTER;
 
-    // The right side parameter abstraction.
+    // The right side abstraction.
     void** rsa = POINTER_NULL_POINTER;
     void** rsac = POINTER_NULL_POINTER;
     void** rsas = POINTER_NULL_POINTER;
-    // The right side parameter model.
+    // The right side model.
     void** rsm = POINTER_NULL_POINTER;
     void** rsmc = POINTER_NULL_POINTER;
     void** rsms = POINTER_NULL_POINTER;
-    // The right side parameter details.
+    // The right side details.
     void** rsd = POINTER_NULL_POINTER;
     void** rsdc = POINTER_NULL_POINTER;
     void** rsds = POINTER_NULL_POINTER;
 
-    // The result parameter abstraction.
+    // The result abstraction.
     void** ra = POINTER_NULL_POINTER;
     void** rac = POINTER_NULL_POINTER;
     void** ras = POINTER_NULL_POINTER;
-    // The result parameter model.
+    // The result model.
     void** rm = POINTER_NULL_POINTER;
     void** rmc = POINTER_NULL_POINTER;
     void** rms = POINTER_NULL_POINTER;
-    // The result parameter details.
+    // The result details.
     void** rd = POINTER_NULL_POINTER;
     void** rdc = POINTER_NULL_POINTER;
     void** rds = POINTER_NULL_POINTER;
 
-    // Get comparison parameter.
+    // Get comparison.
     get_real_compound_element_by_name(p0, p1,
         (void*) COMPARISON_NAME, (void*) COMPARISON_NAME_COUNT,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
-        *km, *kmc);
+        p2, p3);
 
-    // Get left side parameter.
+    // Get left side.
     get_real_compound_element_by_name(p0, p1,
         (void*) LEFT_SIDE_NAME, (void*) LEFT_SIDE_NAME_COUNT,
         (void*) &lsa, (void*) &lsac, (void*) &lsas,
         (void*) &lsm, (void*) &lsmc, (void*) &lsms,
         (void*) &lsd, (void*) &lsdc, (void*) &lsds,
-        *km, *kmc);
+        p2, p3);
 
-    // Get right side parameter.
+    // Get right side.
     get_real_compound_element_by_name(p0, p1,
         (void*) RIGHT_SIDE_NAME, (void*) RIGHT_SIDE_NAME_COUNT,
         (void*) &rsa, (void*) &rsac, (void*) &rsas,
         (void*) &rsm, (void*) &rsmc, (void*) &rsms,
         (void*) &rsd, (void*) &rsdc, (void*) &rsds,
-        *km, *kmc);
+        p2, p3);
 
-    // Get result parameter.
+    // Get result.
     get_real_compound_element_by_name(p0, p1,
         (void*) RESULT_NAME, (void*) RESULT_NAME_COUNT,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
         (void*) &rd, (void*) &rdc, (void*) &rds,
-        *km, *kmc);
+        p2, p3);
 
     // The comparison result.
     int r = 0;

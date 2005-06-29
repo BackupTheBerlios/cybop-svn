@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.4 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-06-29 22:57:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -202,7 +202,7 @@ void build_listname( const void* param, const int* param_count,
             resize_array(resm, *resms, CHARACTER_ARRAY );
 
             //set the result array
-            set_array_elements( *resm, (void*) ZERO_NUMBER,
+            set_array_elements( *resm, (void*) ZERO_INTEGER,
                                 *bnm, *bnmc,  (void*) CHARACTER_ARRAY);
             set_array_elements( *resm, *bnmc,
                                 LIST_SEPARATOR, LIST_SEPARATOR_COUNT,
