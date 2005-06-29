@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-29 18:48:46 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 23:59:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -114,6 +114,12 @@ static const int* OR_MODEL_COUNT = OR_MODEL_COUNT_ARRAY;
 //
 // Comparison models.
 //
+
+/** The compare model. */
+static const char COMPARE_MODEL_ARRAY[] = {'c', 'o', 'm', 'p', 'a', 'r', 'e'};
+static const char* COMPARE_MODEL = COMPARE_MODEL_ARRAY;
+static const int COMPARE_MODEL_COUNT_ARRAY[] = {7};
+static const int* COMPARE_MODEL_COUNT = COMPARE_MODEL_COUNT_ARRAY;
 
 /** The equal model. */
 static const char EQUAL_MODEL_ARRAY[] = {'e', 'q', 'u', 'a', 'l'};

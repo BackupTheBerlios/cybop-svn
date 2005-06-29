@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.4 $ $Date: 2005-06-29 22:57:32 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-06-29 23:59:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -422,12 +422,8 @@ void set_property( const void* param, const int* param_count,
             } //check null pointer property
 
         } //string abstraction for destination property
-
     }
 }
 
-
 /* SET_SOURCE */
 #endif
-
-

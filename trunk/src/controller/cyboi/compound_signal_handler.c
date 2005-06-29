@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-29 23:59:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -28,23 +28,17 @@
 #ifndef COMPOUND_SIGNAL_HANDLER_SOURCE
 #define COMPOUND_SIGNAL_HANDLER_SOURCE
 
-#include "../../controller/cyboi/signal_handler.c"
-/*??
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/model_constants.c"
+#include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memory/array/array.c"
-#include "../../memory/accessor/signal_memory_accessor.c"
-*/
 
 //
 // Forward declarations.
 //
 
 void handle_signal(const void* p0, const void* p1, const void* p2, const void* p3,
-    const void* p4, const void* p5,const  void* p6, const void* p7, void* p8, void* p9, void* p10);
+    const void* p4, const void* p5, const  void* p6, const void* p7, void* p8, void* p9, void* p10);
 
 /*??
 void loop(const void* param, const int* param_count,

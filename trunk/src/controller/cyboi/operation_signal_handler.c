@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-29 22:57:38 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 23:59:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -94,7 +94,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            copy(p2, p3, p4, p5, p7);
+//??            copy(p2, p3, p4, p5, p7);
         }
     }
 
@@ -104,7 +104,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            copy_property(p2, p3, p4, p5, p7);
+//??            copy_property(p2, p3, p4, p5, p7);
         }
     }
 
@@ -114,7 +114,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            branch(p2, p3, p4, p5, p6, p7);
+            branch(p2, p3, *km, *kmc, *kms, p4, p5, p6, p7);
         }
     }
 
@@ -124,7 +124,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            loop(p2, p3, p4, p5, p6, p7);
+            loop(p2, p3, *km, *kmc, *kms, p4, p5, p6, p7);
         }
     }
 
@@ -134,7 +134,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            count_parts(p2, p3, p7);
+//??            count_parts(p2, p3, p7);
         }
     }
 
@@ -144,7 +144,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            build_listname(p2, p3, p7);
+//??            build_listname(p2, p3, p7);
         }
     }
 
@@ -158,51 +158,11 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) EQUAL_MODEL, (void*) EQUAL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p0, p1, (void*) COMPARE_MODEL, (void*) COMPARE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            compare_equal(p2, p3, *km, *kmc, *kms);
-        }
-    }
-
-    if (r != 1) {
-
-        compare_arrays(p0, p1, (void*) SMALLER_MODEL, (void*) SMALLER_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            compare_smaller(p2, p3, *km, *kmc, *kms);
-        }
-    }
-
-    if (r != 1) {
-
-        compare_arrays(p0, p1, (void*) GREATER_MODEL, (void*) GREATER_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            compare_greater(p2, p3, *km, *kmc, *kms);
-        }
-    }
-
-    if (r != 1) {
-
-        compare_arrays(p0, p1, (void*) SMALLER_OR_EQUAL_MODEL, (void*) SMALLER_OR_EQUAL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            compare_smaller_or_equal(p2, p3, *km, *kmc, *kms);
-        }
-    }
-
-    if (r != 1) {
-
-        compare_arrays(p0, p1, (void*) GREATER_OR_EQUAL_MODEL, (void*) GREATER_OR_EQUAL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r == 1) {
-
-            compare_greater_or_equal(p2, p3, *km, *kmc, *kms);
+            compare(p2, p3, *km, *kmc, *kms);
         }
     }
 
@@ -311,7 +271,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            interrupt_service(p2, p3, *km, *kmc, *kms, p7);
+//??            interrupt_service(p2, p3, *km, *kmc, *kms, p7);
         }
     }
 
@@ -321,7 +281,7 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 
         if (r == 1) {
 
-            refresh_url(p2, p3, *km, *kmc, *kms, p5, p7);
+//??            refresh_url(p2, p3, *km, *kmc, *kms, p5, p7);
         }
     }
 

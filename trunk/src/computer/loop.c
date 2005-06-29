@@ -22,69 +22,60 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.4 $ $Date: 2005-06-29 22:57:32 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-06-29 23:59:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LOOP_SOURCE
 #define LOOP_SOURCE
 
-#include "../controller/converter/converter.c"
-#include "../controller/translator/translator.c"
-#include "../controller/cyboi/signal_handler.c"
-#include "../controller/communicator/communicator.c"
 #include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/boolean_constants.c"
 #include "../globals/constants/log_constants.c"
 #include "../globals/constants/name_constants.c"
+#include "../globals/constants/structure_constants.c"
 #include "../globals/logger/logger.c"
+#include "../memory/accessor/compound_accessor.c"
 #include "../memory/array/array.c"
-#include "../memory/creator/creator.c"
-#include "../tester/tester.c"
+
+//
+// Forward declarations.
+//
 
 void handle_signal(const void* p0, const void* p1, const void* p2, const void* p3,
-    const void* p4, const void* p5, const void* p6, const void* p7, void* p8, void* p9, void* p10);
+    const void* p4, const void* p5,const  void* p6, const void* p7, void* p8, void* p9, void* p10);
 
-/*
- * @param param the parameters
- * @param param_count the parameters count
- * @param proiority
- * @param signal_id
- * @param internal
-*/
-void loop( const void* param, const int* param_count,
-           const void* priority, const void* signal_id, void* shutdownflag,
-           void* internal )
-{
-    //Vorgehen
-    //alle paramater ausfl?sen
-    //Schleife von bis durchlaufen
-    //signal virtuell erzeugen
-    //und in der Schleifen abarbeiten
-    //nicht signal in signal memeory einf?gen, da eventuell
-    //diese Operation vor den anderen ausgef?hrt werden m?ssen
+/**
+ * Loops the program flow, depending on a flag.
+ *
+ * Expected parameters:
+ * - break: the break flag
+ * - model: the model to be executed repeatadly
+ *
+ * @param p0 the parameters
+ * @param p1 the parameters count
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
+ * @param p4 the knowledge memory size
+ * @param p5 the priority
+ * @param p6 the signal id
+ * @param p7 the shutdown flag
+ * @param p8 the internals memory
+ */
+void loop(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4,
+    const void* p5, const void* p6, void* p7, void* p8) {
 
-    // The knowledge memory.
-    void** km = POINTER_NULL_POINTER;
-    void** kmc = POINTER_NULL_POINTER;
-    void** kms = POINTER_NULL_POINTER;
+    log_message_debug("Loop program flow.");
 
-    // Get knowledge memory.
-    get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
-    get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
-    get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
-
-
-    log_message_debug("operation loop");
-
-    // The breakflag abstraction.
+    // The break flag abstraction.
     void** bfa = POINTER_NULL_POINTER;
     void** bfac = POINTER_NULL_POINTER;
     void** bfas = POINTER_NULL_POINTER;
-    // The breakflag model.
+    // The break flag model.
     void** bfm = POINTER_NULL_POINTER;
     void** bfmc = POINTER_NULL_POINTER;
     void** bfms = POINTER_NULL_POINTER;
-    // The breakflag details.
+    // The break flag details.
     void** bfd = POINTER_NULL_POINTER;
     void** bfdc = POINTER_NULL_POINTER;
     void** bfds = POINTER_NULL_POINTER;
@@ -102,26 +93,24 @@ void loop( const void* param, const int* param_count,
     void** mdc = POINTER_NULL_POINTER;
     void** mds = POINTER_NULL_POINTER;
 
-    // get the breakflag
-    get_real_compound_element_by_name( param, param_count,
-        (void*) BREAK_FLAG_NAME,
-        (void*) BREAK_FLAG_NAME_COUNT,
+    // Get break flag.
+    get_real_compound_element_by_name(p0, p1,
+        (void*) BREAK_FLAG_NAME, (void*) BREAK_FLAG_NAME_COUNT,
         (void*) &bfa, (void*) &bfac, (void*) &bfas,
         (void*) &bfm, (void*) &bfmc, (void*) &bfms,
         (void*) &bfd, (void*) &bfdc, (void*) &bfds,
-        *km, *kmc );
+        p2, p3);
 
-    // get the model
-    get_real_compound_element_by_name( param, param_count,
-        (void*) LOOP_MODEL_NAME,
-        (void*) LOOP_MODEL_NAME_COUNT,
+    // Get model.
+    get_real_compound_element_by_name(p0, p1,
+        (void*) LOOP_MODEL_NAME, (void*) LOOP_MODEL_NAME_COUNT,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
-        *km, *kmc);
+        p2, p3);
 
-    // Check breakflag.
-    if (   (bfa != POINTER_NULL_POINTER)
+    // Check break flag.
+    if ((bfa != POINTER_NULL_POINTER)
         && (bfac != POINTER_NULL_POINTER)
         && (bfas != POINTER_NULL_POINTER)
         && (bfm != POINTER_NULL_POINTER)
@@ -139,51 +128,52 @@ void loop( const void* param, const int* param_count,
         && (mms != POINTER_NULL_POINTER)
         && (md != POINTER_NULL_POINTER)
         && (mdc != POINTER_NULL_POINTER)
-        && (mds != POINTER_NULL_POINTER) )
-    {
+        && (mds != POINTER_NULL_POINTER)) {
+
+        // The comparison result.
         int r = 0;
 
-        int direct_execution_flag = 1;
+        compare_arrays(*bfa, *bfac, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        compare_arrays( *bfa, *bfac,
-                        (void*) BOOLEAN_ABSTRACTION,
-                        (void*) BOOLEAN_ABSTRACTION_COUNT,
-                        (void*) &r, (void*) CHARACTER_ARRAY);
-
-        if (r==1) {
+        if (r == 1) {
 
             while (1) {
 
-                //chek, is then value of the brakflag false
-                void* bf_dest = NULL_POINTER;
-                get_array_elements( *bfm, (void*) INTEGER_VALUE_INDEX,
-                                    (void*) &bf_dest,
-                                    (void*) INTEGER_ARRAY);
+                // The break flag.
+                void* b = NULL_POINTER;
+
+                // Get break flag.
+                get_array_elements(*bfm, (void*) INTEGER_VALUE_INDEX, (void*) &b, (void*) INTEGER_ARRAY);
+
+                // Reset comparison flag.
                 r = 0;
-                compare_arrays( bf_dest, INTEGER_COUNT,
-                                (void*) ZERO_INTEGER, (void*) ONE_INTEGER,
-                                &r, (void*) INTEGER_ARRAY );
 
-                if (r ==1) {
+                compare_arrays(b, INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) ONE_INTEGER, &r, (void*) INTEGER_ARRAY);
 
-                    //the brakflag is false
-                    //so can work the model
-                    handle_signal( *ma, *mac, *mm, *mmc, *md, *mdc,
-                                   priority, signal_id,
-                                   shutdownflag, internal,
-                                   (void*) &direct_execution_flag );
-                }
-                else {
-                    //the loop ending
+                // The direct execution flag.
+                // CAUTION! The flag has to be set to true, because otherwise,
+                // each loop cycle places a new signal in signal memory so that
+                // these would only be processed with a delay.
+                // But this is not desirable, since follow-up signals of this
+                // loop may rely on its full execution, including all cycles.
+                int x = 1;
+
+                if (r == 1) {
+
+                    // Leave the loop if the break flag is true.
                     break;
+
+                } else {
+
+                    // Send the loop model as new signal,
+                    // as long as the break flag is false (not set).
+                    handle_signal(*ma, *mac, *mm, *mmc, *md, *mdc,
+                        p5, p6, p7, p8, (void*) &x);
                 }
             }
         }
     }
-
 }
 
 /* LOOP_SOURCE */
 #endif
-
-

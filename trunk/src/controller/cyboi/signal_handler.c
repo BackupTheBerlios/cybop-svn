@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-06-29 22:57:38 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-06-29 23:59:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -31,8 +31,9 @@
 #include "../../controller/cyboi/compound_signal_handler.c"
 #include "../../controller/cyboi/operation_signal_handler.c"
 #include "../../globals/constants/abstraction_constants.c"
-#include "../../memory/array/array.c"
+#include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
+#include "../../memory/array/array.c"
 
 /**
  * Handles the signal.

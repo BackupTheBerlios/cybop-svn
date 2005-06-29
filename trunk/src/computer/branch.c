@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-29 22:57:32 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-29 23:59:08 $ $Author: christian $
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -29,6 +29,7 @@
 #define BRANCH_SOURCE
 
 #include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/boolean_constants.c"
 #include "../globals/constants/log_constants.c"
 #include "../globals/constants/name_constants.c"
 #include "../globals/constants/structure_constants.c"
@@ -47,7 +48,7 @@ void handle_signal(const void* p0, const void* p1, const void* p2, const void* p
  * Branches the program flow, depending on a flag.
  *
  * Expected parameters:
- * - criterion: breakflag
+ * - criterion: the separation flag
  * - true: the model to be executed if the criterion is true
  * - false: the model to be executed if the criterion is false
  *
@@ -60,10 +61,9 @@ void handle_signal(const void* p0, const void* p1, const void* p2, const void* p
  * @param p6 the signal id
  * @param p7 the shutdown flag
  * @param p8 the internals memory
- * @param p9 the direct execution flag
  */
 void branch(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6, void* p7, void* p8, const void* p9) {
+    const void* p5, const void* p6, void* p7, void* p8) {
 
     log_message_debug("Branch program flow.");
 
@@ -130,11 +130,12 @@ void branch(const void* p0, const void* p1, const void* p2, const void* p3, cons
         (void*) &fd, (void*) &fdc, (void*) &fds,
         p2, p3);
 
-    // Check comparison
-    if (   (ca != POINTER_NULL_POINTER)
+    if ((ca != POINTER_NULL_POINTER)
         && (cac != POINTER_NULL_POINTER)
+
         && (cas != POINTER_NULL_POINTER)
         && (cm != POINTER_NULL_POINTER)
+
         && (cmc != POINTER_NULL_POINTER)
         && (cms != POINTER_NULL_POINTER)
         && (cd != POINTER_NULL_POINTER)
@@ -181,20 +182,19 @@ void branch(const void* p0, const void* p1, const void* p2, const void* p3, cons
             compare_arrays(c, (void*) INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) ONE_INTEGER, &r, (void*) INTEGER_ARRAY);
 
             // The direct execution flag.
-            //?? Use local parameter or the one handed over as p9?
-//??            int x = 0;
+            int x = 0;
 
             if (r == 1) {
 
                 // The criterion is true.
                 handle_signal(*ta, *tac, *tm, *tmc, *td, *tdc,
-                    p5, p6, p7, p8, p9 /*??(void*) &x*/);
+                    p5, p6, p7, p8, (void*) &x);
 
             } else {
 
                 // The criterion is false.
                 handle_signal(*fa, *fac, *fm, *fmc, *fd, *fdc,
-                    p5, p6, p7, p8, p9 /*??(void*) &x*/);
+                    p5, p6, p7, p8, (void*) &x);
             }
         }
     }
