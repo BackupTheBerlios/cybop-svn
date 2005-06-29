@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-06-06 08:12:24 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -100,11 +100,11 @@ void receive_message(const void* p0, const void* p1,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
-        p2, p3 );
+        p2, p3);
 
     // Get parameters.
     get_real_compound_element_by_name(p0, p1,
-        (void*) TCP_SOCKET_BLOCKING_NAME, (void*) TCP_SOCKET_BLOCKING_NAME_COUNT,
+        (void*) BLOCKING_NAME, (void*) BLOCKING_NAME_COUNT,
         (void*) &ba, (void*) &bac, (void*) &bas,
         (void*) &bm, (void*) &bmc, (void*) &bms,
         (void*) &bd, (void*) &bdc, (void*) &bds,
@@ -115,7 +115,7 @@ void receive_message(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) TUI_MODEL, (void*) TUI_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
@@ -131,7 +131,7 @@ void receive_message(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
@@ -148,7 +148,7 @@ void receive_message(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) UNIX_SOCKET_CHANNEL, (void*) UNIX_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) UNIX_SOCKET_MODEL, (void*) UNIX_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
@@ -163,7 +163,7 @@ void receive_message(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_CHANNEL, (void*) TCP_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 

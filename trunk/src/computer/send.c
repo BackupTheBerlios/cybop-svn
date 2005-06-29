@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-06-26 22:33:03 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -35,6 +35,7 @@
 #include "../controller/translator/translator.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
+#include "../globals/constants/model_constants.c"
 #include "../globals/constants/name_constants.c"
 #include "../globals/constants/structure_constants.c"
 #include "../globals/logger/logger.c"
@@ -126,29 +127,28 @@ void send_message(const void* p0, const void* p1,
 
     // Get language.
     get_compound_element_by_name(p0, p1,
-        (void*) LANGUAGE_NAME_ABSTRACTION, (void*) LANGUAGE_NAME_ABSTRACTION_COUNT,
+        (void*) LANGUAGE_NAME, (void*) LANGUAGE_NAME_COUNT,
         (void*) &la, (void*) &lac, (void*) &las,
         (void*) &lm, (void*) &lmc, (void*) &lms,
         (void*) &ld, (void*) &ldc, (void*) &lds);
 
     // Get sender.
     get_compound_element_by_name(p0, p1,
-        (void*) SENDER_NAME_ABSTRACTION, (void*) SENDER_NAME_ABSTRACTION_COUNT,
+        (void*) SENDER_NAME, (void*) SENDER_NAME_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds);
 
-
     // Get receiver.
     get_compound_element_by_name(p0, p1,
-        (void*) RECEIVER_NAME_ABSTRACTION, (void*) RECEIVER_NAME_ABSTRACTION_COUNT,
+        (void*) RECEIVER_NAME, (void*) RECEIVER_NAME_COUNT,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
         (void*) &rd, (void*) &rdc, (void*) &rds);
 
     // Get message.
     get_real_compound_element_by_name(p0, p1,
-        (void*) MESSAGE_NAME_ABSTRACTION, (void*) MESSAGE_NAME_ABSTRACTION_COUNT,
+        (void*) MESSAGE_NAME, (void*) MESSAGE_NAME_COUNT,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
@@ -159,7 +159,7 @@ void send_message(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays((void*) *lm, (void*) *lmc, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *lm, (void*) *lmc, (void*) TUI_MODEL, (void*) TUI_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
@@ -175,7 +175,7 @@ void send_message(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays((void*) *lm, (void*) *lmc, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *lm, (void*) *lmc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
@@ -186,8 +186,8 @@ void send_message(const void* p0, const void* p1,
     if (r != 1) {
 
         compare_arrays( (void*) *lm, (void*) *lmc,
-                        (void*) SIGNAL_ABSTRACTION,
-                        (void*) SIGNAL_ABSTRACTION_COUNT,
+                        (void*) SIGNAL_MODEL,
+                        (void*) SIGNAL_MODEL_COUNT,
                         (void*) &r, (void*) CHARACTER_ARRAY );
 
         if (r == 1) {
@@ -217,7 +217,7 @@ void send_message(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays((void*) *lm, (void*) *lmc, (void*) TCP_SOCKET_CHANNEL, (void*) TCP_SOCKET_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *lm, (void*) *lmc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
@@ -327,7 +327,7 @@ void send_url_refresh( const void* p0, const void* p1,
 
     // Get language.
     get_real_compound_element_by_name(p0, p1,
-        (void*) URL_NAME_ABSTRACTION, (void*) URL_NAME_ABSTRACTION_COUNT,
+        (void*) URL_NAME, (void*) URL_NAME_COUNT,
         (void*) &urla, (void*) &urlac, (void*) &urlas,
         (void*) &urlm, (void*) &urlmc, (void*) &urlms,
         (void*) &urld, (void*) &urldc, (void*) &urlds,

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-26 22:34:18 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-06-29 18:48:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -83,10 +83,10 @@ static const int RIGHT_SIDE_NAME_COUNT_ARRAY[] = {5};
 static const int* RIGHT_SIDE_NAME_COUNT = RIGHT_SIDE_NAME_COUNT_ARRAY;
 
 /** The result name. */
-static const char COMPOSED_NAME_NAME_ARRAY[] = {'r', 'e', 's', 'u', 'l', 't'};
-static const char* COMPOSED_NAME_NAME = COMPOSED_NAME_NAME_ARRAY;
-static const int COMPOSED_NAME_NAME_COUNT_ARRAY[] = {6};
-static const int* COMPOSED_NAME_NAME_COUNT = COMPOSED_NAME_NAME_COUNT_ARRAY;
+static const char RESULT_NAME_ARRAY[] = {'r', 'e', 's', 'u', 'l', 't'};
+static const char* RESULT_NAME = RESULT_NAME_ARRAY;
+static const int RESULT_NAME_COUNT_ARRAY[] = {6};
+static const int* RESULT_NAME_COUNT = RESULT_NAME_COUNT_ARRAY;
 
 //
 // Arithmetic names.
@@ -164,11 +164,11 @@ static const char* BREAK_FLAG_NAME = BREAK_FLAG_NAME_ARRAY;
 static const int BREAK_FLAG_NAME_COUNT_ARRAY[] = {5};
 static const int* BREAK_FLAG_NAME_COUNT = BREAK_FLAG_NAME_COUNT_ARRAY;
 
-/** The model name. */
-static const char MODEL_NAME_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
-static const char* MODEL_NAME = MODEL_NAME_ARRAY;
-static const int MODEL_NAME_COUNT_ARRAY[] = {5};
-static const int* MODEL_NAME_COUNT = MODEL_NAME_COUNT_ARRAY;
+/** The loop model name. */
+static const char LOOP_MODEL_NAME_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
+static const char* LOOP_MODEL_NAME = LOOP_MODEL_NAME_ARRAY;
+static const int LOOP_MODEL_NAME_COUNT_ARRAY[] = {5};
+static const int* LOOP_MODEL_NAME_COUNT = LOOP_MODEL_NAME_COUNT_ARRAY;
 
 //
 // Build listname names.

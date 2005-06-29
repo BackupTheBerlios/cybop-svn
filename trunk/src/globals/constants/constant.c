@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-26 22:33:03 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-06-29 18:48:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -210,22 +210,6 @@ static const int* COMPOUND_ELEMENT_SEPARATOR_COUNT = FULL_STOP_CHARACTER_COUNT_A
 /** The operation parameter separator. */
 static const char* OPERATION_PARAMETER_SEPARATOR = COMMA_CHARACTER_ARRAY;
 static const int* OPERATION_PARAMETER_SEPARATOR_COUNT = COMMA_CHARACTER_COUNT_ARRAY;
-
-//
-// Boolean.
-//
-
-/** The true boolean array, pointer, count. */
-static const char TRUE_BOOLEAN_ARRAY[] = {'t', 'r', 'u', 'e'};
-static const char* TRUE_BOOLEAN = TRUE_BOOLEAN_ARRAY;
-static const int TRUE_BOOLEAN_COUNT_ARRAY[] = {4};
-static const int* TRUE_BOOLEAN_COUNT = TRUE_BOOLEAN_COUNT_ARRAY;
-
-/** The false boolean array, pointer, count. */
-static const char FALSE_BOOLEAN_ARRAY[] = {'f', 'a', 'l', 's', 'e'};
-static const char* FALSE_BOOLEAN = FALSE_BOOLEAN_ARRAY;
-static const int FALSE_BOOLEAN_COUNT_ARRAY[] = {5};
-static const int* FALSE_BOOLEAN_COUNT = FALSE_BOOLEAN_COUNT_ARRAY;
 
 //
 // Cyboi.

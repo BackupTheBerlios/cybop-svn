@@ -20,16 +20,17 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BOOLEAN_CONVERTER_SOURCE
 #define BOOLEAN_CONVERTER_SOURCE
 
-#include "../../globals/constants/constant.c"
+#include "../../globals/constants/boolean_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memory/array/array.c"
@@ -67,25 +68,25 @@ void parse_boolean(void* p0, void* p1, void* p2, const void* p3, const void* p4)
             // The comparison result.
             int r = 0;
 
-            if (*sc == *TRUE_BOOLEAN_COUNT) {
+            if (*sc == *TRUE_MODEL_COUNT) {
 
-                compare_array_elements(p3, (void*) TRUE_BOOLEAN, (void*) TRUE_BOOLEAN_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_array_elements(p3, (void*) TRUE_MODEL, (void*) TRUE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 
                     // Set boolean value to 'true'.
-                    set_array_elements(*d, (void*) INTEGER_VALUE_INDEX, (void*) ONE_NUMBER, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                    set_array_elements(*d, (void*) INTEGER_VALUE_INDEX, (void*) TRUE_BOOLEAN, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
                 }
             }
 
-            if (*sc == *FALSE_BOOLEAN_COUNT) {
+            if (*sc == *FALSE_MODEL_COUNT) {
 
-                compare_array_elements(p3, (void*) FALSE_BOOLEAN, (void*) FALSE_BOOLEAN_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_array_elements(p3, (void*) FALSE_MODEL, (void*) FALSE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
                 if (r == 1) {
 
                     // Set boolean value to 'true'.
-                    set_array_elements(*d, (void*) INTEGER_VALUE_INDEX, (void*) ZERO_NUMBER, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
+                    set_array_elements(*d, (void*) INTEGER_VALUE_INDEX, (void*) FALSE_BOOLEAN, (void*) ONE_NUMBER, (void*) INTEGER_ARRAY);
                 }
             }
 
@@ -125,7 +126,7 @@ void serialize_boolean(void* p0, void* p1, void* p2, const void* p3, const void*
             if (*s == 1) {
 
 /*??
-                set_array_elements(TRUE_BOOLEAN ...);
+                set_array_elements(TRUE_MODEL ...);
                 set_size
                 set_count
 */
@@ -133,7 +134,7 @@ void serialize_boolean(void* p0, void* p1, void* p2, const void* p3, const void*
             } else {
 
 /*??
-                set_array_elements(FALSE_BOOLEAN ...);
+                set_array_elements(FALSE_MODEL ...);
                 set_size
                 set_count
 */

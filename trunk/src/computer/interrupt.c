@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,6 +72,7 @@ void interupt_service(const void* p0, const void* p1,
     // The comparison result.
     int r = 0;
 
+/*??
     if (r != 1) {
 
         compare_arrays((void*) *sm, (void*) *smc, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
@@ -88,6 +89,7 @@ void interupt_service(const void* p0, const void* p1,
         if (r == 1) {
         }
     }
+*/
 
     if (r != 1) {
 

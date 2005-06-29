@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -437,7 +437,7 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
     // Get name name.
     get_real_compound_element_by_name(p0, p1,
-        (void*) NAME_NAME_ABSTRACTION, (void*) NAME_NAME_ABSTRACTION_COUNT,
+        (void*) NAME_NAME, (void*) NAME_NAME_COUNT,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
         (void*) &nd, (void*) &ndc, (void*) &nds,
@@ -445,7 +445,7 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
     // Get channel name.
     get_real_compound_element_by_name(p0, p1,
-        (void*) CHANNEL_NAME_ABSTRACTION, (void*) CHANNEL_NAME_ABSTRACTION_COUNT,
+        (void*) CHANNEL_NAME, (void*) CHANNEL_NAME_COUNT,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
@@ -453,7 +453,7 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
     // Get abstraction name.
     get_real_compound_element_by_name(p0, p1,
-        (void*) ABSTRACTION_NAME_ABSTRACTION, (void*) ABSTRACTION_NAME_ABSTRACTION_COUNT,
+        (void*) ABSTRACTION_NAME, (void*) ABSTRACTION_NAME_COUNT,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,
@@ -461,7 +461,7 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
     // Get model name.
     get_real_compound_element_by_name(p0, p1,
-        (void*) MODEL_NAME_ABSTRACTION, (void*) MODEL_NAME_ABSTRACTION_COUNT,
+        (void*) MODEL_NAME, (void*) MODEL_NAME_COUNT,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
@@ -469,7 +469,7 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
     // Get whole.
     get_real_compound_element_by_name(p0, p1,
-        (void*) WHOLE_NAME_ABSTRACTION, (void*) WHOLE_NAME_ABSTRACTION_COUNT,
+        (void*) WHOLE_NAME, (void*) WHOLE_NAME_COUNT,
         (void*) &wa, (void*) &wac, (void*) &was,
         (void*) &wm, (void*) &wmc, (void*) &wms,
         (void*) &wd, (void*) &wdc, (void*) &wds,

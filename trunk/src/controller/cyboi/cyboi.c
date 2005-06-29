@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-06 08:12:24 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,23 +79,23 @@ int main(int p0, char** p1) {
 
             log_message_debug("Execute CYBOI.");
 
-            // The configuration file name.
-            void** c = POINTER_NULL_POINTER;
+            // The run source name.
+            void** s = POINTER_NULL_POINTER;
 
-            // Get configuration file name.
-            get_array_elements((void*) p1, (void*) CONFIGURATION_FILE_PARAMETER_INDEX, (void*) &c, (void*) POINTER_ARRAY);
+            // Get run source name.
+            get_array_elements((void*) p1, (void*) RUN_FILE_PARAMETER_INDEX, (void*) &s, (void*) POINTER_ARRAY);
 
-            if (c != POINTER_NULL_POINTER) {
+            if (s != POINTER_NULL_POINTER) {
 
                 // CAUTION! This is a DIRTY workaround!
-                // The configuration file count (number of file path characters)
+                // The run source count (number of file path characters)
                 // is not known. There are two possibilities to determine it:
                 // 1 Force the user to give it as third command line parameter
                 // (this would be rather weird and not very user-friendly)
                 // 2 Rely on the null termination character to determine it
                 // (in this case, the strlen function can be used)
                 // Possibility 2 is applied here.
-                int cc = strlen((char*) *c);
+                int sc = strlen((char*) *s);
                 // The internals memory.
                 void* i = NULL_POINTER;
 
@@ -103,7 +103,7 @@ int main(int p0, char** p1) {
                 create(&i, (void*) INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) INTERNALS_MEMORY_ABSTRACTION, (void*) INTERNALS_MEMORY_ABSTRACTION_COUNT);
 
                 // Handle system.
-                handle_system(i, *c, &cc);
+                handle_system(i, *s, &sc);
 
                 // Destroy internals memory.
                 destroy(&i, (void*) INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) INTERNALS_MEMORY_ABSTRACTION, (void*) INTERNALS_MEMORY_ABSTRACTION_COUNT);
@@ -115,7 +115,7 @@ int main(int p0, char** p1) {
 
             } else {
 
-                log_message_debug("Could not execute CYBOI. The configuration file name is null.");
+                log_message_debug("Could not execute CYBOI. The run source name is null.");
             }
 
         } else {

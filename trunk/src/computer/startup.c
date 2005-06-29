@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -34,6 +34,7 @@
 #include "../globals/constants/channel_constants.c"
 #include "../globals/constants/constant.c"
 #include "../globals/constants/log_constants.c"
+#include "../globals/constants/model_constants.c"
 #include "../globals/constants/name_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memory/array/array.c"
@@ -93,7 +94,7 @@ void startup_service(const void* p0, const void* p1,
 
     // Get parameters.
     get_real_compound_element_by_name(p0, p1,
-        (void*) TCP_SOCKET_PORT_NAME, (void*) TCP_SOCKET_PORT_NAME_COUNT,
+        (void*) PORT_NAME, (void*) PORT_NAME_COUNT,
         (void*) &spa, (void*) &spac, (void*) &spas,
         (void*) &spm, (void*) &spmc, (void*) &spms,
         (void*) &spd, (void*) &spdc, (void*) &spds,
@@ -102,12 +103,9 @@ void startup_service(const void* p0, const void* p1,
     // The comparison result.
     int r = 0;
 
-    // Reset comparison result.
-    r = 0;
-
     if (r != 1) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_ABSTRACTION, (void*) X_WINDOW_SYSTEM_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
@@ -117,7 +115,7 @@ void startup_service(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_ABSTRACTION, (void*) TCP_SOCKET_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
@@ -137,7 +135,6 @@ void startup_service(const void* p0, const void* p1,
         }
     }
 }
-
 
 /* STARTUP_SOURCE */
 #endif

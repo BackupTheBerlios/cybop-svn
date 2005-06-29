@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -103,8 +103,8 @@ void count_part( const void* param, const int* param_count,
 
     // get the basisname
     get_real_compound_element_by_name( param, param_count,
-        (void*) COUNT_PART_BASISNAME_NAME_ABSTRACTION,
-        (void*) COUNT_PART_BASISNAME_NAME_ABSTRACTION_COUNT,
+        (void*) PART_NAME_NAME,
+        (void*) PART_NAME_NAME_COUNT,
         (void*) &bna, (void*) &bnac, (void*) &bnas,
         (void*) &bnm, (void*) &bnmc, (void*) &bnms,
         (void*) &bnd, (void*) &bndc, (void*) &bnds,
@@ -112,8 +112,8 @@ void count_part( const void* param, const int* param_count,
 
     // get the model
     get_real_compound_element_by_name( param, param_count,
-        (void*) COUNT_PART_MODEL_NAME_ABSTRACTION,
-        (void*) COUNT_PART_MODEL_NAME_ABSTRACTION_COUNT,
+        (void*) WHOLE_MODEL_NAME,
+        (void*) WHOLE_MODEL_NAME_COUNT,
         (void*) &mdla, (void*) &mdlac, (void*) &mdlas,
         (void*) &mdlm, (void*) &mdlmc, (void*) &mdlms,
         (void*) &mdld, (void*) &mdldc, (void*) &mdlds,
@@ -121,8 +121,8 @@ void count_part( const void* param, const int* param_count,
 
     // get the result
     get_real_compound_element_by_name( param, param_count,
-        (void*) COUNT_PART_RESULT_NAME_ABSTRACTION,
-        (void*) COUNT_PART_RESULT_NAME_ABSTRACTION_COUNT,
+        (void*) COUNTER_NAME,
+        (void*) COUNTER_NAME_COUNT,
         (void*) &resa, (void*) &resac, (void*) &resas,
         (void*) &resm, (void*) &resmc, (void*) &resms,
         (void*) &resd, (void*) &resdc, (void*) &resds,

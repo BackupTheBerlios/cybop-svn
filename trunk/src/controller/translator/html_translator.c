@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 18:48:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -290,7 +290,7 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
 
             get_compound_element_by_name(
                 source_detail, source_detail_count,
-                HTML_TAG_NAME_ABSTRACTION, HTML_TAG_NAME_ABSTRACTION_COUNT,
+                TAG_NAME, TAG_NAME_COUNT,
                 &tag_abstr, &tag_abstr_count, &tag_abstr_size,
                 &tag_model, &tag_model_count, &tag_model_size,
                 &tag_detail, &tag_detail_count, &tag_detail_size
@@ -298,8 +298,8 @@ void encode_html( void** dest, int* dest_count, int *dest_size,
 
             get_compound_element_by_name(
                 source_detail, source_detail_count,
-                HTML_TAG_PROPERTIES_NAME_ABSTRACTION,
-                HTML_TAG_PROPERTIES_NAME_ABSTRACTION_COUNT,
+                PROPERTY_NAME,
+                PROPERTY_NAME_COUNT,
                 &tag_prop_abstr, &tag_prop_abstr_count, &tag_prop_abstr_size,
                 &tag_prop_model, &tag_prop_model_count, &tag_prop_model_size,
                 &tag_prop_detail, &tag_prop_detail_count, &tag_prop_detail_size

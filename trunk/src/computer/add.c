@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -187,7 +187,7 @@ void add_strings( void** res, int* res_count, int* res_size,
  */
 void add(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
-
+/*??
     // The opernad 1 abstraction.
     void** op1a = POINTER_NULL_POINTER;
     void** op1ac = POINTER_NULL_POINTER;
@@ -336,115 +336,6 @@ void add(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
         }
 
     }
-/*??
-    if (p0 != NULL_POINTER) {
-
-        int* sc = (int*) p0;
-
-        if (*sc == 4) {
-
-            // Initialize persistent summand 1-, summand 2- and sum model
-            // and their counts and sizes.
-            void* ps1m = NULL_POINTER;
-            int ps1mc = 0;
-            int ps1ms = 0;
-            void* ps2m = NULL_POINTER;
-            int ps2mc = 0;
-            int ps2ms = 0;
-            void* psumm = NULL_POINTER;
-            int psummc = 0;
-            int psumms = 0;
-
-            // CAUTION! The parameter at index 0 is the logic/ operation name.
-            // Input and output parameters start with index 1.
-
-            // The loop variable.
-            int j = 1;
-
-            while (1) {
-
-                if (j >= *sc) {
-
-                    break;
-                }
-
-                // CAUTION! The parameter at index 0 is the logic/ operation name.
-                // Input and output parameters start with index 1.
-
-                if (j == 1) {
-
-                    // Get persistent summand 1 model and its count and size.
-                    get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ps1m);
-                    get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ps1mc);
-                    get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ps1ms);
-
-                } else if (j == 2) {
-
-                    // Get persistent summand 2 model and its count and size.
-                    get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &ps2m);
-                    get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ps2mc);
-                    get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &ps2ms);
-
-                } else if (j == 3) {
-
-                    // Get persistent sum model and its count and size.
-                    get_array_element(p1, (void*) &POINTER_ARRAY, (void*) &j, (void*) &psumm);
-                    get_array_element(p2, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &psummc);
-                    get_array_element(p3, (void*) &INTEGER_ARRAY, (void*) &j, (void*) &psumms);
-                }
-
-                j++;
-            }
-
-            // Initialize transient summand 1-, summand 2- and sum model, abstraction
-            // and their counts and sizes.
-            void* ts1m = NULL_POINTER;
-            int ts1mc = 0;
-            int ts1ms = 0;
-            void* ts1a = NULL_POINTER;
-            int ts1ac = 0;
-            int ts1as = 0;
-            void* ts2m = NULL_POINTER;
-            int ts2mc = 0;
-            int ts2ms = 0;
-            void* ts2a = NULL_POINTER;
-            int ts2ac = 0;
-            int ts2as = 0;
-            void* tsumm = NULL_POINTER;
-            int tsummc = 0;
-            int tsumms = 0;
-            void* tsuma = NULL_POINTER;
-            int tsumac = 0;
-            int tsumas = 0;
-
-/*??
-            // Get transient summand 1-, summand 2- and sum model
-            // and their counts and sizes.
-            get_compound_part_by_name(p4, p5, p6,
-                (void*) &ps1m, (void*) &ps1mc, (void*) &ps1ms,
-                (void*) &ts1m, (void*) &ts1mc, (void*) &ts1ms,
-                (void*) &ts1a, (void*) &ts1ac, (void*) &ts1as,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
-            get_compound_part_by_name(p4, p5, p6,
-                (void*) &ps2m, (void*) &ps2mc, (void*) &ps2ms,
-                (void*) &ts2m, (void*) &ts2mc, (void*) &ts2ms,
-                (void*) &ts2a, (void*) &ts2ac, (void*) &ts2as,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
-            get_compound_part_by_name(p4, p5, p6,
-                (void*) &psumm, (void*) &psummc, (void*) &psumms,
-                (void*) &tsumm, (void*) &tsummc, (void*) &tsumms,
-                (void*) &tsuma, (void*) &tsumac, (void*) &tsumas,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER,
-                (void*) &NULL_POINTER, (void*) &NULL_POINTER, (void*) &NULL_POINTER);
-*/
 
 /*??
             //

@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -104,8 +104,8 @@ void loop( const void* param, const int* param_count,
 
     // get the breakflag
     get_real_compound_element_by_name( param, param_count,
-        (void*) LOOP_BREAKFLAG_NAME_ABSTRACTION,
-        (void*) LOOP_BREAKFLAG_NAME_ABSTRACTION_COUNT,
+        (void*) BREAK_FLAG_NAME,
+        (void*) BREAK_FLAG_NAME_COUNT,
         (void*) &bfa, (void*) &bfac, (void*) &bfas,
         (void*) &bfm, (void*) &bfmc, (void*) &bfms,
         (void*) &bfd, (void*) &bfdc, (void*) &bfds,
@@ -113,12 +113,12 @@ void loop( const void* param, const int* param_count,
 
     // get the model
     get_real_compound_element_by_name( param, param_count,
-        (void*) LOOP_MODEL_NAME_ABSTRACTION,
-        (void*) LOOP_MODEL_NAME_ABSTRACTION_COUNT,
+        (void*) LOOP_MODEL_NAME,
+        (void*) LOOP_MODEL_NAME_COUNT,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
-        *km, *kmc );
+        *km, *kmc);
 
     // Check breakflag.
     if (   (bfa != POINTER_NULL_POINTER)

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 23:57:03 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-29 18:48:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,45 +31,45 @@
 // Digits (0 - 9).
 //
 
-/** The zero number. */
-static const int ZERO_NUMBER_ARRAY[] = {0};
-static const int* ZERO_NUMBER = ZERO_NUMBER_ARRAY;
+/** The zero integer. */
+static const int ZERO_INTEGER_ARRAY[] = {0};
+static const int* ZERO_INTEGER = ZERO_INTEGER_ARRAY;
 
-/** The one number. */
-static const int ONE_NUMBER_ARRAY[] = {1};
-static const int* ONE_NUMBER = ONE_NUMBER_ARRAY;
+/** The one integer. */
+static const int ONE_INTEGER_ARRAY[] = {1};
+static const int* ONE_INTEGER = ONE_INTEGER_ARRAY;
 
-/** The two number. */
-static const int TWO_NUMBER_ARRAY[] = {2};
-static const int* TWO_NUMBER = TWO_NUMBER_ARRAY;
+/** The two integer. */
+static const int TWO_INTEGER_ARRAY[] = {2};
+static const int* TWO_INTEGER = TWO_INTEGER_ARRAY;
 
-/** The three number. */
-static const int THREE_NUMBER_ARRAY[] = {3};
-static const int* THREE_NUMBER = THREE_NUMBER_ARRAY;
+/** The three integer. */
+static const int THREE_INTEGER_ARRAY[] = {3};
+static const int* THREE_INTEGER = THREE_INTEGER_ARRAY;
 
-/** The four number. */
-static const int FOUR_NUMBER_ARRAY[] = {4};
-static const int* FOUR_NUMBER = FOUR_NUMBER_ARRAY;
+/** The four integer. */
+static const int FOUR_INTEGER_ARRAY[] = {4};
+static const int* FOUR_INTEGER = FOUR_INTEGER_ARRAY;
 
-/** The five number. */
-static const int FIVE_NUMBER_ARRAY[] = {5};
-static const int* FIVE_NUMBER = FIVE_NUMBER_ARRAY;
+/** The five integer. */
+static const int FIVE_INTEGER_ARRAY[] = {5};
+static const int* FIVE_INTEGER = FIVE_INTEGER_ARRAY;
 
-/** The six number. */
-static const int SIX_NUMBER_ARRAY[] = {6};
-static const int* SIX_NUMBER = SIX_NUMBER_ARRAY;
+/** The six integer. */
+static const int SIX_INTEGER_ARRAY[] = {6};
+static const int* SIX_INTEGER = SIX_INTEGER_ARRAY;
 
-/** The seven number. */
-static const int SEVEN_NUMBER_ARRAY[] = {7};
-static const int* SEVEN_NUMBER = SEVEN_NUMBER_ARRAY;
+/** The seven integer. */
+static const int SEVEN_INTEGER_ARRAY[] = {7};
+static const int* SEVEN_INTEGER = SEVEN_INTEGER_ARRAY;
 
-/** The eight number. */
-static const int EIGHT_NUMBER_ARRAY[] = {8};
-static const int* EIGHT_NUMBER = EIGHT_NUMBER_ARRAY;
+/** The eight integer. */
+static const int EIGHT_INTEGER_ARRAY[] = {8};
+static const int* EIGHT_INTEGER = EIGHT_INTEGER_ARRAY;
 
-/** The nine number. */
-static const int NINE_NUMBER_ARRAY[] = {9};
-static const int* NINE_NUMBER = NINE_NUMBER_ARRAY;
+/** The nine integer. */
+static const int NINE_INTEGER_ARRAY[] = {9};
+static const int* NINE_INTEGER = NINE_INTEGER_ARRAY;
 
 /* INTEGER_CONSTANTS_SOURCE */
 #endif

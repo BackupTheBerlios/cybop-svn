@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-06 08:12:25 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -65,8 +65,6 @@ void wait(void* p0) {
     get_array_elements(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_ARRAY);
     get_array_elements(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_ARRAY);
 
-    int direct_execution_flag = 0;
-
     if (k != POINTER_NULL_POINTER) {
 
         if (kc != POINTER_NULL_POINTER) {
@@ -98,6 +96,8 @@ void wait(void* p0) {
                             int i = -1;
                             // The comparison result.
                             int r = 0;
+                            // The direct execution flag.
+                            int x = 0;
 
                             // Run endless loop checking signal memory for signals.
                             while (1) {
@@ -107,7 +107,6 @@ void wait(void* p0) {
                                     // Leave loop if the shutdown flag was set.
                                     break;
                                 }
-                                //sleep(1);
 
                                 // Get index of the top priority signal.
                                 get_highest_priority_index(*s, *sc, (void*) &i);
@@ -173,7 +172,7 @@ void wait(void* p0) {
                                                                     // Handle signal.
                                                                     //
 
-                                                                    handle_signal(*a, *ac, *m, *mc, *d, *dc, *p, *id, (void*) &f, p0, &direct_execution_flag);
+                                                                    handle_signal(*a, *ac, *m, *mc, *d, *dc, *p, *id, (void*) &f, p0, &x);
 
                                                                     // Remove signal from signal memory.
                                                                     remove_signal(*s, *sc, *ss, (void*) &i);

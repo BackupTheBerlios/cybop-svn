@@ -20,12 +20,28 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-26 22:33:03 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-06-29 18:48:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MODEL_CONSTANTS_SOURCE
 #define MODEL_CONSTANTS_SOURCE
+
+//
+// Boolean models.
+//
+
+/** The false model. */
+static const char FALSE_MODEL_ARRAY[] = {'f', 'a', 'l', 's', 'e'};
+static const char* FALSE_MODEL = FALSE_MODEL_ARRAY;
+static const int FALSE_MODEL_COUNT_ARRAY[] = {5};
+static const int* FALSE_MODEL_COUNT = FALSE_MODEL_COUNT_ARRAY;
+
+/** The true model. */
+static const char TRUE_MODEL_ARRAY[] = {'t', 'r', 'u', 'e'};
+static const char* TRUE_MODEL = TRUE_MODEL_ARRAY;
+static const int TRUE_MODEL_COUNT_ARRAY[] = {4};
+static const int* TRUE_MODEL_COUNT = TRUE_MODEL_COUNT_ARRAY;
 
 //
 // Program flow models.
@@ -217,11 +233,11 @@ static const char* INTERRUPT_MODEL = INTERRUPT_MODEL_ARRAY;
 static const int INTERRUPT_MODEL_COUNT_ARRAY[] = {9};
 static const int* INTERRUPT_MODEL_COUNT = INTERRUPT_MODEL_COUNT_ARRAY;
 
-/** The url refresh model. */
-static const char URL_REFRESH_MODEL_ARRAY[] = {'u', 'r', 'l', '_', 'r', 'e', 'f', 'r', 'e', 's', 'h'};
-static const char* URL_REFRESH_MODEL = URL_REFRESH_MODEL_ARRAY;
-static const int URL_REFRESH_MODEL_COUNT_ARRAY[] = {11};
-static const int* URL_REFRESH_MODEL_COUNT = URL_REFRESH_MODEL_COUNT_ARRAY;
+/** The refresh url model. */
+static const char REFRESH_URL_MODEL_ARRAY[] = {'r', 'e', 'f', 'r', 'e', 's', 'h', '_', 'u', 'r', 'l'};
+static const char* REFRESH_URL_MODEL = REFRESH_URL_MODEL_ARRAY;
+static const int REFRESH_URL_MODEL_COUNT_ARRAY[] = {11};
+static const int* REFRESH_URL_MODEL_COUNT = REFRESH_URL_MODEL_COUNT_ARRAY;
 
 //
 // Language models.
@@ -250,6 +266,12 @@ static const char X_WINDOW_SYSTEM_MODEL_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd',
 static const char* X_WINDOW_SYSTEM_MODEL = X_WINDOW_SYSTEM_MODEL_ARRAY;
 static const int X_WINDOW_SYSTEM_MODEL_COUNT_ARRAY[] = {15};
 static const int* X_WINDOW_SYSTEM_MODEL_COUNT = X_WINDOW_SYSTEM_MODEL_COUNT_ARRAY;
+
+/** The unix socket model. */
+static const char UNIX_SOCKET_MODEL_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'o', 'c', 'k', 'e', 't'};
+static const char* UNIX_SOCKET_MODEL = UNIX_SOCKET_MODEL_ARRAY;
+static const int UNIX_SOCKET_MODEL_COUNT_ARRAY[] = {11};
+static const int* UNIX_SOCKET_MODEL_COUNT = UNIX_SOCKET_MODEL_COUNT_ARRAY;
 
 /** The tcp socket model. */
 static const char TCP_SOCKET_MODEL_ARRAY[] = {'t', 'c', 'p', '_', 's', 'o', 'c', 'k', 'e', 't'};

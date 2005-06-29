@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -131,8 +131,8 @@ void set( const void* param, const int* param_count,
 
     // Get source.
     get_real_compound_element_by_name( param, param_count,
-        (void*) SET_SOURCE_NAME_ABSTRACTION,
-        (void*) SET_SOURCE_NAME_ABSTRACTION_COUNT,
+        (void*) SOURCE_NAME,
+        (void*) SOURCE_NAME_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
@@ -140,8 +140,8 @@ void set( const void* param, const int* param_count,
 
     // Get destination.
     get_real_compound_element_by_name( param, param_count,
-        (void*) SET_DESTINATION_NAME_ABSTRACTION,
-        (void*) SET_DESTINATION_NAME_ABSTRACTION_COUNT,
+        (void*) DESTINATION_NAME,
+        (void*) DESTINATION_NAME_COUNT,
         (void*) &da, (void*) &dac, (void*) &das,
         (void*) &dm, (void*) &dmc, (void*) &dms,
         (void*) &dd, (void*) &ddc, (void*) &dds,
@@ -292,8 +292,8 @@ void set_property( const void* param, const int* param_count,
 
     // Get source.
     get_real_compound_element_by_name( param, param_count,
-        (void*) SET_SOURCE_NAME_ABSTRACTION,
-        (void*) SET_SOURCE_NAME_ABSTRACTION_COUNT,
+        (void*) SOURCE_NAME,
+        (void*) SOURCE_NAME_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
@@ -301,8 +301,8 @@ void set_property( const void* param, const int* param_count,
 
     // Get destination.
     get_real_compound_element_by_name( param, param_count,
-        (void*) SET_DESTINATION_NAME_ABSTRACTION,
-        (void*) SET_DESTINATION_NAME_ABSTRACTION_COUNT,
+        (void*) DESTINATION_NAME,
+        (void*) DESTINATION_NAME_COUNT,
         (void*) &da, (void*) &dac, (void*) &das,
         (void*) &dm, (void*) &dmc, (void*) &dms,
         (void*) &dd, (void*) &ddc, (void*) &dds,
@@ -310,8 +310,8 @@ void set_property( const void* param, const int* param_count,
 
     // Get destination property.
     get_real_compound_element_by_name( param, param_count,
-        (void*) SET_DESTINATION_PROPERTY_NAME_ABSTRACTION,
-        (void*) SET_DESTINATION_PROPERTY_NAME_ABSTRACTION_COUNT,
+        (void*) DESTINATION_PROPERTY_NAME,
+        (void*) DESTINATION_PROPERTY_NAME_COUNT,
         (void*) &dpa, (void*) &dpac, (void*) &dpas,
         (void*) &dpm, (void*) &dpmc, (void*) &dpms,
         (void*) &dpd, (void*) &dpdc, (void*) &dpds,

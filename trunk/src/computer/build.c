@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-05 11:12:17 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -103,8 +103,8 @@ void build_listname( const void* param, const int* param_count,
 
     // get the basisname
     get_real_compound_element_by_name( param, param_count,
-        (void*) BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION,
-        (void*) BUILD_LISTNAME_BASISNAME_NAME_ABSTRACTION_COUNT,
+        (void*) BASE_NAME_NAME,
+        (void*) BASE_NAME_NAME_COUNT,
         (void*) &bna, (void*) &bnac, (void*) &bnas,
         (void*) &bnm, (void*) &bnmc, (void*) &bnms,
         (void*) &bnd, (void*) &bndc, (void*) &bnds,
@@ -112,21 +112,21 @@ void build_listname( const void* param, const int* param_count,
 
     // get the index
     get_real_compound_element_by_name( param, param_count,
-        (void*) BUILD_LISTNAME_INDEX_NAME_ABSTRACTION,
-        (void*) BUILD_LISTNAME_INDEX_NAME_ABSTRACTION_COUNT,
+        (void*) INDEX_NAME_NAME,
+        (void*) INDEX_NAME_NAME_COUNT,
         (void*) &idxa, (void*) &idxac, (void*) &idxas,
         (void*) &idxm, (void*) &idxmc, (void*) &idxms,
         (void*) &idxd, (void*) &idxdc, (void*) &idxds,
-        *km, *kmc );
+        *km, *kmc);
 
     // get the result
     get_real_compound_element_by_name( param, param_count,
-        (void*) BUILD_LISTNAME_RESULT_NAME_ABSTRACTION,
-        (void*) BUILD_LISTNAME_RESULT_NAME_ABSTRACTION_COUNT,
+        (void*) COMPOSED_NAME_NAME,
+        (void*) COMPOSED_NAME_NAME_COUNT,
         (void*) &resa, (void*) &resac, (void*) &resas,
         (void*) &resm, (void*) &resmc, (void*) &resms,
         (void*) &resd, (void*) &resdc, (void*) &resds,
-        *km, *kmc );
+        *km, *kmc);
 
     // Check basisname.
     if (   (bna != POINTER_NULL_POINTER)

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-04 23:49:50 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -109,8 +109,8 @@ void selection( const void* param, const int* param_count,
 
     // get the comarison
     get_real_compound_element_by_name( param, param_count,
-        (void*) SELECTION_COMPARISON_NAME_ABSTRACTION,
-        (void*) SELECTION_COMPARISON_NAME_ABSTRACTION_COUNT,
+        (void*) CRITERION_NAME,
+        (void*) CRITERION_NAME_COUNT,
         (void*) &compa, (void*) &compac, (void*) &compas,
         (void*) &compm, (void*) &compmc, (void*) &compms,
         (void*) &compd, (void*) &compdc, (void*) &compds,
@@ -118,17 +118,17 @@ void selection( const void* param, const int* param_count,
 
     // get the operand 2
     get_real_compound_element_by_name( param, param_count,
-        (void*) SELECTION_FALSE_MODEL_NAME_ABSTRACTION,
-        (void*) SELECTION_FALSE_MODEL_NAME_ABSTRACTION_COUNT,
+        (void*) FALSE_MODEL_NAME,
+        (void*) FALSE_MODEL_NAME_COUNT,
         (void*) &truea, (void*) &trueac, (void*) &trueas,
         (void*) &truem, (void*) &truemc, (void*) &truems,
         (void*) &trued, (void*) &truedc, (void*) &trueds,
-        *km, *kmc );
+        *km, *kmc);
 
     // get the result
     get_real_compound_element_by_name( param, param_count,
-        (void*) SELECTION_TRUE_MODEL_NAME_ABSTRACTION,
-        (void*) SELECTION_TRUE_MODEL_NAME_ABSTRACTION_COUNT,
+        (void*) TRUE_MODEL_NAME,
+        (void*) TRUE_MODEL_NAME_COUNT,
         (void*) &falsea, (void*) &falseac, (void*) &falseas,
         (void*) &falsem, (void*) &falsemc, (void*) &falsems,
         (void*) &falsed, (void*) &falsedc, (void*) &falseds,

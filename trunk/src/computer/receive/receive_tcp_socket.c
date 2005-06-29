@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-06 08:12:24 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-06-29 18:48:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -43,6 +43,7 @@
 #include "../../globals/constants/escape_code_constants.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
@@ -733,7 +734,7 @@ void set_signal_for_parameter( void* source, int* source_count,
         create_integer( &sms );
         *sms = 0;
         create_model((void*) &sm, (void*) smc, (void*) sms,
-            (void*) SET_ABSTRACTION, (void*) SET_ABSTRACTION_COUNT,
+            (void*) COPY_MODEL, (void*) COPY_MODEL_COUNT,
             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
@@ -778,8 +779,8 @@ void set_signal_for_parameter( void* source, int* source_count,
         create_integer( &pdns );
         *pdns = 0;
         create_model((void*) &pdn, (void*) pdnc, (void*) pdns,
-            (void*) SET_DESTINATION_NAME_ABSTRACTION,
-            (void*) SET_DESTINATION_NAME_ABSTRACTION_COUNT,
+            (void*) DESTINATION_NAME,
+            (void*) DESTINATION_NAME_COUNT,
             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
@@ -836,8 +837,8 @@ void set_signal_for_parameter( void* source, int* source_count,
         create_integer( &psns );
         *psns = 0;
         create_model((void*) &psn, (void*) psnc, (void*) psns,
-            (void*) SET_SOURCE_NAME_ABSTRACTION,
-            (void*) SET_SOURCE_NAME_ABSTRACTION_COUNT,
+            (void*) SOURCE_NAME,
+            (void*) SOURCE_NAME_COUNT,
             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
