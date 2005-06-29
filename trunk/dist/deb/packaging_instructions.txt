@@ -1,0 +1,75 @@
+#
+# $RCSfile: packaging_instructions.txt,v $
+#
+# Copyright (c) 2004-2005. Christian Heller and the CYBOP developers.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#
+# http://www.cybop.net
+# - Cybernetics Oriented Programming -
+#
+# Version:
+# $Revision: 1.1 $ $Date: 2005-06-29 08:59:25 $ $Author: christian $
+#
+# Authors:
+# Andreas Tille <tille@debian.org>
+# Dennis Reichenbach <dennis.reichenbach@gmx.net>
+# Christian Heller <christian.heller@tuxtax.de>
+#
+
+Hmmm, es sieht so aus, als hättest Du Deine Upstream-Tarballs schon sehr
+auf Debian-Pakete hin ausgerichtet.  Das ist vollkommen unnötig und eher
+verwirrend.  Tut doch einfach mal so, als würdet Ihr ganz normal ein
+Projekt entwickeln und tar.gz-Archive dafür bereitstellen.  Ihr seid
+die Upstream-Autoren und stellt folgendes bereit:
+
+    cybop-0.1.tar.gz
+    cybol-1.0.tar.gz
+    cyboi-0.5.tar.gz
+
+(oder was auch immer noch).  Es ist ausgesprochen unüblich und vollkommen
+unmotiviert, die Debian-typische bezeichnugsweise <name>_version.orig.tar.gz
+zu verwenden.  Soweit zu der Upstream-Arbeit.  Mehr braucht auch eigentlich
+nicht unter berlios.de zu liegen.
+
+Anschließend setzt Ihr Euren Debian-Maintainer-Hut auf.  Zunächst wird nun
+das Upstream-Archiv (ich mach's mal am Beispiel cyboi-0.5.tar.gz) umbenannt:
+
+   mv cyboi-0.5.tar.gz cyboi_0.5.orig.tar.gz
+
+Dann könnte man per dh_make ein debian/ Verzeichnis erzeugen:
+
+   tar -xzf cyboi_0.5.orig.tar.gz
+   cd cyboi-0.5
+   dh_make
+
+Dort sagt man dann multi-binary package und genau JETZT erst erfolgt das
+aufsplitten in die Pakete
+
+   cyboi, cyboi-dev, cyboi-doc, ???
+
+Diese werden alle aus einem einzigen Upstream-Archiv erzeugt.  Es ist
+schließlich ein Release (wie ich aus der Versionsnummer annehmen darf und
+es gibt überheupt keinen Grund, daß Upstream auseinanderzufrickeln).
+Mich interessiert anschließend nur das *.diff.gz und *.dsc, die Ihr
+aber auch nicht auf berlios.de ablegen braucht.  Es reicht irgendein
+web / ftp Server, wo ich mir das Zeug holen kann, zur Not auch diese
+beiden Sachen per Mail.
+
+Bitte schaut Euch UNBEDINGT Beispiele für sowas an, die es in Hülle und
+Fülle gibt und lest debian-policy und developers-reference.  So richtig
+weiß ich sonst gar nicht, was ich mit den Sachen machen soll, die Ihr
+da auf berlios.de bereitstellt.
+
