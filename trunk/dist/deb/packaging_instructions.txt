@@ -21,7 +21,7 @@
 # - Cybernetics Oriented Programming -
 #
 # Version:
-# $Revision: 1.1 $ $Date: 2005-06-29 08:59:25 $ $Author: christian $
+# $Revision: 1.2 $ $Date: 2005-07-01 16:45:40 $ $Author: christian $
 #
 # Authors:
 # Andreas Tille <tille@debian.org>
@@ -68,8 +68,27 @@ aber auch nicht auf berlios.de ablegen braucht.  Es reicht irgendein
 web / ftp Server, wo ich mir das Zeug holen kann, zur Not auch diese
 beiden Sachen per Mail.
 
+> Sollte man diese beiden nicht auch besser archivieren, zumindest im CVS?
+
+Die einzelnen Dateien im Debian-Verzeichnis könnten natürlich auch im
+CVS liegen, aber in den Upstream Tarball gehören sie eigentlich nicht.
+
+Seht Euch doch einfach mal die Quellen zu irgendeinem beliebigen
+Debian-Paket Eurer Wahl an und macht es dann so wie in dem Beispiel.
 Bitte schaut Euch UNBEDINGT Beispiele für sowas an, die es in Hülle und
 Fülle gibt und lest debian-policy und developers-reference.  So richtig
 weiß ich sonst gar nicht, was ich mit den Sachen machen soll, die Ihr
 da auf berlios.de bereitstellt.
+
+Die Quelle für ein Debian Paket besteht aus:
+
+      *.orig.tar.gz  =  Upstream Tarball
+      *.diff.gz      =  Diff mit Debian spezifischen Patches
+      *.dsc
+
+Letztere beiden werden beim Paket-Bauen automatisch erzeugt.  Diese
+drei Dateien brauche ich, nicht die Debs.
+
+> Frage: Wie fuegt man beim Debian-Paketbau einen Systempfad hinzu?
+Man schreibt ein kleines Wrapper-Skript, das man in /usr/bin legt.
 
