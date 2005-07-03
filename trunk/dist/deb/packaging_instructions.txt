@@ -1,3 +1,4 @@
+
 #
 # $RCSfile: packaging_instructions.txt,v $
 #
@@ -21,7 +22,7 @@
 # - Cybernetics Oriented Programming -
 #
 # Version:
-# $Revision: 1.2 $ $Date: 2005-07-01 16:45:40 $ $Author: christian $
+# $Revision: 1.3 $ $Date: 2005-07-03 23:09:33 $ $Author: christian $
 #
 # Authors:
 # Andreas Tille <tille@debian.org>
@@ -91,4 +92,14 @@ drei Dateien brauche ich, nicht die Debs.
 
 > Frage: Wie fuegt man beim Debian-Paketbau einen Systempfad hinzu?
 Man schreibt ein kleines Wrapper-Skript, das man in /usr/bin legt.
+
+--
+
+> Auf mentors.debian.net liegt aber kein Debian-Paket, sondern nur eine
+> tgz-Datei.
+Ja, und eine *.dsc Datei dazu.  Zum Debian-Paket kommt man durch:
+
+     dpkg-source -x *.dsc          # Packt Tarfile aus
+     cd <build-directory>
+     debuild -k<Dein_GPG_Key>      # Baut das Paket
 
