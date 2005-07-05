@@ -22,7 +22,7 @@
 # - Cybernetics Oriented Programming -
 #
 # Version:
-# $Revision: 1.3 $ $Date: 2005-07-03 23:09:33 $ $Author: christian $
+# $Revision: 1.4 $ $Date: 2005-07-05 07:16:42 $ $Author: christian $
 #
 # Authors:
 # Andreas Tille <tille@debian.org>
@@ -102,4 +102,32 @@ Ja, und eine *.dsc Datei dazu.  Zum Debian-Paket kommt man durch:
      dpkg-source -x *.dsc          # Packt Tarfile aus
      cd <build-directory>
      debuild -k<Dein_GPG_Key>      # Baut das Paket
+
+--
+
+>>> Das Debian Paket "resmedicinae-apw" funktioniert. Allerdings sind
+>>> apw.pdf und
+>>> die HTML-Seiten nach dem Entpacken noch gzipped. Wäre es nicht besser,
+>>> die
+>>> PDF-Datei und die HTML-Seiten ungezipped in das Paket zu packen? Das
+>>> Debian-Paket ist ja sowieso komprimiert.
+>>
+>> Schoen, danke fuer's Testen!
+>>
+>> Mir erscheint es fuer den Nutzer auch einfacher, die Dateien zu unzippen.
+>Das Zippen wird beim Paketbauen durch dh_compress erledigt.  Wie man das
+>für spezielle Dateien verhindert steht in der zugehörigen Manpage.
+wie Andreas schon gesagt hatte, das Zippen wird beim Paketbauen durch
+dh_compress erledigt.
+Man kann das Zippen für spezielle Dateien verhindern, in dem man z.B.,
+schreibt:
+    dh_compress -X.pdf , dadurch werden keine *.pdf Dateien komprimiert
+
+>> Ich weisz jedoch nicht genau, was Debian dazu vorschreibt.
+>Naja, es ist üblich, große Dateien in /usr/share/doc zu packen.  Seht
+>Euch ähnliche Pakete an, wie es dort gemacht wird.
+Das habe ich auch gelesen. Das debhelper Programm dh_compress packt
+alles Dateien, die ins /usr/share/doc Verzeichnis kommen und grösser als 4
+kbyte sind.
+Man kann das aber wie ober geschrieben unterbinden.
 
