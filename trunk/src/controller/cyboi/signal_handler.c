@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-06-29 23:59:10 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -33,7 +33,7 @@
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memory/array/array.c"
+#include "../../memoriser/array/array.c"
 
 /**
  * Handles the signal.

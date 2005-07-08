@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.31 $ $Date: 2005-07-08 14:00:04 $ $Author: christian $
+# @version $Revision: 1.32 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -72,6 +72,8 @@ MAIN_SOURCE = $(SRC)/controller/cyboi/cyboi.c
 # Applicator.
 APPLICATOR_SOURCES = $(wildcard $(SRC)/applicator/*.c)
 APPLICATOR_OBJECTS = $(patsubst $(SRC)/applicator/%.c,$(OBJ)/applicator/%.o,$(APPLICATOR_SOURCES))
+APPLICATOR_COMPARE_SOURCES = $(wildcard $(SRC)/applicator/compare/*.c)
+APPLICATOR_COMPARE_OBJECTS = $(patsubst $(SRC)/applicator/compare/%.c,$(OBJ)/applicator/compare/%.o,$(APPLICATOR_COMPARE_SOURCES))
 APPLICATOR_INTERRUPT_SOURCES = $(wildcard $(SRC)/applicator/interrupt/*.c)
 APPLICATOR_INTERRUPT_OBJECTS = $(patsubst $(SRC)/applicator/interrupt/%.c,$(OBJ)/applicator/interrupt/%.o,$(APPLICATOR_INTERRUPT_SOURCES))
 APPLICATOR_RECEIVE_SOURCES = $(wildcard $(SRC)/applicator/receive/*.c)
@@ -103,23 +105,17 @@ GLOBALS_LOGGER_OBJECTS = $(patsubst $(SRC)/globals/logger/%.c,$(OBJ)/globals/log
 GLOBALS_VARIABLES_SOURCES = $(wildcard $(SRC)/globals/variables/*.c)
 GLOBALS_VARIABLES_OBJECTS = $(patsubst $(SRC)/globals/variables/%.c,$(OBJ)/globals/variables/%.o,$(GLOBALS_VARIABLES_SOURCES))
 
-# Memory.
-MEMORY_ACCESSOR_SOURCES = $(wildcard $(SRC)/memory/accessor/*.c)
-MEMORY_ACCESSOR_OBJECTS = $(patsubst $(SRC)/memory/accessor/%.c,$(OBJ)/memory/accessor/%.o,$(MEMORY_ACCESSOR_SOURCES))
-MEMORY_ARRAY_SOURCES = $(wildcard $(SRC)/memory/array/*.c)
-MEMORY_ARRAY_OBJECTS = $(patsubst $(SRC)/memory/array/%.c,$(OBJ)/memory/array/%.o,$(MEMORY_ARRAY_SOURCES))
-MEMORY_CREATOR_SOURCES = $(wildcard $(SRC)/memory/creator/*.c)
-MEMORY_CREATOR_OBJECTS = $(patsubst $(SRC)/memory/creator/%.c,$(OBJ)/memory/creator/%.o,$(MEMORY_CREATOR_SOURCES))
+# Memoriser.
+MEMORISER_ACCESSOR_SOURCES = $(wildcard $(SRC)/memoriser/accessor/*.c)
+MEMORISER_ACCESSOR_OBJECTS = $(patsubst $(SRC)/memoriser/accessor/%.c,$(OBJ)/memoriser/accessor/%.o,$(MEMORISER_ACCESSOR_SOURCES))
+MEMORISER_ARRAY_SOURCES = $(wildcard $(SRC)/memoriser/array/*.c)
+MEMORISER_ARRAY_OBJECTS = $(patsubst $(SRC)/memoriser/array/%.c,$(OBJ)/memoriser/array/%.o,$(MEMORISER_ARRAY_SOURCES))
+MEMORISER_CREATOR_SOURCES = $(wildcard $(SRC)/memoriser/creator/*.c)
+MEMORISER_CREATOR_OBJECTS = $(patsubst $(SRC)/memoriser/creator/%.c,$(OBJ)/memoriser/creator/%.o,$(MEMORISER_CREATOR_SOURCES))
 
 # Tester.
 TESTER_SOURCES = $(wildcard $(SRC)/tester/*.c)
 TESTER_OBJECTS = $(patsubst $(SRC)/tester/%.c,$(OBJ)/tester/%.o,$(TESTER_SOURCES))
-
-# OLD stuff to be deleted!
-SOCKET_SOURCES = $(wildcard $(SRC)/socket/*.c)
-SOCKET_OBJECTS = $(patsubst $(SRC)/socket/%.c,$(OBJ)/socket/%.o,$(SOCKET_SOURCES))
-WEB_SOURCES = $(wildcard $(SRC)/web/*.c)
-WEB_OBJECTS = $(patsubst $(SRC)/web/%.c,$(OBJ)/web/%.o,$(WEB_SOURCES))
 
 #
 # Compiles all cyboi source files.
@@ -139,6 +135,7 @@ WEB_OBJECTS = $(patsubst $(SRC)/web/%.c,$(OBJ)/web/%.o,$(WEB_SOURCES))
 #
 all: create \
 	$(APPLICATOR_OBJECTS) \
+	$(APPLICATOR_COMPARE_OBJECTS) \
 	$(APPLICATOR_INTERRUPT_OBJECTS) \
 	$(APPLICATOR_RECEIVE_OBJECTS) \
 	$(APPLICATOR_SEND_OBJECTS) \
@@ -152,12 +149,10 @@ all: create \
 	$(GLOBALS_CONSTANTS_OBJECTS) \
 	$(GLOBALS_LOGGER_OBJECTS) \
 	$(GLOBALS_VARIABLES_OBJECTS) \
-	$(MEMORY_ACCESSOR_OBJECTS) \
-	$(MEMORY_ARRAY_OBJECTS) \
-	$(MEMORY_CREATOR_OBJECTS) \
+	$(MEMORISER_ACCESSOR_OBJECTS) \
+	$(MEMORISER_ARRAY_OBJECTS) \
+	$(MEMORISER_CREATOR_OBJECTS) \
 	$(TESTER_OBJECTS) \
-	$(SOCKET_OBJECTS) \
-	$(WEB_OBJECTS) \
 # Compile source files.
 	$(COMPILER) -c $(COMPILER_FLAGS) $(SRC)/controller/cyboi/cyboi.c \
 		-o $(OBJ)/controller/cyboi/cyboi.o
@@ -176,6 +171,7 @@ all: create \
 create:
 	-cd ..; mkdir obj; mkdir bin
 	-cd $(OBJ); mkdir applicator
+	-cd $(OBJ); mkdir applicator/compare
 	-cd $(OBJ); mkdir applicator/interrupt
 	-cd $(OBJ); mkdir applicator/receive
 	-cd $(OBJ); mkdir applicator/send
@@ -191,18 +187,19 @@ create:
 	-cd $(OBJ); mkdir globals/constants
 	-cd $(OBJ); mkdir globals/logger
 	-cd $(OBJ); mkdir globals/variables
-	-cd $(OBJ); mkdir memory
-	-cd $(OBJ); mkdir memory/accessor
-	-cd $(OBJ); mkdir memory/array
-	-cd $(OBJ); mkdir memory/creator
+	-cd $(OBJ); mkdir memoriser
+	-cd $(OBJ); mkdir memoriser/accessor
+	-cd $(OBJ); mkdir memoriser/array
+	-cd $(OBJ); mkdir memoriser/creator
 	-cd $(OBJ); mkdir tester
-	-cd $(OBJ); mkdir socket
-	-cd $(OBJ); mkdir web
 
 #$(OBJ)/%.o: $(SRC)/%.c
 #       $(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/applicator/%.o: $(SRC)/applicator/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/applicator/compare/%.o: $(SRC)/applicator/compare/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/applicator/interrupt/%.o: $(SRC)/applicator/interrupt/%.c
@@ -244,22 +241,16 @@ $(OBJ)/globals/logger/%.o: $(SRC)/globals/logger/%.c
 $(OBJ)/globals/variables/%.o: $(SRC)/globals/variables/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/memory/accessor/%.o: $(SRC)/memory/accessor/%.c
+$(OBJ)/memoriser/accessor/%.o: $(SRC)/memoriser/accessor/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/memory/array/%.o: $(SRC)/memory/array/%.c
+$(OBJ)/memoriser/array/%.o: $(SRC)/memoriser/array/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/memory/creator/%.o: $(SRC)/memory/creator/%.c
+$(OBJ)/memoriser/creator/%.o: $(SRC)/memoriser/creator/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/tester/%.o: $(SRC)/tester/%.c
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
-
-$(OBJ)/socket/%.o: $(SRC)/socket/%.c
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
-
-$(OBJ)/web/%.o: $(SRC)/web/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 #

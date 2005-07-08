@@ -24,7 +24,7 @@
  * - parse an xml stream into an xml model
  * - serialize an xml model into an xml stream
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-29 22:57:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,9 +37,9 @@
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memory/creator/integer_creator.c"
-#include "../../memory/creator/xml_node_creator.c"
-#include "../../memory/creator/xml_property_creator.c"
+#include "../../memoriser/creator/integer_creator.c"
+#include "../../memoriser/creator/xml_node_creator.c"
+#include "../../memoriser/creator/xml_property_creator.c"
 
 //
 // Xml comment tag.

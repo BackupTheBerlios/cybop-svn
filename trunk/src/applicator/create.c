@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-08 13:47:18 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,8 +37,8 @@
 #include "../globals/constants/log_constants.c"
 #include "../globals/constants/name_constants.c"
 #include "../globals/logger/logger.c"
-#include "../memory/array/array.c"
-#include "../memory/creator/creator.c"
+#include "../memoriser/array/array.c"
+#include "../memoriser/creator/creator.c"
 #include "../tester/tester.c"
 
 /**

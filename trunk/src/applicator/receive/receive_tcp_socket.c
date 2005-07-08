@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-08 13:48:18 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -47,11 +47,11 @@
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
-#include "../../memory/accessor/compound_accessor.c"
-#include "../../memory/accessor/internals_memory_accessor.c"
-#include "../../memory/accessor/signal_memory_accessor.c"
-#include "../../memory/array/array.c"
-#include "../../memory/creator/creator.c"
+#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../memoriser/accessor/internals_memory_accessor.c"
+#include "../../memoriser/accessor/signal_memory_accessor.c"
+#include "../../memoriser/array/array.c"
+#include "../../memoriser/creator/creator.c"
 
 //
 // Forward declarations.

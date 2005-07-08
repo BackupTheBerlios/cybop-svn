@@ -24,7 +24,7 @@
  * - receive data into a byte array
  * - send data from a byte array
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:17 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,7 +39,7 @@
 #include "../../globals/constants/channel_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memory/array/array.c"
+#include "../../memoriser/array/array.c"
 
 /**
  * Receives a stream according to the given communication channel type

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-06-29 22:57:36 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,8 +33,8 @@
 #include "../../globals/constants/model_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memory/array/array.c"
-#include "../../memory/creator/integer_creator.c"
+#include "../../memoriser/array/array.c"
+#include "../../memoriser/creator/integer_creator.c"
 
 //
 // A boolean can have just one of the two values: TRUE or FALSE

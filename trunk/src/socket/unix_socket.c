@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.18 $ $Date: 2005-06-29 22:57:39 $ $Author: christian $
+ * @version $Revision: 1.19 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -33,7 +33,7 @@
 #include "../globals/constants/constant.c"
 #include "../globals/constants/integer_constants.c"
 #include "../globals/variables/variables.c"
-#include "../memory/accessor/compound_accessor.c"
+#include "../memoriser/accessor/compound_accessor.c"
 
 /**
  * Creates the unix server socket.

@@ -20,7 +20,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.6 $ $Date: 2005-07-08 15:45:14 $ $Author: christian $
+# @version $Revision: 1.7 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -37,16 +37,15 @@ main parts, which are listed together with their names in CYBOI, below:
 ------------------------------------------------------------------------
 von Neumann                         | CYBOI
 ------------------------------------------------------------------------
-Memory                              | memory
-Control Unit                        | controller
-Algorithmic Logic Unit (ALU)        | applicator
+Control Unit                        | controller (coordinates flow)
+Memory                              | memoriser (contains states)
+Algorithmic Logic Unit (ALU)        | applicator (contains logic)
 ------------------------------------------------------------------------
 
 The logic operations provided by the applicator serve as interface to
 CYBOL. In other words, CYBOL knowledge templates may only use operations
 offered by the applicator. The names of files containing an operation
-are VERBS. Other, internally used files of CYBOI carry a NOUN as their
-name.
+are VERBS. Internally used files of CYBOI carry a NOUN as their name.
 
 
 Overview

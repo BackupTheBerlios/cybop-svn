@@ -49,7 +49,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-08 15:45:14 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,11 +59,11 @@
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memory/array/character_array.c"
-#include "../../memory/array/double_array.c"
-#include "../../memory/array/integer_array.c"
-#include "../../memory/array/pointer_array.c"
-#include "../../memory/array/unsigned_long_array.c"
+#include "../../memoriser/array/character_array.c"
+#include "../../memoriser/array/double_array.c"
+#include "../../memoriser/array/integer_array.c"
+#include "../../memoriser/array/pointer_array.c"
+#include "../../memoriser/array/unsigned_long_array.c"
 
 /**
  * Creates the array.

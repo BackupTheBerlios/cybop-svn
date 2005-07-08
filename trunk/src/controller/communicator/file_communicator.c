@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-29 22:57:34 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,7 +38,7 @@
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
-#include "../../memory/array/array.c"
+#include "../../memoriser/array/array.c"
 
 /**
  * Receives a file stream and writes it into a byte array.

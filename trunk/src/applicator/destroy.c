@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-08 13:47:18 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,7 +33,7 @@
 #include "../globals/constants/log_constants.c"
 #include "../globals/constants/name_constants.c"
 #include "../globals/logger/logger.c"
-#include "../memory/array/array.c"
+#include "../memoriser/array/array.c"
 
 void destroy_model( void** model, void* model_count, void* model_size,
                     void* model_abstr, void* model_abstr_count );
@@ -102,7 +102,7 @@ void destroy_primitive_model( void** model, void* model_count, void* model_size,
 void destroy_compound_model( void** model, void* model_count, void* model_size,
                              void* model_abstr, void* model_abstr_count)
 {
-    //das gesamte Compound durchgehen und für jedes Element im Compound wieder
+    //das gesamte Compound durchgehen und f?r jedes Element im Compound wieder
     //destroy model aufrufen
 
     if (    (model != NULL_POINTER)

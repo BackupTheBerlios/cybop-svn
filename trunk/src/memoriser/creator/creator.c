@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-08 15:45:14 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,19 +34,19 @@
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memory/array/array.c"
-#include "../../memory/creator/complex_creator.c"
-#include "../../memory/creator/compound_creator.c"
-#include "../../memory/creator/double_creator.c"
-#include "../../memory/creator/fraction_creator.c"
-#include "../../memory/creator/integer_creator.c"
-#include "../../memory/creator/internals_memory_creator.c"
-#include "../../memory/creator/signal_memory_creator.c"
-#include "../../memory/creator/string_creator.c"
-#include "../../memory/creator/time_creator.c"
-#include "../../memory/creator/vector_creator.c"
-#include "../../memory/creator/xml_node_creator.c"
-#include "../../memory/creator/xml_property_creator.c"
+#include "../../memoriser/array/array.c"
+#include "../../memoriser/creator/complex_creator.c"
+#include "../../memoriser/creator/compound_creator.c"
+#include "../../memoriser/creator/double_creator.c"
+#include "../../memoriser/creator/fraction_creator.c"
+#include "../../memoriser/creator/integer_creator.c"
+#include "../../memoriser/creator/internals_memory_creator.c"
+#include "../../memoriser/creator/signal_memory_creator.c"
+#include "../../memoriser/creator/string_creator.c"
+#include "../../memoriser/creator/time_creator.c"
+#include "../../memoriser/creator/vector_creator.c"
+#include "../../memoriser/creator/xml_node_creator.c"
+#include "../../memoriser/creator/xml_property_creator.c"
 
 /**
  * Creates the model.
