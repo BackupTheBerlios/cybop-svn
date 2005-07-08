@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.30 $ $Date: 2005-06-05 11:12:17 $ $Author: christian $
+# @version $Revision: 1.31 $ $Date: 2005-07-08 14:00:04 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -69,21 +69,21 @@ MAIN_SOURCE = $(SRC)/controller/cyboi/cyboi.c
 #ROOT_SOURCES = $(wildcard $(SRC)/*.c)
 #ROOT_OBJECTS = $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(ROOT_SOURCES))
 
-# Computer.
-COMPUTER_SOURCES = $(wildcard $(SRC)/computer/*.c)
-COMPUTER_OBJECTS = $(patsubst $(SRC)/computer/%.c,$(OBJ)/computer/%.o,$(COMPUTER_SOURCES))
-COMPUTER_INTERRUPT_SOURCES = $(wildcard $(SRC)/computer/interrupt/*.c)
-COMPUTER_INTERRUPT_OBJECTS = $(patsubst $(SRC)/computer/interrupt/%.c,$(OBJ)/computer/interrupt/%.o,$(COMPUTER_INTERRUPT_SOURCES))
-COMPUTER_RECEIVE_SOURCES = $(wildcard $(SRC)/computer/receive/*.c)
-COMPUTER_RECEIVE_OBJECTS = $(patsubst $(SRC)/computer/receive/%.c,$(OBJ)/computer/receive/%.o,$(COMPUTER_RECEIVE_SOURCES))
-COMPUTER_SEND_SOURCES = $(wildcard $(SRC)/computer/send/*.c)
-COMPUTER_SEND_OBJECTS = $(patsubst $(SRC)/computer/send/%.c,$(OBJ)/computer/send/%.o,$(COMPUTER_SEND_SOURCES))
-COMPUTER_SHUTDOWN_SOURCES = $(wildcard $(SRC)/computer/shutdown/*.c)
-COMPUTER_SHUTDOWN_OBJECTS = $(patsubst $(SRC)/computer/shutdown/%.c,$(OBJ)/computer/shutdown/%.o,$(COMPUTER_SHUTDOWN_SOURCES))
-COMPUTER_STARTUP_SOURCES = $(wildcard $(SRC)/computer/startup/*.c)
-COMPUTER_STARTUP_OBJECTS = $(patsubst $(SRC)/computer/startup/%.c,$(OBJ)/computer/startup/%.o,$(COMPUTER_STARTUP_SOURCES))
-COMPUTER_SUSPEND_SOURCES = $(wildcard $(SRC)/computer/suspend/*.c)
-COMPUTER_SUSPEND_OBJECTS = $(patsubst $(SRC)/computer/suspend/%.c,$(OBJ)/computer/suspend/%.o,$(COMPUTER_SUSPEND_SOURCES))
+# Applicator.
+APPLICATOR_SOURCES = $(wildcard $(SRC)/applicator/*.c)
+APPLICATOR_OBJECTS = $(patsubst $(SRC)/applicator/%.c,$(OBJ)/applicator/%.o,$(APPLICATOR_SOURCES))
+APPLICATOR_INTERRUPT_SOURCES = $(wildcard $(SRC)/applicator/interrupt/*.c)
+APPLICATOR_INTERRUPT_OBJECTS = $(patsubst $(SRC)/applicator/interrupt/%.c,$(OBJ)/applicator/interrupt/%.o,$(APPLICATOR_INTERRUPT_SOURCES))
+APPLICATOR_RECEIVE_SOURCES = $(wildcard $(SRC)/applicator/receive/*.c)
+APPLICATOR_RECEIVE_OBJECTS = $(patsubst $(SRC)/applicator/receive/%.c,$(OBJ)/applicator/receive/%.o,$(APPLICATOR_RECEIVE_SOURCES))
+APPLICATOR_SEND_SOURCES = $(wildcard $(SRC)/applicator/send/*.c)
+APPLICATOR_SEND_OBJECTS = $(patsubst $(SRC)/applicator/send/%.c,$(OBJ)/applicator/send/%.o,$(APPLICATOR_SEND_SOURCES))
+APPLICATOR_SHUTDOWN_SOURCES = $(wildcard $(SRC)/applicator/shutdown/*.c)
+APPLICATOR_SHUTDOWN_OBJECTS = $(patsubst $(SRC)/applicator/shutdown/%.c,$(OBJ)/applicator/shutdown/%.o,$(APPLICATOR_SHUTDOWN_SOURCES))
+APPLICATOR_STARTUP_SOURCES = $(wildcard $(SRC)/applicator/startup/*.c)
+APPLICATOR_STARTUP_OBJECTS = $(patsubst $(SRC)/applicator/startup/%.c,$(OBJ)/applicator/startup/%.o,$(APPLICATOR_STARTUP_SOURCES))
+APPLICATOR_SUSPEND_SOURCES = $(wildcard $(SRC)/applicator/suspend/*.c)
+APPLICATOR_SUSPEND_OBJECTS = $(patsubst $(SRC)/applicator/suspend/%.c,$(OBJ)/applicator/suspend/%.o,$(APPLICATOR_SUSPEND_SOURCES))
 
 # Controller.
 CONTROLLER_COMMUNICATOR_SOURCES = $(wildcard $(SRC)/controller/communicator/*.c)
@@ -131,20 +131,20 @@ WEB_OBJECTS = $(patsubst $(SRC)/web/%.c,$(OBJ)/web/%.o,$(WEB_SOURCES))
 # Do NOT add a "$@" at the end!
 # Otherwise, a compiler error will occur, because "make $@" is already used internally.
 #
-#	$(COMPILER) -I /usr/X11R6/include -L /usr/X11R6/lib $(OBJ)/cyboi.o -o $(BIN)/$(BINARY)
+#       $(COMPILER) -I /usr/X11R6/include -L /usr/X11R6/lib $(OBJ)/cyboi.o -o $(BIN)/$(BINARY)
 #
-#all: create $(ACCESSOR_OBJECTS) $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CREATOR_OBJECTS) $(CYBOI_OBJECTS) $(CONSTANTS_OBJECTS) $(LOGGER_OBJECTS) $(COMPUTER_OBJECTS) $(CONVERTER_OBJECTS) $(SIGNAL_OBJECTS) $(SOCKET_OBJECTS) $(STATE_OBJECTS) $(TESTER_OBJECTS) $(TRANSLATOR_OBJECTS) $(X_WINDOWS_OBJECTS)
-#	$(COMPILER) -L/usr/X11R6/lib -L/usr/lib \
-#		-o $(BIN)/$(BINARY) $(OBJ)/cyboi/cyboi.o -lX11 -lxml2
+#all: create $(ACCESSOR_OBJECTS) $(ARRAY_OBJECTS) $(COMMUNICATOR_OBJECTS) $(CREATOR_OBJECTS) $(CYBOI_OBJECTS) $(CONSTANTS_OBJECTS) $(LOGGER_OBJECTS) $(APPLICATOR_OBJECTS) $(CONVERTER_OBJECTS) $(SIGNAL_OBJECTS) $(SOCKET_OBJECTS) $(STATE_OBJECTS) $(TESTER_OBJECTS) $(TRANSLATOR_OBJECTS) $(X_WINDOWS_OBJECTS)
+#       $(COMPILER) -L/usr/X11R6/lib -L/usr/lib \
+#               -o $(BIN)/$(BINARY) $(OBJ)/cyboi/cyboi.o -lX11 -lxml2
 #
 all: create \
-	$(COMPUTER_OBJECTS) \
-	$(COMPUTER_INTERRUPT_OBJECTS) \
-	$(COMPUTER_RECEIVE_OBJECTS) \
-	$(COMPUTER_SEND_OBJECTS) \
-	$(COMPUTER_SHUTDOWN_OBJECTS) \
-	$(COMPUTER_STARTUP_OBJECTS) \
-	$(COMPUTER_SUSPEND_OBJECTS) \
+	$(APPLICATOR_OBJECTS) \
+	$(APPLICATOR_INTERRUPT_OBJECTS) \
+	$(APPLICATOR_RECEIVE_OBJECTS) \
+	$(APPLICATOR_SEND_OBJECTS) \
+	$(APPLICATOR_SHUTDOWN_OBJECTS) \
+	$(APPLICATOR_STARTUP_OBJECTS) \
+	$(APPLICATOR_SUSPEND_OBJECTS) \
 	$(CONTROLLER_COMMUNICATOR_OBJECTS) \
 	$(CONTROLLER_CONVERTER_OBJECTS) \
 	$(CONTROLLER_CYBOI_OBJECTS) \
@@ -175,13 +175,13 @@ all: create \
 #
 create:
 	-cd ..; mkdir obj; mkdir bin
-	-cd $(OBJ); mkdir computer
-	-cd $(OBJ); mkdir computer/interrupt
-	-cd $(OBJ); mkdir computer/receive
-	-cd $(OBJ); mkdir computer/send
-	-cd $(OBJ); mkdir computer/shutdown
-	-cd $(OBJ); mkdir computer/startup
-	-cd $(OBJ); mkdir computer/suspend
+	-cd $(OBJ); mkdir applicator
+	-cd $(OBJ); mkdir applicator/interrupt
+	-cd $(OBJ); mkdir applicator/receive
+	-cd $(OBJ); mkdir applicator/send
+	-cd $(OBJ); mkdir applicator/shutdown
+	-cd $(OBJ); mkdir applicator/startup
+	-cd $(OBJ); mkdir applicator/suspend
 	-cd $(OBJ); mkdir controller
 	-cd $(OBJ); mkdir controller/communicator
 	-cd $(OBJ); mkdir controller/converter
@@ -200,27 +200,27 @@ create:
 	-cd $(OBJ); mkdir web
 
 #$(OBJ)/%.o: $(SRC)/%.c
-#	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+#       $(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/computer/%.o: $(SRC)/computer/%.c
+$(OBJ)/applicator/%.o: $(SRC)/applicator/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/computer/interrupt/%.o: $(SRC)/computer/interrupt/%.c
+$(OBJ)/applicator/interrupt/%.o: $(SRC)/applicator/interrupt/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/computer/receive/%.o: $(SRC)/computer/receive/%.c
+$(OBJ)/applicator/receive/%.o: $(SRC)/applicator/receive/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/computer/send/%.o: $(SRC)/computer/send/%.c
+$(OBJ)/applicator/send/%.o: $(SRC)/applicator/send/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/computer/shutdown/%.o: $(SRC)/computer/shutdown/%.c
+$(OBJ)/applicator/shutdown/%.o: $(SRC)/applicator/shutdown/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/computer/startup/%.o: $(SRC)/computer/startup/%.c
+$(OBJ)/applicator/startup/%.o: $(SRC)/applicator/startup/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/computer/suspend/%.o: $(SRC)/computer/suspend/%.c
+$(OBJ)/applicator/suspend/%.o: $(SRC)/applicator/suspend/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/controller/communicator/%.o: $(SRC)/controller/communicator/%.c

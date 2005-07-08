@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-08 13:47:18 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-08 14:00:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -28,8 +28,8 @@
 #ifndef SHUTDOWN_SOURCE
 #define SHUTDOWN_SOURCE
 
-#include "../computer/shutdown/shutdown_tcp_socket.c"
-#include "../computer/shutdown/shutdown_x_window_system.c"
+#include "../applicator/shutdown/shutdown_tcp_socket.c"
+#include "../applicator/shutdown/shutdown_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/log_constants.c"
 #include "../globals/constants/model_constants.c"

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-08 13:47:18 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-08 14:00:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -28,8 +28,8 @@
 #ifndef STARTUP_SOURCE
 #define STARTUP_SOURCE
 
-#include "../computer/startup/startup_tcp_socket.c"
-#include "../computer/startup/startup_x_window_system.c"
+#include "../applicator/startup/startup_tcp_socket.c"
+#include "../applicator/startup/startup_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
 #include "../globals/constants/constant.c"

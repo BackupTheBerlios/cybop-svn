@@ -20,14 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-08 13:47:18 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-08 14:00:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef RECEIVE_SOURCE
 #define RECEIVE_SOURCE
 
-#include "../computer/receive/receive_tcp_socket.c"
+#include "../applicator/receive/receive_tcp_socket.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
 #include "../globals/constants/name_constants.c"

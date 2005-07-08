@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-08 13:47:18 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-08 14:00:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -28,9 +28,9 @@
 #ifndef SEND_SOURCE
 #define SEND_SOURCE
 
-#include "../computer/send/send_linux_console.c"
-//?? #include "../computer/send/send_tcp_socket.c"
-#include "../computer/send/send_x_window_system.c"
+#include "../applicator/send/send_linux_console.c"
+//?? #include "../applicator/send/send_tcp_socket.c"
+#include "../applicator/send/send_x_window_system.c"
 #include "../controller/communicator/tcp_socket_communicator.c"
 #include "../controller/translator/translator.c"
 #include "../globals/constants/abstraction_constants.c"

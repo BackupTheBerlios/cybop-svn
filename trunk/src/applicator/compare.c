@@ -20,18 +20,18 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-08 13:47:18 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-08 14:00:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPARE_SOURCE
 #define COMPARE_SOURCE
 
-#include "../computer/compare/compare_equal.c"
-#include "../computer/compare/compare_greater.c"
-#include "../computer/compare/compare_greater_or_equal.c"
-#include "../computer/compare/compare_smaller.c"
-#include "../computer/compare/compare_smaller_or_equal.c"
+#include "../applicator/compare/compare_equal.c"
+#include "../applicator/compare/compare_greater.c"
+#include "../applicator/compare/compare_greater_or_equal.c"
+#include "../applicator/compare/compare_smaller.c"
+#include "../applicator/compare/compare_smaller_or_equal.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/log_constants.c"
 #include "../globals/constants/model_constants.c"
