@@ -20,15 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-06-29 18:48:46 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-08 13:48:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SYSTEM_HANDLER_SOURCE
 #define SYSTEM_HANDLER_SOURCE
 
-#include "../../computer/create.c"
-#include "../../computer/destroy.c"
+#include "../../applicator/create.c"
+#include "../../applicator/destroy.c"
 #include "../../controller/cyboi/knowledge_memory_handler.c"
 #include "../../controller/cyboi/signal_memory_handler.c"
 #include "../../controller/cyboi/signal_waiter.c"

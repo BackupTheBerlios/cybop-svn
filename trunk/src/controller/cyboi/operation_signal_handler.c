@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-29 23:59:09 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-08 13:48:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -28,20 +28,20 @@
 #ifndef OPERATION_SIGNAL_HANDLER_SOURCE
 #define OPERATION_SIGNAL_HANDLER_SOURCE
 
-#include "../../computer/add.c"
-#include "../../computer/branch.c"
-#include "../../computer/build.c"
-#include "../../computer/compare.c"
-#include "../../computer/count.c"
-#include "../../computer/create.c"
-#include "../../computer/destroy.c"
-#include "../../computer/interrupt.c"
-#include "../../computer/loop.c"
-#include "../../computer/receive.c"
-#include "../../computer/send.c"
-#include "../../computer/set.c"
-#include "../../computer/shutdown.c"
-#include "../../computer/startup.c"
+#include "../../applicator/add.c"
+#include "../../applicator/branch.c"
+#include "../../applicator/build.c"
+#include "../../applicator/compare.c"
+#include "../../applicator/count.c"
+#include "../../applicator/create.c"
+#include "../../applicator/destroy.c"
+#include "../../applicator/interrupt.c"
+#include "../../applicator/loop.c"
+#include "../../applicator/receive.c"
+#include "../../applicator/send.c"
+#include "../../applicator/set.c"
+#include "../../applicator/shutdown.c"
+#include "../../applicator/startup.c"
 #include "../../globals/constants/model_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memory/array/array.c"

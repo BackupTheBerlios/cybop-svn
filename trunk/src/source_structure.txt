@@ -20,7 +20,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.4 $ $Date: 2005-06-07 12:13:55 $ $Author: christian $
+# @version $Revision: 1.5 $ $Date: 2005-07-08 13:48:18 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -39,19 +39,17 @@ von Neumann                         | CYBOI
 ------------------------------------------------------------------------
 Memory                              | memory
 Control Unit                        | controller
-Algorithmic Logic Unit (ALU)        | computer
+Algorithmic Logic Unit (ALU)        | applicator
 ------------------------------------------------------------------------
 
 
 Overview
 ________
 
-computer (formerly: logic)
-controller
-    communicator: receive + send (auch socket, x window system etc.?)
-    converter: parse + serialise (formerly: parser)
-    cyboi (replace "handler" with "manager", in the meaning of "lifecycle manager")
-    translator: decode + encode
+applicator (in the sense of: "applying logic operations to state models")
+controller (cyboi.c/starter.c/possibly merge with system_manager.c, checker.c, handler.c, manager.c)
+    handler
+    manager
 globals
     constants
     logger
@@ -60,12 +58,16 @@ memory
     accessor (move array stuff here)
     creator (move array stuff here) !!?? CAUTION! A better word than "creator" might be "Schöpfer" (in English!)
 tester
+transformer
+    communicator: receive + send (auch socket, x window system etc.?)
+    converter: parse + serialise (formerly: parser)
+    translator: decode + encode
 
 
 Details
 _______
 
-computer (formerly: logic)
+applicator
     interrupt
         interrupt_tcp_socket
     receive
