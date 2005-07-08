@@ -1,5 +1,5 @@
 /*
- * $RCSfile: character_creator.c,v $
+ * $RCSfile: pointer_creator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:07:05 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-08 15:45:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CHARACTER_CREATOR_SOURCE
-#define CHARACTER_CREATOR_SOURCE
+#ifndef POINTER_CREATOR_SOURCE
+#define POINTER_CREATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -33,30 +33,30 @@
 #include "../../memory/array/array.c"
 
 /**
- * Creates the character.
+ * Creates the pointer.
  *
  * @param p0 the model (Hand over as reference!)
  */
-void create_character(void* p0) {
+void create_pointer(void* p0) {
 
-    log_message_debug("Create character.");
+    log_message_debug("Create pointer.");
 
-    // Create character array containing the actual character value.
-    create_array(p0, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+    // Create pointer array containing the actual pointer value.
+    create_array(p0, (void*) POINTER_COUNT, (void*) POINTER_ARRAY);
 }
 
 /**
- * Destroys the character.
+ * Destroys the pointer.
  *
  * @param p0 the model (Hand over as reference!)
  */
-void destroy_character(void* p0) {
+void destroy_pointer(void* p0) {
 
-    log_message_debug("Destroy character.");
+    log_message_debug("Destroy pointer.");
 
-    // Destroy character array containing the actual character value.
-    destroy_array(p0, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+    // Destroy pointer array containing the actual pointer value.
+    destroy_array(p0, (void*) POINTER_COUNT, (void*) POINTER_ARRAY);
 }
 
-/* CHARACTER_CREATOR_SOURCE */
+/* POINTER_CREATOR_SOURCE */
 #endif

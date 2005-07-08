@@ -20,7 +20,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.5 $ $Date: 2005-07-08 13:48:18 $ $Author: christian $
+# @version $Revision: 1.6 $ $Date: 2005-07-08 15:45:14 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -42,26 +42,32 @@ Control Unit                        | controller
 Algorithmic Logic Unit (ALU)        | applicator
 ------------------------------------------------------------------------
 
+The logic operations provided by the applicator serve as interface to
+CYBOL. In other words, CYBOL knowledge templates may only use operations
+offered by the applicator. The names of files containing an operation
+are VERBS. Other, internally used files of CYBOI carry a NOUN as their
+name.
+
 
 Overview
 ________
 
 applicator (in the sense of: "applying logic operations to state models")
-controller (cyboi.c/starter.c/possibly merge with system_manager.c, checker.c, handler.c, manager.c)
+controller
     handler
     manager
-globals
+globaliser
     constants
     logger
     variables
-memory
-    accessor (move array stuff here)
-    creator (move array stuff here) !!?? CAUTION! A better word than "creator" might be "Schöpfer" (in English!)
+memoriser
+    accessor
+    creator
 tester
-transformer
-    communicator: receive + send (auch socket, x window system etc.?)
-    converter: parse + serialise (formerly: parser)
-    translator: decode + encode
+transformer (WHERE to put this --> applicator ??)
+    communicator
+    converter
+    translator
 
 
 Details
@@ -100,6 +106,58 @@ applicator
     shutdown
     startup
 controller
+    handler
+        compound_handler
+        operation_handler
+    manager
+        globals_manager
+        internals_memory_manager
+        knowledge_memory_manager
+        signal_memory_manager
+    checker
+    cyboi (starter; merge with system_manager; hand over all memories as params and NOT within internals memory)
+    handler
+globaliser
+    constants (stator)
+        abstraction_constants
+        channel_constants
+        character_constants
+        cybol_constants
+        escape_code_constants
+        integer_constants
+        log_constants
+        name_constants
+        structure_constants
+    logger
+    variables (changer)
+memoriser
+    accessor
+        character_array_accessor
+        compound_accessor
+        double_array_accessor
+        integer_array_accessor
+        internals_memory_accessor
+        pointer_array_accessor
+        signal_memory_accessor
+        unsigned_long_array_accessor
+    creator
+        character_creator
+        complex_creator
+        compound_creator
+        double_creator
+        fraction_creator
+        integer_creator
+        internals_memory_creator
+        pointer_creator
+        signal_memory_creator
+        string_creator
+        time_creator
+        unsigned_long_creator
+        vector_creator
+        xml_node_creator
+        xml_property_creator
+tester
+transformer
     communicator: receive + send (auch socket, x window system etc.?)
         file_communicator
         ftp_communicator
@@ -119,57 +177,7 @@ controller
         time_converter
         vector_converter
         xml_converter
-    cyboi (replace "handler" with "manager", in the meaning of "lifecycle manager")
-        compound_signal_handler
-        cyboi
-        globals_manager (formerly called "handler")
-        input_output_activator (can probably be deleted, because /processor contains service startup/shutdown now)
-        input_output_handler (can probably be deleted, because /processor contains service startup/shutdown now)
-        knowledge_memory_manager (formerly called "handler")
-        operation_signal_handler
-        signal_memory_manager (formerly called "handler")
-        signal_waiter
-        system_manager (formerly called "handler")
     translator: decode + encode
         cybol_translator
         html_translator
         x_window_system_translator
-globals
-    constants
-        abstraction_constants
-        channel_constants
-        character_constants
-        cybol_constants
-        escape_code_constants
-        integer_constants
-        log_constants
-        name_constants
-        structure_constants
-    logger
-    variables
-memory
-    accessor (move array stuff here)
-        character_array_accessor
-        compound_accessor
-        double_array_accessor
-        integer_array_accessor
-        pointer_array_accessor
-        signal_memory_accessor
-        unsigned_long_array_accessor
-    creator (move array stuff here) !!?? CAUTION! A better word than "creator" might be "Schöpfer" (in English!)
-        character_creator
-        complex_creator
-        compound_creator
-        double_creator
-        fraction_creator
-        integer_creator
-        internals_memory_creator
-        pointer_creator
-        signal_memory_creator
-        string_creator
-        time_creator
-        unsigned_long_creator
-        vector_creator
-        xml_node_creator
-        xml_property_creator
-tester

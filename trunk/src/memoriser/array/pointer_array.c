@@ -1,5 +1,5 @@
 /*
- * $RCSfile: character_array.c,v $
+ * $RCSfile: pointer_array.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles a character array.
+ * This file handles a pointer array.
  *
  * An array is a reserved (allocated) area in the computer memory.
  * A programming language like C provides primitive data types whose size
@@ -28,35 +28,36 @@
  * It is therefore possible to create and destroy arrays based on primitive types.
  *
  * The syntax of an array mostly looks like: type[size]
- * Example: char[10]
+ * Example: void*[10]
  *
  * When working with an array, it is referenced by a pointer like: type* variable
- * Example: char* array
+ * Example: void** array
  *
  * The array can be dereferenced accordingly: *variable
  * Example: *array
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:07:05 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-08 15:45:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CHARACTER_ARRAY_SOURCE
-#define CHARACTER_ARRAY_SOURCE
+#ifndef POINTER_ARRAY_SOURCE
+#define POINTER_ARRAY_SOURCE
 
 #include <stdlib.h>
+#include <string.h>
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../globals/logger/logger.c"
 
 /**
- * Creates the character array.
+ * Creates the pointer array.
  *
  * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  */
-void create_character_array(void* p0, const void* p1) {
+void create_pointer_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -66,35 +67,38 @@ void create_character_array(void* p0, const void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) INFO_LOG_LEVEL, (void*) CREATE_CHARACTER_ARRAY_MESSAGE, (void*) CREATE_CHARACTER_ARRAY_MESSAGE_COUNT);
+            log_message((void*) INFO_LOG_LEVEL, (void*) CREATE_POINTER_ARRAY_MESSAGE, (void*) CREATE_POINTER_ARRAY_MESSAGE_COUNT);
 
             // Determine the memory area to be allocated,
             // as product of element count and type size.
-            int m = *s * *CHARACTER_PRIMITIVE_SIZE;
+            int m = *s * *POINTER_PRIMITIVE_SIZE;
 
             // A minimal space in memory is always allocated,
             // even if the requested size is zero.
             // In other words, a handle to the new instance is always returned.
             *a = (void*) malloc(m);
 
+            // Initialize array elements with null pointer.
+            memset(*a, 0, m);
+
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_CREATE_CHARACTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_CREATE_CHARACTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_CREATE_POINTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_CREATE_POINTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_CREATE_CHARACTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_CREATE_CHARACTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_CREATE_POINTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_CREATE_POINTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
 /**
- * Destroys the character array.
+ * Destroys the pointer array.
  *
  * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  */
-void destroy_character_array(void* p0, const void* p1) {
+void destroy_pointer_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -104,28 +108,28 @@ void destroy_character_array(void* p0, const void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) INFO_LOG_LEVEL, (void*) DESTROY_CHARACTER_ARRAY_MESSAGE, (void*) DESTROY_CHARACTER_ARRAY_MESSAGE_COUNT);
+            log_message((void*) INFO_LOG_LEVEL, (void*) DESTROY_POINTER_ARRAY_MESSAGE, (void*) DESTROY_POINTER_ARRAY_MESSAGE_COUNT);
 
             free(*a);
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_DESTROY_CHARACTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_DESTROY_CHARACTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_DESTROY_POINTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_DESTROY_POINTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_DESTROY_CHARACTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_DESTROY_CHARACTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_DESTROY_POINTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_DESTROY_POINTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
 /**
- * Resizes the character array.
+ * Resizes the pointer array.
  *
  * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  */
-void resize_character_array(void* p0, const void* p1) {
+void resize_pointer_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -135,28 +139,28 @@ void resize_character_array(void* p0, const void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) INFO_LOG_LEVEL, (void*) RESIZE_CHARACTER_ARRAY_MESSAGE, (void*) RESIZE_CHARACTER_ARRAY_MESSAGE_COUNT);
+            log_message((void*) INFO_LOG_LEVEL, (void*) RESIZE_POINTER_ARRAY_MESSAGE, (void*) RESIZE_POINTER_ARRAY_MESSAGE_COUNT);
 
             // Determine the memory area to be allocated,
             // as product of element count and type size.
-            int m = *s * *CHARACTER_PRIMITIVE_SIZE;
+            int m = *s * *POINTER_PRIMITIVE_SIZE;
 
             // Create a new array with extended size.
             *a = (void*) realloc(*a, m);
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_RESIZE_CHARACTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_CHARACTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_RESIZE_POINTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_POINTER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_RESIZE_CHARACTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_CHARACTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_RESIZE_POINTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_POINTER_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
 /**
- * Compares the character array elements.
+ * Compares the pointer array elements.
  *
  * Returns 1 if the array elements are equal;
  * leaves the given result parameter unchanged, otherwise.
@@ -166,7 +170,7 @@ void resize_character_array(void* p0, const void* p1) {
  * @param p2 the count
  * @param p3 the result (Hand over as reference!)
  */
-void compare_character_array_elements(const void* p0, const void* p1, const void* p2, void* p3) {
+void compare_pointer_array_elements(const void* p0, const void* p1, const void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -183,9 +187,9 @@ void compare_character_array_elements(const void* p0, const void* p1, const void
                     // The loop variable.
                     int j = 0;
                     // The first element.
-                    char* e0 = CHARACTER_NULL_POINTER;
+                    void** e0 = POINTER_NULL_POINTER;
                     // The second element.
-                    char* e1 = CHARACTER_NULL_POINTER;
+                    void** e1 = POINTER_NULL_POINTER;
                     // The size.
                     int s = 0;
 
@@ -200,11 +204,11 @@ void compare_character_array_elements(const void* p0, const void* p1, const void
                         }
 
                         // Determine size.
-                        s = j * *CHARACTER_PRIMITIVE_SIZE;
+                        s = j * *POINTER_PRIMITIVE_SIZE;
 
                         // Determine the next elements at array plus index.
-                        e0 = (char*) (p0 + s);
-                        e1 = (char*) (p1 + s);
+                        e0 = (void**) (p0 + s);
+                        e1 = (void**) (p1 + s);
 
                         if (*e0 != *e1) {
 
@@ -217,34 +221,34 @@ void compare_character_array_elements(const void* p0, const void* p1, const void
 
                 } else {
 
-                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE_COUNT);
+                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_POINTER_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_POINTER_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE_COUNT);
                 }
 
             } else {
 
-                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_POINTER_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_POINTER_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_POINTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_POINTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_CHARACTER_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_POINTER_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_POINTER_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
 /**
- * Sets the character array elements.
+ * Sets the pointer array elements.
  *
  * @param p0 the array
  * @param p1 the index
  * @param p2 the elements (Hand over as array!)
  * @param p3 the count
  */
-void set_character_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
+void set_pointer_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -259,11 +263,11 @@ void set_character_array_elements(void* p0, const void* p1, const void* p2, cons
                 if (p0 != NULL_POINTER) {
 
                     // The destination base.
-                    void* db = (void*) (p0 + (*i * *CHARACTER_PRIMITIVE_SIZE));
+                    void* db = (void*) (p0 + (*i * *POINTER_PRIMITIVE_SIZE));
                     // The source element.
-                    char* se = CHARACTER_NULL_POINTER;
+                    void** se = POINTER_NULL_POINTER;
                     // The destination element.
-                    char* de = CHARACTER_NULL_POINTER;
+                    void** de = POINTER_NULL_POINTER;
                     // The loop variable.
                     int j = 0;
                     // The size.
@@ -277,11 +281,11 @@ void set_character_array_elements(void* p0, const void* p1, const void* p2, cons
                         }
 
                         // Determine size.
-                        s = j * *CHARACTER_PRIMITIVE_SIZE;
+                        s = j * *POINTER_PRIMITIVE_SIZE;
 
                         // Determine source and destination element.
-                        se = (char*) (p2 + s);
-                        de = (char*) (db + s);
+                        se = (void**) (p2 + s);
+                        de = (void**) (db + s);
 
                         // Set destination element.
                         *de = *se;
@@ -291,34 +295,34 @@ void set_character_array_elements(void* p0, const void* p1, const void* p2, cons
 
                 } else {
 
-                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
+                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_POINTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_POINTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
                 }
 
             } else {
 
-                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_POINTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_POINTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_POINTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_POINTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_POINTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_POINTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
 /**
- * Removes the character array elements.
+ * Removes the pointer array elements.
  *
  * @param p0 the array
  * @param p1 the size
  * @param p2 the index
  * @param p3 the count
  */
-void remove_character_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
+void remove_pointer_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -335,13 +339,13 @@ void remove_character_array_elements(void* p0, const void* p1, const void* p2, c
                 if (p0 != NULL_POINTER) {
 
                     // The destination base.
-                    void* db = (void*) (p0 + (*i * *CHARACTER_PRIMITIVE_SIZE));
+                    void* db = (void*) (p0 + (*i * *POINTER_PRIMITIVE_SIZE));
                     // The source base.
-                    void* sb = (void*) (db + (*c * *CHARACTER_PRIMITIVE_SIZE));
+                    void* sb = (void*) (db + (*c * *POINTER_PRIMITIVE_SIZE));
                     // The source element.
-                    char* se = CHARACTER_NULL_POINTER;
+                    void** se = POINTER_NULL_POINTER;
                     // The destination element.
-                    char* de = CHARACTER_NULL_POINTER;
+                    void** de = POINTER_NULL_POINTER;
                     // The remaining elements size.
                     int r = *m - (*i + *c);
                     // The loop variable.
@@ -364,11 +368,11 @@ void remove_character_array_elements(void* p0, const void* p1, const void* p2, c
                         }
 
                         // Determine size.
-                        s = j * *CHARACTER_PRIMITIVE_SIZE;
+                        s = j * *POINTER_PRIMITIVE_SIZE;
 
                         // Determine source and destination element.
-                        de = (char*) (db + s);
-                        se = (char*) (sb + s);
+                        de = (void**) (db + s);
+                        se = (void**) (sb + s);
 
                         // Set destination element.
                         *de = *se;
@@ -376,7 +380,7 @@ void remove_character_array_elements(void* p0, const void* p1, const void* p2, c
                         j++;
                     }
 
-                    // Set former last elements to ''. The ASCII of '' is 0.
+                    // Set former last elements to 0.0.
                     // This is disabled for now, since when creating an array,
                     // its elements are also NOT initialized with ''.
                     // The calling procedure may just cut off the remaining
@@ -384,33 +388,33 @@ void remove_character_array_elements(void* p0, const void* p1, const void* p2, c
 
                 } else {
 
-                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_POINTER_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_POINTER_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
                 }
 
             } else {
 
-                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_POINTER_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_POINTER_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_POINTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_POINTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_CHARACTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_POINTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_POINTER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
 /**
- * Gets the character array elements.
+ * Gets the pointer array elements.
  *
  * @param p0 the array
  * @param p1 the index
  * @param p2 the elements (Hand over as array reference!)
  */
-void get_character_array_elements(const void* p0, const void* p1, void* p2) {
+void get_pointer_array_elements(const void* p0, const void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
 
@@ -423,26 +427,26 @@ void get_character_array_elements(const void* p0, const void* p1, void* p2) {
             if (p0 != NULL_POINTER) {
 
                 // Determine element.
-                *e = (void*) (p0 + (*i * *CHARACTER_PRIMITIVE_SIZE));
+                *e = (void*) (p0 + (*i * *POINTER_PRIMITIVE_SIZE));
 
             } else {
 
-                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_POINTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_POINTER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_POINTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_POINTER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_POINTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_POINTER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
     }
 }
 
 /**
- * Gets the character array elements index.
+ * Gets the pointer array elements index.
  *
  * Returns the index if the array elements could be found;
  * leaves the given index parameter unchanged, otherwise.
@@ -454,7 +458,7 @@ void get_character_array_elements(const void* p0, const void* p1, void* p2) {
  * @param p3 the elements count
  * @param p4 the index (Hand over as reference!)
  */
-void get_character_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
+void get_pointer_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -487,8 +491,8 @@ void get_character_array_elements_index(const void* p0, const void* p1, const vo
                             break;
                         }
 
-                        get_character_array_elements(p0, (void*) &j, (void*) &e);
-                        compare_character_array_elements(e, p2, p3, (void*) &r);
+                        get_pointer_array_elements(p0, (void*) &j, (void*) &e);
+                        compare_pointer_array_elements(e, p2, p3, (void*) &r);
 
                         if (r == 1) {
 
@@ -503,24 +507,24 @@ void get_character_array_elements_index(const void* p0, const void* p1, const vo
 
                 } else {
 
-                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_POINTER_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_POINTER_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
                 }
 
             } else {
 
-                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_POINTER_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_POINTER_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_POINTER_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_POINTER_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_CHARACTER_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_POINTER_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_POINTER_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE_COUNT);
     }
 }
 
-/* CHARACTER_ARRAY_SOURCE */
+/* POINTER_ARRAY_SOURCE */
 #endif

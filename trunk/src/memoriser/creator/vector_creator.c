@@ -1,5 +1,5 @@
 /*
- * $RCSfile: complex_creator.c,v $
+ * $RCSfile: vector_creator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -21,14 +21,14 @@
  * - Cybernetics Oriented Programming -
  *
  * This file contains the functionality to:
- * - create a complex model in memory
+ * - create a vector model in memory
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-08 15:45:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef COMPLEX_CREATOR_SOURCE
-#define COMPLEX_CREATOR_SOURCE
+#ifndef VECTOR_CREATOR_SOURCE
+#define VECTOR_CREATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -36,32 +36,37 @@
 #include "../../memory/array/array.c"
 
 /**
- * Creates the complex.
+ * Creates the vector.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void create_complex(void* p0, const void* p1) {
+void create_vector(void* p0, const void* p1) {
 
-    log_message_debug("Create complex.");
+    log_message_debug("Create vector.");
 
-    // Create complex.
-    create_array(p0, (void*) COMPLEX_COUNT, (void*) DOUBLE_ARRAY);
+    //?? OPEN QUESTION:
+    //?? Should vector always be 3-dimensional,
+    //?? or better of dynamic size?
+    //?? If dynamic, then use p1 as size.
+
+    // Create vector.
+    create_array(p0, (void*) VECTOR_COUNT, (void*) INTEGER_ARRAY);
 }
 
 /**
- * Destroys the complex.
+ * Destroys the vector.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void destroy_complex(void* p0, const void* p1) {
+void destroy_vector(void* p0, const void* p1) {
 
-    log_message_debug("Destroy complex.");
+    log_message_debug("Destroy vector.");
 
-    // Destroy complex.
-    destroy_array(p0, (void*) COMPLEX_COUNT, (void*) DOUBLE_ARRAY);
+    // Destroy vector.
+    destroy_array(p0, (void*) VECTOR_COUNT, (void*) INTEGER_ARRAY);
 }
 
-/* COMPLEX_CREATOR_SOURCE */
+/* VECTOR_CREATOR_SOURCE */
 #endif

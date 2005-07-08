@@ -1,5 +1,5 @@
 /*
- * $RCSfile: double_array.c,v $
+ * $RCSfile: integer_array.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file handles a double array.
+ * This file handles an integer array.
  *
  * An array is a reserved (allocated) area in the computer memory.
  * A programming language like C provides primitive data types whose size
@@ -28,22 +28,22 @@
  * It is therefore possible to create and destroy arrays based on primitive types.
  *
  * The syntax of an array mostly looks like: type[size]
- * Example: double[10]
+ * Example: int[10]
  *
  * When working with an array, it is referenced by a pointer like: type* variable
- * Example: double* array
+ * Example: int* array
  *
  * The array can be dereferenced accordingly: *variable
  * Example: *array
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-05 00:07:05 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-08 15:45:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DOUBLE_ARRAY_SOURCE
-#define DOUBLE_ARRAY_SOURCE
+#ifndef INTEGER_ARRAY_SOURCE
+#define INTEGER_ARRAY_SOURCE
 
 #include <stdlib.h>
 #include "../../globals/constants/log_constants.c"
@@ -51,12 +51,12 @@
 #include "../../globals/logger/logger.c"
 
 /**
- * Creates the double array.
+ * Creates the integer array.
  *
  * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  */
-void create_double_array(void* p0, const void* p1) {
+void create_integer_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -66,11 +66,11 @@ void create_double_array(void* p0, const void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) INFO_LOG_LEVEL, (void*) CREATE_DOUBLE_ARRAY_MESSAGE, (void*) CREATE_DOUBLE_ARRAY_MESSAGE_COUNT);
+            log_message((void*) INFO_LOG_LEVEL, (void*) CREATE_INTEGER_ARRAY_MESSAGE, (void*) CREATE_INTEGER_ARRAY_MESSAGE_COUNT);
 
             // Determine the memory area to be allocated,
             // as product of element count and type size.
-            int m = *s * *DOUBLE_PRIMITIVE_SIZE;
+            int m = *s * *INTEGER_PRIMITIVE_SIZE;
 
             // A minimal space in memory is always allocated,
             // even if the requested size is zero.
@@ -79,22 +79,22 @@ void create_double_array(void* p0, const void* p1) {
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_CREATE_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_CREATE_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_CREATE_INTEGER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_CREATE_INTEGER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_CREATE_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_CREATE_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_CREATE_INTEGER_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_CREATE_INTEGER_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
 /**
- * Destroys the double array.
+ * Destroys the integer array.
  *
  * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  */
-void destroy_double_array(void* p0, const void* p1) {
+void destroy_integer_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -104,28 +104,28 @@ void destroy_double_array(void* p0, const void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) INFO_LOG_LEVEL, (void*) DESTROY_DOUBLE_ARRAY_MESSAGE, (void*) DESTROY_DOUBLE_ARRAY_MESSAGE_COUNT);
+            log_message((void*) INFO_LOG_LEVEL, (void*) DESTROY_INTEGER_ARRAY_MESSAGE, (void*) DESTROY_INTEGER_ARRAY_MESSAGE_COUNT);
 
             free(*a);
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_DESTROY_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_DESTROY_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_DESTROY_INTEGER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_DESTROY_INTEGER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_DESTROY_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_DESTROY_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_DESTROY_INTEGER_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_DESTROY_INTEGER_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
 /**
- * Resizes the double array.
+ * Resizes the integer array.
  *
  * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  */
-void resize_double_array(void* p0, const void* p1) {
+void resize_integer_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -135,28 +135,28 @@ void resize_double_array(void* p0, const void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) INFO_LOG_LEVEL, (void*) RESIZE_DOUBLE_ARRAY_MESSAGE, (void*) RESIZE_DOUBLE_ARRAY_MESSAGE_COUNT);
+            log_message((void*) INFO_LOG_LEVEL, (void*) RESIZE_INTEGER_ARRAY_MESSAGE, (void*) RESIZE_INTEGER_ARRAY_MESSAGE_COUNT);
 
             // Determine the memory area to be allocated,
             // as product of element count and type size.
-            int m = *s * *DOUBLE_PRIMITIVE_SIZE;
+            int m = *s * *INTEGER_PRIMITIVE_SIZE;
 
             // Create a new array with extended size.
             *a = (void*) realloc(*a, m);
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_RESIZE_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_RESIZE_INTEGER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_INTEGER_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_RESIZE_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_RESIZE_INTEGER_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_INTEGER_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
 /**
- * Compares the double array elements.
+ * Compares the integer array elements.
  *
  * Returns 1 if the array elements are equal;
  * leaves the given result parameter unchanged, otherwise.
@@ -166,7 +166,7 @@ void resize_double_array(void* p0, const void* p1) {
  * @param p2 the count
  * @param p3 the result (Hand over as reference!)
  */
-void compare_double_array_elements(const void* p0, const void* p1, const void* p2, void* p3) {
+void compare_integer_array_elements(const void* p0, const void* p1, const void* p2, void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -183,9 +183,9 @@ void compare_double_array_elements(const void* p0, const void* p1, const void* p
                     // The loop variable.
                     int j = 0;
                     // The first element.
-                    double* e0 = DOUBLE_NULL_POINTER;
+                    int* e0 = INTEGER_NULL_POINTER;
                     // The second element.
-                    double* e1 = DOUBLE_NULL_POINTER;
+                    int* e1 = INTEGER_NULL_POINTER;
                     // The size.
                     int s = 0;
 
@@ -200,11 +200,11 @@ void compare_double_array_elements(const void* p0, const void* p1, const void* p
                         }
 
                         // Determine size.
-                        s = j * *DOUBLE_PRIMITIVE_SIZE;
+                        s = j * *INTEGER_PRIMITIVE_SIZE;
 
                         // Determine the next elements at array plus index.
-                        e0 = (double*) (p0 + s);
-                        e1 = (double*) (p1 + s);
+                        e0 = (int*) (p0 + s);
+                        e1 = (int*) (p1 + s);
 
                         if (*e0 != *e1) {
 
@@ -217,34 +217,34 @@ void compare_double_array_elements(const void* p0, const void* p1, const void* p
 
                 } else {
 
-                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE_COUNT);
+                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_INTEGER_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_INTEGER_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE_COUNT);
                 }
 
             } else {
 
-                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_INTEGER_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_INTEGER_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_INTEGER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_INTEGER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_COMPARE_INTEGER_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_INTEGER_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
 /**
- * Sets the double array elements.
+ * Sets the integer array elements.
  *
  * @param p0 the array
  * @param p1 the index
  * @param p2 the elements (Hand over as array!)
  * @param p3 the count
  */
-void set_double_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
+void set_integer_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -259,11 +259,11 @@ void set_double_array_elements(void* p0, const void* p1, const void* p2, const v
                 if (p0 != NULL_POINTER) {
 
                     // The destination base.
-                    void* db = (void*) (p0 + (*i * *DOUBLE_PRIMITIVE_SIZE));
+                    void* db = (void*) (p0 + (*i * *INTEGER_PRIMITIVE_SIZE));
                     // The source element.
-                    double* se = DOUBLE_NULL_POINTER;
+                    int* se = INTEGER_NULL_POINTER;
                     // The destination element.
-                    double* de = DOUBLE_NULL_POINTER;
+                    int* de = INTEGER_NULL_POINTER;
                     // The loop variable.
                     int j = 0;
                     // The size.
@@ -277,11 +277,11 @@ void set_double_array_elements(void* p0, const void* p1, const void* p2, const v
                         }
 
                         // Determine size.
-                        s = j * *DOUBLE_PRIMITIVE_SIZE;
+                        s = j * *INTEGER_PRIMITIVE_SIZE;
 
                         // Determine source and destination element.
-                        se = (double*) (p2 + s);
-                        de = (double*) (db + s);
+                        se = (int*) (p2 + s);
+                        de = (int*) (db + s);
 
                         // Set destination element.
                         *de = *se;
@@ -291,34 +291,34 @@ void set_double_array_elements(void* p0, const void* p1, const void* p2, const v
 
                 } else {
 
-                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
+                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_INTEGER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_INTEGER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
                 }
 
             } else {
 
-                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_INTEGER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_INTEGER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_INTEGER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_INTEGER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_SET_INTEGER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_INTEGER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
 /**
- * Removes the double array elements.
+ * Removes the integer array elements.
  *
  * @param p0 the array
  * @param p1 the size
  * @param p2 the index
  * @param p3 the count
  */
-void remove_double_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
+void remove_integer_array_elements(void* p0, const void* p1, const void* p2, const void* p3) {
 
     if (p3 != NULL_POINTER) {
 
@@ -335,13 +335,13 @@ void remove_double_array_elements(void* p0, const void* p1, const void* p2, cons
                 if (p0 != NULL_POINTER) {
 
                     // The destination base.
-                    void* db = (void*) (p0 + (*i * *DOUBLE_PRIMITIVE_SIZE));
+                    void* db = (void*) (p0 + (*i * *INTEGER_PRIMITIVE_SIZE));
                     // The source base.
-                    void* sb = (void*) (db + (*c * *DOUBLE_PRIMITIVE_SIZE));
+                    void* sb = (void*) (db + (*c * *INTEGER_PRIMITIVE_SIZE));
                     // The source element.
-                    double* se = DOUBLE_NULL_POINTER;
+                    int* se = INTEGER_NULL_POINTER;
                     // The destination element.
-                    double* de = DOUBLE_NULL_POINTER;
+                    int* de = INTEGER_NULL_POINTER;
                     // The remaining elements size.
                     int r = *m - (*i + *c);
                     // The loop variable.
@@ -364,11 +364,11 @@ void remove_double_array_elements(void* p0, const void* p1, const void* p2, cons
                         }
 
                         // Determine size.
-                        s = j * *DOUBLE_PRIMITIVE_SIZE;
+                        s = j * *INTEGER_PRIMITIVE_SIZE;
 
                         // Determine source and destination element.
-                        de = (double*) (db + s);
-                        se = (double*) (sb + s);
+                        de = (int*) (db + s);
+                        se = (int*) (sb + s);
 
                         // Set destination element.
                         *de = *se;
@@ -384,33 +384,33 @@ void remove_double_array_elements(void* p0, const void* p1, const void* p2, cons
 
                 } else {
 
-                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_INTEGER_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_INTEGER_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
                 }
 
             } else {
 
-                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_INTEGER_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_INTEGER_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_INTEGER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_INTEGER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_REMOVE_INTEGER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_INTEGER_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
     }
 }
 
 /**
- * Gets the double array elements.
+ * Gets the integer array elements.
  *
  * @param p0 the array
  * @param p1 the index
  * @param p2 the elements (Hand over as array reference!)
  */
-void get_double_array_elements(const void* p0, const void* p1, void* p2) {
+void get_integer_array_elements(const void* p0, const void* p1, void* p2) {
 
     if (p2 != NULL_POINTER) {
 
@@ -423,26 +423,26 @@ void get_double_array_elements(const void* p0, const void* p1, void* p2) {
             if (p0 != NULL_POINTER) {
 
                 // Determine element.
-                *e = (void*) (p0 + (*i * *DOUBLE_PRIMITIVE_SIZE));
+                *e = (void*) (p0 + (*i * *INTEGER_PRIMITIVE_SIZE));
 
             } else {
 
-                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_INTEGER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_INTEGER_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_INTEGER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_INTEGER_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_INTEGER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_INTEGER_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
     }
 }
 
 /**
- * Gets the double array elements index.
+ * Gets the integer array elements index.
  *
  * Returns the index if the array elements could be found;
  * leaves the given index parameter unchanged, otherwise.
@@ -454,7 +454,7 @@ void get_double_array_elements(const void* p0, const void* p1, void* p2) {
  * @param p3 the elements count
  * @param p4 the index (Hand over as reference!)
  */
-void get_double_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
+void get_integer_array_elements_index(const void* p0, const void* p1, const void* p2, const void* p3, void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -487,8 +487,8 @@ void get_double_array_elements_index(const void* p0, const void* p1, const void*
                             break;
                         }
 
-                        get_double_array_elements(p0, (void*) &j, (void*) &e);
-                        compare_double_array_elements(e, p2, p3, (void*) &r);
+                        get_integer_array_elements(p0, (void*) &j, (void*) &e);
+                        compare_integer_array_elements(e, p2, p3, (void*) &r);
 
                         if (r == 1) {
 
@@ -503,24 +503,24 @@ void get_double_array_elements_index(const void* p0, const void* p1, const void*
 
                 } else {
 
-                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+                    log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
                 }
 
             } else {
 
-                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE_COUNT);
             }
 
         } else {
 
-            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_INTEGER_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE_COUNT);
     }
 }
 
-/* DOUBLE_ARRAY_SOURCE */
+/* INTEGER_ARRAY_SOURCE */
 #endif

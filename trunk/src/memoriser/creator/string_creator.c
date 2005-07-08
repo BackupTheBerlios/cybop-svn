@@ -1,5 +1,5 @@
 /*
- * $RCSfile: double_creator.c,v $
+ * $RCSfile: string_creator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * This file contains the functionality to:
+ * - create a string model in memory
+ *
+ * @version $Revision: 1.1 $ $Date: 2005-07-08 15:45:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DOUBLE_CREATOR_SOURCE
-#define DOUBLE_CREATOR_SOURCE
+#ifndef STRING_CREATOR_SOURCE
+#define STRING_CREATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -33,30 +36,30 @@
 #include "../../memory/array/array.c"
 
 /**
- * Creates the double.
+ * Creates the string.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void create_double(void* p0) {
+void create_string(void* p0, const void* p1) {
 
-    log_message_debug("Create double.");
+    log_message_debug("Create string.");
 
-    // Create double array containing the actual double value.
-    create_array(p0, (void*) DOUBLE_COUNT, (void*) DOUBLE_ARRAY);
+    create_array(p0, p1, (void*) CHARACTER_ARRAY);
 }
 
 /**
- * Destroys the double.
+ * Destroys the string.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void destroy_double(void* p0) {
+void destroy_string(void* p0, const void* p1) {
 
-    log_message_debug("Destroy double.");
+    log_message_debug("Destroy string.");
 
-    // Destroy double array containing the actual double value.
-    destroy_array(p0, (void*) DOUBLE_COUNT, (void*) DOUBLE_ARRAY);
+    destroy_array(p0, p1, (void*) CHARACTER_ARRAY);
 }
 
-/* DOUBLE_CREATOR_SOURCE */
+/* STRING_CREATOR_SOURCE */
 #endif

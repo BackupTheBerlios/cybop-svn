@@ -1,5 +1,5 @@
 /*
- * $RCSfile: unsigned_long_creator.c,v $
+ * $RCSfile: time_creator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * This file contains the functionality to:
+ * - create a time model in memory
+ *
+ * @version $Revision: 1.1 $ $Date: 2005-07-08 15:45:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef UNSIGNED_LONG_CREATOR_SOURCE
-#define UNSIGNED_LONG_CREATOR_SOURCE
+#ifndef TIME_CREATOR_SOURCE
+#define TIME_CREATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -33,30 +36,30 @@
 #include "../../memory/array/array.c"
 
 /**
- * Creates the unsigned long.
+ * Creates the time.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void create_unsigned_long(void* p0) {
+void create_time(void* p0, const void* p1) {
 
-    log_message_debug("Create unsigned long.");
+    log_message_debug("Create time.");
 
-    // Create unsigned long array containing the actual value.
-    create_array(p0, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ARRAY);
+    create_array(p0, (void*) TIME_COUNT, (void*) INTEGER_ARRAY);
 }
 
 /**
- * Destroys the unsigned long.
+ * Destroys the time.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void destroy_unsigned_long(void* p0) {
+void destroy_time(void* p0, const void* p1) {
 
-    log_message_debug("Destroy unsigned long.");
+    log_message_debug("Destroy time.");
 
-    // Destroy unsigned long array containing the actual value.
-    destroy_array(p0, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ARRAY);
+    destroy_array(p0, (void*) TIME_COUNT, (void*) INTEGER_ARRAY);
 }
 
-/* UNSIGNED_LONG_CREATOR_SOURCE */
+/* TIME_CREATOR_SOURCE */
 #endif

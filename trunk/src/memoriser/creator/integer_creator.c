@@ -1,5 +1,5 @@
 /*
- * $RCSfile: string_creator.c,v $
+ * $RCSfile: integer_creator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,15 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file contains the functionality to:
- * - create a string model in memory
- *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-08 15:45:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef STRING_CREATOR_SOURCE
-#define STRING_CREATOR_SOURCE
+#ifndef INTEGER_CREATOR_SOURCE
+#define INTEGER_CREATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -36,30 +33,30 @@
 #include "../../memory/array/array.c"
 
 /**
- * Creates the string.
+ * Creates the integer.
  *
  * @param p0 the model (Hand over as reference!)
- * @param p1 the model size
  */
-void create_string(void* p0, const void* p1) {
+void create_integer(void* p0) {
 
-    log_message_debug("Create string.");
+    log_message_debug("Create integer.");
 
-    create_array(p0, p1, (void*) CHARACTER_ARRAY);
+    // Create integer array containing the actual integer value.
+    create_array(p0, (void*) INTEGER_COUNT, (void*) INTEGER_ARRAY);
 }
 
 /**
- * Destroys the string.
+ * Destroys the integer.
  *
  * @param p0 the model (Hand over as reference!)
- * @param p1 the model size
  */
-void destroy_string(void* p0, const void* p1) {
+void destroy_integer(void* p0) {
 
-    log_message_debug("Destroy string.");
+    log_message_debug("Destroy integer.");
 
-    destroy_array(p0, p1, (void*) CHARACTER_ARRAY);
+    // Destroy integer array containing the actual integer value.
+    destroy_array(p0, (void*) INTEGER_COUNT, (void*) INTEGER_ARRAY);
 }
 
-/* STRING_CREATOR_SOURCE */
+/* INTEGER_CREATOR_SOURCE */
 #endif

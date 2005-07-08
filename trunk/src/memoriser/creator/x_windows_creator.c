@@ -1,5 +1,5 @@
 /*
- * $RCSfile: pointer_creator.c,v $
+ * $RCSfile: x_windows_creator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,43 +20,38 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-08 15:45:14 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
+ * @description
+ *
+ * A session (display) manager shows a graphical user login,
+ * in which it offers a list of window managers to chose from.
+ *
+ * A window manager cares about all windows displayed on a screen.
+ * This includes the resizing, moving, stacking or tiling of windows.
+ *
+ * CYBOI aims to become both at the same time,
+ * a session- (display-) as well as a window manager.
  */
 
-#ifndef POINTER_CREATOR_SOURCE
-#define POINTER_CREATOR_SOURCE
-
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
-#include "../../globals/logger/logger.c"
-#include "../../memory/array/array.c"
+#ifndef X_WINDOW_SYSTEM_CREATOR_SOURCE
+#define X_WINDOW_SYSTEM_CREATOR_SOURCE
 
 /**
- * Creates the pointer.
+ * Creates an x window system window.
  *
- * @param p0 the model (Hand over as reference!)
+ * @param p0 the internals memory
  */
-void create_pointer(void* p0) {
-
-    log_message_debug("Create pointer.");
-
-    // Create pointer array containing the actual pointer value.
-    create_array(p0, (void*) POINTER_COUNT, (void*) POINTER_ARRAY);
+void create_x_window_system_window(void* p0) {
 }
 
 /**
- * Destroys the pointer.
+ * Destroys the x window system window.
  *
- * @param p0 the model (Hand over as reference!)
+ * @param p0 the internals memory
  */
-void destroy_pointer(void* p0) {
-
-    log_message_debug("Destroy pointer.");
-
-    // Destroy pointer array containing the actual pointer value.
-    destroy_array(p0, (void*) POINTER_COUNT, (void*) POINTER_ARRAY);
+void destroy_x_window_system_window(void* p0) {
 }
 
-/* POINTER_CREATOR_SOURCE */
+/* X_WINDOW_SYSTEM_CREATOR_SOURCE */
 #endif
