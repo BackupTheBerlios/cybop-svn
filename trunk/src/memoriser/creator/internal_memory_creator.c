@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 13:35:04 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 14:19:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTERNALS_MEMORY_CREATOR_SOURCE
-#define INTERNALS_MEMORY_CREATOR_SOURCE
+#ifndef INTERNAL_MEMORY_CREATOR_SOURCE
+#define INTERNAL_MEMORY_CREATOR_SOURCE
 
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
@@ -34,29 +34,29 @@
 #include "../../memoriser/array/array.c"
 
 /**
- * Creates the internals memory.
+ * Creates the internal memory.
  *
- * @param p0 the internals memory (Hand over as reference!)
- * @param p1 the internals memory size
+ * @param p0 the internal memory (Hand over as reference!)
+ * @param p1 the internal memory size
  */
-void create_internals_memory(void* p0, const void* p1) {
+void create_internal_memory(void* p0, const void* p1) {
 
-    log_message_debug("Create internals memory.");
+    log_message_debug("Create internal memory.");
 
-    // Create internals memory.
+    // Create internal memory.
     create_array(p0, p1, (void*) POINTER_ARRAY);
 }
 
 /**
- * Destroys the internals memory.
+ * Destroys the internal memory.
  *
  * All configuration parameters are destroyed first,
- * before the actual internals memory pointer array.
+ * before the actual internal memory pointer array.
  *
- * @param p0 the internals memory (Hand over as reference!)
- * @param p1 the internals memory size
+ * @param p0 the internal memory (Hand over as reference!)
+ * @param p1 the internal memory size
  */
-void destroy_internals_memory(void* p0, const void* p1) {
+void destroy_internal_memory(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -66,7 +66,7 @@ void destroy_internals_memory(void* p0, const void* p1) {
 
             void** i = (void**) p0;
 
-            log_message_debug("Destroy internals memory.");
+            log_message_debug("Destroy internal memory.");
 
             // The loop variable.
             int j = 0;
@@ -80,7 +80,7 @@ void destroy_internals_memory(void* p0, const void* p1) {
                     break;
                 }
 
-                // Get all configuration parameters from internals memory and
+                // Get all configuration parameters from internal memory and
                 // destroy those which are existent (unequal NULL_POINTER).
                 // The p0 parameter needs to be dereferenced since it is handed over
                 // as reference, but this procedure expects a normal array.
@@ -88,11 +88,11 @@ void destroy_internals_memory(void* p0, const void* p1) {
 
                 // CAUTION! Do not try to remove the parameters!
                 // Each configuration parameter has a fixed position within the
-                // internals memory and CANNOT be removed.
+                // internal memory and CANNOT be removed.
 
                 if (p != NULL_POINTER) {
 
-                    // The internals memory is a simple pointer array and does NOT
+                    // The internal memory is a simple pointer array and does NOT
                     // hold type information about its stored configuration parameters.
                     // This is possible because the type information is known
                     // IN CONTEXT, wherever a configuration parameter is used.
@@ -173,7 +173,7 @@ void destroy_internals_memory(void* p0, const void* p1) {
 
         } else {
 
-            log_message_debug("Could not destroy internals memory. The internals memory parameter is null.");
+            log_message_debug("Could not destroy internal memory. The internal memory parameter is null.");
         }
 
     } else {
@@ -181,9 +181,9 @@ void destroy_internals_memory(void* p0, const void* p1) {
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not get highest priority index. The signal memory count is null.");
     }
 
-    // Destroy internals memory.
+    // Destroy internal memory.
     destroy_array(p0, p1, (void*) POINTER_ARRAY);
 }
 
-/* INTERNALS_MEMORY_CREATOR_SOURCE */
+/* INTERNAL_MEMORY_CREATOR_SOURCE */
 #endif

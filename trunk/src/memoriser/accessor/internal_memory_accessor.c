@@ -20,13 +20,13 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 13:35:04 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 14:19:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
-#ifndef INTERNALS_MEMORY_ACCESSOR_SOURCE
-#define INTERNALS_MEMORY_ACCESSOR_SOURCE
+#ifndef INTERNAL_MEMORY_ACCESSOR_SOURCE
+#define INTERNAL_MEMORY_ACCESSOR_SOURCE
 
 #include "../../globals/constants/constant.c"
 #include "../../globals/constants/integer_constants.c"
@@ -36,9 +36,9 @@
 #include "../../memoriser/array/array.c"
 
 /**
- * Add the client socket into the internal.
+ * Add the client socket.
  *
- * @param p0 the internals memory
+ * @param p0 the internal memory
  * @param p1 the client socket
  */
 void add_client_socket_number(void* p0, void* p1) {
@@ -70,14 +70,14 @@ void add_client_socket_number(void* p0, void* p1) {
 }
 
 /**
- * Add the signal id into the internal.
+ * Add the signal id.
  *
- * @param p0 the internals memory
+ * @param p0 the internal memory
  * @param p1 the signal identification
  */
 void add_signal_id(void* p0, void* p1) {
 
-    // get the main signal id from internal
+    // Get main signal id from internal memory.
     void** id = POINTER_NULL_POINTER;
     void** idc = POINTER_NULL_POINTER;
     void** ids = POINTER_NULL_POINTER;
@@ -103,9 +103,9 @@ void add_signal_id(void* p0, void* p1) {
 }
 
 /**
- * Removes the client socket and the signal id from the internal.
+ * Removes the client socket and the signal id.
  *
- * @param p0 the internals memory
+ * @param p0 the internal memory
  * @param p1 the index
  */
 void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
@@ -141,9 +141,9 @@ void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
 }
 
 /**
- * Get the index from the signal id array in the internal for a signal id.
+ * Get the index from the signal id array.
  *
- * @param p0 the internals memory
+ * @param p0 the internal memory
  * @param p1 the signal identification
  * @param p2 the index (hand over as reference)
  */
@@ -166,7 +166,7 @@ void get_index_for_signal_id(void* p0, const void* p1, void* p2) {
 /**
  * Get the client socket.
  *
- * @param p0 the internals memory
+ * @param p0 the internal memory
  * @param p1 the index
  * @param p2 the client socket
  */
@@ -186,5 +186,5 @@ void get_client_socket_number_for_index(void* p0, void* p1, void* p2) {
     get_array_elements(*cs, p1, p2, (void*) INTEGER_ARRAY);
 }
 
-/* INTERNALS_MEMORY_ACCESSOR_SOURCE */
+/* INTERNAL_MEMORY_ACCESSOR_SOURCE */
 #endif

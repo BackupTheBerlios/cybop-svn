@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-12 14:19:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -48,7 +48,7 @@
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/accessor/compound_accessor.c"
-#include "../../memoriser/accessor/internals_memory_accessor.c"
+#include "../../memoriser/accessor/internal_memory_accessor.c"
 #include "../../memoriser/accessor/signal_memory_accessor.c"
 #include "../../memoriser/array/array.c"
 #include "../../memoriser/creator/creator.c"
@@ -674,7 +674,7 @@ void get_parameter_from_request( char* req, int* req_count,
  * @param source_count the source count
  * @param dest the destination
  * @param dest_count the detsination count
- * @param internal the internal
+ * @param internal the internal memory
  */
 void set_signal_for_parameter( void* source, int* source_count,
                                void* dest, int* dest_count,
@@ -929,7 +929,7 @@ void set_signal_for_parameter( void* source, int* source_count,
  *
  * @param query
  * @param query_count
- * @param internal
+ * @param internal memory
  */
 void set_signals_for_all_parameters( void* query, int* query_count,
                                      void* internal ){
@@ -1083,7 +1083,7 @@ void set_signals_for_all_parameters( void* query, int* query_count,
  * The http request must be parsed for parameters.
  * A signal is created and added to the signal memory, for each parameter.
  *
- * @param p0 the internals memory
+ * @param p0 the internal memory
  * @param p1 the client socket
  */
 void handle_tcp_socket_request(void* p0, void* p1) {
@@ -1263,7 +1263,7 @@ void handle_tcp_socket_request(void* p0, void* p1) {
  * Runs the tcp socket server for one accept.
  *
  *
- * @param p0 the internals memory
+ * @param p0 the internal memory
  */
 void run_tcp_socket(void* p0) {
 
@@ -1319,7 +1319,7 @@ void run_tcp_socket(void* p0) {
  *
  * If the active flag false, so must be exit the thread
  *
- * @param p0 the internal
+ * @param p0 the internal memory
  */
 void run_tcp_socket_server(void* p0) {
 
@@ -1345,7 +1345,7 @@ void run_tcp_socket_server(void* p0) {
 /**
  * Receive over the tcp socket service.
  *
- * @param p0 the internals memory
+ * @param p0 the internal memory
  * @param p1 the knowledge
  * @param p2 the knowledge count
  * @param p3 the knowledge size
@@ -1386,7 +1386,7 @@ void receive_tcp_socket(void* p0, const void* p1, const void* p2, const void* p3
                     }
                 }
 
-                //set the activation flag in the internal
+                //set the activation flag in the internal memory.
                 void** socket_flag = POINTER_NULL_POINTER;
 
                 get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_ARRAY);
@@ -1396,7 +1396,7 @@ void receive_tcp_socket(void* p0, const void* p1, const void* p2, const void* p3
                     **((int**) socket_flag) = 1;
                 }
 
-                //set the blocking flag in the internal
+                //set the blocking flag in the internal memory.
                 void** blocking_flag = POINTER_NULL_POINTER;
 
                 get_array_elements(p0, (void*) TCP_SERVER_SOCKET_BLOCKING_INTERNAL, (void*) &blocking_flag, (void*) POINTER_ARRAY);
@@ -1410,7 +1410,7 @@ void receive_tcp_socket(void* p0, const void* p1, const void* p2, const void* p3
 
     } else {
 
-        log_message_debug("Could not receive tcp socket. The internals memory is null.");
+        log_message_debug("Could not receive tcp socket. The internal memory is null.");
     }
 }
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-12 13:35:03 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-12 14:19:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,7 @@
 #define GLOBALS_MANAGER_SOURCE
 
 #include "../../globals/constants/log_constants.c"
+#include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 
 /**

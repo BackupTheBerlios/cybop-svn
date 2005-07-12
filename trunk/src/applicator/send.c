@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-12 14:19:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -39,7 +39,7 @@
 #include "../globals/constants/name_constants.c"
 #include "../globals/constants/structure_constants.c"
 #include "../globals/logger/logger.c"
-#include "../memoriser/accessor/internals_memory_accessor.c"
+#include "../memoriser/accessor/internal_memory_accessor.c"
 #include "../memoriser/creator/integer_creator.c"
 #include "../socket/unix_socket.c"
 
@@ -62,7 +62,7 @@
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
  * @param p5 the signal id
- * @param p6 the internals memory
+ * @param p6 the internal memory
  */
 void send_message(const void* p0, const void* p1,
     const void* p2, const void* p3, const void* p4, const void* p5, void* p6) {
@@ -273,7 +273,7 @@ void send_message(const void* p0, const void* p1,
                     send_tcp_socket( (void*) &cs, (void*) &tc, (void*) &ts,
                                      (void*) dest, (void*) dest_count );
 
-                    // Remove client socket number and main signal id from internals.
+                    // Remove client socket number and main signal id from internal memory.
                     remove_relation_clientsocketnumber_mainsignalid(p6, (void*) &i);
 
                     // Close socket.
@@ -307,7 +307,7 @@ void send_message(const void* p0, const void* p1,
  * @param p3 the knowledge count
  * @param p4 the knowledge size
  * @param p5 the signal id
- * @param p6 the internals
+ * @param p6 the internal memory
  */
 void send_url_refresh( const void* p0, const void* p1,
     const void* p2, const void* p3, const void* p4, const void* p5, void* p6) {
@@ -399,7 +399,7 @@ void send_url_refresh( const void* p0, const void* p1,
                     send_tcp_socket( (void*) &cs, (void*) &tc, (void*) &ts,
                                      (void*) dest, (void*) dest_count );
 
-                    // Remove client socket number and main signal id from internals.
+                    // Remove client socket number and main signal id from internal memory.
                     remove_relation_clientsocketnumber_mainsignalid(p6, (void*) &i);
 
                     // Close socket.

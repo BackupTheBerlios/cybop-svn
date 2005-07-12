@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-12 13:35:04 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-12 14:19:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1095,17 +1095,17 @@ static const char* DESTROY_SIGNAL_MEMORY_MESSAGE = DESTROY_SIGNAL_MEMORY_MESSAGE
 static const int DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT_ARRAY[] = {22};
 static const int* DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT = DESTROY_SIGNAL_MEMORY_MESSAGE_COUNT_ARRAY;
 
-/** The "Handle compound signal." message. */
-static const char HANDLE_COMPOUND_SIGNAL_MESSAGE_ARRAY[] = {'H', 'a', 'n', 'd', 'l', 'e', ' ', 'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd', ' ', 's', 'i', 'g', 'n', 'a', 'l', '.'};
-static const char* HANDLE_COMPOUND_SIGNAL_MESSAGE = HANDLE_COMPOUND_SIGNAL_MESSAGE_ARRAY;
-static const int HANDLE_COMPOUND_SIGNAL_MESSAGE_COUNT_ARRAY[] = {23};
-static const int* HANDLE_COMPOUND_SIGNAL_MESSAGE_COUNT = HANDLE_COMPOUND_SIGNAL_MESSAGE_COUNT_ARRAY;
+/** The "Handle compound." message. */
+static const char HANDLE_COMPOUND_MESSAGE_ARRAY[] = {'H', 'a', 'n', 'd', 'l', 'e', ' ', 'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd', '.'};
+static const char* HANDLE_COMPOUND_MESSAGE = HANDLE_COMPOUND_MESSAGE_ARRAY;
+static const int HANDLE_COMPOUND_MESSAGE_COUNT_ARRAY[] = {23};
+static const int* HANDLE_COMPOUND_MESSAGE_COUNT = HANDLE_COMPOUND_MESSAGE_COUNT_ARRAY;
 
-/** The "Handle operation signal." message. */
-static const char HANDLE_OPERATION_SIGNAL_MESSAGE_ARRAY[] = {'H', 'a', 'n', 'd', 'l', 'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 's', 'i', 'g', 'n', 'a', 'l', '.'};
-static const char* HANDLE_OPERATION_SIGNAL_MESSAGE = HANDLE_OPERATION_SIGNAL_MESSAGE_ARRAY;
-static const int HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT_ARRAY[] = {24};
-static const int* HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT = HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT_ARRAY;
+/** The "Handle operation." message. */
+static const char HANDLE_OPERATION_MESSAGE_ARRAY[] = {'H', 'a', 'n', 'd', 'l', 'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', '.'};
+static const char* HANDLE_OPERATION_MESSAGE = HANDLE_OPERATION_MESSAGE_ARRAY;
+static const int HANDLE_OPERATION_MESSAGE_COUNT_ARRAY[] = {24};
+static const int* HANDLE_OPERATION_MESSAGE_COUNT = HANDLE_OPERATION_MESSAGE_COUNT_ARRAY;
 
 /** The "Set shutdown flag." message. */
 static const char SET_SHUTDOWN_FLAG_MESSAGE_ARRAY[] = {'S', 'e', 't', ' ', 's', 'h', 'u', 't', 'd', 'o', 'w', 'n', ' ', 'f', 'l', 'a', 'g', '.'};
@@ -1117,11 +1117,11 @@ static const int* SET_SHUTDOWN_FLAG_MESSAGE_COUNT = SET_SHUTDOWN_FLAG_MESSAGE_CO
 // Cyboi log messages.
 //
 
-/** The "Wait for signals." message. */
-static const char WAIT_FOR_SIGNALS_MESSAGE_ARRAY[] = {'W', 'a', 'i', 't', ' ', 'f', 'o', 'r', ' ', 's', 'i', 'g', 'n', 'a', 'l', 's', '.'};
-static const char* WAIT_FOR_SIGNALS_MESSAGE = WAIT_FOR_SIGNALS_MESSAGE_ARRAY;
-static const int WAIT_FOR_SIGNALS_MESSAGE_COUNT_ARRAY[] = {17};
-static const int* WAIT_FOR_SIGNALS_MESSAGE_COUNT = WAIT_FOR_SIGNALS_MESSAGE_COUNT_ARRAY;
+/** The "Check for signals." message. */
+static const char CHECK_FOR_SIGNALS_MESSAGE_ARRAY[] = {'C', 'h', 'e', 'c', 'k', ' ', 'f', 'o', 'r', ' ', 's', 'i', 'g', 'n', 'a', 'l', 's', '.'};
+static const char* CHECK_FOR_SIGNALS_MESSAGE = CHECK_FOR_SIGNALS_MESSAGE_ARRAY;
+static const int CHECK_FOR_SIGNALS_MESSAGE_COUNT_ARRAY[] = {17};
+static const int* CHECK_FOR_SIGNALS_MESSAGE_COUNT = CHECK_FOR_SIGNALS_MESSAGE_COUNT_ARRAY;
 
 /** The "Could not handle signal. The signal abstraction is unknown." message. */
 static const char COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'h', 'a', 'n', 'd', 'l', 'e', ' ', 's', 'i', 'g', 'n', 'a', 'l', '.', ' ', 'T', 'h', 'e', ' ', 's', 'i', 'g', 'n', 'a', 'l', ' ', 'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n', ' ', 'i', 's', ' ', 'u', 'n', 'k', 'n', 'o', 'w', 'n', '.'};
@@ -1129,11 +1129,11 @@ static const char* COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MES
 static const int COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT_ARRAY[] = {59};
 static const int* COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT = COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT_ARRAY;
 
-/** The "Could not wait for signals. The internal is null." message. */
-static const char COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'w', 'a', 'i', 't', ' ', 'f', 'o', 'r', ' ', 's', 'i', 'g', 'n', 'a', 'l', 's', '.', ' ', 'T', 'h', 'e', ' ', 'i', 'n', 't', 'e', 'r', 'n', 'a', 'l', ' ', 'i', 's', ' ', 'n', 'u', 'l', 'l', '.'};
-static const char* COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE = COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE_ARRAY;
-static const int COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE_COUNT_ARRAY[] = {50};
-static const int* COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE_COUNT = COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE_COUNT_ARRAY;
+/** The "Could not check for signals. The internal is null." message. */
+static const char COULD_NOT_CHECK_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'c', 'h', 'e', 'c', 'k', ' ', 'f', 'o', 'r', ' ', 's', 'i', 'g', 'n', 'a', 'l', 's', '.', ' ', 'T', 'h', 'e', ' ', 'i', 'n', 't', 'e', 'r', 'n', 'a', 'l', ' ', 'i', 's', ' ', 'n', 'u', 'l', 'l', '.'};
+static const char* COULD_NOT_CHECK_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE = COULD_NOT_CHECK_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE_ARRAY;
+static const int COULD_NOT_CHECK_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE_COUNT_ARRAY[] = {50};
+static const int* COULD_NOT_CHECK_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE_COUNT = COULD_NOT_CHECK_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE_COUNT_ARRAY;
 
 /** The "Exit CYBOI normally." message. */
 static const char EXIT_CYBOI_NORMALLY_MESSAGE_ARRAY[] = {'E', 'x', 'i', 't', ' ', 'C', 'Y', 'B', 'O', 'I', ' ', 'n', 'o', 'r', 'm', 'a', 'l', 'l', 'y', '.'};

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-12 13:35:03 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-12 14:19:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,8 @@
 #include "../applicator/create.c"
 #include "../applicator/destroy.c"
 //?? #include "../controller/internals_memory_manager.c"
-#include "../controller/knowledge_memory_manager.c"
-#include "../controller/signal_memory_manager.c"
+#include "../controller/manager/knowledge_memory_manager.c"
+#include "../controller/manager/signal_memory_manager.c"
 #include "../controller/checker.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"

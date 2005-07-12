@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-12 14:19:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
 // Forward declarations.
 //
 
-void handle_signal(const void* p0, const void* p1, const void* p2, const void* p3,
+void handle(const void* p0, const void* p1, const void* p2, const void* p3,
     const void* p4, const void* p5,const  void* p6, const void* p7, void* p8, void* p9, void* p10);
 
 /**
@@ -167,7 +167,7 @@ void loop(const void* p0, const void* p1, const void* p2, const void* p3, const 
 
                     // Send the loop model as new signal,
                     // as long as the break flag is false (not set).
-                    handle_signal(*ma, *mac, *mm, *mmc, *md, *mdc,
+                    handle(*ma, *mac, *mm, *mmc, *md, *mdc,
                         p5, p6, p7, p8, (void*) &x);
                 }
             }
