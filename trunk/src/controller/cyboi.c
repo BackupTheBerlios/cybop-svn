@@ -25,21 +25,21 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 10:38:51 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 13:35:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOI_SOURCE
 #define CYBOI_SOURCE
 
-#include "../../applicator/create.c"
-#include "../../controller/cyboi/globals_handler.c"
-#include "../../controller/cyboi/system_handler.c"
-#include "../../globals/constants/channel_constants.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../memoriser/creator/integer_creator.c"
-#include "../../memoriser/creator/pointer_creator.c"
-#include "../../tester/tester.c"
+#include "../controller/handler.c"
+//?? #include "../applicator/create.c"
+#include "../controller/manager/globals_manager.c"
+//?? #include "../globals/constants/channel_constants.c"
+//?? #include "../globals/constants/integer_constants.c"
+//?? #include "../memoriser/creator/integer_creator.c"
+//?? #include "../memoriser/creator/pointer_creator.c"
+//?? #include "../tester/tester.c"
 
 /**
  * The main entry function.
@@ -47,9 +47,9 @@
  * It reads the command line parameters that were handed over and
  * takes care about basic system parameters:
  * - create global variables
- * - create internals memory
+ * - create internal memory
  * - handle system
- * - destroy internals memory
+ * - destroy internal memory
  * - destroy global variables
  *
  * The test function is only provided for testing reasons and can be ignored.
@@ -63,10 +63,10 @@ int main(int p0, char** p1) {
     // Return 1 to indicate an error, by default.
     int r = 1;
 
-    // Create global variables.
+    // Startup global variables.
     // CAUTION! They have to be created BEFORE the command line parameter check below!
     // Otherwise, the logger may not be able to log possible error messages.
-    create_globals();
+    startup_globals();
 
     // Call testing procedures. Comment/ uncomment this as needed!
     // CAUTION! This has to stand AFTER the initialization of the
@@ -96,17 +96,17 @@ int main(int p0, char** p1) {
                 // (in this case, the strlen function can be used)
                 // Possibility 2 is applied here.
                 int sc = strlen((char*) *s);
-                // The internals memory.
+                // The internal memory.
                 void* i = NULL_POINTER;
 
-                // Create internals memory
-                create(&i, (void*) INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) INTERNALS_MEMORY_ABSTRACTION, (void*) INTERNALS_MEMORY_ABSTRACTION_COUNT);
+                // Create internal memory
+                create(&i, (void*) INTERNAL_MEMORY_ELEMENTS_COUNT, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
 
-                // Handle system.
-                handle_system(i, *s, &sc);
+                // Manage system.
+                manage(i, *s, &sc);
 
-                // Destroy internals memory.
-                destroy(&i, (void*) INTERNALS_MEMORY_ELEMENTS_COUNT, (void*) INTERNALS_MEMORY_ABSTRACTION, (void*) INTERNALS_MEMORY_ABSTRACTION_COUNT);
+                // Destroy internal memory.
+                destroy(&i, (void*) INTERNAL_MEMORY_ELEMENTS_COUNT, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
 
                 log_message((void*) INFO_LOG_LEVEL, (void*) EXIT_CYBOI_NORMALLY_MESSAGE, (void*) EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 
@@ -129,10 +129,10 @@ int main(int p0, char** p1) {
         log_message((void*) ERROR_LOG_LEVEL, (void*) COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE, (void*) COULD_NOT_EXECUTE_CYBOI_THE_COMMAND_LINE_ARGUMENT_VECTOR_IS_NULL_MESSAGE_COUNT);
     }
 
-    // Destroy global variables.
+    // Shutdown global variables.
     // CAUTION! They have to be destroyed AFTER the log messages above!
     // Otherwise, the logger may not be able to log possible error messages.
-    destroy_globals();
+    shutdown_globals();
 
     return r;
 }

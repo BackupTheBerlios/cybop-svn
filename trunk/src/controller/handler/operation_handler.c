@@ -20,13 +20,13 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 10:38:54 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 13:35:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
-#ifndef OPERATION_SIGNAL_HANDLER_SOURCE
-#define OPERATION_SIGNAL_HANDLER_SOURCE
+#ifndef OPERATION_HANDLER_SOURCE
+#define OPERATION_HANDLER_SOURCE
 
 #include "../../applicator/add.c"
 #include "../../applicator/branch.c"
@@ -63,10 +63,10 @@
  * @param p6 the shutdown flag
  * @param p7 the internals
  */
-void handle_operation_signal(const void* p0, const void* p1, const void* p2, const void* p3,
+void handle_operation(const void* p0, const void* p1, const void* p2, const void* p3,
     const void* p4, const void* p5, void* p6, void* p7) {
 
-    log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_OPERATION_SIGNAL_MESSAGE, (void*) HANDLE_OPERATION_SIGNAL_MESSAGE_COUNT);
+    log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_OPERATION_MESSAGE, (void*) HANDLE_OPERATION_MESSAGE_COUNT);
 
     // The comparison result.
     int r = 0;
@@ -315,5 +315,5 @@ void handle_operation_signal(const void* p0, const void* p1, const void* p2, con
 */
 }
 
-/* OPERATION_SIGNAL_HANDLER_SOURCE */
+/* OPERATION_HANDLER_SOURCE */
 #endif

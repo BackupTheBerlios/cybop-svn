@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 10:38:54 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 13:35:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SIGNAL_MEMORY_HANDLER_SOURCE
-#define SIGNAL_MEMORY_HANDLER_SOURCE
+#ifndef SIGNAL_MEMORY_MANAGER_SOURCE
+#define SIGNAL_MEMORY_MANAGER_SOURCE
 
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/integer_constants.c"
@@ -92,5 +92,5 @@ void shutdown_signal_memory(void* p0) {
     destroy_integer(ss);
 }
 
-/* SIGNAL_MEMORY_HANDLER_SOURCE */
+/* SIGNAL_MEMORY_MANAGER_SOURCE */
 #endif

@@ -20,31 +20,32 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 10:38:51 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 13:35:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SYSTEM_HANDLER_SOURCE
-#define SYSTEM_HANDLER_SOURCE
+#ifndef MANAGER_SOURCE
+#define MANAGER_SOURCE
 
-#include "../../applicator/create.c"
-#include "../../applicator/destroy.c"
-#include "../../controller/cyboi/knowledge_memory_handler.c"
-#include "../../controller/cyboi/signal_memory_handler.c"
-#include "../../controller/cyboi/signal_waiter.c"
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/channel_constants.c"
-#include "../../globals/constants/constant.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
-#include "../../globals/logger/logger.c"
-#include "../../globals/variables/variables.c"
-#include "../../memoriser/array/array.c"
-#include "../../memoriser/creator/integer_creator.c"
+#include "../applicator/create.c"
+#include "../applicator/destroy.c"
+//?? #include "../controller/internals_memory_manager.c"
+#include "../controller/knowledge_memory_manager.c"
+#include "../controller/signal_memory_manager.c"
+#include "../controller/checker.c"
+#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/channel_constants.c"
+#include "../globals/constants/constant.c"
+#include "../globals/constants/integer_constants.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/constants/structure_constants.c"
+#include "../globals/logger/logger.c"
+#include "../globals/variables/variables.c"
+#include "../memoriser/array/array.c"
+#include "../memoriser/creator/integer_creator.c"
 
 /**
- * Handles the system.
+ * Manages the system.
  *
  * A system lifecycle consists of the three phases:
  * - startup
@@ -66,9 +67,9 @@
  * @param p1 the run source
  * @param p2 the run source count
  */
-void handle_system(void* p0, void* p1, void* p2) {
+void manage(void* p0, void* p1, void* p2) {
 
-    log_message_debug("Handle system.");
+    log_message_debug("Manage system.");
 
     if (p0 != NULL_POINTER) {
 
@@ -155,24 +156,24 @@ void handle_system(void* p0, void* p1, void* p2) {
                         (void*) NORMAL_PRIORITY, (void*) id);
 
                     // The system is now started up and complete so that a loop
-                    // can be entered, waiting for signals (events/ interrupts)
+                    // can be entered, checking for signals (events/ interrupts)
                     // which are stored/ found in the signal memory.
                     // The loop is left as soon as its shutdown flag is set.
-                    wait(p0);
+                    check(p0);
 
                 } else {
 
-                    log_message_debug("Could not handle system. The signal memory size is null.");
+                    log_message_debug("Could not manage system. The signal memory size is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not handle system. The signal memory count is null.");
+                log_message_debug("Could not manage system. The signal memory count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not handle system. The signal memory is null.");
+            log_message_debug("Could not manage system. The signal memory is null.");
         }
 
         shutdown_signal_memory(p0);
@@ -180,9 +181,9 @@ void handle_system(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log_message_debug("Could not handle system. The internal memory is null.");
+        log_message_debug("Could not manage system. The internal memory is null.");
     }
 }
 
-/* SYSTEM_HANDLER_SOURCE */
+/* MANAGER_SOURCE */
 #endif

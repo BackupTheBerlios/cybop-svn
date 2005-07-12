@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 10:38:54 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 13:35:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef KNOWLEDGE_MEMORY_HANDLER_SOURCE
-#define KNOWLEDGE_MEMORY_HANDLER_SOURCE
+#ifndef KNOWLEDGE_MEMORY_MANAGER_SOURCE
+#define KNOWLEDGE_MEMORY_MANAGER_SOURCE
 
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/integer_constants.c"
@@ -92,5 +92,5 @@ void shutdown_knowledge_memory(void* p0) {
     destroy_integer(ks);
 }
 
-/* KNOWLEDGE_MEMORY_HANDLER_SOURCE */
+/* KNOWLEDGE_MEMORY_MANAGER_SOURCE */
 #endif

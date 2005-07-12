@@ -20,27 +20,29 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 10:38:54 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 13:35:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef GLOBALS_HANDLER_SOURCE
-#define GLOBALS_HANDLER_SOURCE
+#ifndef GLOBALS_MANAGER_SOURCE
+#define GLOBALS_MANAGER_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/variables/variables.c"
 
 /**
- * Initializes the global variables.
+ * Starts up the global variables.
  *
- * CAUTION! These global variables can NOT be initialized in
- * /globals/variables.c because then constant values are expected!
+ * They are created, where necessary, and initialised.
+ *
+ * CAUTION! These global variables can NOT be initialised in the file
+ * /globals/variables/variables.c because then constant values are expected!
  */
-void create_globals() {
+void startup_globals() {
 
     // CAUTION! DO NOT use logging functionality here!
     // The logger will not work before these global variables are set.
-    fputs("Info: Create globals.\n", stdout);
+    fputs("Info: Startup globals.\n", stdout);
 
     //
     // Null pointers.
@@ -123,14 +125,14 @@ void create_globals() {
 }
 
 /**
- * Finalizes the global variables.
+ * Shuts down the global variables.
  *
  * Destroys allocated memory in descending order,
  * as compared to the initialize_globals procedure.
  */
-void destroy_globals() {
+void shutdown_globals() {
 
-    log_message_debug("Destroy globals.");
+    log_message_debug("Shutdown globals.");
 
     //
     // Logging.
@@ -170,5 +172,5 @@ void destroy_globals() {
     free(INTEGER_PRIMITIVE_SIZE);
 }
 
-/* GLOBALS_HANDLER_SOURCE */
+/* GLOBALS_MANAGER_SOURCE */
 #endif

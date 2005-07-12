@@ -20,20 +20,20 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 10:38:51 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 13:35:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
-#ifndef SIGNAL_HANDLER_SOURCE
-#define SIGNAL_HANDLER_SOURCE
+#ifndef HANDLER_SOURCE
+#define HANDLER_SOURCE
 
-#include "../../controller/cyboi/compound_signal_handler.c"
-#include "../../controller/cyboi/operation_signal_handler.c"
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/logger/logger.c"
-#include "../../memoriser/array/array.c"
+#include "../controller/handler/compound_handler.c"
+#include "../controller/handler/operation_handler.c"
+#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/logger/logger.c"
+#include "../memoriser/array/array.c"
 
 /**
  * Handles the signal.
@@ -50,10 +50,10 @@
  * @param p6 the priority
  * @param p7 the signal id
  * @param p8 the shutdown flag
- * @param p9 the internals memory
+ * @param p9 the internal memory
  * @param p10 the direct execution flag
  */
-void handle_signal(const void* p0, const void* p1, const void* p2, const void* p3,
+void handle(const void* p0, const void* p1, const void* p2, const void* p3,
     const void* p4, const void* p5, const  void* p6, const void* p7, void* p8, void* p9, void* p10) {
 
     // The comparison result.
@@ -65,7 +65,7 @@ void handle_signal(const void* p0, const void* p1, const void* p2, const void* p
 
         if (r == 1) {
 
-            handle_compound_signal(p2, p3, p6, p7, p8, p9, p10);
+            handle_compound(p2, p3, p6, p7, p8, p9, p10);
         }
     }
 
@@ -75,7 +75,7 @@ void handle_signal(const void* p0, const void* p1, const void* p2, const void* p
 
         if (r == 1) {
 
-            handle_operation_signal(p2, p3, p4, p5, p6, p7, p8, p9);
+            handle_operation(p2, p3, p4, p5, p6, p7, p8, p9);
         }
     }
 
@@ -85,5 +85,5 @@ void handle_signal(const void* p0, const void* p1, const void* p2, const void* p
     }
 }
 
-/* SIGNAL_HANDLER_SOURCE */
+/* HANDLER_SOURCE */
 #endif

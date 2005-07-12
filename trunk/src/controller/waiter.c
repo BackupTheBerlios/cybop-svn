@@ -20,28 +20,28 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 10:38:51 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 13:35:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
-#ifndef SIGNAL_WAITER_SOURCE
-#define SIGNAL_WAITER_SOURCE
+#ifndef CHECKER_SOURCE
+#define CHECKER_SOURCE
 
-#include "../../controller/cyboi/signal_handler.c"
-#include "../../globals/constants/integer_constants.c"
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/logger/logger.c"
-#include "../../memoriser/accessor/signal_memory_accessor.c"
+#include "../controller/handler.c"
+#include "../globals/constants/integer_constants.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/logger/logger.c"
+#include "../memoriser/accessor/signal_memory_accessor.c"
 
 /**
- * Waits for signals.
+ * Checks for signals.
  *
- * @param p0 the internals memory
+ * @param p0 the internal memory
  */
-void wait(void* p0) {
+void check(void* p0) {
 
-    log_message((void*) INFO_LOG_LEVEL, (void*) WAIT_FOR_SIGNALS_MESSAGE, (void*) WAIT_FOR_SIGNALS_MESSAGE_COUNT);
+    log_message((void*) INFO_LOG_LEVEL, (void*) CHECK_FOR_SIGNALS_MESSAGE, (void*) CHECK_FOR_SIGNALS_MESSAGE_COUNT);
 
     //?? TODO: Debugging stuff from Rolf Holzmueller.
     void** socket_flag = POINTER_NULL_POINTER;
@@ -151,15 +151,15 @@ void wait(void* p0) {
                                                                 if (id != POINTER_NULL_POINTER) {
 
                                                                     //?? For testing only. TODO: Delete these lines later!
-                                                                    fprintf(stderr, "wait i: %i\n", i);
-                                                                    fprintf(stderr, "wait a: %s\n", (char*) *a);
-                                                                    fprintf(stderr, "wait ac: %i\n", *((int*) *ac));
-                                                                    fprintf(stderr, "wait m: %s\n", (char*) *m);
-                                                                    fprintf(stderr, "wait mc: %i\n", *((int*) *mc));
+                                                                    fprintf(stderr, "check i: %i\n", i);
+                                                                    fprintf(stderr, "check a: %s\n", (char*) *a);
+                                                                    fprintf(stderr, "check ac: %i\n", *((int*) *ac));
+                                                                    fprintf(stderr, "check m: %s\n", (char*) *m);
+                                                                    fprintf(stderr, "check mc: %i\n", *((int*) *mc));
                                                                     //?? d and dc are NULL. DO NOT try to print their values here!
-                                                                    fprintf(stderr, "wait p: %i\n", *((int*) *p));
-                                                                    fprintf(stderr, "wait id: %i\n", *((int*) *id));
-                                                                    fprintf(stderr, "wait knowledge model: %s\n", "");
+                                                                    fprintf(stderr, "check p: %i\n", *((int*) *p));
+                                                                    fprintf(stderr, "check id: %i\n", *((int*) *id));
+                                                                    fprintf(stderr, "check knowledge model: %s\n", "");
 //??                                                                    test_knowledge_model(*k, *kc, 0);
 
                                                                     // CAUTION! Do NOT destroy signal here!
@@ -172,7 +172,7 @@ void wait(void* p0) {
                                                                     // Handle signal.
                                                                     //
 
-                                                                    handle_signal(*a, *ac, *m, *mc, *d, *dc, *p, *id, (void*) &f, p0, &x);
+                                                                    handle(*a, *ac, *m, *mc, *d, *dc, *p, *id, (void*) &f, p0, &x);
 
                                                                     // Remove signal from signal memory.
                                                                     remove_signal(*s, *sc, *ss, (void*) &i);
@@ -181,50 +181,50 @@ void wait(void* p0) {
                                                                     // CAUTION! Do NOT hand over as reference!
                                                                     // The id was read from signal memory and is of type void**.
                                                                     // The expression (&*id) is the same like (id).
-                                                                    fprintf(stderr, "TEST wait pre integer destroy i: %i\n", i);
+                                                                    fprintf(stderr, "TEST check pre integer destroy i: %i\n", i);
 //??                                                                    destroy_integer((void*) id);
-                                                                    fprintf(stderr, "TEST wait post integer destroy i: %i\n", i);
+                                                                    fprintf(stderr, "TEST check post integer destroy i: %i\n", i);
                                                                     // CAUTION! Do NOT destroy the signal priority!
                                                                     // It is a FIXED system constant.
 
                                                                 } else {
 
-                                                                    log_message_debug("Could not wait for signals. The identification is null.");
+                                                                    log_message_debug("Could not check for signals. The identification is null.");
                                                                 }
 
                                                             } else {
 
-                                                                log_message_debug("Could not wait for signals. The priority is null.");
+                                                                log_message_debug("Could not check for signals. The priority is null.");
                                                             }
 
                                                         } else {
 
-                                                            log_message_debug("Could not wait for signals. The details count is null.");
+                                                            log_message_debug("Could not check for signals. The details count is null.");
                                                         }
 
                                                     } else {
 
-                                                        log_message_debug("Could not wait for signals. The details is null.");
+                                                        log_message_debug("Could not check for signals. The details is null.");
                                                     }
 
                                                 } else {
 
-                                                    log_message_debug("Could not wait for signals. The model count is null.");
+                                                    log_message_debug("Could not check for signals. The model count is null.");
                                                 }
 
                                             } else {
 
-                                                log_message_debug("Could not wait for signals. The model is null.");
+                                                log_message_debug("Could not check for signals. The model is null.");
                                             }
 
                                         } else {
 
-                                            log_message_debug("Could not wait for signals. The abstraction count is null.");
+                                            log_message_debug("Could not check for signals. The abstraction count is null.");
                                         }
 
                                     } else {
 
-                                        log_message_debug("Could not wait for signals. The abstraction is null.");
+                                        log_message_debug("Could not check for signals. The abstraction is null.");
                                     }
 
                                     // Reset abstraction.
@@ -249,34 +249,34 @@ void wait(void* p0) {
 
                         } else {
 
-                            log_message_debug("Could not wait for signals. The signal memory size is null.");
+                            log_message_debug("Could not check for signals. The signal memory size is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not wait for signals. The signal memory count is null.");
+                        log_message_debug("Could not check for signals. The signal memory count is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not wait for signals. The signal memory is null.");
+                    log_message_debug("Could not check for signals. The signal memory is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not wait for signals. The knowledge memory size is null.");
+                log_message_debug("Could not check for signals. The knowledge memory size is null.");
             }
 
         } else {
 
-            log_message_debug("Could not wait for signals. The knowledge memory count is null.");
+            log_message_debug("Could not check for signals. The knowledge memory count is null.");
         }
 
     } else {
 
-        log_message_debug("Could not wait for signals. The knowledge memory is null.");
+        log_message_debug("Could not check for signals. The knowledge memory is null.");
     }
 }
 
-/* SIGNAL_WAITER_SOURCE */
+/* CHECKER_SOURCE */
 #endif

@@ -20,13 +20,13 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 10:38:53 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 13:35:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
-#ifndef COMPOUND_SIGNAL_HANDLER_SOURCE
-#define COMPOUND_SIGNAL_HANDLER_SOURCE
+#ifndef COMPOUND_HANDLER_SOURCE
+#define COMPOUND_HANDLER_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -37,7 +37,7 @@
 // Forward declarations.
 //
 
-void handle_signal(const void* p0, const void* p1, const void* p2, const void* p3,
+void handle(const void* p0, const void* p1, const void* p2, const void* p3,
     const void* p4, const void* p5, const  void* p6, const void* p7, void* p8, void* p9, void* p10);
 
 /*??
@@ -58,11 +58,11 @@ void branch(const void* param, const int* param_count,
  * @param p2 the signal priority
  * @param p3 the signal id
  * @param p4 the shutdown flag
- * @param p5 the internals memory
+ * @param p5 the internal memory
  * @param p6 the direct execution flag
  */
-void handle_compound_signal(const void* p0, const void* p1,
-    const void* p2, const void* p3, void* p4, void* p5, void* p6) {
+void handle_compound(const void* p0, const void* p1, const void* p2,
+    const void* p3, void* p4, void* p5, void* p6) {
 
     if (p1 != NULL_POINTER) {
 
@@ -86,7 +86,7 @@ void handle_compound_signal(const void* p0, const void* p1,
         get_array_elements(p5, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &smc, (void*) POINTER_ARRAY);
         get_array_elements(p5, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &sms, (void*) POINTER_ARRAY);
 
-        log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_COMPOUND_SIGNAL_MESSAGE, (void*) HANDLE_COMPOUND_SIGNAL_MESSAGE_COUNT);
+        log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_COMPOUND_MESSAGE, (void*) HANDLE_COMPOUND_MESSAGE_COUNT);
 
         // The abstractions, models, details.
         void** pa = POINTER_NULL_POINTER;
@@ -165,39 +165,39 @@ void handle_compound_signal(const void* p0, const void* p1,
 
                                                             } else {
 */
-                                                                handle_signal(*a, *ac, *m, *mc, *d, *dc, p2, p3, p4, p5, p6);
+                                                                handle(*a, *ac, *m, *mc, *d, *dc, p2, p3, p4, p5, p6);
 /*??
                                                             }
 */
 
                                                         } else {
 
-                                                            log_message_debug("Could not handle compound signal. The details count is null.");
+                                                            log_message_debug("Could not handle compound. The details count is null.");
                                                         }
 
                                                     } else {
 
-                                                        log_message_debug("Could not handle compound signal. The details is null.");
+                                                        log_message_debug("Could not handle compound. The details is null.");
                                                     }
 
                                                 } else {
 
-                                                    log_message_debug("Could not handle compound signal. The model count is null.");
+                                                    log_message_debug("Could not handle compound. The model count is null.");
                                                 }
 
                                             } else {
 
-                                                log_message_debug("Could not handle compound signal. The model is null.");
+                                                log_message_debug("Could not handle compound. The model is null.");
                                             }
 
                                         } else {
 
-                                            log_message_debug("Could not handle compound signal. The abstraction count is null.");
+                                            log_message_debug("Could not handle compound. The abstraction count is null.");
                                         }
 
                                     } else {
 
-                                        log_message_debug("Could not handle compound signal. The abstraction is null.");
+                                        log_message_debug("Could not handle compound. The abstraction is null.");
                                     }
 
                                     // Reset abstraction, model, details.
@@ -213,39 +213,39 @@ void handle_compound_signal(const void* p0, const void* p1,
 
                             } else {
 
-                                log_message_debug("Could not handle compound signal. The part details counts is null.");
+                                log_message_debug("Could not handle compound. The part details counts is null.");
                             }
 
                         } else {
 
-                            log_message_debug("Could not handle compound signal. The part details is null.");
+                            log_message_debug("Could not handle compound. The part details is null.");
                         }
 
                     } else {
 
-                        log_message_debug("Could not handle compound signal. The part models counts is null.");
+                        log_message_debug("Could not handle compound. The part models counts is null.");
                     }
 
                 } else {
 
-                    log_message_debug("Could not handle compound signal. The part models is null.");
+                    log_message_debug("Could not handle compound. The part models is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not handle compound signal. The part abstractions counts is null.");
+                log_message_debug("Could not handle compound. The part abstractions counts is null.");
             }
 
         } else {
 
-            log_message_debug("Could not handle compound signal. The part abstractions is null.");
+            log_message_debug("Could not handle compound. The part abstractions is null.");
         }
 
     } else {
 
-        log_message_debug("Could not handle compound signal. The signal count is null.");
+        log_message_debug("Could not handle compound. The signal count is null.");
     }
 }
 
-/* COMPOUND_SIGNAL_HANDLER_SOURCE */
+/* COMPOUND_HANDLER_SOURCE */
 #endif
