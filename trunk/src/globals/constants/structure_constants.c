@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-29 22:57:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-12 13:35:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -309,12 +309,12 @@ static const int SIGNALS_IDENTIFICATIONS_INDEX_ARRAY[] = {7};
 static const int* SIGNALS_IDENTIFICATIONS_INDEX = SIGNALS_IDENTIFICATIONS_INDEX_ARRAY;
 
 //
-// Internals memory elements.
+// Internal memory elements.
 //
 
-/** The internals memory elements count. */
-static const int INTERNALS_MEMORY_ELEMENTS_COUNT_ARRAY[] = {44};
-static const int* INTERNALS_MEMORY_ELEMENTS_COUNT = INTERNALS_MEMORY_ELEMENTS_COUNT_ARRAY;
+/** The internal memory elements count. */
+static const int INTERNAL_MEMORY_ELEMENTS_COUNT_ARRAY[] = {44};
+static const int* INTERNAL_MEMORY_ELEMENTS_COUNT = INTERNAL_MEMORY_ELEMENTS_COUNT_ARRAY;
 
 /** The knowledge memory. */
 static const int KNOWLEDGE_MEMORY_INTERNAL_ARRAY[] = {0};

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-04 23:57:03 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 13:35:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1129,11 +1129,11 @@ static const char* COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MES
 static const int COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT_ARRAY[] = {59};
 static const int* COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT = COULD_NOT_HANDLE_SIGNAL_THE_SIGNAL_ABSTRACTION_IS_UNKNOWN_MESSAGE_COUNT_ARRAY;
 
-/** The "Could not wait for signals. The internals is null." message. */
-static const char COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNALS_IS_NULL_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'w', 'a', 'i', 't', ' ', 'f', 'o', 'r', ' ', 's', 'i', 'g', 'n', 'a', 'l', 's', '.', ' ', 'T', 'h', 'e', ' ', 'i', 'n', 't', 'e', 'r', 'n', 'a', 'l', 's', ' ', 'i', 's', ' ', 'n', 'u', 'l', 'l', '.'};
-static const char* COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNALS_IS_NULL_MESSAGE = COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNALS_IS_NULL_MESSAGE_ARRAY;
-static const int COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNALS_IS_NULL_MESSAGE_COUNT_ARRAY[] = {50};
-static const int* COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNALS_IS_NULL_MESSAGE_COUNT = COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNALS_IS_NULL_MESSAGE_COUNT_ARRAY;
+/** The "Could not wait for signals. The internal is null." message. */
+static const char COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE_ARRAY[] = {'C', 'o', 'u', 'l', 'd', ' ', 'n', 'o', 't', ' ', 'w', 'a', 'i', 't', ' ', 'f', 'o', 'r', ' ', 's', 'i', 'g', 'n', 'a', 'l', 's', '.', ' ', 'T', 'h', 'e', ' ', 'i', 'n', 't', 'e', 'r', 'n', 'a', 'l', ' ', 'i', 's', ' ', 'n', 'u', 'l', 'l', '.'};
+static const char* COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE = COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE_ARRAY;
+static const int COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE_COUNT_ARRAY[] = {50};
+static const int* COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE_COUNT = COULD_NOT_WAIT_FOR_SIGNALS_THE_INTERNAL_IS_NULL_MESSAGE_COUNT_ARRAY;
 
 /** The "Exit CYBOI normally." message. */
 static const char EXIT_CYBOI_NORMALLY_MESSAGE_ARRAY[] = {'E', 'x', 'i', 't', ' ', 'C', 'Y', 'B', 'O', 'I', ' ', 'n', 'o', 'r', 'm', 'a', 'l', 'l', 'y', '.'};

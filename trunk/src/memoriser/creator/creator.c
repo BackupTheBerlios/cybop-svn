@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-12 13:35:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,7 @@
 #include "../../memoriser/creator/double_creator.c"
 #include "../../memoriser/creator/fraction_creator.c"
 #include "../../memoriser/creator/integer_creator.c"
-#include "../../memoriser/creator/internals_memory_creator.c"
+#include "../../memoriser/creator/internal_memory_creator.c"
 #include "../../memoriser/creator/signal_memory_creator.c"
 #include "../../memoriser/creator/string_creator.c"
 #include "../../memoriser/creator/time_creator.c"
@@ -213,11 +213,11 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
     if (r != 1) {
 
-        compare_arrays(p2, p3, (void*) INTERNALS_MEMORY_ABSTRACTION, (void*) INTERNALS_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p2, p3, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            create_internals_memory(p0, p1);
+            create_internal_memory(p0, p1);
         }
     }
 
@@ -377,11 +377,11 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
     if (r != 1) {
 
-        compare_arrays(p2, p3, (void*) INTERNALS_MEMORY_ABSTRACTION, (void*) INTERNALS_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p2, p3, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            destroy_internals_memory(p0, p1);
+            destroy_internal_memory(p0, p1);
         }
     }
 }
