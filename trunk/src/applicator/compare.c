@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,7 +38,7 @@
 #include "../globals/constants/name_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
-#include "../memoriser/array/array.c"
+#include "../memoriser/array.c"
 
 /**
  * Compares two parameters.

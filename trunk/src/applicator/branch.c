@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 14:19:21 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -35,7 +35,7 @@
 #include "../globals/constants/structure_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
-#include "../memoriser/array/array.c"
+#include "../memoriser/array.c"
 
 //
 // Forward declarations.

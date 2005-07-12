@@ -24,29 +24,29 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 14:33:19 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CREATOR_SOURCE
 #define CREATOR_SOURCE
 
-#include "../../globals/constants/abstraction_constants.c"
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/logger/logger.c"
-#include "../../memoriser/array/array.c"
-#include "../../memoriser/creator/complex_creator.c"
-#include "../../memoriser/creator/compound_creator.c"
-#include "../../memoriser/creator/double_creator.c"
-#include "../../memoriser/creator/fraction_creator.c"
-#include "../../memoriser/creator/integer_creator.c"
-#include "../../memoriser/creator/internal_memory_creator.c"
-#include "../../memoriser/creator/signal_memory_creator.c"
-#include "../../memoriser/creator/string_creator.c"
-#include "../../memoriser/creator/time_creator.c"
-#include "../../memoriser/creator/vector_creator.c"
-#include "../../memoriser/creator/xml_node_creator.c"
-#include "../../memoriser/creator/xml_property_creator.c"
+#include "../globals/constants/abstraction_constants.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/logger/logger.c"
+#include "../memoriser/array.c"
+#include "../memoriser/creator/complex_creator.c"
+#include "../memoriser/creator/compound_creator.c"
+#include "../memoriser/creator/double_creator.c"
+#include "../memoriser/creator/fraction_creator.c"
+#include "../memoriser/creator/integer_creator.c"
+#include "../memoriser/creator/internal_memory_creator.c"
+#include "../memoriser/creator/signal_memory_creator.c"
+#include "../memoriser/creator/string_creator.c"
+#include "../memoriser/creator/time_creator.c"
+#include "../memoriser/creator/vector_creator.c"
+#include "../memoriser/creator/xml_node_creator.c"
+#include "../memoriser/creator/xml_property_creator.c"
 
 /**
  * Creates the model.

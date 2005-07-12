@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-12 14:19:21 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -31,8 +31,6 @@
 #include "../applicator/send/send_linux_console.c"
 //?? #include "../applicator/send/send_tcp_socket.c"
 #include "../applicator/send/send_x_window_system.c"
-#include "../controller/communicator/tcp_socket_communicator.c"
-#include "../controller/translator/translator.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
 #include "../globals/constants/model_constants.c"
@@ -40,7 +38,9 @@
 #include "../globals/constants/structure_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/internal_memory_accessor.c"
+#include "../memoriser/communicator/tcp_socket_communicator.c"
 #include "../memoriser/creator/integer_creator.c"
+#include "../memoriser/translator.c"
 #include "../socket/unix_socket.c"
 
 /**

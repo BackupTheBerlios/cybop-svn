@@ -20,16 +20,16 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 14:33:19 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef TRANSLATOR_SOURCE
 #define TRANSLATOR_SOURCE
 
-#include "../../controller/translator/cybol_translator.c"
-#include "../../controller/translator/html_translator.c"
-#include "../../controller/translator/x_window_system_translator.c"
+#include "../memoriser/translator/cybol_translator.c"
+#include "../memoriser/translator/html_translator.c"
+#include "../memoriser/translator/x_window_system_translator.c"
 
 /**
  * Decodes the document model according to the given document type

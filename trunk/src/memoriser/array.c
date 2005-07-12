@@ -49,21 +49,21 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 14:33:19 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ARRAY_SOURCE
 #define ARRAY_SOURCE
 
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
-#include "../../globals/logger/logger.c"
-#include "../../memoriser/array/character_array.c"
-#include "../../memoriser/array/double_array.c"
-#include "../../memoriser/array/integer_array.c"
-#include "../../memoriser/array/pointer_array.c"
-#include "../../memoriser/array/unsigned_long_array.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/constants/structure_constants.c"
+#include "../globals/logger/logger.c"
+#include "../memoriser/array/character_array.c"
+#include "../memoriser/array/double_array.c"
+#include "../memoriser/array/integer_array.c"
+#include "../memoriser/array/pointer_array.c"
+#include "../memoriser/array/unsigned_long_array.c"
 
 /**
  * Creates the array.

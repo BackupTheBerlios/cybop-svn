@@ -22,7 +22,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.32 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+# @version $Revision: 1.33 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
 # @author Michael Simon <michael.simon@gmx.net>
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
@@ -65,7 +65,7 @@ COMPILER_FLAGS = -g -I/usr/X11R6/include -I/usr/include/libxml2 # -fsjlj-excepti
 #vpath %.c $(SRC)
 #vpath %.o $(OBJ)
 
-MAIN_SOURCE = $(SRC)/controller/cyboi/cyboi.c
+MAIN_SOURCE = $(SRC)/controller/cyboi.c
 #ROOT_SOURCES = $(wildcard $(SRC)/*.c)
 #ROOT_OBJECTS = $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(ROOT_SOURCES))
 
@@ -88,14 +88,12 @@ APPLICATOR_SUSPEND_SOURCES = $(wildcard $(SRC)/applicator/suspend/*.c)
 APPLICATOR_SUSPEND_OBJECTS = $(patsubst $(SRC)/applicator/suspend/%.c,$(OBJ)/applicator/suspend/%.o,$(APPLICATOR_SUSPEND_SOURCES))
 
 # Controller.
-CONTROLLER_COMMUNICATOR_SOURCES = $(wildcard $(SRC)/controller/communicator/*.c)
-CONTROLLER_COMMUNICATOR_OBJECTS = $(patsubst $(SRC)/controller/communicator/%.c,$(OBJ)/controller/communicator/%.o,$(CONTROLLER_COMMUNICATOR_SOURCES))
-CONTROLLER_CONVERTER_SOURCES = $(wildcard $(SRC)/controller/converter/*.c)
-CONTROLLER_CONVERTER_OBJECTS = $(patsubst $(SRC)/controller/converter/%.c,$(OBJ)/controller/converter/%.o,$(CONTROLLER_CONVERTER_SOURCES))
-CONTROLLER_CYBOI_SOURCES = $(wildcard $(SRC)/controller/cyboi/*.c)
-CONTROLLER_CYBOI_OBJECTS = $(patsubst $(SRC)/controller/cyboi/%.c,$(OBJ)/controller/cyboi/%.o,$(CONTROLLER_CYBOI_SOURCES))
-CONTROLLER_TRANSLATOR_SOURCES = $(wildcard $(SRC)/controller/translator/*.c)
-CONTROLLER_TRANSLATOR_OBJECTS = $(patsubst $(SRC)/controller/translator/%.c,$(OBJ)/controller/translator/%.o,$(CONTROLLER_TRANSLATOR_SOURCES))
+CONTROLLER_SOURCES = $(wildcard $(SRC)/controller/*.c)
+CONTROLLER_OBJECTS = $(patsubst $(SRC)/controller/%.c,$(OBJ)/controller/%.o,$(CONTROLLER_SOURCES))
+CONTROLLER_HANDLER_SOURCES = $(wildcard $(SRC)/controller/handler/*.c)
+CONTROLLER_HANDLER_OBJECTS = $(patsubst $(SRC)/controller/handler/%.c,$(OBJ)/controller/handler/%.o,$(CONTROLLER_HANDLER_SOURCES))
+CONTROLLER_MANAGER_SOURCES = $(wildcard $(SRC)/controller/manager/*.c)
+CONTROLLER_MANAGER_OBJECTS = $(patsubst $(SRC)/controller/manager/%.c,$(OBJ)/controller/manager/%.o,$(CONTROLLER_MANAGER_SOURCES))
 
 # Globals.
 GLOBALS_CONSTANTS_SOURCES = $(wildcard $(SRC)/globals/constants/*.c)
@@ -110,8 +108,14 @@ MEMORISER_ACCESSOR_SOURCES = $(wildcard $(SRC)/memoriser/accessor/*.c)
 MEMORISER_ACCESSOR_OBJECTS = $(patsubst $(SRC)/memoriser/accessor/%.c,$(OBJ)/memoriser/accessor/%.o,$(MEMORISER_ACCESSOR_SOURCES))
 MEMORISER_ARRAY_SOURCES = $(wildcard $(SRC)/memoriser/array/*.c)
 MEMORISER_ARRAY_OBJECTS = $(patsubst $(SRC)/memoriser/array/%.c,$(OBJ)/memoriser/array/%.o,$(MEMORISER_ARRAY_SOURCES))
+MEMORISER_COMMUNICATOR_SOURCES = $(wildcard $(SRC)/memoriser/communicator/*.c)
+MEMORISER_COMMUNICATOR_OBJECTS = $(patsubst $(SRC)/memoriser/communicator/%.c,$(OBJ)/memoriser/communicator/%.o,$(MEMORISER_COMMUNICATOR_SOURCES))
+MEMORISER_CONVERTER_SOURCES = $(wildcard $(SRC)/memoriser/converter/*.c)
+MEMORISER_CONVERTER_OBJECTS = $(patsubst $(SRC)/memoriser/converter/%.c,$(OBJ)/memoriser/converter/%.o,$(MEMORISER_CONVERTER_SOURCES))
 MEMORISER_CREATOR_SOURCES = $(wildcard $(SRC)/memoriser/creator/*.c)
 MEMORISER_CREATOR_OBJECTS = $(patsubst $(SRC)/memoriser/creator/%.c,$(OBJ)/memoriser/creator/%.o,$(MEMORISER_CREATOR_SOURCES))
+MEMORISER_TRANSLATOR_SOURCES = $(wildcard $(SRC)/memoriser/translator/*.c)
+MEMORISER_TRANSLATOR_OBJECTS = $(patsubst $(SRC)/memoriser/translator/%.c,$(OBJ)/memoriser/translator/%.o,$(MEMORISER_TRANSLATOR_SOURCES))
 
 # Tester.
 TESTER_SOURCES = $(wildcard $(SRC)/tester/*.c)
@@ -142,23 +146,25 @@ all: create \
 	$(APPLICATOR_SHUTDOWN_OBJECTS) \
 	$(APPLICATOR_STARTUP_OBJECTS) \
 	$(APPLICATOR_SUSPEND_OBJECTS) \
-	$(CONTROLLER_COMMUNICATOR_OBJECTS) \
-	$(CONTROLLER_CONVERTER_OBJECTS) \
-	$(CONTROLLER_CYBOI_OBJECTS) \
-	$(CONTROLLER_TRANSLATOR_OBJECTS) \
+	$(CONTROLLER_OBJECTS) \
+	$(CONTROLLER_HANDLER_OBJECTS) \
+	$(CONTROLLER_MANAGER_OBJECTS) \
 	$(GLOBALS_CONSTANTS_OBJECTS) \
 	$(GLOBALS_LOGGER_OBJECTS) \
 	$(GLOBALS_VARIABLES_OBJECTS) \
 	$(MEMORISER_ACCESSOR_OBJECTS) \
 	$(MEMORISER_ARRAY_OBJECTS) \
+	$(MEMORISER_COMMUNICATOR_OBJECTS) \
+	$(MEMORISER_CONVERTER_OBJECTS) \
 	$(MEMORISER_CREATOR_OBJECTS) \
+	$(MEMORISER_TRANSLATOR_OBJECTS) \
 	$(TESTER_OBJECTS) \
 # Compile source files.
-	$(COMPILER) -c $(COMPILER_FLAGS) $(SRC)/controller/cyboi/cyboi.c \
-		-o $(OBJ)/controller/cyboi/cyboi.o
+	$(COMPILER) -c $(COMPILER_FLAGS) $(SRC)/controller/cyboi.c \
+		-o $(OBJ)/controller/cyboi.o
 # Link object files.
 	$(COMPILER) -L/usr/X11R6/lib -L/usr/lib \
-		-o $(BIN)/$(BINARY) $(OBJ)/controller/cyboi/cyboi.o -lX11 -lxml2
+		-o $(BIN)/$(BINARY) $(OBJ)/controller/cyboi.o -lX11 -lxml2
 # Print ready message.
 	@echo Compiled cyboi files.
 
@@ -179,10 +185,8 @@ create:
 	-cd $(OBJ); mkdir applicator/startup
 	-cd $(OBJ); mkdir applicator/suspend
 	-cd $(OBJ); mkdir controller
-	-cd $(OBJ); mkdir controller/communicator
-	-cd $(OBJ); mkdir controller/converter
-	-cd $(OBJ); mkdir controller/cyboi
-	-cd $(OBJ); mkdir controller/translator
+	-cd $(OBJ); mkdir controller/handler
+	-cd $(OBJ); mkdir controller/manager
 	-cd $(OBJ); mkdir globals
 	-cd $(OBJ); mkdir globals/constants
 	-cd $(OBJ); mkdir globals/logger
@@ -190,7 +194,10 @@ create:
 	-cd $(OBJ); mkdir memoriser
 	-cd $(OBJ); mkdir memoriser/accessor
 	-cd $(OBJ); mkdir memoriser/array
+	-cd $(OBJ); mkdir memoriser/communicator
+	-cd $(OBJ); mkdir memoriser/converter
 	-cd $(OBJ); mkdir memoriser/creator
+	-cd $(OBJ); mkdir memoriser/translator
 	-cd $(OBJ); mkdir tester
 
 #$(OBJ)/%.o: $(SRC)/%.c
@@ -220,16 +227,13 @@ $(OBJ)/applicator/startup/%.o: $(SRC)/applicator/startup/%.c
 $(OBJ)/applicator/suspend/%.o: $(SRC)/applicator/suspend/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/controller/communicator/%.o: $(SRC)/controller/communicator/%.c
+$(OBJ)/controller/%.o: $(SRC)/controller/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/controller/converter/%.o: $(SRC)/controller/converter/%.c
+$(OBJ)/controller/handler/%.o: $(SRC)/controller/handler/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
-$(OBJ)/controller/cyboi/%.o: $(SRC)/controller/cyboi/%.c
-	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
-
-$(OBJ)/controller/translator/%.o: $(SRC)/controller/translator/%.c
+$(OBJ)/controller/manager/%.o: $(SRC)/controller/manager/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/globals/constants/%.o: $(SRC)/globals/constants/%.c
@@ -247,7 +251,16 @@ $(OBJ)/memoriser/accessor/%.o: $(SRC)/memoriser/accessor/%.c
 $(OBJ)/memoriser/array/%.o: $(SRC)/memoriser/array/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
+$(OBJ)/memoriser/communicator/%.o: $(SRC)/memoriser/communicator/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/memoriser/converter/%.o: $(SRC)/memoriser/converter/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
 $(OBJ)/memoriser/creator/%.o: $(SRC)/memoriser/creator/%.c
+	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
+
+$(OBJ)/memoriser/translator/%.o: $(SRC)/memoriser/translator/%.c
 	$(COMPILER) -c $(COMPILER_FLAGS) $< -o $@
 
 $(OBJ)/tester/%.o: $(SRC)/tester/%.c

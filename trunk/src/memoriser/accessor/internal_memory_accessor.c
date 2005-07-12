@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-12 14:19:21 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -33,7 +33,7 @@
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memoriser/array/array.c"
+#include "../../memoriser/array.c"
 
 /**
  * Add the client socket.

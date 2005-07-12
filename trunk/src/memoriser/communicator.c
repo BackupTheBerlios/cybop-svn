@@ -24,7 +24,7 @@
  * - receive data into a byte array
  * - send data from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 14:33:19 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,14 +32,14 @@
 #define COMMUNICATOR_SOURCE
 
 #include <stdio.h>
-#include "../../controller/communicator/file_communicator.c"
-#include "../../controller/communicator/ftp_communicator.c"
-#include "../../controller/communicator/http_communicator.c"
-#include "../../controller/communicator/inline_communicator.c"
-#include "../../globals/constants/channel_constants.c"
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/logger/logger.c"
-#include "../../memoriser/array/array.c"
+#include "../globals/constants/channel_constants.c"
+#include "../globals/constants/log_constants.c"
+#include "../globals/logger/logger.c"
+#include "../memoriser/array.c"
+#include "../memoriser/communicator/file_communicator.c"
+#include "../memoriser/communicator/ftp_communicator.c"
+#include "../memoriser/communicator/http_communicator.c"
+#include "../memoriser/communicator/inline_communicator.c"
 
 /**
  * Receives a stream according to the given communication channel type

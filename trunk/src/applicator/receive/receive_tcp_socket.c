@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 14:19:21 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -50,8 +50,8 @@
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor/internal_memory_accessor.c"
 #include "../../memoriser/accessor/signal_memory_accessor.c"
-#include "../../memoriser/array/array.c"
-#include "../../memoriser/creator/creator.c"
+#include "../../memoriser/array.c"
+#include "../../memoriser/creator.c"
 
 //
 // Forward declarations.

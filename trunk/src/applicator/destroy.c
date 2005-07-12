@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,7 +33,7 @@
 #include "../globals/constants/log_constants.c"
 #include "../globals/constants/name_constants.c"
 #include "../globals/logger/logger.c"
-#include "../memoriser/array/array.c"
+#include "../memoriser/array.c"
 
 void destroy_model( void** model, void* model_count, void* model_size,
                     void* model_abstr, void* model_abstr_count );

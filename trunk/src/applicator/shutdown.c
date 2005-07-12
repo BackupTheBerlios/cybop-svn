@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module shuts down a service.
  */
@@ -35,7 +35,7 @@
 #include "../globals/constants/model_constants.c"
 #include "../globals/constants/name_constants.c"
 #include "../globals/logger/logger.c"
-#include "../memoriser/array/array.c"
+#include "../memoriser/array.c"
 
 /**
  * Shuts down a service.

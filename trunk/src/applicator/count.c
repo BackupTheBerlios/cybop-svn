@@ -22,22 +22,22 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COUNT_SOURCE
 #define COUNT_SOURCE
 
-#include "../controller/communicator/communicator.c"
-#include "../controller/converter/converter.c"
-#include "../controller/translator/translator.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/log_constants.c"
 #include "../globals/constants/name_constants.c"
 #include "../globals/logger/logger.c"
-#include "../memoriser/array/array.c"
-#include "../memoriser/creator/creator.c"
+#include "../memoriser/array.c"
+#include "../memoriser/communicator.c"
+#include "../memoriser/converter.c"
+#include "../memoriser/creator.c"
+#include "../memoriser/translator.c"
 #include "../tester/tester.c"
 
 /*
