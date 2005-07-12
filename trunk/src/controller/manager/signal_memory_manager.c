@@ -1,5 +1,5 @@
 /*
- * $RCSfile: signal_memory_handler.c,v $
+ * $RCSfile: signal_memory_manager.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-12 10:38:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
