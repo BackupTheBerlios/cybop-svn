@@ -49,7 +49,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-12 14:33:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

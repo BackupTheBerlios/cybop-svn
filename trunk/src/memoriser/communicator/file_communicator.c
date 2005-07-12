@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-12 14:35:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

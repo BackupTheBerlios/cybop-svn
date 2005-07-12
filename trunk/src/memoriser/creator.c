@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 13:35:04 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-12 14:33:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

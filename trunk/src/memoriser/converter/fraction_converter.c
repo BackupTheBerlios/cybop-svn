@@ -1,5 +1,5 @@
 /*
- * $RCSfile: complex_converter.c,v $
+ * $RCSfile: fraction_converter.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,22 +20,25 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-12 14:35:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef COMPLEX_CONVERTER_SOURCE
-#define COMPLEX_CONVERTER_SOURCE
+#ifndef FRACTION_CONVERTER_SOURCE
+#define FRACTION_CONVERTER_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
 
 //
-// A complex consists of two floats, a real and an imaginary.
+// A fraction consists of two integers, a numerator and a denominator.
+//
+// For higher performance, it is mostly better to use floating point numbers
+// (float) which can be calculated by the Arithmetic Logic Unit (ALU).
 //
 
 /**
- * Parses the byte stream and creates a complex model from it.
+ * Parses the byte stream and creates a fraction model from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -43,7 +46,7 @@
  * @param p3 the source
  * @param p4 the source count
  */
-void parse_complex(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void parse_fraction(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -55,22 +58,22 @@ void parse_complex(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 
             if (p0 != NULL_POINTER) {
 
-                void* d = (void*) p0;
+                void** d = (void**) p0;
 
 /*??
-            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize complex.");
+            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize fraction.");
 
-            //??    fscanf(p1, %d, (void*) &(t->real));
-            //??    fscanf(p1, %d, (void*) &(t->imaginary));
+            //??    sscanf(p1, %l, (void*) &(m->value));
 
                 // Initialize elements.
-                int i = 0;
-                int r = 0;
+                int d = 0;
+                int n = 0;
 
                 // Set elements.
-                set_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &REAL_INDEX, (void*) &r);
-                set_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
+                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX, (void*) &n);
+                set_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DENOMINATOR_INDEX, (void*) &d);
 */
+
             } else {
 
 //??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
@@ -88,7 +91,7 @@ void parse_complex(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 }
 
 /**
- * Serializes the complex model and creates a byte stream from it.
+ * Serializes the fraction model and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -96,27 +99,26 @@ void parse_complex(void* p0, void* p1, void* p2, const void* p3, const void* p4)
  * @param p3 the source
  * @param p4 the source count
  */
-void serialize_complex(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void serialize_fraction(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
 /*??
-            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize complex.");
+            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize fraction.");
 
                 // Initialize elements.
-                int i = 0;
-                int r = 0;
+                int d = 0;
+                int n = 0;
 
                 // Get elements.
-                get_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
-                get_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &REAL_INDEX, (void*) &r);
+                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DENOMINATOR_INDEX, (void*) &d);
+                get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX, (void*) &n);
 
                 // Remove elements.
-                remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT, (void*) &IMAGINARY_INDEX);
-                remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT, (void*) &REAL_INDEX);
+                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT, (void*) &DENOMINATOR_INDEX);
+                remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT, (void*) &NUMERATOR_INDEX);
 
-            //??    fprintf(p1, %d, (void*) &(t->real));
-            //??    fprintf(p1, %d, (void*) &(t->imaginary));
+            //??    sprintf(p1, %l, (void*) &(m->value));
 */
 }
 
-/* COMPLEX_CONVERTER_SOURCE */
+/* FRACTION_CONVERTER_SOURCE */
 #endif

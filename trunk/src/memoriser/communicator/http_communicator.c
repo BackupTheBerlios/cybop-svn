@@ -1,5 +1,5 @@
 /*
- * $RCSfile: tcp_socket_communicator.c,v $
+ * $RCSfile: http_communicator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -24,20 +24,16 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-12 14:35:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
 
-#ifndef TCP_SOCKET_COMMUNICATOR_SOURCE
-#define TCP_SOCKET_COMMUNICATOR_SOURCE
+#ifndef HTTP_COMMUNICATOR_SOURCE
+#define HTTP_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
-#include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/constant.c"
-#include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../globals/variables/variables.c"
 #include "../../memoriser/array/array.c"
 
 /**
@@ -49,52 +45,20 @@
  * @param p3 the source (http url)
  * @param p4 the source count
  */
-/*??
-void receive_tcp_socket(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void receive_http(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
-*/
 
 /**
  * Sends an http stream that was read from a byte array.
  *
- * @param p0 the destination (client socket number) (Hand over as reference!)
+ * @param p0 the destination (http url) (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source (byte array)
  * @param p4 the source count
  */
-void send_tcp_socket(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
-
-    if (p4 != NULL_POINTER) {
-
-        int* sc = (int*) p4;
-
-        if (p0 != NULL_POINTER) {
-
-            int** d = (int**) p0;
-
-            // The output.
-            void* o = (void*) p3;
-            // The output count.
-            int oc = *sc;
-            // The send byte gets returned.
-            int b = send(**d, o, oc, 0);
-
-            if (b < 0) {
-
-                log_message_debug("ERROR: Could not send via tcp socket.");
-            }
-
-        } else {
-
-            log_message_debug("ERROR: The destination (client socket number) is null.");
-        }
-
-    } else {
-
-        log_message_debug("ERROR: The source count is null.");
-    }
+void send_http(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
-/* TCP_SOCKET_COMMUNICATOR_SOURCE */
+/* HTTP_COMMUNICATOR_SOURCE */
 #endif

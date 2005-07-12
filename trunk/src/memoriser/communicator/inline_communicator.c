@@ -24,7 +24,7 @@
  * - receive an inline stream into a byte array
  * - send an inline stream from a byte array
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-12 14:35:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
