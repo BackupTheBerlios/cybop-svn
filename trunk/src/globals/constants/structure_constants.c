@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-12 13:35:04 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-14 17:41:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -313,7 +313,7 @@ static const int* SIGNALS_IDENTIFICATIONS_INDEX = SIGNALS_IDENTIFICATIONS_INDEX_
 //
 
 /** The internal memory elements count. */
-static const int INTERNAL_MEMORY_ELEMENTS_COUNT_ARRAY[] = {44};
+static const int INTERNAL_MEMORY_ELEMENTS_COUNT_ARRAY[] = {45};
 static const int* INTERNAL_MEMORY_ELEMENTS_COUNT = INTERNAL_MEMORY_ELEMENTS_COUNT_ARRAY;
 
 /** The knowledge memory. */
@@ -427,6 +427,10 @@ static const int* X_WINDOW_SYSTEM_FONT_NAME_INTERNAL = X_WINDOW_SYSTEM_FONT_NAME
 
 static const int X_WINDOW_SYSTEM_FONT_INTERNAL_ARRAY[] = {43};
 static const int* X_WINDOW_SYSTEM_FONT_INTERNAL = X_WINDOW_SYSTEM_FONT_INTERNAL_ARRAY;
+
+/** The linux console. */
+static const int LINUX_CONSOLE_TERMINAL_INTERNAL_ARRAY[] = {44};
+static const int* LINUX_CONSOLE_TERMINAL_INTERNAL = LINUX_CONSOLE_TERMINAL_INTERNAL_ARRAY;
 
 //
 // Xml tag.

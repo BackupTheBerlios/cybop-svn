@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-14 17:41:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -154,6 +154,8 @@ void send_message(const void* p0, const void* p1,
         (void*) &md, (void*) &mdc, (void*) &mds,
         p2, p3);
 
+    log_message_debug("Send.");
+
     // The comparison result.
     int r = 0;
 
@@ -163,13 +165,15 @@ void send_message(const void* p0, const void* p1,
 
         if (r == 1) {
 
-            //?? The temporary standard console output as destination.
-            //?? Possibly use "sender" information instead, later.
-            void* tmpd = (void*) stdout;
-            void* tmpdc = NULL_POINTER;
-            void* tmpds = NULL_POINTER;
+            // The terminal (device name).
+            void** t = NULL_POINTER;
 
-            send_linux_console(tmpd, tmpdc, tmpds, *mm, *mmc);
+            // Get terminal.
+            get_array_elements(p0, (void*) LINUX_CONSOLE_TERMINAL_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
+
+//??            send_linux_console(&stdout, NULL_POINTER, NULL_POINTER, *mm, *mmc);
+
+            send_linux_console((void*) &t, NULL_POINTER, NULL_POINTER, *mm, *mmc);
         }
     }
 
@@ -185,15 +189,9 @@ void send_message(const void* p0, const void* p1,
 
     if (r != 1) {
 
-        compare_arrays( (void*) *lm, (void*) *lmc,
-                        (void*) SIGNAL_MODEL,
-                        (void*) SIGNAL_MODEL_COUNT,
-                        (void*) &r, (void*) CHARACTER_ARRAY );
+        compare_arrays((void*) *lm, (void*) *lmc, (void*) SIGNAL_MODEL, (void*) SIGNAL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
-
-            //set_signal
-            log_message_debug("Set signal.");
 
             // The signal memory.
             void** sm = NULL_POINTER;
@@ -206,12 +204,7 @@ void send_message(const void* p0, const void* p1,
             get_array_elements(p6, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &sms, (void*) POINTER_ARRAY);
 
             // Set signal.
-            set_signal(*sm, *smc, *sms,
-                (void*) *ma, (void*) *mac,
-                (void*) *mm, (void*) *mmc,
-                (void*) *md, (void*) *mdc,
-                (void*) NORMAL_PRIORITY, p5);
-
+            set_signal(*sm, *smc, *sms, (void*) *ma, (void*) *mac, (void*) *mm, (void*) *mmc, (void*) *md, (void*) *mdc, (void*) NORMAL_PRIORITY, p5);
         }
     }
 
@@ -249,29 +242,22 @@ void send_message(const void* p0, const void* p1,
                     int* dest_count = INTEGER_NULL_POINTER;
                     int* dest_size = INTEGER_NULL_POINTER;
 
-                    create( &dest_count, INTEGER_COUNT,
-                            INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
-                    create( &dest_size, INTEGER_COUNT,
-                            INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
+                    create(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                    create(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
                     *dest_count = 0;
                     *dest_size  = 0;
-                    create( &dest, dest_size,
-                            STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT );
+                    create(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
-                    encode_model( &dest, dest_count, dest_size,
-                                  *ma, *mac,
-                                  *mm, *mmc,
-                                  *md, *mdc,
-                                  (void*) HTML_ABSTRACTION,
-                                  (void*) HTML_ABSTRACTION_COUNT,
-                                  p2, p3 );
+                    encode_model(&dest, dest_count, dest_size,
+                        *ma, *mac, *mm, *mmc, *md, *mdc,
+                        (void*) HTML_ABSTRACTION, (void*) HTML_ABSTRACTION_COUNT,
+                        p2, p3);
 
                     // The temporary count, size.
                     int tc = 0;
                     int ts = 0;
 
-                    send_tcp_socket( (void*) &cs, (void*) &tc, (void*) &ts,
-                                     (void*) dest, (void*) dest_count );
+                    send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts, (void*) dest, (void*) dest_count);
 
                     // Remove client socket number and main signal id from internal memory.
                     remove_relation_clientsocketnumber_mainsignalid(p6, (void*) &i);
@@ -279,13 +265,10 @@ void send_message(const void* p0, const void* p1,
                     // Close socket.
                     close(*cs);
 
-                    //destroy destination
-                    destroy( &dest, dest_size,
-                             STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT );
-                    destroy( &dest_count, INTEGER_COUNT,
-                             INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
-                    destroy( &dest_size, INTEGER_COUNT,
-                             INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
+                    // Destroy destination.
+                    destroy(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                    destroy(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                    destroy(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
 
                 } else {
 
@@ -331,9 +314,9 @@ void send_url_refresh( const void* p0, const void* p1,
         (void*) &urla, (void*) &urlac, (void*) &urlas,
         (void*) &urlm, (void*) &urlmc, (void*) &urlms,
         (void*) &urld, (void*) &urldc, (void*) &urlds,
-        p2, p3 );
+        p2, p3);
 
-    if (    (urla != NULL_POINTER)
+    if ((urla != NULL_POINTER)
          && (urlac != NULL_POINTER)
          && (urlas != NULL_POINTER)
          && (urlm != NULL_POINTER)
@@ -341,9 +324,7 @@ void send_url_refresh( const void* p0, const void* p1,
          && (urlms != NULL_POINTER)
          && (urld != NULL_POINTER)
          && (urldc != NULL_POINTER)
-         && (urlds != NULL_POINTER)
-       )
-    {
+         && (urlds != NULL_POINTER)) {
 
         // The socket number for the signal id.
         // The index for the signal id in the array is the same index
@@ -361,61 +342,46 @@ void send_url_refresh( const void* p0, const void* p1,
 
             if (*cs >= 0) {
 
-                    char msg_refresh_part_1[] = "<head> <meta http-equiv='expires' content='0'>  <meta http-equiv='refresh' content='0; URL=";
-                    char msg_refresh_part_3[] = "'></head><body></body>";
-                    int msg_part_1_count = strlen( msg_refresh_part_1 );
-                    int msg_part_3_count = strlen( msg_refresh_part_3 );
+                char msg_refresh_part_1[] = "<head> <meta http-equiv='expires' content='0'>  <meta http-equiv='refresh' content='0; URL=";
+                char msg_refresh_part_3[] = "'></head><body></body>";
+                int msg_part_1_count = strlen( msg_refresh_part_1 );
+                int msg_part_3_count = strlen( msg_refresh_part_3 );
 
-                    //create the destination for the send model
-                    void* dest = NULL_POINTER;
-                    int* dest_count = INTEGER_NULL_POINTER;
-                    int* dest_size = INTEGER_NULL_POINTER;
+                //create the destination for the send model
+                void* dest = NULL_POINTER;
+                int* dest_count = INTEGER_NULL_POINTER;
+                int* dest_size = INTEGER_NULL_POINTER;
 
-                    create( &dest_count, INTEGER_COUNT,
-                            INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
-                    create( &dest_size, INTEGER_COUNT,
-                            INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
-                    *dest_count = 0;
-                    *dest_size  = 0;
-                    create( &dest, dest_size,
-                            STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT );
+                create(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                create(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                *dest_count = 0;
+                *dest_size  = 0;
+                create(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
-                    parse( &dest, dest_count, dest_size,
-                           &msg_refresh_part_1[0], &msg_part_1_count,
-                           STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                parse(&dest, dest_count, dest_size, &msg_refresh_part_1[0], &msg_part_1_count, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                parse(&dest, dest_count, dest_size, *urlm, *urlmc, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                parse(&dest, dest_count, dest_size, &msg_refresh_part_3[0], &msg_part_3_count, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
-                    parse( &dest, dest_count, dest_size,
-                           *urlm, *urlmc,
-                           STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                // The temporary count, size.
+                int tc = 0;
+                int ts = 0;
 
-                    parse( &dest, dest_count, dest_size,
-                           &msg_refresh_part_3[0], &msg_part_3_count,
-                           STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts, (void*) dest, (void*) dest_count);
 
-                    // The temporary count, size.
-                    int tc = 0;
-                    int ts = 0;
+                // Remove client socket number and main signal id from internal memory.
+                remove_relation_clientsocketnumber_mainsignalid(p6, (void*) &i);
 
-                    send_tcp_socket( (void*) &cs, (void*) &tc, (void*) &ts,
-                                     (void*) dest, (void*) dest_count );
+                // Close socket.
+                close(*cs);
 
-                    // Remove client socket number and main signal id from internal memory.
-                    remove_relation_clientsocketnumber_mainsignalid(p6, (void*) &i);
-
-                    // Close socket.
-                    close(*cs);
-
-                    //destroy destination
-                    destroy( &dest, dest_size,
-                             STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT );
-                    destroy( &dest_count, INTEGER_COUNT,
-                             INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
-                    destroy( &dest_size, INTEGER_COUNT,
-                             INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT );
-
+                // Destroy destination.
+                destroy(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                destroy(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                destroy(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
             }
         }
     }
 }
+
 /* SEND_SOURCE */
 #endif

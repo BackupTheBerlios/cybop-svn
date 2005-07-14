@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-06-29 23:59:10 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-14 17:41:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -266,6 +266,12 @@ static const char WUI_MODEL_ARRAY[] = {'w', 'u', 'i'};
 static const char* WUI_MODEL = WUI_MODEL_ARRAY;
 static const int WUI_MODEL_COUNT_ARRAY[] = {3};
 static const int* WUI_MODEL_COUNT = WUI_MODEL_COUNT_ARRAY;
+
+/** The linux console model. */
+static const char LINUX_CONSOLE_MODEL_ARRAY[] = {'l', 'i', 'n', 'u', 'x', '_', 'c', 'o', 'n', 's', 'o', 'l', 'e'};
+static const char* LINUX_CONSOLE_MODEL = LINUX_CONSOLE_MODEL_ARRAY;
+static const int LINUX_CONSOLE_MODEL_COUNT_ARRAY[] = {13};
+static const int* LINUX_CONSOLE_MODEL_COUNT = LINUX_CONSOLE_MODEL_COUNT_ARRAY;
 
 /** The x window system model. */
 static const char X_WINDOW_SYSTEM_MODEL_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', '_', 's', 'y', 's', 't', 'e', 'm'};

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-14 17:41:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -179,28 +179,22 @@ void send_linux_console(void* p0, void* p1, void* p2, const void* p3, const void
 
                 void** d = (void**) p0;
 
-//??                if (strcmp("linux", getenv("TERM")) == 0) {
-
-                    fputs("TEST: This is a linux console.\n", (FILE*) d);
+                    log_message_debug("Send linux console.");
 
                     // Clear screen.
-                    printf("\033[2J");
+//??                    printf("\033[2J");
 
                     // Position cursor.
-                    int column = 10;
-                    int row = 5;
-                    printf("\033[%d;%dH", column, row);
+//??                    int column = 10;
+//??                    int row = 5;
+//??                    printf("\033[%d;%dH", column, row);
+
+                    fprintf(*d, "\n\n%s\n\n\n", (char*) p3);
 
                     //?? TEST: for "Hello, World!"
-                    fprintf(stdout, "\n\n%s\n\n\n", (char*) p3);
+//??                    fprintf(stdout, "\n\n%s\n\n\n", (char*) p3);
 
 /*??
-                    // The device name of the controlling terminal.
-                    int t = -1;
-
-                    // Get device name of the controlling terminal internal.
-                    get_array_elements(p0, (void*) LINUX_CONSOLE_TERMINAL_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
-
                     // The temporary null-terminated message.
                     char* tmp = NULL_POINTER;
                     int tmps = **sc + 1;

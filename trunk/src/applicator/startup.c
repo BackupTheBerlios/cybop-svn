@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-14 17:41:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -28,6 +28,7 @@
 #ifndef STARTUP_SOURCE
 #define STARTUP_SOURCE
 
+#include "../applicator/startup/startup_linux_console.c"
 #include "../applicator/startup/startup_tcp_socket.c"
 #include "../applicator/startup/startup_x_window_system.c"
 #include "../globals/constants/abstraction_constants.c"
@@ -102,6 +103,16 @@ void startup_service(const void* p0, const void* p1,
 
     // The comparison result.
     int r = 0;
+
+    if (r != 1) {
+
+        compare_arrays((void*) *sm, (void*) *smc, (void*) LINUX_CONSOLE_MODEL, (void*) LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r == 1) {
+
+            startup_linux_console(p5, p2, p3, p4);
+        }
+    }
 
     if (r != 1) {
 

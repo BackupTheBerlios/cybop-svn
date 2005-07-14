@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-14 17:41:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -38,100 +38,49 @@
  * Starts up the linux console.
  *
  * @param p0 the internals memory
- * @param p1 the knowledge
- * @param p2 the knowledge count
- * @param p3 the knowledge size
+ * @param p1 the knowledge memory
+ * @param p2 the knowledge memory count
+ * @param p3 the knowledge memory size
  */
 void startup_linux_console(void* p0, const void* p1, const void* p2, const void* p3) {
 
     log_message_debug("Startup linux console.");
 
-/*??
-    // The device name of the controlling terminal.
-    int t = -1;
+    // The terminal (device name) internal.
+    int** ti = NULL_POINTER;
 
     // Get terminal internal.
-    get_array_elements(p0, (void*) LINUX_CONSOLE_TERMINAL_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) LINUX_CONSOLE_TERMINAL_INTERNAL, (void*) &ti, (void*) POINTER_ARRAY);
 
-    if (*t == NULL_POINTER) {
+    if (*ti == NULL_POINTER) {
 
-/*??
-        // The background pixel values.
-        unsigned long* bg = NULL_POINTER;
-        // The foreground pixel values.
-        unsigned long* fg = NULL_POINTER;
-        // The top-level root window for the given display and screen.
-        // This is sometimes called the root window of the window manager.
-        // Remember, CYBOI itself IS the window manager.
-        int* r = NULL_POINTER;
-        // The font name.
-//??        char* fn = NULL_POINTER;
-        // The font id.
-//??        int* f = NULL_POINTER;
-*/
+        // The terminal (device name).
+        int* t = NULL_POINTER;
 
         // Create linux console internals.
-/*??
-        create_integer((void*) &sn);
-        create_integer((void*) &cm);
-        create_unsigned_long((void*) &bg);
-        create_unsigned_long((void*) &fg);
-        create_integer((void*) &r);
-//??        create_integer((void*) &f);
-        create_unsigned_long((void*) &vm);
-*/
+        create_integer((void*) &t);
 
-/*??
         // Initialise linux console internals.
-        t = ttyname();
-        fprintf((FILE*) *d, "TEST: The linux console terminal device name is: %i\n", n);
-/*??
-        dn = "";
-        d = XOpenDisplay(dn);
-        *sn = DefaultScreen(d);
-//??        s = XScreenOfDisplay(*d, *sn);
-        *cm = XDefaultColormap(d, *sn);
-        *bg = XWhitePixel(d, *sn);
-        *fg = XBlackPixel(d, *sn);
-        *r = DefaultRootWindow(d);
-//??        *r = XRootWindowOfScreen(s);
-//??        fn = "Helvetica";
-//??        *f = XLoadFont(*d, fn);
-        *vm = 0;
-        v = NULL_POINTER;
-        gc = XCreateGC(d, *r, *vm, v);
-*/
+        if (strcmp("linux", getenv("TERM")) == 0) {
 
-/*??
-        // Assign linux console internals.
-        XSetBackground(d, gc, *bg);
-        XSetForeground(d, gc, *fg);
-//??        XSetFont(*d, gc, f);
-*/
+            log_message_debug("TEST: This is a linux system.");
 
-        // Set linux console internals.
-/*??
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL, (void*) &dn, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_SCREEN_NUMBER_INTERNAL, (void*) &sn, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-//??        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_SCREEN_INTERNAL, (void*) &s, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_COLOUR_MAP_INTERNAL, (void*) &cm, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL, (void*) &bg, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL, (void*) &fg, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL, (void*) &r, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-//??        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_FONT_NAME_INTERNAL, (void*) &fn, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-//??        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_FONT_INTERNAL, (void*) &f, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL, (void*) &vm, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUES_INTERNAL, (void*) &v, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-*/
+            *t = ttyname();
 
-/*??
+            fprintf(stdout, "TEST: The terminal device name is: %i\n", *t);
+
+            // Set linux console internals.
+            set_array_elements(p0, (void*) LINUX_CONSOLE_TERMINAL_INTERNAL, (void*) &t, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+
+        } else {
+
+            log_message_debug("ERROR: Could not startup linux console. This is not a linux system.");
+        }
+
     } else {
 
         log_message_debug("WARNING: Could not startup linux console. The linux console is already running.");
     }
-*/
 }
 
 /* STARTUP_LINUX_CONSOLE_SOURCE */
