@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+    $RCSfile: cybol.cybol,v $
+
+    Copyright (c) 2003-2005. Christian Heller and the CYBOP developers.
+
+    This knowledge model is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This knowledge model is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this knowledge model; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+    http://www.cybop.net
+    - Cybernetics Oriented Programming -
+
+    @version $Revision: 1.1 $ $Date: 2005-07-14 10:31:36 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->
+
+<model>
+    <part name="model" channel="file" abstraction="cybol" model="part.cybol"/>
+    <part name="part" channel="file" abstraction="cybol" model="property.cybol">
+        <property name="name" channel="inline" abstraction="string" model=""/>
+        <property name="channel" channel="inline" abstraction="string" model=""/>
+        <property name="abstraction" channel="inline" abstraction="string" model=""/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+    <part name="property" channel="file" abstraction="cybol" model="constraint.cybol">
+        <property name="name" channel="inline" abstraction="string" model=""/>
+        <property name="channel" channel="inline" abstraction="string" model=""/>
+        <property name="abstraction" channel="inline" abstraction="string" model=""/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+    <part name="constraint" channel="file" abstraction="cybol" model="">
+        <property name="name" channel="inline" abstraction="string" model=""/>
+        <property name="channel" channel="inline" abstraction="string" model=""/>
+        <property name="abstraction" channel="inline" abstraction="string" model=""/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+</model>
+
+<!-- Short version. -->
+
+    <part name="schema" channel="file" abstraction="cybol" model="schema.cybol">
+        <property name="name" channel="inline" abstraction="string" model=""/>
+        <property name="channel" channel="inline" abstraction="string" model=""/>
+        <property name="abstraction" channel="inline" abstraction="string" model=""/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
+
+TEST
+
+    <part name="schema" channel="file" abstraction="cybol" model="schema.cybol">
+        <property name="name" channel="inline" abstraction="string" model=""/>
+        <property name="channel" channel="inline" abstraction="string" model=""/>
+        <property name="abstraction" channel="inline" abstraction="string" model=""/>
+        <property name="model" channel="inline" abstraction="string" model=""/>
+    </part>
