@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-05 11:12:18 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-16 00:18:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -35,6 +35,8 @@
 #ifndef LOGGER_SOURCE
 #define LOGGER_SOURCE
 
+#include <stdlib.h>
+#include <unistd.h>
 #include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/variables/variables.c"
@@ -65,6 +67,8 @@ void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
 
                 if (p0 != NULL_POINTER) {
 
+                    void** e = (void**) p0;
+
                     // The loop index.
                     int j = 0;
                     // The destination character.
@@ -80,7 +84,7 @@ void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
                         }
 
                         // Determine log entry pointer as destination.
-                        dest = (char*) (p0 + *ei + j);
+                        dest = (char*) (*e + *ei + j);
                         // Determine log details pointer as source.
                         src = (char*) (p2 + j);
 
@@ -94,28 +98,28 @@ void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
 
                     // CAUTION! DO NOT use logging functionality here!
                     // The logger cannot log itself.
-                    fputs("Error: Could not add log details. The log entry index is null.\n", LOG_OUTPUT);
+                    fputs("Error: Could not add log details. The log entry is null.\n", stdout);
                 }
 
             } else {
 
                 // CAUTION! DO NOT use logging functionality here!
                 // The logger cannot log itself.
-                fputs("Error: Could not add log details. The log entry index is null.\n", LOG_OUTPUT);
+                fputs("Error: Could not add log details. The log entry index is null.\n", stdout);
             }
 
         } else {
 
             // CAUTION! DO NOT use logging functionality here!
             // The logger cannot log itself.
-            fputs("Error: Could not add log details. The log entry index is null.\n", LOG_OUTPUT);
+            fputs("Error: Could not add log details. The log details is null.\n", stdout);
         }
 
     } else {
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger cannot log itself.
-        fputs("Error: Could not add log details. The log details count is null.\n", LOG_OUTPUT);
+        fputs("Error: Could not add log details. The log details count is null.\n", stdout);
     }
 }
 
@@ -127,7 +131,7 @@ void add_log_details(void* p0, const void* p1, const void* p2, const void* p3) {
  * @param p2 the log entry count
  * @param p3 the log entry index
  */
-void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
+void add_log_level_name(const void* p0, void* p1, void* p2, void* p3) {
 
     // CAUTION! DO NOT use array functionality here!
     // The arrays use the logger which would cause circular references.
@@ -141,86 +145,69 @@ void add_log_level_name(const void* p0, void* p1, const void* p2, void* p3) {
 
             int* ec = (int*) p2;
 
-            if (p0 != NULL_POINTER) {
+            if (p1 != NULL_POINTER) {
 
-                int* l = (int*) p0;
+                void** e = (void**) p1;
 
-                if (*l == *DEBUG_LOG_LEVEL) {
+                if (p0 != NULL_POINTER) {
 
-                    if ((*ei + *DEBUG_LOG_LEVEL_NAME_COUNT) < *ec) {
+                    int* l = (int*) p0;
 
+                    if (*l == *DEBUG_LOG_LEVEL) {
+
+                        *ec = *ec + *DEBUG_LOG_LEVEL_NAME_COUNT;
+                        *e = (void*) realloc(*e, *ec);
                         add_log_details(p1, p3, (void*) DEBUG_LOG_LEVEL_NAME, (void*) DEBUG_LOG_LEVEL_NAME_COUNT);
                         *ei = *ei + *DEBUG_LOG_LEVEL_NAME_COUNT;
 
-                    } else {
+                    } else if (*l == *INFO_LOG_LEVEL) {
 
-                        // CAUTION! DO NOT use logging functionality here!
-                        // The logger cannot log itself.
-                        fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
-                    }
-
-                } else if (*l == *INFO_LOG_LEVEL) {
-
-                    if ((*ei + *INFO_LOG_LEVEL_NAME_COUNT) < *ec) {
-
+                        *ec = *ec + *INFO_LOG_LEVEL_NAME_COUNT;
+                        *e = (void*) realloc(*e, *ec);
                         add_log_details(p1, p3, (void*) INFO_LOG_LEVEL_NAME, (void*) INFO_LOG_LEVEL_NAME_COUNT);
                         *ei = *ei + *INFO_LOG_LEVEL_NAME_COUNT;
 
-                    } else {
+                    } else if (*l == *WARNING_LOG_LEVEL) {
 
-                        // CAUTION! DO NOT use logging functionality here!
-                        // The logger cannot log itself.
-                        fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
-                    }
-
-                } else if (*l == *WARNING_LOG_LEVEL) {
-
-                    if ((*ei + *WARNING_LOG_LEVEL_NAME_COUNT) < *ec) {
-
+                        *ec = *ec + *WARNING_LOG_LEVEL_NAME_COUNT;
+                        *e = (void*) realloc(*e, *ec);
                         add_log_details(p1, p3, (void*) WARNING_LOG_LEVEL_NAME, (void*) WARNING_LOG_LEVEL_NAME_COUNT);
                         *ei = *ei + *WARNING_LOG_LEVEL_NAME_COUNT;
 
-                    } else {
+                    } else if (*l == *ERROR_LOG_LEVEL) {
 
-                        // CAUTION! DO NOT use logging functionality here!
-                        // The logger cannot log itself.
-                        fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
-                    }
-
-                } else if (*l == *ERROR_LOG_LEVEL) {
-
-                    if ((*ei + *ERROR_LOG_LEVEL_NAME_COUNT) < *ec) {
-
+                        *ec = *ec + *ERROR_LOG_LEVEL_NAME_COUNT;
+                        *e = (void*) realloc(*e, *ec);
                         add_log_details(p1, p3, (void*) ERROR_LOG_LEVEL_NAME, (void*) ERROR_LOG_LEVEL_NAME_COUNT);
                         *ei = *ei + *ERROR_LOG_LEVEL_NAME_COUNT;
-
-                    } else {
-
-                        // CAUTION! DO NOT use logging functionality here!
-                        // The logger cannot log itself.
-                        fputs("Warning: Could not add log level name. The log entry count is exceeded.\n", LOG_OUTPUT);
                     }
+
+                } else {
+
+                    // CAUTION! DO NOT use logging functionality here!
+                    // The logger cannot log itself.
+                    fputs("Error: Could not add log level name. The log level is null.\n", stdout);
                 }
 
             } else {
 
                 // CAUTION! DO NOT use logging functionality here!
                 // The logger cannot log itself.
-                fputs("Error: Could not add log level name. The log level is null.\n", LOG_OUTPUT);
+                fputs("Error: Could not add log level name. The log entry is null.\n", stdout);
             }
 
         } else {
 
             // CAUTION! DO NOT use logging functionality here!
             // The logger cannot log itself.
-            fputs("Error: Could not add log level name. The log entry count is null.\n", LOG_OUTPUT);
+            fputs("Error: Could not add log level name. The log entry count is null.\n", stdout);
         }
 
     } else {
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger cannot log itself.
-        fputs("Error: Could not add log level name. The log entry index is null.\n", LOG_OUTPUT);
+        fputs("Error: Could not add log level name. The log entry index is null.\n", stdout);
     }
 }
 
@@ -251,83 +238,40 @@ void log_message(const void* p0, const void* p1, const void* p2) {
                 // The log entry.
                 void* e = NULL_POINTER;
                 // The log entry count.
-                const int* ec = MAXIMUM_LOG_MESSAGE_COUNT;
+                int ec = 0;
                 // The log entry index for adding characters.
                 int ei = 0;
 
                 // Create log entry.
-                e = (void*) malloc(*ec);
+                e = (void*) malloc(ec);
 
                 // Add name of the given log level to log entry.
-                add_log_level_name(p0, e, (void*) ec, (void*) &ei);
+                add_log_level_name(p0, (void*) &e, (void*) &ec, (void*) &ei);
+
+                // Resize log entry at once, for all following entries
+                // (colon + space + message + line feed).
+                ec = ec + 1 + 1 + *mc + 1;
+                e = (void*) realloc(e, ec);
 
                 // Add colon to log entry.
-                if ((ei + 1) < *ec) {
-
-                    add_log_details((void*) e, (void*) &ei, (void*) COLON_CHARACTER, (void*) COLON_CHARACTER_COUNT);
-                    ei = ei + 1;
-
-                } else {
-
-                    // CAUTION! DO NOT use logging functionality here!
-                    // The logger cannot log itself.
-                    fputs("Warning: Could not add colon to log entry. The log entry count is exceeded.\n", LOG_OUTPUT);
-                }
+                add_log_details((void*) &e, (void*) &ei, (void*) COLON_CHARACTER, (void*) COLON_CHARACTER_COUNT);
+                ei = ei + 1;
 
                 // Add space to log entry.
-                if ((ei + 1) < *ec) {
-
-                    add_log_details((void*) e, (void*) &ei, (void*) SPACE_CHARACTER, (void*) SPACE_CHARACTER_COUNT);
-                    ei = ei + 1;
-
-                } else {
-
-                    // CAUTION! DO NOT use logging functionality here!
-                    // The logger cannot log itself.
-                    fputs("Warning: Could not add space to log entry. The log entry count is exceeded.\n", LOG_OUTPUT);
-                }
+                add_log_details((void*) &e, (void*) &ei, (void*) SPACE_CHARACTER, (void*) SPACE_CHARACTER_COUNT);
+                ei = ei + 1;
 
                 // Add message to log entry.
-                if ((ei + *mc) < *ec) {
-
-                    add_log_details((void*) e, (void*) &ei, p1, p2);
-                    ei = ei + *mc;
-
-                } else {
-
-                    // CAUTION! DO NOT use logging functionality here!
-                    // The logger cannot log itself.
-                    fputs("Warning: Could not add message to log entry. The log entry count is exceeded.\n", LOG_OUTPUT);
-                }
+                add_log_details((void*) &e, (void*) &ei, p1, p2);
+                ei = ei + *mc;
 
                 // Add new line to log entry.
-                if ((ei + 1) < *ec) {
-
-                    add_log_details((void*) e, (void*) &ei, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) LINE_FEED_CONTROL_CHARACTER_COUNT);
-                    ei = ei + 1;
-
-                } else {
-
-                    // CAUTION! DO NOT use logging functionality here!
-                    // The logger cannot log itself.
-                    fputs("Warning: Could not add new line to log entry. The log entry count is exceeded.\n", LOG_OUTPUT);
-                }
-
-                // Add string termination to log entry.
-                if ((ei + 1) < *ec) {
-
-                    add_log_details((void*) e, (void*) &ei, (void*) NULL_CONTROL_CHARACTER, (void*) NULL_CONTROL_CHARACTER_COUNT);
-                    ei = ei + 1;
-
-                } else {
-
-                    // CAUTION! DO NOT use logging functionality here!
-                    // The logger cannot log itself.
-                    fputs("Warning: Could not add string termination to log entry. The log entry count is exceeded.\n", LOG_OUTPUT);
-                }
+                add_log_details((void*) &e, (void*) &ei, (void*) LINE_FEED_CONTROL_CHARACTER, (void*) LINE_FEED_CONTROL_CHARACTER_COUNT);
+                ei = ei + 1;
 
                 // Log entry to output.
-                fputs((char*) e, LOG_OUTPUT);
+                // Old solution: fputs((char*) e, stdout);
+                write(LOG_OUTPUT, e, ec);
 
                 // Destroy log entry.
                 free(e);
@@ -337,35 +281,32 @@ void log_message(const void* p0, const void* p1, const void* p2) {
 
             // CAUTION! DO NOT use logging functionality here!
             // The logger cannot log itself.
-            fputs("Error: Could not log message. The message count is null.\n", LOG_OUTPUT);
+            fputs("Error: Could not log message. The message count is null.\n", stdout);
         }
 
     } else {
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger cannot log itself.
-        fputs("Error: Could not log message. The log level is null.\n", LOG_OUTPUT);
+        fputs("Error: Could not log message. The log level is null.\n", stdout);
     }
 }
 
 /**
  * Logs the message for debugging.
  *
- * @param m the log message as null terminated string
+ * @param p0 the log message as null terminated string
  */
-void log_message_debug(const char* m) {
+void log_message_debug(const void* p0) {
 
     // CAUTION! DO NOT use array functionality here!
     // The arrays use the logger which would cause circular references.
     // Instead, use malloc and similar functions directly!
 
     // The message count.
-    int* c = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *c = strlen(m);
+    int c = strlen(p0);
 
-    log_message((void*) DEBUG_LOG_LEVEL, (void*) m, (void*) c);
-
-    free(c);
+    log_message((void*) DEBUG_LOG_LEVEL, p0, (void*) &c);
 }
 
 /* LOGGER_SOURCE */

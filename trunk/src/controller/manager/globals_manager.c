@@ -20,13 +20,16 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 14:19:21 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-16 00:18:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef GLOBALS_MANAGER_SOURCE
 #define GLOBALS_MANAGER_SOURCE
 
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
@@ -117,12 +120,40 @@ void startup_globals() {
     LOG_LEVEL = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *LOG_LEVEL = *DEBUG_LOG_LEVEL;
 
-    // The maximum log message count.
-    MAXIMUM_LOG_MESSAGE_COUNT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *MAXIMUM_LOG_MESSAGE_COUNT = 300;
+    // The log file name.
+    char* n = "cyboi.log";
+    // The log file status flags.
+    int s = O_TRUNC | O_CREAT | O_WRONLY;
+    // The log file.
+    int f = open(n, s);
 
-    // The log output.
-    LOG_OUTPUT = stderr;
+    if (f >= 0) {
+
+        // The file owner.
+        int o = -1;
+
+        // The file group.
+        int g = -1;
+
+        // Set file owner.
+        chown(n, o, g);
+
+        // The file access rights.
+        int r = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP;
+
+        // Set file access rights.
+        chmod(n, r);
+
+        // The log output.
+        // Example: LOG_OUTPUT = stderr;
+        LOG_OUTPUT = f;
+
+    } else {
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger will not work before these global variables are set.
+        fputs("Error: Could not open log file. A file error occured.\n", stdout);
+    }
 }
 
 /**
@@ -133,7 +164,7 @@ void startup_globals() {
  */
 void shutdown_globals() {
 
-    log_message_debug("Shutdown globals.");
+    fputs("Shutdown globals.\n", stdout);
 
     //
     // Logging.
@@ -143,8 +174,20 @@ void shutdown_globals() {
     // Instead, use malloc and similar functions directly!
     //
 
-    // The maximum log message count.
-    free(MAXIMUM_LOG_MESSAGE_COUNT);
+    // The log file.
+    int f = LOG_OUTPUT;
+
+    if (f >= 0) {
+
+        // Close log file.
+        close(f);
+
+    } else {
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger will not work before these global variables are set.
+        fputs("Error: Could not close log file. A file error occured.\n", stdout);
+    }
 
     // The log level.
     free(LOG_LEVEL);

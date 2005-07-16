@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 13:36:14 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-16 00:18:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -150,6 +150,7 @@ void check(void* p0) {
 
                                                                 if (id != POINTER_NULL_POINTER) {
 
+/*??
                                                                     //?? For testing only. TODO: Delete these lines later!
                                                                     fprintf(stderr, "check i: %i\n", i);
                                                                     fprintf(stderr, "check a: %s\n", (char*) *a);
@@ -161,6 +162,7 @@ void check(void* p0) {
                                                                     fprintf(stderr, "check id: %i\n", *((int*) *id));
                                                                     fprintf(stderr, "check knowledge model: %s\n", "");
 //??                                                                    test_knowledge_model(*k, *kc, 0);
+*/
 
                                                                     // CAUTION! Do NOT destroy signal here!
                                                                     // Signals are stored in the logic knowledge tree which gets created
@@ -181,9 +183,9 @@ void check(void* p0) {
                                                                     // CAUTION! Do NOT hand over as reference!
                                                                     // The id was read from signal memory and is of type void**.
                                                                     // The expression (&*id) is the same like (id).
-                                                                    fprintf(stderr, "TEST check pre integer destroy i: %i\n", i);
+//??                                                                    fprintf(stderr, "TEST check pre integer destroy i: %i\n", i);
 //??                                                                    destroy_integer((void*) id);
-                                                                    fprintf(stderr, "TEST check post integer destroy i: %i\n", i);
+//??                                                                    fprintf(stderr, "TEST check post integer destroy i: %i\n", i);
                                                                     // CAUTION! Do NOT destroy the signal priority!
                                                                     // It is a FIXED system constant.
 

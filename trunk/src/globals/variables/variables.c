@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-06-26 22:33:04 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-16 00:18:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -65,11 +65,8 @@ static FILE* FILE_NULL_POINTER;
 // The log level.
 static int* LOG_LEVEL;
 
-// The maximum log message count.
-static int* MAXIMUM_LOG_MESSAGE_COUNT;
-
 // The log output.
-static FILE* LOG_OUTPUT;
+static int LOG_OUTPUT;
 
 //
 // Primitive type sizes.

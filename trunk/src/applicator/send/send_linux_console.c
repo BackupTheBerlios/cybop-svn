@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-14 17:41:44 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-16 00:18:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -238,13 +238,6 @@ void send_linux_console(void* p0, void* p1, void* p2, const void* p3, const void
 
                     // Destroy temporary null-terminated message.
                     destroy_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
-*/
-
-/*??
-                } else {
-
-                    fputs("TEST: This is a normal serial terminal.\n", (FILE*) *d);
-                }
 */
 
             } else {

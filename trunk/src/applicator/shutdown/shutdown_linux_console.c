@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-14 17:41:44 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-16 00:18:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -28,6 +28,7 @@
 #ifndef SHUTDOWN_LINUX_CONSOLE_SOURCE
 #define SHUTDOWN_LINUX_CONSOLE_SOURCE
 
+#include <termios.h>
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
@@ -50,15 +51,33 @@ void shutdown_linux_console(void* p0, const void* p1, const void* p2, const void
     int** t = NULL_POINTER;
 
     // Get terminal internal.
-    get_array_elements(p0, (void*) LINUX_CONSOLE_TERMINAL_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
 
     if (*t != NULL_POINTER) {
 
-        // Destroy linux console internals.
+        // The terminal (device name).
+        int** t = NULL_POINTER;
+        // The original termios interface.
+        struct termios** to = NULL_POINTER;
+        // The working termios interface.
+        struct termios** tw = NULL_POINTER;
+
+        // Get terminal internals.
+        get_array_elements(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) TERMINAL_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) POINTER_ARRAY);
+        get_array_elements(p0, (void*) TERMINAL_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) POINTER_ARRAY);
+
+        // Finalise terminal internals.
+        // Reset original terminal attributes.
+        tcsetattr(**t, TCSANOW, (void*) *to);
+
+        // Destroy terminal internals.
         // CAUTION! Use descending order, as opposed to the creation!
         // CAUTION! Do NOT use references &, because variables are **
         // and *&variable equals the variable alone.
         destroy_integer((void*) t);
+        free(*tw);
+        free(*to);
 
     } else {
 

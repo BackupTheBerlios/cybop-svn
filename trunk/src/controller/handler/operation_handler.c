@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-14 17:41:44 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-16 00:18:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -71,8 +71,12 @@ void handle_operation(const void* p0, const void* p1, const void* p2, const void
     // The comparison result.
     int r = 0;
 
-    fprintf(stderr, "\n\nTEST: Handle operation: %s\n", (char*) p0);
-    fprintf(stderr, "TEST: Operation count: %i\n", *((int*) p1));
+    log_message_debug("Handle operation.");
+
+/*??
+    fprintf(stderr, "\n\nTest: Handle operation: %s\n", (char*) p0);
+    fprintf(stderr, "Test: Operation count: %i\n", *((int*) p1));
+*/
 
     // The knowledge memory.
     void** km = POINTER_NULL_POINTER;

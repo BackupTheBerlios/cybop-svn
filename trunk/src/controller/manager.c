@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-16 00:18:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -142,11 +142,13 @@ void manage(void* p0, void* p1, void* p2) {
                     *id = 0;
                     get_new_signal_id(*s, *sc, (void*) id);
 
+/*??
                     fprintf(stderr, "p: %i\n", *NORMAL_PRIORITY);
                     fprintf(stderr, "id: %i\n", *id);
                     fprintf(stderr, "s: %i\n", *s);
                     fprintf(stderr, "sc: %i\n", *((int*) *sc));
                     fprintf(stderr, "ss: %i\n", *((int*) *ss));
+*/
 
                     // Add startup signal to signal memory.
                     set_signal(*s, *sc, *ss,

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-16 00:18:24 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -544,9 +544,11 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
 
     get_array_elements_index(p3, p4, (void*) COMPOUND_ELEMENT_SEPARATOR, (void*) ONE_INTEGER, (void*) &i, (void*) CHARACTER_ARRAY);
 
+/*??
     fprintf(stderr, "TEST set_compound_element_by_name n: %s\n", (char*) p3);
     fprintf(stderr, "TEST set_compound_element_by_name nc: %i\n", *((int*) p4));
     fprintf(stderr, "TEST set_compound_element_by_name ns: %i\n", *((int*) p5));
+*/
 
     if (i != -1) {
 
@@ -980,8 +982,10 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2,
 
     get_array_elements_index(p3, p4, (void*) COMPOUND_ELEMENT_SEPARATOR, (void*) ONE_INTEGER, (void*) &i, (void*) CHARACTER_ARRAY);
 
+/*??
     fprintf(stderr, "TEST remove_compound_element_by_name n: %s\n", (char*) p3);
     fprintf(stderr, "TEST remove_compound_element_by_name nc: %i\n", *((int*) p4));
+*/
 
     if (i != -1) {
 
@@ -1349,8 +1353,10 @@ void get_compound_element_by_name(const void* p0, const void* p1,
 
     get_array_elements_index(p2, p3, (void*) COMPOUND_ELEMENT_SEPARATOR, (void*) ONE_INTEGER, (void*) &i, (void*) CHARACTER_ARRAY);
 
+/*??
     fprintf(stderr, "TEST get_compound_element_by_name n: %s\n", (char*) p2);
     fprintf(stderr, "TEST get_compound_element_by_name nc: %i\n", *((int*) p3));
+*/
 
     if (i != -1) {
 
@@ -1681,8 +1687,10 @@ void get_compound_element_by_encapsulated_name(const void* p0, const void* p1,
             // application.communication.partners.hostname.address
             //
 
+/*??
     fprintf(stderr, "TEST get_compound_element_by_encapsulated_name m: %s\n", (char*) *m);
     fprintf(stderr, "TEST get_compound_element_by_encapsulated_name mc: %i\n", *((int*) *mc));
+*/
 
             // Get knowledge element.
             get_compound_element_by_name(p13, p14, *m, *mc,
