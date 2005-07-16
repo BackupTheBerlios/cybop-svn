@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-16 00:18:23 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-16 07:58:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -88,7 +88,6 @@ void startup_linux_console(void* p0, const void* p1, const void* p2, const void*
         tw->c_lflag &= ~ECHO;
         // Set termios attributes.
         tcsetattr(*t, TCSANOW, (void*) tw);
-//??        eingabe = getc(stdin);
 
 /*??
         // Check for linux console.

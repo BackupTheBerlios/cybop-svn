@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-16 00:18:23 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-16 07:58:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -181,18 +181,24 @@ void send_linux_console(void* p0, void* p1, void* p2, const void* p3, const void
 
                     log_message_debug("Send linux console.");
 
+                    // Set blue background.
+                    printf("\033[44m");
                     // Clear screen.
-//??                    printf("\033[2J");
-
+                    printf("\033[2J");
                     // Position cursor.
-//??                    int column = 10;
-//??                    int row = 5;
-//??                    printf("\033[%d;%dH", column, row);
+                    int column = 10;
+                    int row = 5;
+                    printf("\033[%d;%dH", column, row);
 
-                    fprintf(*d, "\n\n%s\n\n\n", (char*) p3);
-
+                    printf("%s", (char*) p3);
+//??                    fprintf(*d, "\n\n%s\n\n\n", (char*) p3);
                     //?? TEST: for "Hello, World!"
 //??                    fprintf(stdout, "\n\n%s\n\n\n", (char*) p3);
+
+                    // Set default background.
+//??                    printf("\033[0m");
+
+                    getc(stdin);
 
 /*??
                     // The temporary null-terminated message.
