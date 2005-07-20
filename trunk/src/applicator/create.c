@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -138,7 +138,7 @@ void check_primitive_model(void* p0, const void* p1, const void* p2) {
  *
  * The counterparts of the creation procedures are:
  * - receive <--> send (read <--> write)
- * - parse <--> serialize
+ * - parse <--> serialise
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -204,7 +204,7 @@ void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const 
  *
  * The counterparts of the creation procedures are:
  * - receive <--> send (read <--> write)
- * - parse <--> serialize
+ * - parse <--> serialise
  * - decode <--> encode
  *
  * @param p0 the destination (Hand over as reference!)

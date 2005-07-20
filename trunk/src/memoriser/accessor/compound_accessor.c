@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-16 00:18:24 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1754,7 +1754,7 @@ void get_real_compound_element_by_name(const void* p0, const void* p1,
         (void*) &m, (void*) &mc, (void*) &ms,
         (void*) &d, (void*) &dc, (void*) &ds);
 
-   //check for abstraction knowledge memeory
+    //check for abstraction knowledge memeory
     if ( (p4 != POINTER_NULL_POINTER) &&
          (p5 != POINTER_NULL_POINTER) &&
          (p6 != POINTER_NULL_POINTER) &&
@@ -1790,7 +1790,6 @@ void get_real_compound_element_by_name(const void* p0, const void* p1,
             void** edc = POINTER_NULL_POINTER;
             void** eds = POINTER_NULL_POINTER;
 
-
             // Get knowledge element.
             get_compound_element_by_name(p13, p14, *m, *mc,
                 (void*) &ea, (void*) &eac, (void*) &eas,
@@ -1801,8 +1800,8 @@ void get_real_compound_element_by_name(const void* p0, const void* p1,
 
                 get_compound_element_by_name(p13, p14, *em, *emc,
                     p4, p5, p6, p7, p8, p9, p10, p11, p12);
-            }
-            else {
+
+            } else {
 
                 *(void**)p4  = ea;
                 *(void**)p5  = eac;
@@ -1814,8 +1813,8 @@ void get_real_compound_element_by_name(const void* p0, const void* p1,
                 *(void**)p11 = edc;
                 *(void**)p12 = eds;
             }
-        }
-        else {
+
+        } else {
 
             *(void**)p4  = a;
             *(void**)p5  = ac;
@@ -1828,28 +1827,21 @@ void get_real_compound_element_by_name(const void* p0, const void* p1,
             *(void**)p12 = ds;
         }
     }
-
 }
 
 /**
- *  Reindex the listelemenst in the compound
+ *  Reindex the list elements in the compound.
  *
  * @param compound
  * @param compound_count
  * @param basisname the list basis name
  * @param basisname_count the liste basis name count
- *
  */
-void reindex_compound_for_listelements( void* compound, void* compound_count,
-    const void* basisname, int* basisname_count )
-{
+void reindex_compound_for_listelements(void* compound, void* compound_count, const void* basisname, int* basisname_count) {
 
-    if (    (compound != NULL_POINTER)
-         && (compound_count != NULL_POINTER)
-         && (basisname != NULL_POINTER)
-         && (basisname_count != NULL_POINTER)
-       )
-    {
+    if ((compound != NULL_POINTER) && (compound_count != NULL_POINTER)
+        && (basisname != NULL_POINTER) && (basisname_count != NULL_POINTER)) {
+
         int compound_counter = 0;
         int index_counter = 0;
 
@@ -1858,101 +1850,73 @@ void reindex_compound_for_listelements( void* compound, void* compound_count,
         void** cenc = POINTER_NULL_POINTER;
         void** cens = POINTER_NULL_POINTER;
 
-
         // Create compare string.
         char* compstring = NULL_POINTER;
         int compstring_count = *((int*)basisname_count) + *LIST_SEPARATOR_COUNT;
 
-        create_array( (void*) &compstring, (void*) &compstring_count,
-                      (void*) CHARACTER_ARRAY);
+        create_array((void*) &compstring, (void*) &compstring_count, (void*) CHARACTER_ARRAY);
 
         // Set the compare string
         //this is the basisname and the list separat
-        set_array_elements( compstring, (void*) ZERO_INTEGER,
-                            basisname, basisname_count,
-                            (void*) CHARACTER_ARRAY);
-        set_array_elements( compstring, basisname_count,
-                            LIST_SEPARATOR, LIST_SEPARATOR_COUNT,
-                            (void*) CHARACTER_ARRAY);
+        set_array_elements(compstring, (void*) ZERO_INTEGER, basisname, basisname_count, (void*) CHARACTER_ARRAY);
+        set_array_elements(compstring, basisname_count, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
 
         //create integer model for the index
         void* indexstr = NULL_POINTER;
         int indexstr_count = 0;
         int indexstr_size = 10;
-        create_array( (void*) &indexstr, (void*) &indexstr_size,
-                      (void*) CHARACTER_ARRAY);
+
+        create_array((void*) &indexstr, (void*) &indexstr_size, (void*) CHARACTER_ARRAY);
 
         int comp_res = 0;
 
-        while ( 1 ) {
+        while (1) {
 
-            if ( compound_counter >= *((int*)compound_count) ) {
+            if (compound_counter >= *((int*) compound_count)) {
 
                 break;
             }
 
-            get_compound_element_name_by_index(
-                    compound, compound_count,
-                    &compound_counter,
-                    &cen, &cenc, &cens );
-            if (    (cen != NULL_POINTER)
-                 && (cenc != NULL_POINTER)
-                 && (cens != NULL_POINTER)
-               )
-            {
+            get_compound_element_name_by_index(compound, compound_count, &compound_counter, &cen, &cenc, &cens);
 
-                if ( *((int*)*cenc) > compstring_count ) {
+            if ((cen != NULL_POINTER) && (cenc != NULL_POINTER) && (cens != NULL_POINTER)) {
+
+                if (*((int*) *cenc) > compstring_count) {
 
                     comp_res = 0;
-                    compare_arrays( compstring, &compstring_count,
-                                    *cen, &compstring_count,
-                                    &comp_res,
-                                    CHARACTER_ARRAY );
+                    compare_arrays(compstring, &compstring_count, *cen, &compstring_count, &comp_res, CHARACTER_ARRAY);
 
                     //if teh begiining of the two arrays ident, then
                     //the compound element is a part of the list
-                    if ( comp_res == 1 ) {
+                    if (comp_res == 1) {
 
-                        *((int*)*cenc) = 0;
+                        *((int*) *cenc) = 0;
 
                         //parse the basisname
-                        parse( cen, *cenc, *cens,
-                           basisname, basisname_count,
-                           STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                        parse(cen, *cenc, *cens, basisname, basisname_count, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
                         //parse the list separator
-                        parse( cen, *cenc, *cens,
-                           LIST_SEPARATOR, LIST_SEPARATOR_COUNT,
-                           STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                        parse(cen, *cenc, *cens, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
                         //parse the index
-                        indexstr_count = snprintf( indexstr, indexstr_size,
-                                                   "%i", index_counter);
-                        parse( cen, *cenc, *cens,
-                           indexstr, &indexstr_count,
-                           STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                        indexstr_count = snprintf(indexstr, indexstr_size, "%i", index_counter);
+                        parse(cen, *cenc, *cens, indexstr, &indexstr_count, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
-                        index_counter = index_counter+1;
+                        index_counter = index_counter + 1;
                     }
                 }
-            } //
+            }
 
             compound_counter = compound_counter + 1;
         }
 
         // destroy compare string.
-        destroy_array( (void*) &compstring, (void*) &compstring_count,
-                       (void*) CHARACTER_ARRAY);
+        destroy_array((void*) &compstring, (void*) &compstring_count, (void*) CHARACTER_ARRAY);
 
         // destroy index string.
-        destroy_array( (void*) &indexstr, (void*) &indexstr_count,
-                       (void*) CHARACTER_ARRAY);
-
+        destroy_array((void*) &indexstr, (void*) &indexstr_count, (void*) CHARACTER_ARRAY);
     }
-
 }
-
-
 
 /* COMPOUND_ACCESSOR_SOURCE */
 #endif

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 14:35:30 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -117,7 +117,7 @@ void parse_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 }
 
 /**
- * Serializes the string model and creates a byte stream from it.
+ * Serialises the string model and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -125,7 +125,7 @@ void parse_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
  * @param p3 the source
  * @param p4 the source count
  */
-void serialize_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void serialise_string(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /* STRING_CONVERTER_SOURCE */

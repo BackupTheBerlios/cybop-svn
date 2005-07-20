@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -222,7 +222,7 @@ void test_pointer_return() {
     // A simple null pointer can be declared and passed to a procedure (as reference &).
     // The procedure can then dereference the pointer (*parameter) and store the result.
     // Since this works, one can avoid allocating extra local result variables,
-    // and use just a null pointer to initialize the result variable.
+    // and use just a null pointer to initialise the result variable.
 
     // The result array.
     void* r = NULL_POINTER;
@@ -453,10 +453,10 @@ void test_integer_parser() {
     // Create destination string.
     create_array((void*) &ds, (void*) &CHARACTER_ARRAY, (void*) &dss);
 
-    serialize((void*) &ds, (void*) &dsc, (void*) &dss, (void*) &si, (void*) &sic,
+    serialise((void*) &ds, (void*) &dsc, (void*) &dss, (void*) &si, (void*) &sic,
         (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT);
 
-    fprintf(stderr, "Serialized source integer results in destination string: %s\n", ds);
+    fprintf(stderr, "Serialised source integer results in destination string: %s\n", ds);
 
     // Destroy destination string.
     destroy_array((void*) &ds, (void*) &CHARACTER_ARRAY, (void*) &dss);

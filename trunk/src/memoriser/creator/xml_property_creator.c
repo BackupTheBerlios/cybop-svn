@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,7 +45,7 @@ void create_xml_property(void* p0, const void* p1) {
     // Create xml attribute.
     create_array(p0, (void*) XML_ATTRIBUTE_COUNT, (void*) POINTER_ARRAY);
 
-    // Initialize xml attribute name, value.
+    // Initialise xml attribute name, value.
     void* nv = NULL_POINTER;
     void* c = NULL_POINTER;
 
@@ -72,7 +72,7 @@ void destroy_xml_property(void* p0, const void* p1) {
 
     log_message_debug("Destroy xml property.");
 
-    // Initialize xml attribute name, value.
+    // Initialise xml attribute name, value.
     void* nv = NULL_POINTER;
     void* c = NULL_POINTER;
 

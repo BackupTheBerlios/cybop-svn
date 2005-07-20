@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-16 00:18:24 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1067,13 +1067,13 @@ static const char* DESTROY_OPERATION_MESSAGE = DESTROY_OPERATION_MESSAGE_ARRAY;
 static const int DESTROY_OPERATION_MESSAGE_COUNT_ARRAY[] = {18};
 static const int* DESTROY_OPERATION_MESSAGE_COUNT = DESTROY_OPERATION_MESSAGE_COUNT_ARRAY;
 
-/** The "Initialize operation." message. */
+/** The "Initialise operation." message. */
 static const char INITIALIZE_OPERATION_MESSAGE_ARRAY[] = {'I', 'n', 'i', 't', 'i', 'a', 'l', 'i', 'z', 'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', '.'};
 static const char* INITIALIZE_OPERATION_MESSAGE = INITIALIZE_OPERATION_MESSAGE_ARRAY;
 static const int INITIALIZE_OPERATION_MESSAGE_COUNT_ARRAY[] = {21};
 static const int* INITIALIZE_OPERATION_MESSAGE_COUNT = INITIALIZE_OPERATION_MESSAGE_COUNT_ARRAY;
 
-/** The "Finalize operation." message. */
+/** The "Finalise operation." message. */
 static const char FINALIZE_OPERATION_MESSAGE_ARRAY[] = {'F', 'i', 'n', 'a', 'l', 'i', 'z', 'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', '.'};
 static const char* FINALIZE_OPERATION_MESSAGE = FINALIZE_OPERATION_MESSAGE_ARRAY;
 static const int FINALIZE_OPERATION_MESSAGE_COUNT_ARRAY[] = {19};

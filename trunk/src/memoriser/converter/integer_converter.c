@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 14:35:30 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,10 +38,10 @@
 /**
  * Parses the byte stream and creates an integer model from it.
  *
- * @param p0 the destination (Hand over as reference!)
+ * @param p0 the destination integer number (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source
+ * @param p3 the source character array
  * @param p4 the source count
  */
 void parse_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
@@ -112,15 +112,15 @@ void parse_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 }
 
 /**
- * Serializes the integer model and creates a byte stream from it.
+ * Serialises the integer model and creates a byte stream from it.
  *
- * @param p0 the destination (Hand over as reference!)
+ * @param p0 the destination character array (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source
+ * @param p3 the source integer number
  * @param p4 the source count
  */
-void serialize_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void serialise_integer(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     if (p2 != NULL_POINTER) {
 
@@ -134,7 +134,7 @@ void serialize_integer(void* p0, void* p1, void* p2, const void* p3, const void*
 
                 char** d = (char**) p0;
 
-                log_message_debug("Serialize integer.");
+                log_message_debug("Serialise integer.");
 
                 // The integer value.
                 int* v = INTEGER_NULL_POINTER;

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 14:35:30 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -122,7 +122,7 @@ void parse_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 }
 
 /**
- * Serializes the double model and creates a byte stream from it.
+ * Serialises the double model and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -130,7 +130,7 @@ void parse_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
  * @param p3 the source
  * @param p4 the source count
  */
-void serialize_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void serialise_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     if (p2 != NULL_POINTER) {
 
@@ -144,7 +144,7 @@ void serialize_double(void* p0, void* p1, void* p2, const void* p3, const void* 
 
                 char** d = (char**) p0;
 
-                log_message_debug("Serialize double.");
+                log_message_debug("Serialise double.");
 
                 // The double value.
                 double* v = DOUBLE_NULL_POINTER;

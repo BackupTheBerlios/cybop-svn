@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -215,7 +215,7 @@ void encode_html_integer( void** dest, int* dest_count, int* dest_size,
             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
-        serialize( &dest_int, dest_int_count, dest_int_size,
+        serialise( &dest_int, dest_int_count, dest_int_size,
                source_model, source_model_count,
                INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
 

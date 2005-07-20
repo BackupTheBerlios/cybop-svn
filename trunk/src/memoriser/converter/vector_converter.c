@@ -20,23 +20,25 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 14:35:30 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef VECTOR_CONVERTER_SOURCE
 #define VECTOR_CONVERTER_SOURCE
 
+#include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
+#include "../../memoriser/converter/integer_converter.c"
 
 /**
  * Parses the byte stream and creates a vector model from it.
  *
- * @param p0 the destination (Hand over as reference!)
+ * @param p0 the destination vector array (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source
+ * @param p3 the source array
  * @param p4 the source count
  */
 void parse_vector(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
@@ -47,21 +49,62 @@ void parse_vector(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
         if (p3 != NULL_POINTER) {
 
-            void* s = (void*) p3;
+            void** s = (void**) p3;
 
             if (p0 != NULL_POINTER) {
 
                 void** d = (void**) p0;
 
-/*??
-            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize vector.");
+                log_message_debug("Parse vector.");
+
+                // The loop count.
+                int j = 0;
+                // The comma index.
+                int i = -1;
+                // The vector element count.
+                void* c = NULL_POINTER;
+                // The integer number.
+                int n = 0;
+
+                while (1) {
+
+                    if (j >= *sc) {
+
+                        break;
+                    }
+
+                    get_character_array_elements_index(p3, p4, (void*) COMMA_CHARACTER, (void*) COMMA_CHARACTER_COUNT, (void*) &i);
+
+                    if (i > 0) {
+
+                        // Determine vector element count.
+                        c = *s + i;
+
+                        // Example:
+                        // Vector elements: "200,300,400"
+                        // The number 200 character array length is 3.
+                        // Index of first comma: 3
+                        // Handed over as vector element (source) count: index i
+                        // (which is 3, as needed for the length)
+                        parse_integer(d, dc, ds, p3, &i);
+
+                        // Recursively call this procedure for the remaining vector elements.
+                        parse_vector(d, dc, ds, new_start_vector, sc);
+
+                    } else {
+
+                        log_message_debug("ERROR: Could not parse vector. The source string starts with a comma character.");
+                    }
+
+                    j++;
+                }
 
                 // Read input stream and transform to vector.
-            //??    fscanf(p1, %d, &(m->x));
-            //??    fscanf(p1, %d, &(m->y));
-            //??    fscanf(p1, %d, &(m->z));
+                //??    fscanf(p1, %d, &(m->x));
+                //??    fscanf(p1, %d, &(m->y));
+                //??    fscanf(p1, %d, &(m->z));
 
-                // Initialize elements.
+                // Initialise elements.
                 int z = 0;
                 int y = 0;
                 int x = 0;
@@ -117,7 +160,7 @@ void parse_vector(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 }
 
 /**
- * Serializes the vector model and creates a byte stream from it.
+ * Serialises the vector model and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -125,14 +168,14 @@ void parse_vector(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
  * @param p3 the source
  * @param p4 the source count
  */
-void serialize_vector(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void serialise_vector(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
 /*??
-            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize vector.");
+            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalise vector.");
 
                 // Write output stream and transform from vector.
 
-                // Initialize elements.
+                // Initialise elements.
                 int z = 0;
                 int y = 0;
                 int x = 0;

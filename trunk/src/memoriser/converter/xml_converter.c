@@ -22,9 +22,9 @@
  *
  * This file contains the functionality to:
  * - parse an xml stream into an xml model
- * - serialize an xml model into an xml stream
+ * - serialise an xml model into an xml stream
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 14:35:30 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -131,7 +131,7 @@ void parse_xml_comment_tag(void* p0, void* p1) {
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize compound. The persistent model count is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialise compound. The persistent model count is null.");
     }
 }
 
@@ -214,7 +214,7 @@ void parse_xml_tag(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialize compound. The persistent model count is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not initialise compound. The persistent model count is null.");
     }
 }
 
@@ -262,7 +262,7 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                 set_array_elements(tmp, (void*) ZERO_INTEGER, p3, p4, (void*) CHARACTER_ARRAY);
                 set_array_elements(tmp, p4, (void*) NULL_CONTROL_CHARACTER, (void*) NULL_CONTROL_CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
 
-                // Initialize the library.
+                // Initialise the library.
                 // Check potential ABI mismatches between the version
                 // it was compiled for and the actual shared library used.
                 LIBXML_TEST_VERSION
@@ -339,7 +339,7 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                             b = b + BEGIN_TAG_BEGIN_COUNT;
                             bc = bc - BEGIN_TAG_BEGIN_COUNT;
 
-                            // Initialize xml tag.
+                            // Initialise xml tag.
                             void* t = NULL_POINTER;
                             int tc = 0;
                             int ts = 0;
@@ -400,7 +400,7 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /**
- * Serializes the xml model and creates a byte stream from it.
+ * Serialises the xml model and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -408,7 +408,7 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
  * @param p3 the source
  * @param p4 the source count
  */
-void serialize_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void serialise_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /* XML_CONVERTER_SOURCE */

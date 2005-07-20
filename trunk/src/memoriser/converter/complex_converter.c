@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 14:35:30 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,12 +58,12 @@ void parse_complex(void* p0, void* p1, void* p2, const void* p3, const void* p4)
                 void* d = (void*) p0;
 
 /*??
-            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialize complex.");
+            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Initialise complex.");
 
             //??    fscanf(p1, %d, (void*) &(t->real));
             //??    fscanf(p1, %d, (void*) &(t->imaginary));
 
-                // Initialize elements.
+                // Initialise elements.
                 int i = 0;
                 int r = 0;
 
@@ -88,7 +88,7 @@ void parse_complex(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 }
 
 /**
- * Serializes the complex model and creates a byte stream from it.
+ * Serialises the complex model and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -96,12 +96,12 @@ void parse_complex(void* p0, void* p1, void* p2, const void* p3, const void* p4)
  * @param p3 the source
  * @param p4 the source count
  */
-void serialize_complex(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void serialise_complex(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
 /*??
-            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalize complex.");
+            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalise complex.");
 
-                // Initialize elements.
+                // Initialise elements.
                 int i = 0;
                 int r = 0;
 

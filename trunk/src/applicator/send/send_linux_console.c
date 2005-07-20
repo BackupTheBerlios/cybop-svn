@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-20 08:18:30 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,14 +62,14 @@ void receive_linux_console(void* p0, void* p1, void* p2, const void* p3, const v
 
                     int* ac = (int*) p1;
 
-                    // Initialize terminated file name and its size.
+                    // Initialise terminated file name and its size.
                     char* tn = CHARACTER_NULL_POINTER;
                     int tns = *nc + 1;
 
                     // Create terminated file name.
                     create_array((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &tns);
 
-                    // Initialize destination array index.
+                    // Initialise destination array index.
                     int i = 0;
 
                     // Set terminated file name by first copying the actual name and then

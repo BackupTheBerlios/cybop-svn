@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-08 15:45:14 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,7 +78,7 @@ void create_pointer_array(void* p0, const void* p1) {
             // In other words, a handle to the new instance is always returned.
             *a = (void*) malloc(m);
 
-            // Initialize array elements with null pointer.
+            // Initialise array elements with null pointer.
             memset(*a, 0, m);
 
         } else {
@@ -382,7 +382,7 @@ void remove_pointer_array_elements(void* p0, const void* p1, const void* p2, con
 
                     // Set former last elements to 0.0.
                     // This is disabled for now, since when creating an array,
-                    // its elements are also NOT initialized with ''.
+                    // its elements are also NOT initialised with ''.
                     // The calling procedure may just cut off the remaining
                     // elements by decreasing the array size (resizing).
 

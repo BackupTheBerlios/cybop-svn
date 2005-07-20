@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-16 00:18:23 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -53,7 +53,7 @@
  * - language (channel): internal, tui, gui, socket, http
  * - sender (who): ip address, socket port
  * - receiver (whom): ip address, socket port
- * - message (what): knowledge model to be sent in serialized form
+ * - message (what): knowledge model to be sent in serialised form
  * - waiting (blocking): whether the system shall wait until message is sent
  *
  * @param p0 the parameters

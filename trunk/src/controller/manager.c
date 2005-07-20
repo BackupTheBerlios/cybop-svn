@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-16 00:18:24 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,7 +97,7 @@ void manage(void* p0, void* p1, void* p2) {
         // CAUTION! Do not create startup model details!
         // It is not needed for the startup signal.
 
-        // Initialize startup model abstraction, model, details.
+        // Initialise startup model abstraction, model, details.
         *mac = 0;
         *mas = 0;
         *mmc = 0;

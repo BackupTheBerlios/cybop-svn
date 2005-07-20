@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -208,7 +208,7 @@ void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 }
 
 /**
- * Serializes the document model according to the given document type
+ * Serialises the document model according to the given document type
  * and creates a byte stream from it.
  *
  * @param p0 the destination (Hand over as reference!)
@@ -219,7 +219,7 @@ void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  * @param p5 the type
  * @param p6 the type count
  */
-void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
+void serialise(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6) {
 
     // The comparison result.
@@ -231,7 +231,7 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r == 1) {
 
-            serialize_xml(p0, p1, p2, p3, p4);
+            serialise_xml(p0, p1, p2, p3, p4);
         }
     }
 
@@ -241,7 +241,7 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r == 1) {
 
-            serialize_string(p0, p1, p2, p3, p4);
+            serialise_string(p0, p1, p2, p3, p4);
         }
     }
 
@@ -251,7 +251,7 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r == 1) {
 
-            serialize_string(p0, p1, p2, p3, p4);
+            serialise_string(p0, p1, p2, p3, p4);
         }
     }
 
@@ -261,7 +261,7 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r == 1) {
 
-            serialize_boolean(p0, p1, p2, p3, p4);
+            serialise_boolean(p0, p1, p2, p3, p4);
         }
     }
 
@@ -271,7 +271,7 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r == 1) {
 
-            serialize_integer(p0, p1, p2, p3, p4);
+            serialise_integer(p0, p1, p2, p3, p4);
         }
     }
 
@@ -281,7 +281,7 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r == 1) {
 
-            serialize_vector(p0, p1, p2, p3, p4);
+            serialise_vector(p0, p1, p2, p3, p4);
         }
     }
 
@@ -291,7 +291,7 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r == 1) {
 
-            serialize_double(p0, p1, p2, p3, p4);
+            serialise_double(p0, p1, p2, p3, p4);
         }
     }
 
@@ -301,7 +301,7 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r == 1) {
 
-            serialize_fraction(p0, p1, p2, p3, p4);
+            serialise_fraction(p0, p1, p2, p3, p4);
         }
     }
 
@@ -311,7 +311,7 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r == 1) {
 
-            serialize_complex(p0, p1, p2, p3, p4);
+            serialise_complex(p0, p1, p2, p3, p4);
         }
     }
 
@@ -321,7 +321,7 @@ void serialize(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r == 1) {
 
-            serialize_time(p0, p1, p2, p3, p4);
+            serialise_time(p0, p1, p2, p3, p4);
         }
     }
 

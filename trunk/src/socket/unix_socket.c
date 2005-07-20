@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.19 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.20 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -200,7 +200,7 @@ void send_unix_socket(void* p0) {
             // 0 stands for the default protocol (recommended).
             int s = socket(AF_UNIX, SOCK_STREAM, 0);
 
-            // Initialize unix socket filename and its count.
+            // Initialise unix socket filename and its count.
             void* n = NULL_POINTER;
             int nc = 0;
 
@@ -217,7 +217,7 @@ void send_unix_socket(void* p0) {
 */
 
 /*??
-            // Initialize socket address.
+            // Initialise socket address.
             struct sockaddr_un a;
             // Set address format.
             a.sun_family = AF_UNIX;
@@ -243,7 +243,7 @@ void send_unix_socket(void* p0) {
             // Convert message to avoid byte-order problems. Many machines
             // use differing dialects (ASCII versus EBCDIC) to represent data.
             // The byte-order problem does NOT occur if data are exclusively
-            // passed as text, for example as serialized cybol file.
+            // passed as text, for example as serialised cybol file.
 //??            m = htonl(m);
 
             // Write message to socket.
@@ -306,7 +306,7 @@ void receive_unix_socket(void* p0) {
             // Convert message to avoid byte-order problems. Many machines
             // use differing dialects (ASCII versus EBCDIC) to represent data.
             // The byte-order problem does NOT occur if data are exclusively
-            // passed as text, for example as serialized cybol file.
+            // passed as text, for example as serialised cybol file.
 //??            m = ntohl(m);
 
             close(cs);

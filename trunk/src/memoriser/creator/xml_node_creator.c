@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,7 +45,7 @@ void create_xml_node(void* p0, const void* p1) {
     // Create xml node.
     create_array(p0, (void*) XML_TAG_COUNT, (void*) POINTER_ARRAY);
 
-    // Initialize xml node name, attributes, value.
+    // Initialise xml node name, attributes, value.
     void* nav = NULL_POINTER;
     void* c = NULL_POINTER;
 
@@ -72,7 +72,7 @@ void destroy_xml_node(void* p0, const void* p1) {
 
     log_message_debug("Destroy xml node.");
 
-    // Initialize xml tag name, attributes, value.
+    // Initialise xml tag name, attributes, value.
     void* nav = NULL_POINTER;
     void* c = NULL_POINTER;
 

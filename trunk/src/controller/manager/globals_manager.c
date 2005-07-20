@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-16 00:18:24 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -87,7 +87,7 @@ void startup_globals() {
 
     // The integer primitive size.
     // CAUTION! The sizeof operator must be used twice here,
-    // because INTEGER_PRIMITIVE_SIZE cannot be used before being initialized.
+    // because INTEGER_PRIMITIVE_SIZE cannot be used before being initialised.
     // CAUTION! The integer size need to be initialised FIRST!
     INTEGER_PRIMITIVE_SIZE = (int*) malloc(sizeof(int));
     *INTEGER_PRIMITIVE_SIZE = sizeof(int);
@@ -160,7 +160,7 @@ void startup_globals() {
  * Shuts down the global variables.
  *
  * Destroys allocated memory in descending order,
- * as compared to the initialize_globals procedure.
+ * as compared to the initialise_globals procedure.
  */
 void shutdown_globals() {
 

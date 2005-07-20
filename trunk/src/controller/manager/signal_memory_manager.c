@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,7 +53,7 @@ void startup_signal_memory(void* p0) {
     create_integer((void*) &sc);
     create_integer((void*) &ss);
 
-    // Initialize signal memory count, size.
+    // Initialise signal memory count, size.
     *sc = 0;
     *ss = 0;
 
