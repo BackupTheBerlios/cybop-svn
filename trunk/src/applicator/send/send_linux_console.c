@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-16 07:58:39 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-20 08:18:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -191,9 +191,6 @@ void send_linux_console(void* p0, void* p1, void* p2, const void* p3, const void
                     printf("\033[%d;%dH", column, row);
 
                     printf("%s", (char*) p3);
-//??                    fprintf(*d, "\n\n%s\n\n\n", (char*) p3);
-                    //?? TEST: for "Hello, World!"
-//??                    fprintf(stdout, "\n\n%s\n\n\n", (char*) p3);
 
                     // Set default background.
 //??                    printf("\033[0m");
@@ -260,170 +257,7 @@ void send_linux_console(void* p0, void* p1, void* p2, const void* p3, const void
 
 //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The file name count is null.");
     }
-
-/*??
-    char r = NULL_CONTROL_CHARACTER;
-    int j = 0;
-    char c = NULL_CONTROL_CHARACTER;
-
-    while (1) {
-
-        if (j >= *as) {
-
-            break;
-        }
-
-        if (r == EOF) {
-
-            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not write file. A write error occured.");
-
-            break;
-        }
-
-        get_array_element(p0, (void*) &CHARACTER_ARRAY, (void*) &j, (void*) &c);
-
-        r = fputc(c, f);
-        j++;
-    }
-*/
 }
-
-/*?? ==================================== OLD
-
-//
-// Character screen.
-//
-
-struct textual_screen {
-
-    void* button;
-};
-
-struct button {
-
-    void* size;
-    void* label;
-};
-
-/*??
-void create_test(void* p0) {
-
-    struct textual_screen* s = (struct textual_screen*) p0;
-    s->button = (void*) malloc(sizeof(struct button));
-
-    struct button* b = (struct button*) s->button;
-    b->size = (void*) malloc(sizeof(struct vector));
-
-    struct vector* v = (struct vector*) b->size;
-    v->x = 10;
-    v->y = 3;
-    v->z = 1;
-
-    b->label = (void*) "Exit";
-}
-*/
-
-/*??
-void destroy_test(void* p0) {
-
-    struct textual_screen* s = (struct textual_screen*) p0;
-    struct button* b = (struct button*) s->button;
-    struct vector* v = (struct vector*) b->size;
-
-    free(v);
-    free(b);
-}
-*/
-
-/*??
-void write_button_label(void* p0, void* p1) {
-
-    char* c = (char*) p0;
-    FILE* f = (FILE*) p1;
-
-    fputs(c, f);
-    fputc(10, stdout);
-    fputc(10, stdout);
-    fflush(stdout);
-}
-
-/*??
-void paint_button(void* p0, void* p1) {
-
-    struct vector* s = (struct vector*) p0;
-    FILE* f = (FILE*) p1;
-    int w = s->x;
-    int h = s->y;
-    int d = s->z;
-    int x_pos = 8;
-    int y_pos = 10;
-    int z_pos = 0;
-    int x = x_pos;
-    int y = y_pos;
-    int z = z_pos;
-
-    while (z < (z_pos + d)) {
-
-        while (y < (y_pos + h)) {
-
-            while (x < (x_pos + w)) {
-
-                fputc(95, f);
-
-                x++;
-            }
-
-            y++;
-        }
-
-        z++;
-    }
-
-    fputc(10, stdout);
-    fputc(10, stdout);
-    fflush(stdout);
-}
-*/
-
-/*??
-void send_button(void* p0) {
-
-    struct button* b = (struct button*) p0;
-    paint_button(b->size, stdout);
-    write_button_label(b->label, stdout);
-}
-*/
-
-/**
- * Send character screen signal to communication partner (probably the human user).
- *
- * @param p0 the textual screen
- */
-/*??
-void send_textual_screen(void* p0) {
-
-    struct textual_screen* s = (struct textual_screen*) p0;
-    send_button(s->button);
-}
-*/
-
-/**
- * Tests the textual screen.
- *
- * ?? Probably temporary; CYBOI should read hierarchy from CYBOL files later.
- */
-/*??
-void test_textual_screen() {
-
-    void* s = (void*) malloc(sizeof(struct textual_screen));
-    create_test(s);
-
-    send_textual_screen(s);
-
-    destroy_test(s);
-    free(s);
-}
-*/
 
 /* SEND_LINUX_CONSOLE_SOURCE */
 #endif

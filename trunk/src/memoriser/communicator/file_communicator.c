@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-20 08:18:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,6 +39,62 @@
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/array.c"
+
+/**
+ * Receives a file stream and writes it into a byte array.
+ *
+ * @param p0 the destination (byte array) (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source (file name)
+ * @param p4 the source count
+ */
+/*??
+void receive_terminal_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+
+    // Position cursor to top-left corner of screen mask.
+    int column = 0;
+    int row = 0;
+    printf("\033[%d;%dH", column, row);
+
+    // The input character.
+    int c;
+
+    while (1) {
+
+        if (c == EOF) {
+
+            break;
+        }
+
+        if (*dc == *ds) {
+
+            // Increase size.
+            *ds = (*ds * *FILE_RESIZE_FACTOR) + 1;
+
+            // Resize array.
+            resize_array(p0, p2, (void*) CHARACTER_ARRAY);
+        }
+
+        if (*dc < *ds) {
+
+            // Set character in destination array.
+            // The array count serves as index for setting the character.
+            set_array_elements(*d, p1, (void*) &c, (void*) ONE_INTEGER, (void*) CHARACTER_ARRAY);
+
+            // Increase array count.
+            (*dc)++;
+
+        } else {
+
+            log_message_debug("Could not receive file. The index exceeds the array size.");
+        }
+
+        // Read next character.
+        c = fgetc(stdin);
+    }
+}
+*/
 
 /**
  * Receives a file stream and writes it into a byte array.
