@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-21 08:02:01 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -210,7 +210,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_SPACE_CHARACTER,
+                                SPACE_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -223,7 +223,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_LESS_THAN_SIGN_CHARACTER,
+                                LESS_THAN_SIGN_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -236,7 +236,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_GREATER_THAN_SIGN_CHARACTER,
+                                GREATER_THAN_SIGN_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -249,7 +249,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_NUMBER_SIGN_CHARACTER,
+                                NUMBER_SIGN_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -262,7 +262,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_PERCENT_SIGN_CHARACTER,
+                                PERCENT_SIGN_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -275,7 +275,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_LEFT_CURLY_BRACKET_CHARACTER,
+                                LEFT_CURLY_BRACKET_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -288,7 +288,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_RIGHT_CURLY_BRACKET_CHARACTER,
+                                RIGHT_CURLY_BRACKET_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -301,7 +301,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_VERTICAL_LINE_CHARACTER,
+                                VERTICAL_LINE_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -314,7 +314,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_REVERSE_SOLIDUS_CHARACTER,
+                                REVERSE_SOLIDUS_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -327,7 +327,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_CIRCUMFLEX_ACCENT_CHARACTER,
+                                CIRCUMFLEX_ACCENT_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -340,7 +340,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_TILDE_CHARACTER,
+                                TILDE_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -353,7 +353,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_LEFT_SQUARE_BRACKET_CHARACTER,
+                                LEFT_SQUARE_BRACKET_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -366,7 +366,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_RIGHT_SQUARE_BRACKET_CHARACTER,
+                                RIGHT_SQUARE_BRACKET_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -379,7 +379,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_GRAVE_ACCENT_CHARACTER,
+                                GRAVE_ACCENT_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -392,7 +392,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_SEMICOLON_CHARACTER,
+                                SEMICOLON_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -405,7 +405,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_SOLIDUS_CHARACTER,
+                                SOLIDUS_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -418,7 +418,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_QUESTION_MARK_CHARACTER,
+                                QUESTION_MARK_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -431,7 +431,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_COLON_CHARACTER,
+                                COLON_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -444,7 +444,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_COMMERCIAL_AT_CHARACTER,
+                                COMMERCIAL_AT_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -457,7 +457,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_EQUALS_SIGN_CHARACTER,
+                                EQUALS_SIGN_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -470,7 +470,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_AMPERSAND_CHARACTER,
+                                AMPERSAND_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 
@@ -483,7 +483,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
             if ( r == 0) {
 
                 compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                ESCAPE_CODE_DOLLAR_SIGN_CHARACTER,
+                                DOLLAR_SIGN_CHARACTER_ESCAPE_CODE,
                                 ESCAPE_CODE_CHARACTER_COUNT,
                                 &r, CHARACTER_ARRAY );
 

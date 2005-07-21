@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-21 08:02:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,10 +34,10 @@
 /**
  * Parses the byte stream and creates a terminal model from it.
  *
- * @param p0 the destination (Hand over as reference!)
+ * @param p0 the destination compound model (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source
+ * @param p3 the source array with escape control sequences
  * @param p4 the source count
  */
 void parse_terminal(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
@@ -46,11 +46,11 @@ void parse_terminal(void* p0, void* p1, void* p2, const void* p3, const void* p4
 /**
  * Serialises the terminal model and creates a byte stream from it.
  *
- * @param p0 the destination (Hand over as reference!) (the array with escape control sequences)
+ * @param p0 the destination array with escape control sequences (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source (the compound model)
- * @param p4 the source count (the compound model parts count)
+ * @param p3 the source compound model
+ * @param p4 the source count
  */
 void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
@@ -58,85 +58,177 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
 
         int* sc = (int*) p4;
 
-        if (*dc >= 0) {
+        log_message_debug("Serialise terminal.");
 
-            log_message_debug("Serialise terminal.");
+        // The part abstraction, model, details.
+        void** a = POINTER_NULL_POINTER;
+        void** ac = POINTER_NULL_POINTER;
+        void** as = POINTER_NULL_POINTER;
+        void** m = POINTER_NULL_POINTER;
+        void** mc = POINTER_NULL_POINTER;
+        void** ms = POINTER_NULL_POINTER;
+        void** d = POINTER_NULL_POINTER;
+        void** dc = POINTER_NULL_POINTER;
+        void** ds = POINTER_NULL_POINTER;
 
-            // The loop count.
-            int j = 0;
+        // The part position.
+        void** pa = POINTER_NULL_POINTER;
+        void** pac = POINTER_NULL_POINTER;
+        void** pas = POINTER_NULL_POINTER;
+        void** pm = POINTER_NULL_POINTER;
+        void** pmc = POINTER_NULL_POINTER;
+        void** pms = POINTER_NULL_POINTER;
+        void** pd = POINTER_NULL_POINTER;
+        void** pdc = POINTER_NULL_POINTER;
+        void** pds = POINTER_NULL_POINTER;
 
+        // The part size.
+        void** sa = POINTER_NULL_POINTER;
+        void** sac = POINTER_NULL_POINTER;
+        void** sas = POINTER_NULL_POINTER;
+        void** sm = POINTER_NULL_POINTER;
+        void** smc = POINTER_NULL_POINTER;
+        void** sms = POINTER_NULL_POINTER;
+        void** sd = POINTER_NULL_POINTER;
+        void** sdc = POINTER_NULL_POINTER;
+        void** sds = POINTER_NULL_POINTER;
+
+        // The part colour.
+        void** ca = POINTER_NULL_POINTER;
+        void** cac = POINTER_NULL_POINTER;
+        void** cas = POINTER_NULL_POINTER;
+        void** cm = POINTER_NULL_POINTER;
+        void** cmc = POINTER_NULL_POINTER;
+        void** cms = POINTER_NULL_POINTER;
+        void** cd = POINTER_NULL_POINTER;
+        void** cdc = POINTER_NULL_POINTER;
+        void** cds = POINTER_NULL_POINTER;
+
+        // The part position x, y, z.
+        int px = -1;
+        int py = -1;
+        int pz = -1;
+        // The part size x, y, z.
+        int sx = -1;
+        int sy = -1;
+        int sz = -1;
+        // The part colour.
+        void* c = NULL_POINTER;
+
+        // The loop count.
+        int j = 0;
+        // The x loop count.
+        int x = 0;
+        // The y loop count.
+        int y = 0;
+        // The z loop count.
+        int z = 0;
+
+        while (1) {
+
+            if (j >= *c) {
+
+                break;
+            }
+
+            // Get part at index j.
+            get_compound_element_by_index(p3, p4, (void*) &j,
+                (void*) a, (void*) ac, (void*) as
+                (void*) m, (void*) mc, (void*) ms
+                (void*) d, (void*) dc, (void*) ds);
+
+            // Get part position from details.
+            get_compound_element_by_index(*d, *dc, (void*) TUI_POSITION,
+                (void*) pa, (void*) pac, (void*) pas
+                (void*) pm, (void*) pmc, (void*) pms
+                (void*) pd, (void*) pdc, (void*) pds);
+
+            // Get part size from details.
+            get_compound_element_by_index(*d, *dc, (void*) TUI_POSITION,
+                (void*) sa, (void*) sac, (void*) sas
+                (void*) sm, (void*) smc, (void*) sms
+                (void*) sd, (void*) sdc, (void*) sds);
+
+            // Get part colour from details.
+            get_compound_element_by_index(*d, *dc, (void*) TUI_COLOUR,
+                (void*) ca, (void*) cac, (void*) cas
+                (void*) cm, (void*) cmc, (void*) cms
+                (void*) cd, (void*) cdc, (void*) cds);
+
+            // Get part position x, y, z.
+            get_integer_array_elements(*pm, (void*) ONE_INTEGER, (void*) &px);
+            get_integer_array_elements(*pm, (void*) TWO_INTEGER, (void*) &py);
+            get_integer_array_elements(*pm, (void*) THREE_INTEGER, (void*) &pz);
+            // Get part size x, y, z.
+            get_integer_array_elements(*sm, (void*) ONE_INTEGER, (void*) &sx);
+            get_integer_array_elements(*sm, (void*) TWO_INTEGER, (void*) &sy);
+            get_integer_array_elements(*sm, (void*) THREE_INTEGER, (void*) &sz);
+
+            // Get part colour as escape control sequence.
+            get_integer_array_elements(*cm, (void*) ONE_INTEGER, (void*) &c);
+
+            // Position cursor.
+            printf("\033[%d;%dH", py, px);
+
+            // Reset z loop index to first position.
+            z = 1;
+
+            // Add corresponding escape control sequences.
             while (1) {
 
-                if (j >= *c) {
+                if (z >= sz) {
 
                     break;
                 }
 
-                // The part abstraction, model, details.
-                void** a = POINTER_NULL_POINTER;
-                void** ac = POINTER_NULL_POINTER;
-                void** as = POINTER_NULL_POINTER;
-                void** m = POINTER_NULL_POINTER;
-                void** mc = POINTER_NULL_POINTER;
-                void** ms = POINTER_NULL_POINTER;
-                void** d = POINTER_NULL_POINTER;
-                void** dc = POINTER_NULL_POINTER;
-                void** ds = POINTER_NULL_POINTER;
+                // Reset y loop index to first position.
+                y = 1;
 
-                // Get part at index j.
-                get_compound_element_by_index(p3, p4, (void*) &j,
-                    (void*) a, (void*) ac, (void*) as
-                    (void*) m, (void*) mc, (void*) ms
-                    (void*) d, (void*) dc, (void*) ds);
+                while (1) {
 
-                // The part position.
-                void** pa = POINTER_NULL_POINTER;
-                void** pac = POINTER_NULL_POINTER;
-                void** pas = POINTER_NULL_POINTER;
-                void** pm = POINTER_NULL_POINTER;
-                void** pmc = POINTER_NULL_POINTER;
-                void** pms = POINTER_NULL_POINTER;
-                void** pd = POINTER_NULL_POINTER;
-                void** pdc = POINTER_NULL_POINTER;
-                void** pds = POINTER_NULL_POINTER;
+                    if (y >= sy) {
 
-                // Get part position from details.
-                get_compound_element_by_index(*d, *dc, (void*) TUI_POSITION,
-                    (void*) pa, (void*) pac, (void*) pas
-                    (void*) pm, (void*) pmc, (void*) pms
-                    (void*) pd, (void*) pdc, (void*) pds);
+                        break;
+                    }
 
-                // The part colour.
-                void** ca = POINTER_NULL_POINTER;
-                void** cac = POINTER_NULL_POINTER;
-                void** cas = POINTER_NULL_POINTER;
-                void** cm = POINTER_NULL_POINTER;
-                void** cmc = POINTER_NULL_POINTER;
-                void** cms = POINTER_NULL_POINTER;
-                void** cd = POINTER_NULL_POINTER;
-                void** cdc = POINTER_NULL_POINTER;
-                void** cds = POINTER_NULL_POINTER;
+                    // Reset x loop index to first position.
+                    x = 1;
 
-                // Get part colour from details.
-                get_compound_element_by_index(*d, *dc, (void*) TUI_COLOUR,
-                    (void*) ca, (void*) cac, (void*) cas
-                    (void*) cm, (void*) cmc, (void*) cms
-                    (void*) cd, (void*) cdc, (void*) cds);
+                    while (1) {
 
-                // Check if destination array size is large enough.
+                        if (x >= sx) {
 
+                            break;
+                        }
 
-                // Add corresponding escape control sequences.
-                for all size length + height fill with colour
+                        printf("\033[32m");
 
-                if model's abstraction a equals string, then
-                set foreground colour and print string into array
+                        x++;
+                    }
 
-                // Recursively call this procedure for part model.
-                serialise_terminal(p0, p1, p2, *m, *mc);
+                    y++;
+                }
 
-                j++;
+                z++;
             }
+
+            // Check if destination array size is large enough.
+
+            printf("\033[2J");
+            fputs("Set colour to \033[32mgreen\033[0m.\n", (FILE*) *d);
+
+            for all size length + height fill with colour
+
+            if model's abstraction a equals string, then
+            set foreground colour and print string into array
+
+            // Recursively call this procedure for part model.
+            serialise_terminal(p0, p1, p2, *m, *mc);
+
+            j++;
+        }
+
+        if (*dc >= 0) {
 
             // The new destination string size.
             // (Not exactly the size, but the destination string index
