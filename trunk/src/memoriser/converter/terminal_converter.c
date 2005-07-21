@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-21 08:02:08 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-21 15:56:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,6 +57,18 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
     if (p4 != NULL_POINTER) {
 
         int* sc = (int*) p4;
+
+        if (p2 != NULL_POINTER) {
+
+            int* des = (int*) p2;
+
+            if (p1 != NULL_POINTER) {
+
+                int* dec = (int*) p1;
+
+                if (p0 != NULL_POINTER) {
+
+                    void** de = (void**) p0;
 
         log_message_debug("Serialise terminal.");
 
@@ -108,25 +120,42 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
         int px = -1;
         int py = -1;
         int pz = -1;
+
         // The part size x, y, z.
         int sx = -1;
         int sy = -1;
         int sz = -1;
+
         // The part colour.
         void* c = NULL_POINTER;
 
         // The loop count.
         int j = 0;
-        // The x loop count.
+
+        // The comparison result.
+        int r = 0;
+
+        // The x, y, z loop counts.
         int x = 0;
-        // The y loop count.
         int y = 0;
-        // The z loop count.
         int z = 0;
+
+        // The part colour control sequence.
+        char* cs = NULL_POINTER;
+        int csc = 0;
+        int css = 0;
+
+        // The terminated part colour control sequence.
+        char* tcs = NULL_POINTER;
+        int tcsc = 0;
+        int tcss = 0;
+
+        // The part model string.
+        char* s = NULL_POINTER;
 
         while (1) {
 
-            if (j >= *c) {
+            if (j >= *sc) {
 
                 break;
             }
@@ -137,6 +166,11 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
                 (void*) m, (void*) mc, (void*) ms
                 (void*) d, (void*) dc, (void*) ds);
 
+            // Reset comparison result.
+            r = 0;
+
+            compare_arrays(*a, *ac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
             // Get part position from details.
             get_compound_element_by_index(*d, *dc, (void*) TUI_POSITION,
                 (void*) pa, (void*) pac, (void*) pas
@@ -144,7 +178,7 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
                 (void*) pd, (void*) pdc, (void*) pds);
 
             // Get part size from details.
-            get_compound_element_by_index(*d, *dc, (void*) TUI_POSITION,
+            get_compound_element_by_index(*d, *dc, (void*) TUI_SIZE,
                 (void*) sa, (void*) sac, (void*) sas
                 (void*) sm, (void*) smc, (void*) sms
                 (void*) sd, (void*) sdc, (void*) sds);
@@ -159,19 +193,40 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
             get_integer_array_elements(*pm, (void*) ONE_INTEGER, (void*) &px);
             get_integer_array_elements(*pm, (void*) TWO_INTEGER, (void*) &py);
             get_integer_array_elements(*pm, (void*) THREE_INTEGER, (void*) &pz);
+
             // Get part size x, y, z.
             get_integer_array_elements(*sm, (void*) ONE_INTEGER, (void*) &sx);
             get_integer_array_elements(*sm, (void*) TWO_INTEGER, (void*) &sy);
             get_integer_array_elements(*sm, (void*) THREE_INTEGER, (void*) &sz);
 
-            // Get part colour as escape control sequence.
-            get_integer_array_elements(*cm, (void*) ONE_INTEGER, (void*) &c);
+            if (r == 0) {
+
+            // Determine part colour control sequence.
+            get_control_sequence((void*) &cs, (void*) &csc, (void*) &css, *cm, *cmc);
+
+            // Reset terminated part colour control sequence.
+            tcs = NULL_POINTER;
+            // Set terminated part colour control sequence size.
+            tcss = csc + 1;
+
+            // Create terminated part colour control sequence.
+            create_array((void*) &tcs, (void*) &tcss, (void*) CHARACTER_ARRAY);
+
+            // Set terminated part colour control sequence by first copying the
+            // actual control sequence and then adding the null termination character.
+            set_array_elements(tcs, (void*) ZERO_INTEGER, (void*) &cs, (void*) &csc, (void*) CHARACTER_ARRAY);
+            set_array_elements(tcs, (void*) &csc, (void*) NULL_CONTROL_CHARACTER, (void*) NULL_CONTROL_CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
 
             // Position cursor.
-            printf("\033[%d;%dH", py, px);
+            // CAUTION! The top-left terminal corner is 1:1, but the given positions
+            // start counting from 0, so that 1 has to be added to all positions.
+            printf("\033[%d;%dH", py + 1, px + 1);
+
+            // Print colour.
+            sprintf(*d, tcs);
 
             // Reset z loop index to first position.
-            z = 1;
+            z = 0;
 
             // Add corresponding escape control sequences.
             while (1) {
@@ -182,7 +237,7 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
                 }
 
                 // Reset y loop index to first position.
-                y = 1;
+                y = 0;
 
                 while (1) {
 
@@ -192,7 +247,7 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
                     }
 
                     // Reset x loop index to first position.
-                    x = 1;
+                    x = 0;
 
                     while (1) {
 
@@ -201,7 +256,19 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
                             break;
                         }
 
-                        printf("\033[32m");
+                        if (r == 0) {
+
+                            // Print space.
+                            sprintf(*d, SPACE_CHARACTER);
+
+                        } else {
+
+                            // Get part string with just one character at position y.
+                            get_character_array_elements(string, (void*) &y, (void*) &s);
+
+                            // Print string.
+                            sprintf(*d, s);
+                        }
 
                         x++;
                     }
@@ -212,18 +279,27 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
                 z++;
             }
 
+            // Destroy terminated part colour control sequence.
+            destroy_array((void*) &tcs, (void*) &tcss, (void*) CHARACTER_ARRAY);
+
             // Check if destination array size is large enough.
 
             printf("\033[2J");
             fputs("Set colour to \033[32mgreen\033[0m.\n", (FILE*) *d);
 
-            for all size length + height fill with colour
-
             if model's abstraction a equals string, then
             set foreground colour and print string into array
 
-            // Recursively call this procedure for part model.
-            serialise_terminal(p0, p1, p2, *m, *mc);
+            // Reset comparison result.
+            r = 0;
+
+            compare_arrays(*a, *ac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+            if (r != 0) {
+
+                // Recursively call this procedure for compound part model.
+                serialise_terminal(p0, p1, p2, *m, *mc);
+            }
 
             j++;
         }
