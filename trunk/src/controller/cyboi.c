@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-16 00:18:23 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-22 10:03:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,17 +97,9 @@ int main(int p0, char** p1) {
                 // (in this case, the strlen function can be used)
                 // Possibility 2 is applied here.
                 int sc = strlen((char*) *s);
-                // The internal memory.
-                void* i = NULL_POINTER;
-
-                // Create internal memory
-                create((void*) &i, (void*) INTERNAL_MEMORY_ELEMENTS_COUNT, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
 
                 // Manage system.
-                manage(i, *s, (void*) &sc);
-
-                // Destroy internal memory.
-                destroy((void*) &i, (void*) INTERNAL_MEMORY_ELEMENTS_COUNT, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
+                manage(*s, (void*) &sc);
 
                 log_message((void*) INFO_LOG_LEVEL, (void*) EXIT_CYBOI_NORMALLY_MESSAGE, (void*) EXIT_CYBOI_NORMALLY_MESSAGE_COUNT);
 
