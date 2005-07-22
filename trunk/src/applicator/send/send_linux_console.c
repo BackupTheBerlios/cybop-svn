@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-22 07:29:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,7 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include "../../globals/constants/channel_constants.c"
 #include "../../globals/constants/character_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
@@ -159,104 +160,72 @@ void receive_linux_console(void* p0, void* p1, void* p2, const void* p3, const v
 /**
  * Sends a destination tui that was read from a source byte array.
  *
- * @param p0 the destination (Hand over as reference!)
+ * @param p0 the destination terminal (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source
+ * @param p3 the source tui compound model
  * @param p4 the source count
  */
 void send_linux_console(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
-    if (p4 != NULL_POINTER) {
+    log_message_debug("Send via linux console.");
 
-        int* sc = (int*) p4;
+    // The encoded multi-dimensional tui.
+    void* t = NULL_POINTER;
+    int* tc = NULL_POINTER;
+    int* ts = NULL_POINTER;
 
-        if (p3 != NULL_POINTER) {
-
-            void* s = (void*) p3;
-
-            if (p0 != NULL_POINTER) {
-
-                void** d = (void**) p0;
-
-                    log_message_debug("Send linux console.");
-
-                    // Set blue background.
-                    printf("\033[44m");
-                    // Clear screen.
-                    printf("\033[2J");
-                    // Position cursor.
-                    int column = 10;
-                    int row = 5;
-                    printf("\033[%d;%dH", column, row);
-
-                    printf("%s", (char*) p3);
-
-                    // Set default background.
-//??                    printf("\033[0m");
-
-                    getc(stdin);
+    // The tui internals.
+    void** ti = NULL_POINTER;
+    int** tic = NULL_POINTER;
+    int** tis = NULL_POINTER;
 
 /*??
-                    // The temporary null-terminated message.
-                    char* tmp = NULL_POINTER;
-                    int tmps = **sc + 1;
+    // Get tui internals.
+    get_array_elements(p0, (void*) TUI_INTERNAL, (void*) &ti, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) TUI_COUNT_INTERNAL, (void*) &tic, (void*) POINTER_ARRAY);
+    get_array_elements(p0, (void*) TUI_SIZE_INTERNAL, (void*) &tis, (void*) POINTER_ARRAY);
 
-                    // The index.
-                    int* i = INTEGER_NULL_POINTER;
-                    create_integer((void*) &i);
-                    *i = 0;
+    // Assign tui internals to real tui.
+    t = *ti;
+    *tc = **tic;
+    *ts = **tis;
 
-                    // Create temporary null-terminated message.
-                    create_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
+    if (t == NULL_POINTER) {
 
-                    // Copy original message to temporary null-terminated message.
-                    set_array_elements((void*) &tmp, (void*) CHARACTER_ARRAY, (void*) &i, p3, p4);
-                    // This is used as index to set the termination character.
-                    *i = **sc;
-                    // Add string termination to temporary null-terminated message.
-                    set_array_elements((void*) &tmp, (void*) CHARACTER_ARRAY, (void*) &i, (void*) &NULL_CONTROL_CHARACTER, (void*) &NULL_CONTROL_CHARACTER_COUNT);
+        // Create tui.
+        create_array((void*) &t, (void*) ts, (void*) &POINTER_ARRAY);
+        create((void*) &t, (void*) ts, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        create((void*) &t, (void*) ts, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
-                    destroy_integer((void*) &i);
+        // Set tui internals.
+        set_array_elements(p0, (void*) TUI_INTERNAL, (void*) &t, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) TUI_COUNT_INTERNAL, (void*) &tc, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) TUI_SIZE_INTERNAL, (void*) &ts, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+    }
 
-                    fputs(tmp, (FILE*) *d);
-                    fputs("\n", (FILE*) *d);
+    // Encode compound model into tui.
+    encode((void*) &t, (void*) tc, (void*) ts, p3, p4);
 
-                    // Beep \007 twice with system loudspeaker.
-//??                    fputs("Beep:\n\007", (FILE*) *d);
+    // The serialised string array to be sent to the terminal.
+    void* a = NULL_POINTER;
+    int ac = 0;
+    int as = 0;
 
-                    //
-                    // Start ESCAPE CSI sequence with: \033[
-                    //
+    // Create array.
+    create((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
-                    // Print bold word.
-//??                    fputs("This is a \033[1mbold\033[0m word.\n", (FILE*) *d);
+    // Serialise multi-dimensional tui into array.
+    serialise((void*) &a, (void*) &ac, (void*) &as, t, (void*) tc);
 
-                    // Set colours.
-                    // CAUTION! The "m" has to stand after the colour number
-                    // and it must NOT be a capital letter.
-//??                    fputs("Set colour to \033[32mgreen\033[0m.\n", (FILE*) *d);
-//??                    fputs("Set colour to \033[32myellow\041[0m.\n", (FILE*) *d);
-//??                    fputs("Set colour to \033[32mred\031[0m.\n", (FILE*) *d);
+    // Send serialised array as message to terminal.
+    send_general(p0, p1, p2, a, (void*) &ac);
 
-                    // Destroy temporary null-terminated message.
-                    destroy_array((void*) &tmp, (void*) &CHARACTER_ARRAY, (void*) &tmps);
+    // Destroy array.
+    destroy((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 */
 
-            } else {
-
-        //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The file name count is null.");
-            }
-
-        } else {
-
-    //??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The file name count is null.");
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read file. The file name count is null.");
-    }
+    send_general(p0, p1, p2, p3, p4, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
 }
 
 /* SEND_LINUX_CONSOLE_SOURCE */

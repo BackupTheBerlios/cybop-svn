@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-22 07:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,6 +57,7 @@ void parse_vector(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
                 log_message_debug("Parse vector.");
 
+/*??
                 // The loop count.
                 int j = 0;
                 // The comma index.
@@ -113,6 +114,7 @@ void parse_vector(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
                 set_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
                 set_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
                 set_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
+*/
 
 /*??
                 int i1 = s.indexOf(",");
@@ -171,28 +173,28 @@ void parse_vector(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 void serialise_vector(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
 /*??
-            //??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalise vector.");
+//??    log_message((void*) &INFO_LOG_LEVEL, (void*) &"Finalise vector.");
 
-                // Write output stream and transform from vector.
+    // Write output stream and transform from vector.
 
-                // Initialise elements.
-                int z = 0;
-                int y = 0;
-                int x = 0;
+    // Initialise elements.
+    int z = 0;
+    int y = 0;
+    int x = 0;
 
-                // Get elements.
-                get_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
-                get_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
-                get_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
+    // Get elements.
+    get_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
+    get_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
+    get_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
 
-                // Remove elements.
-                remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &Z_INDEX);
-                remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &Y_INDEX);
-                remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &X_INDEX);
+    // Remove elements.
+    remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &Z_INDEX);
+    remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &Y_INDEX);
+    remove_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &VECTOR_COUNT, (void*) &X_INDEX);
 
-            //??    fprintf(p1, %d, &(m->x));
-            //??    fprintf(p1, %d, &(m->y));
-            //??    fprintf(p1, %d, &(m->z));
+//??    fprintf(p1, %d, &(m->x));
+//??    fprintf(p1, %d, &(m->y));
+//??    fprintf(p1, %d, &(m->z));
 */
 }
 

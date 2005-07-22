@@ -24,7 +24,7 @@
  * - receive data into a byte array
  * - send data from a byte array
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-22 07:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,6 +40,7 @@
 #include "../memoriser/communicator/ftp_communicator.c"
 #include "../memoriser/communicator/http_communicator.c"
 #include "../memoriser/communicator/inline_communicator.c"
+#include "../memoriser/communicator/terminal_communicator.c"
 
 /**
  * Receives a stream according to the given communication channel type
@@ -48,7 +49,7 @@
  * CAUTION! This procedure cannot be called "receive"
  * as that name is already used by the socket mechanism.
  *
- * @param p0 the destination (byte array) (Hand over as reference!)
+ * @param p0 the destination byte array (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source
@@ -62,41 +63,51 @@ void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p
     // The comparison result.
     int r = 0;
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             receive_inline(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            receive_terminal(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             receive_file(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) FTP_CHANNEL, (void*) FTP_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             receive_ftp(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) HTTP_CHANNEL, (void*) HTTP_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             receive_http(p0, p1, p2, p3, p4);
         }
@@ -113,7 +124,7 @@ void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source (byte array)
+ * @param p3 the source byte array
  * @param p4 the source count
  * @param p5 the type
  * @param p6 the type count
@@ -124,41 +135,51 @@ void send_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     // The comparison result.
     int r = 0;
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             send_inline(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
+
+        compare_arrays(p5, p6, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+
+        if (r != 0) {
+
+            send_terminal(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             send_file(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) FTP_CHANNEL, (void*) FTP_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             send_ftp(p0, p1, p2, p3, p4);
         }
     }
 
-    if (r != 1) {
+    if (r == 0) {
 
         compare_arrays(p5, p6, (void*) HTTP_CHANNEL, (void*) HTTP_CHANNEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if (r == 1) {
+        if (r != 0) {
 
             send_http(p0, p1, p2, p3, p4);
         }

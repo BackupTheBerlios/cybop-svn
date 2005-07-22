@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-16 07:58:39 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-22 07:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -57,7 +57,7 @@ void startup_linux_console(void* p0, const void* p1, const void* p2, const void*
     log_message_debug("Startup linux console.");
 
     // The terminal (device name) internal.
-    int** ti = NULL_POINTER;
+    FILE** ti = NULL_POINTER;
 
     // Get terminal internal.
     get_array_elements(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &ti, (void*) POINTER_ARRAY);
@@ -65,29 +65,32 @@ void startup_linux_console(void* p0, const void* p1, const void* p2, const void*
     if (*ti == NULL_POINTER) {
 
         // The terminal (device name).
-        int* t = NULL_POINTER;
+        FILE* t = NULL_POINTER;
         // The original termios interface.
         struct termios* to = NULL_POINTER;
         // The working termios interface.
         struct termios* tw = NULL_POINTER;
 
         // Create linux console internals.
-        create_integer((void*) &t);
-        fprintf(stdout, "TEST: The terminal device file descriptor is: %i\n", *t);
+//??        create_integer((void*) &t);
         to = (struct termios*) malloc(sizeof(struct termios));
         tw = (struct termios*) malloc(sizeof(struct termios));
 
         // Initialise linux console internals.
-        // Get file descriptor (int) for file stream (FILE*).
-        *t = fileno(stdin);
+        // Set file stream.
+        // CAUTION! Possibly, stdin must be used instead of stdout here!
+        t = stdout;
+        fprintf(stdout, "TEST: The terminal file stream is: %i\n", t);
+        // Get file descriptor for file stream.
+        int d = fileno(t);
         // Copy termios attributes from file descriptor.
-        tcgetattr(*t, (void*) to);
-        tcgetattr(*t, (void*) tw);
+        tcgetattr(d, (void*) to);
+        tcgetattr(d, (void*) tw);
         // Manipulate termios attributes.
         tw->c_lflag &= ~ICANON;
         tw->c_lflag &= ~ECHO;
         // Set termios attributes.
-        tcsetattr(*t, TCSANOW, (void*) tw);
+        tcsetattr(d, TCSANOW, (void*) tw);
 
 /*??
         // Check for linux console.

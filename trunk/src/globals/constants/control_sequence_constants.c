@@ -20,12 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-21 15:56:22 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-22 07:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ESCAPE_CODE_CONSTANTS_SOURCE
-#define ESCAPE_CODE_CONSTANTS_SOURCE
+#ifndef CONTROL_SEQUENCE_CONSTANTS_SOURCE
+#define CONTROL_SEQUENCE_CONSTANTS_SOURCE
 
 /**
  * The erase display control sequence.
@@ -208,5 +208,5 @@ static const char* WHITE_BACKGROUND_CONTROL_SEQUENCE = WHITE_BACKGROUND_CONTROL_
 static const int WHITE_BACKGROUND_CONTROL_SEQUENCE_COUNT_ARRAY[] = {4};
 static const int* WHITE_BACKGROUND_CONTROL_SEQUENCE_COUNT = WHITE_BACKGROUND_CONTROL_SEQUENCE_COUNT_ARRAY;
 
-/* ESCAPE_CODE_CONSTANTS_SOURCE */
+/* CONTROL_SEQUENCE_CONSTANTS_SOURCE */
 #endif

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-21 15:56:22 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-22 07:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,6 +54,7 @@ void parse_terminal(void* p0, void* p1, void* p2, const void* p3, const void* p4
  */
 void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
+/*??
     if (p4 != NULL_POINTER) {
 
         int* sc = (int*) p4;
@@ -162,8 +163,8 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
 
             // Get part at index j.
             get_compound_element_by_index(p3, p4, (void*) &j,
-                (void*) a, (void*) ac, (void*) as
-                (void*) m, (void*) mc, (void*) ms
+                (void*) a, (void*) ac, (void*) as,
+                (void*) m, (void*) mc, (void*) ms,
                 (void*) d, (void*) dc, (void*) ds);
 
             // Reset comparison result.
@@ -343,6 +344,7 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
 
         log_message_debug("Could not serialise terminal. The source count is null.");
     }
+*/
 }
 
 /* TERMINAL_CONVERTER_SOURCE */

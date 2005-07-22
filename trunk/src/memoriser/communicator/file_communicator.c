@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-21 15:56:22 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-22 07:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,10 +43,10 @@
 /**
  * Receives a file stream and writes it into a byte array.
  *
- * @param p0 the destination (byte array) (Hand over as reference!)
+ * @param p0 the destination byte array (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source (file name)
+ * @param p3 the source file name
  * @param p4 the source count
  */
 void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
@@ -160,10 +160,10 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 /**
  * Sends a file stream that was read from a byte array.
  *
- * @param p0 the destination (file name) (Hand over as reference!)
+ * @param p0 the destination file name (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
- * @param p3 the source (byte array)
+ * @param p3 the source byte array
  * @param p4 the source count
  */
 void send_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
