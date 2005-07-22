@@ -1,5 +1,5 @@
 /*
- * $RCSfile: set.c,v $
+ * $RCSfile: copy.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-22 22:42:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,69 +38,60 @@
 #include "../memoriser/converter.c"
 #include "../memoriser/creator.c"
 #include "../memoriser/translator.c"
-#include "../tester/tester.c"
 
-void set_integer( void* source, int* source_count,
-                  void* dest, int* dest_count ) {
+/**
+ * Copies an integer model.
+ *
+ * @param
+ */
+void copy_integer(void* source, int* source_count, void* dest, int* dest_count) {
 
     //the source and the destinatione are integers
 
-    if ( (source != NULL_POINTER) &&
-         (dest   != NULL_POINTER) ) {
+    if ((source != NULL_POINTER) && (dest != NULL_POINTER)) {
 
-        *((int*)dest) = *((int*)source);
+        *((int*) dest) = *((int*) source);
     }
 }
 
+/**
+ * Copies a string model.
+ *
+ * @param
+ */
+void copy_string(void* source, int* source_count, int* source_size, void** dest, int* dest_count, int* dest_size) {
 
-void set_string( void* source, int* source_count, int* source_size,
-                 void** dest, int* dest_count, int* dest_size ) {
+    // the source and the destinatione are arrays of string
 
-    //the source and the destinatione are arrays of string
+    if ((source != NULL_POINTER) &&
+        (source_count != NULL_POINTER) &&
+        (source_size != NULL_POINTER) &&
+        (dest   != NULL_POINTER)  &&
+        (dest_count   != NULL_POINTER)  &&
+        (dest_size   != NULL_POINTER)) {
 
-    if ( (source != NULL_POINTER) &&
-         (source_count != NULL_POINTER) &&
-         (source_size != NULL_POINTER) &&
-         (dest   != NULL_POINTER)  &&
-         (dest_count   != NULL_POINTER)  &&
-         (dest_size   != NULL_POINTER)  )
-    {
+        *dest_count = *source_count;
+        *dest_size = *dest_count;
 
-        *dest_count=*source_count;
-        *dest_size=*dest_count;
-
-        resize_array( dest, dest_size, CHARACTER_ARRAY );
-
-        set_array_elements( *dest, (void*) ZERO_INTEGER,
-                            source, source_count,
-                            (void*) CHARACTER_ARRAY);
+        resize_array(dest, dest_size, CHARACTER_ARRAY);
+        set_array_elements(*dest, (void*) ZERO_INTEGER, source, source_count, (void*) CHARACTER_ARRAY);
     }
 }
 
-/*
+/**
+ * Copies a primitive model.
+ *
  * @param param the parameters
  * @param param_count the parameters count
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
+ * @param p4 the knowledge memory size
  * @param proiority
  * @param signal_id
- * @param internal
-*/
-void set( const void* param, const int* param_count,
-          const void* priority, const void* signal_id,
-          void* internal )
-{
+ */
+void copy(const void* param, const int* param_count, void* p2, void* p3, void* p4, const void* priority, const void* signal_id) {
 
-    // The knowledge memory.
-    void** km = POINTER_NULL_POINTER;
-    void** kmc = POINTER_NULL_POINTER;
-    void** kms = POINTER_NULL_POINTER;
-
-    // Get knowledge memory.
-    get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
-    get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
-    get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
-
-
-    log_message_debug("operation set");
+    log_message_debug("Copy primitive model.");
 
     // The source name abstraction.
     void** sa = POINTER_NULL_POINTER;
@@ -128,27 +119,26 @@ void set( const void* param, const int* param_count,
     void** ddc = POINTER_NULL_POINTER;
     void** dds = POINTER_NULL_POINTER;
 
-
     // Get source.
-    get_real_compound_element_by_name( param, param_count,
+    get_real_compound_element_by_name(param, param_count,
         (void*) SOURCE_NAME,
         (void*) SOURCE_NAME_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
-        *km, *kmc );
+        p2, p3);
 
     // Get destination.
-    get_real_compound_element_by_name( param, param_count,
+    get_real_compound_element_by_name(param, param_count,
         (void*) DESTINATION_NAME,
         (void*) DESTINATION_NAME_COUNT,
         (void*) &da, (void*) &dac, (void*) &das,
         (void*) &dm, (void*) &dmc, (void*) &dms,
         (void*) &dd, (void*) &ddc, (void*) &dds,
-        *km, *kmc );
+        p2, p3);
 
     // Check source.
-    if (   (sa != POINTER_NULL_POINTER)
+    if ((sa != POINTER_NULL_POINTER)
         && (sac != POINTER_NULL_POINTER)
         && (sas != POINTER_NULL_POINTER)
         && (sm != POINTER_NULL_POINTER)
@@ -166,9 +156,7 @@ void set( const void* param, const int* param_count,
         && (dms != POINTER_NULL_POINTER)
         && (dd != POINTER_NULL_POINTER)
         && (ddc != POINTER_NULL_POINTER)
-        && (dds != POINTER_NULL_POINTER)
-      )
-    {
+        && (dds != POINTER_NULL_POINTER)) {
 
         int r1 = 0;
         int r2 = 0;
@@ -177,66 +165,42 @@ void set( const void* param, const int* param_count,
         r1 = 0;
         r2 = 0;
 
-        compare_arrays( *sa, *sac,
-                        (void*) INTEGER_ABSTRACTION,
-                        (void*) INTEGER_ABSTRACTION_COUNT,
-                        (void*) &r1, (void*) CHARACTER_ARRAY);
-        compare_arrays( *da, *dac,
-                        (void*) INTEGER_ABSTRACTION,
-                        (void*) INTEGER_ABSTRACTION_COUNT,
-                        (void*) &r2, (void*) CHARACTER_ARRAY);
+        compare_arrays(*sa, *sac, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
+        compare_arrays(*da, *dac, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
 
-        if ( (r1 == 1) && (r2 == 1) ) {
+        if ((r1 == 1) && (r2 == 1)) {
 
-            set_integer( *sm, *smc, *dm, *dmc);
+            copy_integer(*sm, *smc, *dm, *dmc);
         }
 
-
-        //set for string
+        // Set for string.
         r1 = 0;
         r2 = 0;
 
-        compare_arrays( *sa, *sac,
-                        (void*) STRING_ABSTRACTION,
-                        (void*) STRING_ABSTRACTION_COUNT,
-                        (void*) &r1, (void*) CHARACTER_ARRAY);
-        compare_arrays( *da, *dac,
-                        (void*) STRING_ABSTRACTION,
-                        (void*) STRING_ABSTRACTION_COUNT,
-                        (void*) &r2, (void*) CHARACTER_ARRAY);
+        compare_arrays(*sa, *sac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
+        compare_arrays(*da, *dac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
 
-        if ( (r1 == 1) && (r2 == 1) ) {
+        if ((r1 == 1) && (r2 == 1)) {
 
-            set_string( *sm, *smc, *sms, dm, *dmc, *dms );
+            copy_string(*sm, *smc, *sms, dm, *dmc, *dms);
         }
-
     }
 }
 
-/*
+/**
+ * Copies a model property.
+ *
  * @param param the parameters
  * @param param_count the parameters count
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
+ * @param p4 the knowledge memory size
  * @param proiority
  * @param signal_id
- * @param internal
-*/
-void set_property( const void* param, const int* param_count,
-                   const void* priority, const void* signal_id,
-                   void* internal )
-{
+ */
+void copy_property(const void* param, const int* param_count, void* p2, void* p3, void* p4, const void* priority, const void* signal_id) {
 
-    // The knowledge memory.
-    void** km = POINTER_NULL_POINTER;
-    void** kmc = POINTER_NULL_POINTER;
-    void** kms = POINTER_NULL_POINTER;
-
-    // Get knowledge memory.
-    get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
-    get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
-    get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
-
-
-    log_message_debug("operation set_proerty.");
+    log_message_debug("Copy property.");
 
     // The source name abstraction.
     void** sa = POINTER_NULL_POINTER;
@@ -291,34 +255,34 @@ void set_property( const void* param, const int* param_count,
     void** pds = POINTER_NULL_POINTER;
 
     // Get source.
-    get_real_compound_element_by_name( param, param_count,
+    get_real_compound_element_by_name(param, param_count,
         (void*) SOURCE_NAME,
         (void*) SOURCE_NAME_COUNT,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
-        *km, *kmc );
+        p2, p3);
 
     // Get destination.
-    get_real_compound_element_by_name( param, param_count,
+    get_real_compound_element_by_name(param, param_count,
         (void*) DESTINATION_NAME,
         (void*) DESTINATION_NAME_COUNT,
         (void*) &da, (void*) &dac, (void*) &das,
         (void*) &dm, (void*) &dmc, (void*) &dms,
         (void*) &dd, (void*) &ddc, (void*) &dds,
-        *km, *kmc );
+        p2, p3);
 
     // Get destination property.
-    get_real_compound_element_by_name( param, param_count,
+    get_real_compound_element_by_name(param, param_count,
         (void*) DESTINATION_PROPERTY_NAME,
         (void*) DESTINATION_PROPERTY_NAME_COUNT,
         (void*) &dpa, (void*) &dpac, (void*) &dpas,
         (void*) &dpm, (void*) &dpmc, (void*) &dpms,
         (void*) &dpd, (void*) &dpdc, (void*) &dpds,
-        *km, *kmc );
+        p2, p3);
 
     // Check source.
-    if (   (sa != POINTER_NULL_POINTER)
+    if ((sa != POINTER_NULL_POINTER)
         && (sac != POINTER_NULL_POINTER)
         && (sas != POINTER_NULL_POINTER)
         && (sm != POINTER_NULL_POINTER)
@@ -346,29 +310,24 @@ void set_property( const void* param, const int* param_count,
         && (dpms != POINTER_NULL_POINTER)
         && (dpd != POINTER_NULL_POINTER)
         && (dpdc != POINTER_NULL_POINTER)
-        && (dpds != POINTER_NULL_POINTER)
-      )
-    {
+        && (dpds != POINTER_NULL_POINTER)) {
 
         //check the abstraction for the destination property
         //this must be a string
         int r = 0;
 
-        compare_arrays( *dpa, *dpac,
-                        (void*) STRING_ABSTRACTION,
-                        (void*) STRING_ABSTRACTION_COUNT,
-                        (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(*dpa, *dpac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
-        if ( r == 1 ) {
+        if (r == 1) {
 
-            //get the property from the destination
-            get_compound_element_by_name( *dd, *ddc,
+            // Get the property from the destination
+            get_compound_element_by_name(*dd, *ddc,
                 (void*) *dpm, (void*) *dpmc,
                 (void*) &pa, (void*) &pac, (void*) &pas,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
-                (void*) &pd, (void*) &pdc, (void*) &pds );
+                (void*) &pd, (void*) &pdc, (void*) &pds);
 
-            if (   (pa != POINTER_NULL_POINTER)
+            if ((pa != POINTER_NULL_POINTER)
                 && (pac != POINTER_NULL_POINTER)
                 && (pas != POINTER_NULL_POINTER)
                 && (pm != POINTER_NULL_POINTER)
@@ -376,8 +335,7 @@ void set_property( const void* param, const int* param_count,
                 && (pms != POINTER_NULL_POINTER)
                 && (pd != POINTER_NULL_POINTER)
                 && (pdc != POINTER_NULL_POINTER)
-                && (pds != POINTER_NULL_POINTER) )
-            {
+                && (pds != POINTER_NULL_POINTER)) {
 
                 int r1 = 0;
                 int r2 = 0;
@@ -386,42 +344,27 @@ void set_property( const void* param, const int* param_count,
                 r1 = 0;
                 r2 = 0;
 
-                compare_arrays( *sa, *sac,
-                                (void*) INTEGER_ABSTRACTION,
-                                (void*) INTEGER_ABSTRACTION_COUNT,
-                                (void*) &r1, (void*) CHARACTER_ARRAY);
-                compare_arrays( *pa, *pac,
-                                (void*) INTEGER_ABSTRACTION,
-                                (void*) INTEGER_ABSTRACTION_COUNT,
-                                (void*) &r2, (void*) CHARACTER_ARRAY);
+                compare_arrays(*sa, *sac, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
+                compare_arrays(*pa, *pac, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
 
-                if ( (r1 == 1) && (r2 == 1) ) {
+                if ((r1 == 1) && (r2 == 1)) {
 
-                    set_integer( *sm, *smc, *pm, *pmc);
+                    copy_integer(*sm, *smc, *pm, *pmc);
                 }
 
-
-                //set for string
+                // Set for string.
                 r1 = 0;
                 r2 = 0;
 
-                compare_arrays( *sa, *sac,
-                                (void*) STRING_ABSTRACTION,
-                                (void*) STRING_ABSTRACTION_COUNT,
-                                (void*) &r1, (void*) CHARACTER_ARRAY);
-                compare_arrays( *pa, *pac,
-                                (void*) STRING_ABSTRACTION,
-                                (void*) STRING_ABSTRACTION_COUNT,
-                                (void*) &r2, (void*) CHARACTER_ARRAY);
+                compare_arrays(*sa, *sac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r1, (void*) CHARACTER_ARRAY);
+                compare_arrays(*pa, *pac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &r2, (void*) CHARACTER_ARRAY);
 
-                if ( (r1 == 1) && (r2 == 1) ) {
+                if ((r1 == 1) && (r2 == 1)) {
 
-                    set_string( *sm, *smc, *sms, pm, *pmc, *pms );
+                    copy_string(*sm, *smc, *sms, pm, *pmc, *pms);
                 }
-
-            } //check null pointer property
-
-        } //string abstraction for destination property
+            }
+        }
     }
 }
 

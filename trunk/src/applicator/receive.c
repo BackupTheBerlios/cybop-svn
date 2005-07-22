@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-08 14:00:04 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-22 22:42:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,13 +60,13 @@
  *
  * @param p0 the parameters
  * @param p1 the parameters count
- * @param p2 the knowledge
- * @param p3 the knowledge count
- * @param p4 the knowledge size
- * @param p5 the internals
+ * @param p2 the internal memory
+ * @param p3 the knowledge memory
+ * @param p4 the knowledge memory count
+ * @param p5 the knowledge memory size
  */
 void receive_message(const void* p0, const void* p1,
-    const void* p2, const void* p3, const void* p4, void* p5) {
+    void* p2, const void* p3, const void* p4, const void* p5) {
 
     // The service abstraction.
     void** sa = NULL_POINTER;
@@ -100,7 +100,7 @@ void receive_message(const void* p0, const void* p1,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
-        p2, p3);
+        p3, p4);
 
     // Get parameters.
     get_real_compound_element_by_name(p0, p1,
@@ -108,7 +108,7 @@ void receive_message(const void* p0, const void* p1,
         (void*) &ba, (void*) &bac, (void*) &bas,
         (void*) &bm, (void*) &bmc, (void*) &bms,
         (void*) &bd, (void*) &bdc, (void*) &bds,
-        p2, p3);
+        p3, p4);
 
     // The comparison result.
     int r = 0;
@@ -172,7 +172,7 @@ void receive_message(const void* p0, const void* p1,
                 && (bm != NULL_POINTER)
                 && (bmc != NULL_POINTER)) {
 
-                receive_tcp_socket(p5, p2, p3, p4, *ba, *bac, *bm, *bmc);
+                receive_tcp_socket(p2, p3, p4, p5, *ba, *bac, *bm, *bmc);
             }
         }
     }

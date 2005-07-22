@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-22 22:42:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -101,31 +101,7 @@ void destroy_internal_memory(void* p0, const void* p1) {
                     // all configuration parameters need to be distinguished here,
                     // via conditional if-else statements.
 
-                    if (j == *KNOWLEDGE_MEMORY_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-
-                    } else if (j == *KNOWLEDGE_MEMORY_COUNT_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
-
-                    } else if (j == *KNOWLEDGE_MEMORY_SIZE_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
-
-                    } else if (j == *SIGNAL_MEMORY_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-
-                    } else if (j == *SIGNAL_MEMORY_COUNT_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
-
-                    } else if (j == *SIGNAL_MEMORY_SIZE_INTERNAL) {
-
-                        destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
-
-                    } else if (j == *TCP_SERVER_SOCKET_INTERNAL) {
+                    if (j == *TCP_SERVER_SOCKET_INTERNAL) {
 
                         destroy_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
 

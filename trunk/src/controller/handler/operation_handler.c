@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-22 22:42:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -32,6 +32,7 @@
 #include "../../applicator/branch.c"
 #include "../../applicator/build.c"
 #include "../../applicator/compare.c"
+#include "../../applicator/copy.c"
 #include "../../applicator/count.c"
 #include "../../applicator/create.c"
 #include "../../applicator/destroy.c"
@@ -39,7 +40,6 @@
 #include "../../applicator/loop.c"
 #include "../../applicator/receive.c"
 #include "../../applicator/send.c"
-#include "../../applicator/set.c"
 #include "../../applicator/shutdown.c"
 #include "../../applicator/startup.c"
 //?? #include "../../globals/constants/model_constants.c"
@@ -92,7 +92,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r == 1) {
 
-//??            copy(p10, p11, p12, p13, p0);
+            copy(p10, p11, p1, p2, p3, p12, p13);
         }
     }
 
@@ -102,7 +102,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r == 1) {
 
-//??            copy_property(p10, p11, p12, p13, p0);
+            copy_property(p10, p11, p1, p2, p3, p12, p13);
         }
     }
 
@@ -132,7 +132,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r == 1) {
 
-//??            count_parts(p10, p11, p0);
+            count_parts(p10, p11, p1, p2, p3);
         }
     }
 
@@ -142,7 +142,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r == 1) {
 
-//??            build_listname(p10, p11, p0);
+            build_listname(p10, p11, p1, p2, p3);
         }
     }
 
@@ -259,7 +259,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r == 1) {
 
-            receive_message(p10, p11, p1, p2, p3, p0);
+            receive_message(p10, p11, p0, p1, p2, p3);
         }
     }
 

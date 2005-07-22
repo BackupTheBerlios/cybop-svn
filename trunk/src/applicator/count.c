@@ -20,9 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * this handel a loop
- *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-22 22:42:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,29 +36,19 @@
 #include "../memoriser/converter.c"
 #include "../memoriser/creator.c"
 #include "../memoriser/translator.c"
-#include "../tester/tester.c"
 
-/*
- * @param param the parameters
- * @param param_count the parameters count
- * @param internal
+/**
+ * Counts the parts.
+ *
+ * @param p0 the parameters
+ * @param p1 the parameters count
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
+ * @param p4 the knowledge memory size
  */
-void count_part( const void* param, const int* param_count,
-                 void* internal )
-{
+void count_parts(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
-    // The knowledge memory.
-    void** km = POINTER_NULL_POINTER;
-    void** kmc = POINTER_NULL_POINTER;
-    void** kms = POINTER_NULL_POINTER;
-
-    // Get knowledge memory.
-    get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
-    get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
-    get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
-
-
-    log_message_debug("operation count_part");
+    log_message_debug("Count parts.");
 
     // The basisname abstraction.
     void** bna = POINTER_NULL_POINTER;
@@ -102,34 +90,34 @@ void count_part( const void* param, const int* param_count,
     void** resds = POINTER_NULL_POINTER;
 
     // get the basisname
-    get_real_compound_element_by_name( param, param_count,
+    get_real_compound_element_by_name(p0, p1,
         (void*) PART_NAME_NAME,
         (void*) PART_NAME_NAME_COUNT,
         (void*) &bna, (void*) &bnac, (void*) &bnas,
         (void*) &bnm, (void*) &bnmc, (void*) &bnms,
         (void*) &bnd, (void*) &bndc, (void*) &bnds,
-        *km, *kmc );
+        p2, p3);
 
     // get the model
-    get_real_compound_element_by_name( param, param_count,
+    get_real_compound_element_by_name(p0, p1,
         (void*) WHOLE_MODEL_NAME,
         (void*) WHOLE_MODEL_NAME_COUNT,
         (void*) &mdla, (void*) &mdlac, (void*) &mdlas,
         (void*) &mdlm, (void*) &mdlmc, (void*) &mdlms,
         (void*) &mdld, (void*) &mdldc, (void*) &mdlds,
-        *km, *kmc );
+        p2, p3);
 
     // get the result
-    get_real_compound_element_by_name( param, param_count,
+    get_real_compound_element_by_name(p0, p1,
         (void*) COUNTER_NAME,
         (void*) COUNTER_NAME_COUNT,
         (void*) &resa, (void*) &resac, (void*) &resas,
         (void*) &resm, (void*) &resmc, (void*) &resms,
         (void*) &resd, (void*) &resdc, (void*) &resds,
-        *km, *kmc );
+        p2, p3);
 
     // Check basisname.
-    if (   (bna != POINTER_NULL_POINTER)
+    if ((bna != POINTER_NULL_POINTER)
         && (bnac != POINTER_NULL_POINTER)
         && (bnas != POINTER_NULL_POINTER)
         && (bnm != POINTER_NULL_POINTER)
@@ -157,32 +145,19 @@ void count_part( const void* param, const int* param_count,
         && (resms != POINTER_NULL_POINTER)
         && (resd != POINTER_NULL_POINTER)
         && (resdc != POINTER_NULL_POINTER)
-        && (resds != POINTER_NULL_POINTER) )
-    {
+        && (resds != POINTER_NULL_POINTER)) {
 
         //check the abstraction for the operation element
         int comp_res1 = 0;
         int comp_res2 = 0;
         int comp_res3 = 0;
 
-        compare_arrays( *bna, *bnac,
-                        (void*) STRING_ABSTRACTION,
-                        (void*) STRING_ABSTRACTION_COUNT,
-                        (void*) &comp_res1, (void*) CHARACTER_ARRAY);
-        compare_arrays( *mdla, *mdlac,
-                        (void*) COMPOUND_ABSTRACTION,
-                        (void*) COMPOUND_ABSTRACTION_COUNT,
-                        (void*) &comp_res2, (void*) CHARACTER_ARRAY);
-        compare_arrays( *mdla, *mdlac,
-                        (void*) CYBOL_ABSTRACTION,
-                        (void*) CYBOL_ABSTRACTION_COUNT,
-                        (void*) &comp_res2, (void*) CHARACTER_ARRAY);
-        compare_arrays( *resa, *resac,
-                        (void*) INTEGER_ABSTRACTION,
-                        (void*) INTEGER_ABSTRACTION_COUNT,
-                        (void*) &comp_res3, (void*) CHARACTER_ARRAY);
+        compare_arrays(*bna, *bnac, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT, (void*) &comp_res1, (void*) CHARACTER_ARRAY);
+        compare_arrays(*mdla, *mdlac, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, (void*) &comp_res2, (void*) CHARACTER_ARRAY);
+        compare_arrays(*mdla, *mdlac, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &comp_res2, (void*) CHARACTER_ARRAY);
+        compare_arrays(*resa, *resac, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT, (void*) &comp_res3, (void*) CHARACTER_ARRAY);
 
-        if ( (comp_res1 == 1) && (comp_res2 == 1) && (comp_res3 == 1) ) {
+        if ((comp_res1 == 1) && (comp_res2 == 1) && (comp_res3 == 1)) {
 
             //Vorgehen,
             //-alle Elemente des Compound durchgehen
@@ -197,86 +172,68 @@ void count_part( const void* param, const int* param_count,
             void** cens = POINTER_NULL_POINTER;
 
             //init the counter
-            int* list_counter = (int*)*resm;
-            *list_counter=0;
+            int* list_counter = (int*) *resm;
+            *list_counter = 0;
 
             // Create compare string.
             char* compstring = NULL_POINTER;
-            int compstring_count = *((int*)*bnmc) + *LIST_SEPARATOR_COUNT;
+            int compstring_count = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT;
 
-            create_array( (void*) &compstring, (void*) &compstring_count,
-                          (void*) CHARACTER_ARRAY);
+            create_array((void*) &compstring, (void*) &compstring_count, (void*) CHARACTER_ARRAY);
 
             // Set the compare string
-            //this is the basisname and the list separat
-            set_array_elements( compstring, (void*) ZERO_INTEGER,
-                                *bnm, *bnmc,  (void*) CHARACTER_ARRAY);
-            set_array_elements( compstring, *bnmc,
-                                LIST_SEPARATOR, LIST_SEPARATOR_COUNT,
-                                (void*) CHARACTER_ARRAY);
+            // this is the basisname and the list separat
+            set_array_elements(compstring, (void*) ZERO_INTEGER, *bnm, *bnmc,  (void*) CHARACTER_ARRAY);
+            set_array_elements(compstring, *bnmc, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
 
-            int compare_result = 0;
-            int loop_counter = 0;
+            // The loop count.
+            int j = 0;
+            // The comparison result.
+            int r = 0;
+
             while (1) {
 
-                if ( loop_counter >= *((int*)*mdlmc ) ) {
+                if (j >= *((int*) *mdlmc)) {
+
                     break;
                 }
 
-                get_compound_element_name_by_index(
-                    *mdlm, *mdlmc,
-                    &loop_counter,
-                    &cen, &cenc, &cens );
+                get_compound_element_name_by_index(*mdlm, *mdlmc, &j, &cen, &cenc, &cens);
 
-                if (   (cen != POINTER_NULL_POINTER)
-                    && (cenc != POINTER_NULL_POINTER)
-                    && (cens != POINTER_NULL_POINTER) )
-                {
+                if ((cen != POINTER_NULL_POINTER) && (cenc != POINTER_NULL_POINTER) && (cens != POINTER_NULL_POINTER)) {
 
-                    if (   (*cen != NULL_POINTER)
-                        && (*cenc != NULL_POINTER)
-                        && (*cens != NULL_POINTER) )
-                    {
+                    if ((*cen != NULL_POINTER) && (*cenc != NULL_POINTER) && (*cens != NULL_POINTER)) {
 
                         //check the count for the compare arrays
                         // the compound element must greater als the compare string
-                        if ( *((int*)*cenc) > compstring_count ) {
+                        if (*((int*) *cenc) > compstring_count) {
 
-                            //
-                            compare_result = 0;
-                            compare_arrays( compstring, &compstring_count,
-                                            *cen, &compstring_count,
-                                            &compare_result,
-                                            CHARACTER_ARRAY );
+                            r = 0;
+
+                            compare_arrays(compstring, &compstring_count, *cen, &compstring_count, &r, CHARACTER_ARRAY);
 
                             //if teh begiining of the two arrays ident, then
                             //the compound element is a part of the list
-                            if ( compare_result == 1 ) {
+                            if (r == 1) {
 
-                                *list_counter = *list_counter+1;
+                                *list_counter = *list_counter + 1;
                             }
                         }
                     }
                 }
 
-                //
-                loop_counter++;
+                j++;
             }
 
             // destroy compare string.
-            destroy_array( (void*) &compstring, (void*) &compstring_count,
-                          (void*) CHARACTER_ARRAY);
-        }
-        else {
+            destroy_array((void*) &compstring, (void*) &compstring_count, (void*) CHARACTER_ARRAY);
 
-            log_message_debug("operation count_part: the abstraction for the operands are not correct");
-        }
+        } else {
 
+            log_message_debug("Could not count part. The abstraction for the operands is not correct.");
+        }
     }
-
 }
 
 /* COUNT_SOURCE */
 #endif
-
-

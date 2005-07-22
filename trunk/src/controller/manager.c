@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-22 22:42:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,23 +63,51 @@ void manage(const void* p0, const void* p1) {
 
     // The internal memory.
     void* i = NULL_POINTER;
-    int ic = *INTERNAL_MEMORY_ELEMENTS_COUNT;
-    int is = *INTERNAL_MEMORY_ELEMENTS_COUNT;
+    const int* ic = INTERNAL_MEMORY_ELEMENTS_COUNT;
+    const int* is = INTERNAL_MEMORY_ELEMENTS_COUNT;
     // The knowledge memory.
     void* k = NULL_POINTER;
-    int kc = 0;
-    int ks = 0;
+    int* kc = NULL_POINTER;
+    int* ks = NULL_POINTER;
     // The signal memory.
     void* s = NULL_POINTER;
-    int sc = 0;
-    int ss = 0;
+    int* sc = NULL_POINTER;
+    int* ss = NULL_POINTER;
+
+    // Create knowledge memory count, size.
+    create_integer((void*) &kc);
+    create_integer((void*) &ks);
+    // Create signal memory count, size.
+    create_integer((void*) &sc);
+    create_integer((void*) &ss);
+
+    // Initialise knowledge memory count, size.
+    *kc = 0;
+    *ks = 0;
+    // Initialise signal memory count, size.
+    *sc = 0;
+    *ss = 0;
 
     // Create internal memory.
-    create((void*) &i, (void*) &is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
+    create((void*) &i, (void*) is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
     // Create knowledge memory.
-    create((void*) &k, (void*) &ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+    create((void*) &k, (void*) ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
     // Create signal memory.
-    create((void*) &s, (void*) &ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
+    create((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
+
+    // CAUTION! ONLY ONE parameter can be handed over to threads!
+    // For example, the tcp socket is running in an own thread.
+    // Therefore, the knowledge memory and signal memory NEED TO BE ADDED
+    // to the internal memory, in order to be forwardable to threads.
+
+    // Set knowledge memory internals.
+    set_array_elements(i, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+    set_array_elements(i, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+    set_array_elements(i, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+    // Set signal memory internals.
+    set_array_elements(i, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+    set_array_elements(i, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+    set_array_elements(i, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
 
     log_message_debug("\n\n");
     log_message_debug("Create startup model.");
@@ -130,7 +158,7 @@ void manage(const void* p0, const void* p1) {
     int* id = INTEGER_NULL_POINTER;
     create_integer((void*) &id);
     *id = 0;
-    get_new_signal_id(s, (void*) &sc, (void*) id);
+    get_new_signal_id(s, (void*) sc, (void*) id);
 
 /*??
     fprintf(stderr, "p: %i\n", *NORMAL_PRIORITY);
@@ -141,24 +169,24 @@ void manage(const void* p0, const void* p1) {
 */
 
     // Add startup signal to signal memory.
-    set_signal(s, (void*) &sc, (void*) &ss,
-        ma, (void*) mac, mm, (void*) mmc, md, (void*) mdc,
-        (void*) NORMAL_PRIORITY, (void*) id);
+    set_signal(s, (void*) sc, (void*) ss, ma, (void*) mac, mm, (void*) mmc, md, (void*) mdc, (void*) NORMAL_PRIORITY, (void*) id);
 
     // The system is now started up and complete so that a loop
     // can be entered, checking for signals (events/ interrupts)
     // which are stored/ found in the signal memory.
     // The loop is left as soon as its shutdown flag is set.
-    check((void*) i,
-        (void*) k, (void*) &kc, (void*) &ks,
-        (void*) s, (void*) &sc, (void*) &ss);
+    check(i, k, (void*) kc, (void*) ks, s, (void*) sc, (void*) ss);
 
     // Destroy signal memory.
-    destroy((void*) &s, (void*) &ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
+    destroy((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
+    destroy_integer((void*) &sc);
+    destroy_integer((void*) &ss);
     // Destroy knowledge memory.
-    destroy((void*) &k, (void*) &ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+    destroy((void*) &k, (void*) ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+    destroy_integer((void*) &kc);
+    destroy_integer((void*) &ks);
     // Destroy internal memory.
-    destroy((void*) &i, (void*) &is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
+    destroy((void*) &i, (void*) is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* MANAGER_SOURCE */

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-21 08:02:01 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-22 22:42:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -73,8 +73,6 @@
 void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8);
 
-
-
 /**
  * Get the request method from the complet request msg
  * example for a request row: GET /paramater HTTP/1.1
@@ -86,10 +84,10 @@ void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
  * @param req_row return the request row
  * @param reg_row_count return the count of the request row
  */
-void get_request_method( char* req, int* req_count,
-                         char** req_method, int* req_method_count) {
+void get_request_method(char* req, int* req_count, char** req_method, int* req_method_count) {
 
     *req_method_count = 0;
+
     // The element.
     char* e = CHARACTER_NULL_POINTER;
 
@@ -111,7 +109,6 @@ void get_request_method( char* req, int* req_count,
         int max_count = *req_method_count + 1;
 
         resize_array((void*) req_method, (void*) &max_count, (void*) CHARACTER_ARRAY);
-
         set_array_elements(*req_method, req_method_count, (void*) e, (void*) ONE_INTEGER, (void*) CHARACTER_ARRAY);
 
         *req_method_count = *req_method_count + 1;
@@ -132,8 +129,7 @@ void get_request_method( char* req, int* req_count,
  * @param param the parameter from the request
  * @param param_count the count from the parameter
  */
-void get_url_basename_from_request( char* req, int* req_count,
-                                    char** urlbase, int* urlbase_count) {
+void get_url_basename_from_request(char* req, int* req_count, char** urlbase, int* urlbase_count) {
 
     *urlbase_count = 0;
     int req_index = 0;
@@ -152,8 +148,7 @@ void get_url_basename_from_request( char* req, int* req_count,
         get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
 
         // Check of ending the paramaters.
-        if ( (start_urlbase_flag == 1) &&
-             ( (*e == *SPACE_CHARACTER) || (*e == *QUESTION_MARK_CHARACTER) ) ) {
+        if ((start_urlbase_flag == 1) && ((*e == *SPACE_CHARACTER) || (*e == *QUESTION_MARK_CHARACTER))) {
 
             break;
         }
@@ -164,7 +159,6 @@ void get_url_basename_from_request( char* req, int* req_count,
             max_count = *urlbase_count + 1;
 
             resize_array((void*) urlbase, (void*) &max_count, (void*) CHARACTER_ARRAY);
-
             set_array_elements(*urlbase, urlbase_count, (void*) e, (void*) ONE_INTEGER, (void*) CHARACTER_ARRAY);
 
             *urlbase_count = *urlbase_count + 1;
@@ -193,309 +187,260 @@ void get_url_basename_from_request( char* req, int* req_count,
  * @param source_count the count of the request row
  * @param dest param the parameter from the request
  */
-void* get_character_from_escape_code( void* source, int* source_count,
-                                      char** dest ) {
+void* get_character_from_escape_code(void* source, int* source_count, char** dest) {
 
-    if (    (source != NULL_POINTER)
-         && (source_count != NULL_POINTER)
-         && (dest != NULL_POINTER) )
-    {
+    if ((source != NULL_POINTER) && (source_count != NULL_POINTER) && (dest != NULL_POINTER)) {
 
         int r = 0;
 
         //esquape code must be 3 signs
-        if ( *source_count>= *ESCAPE_CODE_CHARACTER_COUNT ) {
+        if (*source_count >= *ESCAPE_CODE_CHARACTER_COUNT) {
 
             // space character
-            if ( r == 0) {
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                SPACE_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, SPACE_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) SPACE_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) SPACE_CHARACTER;
                 }
             }
 
             // less than sign character
-            if ( r == 0) {
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                LESS_THAN_SIGN_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, LESS_THAN_SIGN_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) LESS_THAN_SIGN_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) LESS_THAN_SIGN_CHARACTER;
                 }
             }
 
             // greater than sign character
-            if ( r == 0) {
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                GREATER_THAN_SIGN_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, GREATER_THAN_SIGN_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) GREATER_THAN_SIGN_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) GREATER_THAN_SIGN_CHARACTER;
                 }
             }
 
             // nummer sign character
-            if ( r == 0) {
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                NUMBER_SIGN_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, NUMBER_SIGN_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) NUMBER_SIGN_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) NUMBER_SIGN_CHARACTER;
                 }
             }
 
             // percent sign character
-            if ( r == 0) {
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                PERCENT_SIGN_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, PERCENT_SIGN_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) PERCENT_SIGN_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) PERCENT_SIGN_CHARACTER;
                 }
             }
 
-            // left curly bracket  character
-            if ( r == 0) {
+            // left curly bracket character
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                LEFT_CURLY_BRACKET_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, LEFT_CURLY_BRACKET_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) LEFT_CURLY_BRACKET_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) LEFT_CURLY_BRACKET_CHARACTER;
                 }
             }
 
-            // right curly bracket  character
-            if ( r == 0) {
+            // right curly bracket character
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                RIGHT_CURLY_BRACKET_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, RIGHT_CURLY_BRACKET_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) RIGHT_CURLY_BRACKET_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) RIGHT_CURLY_BRACKET_CHARACTER;
                 }
             }
 
             // vertical line character
-            if ( r == 0) {
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                VERTICAL_LINE_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, VERTICAL_LINE_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) VERTICAL_LINE_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) VERTICAL_LINE_CHARACTER;
                 }
             }
 
             // reverse solidus character
-            if ( r == 0) {
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                REVERSE_SOLIDUS_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, REVERSE_SOLIDUS_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) REVERSE_SOLIDUS_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) REVERSE_SOLIDUS_CHARACTER;
                 }
             }
 
-            //CIRCUMFLEX_ACCENT_CHARACTER
-            if ( r == 0) {
+            // CIRCUMFLEX_ACCENT_CHARACTER
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                CIRCUMFLEX_ACCENT_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, CIRCUMFLEX_ACCENT_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) CIRCUMFLEX_ACCENT_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) CIRCUMFLEX_ACCENT_CHARACTER;
                 }
             }
 
-            //tilde character
-            if ( r == 0) {
+            // tilde character
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                TILDE_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, TILDE_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) TILDE_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) TILDE_CHARACTER;
                 }
             }
 
             //left square character
-            if ( r == 0) {
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                LEFT_SQUARE_BRACKET_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, LEFT_SQUARE_BRACKET_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) LEFT_SQUARE_BRACKET_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) LEFT_SQUARE_BRACKET_CHARACTER;
                 }
             }
 
-            //right square character
-            if ( r == 0) {
+            // right square character
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                RIGHT_SQUARE_BRACKET_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, RIGHT_SQUARE_BRACKET_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) RIGHT_SQUARE_BRACKET_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) RIGHT_SQUARE_BRACKET_CHARACTER;
                 }
             }
 
-            //grave accent character
-            if ( r == 0) {
+            // grave accent character
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                GRAVE_ACCENT_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, GRAVE_ACCENT_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) GRAVE_ACCENT_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) GRAVE_ACCENT_CHARACTER;
                 }
             }
 
-            //semikolon character
-            if ( r == 0) {
+            // semikolon character
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                SEMICOLON_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, SEMICOLON_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) SEMICOLON_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) SEMICOLON_CHARACTER;
                 }
             }
 
-            //soldius character
-            if ( r == 0) {
+            // soldius character
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                SOLIDUS_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, SOLIDUS_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) SOLIDUS_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) SOLIDUS_CHARACTER;
                 }
             }
 
-            //question mark character
-            if ( r == 0) {
+            // question mark character
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                QUESTION_MARK_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, QUESTION_MARK_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) QUESTION_MARK_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) QUESTION_MARK_CHARACTER;
                 }
             }
 
             //colon character
-            if ( r == 0) {
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                COLON_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, COLON_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) COLON_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) COLON_CHARACTER;
                 }
             }
 
             //commercial at character
-            if ( r == 0) {
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                COMMERCIAL_AT_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, COMMERCIAL_AT_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) COMMERCIAL_AT_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) COMMERCIAL_AT_CHARACTER;
                 }
             }
 
-            //equal sign character
-            if ( r == 0) {
+            // Equal sign character.
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                EQUALS_SIGN_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, EQUALS_SIGN_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) EQUALS_SIGN_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) EQUALS_SIGN_CHARACTER;
                 }
             }
 
-            //ampersand character
-            if ( r == 0) {
+            // Ampersand character
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                AMPERSAND_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, AMPERSAND_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) AMPERSAND_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) AMPERSAND_CHARACTER;
                 }
             }
 
             //dollar  character
-            if ( r == 0) {
+            if (r == 0) {
 
-                compare_arrays( source, ESCAPE_CODE_CHARACTER_COUNT,
-                                DOLLAR_SIGN_CHARACTER_ESCAPE_CODE,
-                                ESCAPE_CODE_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(source, ESCAPE_CODE_CHARACTER_COUNT, DOLLAR_SIGN_CHARACTER_ESCAPE_CODE, ESCAPE_CODE_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( r == 1 ) {
-                    *dest  = (char*) DOLLAR_SIGN_CHARACTER;
+                if (r == 1) {
+
+                    *dest = (char*) DOLLAR_SIGN_CHARACTER;
                 }
             }
-
         }
 
         // no escape code
-        if ( r == 0 ) {
+        if (r == 0) {
 
             *dest = source;
         }
@@ -511,8 +456,7 @@ void* get_character_from_escape_code( void* source, int* source_count,
  * @param param the parameter
  * @param param_count the paramater count
  */
-void get_parameter_from_request_for_post( char* req, int* req_count,
-                                          char** param, int* param_count) {
+void get_parameter_from_request_for_post(char* req, int* req_count, char** param, int* param_count) {
 
     *param_count = 0;
     int req_index = *req_count-1;
@@ -533,7 +477,7 @@ void get_parameter_from_request_for_post( char* req, int* req_count,
         get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
 
         // Check of beginning  the paramaters.
-        if ( (*e == *LINE_FEED_CONTROL_CHARACTER) ) {
+        if ((*e == *LINE_FEED_CONTROL_CHARACTER)) {
 
             start_param_index = req_index + 1;
             break;
@@ -542,8 +486,8 @@ void get_parameter_from_request_for_post( char* req, int* req_count,
         req_index = req_index - 1;
     }
 
-    //set the parameters from the request
-    if ( start_param_index > 0 ) {
+    // set the parameters from the request
+    if (start_param_index > 0) {
 
         req_index = start_param_index;
 
@@ -557,17 +501,12 @@ void get_parameter_from_request_for_post( char* req, int* req_count,
             max_count = *param_count + 1;
 
             resize_array((void*) param, (void*) &max_count, (void*) CHARACTER_ARRAY);
-
             get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
-
             set_array_elements(*param, param_count, (void*) e, (void*) ONE_INTEGER, (void*) CHARACTER_ARRAY);
 
             *param_count = *param_count + 1;
-
             req_index = req_index + 1;
-
         }
-
     }
 }
 
@@ -585,8 +524,7 @@ void get_parameter_from_request_for_post( char* req, int* req_count,
  * @param param the parameter
  * @param param_count the paramater count
  */
-void get_parameter_from_request_for_get( char* req, int* req_count,
-                                         char** param, int* param_count) {
+void get_parameter_from_request_for_get(char* req, int* req_count, char** param, int* param_count) {
 
     *param_count = 0;
     int req_index = 0;
@@ -605,7 +543,7 @@ void get_parameter_from_request_for_get( char* req, int* req_count,
         get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
 
         // Check of ending the paramaters.
-        if ( (start_param_flag == 1) && (*e == *SPACE_CHARACTER) ) {
+        if ((start_param_flag == 1) && (*e == *SPACE_CHARACTER)) {
 
             break;
         }
@@ -616,7 +554,6 @@ void get_parameter_from_request_for_get( char* req, int* req_count,
             max_count = *param_count + 1;
 
             resize_array((void*) param, (void*) &max_count, (void*) CHARACTER_ARRAY);
-
             set_array_elements(*param, param_count, (void*) e, (void*) ONE_INTEGER, (void*) CHARACTER_ARRAY);
 
             *param_count = *param_count + 1;
@@ -641,27 +578,21 @@ void get_parameter_from_request_for_get( char* req, int* req_count,
  * @param param the parameter
  * @param param_count the paramater count
  */
-void get_parameter_from_request( char* req, int* req_count,
-                                 char** param, int* param_count) {
+void get_parameter_from_request(char* req, int* req_count, char** param, int* param_count) {
 
-    //Check the request method ( post or get );
+    // Check the request method ( post or get );
     int req_meth_post_res = 0;
 
-    compare_arrays( req, REQEUST_METHOD_POST_COUNT,
-                    REQEUST_METHOD_POST, REQEUST_METHOD_POST_COUNT,
-                    &req_meth_post_res, CHARACTER_ARRAY );
+    compare_arrays(req, REQEUST_METHOD_POST_COUNT, REQEUST_METHOD_POST, REQEUST_METHOD_POST_COUNT, &req_meth_post_res, CHARACTER_ARRAY);
 
-    if ( req_meth_post_res == 0 ) {
+    if (req_meth_post_res == 0) {
 
-        get_parameter_from_request_for_get( req, req_count,
-                                            param, param_count );
+        get_parameter_from_request_for_get(req, req_count, param, param_count);
+
+    } else {
+
+        get_parameter_from_request_for_post(req, req_count, param, param_count);
     }
-    else {
-
-        get_parameter_from_request_for_post( req, req_count,
-                                             param, param_count );
-    }
-
 }
 
 /**
@@ -674,19 +605,16 @@ void get_parameter_from_request( char* req, int* req_count,
  * @param source_count the source count
  * @param dest the destination
  * @param dest_count the detsination count
- * @param internal the internal memory
+ * @param p4 the internal memory
  */
-void set_signal_for_parameter( void* source, int* source_count,
-                               void* dest, int* dest_count,
-                               void* internal ){
+void set_signal_for_parameter(void* source, int* source_count, void* dest, int* dest_count, void* p4) {
 
-    //check of null pointer
-    if ( (source != NULL_POINTER) &&
-         (source_count != NULL_POINTER) &&
-         (dest != NULL_POINTER) &&
-         (dest_count != NULL_POINTER) &&
-         (internal != NULL_POINTER) )
-    {
+    // check of null pointer
+    if ((source != NULL_POINTER) &&
+        (source_count != NULL_POINTER) &&
+        (dest != NULL_POINTER) &&
+        (dest_count != NULL_POINTER) &&
+        (p4 != NULL_POINTER)) {
 
         // The knowledge memory.
         void** km = POINTER_NULL_POINTER;
@@ -694,9 +622,9 @@ void set_signal_for_parameter( void* source, int* source_count,
         void** kms = POINTER_NULL_POINTER;
 
         // Get knowledge memory.
-        get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
-        get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
-        get_array_elements(internal, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
+        get_array_elements(p4, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
+        get_array_elements(p4, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
+        get_array_elements(p4, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
 
 
         //
@@ -894,9 +822,9 @@ void set_signal_for_parameter( void* source, int* source_count,
         void** ms = NULL_POINTER;
 
         // Get signal memory.
-        get_array_elements(internal, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) POINTER_ARRAY);
-        get_array_elements(internal, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) POINTER_ARRAY);
-        get_array_elements(internal, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) POINTER_ARRAY);
+        get_array_elements(p4, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &m, (void*) POINTER_ARRAY);
+        get_array_elements(p4, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &mc, (void*) POINTER_ARRAY);
+        get_array_elements(p4, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ms, (void*) POINTER_ARRAY);
 
         // The signal id.
         int* id = INTEGER_NULL_POINTER;
@@ -910,37 +838,29 @@ void set_signal_for_parameter( void* source, int* source_count,
             (void*) sm, (void*) smc,
             (void*) sd, (void*) sdc,
             (void*) NORMAL_PRIORITY, (void*) id);
-
     }
-
 }
 
-
 /**
+ * Separates the query string into single parameters.
  *
- * Separate the query string in the singe parameter
- * For each singel paramater must be create a signal
- * in the signal memory
+ * A signal is created for each single parameter.
  *
  * Example:
- *   the query string is domain.teststring1=Hallo&domain.teststring2=Rolf
- *   the parameter one is domain.teststring1=Hallo and
- *   the parameter two is domain.teststring2=Rolf
+ * query string: domain.teststring1=Hallo&domain.teststring2=Rolf
+ * parameter one: domain.teststring1=Hallo and
+ * parameter two: domain.teststring2=Rolf
  *
- * @param query
- * @param query_count
- * @param internal memory
+ * @param p0 the query
+ * @param p1 the query count
+ * @param p2 the internal memory
  */
-void set_signals_for_all_parameters( void* query, int* query_count,
-                                     void* internal ){
+void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
 
     //check of null pointer
-    if ( (query != NULL_POINTER) &&
-         (query_count != NULL_POINTER) &&
-         (internal != NULL_POINTER) )
-    {
+    if ((p0 != NULL_POINTER) && (p1 != NULL_POINTER) && (p2 != NULL_POINTER)) {
 
-        int query_counter=0;
+        int query_counter = 0;
 
         //paramater
         char* param = CHARACTER_NULL_POINTER;
@@ -952,19 +872,19 @@ void set_signals_for_all_parameters( void* query, int* query_count,
         int* value_count = INTEGER_NULL_POINTER;
         int* value_size = INTEGER_NULL_POINTER;
 
-        create_integer( &param_count );
-        *param_count = *query_count;
-        create_integer( &param_size );
-        *param_size = *query_count;
-        create_string( &param, param_size );
+        create_integer(&param_count);
+        *param_count = *p1;
+        create_integer(&param_size);
+        *param_size = *p1;
+        create_string(&param, param_size);
 
-        create_integer( &value_count );
-        *value_count = *query_count;
-        create_integer( &value_size );
-        *value_size = *query_count;
-        create_string( &value, value_size );
+        create_integer(&value_count);
+        *value_count = *p1;
+        create_integer(&value_size);
+        *value_size = *p1;
+        create_string(&value, value_size);
 
-        //result flag fpor comparision
+        // The comparison result.
         int r = 0;
 
         //elements from the array
@@ -974,51 +894,46 @@ void set_signals_for_all_parameters( void* query, int* query_count,
         int last_query_count = 0;
 
         //temp count  for comparision
-        int temp_count= 1;
+        int temp_count = 1;
 
         while (1) {
 
-            if ( query_counter >= *query_count ) {
+            if (query_counter >= *p1) {
 
                 break;
             }
 
-            //param
+            // param
             *param_count = 0;
             r = 0;
 
-            while ( 1 ) {
+            while (1) {
 
-                get_array_elements( (void*) query, (void*) &query_counter,
-                                    (void*) &element, CHARACTER_ARRAY );
+                get_array_elements((void*) p0, (void*) &query_counter, (void*) &element, CHARACTER_ARRAY);
 
-                compare_arrays( element, &temp_count,
-                                EQUALS_SIGN_CHARACTER,
-                                EQUALS_SIGN_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(element, &temp_count, EQUALS_SIGN_CHARACTER, EQUALS_SIGN_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( (query_counter >= *query_count) ||
-                     (r==1) )
-                {
+                if ((query_counter >= *p1) || (r == 1)) {
 
                     query_counter = query_counter + 1;
                     break;
                 }
 
                 //the element must insert into the param
-                last_query_count = *query_count - query_counter;
-                get_character_from_escape_code( element, &last_query_count,
-                                                (char**) &decode_element );
-                set_array_elements( param, param_count,
-                                    decode_element, &temp_count,
-                                    CHARACTER_ARRAY );
+                last_query_count = *p1 - query_counter;
 
-                if ( element == decode_element ) {
+                get_character_from_escape_code(element, &last_query_count, (char**) &decode_element);
+                set_array_elements(param, param_count, decode_element, &temp_count, CHARACTER_ARRAY);
+
+                if (element == decode_element) {
+
                     query_counter = query_counter + 1;
-                }
-                else {
+
+                } else {
+
                     query_counter = query_counter + *ESCAPE_CODE_CHARACTER_COUNT;
                 }
+
                 *param_count = *param_count + 1;
             }
 
@@ -1026,56 +941,43 @@ void set_signals_for_all_parameters( void* query, int* query_count,
             *value_count = 0;
             r = 0;
 
-            while ( 1 ) {
+            while (1) {
 
-                get_array_elements( (void*) query, (void*) &query_counter,
-                                    (void*) &element, CHARACTER_ARRAY );
+                get_array_elements((void*) p0, (void*) &query_counter, (void*) &element, CHARACTER_ARRAY);
 
-                compare_arrays( element, &temp_count,
-                                AMPERSAND_CHARACTER,
-                                AMPERSAND_CHARACTER_COUNT,
-                                &r, CHARACTER_ARRAY );
+                compare_arrays(element, &temp_count, AMPERSAND_CHARACTER, AMPERSAND_CHARACTER_COUNT, &r, CHARACTER_ARRAY);
 
-                if ( (query_counter >= *query_count) ||
-                     (r==1) )
-                {
+                if ((query_counter >= *p1) || (r == 1)) {
 
                     query_counter = query_counter + 1;
                     break;
                 }
 
                 //the element must insert into the value
-                last_query_count = *query_count - query_counter;
-                get_character_from_escape_code( element, &last_query_count,
-                                                (char**) &decode_element );
-                set_array_elements( value, value_count,
-                                    decode_element, &temp_count,
-                                    CHARACTER_ARRAY );
+                last_query_count = *p1 - query_counter;
+                get_character_from_escape_code(element, &last_query_count, (char**) &decode_element);
+                set_array_elements(value, value_count, decode_element, &temp_count, CHARACTER_ARRAY);
 
+                if (element == decode_element) {
 
-                if ( element == decode_element ) {
                     query_counter = query_counter + 1;
-                }
-                else {
+
+                } else {
+
                     query_counter = query_counter + *ESCAPE_CODE_CHARACTER_COUNT;
                 }
+
                 *value_count = *value_count + 1;
             }
 
-
             //set the signal for the paramater and the value
-            if ( *param_count > 0 ) {
+            if (*param_count > 0) {
 
-                set_signal_for_parameter( value, value_count,
-                                          param, param_count,
-                                          internal );
+                set_signal_for_parameter(value, value_count, param, param_count, p2);
             }
         }
-
     }
-
 }
-
 
 /**
  * Handles a tcp socket request.
@@ -1112,14 +1014,10 @@ void handle_tcp_socket_request(void* p0, void* p1) {
             int url_basename_count = 0;
 
             // Create url basename.
-            create_array( (void*) &url_basename, (void*) &url_basename_count,
-                          (void*) CHARACTER_ARRAY);
+            create_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
 
-            // Get url base name .
-            get_url_basename_from_request( msg, &msg_count,
-                                           &url_basename,
-                                           &url_basename_count );
-
+            // Get url base name.
+            get_url_basename_from_request(msg, &msg_count, &url_basename, &url_basename_count);
 
             // The parameter.
             char* param = NULL_POINTER;
@@ -1129,8 +1027,7 @@ void handle_tcp_socket_request(void* p0, void* p1) {
             create_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
 
             // Get parameters.
-            get_parameter_from_request( msg, &msg_count,
-                                        &param, &param_count);
+            get_parameter_from_request(msg, &msg_count, &param, &param_count);
 
             // The firefox web browser makes a second request
             // to determine the favicon.
@@ -1145,9 +1042,8 @@ void handle_tcp_socket_request(void* p0, void* p1) {
 
             if (r != 1) {
 
-                //query string handling
-                set_signals_for_all_parameters( (void*) param, (void*) &param_count, p0 );
-
+                // query string handling
+                set_signals_for_all_parameters((void*) param, (void*) &param_count, p0);
 
                 log_message_debug("Create destination abstraction, model, details.");
 
@@ -1155,47 +1051,47 @@ void handle_tcp_socket_request(void* p0, void* p1) {
                 char c_sc[] = "file";
                 char* sc = &c_sc[0];
                 int* scc = INTEGER_NULL_POINTER;
-                create_integer( &scc );
+                create_integer(&scc);
                 *scc = 4;
 
                 // The source abstraction.
                 char c_sa[] = "cybol";
                 char* sa = &c_sa[0];
                 int* sac = INTEGER_NULL_POINTER;
-                create_integer( &sac );
+                create_integer(&sac);
                 *sac = 5;
 
                 // The source model.
                 char* sm = url_basename;
                 int* smc = INTEGER_NULL_POINTER;
-                create_integer( &smc );
+                create_integer(&smc);
                 *smc = url_basename_count;
 
                 // The destination abstraction.
                 void* da = NULL_POINTER;
                 int* dac = INTEGER_NULL_POINTER;
-                create_integer( &dac );
+                create_integer(&dac);
                 *dac = 0;
                 int* das = INTEGER_NULL_POINTER;
-                create_integer( &das );
+                create_integer(&das);
                 *das = 0;
 
                 // The destination model.
                 void* dm = NULL_POINTER;
                 int* dmc = INTEGER_NULL_POINTER;
-                create_integer( &dmc );
+                create_integer(&dmc);
                 *dmc = 0;
                 int* dms = INTEGER_NULL_POINTER;
-                create_integer( &dms );
+                create_integer(&dms);
                 *dms = 0;
 
                 // The destination details.
                 void* dd = NULL_POINTER;
                 int* ddc = INTEGER_NULL_POINTER;
-                create_integer( &ddc );
+                create_integer(&ddc);
                 *ddc = 0;
                 int* dds = INTEGER_NULL_POINTER;
-                create_integer( &dds );
+                create_integer(&dds);
                 *dds = 0;
 
                 // Create destination abstraction.
@@ -1258,10 +1154,8 @@ void handle_tcp_socket_request(void* p0, void* p1) {
     }
 }
 
-
 /**
  * Runs the tcp socket server for one accept.
- *
  *
  * @param p0 the internal memory
  */
@@ -1275,7 +1169,7 @@ void run_tcp_socket(void* p0) {
 
     if (s != POINTER_NULL_POINTER) {
 
-        if (*s != NULL_POINTER ) {
+        if (*s != NULL_POINTER) {
 
             log_message_debug("Run tcp socket.");
 
@@ -1286,14 +1180,12 @@ void run_tcp_socket(void* p0) {
             int cas = sizeof(ca);
 
             // Accept client socket request and store client socket.
-            int cs = accept(**((int**)s), (struct sockaddr*) &ca, &cas);
+            int cs = accept(**((int**) s), (struct sockaddr*) &ca, &cas);
 
             if (cs >= 0) {
 
                 log_message_debug("DEBUG: Accepted tcp client socket request.");
-
                 handle_tcp_socket_request(p0, (void*) &cs);
-
 
             } else {
 
@@ -1304,51 +1196,48 @@ void run_tcp_socket(void* p0) {
         }else {
 
             log_message_debug("Could not run tcp socket. The socket is null.");
-
         }
+
     } else {
 
         log_message_debug("Could not run tcp socket. The socket is null.");
     }
 }
 
-
 /**
- * The procedure is running in a thread,
- * to avoid blocking of the main signal waiting loop.
+ * Runs a thread listening on the tcp socket.
  *
- * If the active flag false, so must be exit the thread
+ * It is to avoid blocking of the main signal checker loop.
+ * The thread exits if the active flag is false.
  *
  * @param p0 the internal memory
  */
 void run_tcp_socket_server(void* p0) {
 
     void** active_flag = POINTER_NULL_POINTER;
-    get_array_elements( p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL,
-                        (void*) &active_flag, (void*) POINTER_ARRAY );
 
+    get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &active_flag, (void*) POINTER_ARRAY);
 
     while (1) {
 
-        if ( **((int**)active_flag) == *ZERO_INTEGER ) {
+        if (**((int**) active_flag) == *ZERO_INTEGER) {
 
             break;
         }
 
-        run_tcp_socket( p0 );
+        run_tcp_socket(p0);
     }
 
     pthread_exit(NULL_POINTER);
-
 }
 
 /**
- * Receive over the tcp socket service.
+ * Receives via tcp socket.
  *
  * @param p0 the internal memory
- * @param p1 the knowledge
- * @param p2 the knowledge count
- * @param p3 the knowledge size
+ * @param p1 the knowledge memory
+ * @param p2 the knowledge memory count
+ * @param p3 the knowledge memory size
  * @param blocking_abstr the blocking abtsraction
  * @param blocking_abstr_count the blocking abtsraction count
  * @param blocking_model the blocking model
@@ -1357,7 +1246,7 @@ void run_tcp_socket_server(void* p0) {
 void receive_tcp_socket(void* p0, const void* p1, const void* p2, const void* p3,
     void* blocking_abstr, void* blocking_abstr_count, void* blocking_model, void* blocking_model_count) {
 
-    log_message_debug("Receive tcp socket.");
+    log_message_debug("Receive via tcp socket.");
 
     if (p0 != NULL_POINTER) {
 
@@ -1386,7 +1275,7 @@ void receive_tcp_socket(void* p0, const void* p1, const void* p2, const void* p3
                     }
                 }
 
-                //set the activation flag in the internal memory.
+                // Set the activation flag in the internal memory.
                 void** socket_flag = POINTER_NULL_POINTER;
 
                 get_array_elements(p0, (void*) TCP_SERVER_SOCKET_ACTIVE_INTERNAL, (void*) &socket_flag, (void*) POINTER_ARRAY);
