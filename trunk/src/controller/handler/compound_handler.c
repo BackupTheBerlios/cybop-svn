@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -29,7 +29,7 @@
 #define COMPOUND_HANDLER_SOURCE
 
 #include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
+#include "../../globals/variables/variables.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -37,55 +37,43 @@
 // Forward declarations.
 //
 
-void handle(const void* p0, const void* p1, const void* p2, const void* p3,
-    const void* p4, const void* p5, const  void* p6, const void* p7, void* p8, void* p9, void* p10);
-
-/*??
-void loop(const void* param, const int* param_count,
-          const void* priority, const void* signal_id, void* shutdownflag,
-          void* internal);
-
-void branch(const void* param, const int* param_count,
-           const void* priority, const void* signal_id, void* shutdownflag,
-           void* internal);
-*/
+void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+    void* p7, const void* p8, const void* p9, const void* p10, const void* p11,
+    const void* p12, const void* p13, const  void* p14, const void* p15, const void* p16);
 
 /**
  * Handles the compound signal.
  *
- * @param p0 the signal
- * @param p1 the signal count
- * @param p2 the signal priority
- * @param p3 the signal id
- * @param p4 the shutdown flag
- * @param p5 the internal memory
- * @param p6 the direct execution flag
+ * @param p0 the internal memory
+ * @param p1 the knowledge memory
+ * @param p2 the knowledge memory count
+ * @param p3 the knowledge memory size
+ * @param p4 the signal memory
+ * @param p5 the signal memory count
+ * @param p6 the signal memory size
+ * @param p7 the shutdown flag
+ * @param p8 the signal
+ * @param p9 the signal count
+ * @param p10 the signal priority
+ * @param p11 the signal id
+ * @param p12 the direct execution flag
  */
-void handle_compound(const void* p0, const void* p1, const void* p2,
-    const void* p3, void* p4, void* p5, void* p6) {
+void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+    void* p7, const void* p8, const void* p9, const void* p10, const void* p11, const void* p12) {
 
-    if (p1 != NULL_POINTER) {
+    if (p9 != NULL_POINTER) {
 
-        int* sc = (int*) p1;
+        int* sc = (int*) p9;
 
         // The direct execution flag.
-        int x = 0;
+        int* x = NULL_POINTER;
 
-        if (p6 != NULL_POINTER) {
+        if (p12 != NULL_POINTER) {
 
-            x = *((int*) p6);
+            x = (int*) p12;
         };
 
-        // The signal memory.
-        void** sm = POINTER_NULL_POINTER;
-        void** smc = POINTER_NULL_POINTER;
-        void** sms = POINTER_NULL_POINTER;
-
-        // Get signal memory.
-        get_array_elements(p5, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &sm, (void*) POINTER_ARRAY);
-        get_array_elements(p5, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &smc, (void*) POINTER_ARRAY);
-        get_array_elements(p5, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &sms, (void*) POINTER_ARRAY);
-
+        log_message_debug("\n\n");
         log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_COMPOUND_MESSAGE, (void*) HANDLE_COMPOUND_MESSAGE_COUNT);
 
         // The abstractions, models, details.
@@ -97,12 +85,12 @@ void handle_compound(const void* p0, const void* p1, const void* p2,
         void** pdc = POINTER_NULL_POINTER;
 
         // Get abstractions, models, details.
-        get_array_elements(p0, (void*) ABSTRACTIONS_INDEX, (void*) &pa, (void*) POINTER_ARRAY);
-        get_array_elements(p0, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) &pac, (void*) POINTER_ARRAY);
-        get_array_elements(p0, (void*) MODELS_INDEX, (void*) &pm, (void*) POINTER_ARRAY);
-        get_array_elements(p0, (void*) MODELS_COUNTS_INDEX, (void*) &pmc, (void*) POINTER_ARRAY);
-        get_array_elements(p0, (void*) DETAILS_INDEX, (void*) &pd, (void*) POINTER_ARRAY);
-        get_array_elements(p0, (void*) DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) POINTER_ARRAY);
+        get_array_elements(p8, (void*) ABSTRACTIONS_INDEX, (void*) &pa, (void*) POINTER_ARRAY);
+        get_array_elements(p8, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) &pac, (void*) POINTER_ARRAY);
+        get_array_elements(p8, (void*) MODELS_INDEX, (void*) &pm, (void*) POINTER_ARRAY);
+        get_array_elements(p8, (void*) MODELS_COUNTS_INDEX, (void*) &pmc, (void*) POINTER_ARRAY);
+        get_array_elements(p8, (void*) DETAILS_INDEX, (void*) &pd, (void*) POINTER_ARRAY);
+        get_array_elements(p8, (void*) DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) POINTER_ARRAY);
 
         if (pa != POINTER_NULL_POINTER) {
 
@@ -159,13 +147,14 @@ void handle_compound(const void* p0, const void* p1, const void* p2,
                                                             // signals. The part signals cannot have higher / lower priority
                                                             // than their original whole signal.)
 /*??
-                                                            if (x == 0) {
+                                                            if (*x == 0) {
 
-                                                                set_signal(*sm, *smc, *sms, *a, *ac, *m, *mc, *d, *dc, p2, p3);
+                                                                set_signal(p4, p5, p6, *a, *ac, *m, *mc, *d, *dc, p10, p11);
 
                                                             } else {
 */
-                                                                handle(*a, *ac, *m, *mc, *d, *dc, p2, p3, p4, p5, p6);
+                                                                handle(p0, p1, p2, p3, p4, p5, p6,
+                                                                    p7, *a, *ac, *m, *mc, *d, *dc, p10, p11, p12);
 /*??
                                                             }
 */

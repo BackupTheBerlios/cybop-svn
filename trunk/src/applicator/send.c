@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-07-22 07:29:45 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -58,14 +58,18 @@
  *
  * @param p0 the parameters
  * @param p1 the parameters count
- * @param p2 the knowledge memory
- * @param p3 the knowledge memory count
- * @param p4 the knowledge memory size
- * @param p5 the signal id
- * @param p6 the internal memory
+ * @param p2 the internal memory
+ * @param p3 the knowledge memory
+ * @param p4 the knowledge memory count
+ * @param p5 the knowledge memory size
+ * @param p6 the signal memory
+ * @param p7 the signal memory count
+ * @param p8 the signal memory size
+ * @param p9 the signal id
  */
 void send_message(const void* p0, const void* p1,
-    const void* p2, const void* p3, const void* p4, const void* p5, void* p6) {
+    void* p2, const void* p3, const void* p4, const void* p5,
+    void* p6, void* p7, void* p8, const void* p9) {
 
     // The language abstraction.
     void** la = NULL_POINTER;
@@ -152,7 +156,7 @@ void send_message(const void* p0, const void* p1,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
-        p2, p3);
+        p3, p4);
 
     log_message_debug("Send.");
 
@@ -169,7 +173,7 @@ void send_message(const void* p0, const void* p1,
             void** t = NULL_POINTER;
 
             // Get terminal.
-            get_array_elements(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
+            get_array_elements(p2, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) POINTER_ARRAY);
 
             send_linux_console((void*) t, NULL_POINTER, NULL_POINTER, *mm, *mmc);
         }
@@ -181,7 +185,7 @@ void send_message(const void* p0, const void* p1,
 
         if (r == 1) {
 
-            send_x_window_system(p6, p2, p3, p4);
+            send_x_window_system(p2, p3, p4, p5);
         }
     }
 
@@ -191,18 +195,7 @@ void send_message(const void* p0, const void* p1,
 
         if (r == 1) {
 
-            // The signal memory.
-            void** sm = NULL_POINTER;
-            void** smc = NULL_POINTER;
-            void** sms = NULL_POINTER;
-
-            // Get signal memory.
-            get_array_elements(p6, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &sm, (void*) POINTER_ARRAY);
-            get_array_elements(p6, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &smc, (void*) POINTER_ARRAY);
-            get_array_elements(p6, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &sms, (void*) POINTER_ARRAY);
-
-            // Set signal.
-            set_signal(*sm, *smc, *sms, (void*) *ma, (void*) *mac, (void*) *mm, (void*) *mmc, (void*) *md, (void*) *mdc, (void*) NORMAL_PRIORITY, p5);
+            set_signal(p6, p7, p8, (void*) *ma, (void*) *mac, (void*) *mm, (void*) *mmc, (void*) *md, (void*) *mdc, (void*) NORMAL_PRIORITY, p9);
         }
     }
 
@@ -217,14 +210,14 @@ void send_message(const void* p0, const void* p1,
             // in the client socket number array.
             int i = -1;
 
-            get_index_for_signal_id(p6, p5, (void*) &i);
+            get_index_for_signal_id(p2, p9, (void*) &i);
 
             if (i >= 0) {
 
                 // The client socket.
                 int* cs = INTEGER_NULL_POINTER;
 
-                get_client_socket_number_for_index(p6, (void*) &i, (void*) &cs);
+                get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
 
                 if (*cs >= 0) {
 
@@ -249,7 +242,7 @@ void send_message(const void* p0, const void* p1,
                     encode_model(&dest, dest_count, dest_size,
                         *ma, *mac, *mm, *mmc, *md, *mdc,
                         (void*) HTML_ABSTRACTION, (void*) HTML_ABSTRACTION_COUNT,
-                        p2, p3);
+                        p3, p4);
 
                     // The temporary count, size.
                     int tc = 0;
@@ -258,7 +251,7 @@ void send_message(const void* p0, const void* p1,
                     send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts, (void*) dest, (void*) dest_count);
 
                     // Remove client socket number and main signal id from internal memory.
-                    remove_relation_clientsocketnumber_mainsignalid(p6, (void*) &i);
+                    remove_relation_clientsocketnumber_mainsignalid(p2, (void*) &i);
 
                     // Close socket.
                     close(*cs);
@@ -282,16 +275,18 @@ void send_message(const void* p0, const void* p1,
 }
 
 /**
+ * Refreshes the url.
+ *
  * @param p0 the parameters
  * @param p1 the parameters count
- * @param p2 the knowledge
- * @param p3 the knowledge count
- * @param p4 the knowledge size
- * @param p5 the signal id
- * @param p6 the internal memory
+ * @param p2 the internal memory
+ * @param p3 the knowledge
+ * @param p4 the knowledge count
+ * @param p5 the knowledge size
+ * @param p6 the signal id
  */
-void send_url_refresh( const void* p0, const void* p1,
-    const void* p2, const void* p3, const void* p4, const void* p5, void* p6) {
+void refresh_url(const void* p0, const void* p1,
+    void* p2, const void* p3, const void* p4, const void* p5, const void* p6) {
 
     // The message abstraction.
     void** urla = NULL_POINTER;
@@ -312,7 +307,7 @@ void send_url_refresh( const void* p0, const void* p1,
         (void*) &urla, (void*) &urlac, (void*) &urlas,
         (void*) &urlm, (void*) &urlmc, (void*) &urlms,
         (void*) &urld, (void*) &urldc, (void*) &urlds,
-        p2, p3);
+        p3, p4);
 
     if ((urla != NULL_POINTER)
          && (urlac != NULL_POINTER)
@@ -329,14 +324,14 @@ void send_url_refresh( const void* p0, const void* p1,
         // in the client socket number array.
         int i = -1;
 
-        get_index_for_signal_id(p6, p5, (void*) &i);
+        get_index_for_signal_id(p2, p6, (void*) &i);
 
         if (i >= 0) {
 
             // The client socket.
             int* cs = INTEGER_NULL_POINTER;
 
-            get_client_socket_number_for_index(p6, (void*) &i, (void*) &cs);
+            get_client_socket_number_for_index(p2, (void*) &i, (void*) &cs);
 
             if (*cs >= 0) {
 
@@ -367,7 +362,7 @@ void send_url_refresh( const void* p0, const void* p1,
                 send_tcp_socket((void*) &cs, (void*) &tc, (void*) &ts, (void*) dest, (void*) dest_count);
 
                 // Remove client socket number and main signal id from internal memory.
-                remove_relation_clientsocketnumber_mainsignalid(p6, (void*) &i);
+                remove_relation_clientsocketnumber_mainsignalid(p2, (void*) &i);
 
                 // Close socket.
                 close(*cs);

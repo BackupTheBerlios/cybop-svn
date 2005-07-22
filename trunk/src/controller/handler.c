@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -41,41 +41,50 @@
  * This procedure identifies the signal abstraction and then calls either
  * the compound signal handler, or the operation signal handler procedure.
  *
- * @param p0 the abctraction
- * @param p1 the abstraction count
- * @param p2 the signal (model)
- * @param p3 the signal count
- * @param p4 the parameters (details)
- * @param p5 the parameters count
- * @param p6 the priority
- * @param p7 the signal id
- * @param p8 the shutdown flag
- * @param p9 the internal memory
- * @param p10 the direct execution flag
+ * @param p0 the internal memory
+ * @param p1 the knowledge memory
+ * @param p2 the knowledge memory count
+ * @param p3 the knowledge memory size
+ * @param p4 the signal memory
+ * @param p5 the signal memory count
+ * @param p6 the signal memory size
+ * @param p7 the shutdown flag
+ * @param p8 the abctraction
+ * @param p9 the abstraction count
+ * @param p10 the signal (model)
+ * @param p11 the signal count
+ * @param p12 the parameters (details)
+ * @param p13 the parameters count
+ * @param p14 the priority
+ * @param p15 the signal id
+ * @param p16 the direct execution flag
  */
-void handle(const void* p0, const void* p1, const void* p2, const void* p3,
-    const void* p4, const void* p5, const  void* p6, const void* p7, void* p8, void* p9, void* p10) {
+void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+    void* p7, const void* p8, const void* p9, const void* p10, const void* p11,
+    const void* p12, const void* p13, const  void* p14, const void* p15, const void* p16) {
 
     // The comparison result.
     int r = 0;
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            handle_compound(p2, p3, p6, p7, p8, p9, p10);
+            handle_compound(p0, p1, p2, p3, p4, p5, p6,
+                p7, p10, p11, p14, p15, p16);
         }
     }
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            handle_operation(p2, p3, p4, p5, p6, p7, p8, p9);
+            handle_operation(p0, p1, p2, p3, p4, p5, p6,
+                p7, p10, p11, p12, p13, p14, p15);
         }
     }
 

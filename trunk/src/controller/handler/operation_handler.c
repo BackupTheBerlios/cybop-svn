@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-16 00:18:24 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -42,9 +42,9 @@
 #include "../../applicator/set.c"
 #include "../../applicator/shutdown.c"
 #include "../../applicator/startup.c"
-#include "../../globals/constants/model_constants.c"
-#include "../../globals/logger/logger.c"
-#include "../../memoriser/array.c"
+//?? #include "../../globals/constants/model_constants.c"
+//?? #include "../../globals/logger/logger.c"
+//?? #include "../../memoriser/array.c"
 /*??
 #include "../../globals/constants/abstraction_constants.c"
 #include "../../globals/constants/integer_constants.c"
@@ -54,39 +54,33 @@
 /**
  * Handles the operation signal.
  *
- * @param p0 the signal (operation)
- * @param p1 the signal count
- * @param p2 the parameters (details)
- * @param p3 the parameters count
- * @param p4 the signal priority
- * @param p5 the signal id
- * @param p6 the shutdown flag
- * @param p7 the internals
+ * @param p0 the internal memory
+ * @param p1 the knowledge memory
+ * @param p2 the knowledge memory count
+ * @param p3 the knowledge memory size
+ * @param p4 the signal memory
+ * @param p5 the signal memory count
+ * @param p6 the signal memory size
+ * @param p7 the shutdown flag
+ * @param p8 the signal (operation)
+ * @param p9 the signal count
+ * @param p10 the parameters (details)
+ * @param p11 the parameters count
+ * @param p12 the signal priority
+ * @param p13 the signal id
  */
-void handle_operation(const void* p0, const void* p1, const void* p2, const void* p3,
-    const void* p4, const void* p5, void* p6, void* p7) {
+void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+    void* p7, const void* p8, const void* p9, const void* p10, const void* p11,
+    const void* p12, const void* p13) {
 
+    log_message_debug("\n\n");
     log_message((void*) INFO_LOG_LEVEL, (void*) HANDLE_OPERATION_MESSAGE, (void*) HANDLE_OPERATION_MESSAGE_COUNT);
 
     // The comparison result.
     int r = 0;
 
-    log_message_debug("Handle operation.");
-
-/*??
-    fprintf(stderr, "\n\nTest: Handle operation: %s\n", (char*) p0);
-    fprintf(stderr, "Test: Operation count: %i\n", *((int*) p1));
-*/
-
-    // The knowledge memory.
-    void** km = POINTER_NULL_POINTER;
-    void** kmc = POINTER_NULL_POINTER;
-    void** kms = POINTER_NULL_POINTER;
-
-    // Get knowledge memory.
-    get_array_elements(p7, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &km, (void*) POINTER_ARRAY);
-    get_array_elements(p7, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kmc, (void*) POINTER_ARRAY);
-    get_array_elements(p7, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &kms, (void*) POINTER_ARRAY);
+    fprintf(stderr, "Test: Operation: %s\n", (char*) p8);
+    fprintf(stderr, "Test: Operation count: %i\n", *((int*) p9));
 
     //
     // Program flow models.
@@ -94,61 +88,61 @@ void handle_operation(const void* p0, const void* p1, const void* p2, const void
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) COPY_MODEL, (void*) COPY_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) COPY_MODEL, (void*) COPY_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-//??            copy(p2, p3, p4, p5, p7);
+//??            copy(p10, p11, p12, p13, p0);
         }
     }
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) COPY_PROPERTY_MODEL, (void*) COPY_PROPERTY_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) COPY_PROPERTY_MODEL, (void*) COPY_PROPERTY_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-//??            copy_property(p2, p3, p4, p5, p7);
+//??            copy_property(p10, p11, p12, p13, p0);
         }
     }
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) BRANCH_MODEL, (void*) BRANCH_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) BRANCH_MODEL, (void*) BRANCH_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            branch(p2, p3, *km, *kmc, *kms, p4, p5, p6, p7);
+            branch(p0, p1, p2, p3, p4, p5, p6, p7, p10, p11, p12, p13);
         }
     }
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) LOOP_MODEL, (void*) LOOP_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) LOOP_MODEL, (void*) LOOP_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            loop(p2, p3, *km, *kmc, *kms, p4, p5, p6, p7);
+            loop(p0, p1, p2, p3, p4, p5, p6, p7, p10, p11, p12, p13);
         }
     }
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) COUNT_PARTS_MODEL, (void*) COUNT_PARTS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) COUNT_PARTS_MODEL, (void*) COUNT_PARTS_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-//??            count_parts(p2, p3, p7);
+//??            count_parts(p10, p11, p0);
         }
     }
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) BUILD_LISTNAME_MODEL, (void*) BUILD_LISTNAME_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) BUILD_LISTNAME_MODEL, (void*) BUILD_LISTNAME_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-//??            build_listname(p2, p3, p7);
+//??            build_listname(p10, p11, p0);
         }
     }
 
@@ -162,11 +156,11 @@ void handle_operation(const void* p0, const void* p1, const void* p2, const void
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) COMPARE_MODEL, (void*) COMPARE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) COMPARE_MODEL, (void*) COMPARE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            compare(p2, p3, *km, *kmc, *kms);
+            compare(p10, p11, p1, p2, p3);
         }
     }
 
@@ -176,11 +170,11 @@ void handle_operation(const void* p0, const void* p1, const void* p2, const void
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) ADD_MODEL, (void*) ADD_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) ADD_MODEL, (void*) ADD_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            add(p2, p3, *km, *kmc, *kms);
+            add(p10, p11, p1, p2, p3);
         }
     }
 
@@ -190,21 +184,21 @@ void handle_operation(const void* p0, const void* p1, const void* p2, const void
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) CREATE_PART_MODEL, (void*) CREATE_PART_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) CREATE_PART_MODEL, (void*) CREATE_PART_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            create_part(p2, p3, *km, *kmc, *kms);
+            create_part(p10, p11, p1, p2, p3);
         }
     }
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) DESTROY_PART_MODEL, (void*) DESTROY_PART_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) DESTROY_PART_MODEL, (void*) DESTROY_PART_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            destroy_part(p2, p3, *km, *kmc, *kms);
+            destroy_part(p10, p11, p1, p2, p3);
         }
     }
 
@@ -214,33 +208,33 @@ void handle_operation(const void* p0, const void* p1, const void* p2, const void
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) STARTUP_MODEL, (void*) STARTUP_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) STARTUP_MODEL, (void*) STARTUP_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            startup_service(p2, p3, *km, *kmc, *kms, p7);
+            startup_service(p10, p11, p1, p2, p3, p0);
         }
     }
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) SHUTDOWN_MODEL, (void*) SHUTDOWN_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) SHUTDOWN_MODEL, (void*) SHUTDOWN_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            shutdown_service(p2, p3, *km, *kmc, *kms, p7);
+            shutdown_service(p10, p11, p1, p2, p3, p0);
         }
     }
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) EXIT_MODEL, (void*) EXIT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) EXIT_MODEL, (void*) EXIT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
             log_message((void*) INFO_LOG_LEVEL, (void*) SET_SHUTDOWN_FLAG_MESSAGE, (void*) SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
 
-            int* f = (int*) p6;
+            int* f = (int*) p7;
             *f = 1;
         }
     }
@@ -251,41 +245,41 @@ void handle_operation(const void* p0, const void* p1, const void* p2, const void
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) SEND_MODEL, (void*) SEND_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) SEND_MODEL, (void*) SEND_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            send_message(p2, p3, *km, *kmc, *kms, p5, p7);
+            send_message(p10, p11, p0, p1, p2, p3, p4, p5, p6, p13);
         }
     }
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) RECEIVE_MODEL, (void*) RECEIVE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) RECEIVE_MODEL, (void*) RECEIVE_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-            receive_message(p2, p3, *km, *kmc, *kms, p7);
+            receive_message(p10, p11, p1, p2, p3, p0);
         }
     }
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) INTERRUPT_MODEL, (void*) INTERRUPT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) INTERRUPT_MODEL, (void*) INTERRUPT_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-//??            interrupt_service(p2, p3, *km, *kmc, *kms, p7);
+//??            interrupt_service(p10, p11, p1, p2, p3, p0);
         }
     }
 
     if (r != 1) {
 
-        compare_arrays(p0, p1, (void*) REFRESH_URL_MODEL, (void*) REFRESH_URL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+        compare_arrays(p8, p9, (void*) REFRESH_URL_MODEL, (void*) REFRESH_URL_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
 
         if (r == 1) {
 
-//??            refresh_url(p2, p3, *km, *kmc, *kms, p5, p7);
+//??            refresh_url(p10, p11, p0, p1, p2, p3, p13);
         }
     }
 

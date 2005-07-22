@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-07-22 07:29:45 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,7 +38,7 @@
 /**
  * Receives a tui source and writes it into a destination byte array.
  *
- * @param p0 the destination (byte array) (Hand over as reference!)
+ * @param p0 the destination byte array (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source

@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-22 07:29:46 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,14 +69,7 @@ void send_terminal(void* p0, void* p1, void* p2, const void* p3, const void* p4)
 
         FILE** f = (FILE**) p0;
 
-    fprintf(stdout, "TEST f: %i\n", f);
-    fprintf(stdout, "TEST *f: %i\n", *f);
-    fprintf(stdout, "TEST stdout: %i\n", stdout);
-    fprintf(stdout, "TEST stdin: %i\n", stdin);
-
-        //?? TODO: For some reason, *f does NOT work instead of stdout.
-        //?? Check this out!
-        fprintf(stdout, "%s", (char*) p3);
+        fprintf(*f, "%s", (char*) p3);
 
         //?? TODO: temporary. Move to receive loop into an own thread!?
         getc(stdin);

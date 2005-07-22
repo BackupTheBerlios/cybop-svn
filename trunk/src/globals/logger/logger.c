@@ -27,7 +27,7 @@
  * Otherwise, an ENDLESS LOOP will be created, because cyboi's
  * array procedures call the logger in turn.
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-16 00:18:24 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -270,7 +270,6 @@ void log_message(const void* p0, const void* p1, const void* p2) {
                 ei = ei + 1;
 
                 // Log entry to output.
-                // Old solution: fputs((char*) e, stdout);
                 write(LOG_OUTPUT, e, ec);
 
                 // Destroy log entry.

@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,8 +42,9 @@
 // Forward declarations.
 //
 
-void handle(const void* p0, const void* p1, const void* p2, const void* p3,
-    const void* p4, const void* p5,const  void* p6, const void* p7, void* p8, void* p9, void* p10);
+void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+    void* p7, const void* p8, const void* p9, const void* p10, const void* p11,
+    const void* p12, const void* p13, const  void* p14, const void* p15, const void* p16);
 
 /**
  * Loops the program flow, depending on a flag.
@@ -52,19 +53,23 @@ void handle(const void* p0, const void* p1, const void* p2, const void* p3,
  * - break: the break flag
  * - model: the model to be executed repeatadly
  *
- * @param p0 the parameters
- * @param p1 the parameters count
- * @param p2 the knowledge memory
- * @param p3 the knowledge memory count
- * @param p4 the knowledge memory size
- * @param p5 the priority
- * @param p6 the signal id
+ * @param p0 the internal memory
+ * @param p1 the knowledge memory
+ * @param p2 the knowledge memory count
+ * @param p3 the knowledge memory size
+ * @param p4 the signal memory
+ * @param p5 the signal memory count
+ * @param p6 the signal memory size
  * @param p7 the shutdown flag
- * @param p8 the internals memory
+ * @param p8 the parameters
+ * @param p9 the parameters count
+ * @param p10 the priority
+ * @param p11 the signal id
  */
-void loop(const void* p0, const void* p1, const void* p2, const void* p3, const void* p4,
-    const void* p5, const void* p6, void* p7, void* p8) {
+void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+    void* p7, const void* p8, const void* p9, const void* p10, const void* p11) {
 
+    log_message_debug("\n\n");
     log_message_debug("Loop program flow.");
 
     // The break flag abstraction.
@@ -94,20 +99,20 @@ void loop(const void* p0, const void* p1, const void* p2, const void* p3, const 
     void** mds = POINTER_NULL_POINTER;
 
     // Get break flag.
-    get_real_compound_element_by_name(p0, p1,
+    get_real_compound_element_by_name(p8, p9,
         (void*) BREAK_FLAG_NAME, (void*) BREAK_FLAG_NAME_COUNT,
         (void*) &bfa, (void*) &bfac, (void*) &bfas,
         (void*) &bfm, (void*) &bfmc, (void*) &bfms,
         (void*) &bfd, (void*) &bfdc, (void*) &bfds,
-        p2, p3);
+        p1, p2);
 
     // Get model.
-    get_real_compound_element_by_name(p0, p1,
+    get_real_compound_element_by_name(p8, p9,
         (void*) LOOP_MODEL_NAME, (void*) LOOP_MODEL_NAME_COUNT,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
-        p2, p3);
+        p1, p2);
 
     // Check break flag.
     if ((bfa != POINTER_NULL_POINTER)
@@ -167,8 +172,9 @@ void loop(const void* p0, const void* p1, const void* p2, const void* p3, const 
 
                     // Send the loop model as new signal,
                     // as long as the break flag is false (not set).
-                    handle(*ma, *mac, *mm, *mmc, *md, *mdc,
-                        p5, p6, p7, p8, (void*) &x);
+                    handle(p0, p1, p2, p3, p4, p5, p6,
+                        p7, *ma, *mac, *mm, *mmc, *md, *mdc,
+                        p10, p11, (void*) &x);
                 }
             }
         }

@@ -20,29 +20,19 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-22 10:03:46 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MANAGER_SOURCE
 #define MANAGER_SOURCE
 
-#include "../applicator/create.c"
-#include "../applicator/destroy.c"
-//?? #include "../controller/internals_memory_manager.c"
-#include "../controller/manager/knowledge_memory_manager.c"
-#include "../controller/manager/signal_memory_manager.c"
 #include "../controller/checker.c"
 #include "../globals/constants/abstraction_constants.c"
 #include "../globals/constants/channel_constants.c"
-#include "../globals/constants/constant.c"
-#include "../globals/constants/integer_constants.c"
 #include "../globals/constants/log_constants.c"
-#include "../globals/constants/structure_constants.c"
 #include "../globals/logger/logger.c"
 #include "../globals/variables/variables.c"
-#include "../memoriser/array.c"
-#include "../memoriser/creator/integer_creator.c"
 
 /**
  * Manages the system.
@@ -68,12 +58,13 @@
  */
 void manage(const void* p0, const void* p1) {
 
+    log_message_debug("\n\n");
     log_message_debug("Manage system.");
 
     // The internal memory.
     void* i = NULL_POINTER;
-    int ic = INTERNAL_MEMORY_ELEMENTS_COUNT;
-    int is = INTERNAL_MEMORY_ELEMENTS_COUNT;
+    int ic = *INTERNAL_MEMORY_ELEMENTS_COUNT;
+    int is = *INTERNAL_MEMORY_ELEMENTS_COUNT;
     // The knowledge memory.
     void* k = NULL_POINTER;
     int kc = 0;
@@ -90,6 +81,7 @@ void manage(const void* p0, const void* p1) {
     // Create signal memory.
     create((void*) &s, (void*) &ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
+    log_message_debug("\n\n");
     log_message_debug("Create startup model.");
 
     // The startup model abstraction, model, details.
@@ -131,6 +123,7 @@ void manage(const void* p0, const void* p1) {
     // CAUTION! Do not create startup model details!
     // It is not needed for the startup signal.
 
+    log_message_debug("\n\n");
     log_message_debug("Add startup model as signal to signal memory.");
 
     // The signal id.
@@ -149,16 +142,16 @@ void manage(const void* p0, const void* p1) {
 
     // Add startup signal to signal memory.
     set_signal(s, (void*) &sc, (void*) &ss,
-        ma, (void*) mac,
-        mm, (void*) mmc,
-        md, (void*) mdc,
+        ma, (void*) mac, mm, (void*) mmc, md, (void*) mdc,
         (void*) NORMAL_PRIORITY, (void*) id);
 
     // The system is now started up and complete so that a loop
     // can be entered, checking for signals (events/ interrupts)
     // which are stored/ found in the signal memory.
     // The loop is left as soon as its shutdown flag is set.
-    check(p0);
+    check((void*) i,
+        (void*) k, (void*) &kc, (void*) &ks,
+        (void*) s, (void*) &sc, (void*) &ss);
 
     // Destroy signal memory.
     destroy((void*) &s, (void*) &ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
