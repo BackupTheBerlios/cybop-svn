@@ -1,5 +1,5 @@
 /*
- * $RCSfile: pointer_creator.c,v $
+ * $RCSfile: time_allocator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * This file contains the functionality to:
+ * - create a time model in memory
+ *
+ * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef POINTER_CREATOR_SOURCE
-#define POINTER_CREATOR_SOURCE
+#ifndef TIME_CREATOR_SOURCE
+#define TIME_CREATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -33,30 +36,30 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the pointer.
+ * Creates the time.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void create_pointer(void* p0) {
+void create_time(void* p0, const void* p1) {
 
-    log_message_debug("Create pointer.");
+    log_message_debug("Create time.");
 
-    // Create pointer array containing the actual pointer value.
-    create_array(p0, (void*) POINTER_COUNT, (void*) POINTER_ARRAY);
+    create_array(p0, (void*) TIME_COUNT, (void*) INTEGER_ARRAY);
 }
 
 /**
- * Destroys the pointer.
+ * Destroys the time.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void destroy_pointer(void* p0) {
+void destroy_time(void* p0, const void* p1) {
 
-    log_message_debug("Destroy pointer.");
+    log_message_debug("Destroy time.");
 
-    // Destroy pointer array containing the actual pointer value.
-    destroy_array(p0, (void*) POINTER_COUNT, (void*) POINTER_ARRAY);
+    destroy_array(p0, (void*) TIME_COUNT, (void*) INTEGER_ARRAY);
 }
 
-/* POINTER_CREATOR_SOURCE */
+/* TIME_CREATOR_SOURCE */
 #endif

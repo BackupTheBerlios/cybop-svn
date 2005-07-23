@@ -1,5 +1,5 @@
 /*
- * $RCSfile: signal_memory_creator.c,v $
+ * $RCSfile: signal_memory_allocator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

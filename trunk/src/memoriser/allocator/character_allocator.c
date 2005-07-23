@@ -1,5 +1,5 @@
 /*
- * $RCSfile: fraction_creator.c,v $
+ * $RCSfile: character_allocator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,15 +20,12 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file contains the functionality to:
- * - create a fraction model in memory
- *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef FRACTION_CREATOR_SOURCE
-#define FRACTION_CREATOR_SOURCE
+#ifndef CHARACTER_CREATOR_SOURCE
+#define CHARACTER_CREATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -36,32 +33,30 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the fraction.
+ * Creates the character.
  *
  * @param p0 the model (Hand over as reference!)
- * @param p1 the model size
  */
-void create_fraction(void* p0, const void* p1) {
+void create_character(void* p0) {
 
-    log_message_debug("Create fraction.");
+    log_message_debug("Create character.");
 
-    // Create fraction.
-    create_array(p0, (void*) FRACTION_COUNT, (void*) INTEGER_ARRAY);
+    // Create character array containing the actual character value.
+    create_array(p0, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
 }
 
 /**
- * Destroys the fraction.
+ * Destroys the character.
  *
  * @param p0 the model (Hand over as reference!)
- * @param p1 the model size
  */
-void destroy_fraction(void* p0, const void* p1) {
+void destroy_character(void* p0) {
 
-    log_message_debug("Destroy fraction.");
+    log_message_debug("Destroy character.");
 
-    // Destroy fraction.
-    destroy_array(p0, (void*) FRACTION_COUNT, (void*) INTEGER_ARRAY);
+    // Destroy character array containing the actual character value.
+    destroy_array(p0, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
 }
 
-/* FRACTION_CREATOR_SOURCE */
+/* CHARACTER_CREATOR_SOURCE */
 #endif

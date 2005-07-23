@@ -1,5 +1,5 @@
 /*
- * $RCSfile: x_windows_creator.c,v $
+ * $RCSfile: pointer_allocator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,38 +20,43 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-08 15:45:14 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
- * @description
- *
- * A session (display) manager shows a graphical user login,
- * in which it offers a list of window managers to chose from.
- *
- * A window manager cares about all windows displayed on a screen.
- * This includes the resizing, moving, stacking or tiling of windows.
- *
- * CYBOI aims to become both at the same time,
- * a session- (display-) as well as a window manager.
  */
 
-#ifndef X_WINDOW_SYSTEM_CREATOR_SOURCE
-#define X_WINDOW_SYSTEM_CREATOR_SOURCE
+#ifndef POINTER_CREATOR_SOURCE
+#define POINTER_CREATOR_SOURCE
+
+#include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/structure_constants.c"
+#include "../../globals/logger/logger.c"
+#include "../../memoriser/array.c"
 
 /**
- * Creates an x window system window.
+ * Creates the pointer.
  *
- * @param p0 the internals memory
+ * @param p0 the model (Hand over as reference!)
  */
-void create_x_window_system_window(void* p0) {
+void create_pointer(void* p0) {
+
+    log_message_debug("Create pointer.");
+
+    // Create pointer array containing the actual pointer value.
+    create_array(p0, (void*) POINTER_COUNT, (void*) POINTER_ARRAY);
 }
 
 /**
- * Destroys the x window system window.
+ * Destroys the pointer.
  *
- * @param p0 the internals memory
+ * @param p0 the model (Hand over as reference!)
  */
-void destroy_x_window_system_window(void* p0) {
+void destroy_pointer(void* p0) {
+
+    log_message_debug("Destroy pointer.");
+
+    // Destroy pointer array containing the actual pointer value.
+    destroy_array(p0, (void*) POINTER_COUNT, (void*) POINTER_ARRAY);
 }
 
-/* X_WINDOW_SYSTEM_CREATOR_SOURCE */
+/* POINTER_CREATOR_SOURCE */
 #endif

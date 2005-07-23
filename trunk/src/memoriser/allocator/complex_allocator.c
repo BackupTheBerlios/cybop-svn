@@ -1,5 +1,5 @@
 /*
- * $RCSfile: double_creator.c,v $
+ * $RCSfile: complex_allocator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * This file contains the functionality to:
+ * - create a complex model in memory
+ *
+ * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DOUBLE_CREATOR_SOURCE
-#define DOUBLE_CREATOR_SOURCE
+#ifndef COMPLEX_CREATOR_SOURCE
+#define COMPLEX_CREATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -33,30 +36,32 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the double.
+ * Creates the complex.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void create_double(void* p0) {
+void create_complex(void* p0, const void* p1) {
 
-    log_message_debug("Create double.");
+    log_message_debug("Create complex.");
 
-    // Create double array containing the actual double value.
-    create_array(p0, (void*) DOUBLE_COUNT, (void*) DOUBLE_ARRAY);
+    // Create complex.
+    create_array(p0, (void*) COMPLEX_COUNT, (void*) DOUBLE_ARRAY);
 }
 
 /**
- * Destroys the double.
+ * Destroys the complex.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void destroy_double(void* p0) {
+void destroy_complex(void* p0, const void* p1) {
 
-    log_message_debug("Destroy double.");
+    log_message_debug("Destroy complex.");
 
-    // Destroy double array containing the actual double value.
-    destroy_array(p0, (void*) DOUBLE_COUNT, (void*) DOUBLE_ARRAY);
+    // Destroy complex.
+    destroy_array(p0, (void*) COMPLEX_COUNT, (void*) DOUBLE_ARRAY);
 }
 
-/* DOUBLE_CREATOR_SOURCE */
+/* COMPLEX_CREATOR_SOURCE */
 #endif

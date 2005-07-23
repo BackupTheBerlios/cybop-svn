@@ -1,5 +1,5 @@
 /*
- * $RCSfile: unsigned_long_creator.c,v $
+ * $RCSfile: vector_allocator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * This file contains the functionality to:
+ * - create a vector model in memory
+ *
+ * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef UNSIGNED_LONG_CREATOR_SOURCE
-#define UNSIGNED_LONG_CREATOR_SOURCE
+#ifndef VECTOR_CREATOR_SOURCE
+#define VECTOR_CREATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -33,30 +36,37 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the unsigned long.
+ * Creates the vector.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void create_unsigned_long(void* p0) {
+void create_vector(void* p0, const void* p1) {
 
-    log_message_debug("Create unsigned long.");
+    log_message_debug("Create vector.");
 
-    // Create unsigned long array containing the actual value.
-    create_array(p0, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ARRAY);
+    //?? OPEN QUESTION:
+    //?? Should vector always be 3-dimensional,
+    //?? or better of dynamic size?
+    //?? If dynamic, then use p1 as size.
+
+    // Create vector.
+    create_array(p0, (void*) VECTOR_COUNT, (void*) INTEGER_ARRAY);
 }
 
 /**
- * Destroys the unsigned long.
+ * Destroys the vector.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void destroy_unsigned_long(void* p0) {
+void destroy_vector(void* p0, const void* p1) {
 
-    log_message_debug("Destroy unsigned long.");
+    log_message_debug("Destroy vector.");
 
-    // Destroy unsigned long array containing the actual value.
-    destroy_array(p0, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ARRAY);
+    // Destroy vector.
+    destroy_array(p0, (void*) VECTOR_COUNT, (void*) INTEGER_ARRAY);
 }
 
-/* UNSIGNED_LONG_CREATOR_SOURCE */
+/* VECTOR_CREATOR_SOURCE */
 #endif

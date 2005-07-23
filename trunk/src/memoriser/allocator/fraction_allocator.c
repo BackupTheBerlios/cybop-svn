@@ -1,5 +1,5 @@
 /*
- * $RCSfile: vector_creator.c,v $
+ * $RCSfile: fraction_allocator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -21,14 +21,14 @@
  * - Cybernetics Oriented Programming -
  *
  * This file contains the functionality to:
- * - create a vector model in memory
+ * - create a fraction model in memory
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef VECTOR_CREATOR_SOURCE
-#define VECTOR_CREATOR_SOURCE
+#ifndef FRACTION_CREATOR_SOURCE
+#define FRACTION_CREATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -36,37 +36,32 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the vector.
+ * Creates the fraction.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void create_vector(void* p0, const void* p1) {
+void create_fraction(void* p0, const void* p1) {
 
-    log_message_debug("Create vector.");
+    log_message_debug("Create fraction.");
 
-    //?? OPEN QUESTION:
-    //?? Should vector always be 3-dimensional,
-    //?? or better of dynamic size?
-    //?? If dynamic, then use p1 as size.
-
-    // Create vector.
-    create_array(p0, (void*) VECTOR_COUNT, (void*) INTEGER_ARRAY);
+    // Create fraction.
+    create_array(p0, (void*) FRACTION_COUNT, (void*) INTEGER_ARRAY);
 }
 
 /**
- * Destroys the vector.
+ * Destroys the fraction.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void destroy_vector(void* p0, const void* p1) {
+void destroy_fraction(void* p0, const void* p1) {
 
-    log_message_debug("Destroy vector.");
+    log_message_debug("Destroy fraction.");
 
-    // Destroy vector.
-    destroy_array(p0, (void*) VECTOR_COUNT, (void*) INTEGER_ARRAY);
+    // Destroy fraction.
+    destroy_array(p0, (void*) FRACTION_COUNT, (void*) INTEGER_ARRAY);
 }
 
-/* VECTOR_CREATOR_SOURCE */
+/* FRACTION_CREATOR_SOURCE */
 #endif

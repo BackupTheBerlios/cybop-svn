@@ -1,5 +1,5 @@
 /*
- * $RCSfile: string_creator.c,v $
+ * $RCSfile: x_windows_allocator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,46 +20,38 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * This file contains the functionality to:
- * - create a string model in memory
- *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
+ * @description
+ *
+ * A session (display) manager shows a graphical user login,
+ * in which it offers a list of window managers to chose from.
+ *
+ * A window manager cares about all windows displayed on a screen.
+ * This includes the resizing, moving, stacking or tiling of windows.
+ *
+ * CYBOI aims to become both at the same time,
+ * a session- (display-) as well as a window manager.
  */
 
-#ifndef STRING_CREATOR_SOURCE
-#define STRING_CREATOR_SOURCE
-
-#include "../../globals/constants/log_constants.c"
-#include "../../globals/constants/structure_constants.c"
-#include "../../globals/logger/logger.c"
-#include "../../memoriser/array.c"
+#ifndef X_WINDOW_SYSTEM_CREATOR_SOURCE
+#define X_WINDOW_SYSTEM_CREATOR_SOURCE
 
 /**
- * Creates the string.
+ * Creates an x window system window.
  *
- * @param p0 the model (Hand over as reference!)
- * @param p1 the model size
+ * @param p0 the internals memory
  */
-void create_string(void* p0, const void* p1) {
-
-    log_message_debug("Create string.");
-
-    create_array(p0, p1, (void*) CHARACTER_ARRAY);
+void create_x_window_system_window(void* p0) {
 }
 
 /**
- * Destroys the string.
+ * Destroys the x window system window.
  *
- * @param p0 the model (Hand over as reference!)
- * @param p1 the model size
+ * @param p0 the internals memory
  */
-void destroy_string(void* p0, const void* p1) {
-
-    log_message_debug("Destroy string.");
-
-    destroy_array(p0, p1, (void*) CHARACTER_ARRAY);
+void destroy_x_window_system_window(void* p0) {
 }
 
-/* STRING_CREATOR_SOURCE */
+/* X_WINDOW_SYSTEM_CREATOR_SOURCE */
 #endif

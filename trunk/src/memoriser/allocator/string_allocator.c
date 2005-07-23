@@ -1,5 +1,5 @@
 /*
- * $RCSfile: character_creator.c,v $
+ * $RCSfile: string_allocator.c,v $
  *
  * Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
  *
@@ -20,12 +20,15 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * This file contains the functionality to:
+ * - create a string model in memory
+ *
+ * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CHARACTER_CREATOR_SOURCE
-#define CHARACTER_CREATOR_SOURCE
+#ifndef STRING_CREATOR_SOURCE
+#define STRING_CREATOR_SOURCE
 
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
@@ -33,30 +36,30 @@
 #include "../../memoriser/array.c"
 
 /**
- * Creates the character.
+ * Creates the string.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void create_character(void* p0) {
+void create_string(void* p0, const void* p1) {
 
-    log_message_debug("Create character.");
+    log_message_debug("Create string.");
 
-    // Create character array containing the actual character value.
-    create_array(p0, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+    create_array(p0, p1, (void*) CHARACTER_ARRAY);
 }
 
 /**
- * Destroys the character.
+ * Destroys the string.
  *
  * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
  */
-void destroy_character(void* p0) {
+void destroy_string(void* p0, const void* p1) {
 
-    log_message_debug("Destroy character.");
+    log_message_debug("Destroy string.");
 
-    // Destroy character array containing the actual character value.
-    destroy_array(p0, (void*) CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
+    destroy_array(p0, p1, (void*) CHARACTER_ARRAY);
 }
 
-/* CHARACTER_CREATOR_SOURCE */
+/* STRING_CREATOR_SOURCE */
 #endif
