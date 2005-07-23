@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,8 +36,8 @@
 #include "../../globals/constants/name_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
-#include "../../memoriser/creator.c"
-#include "../../memoriser/creator/integer_creator.c"
+#include "../../memoriser/allocator.c"
+#include "../../memoriser/allocator/integer_allocator.c"
 
 //
 // Forward declarations.
@@ -56,7 +56,7 @@
  * @param p7 the source channel
  * @param p8 the source channel count
  */
-void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
+void create(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8);
 
 void set_compound_element_by_name(void* p0, void* p1, void* p2,
@@ -363,11 +363,11 @@ void decode_cybol_node(void* p0, void* p1, void* p2, const void* p3, const void*
 //??        fprintf(stderr, "smc: %i\n", *((int*) smc));
 
                         // Create destination name.
-                        create_integer((void*) &dnc);
+                        allocate_integer((void*) &dnc);
                         *dnc = 0;
-                        create_integer((void*) &dns);
+                        allocate_integer((void*) &dns);
                         *dns = 0;
-                        create_model((void*) &dn, (void*) dnc, (void*) dns,
+                        create((void*) &dn, (void*) dnc, (void*) dns,
                             sn, (void*) &snc,
                             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
                             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -376,21 +376,21 @@ void decode_cybol_node(void* p0, void* p1, void* p2, const void* p3, const void*
                         // since that is only needed temporarily for model loading.
 
                         // Create destination abstraction.
-                        create_integer((void*) &dac);
+                        allocate_integer((void*) &dac);
                         *dac = 0;
-                        create_integer((void*) &das);
+                        allocate_integer((void*) &das);
                         *das = 0;
-                        create_model((void*) &da, (void*) dac, (void*) das,
+                        create((void*) &da, (void*) dac, (void*) das,
                             sa, (void*) &sac,
                             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
                             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
                         // Create destination model.
-                        create_integer((void*) &dmc);
+                        allocate_integer((void*) &dmc);
                         *dmc = 0;
-                        create_integer((void*) &dms);
+                        allocate_integer((void*) &dms);
                         *dms = 0;
-                        create_model((void*) &dm, (void*) dmc, (void*) dms,
+                        create((void*) &dm, (void*) dmc, (void*) dms,
                             sm, (void*) &smc,
                             sa, (void*) &sac,
                             sc, (void*) &scc);
@@ -399,11 +399,11 @@ void decode_cybol_node(void* p0, void* p1, void* p2, const void* p3, const void*
                         if (c->children != NULL_POINTER) {
 
                             // Create details model.
-                            create_integer((void*) &ddc);
+                            allocate_integer((void*) &ddc);
                             *ddc = 0;
-                            create_integer((void*) &dds);
+                            allocate_integer((void*) &dds);
                             *dds = 0;
-                            create((void*) &dd, (void*) dds,
+                            allocate((void*) &dd, (void*) dds,
                                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
                             // Decode child node children.

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-22 22:42:51 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -51,7 +51,7 @@
 #include "../../memoriser/accessor/internal_memory_accessor.c"
 #include "../../memoriser/accessor/signal_memory_accessor.c"
 #include "../../memoriser/array.c"
-#include "../../memoriser/creator.c"
+#include "../../memoriser/allocator.c"
 
 //
 // Forward declarations.
@@ -70,7 +70,7 @@
  * @param p7 the source channel
  * @param p8 the source channel count
  */
-void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
+void create(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8);
 
 /**
@@ -647,31 +647,31 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         int* sds = INTEGER_NULL_POINTER;
 
         // Create signal abstraction.
-        create_integer( &sac );
+        allocate_integer( &sac );
         *sac = 0;
-        create_integer( &sas );
+        allocate_integer( &sas );
         *sas = 0;
-        create_model((void*) &sa, (void*) sac, (void*) sas,
+        create((void*) &sa, (void*) sac, (void*) sas,
             (void*) OPERATION_ABSTRACTION, (void*) OPERATION_ABSTRACTION_COUNT,
             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         // Create signal model.
-        create_integer( &smc );
+        allocate_integer( &smc );
         *smc = 0;
-        create_integer( &sms );
+        allocate_integer( &sms );
         *sms = 0;
-        create_model((void*) &sm, (void*) smc, (void*) sms,
+        create((void*) &sm, (void*) smc, (void*) sms,
             (void*) COPY_MODEL, (void*) COPY_MODEL_COUNT,
             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         // Create signal detail.
-        create_integer( &sdc );
+        allocate_integer( &sdc );
         *sdc = 0;
-        create_integer( &sds );
+        allocate_integer( &sds );
         *sds = 0;
-        create_model((void*) &sd, (void*) sdc, (void*) sds,
+        create((void*) &sd, (void*) sdc, (void*) sds,
             (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
             (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -702,32 +702,32 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         int* pdds = INTEGER_NULL_POINTER;
 
         // Create property destination name.
-        create_integer( &pdnc );
+        allocate_integer( &pdnc );
         *pdnc = 0;
-        create_integer( &pdns );
+        allocate_integer( &pdns );
         *pdns = 0;
-        create_model((void*) &pdn, (void*) pdnc, (void*) pdns,
+        create((void*) &pdn, (void*) pdnc, (void*) pdns,
             (void*) DESTINATION_NAME,
             (void*) DESTINATION_NAME_COUNT,
             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         // Create property destination abstraction.
-        create_integer( &pdac );
+        allocate_integer( &pdac );
         *pdac = 0;
-        create_integer( &pdas );
+        allocate_integer( &pdas );
         *pdas = 0;
-        create_model((void*) &pda, (void*) pdac, (void*) pdas,
+        create((void*) &pda, (void*) pdac, (void*) pdas,
             (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT,
             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         // Create property destination model.
-        create_integer( &pdmc );
+        allocate_integer( &pdmc );
         *pdmc = 0;
-        create_integer( &pdms );
+        allocate_integer( &pdms );
         *pdms = 0;
-        create_model((void*) &pdm, (void*) pdmc, (void*) pdms,
+        create((void*) &pdm, (void*) pdmc, (void*) pdms,
             (void*) dest, (void*) dest_count,
             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -760,11 +760,11 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
         int* psds = INTEGER_NULL_POINTER;
 
         // Create property source name.
-        create_integer( &psnc );
+        allocate_integer( &psnc );
         *psnc = 0;
-        create_integer( &psns );
+        allocate_integer( &psns );
         *psns = 0;
-        create_model((void*) &psn, (void*) psnc, (void*) psns,
+        create((void*) &psn, (void*) psnc, (void*) psns,
             (void*) SOURCE_NAME,
             (void*) SOURCE_NAME_COUNT,
             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
@@ -772,22 +772,22 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
 
 
         // Create property source abstraction.
-        create_integer( &psac );
+        allocate_integer( &psac );
         *psac = 0;
-        create_integer( &psas );
+        allocate_integer( &psas );
         *psas = 0;
-        create_model((void*) &psa, (void*) psac, (void*) psas,
+        create((void*) &psa, (void*) psac, (void*) psas,
             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         // Create property source model.
         // todo: expansion for other types
-        create_integer( &psmc );
+        allocate_integer( &psmc );
         *psmc = 0;
-        create_integer( &psms );
+        allocate_integer( &psms );
         *psms = 0;
-        create_model((void*) &psm, (void*) psmc, (void*) psms,
+        create((void*) &psm, (void*) psmc, (void*) psms,
             (void*) source, (void*) source_count,
             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
@@ -828,7 +828,7 @@ void set_signal_for_parameter(void* source, int* source_count, void* dest, int* 
 
         // The signal id.
         int* id = INTEGER_NULL_POINTER;
-        create_integer( &id);
+        allocate_integer( &id);
         *id = 0;
         get_new_signal_id(*m, *mc, (void*) id);
 
@@ -872,17 +872,17 @@ void set_signals_for_all_parameters(void* p0, int* p1, void* p2) {
         int* value_count = INTEGER_NULL_POINTER;
         int* value_size = INTEGER_NULL_POINTER;
 
-        create_integer(&param_count);
+        allocate_integer(&param_count);
         *param_count = *p1;
-        create_integer(&param_size);
+        allocate_integer(&param_size);
         *param_size = *p1;
-        create_string(&param, param_size);
+        allocate_string(&param, param_size);
 
-        create_integer(&value_count);
+        allocate_integer(&value_count);
         *value_count = *p1;
-        create_integer(&value_size);
+        allocate_integer(&value_size);
         *value_size = *p1;
-        create_string(&value, value_size);
+        allocate_string(&value, value_size);
 
         // The comparison result.
         int r = 0;
@@ -1002,7 +1002,7 @@ void handle_tcp_socket_request(void* p0, void* p1) {
         int max_msg_count = 2048;
 
         // Create message.
-        create_array((void*) &msg, (void*) &max_msg_count, (void*) CHARACTER_ARRAY);
+        allocate_array((void*) &msg, (void*) &max_msg_count, (void*) CHARACTER_ARRAY);
 
         // Receive message from client.
         int msg_count = recv(*cs, msg, max_msg_count, 0);
@@ -1014,7 +1014,7 @@ void handle_tcp_socket_request(void* p0, void* p1) {
             int url_basename_count = 0;
 
             // Create url basename.
-            create_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
+            allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) CHARACTER_ARRAY);
 
             // Get url base name.
             get_url_basename_from_request(msg, &msg_count, &url_basename, &url_basename_count);
@@ -1024,7 +1024,7 @@ void handle_tcp_socket_request(void* p0, void* p1) {
             int param_count = 0;
 
             // Create paramater.
-            create_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
+            allocate_array((void*) &param, (void*) &param_count, (void*) CHARACTER_ARRAY);
 
             // Get parameters.
             get_parameter_from_request(msg, &msg_count, &param, &param_count);
@@ -1051,57 +1051,57 @@ void handle_tcp_socket_request(void* p0, void* p1) {
                 char c_sc[] = "file";
                 char* sc = &c_sc[0];
                 int* scc = INTEGER_NULL_POINTER;
-                create_integer(&scc);
+                allocate_integer(&scc);
                 *scc = 4;
 
                 // The source abstraction.
                 char c_sa[] = "cybol";
                 char* sa = &c_sa[0];
                 int* sac = INTEGER_NULL_POINTER;
-                create_integer(&sac);
+                allocate_integer(&sac);
                 *sac = 5;
 
                 // The source model.
                 char* sm = url_basename;
                 int* smc = INTEGER_NULL_POINTER;
-                create_integer(&smc);
+                allocate_integer(&smc);
                 *smc = url_basename_count;
 
                 // The destination abstraction.
                 void* da = NULL_POINTER;
                 int* dac = INTEGER_NULL_POINTER;
-                create_integer(&dac);
+                allocate_integer(&dac);
                 *dac = 0;
                 int* das = INTEGER_NULL_POINTER;
-                create_integer(&das);
+                allocate_integer(&das);
                 *das = 0;
 
                 // The destination model.
                 void* dm = NULL_POINTER;
                 int* dmc = INTEGER_NULL_POINTER;
-                create_integer(&dmc);
+                allocate_integer(&dmc);
                 *dmc = 0;
                 int* dms = INTEGER_NULL_POINTER;
-                create_integer(&dms);
+                allocate_integer(&dms);
                 *dms = 0;
 
                 // The destination details.
                 void* dd = NULL_POINTER;
                 int* ddc = INTEGER_NULL_POINTER;
-                create_integer(&ddc);
+                allocate_integer(&ddc);
                 *ddc = 0;
                 int* dds = INTEGER_NULL_POINTER;
-                create_integer(&dds);
+                allocate_integer(&dds);
                 *dds = 0;
 
                 // Create destination abstraction.
-                create_model((void*) &da, (void*) dac, (void*) das,
+                create((void*) &da, (void*) dac, (void*) das,
                     (void*) sa, (void*) sac,
                     (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
                     (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
                 // Create destination model.
-                create_model((void*) &dm, (void*) dmc, (void*) dms,
+                create((void*) &dm, (void*) dmc, (void*) dms,
                     (void*) sm, (void*) smc,
                     (void*) sa, (void*) sac,
                     (void*) sc, (void*) scc);
@@ -1124,7 +1124,7 @@ void handle_tcp_socket_request(void* p0, void* p1) {
 
                 // The signal id.
                 int* id = INTEGER_NULL_POINTER;
-                create_integer( &id);
+                allocate_integer( &id);
                 *id = 0;
                 get_new_signal_id(*m, *mc, (void*) id);
 

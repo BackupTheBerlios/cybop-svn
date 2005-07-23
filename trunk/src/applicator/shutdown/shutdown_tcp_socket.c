@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -32,7 +32,7 @@
 #include "../../globals/logger/logger.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/array.c"
-#include "../../memoriser/creator/integer_creator.c"
+#include "../../memoriser/allocator/integer_allocator.c"
 
 /**
  * Shuts down the tcp socket service.
@@ -85,19 +85,19 @@ void shutdown_tcp_socket(void* p0, const void* p1, const void* p2, const void* p
         close(**s);
 
         // Destroy tcp server socket.
-        destroy_integer(s);
+        deallocate_integer(s);
         // Destroy tcp client sockets.
-        destroy_array((void*) cs, (void*) css, (void*) INTEGER_ARRAY);
-        destroy_integer(csc);
-        destroy_integer(css);
+        deallocate_array((void*) cs, (void*) css, (void*) INTEGER_ARRAY);
+        deallocate_integer(csc);
+        deallocate_integer(css);
         // Destroy activation flag.
-        destroy_integer(af);
+        deallocate_integer(af);
         // Destroy blocking flag.
-        destroy_integer(bf);
+        deallocate_integer(bf);
         // Destroy tcp signal ids.
-        destroy_array((void*) id, (void*) ids, (void*) INTEGER_ARRAY);
-        destroy_integer(idc);
-        destroy_integer(ids);
+        deallocate_array((void*) id, (void*) ids, (void*) INTEGER_ARRAY);
+        deallocate_integer(idc);
+        deallocate_integer(ids);
 
     } else {
 

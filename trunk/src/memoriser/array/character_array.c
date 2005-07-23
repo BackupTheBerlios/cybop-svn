@@ -38,7 +38,7 @@
  *
  * Array elements are accessed over their index (array base pointer + index).
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,7 +56,7 @@
  * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  */
-void create_character_array(void* p0, const void* p1) {
+void allocate_character_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 
@@ -94,7 +94,7 @@ void create_character_array(void* p0, const void* p1) {
  * @param p0 the array (Hand over as reference!)
  * @param p1 the size
  */
-void destroy_character_array(void* p0, const void* p1) {
+void deallocate_character_array(void* p0, const void* p1) {
 
     if (p1 != NULL_POINTER) {
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,12 +37,12 @@
  *
  * @param p0 the model (Hand over as reference!)
  */
-void create_unsigned_long(void* p0) {
+void allocate_unsigned_long(void* p0) {
 
     log_message_debug("Create unsigned long.");
 
     // Create unsigned long array containing the actual value.
-    create_array(p0, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ARRAY);
+    allocate_array(p0, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ARRAY);
 }
 
 /**
@@ -50,12 +50,12 @@ void create_unsigned_long(void* p0) {
  *
  * @param p0 the model (Hand over as reference!)
  */
-void destroy_unsigned_long(void* p0) {
+void deallocate_unsigned_long(void* p0) {
 
     log_message_debug("Destroy unsigned long.");
 
     // Destroy unsigned long array containing the actual value.
-    destroy_array(p0, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ARRAY);
+    deallocate_array(p0, (void*) UNSIGNED_LONG_COUNT, (void*) UNSIGNED_LONG_ARRAY);
 }
 
 /* UNSIGNED_LONG_CREATOR_SOURCE */

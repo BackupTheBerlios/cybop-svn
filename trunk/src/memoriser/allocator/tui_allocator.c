@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
  * @param p0 the textual user interface (Hand over as reference!)
  * @param p1 the textual user interface size
  */
-void create_tui(void* p0, const void* p1) {
+void allocate_tui(void* p0, const void* p1) {
 
 /*??
     if (p0 != NULL_POINTER) {
@@ -52,13 +52,13 @@ void create_tui(void* p0, const void* p1) {
         log_message_debug("Create textual user interface.");
 
         // Create textual user interface.
-        create_array(p0, (void*) TUI_COUNT, (void*) POINTER_ARRAY);
+        allocate_array(p0, (void*) TUI_COUNT, (void*) POINTER_ARRAY);
 
         // The panels.
         void* p = NULL_POINTER;
 
         // Create panels.
-        create_array((void*) &p, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &p, p1, (void*) POINTER_ARRAY);
 
         // Set panels.
         // The p0 parameter needs to be dereferenced since it is handed over
@@ -78,7 +78,7 @@ void create_tui(void* p0, const void* p1) {
  * @param p0 the textual user interface (Hand over as reference!)
  * @param p1 the textual user interface size
  */
-void destroy_tui(void* p0, const void* p1) {
+void deallocate_tui(void* p0, const void* p1) {
 
 /*??
     if (p0 != NULL_POINTER) {
@@ -105,10 +105,10 @@ void destroy_tui(void* p0, const void* p1) {
         // CAUTION! Do NOT hand over as reference!
         // The variables are of type void**.
         // The expression (&*variable) is the same like (variable).
-        destroy_array((void*) p, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) p, p1, (void*) POINTER_ARRAY);
 
         // Destroy signal memory.
-        destroy_array(p0, (void*) TUI_COUNT, (void*) POINTER_ARRAY);
+        deallocate_array(p0, (void*) TUI_COUNT, (void*) POINTER_ARRAY);
 
     } else {
 

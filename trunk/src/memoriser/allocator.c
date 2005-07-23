@@ -24,7 +24,7 @@
  * - create a model in memory
  * - destroy a model in memory
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,18 +35,18 @@
 #include "../globals/constants/log_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/array.c"
-#include "../memoriser/creator/complex_creator.c"
-#include "../memoriser/creator/compound_creator.c"
-#include "../memoriser/creator/double_creator.c"
-#include "../memoriser/creator/fraction_creator.c"
-#include "../memoriser/creator/integer_creator.c"
-#include "../memoriser/creator/internal_memory_creator.c"
-#include "../memoriser/creator/signal_memory_creator.c"
-#include "../memoriser/creator/string_creator.c"
-#include "../memoriser/creator/time_creator.c"
-#include "../memoriser/creator/vector_creator.c"
-#include "../memoriser/creator/xml_node_creator.c"
-#include "../memoriser/creator/xml_property_creator.c"
+#include "../memoriser/allocator/complex_allocator.c"
+#include "../memoriser/allocator/compound_allocator.c"
+#include "../memoriser/allocator/double_allocator.c"
+#include "../memoriser/allocator/fraction_allocator.c"
+#include "../memoriser/allocator/integer_allocator.c"
+#include "../memoriser/allocator/internal_memory_allocator.c"
+#include "../memoriser/allocator/signal_memory_allocator.c"
+#include "../memoriser/allocator/string_allocator.c"
+#include "../memoriser/allocator/time_allocator.c"
+#include "../memoriser/allocator/vector_allocator.c"
+#include "../memoriser/allocator/xml_node_allocator.c"
+#include "../memoriser/allocator/xml_property_allocator.c"
 
 /**
  * Creates the model.
@@ -56,7 +56,7 @@
  * @param p2 the abstraction
  * @param p3 the abstraction count
  */
-void create(void* p0, const void* p1, const void* p2, const void* p3) {
+void allocate(void* p0, const void* p1, const void* p2, const void* p3) {
 
     // The comparison result.
     int r = 0;
@@ -67,7 +67,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_string(p0, p1);
+            allocate_string(p0, p1);
         }
     }
 
@@ -77,7 +77,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_string(p0, p1);
+            allocate_string(p0, p1);
         }
     }
 
@@ -87,7 +87,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_compound(p0, p1);
+            allocate_compound(p0, p1);
         }
     }
 
@@ -97,7 +97,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_string(p0, p1);
+            allocate_string(p0, p1);
         }
     }
 
@@ -107,7 +107,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_string(p0, p1);
+            allocate_string(p0, p1);
         }
     }
 
@@ -117,7 +117,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_integer(p0);
+            allocate_integer(p0);
         }
     }
 
@@ -127,7 +127,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_integer(p0);
+            allocate_integer(p0);
         }
     }
 
@@ -137,7 +137,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_vector(p0, p1);
+            allocate_vector(p0, p1);
         }
     }
 
@@ -147,7 +147,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_double(p0);
+            allocate_double(p0);
         }
     }
 
@@ -157,7 +157,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_fraction(p0, p1);
+            allocate_fraction(p0, p1);
         }
     }
 
@@ -167,7 +167,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_complex(p0, p1);
+            allocate_complex(p0, p1);
         }
     }
 
@@ -177,7 +177,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_time(p0, p1);
+            allocate_time(p0, p1);
         }
     }
 
@@ -187,7 +187,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_xml_node(p0, p1);
+            allocate_xml_node(p0, p1);
         }
     }
 
@@ -197,7 +197,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_xml_node(p0, p1);
+            allocate_xml_node(p0, p1);
         }
     }
 
@@ -207,7 +207,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_signal_memory(p0, p1);
+            allocate_signal_memory(p0, p1);
         }
     }
 
@@ -217,7 +217,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_internal_memory(p0, p1);
+            allocate_internal_memory(p0, p1);
         }
     }
 
@@ -227,7 +227,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            create_string(p0, p1);
+            allocate_string(p0, p1);
         }
     }
 }
@@ -240,7 +240,7 @@ void create(void* p0, const void* p1, const void* p2, const void* p3) {
  * @param p2 the abstraction
  * @param p3 the abstraction count
  */
-void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
+void deallocate(void* p0, const void* p1, const void* p2, const void* p3) {
 
     // The comparison result.
     int r = 0;
@@ -251,7 +251,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_compound(p0, p1);
+            deallocate_compound(p0, p1);
         }
     }
 
@@ -261,7 +261,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_string(p0, p1);
+            deallocate_string(p0, p1);
         }
     }
 
@@ -271,7 +271,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_string(p0, p1);
+            deallocate_string(p0, p1);
         }
     }
 
@@ -281,7 +281,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_integer(p0);
+            deallocate_integer(p0);
         }
     }
 
@@ -291,7 +291,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_integer(p0);
+            deallocate_integer(p0);
         }
     }
 
@@ -301,7 +301,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_vector(p0, p1);
+            deallocate_vector(p0, p1);
         }
     }
 
@@ -311,7 +311,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_double(p0);
+            deallocate_double(p0);
         }
     }
 
@@ -321,7 +321,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_fraction(p0, p1);
+            deallocate_fraction(p0, p1);
         }
     }
 
@@ -331,7 +331,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_complex(p0, p1);
+            deallocate_complex(p0, p1);
         }
     }
 
@@ -341,7 +341,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_time(p0, p1);
+            deallocate_time(p0, p1);
         }
     }
 
@@ -351,7 +351,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_xml_node(p0, p1);
+            deallocate_xml_node(p0, p1);
         }
     }
 
@@ -361,7 +361,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_xml_node(p0, p1);
+            deallocate_xml_node(p0, p1);
         }
     }
 
@@ -371,7 +371,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_signal_memory(p0, p1);
+            deallocate_signal_memory(p0, p1);
         }
     }
 
@@ -381,7 +381,7 @@ void destroy(void* p0, const void* p1, const void* p2, const void* p3) {
 
         if (r == 1) {
 
-            destroy_internal_memory(p0, p1);
+            deallocate_internal_memory(p0, p1);
         }
     }
 }

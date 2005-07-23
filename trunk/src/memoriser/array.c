@@ -49,7 +49,7 @@
  * the array size needs to be given extra here because sizeof will not work.
  * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,7 +72,7 @@
  * @param p1 the size
  * @param p2 the type
  */
-void create_array(void* p0, const void* p1, const void* p2) {
+void allocate_array(void* p0, const void* p1, const void* p2) {
 
     if (p2 != NULL_POINTER) {
 
@@ -80,23 +80,23 @@ void create_array(void* p0, const void* p1, const void* p2) {
 
         if (*t == *POINTER_ARRAY) {
 
-            create_pointer_array(p0, p1);
+            allocate_pointer_array(p0, p1);
 
         } else if (*t == *INTEGER_ARRAY) {
 
-            create_integer_array(p0, p1);
+            allocate_integer_array(p0, p1);
 
         } else if (*t == *UNSIGNED_LONG_ARRAY) {
 
-            create_unsigned_long_array(p0, p1);
+            allocate_unsigned_long_array(p0, p1);
 
         } else if (*t == *DOUBLE_ARRAY) {
 
-            create_double_array(p0, p1);
+            allocate_double_array(p0, p1);
 
         } else if (*t == *CHARACTER_ARRAY) {
 
-            create_character_array(p0, p1);
+            allocate_character_array(p0, p1);
         }
 
     } else {
@@ -112,7 +112,7 @@ void create_array(void* p0, const void* p1, const void* p2) {
  * @param p1 the size
  * @param p2 the type
  */
-void destroy_array(void* p0, const void* p1, const void* p2) {
+void deallocate_array(void* p0, const void* p1, const void* p2) {
 
     if (p2 != NULL_POINTER) {
 
@@ -120,23 +120,23 @@ void destroy_array(void* p0, const void* p1, const void* p2) {
 
         if (*t == *POINTER_ARRAY) {
 
-            destroy_pointer_array(p0, p1);
+            deallocate_pointer_array(p0, p1);
 
         } else if (*t == *INTEGER_ARRAY) {
 
-            destroy_integer_array(p0, p1);
+            deallocate_integer_array(p0, p1);
 
         } else if (*t == *UNSIGNED_LONG_ARRAY) {
 
-            destroy_unsigned_long_array(p0, p1);
+            deallocate_unsigned_long_array(p0, p1);
 
         } else if (*t == *DOUBLE_ARRAY) {
 
-            destroy_double_array(p0, p1);
+            deallocate_double_array(p0, p1);
 
         } else if (*t == *CHARACTER_ARRAY) {
 
-            destroy_character_array(p0, p1);
+            deallocate_character_array(p0, p1);
         }
 
     } else {

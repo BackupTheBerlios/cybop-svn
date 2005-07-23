@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-22 07:29:46 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -39,7 +39,7 @@
 //?? #include <fcntl.h>
 #include <stdio.h>
 #include <termios.h>
-#include "../../memoriser/creator/integer_creator.c"
+#include "../../memoriser/allocator/integer_allocator.c"
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
@@ -72,7 +72,7 @@ void startup_linux_console(void* p0, const void* p1, const void* p2, const void*
         struct termios* tw = NULL_POINTER;
 
         // Create linux console internals.
-//??        create_integer((void*) &t);
+//??        allocate_integer((void*) &t);
         to = (struct termios*) malloc(sizeof(struct termios));
         tw = (struct termios*) malloc(sizeof(struct termios));
 

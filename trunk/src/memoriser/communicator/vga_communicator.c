@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -184,7 +184,7 @@ void read_key_press_x_windows_input(void* p0, void* p1, void* p2) {
             int i = XLookupString((XKeyEvent*) p2, x->text, 10, &(x->key), 0);
 
             // Create signal.
-        //??    void* s = create_dynamics((void*) action, NULL, NULL, (void*) DYNAMICS_COMPOUND);
+        //??    void* s = allocate_dynamics((void*) action, NULL, NULL, (void*) DYNAMICS_COMPOUND);
 
             // Add signal to signal memory.
         //??    add_signal(p0, s, (void*) DYNAMICS_COMPOUND, (void*) &NORMAL_PRIORITY);

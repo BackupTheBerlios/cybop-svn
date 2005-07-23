@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.21 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
+ * @version $Revision: 1.22 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -40,7 +40,7 @@
  *
  * @param p0 the internals memory
  */
-void create_unix_server_socket(void* p0) {
+void allocate_unix_server_socket(void* p0) {
 
     // The unix server socket filename.
     void* f = POINTER_NULL_POINTER;
@@ -56,7 +56,7 @@ void create_unix_server_socket(void* p0) {
         int* s = INTEGER_NULL_POINTER;
 
         // Create unix server socket.
-        create_integer((void*) &s);
+        allocate_integer((void*) &s);
 
         // Open socket and get its number.
         // AF stands for address format. AF_LOCAL is a synonym for AF_UNIX.
@@ -125,7 +125,7 @@ void create_unix_server_socket(void* p0) {
  *
  * @param p0 the internals memory
  */
-void destroy_unix_server_socket(void* p0) {
+void deallocate_unix_server_socket(void* p0) {
 
     // The unix server socket filename.
     void* f = POINTER_NULL_POINTER;
@@ -152,7 +152,7 @@ void destroy_unix_server_socket(void* p0) {
             unlink((char*) f);
 
             // Destroy unix server socket.
-            destroy_integer((void*) &s);
+            deallocate_integer((void*) &s);
 
         } else {
 

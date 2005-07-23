@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a fraction model in memory
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,12 +41,12 @@
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void create_fraction(void* p0, const void* p1) {
+void allocate_fraction(void* p0, const void* p1) {
 
     log_message_debug("Create fraction.");
 
     // Create fraction.
-    create_array(p0, (void*) FRACTION_COUNT, (void*) INTEGER_ARRAY);
+    allocate_array(p0, (void*) FRACTION_COUNT, (void*) INTEGER_ARRAY);
 }
 
 /**
@@ -55,12 +55,12 @@ void create_fraction(void* p0, const void* p1) {
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void destroy_fraction(void* p0, const void* p1) {
+void deallocate_fraction(void* p0, const void* p1) {
 
     log_message_debug("Destroy fraction.");
 
     // Destroy fraction.
-    destroy_array(p0, (void*) FRACTION_COUNT, (void*) INTEGER_ARRAY);
+    deallocate_array(p0, (void*) FRACTION_COUNT, (void*) INTEGER_ARRAY);
 }
 
 /* FRACTION_CREATOR_SOURCE */

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-16 00:18:23 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -32,8 +32,8 @@
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
-#include "../../memoriser/creator/integer_creator.c"
-#include "../../memoriser/creator/unsigned_long_creator.c"
+#include "../../memoriser/allocator/integer_allocator.c"
+#include "../../memoriser/allocator/unsigned_long_allocator.c"
 
 /**
  * Shuts down the linux console.
@@ -75,7 +75,7 @@ void shutdown_linux_console(void* p0, const void* p1, const void* p2, const void
         // CAUTION! Use descending order, as opposed to the creation!
         // CAUTION! Do NOT use references &, because variables are **
         // and *&variable equals the variable alone.
-        destroy_integer((void*) t);
+        deallocate_integer((void*) t);
         free(*tw);
         free(*to);
 

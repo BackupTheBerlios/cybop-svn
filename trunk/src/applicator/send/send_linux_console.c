@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,7 +68,7 @@ void receive_linux_console(void* p0, void* p1, void* p2, const void* p3, const v
                     int tns = *nc + 1;
 
                     // Create terminated file name.
-                    create_array((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &tns);
+                    allocate_array((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &tns);
 
                     // Initialise destination array index.
                     int i = 0;
@@ -128,7 +128,7 @@ void receive_linux_console(void* p0, void* p1, void* p2, const void* p3, const v
                         fclose(f);
 
                         // Destroy terminated file name.
-                        destroy_array((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &tns);
+                        deallocate_array((void*) &tn, (void*) &CHARACTER_ARRAY, (void*) &tns);
 
                     } else {
 
@@ -194,9 +194,9 @@ void send_linux_console(void* p0, void* p1, void* p2, const void* p3, const void
     if (t == NULL_POINTER) {
 
         // Create tui.
-        create_array((void*) &t, (void*) ts, (void*) &POINTER_ARRAY);
-        create((void*) &t, (void*) ts, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
-        create((void*) &t, (void*) ts, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate_array((void*) &t, (void*) ts, (void*) &POINTER_ARRAY);
+        allocate((void*) &t, (void*) ts, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
+        allocate((void*) &t, (void*) ts, (void*) INTEGER_ABSTRACTION, (void*) INTEGER_ABSTRACTION_COUNT);
 
         // Set tui internals.
         set_array_elements(p0, (void*) TUI_INTERNAL, (void*) &t, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
@@ -213,7 +213,7 @@ void send_linux_console(void* p0, void* p1, void* p2, const void* p3, const void
     int as = 0;
 
     // Create array.
-    create((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+    allocate((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
     // Serialise multi-dimensional tui into array.
     serialise((void*) &a, (void*) &ac, (void*) &as, t, (void*) tc);
@@ -222,7 +222,7 @@ void send_linux_console(void* p0, void* p1, void* p2, const void* p3, const void
     write_data(p0, p1, p2, a, (void*) &ac);
 
     // Destroy array.
-    destroy((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+    deallocate((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 */
 
     //?? TEST.

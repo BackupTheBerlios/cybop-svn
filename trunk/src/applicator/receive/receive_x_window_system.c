@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-08 13:48:18 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -30,8 +30,8 @@
 
 //?? #include <X11/Xlib.h>
 //?? #include <X11/Xutil.h>
-//?? #include "../../creator/integer_creator.c"
-//?? #include "../../creator/unsigned_long_creator.c"
+//?? #include "../../creator/integer_allocator.c"
+//?? #include "../../creator/unsigned_long_allocator.c"
 //?? #include "../../global/integer_constants.c"
 //?? #include "../../global/structure_constants.c"
 //?? #include "../../global/variables.c"

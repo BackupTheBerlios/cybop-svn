@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-23 12:56:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,7 +37,7 @@
 #include "../memoriser/array.c"
 #include "../memoriser/communicator.c"
 #include "../memoriser/converter.c"
-#include "../memoriser/creator.c"
+#include "../memoriser/allocator.c"
 #include "../memoriser/translator.c"
 #include "../tester/tester.c"
 
@@ -165,7 +165,7 @@ void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const 
     int rms = 0;
 
     // Create receive model of type character, to read single bytes.
-    create((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+    allocate((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
     // Reads persistent byte stream over channel.
     read_data((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
@@ -175,13 +175,13 @@ void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const 
     //
 
     // Create parse model of type given as abstraction.
-    create(p0, p2, p5, p6);
+    allocate(p0, p2, p5, p6);
 
     // Parse byte stream according to given document type.
     parse(p0, p1, p2, rm, (void*) &rmc, p5, p6);
 
     // Destroy receive model.
-    destroy((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+    deallocate((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 }
 
 /**
@@ -244,7 +244,7 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     int rms = 0;
 
     // Create receive model of type character, to read single bytes.
-    create((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+    allocate((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
     // Read persistent byte stream over channel.
     read_data((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
@@ -261,7 +261,7 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     if (w == 0) {
 
         // Create parse model of type given as abstraction.
-        create((void*) &pm, (void*) &pms, p5, p6);
+        allocate((void*) &pm, (void*) &pms, p5, p6);
 
         // Parse byte stream according to given document type.
         parse((void*) &pm, (void*) &pmc, (void*) &pms, rm, (void*) &rmc, p5, p6);
@@ -272,14 +272,14 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     }
 
     // Destroy receive model.
-    destroy((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
+    deallocate((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
     //
     // Decode.
     //
 
     // Create compound decode model.
-    create(p0, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+    allocate(p0, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
     // Decode document model according to given document type.
     decode(p0, p1, p2, pm, (void*) &pmc, p5, p6);
@@ -295,7 +295,7 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     if (w == 0) {
 
         // Destroy parse model.
-        destroy((void*) &pm, (void*) &pms, p5, p6);
+        deallocate((void*) &pm, (void*) &pms, p5, p6);
 
     } else {
 
@@ -330,7 +330,7 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
  * @param p7 the source channel
  * @param p8 the source channel count
  */
-void create_model(void* p0, void* p1, void* p2, const void* p3, const void* p4,
+void create(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6, const void* p7, const void* p8) {
 
     log_message_debug("Create model.");
@@ -545,30 +545,30 @@ void create_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
         int* pds = INTEGER_NULL_POINTER;
 
         // Create part name.
-        create_integer((void*) &pnc);
+        allocate_integer((void*) &pnc);
         *pnc = 0;
-        create_integer((void*) &pns);
+        allocate_integer((void*) &pns);
         *pns = 0;
-        create_model((void*) &pn, (void*) pnc, (void*) pns, *nm, *nmc, *na, *nac,
+        create((void*) &pn, (void*) pnc, (void*) pns, *nm, *nmc, *na, *nac,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         // A part channel is not created, since that is only needed temporarily
         // for model loading.
 
         // Create part abstraction.
-        create_integer((void*) &pac);
+        allocate_integer((void*) &pac);
         *pac = 0;
-        create_integer((void*) &pas);
+        allocate_integer((void*) &pas);
         *pas = 0;
-        create_model((void*) &pa, (void*) pac, (void*) pas, *am, *amc, *aa, *aac,
+        create((void*) &pa, (void*) pac, (void*) pas, *am, *amc, *aa, *aac,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
 
         // Create part model.
-        create_integer((void*) &pmc);
+        allocate_integer((void*) &pmc);
         *pmc = 0;
-        create_integer((void*) &pms);
+        allocate_integer((void*) &pms);
         *pms = 0;
-        create_model((void*) &pm, (void*) pmc, (void*) pms, *mm, *mmc, *am, *amc,
+        create((void*) &pm, (void*) pmc, (void*) pms, *mm, *mmc, *am, *amc,
             *cm, *cmc);
 
         // Add part to whole.

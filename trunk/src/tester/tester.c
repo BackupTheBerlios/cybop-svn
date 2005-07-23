@@ -24,7 +24,7 @@
  *
  * From here all tests can be activated or deactivated.
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -38,7 +38,7 @@
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"
 #include "../memoriser/converter.c"
-#include "../memoriser/creator/integer_creator.c"
+#include "../memoriser/allocator/integer_allocator.c"
 
 /**
  * Tests the standard output and error stream.
@@ -106,7 +106,7 @@ void test_character_array_single_element() {
     int cs = 5;
 
     // Create character array.
-    create_array((void*) &c, (void*) &cs, (void*) CHARACTER_ARRAY);
+    allocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_ARRAY);
 
     set_character_array_elements(c, (void*) ZERO_INTEGER, (void*) LATIN_CAPITAL_LETTER_A_CHARACTER, (void*) LATIN_CAPITAL_LETTER_A_CHARACTER_COUNT);
     set_character_array_elements(c, (void*) ONE_INTEGER, (void*) LATIN_CAPITAL_LETTER_B_CHARACTER, (void*) LATIN_CAPITAL_LETTER_B_CHARACTER_COUNT);
@@ -134,7 +134,7 @@ void test_character_array_single_element() {
     }
 
     // Destroy character array.
-    destroy_array((void*) &c, (void*) &cs, (void*) CHARACTER_ARRAY);
+    deallocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_ARRAY);
 }
 
 /**
@@ -149,7 +149,7 @@ void test_character_array_multiple_elements() {
     int ds = 22;
 
     // Create destination array.
-    create_array((void*) &d, (void*) &ds, (void*) CHARACTER_ARRAY);
+    allocate_array((void*) &d, (void*) &ds, (void*) CHARACTER_ARRAY);
 
     // The source array.
     char a[] = {'T', 'h', 'i', 's', ' ', 'i', 's', ' ', 'a', ' ', 't', 'e', 's', 't', '.', '\n', '\0'};
@@ -196,7 +196,7 @@ void test_character_array_multiple_elements() {
     fputs((char*) r, stdout);
 
     // Destroy destination array.
-    destroy_array((void*) &d, (void*) &ns, (void*) CHARACTER_ARRAY);
+    deallocate_array((void*) &d, (void*) &ns, (void*) CHARACTER_ARRAY);
 }
 
 /**
@@ -215,7 +215,7 @@ void test_pointer_return() {
 
     // Create character array.
     c = (void*) "Hello World!";
-    create_integer((void*) &cs);
+    allocate_integer((void*) &cs);
     *cs = 13;
 
     // THIS is the important part of the test.
@@ -234,7 +234,7 @@ void test_pointer_return() {
     fprintf(stderr, "r: %s\n", (char*) r);
 
     // Destroy character array.
-    destroy_integer((void*) &cs);
+    deallocate_integer((void*) &cs);
 }
 
 /**
@@ -259,7 +259,7 @@ void test_pointer_array() {
     int ps = 1;
 
     // Create pointer array.
-    create_array((void*) &p, (void*) &ps, (void*) POINTER_ARRAY);
+    allocate_array((void*) &p, (void*) &ps, (void*) POINTER_ARRAY);
 
     fprintf(stderr, "p: %i\n", p);
 
@@ -292,7 +292,7 @@ void test_pointer_array() {
     //
 
     // Destroy pointer array.
-    destroy_array((void*) &p, (void*) &ps, (void*) POINTER_ARRAY);
+    deallocate_array((void*) &p, (void*) &ps, (void*) POINTER_ARRAY);
 }
 
 /**
@@ -319,7 +319,7 @@ void test_file_read() {
     // The file name count.
     int fnc = 26;
 
-    create_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &as);
+    allocate_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &as);
 //??    read_file((void*) &a, (void*) &as, (void*) &ac, (void*) &fn, (void*) &fnc);
 
     fprintf(stderr, "a: %i\n", a);
@@ -345,7 +345,7 @@ void test_file_read() {
         j++;
     }
 
-    destroy_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &as);
+    deallocate_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &as);
 */
 }
 
@@ -451,7 +451,7 @@ void test_integer_parser() {
     int dss = 0;
 
     // Create destination string.
-    create_array((void*) &ds, (void*) &CHARACTER_ARRAY, (void*) &dss);
+    allocate_array((void*) &ds, (void*) &CHARACTER_ARRAY, (void*) &dss);
 
     serialise((void*) &ds, (void*) &dsc, (void*) &dss, (void*) &si, (void*) &sic,
         (void*) &INTEGER_ABSTRACTION, (void*) &INTEGER_ABSTRACTION_COUNT);
@@ -459,7 +459,7 @@ void test_integer_parser() {
     fprintf(stderr, "Serialised source integer results in destination string: %s\n", ds);
 
     // Destroy destination string.
-    destroy_array((void*) &ds, (void*) &CHARACTER_ARRAY, (void*) &dss);
+    deallocate_array((void*) &ds, (void*) &CHARACTER_ARRAY, (void*) &dss);
 */
 }
 

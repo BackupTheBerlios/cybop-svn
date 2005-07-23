@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
  * @param p0 the signal memory (Hand over as reference!)
  * @param p1 the signal memory size
  */
-void create_signal_memory(void* p0, const void* p1) {
+void allocate_signal_memory(void* p0, const void* p1) {
 
     if (p0 != NULL_POINTER) {
 
@@ -51,7 +51,7 @@ void create_signal_memory(void* p0, const void* p1) {
         log_message((void*) INFO_LOG_LEVEL, (void*) CREATE_SIGNAL_MEMORY_MESSAGE, (void*) CREATE_SIGNAL_MEMORY_MESSAGE_COUNT);
 
         // Create signal memory.
-        create_array(p0, (void*) SIGNAL_MEMORY_COUNT, (void*) POINTER_ARRAY);
+        allocate_array(p0, (void*) SIGNAL_MEMORY_COUNT, (void*) POINTER_ARRAY);
 
         // The abstractions, models, details, priorities, identifications.
         void* a = NULL_POINTER;
@@ -64,14 +64,14 @@ void create_signal_memory(void* p0, const void* p1) {
         void* id = NULL_POINTER;
 
         // Create abstractions, models, details, priorities, identifications.
-        create_array((void*) &a, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &ac, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &m, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &mc, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &d, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &dc, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &p, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &id, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &a, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &ac, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &m, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &mc, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &d, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &dc, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &p, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &id, p1, (void*) POINTER_ARRAY);
 
         // Set abstractions, models, details, priorities, identifications.
         // CAUTION! Use ascending order, as compared to destruction!
@@ -98,7 +98,7 @@ void create_signal_memory(void* p0, const void* p1) {
  * @param p0 the signal memory (Hand over as reference!)
  * @param p1 the signal memory size
  */
-void destroy_signal_memory(void* p0, const void* p1) {
+void deallocate_signal_memory(void* p0, const void* p1) {
 
     if (p0 != NULL_POINTER) {
 
@@ -137,7 +137,7 @@ void destroy_signal_memory(void* p0, const void* p1) {
 
             // Destroy signal. Do not destroy the signal's abstraction and
             // priority here; they are static within CYBOI.
-            destroy_model(s, NULL, NULL, (void*) a);
+            decreate(s, NULL, NULL, (void*) a);
 
             i--;
         }
@@ -172,17 +172,17 @@ void destroy_signal_memory(void* p0, const void* p1) {
         // CAUTION! Do NOT hand over as reference!
         // The variables are of type void**.
         // The expression (&*variable) is the same like (variable).
-        destroy_array((void*) a, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) ac, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) m, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) mc, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) d, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) dc, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) p, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) id, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) a, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) ac, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) m, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) mc, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) d, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) dc, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) p, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) id, p1, (void*) POINTER_ARRAY);
 
         // Destroy signal memory.
-        destroy_array(p0, (void*) SIGNAL_MEMORY_COUNT, (void*) POINTER_ARRAY);
+        deallocate_array(p0, (void*) SIGNAL_MEMORY_COUNT, (void*) POINTER_ARRAY);
 
     } else {
 

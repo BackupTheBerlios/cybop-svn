@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a vector model in memory
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,7 +41,7 @@
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void create_vector(void* p0, const void* p1) {
+void allocate_vector(void* p0, const void* p1) {
 
     log_message_debug("Create vector.");
 
@@ -51,7 +51,7 @@ void create_vector(void* p0, const void* p1) {
     //?? If dynamic, then use p1 as size.
 
     // Create vector.
-    create_array(p0, (void*) VECTOR_COUNT, (void*) INTEGER_ARRAY);
+    allocate_array(p0, (void*) VECTOR_COUNT, (void*) INTEGER_ARRAY);
 }
 
 /**
@@ -60,12 +60,12 @@ void create_vector(void* p0, const void* p1) {
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void destroy_vector(void* p0, const void* p1) {
+void deallocate_vector(void* p0, const void* p1) {
 
     log_message_debug("Destroy vector.");
 
     // Destroy vector.
-    destroy_array(p0, (void*) VECTOR_COUNT, (void*) INTEGER_ARRAY);
+    deallocate_array(p0, (void*) VECTOR_COUNT, (void*) INTEGER_ARRAY);
 }
 
 /* VECTOR_CREATOR_SOURCE */

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.9 $ $Date: 2005-07-22 22:42:51 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -75,11 +75,11 @@ void manage(const void* p0, const void* p1) {
     int* ss = NULL_POINTER;
 
     // Create knowledge memory count, size.
-    create_integer((void*) &kc);
-    create_integer((void*) &ks);
+    allocate_integer((void*) &kc);
+    allocate_integer((void*) &ks);
     // Create signal memory count, size.
-    create_integer((void*) &sc);
-    create_integer((void*) &ss);
+    allocate_integer((void*) &sc);
+    allocate_integer((void*) &ss);
 
     // Initialise knowledge memory count, size.
     *kc = 0;
@@ -89,11 +89,11 @@ void manage(const void* p0, const void* p1) {
     *ss = 0;
 
     // Create internal memory.
-    create((void*) &i, (void*) is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &i, (void*) is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
     // Create knowledge memory.
-    create((void*) &k, (void*) ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+    allocate((void*) &k, (void*) ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
     // Create signal memory.
-    create((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
 
     // CAUTION! ONLY ONE parameter can be handed over to threads!
     // For example, the tcp socket is running in an own thread.
@@ -124,10 +124,10 @@ void manage(const void* p0, const void* p1) {
     int* mds = INTEGER_NULL_POINTER;
 
     // Create startup model abstraction, model, details.
-    create_integer((void*) &mac);
-    create_integer((void*) &mas);
-    create_integer((void*) &mmc);
-    create_integer((void*) &mms);
+    allocate_integer((void*) &mac);
+    allocate_integer((void*) &mas);
+    allocate_integer((void*) &mmc);
+    allocate_integer((void*) &mms);
     // CAUTION! Do not create startup model details!
     // It is not needed for the startup signal.
 
@@ -140,11 +140,11 @@ void manage(const void* p0, const void* p1) {
     // It is not needed for the startup signal.
 
     // Create startup model abstraction, model, details.
-    create_model((void*) &ma, (void*) mac, (void*) mas,
+    create((void*) &ma, (void*) mac, (void*) mas,
         (void*) CYBOL_ABSTRACTION, (void*) CYBOL_ABSTRACTION_COUNT,
         (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
         (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
-    create_model((void*) &mm, (void*) mmc, (void*) mms,
+    create((void*) &mm, (void*) mmc, (void*) mms,
         p0, p1,
         CYBOL_ABSTRACTION, CYBOL_ABSTRACTION_COUNT,
         FILE_CHANNEL, FILE_CHANNEL_COUNT );
@@ -156,7 +156,7 @@ void manage(const void* p0, const void* p1) {
 
     // The signal id.
     int* id = INTEGER_NULL_POINTER;
-    create_integer((void*) &id);
+    allocate_integer((void*) &id);
     *id = 0;
     get_new_signal_id(s, (void*) sc, (void*) id);
 
@@ -178,15 +178,15 @@ void manage(const void* p0, const void* p1) {
     check(i, k, (void*) kc, (void*) ks, s, (void*) sc, (void*) ss);
 
     // Destroy signal memory.
-    destroy((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
-    destroy_integer((void*) &sc);
-    destroy_integer((void*) &ss);
+    deallocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_ABSTRACTION_COUNT);
+    deallocate_integer((void*) &sc);
+    deallocate_integer((void*) &ss);
     // Destroy knowledge memory.
-    destroy((void*) &k, (void*) ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
-    destroy_integer((void*) &kc);
-    destroy_integer((void*) &ks);
+    deallocate((void*) &k, (void*) ks, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
+    deallocate_integer((void*) &kc);
+    deallocate_integer((void*) &ks);
     // Destroy internal memory.
-    destroy((void*) &i, (void*) is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &i, (void*) is, (void*) INTERNAL_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* MANAGER_SOURCE */

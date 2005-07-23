@@ -24,7 +24,7 @@
  * - parse an xml stream into an xml model
  * - serialise an xml model into an xml stream
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,9 +37,9 @@
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memoriser/creator/integer_creator.c"
-#include "../../memoriser/creator/xml_node_creator.c"
-#include "../../memoriser/creator/xml_property_creator.c"
+#include "../../memoriser/allocator/integer_allocator.c"
+#include "../../memoriser/allocator/xml_node_allocator.c"
+#include "../../memoriser/allocator/xml_property_allocator.c"
 
 //
 // Xml comment tag.
@@ -255,7 +255,7 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                 int tmps = *sc + 1;
 
                 // Create temporary null-terminated file name.
-                create_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+                allocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
 
                 // Set terminated file name by first copying the actual name
                 // and then adding the null termination character.
@@ -275,7 +275,7 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                 xmlCleanupParser();
 
                 // Destroy temporary null-terminated file name.
-                destroy_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+                deallocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
 
                 //??
                 //?? END of temporary workaround for using the libxml2 parser.
@@ -284,7 +284,7 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 /*??
             // The comparison result.
             int* r = INTEGER_NULL_POINTER;
-            create_integer((void*) &r);
+            allocate_integer((void*) &r);
             *r = 0;
             // The current byte within the stream.
             void* b = *s;
@@ -353,7 +353,7 @@ void parse_xml(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                             // new transient xml tag models have to be created!
 
                             // Create xml tag.
-//??                            create_xml_tag((void*) &t, (void*) &ts);
+//??                            allocate_xml_tag((void*) &t, (void*) &ts);
 
                             // Parse xml tag.
                             parse_xml_tag((void*) &t, (void*) &tc, (void*) &ts,

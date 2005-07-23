@@ -25,7 +25,7 @@
  * CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
  * which adhere to the Extended Markup Language (XML) syntax.
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-22 10:03:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,8 +38,8 @@
 //?? #include "../applicator/create.c"
 //?? #include "../globals/constants/channel_constants.c"
 //?? #include "../globals/constants/integer_constants.c"
-//?? #include "../memoriser/creator/integer_creator.c"
-//?? #include "../memoriser/creator/pointer_creator.c"
+//?? #include "../memoriser/allocator/integer_allocator.c"
+//?? #include "../memoriser/allocator/pointer_allocator.c"
 //?? #include "../tester/tester.c"
 
 /**
@@ -72,7 +72,7 @@ int main(int p0, char** p1) {
     // Call testing procedures. Comment/ uncomment this as needed!
     // CAUTION! This has to stand AFTER the initialization of the
     // global variables because these are used by the testing code.
-//??    test(); destroy_globals(); r = 0; return r;
+//??    test(); deallocate_globals(); r = 0; return r;
 
     if (p1 != NULL_POINTER) {
 

@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a compound model in memory
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
  * @param p0 the compound (Hand over as reference!)
  * @param p1 the compound size
  */
-void create_compound(void* p0, const void* p1) {
+void allocate_compound(void* p0, const void* p1) {
 
     if (p0 != NULL_POINTER) {
 
@@ -51,7 +51,7 @@ void create_compound(void* p0, const void* p1) {
         log_message_debug("Create compound.");
 
         // Create compound.
-        create_array(p0, (void*) COMPOUND_COUNT, (void*) POINTER_ARRAY);
+        allocate_array(p0, (void*) COMPOUND_COUNT, (void*) POINTER_ARRAY);
 
         // The names, abstractions, models, details.
         void* n = NULL_POINTER;
@@ -68,18 +68,18 @@ void create_compound(void* p0, const void* p1) {
         void* ds = NULL_POINTER;
 
         // Create names, abstractions, models, details.
-        create_array((void*) &n, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &nc, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &ns, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &a, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &ac, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &as, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &m, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &mc, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &ms, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &d, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &dc, p1, (void*) POINTER_ARRAY);
-        create_array((void*) &ds, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &n, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &nc, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &ns, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &a, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &ac, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &as, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &m, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &mc, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &ms, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &d, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &dc, p1, (void*) POINTER_ARRAY);
+        allocate_array((void*) &ds, p1, (void*) POINTER_ARRAY);
 
         // Set names, abstractions, models, details.
         // CAUTION! Use ascending order, as compared to destruction!
@@ -110,7 +110,7 @@ void create_compound(void* p0, const void* p1) {
  * @param p0 the compound (Hand over as reference!)
  * @param p1 the compound size
  */
-void destroy_compound(void* p0, const void* p1) {
+void deallocate_compound(void* p0, const void* p1) {
 
     if (p0 != NULL_POINTER) {
 
@@ -169,21 +169,21 @@ void destroy_compound(void* p0, const void* p1) {
         // CAUTION! Do NOT hand over as reference!
         // The variables are of type void**.
         // The expression (&*variable) is the same like (variable).
-        destroy_array((void*) n, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) nc, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) ns, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) a, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) ac, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) as, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) m, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) mc, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) ms, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) d, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) dc, p1, (void*) POINTER_ARRAY);
-        destroy_array((void*) ds, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) n, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) nc, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) ns, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) a, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) ac, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) as, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) m, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) mc, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) ms, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) d, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) dc, p1, (void*) POINTER_ARRAY);
+        deallocate_array((void*) ds, p1, (void*) POINTER_ARRAY);
 
         // Destroy compound.
-        destroy_array(p0, (void*) COMPOUND_COUNT, (void*) POINTER_ARRAY);
+        deallocate_array(p0, (void*) COMPOUND_COUNT, (void*) POINTER_ARRAY);
 
     } else {
 

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,8 +33,8 @@
 #include "../../globals/constants/log_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
-#include "../../memoriser/creator/integer_creator.c"
-#include "../../memoriser/creator/double_creator.c"
+#include "../../memoriser/allocator/integer_allocator.c"
+#include "../../memoriser/allocator/double_allocator.c"
 
 //
 // A double is a floating point number.
@@ -66,7 +66,7 @@ void parse_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
             int tmps = *sc + 1;
 
             // Create temporary null-terminated string.
-            create_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+            allocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
 
             // The index.
             int i = 0;
@@ -108,7 +108,7 @@ void parse_double(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
             set_array_elements(*d, (void*) DOUBLE_VALUE_INDEX, (void*) &v, (void*) ONE_INTEGER, (void*) DOUBLE_ARRAY);
 
             // Destroy temporary null-terminated string.
-            destroy_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+            deallocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
 
         } else {
 

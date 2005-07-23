@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -39,7 +39,7 @@
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../memoriser/array.c"
-#include "../../memoriser/creator/integer_creator.c"
+#include "../../memoriser/allocator/integer_allocator.c"
 
 /**
  * Starts up the tcp socket service.
@@ -103,26 +103,26 @@ void startup_tcp_socket( void* internals, const void* know,
             int* ids = INTEGER_NULL_POINTER;
 
             // Create tcp server socket.
-            create_integer((void*) &s);
+            allocate_integer((void*) &s);
             *s = socket(PF_INET, SOCK_STREAM, 0);
             // Create tcp client sockets.
-            create_integer((void*) &csc);
+            allocate_integer((void*) &csc);
             *csc = 0;
-            create_integer((void*) &css);
+            allocate_integer((void*) &css);
             *css = 0;
-            create_array((void*) &cs, (void*) css, (void*) INTEGER_ARRAY);
+            allocate_array((void*) &cs, (void*) css, (void*) INTEGER_ARRAY);
             // Create activation flag.
-            create_integer(&af);
+            allocate_integer(&af);
             *af = 0;
             // Create blocking flag.
-            create_integer(&bf);
+            allocate_integer(&bf);
             *bf = 0;
             // Create tcp signal ids.
-            create_integer((void*) &idc);
+            allocate_integer((void*) &idc);
             *idc = 0;
-            create_integer((void*) &ids);
+            allocate_integer((void*) &ids);
             *ids = 0;
-            create_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY);
+            allocate_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY);
 
             // Set tcp server socket.
             set_array_elements(internals, (void*) TCP_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);

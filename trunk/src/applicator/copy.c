@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-22 22:42:50 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,7 +36,7 @@
 #include "../memoriser/array.c"
 #include "../memoriser/communicator.c"
 #include "../memoriser/converter.c"
-#include "../memoriser/creator.c"
+#include "../memoriser/allocator.c"
 #include "../memoriser/translator.c"
 
 /**

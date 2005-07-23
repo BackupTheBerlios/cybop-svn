@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-08 16:24:21 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -49,8 +49,8 @@
 #include "../../globals/constants/integer_constants.c"
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
-#include "../../memoriser/creator/integer_creator.c"
-#include "../../memoriser/creator/unsigned_long_creator.c"
+#include "../../memoriser/allocator/integer_allocator.c"
+#include "../../memoriser/allocator/unsigned_long_allocator.c"
 
 /**
  * Starts up the x window system.
@@ -116,13 +116,13 @@ void startup_x_window_system(void* p0, const void* p1, const void* p2, const voi
         struct _XGC* gc = NULL_POINTER;
 
         // Create x window system internals.
-        create_integer((void*) &sn);
-        create_integer((void*) &cm);
-        create_unsigned_long((void*) &bg);
-        create_unsigned_long((void*) &fg);
-        create_integer((void*) &r);
-//??        create_integer((void*) &f);
-        create_unsigned_long((void*) &vm);
+        allocate_integer((void*) &sn);
+        allocate_integer((void*) &cm);
+        allocate_unsigned_long((void*) &bg);
+        allocate_unsigned_long((void*) &fg);
+        allocate_integer((void*) &r);
+//??        allocate_integer((void*) &f);
+        allocate_unsigned_long((void*) &vm);
 
         // Initialise x window system internals.
         dn = "";

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,7 @@
 #include "../memoriser/converter/time_converter.c"
 #include "../memoriser/converter/vector_converter.c"
 #include "../memoriser/converter/xml_converter.c"
-#include "../memoriser/creator/integer_creator.c"
+#include "../memoriser/allocator/integer_allocator.c"
 
 /**
  * Parses the byte stream according to the given document type

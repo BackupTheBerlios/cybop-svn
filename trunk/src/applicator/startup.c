@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-14 17:41:44 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description This module starts up a service.
  */
@@ -39,7 +39,7 @@
 #include "../globals/constants/name_constants.c"
 #include "../globals/logger/logger.c"
 #include "../memoriser/array.c"
-#include "../memoriser/creator.c"
+#include "../memoriser/allocator.c"
 
 /**
  * Starts up a service.

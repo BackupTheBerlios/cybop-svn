@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-22 22:42:50 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-23 12:56:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,7 +34,7 @@
 #include "../memoriser/array.c"
 #include "../memoriser/communicator.c"
 #include "../memoriser/converter.c"
-#include "../memoriser/creator.c"
+#include "../memoriser/allocator.c"
 #include "../memoriser/translator.c"
 
 /**
@@ -166,7 +166,7 @@ void build_listname(const void* p0, const void* p1, void* p2, void* p3, void* p4
             int int_string_count = 0;
             int int_string_size = 10;
 
-            create_array((void*) &int_string, (void*) &int_string_size, (void*) CHARACTER_ARRAY);
+            allocate_array((void*) &int_string, (void*) &int_string_size, (void*) CHARACTER_ARRAY);
 
             int_string_count = snprintf(int_string, int_string_size, "%i", *((int*) *idxm));
 
@@ -186,7 +186,7 @@ void build_listname(const void* p0, const void* p1, void* p2, void* p3, void* p4
             set_array_elements(*resm, &temp_index, int_string, &int_string_count, (void*) CHARACTER_ARRAY);
 
             // Destroy int_string array.
-            destroy_array((void*) &int_string, (void*) &int_string_size, (void*) CHARACTER_ARRAY);
+            deallocate_array((void*) &int_string, (void*) &int_string_size, (void*) CHARACTER_ARRAY);
 
         } else {
 

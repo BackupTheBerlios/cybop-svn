@@ -22,7 +22,7 @@
  *
  * This file destroys a transient model to a persistent model.
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-23 12:56:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,9 +35,8 @@
 #include "../globals/logger/logger.c"
 #include "../memoriser/array.c"
 
-void destroy_model( void** model, void* model_count, void* model_size,
-                    void* model_abstr, void* model_abstr_count );
-
+void destroy(void** model, void* model_count, void* model_size,
+    void* model_abstr, void* model_abstr_count);
 
 /**
  * Checks for a compound model.
@@ -79,16 +78,14 @@ void check_compound_model(void* p0, const void* p1, const void* p2) {
  * @param p3 the model abstraction
  * @param p4 the model abstraction count
  */
-void destroy_primitive_model( void** model, void* model_count, void* model_size,
-                              void* model_abstr, void* model_abstr_count)
-{
+void deallocate_primitive_model( void** model, void* model_count, void* model_size,
+    void* model_abstr, void* model_abstr_count) {
 
     log_message_debug("Destroy primitive model.");
 
     // Destroy model of type given as abstraction.
-    destroy( model, model_size, model_abstr, model_abstr_count );
+    deallocate( model, model_size, model_abstr, model_abstr_count );
 }
-
 
 /**
  * destroy a primitive model
@@ -99,9 +96,9 @@ void destroy_primitive_model( void** model, void* model_count, void* model_size,
  * @param p3 the model abstraction
  * @param p4 the model abstraction count
  */
-void destroy_compound_model( void** model, void* model_count, void* model_size,
-                             void* model_abstr, void* model_abstr_count)
-{
+void deallocate_compound_model( void** model, void* model_count, void* model_size,
+    void* model_abstr, void* model_abstr_count) {
+        
     //das gesamte Compound durchgehen und f?r jedes Element im Compound wieder
     //destroy model aufrufen
 
@@ -151,14 +148,13 @@ void destroy_compound_model( void** model, void* model_count, void* model_size,
                 (void*) &em, (void*) &emc, (void*) &ems,
                 (void*) &ed, (void*) &edc, (void*) &eds);
 
-            destroy_model( em, *emc, *ems, *ea, *eac);
+            destroy( em, *emc, *ems, *ea, *eac);
 
             compound_counter = compound_counter + 1;
 
         }
     }
 }
-
 
 /**
  * Destroys a transient destination model.
@@ -182,9 +178,8 @@ void destroy_compound_model( void** model, void* model_count, void* model_size,
  * @param p3 the model abstraction
  * @param p4 the model abstraction count
  */
-void destroy_model( void** model, void* model_count, void* model_size,
-                    void* model_abstr, void* model_abstr_count)
-{
+void destroy(void** model, void* model_count, void* model_size,
+    void* model_abstr, void* model_abstr_count) {
 
     //?The comparison result.
     int r = 0;
@@ -194,15 +189,12 @@ void destroy_model( void** model, void* model_count, void* model_size,
 
     if (r == 0) {
 
-        destroy_primitive_model( model, model_count, model_size,
-                                 model_abstr, model_abstr_count );
+        deallocate_primitive_model(model, model_count, model_size, model_abstr, model_abstr_count);
 
     } else {
 
-        destroy_compound_model( model, model_count, model_size,
-                                 model_abstr, model_abstr_count);
+        deallocate_compound_model(model, model_count, model_size, model_abstr, model_abstr_count);
     }
-
 }
 
 /**
@@ -220,7 +212,7 @@ void destroy_model( void** model, void* model_count, void* model_size,
  * @param p3 the knowledge count
  * @param p4 the knowledge size
  */
-void destroy_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
+void deallocate_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
     log_message_debug("Destroy part.");
 
@@ -297,7 +289,7 @@ void destroy_part(const void* p0, const void* p1, void* p2, void* p3, void* p4) 
             {
 
                 //destroy model
-                destroy_model( em, *emc, *ems , *ea, *eac );
+                destroy( em, *emc, *ems , *ea, *eac );
             }
 
             //remove the part

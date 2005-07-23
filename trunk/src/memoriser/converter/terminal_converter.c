@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-22 07:29:46 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -211,7 +211,7 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
             tcss = csc + 1;
 
             // Create terminated part colour control sequence.
-            create_array((void*) &tcs, (void*) &tcss, (void*) CHARACTER_ARRAY);
+            allocate_array((void*) &tcs, (void*) &tcss, (void*) CHARACTER_ARRAY);
 
             // Set terminated part colour control sequence by first copying the
             // actual control sequence and then adding the null termination character.
@@ -281,7 +281,7 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
             }
 
             // Destroy terminated part colour control sequence.
-            destroy_array((void*) &tcs, (void*) &tcss, (void*) CHARACTER_ARRAY);
+            deallocate_array((void*) &tcs, (void*) &tcss, (void*) CHARACTER_ARRAY);
 
             // Check if destination array size is large enough.
 

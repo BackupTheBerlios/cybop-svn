@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-23 11:21:58 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,20 +38,20 @@
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void create_xml_property(void* p0, const void* p1) {
+void allocate_xml_property(void* p0, const void* p1) {
 
     log_message_debug("Create xml property.");
 
     // Create xml attribute.
-    create_array(p0, (void*) XML_ATTRIBUTE_COUNT, (void*) POINTER_ARRAY);
+    allocate_array(p0, (void*) XML_ATTRIBUTE_COUNT, (void*) POINTER_ARRAY);
 
     // Initialise xml attribute name, value.
     void* nv = NULL_POINTER;
     void* c = NULL_POINTER;
 
     // Create xml attribute name, value.
-    create_array((void*) &nv, p1, (void*) POINTER_ARRAY);
-    create_array((void*) &c, p1, (void*) INTEGER_ARRAY);
+    allocate_array((void*) &nv, p1, (void*) POINTER_ARRAY);
+    allocate_array((void*) &c, p1, (void*) INTEGER_ARRAY);
 
     //
     // Use ascending order.
@@ -68,7 +68,7 @@ void create_xml_property(void* p0, const void* p1) {
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  */
-void destroy_xml_property(void* p0, const void* p1) {
+void deallocate_xml_property(void* p0, const void* p1) {
 
     log_message_debug("Destroy xml property.");
 
@@ -89,11 +89,11 @@ void destroy_xml_property(void* p0, const void* p1) {
 //??    remove_array_elements(p0, (void*) POINTER_ARRAY, (void*) &XML_ATTRIBUTE_COUNT, (void*) &XML_ATTRIBUTE_NAME_VALUE_INDEX);
 
     // Destroy xml attribute name, value.
-    destroy_array((void*) &nv, p1, (void*) POINTER_ARRAY);
-    destroy_array((void*) &c, p1, (void*) INTEGER_ARRAY);
+    deallocate_array((void*) &nv, p1, (void*) POINTER_ARRAY);
+    deallocate_array((void*) &c, p1, (void*) INTEGER_ARRAY);
 
     // Destroy xml attribute.
-    destroy_array(p0, (void*) XML_ATTRIBUTE_COUNT, (void*) POINTER_ARRAY);
+    deallocate_array(p0, (void*) XML_ATTRIBUTE_COUNT, (void*) POINTER_ARRAY);
 }
 
 /* XML_PROPERTY_CREATOR_SOURCE */

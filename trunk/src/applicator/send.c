@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.11 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
+ * @version $Revision: 1.12 $ $Date: 2005-07-23 12:56:51 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -39,7 +39,7 @@
 #include "../globals/logger/logger.c"
 #include "../memoriser/accessor/internal_memory_accessor.c"
 #include "../memoriser/communicator/tcp_socket_communicator.c"
-#include "../memoriser/creator/integer_creator.c"
+#include "../memoriser/allocator/integer_allocator.c"
 #include "../memoriser/translator.c"
 #include "../socket/unix_socket.c"
 
@@ -234,11 +234,11 @@ void send_message(const void* p0, const void* p1,
                     int* dest_count = INTEGER_NULL_POINTER;
                     int* dest_size = INTEGER_NULL_POINTER;
 
-                    create(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
-                    create(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                    allocate(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                    allocate(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
                     *dest_count = 0;
                     *dest_size  = 0;
-                    create(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                    allocate(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
                     encode_model(&dest, dest_count, dest_size,
                         *ma, *mac, *mm, *mmc, *md, *mdc,
@@ -258,9 +258,9 @@ void send_message(const void* p0, const void* p1,
                     close(*cs);
 
                     // Destroy destination.
-                    destroy(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
-                    destroy(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
-                    destroy(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                    deallocate(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                    deallocate(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                    deallocate(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
 
                 } else {
 
@@ -348,11 +348,11 @@ void refresh_url(const void* p0, const void* p1,
                 int* dest_count = INTEGER_NULL_POINTER;
                 int* dest_size = INTEGER_NULL_POINTER;
 
-                create(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
-                create(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                allocate(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                allocate(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
                 *dest_count = 0;
                 *dest_size  = 0;
-                create(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                allocate(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
 
                 parse(&dest, dest_count, dest_size, &msg_refresh_part_1[0], &msg_part_1_count, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
                 parse(&dest, dest_count, dest_size, *urlm, *urlmc, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
@@ -371,9 +371,9 @@ void refresh_url(const void* p0, const void* p1,
                 close(*cs);
 
                 // Destroy destination.
-                destroy(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
-                destroy(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
-                destroy(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                deallocate(&dest, dest_size, STRING_ABSTRACTION, STRING_ABSTRACTION_COUNT);
+                deallocate(&dest_count, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+                deallocate(&dest_size, INTEGER_COUNT, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
             }
         }
     }

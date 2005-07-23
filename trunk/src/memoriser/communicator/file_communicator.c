@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.6 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,7 +72,7 @@ void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                     int tns = *sc + 1;
 
                     // Create terminated file name.
-                    create_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
+                    allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
 
                     // Set terminated file name by first copying the actual name
                     // and then adding the null termination character.
@@ -134,7 +134,7 @@ void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
                     }
 
                     // Destroy terminated file name.
-                    destroy_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
+                    deallocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
 
                 } else {
 

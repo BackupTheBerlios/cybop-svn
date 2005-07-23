@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,7 +34,7 @@
 #include "../../globals/constants/structure_constants.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"
-#include "../../memoriser/creator/integer_creator.c"
+#include "../../memoriser/allocator/integer_allocator.c"
 
 void parse(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6);
@@ -1854,7 +1854,7 @@ void reindex_compound_for_listelements(void* compound, void* compound_count, con
         char* compstring = NULL_POINTER;
         int compstring_count = *((int*)basisname_count) + *LIST_SEPARATOR_COUNT;
 
-        create_array((void*) &compstring, (void*) &compstring_count, (void*) CHARACTER_ARRAY);
+        allocate_array((void*) &compstring, (void*) &compstring_count, (void*) CHARACTER_ARRAY);
 
         // Set the compare string
         //this is the basisname and the list separat
@@ -1866,7 +1866,7 @@ void reindex_compound_for_listelements(void* compound, void* compound_count, con
         int indexstr_count = 0;
         int indexstr_size = 10;
 
-        create_array((void*) &indexstr, (void*) &indexstr_size, (void*) CHARACTER_ARRAY);
+        allocate_array((void*) &indexstr, (void*) &indexstr_size, (void*) CHARACTER_ARRAY);
 
         int comp_res = 0;
 
@@ -1911,10 +1911,10 @@ void reindex_compound_for_listelements(void* compound, void* compound_count, con
         }
 
         // destroy compare string.
-        destroy_array((void*) &compstring, (void*) &compstring_count, (void*) CHARACTER_ARRAY);
+        deallocate_array((void*) &compstring, (void*) &compstring_count, (void*) CHARACTER_ARRAY);
 
         // destroy index string.
-        destroy_array((void*) &indexstr, (void*) &indexstr_count, (void*) CHARACTER_ARRAY);
+        deallocate_array((void*) &indexstr, (void*) &indexstr_count, (void*) CHARACTER_ARRAY);
     }
 }
 

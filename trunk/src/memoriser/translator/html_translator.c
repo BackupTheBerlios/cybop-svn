@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -206,11 +206,11 @@ void encode_html_integer( void** dest, int* dest_count, int* dest_size,
         int* dest_int_count = INTEGER_NULL_POINTER;
         int* dest_int_size = INTEGER_NULL_POINTER;
 
-        create_integer( &dest_int_count );
+        allocate_integer( &dest_int_count );
         *dest_int_count = 0;
-        create_integer( &dest_int_size );
+        allocate_integer( &dest_int_size );
         *dest_int_size = 0;
-        create_model((void*) &dest_int, (void*) dest_int_count, (void*) dest_int_size,
+        create((void*) &dest_int, (void*) dest_int_count, (void*) dest_int_size,
             (void*) SPACE_CHARACTER , (void*) SPACE_CHARACTER_COUNT,
             (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT,
             (void*) INLINE_CHANNEL, (void*) INLINE_CHANNEL_COUNT);
