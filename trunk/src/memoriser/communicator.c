@@ -21,10 +21,10 @@
  * - Cybernetics Oriented Programming -
  *
  * This file contains the functionality to:
- * - receive data into a byte array
- * - send data from a byte array
+ * - read data from a device into a byte array
+ * - write data from a byte array to a device
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-22 07:29:46 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,9 +43,11 @@
 #include "../memoriser/communicator/terminal_communicator.c"
 
 /**
- * Receives a stream according to the given communication channel type
+ * Reads a stream according to the given communication channel type
  * and creates a byte array from it.
  *
+ * CAUTION! This procedure cannot be called "read"
+ * as that name is already used by the input/ output mechanism.
  * CAUTION! This procedure cannot be called "receive"
  * as that name is already used by the socket mechanism.
  *
@@ -57,7 +59,7 @@
  * @param p5 the type
  * @param p6 the type count
  */
-void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
+void read_data(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6) {
 
     // The comparison result.
@@ -69,7 +71,7 @@ void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p
 
         if (r != 0) {
 
-            receive_inline(p0, p1, p2, p3, p4);
+            read_inline(p0, p1, p2, p3, p4);
         }
     }
 
@@ -79,7 +81,7 @@ void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p
 
         if (r != 0) {
 
-            receive_terminal(p0, p1, p2, p3, p4);
+            read_terminal(p0, p1, p2, p3, p4);
         }
     }
 
@@ -89,7 +91,7 @@ void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p
 
         if (r != 0) {
 
-            receive_file(p0, p1, p2, p3, p4);
+            read_file(p0, p1, p2, p3, p4);
         }
     }
 
@@ -99,7 +101,7 @@ void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p
 
         if (r != 0) {
 
-            receive_ftp(p0, p1, p2, p3, p4);
+            read_ftp(p0, p1, p2, p3, p4);
         }
     }
 
@@ -109,15 +111,17 @@ void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p
 
         if (r != 0) {
 
-            receive_http(p0, p1, p2, p3, p4);
+            read_http(p0, p1, p2, p3, p4);
         }
     }
 }
 
 /**
- * Sends a stream according to the given communication channel type
+ * Writes a stream according to the given communication channel type
  * and reads its data from a byte array.
  *
+ * CAUTION! This procedure cannot be called "write"
+ * as that name is already used by the input/ output mechanism.
  * CAUTION! This procedure cannot be called "send"
  * as that name is already used by the socket mechanism.
  *
@@ -129,7 +133,7 @@ void receive_general(void* p0, void* p1, void* p2, const void* p3, const void* p
  * @param p5 the type
  * @param p6 the type count
  */
-void send_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
+void write_data(void* p0, void* p1, void* p2, const void* p3, const void* p4,
     const void* p5, const void* p6) {
 
     // The comparison result.
@@ -141,7 +145,7 @@ void send_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r != 0) {
 
-            send_inline(p0, p1, p2, p3, p4);
+            write_inline(p0, p1, p2, p3, p4);
         }
     }
 
@@ -151,7 +155,7 @@ void send_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r != 0) {
 
-            send_terminal(p0, p1, p2, p3, p4);
+            write_terminal(p0, p1, p2, p3, p4);
         }
     }
 
@@ -161,7 +165,7 @@ void send_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r != 0) {
 
-            send_file(p0, p1, p2, p3, p4);
+            write_file(p0, p1, p2, p3, p4);
         }
     }
 
@@ -171,7 +175,7 @@ void send_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r != 0) {
 
-            send_ftp(p0, p1, p2, p3, p4);
+            write_ftp(p0, p1, p2, p3, p4);
         }
     }
 
@@ -181,7 +185,7 @@ void send_general(void* p0, void* p1, void* p2, const void* p3, const void* p4,
 
         if (r != 0) {
 
-            send_http(p0, p1, p2, p3, p4);
+            write_http(p0, p1, p2, p3, p4);
         }
     }
 }

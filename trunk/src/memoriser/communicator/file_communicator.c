@@ -24,7 +24,7 @@
  * - receive a file stream into a byte array
  * - send a file stream from a byte array
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-22 07:29:46 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,7 +41,7 @@
 #include "../../memoriser/array.c"
 
 /**
- * Receives a file stream and writes it into a byte array.
+ * Reads a file stream and writes it into a byte array.
  *
  * @param p0 the destination byte array (Hand over as reference!)
  * @param p1 the destination count
@@ -49,7 +49,7 @@
  * @param p3 the source file name
  * @param p4 the source count
  */
-void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void read_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
     if (p4 != NULL_POINTER) {
 
@@ -118,7 +118,7 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
                             } else {
 
-                                log_message_debug("Could not receive file. The index exceeds the array size.");
+                                log_message_debug("Could not read file. The index exceeds the array size.");
                             }
 
                             // Read next character.
@@ -130,7 +130,7 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
                     } else {
 
-                        log_message_debug("Could not receive file. The file is null.");
+                        log_message_debug("Could not read file. The file is null.");
                     }
 
                     // Destroy terminated file name.
@@ -138,27 +138,27 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
 
                 } else {
 
-                    log_message_debug("Could not receive file. The destination is null.");
+                    log_message_debug("Could not read file. The destination is null.");
                 }
 
             } else {
 
-                log_message_debug("Could not receive file. The destination count is null.");
+                log_message_debug("Could not read file. The destination count is null.");
             }
 
         } else {
 
-            log_message_debug("Could not receive file. The destination size is null.");
+            log_message_debug("Could not read file. The destination size is null.");
         }
 
     } else {
 
-        log_message_debug("Could not receive file. The source count is null.");
+        log_message_debug("Could not read file. The source count is null.");
     }
 }
 
 /**
- * Sends a file stream that was read from a byte array.
+ * Write a file stream that was read from a byte array.
  *
  * @param p0 the destination file name (Hand over as reference!)
  * @param p1 the destination count
@@ -166,7 +166,7 @@ void receive_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
  * @param p3 the source byte array
  * @param p4 the source count
  */
-void send_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void write_file(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
 /*??
     char r = NULL_CONTROL_CHARACTER;

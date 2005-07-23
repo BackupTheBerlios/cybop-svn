@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -218,14 +218,15 @@ void send_linux_console(void* p0, void* p1, void* p2, const void* p3, const void
     // Serialise multi-dimensional tui into array.
     serialise((void*) &a, (void*) &ac, (void*) &as, t, (void*) tc);
 
-    // Send serialised array as message to terminal.
-    send_general(p0, p1, p2, a, (void*) &ac);
+    // Write serialised array as message to terminal.
+    write_data(p0, p1, p2, a, (void*) &ac);
 
     // Destroy array.
     destroy((void*) &a, (void*) &as, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 */
 
-    send_general(p0, p1, p2, p3, p4, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
+    //?? TEST.
+    write_data(p0, p1, p2, p3, p4, (void*) TERMINAL_CHANNEL, (void*) TERMINAL_CHANNEL_COUNT);
 }
 
 /* SEND_LINUX_CONSOLE_SOURCE */

@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-07-12 14:35:30 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,7 +28,7 @@
 #define VGA_COMMUNICATOR_SOURCE
 
 /**
- * Receives an expose x windows input.
+ * Reads an expose x windows input.
  *
  * An expose leads to repainting the window.
  *
@@ -36,7 +36,7 @@
  * @param p1 the internal x windows data
  * @param p2 the event
  */
-void receive_expose_x_windows(void* p0, void* p1, void* p2) {
+void read_expose_x_windows(void* p0, void* p1, void* p2) {
 
 /*??
     struct x_windows* x = (struct x_windows*) p1;
@@ -134,35 +134,35 @@ void receive_expose_x_windows(void* p0, void* p1, void* p2) {
 
             } else {
 
-//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not receive expose x windows input. The expose event is null.");
+//??                log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read expose x windows input. The expose event is null.");
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not receive expose x windows input. The event is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read expose x windows input. The event is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not receive expose x windows input. The x windows is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read expose x windows input. The x windows is null.");
     }
 */
 }
 
 /**
- * Receives a mapping notify x windows input.
+ * Reads a mapping notify x windows input.
  *
  * Processes keyboard mapping changes.
  *
  * @param p0 the event
  */
-void receive_mapping_notify_x_windows_input(void* p0) {
+void read_mapping_notify_x_windows_input(void* p0) {
 
 //??    XRefreshKeyboardMapping((XMappingEvent*) p0);
 }
 
 /**
- * Receives a key press x windows input.
+ * Reads a key press x windows input.
  *
  * Processes keyboard events.
  *
@@ -170,7 +170,7 @@ void receive_mapping_notify_x_windows_input(void* p0) {
  * @param p1 the internal x windows data
  * @param p2 the event
  */
-void receive_key_press_x_windows_input(void* p0, void* p1, void* p2) {
+void read_key_press_x_windows_input(void* p0, void* p1, void* p2) {
 
 /*??
     struct x_windows* x = (struct x_windows*) p1;
@@ -227,18 +227,18 @@ void receive_key_press_x_windows_input(void* p0, void* p1, void* p2) {
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not receive key press x windows input. The event is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read key press x windows input. The event is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not receive key press x windows input. The x windows is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read key press x windows input. The x windows is null.");
     }
 */
 }
 
 /**
- * Receives a button press x windows input.
+ * Reads a button press x windows input.
  *
  * Processes mouse events.
  *
@@ -246,7 +246,7 @@ void receive_key_press_x_windows_input(void* p0, void* p1, void* p2) {
  * @param p1 the internal x windows data
  * @param p2 the event
  */
-void receive_button_press_x_windows_input(void* p0, void* p1, void* p2) {
+void read_button_press_x_windows_input(void* p0, void* p1, void* p2) {
 
 /*??
     struct x_windows* x = (struct x_windows*) p1;
@@ -296,18 +296,18 @@ void receive_button_press_x_windows_input(void* p0, void* p1, void* p2) {
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not receive button press x windows input. The event is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read button press x windows input. The event is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not receive button press x windows input. The x windows is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read button press x windows input. The x windows is null.");
     }
 */
 }
 
 /**
- * Receives a graphics array from a vga graphics adapter and translates it into
+ * Reads a graphics array from a vga graphics adapter and translates it into
  * a serialised x window model.
  *
  * @param p0 the destination (serialised x window model) (Hand over as reference!)
@@ -316,7 +316,7 @@ void receive_button_press_x_windows_input(void* p0, void* p1, void* p2) {
  * @param p3 the source (graphics adapter array)
  * @param p4 the source count
  */
-void receive_vga(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void read_vga(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
 /*??
     struct x_windows* x = (struct x_windows*) p1;
@@ -335,29 +335,29 @@ void receive_vga(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 
             if (t == Expose) {
 
-                receive_expose_x_windows_input(p0, p1, (void*) e);
+                read_expose_x_windows_input(p0, p1, (void*) e);
 
             } else if (t == MappingNotify) {
 
-                receive_mapping_notify_x_windows_input((void*) e);
+                read_mapping_notify_x_windows_input((void*) e);
 
             } else if (t == KeyPress) {
 
-                receive_key_press_x_windows_input(p0, p1, (void*) e);
+                read_key_press_x_windows_input(p0, p1, (void*) e);
 
             } else if (t == ButtonPress) {
 
-                receive_button_press_x_windows_input(p0, p1, (void*) e);
+                read_button_press_x_windows_input(p0, p1, (void*) e);
             }
 
         } else {
 
-//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not receive x windows input. The event is null.");
+//??            log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read x windows input. The event is null.");
         }
 
     } else {
 
-//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not receive x windows input. The x windows is null.");
+//??        log_message((void*) &ERROR_LOG_LEVEL, (void*) &"Could not read x windows input. The x windows is null.");
     }
 */
 }
@@ -479,7 +479,7 @@ void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
 */
 
 /**
- * Sends a serialised x window model in form of a graphics array to a
+ * Writes a serialised x window model in form of a graphics array to a
  * vga graphics adapter.
  *
  * @param p0 the destination (graphics array) (Hand over as reference!)
@@ -488,7 +488,7 @@ void mouse_clicked_action(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source (serialised x window model)
  * @param p4 the source count
  */
-void send_vga(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void write_vga(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /* VGA_COMMUNICATOR_SOURCE */

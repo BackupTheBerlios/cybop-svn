@@ -22,7 +22,7 @@
  *
  * This file creates a transient model from a persistent model.
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -167,8 +167,8 @@ void create_primitive_model(void* p0, void* p1, void* p2, const void* p3, const 
     // Create receive model of type character, to read single bytes.
     create((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
-    // Receive persistent byte stream over channel.
-    receive_general((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
+    // Reads persistent byte stream over channel.
+    read_data((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
 
     //
     // Parse.
@@ -246,8 +246,8 @@ void create_compound_model(void* p0, void* p1, void* p2, const void* p3, const v
     // Create receive model of type character, to read single bytes.
     create((void*) &rm, (void*) &rms, (void*) STRING_ABSTRACTION, (void*) STRING_ABSTRACTION_COUNT);
 
-    // Receive persistent byte stream over channel.
-    receive_general((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
+    // Read persistent byte stream over channel.
+    read_data((void*) &rm, (void*) &rmc, (void*) &rms, p3, p4, p7, p8);
 
     //
     // Parse.

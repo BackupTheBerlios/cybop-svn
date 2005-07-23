@@ -24,7 +24,7 @@
  * - receive an http stream into a byte array
  * - send an http stream from a byte array
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,7 +37,7 @@
 #include "../../memoriser/array.c"
 
 /**
- * Receives an http stream and writes it into a byte array.
+ * Reads an http stream and writes it into a byte array.
  *
  * @param p0 the destination (byte array) (Hand over as reference!)
  * @param p1 the destination count
@@ -45,11 +45,11 @@
  * @param p3 the source (http url)
  * @param p4 the source count
  */
-void receive_http(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void read_http(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /**
- * Sends an http stream that was read from a byte array.
+ * Writes an http stream that was read from a byte array.
  *
  * @param p0 the destination (http url) (Hand over as reference!)
  * @param p1 the destination count
@@ -57,7 +57,7 @@ void receive_http(void* p0, void* p1, void* p2, const void* p3, const void* p4) 
  * @param p3 the source (byte array)
  * @param p4 the source count
  */
-void send_http(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
+void write_http(void* p0, void* p1, void* p2, const void* p3, const void* p4) {
 }
 
 /* HTTP_COMMUNICATOR_SOURCE */

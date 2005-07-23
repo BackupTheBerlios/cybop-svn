@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.20 $ $Date: 2005-07-20 15:50:37 $ $Author: christian $
+ * @version $Revision: 1.21 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -166,11 +166,11 @@ void destroy_unix_server_socket(void* p0) {
 }
 
 /**
- * Sends unix socket output.
+ * Writes to unix socket.
  *
  * @param p0 the internals memory
  */
-void send_unix_socket(void* p0) {
+void write_unix_socket(void* p0) {
 
 /*??
 @param p0 the receiver address
@@ -188,7 +188,7 @@ void send_unix_socket(void* p0) {
 
             void** m = (void**) p2;
 
-            log_message_debug("Send unix server socket.");
+            log_message_debug("Write to unix socket.");
 
             // Open socket and get its number.
             // AF stands for address format. AF_LOCAL is a synonym for AF_UNIX.
@@ -265,11 +265,11 @@ void send_unix_socket(void* p0) {
 }
 
 /**
- * Receives unix socket input.
+ * Reads from unix socket.
  *
  * @param p0 the internals memory
  */
-void receive_unix_socket(void* p0) {
+void read_unix_socket(void* p0) {
 
     // The unix server socket.
     int* s = INTEGER_NULL_POINTER;
@@ -279,7 +279,7 @@ void receive_unix_socket(void* p0) {
 
     if (s != INTEGER_NULL_POINTER) {
 
-        log_message_debug("Receive unix server socket.");
+        log_message_debug("Read from unix socket.");
 
         // The client socket address.
         struct sockaddr_un ca;
@@ -300,7 +300,7 @@ void receive_unix_socket(void* p0) {
 
             log_message_debug("DEBUG: Accepted unix client socket request.");
 
-            // Receive message from socket.
+            // Read message from socket.
 //??            read(cs, (char*) *m, *mc);
 
             // Convert message to avoid byte-order problems. Many machines
@@ -313,12 +313,12 @@ void receive_unix_socket(void* p0) {
 
         } else {
 
-            fprintf(stderr, "Could not receive unix server socket. The accept failed.");
+            fprintf(stderr, "Could not read unix server socket. The accept failed.");
         }
 
     } else {
 
-        log_message_debug("Could not receive unix server socket. The socket is null.");
+        log_message_debug("Could not read unix server socket. The socket is null.");
     }
 }
 

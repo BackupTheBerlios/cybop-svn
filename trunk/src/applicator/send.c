@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-07-23 10:11:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -199,6 +199,7 @@ void send_message(const void* p0, const void* p1,
         }
     }
 
+/*??
     if (r != 1) {
 
         compare_arrays((void*) *lm, (void*) *lmc, (void*) TCP_SOCKET_MODEL, (void*) TCP_SOCKET_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
@@ -272,6 +273,7 @@ void send_message(const void* p0, const void* p1,
             }
         }
     }
+*/
 }
 
 /**
@@ -309,6 +311,7 @@ void refresh_url(const void* p0, const void* p1,
         (void*) &urld, (void*) &urldc, (void*) &urlds,
         p3, p4);
 
+/*??
     if ((urla != NULL_POINTER)
          && (urlac != NULL_POINTER)
          && (urlas != NULL_POINTER)
@@ -374,6 +377,7 @@ void refresh_url(const void* p0, const void* p1,
             }
         }
     }
+*/
 }
 
 /* SEND_SOURCE */
