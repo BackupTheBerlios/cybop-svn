@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>CYBOP 0.6.0.0</title>
     <!--
         $RCSfile: features.html,v $
 
@@ -18,12 +17,11 @@
         http://www.cybop.net
         - Cybernetics Oriented Programming -
     /-->
-    <meta name="date" content="$Revision: 1.1 $ $Date: 2005-06-07 15:21:07 $">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
+    <meta name="date" content="$Revision: 1.2 $ $Date: 2005-07-23 11:00:36 $">
     <meta name="author" content="$Author: christian $">
-    <!-- Includes Cascading Style Sheet. -->
     <link rel="stylesheet" type="text/css" href="../../cybop.css"/>
-    <!-- Forces web server to reload pages every 30 days and not to take it from a proxy. -->
-    <meta http-equiv="expires" content="2592000"/>
+    <title>CYBOP 0.6.0.0</title>
 </head>
 <body>
     <table width="900" cellspacing="0" cellpadding="0" border="0">
@@ -57,44 +55,39 @@
                         <td align="left" valign="top">
                             <h6>Project</h6>
                             <ul>
-                                <li>Create Debian packages <i>cybop-books</i>, <i>cybol-core</i>, <i>cybol-healthcare</i></li>
-                                <li>Add CYBOL directory to system path</li>
-                                <li>Create startup scripts and KDE/ GNOME menu entries for all CYBOL applications</li>
+                                <li>Sponsor Debian packages and upload to testing distribution</li>
+                                <li>Provide source code tar balls (tar.gz), as pre-condition</li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
-                            Dennis Reichenbach<br>
-                            <<a href="mailto:dennis.reichenbach@gmx.net">dennis.reichenbach@gmx.net</a>><br>
+                            Andreas Tille<br>
+                            <<a href="mailto:tille@debian.org">tille@debian.org</a>><br>
+                            Christian Heller<br>
+                            <<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>><br>
                         </td>
                     </tr>
                     <tr bgcolor="#000000">
-                        <td bgcolor="#FF8080"/>
+                        <td bgcolor="#FFFFC0"/>
                         <td align="left" valign="top">
                             <h6>CYBOI</h6>
                             <ul>
-                                <li>Change signal <i>wait</i> loop to become blocking, that is to react only to interrupts;
-                                    this avoids wasting system resources (CPU activity) as it happened up to now</li>
-                                <li>Implement CYBOL serialisation and persistence handling</li>
-                                <li>Implement handling of <i>Textual User Interfaces</i> (TUI);
+                                <li>Write log messages to a file instead of to console</li>
+                                <li>Hand over memories as parameters, instead of reading
+                                    them every time from <i>internal_memory</i></li>
+                                <li>Rename low-level <i>receive</i>/ <i>send</i> into
+                                    <i>read</i>/ <i>write</i>, to better distinguish them from
+                                    the high-level <i>receive</i>/ <i>send</i> CYBOL operations</li>
+                                <li>Rename low-level <i>create</i>/ <i>destroy</i> into
+                                    <i>allocate</i>/ <i>deallocate</i>, to better distinguish them from
+                                    the high-level <i>create</i>/ <i>destroy</i> CYBOL operations</li>
+                                <li>Implement terminal handling of <i>Textual User Interfaces</i> (TUI);
                                     (see <a href="http://zemljanka.sourceforge.net/cursed/">Zemljanka</a>
                                     and <a href="http://tvision.sourceforge.net/">TurboVision</a>)</li>
-                                <li>Improve X-Windows graphics drawing routines (xlibs)</li>
-                                <li>Implement RPC communication</li>
-                                <li>Implement CORBA (Healthcare/ HDTF/ CORBAmed) communication</li>
-                                <li>Implement SOAP communication</li>
-                                <li>Implement HL7 Message communication</li>
-                                <li>Implement HL7 <i>Clinical Document Architecture</i> (CDA) communication</li>
-                                <li>Implement DICOM communication</li>
-                                <li>Use colors for log messages on console (see SuSE Linux logs:
-                                    <i>Doing action ... ok (green)/failed (red)</i>,
-                                    <i>ok</i> on the right side of the screen)</li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
                             Christian Heller<br>
                             <<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>><br>
-                            Rolf Holzmueller<br>
-                            <<a href="mailto:rolf.holzmueller@gmx.de">rolf.holzmueller@gmx.de</a>><br>
                         </td>
                     </tr>
                     <tr bgcolor="#000000">
@@ -102,16 +95,9 @@
                         <td align="left" valign="top">
                             <h6>CYBOL</h6>
                             <ul>
-                                <li>Think through ontology (package structure) once more</li>
-                                <li>Implement <i>start_progress</i> and <i>stop_progress</i> action
-                                    to set <i>Wait</i> cursor at beginning and end of <i>handle</i></li>
-                                <li>Implement <i>login</i> at system startup</li>
-                                <li>Implement <i>UnDo</i> functionality; see design patterns <i>Command</i> and <i>Memento</i></li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
-                            Christian Heller<br>
-                            <<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>><br>
                         </td>
                     </tr>
                     </table>
@@ -123,9 +109,8 @@
     <tr>
         <td>
             <!-- Copyright Information. -->
-            <br/>
             <hr noshade size="1"/>
-            <font size="1">Copyright (c) 2002-2005. <a href="mailto:cybop-webmasters@lists.berlios.de">The CYBOP Webmasters</a>. All rights reserved. GNU FDL license. Last Update: 2005-06-07</font>
+            <font size="1">Copyright (c) 2002-2005. <a href="mailto:cybop-webmasters@lists.berlios.de">The CYBOP Webmasters</a>. All rights reserved. GNU FDL license. Last Update: 2005-07-23</font>
         </td>
     </tr>
     </table>
