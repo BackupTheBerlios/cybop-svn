@@ -20,12 +20,33 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-25 08:17:35 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ABSTRACTION_CONSTANTS_SOURCE
 #define ABSTRACTION_CONSTANTS_SOURCE
+
+#include "../../globals/constants/integer_constants.c"
+
+//
+// Array abstractions.
+//
+
+/** The character array constant. */
+static const int* CHARACTER_ARRAY = NUMBER_0_INTEGER_ARRAY;
+
+/** The integer array constant. */
+static const int* INTEGER_ARRAY = NUMBER_1_INTEGER_ARRAY;
+
+/** The pointer array constant. */
+static const int* POINTER_ARRAY = NUMBER_2_INTEGER_ARRAY;
+
+/** The double array constant. */
+static const int* DOUBLE_ARRAY = NUMBER_3_INTEGER_ARRAY;
+
+/** The unsigned long array constant. */
+static const int* UNSIGNED_LONG_ARRAY = NUMBER_4_INTEGER_ARRAY;
 
 //
 // Internal memory abstraction.
@@ -34,8 +55,7 @@
 /** The internal memory abstraction. */
 static const char INTERNAL_MEMORY_ABSTRACTION_ARRAY[] = {'i', 'n', 't', 'e', 'r', 'n', 'a', 'l', '_', 'm', 'e', 'm', 'o', 'r', 'y'};
 static const char* INTERNAL_MEMORY_ABSTRACTION = INTERNAL_MEMORY_ABSTRACTION_ARRAY;
-static const int INTERNAL_MEMORY_ABSTRACTION_COUNT_ARRAY[] = {16};
-static const int* INTERNAL_MEMORY_ABSTRACTION_COUNT = INTERNAL_MEMORY_ABSTRACTION_COUNT_ARRAY;
+static const int* INTERNAL_MEMORY_ABSTRACTION_COUNT = NUMBER_16_INTEGER_ARRAY;
 
 //
 // Compound abstraction.
@@ -48,8 +68,7 @@ static const int* INTERNAL_MEMORY_ABSTRACTION_COUNT = INTERNAL_MEMORY_ABSTRACTIO
 /** The compound abstraction. */
 static const char COMPOUND_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'o', 'u', 'n', 'd'};
 static const char* COMPOUND_ABSTRACTION = COMPOUND_ABSTRACTION_ARRAY;
-static const int COMPOUND_ABSTRACTION_COUNT_ARRAY[] = {8};
-static const int* COMPOUND_ABSTRACTION_COUNT = COMPOUND_ABSTRACTION_COUNT_ARRAY;
+static const int* COMPOUND_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 //
 // Signal memory abstraction.
@@ -58,8 +77,7 @@ static const int* COMPOUND_ABSTRACTION_COUNT = COMPOUND_ABSTRACTION_COUNT_ARRAY;
 /** The signal memory abstraction. */
 static const char SIGNAL_MEMORY_ABSTRACTION_ARRAY[] = {'s', 'i', 'g', 'n', 'a', 'l', '_', 'm', 'e', 'm', 'o', 'r', 'y'};
 static const char* SIGNAL_MEMORY_ABSTRACTION = SIGNAL_MEMORY_ABSTRACTION_ARRAY;
-static const int SIGNAL_MEMORY_ABSTRACTION_COUNT_ARRAY[] = {13};
-static const int* SIGNAL_MEMORY_ABSTRACTION_COUNT = SIGNAL_MEMORY_ABSTRACTION_COUNT_ARRAY;
+static const int* SIGNAL_MEMORY_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 //
 // Knowledge abstraction.
@@ -70,14 +88,12 @@ static const int* SIGNAL_MEMORY_ABSTRACTION_COUNT = SIGNAL_MEMORY_ABSTRACTION_CO
 /** The knowledge abstraction. */
 static const char KNOWLEDGE_ABSTRACTION_ARRAY[] = {'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e'};
 static const char* KNOWLEDGE_ABSTRACTION = KNOWLEDGE_ABSTRACTION_ARRAY;
-static const int KNOWLEDGE_ABSTRACTION_COUNT_ARRAY[] = {9};
-static const int* KNOWLEDGE_ABSTRACTION_COUNT = KNOWLEDGE_ABSTRACTION_COUNT_ARRAY;
+static const int* KNOWLEDGE_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
 
 /** The encapsulated knowledge abstraction. */
 static const char ENCAPSULATED_KNOWLEDGE_ABSTRACTION_ARRAY[] = {'e', 'n', 'c', 'a', 'p', 's', 'u', 'l', 'a', 't', 'e', 'd', '_', 'k', 'n', 'o', 'w', 'l', 'e', 'd', 'g', 'e'};
 static const char* ENCAPSULATED_KNOWLEDGE_ABSTRACTION = ENCAPSULATED_KNOWLEDGE_ABSTRACTION_ARRAY;
-static const int ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT_ARRAY[] = {22};
-static const int* ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT = ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT_ARRAY;
+static const int* ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT = NUMBER_22_INTEGER_ARRAY;
 
 //
 // Internal abstractions.
@@ -86,8 +102,7 @@ static const int* ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT = ENCAPSULATED_KNOWLE
 /** The textual user interface (tui) abstraction. */
 static const char TUI_ABSTRACTION_ARRAY[] = {'t', 'u', 'i'};
 static const char* TUI_ABSTRACTION = TUI_ABSTRACTION_ARRAY;
-static const int TUI_ABSTRACTION_COUNT_ARRAY[] = {9};
-static const int* TUI_ABSTRACTION_COUNT = TUI_ABSTRACTION_COUNT_ARRAY;
+static const int* TUI_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 //
 // Operation abstraction.
@@ -96,8 +111,7 @@ static const int* TUI_ABSTRACTION_COUNT = TUI_ABSTRACTION_COUNT_ARRAY;
 /** The operation abstraction. */
 static const char OPERATION_ABSTRACTION_ARRAY[] = {'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n'};
 static const char* OPERATION_ABSTRACTION = OPERATION_ABSTRACTION_ARRAY;
-static const int OPERATION_ABSTRACTION_COUNT_ARRAY[] = {9};
-static const int* OPERATION_ABSTRACTION_COUNT = OPERATION_ABSTRACTION_COUNT_ARRAY;
+static const int* OPERATION_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
 
 //
 // Primitive abstractions.
@@ -106,56 +120,47 @@ static const int* OPERATION_ABSTRACTION_COUNT = OPERATION_ABSTRACTION_COUNT_ARRA
 /** The pointer abstraction. */
 static const char POINTER_ABSTRACTION_ARRAY[] = {'p', 'o', 'i', 'n', 't', 'e', 'r'};
 static const char* POINTER_ABSTRACTION = POINTER_ABSTRACTION_ARRAY;
-static const int POINTER_ABSTRACTION_COUNT_ARRAY[] = {7};
-static const int* POINTER_ABSTRACTION_COUNT = POINTER_ABSTRACTION_COUNT_ARRAY;
+static const int* POINTER_ABSTRACTION_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The boolean abstraction. */
 static const char BOOLEAN_ABSTRACTION_ARRAY[] = {'b', 'o', 'o', 'l', 'e', 'a', 'n'};
 static const char* BOOLEAN_ABSTRACTION = BOOLEAN_ABSTRACTION_ARRAY;
-static const int BOOLEAN_ABSTRACTION_COUNT_ARRAY[] = {7};
-static const int* BOOLEAN_ABSTRACTION_COUNT = BOOLEAN_ABSTRACTION_COUNT_ARRAY;
+static const int* BOOLEAN_ABSTRACTION_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The integer abstraction. */
 static const char INTEGER_ABSTRACTION_ARRAY[] = {'i', 'n', 't', 'e', 'g', 'e', 'r'};
 static const char* INTEGER_ABSTRACTION = INTEGER_ABSTRACTION_ARRAY;
-static const int INTEGER_ABSTRACTION_COUNT_ARRAY[] = {7};
-static const int* INTEGER_ABSTRACTION_COUNT = INTEGER_ABSTRACTION_COUNT_ARRAY;
+static const int* INTEGER_ABSTRACTION_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The double abstraction. */
 static const char DOUBLE_ABSTRACTION_ARRAY[] = {'d', 'o', 'u', 'b', 'l', 'e'};
 static const char* DOUBLE_ABSTRACTION = DOUBLE_ABSTRACTION_ARRAY;
-static const int DOUBLE_ABSTRACTION_COUNT_ARRAY[] = {6};
-static const int* DOUBLE_ABSTRACTION_COUNT = DOUBLE_ABSTRACTION_COUNT_ARRAY;
+static const int* DOUBLE_ABSTRACTION_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /** The fraction abstraction. */
 static const char FRACTION_ABSTRACTION_ARRAY[] = {'f', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
 static const char* FRACTION_ABSTRACTION = FRACTION_ABSTRACTION_ARRAY;
-static const int FRACTION_ABSTRACTION_COUNT_ARRAY[] = {8};
-static const int* FRACTION_ABSTRACTION_COUNT = FRACTION_ABSTRACTION_COUNT_ARRAY;
+static const int* FRACTION_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /** The complex abstraction. */
 static const char COMPLEX_ABSTRACTION_ARRAY[] = {'c', 'o', 'm', 'p', 'l', 'e', 'x'};
 static const char* COMPLEX_ABSTRACTION = COMPLEX_ABSTRACTION_ARRAY;
-static const int COMPLEX_ABSTRACTION_COUNT_ARRAY[] = {7};
-static const int* COMPLEX_ABSTRACTION_COUNT = COMPLEX_ABSTRACTION_COUNT_ARRAY;
+static const int* COMPLEX_ABSTRACTION_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The vector abstraction. */
 static const char VECTOR_ABSTRACTION_ARRAY[] = {'v', 'e', 'c', 't', 'o', 'r'};
 static const char* VECTOR_ABSTRACTION = VECTOR_ABSTRACTION_ARRAY;
-static const int VECTOR_ABSTRACTION_COUNT_ARRAY[] = {6};
-static const int* VECTOR_ABSTRACTION_COUNT = VECTOR_ABSTRACTION_COUNT_ARRAY;
+static const int* VECTOR_ABSTRACTION_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /** The string abstraction. */
 static const char STRING_ABSTRACTION_ARRAY[] = {'s', 't', 'r', 'i', 'n', 'g'};
 static const char* STRING_ABSTRACTION = STRING_ABSTRACTION_ARRAY;
-static const int STRING_ABSTRACTION_COUNT_ARRAY[] = {6};
-static const int* STRING_ABSTRACTION_COUNT = STRING_ABSTRACTION_COUNT_ARRAY;
+static const int* STRING_ABSTRACTION_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /** The time abstraction. */
 static const char TIME_ABSTRACTION_ARRAY[] = {'t', 'i', 'm', 'e'};
 static const char* TIME_ABSTRACTION = TIME_ABSTRACTION_ARRAY;
-static const int TIME_ABSTRACTION_COUNT_ARRAY[] = {4};
-static const int* TIME_ABSTRACTION_COUNT = TIME_ABSTRACTION_COUNT_ARRAY;
+static const int* TIME_ABSTRACTION_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 //
 // Audio abstractions.
@@ -164,8 +169,7 @@ static const int* TIME_ABSTRACTION_COUNT = TIME_ABSTRACTION_COUNT_ARRAY;
 /** The mp3 abstraction. */
 static const char MP3_MODEL_ARRAY[] = {'m', 'p', '3'};
 static const char* MP3_MODEL = MP3_MODEL_ARRAY;
-static const int MP3_ABSTRACTION_COUNT_ARRAY[] = {3};
-static const int* MP3_ABSTRACTION_COUNT = MP3_ABSTRACTION_COUNT_ARRAY;
+static const int* MP3_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 //
 // Image abstractions.
@@ -174,20 +178,17 @@ static const int* MP3_ABSTRACTION_COUNT = MP3_ABSTRACTION_COUNT_ARRAY;
 /** The jpeg abstraction. */
 static const char JPEG_ABSTRACTION_ARRAY[] = {'j', 'p', 'e', 'g'};
 static const char* JPEG_ABSTRACTION = JPEG_ABSTRACTION_ARRAY;
-static const int JPEG_ABSTRACTION_COUNT_ARRAY[] = {4};
-static const int* JPEG_ABSTRACTION_COUNT = JPEG_ABSTRACTION_COUNT_ARRAY;
+static const int* JPEG_ABSTRACTION_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The gif abstraction. */
 static const char GIF_ABSTRACTION_ARRAY[] = {'g', 'i', 'f'};
 static const char* GIF_ABSTRACTION = GIF_ABSTRACTION_ARRAY;
-static const int GIF_ABSTRACTION_COUNT_ARRAY[] = {3};
-static const int* GIF_ABSTRACTION_COUNT = GIF_ABSTRACTION_COUNT_ARRAY;
+static const int* GIF_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The bmp abstraction. */
 static const char BMP_ABSTRACTION_ARRAY[] = {'b', 'm', 'p'};
 static const char* BMP_ABSTRACTION = BMP_ABSTRACTION_ARRAY;
-static const int BMP_ABSTRACTION_COUNT_ARRAY[] = {3};
-static const int* BMP_ABSTRACTION_COUNT = BMP_ABSTRACTION_COUNT_ARRAY;
+static const int* BMP_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 //
 // Text abstractions.
@@ -196,44 +197,37 @@ static const int* BMP_ABSTRACTION_COUNT = BMP_ABSTRACTION_COUNT_ARRAY;
 /** The cybol abstraction. */
 static const char CYBOL_ABSTRACTION_ARRAY[] = {'c', 'y', 'b', 'o', 'l'};
 static const char* CYBOL_ABSTRACTION = CYBOL_ABSTRACTION_ARRAY;
-static const int CYBOL_ABSTRACTION_COUNT_ARRAY[] = {5};
-static const int* CYBOL_ABSTRACTION_COUNT = CYBOL_ABSTRACTION_COUNT_ARRAY;
+static const int* CYBOL_ABSTRACTION_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The sgml abstraction. */
 static const char SGML_ABSTRACTION_ARRAY[] = {'s', 'g', 'm', 'l'};
 static const char* SGML_ABSTRACTION = SGML_ABSTRACTION_ARRAY;
-static const int SGML_ABSTRACTION_COUNT_ARRAY[] = {4};
-static const int* SGML_ABSTRACTION_COUNT = SGML_ABSTRACTION_COUNT_ARRAY;
+static const int* SGML_ABSTRACTION_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The xml abstraction. */
 static const char XML_ABSTRACTION_ARRAY[] = {'x', 'm', 'l'};
 static const char* XML_ABSTRACTION = XML_ABSTRACTION_ARRAY;
-static const int XML_ABSTRACTION_COUNT_ARRAY[] = {3};
-static const int* XML_ABSTRACTION_COUNT = XML_ABSTRACTION_COUNT_ARRAY;
+static const int* XML_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The html abstraction. */
 static const char HTML_ABSTRACTION_ARRAY[] = {'h', 't', 'm', 'l'};
 static const char* HTML_ABSTRACTION = HTML_ABSTRACTION_ARRAY;
-static const int HTML_ABSTRACTION_COUNT_ARRAY[] = {4};
-static const int* HTML_ABSTRACTION_COUNT = HTML_ABSTRACTION_COUNT_ARRAY;
+static const int* HTML_ABSTRACTION_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The rtf abstraction. */
 static const char RTF_ABSTRACTION_ARRAY[] = {'r', 't', 'f'};
 static const char* RTF_ABSTRACTION = RTF_ABSTRACTION_ARRAY;
-static const int RTF_ABSTRACTION_COUNT_ARRAY[] = {3};
-static const int* RTF_ABSTRACTION_COUNT = RTF_ABSTRACTION_COUNT_ARRAY;
+static const int* RTF_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The tex abstraction. */
 static const char TEX_ABSTRACTION_ARRAY[] = {'t', 'e', 'x'};
 static const char* TEX_ABSTRACTION = TEX_ABSTRACTION_ARRAY;
-static const int TEX_ABSTRACTION_COUNT_ARRAY[] = {3};
-static const int* TEX_ABSTRACTION_COUNT = TEX_ABSTRACTION_COUNT_ARRAY;
+static const int* TEX_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The healthcare exchange protocol abstraction. */
 static const char HXP_ABSTRACTION_ARRAY[] = {'h', 'x', 'p'};
 static const char* HXP_ABSTRACTION = HXP_ABSTRACTION_ARRAY;
-static const int HXP_ABSTRACTION_COUNT_ARRAY[] = {5};
-static const int* HXP_ABSTRACTION_COUNT = HXP_ABSTRACTION_COUNT_ARRAY;
+static const int* HXP_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 //
 // Video abstractions.
@@ -242,14 +236,12 @@ static const int* HXP_ABSTRACTION_COUNT = HXP_ABSTRACTION_COUNT_ARRAY;
 /** The mpeg abstraction. */
 static const char MPEG_ABSTRACTION_ARRAY[] = {'m', 'p', 'e', 'g'};
 static const char* MPEG_ABSTRACTION = MPEG_ABSTRACTION_ARRAY;
-static const int MPEG_ABSTRACTION_COUNT_ARRAY[] = {4};
-static const int* MPEG_ABSTRACTION_COUNT = MPEG_ABSTRACTION_COUNT_ARRAY;
+static const int* MPEG_ABSTRACTION_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The quicktime abstraction. */
 static const char QT_ABSTRACTION_ARRAY[] = {'q', 't'};
 static const char* QT_ABSTRACTION = QT_ABSTRACTION_ARRAY;
-static const int QT_ABSTRACTION_COUNT_ARRAY[] = {2};
-static const int* QT_ABSTRACTION_COUNT = QT_ABSTRACTION_COUNT_ARRAY;
+static const int* QT_ABSTRACTION_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 //
 // Packed abstractions.
@@ -258,14 +250,12 @@ static const int* QT_ABSTRACTION_COUNT = QT_ABSTRACTION_COUNT_ARRAY;
 /** The tar abstraction. */
 static const char TAR_ABSTRACTION_ARRAY[] = {'t', 'a', 'r'};
 static const char* TAR_ABSTRACTION = TAR_ABSTRACTION_ARRAY;
-static const int TAR_ABSTRACTION_COUNT_ARRAY[] = {3};
-static const int* TAR_ABSTRACTION_COUNT = TAR_ABSTRACTION_COUNT_ARRAY;
+static const int* TAR_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The zip abstraction. */
 static const char ZIP_ABSTRACTION_ARRAY[] = {'z', 'i', 'p'};
 static const char* ZIP_ABSTRACTION = ZIP_ABSTRACTION_ARRAY;
-static const int ZIP_ABSTRACTION_COUNT_ARRAY[] = {3};
-static const int* ZIP_ABSTRACTION_COUNT = ZIP_ABSTRACTION_COUNT_ARRAY;
+static const int* ZIP_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 //
 // Application abstractions.
@@ -274,14 +264,12 @@ static const int* ZIP_ABSTRACTION_COUNT = ZIP_ABSTRACTION_COUNT_ARRAY;
 /** The koffice kword abstraction. */
 static const char KWD_ABSTRACTION_ARRAY[] = {'k', 'w', 'd'};
 static const char* KWD_ABSTRACTION = KWD_ABSTRACTION_ARRAY;
-static const int KWD_ABSTRACTION_COUNT_ARRAY[] = {5};
-static const int* KWD_ABSTRACTION_COUNT = KWD_ABSTRACTION_COUNT_ARRAY;
+static const int* KWD_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The open office writer abstraction. */
 static const char SXW_ABSTRACTION_ARRAY[] = {'s', 'x', 'w'};
 static const char* SXW_ABSTRACTION = SXW_ABSTRACTION_ARRAY;
-static const int SXW_ABSTRACTION_COUNT_ARRAY[] = {3};
-static const int* SXW_ABSTRACTION_COUNT = SXW_ABSTRACTION_COUNT_ARRAY;
+static const int* SXW_ABSTRACTION_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /* ABSTRACTION_CONSTANTS_SOURCE */
 #endif

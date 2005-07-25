@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-12 15:23:38 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -60,11 +60,11 @@ void add_client_socket_number(void* p0, void* p1) {
 
         resize_array((void*) cs, (void*) *css, (void*) INTEGER_ARRAY);
 
-        set_array_elements(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) cs, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) TCP_CLIENT_SOCKETS_INTERNAL, (void*) cs, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
     }
 
     // Add socket number.
-    set_array_elements(*cs, (void*) *csc, p1, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
+    set_array_elements(*cs, (void*) *csc, p1, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 
     (*((int*)*csc))++;
 }
@@ -93,11 +93,11 @@ void add_signal_id(void* p0, void* p1) {
 
         resize_array((void*) id, (void*) *ids, (void*) INTEGER_ARRAY);
 
-        set_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) id, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) id, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
     }
 
     // Add the socket number.
-    set_array_elements(*id, (void*) *idc, p1, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
+    set_array_elements(*id, (void*) *idc, p1, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 
     (*((int*)*idc))++;
 }
@@ -121,7 +121,7 @@ void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
     get_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_ARRAY);
 
     // Remove signal id.
-    remove_array_elements(*id, *ids, p1, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
+    remove_array_elements(*id, *ids, p1, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 
     (*((int*)*idc))--;
 
@@ -135,7 +135,7 @@ void remove_relation_clientsocketnumber_mainsignalid(void* p0, void* p1) {
     get_array_elements(p0, (void*) TCP_CLIENT_SOCKETS_SIZE_INTERNAL, (void*) &css, (void*) POINTER_ARRAY);
 
     // Remove client socket.
-    remove_array_elements(*cs, *css, p1, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
+    remove_array_elements(*cs, *css, p1, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 
     (*((int*)*csc))--;
 }
@@ -160,7 +160,7 @@ void get_index_for_signal_id(void* p0, const void* p1, void* p2) {
     get_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_ARRAY);
 
     // Get index.
-    get_array_elements_index(*id, (void*) *ids, p1, (void*) ONE_INTEGER, p2, (void*) INTEGER_ARRAY);
+    get_array_elements_index(*id, (void*) *ids, p1, (void*) NUMBER_1_INTEGER, p2, (void*) INTEGER_ARRAY);
 }
 
 /**

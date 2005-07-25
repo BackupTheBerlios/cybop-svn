@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-06-29 18:48:46 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,14 +28,14 @@
 #define CONSTANT_SOURCE
 
 #include "../../globals/constants/character_constants.c"
+#include "../../globals/constants/integer_constants.c"
 
 //
 // Signal priorities.
 //
 
 /** The normal priority. */
-static const int NORMAL_PRIORITY_ARRAY[] = {0};
-static const int* NORMAL_PRIORITY = NORMAL_PRIORITY_ARRAY;
+static const int* NORMAL_PRIORITY = NUMBER_0_INTEGER_ARRAY;
 
 //
 // Xml markups.
@@ -44,102 +44,84 @@ static const int* NORMAL_PRIORITY = NORMAL_PRIORITY_ARRAY;
 /** The begin comment tag array, pointer, count. */
 static const char BEGIN_COMMENT_TAG_ARRAY[] = {'<', '!', '-', '-'};
 static const char* BEGIN_COMMENT_TAG = BEGIN_COMMENT_TAG_ARRAY;
-static const int BEGIN_COMMENT_TAG_COUNT_ARRAY[] = {4};
-static const int* BEGIN_COMMENT_TAG_COUNT = BEGIN_COMMENT_TAG_COUNT_ARRAY;
+static const int* BEGIN_COMMENT_TAG_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The end comment tag array, pointer, count. */
 static const char END_COMMENT_TAG_ARRAY[] = {'/', '-', '-', '>'};
 static const char* END_COMMENT_TAG = END_COMMENT_TAG_ARRAY;
-static const int END_COMMENT_TAG_COUNT_ARRAY[] = {4};
-static const int* END_COMMENT_TAG_COUNT = END_COMMENT_TAG_COUNT_ARRAY;
+static const int* END_COMMENT_TAG_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The short end comment tag array, pointer, count. */
 static const char SHORT_END_COMMENT_TAG_ARRAY[] = {'-', '-', '>'};
 static const char* SHORT_END_COMMENT_TAG = SHORT_END_COMMENT_TAG_ARRAY;
-static const int SHORT_END_COMMENT_TAG_COUNT_ARRAY[] = {3};
-static const int* SHORT_END_COMMENT_TAG_COUNT = SHORT_END_COMMENT_TAG_COUNT_ARRAY;
+static const int* SHORT_END_COMMENT_TAG_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The begin tag begin array, pointer, count. */
 static const char BEGIN_TAG_BEGIN_ARRAY[] = {'<'};
 static const char* BEGIN_TAG_BEGIN = BEGIN_TAG_BEGIN_ARRAY;
-static const int BEGIN_TAG_BEGIN_COUNT_ARRAY[] = {1};
-static const int* BEGIN_TAG_BEGIN_COUNT = BEGIN_TAG_BEGIN_COUNT_ARRAY;
+static const int* BEGIN_TAG_BEGIN_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The end tag begin array, pointer, count. */
 static const char END_TAG_BEGIN_ARRAY[] = {'<', '/'};
 static const char* END_TAG_BEGIN = END_TAG_BEGIN_ARRAY;
-static const int END_TAG_BEGIN_COUNT_ARRAY[] = {2};
-static const int* END_TAG_BEGIN_COUNT = END_TAG_BEGIN_COUNT_ARRAY;
+static const int* END_TAG_BEGIN_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 /** The tag end array, pointer, count. */
 static const char TAG_END_ARRAY[] = {'>'};
 static const char* TAG_END = TAG_END_ARRAY;
-static const int TAG_END_COUNT_ARRAY[] = {1};
-static const int* TAG_END_COUNT = TAG_END_COUNT_ARRAY;
+static const int* TAG_END_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The empty tag end array, pointer, count. */
 static const char EMPTY_TAG_END_ARRAY[] = {'/', '>'};
 static const char* EMPTY_TAG_END = EMPTY_TAG_END_ARRAY;
-static const int EMPTY_TAG_END_COUNT_ARRAY[] = {2};
-static const int* EMPTY_TAG_END_COUNT = EMPTY_TAG_END_COUNT_ARRAY;
+static const int* EMPTY_TAG_END_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 /** The attribute begin array, pointer, count. */
 static const char ATTRIBUTE_BEGIN_ARRAY[] = {' '};
 static const char* ATTRIBUTE_BEGIN = ATTRIBUTE_BEGIN_ARRAY;
-static const int ATTRIBUTE_BEGIN_COUNT_ARRAY[] = {1};
-static const int* ATTRIBUTE_BEGIN_COUNT = ATTRIBUTE_BEGIN_COUNT_ARRAY;
+static const int* ATTRIBUTE_BEGIN_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The attribute value begin array, pointer, count. */
 static const char ATTRIBUTE_VALUE_BEGIN_ARRAY[] = {'=', '"'};
 static const char* ATTRIBUTE_VALUE_BEGIN = ATTRIBUTE_VALUE_BEGIN_ARRAY;
-static const int ATTRIBUTE_VALUE_BEGIN_COUNT_ARRAY[] = {1};
-static const int* ATTRIBUTE_VALUE_BEGIN_COUNT = ATTRIBUTE_VALUE_BEGIN_COUNT_ARRAY;
+static const int* ATTRIBUTE_VALUE_BEGIN_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The attribute value end array, pointer, count. */
 static const char ATTRIBUTE_VALUE_END_ARRAY[] = {'"'};
 static const char* ATTRIBUTE_VALUE_END = ATTRIBUTE_VALUE_END_ARRAY;
-static const int ATTRIBUTE_VALUE_END_COUNT_ARRAY[] = {1};
-static const int* ATTRIBUTE_VALUE_END_COUNT = ATTRIBUTE_VALUE_END_COUNT_ARRAY;
+static const int* ATTRIBUTE_VALUE_END_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 //
 // Xml parse modes.
 //
 
 /** The zero parse mode. */
-static const int ZERO_PARSE_MODE_ARRAY[] = {0};
-static const int* ZERO_PARSE_MODE = ZERO_PARSE_MODE_ARRAY;
+static const int* ZERO_PARSE_MODE = NUMBER_0_INTEGER_ARRAY;
 
 /** The comment tag parse mode. */
-static const int COMMENT_TAG_PARSE_MODE_ARRAY[] = {1};
-static const int* COMMENT_TAG_PARSE_MODE = COMMENT_TAG_PARSE_MODE_ARRAY;
+static const int* COMMENT_TAG_PARSE_MODE = NUMBER_1_INTEGER_ARRAY;
 
 /** The begin tag parse mode. */
-static const int BEGIN_TAG_PARSE_MODE_ARRAY[] = {2};
-static const int* BEGIN_TAG_PARSE_MODE = BEGIN_TAG_PARSE_MODE_ARRAY;
+static const int* BEGIN_TAG_PARSE_MODE = NUMBER_2_INTEGER_ARRAY;
 
 /** The end tag parse mode. */
-static const int END_TAG_PARSE_MODE_ARRAY[] = {3};
-static const int* END_TAG_PARSE_MODE = END_TAG_PARSE_MODE_ARRAY;
+static const int* END_TAG_PARSE_MODE = NUMBER_3_INTEGER_ARRAY;
 
 /** The tag value parse mode. */
-static const int TAG_VALUE_PARSE_MODE_ARRAY[] = {4};
-static const int* TAG_VALUE_PARSE_MODE = TAG_VALUE_PARSE_MODE_ARRAY;
+static const int* TAG_VALUE_PARSE_MODE = NUMBER_4_INTEGER_ARRAY;
 
 /** The attribute name parse mode. */
-static const int ATTRIBUTE_NAME_PARSE_MODE_ARRAY[] = {5};
-static const int* ATTRIBUTE_NAME_PARSE_MODE = ATTRIBUTE_NAME_PARSE_MODE_ARRAY;
+static const int* ATTRIBUTE_NAME_PARSE_MODE = NUMBER_5_INTEGER_ARRAY;
 
 /** The attribute value parse mode. */
-static const int ATTRIBUTE_VALUE_PARSE_MODE_ARRAY[] = {6};
-static const int* ATTRIBUTE_VALUE_PARSE_MODE = ATTRIBUTE_VALUE_PARSE_MODE_ARRAY;
+static const int* ATTRIBUTE_VALUE_PARSE_MODE = NUMBER_6_INTEGER_ARRAY;
 
 //
 // Cybol file.
 //
 
 /** The file resize factor. */
-static const int FILE_RESIZE_FACTOR_ARRAY[] = {2};
-static const int* FILE_RESIZE_FACTOR = FILE_RESIZE_FACTOR_ARRAY;
+static const int* FILE_RESIZE_FACTOR = NUMBER_2_INTEGER_ARRAY;
 
 /** The cybol path. */
 //?? static const char CYBOL_PATH[] = {'/home/cybop/lib/cybop/'};
@@ -157,9 +139,7 @@ static const int* FILE_RESIZE_FACTOR = FILE_RESIZE_FACTOR_ARRAY;
 /** The model location separator array, pointer, count. */
 static const char MODEL_LOCATION_SEPARATOR_ARRAY[] = {':'};
 static const char* MODEL_LOCATION_SEPARATOR = MODEL_LOCATION_SEPARATOR_ARRAY;
-static const int MODEL_LOCATION_SEPARATOR_COUNT_ARRAY[] = {1};
-static const int* MODEL_LOCATION_SEPARATOR_COUNT = MODEL_LOCATION_SEPARATOR_COUNT_ARRAY;
-
+static const int* MODEL_LOCATION_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 //
 // List separator.
@@ -169,8 +149,7 @@ static const int* MODEL_LOCATION_SEPARATOR_COUNT = MODEL_LOCATION_SEPARATOR_COUN
 /** The model location separator array, pointer, count. */
 static const char LIST_SEPARATOR_ARRAY[] = {'_', '$'};
 static const char* LIST_SEPARATOR = LIST_SEPARATOR_ARRAY;
-static const int LIST_SEPARATOR_COUNT_ARRAY[] = {2};
-static const int* LIST_SEPARATOR_COUNT = LIST_SEPARATOR_COUNT_ARRAY;
+static const int* LIST_SEPARATOR_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 //
 // Request method
@@ -179,14 +158,12 @@ static const int* LIST_SEPARATOR_COUNT = LIST_SEPARATOR_COUNT_ARRAY;
 /** The model request method get array, pointer, count. */
 static const char REQEUST_METHOD_GET_ARRAY[] = {'G', 'E', 'T'};
 static const char* REQEUST_METHOD_GET = REQEUST_METHOD_GET_ARRAY;
-static const int REQEUST_METHOD_GET_COUNT_ARRAY[] = {3};
-static const int* REQEUST_METHOD_GET_COUNT = REQEUST_METHOD_GET_COUNT_ARRAY;
+static const int* REQEUST_METHOD_GET_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The model request method post array, pointer, count. */
 static const char REQEUST_METHOD_POST_ARRAY[] = {'P', 'O', 'S', 'T'};
 static const char* REQEUST_METHOD_POST = REQEUST_METHOD_POST_ARRAY;
-static const int REQEUST_METHOD_POST_COUNT_ARRAY[] = {4};
-static const int* REQEUST_METHOD_POST_COUNT = REQEUST_METHOD_POST_COUNT_ARRAY;
+static const int* REQEUST_METHOD_POST_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 //
 // Cybol model values:
@@ -201,7 +178,7 @@ static const int* REQEUST_METHOD_POST_COUNT = REQEUST_METHOD_POST_COUNT_ARRAY;
 
 /** The compound element separator. */
 static const char* COMPOUND_ELEMENT_SEPARATOR = FULL_STOP_CHARACTER_ARRAY;
-static const int* COMPOUND_ELEMENT_SEPARATOR_COUNT = FULL_STOP_CHARACTER_COUNT_ARRAY;
+static const int* COMPOUND_ELEMENT_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 //
 // Operation.
@@ -209,23 +186,20 @@ static const int* COMPOUND_ELEMENT_SEPARATOR_COUNT = FULL_STOP_CHARACTER_COUNT_A
 
 /** The operation parameter separator. */
 static const char* OPERATION_PARAMETER_SEPARATOR = COMMA_CHARACTER_ARRAY;
-static const int* OPERATION_PARAMETER_SEPARATOR_COUNT = COMMA_CHARACTER_COUNT_ARRAY;
+static const int* OPERATION_PARAMETER_SEPARATOR_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 //
 // Cyboi.
 //
 
 /** The startup parameters count. */
-static const int STARTUP_PARAMETERS_COUNT_ARRAY[] = {2};
-static const int* STARTUP_PARAMETERS_COUNT = STARTUP_PARAMETERS_COUNT_ARRAY;
+static const int* STARTUP_PARAMETERS_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 /** The command parameter index. */
-static const int COMMAND_PARAMETER_INDEX_ARRAY[] = {0};
-static const int* COMMAND_PARAMETER_INDEX = COMMAND_PARAMETER_INDEX_ARRAY;
+static const int* COMMAND_PARAMETER_INDEX = NUMBER_0_INTEGER_ARRAY;
 
 /** The run file parameter index. */
-static const int RUN_FILE_PARAMETER_INDEX_ARRAY[] = {1};
-static const int* RUN_FILE_PARAMETER_INDEX = RUN_FILE_PARAMETER_INDEX_ARRAY;
+static const int* RUN_FILE_PARAMETER_INDEX = NUMBER_1_INTEGER_ARRAY;
 
 /* CONSTANT_SOURCE */
 #endif

@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:53 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,7 +63,7 @@ void allocate_tui(void* p0, const void* p1) {
         // Set panels.
         // The p0 parameter needs to be dereferenced since it is handed over
         // as reference, but this procedure expects a normal array.
-        set_array_elements(*t, (void*) TUI_PANELS_INDEX, (void*) &p, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*t, (void*) TUI_PANELS_INDEX, (void*) &p, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
 
     } else {
 
@@ -99,7 +99,7 @@ void deallocate_tui(void* p0, const void* p1) {
         // CAUTION! Use descending order as compared to creation, for faster removal.
         // The p0 parameter needs to be dereferenced since it is handed over
         // as reference, but this procedure expects a normal array.
-        remove_array_elements(*t, (void*) TUI_COUNT, (void*) TUI_PANELS_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*t, (void*) TUI_COUNT, (void*) TUI_PANELS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
 
         // Destroy panels.
         // CAUTION! Do NOT hand over as reference!

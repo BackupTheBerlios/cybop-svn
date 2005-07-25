@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @author Rolf Holzmueller <rolf.holzmueller@gmx.de>
  */
@@ -29,6 +29,7 @@
 #define COMPOUND_HANDLER_SOURCE
 
 #include "../../globals/constants/log_constants.c"
+#include "../../globals/constants/structure_constants.c"
 #include "../../globals/variables/variables.c"
 #include "../../globals/logger/logger.c"
 #include "../../memoriser/array.c"

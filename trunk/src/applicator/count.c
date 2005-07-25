@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-23 12:56:51 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -183,7 +183,7 @@ void count_parts(const void* p0, const void* p1, void* p2, void* p3, void* p4) {
 
             // Set the compare string
             // this is the basisname and the list separat
-            set_array_elements(compstring, (void*) ZERO_INTEGER, *bnm, *bnmc,  (void*) CHARACTER_ARRAY);
+            set_array_elements(compstring, (void*) NUMBER_0_INTEGER, *bnm, *bnmc,  (void*) CHARACTER_ARRAY);
             set_array_elements(compstring, *bnmc, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
 
             // The loop count.

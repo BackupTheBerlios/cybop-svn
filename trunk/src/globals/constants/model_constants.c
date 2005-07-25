@@ -20,12 +20,14 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-14 17:41:44 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MODEL_CONSTANTS_SOURCE
 #define MODEL_CONSTANTS_SOURCE
+
+#include "../../globals/constants/integer_constants.c"
 
 //
 // Boolean models.
@@ -34,14 +36,12 @@
 /** The false model. */
 static const char FALSE_MODEL_ARRAY[] = {'f', 'a', 'l', 's', 'e'};
 static const char* FALSE_MODEL = FALSE_MODEL_ARRAY;
-static const int FALSE_MODEL_COUNT_ARRAY[] = {5};
-static const int* FALSE_MODEL_COUNT = FALSE_MODEL_COUNT_ARRAY;
+static const int* FALSE_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The true model. */
 static const char TRUE_MODEL_ARRAY[] = {'t', 'r', 'u', 'e'};
 static const char* TRUE_MODEL = TRUE_MODEL_ARRAY;
-static const int TRUE_MODEL_COUNT_ARRAY[] = {4};
-static const int* TRUE_MODEL_COUNT = TRUE_MODEL_COUNT_ARRAY;
+static const int* TRUE_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 //
 // Program flow models.
@@ -50,50 +50,42 @@ static const int* TRUE_MODEL_COUNT = TRUE_MODEL_COUNT_ARRAY;
 /** The copy (set, assign) model. */
 static const char COPY_MODEL_ARRAY[] = {'c', 'o', 'p', 'y'};
 static const char* COPY_MODEL = COPY_MODEL_ARRAY;
-static const int COPY_MODEL_COUNT_ARRAY[] = {4};
-static const int* COPY_MODEL_COUNT = COPY_MODEL_COUNT_ARRAY;
+static const int* COPY_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The move model. */
 static const char MOVE_MODEL_ARRAY[] = {'m', 'o', 'v', 'e'};
 static const char* MOVE_MODEL = MOVE_MODEL_ARRAY;
-static const int MOVE_MODEL_COUNT_ARRAY[] = {4};
-static const int* MOVE_MODEL_COUNT = MOVE_MODEL_COUNT_ARRAY;
+static const int* MOVE_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The copy property model. */
 static const char COPY_PROPERTY_MODEL_ARRAY[] = {'c', 'o', 'p', 'y', '_', 'p', 'r', 'o', 'p', 'e', 'r', 't', 'y'};
 static const char* COPY_PROPERTY_MODEL = COPY_PROPERTY_MODEL_ARRAY;
-static const int COPY_PROPERTY_MODEL_COUNT_ARRAY[] = {13};
-static const int* COPY_PROPERTY_MODEL_COUNT = COPY_PROPERTY_MODEL_COUNT_ARRAY;
+static const int* COPY_PROPERTY_MODEL_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /** The move property model. */
 static const char MOVE_PROPERTY_MODEL_ARRAY[] = {'m', 'o', 'v', 'e', '_', 'p', 'r', 'o', 'p', 'e', 'r', 't', 'y'};
 static const char* MOVE_PROPERTY_MODEL = MOVE_PROPERTY_MODEL_ARRAY;
-static const int MOVE_PROPERTY_MODEL_COUNT_ARRAY[] = {13};
-static const int* MOVE_PROPERTY_MODEL_COUNT = MOVE_PROPERTY_MODEL_COUNT_ARRAY;
+static const int* MOVE_PROPERTY_MODEL_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /** The branch model. */
 static const char BRANCH_MODEL_ARRAY[] = {'b', 'r', 'a', 'n', 'c', 'h'};
 static const char* BRANCH_MODEL = BRANCH_MODEL_ARRAY;
-static const int BRANCH_MODEL_COUNT_ARRAY[] = {6};
-static const int* BRANCH_MODEL_COUNT = BRANCH_MODEL_COUNT_ARRAY;
+static const int* BRANCH_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /** The loop model. */
 static const char LOOP_MODEL_ARRAY[] = {'l', 'o', 'o', 'p'};
 static const char* LOOP_MODEL = LOOP_MODEL_ARRAY;
-static const int LOOP_MODEL_COUNT_ARRAY[] = {4};
-static const int* LOOP_MODEL_COUNT = LOOP_MODEL_COUNT_ARRAY;
+static const int* LOOP_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The count parts model. */
 static const char COUNT_PARTS_MODEL_ARRAY[] = {'c', 'o', 'u', 'n', 't', '_', 'p', 'a', 'r', 't', 's'};
 static const char* COUNT_PARTS_MODEL = COUNT_PARTS_MODEL_ARRAY;
-static const int COUNT_PARTS_MODEL_COUNT_ARRAY[] = {11};
-static const int* COUNT_PARTS_MODEL_COUNT = COUNT_PARTS_MODEL_COUNT_ARRAY;
+static const int* COUNT_PARTS_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 /** The build listname model. */
 static const char BUILD_LISTNAME_MODEL_ARRAY[] = {'b', 'u', 'i', 'l', 'd', '_', 'l', 'i', 's', 't', 'n', 'a', 'm', 'e'};
 static const char* BUILD_LISTNAME_MODEL = BUILD_LISTNAME_MODEL_ARRAY;
-static const int BUILD_LISTNAME_MODEL_COUNT_ARRAY[] = {14};
-static const int* BUILD_LISTNAME_MODEL_COUNT = BUILD_LISTNAME_MODEL_COUNT_ARRAY;
+static const int* BUILD_LISTNAME_MODEL_COUNT = NUMBER_14_INTEGER_ARRAY;
 
 //
 // Boolean logic models.
@@ -102,14 +94,12 @@ static const int* BUILD_LISTNAME_MODEL_COUNT = BUILD_LISTNAME_MODEL_COUNT_ARRAY;
 /** The and model. */
 static const char AND_MODEL_ARRAY[] = {'a', 'n', 'd'};
 static const char* AND_MODEL = AND_MODEL_ARRAY;
-static const int AND_MODEL_COUNT_ARRAY[] = {3};
-static const int* AND_MODEL_COUNT = AND_MODEL_COUNT_ARRAY;
+static const int* AND_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The or model. */
 static const char OR_MODEL_ARRAY[] = {'o', 'r'};
 static const char* OR_MODEL = OR_MODEL_ARRAY;
-static const int OR_MODEL_COUNT_ARRAY[] = {2};
-static const int* OR_MODEL_COUNT = OR_MODEL_COUNT_ARRAY;
+static const int* OR_MODEL_COUNT = NUMBER_2_INTEGER_ARRAY;
 
 //
 // Comparison models.
@@ -118,38 +108,32 @@ static const int* OR_MODEL_COUNT = OR_MODEL_COUNT_ARRAY;
 /** The compare model. */
 static const char COMPARE_MODEL_ARRAY[] = {'c', 'o', 'm', 'p', 'a', 'r', 'e'};
 static const char* COMPARE_MODEL = COMPARE_MODEL_ARRAY;
-static const int COMPARE_MODEL_COUNT_ARRAY[] = {7};
-static const int* COMPARE_MODEL_COUNT = COMPARE_MODEL_COUNT_ARRAY;
+static const int* COMPARE_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The equal model. */
 static const char EQUAL_MODEL_ARRAY[] = {'e', 'q', 'u', 'a', 'l'};
 static const char* EQUAL_MODEL = EQUAL_MODEL_ARRAY;
-static const int EQUAL_MODEL_COUNT_ARRAY[] = {5};
-static const int* EQUAL_MODEL_COUNT = EQUAL_MODEL_COUNT_ARRAY;
+static const int* EQUAL_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The smaller model. */
 static const char SMALLER_MODEL_ARRAY[] = {'s', 'm', 'a', 'l', 'l', 'e', 'r'};
 static const char* SMALLER_MODEL = SMALLER_MODEL_ARRAY;
-static const int SMALLER_MODEL_COUNT_ARRAY[] = {7};
-static const int* SMALLER_MODEL_COUNT = SMALLER_MODEL_COUNT_ARRAY;
+static const int* SMALLER_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The greater model. */
 static const char GREATER_MODEL_ARRAY[] = {'g', 'r', 'e', 'a', 't', 'e', 'r'};
 static const char* GREATER_MODEL = GREATER_MODEL_ARRAY;
-static const int GREATER_MODEL_COUNT_ARRAY[] = {7};
-static const int* GREATER_MODEL_COUNT = GREATER_MODEL_COUNT_ARRAY;
+static const int* GREATER_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The smaller or equal model. */
 static const char SMALLER_OR_EQUAL_MODEL_ARRAY[] = {'s', 'm', 'a', 'l', 'l', 'e', 'r', '_', 'o', 'r', '_', 'e', 'q', 'u', 'a', 'l'};
 static const char* SMALLER_OR_EQUAL_MODEL = SMALLER_OR_EQUAL_MODEL_ARRAY;
-static const int SMALLER_OR_EQUAL_MODEL_COUNT_ARRAY[] = {16};
-static const int* SMALLER_OR_EQUAL_MODEL_COUNT = SMALLER_OR_EQUAL_MODEL_COUNT_ARRAY;
+static const int* SMALLER_OR_EQUAL_MODEL_COUNT = NUMBER_16_INTEGER_ARRAY;
 
 /** The greater or equal model. */
 static const char GREATER_OR_EQUAL_MODEL_ARRAY[] = {'g', 'r', 'e', 'a', 't', 'e', 'r', '_', 'o', 'r', '_', 'e', 'q', 'u', 'a', 'l'};
 static const char* GREATER_OR_EQUAL_MODEL = GREATER_OR_EQUAL_MODEL_ARRAY;
-static const int GREATER_OR_EQUAL_MODEL_COUNT_ARRAY[] = {16};
-static const int* GREATER_OR_EQUAL_MODEL_COUNT = GREATER_OR_EQUAL_MODEL_COUNT_ARRAY;
+static const int* GREATER_OR_EQUAL_MODEL_COUNT = NUMBER_16_INTEGER_ARRAY;
 
 //
 // Arithmetic models.
@@ -158,26 +142,22 @@ static const int* GREATER_OR_EQUAL_MODEL_COUNT = GREATER_OR_EQUAL_MODEL_COUNT_AR
 /** The add model. */
 static const char ADD_MODEL_ARRAY[] = {'a', 'd', 'd'};
 static const char* ADD_MODEL = ADD_MODEL_ARRAY;
-static const int ADD_MODEL_COUNT_ARRAY[] = {3};
-static const int* ADD_MODEL_COUNT = ADD_MODEL_COUNT_ARRAY;
+static const int* ADD_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The subtract model. */
 static const char SUBTRACT_MODEL_ARRAY[] = {'s', 'u', 'b', 't', 'r', 'a', 'c', 't'};
 static const char* SUBTRACT_MODEL = SUBTRACT_MODEL_ARRAY;
-static const int SUBTRACT_MODEL_COUNT_ARRAY[] = {8};
-static const int* SUBTRACT_MODEL_COUNT = SUBTRACT_MODEL_COUNT_ARRAY;
+static const int* SUBTRACT_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /** The multiply model. */
 static const char MULTIPLY_MODEL_ARRAY[] = {'m', 'u', 'l', 't', 'i', 'p', 'l', 'y'};
 static const char* MULTIPLY_MODEL = MULTIPLY_MODEL_ARRAY;
-static const int MULTIPLY_MODEL_COUNT_ARRAY[] = {8};
-static const int* MULTIPLY_MODEL_COUNT = MULTIPLY_MODEL_COUNT_ARRAY;
+static const int* MULTIPLY_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /** The divide model. */
 static const char DIVIDE_MODEL_ARRAY[] = {'d', 'i', 'v', 'i', 'd', 'e'};
 static const char* DIVIDE_MODEL = DIVIDE_MODEL_ARRAY;
-static const int DIVIDE_MODEL_COUNT_ARRAY[] = {6};
-static const int* DIVIDE_MODEL_COUNT = DIVIDE_MODEL_COUNT_ARRAY;
+static const int* DIVIDE_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 //
 // Memory management models.
@@ -186,14 +166,12 @@ static const int* DIVIDE_MODEL_COUNT = DIVIDE_MODEL_COUNT_ARRAY;
 /** The create part model. */
 static const char CREATE_PART_MODEL_ARRAY[] = {'c', 'r', 'e', 'a', 't', 'e', '_', 'p', 'a', 'r', 't'};
 static const char* CREATE_PART_MODEL = CREATE_PART_MODEL_ARRAY;
-static const int CREATE_PART_MODEL_COUNT_ARRAY[] = {11};
-static const int* CREATE_PART_MODEL_COUNT = CREATE_PART_MODEL_COUNT_ARRAY;
+static const int* CREATE_PART_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 /** The destroy part model. */
 static const char DESTROY_PART_MODEL_ARRAY[] = {'d', 'e', 's', 't', 'r', 'o', 'y', '_', 'p', 'a', 'r', 't'};
 static const char* DESTROY_PART_MODEL = DESTROY_PART_MODEL_ARRAY;
-static const int DESTROY_PART_MODEL_COUNT_ARRAY[] = {12};
-static const int* DESTROY_PART_MODEL_COUNT = DESTROY_PART_MODEL_COUNT_ARRAY;
+static const int* DESTROY_PART_MODEL_COUNT = NUMBER_12_INTEGER_ARRAY;
 
 //
 // Lifecycle models.
@@ -202,20 +180,17 @@ static const int* DESTROY_PART_MODEL_COUNT = DESTROY_PART_MODEL_COUNT_ARRAY;
 /** The startup model. */
 static const char STARTUP_MODEL_ARRAY[] = {'s', 't', 'a', 'r', 't', 'u', 'p'};
 static const char* STARTUP_MODEL = STARTUP_MODEL_ARRAY;
-static const int STARTUP_MODEL_COUNT_ARRAY[] = {7};
-static const int* STARTUP_MODEL_COUNT = STARTUP_MODEL_COUNT_ARRAY;
+static const int* STARTUP_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The shutdown model. */
 static const char SHUTDOWN_MODEL_ARRAY[] = {'s', 'h', 'u', 't', 'd', 'o', 'w', 'n'};
 static const char* SHUTDOWN_MODEL = SHUTDOWN_MODEL_ARRAY;
-static const int SHUTDOWN_MODEL_COUNT_ARRAY[] = {8};
-static const int* SHUTDOWN_MODEL_COUNT = SHUTDOWN_MODEL_COUNT_ARRAY;
+static const int* SHUTDOWN_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
 
 /** The exit model. */
 static const char EXIT_MODEL_ARRAY[] = {'e', 'x', 'i', 't'};
 static const char* EXIT_MODEL = EXIT_MODEL_ARRAY;
-static const int EXIT_MODEL_COUNT_ARRAY[] = {4};
-static const int* EXIT_MODEL_COUNT = EXIT_MODEL_COUNT_ARRAY;
+static const int* EXIT_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 //
 // Communication models.
@@ -224,26 +199,22 @@ static const int* EXIT_MODEL_COUNT = EXIT_MODEL_COUNT_ARRAY;
 /** The send model. */
 static const char SEND_MODEL_ARRAY[] = {'s', 'e', 'n', 'd'};
 static const char* SEND_MODEL = SEND_MODEL_ARRAY;
-static const int SEND_MODEL_COUNT_ARRAY[] = {4};
-static const int* SEND_MODEL_COUNT = SEND_MODEL_COUNT_ARRAY;
+static const int* SEND_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
 
 /** The receive model. */
 static const char RECEIVE_MODEL_ARRAY[] = {'r', 'e', 'c', 'e', 'i', 'v', 'e'};
 static const char* RECEIVE_MODEL = RECEIVE_MODEL_ARRAY;
-static const int RECEIVE_MODEL_COUNT_ARRAY[] = {7};
-static const int* RECEIVE_MODEL_COUNT = RECEIVE_MODEL_COUNT_ARRAY;
+static const int* RECEIVE_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
 
 /** The interrupt model. */
 static const char INTERRUPT_MODEL_ARRAY[] = {'i', 'n', 't', 'e', 'r', 'r', 'u', 'p', 't'};
 static const char* INTERRUPT_MODEL = INTERRUPT_MODEL_ARRAY;
-static const int INTERRUPT_MODEL_COUNT_ARRAY[] = {9};
-static const int* INTERRUPT_MODEL_COUNT = INTERRUPT_MODEL_COUNT_ARRAY;
+static const int* INTERRUPT_MODEL_COUNT = NUMBER_9_INTEGER_ARRAY;
 
 /** The refresh url model. */
 static const char REFRESH_URL_MODEL_ARRAY[] = {'r', 'e', 'f', 'r', 'e', 's', 'h', '_', 'u', 'r', 'l'};
 static const char* REFRESH_URL_MODEL = REFRESH_URL_MODEL_ARRAY;
-static const int REFRESH_URL_MODEL_COUNT_ARRAY[] = {11};
-static const int* REFRESH_URL_MODEL_COUNT = REFRESH_URL_MODEL_COUNT_ARRAY;
+static const int* REFRESH_URL_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 //
 // Language models.
@@ -252,62 +223,52 @@ static const int* REFRESH_URL_MODEL_COUNT = REFRESH_URL_MODEL_COUNT_ARRAY;
 /** The textual user interface (tui) model. */
 static const char TUI_MODEL_ARRAY[] = {'t', 'u', 'i'};
 static const char* TUI_MODEL = TUI_MODEL_ARRAY;
-static const int TUI_MODEL_COUNT_ARRAY[] = {3};
-static const int* TUI_MODEL_COUNT = TUI_MODEL_COUNT_ARRAY;
+static const int* TUI_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The graphical user interface (gui) model. */
 static const char GUI_MODEL_ARRAY[] = {'g', 'u', 'i'};
 static const char* GUI_MODEL = GUI_MODEL_ARRAY;
-static const int GUI_MODEL_COUNT_ARRAY[] = {3};
-static const int* GUI_MODEL_COUNT = GUI_MODEL_COUNT_ARRAY;
+static const int* GUI_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The web user interface (wui) model. */
 static const char WUI_MODEL_ARRAY[] = {'w', 'u', 'i'};
 static const char* WUI_MODEL = WUI_MODEL_ARRAY;
-static const int WUI_MODEL_COUNT_ARRAY[] = {3};
-static const int* WUI_MODEL_COUNT = WUI_MODEL_COUNT_ARRAY;
+static const int* WUI_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The linux console model. */
 static const char LINUX_CONSOLE_MODEL_ARRAY[] = {'l', 'i', 'n', 'u', 'x', '_', 'c', 'o', 'n', 's', 'o', 'l', 'e'};
 static const char* LINUX_CONSOLE_MODEL = LINUX_CONSOLE_MODEL_ARRAY;
-static const int LINUX_CONSOLE_MODEL_COUNT_ARRAY[] = {13};
-static const int* LINUX_CONSOLE_MODEL_COUNT = LINUX_CONSOLE_MODEL_COUNT_ARRAY;
+static const int* LINUX_CONSOLE_MODEL_COUNT = NUMBER_13_INTEGER_ARRAY;
 
 /** The x window system model. */
 static const char X_WINDOW_SYSTEM_MODEL_ARRAY[] = {'x', '_', 'w', 'i', 'n', 'd', 'o', 'w', '_', 's', 'y', 's', 't', 'e', 'm'};
 static const char* X_WINDOW_SYSTEM_MODEL = X_WINDOW_SYSTEM_MODEL_ARRAY;
-static const int X_WINDOW_SYSTEM_MODEL_COUNT_ARRAY[] = {15};
-static const int* X_WINDOW_SYSTEM_MODEL_COUNT = X_WINDOW_SYSTEM_MODEL_COUNT_ARRAY;
+static const int* X_WINDOW_SYSTEM_MODEL_COUNT = NUMBER_15_INTEGER_ARRAY;
 
 /** The unix socket model. */
 static const char UNIX_SOCKET_MODEL_ARRAY[] = {'u', 'n', 'i', 'x', '_', 's', 'o', 'c', 'k', 'e', 't'};
 static const char* UNIX_SOCKET_MODEL = UNIX_SOCKET_MODEL_ARRAY;
-static const int UNIX_SOCKET_MODEL_COUNT_ARRAY[] = {11};
-static const int* UNIX_SOCKET_MODEL_COUNT = UNIX_SOCKET_MODEL_COUNT_ARRAY;
+static const int* UNIX_SOCKET_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
 
 /** The tcp socket model. */
 static const char TCP_SOCKET_MODEL_ARRAY[] = {'t', 'c', 'p', '_', 's', 'o', 'c', 'k', 'e', 't'};
 static const char* TCP_SOCKET_MODEL = TCP_SOCKET_MODEL_ARRAY;
-static const int TCP_SOCKET_MODEL_COUNT_ARRAY[] = {10};
-static const int* TCP_SOCKET_MODEL_COUNT = TCP_SOCKET_MODEL_COUNT_ARRAY;
+static const int* TCP_SOCKET_MODEL_COUNT = NUMBER_10_INTEGER_ARRAY;
 
 /** The signal model. */
 static const char SIGNAL_MODEL_ARRAY[] = {'s', 'i', 'g', 'n', 'a', 'l'};
 static const char* SIGNAL_MODEL = SIGNAL_MODEL_ARRAY;
-static const int SIGNAL_MODEL_COUNT_ARRAY[] = {6};
-static const int* SIGNAL_MODEL_COUNT = SIGNAL_MODEL_COUNT_ARRAY;
+static const int* SIGNAL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
 
 /** The mouse model. */
 static const char MOUSE_MODEL_ARRAY[] = {'m', 'o', 'u', 's', 'e'};
 static const char* MOUSE_MODEL = MOUSE_MODEL_ARRAY;
-static const int MOUSE_MODEL_COUNT_ARRAY[] = {5};
-static const int* MOUSE_MODEL_COUNT = MOUSE_MODEL_COUNT_ARRAY;
+static const int* MOUSE_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
 
 /** The structured query language (sql). */
 static const char SQL_MODEL_ARRAY[] = {'s', 'q', 'l'};
 static const char* SQL_MODEL = SQL_MODEL_ARRAY;
-static const int SQL_MODEL_COUNT_ARRAY[] = {3};
-static const int* SQL_MODEL_COUNT = SQL_MODEL_COUNT_ARRAY;
+static const int* SQL_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 //
 //

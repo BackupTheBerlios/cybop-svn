@@ -20,16 +20,17 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-21 08:02:08 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ESCAPE_CODE_CONSTANTS_SOURCE
 #define ESCAPE_CODE_CONSTANTS_SOURCE
 
+#include "../../globals/constants/integer_constants.c"
+
 /** The escape code count. */
-static const int ESCAPE_CODE_CHARACTER_COUNT_ARRAY[] = {3};
-static const int* ESCAPE_CODE_CHARACTER_COUNT = ESCAPE_CODE_CHARACTER_COUNT_ARRAY;
+static const int* ESCAPE_CODE_CHARACTER_COUNT = NUMBER_3_INTEGER_ARRAY;
 
 /** The space character escape code. U+0020 */
 static const char SPACE_CHARACTER_ESCAPE_CODE_ARRAY[] = {'%', '2', '0'};

@@ -22,7 +22,7 @@
  *
  * this handel a loop
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-22 17:38:22 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -153,7 +153,7 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
                 // Reset comparison flag.
                 r = 0;
 
-                compare_arrays(b, INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) ONE_INTEGER, &r, (void*) INTEGER_ARRAY);
+                compare_arrays(b, INTEGER_COUNT, (void*) TRUE_BOOLEAN, (void*) NUMBER_1_INTEGER, &r, (void*) INTEGER_ARRAY);
 
                 // The direct execution flag.
                 // CAUTION! The flag has to be set to true, because otherwise,

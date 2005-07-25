@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.10 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -101,13 +101,13 @@ void manage(const void* p0, const void* p1) {
     // to the internal memory, in order to be forwardable to threads.
 
     // Set knowledge memory internals.
-    set_array_elements(i, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-    set_array_elements(i, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-    set_array_elements(i, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+    set_array_elements(i, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+    set_array_elements(i, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL, (void*) &kc, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+    set_array_elements(i, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
     // Set signal memory internals.
-    set_array_elements(i, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-    set_array_elements(i, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-    set_array_elements(i, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+    set_array_elements(i, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+    set_array_elements(i, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+    set_array_elements(i, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
 
     log_message_debug("\n\n");
     log_message_debug("Create startup model.");

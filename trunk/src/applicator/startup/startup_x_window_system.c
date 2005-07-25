@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.3 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.4 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  *
@@ -146,19 +146,19 @@ void startup_x_window_system(void* p0, const void* p1, const void* p2, const voi
 //??        XSetFont(*d, gc, f);
 
         // Set x window system internals.
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL, (void*) &dn, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_SCREEN_NUMBER_INTERNAL, (void*) &sn, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-//??        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_SCREEN_INTERNAL, (void*) &s, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_COLOUR_MAP_INTERNAL, (void*) &cm, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL, (void*) &bg, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL, (void*) &fg, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL, (void*) &r, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-//??        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_FONT_NAME_INTERNAL, (void*) &fn, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-//??        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_FONT_INTERNAL, (void*) &f, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL, (void*) &vm, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUES_INTERNAL, (void*) &v, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL, (void*) &dn, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_SCREEN_NUMBER_INTERNAL, (void*) &sn, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+//??        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_SCREEN_INTERNAL, (void*) &s, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_COLOUR_MAP_INTERNAL, (void*) &cm, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL, (void*) &bg, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL, (void*) &fg, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL, (void*) &r, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+//??        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_FONT_NAME_INTERNAL, (void*) &fn, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+//??        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_FONT_INTERNAL, (void*) &f, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL, (void*) &vm, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUES_INTERNAL, (void*) &v, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
 
     } else {
 

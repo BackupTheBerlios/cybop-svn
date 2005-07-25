@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.7 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -109,7 +109,7 @@ void get_request_method(char* req, int* req_count, char** req_method, int* req_m
         int max_count = *req_method_count + 1;
 
         resize_array((void*) req_method, (void*) &max_count, (void*) CHARACTER_ARRAY);
-        set_array_elements(*req_method, req_method_count, (void*) e, (void*) ONE_INTEGER, (void*) CHARACTER_ARRAY);
+        set_array_elements(*req_method, req_method_count, (void*) e, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
 
         *req_method_count = *req_method_count + 1;
     }
@@ -159,7 +159,7 @@ void get_url_basename_from_request(char* req, int* req_count, char** urlbase, in
             max_count = *urlbase_count + 1;
 
             resize_array((void*) urlbase, (void*) &max_count, (void*) CHARACTER_ARRAY);
-            set_array_elements(*urlbase, urlbase_count, (void*) e, (void*) ONE_INTEGER, (void*) CHARACTER_ARRAY);
+            set_array_elements(*urlbase, urlbase_count, (void*) e, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
 
             *urlbase_count = *urlbase_count + 1;
         }
@@ -502,7 +502,7 @@ void get_parameter_from_request_for_post(char* req, int* req_count, char** param
 
             resize_array((void*) param, (void*) &max_count, (void*) CHARACTER_ARRAY);
             get_array_elements(req, (void*) &req_index, (void*) &e, (void*) CHARACTER_ARRAY);
-            set_array_elements(*param, param_count, (void*) e, (void*) ONE_INTEGER, (void*) CHARACTER_ARRAY);
+            set_array_elements(*param, param_count, (void*) e, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
 
             *param_count = *param_count + 1;
             req_index = req_index + 1;
@@ -554,7 +554,7 @@ void get_parameter_from_request_for_get(char* req, int* req_count, char** param,
             max_count = *param_count + 1;
 
             resize_array((void*) param, (void*) &max_count, (void*) CHARACTER_ARRAY);
-            set_array_elements(*param, param_count, (void*) e, (void*) ONE_INTEGER, (void*) CHARACTER_ARRAY);
+            set_array_elements(*param, param_count, (void*) e, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
 
             *param_count = *param_count + 1;
         }
@@ -1220,7 +1220,7 @@ void run_tcp_socket_server(void* p0) {
 
     while (1) {
 
-        if (**((int**) active_flag) == *ZERO_INTEGER) {
+        if (**((int**) active_flag) == *NUMBER_0_INTEGER) {
 
             break;
         }
@@ -1261,7 +1261,7 @@ void receive_tcp_socket(void* p0, const void* p1, const void* p2, const void* p3
 
             if (r == 1) {
 
-                if (*((int*) blocking_model) == *ZERO_INTEGER) {
+                if (*((int*) blocking_model) == *NUMBER_0_INTEGER) {
 
                     // The thread.
                     pthread_t t;

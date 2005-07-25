@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.4 $ $Date: 2005-07-23 12:56:51 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2005-07-25 20:27:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -121,7 +121,7 @@ void add_strings( void** res, int* res_count, int* res_size,
             resize_array( res, res_size, CHARACTER_ARRAY );
 
             //set the result array
-            set_array_elements( *res, (void*) ZERO_INTEGER,
+            set_array_elements( *res, (void*) NUMBER_0_INTEGER,
                                 op1, op1_count,  (void*) CHARACTER_ARRAY);
 
             set_array_elements( *res, &start_count,

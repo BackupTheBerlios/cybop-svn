@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.13 $ $Date: 2005-07-25 08:17:35 $ $Author: christian $
+ * @version $Revision: 1.14 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -209,9 +209,9 @@ void send_linux_console(void* p0, void* p1, void* p2, const void* p3, const void
         allocate((void*) &t, (void*) ts, (void*) TUI_ABSTRACTION, (void*) TUI_ABSTRACTION_COUNT);
 
         // Set tui internals.
-        set_array_elements(p0, (void*) TUI_INTERNAL, (void*) &t, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) TUI_COUNT_INTERNAL, (void*) &tc, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) TUI_SIZE_INTERNAL, (void*) &ts, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) TUI_INTERNAL, (void*) &t, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) TUI_COUNT_INTERNAL, (void*) &tc, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) TUI_SIZE_INTERNAL, (void*) &ts, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
     }
 
     // Encode compound model into tui.

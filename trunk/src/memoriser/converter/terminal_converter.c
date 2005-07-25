@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -191,13 +191,13 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
                 (void*) cd, (void*) cdc, (void*) cds);
 
             // Get part position x, y, z.
-            get_integer_array_elements(*pm, (void*) ONE_INTEGER, (void*) &px);
-            get_integer_array_elements(*pm, (void*) TWO_INTEGER, (void*) &py);
+            get_integer_array_elements(*pm, (void*) NUMBER_1_INTEGER, (void*) &px);
+            get_integer_array_elements(*pm, (void*) NUMBER_2_INTEGER, (void*) &py);
             get_integer_array_elements(*pm, (void*) THREE_INTEGER, (void*) &pz);
 
             // Get part size x, y, z.
-            get_integer_array_elements(*sm, (void*) ONE_INTEGER, (void*) &sx);
-            get_integer_array_elements(*sm, (void*) TWO_INTEGER, (void*) &sy);
+            get_integer_array_elements(*sm, (void*) NUMBER_1_INTEGER, (void*) &sx);
+            get_integer_array_elements(*sm, (void*) NUMBER_2_INTEGER, (void*) &sy);
             get_integer_array_elements(*sm, (void*) THREE_INTEGER, (void*) &sz);
 
             if (r == 0) {
@@ -215,7 +215,7 @@ void serialise_terminal(void* p0, void* p1, void* p2, const void* p3, const void
 
             // Set terminated part colour control sequence by first copying the
             // actual control sequence and then adding the null termination character.
-            set_array_elements(tcs, (void*) ZERO_INTEGER, (void*) &cs, (void*) &csc, (void*) CHARACTER_ARRAY);
+            set_array_elements(tcs, (void*) NUMBER_0_INTEGER, (void*) &cs, (void*) &csc, (void*) CHARACTER_ARRAY);
             set_array_elements(tcs, (void*) &csc, (void*) NULL_CONTROL_CHARACTER, (void*) NULL_CONTROL_CHARACTER_COUNT, (void*) CHARACTER_ARRAY);
 
             // Position cursor.

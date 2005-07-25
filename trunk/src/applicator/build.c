@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.5 $ $Date: 2005-07-23 12:56:51 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -178,7 +178,7 @@ void build_listname(const void* p0, const void* p1, void* p2, void* p3, void* p4
             resize_array(resm, *resms, CHARACTER_ARRAY);
 
             // set the result array
-            set_array_elements(*resm, (void*) ZERO_INTEGER, *bnm, *bnmc, (void*) CHARACTER_ARRAY);
+            set_array_elements(*resm, (void*) NUMBER_0_INTEGER, *bnm, *bnmc, (void*) CHARACTER_ARRAY);
             set_array_elements(*resm, *bnmc, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) CHARACTER_ARRAY);
 
             int temp_index = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT;

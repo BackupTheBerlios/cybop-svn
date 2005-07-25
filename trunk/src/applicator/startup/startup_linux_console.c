@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.8 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  * @description
  */
@@ -107,9 +107,9 @@ void startup_linux_console(void* p0, const void* p1, const void* p2, const void*
 */
 
         // Set linux console internals.
-        set_array_elements(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) TERMINAL_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(p0, (void*) TERMINAL_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) TERMINAL_FILE_DESCRIPTOR_INTERNAL, (void*) &t, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) TERMINAL_ORIGINAL_ATTRIBUTES_INTERNAL, (void*) &to, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) TERMINAL_WORKING_ATTRIBUTES_INTERNAL, (void*) &tw, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
 
     } else {
 

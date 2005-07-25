@@ -23,7 +23,7 @@
  * This file contains the functionality to:
  * - create a signal memory in memory
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,14 +77,14 @@ void allocate_signal_memory(void* p0, const void* p1) {
         // CAUTION! Use ascending order, as compared to destruction!
         // The p0 parameter needs to be dereferenced since it is handed over
         // as reference, but this procedure expects a normal array.
-        set_array_elements(*s, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(*s, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(*s, (void*) SIGNALS_MODELS_INDEX, (void*) &m, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(*s, (void*) SIGNALS_MODELS_COUNTS_INDEX, (void*) &mc, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(*s, (void*) SIGNALS_DETAILS_INDEX, (void*) &d, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(*s, (void*) SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(*s, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        set_array_elements(*s, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*s, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) &a, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*s, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) &ac, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*s, (void*) SIGNALS_MODELS_INDEX, (void*) &m, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*s, (void*) SIGNALS_MODELS_COUNTS_INDEX, (void*) &mc, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*s, (void*) SIGNALS_DETAILS_INDEX, (void*) &d, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*s, (void*) SIGNALS_DETAILS_COUNTS_INDEX, (void*) &dc, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*s, (void*) SIGNALS_PRIORITIES_INDEX, (void*) &p, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(*s, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) &id, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
 
     } else {
 
@@ -159,14 +159,14 @@ void deallocate_signal_memory(void* p0, const void* p1) {
         // CAUTION! Use descending order as compared to creation, for faster removal.
         // The p0 parameter needs to be dereferenced since it is handed over
         // as reference, but this procedure expects a normal array.
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_PRIORITIES_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_DETAILS_COUNTS_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_DETAILS_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_MODELS_COUNTS_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_MODELS_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
-        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_IDENTIFICATIONS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_PRIORITIES_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_DETAILS_COUNTS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_DETAILS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_MODELS_COUNTS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_MODELS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_ABSTRACTIONS_COUNTS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
+        remove_array_elements(*s, (void*) SIGNAL_MEMORY_COUNT, (void*) SIGNALS_ABSTRACTIONS_INDEX, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
 
         // Destroy abstractions, models, details, priorities, identifications.
         // CAUTION! Do NOT hand over as reference!

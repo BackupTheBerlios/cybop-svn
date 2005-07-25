@@ -20,24 +20,24 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.1 $ $Date: 2005-06-29 18:48:46 $ $Author: christian $
+ * @version $Revision: 1.2 $ $Date: 2005-07-25 20:27:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BOOLEAN_CONSTANTS_SOURCE
 #define BOOLEAN_CONSTANTS_SOURCE
 
+#include "../../globals/constants/integer_constants.c"
+
 //
 // The two boolean values.
 //
 
 /** The false boolean. */
-static const int FALSE_BOOLEAN_ARRAY[] = {0};
-static const int* FALSE_BOOLEAN = FALSE_BOOLEAN_ARRAY;
+static const int* FALSE_BOOLEAN = NUMBER_0_INTEGER_ARRAY;
 
 /** The true boolean. */
-static const int TRUE_BOOLEAN_ARRAY[] = {1};
-static const int* TRUE_BOOLEAN = TRUE_BOOLEAN_ARRAY;
+static const int* TRUE_BOOLEAN = NUMBER_1_INTEGER_ARRAY;
 
 /* BOOLEAN_CONSTANTS_SOURCE */
 #endif

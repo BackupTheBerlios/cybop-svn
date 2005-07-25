@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.2 $ $Date: 2005-07-23 12:56:52 $ $Author: christian $
+ * @version $Revision: 1.3 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -103,39 +103,39 @@ void deallocate_internal_memory(void* p0, const void* p1) {
 
                     if (j == *TCP_SERVER_SOCKET_INTERNAL) {
 
-                        deallocate_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
+                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 
 //                    } else if (j == *TCP_SERVER_SOCKET_PORT_INTERNAL) {
 //
-//                        deallocate_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
+//                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 //
                     } else if (j == *TCP_SERVER_SOCKET_ACTIVE_INTERNAL) {
 
-                        deallocate_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
+                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 
                     } else if (j == *TCP_CLIENT_SOCKETS_INTERNAL) {
 
-                        deallocate_array(p, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
 
                     } else if (j == *TCP_CLIENT_SOCKETS_COUNT_INTERNAL) {
 
-                        deallocate_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
+                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 
                     } else if (j == *TCP_CLIENT_SOCKETS_SIZE_INTERNAL) {
 
-                        deallocate_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
+                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 
                     } else if (j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL) {
 
-                        deallocate_array(p, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
 
                     } else if (j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL) {
 
-                        deallocate_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
+                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
 
                     } else if (j == *TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL) {
 
-                        deallocate_array(p, (void*) ONE_INTEGER, (void*) INTEGER_ARRAY);
+                        deallocate_array(p, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
                     }
 
                     //?? TODO: some variables are missing here which causes memory leaks!!

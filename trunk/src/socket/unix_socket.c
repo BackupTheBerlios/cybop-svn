@@ -20,7 +20,7 @@
  * http://www.cybop.net
  * - Cybernetics Oriented Programming -
  *
- * @version $Revision: 1.22 $ $Date: 2005-07-23 12:56:54 $ $Author: christian $
+ * @version $Revision: 1.23 $ $Date: 2005-07-25 20:27:59 $ $Author: christian $
  * @author Marcel Kiesling <makie2001@web.de>
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
@@ -69,7 +69,7 @@ void allocate_unix_server_socket(void* p0) {
         *s = socket(AF_UNIX, SOCK_STREAM, 0);
 
         // Set unix server socket.
-        set_array_elements(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) ONE_INTEGER, (void*) POINTER_ARRAY);
+        set_array_elements(p0, (void*) UNIX_SERVER_SOCKET_INTERNAL, (void*) &s, (void*) NUMBER_1_INTEGER, (void*) POINTER_ARRAY);
 
         if (*s >= 0) {
 
